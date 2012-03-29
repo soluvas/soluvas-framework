@@ -1,0 +1,20 @@
+h1. Soluvas ApacheDS
+
+Embeds ApacheDS LDAP Directory Server inside your web application.
+
+Useful for deploying applications to OpenShift Express, which does not support ApacheDS cartridge (yet?).
+
+h2. Usage
+
+bc.. @Produces @Preferred @ApplicationScoped public DirectoryEngine getDirectoryEngine(@New DirectoryEngine engine) throws Exception {
+	engine.setWorkDir(new File(props.getProperty("ds.work.dir")));
+	engine.setMainDn(props.getProperty("ds.partition.dn"));
+	engine.setMainName(props.getProperty("ds.partition.cn"));
+	engine.setServerEnabled(Boolean.valueOf(props.getProperty("ds.server.enabled", "false")));
+	engine.start();
+	return engine;
+}
+
+public void disposeDirectoryEngine(@Disposes @Preferred DirectoryEngine engine) throws Exception {
+	engine.destroy();
+}
