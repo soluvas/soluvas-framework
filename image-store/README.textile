@@ -1,0 +1,5 @@
+h1. Soluvas Framework: Image Store
+
+h2. Usage
+
+Use CDI to configure and @Disposes the Image Store.
