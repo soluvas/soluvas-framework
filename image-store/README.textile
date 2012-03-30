@@ -2,4 +2,27 @@ h1. Soluvas Framework: Image Store
 
 h2. Usage
 
-Use CDI to configure and @Disposes the Image Store.
+Configure @ImageStore@ via CDI @Produces and @Disposes:
+
+bc.. @Produces @PersonRelated public ImageStore createPersonImageStore(@New ImageStore imageStore) {
+	imageStore.addStyle("thumbnail", "t", 50, 50);
+	imageStore.addStyle("small", "n", 125, 125);
+	imageStore.addStyle("normal", "n", 240, 320);
+	imageStore.setDavUri(getProperty("image.dav.uri"));
+	imageStore.setPublicUri(getProperty("image.public.uri"));
+	imageStore.setMongoUri(getProperty("image.mongo.uri"));
+	imageStore.setNamespace("person");
+	imageStore.init(getProperty("image.dav.password"), getProperty("image.mongo.password"));
+	return imageStore;
+}
+
+public void destroyPersonImageStore(@Disposes @PersonRelated ImageStore imageStore) {
+	imageStore.destroy();
+}
+
+p. You can also use Solder Config to configure the bean.
+
+p. Use the configured @ImageStore@ :
+
+bc. @Inject @PersonRelated ImageStore personImageStore;
+
