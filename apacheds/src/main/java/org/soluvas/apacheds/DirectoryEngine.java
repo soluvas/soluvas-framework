@@ -274,7 +274,7 @@ public class DirectoryEngine {
 		if (service != null)
 			service.shutdown();
 	}
-
+	
 	public boolean isServerEnabled() {
 		return serverEnabled;
 	}
