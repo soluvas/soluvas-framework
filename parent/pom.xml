@@ -160,20 +160,17 @@
 				<extensions>true</extensions>
 			</plugin>
   		</plugins>
-		<extensions>
-			<extension>
-				<artifactId>wagon-webdav-jackrabbit</artifactId>
-				<groupId>org.apache.maven.wagon</groupId>
-				<version>2.2</version>
-			</extension>
-		</extensions>
 	</build>
 
 	<distributionManagement>
 		<snapshotRepository>
-			<id>soluvas.org.snapshots.tmp</id>
-			<url>dav:http://maven.soluvas.org/snapshots</url>
+			<id>sonatype-nexus-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 		</snapshotRepository>
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
 	</distributionManagement>
 	
 </project> 
