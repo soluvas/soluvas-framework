@@ -40,9 +40,9 @@ public class Image {
 			@Override
 			public StyledImage transformEntry(String key, Object value) {
 				BasicBSONObject styleBson = (BasicBSONObject)value;
-				return new StyledImage(key, (Character)styleBson.get("code"),
+				return new StyledImage(key, styleBson.getString("code"),
 						URI.create(styleBson.getString("uri")),
-						styleBson.getString("contentType"), styleBson.getLong("size"),
+						styleBson.getString("contentType"), styleBson.getInt("size"),
 						styleBson.getInt("width"), styleBson.getInt("height"));
 			}
 		});

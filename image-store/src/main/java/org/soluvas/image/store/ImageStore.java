@@ -1,6 +1,5 @@
 package org.soluvas.image.store;
 
-import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,7 +35,6 @@ import org.bson.BasicBSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Maps.EntryTransformer;
 import com.mongodb.BasicDBObject;
@@ -218,7 +216,7 @@ public class ImageStore {
 		final String seoName1 = generateId(name, 0);
 		final String seoName2 = generateId(FilenameUtils.getBaseName(fileName), 0);
 		final String imageId = seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2;
-		final HashMap<String, Point> dimensions = new HashMap<String, Point>();
+		final HashMap<String, StyledImage> styleds = new HashMap<String, StyledImage>();
 		final String extension = FilenameUtils.getExtension(fileName);
 		
 		final File origFile = File.createTempFile(imageId + "_", "_o." + extension);
@@ -233,19 +231,19 @@ public class ImageStore {
 
 			// Create styles and upload
 			for (Entry<String, ImageStyle> kv : styles.entrySet()) {
-				if ("original".equals(kv.getKey()))
-					continue;
 				File styledFile = File.createTempFile(imageId + "_", "_" + kv.getValue().getCode() + ".jpg");
 				try {
 					log.info("Shrinking {} to {}", origFile, styledFile);
 					BufferedImage styledImage = Thumbnails.of(origFile).size(kv.getValue().getMaxWidth(), kv.getValue().getMaxHeight())
 						.asBufferedImage();
-					final Point dimension = new Point(styledImage.getWidth(), styledImage.getHeight());
-					log.info("Dimensions of {} is {}x{}", new Object[] { styledFile, dimension.x, dimension.y });
-					dimensions.put(kv.getKey(), dimension);
+					log.info("Dimensions of {} is {}x{}", new Object[] { styledFile, styledImage.getWidth(), styledImage.getHeight() });
 					ImageIO.write(styledImage, "jpg", styledFile);
-					URI styledUri = getImageDavUri(imageId, kv.getValue().getName());
-					uploadFile(styledUri, new FileInputStream(styledFile), "image/jpeg", styledFile.length());
+					URI styledDavUri = getImageDavUri(imageId, kv.getValue().getName());
+					uploadFile(styledDavUri, new FileInputStream(styledFile), "image/jpeg", styledFile.length());
+					URI styledPublicUri = getImagePublicUri(imageId, kv.getKey());
+					StyledImage styled = new StyledImage(kv.getKey(), kv.getValue().getCode(), styledPublicUri, "image/jpeg",
+							(int)styledFile.length(), styledImage.getWidth(), styledImage.getHeight());
+					styleds.put(kv.getKey(), styled);
 				} finally {
 					log.info("Deleting temporary {} image {}", kv.getValue().getName(), styledFile);
 					styledFile.delete();
@@ -268,15 +266,19 @@ public class ImageStore {
 		dbo.put("uri", originalPublicUri.toString());
 		dbo.put("fileName", fileName);
 		dbo.put("contentType", contentType);
-		dbo.put("size", length);
+		dbo.put("size", (int)length);
 		dbo.put("created", new Date());
-		Map<String, Map<String, ?>> styledImages = Maps.transformEntries(styles, new EntryTransformer<String, ImageStyle, Map<String, ?>>() {
+		Map<String, Map<String, Object>> styledImages = Maps.transformEntries(styleds, new EntryTransformer<String, StyledImage, Map<String, Object>>() {
 			@Override
-			public Map<String, ?> transformEntry(String key, ImageStyle style) {
-				URI styledUri = getImageDavUri(imageId, key);
-				return ImmutableMap.of("code", style.getCode(), "width", Integer.valueOf(dimensions.get(key).x),
-						"height", Integer.valueOf(dimensions.get(key).y),
-						"uri", styledUri.toString());
+			public Map<String, Object> transformEntry(String key, StyledImage styled) {
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("code", styled.getCode());
+				map.put("uri", styled.getUri().toString());
+				map.put("contentType", styled.getContentType());
+				map.put("size", styled.getSize());
+				map.put("width", (Integer)styled.getWidth());
+				map.put("height", (Integer)styled.getHeight());
+				return map;
 			}
 		});
 		dbo.put("styles", styledImages); 

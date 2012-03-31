@@ -12,15 +12,15 @@ import java.net.URI;
 public class StyledImage {
 
 	private String styleName;
-	private char code;
+	private String code;
 	private URI uri;
 	private String contentType;
-	private long size;
+	private int size;
 	private int width;
 	private int height;
 	
-	public StyledImage(String styleName, char code, URI uri,
-			String contentType, long size, int width, int height) {
+	public StyledImage(String styleName, String code, URI uri,
+			String contentType, int size, int width, int height) {
 		super();
 		this.styleName = styleName;
 		this.code = code;
@@ -35,7 +35,7 @@ public class StyledImage {
 		return styleName;
 	}
 
-	public char getCode() {
+	public String getCode() {
 		return code;
 	}
 
@@ -47,7 +47,7 @@ public class StyledImage {
 		return contentType;
 	}
 
-	public long getSize() {
+	public int getSize() {
 		return size;
 	}
 
