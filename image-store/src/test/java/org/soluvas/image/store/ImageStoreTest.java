@@ -29,8 +29,7 @@ public class ImageStoreTest {
 		imageStore.setDavUri(props.getProperty("person.image.dav.uri"));
 		imageStore.setPublicUri(props.getProperty("person.image.public.uri"));
 		imageStore.setMongoUri(props.getProperty("person.image.mongo.uri"));
-		imageStore.init(props.getProperty("person.image.dav.password"),
-				props.getProperty("person.image.mongo.password"));
+		imageStore.init(props.getProperty("person.image.dav.password"));
 	}
 
 	@After

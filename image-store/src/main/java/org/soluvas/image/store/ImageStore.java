@@ -88,7 +88,7 @@ public class ImageStore {
 	private final BasicHttpContext httpContext = new BasicHttpContext();
 	private final Map<String, ImageStyle> styles = new HashMap<String, ImageStyle>();
 	
-	public void init(String davPassword, String mongoPassword) {
+	public void init(String davPassword) {
 		log.info("Starting ImageStore {}", namespace);
 		
 		// Sanity checks
@@ -122,18 +122,19 @@ public class ImageStore {
 		
 		log.info("Connecting to MongoDB {}", mongoUri);
 		Mongo mongo;
+		MongoURI mongoUriDetail = new MongoURI(mongoUri);
 		try {
-			MongoURI mongoUriDetail = new MongoURI(mongoUri);
-			mongo = new Mongo(mongoUriDetail);
-			DB db = mongo.getDB(mongoUriDetail.getDatabase());
-			if (mongoUriDetail.getUsername() != null) {
-				db.authenticate(mongoUriDetail.getUsername(), mongoPassword.toCharArray());
-			}
+//			mongo = new Mongo(mongoUriDetail);
+//			DB db = mongo.getDB(mongoUriDetail.getDatabase());
+//			if (mongoUriDetail.getUsername() != null) {
+//				db.authenticate(mongoUriDetail.getUsername(), mongoUriDetail.getPassword());
+//			}
+			DB db = mongoUriDetail.connectDB();
 			String collName = namespace + "Image";
 			log.info("Authenticated to MongoDB. Collection name is {}", collName);
 			mongoColl = db.getCollection(collName);
 		} catch (Exception e) {
-			throw new RuntimeException("Cannot connect to MongoDB "+ mongoUri, e);
+			throw new RuntimeException("Cannot connect to MongoDB "+ mongoUriDetail.getHosts() + " database " + mongoUriDetail.getDatabase(), e);
 		}
 		
 		createFolders();

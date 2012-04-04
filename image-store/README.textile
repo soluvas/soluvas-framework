@@ -12,7 +12,7 @@ bc.. @Produces @PersonRelated public ImageStore createPersonImageStore(@New Imag
 	imageStore.setPublicUri(getProperty("image.public.uri"));
 	imageStore.setMongoUri(getProperty("image.mongo.uri"));
 	imageStore.setNamespace("person");
-	imageStore.init(getProperty("image.dav.password"), getProperty("image.mongo.password"));
+	imageStore.init(getProperty("image.dav.password"));
 	return imageStore;
 }
 
