@@ -16,7 +16,8 @@ public class SlugUtils {
 	 * @return
 	 */
 	public static String generateScreenName(String name, int iteration) {
-		final String base = name.replaceAll("[.,_]", " ").trim().toLowerCase().replaceAll(" ", ".").replaceAll("[^A-Za-z0-9.]", "");
+		final String base = name.replaceAll("[.,_]", " ").trim().toLowerCase().replaceAll(" ", ".").replaceAll("[^A-Za-z0-9.]", "")
+				.replaceAll("\\.+", "");
 		return (iteration == 0) ? base : base + String.valueOf(iteration + 1);
 	}
 	
@@ -27,7 +28,8 @@ public class SlugUtils {
 	 * @return
 	 */
 	public static String generateId(String name, int iteration) {
-		final String base = name.replaceAll("[.,_-]", " ").trim().toLowerCase().replaceAll(" ", "_").replaceAll("[^A-Za-z0-9_]", "");
+		final String base = name.replaceAll("[.,_-]", " ").trim().toLowerCase().replaceAll(" ", "_").replaceAll("[^A-Za-z0-9_]", "")
+				.replaceAll("\\_+", "");
 		return (iteration == 0) ? base : base + String.valueOf(iteration + 1);
 	}
 	
@@ -38,7 +40,8 @@ public class SlugUtils {
 	 * @return
 	 */
 	public static String generateSegment(String name, int iteration) {
-		final String base = name.replaceAll("[_.,-]", " ").trim().toLowerCase().replaceAll(" ", "-").replaceAll("[^A-Za-z0-9-]", "");
+		final String base = name.replaceAll("[_.,-]", " ").trim().toLowerCase().replaceAll(" ", "-").replaceAll("[^A-Za-z0-9-]", "")
+				.replaceAll("\\-+", "");
 		return (iteration == 0) ? base : base + String.valueOf(iteration + 1);
 	}
 	
