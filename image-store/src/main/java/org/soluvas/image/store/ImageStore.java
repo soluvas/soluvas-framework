@@ -83,6 +83,14 @@ public class ImageStore {
 	
 	public void init(String davPassword, String mongoPassword) {
 		log.info("Starting ImageStore {}", namespace);
+		
+		// Sanity checks
+		if (davUri == null || davUri.isEmpty())
+			throw new RuntimeException("DAV URI for " + namespace + " Image Store cannot be empty");
+		if (publicUri == null || publicUri.isEmpty())
+			throw new RuntimeException("Public URI for " + namespace + " Image Store cannot be empty");
+		if (mongoUri == null || mongoUri.isEmpty())
+			throw new RuntimeException("MongoDB URI for " + namespace + " Image Store cannot be empty");
 
 		URI davUriDetail = URI.create(davUri);
 		if (davUriDetail.getUserInfo() != null) {
@@ -261,6 +269,7 @@ public class ImageStore {
 		httpPut.setHeader("Content-Type", contentType);
 		httpPut.setEntity(new InputStreamEntity(source, length));
 		HttpResponse response = client.execute(httpPut, httpContext);
+		response.getEntity().getContent().close();
 		log.info("Upload {} returned: {}", uri, response.getStatusLine());
 	}
 	
