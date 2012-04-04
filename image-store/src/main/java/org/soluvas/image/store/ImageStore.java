@@ -34,6 +34,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.bson.BasicBSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.slug.SlugUtils;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Maps.EntryTransformer;
@@ -156,39 +157,6 @@ public class ImageStore {
 	}
 	
 	/**
-	 * Generate person slugs (using underscores).
-	 * @param name
-	 * @param iteration
-	 * @return
-	 */
-	public String generateScreenName(String name, int iteration) {
-		final String base = name.replaceAll("[.,_]", " ").trim().toLowerCase().replaceAll(" ", ".").replaceAll("[^A-Za-z0-9.]", "");
-		return (iteration == 0) ? base : base + String.valueOf(iteration + 1);
-	}
-	
-	/**
-	 * Generator resource IDs (using underscores).
-	 * @param name
-	 * @param iteration
-	 * @return
-	 */
-	public String generateId(String name, int iteration) {
-		final String base = name.replaceAll("[.,_-]", " ").trim().toLowerCase().replaceAll(" ", "_").replaceAll("[^A-Za-z0-9_]", "");
-		return (iteration == 0) ? base : base + String.valueOf(iteration + 1);
-	}
-	
-	/**
-	 * Generator article URL path segments (using '-').
-	 * @param name
-	 * @param iteration
-	 * @return
-	 */
-	public String generateSegment(String name, int iteration) {
-		final String base = name.replaceAll("[_.,-]", " ").trim().toLowerCase().replaceAll(" ", "-").replaceAll("[^A-Za-z0-9-]", "");
-		return (iteration == 0) ? base : base + String.valueOf(iteration + 1);
-	}
-	
-	/**
 	 * Scheme: ${davUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
 	 * 
 	 * This only works for non-original image styles.
@@ -213,8 +181,8 @@ public class ImageStore {
 	
 	public String create(String fileName, InputStream content, String contentType, long length, String name) throws IOException {
 //		final String seoName = name + " " + FilenameUtils.getBaseName(fileName);
-		final String seoName1 = generateId(name, 0);
-		final String seoName2 = generateId(FilenameUtils.getBaseName(fileName), 0);
+		final String seoName1 = SlugUtils.generateId(name, 0);
+		final String seoName2 = SlugUtils.generateId(FilenameUtils.getBaseName(fileName), 0);
 		final String imageId = seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2;
 		final HashMap<String, StyledImage> styleds = new HashMap<String, StyledImage>();
 		final String extension = FilenameUtils.getExtension(fileName);
@@ -360,6 +328,14 @@ public class ImageStore {
 
 	public void setMongoUri(String mongoUri) {
 		this.mongoUri = mongoUri;
+	}
+
+	/**
+	 * Delete the image with the specified ID, from the MongoDB metadata including all files and styled images from WebDAV.
+	 * @param photoId
+	 */
+	public void delete(String imageId) {
+		throw new UnsupportedOperationException("not implemented");
 	}
 
 	

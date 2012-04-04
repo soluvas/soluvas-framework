@@ -52,6 +52,10 @@ public class Image {
 		return id;
 	}
 
+	/**
+	 * Public URI of the original image.
+	 * @return
+	 */
 	public URI getUri() {
 		return uri;
 	}
