@@ -23,6 +23,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.entity.InputStreamEntity;
@@ -70,8 +71,14 @@ public class ImageStore {
 
 	private transient Logger log = LoggerFactory.getLogger(ImageStore.class);
 	
+	/**
+	 * Name of the predefined "original" image style.
+	 */
 	public static String ORIGINAL_NAME = "original";
-	public static char ORIGINAL_SHORT_CODE = 'o';
+	/**
+	 * Short code for predefined "original" image style.
+	 */
+	public static String ORIGINAL_CODE = "o";
 	private String namespace;
 	private String davUri;
 	private String publicUri;
@@ -183,8 +190,8 @@ public class ImageStore {
 	 */
 	public URI getImagePublicUri(String id, String styleName) {
 		String extension = "jpg";
-		ImageStyle style = styles.get(styleName);
-		return URI.create(String.format("%s%s/%s/%s_%s.%s", publicUri, namespace, style.getCode(), id, style.getCode(), extension));
+		String code = styleName == ORIGINAL_NAME ? ORIGINAL_CODE : styles.get(styleName).getCode(); 
+		return URI.create(String.format("%s%s/%s/%s_%s.%s", publicUri, namespace, code, id, code, extension));
 	}
 	
 	public String create(String fileName, InputStream content, String contentType, long length, String name) throws IOException {
@@ -269,7 +276,8 @@ public class ImageStore {
 		httpPut.setHeader("Content-Type", contentType);
 		httpPut.setEntity(new InputStreamEntity(source, length));
 		HttpResponse response = client.execute(httpPut, httpContext);
-		response.getEntity().getContent().close();
+		if (response.getEntity() != null)
+			response.getEntity().getContent().close();
 		log.info("Upload {} returned: {}", uri, response.getStatusLine());
 	}
 	
@@ -278,34 +286,46 @@ public class ImageStore {
 	 * @param id Image ID.
 	 */
 	public void delete(String id) {
-		throw new UnsupportedOperationException("not implemented");
-//		DefaultHttpClient client = new DefaultHttpClient(new ThreadSafeClientConnManager());
-//		try {
-//			URI originalUri = getUri(id);
-//			log.info("Deleting image {} original URI: {}", id, originalUri);
-//			HttpDelete deleteOriginal = new HttpDelete(originalUri);
-//			try {
-//				HttpResponse response = client.execute(deleteOriginal, httpContext);
-//				log.info("Delete {} returned: {}", originalUri, response.getStatusLine());
-//			} catch (Exception e) {
-//				log.error("Error deleting "+ originalUri, e);
-//			}
-//
-//			URI thumbUri = getUri(id);
-//			log.info("Deleting image {} thumb URI: {}", id, thumbUri);
-//			HttpDelete deleteThumb = new HttpDelete(thumbUri);
-//			try {
-//				HttpResponse response = client.execute(deleteThumb, httpContext);
-//				log.info("Delete {} returned: {}", thumbUri, response.getStatusLine());
-//			} catch (Exception e) {
-//				log.error("Error deleting "+ thumbUri, e);
-//			}
-//		} finally {
-//			client.getConnectionManager().shutdown();
-//		}
+		Image image = findOne(id);
+		// TODO: Implement concurrent deletion
+
+		for (StyledImage styled : image.getStyles().values()) {
+			log.info("Deleting {} image {} - {}: {}", new Object[] { 
+					namespace, id, styled.getStyleName(), styled.getUri() });
+			HttpDelete deleteThumb = new HttpDelete(styled.getUri());
+			try {
+				HttpResponse response = client.execute(deleteThumb, httpContext);
+				if (response.getEntity() != null)
+					response.getEntity().getContent().close();
+				log.info("Delete {} returned: {}", styled.getUri(), response.getStatusLine());
+			} catch (Exception e) {
+				log.error("Error deleting "+ styled.getUri(), e);
+			}
+		}
+
+		URI originalUri = image.getUri();
+		log.info("Deleting {} image {} - original: {}", new Object[] { 
+				namespace, id, originalUri });
+		HttpDelete deleteOriginal = new HttpDelete(originalUri);
+		try {
+			HttpResponse response = client.execute(deleteOriginal, httpContext);
+			if (response.getEntity() != null)
+				response.getEntity().getContent().close();
+			log.info("Delete {} returned: {}", originalUri, response.getStatusLine());
+		} catch (Exception e) {
+			log.error("Error deleting "+ originalUri, e);
+		}
+
+		log.debug("Deleting {} image metadata {}", namespace, id);
+		try {
+			mongoColl.remove(new BasicDBObject("_id", id));
+		} catch (Exception e) {
+			log.error("Error deleting "+ namespace + " image metadata " + id, e);
+		}
 	}
 
 	public Image findOne(String id) {
+		log.trace("Get {} Image {}", namespace, id);
 		DBObject dbo = mongoColl.findOne(new BasicDBObject("_id", id));
 		if (dbo == null)
 			return null;
