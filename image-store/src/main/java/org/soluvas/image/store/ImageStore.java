@@ -264,7 +264,12 @@ public class ImageStore {
 		log.info("Upload {} returned: {}", uri, response.getStatusLine());
 	}
 	
-//	public void delete(String id) {
+	/**
+	 * Delete the image with the specified ID, from the MongoDB metadata including all files and styled images from WebDAV.
+	 * @param id Image ID.
+	 */
+	public void delete(String id) {
+		throw new UnsupportedOperationException("not implemented");
 //		DefaultHttpClient client = new DefaultHttpClient(new ThreadSafeClientConnManager());
 //		try {
 //			URI originalUri = getUri(id);
@@ -289,7 +294,7 @@ public class ImageStore {
 //		} finally {
 //			client.getConnectionManager().shutdown();
 //		}
-//	}
+	}
 
 	public Image findOne(String id) {
 		DBObject dbo = mongoColl.findOne(new BasicDBObject("_id", id));
@@ -330,13 +335,4 @@ public class ImageStore {
 		this.mongoUri = mongoUri;
 	}
 
-	/**
-	 * Delete the image with the specified ID, from the MongoDB metadata including all files and styled images from WebDAV.
-	 * @param photoId
-	 */
-	public void delete(String imageId) {
-		throw new UnsupportedOperationException("not implemented");
-	}
-
-	
 }
