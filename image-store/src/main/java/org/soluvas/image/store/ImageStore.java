@@ -37,6 +37,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.slug.SlugUtils;
 
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.actor.Props;
+import akka.actor.UntypedActor;
+import akka.dispatch.Await;
+import akka.dispatch.Future;
+import akka.event.Logging;
+import akka.event.LoggingAdapter;
+import akka.pattern.Patterns;
+import akka.util.Duration;
+import akka.util.Timeout;
+
 import com.google.common.collect.Maps;
 import com.google.common.collect.Maps.EntryTransformer;
 import com.mongodb.BasicDBObject;
@@ -86,6 +98,65 @@ public class ImageStore {
 	private final DefaultHttpClient client = new DefaultHttpClient(new ThreadSafeClientConnManager());
 	private final BasicHttpContext httpContext = new BasicHttpContext();
 	private final Map<String, ImageStyle> styles = new HashMap<String, ImageStyle>();
+
+	private ActorSystem system;
+
+	private ActorRef imageThumbnailer;
+
+	public static class ThumbnailImageCommand {
+		ImageStore store;
+		String imageId;
+		File originalFile;
+		String styleName;
+		
+		public ThumbnailImageCommand(ImageStore store, String imageId, File originalFile, String styleName) {
+			super();
+			this.store = store;
+			this.imageId = imageId;
+			this.originalFile = originalFile;
+			this.styleName = styleName;
+		}
+	}
+	
+	/**
+	 * Resize an original file to a smaller size and upload it.
+	 * 
+	 * The original file must already exist on the filesystem, and will not be deleted afterwards.
+	 * 
+	 * Returns a {@link StyledImage}.
+	 * 
+	 * @author ceefour
+	 */
+	public static class ImageThumbnailer extends UntypedActor {
+		private transient LoggingAdapter log = Logging.getLogger(getContext().system(), this);
+
+		@Override
+		public void onReceive(Object msg) throws Exception {
+			// TODO: Separate thumbnail generation and upload
+			ThumbnailImageCommand cmd = (ThumbnailImageCommand) msg;
+			ImageStyle style = cmd.store.styles.get(cmd.styleName);
+			File styledFile = File.createTempFile(cmd.imageId + "_", "_" + style.getCode() + ".jpg");
+			try {
+				log.info("Shrinking {} to {}", cmd.originalFile, styledFile);
+				BufferedImage styledImage = Thumbnails.of(cmd.originalFile).size(style.getMaxWidth(), style.getMaxHeight())
+					.asBufferedImage();
+				log.info("Dimensions of {} is {}x{}", new Object[] { styledFile, styledImage.getWidth(), styledImage.getHeight() });
+				ImageIO.write(styledImage, "jpg", styledFile);
+				URI styledDavUri = cmd.store.getImageDavUri(cmd.imageId, style.getName());
+				cmd.store.uploadFile(styledDavUri, new FileInputStream(styledFile), "image/jpeg", styledFile.length());
+				URI styledPublicUri = cmd.store.getImagePublicUri(cmd.imageId, style.getName());
+				StyledImage styled = new StyledImage(style.getName(), style.getCode(), styledPublicUri, "image/jpeg",
+						(int)styledFile.length(), styledImage.getWidth(), styledImage.getHeight());
+				sender().tell(styled);
+//				styleds.put(style.getName(), styled);
+			} finally {
+				log.info("Deleting temporary {} image {}", style.getName(), styledFile);
+				styledFile.delete();
+			}
+			
+		}
+		
+	}
 	
 	public void init(String davPassword) {
 		log.info("Starting ImageStore {}", namespace);
@@ -123,11 +194,14 @@ public class ImageStore {
 		createFolders();
 		
 		// Start actors
-		
+		system = ActorSystem.create("ImageStore");
+		imageThumbnailer = system.actorOf(new Props(ImageThumbnailer.class), "ImageThumbnailer");
 	}
 	
 	@PreDestroy public void destroy() {
 		log.info("Shutting down ImageStore {}", namespace);
+		system.shutdown();
+		system.awaitTermination();
 		client.getConnectionManager().shutdown();
 		if (mongoColl != null) {
 			mongoColl.getDB().cleanCursors(false);
@@ -194,29 +268,31 @@ public class ImageStore {
 				contentType, length, origFile });
 		FileUtils.copyInputStreamToFile(content, origFile);
 		try {
-			// TODO: make these operations parallel
 			URI originalDavUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
 					davUri, namespace, 'o', imageId, 'o', extension));
 			uploadFile(originalDavUri, new FileInputStream(origFile), contentType, length);
 
 			// Create styles and upload
+			Map<String, Future<Object>> styledFutures = new HashMap<String, Future<Object>>();
 			for (Entry<String, ImageStyle> kv : styles.entrySet()) {
-				File styledFile = File.createTempFile(imageId + "_", "_" + kv.getValue().getCode() + ".jpg");
 				try {
-					log.info("Shrinking {} to {}", origFile, styledFile);
-					BufferedImage styledImage = Thumbnails.of(origFile).size(kv.getValue().getMaxWidth(), kv.getValue().getMaxHeight())
-						.asBufferedImage();
-					log.info("Dimensions of {} is {}x{}", new Object[] { styledFile, styledImage.getWidth(), styledImage.getHeight() });
-					ImageIO.write(styledImage, "jpg", styledFile);
-					URI styledDavUri = getImageDavUri(imageId, kv.getValue().getName());
-					uploadFile(styledDavUri, new FileInputStream(styledFile), "image/jpeg", styledFile.length());
-					URI styledPublicUri = getImagePublicUri(imageId, kv.getKey());
-					StyledImage styled = new StyledImage(kv.getKey(), kv.getValue().getCode(), styledPublicUri, "image/jpeg",
-							(int)styledFile.length(), styledImage.getWidth(), styledImage.getHeight());
-					styleds.put(kv.getKey(), styled);
-				} finally {
-					log.info("Deleting temporary {} image {}", kv.getValue().getName(), styledFile);
-					styledFile.delete();
+					Timeout timeout = new Timeout(Duration.parse("500 seconds"));
+					Future<Object> thumbnailer = Patterns.ask(imageThumbnailer,
+							new ThumbnailImageCommand(this, imageId, origFile, kv.getKey()), timeout);
+					styledFutures.put(kv.getKey(), thumbnailer);
+				} catch (Exception e) {
+					throw new RuntimeException("Error processing " + kv.getKey() + " for " + imageId, e);
+				}
+			}
+			
+			// Await results
+			for (Entry<String, Future<Object>> f : styledFutures.entrySet()) {
+				Timeout timeout = new Timeout(Duration.parse("500 seconds"));
+				try {
+					StyledImage styled = (StyledImage) Await.result(f.getValue(), timeout.duration());
+					styleds.put(f.getKey(), styled);
+				} catch (Exception e) {
+					throw new RuntimeException("Error processing " + f.getKey() + " for " + imageId, e);
 				}
 			}
 			
