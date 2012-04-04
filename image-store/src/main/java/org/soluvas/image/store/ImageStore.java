@@ -43,7 +43,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
-import com.mongodb.Mongo;
 import com.mongodb.MongoURI;
 
 /**
@@ -112,6 +111,8 @@ public class ImageStore {
 		try {
 			log.info("Connecting to MongoDB {} database {}", mongoUriDetail.getHosts(), mongoUriDetail.getDatabase());
 			DB db = mongoUriDetail.connectDB();
+			if (mongoUriDetail.getUsername() != null)
+				db.authenticate(mongoUriDetail.getUsername(), mongoUriDetail.getPassword());
 			String collName = namespace + "Image";
 			log.info("Authenticated to MongoDB. Collection name is {}", collName);
 			mongoColl = db.getCollection(collName);
@@ -120,6 +121,9 @@ public class ImageStore {
 		}
 		
 		createFolders();
+		
+		// Start actors
+		
 	}
 	
 	@PreDestroy public void destroy() {
