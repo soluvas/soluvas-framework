@@ -108,27 +108,9 @@ public class ImageStore {
 			httpContext.setAttribute(ClientContext.AUTH_CACHE, authCache);
 		}
 		
-//		String dataDir = System.getenv("OPENSHIFT_DATA_DIR");
-//		Properties props = new Properties();
-//		if (dataDir != null) {
-//			props.load(new FileReader(new File(dataDir, "aksimata.properties")));
-//		} else {
-//			props.load(ImageStore.class.getResourceAsStream("/aksimata.properties"));
-//		}
-//		davUser = props.getProperty("image.dav.user");
-//		davPassword = props.getProperty("image.dav.password");
-//		davUri = props.getProperty("image.dav.uri");
-//		publicUri = props.getProperty("image.public.uri");
-		
-		log.info("Connecting to MongoDB {}", mongoUri);
-		Mongo mongo;
 		MongoURI mongoUriDetail = new MongoURI(mongoUri);
 		try {
-//			mongo = new Mongo(mongoUriDetail);
-//			DB db = mongo.getDB(mongoUriDetail.getDatabase());
-//			if (mongoUriDetail.getUsername() != null) {
-//				db.authenticate(mongoUriDetail.getUsername(), mongoUriDetail.getPassword());
-//			}
+			log.info("Connecting to MongoDB {} database {}", mongoUriDetail.getHosts(), mongoUriDetail.getDatabase());
 			DB db = mongoUriDetail.connectDB();
 			String collName = namespace + "Image";
 			log.info("Authenticated to MongoDB. Collection name is {}", collName);
