@@ -11,13 +11,13 @@ import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 
 import javax.annotation.PreDestroy;
 import javax.imageio.ImageIO;
 
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -35,29 +35,21 @@ import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.protocol.BasicHttpContext;
-import org.bson.BSONObject;
 import org.bson.BasicBSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.slug.SlugUtils;
 
-import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
-import akka.actor.Props;
-import akka.actor.UntypedActor;
 import akka.dispatch.Await;
 import akka.dispatch.Future;
 import akka.dispatch.Futures;
 import akka.dispatch.Mapper;
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
 import akka.japi.Function2;
 import akka.util.Duration;
 import akka.util.Timeout;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Maps.EntryTransformer;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -108,23 +100,6 @@ public class ImageStore {
 
 	private ActorSystem system;
 
-	private ActorRef imageThumbnailer;
-
-	public static class ThumbnailImageCommand {
-		ImageStore store;
-		String imageId;
-		File originalFile;
-		String styleName;
-		
-		public ThumbnailImageCommand(ImageStore store, String imageId, File originalFile, String styleName) {
-			super();
-			this.store = store;
-			this.imageId = imageId;
-			this.originalFile = originalFile;
-			this.styleName = styleName;
-		}
-	}
-	
 	public static class ResizeResult {
 		String styleName;
 		String contentType;
@@ -144,51 +119,6 @@ public class ImageStore {
 			this.content = content;
 			this.width = width;
 			this.height = height;
-		}
-		
-	}
-	
-	/**
-	 * Resize an original file to a smaller size and upload it.
-	 * 
-	 * The original file must already exist on the filesystem, and will not be deleted afterwards.
-	 * 
-	 * Returns a {@link StyledImage}.
-	 * 
-	 * @author ceefour
-	 */
-	public static class ImageThumbnailer extends UntypedActor {
-		private transient LoggingAdapter log = Logging.getLogger(getContext().system(), this);
-
-		@Override
-		public void onReceive(Object msg) throws Exception {
-			// TODO: Separate thumbnail generation and upload
-			ThumbnailImageCommand cmd = (ThumbnailImageCommand) msg;
-			ImageStyle style = cmd.store.styles.get(cmd.styleName);
-			File styledFile = File.createTempFile(cmd.imageId + "_", "_" + style.getCode() + ".jpg");
-			try {
-				log.info("Shrinking {} to {}", cmd.originalFile, styledFile);
-				BufferedImage styledImage = Thumbnails.of(cmd.originalFile).size(style.getMaxWidth(), style.getMaxHeight())
-					.asBufferedImage();
-				log.info("Dimensions of {} is {}x{}", new Object[] { styledFile, styledImage.getWidth(), styledImage.getHeight() });
-				ByteArrayOutputStream buf = new ByteArrayOutputStream();
-				ImageIO.write(styledImage, "jpg", buf);
-				byte[] content = buf.toByteArray();
-				ResizeResult result = new ResizeResult(cmd.styleName, "image/jpeg", "jpg", content.length, content,
-						styledImage.getWidth(), styledImage.getHeight());
-				sender().tell(result);
-//				ImageIO.write(styledImage, "jpg", styledFile);
-//				URI styledDavUri = cmd.store.getImageDavUri(cmd.imageId, style.getName());
-//				cmd.store.uploadFile(styledDavUri, new FileInputStream(styledFile), "image/jpeg", styledFile.length());
-//				URI styledPublicUri = cmd.store.getImagePublicUri(cmd.imageId, style.getName());
-//				StyledImage styled = new StyledImage(style.getName(), style.getCode(), styledPublicUri, "image/jpeg",
-//						(int)styledFile.length(), styledImage.getWidth(), styledImage.getHeight());
-//				sender().tell(styled);
-			} finally {
-				log.info("Deleting temporary {} image {}", style.getName(), styledFile);
-				styledFile.delete();
-			}
-			
 		}
 		
 	}
@@ -230,7 +160,6 @@ public class ImageStore {
 		
 		// Start actors
 		system = ActorSystem.create("ImageStore");
-		imageThumbnailer = system.actorOf(new Props(ImageThumbnailer.class), "ImageThumbnailer");
 	}
 	
 	@PreDestroy public void destroy() {
@@ -295,7 +224,6 @@ public class ImageStore {
 		final String seoName1 = SlugUtils.generateId(name, 0);
 		final String seoName2 = SlugUtils.generateId(FilenameUtils.getBaseName(fileName), 0);
 		final String imageId = seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2;
-		final HashMap<String, StyledImage> styleds = new HashMap<String, StyledImage>();
 		final String extension = FilenameUtils.getExtension(fileName);
 		
 		final File originalFile = File.createTempFile(imageId + "_", "_o." + extension);
@@ -319,13 +247,12 @@ public class ImageStore {
 				@Override
 				public Future<ResizeResult> apply(final ImageStyle style) {
 					return Futures.future(new Callable<ResizeResult>() {
-						private transient LoggingAdapter log = Logging.getLogger(system, this);
 						@Override public ResizeResult call() throws Exception {
 							File styledFile = File.createTempFile(imageId + "_", "_" + style.getCode() + ".jpg");
 							try {
-								log.info("Shrinking {} to {}", originalFile, styledFile);
+								log.info("Resizing {} to {}", originalFile, styledFile);
 								BufferedImage styledImage = Thumbnails.of(originalFile).size(style.getMaxWidth(), style.getMaxHeight())
-									.asBufferedImage();
+									.crop(Positions.CENTER).asBufferedImage();
 								log.info("Dimensions of {} is {}x{}", new Object[] { styledFile, styledImage.getWidth(), styledImage.getHeight() });
 								ByteArrayOutputStream buf = new ByteArrayOutputStream();
 								ImageIO.write(styledImage, "jpg", buf);
@@ -333,14 +260,6 @@ public class ImageStore {
 								ResizeResult result = new ResizeResult(style.getName(), "image/jpeg", "jpg", content.length, content,
 										styledImage.getWidth(), styledImage.getHeight());
 								return result;
-//								sender().tell(result);
-//								ImageIO.write(styledImage, "jpg", styledFile);
-//								URI styledDavUri = cmd.store.getImageDavUri(cmd.imageId, style.getName());
-//								cmd.store.uploadFile(styledDavUri, new FileInputStream(styledFile), "image/jpeg", styledFile.length());
-//								URI styledPublicUri = cmd.store.getImagePublicUri(cmd.imageId, style.getName());
-//								StyledImage styled = new StyledImage(style.getName(), style.getCode(), styledPublicUri, "image/jpeg",
-//										(int)styledFile.length(), styledImage.getWidth(), styledImage.getHeight());
-//								sender().tell(styled);
 							} finally {
 								log.info("Deleting temporary {} image {}", style.getName(), styledFile);
 								styledFile.delete();
@@ -350,41 +269,6 @@ public class ImageStore {
 				}
 			});
 			
-//			Future<Iterable<ThumbnailResult>> thumbnails = Futures.traverse(styles.values(), new Function<ImageStyle, Future<ThumbnailResult>>() {
-//				@Override
-//				public Future<ThumbnailResult> apply(final ImageStyle style) {
-//					return Futures.future(new Callable<ThumbnailResult>() {
-//						private transient LoggingAdapter log = Logging.getLogger(system, this);
-//						@Override
-//						public ThumbnailResult call() throws Exception {
-//							File styledFile = File.createTempFile(imageId + "_", "_" + style.getCode() + ".jpg");
-//							try {
-//								log.info("Shrinking {} to {}", originalFile, styledFile);
-//								BufferedImage styledImage = Thumbnails.of(originalFile).size(style.getMaxWidth(), style.getMaxHeight())
-//									.asBufferedImage();
-//								log.info("Dimensions of {} is {}x{}", new Object[] { styledFile, styledImage.getWidth(), styledImage.getHeight() });
-//								ByteArrayOutputStream buf = new ByteArrayOutputStream();
-//								ImageIO.write(styledImage, "jpg", buf);
-//								byte[] content = buf.toByteArray();
-//								ThumbnailResult result = new ThumbnailResult(style.getName(), "image/jpeg", "jpg", content.length, content);
-//								return result;
-////								sender().tell(result);
-////								ImageIO.write(styledImage, "jpg", styledFile);
-////								URI styledDavUri = cmd.store.getImageDavUri(cmd.imageId, style.getName());
-////								cmd.store.uploadFile(styledDavUri, new FileInputStream(styledFile), "image/jpeg", styledFile.length());
-////								URI styledPublicUri = cmd.store.getImagePublicUri(cmd.imageId, style.getName());
-////								StyledImage styled = new StyledImage(style.getName(), style.getCode(), styledPublicUri, "image/jpeg",
-////										(int)styledFile.length(), styledImage.getWidth(), styledImage.getHeight());
-////								sender().tell(styled);
-//							} finally {
-//								log.info("Deleting temporary {} image {}", style.getName(), styledFile);
-//								styledFile.delete();
-//							}
-//						}
-//					}, system.dispatcher());
-//				}
-//			}, system.dispatcher());
-			
 			// Upload these thumbnails
 			Iterable<Future<StyledImage>> uploadedFutures = Iterables.transform(styledFutures, new com.google.common.base.Function<Future<ResizeResult>, Future<StyledImage>>() {
 				@Override
@@ -393,7 +277,6 @@ public class ImageStore {
 						@Override
 						public Future<StyledImage> apply(final ResizeResult resized) {
 							return Futures.future(new Callable<StyledImage>() {
-								private transient LoggingAdapter log = Logging.getLogger(system, this);
 								@Override public StyledImage call() throws Exception {
 									URI styledDavUri = getImageDavUri(imageId, resized.styleName);
 									log.info("Uploading {} {} to {}", new Object[] { resized.styleName, imageId, styledDavUri });
@@ -409,45 +292,6 @@ public class ImageStore {
 					});
 				}
 			});
-//			thumbnails.andThen(new PartialFunction<Either<Throwable,Iterable<ThumbnailResult>>, StyledImage>() {
-//			});
-//			thumbnails.map(new Mapper<Iterable<ThumbnailResult>, StyledImage>() {
-//				@Override
-//				public StyledImage apply(Iterable<ThumbnailResult> arg0) {
-//					
-//				}
-//			});
-			
-//			Map<String, Future<Object>> styledFutures = new HashMap<String, Future<Object>>();
-//			for (Entry<String, ImageStyle> kv : styles.entrySet()) {
-//				try {
-//					Timeout timeout = new Timeout(Duration.parse("500 seconds"));
-//					Future<Object> thumbnailer = Patterns.ask(imageThumbnailer,
-//							new ThumbnailImageCommand(this, imageId, origFile, kv.getKey()), timeout);
-//					styledFutures.put(kv.getKey(), thumbnailer);
-//				} catch (Exception e) {
-//					throw new RuntimeException("Error processing " + kv.getKey() + " for " + imageId, e);
-//				}
-//			}
-			
-//			ImageIO.write(styledImage, "jpg", styledFile);
-//			URI styledDavUri = cmd.store.getImageDavUri(cmd.imageId, style.getName());
-//			cmd.store.uploadFile(styledDavUri, new FileInputStream(styledFile), "image/jpeg", styledFile.length());
-//			URI styledPublicUri = cmd.store.getImagePublicUri(cmd.imageId, style.getName());
-//			StyledImage styled = new StyledImage(style.getName(), style.getCode(), styledPublicUri, "image/jpeg",
-//					(int)styledFile.length(), styledImage.getWidth(), styledImage.getHeight());
-//			sender().tell(styled);
-
-			// Await results
-//			for (Entry<String, Future<Object>> f : styledFutures.entrySet()) {
-//				Timeout timeout = new Timeout(Duration.parse("500 seconds"));
-//				try {
-//					StyledImage styled = (StyledImage) Await.result(f.getValue(), timeout.duration());
-//					styleds.put(f.getKey(), styled);
-//				} catch (Exception e) {
-//					throw new RuntimeException("Error processing " + f.getKey() + " for " + imageId, e);
-//				}
-//			}
 
 			try {
 				Await.result(originalFuture, Timeout.never().duration());
@@ -481,19 +325,6 @@ public class ImageStore {
 				dbo.put("contentType", contentType);
 				dbo.put("size", (int)length);
 				dbo.put("created", new Date());
-//				Map<String, Map<String, Object>> styledImages = Maps.transformEntries(styleds, new EntryTransformer<String, StyledImage, Map<String, Object>>() {
-//					@Override
-//					public Map<String, Object> transformEntry(String key, StyledImage styled) {
-//						HashMap<String, Object> map = new HashMap<String, Object>();
-//						map.put("code", styled.getCode());
-//						map.put("uri", styled.getUri().toString());
-//						map.put("contentType", styled.getContentType());
-//						map.put("size", styled.getSize());
-//						map.put("width", (Integer)styled.getWidth());
-//						map.put("height", (Integer)styled.getHeight());
-//						return map;
-//					}
-//				});
 				dbo.put("styles", Await.result(stylesFuture, Duration.Inf()));
 				
 				log.info("Inserting image {} ({}) metadata into MongoDB collection {}", new Object[] { 
