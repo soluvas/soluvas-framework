@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PreDestroy;
 import javax.imageio.ImageIO;
@@ -23,6 +24,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
@@ -45,6 +47,7 @@ import akka.dispatch.Await;
 import akka.dispatch.Future;
 import akka.dispatch.Futures;
 import akka.dispatch.Mapper;
+import akka.japi.Function;
 import akka.japi.Function2;
 import akka.util.Duration;
 import akka.util.Timeout;
@@ -374,42 +377,67 @@ public class ImageStore {
 	 * Delete the image with the specified ID, from the MongoDB metadata including all files and styled images from WebDAV.
 	 * @param id Image ID.
 	 */
-	public void delete(String id) {
-		Image image = findOne(id);
-		// TODO: Implement concurrent deletion
-
-		for (StyledImage styled : image.getStyles().values()) {
-			log.info("Deleting {} image {} - {}: {}", new Object[] { 
-					namespace, id, styled.getStyleName(), styled.getUri() });
-			HttpDelete deleteThumb = new HttpDelete(styled.getUri());
-			try {
-				HttpResponse response = client.execute(deleteThumb, httpContext);
-				if (response.getEntity() != null)
-					response.getEntity().getContent().close();
-				log.info("Delete {} returned: {}", styled.getUri(), response.getStatusLine());
-			} catch (Exception e) {
-				log.error("Error deleting "+ styled.getUri(), e);
+	public void delete(final String id) {
+		final Image image = findOne(id);
+		
+		Future<StatusLine> originalFuture = Futures.future(new Callable<StatusLine>() {
+			@Override
+			public StatusLine call() throws Exception {
+				URI originalUri = image.getUri();
+				log.info("Deleting {} image {} - original: {}", new Object[] { 
+						namespace, id, originalUri });
+				HttpDelete deleteOriginal = new HttpDelete(originalUri);
+				try {
+					HttpResponse response = client.execute(deleteOriginal, httpContext);
+					if (response.getEntity() != null)
+						response.getEntity().getContent().close();
+					log.info("Delete {} returned: {}", originalUri, response.getStatusLine());
+					return response.getStatusLine();
+				} catch (Exception e) {
+					log.error("Error deleting "+ originalUri, e);
+					return null;
+				}				
 			}
-		}
+		}, system.dispatcher());
+		
+		Future<Iterable<StatusLine>> styledsFuture = Futures.traverse(image.getStyles().values(), new Function<StyledImage, Future<StatusLine>>() {
+			@Override
+			public Future<StatusLine> apply(final StyledImage styled) {
+				return Futures.future(new Callable<StatusLine>() {
+					@Override
+					public StatusLine call() throws Exception {
+						log.info("Deleting {} image {} - {}: {}", new Object[] { 
+								namespace, id, styled.getStyleName(), styled.getUri() });
+						HttpDelete deleteThumb = new HttpDelete(styled.getUri());
+						try {
+							HttpResponse response = client.execute(deleteThumb, httpContext);
+							if (response.getEntity() != null)
+								response.getEntity().getContent().close();
+							log.info("Delete {} returned: {}", styled.getUri(), response.getStatusLine());
+							return response.getStatusLine();
+						} catch (Exception e) {
+							log.error("Error deleting "+ styled.getUri(), e);
+							return null;
+						}
+					}
+				}, system.dispatcher());
+			}
+		}, system.dispatcher());
 
-		URI originalUri = image.getUri();
-		log.info("Deleting {} image {} - original: {}", new Object[] { 
-				namespace, id, originalUri });
-		HttpDelete deleteOriginal = new HttpDelete(originalUri);
 		try {
-			HttpResponse response = client.execute(deleteOriginal, httpContext);
-			if (response.getEntity() != null)
-				response.getEntity().getContent().close();
-			log.info("Delete {} returned: {}", originalUri, response.getStatusLine());
+			Iterable<StatusLine> statuses = Await.result(styledsFuture, Duration.create(60, TimeUnit.SECONDS));
+			log.info("Delete styled {} image {} status codes: {}", new Object[] { namespace, id, statuses });
+			StatusLine status = Await.result(originalFuture, Duration.create(60, TimeUnit.SECONDS));
+			log.info("Delete original {} image {} status code: {}", new Object[] { namespace, id, status });
 		} catch (Exception e) {
-			log.error("Error deleting "+ originalUri, e);
+			log.error("Error deleting " + namespace + " image " + id + " from WebDAV", e);
 		}
 
 		log.debug("Deleting {} image metadata {}", namespace, id);
 		try {
 			mongoColl.remove(new BasicDBObject("_id", id));
 		} catch (Exception e) {
-			log.error("Error deleting "+ namespace + " image metadata " + id, e);
+			log.error("Error deleting " + namespace + " image metadata " + id, e);
 		}
 	}
 
