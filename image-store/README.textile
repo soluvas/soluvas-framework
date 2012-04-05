@@ -2,11 +2,11 @@ h1. Soluvas Framework: Image Store
 
 h2. Usage
 
-Configure @ImageStore@ via CDI @Produces and @Disposes:
+Configure @ImageStore@ via CDI *@Produces* and *@Disposes*:
 
 bc.. @Produces @PersonRelated @ApplicationScoped public ImageStore createPersonImageStore(@New ImageStore imageStore) {
 	imageStore.addStyle("thumbnail", "t", 50, 50);
-	imageStore.addStyle("small", "s", 125, 125);
+	imageStore.addStyle("small", "s", 128, 128);
 	imageStore.addStyle("normal", "n", 240, 320);
 	imageStore.setDavUri(getProperty("image.dav.uri"));
 	imageStore.setPublicUri(getProperty("image.public.uri"));
@@ -26,3 +26,23 @@ p. Use the configured @ImageStore@ :
 
 bc. @Inject @PersonRelated ImageStore personImageStore;
 
+h3. Using your own Akka ActorSystem
+
+Call @setSystem(ActorSystem)@, e.g. :
+
+bc.. @Inject ActorSystem system;
+
+@Produces @ArticleRelated @ApplicationScoped public ImageStore createArticleImageStore(@New ImageStore imageStore) {
+	imageStore.setSystem(system);
+	imageStore.addStyle("thumbnail", "t", 50, 50);
+	imageStore.addStyle("small", "s", 125, 125);
+	imageStore.addStyle("normal", "n", 320, 240);
+	imageStore.setDavUri(getProperty("image.dav.uri"));
+	imageStore.setPublicUri(getProperty("image.public.uri"));
+	imageStore.setMongoUri(getProperty("image.mongo.uri"));
+	imageStore.setNamespace("article");
+	imageStore.init(getProperty("image.dav.password"));
+	return imageStore;
+}
+
+p. You are responsible for shutting down the @ActorSystem@.

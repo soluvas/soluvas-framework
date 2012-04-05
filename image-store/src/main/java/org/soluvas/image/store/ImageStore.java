@@ -97,8 +97,12 @@ public class ImageStore {
 	private final DefaultHttpClient client = new DefaultHttpClient(new ThreadSafeClientConnManager());
 	private final BasicHttpContext httpContext = new BasicHttpContext();
 	private final Map<String, ImageStyle> styles = new HashMap<String, ImageStyle>();
-
 	private ActorSystem system;
+	/**
+	 * If true, means the {@link ActorSystem} is owned by {@link ImageStore},
+	 * and should be shutdown when ImageStore is destroyed.
+	 */
+	private boolean shutdownActorSystem = false;
 
 	public static class ResizeResult {
 		String styleName;
@@ -159,13 +163,18 @@ public class ImageStore {
 		createFolders();
 		
 		// Start actors
-		system = ActorSystem.create("ImageStore");
+		if (system == null) {
+			shutdownActorSystem = true;
+			system = ActorSystem.create("ImageStore");
+		}
 	}
 	
 	@PreDestroy public void destroy() {
 		log.info("Shutting down ImageStore {}", namespace);
-		system.shutdown();
-		system.awaitTermination();
+		if (shutdownActorSystem && system != null) {
+			system.shutdown();
+			system.awaitTermination();
+		}
 		client.getConnectionManager().shutdown();
 		if (mongoColl != null) {
 			mongoColl.getDB().cleanCursors(false);
@@ -232,13 +241,17 @@ public class ImageStore {
 		FileUtils.copyInputStreamToFile(content, originalFile);
 		try {
 			// Upload original
-			final URI originalDavUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
-					davUri, namespace, 'o', imageId, 'o', extension));
 			Future<Object> originalFuture = Futures.future(new Callable<Object>() {
 				@Override
 				public Object call() throws Exception {
-					uploadFile(originalDavUri, new FileInputStream(originalFile), contentType, length);
-					return null;
+					final URI originalDavUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
+							davUri, namespace, 'o', imageId, 'o', extension));
+					try {
+						uploadFile(originalDavUri, new FileInputStream(originalFile), contentType, length);
+						return null;
+					} catch (Exception e) {
+						throw new RuntimeException("Error uploading original " + imageId + " to " + originalDavUri, e);
+					}
 				}
 			}, system.dispatcher());
 
@@ -260,6 +273,8 @@ public class ImageStore {
 								ResizeResult result = new ResizeResult(style.getName(), "image/jpeg", "jpg", content.length, content,
 										styledImage.getWidth(), styledImage.getHeight());
 								return result;
+							} catch (Exception e) {
+								throw new RuntimeException("Error resizing " + imageId + " to " + style.getCode() + ", destination: " + styledFile, e);
 							} finally {
 								log.info("Deleting temporary {} image {}", style.getName(), styledFile);
 								styledFile.delete();
@@ -279,13 +294,17 @@ public class ImageStore {
 							return Futures.future(new Callable<StyledImage>() {
 								@Override public StyledImage call() throws Exception {
 									URI styledDavUri = getImageDavUri(imageId, resized.styleName);
-									log.info("Uploading {} {} to {}", new Object[] { resized.styleName, imageId, styledDavUri });
-									uploadFile(styledDavUri, new ByteArrayInputStream(resized.content), resized.contentType, resized.length);
-									URI styledPublicUri = getImagePublicUri(imageId, resized.styleName);
-									ImageStyle style = styles.get(resized.styleName);
-									StyledImage styled = new StyledImage(resized.styleName, style.getCode(), styledPublicUri, resized.contentType,
-											(int)resized.length, resized.width, resized.height);
-									return styled;
+									try {
+										log.info("Uploading {} {} to {}", new Object[] { resized.styleName, imageId, styledDavUri });
+										uploadFile(styledDavUri, new ByteArrayInputStream(resized.content), resized.contentType, resized.length);
+										URI styledPublicUri = getImagePublicUri(imageId, resized.styleName);
+										ImageStyle style = styles.get(resized.styleName);
+										StyledImage styled = new StyledImage(resized.styleName, style.getCode(), styledPublicUri, resized.contentType,
+												(int)resized.length, resized.width, resized.height);
+										return styled;
+									} catch (Exception e) {
+										throw new RuntimeException("Error uploading " + resized.styleName + " " + imageId + " to " + styledDavUri, e);
+									}
 								}
 							}, system.dispatcher());
 						}
@@ -293,48 +312,46 @@ public class ImageStore {
 				}
 			});
 
-			try {
-				Await.result(originalFuture, Timeout.never().duration());
-				
-				Future<BasicBSONObject> stylesFuture = Futures.fold(new BasicBSONObject(), uploadedFutures,
-						new Function2<BasicBSONObject, StyledImage, BasicBSONObject>() {
-							@Override
-							public BasicBSONObject apply(BasicBSONObject obj, StyledImage styled) {
-								Map<String, Object> styledObj = new HashMap<String, Object>();
-								styledObj.put("code", styled.getCode());
-								styledObj.put("uri", styled.getUri().toString());
-								styledObj.put("contentType", styled.getContentType());
-								styledObj.put("size", styled.getSize());
-								styledObj.put("width", (Integer)styled.getWidth());
-								styledObj.put("height", (Integer)styled.getHeight());
-								synchronized (obj) {
-									obj.put(styled.getStyleName(), styledObj);
-								}
-								return obj;
+			Await.result(originalFuture, Timeout.never().duration());
+			
+			Future<BasicBSONObject> stylesFuture = Futures.fold(new BasicBSONObject(), uploadedFutures,
+					new Function2<BasicBSONObject, StyledImage, BasicBSONObject>() {
+						@Override
+						public BasicBSONObject apply(BasicBSONObject obj, StyledImage styled) {
+							Map<String, Object> styledObj = new HashMap<String, Object>();
+							styledObj.put("code", styled.getCode());
+							styledObj.put("uri", styled.getUri().toString());
+							styledObj.put("contentType", styled.getContentType());
+							styledObj.put("size", styled.getSize());
+							styledObj.put("width", (Integer)styled.getWidth());
+							styledObj.put("height", (Integer)styled.getHeight());
+							synchronized (obj) {
+								obj.put(styled.getStyleName(), styledObj);
 							}
-						}, system.dispatcher());
+							return obj;
+						}
+					}, system.dispatcher());
+			
+			// Create mongoDB
+			BasicDBObject dbo = new BasicDBObject();
+			URI originalPublicUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
+					publicUri, namespace, 'o', imageId, 'o', extension));
+			dbo.put("_id", imageId);
+			dbo.put("name", name);
+			dbo.put("uri", originalPublicUri.toString());
+			dbo.put("fileName", fileName);
+			dbo.put("contentType", contentType);
+			dbo.put("size", (int)length);
+			dbo.put("created", new Date());
+			dbo.put("styles", Await.result(stylesFuture, Duration.Inf()));
+			
+			log.info("Inserting image {} ({}) metadata into MongoDB collection {}", new Object[] { 
+					imageId, name, mongoColl.getName() });
+			mongoColl.insert(dbo);
+			return imageId;
 				
-				// Create mongoDB
-				BasicDBObject dbo = new BasicDBObject();
-				URI originalPublicUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
-						publicUri, namespace, 'o', imageId, 'o', extension));
-				dbo.put("_id", imageId);
-				dbo.put("name", name);
-				dbo.put("uri", originalPublicUri.toString());
-				dbo.put("fileName", fileName);
-				dbo.put("contentType", contentType);
-				dbo.put("size", (int)length);
-				dbo.put("created", new Date());
-				dbo.put("styles", Await.result(stylesFuture, Duration.Inf()));
-				
-				log.info("Inserting image {} ({}) metadata into MongoDB collection {}", new Object[] { 
-						imageId, name, mongoColl.getName() });
-				mongoColl.insert(dbo);
-				return imageId;
-				
-			} catch (Exception e) {
-				throw new RuntimeException("Error processing image " + imageId, e);
-			}
+		} catch (Exception e) {
+			throw new RuntimeException("Error processing image " + imageId, e);
 		} finally {
 			log.info("Deleting temporary original image {}", originalFile);
 			originalFile.delete();
@@ -434,6 +451,13 @@ public class ImageStore {
 
 	public void setMongoUri(String mongoUri) {
 		this.mongoUri = mongoUri;
+	}
+
+	/**
+	 * @param system the system to set
+	 */
+	public void setSystem(ActorSystem system) {
+		this.system = system;
 	}
 
 }
