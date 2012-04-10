@@ -1,0 +1,16 @@
+attributetype ( 2.25.31030703689307962575270284666844839901.1 
+	NAME 'photoId' 
+	DESC 'Application-specific identifier of the person's photo.' 
+	EQUALITY caseExactMatch 
+	ORDERING caseExactOrderingMatch 
+	SUBSTR caseExactSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+ )
+
+objectclass ( 2.25.31030703689307962575270284666844839901.2 
+	NAME 'socialPerson' 
+	DESC 'Person in the Web 2.0 age.' 
+	AUXILIARY 
+	MAY photoId 
+ )
+
