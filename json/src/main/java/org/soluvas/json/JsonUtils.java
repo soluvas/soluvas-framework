@@ -24,13 +24,7 @@ public class JsonUtils {
 	
 	public static String asJson(Object obj) {
 		try {
-			if (obj == null)
-				throw new NullPointerException("Serializing null object as JSON");
-			else
-				return writer.writeValueAsString(obj);
-		} catch (NullPointerException e) {
-			log.warn(e.getMessage(), e);
-			return null;
+			return writer.writeValueAsString(obj);
 		} catch (Exception e) {
 			log.error("Cannot serialize " + obj.getClass().getName() + " as JSON", e);
 			return null;
