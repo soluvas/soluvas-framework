@@ -36,8 +36,8 @@ Simply run your own ApacheDS Server instance, set it up as you want, then:
 
 Example:
 
-bc. ceefour@annafi:/var/lib/apacheds-2.0.0-M6/default/partitions$ rsync -vza --delete schema aksimata-soluvas.rhcloud.com:aksimata/data/ds/partitions/schema
-ceefour@annafi:/var/lib/apacheds-2.0.0-M6/default/partitions$ rsync -vza --delete aksimata aksimata-soluvas.rhcloud.com:aksimata/data/ds/partitions/main
+bc. ceefour@annafi:/var/lib/apacheds-2.0.0-M6/default/partitions$ rsync -vza --delete schema/ aksimata-soluvas.rhcloud.com:aksimata/data/ds/partitions/schema/
+ceefour@annafi:/var/lib/apacheds-2.0.0-M6/default/partitions$ rsync -vza --delete aksimata/ aksimata-soluvas.rhcloud.com:aksimata/data/ds/partitions/main/
 
 Note: In your local ApacheDS server instance, you don't need to name your partition @main@, you can use any other name. Only the contents
 of the partition needs to be transferred. 
