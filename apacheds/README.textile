@@ -18,3 +18,28 @@ bc.. @Produces @Preferred @ApplicationScoped public DirectoryEngine getDirectory
 public void disposeDirectoryEngine(@Disposes @Preferred DirectoryEngine engine) throws Exception {
 	engine.destroy();
 }
+
+h2. FAQ: How to Transfer LDAP Data to Embedded ApacheDS in OpenShift?
+
+Since OpenShift does not allow applications to open TCP/IP ports, there are several alternatives:
+
+1. Access the filesystem directly or remotely (via rsync)
+2. Provide functionality within the app to manipulate Directory contents
+
+No. 1 is the easiest.
+
+Simply run your own ApacheDS Server instance, set it up as you want, then:
+
+1. Stop the OpenShift app
+2. Do an @rsync@ to synchronize the @schema@ and @main@ partitions
+3. Restart the OpenShift app
+
+Example:
+
+bc. ceefour@annafi:/var/lib/apacheds-2.0.0-M6/default/partitions$ rsync -vza --delete schema aksimata-soluvas.rhcloud.com:aksimata/data/ds/partitions/schema
+ceefour@annafi:/var/lib/apacheds-2.0.0-M6/default/partitions$ rsync -vza --delete aksimata aksimata-soluvas.rhcloud.com:aksimata/data/ds/partitions/main
+
+Note: In your local ApacheDS server instance, you don't need to name your partition @main@, you can use any other name. Only the contents
+of the partition needs to be transferred. 
+
+You're set. :-)

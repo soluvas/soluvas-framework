@@ -62,7 +62,7 @@ public class DirectoryEngine {
         // Create a new partition named 'foo'.
         JdbmPartition partition = new JdbmPartition(service.getSchemaManager());
         partition.setId( partitionId );
-        partition.setPartitionPath( new File( getWorkDir(), partitionId ).toURI() );
+        partition.setPartitionPath( new File( getPartitionsDir(), partitionId ).toURI() );
         partition.setSuffixDn( new Dn(partitionDn) );
         service.addPartition( partition );
 
@@ -82,7 +82,7 @@ public class DirectoryEngine {
         // Create a new partition named 'foo'.
         JdbmPartition partition = new JdbmPartition(service.getSchemaManager());
         partition.setId( partitionId );
-        partition.setPartitionPath( new File( getWorkDir(), partitionId ).toURI() );
+        partition.setPartitionPath( new File( getPartitionsDir(), partitionId ).toURI() );
         partition.setSuffixDn( new Dn(partitionDn) );
 
         return partition;
@@ -283,12 +283,25 @@ public class DirectoryEngine {
 		this.serverEnabled = serverEnabled;
 	}
 
+	/**
+	 * Work directory. In OpenShift this would usually be <tt>$HOME/$APP/data/ds</tt>, containing the
+	 * folders: <tt>conf</tt>, <tt>log</tt>, <tt>partitions</tt>, <tt>run</tt>.
+	 * @return
+	 */
 	public File getWorkDir() {
 		return workDir;
 	}
 
 	public void setWorkDir(File workDir) {
 		this.workDir = workDir;
+	}
+	
+	/**
+	 * Folder containing partitions, this will be <tt>$WORK_DIR/partitions</tt>, or in OpenShift: <tt>$HOME/$APP/data/ds/partitions</tt>.
+	 * @return
+	 */
+	public File getPartitionsDir() {
+		return new File(getWorkDir(), "partitions");
 	}
 
 	public String getMainDn() {
