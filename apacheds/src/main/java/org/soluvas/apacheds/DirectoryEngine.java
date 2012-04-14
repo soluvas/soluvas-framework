@@ -59,13 +59,15 @@ public class DirectoryEngine {
      */
     private Partition addPartition( String partitionId, String partitionDn ) throws Exception
     {
+        final File partitionDir = new File( getPartitionsDir(), partitionId );
+        log.info("Data partition {} DN: {} Location: {}", new Object[] {
+        		partitionId, partitionDn, partitionDir});
         // Create a new partition named 'foo'.
         JdbmPartition partition = new JdbmPartition(service.getSchemaManager());
         partition.setId( partitionId );
-        partition.setPartitionPath( new File( getPartitionsDir(), partitionId ).toURI() );
+		partition.setPartitionPath( partitionDir.toURI() );
         partition.setSuffixDn( new Dn(partitionDn) );
         service.addPartition( partition );
-
         return partition;
     }
 
@@ -79,12 +81,14 @@ public class DirectoryEngine {
      */
     private Partition addSystemPartition( String partitionId, String partitionDn ) throws Exception
     {
+        final File partitionDir = new File( getPartitionsDir(), partitionId );
+        log.info("System partition {} DN: {} Location: {}", new Object[] {
+        		partitionId, partitionDn, partitionDir});
         // Create a new partition named 'foo'.
         JdbmPartition partition = new JdbmPartition(service.getSchemaManager());
         partition.setId( partitionId );
-        partition.setPartitionPath( new File( getPartitionsDir(), partitionId ).toURI() );
+		partition.setPartitionPath( partitionDir.toURI() );
         partition.setSuffixDn( new Dn(partitionDn) );
-
         return partition;
     }
 
@@ -110,7 +114,7 @@ public class DirectoryEngine {
 
     
     /**
-     * initialize the schema manager and add the schema partition to diectory service
+     * initialize the schema manager and add the schema partition to directory service
      *
      * @throws Exception if the schema LDIF files are not found on the classpath
      */
@@ -118,19 +122,18 @@ public class DirectoryEngine {
     {
     	SchemaManager schemaManager = service.getSchemaManager();
     	
-    	
     	SchemaPartition schemaPartition = new SchemaPartition(schemaManager);
     	service.setSchemaPartition(schemaPartition);
 
         // Init the LdifPartition
         LdifPartition ldifPartition = new LdifPartition(schemaManager);
-        File schemaDir = new File(getWorkDir(), "schema");
-        log.info("Schema directory: {}", schemaDir);
+        File schemaDir = new File(getPartitionsDir(), "schema");
+        log.info("Schema partition location: {}", schemaDir);
 		ldifPartition.setPartitionPath( schemaDir.toURI() );
 
         // Extract the schema on disk (a brand new one) and load the registries
 		if (!schemaDir.exists()) {
-	        SchemaLdifExtractor extractor = new DefaultSchemaLdifExtractor( getWorkDir() );
+	        SchemaLdifExtractor extractor = new DefaultSchemaLdifExtractor( getPartitionsDir() );
 	        extractor.extractOrCopy( true );
 		}
 
