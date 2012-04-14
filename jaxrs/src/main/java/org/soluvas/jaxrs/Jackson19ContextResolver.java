@@ -15,17 +15,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Provider @Produces(MediaType.APPLICATION_JSON)
-public class JacksonContextResolver implements ContextResolver<ObjectMapper> {
+public class Jackson19ContextResolver implements ContextResolver<ObjectMapper> {
 
-	private transient Logger log = LoggerFactory.getLogger(JacksonContextResolver.class);
+	private transient Logger log = LoggerFactory.getLogger(Jackson19ContextResolver.class);
 	private ObjectMapper objectMapper;
 
-	public JacksonContextResolver() throws JsonGenerationException, JsonMappingException, IOException {
+	public Jackson19ContextResolver() throws JsonGenerationException, JsonMappingException, IOException {
 		log.info("Configuring Jackson ObjectMapper to indent output and write dates as ISO-8601");
 		objectMapper = new ObjectMapper();
-		objectMapper.configure(Feature.INDENT_OUTPUT, true);
-		objectMapper.configure(Feature.WRITE_DATES_AS_TIMESTAMPS, false);
-		objectMapper.configure(Feature.WRITE_DATE_KEYS_AS_TIMESTAMPS, false);
+		objectMapper.enable(Feature.INDENT_OUTPUT);
+		objectMapper.disable(Feature.WRITE_DATES_AS_TIMESTAMPS);
+		objectMapper.disable(Feature.WRITE_DATE_KEYS_AS_TIMESTAMPS);
 	}
 	
 	@Override

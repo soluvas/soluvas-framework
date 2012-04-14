@@ -9,16 +9,16 @@
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>parent/pom.xml</relativePath>
 	</parent>
-	<groupId>org.soluvas</groupId>
 	<artifactId>soluvas-build</artifactId>
 	<packaging>pom</packaging>
 
-   <modules>
-	   <module>parent</module>
-	   <module>cdi</module>
-           <module>jaxrs</module>
-	   <module>image-store</module>
-	   <module>apacheds</module>
-   </modules>
+	<modules>
+		<module>parent</module>
+		<module>json</module>
+		<module>cdi</module>
+		<module>jaxrs</module>
+		<module>image-store</module>
+		<module>apacheds</module>
+	</modules>
 
 </project>

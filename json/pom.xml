@@ -9,29 +9,29 @@
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
-	<groupId>org.soluvas.jaxrs</groupId>
-	<artifactId>soluvas-jaxrs</artifactId>
+	<artifactId>soluvas-json</artifactId>
 	<packaging>bundle</packaging>
-	<description>JAX-RS ContextResolver for Jackson 1.9.</description>
+	<description>JSON utilities via Jackson.</description>
 	
 	<dependencies>
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.6</version>
-			<scope>provided</scope>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-joda</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>jsr311-api</artifactId>
-		</dependency>
+	
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
 	</dependencies>
 
-	<build>
-		<finalName>soluvas-jaxrs</finalName>
-	</build>
 </project>

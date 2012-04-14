@@ -1,0 +1,31 @@
+h1. Soluvas JSON
+
+JSON Utilities.
+
+h2. Usage
+
+bc.. @SuppressWarnings("serial") @Entity(noClassnameStored=true)
+public class Story implements Serializable {
+
+	@Id @JsonSerialize(using=ToStringSerializer.class) private ObjectId id;
+	private String subject;
+	private String kind;
+	private DateTime created;
+	private boolean publicized;
+
+	public Story() { }
+	
+	public Story(String subject, String kind, boolean publicized) {
+		super();
+		this.subject = subject;
+		this.kind = kind;
+		this.publicized = publicized;
+		this.created = new DateTime();
+	}
+	
+	@Override
+	public String toString() {
+		return JsonUtils.asJson(this);
+	}
+
+}
