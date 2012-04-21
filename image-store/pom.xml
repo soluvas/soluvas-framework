@@ -62,7 +62,4 @@
 		</repository>
 	</repositories>
 
-	<build>
-		<finalName>soluvas-image-store</finalName>
-	</build>
 </project>
