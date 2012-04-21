@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PreDestroy;
@@ -99,7 +100,7 @@ public class ImageStore {
 	private DBCollection mongoColl;
 	private final DefaultHttpClient client = new DefaultHttpClient(new ThreadSafeClientConnManager());
 	private final BasicHttpContext httpContext = new BasicHttpContext();
-	private final Map<String, ImageStyle> styles = new HashMap<String, ImageStyle>();
+	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<String, ImageStyle>();
 	private ActorSystem system;
 	/**
 	 * If true, means the {@link ActorSystem} is owned by {@link ImageStore},
