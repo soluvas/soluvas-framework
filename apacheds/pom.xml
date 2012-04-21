@@ -9,7 +9,6 @@
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
-	<groupId>org.soluvas.apacheds</groupId>
 	<artifactId>soluvas-apacheds</artifactId>
 	<packaging>bundle</packaging>
 	
