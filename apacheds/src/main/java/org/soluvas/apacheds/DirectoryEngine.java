@@ -171,6 +171,7 @@ public class DirectoryEngine {
     {
         // Initialize the LDAP service
         service = new DefaultDirectoryService();
+        service.setInstanceId("soluvas-apacheds");
         service.setSchemaManager(new DefaultSchemaManager());
 //      service.setWorkingDirectory( workDir );
         service.setInstanceLayout(new InstanceLayout(workDir));
