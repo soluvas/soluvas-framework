@@ -1,18 +1,15 @@
 package org.soluvas.image.store;
 
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -49,15 +46,10 @@ import akka.actor.ActorSystem;
 import akka.dispatch.Await;
 import akka.dispatch.Future;
 import akka.dispatch.Futures;
-import akka.dispatch.Mapper;
 import akka.japi.Function;
-import akka.japi.Function2;
 import akka.util.Duration;
-import akka.util.Timeout;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
+import com.google.common.collect.Collections2;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -291,68 +283,82 @@ public class ImageStore {
 			uploadOriginal.call();
 //			Future<Object> originalFuture = Futures.future(uploadOriginal, system.dispatcher());
 
-			// Create styles
-			List<Future<ResizeResult>> styledFutures = Lists.transform(ImmutableList.copyOf(styles.values()), new com.google.common.base.Function<ImageStyle, Future<ResizeResult>>() {
+			// Create styles and upload
+			Collection<StyledImage> styledImages = Collections2.transform(styles.values(), new com.google.common.base.Function<ImageStyle, StyledImage>() {
 				@Override
-				public Future<ResizeResult> apply(final ImageStyle style) {
-					return Futures.future(new Callable<ResizeResult>() {
-						@Override public ResizeResult call() throws Exception {
-							File styledFile = File.createTempFile(imageId + "_", "_" + style.getCode() + ".jpg");
-							try {
-								log.info("Resizing {} to {}", originalFile, styledFile);
-								BufferedImage styledImage = Thumbnails.of(originalFile).size(style.getMaxWidth(), style.getMaxHeight())
-									.crop(Positions.CENTER).asBufferedImage();
-								log.info("Dimensions of {} is {}x{}", new Object[] { styledFile, styledImage.getWidth(), styledImage.getHeight() });
-								ByteArrayOutputStream buf = new ByteArrayOutputStream();
-								ImageIO.write(styledImage, "jpg", buf);
-								byte[] content = buf.toByteArray();
-								ResizeResult result = new ResizeResult(style.getName(), "image/jpeg", "jpg", content.length, content,
-										styledImage.getWidth(), styledImage.getHeight());
-								return result;
-							} catch (Exception e) {
-								throw new RuntimeException("Error resizing " + imageId + " to " + style.getCode() + ", destination: " + styledFile, e);
-							} finally {
-								log.info("Deleting temporary {} image {}", style.getName(), styledFile);
-								styledFile.delete();
-							}
-						}
-					}, system.dispatcher());
+				public StyledImage apply(final ImageStyle style) {
+					File styledFile = null;
+					int width;
+					int height;
+					try {
+						styledFile = File.createTempFile(imageId + "_", "_" + style.getCode() + ".jpg");
+						log.info("Resizing {} to {}", originalFile, styledFile);
+						BufferedImage styledImage = Thumbnails.of(originalFile).size(style.getMaxWidth(), style.getMaxHeight())
+							.crop(Positions.CENTER).asBufferedImage();
+						width = styledImage.getWidth();
+						height = styledImage.getHeight();
+						log.info("Dimensions of {} is {}x{}", new Object[] { styledFile, width, height });
+						ImageIO.write(styledImage, "jpg", styledFile);
+//						ByteArrayOutputStream buf = new ByteArrayOutputStream();
+//						ImageIO.write(styledImage, "jpg", buf);
+//						byte[] content = buf.toByteArray();
+//						ResizeResult result = new ResizeResult(style.getName(), contentType, "jpg", content.length, content,
+//								styledImage.getWidth(), styledImage.getHeight());
+					} catch (Exception e) {
+						throw new RuntimeException("Error resizing " + imageId + " to " + style.getCode() + ", destination: " + styledFile, e);
+					}
+					URI styledDavUri = getImageDavUri(imageId, style.getName());
+					try {
+						// upload directly for efficiency
+						final String styledContentType = "image/jpeg";
+						log.info("Uploading {} {} to {}", new Object[] { style.getName(), imageId, styledDavUri });
+						uploadFile(styledDavUri, new FileInputStream(styledFile), styledContentType, styledFile.length());
+						URI styledPublicUri = getImagePublicUri(imageId, style.getName());
+						StyledImage styled = new StyledImage(style.getName(), style.getCode(), styledPublicUri, styledContentType,
+								(int)styledFile.length(), width, height);
+						return styled;
+					} catch (Exception e) {
+						throw new RuntimeException("Error uploading " + style.getName() + " " + imageId + " to " + styledDavUri, e);
+					} finally {
+						log.info("Deleting temporary {} image {}", style.getName(), styledFile);
+						styledFile.delete();
+					}
 				}
 			});
 			
-			// Upload these thumbnails
-			List<Future<StyledImage>> uploadedFutures = Lists.transform(styledFutures, new com.google.common.base.Function<Future<ResizeResult>, Future<StyledImage>>() {
-				@Override
-				public Future<StyledImage> apply(final Future<ResizeResult> styledFuture) {
-					return styledFuture.flatMap(new Mapper<ResizeResult, Future<StyledImage>>() {
-						@Override
-						public Future<StyledImage> apply(final ResizeResult resized) {
-							return Futures.future(new Callable<StyledImage>() {
-								@Override public StyledImage call() throws Exception {
-									URI styledDavUri = getImageDavUri(imageId, resized.styleName);
-									try {
-										log.info("Uploading {} {} to {}", new Object[] { resized.styleName, imageId, styledDavUri });
-										uploadFile(styledDavUri, new ByteArrayInputStream(resized.content), resized.contentType, resized.length);
-										URI styledPublicUri = getImagePublicUri(imageId, resized.styleName);
-										ImageStyle style = styles.get(resized.styleName);
-										StyledImage styled = new StyledImage(resized.styleName, style.getCode(), styledPublicUri, resized.contentType,
-												(int)resized.length, resized.width, resized.height);
-										return styled;
-									} catch (Exception e) {
-										throw new RuntimeException("Error uploading " + resized.styleName + " " + imageId + " to " + styledDavUri, e);
-									}
-								}
-							}, system.dispatcher());
-						}
-					});
-				}
-			});
+//			// Upload these thumbnails
+//			List<Future<StyledImage>> uploadedFutures = Lists.transform(styledFutures, new com.google.common.base.Function<Future<ResizeResult>, Future<StyledImage>>() {
+//				@Override
+//				public Future<StyledImage> apply(final Future<ResizeResult> styledFuture) {
+//					return styledFuture.flatMap(new Mapper<ResizeResult, Future<StyledImage>>() {
+//						@Override
+//						public Future<StyledImage> apply(final ResizeResult resized) {
+//							return Futures.future(new Callable<StyledImage>() {
+//								@Override public StyledImage call() throws Exception {
+//									URI styledDavUri = getImageDavUri(imageId, resized.styleName);
+//									try {
+//										log.info("Uploading {} {} to {}", new Object[] { resized.styleName, imageId, styledDavUri });
+//										uploadFile(styledDavUri, new ByteArrayInputStream(resized.content), resized.contentType, resized.length);
+//										URI styledPublicUri = getImagePublicUri(imageId, resized.styleName);
+//										ImageStyle style = styles.get(resized.styleName);
+//										StyledImage styled = new StyledImage(resized.styleName, style.getCode(), styledPublicUri, resized.contentType,
+//												(int)resized.length, resized.width, resized.height);
+//										return styled;
+//									} catch (Exception e) {
+//										throw new RuntimeException("Error uploading " + resized.styleName + " " + imageId + " to " + styledDavUri, e);
+//									}
+//								}
+//							}, system.dispatcher());
+//						}
+//					});
+//				}
+//			});
 
 //			Await.result(originalFuture, Timeout.never().duration());
 			
 			BasicBSONObject stylesObj = new BasicBSONObject();
-			for (Future<StyledImage> future : uploadedFutures) {
-				StyledImage styled = Await.result(future, Timeout.never().duration());
+			for (StyledImage styled : styledImages) {
+//				StyledImage styled = Await.result(future, Timeout.never().duration());
 				Map<String, Object> bson = new HashMap<String, Object>();
 				bson.put("code", styled.getCode());
 				bson.put("uri", styled.getUri().toString());

@@ -232,7 +232,7 @@ public class DirectoryEngine {
         server.start();
     }
 
-	public void start() throws Exception {
+	public void start() {
 		// Sanity checks
 		if (workDir == null)
 			throw new RuntimeException("ApacheDS workDir must be configured");
@@ -251,7 +251,8 @@ public class DirectoryEngine {
         getWorkDir().mkdirs();
         
         // Create the server
-        initDirectoryService( getWorkDir() );
+        try {
+			initDirectoryService( getWorkDir() );
 
 ////        CoreSession session = service.getAdminSession();
 //        LdapConnection ldap = new LdapCoreSessionConnection(service);
@@ -265,6 +266,9 @@ public class DirectoryEngine {
         // optionally we can start a server too
         if (isServerEnabled())
         	startServer();
+		} catch (Exception e) {
+			throw new RuntimeException("Cannot start embedded ApacheDS", e);
+		}
 	}
 	
 	public LdapConnection createConnection() {
