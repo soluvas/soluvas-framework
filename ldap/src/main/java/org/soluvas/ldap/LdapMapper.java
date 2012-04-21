@@ -288,13 +288,13 @@ public class LdapMapper {
 				if (Set.class.isAssignableFrom(f.getType())) {
 					// Set value as multi attribute
 					try {
-						HashSet<String> values = new HashSet<String>();
+						HashSet<Object> values = new HashSet<Object>();
 						for (Value<?> v : attr) {
-							values.add(v.getString());
+							values.add(v.getValue());
 						}
 						log.trace("Map {} to {}#{} as set: {}", new Object[] {
 								attrName, clazz.getName(), fieldName, values });
-						PropertyUtils.setProperty(bean, fieldName, values);
+						BeanUtils.setProperty(bean, fieldName, values);
 					} catch (Exception e) {
 						throw new LdapMappingException("Cannot map multi " + attrName + ": " + attr + " as " +
 								clazz.getName() + "#" + fieldName + " (" + f.getType().getName() + ") from " + entry.getDn(), e);
@@ -302,7 +302,7 @@ public class LdapMapper {
 				} else {
 					// Set property value from single attribute value
 					try {
-						String value = attr.getString();
+						Object value = attr.get().getValue();
 						log.trace("Map {} to {}#{} as {}: {}", new Object[] {
 								attrName, clazz.getName(), fieldName, f.getType().getName(), value });
 						BeanUtils.setProperty(bean, fieldName, value);
