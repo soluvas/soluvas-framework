@@ -17,6 +17,7 @@
 		<module>json</module>
 		<module>cdi</module>
 		<module>jaxrs</module>
+		<module>ldap</module>
 		<module>image-store</module>
 		<module>apacheds</module>
 	</modules>
