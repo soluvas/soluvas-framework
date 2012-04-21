@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.directory.shared.ldap.model.entry.Attribute;
 import org.apache.directory.shared.ldap.model.entry.DefaultEntry;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.entry.Value;
@@ -271,29 +272,44 @@ public class LdapMapper {
 			LdapRdn ldapRdn = f.getAnnotation(LdapRdn.class);
 			String fieldName = f.getName();
 			if (ldapRdn != null) {
-				// Set value from the RDN
-				String rdnValue = entry.getDn().getRdn().getValue().getString();
-				log.debug("Map DN {} to {} RDN property {}={}", new Object[] {
-						entry.getDn(), clazz.getName(), fieldName, rdnValue });
-				BeanUtils.setProperty(bean, fieldName, rdnValue);
+				try {
+					// Set value from the RDN
+					String rdnValue = entry.getDn().getRdn().getValue().getString();
+					log.debug("Map DN {} to {} RDN property {}={}", new Object[] {
+							entry.getDn(), clazz.getName(), fieldName, rdnValue });
+					BeanUtils.setProperty(bean, fieldName, rdnValue);
+				} catch (Exception e) {
+					throw new LdapMappingException("Cannot map DN " + entry.getDn() + " as " + clazz.getName() + "#" + fieldName, e);
+				}
 			} else {
 				if (!entry.containsAttribute(attrName))
 					continue;
+				final Attribute attr = entry.get(attrName);
 				if (Set.class.isAssignableFrom(f.getType())) {
 					// Set value as multi attribute
-					HashSet<String> values = new HashSet<String>();
-					for (Value<?> v : entry.get(attrName)) {
-						values.add(v.getString());
+					try {
+						HashSet<String> values = new HashSet<String>();
+						for (Value<?> v : attr) {
+							values.add(v.getString());
+						}
+						log.trace("Map {} to {}#{} as set: {}", new Object[] {
+								attrName, clazz.getName(), fieldName, values });
+						PropertyUtils.setProperty(bean, fieldName, values);
+					} catch (Exception e) {
+						throw new LdapMappingException("Cannot map multi " + attrName + ": " + attr + " as " +
+								clazz.getName() + "#" + fieldName + " (" + f.getType().getName() + ")", e);
 					}
-					log.trace("Map {} to {}#{} as set: {}", new Object[] {
-							attrName, clazz.getName(), fieldName, values });
-					PropertyUtils.setProperty(bean, fieldName, values);
 				} else {
 					// Set property value from single attribute value
-					String value = entry.get(attrName).getString();
-					log.trace("Map {} to {}#{} as {}: {}", new Object[] {
-							attrName, clazz.getName(), fieldName, f.getType().getName(), value });
-					BeanUtils.setProperty(bean, fieldName, value);
+					try {
+						String value = attr.getString();
+						log.trace("Map {} to {}#{} as {}: {}", new Object[] {
+								attrName, clazz.getName(), fieldName, f.getType().getName(), value });
+						BeanUtils.setProperty(bean, fieldName, value);
+					} catch (Exception e) {
+						throw new LdapMappingException("Cannot map " + attrName + ": " + attr.get() + " as " +
+								clazz.getName() + "#" + fieldName + " (" + f.getType().getName() + ")", e);
+					}
 				}
 			}
 		}
