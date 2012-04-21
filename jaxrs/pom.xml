@@ -9,7 +9,6 @@
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
-	<groupId>org.soluvas.jaxrs</groupId>
 	<artifactId>soluvas-jaxrs</artifactId>
 	<packaging>bundle</packaging>
 	<description>JAX-RS ContextResolver for Jackson 1.9.</description>
