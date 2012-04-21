@@ -231,17 +231,41 @@ public class ImageStore {
 		return URI.create(String.format("%s%s/%s/%s_%s.%s", publicUri, namespace, code, id, code, extension));
 	}
 	
+	/**
+	 * Add an {@link Image} from an {@link InputStream}. This method makes use of a temporary file.
+	 * @param fileName
+	 * @param content
+	 * @param contentType
+	 * @param length
+	 * @param name
+	 * @return
+	 * @throws IOException
+	 */
 	public String create(String fileName, InputStream content, final String contentType, final long length, String name) throws IOException {
+		final File originalFile = File.createTempFile(getNamespace() + "_", "_" + fileName);
+		try {
+			log.info("Saving original image ({} {} bytes) to temporary file {}", new Object[] { 
+					contentType, length, originalFile });
+			FileUtils.copyInputStreamToFile(content, originalFile);
+			
+			return doCreate(originalFile, contentType, originalFile.length(), name, fileName);
+		} finally {
+			log.info("Deleting temporary original image {}", originalFile);
+			originalFile.delete();
+		}
+	}
+	
+	public String create(File originalFile, final String contentType, String name) throws IOException {
+		return doCreate(originalFile, contentType, originalFile.length(), name, originalFile.getName());
+	}
+	
+	public String doCreate(final File originalFile, final String contentType, final long length, String name, String originalName) throws IOException {
 //		final String seoName = name + " " + FilenameUtils.getBaseName(fileName);
 		final String seoName1 = SlugUtils.generateId(name, 0);
-		final String seoName2 = SlugUtils.generateId(FilenameUtils.getBaseName(fileName), 0);
+		final String seoName2 = SlugUtils.generateId(FilenameUtils.getBaseName(originalName), 0);
 		final String imageId = seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2;
-		final String extension = FilenameUtils.getExtension(fileName);
+		final String extension = FilenameUtils.getExtension(originalName);
 		
-		final File originalFile = File.createTempFile(imageId + "_", "_o." + extension);
-		log.info("Saving original image ({} {} bytes) to temporary file {}", new Object[] { 
-				contentType, length, originalFile });
-		FileUtils.copyInputStreamToFile(content, originalFile);
 		try {
 			// Upload original
 			Future<Object> originalFuture = Futures.future(new Callable<Object>() {
@@ -342,7 +366,7 @@ public class ImageStore {
 			dbo.put("_id", imageId);
 			dbo.put("name", name);
 			dbo.put("uri", originalPublicUri.toString());
-			dbo.put("fileName", fileName);
+			dbo.put("fileName", originalName);
 			dbo.put("contentType", contentType);
 			dbo.put("size", (int)length);
 			dbo.put("created", new Date());
@@ -355,9 +379,6 @@ public class ImageStore {
 				
 		} catch (Exception e) {
 			throw new RuntimeException("Error processing image " + imageId, e);
-		} finally {
-			log.info("Deleting temporary original image {}", originalFile);
-			originalFile.delete();
 		}
 	}
 	
