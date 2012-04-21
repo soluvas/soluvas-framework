@@ -10,7 +10,9 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -53,7 +55,9 @@ import akka.japi.Function2;
 import akka.util.Duration;
 import akka.util.Timeout;
 
-import com.google.common.collect.Iterables;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -266,10 +270,12 @@ public class ImageStore {
 		final String seoName2 = SlugUtils.generateId(FilenameUtils.getBaseName(originalName), 0);
 		final String imageId = seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2;
 		final String extension = FilenameUtils.getExtension(originalName);
+		log.debug("Adding image from {} ({} {} bytes) as {}", new Object[] {
+				originalFile.getName(), contentType, length, imageId });
 		
 		try {
 			// Upload original
-			Future<Object> originalFuture = Futures.future(new Callable<Object>() {
+			final Callable<Object> uploadOriginal = new Callable<Object>() {
 				@Override
 				public Object call() throws Exception {
 					final URI originalDavUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
@@ -281,10 +287,12 @@ public class ImageStore {
 						throw new RuntimeException("Error uploading original " + imageId + " to " + originalDavUri, e);
 					}
 				}
-			}, system.dispatcher());
+			};
+			uploadOriginal.call();
+//			Future<Object> originalFuture = Futures.future(uploadOriginal, system.dispatcher());
 
 			// Create styles
-			Iterable<Future<ResizeResult>> styledFutures = Iterables.transform(styles.values(), new com.google.common.base.Function<ImageStyle, Future<ResizeResult>>() {
+			List<Future<ResizeResult>> styledFutures = Lists.transform(ImmutableList.copyOf(styles.values()), new com.google.common.base.Function<ImageStyle, Future<ResizeResult>>() {
 				@Override
 				public Future<ResizeResult> apply(final ImageStyle style) {
 					return Futures.future(new Callable<ResizeResult>() {
@@ -313,7 +321,7 @@ public class ImageStore {
 			});
 			
 			// Upload these thumbnails
-			Iterable<Future<StyledImage>> uploadedFutures = Iterables.transform(styledFutures, new com.google.common.base.Function<Future<ResizeResult>, Future<StyledImage>>() {
+			List<Future<StyledImage>> uploadedFutures = Lists.transform(styledFutures, new com.google.common.base.Function<Future<ResizeResult>, Future<StyledImage>>() {
 				@Override
 				public Future<StyledImage> apply(final Future<ResizeResult> styledFuture) {
 					return styledFuture.flatMap(new Mapper<ResizeResult, Future<StyledImage>>() {
@@ -340,25 +348,20 @@ public class ImageStore {
 				}
 			});
 
-			Await.result(originalFuture, Timeout.never().duration());
+//			Await.result(originalFuture, Timeout.never().duration());
 			
-			Future<BasicBSONObject> stylesFuture = Futures.fold(new BasicBSONObject(), uploadedFutures,
-					new Function2<BasicBSONObject, StyledImage, BasicBSONObject>() {
-						@Override
-						public BasicBSONObject apply(BasicBSONObject obj, StyledImage styled) {
-							Map<String, Object> styledObj = new HashMap<String, Object>();
-							styledObj.put("code", styled.getCode());
-							styledObj.put("uri", styled.getUri().toString());
-							styledObj.put("contentType", styled.getContentType());
-							styledObj.put("size", styled.getSize());
-							styledObj.put("width", (Integer)styled.getWidth());
-							styledObj.put("height", (Integer)styled.getHeight());
-							synchronized (obj) {
-								obj.put(styled.getStyleName(), styledObj);
-							}
-							return obj;
-						}
-					}, system.dispatcher());
+			BasicBSONObject stylesObj = new BasicBSONObject();
+			for (Future<StyledImage> future : uploadedFutures) {
+				StyledImage styled = Await.result(future, Timeout.never().duration());
+				Map<String, Object> bson = new HashMap<String, Object>();
+				bson.put("code", styled.getCode());
+				bson.put("uri", styled.getUri().toString());
+				bson.put("contentType", styled.getContentType());
+				bson.put("size", styled.getSize());
+				bson.put("width", (Integer)styled.getWidth());
+				bson.put("height", (Integer)styled.getHeight());
+				stylesObj.put(styled.getStyleName(), bson);
+			}
 			
 			// Create mongoDB
 			BasicDBObject dbo = new BasicDBObject();
@@ -371,13 +374,13 @@ public class ImageStore {
 			dbo.put("contentType", contentType);
 			dbo.put("size", (int)length);
 			dbo.put("created", new Date());
-			dbo.put("styles", Await.result(stylesFuture, Duration.Inf()));
+			dbo.put("styles", stylesObj);
 			
 			log.info("Inserting image {} ({}) metadata into MongoDB collection {}", new Object[] { 
 					imageId, name, mongoColl.getName() });
 			mongoColl.insert(dbo);
+			
 			return imageId;
-				
 		} catch (Exception e) {
 			throw new RuntimeException("Error processing image " + imageId, e);
 		}
