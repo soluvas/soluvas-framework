@@ -297,7 +297,7 @@ public class LdapMapper {
 						PropertyUtils.setProperty(bean, fieldName, values);
 					} catch (Exception e) {
 						throw new LdapMappingException("Cannot map multi " + attrName + ": " + attr + " as " +
-								clazz.getName() + "#" + fieldName + " (" + f.getType().getName() + ")", e);
+								clazz.getName() + "#" + fieldName + " (" + f.getType().getName() + ") from " + entry.getDn(), e);
 					}
 				} else {
 					// Set property value from single attribute value
@@ -308,7 +308,7 @@ public class LdapMapper {
 						BeanUtils.setProperty(bean, fieldName, value);
 					} catch (Exception e) {
 						throw new LdapMappingException("Cannot map " + attrName + ": " + attr.get() + " as " +
-								clazz.getName() + "#" + fieldName + " (" + f.getType().getName() + ")", e);
+								clazz.getName() + "#" + fieldName + " (" + f.getType().getName() + ") from " + entry.getDn(), e);
 					}
 				}
 			}
