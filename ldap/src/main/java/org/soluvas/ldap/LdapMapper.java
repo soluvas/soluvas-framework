@@ -3,6 +3,7 @@ package org.soluvas.ldap;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -18,6 +19,10 @@ import org.apache.directory.shared.ldap.model.name.Dn;
 import org.apache.directory.shared.ldap.model.name.Rdn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 /**
  * Maps LDAP {@link Entry} with <tt>objectClass=person</tt> to POJO and back.
@@ -263,7 +268,13 @@ public class LdapMapper {
 			throws IllegalAccessException, InvocationTargetException,
 			NoSuchMethodException, LdapInvalidAttributeValueException {
 		final Field[] fields = clazz.getDeclaredFields();
-		log.debug("Mapping Entry attributes to fields in {}: {}", clazz.getName(), fields);
+		final List<String> fieldNames = Lists.transform(ImmutableList.copyOf(fields), new Function<Field, String>() {
+			@Override
+			public String apply(Field input) {
+				return input.getName() + ": " + input.getType().getSimpleName();
+			}
+		});
+		log.debug("Mapping Entry attributes to fields in {}: {}", clazz.getName(), fieldNames);
 		for (Field f : fields) {
 			LdapAttribute ldapAttribute = f.getAnnotation(LdapAttribute.class);
 			if (ldapAttribute == null)
