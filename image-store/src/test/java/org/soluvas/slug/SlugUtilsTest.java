@@ -37,6 +37,8 @@ public class SlugUtilsTest {
 				slugUtils.generateId("Have a Wonderful Day :)", 0));
 		Assert.assertEquals("slurp_martabak_telor_slurp",
 				slugUtils.generateId("Slurp martabak telor slurp :-)", 0));
+		Assert.assertEquals("x5_4_0dhyyydgs",
+				slugUtils.generateId("x5%4!(0dhyYYDgs", 0));
 	}
 
 	@Test
