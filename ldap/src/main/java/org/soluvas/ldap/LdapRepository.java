@@ -23,7 +23,7 @@ public class LdapRepository<T> {
 
 	private transient Logger log = LoggerFactory.getLogger(LdapRepository.class);
 	private LdapConnection connection;
-	private LdapMapper mapper = new LdapMapper();
+	private LdapMapper mapper;
 	private String baseDn;
 	private Class<T> entityClass;
 
@@ -35,6 +35,10 @@ public class LdapRepository<T> {
 		this.entityClass = entityClass;
 		this.connection = connection;
 		this.baseDn = baseDn;
+	}
+	
+	public void init() {
+		mapper = new LdapMapper(connection.getSchemaManager());
 	}
 
 	/**
