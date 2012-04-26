@@ -17,6 +17,7 @@ import org.apache.directory.shared.ldap.model.exception.LdapInvalidAttributeValu
 import org.apache.directory.shared.ldap.model.exception.LdapInvalidDnException;
 import org.apache.directory.shared.ldap.model.name.Dn;
 import org.apache.directory.shared.ldap.model.name.Rdn;
+import org.apache.directory.shared.ldap.model.schema.SchemaManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +35,20 @@ import com.google.common.collect.Lists;
 public class LdapMapper {
 
 	private transient Logger log = LoggerFactory.getLogger(LdapMapper.class);
+	private SchemaManager schemaManager;
 	
+	public LdapMapper() {
+		super();
+	}
+
+	/**
+	 * @param schemaManager
+	 */
+	public LdapMapper(SchemaManager schemaManager) {
+		super();
+		this.schemaManager = schemaManager;
+	}
+
 	/**
 	 * Get the DN of a hypothetical POJO LDAP entry.
 	 * @param id
@@ -111,7 +125,7 @@ public class LdapMapper {
 		log.debug("Mapping {} {} as Entry in {}", new Object[] { clazz.getName(), obj, baseDn });
 		
 		// Create the Entry (TODO: should be after mapping is prepared)
-		DefaultEntry entry = new DefaultEntry();
+		DefaultEntry entry = schemaManager != null ? new DefaultEntry(schemaManager) : new DefaultEntry();
 		
 		// Prepare the mapping from the provided object side
 		
@@ -326,4 +340,18 @@ public class LdapMapper {
 		}
 	}
 	
+	/**
+	 * @return the schemaManager
+	 */
+	public SchemaManager getSchemaManager() {
+		return schemaManager;
+	}
+
+	/**
+	 * @param schemaManager the schemaManager to set
+	 */
+	public void setSchemaManager(SchemaManager schemaManager) {
+		this.schemaManager = schemaManager;
+	}
+
 }
