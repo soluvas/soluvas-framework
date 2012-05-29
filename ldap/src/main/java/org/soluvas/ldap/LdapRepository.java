@@ -42,7 +42,7 @@ public class LdapRepository<T> {
 	public void init() {
 		mapper = new LdapMapper(connection.getSchemaManager());
 	}
-
+	
 	/**
 	 * Add an LDAP {@link Entry} from typed POJO object.
 	 * @param obj
@@ -244,6 +244,13 @@ public class LdapRepository<T> {
 	 */
 	public void setConnection(LdapConnection connection) {
 		this.connection = connection;
+	}
+
+	/**
+	 * @return the mapper
+	 */
+	public LdapMapper getMapper() {
+		return mapper;
 	}
 	
 }
