@@ -2,6 +2,8 @@ package org.soluvas.ldap;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.shared.ldap.model.cursor.EntryCursor;
 import org.apache.directory.shared.ldap.model.entry.Entry;
@@ -22,7 +24,7 @@ import com.google.common.collect.Lists;
 public class LdapRepository<T> {
 
 	private transient Logger log = LoggerFactory.getLogger(LdapRepository.class);
-	private LdapConnection connection;
+	@Inject private LdapConnection connection;
 	private LdapMapper mapper;
 	private String baseDn;
 	private Class<T> entityClass;
