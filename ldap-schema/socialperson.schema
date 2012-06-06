@@ -7,10 +7,27 @@ attributetype ( 2.25.31030703689307962575270284666844839901.1
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
  )
 
+attributetype ( 2.25.31030703689307962575270284666844839901.3 
+	NAME 'virtualMail' 
+	DESC 'Virtual e-mail address. It is a valid e-mail address but usually only used
+internally for private messaging system.' 
+	EQUALITY caseIgnoreIA5Match 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreIA5SubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 
+ )
+
 objectclass ( 2.25.31030703689307962575270284666844839901.2 
 	NAME 'socialPerson' 
 	DESC 'Person in the Web 2.0 age.' 
 	AUXILIARY 
-	MAY photoId 
+	MAY ( photoId $ virtualMail ) 
+ )
+
+objectclass ( 2.25.31030703689307962575270284666844839901.4 
+	NAME 'socialObject' 
+	DESC 'Any object that wants to have social attributes.' 
+	AUXILIARY 
+	MAY ( photoId $ virtualMail ) 
  )
 
