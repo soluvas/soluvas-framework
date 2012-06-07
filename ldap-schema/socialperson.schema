@@ -9,12 +9,57 @@ attributetype ( 2.25.31030703689307962575270284666844839901.1
 
 attributetype ( 2.25.31030703689307962575270284666844839901.3 
 	NAME 'virtualMail' 
-	DESC 'Virtual e-mail address. It is a valid e-mail address but usually only used
-internally for private messaging system.' 
-	EQUALITY caseIgnoreIA5Match 
+	DESC 'Virtual e-mail address. It is a valid e-mail address but usually only used internally for private messaging system.' 
+	EQUALITY caseIgnoreMatch 
 	ORDERING caseIgnoreOrderingMatch 
-	SUBSTR caseIgnoreIA5SubstringsMatch 
-	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+ )
+
+attributetype ( 2.25.31030703689307962575270284666844839901.5 
+	NAME 'primaryBillingAddress' 
+	EQUALITY caseExactMatch 
+	ORDERING caseExactOrderingMatch 
+	SUBSTR caseExactSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+	SINGLE-VALUE 
+ )
+
+attributetype ( 2.25.31030703689307962575270284666844839901.6 
+	NAME 'primaryShippingAddress' 
+	EQUALITY caseExactMatch 
+	ORDERING caseExactOrderingMatch 
+	SUBSTR caseExactSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+	SINGLE-VALUE 
+ )
+
+attributetype ( 2.25.31030703689307962575270284666844839901.7 
+	NAME 'primaryPayment' 
+	EQUALITY caseExactMatch 
+	ORDERING caseExactOrderingMatch 
+	SUBSTR caseExactSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+	SINGLE-VALUE 
+ )
+
+attributetype ( 2.25.31030703689307962575270284666844839901.8 
+	NAME 'primaryMail' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+	SINGLE-VALUE 
+ )
+
+attributetype ( 2.25.31030703689307962575270284666844839901.11 
+	NAME 'paymentMethod' 
+	DESC 'Payment methods: paypal, doku, debit, visa, mastercard, klikbca, bankmandiri, koperasi_kredit, telkomsel, indosat.' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+	SINGLE-VALUE 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.2 
@@ -29,5 +74,18 @@ objectclass ( 2.25.31030703689307962575270284666844839901.4
 	DESC 'Any object that wants to have social attributes.' 
 	AUXILIARY 
 	MAY ( photoId $ virtualMail ) 
+ )
+
+objectclass ( 2.25.31030703689307962575270284666844839901.9 
+	NAME 'address' 
+	STRUCTURAL 
+	MAY ( c $ cn $ description $ facsimileTelephoneNumber $ l $ mail $ mobile $ postalCode $ st $ street $ telephoneNumber ) 
+ )
+
+objectclass ( 2.25.31030703689307962575270284666844839901.10 
+	NAME 'payment' 
+	STRUCTURAL 
+	MUST ( cn $ paymentMethod ) 
+	MAY ( description $ mail $ telephoneNumber $ mobile ) 
  )
 
