@@ -14,14 +14,17 @@ public class SocialPerson extends Person {
 	@LdapAttribute("fbAccessToken") private String facebookAccessToken;
 	@LdapAttribute("twitterId") private Long twitterId;
 	@LdapAttribute("twitterScreenName") private String twitterScreenName;
+	@LdapAttribute("virtualMail") private String virtualMail;
 	
 	public SocialPerson() {
 		super();
 	}
 
 	public SocialPerson(String id, String slug, String firstName,
-			String lastName, String email) {
+			String lastName, String email, String virtualMail) {
 		super(id, slug, firstName, lastName, email);
+		
+		this.virtualMail = virtualMail;
 	}
 
 	public SocialPerson(String id, String slug, String firstName,
@@ -111,6 +114,20 @@ public class SocialPerson extends Person {
 	 */
 	public void setTwitterScreenName(String twitterScreenName) {
 		this.twitterScreenName = twitterScreenName;
+	}
+
+	/**
+	 * @return the virtualMail
+	 */
+	public String getVirtualMail() {
+		return virtualMail;
+	}
+
+	/**
+	 * @param virtualMail the virtualMail to set
+	 */
+	public void setVirtualMail(String virtualMail) {
+		this.virtualMail = virtualMail;
 	}
 	
 }
