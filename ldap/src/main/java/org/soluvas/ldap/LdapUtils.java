@@ -6,7 +6,6 @@ import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.entry.Value;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
 import org.apache.directory.shared.ldap.model.message.ModifyRequestImpl;
-import org.apache.directory.shared.ldap.model.schema.SchemaManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +29,8 @@ public class LdapUtils {
 	 */
 	public static void update(LdapConnection conn, Entry entry,
 			boolean removeExtraAttributes, String... excludedAttributes) throws LdapException {
+		log.info("Updating entry {}, removeExtraAttributes: {}, excludedAttributes: {}", new Object[] {
+				entry.getDn(), removeExtraAttributes, excludedAttributes });
 		Entry existing = conn.lookup(entry.getDn());
 
 		ImmutableSet<String> excludedAttributeSet = ImmutableSet.copyOf(excludedAttributes);
@@ -65,8 +66,12 @@ public class LdapUtils {
 				}
 			}
 		}
-		log.info("Modify {}: {}", entry.getDn(), req);
-		conn.modify(req);
+		if (!req.getModifications().isEmpty()) {
+			log.info("Modify {}: {}", entry.getDn(), req);
+			conn.modify(req);
+		} else {
+			log.info("Not modifying {} because there are no changes", entry.getDn());
+		}
 	}
 
 }

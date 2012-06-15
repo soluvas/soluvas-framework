@@ -72,7 +72,7 @@ public class LdapRepositoryImpl<T> implements LdapRepository<T> {
 	 */
 	public T modify(T obj, boolean removeExtraAttributes) {
 		Entry entry = mapper.toEntry(obj, baseDn);
-		log.info("Modify LDAP Entry {}: {}", entry.getDn(), entry); 
+		log.info("Modify LDAP Entry {}", entry.getDn(), entry); 
 		try {
 			LdapUtils.update(connection, entry, removeExtraAttributes, "uid"); 
 			log.debug("Lookup modified LDAP Entry {}", entry.getDn());
