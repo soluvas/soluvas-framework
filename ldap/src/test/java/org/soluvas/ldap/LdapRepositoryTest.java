@@ -31,7 +31,7 @@ public class LdapRepositoryTest {
 	public void setUp() throws Exception {
 		conn = new LdapNetworkConnection("localhost", 10389);
 		conn.bind("uid=admin,ou=system", "secret");
-		personRepo = new LdapRepository<SocialPerson>(SocialPerson.class, conn, "ou=users,dc=aksimata,dc=com");
+		personRepo = new LdapRepositoryImpl<SocialPerson>(SocialPerson.class, conn, "ou=users,dc=aksimata,dc=com");
 	}
 
 	/**
