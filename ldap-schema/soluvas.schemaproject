@@ -6924,6 +6924,68 @@
           <ordering>caseExactOrderingMatch</ordering>
           <substring>caseExactSubstringsMatch</substring>
         </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.3" obsolete="false" singlevalue="false" collective="false" nousermodification="false">
+          <aliases>
+            <alias>virtualMail</alias>
+          </aliases>
+          <description>Virtual e-mail address. It is a valid e-mail address but usually only used internally for private messaging system.</description>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseIgnoreMatch</equality>
+          <ordering>caseIgnoreOrderingMatch</ordering>
+          <substring>caseIgnoreSubstringsMatch</substring>
+        </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.5" obsolete="false" singlevalue="true" collective="false" nousermodification="false">
+          <aliases>
+            <alias>primaryBillingAddress</alias>
+          </aliases>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseExactMatch</equality>
+          <ordering>caseExactOrderingMatch</ordering>
+          <substring>caseExactSubstringsMatch</substring>
+        </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.6" obsolete="false" singlevalue="true" collective="false" nousermodification="false">
+          <aliases>
+            <alias>primaryShippingAddress</alias>
+          </aliases>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseExactMatch</equality>
+          <ordering>caseExactOrderingMatch</ordering>
+          <substring>caseExactSubstringsMatch</substring>
+        </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.7" obsolete="false" singlevalue="true" collective="false" nousermodification="false">
+          <aliases>
+            <alias>primaryPayment</alias>
+          </aliases>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseExactMatch</equality>
+          <ordering>caseExactOrderingMatch</ordering>
+          <substring>caseExactSubstringsMatch</substring>
+        </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.8" obsolete="false" singlevalue="true" collective="false" nousermodification="false">
+          <aliases>
+            <alias>primaryMail</alias>
+          </aliases>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseIgnoreMatch</equality>
+          <ordering>caseIgnoreOrderingMatch</ordering>
+          <substring>caseIgnoreSubstringsMatch</substring>
+        </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.11" obsolete="false" singlevalue="true" collective="false" nousermodification="false">
+          <aliases>
+            <alias>paymentMethod</alias>
+          </aliases>
+          <description>Payment methods: paypal, doku, debit, visa, mastercard, klikbca, bankmandiri, koperasi_kredit, telkomsel, indosat.</description>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseIgnoreMatch</equality>
+          <ordering>caseIgnoreOrderingMatch</ordering>
+          <substring>caseIgnoreSubstringsMatch</substring>
+        </attributetype>
       </attributetypes>
       <objectclasses>
         <objectclass oid="2.25.31030703689307962575270284666844839901.2" obsolete="false">
@@ -6934,6 +6996,53 @@
           <type>AUXILIARY</type>
           <optional>
             <attributetype>photoId</attributetype>
+            <attributetype>virtualMail</attributetype>
+          </optional>
+        </objectclass>
+        <objectclass oid="2.25.31030703689307962575270284666844839901.4" obsolete="false">
+          <aliases>
+            <alias>socialObject</alias>
+          </aliases>
+          <description>Any object that wants to have social attributes.</description>
+          <type>AUXILIARY</type>
+          <optional>
+            <attributetype>photoId</attributetype>
+            <attributetype>virtualMail</attributetype>
+          </optional>
+        </objectclass>
+        <objectclass oid="2.25.31030703689307962575270284666844839901.9" obsolete="false">
+          <aliases>
+            <alias>address</alias>
+          </aliases>
+          <type>STRUCTURAL</type>
+          <optional>
+            <attributetype>c</attributetype>
+            <attributetype>cn</attributetype>
+            <attributetype>description</attributetype>
+            <attributetype>facsimileTelephoneNumber</attributetype>
+            <attributetype>l</attributetype>
+            <attributetype>mail</attributetype>
+            <attributetype>mobile</attributetype>
+            <attributetype>postalCode</attributetype>
+            <attributetype>st</attributetype>
+            <attributetype>street</attributetype>
+            <attributetype>telephoneNumber</attributetype>
+          </optional>
+        </objectclass>
+        <objectclass oid="2.25.31030703689307962575270284666844839901.10" obsolete="false">
+          <aliases>
+            <alias>payment</alias>
+          </aliases>
+          <type>STRUCTURAL</type>
+          <mandatory>
+            <attributetype>cn</attributetype>
+            <attributetype>paymentMethod</attributetype>
+          </mandatory>
+          <optional>
+            <attributetype>description</attributetype>
+            <attributetype>mail</attributetype>
+            <attributetype>telephoneNumber</attributetype>
+            <attributetype>mobile</attributetype>
           </optional>
         </objectclass>
       </objectclasses>

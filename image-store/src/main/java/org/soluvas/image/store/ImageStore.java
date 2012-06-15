@@ -156,6 +156,7 @@ public class ImageStore {
 			String collName = namespace + "Image";
 			log.info("Authenticated to MongoDB. Collection name is {}", collName);
 			mongoColl = db.getCollection(collName);
+			mongoColl.ensureIndex(new BasicDBObject("created", -1));
 		} catch (Exception e) {
 			throw new RuntimeException("Cannot connect to MongoDB "+ mongoUriDetail.getHosts() + " database " + mongoUriDetail.getDatabase(), e);
 		}
