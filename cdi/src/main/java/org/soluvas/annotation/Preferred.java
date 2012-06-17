@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.soluvas.annotation;
 
 import static java.lang.annotation.ElementType.FIELD;
@@ -15,14 +12,16 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
+/**
+ * Already configured instance, not just a "plain" instance.
+ * @author ceefour
+ * @deprecated If you need this {@link Qualifier}, you should consider using interfaces.
+ */
 @Qualifier
 @Target({ TYPE, METHOD, PARAMETER, FIELD })
 @Retention(RUNTIME)
 @Documented
-/**
- * @author ceefour
- * Already configured instance, not just a "plain" instance.
- */
+@Deprecated
 public @interface Preferred {
 
 }

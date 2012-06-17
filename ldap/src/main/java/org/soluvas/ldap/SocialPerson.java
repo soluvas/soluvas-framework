@@ -21,15 +21,13 @@ public class SocialPerson extends Person {
 	}
 
 	public SocialPerson(String id, String slug, String firstName,
-			String lastName, String email, String virtualMail) {
-		super(id, slug, firstName, lastName, email);
-		
-		this.virtualMail = virtualMail;
+			String lastName) {
+		super(id, slug, firstName, lastName);
 	}
 
 	public SocialPerson(String id, String slug, String firstName,
-			String lastName) {
-		super(id, slug, firstName, lastName);
+			String lastName, String email) {
+		super(id, slug, firstName, lastName, email);
 	}
 
 	/**
