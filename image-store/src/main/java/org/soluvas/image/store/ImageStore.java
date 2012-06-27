@@ -268,23 +268,6 @@ public class ImageStore {
 				originalFile.getName(), contentType, length, imageId });
 		
 		try {
-			// Upload original
-			final Callable<Object> uploadOriginal = new Callable<Object>() {
-				@Override
-				public Object call() throws Exception {
-					final URI originalDavUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
-							davUri, namespace, 'o', imageId, 'o', extension));
-					try {
-						uploadFile(originalDavUri, new FileInputStream(originalFile), contentType, length);
-						return null;
-					} catch (Exception e) {
-						throw new RuntimeException("Error uploading original " + imageId + " to " + originalDavUri, e);
-					}
-				}
-			};
-			uploadOriginal.call();
-//			Future<Object> originalFuture = Futures.future(uploadOriginal, system.dispatcher());
-
 			// Create styles and upload
 			Collection<StyledImage> styledImages = Collections2.transform(styles.values(), new com.google.common.base.Function<ImageStyle, StyledImage>() {
 				@Override
@@ -331,7 +314,24 @@ public class ImageStore {
 					}
 				}
 			});
-			
+
+			// Upload originals last, so that unreadable images aren't uploaded at all
+			final Callable<Object> uploadOriginal = new Callable<Object>() {
+				@Override
+				public Object call() throws Exception {
+					final URI originalDavUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
+							davUri, namespace, 'o', imageId, 'o', extension));
+					try {
+						uploadFile(originalDavUri, new FileInputStream(originalFile), contentType, length);
+						return null;
+					} catch (Exception e) {
+						throw new RuntimeException("Error uploading original " + imageId + " to " + originalDavUri, e);
+					}
+				}
+			};
+			uploadOriginal.call();
+//			Future<Object> originalFuture = Futures.future(uploadOriginal, system.dispatcher());
+
 //			// Upload these thumbnails
 //			List<Future<StyledImage>> uploadedFutures = Lists.transform(styledFutures, new com.google.common.base.Function<Future<ResizeResult>, Future<StyledImage>>() {
 //				@Override
