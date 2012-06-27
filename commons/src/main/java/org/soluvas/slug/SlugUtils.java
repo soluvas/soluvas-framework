@@ -58,7 +58,7 @@ public class SlugUtils {
 	 * @param validator
 	 * @return
 	 */
-	public String generateValidId(String name, Predicate<String> validator) {
+	public static String generateValidId(String name, Predicate<String> validator) {
 		String id = generateId(name, 0);
 		if (validator.apply(id))
 			return id;
@@ -78,7 +78,7 @@ public class SlugUtils {
 	 * @param validator
 	 * @return
 	 */
-	public String generateValidSegment(String name, Predicate<String> validator) {
+	public static String generateValidSegment(String name, Predicate<String> validator) {
 		String id = generateSegment(name, 0);
 		if (validator.apply(id))
 			return id;
@@ -98,7 +98,7 @@ public class SlugUtils {
 	 * @param validator
 	 * @return
 	 */
-	public String generateValidScreenName(String name, Predicate<String> validator) {
+	public static String generateValidScreenName(String name, Predicate<String> validator) {
 		String id = generateScreenName(name, 0);
 		if (validator.apply(id))
 			return id;
