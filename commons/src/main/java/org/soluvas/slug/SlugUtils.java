@@ -5,6 +5,9 @@ package org.soluvas.slug;
  * @author ceefour
  */
 public class SlugUtils {
+	
+	public static final int MIN_LENGTH = 3;
+	
 	/**
 	 * Generate person slugs (using underscores).
 	 * @param name
@@ -12,8 +15,10 @@ public class SlugUtils {
 	 * @return
 	 */
 	public static String generateScreenName(String name, int iteration) {
-		final String base = name.replaceAll("[^A-Za-z0-9]", " ").trim().toLowerCase().replaceAll(" ", ".")
+		String base = name.replaceAll("[^A-Za-z0-9]", " ").trim().toLowerCase().replaceAll(" ", ".")
 				.replaceAll("\\.+", ".");
+		while (base.length() < MIN_LENGTH)
+			base += "a";
 		return (iteration == 0) ? base : base + String.valueOf(iteration + 1);
 	}
 	
@@ -24,8 +29,10 @@ public class SlugUtils {
 	 * @return
 	 */
 	public static String generateId(String name, int iteration) {
-		final String base = name.replaceAll("[^A-Za-z0-9]", " ").trim().toLowerCase().replaceAll(" ", "_")
+		String base = name.replaceAll("[^A-Za-z0-9]", " ").trim().toLowerCase().replaceAll(" ", "_")
 				.replaceAll("\\_+", "_");
+		while (base.length() < MIN_LENGTH)
+			base += "a";
 		return (iteration == 0) ? base : base + String.valueOf(iteration + 1);
 	}
 	
@@ -36,8 +43,10 @@ public class SlugUtils {
 	 * @return
 	 */
 	public static String generateSegment(String name, int iteration) {
-		final String base = name.replaceAll("[^A-Za-z0-9]", " ").trim().toLowerCase().replaceAll(" ", "-")
+		String base = name.replaceAll("[^A-Za-z0-9]", " ").trim().toLowerCase().replaceAll(" ", "-")
 				.replaceAll("\\-+", "-");
+		while (base.length() < MIN_LENGTH)
+			base += "a";
 		return (iteration == 0) ? base : base + String.valueOf(iteration + 1);
 	}
 	
