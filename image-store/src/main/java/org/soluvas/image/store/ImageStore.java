@@ -293,14 +293,18 @@ public class ImageStore {
 					int width;
 					int height;
 					try {
-						styledFile = File.createTempFile(imageId + "_", "_" + style.getCode() + ".jpg");
-						log.info("Resizing {} to {}", originalFile, styledFile);
-						BufferedImage styledImage = Thumbnails.of(originalFile).size(style.getMaxWidth(), style.getMaxHeight())
-							.crop(Positions.CENTER).asBufferedImage();
-						width = styledImage.getWidth();
-						height = styledImage.getHeight();
-						log.info("Dimensions of {} is {}x{}", new Object[] { styledFile, width, height });
-						ImageIO.write(styledImage, "jpg", styledFile);
+						// I don't think Thumbnailer and/or ImageIO is thread-safe
+						synchronized (this) {
+							styledFile = File.createTempFile(imageId + "_", "_" + style.getCode() + ".jpg");
+							log.info("Resizing {} to {}", originalFile, styledFile);
+							BufferedImage styledImage = Thumbnails.of(originalFile).size(style.getMaxWidth(), style.getMaxHeight())
+								.crop(Positions.CENTER).asBufferedImage();
+							width = styledImage.getWidth();
+							height = styledImage.getHeight();
+							log.info("Dimensions of {} is {}x{}", new Object[] { styledFile, width, height });
+							ImageIO.write(styledImage, "jpg", styledFile);
+						}
+						
 //						ByteArrayOutputStream buf = new ByteArrayOutputStream();
 //						ImageIO.write(styledImage, "jpg", buf);
 //						byte[] content = buf.toByteArray();
