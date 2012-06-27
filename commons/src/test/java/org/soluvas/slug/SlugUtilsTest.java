@@ -26,15 +26,20 @@ public class SlugUtilsTest {
 	@Test
 	public void testGenerateScreenName() {
 		Assert.assertEquals("have.a.wonderful.day",
-				slugUtils.generateScreenName("Have a Wonderful Day :)", 0));
+				slugUtils.generateScreenName("Have a Wonderful Day :)"));
 		Assert.assertEquals("slurp.martabak.telor.slurp",
-				slugUtils.generateScreenName("Slurp martabak telor slurp :-)", 0));
+				slugUtils.generateScreenName("Slurp martabak telor slurp :-)"));
 		// Minimum length is 3, pad with 'a'
 		Assert.assertEquals("aaa",
-				slugUtils.generateScreenName("", 0));
+				slugUtils.generateScreenName(""));
 		// International characters
 		Assert.assertEquals("aaa",
-				slugUtils.generateScreenName("増田秀樹", 0));
+				slugUtils.generateScreenName("増田秀樹"));
+		// suffix
+		Assert.assertEquals("have.a.wonderful.day5",
+				slugUtils.generateScreenName("Have a Wonderful Day :)", 5));
+		Assert.assertEquals("aaa45",
+				slugUtils.generateScreenName("増田秀樹", 45));
 	}
 
 	@Test
@@ -51,6 +56,11 @@ public class SlugUtilsTest {
 		// International characters
 		Assert.assertEquals("aaa",
 				slugUtils.generateId("増田秀樹", 0));
+		// suffix
+		Assert.assertEquals("have_a_wonderful_day5",
+				slugUtils.generateId("Have a Wonderful Day :)", 5));
+		Assert.assertEquals("aaa45",
+				slugUtils.generateId("増田秀樹", 45));
 	}
 
 	@Test
@@ -66,6 +76,11 @@ public class SlugUtilsTest {
 		// International characters
 		Assert.assertEquals("aaa",
 				slugUtils.generateSegment("増田秀樹", 0));
+		// suffix
+		Assert.assertEquals("have-a-wonderful-day5",
+				slugUtils.generateSegment("Have a Wonderful Day :)", 5));
+		Assert.assertEquals("aaa45",
+				slugUtils.generateSegment("増田秀樹", 45));
 	}
 
 }
