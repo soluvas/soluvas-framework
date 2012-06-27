@@ -31,11 +31,12 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.protocol.BasicHttpContext;
 import org.bson.BasicBSONObject;
 import org.slf4j.Logger;
@@ -94,7 +95,7 @@ public class ImageStore {
 	private String publicUri;
 	private String mongoUri;
 	private DBCollection mongoColl;
-	private final DefaultHttpClient client = new DefaultHttpClient(new ThreadSafeClientConnManager());
+	private final DefaultHttpClient client = new DefaultHttpClient(new PoolingClientConnectionManager());
 	private final BasicHttpContext httpContext = new BasicHttpContext();
 	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<String, ImageStyle>();
 	private ActorSystem system;
@@ -400,8 +401,7 @@ public class ImageStore {
 		httpPut.setHeader("Content-Type", contentType);
 		httpPut.setEntity(new InputStreamEntity(source, length));
 		HttpResponse response = client.execute(httpPut, httpContext);
-		if (response.getEntity() != null)
-			response.getEntity().getContent().close();
+		HttpClientUtils.closeQuietly(response);
 		log.info("Upload {} returned: {}", uri, response.getStatusLine());
 	}
 	
@@ -421,8 +421,7 @@ public class ImageStore {
 				HttpDelete deleteOriginal = new HttpDelete(originalUri);
 				try {
 					HttpResponse response = client.execute(deleteOriginal, httpContext);
-					if (response.getEntity() != null)
-						response.getEntity().getContent().close();
+					HttpClientUtils.closeQuietly(response);
 					log.info("Delete {} returned: {}", originalUri, response.getStatusLine());
 					return response.getStatusLine();
 				} catch (Exception e) {
@@ -443,8 +442,7 @@ public class ImageStore {
 						HttpDelete deleteThumb = new HttpDelete(styled.getUri());
 						try {
 							HttpResponse response = client.execute(deleteThumb, httpContext);
-							if (response.getEntity() != null)
-								response.getEntity().getContent().close();
+							HttpClientUtils.closeQuietly(response);
 							log.info("Delete {} returned: {}", styled.getUri(), response.getStatusLine());
 							return response.getStatusLine();
 						} catch (Exception e) {
