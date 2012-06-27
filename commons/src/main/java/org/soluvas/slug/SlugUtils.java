@@ -5,7 +5,6 @@ package org.soluvas.slug;
  * @author ceefour
  */
 public class SlugUtils {
-
 	/**
 	 * Generate person slugs (using underscores).
 	 * @param name
