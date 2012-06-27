@@ -29,6 +29,12 @@ public class SlugUtilsTest {
 				slugUtils.generateScreenName("Have a Wonderful Day :)", 0));
 		Assert.assertEquals("slurp.martabak.telor.slurp",
 				slugUtils.generateScreenName("Slurp martabak telor slurp :-)", 0));
+		// Minimum length is 3, pad with 'a'
+		Assert.assertEquals("aaa",
+				slugUtils.generateScreenName("", 0));
+		// International characters
+		Assert.assertEquals("aaa",
+				slugUtils.generateScreenName("増田秀樹", 0));
 	}
 
 	@Test
@@ -39,6 +45,12 @@ public class SlugUtilsTest {
 				slugUtils.generateId("Slurp martabak telor slurp :-)", 0));
 		Assert.assertEquals("x5_4_0dhyyydgs",
 				slugUtils.generateId("x5%4!(0dhyYYDgs", 0));
+		// Minimum length is 3, pad with 'a'
+		Assert.assertEquals("aaa",
+				slugUtils.generateId("", 0));
+		// International characters
+		Assert.assertEquals("aaa",
+				slugUtils.generateId("増田秀樹", 0));
 	}
 
 	@Test
@@ -48,6 +60,12 @@ public class SlugUtilsTest {
 				slugUtils.generateSegment("Have a Wonderful Day :)", 0));
 		Assert.assertEquals("slurp-martabak-telor-slurp",
 				slugUtils.generateSegment("Slurp martabak telor slurp :-)", 0));
+		// Minimum length is 3, pad with 'a'
+		Assert.assertEquals("aaa",
+				slugUtils.generateSegment("", 0));
+		// International characters
+		Assert.assertEquals("aaa",
+				slugUtils.generateSegment("増田秀樹", 0));
 	}
 
 }
