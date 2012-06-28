@@ -62,30 +62,67 @@ attributetype ( 2.25.31030703689307962575270284666844839901.11
 	SINGLE-VALUE 
  )
 
+attributetype ( 2.25.31030703689307962575270284666844839901.12 
+	NAME 'birthDate' 
+	DESC 'Account owner's date of birth. ' 
+	EQUALITY generalizedTimeMatch 
+	ORDERING generalizedTimeOrderingMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.24 
+	SINGLE-VALUE 
+ )
+
+attributetype ( 2.25.31030703689307962575270284666844839901.13 
+	NAME 'gender' 
+	DESC 'Gender (male/female)' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+	SINGLE-VALUE 
+ )
+
+attributetype ( 2.25.31030703689307962575270284666844839901.14 
+	NAME 'websiteUri' 
+	DESC 'URI of website(s), in no specific order.' 
+	EQUALITY caseExactMatch 
+	ORDERING caseExactOrderingMatch 
+	SUBSTR caseExactSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+ )
+
+attributetype ( 2.25.31030703689307962575270284666844839901.15 
+	NAME 'nickname' 
+	DESC 'Person nickname(s).' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+ )
+
 objectclass ( 2.25.31030703689307962575270284666844839901.2 
 	NAME 'socialPerson' 
 	DESC 'Person in the Web 2.0 age.' 
 	AUXILIARY 
-	MAY ( photoId $ virtualMail ) 
+	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname ) 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.4 
 	NAME 'socialObject' 
 	DESC 'Any object that wants to have social attributes.' 
 	AUXILIARY 
-	MAY ( photoId $ virtualMail ) 
+	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname ) 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.9 
 	NAME 'address' 
 	STRUCTURAL 
-	MAY ( c $ cn $ description $ facsimileTelephoneNumber $ l $ mail $ mobile $ postalCode $ st $ street $ telephoneNumber ) 
+	MAY ( c $ cn $ description $ facsimileTelephoneNumber $ l $ mail $ mobile $ postalCode $ st $ street $ telephoneNumber $ uniqueIdentifier $ o ) 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.10 
 	NAME 'payment' 
 	STRUCTURAL 
-	MUST ( cn $ paymentMethod ) 
-	MAY ( description $ mail $ telephoneNumber $ mobile ) 
+	MUST paymentMethod 
+	MAY ( description $ mail $ telephoneNumber $ mobile $ uniqueIdentifier $ cn ) 
  )
 

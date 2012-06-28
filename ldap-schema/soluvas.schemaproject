@@ -6986,6 +6986,49 @@
           <ordering>caseIgnoreOrderingMatch</ordering>
           <substring>caseIgnoreSubstringsMatch</substring>
         </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.12" obsolete="false" singlevalue="true" collective="false" nousermodification="false">
+          <aliases>
+            <alias>birthDate</alias>
+          </aliases>
+          <description>Account owner's date of birth.</description>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.24</syntax>
+          <equality>generalizedTimeMatch</equality>
+          <ordering>generalizedTimeOrderingMatch</ordering>
+        </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.13" obsolete="false" singlevalue="true" collective="false" nousermodification="false">
+          <aliases>
+            <alias>gender</alias>
+          </aliases>
+          <description>Gender (male/female)</description>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseIgnoreMatch</equality>
+          <ordering>caseIgnoreOrderingMatch</ordering>
+          <substring>caseIgnoreSubstringsMatch</substring>
+        </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.14" obsolete="false" singlevalue="false" collective="false" nousermodification="false">
+          <aliases>
+            <alias>websiteUri</alias>
+          </aliases>
+          <description>URI of website(s), in no specific order.</description>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseExactMatch</equality>
+          <ordering>caseExactOrderingMatch</ordering>
+          <substring>caseExactSubstringsMatch</substring>
+        </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.15" obsolete="false" singlevalue="false" collective="false" nousermodification="false">
+          <aliases>
+            <alias>nickname</alias>
+          </aliases>
+          <description>Person nickname(s).</description>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseIgnoreMatch</equality>
+          <ordering>caseIgnoreOrderingMatch</ordering>
+          <substring>caseIgnoreSubstringsMatch</substring>
+        </attributetype>
       </attributetypes>
       <objectclasses>
         <objectclass oid="2.25.31030703689307962575270284666844839901.2" obsolete="false">
@@ -6997,6 +7040,14 @@
           <optional>
             <attributetype>photoId</attributetype>
             <attributetype>virtualMail</attributetype>
+            <attributetype>primaryBillingAddress</attributetype>
+            <attributetype>primaryMail</attributetype>
+            <attributetype>primaryPayment</attributetype>
+            <attributetype>primaryShippingAddress</attributetype>
+            <attributetype>birthDate</attributetype>
+            <attributetype>gender</attributetype>
+            <attributetype>websiteUri</attributetype>
+            <attributetype>nickname</attributetype>
           </optional>
         </objectclass>
         <objectclass oid="2.25.31030703689307962575270284666844839901.4" obsolete="false">
@@ -7008,6 +7059,14 @@
           <optional>
             <attributetype>photoId</attributetype>
             <attributetype>virtualMail</attributetype>
+            <attributetype>primaryBillingAddress</attributetype>
+            <attributetype>primaryMail</attributetype>
+            <attributetype>primaryPayment</attributetype>
+            <attributetype>primaryShippingAddress</attributetype>
+            <attributetype>birthDate</attributetype>
+            <attributetype>gender</attributetype>
+            <attributetype>websiteUri</attributetype>
+            <attributetype>nickname</attributetype>
           </optional>
         </objectclass>
         <objectclass oid="2.25.31030703689307962575270284666844839901.9" obsolete="false">
@@ -7027,6 +7086,8 @@
             <attributetype>st</attributetype>
             <attributetype>street</attributetype>
             <attributetype>telephoneNumber</attributetype>
+            <attributetype>uniqueIdentifier</attributetype>
+            <attributetype>o</attributetype>
           </optional>
         </objectclass>
         <objectclass oid="2.25.31030703689307962575270284666844839901.10" obsolete="false">
@@ -7035,7 +7096,6 @@
           </aliases>
           <type>STRUCTURAL</type>
           <mandatory>
-            <attributetype>cn</attributetype>
             <attributetype>paymentMethod</attributetype>
           </mandatory>
           <optional>
@@ -7043,6 +7103,8 @@
             <attributetype>mail</attributetype>
             <attributetype>telephoneNumber</attributetype>
             <attributetype>mobile</attributetype>
+            <attributetype>uniqueIdentifier</attributetype>
+            <attributetype>cn</attributetype>
           </optional>
         </objectclass>
       </objectclasses>
