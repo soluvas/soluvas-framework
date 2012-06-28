@@ -27,6 +27,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.AuthCache;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPut;
@@ -38,6 +39,7 @@ import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 import org.bson.BasicBSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,7 +98,6 @@ public class ImageStore {
 	private String mongoUri;
 	private DBCollection mongoColl;
 	private final DefaultHttpClient client = new DefaultHttpClient(new PoolingClientConnectionManager());
-	private final BasicHttpContext httpContext = new BasicHttpContext();
 	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<String, ImageStyle>();
 	private ActorSystem system;
 	/**
@@ -128,6 +129,19 @@ public class ImageStore {
 		
 	}
 	
+	/**
+	 * Create {@link HttpContext} with {@link AuthCache} pre-populated,
+	 * since HttpClient does not allow HttpContext to be shared among threads.
+	 * @return
+	 */
+	protected HttpContext createHttpContext() {
+		BasicHttpContext httpContext = new BasicHttpContext();
+		BasicAuthCache authCache = new BasicAuthCache();
+		authCache.put(new HttpHost(URI.create(davUri).getHost()), new BasicScheme());
+		httpContext.setAttribute(ClientContext.AUTH_CACHE, authCache);
+		return httpContext;
+	}
+	
 	public void init(String davPassword) {
 		log.info("Starting ImageStore {}", namespace);
 		
@@ -143,9 +157,6 @@ public class ImageStore {
 		if (davUriDetail.getUserInfo() != null) {
 			UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(davUriDetail.getUserInfo(), davPassword);
 			client.getCredentialsProvider().setCredentials(AuthScope.ANY, credentials);
-			BasicAuthCache authCache = new BasicAuthCache();
-			authCache.put(new HttpHost(davUriDetail.getHost()), new BasicScheme());
-			httpContext.setAttribute(ClientContext.AUTH_CACHE, authCache);
 		}
 		
 		MongoURI mongoUriDetail = new MongoURI(mongoUri);
@@ -404,9 +415,9 @@ public class ImageStore {
 		HttpPut httpPut = new HttpPut(uri);
 		httpPut.setHeader("Content-Type", contentType);
 		httpPut.setEntity(new InputStreamEntity(source, length));
-		HttpResponse response = client.execute(httpPut, httpContext);
-		HttpClientUtils.closeQuietly(response);
+		HttpResponse response = client.execute(httpPut, createHttpContext());
 		log.info("Upload {} returned: {}", uri, response.getStatusLine());
+		HttpClientUtils.closeQuietly(response);
 	}
 	
 	/**
@@ -416,53 +427,85 @@ public class ImageStore {
 	public void delete(final String id) {
 		final Image image = findOne(id);
 		
-		Future<StatusLine> originalFuture = Futures.future(new Callable<StatusLine>() {
-			@Override
-			public StatusLine call() throws Exception {
-				URI originalUri = image.getUri();
-				log.info("Deleting {} image {} - original: {}", new Object[] { 
-						namespace, id, originalUri });
-				HttpDelete deleteOriginal = new HttpDelete(originalUri);
-				try {
-					HttpResponse response = client.execute(deleteOriginal, httpContext);
-					HttpClientUtils.closeQuietly(response);
-					log.info("Delete {} returned: {}", originalUri, response.getStatusLine());
-					return response.getStatusLine();
-				} catch (Exception e) {
-					log.error("Error deleting "+ originalUri, e);
-					return null;
-				}				
-			}
-		}, system.dispatcher());
+//		Future<StatusLine> originalFuture = Futures.future(new Callable<StatusLine>() {
+//			@Override
+//			public StatusLine call() throws Exception {
+//				URI originalUri = image.getUri();
+//				log.info("Deleting {} image {} - original: {}", new Object[] { 
+//						namespace, id, originalUri });
+//				HttpDelete deleteOriginal = new HttpDelete(originalUri);
+//				try {
+//					HttpResponse response = client.execute(deleteOriginal, createHttpContext());
+//					final StatusLine statusLine = response.getStatusLine();
+//					log.info("Delete {} returned: {}", originalUri, statusLine);
+//					HttpClientUtils.closeQuietly(response);
+//					return statusLine;
+//				} catch (Exception e) {
+//					log.error("Error deleting "+ originalUri, e);
+//					return null;
+//				}
+//			}
+//		}, system.dispatcher());
+
+		URI originalUri = image.getUri();
+		log.info("Deleting {} image {} - original: {}", new Object[] { 
+				namespace, id, originalUri });
+		HttpDelete deleteOriginal = new HttpDelete(originalUri);
+		try {
+			HttpResponse response = client.execute(deleteOriginal, createHttpContext());
+			final StatusLine statusLine = response.getStatusLine();
+			log.info("Delete {} returned: {}", originalUri, statusLine);
+			HttpClientUtils.closeQuietly(response);
+//			return statusLine;
+		} catch (Exception e) {
+			log.error("Error deleting "+ originalUri, e);
+//			return null;
+		}
 		
-		Future<Iterable<StatusLine>> styledsFuture = Futures.traverse(image.getStyles().values(), new Function<StyledImage, Future<StatusLine>>() {
-			@Override
-			public Future<StatusLine> apply(final StyledImage styled) {
-				return Futures.future(new Callable<StatusLine>() {
-					@Override
-					public StatusLine call() throws Exception {
-						log.info("Deleting {} image {} - {}: {}", new Object[] { 
-								namespace, id, styled.getStyleName(), styled.getUri() });
-						HttpDelete deleteThumb = new HttpDelete(styled.getUri());
-						try {
-							HttpResponse response = client.execute(deleteThumb, httpContext);
-							HttpClientUtils.closeQuietly(response);
-							log.info("Delete {} returned: {}", styled.getUri(), response.getStatusLine());
-							return response.getStatusLine();
-						} catch (Exception e) {
-							log.error("Error deleting "+ styled.getUri(), e);
-							return null;
-						}
-					}
-				}, system.dispatcher());
+//		Future<Iterable<StatusLine>> styledsFuture = Futures.traverse(image.getStyles().values(), new Function<StyledImage, Future<StatusLine>>() {
+//			@Override
+//			public Future<StatusLine> apply(final StyledImage styled) {
+//				return Futures.future(new Callable<StatusLine>() {
+//					@Override
+//					public StatusLine call() throws Exception {
+//						log.info("Deleting {} image {} - {}: {}", new Object[] { 
+//								namespace, id, styled.getStyleName(), styled.getUri() });
+//						HttpDelete deleteThumb = new HttpDelete(styled.getUri());
+//						try {
+//							HttpResponse response = client.execute(deleteThumb, createHttpContext());
+//							final StatusLine statusLine = response.getStatusLine();
+//							HttpClientUtils.closeQuietly(response);
+//							log.info("Delete {} returned: {}", styled.getUri(), statusLine);
+//							return statusLine;
+//						} catch (Exception e) {
+//							log.error("Error deleting "+ styled.getUri(), e);
+//							return null;
+//						}
+//					}
+//				}, system.dispatcher());
+//			}
+//		}, system.dispatcher());
+
+		for (StyledImage styled : image.getStyles().values()) {
+			log.info("Deleting {} image {} - {}: {}", new Object[] { 
+					namespace, id, styled.getStyleName(), styled.getUri() });
+			HttpDelete deleteThumb = new HttpDelete(styled.getUri());
+			try {
+				HttpResponse response = client.execute(deleteThumb, createHttpContext());
+				log.info("Delete {} returned: {}", styled.getUri(), response.getStatusLine());
+				HttpClientUtils.closeQuietly(response);
+//				return response.getStatusLine();
+			} catch (Exception e) {
+				log.error("Error deleting "+ styled.getUri(), e);
+//				return null;
 			}
-		}, system.dispatcher());
+		}
 
 		try {
-			Iterable<StatusLine> statuses = Await.result(styledsFuture, Duration.create(60, TimeUnit.SECONDS));
-			log.info("Delete styled {} image {} status codes: {}", new Object[] { namespace, id, statuses });
-			StatusLine status = Await.result(originalFuture, Duration.create(60, TimeUnit.SECONDS));
-			log.info("Delete original {} image {} status code: {}", new Object[] { namespace, id, status });
+//			Iterable<StatusLine> statuses = Await.result(styledsFuture, Duration.create(60, TimeUnit.SECONDS));
+//			log.info("Delete styled {} image {} status codes: {}", new Object[] { namespace, id, statuses });
+//			StatusLine status = Await.result(originalFuture, Duration.create(60, TimeUnit.SECONDS));
+//			log.info("Delete original {} image {} status code: {}", new Object[] { namespace, id, status });
 		} catch (Exception e) {
 			log.error("Error deleting " + namespace + " image " + id + " from WebDAV", e);
 		}
