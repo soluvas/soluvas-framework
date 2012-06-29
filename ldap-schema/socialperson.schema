@@ -64,7 +64,7 @@ attributetype ( 2.25.31030703689307962575270284666844839901.11
 
 attributetype ( 2.25.31030703689307962575270284666844839901.12 
 	NAME 'birthDate' 
-	DESC 'Account owner's date of birth. ' 
+	DESC 'Account owner date of birth.' 
 	EQUALITY generalizedTimeMatch 
 	ORDERING generalizedTimeOrderingMatch 
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.24 
@@ -99,18 +99,28 @@ attributetype ( 2.25.31030703689307962575270284666844839901.15
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
  )
 
+attributetype ( 2.25.31030703689307962575270284666844839901.16 
+	NAME 'canonicalIdentifier' 
+	DESC 'Canonical identifier, ie. without special character or separators. For example the canonical identifier of arum.puspita is arumpuspita.' 
+	EQUALITY caseExactMatch 
+	ORDERING caseExactOrderingMatch 
+	SUBSTR caseExactSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+	SINGLE-VALUE 
+ )
+
 objectclass ( 2.25.31030703689307962575270284666844839901.2 
 	NAME 'socialPerson' 
 	DESC 'Person in the Web 2.0 age.' 
 	AUXILIARY 
-	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname ) 
+	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier ) 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.4 
 	NAME 'socialObject' 
 	DESC 'Any object that wants to have social attributes.' 
 	AUXILIARY 
-	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname ) 
+	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier ) 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.9 
