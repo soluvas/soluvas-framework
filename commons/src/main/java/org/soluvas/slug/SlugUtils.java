@@ -139,4 +139,18 @@ public class SlugUtils {
 		}
 	}
 	
+	/**
+	 * Makes it lowercase, and removes every character not in a-z, 0-9, and underscore.
+	 * 
+	 * It is useful for e.g. making both http://www.satukancinta.com/member/arum.puspita and http://www.satukancinta.com/member/arumpuspita
+	 * or even http://www.satukancinta.com/member/arum.pus.pi.ta usable.
+	 * From the technical point-of-view (easy matching/lookup), the canonical slug/identifier for <tt>arum.puspita</tt> is <tt>arumpuspita</tt>.
+	 * From the user or SEO point-of-view however, the "canonical" one is <tt>arum.puspita</tt>, but it is not what is meant here.
+	 * 
+	 * @param slug
+	 * @return
+	 */
+	public static String canonicalize(String slug) {
+		return slug.toLowerCase().replaceAll("[^a-z0-9_]", "");
+	}
 }

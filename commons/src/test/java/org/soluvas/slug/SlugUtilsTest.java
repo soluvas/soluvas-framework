@@ -24,7 +24,7 @@ public class SlugUtilsTest {
 	}
 
 	@Test
-	public void testGenerateScreenName() {
+	public void generateScreenName() {
 		Assert.assertEquals("have.a.wonderful.day",
 				slugUtils.generateScreenName("Have a Wonderful Day :)"));
 		Assert.assertEquals("slurp.martabak.telor.slurp",
@@ -43,7 +43,7 @@ public class SlugUtilsTest {
 	}
 
 	@Test
-	public void testGenerateId() {
+	public void generateId() {
 		Assert.assertEquals("have_a_wonderful_day",
 				slugUtils.generateId("Have a Wonderful Day :)", 0));
 		Assert.assertEquals("slurp_martabak_telor_slurp",
@@ -64,7 +64,7 @@ public class SlugUtilsTest {
 	}
 
 	@Test
-	public void testGenerateSegment() {
+	public void generateSegment() {
 		// should actually be "have-wonderful-day"
 		Assert.assertEquals("have-a-wonderful-day",
 				slugUtils.generateSegment("Have a Wonderful Day :)", 0));
@@ -81,6 +81,15 @@ public class SlugUtilsTest {
 				slugUtils.generateSegment("Have a Wonderful Day :)", 5));
 		Assert.assertEquals("aaa45",
 				slugUtils.generateSegment("増田秀樹", 45));
+	}
+
+	@Test
+	public void canonicalize() {
+		Assert.assertEquals("arumpuspita", SlugUtils.canonicalize("arum.puspita"));
+		Assert.assertEquals("arumpuspita", SlugUtils.canonicalize("Arum.Puspita"));
+		Assert.assertEquals("arumpuspita", SlugUtils.canonicalize("Arum.Pus.pIt.a"));
+		Assert.assertEquals("arumpuspita", SlugUtils.canonicalize("Ar um. @#%# P-us .p I t.-a"));
+		Assert.assertEquals("arum_puspita", SlugUtils.canonicalize("Ar um. @#%#_ P-us .p I t.-a"));
 	}
 
 }
