@@ -24,7 +24,7 @@ import com.google.common.collect.Lists;
 public class LdapRepositoryImpl<T> implements LdapRepository<T> {
 
 	private transient Logger log = LoggerFactory.getLogger(LdapRepositoryImpl.class);
-	@Inject private LdapConnection connection;
+	@Inject private transient LdapConnection connection;
 	private LdapMapper mapper;
 	private String baseDn;
 	private Class<T> entityClass;
