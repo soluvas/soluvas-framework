@@ -13,14 +13,14 @@
 	<packaging>bundle</packaging>
 	
 	<properties>
-		<apacheds.version>2.0.0-M6</apacheds.version>
+		<apacheds.version>2.0.0-M7</apacheds.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.directory.shared</groupId>
 			<artifactId>shared-ldap-codec-standalone</artifactId>
-			<version>1.0.0-M11</version>
+			<version>1.0.0-M12</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.directory.jdbm</groupId>
