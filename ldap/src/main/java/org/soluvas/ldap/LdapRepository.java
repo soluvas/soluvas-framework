@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
+import org.apache.directory.shared.ldap.model.name.Dn;
 
 /**
  * Manages LDAP entry POJO objects annotated with {@link LdapEntry}.
@@ -12,14 +13,14 @@ import org.apache.directory.shared.ldap.model.exception.LdapException;
  */
 public interface LdapRepository<T> {
 
-	public void init();
+	void init();
 	
 	/**
 	 * Add an LDAP {@link Entry} from typed POJO object.
 	 * @param obj
 	 * @throws LdapException
 	 */
-	public T add(T obj);
+	T add(T obj);
 	
 	/**
 	 * Modify an LDAP {@link Entry} from typed POJO object.
@@ -28,21 +29,21 @@ public interface LdapRepository<T> {
 	 * @return
 	 * @throws LdapException
 	 */
-	public T modify(T obj, boolean removeExtraAttributes);
+	T modify(T obj, boolean removeExtraAttributes);
 
 	/**
 	 * Delete an LDAP entry.
 	 * @param obj
 	 * @throws LdapException
 	 */
-	public void delete(T obj);
+	void delete(T obj);
 	
 	/**
 	 * Delete an LDAP entry based on ID, a {@link LdapRdn} annotated property.
 	 * @param obj
 	 * @throws LdapException
 	 */
-	public void delete(String id);
+	void delete(String id);
 	
 	/**
 	 * Find LDAP entry based on ID, a {@link LdapRdn} annotated property.
@@ -50,7 +51,7 @@ public interface LdapRepository<T> {
 	 * @throws LdapException
 	 * @return T entity or <tt>null</tt> if none found.
 	 */
-	public T findOne(String id);
+	T findOne(String id);
 
 	/**
 	 * Find LDAP entry based on an attribute value. The attribute does not need to be
@@ -60,34 +61,34 @@ public interface LdapRepository<T> {
 	 * @throws LdapException
 	 * @return T entity or <tt>null</tt> if none found.
 	 */
-	public T findOneByAttribute(String attribute, String value);
+	T findOneByAttribute(String attribute, String value);
 	
 	/**
 	 * Find all LDAP entries of the same <tt>objectClass</tt>-es as the {@link LdapEntity}#objectClasses() annotation.
 	 * @param obj
 	 * @throws LdapException
 	 */
-	public List<T> findAll();
+	List<T> findAll();
 
 	/**
 	 * @return the baseDn
 	 */
-	public String getBaseDn();
+	String getBaseDn();
 
 	/**
 	 * @param baseDn the baseDn to set
 	 */
-	public void setBaseDn(String baseDn);
+	void setBaseDn(String baseDn);
 
 	/**
 	 * @return the entityClass
 	 */
-	public Class<T> getEntityClass();
+	Class<T> getEntityClass();
 
 	/**
 	 * @param entityClass the entityClass to set
 	 */
-	public void setEntityClass(Class<T> entityClass);
+	void setEntityClass(Class<T> entityClass);
 
 	/**
 	 * @return the connection
@@ -102,6 +103,13 @@ public interface LdapRepository<T> {
 	/**
 	 * @return the mapper
 	 */
-	public LdapMapper getMapper();
-	
+	LdapMapper getMapper();
+
+	/**
+	 * Get the entry {@link Dn} for the specified entry ID.
+	 * @param id entry ID.
+	 * @return Entry DN.
+	 */
+	Dn toDn(String id);
+
 }

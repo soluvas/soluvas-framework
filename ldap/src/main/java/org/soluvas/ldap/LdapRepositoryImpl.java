@@ -107,7 +107,7 @@ public class LdapRepositoryImpl<T> implements LdapRepository<T> {
 	 * @throws LdapException
 	 */
 	public void delete(String id) {
-		Dn dn = mapper.toDn(id, entityClass, baseDn);
+		Dn dn = toDn(id);
 		log.info("Delete LDAP Entry {}", dn); 
 		try {
 			connection.delete(dn);
@@ -124,7 +124,7 @@ public class LdapRepositoryImpl<T> implements LdapRepository<T> {
 	 * @return T entity or <tt>null</tt> if none found.
 	 */
 	public T findOne(String id) {
-		Dn dn = mapper.toDn(id, entityClass, baseDn);
+		Dn dn = toDn(id);
 		log.info("Lookup LDAP Entry {}", dn); 
 		Entry entry;
 		try {
@@ -142,6 +142,10 @@ public class LdapRepositoryImpl<T> implements LdapRepository<T> {
 		}
 	}
 
+	public Dn toDn(String id) {
+		return mapper.toDn(id, entityClass, baseDn);
+	}
+	
 	/**
 	 * Find LDAP entry based on an attribute value. The attribute does not need to be
 	 * {@link LdapAttribute} annotated.
