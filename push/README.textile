@@ -13,13 +13,23 @@ In AMQP, a sample topic pattern would be:
 
 * @${tenantId}.${tenantEnv}._meta.${topLevelEntity}@
 * @${tenantId}.${tenantEnv}.${topLevelEntity}.${id}@
+* @${tenantId}.${tenantEnv}._encquery.${topLevelEntity}.${rawUrlEncodedQuery}@
+* @${tenantId}.${tenantEnv}._sha1query.${topLevelEntity}.${sha1EncodedQuery}@
 * @${tenantId}.${tenantEnv}.${topLevelEntity}.${id}._meta.${secondLevelEntity}@
 * @${tenantId}.${tenantEnv}.${topLevelEntity}.${id}.${secondLevelEntity}.${id}@
 
 Example for Wikindonesia:
 
-* wikindonesia.dev._meta.menu
-* wikindonesia.dev.menu.main
+* @wikindonesia.dev._meta.menu@
+* @wikindonesia.dev.menu.main@
+
+In short, there needs to be a naming scheme to refer to particular list of objects.
+And a way to declaratively relate the data objects (model) to the views in different worlds
+(both in the server *and* the client).
+
+Note that RabbitMQ limits topic names (routing keys) to 255 characters. So raw URL encoded queries
+are not always possible if the query is too long. SHA1 encoded queries seems much better.
+(Queries should be normalized)
 
 h2. AMQP Configuration
 
