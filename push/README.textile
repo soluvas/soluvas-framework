@@ -1,3 +1,22 @@
 h1. Soluvas Push
 
 Ajax Push for asynchronous web messaging.
+
+h2. Repository Push Topic Names
+
+In order for Repositories to be able to push notifications, a particular instance Repository (or Query)
+must be named.
+
+Topic names are usually nested like REST resources.
+
+In AMQP, a sample topic pattern would be:
+
+* @${tenantId}.${tenantEnv}._meta.${topLevelEntity}@
+* @${tenantId}.${tenantEnv}.${topLevelEntity}.${id}@
+* @${tenantId}.${tenantEnv}.${topLevelEntity}.${id}._meta.${secondLevelEntity}@
+* @${tenantId}.${tenantEnv}.${topLevelEntity}.${id}.${secondLevelEntity}.${id}@
+
+Example for Wikindonesia:
+
+* wikindonesia.dev._meta.menu
+* wikindonesia.dev.menu.main
