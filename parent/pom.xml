@@ -74,6 +74,16 @@
 				<artifactId>soluvas-cdi</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.soluvas</groupId>
+				<artifactId>soluvas-push</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.soluvas</groupId>
+				<artifactId>soluvas-async</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.apache.karaf.shell</groupId>

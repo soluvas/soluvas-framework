@@ -21,6 +21,8 @@
 		<module>ldap</module>
 		<module>image-store</module>
 		<module>apacheds</module>
+		<module>async</module>
+		<module>push</module>
 	</modules>
 
 </project>
