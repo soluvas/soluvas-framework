@@ -38,7 +38,7 @@ public class BroadcastingRepository<ID, T> implements SyncRepository<ID, T>{
 		try {
 			channel.close();
 		} catch (IOException e) {
-			log.warn("Cannot close AMQP Channel");
+			log.warn("Cannot close AMQP Channel", e);
 		}
 	}
 

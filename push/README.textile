@@ -20,3 +20,7 @@ Example for Wikindonesia:
 
 * wikindonesia.dev._meta.menu
 * wikindonesia.dev.menu.main
+
+h2. AMQP Configuration
+
+URI for default unsecured MongoDB installation: amqp://guest:guest@localhost/%2F
