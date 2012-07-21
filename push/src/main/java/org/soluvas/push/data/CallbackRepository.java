@@ -2,7 +2,7 @@ package org.soluvas.push.data;
 
 import java.util.List;
 
-import org.soluvas.async.Callback;
+import org.soluvas.async.FailingCallback;
 
 /**
  * Callback-based repository.
@@ -12,10 +12,10 @@ import org.soluvas.async.Callback;
  */
 public interface CallbackRepository<ID, T> {
 	
-	void add(T menu);
-	void delete(ID id);
-	void findOne(ID id, Callback<T> callback);
-	void findAll(Callback<List<T>> callback);
-	void findAllIds(Callback<List<T>> callback);
+	void add(T data, FailingCallback<T> callback);
+	void delete(ID id, FailingCallback<T> callback);
+	void findOne(ID id, FailingCallback<T> callback);
+	void findAll(FailingCallback<List<T>> callback);
+	void findAllIds(FailingCallback<List<ID>> callback);
 
 }
