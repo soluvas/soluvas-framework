@@ -35,6 +35,7 @@
 			<groupId>org.apache.directory.shared</groupId>
 			<artifactId>shared-ldap-codec-standalone</artifactId>
 			<version>1.0.0-M12</version>
+			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
