@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 /**
  * Manages LDAP entry POJO objects annotated with {@link LdapEntry}.
  * You need to call init() after creation.
+ * This repository is thread-safe.
  * @author ceefour
  */
 public class PooledLdapRepository<T> implements LdapRepository<T> {
