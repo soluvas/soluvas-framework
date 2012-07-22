@@ -6,6 +6,9 @@ import org.soluvas.async.FailingCallback;
 
 /**
  * Callback-based repository.
+ * This is a the lowest-level repository access API. For convenience,
+ * you can use {@link SyncRepositoryWrapper}.
+ * 
  * The API is meant for asynchronous callbacks, i.e. the callback
  * should be an Akka typed actor or a Camel proxy.
  * @author ceefour
@@ -59,6 +62,6 @@ public interface CallbackRepository<ID, T> {
 	 * @param data
 	 * @param callback
 	 */
-	void update(String id, T data, FailingCallback<T> callback);
+	void update(ID id, T data, FailingCallback<T> callback);
 
 }
