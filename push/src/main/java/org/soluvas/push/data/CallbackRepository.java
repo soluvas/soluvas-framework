@@ -12,11 +12,53 @@ import org.soluvas.async.FailingCallback;
  */
 public interface CallbackRepository<ID, T> {
 	
+	/**
+	 * Add entity to repository.
+	 * @param data
+	 * @param callback
+	 */
 	void add(T data, FailingCallback<T> callback);
+	
+	/**
+	 * Delete entity from repository.
+	 * @param id
+	 * @param callback
+	 */
 	void delete(ID id, FailingCallback<T> callback);
+	
+	/**
+	 * Find a single entity by ID.
+	 * @param id
+	 * @param callback
+	 */
 	void findOne(ID id, FailingCallback<T> callback);
+	
+	/**
+	 * Find all data.
+	 * @param callback
+	 */
 	void findAll(FailingCallback<List<T>> callback);
+	
+	/**
+	 * List all entity IDs.
+	 * @param callback
+	 */
 	void findAllIds(FailingCallback<List<ID>> callback);
+	
+	/**
+	 * Coarse-grained query for search entities by partial ID, partial slug, or partial name.
+	 * For detailed query use the query() method.
+	 * @param searchText
+	 * @param callback
+	 */
 	void search(String searchText, FailingCallback<List<T>> callback);
+	
+	/**
+	 * Update an entity with new attributes. <tt>id</tt> attribute is usually immutable.
+	 * @param id
+	 * @param data
+	 * @param callback
+	 */
+	void update(String id, T data, FailingCallback<T> callback);
 
 }
