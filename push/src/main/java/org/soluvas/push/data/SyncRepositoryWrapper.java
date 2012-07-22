@@ -3,11 +3,18 @@ package org.soluvas.push.data;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+import javax.annotation.Nullable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.async.FailingCallback;
 
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.base.Throwables;
+
 /**
+ * Wraps a callback-based {@link CallbackRepository} API in a convenient synchronized (traditional) API style.
  * @author ceefour
  */
 public class SyncRepositoryWrapper<ID, T> implements SyncRepository<ID, T> {
@@ -19,31 +26,51 @@ public class SyncRepositoryWrapper<ID, T> implements SyncRepository<ID, T> {
 		super();
 		this.delegateRepository = delegateRepository;
 	}
+	
+	public <V> V wrap(Function<FailingCallback<V>, Void> func) {
+		final AtomicReference<Optional<V>> success = new AtomicReference<Optional<V>>(Optional.<V>absent());
+		final AtomicReference<Optional<Throwable>> error = new AtomicReference<Optional<Throwable>>(Optional.<Throwable>absent());
+		func.apply(new FailingCallback<V>() {
+			@Override public void success(V data) {
+				success.set(Optional.of(data));
+				synchronized (SyncRepositoryWrapper.this) {
+					SyncRepositoryWrapper.this.notify();
+				}
+			}
+
+			@Override public void error(Throwable e) {
+				error.set(Optional.of(e));
+				synchronized (SyncRepositoryWrapper.this) {
+					SyncRepositoryWrapper.this.notify();
+				}
+			}
+		});
+		if (!success.get().isPresent() && !error.get().isPresent()) {
+			synchronized (this) {
+				try {
+					this.wait();
+				} catch (InterruptedException e) {
+					Throwables.propagate(e);
+				}
+			}
+		}
+		if (error.get().isPresent())
+			Throwables.propagate(error.get().orNull());
+		return success.get().orNull();
+	}
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.push.data.SyncRepository#findOne(java.lang.Object)
 	 */
 	@Override
-	public T findOne(ID id) {
-		try {
-			final AtomicReference<T> result = new AtomicReference<T>();
-			delegateRepository.findOne(id, new FailingCallback<T>() {
-				@Override public void success(T data) {
-					result.set(data);
-					result.notify();
-				}
-				
-				@Override public void error(Throwable e) {
-					throw new RepositoryException(e);
-				}
-			});
-			if (result.get() == null) {
-				result.wait();
+	public T findOne(final ID id) {
+		return wrap(new Function<FailingCallback<T>, Void>() {
+			@Override @Nullable
+			public Void apply(@Nullable FailingCallback<T> callback) {
+				delegateRepository.findOne(id, callback);
+				return null;
 			}
-			return result.get();
-		} catch (InterruptedException e) {
-			throw new RepositoryException(e);
-		}
+		});
 	}
 
 	/* (non-Javadoc)
@@ -51,103 +78,56 @@ public class SyncRepositoryWrapper<ID, T> implements SyncRepository<ID, T> {
 	 */
 	@Override
 	public List<T> findAll() {
-		try {
-			final AtomicReference<List<T>> result = new AtomicReference<List<T>>();
-			delegateRepository.findAll(new FailingCallback<List<T>>() {
-				@Override public void success(List<T> data) {
-					result.set(data);
-					result.notify();
-				}
-				
-				@Override public void error(Throwable e) {
-					throw new RepositoryException(e);
-				}
-			});
-			if (result.get() == null) {
-				result.wait();
+		return wrap(new Function<FailingCallback<List<T>>, Void>() {
+			@Override @Nullable
+			public Void apply(@Nullable FailingCallback<List<T>> callback) {
+				delegateRepository.findAll(callback);
+				return null;
 			}
-			return result.get();
-		} catch (InterruptedException e) {
-			throw new RepositoryException(e);
-		}
+		});
 	}
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.push.data.SyncRepository#create(java.lang.Object)
 	 */
 	@Override
-	public T create(T entry) {
-		try {
-			final AtomicReference<T> result = new AtomicReference<T>();
-			delegateRepository.add(entry, new FailingCallback<T>() {
-				@Override public void success(T data) {
-					result.set(data);
-					result.notify();
-				}
-				
-				@Override public void error(Throwable e) {
-					throw new RepositoryException(e);
-				}
-			});
-			if (result.get() == null) {
-				result.wait();
+	public T create(final T entry) {
+		return wrap(new Function<FailingCallback<T>, Void>() {
+			@Override @Nullable
+			public Void apply(@Nullable FailingCallback<T> callback) {
+				delegateRepository.add(entry, callback);
+				return null;
 			}
-			return result.get();
-		} catch (InterruptedException e) {
-			throw new RepositoryException(e);
-		}
+		});
 	}
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.push.data.SyncRepository#update(java.lang.Object, java.lang.Object)
 	 */
 	@Override
-	public T update(ID id, T entry) {
-		try {
-			final AtomicReference<T> result = new AtomicReference<T>();
-			delegateRepository.update(id, entry, new FailingCallback<T>() {
-				@Override public void success(T data) {
-					result.set(data);
-					result.notify();
-				}
-				
-				@Override public void error(Throwable e) {
-					throw new RepositoryException(e);
-				}
-			});
-			if (result.get() == null) {
-				result.wait();
+	public T update(final ID id, final T entry) {
+		return wrap(new Function<FailingCallback<T>, Void>() {
+			@Override @Nullable
+			public Void apply(@Nullable FailingCallback<T> callback) {
+				delegateRepository.update(id, entry, callback);
+				return null;
 			}
-			return result.get();
-		} catch (InterruptedException e) {
-			throw new RepositoryException(e);
-		}
+		});
 	}
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.push.data.SyncRepository#delete(java.lang.Object)
 	 */
 	@Override
-	public void delete(ID id) {
-		try {
-			final AtomicReference<T> result = new AtomicReference<T>();
-			delegateRepository.delete(id, new FailingCallback<T>() {
-				@Override public void success(T data) {
-					result.set(data);
-					result.notify();
-				}
-				
-				@Override public void error(Throwable e) {
-					throw new RepositoryException(e);
-				}
-			});
-			if (result.get() == null) {
-				result.wait();
+	public void delete(final ID id) {
+		T deleteResult = wrap(new Function<FailingCallback<T>, Void>() {
+			@Override @Nullable
+			public Void apply(@Nullable FailingCallback<T> callback) {
+				delegateRepository.delete(id, callback);
+				return null;
 			}
-			log.debug("Delete {} result: ", result.get());
-		} catch (InterruptedException e) {
-			throw new RepositoryException(e);
-		}
+		});
+		log.debug("Delete {} result: {}", id, deleteResult);
 	}
 
 }

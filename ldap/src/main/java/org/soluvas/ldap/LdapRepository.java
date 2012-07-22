@@ -91,16 +91,6 @@ public interface LdapRepository<T> {
 	void setEntityClass(Class<T> entityClass);
 
 	/**
-	 * @return the connection
-	 */
-	public LdapConnection getConnection();
-
-	/**
-	 * @param connection the connection to set
-	 */
-	public void setConnection(LdapConnection connection);
-
-	/**
 	 * @return the mapper
 	 */
 	LdapMapper getMapper();
