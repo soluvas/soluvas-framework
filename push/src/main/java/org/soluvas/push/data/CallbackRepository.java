@@ -17,5 +17,6 @@ public interface CallbackRepository<ID, T> {
 	void findOne(ID id, FailingCallback<T> callback);
 	void findAll(FailingCallback<List<T>> callback);
 	void findAllIds(FailingCallback<List<ID>> callback);
+	void search(String searchText, FailingCallback<List<T>> callback);
 
 }
