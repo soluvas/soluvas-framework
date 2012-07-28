@@ -11,6 +11,8 @@
 	</parent>
 	<artifactId>soluvas-build</artifactId>
 	<packaging>pom</packaging>
+	<name>Soluvas Framework - Build</name>
+	<description>Soluvas Framework - Build</description>
 
 	<modules>
 		<module>parent</module>

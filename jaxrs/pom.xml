@@ -11,6 +11,7 @@
 	</parent>
 	<artifactId>soluvas-jaxrs</artifactId>
 	<packaging>bundle</packaging>
+	<name>Soluvas JAX-RS</name>
 	<description>JAX-RS ContextResolver for Jackson 1.9.</description>
 	
 	<dependencies>

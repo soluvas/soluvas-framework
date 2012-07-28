@@ -11,6 +11,8 @@
 	</parent>
 	<artifactId>soluvas-apacheds</artifactId>
 	<packaging>bundle</packaging>
+	<name>Soluvas ApacheDS</name>
+	<description>Embeds ApacheDS inside Java application.</description>
 	
 	<properties>
 		<apacheds.version>2.0.0-M7</apacheds.version>

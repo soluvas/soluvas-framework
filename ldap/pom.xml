@@ -11,6 +11,7 @@
 	</parent>
 	<artifactId>soluvas-ldap</artifactId>
 	<packaging>bundle</packaging>
+	<name>Soluvas LDAP</name>
 	<description>LDAP Utilities and POJO Object Mapper for LDAP entries.</description>
 	
 	<dependencies>

@@ -11,6 +11,7 @@
 	</parent>
 	<artifactId>soluvas-commons</artifactId>
 	<packaging>bundle</packaging>
+	<name>Soluvas Commons</name>
 	<description>Common libraries and utilities.</description>
 	
 	<dependencies>

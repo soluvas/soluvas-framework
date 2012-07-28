@@ -11,6 +11,7 @@
 	</parent>
 	<artifactId>soluvas-push</artifactId>
 	<packaging>bundle</packaging>
+	<name>Soluvas Push</name>
 	<description>AJAX Push for web messaging.</description>
 
 	<dependencies>
