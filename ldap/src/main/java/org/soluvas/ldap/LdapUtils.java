@@ -51,7 +51,7 @@ public class LdapUtils {
 		LdapConnectionConfig ldapConfig = new LdapConnectionConfig();
 		ldapConfig.setLdapHost(ldapUrlObj.getHost());
 		ldapConfig.setLdapPort(ldapUrlObj.getPort());
-		ldapConfig.setUseSsl("ldaps".equals(ldapUrlObj.getScheme()));
+		ldapConfig.setUseSsl(LdapUrl.LDAPS_SCHEME.equalsIgnoreCase(ldapUrlObj.getScheme()));
 		X509TrustManager alwaysTrustManager = new X509TrustManager() {
 			@Override public X509Certificate[] getAcceptedIssuers() {
 				return null;
