@@ -1,7 +1,6 @@
 person.image.namespace=person
-# Dav URI should include username (if required) but NOT password
+# Dav URI can include username and password
 person.image.dav.uri=http://dav.ceefour.annafi.dev/test_person/
-person.image.dav.password=
 # Do NOT include username and password in public URI! It can be CDN.
 person.image.public.uri=http://dav.ceefour.annafi.dev/test_person/
 # MongoDB URI should include username (if required) but NOT password

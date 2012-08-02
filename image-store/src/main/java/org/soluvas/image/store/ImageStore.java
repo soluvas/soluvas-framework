@@ -6,13 +6,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PreDestroy;
 import javax.imageio.ImageIO;
@@ -33,6 +33,7 @@ import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.HttpClientUtils;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicAuthCache;
@@ -46,12 +47,9 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.slug.SlugUtils;
 
 import akka.actor.ActorSystem;
-import akka.dispatch.Await;
-import akka.dispatch.Future;
-import akka.dispatch.Futures;
-import akka.japi.Function;
-import akka.util.Duration;
 
+import com.google.common.base.Strings;
+import com.google.common.base.Throwables;
 import com.google.common.collect.Collections2;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -71,10 +69,10 @@ import com.mongodb.MongoURI;
  * 
  * Scheme is:
  * ${publicUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
- * ${davUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
+ * ${safeDavUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
  *
  * Usage:
- * 1. Set the following 4 properties: namespace, davUri, publicUri, mongoUri
+ * 1. Set the following 4 properties: namespace, safeDavUri, publicUri, mongoUri
  * 2. addStyle() as needed
  * 3. Additional 2 passwords during init().
  * 
@@ -94,6 +92,8 @@ public class ImageStore {
 	public static String ORIGINAL_CODE = "o";
 	private String namespace;
 	private String davUri;
+	private String safeDavUri;
+	private HttpHost davHost;
 	private String publicUri;
 	private String mongoUri;
 	private DBCollection mongoColl;
@@ -137,12 +137,12 @@ public class ImageStore {
 	protected HttpContext createHttpContext() {
 		BasicHttpContext httpContext = new BasicHttpContext();
 		BasicAuthCache authCache = new BasicAuthCache();
-		authCache.put(new HttpHost(URI.create(davUri).getHost()), new BasicScheme());
+		authCache.put(davHost, new BasicScheme());
 		httpContext.setAttribute(ClientContext.AUTH_CACHE, authCache);
 		return httpContext;
 	}
 	
-	public void init(String davPassword) {
+	public void init() {
 		log.info("Starting ImageStore {}", namespace);
 		
 		// Sanity checks
@@ -154,9 +154,23 @@ public class ImageStore {
 			throw new RuntimeException("MongoDB URI for " + namespace + " Image Store cannot be empty");
 
 		URI davUriDetail = URI.create(davUri);
-		if (davUriDetail.getUserInfo() != null) {
-			UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(davUriDetail.getUserInfo(), davPassword);
+		final String userInfo = davUriDetail.getUserInfo();
+		if (!Strings.isNullOrEmpty(userInfo)) {
+			String username = userInfo;
+			String password = "";
+			if (userInfo.contains(":")) {
+				String[] splitted = userInfo.split(":");
+				username = splitted[0];
+				password = splitted[1];
+			}
+			UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
 			client.getCredentialsProvider().setCredentials(AuthScope.ANY, credentials);
+		}
+		davHost = new HttpHost(davUriDetail.getHost(), davUriDetail.getPort() != -1 ? davUriDetail.getPort() : 80, davUriDetail.getScheme());
+		try {
+			safeDavUri = new URIBuilder(davUri).setUserInfo(null).build().toString();
+		} catch (URISyntaxException e1) {
+			Throwables.propagate(e1);
 		}
 		
 		MongoURI mongoUriDetail = new MongoURI(mongoUri);
@@ -219,7 +233,7 @@ public class ImageStore {
 	}
 	
 	/**
-	 * Scheme: ${davUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
+	 * Scheme: ${safeDavUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
 	 * 
 	 * This only works for non-original image styles.
 	 * 
@@ -228,7 +242,7 @@ public class ImageStore {
 	public URI getImageDavUri(String id, String styleName) {
 		String extension = "jpg";
 		ImageStyle style = styles.get(styleName);
-		return URI.create(String.format("%s%s/%s/%s_%s.%s", davUri, namespace, style.getCode(), id, style.getCode(), extension));
+		return URI.create(String.format("%s%s/%s/%s_%s.%s", safeDavUri, namespace, style.getCode(), id, style.getCode(), extension));
 	}
 	
 	/**
@@ -331,7 +345,7 @@ public class ImageStore {
 				@Override
 				public Object call() throws Exception {
 					final URI originalDavUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
-							davUri, namespace, 'o', imageId, 'o', extension));
+							safeDavUri, namespace, 'o', imageId, 'o', extension));
 					try {
 						uploadFile(originalDavUri, new FileInputStream(originalFile), contentType, length);
 						return null;
@@ -409,15 +423,33 @@ public class ImageStore {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param uri
+	 * @param source
+	 * @param contentType
+	 * @param length
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 * @deprecated Can throw org.apache.http.client.NonRepeatableRequestException: Cannot retry request with a non-repeatable request entity.
+	 * 		because InputStream can only be read once.
+	 */
+	@Deprecated
 	protected void uploadFile(URI uri, InputStream source, String contentType, long length) throws ClientProtocolException, IOException {
 		log.info("Uploading {} ({} bytes) to {}", new Object[] { contentType, length, uri });
 		
 		HttpPut httpPut = new HttpPut(uri);
 		httpPut.setHeader("Content-Type", contentType);
 		httpPut.setEntity(new InputStreamEntity(source, length));
-		HttpResponse response = client.execute(httpPut, createHttpContext());
-		log.info("Upload {} returned: {}", uri, response.getStatusLine());
-		HttpClientUtils.closeQuietly(response);
+		HttpResponse response = client.execute(davHost, httpPut, createHttpContext());
+		try {
+			if (response.getStatusLine().getStatusCode() >= 200 && response.getStatusLine().getStatusCode() < 300)
+				log.info("Upload {} returned: {}", uri, response.getStatusLine());
+			else
+				log.error("Upload {} returned: {}", uri, response.getStatusLine());
+		} finally {
+			HttpClientUtils.closeQuietly(response);
+		}
 	}
 	
 	/**
@@ -435,7 +467,7 @@ public class ImageStore {
 //						namespace, id, originalUri });
 //				HttpDelete deleteOriginal = new HttpDelete(originalUri);
 //				try {
-//					HttpResponse response = client.execute(deleteOriginal, createHttpContext());
+//					HttpResponse response = client.execute(davHost, deleteOriginal, createHttpContext());
 //					final StatusLine statusLine = response.getStatusLine();
 //					log.info("Delete {} returned: {}", originalUri, statusLine);
 //					HttpClientUtils.closeQuietly(response);
@@ -452,14 +484,18 @@ public class ImageStore {
 				namespace, id, originalUri });
 		HttpDelete deleteOriginal = new HttpDelete(originalUri);
 		try {
-			HttpResponse response = client.execute(deleteOriginal, createHttpContext());
-			final StatusLine statusLine = response.getStatusLine();
-			log.info("Delete {} returned: {}", originalUri, statusLine);
-			HttpClientUtils.closeQuietly(response);
-//			return statusLine;
-		} catch (Exception e) {
-			log.error("Error deleting "+ originalUri, e);
-//			return null;
+			HttpResponse response = client.execute(davHost, deleteOriginal, createHttpContext());
+			try {
+				final StatusLine statusLine = response.getStatusLine();
+				if (statusLine.getStatusCode() >= 200 && statusLine.getStatusCode() < 300)
+					log.info("Delete {} returned: {}", originalUri, statusLine);
+				else
+					log.error("Delete {} returned: {}", originalUri, statusLine);
+			} finally {
+				HttpClientUtils.closeQuietly(response);
+			}
+		} catch (Exception e1) {
+			log.error("Cannot delete " + namespace + " " + id + " - original: " + originalUri, e1);
 		}
 		
 //		Future<Iterable<StatusLine>> styledsFuture = Futures.traverse(image.getStyles().values(), new Function<StyledImage, Future<StatusLine>>() {
@@ -472,7 +508,7 @@ public class ImageStore {
 //								namespace, id, styled.getStyleName(), styled.getUri() });
 //						HttpDelete deleteThumb = new HttpDelete(styled.getUri());
 //						try {
-//							HttpResponse response = client.execute(deleteThumb, createHttpContext());
+//							HttpResponse response = client.execute(davHost, deleteThumb, createHttpContext());
 //							final StatusLine statusLine = response.getStatusLine();
 //							HttpClientUtils.closeQuietly(response);
 //							log.info("Delete {} returned: {}", styled.getUri(), statusLine);
@@ -490,14 +526,16 @@ public class ImageStore {
 			log.info("Deleting {} image {} - {}: {}", new Object[] { 
 					namespace, id, styled.getStyleName(), styled.getUri() });
 			HttpDelete deleteThumb = new HttpDelete(styled.getUri());
+			HttpResponse deleteThumbResp;
 			try {
-				HttpResponse response = client.execute(deleteThumb, createHttpContext());
-				log.info("Delete {} returned: {}", styled.getUri(), response.getStatusLine());
-				HttpClientUtils.closeQuietly(response);
-//				return response.getStatusLine();
+				deleteThumbResp = client.execute(davHost, deleteThumb, createHttpContext());
+				try {
+					log.info("Delete {} returned: {}", styled.getUri(), deleteThumbResp.getStatusLine());
+				} finally {
+					HttpClientUtils.closeQuietly(deleteThumbResp);
+				}
 			} catch (Exception e) {
-				log.error("Error deleting "+ styled.getUri(), e);
-//				return null;
+				log.error("Cannot delete " + namespace + " image " + id + ": " + styled.getStyleName() + " at " + styled.getUri(), e);
 			}
 		}
 
