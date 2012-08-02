@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -31,6 +32,14 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	private transient Logger log = LoggerFactory.getLogger(PooledLdapRepository.class);
 	@Inject private transient LdapConnectionPool pool;
 	private LdapMapper mapper;
+	public LdapConnectionPool getPool() {
+		return pool;
+	}
+
+	public void setPool(LdapConnectionPool pool) {
+		this.pool = pool;
+	}
+
 	private String baseDn;
 	private Class<T> entityClass;
 
@@ -45,12 +54,18 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 		this.baseDn = baseDn;
 	}
 	
-	protected <V> V withConnection(Function<LdapConnection, V> function) throws Exception {
-		LdapConnection conn = pool.getConnection();
+	protected <V> V withConnection(Function<LdapConnection, V> function) {
 		try {
-			return function.apply(conn);
-		} finally {
-			pool.releaseConnection(conn);
+			LdapConnection conn = pool.getConnection();
+			try {
+				return function.apply(conn);
+			} finally {
+				pool.releaseConnection(conn);
+			}
+		} catch (Exception e) {
+			log.error("LDAP operation error", e);
+			Throwables.propagate(e);
+			return null;
 		}
 	}
 	
@@ -328,6 +343,22 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 */
 	public LdapMapper getMapper() {
 		return mapper;
+	}
+
+	@Override
+	public boolean exists(String id) {
+		final Dn dn = toDn(id);
+		return withConnection(new Function<LdapConnection, Boolean>() {
+			@Override @Nullable
+			public Boolean apply(@Nullable LdapConnection conn) {
+				try {
+					return conn.exists(dn);
+				} catch (LdapException e) {
+					Throwables.propagate(e);
+					return false;
+				}
+			}
+		});
 	}
 	
 }

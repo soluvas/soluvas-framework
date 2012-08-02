@@ -258,5 +258,10 @@ public class LdapRepositoryImpl<T> implements LdapRepository<T> {
 	public LdapMapper getMapper() {
 		return mapper;
 	}
+
+	@Override
+	public boolean exists(String proposedId) {
+		throw new UnsupportedOperationException();
+	}
 	
 }

@@ -1,6 +1,7 @@
 package org.soluvas.ldap;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.constraints.NotNull;
@@ -40,7 +41,7 @@ public class Person implements Serializable, User {
 
 	public Person(String id, String slug, String firstName, String lastName, String email) {
 		this(id, slug, firstName, lastName);
-		this.emails = ImmutableSet.of(email);
+		this.emails = email != null ? ImmutableSet.of(email) : new HashSet<String>();
 	}
 
 	/**
