@@ -2,6 +2,7 @@ package org.soluvas.ldap;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.apache.directory.ldap.client.api.LdapConnection;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
+import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -260,8 +262,14 @@ public class LdapRepositoryImpl<T> implements LdapRepository<T> {
 	}
 
 	@Override
-	public boolean exists(String proposedId) {
-		throw new UnsupportedOperationException();
+	public boolean exists(String id) {
+		final Dn dn = toDn(id);
+		try {
+			return connection.exists(dn);
+		} catch (LdapException e) {
+			log.error("Error lookup LDAP " + dn, e);
+			throw new RuntimeException("Error lookup LDAP " + dn, e);
+		}
 	}
-	
+
 }

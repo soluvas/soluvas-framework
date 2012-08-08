@@ -101,6 +101,6 @@ public interface LdapRepository<T> {
 	 */
 	Dn toDn(String id);
 
-	boolean exists(String proposedId);
+	boolean exists(String id);
 
 }
