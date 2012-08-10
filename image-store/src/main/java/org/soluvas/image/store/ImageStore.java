@@ -46,8 +46,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.slug.SlugUtils;
 
-import akka.actor.ActorSystem;
-
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Collections2;
@@ -99,12 +97,12 @@ public class ImageStore {
 	private DBCollection mongoColl;
 	private final DefaultHttpClient client = new DefaultHttpClient(new PoolingClientConnectionManager());
 	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<String, ImageStyle>();
-	private ActorSystem system;
+//	private ActorSystem system;
 	/**
 	 * If true, means the {@link ActorSystem} is owned by {@link ImageStore},
 	 * and should be shutdown when ImageStore is destroyed.
 	 */
-	private boolean shutdownActorSystem = false;
+//	private boolean shutdownActorSystem = false;
 
 	public static class ResizeResult {
 		String styleName;
@@ -190,18 +188,18 @@ public class ImageStore {
 		createFolders();
 		
 		// Start actors
-		if (system == null) {
-			shutdownActorSystem = true;
-			system = ActorSystem.create("ImageStore");
-		}
+//		if (system == null) {
+//			shutdownActorSystem = true;
+//			system = ActorSystem.create("ImageStore");
+//		}
 	}
 	
 	@PreDestroy public void destroy() {
 		log.info("Shutting down ImageStore {}", namespace);
-		if (shutdownActorSystem && system != null) {
-			system.shutdown();
-			system.awaitTermination();
-		}
+//		if (shutdownActorSystem && system != null) {
+//			system.shutdown();
+//			system.awaitTermination();
+//		}
 		client.getConnectionManager().shutdown();
 		if (mongoColl != null) {
 			mongoColl.getDB().cleanCursors(false);
@@ -597,10 +595,13 @@ public class ImageStore {
 	}
 
 	/**
-	 * @param system the system to set
+	 * Note: For now Akka is not used, but for backwards compatibility it is simply ignored.
+	 * @param system the Akka actor system to set
 	 */
-	public void setSystem(ActorSystem system) {
-		this.system = system;
+//	public void setSystem(ActorSystem system) {
+//		this.system = system;
+//	}
+	public void setSystem(Object system) {
 	}
 
 }
