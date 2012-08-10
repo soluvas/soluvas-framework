@@ -2,11 +2,9 @@ package org.soluvas.ldap;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.apache.directory.ldap.client.api.LdapConnection;
-import org.apache.directory.shared.ldap.model.cursor.EntryCursor;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
 import org.apache.directory.shared.ldap.model.message.SearchScope;
@@ -15,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
-import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -164,8 +161,8 @@ public class LdapRepositoryImpl<T> implements LdapRepository<T> {
 		String filter = "(&(objectClass=" + objectClasses[0] + ")(" + attribute + "=" + value + "))";
 		log.info("Searching LDAP {} filter: {}", baseDn, filter); 
 		try {
-			EntryCursor cursor = connection.search(baseDn, filter, SearchScope.ONELEVEL);
-			Entry entry = Iterables.getOnlyElement(cursor, null);
+			List<Entry> entries = LdapUtils.asList( connection.search(baseDn, filter, SearchScope.ONELEVEL) );
+			Entry entry = Iterables.getOnlyElement(entries, null);
 			if (entry != null) {
 				log.info("LDAP search {} filter {} returned {}", new Object[] { baseDn, filter, entry.getDn() });
 				T entity = mapper.fromEntry(entry, entityClass);
@@ -196,8 +193,7 @@ public class LdapRepositoryImpl<T> implements LdapRepository<T> {
 		String filter = "(objectClass=" + objectClasses[0] + ")";
 		log.info("Searching LDAP {} filter: {}", baseDn, filter); 
 		try {
-			EntryCursor cursor = connection.search(baseDn, filter, SearchScope.ONELEVEL);
-			List<Entry> entries = Lists.newArrayList(cursor);
+			List<Entry> entries = LdapUtils.asList( connection.search(baseDn, filter, SearchScope.ONELEVEL) );
 			log.info("LDAP search {} filter {} returned {} entries", new Object[] { baseDn, filter, entries.size() });
 			List<T> entities = Lists.transform(entries, new Function<Entry, T>() {
 				@Override

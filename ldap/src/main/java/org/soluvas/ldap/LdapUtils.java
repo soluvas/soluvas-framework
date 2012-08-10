@@ -2,12 +2,14 @@ package org.soluvas.ldap;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.List;
 
 import javax.net.ssl.X509TrustManager;
 
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 import org.apache.directory.ldap.client.api.PoolableLdapConnectionFactory;
+import org.apache.directory.shared.ldap.model.cursor.EntryCursor;
 import org.apache.directory.shared.ldap.model.entry.Attribute;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.entry.Value;
@@ -19,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -127,6 +130,26 @@ public class LdapUtils {
 			conn.modify(req);
 		} else {
 			log.info("Not modifying {} because there are no changes", entry.getDn());
+		}
+	}
+	
+	/**
+	 * Convert an LDAP {@link EntryCursor} to a {@link List},
+	 * making sure the cursor is closed. Exceptions during close will be swallowed,
+	 * but logged as WARN.
+	 * 
+	 * @param cursor
+	 */
+	public static List<Entry> asList(EntryCursor cursor) {
+		try {
+			ImmutableList<Entry> entries = ImmutableList.copyOf((Iterable<Entry>)cursor);
+			return entries;
+		} finally {
+			try {
+				cursor.close();
+			} catch (Exception e) {
+				log.warn("Error closing LDAP cursor", e);
+			}
 		}
 	}
 

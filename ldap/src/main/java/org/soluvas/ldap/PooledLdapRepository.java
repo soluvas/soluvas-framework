@@ -7,8 +7,6 @@ import javax.inject.Inject;
 
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionPool;
-import org.apache.directory.shared.ldap.model.cursor.CursorIterator;
-import org.apache.directory.shared.ldap.model.cursor.EntryCursor;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
 import org.apache.directory.shared.ldap.model.message.SearchScope;
@@ -18,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
 import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -249,10 +246,11 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 				@Override @Nullable
 				public Entry apply(@Nullable LdapConnection conn) {
 					try {
-						EntryCursor cursor = conn.search(baseDn, filter, SearchScope.ONELEVEL);
-						return Iterables.getOnlyElement(cursor, null);
+						List<Entry> entries = LdapUtils.asList(conn.search(baseDn, filter, SearchScope.ONELEVEL));
+						return Iterables.getOnlyElement(entries, null);
 					} catch (LdapException e) {
-						throw new RuntimeException(e);
+						Throwables.propagate(e);
+						return null;
 					}
 				}
 			});
@@ -290,16 +288,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 				@Override @Nullable
 				public List<Entry> apply(@Nullable LdapConnection conn) {
 					try {
-						EntryCursor cursor = conn.search(baseDn, filter, SearchScope.ONELEVEL);
-						try {
-							return ImmutableList.copyOf((Iterable<Entry>)cursor);
-						} finally {
-							try {
-								cursor.close();
-							} catch (Exception e) {
-								log.warn("Error closing LDAP cursor", e);
-							}
-						}
+						return LdapUtils.asList( conn.search(baseDn, filter, SearchScope.ONELEVEL) );
 					} catch (LdapException e) {
 						Throwables.propagate(e);
 						return null;
