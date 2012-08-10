@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionPool;
+import org.apache.directory.shared.ldap.model.cursor.CursorIterator;
 import org.apache.directory.shared.ldap.model.cursor.EntryCursor;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
@@ -290,9 +291,18 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 				public List<Entry> apply(@Nullable LdapConnection conn) {
 					try {
 						EntryCursor cursor = conn.search(baseDn, filter, SearchScope.ONELEVEL);
-						return ImmutableList.copyOf(cursor.iterator());
+						try {
+							return ImmutableList.copyOf((Iterable<Entry>)cursor);
+						} finally {
+							try {
+								cursor.close();
+							} catch (Exception e) {
+								log.warn("Error closing LDAP cursor", e);
+							}
+						}
 					} catch (LdapException e) {
-						throw new RuntimeException(e);
+						Throwables.propagate(e);
+						return null;
 					}
 				}
 			});
