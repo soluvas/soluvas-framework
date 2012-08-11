@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
 
 import javax.annotation.PreDestroy;
 import javax.imageio.ImageIO;
@@ -52,6 +53,7 @@ import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -586,6 +588,30 @@ public class ImageStore {
 	 */
 	public List<Image> findAll() {
 		DBCursor cursor = mongoColl.find().sort(new BasicDBObject("_id", "1"));
+		try {
+			ImmutableList<Image> images = ImmutableList.copyOf( Iterables.transform(cursor, new Function<DBObject, Image>() {
+				@Override
+				public Image apply(DBObject input) {
+					return new Image(ImageStore.this, (BasicBSONObject)input);
+				}
+			}) );
+			return images;
+		} finally {
+			cursor.close();
+		}
+	}
+
+	/**
+	 * Search {@link Image}s by ID, fileName, URL. Sorted by ID.
+	 * @return
+	 */
+	public List<Image> search(String searchText) {
+		log.debug("Searching {}", searchText);
+		DBCursor cursor = mongoColl.find(new BasicDBObject("$or", new Map[] {
+				ImmutableMap.of("_id", Pattern.compile(".*" + Pattern.quote(searchText) + ".*")),
+				ImmutableMap.of("fileName", Pattern.compile(".*" + Pattern.quote(searchText) + ".*")),
+				ImmutableMap.of("uri", Pattern.compile(".*" + Pattern.quote(searchText) + ".*"))
+		})).sort(new BasicDBObject("_id", "1"));
 		try {
 			ImmutableList<Image> images = ImmutableList.copyOf( Iterables.transform(cursor, new Function<DBObject, Image>() {
 				@Override
