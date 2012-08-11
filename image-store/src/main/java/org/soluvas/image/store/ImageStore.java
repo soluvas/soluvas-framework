@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -46,12 +47,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.slug.SlugUtils;
 
+import com.google.common.base.Function;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoURI;
 
@@ -127,19 +132,19 @@ public class ImageStore {
 		
 	}
 	
-	/**
-	 * Create {@link HttpContext} with {@link AuthCache} pre-populated,
-	 * since HttpClient does not allow HttpContext to be shared among threads.
-	 * @return
-	 */
-	protected HttpContext createHttpContext() {
-		BasicHttpContext httpContext = new BasicHttpContext();
-		BasicAuthCache authCache = new BasicAuthCache();
-		authCache.put(davHost, new BasicScheme());
-		httpContext.setAttribute(ClientContext.AUTH_CACHE, authCache);
-		return httpContext;
+	public ImageStore() {
+		super();
 	}
 	
+	public ImageStore(String namespace, String davUri, String publicUri,
+			String mongoUri) {
+		super();
+		this.namespace = namespace;
+		this.davUri = davUri;
+		this.publicUri = publicUri;
+		this.mongoUri = mongoUri;
+	}
+
 	public void init() {
 		log.info("Starting ImageStore {}", namespace);
 		
@@ -192,6 +197,19 @@ public class ImageStore {
 //			shutdownActorSystem = true;
 //			system = ActorSystem.create("ImageStore");
 //		}
+	}
+	
+	/**
+	 * Create {@link HttpContext} with {@link AuthCache} pre-populated,
+	 * since HttpClient does not allow HttpContext to be shared among threads.
+	 * @return
+	 */
+	protected HttpContext createHttpContext() {
+		BasicHttpContext httpContext = new BasicHttpContext();
+		BasicAuthCache authCache = new BasicAuthCache();
+		authCache.put(davHost, new BasicScheme());
+		httpContext.setAttribute(ClientContext.AUTH_CACHE, authCache);
+		return httpContext;
 	}
 	
 	@PreDestroy public void destroy() {
@@ -560,6 +578,25 @@ public class ImageStore {
 		if (dbo == null)
 			return null;
 		return new Image(this, (BasicBSONObject)dbo);
+	}
+
+	/**
+	 * List all {@link Image}s, ordered by Image ID.
+	 * @return
+	 */
+	public List<Image> findAll() {
+		DBCursor cursor = mongoColl.find().sort(new BasicDBObject("_id", "1"));
+		try {
+			ImmutableList<Image> images = ImmutableList.copyOf( Iterables.transform(cursor, new Function<DBObject, Image>() {
+				@Override
+				public Image apply(DBObject input) {
+					return new Image(ImageStore.this, (BasicBSONObject)input);
+				}
+			}) );
+			return images;
+		} finally {
+			cursor.close();
+		}
 	}
 
 	public String getNamespace() {
