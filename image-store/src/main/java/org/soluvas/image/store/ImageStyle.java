@@ -13,6 +13,10 @@ public class ImageStyle {
 	private int maxWidth;
 	private int maxHeight;
 
+	public ImageStyle() {
+		super();
+	}
+
 	public ImageStyle(String name, String code, int maxWidth, int maxHeight) {
 		super();
 		this.name = name;

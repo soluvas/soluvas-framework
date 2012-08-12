@@ -3,6 +3,7 @@ package org.soluvas.image.store;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -24,6 +25,7 @@ import net.coobird.thumbnailator.geometry.Positions;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -32,6 +34,7 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.AuthCache;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.HttpClientUtils;
@@ -55,6 +58,7 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -104,7 +108,15 @@ public class ImageStore {
 	private DBCollection mongoColl;
 	private final DefaultHttpClient client = new DefaultHttpClient(new PoolingClientConnectionManager());
 	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<String, ImageStyle>();
-//	private ActorSystem system;
+	
+	public class DBObjectToImage implements Function<DBObject, Image> {
+		@Override
+		public Image apply(DBObject input) {
+			return new Image(ImageStore.this, (BasicBSONObject)input);
+		}
+	}
+
+	//	private ActorSystem system;
 	/**
 	 * If true, means the {@link ActorSystem} is owned by {@link ImageStore},
 	 * and should be shutdown when ImageStore is destroyed.
@@ -240,7 +252,9 @@ public class ImageStore {
 	 * @param code
 	 * @param maxWidth
 	 * @param maxHeight
+	 * @deprecated Use setStyles().
 	 */
+	@Deprecated
 	public void addStyle(String name, String code, int maxWidth, int maxHeight) {
 		if ("o".equals(code))
 			throw new RuntimeException("Cannot use code 'o' for image style");
@@ -248,6 +262,24 @@ public class ImageStore {
 				code, name, maxWidth, maxHeight });
 		ImageStyle style = new ImageStyle(name, code, maxWidth, maxHeight);
 		styles.put(name, style);
+	}
+	
+	public List<ImageStyle> getStyles() {
+		return ImmutableList.copyOf(styles.values());
+	}
+	
+	/**
+	 * Note that the shortCode 'o' (for "original") is reserved.
+	 * 
+	 * This does not use the styles, but rather copy it to our own.
+	 * 
+	 * @param styles Source styles that will be copied.
+	 */
+	public void setStyles(List<ImageStyle> styles) {
+		this.styles.clear();
+		for (ImageStyle style : styles) {
+			addStyle(style.getName(), style.getCode(), style.getMaxWidth(), style.getMaxHeight());
+		}
 	}
 	
 	/**
@@ -290,18 +322,48 @@ public class ImageStore {
 					contentType, length, originalFile });
 			FileUtils.copyInputStreamToFile(content, originalFile);
 			
-			return doCreate(originalFile, contentType, originalFile.length(), name, fileName);
+			return doCreate(originalFile, contentType, originalFile.length(), name, fileName, true);
 		} finally {
 			log.info("Deleting temporary original image {}", originalFile);
 			originalFile.delete();
 		}
 	}
 	
+	/**
+	 * Upload a file.
+	 * 
+	 * Note: To comply with Soluvas Data, the add() method should accept a VO object (that can be deserialized from
+	 * JSON, AMQP, RDF, XMI, etc.). See add().
+	 * 
+	 * @param originalFile
+	 * @param contentType
+	 * @param name
+	 * @return
+	 * @throws IOException
+	 */
 	public String create(File originalFile, final String contentType, String name) throws IOException {
-		return doCreate(originalFile, contentType, originalFile.length(), name, originalFile.getName());
+		return doCreate(originalFile, contentType, originalFile.length(), name, originalFile.getName(), true);
 	}
-	
-	public String doCreate(final File originalFile, final String contentType, final long length, String name, String originalName) throws IOException {
+
+	/**
+	 * Upload a file.
+	 * 
+	 * To comply with Soluvas Data, the add() method should accept a VO object (that can be deserialized from
+	 * JSON, AMQP, RDF, XMI, etc.). All exceptions are rethrown as runtime exceptions.
+	 * 
+	 * @param newImage
+	 * @return
+	 */
+	public String add(NewImage newImage) {
+		try {
+			return create(newImage.getOriginalFile(), newImage.getContentType(), newImage.getName());
+		} catch (IOException e) {
+			throw new RuntimeException("Error adding image " + newImage, e);
+		}
+	}
+
+	public String doCreate(final File originalFile, final String contentType, final long length, String name, String originalName,
+			boolean alsoUploadOriginal) throws IOException {
 //		final String seoName = name + " " + FilenameUtils.getBaseName(fileName);
 		final String seoName1 = SlugUtils.generateId(name, 0);
 		final String seoName2 = SlugUtils.generateId(FilenameUtils.getBaseName(originalName), 0);
@@ -359,20 +421,22 @@ public class ImageStore {
 			});
 
 			// Upload originals last, so that unreadable images aren't uploaded at all
-			final Callable<Object> uploadOriginal = new Callable<Object>() {
-				@Override
-				public Object call() throws Exception {
-					final URI originalDavUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
-							safeDavUri, namespace, 'o', imageId, 'o', extension));
-					try {
-						uploadFile(originalDavUri, new FileInputStream(originalFile), contentType, length);
-						return null;
-					} catch (Exception e) {
-						throw new RuntimeException("Error uploading original " + imageId + " to " + originalDavUri, e);
+			if (alsoUploadOriginal) {
+				final Callable<Object> uploadOriginal = new Callable<Object>() {
+					@Override
+					public Object call() throws Exception {
+						final URI originalDavUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
+								safeDavUri, namespace, 'o', imageId, 'o', extension));
+						try {
+							uploadFile(originalDavUri, new FileInputStream(originalFile), contentType, length);
+							return null;
+						} catch (Exception e) {
+							throw new RuntimeException("Error uploading original " + imageId + " to " + originalDavUri, e);
+						}
 					}
-				}
-			};
-			uploadOriginal.call();
+				};
+				uploadOriginal.call();
+			}
 //			Future<Object> originalFuture = Futures.future(uploadOriginal, system.dispatcher());
 
 //			// Upload these thumbnails
@@ -431,9 +495,9 @@ public class ImageStore {
 			dbo.put("created", new Date());
 			dbo.put("styles", stylesObj);
 			
-			log.info("Inserting image {} ({}) metadata into MongoDB collection {}", new Object[] { 
+			log.info("Upserting image {} ({}) metadata into MongoDB collection {}", new Object[] { 
 					imageId, name, mongoColl.getName() });
-			mongoColl.insert(dbo);
+			mongoColl.update(new BasicDBObject("_id", imageId), dbo, true, false);
 			
 			return imageId;
 		} catch (Exception e) {
@@ -582,6 +646,25 @@ public class ImageStore {
 		return new Image(this, (BasicBSONObject)dbo);
 	}
 
+	public Map<String, Image> findAllByIds(Iterable<String> ids) {
+		log.trace("Get {} Image with IDs {}", namespace, ids);
+		DBCursor dbCursor = mongoColl.find(
+				new BasicDBObject("_id", new BasicDBObject("$in", Iterables.toArray(ids, String.class))));
+		try {
+			ImmutableMap<String, Image> images = Maps.uniqueIndex( Iterables.transform(dbCursor, new DBObjectToImage()), new Function<Image, String>() {
+				@Override
+				public String apply(Image input) {
+					return input.getId();
+				}
+			});
+			log.debug("Got {} {} images with IDs {}", new Object[] {
+					images.size(), namespace, ids });
+			return images;
+		} finally {
+			dbCursor.close();
+		}
+	}
+
 	/**
 	 * List all {@link Image}s, ordered by Image ID.
 	 * @return
@@ -589,12 +672,7 @@ public class ImageStore {
 	public List<Image> findAll() {
 		DBCursor cursor = mongoColl.find().sort(new BasicDBObject("_id", "1"));
 		try {
-			ImmutableList<Image> images = ImmutableList.copyOf( Iterables.transform(cursor, new Function<DBObject, Image>() {
-				@Override
-				public Image apply(DBObject input) {
-					return new Image(ImageStore.this, (BasicBSONObject)input);
-				}
-			}) );
+			ImmutableList<Image> images = ImmutableList.copyOf( Iterables.transform(cursor, new DBObjectToImage()) );
 			return images;
 		} finally {
 			cursor.close();
@@ -623,6 +701,61 @@ public class ImageStore {
 		} finally {
 			cursor.close();
 		}
+	}
+	
+	/**
+	 * For each image, redownloads the original file from WebDAV repository, reprocesses each image style, and re-uploads the processed images to WebDAV repository.
+	 * @param ids
+	 */
+	public void reprocess(Iterable<String> ids) {
+		Map<String, Image> images = findAllByIds(ids);
+		doReprocess(images.values());
+	}
+
+	/**
+	 * @param images
+	 */
+	protected void doReprocess(Iterable<Image> images) {
+		log.info("Reprocessing {} images", Iterables.size(images));
+		for (Image image : images) {
+			log.info("Downloading {} from {}", new Object[] { image.getId(), image.getUri() });
+			HttpGet httpGet = new HttpGet(image.getUri());
+			try {
+				HttpResponse response = client.execute(davHost, httpGet, createHttpContext());
+				try {
+					if (response.getStatusLine().getStatusCode() >= 200 && response.getStatusLine().getStatusCode() < 300) {
+						log.trace("Download {} successful: {}", image.getUri(), response.getStatusLine());
+						File tempFile = File.createTempFile(image.getId(), ".tmp");
+						log.info("Writing {} bytes to {}", response.getEntity().getContentLength(), tempFile);
+						FileUtils.copyInputStreamToFile(response.getEntity().getContent(), tempFile);
+						try {
+							if (tempFile.length() != image.getSize())
+								log.warn("Downloaded file size is {} bytes, expected {} bytes",
+										tempFile.length(), image.getSize() );
+							doCreate(tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
+									image.getFileName(), false);
+						} catch (Exception e) {
+							log.error("Cannot reprocess " + image.getId(), e);
+						} finally {
+							log.debug("Deleting {}", tempFile);
+							tempFile.delete();
+						}
+					} else {
+						log.error("Download {} returned: {}", image.getUri(), response.getStatusLine());
+					}
+				} finally {
+					HttpClientUtils.closeQuietly(response);
+				}
+			} catch (Exception e) {
+				// log, but continue
+				log.error("Cannot download " + image.getId() + " from " + image.getUri(), e);
+			}
+		}
+	}
+
+	public void reprocessAll() {
+		List<Image> images = findAll();
+		doReprocess(images);
 	}
 
 	public String getNamespace() {
