@@ -78,4 +78,11 @@ public class ImageStyle {
 		this.maxHeight = maxHeight;
 	}
 
+	@Override
+	public String toString() {
+		return String.format(
+				"ImageStyle [name=%s, code=%s, maxWidth=%s, maxHeight=%s]",
+				name, code, maxWidth, maxHeight);
+	}
+
 }
