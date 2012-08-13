@@ -12,6 +12,7 @@ public class ImageStyle {
 	private String code;
 	private int maxWidth;
 	private int maxHeight;
+	private float quality = 0.85f;
 
 	public ImageStyle() {
 		super();
@@ -76,6 +77,14 @@ public class ImageStyle {
 
 	public void setMaxHeight(int maxHeight) {
 		this.maxHeight = maxHeight;
+	}
+
+	public float getQuality() {
+		return quality;
+	}
+
+	public void setQuality(float quality) {
+		this.quality = quality;
 	}
 
 	@Override

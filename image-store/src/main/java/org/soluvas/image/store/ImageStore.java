@@ -17,7 +17,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 import javax.annotation.PreDestroy;
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.plugins.jpeg.JPEGImageWriteParam;
+import javax.imageio.spi.ImageWriterSpi;
+import javax.imageio.stream.FileImageOutputStream;
 
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -386,13 +392,29 @@ public class ImageStore {
 						// I don't think Thumbnailer and/or ImageIO is thread-safe
 						synchronized (this) {
 							styledFile = File.createTempFile(imageId + "_", "_" + style.getCode() + ".jpg");
-							log.info("Resizing {} to {}", originalFile, styledFile);
-							BufferedImage styledImage = Thumbnails.of(originalFile).size(style.getMaxWidth(), style.getMaxHeight())
-								.crop(Positions.CENTER).asBufferedImage();
+							final boolean progressive = style.getMaxWidth() >= 512;
+							log.info("Resizing {} to {}, quality={} progressive={}", new Object[] {
+									originalFile, styledFile, style.getQuality(), progressive });
+							BufferedImage styledImage = Thumbnails.of(originalFile)
+									.size(style.getMaxWidth(), style.getMaxHeight())
+									.crop(Positions.CENTER).asBufferedImage();
 							width = styledImage.getWidth();
 							height = styledImage.getHeight();
 							log.info("Dimensions of {} is {}x{}", new Object[] { styledFile, width, height });
-							ImageIO.write(styledImage, "jpg", styledFile);
+							ImageWriter jpegWriter = ImageIO.getImageWritersByFormatName("jpg").next();
+							final FileImageOutputStream styledOutput = new FileImageOutputStream(styledFile);
+							jpegWriter.setOutput(styledOutput);
+							try {
+								ImageWriteParam jpegParam = jpegWriter.getDefaultWriteParam();
+								jpegParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+								jpegParam.setCompressionQuality(style.getQuality());
+								// Enable progressive if width >= 512, else disable
+								jpegParam.setProgressiveMode(progressive ? ImageWriteParam.MODE_DEFAULT : ImageWriteParam.MODE_DISABLED);
+								jpegWriter.write(null, new IIOImage(styledImage, null, null), jpegParam);
+//								ImageIO.write(styledImage, "jpg", styledFile); // no quality control
+							} finally {
+								styledOutput.close();
+							}
 						}
 						
 //						ByteArrayOutputStream buf = new ByteArrayOutputStream();
