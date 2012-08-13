@@ -1,8 +1,6 @@
-/**
- * 
- */
 package org.soluvas.image.store;
 
+import java.io.File;
 import java.net.URI;
 import java.util.Map;
 
@@ -21,13 +19,28 @@ public class Image {
 	private URI uri;
 	private String contentType;
 	private String fileName;
-	private long size;
+	private Long size;
 	// TODO: Support original width and height
 //	private int width;
 //	private int height;
 	private Map<String, StyledImage> styles;
+	/**
+	 * Only used for creating/uploading new image. Otherwise it's always null.
+	 * @see ImageStore#add(Image)
+	 */
+	private File originalFile;
+	/**
+	 * Only used for creating/uploading new image. Otherwise it's always null.
+	 * @see ImageStore#add(Image)
+	 */
+	private String name;
+	
+	public Image() {
+		super();
+	}
 	
 	public Image(ImageStore imageStore, BasicBSONObject dbo) {
+		super();
 		id = dbo.getString("_id");
 		uri = imageStore.getImagePublicUri(id, ImageStore.ORIGINAL_NAME);
 		contentType = dbo.getString("contentType");
@@ -64,16 +77,63 @@ public class Image {
 		return contentType;
 	}
 
+	/**
+	 * Only set this for new Images, do not set this on existing images.
+	 * @param contentType
+	 */
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
 	public String getFileName() {
 		return fileName;
 	}
 
-	public long getSize() {
+	public Long getSize() {
 		return size;
 	}
 
 	public Map<String, StyledImage> getStyles() {
 		return styles;
+	}
+
+	/**
+	 * Only used for creating/uploading new image. Otherwise it's always null.
+	 * @see ImageStore#add(Image)
+	 */
+	public File getOriginalFile() {
+		return originalFile;
+	}
+
+	/**
+	 * Only used for creating/uploading new image. Otherwise it's always null.
+	 * @see ImageStore#add(Image)
+	 */
+	public void setOriginalFile(File originalFile) {
+		this.originalFile = originalFile;
+	}
+
+	/**
+	 * Only used for creating/uploading new image. Otherwise it's always null.
+	 * @see ImageStore#add(Image)
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Only used for creating/uploading new image. Otherwise it's always null.
+	 * @see ImageStore#add(Image)
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Image [id=%s, contentType=%s, fileName=%s, size=%d, uri=%s]",
+				id, contentType, fileName, size, uri);
 	}
 	
 }

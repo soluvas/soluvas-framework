@@ -3,7 +3,6 @@ package org.soluvas.image.store;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -25,7 +24,6 @@ import net.coobird.thumbnailator.geometry.Positions;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -52,6 +50,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.slug.SlugUtils;
 
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Collections2;
@@ -322,7 +321,7 @@ public class ImageStore {
 					contentType, length, originalFile });
 			FileUtils.copyInputStreamToFile(content, originalFile);
 			
-			return doCreate(originalFile, contentType, originalFile.length(), name, fileName, true);
+			return doCreate(null, originalFile, contentType, originalFile.length(), name, fileName, true);
 		} finally {
 			log.info("Deleting temporary original image {}", originalFile);
 			originalFile.delete();
@@ -342,7 +341,7 @@ public class ImageStore {
 	 * @throws IOException
 	 */
 	public String create(File originalFile, final String contentType, String name) throws IOException {
-		return doCreate(originalFile, contentType, originalFile.length(), name, originalFile.getName(), true);
+		return doCreate(null, originalFile, contentType, originalFile.length(), name, originalFile.getName(), true);
 	}
 
 	/**
@@ -351,10 +350,12 @@ public class ImageStore {
 	 * To comply with Soluvas Data, the add() method should accept a VO object (that can be deserialized from
 	 * JSON, AMQP, RDF, XMI, etc.). All exceptions are rethrown as runtime exceptions.
 	 * 
+	 * Required attributes for new {@link Image} are: originalFile, contentType, name.
+	 * 
 	 * @param newImage
 	 * @return
 	 */
-	public String add(NewImage newImage) {
+	public String add(Image newImage) {
 		try {
 			return create(newImage.getOriginalFile(), newImage.getContentType(), newImage.getName());
 		} catch (IOException e) {
@@ -362,13 +363,14 @@ public class ImageStore {
 		}
 	}
 
-	public String doCreate(final File originalFile, final String contentType, final long length, String name, String originalName,
-			boolean alsoUploadOriginal) throws IOException {
+	public String doCreate(String existingImageId, final File originalFile, final String contentType,
+			final long length, final String name, final String originalName, boolean alsoUploadOriginal) throws IOException {
 //		final String seoName = name + " " + FilenameUtils.getBaseName(fileName);
 		final String seoName1 = SlugUtils.generateId(name, 0);
 		final String seoName2 = SlugUtils.generateId(FilenameUtils.getBaseName(originalName), 0);
-		final String imageId = seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2;
+		final String imageId = Optional.fromNullable(existingImageId).or( seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2 );
 		final String extension = FilenameUtils.getExtension(originalName);
+		
 		log.debug("Adding image from {} ({} {} bytes) as {}", new Object[] {
 				originalFile.getName(), contentType, length, imageId });
 		
@@ -686,12 +688,12 @@ public class ImageStore {
 	public List<Image> search(String searchText) {
 		log.debug("Searching {}", searchText);
 		DBCursor cursor = mongoColl.find(new BasicDBObject("$or", new Map[] {
-				ImmutableMap.of("_id", Pattern.compile(".*" + Pattern.quote(searchText) + ".*")),
-				ImmutableMap.of("fileName", Pattern.compile(".*" + Pattern.quote(searchText) + ".*")),
-				ImmutableMap.of("uri", Pattern.compile(".*" + Pattern.quote(searchText) + ".*"))
+				ImmutableMap.of("_id", Pattern.compile(".*" + Pattern.quote(searchText) + ".*", Pattern.CASE_INSENSITIVE)),
+				ImmutableMap.of("fileName", Pattern.compile(".*" + Pattern.quote(searchText) + ".*", Pattern.CASE_INSENSITIVE)),
+				ImmutableMap.of("uri", Pattern.compile(".*" + Pattern.quote(searchText) + ".*", Pattern.CASE_INSENSITIVE))
 		})).sort(new BasicDBObject("_id", "1"));
 		try {
-			ImmutableList<Image> images = ImmutableList.copyOf( Iterables.transform(cursor, new Function<DBObject, Image>() {
+			List<Image> images = ImmutableList.copyOf( Iterables.transform(cursor, new Function<DBObject, Image>() {
 				@Override
 				public Image apply(DBObject input) {
 					return new Image(ImageStore.this, (BasicBSONObject)input);
@@ -732,7 +734,7 @@ public class ImageStore {
 							if (tempFile.length() != image.getSize())
 								log.warn("Downloaded file size is {} bytes, expected {} bytes",
 										tempFile.length(), image.getSize() );
-							doCreate(tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
+							doCreate(image.getId(), tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
 									image.getFileName(), false);
 						} catch (Exception e) {
 							log.error("Cannot reprocess " + image.getId(), e);
