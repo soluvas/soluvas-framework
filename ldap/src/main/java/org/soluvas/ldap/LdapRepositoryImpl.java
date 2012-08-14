@@ -268,4 +268,9 @@ public class LdapRepositoryImpl<T> implements LdapRepository<T> {
 		}
 	}
 
+	@Override
+	public List<T> search(String searchText) {
+		throw new UnsupportedOperationException();
+	}
+
 }

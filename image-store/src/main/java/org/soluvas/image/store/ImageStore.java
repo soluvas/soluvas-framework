@@ -240,6 +240,7 @@ public class ImageStore {
 		client.getConnectionManager().shutdown();
 		if (mongoColl != null) {
 			mongoColl.getDB().cleanCursors(false);
+			mongoColl.getDB().getMongo().close();
 		}
 	}
 	

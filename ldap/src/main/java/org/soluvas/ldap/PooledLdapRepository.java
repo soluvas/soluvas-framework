@@ -9,6 +9,7 @@ import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionPool;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
+import org.apache.directory.shared.ldap.model.message.SearchRequestImpl;
 import org.apache.directory.shared.ldap.model.message.SearchScope;
 import org.apache.directory.shared.ldap.model.name.Dn;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
 
 /**
  * Manages LDAP entry POJO objects annotated with {@link LdapEntry}.
@@ -358,6 +360,11 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 				}
 			}
 		});
+	}
+
+	@Override
+	public List<T> search(String searchText) {
+		throw new UnsupportedOperationException();
 	}
 	
 }

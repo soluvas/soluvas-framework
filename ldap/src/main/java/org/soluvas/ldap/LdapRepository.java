@@ -70,6 +70,13 @@ public interface LdapRepository<T> {
 	List<T> findAll();
 
 	/**
+	 * Find all LDAP entries partially matching a specified searchText.
+	 * @param obj
+	 * @throws LdapException
+	 */
+	List<T> search(String searchText);
+
+	/**
 	 * @return the baseDn
 	 */
 	String getBaseDn();
@@ -102,5 +109,5 @@ public interface LdapRepository<T> {
 	Dn toDn(String id);
 
 	boolean exists(String id);
-
+	
 }
