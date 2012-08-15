@@ -21,6 +21,7 @@ import org.apache.directory.shared.ldap.model.schema.SchemaManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
@@ -372,6 +373,9 @@ public class LdapMapper {
 				throw new IllegalArgumentException("Cannot convert '" + value +"' to " + fieldType.getName() +
 						". Valid values are: " + enumConstants);
 			return found;
+		} else if (value instanceof byte[]) {
+			// Byte array, usually userPassword
+			return (R) new String((byte[])value, Charsets.UTF_8);
 		} else {
 			return (R) value;
 		}
