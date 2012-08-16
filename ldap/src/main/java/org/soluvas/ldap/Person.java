@@ -26,21 +26,23 @@ public class Person implements Serializable, User {
 	@LdapAttribute("cn") @NotNull private String name;
 	@LdapAttribute("userPassword") private String password;
 	@LdapAttribute("mail") private Set<String> emails;
+	@LdapAttribute("gender") private String gender; 
 	
 	public Person() {
 	}
 	
-	public Person(String id, String slug, String firstName, String lastName) {
+	public Person(String id, String slug, String firstName, String lastName, String gender) {
 		super();
 		this.id = id;
 		this.slug = slug;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.name = (firstName + " " + lastName).trim();
+		this.gender = gender;
 	}
 
-	public Person(String id, String slug, String firstName, String lastName, String email) {
-		this(id, slug, firstName, lastName);
+	public Person(String id, String slug, String firstName, String lastName, String gender, String email) {
+		this(id, slug, firstName, lastName, gender);
 		this.emails = email != null ? ImmutableSet.of(email) : new HashSet<String>();
 	}
 
@@ -153,6 +155,20 @@ public class Person implements Serializable, User {
 	@Override
 	public String getKey() {
 		return getId();
+	}
+
+	/**
+	 * @return the gender
+	 */
+	public String getGender() {
+		return gender;
+	}
+
+	/**
+	 * @param gender the gender to set
+	 */
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
 }

@@ -21,13 +21,13 @@ public class SocialPerson extends Person {
 	}
 
 	public SocialPerson(String id, String slug, String firstName,
-			String lastName) {
-		super(id, slug, firstName, lastName);
+			String lastName, String gender) {
+		super(id, slug, firstName, lastName, gender);
 	}
 
 	public SocialPerson(String id, String slug, String firstName,
-			String lastName, String email) {
-		super(id, slug, firstName, lastName, email);
+			String lastName, String gender, String email) {
+		super(id, slug, firstName, lastName, gender, email);
 	}
 
 	/**

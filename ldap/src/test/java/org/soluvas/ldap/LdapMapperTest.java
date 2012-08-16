@@ -58,7 +58,7 @@ public class LdapMapperTest {
 
 	@Test
 	public void canMapMultiValuesToEntry() throws LdapInvalidAttributeValueException {
-		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan");
+		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
 		hendy.setEmails(ImmutableSet.of("hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com"));
 		log.info("Input Person: {}", hendy);
 		
@@ -77,7 +77,7 @@ public class LdapMapperTest {
 	
 	@Test
 	public void canMapSubclassToEntry() throws LdapInvalidAttributeValueException {
-		SocialPerson hendy = new SocialPerson("hendy", "hendy.irawan", "Hendy", "Irawan");
+		SocialPerson hendy = new SocialPerson("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
 		hendy.setEmails(ImmutableSet.of("hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com"));
 		hendy.setPhotoId("hendy");
 		hendy.setFacebookId(596326671L);

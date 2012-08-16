@@ -74,7 +74,7 @@ public class LdapRepositoryTest {
 
 	@Test
 	public void add() {
-		SocialPerson liz = new SocialPerson("liz", "liz.lemon", "Liz", "Lemon");
+		SocialPerson liz = new SocialPerson("liz", "liz.lemon", "Liz", "Lemon", "female");
 		liz.setEmails(ImmutableSet.of("liz.lemon@example.com", "liz@example.com"));
 		liz.setPhotoId("liz_lemon");
 		liz.setFacebookId(123456L);
