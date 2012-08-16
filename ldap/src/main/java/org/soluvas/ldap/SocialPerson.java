@@ -1,5 +1,11 @@
 package org.soluvas.ldap;
 
+import java.util.Set;
+
+import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSet.Builder;
+
 /**
  * {@link Person} with extended attributes from Soluvas, Bippo, Facebook, and Twitter.
  * @author ceefour
@@ -10,6 +16,7 @@ public class SocialPerson extends Person {
 	
 	public static enum Gender { MALE, FEMALE };
 
+	@LdapAttribute("primaryEmail") private String primaryEmail;
 	@LdapAttribute("photoId") private String photoId;
 	@LdapAttribute("gender") private Gender gender;
 	@LdapAttribute("fbId") private Long facebookId;
@@ -32,6 +39,39 @@ public class SocialPerson extends Person {
 			String lastName, Gender gender) {
 		super(id, slug, firstName, lastName);
 		this.gender = gender;
+	}
+
+	/**
+	 * @return the primaryEmail
+	 */
+	public String getPrimaryEmail() {
+		return primaryEmail;
+	}
+
+	/**
+	 * @param primaryEmail the primaryEmail to set
+	 */
+	public void setPrimaryEmail(String primaryEmail) {
+		this.primaryEmail = primaryEmail;
+		Builder<String> emailsBuilder = ImmutableSet.<String>builder();
+		if (getEmails() != null)
+			emailsBuilder.addAll(getEmails());
+		if (primaryEmail != null)
+			emailsBuilder.add(primaryEmail);
+		final Set<String> newEmails = emailsBuilder.build();
+		if (!newEmails.equals(getEmails())) {
+			setEmails( newEmails );
+		}
+	}
+	
+	@Override
+	public void setEmails(Set<String> emails) {
+		super.setEmails(emails);
+		if (emails != null && !emails.isEmpty() && Strings.isNullOrEmpty(primaryEmail)) {
+			final String newPrimaryEmail = emails.iterator().next();
+			if (!Strings.isNullOrEmpty(newPrimaryEmail))
+				setPrimaryEmail(newPrimaryEmail);
+		}
 	}
 
 	/**
