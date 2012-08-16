@@ -7,8 +7,11 @@ package org.soluvas.ldap;
 @SuppressWarnings("serial")
 @LdapEntry(objectClasses={"organizationalPerson", "uidObject", "extensibleObject", "socialPerson", "facebookObject", "twitterObject"})
 public class SocialPerson extends Person {
+	
+	public static enum Gender { MALE, FEMALE };
 
 	@LdapAttribute("photoId") private String photoId;
+	@LdapAttribute("gender") private Gender gender;
 	@LdapAttribute("fbId") private Long facebookId;
 	@LdapAttribute("fbUser") private String facebookUsername;
 	@LdapAttribute("fbAccessToken") private String facebookAccessToken;
@@ -44,6 +47,14 @@ public class SocialPerson extends Person {
 		this.photoId = photoId;
 	}
 	
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
 	/**
 	 * @return the facebookId
 	 */

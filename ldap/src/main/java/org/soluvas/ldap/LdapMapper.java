@@ -21,8 +21,12 @@ import org.apache.directory.shared.ldap.model.schema.SchemaManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -184,13 +188,13 @@ public class LdapMapper {
 			LdapInvalidDnException {
 		final Field[] fields = clazz.getDeclaredFields();
 		log.debug("Mapping {} fields: {}", clazz.getName(), fields);
-		for (Field f : fields) {
-			LdapAttribute ldapAttribute = f.getAnnotation(LdapAttribute.class);
+		for (final Field field : fields) {
+			LdapAttribute ldapAttribute = field.getAnnotation(LdapAttribute.class);
 			if (ldapAttribute == null)
 				continue;
 			String attrName = ldapAttribute.value();
-			LdapRdn ldapRdn = f.getAnnotation(LdapRdn.class);
-			String fieldName = f.getName();
+			LdapRdn ldapRdn = field.getAnnotation(LdapRdn.class);
+			String fieldName = field.getName();
 			if (ldapRdn != null) {
 				// Set value as the RDN
 				String value = BeanUtils.getSimpleProperty(obj, fieldName);
@@ -202,24 +206,31 @@ public class LdapMapper {
 				entry.put(attrName, value);
 				entry.setDn(dn);
 			} else {
-				if (Set.class.isAssignableFrom(f.getType())) {
+				if (Set.class.isAssignableFrom(field.getType())) {
 					// Set value as multi attribute
-					Set<String> values = (Set<String>) PropertyUtils.getProperty(obj, fieldName);
-					if (values != null) {
+					Set<Object> objValues = (Set<Object>) PropertyUtils.getProperty(obj, fieldName);
+					if (objValues != null) {
+						ImmutableSet<Iterable<String>> attrValues = ImmutableSet.of( Iterables.transform(objValues, new Function<Object, String>() {
+							@Override
+							public String apply(Object input) {
+								return convertFromPropertyValue(field.getType(), input);
+							}
+						}) );
 						log.trace("Map {}#{} as multi {}: {}", new Object[] {
-								clazz.getName(), fieldName, attrName, values });
-						entry.put(attrName, values.toArray(new String[] { }));
+								clazz.getName(), fieldName, attrName, attrValues });
+						entry.put(attrName, attrValues.toArray(new String[] { }));
 					} else {
 						log.trace("Not mapping null {}#{} as multi {}", new Object[] {
 								clazz.getName(), fieldName, attrName });
 					}
 				} else {
-					// Set value as normal attribute
-					String value = BeanUtils.getSimpleProperty(obj, fieldName);
-					if (value != null) {
+					// Set value as single attribute
+					Object objValue = PropertyUtils.getProperty(obj, fieldName);
+					if (objValue != null) {
+						String attrValue = convertFromPropertyValue(field.getType(), objValue);
 						log.trace("Map {}#{} as {}: {}", new Object[] {
-								clazz.getName(), fieldName, attrName, value });
-						entry.put(attrName, value);
+								clazz.getName(), fieldName, attrName, attrValue });
+						entry.put(attrName, attrValue);
 					} else {
 						log.trace("Not mapping null {}#{} as {}", new Object[] {
 								clazz.getName(), fieldName, attrName });
@@ -289,13 +300,13 @@ public class LdapMapper {
 			}
 		});
 		log.debug("Mapping Entry attributes to fields in {}: {}", clazz.getName(), fieldNames);
-		for (Field f : fields) {
-			LdapAttribute ldapAttribute = f.getAnnotation(LdapAttribute.class);
+		for (Field field : fields) {
+			LdapAttribute ldapAttribute = field.getAnnotation(LdapAttribute.class);
 			if (ldapAttribute == null)
 				continue;
 			String attrName = ldapAttribute.value();
-			LdapRdn ldapRdn = f.getAnnotation(LdapRdn.class);
-			String fieldName = f.getName();
+			LdapRdn ldapRdn = field.getAnnotation(LdapRdn.class);
+			String fieldName = field.getName();
 			if (ldapRdn != null) {
 				try {
 					// Set value from the RDN
@@ -310,36 +321,82 @@ public class LdapMapper {
 				if (!entry.containsAttribute(attrName))
 					continue;
 				final Attribute attr = entry.get(attrName);
-				if (Set.class.isAssignableFrom(f.getType())) {
+				if (Set.class.isAssignableFrom(field.getType())) {
 					// Set value as multi attribute
 					try {
 						HashSet<Object> values = new HashSet<Object>();
 						for (Value<?> v : attr) {
-							values.add(v.getValue());
+							Object converted = convertToPropertyValue(field.getType(), v.getValue());
+							values.add(converted);
 						}
 						log.trace("Map {} to {}#{} as set: {}", new Object[] {
 								attrName, clazz.getName(), fieldName, values });
 						BeanUtils.setProperty(bean, fieldName, values);
 					} catch (Exception e) {
 						throw new LdapMappingException("Cannot map multi " + attrName + ": " + attr + " as " +
-								clazz.getName() + "#" + fieldName + " (" + f.getType().getName() + ") from " + entry.getDn(), e);
+								clazz.getName() + "#" + fieldName + " (" + field.getType().getName() + ") from " + entry.getDn(), e);
 					}
 				} else {
 					// Set property value from single attribute value
 					try {
 						Object value = attr.get().getValue();
+						Object converted = convertToPropertyValue(field.getType(), value);
 						log.trace("Map {} to {}#{} as {}: {}", new Object[] {
-								attrName, clazz.getName(), fieldName, f.getType().getName(), value });
-						BeanUtils.setProperty(bean, fieldName, value);
+								attrName, clazz.getName(), fieldName, field.getType().getName(), converted });
+						BeanUtils.setProperty(bean, fieldName, converted);
 					} catch (Exception e) {
 						throw new LdapMappingException("Cannot map " + attrName + ": " + attr.get() + " as " +
-								clazz.getName() + "#" + fieldName + " (" + f.getType().getName() + ") from " + entry.getDn(), e);
+								clazz.getName() + "#" + fieldName + " (" + field.getType().getName() + ") from " + entry.getDn(), e);
 					}
 				}
 			}
 		}
 	}
-	
+
+	/**
+	 * Convert from an LDAP value (usually string) to a Bean property value. 
+	 * @param bean
+	 * @param fieldName
+	 * @param value
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 */
+	protected <T, R> R convertToPropertyValue(Class<R> fieldType, final Object value) {
+		if (fieldType.isEnum()) {
+			final R[] enumConstants = fieldType.getEnumConstants();
+			R found = Iterables.find( ImmutableList.copyOf(enumConstants), new Predicate<R>() {
+				public boolean apply(R input) {
+					return ((Enum)input).name().equalsIgnoreCase((String) value);
+				};
+			}, null);
+			if (found == null)
+				throw new IllegalArgumentException("Cannot convert '" + value +"' to " + fieldType.getName() +
+						". Valid values are: " + enumConstants);
+			return found;
+		} else if (value instanceof byte[]) {
+			// Byte array, usually userPassword
+			return (R) new String((byte[])value, Charsets.UTF_8);
+		} else {
+			return (R) value;
+		}
+	}
+
+	/**
+	 * Convert from Bean property value (can be {@link Enum}) to an LDAP attribute value (usually String).
+	 * @param bean
+	 * @param fieldName
+	 * @param value
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 */
+	protected String convertFromPropertyValue(Class<?> fieldType, final Object value) {
+		if (fieldType.isEnum()) {
+			return ((Enum) value).name().toLowerCase();
+		} else {
+			return (String) value;
+		}
+	}
+
 	/**
 	 * @return the schemaManager
 	 */
