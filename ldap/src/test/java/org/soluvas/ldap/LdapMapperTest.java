@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.ldap.SocialPerson.Gender;
 
 import com.google.common.collect.ImmutableSet;
 
@@ -77,7 +78,7 @@ public class LdapMapperTest {
 	
 	@Test
 	public void canMapSubclassToEntry() throws LdapInvalidAttributeValueException {
-		SocialPerson hendy = new SocialPerson("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
+		SocialPerson hendy = new SocialPerson("hendy", "hendy.irawan", "Hendy", "Irawan", Gender.MALE);
 		hendy.setEmails(ImmutableSet.of("hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com"));
 		hendy.setPhotoId("hendy");
 		hendy.setFacebookId(596326671L);

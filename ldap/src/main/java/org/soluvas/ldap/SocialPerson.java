@@ -24,13 +24,14 @@ public class SocialPerson extends Person {
 	}
 
 	public SocialPerson(String id, String slug, String firstName,
-			String lastName, String gender) {
-		super(id, slug, firstName, lastName, gender);
+			String lastName) {
+		super(id, slug, firstName, lastName);
 	}
 
 	public SocialPerson(String id, String slug, String firstName,
-			String lastName, String gender, String email) {
-		super(id, slug, firstName, lastName, gender, email);
+			String lastName, Gender gender) {
+		super(id, slug, firstName, lastName);
+		this.gender = gender;
 	}
 
 	/**

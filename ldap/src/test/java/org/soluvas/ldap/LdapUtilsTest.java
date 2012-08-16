@@ -6,10 +6,10 @@ import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.ldap.SocialPerson.Gender;
 
 import com.google.common.collect.ImmutableSet;
 
@@ -47,7 +47,7 @@ public class LdapUtilsTest {
 
 	@Test
 	public void canCreatePerson() throws LdapException {
-		SocialPerson liz = new SocialPerson("liz", "liz.lemon", "Liz", "Lemon", "female");
+		SocialPerson liz = new SocialPerson("liz", "liz.lemon", "Liz", "Lemon", Gender.FEMALE);
 		liz.setEmails(ImmutableSet.of("liz.lemon@example.com", "liz@example.com"));
 		liz.setPhotoId("liz_lemon");
 		liz.setFacebookId(123456L);

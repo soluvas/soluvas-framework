@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.ldap.SocialPerson.Gender;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableSet;
@@ -74,7 +75,7 @@ public class LdapRepositoryTest {
 
 	@Test
 	public void add() {
-		SocialPerson liz = new SocialPerson("liz", "liz.lemon", "Liz", "Lemon", "female");
+		SocialPerson liz = new SocialPerson("liz", "liz.lemon", "Liz", "Lemon", Gender.FEMALE);
 		liz.setEmails(ImmutableSet.of("liz.lemon@example.com", "liz@example.com"));
 		liz.setPhotoId("liz_lemon");
 		liz.setFacebookId(123456L);
