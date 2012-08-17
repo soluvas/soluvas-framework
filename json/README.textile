@@ -32,6 +32,12 @@ public class Story implements Serializable {
 
 h2. Usage in OSGi Blueprint
 
+Bundles (requires patched joda-money 0.6):
+
+bc. install -s mvn:org.joda/joda-money/0.6.soluvas1
+
+Blueprint XML:
+
 bc. 	<reference id="jacksonMapperFactory" interface="com.google.common.base.Supplier"
 		filter="(className=com.fasterxml.jackson.databind.ObjectMapper)"/>
 
