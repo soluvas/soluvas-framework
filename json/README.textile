@@ -29,3 +29,27 @@ public class Story implements Serializable {
 	}
 
 }
+
+h2. Usage in OSGi Blueprint
+
+bc. 	<reference id="jacksonMapperFactory" interface="com.google.common.base.Supplier"
+		filter="(className=com.fasterxml.jackson.databind.ObjectMapper)"/>
+
+h2. Usage in CXF OSGi
+
+Requires @soluvas-jaxrs@ as well.
+
+In addition to OSGi Blueprint Service reference above:
+
+bc.. 	<jaxrs:server id="apiRs" address="/api">
+		<jaxrs:providers>
+			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider"/>
+			<bean class="org.soluvas.jaxrs.Jackson2ContextResolver">
+				<argument ref="jacksonMapperFactory"/>
+			</bean>
+		</jaxrs:providers>
+		
+		<jaxrs:serviceBeans>
+			<ref component-id="salesOrderRs" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
