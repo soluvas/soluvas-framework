@@ -1,15 +1,52 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
     xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0
-        http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0 http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0
-        http://karaf.apache.org/xmlns/shell/v1.0.0 http://karaf.apache.org/xmlns/shell/v1.0.0
+        http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
+        http://karaf.apache.org/xmlns/shell/v1.1.0 http://karaf.apache.org/xmlns/shell/v1.1.0
         http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0 http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0">
 
-	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
+	<service auto-export="interfaces">
+		<service-properties>
+			<entry key="className" value="com.fasterxml.jackson.databind.Module"/>
+		</service-properties>
+		<bean class="org.soluvas.json.SimpleSupplier">
+			<argument>
+				<bean class="com.fasterxml.jackson.datatype.joda.JodaModule"/>
+			</argument>
+		</bean>
+	</service>
+	<service auto-export="interfaces">
+		<service-properties>
+			<entry key="className" value="com.fasterxml.jackson.databind.Module"/>
+		</service-properties>
+		<bean class="org.soluvas.json.SimpleSupplier">
+			<argument>
+				<bean class="com.fasterxml.jackson.datatype.guava.GuavaModule"/>
+			</argument>
+		</bean>
+	</service>
+
+	<reference-list id="jacksonModuleSuppliers" interface="com.google.common.base.Supplier"
+		filter="(className=com.fasterxml.jackson.databind.Module)" availability="optional"/>
+	<bean id="jacksonMapperFactory" class="org.soluvas.json.JacksonMapperFactory"
+		depends-on="jacksonModuleSuppliers">
+		<argument ref="jacksonModuleSuppliers"/>
+	</bean>
+	<service ref="jacksonMapperFactory" auto-export="all-classes">
+		<service-properties>
+			<entry key="className" value="com.fasterxml.jackson.databind.ObjectMapper"/>
+		</service-properties>
+	</service>
+	<bean id="jacksonMapper" factory-ref="jacksonMapperFactory" factory-method="get"
+		scope="prototype"/>
+
+	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
 		<command name="as/json">
-			<action class="org.soluvas.json.AsJsonCommand"/>
+			<action class="org.soluvas.json.AsJsonCommand">
+				<argument ref="jacksonMapper"/>
+			</action>
 		</command>
 	</command-bundle>
 

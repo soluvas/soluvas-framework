@@ -12,14 +12,22 @@
 	<artifactId>soluvas-jaxrs</artifactId>
 	<packaging>bundle</packaging>
 	<name>Soluvas JAX-RS</name>
-	<description>JAX-RS ContextResolver for Jackson 1.9.</description>
+	<description>JAX-RS ContextResolver for Jackson 1.9 and 2.0.</description>
 	
 	<dependencies>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.6</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
@@ -32,6 +40,19 @@
 	</dependencies>
 
 	<build>
-		<finalName>soluvas-jaxrs</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<configuration>
+					<instructions>
+						<Import-Package>com.fasterxml.jackson.*;resolution:=optional,
+							org.codehaus.jackson;resolution:=optional,
+							*</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
+
 </project>
