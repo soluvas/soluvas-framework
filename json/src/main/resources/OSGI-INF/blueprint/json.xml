@@ -37,6 +37,16 @@
 			</argument>
 		</bean>
 	</service>
+  	<service auto-export="interfaces">
+		<service-properties>
+			<entry key="className" value="com.fasterxml.jackson.databind.Module"/>
+		</service-properties>
+		<bean class="org.soluvas.json.SimpleSupplier">
+			<argument>
+				<bean class="org.soluvas.json.LowerEnumModule"/>
+			</argument>
+		</bean>
+	</service>
 
 	<reference-list id="jacksonModuleSuppliers" interface="com.google.common.base.Supplier"
 		filter="(className=com.fasterxml.jackson.databind.Module)" availability="optional"/>
