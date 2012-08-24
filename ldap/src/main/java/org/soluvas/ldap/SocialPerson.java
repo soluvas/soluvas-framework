@@ -7,12 +7,12 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 
 /**
- * {@link Person} with extended attributes from Soluvas, Bippo, Facebook, and Twitter.
+ * {@link PersonWithLong} with extended attributes from Soluvas, Bippo, Facebook, and Twitter.
  * @author ceefour
  */
 @SuppressWarnings("serial")
 @LdapEntry(objectClasses={"organizationalPerson", "uidObject", "extensibleObject", "socialPerson", "facebookObject", "twitterObject"})
-public class SocialPerson extends Person {
+public class SocialPerson extends PersonWithLong {
 	
 	public static enum Gender { MALE, FEMALE };
 

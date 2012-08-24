@@ -195,47 +195,51 @@ public class LdapMapper {
 			String attrName = ldapAttribute.value();
 			LdapRdn ldapRdn = field.getAnnotation(LdapRdn.class);
 			String fieldName = field.getName();
-			if (ldapRdn != null) {
-				// Set value as the RDN
-				String value = BeanUtils.getSimpleProperty(obj, fieldName);
-				if (value == null)
-					throw new LdapMappingException("RDN property " + clazz.getName() + "#" + fieldName + " cannot be null");
-				final Dn dn = new Dn(new Rdn(attrName, value), new Dn(baseDn));
-				log.debug("Map {} with {}={} as Entry DN: {}", new Object[] {
-					clazz.getName(), fieldName, value, dn });
-				entry.put(attrName, value);
-				entry.setDn(dn);
-			} else {
-				if (Set.class.isAssignableFrom(field.getType())) {
-					// Set value as multi attribute
-					Set<Object> objValues = (Set<Object>) PropertyUtils.getProperty(obj, fieldName);
-					if (objValues != null) {
-						ImmutableSet<Iterable<String>> attrValues = ImmutableSet.of( Iterables.transform(objValues, new Function<Object, String>() {
-							@Override
-							public String apply(Object input) {
-								return convertFromPropertyValue(field.getType(), input);
-							}
-						}) );
-						log.trace("Map {}#{} as multi {}: {}", new Object[] {
-								clazz.getName(), fieldName, attrName, attrValues });
-						entry.put(attrName, attrValues.toArray(new String[] { }));
-					} else {
-						log.trace("Not mapping null {}#{} as multi {}", new Object[] {
-								clazz.getName(), fieldName, attrName });
-					}
+			try {
+				if (ldapRdn != null) {
+					// Set value as the RDN
+					String value = BeanUtils.getSimpleProperty(obj, fieldName);
+					if (value == null)
+						throw new LdapMappingException("RDN property " + clazz.getName() + "#" + fieldName + " cannot be null");
+					final Dn dn = new Dn(new Rdn(attrName, value), new Dn(baseDn));
+					log.debug("Map {} with {}={} as Entry DN: {}", new Object[] {
+						clazz.getName(), fieldName, value, dn });
+					entry.put(attrName, value);
+					entry.setDn(dn);
 				} else {
-					// Set value as single attribute
-					Object objValue = PropertyUtils.getProperty(obj, fieldName);
-					if (objValue != null) {
-						String attrValue = convertFromPropertyValue(field.getType(), objValue);
-						log.trace("Map {}#{} as {}: {}", new Object[] {
-								clazz.getName(), fieldName, attrName, attrValue });
-						entry.put(attrName, attrValue);
+					if (Set.class.isAssignableFrom(field.getType())) {
+						// Set value as multi attribute
+						Set<Object> objValues = (Set<Object>) PropertyUtils.getProperty(obj, fieldName);
+						if (objValues != null) {
+							Set<String> attrValues = ImmutableSet.copyOf( Iterables.transform(objValues, new Function<Object, String>() {
+								@Override
+								public String apply(Object input) {
+									return convertFromPropertyValue(field.getType(), input);
+								}
+							}) );
+							log.trace("Map {}#{} as multi {}: {}", new Object[] {
+									clazz.getName(), fieldName, attrName, attrValues });
+							entry.put(attrName, attrValues.toArray(new String[] { }));
+						} else {
+							log.trace("Not mapping null {}#{} as multi {}", new Object[] {
+									clazz.getName(), fieldName, attrName });
+						}
 					} else {
-						log.trace("Not mapping null {}#{} as {}", new Object[] {
-								clazz.getName(), fieldName, attrName });
+						// Set value as single attribute
+						Object objValue = PropertyUtils.getProperty(obj, fieldName);
+						if (objValue != null) {
+							String attrValue = convertFromPropertyValue(field.getType(), objValue);
+							log.trace("Map {}#{} as {}: {}", new Object[] {
+									clazz.getName(), fieldName, attrName, attrValue });
+							entry.put(attrName, attrValue);
+						} else {
+							log.trace("Not mapping null {}#{} as {}", new Object[] {
+									clazz.getName(), fieldName, attrName });
+						}
 					}
 				}
+			} catch (Exception e) {
+				throw new RuntimeException("Error mapping property " + fieldName + " to attribute " + attrName, e);
 			}
 		}
 	}
@@ -382,7 +386,7 @@ public class LdapMapper {
 	}
 
 	/**
-	 * Convert from Bean property value (can be {@link Enum}) to an LDAP attribute value (usually String).
+	 * Convert from Bean property value (can be {@link Enum}) to an LDAP attribute value (usually String, but can be Long).
 	 * @param bean
 	 * @param fieldName
 	 * @param value
@@ -390,10 +394,12 @@ public class LdapMapper {
 	 * @throws InvocationTargetException
 	 */
 	protected String convertFromPropertyValue(Class<?> fieldType, final Object value) {
-		if (fieldType.isEnum()) {
+		if (value == null) {
+			return null;
+		} else if (fieldType.isEnum()) {
 			return ((Enum) value).name().toLowerCase();
 		} else {
-			return (String) value;
+			return value.toString();
 		}
 	}
 
