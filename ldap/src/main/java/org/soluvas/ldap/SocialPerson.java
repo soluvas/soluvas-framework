@@ -16,7 +16,7 @@ public class SocialPerson extends Person {
 	
 	public static enum Gender { MALE, FEMALE };
 
-	@LdapAttribute("primaryEmail") private String primaryEmail;
+	@LdapAttribute("primaryMail") private String primaryEmail;
 	@LdapAttribute("photoId") private String photoId;
 	@LdapAttribute("gender") private Gender gender;
 	@LdapAttribute("fbId") private Long facebookId;
