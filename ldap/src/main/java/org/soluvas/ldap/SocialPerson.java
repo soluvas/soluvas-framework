@@ -7,7 +7,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 
 /**
- * {@link PersonWithLong} with extended attributes from Soluvas, Bippo, Facebook, and Twitter.
+ * {@link Person} with extended attributes from Soluvas, Bippo, Facebook, and Twitter.
  * @author ceefour
  */
 @SuppressWarnings("serial")

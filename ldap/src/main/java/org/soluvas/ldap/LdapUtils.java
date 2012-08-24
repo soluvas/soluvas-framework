@@ -79,7 +79,7 @@ public class LdapUtils {
 	}
 	
 	/**
-	 * When updating {@link PersonWithLong}, you should always exclude <tt>uid</tt> (the RDN) and <tt>userPassword</tt>
+	 * When updating {@link Person}, you should always exclude <tt>uid</tt> (the RDN) and <tt>userPassword</tt>
 	 * attributes. 
 	 * @param conn
 	 * @param entry

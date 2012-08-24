@@ -1,7 +1,7 @@
 package org.soluvas.ldap;
 
-import static org.junit.Assert.*;
-import junit.framework.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.apache.directory.shared.ldap.model.entry.DefaultEntry;
 import org.apache.directory.shared.ldap.model.entry.Entry;
@@ -17,7 +17,7 @@ import org.soluvas.ldap.SocialPerson.Gender;
 import com.google.common.collect.ImmutableSet;
 
 /**
- * Test mapping of {@link PersonWithLong} to {@link Entry} and back.
+ * Test mapping of {@link Person} to {@link Entry} and back.
  * @author ceefour
  */
 public class LdapMapperTest {
@@ -42,7 +42,7 @@ public class LdapMapperTest {
 
 	@Test
 	public void canMapSimpleClassToEntry() throws LdapInvalidAttributeValueException {
-		PersonWithLong hendy = new PersonWithLong("hendy", "hendy.irawan", "Hendy", "Irawan", "hendy@soluvas.com");
+		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "hendy@soluvas.com");
 		log.info("Input Person: {}", hendy);
 		
 		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
@@ -60,7 +60,7 @@ public class LdapMapperTest {
 
 	@Test
 	public void canMapMultiValuesToEntry() throws LdapInvalidAttributeValueException {
-		PersonWithLong hendy = new PersonWithLong("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
+		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
 		hendy.setEmails(ImmutableSet.of("hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com"));
 		log.info("Input Person: {}", hendy);
 		
@@ -119,15 +119,15 @@ public class LdapMapperTest {
 		entry.put("mail", "hendy@soluvas.com");
 		log.info("Input Entry: {}", entry);
 		
-		PersonWithLong personWithLong = mapper.fromEntry(entry, PersonWithLong.class);
-		log.info("Output Person: {}", personWithLong);
+		Person person = mapper.fromEntry(entry, Person.class);
+		log.info("Output Person: {}", person);
 		
-		assertEquals("hendy", personWithLong.getId());
-		assertEquals("hendy.irawan", personWithLong.getSlug());
-		assertEquals("Hendy", personWithLong.getFirstName());
-		assertEquals("Irawan", personWithLong.getLastName());
-		assertEquals("Hendy Irawan", personWithLong.getName());
-		assertEquals(ImmutableSet.of("hendy@soluvas.com"), personWithLong.getEmails());
+		assertEquals("hendy", person.getId());
+		assertEquals("hendy.irawan", person.getSlug());
+		assertEquals("Hendy", person.getFirstName());
+		assertEquals("Irawan", person.getLastName());
+		assertEquals("Hendy Irawan", person.getName());
+		assertEquals(ImmutableSet.of("hendy@soluvas.com"), person.getEmails());
 	}
 
 	@Test
@@ -142,16 +142,16 @@ public class LdapMapperTest {
 		entry.put("mail", "hendy@soluvas.com", "ceefour666@gmail.com", "hendy@bippo.co.id");
 		log.info("Input Entry: {}", entry);
 		
-		PersonWithLong personWithLong = mapper.fromEntry(entry, PersonWithLong.class);
-		log.info("Output Person: {}", personWithLong);
+		Person person = mapper.fromEntry(entry, Person.class);
+		log.info("Output Person: {}", person);
 		
-		assertEquals("hendy", personWithLong.getId());
-		assertEquals("hendy.irawan", personWithLong.getSlug());
-		assertEquals("Hendy", personWithLong.getFirstName());
-		assertEquals("Irawan", personWithLong.getLastName());
-		assertEquals("Hendy Irawan", personWithLong.getName());
+		assertEquals("hendy", person.getId());
+		assertEquals("hendy.irawan", person.getSlug());
+		assertEquals("Hendy", person.getFirstName());
+		assertEquals("Irawan", person.getLastName());
+		assertEquals("Hendy Irawan", person.getName());
 		assertEquals(ImmutableSet.of("hendy@soluvas.com", "ceefour666@gmail.com", "hendy@bippo.co.id"),
-				personWithLong.getEmails());
+				person.getEmails());
 	}
 
 	@Test
