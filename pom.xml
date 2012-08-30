@@ -16,15 +16,18 @@
 
 	<modules>
 		<module>parent</module>
+		<!-- Infrastructure -->
 		<module>commons</module>
 		<module>json</module>
 		<module>cdi</module>
 		<module>jaxrs</module>
 		<module>ldap</module>
-		<module>image-store</module>
-		<module>apacheds</module>
 		<module>async</module>
 		<module>push</module>
+		<module>multitenant</module>
+		<!-- Backends -->
+		<module>image-store</module>
+		<module>apacheds</module>
 	</modules>
 
 </project>

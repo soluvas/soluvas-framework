@@ -89,6 +89,11 @@
 				<artifactId>soluvas-jaxrs</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.soluvas</groupId>
+				<artifactId>soluvas-multitenant</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.apache.karaf.shell</groupId>
