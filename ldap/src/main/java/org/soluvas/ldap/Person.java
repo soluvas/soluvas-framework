@@ -16,7 +16,7 @@ import com.google.common.collect.ImmutableSet;
  * @author ceefour
  */
 @SuppressWarnings("serial")
-@LdapEntry(objectClasses={"organizationalPerson", "uidObject", "extensibleObject"})
+@LdapEntry(objectClasses={"inetOrgPerson", "uidObject", "extensibleObject"})
 public class Person implements Serializable, User {
 
 	@LdapRdn @LdapAttribute("uid") @NotNull private String id;
@@ -26,6 +26,7 @@ public class Person implements Serializable, User {
 	@LdapAttribute("cn") @NotNull private String name;
 	@LdapAttribute("userPassword") private String password;
 	@LdapAttribute("mail") private Set<String> emails;
+	@LdapAttribute("mobile") private String mobile;
 	
 	public Person() {
 	}
@@ -142,6 +143,20 @@ public class Person implements Serializable, User {
 		this.password = password;
 	}
 	
+	/**
+	 * @return the mobile
+	 */
+	public String getMobile() {
+		return mobile;
+	}
+
+	/**
+	 * @param mobile the mobile to set
+	 */
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
 	@Override
 	public String toString() {
 		return JsonUtils.asJson(this);
