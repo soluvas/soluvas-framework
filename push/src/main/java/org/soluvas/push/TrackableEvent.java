@@ -10,6 +10,10 @@ public class TrackableEvent implements Serializable {
 	
 	private String trackingId;
 
+	public TrackableEvent() {
+		super();
+	}
+
 	public TrackableEvent(String trackingId) {
 		super();
 		this.trackingId = trackingId;

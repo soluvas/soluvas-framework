@@ -14,8 +14,8 @@ public class CollectionUpdate<T> extends PushMessage {
 		super();
 	}
 
-	public CollectionUpdate(String topic, String collectionName, String entryId, T entry) {
-		super(topic);
+	public CollectionUpdate(String trackingId, String topic, String collectionName, String entryId, T entry) {
+		super(trackingId, topic);
 		this.collectionName = collectionName;
 		this.entryId = entryId;
 		this.entry = entry;

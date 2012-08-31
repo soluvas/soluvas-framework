@@ -13,8 +13,8 @@ public class CollectionDelete extends PushMessage {
 		super();
 	}
 
-	public CollectionDelete(String topic, String collection, String entryId) {
-		super(topic);
+	public CollectionDelete(String trackingId, String topic, String collection, String entryId) {
+		super(trackingId, topic);
 		this.collection = collection;
 		this.entryId = entryId;
 	}

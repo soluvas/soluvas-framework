@@ -13,16 +13,15 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 @SuppressWarnings("serial")
 @JsonTypeInfo(use=Id.CLASS)
 //@org.codehaus.jackson.annotate.JsonTypeInfo(use=org.codehaus.jackson.annotate.JsonTypeInfo.Id.CLASS)
-public class PushMessage implements Serializable {
+public class PushMessage extends TrackableEvent {
 
 	private String topic;
 	
 	public PushMessage() {
-		super();
 	}
 	
-	public PushMessage(String topic) {
-		super();
+	public PushMessage(String trackingId, String topic) {
+		super(trackingId);
 		this.topic = topic;
 	}
 

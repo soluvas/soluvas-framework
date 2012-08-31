@@ -13,8 +13,8 @@ public class CollectionCount extends PushMessage {
 		super();
 	}
 
-	public CollectionCount(String topic, String collection, Long size) {
-		super(topic);
+	public CollectionCount(String trackingId, String topic, String collection, Long size) {
+		super(trackingId, topic);
 		this.collection = collection;
 		this.size = size;
 	}

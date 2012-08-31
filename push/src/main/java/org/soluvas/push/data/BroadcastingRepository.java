@@ -25,11 +25,14 @@ public class BroadcastingRepository<ID, T> implements SyncRepository<ID, T>{
 	private transient Logger log = LoggerFactory.getLogger(BroadcastingRepository.class);
 	private SyncRepository<ID, T> delegate;
 	private Channel channel;
+	private String trackingId;
 	private String topic;
 	
-	public BroadcastingRepository(SyncRepository delegate, Connection amqp, String topic) throws IOException {
+	public BroadcastingRepository(SyncRepository delegate, Connection amqp,
+			String trackingId, String topic) throws IOException {
 		super();
 		this.delegate = delegate;
+		this.trackingId = trackingId;
 		this.topic = topic;
 		channel = amqp.createChannel();
 	}
@@ -55,7 +58,7 @@ public class BroadcastingRepository<ID, T> implements SyncRepository<ID, T>{
 	@Override
 	public T create(T entry) {
 		T result = delegate.create(entry);
-		CollectionAdd<T> push = new CollectionAdd<T>(topic, topic, result);
+		CollectionAdd<T> push = new CollectionAdd<T>(trackingId, topic, topic, result);
 		String pushJson = JsonUtils.asJson(push);
 		log.info("Publishing CollectionAdd {} to {}", result, topic);
 		try {
@@ -69,7 +72,7 @@ public class BroadcastingRepository<ID, T> implements SyncRepository<ID, T>{
 	@Override
 	public T update(ID id, T entry) {
 		T result = delegate.update(id, entry);
-		CollectionUpdate<T> push = new CollectionUpdate<T>(topic, topic, String.valueOf(id), result);
+		CollectionUpdate<T> push = new CollectionUpdate<T>(trackingId, topic, topic, String.valueOf(id), result);
 		String pushJson = JsonUtils.asJson(push);
 		log.info("Publishing CollectionUpdate {} to {}", result, topic);
 		try {
@@ -83,7 +86,7 @@ public class BroadcastingRepository<ID, T> implements SyncRepository<ID, T>{
 	@Override
 	public void delete(ID id) {
 		delegate.delete(id);
-		CollectionDelete push = new CollectionDelete(topic, topic, String.valueOf(id));
+		CollectionDelete push = new CollectionDelete(trackingId, topic, topic, String.valueOf(id));
 		String pushJson = JsonUtils.asJson(push);
 		log.info("Publishing CollectionDelete {} to {}", id, topic);
 		try {

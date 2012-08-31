@@ -3,7 +3,7 @@ package org.soluvas.push;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.enterprise.context.ApplicationScoped;
 
@@ -36,27 +36,34 @@ public class QueuedPushListener implements PushListener {
 		}
 		final String trackingId = ((TrackableEvent) (Object) message).getTrackingId();
 		
-		Queue<PushMessage> queue = queues.get(trackingId);
-		if (queue == null) {
-			queue = new SynchronousQueue<PushMessage>();
-			queues.put(trackingId, queue);
+		synchronized (queues) {
+			Queue<PushMessage> queue = queues.get(trackingId);
+			if (queue == null) {
+				queue = new ConcurrentLinkedQueue<PushMessage>();
+				queues.put(trackingId, queue);
+			}
+			log.debug("Tracking {} push message: {}", trackingId, message);
+			queue.add(message);
 		}
-		queue.add(message);
 	}
 	
 	public Map<String, PushMessage> getPushesAndRemove(String trackingId) {
-		Queue<PushMessage> queue = queues.get(trackingId);
-		if (queue == null) {
-			return ImmutableMap.of();
-		}
-		ImmutableMap<String, PushMessage> pushes = Maps.uniqueIndex(queue, new Function<PushMessage, String>() {
-			@Override
-			public String apply(PushMessage input) {
-				return "/topic/" + input.getTopic();
+		synchronized (queues) {
+			Queue<PushMessage> queue = queues.get(trackingId);
+			if (queue == null) {
+				log.debug("Queue tracker {} empty", trackingId);
+				return ImmutableMap.of();
 			}
-		});
-		queues.remove(trackingId);
-		return pushes;
+			ImmutableMap<String, PushMessage> pushes = Maps.uniqueIndex(queue, new Function<PushMessage, String>() {
+				@Override
+				public String apply(PushMessage input) {
+					return "/topic/" + input.getTopic();
+				}
+			});
+			log.debug("Queue tracker {} contained {} messages, now removing", trackingId, pushes.size());
+			queues.remove(trackingId);
+			return pushes;
+		}
 	}
 
 }

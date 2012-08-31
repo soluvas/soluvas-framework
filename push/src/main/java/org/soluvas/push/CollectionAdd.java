@@ -15,14 +15,14 @@ public class CollectionAdd<T> extends PushMessage {
 	}
 
 	@Deprecated
-	public CollectionAdd(String topic, String collection, T entry) {
-		super(topic);
+	public CollectionAdd(String trackingId, String topic, String collection, T entry) {
+		super(trackingId, topic);
 		this.collection = collection;
 		this.entry = entry;
 	}
 	
-	public CollectionAdd(String topic, String collection, T entry, long position) {
-		super(topic);
+	public CollectionAdd(String trackingId, String topic, String collection, T entry, long position) {
+		super(trackingId, topic);
 		this.collection = collection;
 		this.entry = entry;
 		this.position = position;
