@@ -55,7 +55,7 @@ public class BroadcastingRepository<ID, T> implements SyncRepository<ID, T>{
 	@Override
 	public T create(T entry) {
 		T result = delegate.create(entry);
-		CollectionAdd<T> push = new CollectionAdd<T>(topic, result);
+		CollectionAdd<T> push = new CollectionAdd<T>(topic, topic, result);
 		String pushJson = JsonUtils.asJson(push);
 		log.info("Publishing CollectionAdd {} to {}", result, topic);
 		try {
@@ -69,7 +69,7 @@ public class BroadcastingRepository<ID, T> implements SyncRepository<ID, T>{
 	@Override
 	public T update(ID id, T entry) {
 		T result = delegate.update(id, entry);
-		CollectionUpdate<T> push = new CollectionUpdate<T>(topic, String.valueOf(id), result);
+		CollectionUpdate<T> push = new CollectionUpdate<T>(topic, topic, String.valueOf(id), result);
 		String pushJson = JsonUtils.asJson(push);
 		log.info("Publishing CollectionUpdate {} to {}", result, topic);
 		try {
@@ -83,7 +83,7 @@ public class BroadcastingRepository<ID, T> implements SyncRepository<ID, T>{
 	@Override
 	public void delete(ID id) {
 		delegate.delete(id);
-		CollectionDelete push = new CollectionDelete(topic, String.valueOf(id));
+		CollectionDelete push = new CollectionDelete(topic, topic, String.valueOf(id));
 		String pushJson = JsonUtils.asJson(push);
 		log.info("Publishing CollectionDelete {} to {}", id, topic);
 		try {
