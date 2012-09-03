@@ -19,9 +19,9 @@ public class SocialPerson extends Person {
 	@LdapAttribute("primaryMail") private String primaryEmail;
 	@LdapAttribute("photoId") private String photoId;
 	@LdapAttribute("gender") private Gender gender;
-	@LdapAttribute("fbId") private Long facebookId;
-	@LdapAttribute("fbUser") private String facebookUsername;
-	@LdapAttribute("fbAccessToken") private String facebookAccessToken;
+	@LdapAttribute({"fbId", "facebookId"}) private Long facebookId;
+	@LdapAttribute({"fbUser", "facebookUser"}) private String facebookUsername;
+	@LdapAttribute({"fbAccessToken", "facebookAccessToken"}) private String facebookAccessToken;
 	@LdapAttribute("twitterId") private Long twitterId;
 	@LdapAttribute("twitterScreenName") private String twitterScreenName;
 	@LdapAttribute("virtualMail") private String virtualMail;

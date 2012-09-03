@@ -19,9 +19,9 @@ import java.lang.annotation.Target;
 public @interface LdapAttribute {
 
 	/**
-	 * Name of the LDAP attribute.
+	 * Name(s) of the LDAP attribute.
 	 * @return
 	 */
-	String value();
+	String[] value();
 	
 }
