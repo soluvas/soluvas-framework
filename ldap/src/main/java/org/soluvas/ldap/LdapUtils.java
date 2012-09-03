@@ -3,6 +3,7 @@ package org.soluvas.ldap;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.List;
+import java.util.Set;
 
 import javax.net.ssl.X509TrustManager;
 
@@ -16,13 +17,17 @@ import org.apache.directory.shared.ldap.model.entry.Value;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
 import org.apache.directory.shared.ldap.model.exception.LdapURLEncodingException;
 import org.apache.directory.shared.ldap.model.message.ModifyRequestImpl;
+import org.apache.directory.shared.ldap.model.message.ModifyResponse;
+import org.apache.directory.shared.ldap.model.message.ResultCodeEnum;
 import org.apache.directory.shared.ldap.model.url.LdapUrl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 
 /**
  * Manages {@link Entry} objects inside a base DN entry.
@@ -30,6 +35,13 @@ import com.google.common.collect.ImmutableSet;
  */
 public class LdapUtils {
 	
+	public static class ValueToString implements Function<Value<?>, String> {
+		@Override
+		public String apply(Value<?> input) {
+			return input.getString();
+		}
+	}
+
 	private transient static Logger log = LoggerFactory.getLogger(LdapUtils.class);
 
 	/**
@@ -88,11 +100,38 @@ public class LdapUtils {
 	 */
 	public static void update(LdapConnection conn, Entry entry,
 			boolean removeExtraAttributes, String... excludedAttributes) throws LdapException {
+		Entry existing = conn.lookup(entry.getDn());
+		ModifyRequestImpl req = createModifyRequest(entry, existing,
+				removeExtraAttributes, excludedAttributes);
+		if (!req.getModifications().isEmpty()) {
+			log.info("Modify {}: {}", entry.getDn(), req);
+			ModifyResponse response = conn.modify(req);
+			if (response.getLdapResult().getResultCode() != ResultCodeEnum.SUCCESS) {
+				log.error("Cannot modify entry " + entry.getDn() + ": " + response.getLdapResult().getResultCode() + " - " +
+						response.getLdapResult().getDiagnosticMessage());
+				throw new LdapException("Cannot modify entry " + entry.getDn() + ": " + response.getLdapResult().getResultCode() + " - " +
+						response.getLdapResult().getDiagnosticMessage());
+			}
+		} else {
+			log.info("Not modifying {} because there are no changes", entry.getDn());
+		}
+	}
+
+	/**
+	 * @param conn
+	 * @param entry
+	 * @param removeExtraAttributes
+	 * @param excludedAttributes
+	 * @return
+	 * @throws LdapException
+	 */
+	protected static ModifyRequestImpl createModifyRequest(
+			Entry entry, Entry existing, boolean removeExtraAttributes,
+			String... excludedAttributes) throws LdapException {
 		log.info("Updating entry {}, removeExtraAttributes: {}, excludedAttributes: {}", new Object[] {
 				entry.getDn(), removeExtraAttributes, excludedAttributes });
-		Entry existing = conn.lookup(entry.getDn());
 
-		ImmutableSet<String> excludedAttributeSet = ImmutableSet.copyOf(excludedAttributes);
+		Set<String> excludedAttributeSet = ImmutableSet.copyOf(excludedAttributes);
 		
 		ModifyRequestImpl req = new ModifyRequestImpl();
 		req.setName(entry.getDn());
@@ -101,16 +140,17 @@ public class LdapUtils {
 				continue;
 			if (excludedAttributeSet.contains(a.getId()))
 				continue;
-			ImmutableSet<Value<?>> newValues = ImmutableSet.copyOf(a);
+			Set<String> newValues = ImmutableSet.copyOf(Iterables.transform(a, new ValueToString()));
+			Set<String> oldValues = ImmutableSet.of();
 			if (existing.containsAttribute(a.getId())) {
-				// make sure the new values are different, or ignore
-				ImmutableSet<Value<?>> oldValues = ImmutableSet.copyOf( existing.get(a.getId()) );
-				if (oldValues.equals(newValues))
-					continue;
+				oldValues = ImmutableSet.copyOf( Iterables.transform(existing.get(a.getId()), new ValueToString()) );
 			}
-			log.debug("Replace {} in {} with {}", new Object[] {
-					a.getId(), entry.getDn(), newValues });
-			req.replace(a);
+			// make sure the new values are different, or ignore
+			if (!oldValues.equals(newValues)) {
+				log.debug("Replace {} in {}, {} => {}", new Object[] {
+						a.getId(), entry.getDn(), oldValues, newValues });
+				req.replace(a);
+			}
 		}
 		if (removeExtraAttributes) {
 			for (Attribute a : existing) {
@@ -125,12 +165,7 @@ public class LdapUtils {
 				}
 			}
 		}
-		if (!req.getModifications().isEmpty()) {
-			log.info("Modify {}: {}", entry.getDn(), req);
-			conn.modify(req);
-		} else {
-			log.info("Not modifying {} because there are no changes", entry.getDn());
-		}
+		return req;
 	}
 	
 	/**

@@ -130,14 +130,14 @@ public class Person implements Serializable, User {
 	}
 
 	/**
-	 * @return the password
+	 * @return the password, may be encoded e.g. <code>{SSHA}BacKnhFVjpSunHYgivCVPAzcavAZZe9QFtd51A==<code> 
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password the password to set, may be encoded e.g. <code>{SSHA}BacKnhFVjpSunHYgivCVPAzcavAZZe9QFtd51A==<code>
 	 */
 	public void setPassword(String password) {
 		this.password = password;

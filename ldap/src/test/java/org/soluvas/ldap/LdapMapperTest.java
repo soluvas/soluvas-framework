@@ -40,8 +40,7 @@ public class LdapMapperTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void canMapSimpleClassToEntry() throws LdapInvalidAttributeValueException {
+	@Test public void canMapSimpleClassToEntry() throws LdapInvalidAttributeValueException {
 		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "hendy@soluvas.com");
 		log.info("Input Person: {}", hendy);
 		
@@ -107,8 +106,7 @@ public class LdapMapperTest {
 		assertEquals("hendyirawan", entry.get("twitterScreenName").getString());
 	}
 
-	@Test
-	public void canMapEntryToSimpleClass() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
+	@Test public void canMapEntryToSimpleClass() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
 		Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		entry.put("objectClass", "organizationalPerson", "extensibleObject");
 		entry.put("uid", "hendy");
@@ -128,6 +126,20 @@ public class LdapMapperTest {
 		assertEquals("Irawan", person.getLastName());
 		assertEquals("Hendy Irawan", person.getName());
 		assertEquals(ImmutableSet.of("hendy@soluvas.com"), person.getEmails());
+	}
+
+	@Test public void mapsUserPasswordCorrectly() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
+		Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		entry.put("objectClass", "organizationalPerson", "extensibleObject");
+		entry.put("uid", "hendy");
+		final String password = "{SSHA}BacKnhFVjpSunHYgivCVPAzcavAZZe9QFtd51A==";
+		entry.put("userPassword", password.getBytes());
+		log.info("Input Entry: {}", entry);
+		
+		Person person = mapper.fromEntry(entry, Person.class);
+		log.info("Output Person: {}", person);
+		
+		assertEquals(password, person.getPassword());
 	}
 
 	@Test

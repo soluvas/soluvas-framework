@@ -19,9 +19,9 @@ import com.google.common.collect.Lists;
  * Test {@link LdapRepository} for {@link SocialPerson}.
  * @author ceefour
  */
-public class LdapRepositoryTest {
+public class LdapRepositoryImplTest {
 
-	private transient Logger log = LoggerFactory.getLogger(LdapRepositoryTest.class);
+	private transient Logger log = LoggerFactory.getLogger(LdapRepositoryImplTest.class);
 	private LdapNetworkConnection conn;
 	private LdapRepository<SocialPerson> personRepo;
 
@@ -33,6 +33,7 @@ public class LdapRepositoryTest {
 		conn = new LdapNetworkConnection("localhost", 10389);
 		conn.bind("uid=admin,ou=system", "secret");
 		personRepo = new LdapRepositoryImpl<SocialPerson>(SocialPerson.class, conn, "ou=users,dc=aksimata,dc=com");
+		personRepo.init();
 	}
 
 	/**
