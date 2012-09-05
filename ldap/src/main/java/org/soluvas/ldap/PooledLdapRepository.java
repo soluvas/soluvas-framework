@@ -53,18 +53,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	}
 	
 	protected <V> V withConnection(Function<LdapConnection, V> function) {
-		try {
-			LdapConnection conn = pool.getConnection();
-			try {
-				return function.apply(conn);
-			} finally {
-				pool.releaseConnection(conn);
-			}
-		} catch (Exception e) {
-			log.error("LDAP operation error", e);
-			Throwables.propagate(e);
-			return null;
-		}
+		return LdapUtils.withConnection(pool, function);
 	}
 	
 	public void init() {

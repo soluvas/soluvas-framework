@@ -9,6 +9,7 @@ import javax.net.ssl.X509TrustManager;
 
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
+import org.apache.directory.ldap.client.api.LdapConnectionPool;
 import org.apache.directory.ldap.client.api.PoolableLdapConnectionFactory;
 import org.apache.directory.shared.ldap.model.cursor.EntryCursor;
 import org.apache.directory.shared.ldap.model.entry.Attribute;
@@ -25,6 +26,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -188,4 +190,18 @@ public class LdapUtils {
 		}
 	}
 
+	public static <V> V withConnection(LdapConnectionPool ldapPool, Function<LdapConnection, V> function) {
+		try {
+			LdapConnection conn = ldapPool.getConnection();
+			try {
+				return function.apply(conn);
+			} finally {
+				ldapPool.releaseConnection(conn);
+			}
+		} catch (Exception e) {
+			log.error("LDAP operation error", e);
+			Throwables.propagate(e);
+			return null;
+		}
+	}
 }
