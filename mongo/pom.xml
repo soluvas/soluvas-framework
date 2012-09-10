@@ -45,5 +45,15 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
+	
+	<repositories>
+		<repository>
+			<id>morphia</id>
+			<url>http://morphia.googlecode.com/svn/mavenrepo</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 </project>
