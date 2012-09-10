@@ -25,6 +25,7 @@
 		<module>async</module>
 		<module>push</module>
 		<module>multitenant</module>
+		<module>mongo</module>
 		<!-- Backends -->
 		<module>image-store</module>
 		<module>apacheds</module>
