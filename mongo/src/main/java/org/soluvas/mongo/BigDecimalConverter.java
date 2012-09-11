@@ -24,7 +24,9 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 	@Override
 	public Object decode(Class targetClass, Object fromDBObject,
 			MappedField optionalExtraInfo) throws MappingException {
-		if (fromDBObject instanceof Double)
+		if (fromDBObject == null)
+			return null;
+		else if (fromDBObject instanceof Double)
 			return new BigDecimal((Double)fromDBObject);
 		else
 			return new BigDecimal((String)fromDBObject);
@@ -32,7 +34,7 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 
 	@Override
 	public Object encode(Object value, MappedField optionalExtraInfo) {
-		return value.toString();
+		return value != null ? value.toString() : null;
 	}
 
 }

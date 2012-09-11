@@ -3,6 +3,9 @@ package org.soluvas.json;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -16,6 +19,9 @@ import com.fasterxml.jackson.databind.deser.std.StdScalarDeserializer;
  */
 public class LowerEnumDeserializer extends StdScalarDeserializer<Enum<?>> {
 
+	private transient Logger log = LoggerFactory
+			.getLogger(LowerEnumDeserializer.class);
+	
 	protected LowerEnumDeserializer(Class<Enum<?>> clazz) {
 		super(clazz);
 	}
@@ -23,11 +29,15 @@ public class LowerEnumDeserializer extends StdScalarDeserializer<Enum<?>> {
 	@Override
 	public Enum<?> deserialize(JsonParser jp, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {
-		String text = jp.getText().toUpperCase();
+		final String jpText = jp.getText();
+		if (jpText == null)
+			return null;
+		String text = jpText.toUpperCase();
 		try {
 			Method valueOfMethod = getValueClass().getDeclaredMethod("valueOf", String.class);
 			return (Enum<?>) valueOfMethod.invoke(null, text);
 		} catch (Exception e) {
+			log.error("Cannot deserialize enum " + getValueClass().getName() + " from " + text, e);
 			throw new RuntimeException("Cannot deserialize enum " + getValueClass().getName() + " from " + text, e);
 		}
 	}
