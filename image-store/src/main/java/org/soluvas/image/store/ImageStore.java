@@ -114,6 +114,10 @@ public class ImageStore {
 	private final DefaultHttpClient client = new DefaultHttpClient(new PoolingClientConnectionManager());
 	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<String, ImageStyle>();
 	
+	private String maleDefaultPhotoID;
+	private String femaleDefaultPhotoID;
+	private String defaultPhotoID;
+	
 	public class DBObjectToImage implements Function<DBObject, Image> {
 		@Override
 		public Image apply(DBObject input) {
@@ -309,6 +313,20 @@ public class ImageStore {
 		String extension = "jpg";
 		String code = styleName == ORIGINAL_NAME ? ORIGINAL_CODE : styles.get(styleName).getCode(); 
 		return URI.create(String.format("%s%s/%s/%s_%s.%s", publicUri, namespace, code, id, code, extension));
+	}
+	
+	/**
+	 * @param gender
+	 * @return default default image user according by gender
+	 */
+	public String getDefaultUserImage(String gender) {
+		log.debug("Current User Gender {}", gender);
+		if (gender == "MALE")
+			return this.getMaleDefaultPhotoID();
+		else if (gender == "FEMALE")
+			return this.getFemaleDefaultPhotoID();
+		else 
+			return "Unknown";
 	}
 	
 	/**
@@ -823,6 +841,34 @@ public class ImageStore {
 //		this.system = system;
 //	}
 	public void setSystem(Object system) {
+	}
+
+	/**
+	 * @return the maleDefaultPhotoID
+	 */
+	public String getMaleDefaultPhotoID() {
+		return maleDefaultPhotoID;
+	}
+
+	/**
+	 * @return the femaleDefaultPhotoID
+	 */
+	public String getFemaleDefaultPhotoID() {
+		return femaleDefaultPhotoID;
+	}
+
+	/**
+	 * @param maleDefaultPhotoID the maleDefaultPhotoID to set
+	 */
+	public void setMaleDefaultPhotoID(String maleDefaultPhotoID) {
+		this.maleDefaultPhotoID = maleDefaultPhotoID;
+	}
+
+	/**
+	 * @param femaleDefaultPhotoID the femaleDefaultPhotoID to set
+	 */
+	public void setFemaleDefaultPhotoID(String femaleDefaultPhotoID) {
+		this.femaleDefaultPhotoID = femaleDefaultPhotoID;
 	}
 
 }
