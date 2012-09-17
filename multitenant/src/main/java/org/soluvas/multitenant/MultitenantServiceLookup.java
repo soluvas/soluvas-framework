@@ -1,6 +1,5 @@
 package org.soluvas.multitenant;
 
-
 import javax.annotation.Nonnull;
 
 import org.apache.felix.service.command.CommandSession;

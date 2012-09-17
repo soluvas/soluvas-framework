@@ -34,7 +34,7 @@
 	</licenses>
 
 	<properties>
-		<karaf.version>2.2.8</karaf.version>
+		<karaf.version>2.2.9</karaf.version>
 
 		<akka.version>2.0.2</akka.version>
 		<scala.version>2.9.2</scala.version>
