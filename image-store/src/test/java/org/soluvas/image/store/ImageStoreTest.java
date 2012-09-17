@@ -40,7 +40,8 @@ public class ImageStoreTest {
 	@Test
 	public void shouldCreateSuccessfully() throws FileNotFoundException, IOException {
 		File file = new File("/together/project/AksiMata/sample/Shaun-udah-mau-makan.jpg");
-		String imageId = imageStore.create(file.getName(), new FileInputStream(file), "image/jpeg", file.length(), "Shaun udah mau makan");
+//		String imageId = imageStore.create(file.getName(), new FileInputStream(file), "image/jpeg", file.length(), "Shaun udah mau makan");
+		String imageId = imageStore.add(new Image(file, "image/jpeg", "Shaun udah mau makan"));
 		System.out.println("Created image " + imageId);
 		Assert.assertNotNull(imageId);
 	}

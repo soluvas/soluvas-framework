@@ -331,6 +331,7 @@ public class ImageStore {
 	
 	/**
 	 * Add an {@link Image} from an {@link InputStream}. This method makes use of a temporary file.
+	 * @deprecated Better use {@link ImageStore#add(Image)}.
 	 * @param fileName
 	 * @param content
 	 * @param contentType
