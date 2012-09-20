@@ -21,6 +21,8 @@ public class MongoUtils {
 	 * @return
 	 */
 	public static List<? extends DBObject> asList(DBCursor cursor) {
+		if (cursor == null)
+			return ImmutableList.of();
 		try {
 			return ImmutableList.copyOf((Iterable<? extends DBObject>) cursor);
 		} finally {
@@ -36,6 +38,8 @@ public class MongoUtils {
 	 * @return
 	 */
 	public static <T> List<T> transform(DBCursor cursor, Function<DBObject, T> transformer) {
+		if (cursor == null)
+			return ImmutableList.of();
 		try {
 			return ImmutableList.copyOf( Iterables.transform(cursor, transformer) );
 		} finally {
