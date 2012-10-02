@@ -5,8 +5,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 
+import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.ldap.client.api.LdapConnection;
-import org.apache.directory.ldap.client.api.LdapConnectionPool;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
 import org.apache.directory.shared.ldap.model.message.SearchScope;
@@ -28,16 +28,9 @@ import com.google.common.collect.Lists;
 public class PooledLdapRepository<T> implements LdapRepository<T> {
 
 	private transient Logger log = LoggerFactory.getLogger(PooledLdapRepository.class);
-	@Inject private transient LdapConnectionPool pool;
+	@Inject private transient ObjectPool<LdapConnection> pool;
 	private LdapMapper mapper;
-	public LdapConnectionPool getPool() {
-		return pool;
-	}
-
-	public void setPool(LdapConnectionPool pool) {
-		this.pool = pool;
-	}
-
+	
 	private String baseDn;
 	private Class<T> entityClass;
 
@@ -45,7 +38,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 		super();
 	}
 	
-	public PooledLdapRepository(Class<T> entityClass, LdapConnectionPool pool, String baseDn) {
+	public PooledLdapRepository(Class<T> entityClass, ObjectPool<LdapConnection> pool, String baseDn) {
 		super();
 		this.entityClass = entityClass;
 		this.pool = pool;
@@ -326,6 +319,14 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 */
 	public LdapMapper getMapper() {
 		return mapper;
+	}
+
+	public ObjectPool<LdapConnection> getPool() {
+		return pool;
+	}
+
+	public void setPool(ObjectPool<LdapConnection> pool) {
+		this.pool = pool;
 	}
 
 	@Override

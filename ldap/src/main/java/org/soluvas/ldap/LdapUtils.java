@@ -7,9 +7,9 @@ import java.util.Set;
 
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
-import org.apache.directory.ldap.client.api.LdapConnectionPool;
 import org.apache.directory.ldap.client.api.PoolableLdapConnectionFactory;
 import org.apache.directory.shared.ldap.model.cursor.EntryCursor;
 import org.apache.directory.shared.ldap.model.entry.Attribute;
@@ -190,13 +190,13 @@ public class LdapUtils {
 		}
 	}
 
-	public static <V> V withConnection(LdapConnectionPool ldapPool, Function<LdapConnection, V> function) {
+	public static <V> V withConnection(ObjectPool<LdapConnection> ldapPool, Function<LdapConnection, V> function) {
 		try {
-			LdapConnection conn = ldapPool.getConnection();
+			LdapConnection conn = ldapPool.borrowObject();
 			try {
 				return function.apply(conn);
 			} finally {
-				ldapPool.releaseConnection(conn);
+				ldapPool.returnObject(conn);
 			}
 		} catch (Exception e) {
 			log.error("LDAP operation error", e);
