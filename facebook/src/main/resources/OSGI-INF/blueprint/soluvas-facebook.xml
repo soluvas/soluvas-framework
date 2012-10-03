@@ -1,0 +1,22 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+	<bean id="contextHelper" class="org.soluvas.facebook.ContextHelper" destroy-method="destroy"/>
+	<bean id="executor" factory-ref="contextHelper" factory-method="getExecutor"/>
+	<bean id="httpClient" factory-ref="contextHelper" factory-method="getHttpClient"/>
+	
+	<bean id="friendListDownloader" class="org.soluvas.facebook.FriendListDownloader">
+		<argument ref="httpClient"/>
+		<argument ref="executor"/>
+	</bean>
+	<bean id="userListParser" class="org.soluvas.facebook.UserListParser">
+		<argument ref="executor"/>
+	</bean>
+	<bean id="facebookUtils" class="org.soluvas.facebook.FacebookUtils">
+		<argument ref="friendListDownloader"/>
+		<argument ref="userListParser"/>
+	</bean>
+	<service ref="facebookUtils" auto-export="all-classes"/>
+	
+</blueprint>

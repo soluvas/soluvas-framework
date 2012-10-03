@@ -3,6 +3,8 @@ package org.soluvas.facebook;
 import java.net.URI;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import javax.inject.Inject;
@@ -17,6 +19,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
  * Inspired by org.soluvas.fbcli.FriendListDownloader.
@@ -24,7 +27,7 @@ import com.google.common.collect.Lists;
  */
 public class FacebookUtils {
 	
-	private transient Logger log = LoggerFactory.getLogger(FacebookUtils.class);
+	private transient static Logger log = LoggerFactory.getLogger(FacebookUtils.class);
 	@Inject private FriendListDownloader friendListDownloader;
 	@Inject private UserListParser userListParser;
 	private LoadingCache<String, List<HintPerson>> friendListCache;
@@ -90,5 +93,5 @@ public class FacebookUtils {
 			throw new RuntimeException("Cannot find friends", e);
 		}
 	}
-
+	
 }
