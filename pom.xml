@@ -29,6 +29,8 @@
 		<!-- Backends -->
 		<module>image-store</module>
 		<module>apacheds</module>
+		<!-- Others -->
+		<module>facebook</module>
 	</modules>
 
 </project>
