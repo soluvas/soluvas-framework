@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 import javax.inject.Inject;
 
@@ -12,12 +14,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import akka.actor.ActorSystem;
-import akka.dispatch.Await;
-import akka.dispatch.Future;
-import akka.dispatch.Futures;
-import akka.util.Duration;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,15 +28,15 @@ public class FriendListDownloader {
 
 	private transient Logger log = LoggerFactory.getLogger(FriendListDownloader.class);
 	@Inject HttpClient httpClient;
-	@Inject ActorSystem actorSystem;
+	@Inject ExecutorService executor;
 	
 	public FriendListDownloader() {
 	}
 	
-	public FriendListDownloader(HttpClient httpClient, ActorSystem actorSystem) {
+	public FriendListDownloader(HttpClient httpClient, ExecutorService executor) {
 		super();
 		this.httpClient = httpClient;
-		this.actorSystem = actorSystem;
+		this.executor = executor;
 	}
 
 	/**
@@ -50,7 +46,7 @@ public class FriendListDownloader {
 	 * @return JSON Node containing first page of friend list.
 	 */
 	public Future<JsonNode> fetchFriendsPage(final URI uri) {
-		return Futures.future(new Callable<JsonNode>() {
+		return executor.submit(new Callable<JsonNode>() {
 			@Override
 			public JsonNode call() throws Exception {
 				log.info("Fetching friends page {}", uri);
@@ -62,7 +58,7 @@ public class FriendListDownloader {
 				JsonNode json = mapper.readTree(friendsResp.getEntity().getContent());
 				return json;
 			}
-		}, actorSystem.dispatcher());
+		});
 	}
 	
 	/**
@@ -71,7 +67,7 @@ public class FriendListDownloader {
 	 * @return List of JSON Nodes (one {@link JsonNode} per page), containing friend list.
 	 */
 	public Future<List<JsonNode>> fetchFriendsPages(final URI uri) {
-		return Futures.future(new Callable<List<JsonNode>>() {
+		return executor.submit(new Callable<List<JsonNode>>() {
 			@Override
 			public List<JsonNode> call() throws Exception {
 				ArrayList<JsonNode> pages = Lists.newArrayList();
@@ -81,7 +77,8 @@ public class FriendListDownloader {
 				while (currentUri != null) {
 					Future<JsonNode> page = fetchFriendsPage(currentUri);
 					currentUri = null;
-					JsonNode json = Await.result(page, Duration.Inf());
+					
+					JsonNode json = page.get();
 					pages.add(json);
 					
 //					mapper.writeValue(System.out, json);
@@ -99,7 +96,7 @@ public class FriendListDownloader {
 				}
 				return pages;
 			}
-		}, actorSystem.dispatcher());
+		});
 	}
 	
 }

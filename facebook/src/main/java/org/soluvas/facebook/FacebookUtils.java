@@ -3,16 +3,13 @@ package org.soluvas.facebook;
 import java.net.URI;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import javax.inject.Inject;
 
 import org.apache.http.client.utils.URIBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import akka.dispatch.Await;
-import akka.dispatch.Future;
-import akka.util.Duration;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Function;
@@ -62,10 +59,12 @@ public class FacebookUtils {
 				.addParameter("limit", "250")
 				.build();
 			Future<List<JsonNode>> pagesFuture = friendListDownloader.fetchFriendsPages(friendsPageUri);
-			List<JsonNode> pages = Await.result(pagesFuture, Duration.Inf());
+			List<JsonNode> pages = pagesFuture.get();
+//			List<JsonNode> pages = Await.result(pagesFuture, Duration.Inf());
 			
 			// Parse user list from JSON nodes
-			List<UserRef> userList = Await.result(userListParser.parseNodes(pages), Duration.Inf());
+			List<UserRef> userList = userListParser.parseNodes(pages).get();
+//			List<UserRef> userList = Await.result(userListParser.parseNodes(pages), Duration.Inf());
 			log.info("Parsed {} users", userList.size());
 			
 			List<HintPerson> hintPeople = Lists.transform(userList, new Function<UserRef, HintPerson>() {
