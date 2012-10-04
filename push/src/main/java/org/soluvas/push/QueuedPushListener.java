@@ -20,6 +20,7 @@ import com.google.common.eventbus.Subscribe;
  * FIXME: Use Multimap when it's done
  * @author ceefour
  */
+@SuppressWarnings("deprecation")
 @ApplicationScoped
 public class QueuedPushListener implements PushListener {
 
