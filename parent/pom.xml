@@ -225,6 +225,22 @@
 			</dependency>
 
 			<dependency>
+				<groupId>org.osgi</groupId>
+				<artifactId>org.osgi.enterprise</artifactId>
+				<version>4.2.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osgi</groupId>
+				<artifactId>org.osgi.compendium</artifactId>
+				<version>4.2.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osgi</groupId>
+				<artifactId>org.osgi.core</artifactId>
+				<version>4.2.0</version>
+			</dependency>
+
+			<dependency>
 				<groupId>javax.ws.rs</groupId>
 				<artifactId>jsr311-api</artifactId>
 				<version>1.1.1</version>
