@@ -11,17 +11,17 @@
 		<service-properties>
 			<entry key="className" value="com.fasterxml.jackson.databind.Module"/>
 		</service-properties>
-		<bean class="org.soluvas.json.SimpleSupplier">
+		<bean class="com.google.common.base.Suppliers" factory-method="ofInstance">
 			<argument>
 				<bean class="com.fasterxml.jackson.datatype.joda.JodaModule"/>
 			</argument>
-		</bean>
+		</bean>		
 	</service>
 	<service auto-export="interfaces">
 		<service-properties>
 			<entry key="className" value="com.fasterxml.jackson.databind.Module"/>
 		</service-properties>
-		<bean class="org.soluvas.json.SimpleSupplier">
+		<bean class="com.google.common.base.Suppliers" factory-method="ofInstance">
 			<argument>
 				<bean class="com.fasterxml.jackson.datatype.guava.GuavaModule"/>
 			</argument>
@@ -31,17 +31,17 @@
 		<service-properties>
 			<entry key="className" value="com.fasterxml.jackson.databind.Module"/>
 		</service-properties>
-		<bean class="org.soluvas.json.SimpleSupplier">
+		<bean class="com.google.common.base.Suppliers" factory-method="ofInstance">
 			<argument>
 				<bean class="org.soluvas.json.money.JodaMoneyModule"/>
 			</argument>
-		</bean>
+		</bean>		
 	</service>
   	<service auto-export="interfaces">
 		<service-properties>
 			<entry key="className" value="com.fasterxml.jackson.databind.Module"/>
 		</service-properties>
-		<bean class="org.soluvas.json.SimpleSupplier">
+		<bean class="com.google.common.base.Suppliers" factory-method="ofInstance">
 			<argument>
 				<bean class="org.soluvas.json.LowerEnumModule"/>
 			</argument>
