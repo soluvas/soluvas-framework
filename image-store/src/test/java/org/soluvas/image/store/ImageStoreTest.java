@@ -14,14 +14,14 @@ import org.junit.Test;
 
 public class ImageStoreTest {
 
-	private ImageStore imageStore;
+	private ImageRepository imageStore;
 
 	@Before
 	public void setUp() throws Exception {
 		Properties props = new Properties();
 		props.load(ImageStoreTest.class.getResourceAsStream("/soluvas-image-store.properties"));
 		
-		imageStore = new ImageStore();
+		imageStore = new MongoImageRepository();
 		imageStore.addStyle("thumbnail", "t", 50, 50);
 		imageStore.addStyle("small", "s", 125, 125);
 		imageStore.addStyle("normal", "n", 240, 320);

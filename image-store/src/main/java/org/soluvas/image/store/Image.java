@@ -26,12 +26,12 @@ public class Image {
 	private Map<String, StyledImage> styles;
 	/**
 	 * Only used for creating/uploading new image. Otherwise it's always null.
-	 * @see ImageStore#add(Image)
+	 * @see MongoImageRepository#add(Image)
 	 */
 	private File originalFile;
 	/**
 	 * Only used for creating/uploading new image. Otherwise it's always null.
-	 * @see ImageStore#add(Image)
+	 * @see MongoImageRepository#add(Image)
 	 */
 	private String name;
 	
@@ -40,7 +40,7 @@ public class Image {
 	}
 	
 	/**
-	 * Convenience constructor for passing to {@link ImageStore#add(Image)}.
+	 * Convenience constructor for passing to {@link MongoImageRepository#add(Image)}.
 	 * @param originalFile
 	 * @param contentType
 	 * @param name
@@ -52,10 +52,10 @@ public class Image {
 		this.name = name;
 	}
 
-	public Image(ImageStore imageStore, BasicBSONObject dbo) {
+	public Image(ImageRepository imageStore, BasicBSONObject dbo) {
 		super();
 		id = dbo.getString("_id");
-		uri = imageStore.getImagePublicUri(id, ImageStore.ORIGINAL_NAME);
+		uri = imageStore.getImagePublicUri(id, MongoImageRepository.ORIGINAL_NAME);
 		contentType = dbo.getString("contentType");
 		fileName = dbo.getString("fileName");
 		size = dbo.getLong("size");
@@ -112,7 +112,7 @@ public class Image {
 
 	/**
 	 * Only used for creating/uploading new image. Otherwise it's always null.
-	 * @see ImageStore#add(Image)
+	 * @see MongoImageRepository#add(Image)
 	 */
 	public File getOriginalFile() {
 		return originalFile;
@@ -120,7 +120,7 @@ public class Image {
 
 	/**
 	 * Only used for creating/uploading new image. Otherwise it's always null.
-	 * @see ImageStore#add(Image)
+	 * @see MongoImageRepository#add(Image)
 	 */
 	public void setOriginalFile(File originalFile) {
 		this.originalFile = originalFile;
@@ -128,7 +128,7 @@ public class Image {
 
 	/**
 	 * Only used for creating/uploading new image. Otherwise it's always null.
-	 * @see ImageStore#add(Image)
+	 * @see MongoImageRepository#add(Image)
 	 */
 	public String getName() {
 		return name;
@@ -136,7 +136,7 @@ public class Image {
 
 	/**
 	 * Only used for creating/uploading new image. Otherwise it's always null.
-	 * @see ImageStore#add(Image)
+	 * @see MongoImageRepository#add(Image)
 	 */
 	public void setName(String name) {
 		this.name = name;
