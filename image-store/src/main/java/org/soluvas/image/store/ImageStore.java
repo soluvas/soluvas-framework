@@ -1,7 +1,5 @@
 package org.soluvas.image.store;
 
-<<<<<<< HEAD
-=======
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -72,7 +70,6 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoURI;
 
->>>>>>> branch 'master' of git@github.com:soluvas/soluvas-framework.git
 /**
  * @author rudi
  * @deprecated Use {@link MongoImageRepository}.
@@ -80,8 +77,6 @@ import com.mongodb.MongoURI;
 @Deprecated
 public class ImageStore extends MongoImageRepository {
 
-<<<<<<< HEAD
-=======
 	private transient Logger log = LoggerFactory.getLogger(ImageStore.class);
 	
 	/**
@@ -156,12 +151,9 @@ public class ImageStore extends MongoImageRepository {
 		
 	}
 
->>>>>>> branch 'master' of git@github.com:soluvas/soluvas-framework.git
 	public ImageStore() {
 		super();
 	}
-<<<<<<< HEAD
-=======
 	
 	public boolean exists(@Nullable String id) {
 		log.trace("Exists {} Image {} ?", namespace, id);
@@ -881,7 +873,6 @@ public class ImageStore extends MongoImageRepository {
 	 */
 	public void setFemaleDefaultPhotoID(String femaleDefaultPhotoID) {
 		this.femaleDefaultPhotoID = femaleDefaultPhotoID;
->>>>>>> branch 'master' of git@github.com:soluvas/soluvas-framework.git
 	}
 
 }
