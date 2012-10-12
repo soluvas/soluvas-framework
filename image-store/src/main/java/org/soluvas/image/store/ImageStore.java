@@ -21,10 +21,9 @@ import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
-import javax.imageio.plugins.jpeg.JPEGImageWriteParam;
-import javax.imageio.spi.ImageWriterSpi;
 import javax.imageio.stream.FileImageOutputStream;
 
+import jline.internal.Nullable;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 
@@ -56,7 +55,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.slug.SlugUtils;
 
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Collections2;
@@ -118,19 +117,19 @@ public class ImageStore {
 	private String femaleDefaultPhotoID;
 	private String defaultPhotoID;
 	
-	public class DBObjectToImage implements Function<DBObject, Image> {
-		@Override
-		public Image apply(DBObject input) {
-			return new Image(ImageStore.this, (BasicBSONObject)input);
-		}
-	}
-
 	//	private ActorSystem system;
 	/**
 	 * If true, means the {@link ActorSystem} is owned by {@link ImageStore},
 	 * and should be shutdown when ImageStore is destroyed.
 	 */
 //	private boolean shutdownActorSystem = false;
+
+	public class DBObjectToImage implements Function<DBObject, Image> {
+		@Override
+		public Image apply(DBObject input) {
+			return new Image(ImageStore.this, (BasicBSONObject)input);
+		}
+	}
 
 	public static class ResizeResult {
 		String styleName;
@@ -155,10 +154,29 @@ public class ImageStore {
 		
 	}
 	
+	/**
+	 * ID validity check, fails if the Image ID already exists.
+	 * To be used by {@link SlugUtils#generateValidId(String, Predicate)}.
+	 * @author ceefour
+	 */
+	public class IdValidator implements Predicate<String> {
+		
+		@Override public boolean apply(@Nullable String id) {
+			return !ImageStore.this.exists(id);
+		}
+		
+	}
+
 	public ImageStore() {
 		super();
 	}
 	
+	public boolean exists(@Nullable String id) {
+		log.trace("Exists {} Image {} ?", namespace, id);
+		DBObject dbo = mongoColl.findOne(new BasicDBObject("_id", id));
+		return dbo != null;
+	}
+
 	public ImageStore(String namespace, String davUri, String publicUri,
 			String mongoUri) {
 		super();
@@ -389,12 +407,13 @@ public class ImageStore {
 		}
 	}
 
-	public String doCreate(String existingImageId, final File originalFile, final String contentType,
+	public String doCreate(@Nullable String existingImageId, final File originalFile, final String contentType,
 			final long length, final String name, final String originalName, boolean alsoUploadOriginal) throws IOException {
 //		final String seoName = name + " " + FilenameUtils.getBaseName(fileName);
 		final String seoName1 = SlugUtils.generateId(name, 0);
 		final String seoName2 = SlugUtils.generateId(FilenameUtils.getBaseName(originalName), 0);
-		final String imageId = Optional.fromNullable(existingImageId).or( seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2 );
+		final String imageId = existingImageId != null ? existingImageId :
+			( seoName1.equals(seoName2) ? SlugUtils.generateValidId(seoName1, new IdValidator()) : SlugUtils.generateValidId(seoName1 + "_" + seoName2, new IdValidator()) );
 		final String extension = FilenameUtils.getExtension(originalName);
 		
 		log.debug("Adding image from {} ({} {} bytes) as {}", new Object[] {
