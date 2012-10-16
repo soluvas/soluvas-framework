@@ -34,7 +34,7 @@
 	</licenses>
 
 	<properties>
-		<karaf.version>2.2.9</karaf.version>
+		<karaf.version>2.3.0</karaf.version>
 
 		<akka.version>2.0.2</akka.version>
 		<scala.version>2.9.2</scala.version>
@@ -42,8 +42,8 @@
 		<jackson1.version>1.9.9</jackson1.version>
 		<jackson2.version>2.0.5</jackson2.version>
 
-		<slf4j.version>1.6.6</slf4j.version>
-		<logback.version>1.0.6</logback.version>
+		<slf4j.version>1.7.2</slf4j.version>
+		<logback.version>1.0.7</logback.version>
 		<junit.version>4.10</junit.version>
 	</properties>
 
