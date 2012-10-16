@@ -4,8 +4,11 @@ import java.io.File;
 import java.net.URI;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import org.bson.BasicBSONObject;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Maps.EntryTransformer;
 
@@ -14,6 +17,15 @@ import com.google.common.collect.Maps.EntryTransformer;
  * Image descriptor;
  */
 public class Image {
+	
+	public static class ToId implements Function<Image, String> {
+		
+		@Override @Nullable
+		public String apply(@Nullable Image input) {
+			return input.getId();
+		}
+		
+	}
 
 	private String id;
 	private URI uri;
