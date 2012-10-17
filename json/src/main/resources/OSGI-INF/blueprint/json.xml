@@ -50,11 +50,11 @@
 
 	<reference-list id="jacksonModuleSuppliers" interface="com.google.common.base.Supplier"
 		filter="(className=com.fasterxml.jackson.databind.Module)" availability="optional"/>
-	<bean id="jacksonMapperFactory" class="org.soluvas.json.JacksonMapperFactory"
+	<bean id="jacksonMapperFactory" class="org.soluvas.json.JacksonMapperFactoryImpl"
 		depends-on="jacksonModuleSuppliers">
 		<argument ref="jacksonModuleSuppliers"/>
 	</bean>
-	<service ref="jacksonMapperFactory" auto-export="all-classes">
+	<service ref="jacksonMapperFactory" auto-export="interfaces">
 		<service-properties>
 			<entry key="className" value="com.fasterxml.jackson.databind.ObjectMapper"/>
 		</service-properties>

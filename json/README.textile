@@ -38,8 +38,7 @@ bc. install -s mvn:org.joda/joda-money/0.6.soluvas1
 
 Blueprint XML:
 
-bc. 	<reference id="jacksonMapperFactory" interface="com.google.common.base.Supplier"
-		filter="(className=com.fasterxml.jackson.databind.ObjectMapper)"/>
+bc. <reference id="jacksonMapperFactory" interface="org.soluvas.json.JacksonMapperFactory" />
 
 h2. Usage in CXF OSGi
 
