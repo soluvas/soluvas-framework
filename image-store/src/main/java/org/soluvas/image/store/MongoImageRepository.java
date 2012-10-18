@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
@@ -21,8 +22,6 @@ import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
-import javax.imageio.plugins.jpeg.JPEGImageWriteParam;
-import javax.imageio.spi.ImageWriterSpi;
 import javax.imageio.stream.FileImageOutputStream;
 
 import net.coobird.thumbnailator.Thumbnails;
@@ -902,6 +901,14 @@ public class MongoImageRepository implements ImageRepository {
 	@Override
 	public void setFemaleDefaultPhotoID(String femaleDefaultPhotoID) {
 		this.femaleDefaultPhotoID = femaleDefaultPhotoID;
+	}
+
+	@Override
+	public void deleteMultiple(Set<String> ids) {
+		log.info("Multiple deleting images {}", ids);
+		for (String id : ids) {
+			delete(id);
+		}
 	}
 
 }

@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PreDestroy;
 
@@ -117,6 +118,12 @@ public interface ImageRepository {
 	 * @param id Image ID.
 	 */
 	public abstract void delete(String id);
+	
+	/**
+	 * Delete multiple images with the specified ID, from the MongoDB metadata including all files and styled images from WebDAV.
+	 * @param id Image IDs.
+	 */
+	public abstract void deleteMultiple(Set<String> ids);
 
 	public abstract Image findOne(String id);
 
