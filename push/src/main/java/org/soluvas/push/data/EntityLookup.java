@@ -1,28 +1,15 @@
 package org.soluvas.push.data;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.annotation.Nonnull;
 
-import com.google.common.base.Function;
 
 /**
  * A entity lookup function without cache.
- * @see CachingEntityLookup
+ * @see CachingEntityLookup, {@link RepositoryEntityLookup}
  * @author ceefour
  */
-public class EntityLookup<ID, T> implements Function<ID, T> {
+public interface EntityLookup<ID, T> {
 
-	private transient Logger log = LoggerFactory
-			.getLogger(EntityLookup.class);
-	private SyncRepository<ID, T> repository;
-	
-	public EntityLookup(final SyncRepository<ID, T> repository) {
-		super();
-		this.repository = repository;
-	}
-
-	public T apply(ID id) {
-		return repository.findOne(id);
-	}
+	public <U extends T> U findOne(@Nonnull ID id);
 	
 }
