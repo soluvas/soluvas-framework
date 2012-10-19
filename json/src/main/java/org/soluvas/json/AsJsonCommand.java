@@ -17,7 +17,7 @@ public class AsJsonCommand extends OsgiCommandSupport {
 	
 	private ObjectMapper mapper;
 	
-	@Argument(name="OBJECT", required=true, description="Object to format as JSON, e.g. (process:find hello).")
+	@Argument(name="object", required=true, description="Object to format as JSON, e.g. (process:find hello).")
 	private Object input;
 	
 	public AsJsonCommand(ObjectMapper mapper) {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_OHFzIBnPEeKuD9M24pvFUQ" type="EcoreTools" name="image" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_OsrMcBnPEeKuD9M24pvFUQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_OsrzgBnPEeKuD9M24pvFUQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_OsrzgRnPEeKuD9M24pvFUQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_RxK4MBnPEeKuD9M24pvFUQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="image.ecore#//ImageConfig/publicUri"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_RxK4MRnPEeKuD9M24pvFUQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_OsrzghnPEeKuD9M24pvFUQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_OsrzgxnPEeKuD9M24pvFUQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_OsrzhBnPEeKuD9M24pvFUQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_OssakBnPEeKuD9M24pvFUQ" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_OssakRnPEeKuD9M24pvFUQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_OssakhnPEeKuD9M24pvFUQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_OssakxnPEeKuD9M24pvFUQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_OsrMcRnPEeKuD9M24pvFUQ" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="image.ecore#//ImageConfig"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OsrMchnPEeKuD9M24pvFUQ" x="215" y="140"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_OHGaMBnPEeKuD9M24pvFUQ"/>
+  <element xmi:type="ecore:EPackage" href="image.ecore#/"/>
+</notation:Diagram>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="image" nsURI="http://www.soluvas.org/schema/image/1.0" nsPrefix="image">
+  <eClassifiers xsi:type="ecore:EClass" name="ImageConfig">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Image module configuration.&#xA;&#xA;The URI pattern is hardcoded as folows:&#xA;&#xA;For normal styles:&#xA;&#xA;* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}.{extension}&#xA;&#xA;For variant styles: (styleCode is usually 'x', but can be anything else except 'o')&#xA;&#xA;* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}_{variantCode}.{extension}&#xA;&#xA;In the future, URI pattern (&quot;template&quot;) should be configurable, based on http://tools.ietf.org/html/rfc6570&#xA;and can be expanded both by server and client scripts.&#xA;&#xA;The domain name can also be different for each namespace, or even for each styleCode or variantCode.&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="publicUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass0"/>
+</ecore:EPackage>

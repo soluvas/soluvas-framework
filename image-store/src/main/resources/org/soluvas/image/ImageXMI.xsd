@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:image="http://www.soluvas.org/schema/image/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/image/1.0">
+  <xsd:import namespace="http://www.omg.org/XMI" schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/XMI.xsd"/>
+  <xsd:complexType name="ImageConfig">
+    <xsd:annotation>
+      <xsd:documentation>Image module configuration.
+
+The URI pattern is hardcoded as folows:
+
+For normal styles:
+
+* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}.{extension}
+
+For variant styles: (styleCode is usually 'x', but can be anything else except 'o')
+
+* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}_{variantCode}.{extension}
+
+In the future, URI pattern ("template") should be configurable, based on http://tools.ietf.org/html/rfc6570
+and can be expanded both by server and client scripts.
+
+The domain name can also be different for each namespace, or even for each styleCode or variantCode.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="publicUri" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="ImageConfig" type="image:ImageConfig">
+    <xsd:annotation>
+      <xsd:documentation>Image module configuration.
+
+The URI pattern is hardcoded as folows:
+
+For normal styles:
+
+* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}.{extension}
+
+For variant styles: (styleCode is usually 'x', but can be anything else except 'o')
+
+* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}_{variantCode}.{extension}
+
+In the future, URI pattern ("template") should be configurable, based on http://tools.ietf.org/html/rfc6570
+and can be expanded both by server and client scripts.
+
+The domain name can also be different for each namespace, or even for each styleCode or variantCode.
+</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="EClass0">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="EClass0" type="image:EClass0"/>
+</xsd:schema>
