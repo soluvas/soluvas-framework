@@ -15,7 +15,11 @@
 	<description>LDAP Utilities and POJO Object Mapper for LDAP entries.</description>
 	
 	<dependencies>
-	
+		<dependency>
+			<groupId>org.soluvas</groupId>
+			<artifactId>soluvas-push</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.picketlink.idm</groupId>
 			<artifactId>picketlink-idm-api</artifactId>

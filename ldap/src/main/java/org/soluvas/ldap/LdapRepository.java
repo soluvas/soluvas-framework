@@ -5,12 +5,13 @@ import java.util.List;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
 import org.apache.directory.shared.ldap.model.name.Dn;
+import org.soluvas.push.data.EntityLookup;
 
 /**
  * Manages LDAP entry POJO objects annotated with {@link LdapEntry}.
  * @author ceefour
  */
-public interface LdapRepository<T> {
+public interface LdapRepository<T> extends EntityLookup<String, T> {
 
 	void init();
 	
