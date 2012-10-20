@@ -174,7 +174,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * @throws LdapException
 	 * @return T entity or <tt>null</tt> if none found.
 	 */
-	public T findOne(String id) {
+	public <U extends T> U findOne(String id) {
 		final Dn dn = toDn(id);
 		log.info("Lookup LDAP Entry {}", dn); 
 		try {
@@ -190,7 +190,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 			});
 			if (entry != null) {
 				T obj = mapper.fromEntry(entry, entityClass);
-				return obj;
+				return (U) obj;
 			} else {
 				log.trace("Lookup LDAP Entry " + dn + " returns nothing");
 				return null;

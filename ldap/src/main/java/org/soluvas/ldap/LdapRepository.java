@@ -50,7 +50,7 @@ public interface LdapRepository<T> {
 	 * @throws LdapException
 	 * @return T entity or <tt>null</tt> if none found.
 	 */
-	T findOne(String id);
+	<U extends T> U findOne(String id);
 
 	/**
 	 * Find LDAP entry based on an attribute value. The attribute does not need to be
