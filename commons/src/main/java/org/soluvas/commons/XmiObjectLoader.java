@@ -26,6 +26,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	private Class<? extends EPackage> ePackage;
 	private Class<?> loaderClass;
 	private String resourcePath;
+	private String fileName;
 	
 	public XmiObjectLoader(Class<? extends EPackage> ePackage, Class<?> loaderClass, String resourcePath) {
 		super();
@@ -34,13 +35,24 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		this.resourcePath = resourcePath;
 	}
 
+	public XmiObjectLoader(Class<? extends EPackage> ePackage, String fileName) {
+		super();
+		this.ePackage = ePackage;
+		this.fileName = fileName;
+	}
+
 	@SuppressWarnings("unchecked") @Override
 	public T get() {
-		log.info("Loading XMI: {} from {}", resourcePath, loaderClass.getName());
-		final URL resourceUrl = loaderClass.getResource(resourcePath);
-		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s using class %s",
-				resourcePath, loaderClass.getName());
-		final URI resourceUri = URI.createURI(resourceUrl.toExternalForm());
+		URI resourceUri;
+		if (fileName != null) {
+			resourceUri = URI.createFileURI(fileName);
+		} else {
+			log.info("Loading XMI: {} from {}", resourcePath, loaderClass.getName());
+			final URL resourceUrl = loaderClass.getResource(resourcePath);
+			Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s using class %s",
+					resourcePath, loaderClass.getName());
+			resourceUri = URI.createURI(resourceUrl.toExternalForm());
+		}
 		log.debug("Loading XMI from URI: {}", resourceUri);
 		
 		ResourceSetImpl rset = new ResourceSetImpl();
