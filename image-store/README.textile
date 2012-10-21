@@ -46,3 +46,36 @@ bc.. @Inject ActorSystem system;
 }
 
 p. You are responsible for shutting down the @ActorSystem@.
+
+h2. JavaScript Library
+
+What you need:
+
+* RequireJS
+* org.soluvas.image/imageConfigs
+* org.soluvas.image/Images
+* "uritemplate.js":https://github.com/fxa/uritemplate-js 
+
+A proper @imageConfigs@ must contain something like:
+
+bc.. define([], function() {
+
+var imageConfigs = {
+	'person': {publicUriTemplate: 'http://dav.berbatik.annafi.dev/person/styleCode/imageId_styleCode_variantCode.ext'},
+};
+
+return apiConfig;
+});
+
+p. To get a URI from an image ID:
+
+bc. define(['org.soluvas.image/Images'], function(Images) {
+Images.getPublicUri(namespace, imageId); // DO NOT USE!
+Images.getPublicUri(namespace, imageId, styleCode); // RECOMMENDED
+Images.getPublicUri(namespace, imageId, styleCode, variantCode);
+Images.getPublicUri(namespace, imageId, styleCode, variantCode, ext);
+});
+
+ext is assumed to be 'jpg' in all other classes.
+
+Note to get width, height, available styles and variants, etc. you need to provide it from the server, not pure client.
