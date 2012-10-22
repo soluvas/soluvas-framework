@@ -26,7 +26,8 @@
 		</bean>
 	</service>
 	
-	<reference-list id="imageRepos" interface="org.soluvas.image.store.ImageRepository" availability="optional" />
+	<reference-list id="imageRepos" interface="org.soluvas.image.store.ImageRepository" availability="optional"
+		filter="(&amp;(tenantId=berbatik)(tenantEnv=dev))" />
 
 	<bean id="imageRs" class="org.soluvas.image.rs.ImageResource">
 		<argument ref="imageRepos" />
