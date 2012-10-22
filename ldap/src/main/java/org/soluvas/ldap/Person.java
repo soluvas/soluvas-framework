@@ -27,6 +27,12 @@ public class Person implements Serializable, User {
 	@LdapAttribute("userPassword") private String password;
 	@LdapAttribute("mail") private Set<String> emails;
 	@LdapAttribute("mobile") private String mobile;
+	@LdapAttribute("telephoneNumber") private String phone;
+	@LdapAttribute("street") private String streetAddress;
+	@LdapAttribute("postalCode") private String postalCode;
+	@LdapAttribute("l") private String city;
+	@LdapAttribute("st") private String state;
+	@LdapAttribute("c") private String country;
 	
 	public Person() {
 	}
@@ -155,6 +161,90 @@ public class Person implements Serializable, User {
 	 */
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+	
+	/**
+	 * @return the phone
+	 */
+	public String getPhone() {
+		return phone;
+	}
+
+	/**
+	 * @param phone the phone to set
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	/**
+	 * @return the streetAddress
+	 */
+	public String getStreetAddress() {
+		return streetAddress;
+	}
+
+	/**
+	 * @param streetAddress the streetAddress to set
+	 */
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
+	}
+
+	/**
+	 * @return the postalCode
+	 */
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	/**
+	 * @param postalCode the postalCode to set
+	 */
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	/**
+	 * @return the city
+	 */
+	public String getCity() {
+		return city;
+	}
+
+	/**
+	 * @param city the city to set
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	/**
+	 * @return the state
+	 */
+	public String getState() {
+		return state;
+	}
+
+	/**
+	 * @param state the state to set
+	 */
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	/**
+	 * @return the country
+	 */
+	public String getCountry() {
+		return country;
+	}
+
+	/**
+	 * @param country the country to set
+	 */
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	@Override
