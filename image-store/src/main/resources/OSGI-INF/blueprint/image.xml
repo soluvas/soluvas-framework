@@ -16,13 +16,35 @@
 	<service auto-export="interfaces">
 		<bean class="org.soluvas.web.site.JavaScriptModuleImpl">
 			<argument value="org.soluvas.image/imageConfigs"/>
-			<argument value="js/org.soluvas.image/imageConfigs"/>
+			<argument value="/cxf/api/org.soluvas.image/imageConfigs"/>
 		</bean>
 	</service>
 	<service auto-export="interfaces">
 		<bean class="org.soluvas.web.site.JavaScriptModuleImpl">
 			<argument value="org.soluvas.image"/>
 			<argument value="js/org.soluvas.image"/>
+		</bean>
+	</service>
+	
+	<reference-list id="imageRepos" interface="org.soluvas.image.store.ImageRepository" availability="optional" />
+
+	<bean id="imageRs" class="org.soluvas.image.rs.ImageResource">
+		<argument ref="imageRepos" />
+	</bean>
+	<service auto-export="interfaces">
+		<service-properties>
+			<entry key="clientId" value="berbatik"/>
+			<entry key="tenantId" value="berbatik"/>
+			<entry key="tenantEnv" value="dev"/>
+			<entry key="type" value="jaxrs"/>
+			<entry key="address" value="api"/>
+		</service-properties>
+		<bean class="java.util.ArrayList">
+			<argument>
+				<list>
+					<ref component-id="imageRs"/>
+				</list>
+			</argument>
 		</bean>
 	</service>
 
