@@ -1,5 +1,9 @@
 package org.soluvas.slug;
 
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 
 /**
@@ -16,7 +20,9 @@ public class SlugUtils {
 	 * @param suffix
 	 * @return
 	 */
-	public static String generateScreenName(String name, int suffix) {
+	public static String generateScreenName(@Nonnull String name, @Nonnegative int suffix) {
+		Preconditions.checkNotNull(name, "name must not be null");
+		Preconditions.checkArgument(suffix >= 0, "suffix must be non-negative");
 		String base = name.replaceAll("[^A-Za-z0-9]", " ").trim().toLowerCase().replaceAll(" ", ".")
 				.replaceAll("\\.+", ".");
 		while (base.length() < MIN_LENGTH)
@@ -40,6 +46,8 @@ public class SlugUtils {
 	 * @return
 	 */
 	public static String generateId(String name, int suffix) {
+		Preconditions.checkNotNull(name, "name must not be null");
+		Preconditions.checkArgument(suffix >= 0, "suffix must be non-negative");
 		String base = name.replaceAll("[^A-Za-z0-9]", " ").trim().toLowerCase().replaceAll(" ", "_")
 				.replaceAll("\\_+", "_");
 		while (base.length() < MIN_LENGTH)
@@ -63,6 +71,8 @@ public class SlugUtils {
 	 * @return
 	 */
 	public static String generateSegment(String name, int suffix) {
+		Preconditions.checkNotNull(name, "name must not be null");
+		Preconditions.checkArgument(suffix >= 0, "suffix must be non-negative");
 		String base = name.replaceAll("[^A-Za-z0-9]", " ").trim().toLowerCase().replaceAll(" ", "-")
 				.replaceAll("\\-+", "-");
 		while (base.length() < MIN_LENGTH)
@@ -85,7 +95,8 @@ public class SlugUtils {
 	 * @param validator
 	 * @return
 	 */
-	public static String generateValidId(String name, Predicate<String> validator) {
+	public static String generateValidId(@Nonnull String name, @Nonnull Predicate<String> validator) {
+		Preconditions.checkNotNull(validator, "validator must not be null");
 		String id = generateId(name, 0);
 		if (validator.apply(id))
 			return id;
@@ -105,7 +116,8 @@ public class SlugUtils {
 	 * @param validator
 	 * @return
 	 */
-	public static String generateValidSegment(String name, Predicate<String> validator) {
+	public static String generateValidSegment(@Nonnull String name, @Nonnull Predicate<String> validator) {
+		Preconditions.checkNotNull(validator, "validator must not be null");
 		String id = generateSegment(name, 0);
 		if (validator.apply(id))
 			return id;
@@ -125,7 +137,8 @@ public class SlugUtils {
 	 * @param validator
 	 * @return
 	 */
-	public static String generateValidScreenName(String name, Predicate<String> validator) {
+	public static String generateValidScreenName(@Nonnull String name, @Nonnull Predicate<String> validator) {
+		Preconditions.checkNotNull(validator, "validator must not be null");
 		String id = generateScreenName(name, 0);
 		if (validator.apply(id))
 			return id;
@@ -150,7 +163,9 @@ public class SlugUtils {
 	 * @param slug
 	 * @return
 	 */
-	public static String canonicalize(String slug) {
+	public static String canonicalize(@Nonnull String slug) {
+		Preconditions.checkNotNull(slug, "slug must not be null");
 		return slug.toLowerCase().replaceAll("[^a-z0-9_]", "");
 	}
+
 }

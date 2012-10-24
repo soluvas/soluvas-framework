@@ -83,6 +83,11 @@ public class SlugUtilsTest {
 				slugUtils.generateSegment("増田秀樹", 45));
 	}
 
+	@Test(expected=NullPointerException.class)
+	public void generateNullName() {
+		SlugUtils.generateId(null);
+	}
+	
 	@Test
 	public void canonicalize() {
 		Assert.assertEquals("arumpuspita", SlugUtils.canonicalize("arum.puspita"));

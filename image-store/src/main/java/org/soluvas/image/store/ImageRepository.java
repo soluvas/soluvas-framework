@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
 public interface ImageRepository {
@@ -125,7 +126,7 @@ public interface ImageRepository {
 	 */
 	public abstract void deleteMultiple(Set<String> ids);
 
-	public abstract Image findOne(String id);
+	public abstract Image findOne(@Nullable String id);
 
 	public abstract Map<String, Image> findAllByIds(Iterable<String> ids);
 

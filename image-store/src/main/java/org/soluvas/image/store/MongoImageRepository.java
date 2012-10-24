@@ -673,6 +673,8 @@ public class MongoImageRepository implements ImageRepository {
 	@Override
 	public Image findOne(String id) {
 		log.trace("Get {} Image {}", namespace, id);
+		if (id == null)
+			return null;
 		DBObject dbo = mongoColl.findOne(new BasicDBObject("_id", id));
 		if (dbo == null)
 			return null;
