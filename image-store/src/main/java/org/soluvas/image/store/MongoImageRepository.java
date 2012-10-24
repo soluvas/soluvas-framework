@@ -56,6 +56,7 @@ import org.soluvas.slug.SlugUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Collections2;
@@ -353,6 +354,7 @@ public class MongoImageRepository implements ImageRepository {
 	 */
 	@Override
 	public String create(File originalFile, final String contentType, String name) throws IOException {
+		Preconditions.checkNotNull(originalFile, "Original file to be added must not be null");
 		return doCreate(null, originalFile, contentType, originalFile.length(), name, originalFile.getName(), true);
 	}
 

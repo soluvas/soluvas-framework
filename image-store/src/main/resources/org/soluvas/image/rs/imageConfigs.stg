@@ -1,0 +1,21 @@
+imageConfigs(imageRepos) ::= <<
+/**
+ * Soluvas Image repositories configuration for JavaScript clients.
+ */
+define(['uritemplate'], function(UriTemplate) {
+
+var imageConfigs = {
+~imageRepos:imageRepo()~
+};
+
+return imageConfigs;
+});
+>>
+
+imageRepo(repo) ::= <<
+	'~repo.namespace~': {
+		publicUriTemplate: '~repo.publicUri~{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}',
+		publicUriExpander: UriTemplate.parse('~repo.publicUri~{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}'),
+	},
+
+>>

@@ -25,6 +25,7 @@ public class SocialPerson extends Person {
 	@LdapAttribute("twitterId") private Long twitterId;
 	@LdapAttribute("twitterScreenName") private String twitterScreenName;
 	@LdapAttribute("virtualMail") private String virtualMail;
+	@LdapAttribute("nickname") private String nickname;
 	
 	public SocialPerson() {
 		super();
@@ -178,6 +179,20 @@ public class SocialPerson extends Person {
 	 */
 	public void setVirtualMail(String virtualMail) {
 		this.virtualMail = virtualMail;
+	}
+
+	/**
+	 * @return the nickname
+	 */
+	public String getNickname() {
+		return nickname;
+	}
+
+	/**
+	 * @param nickname the nickname to set
+	 */
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 }
