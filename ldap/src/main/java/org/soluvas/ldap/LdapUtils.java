@@ -1,12 +1,17 @@
 package org.soluvas.ldap;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
@@ -45,6 +50,7 @@ public class LdapUtils {
 	}
 
 	private transient static Logger log = LoggerFactory.getLogger(LdapUtils.class);
+	private static final Random random = new Random();
 
 	/**
 	 * Useful to be passed to {@link PoolableLdapConnectionFactory}.
@@ -204,4 +210,55 @@ public class LdapUtils {
 			return null;
 		}
 	}
+	
+	/**
+	 * Generates 4-byte salt.
+	 * @return
+	 * @see #encodeSsha(String)
+	 */
+	public static byte[] generateSalt() {
+		byte[] bytes = new byte[4];
+		random.nextBytes(bytes);
+		return bytes;
+	}
+	
+	/**
+	 * Encodes RFC 2307 (http://tools.ietf.org/html/rfc2307) SSHA password
+	 * as byte array, using the provided salt.
+	 * @param password
+	 * @param salt
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws UnsupportedEncodingException
+	 * @see #encodeSsha(String)
+	 */
+	public static byte[] calculateSsha(String password, byte[] salt)
+			throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		MessageDigest digest = MessageDigest.getInstance("SHA");
+		digest.reset();
+		digest.update(password.getBytes("UTF-8"));
+		digest.update(salt);
+		return digest.digest();
+	}
+	
+	/**
+	 * Encodes RFC 2307 (http://tools.ietf.org/html/rfc2307) formatted {SSHA} password
+	 * with random salt.
+	 * @param password
+	 * @return
+	 */
+	public static String encodeSsha(String password) {
+		byte[] salt = generateSalt();
+		byte[] digest;
+		try {
+			digest = calculateSsha(password, salt);
+		} catch (Exception e) {
+			throw new RuntimeException("Cannot calculate SHA using salt " + salt, e);
+		}
+		byte[] digestAndSalt = new byte[digest.length + salt.length];
+		System.arraycopy(digest, 0, digestAndSalt, 0, digest.length);
+		System.arraycopy(salt, 0, digestAndSalt, digest.length, salt.length);
+		return "{SSHA}" + Base64.encodeBase64String(digestAndSalt);
+	}
+	
 }
