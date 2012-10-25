@@ -1,8 +1,9 @@
 package org.soluvas.ldap;
 
-import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
@@ -10,8 +11,12 @@ import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapNetworkConnection;
 import org.apache.directory.shared.ldap.model.entry.DefaultEntry;
 import org.apache.directory.shared.ldap.model.entry.Entry;
+import org.apache.directory.shared.ldap.model.entry.Modification;
+import org.apache.directory.shared.ldap.model.entry.ModificationOperation;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
-import org.apache.directory.shared.ldap.model.message.ModifyRequestImpl;
+import org.apache.directory.shared.ldap.model.message.ModifyRequest;
+import org.apache.directory.shared.ldap.model.schema.SchemaManager;
+import org.apache.directory.shared.ldap.schemamanager.impl.DefaultSchemaManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,18 +35,17 @@ public class LdapUtilsTest {
 
 	private transient Logger log = LoggerFactory.getLogger(LdapUtilsTest.class);
 	
-	private LdapUtils ldapUtils;
-	private LdapMapper mapper;
-
-	private LdapNetworkConnection conn;
+	private transient LdapMapper mapper;
+	private transient LdapNetworkConnection conn;
+	private SchemaManager schemaManager;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		ldapUtils = new LdapUtils();
-		mapper = new LdapMapper();
+		schemaManager = new DefaultSchemaManager();
+		mapper = new LdapMapper(schemaManager);
 		conn = new LdapNetworkConnection("localhost", 10389);
 		conn.bind("uid=admin,ou=system", "secret");
 	}
@@ -70,14 +74,43 @@ public class LdapUtilsTest {
 		conn.add(entry);
 	}
 
-	@Test public void canUpdatePerson() throws LdapException {
-		Entry entry = conn.lookup("uid=liz,ou=users,dc=aksimata,dc=com");
-		SocialPerson liz = mapper.fromEntry(entry, SocialPerson.class);
+	@Test public void properUpdateStandardPerson() throws LdapException {
+		Entry existing = conn.lookup("uid=budi,ou=users,dc=dev,dc=berbatik,dc=com");
+		Person liz = mapper.fromEntry(existing, Person.class);
+		
+		liz.setMobile("08123456789");
+		
+		Entry newEntry = mapper.toEntry(liz, "ou=users,dc=dev,dc=berbatik,dc=com");
+		ModifyRequest request = LdapUtils.createModifyRequest(newEntry, existing,
+				schemaManager, mapper.getAttributeIds(Person.class) );
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertThat(request.getModifications(), hasSize(1));
+		final Modification modification = request.getModifications().iterator().next();
+		assertEquals(ModificationOperation.REPLACE_ATTRIBUTE, modification.getOperation());
+		assertEquals("mobile", modification.getAttribute().getId());
+	}
+
+	@Test public void canUpdateStandardPerson() throws LdapException {
+		Entry entry = conn.lookup("uid=budi,ou=users,dc=dev,dc=berbatik,dc=com");
+		Person liz = mapper.fromEntry(entry, Person.class);
+		
+		liz.setMobile("08123456789");
+		
+		Entry newEntry = mapper.toEntry(liz, "ou=users,dc=dev,dc=berbatik,dc=com");
+		LdapUtils.update(conn, newEntry,
+				schemaManager, ImmutableSet.of("objectClass", "uid", "cn") );
+	}
+
+	@Test public void canUpdateSocialPerson() throws LdapException {
+		Entry entry = conn.lookup("uid=budi,ou=users,dc=dev,dc=berbatik,dc=com");
+		SocialPerson liz = new LdapMapper(conn.getSchemaManager()).fromEntry(entry, SocialPerson.class);
 		
 		liz.setFacebookAccessToken("abcdefgh");
 		
-		Entry newEntry = mapper.toEntry(liz, "ou=users,dc=aksimata,dc=com");
-		ldapUtils.update(conn, newEntry, true, "uid", "userPassword");
+		Entry newEntry = mapper.toEntry(liz, "ou=users,dc=dev,dc=berbatik,dc=com");
+		LdapUtils.update(conn, newEntry,
+				schemaManager, ImmutableSet.of("objectClass", "uid", "cn", "fbAccessToken") );
 	}
 
 	@Test public void replaceAttributeModifyRequest() throws LdapException {
@@ -93,7 +126,29 @@ public class LdapUtilsTest {
 		updating.put("cn", "Hendy Irawan 2");
 		log.info("Updating Entry: {}", updating);
 		
-		ModifyRequestImpl request = LdapUtils.createModifyRequest(updating, existing, false, "uid");
+		ModifyRequest request = LdapUtils.createModifyRequest(updating, existing,
+				schemaManager, ImmutableSet.of("objectClass", "uid", "cn", "userPassword") );
+		log.info("Modify request: {}", request);
+		assertThat(request.getModifications(), hasSize(1));
+	}
+
+	@Test public void replaceAttributeAliasModifyRequest() throws LdapException {
+		Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject");
+		existing.put("uid", "hendy");
+		existing.put("givenName", "Hendy");
+		log.info("Existing Entry: {}", existing);
+		
+		Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		updating.put("objectClass", "organizationalPerson", "extensibleObject");
+		updating.put("uid", "hendy");
+		updating.put("gn", "Rudi");
+		log.info("Updating Entry: {}", updating);
+		
+		ModifyRequest request = LdapUtils.createModifyRequest(updating, existing,
+				schemaManager, ImmutableSet.of("objectClass", "uid", "givenName", "gn", "cn", "userPassword") );
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
 		assertThat(request.getModifications(), hasSize(1));
 	}
 
@@ -109,10 +164,56 @@ public class LdapUtilsTest {
 		updating.put("cn", "Hendy Irawan");
 		log.info("Input Entry: {}", updating);
 		
-		ModifyRequestImpl request = LdapUtils.createModifyRequest(updating, existing, false, "uid");
+		ModifyRequest request = LdapUtils.createModifyRequest(updating, existing, 
+				schemaManager, ImmutableSet.of("objectClass", "uid", "cn", "userPassword") );
+		log.info("Modify request: {}", request);
 		assertNotNull(request);
 		assertThat(request.getModifications(), not(empty()));
 		assertThat(request.getModifications(), hasSize(1));
+	}
+
+	@Test public void removeAttributeModifyRequest() throws LdapException {
+		Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject");
+		existing.put("uid", "hendy");
+		existing.put("cn", "Hendy Irawan");
+		existing.put("photoid", "hendy_irawan");
+		log.info("Existing Entry: {}", existing);
+		
+		Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		updating.put("objectClass", "organizationalPerson", "extensibleObject");
+		updating.put("uid", "hendy");
+		updating.put("cn", "Hendy Irawan");
+		log.info("Input Entry: {}", updating);
+		
+		ModifyRequest request = LdapUtils.createModifyRequest(updating, existing,
+				schemaManager, ImmutableSet.of("objectClass", "uid", "cn", "photoId") );
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertThat(request.getModifications(), not(empty()));
+		assertThat(request.getModifications(), hasSize(1));
+		final Modification modification = request.getModifications().iterator().next();
+		assertEquals(ModificationOperation.REMOVE_ATTRIBUTE, modification.getOperation());
+	}
+
+	@Test public void doNotRemoveAttributeWithAlias() throws LdapException {
+		Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject");
+		existing.put("uid", "hendy");
+		existing.put("gn", "Hendy");
+		log.info("Existing Entry: {}", existing);
+		
+		Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		updating.put("objectClass", "organizationalPerson", "extensibleObject");
+		updating.put("uid", "hendy");
+		updating.put("givenName", "Hendy");
+		log.info("Input Entry: {}", updating);
+		
+		ModifyRequest request = LdapUtils.createModifyRequest(updating, existing,
+				schemaManager, ImmutableSet.of("objectClass", "uid", "gn", "givenName") );
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertThat(request.getModifications(), empty());
 	}
 
 	@Test public void comparesPasswordIfNotChanged() throws LdapException {
@@ -132,7 +233,9 @@ public class LdapUtilsTest {
 		existing.put("userPassword", password);
 		log.info("Input Entry: {}", entry);
 		
-		ModifyRequestImpl request = LdapUtils.createModifyRequest(entry, existing, false, "uid");
+		ModifyRequest request = LdapUtils.createModifyRequest(entry, existing,
+				schemaManager, ImmutableSet.of("objectClass", "uid", "cn", "userPassword") );
+		log.info("Modify request: {}", request);
 		assertThat(request.getModifications(), empty());
 	}
 

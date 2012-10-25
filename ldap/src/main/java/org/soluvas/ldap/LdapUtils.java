@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.codec.binary.Base64;
@@ -22,14 +24,19 @@ import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.entry.Value;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
 import org.apache.directory.shared.ldap.model.exception.LdapURLEncodingException;
+import org.apache.directory.shared.ldap.model.message.ModifyRequest;
 import org.apache.directory.shared.ldap.model.message.ModifyRequestImpl;
 import org.apache.directory.shared.ldap.model.message.ModifyResponse;
 import org.apache.directory.shared.ldap.model.message.ResultCodeEnum;
+import org.apache.directory.shared.ldap.model.schema.AttributeType;
+import org.apache.directory.shared.ldap.model.schema.SchemaManager;
 import org.apache.directory.shared.ldap.model.url.LdapUrl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.NotNullPredicate;
 
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
@@ -103,14 +110,12 @@ public class LdapUtils {
 	 * attributes. 
 	 * @param conn
 	 * @param entry
-	 * @param excludedAttributes
 	 * @throws LdapException 
 	 */
-	public static void update(LdapConnection conn, Entry entry,
-			boolean removeExtraAttributes, String... excludedAttributes) throws LdapException {
+	public static void update(@Nonnull LdapConnection conn, @Nonnull Entry entry,
+			SchemaManager schemaManager, @Nonnull Set<String> affectedAttributes) throws LdapException {
 		Entry existing = conn.lookup(entry.getDn());
-		ModifyRequestImpl req = createModifyRequest(entry, existing,
-				removeExtraAttributes, excludedAttributes);
+		ModifyRequest req = createModifyRequest(entry, existing, schemaManager, affectedAttributes);
 		if (!req.getModifications().isEmpty()) {
 			log.info("Modify {}: {}", entry.getDn(), req);
 			ModifyResponse response = conn.modify(req);
@@ -133,44 +138,72 @@ public class LdapUtils {
 	 * @return
 	 * @throws LdapException
 	 */
-	protected static ModifyRequestImpl createModifyRequest(
-			Entry entry, Entry existing, boolean removeExtraAttributes,
-			String... excludedAttributes) throws LdapException {
-		log.info("Updating entry {}, removeExtraAttributes: {}, excludedAttributes: {}", new Object[] {
-				entry.getDn(), removeExtraAttributes, excludedAttributes });
+	protected static ModifyRequest createModifyRequest(
+			@Nonnull Entry entry, @Nonnull Entry existing,
+			final SchemaManager schemaMgr, Set<String> affectedAttributes) throws LdapException {
+		final Set<AttributeType> affectedAttributeTypes = ImmutableSet.copyOf(Iterables.transform(affectedAttributes, new Function<String, AttributeType>() {
+			@Override @Nullable
+			public AttributeType apply(@Nullable String input) {
+				AttributeType attributeType = schemaMgr.getAttributeType(input);
+				Preconditions.checkNotNull(attributeType, "Cannot get AttributeType %s from SchemaManager %s", input, schemaMgr);
+				return attributeType;
+			}
+		}));
+		log.info("Updating entry {}, affectedAttributes: {}", new Object[] {
+				entry.getDn(), affectedAttributes });
 
-		Set<String> excludedAttributeSet = ImmutableSet.copyOf(excludedAttributes);
-		
-		ModifyRequestImpl req = new ModifyRequestImpl();
+		ModifyRequest req = new ModifyRequestImpl();
 		req.setName(entry.getDn());
-		for (Attribute a : entry) {
-			if ("objectClass".equalsIgnoreCase(a.getId()))
+		for (Attribute updatedAttr : entry) {
+			if ("objectClass".equalsIgnoreCase(updatedAttr.getId()))
 				continue;
-			if (excludedAttributeSet.contains(a.getId()))
+			final AttributeType updatedAttrType = Optional.fromNullable(updatedAttr.getAttributeType())
+					.or(schemaMgr.getAttributeType(updatedAttr.getId()));
+			Preconditions.checkNotNull(updatedAttrType, "AttributeType of %s cannot be null", updatedAttr);
+			if (!affectedAttributeTypes.contains(updatedAttrType))
 				continue;
-			Set<String> newValues = ImmutableSet.copyOf(Iterables.transform(a, new ValueToString()));
+			Set<String> newValues = ImmutableSet.copyOf(Iterables.filter(Iterables.transform(updatedAttr, new ValueToString()),
+					new NotNullPredicate<String>()));
 			Set<String> oldValues = ImmutableSet.of();
-			if (existing.containsAttribute(a.getId())) {
-				oldValues = ImmutableSet.copyOf( Iterables.transform(existing.get(a.getId()), new ValueToString()) );
+			// get old value from either AttributeType (if present) or ID
+			if (existing.containsAttribute(updatedAttrType)) {
+				oldValues = ImmutableSet.copyOf( Iterables.transform(existing.get(updatedAttrType), new ValueToString()) );
+			} else if (existing.containsAttribute(updatedAttr.getId())) {
+				oldValues = ImmutableSet.copyOf( Iterables.transform(existing.get(updatedAttr.getId()), new ValueToString()) );
 			}
 			// make sure the new values are different, or ignore
 			if (!oldValues.equals(newValues)) {
-				log.debug("Replace {} in {}, {} => {}", new Object[] {
-						a.getId(), entry.getDn(), oldValues, newValues });
-				req.replace(a);
+				log.debug("Replace {} in {}, {} => {}",
+						updatedAttr.getId(), entry.getDn(), oldValues, newValues );
+				req.replace(updatedAttr);
 			}
 		}
-		if (removeExtraAttributes) {
-			for (Attribute a : existing) {
-				if ("objectClass".equalsIgnoreCase(a.getId()))
-					continue;
-				if (excludedAttributeSet.contains(a.getId()))
-					continue;
-				if (!entry.containsAttribute(a.getId())) {
-					log.debug("Remove {} in {}", new Object[] {
-							a.getId(), entry.getDn() });
-					req.remove(a);
-				}
+		
+		final Set<AttributeType> updatedAttrTypes = ImmutableSet.copyOf(Iterables.transform(entry, new Function<Attribute, AttributeType>() {
+			@Override @Nullable
+			public AttributeType apply(@Nullable Attribute attr) {
+				return Optional.fromNullable(attr.getAttributeType())
+						.or(schemaMgr.getAttributeType(attr.getId()));
+			}
+		}));
+		
+		for (Attribute existingAttr : existing) {
+			final AttributeType existingAttrType = Optional.fromNullable(existingAttr.getAttributeType())
+					.or(Optional.fromNullable(schemaMgr.getAttributeType(existingAttr.getId()))).orNull();
+			if (existingAttrType == null) {
+				log.warn("Skipping existing attribute {} from entry {} because not known by SchemaManager {}",
+						existingAttr.getId(), existing.getDn(), schemaMgr);
+				continue;
+			}
+			if ("objectClass".equalsIgnoreCase(existingAttr.getId()))
+				continue;
+			if (!affectedAttributeTypes.contains(existingAttrType))
+				continue;
+			// remove if AttributeType (looked up first) not found in updated entry
+			if (!updatedAttrTypes.contains(existingAttrType)) {
+				log.debug("Remove {} in {}",
+						existingAttr.getId(), entry.getDn() );
+				req.remove(existingAttr);
 			}
 		}
 		return req;
@@ -183,7 +216,7 @@ public class LdapUtils {
 	 * 
 	 * @param cursor
 	 */
-	public static List<Entry> asList(EntryCursor cursor) {
+	public static List<Entry> asList(@Nonnull EntryCursor cursor) {
 		try {
 			ImmutableList<Entry> entries = ImmutableList.copyOf((Iterable<Entry>)cursor);
 			return entries;

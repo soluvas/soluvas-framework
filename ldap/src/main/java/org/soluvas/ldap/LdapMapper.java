@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.directory.shared.ldap.model.entry.Attribute;
@@ -23,9 +25,11 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -39,7 +43,7 @@ import com.google.common.collect.Lists;
 public class LdapMapper {
 
 	private transient Logger log = LoggerFactory.getLogger(LdapMapper.class);
-	private SchemaManager schemaManager;
+	private transient SchemaManager schemaManager;
 	
 	public LdapMapper() {
 		super();
@@ -126,7 +130,7 @@ public class LdapMapper {
 	 */
 	public Entry toEntry(Object obj, String baseDn) {
 		Class<?> clazz = obj.getClass();
-		log.debug("Mapping {} {} as Entry in {}", new Object[] { clazz.getName(), obj, baseDn });
+		log.trace("Mapping {} {} as Entry in {}", new Object[] { clazz.getName(), obj, baseDn });
 		
 		// Create the Entry (TODO: should be after mapping is prepared)
 		DefaultEntry entry = schemaManager != null ? new DefaultEntry(schemaManager) : new DefaultEntry();
@@ -140,7 +144,7 @@ public class LdapMapper {
 			throw new LdapMappingException(clazz.getName() + " must be annotated with @LdapEntry");
 		}
 		String[] objectClasses = entryAnn.objectClasses();
-		log.debug("{} maps to objectClasses: {}", clazz.getName(), objectClasses);
+		log.trace("{} maps to objectClasses: {}", clazz.getName(), objectClasses);
 		try {
 			entry.add("objectClass", objectClasses);
 			
@@ -167,6 +171,50 @@ public class LdapMapper {
 			throw new LdapMappingException("Error mapping " + clazz.getName(), e);
 		}
 	}
+	
+	/**
+	 * Return all {@link Field}s (including private) of a {@link Class},
+	 * including superclasses.
+	 * @param clazz
+	 * @return
+	 */
+	public Set<Field> getAllFields(@Nonnull Class<?> clazz) {
+		Preconditions.checkNotNull(clazz, "clazz must not be null");
+		
+		Builder<Field> fieldsBuilder = ImmutableSet.builder();
+		final Field[] ownFields = clazz.getDeclaredFields();
+		fieldsBuilder.addAll(ImmutableList.copyOf(ownFields));
+
+		Class<?>[] interfaces = clazz.getInterfaces();
+		for (Class<?> iface : interfaces) {
+			fieldsBuilder.addAll( getAllFields(iface) );
+		}
+		
+		Class<?> superclass = clazz.getSuperclass();
+		if (superclass != null) {
+			fieldsBuilder.addAll( getAllFields(superclass) );
+		}
+		
+		return fieldsBuilder.build();
+	}
+	
+	/**
+	 * Return LDAP attribute IDs for the specified class.
+	 * @param clazz
+	 * @return
+	 */
+	public Set<String> getAttributeIds(Class<?> clazz) {
+		final Set<Field> fields = getAllFields(clazz);
+		log.trace("Mapping {} fields: {}", clazz.getName(), fields);
+		Builder<String> attributeIds = ImmutableSet.builder();
+		for (final Field field : fields) {
+			LdapAttribute ldapAttribute = field.getAnnotation(LdapAttribute.class);
+			if (ldapAttribute == null)
+				continue;
+			attributeIds.addAll(ImmutableList.copyOf(ldapAttribute.value()));
+		}
+		return attributeIds.build();
+	}
 
 	/**
 	 * Map the fields of a specific {@link Class} to an LDAP {@link Entry}.
@@ -187,7 +235,7 @@ public class LdapMapper {
 			InvocationTargetException, NoSuchMethodException,
 			LdapInvalidDnException {
 		final Field[] fields = clazz.getDeclaredFields();
-		log.debug("Mapping {} fields: {}", clazz.getName(), fields);
+		log.trace("Mapping {} fields: {}", clazz.getName(), fields);
 		for (final Field field : fields) {
 			LdapAttribute ldapAttribute = field.getAnnotation(LdapAttribute.class);
 			if (ldapAttribute == null)
@@ -202,8 +250,8 @@ public class LdapMapper {
 					if (value == null)
 						throw new LdapMappingException("RDN property " + clazz.getName() + "#" + fieldName + " cannot be null");
 					final Dn dn = new Dn(new Rdn(attrName, value), new Dn(baseDn));
-					log.debug("Map {} with {}={} as Entry DN: {}", new Object[] {
-						clazz.getName(), fieldName, value, dn });
+					log.trace("Map {} with {}={} as Entry DN: {}",
+						clazz.getName(), fieldName, value, dn );
 					entry.put(attrName, value);
 					entry.setDn(dn);
 				} else {
@@ -217,20 +265,20 @@ public class LdapMapper {
 									return convertFromPropertyValue(field.getType(), input);
 								}
 							}) );
-							log.trace("Map {}#{} as multi {}: {}", new Object[] {
-									clazz.getName(), fieldName, attrName, attrValues });
+							log.trace("Map {}#{} as multi {}: {}",
+									clazz.getName(), fieldName, attrName, attrValues );
 							entry.put(attrName, attrValues.toArray(new String[] { }));
 						} else {
-							log.trace("Not mapping null {}#{} as multi {}", new Object[] {
-									clazz.getName(), fieldName, attrName });
+							log.trace("Not mapping null {}#{} as multi {}",
+									clazz.getName(), fieldName, attrName );
 						}
 					} else {
 						// Set value as single attribute
 						Object objValue = PropertyUtils.getProperty(obj, fieldName);
 						if (objValue != null) {
 							String attrValue = convertFromPropertyValue(field.getType(), objValue);
-							log.trace("Map {}#{} as {}: {}", new Object[] {
-									clazz.getName(), fieldName, attrName, attrValue });
+							log.trace("Map {}#{} as {}: {}",
+									clazz.getName(), fieldName, attrName, attrValue );
 							entry.put(attrName, attrValue);
 						} else {
 							log.trace("Not mapping null {}#{} as {}", new Object[] {
@@ -401,7 +449,7 @@ public class LdapMapper {
 		if (value == null) {
 			return null;
 		} else if (fieldType.isEnum()) {
-			return ((Enum) value).name().toLowerCase();
+			return ((Enum<?>) value).name().toLowerCase();
 		} else {
 			return value.toString();
 		}

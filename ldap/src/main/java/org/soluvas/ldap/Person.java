@@ -21,7 +21,7 @@ public class Person implements Serializable, User {
 
 	@LdapRdn @LdapAttribute("uid") @NotNull private String id;
 	@LdapAttribute("uniqueIdentifier") private String slug;
-	@LdapAttribute("gn") private String firstName;
+	@LdapAttribute({"gn", "givenName"}) private String firstName;
 	@LdapAttribute("sn") @NotNull private String lastName;
 	@LdapAttribute("cn") @NotNull private String name;
 	@LdapAttribute("userPassword") private String password;

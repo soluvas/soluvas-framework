@@ -1,7 +1,9 @@
 package org.soluvas.ldap;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.apache.directory.ldap.client.api.LdapConnection;
@@ -13,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -75,7 +79,14 @@ public class LdapRepositoryImpl<T> implements LdapRepository<T> {
 		Entry entry = mapper.toEntry(obj, baseDn);
 		log.info("Modify LDAP Entry {}", entry.getDn(), entry); 
 		try {
-			LdapUtils.update(connection, entry, removeExtraAttributes, "uid"); 
+			Set<String> knownAttributes = mapper.getAttributeIds(entityClass);
+			Set<String> affectedAttributes = ImmutableSet.copyOf(Iterables.filter(knownAttributes, new Predicate<String>() {
+				@Override
+				public boolean apply(@Nullable String input) {
+					return !"uid".equalsIgnoreCase(input);
+				}
+			}));
+			LdapUtils.update(connection, entry, connection.getSchemaManager(), affectedAttributes); 
 			log.debug("Lookup modified LDAP Entry {}", entry.getDn());
 			Entry newEntry = connection.lookup(entry.getDn());
 			T newObj = mapper.fromEntry(newEntry, entityClass);

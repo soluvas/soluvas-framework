@@ -1,7 +1,11 @@
 package org.soluvas.ldap;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+
+import java.util.Set;
 
 import org.apache.directory.shared.ldap.model.entry.DefaultEntry;
 import org.apache.directory.shared.ldap.model.entry.Entry;
@@ -15,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.ldap.SocialPerson.Gender;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Ordering;
 
 /**
  * Test mapping of {@link Person} to {@link Entry} and back.
@@ -40,7 +45,7 @@ public class LdapMapperTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test public void canMapSimpleClassToEntry() throws LdapInvalidAttributeValueException {
+	@Test public void mapsSimpleClassToEntry() throws LdapInvalidAttributeValueException {
 		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "hendy@soluvas.com");
 		log.info("Input Person: {}", hendy);
 		
@@ -58,7 +63,7 @@ public class LdapMapperTest {
 	}
 
 	@Test
-	public void canMapMultiValuesToEntry() throws LdapInvalidAttributeValueException {
+	public void mapsMultiValuesToEntry() throws LdapInvalidAttributeValueException {
 		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
 		hendy.setEmails(ImmutableSet.of("hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com"));
 		log.info("Input Person: {}", hendy);
@@ -77,7 +82,7 @@ public class LdapMapperTest {
 	}
 	
 	@Test
-	public void canMapSubclassToEntry() throws LdapInvalidAttributeValueException {
+	public void mapsSubclassToEntry() throws LdapInvalidAttributeValueException {
 		SocialPerson hendy = new SocialPerson("hendy", "hendy.irawan", "Hendy", "Irawan", Gender.MALE);
 		hendy.setEmails(ImmutableSet.of("hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com"));
 		hendy.setPhotoId("hendy");
@@ -106,7 +111,7 @@ public class LdapMapperTest {
 		assertEquals("hendyirawan", entry.get("twitterScreenName").getString());
 	}
 
-	@Test public void canMapEntryToSimpleClass() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
+	@Test public void mapsEntryToSimpleClass() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
 		Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		entry.put("objectClass", "organizationalPerson", "extensibleObject");
 		entry.put("uid", "hendy");
@@ -143,7 +148,7 @@ public class LdapMapperTest {
 	}
 
 	@Test
-	public void canMapMultiToSimpleClass() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
+	public void mapsMultiToSimpleClass() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
 		Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		entry.put("objectClass", "organizationalPerson", "extensibleObject");
 		entry.put("uid", "hendy");
@@ -167,7 +172,7 @@ public class LdapMapperTest {
 	}
 
 	@Test
-	public void canMapEntryToSubclass() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
+	public void mapsEntryToSubclass() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
 		Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		entry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject");
 		entry.put("uid", "hendy");
@@ -201,7 +206,25 @@ public class LdapMapperTest {
 		assertEquals("hendyirawan", person.getTwitterScreenName());
 	}
 
-	@Test public void canMapLongToEntry() throws LdapInvalidAttributeValueException {
+	@Test
+	public void includesSuperClassAttributes() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
+		Set<String> expectedAttributeIds = ImmutableSet.of(
+				// Person:
+				"uid", "uniqueIdentifier", "gn", "givenName", "sn", "cn",
+				"userPassword", "mail", "mobile", "telephoneNumber",
+				"street", "postalCode", "l", "st", "c",
+				// SocialPerson:
+				"primaryMail", "photoId", "gender", "fbId", "facebookId", "fbUser", "facebookUser",
+				"fbAccessToken", "facebookAccessToken",
+				"twitterId", "twitterScreenName", "virtualMail", "nickname");
+		Set<String> attributeIds = mapper.getAttributeIds(SocialPerson.class);
+		;
+		log.info("Attribute IDs of SocialPerson: {}", attributeIds);
+		assertEquals(Ordering.natural().immutableSortedCopy(expectedAttributeIds), Ordering.natural().immutableSortedCopy(attributeIds));
+//		assertEquals(expectedAttributeIds, attributeIds);
+	}
+
+	@Test public void mapsLongToEntry() throws LdapInvalidAttributeValueException {
 		PersonWithLong hendy = new PersonWithLong("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
 		hendy.setMagentoId(123L);
 		log.info("Input Person: {}", hendy);
@@ -212,7 +235,7 @@ public class LdapMapperTest {
 		assertEquals("123", entry.get("magentoId").getString());
 	}
 	
-	@Test public void canAttributeToLong() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
+	@Test public void mapsAttributeToLong() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
 		Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		entry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject");
 		entry.put("uid", "hendy");
@@ -229,6 +252,25 @@ public class LdapMapperTest {
 		log.info("Output Person: {}", person);
 		
 		assertEquals((Long)123L, person.getMagentoId());
+	}
+	
+	@Test public void mapsAttributeAlias() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
+		Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		entry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject");
+		entry.put("uid", "hendy");
+		entry.put("uniqueIdentifier", "hendy.irawan");
+		entry.put("givenName", "Hendy");
+		entry.put("sn", "Irawan");
+		entry.put("cn", "Hendy Irawan");
+		entry.put("mail", "hendy@soluvas.com", "ceefour666@gmail.com", "hendy@bippo.co.id");
+		entry.put("magentoId", "123");
+		
+		log.info("Input Entry: {}", entry);
+		
+		SocialPerson person = mapper.fromEntry(entry, SocialPerson.class);
+		log.info("Output Person: {}", person);
+		
+		assertEquals("Hendy", person.getFirstName());
 	}
 	
 }
