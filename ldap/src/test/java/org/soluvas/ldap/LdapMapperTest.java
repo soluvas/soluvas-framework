@@ -1,16 +1,22 @@
 package org.soluvas.ldap;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.util.Collection;
 import java.util.Set;
 
 import org.apache.directory.shared.ldap.model.entry.DefaultEntry;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.exception.LdapInvalidAttributeValueException;
 import org.apache.directory.shared.ldap.model.exception.LdapInvalidDnException;
+import org.apache.directory.shared.ldap.model.schema.SchemaManager;
+import org.apache.directory.shared.ldap.model.schema.registries.Schema;
+import org.apache.directory.shared.ldap.model.schema.registries.SchemaLoader;
+import org.apache.directory.shared.ldap.schemaloader.LdifSchemaLoader;
+import org.apache.directory.shared.ldap.schemamanager.impl.DefaultSchemaManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +58,7 @@ public class LdapMapperTest {
 		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
 		log.info("Output Entry: {}", entry);
 		
-		assertTrue( entry.contains("objectClass", "organizationalPerson", "uidObject", "extensibleObject") );
+		assertTrue(entry.contains("objectClass", "inetOrgPerson", "uidObject", "extensibleObject") );
 		assertEquals("uid=hendy,ou=users,dc=aksimata,dc=com", entry.getDn().toString());
 		assertEquals("hendy", entry.get("uid").getString());
 		assertEquals("hendy.irawan", entry.get("uniqueIdentifier").getString());
@@ -62,8 +68,34 @@ public class LdapMapperTest {
 		assertEquals("hendy@soluvas.com", entry.get("mail").getString());
 	}
 
-	@Test
-	public void mapsMultiValuesToEntry() throws LdapInvalidAttributeValueException {
+	@Test public void mapsEntryWithProperAttributeTypes() throws LdapInvalidAttributeValueException {
+		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "hendy@soluvas.com");
+		log.info("Input Person: {}", hendy);
+		
+		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
+		log.info("Output Entry: {}", entry);
+		
+		assertNotNull(entry.get("uid").getAttributeType());
+		assertNotNull(entry.get("uniqueIdentifier").getAttributeType());
+		assertNotNull(entry.get("gn").getAttributeType());
+		assertNotNull(entry.get("givenName").getAttributeType());
+		assertNotNull(entry.get("sn").getAttributeType());
+		assertNotNull(entry.get("cn").getAttributeType());
+		assertNotNull(entry.get("mail").getAttributeType());
+	}
+
+	@Test public void mapsSimpleClassWithProperAlias() throws LdapInvalidAttributeValueException {
+		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "hendy@soluvas.com");
+		log.info("Input Person: {}", hendy);
+		
+		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
+		log.info("Output Entry: {}", entry);
+		
+		assertEquals("Hendy", entry.get("gn").getString());
+		assertEquals("Hendy", entry.get("givenName").getString());
+	}
+
+	@Test public void mapsMultiValuesToEntry() throws LdapInvalidAttributeValueException {
 		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
 		hendy.setEmails(ImmutableSet.of("hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com"));
 		log.info("Input Person: {}", hendy);
@@ -71,7 +103,7 @@ public class LdapMapperTest {
 		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
 		log.info("Output Entry: {}", entry);
 		
-		assertTrue( entry.contains("objectClass", "organizationalPerson", "uidObject", "extensibleObject") );
+		assertTrue( entry.contains("objectClass", "inetOrgPerson", "uidObject", "extensibleObject") );
 		assertEquals("uid=hendy,ou=users,dc=aksimata,dc=com", entry.getDn().toString());
 		assertEquals("hendy", entry.get("uid").getString());
 		assertEquals("hendy.irawan", entry.get("uniqueIdentifier").getString());
@@ -81,8 +113,14 @@ public class LdapMapperTest {
 		assertTrue( entry.contains("mail", "hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com") );
 	}
 	
-	@Test
-	public void mapsSubclassToEntry() throws LdapInvalidAttributeValueException {
+	@Test public void mapsSubclassToEntry() throws Exception {
+		SchemaLoader customSchemaLoader = new LdifSchemaLoader(new File("/var/lib/apacheds-2.0.0-M7/default/partitions/schema/"));
+		SchemaManager customSchemaMgr = new DefaultSchemaManager(customSchemaLoader);
+		final Collection<Schema> schemas = customSchemaLoader.getAllEnabled();
+		log.info("Loaded {} LDAP schemas: {}", schemas.size(), schemas);
+		customSchemaMgr.enable(schemas.toArray(new Schema[] {}));
+		LdapMapper customMapper = new LdapMapper(customSchemaMgr);
+		
 		SocialPerson hendy = new SocialPerson("hendy", "hendy.irawan", "Hendy", "Irawan", Gender.MALE);
 		hendy.setEmails(ImmutableSet.of("hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com"));
 		hendy.setPhotoId("hendy");
@@ -92,10 +130,10 @@ public class LdapMapperTest {
 		hendy.setTwitterScreenName("hendyirawan");
 		log.info("Input Person: {}", hendy);
 		
-		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
+		Entry entry = customMapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
 		log.info("Output Entry: {}", entry);
 		
-		assertTrue( entry.contains("objectClass", "organizationalPerson", "uidObject", "extensibleObject") );
+		assertTrue( entry.contains("objectClass", "inetOrgPerson", "uidObject", "extensibleObject") );
 		assertEquals("uid=hendy,ou=users,dc=aksimata,dc=com", entry.getDn().toString());
 		assertEquals("hendy", entry.get("uid").getString());
 		assertEquals("hendy.irawan", entry.get("uniqueIdentifier").getString());
@@ -226,13 +264,13 @@ public class LdapMapperTest {
 
 	@Test public void mapsLongToEntry() throws LdapInvalidAttributeValueException {
 		PersonWithLong hendy = new PersonWithLong("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
-		hendy.setMagentoId(123L);
+		hendy.setEmployeeNumber(123L);
 		log.info("Input Person: {}", hendy);
 		
 		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
 		log.info("Output Entry: {}", entry);
 		
-		assertEquals("123", entry.get("magentoId").getString());
+		assertEquals("123", entry.get("employeeNumber").getString());
 	}
 	
 	@Test public void mapsAttributeToLong() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
@@ -244,14 +282,14 @@ public class LdapMapperTest {
 		entry.put("sn", "Irawan");
 		entry.put("cn", "Hendy Irawan");
 		entry.put("mail", "hendy@soluvas.com", "ceefour666@gmail.com", "hendy@bippo.co.id");
-		entry.put("magentoId", "123");
+		entry.put("employeeNumber", "123");
 		
 		log.info("Input Entry: {}", entry);
 		
 		PersonWithLong person = mapper.fromEntry(entry, PersonWithLong.class);
 		log.info("Output Person: {}", person);
 		
-		assertEquals((Long)123L, person.getMagentoId());
+		assertEquals((Long)123L, person.getEmployeeNumber());
 	}
 	
 	@Test public void mapsAttributeAlias() throws LdapInvalidAttributeValueException, LdapInvalidDnException {

@@ -19,7 +19,9 @@ import org.apache.directory.shared.ldap.model.exception.LdapInvalidAttributeValu
 import org.apache.directory.shared.ldap.model.exception.LdapInvalidDnException;
 import org.apache.directory.shared.ldap.model.name.Dn;
 import org.apache.directory.shared.ldap.model.name.Rdn;
+import org.apache.directory.shared.ldap.model.schema.AttributeType;
 import org.apache.directory.shared.ldap.model.schema.SchemaManager;
+import org.apache.directory.shared.ldap.schemamanager.impl.DefaultSchemaManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,17 +45,18 @@ import com.google.common.collect.Lists;
 public class LdapMapper {
 
 	private transient Logger log = LoggerFactory.getLogger(LdapMapper.class);
-	private transient SchemaManager schemaManager;
+	@Nonnull private transient SchemaManager schemaManager;
 	
-	public LdapMapper() {
-		super();
+	public LdapMapper() throws Exception {
+		this(new DefaultSchemaManager());
 	}
 
 	/**
 	 * @param schemaManager
 	 */
-	public LdapMapper(SchemaManager schemaManager) {
+	public LdapMapper(@Nonnull SchemaManager schemaManager) {
 		super();
+		Preconditions.checkNotNull(schemaManager, "schemaManager cannot be null");
 		this.schemaManager = schemaManager;
 	}
 
@@ -131,9 +134,10 @@ public class LdapMapper {
 	public Entry toEntry(Object obj, String baseDn) {
 		Class<?> clazz = obj.getClass();
 		log.trace("Mapping {} {} as Entry in {}", new Object[] { clazz.getName(), obj, baseDn });
+		Preconditions.checkNotNull(schemaManager, "schemaManager cannot be null");
 		
 		// Create the Entry (TODO: should be after mapping is prepared)
-		DefaultEntry entry = schemaManager != null ? new DefaultEntry(schemaManager) : new DefaultEntry();
+		DefaultEntry entry = new DefaultEntry(schemaManager);
 		
 		// Prepare the mapping from the provided object side
 		
@@ -146,7 +150,9 @@ public class LdapMapper {
 		String[] objectClasses = entryAnn.objectClasses();
 		log.trace("{} maps to objectClasses: {}", clazz.getName(), objectClasses);
 		try {
-			entry.add("objectClass", objectClasses);
+			AttributeType objectClassAttrType = schemaManager.getAttributeType("objectClass");
+			Preconditions.checkNotNull(objectClassAttrType, "Cannot find AttributeType for 'objectClass' (2.5.4.0) using %s", schemaManager);
+			entry.add(objectClassAttrType, objectClasses);
 			
 			Class<?> currentClass = clazz;
 			while (currentClass != null) {
@@ -241,6 +247,8 @@ public class LdapMapper {
 			if (ldapAttribute == null)
 				continue;
 			String attrName = ldapAttribute.value()[0];
+			final AttributeType attrType = schemaManager.getAttributeType(attrName);
+			Preconditions.checkNotNull(attrType, "Cannot find attribute %s in schema %s", attrName, schemaManager);
 			LdapRdn ldapRdn = field.getAnnotation(LdapRdn.class);
 			String fieldName = field.getName();
 			try {
@@ -252,7 +260,7 @@ public class LdapMapper {
 					final Dn dn = new Dn(new Rdn(attrName, value), new Dn(baseDn));
 					log.trace("Map {} with {}={} as Entry DN: {}",
 						clazz.getName(), fieldName, value, dn );
-					entry.put(attrName, value);
+					entry.put(attrType, value);
 					entry.setDn(dn);
 				} else {
 					if (Set.class.isAssignableFrom(field.getType())) {
@@ -265,9 +273,9 @@ public class LdapMapper {
 									return convertFromPropertyValue(field.getType(), input);
 								}
 							}) );
-							log.trace("Map {}#{} as multi {}: {}",
-									clazz.getName(), fieldName, attrName, attrValues );
-							entry.put(attrName, attrValues.toArray(new String[] { }));
+							log.trace("Map {}#{} as multi {} ({}): {}",
+									clazz.getName(), fieldName, attrName, attrType.getOid(), attrValues );
+							entry.put(attrType, attrValues.toArray(new String[] { }));
 						} else {
 							log.trace("Not mapping null {}#{} as multi {}",
 									clazz.getName(), fieldName, attrName );
@@ -277,8 +285,8 @@ public class LdapMapper {
 						Object objValue = PropertyUtils.getProperty(obj, fieldName);
 						if (objValue != null) {
 							String attrValue = convertFromPropertyValue(field.getType(), objValue);
-							log.trace("Map {}#{} as {}: {}",
-									clazz.getName(), fieldName, attrName, attrValue );
+							log.trace("Map {}#{} as {} ({}): {}",
+									clazz.getName(), fieldName, attrName, attrType.getOid(), attrValue );
 							entry.put(attrName, attrValue);
 						} else {
 							log.trace("Not mapping null {}#{} as {}", new Object[] {

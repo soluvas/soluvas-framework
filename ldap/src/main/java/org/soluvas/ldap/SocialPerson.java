@@ -11,7 +11,7 @@ import com.google.common.collect.ImmutableSet.Builder;
  * @author ceefour
  */
 @SuppressWarnings("serial")
-@LdapEntry(objectClasses={"organizationalPerson", "uidObject", "extensibleObject", "socialPerson", "facebookObject", "twitterObject"})
+@LdapEntry(objectClasses={"inetOrgPerson", "uidObject", "extensibleObject", "socialPerson", "facebookObject", "twitterObject"})
 public class SocialPerson extends Person {
 	
 	public static enum Gender { MALE, FEMALE };
