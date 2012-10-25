@@ -26,14 +26,14 @@ public class PersonWithLong implements Serializable, User {
 	@LdapAttribute("cn") @NotNull private String name;
 	@LdapAttribute("userPassword") private String password;
 	@LdapAttribute("mail") private Set<String> emails;
-	@LdapAttribute("magentoId") private Long magentoId;
+	@LdapAttribute("employeeNumber") private Long employeeNumber;
 	
-	public Long getMagentoId() {
-		return magentoId;
+	public Long getEmployeeNumber() {
+		return employeeNumber;
 	}
 
-	public void setMagentoId(Long magentoId) {
-		this.magentoId = magentoId;
+	public void setEmployeeNumber(Long employeeNumber) {
+		this.employeeNumber = employeeNumber;
 	}
 
 	public PersonWithLong() {

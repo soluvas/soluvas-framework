@@ -1,6 +1,7 @@
 package org.soluvas.ldap;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
@@ -15,7 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -92,6 +95,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	
 	/**
 	 * Modify an LDAP {@link Entry} from typed POJO object.
+	 * <tt>uid</tt> attribute cannot be replaced.
 	 * @param obj
 	 * @param removeExtraAttributes
 	 * @return
@@ -104,7 +108,14 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 			@Override @Nullable
 			public Entry apply(@Nullable LdapConnection conn) {
 				try {
-					LdapUtils.update(conn, entry, removeExtraAttributes, "uid"); 
+					Set<String> knownAttributes = mapper.getAttributeIds(entityClass);
+					Set<String> affectedAttributes = ImmutableSet.copyOf(Iterables.filter(knownAttributes, new Predicate<String>() {
+						@Override
+						public boolean apply(@Nullable String input) {
+							return !"uid".equalsIgnoreCase(input);
+						}
+					}));
+					LdapUtils.update(conn, entry, conn.getSchemaManager(), affectedAttributes); 
 					log.debug("Lookup modified LDAP Entry {}", entry.getDn());
 					return conn.lookup(entry.getDn());
 				} catch (LdapException e) {
