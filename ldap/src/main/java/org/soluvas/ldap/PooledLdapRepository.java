@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
@@ -57,6 +58,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 			mapper = withConnection(new Function<LdapConnection, LdapMapper>() {
 				@Override @Nullable
 				public LdapMapper apply(@Nullable LdapConnection conn) {
+					Preconditions.checkNotNull(conn.getSchemaManager(), "LDAP connection %s must have SchemaManager", conn);
 					return new LdapMapper(conn.getSchemaManager());
 				}
 			});

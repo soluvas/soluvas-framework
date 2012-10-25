@@ -259,6 +259,11 @@ public class LdapUtils {
 		try {
 			LdapConnection conn = ldapPool.borrowObject();
 			try {
+				if (conn.getSchemaManager() == null) {
+					conn.loadSchema();
+					SchemaManager schemaManager = conn.getSchemaManager();
+					Preconditions.checkNotNull(schemaManager, "Cannot load schemas for LDAP connection %s", conn);
+				}
 				return function.apply(conn);
 			} finally {
 				ldapPool.returnObject(conn);
