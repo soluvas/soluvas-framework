@@ -1,7 +1,6 @@
 package org.soluvas.ldap;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -12,6 +11,7 @@ import org.apache.directory.shared.ldap.model.entry.DefaultEntry;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.exception.LdapInvalidAttributeValueException;
 import org.apache.directory.shared.ldap.model.exception.LdapInvalidDnException;
+import org.apache.directory.shared.ldap.model.schema.AttributeType;
 import org.apache.directory.shared.ldap.model.schema.SchemaManager;
 import org.apache.directory.shared.ldap.model.schema.registries.Schema;
 import org.apache.directory.shared.ldap.model.schema.registries.SchemaLoader;
@@ -35,13 +35,15 @@ public class LdapMapperTest {
 
 	private transient Logger log = LoggerFactory.getLogger(LdapMapperTest.class);
 	private LdapMapper mapper;
+	private DefaultSchemaManager schemaManager;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		mapper = new LdapMapper();
+		schemaManager = new DefaultSchemaManager();
+		mapper = new LdapMapper(schemaManager);
 	}
 
 	/**
@@ -75,13 +77,28 @@ public class LdapMapperTest {
 		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
 		log.info("Output Entry: {}", entry);
 		
-		assertNotNull(entry.get("uid").getAttributeType());
-		assertNotNull(entry.get("uniqueIdentifier").getAttributeType());
-		assertNotNull(entry.get("gn").getAttributeType());
-		assertNotNull(entry.get("givenName").getAttributeType());
-		assertNotNull(entry.get("sn").getAttributeType());
-		assertNotNull(entry.get("cn").getAttributeType());
-		assertNotNull(entry.get("mail").getAttributeType());
+		AttributeType objectClassType = schemaManager.getAttributeType("objectClass");
+		assertEquals(objectClassType, entry.get("objectClass").getAttributeType());
+		assertTrue("mapped Entry should contain AttributeType objectClass", entry.containsAttribute(objectClassType));
+		AttributeType uidType = schemaManager.getAttributeType("uid");
+		assertEquals(uidType, entry.get("uid").getAttributeType());
+		assertTrue("mapped Entry should contain AttributeType uid", entry.containsAttribute(uidType));
+		AttributeType uniqueIdentifierType = schemaManager.getAttributeType("uniqueIdentifier");
+		assertEquals(uniqueIdentifierType, entry.get("uniqueIdentifier").getAttributeType());
+		assertTrue("mapped Entry should contain AttributeType uniqueIdentifier", entry.containsAttribute(uniqueIdentifierType));
+		AttributeType gnType = schemaManager.getAttributeType("gn");
+		assertEquals(gnType, entry.get("gn").getAttributeType());
+		assertEquals(gnType, entry.get("givenName").getAttributeType());
+		assertTrue("mapped Entry should contain AttributeType gn", entry.containsAttribute(gnType));
+		AttributeType snType = schemaManager.getAttributeType("sn");
+		assertEquals(snType, entry.get("sn").getAttributeType());
+		assertTrue("mapped Entry should contain AttributeType sn", entry.containsAttribute(snType));
+		AttributeType cnType = schemaManager.getAttributeType("cn");
+		assertEquals(cnType, entry.get("cn").getAttributeType());
+		assertTrue("mapped Entry should contain AttributeType cn", entry.containsAttribute(cnType));
+		AttributeType mailType = schemaManager.getAttributeType("mail");
+		assertEquals(mailType, entry.get("mail").getAttributeType());
+		assertTrue("mapped Entry should contain AttributeType mail", entry.containsAttribute(mailType));
 	}
 
 	@Test public void mapsSimpleClassWithProperAlias() throws LdapInvalidAttributeValueException {
