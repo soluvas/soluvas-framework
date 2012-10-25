@@ -34,6 +34,7 @@
 	</licenses>
 
 	<properties>
+		<soluvas-framework.version>1.0.0-SNAPSHOT</soluvas-framework.version>
 		<karaf.version>2.3.0</karaf.version>
 
 		<akka.version>2.0.2</akka.version>
@@ -53,57 +54,57 @@
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>soluvas-commons</artifactId>
-				<version>${project.version}</version>
+				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>soluvas-json</artifactId>
-				<version>${project.version}</version>
+				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>soluvas-ldap</artifactId>
-				<version>${project.version}</version>
+				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>soluvas-image-store</artifactId>
-				<version>${project.version}</version>
+				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>soluvas-cdi</artifactId>
-				<version>${project.version}</version>
+				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>soluvas-push</artifactId>
-				<version>${project.version}</version>
+				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>soluvas-async</artifactId>
-				<version>${project.version}</version>
+				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>soluvas-jaxrs</artifactId>
-				<version>${project.version}</version>
+				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>soluvas-multitenant</artifactId>
-				<version>${project.version}</version>
+				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>soluvas-mongo</artifactId>
-				<version>${project.version}</version>
+				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>org.soluvas.facebook</artifactId>
-				<version>${project.version}</version>
+				<version>${soluvas-framework.version}</version>
 			</dependency>
 
 			<dependency>

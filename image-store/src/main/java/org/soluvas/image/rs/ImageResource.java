@@ -23,6 +23,13 @@ public class ImageResource {
 	private transient Logger log = LoggerFactory.getLogger(ImageResource.class);
 	private List<ImageRepository> imageRepos;
 	
+	/**
+	 * biar JBoss senang :)
+	 */
+	public ImageResource() {
+		super();
+	}
+	
 	public ImageResource(List<ImageRepository> imageRepos) {
 		super();
 		this.imageRepos = imageRepos;
