@@ -12,20 +12,13 @@
 			<property name="path" value="/js"/>
 		</bean>
 	</service>
-	<!-- TODO: dynamic image configs -->
-	<service auto-export="interfaces">
-		<bean class="org.soluvas.web.site.JavaScriptModuleImpl">
-			<argument value="org.soluvas.image/imageConfigs"/>
-			<argument value="/cxf/api/org.soluvas.image/imageConfigs"/>
-		</bean>
-	</service>
 	<service auto-export="interfaces">
 		<bean class="org.soluvas.web.site.JavaScriptModuleImpl">
 			<argument value="org.soluvas.image"/>
 			<argument value="js/org.soluvas.image"/>
 		</bean>
 	</service>
-	
+
 	<reference-list id="imageRepos" interface="org.soluvas.image.store.ImageRepository" availability="optional"
 		filter="(&amp;(tenantId=berbatik)(tenantEnv=dev))" />
 
@@ -46,6 +39,14 @@
 					<ref component-id="imageRs"/>
 				</list>
 			</argument>
+		</bean>
+	</service>
+	<service auto-export="interfaces">
+		<bean class="org.soluvas.web.site.JavaScriptModuleImpl">
+			<argument value="org.soluvas.image/imageConfigs"/>
+			<argument value="org.soluvas.image/imageConfigs"/>
+			<argument value="org.soluvas.image/imageConfigs"/>
+			<argument value="DYNAMIC"/>
 		</bean>
 	</service>
 
