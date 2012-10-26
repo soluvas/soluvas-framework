@@ -16,16 +16,26 @@ public class SocialPerson extends Person {
 	
 	public static enum Gender { MALE, FEMALE };
 
-	@LdapAttribute("primaryMail") private String primaryEmail;
-	@LdapAttribute("photoId") private String photoId;
-	@LdapAttribute("gender") private Gender gender;
-	@LdapAttribute({"fbId", "facebookId"}) private Long facebookId;
-	@LdapAttribute({"fbUser", "facebookUser"}) private String facebookUsername;
-	@LdapAttribute({"fbAccessToken", "facebookAccessToken"}) private String facebookAccessToken;
-	@LdapAttribute("twitterId") private Long twitterId;
-	@LdapAttribute("twitterScreenName") private String twitterScreenName;
-	@LdapAttribute("virtualMail") private String virtualMail;
-	@LdapAttribute("nickname") private String nickname;
+	@LdapAttribute("primaryMail")
+	private String primaryEmail;
+	@LdapAttribute("photoId")
+	private String photoId;
+	@LdapAttribute("gender")
+	private Gender gender;
+	@LdapAttribute({ "fbId", "facebookId" })
+	private Long facebookId;
+	@LdapAttribute({ "fbUser", "facebookUsername" })
+	private String facebookUsername;
+	@LdapAttribute("fbAccessToken")
+	private String facebookAccessToken;
+	@LdapAttribute("twitterId")
+	private Long twitterId;
+	@LdapAttribute("twitterScreenName")
+	private String twitterScreenName;
+	@LdapAttribute("virtualMail")
+	private String virtualMail;
+	@LdapAttribute("nickname")
+	private String nickname;
 	
 	public SocialPerson() {
 		super();
