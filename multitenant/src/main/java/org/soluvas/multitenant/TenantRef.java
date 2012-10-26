@@ -1,4 +1,4 @@
-package org.soluvas.jaxrs;
+package org.soluvas.multitenant;
 
 import java.io.Serializable;
 
