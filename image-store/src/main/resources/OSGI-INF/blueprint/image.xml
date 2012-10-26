@@ -15,7 +15,7 @@
 	<service auto-export="interfaces">
 		<bean class="org.soluvas.web.site.JavaScriptModuleImpl">
 			<argument value="org.soluvas.image"/>
-			<argument value="js/org.soluvas.image"/>
+			<argument value="org.soluvas.image"/>
 		</bean>
 	</service>
 
