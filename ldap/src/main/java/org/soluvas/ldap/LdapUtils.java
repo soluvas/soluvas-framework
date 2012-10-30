@@ -1,7 +1,6 @@
 package org.soluvas.ldap;
 
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
@@ -35,7 +34,6 @@ import org.apache.directory.shared.ldap.model.schema.SchemaManager;
 import org.apache.directory.shared.ldap.model.url.LdapUrl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.NotNullPredicate;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -44,6 +42,7 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /**
  * Manages {@link Entry} objects inside a base DN entry.
@@ -167,9 +166,14 @@ public class LdapUtils {
 				continue;
 			if (!affectedAttributeTypes.contains(updatedAttrType))
 				continue;
-			Set<String> newValues = ImmutableSet.copyOf(Iterables.filter(Iterables.transform(updatedAttr, new ValueToString()),
-					new NotNullPredicate<String>()));
-			Set<String> oldValues = ImmutableSet.of();
+
+			// from old algorithm :
+			// Set<String> newValues =
+			// ImmutableSet.copyOf(Iterables.filter(Iterables.transform(updatedAttr,
+			// new ValueToString()),
+			// new NotNullPredicate<String>()));
+			// Set<String> oldValues = ImmutableSet.of();
+
 			// get old value from either AttributeType (if present) or ID
 			Attribute existingAttr = existing.get(updatedAttrType.getName());
 			if (existingAttr == null) {
@@ -244,7 +248,43 @@ public class LdapUtils {
 	 */
 	public static List<Entry> asList(@Nonnull EntryCursor cursor) {
 		try {
-			ImmutableList<Entry> entries = ImmutableList.copyOf((Iterable<Entry>)cursor);
+			List<Entry> entries = ImmutableList.copyOf(cursor);
+			return entries;
+		} finally {
+			try {
+				cursor.close();
+			} catch (Exception e) {
+				log.warn("Error closing LDAP cursor", e);
+			}
+		}
+	}
+
+	/**
+	 * Transforms as {@link EntryCursor} to a {@link List} of T objects, then
+	 * closes the connection.
+	 * 
+	 * @param cursor
+	 * @param function
+	 * @return
+	 */
+	public static <T> List<T> transform(@Nonnull EntryCursor cursor,
+			Function<Entry, T> function) {
+		return Lists.transform(LdapUtils.asList(cursor), function);
+	}
+
+	/**
+	 * Transforms as {@link EntryCursor} to a {@link Set} of T objects, then
+	 * closes the connection.
+	 * 
+	 * @param cursor
+	 * @param function
+	 * @return
+	 */
+	public static <T> Set<T> transformSet(@Nonnull EntryCursor cursor,
+			Function<Entry, T> function) {
+		try {
+			Set<T> entries = ImmutableSet.copyOf(Iterables.transform(cursor,
+					function));
 			return entries;
 		} finally {
 			try {
