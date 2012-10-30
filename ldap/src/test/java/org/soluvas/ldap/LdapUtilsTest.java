@@ -102,18 +102,20 @@ public class LdapUtilsTest {
 		
 		Entry newEntry = mapper.toEntry(liz, "ou=users,dc=dev,dc=berbatik,dc=com");
 		LdapUtils.update(conn, newEntry,
-				schemaManager, ImmutableSet.of("objectClass", "uid", "cn") );
+				ImmutableSet.of("objectClass", "uid", "cn"));
 	}
 
 	@Test public void canUpdateSocialPerson() throws LdapException {
 		Entry entry = conn.lookup("uid=budi,ou=users,dc=dev,dc=berbatik,dc=com");
-		SocialPerson liz = new LdapMapper(conn.getSchemaManager()).fromEntry(entry, SocialPerson.class);
+		final LdapMapper socialMapper = new LdapMapper(conn.getSchemaManager());
+		SocialPerson liz = socialMapper.fromEntry(entry, SocialPerson.class);
 		
 		liz.setFacebookAccessToken("abcdefgh");
 		
-		Entry newEntry = mapper.toEntry(liz, "ou=users,dc=dev,dc=berbatik,dc=com");
+		Entry newEntry = socialMapper.toEntry(liz,
+				"ou=users,dc=dev,dc=berbatik,dc=com");
 		LdapUtils.update(conn, newEntry,
-				schemaManager, ImmutableSet.of("objectClass", "uid", "cn", "fbAccessToken") );
+				ImmutableSet.of("objectClass", "uid", "cn", "fbAccessToken"));
 	}
 
 	@Test public void replaceAttributeModifyRequest() throws LdapException {
@@ -136,13 +138,15 @@ public class LdapUtilsTest {
 	}
 
 	@Test public void replaceAttributeAliasModifyRequest() throws LdapException {
-		Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		Entry existing = new DefaultEntry(schemaManager,
+				"uid=hendy,ou=users,dc=aksimata,dc=com");
 		existing.put("objectClass", "organizationalPerson", "extensibleObject");
 		existing.put("uid", "hendy");
 		existing.put("givenName", "Hendy");
 		log.info("Existing Entry: {}", existing);
 		
-		Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		Entry updating = new DefaultEntry(schemaManager,
+				"uid=hendy,ou=users,dc=aksimata,dc=com");
 		updating.put("objectClass", "organizationalPerson", "extensibleObject");
 		updating.put("uid", "hendy");
 		updating.put("gn", "Rudi");

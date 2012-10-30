@@ -116,7 +116,7 @@ public class LdapMapper {
 	 * @return
 	 */
 	public String[] getObjectClasses(Class<?> clazz) {
-		LdapEntry entryAnn = (LdapEntry)clazz.getAnnotation(LdapEntry.class);
+		LdapEntry entryAnn = clazz.getAnnotation(LdapEntry.class);
 		if (entryAnn == null) {
 			throw new LdapMappingException(clazz.getName() + " must be annotated with @LdapEntry");
 		}
@@ -143,7 +143,7 @@ public class LdapMapper {
 		
 		
 		// Prepare the mapping from the Class side
-		LdapEntry entryAnn = (LdapEntry)clazz.getAnnotation(LdapEntry.class);
+		LdapEntry entryAnn = clazz.getAnnotation(LdapEntry.class);
 		if (entryAnn == null) {
 			throw new LdapMappingException(clazz.getName() + " must be annotated with @LdapEntry");
 		}
@@ -287,7 +287,7 @@ public class LdapMapper {
 							String attrValue = convertFromPropertyValue(field.getType(), objValue);
 							log.trace("Map {}#{} as {} ({}): {}",
 									clazz.getName(), fieldName, attrName, attrType.getOid(), attrValue );
-							entry.put(attrName, attrValue);
+							entry.put(attrType, attrValue);
 						} else {
 							log.trace("Not mapping null {}#{} as {}", new Object[] {
 									clazz.getName(), fieldName, attrName });
@@ -429,6 +429,7 @@ public class LdapMapper {
 		if (fieldType.isEnum()) {
 			final R[] enumConstants = fieldType.getEnumConstants();
 			R found = Iterables.find( ImmutableList.copyOf(enumConstants), new Predicate<R>() {
+				@Override
 				public boolean apply(R input) {
 					return ((Enum)input).name().equalsIgnoreCase((String) value);
 				};

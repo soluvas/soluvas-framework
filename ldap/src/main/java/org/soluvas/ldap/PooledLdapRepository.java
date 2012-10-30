@@ -53,6 +53,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 		return LdapUtils.withConnection(pool, function);
 	}
 	
+	@Override
 	public void init() {
 		try {
 			mapper = withConnection(new Function<LdapConnection, LdapMapper>() {
@@ -72,6 +73,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * @param obj
 	 * @throws LdapException
 	 */
+	@Override
 	public T add(T obj) {
 		final Entry entry = mapper.toEntry(obj, baseDn);
 		log.info("Add LDAP Entry {}: {}", entry.getDn(), entry);
@@ -103,6 +105,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * @return
 	 * @throws LdapException
 	 */
+	@Override
 	public T modify(T obj, final boolean removeExtraAttributes) {
 		final Entry entry = mapper.toEntry(obj, baseDn);
 		log.info("Modify LDAP Entry {}", entry.getDn(), entry); 
@@ -117,7 +120,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 							return !"uid".equalsIgnoreCase(input);
 						}
 					}));
-					LdapUtils.update(conn, entry, conn.getSchemaManager(), affectedAttributes); 
+					LdapUtils.update(conn, entry, affectedAttributes);
 					log.debug("Lookup modified LDAP Entry {}", entry.getDn());
 					return conn.lookup(entry.getDn());
 				} catch (LdapException e) {
@@ -134,6 +137,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * @param obj
 	 * @throws LdapException
 	 */
+	@Override
 	public void delete(T obj) {
 		final Entry entry = mapper.toEntry(obj, baseDn);
 		log.info("Delete LDAP Entry {}", entry.getDn()); 
@@ -160,6 +164,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * @param obj
 	 * @throws LdapException
 	 */
+	@Override
 	public void delete(String id) {
 		final Dn dn = toDn(id);
 		log.info("Delete LDAP Entry {}", dn); 
@@ -187,6 +192,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * @throws LdapException
 	 * @return T entity or <tt>null</tt> if none found.
 	 */
+	@Override
 	public <U extends T> U findOne(String id) {
 		final Dn dn = toDn(id);
 		log.info("Lookup LDAP Entry {}", dn); 
@@ -214,6 +220,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 		}
 	}
 
+	@Override
 	public Dn toDn(String id) {
 		return mapper.toDn(id, entityClass, baseDn);
 	}
@@ -226,6 +233,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * @throws LdapException
 	 * @return T entity or <tt>null</tt> if none found.
 	 */
+	@Override
 	public T findOneByAttribute(String attribute, String value) {
 		String[] objectClasses = mapper.getObjectClasses(entityClass);
 		// Only search based on first objectClass, this is the typical use case
@@ -263,6 +271,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * @param obj
 	 * @throws LdapException
 	 */
+	@Override
 	public List<T> findAll() {
 		String[] objectClasses = mapper.getObjectClasses(entityClass);
 //		String filter = "(&";
@@ -302,6 +311,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	/**
 	 * @return the baseDn
 	 */
+	@Override
 	public String getBaseDn() {
 		return baseDn;
 	}
@@ -309,6 +319,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	/**
 	 * @param baseDn the baseDn to set
 	 */
+	@Override
 	public void setBaseDn(String baseDn) {
 		this.baseDn = baseDn;
 	}
@@ -316,6 +327,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	/**
 	 * @return the entityClass
 	 */
+	@Override
 	public Class<T> getEntityClass() {
 		return entityClass;
 	}
@@ -323,6 +335,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	/**
 	 * @param entityClass the entityClass to set
 	 */
+	@Override
 	public void setEntityClass(Class<T> entityClass) {
 		this.entityClass = entityClass;
 	}
@@ -330,6 +343,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	/**
 	 * @return the mapper
 	 */
+	@Override
 	public LdapMapper getMapper() {
 		return mapper;
 	}

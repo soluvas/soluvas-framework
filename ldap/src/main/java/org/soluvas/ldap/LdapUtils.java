@@ -114,9 +114,11 @@ public class LdapUtils {
 	 * @throws LdapException 
 	 */
 	public static void update(@Nonnull LdapConnection conn, @Nonnull Entry entry,
-			SchemaManager schemaManager, @Nonnull Set<String> affectedAttributes) throws LdapException {
+ @Nonnull Set<String> affectedAttributes)
+			throws LdapException {
 		Entry existing = conn.lookup(entry.getDn());
-		ModifyRequest req = createModifyRequest(entry, existing, schemaManager, affectedAttributes);
+		ModifyRequest req = createModifyRequest(entry, existing,
+				conn.getSchemaManager(), affectedAttributes);
 		if (!req.getModifications().isEmpty()) {
 			log.info("Modify {}: {}", entry.getDn(), req);
 			ModifyResponse response = conn.modify(req);
@@ -183,13 +185,22 @@ public class LdapUtils {
 			} else {
 				// make sure the new values are different, or ignore
 				
+				// Workaround for
+				// https://issues.apache.org/jira/browse/DIRSHARED-142
 				if (existingAttr.get().getNormValue() instanceof byte[]) {
-					if (!Arrays.equals((byte[])existingAttr.get().getNormValue(), (byte[]) updatedAttr.get().getNormValue())) {
-						log.debug("Replace {} in {}, {} => {}",
-								updatedAttrType.getName(), entry.getDn(), existingAttr.get().getNormValue(), updatedAttr.get().getNormValue() );
+					if (!Arrays.equals((byte[]) existingAttr.get()
+							.getNormValue(), (byte[]) updatedAttr.get()
+							.getNormValue())) {
+						log.debug("Replace {} in {}, {} => {}", updatedAttrType
+								.getName(), entry.getDn(), existingAttr.get()
+								.getNormValue(), updatedAttr.get()
+								.getNormValue());
 						req.replace(updatedAttr);
 					}
-				} else if (!existingAttr.get().getNormValue().equals(updatedAttr.get().getNormValue())) {
+				} else if (!existingAttr.get().getNormValue()
+						.equals(updatedAttr.get().getNormValue())) {
+					// Should be this simple: if
+					// (!existingAttr.get().equals(updatedAttr.get())) {
 					log.debug("Replace {} in {}, {} => {}",
 							updatedAttrType.getName(), entry.getDn(), existingAttr.get().getNormValue(), updatedAttr.get().getNormValue() );
 					req.replace(updatedAttr);
