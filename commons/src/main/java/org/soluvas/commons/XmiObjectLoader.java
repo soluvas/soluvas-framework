@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,17 +16,22 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Supplier;
 
 /**
- * Loads a predefined EMF object from an XMI file. 
+ * Loads a predefined EMF object from an XMI file.
+ * 
+ * Note: the object is supplied as-is from the {@link XMIResource}, i.e. not
+ * cloned.
+ * 
  * @author rudi
  */
 public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	
 	private transient Logger log = LoggerFactory
 			.getLogger(XmiObjectLoader.class);
-	private Class<? extends EPackage> ePackage;
+	private final Class<? extends EPackage> ePackage;
 	private Class<?> loaderClass;
 	private String resourcePath;
 	private String fileName;
+	private T obj;
 	
 	public XmiObjectLoader(Class<? extends EPackage> ePackage, Class<?> loaderClass, String resourcePath) {
 		super();
@@ -41,8 +46,15 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		this.fileName = fileName;
 	}
 
-	@SuppressWarnings("unchecked") @Override
+	@Override
 	public T get() {
+		if (obj == null)
+			load();
+		return obj;
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void load() {
 		URI resourceUri;
 		if (fileName != null) {
 			resourceUri = URI.createFileURI(fileName);
@@ -68,7 +80,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 			Resource resource = rset.getResource(resourceUri, true);
 			T obj = (T)resource.getContents().get(0);
 			log.info("Loaded {} from {}", obj, resourceUri);
-			return EcoreUtil.copy(obj);
+			this.obj = obj;
 		} catch (Exception e) {
 			log.error("Cannot load " + resourceUri + " using package " + ePackage, e);
 			throw new RuntimeException("Cannot load " + resourceUri + " using package " + ePackage, e);
