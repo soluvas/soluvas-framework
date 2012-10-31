@@ -81,7 +81,8 @@
 							org.apache.felix.gogo.commands;resolution:=optional,
 							org.apache.karaf.shell.console;resolution:=optional,
 							*
-						</Import-Package> 
+						</Import-Package>
+						<Export-Package>org.soluvas.security.*</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>

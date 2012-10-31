@@ -6,7 +6,6 @@ import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.EObjectNameOrdering;
 import org.soluvas.multitenant.ServiceLookup;
 import org.soluvas.security.Permission;
 import org.soluvas.security.SecurityCatalog;
@@ -39,18 +38,17 @@ public class SecPermLsCommand extends OsgiCommandSupport {
 				"Domain", "Action", "Instance", "Role", "Source");
 		SecurityCatalog securityCatalog = svcLookup.getSupplied(
 				SecurityCatalog.class, session);
-		List<Permission> sortedPermissions = new EObjectNameOrdering()
-				.immutableSortedCopy(securityCatalog.getPermissions());
+		List<Permission> permissions = securityCatalog.getPermissions();
 		int i = 0;
-		for (Permission it : sortedPermissions) {
+		for (Permission it : permissions) {
 			// TODO: use locale settings to format date, currency, amount,
 			// "and", many
 			// TODO: format products
-			final Joiner commaJoiner = Joiner.on(", ");
+			final Joiner spaceJoiner = Joiner.on(' ');
 			System.out.format("%3d | %-15s | %-15s | %-15s | %-20s | %s\n",
-					++i, commaJoiner.join(it.getDomainPermission()),
-					commaJoiner.join(it.getActionPermission()), commaJoiner
-							.join(it.getInstancePermission()), commaJoiner
+					++i, spaceJoiner.join(it.getDomainPermission()),
+					spaceJoiner.join(it.getActionPermission()), spaceJoiner
+							.join(it.getInstancePermission()), spaceJoiner
 							.join(it.getRoles()),
 					it.eResource() != null ? it.eResource().getURI() : null);
 		}
