@@ -50,4 +50,58 @@
 		<argument value="org.soluvas.security.SecurityPackage" />
 	</bean>
 
+	<bean id="defaultSecurityCatalogSupplier" class="org.soluvas.commons.XmiObjectLoader">
+		<argument type="java.lang.Class" value="org.soluvas.security.SecurityPackage" />
+		<argument value="org.soluvas.security.SecurityPackage" />
+		<argument value="default.SecurityCatalog.xmi" />
+	</bean>
+	<service ref="defaultSecurityCatalogSupplier" auto-export="interfaces">
+		<service-properties>
+			<entry key="clientId" value="berbatik" />
+			<entry key="tenantId" value="berbatik" />
+			<entry key="tenantEnv" value="dev" />
+			<entry key="suppliedClass" value="org.soluvas.security.SecurityCatalog" />
+			<entry key="layer" value="module" />
+		</service-properties>
+	</service>
+	
+	<bean id="securityPackage" class="org.soluvas.security.impl.SecurityPackageImpl" factory-method="init" />
+	<bean id="aggregatingSecurityCatalogSupplier" class="org.soluvas.commons.AggregatingSupplier">
+		<argument>
+			<bean class="org.soluvas.security.impl.SecurityFactoryImpl" />
+		</argument>
+		<argument>
+			<bean factory-ref="securityPackage" factory-method="getSecurityCatalog" />
+		</argument>
+		<argument>
+			<list>
+<!-- 				<ref component-id="defaultSecurityCatalogSupplier"/> -->
+<!-- 				<ref component-id="bippoSecurityCatalogSupplier"/> -->
+			</list>
+		</argument>
+	</bean>
+	<service ref="aggregatingSecurityCatalogSupplier" auto-export="interfaces">
+		<service-properties>
+			<entry key="clientId" value="berbatik" />
+			<entry key="tenantId" value="berbatik" />
+			<entry key="tenantEnv" value="dev" />
+			<entry key="suppliedClass" value="org.soluvas.security.SecurityCatalog" />
+			<entry key="layer" value="application" />
+		</service-properties>
+	</service>
+	
+	<bean id="securityCatalogSupplierTracker" class="org.soluvas.security.SecurityCatalogSupplierTracker">
+		<argument ref="blueprintBundleContext" />
+		<argument ref="aggregatingSecurityCatalogSupplier" />
+	</bean>
+	<bean class="org.osgi.util.tracker.ServiceTracker" init-method="open" destroy-method="close">
+		<argument ref="blueprintBundleContext" />
+		<argument>
+			<bean class="org.osgi.framework.FrameworkUtil" factory-method="createFilter">
+				<argument value="(&amp;(objectClass=com.google.common.base.Supplier)(suppliedClass=org.soluvas.security.SecurityCatalog)(tenantId=berbatik)(tenantEnv=dev)(layer=module))" />
+			</bean>
+		</argument>
+		<argument ref="securityCatalogSupplierTracker" />
+	</bean>
+	
 </blueprint>

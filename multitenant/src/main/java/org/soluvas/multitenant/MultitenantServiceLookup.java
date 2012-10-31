@@ -194,7 +194,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public <T> T getSupplied(@Nonnull Class<T> clazz, CommandSession session) {
 		ServiceReference<Supplier> supplierRef = getService(Supplier.class,
-				session, null, "(suppliedClass=" + clazz.getName() + ")");
+				session, null, "(suppliedClass=" + clazz.getName() + ")(layer=application)");
 		BundleContext bundleContext = FrameworkUtil.getBundle(
 				MultitenantServiceLookup.class).getBundleContext();
 		Supplier<T> supplier = bundleContext.getService(supplierRef);

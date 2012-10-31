@@ -61,7 +61,8 @@ public interface ServiceLookup {
 			FutureCallback<T> callback);
 
 	/**
-	 * Returns a tenant-scoped supplied object from {@link Supplier} service.
+	 * Returns a tenant-scoped supplied object from {@link Supplier} service,
+	 * with layer=application.
 	 * 
 	 * @param clazz
 	 * @return
