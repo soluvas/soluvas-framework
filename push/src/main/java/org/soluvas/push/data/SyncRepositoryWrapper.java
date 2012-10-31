@@ -2,7 +2,7 @@ package org.soluvas.push.data;
 
 import java.util.List;
 
-import jline.internal.Nullable;
+import javax.annotation.Nullable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

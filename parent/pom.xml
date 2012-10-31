@@ -115,6 +115,13 @@
 				<groupId>org.apache.karaf.shell</groupId>
 				<artifactId>org.apache.karaf.shell.console</artifactId>
 				<version>${karaf.version}</version>
+				<scope>provided</scope>
+				<exclusions>
+					<exclusion>
+						<artifactId>org.osgi.core</artifactId>
+						<groupId>org.osgi</groupId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<dependency>
@@ -253,19 +260,29 @@
 			</dependency>
 
 			<dependency>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>org.apache.felix.framework</artifactId>
+				<version>4.0.3</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>org.osgi.enterprise</artifactId>
 				<version>4.2.0</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>org.osgi.compendium</artifactId>
 				<version>4.3.0</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
+				<!-- Do NOT use! Use felix framework instead -->
 				<groupId>org.osgi</groupId>
 				<artifactId>org.osgi.core</artifactId>
-				<version>4.3.0</version>
+				<version>4.2.0</version>
+				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
