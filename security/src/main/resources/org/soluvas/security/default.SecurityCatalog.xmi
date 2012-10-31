@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ASCII"?>
+<security:SecurityCatalog xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.soluvas.org/schema/security/1.0" xsi:schemaLocation="http://www.soluvas.org/schema/security/1.0 security.ecore">
+  <roles name="admin" description="General administrators (not sysadmins) of the (web) application."/>
+  <roles name="sysadmin" description="Perform technical administration."/>
+  <roles name="guest" description="Everybody, including not logged in users" assignMode="guest"/>
+  <roles name="authenticated" description="Authenticated or remember users" assignMode="authenticated"/>
+  <domains name="person" description="Person or user"/>
+  <domains name="sec_role" description="Security role"/>
+  <domains name="sec_action" description="Security action"/>
+  <domains name="sec_domain" description="Security domain"/>
+  <actions name="add" global="true" description="Add objects to repositories."/>
+  <actions name="list" global="true" description="List objects in repositories."/>
+  <actions name="search" global="true" description="Searches objects in repositories."/>
+  <actions name="delete" global="true" description="Deletes objects in repositories."/>
+  <actions name="edit" global="true" description="Modifies objects."/>
+  <actions name="undelete" global="true" description="Bring back objects from trash (for repositories that have this capability)."/>
+  <actions name="archive" global="true" description="Archives objects from Inbox."/>
+  <actions name="unarchive" global="true" description="Brings back objects to Inbox."/>
+  <actions name="label" global="true" description="Set/unset labels in an object."/>
+  <permissions>
+    <roles>sysadmin</roles>
+    <roles>admin</roles>
+    <domainPermission>*</domainPermission>
+    <actionPermission>*</actionPermission>
+    <instancePermission>*</instancePermission>
+  </permissions>
+</security:SecurityCatalog>

@@ -105,6 +105,11 @@
 				<artifactId>org.soluvas.facebook</artifactId>
 				<version>${soluvas-framework.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.soluvas</groupId>
+				<artifactId>org.soluvas.security</artifactId>
+				<version>${soluvas-framework.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.apache.karaf.shell</groupId>
