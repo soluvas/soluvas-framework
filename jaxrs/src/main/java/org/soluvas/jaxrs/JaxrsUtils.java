@@ -46,7 +46,8 @@ public class JaxrsUtils {
 			log.warn("REST path {} does not conform to multitenant REST API pattern", pathInfo);
 			return null;
 		}
-		TenantRef tenantRef = new TenantRef(apiPathMatcher.group(1), apiPathMatcher.group(2));
+		TenantRef tenantRef = new TenantRef(null, apiPathMatcher.group(1),
+				apiPathMatcher.group(2));
 		log.debug("REST path {} is for {}", pathInfo, tenantRef);
 		return tenantRef;
 	}

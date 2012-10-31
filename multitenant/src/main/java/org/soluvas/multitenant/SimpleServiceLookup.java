@@ -3,15 +3,18 @@ package org.soluvas.multitenant;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.google.common.base.Function;
+import javax.annotation.Nonnull;
+
+import org.apache.felix.service.command.CommandSession;
 
 /**
  * @author ceefour
  * @deprecated
  */
+@Deprecated
 public abstract class SimpleServiceLookup<T> implements ServiceLookup {
 	
-	private Map<LookupKey, T> services;
+	private final Map<LookupKey, T> services;
 	
 	public SimpleServiceLookup() {
 		super();
@@ -21,6 +24,11 @@ public abstract class SimpleServiceLookup<T> implements ServiceLookup {
 	public SimpleServiceLookup(Map<LookupKey, T> services) {
 		super();
 		this.services = services;
+	}
+
+	@Override
+	public TenantRef getTenant(@Nonnull CommandSession session) {
+		return null;
 	}
 
 	/* (non-Javadoc)

@@ -9,13 +9,28 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class TenantRef implements Serializable {
 
+	private String clientId;
 	private String tenantId;
 	private String tenantEnv;
 	
-	public TenantRef(String tenantId, String tenantEnv) {
+	public TenantRef(String clientId, String tenantId, String tenantEnv) {
 		super();
+		this.clientId = clientId;
 		this.tenantId = tenantId;
 		this.tenantEnv = tenantEnv;
+	}
+
+	/**
+	 * Client ID is usually null. Only used by shell-based tenant usage.
+	 * 
+	 * @return
+	 */
+	public String getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
 	}
 
 	public String getTenantId() {
