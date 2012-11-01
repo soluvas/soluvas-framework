@@ -8,10 +8,24 @@ import javax.annotation.Nullable;
 import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
+import org.soluvas.data.repository.BulkCrudRepository;
+import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.ldap.Person;
 
+/**
+ * This is different that security dictionary.
+ * Role definition modifications in the dictionary are not automatically applied to the repository.
+ * Repository is the database, dictionary defines what should/shouldn't exist based on the active bundles. 
+ * @author ceefour
+ */
 public interface SecurityRepository {
 
+	/**
+	 * Returns a {@link Role} {@link CrudRepository} where roles can be added and removed.
+	 * @return
+	 */
+	@Nonnull BulkCrudRepository<Role, String> getRoleRepository();
+	
 	/**
 	 * Give a Person ID, return their roles in the LDAP repository.
 	 * @param personId
@@ -51,6 +65,7 @@ public interface SecurityRepository {
 	 * @param description
 	 * @param personIds TODO
 	 */
+	@Deprecated
 	void addRole(@Nonnull final String name, @Nullable final String description, @Nullable final Set<String> personIds);
 	
 	/**
