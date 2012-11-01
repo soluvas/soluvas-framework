@@ -1,5 +1,6 @@
 package org.soluvas.security.ldap;
 
+import java.util.Collection;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
@@ -268,6 +269,25 @@ public class LdapSecurityRepository implements SecurityRepository {
 	@Nonnull
 	public BulkCrudRepository<Role, String> getRoleRepository() {
 		return roleRepository;
+	}
+
+	@Override
+	public void ensureRoles(@Nonnull Collection<Role> roles) {
+		log.trace("Ensuring {} roles exist", roles.size());
+		long skipped = 0;
+		long added = 0;
+		for (Role role : roles) {
+			if (!roleRepository.exists(role.getName())) {
+				log.info("Adding role {}", role.getName());
+				roleRepository.save(role);
+				added++;
+			} else {
+				log.trace("Skipping role {}", role.getName());
+				skipped++;
+			}
+		}
+		log.info("Ensured {} roles exist, added {}, skipped {}", roles.size(),
+				added, skipped);
 	}
 	
 }

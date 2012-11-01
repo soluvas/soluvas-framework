@@ -1,5 +1,6 @@
 package org.soluvas.security;
 
+import java.util.Collection;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
@@ -67,6 +68,12 @@ public interface SecurityRepository {
 	 */
 	@Deprecated
 	void addRole(@Nonnull final String name, @Nullable final String description, @Nullable final Set<String> personIds);
+
+	/**
+	 * Make sure all the requested {@link Role}s exist in the repository.
+	 * @param roles
+	 */
+	void ensureRoles(@Nonnull final Collection<Role> roles);
 	
 	/**
 	 * @deprecated shouldn't be here

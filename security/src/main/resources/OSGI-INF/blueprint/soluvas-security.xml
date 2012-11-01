@@ -48,6 +48,11 @@
 				<argument ref="svcLookup" />
 			</action>
 		</command>
+		<command name="sec/rolesync">
+			<action class="org.soluvas.security.shell.SecRoleSyncCommand">
+				<argument ref="svcLookup" />
+			</action>
+		</command>
 		<command name="sec/rolememberls">
 			<action class="org.soluvas.security.shell.SecRoleMemberLsCommand">
 				<argument ref="svcLookup" />
