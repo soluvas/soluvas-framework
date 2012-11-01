@@ -46,7 +46,7 @@ public class SecRoleLsCommand extends OsgiCommandSupport {
 			// "and", many
 			// TODO: format products
 			System.out.format("%3d | %-15s | %-40s | %s\n", ++i, it.getName(),
-					it.eResource() != null ? it.eResource().getURI() : null, it.getDescription() );
+					it.getResourceUri(), it.getDescription() );
 		}
 		System.out.format("%d Roles\n", securityCatalog.getRoles().size());
 		return null;

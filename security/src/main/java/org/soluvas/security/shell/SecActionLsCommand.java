@@ -49,7 +49,7 @@ public class SecActionLsCommand extends OsgiCommandSupport {
 			System.out.format("%3d | %-20s | %1s | %-20s | %-40s | %s\n", ++i,
 					it.getName(), it.getGlobal() ? "G" : "-",
 					Joiner.on(", ").join(it.getDomains()),
-					it.eResource() != null ? it .eResource().getURI() : null,
+					it.getResourceUri(),
 					it.getDescription());
 		}
 		System.out.format("%d Actions\n", securityCatalog.getActions().size());

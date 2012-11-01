@@ -4,6 +4,7 @@ import java.net.URL;
 
 import javax.annotation.Nonnull;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -30,39 +31,34 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	private transient Logger log = LoggerFactory
 			.getLogger(XmiObjectLoader.class);
 	private final Class<? extends EPackage> ePackage;
-	private Class<?> loaderClass;
-	private String resourcePath;
-	private String fileName;
 	private T obj;
 	
 	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackage, @Nonnull Class<?> loaderClass, @Nonnull String resourcePath) {
 		super();
 		this.ePackage = ePackage;
-		this.loaderClass = loaderClass;
-		this.resourcePath = resourcePath;
 		
 		log.info("Loading XMI: {} from {}", resourcePath, loaderClass.getName());
 		final URL resourceUrl = loaderClass.getResource(resourcePath);
 		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s using class %s",
 				resourcePath, loaderClass.getName());
 		final URI resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		load(resourceUri);
+		load(resourceUri, ResourceType.BUNDLE);
 	}
 
 	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackage, @Nonnull String fileName) {
 		super();
 		this.ePackage = ePackage;
-		this.fileName = fileName;
 		
-		load(URI.createFileURI(fileName));
+		load(URI.createFileURI(fileName), ResourceType.FILE);
 	}
 
-	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackage, @Nonnull URL resourceUrl) {
+	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackage, @Nonnull URL resourceUrl,
+			ResourceType resourceType) {
 		super();
 		this.ePackage = ePackage;
 		
 		final URI resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		load(resourceUri);
+		load(resourceUri, resourceType);
 	}
 
 	@Override
@@ -71,7 +67,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void load(URI resourceUri) {
+	protected void load(URI resourceUri, ResourceType resourceType) {
 		log.debug("Loading XMI from URI: {}", resourceUri);
 		
 		ResourceSetImpl rset = new ResourceSetImpl();
@@ -92,6 +88,20 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 			log.error("Cannot load " + resourceUri + " using package " + ePackage, e);
 			throw new RuntimeException("Cannot load " + resourceUri + " using package " + ePackage, e);
 		}
+		
+		// Augment resource information
+		final TreeIterator<EObject> allContents = obj.eAllContents();
+		long augmented = 0;
+		while (allContents.hasNext()) {
+			EObject content = allContents.next();
+			if (content instanceof ResourceAware) {
+				((ResourceAware) content).setResourceType(resourceType);
+				((ResourceAware) content).setResourceUri(resourceUri.toString());
+			}
+		}
+		if (augmented > 0)
+			log.debug("Augmented {} EObjects with resource information from {}",
+					augmented, resourceUri);
 	}
 
 }

@@ -26,9 +26,7 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T> {
 
 	private transient Logger log = LoggerFactory
 			.getLogger(AggregatingSupplier.class);
-	private final EFactory eFactory;
 	private final EClass eClass;
-	private final List<Supplier<T>> suppliers;
 	/**
 	 * Maps a supplier with the {@link EObject}s it contains.
 	 * Note that these are <strong>copied</strong> objects, not original objects from suppliers.
@@ -41,13 +39,10 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T> {
 	public AggregatingSupplier(EFactory eFactory, EClass eClass,
 			List<Supplier<T>> suppliers) {
 		super();
-		this.eFactory = eFactory;
 		this.eClass = eClass;
-		this.suppliers = suppliers;
 		this.map = Multimaps.synchronizedListMultimap(ArrayListMultimap.<Supplier<T>, EObject>create());
 		aggregate = (T) eFactory.create(eClass);
-		containments = aggregate.eClass()
-				.getEAllContainments();
+		containments = aggregate.eClass().getEAllContainments();
 		log.info("Initializing aggregating supplier for {} with {} suppliers", eClass, suppliers.size());
 		for (Supplier<T> supplier : suppliers) {
 			addSupplier(supplier);

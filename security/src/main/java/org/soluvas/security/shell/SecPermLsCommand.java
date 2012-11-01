@@ -50,7 +50,7 @@ public class SecPermLsCommand extends OsgiCommandSupport {
 					spaceJoiner.join(it.getActionPermission()), spaceJoiner
 							.join(it.getInstancePermission()), spaceJoiner
 							.join(it.getRoles()),
-					it.eResource() != null ? it.eResource().getURI() : null);
+					it.getResourceUri());
 		}
 		System.out.format("%d Permissions\n", securityCatalog.getPermissions()
 				.size());
