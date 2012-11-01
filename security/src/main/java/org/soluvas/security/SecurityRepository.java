@@ -3,6 +3,7 @@ package org.soluvas.security;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.ldap.client.api.LdapConnection;
@@ -41,6 +42,16 @@ public interface SecurityRepository {
 	 * @param personId
 	 */
 	void replaceRoleMembers(@Nonnull final String role, @Nonnull final Set<String> personIds);
+	
+	/**
+	 * Add a role to the <strong>repository</strong>. Note that this is different that security dictionary.
+	 * Role definition modifications in the dictionary are not automatically applied to the repository.
+	 * Repository is the database, dictionary defines what should/shouldn't exist based on the active bundles. 
+	 * @param name
+	 * @param description
+	 * @param personIds TODO
+	 */
+	void addRole(@Nonnull final String name, @Nullable final String description, @Nullable final Set<String> personIds);
 	
 	/**
 	 * @deprecated shouldn't be here

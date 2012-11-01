@@ -17,14 +17,14 @@ import com.google.common.base.Joiner;
  * 
  * @author ceefour
  */
-@Command(scope = "sec", name = "permls", description = "List available Permissions")
-public class SecPermLsCommand extends OsgiCommandSupport {
+@Command(scope = "secd", name = "permls", description = "List available Permissions")
+public class SecdPermLsCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecPermLsCommand.class);
+	private transient Logger log = LoggerFactory.getLogger(SecdPermLsCommand.class);
 
 	private final ServiceLookup svcLookup;
 
-	public SecPermLsCommand(ServiceLookup svcLookup) {
+	public SecdPermLsCommand(ServiceLookup svcLookup) {
 		super();
 		this.svcLookup = svcLookup;
 	}

@@ -8,23 +8,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.EObjectNameOrdering;
 import org.soluvas.multitenant.ServiceLookup;
-import org.soluvas.security.Role;
+import org.soluvas.security.Domain;
 import org.soluvas.security.SecurityCatalog;
 
 
 /**
- * Shell command to list available {@link Role}s.
+ * Shell command to list available {@link Domain}s.
  * 
  * @author ceefour
  */
-@Command(scope = "sec", name = "rolels", description = "List available Roles")
-public class SecRoleLsCommand extends OsgiCommandSupport {
+@Command(scope = "secd", name = "domainls", description = "List available Domains")
+public class SecdDomainLsCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecRoleLsCommand.class);
+	private transient Logger log = LoggerFactory.getLogger(SecdDomainLsCommand.class);
 
 	private final ServiceLookup svcLookup;
 
-	public SecRoleLsCommand(ServiceLookup svcLookup) {
+	public SecdDomainLsCommand(ServiceLookup svcLookup) {
 		super();
 		this.svcLookup = svcLookup;
 	}
@@ -38,17 +38,17 @@ public class SecRoleLsCommand extends OsgiCommandSupport {
 				"Source", "Description");
 		SecurityCatalog securityCatalog = svcLookup.getSupplied(
 				SecurityCatalog.class, session);
-		List<Role> sortedRoles = new EObjectNameOrdering()
-				.immutableSortedCopy(securityCatalog.getRoles());
+		List<Domain> sortedDomains = new EObjectNameOrdering()
+				.immutableSortedCopy(securityCatalog.getDomains());
 		int i = 0;
-		for (Role it : sortedRoles) {
+		for (Domain it : sortedDomains) {
 			// TODO: use locale settings to format date, currency, amount,
 			// "and", many
 			// TODO: format products
 			System.out.format("%3d | %-15s | %-40s | %s\n", ++i, it.getName(),
 					it.getResourceUri(), it.getDescription() );
 		}
-		System.out.format("%d Roles\n", securityCatalog.getRoles().size());
+		System.out.format("%d Domains\n", securityCatalog.getDomains().size());
 		return null;
 	}
 

@@ -18,14 +18,14 @@ import com.google.common.base.Joiner;
  * 
  * @author ceefour
  */
-@Command(scope = "sec", name = "actionls", description = "List available Actions")
-public class SecActionLsCommand extends OsgiCommandSupport {
+@Command(scope = "secd", name = "actionls", description = "List available Actions")
+public class SecdActionLsCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecActionLsCommand.class);
+	private transient Logger log = LoggerFactory.getLogger(SecdActionLsCommand.class);
 
 	private final ServiceLookup svcLookup;
 
-	public SecActionLsCommand(ServiceLookup svcLookup) {
+	public SecdActionLsCommand(ServiceLookup svcLookup) {
 		super();
 		this.svcLookup = svcLookup;
 	}

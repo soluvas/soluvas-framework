@@ -2,6 +2,7 @@
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
+import org.apache.felix.gogo.commands.Option;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
@@ -13,24 +14,27 @@ import org.soluvas.security.SecurityRepository;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableSet;
 
+
 /**
- * Shell command to set members of a {@link Role}.
+ * Add a {@link Role} to the Security Repository.
  * 
  * @author ceefour
  */
-@Command(scope = "sec", name = "rolememberset", description = "Set members of a security role.")
-public class SecRoleMemberSetCommand extends OsgiCommandSupport {
+@Command(scope = "sec", name = "roleadd", description = "Add a Role to the Security Repository")
+public class SecRoleAddCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecRoleMemberSetCommand.class);
+	private transient Logger log = LoggerFactory.getLogger(SecRoleAddCommand.class);
 
 	private final ServiceLookup svcLookup;
-	
+
+	@Option(name="-d", aliases="--description", description="Role description.")
+	private String description;
 	@Argument(index=0, name="role", required=true, description="Role name.")
 	private String role;
-	@Argument(index=1, name="personId ...", required=false, description="Person ID(s)", multiValued=true)
+	@Argument(index=1, name="personId ...", required=true, description="Role members as Person ID(s).", multiValued=true)
 	private String[] personIds;
 
-	public SecRoleMemberSetCommand(ServiceLookup svcLookup) {
+	public SecRoleAddCommand(ServiceLookup svcLookup) {
 		super();
 		this.svcLookup = svcLookup;
 	}
@@ -43,9 +47,11 @@ public class SecRoleMemberSetCommand extends OsgiCommandSupport {
 		ServiceReference<SecurityRepository> securityRepoRef = svcLookup.getService(SecurityRepository.class, session, null, null);
 		SecurityRepository securityRepo = bundleContext.getService(securityRepoRef);
 		try {
-			System.out.format("Setting members of role %s to %s...",
-					role, Joiner.on(", ").join(personIds));
-			securityRepo.replaceRoleMembers(role, ImmutableSet.copyOf(personIds));
+			System.out.format("Add role %s with members: %s and description '%s'...",
+					role,
+					Joiner.on(", ").join(personIds),
+					description);
+			securityRepo.addRole(role, description, ImmutableSet.copyOf(personIds));
 			System.out.format(" OK\n");
 			return null;
 		} finally {

@@ -9,6 +9,7 @@ import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 import org.apache.directory.shared.ldap.model.entry.Attribute;
+import org.apache.directory.shared.ldap.model.entry.DefaultEntry;
 import org.apache.directory.shared.ldap.model.entry.DefaultModification;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.entry.Modification;
@@ -24,6 +25,7 @@ import org.soluvas.ldap.LdapUtils;
 import org.soluvas.security.SecurityRepository;
 
 import com.google.common.base.Function;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Iterables;
@@ -249,6 +251,51 @@ public class LdapSecurityRepository implements SecurityRepository {
 					log.error("Cannot replace members for role " + role, e);
 					throw new RuntimeException(
 							"Cannot replace members for " + role, e);
+				}
+			}
+		});
+	}
+
+	@Override
+	public void addRole(@Nonnull final String name, @Nullable final String description, @Nullable final Set<String> personIds) {
+		LdapUtils.withConnection(ldapPool,
+				new Function<LdapConnection, Void>() {
+			@Override @Nullable
+			public Void apply(@Nullable LdapConnection ldap) {
+				try {
+					final Dn groupDn = new Dn(new Rdn("cn", name),
+							new Dn(groupsRdn, domainBase));
+					final Dn usersDn = new Dn(usersRdn, domainBase);
+					DefaultEntry groupEntry = new DefaultEntry(ldap.getSchemaManager(), groupDn);
+					groupEntry.add("objectClass", "groupOfUniqueNames");
+					if (!Strings.isNullOrEmpty(description))
+						groupEntry.add("description", description);
+					final String[] uniqueMembers;
+					if (personIds == null || personIds.isEmpty()) {
+						// dummy member, stupid LDAP spec :(
+						uniqueMembers = new String[] { domainBase };						
+					} else {
+						uniqueMembers = Iterables.toArray( Iterables.transform(personIds, new Function<String, String>() {
+							@Override
+							@Nullable
+							public String apply(@Nullable String input) {
+								try {
+									return new Rdn("uid", input).getName() + "," + usersDn.getName();
+								} catch (LdapInvalidDnException e) {
+									throw new RuntimeException("Invalid person ID: " + input, e);
+								}
+							}
+						}), String.class);
+					}
+					groupEntry.add("uniqueMember", uniqueMembers);
+					log.info("Adding group entry {} with description='{}' members={}",
+							groupDn.getName(), description, personIds);
+					ldap.add(groupEntry);
+					return null;
+				} catch (Exception e) {
+					log.error("Cannot add role " + name, e);
+					throw new RuntimeException(
+							"Cannot add role " + name, e);
 				}
 			}
 		});

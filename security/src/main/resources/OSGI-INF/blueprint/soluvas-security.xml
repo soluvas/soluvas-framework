@@ -11,28 +11,33 @@
 
 	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
 		<!-- Security Dictionary -->
-		<command name="sec/rolels">
-			<action class="org.soluvas.security.shell.SecRoleLsCommand">
+		<command name="secd/rolels">
+			<action class="org.soluvas.security.shell.SecdRoleLsCommand">
 				<argument ref="svcLookup" />
 			</action>
 		</command>
-		<command name="sec/actionls">
-			<action class="org.soluvas.security.shell.SecActionLsCommand">
+		<command name="secd/actionls">
+			<action class="org.soluvas.security.shell.SecdActionLsCommand">
 				<argument ref="svcLookup" />
 			</action>
 		</command>
-		<command name="sec/domainls">
-			<action class="org.soluvas.security.shell.SecDomainLsCommand">
+		<command name="secd/domainls">
+			<action class="org.soluvas.security.shell.SecdDomainLsCommand">
 				<argument ref="svcLookup" />
 			</action>
 		</command>
-		<command name="sec/permls">
-			<action class="org.soluvas.security.shell.SecPermLsCommand">
+		<command name="secd/permls">
+			<action class="org.soluvas.security.shell.SecdPermLsCommand">
 				<argument ref="svcLookup" />
 			</action>
 		</command>
 		
-		<!-- Security Runtime -->
+		<!-- Security Repository -->
+		<command name="sec/roleadd">
+			<action class="org.soluvas.security.shell.SecRoleAddCommand">
+				<argument ref="svcLookup" />
+			</action>
+		</command>
 		<command name="sec/rolememberls">
 			<action class="org.soluvas.security.shell.SecRoleMemberLsCommand">
 				<argument ref="svcLookup" />
@@ -48,6 +53,8 @@
 				<argument ref="svcLookup" />
 			</action>
 		</command>
+		
+		<!-- Security Runtime -->
 	</command-bundle>
 	
 	<bean class="org.soluvas.commons.EmfUnloader" destroy-method="destroy">
