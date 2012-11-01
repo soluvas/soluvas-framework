@@ -2,6 +2,7 @@ package org.soluvas.apacheds;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.annotation.PreDestroy;
 
@@ -102,11 +103,11 @@ public class DirectoryEngine {
     private void addIndex( Partition partition, String... attrs )
     {
         // Index some attributes on the apache partition
-        HashSet<Index<?, Entry, Long>> indexedAttributes = new HashSet<Index<?, Entry, Long>>();
+        Set<Index<?, ?, String>> indexedAttributes = new HashSet<Index<?, ?, String>>();
 
         for ( String attribute : attrs )
         {
-            indexedAttributes.add( new JdbmIndex<String, Entry>( attribute ) );
+            indexedAttributes.add( new JdbmIndex<String, Entry>( attribute, false ) );
         }
 
         ( ( JdbmPartition ) partition ).setIndexedAttributes( indexedAttributes );
