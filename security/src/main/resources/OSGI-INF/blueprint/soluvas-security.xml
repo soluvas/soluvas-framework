@@ -36,21 +36,6 @@
 		<argument value="org.soluvas.security.SecurityPackage" />
 	</bean>
 
-	<bean id="defaultSecurityCatalogSupplier" class="org.soluvas.commons.XmiObjectLoader">
-		<argument type="java.lang.Class" value="org.soluvas.security.SecurityPackage" />
-		<argument value="org.soluvas.security.SecurityPackage" />
-		<argument value="default.SecurityCatalog.xmi" />
-	</bean>
-	<service ref="defaultSecurityCatalogSupplier" auto-export="interfaces">
-		<service-properties>
-			<entry key="clientId" value="berbatik" />
-			<entry key="tenantId" value="berbatik" />
-			<entry key="tenantEnv" value="dev" />
-			<entry key="suppliedClass" value="org.soluvas.security.SecurityCatalog" />
-			<entry key="layer" value="module" />
-		</service-properties>
-	</service>
-	
 	<bean id="securityPackage" class="org.soluvas.security.impl.SecurityPackageImpl" factory-method="init" />
 	<bean id="aggregatingSecurityCatalogSupplier" class="org.soluvas.commons.AggregatingSupplier">
 		<argument>
@@ -90,15 +75,14 @@
 		<argument ref="securityCatalogSupplierTracker" />
 	</bean>
 	
-<!-- 	<bean id="securityCatalogXmiTracker" class="org.soluvas.security.SecurityCatalogXmiTracker"> -->
-<!-- 		<argument ref="blueprintBundleContext" /> -->
-<!-- 		<argument value="berbatik" /> -->
-<!-- 		<argument value="dev" /> -->
-<!-- 	</bean> -->
-<!-- 	<bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close"> -->
-<!-- 		<argument ref="blueprintBundleContext" /> -->
-<!-- 		<argument value="255" /> -->
-<!-- 		<argument ref="securityCatalogXmiTracker" /> -->
-<!-- 	</bean> -->
+	<bean id="securityCatalogXmiTracker" class="org.soluvas.security.SecurityCatalogXmiTracker">
+		<argument value="berbatik" />
+		<argument value="dev" />
+	</bean>
+	<bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close">
+		<argument ref="blueprintBundleContext" />
+		<argument value="32" />
+		<argument ref="securityCatalogXmiTracker" />
+	</bean>
 
 </blueprint>

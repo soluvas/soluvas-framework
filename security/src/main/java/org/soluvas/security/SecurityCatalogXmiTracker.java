@@ -6,6 +6,9 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.eclipse.emf.ecore.EObject;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleEvent;
@@ -22,6 +25,21 @@ import com.google.common.collect.ImmutableList.Builder;
 /**
  * Tracks files named <tt>(bundle).SecurityCatalog.xmi</tt> and registers
  * them as {@link SecurityCatalog} {@link Supplier}.
+ * 
+ * Usage:
+ * 
+ * <pre>{@code
+ * <bean id="securityCatalogXmiTracker" class="org.soluvas.security.SecurityCatalogXmiTracker">
+ * 	<argument value="berbatik" />
+ * 	<argument value="dev" />
+ * </bean>
+ * <bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close">
+ * 	<argument ref="blueprintBundleContext" />
+ * 	<argument value="32" />
+ * 	<argument ref="securityCatalogXmiTracker" />
+ * </bean>
+ * }</pre>
+ * 
  * @author ceefour
  */
 @SuppressWarnings("rawtypes")
@@ -32,20 +50,24 @@ public class SecurityCatalogXmiTracker implements BundleTrackerCustomizer<List<S
 	private final String tenantId;
 	private final String tenantEnv;
 	
-	public SecurityCatalogXmiTracker(String tenantId, String tenantEnv) {
+	public SecurityCatalogXmiTracker(@Nonnull String tenantId, @Nonnull String tenantEnv) {
 		super();
 		this.tenantId = tenantId;
 		this.tenantEnv = tenantEnv;
 	}
 
 	@Override
-	public List<ServiceRegistration<Supplier>> addingBundle(Bundle bundle,
-			BundleEvent event) {
+	@Nullable
+	public List<ServiceRegistration<Supplier>> addingBundle(@Nonnull Bundle bundle,
+			@Nonnull BundleEvent event) {
 		String path = bundle.getSymbolicName().replace('.', '/');
 		String filePattern = "*.SecurityCatalog.xmi";
 		log.trace("Scanning {} [{}] for {}/{}", bundle.getSymbolicName(), bundle.getBundleId(),
 				path , filePattern);
 		Enumeration<URL> entries = bundle.findEntries(path, filePattern, false);
+		if (entries == null) {
+			return null;
+		}
 		Builder<ServiceRegistration<Supplier>> svcRegs = ImmutableList.builder();
 		while (entries.hasMoreElements()) {
 			URL url = entries.nextElement();
@@ -53,6 +75,7 @@ public class SecurityCatalogXmiTracker implements BundleTrackerCustomizer<List<S
 			XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(SecurityPackage.class, url);
 			Dictionary<String, String> props = new Hashtable<String, String>();
 			props.put("suppliedClass", SecurityCatalog.class.getName());
+			props.put("layer", "module");
 			props.put("tenantId", tenantId);
 			props.put("tenantEnv", tenantEnv);
 			ServiceRegistration<Supplier> svcReg = bundle.getBundleContext().registerService(Supplier.class, loader, props);
@@ -65,13 +88,15 @@ public class SecurityCatalogXmiTracker implements BundleTrackerCustomizer<List<S
 	}
 
 	@Override
-	public void modifiedBundle(Bundle bundle, BundleEvent event,
-			List<ServiceRegistration<Supplier>> object) {
+	public void modifiedBundle(@Nonnull Bundle bundle, @Nonnull BundleEvent event,
+			@Nullable List<ServiceRegistration<Supplier>> object) {
 	}
 
 	@Override
-	public void removedBundle(Bundle bundle, BundleEvent event,
-			List<ServiceRegistration<Supplier>> svcRegs) {
+	public void removedBundle(@Nonnull Bundle bundle, @Nonnull BundleEvent event,
+			@Nullable List<ServiceRegistration<Supplier>> svcRegs) {
+		if (svcRegs == null)
+			return;
 		log.debug("Unregistering {} SecurityCatalog suppliers from {} [{}]",
 				svcRegs.size(), bundle.getSymbolicName(), bundle.getBundleId());
 		for (ServiceRegistration<Supplier> svcReg : svcRegs) {
