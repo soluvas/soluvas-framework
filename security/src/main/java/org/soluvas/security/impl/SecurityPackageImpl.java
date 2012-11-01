@@ -7,9 +7,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
+import org.soluvas.commons.CommonsPackage;
 import org.soluvas.security.Action;
 import org.soluvas.security.AssignMode;
 import org.soluvas.security.Domain;
@@ -122,6 +121,9 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 
 		isInited = true;
 
+		// Initialize simple dependencies
+		CommonsPackage.eINSTANCE.eClass();
+
 		// Create package meta-data objects
 		theSecurityPackage.createPackageContents();
 
@@ -142,6 +144,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRole() {
 		return roleEClass;
 	}
@@ -151,6 +154,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRole_Name() {
 		return (EAttribute)roleEClass.getEStructuralFeatures().get(0);
 	}
@@ -160,6 +164,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRole_Description() {
 		return (EAttribute)roleEClass.getEStructuralFeatures().get(1);
 	}
@@ -169,6 +174,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRole_AssignMode() {
 		return (EAttribute)roleEClass.getEStructuralFeatures().get(2);
 	}
@@ -178,6 +184,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInstanceRole() {
 		return instanceRoleEClass;
 	}
@@ -187,6 +194,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInstanceRole_Name() {
 		return (EAttribute)instanceRoleEClass.getEStructuralFeatures().get(0);
 	}
@@ -196,6 +204,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInstanceRole_Description() {
 		return (EAttribute)instanceRoleEClass.getEStructuralFeatures().get(1);
 	}
@@ -205,6 +214,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDomain() {
 		return domainEClass;
 	}
@@ -214,6 +224,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomain_Name() {
 		return (EAttribute)domainEClass.getEStructuralFeatures().get(0);
 	}
@@ -223,6 +234,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomain_Description() {
 		return (EAttribute)domainEClass.getEStructuralFeatures().get(1);
 	}
@@ -232,6 +244,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAction() {
 		return actionEClass;
 	}
@@ -241,6 +254,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAction_Name() {
 		return (EAttribute)actionEClass.getEStructuralFeatures().get(0);
 	}
@@ -250,6 +264,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAction_Global() {
 		return (EAttribute)actionEClass.getEStructuralFeatures().get(1);
 	}
@@ -259,6 +274,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAction_Domains() {
 		return (EAttribute)actionEClass.getEStructuralFeatures().get(2);
 	}
@@ -268,6 +284,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAction_Description() {
 		return (EAttribute)actionEClass.getEStructuralFeatures().get(3);
 	}
@@ -277,6 +294,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSecurityCatalog() {
 		return securityCatalogEClass;
 	}
@@ -286,6 +304,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSecurityCatalog_Roles() {
 		return (EReference)securityCatalogEClass.getEStructuralFeatures().get(0);
 	}
@@ -295,6 +314,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSecurityCatalog_InstanceRoles() {
 		return (EReference)securityCatalogEClass.getEStructuralFeatures().get(1);
 	}
@@ -304,6 +324,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSecurityCatalog_Domains() {
 		return (EReference)securityCatalogEClass.getEStructuralFeatures().get(2);
 	}
@@ -313,6 +334,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSecurityCatalog_Actions() {
 		return (EReference)securityCatalogEClass.getEStructuralFeatures().get(3);
 	}
@@ -322,6 +344,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSecurityCatalog_Permissions() {
 		return (EReference)securityCatalogEClass.getEStructuralFeatures().get(4);
 	}
@@ -331,6 +354,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPermission() {
 		return permissionEClass;
 	}
@@ -340,6 +364,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPermission_Roles() {
 		return (EAttribute)permissionEClass.getEStructuralFeatures().get(0);
 	}
@@ -349,6 +374,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPermission_DomainPermission() {
 		return (EAttribute)permissionEClass.getEStructuralFeatures().get(1);
 	}
@@ -358,6 +384,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPermission_ActionPermission() {
 		return (EAttribute)permissionEClass.getEStructuralFeatures().get(2);
 	}
@@ -367,6 +394,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPermission_InstancePermission() {
 		return (EAttribute)permissionEClass.getEStructuralFeatures().get(3);
 	}
@@ -376,6 +404,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getAssignMode() {
 		return assignModeEEnum;
 	}
@@ -385,6 +414,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SecurityFactory getSecurityFactory() {
 		return (SecurityFactory)getEFactoryInstance();
 	}
@@ -467,11 +497,19 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		CommonsPackage theCommonsPackage = (CommonsPackage)EPackage.Registry.INSTANCE.getEPackage(CommonsPackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		roleEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		instanceRoleEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		domainEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		actionEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		permissionEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -630,7 +668,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		  (getPermission_InstancePermission(), 
 		   source, 
 		   new String[] {
-			 "documentation", "Name(s) of the insance, can be \"*\"."
+			 "documentation", "Name(s) of the instance(s), can be \"*\".\n\nTo specify multiple parts, separate each with \":\".\ne.g.\ndomain=wink\naction=add\ninstance=hendy:car:nana\n\nmeans permit hendy to add wink for car to nana."
 		   });		
 		addAnnotation
 		  (assignModeEEnum, 

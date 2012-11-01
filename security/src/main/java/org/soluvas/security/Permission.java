@@ -5,7 +5,7 @@ package org.soluvas.security;
 import javax.annotation.Nullable;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
+import org.soluvas.commons.ResourceAware;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -29,7 +29,7 @@ import com.google.common.base.Joiner;
  * @model
  * @generated
  */
-public interface Permission extends EObject {
+public interface Permission extends ResourceAware {
 
 	public static class ToStringPermission implements
 			Function<Permission, String> {
@@ -96,7 +96,15 @@ public interface Permission extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Name(s) of the insance, can be "*".
+	 * Name(s) of the instance(s), can be "*".
+	 * 
+	 * To specify multiple parts, separate each with ":".
+	 * e.g.
+	 * domain=wink
+	 * action=add
+	 * instance=hendy:car:nana
+	 * 
+	 * means permit hendy to add wink for car to nana.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Instance Permission</em>' attribute list.
 	 * @see org.soluvas.security.SecurityPackage#getPermission_InstancePermission()

@@ -2,7 +2,7 @@
  */
 package org.soluvas.security;
 
-import org.eclipse.emf.ecore.EObject;
+import org.soluvas.commons.ResourceAware;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface InstanceRole extends EObject {
+public interface InstanceRole extends ResourceAware {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

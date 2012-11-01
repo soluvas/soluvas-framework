@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.soluvas.commons.CommonsPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -67,13 +68,31 @@ public interface SecurityPackage extends EPackage {
 	int ROLE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
+
+	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE__NAME = 0;
+	int ROLE__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -82,7 +101,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE__DESCRIPTION = 1;
+	int ROLE__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Assign Mode</b></em>' attribute.
@@ -91,7 +110,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE__ASSIGN_MODE = 2;
+	int ROLE__ASSIGN_MODE = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Role</em>' class.
@@ -100,7 +119,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_FEATURE_COUNT = 3;
+	int ROLE_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.security.impl.InstanceRoleImpl <em>Instance Role</em>}' class.
@@ -113,13 +132,31 @@ public interface SecurityPackage extends EPackage {
 	int INSTANCE_ROLE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_ROLE__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
+
+	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_ROLE__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_ROLE__NAME = 0;
+	int INSTANCE_ROLE__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -128,7 +165,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_ROLE__DESCRIPTION = 1;
+	int INSTANCE_ROLE__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Instance Role</em>' class.
@@ -137,7 +174,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_ROLE_FEATURE_COUNT = 2;
+	int INSTANCE_ROLE_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.security.impl.DomainImpl <em>Domain</em>}' class.
@@ -150,13 +187,31 @@ public interface SecurityPackage extends EPackage {
 	int DOMAIN = 2;
 
 	/**
+	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
+
+	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN__NAME = 0;
+	int DOMAIN__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -165,7 +220,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN__DESCRIPTION = 1;
+	int DOMAIN__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Domain</em>' class.
@@ -174,7 +229,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_FEATURE_COUNT = 2;
+	int DOMAIN_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.security.impl.ActionImpl <em>Action</em>}' class.
@@ -187,13 +242,31 @@ public interface SecurityPackage extends EPackage {
 	int ACTION = 3;
 
 	/**
+	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
+
+	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION__NAME = 0;
+	int ACTION__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -202,7 +275,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION__GLOBAL = 1;
+	int ACTION__GLOBAL = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Domains</b></em>' attribute list.
@@ -211,7 +284,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION__DOMAINS = 2;
+	int ACTION__DOMAINS = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -220,7 +293,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION__DESCRIPTION = 3;
+	int ACTION__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Action</em>' class.
@@ -229,7 +302,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_FEATURE_COUNT = 4;
+	int ACTION_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.security.impl.SecurityCatalogImpl <em>Catalog</em>}' class.
@@ -306,13 +379,31 @@ public interface SecurityPackage extends EPackage {
 	int PERMISSION = 5;
 
 	/**
+	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERMISSION__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
+
+	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERMISSION__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Roles</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__ROLES = 0;
+	int PERMISSION__ROLES = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Domain Permission</b></em>' attribute list.
@@ -321,7 +412,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__DOMAIN_PERMISSION = 1;
+	int PERMISSION__DOMAIN_PERMISSION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Action Permission</b></em>' attribute list.
@@ -330,7 +421,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__ACTION_PERMISSION = 2;
+	int PERMISSION__ACTION_PERMISSION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Instance Permission</b></em>' attribute list.
@@ -339,7 +430,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__INSTANCE_PERMISSION = 3;
+	int PERMISSION__INSTANCE_PERMISSION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Permission</em>' class.
@@ -348,7 +439,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION_FEATURE_COUNT = 4;
+	int PERMISSION_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 4;
 
 
 	/**

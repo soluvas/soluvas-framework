@@ -4,12 +4,17 @@ package org.soluvas.security.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
+import org.soluvas.commons.ResourceAware;
 import org.soluvas.security.*;
+import org.soluvas.security.Action;
+import org.soluvas.security.Domain;
+import org.soluvas.security.InstanceRole;
+import org.soluvas.security.Permission;
+import org.soluvas.security.Role;
+import org.soluvas.security.SecurityCatalog;
+import org.soluvas.security.SecurityPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -90,6 +95,10 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePermission(Permission object) {
 				return createPermissionAdapter();
+			}
+			@Override
+			public Adapter caseResourceAware(ResourceAware object) {
+				return createResourceAwareAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -192,6 +201,20 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPermissionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.ResourceAware
+	 * @generated
+	 */
+	public Adapter createResourceAwareAdapter() {
 		return null;
 	}
 

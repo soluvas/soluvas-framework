@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_Hn9XoCQDEeKL8qHxNHEWSw" type="EcoreTools" name="commons" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_qE-lcCQDEeKL8qHxNHEWSw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_qFBBsCQDEeKL8qHxNHEWSw" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_qFBBsSQDEeKL8qHxNHEWSw" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_qFBBsiQDEeKL8qHxNHEWSw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_qFBBsyQDEeKL8qHxNHEWSw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_qFBBtCQDEeKL8qHxNHEWSw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_qFBBtSQDEeKL8qHxNHEWSw" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_qFBBtiQDEeKL8qHxNHEWSw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_qFBBtyQDEeKL8qHxNHEWSw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_qFBBuCQDEeKL8qHxNHEWSw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_qE-lcSQDEeKL8qHxNHEWSw" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="commons.ecore#//ResourceAware"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_qE-lciQDEeKL8qHxNHEWSw" x="108" y="336"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_qFBowCQDEeKL8qHxNHEWSw" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_qFCP0CQDEeKL8qHxNHEWSw" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_qFCP0SQDEeKL8qHxNHEWSw" type="5008">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_qFCP0iQDEeKL8qHxNHEWSw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_qFCP0yQDEeKL8qHxNHEWSw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_qFCP1CQDEeKL8qHxNHEWSw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_qFBowSQDEeKL8qHxNHEWSw" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="commons.ecore#//ResourceType"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_qFBowiQDEeKL8qHxNHEWSw" x="372" y="336"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_Hn9XoSQDEeKL8qHxNHEWSw"/>
+  <element xmi:type="ecore:EPackage" href="commons.ecore#/"/>
+</notation:Diagram>

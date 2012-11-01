@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<xsd:schema xmlns:security="http://www.soluvas.org/schema/security/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/security/1.0">
+<xsd:schema xmlns:commons="http://www.soluvas.org/schema/commons/1.0" xmlns:security="http://www.soluvas.org/schema/security/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/security/1.0">
   <xsd:import namespace="http://www.omg.org/XMI" schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/XMI.xsd"/>
+  <xsd:import namespace="http://www.soluvas.org/schema/commons/1.0" schemaLocation="commons.xsd"/>
   <xsd:simpleType name="AssignMode">
     <xsd:annotation>
       <xsd:documentation>Specify how a role should be assigned to a subject.</xsd:documentation>
@@ -27,20 +28,19 @@
     <xsd:annotation>
       <xsd:documentation>Roles contain global permissions.</xsd:documentation>
     </xsd:annotation>
-    <xsd:choice maxOccurs="unbounded" minOccurs="0">
-      <xsd:element ref="xmi:Extension"/>
-    </xsd:choice>
-    <xsd:attribute ref="xmi:id"/>
-    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="name" type="xsd:string" use="required">
-      <xsd:annotation>
-        <xsd:documentation>Name of role, e.g. "admin", "sysadmin", "manager", "sales", in lower_underscore format.
+    <xsd:complexContent>
+      <xsd:extension base="commons:ResourceAware">
+        <xsd:attribute name="name" type="xsd:string" use="required">
+          <xsd:annotation>
+            <xsd:documentation>Name of role, e.g. "admin", "sysadmin", "manager", "sales", in lower_underscore format.
 
 This corresponds directly to entries in ou=groups in LDAP.</xsd:documentation>
-      </xsd:annotation>
-    </xsd:attribute>
-    <xsd:attribute name="description" type="xsd:string"/>
-    <xsd:attribute name="assignMode" type="security:AssignMode"/>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="description" type="xsd:string"/>
+        <xsd:attribute name="assignMode" type="security:AssignMode"/>
+      </xsd:extension>
+    </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="Role" type="security:Role">
     <xsd:annotation>
@@ -56,19 +56,18 @@ zibalabel : instance.
 shop : domain.
 </xsd:documentation>
     </xsd:annotation>
-    <xsd:choice maxOccurs="unbounded" minOccurs="0">
-      <xsd:element ref="xmi:Extension"/>
-    </xsd:choice>
-    <xsd:attribute ref="xmi:id"/>
-    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="name" type="xsd:string" use="required">
-      <xsd:annotation>
-        <xsd:documentation>Name of instance role, e.g. "admin", "sysadmin", "manager", "sales", in lower_underscore format.
+    <xsd:complexContent>
+      <xsd:extension base="commons:ResourceAware">
+        <xsd:attribute name="name" type="xsd:string" use="required">
+          <xsd:annotation>
+            <xsd:documentation>Name of instance role, e.g. "admin", "sysadmin", "manager", "sales", in lower_underscore format.
 
 This corresponds directly to entries in ou=groups in LDAP.</xsd:documentation>
-      </xsd:annotation>
-    </xsd:attribute>
-    <xsd:attribute name="description" type="xsd:string"/>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="description" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="InstanceRole" type="security:InstanceRole">
     <xsd:annotation>
@@ -81,52 +80,52 @@ shop : domain.
     </xsd:annotation>
   </xsd:element>
   <xsd:complexType name="Domain">
-    <xsd:choice maxOccurs="unbounded" minOccurs="0">
-      <xsd:element ref="xmi:Extension"/>
-    </xsd:choice>
-    <xsd:attribute ref="xmi:id"/>
-    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="name" type="xsd:string" use="required">
-      <xsd:annotation>
-        <xsd:documentation>Name of the security domain (object class), e.g. "shop", "person", "product", in lower_underscore format.</xsd:documentation>
-      </xsd:annotation>
-    </xsd:attribute>
-    <xsd:attribute name="description" type="xsd:string">
-      <xsd:annotation>
-        <xsd:documentation>Provides human-readable description.</xsd:documentation>
-      </xsd:annotation>
-    </xsd:attribute>
+    <xsd:complexContent>
+      <xsd:extension base="commons:ResourceAware">
+        <xsd:attribute name="name" type="xsd:string" use="required">
+          <xsd:annotation>
+            <xsd:documentation>Name of the security domain (object class), e.g. "shop", "person", "product", in lower_underscore format.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="description" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Provides human-readable description.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="Domain" type="security:Domain"/>
   <xsd:complexType name="Action">
     <xsd:annotation>
       <xsd:documentation>Secured action.</xsd:documentation>
     </xsd:annotation>
-    <xsd:choice maxOccurs="unbounded" minOccurs="0">
-      <xsd:element name="domains" nillable="true" type="xsd:string">
-        <xsd:annotation>
-          <xsd:documentation>The list of domains this action applies to.</xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element ref="xmi:Extension"/>
-    </xsd:choice>
-    <xsd:attribute ref="xmi:id"/>
-    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="name" type="xsd:string" use="required">
-      <xsd:annotation>
-        <xsd:documentation>Name of action, e.g. "print", "edit", in lower_underscore format.</xsd:documentation>
-      </xsd:annotation>
-    </xsd:attribute>
-    <xsd:attribute name="global" type="xsd:boolean">
-      <xsd:annotation>
-        <xsd:documentation>Global actions apply to the whole application, in addition to domain instances (if specified).</xsd:documentation>
-      </xsd:annotation>
-    </xsd:attribute>
-    <xsd:attribute name="description" type="xsd:string">
-      <xsd:annotation>
-        <xsd:documentation>Provides human-readable purpose of the action.</xsd:documentation>
-      </xsd:annotation>
-    </xsd:attribute>
+    <xsd:complexContent>
+      <xsd:extension base="commons:ResourceAware">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="domains" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>The list of domains this action applies to.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:choice>
+        <xsd:attribute name="name" type="xsd:string" use="required">
+          <xsd:annotation>
+            <xsd:documentation>Name of action, e.g. "print", "edit", in lower_underscore format.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="global" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Global actions apply to the whole application, in addition to domain instances (if specified).</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="description" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Provides human-readable purpose of the action.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="Action" type="security:Action">
     <xsd:annotation>
@@ -154,31 +153,40 @@ shop : domain.
     </xsd:annotation>
   </xsd:element>
   <xsd:complexType name="Permission">
-    <xsd:choice maxOccurs="unbounded" minOccurs="0">
-      <xsd:element name="roles" nillable="true" type="xsd:string">
-        <xsd:annotation>
-          <xsd:documentation>The roles this permission apply to.</xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="domainPermission" nillable="true" type="xsd:string">
-        <xsd:annotation>
-          <xsd:documentation>Name(s) of the domain, can be "*".</xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="actionPermission" nillable="true" type="xsd:string">
-        <xsd:annotation>
-          <xsd:documentation>Name(s) of the action, can be "*".</xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="instancePermission" nillable="true" type="xsd:string">
-        <xsd:annotation>
-          <xsd:documentation>Name(s) of the insance, can be "*".</xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element ref="xmi:Extension"/>
-    </xsd:choice>
-    <xsd:attribute ref="xmi:id"/>
-    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:complexContent>
+      <xsd:extension base="commons:ResourceAware">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="roles" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>The roles this permission apply to.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="domainPermission" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Name(s) of the domain, can be "*".</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="actionPermission" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Name(s) of the action, can be "*".</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="instancePermission" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Name(s) of the instance(s), can be "*".
+
+To specify multiple parts, separate each with ":".
+e.g.
+domain=wink
+action=add
+instance=hendy:car:nana
+
+means permit hendy to add wink for car to nana.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="Permission" type="security:Permission"/>
 </xsd:schema>

@@ -5,16 +5,12 @@ package org.soluvas.security.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-
+import org.soluvas.commons.ResourceType;
 import org.soluvas.security.Action;
 import org.soluvas.security.SecurityPackage;
 
@@ -25,6 +21,8 @@ import org.soluvas.security.SecurityPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.soluvas.security.impl.ActionImpl#getResourceUri <em>Resource Uri</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.ActionImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.security.impl.ActionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.security.impl.ActionImpl#getGlobal <em>Global</em>}</li>
  *   <li>{@link org.soluvas.security.impl.ActionImpl#getDomains <em>Domains</em>}</li>
@@ -35,6 +33,46 @@ import org.soluvas.security.SecurityPackage;
  * @generated
  */
 public class ActionImpl extends EObjectImpl implements Action {
+	/**
+	 * The default value of the '{@link #getResourceUri() <em>Resource Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResourceUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String RESOURCE_URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getResourceUri() <em>Resource Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResourceUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected String resourceUri = RESOURCE_URI_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResourceType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ResourceType RESOURCE_TYPE_EDEFAULT = ResourceType.BUNDLE;
+
+	/**
+	 * The cached value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResourceType()
+	 * @generated
+	 * @ordered
+	 */
+	protected ResourceType resourceType = RESOURCE_TYPE_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -129,6 +167,53 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public String getResourceUri() {
+		return resourceUri;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setResourceUri(String newResourceUri) {
+		String oldResourceUri = resourceUri;
+		resourceUri = newResourceUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.ACTION__RESOURCE_URI, oldResourceUri, resourceUri));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceType getResourceType() {
+		return resourceType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setResourceType(ResourceType newResourceType) {
+		ResourceType oldResourceType = resourceType;
+		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.ACTION__RESOURCE_TYPE, oldResourceType, resourceType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -138,6 +223,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -150,6 +236,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Boolean getGlobal() {
 		return global;
 	}
@@ -159,6 +246,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGlobal(Boolean newGlobal) {
 		Boolean oldGlobal = global;
 		global = newGlobal;
@@ -171,6 +259,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getDomains() {
 		if (domains == null) {
 			domains = new EDataTypeUniqueEList<String>(String.class, this, SecurityPackage.ACTION__DOMAINS);
@@ -183,6 +272,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -192,6 +282,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		String oldDescription = description;
 		description = newDescription;
@@ -207,6 +298,10 @@ public class ActionImpl extends EObjectImpl implements Action {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case SecurityPackage.ACTION__RESOURCE_URI:
+				return getResourceUri();
+			case SecurityPackage.ACTION__RESOURCE_TYPE:
+				return getResourceType();
 			case SecurityPackage.ACTION__NAME:
 				return getName();
 			case SecurityPackage.ACTION__GLOBAL:
@@ -228,6 +323,12 @@ public class ActionImpl extends EObjectImpl implements Action {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case SecurityPackage.ACTION__RESOURCE_URI:
+				setResourceUri((String)newValue);
+				return;
+			case SecurityPackage.ACTION__RESOURCE_TYPE:
+				setResourceType((ResourceType)newValue);
+				return;
 			case SecurityPackage.ACTION__NAME:
 				setName((String)newValue);
 				return;
@@ -253,6 +354,12 @@ public class ActionImpl extends EObjectImpl implements Action {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case SecurityPackage.ACTION__RESOURCE_URI:
+				setResourceUri(RESOURCE_URI_EDEFAULT);
+				return;
+			case SecurityPackage.ACTION__RESOURCE_TYPE:
+				setResourceType(RESOURCE_TYPE_EDEFAULT);
+				return;
 			case SecurityPackage.ACTION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -277,6 +384,10 @@ public class ActionImpl extends EObjectImpl implements Action {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case SecurityPackage.ACTION__RESOURCE_URI:
+				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
+			case SecurityPackage.ACTION__RESOURCE_TYPE:
+				return resourceType != RESOURCE_TYPE_EDEFAULT;
 			case SecurityPackage.ACTION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SecurityPackage.ACTION__GLOBAL:
@@ -299,7 +410,11 @@ public class ActionImpl extends EObjectImpl implements Action {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
+		result.append(" (resourceUri: ");
+		result.append(resourceUri);
+		result.append(", resourceType: ");
+		result.append(resourceType);
+		result.append(", name: ");
 		result.append(name);
 		result.append(", global: ");
 		result.append(global);

@@ -4,10 +4,16 @@ package org.soluvas.security.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
+import org.soluvas.commons.ResourceAware;
 import org.soluvas.security.*;
+import org.soluvas.security.Action;
+import org.soluvas.security.Domain;
+import org.soluvas.security.InstanceRole;
+import org.soluvas.security.Permission;
+import org.soluvas.security.Role;
+import org.soluvas.security.SecurityCatalog;
+import org.soluvas.security.SecurityPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,24 +75,28 @@ public class SecuritySwitch<T> extends Switch<T> {
 			case SecurityPackage.ROLE: {
 				Role role = (Role)theEObject;
 				T result = caseRole(role);
+				if (result == null) result = caseResourceAware(role);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case SecurityPackage.INSTANCE_ROLE: {
 				InstanceRole instanceRole = (InstanceRole)theEObject;
 				T result = caseInstanceRole(instanceRole);
+				if (result == null) result = caseResourceAware(instanceRole);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case SecurityPackage.DOMAIN: {
 				Domain domain = (Domain)theEObject;
 				T result = caseDomain(domain);
+				if (result == null) result = caseResourceAware(domain);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case SecurityPackage.ACTION: {
 				Action action = (Action)theEObject;
 				T result = caseAction(action);
+				if (result == null) result = caseResourceAware(action);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -99,6 +109,7 @@ public class SecuritySwitch<T> extends Switch<T> {
 			case SecurityPackage.PERMISSION: {
 				Permission permission = (Permission)theEObject;
 				T result = casePermission(permission);
+				if (result == null) result = caseResourceAware(permission);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -193,6 +204,21 @@ public class SecuritySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePermission(Permission object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Resource Aware</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Resource Aware</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseResourceAware(ResourceAware object) {
 		return null;
 	}
 
