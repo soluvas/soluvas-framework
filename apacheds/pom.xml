@@ -13,7 +13,7 @@
 	<description>Embeds ApacheDS inside Java application.</description>
 	
 	<properties>
-		<apacheds.version>2.0.0-M7</apacheds.version>
+		<apacheds.version>2.0.0-M8</apacheds.version>
 	</properties>
 
 	<dependencies>
