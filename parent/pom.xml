@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.soluvas</groupId>
-	<artifactId>soluvas-parent</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
+	<artifactId>org.soluvas.parent</artifactId>
+	<version>2.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Soluvas Framework Parent</name>
 	<description>Soluvas Framework library and tooling platform.</description>
@@ -33,7 +33,7 @@
 	</licenses>
 
 	<properties>
-		<soluvas-framework.version>1.1.0-SNAPSHOT</soluvas-framework.version>
+		<soluvas-framework.version>2.0.0-SNAPSHOT</soluvas-framework.version>
 		<karaf.version>2.3.0</karaf.version>
 
 		<akka.version>2.0.2</akka.version>
@@ -52,42 +52,42 @@
 		<dependencies>
 			<dependency>
 				<groupId>org.soluvas</groupId>
-				<artifactId>soluvas-commons</artifactId>
+				<artifactId>org.soluvas.commons</artifactId>
 				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
-				<artifactId>soluvas-json</artifactId>
+				<artifactId>org.soluvas.json</artifactId>
 				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
-				<artifactId>soluvas-ldap</artifactId>
+				<artifactId>org.soluvas.ldap</artifactId>
 				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
-				<artifactId>soluvas-image-store</artifactId>
+				<artifactId>org.soluvas.image</artifactId>
 				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
-				<artifactId>soluvas-cdi</artifactId>
+				<artifactId>org.soluvas.cdi</artifactId>
 				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
-				<artifactId>soluvas-push</artifactId>
+				<artifactId>org.soluvas.push</artifactId>
 				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
-				<artifactId>soluvas-async</artifactId>
+				<artifactId>org.soluvas.async</artifactId>
 				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
-				<artifactId>soluvas-jaxrs</artifactId>
+				<artifactId>org.soluvas.jaxrs</artifactId>
 				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
@@ -97,12 +97,12 @@
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
-				<artifactId>soluvas-multitenant</artifactId>
+				<artifactId>org.soluvas.multitenant</artifactId>
 				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.soluvas</groupId>
-				<artifactId>soluvas-mongo</artifactId>
+				<artifactId>org.soluvas.mongo</artifactId>
 				<version>${soluvas-framework.version}</version>
 			</dependency>
 			<dependency>

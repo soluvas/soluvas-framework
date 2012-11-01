@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.soluvas</groupId>
-		<artifactId>soluvas-parent</artifactId>
-		<version>1.1.0-SNAPSHOT</version>
+		<artifactId>org.soluvas.parent</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>soluvas-mongo</artifactId>
+	<artifactId>org.soluvas.mongo</artifactId>
 	<packaging>bundle</packaging>
 	<name>Soluvas Mongo</name>
 	<description>MongoDB utilities.</description>
