@@ -2,6 +2,8 @@ package org.soluvas.commons;
 
 import java.net.URL;
 
+import javax.annotation.Nonnull;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -33,38 +35,43 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	private String fileName;
 	private T obj;
 	
-	public XmiObjectLoader(Class<? extends EPackage> ePackage, Class<?> loaderClass, String resourcePath) {
+	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackage, @Nonnull Class<?> loaderClass, @Nonnull String resourcePath) {
 		super();
 		this.ePackage = ePackage;
 		this.loaderClass = loaderClass;
 		this.resourcePath = resourcePath;
+		
+		log.info("Loading XMI: {} from {}", resourcePath, loaderClass.getName());
+		final URL resourceUrl = loaderClass.getResource(resourcePath);
+		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s using class %s",
+				resourcePath, loaderClass.getName());
+		final URI resourceUri = URI.createURI(resourceUrl.toExternalForm());
+		load(resourceUri);
 	}
 
-	public XmiObjectLoader(Class<? extends EPackage> ePackage, String fileName) {
+	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackage, @Nonnull String fileName) {
 		super();
 		this.ePackage = ePackage;
 		this.fileName = fileName;
+		
+		load(URI.createFileURI(fileName));
+	}
+
+	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackage, @Nonnull URL resourceUrl) {
+		super();
+		this.ePackage = ePackage;
+		
+		final URI resourceUri = URI.createURI(resourceUrl.toExternalForm());
+		load(resourceUri);
 	}
 
 	@Override
 	public T get() {
-		if (obj == null)
-			load();
 		return obj;
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void load() {
-		URI resourceUri;
-		if (fileName != null) {
-			resourceUri = URI.createFileURI(fileName);
-		} else {
-			log.info("Loading XMI: {} from {}", resourcePath, loaderClass.getName());
-			final URL resourceUrl = loaderClass.getResource(resourcePath);
-			Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s using class %s",
-					resourcePath, loaderClass.getName());
-			resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		}
+	protected void load(URI resourceUri) {
 		log.debug("Loading XMI from URI: {}", resourceUri);
 		
 		ResourceSetImpl rset = new ResourceSetImpl();

@@ -7,20 +7,6 @@
         http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0
         http://karaf.apache.org/xmlns/shell/v1.1.0 http://karaf.apache.org/xmlns/shell/v1.1.0">
 
-<!-- 	<bean id="xmiSecurityCatalogSupplier" class="org.soluvas.commons.XmiObjectLoader"> -->
-<!-- 		<argument value="org.soluvas.security.SecurityPackage" /> -->
-<!-- 		<argument value="org.soluvas.security.SecurityPackage" /> -->
-<!-- 		<argument value="default.SecurityCatalog.xmi" /> -->
-<!-- 	</bean> -->
-<!-- 	<service ref="xmiSecurityCatalogSupplier" auto-export="interfaces"> -->
-<!-- 		<service-properties> -->
-<!-- 			<entry key="clientId" value="berbatik" /> -->
-<!-- 			<entry key="tenantId" value="berbatik" /> -->
-<!-- 			<entry key="tenantEnv" value="dev" /> -->
-<!-- 			<entry key="suppliedClass" value="org.soluvas.security.SecurityCatalog" /> -->
-<!-- 		</service-properties> -->
-<!-- 	</service> -->
-	
 	<reference id="svcLookup" interface="org.soluvas.multitenant.ServiceLookup"/>
 
 	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
@@ -104,4 +90,15 @@
 		<argument ref="securityCatalogSupplierTracker" />
 	</bean>
 	
+<!-- 	<bean id="securityCatalogXmiTracker" class="org.soluvas.security.SecurityCatalogXmiTracker"> -->
+<!-- 		<argument ref="blueprintBundleContext" /> -->
+<!-- 		<argument value="berbatik" /> -->
+<!-- 		<argument value="dev" /> -->
+<!-- 	</bean> -->
+<!-- 	<bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close"> -->
+<!-- 		<argument ref="blueprintBundleContext" /> -->
+<!-- 		<argument value="255" /> -->
+<!-- 		<argument ref="securityCatalogXmiTracker" /> -->
+<!-- 	</bean> -->
+
 </blueprint>
