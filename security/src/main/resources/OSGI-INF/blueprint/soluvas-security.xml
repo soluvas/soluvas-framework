@@ -38,6 +38,11 @@
 				<argument ref="svcLookup" />
 			</action>
 		</command>
+		<command name="sec/personrolels">
+			<action class="org.soluvas.security.shell.SecPersonRoleLsCommand">
+				<argument ref="svcLookup" />
+			</action>
+		</command>
 	</command-bundle>
 	
 	<bean class="org.soluvas.commons.EmfUnloader" destroy-method="destroy">
