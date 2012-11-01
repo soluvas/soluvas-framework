@@ -17,6 +17,9 @@
   <actions name="archive" global="true" description="Archives objects from Inbox."/>
   <actions name="unarchive" global="true" description="Brings back objects to Inbox."/>
   <actions name="label" global="true" description="Set/unset labels in an object."/>
+  <actions name="view" global="true" description="View publicly available information."/>
+  <actions name="view_private" global="true" description="View private information."/>
+  <actions name="view_all" global="true" description="View all information, including private and administrative."/>
   <permissions>
     <roles>sysadmin</roles>
     <roles>admin</roles>
