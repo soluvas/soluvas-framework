@@ -33,8 +33,13 @@
 		</command>
 		
 		<!-- Security Runtime -->
-		<command name="sec/rolemembers">
-			<action class="org.soluvas.security.shell.SecRoleMembersCommand">
+		<command name="sec/rolememberls">
+			<action class="org.soluvas.security.shell.SecRoleMemberLsCommand">
+				<argument ref="svcLookup" />
+			</action>
+		</command>
+		<command name="sec/rolememberset">
+			<action class="org.soluvas.security.shell.SecRoleMemberSetCommand">
 				<argument ref="svcLookup" />
 			</action>
 		</command>

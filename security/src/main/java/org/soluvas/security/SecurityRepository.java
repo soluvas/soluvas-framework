@@ -2,9 +2,12 @@ package org.soluvas.security;
 
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
+import org.soluvas.ldap.Person;
 
 public interface SecurityRepository {
 
@@ -13,7 +16,7 @@ public interface SecurityRepository {
 	 * @param personId
 	 * @return
 	 */
-	public abstract Set<String> getPersonRoles(String personId);
+	Set<String> getPersonRoles(@Nonnull final String personId);
 
 	/**
 	 * Return the list of <strong>physical</strong> members (person IDs) of a particular <strong>physical</strong> role.
@@ -23,8 +26,22 @@ public interface SecurityRepository {
 	 * @param role
 	 * @return
 	 */
-	public abstract Set<String> getRoleMembers(String role);
+	Set<String> getRoleMembers(@Nonnull final String role);
+	
+	/**
+	 * Replace all roles of a {@link Person} with specified {@link Role} names.
+	 * @param personId
+	 * @param roles
+	 */
+	void replacePersonRoles(@Nonnull final String personId, @Nonnull final Set<String> roles);
 
+	/**
+	 * Replace all members of a {@link Role} with specified {@link Person} IDs.
+	 * @param role
+	 * @param personId
+	 */
+	void replaceRoleMembers(@Nonnull final String role, @Nonnull final Set<String> personIds);
+	
 	/**
 	 * @deprecated shouldn't be here
 	 */
