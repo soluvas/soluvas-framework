@@ -6,8 +6,11 @@ import java.util.List;
 import com.google.common.collect.ImmutableList;
 
 /**
+ * 
+ * @todo Evaluate or consider merging with: jOOQ (knows JDO Typesafe), Querydsl (supported by Spring),
+ * Spring Data JPA Specification (who use it?), JPA Criteria (bad), JDO Typesafe (inspired by Querydsl), SDO.
+ * I think Querydsl is best. As jOOQ is too SQL-specific. 
  * @author rudi
- *
  */
 @SuppressWarnings("serial")
 public class Criteria implements Serializable {

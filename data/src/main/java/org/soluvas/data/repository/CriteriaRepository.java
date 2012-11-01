@@ -18,6 +18,7 @@ import org.soluvas.data.query.Criteria;
  * </ol>
  * find, exists, count and delete operations.
  * @author ceefour
+ * @todo Switch to Querydsl
  */
 public interface CriteriaRepository<T, ID extends Serializable>  extends CrudRepository<T, ID> {
 	

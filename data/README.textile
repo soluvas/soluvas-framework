@@ -1,3 +1,22 @@
 h1. Soluvas Data
 
 Inspired by, and includes code from, "Spring Data Commons":http://www.springsource.org/spring-data/commons .
+
+h2. Q&A
+
+h3. Will Soluvas Data merge with Spring Data?
+
+Short answer: Not likely.
+
+Soluvas Data aims to be practical, efficient, generic, and safe.
+
+Among the features:
+
+1. Suitable as remote interface (coarse-grained)
+2. Callback support
+3. Asynchronous support
+4. Progress reporting
+5. Result reporting
+6. Static analysis
+
+It's always possible to wrap Soluvas Data with Spring Data and vice versa using delegating adapter.
