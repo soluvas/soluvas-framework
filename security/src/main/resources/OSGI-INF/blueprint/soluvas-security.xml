@@ -10,6 +10,7 @@
 	<reference id="svcLookup" interface="org.soluvas.multitenant.ServiceLookup"/>
 
 	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
+		<!-- Security Dictionary -->
 		<command name="sec/rolels">
 			<action class="org.soluvas.security.shell.SecRoleLsCommand">
 				<argument ref="svcLookup" />
@@ -27,6 +28,13 @@
 		</command>
 		<command name="sec/permls">
 			<action class="org.soluvas.security.shell.SecPermLsCommand">
+				<argument ref="svcLookup" />
+			</action>
+		</command>
+		
+		<!-- Security Runtime -->
+		<command name="sec/rolemembers">
+			<action class="org.soluvas.security.shell.SecRoleMembersCommand">
 				<argument ref="svcLookup" />
 			</action>
 		</command>
