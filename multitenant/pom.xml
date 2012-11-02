@@ -13,7 +13,11 @@
 	<description>Multitenancy support in shared infrastructure applications.</description>
 	
 	<dependencies>
-
+		<dependency>
+			<groupId>org.soluvas</groupId>
+			<artifactId>org.soluvas.commons</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.karaf.shell</groupId>
 			<artifactId>org.apache.karaf.shell.console</artifactId>

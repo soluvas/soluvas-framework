@@ -21,7 +21,7 @@ import com.google.common.collect.Maps;
  * @todo Support for propagating EMF Notify changes.
  * @author ceefour
  */
-public class OverlayingSupplier<T extends EObject> implements Supplier<T> {
+public class OverlayingSupplier<T extends EObject> implements Supplier<T>, DelegatingSupplier<T> {
 
 	private transient Logger log = LoggerFactory
 			.getLogger(OverlayingSupplier.class);
@@ -31,9 +31,9 @@ public class OverlayingSupplier<T extends EObject> implements Supplier<T> {
 	 * Note that these are <strong>copied</strong> objects, not original objects from suppliers.
 	 */
 	private T overlaid;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private final SortedMap<T, Supplier<T>> sources = Maps.synchronizedNavigableMap(Maps.newTreeMap(new WeightComparator()));
 
-	@SuppressWarnings("unchecked")
 	public OverlayingSupplier(EFactory eFactory, EClass eClass,
 			List<Supplier<T>> suppliers) {
 		super();
@@ -56,6 +56,7 @@ public class OverlayingSupplier<T extends EObject> implements Supplier<T> {
 		}
 	}
 	
+	@Override
 	public void addSupplier(Supplier<T> supplier) {
 		log.debug("Adding supplier {} for {}", supplier, eClass.getName());
 		sources.put(supplier.get(), supplier);
@@ -63,6 +64,7 @@ public class OverlayingSupplier<T extends EObject> implements Supplier<T> {
 		log.info("Added supplier {} for {}, now {} suppliers", supplier, eClass.getName(), sources.size());
 	}
 
+	@Override
 	public void removeSupplier(Supplier<T> supplier) {
 		log.debug("Removing supplier {} for {}", supplier, eClass.getName());
 		Iterator<Entry<T, Supplier<T>>> iterator = sources.entrySet().iterator();

@@ -30,10 +30,10 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	
 	private transient Logger log = LoggerFactory
 			.getLogger(XmiObjectLoader.class);
-	private final Class<? extends EPackage> ePackage;
+	private final EPackage ePackage;
 	private T obj;
 	
-	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackage, @Nonnull Class<?> loaderClass, @Nonnull String resourcePath) {
+	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull Class<?> loaderClass, @Nonnull String resourcePath) {
 		super();
 		this.ePackage = ePackage;
 		
@@ -45,20 +45,39 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		load(resourceUri, ResourceType.BUNDLE);
 	}
 
-	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackage, @Nonnull String fileName) {
+	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull String fileName) {
 		super();
 		this.ePackage = ePackage;
 		
 		load(URI.createFileURI(fileName), ResourceType.FILE);
 	}
 
-	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackage, @Nonnull URL resourceUrl,
+	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull URL resourceUrl,
 			ResourceType resourceType) {
 		super();
 		this.ePackage = ePackage;
 		
 		final URI resourceUri = URI.createURI(resourceUrl.toExternalForm());
 		load(resourceUri, resourceType);
+	}
+
+	@Deprecated
+	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackageClass, @Nonnull Class<?> loaderClass, @Nonnull String resourcePath) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException {
+		this( (EPackage) ePackageClass.getDeclaredField("eINSTANCE").get(ePackageClass),
+				loaderClass, resourcePath);
+	}
+
+	@Deprecated
+	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackageClass, @Nonnull String fileName) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException {
+		this( (EPackage) ePackageClass.getDeclaredField("eINSTANCE").get(ePackageClass),
+				fileName);
+	}
+
+	@Deprecated
+	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackageClass, @Nonnull URL resourceUrl,
+			ResourceType resourceType) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException {
+		this( (EPackage) ePackageClass.getDeclaredField("eINSTANCE").get(ePackageClass),
+				resourceUrl, resourceType);
 	}
 
 	@Override
@@ -75,10 +94,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 			.put("xmi", new XMIResourceFactoryImpl());
 		
 		try {
-			String packageNsUri = (String) ePackage.getDeclaredField("eNS_URI").get(ePackage);
-			EPackage packageInstance = (EPackage) ePackage.getDeclaredField("eINSTANCE").get(ePackage);
-//		rset.getPackageRegistry().put(ePackage.getNsURI(), ePackage);
-			rset.getPackageRegistry().put(packageNsUri, packageInstance);
+			rset.getPackageRegistry().put(ePackage.getNsURI(), ePackage);
 			
 			Resource resource = rset.getResource(resourceUri, true);
 			T obj = (T)resource.getContents().get(0);
@@ -90,18 +106,24 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		}
 		
 		// Augment resource information
+		augmentResourceInfo(resourceUri, resourceType, obj);
 		final TreeIterator<EObject> allContents = obj.eAllContents();
 		long augmented = 0;
 		while (allContents.hasNext()) {
 			EObject content = allContents.next();
-			if (content instanceof ResourceAware) {
-				((ResourceAware) content).setResourceType(resourceType);
-				((ResourceAware) content).setResourceUri(resourceUri.toString());
-			}
+			augmentResourceInfo(resourceUri, resourceType, content);
 		}
 		if (augmented > 0)
 			log.debug("Augmented {} EObjects with resource information from {}",
 					augmented, resourceUri);
+	}
+
+	protected void augmentResourceInfo(URI resourceUri,
+			ResourceType resourceType, EObject content) {
+		if (content instanceof ResourceAware) {
+			((ResourceAware) content).setResourceType(resourceType);
+			((ResourceAware) content).setResourceUri(resourceUri.toString());
+		}
 	}
 
 }
