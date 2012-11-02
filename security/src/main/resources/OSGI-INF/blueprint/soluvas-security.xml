@@ -85,10 +85,7 @@
 			<bean factory-ref="securityPackage" factory-method="getSecurityCatalog" />
 		</argument>
 		<argument>
-			<list>
-<!-- 				<ref component-id="defaultSecurityCatalogSupplier"/> -->
-<!-- 				<ref component-id="bippoSecurityCatalogSupplier"/> -->
-			</list>
+			<list />
 		</argument>
 	</bean>
 	<service ref="aggregatingSecurityCatalogSupplier" auto-export="interfaces">
@@ -101,7 +98,7 @@
 		</service-properties>
 	</service>
 	
-	<bean id="securityCatalogSupplierTracker" class="org.soluvas.security.SecurityCatalogSupplierTracker">
+	<bean id="securityCatalogSupplierTracker" class="org.soluvas.commons.SupplierTracker">
 		<argument ref="blueprintBundleContext" />
 		<argument ref="aggregatingSecurityCatalogSupplier" />
 	</bean>
@@ -115,7 +112,9 @@
 		<argument ref="securityCatalogSupplierTracker" />
 	</bean>
 	
-	<bean id="securityCatalogXmiTracker" class="org.soluvas.security.SecurityCatalogXmiTracker">
+	<bean id="securityCatalogXmiTracker" class="org.soluvas.commons.XmiTracker">
+		<argument ref="securityPackage" />
+		<argument value="org.soluvas.security.SecurityCatalog" />
 		<argument value="berbatik" />
 		<argument value="dev" />
 	</bean>

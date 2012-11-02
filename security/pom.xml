@@ -25,6 +25,11 @@
 			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.commons</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.karaf.shell</groupId>

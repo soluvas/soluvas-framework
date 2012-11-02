@@ -36,6 +36,7 @@
 		<soluvas-framework.version>2.0.0-SNAPSHOT</soluvas-framework.version>
 		<karaf.version>2.3.0</karaf.version>
 
+		<shiro.version>1.2.1</shiro.version>
 		<akka.version>2.0.2</akka.version>
 		<scala.version>2.9.2</scala.version>
 		<emf.version>2.8.0.v20120911-0500</emf.version><!-- Note: ecore has different version -->
@@ -151,6 +152,21 @@
 				<version>${emf.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-spring</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-web</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-core</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpcore</artifactId>
