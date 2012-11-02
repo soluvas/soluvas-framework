@@ -10,7 +10,7 @@ import org.soluvas.commons.ResourceAware;
 import org.soluvas.security.*;
 import org.soluvas.security.Action;
 import org.soluvas.security.Domain;
-import org.soluvas.security.InstanceRole;
+import org.soluvas.security.DomainRole;
 import org.soluvas.security.Permission;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityCatalog;
@@ -77,8 +77,8 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 				return createRoleAdapter();
 			}
 			@Override
-			public Adapter caseInstanceRole(InstanceRole object) {
-				return createInstanceRoleAdapter();
+			public Adapter caseDomainRole(DomainRole object) {
+				return createDomainRoleAdapter();
 			}
 			@Override
 			public Adapter caseDomain(Domain object) {
@@ -95,6 +95,10 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePermission(Permission object) {
 				return createPermissionAdapter();
+			}
+			@Override
+			public Adapter caseDomainPermission(DomainPermission object) {
+				return createDomainPermissionAdapter();
 			}
 			@Override
 			public Adapter caseResourceAware(ResourceAware object) {
@@ -135,16 +139,16 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.security.InstanceRole <em>Instance Role</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.security.DomainRole <em>Domain Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.soluvas.security.InstanceRole
+	 * @see org.soluvas.security.DomainRole
 	 * @generated
 	 */
-	public Adapter createInstanceRoleAdapter() {
+	public Adapter createDomainRoleAdapter() {
 		return null;
 	}
 
@@ -201,6 +205,20 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPermissionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.security.DomainPermission <em>Domain Permission</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.security.DomainPermission
+	 * @generated
+	 */
+	public Adapter createDomainPermissionAdapter() {
 		return null;
 	}
 

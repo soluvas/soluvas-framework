@@ -32,11 +32,15 @@
     <children xmi:type="notation:Node" xmi:id="_UytRoCMGEeKl8MxWFdVCpA" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_Uyt4sCMGEeKl8MxWFdVCpA" type="5001">
       <children xmi:type="notation:Node" xmi:id="_FIDhMCMHEeKl8MxWFdVCpA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="security.ecore#//InstanceRole/name"/>
+        <element xmi:type="ecore:EAttribute" href="security.ecore#//DomainRole/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_FIDhMSMHEeKl8MxWFdVCpA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_DbDXASUvEeKXpvHOc9FsMg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="security.ecore#//DomainRole/domain"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DbDXAiUvEeKXpvHOc9FsMg"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_GXKYoCMHEeKl8MxWFdVCpA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="security.ecore#//InstanceRole/description"/>
+        <element xmi:type="ecore:EAttribute" href="security.ecore#//DomainRole/description"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_GXKYoSMHEeKl8MxWFdVCpA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Uyt4sSMGEeKl8MxWFdVCpA"/>
@@ -49,7 +53,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_UyvG0yMGEeKl8MxWFdVCpA"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_UyrccSMGEeKl8MxWFdVCpA" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="security.ecore#//InstanceRole"/>
+    <element xmi:type="ecore:EClass" href="security.ecore#//DomainRole"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UyrcciMGEeKl8MxWFdVCpA" x="240" y="24"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_VZdvoCMGEeKl8MxWFdVCpA" type="1001">
@@ -187,15 +191,15 @@
     <children xmi:type="notation:Node" xmi:id="_iRsQcCThEeKbzM7423kNHA" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_iRsQcSThEeKbzM7423kNHA" type="5001">
       <children xmi:type="notation:Node" xmi:id="_j2oN8CThEeKbzM7423kNHA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="security.ecore#//InstancePermission/domain"/>
+        <element xmi:type="ecore:EAttribute" href="security.ecore#//DomainPermission/domain"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_j2oN8SThEeKbzM7423kNHA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_UIX6cCTjEeKbzM7423kNHA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="security.ecore#//InstancePermission/instanceRole"/>
+        <element xmi:type="ecore:EAttribute" href="security.ecore#//DomainPermission/domainRoles"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_UIX6cSTjEeKbzM7423kNHA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Yk-ooCTjEeKbzM7423kNHA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="security.ecore#//InstancePermission/action"/>
+        <element xmi:type="ecore:EAttribute" href="security.ecore#//DomainPermission/actions"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Yk-ooSTjEeKbzM7423kNHA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_iRsQciThEeKbzM7423kNHA"/>
@@ -208,7 +212,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_iRs3hSThEeKbzM7423kNHA"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_iRqbQiThEeKbzM7423kNHA" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="security.ecore#//InstancePermission"/>
+    <element xmi:type="ecore:EClass" href="security.ecore#//DomainPermission"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iRqbQyThEeKbzM7423kNHA" x="480" y="324"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Tc3gEiMGEeKl8MxWFdVCpA"/>
@@ -292,7 +296,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_qRSkQSThEeKbzM7423kNHA" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_qRSkQiThEeKbzM7423kNHA" fontColor="4210752" fontName="Ubuntu" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="security.ecore#//SecurityCatalog/instancePermissions"/>
+    <element xmi:type="ecore:EReference" href="security.ecore#//SecurityCatalog/domainPermissions"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_qRSkQyThEeKbzM7423kNHA" points="[-2, 7, 27, -102]$[-34, 133, -5, 24]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_qRYD0CThEeKbzM7423kNHA" id="(0.4666666666666667,0.8333333333333334)"/>
   </edges>

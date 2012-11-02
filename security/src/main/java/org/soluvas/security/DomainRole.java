@@ -21,16 +21,17 @@ import org.soluvas.commons.ResourceAware;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.soluvas.security.InstanceRole#getName <em>Name</em>}</li>
- *   <li>{@link org.soluvas.security.InstanceRole#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.soluvas.security.DomainRole#getName <em>Name</em>}</li>
+ *   <li>{@link org.soluvas.security.DomainRole#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.soluvas.security.DomainRole#getDomain <em>Domain</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.soluvas.security.SecurityPackage#getInstanceRole()
+ * @see org.soluvas.security.SecurityPackage#getDomainRole()
  * @model
  * @generated
  */
-public interface InstanceRole extends ResourceAware {
+public interface DomainRole extends ResourceAware {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -42,14 +43,14 @@ public interface InstanceRole extends ResourceAware {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.soluvas.security.SecurityPackage#getInstanceRole_Name()
+	 * @see org.soluvas.security.SecurityPackage#getDomainRole_Name()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.security.InstanceRole#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.security.DomainRole#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -68,14 +69,14 @@ public interface InstanceRole extends ResourceAware {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Description</em>' attribute.
 	 * @see #setDescription(String)
-	 * @see org.soluvas.security.SecurityPackage#getInstanceRole_Description()
+	 * @see org.soluvas.security.SecurityPackage#getDomainRole_Description()
 	 * @model
 	 * @generated
 	 */
 	String getDescription();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.security.InstanceRole#getDescription <em>Description</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.security.DomainRole#getDescription <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Description</em>' attribute.
@@ -84,4 +85,29 @@ public interface InstanceRole extends ResourceAware {
 	 */
 	void setDescription(String value);
 
-} // InstanceRole
+	/**
+	 * Returns the value of the '<em><b>Domain</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Domain where this role applies to.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Domain</em>' attribute.
+	 * @see #setDomain(String)
+	 * @see org.soluvas.security.SecurityPackage#getDomainRole_Domain()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getDomain();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.security.DomainRole#getDomain <em>Domain</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Domain</em>' attribute.
+	 * @see #getDomain()
+	 * @generated
+	 */
+	void setDomain(String value);
+
+} // DomainRole

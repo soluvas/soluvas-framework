@@ -47,7 +47,7 @@ This corresponds directly to entries in ou=groups in LDAP.</xsd:documentation>
       <xsd:documentation>Roles contain global permissions.</xsd:documentation>
     </xsd:annotation>
   </xsd:element>
-  <xsd:complexType name="InstanceRole">
+  <xsd:complexType name="DomainRole">
     <xsd:annotation>
       <xsd:documentation>Can be assigned to a person (security subject) in relation to a domain instance, e.g. "manager" of "zibalabel" "shop".
 
@@ -66,10 +66,15 @@ This corresponds directly to entries in ou=groups in LDAP.</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
         <xsd:attribute name="description" type="xsd:string"/>
+        <xsd:attribute name="domain" type="xsd:string" use="required">
+          <xsd:annotation>
+            <xsd:documentation>Domain where this role applies to.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
-  <xsd:element name="InstanceRole" type="security:InstanceRole">
+  <xsd:element name="DomainRole" type="security:DomainRole">
     <xsd:annotation>
       <xsd:documentation>Can be assigned to a person (security subject) in relation to a domain instance, e.g. "manager" of "zibalabel" "shop".
 
@@ -138,14 +143,16 @@ shop : domain.
     </xsd:annotation>
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element name="roles" type="security:Role"/>
-      <xsd:element name="instanceRoles" type="security:InstanceRole"/>
+      <xsd:element name="instanceRoles" type="security:DomainRole"/>
       <xsd:element name="domains" type="security:Domain"/>
       <xsd:element name="actions" type="security:Action"/>
       <xsd:element name="permissions" type="security:Permission"/>
+      <xsd:element name="domainPermissions" type="security:DomainPermission"/>
       <xsd:element ref="xmi:Extension"/>
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="domainPermissions" type="xsd:string"/>
   </xsd:complexType>
   <xsd:element name="SecurityCatalog" type="security:SecurityCatalog">
     <xsd:annotation>
@@ -189,4 +196,79 @@ means permit hendy to add wink for car to nana.</xsd:documentation>
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="Permission" type="security:Permission"/>
+  <xsd:complexType name="DomainPermission">
+    <xsd:annotation>
+      <xsd:documentation>Permission for arbitrary instance of a single domain.
+
+To express "manager of shop X can edit shop X" :
+domain: shop
+instanceRole: manager
+action: edit,delete
+
+More complex use cases are not possible, and need a different and much more complex DSL, such as...
+
+To express "moderator of shop X can edit+delete comment * to shop X"
+domain: shop
+instanceRole: moderator
+action: edit,delete
+targetDomain: comment
+targetInstance: *
+
+To express "wink_moderator of zibalabel can edit+delete wink * of product * for zibalabel"
+
+To express "creator of comment X can edit+delete comment X for *":
+instanceRole: creator
+domain: comment
+action: edit,delete
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="domainRoles" nillable="true" type="xsd:string"/>
+      <xsd:element name="actions" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation>Action permissions given to subjects having the specified domain roles of a particular domain.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="domain" type="xsd:string" use="required">
+      <xsd:annotation>
+        <xsd:documentation>A simple (non-composite) domain this permission refers to.
+
+A composite domain example is "comment-shop" or "wink-product-person".
+</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="DomainPermission" type="security:DomainPermission">
+    <xsd:annotation>
+      <xsd:documentation>Permission for arbitrary instance of a single domain.
+
+To express "manager of shop X can edit shop X" :
+domain: shop
+instanceRole: manager
+action: edit,delete
+
+More complex use cases are not possible, and need a different and much more complex DSL, such as...
+
+To express "moderator of shop X can edit+delete comment * to shop X"
+domain: shop
+instanceRole: moderator
+action: edit,delete
+targetDomain: comment
+targetInstance: *
+
+To express "wink_moderator of zibalabel can edit+delete wink * of product * for zibalabel"
+
+To express "creator of comment X can edit+delete comment X for *":
+instanceRole: creator
+domain: comment
+action: edit,delete
+
+</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
 </xsd:schema>

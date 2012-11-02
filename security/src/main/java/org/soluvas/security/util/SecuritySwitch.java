@@ -9,7 +9,7 @@ import org.soluvas.commons.ResourceAware;
 import org.soluvas.security.*;
 import org.soluvas.security.Action;
 import org.soluvas.security.Domain;
-import org.soluvas.security.InstanceRole;
+import org.soluvas.security.DomainRole;
 import org.soluvas.security.Permission;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityCatalog;
@@ -79,10 +79,10 @@ public class SecuritySwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SecurityPackage.INSTANCE_ROLE: {
-				InstanceRole instanceRole = (InstanceRole)theEObject;
-				T result = caseInstanceRole(instanceRole);
-				if (result == null) result = caseResourceAware(instanceRole);
+			case SecurityPackage.DOMAIN_ROLE: {
+				DomainRole domainRole = (DomainRole)theEObject;
+				T result = caseDomainRole(domainRole);
+				if (result == null) result = caseResourceAware(domainRole);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -113,6 +113,12 @@ public class SecuritySwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SecurityPackage.DOMAIN_PERMISSION: {
+				DomainPermission domainPermission = (DomainPermission)theEObject;
+				T result = caseDomainPermission(domainPermission);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -133,17 +139,17 @@ public class SecuritySwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Instance Role</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Domain Role</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Instance Role</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Domain Role</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseInstanceRole(InstanceRole object) {
+	public T caseDomainRole(DomainRole object) {
 		return null;
 	}
 
@@ -204,6 +210,21 @@ public class SecuritySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePermission(Permission object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Domain Permission</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Domain Permission</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDomainPermission(DomainPermission object) {
 		return null;
 	}
 

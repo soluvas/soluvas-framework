@@ -31,13 +31,13 @@ public interface SecurityFactory extends EFactory {
 	Role createRole();
 
 	/**
-	 * Returns a new object of class '<em>Instance Role</em>'.
+	 * Returns a new object of class '<em>Domain Role</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Instance Role</em>'.
+	 * @return a new object of class '<em>Domain Role</em>'.
 	 * @generated
 	 */
-	InstanceRole createInstanceRole();
+	DomainRole createDomainRole();
 
 	/**
 	 * Returns a new object of class '<em>Domain</em>'.
@@ -74,6 +74,15 @@ public interface SecurityFactory extends EFactory {
 	 * @generated
 	 */
 	Permission createPermission();
+
+	/**
+	 * Returns a new object of class '<em>Domain Permission</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Domain Permission</em>'.
+	 * @generated
+	 */
+	DomainPermission createDomainPermission();
 
 	/**
 	 * Returns the package supported by this factory.

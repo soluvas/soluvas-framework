@@ -58,11 +58,12 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case SecurityPackage.ROLE: return createRole();
-			case SecurityPackage.INSTANCE_ROLE: return createInstanceRole();
+			case SecurityPackage.DOMAIN_ROLE: return createDomainRole();
 			case SecurityPackage.DOMAIN: return createDomain();
 			case SecurityPackage.ACTION: return createAction();
 			case SecurityPackage.SECURITY_CATALOG: return createSecurityCatalog();
 			case SecurityPackage.PERMISSION: return createPermission();
+			case SecurityPackage.DOMAIN_PERMISSION: return createDomainPermission();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -113,9 +114,9 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InstanceRole createInstanceRole() {
-		InstanceRoleImpl instanceRole = new InstanceRoleImpl();
-		return instanceRole;
+	public DomainRole createDomainRole() {
+		DomainRoleImpl domainRole = new DomainRoleImpl();
+		return domainRole;
 	}
 
 	/**
@@ -156,6 +157,16 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 	public Permission createPermission() {
 		PermissionImpl permission = new PermissionImpl();
 		return permission;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DomainPermission createDomainPermission() {
+		DomainPermissionImpl domainPermission = new DomainPermissionImpl();
+		return domainPermission;
 	}
 
 	/**
