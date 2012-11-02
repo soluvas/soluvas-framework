@@ -1,4 +1,4 @@
-package org.soluvas.eventbus;
+package org.soluvas.commons.shell;
 
 import java.util.List;
 

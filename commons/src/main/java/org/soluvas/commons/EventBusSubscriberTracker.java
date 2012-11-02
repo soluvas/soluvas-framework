@@ -1,4 +1,4 @@
-package org.soluvas.eventbus;
+package org.soluvas.commons;
 
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;

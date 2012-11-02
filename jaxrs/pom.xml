@@ -15,7 +15,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.soluvas</groupId>
-			<artifactId>org.soluvas.multitenant</artifactId>
+			<artifactId>org.soluvas.commons</artifactId>
 		</dependency>
 
 		<dependency>

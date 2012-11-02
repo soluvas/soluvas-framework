@@ -52,7 +52,7 @@ import org.apache.http.protocol.HttpContext;
 import org.bson.BasicBSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.slug.SlugUtils;
+import org.soluvas.commons.SlugUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;

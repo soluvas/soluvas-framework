@@ -23,7 +23,6 @@
 		<module>ldap</module>
 		<module>async</module>
 		<module>push</module>
-		<module>multitenant</module>
 		<module>security</module>
 		<module>mongo</module>
 		<!-- Backends -->

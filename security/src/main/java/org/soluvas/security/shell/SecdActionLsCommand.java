@@ -7,7 +7,7 @@ import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.EObjectNameOrdering;
-import org.soluvas.multitenant.ServiceLookup;
+import org.soluvas.commons.tenant.ServiceLookup;
 import org.soluvas.security.Action;
 import org.soluvas.security.SecurityCatalog;
 

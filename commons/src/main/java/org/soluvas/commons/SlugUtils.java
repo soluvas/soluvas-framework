@@ -1,4 +1,4 @@
-package org.soluvas.slug;
+package org.soluvas.commons;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;

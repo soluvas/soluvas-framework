@@ -1,4 +1,4 @@
-package org.soluvas.multitenant;
+package org.soluvas.commons.tenant;
 
 public class LookupKey {
 	private String clientId;

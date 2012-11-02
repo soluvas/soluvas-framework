@@ -55,3 +55,7 @@ bc. 	<reference id="eventBus" interface="com.google.common.eventbus.EventBus"
 h2. EventBus Shell
 
 @eventbus:ls@	:	List all subscribers. 
+
+h2. Multitenant
+
+h3. TODO: @TenantService support for OsgiCommandSupport Karaf Shell

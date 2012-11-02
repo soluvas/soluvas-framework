@@ -6,12 +6,23 @@
 	<reference-list id="subscriberSuppliers"
 		interface="com.google.common.base.Supplier" availability="optional"
 		filter="(type=eventbus)" />
-	
+
+	<bean id="svcLookup" class="org.soluvas.commons.tenant.MultitenantServiceLookup">
+		<argument ref="blueprintBundleContext"/>
+	</bean>
+	<service ref="svcLookup" auto-export="interfaces"/>
+
 	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
 		<!-- EventBus -->
 		<command name="eventbus/ls">
 			<action class="org.soluvas.eventbus.EventBusLsCommand">
 				<argument ref="subscriberSuppliers" />
+			</action>
+		</command>
+		
+		<command name="app/manifestcat">
+			<action class="org.soluvas.commons.shell.AppManifestCatCommand">
+				<argument ref="svcLookup" />
 			</action>
 		</command>
 	</command-bundle>

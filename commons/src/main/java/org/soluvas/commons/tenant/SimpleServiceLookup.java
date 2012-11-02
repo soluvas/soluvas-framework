@@ -1,4 +1,4 @@
-package org.soluvas.multitenant;
+package org.soluvas.commons.tenant;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

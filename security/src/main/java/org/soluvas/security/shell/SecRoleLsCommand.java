@@ -8,7 +8,7 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.EObjectNameOrdering;
-import org.soluvas.multitenant.ServiceLookup;
+import org.soluvas.commons.tenant.ServiceLookup;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityRepository;
 

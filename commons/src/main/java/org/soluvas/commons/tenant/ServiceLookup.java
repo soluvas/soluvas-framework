@@ -1,4 +1,4 @@
-package org.soluvas.multitenant;
+package org.soluvas.commons.tenant;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

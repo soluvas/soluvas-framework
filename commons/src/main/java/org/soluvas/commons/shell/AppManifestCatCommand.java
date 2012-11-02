@@ -1,11 +1,11 @@
- package org.soluvas.multitenant.shell; 
+ package org.soluvas.commons.shell; 
 
 import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
-import org.soluvas.multitenant.ServiceLookup;
+import org.soluvas.commons.tenant.ServiceLookup;
 
 /**
  * Show current {@link AppManifest}.
