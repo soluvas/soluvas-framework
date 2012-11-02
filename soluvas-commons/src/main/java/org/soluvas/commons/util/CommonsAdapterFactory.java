@@ -76,10 +76,6 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createWeightableAdapter();
 			}
 			@Override
-			public Adapter caseAppManifest(AppManifest object) {
-				return createAppManifestAdapter();
-			}
-			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -124,20 +120,6 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createWeightableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.AppManifest <em>App Manifest</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.soluvas.commons.AppManifest
-	 * @generated
-	 */
-	public Adapter createAppManifestAdapter() {
 		return null;
 	}
 

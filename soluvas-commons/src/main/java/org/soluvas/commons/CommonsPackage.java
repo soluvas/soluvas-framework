@@ -121,70 +121,6 @@ public interface CommonsPackage extends EPackage {
 	int WEIGHTABLE_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.commons.impl.AppManifestImpl <em>App Manifest</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.soluvas.commons.impl.AppManifestImpl
-	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAppManifest()
-	 * @generated
-	 */
-	int APP_MANIFEST = 2;
-
-	/**
-	 * The feature id for the '<em><b>Weight</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST__WEIGHT = WEIGHTABLE__WEIGHT;
-
-	/**
-	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST__RESOURCE_URI = WEIGHTABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST__RESOURCE_TYPE = WEIGHTABLE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Title</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST__TITLE = WEIGHTABLE_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST__DESCRIPTION = WEIGHTABLE_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>App Manifest</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST_FEATURE_COUNT = WEIGHTABLE_FEATURE_COUNT + 4;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -192,7 +128,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 3;
+	int RESOURCE_TYPE = 2;
 
 
 	/**
@@ -247,38 +183,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getWeightable_Weight();
-
-	/**
-	 * Returns the meta object for class '{@link org.soluvas.commons.AppManifest <em>App Manifest</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>App Manifest</em>'.
-	 * @see org.soluvas.commons.AppManifest
-	 * @generated
-	 */
-	EClass getAppManifest();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getTitle <em>Title</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Title</em>'.
-	 * @see org.soluvas.commons.AppManifest#getTitle()
-	 * @see #getAppManifest()
-	 * @generated
-	 */
-	EAttribute getAppManifest_Title();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see org.soluvas.commons.AppManifest#getDescription()
-	 * @see #getAppManifest()
-	 * @generated
-	 */
-	EAttribute getAppManifest_Description();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -355,32 +259,6 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute WEIGHTABLE__WEIGHT = eINSTANCE.getWeightable_Weight();
-
-		/**
-		 * The meta object literal for the '{@link org.soluvas.commons.impl.AppManifestImpl <em>App Manifest</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.soluvas.commons.impl.AppManifestImpl
-		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAppManifest()
-		 * @generated
-		 */
-		EClass APP_MANIFEST = eINSTANCE.getAppManifest();
-
-		/**
-		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APP_MANIFEST__TITLE = eINSTANCE.getAppManifest_Title();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APP_MANIFEST__DESCRIPTION = eINSTANCE.getAppManifest_Description();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

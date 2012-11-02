@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.ResourceAware;
@@ -36,13 +35,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass weightableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass appManifestEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -162,33 +154,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAppManifest() {
-		return appManifestEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAppManifest_Title() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAppManifest_Description() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
 	}
@@ -228,10 +193,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		weightableEClass = createEClass(WEIGHTABLE);
 		createEAttribute(weightableEClass, WEIGHTABLE__WEIGHT);
 
-		appManifestEClass = createEClass(APP_MANIFEST);
-		createEAttribute(appManifestEClass, APP_MANIFEST__TITLE);
-		createEAttribute(appManifestEClass, APP_MANIFEST__DESCRIPTION);
-
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 	}
@@ -264,8 +225,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		appManifestEClass.getESuperTypes().add(this.getWeightable());
-		appManifestEClass.getESuperTypes().add(this.getResourceAware());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -274,10 +233,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(weightableEClass, Weightable.class, "Weightable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getWeightable_Weight(), ecorePackage.getEIntegerObject(), "weight", "0", 0, 1, Weightable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(appManifestEClass, AppManifest.class, "AppManifest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAppManifest_Title(), ecorePackage.getEString(), "title", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppManifest_Description(), ecorePackage.getEString(), "description", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");

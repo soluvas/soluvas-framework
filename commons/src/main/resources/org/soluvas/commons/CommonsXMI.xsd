@@ -30,4 +30,24 @@
     <xsd:attribute name="resourceType" type="commons:ResourceType"/>
   </xsd:complexType>
   <xsd:element name="ResourceAware" type="commons:ResourceAware"/>
+  <xsd:complexType abstract="true" name="Weightable">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="weight" type="xsd:int"/>
+  </xsd:complexType>
+  <xsd:element name="Weightable" type="commons:Weightable"/>
+  <xsd:complexType name="AppManifest">
+    <xsd:complexContent>
+      <xsd:extension base="commons:Weightable">
+        <xsd:attribute name="resourceUri" type="xsd:string"/>
+        <xsd:attribute name="resourceType" type="commons:ResourceType"/>
+        <xsd:attribute name="title" type="xsd:string"/>
+        <xsd:attribute name="description" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="AppManifest" type="commons:AppManifest"/>
 </xsd:schema>

@@ -22,15 +22,6 @@ public interface CommonsFactory extends EFactory {
 	CommonsFactory eINSTANCE = org.soluvas.commons.impl.CommonsFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>App Manifest</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>App Manifest</em>'.
-	 * @generated
-	 */
-	AppManifest createAppManifest();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -78,14 +78,6 @@ public class CommonsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CommonsPackage.APP_MANIFEST: {
-				AppManifest appManifest = (AppManifest)theEObject;
-				T result = caseAppManifest(appManifest);
-				if (result == null) result = caseWeightable(appManifest);
-				if (result == null) result = caseResourceAware(appManifest);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -117,21 +109,6 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseWeightable(Weightable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>App Manifest</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>App Manifest</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAppManifest(AppManifest object) {
 		return null;
 	}
 

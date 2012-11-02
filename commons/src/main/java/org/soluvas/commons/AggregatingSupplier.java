@@ -19,6 +19,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
 /**
+ * Aggregate (not federate) contents from {@link EObject} {@link Supplier}s.
  * @todo Support for propagating EMF Notify changes.
  * @author ceefour
  */
