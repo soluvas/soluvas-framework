@@ -74,7 +74,7 @@ public class SecurityCatalogXmiTracker implements BundleTrackerCustomizer<List<S
 		while (entries.hasMoreElements()) {
 			URL url = entries.nextElement();
 			log.debug("Loading SecurityCatalog from {}", url);
-			XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(SecurityPackage.class, url,
+			XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(SecurityPackage.eINSTANCE, url,
 					ResourceType.BUNDLE);
 			Dictionary<String, String> props = new Hashtable<String, String>();
 			props.put("suppliedClass", SecurityCatalog.class.getName());
