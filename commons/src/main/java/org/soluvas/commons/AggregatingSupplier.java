@@ -23,7 +23,7 @@ import com.google.common.collect.Multimaps;
  * @todo Support for propagating EMF Notify changes.
  * @author ceefour
  */
-public class AggregatingSupplier<T extends EObject> implements Supplier<T> {
+public class AggregatingSupplier<T extends EObject> implements Supplier<T>, DelegatingSupplier<T> {
 
 	private transient Logger log = LoggerFactory
 			.getLogger(AggregatingSupplier.class);
@@ -50,6 +50,10 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T> {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.soluvas.commons.DelegatingSupplier#addSupplier(com.google.common.base.Supplier)
+	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public void addSupplier(Supplier<T> supplier) {
 		log.debug("Adding supplier {} for {}", supplier, eClass.getName());
@@ -73,6 +77,10 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T> {
 		log.info("Added {} models from supplier {} for {}", count, supplier, eClass.getName());
 	}
 
+	/* (non-Javadoc)
+	 * @see org.soluvas.commons.DelegatingSupplier#removeSupplier(com.google.common.base.Supplier)
+	 */
+	@Override
 	public void removeSupplier(Supplier<T> supplier) {
 		log.debug("Removing supplier {} for {}", supplier, eClass.getName());
 		final Collection<EObject> models = ImmutableList.copyOf(map.get(supplier));

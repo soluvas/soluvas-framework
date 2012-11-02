@@ -79,7 +79,7 @@
 	<bean id="securityPackage" class="org.soluvas.security.impl.SecurityPackageImpl" factory-method="init" />
 	<bean id="aggregatingSecurityCatalogSupplier" class="org.soluvas.commons.AggregatingSupplier">
 		<argument>
-			<bean class="org.soluvas.security.impl.SecurityFactoryImpl" />
+			<bean class="org.soluvas.security.impl.SecurityFactoryImpl" factory-method="init" />
 		</argument>
 		<argument>
 			<bean factory-ref="securityPackage" factory-method="getSecurityCatalog" />

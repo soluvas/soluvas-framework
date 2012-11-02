@@ -3,7 +3,7 @@ package org.soluvas.security;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
-import org.soluvas.commons.AggregatingSupplier;
+import org.soluvas.commons.DelegatingSupplier;
 
 import com.google.common.base.Supplier;
 
@@ -15,10 +15,10 @@ public class SecurityCatalogSupplierTracker implements
 		ServiceTrackerCustomizer<Supplier<SecurityCatalog>, Supplier<SecurityCatalog>> {
 
 	private final BundleContext bundleContext;
-	private final AggregatingSupplier<SecurityCatalog> aggregator;
+	private final DelegatingSupplier<SecurityCatalog> aggregator;
 
 	public SecurityCatalogSupplierTracker(BundleContext bundleContext,
-			AggregatingSupplier aggregator) {
+			DelegatingSupplier aggregator) {
 		super();
 		this.bundleContext = bundleContext;
 		this.aggregator = aggregator;
