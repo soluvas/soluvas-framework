@@ -75,20 +75,20 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	/**
 	 * Returns whether all entities with the given ids exists.
 	 * 
-	 * @param id must not be {@literal null}.
+	 * @param ids must not be {@literal null}.
 	 * @return true if an entity with the given id exists, alse otherwise
 	 * @throws IllegalArgumentException if {@code id} is {@literal null}
 	 */
-	boolean existsAll(@Nonnull final Iterable<ID> id);
+	boolean existsAll(@Nonnull final Iterable<ID> ids);
 
 	/**
 	 * Returns whether any entity with one of the given ids exists.
 	 * 
-	 * @param id must not be {@literal null}.
+	 * @param ids must not be {@literal null}.
 	 * @return true if an entity with the given id exists, alse otherwise
 	 * @throws IllegalArgumentException if {@code id} is {@literal null}
 	 */
-	boolean existsAny(@Nonnull final Iterable<ID> id);
+	boolean existsAny(@Nonnull final Iterable<ID> ids);
 
 	/**
 	 * Returns all instances of the type.
@@ -99,6 +99,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 
 	/**
 	 * Returns all instances of the type with the given IDs.
+	 * Not found instances are skipped, but should be logged.
 	 * 
 	 * @param ids
 	 * @return

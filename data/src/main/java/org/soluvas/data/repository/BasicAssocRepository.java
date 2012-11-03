@@ -63,7 +63,7 @@ public interface BasicAssocRepository<L, R> extends BasicRepository {
 	 *     multimap.
 	 */
 	@Nonnull
-	public abstract Collection<R> removeAllRights(@Nonnull L left);
+	public abstract long removeAllRights(@Nonnull L left);
 
 	/**
 	 * Removes all lefts associated with a given right.
@@ -75,7 +75,7 @@ public interface BasicAssocRepository<L, R> extends BasicRepository {
 	 *     multimap.
 	 */
 	@Nonnull
-	public abstract Collection<L> removeAllLefts(@Nonnull R right);
+	public abstract long removeAllLefts(@Nonnull R right);
 
 	/**
 	 * Removes all left-right pairs from the multimap.

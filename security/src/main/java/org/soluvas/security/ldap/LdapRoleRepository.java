@@ -230,7 +230,7 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	 * @see org.soluvas.data.repository.CrudRepository#existsAll(java.lang.Iterable)
 	 */
 	@Override
-	public boolean existsAll(Iterable<String> id) {
+	public boolean existsAll(Iterable<String> ids) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -238,7 +238,7 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	 * @see org.soluvas.data.repository.CrudRepository#existsAny(java.lang.Iterable)
 	 */
 	@Override
-	public boolean existsAny(Iterable<String> id) {
+	public boolean existsAny(Iterable<String> ids) {
 		throw new UnsupportedOperationException();
 	}
 

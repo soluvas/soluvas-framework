@@ -76,9 +76,9 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      *
      * @param left left to store in the multimap
      * @param rights rights to store in the multimap
-     * @return {@code true} if the multimap changed
+     * @return (Approximate) number of changed edges. 0 if multimap doesn't changed. -1 if changed, but number is not known.
      */
-    boolean putAll(@Nonnull L left, Iterable<? extends R> rights);
+    long putAll(@Nonnull L left, Iterable<? extends R> rights);
 
     /**
      * Stores a collection of lefts with the same right.
@@ -87,7 +87,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param rights rights to store in the multimap
      * @return {@code true} if the multimap changed
      */
-    boolean putAllInverse(@Nonnull L right, Iterable<? extends R> lefts);
+    long putAllInverse(@Nonnull R right, Iterable<? extends L> lefts);
 
     /**
      * Copies all of another multimap's left-right pairs into this multimap. The
@@ -97,7 +97,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param multimap mappings to store in this multimap
      * @return {@code true} if the multimap changed
      */
-    boolean putAll(Multimap<? extends L, ? extends R> multimap);
+    long putAll(Multimap<? extends L, ? extends R> multimap);
 
     /**
      * Copies all of another multimap's right-left pairs into this multimap. The
@@ -107,7 +107,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param multimap mappings to store in this multimap
      * @return {@code true} if the multimap changed
      */
-    boolean putAllInverse(Multimap<? extends R, ? extends L> inverseMultimap);
+    long putAllInverse(Multimap<? extends R, ? extends L> inverseMultimap);
 
     /**
      * Stores a collection of rights with the same left, replacing any existing
@@ -115,8 +115,9 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      *
      * @param key key to store in the multimap
      * @param rights rights to store in the multimap
+     * @return TODO
      */
-    @Nonnull void replaceRights(@Nonnull L left, Iterable<? extends R> rights);
+    @Nonnull long replaceRights(@Nonnull L left, Iterable<? extends R> rights);
 
     /**
      * Stores a collection of lefts with the same right, replacing any existing
@@ -125,7 +126,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param key key to store in the multimap
      * @param rights rights to store in the multimap
      */
-    @Nonnull void replaceLefts(@Nonnull L right, Iterable<? extends L> lefts);
+    @Nonnull void replaceLefts(@Nonnull R right, Iterable<? extends L> lefts);
 
     // Views
 

@@ -1,10 +1,8 @@
 package org.soluvas.ldap;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.apache.commons.pool.ObjectPool;
@@ -21,9 +19,10 @@ import org.apache.directory.shared.ldap.model.name.Dn;
 import org.apache.directory.shared.ldap.model.name.Rdn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.data.repository.AssocRepository;
+import org.soluvas.data.repository.AssocRepositoryBase;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Iterables;
@@ -34,7 +33,7 @@ import com.google.common.collect.Multiset;
  * Associates role name with {@link Person} IDs.
  * @author ceefour
  */
-public class LdapRolePersonAssoc implements AssocRepository<String, String> {
+public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 
 	private transient Logger log = LoggerFactory
 			.getLogger(LdapRolePersonAssoc.class);
@@ -65,49 +64,6 @@ public class LdapRolePersonAssoc implements AssocRepository<String, String> {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#count()
-	 */
-	@Override
-	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#isEmpty()
-	 */
-	@Override
-	public boolean isEmpty() {
-		return count() > 0;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#containsLeft(java.lang.Object)
-	 */
-	@Override
-	public boolean containsLeft(@Nonnull String role) {
-		return getLeft(role).size() > 0;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#containsRight(java.lang.Object)
-	 */
-	@Override
-	public boolean containsRight(String right) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#containsEntry(java.lang.Object, java.lang.Object)
-	 */
-	@Override
-	public boolean containsEntry(String left, String right) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.AssocRepository#put(java.lang.Object, java.lang.Object)
 	 */
 	@Override
@@ -126,47 +82,10 @@ public class LdapRolePersonAssoc implements AssocRepository<String, String> {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#putAll(java.lang.Object, java.lang.Iterable)
-	 */
-	@Override
-	public boolean putAll(String left, Iterable<? extends String> rights) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#putAllInverse(java.lang.Object, java.lang.Iterable)
-	 */
-	@Override
-	public boolean putAllInverse(String right, Iterable<? extends String> lefts) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#putAll(com.google.common.collect.Multimap)
-	 */
-	@Override
-	public boolean putAll(Multimap<? extends String, ? extends String> multimap) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#putAllInverse(com.google.common.collect.Multimap)
-	 */
-	@Override
-	public boolean putAllInverse(
-			Multimap<? extends String, ? extends String> inverseMultimap) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.AssocRepository#replaceRights(java.lang.Object, java.lang.Iterable)
 	 */
 	@Override
-	public void replaceRights(final String role,
+	public long replaceRights(final String role,
 			final Iterable<? extends String> personIds) {
 		LdapUtils.withConnection(ldapPool,
 				new Function<LdapConnection, Void>() {
@@ -205,6 +124,7 @@ public class LdapRolePersonAssoc implements AssocRepository<String, String> {
 				}
 			}
 		});
+		return -1;
 	}
 
 	/* (non-Javadoc)
@@ -220,27 +140,8 @@ public class LdapRolePersonAssoc implements AssocRepository<String, String> {
 	 * @see org.soluvas.data.repository.AssocRepository#removeAllRights(java.lang.Object)
 	 */
 	@Override
-	public Collection<String> removeAllRights(String left) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#removeAllLefts(java.lang.Object)
-	 */
-	@Override
-	public Collection<String> removeAllLefts(String right) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#deleteAll()
-	 */
-	@Override
-	public void deleteAll() {
-		// TODO Auto-generated method stub
-
+	public long removeAllRights(String role) {
+		return replaceRights(role, ImmutableList.<String>of());
 	}
 
 	/* (non-Javadoc)
@@ -338,22 +239,6 @@ public class LdapRolePersonAssoc implements AssocRepository<String, String> {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#leftSet()
-	 */
-	@Override
-	public Set<String> leftSet() {
-		return ImmutableSet.copyOf(lefts());
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#rightSet()
-	 */
-	@Override
-	public Set<String> rightSet() {
-		return ImmutableSet.copyOf(rights());
-	}
-
-	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.AssocRepository#lefts()
 	 */
 	@Override
@@ -378,35 +263,6 @@ public class LdapRolePersonAssoc implements AssocRepository<String, String> {
 	public Multimap<String, String> findAll() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#entries()
-	 */
-	@Override
-	public Collection<Map.Entry<String, String>> entries() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public long countLefts() {
-		return lefts().size();
-	}
-
-	@Override
-	public long countLeftSet() {
-		return rights().size();
-	}
-
-	@Override
-	public long countRights() {
-		return rights().size();
-	}
-
-	@Override
-	public long countRightSet() {
-		return rightSet().size();
 	}
 
 }
