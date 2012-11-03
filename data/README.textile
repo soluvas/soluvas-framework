@@ -2,6 +2,25 @@ h1. Soluvas Data
 
 Inspired by, and includes code from, "Spring Data Commons":http://www.springsource.org/spring-data/commons .
 
+h2. Design Goals
+
+1. Easily adaptable from/to Spring Data
+2. Plays well with concurrency frameworks like Akka, java.util.concurrent, Guava concurrent
+3. Reuses Querydsl for criteria building
+4. Mostly typesafe (i.e. generics, objects/enums instead of strings)
+5. Plays well with Camel routing framework
+6. Plays well with AMQP
+7. Plays well with EMF, EMF Notify, EMF Query, and CDO
+8. Plays well with Map/Reduce
+9. Works 100% in OSGi
+10. Dynamic behavior at runtime
+11. Multitenant aware
+12. JavaScript client friendly
+13. Plays well with Xtext
+14. Plays well with Eclipse Jobs/Progress
+15. Plays well in non-blocking environments such as Play and vert.x
+
+
 h2. Q&A
 
 h3. Will Soluvas Data merge with Spring Data?
@@ -20,3 +39,5 @@ Among the features:
 6. Static analysis
 
 It's always possible to wrap Soluvas Data with Spring Data and vice versa using delegating adapter.
+
+See also *Design Goals* above.
