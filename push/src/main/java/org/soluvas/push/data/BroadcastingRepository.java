@@ -1,6 +1,7 @@
 package org.soluvas.push.data;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -20,13 +21,13 @@ import com.rabbitmq.client.Connection;
  * @author ceefour
  * @todo Support Akka Future-based Repository.
  */
-public class BroadcastingRepository<ID, T> implements SyncRepository<ID, T>{
+public class BroadcastingRepository<T, ID extends Serializable> implements SyncRepository<T, ID> {
 
 	private transient Logger log = LoggerFactory.getLogger(BroadcastingRepository.class);
-	private SyncRepository<ID, T> delegate;
-	private Channel channel;
-	private String trackingId;
-	private String topic;
+	private final SyncRepository<T, ID> delegate;
+	private final Channel channel;
+	private final String trackingId;
+	private final String topic;
 	
 	public BroadcastingRepository(SyncRepository delegate, Connection amqp,
 			String trackingId, String topic) throws IOException {

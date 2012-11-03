@@ -15,16 +15,16 @@ import com.google.common.base.Preconditions;
  */
 public class RepositoryEntityLookup<T, ID extends Serializable> implements EntityLookup<T, ID> {
 
-	private final SyncRepository<ID, T> repository;
+	private final SyncRepository<T, ID> repository;
 	
-	public RepositoryEntityLookup(final SyncRepository<ID, T> repository) {
+	public RepositoryEntityLookup(final SyncRepository<T, ID> repository) {
 		super();
 		this.repository = repository;
 	}
 
-	public RepositoryEntityLookup(final CallbackRepository<ID, T> repository) {
+	public RepositoryEntityLookup(final CallbackRepository<T, ID> repository) {
 		super();
-		this.repository = new SyncRepositoryWrapper<ID, T>(repository);
+		this.repository = new SyncRepositoryWrapper<T, ID>(repository);
 	}
 
 	@Override

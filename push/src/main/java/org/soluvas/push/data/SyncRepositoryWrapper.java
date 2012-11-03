@@ -1,5 +1,6 @@
 package org.soluvas.push.data;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -15,12 +16,12 @@ import com.google.common.base.Function;
  * Wraps a callback-based {@link CallbackRepository} API in a convenient synchronized (traditional) API style.
  * @author ceefour
  */
-public class SyncRepositoryWrapper<ID, T> implements SyncRepository<ID, T> {
+public class SyncRepositoryWrapper<T, ID extends Serializable> implements SyncRepository<T, ID> {
 
 	private transient Logger log = LoggerFactory.getLogger(SyncRepositoryWrapper.class);
-	private CallbackRepository<ID, T> delegateRepository;
+	private final CallbackRepository<T, ID> delegateRepository;
 
-	public SyncRepositoryWrapper(CallbackRepository<ID, T> delegateRepository) {
+	public SyncRepositoryWrapper(CallbackRepository<T, ID> delegateRepository) {
 		super();
 		this.delegateRepository = delegateRepository;
 	}
