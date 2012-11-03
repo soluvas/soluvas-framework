@@ -2,25 +2,37 @@ package org.soluvas.data.repository;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.NotNullPredicate;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Sort;
+import org.soluvas.data.domain.Sort.Direction;
+import org.soluvas.data.domain.Sort.Order;
 
 import com.google.common.base.Function;
+import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Ordering;
 
 /**
  * {@link CrudRepository} base implementation that needs only the core
  * methods to override.
  * @author ceefour
  */
-public abstract class CrudRepositoryBase<T, ID extends Serializable> implements CrudRepository<T, ID> {
+public abstract class CrudRepositoryBase<T, ID extends Serializable> implements PagingAndSortingRepository<T, ID> {
 
 	private transient Logger log = LoggerFactory
 			.getLogger(CrudRepositoryBase.class);
@@ -129,6 +141,67 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 				deleted++;
 		}
 		return deleted;
+	}
+	
+	/**
+	 * It is recommended to override this method for performance.
+	 * The default implementation delegates to {@link #findAll()}.
+	 */
+	@Override
+	@Nonnull
+	public Collection<T> findAll(Sort sort) {
+		Iterable<Comparator<T>> comparators = Iterables.transform(sort, new Function<Order, Comparator<T>>() {
+			@Override
+			@Nullable
+			public Comparator<T> apply(@Nullable final Order order) {
+				final String property = order.getProperty();
+				final int multiplier = order.getDirection() == Direction.ASC ? 1 : -1;
+				return new Comparator<T>() {
+					@SuppressWarnings("unchecked")
+					@Override
+					public int compare(T o1, T o2) {
+						try {
+							Object v1 = PropertyUtils.getProperty(o1, property);
+							Object v2 = PropertyUtils.getProperty(o2, property);
+							if (Objects.equal(v1, v2)) {
+								return 0;
+							} else if (v1 == null) {
+								return -1 * multiplier;
+							} else if (v2 == null) {
+								return 1 * multiplier;
+							} else {
+								if (v1 instanceof Comparable) {
+									return ((Comparable<T>)v1).compareTo(o2) * multiplier;
+								} else {
+									return String.valueOf(v1).compareToIgnoreCase(String.valueOf(v2)) * multiplier;
+								}
+							}
+						} catch (Exception e) {
+							Throwables.propagate(e);
+							return 0;
+						}
+					}
+				};
+			}
+		});
+		Ordering<T> ordering = Ordering.compound(comparators);
+		Collection<T> entities = findAll();
+		List<T> sorted = ordering.immutableSortedCopy(entities);
+		return sorted;
+	}
+	
+	/**
+	 * It is recommended to override this method for performance.
+	 * The default implementation delegates to {@link #findAll(Sort)}.
+	 */
+	@Override
+	@Nonnull
+	public Page<T> findAll(Pageable pageable) {
+		final Collection<T> entities = findAll(pageable.getSort());
+		final Iterable<T> skipped = Iterables.skip(entities, pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize());
+		final Iterable<T> limited = Iterables.limit(skipped, pageable.getPageSize());
+		final List<T> content = ImmutableList.copyOf(limited);
+		return new PageImpl<T>(content, pageable, entities.size());
 	}
 
 }

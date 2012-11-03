@@ -1,14 +1,25 @@
 package org.soluvas.data.repository;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Sort;
+
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 
@@ -17,7 +28,11 @@ import com.google.common.collect.Multiset;
  * few methods to override.
  * @author ceefour
  */
-public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R> {
+public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>,
+	PageableAndSortable<Map.Entry<L, R>> {
+	
+	private transient Logger log = LoggerFactory
+			.getLogger(AssocRepositoryBase.class);
 
 	@Override
 	public boolean isEmpty() {
@@ -255,5 +270,21 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	public long countRightSet() {
 		return rightSet().size();
 	}
-
+	
+	@Override
+	@Nonnull
+	public Collection<Entry<L, R>> findAll(Sort sort) {
+		log.warn("Sorting on {} not supported", getClass());
+		return findAll().entries();
+	}
+	
+	@Override
+	@Nonnull
+	public Page<Entry<L, R>> findAll(Pageable pageable) {
+		final Collection<Entry<L, R>> entries = findAll(pageable.getSort());
+		final Iterable<Entry<L, R>> skipped = Iterables.skip(entries, pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize());
+		final Iterable<Entry<L, R>> limited = Iterables.limit(skipped, pageable.getPageSize());
+		final List<Entry<L, R>> content = ImmutableList.copyOf(limited);
+		return new PageImpl<Entry<L, R>>(content, pageable, entries.size());
+	}
 }
