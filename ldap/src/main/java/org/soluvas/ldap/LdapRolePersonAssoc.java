@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.apache.commons.pool.ObjectPool;
@@ -21,12 +22,14 @@ import org.apache.directory.shared.ldap.model.name.Dn;
 import org.apache.directory.shared.ldap.model.name.Rdn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.NotNullPredicate;
 import org.soluvas.data.repository.AssocRepositoryBase;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
@@ -34,6 +37,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
+import com.google.common.collect.Multisets;
 
 /**
  * Associates role name with {@link Person} IDs.
@@ -74,6 +78,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 	 */
 	@Override
 	public boolean put(String left, String right) {
+		// TODO: implement
 		throw new UnsupportedOperationException();
 	}
 
@@ -194,6 +199,8 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 						Builder<String> members = ImmutableSet.<String>builder();
 						for (Value<?> uniqueMember : uniqueMemberAttr) {
 							String memberStr = uniqueMember.getString();
+							if (memberStr.equals(domainBase))
+								return null;
 							Dn memberDn = new Dn(memberStr);
 							if (!memberDn.isDescendantOf(usersDn)) {
 								log.warn("Skipping invalid uniqueMember {} from {}, expected a descendant of {}",
@@ -276,16 +283,18 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 				try {
 					final Dn groupsDn = new Dn(groupsRdn, domainBase);
 					final Dn usersDn = new Dn(usersRdn, domainBase);
-					List<java.util.Map.Entry<String, Integer>> lefts = LdapUtils.transform(ldap.search(groupsDn, "(objectClass=groupOfUniqueNames)", SearchScope.ONELEVEL, "uniqueMember"), new Function<Entry, Map.Entry<String, Integer>>() {
+					List<Multiset.Entry<String>> lefts = LdapUtils.transform(ldap.search(groupsDn, "(objectClass=groupOfUniqueNames)", SearchScope.ONELEVEL, "uniqueMember"), new Function<Entry, Multiset.Entry<String>>() {
 						@Override
 						@Nullable
-						public Map.Entry<String, Integer> apply(@Nullable final Entry entry) {
+						public Multiset.Entry<String> apply(@Nullable final Entry entry) {
 							Attribute uniqueMemberAttr = entry.get("uniqueMember");
 							Iterable<Value<?>> validValues = Iterables.filter(uniqueMemberAttr, new Predicate<Value<?>>() {
 								@Override
 								public boolean apply(@Nullable Value<?> member) {
 									try {
 										final String memberStr = member.getString();
+										if (memberStr.equals(domainBase))
+											return false;
 										final Dn memberDn = new Dn(memberStr);
 										if (!memberDn.isDescendantOf(usersDn)) {
 											log.warn("Skipping invalid uniqueMember {} from {}, expected a descendant of {}",
@@ -304,12 +313,12 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 								}
 							});
 							final int validValueCount = Iterables.size(validValues);
-							return Maps.immutableEntry(entry.getDn().getRdn().getValue().getString(), validValueCount);
+							return Multisets.immutableEntry(entry.getDn().getRdn().getValue().getString(), validValueCount);
 						}
 					});
 					ImmutableMultiset.Builder<String> builder = ImmutableMultiset.builder();
-					for (Map.Entry<String, Integer> left : lefts) {
-						builder.addCopies(left.getKey(), left.getValue());
+					for (Multiset.Entry<String> left : lefts) {
+						builder.addCopies(left.getElement(), left.getCount());
 					}
 					return builder.build();
 				} catch (Exception e) {
@@ -321,19 +330,63 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#rights()
-	 */
-	@Override
-	public Multiset<String> rights() {
-		throw new UnsupportedOperationException();
-	}
-
-	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.AssocRepository#findAll()
 	 */
-	@Override
+	@Override @Nonnull
 	public Multimap<String, String> findAll() {
-		throw new UnsupportedOperationException();
+		return LdapUtils.withConnection(ldapPool,
+				new Function<LdapConnection, Multimap<String, String>>() {
+			@Override @Nullable
+			public Multimap<String, String> apply(@Nullable LdapConnection ldap) {
+				try {
+					final Dn groupsDn = new Dn(groupsRdn, domainBase);
+					final Dn usersDn = new Dn(usersRdn, domainBase);
+					List<Map.Entry<String, Iterable<String>>> nestedEntries = LdapUtils.transform(
+							ldap.search(groupsDn, "(objectClass=groupOfUniqueNames)", SearchScope.ONELEVEL, "uniqueMember"),
+							new Function<Entry, Map.Entry<String, Iterable<String>>>() {
+						@Override
+						@Nullable
+						public Map.Entry<String, Iterable<String>> apply(@Nullable final Entry entry) {
+							final Attribute uniqueMemberAttr = entry.get("uniqueMember");
+							final Iterable<String> members = Iterables.transform(uniqueMemberAttr, new Function<Value<?>, String>() {
+								@Override
+								public String apply(@Nullable Value<?> member) {
+									try {
+										final String memberStr = member.getString();
+										if (memberStr.equals(domainBase))
+											return null;
+										final Dn memberDn = new Dn(memberStr);
+										if (!memberDn.isDescendantOf(usersDn)) {
+											log.warn("Skipping invalid uniqueMember {} from {}, expected a descendant of {}",
+													memberStr, entry.getDn().getName(), usersDn.getName());
+											return null;
+										}
+										if (!"uid".equals(memberDn.getRdn().getType())) {
+											log.warn("Skipping invalid uniqueMember {} from {}, expected 'uid' RDN, but got {}",
+													memberStr, entry.getDn().getName(), memberDn.getRdn().getType());
+											return null;
+										}
+										return memberDn.getRdn().getValue().getString();
+									} catch (LdapInvalidDnException e) {
+										throw Throwables.propagate(e);
+									}
+								}
+							});
+							Iterable<String> filteredMembers = Iterables.filter(members, new NotNullPredicate<String>());
+							final String roleName = entry.getDn().getRdn().getValue().getString();
+							return Maps.immutableEntry(roleName, filteredMembers);
+						}
+					});
+					ImmutableMultimap.Builder<String, String> builder = ImmutableMultimap.builder();
+					for (Map.Entry<String, Iterable<String>> entry : nestedEntries) {
+						builder.putAll(entry.getKey(), entry.getValue());
+					}
+					return builder.build();
+				} catch (Exception e) {
+					throw new RuntimeException("Cannot find all person-role associations", e);
+				}
+			}
+		});
 	}
 
 }

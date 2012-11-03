@@ -1,5 +1,7 @@
 package org.soluvas.commons.tenant;
 
+import java.util.Set;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -75,5 +77,7 @@ public interface ServiceLookup {
 			@Nullable String filter);
 
 	public abstract TenantRef getTenant(@Nonnull CommandSession session);
+
+	public abstract <T> Set<String> getNamespaces(@Nonnull Class<T> iface, @Nonnull TenantRef tenant, @Nullable String filter);
 
 }
