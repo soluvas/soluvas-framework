@@ -107,7 +107,7 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	}
 
 	@Override
-	public Role findOne(String id) {
+	public <S extends Role> S findOne(String id) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -177,18 +177,18 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	}
 
 	@Override
-	public void delete(final String id) {
-		LdapUtils.withConnection(ldapPool,
-				new Function<LdapConnection, Void>() {
+	public boolean delete(final String id) {
+		return LdapUtils.withConnection(ldapPool,
+				new Function<LdapConnection, Boolean>() {
 			@Override @Nullable
-			public Void apply(@Nullable LdapConnection ldap) {
+			public Boolean apply(@Nullable LdapConnection ldap) {
 				try {
 					final Dn groupDn = new Dn(new Rdn("cn", id),
 							new Dn(groupsRdn, domainBase));
 					log.debug("Deleting group entry {}", groupDn.getName());
 					ldap.delete(groupDn);
 					log.info("Group entry {} deleted", groupDn.getName());
-					return null;
+					return true;
 				} catch (Exception e) {
 					log.error("Cannot delete role " + id, e);
 					throw new SecurityException("Cannot delete role " + id, e);
@@ -198,12 +198,12 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	}
 
 	@Override
-	public void delete(Role entity) {
-		delete(entity.getName());
+	public boolean delete(Role entity) {
+		return delete(entity.getName());
 	}
 
 	@Override
-	public void delete(Iterable<? extends Role> entities) {
+	public long delete(Iterable<? extends Role> entities) {
 		Iterable<String> ids = Iterables.transform(entities, new Function<Role, String>() {
 			@Override
 			@Nullable
@@ -211,19 +211,22 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 				return input.getName();
 			}
 		});
-		deleteIds(ids);
+		return deleteIds(ids);
 	}
 
 	@Override
-	public void deleteAll() {
+	public long deleteAll() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void deleteIds(Iterable<String> ids) {
+	public long deleteIds(Iterable<String> ids) {
+		long deleted = 0;
 		for (String id : ids) {
-			delete(id);
+			if (delete(id))
+				deleted++;
 		}
+		return deleted;
 	}
 
 	/* (non-Javadoc)

@@ -31,9 +31,9 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	}
 
 	@Override
-	public void deleteAll() {
+	public long deleteAll() {
 		Collection<T> entities = findAll();
-		delete(entities);
+		return delete(entities);
 	}
 
 	@Override
@@ -107,22 +107,28 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	}
 
 	@Override
-	public void delete(T entity) {
-		delete(getId(entity));
+	public boolean delete(T entity) {
+		return delete(getId(entity));
 	}
 
 	@Override
-	public void delete(Iterable<? extends T> entities) {
+	public long delete(Iterable<? extends T> entities) {
+		long deleted = 0;
 		for (T entity : entities) {
-			delete(entity);
+			if (delete(entity))
+				deleted++;
 		}
+		return deleted;
 	}
 
 	@Override
-	public void deleteIds(Iterable<ID> ids) {
+	public long deleteIds(Iterable<ID> ids) {
+		long deleted = 0;
 		for (ID id : ids) {
-			delete(id);
+			if (delete(id))
+				deleted++;
 		}
+		return deleted;
 	}
 
 }

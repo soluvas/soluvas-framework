@@ -49,10 +49,10 @@ public class MultitenantServiceLookup implements ServiceLookup {
 
 	@Deprecated
 	@Override
-	public <T> void withService(Class<? extends T> clazz, CommandSession commandSession, final FutureCallback<T> callback) {
-		withService(clazz, commandSession, new Function<T, Void>() {
+	public <T, S extends T> void withService(@Nonnull Class<T> clazz, @Nonnull CommandSession commandSession, @Nonnull final FutureCallback<S> callback) {
+		withService(clazz, commandSession, new Function<S, Void>() {
 			@Override
-			public Void apply(T input) {
+			public Void apply(S input) {
 				callback.onSuccess(input);
 				return null;
 			};
@@ -61,7 +61,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T, R> R withService(Class<? extends T> clazz, String filter, Function<T, R> callback) {
+	public <T, R, S extends T> R withService(Class<T> clazz, String filter, Function<S,R> callback) {
 		try {
 			ServiceReference<T>[] refs = (ServiceReference<T>[]) bundleContext
 					.getServiceReferences(clazz.getName(), filter);
@@ -69,7 +69,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 				throw new RuntimeException(String.format("Cannot find service %s for filter %s",
 						clazz, filter));
 			ServiceReference<T> ref = refs[0];
-			T svc = bundleContext.getService(ref);
+			S svc = (S) bundleContext.getService(ref);
 			try {
 				R result = callback.apply(svc);
 				return result;
@@ -85,25 +85,25 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	}
 
 	@Override
-	public <T, R> R withService(Class<? extends T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv, 
-			@Nonnull String tenantId, @Nonnull String namespace, Function<T, R> callback) {
+	public <T, R> R withService(Class<T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv, 
+			@Nonnull String tenantId, @Nonnull String namespace, Function<? extends T, R> callback) {
 		final String filter = String.format("(&(clientId=%s)(tenantId=%s)(tenantEnv=%s)(namespace=%s))",
 				clientId, tenantId, tenantEnv, namespace);
 		return withService(clazz, filter, callback);
 	}
 
 	@Override
-	public <T, R> R withService(Class<? extends T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv, 
-			@Nonnull String tenantId, @Nonnull Function<T, R> callback) {
+	public <T, R> R withService(Class<T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv, 
+			@Nonnull String tenantId, @Nonnull Function<? extends T, R> callback) {
 		final String filter = String.format("(&(clientId=%s)(tenantId=%s)(tenantEnv=%s))",
 				clientId, tenantId, tenantEnv);
 		return withService(clazz, filter, callback);
 	}
 
 	@Override
-	public <T, R> R withService(@Nonnull Class<? extends T> clazz,
+	public <T, R> R withService(@Nonnull Class<T> clazz,
 			@Nonnull CommandSession commandSession, @Nullable String namespace,
-			@Nullable String filter, Function<T, R> callback) {
+			@Nullable String filter, Function<? extends T, R> callback) {
 		TenantRef tenant = getTenant(commandSession);
 		final String realFilter = String.format(
 				"(&(clientId=%s)(tenantId=%s)(tenantEnv=%s)%s%s)", tenant
@@ -115,15 +115,15 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	}
 
 	@Override
-	public <T, R> R withService(Class<? extends T> clazz,
-			CommandSession commandSession, Function<T, R> callback) {
+	public <T, R> R withService(Class<T> clazz,
+			CommandSession commandSession, Function<? extends T, R> callback) {
 		return withService(clazz, commandSession, null, null, callback);
 	}
 
 	@Override
-	public <T, R> R withService(Class<? extends T> clazz,
+	public <T, R> R withService(Class<T> clazz,
 			CommandSession commandSession, String namespace,
-			Function<T, R> callback) {
+			Function<? extends T, R> callback) {
 		return withService(clazz, commandSession, namespace, null, callback);
 	}
 

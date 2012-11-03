@@ -36,6 +36,7 @@ import org.soluvas.data.EntityLookup;
  *  	you need batching or paging. The ability to call {@link Collection#size()}
  *  	outweights the {@link Iterable} benefits.</li>
  *  <li>EntityLookup{@link #findOne(Serializable)} returns subclass of T.
+ *  <li>delete methods return number of changed entities</li>
  * </ol>
  * 
  * @author Oliver Gierke
@@ -118,31 +119,35 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * Deletes the entity with the given id.
 	 * 
 	 * @param id must not be {@literal null}.
+	 * @return TODO
 	 * @throws IllegalArgumentException in case the given {@code id} is {@literal null}
 	 */
-	void delete(@Nonnull final ID id);
+	boolean delete(@Nonnull final ID id);
 
 	/**
 	 * Deletes a given entity.
 	 * 
 	 * @param entity
+	 * @return TODO
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
-	void delete(@Nonnull final T entity);
+	boolean delete(@Nonnull final T entity);
 
 	/**
 	 * Deletes the given entities.
 	 * 
 	 * @param entities
+	 * @return TODO
 	 * @throws IllegalArgumentException in case the given {@link Iterable} is (@literal null}.
 	 */
-	void delete(@Nonnull final Iterable<? extends T> entities);
+	long delete(@Nonnull final Iterable<? extends T> entities);
 
 	/**
 	 * This is usually (but not always) more efficient than calling
 	 * {@link CrudRepository#delete(Serializable)} multiple times.
 	 * @param ids
+	 * @return TODO
 	 */
-	void deleteIds(Iterable<ID> ids);
+	long deleteIds(Iterable<ID> ids);
 
 }

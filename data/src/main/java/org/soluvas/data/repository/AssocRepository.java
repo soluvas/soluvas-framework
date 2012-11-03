@@ -32,6 +32,15 @@ import com.google.common.collect.Multimap;
  * (using URN scheme, path, or QName). Or maybe a job for a different interface
  * (TypedAssocRepository?).
  * 
+ * If an AssocRepository has a "vertex" concept, it should automatically create the vertex if
+ * the placeholder didn't exist when {@link #put(Object, Object)} is called.
+ * During {@link #delete(Object, Object)}, it may delete unused vertices, but may also
+ * defer that to a separate "garbage collection" operation.
+ * 
+ * AssocRepository methods must co-exist with {@link CrudRepository} methods,
+ * because {@link EdgeRepository} is a combination between {@link CrudRepository}
+ * and AssocRepository. 
+ * 
  * Inspired by com.tinkerpop.blueprints.pgm.Graph.
  * @see BiMap, {@link Multimap}
  * @author ceefour
@@ -67,9 +76,27 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param value value of entry to remove the multimap
      * @return {@code true} if the multimap changed
      */
-    boolean remove(@Nonnull L left, @Nonnull R right);
+    boolean delete(@Nonnull L left, @Nonnull R right);
 
     // Bulk Operations
+
+    /**
+     * Removes one or more left-right pairs with the same left from the multimap.
+     *
+     * @param left left of entry to remove from the multimap
+     * @param rights rights of entry to remove the multimap
+     * @return {@code true} if the multimap changed
+     */
+    long delete(@Nonnull L left, @Nonnull Iterable<R> rights);
+
+    /**
+     * Removes one or more left-right pairs with the same right from the multimap.
+     *
+     * @param lefts lefts of entry to remove from the multimap
+     * @param right right of entry to remove the multimap
+     * @return {@code true} if the multimap changed
+     */
+    long delete(@Nonnull Iterable<L> lefts, @Nonnull R right);
 
     /**
      * Stores a collection of rights with the same left.
@@ -78,16 +105,16 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param rights rights to store in the multimap
      * @return (Approximate) number of changed edges. 0 if multimap doesn't changed. -1 if changed, but number is not known.
      */
-    long putAll(@Nonnull L left, Iterable<? extends R> rights);
+    long save(@Nonnull L left, Iterable<? extends R> rights);
 
     /**
      * Stores a collection of lefts with the same right.
-     *
      * @param key key to store in the multimap
      * @param rights rights to store in the multimap
+     *
      * @return {@code true} if the multimap changed
      */
-    long putAllInverse(@Nonnull R right, Iterable<? extends L> lefts);
+    long save(Iterable<? extends L> lefts, @Nonnull R right);
 
     /**
      * Copies all of another multimap's left-right pairs into this multimap. The
@@ -97,7 +124,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param multimap mappings to store in this multimap
      * @return {@code true} if the multimap changed
      */
-    long putAll(Multimap<? extends L, ? extends R> multimap);
+    long save(Multimap<? extends L, ? extends R> multimap);
 
     /**
      * Copies all of another multimap's right-left pairs into this multimap. The
@@ -107,7 +134,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param multimap mappings to store in this multimap
      * @return {@code true} if the multimap changed
      */
-    long putAllInverse(Multimap<? extends R, ? extends L> inverseMultimap);
+    long saveInverse(Multimap<? extends R, ? extends L> inverseMultimap);
 
     /**
      * Stores a collection of rights with the same left, replacing any existing
@@ -132,7 +159,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
 
     /**
      * Returns a multimap of all left-right pairs. It's the reverse of
-     * {@link #putAll(Multimap)}.
+     * {@link #save(Multimap)}.
      *
      * @return map entries
      */

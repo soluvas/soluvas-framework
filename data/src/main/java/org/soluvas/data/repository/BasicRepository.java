@@ -19,7 +19,8 @@ public interface BasicRepository {
 
 	/**
 	 * Deletes all entities managed by the repository.
+	 * @return The number of deleted entities (can be approximation). 0 if nothing. -1 if unknown.
 	 */
-	void deleteAll();
+	long deleteAll();
 
 }

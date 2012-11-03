@@ -21,7 +21,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 
 	@Override
 	public boolean isEmpty() {
-		return count() > 0;
+		return count() == 0;
 	}
 	
 	@Override
@@ -31,14 +31,45 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	
 	/**
 	 * Deletes all associations by getting {@link #leftSet()},
-	 * and {@link #removeAllRights(Object)} on each of the left set.
+	 * and {@link #deleteAllRights(Object)} on each of the left set.
 	 */
 	@Override
-	public void deleteAll() {
+	public long deleteAll() {
+		long removed = 0;
 		Set<L> leftSet = leftSet();
 		for (L left : leftSet) {
-			removeAllRights(left);
+			long step = deleteAllRights(left);
+			if (step > 0) {
+				if (removed <= 0) {
+					removed = step;
+				} else {
+					removed += step;
+				}
+			} else if (step < 0 && removed == 0) {
+				removed = -1;
+			}
 		}
+		return removed;
+	}
+	
+	@Override
+	public long delete(Iterable<L> lefts, R right) {
+		long deleted = 0;
+		for (L left : lefts) {
+			if (delete(left, right))
+				deleted++;
+		}
+		return deleted;
+	};
+	
+	@Override
+	public long delete(L left, Iterable<R> rights) {
+		long deleted = 0;
+		for (R right : rights) {
+			if (delete(left, right))
+				deleted++;
+		}
+		return deleted;
 	}
 
 	@Override
@@ -63,11 +94,11 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	 */
 	@Override
 	@Nonnull
-	public long removeAllRights(L left) {
+	public long deleteAllRights(L left) {
 		Collection<R> rights = getLeft(left);
 		long removed = 0;
 		for (R right : rights) {
-			if (remove(left, right))
+			if (delete(left, right))
 				removed++;
 		}
 		return removed;
@@ -75,11 +106,11 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 
 	@Override
 	@Nonnull
-	public long removeAllLefts(R right) {
+	public long deleteAllLefts(R right) {
 		Collection<L> lefts = getRight(right);
 		long removed = 0;
 		for (L left : lefts) {
-			if (remove(left, right))
+			if (delete(left, right))
 				removed++;
 		}
 		return removed;
@@ -90,7 +121,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	 * The default implementation simply calls {@link #put(Object, Object)} repeatedly.
 	 */
 	@Override
-	public long putAll(L left, Iterable<? extends R> rights) {
+	public long save(L left, Iterable<? extends R> rights) {
 		long result = 0;
 		for (R right : rights) {
 			if (put(left, right))
@@ -100,7 +131,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	}
 
 	@Override
-	public long putAllInverse(R right, Iterable<? extends L> lefts) {
+	public long save(Iterable<? extends L> lefts, R right) {
 		long result = 0;
 		for (L left : lefts) {
 			if (put(left, right))
@@ -111,11 +142,11 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public long putAll(Multimap<? extends L, ? extends R> multimap) {
+	public long save(Multimap<? extends L, ? extends R> multimap) {
 		long result = 0;
 		Set<? extends L> leftSet = multimap.keySet();
 		for (L left : leftSet) {
-			long changed = putAll(left, ((Multimap<L, ? extends R>)multimap).get(left));
+			long changed = save(left, ((Multimap<L, ? extends R>)multimap).get(left));
 			if (changed > 0) {
 				if (result > 0)
 					result += changed;
@@ -130,17 +161,17 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	}
 
 	@Override
-	public long putAllInverse(
+	public long saveInverse(
 			Multimap<? extends R, ? extends L> inverseMultimap) {
 		Multimap<L, R> normal = ImmutableMultimap.copyOf(inverseMultimap).inverse();
-		return putAll(normal);
+		return save(normal);
 	}
 
 	@Override
 	@Nonnull
 	public long replaceRights(L left, Iterable<? extends R> rights) {
-		long removeAllRights = removeAllRights(left);
-		long putAll = putAll(left, rights);
+		long removeAllRights = deleteAllRights(left);
+		long putAll = save(left, rights);
 		if (removeAllRights == 0 && putAll == 0) {
 			return 0;
 		} else if (removeAllRights > 0 && putAll > 0) {
@@ -157,8 +188,8 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	@Override
 	@Nonnull
 	public void replaceLefts(R right, Iterable<? extends L> lefts) {
-		removeAllLefts(right);
-		putAllInverse(right, lefts);
+		deleteAllLefts(right);
+		save(lefts, right);
 	}
 
 	/* (non-Javadoc)

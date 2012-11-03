@@ -77,16 +77,53 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 	 * @see org.soluvas.data.repository.AssocRepository#put(java.lang.Object, java.lang.Object)
 	 */
 	@Override
-	public boolean put(String left, String right) {
-		// TODO: implement
-		throw new UnsupportedOperationException();
+	public boolean put(final String role, final String personId) {
+		return LdapUtils.withConnection(ldapPool,
+				new Function<LdapConnection, Boolean>() {
+			@Override @Nullable
+			public Boolean apply(@Nullable LdapConnection ldap) {
+				try {
+					final Dn groupDn = new Dn(new Rdn("cn", role),
+							new Dn(groupsRdn, domainBase));
+					final Dn usersDn = new Dn(usersRdn, domainBase);
+					Entry groupEntry = ldap.lookup(groupDn);
+					if (groupEntry == null) {
+						// TODO: should just create the group
+						log.warn("Cannot find group entry {}", groupDn.getName());
+						return false;
+					}
+					Attribute membersAttr = groupEntry.get("uniqueMember");
+					final String personMember = new Rdn("uid", personId).getName() + "," + usersDn.getName();
+					if (!membersAttr.contains(personMember)) {
+						log.debug("Adding member {} to role entry {}",
+								personMember, groupEntry.getDn().getName());
+						membersAttr.add(personMember);
+						if (membersAttr.contains(domainBase)) {
+							log.debug("Removing dummy member {} in role entry {}",
+									domainBase, groupEntry.getDn().getName());
+							membersAttr.remove(domainBase);
+						}
+						log.info("Replacing uniqueMember in {} with {}",
+								groupDn.getName(), membersAttr.get()); 
+						ldap.modify(groupDn, new DefaultModification(ModificationOperation.REPLACE_ATTRIBUTE, membersAttr));
+						return true;
+					} else {
+						log.debug("Skipping existing member {} in role entry {}",
+								personMember, groupEntry.getDn().getName());
+						return false;
+					}
+				} catch (Exception e) {
+					throw new RuntimeException("Cannot add member " + personId + " to role " + role, e);
+				}
+			}
+		});
 	}
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.AssocRepository#remove(java.lang.Object, java.lang.Object)
 	 */
 	@Override
-	public boolean remove(final String role, final String personId) {
+	public boolean delete(final String role, final String personId) {
 		return LdapUtils.withConnection(ldapPool,
 				new Function<LdapConnection, Boolean>() {
 			@Override @Nullable
@@ -102,7 +139,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 					}
 					Attribute membersAttr = groupEntry.get("uniqueMember");
 					final String personMember = new Rdn("uid", personId).getName() + "," + usersDn.getName();
-					if (membersAttr.remove(personId)) {
+					if (membersAttr.remove(personMember)) {
 						if (membersAttr.size() == 0) {
 							membersAttr.add(domainBase);
 						}
@@ -171,7 +208,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 	 * @see org.soluvas.data.repository.AssocRepository#removeAllRights(java.lang.Object)
 	 */
 	@Override
-	public long removeAllRights(String role) {
+	public long deleteAllRights(String role) {
 		return replaceRights(role, ImmutableList.<String>of());
 	}
 
@@ -389,4 +426,15 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "LdapRolePersonAssoc ["
+				+ (domainBase != null ? "domainBase=" + domainBase + ", " : "")
+				+ (groupsRdn != null ? "groupsRdn=" + groupsRdn + ", " : "")
+				+ (usersRdn != null ? "usersRdn=" + usersRdn : "") + "]";
+	}
+	
 }
