@@ -9,7 +9,6 @@ import javax.annotation.Nullable;
 import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
-import org.soluvas.data.repository.BulkCrudRepository;
 import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.ldap.Person;
 
@@ -25,7 +24,7 @@ public interface SecurityRepository {
 	 * Returns a {@link Role} {@link CrudRepository} where roles can be added and removed.
 	 * @return
 	 */
-	@Nonnull BulkCrudRepository<Role, String> getRoleRepository();
+	@Nonnull CrudRepository<Role, String> getRoleRepository();
 	
 	/**
 	 * Give a Person ID, return their roles in the LDAP repository.

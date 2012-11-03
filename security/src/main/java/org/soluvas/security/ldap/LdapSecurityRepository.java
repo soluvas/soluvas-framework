@@ -21,7 +21,7 @@ import org.apache.directory.shared.ldap.model.name.Dn;
 import org.apache.directory.shared.ldap.model.name.Rdn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.data.repository.BulkCrudRepository;
+import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.ldap.LdapUtils;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityRepository;
@@ -267,7 +267,7 @@ public class LdapSecurityRepository implements SecurityRepository {
 
 	@Override
 	@Nonnull
-	public BulkCrudRepository<Role, String> getRoleRepository() {
+	public CrudRepository<Role, String> getRoleRepository() {
 		return roleRepository;
 	}
 

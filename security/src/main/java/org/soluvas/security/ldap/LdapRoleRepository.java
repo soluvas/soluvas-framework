@@ -1,5 +1,6 @@
 package org.soluvas.security.ldap;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -16,7 +17,7 @@ import org.apache.directory.shared.ldap.model.name.Dn;
 import org.apache.directory.shared.ldap.model.name.Rdn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.data.repository.BulkCrudRepository;
+import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.ldap.LdapUtils;
 import org.soluvas.ldap.PooledLdapRepository;
 import org.soluvas.security.Role;
@@ -31,7 +32,7 @@ import com.google.common.collect.Iterables;
  * @author ceefour
  * @todo Should be implemented on top of, or directly uses, {@link PooledLdapRepository}.
  */
-public class LdapRoleRepository implements BulkCrudRepository<Role, String> {
+public class LdapRoleRepository implements CrudRepository<Role, String> {
 
 	private transient Logger log = LoggerFactory
 			.getLogger(LdapRoleRepository.class);
@@ -101,7 +102,7 @@ public class LdapRoleRepository implements BulkCrudRepository<Role, String> {
 	}
 
 	@Override
-	public <S extends Role> Iterable<S> save(Iterable<S> entities) {
+	public <S extends Role> Collection<S> save(Iterable<S> entities) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -130,7 +131,7 @@ public class LdapRoleRepository implements BulkCrudRepository<Role, String> {
 	}
 
 	@Override
-	public Iterable<Role> findAll() {
+	public Collection<Role> findAll() {
 		return LdapUtils.withConnection(ldapPool,
 				new Function<LdapConnection, List<Role>>() {
 			@Override @Nullable
@@ -166,7 +167,7 @@ public class LdapRoleRepository implements BulkCrudRepository<Role, String> {
 	}
 
 	@Override
-	public Iterable<Role> findAll(Iterable<String> ids) {
+	public Collection<Role> findAll(Iterable<String> ids) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -223,6 +224,38 @@ public class LdapRoleRepository implements BulkCrudRepository<Role, String> {
 		for (String id : ids) {
 			delete(id);
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see org.soluvas.data.repository.CrudRepository#existsAll(java.lang.Iterable)
+	 */
+	@Override
+	public boolean existsAll(Iterable<String> id) {
+		throw new UnsupportedOperationException();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.soluvas.data.repository.CrudRepository#existsAny(java.lang.Iterable)
+	 */
+	@Override
+	public boolean existsAny(Iterable<String> id) {
+		throw new UnsupportedOperationException();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.soluvas.data.repository.CrudRepository#isEmpty()
+	 */
+	@Override
+	public boolean isEmpty() {
+		throw new UnsupportedOperationException();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.soluvas.data.repository.CrudRepository#count(java.lang.Iterable)
+	 */
+	@Override
+	public long count(Iterable<String> ids) {
+		throw new UnsupportedOperationException();
 	}
 
 }
