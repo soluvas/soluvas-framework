@@ -7,8 +7,10 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multiset;
 
 /**
  * {@link AssocRepository} base implementation that only needs
@@ -166,6 +168,16 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	public Collection<Map.Entry<L, R>> entries() {
 		return findAll().entries();
 	}
+	
+	/**
+	 * It is recommended to override this for efficiency.
+	 * The default implementation simply processes {@link #findAll()}.
+	 */
+	@Override
+	@Nonnull
+	public Multiset<L> lefts() {
+		return findAll().keys();
+	}
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.AssocRepository#leftSet()
@@ -175,6 +187,16 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 		return ImmutableSet.copyOf(lefts());
 	}
 
+	/**
+	 * It is recommended to override this for efficiency.
+	 * The default implementation simply processes {@link #findAll()}.
+	 */
+	@Override
+	@Nonnull
+	public Multiset<R> rights() {
+		return ImmutableMultiset.copyOf(findAll().values());
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.AssocRepository#rightSet()
 	 */

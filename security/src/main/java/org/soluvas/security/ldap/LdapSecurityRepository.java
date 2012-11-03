@@ -75,6 +75,24 @@ public class LdapSecurityRepository implements SecurityRepository {
 		this.rolePersonAssoc = new LdapRolePersonAssoc(ldapPool, domainBase);
 	}
 
+	/**
+	 * 
+	 * @param ldapPool
+	 * @param domainBase
+	 * @param bindConfig
+	 *            LDAP configuration used to perform bind-based authentication.
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public LdapSecurityRepository(final ObjectPool<LdapConnection> ldapPool,
+			String domainBase, LdapConnectionConfig bindConfig, AssocRepository rolePersonAssoc) {
+		super();
+		this.ldapPool = ldapPool;
+		this.domainBase = domainBase;
+		this.bindConfig = bindConfig;
+		this.roleRepository = new LdapRoleRepository(ldapPool, domainBase);
+		this.rolePersonAssoc = rolePersonAssoc;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.soluvas.web.login.SecurityRepository#getPersonRoles(java.lang.String)
 	 */

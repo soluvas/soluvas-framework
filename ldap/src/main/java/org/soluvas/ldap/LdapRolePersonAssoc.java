@@ -1,6 +1,8 @@
 package org.soluvas.ldap;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Nullable;
@@ -22,10 +24,14 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.data.repository.AssocRepositoryBase;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 
@@ -68,17 +74,46 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 	 */
 	@Override
 	public boolean put(String left, String right) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.AssocRepository#remove(java.lang.Object, java.lang.Object)
 	 */
 	@Override
-	public boolean remove(String left, String right) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean remove(final String role, final String personId) {
+		return LdapUtils.withConnection(ldapPool,
+				new Function<LdapConnection, Boolean>() {
+			@Override @Nullable
+			public Boolean apply(@Nullable LdapConnection ldap) {
+				try {
+					final Dn groupDn = new Dn(new Rdn("cn", role),
+							new Dn(groupsRdn, domainBase));
+					final Dn usersDn = new Dn(usersRdn, domainBase);
+					Entry groupEntry = ldap.lookup(groupDn);
+					if (groupEntry == null) {
+						log.warn("Cannot find group entry {}", groupDn.getName());
+						return false;
+					}
+					Attribute membersAttr = groupEntry.get("uniqueMember");
+					final String personMember = new Rdn("uid", personId).getName() + "," + usersDn.getName();
+					if (membersAttr.remove(personId)) {
+						if (membersAttr.size() == 0) {
+							membersAttr.add(domainBase);
+						}
+						log.info("Replacing uniqueMember in {} with {}",
+								groupDn.getName(), membersAttr.get()); 
+						ldap.modify(groupDn, new DefaultModification(ModificationOperation.REPLACE_ATTRIBUTE, membersAttr));
+						return true;
+					} else {
+						return false;
+					}
+				} catch (Exception e) {
+					log.error("Cannot remove member " + personId + " from role " + role, e);
+					throw new RuntimeException("Cannot remove member " + personId + " from role " + role, e);
+				}
+			}
+		});
 	}
 
 	/* (non-Javadoc)
@@ -125,15 +160,6 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 			}
 		});
 		return -1;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.repository.AssocRepository#replaceLefts(java.lang.Object, java.lang.Iterable)
-	 */
-	@Override
-	public void replaceLefts(String right,
-			Iterable<? extends String> lefts) {
-		// TODO Auto-generated method stub
 	}
 
 	/* (non-Javadoc)
@@ -243,8 +269,55 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 	 */
 	@Override
 	public Multiset<String> lefts() {
-		// TODO Auto-generated method stub
-		return null;
+		return LdapUtils.withConnection(ldapPool,
+				new Function<LdapConnection, Multiset<String>>() {
+			@Override @Nullable
+			public Multiset<String> apply(@Nullable LdapConnection ldap) {
+				try {
+					final Dn groupsDn = new Dn(groupsRdn, domainBase);
+					final Dn usersDn = new Dn(usersRdn, domainBase);
+					List<java.util.Map.Entry<String, Integer>> lefts = LdapUtils.transform(ldap.search(groupsDn, "(objectClass=groupOfUniqueNames)", SearchScope.ONELEVEL, "uniqueMember"), new Function<Entry, Map.Entry<String, Integer>>() {
+						@Override
+						@Nullable
+						public Map.Entry<String, Integer> apply(@Nullable final Entry entry) {
+							Attribute uniqueMemberAttr = entry.get("uniqueMember");
+							Iterable<Value<?>> validValues = Iterables.filter(uniqueMemberAttr, new Predicate<Value<?>>() {
+								@Override
+								public boolean apply(@Nullable Value<?> member) {
+									try {
+										final String memberStr = member.getString();
+										final Dn memberDn = new Dn(memberStr);
+										if (!memberDn.isDescendantOf(usersDn)) {
+											log.warn("Skipping invalid uniqueMember {} from {}, expected a descendant of {}",
+													memberStr, entry.getDn().getName(), usersDn.getName());
+											return false;
+										}
+										if (!"uid".equals(memberDn.getRdn().getType())) {
+											log.warn("Skipping invalid uniqueMember {} from {}, expected 'uid' RDN, but got {}",
+													memberStr, entry.getDn().getName(), memberDn.getRdn().getType());
+											return false;
+										}
+										return true;
+									} catch (LdapInvalidDnException e) {
+										throw Throwables.propagate(e);
+									}
+								}
+							});
+							final int validValueCount = Iterables.size(validValues);
+							return Maps.immutableEntry(entry.getDn().getRdn().getValue().getString(), validValueCount);
+						}
+					});
+					ImmutableMultiset.Builder<String> builder = ImmutableMultiset.builder();
+					for (Map.Entry<String, Integer> left : lefts) {
+						builder.addCopies(left.getKey(), left.getValue());
+					}
+					return builder.build();
+				} catch (Exception e) {
+					log.error("Cannot get roles", e);
+					throw new RuntimeException("Cannot get roles", e);
+				}
+			}
+		});
 	}
 
 	/* (non-Javadoc)
@@ -252,8 +325,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 	 */
 	@Override
 	public Multiset<String> rights() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	/* (non-Javadoc)
@@ -261,8 +333,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 	 */
 	@Override
 	public Multimap<String, String> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 }

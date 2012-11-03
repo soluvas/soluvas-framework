@@ -72,7 +72,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 			}
 		} catch (Exception e) {
 			log.error(String.format("Cannot find service %s for filter %s",
-						clazz, filter), e);
+						clazz.getName(), filter), e);
 			Throwables.propagate(e);
 			return null;
 		}
