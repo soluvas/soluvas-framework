@@ -1,16 +1,11 @@
-/**
- * 
- */
 package org.soluvas.data.repository;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multiset;
 
 /**
  * Repository that manages left-right pairs. A left-right pair is unique (no duplicates),
@@ -41,41 +36,11 @@ import com.google.common.collect.Multiset;
  * @see BiMap, {@link Multimap}
  * @author ceefour
  */
-public interface AssocRepository<LID, RID> extends BasicRepository {
+public interface AssocRepository<L, R> extends BasicRepository, BasicAssocRepository<L, R> {
 
     // Query Operations
 
-    /** Returns the number of left-right pairs in the multimap. */
-    @Override
-	long count();
-
-    /** Returns {@code true} if the multimap contains no left-right pairs. */
-    @Override
-	boolean isEmpty();
-
-    /**
-     * Returns {@code true} if the multimap contains any rights for the specified
-     * key.
-     *
-     * @param key key to search for in multimap
-     */
-    boolean containsLeft(@Nullable LID left);
-
-    /**
-     * Returns {@code true} if the multimap contains the specified value for any
-     * key.
-     *
-     * @param value value to search for in multimap
-     */
-    boolean containsRight(@Nullable RID right);
-
-    /**
-     * Returns {@code true} if the multimap contains the specified left-right pair.
-     *
-     * @param key key to search for in multimap
-     * @param value value to search for in multimap
-     */
-    boolean containsEntry(@Nullable LID left, @Nullable RID right);
+    
 
     // Modification Operations
 
@@ -93,7 +58,7 @@ public interface AssocRepository<LID, RID> extends BasicRepository {
      *     {@code false} if the multimap already contained the left-right pair and
      *     doesn't allow duplicates
      */
-    boolean put(@Nullable LID left, @Nullable RID right);
+    boolean put(@Nonnull L left, @Nonnull R right);
 
     /**
      * Removes a single left-right pair from the multimap.
@@ -102,7 +67,7 @@ public interface AssocRepository<LID, RID> extends BasicRepository {
      * @param value value of entry to remove the multimap
      * @return {@code true} if the multimap changed
      */
-    boolean remove(@Nullable LID left, @Nullable RID right);
+    boolean remove(@Nonnull L left, @Nonnull R right);
 
     // Bulk Operations
 
@@ -113,7 +78,7 @@ public interface AssocRepository<LID, RID> extends BasicRepository {
      * @param rights rights to store in the multimap
      * @return {@code true} if the multimap changed
      */
-    boolean putAll(@Nullable LID left, Iterable<? extends RID> rights);
+    boolean putAll(@Nonnull L left, Iterable<? extends R> rights);
 
     /**
      * Stores a collection of lefts with the same right.
@@ -122,7 +87,7 @@ public interface AssocRepository<LID, RID> extends BasicRepository {
      * @param rights rights to store in the multimap
      * @return {@code true} if the multimap changed
      */
-    boolean putAllInverse(@Nullable LID right, Iterable<? extends RID> lefts);
+    boolean putAllInverse(@Nonnull L right, Iterable<? extends R> lefts);
 
     /**
      * Copies all of another multimap's left-right pairs into this multimap. The
@@ -132,7 +97,7 @@ public interface AssocRepository<LID, RID> extends BasicRepository {
      * @param multimap mappings to store in this multimap
      * @return {@code true} if the multimap changed
      */
-    boolean putAll(Multimap<? extends LID, ? extends RID> multimap);
+    boolean putAll(Multimap<? extends L, ? extends R> multimap);
 
     /**
      * Copies all of another multimap's right-left pairs into this multimap. The
@@ -142,7 +107,7 @@ public interface AssocRepository<LID, RID> extends BasicRepository {
      * @param multimap mappings to store in this multimap
      * @return {@code true} if the multimap changed
      */
-    boolean putAllInverse(Multimap<? extends RID, ? extends LID> inverseMultimap);
+    boolean putAllInverse(Multimap<? extends R, ? extends L> inverseMultimap);
 
     /**
      * Stores a collection of rights with the same left, replacing any existing
@@ -150,12 +115,8 @@ public interface AssocRepository<LID, RID> extends BasicRepository {
      *
      * @param key key to store in the multimap
      * @param rights rights to store in the multimap
-     * @return the collection of replaced rights, or an empty collection if no
-     *     rights were previously associated with the key. The collection
-     *     <i>may</i> be modifiable, but updating it will have no effect on the
-     *     multimap.
      */
-    Collection<RID> replaceRights(@Nullable LID left, Iterable<? extends RID> rights);
+    @Nonnull void replaceRights(@Nonnull L left, Iterable<? extends R> rights);
 
     /**
      * Stores a collection of lefts with the same right, replacing any existing
@@ -163,111 +124,18 @@ public interface AssocRepository<LID, RID> extends BasicRepository {
      *
      * @param key key to store in the multimap
      * @param rights rights to store in the multimap
-     * @return the collection of replaced rights, or an empty collection if no
-     *     rights were previously associated with the key. The collection
-     *     <i>may</i> be modifiable, but updating it will have no effect on the
-     *     multimap.
      */
-    Collection<RID> replaceLefts(@Nullable LID right, Iterable<? extends LID> lefts);
-
-    /**
-     * Removes all rights associated with a given left.
-     *
-     * @param left left of entries to remove from the multimap
-     * @return the collection of removed rights, or an empty collection if no
-     *     rights were associated with the provided key. The collection
-     *     <i>may</i> be modifiable, but updating it will have no effect on the
-     *     multimap.
-     */
-    Collection<RID> removeAllRights(@Nullable LID left);
-
-    /**
-     * Removes all lefts associated with a given right.
-     *
-     * @param right right of entries to remove from the multimap
-     * @return the collection of removed rights, or an empty collection if no
-     *     rights were associated with the provided key. The collection
-     *     <i>may</i> be modifiable, but updating it will have no effect on the
-     *     multimap.
-     */
-    Collection<LID> removeAllLefts(@Nullable RID right);
-
-    /**
-     * Removes all left-right pairs from the multimap.
-     */
-    @Override
-	void deleteAll();
+    @Nonnull void replaceLefts(@Nonnull L right, Iterable<? extends L> lefts);
 
     // Views
 
-    /**
-     * Returns a collection view of all rights associated with a key. If no
-     * mappings in the multimap have the provided key, an empty collection is
-     * returned.
-     *
-     * <p>Changes to the returned collection will update the underlying multimap,
-     * and vice versa.
-     *
-     * @param key key to search for in multimap
-     * @return the collection of rights that the key maps to
-     */
-    Collection<RID> getLeft(@Nullable LID left);
-
-    /**
-     * Returns a collection view of all lefts associated with a key. If no
-     * mappings in the multimap have the provided key, an empty collection is
-     * returned.
-     *
-     * <p>Changes to the returned collection will update the underlying multimap,
-     * and vice versa.
-     *
-     * @param right right to search for in multimap
-     * @return the collection of lefts that the key maps to
-     */
-    Collection<LID> getRight(@Nullable RID right);
-
-    /**
-     * Returns the set of all lefts, each appearing once in the returned set.
-     *
-     * @return the collection of distinct lefts
-     */
-    Set<LID> leftSet();
-
-    /**
-     * Returns the set of all rights, each appearing once in the returned set.
-     *
-     * @return the collection of distinct rights
-     */
-    Set<RID> rightSet();
-
-    /**
-     * Returns a collection, which may contain duplicates, of all keys. The number
-     * of times of key appears in the returned multiset equals the number of
-     * mappings the key has in the multimap. Changes to the returned multiset will
-     * update the underlying multimap, and vice versa.
-     *
-     * @return a multiset with keys corresponding to the distinct keys of the
-     *     multimap and frequencies corresponding to the number of rights that
-     *     each key maps to
-     */
-    Multiset<LID> lefts();
-
-    /**
-     * Returns a collection of all rights in the multimap. Changes to the returned
-     * collection will update the underlying multimap, and vice versa.
-     *
-     * @return collection of rights, which may include the same value multiple
-     *     times if it occurs in multiple mappings
-     */
-    Multiset<RID> rights();
-    
     /**
      * Returns a multimap of all left-right pairs. It's the reverse of
      * {@link #putAll(Multimap)}.
      *
      * @return map entries
      */
-    Multimap<LID, RID> findAll();
+    @Nonnull Multimap<L, R> findAll();
 
     /**
      * Returns a collection of all left-right pairs. Changes to the returned
@@ -276,6 +144,6 @@ public interface AssocRepository<LID, RID> extends BasicRepository {
      *
      * @return collection of map entries consisting of left-right pairs
      */
-    Collection<Map.Entry<LID, RID>> entries();
+    @Nonnull Collection<Map.Entry<L, R>> entries();
 
 }

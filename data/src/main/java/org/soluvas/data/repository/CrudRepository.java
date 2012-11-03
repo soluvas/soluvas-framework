@@ -20,6 +20,8 @@ import java.util.Collection;
 
 import javax.annotation.Nonnull;
 
+import org.soluvas.data.EntityLookup;
+
 /**
  * Interface for generic CRUD operations on a repository for a specific type.
  * 
@@ -33,6 +35,7 @@ import javax.annotation.Nonnull;
  *  	is find methods are not supposed to return large results anyway. For that
  *  	you need batching or paging. The ability to call {@link Collection#size()}
  *  	outweights the {@link Iterable} benefits.</li>
+ *  <li>EntityLookup{@link #findOne(Serializable)} returns subclass of T.
  * </ol>
  * 
  * @author Oliver Gierke
@@ -40,7 +43,7 @@ import javax.annotation.Nonnull;
  * @author Hendy Irawan
  */
 //@NoRepositoryBean
-public interface CrudRepository<T, ID extends Serializable> extends Repository<T, ID>, BasicRepository {
+public interface CrudRepository<T, ID extends Serializable> extends Repository<T, ID>, BasicRepository, EntityLookup<T, ID> {
 
 	/**
 	 * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
@@ -59,15 +62,6 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
 	<S extends T> Collection<S> save(@Nonnull final Iterable<S> entities);
-
-	/**
-	 * Retrives an entity by its id.
-	 * 
-	 * @param id must not be {@literal null}.
-	 * @return the entity with the given id or {@literal null} if none found
-	 * @throws IllegalArgumentException if {@code id} is {@literal null}
-	 */
-	T findOne(ID id);
 
 	/**
 	 * Returns whether an entity with the given id exists.
