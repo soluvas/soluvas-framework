@@ -15,6 +15,10 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.soluvas</groupId>
+			<artifactId>org.soluvas.commons</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.json</artifactId>
 		</dependency>
 		

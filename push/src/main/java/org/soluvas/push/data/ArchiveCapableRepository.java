@@ -1,12 +1,14 @@
 package org.soluvas.push.data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Synchronous interface for archive capabilities.
  * @author ceefour
+ * @todo Better name: ArchivingRepository ?
  */
-public interface ArchiveCapableRepository<ID, T> {
+public interface ArchiveCapableRepository<T, ID extends Serializable> {
 	
 	/**
 	 * Returns true if archive is supported.

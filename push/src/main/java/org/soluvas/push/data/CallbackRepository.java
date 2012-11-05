@@ -1,5 +1,6 @@
 package org.soluvas.push.data;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.soluvas.async.FailingCallback;
@@ -13,7 +14,7 @@ import org.soluvas.async.FailingCallback;
  * should be an Akka typed actor or a Camel proxy.
  * @author ceefour
  */
-public interface CallbackRepository<ID, T> {
+public interface CallbackRepository<T, ID extends Serializable> {
 	
 	/**
 	 * Add entity to repository.

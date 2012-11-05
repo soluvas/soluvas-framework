@@ -1,6 +1,7 @@
 package org.soluvas.commons.tenant;
 
 import java.util.Collection;
+import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -19,12 +20,17 @@ import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
 import com.google.common.base.Throwables;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.FutureCallback;
 
 /**
  * Provides helper to lookup multitenant-aware services in the OSGi runtime.
  * 
- * Also {@link ServiceTrackerCustomizer} to put clientId, tenantId, and tenantEnv default settings.
+ * Also see {@link ServiceTrackerCustomizer} to put clientId, tenantId, and tenantEnv default settings.
+ * 
+ * Note: Do <strong>not</strong> expose this as a service! Rather, create a bean for each bundle,
+ * then pass it to a {@link ServiceLookup} field in the consumer class.
  *  
  * @author ceefour
  * @version 1.1
@@ -43,10 +49,10 @@ public class MultitenantServiceLookup implements ServiceLookup {
 
 	@Deprecated
 	@Override
-	public <T> void withService(Class<? extends T> clazz, CommandSession commandSession, final FutureCallback<T> callback) {
-		withService(clazz, commandSession, new Function<T, Void>() {
+	public <T, S extends T> void withService(@Nonnull Class<T> clazz, @Nonnull CommandSession commandSession, @Nonnull final FutureCallback<S> callback) {
+		withService(clazz, commandSession, new Function<S, Void>() {
 			@Override
-			public Void apply(T input) {
+			public Void apply(S input) {
 				callback.onSuccess(input);
 				return null;
 			};
@@ -55,7 +61,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T, R> R withService(Class<? extends T> clazz, String filter, Function<T, R> callback) {
+	public <T, R, S extends T> R withService(Class<T> clazz, String filter, Function<S,R> callback) {
 		try {
 			ServiceReference<T>[] refs = (ServiceReference<T>[]) bundleContext
 					.getServiceReferences(clazz.getName(), filter);
@@ -63,7 +69,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 				throw new RuntimeException(String.format("Cannot find service %s for filter %s",
 						clazz, filter));
 			ServiceReference<T> ref = refs[0];
-			T svc = bundleContext.getService(ref);
+			S svc = (S) bundleContext.getService(ref);
 			try {
 				R result = callback.apply(svc);
 				return result;
@@ -72,32 +78,32 @@ public class MultitenantServiceLookup implements ServiceLookup {
 			}
 		} catch (Exception e) {
 			log.error(String.format("Cannot find service %s for filter %s",
-						clazz, filter), e);
+						clazz.getName(), filter), e);
 			Throwables.propagate(e);
 			return null;
 		}
 	}
 
 	@Override
-	public <T, R> R withService(Class<? extends T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv, 
-			@Nonnull String tenantId, @Nonnull String namespace, Function<T, R> callback) {
+	public <T, R> R withService(Class<T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv, 
+			@Nonnull String tenantId, @Nonnull String namespace, Function<? extends T, R> callback) {
 		final String filter = String.format("(&(clientId=%s)(tenantId=%s)(tenantEnv=%s)(namespace=%s))",
 				clientId, tenantId, tenantEnv, namespace);
 		return withService(clazz, filter, callback);
 	}
 
 	@Override
-	public <T, R> R withService(Class<? extends T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv, 
-			@Nonnull String tenantId, @Nonnull Function<T, R> callback) {
+	public <T, R> R withService(Class<T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv, 
+			@Nonnull String tenantId, @Nonnull Function<? extends T, R> callback) {
 		final String filter = String.format("(&(clientId=%s)(tenantId=%s)(tenantEnv=%s))",
 				clientId, tenantId, tenantEnv);
 		return withService(clazz, filter, callback);
 	}
 
 	@Override
-	public <T, R> R withService(@Nonnull Class<? extends T> clazz,
+	public <T, R> R withService(@Nonnull Class<T> clazz,
 			@Nonnull CommandSession commandSession, @Nullable String namespace,
-			@Nullable String filter, Function<T, R> callback) {
+			@Nullable String filter, Function<? extends T, R> callback) {
 		TenantRef tenant = getTenant(commandSession);
 		final String realFilter = String.format(
 				"(&(clientId=%s)(tenantId=%s)(tenantEnv=%s)%s%s)", tenant
@@ -109,15 +115,15 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	}
 
 	@Override
-	public <T, R> R withService(Class<? extends T> clazz,
-			CommandSession commandSession, Function<T, R> callback) {
+	public <T, R> R withService(Class<T> clazz,
+			CommandSession commandSession, Function<? extends T, R> callback) {
 		return withService(clazz, commandSession, null, null, callback);
 	}
 
 	@Override
-	public <T, R> R withService(Class<? extends T> clazz,
+	public <T, R> R withService(Class<T> clazz,
 			CommandSession commandSession, String namespace,
-			Function<T, R> callback) {
+			Function<? extends T, R> callback) {
 		return withService(clazz, commandSession, namespace, null, callback);
 	}
 
@@ -150,16 +156,13 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	public <T> ServiceReference<T> getService(@Nonnull Class<T> iface,
 			@Nonnull CommandSession session, @Nullable String namespace,
 			@Nullable String filter) {
-		BundleContext bundleContext = FrameworkUtil.getBundle(
-				MultitenantServiceLookup.class).getBundleContext();
-
 		TenantRef tenant = getTenant(session);
 
-		final String className = iface.getName();
+		final String ifaceName = iface.getName();
 		final String additionalFilter = Optional.fromNullable(filter).or("");
 		log.trace(
 				"Lookup {} for tenantId={} tenantEnv={} namespace={} filter: {}",
-				new Object[] { className, tenant.getTenantId(),
+				new Object[] { ifaceName, tenant.getTenantId(),
 						tenant.getTenantEnv(), namespace,
 						additionalFilter });
 		final String namespaceFilter = !Strings.isNullOrEmpty(namespace) ? "(namespace="
@@ -174,13 +177,12 @@ public class MultitenantServiceLookup implements ServiceLookup {
 			Collection<ServiceReference<T>> foundRefs = bundleContext
 					.getServiceReferences(iface, realFilter);
 			if (foundRefs == null || foundRefs.isEmpty())
-				throw new RuntimeException("Cannot find " + className
+				throw new RuntimeException("Cannot find " + ifaceName
 						+ " service with filter " + realFilter);
 			serviceRef = foundRefs.iterator().next();
 			return serviceRef;
 		} catch (InvalidSyntaxException e) {
-			throw new RuntimeException("Cannot find " + className
-					+ " service with filter " + realFilter, e);
+			throw new RuntimeException("Cannot find " + ifaceName + " service for " + tenant + " with filter " + realFilter, e);
 		}
 	}
 
@@ -193,15 +195,50 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public <T> T getSupplied(@Nonnull Class<T> clazz, CommandSession session) {
-		ServiceReference<Supplier> supplierRef = getService(Supplier.class,
+		final ServiceReference<Supplier> supplierRef = getService(Supplier.class,
 				session, null, "(suppliedClass=" + clazz.getName() + ")(layer=application)");
-		BundleContext bundleContext = FrameworkUtil.getBundle(
+		final BundleContext bundleContext = FrameworkUtil.getBundle(
 				MultitenantServiceLookup.class).getBundleContext();
-		Supplier<T> supplier = bundleContext.getService(supplierRef);
+		final Supplier<T> supplier = bundleContext.getService(supplierRef);
 		try {
 			return supplier.get();
 		} finally {
 			bundleContext.ungetService(supplierRef);
+		}
+	}
+	
+	@Override
+	public <T> Set<String> getNamespaces(@Nonnull final Class<T> iface, @Nonnull final TenantRef tenant, @Nullable final String filter) {
+		final String ifaceName = iface.getName();
+		final String additionalFilter = Optional.fromNullable(filter).or("");
+		log.trace(
+				"Lookup {} for tenantId={} tenantEnv={} filter: {}",
+				new Object[] { ifaceName, tenant.getTenantId(),
+						tenant.getTenantEnv(), additionalFilter });
+		String realFilter = "(&(tenantId=" + tenant.getTenantId()
+				+ ")(tenantEnv=" + tenant.getTenantEnv() + ")"
+				+ additionalFilter + ")";
+
+		try {
+			Collection<ServiceReference<T>> foundRefs = bundleContext
+					.getServiceReferences(iface, realFilter);
+			if (foundRefs == null || foundRefs.isEmpty()) {
+				log.trace("Cannot find {} service for {} with filter {}", ifaceName, tenant, realFilter);
+				return ImmutableSet.of();
+			} else {
+				Collection<String> namespaces = Collections2.transform(foundRefs, new Function<ServiceReference<T>, String>() {
+					@Override
+					@Nullable
+					public String apply(@Nullable ServiceReference<T> ref) {
+						return Optional.fromNullable((String) ref.getProperty("namespace")).or("");
+					}
+				});
+				final Set<String> namespaceSet = ImmutableSet.copyOf(namespaces);
+				log.trace("{} service namespaces for {} with filter {}: {}", ifaceName, tenant, realFilter, namespaceSet);
+				return namespaceSet;
+			}
+		} catch (InvalidSyntaxException e) {
+			throw new RuntimeException("Cannot find " + ifaceName + " service for " + tenant + " with filter " + realFilter, e);
 		}
 	}
 

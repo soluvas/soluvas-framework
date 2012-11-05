@@ -1,5 +1,7 @@
 package org.soluvas.commons.tenant;
 
+import java.util.Set;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -27,8 +29,8 @@ public interface ServiceLookup {
 	 * @param callback
 	 * @return
 	 */
-	public abstract <T, R> R withService(Class<? extends T> clazz, CommandSession commandSession, String namespace,
-			Function<T, R> callback);
+	public abstract <T, R> R withService(Class<T> clazz, CommandSession commandSession, String namespace,
+			Function<? extends T, R> callback);
 
 	/**
 	 * Lookup the service. In OSGi environments or when looking up a service
@@ -42,23 +44,22 @@ public interface ServiceLookup {
 	 * @param callback
 	 * @return
 	 */
-	public abstract <T, R> R withService(Class<? extends T> clazz,
+	public abstract <T, R> R withService(Class<T> clazz,
 			CommandSession commandSession, String namespace, String filter,
-			Function<T, R> callback);
+			Function<? extends T, R> callback);
 
-	public abstract <T, R> R withService(Class<? extends T> clazz, CommandSession commandSession, Function<T, R> callback);
+	public abstract <T, R> R withService(Class<T> clazz, CommandSession commandSession, Function<? extends T, R> callback);
 
-	public abstract <T, R> R withService(Class<? extends T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv,
-			@Nonnull String tenantId, @Nonnull Function<T, R> callback);
+	public abstract <T, R> R withService(Class<T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv,
+			@Nonnull String tenantId, @Nonnull Function<? extends T, R> callback);
 
-	public abstract <T, R> R withService(Class<? extends T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv,
-			@Nonnull String tenantId, @Nonnull String namespace, Function<T, R> callback);
+	public abstract <T, R> R withService(Class<T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv,
+			@Nonnull String tenantId, @Nonnull String namespace, Function<? extends T, R> callback);
 
-	public abstract <T, R> R withService(Class<? extends T> clazz, String filter, Function<T, R> callback);
+	public abstract <T, R, S extends T> R withService(Class<T> clazz, String filter, Function<S,R> callback);
 
 	@Deprecated
-	public abstract <T> void withService(Class<? extends T> clazz, CommandSession commandSession,
-			FutureCallback<T> callback);
+	public <T, S extends T> void withService(@Nonnull Class<T> clazz, @Nonnull CommandSession commandSession, @Nonnull final FutureCallback<S> callback);
 
 	/**
 	 * Returns a tenant-scoped supplied object from {@link Supplier} service,
@@ -75,5 +76,7 @@ public interface ServiceLookup {
 			@Nullable String filter);
 
 	public abstract TenantRef getTenant(@Nonnull CommandSession session);
+
+	public abstract <T> Set<String> getNamespaces(@Nonnull Class<T> iface, @Nonnull TenantRef tenant, @Nullable String filter);
 
 }

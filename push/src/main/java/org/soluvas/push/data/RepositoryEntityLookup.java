@@ -1,6 +1,10 @@
 package org.soluvas.push.data;
 
+import java.io.Serializable;
+
 import javax.annotation.Nonnull;
+
+import org.soluvas.data.EntityLookup;
 
 import com.google.common.base.Preconditions;
 
@@ -9,18 +13,18 @@ import com.google.common.base.Preconditions;
  * @see CachingEntityLookup
  * @author ceefour
  */
-public class RepositoryEntityLookup<ID, T> implements EntityLookup<ID, T>{
+public class RepositoryEntityLookup<T, ID extends Serializable> implements EntityLookup<T, ID> {
 
-	private SyncRepository<ID, T> repository;
+	private final SyncRepository<T, ID> repository;
 	
-	public RepositoryEntityLookup(final SyncRepository<ID, T> repository) {
+	public RepositoryEntityLookup(final SyncRepository<T, ID> repository) {
 		super();
 		this.repository = repository;
 	}
 
-	public RepositoryEntityLookup(final CallbackRepository<ID, T> repository) {
+	public RepositoryEntityLookup(final CallbackRepository<T, ID> repository) {
 		super();
-		this.repository = new SyncRepositoryWrapper<ID, T>(repository);
+		this.repository = new SyncRepositoryWrapper<T, ID>(repository);
 	}
 
 	@Override

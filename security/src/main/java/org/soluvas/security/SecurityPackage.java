@@ -122,14 +122,14 @@ public interface SecurityPackage extends EPackage {
 	int ROLE_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.security.impl.InstanceRoleImpl <em>Instance Role</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.security.impl.DomainRoleImpl <em>Domain Role</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.security.impl.InstanceRoleImpl
-	 * @see org.soluvas.security.impl.SecurityPackageImpl#getInstanceRole()
+	 * @see org.soluvas.security.impl.DomainRoleImpl
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getDomainRole()
 	 * @generated
 	 */
-	int INSTANCE_ROLE = 1;
+	int DOMAIN_ROLE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
@@ -138,7 +138,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_ROLE__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
+	int DOMAIN_ROLE__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
 
 	/**
 	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
@@ -147,7 +147,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_ROLE__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+	int DOMAIN_ROLE__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -156,7 +156,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_ROLE__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
+	int DOMAIN_ROLE__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -165,16 +165,25 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_ROLE__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
+	int DOMAIN_ROLE__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Instance Role</em>' class.
+	 * The feature id for the '<em><b>Domain</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_ROLE_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
+	int DOMAIN_ROLE__DOMAIN = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Domain Role</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ROLE_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.security.impl.DomainImpl <em>Domain</em>}' class.
@@ -360,13 +369,22 @@ public interface SecurityPackage extends EPackage {
 	int SECURITY_CATALOG__PERMISSIONS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Domain Permissions</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECURITY_CATALOG__DOMAIN_PERMISSIONS = 5;
+
+	/**
 	 * The number of structural features of the '<em>Catalog</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SECURITY_CATALOG_FEATURE_COUNT = 5;
+	int SECURITY_CATALOG_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.security.impl.PermissionImpl <em>Permission</em>}' class.
@@ -443,6 +461,52 @@ public interface SecurityPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.security.impl.DomainPermissionImpl <em>Domain Permission</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.security.impl.DomainPermissionImpl
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getDomainPermission()
+	 * @generated
+	 */
+	int DOMAIN_PERMISSION = 6;
+
+	/**
+	 * The feature id for the '<em><b>Domain</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_PERMISSION__DOMAIN = 0;
+
+	/**
+	 * The feature id for the '<em><b>Domain Roles</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_PERMISSION__DOMAIN_ROLES = 1;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_PERMISSION__ACTIONS = 2;
+
+	/**
+	 * The number of structural features of the '<em>Domain Permission</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_PERMISSION_FEATURE_COUNT = 3;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.security.AssignMode <em>Assign Mode</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -450,7 +514,7 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getAssignMode()
 	 * @generated
 	 */
-	int ASSIGN_MODE = 6;
+	int ASSIGN_MODE = 7;
 
 
 	/**
@@ -497,36 +561,47 @@ public interface SecurityPackage extends EPackage {
 	EAttribute getRole_AssignMode();
 
 	/**
-	 * Returns the meta object for class '{@link org.soluvas.security.InstanceRole <em>Instance Role</em>}'.
+	 * Returns the meta object for class '{@link org.soluvas.security.DomainRole <em>Domain Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Instance Role</em>'.
-	 * @see org.soluvas.security.InstanceRole
+	 * @return the meta object for class '<em>Domain Role</em>'.
+	 * @see org.soluvas.security.DomainRole
 	 * @generated
 	 */
-	EClass getInstanceRole();
+	EClass getDomainRole();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.security.InstanceRole#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.DomainRole#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.soluvas.security.InstanceRole#getName()
-	 * @see #getInstanceRole()
+	 * @see org.soluvas.security.DomainRole#getName()
+	 * @see #getDomainRole()
 	 * @generated
 	 */
-	EAttribute getInstanceRole_Name();
+	EAttribute getDomainRole_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.security.InstanceRole#getDescription <em>Description</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.DomainRole#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see org.soluvas.security.InstanceRole#getDescription()
-	 * @see #getInstanceRole()
+	 * @see org.soluvas.security.DomainRole#getDescription()
+	 * @see #getDomainRole()
 	 * @generated
 	 */
-	EAttribute getInstanceRole_Description();
+	EAttribute getDomainRole_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.DomainRole#getDomain <em>Domain</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Domain</em>'.
+	 * @see org.soluvas.security.DomainRole#getDomain()
+	 * @see #getDomainRole()
+	 * @generated
+	 */
+	EAttribute getDomainRole_Domain();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.security.Domain <em>Domain</em>}'.
@@ -680,6 +755,17 @@ public interface SecurityPackage extends EPackage {
 	EReference getSecurityCatalog_Permissions();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.security.SecurityCatalog#getDomainPermissions <em>Domain Permissions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Domain Permissions</em>'.
+	 * @see org.soluvas.security.SecurityCatalog#getDomainPermissions()
+	 * @see #getSecurityCatalog()
+	 * @generated
+	 */
+	EReference getSecurityCatalog_DomainPermissions();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.security.Permission <em>Permission</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -732,6 +818,49 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPermission_InstancePermission();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.security.DomainPermission <em>Domain Permission</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Domain Permission</em>'.
+	 * @see org.soluvas.security.DomainPermission
+	 * @generated
+	 */
+	EClass getDomainPermission();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.DomainPermission#getDomain <em>Domain</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Domain</em>'.
+	 * @see org.soluvas.security.DomainPermission#getDomain()
+	 * @see #getDomainPermission()
+	 * @generated
+	 */
+	EAttribute getDomainPermission_Domain();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.security.DomainPermission#getDomainRoles <em>Domain Roles</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Domain Roles</em>'.
+	 * @see org.soluvas.security.DomainPermission#getDomainRoles()
+	 * @see #getDomainPermission()
+	 * @generated
+	 */
+	EAttribute getDomainPermission_DomainRoles();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.security.DomainPermission#getActions <em>Actions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Actions</em>'.
+	 * @see org.soluvas.security.DomainPermission#getActions()
+	 * @see #getDomainPermission()
+	 * @generated
+	 */
+	EAttribute getDomainPermission_Actions();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.security.AssignMode <em>Assign Mode</em>}'.
@@ -800,14 +929,14 @@ public interface SecurityPackage extends EPackage {
 		EAttribute ROLE__ASSIGN_MODE = eINSTANCE.getRole_AssignMode();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.security.impl.InstanceRoleImpl <em>Instance Role</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.security.impl.DomainRoleImpl <em>Domain Role</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.security.impl.InstanceRoleImpl
-		 * @see org.soluvas.security.impl.SecurityPackageImpl#getInstanceRole()
+		 * @see org.soluvas.security.impl.DomainRoleImpl
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getDomainRole()
 		 * @generated
 		 */
-		EClass INSTANCE_ROLE = eINSTANCE.getInstanceRole();
+		EClass DOMAIN_ROLE = eINSTANCE.getDomainRole();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -815,7 +944,7 @@ public interface SecurityPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute INSTANCE_ROLE__NAME = eINSTANCE.getInstanceRole_Name();
+		EAttribute DOMAIN_ROLE__NAME = eINSTANCE.getDomainRole_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -823,7 +952,15 @@ public interface SecurityPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute INSTANCE_ROLE__DESCRIPTION = eINSTANCE.getInstanceRole_Description();
+		EAttribute DOMAIN_ROLE__DESCRIPTION = eINSTANCE.getDomainRole_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Domain</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOMAIN_ROLE__DOMAIN = eINSTANCE.getDomainRole_Domain();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.security.impl.DomainImpl <em>Domain</em>}' class.
@@ -944,6 +1081,14 @@ public interface SecurityPackage extends EPackage {
 		EReference SECURITY_CATALOG__PERMISSIONS = eINSTANCE.getSecurityCatalog_Permissions();
 
 		/**
+		 * The meta object literal for the '<em><b>Domain Permissions</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SECURITY_CATALOG__DOMAIN_PERMISSIONS = eINSTANCE.getSecurityCatalog_DomainPermissions();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.security.impl.PermissionImpl <em>Permission</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -984,6 +1129,40 @@ public interface SecurityPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERMISSION__INSTANCE_PERMISSION = eINSTANCE.getPermission_InstancePermission();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.security.impl.DomainPermissionImpl <em>Domain Permission</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.security.impl.DomainPermissionImpl
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getDomainPermission()
+		 * @generated
+		 */
+		EClass DOMAIN_PERMISSION = eINSTANCE.getDomainPermission();
+
+		/**
+		 * The meta object literal for the '<em><b>Domain</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOMAIN_PERMISSION__DOMAIN = eINSTANCE.getDomainPermission_Domain();
+
+		/**
+		 * The meta object literal for the '<em><b>Domain Roles</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOMAIN_PERMISSION__DOMAIN_ROLES = eINSTANCE.getDomainPermission_DomainRoles();
+
+		/**
+		 * The meta object literal for the '<em><b>Actions</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOMAIN_PERMISSION__ACTIONS = eINSTANCE.getDomainPermission_Actions();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.security.AssignMode <em>Assign Mode</em>}' enum.

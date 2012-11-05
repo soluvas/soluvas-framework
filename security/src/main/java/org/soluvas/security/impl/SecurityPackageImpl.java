@@ -12,7 +12,8 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.security.Action;
 import org.soluvas.security.AssignMode;
 import org.soluvas.security.Domain;
-import org.soluvas.security.InstanceRole;
+import org.soluvas.security.DomainPermission;
+import org.soluvas.security.DomainRole;
 import org.soluvas.security.Permission;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityCatalog;
@@ -38,7 +39,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass instanceRoleEClass = null;
+	private EClass domainRoleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -67,6 +68,13 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * @generated
 	 */
 	private EClass permissionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass domainPermissionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -184,9 +192,8 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EClass getInstanceRole() {
-		return instanceRoleEClass;
+	public EClass getDomainRole() {
+		return domainRoleEClass;
 	}
 
 	/**
@@ -194,9 +201,8 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getInstanceRole_Name() {
-		return (EAttribute)instanceRoleEClass.getEStructuralFeatures().get(0);
+	public EAttribute getDomainRole_Name() {
+		return (EAttribute)domainRoleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -204,9 +210,17 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getInstanceRole_Description() {
-		return (EAttribute)instanceRoleEClass.getEStructuralFeatures().get(1);
+	public EAttribute getDomainRole_Description() {
+		return (EAttribute)domainRoleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDomainRole_Domain() {
+		return (EAttribute)domainRoleEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -354,6 +368,15 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getSecurityCatalog_DomainPermissions() {
+		return (EReference)securityCatalogEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getPermission() {
 		return permissionEClass;
@@ -404,6 +427,42 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDomainPermission() {
+		return domainPermissionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDomainPermission_Domain() {
+		return (EAttribute)domainPermissionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDomainPermission_DomainRoles() {
+		return (EAttribute)domainPermissionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDomainPermission_Actions() {
+		return (EAttribute)domainPermissionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getAssignMode() {
 		return assignModeEEnum;
@@ -443,9 +502,10 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		createEAttribute(roleEClass, ROLE__DESCRIPTION);
 		createEAttribute(roleEClass, ROLE__ASSIGN_MODE);
 
-		instanceRoleEClass = createEClass(INSTANCE_ROLE);
-		createEAttribute(instanceRoleEClass, INSTANCE_ROLE__NAME);
-		createEAttribute(instanceRoleEClass, INSTANCE_ROLE__DESCRIPTION);
+		domainRoleEClass = createEClass(DOMAIN_ROLE);
+		createEAttribute(domainRoleEClass, DOMAIN_ROLE__NAME);
+		createEAttribute(domainRoleEClass, DOMAIN_ROLE__DESCRIPTION);
+		createEAttribute(domainRoleEClass, DOMAIN_ROLE__DOMAIN);
 
 		domainEClass = createEClass(DOMAIN);
 		createEAttribute(domainEClass, DOMAIN__NAME);
@@ -463,12 +523,18 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		createEReference(securityCatalogEClass, SECURITY_CATALOG__DOMAINS);
 		createEReference(securityCatalogEClass, SECURITY_CATALOG__ACTIONS);
 		createEReference(securityCatalogEClass, SECURITY_CATALOG__PERMISSIONS);
+		createEReference(securityCatalogEClass, SECURITY_CATALOG__DOMAIN_PERMISSIONS);
 
 		permissionEClass = createEClass(PERMISSION);
 		createEAttribute(permissionEClass, PERMISSION__ROLES);
 		createEAttribute(permissionEClass, PERMISSION__DOMAIN_PERMISSION);
 		createEAttribute(permissionEClass, PERMISSION__ACTION_PERMISSION);
 		createEAttribute(permissionEClass, PERMISSION__INSTANCE_PERMISSION);
+
+		domainPermissionEClass = createEClass(DOMAIN_PERMISSION);
+		createEAttribute(domainPermissionEClass, DOMAIN_PERMISSION__DOMAIN);
+		createEAttribute(domainPermissionEClass, DOMAIN_PERMISSION__DOMAIN_ROLES);
+		createEAttribute(domainPermissionEClass, DOMAIN_PERMISSION__ACTIONS);
 
 		// Create enums
 		assignModeEEnum = createEEnum(ASSIGN_MODE);
@@ -506,7 +572,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 
 		// Add supertypes to classes
 		roleEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
-		instanceRoleEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		domainRoleEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 		domainEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 		actionEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 		permissionEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
@@ -517,9 +583,10 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEAttribute(getRole_Description(), ecorePackage.getEString(), "description", null, 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRole_AssignMode(), this.getAssignMode(), "assignMode", "manual", 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(instanceRoleEClass, InstanceRole.class, "InstanceRole", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getInstanceRole_Name(), ecorePackage.getEString(), "name", null, 1, 1, InstanceRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getInstanceRole_Description(), ecorePackage.getEString(), "description", null, 0, 1, InstanceRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(domainRoleEClass, DomainRole.class, "DomainRole", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDomainRole_Name(), ecorePackage.getEString(), "name", null, 1, 1, DomainRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainRole_Description(), ecorePackage.getEString(), "description", null, 0, 1, DomainRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainRole_Domain(), ecorePackage.getEString(), "domain", null, 1, 1, DomainRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainEClass, Domain.class, "Domain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomain_Name(), ecorePackage.getEString(), "name", null, 1, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -533,10 +600,11 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 
 		initEClass(securityCatalogEClass, SecurityCatalog.class, "SecurityCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSecurityCatalog_Roles(), this.getRole(), null, "roles", null, 0, -1, SecurityCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSecurityCatalog_InstanceRoles(), this.getInstanceRole(), null, "instanceRoles", null, 0, -1, SecurityCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSecurityCatalog_InstanceRoles(), this.getDomainRole(), null, "instanceRoles", null, 0, -1, SecurityCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSecurityCatalog_Domains(), this.getDomain(), null, "domains", null, 0, -1, SecurityCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSecurityCatalog_Actions(), this.getAction(), null, "actions", null, 0, -1, SecurityCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSecurityCatalog_Permissions(), this.getPermission(), null, "permissions", null, 0, -1, SecurityCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSecurityCatalog_DomainPermissions(), this.getDomainPermission(), null, "domainPermissions", null, 0, 1, SecurityCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(permissionEClass, Permission.class, "Permission", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPermission_Roles(), ecorePackage.getEString(), "roles", null, 0, -1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -545,6 +613,11 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEAttribute(getPermission_InstancePermission(), ecorePackage.getEString(), "instancePermission", null, 1, -1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(permissionEClass, ecorePackage.getEString(), "toStringPermission", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(domainPermissionEClass, DomainPermission.class, "DomainPermission", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDomainPermission_Domain(), ecorePackage.getEString(), "domain", null, 1, 1, DomainPermission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainPermission_DomainRoles(), ecorePackage.getEString(), "domainRoles", null, 1, -1, DomainPermission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainPermission_Actions(), ecorePackage.getEString(), "actions", null, 1, -1, DomainPermission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(assignModeEEnum, AssignMode.class, "AssignMode");
@@ -581,16 +654,22 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 			 "documentation", "Name of role, e.g. \"admin\", \"sysadmin\", \"manager\", \"sales\", in lower_underscore format.\n\nThis corresponds directly to entries in ou=groups in LDAP."
 		   });		
 		addAnnotation
-		  (instanceRoleEClass, 
+		  (domainRoleEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Can be assigned to a person (security subject) in relation to a domain instance, e.g. \"manager\" of \"zibalabel\" \"shop\".\n\nmanager : instance role.\nzibalabel : instance.\nshop : domain.\n"
 		   });		
 		addAnnotation
-		  (getInstanceRole_Name(), 
+		  (getDomainRole_Name(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name of instance role, e.g. \"admin\", \"sysadmin\", \"manager\", \"sales\", in lower_underscore format.\n\nThis corresponds directly to entries in ou=groups in LDAP."
+		   });		
+		addAnnotation
+		  (getDomainRole_Domain(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Domain where this role applies to."
 		   });		
 		addAnnotation
 		  (getDomain_Name(), 
@@ -693,6 +772,24 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		   source, 
 		   new String[] {
 			 "documentation", "This role is given to all remembered or authenticated users."
+		   });		
+		addAnnotation
+		  (domainPermissionEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Permission for arbitrary instance of a single domain.\n\nTo express \"manager of shop X can edit shop X\" :\ndomain: shop\ninstanceRole: manager\naction: edit,delete\n\nMore complex use cases are not possible, and need a different and much more complex DSL, such as...\n\nTo express \"moderator of shop X can edit+delete comment * to shop X\"\ndomain: shop\ninstanceRole: moderator\naction: edit,delete\ntargetDomain: comment\ntargetInstance: *\n\nTo express \"wink_moderator of zibalabel can edit+delete wink * of product * for zibalabel\"\n\nTo express \"creator of comment X can edit+delete comment X for *\":\ninstanceRole: creator\ndomain: comment\naction: edit,delete\n\n"
+		   });		
+		addAnnotation
+		  (getDomainPermission_Domain(), 
+		   source, 
+		   new String[] {
+			 "documentation", "A simple (non-composite) domain this permission refers to.\n\nA composite domain example is \"comment-shop\" or \"wink-product-person\".\n"
+		   });		
+		addAnnotation
+		  (getDomainPermission_Actions(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Action permissions given to subjects having the specified domain roles of a particular domain."
 		   });
 	}
 

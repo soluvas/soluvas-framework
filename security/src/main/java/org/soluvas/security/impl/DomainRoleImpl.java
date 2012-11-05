@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.soluvas.commons.ResourceType;
-import org.soluvas.security.InstanceRole;
+import org.soluvas.security.DomainRole;
 import org.soluvas.security.SecurityPackage;
 
 /**
@@ -17,16 +17,17 @@ import org.soluvas.security.SecurityPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.soluvas.security.impl.InstanceRoleImpl#getResourceUri <em>Resource Uri</em>}</li>
- *   <li>{@link org.soluvas.security.impl.InstanceRoleImpl#getResourceType <em>Resource Type</em>}</li>
- *   <li>{@link org.soluvas.security.impl.InstanceRoleImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.soluvas.security.impl.InstanceRoleImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.DomainRoleImpl#getResourceUri <em>Resource Uri</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.DomainRoleImpl#getResourceType <em>Resource Type</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.DomainRoleImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.DomainRoleImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.DomainRoleImpl#getDomain <em>Domain</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class InstanceRoleImpl extends EObjectImpl implements InstanceRole {
+public class DomainRoleImpl extends EObjectImpl implements DomainRole {
 	/**
 	 * The default value of the '{@link #getResourceUri() <em>Resource Uri</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -108,11 +109,31 @@ public class InstanceRoleImpl extends EObjectImpl implements InstanceRole {
 	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getDomain() <em>Domain</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomain()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DOMAIN_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDomain() <em>Domain</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomain()
+	 * @generated
+	 * @ordered
+	 */
+	protected String domain = DOMAIN_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InstanceRoleImpl() {
+	public DomainRoleImpl() {
 		super();
 	}
 
@@ -123,7 +144,7 @@ public class InstanceRoleImpl extends EObjectImpl implements InstanceRole {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SecurityPackage.Literals.INSTANCE_ROLE;
+		return SecurityPackage.Literals.DOMAIN_ROLE;
 	}
 
 	/**
@@ -146,7 +167,7 @@ public class InstanceRoleImpl extends EObjectImpl implements InstanceRole {
 		String oldResourceUri = resourceUri;
 		resourceUri = newResourceUri;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.INSTANCE_ROLE__RESOURCE_URI, oldResourceUri, resourceUri));
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.DOMAIN_ROLE__RESOURCE_URI, oldResourceUri, resourceUri));
 	}
 
 	/**
@@ -169,7 +190,7 @@ public class InstanceRoleImpl extends EObjectImpl implements InstanceRole {
 		ResourceType oldResourceType = resourceType;
 		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.INSTANCE_ROLE__RESOURCE_TYPE, oldResourceType, resourceType));
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.DOMAIN_ROLE__RESOURCE_TYPE, oldResourceType, resourceType));
 	}
 
 	/**
@@ -192,7 +213,7 @@ public class InstanceRoleImpl extends EObjectImpl implements InstanceRole {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.INSTANCE_ROLE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.DOMAIN_ROLE__NAME, oldName, name));
 	}
 
 	/**
@@ -215,7 +236,28 @@ public class InstanceRoleImpl extends EObjectImpl implements InstanceRole {
 		String oldDescription = description;
 		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.INSTANCE_ROLE__DESCRIPTION, oldDescription, description));
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.DOMAIN_ROLE__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDomain() {
+		return domain;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDomain(String newDomain) {
+		String oldDomain = domain;
+		domain = newDomain;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.DOMAIN_ROLE__DOMAIN, oldDomain, domain));
 	}
 
 	/**
@@ -226,14 +268,16 @@ public class InstanceRoleImpl extends EObjectImpl implements InstanceRole {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SecurityPackage.INSTANCE_ROLE__RESOURCE_URI:
+			case SecurityPackage.DOMAIN_ROLE__RESOURCE_URI:
 				return getResourceUri();
-			case SecurityPackage.INSTANCE_ROLE__RESOURCE_TYPE:
+			case SecurityPackage.DOMAIN_ROLE__RESOURCE_TYPE:
 				return getResourceType();
-			case SecurityPackage.INSTANCE_ROLE__NAME:
+			case SecurityPackage.DOMAIN_ROLE__NAME:
 				return getName();
-			case SecurityPackage.INSTANCE_ROLE__DESCRIPTION:
+			case SecurityPackage.DOMAIN_ROLE__DESCRIPTION:
 				return getDescription();
+			case SecurityPackage.DOMAIN_ROLE__DOMAIN:
+				return getDomain();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -246,17 +290,20 @@ public class InstanceRoleImpl extends EObjectImpl implements InstanceRole {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SecurityPackage.INSTANCE_ROLE__RESOURCE_URI:
+			case SecurityPackage.DOMAIN_ROLE__RESOURCE_URI:
 				setResourceUri((String)newValue);
 				return;
-			case SecurityPackage.INSTANCE_ROLE__RESOURCE_TYPE:
+			case SecurityPackage.DOMAIN_ROLE__RESOURCE_TYPE:
 				setResourceType((ResourceType)newValue);
 				return;
-			case SecurityPackage.INSTANCE_ROLE__NAME:
+			case SecurityPackage.DOMAIN_ROLE__NAME:
 				setName((String)newValue);
 				return;
-			case SecurityPackage.INSTANCE_ROLE__DESCRIPTION:
+			case SecurityPackage.DOMAIN_ROLE__DESCRIPTION:
 				setDescription((String)newValue);
+				return;
+			case SecurityPackage.DOMAIN_ROLE__DOMAIN:
+				setDomain((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -270,17 +317,20 @@ public class InstanceRoleImpl extends EObjectImpl implements InstanceRole {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SecurityPackage.INSTANCE_ROLE__RESOURCE_URI:
+			case SecurityPackage.DOMAIN_ROLE__RESOURCE_URI:
 				setResourceUri(RESOURCE_URI_EDEFAULT);
 				return;
-			case SecurityPackage.INSTANCE_ROLE__RESOURCE_TYPE:
+			case SecurityPackage.DOMAIN_ROLE__RESOURCE_TYPE:
 				setResourceType(RESOURCE_TYPE_EDEFAULT);
 				return;
-			case SecurityPackage.INSTANCE_ROLE__NAME:
+			case SecurityPackage.DOMAIN_ROLE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case SecurityPackage.INSTANCE_ROLE__DESCRIPTION:
+			case SecurityPackage.DOMAIN_ROLE__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
+				return;
+			case SecurityPackage.DOMAIN_ROLE__DOMAIN:
+				setDomain(DOMAIN_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -294,14 +344,16 @@ public class InstanceRoleImpl extends EObjectImpl implements InstanceRole {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SecurityPackage.INSTANCE_ROLE__RESOURCE_URI:
+			case SecurityPackage.DOMAIN_ROLE__RESOURCE_URI:
 				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
-			case SecurityPackage.INSTANCE_ROLE__RESOURCE_TYPE:
+			case SecurityPackage.DOMAIN_ROLE__RESOURCE_TYPE:
 				return resourceType != RESOURCE_TYPE_EDEFAULT;
-			case SecurityPackage.INSTANCE_ROLE__NAME:
+			case SecurityPackage.DOMAIN_ROLE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case SecurityPackage.INSTANCE_ROLE__DESCRIPTION:
+			case SecurityPackage.DOMAIN_ROLE__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case SecurityPackage.DOMAIN_ROLE__DOMAIN:
+				return DOMAIN_EDEFAULT == null ? domain != null : !DOMAIN_EDEFAULT.equals(domain);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -324,8 +376,10 @@ public class InstanceRoleImpl extends EObjectImpl implements InstanceRole {
 		result.append(name);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", domain: ");
+		result.append(domain);
 		result.append(')');
 		return result.toString();
 	}
 
-} //InstanceRoleImpl
+} //DomainRoleImpl

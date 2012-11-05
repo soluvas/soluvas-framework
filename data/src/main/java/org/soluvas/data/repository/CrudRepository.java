@@ -16,17 +16,35 @@
 package org.soluvas.data.repository;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.annotation.Nonnull;
+
+import org.soluvas.data.EntityLookup;
 
 /**
  * Interface for generic CRUD operations on a repository for a specific type.
  * 
+ * The difference to Spring Data 1.4 are:
+ * <ol>
+ * 	<li>@{@link Nonnull} annotations</li>
+ *  <li>CrudRepository{@link #isEmpty()}</li>
+ *  <li>Supports bulk delete by IDs: {@link CrudRepository#deleteIds(Iterable)}.</li>
+ *  <li>Extends {@link BasicRepository}</li>
+ *  <li>find methods return {@link Collection} instead of {@link Iterable}. Reason
+ *  	is find methods are not supposed to return large results anyway. For that
+ *  	you need batching or paging. The ability to call {@link Collection#size()}
+ *  	outweights the {@link Iterable} benefits.</li>
+ *  <li>EntityLookup{@link #findOne(Serializable)} returns subclass of T.
+ *  <li>delete methods return number of changed entities</li>
+ * </ol>
+ * 
  * @author Oliver Gierke
  * @author Eberhard Wolff
+ * @author Hendy Irawan
  */
 //@NoRepositoryBean
-public interface CrudRepository<T, ID extends Serializable> extends Repository<T, ID> {
+public interface CrudRepository<T, ID extends Serializable> extends Repository<T, ID>, BasicRepository, EntityLookup<T, ID> {
 
 	/**
 	 * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
@@ -44,16 +62,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return the saved entities
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
-	<S extends T> Iterable<S> save(@Nonnull final Iterable<S> entities);
-
-	/**
-	 * Retrives an entity by its id.
-	 * 
-	 * @param id must not be {@literal null}.
-	 * @return the entity with the given id or {@literal null} if none found
-	 * @throws IllegalArgumentException if {@code id} is {@literal null}
-	 */
-	T findOne(ID id);
+	<S extends T> Collection<S> save(@Nonnull final Iterable<S> entities);
 
 	/**
 	 * Returns whether an entity with the given id exists.
@@ -65,53 +74,80 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	boolean exists(@Nonnull final ID id);
 
 	/**
+	 * Returns whether all entities with the given ids exists.
+	 * 
+	 * @param ids must not be {@literal null}.
+	 * @return true if an entity with the given id exists, alse otherwise
+	 * @throws IllegalArgumentException if {@code id} is {@literal null}
+	 */
+	boolean existsAll(@Nonnull final Iterable<ID> ids);
+
+	/**
+	 * Returns whether any entity with one of the given ids exists.
+	 * 
+	 * @param ids must not be {@literal null}.
+	 * @return true if an entity with the given id exists, alse otherwise
+	 * @throws IllegalArgumentException if {@code id} is {@literal null}
+	 */
+	boolean existsAny(@Nonnull final Iterable<ID> ids);
+
+	/**
 	 * Returns all instances of the type.
 	 * 
 	 * @return all entities
 	 */
-	Iterable<T> findAll();
+	Collection<T> findAll();
 
 	/**
 	 * Returns all instances of the type with the given IDs.
+	 * Not found instances are skipped, but should be logged.
 	 * 
 	 * @param ids
 	 * @return
 	 */
-	Iterable<T> findAll(Iterable<ID> ids);
+	Collection<T> findAll(Iterable<ID> ids);
 
-	/**
-	 * Returns the number of entities available.
+    /**
+	 * Returns the number of entities matching the given ids.
 	 * 
-	 * @return the number of entities
+	 * @return the number of entities, the maximum number of returned
+	 * is always the size of ids parameter.
 	 */
-	long count();
+	long count(@Nonnull Iterable<ID> ids);
 
 	/**
 	 * Deletes the entity with the given id.
 	 * 
 	 * @param id must not be {@literal null}.
+	 * @return TODO
 	 * @throws IllegalArgumentException in case the given {@code id} is {@literal null}
 	 */
-	void delete(@Nonnull final ID id);
+	boolean delete(@Nonnull final ID id);
 
 	/**
 	 * Deletes a given entity.
 	 * 
 	 * @param entity
+	 * @return TODO
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
-	void delete(@Nonnull final T entity);
+	boolean delete(@Nonnull final T entity);
 
 	/**
 	 * Deletes the given entities.
 	 * 
 	 * @param entities
+	 * @return TODO
 	 * @throws IllegalArgumentException in case the given {@link Iterable} is (@literal null}.
 	 */
-	void delete(@Nonnull final Iterable<? extends T> entities);
+	long delete(@Nonnull final Iterable<? extends T> entities);
 
 	/**
-	 * Deletes all entities managed by the repository.
+	 * This is usually (but not always) more efficient than calling
+	 * {@link CrudRepository#delete(Serializable)} multiple times.
+	 * @param ids
+	 * @return TODO
 	 */
-	void deleteAll();
+	long deleteIds(Iterable<ID> ids);
+
 }

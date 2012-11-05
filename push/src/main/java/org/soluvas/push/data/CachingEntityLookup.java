@@ -1,5 +1,6 @@
 package org.soluvas.push.data;
 
+import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
 import org.slf4j.Logger;
@@ -15,14 +16,14 @@ import com.google.common.cache.LoadingCache;
  * A entity lookup function with a built-in Guava powered {@link Cache}.
  * @author ceefour
  */
-public class CachingEntityLookup<ID, T> implements Function<ID, T> {
+public class CachingEntityLookup<ID extends Serializable, T> implements Function<ID, T> {
 
 	private transient Logger log = LoggerFactory
 			.getLogger(CachingEntityLookup.class);
-	private SyncRepository<ID, T> repository;
-	private LoadingCache<ID,T> cache;
+	private SyncRepository<T, ID> repository;
+	private LoadingCache<ID, T> cache;
 	
-	public CachingEntityLookup(final SyncRepository<ID, T> repository) {
+	public CachingEntityLookup(final SyncRepository<T, ID> repository) {
 		super();
 		this.repository = repository;
 		cache = CacheBuilder.newBuilder().build(new CacheLoader<ID, T>() {
@@ -34,6 +35,7 @@ public class CachingEntityLookup<ID, T> implements Function<ID, T> {
 		});
 	}
 
+	@Override
 	public T apply(ID id) {
 		try {
 			return cache.get(id);

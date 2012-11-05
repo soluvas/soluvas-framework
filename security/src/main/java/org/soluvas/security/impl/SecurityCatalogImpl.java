@@ -4,6 +4,7 @@ package org.soluvas.security.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -11,6 +12,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -18,7 +20,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.soluvas.security.Action;
 import org.soluvas.security.Domain;
-import org.soluvas.security.InstanceRole;
+import org.soluvas.security.DomainPermission;
+import org.soluvas.security.DomainRole;
 import org.soluvas.security.Permission;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityCatalog;
@@ -36,6 +39,7 @@ import org.soluvas.security.SecurityPackage;
  *   <li>{@link org.soluvas.security.impl.SecurityCatalogImpl#getDomains <em>Domains</em>}</li>
  *   <li>{@link org.soluvas.security.impl.SecurityCatalogImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link org.soluvas.security.impl.SecurityCatalogImpl#getPermissions <em>Permissions</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.SecurityCatalogImpl#getDomainPermissions <em>Domain Permissions</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,7 +64,7 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<InstanceRole> instanceRoles;
+	protected EList<DomainRole> instanceRoles;
 
 	/**
 	 * The cached value of the '{@link #getDomains() <em>Domains</em>}' containment reference list.
@@ -91,6 +95,16 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 	 * @ordered
 	 */
 	protected EList<Permission> permissions;
+
+	/**
+	 * The cached value of the '{@link #getDomainPermissions() <em>Domain Permissions</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainPermissions()
+	 * @generated
+	 * @ordered
+	 */
+	protected DomainPermission domainPermissions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -128,9 +142,9 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<InstanceRole> getInstanceRoles() {
+	public EList<DomainRole> getInstanceRoles() {
 		if (instanceRoles == null) {
-			instanceRoles = new EObjectContainmentEList<InstanceRole>(InstanceRole.class, this, SecurityPackage.SECURITY_CATALOG__INSTANCE_ROLES);
+			instanceRoles = new EObjectContainmentEList<DomainRole>(DomainRole.class, this, SecurityPackage.SECURITY_CATALOG__INSTANCE_ROLES);
 		}
 		return instanceRoles;
 	}
@@ -176,6 +190,44 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public DomainPermission getDomainPermissions() {
+		if (domainPermissions != null && domainPermissions.eIsProxy()) {
+			InternalEObject oldDomainPermissions = (InternalEObject)domainPermissions;
+			domainPermissions = (DomainPermission)eResolveProxy(oldDomainPermissions);
+			if (domainPermissions != oldDomainPermissions) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SecurityPackage.SECURITY_CATALOG__DOMAIN_PERMISSIONS, oldDomainPermissions, domainPermissions));
+			}
+		}
+		return domainPermissions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DomainPermission basicGetDomainPermissions() {
+		return domainPermissions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDomainPermissions(DomainPermission newDomainPermissions) {
+		DomainPermission oldDomainPermissions = domainPermissions;
+		domainPermissions = newDomainPermissions;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.SECURITY_CATALOG__DOMAIN_PERMISSIONS, oldDomainPermissions, domainPermissions));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -211,6 +263,9 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 				return getActions();
 			case SecurityPackage.SECURITY_CATALOG__PERMISSIONS:
 				return getPermissions();
+			case SecurityPackage.SECURITY_CATALOG__DOMAIN_PERMISSIONS:
+				if (resolve) return getDomainPermissions();
+				return basicGetDomainPermissions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -230,7 +285,7 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 				return;
 			case SecurityPackage.SECURITY_CATALOG__INSTANCE_ROLES:
 				getInstanceRoles().clear();
-				getInstanceRoles().addAll((Collection<? extends InstanceRole>)newValue);
+				getInstanceRoles().addAll((Collection<? extends DomainRole>)newValue);
 				return;
 			case SecurityPackage.SECURITY_CATALOG__DOMAINS:
 				getDomains().clear();
@@ -243,6 +298,9 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 			case SecurityPackage.SECURITY_CATALOG__PERMISSIONS:
 				getPermissions().clear();
 				getPermissions().addAll((Collection<? extends Permission>)newValue);
+				return;
+			case SecurityPackage.SECURITY_CATALOG__DOMAIN_PERMISSIONS:
+				setDomainPermissions((DomainPermission)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -271,6 +329,9 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 			case SecurityPackage.SECURITY_CATALOG__PERMISSIONS:
 				getPermissions().clear();
 				return;
+			case SecurityPackage.SECURITY_CATALOG__DOMAIN_PERMISSIONS:
+				setDomainPermissions((DomainPermission)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -293,6 +354,8 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 				return actions != null && !actions.isEmpty();
 			case SecurityPackage.SECURITY_CATALOG__PERMISSIONS:
 				return permissions != null && !permissions.isEmpty();
+			case SecurityPackage.SECURITY_CATALOG__DOMAIN_PERMISSIONS:
+				return domainPermissions != null;
 		}
 		return super.eIsSet(featureID);
 	}

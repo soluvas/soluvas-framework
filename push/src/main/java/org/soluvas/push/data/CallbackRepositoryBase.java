@@ -1,5 +1,6 @@
 package org.soluvas.push.data;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.soluvas.async.FailingCallback;
@@ -8,8 +9,8 @@ import org.soluvas.async.FailingCallback;
  * Throws {@link UnsupportedOperationException} for all methods.
  * @author ceefour
  */
-public class CallbackRepositoryBase<ID, T> implements
-		CallbackRepository<ID, T> {
+public class CallbackRepositoryBase<T, ID extends Serializable> implements
+		CallbackRepository<T, ID> {
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.push.data.CallbackRepository#add(java.lang.Object, org.soluvas.async.FailingCallback)

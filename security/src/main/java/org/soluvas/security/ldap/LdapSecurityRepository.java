@@ -9,26 +9,23 @@ import javax.annotation.Nullable;
 import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
-import org.apache.directory.shared.ldap.model.entry.Attribute;
 import org.apache.directory.shared.ldap.model.entry.DefaultModification;
-import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.entry.Modification;
 import org.apache.directory.shared.ldap.model.entry.ModificationOperation;
-import org.apache.directory.shared.ldap.model.entry.Value;
 import org.apache.directory.shared.ldap.model.exception.LdapInvalidDnException;
-import org.apache.directory.shared.ldap.model.message.SearchScope;
 import org.apache.directory.shared.ldap.model.name.Dn;
 import org.apache.directory.shared.ldap.model.name.Rdn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.data.repository.BulkCrudRepository;
+import org.soluvas.data.repository.AssocRepository;
+import org.soluvas.data.repository.CrudRepository;
+import org.soluvas.ldap.LdapRolePersonAssoc;
 import org.soluvas.ldap.LdapUtils;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityRepository;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Iterables;
 
 /**
@@ -59,6 +56,7 @@ public class LdapSecurityRepository implements SecurityRepository {
 	final String groupsRdn = "ou=groups";
 	private final LdapConnectionConfig bindConfig;
 	private final LdapRoleRepository roleRepository;
+	private final AssocRepository<String, String> rolePersonAssoc;
 	
 	/**
 	 * 
@@ -74,6 +72,25 @@ public class LdapSecurityRepository implements SecurityRepository {
 		this.domainBase = domainBase;
 		this.bindConfig = bindConfig;
 		this.roleRepository = new LdapRoleRepository(ldapPool, domainBase);
+		this.rolePersonAssoc = new LdapRolePersonAssoc(ldapPool, domainBase);
+	}
+
+	/**
+	 * 
+	 * @param ldapPool
+	 * @param domainBase
+	 * @param bindConfig
+	 *            LDAP configuration used to perform bind-based authentication.
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public LdapSecurityRepository(final ObjectPool<LdapConnection> ldapPool,
+			String domainBase, LdapConnectionConfig bindConfig, AssocRepository rolePersonAssoc) {
+		super();
+		this.ldapPool = ldapPool;
+		this.domainBase = domainBase;
+		this.bindConfig = bindConfig;
+		this.roleRepository = new LdapRoleRepository(ldapPool, domainBase);
+		this.rolePersonAssoc = rolePersonAssoc;
 	}
 
 	/* (non-Javadoc)
@@ -81,43 +98,7 @@ public class LdapSecurityRepository implements SecurityRepository {
 	 */
 	@Override
 	public Set<String> getPersonRoles(final String personId) {
-		Set<String> ldapRoles = LdapUtils.withConnection(ldapPool,
-				new Function<LdapConnection, Set<String>>() {
-			@Override @Nullable
-			public Set<String> apply(@Nullable LdapConnection ldap) {
-				try {
-					final Dn userDn = new Dn(new Rdn("uid", personId),
-							new Dn(usersRdn, domainBase));
-					final Dn groupsDn = new Dn(groupsRdn, domainBase);
-					final String memberFilter = "(uniqueMember="
-							+ userDn.getName() + ")";
-					log.debug("Searching for {} in {}", memberFilter,
-							groupsDn.getName());
-					Set<String> roles = LdapUtils.transformSet(ldap
-							.search(groupsDn, memberFilter,
-									SearchScope.ONELEVEL),
-							new Function<Entry, String>() {
-								@Override
-								@Nullable
-								public String apply(
-										@Nullable Entry input) {
-									return input.getDn().getRdn()
-											.getValue().getString();
-								}
-							});
-					log.debug("User {} has {} roles: {}", personId,
-							roles.size(), roles);
-					return roles;
-				} catch (Exception e) {
-					log.error("Cannot get authorization info for "
-							+ personId, e);
-					throw new RuntimeException(
-							"Cannot get authorization info for "
-									+ personId, e);
-				}
-			}
-		});
-		return ldapRoles;
+		return ImmutableSet.copyOf(rolePersonAssoc.getRight(personId));
 	}
 	
 	/* (non-Javadoc)
@@ -125,51 +106,7 @@ public class LdapSecurityRepository implements SecurityRepository {
 	 */
 	@Override
 	public Set<String> getRoleMembers(final String role) {
-		Set<String> members = LdapUtils.withConnection(ldapPool,
-				new Function<LdapConnection, Set<String>>() {
-			@Override @Nullable
-			public Set<String> apply(@Nullable LdapConnection ldap) {
-				try {
-					final Dn groupDn = new Dn(new Rdn("cn", role),
-							new Dn(groupsRdn, domainBase));
-					final Dn usersDn = new Dn(usersRdn, domainBase);
-					Entry groupEntry = ldap.lookup(groupDn);
-					if (groupEntry == null) {
-						log.warn("Cannot get members of role {}, entry {} does not exist",
-								role, groupDn.getName());
-						return ImmutableSet.of();
-					}
-					Attribute uniqueMemberAttr = groupEntry.get("uniqueMember");
-					if (uniqueMemberAttr != null) {
-						Builder<String> members = ImmutableSet.<String>builder();
-						for (Value<?> uniqueMember : uniqueMemberAttr) {
-							String memberStr = uniqueMember.getString();
-							Dn memberDn = new Dn(memberStr);
-							if (!memberDn.isDescendantOf(usersDn)) {
-								log.warn("Skipping invalid uniqueMember {} from {}, expected a descendant of {}",
-										memberStr, groupDn.getName(), usersDn.getName());
-								continue;
-							}
-							if (!"uid".equals(memberDn.getRdn().getType())) {
-								log.warn("Skipping invalid uniqueMember {} from {}, expected 'uid' RDN, but got {}",
-										memberStr, groupDn.getName(), memberDn.getRdn().getType());
-								continue;
-							}
-							members.add(memberDn.getRdn().getValue().getString());
-						}
-						return members.build();
-					} else {
-						return ImmutableSet.of();
-					}
-				} catch (Exception e) {
-					log.error("Cannot get members for role " + role, e);
-					throw new RuntimeException(
-							"Cannot get members for " + role, e);
-				}
-			}
-		});
-		log.debug("Role {} has {} members: {}", role, members.size(), members);
-		return members;
+		return ImmutableSet.copyOf(rolePersonAssoc.getLeft(role));
 	}
 
 	/* (non-Javadoc)
@@ -267,7 +204,7 @@ public class LdapSecurityRepository implements SecurityRepository {
 
 	@Override
 	@Nonnull
-	public BulkCrudRepository<Role, String> getRoleRepository() {
+	public CrudRepository<Role, String> getRoleRepository() {
 		return roleRepository;
 	}
 

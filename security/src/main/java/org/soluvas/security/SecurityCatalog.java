@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.soluvas.security.SecurityCatalog#getDomains <em>Domains</em>}</li>
  *   <li>{@link org.soluvas.security.SecurityCatalog#getActions <em>Actions</em>}</li>
  *   <li>{@link org.soluvas.security.SecurityCatalog#getPermissions <em>Permissions</em>}</li>
+ *   <li>{@link org.soluvas.security.SecurityCatalog#getDomainPermissions <em>Domain Permissions</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,7 +50,7 @@ public interface SecurityCatalog extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Instance Roles</b></em>' containment reference list.
-	 * The list contents are of type {@link org.soluvas.security.InstanceRole}.
+	 * The list contents are of type {@link org.soluvas.security.DomainRole}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Instance Roles</em>' containment reference list isn't clear,
@@ -61,7 +62,7 @@ public interface SecurityCatalog extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<InstanceRole> getInstanceRoles();
+	EList<DomainRole> getInstanceRoles();
 
 	/**
 	 * Returns the value of the '<em><b>Domains</b></em>' containment reference list.
@@ -110,5 +111,31 @@ public interface SecurityCatalog extends EObject {
 	 * @generated
 	 */
 	EList<Permission> getPermissions();
+
+	/**
+	 * Returns the value of the '<em><b>Domain Permissions</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Domain Permissions</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Domain Permissions</em>' reference.
+	 * @see #setDomainPermissions(DomainPermission)
+	 * @see org.soluvas.security.SecurityPackage#getSecurityCatalog_DomainPermissions()
+	 * @model
+	 * @generated
+	 */
+	DomainPermission getDomainPermissions();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.security.SecurityCatalog#getDomainPermissions <em>Domain Permissions</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Domain Permissions</em>' reference.
+	 * @see #getDomainPermissions()
+	 * @generated
+	 */
+	void setDomainPermissions(DomainPermission value);
 
 } // SecurityCatalog
