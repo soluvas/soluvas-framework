@@ -1,0 +1,125 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+    xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0"
+    xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+    	http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
+    	http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0">
+    
+	<cm:property-placeholder persistent-id="berbatik" update-strategy="reload">
+		<cm:default-properties>
+			<!-- Tenant Info -->
+			<cm:property name="clientId"				value="berbatik" />
+			<cm:property name="tenantId"				value="berbatik" />
+			<cm:property name="tenantEnv"				value="dev" />
+			<!-- Auth -->
+			<cm:property name="mallLdapBaseDn"			value="dc=dev,dc=berbatik,dc=com" />
+		</cm:default-properties>
+	</cm:property-placeholder>
+	
+	<bean id="securityPackage" class="org.soluvas.security.impl.SecurityPackageImpl" factory-method="init" />
+	<bean id="aggregatingSecurityCatalogSupplier" class="org.soluvas.commons.AggregatingSupplier">
+		<argument>
+			<bean class="org.soluvas.security.impl.SecurityFactoryImpl" factory-method="init" />
+		</argument>
+		<argument>
+			<bean factory-ref="securityPackage" factory-method="getSecurityCatalog" />
+		</argument>
+		<argument>
+			<list />
+		</argument>
+	</bean>
+	<service ref="aggregatingSecurityCatalogSupplier" auto-export="interfaces">
+		<service-properties>
+			<entry key="clientId" value="${clientId}" />
+			<entry key="tenantEnv" value="${tenantEnv}" />
+			<entry key="tenantId" value="${tenantId}" />
+			<entry key="suppliedClass" value="org.soluvas.security.SecurityCatalog" />
+			<entry key="layer" value="application" />
+		</service-properties>
+	</service>
+	
+	<bean id="securityCatalogSupplierTracker" class="org.soluvas.commons.SupplierTracker">
+		<argument ref="blueprintBundleContext" />
+		<argument ref="aggregatingSecurityCatalogSupplier" />
+	</bean>
+	<bean class="org.osgi.util.tracker.ServiceTracker" init-method="open" destroy-method="close">
+		<argument ref="blueprintBundleContext" />
+		<argument>
+			<bean class="org.osgi.framework.FrameworkUtil" factory-method="createFilter">
+				<argument value="(&amp;(objectClass=com.google.common.base.Supplier)(suppliedClass=org.soluvas.security.SecurityCatalog)(tenantId=berbatik)(layer=module))" />
+			</bean>
+		</argument>
+		<argument ref="securityCatalogSupplierTracker" />
+	</bean>
+	
+	<bean id="securityCatalogXmiTracker" class="org.soluvas.commons.XmiTracker">
+		<argument ref="securityPackage" />
+		<argument value="org.soluvas.security.SecurityCatalog" />
+		<argument value="${tenantId}" />
+		<argument value="${tenantEnv}" />
+	</bean>
+	<bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close">
+		<argument ref="blueprintBundleContext" />
+		<argument value="32" />
+		<argument ref="securityCatalogXmiTracker" />
+	</bean>
+
+	<reference id="ldapPool" interface="org.apache.commons.pool.ObjectPool"
+		filter="(&amp;(tenantId=berbatik)(namespace=ldap))"/>
+	<reference id="ldapConfigSupplier" interface="com.google.common.base.Supplier"
+		filter="(&amp;(tenantId=berbatik)(suppliedClass=org.apache.directory.ldap.client.api.LdapConnectionConfig))" />
+
+	<bean id="rolePersonAssoc" class="org.soluvas.ldap.LdapRolePersonAssoc">
+		<argument ref="ldapPool" />
+		<argument value="${mallLdapBaseDn}" />
+	</bean>
+	<service ref="rolePersonAssoc" auto-export="interfaces">
+		<service-properties>
+			<entry key="clientId" value="${clientId}" />
+			<entry key="tenantId" value="${tenantId}" />
+			<entry key="tenantEnv" value="${tenantEnv}" />
+			<entry key="namespace" value="role-person" />
+		</service-properties>
+	</service>
+	<bean id="securityRepo" class="org.soluvas.security.ldap.LdapSecurityRepository">
+		<argument ref="ldapPool" />
+		<argument value="${mallLdapBaseDn}" />
+		<argument>
+			<bean factory-ref="ldapConfigSupplier" factory-method="get" />
+		</argument>
+		<argument ref="rolePersonAssoc" />
+	</bean>
+	<service ref="securityRepo" auto-export="interfaces">
+		<service-properties>
+			<entry key="clientId" value="${clientId}" />
+			<entry key="tenantId" value="${tenantId}" />
+			<entry key="tenantEnv" value="${tenantEnv}" />
+		</service-properties>
+	</service>
+	
+	<bean id="shiroRealm" class="org.soluvas.web.login.SoluvasRealm" init-method="init">
+		<argument ref="aggregatingSecurityCatalogSupplier" />
+		<argument ref="securityRepo" />
+	</bean>
+
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"
+		destroy-method="destroy">
+		<property name="realm" ref="shiroRealm" />
+	</bean>
+
+	<bean id="shiroFilterFactory" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+
+	<bean id="securityFilter" class="org.soluvas.web.login.DelegatingFilterFactory"
+		init-method="register" activation="eager">
+		<argument ref="blueprintBundleContext" />
+		<argument value="${tenantId}_${tenantEnv}" />				<!-- Wicket application name -->
+		<argument value="2" />							<!-- Priority -->
+		<property name="filter">
+			<bean factory-ref="shiroFilterFactory" factory-method="getObject" />
+		</property>
+	</bean>
+
+</blueprint>
