@@ -15,7 +15,7 @@
 	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
 		<!-- EventBus -->
 		<command name="eventbus/ls">
-			<action class="org.soluvas.eventbus.EventBusLsCommand">
+			<action class="org.soluvas.commons.shell.EventBusLsCommand">
 				<argument ref="subscriberSuppliers" />
 			</action>
 		</command>
