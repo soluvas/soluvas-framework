@@ -33,19 +33,19 @@ bc. <bean id="eventBus" class="com.google.common.eventbus.EventBus">
 
 Registering subscriber:
 
-bc. 	<service auto-export="interfaces">
-		<service-properties>
-			<entry key="type" value="eventbus"/>
-			<entry key="clientId" value="berbatik"/>
-			<entry key="tenantId" value="berbatik"/>
-			<entry key="tenantEnv" value="dev"/>
-		</service-properties>
-		<bean class="com.google.common.base.Suppliers" factory-method="ofInstance">
-			<argument>
-				<bean class="tmp.test.subscriber.TestSubscriber" />
-			</argument>
-		</bean>
-	</service>
+bc. <service auto-export="interfaces">
+	<service-properties>
+		<entry key="type" value="eventbus"/>
+		<entry key="clientId" value="berbatik"/>
+		<entry key="tenantId" value="berbatik"/>
+		<entry key="tenantEnv" value="dev"/>
+	</service-properties>
+	<bean class="com.google.common.base.Suppliers" factory-method="ofInstance">
+		<argument>
+			<bean class="tmp.test.subscriber.TestSubscriber" />
+		</argument>
+	</bean>
+</service>
 
 Consuming EventBus:
 
