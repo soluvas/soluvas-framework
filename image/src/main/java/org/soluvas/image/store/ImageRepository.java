@@ -79,6 +79,7 @@ public interface ImageRepository {
 	 * @return
 	 * @throws IOException
 	 */
+	@Deprecated
 	public abstract String create(String fileName, InputStream content,
 			String contentType, long length, String name) throws IOException;
 
@@ -194,5 +195,9 @@ public interface ImageRepository {
 	 * @param femaleDefaultPhotoID the femaleDefaultPhotoID to set
 	 */
 	public abstract void setFemaleDefaultPhotoID(String femaleDefaultPhotoID);
+
+	public abstract void updateUrisAll();
+
+	public abstract void updateImageUri(String[] imageId);
 
 }
