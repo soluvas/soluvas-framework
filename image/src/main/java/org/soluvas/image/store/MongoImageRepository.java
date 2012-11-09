@@ -18,6 +18,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -917,8 +918,12 @@ public class MongoImageRepository implements ImageRepository {
 	}
 
 	@Override
-	public void updateUrisAll() {
+	public void updateUriAll() {
 		final List<Image> images = findAll();
+		doUpdateUri(images);
+	}
+
+	protected void doUpdateUri(final Collection<Image> images) {
 		log.info("Updating {} {} image URIs", images.size(), namespace);
 		for (Image image : images) {
 			final URI newUri = getImagePublicUri(image.getId(), ORIGINAL_NAME);
@@ -939,27 +944,16 @@ public class MongoImageRepository implements ImageRepository {
 	}
 
 	@Override
-	public void updateImageUri(String[] arrImageId) {
-		for (String imageId : arrImageId){
-			Image image = findOne(imageId);
-			Preconditions.checkNotNull(image, "Cannot find %s image with imageId %s", namespace, imageId);
-			if (image.getId() != null) {
-				final URI newUri = getImagePublicUri(image.getId(), ORIGINAL_NAME);
-				log.debug("updating {} image {} to {}", namespace, image.getId(), newUri);
-				final BasicDBObject dbo = new BasicDBObject("uri", newUri.toString());
-				mongoColl.update(new BasicDBObject("_id", imageId), new BasicDBObject("$set", dbo));
-				
-				final Map<String, StyledImage> imageStyles = image.getStyles();
-				for (Entry<String, StyledImage> styleImage : imageStyles.entrySet()) {
-					final String styleName = styleImage.getKey();
-					final URI newStyleUri = getImagePublicUri(image.getId(), styleName);
-					final BasicDBObject updatedStyleUri = new BasicDBObject("styles."+ styleName +".uri", newStyleUri.toString());
-					log.debug("Updating {} image id {} to {} with style {}", namespace, image.getId(), newStyleUri, styleName);
-					mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", updatedStyleUri));
-				}
+	public void updateUri(Collection<String> imageIds) {
+		Collection<Image> images = Collections2.transform(imageIds, new Function<String, Image>() {
+			@Override @Nullable
+			public Image apply(@Nullable String imageId) {
+				final Image image = findOne(imageId);
+				Preconditions.checkNotNull(image, "Cannot find %s image with imageId %s", namespace, imageId);
+				return image;
 			}
-			
-		}
+		});
+		doUpdateUri(images);
 	}
 
 }

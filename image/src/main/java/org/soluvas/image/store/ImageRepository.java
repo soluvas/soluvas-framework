@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -196,8 +197,8 @@ public interface ImageRepository {
 	 */
 	public abstract void setFemaleDefaultPhotoID(String femaleDefaultPhotoID);
 
-	public abstract void updateUrisAll();
+	public abstract void updateUriAll();
 
-	public abstract void updateImageUri(String[] imageId);
+	public abstract void updateUri(Collection<String> imageIds);
 
 }
