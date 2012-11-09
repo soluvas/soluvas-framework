@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -313,7 +314,7 @@ public class MongoImageRepository implements ImageRepository {
 	@Override
 	public URI getImagePublicUri(String id, String styleName) {
 		String extension = "jpg";
-		String code = styleName == ORIGINAL_NAME ? ORIGINAL_CODE : styles.get(styleName).getCode(); 
+		String code = ORIGINAL_NAME.equals(styleName) ? ORIGINAL_CODE : styles.get(styleName).getCode(); 
 		return URI.create(String.format("%s%s/%s/%s_%s.%s", publicUri, namespace, code, id, code, extension));
 	}
 	
@@ -506,8 +507,8 @@ public class MongoImageRepository implements ImageRepository {
 				bson.put("uri", styled.getUri().toString());
 				bson.put("contentType", styled.getContentType());
 				bson.put("size", styled.getSize());
-				bson.put("width", (Integer)styled.getWidth());
-				bson.put("height", (Integer)styled.getHeight());
+				bson.put("width", styled.getWidth());
+				bson.put("height", styled.getHeight());
 				stylesObj.put(styled.getStyleName(), bson);
 			}
 			
@@ -912,6 +913,47 @@ public class MongoImageRepository implements ImageRepository {
 		log.info("Multiple deleting images {}", ids);
 		for (String id : ids) {
 			delete(id);
+		}
+	}
+
+	@Override
+	public void updateUrisAll() {
+		final List<Image> images = findAll();
+		log.info("Updating {} {} image URIs", images.size(), namespace);
+		for (Image image : images) {
+			final URI newUri = getImagePublicUri(image.getId(), ORIGINAL_NAME);
+			final BasicDBObject dbo = new BasicDBObject();
+			dbo.put("uri", newUri.toString());
+			log.debug("updating {} image {} to {}", namespace, image.getId(), newUri);
+			mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", dbo));
+			
+			final Map<String, StyledImage> imageStyles = image.getStyles();
+			for (Entry<String, StyledImage> styleImage : imageStyles.entrySet()) {
+				final String styleName = styleImage.getKey();
+				final URI newStyleUri = getImagePublicUri(image.getId(), styleName);
+				final BasicDBObject updatedStyleUri = new BasicDBObject("styles."+ styleName +".uri", newStyleUri.toString());
+				log.debug("Updating {} image id {} to {} with style {}", namespace, image.getId(), newStyleUri, styleName);
+				mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", updatedStyleUri));
+			}
+		}
+	}
+
+	@Override
+	public void updateImageUri(String[] arrImageId) {
+		for (String imageId : arrImageId){
+			final URI newUri = getImagePublicUri(imageId, ORIGINAL_NAME);
+			log.debug("updating {} image {} to {}", namespace, imageId, newUri);
+			final BasicDBObject dbo = new BasicDBObject("uri", newUri);
+			mongoColl.update(new BasicDBObject("_id", imageId), new BasicDBObject("$set", new BasicDBObject("$set", dbo)));
+			
+//			final Map<String, StyledImage> imageStyles = image.getStyles();
+//			for (Entry<String, StyledImage> styleImage : imageStyles.entrySet()) {
+//				final String styleName = styleImage.getKey();
+//				final URI newStyleUri = getImagePublicUri(image.getId(), styleName);
+//				final BasicDBObject updatedStyleUri = new BasicDBObject("styles."+ styleName +".uri", newStyleUri.toString());
+//				log.debug("Updating {} image id {} to {} with style {}", namespace, image.getId(), newStyleUri, styleName);
+//				mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", updatedStyleUri));
+//			}
 		}
 	}
 
