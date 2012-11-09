@@ -941,19 +941,24 @@ public class MongoImageRepository implements ImageRepository {
 	@Override
 	public void updateImageUri(String[] arrImageId) {
 		for (String imageId : arrImageId){
-			final URI newUri = getImagePublicUri(imageId, ORIGINAL_NAME);
-			log.debug("updating {} image {} to {}", namespace, imageId, newUri);
-			final BasicDBObject dbo = new BasicDBObject("uri", newUri);
-			mongoColl.update(new BasicDBObject("_id", imageId), new BasicDBObject("$set", new BasicDBObject("$set", dbo)));
+			Image image = findOne(imageId);
+			Preconditions.checkNotNull(image, "Cannot find %s image with imageId %s", namespace, imageId);
+			if (image.getId() != null) {
+				final URI newUri = getImagePublicUri(image.getId(), ORIGINAL_NAME);
+				log.debug("updating {} image {} to {}", namespace, image.getId(), newUri);
+				final BasicDBObject dbo = new BasicDBObject("uri", newUri.toString());
+				mongoColl.update(new BasicDBObject("_id", imageId), new BasicDBObject("$set", dbo));
+				
+				final Map<String, StyledImage> imageStyles = image.getStyles();
+				for (Entry<String, StyledImage> styleImage : imageStyles.entrySet()) {
+					final String styleName = styleImage.getKey();
+					final URI newStyleUri = getImagePublicUri(image.getId(), styleName);
+					final BasicDBObject updatedStyleUri = new BasicDBObject("styles."+ styleName +".uri", newStyleUri.toString());
+					log.debug("Updating {} image id {} to {} with style {}", namespace, image.getId(), newStyleUri, styleName);
+					mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", updatedStyleUri));
+				}
+			}
 			
-//			final Map<String, StyledImage> imageStyles = image.getStyles();
-//			for (Entry<String, StyledImage> styleImage : imageStyles.entrySet()) {
-//				final String styleName = styleImage.getKey();
-//				final URI newStyleUri = getImagePublicUri(image.getId(), styleName);
-//				final BasicDBObject updatedStyleUri = new BasicDBObject("styles."+ styleName +".uri", newStyleUri.toString());
-//				log.debug("Updating {} image id {} to {} with style {}", namespace, image.getId(), newStyleUri, styleName);
-//				mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", updatedStyleUri));
-//			}
 		}
 	}
 
