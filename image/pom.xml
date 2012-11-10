@@ -15,7 +15,19 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.soluvas</groupId>
+			<artifactId>org.soluvas.jaxrs</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.commons</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
 		</dependency>
 
 		<dependency>

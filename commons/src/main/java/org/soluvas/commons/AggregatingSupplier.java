@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
@@ -48,6 +49,11 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 		for (Supplier<T> supplier : suppliers) {
 			addSupplier(supplier);
 		}
+	}
+	
+	public AggregatingSupplier(Class<EPackage> ePackageClass, Class<EFactory> eFactoryClass, String eClassName,
+			List<Supplier<T>> suppliers) {
+		this(EmfUtils.getEFactory(eFactoryClass), EmfUtils.getEClass(ePackageClass, eClassName), suppliers);
 	}
 	
 	/* (non-Javadoc)

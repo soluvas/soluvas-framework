@@ -50,23 +50,55 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 	private final String tenantId;
 	private final String tenantEnv;
 	private final EPackage ePackage;
-	private final Class<?> suppliedClass;
+	private final String suppliedClassName;
+	private final String suppliedClassSimpleName;
 	
+	/**
+	 * Do not use this constructor in Blueprint XML due to classloading problems, use {@link #XmiTracker(Class, Class, String, String)}.
+	 * @param ePackage
+	 * @param suppliedClass
+	 * @param tenantId
+	 * @param tenantEnv
+	 */
 	public XmiTracker(final @Nonnull EPackage ePackage, final @Nonnull Class<?> suppliedClass,
 			@Nonnull String tenantId, @Nonnull String tenantEnv) {
 		super();
 		this.ePackage = ePackage;
-		this.suppliedClass = suppliedClass;
+		this.suppliedClassName = suppliedClass.getName();
+		this.suppliedClassSimpleName = suppliedClass.getSimpleName();
 		this.tenantId = tenantId;
 		this.tenantEnv = tenantEnv;
 	}
+
+	public XmiTracker(final @Nonnull Class<EPackage> ePackageClass, final @Nonnull Class<?> suppliedClass,
+			@Nonnull String tenantId, @Nonnull String tenantEnv) {
+		super();
+		this.ePackage = EmfUtils.getEPackage(ePackageClass);
+		this.suppliedClassName = suppliedClass.getName();
+		this.suppliedClassSimpleName = suppliedClass.getSimpleName();
+		this.tenantId = tenantId;
+		this.tenantEnv = tenantEnv;
+	}
+
+//	public XmiTracker(final @Nonnull EPackage ePackage, final @Nonnull String suppliedClassName,
+//			@Nonnull String tenantId, @Nonnull String tenantEnv) {
+//		super();
+//		this.ePackage = ePackage;
+//		this.suppliedClassName = suppliedClassName;
+//		Matcher matcher = Pattern.compile(".*([^.]+)").matcher(suppliedClassName);
+//		if (!matcher.matches())
+//			throw new IllegalArgumentException("Invalid supplied class name: " + suppliedClassName);
+//		this.suppliedClassSimpleName = matcher.group(1);
+//		this.tenantId = tenantId;
+//		this.tenantEnv = tenantEnv;
+//	}
 
 	@Override
 	@Nullable
 	public List<ServiceRegistration<Supplier>> addingBundle(@Nonnull Bundle bundle,
 			@Nonnull BundleEvent event) {
 		String path = bundle.getSymbolicName().replace('.', '/');
-		String filePattern = "*." + suppliedClass.getSimpleName() + ".xmi";
+		String filePattern = "*." + suppliedClassSimpleName + ".xmi";
 		log.trace("Scanning {} [{}] for {}/{}", bundle.getSymbolicName(), bundle.getBundleId(),
 				path , filePattern);
 		Enumeration<URL> entries = bundle.findEntries(path, filePattern, false);
@@ -76,11 +108,11 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 		Builder<ServiceRegistration<Supplier>> svcRegs = ImmutableList.builder();
 		while (entries.hasMoreElements()) {
 			URL url = entries.nextElement();
-			log.debug("Registering SecurityCatalog for {} from {}", suppliedClass.getName(), url);
+			log.debug("Registering SecurityCatalog for {} from {}", suppliedClassName, url);
 			XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(ePackage, url,
 					ResourceType.BUNDLE);
 			Dictionary<String, String> props = new Hashtable<String, String>();
-			props.put("suppliedClass", suppliedClass.getName());
+			props.put("suppliedClass", suppliedClassName);
 			props.put("layer", "module");
 			props.put("tenantId", tenantId);
 			props.put("tenantEnv", tenantEnv);

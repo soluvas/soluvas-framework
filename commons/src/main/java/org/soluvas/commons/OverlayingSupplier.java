@@ -8,6 +8,7 @@ import java.util.SortedMap;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,6 +43,11 @@ public class OverlayingSupplier<T extends EObject> implements Supplier<T>, Deleg
 		for (Supplier<T> supplier : suppliers) {
 			addSupplier(supplier);
 		}
+	}
+	
+	public OverlayingSupplier(Class<EPackage> ePackageClass, Class<EFactory> eFactoryClass, String eClassName,
+			List<Supplier<T>> suppliers) {
+		this(EmfUtils.getEFactory(eFactoryClass), EmfUtils.getEClass(ePackageClass, eClassName), suppliers);
 	}
 	
 	protected void reoverlay() {

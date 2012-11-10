@@ -35,9 +35,24 @@ public class EmfUnloader {
 		super();
 		this.packages = packages;
 	}
+	
+	/**
+	 * Call this to register the {@link EPackage}s.
+	 */
+	public void init() {
+		for (Class<? extends EPackage> pkg : packages) {
+			try {
+				log.debug("Registering EPackage {}", pkg.getName());
+				EPackage ePackage = EmfUtils.getEPackage(pkg);
+				EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
+			} catch (Exception e) {
+				log.error("Cannot register EPackage " + pkg.getName(), e);
+			}
+		}
+	}
 
 	/**
-	 * Call this to unload the packages.
+	 * Call this to unload the {@link EPackage}s.
 	 */
 	public void destroy() {
 		for (Class<? extends EPackage> pkg : packages) {

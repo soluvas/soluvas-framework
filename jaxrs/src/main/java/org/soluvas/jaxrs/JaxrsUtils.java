@@ -21,25 +21,25 @@ public class JaxrsUtils {
 	 * Use {@code @Context UriInfo uriInfo} in JAX-RS.
 	 * @return
 	 */
-	public static TenantRef getTenantInfo(UriInfo uriInfo) {
+	public static TenantRef getTenant(UriInfo uriInfo) {
 		final String pathInfo = uriInfo.getBaseUri().getPath();
-		return getTenantInfo(pathInfo);
+		return getTenant(pathInfo);
 	}
 
 	/**
 	 * Use {@code @Context HttpServletRequest httpReq} in JAX-RS.
 	 * @return
 	 */
-	public static TenantRef getTenantInfo(HttpServletRequest httpReq) {
+	public static TenantRef getTenant(HttpServletRequest httpReq) {
 		final String pathInfo = httpReq.getPathInfo();
-		return getTenantInfo(pathInfo);
+		return getTenant(pathInfo);
 	}
 
 	/**
 	 * @param pathInfo
 	 * @return
 	 */
-	public static TenantRef getTenantInfo(final String pathInfo) {
+	public static TenantRef getTenant(final String pathInfo) {
 		Pattern apiPathPattern = Pattern.compile(".*\\/api\\/(.+)_([^_]+).*");
 		Matcher apiPathMatcher = apiPathPattern.matcher(pathInfo);
 		if (!apiPathMatcher.matches()) {

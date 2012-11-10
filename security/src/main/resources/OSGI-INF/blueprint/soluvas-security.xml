@@ -72,7 +72,7 @@
 		<!-- Security Runtime -->
 	</command-bundle>
 	
-	<bean class="org.soluvas.commons.EmfUnloader" destroy-method="destroy">
+	<bean class="org.soluvas.commons.EmfUnloader" init-method="init" destroy-method="destroy">
 		<argument value="org.soluvas.security.SecurityPackage" />
 	</bean>
 
