@@ -57,10 +57,6 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.typesafe.akka</groupId> -->
-<!-- 			<artifactId>akka-actor</artifactId> -->
-<!-- 		</dependency> -->
 
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>

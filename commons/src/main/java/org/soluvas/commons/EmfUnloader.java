@@ -10,6 +10,8 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.collect.ImmutableList;
+
 /**
  * Generic EMF Unloader.
  * 
@@ -28,7 +30,7 @@ import org.slf4j.LoggerFactory;
 public class EmfUnloader {
 
 	private transient Logger log = LoggerFactory.getLogger(EmfUnloader.class);
-	private final Class<? extends EPackage>[] packages;
+	private final Iterable<Class<EPackage>> packages;
 	private final BundleContext bundleContext;
 	private final List<ServiceRegistration<?>> svcRegs = new ArrayList<ServiceRegistration<?>>();
 	
@@ -43,14 +45,21 @@ public class EmfUnloader {
 	public EmfUnloader(Class... packages) {
 		super();
 		this.bundleContext = null;
-		this.packages = packages;
+		this.packages = ImmutableList.copyOf((Class<EPackage>[]) packages);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public EmfUnloader(BundleContext bundleContext, Class<? extends EPackage> pkg) {
+	public EmfUnloader(BundleContext bundleContext, Class<EPackage> pkg) {
 		super();
 		this.bundleContext = bundleContext;
-		this.packages = new Class[] { pkg };
+		this.packages = ImmutableList.of(pkg);
+	}
+
+	@SuppressWarnings("unchecked")
+	public EmfUnloader(BundleContext bundleContext, Iterable<Class<EPackage>> packageClasses) {
+		super();
+		this.bundleContext = bundleContext;
+		this.packages = packageClasses;
 	}
 
 	/**
