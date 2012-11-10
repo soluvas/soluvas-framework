@@ -19,7 +19,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
-import com.google.common.base.Throwables;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.FutureCallback;
@@ -62,25 +61,26 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T, R, S extends T> R withService(Class<T> clazz, String filter, Function<S,R> callback) {
+		final ServiceReference<T>[] refs;
 		try {
-			ServiceReference<T>[] refs = (ServiceReference<T>[]) bundleContext
+			refs = (ServiceReference<T>[]) bundleContext
 					.getServiceReferences(clazz.getName(), filter);
-			if (refs == null || refs.length <= 0)
-				throw new RuntimeException(String.format("Cannot find service %s for filter %s",
-						clazz, filter));
-			ServiceReference<T> ref = refs[0];
-			S svc = (S) bundleContext.getService(ref);
-			try {
-				R result = callback.apply(svc);
-				return result;
-			} finally {
-				bundleContext.ungetService(ref);
-			}
 		} catch (Exception e) {
 			log.error(String.format("Cannot find service %s for filter %s",
 						clazz.getName(), filter), e);
-			Throwables.propagate(e);
-			return null;
+			throw new RuntimeException(String.format("Cannot find service %s for filter %s",
+					clazz.getName(), filter), e);
+		}
+		if (refs == null || refs.length <= 0)
+			throw new RuntimeException(String.format("Cannot find service %s for filter %s",
+					clazz, filter));
+		ServiceReference<T> ref = refs[0];
+		S svc = (S) bundleContext.getService(ref);
+		try {
+			R result = callback.apply(svc);
+			return result;
+		} finally {
+			bundleContext.ungetService(ref);
 		}
 	}
 

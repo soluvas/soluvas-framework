@@ -374,7 +374,41 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 
 	@Override
 	public List<T> search(String searchText) {
-		throw new UnsupportedOperationException();
+		String[] objectClasses = mapper.getObjectClasses(entityClass);
+//		String filter = "(&";
+//		for (String objectClass : objectClasses) {
+//			filter += "(objectClass=" + objectClass + ")";
+//		}
+//		filter += ")";
+		// Only search based on first objectClass, this is the typical use case
+		// TODO: escape searchText
+		final String filter = String.format("(&(objectClass=%s)(|(cn=*%s*)(gn=*%s*)(sn=*%s*)(uid=*%s*)(mail=*%s*)))",
+				objectClasses[0], searchText, searchText, searchText, searchText, searchText);
+		log.info("Searching LDAP {} filter: {}", baseDn, filter); 
+		try {
+			List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
+				@Override @Nullable
+				public List<Entry> apply(@Nullable LdapConnection conn) {
+					try {
+						return LdapUtils.asList( conn.search(baseDn, filter, SearchScope.ONELEVEL) );
+					} catch (LdapException e) {
+						Throwables.propagate(e);
+						return null;
+					}
+				}
+			});
+			log.info("LDAP search {} filter {} returned {} entries", new Object[] { baseDn, filter, entries.size() });
+			List<T> entities = Lists.transform(entries, new Function<Entry, T>() {
+				@Override
+				public T apply(Entry input) {
+					return mapper.fromEntry(input, entityClass);
+				}
+			});
+			return entities;
+		} catch (Exception e) {
+			log.error("Error searching LDAP in " + baseDn + " filter " + filter, e);
+			throw new RuntimeException("Error searching LDAP in " + baseDn + " filter " + filter, e);
+		}
 	}
 	
 }
