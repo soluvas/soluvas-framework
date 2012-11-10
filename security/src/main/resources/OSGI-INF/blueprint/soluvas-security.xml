@@ -72,7 +72,11 @@
 		<!-- Security Runtime -->
 	</command-bundle>
 	
-	<bean class="org.soluvas.commons.EmfUnloader" init-method="init" destroy-method="destroy">
+	<reference id="commonsPackage" interface="org.soluvas.commons.CommonsPackage" />
+	
+	<bean class="org.soluvas.commons.EmfUnloader" init-method="init" destroy-method="destroy"
+		depends-on="commonsPackage">
+		<argument ref="blueprintBundleContext"/>
 		<argument value="org.soluvas.security.SecurityPackage" />
 	</bean>
 

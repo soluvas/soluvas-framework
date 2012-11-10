@@ -32,6 +32,7 @@
 	</command-bundle>
 
 	<bean class="org.soluvas.commons.EmfUnloader" init-method="init" destroy-method="destroy">
+		<argument ref="blueprintBundleContext"/>
 		<argument value="org.soluvas.commons.CommonsPackage" />
 	</bean>
 
