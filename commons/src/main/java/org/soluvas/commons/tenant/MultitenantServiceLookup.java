@@ -34,6 +34,7 @@ import com.google.common.util.concurrent.FutureCallback;
  * @author ceefour
  * @version 1.1
  */
+@Deprecated
 public class MultitenantServiceLookup implements ServiceLookup {
 	
 	private transient Logger log = LoggerFactory.getLogger(MultitenantServiceLookup.class);
@@ -61,27 +62,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T, R, S extends T> R withService(Class<T> clazz, String filter, Function<S,R> callback) {
-		final ServiceReference<T>[] refs;
-		try {
-			refs = (ServiceReference<T>[]) bundleContext
-					.getServiceReferences(clazz.getName(), filter);
-		} catch (Exception e) {
-			log.error(String.format("Cannot find service %s for filter %s",
-						clazz.getName(), filter), e);
-			throw new RuntimeException(String.format("Cannot find service %s for filter %s",
-					clazz.getName(), filter), e);
-		}
-		if (refs == null || refs.length <= 0)
-			throw new RuntimeException(String.format("Cannot find service %s for filter %s",
-					clazz, filter));
-		ServiceReference<T> ref = refs[0];
-		S svc = (S) bundleContext.getService(ref);
-		try {
-			R result = callback.apply(svc);
-			return result;
-		} finally {
-			bundleContext.ungetService(ref);
-		}
+		return TenantUtils.withService(bundleContext, clazz, filter, callback);
 	}
 
 	@Override
@@ -193,18 +174,11 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	 * @return
 	 */
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public <T> T getSupplied(@Nonnull Class<T> clazz, CommandSession session) {
-		final ServiceReference<Supplier> supplierRef = getService(Supplier.class,
-				session, null, "(suppliedClass=" + clazz.getName() + ")(layer=application)");
+		final TenantRef tenant = getTenant(session);
 		final BundleContext bundleContext = FrameworkUtil.getBundle(
 				MultitenantServiceLookup.class).getBundleContext();
-		final Supplier<T> supplier = bundleContext.getService(supplierRef);
-		try {
-			return supplier.get();
-		} finally {
-			bundleContext.ungetService(supplierRef);
-		}
+		return TenantUtils.getSupplied(bundleContext, tenant, clazz);
 	}
 	
 	@Override

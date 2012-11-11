@@ -33,6 +33,7 @@ import com.google.common.collect.Lists;
 public class ImageResource {
 	
 	private transient Logger log = LoggerFactory.getLogger(ImageResource.class);
+	@Deprecated
 	private transient BundleContext bundleContext;
 	private transient @Context UriInfo uriInfo;
 	
