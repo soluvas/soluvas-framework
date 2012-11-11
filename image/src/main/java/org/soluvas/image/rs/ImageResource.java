@@ -47,7 +47,7 @@ public class ImageResource {
 	public String getImageConfigs() throws InvalidSyntaxException {
 		final TenantRef tenant = JaxrsUtils.getTenant(uriInfo);
 		final String filter = String.format("(&(tenantId=%s)(tenantEnv=%s))", tenant.getTenantId(), tenant.getTenantEnv());
-		log.debug("Getting imageConfigs.js for {} using {}", tenant, filter);
+		log.trace("Getting imageConfigs.js for {} using {}", tenant, filter);
 		List<ServiceReference<ImageRepository>> refs = ImmutableList.copyOf(bundleContext.getServiceReferences(ImageRepository.class,
 				filter));
 		try {
@@ -57,7 +57,7 @@ public class ImageResource {
 					return bundleContext.getService(input);
 				}
 			});
-			log.debug("Got {} image repositories for {}: {}", imageRepos.size(), tenant, imageRepos);
+			log.trace("Got {} image repositories for {}: {}", imageRepos.size(), tenant, imageRepos);
 			URL stgUrl = ImageResource.class.getResource("imageConfigs.stg");
 			STGroupFile stg = new STGroupFile(stgUrl, "UTF-8", '~', '~');
 			ST configsSt = stg.getInstanceOf("imageConfigs");

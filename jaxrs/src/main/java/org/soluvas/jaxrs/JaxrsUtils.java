@@ -48,7 +48,7 @@ public class JaxrsUtils {
 		}
 		TenantRef tenantRef = new TenantRef(null, apiPathMatcher.group(1),
 				apiPathMatcher.group(2));
-		log.debug("REST path {} is for {}", pathInfo, tenantRef);
+		log.trace("REST path {} is for {}", pathInfo, tenantRef);
 		return tenantRef;
 	}
 
