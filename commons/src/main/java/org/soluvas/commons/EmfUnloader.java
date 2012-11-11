@@ -34,7 +34,6 @@ public class EmfUnloader {
 	private final BundleContext bundleContext;
 	private final List<ServiceRegistration<?>> svcRegs = new ArrayList<ServiceRegistration<?>>();
 	
-	@SuppressWarnings("unchecked")
 	@Deprecated
 	public EmfUnloader(Class<? extends EPackage> pkg) {
 		this(null, pkg);
@@ -48,7 +47,6 @@ public class EmfUnloader {
 		this.packages = ImmutableList.copyOf((Class<EPackage>[]) packages);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public EmfUnloader(BundleContext bundleContext, Class<EPackage> pkg) {
 		super();
 		this.bundleContext = bundleContext;
@@ -56,10 +54,10 @@ public class EmfUnloader {
 	}
 
 	@SuppressWarnings("unchecked")
-	public EmfUnloader(BundleContext bundleContext, Iterable<Class<EPackage>> packageClasses) {
+	public EmfUnloader(BundleContext bundleContext, Iterable<?> packageClasses) {
 		super();
 		this.bundleContext = bundleContext;
-		this.packages = packageClasses;
+		this.packages = (Iterable<Class<EPackage>>) packageClasses;
 	}
 
 	/**
