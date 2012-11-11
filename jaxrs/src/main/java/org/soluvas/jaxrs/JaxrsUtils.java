@@ -40,7 +40,7 @@ public class JaxrsUtils {
 	 * @return
 	 */
 	public static TenantRef getTenant(final String pathInfo) {
-		Pattern apiPathPattern = Pattern.compile(".*\\/api\\/(.+)_([^_]+).*");
+		Pattern apiPathPattern = Pattern.compile(".*\\/api\\/(.+)_([^_/]+).*");
 		Matcher apiPathMatcher = apiPathPattern.matcher(pathInfo);
 		if (!apiPathMatcher.matches()) {
 			log.warn("REST path {} does not conform to multitenant REST API pattern", pathInfo);

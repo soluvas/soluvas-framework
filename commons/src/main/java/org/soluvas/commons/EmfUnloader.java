@@ -15,7 +15,7 @@ import com.google.common.collect.ImmutableList;
 /**
  * Generic EMF Unloader.
  * 
- * Usage:
+ * Usage for single package:
  * 
  * <pre>
  * {@code
@@ -24,6 +24,21 @@ import com.google.common.collect.ImmutableList;
  * </bean>
  * }
  * </pre>
+ * 
+ * Usage for multiple packages:
+ * 
+ * <pre>{@code
+ * <bean class="org.soluvas.commons.EmfUnloader" init-method="init" destroy-method="destroy">
+ * 	<argument ref="blueprintBundleContext" />
+ * 	<argument>
+ * 		<list value-type="java.lang.Class">
+ * 			<value>org.soluvas.web.site.SitePackage</value>
+ * 			<value>org.soluvas.web.site.pagemeta.PageMetaPackage</value>
+ * 			<value>org.soluvas.web.site.webaddress.WebaddressPackage</value>
+ * 		</list>
+ * 	</argument>
+ * </bean>
+ * }</pre>
  * 
  * @author ceefour
  */
