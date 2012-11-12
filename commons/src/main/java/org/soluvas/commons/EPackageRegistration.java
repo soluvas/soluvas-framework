@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
@@ -25,7 +26,7 @@ import com.google.common.collect.Lists;
  * 
  * <pre>
  * {@code
- * <bean class="org.soluvas.commons.EmfUnloader" destroy-method="destroy">
+ * <bean class="org.soluvas.commons.EPackageRegistration" destroy-method="destroy">
  * 	<argument value="org.soluvas.security.SecurityPackage" />
  * </bean>
  * }
@@ -34,7 +35,7 @@ import com.google.common.collect.Lists;
  * Usage for multiple packages:
  * 
  * <pre>{@code
- * <bean class="org.soluvas.commons.EmfUnloader" init-method="init" destroy-method="destroy">
+ * <bean class="org.soluvas.commons.EPackageRegistration" init-method="init" destroy-method="destroy">
  * 	<argument ref="blueprintBundleContext" />
  * 	<argument>
  * 		<list value-type="java.lang.Class">
@@ -48,7 +49,7 @@ import com.google.common.collect.Lists;
  * 
  * @author ceefour
  */
-public class EmfUnloader {
+public class EPackageRegistration {
 
 	public static final class ClassToName implements Function<Class<?>, String> {
 		@Override
@@ -58,21 +59,21 @@ public class EmfUnloader {
 		}
 	}
 
-	private transient Logger log = LoggerFactory.getLogger(EmfUnloader.class);
+	private transient Logger log = LoggerFactory.getLogger(EPackageRegistration.class);
 	private final Iterable<Class<EPackage>> packages;
 	@Nonnull
 	private final BundleContext bundleContext;
 	private final List<ServiceRegistration<?>> pkgRegs = new ArrayList<ServiceRegistration<?>>();
 	private final List<ServiceRegistration<?>> factoryRegs = new ArrayList<ServiceRegistration<?>>();
 	
-	public EmfUnloader(@Nonnull BundleContext bundleContext, @Nonnull Class<EPackage> pkg) {
+	public EPackageRegistration(@Nonnull BundleContext bundleContext, @Nonnull Class<EPackage> pkg) {
 		super();
 		this.bundleContext = bundleContext;
 		this.packages = ImmutableList.of(pkg);
 	}
 
 	@SuppressWarnings("unchecked")
-	public EmfUnloader(@Nonnull BundleContext bundleContext, @Nonnull Iterable<?> packageClasses) {
+	public EPackageRegistration(@Nonnull BundleContext bundleContext, @Nonnull Iterable<?> packageClasses) {
 		super();
 		this.bundleContext = bundleContext;
 		this.packages = (Iterable<Class<EPackage>>) packageClasses;
@@ -95,9 +96,10 @@ public class EmfUnloader {
 				pkgRegs.add(reg);
 				
 				EFactory eFactory = ePackage.getEFactoryInstance();
+				Preconditions.checkNotNull(eFactory, "Cannot get EFactory for EPackage %s [%s]", ePackage.getName(), ePackage.getNsURI());
 				List<String> factoryInterfaces = Lists.transform( ImmutableList.copyOf(eFactory.getClass().getInterfaces()), new ClassToName());
 				ServiceRegistration<?> factoryReg = bundleContext.registerService(factoryInterfaces.toArray(new String[] {}),
-						ePackage, new Hashtable<String, Object>());
+						eFactory, new Hashtable<String, Object>());
 				log.trace("Registered EFactory service {}", factoryReg);
 				factoryRegs.add(factoryReg);
 			} catch (Exception e) {

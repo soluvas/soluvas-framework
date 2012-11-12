@@ -76,7 +76,8 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	@Nullable
 	public T get() {
 		if (obj == null) {
-			log.warn("Returning null, probably XMI Loader has been destroyed.");
+			log.warn("Returning null, probably XMI Loader has been destroyed for {} from {} [{}]",
+					resourceUri, ePackageName, ePackageNsUri);
 		}
 		return obj;
 	}
