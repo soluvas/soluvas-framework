@@ -22,8 +22,9 @@ public class SupplierTracker<T extends EObject> implements
 	private final BundleContext bundleContext;
 	private final DelegatingSupplier<T> delegate;
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public SupplierTracker(BundleContext bundleContext,
-			DelegatingSupplier<T> delegate) {
+			DelegatingSupplier delegate) {
 		super();
 		this.bundleContext = bundleContext;
 		this.delegate = delegate;
