@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 /**
  * Generic EMF Unloader.
@@ -44,32 +50,29 @@ import com.google.common.collect.ImmutableList;
  */
 public class EmfUnloader {
 
-	private transient Logger log = LoggerFactory.getLogger(EmfUnloader.class);
-	private final Iterable<Class<EPackage>> packages;
-	private final BundleContext bundleContext;
-	private final List<ServiceRegistration<?>> svcRegs = new ArrayList<ServiceRegistration<?>>();
-	
-	@Deprecated
-	public EmfUnloader(Class<? extends EPackage> pkg) {
-		this(null, pkg);
+	public static final class ClassToName implements Function<Class<?>, String> {
+		@Override
+		@Nullable
+		public String apply(@Nullable Class<?> input) {
+			return input.getName();
+		}
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@Deprecated
-	public EmfUnloader(Class... packages) {
-		super();
-		this.bundleContext = null;
-		this.packages = ImmutableList.copyOf((Class<EPackage>[]) packages);
-	}
+	private transient Logger log = LoggerFactory.getLogger(EmfUnloader.class);
+	private final Iterable<Class<EPackage>> packages;
+	@Nonnull
+	private final BundleContext bundleContext;
+	private final List<ServiceRegistration<?>> pkgRegs = new ArrayList<ServiceRegistration<?>>();
+	private final List<ServiceRegistration<?>> factoryRegs = new ArrayList<ServiceRegistration<?>>();
 	
-	public EmfUnloader(BundleContext bundleContext, Class<EPackage> pkg) {
+	public EmfUnloader(@Nonnull BundleContext bundleContext, @Nonnull Class<EPackage> pkg) {
 		super();
 		this.bundleContext = bundleContext;
 		this.packages = ImmutableList.of(pkg);
 	}
 
 	@SuppressWarnings("unchecked")
-	public EmfUnloader(BundleContext bundleContext, Iterable<?> packageClasses) {
+	public EmfUnloader(@Nonnull BundleContext bundleContext, @Nonnull Iterable<?> packageClasses) {
 		super();
 		this.bundleContext = bundleContext;
 		this.packages = (Iterable<Class<EPackage>>) packageClasses;
@@ -85,11 +88,18 @@ public class EmfUnloader {
 				EPackage ePackage = EmfUtils.getEPackage(pkg);
 				EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
 				
-				if (bundleContext != null) {
-					ServiceRegistration<?> reg = bundleContext.registerService(pkg.getName(), ePackage, new Hashtable<String, Object>());
-					log.trace("Registered EPackage service {}", reg);
-					svcRegs.add(reg);
-				}
+				List<String> pkgInterfaces = Lists.transform( ImmutableList.copyOf(ePackage.getClass().getInterfaces()), new ClassToName());
+				ServiceRegistration<?> reg = bundleContext.registerService(pkgInterfaces.toArray(new String[] {}),
+						ePackage, new Hashtable<String, Object>());
+				log.trace("Registered EPackage service {}", reg);
+				pkgRegs.add(reg);
+				
+				EFactory eFactory = ePackage.getEFactoryInstance();
+				List<String> factoryInterfaces = Lists.transform( ImmutableList.copyOf(eFactory.getClass().getInterfaces()), new ClassToName());
+				ServiceRegistration<?> factoryReg = bundleContext.registerService(factoryInterfaces.toArray(new String[] {}),
+						ePackage, new Hashtable<String, Object>());
+				log.trace("Registered EFactory service {}", factoryReg);
+				factoryRegs.add(factoryReg);
 			} catch (Exception e) {
 				log.error("Cannot register EPackage " + pkg.getName(), e);
 			}
@@ -97,13 +107,20 @@ public class EmfUnloader {
 	}
 
 	/**
-	 * Call this to unload the {@link EPackage}s.
+	 * Call this to unload the {@link EPackage}s and {@link EFactory}s.
 	 */
 	public void destroy() {
-		for (ServiceRegistration<?> reg : svcRegs) {
+		for (ServiceRegistration<?> reg : factoryRegs) {
+			log.trace("Unregistering EFactory service {}", reg);
+			reg.unregister();
+		}
+		factoryRegs.clear();
+
+		for (ServiceRegistration<?> reg : pkgRegs) {
 			log.trace("Unregistering EPackage service {}", reg);
 			reg.unregister();
 		}
+		pkgRegs.clear();
 		
 		for (Class<? extends EPackage> pkg : packages) {
 			try {

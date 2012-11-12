@@ -3,6 +3,8 @@ package org.soluvas.commons;
 import java.net.URL;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.PreDestroy;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -30,93 +32,57 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	
 	private transient Logger log = LoggerFactory
 			.getLogger(XmiObjectLoader.class);
-	private final EPackage ePackage;
 	private T obj;
+	private final String ePackageName;
+	private final String ePackageNsUri;
+	private final URI resourceUri;
 	
 	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull Class<?> loaderClass, @Nonnull String resourcePath) {
 		super();
-		this.ePackage = ePackage;
-		
+		this.ePackageName = ePackage.getName();
+		this.ePackageNsUri = ePackage.getNsURI();
 		log.info("Loading XMI: {} from {}", resourcePath, loaderClass.getName());
 		final URL resourceUrl = loaderClass.getResource(resourcePath);
 		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s using class %s",
 				resourcePath, loaderClass.getName());
-		final URI resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		load(resourceUri, ResourceType.BUNDLE);
+		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
+		load(ePackage, resourceUri, ResourceType.BUNDLE);
 	}
 
 	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull String fileName) {
 		super();
-		this.ePackage = ePackage;
-		
-		load(URI.createFileURI(fileName), ResourceType.FILE);
+		this.ePackageName = ePackage.getName();
+		this.ePackageNsUri = ePackage.getNsURI();
+		this.resourceUri = URI.createFileURI(fileName);
+		load(ePackage, resourceUri, ResourceType.FILE);
 	}
 
 	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull URL resourceUrl,
 			ResourceType resourceType) {
 		super();
-		this.ePackage = ePackage;
-		
-		final URI resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		load(resourceUri, resourceType);
+		this.ePackageName = ePackage.getName();
+		this.ePackageNsUri = ePackage.getNsURI();
+		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
+		load(ePackage, resourceUri, resourceType);
 	}
-
-	/**
-	 * 
-	 * @deprecated Please use the {@link EPackage} one, they're exposed as services by {@link EmfUnloader}.
-	 * @param ePackageClass
-	 * @param loaderClass
-	 * @param resourcePath
-	 * @throws IllegalArgumentException
-	 * @throws SecurityException
-	 * @throws IllegalAccessException
-	 * @throws NoSuchFieldException
-	 */
-	@Deprecated
-	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackageClass, @Nonnull Class<?> loaderClass, @Nonnull String resourcePath) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException {
-		this( (EPackage) ePackageClass.getDeclaredField("eINSTANCE").get(ePackageClass),
-				loaderClass, resourcePath);
-	}
-
-	/**
-	 * @deprecated @deprecated Please use the {@link EPackage} one, they're exposed as services by {@link EmfUnloader}.
-	 * @param ePackageClass
-	 * @param fileName
-	 * @throws IllegalArgumentException
-	 * @throws SecurityException
-	 * @throws IllegalAccessException
-	 * @throws NoSuchFieldException
-	 */
-	@Deprecated
-	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackageClass, @Nonnull String fileName) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException {
-		this( (EPackage) ePackageClass.getDeclaredField("eINSTANCE").get(ePackageClass),
-				fileName);
-	}
-
-	/**
-	 * @deprecated @deprecated Please use the {@link EPackage} one, they're exposed as services by {@link EmfUnloader}.
-	 * @param ePackageClass
-	 * @param resourceUrl
-	 * @param resourceType
-	 * @throws IllegalArgumentException
-	 * @throws SecurityException
-	 * @throws IllegalAccessException
-	 * @throws NoSuchFieldException
-	 */
-	@Deprecated
-	public XmiObjectLoader(@Nonnull Class<? extends EPackage> ePackageClass, @Nonnull URL resourceUrl,
-			ResourceType resourceType) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException {
-		this( (EPackage) ePackageClass.getDeclaredField("eINSTANCE").get(ePackageClass),
-				resourceUrl, resourceType);
+	
+	@PreDestroy
+	public void destroy() {
+		log.info("Destroying XMI Loader for {} from {} [{}]", resourceUri, ePackageName, ePackageNsUri);
+		obj = null;
 	}
 
 	@Override
+	@Nullable
 	public T get() {
+		if (obj == null) {
+			log.warn("Returning null, probably XMI Loader has been destroyed.");
+		}
 		return obj;
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void load(URI resourceUri, ResourceType resourceType) {
+	protected void load(EPackage ePackage, URI resourceUri, ResourceType resourceType) {
 		log.debug("Loading XMI from URI: {}", resourceUri);
 		
 		ResourceSetImpl rset = new ResourceSetImpl();

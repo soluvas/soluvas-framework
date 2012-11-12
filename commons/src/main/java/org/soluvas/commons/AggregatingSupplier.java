@@ -3,6 +3,8 @@ package org.soluvas.commons;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.PreDestroy;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
@@ -38,8 +40,7 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 	private final EList<EReference> containments;
 
 	@SuppressWarnings("unchecked")
-	public AggregatingSupplier(EFactory eFactory, EClass eClass,
-			List<Supplier<T>> suppliers) {
+	public AggregatingSupplier(EFactory eFactory, EClass eClass, List<Supplier<T>> suppliers) {
 		super();
 		this.eClass = eClass;
 		this.map = Multimaps.synchronizedListMultimap(ArrayListMultimap.<Supplier<T>, EObject>create());
@@ -51,9 +52,8 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 		}
 	}
 	
-	public AggregatingSupplier(Class<EPackage> ePackageClass, Class<EFactory> eFactoryClass, String eClassName,
-			List<Supplier<T>> suppliers) {
-		this(EmfUtils.getEFactory(eFactoryClass), EmfUtils.getEClass(ePackageClass, eClassName), suppliers);
+	public AggregatingSupplier(EPackage ePackage, String eClassName, List<Supplier<T>> suppliers) {
+		this(ePackage.getEFactoryInstance(), (EClass) ePackage.getEClassifier(eClassName), suppliers);
 	}
 	
 	/* (non-Javadoc)
@@ -89,17 +89,37 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 	@Override
 	public void removeSupplier(Supplier<T> supplier) {
 		log.debug("Removing supplier {} for {}", supplier, eClass.getName());
+		final int removedModelCount = doRemoveSupplier(supplier);
+		log.info("Removed {} models from supplier {} for {}", removedModelCount, supplier, eClass.getName());
+	}
+
+	protected int doRemoveSupplier(Supplier<T> supplier) {
 		final Collection<EObject> models = ImmutableList.copyOf(map.get(supplier));
 		for (EObject model : models) {
 			EcoreUtil.remove(model);
 		}
 		map.removeAll(supplier);
-		log.info("Removed {} models from supplier {} for {}", models.size(), supplier, eClass.getName());
+		return models.size();
+	}
+
+	protected void removeSuppliers(Collection<Supplier<T>> removedSuppliers) {
+		log.debug("Removing suppliers {} for {}", removedSuppliers, eClass.getName());
+		int removedModelCount = 0;
+		for (Supplier<T> supplier : removedSuppliers) {
+			removedModelCount += doRemoveSupplier(supplier);
+		}
+		log.info("Removed {} models from suppliers {} for {}", removedModelCount, removedSuppliers, eClass.getName());
 	}
 
 	@Override
 	public T get() {
 		return aggregate;
+	}
+
+	@Override
+	@PreDestroy
+	public void destroy() {
+		removeSuppliers(ImmutableList.copyOf(map.keys()));
 	}
 
 }

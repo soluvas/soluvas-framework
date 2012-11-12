@@ -1,9 +1,12 @@
 package org.soluvas.commons;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.SortedMap;
+
+import javax.annotation.PreDestroy;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
@@ -14,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Supplier;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 /**
@@ -45,9 +49,14 @@ public class OverlayingSupplier<T extends EObject> implements Supplier<T>, Deleg
 		}
 	}
 	
-	public OverlayingSupplier(Class<EPackage> ePackageClass, Class<EFactory> eFactoryClass, String eClassName,
-			List<Supplier<T>> suppliers) {
-		this(EmfUtils.getEFactory(eFactoryClass), EmfUtils.getEClass(ePackageClass, eClassName), suppliers);
+	public OverlayingSupplier(EPackage ePackage, String eClassName, List<Supplier<T>> suppliers) {
+		this(ePackage.getEFactoryInstance(), (EClass) ePackage.getEClassifier(eClassName), suppliers);
+	}
+	
+	@Override
+	@PreDestroy
+	public void destroy() {
+		removeSuppliers(ImmutableList.copyOf(sources.values()));
 	}
 	
 	protected void reoverlay() {
@@ -73,16 +82,30 @@ public class OverlayingSupplier<T extends EObject> implements Supplier<T>, Deleg
 	@Override
 	public void removeSupplier(Supplier<T> supplier) {
 		log.debug("Removing supplier {} for {}", supplier, eClass.getName());
+		doRemoveSuppliers(ImmutableList.of(supplier));
+		reoverlay();
+		log.info("Removed supplier {} for {}, now {} suppliers", supplier, eClass.getName(), sources.size());
+	}
+
+	protected void removeSuppliers(Collection<Supplier<T>> removedSuppliers) {
+		log.debug("Removing suppliers {} for {}", removedSuppliers, eClass.getName());
+		doRemoveSuppliers(removedSuppliers);
+		log.info("Removed suppliers {} for {}, now {} suppliers", removedSuppliers, eClass.getName(), sources.size());
+	}
+
+	protected void doRemoveSuppliers(Collection<Supplier<T>> removedSuppliers) {
+		int removedCount = 0;
 		Iterator<Entry<T, Supplier<T>>> iterator = sources.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<T, Supplier<T>> entry = iterator.next();
-			if (entry.getValue().equals(supplier)) {
+			if (removedSuppliers.contains( entry.getValue() )) {
 				iterator.remove();
-				break;
+				removedCount++;
 			}
+			if (removedCount >= removedSuppliers.size())
+				break;
 		}
 		reoverlay();
-		log.info("Removed supplier {} for {}, now {} suppliers", supplier, eClass.getName(), sources.size());
 	}
 
 	@Override
