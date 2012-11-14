@@ -42,7 +42,6 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 /**
  * Manages {@link Entry} objects inside a base DN entry.
@@ -280,7 +279,15 @@ public class LdapUtils {
 	 */
 	public static <T> List<T> transform(@Nonnull EntryCursor cursor,
 			Function<Entry, T> function) {
-		return Lists.transform(LdapUtils.asList(cursor), function);
+		try {
+			return ImmutableList.copyOf(Iterables.transform(cursor, function));
+		} finally {
+			try {
+				cursor.close();
+			} catch (Exception e) {
+				log.warn("Error closing LDAP cursor", e);
+			}
+		}
 	}
 
 	/**
