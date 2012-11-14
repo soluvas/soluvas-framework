@@ -157,6 +157,9 @@ public class MongoImageRepository implements ImageRepository {
 		
 	}
 	
+	/**
+	 * Required by CDI apps i.e. LDAP Tools CLI.
+	 */
 	public MongoImageRepository() {
 		super();
 	}
