@@ -52,7 +52,7 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	public <S extends T> S save(S entity) {
 		final S saved;
 		final ID id = getId(entity);
-		if (exists(id)) {
+		if (id != null && exists(id)) {
 			saved = modify(id, entity);
 		} else {
 			saved = add(entity);
@@ -60,11 +60,11 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 		return saved;
 	}
 	
-	protected abstract ID getId(T entity);
+	@Nullable protected abstract ID getId(T entity);
 	
-	protected abstract <S extends T> S modify(ID id, T entity);
+	protected abstract <S extends T> S modify(ID id, S entity);
 	
-	protected abstract <S extends T> S add(T entity);
+	protected abstract <S extends T> S add(S entity);
 
 	@Override
 	public <S extends T> Collection<S> save(Iterable<S> entities) {

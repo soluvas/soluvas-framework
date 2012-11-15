@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.XmiObjectLoader;
+import org.soluvas.commons.XmiTracker;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
@@ -41,6 +42,8 @@ import com.google.common.collect.ImmutableList.Builder;
  * </bean>
  * }</pre>
  * 
+ * @deprecated This is replaced by {@link XmiTracker}, BUT... I find a reason to use EMF catalogs directly (push/EMF Notify/EMF Query/MongoEMF support, anyone?),
+ *   and not always have to use the unsemantic OSGi Service Registry.
  * @author ceefour
  */
 @SuppressWarnings("rawtypes")

@@ -108,7 +108,7 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 		Builder<ServiceRegistration<Supplier>> svcRegs = ImmutableList.builder();
 		while (entries.hasMoreElements()) {
 			URL url = entries.nextElement();
-			log.debug("Registering SecurityCatalog for {} from {}", suppliedClassName, url);
+			log.debug("Registering Supplier for {} from {}", suppliedClassName, url);
 			XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(ePackage, url,
 					ResourceType.BUNDLE);
 			Dictionary<String, String> props = new Hashtable<String, String>();

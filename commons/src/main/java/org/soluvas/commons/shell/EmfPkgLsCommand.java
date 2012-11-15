@@ -9,8 +9,6 @@ import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.eclipse.emf.ecore.EPackage;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.soluvas.commons.NameComparator;
 
 import com.google.common.base.Function;
@@ -24,8 +22,6 @@ import com.google.common.collect.Ordering;
  */
 @Command(scope="emf", name="pkgls", description="List registered EPackages.")
 public class EmfPkgLsCommand extends OsgiCommandSupport {
-	
-	private transient Logger log = LoggerFactory.getLogger(EmfPkgLsCommand.class);
 	
 	public EmfPkgLsCommand() {
 		super();
