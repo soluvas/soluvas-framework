@@ -15,10 +15,11 @@ import com.google.common.util.concurrent.FutureCallback;
 /**
  * Looks up a service.
  * 
+ * Just use {@link TenantUtils} or similar (for JAX-RS, Shell, Wicket, etc.). ServiceLookup is used internally
+ * by {@link TenantUtils}.
+ * 
  * @author ceefour
- * @deprecated Just use {@link TenantUtils} or similar (for JAX-RS, Shell, Wicket, etc.)
  */
-@Deprecated
 public interface ServiceLookup {
 
 	/**

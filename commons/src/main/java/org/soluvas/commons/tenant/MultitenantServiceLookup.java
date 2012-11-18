@@ -114,7 +114,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	 * @return
 	 */
 	@Override
-	public TenantRef getTenant(@Nonnull CommandSession session) {
+	public TenantRef getTenant(@Nonnull final CommandSession session) {
 		String clientId = Optional.fromNullable(
 				(String) session.get("clientId")).or(defaultClientId);
 		String tenantEnv = Optional.fromNullable(

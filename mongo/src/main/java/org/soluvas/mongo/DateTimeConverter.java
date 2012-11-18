@@ -1,6 +1,6 @@
 package org.soluvas.mongo;
 
-import java.math.BigDecimal;
+import org.joda.time.DateTime;
 
 import com.google.code.morphia.converters.SimpleValueConverter;
 import com.google.code.morphia.converters.TypeConverter;
@@ -9,13 +9,13 @@ import com.google.code.morphia.mapping.MappingException;
 import com.mongodb.DBObject;
 
 /**
- * Converts {@link BigDecimal} to/from {@link DBObject}.
- * @author atang
+ * Converts {@link DateTime} to/from {@link DBObject}.
+ * @author ceefour
  */
-public class BigDecimalConverter extends TypeConverter implements SimpleValueConverter {
+public class DateTimeConverter extends TypeConverter implements SimpleValueConverter {
 
-	public BigDecimalConverter() {
-		super(BigDecimal.class);
+	public DateTimeConverter() {
+		super(DateTime.class);
 	}
 	
 	/* (non-Javadoc)
@@ -27,10 +27,8 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 			MappedField optionalExtraInfo) throws MappingException {
 		if (fromDBObject == null)
 			return null;
-		else if (fromDBObject instanceof Double)
-			return new BigDecimal((Double)fromDBObject);
 		else
-			return new BigDecimal((String)fromDBObject);
+			return new DateTime(fromDBObject);
 	}
 
 	@Override
