@@ -79,7 +79,7 @@
 							org.apache.felix.gogo.commands;resolution:=optional,
 							org.apache.karaf.shell.console;resolution:=optional,
 							*
-						</Import-Package> 
+						</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>

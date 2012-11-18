@@ -12,10 +12,10 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.Filtered;
-import org.soluvas.commons.Namespaced;
-import org.soluvas.commons.Supplied;
-import org.soluvas.commons.Supplied.Layer;
+import org.soluvas.commons.inject.Filter;
+import org.soluvas.commons.inject.Namespace;
+import org.soluvas.commons.inject.Supplied;
+import org.soluvas.commons.inject.Supplied.Layer;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.commons.tenant.TenantUtils;
 
@@ -26,7 +26,7 @@ import com.google.common.collect.Lists;
 
 /**
  * Manages the lifecycle of tenant-scoped JAX-RS resources and performs dependency injection
- * using {@link Inject}, {@link Supplied}, {@link Namespaced} and {@link Filtered}.
+ * using {@link Inject}, {@link Supplied}, {@link Namespace} and {@link Filter}.
  * Similar in purpose to MultitenantPage.
  * @todo Flawed design: What if a depended service suddenly gone in the middle of resource's operation?
  *   Blueprint manages that, but we don't. :(
@@ -221,8 +221,8 @@ public class ResourceInjector {
 			}
 			final InjectMode injectMode = field.isAnnotationPresent(Supplied.class) ? InjectMode.SUPPLIED : InjectMode.SERVICE;
 			final Layer layer = field.isAnnotationPresent(Supplied.class) ? field.getAnnotation(Supplied.class).value() : null;
-			final String namespace = field.isAnnotationPresent(Namespaced.class) ? field.getAnnotation(Namespaced.class).value() : null;
-			final String filter = field.isAnnotationPresent(Filtered.class) ? field.getAnnotation(Filtered.class).value() : null;
+			final String namespace = field.isAnnotationPresent(Namespace.class) ? field.getAnnotation(Namespace.class).value() : null;
+			final String filter = field.isAnnotationPresent(Filter.class) ? field.getAnnotation(Filter.class).value() : null;
 			injectables.add( new Injectable(field, field.getType(), injectMode, layer, namespace, filter) );
 		}
 		return injectables.build();

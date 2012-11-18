@@ -119,7 +119,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * Deletes the entity with the given id.
 	 * 
 	 * @param id must not be {@literal null}.
-	 * @return TODO
+	 * @return {@literal true} if deleted.
 	 * @throws IllegalArgumentException in case the given {@code id} is {@literal null}
 	 */
 	boolean delete(@Nonnull final ID id);
@@ -128,7 +128,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * Deletes a given entity.
 	 * 
 	 * @param entity
-	 * @return TODO
+	 * @return {@literal true} if deleted.
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
 	boolean delete(@Nonnull final T entity);
@@ -137,7 +137,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * Deletes the given entities.
 	 * 
 	 * @param entities
-	 * @return TODO
+	 * @return Number of deleted entities.
 	 * @throws IllegalArgumentException in case the given {@link Iterable} is (@literal null}.
 	 */
 	long delete(@Nonnull final Iterable<? extends T> entities);
@@ -146,7 +146,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * This is usually (but not always) more efficient than calling
 	 * {@link CrudRepository#delete(Serializable)} multiple times.
 	 * @param ids
-	 * @return TODO
+	 * @return Number of deleted entities.
 	 */
 	long deleteIds(Iterable<ID> ids);
 

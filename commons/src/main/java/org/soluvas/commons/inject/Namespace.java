@@ -1,4 +1,4 @@
-package org.soluvas.commons;
+package org.soluvas.commons.inject;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Namespaced {
+public @interface Namespace {
 	
 	String value();
 

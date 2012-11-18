@@ -142,7 +142,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      *
      * @param key key to store in the multimap
      * @param rights rights to store in the multimap
-     * @return TODO
+     * @return Number of replaced rights.
      */
     @Nonnull long replaceRights(@Nonnull L left, Iterable<? extends R> rights);
 
