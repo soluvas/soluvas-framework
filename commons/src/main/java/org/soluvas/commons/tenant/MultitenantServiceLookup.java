@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Collections2;
@@ -115,11 +116,12 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	 */
 	@Override
 	public TenantRef getTenant(@Nonnull final CommandSession session) {
-		String clientId = Optional.fromNullable(
+		Preconditions.checkNotNull(session, "CommandSession must not be null");
+		final String clientId = Optional.fromNullable(
 				(String) session.get("clientId")).or(defaultClientId);
-		String tenantEnv = Optional.fromNullable(
+		final String tenantEnv = Optional.fromNullable(
 				(String) session.get("tenantEnv")).or(defaultTenantEnv);
-		String tenantId = Optional.fromNullable(
+		final String tenantId = Optional.fromNullable(
 				(String) session.get("tenantId")).or(defaultClientId);
 		return new TenantRef(clientId, tenantId, tenantEnv);
 	}
