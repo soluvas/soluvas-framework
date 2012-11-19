@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.Weightable;
@@ -43,6 +44,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass appManifestEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass personInfoEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -189,6 +197,51 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPersonInfo() {
+		return personInfoEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPersonInfo_Id() {
+		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPersonInfo_Slug() {
+		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPersonInfo_Name() {
+		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPersonInfo_PhotoId() {
+		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
 	}
@@ -231,6 +284,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		appManifestEClass = createEClass(APP_MANIFEST);
 		createEAttribute(appManifestEClass, APP_MANIFEST__TITLE);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DESCRIPTION);
+
+		personInfoEClass = createEClass(PERSON_INFO);
+		createEAttribute(personInfoEClass, PERSON_INFO__ID);
+		createEAttribute(personInfoEClass, PERSON_INFO__SLUG);
+		createEAttribute(personInfoEClass, PERSON_INFO__NAME);
+		createEAttribute(personInfoEClass, PERSON_INFO__PHOTO_ID);
 
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
@@ -278,6 +337,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEClass(appManifestEClass, AppManifest.class, "AppManifest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAppManifest_Title(), ecorePackage.getEString(), "title", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_Description(), ecorePackage.getEString(), "description", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(personInfoEClass, PersonInfo.class, "PersonInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPersonInfo_Id(), ecorePackage.getEString(), "id", null, 1, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPersonInfo_Slug(), ecorePackage.getEString(), "slug", null, 1, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPersonInfo_Name(), ecorePackage.getEString(), "name", null, 1, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPersonInfo_PhotoId(), ecorePackage.getEString(), "photoId", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");

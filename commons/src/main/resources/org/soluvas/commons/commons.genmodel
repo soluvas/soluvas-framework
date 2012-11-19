@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.soluvas.commons/src/main/java" modelPluginID="org.soluvas.commons"
-    modelName="Commons" generateSchema="true" importerID="org.eclipse.emf.importer.ecore"
-    bundleManifest="false" complianceLevel="6.0" suppressGenModelAnnotations="false"
-    copyrightFields="false" publicConstructors="true">
+    modelName="Commons" generateSchema="true" rootExtendsInterface="org.soluvas.commons.SerializableEObject"
+    rootImplementsInterface="" importerID="org.eclipse.emf.importer.ecore" bundleManifest="false"
+    complianceLevel="6.0" suppressGenModelAnnotations="false" copyrightFields="false"
+    publicConstructors="true">
   <foreignModel>commons.ecore</foreignModel>
   <genPackages prefix="Commons" basePackage="org.soluvas" disposableProviderFactory="true"
       ecorePackage="commons.ecore#/">
@@ -18,6 +19,16 @@
     </genClasses>
     <genClasses image="false" ecoreClass="commons.ecore#//Weightable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Weightable/weight"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//AppManifest">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/description"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//PersonInfo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/slug"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/photoId"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

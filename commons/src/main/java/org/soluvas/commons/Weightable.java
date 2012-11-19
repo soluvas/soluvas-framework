@@ -18,9 +18,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.commons.CommonsPackage#getWeightable()
  * @model interface="true" abstract="true"
+ * @extends SerializableEObject
  * @generated
  */
-public interface Weightable extends EObject {
+public interface Weightable extends SerializableEObject {
 	/**
 	 * Returns the value of the '<em><b>Weight</b></em>' attribute.
 	 * The default value is <code>"0"</code>.

@@ -185,6 +185,61 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST_FEATURE_COUNT = WEIGHTABLE_FEATURE_COUNT + 4;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.PersonInfoImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPersonInfo()
+	 * @generated
+	 */
+	int PERSON_INFO = 3;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_INFO__ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Slug</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_INFO__SLUG = 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_INFO__NAME = 2;
+
+	/**
+	 * The feature id for the '<em><b>Photo Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_INFO__PHOTO_ID = 3;
+
+	/**
+	 * The number of structural features of the '<em>Person Info</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_INFO_FEATURE_COUNT = 4;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -192,7 +247,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 3;
+	int RESOURCE_TYPE = 4;
 
 
 	/**
@@ -279,6 +334,60 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAppManifest_Description();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.PersonInfo <em>Person Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Person Info</em>'.
+	 * @see org.soluvas.commons.PersonInfo
+	 * @generated
+	 */
+	EClass getPersonInfo();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PersonInfo#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.soluvas.commons.PersonInfo#getId()
+	 * @see #getPersonInfo()
+	 * @generated
+	 */
+	EAttribute getPersonInfo_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PersonInfo#getSlug <em>Slug</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Slug</em>'.
+	 * @see org.soluvas.commons.PersonInfo#getSlug()
+	 * @see #getPersonInfo()
+	 * @generated
+	 */
+	EAttribute getPersonInfo_Slug();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PersonInfo#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.soluvas.commons.PersonInfo#getName()
+	 * @see #getPersonInfo()
+	 * @generated
+	 */
+	EAttribute getPersonInfo_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PersonInfo#getPhotoId <em>Photo Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Photo Id</em>'.
+	 * @see org.soluvas.commons.PersonInfo#getPhotoId()
+	 * @see #getPersonInfo()
+	 * @generated
+	 */
+	EAttribute getPersonInfo_PhotoId();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -381,6 +490,48 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__DESCRIPTION = eINSTANCE.getAppManifest_Description();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.PersonInfoImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPersonInfo()
+		 * @generated
+		 */
+		EClass PERSON_INFO = eINSTANCE.getPersonInfo();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON_INFO__ID = eINSTANCE.getPersonInfo_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Slug</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON_INFO__SLUG = eINSTANCE.getPersonInfo_Slug();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON_INFO__NAME = eINSTANCE.getPersonInfo_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Photo Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON_INFO__PHOTO_ID = eINSTANCE.getPersonInfo_PhotoId();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

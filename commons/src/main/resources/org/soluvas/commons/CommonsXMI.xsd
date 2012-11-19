@@ -50,4 +50,16 @@
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="AppManifest" type="commons:AppManifest"/>
+  <xsd:complexType name="PersonInfo">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="id" type="xsd:string" use="required"/>
+    <xsd:attribute name="slug" type="xsd:string" use="required"/>
+    <xsd:attribute name="name" type="xsd:string" use="required"/>
+    <xsd:attribute name="photoId" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="PersonInfo" type="commons:PersonInfo"/>
 </xsd:schema>

@@ -19,9 +19,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.commons.CommonsPackage#getResourceAware()
  * @model interface="true" abstract="true"
+ * @extends SerializableEObject
  * @generated
  */
-public interface ResourceAware extends EObject {
+public interface ResourceAware extends SerializableEObject {
 	/**
 	 * Returns the value of the '<em><b>Resource Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->

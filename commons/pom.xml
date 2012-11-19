@@ -82,6 +82,7 @@
 				<artifactId>maven-bundle-plugin</artifactId>
 				<configuration>
 					<instructions>
+						<Export-Package>org.soluvas.commons.*</Export-Package>
 						<Import-Package>
 							org.apache.felix.service.command;resolution:=optional,
 							org.apache.felix.gogo.commands;resolution:=optional,

@@ -31,6 +31,15 @@ public interface CommonsFactory extends EFactory {
 	AppManifest createAppManifest();
 
 	/**
+	 * Returns a new object of class '<em>Person Info</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Person Info</em>'.
+	 * @generated
+	 */
+	PersonInfo createPersonInfo();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
