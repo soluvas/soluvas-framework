@@ -29,6 +29,7 @@ import org.apache.directory.shared.ldap.model.message.ModifyRequest;
 import org.apache.directory.shared.ldap.model.message.ModifyRequestImpl;
 import org.apache.directory.shared.ldap.model.message.ModifyResponse;
 import org.apache.directory.shared.ldap.model.message.ResultCodeEnum;
+import org.apache.directory.shared.ldap.model.message.SearchScope;
 import org.apache.directory.shared.ldap.model.schema.AttributeType;
 import org.apache.directory.shared.ldap.model.schema.SchemaManager;
 import org.apache.directory.shared.ldap.model.url.LdapUrl;
@@ -383,4 +384,27 @@ public class LdapUtils {
 		return "{SSHA}" + Base64.encodeBase64String(digestAndSalt);
 	}
 	
+	/**
+	 * Delete an {@link Entry} and all its children.
+	 * @param ldap
+	 * @param dn
+	 * @return Total number of deleted entries.
+	 */
+	public static long delete(@Nonnull final LdapConnection ldap, @Nonnull final String dn) {
+		try {
+			final List<Entry> children = LdapUtils.asList(ldap.search(dn, "(objectclass=*)", SearchScope.ONELEVEL));
+			log.debug("Deleting {} and its {} children", dn, children.size());
+			long deletedEntries = 0;
+			for (Entry child : children) {
+				deletedEntries += delete(ldap, child.getDn().getName());
+			}
+			ldap.delete(dn);
+			deletedEntries++;
+			log.info("Deleted {} including {} sub-entries", dn, deletedEntries);
+			return deletedEntries;
+		} catch (LdapException e) {
+			throw new RuntimeException("Cannot delete " + dn, e);
+		}
+	}
+
 }
