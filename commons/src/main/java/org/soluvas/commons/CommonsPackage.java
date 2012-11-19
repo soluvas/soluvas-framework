@@ -231,13 +231,22 @@ public interface CommonsPackage extends EPackage {
 	int PERSON_INFO__PHOTO_ID = 3;
 
 	/**
+	 * The feature id for the '<em><b>Gender</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_INFO__GENDER = 4;
+
+	/**
 	 * The number of structural features of the '<em>Person Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_INFO_FEATURE_COUNT = 4;
+	int PERSON_INFO_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
@@ -248,6 +257,17 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	int RESOURCE_TYPE = 4;
+
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.Gender <em>Gender</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.Gender
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
+	 * @generated
+	 */
+	int GENDER = 5;
 
 
 	/**
@@ -390,6 +410,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getPersonInfo_PhotoId();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PersonInfo#getGender <em>Gender</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Gender</em>'.
+	 * @see org.soluvas.commons.PersonInfo#getGender()
+	 * @see #getPersonInfo()
+	 * @generated
+	 */
+	EAttribute getPersonInfo_Gender();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -398,6 +429,16 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getResourceType();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.commons.Gender <em>Gender</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Gender</em>'.
+	 * @see org.soluvas.commons.Gender
+	 * @generated
+	 */
+	EEnum getGender();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -534,6 +575,14 @@ public interface CommonsPackage extends EPackage {
 		EAttribute PERSON_INFO__PHOTO_ID = eINSTANCE.getPersonInfo_PhotoId();
 
 		/**
+		 * The meta object literal for the '<em><b>Gender</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON_INFO__GENDER = eINSTANCE.getPersonInfo_Gender();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -542,6 +591,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum RESOURCE_TYPE = eINSTANCE.getResourceType();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.Gender <em>Gender</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.Gender
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
+		 * @generated
+		 */
+		EEnum GENDER = eINSTANCE.getGender();
 
 	}
 

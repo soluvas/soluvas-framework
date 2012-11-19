@@ -71,6 +71,61 @@
     <element xmi:type="ecore:EClass" href="commons.ecore#//AppManifest"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_J57LEiSDEeKyUdMfH4dSfg" x="146" y="239"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_G7t6ITJQEeKBp9P6a8Rz8A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_G7vvUDJQEeKBp9P6a8Rz8A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_G7wWYDJQEeKBp9P6a8Rz8A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_KW9R8DJQEeKBp9P6a8Rz8A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//Gender/male"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_KW9R8TJQEeKBp9P6a8Rz8A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_K7ap4DJQEeKBp9P6a8Rz8A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//Gender/female"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_K7ap4TJQEeKBp9P6a8Rz8A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_G7wWYTJQEeKBp9P6a8Rz8A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_G7wWYjJQEeKBp9P6a8Rz8A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_G7wWYzJQEeKBp9P6a8Rz8A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_G7t6IjJQEeKBp9P6a8Rz8A" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="commons.ecore#//Gender"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_G7t6IzJQEeKBp9P6a8Rz8A" x="571" y="222"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_IQXY4DJQEeKBp9P6a8Rz8A" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_IQacMDJQEeKBp9P6a8Rz8A" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_IQbqUDJQEeKBp9P6a8Rz8A" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_IQf7wDJQEeKBp9P6a8Rz8A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="commons.ecore#//PersonInfo/id"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_IQgi0DJQEeKBp9P6a8Rz8A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_IQgi0TJQEeKBp9P6a8Rz8A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="commons.ecore#//PersonInfo/slug"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_IQgi0jJQEeKBp9P6a8Rz8A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_IQhJ4DJQEeKBp9P6a8Rz8A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="commons.ecore#//PersonInfo/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_IQhJ4TJQEeKBp9P6a8Rz8A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_IQhw8DJQEeKBp9P6a8Rz8A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="commons.ecore#//PersonInfo/photoId"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_IQhw8TJQEeKBp9P6a8Rz8A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_In9ZgDJQEeKBp9P6a8Rz8A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="commons.ecore#//PersonInfo/gender"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_In9ZgTJQEeKBp9P6a8Rz8A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_IQbqUTJQEeKBp9P6a8Rz8A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_IQbqUjJQEeKBp9P6a8Rz8A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_IQbqUzJQEeKBp9P6a8Rz8A"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_IQc4cDJQEeKBp9P6a8Rz8A" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_IQc4cTJQEeKBp9P6a8Rz8A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_IQc4cjJQEeKBp9P6a8Rz8A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_IQc4czJQEeKBp9P6a8Rz8A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_IQXY4TJQEeKBp9P6a8Rz8A" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="commons.ecore#//PersonInfo"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_IQXY4jJQEeKBp9P6a8Rz8A" x="612" y="311"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Hn9XoSQDEeKL8qHxNHEWSw"/>
   <element xmi:type="ecore:EPackage" href="commons.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_Rrm-sCSDEeKyUdMfH4dSfg" type="3003" source="_J57LECSDEeKyUdMfH4dSfg" target="_aOshcSSAEeKyUdMfH4dSfg">

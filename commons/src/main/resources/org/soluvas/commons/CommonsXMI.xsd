@@ -20,6 +20,12 @@
       </xsd:enumeration>
     </xsd:restriction>
   </xsd:simpleType>
+  <xsd:simpleType name="Gender">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="male"/>
+      <xsd:enumeration value="female"/>
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType abstract="true" name="ResourceAware">
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element ref="xmi:Extension"/>
@@ -60,6 +66,7 @@
     <xsd:attribute name="slug" type="xsd:string" use="required"/>
     <xsd:attribute name="name" type="xsd:string" use="required"/>
     <xsd:attribute name="photoId" type="xsd:string"/>
+    <xsd:attribute name="gender" type="commons:Gender"/>
   </xsd:complexType>
   <xsd:element name="PersonInfo" type="commons:PersonInfo"/>
 </xsd:schema>

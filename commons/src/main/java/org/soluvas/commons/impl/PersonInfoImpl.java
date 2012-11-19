@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo;
 
 /**
@@ -20,6 +21,7 @@ import org.soluvas.commons.PersonInfo;
  *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getSlug <em>Slug</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getPhotoId <em>Photo Id</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getGender <em>Gender</em>}</li>
  * </ul>
  * </p>
  *
@@ -105,6 +107,26 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 	 * @ordered
 	 */
 	protected String photoId = PHOTO_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getGender() <em>Gender</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGender()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Gender GENDER_EDEFAULT = Gender.MALE;
+
+	/**
+	 * The cached value of the '{@link #getGender() <em>Gender</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGender()
+	 * @generated
+	 * @ordered
+	 */
+	protected Gender gender = GENDER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -222,6 +244,27 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Gender getGender() {
+		return gender;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGender(Gender newGender) {
+		Gender oldGender = gender;
+		gender = newGender == null ? GENDER_EDEFAULT : newGender;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON_INFO__GENDER, oldGender, gender));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -233,6 +276,8 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 				return getName();
 			case CommonsPackage.PERSON_INFO__PHOTO_ID:
 				return getPhotoId();
+			case CommonsPackage.PERSON_INFO__GENDER:
+				return getGender();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -256,6 +301,9 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 				return;
 			case CommonsPackage.PERSON_INFO__PHOTO_ID:
 				setPhotoId((String)newValue);
+				return;
+			case CommonsPackage.PERSON_INFO__GENDER:
+				setGender((Gender)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -281,6 +329,9 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 			case CommonsPackage.PERSON_INFO__PHOTO_ID:
 				setPhotoId(PHOTO_ID_EDEFAULT);
 				return;
+			case CommonsPackage.PERSON_INFO__GENDER:
+				setGender(GENDER_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -301,6 +352,8 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case CommonsPackage.PERSON_INFO__PHOTO_ID:
 				return PHOTO_ID_EDEFAULT == null ? photoId != null : !PHOTO_ID_EDEFAULT.equals(photoId);
+			case CommonsPackage.PERSON_INFO__GENDER:
+				return gender != GENDER_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -323,6 +376,8 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 		result.append(name);
 		result.append(", photoId: ");
 		result.append(photoId);
+		result.append(", gender: ");
+		result.append(gender);
 		result.append(')');
 		return result.toString();
 	}

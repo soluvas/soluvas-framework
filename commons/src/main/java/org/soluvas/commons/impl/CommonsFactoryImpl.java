@@ -74,6 +74,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 		switch (eDataType.getClassifierID()) {
 			case CommonsPackage.RESOURCE_TYPE:
 				return createResourceTypeFromString(eDataType, initialValue);
+			case CommonsPackage.GENDER:
+				return createGenderFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -89,6 +91,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 		switch (eDataType.getClassifierID()) {
 			case CommonsPackage.RESOURCE_TYPE:
 				return convertResourceTypeToString(eDataType, instanceValue);
+			case CommonsPackage.GENDER:
+				return convertGenderToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -131,6 +135,26 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertResourceTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Gender createGenderFromString(EDataType eDataType, String initialValue) {
+		Gender result = Gender.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertGenderToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

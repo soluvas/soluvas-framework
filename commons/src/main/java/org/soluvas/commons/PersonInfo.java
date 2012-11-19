@@ -15,6 +15,7 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.PersonInfo#getSlug <em>Slug</em>}</li>
  *   <li>{@link org.soluvas.commons.PersonInfo#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.commons.PersonInfo#getPhotoId <em>Photo Id</em>}</li>
+ *   <li>{@link org.soluvas.commons.PersonInfo#getGender <em>Gender</em>}</li>
  * </ul>
  * </p>
  *
@@ -127,5 +128,34 @@ public interface PersonInfo extends SerializableEObject {
 	 * @generated
 	 */
 	void setPhotoId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Gender</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.soluvas.commons.Gender}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Gender</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Gender</em>' attribute.
+	 * @see org.soluvas.commons.Gender
+	 * @see #setGender(Gender)
+	 * @see org.soluvas.commons.CommonsPackage#getPersonInfo_Gender()
+	 * @model
+	 * @generated
+	 */
+	Gender getGender();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.PersonInfo#getGender <em>Gender</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Gender</em>' attribute.
+	 * @see org.soluvas.commons.Gender
+	 * @see #getGender()
+	 * @generated
+	 */
+	void setGender(Gender value);
 
 } // PersonInfo
