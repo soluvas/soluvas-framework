@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons.impl;
 
+import javax.measure.unit.Unit;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -11,6 +12,8 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import org.joda.money.CurrencyUnit;
+import org.joda.time.DateTime;
 import org.soluvas.commons.*;
 
 /**
@@ -76,6 +79,12 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createResourceTypeFromString(eDataType, initialValue);
 			case CommonsPackage.GENDER:
 				return createGenderFromString(eDataType, initialValue);
+			case CommonsPackage.DATE_TIME:
+				return createDateTimeFromString(eDataType, initialValue);
+			case CommonsPackage.CURRENCY_UNIT:
+				return createCurrencyUnitFromString(eDataType, initialValue);
+			case CommonsPackage.UNIT:
+				return createUnitFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -93,6 +102,12 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertResourceTypeToString(eDataType, instanceValue);
 			case CommonsPackage.GENDER:
 				return convertGenderToString(eDataType, instanceValue);
+			case CommonsPackage.DATE_TIME:
+				return convertDateTimeToString(eDataType, instanceValue);
+			case CommonsPackage.CURRENCY_UNIT:
+				return convertCurrencyUnitToString(eDataType, instanceValue);
+			case CommonsPackage.UNIT:
+				return convertUnitToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -156,6 +171,60 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 */
 	public String convertGenderToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DateTime createDateTimeFromString(EDataType eDataType, String initialValue) {
+		return (DateTime)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertDateTimeToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CurrencyUnit createCurrencyUnitFromString(EDataType eDataType, String initialValue) {
+		return (CurrencyUnit)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertCurrencyUnitToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Unit createUnitFromString(EDataType eDataType, String initialValue) {
+		return (Unit)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertUnitToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

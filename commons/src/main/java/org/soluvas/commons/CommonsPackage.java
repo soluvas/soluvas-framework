@@ -4,6 +4,7 @@ package org.soluvas.commons;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -271,6 +272,37 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Date Time</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.joda.time.DateTime
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
+	 * @generated
+	 */
+	int DATE_TIME = 6;
+
+	/**
+	 * The meta object id for the '<em>Currency Unit</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.joda.money.CurrencyUnit
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
+	 * @generated
+	 */
+	int CURRENCY_UNIT = 7;
+
+	/**
+	 * The meta object id for the '<em>Unit</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see javax.measure.unit.Unit
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
+	 * @generated
+	 */
+	int UNIT = 8;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -441,6 +473,39 @@ public interface CommonsPackage extends EPackage {
 	EEnum getGender();
 
 	/**
+	 * Returns the meta object for data type '{@link org.joda.time.DateTime <em>Date Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Date Time</em>'.
+	 * @see org.joda.time.DateTime
+	 * @model instanceClass="org.joda.time.DateTime"
+	 * @generated
+	 */
+	EDataType getDateTime();
+
+	/**
+	 * Returns the meta object for data type '{@link org.joda.money.CurrencyUnit <em>Currency Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Currency Unit</em>'.
+	 * @see org.joda.money.CurrencyUnit
+	 * @model instanceClass="org.joda.money.CurrencyUnit"
+	 * @generated
+	 */
+	EDataType getCurrencyUnit();
+
+	/**
+	 * Returns the meta object for data type '{@link javax.measure.unit.Unit <em>Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Unit</em>'.
+	 * @see javax.measure.unit.Unit
+	 * @model instanceClass="javax.measure.unit.Unit"
+	 * @generated
+	 */
+	EDataType getUnit();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -601,6 +666,36 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum GENDER = eINSTANCE.getGender();
+
+		/**
+		 * The meta object literal for the '<em>Date Time</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.joda.time.DateTime
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
+		 * @generated
+		 */
+		EDataType DATE_TIME = eINSTANCE.getDateTime();
+
+		/**
+		 * The meta object literal for the '<em>Currency Unit</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.joda.money.CurrencyUnit
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
+		 * @generated
+		 */
+		EDataType CURRENCY_UNIT = eINSTANCE.getCurrencyUnit();
+
+		/**
+		 * The meta object literal for the '<em>Unit</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see javax.measure.unit.Unit
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
+		 * @generated
+		 */
+		EDataType UNIT = eINSTANCE.getUnit();
 
 	}
 
