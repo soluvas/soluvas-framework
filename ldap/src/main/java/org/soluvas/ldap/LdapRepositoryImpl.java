@@ -237,14 +237,6 @@ public class LdapRepositoryImpl<T> implements LdapRepository<T> {
 	}
 
 	/**
-	 * @param baseDn the baseDn to set
-	 */
-	@Override
-	public void setBaseDn(String baseDn) {
-		this.baseDn = baseDn;
-	}
-
-	/**
 	 * @return the entityClass
 	 */
 	@Override
@@ -253,25 +245,10 @@ public class LdapRepositoryImpl<T> implements LdapRepository<T> {
 	}
 
 	/**
-	 * @param entityClass the entityClass to set
-	 */
-	@Override
-	public void setEntityClass(Class<T> entityClass) {
-		this.entityClass = entityClass;
-	}
-
-	/**
 	 * @return the connection
 	 */
 	public LdapConnection getConnection() {
 		return connection;
-	}
-
-	/**
-	 * @param connection the connection to set
-	 */
-	public void setConnection(LdapConnection connection) {
-		this.connection = connection;
 	}
 
 	/**

@@ -314,13 +314,13 @@ public class LdapUtils {
 		}
 	}
 
-	public static <V> V withConnection(ObjectPool<LdapConnection> ldapPool, Function<LdapConnection, V> function) {
+	public static <V> V withConnection(@Nonnull final ObjectPool<LdapConnection> ldapPool, @Nonnull final Function<LdapConnection, V> function) {
 		try {
-			LdapConnection conn = ldapPool.borrowObject();
+			final LdapConnection conn = ldapPool.borrowObject();
 			try {
 				if (conn.getSchemaManager() == null) {
 					conn.loadSchema();
-					SchemaManager schemaManager = conn.getSchemaManager();
+					final SchemaManager schemaManager = conn.getSchemaManager();
 					Preconditions.checkNotNull(schemaManager, "Cannot load schemas for LDAP connection %s", conn);
 				}
 				return function.apply(conn);
@@ -340,7 +340,7 @@ public class LdapUtils {
 	 * @see #encodeSsha(String)
 	 */
 	public static byte[] generateSalt() {
-		byte[] bytes = new byte[4];
+		final byte[] bytes = new byte[4];
 		random.nextBytes(bytes);
 		return bytes;
 	}
@@ -357,7 +357,7 @@ public class LdapUtils {
 	 */
 	public static byte[] calculateSsha(String password, byte[] salt)
 			throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		MessageDigest digest = MessageDigest.getInstance("SHA");
+		final MessageDigest digest = MessageDigest.getInstance("SHA");
 		digest.reset();
 		digest.update(password.getBytes("UTF-8"));
 		digest.update(salt);

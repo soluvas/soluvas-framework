@@ -3,6 +3,7 @@ package org.soluvas.ldap;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 
@@ -31,30 +32,18 @@ import com.google.common.collect.Lists;
  */
 public class PooledLdapRepository<T> implements LdapRepository<T> {
 
-	private transient Logger log = LoggerFactory.getLogger(PooledLdapRepository.class);
-	@Inject private transient ObjectPool<LdapConnection> pool;
-	private LdapMapper mapper;
-	
-	private String baseDn;
-	private Class<T> entityClass;
+	private static Logger log = LoggerFactory.getLogger(PooledLdapRepository.class);
+	@Inject
+	private final ObjectPool<LdapConnection> pool;
+	private final LdapMapper mapper;
+	private final String baseDn;
+	private final Class<T> entityClass;
 
-	public PooledLdapRepository() {
-		super();
-	}
-	
-	public PooledLdapRepository(Class<T> entityClass, ObjectPool<LdapConnection> pool, String baseDn) {
+	public PooledLdapRepository(@Nonnull final Class<T> entityClass, @Nonnull final ObjectPool<LdapConnection> pool, @Nonnull final String baseDn) {
 		super();
 		this.entityClass = entityClass;
 		this.pool = pool;
 		this.baseDn = baseDn;
-	}
-	
-	protected <V> V withConnection(Function<LdapConnection, V> function) {
-		return LdapUtils.withConnection(pool, function);
-	}
-	
-	@Override
-	public void init() {
 		try {
 			mapper = withConnection(new Function<LdapConnection, LdapMapper>() {
 				@Override @Nullable
@@ -64,8 +53,17 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 				}
 			});
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("Cannot initialize " + entityClass.getName() + " LDAP repository at " + baseDn, e);
 		}
+	}
+	
+	protected <V> V withConnection(@Nonnull final Function<LdapConnection, V> function) {
+		return LdapUtils.withConnection(pool, function);
+	}
+	
+	@Override
+	public void init() {
+		// No longer needed
 	}
 	
 	/**
@@ -317,27 +315,11 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	}
 
 	/**
-	 * @param baseDn the baseDn to set
-	 */
-	@Override
-	public void setBaseDn(String baseDn) {
-		this.baseDn = baseDn;
-	}
-
-	/**
 	 * @return the entityClass
 	 */
 	@Override
 	public Class<T> getEntityClass() {
 		return entityClass;
-	}
-
-	/**
-	 * @param entityClass the entityClass to set
-	 */
-	@Override
-	public void setEntityClass(Class<T> entityClass) {
-		this.entityClass = entityClass;
 	}
 
 	/**
@@ -350,10 +332,6 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 
 	public ObjectPool<LdapConnection> getPool() {
 		return pool;
-	}
-
-	public void setPool(ObjectPool<LdapConnection> pool) {
-		this.pool = pool;
 	}
 
 	@Override

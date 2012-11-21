@@ -8,8 +8,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
+import java.io.IOException;
+
+import javax.annotation.Nullable;
+
 import org.apache.directory.ldap.client.api.LdapConnection;
+import org.apache.directory.ldap.client.api.LdapConnectionConfig;
+import org.apache.directory.ldap.client.api.LdapConnectionPool;
 import org.apache.directory.ldap.client.api.LdapNetworkConnection;
+import org.apache.directory.ldap.client.api.PoolableLdapConnectionFactory;
 import org.apache.directory.shared.ldap.model.entry.DefaultEntry;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.entry.Modification;
@@ -20,11 +27,13 @@ import org.apache.directory.shared.ldap.model.schema.SchemaManager;
 import org.apache.directory.shared.ldap.schemamanager.impl.DefaultSchemaManager;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.ldap.SocialPerson.Gender;
 
+import com.google.common.base.Function;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -281,6 +290,21 @@ public class LdapUtilsTest {
 		final String dn = "uid=liz,ou=users,dc=aksimata,dc=com";
 		log.info("Delete Entry {}", dn);
 		conn.delete(dn);
+	}
+
+	@Ignore @Test
+	public void loadSchemaInApacheDS157() throws LdapException, IOException {
+		final LdapConnectionConfig config = LdapUtils.createTrustingConfig("*",
+				"uid=berbatikstaging,ou=users,ou=system", "*");
+		final PoolableLdapConnectionFactory connFactory = new PoolableLdapConnectionFactory(config);
+		final LdapConnectionPool pool = new LdapConnectionPool(connFactory);
+		LdapUtils.withConnection(pool, new Function<LdapConnection, Void>() {
+			@Override
+			@Nullable
+			public Void apply(@Nullable LdapConnection input) {
+				return null;
+			}
+		});
 	}
 
 }

@@ -84,19 +84,9 @@ public interface LdapRepository<T> extends EntityLookup<T, String> {
 	String getBaseDn();
 
 	/**
-	 * @param baseDn the baseDn to set
-	 */
-	void setBaseDn(String baseDn);
-
-	/**
 	 * @return the entityClass
 	 */
 	Class<T> getEntityClass();
-
-	/**
-	 * @param entityClass the entityClass to set
-	 */
-	void setEntityClass(Class<T> entityClass);
 
 	/**
 	 * @return the mapper
