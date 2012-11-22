@@ -1,7 +1,6 @@
 package org.soluvas.facebook;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
@@ -57,10 +56,10 @@ public class FacebookUtilsTest {
 	}
 
 	@Test public void findFriends() {
-		List<HintPerson> hints = facebookUtils.findFriends("---");
+		final List<HintPerson> hints = facebookUtils.findFriends("---");
 		assertNotNull(hints);
 		log.info("Got {} friends", hints.size());
-		assertThat(hints, hasSize(greaterThanOrEqualTo(800)));
+		assertThat(hints.size(), greaterThanOrEqualTo(800));
 	}
 
 }

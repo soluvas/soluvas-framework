@@ -3,7 +3,7 @@
  */
 package org.soluvas.json.money;
 
-import static org.hamcrest.Matchers.comparesEqualTo;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -18,12 +18,10 @@ import org.joda.money.Money;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.soluvas.json.money.JodaMoneyModule;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 
 /**
  * @author ceefour
@@ -55,7 +53,7 @@ public class JodaMoneyDeserializersTest {
 		Money money = objectMapper.readValue("{\"currencyCode\": \"IDR\", \"amount\": \"501250.95\"}", Money.class);
 		assertNotNull(money);
 		assertEquals(expected.getCurrencyUnit(), money.getCurrencyUnit());
-		assertThat(money.getAmount(), comparesEqualTo(expected.getAmount()));
+		assertThat(money.getAmount(), equalTo(expected.getAmount()));
 	}
 
 	@Test
@@ -64,7 +62,7 @@ public class JodaMoneyDeserializersTest {
 		Money money = objectMapper.readValue("{\"currencyCode\": \"IDR\", \"amount\": 501250.95}", Money.class);
 		assertNotNull(money);
 		assertEquals(expected.getCurrencyUnit(), money.getCurrencyUnit());
-		assertThat(money.getAmount(), comparesEqualTo(expected.getAmount()));
+		assertThat(money.getAmount(), equalTo(expected.getAmount()));
 	}
 
 	@Test
@@ -73,7 +71,7 @@ public class JodaMoneyDeserializersTest {
 		Money money = objectMapper.readValue("{\"amount\": \"501250.95\", \"currencyCode\": \"IDR\"}", Money.class);
 		assertNotNull(money);
 		assertEquals(expected.getCurrencyUnit(), money.getCurrencyUnit());
-		assertThat(money.getAmount(), comparesEqualTo(expected.getAmount()));
+		assertThat(money.getAmount(), equalTo(expected.getAmount()));
 	}
 
 	@Test
@@ -88,7 +86,7 @@ public class JodaMoneyDeserializersTest {
 		BigMoney money = objectMapper.readValue("{\"currencyCode\": \"IDR\", \"amount\": \"501250.95\"}", BigMoney.class);
 		assertNotNull(money);
 		assertEquals(expected.getCurrencyUnit(), money.getCurrencyUnit());
-		assertThat(money.getAmount(), comparesEqualTo(expected.getAmount()));
+		assertThat(money.getAmount(), equalTo(expected.getAmount()));
 	}
 	
 	@Test
@@ -97,7 +95,7 @@ public class JodaMoneyDeserializersTest {
 		BigMoney money = objectMapper.readValue("{\"currencyCode\": \"IDR\", \"amount\": 501250.95}", BigMoney.class);
 		assertNotNull(money);
 		assertEquals(expected.getCurrencyUnit(), money.getCurrencyUnit());
-		assertThat(money.getAmount(), comparesEqualTo(expected.getAmount()));
+		assertEquals(0, money.getAmount().compareTo(expected.getAmount()));
 	}
 	
 	@Test

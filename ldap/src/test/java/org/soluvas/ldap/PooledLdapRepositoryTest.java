@@ -104,7 +104,7 @@ public class PooledLdapRepositoryTest {
 	public void modifyShouldThrowExceptionIfFailed() {
 		SocialPerson person = personRepo.findOne("hendy");
 		person.setId("nana");
-		SocialPerson modified = personRepo.modify(person, false);
+		SocialPerson modified = personRepo.modify(person);
 		log.info("Modified person: ", modified);
 	}
 

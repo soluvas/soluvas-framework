@@ -1,10 +1,6 @@
 package org.soluvas.json.money;
 
-import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -15,12 +11,10 @@ import org.joda.money.Money;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.soluvas.json.money.JodaMoneyModule;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 
 /**
  * @author ceefour

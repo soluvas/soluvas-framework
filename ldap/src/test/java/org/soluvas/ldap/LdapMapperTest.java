@@ -1,6 +1,7 @@
 package org.soluvas.ldap;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -9,9 +10,12 @@ import java.util.Set;
 
 import org.apache.directory.shared.ldap.model.entry.DefaultEntry;
 import org.apache.directory.shared.ldap.model.entry.Entry;
+import org.apache.directory.shared.ldap.model.entry.Modification;
+import org.apache.directory.shared.ldap.model.entry.ModificationOperation;
+import org.apache.directory.shared.ldap.model.exception.LdapException;
 import org.apache.directory.shared.ldap.model.exception.LdapInvalidAttributeValueException;
 import org.apache.directory.shared.ldap.model.exception.LdapInvalidDnException;
-import org.apache.directory.shared.ldap.model.schema.AttributeType;
+import org.apache.directory.shared.ldap.model.message.ModifyRequest;
 import org.apache.directory.shared.ldap.model.schema.SchemaManager;
 import org.apache.directory.shared.ldap.model.schema.registries.Schema;
 import org.apache.directory.shared.ldap.model.schema.registries.SchemaLoader;
@@ -35,15 +39,13 @@ public class LdapMapperTest {
 
 	private transient Logger log = LoggerFactory.getLogger(LdapMapperTest.class);
 	private LdapMapper mapper;
-	private DefaultSchemaManager schemaManager;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		schemaManager = new DefaultSchemaManager();
-		mapper = new LdapMapper(schemaManager);
+		mapper = new LdapMapper();
 	}
 
 	/**
@@ -77,28 +79,13 @@ public class LdapMapperTest {
 		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
 		log.info("Output Entry: {}", entry);
 		
-		AttributeType objectClassType = schemaManager.getAttributeType("objectClass");
-		assertEquals(objectClassType, entry.get("objectClass").getAttributeType());
-		assertTrue("mapped Entry should contain AttributeType objectClass", entry.containsAttribute(objectClassType));
-		AttributeType uidType = schemaManager.getAttributeType("uid");
-		assertEquals(uidType, entry.get("uid").getAttributeType());
-		assertTrue("mapped Entry should contain AttributeType uid", entry.containsAttribute(uidType));
-		AttributeType uniqueIdentifierType = schemaManager.getAttributeType("uniqueIdentifier");
-		assertEquals(uniqueIdentifierType, entry.get("uniqueIdentifier").getAttributeType());
-		assertTrue("mapped Entry should contain AttributeType uniqueIdentifier", entry.containsAttribute(uniqueIdentifierType));
-		AttributeType gnType = schemaManager.getAttributeType("gn");
-		assertEquals(gnType, entry.get("gn").getAttributeType());
-		assertEquals(gnType, entry.get("givenName").getAttributeType());
-		assertTrue("mapped Entry should contain AttributeType gn", entry.containsAttribute(gnType));
-		AttributeType snType = schemaManager.getAttributeType("sn");
-		assertEquals(snType, entry.get("sn").getAttributeType());
-		assertTrue("mapped Entry should contain AttributeType sn", entry.containsAttribute(snType));
-		AttributeType cnType = schemaManager.getAttributeType("cn");
-		assertEquals(cnType, entry.get("cn").getAttributeType());
-		assertTrue("mapped Entry should contain AttributeType cn", entry.containsAttribute(cnType));
-		AttributeType mailType = schemaManager.getAttributeType("mail");
-		assertEquals(mailType, entry.get("mail").getAttributeType());
-		assertTrue("mapped Entry should contain AttributeType mail", entry.containsAttribute(mailType));
+		assertTrue("mapped Entry should contain AttributeType objectClass", entry.containsAttribute("objectClass"));
+		assertTrue("mapped Entry should contain AttributeType uid", entry.containsAttribute("uid"));
+		assertTrue("mapped Entry should contain AttributeType uniqueIdentifier", entry.containsAttribute("uniqueIdentifier"));
+		assertTrue("mapped Entry should contain AttributeType gn", entry.containsAttribute("gn"));
+		assertTrue("mapped Entry should contain AttributeType sn", entry.containsAttribute("sn"));
+		assertTrue("mapped Entry should contain AttributeType cn", entry.containsAttribute("cn"));
+		assertTrue("mapped Entry should contain AttributeType mail", entry.containsAttribute("mail"));
 	}
 
 	@Test public void mapsSimpleClassWithProperAlias() throws LdapInvalidAttributeValueException {
@@ -109,7 +96,7 @@ public class LdapMapperTest {
 		log.info("Output Entry: {}", entry);
 		
 		assertEquals("Hendy", entry.get("gn").getString());
-		assertEquals("Hendy", entry.get("givenName").getString());
+//		assertEquals("Hendy", entry.get("givenName").getString()); // no longer schema aware :)
 	}
 
 	@Test public void mapsMultiValuesToEntry() throws LdapInvalidAttributeValueException {
@@ -136,7 +123,7 @@ public class LdapMapperTest {
 		final Collection<Schema> schemas = customSchemaLoader.getAllEnabled();
 		log.info("Loaded {} LDAP schemas: {}", schemas.size(), schemas);
 		customSchemaMgr.enable(schemas.toArray(new Schema[] {}));
-		LdapMapper customMapper = new LdapMapper(customSchemaMgr);
+		LdapMapper customMapper = new LdapMapper();
 		
 		SocialPerson hendy = new SocialPerson("hendy", "hendy.irawan", "Hendy", "Irawan", Gender.MALE);
 		hendy.setEmails(ImmutableSet.of("hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com"));
@@ -263,20 +250,19 @@ public class LdapMapperTest {
 
 	@Test
 	public void includesSuperClassAttributes() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
-		Set<String> expectedAttributeIds = ImmutableSet.of(
-				// Person:
-				"uid", "uniqueIdentifier", "gn", "givenName", "sn", "cn",
-				"userPassword", "mail", "mobile", "telephoneNumber",
-				"street", "postalCode", "l", "st", "c",
-				// SocialPerson:
-				"primaryMail", "photoId", "gender", "fbId", "facebookId", "fbUser", "facebookUser",
-				"fbAccessToken", "facebookAccessToken",
-				"twitterId", "twitterScreenName", "virtualMail", "nickname");
-		Set<String> attributeIds = mapper.getAttributeIds(SocialPerson.class);
-		;
+		final Set<String> expectedAttributeIds = ImmutableSet.of(
+			// Person:
+			"uid", "uniqueIdentifier", "gn", "givenName", "sn", "cn",
+			"userPassword", "mail", "mobile", "telephoneNumber",
+			"street", "postalCode", "l", "st", "c",
+			// SocialPerson:
+			"primaryMail", "photoId", "gender", "fbId", "facebookId", "facebookUsername", "fbUser",
+			"fbAccessToken",
+			"twitterId", "twitterScreenName", "virtualMail", "nickname",
+			"primaryShippingAddress" );
+		final Set<String> attributeIds = mapper.getAttributeIds(SocialPerson.class);
 		log.info("Attribute IDs of SocialPerson: {}", attributeIds);
 		assertEquals(Ordering.natural().immutableSortedCopy(expectedAttributeIds), Ordering.natural().immutableSortedCopy(attributeIds));
-//		assertEquals(expectedAttributeIds, attributeIds);
 	}
 
 	@Test public void mapsLongToEntry() throws LdapInvalidAttributeValueException {
@@ -328,4 +314,256 @@ public class LdapMapperTest {
 		assertEquals("Hendy", person.getFirstName());
 	}
 	
+	@Test public void canAddObjectClasses() throws LdapException {
+		final Entry existingEntry = new DefaultEntry("uid=budi,ou=users,dc=dev,dc=berbatik,dc=com");
+		existingEntry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject");
+//		existing.put("uid", "hendy");
+		existingEntry.put("uniqueIdentifier", "hendy.irawan");
+		existingEntry.put("givenName", "Hendy");
+		existingEntry.put("sn", "Irawan");
+		existingEntry.put("cn", "Hendy Irawan");
+		existingEntry.put("mail", "hendy@soluvas.com", "ceefour666@gmail.com", "hendy@bippo.co.id");
+		existingEntry.put("magentoId", "123");
+		
+		final Person oldLiz = mapper.fromEntry(existingEntry, Person.class);
+		final Person newLiz = mapper.fromEntry(existingEntry, Person.class);
+		
+		final ModifyRequest request = mapper.createModifyRequest(existingEntry, oldLiz, newLiz);
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertEquals(1, request.getModifications().size());
+		final Modification modification = request.getModifications().iterator().next();
+		assertEquals(ModificationOperation.ADD_ATTRIBUTE, modification.getOperation());
+		assertEquals("objectClass", modification.getAttribute().getUpId());
+		assertEquals(2, modification.getAttribute().size());
+	}
+
+	@Test public void properModificationWhenUpdatingStandardPerson() throws LdapException {
+		final Entry existingEntry = new DefaultEntry("uid=budi,ou=users,dc=dev,dc=berbatik,dc=com");
+		existingEntry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject",
+				"inetOrgPerson", "uidObject");
+//		existing.put("uid", "hendy");
+		existingEntry.put("uniqueIdentifier", "hendy.irawan");
+		existingEntry.put("givenName", "Hendy");
+		existingEntry.put("sn", "Irawan");
+		existingEntry.put("cn", "Hendy Irawan");
+		existingEntry.put("mail", "hendy@soluvas.com", "ceefour666@gmail.com", "hendy@bippo.co.id");
+		existingEntry.put("magentoId", "123");
+		
+		final Person oldLiz = mapper.fromEntry(existingEntry, Person.class);
+		final Person newLiz = mapper.fromEntry(existingEntry, Person.class);
+		newLiz.setMobile("08123456789");
+		
+		final ModifyRequest request = mapper.createModifyRequest(existingEntry, oldLiz, newLiz);
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertEquals(1, request.getModifications().size());
+		final Modification modification = request.getModifications().iterator().next();
+		assertEquals(ModificationOperation.REPLACE_ATTRIBUTE, modification.getOperation());
+		assertEquals("mobile", modification.getAttribute().getUpId());
+	}
+
+	@Test public void canUpdateSocialPerson() throws LdapException {
+		final Entry existingEntry = new DefaultEntry("uid=budi,ou=users,dc=dev,dc=berbatik,dc=com");
+		existingEntry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject",
+				"inetOrgPerson", "uidObject");
+//		existing.put("uid", "hendy");
+		existingEntry.put("uniqueIdentifier", "hendy.irawan");
+		existingEntry.put("givenName", "Hendy");
+		existingEntry.put("sn", "Irawan");
+		existingEntry.put("cn", "Hendy Irawan");
+		existingEntry.put("mail", "hendy@soluvas.com", "ceefour666@gmail.com", "hendy@bippo.co.id");
+		existingEntry.put("magentoId", "123");
+
+		final SocialPerson oldLiz = mapper.fromEntry(existingEntry, SocialPerson.class);
+		final SocialPerson newLiz = mapper.fromEntry(existingEntry, SocialPerson.class);
+		
+		newLiz.setFacebookAccessToken("abcdefgh");
+		
+		final ModifyRequest request = mapper.createModifyRequest(existingEntry, oldLiz, newLiz);
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertEquals(1, request.getModifications().size());
+		final Modification modification = request.getModifications().iterator().next();
+		assertEquals(ModificationOperation.ADD_ATTRIBUTE, modification.getOperation());
+		assertEquals("fbAccessToken", modification.getAttribute().getUpId());
+	}
+
+	@Test public void replaceAttributeModifyRequest() throws LdapException {
+		Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("cn", "Hendy Irawan");
+		log.info("Existing Entry: {}", existing);
+		
+		Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		updating.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		updating.put("uid", "hendy");
+		updating.put("cn", "Hendy Irawan 2");
+		log.info("Updating Entry: {}", updating);
+		
+		final Person oldObj = mapper.fromEntry(existing, Person.class);
+		final Person newObj = mapper.fromEntry(updating, Person.class);
+		
+		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertEquals(1, request.getModifications().size());
+		final Modification modification = request.getModifications().iterator().next();
+		assertEquals(ModificationOperation.REPLACE_ATTRIBUTE, modification.getOperation());
+		assertEquals("cn", modification.getAttribute().getUpId());
+	}
+
+	@Test public void replaceAttributeAliasModifyRequest() throws LdapException {
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("givenName", "Hendy");
+		log.info("Existing Entry: {}", existing);
+		
+		final Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		updating.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		updating.put("uid", "hendy");
+		updating.put("gn", "Rudi");
+		log.info("Updating Entry: {}", updating);
+		
+		final Person oldObj = mapper.fromEntry(existing, Person.class);
+		final Person newObj = mapper.fromEntry(updating, Person.class);
+		
+		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertEquals(1, request.getModifications().size());
+		final Modification modification = request.getModifications().iterator().next();
+		assertEquals(ModificationOperation.REPLACE_ATTRIBUTE, modification.getOperation());
+		assertEquals("gn", modification.getAttribute().getUpId());
+	}
+
+	@Test public void addAttributeModifyRequest() throws LdapException {
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		log.info("Existing Entry: {}", existing);
+		
+		final Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		updating.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		updating.put("uid", "hendy");
+		updating.put("cn", "Hendy Irawan");
+		log.info("Input Entry: {}", updating);
+		
+		final Person oldObj = mapper.fromEntry(existing, Person.class);
+		final Person newObj = mapper.fromEntry(updating, Person.class);
+		
+		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertEquals(1, request.getModifications().size());
+		final Modification modification = request.getModifications().iterator().next();
+		assertEquals(ModificationOperation.ADD_ATTRIBUTE, modification.getOperation());
+		assertEquals("cn", modification.getAttribute().getUpId());
+	}
+
+	@Test public void removeAttributeModifyRequest() throws LdapException {
+		Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("cn", "Hendy Irawan");
+		existing.put("sn", "Irawan");
+		log.info("Existing Entry: {}", existing);
+		
+		Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		updating.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		updating.put("uid", "hendy");
+		updating.put("cn", "Hendy Irawan");
+		log.info("Input Entry: {}", updating);
+		
+		final Person oldObj = mapper.fromEntry(existing, Person.class);
+		final Person newObj = mapper.fromEntry(updating, Person.class);
+		
+		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertEquals(1, request.getModifications().size());
+		final Modification modification = request.getModifications().iterator().next();
+		assertEquals(ModificationOperation.REMOVE_ATTRIBUTE, modification.getOperation());
+		assertEquals("sn", modification.getAttribute().getUpId());
+	}
+
+	@Test public void doNotRemoveAttributeWithAlias() throws LdapException {
+		Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("gn", "Hendy");
+		log.info("Existing Entry: {}", existing);
+		
+		Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		updating.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		updating.put("uid", "hendy");
+		updating.put("givenName", "Hendy");
+		log.info("Input Entry: {}", updating);
+		
+		final Person oldObj = mapper.fromEntry(existing, Person.class);
+		final Person newObj = mapper.fromEntry(updating, Person.class);
+		
+		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertEquals(0, request.getModifications().size());
+	}
+
+	@Test public void stringEqualsBytesPassword() throws LdapException {
+		final String password = "{SSHA}BacKnhFVjpSunHYgivCVPAzcavAZZe9QFtd51A==";
+
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("cn", "Hendy Irawan");
+		existing.put("userPassword", password);
+		log.info("Input Entry: {}", existing);
+		
+		final Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		updating.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		updating.put("uid", "hendy");
+		updating.put("cn", "Hendy Irawan");
+		updating.put("userPassword", password.getBytes());
+		log.info("Input Entry: {}", updating);
+		
+		final Person oldObj = mapper.fromEntry(existing, Person.class);
+		final Person newObj = mapper.fromEntry(updating, Person.class);
+		
+		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertEquals(0, request.getModifications().size());
+	}
+
+	@Test public void canChangePassword() throws LdapException {
+		final String password = "{SSHA}BacKnhFVjpSunHYgivCVPAzcavAZZe9QFtd51A==";
+
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("cn", "Hendy Irawan");
+		existing.put("userPassword", password.getBytes());
+		log.info("Input Entry: {}", existing);
+		
+		final Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		updating.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		updating.put("uid", "hendy");
+		updating.put("cn", "Hendy Irawan");
+		updating.put("userPassword", password + "a");
+		log.info("Input Entry: {}", existing);
+		
+		final Person oldObj = mapper.fromEntry(existing, Person.class);
+		final Person newObj = mapper.fromEntry(updating, Person.class);
+		
+		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertEquals(1, request.getModifications().size());
+		final Modification modification = request.getModifications().iterator().next();
+		assertEquals(ModificationOperation.REPLACE_ATTRIBUTE, modification.getOperation());
+		assertEquals("userPassword", modification.getAttribute().getUpId());
+	}
+
 }

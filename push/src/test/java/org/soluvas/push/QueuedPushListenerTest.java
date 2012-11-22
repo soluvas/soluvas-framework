@@ -1,9 +1,7 @@
 package org.soluvas.push;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 
 import java.util.Map;
 import java.util.UUID;
@@ -19,7 +17,7 @@ import org.slf4j.LoggerFactory;
  */
 public class QueuedPushListenerTest {
 
-	private transient Logger log = LoggerFactory
+	private static Logger log = LoggerFactory
 			.getLogger(QueuedPushListenerTest.class);
 	private QueuedPushListener queuer;
 
@@ -33,15 +31,15 @@ public class QueuedPushListenerTest {
 
 	@Test
 	public void pushToQueue() {
-		String trackingId = UUID.randomUUID().toString();
-		String topic = "test";
-		String collection = "test";
-		String entry = "Halooooo";
+		final String trackingId = UUID.randomUUID().toString();
+		final String topic = "test";
+		final String collection = "test";
+		final String entry = "Halooooo";
 		queuer.publishPublic(new CollectionAdd<String>(trackingId, topic, collection, entry ));
-		Map<String, PushMessage> pushes = queuer.getPushesAndRemove(trackingId);
+		final Map<String, PushMessage> pushes = queuer.getPushesAndRemove(trackingId);
 		log.info("Pushes of {}: {}", trackingId, pushes);
 		assertNotNull(pushes);
-		assertThat(pushes.values(), hasSize(1));
+		assertEquals(1, pushes.size());
 	}
 
 }

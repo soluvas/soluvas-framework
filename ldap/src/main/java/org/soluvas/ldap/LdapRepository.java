@@ -6,10 +6,12 @@ import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
 import org.apache.directory.shared.ldap.model.name.Dn;
 import org.soluvas.data.EntityLookup;
+import org.soluvas.data.repository.CrudRepository;
 
 /**
  * Manages LDAP entry POJO objects annotated with {@link LdapEntry}.
  * @author ceefour
+ * @todo Extend {@link CrudRepository}.
  */
 public interface LdapRepository<T> extends EntityLookup<T, String> {
 
@@ -25,11 +27,10 @@ public interface LdapRepository<T> extends EntityLookup<T, String> {
 	/**
 	 * Modify an LDAP {@link Entry} from typed POJO object.
 	 * @param obj
-	 * @param removeExtraAttributes
 	 * @return
 	 * @throws LdapException
 	 */
-	T modify(T obj, boolean removeExtraAttributes);
+	T modify(T obj);
 
 	/**
 	 * Delete an LDAP entry.
@@ -98,7 +99,7 @@ public interface LdapRepository<T> extends EntityLookup<T, String> {
 	 * @param id entry ID.
 	 * @return Entry DN.
 	 */
-	Dn toDn(String id);
+	String toDn(String id);
 
 	boolean exists(String id);
 	

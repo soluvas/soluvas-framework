@@ -1,7 +1,6 @@
 package org.soluvas.ldap;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -11,16 +10,15 @@ import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.shared.ldap.model.entry.Entry;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
+import org.apache.directory.shared.ldap.model.message.ModifyRequest;
+import org.apache.directory.shared.ldap.model.message.ModifyResponse;
 import org.apache.directory.shared.ldap.model.message.SearchScope;
-import org.apache.directory.shared.ldap.model.name.Dn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
 import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -44,17 +42,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 		this.entityClass = entityClass;
 		this.pool = pool;
 		this.baseDn = baseDn;
-		try {
-			mapper = withConnection(new Function<LdapConnection, LdapMapper>() {
-				@Override @Nullable
-				public LdapMapper apply(@Nullable LdapConnection conn) {
-					Preconditions.checkNotNull(conn.getSchemaManager(), "LDAP connection %s must have SchemaManager", conn);
-					return new LdapMapper(conn.getSchemaManager());
-				}
-			});
-		} catch (Exception e) {
-			throw new RuntimeException("Cannot initialize " + entityClass.getName() + " LDAP repository at " + baseDn, e);
-		}
+		this.mapper = new LdapMapper();
 	}
 	
 	protected <V> V withConnection(@Nonnull final Function<LdapConnection, V> function) {
@@ -99,35 +87,42 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * Modify an LDAP {@link Entry} from typed POJO object.
 	 * <tt>uid</tt> attribute cannot be replaced.
 	 * @param obj
-	 * @param removeExtraAttributes
 	 * @return
 	 * @throws LdapException
 	 */
-	@Override
-	public T modify(T obj, final boolean removeExtraAttributes) {
-		final Entry entry = mapper.toEntry(obj, baseDn);
-		log.info("Modify LDAP Entry {}", entry.getDn(), entry); 
-		Entry modifiedEntry = withConnection(new Function<LdapConnection, Entry>() {
+	@Override @Nonnull
+	public T modify(@Nonnull final T obj) {
+		Preconditions.checkNotNull(obj, "LDAP object to modify cannot be null");
+		final String dn = mapper.getDn(obj, baseDn);
+		final String rdnValue = mapper.getRdnValue(obj);
+		log.info("Modify LDAP Entity {} with ID {}: {}", getEntityClass().getName(), rdnValue, dn); 
+		final T modifiedObj = withConnection(new Function<LdapConnection, T>() {
 			@Override @Nullable
-			public Entry apply(@Nullable LdapConnection conn) {
+			public T apply(@Nullable LdapConnection conn) {
 				try {
-					Set<String> knownAttributes = mapper.getAttributeIds(entityClass);
-					Set<String> affectedAttributes = ImmutableSet.copyOf(Iterables.filter(knownAttributes, new Predicate<String>() {
-						@Override
-						public boolean apply(@Nullable String input) {
-							return !"uid".equalsIgnoreCase(input);
-						}
-					}));
-					LdapUtils.update(conn, entry, affectedAttributes);
-					log.debug("Lookup modified LDAP Entry {}", entry.getDn());
-					return conn.lookup(entry.getDn());
+					final Entry existingEntry = conn.lookup(dn);
+					if (existingEntry == null) {
+						throw new RuntimeException("Cannot find LDAP Entry to modify: " + dn);
+					}
+					final T existing = mapper.fromEntry(existingEntry, entityClass);
+					final ModifyRequest modifyRequest = mapper.createModifyRequest(existingEntry, existing, obj);
+					if (modifyRequest.getModifications().isEmpty()) {
+						log.info("Not modifying unmodified LDAP Entry {}", dn);
+						return existing;
+					} else {
+						log.info("Modifying LDAP Entry {} with {}", dn, modifyRequest);
+						final ModifyResponse modifyResponse = conn.modify(modifyRequest);
+						log.info("Modified LDAP Entry {} returned {}", dn, modifyResponse);
+						final Entry modifiedEntry = conn.lookup(dn);
+						final T newObj = mapper.fromEntry(modifiedEntry, entityClass);
+						return newObj;
+					}
 				} catch (LdapException e) {
-					throw new RuntimeException("Error updating LDAP Entry " + entry.getDn(), e);
+					throw new RuntimeException("Error updating LDAP Entry " + dn, e);
 				}
 			}
 		});
-		T newObj = mapper.fromEntry(modifiedEntry, entityClass);
-		return newObj;
+		return modifiedObj;
 	}
 
 	/**
@@ -164,7 +159,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 */
 	@Override
 	public void delete(String id) {
-		final Dn dn = toDn(id);
+		final String dn = toDn(id);
 		log.info("Delete LDAP Entry {}", dn); 
 		try {
 			withConnection(new Function<LdapConnection, Void>() {
@@ -190,9 +185,10 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * @throws LdapException
 	 * @return T entity or <tt>null</tt> if none found.
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public <U extends T> U findOne(String id) {
-		final Dn dn = toDn(id);
+		final String dn = toDn(id);
 		log.info("Lookup LDAP Entry {}", dn); 
 		try {
 			Entry entry = withConnection(new Function<LdapConnection, Entry>() {
@@ -219,8 +215,8 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	}
 
 	@Override
-	public Dn toDn(String id) {
-		return mapper.toDn(id, entityClass, baseDn);
+	public String toDn(String id) {
+		return mapper.getDn(id, entityClass, baseDn);
 	}
 	
 	/**
@@ -233,12 +229,12 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 */
 	@Override
 	public T findOneByAttribute(String attribute, String value) {
-		String[] objectClasses = mapper.getObjectClasses(entityClass);
+		final String primaryObjectClass = mapper.getMapping(entityClass).getPrimaryObjectClass();
 		// Only search based on first objectClass, this is the typical use case
-		final String filter = "(&(objectClass=" + objectClasses[0] + ")(" + attribute + "=" + value + "))";
+		final String filter = "(&(objectClass=" + primaryObjectClass + ")(" + attribute + "=" + value + "))";
 		log.info("Searching LDAP {} filter: {}", baseDn, filter); 
 		try {
-			Entry entry = withConnection(new Function<LdapConnection, Entry>() {
+			final Entry entry = withConnection(new Function<LdapConnection, Entry>() {
 				@Override @Nullable
 				public Entry apply(@Nullable LdapConnection conn) {
 					try {
@@ -252,7 +248,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 			});
 			if (entry != null) {
 				log.info("LDAP search {} filter {} returned {}", new Object[] { baseDn, filter, entry.getDn() });
-				T entity = mapper.fromEntry(entry, entityClass);
+				final T entity = mapper.fromEntry(entry, entityClass);
 				return entity;
 			} else {
 				log.info("LDAP search {} filter {} returned nothing", new Object[] { baseDn, filter });
@@ -271,17 +267,17 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 */
 	@Override
 	public List<T> findAll() {
-		String[] objectClasses = mapper.getObjectClasses(entityClass);
+		final String primaryObjectClass = mapper.getMapping(entityClass).getPrimaryObjectClass();
 //		String filter = "(&";
 //		for (String objectClass : objectClasses) {
 //			filter += "(objectClass=" + objectClass + ")";
 //		}
 //		filter += ")";
 		// Only search based on first objectClass, this is the typical use case
-		final String filter = "(objectClass=" + objectClasses[0] + ")";
+		final String filter = "(objectClass=" + primaryObjectClass + ")";
 		log.info("Searching LDAP {} filter: {}", baseDn, filter); 
 		try {
-			List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
+			final List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
 				@Override @Nullable
 				public List<Entry> apply(@Nullable LdapConnection conn) {
 					try {
@@ -293,7 +289,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 				}
 			});
 			log.info("LDAP search {} filter {} returned {} entries", new Object[] { baseDn, filter, entries.size() });
-			List<T> entities = Lists.transform(entries, new Function<Entry, T>() {
+			final List<T> entities = Lists.transform(entries, new Function<Entry, T>() {
 				@Override
 				public T apply(Entry input) {
 					return mapper.fromEntry(input, entityClass);
@@ -336,7 +332,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 
 	@Override
 	public boolean exists(String id) {
-		final Dn dn = toDn(id);
+		final String dn = toDn(id);
 		return withConnection(new Function<LdapConnection, Boolean>() {
 			@Override @Nullable
 			public Boolean apply(@Nullable LdapConnection conn) {
@@ -352,7 +348,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 
 	@Override
 	public List<T> search(String searchText) {
-		String[] objectClasses = mapper.getObjectClasses(entityClass);
+		final String primaryObjectClass = mapper.getMapping(entityClass).getPrimaryObjectClass();
 //		String filter = "(&";
 //		for (String objectClass : objectClasses) {
 //			filter += "(objectClass=" + objectClass + ")";
@@ -361,7 +357,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 		// Only search based on first objectClass, this is the typical use case
 		// TODO: escape searchText
 		final String filter = String.format("(&(objectClass=%s)(|(cn=*%s*)(gn=*%s*)(sn=*%s*)(uid=*%s*)(mail=*%s*)))",
-				objectClasses[0], searchText, searchText, searchText, searchText, searchText);
+				primaryObjectClass, searchText, searchText, searchText, searchText, searchText);
 		log.info("Searching LDAP {} filter: {}", baseDn, filter); 
 		try {
 			List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
