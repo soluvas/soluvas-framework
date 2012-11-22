@@ -23,7 +23,6 @@ import org.apache.directory.shared.ldap.model.entry.Value;
 import org.apache.directory.shared.ldap.model.exception.LdapException;
 import org.apache.directory.shared.ldap.model.exception.LdapURLEncodingException;
 import org.apache.directory.shared.ldap.model.message.SearchScope;
-import org.apache.directory.shared.ldap.model.schema.SchemaManager;
 import org.apache.directory.shared.ldap.model.url.LdapUrl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -165,11 +164,6 @@ public class LdapUtils {
 		try {
 			final LdapConnection conn = ldapPool.borrowObject();
 			try {
-				if (conn.getSchemaManager() == null) {
-					conn.loadSchema();
-					final SchemaManager schemaManager = conn.getSchemaManager();
-					Preconditions.checkNotNull(schemaManager, "Cannot load schemas for LDAP connection %s", conn);
-				}
 				return function.apply(conn);
 			} finally {
 				ldapPool.returnObject(conn);
