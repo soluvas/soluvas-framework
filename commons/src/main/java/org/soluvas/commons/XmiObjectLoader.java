@@ -30,14 +30,14 @@ import com.google.common.base.Supplier;
  */
 public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	
-	private transient Logger log = LoggerFactory
+	private static Logger log = LoggerFactory
 			.getLogger(XmiObjectLoader.class);
-	private T obj;
+	private final T obj;
 	private final String ePackageName;
 	private final String ePackageNsUri;
 	private final URI resourceUri;
 	
-	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull Class<?> loaderClass, @Nonnull String resourcePath) {
+	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final Class<?> loaderClass, @Nonnull final String resourcePath) {
 		super();
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
@@ -46,30 +46,43 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s using class %s",
 				resourcePath, loaderClass.getName());
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		load(ePackage, resourceUri, ResourceType.BUNDLE);
+		this.obj = load(ePackage, resourceUri, ResourceType.BUNDLE);
 	}
 
-	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull String fileName) {
+	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final String fileName) {
 		super();
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		this.resourceUri = URI.createFileURI(fileName);
-		load(ePackage, resourceUri, ResourceType.FILE);
+		this.obj = load(ePackage, resourceUri, ResourceType.FILE);
 	}
 
-	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull URL resourceUrl,
-			ResourceType resourceType) {
+	/**
+	 * Make it much easier to configure in Blueprint XML, because Blueprint property configurer does not support expressions.
+	 * @param ePackage
+	 * @param baseDir
+	 * @param fileName
+	 */
+	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final String baseDir, @Nonnull final String fileName) {
+		super();
+		this.ePackageName = ePackage.getName();
+		this.ePackageNsUri = ePackage.getNsURI();
+		this.resourceUri = URI.createFileURI(baseDir + "/" + fileName);
+		this.obj = load(ePackage, resourceUri, ResourceType.FILE);
+	}
+
+	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final URL resourceUrl,
+			@Nonnull final ResourceType resourceType) {
 		super();
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		load(ePackage, resourceUri, resourceType);
+		this.obj = load(ePackage, resourceUri, resourceType);
 	}
 	
 	@PreDestroy
 	public void destroy() {
 		log.info("Destroying XMI Loader for {} from {} [{}]", resourceUri, ePackageName, ePackageNsUri);
-		obj = null;
 	}
 
 	@Override
@@ -83,20 +96,21 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void load(EPackage ePackage, URI resourceUri, ResourceType resourceType) {
+	protected T load(@Nonnull final EPackage ePackage, @Nonnull final URI resourceUri,
+			@Nonnull final ResourceType resourceType) {
 		log.debug("Loading XMI from URI: {}", resourceUri);
 		
-		ResourceSetImpl rset = new ResourceSetImpl();
+		final ResourceSetImpl rset = new ResourceSetImpl();
 		rset.getResourceFactoryRegistry().getExtensionToFactoryMap()
 			.put("xmi", new XMIResourceFactoryImpl());
 		
+		final T obj;
 		try {
 			rset.getPackageRegistry().put(ePackage.getNsURI(), ePackage);
 			
-			Resource resource = rset.getResource(resourceUri, true);
-			T obj = (T)resource.getContents().get(0);
+			final Resource resource = rset.getResource(resourceUri, true);
+			obj = (T)resource.getContents().get(0);
 			log.info("Loaded {} from {}", obj, resourceUri);
-			this.obj = obj;
 		} catch (Exception e) {
 			log.error("Cannot load " + resourceUri + " using package " + ePackage, e);
 			throw new RuntimeException("Cannot load " + resourceUri + " using package " + ePackage, e);
@@ -108,18 +122,23 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		long augmented = 0;
 		while (allContents.hasNext()) {
 			EObject content = allContents.next();
-			augmentResourceInfo(resourceUri, resourceType, content);
+			augmented += augmentResourceInfo(resourceUri, resourceType, content);
 		}
 		if (augmented > 0)
 			log.debug("Augmented {} EObjects with resource information from {}",
 					augmented, resourceUri);
+		
+		return obj;
 	}
 
-	protected void augmentResourceInfo(URI resourceUri,
-			ResourceType resourceType, EObject content) {
+	protected long augmentResourceInfo(@Nonnull final URI resourceUri,
+			@Nonnull final ResourceType resourceType, @Nonnull final EObject content) {
 		if (content instanceof ResourceAware) {
 			((ResourceAware) content).setResourceType(resourceType);
 			((ResourceAware) content).setResourceUri(resourceUri.toString());
+			return 1;
+		} else {
+			return 0;
 		}
 	}
 
