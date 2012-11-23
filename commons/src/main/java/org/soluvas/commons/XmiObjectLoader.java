@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.osgi.framework.Bundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +59,22 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	}
 
 	/**
-	 * Make it much easier to configure in Blueprint XML, because Blueprint property configurer does not support expressions.
+	 * Loads from a file inside a {@link Bundle}.
+	 * @param ePackage
+	 * @param baseDir
+	 * @param fileName
+	 */
+	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final Bundle bundle, @Nonnull final String fileName) {
+		super();
+		this.ePackageName = ePackage.getName();
+		this.ePackageNsUri = ePackage.getNsURI();
+		final URL resourceUrl = bundle.getResource(fileName);
+		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
+		this.obj = load(ePackage, resourceUri, ResourceType.BUNDLE);
+	}
+
+	/**
+	 * Loads from a file inside a baseDir, this makes it much easier to configure in Blueprint XML, because Blueprint property configurer does not support expressions.
 	 * @param ePackage
 	 * @param baseDir
 	 * @param fileName
@@ -134,6 +150,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	protected long augmentResourceInfo(@Nonnull final URI resourceUri,
 			@Nonnull final ResourceType resourceType, @Nonnull final EObject content) {
 		if (content instanceof ResourceAware) {
+			// TODO: add the resourcePath, relative to parent resource
 			((ResourceAware) content).setResourceType(resourceType);
 			((ResourceAware) content).setResourceUri(resourceUri.toString());
 			return 1;
