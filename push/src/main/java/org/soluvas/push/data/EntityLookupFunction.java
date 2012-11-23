@@ -2,6 +2,7 @@ package org.soluvas.push.data;
 
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.soluvas.data.EntityLookup;
@@ -15,16 +16,29 @@ import com.google.common.base.Function;
  */
 public class EntityLookupFunction<ID extends Serializable, T> implements Function<ID, T> {
 	
-	EntityLookup<T, ID> entityLookup;
+	private final EntityLookup<T, ID> entityLookup;
+	private final boolean allowNull;
 	
-	public EntityLookupFunction(EntityLookup<T, ID> entityLookup) {
+	/**
+	 * Defaults to allowNull = false, i.e. will throw Cannot find entity with ID "...".
+	 * @param entityLookup
+	 */
+	public EntityLookupFunction(@Nonnull final EntityLookup<T, ID> entityLookup) {
+		this(entityLookup, false);
+	}
+
+	public EntityLookupFunction(@Nonnull final EntityLookup<T, ID> entityLookup, @Nonnull final boolean allowNull) {
 		super();
 		this.entityLookup = entityLookup;
+		this.allowNull = allowNull;
 	}
 
 	@Override
-	public T apply(@Nullable ID id) {
-		return id != null ? entityLookup.findOne(id) : null;
+	public T apply(@Nullable final ID id) {
+		final T entity = id != null ? entityLookup.findOne(id) : null;
+		if (!allowNull && id != null && entity == null)
+			throw new RuntimeException("Cannot find entity '" + id + "' using " + entityLookup);
+		return entity;
 	};
 
 }
