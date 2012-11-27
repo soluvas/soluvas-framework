@@ -38,7 +38,7 @@ public class EnhancedSupplier<T> implements Supplier<T> {
 	 */
 	@Override
 	public T get() {
-		T obj = delegate.get();
+		final T obj = delegate.get();
 		for (Enhancer<T> enhancer : enhancers) {
 			enhancer.enhance(obj);
 		}
