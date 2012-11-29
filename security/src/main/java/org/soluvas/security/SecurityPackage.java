@@ -68,6 +68,15 @@ public interface SecurityPackage extends EPackage {
 	int ROLE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,13 +86,13 @@ public interface SecurityPackage extends EPackage {
 	int ROLE__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
 
 	/**
-	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+	int ROLE__RESOURCE_NAME = CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -132,6 +141,15 @@ public interface SecurityPackage extends EPackage {
 	int DOMAIN_ROLE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ROLE__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -141,13 +159,13 @@ public interface SecurityPackage extends EPackage {
 	int DOMAIN_ROLE__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
 
 	/**
-	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_ROLE__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+	int DOMAIN_ROLE__RESOURCE_NAME = CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -196,6 +214,15 @@ public interface SecurityPackage extends EPackage {
 	int DOMAIN = 2;
 
 	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -205,13 +232,13 @@ public interface SecurityPackage extends EPackage {
 	int DOMAIN__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
 
 	/**
-	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+	int DOMAIN__RESOURCE_NAME = CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -251,6 +278,15 @@ public interface SecurityPackage extends EPackage {
 	int ACTION = 3;
 
 	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -260,13 +296,13 @@ public interface SecurityPackage extends EPackage {
 	int ACTION__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
 
 	/**
-	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+	int ACTION__RESOURCE_NAME = CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -397,6 +433,15 @@ public interface SecurityPackage extends EPackage {
 	int PERMISSION = 5;
 
 	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERMISSION__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -406,13 +451,13 @@ public interface SecurityPackage extends EPackage {
 	int PERMISSION__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
 
 	/**
-	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+	int PERMISSION__RESOURCE_NAME = CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Roles</b></em>' attribute list.

@@ -21,8 +21,9 @@ import org.soluvas.security.SecurityPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.soluvas.security.impl.PermissionImpl#getResourceUri <em>Resource Uri</em>}</li>
  *   <li>{@link org.soluvas.security.impl.PermissionImpl#getResourceType <em>Resource Type</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.PermissionImpl#getResourceUri <em>Resource Uri</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.PermissionImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.security.impl.PermissionImpl#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.soluvas.security.impl.PermissionImpl#getDomainPermission <em>Domain Permission</em>}</li>
  *   <li>{@link org.soluvas.security.impl.PermissionImpl#getActionPermission <em>Action Permission</em>}</li>
@@ -33,6 +34,26 @@ import org.soluvas.security.SecurityPackage;
  * @generated
  */
 public class PermissionImpl extends EObjectImpl implements Permission {
+	/**
+	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResourceType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ResourceType RESOURCE_TYPE_EDEFAULT = ResourceType.BUNDLE;
+
+	/**
+	 * The cached value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResourceType()
+	 * @generated
+	 * @ordered
+	 */
+	protected ResourceType resourceType = RESOURCE_TYPE_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getResourceUri() <em>Resource Uri</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -54,24 +75,24 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	protected String resourceUri = RESOURCE_URI_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * The default value of the '{@link #getResourceName() <em>Resource Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResourceType()
+	 * @see #getResourceName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ResourceType RESOURCE_TYPE_EDEFAULT = ResourceType.BUNDLE;
+	protected static final String RESOURCE_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * The cached value of the '{@link #getResourceName() <em>Resource Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResourceType()
+	 * @see #getResourceName()
 	 * @generated
 	 * @ordered
 	 */
-	protected ResourceType resourceType = RESOURCE_TYPE_EDEFAULT;
+	protected String resourceName = RESOURCE_NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getRoles() <em>Roles</em>}' attribute list.
@@ -153,6 +174,27 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 		resourceUri = newResourceUri;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.PERMISSION__RESOURCE_URI, oldResourceUri, resourceUri));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getResourceName() {
+		return resourceName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResourceName(String newResourceName) {
+		String oldResourceName = resourceName;
+		resourceName = newResourceName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.PERMISSION__RESOURCE_NAME, oldResourceName, resourceName));
 	}
 
 	/**
@@ -247,10 +289,12 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SecurityPackage.PERMISSION__RESOURCE_URI:
-				return getResourceUri();
 			case SecurityPackage.PERMISSION__RESOURCE_TYPE:
 				return getResourceType();
+			case SecurityPackage.PERMISSION__RESOURCE_URI:
+				return getResourceUri();
+			case SecurityPackage.PERMISSION__RESOURCE_NAME:
+				return getResourceName();
 			case SecurityPackage.PERMISSION__ROLES:
 				return getRoles();
 			case SecurityPackage.PERMISSION__DOMAIN_PERMISSION:
@@ -272,11 +316,14 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case SecurityPackage.PERMISSION__RESOURCE_TYPE:
+				setResourceType((ResourceType)newValue);
+				return;
 			case SecurityPackage.PERMISSION__RESOURCE_URI:
 				setResourceUri((String)newValue);
 				return;
-			case SecurityPackage.PERMISSION__RESOURCE_TYPE:
-				setResourceType((ResourceType)newValue);
+			case SecurityPackage.PERMISSION__RESOURCE_NAME:
+				setResourceName((String)newValue);
 				return;
 			case SecurityPackage.PERMISSION__ROLES:
 				getRoles().clear();
@@ -306,11 +353,14 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case SecurityPackage.PERMISSION__RESOURCE_TYPE:
+				setResourceType(RESOURCE_TYPE_EDEFAULT);
+				return;
 			case SecurityPackage.PERMISSION__RESOURCE_URI:
 				setResourceUri(RESOURCE_URI_EDEFAULT);
 				return;
-			case SecurityPackage.PERMISSION__RESOURCE_TYPE:
-				setResourceType(RESOURCE_TYPE_EDEFAULT);
+			case SecurityPackage.PERMISSION__RESOURCE_NAME:
+				setResourceName(RESOURCE_NAME_EDEFAULT);
 				return;
 			case SecurityPackage.PERMISSION__ROLES:
 				getRoles().clear();
@@ -336,10 +386,12 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SecurityPackage.PERMISSION__RESOURCE_URI:
-				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
 			case SecurityPackage.PERMISSION__RESOURCE_TYPE:
 				return resourceType != RESOURCE_TYPE_EDEFAULT;
+			case SecurityPackage.PERMISSION__RESOURCE_URI:
+				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
+			case SecurityPackage.PERMISSION__RESOURCE_NAME:
+				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
 			case SecurityPackage.PERMISSION__ROLES:
 				return roles != null && !roles.isEmpty();
 			case SecurityPackage.PERMISSION__DOMAIN_PERMISSION:
@@ -362,10 +414,12 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (resourceUri: ");
-		result.append(resourceUri);
-		result.append(", resourceType: ");
+		result.append(" (resourceType: ");
 		result.append(resourceType);
+		result.append(", resourceUri: ");
+		result.append(resourceUri);
+		result.append(", resourceName: ");
+		result.append(resourceName);
 		result.append(", roles: ");
 		result.append(roles);
 		result.append(", domainPermission: ");

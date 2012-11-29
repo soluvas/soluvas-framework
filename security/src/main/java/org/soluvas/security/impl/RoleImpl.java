@@ -18,8 +18,9 @@ import org.soluvas.security.SecurityPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.soluvas.security.impl.RoleImpl#getResourceUri <em>Resource Uri</em>}</li>
  *   <li>{@link org.soluvas.security.impl.RoleImpl#getResourceType <em>Resource Type</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.RoleImpl#getResourceUri <em>Resource Uri</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.RoleImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.security.impl.RoleImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.security.impl.RoleImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.security.impl.RoleImpl#getAssignMode <em>Assign Mode</em>}</li>
@@ -29,6 +30,26 @@ import org.soluvas.security.SecurityPackage;
  * @generated
  */
 public class RoleImpl extends EObjectImpl implements Role {
+	/**
+	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResourceType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ResourceType RESOURCE_TYPE_EDEFAULT = ResourceType.BUNDLE;
+
+	/**
+	 * The cached value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResourceType()
+	 * @generated
+	 * @ordered
+	 */
+	protected ResourceType resourceType = RESOURCE_TYPE_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getResourceUri() <em>Resource Uri</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -50,24 +71,24 @@ public class RoleImpl extends EObjectImpl implements Role {
 	protected String resourceUri = RESOURCE_URI_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * The default value of the '{@link #getResourceName() <em>Resource Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResourceType()
+	 * @see #getResourceName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ResourceType RESOURCE_TYPE_EDEFAULT = ResourceType.BUNDLE;
+	protected static final String RESOURCE_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * The cached value of the '{@link #getResourceName() <em>Resource Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResourceType()
+	 * @see #getResourceName()
 	 * @generated
 	 * @ordered
 	 */
-	protected ResourceType resourceType = RESOURCE_TYPE_EDEFAULT;
+	protected String resourceName = RESOURCE_NAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -176,6 +197,27 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getResourceName() {
+		return resourceName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResourceName(String newResourceName) {
+		String oldResourceName = resourceName;
+		resourceName = newResourceName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.ROLE__RESOURCE_NAME, oldResourceName, resourceName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public ResourceType getResourceType() {
 		return resourceType;
@@ -271,10 +313,12 @@ public class RoleImpl extends EObjectImpl implements Role {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SecurityPackage.ROLE__RESOURCE_URI:
-				return getResourceUri();
 			case SecurityPackage.ROLE__RESOURCE_TYPE:
 				return getResourceType();
+			case SecurityPackage.ROLE__RESOURCE_URI:
+				return getResourceUri();
+			case SecurityPackage.ROLE__RESOURCE_NAME:
+				return getResourceName();
 			case SecurityPackage.ROLE__NAME:
 				return getName();
 			case SecurityPackage.ROLE__DESCRIPTION:
@@ -293,11 +337,14 @@ public class RoleImpl extends EObjectImpl implements Role {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case SecurityPackage.ROLE__RESOURCE_TYPE:
+				setResourceType((ResourceType)newValue);
+				return;
 			case SecurityPackage.ROLE__RESOURCE_URI:
 				setResourceUri((String)newValue);
 				return;
-			case SecurityPackage.ROLE__RESOURCE_TYPE:
-				setResourceType((ResourceType)newValue);
+			case SecurityPackage.ROLE__RESOURCE_NAME:
+				setResourceName((String)newValue);
 				return;
 			case SecurityPackage.ROLE__NAME:
 				setName((String)newValue);
@@ -320,11 +367,14 @@ public class RoleImpl extends EObjectImpl implements Role {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case SecurityPackage.ROLE__RESOURCE_TYPE:
+				setResourceType(RESOURCE_TYPE_EDEFAULT);
+				return;
 			case SecurityPackage.ROLE__RESOURCE_URI:
 				setResourceUri(RESOURCE_URI_EDEFAULT);
 				return;
-			case SecurityPackage.ROLE__RESOURCE_TYPE:
-				setResourceType(RESOURCE_TYPE_EDEFAULT);
+			case SecurityPackage.ROLE__RESOURCE_NAME:
+				setResourceName(RESOURCE_NAME_EDEFAULT);
 				return;
 			case SecurityPackage.ROLE__NAME:
 				setName(NAME_EDEFAULT);
@@ -347,10 +397,12 @@ public class RoleImpl extends EObjectImpl implements Role {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SecurityPackage.ROLE__RESOURCE_URI:
-				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
 			case SecurityPackage.ROLE__RESOURCE_TYPE:
 				return resourceType != RESOURCE_TYPE_EDEFAULT;
+			case SecurityPackage.ROLE__RESOURCE_URI:
+				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
+			case SecurityPackage.ROLE__RESOURCE_NAME:
+				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
 			case SecurityPackage.ROLE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SecurityPackage.ROLE__DESCRIPTION:
@@ -371,10 +423,12 @@ public class RoleImpl extends EObjectImpl implements Role {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (resourceUri: ");
-		result.append(resourceUri);
-		result.append(", resourceType: ");
+		result.append(" (resourceType: ");
 		result.append(resourceType);
+		result.append(", resourceUri: ");
+		result.append(resourceUri);
+		result.append(", resourceName: ");
+		result.append(resourceName);
 		result.append(", name: ");
 		result.append(name);
 		result.append(", description: ");

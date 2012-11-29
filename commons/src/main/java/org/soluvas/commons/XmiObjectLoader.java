@@ -51,7 +51,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s using class %s",
 				resourcePath, loaderClass.getName());
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		this.obj = load(ePackage, resourceUri, ResourceType.BUNDLE);
+		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourcePath);
 	}
 
 	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final String fileName) {
@@ -61,7 +61,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		this.resourceUri = URI.createFileURI(fileName);
-		this.obj = load(ePackage, resourceUri, ResourceType.FILE);
+		this.obj = load(ePackage, ResourceType.FILE, resourceUri, fileName);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s in bundle %s [%s]",
 				fileName, bundle.getSymbolicName(), bundle.getBundleId());
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		this.obj = load(ePackage, resourceUri, ResourceType.BUNDLE);
+		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, fileName);
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		this.resourceUri = URI.createFileURI(baseDir + "/" + fileName);
-		this.obj = load(ePackage, resourceUri, ResourceType.FILE);
+		this.obj = load(ePackage, ResourceType.FILE, resourceUri, fileName);
 	}
 
 	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final URL resourceUrl,
@@ -110,7 +110,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		this.obj = load(ePackage, resourceUri, resourceType);
+		this.obj = load(ePackage, resourceType, resourceUri, resourceUri.toString());
 	}
 	
 	@PreDestroy
@@ -129,8 +129,8 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected T load(@Nonnull final EPackage ePackage, @Nonnull final URI resourceUri,
-			@Nonnull final ResourceType resourceType) {
+	protected T load(@Nonnull final EPackage ePackage, @Nonnull final ResourceType resourceType,
+			@Nonnull final URI resourceUri, @Nonnull final String resourceName) {
 		log.debug("Loading XMI from URI: {}", resourceUri);
 		
 		final ResourceSetImpl rset = new ResourceSetImpl();
@@ -150,12 +150,12 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		}
 		
 		// Augment resource information
-		augmentResourceInfo(resourceUri, resourceType, obj);
+		augmentResourceInfo(resourceType, resourceUri, resourceName, obj);
 		final TreeIterator<EObject> allContents = obj.eAllContents();
 		long augmented = 0;
 		while (allContents.hasNext()) {
 			EObject content = allContents.next();
-			augmented += augmentResourceInfo(resourceUri, resourceType, content);
+			augmented += augmentResourceInfo(resourceType, resourceUri, resourceName, content);
 		}
 		if (augmented > 0)
 			log.debug("Augmented {} EObjects with resource information from {}",
@@ -164,12 +164,14 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		return obj;
 	}
 
-	protected long augmentResourceInfo(@Nonnull final URI resourceUri,
-			@Nonnull final ResourceType resourceType, @Nonnull final EObject content) {
+	protected long augmentResourceInfo(@Nonnull final ResourceType resourceType, @Nonnull final URI resourceUri,
+			@Nonnull final String resourceName, @Nonnull final EObject content) {
 		if (content instanceof ResourceAware) {
 			// TODO: add the resourcePath, relative to parent resource
-			((ResourceAware) content).setResourceType(resourceType);
-			((ResourceAware) content).setResourceUri(resourceUri.toString());
+			final ResourceAware resourceContent = (ResourceAware) content;
+			resourceContent.setResourceType(resourceType);
+			resourceContent.setResourceUri(resourceUri.toString());
+			resourceContent.setResourceName(resourceName);
 			return 1;
 		} else {
 			return 0;
