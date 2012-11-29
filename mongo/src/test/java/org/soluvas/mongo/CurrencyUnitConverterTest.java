@@ -3,8 +3,9 @@ package org.soluvas.mongo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.math.BigDecimal;
+import java.util.UUID;
 
+import org.joda.money.CurrencyUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,13 +16,13 @@ import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
-public class BigDecimalConverterTest {
+public class CurrencyUnitConverterTest {
 
 	private Morphia morphia;
 
 	@Before
 	public void setUp() throws Exception {
-		morphia = new Morphia(ImmutableSet.<Class>of(BigDecimalProduct.class));
+		morphia = new Morphia(ImmutableSet.<Class>of(CurrencyUnitProduct.class));
 	}
 
 	@After
@@ -30,18 +31,19 @@ public class BigDecimalConverterTest {
 
 	@Test
 	public void fromProduct() {
-		BigDecimalProduct product = new BigDecimalProduct(new BigDecimal(2500));
+		CurrencyUnitProduct product = new CurrencyUnitProduct(UUID.randomUUID().toString(),
+				CurrencyUnit.of("IDR"));
 		DBObject dbo = morphia.toDBObject(product);
 		assertNotNull(dbo);
-		assertEquals("2500", dbo.get("price"));
+		assertEquals("IDR", dbo.get("currency"));
 	}
 
 	@Test
 	public void toProduct() {
-		final BasicDBObject dbo = new BasicDBObject(ImmutableMap.of("_id", "1", "price", "12900"));
-		BigDecimalProduct product = morphia.fromDBObject(BigDecimalProduct.class, dbo);
+		final BasicDBObject dbo = new BasicDBObject(ImmutableMap.of("_id", "1", "currency", "IDR"));
+		CurrencyUnitProduct product = morphia.fromDBObject(CurrencyUnitProduct.class, dbo);
 		assertNotNull(product);
-		assertEquals(new BigDecimal(12900), product.getPrice());
+		assertEquals("IDR", product.getCurrency().getCode());
 	}
 
 }
