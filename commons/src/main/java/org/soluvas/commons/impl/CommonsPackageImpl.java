@@ -239,24 +239,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_BrandingBundleName() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAppManifest_FaviconPath() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getPersonInfo() {
 		return personInfoEClass;
 	}
@@ -390,8 +372,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		appManifestEClass = createEClass(APP_MANIFEST);
 		createEAttribute(appManifestEClass, APP_MANIFEST__TITLE);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DESCRIPTION);
-		createEAttribute(appManifestEClass, APP_MANIFEST__BRANDING_BUNDLE_NAME);
-		createEAttribute(appManifestEClass, APP_MANIFEST__FAVICON_PATH);
 
 		personInfoEClass = createEClass(PERSON_INFO);
 		createEAttribute(personInfoEClass, PERSON_INFO__ID);
@@ -453,8 +433,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEClass(appManifestEClass, AppManifest.class, "AppManifest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAppManifest_Title(), ecorePackage.getEString(), "title", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_Description(), ecorePackage.getEString(), "description", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppManifest_BrandingBundleName(), ecorePackage.getEString(), "brandingBundleName", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppManifest_FaviconPath(), ecorePackage.getEString(), "faviconPath", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(personInfoEClass, PersonInfo.class, "PersonInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPersonInfo_Id(), ecorePackage.getEString(), "id", null, 1, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -517,18 +495,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "The resource is from a persistence storage."
-		   });		
-		addAnnotation
-		  (getAppManifest_BrandingBundleName(), 
-		   source, 
-		   new String[] {
-			 "documentation", "Bundle that contains the branding resources (favicons, logos)."
-		   });		
-		addAnnotation
-		  (getAppManifest_FaviconPath(), 
-		   source, 
-		   new String[] {
-			 "documentation", "Relative path to 16x16 favicon.ico file in the branding bundle."
 		   });
 	}
 

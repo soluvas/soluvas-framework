@@ -62,16 +62,6 @@
         </xsd:attribute>
         <xsd:attribute name="title" type="xsd:string"/>
         <xsd:attribute name="description" type="xsd:string"/>
-        <xsd:attribute name="brandingBundleName" type="xsd:string">
-          <xsd:annotation>
-            <xsd:documentation>Bundle that contains the branding resources (favicons, logos).</xsd:documentation>
-          </xsd:annotation>
-        </xsd:attribute>
-        <xsd:attribute name="faviconPath" type="xsd:string">
-          <xsd:annotation>
-            <xsd:documentation>Relative path to 16x16 favicon.ico file in the branding bundle.</xsd:documentation>
-          </xsd:annotation>
-        </xsd:attribute>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>

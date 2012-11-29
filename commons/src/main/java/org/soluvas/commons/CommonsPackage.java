@@ -195,31 +195,13 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__DESCRIPTION = POSITIONABLE_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Branding Bundle Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST__BRANDING_BUNDLE_NAME = POSITIONABLE_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Favicon Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST__FAVICON_PATH = POSITIONABLE_FEATURE_COUNT + 6;
-
-	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 7;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.
@@ -433,28 +415,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAppManifest_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getBrandingBundleName <em>Branding Bundle Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Branding Bundle Name</em>'.
-	 * @see org.soluvas.commons.AppManifest#getBrandingBundleName()
-	 * @see #getAppManifest()
-	 * @generated
-	 */
-	EAttribute getAppManifest_BrandingBundleName();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getFaviconPath <em>Favicon Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Favicon Path</em>'.
-	 * @see org.soluvas.commons.AppManifest#getFaviconPath()
-	 * @see #getAppManifest()
-	 * @generated
-	 */
-	EAttribute getAppManifest_FaviconPath();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonInfo <em>Person Info</em>}'.
@@ -673,22 +633,6 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__DESCRIPTION = eINSTANCE.getAppManifest_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Branding Bundle Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APP_MANIFEST__BRANDING_BUNDLE_NAME = eINSTANCE.getAppManifest_BrandingBundleName();
-
-		/**
-		 * The meta object literal for the '<em><b>Favicon Path</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APP_MANIFEST__FAVICON_PATH = eINSTANCE.getAppManifest_FaviconPath();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.

@@ -27,8 +27,6 @@ import org.soluvas.commons.ResourceType;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getBrandingBundleName <em>Branding Bundle Name</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getFaviconPath <em>Favicon Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,46 +152,6 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getBrandingBundleName() <em>Branding Bundle Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBrandingBundleName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String BRANDING_BUNDLE_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getBrandingBundleName() <em>Branding Bundle Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBrandingBundleName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String brandingBundleName = BRANDING_BUNDLE_NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getFaviconPath() <em>Favicon Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFaviconPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String FAVICON_PATH_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getFaviconPath() <em>Favicon Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFaviconPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected String faviconPath = FAVICON_PATH_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -345,48 +303,6 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getBrandingBundleName() {
-		return brandingBundleName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setBrandingBundleName(String newBrandingBundleName) {
-		String oldBrandingBundleName = brandingBundleName;
-		brandingBundleName = newBrandingBundleName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__BRANDING_BUNDLE_NAME, oldBrandingBundleName, brandingBundleName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getFaviconPath() {
-		return faviconPath;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFaviconPath(String newFaviconPath) {
-		String oldFaviconPath = faviconPath;
-		faviconPath = newFaviconPath;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__FAVICON_PATH, oldFaviconPath, faviconPath));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -402,10 +318,6 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return getTitle();
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				return getDescription();
-			case CommonsPackage.APP_MANIFEST__BRANDING_BUNDLE_NAME:
-				return getBrandingBundleName();
-			case CommonsPackage.APP_MANIFEST__FAVICON_PATH:
-				return getFaviconPath();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -435,12 +347,6 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return;
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				setDescription((String)newValue);
-				return;
-			case CommonsPackage.APP_MANIFEST__BRANDING_BUNDLE_NAME:
-				setBrandingBundleName((String)newValue);
-				return;
-			case CommonsPackage.APP_MANIFEST__FAVICON_PATH:
-				setFaviconPath((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -472,12 +378,6 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
-			case CommonsPackage.APP_MANIFEST__BRANDING_BUNDLE_NAME:
-				setBrandingBundleName(BRANDING_BUNDLE_NAME_EDEFAULT);
-				return;
-			case CommonsPackage.APP_MANIFEST__FAVICON_PATH:
-				setFaviconPath(FAVICON_PATH_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -502,10 +402,6 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-			case CommonsPackage.APP_MANIFEST__BRANDING_BUNDLE_NAME:
-				return BRANDING_BUNDLE_NAME_EDEFAULT == null ? brandingBundleName != null : !BRANDING_BUNDLE_NAME_EDEFAULT.equals(brandingBundleName);
-			case CommonsPackage.APP_MANIFEST__FAVICON_PATH:
-				return FAVICON_PATH_EDEFAULT == null ? faviconPath != null : !FAVICON_PATH_EDEFAULT.equals(faviconPath);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -568,10 +464,6 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 		result.append(title);
 		result.append(", description: ");
 		result.append(description);
-		result.append(", brandingBundleName: ");
-		result.append(brandingBundleName);
-		result.append(", faviconPath: ");
-		result.append(faviconPath);
 		result.append(')');
 		return result.toString();
 	}

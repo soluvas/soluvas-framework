@@ -70,14 +70,6 @@
         <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/description"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PLBRQCSDEeKyUdMfH4dSfg"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_0UjHEDoYEeKGo6SOjKfsIg" type="2001">
-        <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/brandingBundleName"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_0UjHEToYEeKGo6SOjKfsIg"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_5OR2IDoYEeKGo6SOjKfsIg" type="2001">
-        <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/faviconPath"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_5OR2IToYEeKGo6SOjKfsIg"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_J59AQSSDEeKyUdMfH4dSfg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_J59AQiSDEeKyUdMfH4dSfg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_J59AQySDEeKyUdMfH4dSfg"/>
