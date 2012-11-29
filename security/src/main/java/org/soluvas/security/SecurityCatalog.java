@@ -4,6 +4,7 @@ package org.soluvas.security;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.soluvas.commons.SerializableEObject;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -29,9 +30,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.security.SecurityPackage#getSecurityCatalog()
  * @model
+ * @extends SerializableEObject
  * @generated
  */
-public interface SecurityCatalog extends EObject {
+public interface SecurityCatalog extends SerializableEObject {
 	/**
 	 * Returns the value of the '<em><b>Roles</b></em>' containment reference list.
 	 * The list contents are of type {@link org.soluvas.security.Role}.
