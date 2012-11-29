@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -160,18 +159,33 @@ public class LdapUtils {
 		}
 	}
 
-	public static <V> V withConnection(@Nonnull final ObjectPool<LdapConnection> ldapPool, @Nonnull final Function<LdapConnection, V> function) {
+	/**
+	 * Get an {@link LdapConnection} from the {@link ObjectPool},
+	 * executes the {@code function}, then returns the {@link LdapConnection} to the {@link ObjectPool}
+	 * or calls {@link ObjectPool#invalidateObject(Object)} if there was an error. 
+	 * @param ldapPool
+	 * @param function
+	 * @return
+	 */
+	public static <V> V withConnection(@Nonnull final ObjectPool<LdapConnection> ldapPool,
+			@Nonnull final Function<LdapConnection, V> function) {
+		final LdapConnection conn;
 		try {
-			final LdapConnection conn = ldapPool.borrowObject();
+			conn = ldapPool.borrowObject();
+		} catch (final Exception e) {
+			throw new RuntimeException("Cannot get LDAP connection", e);
+		}
+		try {
+			final V result = function.apply(conn);
+			ldapPool.returnObject(conn);
+			return result;
+		} catch (final Exception e) {
 			try {
-				return function.apply(conn);
-			} finally {
-				ldapPool.returnObject(conn);
+				ldapPool.invalidateObject(conn);
+			} catch (Exception e1) {
+				log.warn("Cannot invalidate LDAP connection after " + e + " exception", e1);
 			}
-		} catch (Exception e) {
-			log.error("LDAP operation error", e);
-			Throwables.propagate(e);
-			return null;
+			throw new RuntimeException("Cannot perform LDAP operation", e);
 		}
 	}
 	
