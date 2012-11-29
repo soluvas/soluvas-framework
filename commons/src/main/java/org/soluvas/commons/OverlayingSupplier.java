@@ -37,7 +37,7 @@ public class OverlayingSupplier<T extends EObject> implements Supplier<T>, Deleg
 	 */
 	private T overlaid;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private final SortedMap<T, Supplier<T>> sources = Maps.synchronizedNavigableMap(Maps.newTreeMap(new WeightComparator()));
+	private final SortedMap<T, Supplier<T>> sources = Maps.synchronizedNavigableMap(Maps.newTreeMap(new PositionerComparator()));
 
 	public OverlayingSupplier(EFactory eFactory, EClass eClass,
 			List<Supplier<T>> suppliers) {

@@ -72,16 +72,16 @@ public class CommonsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CommonsPackage.WEIGHTABLE: {
-				Weightable weightable = (Weightable)theEObject;
-				T result = caseWeightable(weightable);
+			case CommonsPackage.POSITIONABLE: {
+				Positionable positionable = (Positionable)theEObject;
+				T result = casePositionable(positionable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case CommonsPackage.APP_MANIFEST: {
 				AppManifest appManifest = (AppManifest)theEObject;
 				T result = caseAppManifest(appManifest);
-				if (result == null) result = caseWeightable(appManifest);
+				if (result == null) result = casePositionable(appManifest);
 				if (result == null) result = caseResourceAware(appManifest);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -112,17 +112,17 @@ public class CommonsSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Weightable</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Positionable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Weightable</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Positionable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWeightable(Weightable object) {
+	public T casePositionable(Positionable object) {
 		return null;
 	}
 

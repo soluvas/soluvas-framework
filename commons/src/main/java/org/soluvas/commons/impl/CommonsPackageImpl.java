@@ -20,7 +20,7 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
-import org.soluvas.commons.Weightable;
+import org.soluvas.commons.Positionable;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +41,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass weightableEClass = null;
+	private EClass positionableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -168,15 +168,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	public EAttribute getResourceAware_ResourceUri() {
-		return (EAttribute)resourceAwareEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getResourceAware_ResourceType() {
 		return (EAttribute)resourceAwareEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -185,8 +176,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getWeightable() {
-		return weightableEClass;
+	public EAttribute getResourceAware_ResourceName() {
+		return (EAttribute)resourceAwareEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -194,8 +185,26 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getWeightable_Weight() {
-		return (EAttribute)weightableEClass.getEStructuralFeatures().get(0);
+	public EClass getPositionable() {
+		return positionableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPositionable_Positioner() {
+		return (EAttribute)positionableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getResourceAware_ResourceType() {
+		return (EAttribute)resourceAwareEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -223,6 +232,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	public EAttribute getAppManifest_Description() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_BrandingBundleName() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_FaviconPath() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -353,15 +380,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		// Create classes and their features
 		resourceAwareEClass = createEClass(RESOURCE_AWARE);
-		createEAttribute(resourceAwareEClass, RESOURCE_AWARE__RESOURCE_URI);
 		createEAttribute(resourceAwareEClass, RESOURCE_AWARE__RESOURCE_TYPE);
+		createEAttribute(resourceAwareEClass, RESOURCE_AWARE__RESOURCE_URI);
+		createEAttribute(resourceAwareEClass, RESOURCE_AWARE__RESOURCE_NAME);
 
-		weightableEClass = createEClass(WEIGHTABLE);
-		createEAttribute(weightableEClass, WEIGHTABLE__WEIGHT);
+		positionableEClass = createEClass(POSITIONABLE);
+		createEAttribute(positionableEClass, POSITIONABLE__POSITIONER);
 
 		appManifestEClass = createEClass(APP_MANIFEST);
 		createEAttribute(appManifestEClass, APP_MANIFEST__TITLE);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DESCRIPTION);
+		createEAttribute(appManifestEClass, APP_MANIFEST__BRANDING_BUNDLE_NAME);
+		createEAttribute(appManifestEClass, APP_MANIFEST__FAVICON_PATH);
 
 		personInfoEClass = createEClass(PERSON_INFO);
 		createEAttribute(personInfoEClass, PERSON_INFO__ID);
@@ -408,20 +438,23 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		appManifestEClass.getESuperTypes().add(this.getWeightable());
+		appManifestEClass.getESuperTypes().add(this.getPositionable());
 		appManifestEClass.getESuperTypes().add(this.getResourceAware());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getResourceAware_ResourceUri(), ecorePackage.getEString(), "resourceUri", null, 0, 1, ResourceAware.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResourceAware_ResourceType(), this.getResourceType(), "resourceType", null, 0, 1, ResourceAware.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResourceAware_ResourceUri(), ecorePackage.getEString(), "resourceUri", null, 0, 1, ResourceAware.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResourceAware_ResourceName(), ecorePackage.getEString(), "resourceName", null, 0, 1, ResourceAware.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(weightableEClass, Weightable.class, "Weightable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getWeightable_Weight(), ecorePackage.getEIntegerObject(), "weight", "0", 0, 1, Weightable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(positionableEClass, Positionable.class, "Positionable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPositionable_Positioner(), ecorePackage.getEIntegerObject(), "positioner", "0", 0, 1, Positionable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(appManifestEClass, AppManifest.class, "AppManifest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAppManifest_Title(), ecorePackage.getEString(), "title", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_Description(), ecorePackage.getEString(), "description", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_BrandingBundleName(), ecorePackage.getEString(), "brandingBundleName", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_FaviconPath(), ecorePackage.getEString(), "faviconPath", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(personInfoEClass, PersonInfo.class, "PersonInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPersonInfo_Id(), ecorePackage.getEString(), "id", null, 1, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -462,6 +495,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	protected void createGenModelAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/GenModel";		
 		addAnnotation
+		  (getResourceAware_ResourceName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Name relative to parent resource."
+		   });		
+		addAnnotation
 		  (resourceTypeEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
@@ -478,6 +517,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "The resource is from a persistence storage."
+		   });		
+		addAnnotation
+		  (getAppManifest_BrandingBundleName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Bundle that contains the branding resources (favicons, logos)."
+		   });		
+		addAnnotation
+		  (getAppManifest_FaviconPath(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Relative path to 16x16 favicon.ico file in the branding bundle."
 		   });
 	}
 

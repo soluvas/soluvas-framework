@@ -72,8 +72,8 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createResourceAwareAdapter();
 			}
 			@Override
-			public Adapter caseWeightable(Weightable object) {
-				return createWeightableAdapter();
+			public Adapter casePositionable(Positionable object) {
+				return createPositionableAdapter();
 			}
 			@Override
 			public Adapter caseAppManifest(AppManifest object) {
@@ -118,16 +118,16 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Weightable <em>Weightable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Positionable <em>Positionable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.soluvas.commons.Weightable
+	 * @see org.soluvas.commons.Positionable
 	 * @generated
 	 */
-	public Adapter createWeightableAdapter() {
+	public Adapter createPositionableAdapter() {
 		return null;
 	}
 

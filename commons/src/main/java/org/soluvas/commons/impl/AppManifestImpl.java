@@ -21,11 +21,14 @@ import org.soluvas.commons.ResourceType;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getWeight <em>Weight</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getResourceUri <em>Resource Uri</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getPositioner <em>Positioner</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getResourceType <em>Resource Type</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getResourceUri <em>Resource Uri</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getBrandingBundleName <em>Branding Bundle Name</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getFaviconPath <em>Favicon Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,24 +36,44 @@ import org.soluvas.commons.ResourceType;
  */
 public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	/**
-	 * The default value of the '{@link #getWeight() <em>Weight</em>}' attribute.
+	 * The default value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getWeight()
+	 * @see #getPositioner()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer WEIGHT_EDEFAULT = new Integer(0);
+	protected static final Integer POSITIONER_EDEFAULT = new Integer(0);
 
 	/**
-	 * The cached value of the '{@link #getWeight() <em>Weight</em>}' attribute.
+	 * The cached value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getWeight()
+	 * @see #getPositioner()
 	 * @generated
 	 * @ordered
 	 */
-	protected Integer weight = WEIGHT_EDEFAULT;
+	protected Integer positioner = POSITIONER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResourceType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ResourceType RESOURCE_TYPE_EDEFAULT = ResourceType.BUNDLE;
+
+	/**
+	 * The cached value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResourceType()
+	 * @generated
+	 * @ordered
+	 */
+	protected ResourceType resourceType = RESOURCE_TYPE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getResourceUri() <em>Resource Uri</em>}' attribute.
@@ -73,24 +96,24 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	protected String resourceUri = RESOURCE_URI_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * The default value of the '{@link #getResourceName() <em>Resource Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResourceType()
+	 * @see #getResourceName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ResourceType RESOURCE_TYPE_EDEFAULT = ResourceType.BUNDLE;
+	protected static final String RESOURCE_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * The cached value of the '{@link #getResourceName() <em>Resource Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResourceType()
+	 * @see #getResourceName()
 	 * @generated
 	 * @ordered
 	 */
-	protected ResourceType resourceType = RESOURCE_TYPE_EDEFAULT;
+	protected String resourceName = RESOURCE_NAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
@@ -133,6 +156,46 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getBrandingBundleName() <em>Branding Bundle Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBrandingBundleName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String BRANDING_BUNDLE_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getBrandingBundleName() <em>Branding Bundle Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBrandingBundleName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String brandingBundleName = BRANDING_BUNDLE_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getFaviconPath() <em>Favicon Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFaviconPath()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String FAVICON_PATH_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFaviconPath() <em>Favicon Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFaviconPath()
+	 * @generated
+	 * @ordered
+	 */
+	protected String faviconPath = FAVICON_PATH_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -156,8 +219,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Integer getWeight() {
-		return weight;
+	public Integer getPositioner() {
+		return positioner;
 	}
 
 	/**
@@ -165,11 +228,11 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWeight(Integer newWeight) {
-		Integer oldWeight = weight;
-		weight = newWeight;
+	public void setPositioner(Integer newPositioner) {
+		Integer oldPositioner = positioner;
+		positioner = newPositioner;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__WEIGHT, oldWeight, weight));
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__POSITIONER, oldPositioner, positioner));
 	}
 
 	/**
@@ -191,6 +254,27 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 		resourceUri = newResourceUri;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__RESOURCE_URI, oldResourceUri, resourceUri));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getResourceName() {
+		return resourceName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResourceName(String newResourceName) {
+		String oldResourceName = resourceName;
+		resourceName = newResourceName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__RESOURCE_NAME, oldResourceName, resourceName));
 	}
 
 	/**
@@ -261,19 +345,67 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getBrandingBundleName() {
+		return brandingBundleName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBrandingBundleName(String newBrandingBundleName) {
+		String oldBrandingBundleName = brandingBundleName;
+		brandingBundleName = newBrandingBundleName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__BRANDING_BUNDLE_NAME, oldBrandingBundleName, brandingBundleName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getFaviconPath() {
+		return faviconPath;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFaviconPath(String newFaviconPath) {
+		String oldFaviconPath = faviconPath;
+		faviconPath = newFaviconPath;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__FAVICON_PATH, oldFaviconPath, faviconPath));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CommonsPackage.APP_MANIFEST__WEIGHT:
-				return getWeight();
-			case CommonsPackage.APP_MANIFEST__RESOURCE_URI:
-				return getResourceUri();
+			case CommonsPackage.APP_MANIFEST__POSITIONER:
+				return getPositioner();
 			case CommonsPackage.APP_MANIFEST__RESOURCE_TYPE:
 				return getResourceType();
+			case CommonsPackage.APP_MANIFEST__RESOURCE_URI:
+				return getResourceUri();
+			case CommonsPackage.APP_MANIFEST__RESOURCE_NAME:
+				return getResourceName();
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				return getTitle();
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				return getDescription();
+			case CommonsPackage.APP_MANIFEST__BRANDING_BUNDLE_NAME:
+				return getBrandingBundleName();
+			case CommonsPackage.APP_MANIFEST__FAVICON_PATH:
+				return getFaviconPath();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -286,20 +418,29 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CommonsPackage.APP_MANIFEST__WEIGHT:
-				setWeight((Integer)newValue);
+			case CommonsPackage.APP_MANIFEST__POSITIONER:
+				setPositioner((Integer)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__RESOURCE_TYPE:
+				setResourceType((ResourceType)newValue);
 				return;
 			case CommonsPackage.APP_MANIFEST__RESOURCE_URI:
 				setResourceUri((String)newValue);
 				return;
-			case CommonsPackage.APP_MANIFEST__RESOURCE_TYPE:
-				setResourceType((ResourceType)newValue);
+			case CommonsPackage.APP_MANIFEST__RESOURCE_NAME:
+				setResourceName((String)newValue);
 				return;
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				setTitle((String)newValue);
 				return;
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				setDescription((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__BRANDING_BUNDLE_NAME:
+				setBrandingBundleName((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__FAVICON_PATH:
+				setFaviconPath((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -313,20 +454,29 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CommonsPackage.APP_MANIFEST__WEIGHT:
-				setWeight(WEIGHT_EDEFAULT);
+			case CommonsPackage.APP_MANIFEST__POSITIONER:
+				setPositioner(POSITIONER_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__RESOURCE_TYPE:
+				setResourceType(RESOURCE_TYPE_EDEFAULT);
 				return;
 			case CommonsPackage.APP_MANIFEST__RESOURCE_URI:
 				setResourceUri(RESOURCE_URI_EDEFAULT);
 				return;
-			case CommonsPackage.APP_MANIFEST__RESOURCE_TYPE:
-				setResourceType(RESOURCE_TYPE_EDEFAULT);
+			case CommonsPackage.APP_MANIFEST__RESOURCE_NAME:
+				setResourceName(RESOURCE_NAME_EDEFAULT);
 				return;
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				setTitle(TITLE_EDEFAULT);
 				return;
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__BRANDING_BUNDLE_NAME:
+				setBrandingBundleName(BRANDING_BUNDLE_NAME_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__FAVICON_PATH:
+				setFaviconPath(FAVICON_PATH_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -340,16 +490,22 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CommonsPackage.APP_MANIFEST__WEIGHT:
-				return WEIGHT_EDEFAULT == null ? weight != null : !WEIGHT_EDEFAULT.equals(weight);
-			case CommonsPackage.APP_MANIFEST__RESOURCE_URI:
-				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
+			case CommonsPackage.APP_MANIFEST__POSITIONER:
+				return POSITIONER_EDEFAULT == null ? positioner != null : !POSITIONER_EDEFAULT.equals(positioner);
 			case CommonsPackage.APP_MANIFEST__RESOURCE_TYPE:
 				return resourceType != RESOURCE_TYPE_EDEFAULT;
+			case CommonsPackage.APP_MANIFEST__RESOURCE_URI:
+				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
+			case CommonsPackage.APP_MANIFEST__RESOURCE_NAME:
+				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case CommonsPackage.APP_MANIFEST__BRANDING_BUNDLE_NAME:
+				return BRANDING_BUNDLE_NAME_EDEFAULT == null ? brandingBundleName != null : !BRANDING_BUNDLE_NAME_EDEFAULT.equals(brandingBundleName);
+			case CommonsPackage.APP_MANIFEST__FAVICON_PATH:
+				return FAVICON_PATH_EDEFAULT == null ? faviconPath != null : !FAVICON_PATH_EDEFAULT.equals(faviconPath);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -363,8 +519,9 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ResourceAware.class) {
 			switch (derivedFeatureID) {
-				case CommonsPackage.APP_MANIFEST__RESOURCE_URI: return CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
 				case CommonsPackage.APP_MANIFEST__RESOURCE_TYPE: return CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+				case CommonsPackage.APP_MANIFEST__RESOURCE_URI: return CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
+				case CommonsPackage.APP_MANIFEST__RESOURCE_NAME: return CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
 				default: return -1;
 			}
 		}
@@ -380,8 +537,9 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ResourceAware.class) {
 			switch (baseFeatureID) {
-				case CommonsPackage.RESOURCE_AWARE__RESOURCE_URI: return CommonsPackage.APP_MANIFEST__RESOURCE_URI;
 				case CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE: return CommonsPackage.APP_MANIFEST__RESOURCE_TYPE;
+				case CommonsPackage.RESOURCE_AWARE__RESOURCE_URI: return CommonsPackage.APP_MANIFEST__RESOURCE_URI;
+				case CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME: return CommonsPackage.APP_MANIFEST__RESOURCE_NAME;
 				default: return -1;
 			}
 		}
@@ -398,16 +556,22 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (weight: ");
-		result.append(weight);
-		result.append(", resourceUri: ");
-		result.append(resourceUri);
+		result.append(" (positioner: ");
+		result.append(positioner);
 		result.append(", resourceType: ");
 		result.append(resourceType);
+		result.append(", resourceUri: ");
+		result.append(resourceUri);
+		result.append(", resourceName: ");
+		result.append(resourceName);
 		result.append(", title: ");
 		result.append(title);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", brandingBundleName: ");
+		result.append(brandingBundleName);
+		result.append(", faviconPath: ");
+		result.append(faviconPath);
 		result.append(')');
 		return result.toString();
 	}

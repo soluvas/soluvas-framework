@@ -12,8 +12,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.soluvas.commons.ResourceAware#getResourceUri <em>Resource Uri</em>}</li>
  *   <li>{@link org.soluvas.commons.ResourceAware#getResourceType <em>Resource Type</em>}</li>
+ *   <li>{@link org.soluvas.commons.ResourceAware#getResourceUri <em>Resource Uri</em>}</li>
+ *   <li>{@link org.soluvas.commons.ResourceAware#getResourceName <em>Resource Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,6 +49,31 @@ public interface ResourceAware extends SerializableEObject {
 	 * @generated
 	 */
 	void setResourceUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Resource Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Name relative to parent resource.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Resource Name</em>' attribute.
+	 * @see #setResourceName(String)
+	 * @see org.soluvas.commons.CommonsPackage#getResourceAware_ResourceName()
+	 * @model
+	 * @generated
+	 */
+	String getResourceName();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.ResourceAware#getResourceName <em>Resource Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Resource Name</em>' attribute.
+	 * @see #getResourceName()
+	 * @generated
+	 */
+	void setResourceName(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Resource Type</b></em>' attribute.

@@ -67,22 +67,31 @@ public interface CommonsPackage extends EPackage {
 	int RESOURCE_AWARE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_AWARE__RESOURCE_URI = 0;
-
-	/**
 	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_AWARE__RESOURCE_TYPE = 1;
+	int RESOURCE_AWARE__RESOURCE_TYPE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_AWARE__RESOURCE_URI = 1;
+
+	/**
+	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_AWARE__RESOURCE_NAME = 2;
 
 	/**
 	 * The number of structural features of the '<em>Resource Aware</em>' class.
@@ -91,35 +100,35 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_AWARE_FEATURE_COUNT = 2;
+	int RESOURCE_AWARE_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.commons.Weightable <em>Weightable</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.commons.Positionable <em>Positionable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.commons.Weightable
-	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getWeightable()
+	 * @see org.soluvas.commons.Positionable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPositionable()
 	 * @generated
 	 */
-	int WEIGHTABLE = 1;
+	int POSITIONABLE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Weight</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WEIGHTABLE__WEIGHT = 0;
-
-	/**
-	 * The number of structural features of the '<em>Weightable</em>' class.
+	 * The feature id for the '<em><b>Positioner</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WEIGHTABLE_FEATURE_COUNT = 1;
+	int POSITIONABLE__POSITIONER = 0;
+
+	/**
+	 * The number of structural features of the '<em>Positionable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITIONABLE_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.AppManifestImpl <em>App Manifest</em>}' class.
@@ -132,22 +141,13 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST = 2;
 
 	/**
-	 * The feature id for the '<em><b>Weight</b></em>' attribute.
+	 * The feature id for the '<em><b>Positioner</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__WEIGHT = WEIGHTABLE__WEIGHT;
-
-	/**
-	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST__RESOURCE_URI = WEIGHTABLE_FEATURE_COUNT + 0;
+	int APP_MANIFEST__POSITIONER = POSITIONABLE__POSITIONER;
 
 	/**
 	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
@@ -156,7 +156,25 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__RESOURCE_TYPE = WEIGHTABLE_FEATURE_COUNT + 1;
+	int APP_MANIFEST__RESOURCE_TYPE = POSITIONABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__RESOURCE_URI = POSITIONABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__RESOURCE_NAME = POSITIONABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -165,7 +183,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__TITLE = WEIGHTABLE_FEATURE_COUNT + 2;
+	int APP_MANIFEST__TITLE = POSITIONABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -174,7 +192,25 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DESCRIPTION = WEIGHTABLE_FEATURE_COUNT + 3;
+	int APP_MANIFEST__DESCRIPTION = POSITIONABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Branding Bundle Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__BRANDING_BUNDLE_NAME = POSITIONABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Favicon Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__FAVICON_PATH = POSITIONABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
@@ -183,7 +219,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = WEIGHTABLE_FEATURE_COUNT + 4;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.
@@ -324,6 +360,38 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getResourceAware_ResourceUri();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.ResourceAware#getResourceName <em>Resource Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resource Name</em>'.
+	 * @see org.soluvas.commons.ResourceAware#getResourceName()
+	 * @see #getResourceAware()
+	 * @generated
+	 */
+	EAttribute getResourceAware_ResourceName();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Positionable <em>Positionable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Positionable</em>'.
+	 * @see org.soluvas.commons.Positionable
+	 * @generated
+	 */
+	EClass getPositionable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Positionable#getPositioner <em>Positioner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Positioner</em>'.
+	 * @see org.soluvas.commons.Positionable#getPositioner()
+	 * @see #getPositionable()
+	 * @generated
+	 */
+	EAttribute getPositionable_Positioner();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.ResourceAware#getResourceType <em>Resource Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -333,27 +401,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getResourceAware_ResourceType();
-
-	/**
-	 * Returns the meta object for class '{@link org.soluvas.commons.Weightable <em>Weightable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Weightable</em>'.
-	 * @see org.soluvas.commons.Weightable
-	 * @generated
-	 */
-	EClass getWeightable();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Weightable#getWeight <em>Weight</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Weight</em>'.
-	 * @see org.soluvas.commons.Weightable#getWeight()
-	 * @see #getWeightable()
-	 * @generated
-	 */
-	EAttribute getWeightable_Weight();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.AppManifest <em>App Manifest</em>}'.
@@ -386,6 +433,28 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAppManifest_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getBrandingBundleName <em>Branding Bundle Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Branding Bundle Name</em>'.
+	 * @see org.soluvas.commons.AppManifest#getBrandingBundleName()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_BrandingBundleName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getFaviconPath <em>Favicon Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Favicon Path</em>'.
+	 * @see org.soluvas.commons.AppManifest#getFaviconPath()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_FaviconPath();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonInfo <em>Person Info</em>}'.
@@ -546,30 +615,38 @@ public interface CommonsPackage extends EPackage {
 		EAttribute RESOURCE_AWARE__RESOURCE_URI = eINSTANCE.getResourceAware_ResourceUri();
 
 		/**
+		 * The meta object literal for the '<em><b>Resource Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESOURCE_AWARE__RESOURCE_NAME = eINSTANCE.getResourceAware_ResourceName();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.Positionable <em>Positionable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.Positionable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPositionable()
+		 * @generated
+		 */
+		EClass POSITIONABLE = eINSTANCE.getPositionable();
+
+		/**
+		 * The meta object literal for the '<em><b>Positioner</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSITIONABLE__POSITIONER = eINSTANCE.getPositionable_Positioner();
+
+		/**
 		 * The meta object literal for the '<em><b>Resource Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute RESOURCE_AWARE__RESOURCE_TYPE = eINSTANCE.getResourceAware_ResourceType();
-
-		/**
-		 * The meta object literal for the '{@link org.soluvas.commons.Weightable <em>Weightable</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.soluvas.commons.Weightable
-		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getWeightable()
-		 * @generated
-		 */
-		EClass WEIGHTABLE = eINSTANCE.getWeightable();
-
-		/**
-		 * The meta object literal for the '<em><b>Weight</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute WEIGHTABLE__WEIGHT = eINSTANCE.getWeightable_Weight();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.AppManifestImpl <em>App Manifest</em>}' class.
@@ -596,6 +673,22 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__DESCRIPTION = eINSTANCE.getAppManifest_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Branding Bundle Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__BRANDING_BUNDLE_NAME = eINSTANCE.getAppManifest_BrandingBundleName();
+
+		/**
+		 * The meta object literal for the '<em><b>Favicon Path</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__FAVICON_PATH = eINSTANCE.getAppManifest_FaviconPath();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.
