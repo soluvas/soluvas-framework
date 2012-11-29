@@ -11,6 +11,10 @@
 		<argument ref="blueprintBundleContext"/>
 	</bean>
 	<service ref="svcLookup" auto-export="interfaces"/>
+	
+	<service auto-export="interfaces">
+		<bean class="org.soluvas.commons.impl.XmiObjectLoaderFactoryImpl" />
+	</service>
 
 	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
 		<command name="emf/pkgls">
