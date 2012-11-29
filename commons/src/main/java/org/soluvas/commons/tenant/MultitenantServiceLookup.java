@@ -69,7 +69,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	@Override
 	public <T, R> R withService(Class<T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv, 
 			@Nonnull String tenantId, @Nonnull String namespace, Function<? extends T, R> callback) {
-		final String filter = String.format("(&(clientId=%s)(tenantId=%s)(tenantEnv=%s)(namespace=%s))",
+		final String filter = String.format("(&(|(clientId=%s)(clientId=\\*))(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))(namespace=%s))",
 				clientId, tenantId, tenantEnv, namespace);
 		return withService(clazz, filter, callback);
 	}
@@ -77,7 +77,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	@Override
 	public <T, R> R withService(Class<T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv, 
 			@Nonnull String tenantId, @Nonnull Function<? extends T, R> callback) {
-		final String filter = String.format("(&(clientId=%s)(tenantId=%s)(tenantEnv=%s))",
+		final String filter = String.format("(&(|(clientId=%s)(clientId=\\*))(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*)))",
 				clientId, tenantId, tenantEnv);
 		return withService(clazz, filter, callback);
 	}
@@ -88,7 +88,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 			@Nullable String filter, Function<? extends T, R> callback) {
 		TenantRef tenant = getTenant(commandSession);
 		final String realFilter = String.format(
-				"(&(clientId=%s)(tenantId=%s)(tenantEnv=%s)%s%s)", tenant
+				"(&(|(clientId=%s)(clientId=\\*))(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))%s%s)", tenant
 						.getClientId(), tenant.getTenantId(), tenant
 						.getTenantEnv(),
 				!Strings.isNullOrEmpty(namespace) ? "(namespace=" + namespace
@@ -143,16 +143,14 @@ public class MultitenantServiceLookup implements ServiceLookup {
 
 		final String ifaceName = iface.getName();
 		final String additionalFilter = Optional.fromNullable(filter).or("");
-		log.trace(
-				"Lookup {} for tenantId={} tenantEnv={} namespace={} filter: {}",
-				new Object[] { ifaceName, tenant.getTenantId(),
-						tenant.getTenantEnv(), namespace,
-						additionalFilter });
-		final String namespaceFilter = !Strings.isNullOrEmpty(namespace) ? "(namespace="
-				+ namespace + ")"
+		log.trace("Lookup {} for tenantId={} tenantEnv={} namespace={} filter: {}",
+				ifaceName, tenant.getTenantId(), tenant.getTenantEnv(), namespace,
+				additionalFilter);
+		final String namespaceFilter = !Strings.isNullOrEmpty(namespace)
+				? "(namespace=" + namespace + ")"
 				: "";
-		String realFilter = "(&(tenantId=" + tenant.getTenantId()
-				+ ")(tenantEnv=" + tenant.getTenantEnv() + ")"
+		final String realFilter = "(&" + String.format("(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))",
+					tenant.getTenantId(), tenant.getTenantEnv())
 				+ namespaceFilter + additionalFilter + ")";
 
 		ServiceReference<T> serviceRef = null;
@@ -189,11 +187,10 @@ public class MultitenantServiceLookup implements ServiceLookup {
 		final String additionalFilter = Optional.fromNullable(filter).or("");
 		log.trace(
 				"Lookup {} for tenantId={} tenantEnv={} filter: {}",
-				new Object[] { ifaceName, tenant.getTenantId(),
-						tenant.getTenantEnv(), additionalFilter });
-		String realFilter = "(&(tenantId=" + tenant.getTenantId()
-				+ ")(tenantEnv=" + tenant.getTenantEnv() + ")"
-				+ additionalFilter + ")";
+				ifaceName, tenant.getTenantId(), tenant.getTenantEnv(), additionalFilter );
+		final String realFilter = "(&" + String.format("(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))",
+				tenant.getTenantId(), tenant.getTenantEnv())
+			+ additionalFilter + ")";
 
 		try {
 			Collection<ServiceReference<T>> foundRefs = bundleContext

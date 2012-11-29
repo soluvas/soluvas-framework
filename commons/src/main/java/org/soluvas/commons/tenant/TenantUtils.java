@@ -76,7 +76,7 @@ public class TenantUtils {
 		final String namespaceFilter = !Strings.isNullOrEmpty(namespace) ? "(namespace="
 				+ namespace + ")"
 				: "";
-		String realFilter = "(&(|(tenantId=*)(tenantId=" + tenant.getTenantId() + "))(|(tenantEnv=*)(tenantEnv=" + tenant.getTenantEnv() + "))"
+		String realFilter = "(&(|(tenantId=\\*)(tenantId=" + tenant.getTenantId() + "))(|(tenantEnv=\\*)(tenantEnv=" + tenant.getTenantEnv() + "))"
 				+ namespaceFilter + additionalFilter + ")";
 
 		ServiceReference<T> serviceRef = null;

@@ -31,13 +31,21 @@ import com.google.common.collect.ImmutableList;
  */
 public abstract class TenantCommandSupport extends OsgiCommandSupport {
 
+	/**
+	 * Tenant for the currently executing {@link CommandSession}.
+	 * May be {@literal null} if no session is executing.
+	 */
+	protected TenantRef tenant;
+	
 	@Override
 	public Object execute(final CommandSession session) throws Exception {
+		tenant = TenantUtils.getTenant(session);
 		final Map<Field, ServiceReference<?>> serviceRefs = inject(session);
 		try {
 			return super.execute(session);
 		} finally {
 			uninject(serviceRefs);
+			tenant = null;
 		}
 	}
 	
@@ -83,8 +91,9 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 				
 				log.trace("Field {}#{} looking up {} for tenantId={} tenantEnv={} namespace={} filter: {}", new Object[] {
 						componentId, field.getName(), serviceClass.getName(), tenantId, tenantEnv, namespace, additionalFilter });
-				final String suppliedClassFilter = supplied != null ? "(suppliedClass=" + field.getType().getName() + ")(layer=application)" : "";
-				final String filter = "(&(tenantId=" + tenantId + ")(tenantEnv=" + tenantEnv + ")" + namespaceFilter + suppliedClassFilter + additionalFilter + ")";
+				final String filter = "(&" + String.format("(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))",
+						tenantId, tenantEnv)
+					+ namespaceFilter + additionalFilter + ")";
 				
 				final ServiceReference<?> serviceRef;
 				try {
@@ -114,7 +123,9 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 				log.trace("Field {}#{} needs Supplier<{}> for tenantId={} tenantEnv={} namespace={} filter: {}", new Object[] {
 						componentId, field.getName(), suppliedClass.getName(), tenantId, tenantEnv, namespace, additionalFilter });
 				final String suppliedClassFilter = supplied != null ? "(suppliedClass=" + field.getType().getName() + ")(layer=application)" : "";
-				final String filter = "(&(tenantId=" + tenantId + ")(tenantEnv=" + tenantEnv + ")" + namespaceFilter + suppliedClassFilter + additionalFilter + ")";
+				final String filter = "(&" + String.format("(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))",
+						tenantId, tenantEnv)
+					+ namespaceFilter + suppliedClassFilter + additionalFilter + ")";
 				
 				final Collection<ServiceReference<Supplier>> foundServiceRefs;
 				try {
