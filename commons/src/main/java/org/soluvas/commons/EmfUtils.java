@@ -66,8 +66,13 @@ public class EmfUtils {
 		for (EAttribute attr : overlay.eClass().getEAllAttributes()) {
 			Object attrValue = overlay.eGet(attr);
 			if (overlay.eIsSet(attr) && attrValue != null) {
-				log.trace("Override {}.{} to {}", new Object[] { current.eClass().getName(), attr.getName(), attrValue });
-				current.eSet(attr, attrValue);
+				log.trace("Override {}.{} to {}", current.eClass().getName(), attr.getName(), attrValue);
+				try {
+					current.eSet(attr, attrValue);
+				} catch (Exception e) {
+					throw new RuntimeException(String.format("Cannot override %s.%s to %s", 
+							current.eClass().getName(), attr.getName(), attrValue), e);
+				}
 			}
 		}
 		for (EReference containment : overlay.eClass().getEAllContainments()) {
@@ -78,7 +83,7 @@ public class EmfUtils {
 					combineEObject(currentContainment, overlayContainment);
 				} else {
 					// current doesn't have this containment, so directly set using a copied instance
-					log.debug("Setting {}.{} to {}", new Object[] { current.eClass().getName(), containment.getName(), overlayContainment });
+					log.debug("Setting {}.{} to {}", current.eClass().getName(), containment.getName(), overlayContainment);
 					current.eSet(containment, EcoreUtil.copy(overlayContainment));
 				}
 			}
