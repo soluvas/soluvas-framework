@@ -63,7 +63,11 @@ public class NameUtils {
 	public static String formatClassAnsi(final String name) {
 		// Split into segments
 		final List<String> split = Lists.newArrayList(Splitter.on('.').split(name));
-		split.set(split.size() - 1, "@|bold " + split.get(split.size() - 1) + "|@");
+		final String lastSegment = split.get(split.size() - 1);
+		final String boldedLastSegment = "…".equals(lastSegment.substring(0, 1))
+				? "…" + "@|bold " + lastSegment.substring(1) + "|@"
+				: "@|bold " + lastSegment + "|@";
+		split.set(split.size() - 1, boldedLastSegment);
 //		final List<String> highlight = Lists.transform(split, new Function<String, String>() {
 //			@Override
 //			@Nullable
