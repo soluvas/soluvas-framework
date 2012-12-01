@@ -8,6 +8,12 @@ package org.soluvas.commons;
  * A representation of the model object '<em><b>PersonInfo</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Person partial value object that is stored in Graph database (usually Neo4j) or embedded in a MongoDB document.
+ * 
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -33,6 +39,9 @@ public interface PersonInfo extends SerializableEObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Directory entry uid attribute.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
 	 * @see org.soluvas.commons.CommonsPackage#getPersonInfo_Id()
@@ -59,6 +68,9 @@ public interface PersonInfo extends SerializableEObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Slug</em>' attribute.
 	 * @see #setSlug(String)
 	 * @see org.soluvas.commons.CommonsPackage#getPersonInfo_Slug()
@@ -85,6 +97,9 @@ public interface PersonInfo extends SerializableEObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Display name (can be full name, nickname, slug, screen name, etc. whatever is commonly used by the particular app).
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.soluvas.commons.CommonsPackage#getPersonInfo_Name()
@@ -111,6 +126,9 @@ public interface PersonInfo extends SerializableEObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Avatar Photo ID directly usable by Image Store.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Photo Id</em>' attribute.
 	 * @see #setPhotoId(String)
 	 * @see org.soluvas.commons.CommonsPackage#getPersonInfo_PhotoId()

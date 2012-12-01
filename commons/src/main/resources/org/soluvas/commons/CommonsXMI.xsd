@@ -67,16 +67,68 @@
   </xsd:complexType>
   <xsd:element name="AppManifest" type="commons:AppManifest"/>
   <xsd:complexType name="PersonInfo">
+    <xsd:annotation>
+      <xsd:documentation>Person partial value object that is stored in Graph database (usually Neo4j) or embedded in a MongoDB document.
+
+</xsd:documentation>
+    </xsd:annotation>
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element ref="xmi:Extension"/>
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="id" type="xsd:string" use="required"/>
-    <xsd:attribute name="slug" type="xsd:string" use="required"/>
-    <xsd:attribute name="name" type="xsd:string" use="required"/>
-    <xsd:attribute name="photoId" type="xsd:string"/>
+    <xsd:attribute name="id" type="xsd:string" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Directory entry uid attribute.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="slug" type="xsd:string" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="name" type="xsd:string" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Display name (can be full name, nickname, slug, screen name, etc. whatever is commonly used by the particular app).</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="photoId" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Avatar Photo ID directly usable by Image Store.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
     <xsd:attribute name="gender" type="commons:Gender"/>
   </xsd:complexType>
-  <xsd:element name="PersonInfo" type="commons:PersonInfo"/>
+  <xsd:element name="PersonInfo" type="commons:PersonInfo">
+    <xsd:annotation>
+      <xsd:documentation>Person partial value object that is stored in Graph database (usually Neo4j) or embedded in a MongoDB document.
+
+</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType abstract="true" name="Timestamped">
+    <xsd:annotation>
+      <xsd:documentation>Can be used by any EObject that wants to preserve creationTime/modificationTime.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="creationTime" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>First creation time (raw).</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="modificationTime" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Last modification time (raw).</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="Timestamped" type="commons:Timestamped">
+    <xsd:annotation>
+      <xsd:documentation>Can be used by any EObject that wants to preserve creationTime/modificationTime.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
 </xsd:schema>

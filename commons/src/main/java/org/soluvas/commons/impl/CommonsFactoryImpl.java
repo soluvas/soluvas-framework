@@ -3,18 +3,21 @@
 package org.soluvas.commons.impl;
 
 import javax.measure.unit.Unit;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
-import org.soluvas.commons.*;
+import org.soluvas.commons.AppManifest;
+import org.soluvas.commons.CommonsFactory;
+import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Gender;
+import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.ResourceType;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,8 +63,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CommonsPackage.APP_MANIFEST: return (EObject)createAppManifest();
-			case CommonsPackage.PERSON_INFO: return (EObject)createPersonInfo();
+			case CommonsPackage.APP_MANIFEST: return createAppManifest();
+			case CommonsPackage.PERSON_INFO: return createPersonInfo();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -118,6 +121,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AppManifest createAppManifest() {
 		AppManifestImpl appManifest = new AppManifestImpl();
 		return appManifest;
@@ -128,6 +132,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PersonInfo createPersonInfo() {
 		PersonInfoImpl personInfo = new PersonInfoImpl();
 		return personInfo;
@@ -232,6 +237,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CommonsPackage getCommonsPackage() {
 		return (CommonsPackage)getEPackage();
 	}
@@ -245,6 +251,18 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	@Deprecated
 	public static CommonsPackage getPackage() {
 		return CommonsPackage.eINSTANCE;
+	}
+
+	@Override
+	public PersonInfo createPersonInfo(String id, String slug, String name,
+			String photoId, Gender gender) {
+		final PersonInfo person = createPersonInfo();
+		person.setId(id);
+		person.setSlug(slug);
+		person.setName(name);
+		person.setPhotoId(photoId);
+		person.setGender(gender);
+		return person;
 	}
 
 } //CommonsFactoryImpl

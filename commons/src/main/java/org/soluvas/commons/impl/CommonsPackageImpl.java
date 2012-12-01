@@ -20,6 +20,7 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.Positionable;
 
 /**
@@ -56,6 +57,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass personInfoEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass timestampedEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -293,6 +301,33 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTimestamped() {
+		return timestampedEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTimestamped_CreationTime() {
+		return (EAttribute)timestampedEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTimestamped_ModificationTime() {
+		return (EAttribute)timestampedEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
 	}
@@ -380,6 +415,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(personInfoEClass, PERSON_INFO__PHOTO_ID);
 		createEAttribute(personInfoEClass, PERSON_INFO__GENDER);
 
+		timestampedEClass = createEClass(TIMESTAMPED);
+		createEAttribute(timestampedEClass, TIMESTAMPED__CREATION_TIME);
+		createEAttribute(timestampedEClass, TIMESTAMPED__MODIFICATION_TIME);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -441,6 +480,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPersonInfo_PhotoId(), ecorePackage.getEString(), "photoId", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPersonInfo_Gender(), this.getGender(), "gender", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(timestampedEClass, Timestamped.class, "Timestamped", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTimestamped_CreationTime(), this.getDateTime(), "creationTime", null, 0, 1, Timestamped.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTimestamped_ModificationTime(), this.getDateTime(), "modificationTime", null, 0, 1, Timestamped.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.BUNDLE);
@@ -495,6 +538,54 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "The resource is from a persistence storage."
+		   });		
+		addAnnotation
+		  (personInfoEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Person partial value object that is stored in Graph database (usually Neo4j) or embedded in a MongoDB document.\n\n"
+		   });		
+		addAnnotation
+		  (getPersonInfo_Id(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Directory entry uid attribute."
+		   });		
+		addAnnotation
+		  (getPersonInfo_Slug(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs."
+		   });		
+		addAnnotation
+		  (getPersonInfo_Name(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Display name (can be full name, nickname, slug, screen name, etc. whatever is commonly used by the particular app)."
+		   });		
+		addAnnotation
+		  (getPersonInfo_PhotoId(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Avatar Photo ID directly usable by Image Store."
+		   });		
+		addAnnotation
+		  (timestampedEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Can be used by any EObject that wants to preserve creationTime/modificationTime."
+		   });		
+		addAnnotation
+		  (getTimestamped_CreationTime(), 
+		   source, 
+		   new String[] {
+			 "documentation", "First creation time (raw)."
+		   });		
+		addAnnotation
+		  (getTimestamped_ModificationTime(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Last modification time (raw)."
 		   });
 	}
 

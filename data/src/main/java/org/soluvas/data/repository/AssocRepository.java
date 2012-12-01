@@ -42,6 +42,12 @@ import com.google.common.collect.Multimap;
  * and AssocRepository. 
  * 
  * Inspired by com.tinkerpop.blueprints.pgm.Graph.
+ * 
+ * Consideration of the method name: {@code add} isn't appropriate because it's not always
+ * an add, the semantic is more similar to {@link Map#put(Object, Object)}.
+ * The candidates are: 1) put, 2) save. Save may work, but {@code put} is more accurate
+ * and besides, we're reusing {@link Map} conventions anyway.
+ * 
  * @see BiMap, {@link Multimap}
  * @author ceefour
  */
@@ -105,7 +111,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param rights rights to store in the multimap
      * @return (Approximate) number of changed edges. 0 if multimap doesn't changed. -1 if changed, but number is not known.
      */
-    long save(@Nonnull L left, Iterable<? extends R> rights);
+    long put(@Nonnull L left, Iterable<? extends R> rights);
 
     /**
      * Stores a collection of lefts with the same right.
@@ -114,7 +120,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      *
      * @return {@code true} if the multimap changed
      */
-    long save(Iterable<? extends L> lefts, @Nonnull R right);
+    long put(Iterable<? extends L> lefts, @Nonnull R right);
 
     /**
      * Copies all of another multimap's left-right pairs into this multimap. The
@@ -124,7 +130,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param multimap mappings to store in this multimap
      * @return {@code true} if the multimap changed
      */
-    long save(Multimap<? extends L, ? extends R> multimap);
+    long put(Multimap<? extends L, ? extends R> multimap);
 
     /**
      * Copies all of another multimap's right-left pairs into this multimap. The
@@ -134,7 +140,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param multimap mappings to store in this multimap
      * @return {@code true} if the multimap changed
      */
-    long saveInverse(Multimap<? extends R, ? extends L> inverseMultimap);
+    long putInverse(Multimap<? extends R, ? extends L> inverseMultimap);
 
     /**
      * Stores a collection of rights with the same left, replacing any existing
@@ -159,7 +165,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
 
     /**
      * Returns a multimap of all left-right pairs. It's the reverse of
-     * {@link #save(Multimap)}.
+     * {@link #put(Multimap)}.
      *
      * @return map entries
      */

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -62,10 +63,20 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	
 	@Nullable protected abstract ID getId(T entity);
 	
-	protected abstract <S extends T> S modify(ID id, S entity);
+	@Override
+	public <S extends T> Collection<S> add(Iterable<S> entities) {
+		return ImmutableList.of( add(entities.iterator().next()) );
+	}
 	
-	protected abstract <S extends T> S add(S entity);
-
+	@Override
+	public <S extends T> Collection<S> modify(@Nonnull final Map<ID, S> entities) {
+		final ImmutableList.Builder<S> resultBuilder = ImmutableList.builder();
+		for (final Map.Entry<ID, S> entity : entities.entrySet()) {
+			resultBuilder.add( modify(entity.getKey(), entity.getValue()) );
+		}
+		return resultBuilder.build();
+	}
+	
 	@Override
 	public <S extends T> Collection<S> save(Iterable<S> entities) {
 		List<S> saved = ImmutableList.copyOf(Iterables.transform(entities, new Function<S, S>() {

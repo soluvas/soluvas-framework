@@ -38,6 +38,8 @@ public interface CommonsFactory extends EFactory {
 	 * @generated
 	 */
 	PersonInfo createPersonInfo();
+	
+	PersonInfo createPersonInfo(String id, String slug, String name, String photoId, Gender gender);
 
 	/**
 	 * Returns the package supported by this factory.

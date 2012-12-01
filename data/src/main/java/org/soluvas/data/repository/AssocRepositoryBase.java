@@ -136,7 +136,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	 * The default implementation simply calls {@link #put(Object, Object)} repeatedly.
 	 */
 	@Override
-	public long save(L left, Iterable<? extends R> rights) {
+	public long put(L left, Iterable<? extends R> rights) {
 		long result = 0;
 		for (R right : rights) {
 			if (put(left, right))
@@ -146,7 +146,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	}
 
 	@Override
-	public long save(Iterable<? extends L> lefts, R right) {
+	public long put(Iterable<? extends L> lefts, R right) {
 		long result = 0;
 		for (L left : lefts) {
 			if (put(left, right))
@@ -157,11 +157,11 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public long save(Multimap<? extends L, ? extends R> multimap) {
+	public long put(Multimap<? extends L, ? extends R> multimap) {
 		long result = 0;
 		Set<? extends L> leftSet = multimap.keySet();
 		for (L left : leftSet) {
-			long changed = save(left, ((Multimap<L, ? extends R>)multimap).get(left));
+			long changed = put(left, ((Multimap<L, ? extends R>)multimap).get(left));
 			if (changed > 0) {
 				if (result > 0)
 					result += changed;
@@ -176,17 +176,17 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	}
 
 	@Override
-	public long saveInverse(
+	public long putInverse(
 			Multimap<? extends R, ? extends L> inverseMultimap) {
 		Multimap<L, R> normal = ImmutableMultimap.copyOf(inverseMultimap).inverse();
-		return save(normal);
+		return put(normal);
 	}
 
 	@Override
 	@Nonnull
 	public long replaceRights(L left, Iterable<? extends R> rights) {
 		long removeAllRights = deleteAllRights(left);
-		long putAll = save(left, rights);
+		long putAll = put(left, rights);
 		if (removeAllRights == 0 && putAll == 0) {
 			return 0;
 		} else if (removeAllRights > 0 && putAll > 0) {
@@ -204,7 +204,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	@Nonnull
 	public void replaceLefts(R right, Iterable<? extends L> lefts) {
 		deleteAllLefts(right);
-		save(lefts, right);
+		put(lefts, right);
 	}
 
 	/* (non-Javadoc)

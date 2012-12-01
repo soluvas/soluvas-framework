@@ -268,6 +268,43 @@ public interface CommonsPackage extends EPackage {
 	int PERSON_INFO_FEATURE_COUNT = 5;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.Timestamped <em>Timestamped</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.Timestamped
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTimestamped()
+	 * @generated
+	 */
+	int TIMESTAMPED = 4;
+
+	/**
+	 * The feature id for the '<em><b>Creation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIMESTAMPED__CREATION_TIME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Modification Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIMESTAMPED__MODIFICATION_TIME = 1;
+
+	/**
+	 * The number of structural features of the '<em>Timestamped</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIMESTAMPED_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -275,7 +312,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 4;
+	int RESOURCE_TYPE = 5;
 
 
 	/**
@@ -286,7 +323,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 5;
+	int GENDER = 6;
 
 
 	/**
@@ -297,7 +334,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 6;
+	int DATE_TIME = 7;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -307,7 +344,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 7;
+	int CURRENCY_UNIT = 8;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -317,7 +354,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 8;
+	int UNIT = 9;
 
 
 	/**
@@ -480,6 +517,38 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPersonInfo_Gender();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Timestamped <em>Timestamped</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Timestamped</em>'.
+	 * @see org.soluvas.commons.Timestamped
+	 * @generated
+	 */
+	EClass getTimestamped();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Timestamped#getCreationTime <em>Creation Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Creation Time</em>'.
+	 * @see org.soluvas.commons.Timestamped#getCreationTime()
+	 * @see #getTimestamped()
+	 * @generated
+	 */
+	EAttribute getTimestamped_CreationTime();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Timestamped#getModificationTime <em>Modification Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Modification Time</em>'.
+	 * @see org.soluvas.commons.Timestamped#getModificationTime()
+	 * @see #getTimestamped()
+	 * @generated
+	 */
+	EAttribute getTimestamped_ModificationTime();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -683,6 +752,32 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERSON_INFO__GENDER = eINSTANCE.getPersonInfo_Gender();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.Timestamped <em>Timestamped</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.Timestamped
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTimestamped()
+		 * @generated
+		 */
+		EClass TIMESTAMPED = eINSTANCE.getTimestamped();
+
+		/**
+		 * The meta object literal for the '<em><b>Creation Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TIMESTAMPED__CREATION_TIME = eINSTANCE.getTimestamped_CreationTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Modification Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TIMESTAMPED__MODIFICATION_TIME = eINSTANCE.getTimestamped_ModificationTime();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

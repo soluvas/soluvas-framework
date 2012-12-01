@@ -17,6 +17,7 @@ package org.soluvas.data.repository;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 
@@ -36,7 +37,8 @@ import org.soluvas.data.EntityLookup;
  *  	you need batching or paging. The ability to call {@link Collection#size()}
  *  	outweights the {@link Iterable} benefits.</li>
  *  <li>EntityLookup{@link #findOne(Serializable)} returns subclass of T.
- *  <li>delete methods return number of changed entities</li>
+ *  <li>{@link #delete(Object)} methods return number of changed entities</li>
+ *  <li>{@link #add(Object)} and {@link #modify(Serializable, Object)} methods to replace {@link #save(Object)}</li>
  * </ol>
  * 
  * @author Oliver Gierke
@@ -47,14 +49,54 @@ import org.soluvas.data.EntityLookup;
 public interface CrudRepository<T, ID extends Serializable> extends Repository<T, ID>, BasicRepository, EntityLookup<T, ID> {
 
 	/**
-	 * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
+	 * Adds a given entity. Use the returned instance for further operations as the save operation might have changed the
 	 * entity instance completely.
 	 * 
 	 * @param entity
 	 * @return the saved entity
 	 */
-	<S extends T> S save(@Nonnull final S entity);
+	public abstract <S extends T> S add(@Nonnull S entity);
+	
+	/**
+	 * Adds all given entities.
+	 * 
+	 * @param entities
+	 * @return the saved entities
+	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
+	 */
+	public abstract <S extends T> Collection<S> add(@Nonnull Iterable<S> entities);
+	
+	/**
+	 * Modifies a given entity. Some repositories may allow modifying the {@code id} attribute.
+	 * 
+	 * @param entities
+	 * @return the modified entities
+	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
+	 */
+	public abstract <S extends T> S modify(@Nonnull ID id, @Nonnull S entity);
 
+	/**
+	 * Modifies the given entities. Some repositories may allow modifying the {@code id} attribute.
+	 * 
+	 * @param entities
+	 * @return the modified entities
+	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
+	 */
+	public abstract <S extends T> Collection<S> modify(@Nonnull Map<ID, S> entities);
+
+	/**
+	 * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
+	 * entity instance completely.
+	 * 
+	 * Note that default implementation in {@link CrudRepositoryBase} is not efficient,
+	 * it's recommended to call {@link #add(Object)} or {@link #modify(Serializable, Object)} instead.
+	 * 
+	 * @param entity
+	 * @return the saved entity
+	 */
+	@Deprecated
+	<S extends T> S save(@Nonnull final S entity);
+	
 	/**
 	 * Saves all given entities.
 	 * 
@@ -62,8 +104,9 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return the saved entities
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
+	@Deprecated
 	<S extends T> Collection<S> save(@Nonnull final Iterable<S> entities);
-
+	
 	/**
 	 * Returns whether an entity with the given id exists.
 	 * 
