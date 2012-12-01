@@ -2,6 +2,7 @@ package org.soluvas.security.ldap;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -258,6 +259,26 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	 */
 	@Override
 	public long count(Iterable<String> ids) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public <S extends Role> S add(S entity) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public <S extends Role> Collection<S> add(Iterable<S> entities) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public <S extends Role> S modify(String id, S entity) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public <S extends Role> Collection<S> modify(Map<String, S> entities) {
 		throw new UnsupportedOperationException();
 	}
 
