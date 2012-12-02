@@ -146,7 +146,7 @@ public abstract class Neo4jIdRelationRepository<LID  extends Serializable, RID e
 		Preconditions.checkNotNull(left, "left node cannot be null");
 		Preconditions.checkNotNull(right, "right node cannot be null");
 		
-		final String query = "START left=node({leftNodeId}), liked=node({rightNodeId}) " +
+		final String query = "START left = node({leftNodeId}), right = node({rightNodeId}) " +
 				"MATCH left -[rel:" + relationshipType.name() + "]-> right " +
 				"RETURN rel";
 		final long leftNodeId = left.getId();
@@ -174,8 +174,8 @@ public abstract class Neo4jIdRelationRepository<LID  extends Serializable, RID e
 		Preconditions.checkNotNull(rightId, "rightId cannot be null");
 		
 		final String query = "START left=node:" + leftIdxName + "(_rowId={leftId}), " +
-				"right=node:" + rightIdxName + "(_rowId={rightId}) " +
-				"MATCH left-[rel:" + relationshipType.name() + "]->right " +
+				"right = node:" + rightIdxName + "(_rowId={rightId}) " +
+				"MATCH left -[rel:" + relationshipType.name() + "]-> right " +
 				"RETURN rel";
 		final Map<String, Object> params = ImmutableMap.<String, Object>of("leftId", leftId, "rightId", rightId);
 		final ExecutionResult rows = executionEngine.execute(query, params);

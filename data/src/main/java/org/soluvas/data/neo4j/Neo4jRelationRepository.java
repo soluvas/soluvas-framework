@@ -174,16 +174,16 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 		if (rel == null) {
 			try {
 				rel = leftNode.createRelationshipTo(rightNode, relationshipType);
-				log.info("Added relationship {}: {} {} -{}-> {} {}", rel,
-						leftKind, leftId, relationshipType, rightKind, rightId );
+				log.info("Added relationship {}: {} #{} {} -{}-> {} #{} {}", rel,
+						leftKind, leftNode.getId(), leftId, relationshipType, rightKind, rightNode.getId(), rightId );
 				return true;
 			} catch (Exception e) {
-				throw new DataException(String.format("Cannot add relationship: %s %s -%s-> %s %s",
-						leftKind, leftId, relationshipType, rightKind, rightId), e); 
+				throw new DataException(String.format("Cannot add relationship: %s #%d %s -%s-> %s #%d %s",
+						leftKind, leftNode.getId(), leftId, relationshipType, rightKind, rightNode.getId(), rightId), e); 
 			}
 		} else {
-			log.info("Relationship {} already exists: {} {} -{}-> {} {}", rel,
-						leftKind, leftId, relationshipType, rightKind, rightId );
+			log.info("Relationship {} already exists: {} #{} {} -{}-> {} #{} {}", rel,
+						leftKind, leftNode.getId(), leftId, relationshipType, rightKind, rightNode.getId(), rightId );
 			return false;
 		}
 	}
