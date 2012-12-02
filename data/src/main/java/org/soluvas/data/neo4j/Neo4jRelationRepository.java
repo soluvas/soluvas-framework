@@ -1,6 +1,5 @@
 package org.soluvas.data.neo4j;
 
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.DataException;
 import org.soluvas.data.EntityShadow;
-import org.soluvas.data.repository.AssocRepositoryBase;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.repository.AssocRepository;
+import org.soluvas.data.repository.ExtendedAssocRepository;
+import org.soluvas.data.repository.ExtendedAssocRepositoryBase;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -34,7 +37,7 @@ import com.google.common.collect.Multimap;
  * using Neo4j graph database.
  * @author ceefour
  */
-public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<L, R> {
+public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocRepositoryBase<L, R, String, String> {
 
 	private static Logger log = LoggerFactory.getLogger(Neo4jRelationRepository.class);
 
@@ -47,7 +50,10 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 	private final EntityShadow<L, String, Node> leftShadow;
 	private final EntityShadow<R, String, Node> rightShadow;
 	private final ExecutionEngine executionEngine;
-	private final Neo4jStringIdRelationRepository idRepo;
+	/**
+	 * @todo Is this still needed, now that we have {@link ExtendedAssocRepository}?
+	 */
+	private final Neo4jStringIdRelationRepository idRepository;
 	
 	/**
 	 * @param graphDb
@@ -73,7 +79,7 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 		this.leftShadow = leftShadow;
 		this.rightShadow = rightShadow;
 		executionEngine = new ExecutionEngine(graphDb);
-		idRepo = new Neo4jStringIdRelationRepository(graphDb, relationshipType, leftKind, rightKind, leftIdxName, rightIdxName);
+		idRepository = new Neo4jStringIdRelationRepository(graphDb, relationshipType, leftKind, rightKind, leftIdxName, rightIdxName);
 	}
 	
 	@Override @Nonnull
@@ -136,7 +142,7 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 	 * @param right
 	 */
 	protected Relationship getRelationship(@Nonnull final Node left, @Nonnull final Node right) {
-		return idRepo.getRelationship(left, right);
+		return idRepository.getRelationship(left, right);
 	}
 	
 	/**
@@ -145,17 +151,17 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 	 * @param liked
 	 */
 	protected Relationship getRelationship(@Nonnull final String leftId, @Nonnull final String rightId) {
-		return idRepo.getRelationship(leftId, rightId);
+		return idRepository.getRelationship(leftId, rightId);
 	}
 	
 	@Override
-	public long countRights(L left) {
-		return idRepo.countRights(getLeftId(left));
+	public long countRights(String leftId) {
+		return idRepository.countRights(leftId);
 	}
 	
 	@Override
-	public long countLefts(R right) {
-		return idRepo.countLefts(getRightId(right));
+	public long countLefts(String rightId) {
+		return idRepository.countLefts(rightId);
 	}
 	
 	@Override
@@ -183,11 +189,9 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 	}
 
 	@Override
-	public boolean delete(L left, R right) {
+	public boolean delete(String leftId, String rightId) {
 		// TODO: use cypher, especially for deleteAll
-		final String leftId = getLeftId(left);
-		final String rightId = getRightId(right);
-		return idRepo.delete(leftId, rightId);
+		return idRepository.delete(leftId, rightId);
 	}
 
 	@Override
@@ -222,64 +226,97 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 		return result;
 	}
 
-	@Override @Nonnull
-	public Collection<R> getLeft(L left) {
-		return getLeft(left, null);
+	/**
+	 * Returns the {@link Neo4jIdRelationRepository}, might be useful to call {@link AssocRepository#delete(Object, Object)}
+	 * based on IDs instead of objects.
+	 * @return
+	 */
+	public Neo4jStringIdRelationRepository getIdRepository() {
+		return idRepository;
 	}
-	
-	protected abstract String getLeftId(L left);
-	protected abstract String getRightId(R right);
 
-	public Collection<R> getLeft(L left, Long limit) {
-		final String query = "START left=node:" + leftIdxName + "(_rowId={leftId}) " +
+	/* (non-Javadoc)
+	 * @see org.soluvas.data.repository.ExtendedAssocRepositoryBase#doGetLeft(java.io.Serializable, java.lang.Long, java.lang.Long)
+	 */
+	@Override
+	@Nonnull
+	protected Page<R> doGetLeft(String leftId, Long skip, Long limit) {
+		final String totalQuery = "START left = node:" + leftIdxName + "(_rowId={leftId}) " +
+				"MATCH left -[:" + relationshipType.name() + "]-> right " +
+				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
+				"RETURN COUNT(right)" +
+				(skip != null ? " SKIP {skipRows}" : "") +
+				(limit != null ? " LIMIT {limitRows}" : "");
+
+		final String query = "START left = node:" + leftIdxName + "(_rowId={leftId}) " +
 				"MATCH left -[:" + relationshipType.name() + "]-> right " +
 				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
 				"RETURN right" +
+				(skip != null ? " SKIP {skipRows}" : "") +
 				(limit != null ? " LIMIT {limitRows}" : "");
 		final ImmutableMap.Builder<String, Object> paramsBuilder = ImmutableMap.builder();
-		final String leftId = getLeftId(left);
 		paramsBuilder.put("leftId", leftId);
 		paramsBuilder.put("leftKind", rightKind);
 		paramsBuilder.put("rightKind", rightKind);
+		if (skip != null)
+			paramsBuilder.put("skipRows", skip);
 		if (limit != null)
 			paramsBuilder.put("limitRows", limit);
 		final Map<String, Object> params = paramsBuilder.build();
+		
+		final ExecutionResult totalResult = executionEngine.execute(totalQuery, params);
+		long total = totalResult.<Long>columnAs("total").next();
+		
 		final ExecutionResult rows = executionEngine.execute(query, params);
 		
 		final List<Node> matchingRightNodes = ImmutableList.copyOf(rows.<Node>columnAs("right"));
-		final Collection<R> matchingRights = rightShadow.realize(matchingRightNodes);
-		log.info("getLeft {} {} limit {} returned {} {} rights: {} - {}",
-				leftKind, leftId, limit, matchingRights.size(), rightKind, query, params);
+		final List<R> matchingRights = rightShadow.realize(matchingRightNodes);
+		log.info("getLeft {} {} skip={} limit={} returned {}/{} {} rights: {} - {}",
+				leftKind, leftId, skip, limit, matchingRights.size(), total, rightKind,
+				query, params);
 		
-		return matchingRights;
+		return new PageImpl<R>(matchingRights, null, total);
 	}
 
-	@Override @Nonnull
-	public Collection<L> getRight(R right) {
-		return getRight(right, null);
-	}
-	
-	public Collection<L> getRight(R right, @Nullable Long limit) {
+	/* (non-Javadoc)
+	 * @see org.soluvas.data.repository.ExtendedAssocRepositoryBase#doGetRight(java.io.Serializable, java.lang.Long, java.lang.Long)
+	 */
+	@Override
+	@Nonnull
+	protected Page<L> doGetRight(String rightId, Long skip, Long limit) {
+		final String totalQuery = "START right=node:" + rightIdxName + "(_rowId={rightId}) " +
+				"MATCH left -[:LIKE]-> right " +
+				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
+				"RETURN COUNT(left) AS total" +
+				(skip != null ? " SKIP {skipRows}" : "") +
+				(limit != null ? " LIMIT {limitRows}" : "");
 		final String query = "START right=node:" + rightIdxName + "(_rowId={rightId}) " +
 				"MATCH left -[:LIKE]-> right " +
 				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
 				"RETURN left" +
+				(skip != null ? " SKIP {skipRows}" : "") +
 				(limit != null ? " LIMIT {limitRows}" : "");
 		final ImmutableMap.Builder<String, Object> paramsBuilder = ImmutableMap.builder();
-		final String rightId = getRightId(right);
 		paramsBuilder.put("rightId", rightId);
 		paramsBuilder.put("leftKind", leftKind);
 		paramsBuilder.put("rightKind", rightKind);
+		if (skip != null)
+			paramsBuilder.put("skipRows", skip);
 		if (limit != null)
 			paramsBuilder.put("limitRows", limit);
 		final Map<String, Object> params = paramsBuilder.build();
-		final ExecutionResult rows = executionEngine.execute(query, params);
 		
+		final ExecutionResult totalResult = executionEngine.execute(totalQuery, params);
+		long total = totalResult.<Long>columnAs("total").next();
+		
+		final ExecutionResult rows = executionEngine.execute(query, params);
 		final List<Node> matchingLeftNodes = ImmutableList.copyOf(rows.<Node>columnAs("left"));
-		final Collection<L> matchingLefts = leftShadow.realize(matchingLeftNodes);
-		log.info("getRight {} {} limit {} returned {} {} lefts: {} - {}",
-				rightKind, rightId, limit, matchingLefts.size(), leftKind, query, params);
-		return matchingLefts;
+		final List<L> matchingLefts = leftShadow.realize(matchingLeftNodes);
+		log.info("getRight {} {} skip={} limit={} returned {}/{} {} lefts: {} - {}",
+				rightKind, rightId, skip, limit, matchingLefts.size(), total, leftKind,
+				query, params);
+
+		return new PageImpl<L>(matchingLefts, null, total);
 	}
 
 }

@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.data.DataException;
 import org.soluvas.data.EntityShadow;
 import org.soluvas.data.repository.AssocRepositoryBase;
+import org.soluvas.data.repository.IdAssocRepository;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
@@ -37,7 +38,8 @@ import com.google.common.collect.Multimap;
  * using Neo4j graph database.
  * @author ceefour
  */
-public abstract class Neo4jIdRelationRepository<LID  extends Serializable, RID extends Serializable> extends AssocRepositoryBase<LID, RID> {
+public abstract class Neo4jIdRelationRepository<LID  extends Serializable, RID extends Serializable> extends AssocRepositoryBase<LID, RID>
+	implements IdAssocRepository<LID, RID> {
 
 	/**
 	 * ID property as it appears on a Neo4j {@link Node}. 
@@ -298,10 +300,10 @@ public abstract class Neo4jIdRelationRepository<LID  extends Serializable, RID e
 
 	@Override @Nonnull
 	public Collection<RID> getLeft(LID left) {
-		return getLeft(left, null);
+		return getLeftLimit(left, null);
 	}
 	
-	public Collection<RID> getLeft(LID leftId, Long limit) {
+	public Collection<RID> getLeftLimit(LID leftId, Long limit) {
 		final String query = "START left=node:" + leftIdxName + "(_rowId={leftId}) " +
 				"MATCH left -[:" + relationshipType.name() + "]-> right " +
 				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
@@ -324,10 +326,10 @@ public abstract class Neo4jIdRelationRepository<LID  extends Serializable, RID e
 
 	@Override @Nonnull
 	public Collection<LID> getRight(RID rightId) {
-		return getRight(rightId, null);
+		return getRightLimit(rightId, null);
 	}
 	
-	public Collection<LID> getRight(RID rightId, @Nullable Long limit) {
+	public Collection<LID> getRightLimit(RID rightId, @Nullable Long limit) {
 		final String query = "START right=node:" + rightIdxName + "(_rowId={rightId}) " +
 				"MATCH left -[:LIKE]-> right " +
 				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +

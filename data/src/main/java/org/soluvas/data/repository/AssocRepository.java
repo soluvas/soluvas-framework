@@ -6,6 +6,9 @@ import java.util.NavigableMap;
 
 import javax.annotation.Nonnull;
 
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.data.neo4j.Neo4jIdRelationRepository;
 import org.soluvas.data.neo4j.Neo4jRelationRepository;
 
@@ -97,6 +100,40 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
 	 */
 	@Nonnull
 	public abstract Map<R, Long> getLeftCounts();
+
+	/**
+	 * Returns a collection view of all rights associated with a key. If no
+	 * mappings in the multimap have the provided key, an empty collection is
+	 * returned.
+	 * 
+	 * <p>Note to implementors: To calculate the {@code skip/offset},
+	 * use this:
+	 * 
+	 * <p>{@code long skip = pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize();}
+	 *
+	 * @param key key to search for in multimap
+	 * @return the collection of rights that the key maps to
+	 * @todo Add a {@link Sort} variant, like {@link #findAll()}
+	 */
+	@Nonnull
+	public abstract Page<R> getLeft(@Nonnull L left, @Nonnull Pageable pageable);
+
+	/**
+	 * Returns a collection view of all lefts associated with a key. If no
+	 * mappings in the multimap have the provided key, an empty collection is
+	 * returned.
+	 *
+	 * <p>Note to implementors: To calculate the {@code skip/offset},
+	 * use this:
+	 * 
+	 * <p>{@code long skip = pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize();}
+	 *
+	 * @param right right to search for in multimap
+	 * @return the collection of lefts that the key maps to
+	 * @todo Add a {@link Sort} variant, like {@link #findAll()}
+	 */
+	@Nonnull
+	public abstract Page<L> getRight(@Nonnull R right, @Nonnull Pageable pageable);
 	
     // Modification Operations
 

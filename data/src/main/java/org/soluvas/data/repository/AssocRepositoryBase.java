@@ -340,4 +340,30 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 		return builder.build();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.soluvas.data.repository.AssocRepository#getLeft(java.lang.Object, java.awt.print.Pageable)
+	 */
+	@Override @Nonnull
+	public Page<R> getLeft(L left, Pageable pageable) {
+		final Collection<R> allRights = getLeft(left); // TODO: support sort
+		final Iterable<R> skipped = Iterables.skip(
+				allRights, pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize());
+		final Iterable<R> limited = Iterables.limit(skipped, pageable.getPageSize());
+		final List<R> content = ImmutableList.copyOf(limited);
+		return new PageImpl<R>(content, pageable, allRights.size());
+	}
+
+	/* (non-Javadoc)
+	 * @see org.soluvas.data.repository.AssocRepository#getRight(java.lang.Object, java.awt.print.Pageable)
+	 */
+	@Override @Nonnull
+	public Page<L> getRight(R right, Pageable pageable) {
+		final Collection<L> allLefts = getRight(right); // TODO: support sort
+		final Iterable<L> skipped = Iterables.skip(
+				allLefts, pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize());
+		final Iterable<L> limited = Iterables.limit(skipped, pageable.getPageSize());
+		final List<L> content = ImmutableList.copyOf(limited);
+		return new PageImpl<L>(content, pageable, allLefts.size());
+	}
+	
 }

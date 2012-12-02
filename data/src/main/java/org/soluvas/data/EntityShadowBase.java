@@ -2,6 +2,7 @@ package org.soluvas.data;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -108,7 +109,7 @@ public abstract class EntityShadowBase<T, ID extends Serializable, D> implements
 	}
 	
 	@Override
-	public Collection<T> realize(Collection<D> docs) {
+	public List<T> realize(Collection<D> docs) {
 		return ImmutableList.copyOf(Collections2.transform(docs, realizer));
 	}
 

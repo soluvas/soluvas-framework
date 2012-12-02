@@ -2,6 +2,7 @@ package org.soluvas.data;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 
@@ -106,6 +107,6 @@ public interface EntityShadow<T, ID extends Serializable, D> {
 	 * @param doc
 	 * @return
 	 */
-	public abstract Collection<T> realize(Collection<D> doc);
+	public abstract List<T> realize(Collection<D> doc);
 
 }

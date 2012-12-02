@@ -20,6 +20,11 @@ import javax.annotation.Nonnull;
 /**
  * Abstract interface for pagination information.
  * 
+ * <p>Note to implementors: To calculate the {@code skip/offset},
+ * use this:
+ * 
+ * <p>{@code long skip = pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize();}
+ *
  * @author Oliver Gierke
  */
 public interface Pageable {
