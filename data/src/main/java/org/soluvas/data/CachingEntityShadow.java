@@ -89,7 +89,7 @@ public abstract class CachingEntityShadow<T, ID extends Serializable, D> extends
 					};
 				});
 			} catch (ExecutionException e) {
-				throw new RuntimeException("Cannot ensure object " + cacheKey + " from delegate shadow " + delegate, e);
+				throw new DataException("Cannot ensure object " + cacheKey + " from delegate shadow " + delegate, e);
 			}
 		}
 	}

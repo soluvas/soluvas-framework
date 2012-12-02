@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo;
+import org.soluvas.data.DataException;
 import org.soluvas.data.EntityShadowBase;
 
 import com.google.common.base.Function;
@@ -140,7 +141,7 @@ public class Neo4jPersonShadow extends EntityShadowBase<PersonInfo, String, Node
 			
 			return personNode;
 		} catch (Exception e) {
-			throw new RuntimeException("Cannot find person " + person.getId() + " in index", e);
+			throw new DataException("Cannot find person " + person.getId() + " in index", e);
 		}			
 	}
 

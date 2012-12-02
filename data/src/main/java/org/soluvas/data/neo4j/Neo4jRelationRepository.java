@@ -17,6 +17,7 @@ import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.data.DataException;
 import org.soluvas.data.EntityShadow;
 import org.soluvas.data.repository.AssocRepositoryBase;
 
@@ -171,7 +172,7 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 						leftKind, leftId, relationshipType, rightKind, rightId );
 				return true;
 			} catch (Exception e) {
-				throw new RuntimeException(String.format("Cannot add relationship: %s %s -%s-> %s %s",
+				throw new DataException(String.format("Cannot add relationship: %s %s -%s-> %s %s",
 						leftKind, leftId, relationshipType, rightKind, rightId), e); 
 			}
 		} else {
