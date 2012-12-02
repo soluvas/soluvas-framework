@@ -6,6 +6,9 @@ import java.util.NavigableMap;
 
 import javax.annotation.Nonnull;
 
+import org.soluvas.data.neo4j.Neo4jIdRelationRepository;
+import org.soluvas.data.neo4j.Neo4jRelationRepository;
+
 import com.google.common.collect.Multimap;
 
 /**
@@ -14,7 +17,7 @@ import com.google.common.collect.Multimap;
  * objects in their own right). Only the pair is unique, each left can have
  * multiple rights, and each right can have multiple lefts.
  * 
- * A {@link AssocRepository} is usually used as follows.
+ * <p>A {@link AssocRepository} is usually used as follows.
  * 
  * 1. Associating IDs with IDs. The L and R generic parameters will be strings,
  *    and no other information is provided.
@@ -24,27 +27,30 @@ import com.google.common.collect.Multimap;
  *    For example, in Role-Person association in LDAP, the associations
  *    are stored in the <tt>groupOfUniqueNames</tt> entry, hence belonging to the Role.
  *    
- * And ID may be either a "real" ID or a path (e.g. "bags/hobos").
+ * <p>And ID may be either a "real" ID or a path (e.g. "bags/hobos").
  * It is assumed that IDs are homogenous, i.e. LID is IDs from a
  * particular class and also with RID.
+ * 
+ * <p>For an example of L/R vs LID/RID see {@link Neo4jIdRelationRepository} vs
+ * {@link Neo4jRelationRepository}.
  *  
- * For heterogenous IDs, e.g. likes, where LID can be Person/Shop/Page,
+ * <p>For heterogenous IDs, e.g. likes, where LID can be Person/Shop/Page,
  * and RID can be Product/Shop/Page; IDs need a namespacing mechanism
  * (using URN scheme, path, or QName). Or maybe a job for a different interface
  * (TypedAssocRepository?).
  * 
- * If an AssocRepository has a "vertex" concept, it should automatically create the vertex if
+ * <p>If an AssocRepository has a "vertex" concept, it should automatically create the vertex if
  * the placeholder didn't exist when {@link #put(Object, Object)} is called.
  * During {@link #delete(Object, Object)}, it may delete unused vertices, but may also
  * defer that to a separate "garbage collection" operation.
  * 
- * AssocRepository methods must co-exist with {@link CrudRepository} methods,
+ * <p>AssocRepository methods must co-exist with {@link CrudRepository} methods,
  * because {@link EdgeRepository} is a combination between {@link CrudRepository}
  * and AssocRepository. 
  * 
- * Inspired by com.tinkerpop.blueprints.pgm.Graph.
+ * <p>Inspired by com.tinkerpop.blueprints.pgm.Graph.
  * 
- * Consideration of the method name: {@code add} isn't appropriate because it's not always
+ * <p>Consideration of the method name: {@code add} isn't appropriate because it's not always
  * an add, the semantic is more similar to {@link Map#put(Object, Object)}.
  * The candidates are: 1) put, 2) save. Save may work, but {@code put} is more accurate
  * and besides, we're reusing {@link Map} conventions anyway.

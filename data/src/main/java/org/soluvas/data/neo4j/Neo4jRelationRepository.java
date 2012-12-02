@@ -20,17 +20,16 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.data.EntityShadow;
 import org.soluvas.data.repository.AssocRepositoryBase;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSortedMap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Multimap;
 
 /**
  * Base class useful to implement Like and Follow social features,
+ * It requires both left and right {@link EntityShadow}s, and uses
+ * an {@link Neo4jStringIdRelationRepository} underneath.
  * using Neo4j graph database.
  * @author ceefour
  */
@@ -47,6 +46,7 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 	private final EntityShadow<L, String, Node> leftShadow;
 	private final EntityShadow<R, String, Node> rightShadow;
 	private final ExecutionEngine executionEngine;
+	private final Neo4jStringIdRelationRepository idRepo;
 	
 	/**
 	 * @param graphDb
@@ -72,6 +72,7 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 		this.leftShadow = leftShadow;
 		this.rightShadow = rightShadow;
 		executionEngine = new ExecutionEngine(graphDb);
+		idRepo = new Neo4jStringIdRelationRepository(graphDb, relationshipType, leftKind, rightKind, leftIdxName, rightIdxName);
 	}
 	
 	@Override @Nonnull
@@ -134,25 +135,7 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 	 * @param right
 	 */
 	protected Relationship getRelationship(@Nonnull final Node left, @Nonnull final Node right) {
-		Preconditions.checkNotNull(left, "left node cannot be null");
-		Preconditions.checkNotNull(right, "right node cannot be null");
-		
-		final String query = "START left=node({leftNodeId}), liked=node({rightNodeId}) " +
-				"MATCH left -[rel:" + relationshipType.name() + "]-> right " +
-				"RETURN rel";
-		final long leftNodeId = left.getId();
-		final long rightNodeId = right.getId();
-		final Map<String, Object> params = ImmutableMap.<String, Object>of(
-				"leftNodeId", leftNodeId, "rightNodeId", rightNodeId);
-		final ExecutionResult rows = executionEngine.execute(query, params);
-		log.trace("getRelationship {} #{} -{}-> {} #{} returned {}: {} - {}",
-				leftKind, leftNodeId, relationshipType, rightKind, rightNodeId, rows, query, params);
-		final Map<String, Object> row = Iterables.getFirst(rows, null);
-		if (row != null) {
-			return (Relationship) row.get("rel");
-		} else {
-			return null;
-		}
+		return idRepo.getRelationship(left, right);
 	}
 	
 	/**
@@ -161,55 +144,17 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 	 * @param liked
 	 */
 	protected Relationship getRelationship(@Nonnull final String leftId, @Nonnull final String rightId) {
-		Preconditions.checkNotNull(leftId, "leftId cannot be null");
-		Preconditions.checkNotNull(rightId, "rightId cannot be null");
-		
-		final String query = "START left=node:" + leftIdxName + "(_rowId={leftId}), " +
-				"right=node:" + rightIdxName + "(_rowId={rightId}) " +
-				"MATCH left-[rel:" + relationshipType.name() + "]->right " +
-				"RETURN rel";
-		final Map<String, Object> params = ImmutableMap.<String, Object>of("leftId", leftId, "rightId", rightId);
-		final ExecutionResult rows = executionEngine.execute(query, params);
-		log.trace("getRelationship {} {} -{}-> {} {} returned {}: {} - {}",
-				leftKind, leftId, relationshipType, rightKind, rightId, rows, query, params);
-		final Map<String, Object> row = Iterables.getFirst(rows, null);
-		if (row != null) {
-			return (Relationship) row.get("rel");
-		} else {
-			return null;
-		}
+		return idRepo.getRelationship(leftId, rightId);
 	}
 	
 	@Override
 	public long countRights(L left) {
-		final String query = "START left=node:" + leftIdxName + "(_rowId={leftId}) " +
-				"MATCH left -[rel:" + relationshipType + "]-> right " +
-				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
-				"RETURN COUNT(rel) AS relCount";
-		final String leftId = getLeftId(left);
-		final Map<String, Object> params = ImmutableMap.<String, Object>of(
-				"leftId", leftId, "leftKind", leftKind, "rightKind", rightKind);
-		final ExecutionResult rows = executionEngine.execute(query, params);
-		final long count = (Long) Iterators.getOnlyElement(rows.columnAs("relCount"), 0L);
-		log.info("{} countRights {} {} returned {} {}(s): {} - {}",
-				relationshipType, leftKind, leftId, count, rightKind, query, params);
-		return count;
+		return idRepo.countRights(getLeftId(left));
 	}
 	
 	@Override
 	public long countLefts(R right) {
-		final String query = "START right = node:" + rightIdxName + "(_rowId={rightId}) " +
-				"MATCH left -[rel:" + relationshipType + "]-> right " +
-				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
-				"RETURN COUNT(rel) AS relCount";
-		final String rightId = getRightId(right);
-		final Map<String, Object> params = ImmutableMap.<String, Object>of(
-				"rightId", rightId, "leftKind", leftKind, "rightKind", rightKind);
-		final ExecutionResult rows = executionEngine.execute(query, params);
-		final long count = (Long) Iterators.getOnlyElement(rows.columnAs("relCount"), 0L);
-		log.info("{} countRights {} {} returned {} {}(s): {} - {}",
-				relationshipType, rightKind, rightId, count, leftKind, query, params);
-		return count;
+		return idRepo.countLefts(getRightId(right));
 	}
 	
 	@Override
@@ -238,17 +183,10 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 
 	@Override
 	public boolean delete(L left, R right) {
+		// TODO: use cypher, especially for deleteAll
 		final String leftId = getLeftId(left);
 		final String rightId = getRightId(right);
-		final Relationship rel = getRelationship(leftId, rightId);
-		if (rel != null) {
-			log.info("Delete relationship {} {} -{}-> {} {}: {}",
-					leftKind, leftId, relationshipType, rightKind, rightId, rel);
-			rel.delete();
-			return true;
-		} else {
-			return false;
-		}
+		return idRepo.delete(leftId, rightId);
 	}
 
 	@Override
@@ -283,8 +221,7 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 		return result;
 	}
 
-	@Override
-	@Nonnull
+	@Override @Nonnull
 	public Collection<R> getLeft(L left) {
 		return getLeft(left, null);
 	}
@@ -316,8 +253,7 @@ public abstract class Neo4jRelationRepository<L, R> extends AssocRepositoryBase<
 		return matchingRights;
 	}
 
-	@Override
-	@Nonnull
+	@Override @Nonnull
 	public Collection<L> getRight(R right) {
 		return getRight(right, null);
 	}
