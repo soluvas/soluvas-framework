@@ -16,6 +16,7 @@ import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.ImmutableSet;
@@ -258,7 +259,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 
 	@Override
 	public long countLeftSet() {
-		return rights().size();
+		return leftSet().size();
 	}
 
 	@Override
@@ -269,6 +270,24 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	@Override
 	public long countRightSet() {
 		return rightSet().size();
+	}
+	
+	/**
+	 * It's recommended to override this method for efficiency,
+	 * the default implementation uses {@link #getRight(Object)}.
+	 */
+	@Override
+	public long countLefts(R right) {
+		return getRight(right).size();
+	}
+	
+	/**
+	 * It's recommended to override this method for efficiency,
+	 * the default implementation uses {@link #getLeft(Object)}.
+	 */
+	@Override
+	public long countRights(L left) {
+		return getLeft(left).size();
 	}
 	
 	@Override
@@ -282,9 +301,43 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	@Nonnull
 	public Page<Entry<L, R>> findAll(Pageable pageable) {
 		final Collection<Entry<L, R>> entries = findAll(pageable.getSort());
-		final Iterable<Entry<L, R>> skipped = Iterables.skip(entries, pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize());
+		final Iterable<Entry<L, R>> skipped = Iterables.skip(
+				entries, pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize());
 		final Iterable<Entry<L, R>> limited = Iterables.limit(skipped, pageable.getPageSize());
 		final List<Entry<L, R>> content = ImmutableList.copyOf(limited);
 		return new PageImpl<Entry<L, R>>(content, pageable, entries.size());
 	}
+	
+	/**
+	 * It's recommended to override this for efficiency.
+	 * The default implementation uses {@link #findAll()}.
+	 * @see org.soluvas.data.repository.AssocRepository#getLeftCounts()
+	 */
+	@Override @Nonnull
+	public Map<R, Long> getLeftCounts() {
+		final Multimap<R, L> invertedEntries = ImmutableMultimap.copyOf(findAll()).inverse();
+		final ImmutableMap.Builder<R, Long> builder = ImmutableMap.builder();
+		for (final R right : invertedEntries.keySet()) {
+			final int count = invertedEntries.get(right).size();
+			builder.put(right, Long.valueOf(count));
+		}
+		return builder.build();
+	}
+	
+	/**
+	 * It's recommended to override this for efficiency.
+	 * The default implementation uses {@link #findAll()}.
+	 * @see org.soluvas.data.repository.AssocRepository#getRightCounts()
+	 */
+	@Override @Nonnull
+	public Map<L, Long> getRightCounts() {
+		final Multimap<L, R> entries = findAll();
+		final ImmutableMap.Builder<L, Long> builder = ImmutableMap.builder();
+		for (final L left : entries.keySet()) {
+			final int count = entries.get(left).size();
+			builder.put(left, Long.valueOf(count));
+		}
+		return builder.build();
+	}
+
 }

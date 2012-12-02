@@ -2,6 +2,7 @@ package org.soluvas.data.repository;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.NavigableMap;
 
 import javax.annotation.Nonnull;
 
@@ -55,8 +56,42 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
 
     // Query Operations
 
-    
+	/**
+	 * Returns the number of right values (should never be duplicates) for a particular left.
+	 */
+	public abstract long countRights(@Nonnull L left);
 
+	/**
+	 * Returns the number of left values (should never be duplicates) for a particular right.
+	 */
+	public abstract long countLefts(@Nonnull R right);
+
+	/**
+	 * Returns a {@link Map} of all right counts associated with each left. If no
+	 * mappings in the multimap have the provided key, an empty collection is
+	 * returned.
+	 * 
+	 * <p>Implementations are encouraged to return {@link NavigableMap} and/or
+	 * provide consistent iteration order.
+	 *
+	 * @return map of lefts and right counts
+	 */
+	@Nonnull
+	public abstract Map<L, Long> getRightCounts();
+
+	/**
+	 * Returns a {@link Map} of all left counts associated with each right. If no
+	 * mappings in the multimap have the provided key, an empty collection is
+	 * returned.
+	 *
+	 * <p>Implementations are encouraged to return {@link NavigableMap} and/or
+	 * provide consistent iteration order.
+	 *
+	 * @return map of rights and left counts
+	 */
+	@Nonnull
+	public abstract Map<R, Long> getLeftCounts();
+	
     // Modification Operations
 
     /**

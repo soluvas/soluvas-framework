@@ -7,6 +7,13 @@ import javax.annotation.Nonnull;
 
 import com.google.common.collect.Multiset;
 
+/**
+ * This is implemented by both {@link AssocRepository} and {@link EdgeRepository}. 
+ *
+ * @param <L>
+ * @param <R>
+ * @author ceefour
+ */
 public interface BasicAssocRepository<L, R> extends BasicRepository {
 
 	/** Returns the number of left-right pairs in the multimap. */
@@ -88,9 +95,6 @@ public interface BasicAssocRepository<L, R> extends BasicRepository {
 	 * mappings in the multimap have the provided key, an empty collection is
 	 * returned.
 	 *
-	 * <p>Changes to the returned collection will update the underlying multimap,
-	 * and vice versa.
-	 *
 	 * @param key key to search for in multimap
 	 * @return the collection of rights that the key maps to
 	 */
@@ -101,9 +105,6 @@ public interface BasicAssocRepository<L, R> extends BasicRepository {
 	 * Returns a collection view of all lefts associated with a key. If no
 	 * mappings in the multimap have the provided key, an empty collection is
 	 * returned.
-	 *
-	 * <p>Changes to the returned collection will update the underlying multimap,
-	 * and vice versa.
 	 *
 	 * @param right right to search for in multimap
 	 * @return the collection of lefts that the key maps to
