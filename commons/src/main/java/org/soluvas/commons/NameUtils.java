@@ -1,6 +1,9 @@
 package org.soluvas.commons;
 
 import java.util.List;
+import java.util.UUID;
+
+import javax.annotation.Nullable;
 
 import org.fusesource.jansi.Ansi;
 
@@ -82,4 +85,35 @@ public class NameUtils {
 		return Joiner.on("@|bold,black .|@").join(split).replaceFirst("…", "@|bold,black …|@");
 	}
 
+	/**
+	 * Shorten {@link UUID}.
+	 * @param uuid
+	 * @param targetLength Recommended is 9.
+	 */
+	public static String shortenUuid(@Nullable final String uuid, final int targetLength) {
+		if (uuid == null)
+			return null;
+		if (uuid.length() <= targetLength)
+			return uuid;
+		else {
+			return uuid.substring(0, targetLength - 1) + "…";
+		}
+	}
+	
+	/**
+	 * Shorten {@link UUID}, Ansi-formatted and padded.
+	 * @param uuid
+	 * @param targetLength Recommended is 9.
+	 */
+	public static String shortenUuidAnsi(final String uuid, final int targetLength) {
+		if (uuid == null)
+			return null;
+		final String shortened = shortenUuid(uuid, targetLength);
+		if (shortened.length() >= 1 && "…".equals(shortened.substring(shortened.length() - 1))) {
+			return "@|bold " + shortened.substring(0, shortened.length() - 1) + "|@@|bold,black …|@";
+		} else {
+			return "@|bold " + Strings.padEnd(shortened, targetLength, ' ') + "|@";
+		}
+	}
+	
 }

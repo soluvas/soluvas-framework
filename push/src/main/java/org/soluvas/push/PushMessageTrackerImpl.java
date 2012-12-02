@@ -5,6 +5,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import javax.annotation.Nonnull;
 import javax.enterprise.context.ApplicationScoped;
 
 import org.slf4j.Logger;
@@ -13,29 +14,36 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 /**
- * Simulate push using regular AJAX.
+ * Simulate push using regular AJAX operations.
+ * 
+ * No longer implements {@link PushListener}, although it can, because we want to deprecate {@link PushListener}
+ * in favor of {@link EventBus} / @Subscribe & callbacks.
+ * 
  * FIXME: Use Multimap when it's done
  * @author ceefour
  */
-@SuppressWarnings("deprecation")
 @ApplicationScoped
-public class QueuedPushListener implements PushListener {
+public class PushMessageTrackerImpl implements PushMessageTracker {
 
-	private transient Logger log = LoggerFactory.getLogger(QueuedPushListener.class);
-	private Map<String, Queue<PushMessage>> queues = new ConcurrentHashMap<String, Queue<PushMessage>>();
+	private static final Logger log = LoggerFactory.getLogger(PushMessageTrackerImpl.class);
+	private final Map<String, Queue<PushMessage>> queues = new ConcurrentHashMap<String, Queue<PushMessage>>();
 	
 	/* (non-Javadoc)
 	 * @see id.co.bippo.commerce.push.PushListener#publishPublic(java.lang.String, org.soluvas.push.PushMessage)
 	 */
-	@Override @Subscribe
-	public void publishPublic(PushMessage message) {
-		if (!((Object)message instanceof TrackableEvent)) {
+	@Subscribe
+	public void publishPublic(@Nonnull final PushMessage message) {
+		if (!(message instanceof TrackableEvent)) {
 			log.warn("{} is not TrackableEvent, cannot track", message);
 		}
-		final String trackingId = ((TrackableEvent) (Object) message).getTrackingId();
+		final String trackingId = ((TrackableEvent) message).getTrackingId();
+		// ignore do-not-track messages
+		if (trackingId == null)
+			return;
 		
 		synchronized (queues) {
 			Queue<PushMessage> queue = queues.get(trackingId);
@@ -48,6 +56,10 @@ public class QueuedPushListener implements PushListener {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.soluvas.push.PushMessageTracker#getPushesAndRemove(java.lang.String)
+	 */
+	@Override
 	public Map<String, PushMessage> getPushesAndRemove(String trackingId) {
 		synchronized (queues) {
 			Queue<PushMessage> queue = queues.get(trackingId);

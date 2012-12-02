@@ -19,14 +19,14 @@ public class QueuedPushListenerTest {
 
 	private static Logger log = LoggerFactory
 			.getLogger(QueuedPushListenerTest.class);
-	private QueuedPushListener queuer;
+	private PushMessageTrackerImpl queuer;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		queuer = new QueuedPushListener();
+		queuer = new PushMessageTrackerImpl();
 	}
 
 	@Test
