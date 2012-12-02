@@ -208,6 +208,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 				"RETURN left, right" +
 				(limit != null ? " LIMIT {limitRows}" : "");
 		final ImmutableMap.Builder<String, Object> paramsBuilder = ImmutableMap.builder();
+		paramsBuilder.put("leftKind", leftKind);
 		paramsBuilder.put("rightKind", rightKind);
 		if (limit != null)
 			paramsBuilder.put("limitRows", limit);
@@ -244,7 +245,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 		final String totalQuery = "START left = node:" + leftIdxName + "(_rowId={leftId}) " +
 				"MATCH left -[:" + relationshipType.name() + "]-> right " +
 				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
-				"RETURN COUNT(right)" +
+				"RETURN COUNT(right) AS total" +
 				(skip != null ? " SKIP {skipRows}" : "") +
 				(limit != null ? " LIMIT {limitRows}" : "");
 
@@ -256,7 +257,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 				(limit != null ? " LIMIT {limitRows}" : "");
 		final ImmutableMap.Builder<String, Object> paramsBuilder = ImmutableMap.builder();
 		paramsBuilder.put("leftId", leftId);
-		paramsBuilder.put("leftKind", rightKind);
+		paramsBuilder.put("leftKind", leftKind);
 		paramsBuilder.put("rightKind", rightKind);
 		if (skip != null)
 			paramsBuilder.put("skipRows", skip);
