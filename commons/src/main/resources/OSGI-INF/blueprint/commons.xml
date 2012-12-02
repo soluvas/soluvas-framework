@@ -23,9 +23,7 @@
 	
 		<!-- EventBus -->
 		<command name="eventbus/ls">
-			<action class="org.soluvas.commons.shell.EventBusLsCommand">
-				<argument ref="subscriberSuppliers" />
-			</action>
+			<action class="org.soluvas.commons.shell.EventBusLsCommand" />
 		</command>
 		
 		<command name="app/manifestcat">
