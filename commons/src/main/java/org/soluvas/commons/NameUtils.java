@@ -2,6 +2,8 @@ package org.soluvas.commons;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import org.fusesource.jansi.Ansi;
 
 import com.google.common.base.Joiner;
@@ -22,7 +24,20 @@ public class NameUtils {
 	 * @param targetLength
 	 * @return
 	 */
+	public static String shortenClass(@Nullable final Class clazz, final int targetLength) {
+		return shortenClass(clazz != null ? clazz.getName() : null, targetLength);
+	}
+
+	/**
+	 * Shorten a class name by abbreviating package prefixes, then replacing with ellipsis
+	 * as last resort.
+	 * @param name
+	 * @param targetLength
+	 * @return
+	 */
 	public static String shortenClass(final String name, final int targetLength) {
+		if (Strings.isNullOrEmpty(name))
+			return Strings.repeat(" ", targetLength);
 		String current = name;
 		if (current.length() <= targetLength)
 			return current;
@@ -39,6 +54,20 @@ public class NameUtils {
 		return "…" + current.substring(current.length() - targetLength + 1);
 	}
 	
+	/**
+	 * Shorten a class name by abbreviating package prefixes, then replacing with ellipsis
+	 * as last resort.
+	 * 
+	 * The result is right-padded with space and contain {@link Ansi}-style color instructions.
+	 * 
+	 * @param name
+	 * @param targetLength
+	 * @return
+	 */
+	public static String shortenClassAnsi(final Class<?> clazz, final int targetLength) {
+		return shortenClassAnsi(clazz != null ? clazz.getName() : null, targetLength);
+	}
+
 	/**
 	 * Shorten a class name by abbreviating package prefixes, then replacing with ellipsis
 	 * as last resort.
