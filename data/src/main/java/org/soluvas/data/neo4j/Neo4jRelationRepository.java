@@ -26,11 +26,13 @@ import org.soluvas.data.repository.AssocRepository;
 import org.soluvas.data.repository.ExtendedAssocRepository;
 import org.soluvas.data.repository.ExtendedAssocRepositoryBase;
 
+import com.google.common.base.Function;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSortedMap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
 /**
@@ -42,6 +44,32 @@ import com.google.common.collect.Multimap;
  */
 public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocRepositoryBase<L, R, String, String> {
 
+	public static class ToEdge<L, R> implements Function<Relationship, Edge<L, R>> {
+		private final L left;
+		private final R right;
+		
+		/**
+		 * @param left
+		 * @param right
+		 */
+		public ToEdge(L left, R right) {
+			super();
+			this.left = left;
+			this.right = right;
+		}
+
+		@Override
+		@Nullable
+		public Edge<L, R> apply(@Nullable Relationship rel) {
+			final String creationTimeStr = (String) rel.getProperty("creationTime", null);
+			final DateTime creationTime = !Strings.isNullOrEmpty(creationTimeStr) ? new DateTime(creationTimeStr) : null;
+			final String modificationTimeStr = (String) rel.getProperty("modificationTime", null);
+			final DateTime modificationTime = !Strings.isNullOrEmpty(modificationTimeStr) ? new DateTime(modificationTimeStr) : null;
+			return new TimestampedEdge<L, R>(left, right, creationTime, modificationTime);
+		}
+
+	}
+	
 	private static Logger log = LoggerFactory.getLogger(Neo4jRelationRepository.class);
 
 //	private final GraphDatabaseService graphDb;
@@ -242,8 +270,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.ExtendedAssocRepositoryBase#doGetLeft(java.io.Serializable, java.lang.Long, java.lang.Long)
 	 */
-	@Override
-	@Nonnull
+	@Override @Nonnull
 	protected Page<R> doGetLeft(String leftId, Long skip, Long limit) {
 		final String totalQuery = "START left = node:" + leftIdxName + "(_rowId={leftId}) " +
 				"MATCH left -[:" + relationshipType.name() + "]-> right " +
@@ -283,19 +310,75 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 	}
 
 	/* (non-Javadoc)
+	 * @see org.soluvas.data.repository.ExtendedAssocRepositoryBase#doGetLeft(java.io.Serializable, java.lang.Long, java.lang.Long)
+	 */
+	@Override @Nonnull
+	protected Page<Edge<L, R>> doGetLeftAsEdges(String leftId, Long skip, Long limit) {
+		final String totalQuery = "START left = node:" + leftIdxName + "(_rowId={leftId}) " +
+				"MATCH left -[:" + relationshipType.name() + "]-> right " +
+				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
+				"RETURN COUNT(right) AS total" +
+				(skip != null ? " SKIP {skipRows}" : "") +
+				(limit != null ? " LIMIT {limitRows}" : "");
+
+		final ImmutableMap.Builder<String, Object> paramsBuilder = ImmutableMap.builder();
+		paramsBuilder.put("leftId", leftId);
+		paramsBuilder.put("leftKind", leftKind);
+		paramsBuilder.put("rightKind", rightKind);
+		if (skip != null)
+			paramsBuilder.put("skipRows", skip);
+		if (limit != null)
+			paramsBuilder.put("limitRows", limit);
+		final Map<String, Object> params = paramsBuilder.build();
+		
+		final ExecutionResult totalResult = executionEngine.execute(totalQuery, params);
+		long total = totalResult.<Long>columnAs("total").next();
+		
+		if (total > 0) {
+			final String leftQuery = "START left = node:" + leftIdxName + "(_rowId={leftId}) " +
+					"RETURN left";
+			final Node leftNode = executionEngine.execute(leftQuery, params).<Node>columnAs("left").next();
+			final L left = leftShadow.realize(leftNode);
+			
+			final String query = "START left = node:" + leftIdxName + "(_rowId={leftId}) " +
+					"MATCH left -[rel:" + relationshipType.name() + "]-> right " +
+					"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
+					"RETURN rel, right" +
+					(skip != null ? " SKIP {skipRows}" : "") +
+					(limit != null ? " LIMIT {limitRows}" : "");
+			final ExecutionResult rows = executionEngine.execute(query, params);
+			final List<Edge<L, R>> matchingRights = ImmutableList.copyOf( Iterables.transform(rows, new Function<Map<String, Object>, Edge<L, R>>() {
+				@Override @Nullable
+				public Edge<L, R> apply(@Nullable Map<String, Object> input) {
+					final Relationship rel = (Relationship) input.get("rel");
+					final Node rightNode = (Node) input.get("right");
+					final R right = rightShadow.realize(rightNode);
+					return new ToEdge<L, R>(left, right).apply(rel);
+				}
+			}) );
+			log.info("getLeft {} {} skip={} limit={} returned {}/{} {} rights: {} - {}",
+					leftKind, leftId, skip, limit, matchingRights.size(), total, rightKind,
+					query, params);
+			
+			return new PageImpl<Edge<L, R>>(matchingRights, null, total);
+		} else {
+			return new PageImpl<Edge<L,R>>(ImmutableList.<Edge<L, R>>of());
+		}
+	}
+
+	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.ExtendedAssocRepositoryBase#doGetRight(java.io.Serializable, java.lang.Long, java.lang.Long)
 	 */
-	@Override
-	@Nonnull
+	@Override @Nonnull
 	protected Page<L> doGetRight(String rightId, Long skip, Long limit) {
 		final String totalQuery = "START right=node:" + rightIdxName + "(_rowId={rightId}) " +
-				"MATCH left -[:LIKE]-> right " +
+				"MATCH left -[:" + relationshipType + "]-> right " +
 				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
 				"RETURN COUNT(left) AS total" +
 				(skip != null ? " SKIP {skipRows}" : "") +
 				(limit != null ? " LIMIT {limitRows}" : "");
 		final String query = "START right=node:" + rightIdxName + "(_rowId={rightId}) " +
-				"MATCH left -[:LIKE]-> right " +
+				"MATCH left -[:" + relationshipType + "]-> right " +
 				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
 				"RETURN left" +
 				(skip != null ? " SKIP {skipRows}" : "") +
@@ -323,6 +406,59 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 		return new PageImpl<L>(matchingLefts, null, total);
 	}
 	
+	@Override @Nonnull
+	protected Page<Edge<L, R>> doGetRightAsEdges(String rightId, Long skip, Long limit) {
+		final String totalQuery = "START right=node:" + rightIdxName + "(_rowId={rightId}) " +
+				"MATCH left -[rel:" + relationshipType + "]-> right " +
+				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
+				"RETURN COUNT(rel) AS total" +
+				(skip != null ? " SKIP {skipRows}" : "") +
+				(limit != null ? " LIMIT {limitRows}" : "");
+		final ImmutableMap.Builder<String, Object> paramsBuilder = ImmutableMap.builder();
+		paramsBuilder.put("rightId", rightId);
+		paramsBuilder.put("leftKind", leftKind);
+		paramsBuilder.put("rightKind", rightKind);
+		if (skip != null)
+			paramsBuilder.put("skipRows", skip);
+		if (limit != null)
+			paramsBuilder.put("limitRows", limit);
+		final Map<String, Object> params = paramsBuilder.build();
+		
+		final ExecutionResult totalResult = executionEngine.execute(totalQuery, params);
+		long total = totalResult.<Long>columnAs("total").next();
+		
+		if (total > 0) {
+			final String rightQuery = "START right = node:" + rightIdxName + "(_rowId={rightId}) " +
+					"RETURN right";
+			final Node rightNode = executionEngine.execute(rightQuery, params).<Node>columnAs("right").next();
+			final R right = rightShadow.realize(rightNode);
+			
+			final String query = "START right=node:" + rightIdxName + "(_rowId={rightId}) " +
+					"MATCH left -[rel:" + relationshipType + "]-> right " +
+					"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
+					"RETURN rel, left" +
+					(skip != null ? " SKIP {skipRows}" : "") +
+					(limit != null ? " LIMIT {limitRows}" : "");
+			final ExecutionResult rows = executionEngine.execute(query, params);
+			final List<Edge<L, R>> matchingLefts = ImmutableList.copyOf( Iterables.transform(rows, new Function<Map<String, Object>, Edge<L, R>>() {
+				@Override @Nullable
+				public Edge<L, R> apply(@Nullable Map<String, Object> input) {
+					final Relationship rel = (Relationship) input.get("rel");
+					final Node leftNode = (Node) input.get("left");
+					final L left = leftShadow.realize(leftNode);
+					return new ToEdge<L, R>(left, right).apply(rel);
+				}
+			}) );
+			log.info("getRight {} {} skip={} limit={} returned {}/{} {} lefts: {} - {}",
+					rightKind, rightId, skip, limit, matchingLefts.size(), total, leftKind,
+					query, params);
+			
+			return new PageImpl<Edge<L, R>>(matchingLefts, null, total);
+		} else {
+			return new PageImpl<Edge<L, R>>(ImmutableList.<Edge<L, R>>of());
+		}
+	}
+	
 	@Override
 	public boolean exists(String leftId, String rightId) {
 		return idRepository.getRelationship(leftId, rightId) != null;
@@ -335,11 +471,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 			return null;
 		final L left = leftShadow.realize(rel.getStartNode());
 		final R right = rightShadow.realize(rel.getEndNode());
-		final String creationTimeStr = (String) rel.getProperty("creationTime", null);
-		final DateTime creationTime = !Strings.isNullOrEmpty(creationTimeStr) ? new DateTime(creationTimeStr) : null;
-		final String modificationTimeStr = (String) rel.getProperty("modificationTime", null);
-		final DateTime modificationTime = !Strings.isNullOrEmpty(modificationTimeStr) ? new DateTime(modificationTimeStr) : null;
-		return new TimestampedEdge<L, R>(left, right, creationTime, modificationTime);
+		return new ToEdge<L, R>(left, right).apply(rel);
 	}
-
+	
 }

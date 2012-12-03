@@ -9,10 +9,12 @@ import org.soluvas.data.domain.Edge;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
+import org.soluvas.data.neo4j.TimestampedEdge;
 
 /**
  * An {@link AssocRepository} with extended operations which mimic
  * those in {@link IdAssocRepository}.
+ * @todo Type parameter for subclass of {@link Edge}, e.g. {@link TimestampedEdge}.
  * @author ceefour
  */
 public interface ExtendedAssocRepository<L, R, LID extends Serializable, RID extends Serializable>
@@ -126,5 +128,29 @@ public interface ExtendedAssocRepository<L, R, LID extends Serializable, RID ext
      * @return {@code true} if the multimap changed
      */
     long delete(@Nonnull Iterable<LID> leftIds, @Nonnull RID rightId);
+
+	/**
+	 * Returns a collection view of all rights associated with a key. If no
+	 * mappings in the multimap have the provided key, an empty collection is
+	 * returned.
+	 *
+	 * @param key key to search for in multimap
+	 * @return the collection of rights that the key maps to
+	 * @todo Add a {@link Sort} variant, like {@link #findAll()}
+	 */
+    @Nonnull
+	public abstract List<Edge<L, R>> getLeftAsEdges(@Nonnull String leftId);
+
+	/**
+	 * Returns a collection view of all lefts associated with a right. If no
+	 * mappings in the multimap have the provided right, an empty collection is
+	 * returned.
+	 *
+	 * @param rightId Right ID to search for in multimap
+	 * @return the collection of lefts that the right maps to
+	 * @todo Add a {@link Sort} variant, like {@link #findAll()}
+	 */
+    @Nonnull
+	public abstract List<Edge<L, R>> getRightAsEdges(@Nonnull String rightId);
 
 }

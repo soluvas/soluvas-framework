@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.soluvas.data.domain.Edge;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
@@ -148,5 +149,11 @@ public abstract class ExtendedAssocRepositoryBase<L, R, LID extends Serializable
 	public boolean exists(LID leftId, RID rightId) {
 		return findOne(leftId, rightId) != null;
 	}
+
+	protected abstract Page<Edge<L, R>> doGetLeftAsEdges(@Nonnull String leftId, @Nullable Long skip,
+			@Nullable Long limit);
+
+	protected abstract Page<Edge<L, R>> doGetRightAsEdges(@Nonnull String rightId, @Nullable Long skip,
+			@Nullable Long limit);
 
 }
