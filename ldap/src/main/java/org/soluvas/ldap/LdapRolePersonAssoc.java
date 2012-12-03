@@ -44,7 +44,7 @@ import com.google.common.collect.Multisets;
  */
 public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(LdapRolePersonAssoc.class);
 	/**
 	 * {@link LdapConnection} pool which full access used to manipulate entries.
@@ -91,7 +91,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 						log.warn("Cannot find group entry {}", groupDn.getName());
 						return false;
 					}
-					Attribute membersAttr = groupEntry.get("uniqueMember");
+					final Attribute membersAttr = groupEntry.get("uniqueMember");
 					final String personMember = new Rdn("uid", personId).getName() + "," + usersDn.getName();
 					if (!membersAttr.contains(personMember)) {
 						log.debug("Adding member {} to role entry {}",
@@ -215,8 +215,8 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 	 * @see org.soluvas.data.repository.AssocRepository#getLeft(java.lang.Object)
 	 */
 	@Override
-	public List<R> getLeft(final String role) {
-		Set<String> members = LdapUtils.withConnection(ldapPool,
+	public List<String> getLeft(final String role) {
+		final Set<String> members = LdapUtils.withConnection(ldapPool,
 				new Function<LdapConnection, Set<String>>() {
 			@Override @Nullable
 			public Set<String> apply(@Nullable LdapConnection ldap) {
@@ -262,15 +262,15 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 			}
 		});
 		log.debug("Role {} has {} members: {}", role, members.size(), members);
-		return members;
+		return ImmutableList.copyOf( members );
 	}
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.AssocRepository#getRight(java.lang.Object)
 	 */
 	@Override
-	public List<L> getRight(final String personId) {
-		Set<String> ldapRoles = LdapUtils.withConnection(ldapPool,
+	public List<String> getRight(final String personId) {
+		final Set<String> ldapRoles = LdapUtils.withConnection(ldapPool,
 				new Function<LdapConnection, Set<String>>() {
 			@Override @Nullable
 			public Set<String> apply(@Nullable LdapConnection ldap) {
@@ -304,7 +304,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 				}
 			}
 		});
-		return ldapRoles;
+		return ImmutableList.copyOf( ldapRoles );
 	}
 
 	/* (non-Javadoc)
@@ -319,9 +319,10 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 				try {
 					final Dn groupsDn = new Dn(groupsRdn, domainBase);
 					final Dn usersDn = new Dn(usersRdn, domainBase);
-					List<Multiset.Entry<String>> lefts = LdapUtils.transform(ldap.search(groupsDn, "(objectClass=groupOfUniqueNames)", SearchScope.ONELEVEL, "uniqueMember"), new Function<Entry, Multiset.Entry<String>>() {
-						@Override
-						@Nullable
+					final List<Multiset.Entry<String>> lefts = LdapUtils.transform(
+							ldap.search(groupsDn, "(objectClass=groupOfUniqueNames)", SearchScope.ONELEVEL, "uniqueMember"),
+							new Function<Entry, Multiset.Entry<String>>() {
+						@Override @Nullable
 						public Multiset.Entry<String> apply(@Nullable final Entry entry) {
 							Attribute uniqueMemberAttr = entry.get("uniqueMember");
 							Iterable<Value<?>> validValues = Iterables.filter(uniqueMemberAttr, new Predicate<Value<?>>() {
@@ -352,7 +353,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 							return Multisets.immutableEntry(entry.getDn().getRdn().getValue().getString(), validValueCount);
 						}
 					});
-					ImmutableMultiset.Builder<String> builder = ImmutableMultiset.builder();
+					final ImmutableMultiset.Builder<String> builder = ImmutableMultiset.builder();
 					for (Multiset.Entry<String> left : lefts) {
 						builder.addCopies(left.getElement(), left.getCount());
 					}
@@ -377,7 +378,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 				try {
 					final Dn groupsDn = new Dn(groupsRdn, domainBase);
 					final Dn usersDn = new Dn(usersRdn, domainBase);
-					List<Map.Entry<String, Iterable<String>>> nestedEntries = LdapUtils.transform(
+					final List<Map.Entry<String, Iterable<String>>> nestedEntries = LdapUtils.transform(
 							ldap.search(groupsDn, "(objectClass=groupOfUniqueNames)", SearchScope.ONELEVEL, "uniqueMember"),
 							new Function<Entry, Map.Entry<String, Iterable<String>>>() {
 						@Override
@@ -408,12 +409,12 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 									}
 								}
 							});
-							Iterable<String> filteredMembers = Iterables.filter(members, new NotNullPredicate<String>());
+							final Iterable<String> filteredMembers = Iterables.filter(members, new NotNullPredicate<String>());
 							final String roleName = entry.getDn().getRdn().getValue().getString();
 							return Maps.immutableEntry(roleName, filteredMembers);
 						}
 					});
-					ImmutableMultimap.Builder<String, String> builder = ImmutableMultimap.builder();
+					final ImmutableMultimap.Builder<String, String> builder = ImmutableMultimap.builder();
 					for (Map.Entry<String, Iterable<String>> entry : nestedEntries) {
 						builder.putAll(entry.getKey(), entry.getValue());
 					}
