@@ -5,6 +5,9 @@ import java.util.Currency;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.joda.money.format.MoneyFormatter;
@@ -47,6 +50,7 @@ public class LocaleContext {
 	 * @return
 	 * @todo Always 'in' (aka id_ID), Implement this
 	 */
+	@Nonnull
 	public Locale getLocale() {
 		// TODO: get from LDAP
 		return new Locale("in", "ID"); // the ID is required, otherwise you'll get 2012 Agustus 16!
@@ -58,6 +62,7 @@ public class LocaleContext {
 	 * @return
 	 * @todo Always Asia/Jakarta, implement this
 	 */
+	@Nonnull
 	public DateTimeZone getTimeZone() {
 		// TODO: get from LDAP
 		return DateTimeZone.forID("Asia/Jakarta");
@@ -82,13 +87,21 @@ public class LocaleContext {
 	// short time: hour minute only
 	// medium time: hour minute second
 	
-	public String formatShortDateTime(DateTime time) {
-		return DateTimeFormat.shortDateTime().withLocale(getLocale()).withZone(getTimeZone())
-			.print(time);
+	@Nullable
+	public String formatShortDateTime(@Nullable DateTime time) {
+		if (time == null)
+			return null;
+		else
+			return DateTimeFormat.shortDateTime().withLocale(getLocale()).withZone(getTimeZone())
+				.print(time);
 	}
 
-	public String formatShortDateTime(Date time) {
-		return formatShortDateTime(new DateTime(time));
+	@Nullable
+	public String formatShortDateTime(@Nullable Date time) {
+		if (time == null)
+			return null;
+		else
+			return formatShortDateTime(new DateTime(time));
 	}
 
 	/**
@@ -100,7 +113,10 @@ public class LocaleContext {
 	 * @param time
 	 * @return
 	 */
-	public String formatLongDateTime(DateTime time) {
+	@Nullable
+	public String formatLongDateTime(@Nullable DateTime time) {
+		if (time == null)
+			return null;
 		final Locale locale = getLocale();
 		final DateTimeZone tz = getTimeZone();
 		String suffix = "";
@@ -128,11 +144,17 @@ public class LocaleContext {
 				" " + DateTimeFormat.shortTime().withLocale(locale).withZone(tz).print(time) + suffix;
 	}
 
-	public String formatLongDateTime(Date time) {
+	@Nullable
+	public String formatLongDateTime(@Nullable Date time) {
+		if (time == null)
+			return null;
 		return formatLongDateTime(new DateTime(time));
 	}
 	
+	@Nullable
 	public String formatMoney(BigDecimal amount, Currency currency) {
+		if (amount == null || currency == null)
+			return null;
 //		NumberFormat format = NumberFormat.getCurrencyInstance(getLocale());
 //		format.setCurrency(currency);
 //		format.setMaximumFractionDigits(0);
@@ -140,7 +162,10 @@ public class LocaleContext {
 		return formatMoney(Money.of(CurrencyUnit.of(currency), amount));
 	}
 
+	@Nullable
 	public String formatMoney(Money total) {
+		if (total == null)
+			return null;
 		MoneyFormatter formatter = new MoneyFormatterBuilder().appendCurrencySymbolLocalized().appendLiteral(" ").appendAmountLocalized()
 				.toFormatter(getLocale());
 		return formatter.print(total);
