@@ -150,10 +150,20 @@ public abstract class ExtendedAssocRepositoryBase<L, R, LID extends Serializable
 		return findOne(leftId, rightId) != null;
 	}
 
-	protected abstract Page<Edge<L, R>> doGetLeftAsEdges(@Nonnull String leftId, @Nullable Long skip,
+	protected abstract Page<Edge<L, R>> doGetLeftAsEdges(@Nonnull LID leftId, @Nullable Long skip,
 			@Nullable Long limit);
 
-	protected abstract Page<Edge<L, R>> doGetRightAsEdges(@Nonnull String rightId, @Nullable Long skip,
+	protected abstract Page<Edge<L, R>> doGetRightAsEdges(@Nonnull RID rightId, @Nullable Long skip,
 			@Nullable Long limit);
+	
+	@Override @Nonnull
+	public List<Edge<L, R>> getLeftAsEdges(LID leftId) {
+		return doGetLeftAsEdges(leftId, null, null).getContent();
+	}
+
+	@Override @Nonnull
+	public List<Edge<L, R>> getRightAsEdges(RID rightId) {
+		return doGetRightAsEdges(rightId, null, null).getContent();
+	}
 
 }

@@ -174,11 +174,11 @@ public abstract class Neo4jIdRelationRepository<LID  extends Serializable, RID e
 		
 		final String query = "START left=node:" + leftIdxName + "(_rowId={leftId}), " +
 				"right = node:" + rightIdxName + "(_rowId={rightId}) " +
-				"MATCH left -[rel:" + relationshipType.name() + "]-> right " +
+				"MATCH left -[rel:" + relationshipType + "]-> right " +
 				"RETURN rel";
 		final Map<String, Object> params = ImmutableMap.<String, Object>of("leftId", leftId, "rightId", rightId);
 		final ExecutionResult rows = executionEngine.execute(query, params);
-		log.trace("getRelationship {} {} -{}-> {} {} returned {}: {} - {}",
+		log.debug("getRelationship {} {} -{}-> {} {} returned {}: {} - {}",
 				leftKind, leftId, relationshipType, rightKind, rightId, rows, query, params);
 		final Map<String, Object> row = Iterables.getFirst(rows, null);
 		if (row != null) {
@@ -260,6 +260,8 @@ public abstract class Neo4jIdRelationRepository<LID  extends Serializable, RID e
 			rel.delete();
 			return true;
 		} else {
+			log.info("Not deleting non-existing relationship {} {} -{}-> {} {}",
+					leftKind, leftId, relationshipType, rightKind, rightId);
 			return false;
 		}
 	}

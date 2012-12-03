@@ -19,6 +19,7 @@ import org.osgi.framework.ServiceReference;
 import org.soluvas.commons.inject.Filter;
 import org.soluvas.commons.inject.Namespace;
 import org.soluvas.commons.inject.Supplied;
+import org.soluvas.commons.locale.LocaleContext;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.commons.tenant.TenantUtils;
 
@@ -36,6 +37,10 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 	 * May be {@literal null} if no session is executing.
 	 */
 	protected TenantRef tenant;
+	/**
+	 * @todo Proper locale support.
+	 */
+	protected LocaleContext localeContext = new LocaleContext();
 	
 	@Override
 	public Object execute(final CommandSession session) throws Exception {

@@ -205,6 +205,8 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 		if (rel == null) {
 			try {
 				rel = leftNode.createRelationshipTo(rightNode, relationshipType);
+				rel.setProperty("creationTime", new DateTime().toString());
+				rel.setProperty("modificationTime", new DateTime().toString());
 				log.info("Added relationship {}: {} #{} {} -{}-> {} #{} {}", rel,
 						leftKind, leftNode.getId(), leftId, relationshipType, rightKind, rightNode.getId(), rightId );
 				return true;

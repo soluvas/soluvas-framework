@@ -139,7 +139,7 @@ public interface ExtendedAssocRepository<L, R, LID extends Serializable, RID ext
 	 * @todo Add a {@link Sort} variant, like {@link #findAll()}
 	 */
     @Nonnull
-	public abstract List<Edge<L, R>> getLeftAsEdges(@Nonnull String leftId);
+	public abstract List<Edge<L, R>> getLeftAsEdges(@Nonnull LID leftId);
 
 	/**
 	 * Returns a collection view of all lefts associated with a right. If no
@@ -151,6 +151,6 @@ public interface ExtendedAssocRepository<L, R, LID extends Serializable, RID ext
 	 * @todo Add a {@link Sort} variant, like {@link #findAll()}
 	 */
     @Nonnull
-	public abstract List<Edge<L, R>> getRightAsEdges(@Nonnull String rightId);
+	public abstract List<Edge<L, R>> getRightAsEdges(@Nonnull RID rightId);
 
 }
