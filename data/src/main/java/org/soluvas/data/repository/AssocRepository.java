@@ -65,6 +65,15 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
 
     // Query Operations
 
+//	/**
+//	 * Returns whether an association with the given id exists.
+//	 * 
+//	 * @param id must not be {@literal null}.
+//	 * @return true if an entity with the given id exists, alse otherwise
+//	 * @throws IllegalArgumentException if {@code id} is {@literal null}
+//	 */
+//	boolean exists(@Nonnull final L left, @Nonnull final R right);
+
 	/**
 	 * Returns the number of right values (should never be duplicates) for a particular left.
 	 */

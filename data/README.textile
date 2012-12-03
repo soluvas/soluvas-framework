@@ -23,6 +23,21 @@ h2. Design Goals
 
 h2. Q&A
 
+h3. Association Repository vs Edge Repository vs EntityAssoc vs LookupAssoc Repository
+
+1. Assoc repo : General ?
+2. Edge repository: The edge is saved (this should apply for all assocRepo anyway, even if Edge is "slim", like LDAP Role).
+3. EntityAssoc: the whole entity is saved, there is no notion of ID. Very uncommon.
+3. IdAssoc: Only the ID is saved. Quite common and simplest. Example: LdapRolePersonAssoc.
+4. LookupAssoc: Very common and most complex. The ID and a Shadow is saved. For light query operations, only ID is needed.
+   For query operations which return shadows, only ID is needed, the objects will be returned from the shadow.
+   For manipulation operations, if shadow already exists then no lookup is needed, but
+   if not exists then lookup is needed to get the shadow which will be persisted.
+
+Let's rename :
+
+1.
+
 h3. Will Soluvas Data merge with Spring Data?
 
 Short answer: Not likely.

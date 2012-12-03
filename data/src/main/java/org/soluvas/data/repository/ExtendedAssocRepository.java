@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import org.soluvas.data.domain.Edge;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
@@ -18,6 +19,26 @@ public interface ExtendedAssocRepository<L, R, LID extends Serializable, RID ext
 	extends AssocRepository<L, R> {
 
     // Query Operations
+
+	/**
+	 * Returns whether an association with the given ids exists.
+	 * 
+	 * @param leftId must not be {@literal null}.
+	 * @param rightId must not be {@literal null}.
+	 * @return true if an entity with the given id exists, alse otherwise
+	 * @throws IllegalArgumentException if {@code leftId/rightId} is {@literal null}
+	 */
+	public abstract boolean exists(@Nonnull final LID leftId, @Nonnull final RID rightId);
+
+	/**
+	 * Returns the association with the given ids.
+	 * 
+	 * @param leftId must not be {@literal null}.
+	 * @param rightId must not be {@literal null}.
+	 * @return true if an entity with the given id exists, alse otherwise
+	 * @throws IllegalArgumentException if {@code leftId/rightId} is {@literal null}
+	 */
+	public abstract Edge<L, R> findOne(@Nonnull final LID leftId, @Nonnull final RID rightId);
 
 	/**
 	 * Returns a collection view of all rights associated with a key. If no

@@ -8,6 +8,7 @@ import java.util.NavigableMap;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.joda.time.DateTime;
 import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -18,12 +19,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.DataException;
 import org.soluvas.data.EntityShadow;
+import org.soluvas.data.domain.Edge;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.repository.AssocRepository;
 import org.soluvas.data.repository.ExtendedAssocRepository;
 import org.soluvas.data.repository.ExtendedAssocRepositoryBase;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
@@ -318,6 +321,25 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 				query, params);
 
 		return new PageImpl<L>(matchingLefts, null, total);
+	}
+	
+	@Override
+	public boolean exists(String leftId, String rightId) {
+		return idRepository.getRelationship(leftId, rightId) != null;
+	}
+	
+	@Override
+	public Edge<L, R> findOne(String leftId, String rightId) {
+		final Relationship rel = idRepository.getRelationship(leftId, rightId);
+		if (rel == null)
+			return null;
+		final L left = leftShadow.realize(rel.getStartNode());
+		final R right = rightShadow.realize(rel.getEndNode());
+		final String creationTimeStr = (String) rel.getProperty("creationTime", null);
+		final DateTime creationTime = !Strings.isNullOrEmpty(creationTimeStr) ? new DateTime(creationTimeStr) : null;
+		final String modificationTimeStr = (String) rel.getProperty("modificationTime", null);
+		final DateTime modificationTime = !Strings.isNullOrEmpty(modificationTimeStr) ? new DateTime(modificationTimeStr) : null;
+		return new TimestampedEdge<L, R>(left, right, creationTime, modificationTime);
 	}
 
 }

@@ -138,5 +138,15 @@ public abstract class ExtendedAssocRepositoryBase<L, R, LID extends Serializable
 		final Page<L> upPage = doGetRight(rightId, skip, (long) pageable.getPageSize());
 		return new PageImpl<L>(upPage.getContent(), pageable, upPage.getTotalElements());
 	}
+	
+	/**
+	 * It's recommended to implement this. The default implementation
+	 * simply calls {@link #findOne(Serializable, Serializable)}.
+	 * @see org.soluvas.data.repository.ExtendedAssocRepository#exists(java.io.Serializable, java.io.Serializable)
+	 */
+	@Override
+	public boolean exists(LID leftId, RID rightId) {
+		return findOne(leftId, rightId) != null;
+	}
 
 }
