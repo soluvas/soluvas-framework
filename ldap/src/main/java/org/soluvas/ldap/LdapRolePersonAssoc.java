@@ -1,6 +1,5 @@
 package org.soluvas.ldap;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -216,7 +215,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 	 * @see org.soluvas.data.repository.AssocRepository#getLeft(java.lang.Object)
 	 */
 	@Override
-	public Collection<String> getLeft(final String role) {
+	public List<R> getLeft(final String role) {
 		Set<String> members = LdapUtils.withConnection(ldapPool,
 				new Function<LdapConnection, Set<String>>() {
 			@Override @Nullable
@@ -270,7 +269,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 	 * @see org.soluvas.data.repository.AssocRepository#getRight(java.lang.Object)
 	 */
 	@Override
-	public Collection<String> getRight(final String personId) {
+	public List<L> getRight(final String personId) {
 		Set<String> ldapRoles = LdapUtils.withConnection(ldapPool,
 				new Function<LdapConnection, Set<String>>() {
 			@Override @Nullable

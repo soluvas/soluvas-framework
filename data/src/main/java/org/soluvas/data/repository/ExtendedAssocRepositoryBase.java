@@ -1,10 +1,6 @@
-/**
- * 
- */
 package org.soluvas.data.repository;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -20,7 +16,6 @@ import com.google.common.collect.Iterables;
 
 /**
  * @author ceefour
- *
  */
 public abstract class ExtendedAssocRepositoryBase<L, R, LID extends Serializable, RID extends Serializable>
 	extends AssocRepositoryBase<L, R>
@@ -81,22 +76,22 @@ public abstract class ExtendedAssocRepositoryBase<L, R, LID extends Serializable
 	protected abstract RID getRightId(R right);
 	
 	@Override @Nonnull
-	public Collection<R> getLeft(L left) {
+	public List<R> getLeft(L left) {
 		return getLeft(getLeftId(left));
 	}
 	
 	@Override @Nonnull
-	public Collection<R> getLeft(LID leftId) {
+	public List<R> getLeft(LID leftId) {
 		return doGetLeft(leftId, null, null).getContent();
 	}
 
 	@Override @Nonnull
-	public Collection<L> getRight(R right) {
+	public List<L> getRight(R right) {
 		return getRight(getRightId(right));
 	}
 	
 	@Override @Nonnull
-	public Collection<L> getRight(RID rightId) {
+	public List<L> getRight(RID rightId) {
 		return doGetRight(rightId, null, null).getContent();
 	}
 

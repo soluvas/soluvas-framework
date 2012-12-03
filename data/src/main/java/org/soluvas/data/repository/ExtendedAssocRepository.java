@@ -1,7 +1,7 @@
 package org.soluvas.data.repository;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 
@@ -28,7 +28,7 @@ public interface ExtendedAssocRepository<L, R, LID extends Serializable, RID ext
 	 * @return the collection of rights that the key maps to
 	 */
 	@Nonnull
-	public abstract Collection<R> getLeft(@Nonnull LID leftId);
+	public abstract List<R> getLeft(@Nonnull LID leftId);
 
 	/**
 	 * Returns a collection view of all lefts associated with a key. If no
@@ -39,7 +39,7 @@ public interface ExtendedAssocRepository<L, R, LID extends Serializable, RID ext
 	 * @return the collection of lefts that the key maps to
 	 */
 	@Nonnull
-	public abstract Collection<L> getRight(@Nonnull RID rightId);
+	public abstract List<L> getRight(@Nonnull RID rightId);
 
 	/**
 	 * Returns a collection view of all rights associated with a key. If no

@@ -1,14 +1,29 @@
 package org.soluvas.data.repository;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
 
+import org.soluvas.data.domain.Page;
+
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 
 /**
- * This is implemented by both {@link AssocRepository} and {@link EdgeRepository}. 
+ * This is implemented by both {@link AssocRepository} and {@link EdgeRepository}.
+ * 
+ * <p>Collection Methods return {@link List} instead of {@link Collection} because:
+ * 
+ * <ol>
+ * <li>{@link Page} contains a {@link List} anyway</li>
+ * <li>Makes it easier to wrap with Wicket's {@code ListModel}</li>
+ * </li>
+ * 
+ * <p>Note to implementors: The returned data structures ({@link List}, {@link Set}, {@link Map}, {@link Multimap}, {@link Multiset})
+ * should be immutable.
  *
  * @param <L>
  * @param <R>
@@ -95,22 +110,26 @@ public interface BasicAssocRepository<L, R> extends BasicRepository {
 	 * mappings in the multimap have the provided key, an empty collection is
 	 * returned.
 	 *
+	 * The returned {@link List} should be immutable.
+	 *
 	 * @param key key to search for in multimap
 	 * @return the collection of rights that the key maps to
 	 */
 	@Nonnull
-	public abstract Collection<R> getLeft(@Nonnull L left);
+	public abstract List<R> getLeft(@Nonnull L left);
 
 	/**
 	 * Returns a collection view of all lefts associated with a key. If no
 	 * mappings in the multimap have the provided key, an empty collection is
 	 * returned.
+	 * 
+	 * The returned {@link List} should be immutable.
 	 *
 	 * @param right right to search for in multimap
 	 * @return the collection of lefts that the key maps to
 	 */
 	@Nonnull
-	public abstract Collection<L> getRight(@Nonnull R right);
+	public abstract List<L> getRight(@Nonnull R right);
 
 	/**
 	 * Returns the set of all lefts, each appearing once in the returned set.

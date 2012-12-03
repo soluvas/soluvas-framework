@@ -117,6 +117,14 @@ public class Neo4jPersonShadow extends EntityShadowBase<PersonInfo, String, Node
 		this.idx = idx;
 	}
 
+	/**
+	 * @param graph
+	 * @param idxName
+	 */
+	public Neo4jPersonShadow(@Nonnull final GraphDatabaseService graph, @Nonnull final String idxName) {
+		this(graph, Neo4jUtils.ensureIndex(graph, idxName));
+	}
+	
 	@Override
 	protected Node doEnsure(PersonInfo person, boolean refresh) {
 		try {

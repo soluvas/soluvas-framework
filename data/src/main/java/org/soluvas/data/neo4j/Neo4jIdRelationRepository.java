@@ -1,7 +1,6 @@
 package org.soluvas.data.neo4j;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -299,11 +298,11 @@ public abstract class Neo4jIdRelationRepository<LID  extends Serializable, RID e
 	}
 
 	@Override @Nonnull
-	public Collection<RID> getLeft(LID left) {
+	public List<RID> getLeft(LID left) {
 		return getLeftLimit(left, null);
 	}
 	
-	public Collection<RID> getLeftLimit(LID leftId, Long limit) {
+	public List<RID> getLeftLimit(LID leftId, Long limit) {
 		final String query = "START left=node:" + leftIdxName + "(_rowId={leftId}) " +
 				"MATCH left -[:" + relationshipType.name() + "]-> right " +
 				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
@@ -325,11 +324,11 @@ public abstract class Neo4jIdRelationRepository<LID  extends Serializable, RID e
 	}
 
 	@Override @Nonnull
-	public Collection<LID> getRight(RID rightId) {
+	public List<LID> getRight(RID rightId) {
 		return getRightLimit(rightId, null);
 	}
 	
-	public Collection<LID> getRightLimit(RID rightId, @Nullable Long limit) {
+	public List<LID> getRightLimit(RID rightId, @Nullable Long limit) {
 		final String query = "START right=node:" + rightIdxName + "(_rowId={rightId}) " +
 				"MATCH left -[:LIKE]-> right " +
 				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
