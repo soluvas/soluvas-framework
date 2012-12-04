@@ -143,7 +143,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 	@Override @Nonnull
 	public NavigableMap<L, Long> getRightCounts() {
 		final String query = "START left = node:" + leftIdxName + "('*:*') " +
-				"MATCH left -[:" + relationshipType + "]-> right " +
+				"MATCH left -[rel:" + relationshipType + "]-> right " +
 				"WHERE left.kind = {leftKind} AND right.kind = {rightKind} " +
 				"RETURN left, COUNT(rel) AS relCount";
 		final Map<String, Object> params = ImmutableMap.<String, Object>of(
