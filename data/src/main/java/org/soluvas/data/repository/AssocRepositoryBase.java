@@ -32,7 +32,7 @@ import com.google.common.collect.Multiset;
 public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>,
 	PageableAndSortable<Map.Entry<L, R>> {
 	
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(AssocRepositoryBase.class);
 
 	@Override

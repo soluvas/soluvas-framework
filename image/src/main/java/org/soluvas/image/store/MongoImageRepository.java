@@ -96,7 +96,7 @@ import com.mongodb.MongoURI;
  */
 public class MongoImageRepository implements ImageRepository {
 
-	private transient Logger log = LoggerFactory.getLogger(MongoImageRepository.class);
+	private static final Logger log = LoggerFactory.getLogger(MongoImageRepository.class);
 	
 	/**
 	 * Name of the predefined "original" image style.

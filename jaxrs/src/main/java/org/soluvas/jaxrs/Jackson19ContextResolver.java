@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 @Provider @Produces(MediaType.APPLICATION_JSON)
 public class Jackson19ContextResolver implements ContextResolver<ObjectMapper> {
 
-	private transient Logger log = LoggerFactory.getLogger(Jackson19ContextResolver.class);
+	private static final Logger log = LoggerFactory.getLogger(Jackson19ContextResolver.class);
 	private ObjectMapper objectMapper;
 
 	public Jackson19ContextResolver() throws JsonGenerationException, JsonMappingException, IOException {

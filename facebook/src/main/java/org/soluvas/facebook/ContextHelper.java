@@ -13,7 +13,7 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 public class ContextHelper {
 
-	private transient Logger log = LoggerFactory.getLogger(ContextHelper.class);
+	private static final Logger log = LoggerFactory.getLogger(ContextHelper.class);
 	private ExecutorService executor;
 	private DecompressingHttpClient httpClient;
 	

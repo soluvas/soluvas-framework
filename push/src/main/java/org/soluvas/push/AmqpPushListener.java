@@ -17,7 +17,7 @@ import com.rabbitmq.client.Channel;
  */
 public class AmqpPushListener implements PushListener {
 
-	private transient Logger log = LoggerFactory.getLogger(AmqpPushListener.class);
+	private static final Logger log = LoggerFactory.getLogger(AmqpPushListener.class);
 	@Inject private Channel amqpChannel;
 
 	/* (non-Javadoc)

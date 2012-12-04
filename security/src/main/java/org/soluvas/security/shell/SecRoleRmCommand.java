@@ -22,7 +22,7 @@ import com.google.common.collect.ImmutableList;
 @Command(scope = "sec", name = "rolerm", description = "Deletes a Role in the Security Repository.")
 public class SecRoleRmCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecRoleRmCommand.class);
+	private static final Logger log = LoggerFactory.getLogger(SecRoleRmCommand.class);
 
 	private final ServiceLookup svcLookup;
 

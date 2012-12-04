@@ -35,7 +35,7 @@ import com.google.common.collect.Ordering;
  */
 public abstract class CrudRepositoryBase<T, ID extends Serializable> implements PagingAndSortingRepository<T, ID> {
 
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(CrudRepositoryBase.class);
 	
 	@Override

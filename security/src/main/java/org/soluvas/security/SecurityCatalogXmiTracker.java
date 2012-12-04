@@ -50,7 +50,7 @@ import com.google.common.collect.ImmutableList.Builder;
 @Deprecated
 public class SecurityCatalogXmiTracker implements BundleTrackerCustomizer<List<ServiceRegistration<Supplier>>> {
 
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(SecurityCatalogXmiTracker.class);
 	private final String tenantId;
 	private final String tenantEnv;

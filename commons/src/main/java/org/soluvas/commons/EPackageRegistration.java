@@ -59,7 +59,7 @@ public class EPackageRegistration {
 		}
 	}
 
-	private transient Logger log = LoggerFactory.getLogger(EPackageRegistration.class);
+	private static final Logger log = LoggerFactory.getLogger(EPackageRegistration.class);
 	private final Iterable<Class<EPackage>> packages;
 	@Nonnull
 	private final BundleContext bundleContext;

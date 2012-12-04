@@ -21,7 +21,7 @@ import com.google.common.base.Joiner;
 @Command(scope = "secd", name = "actionls", description = "List available Actions")
 public class SecdActionLsCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecdActionLsCommand.class);
+	private static final Logger log = LoggerFactory.getLogger(SecdActionLsCommand.class);
 
 	private final ServiceLookup svcLookup;
 

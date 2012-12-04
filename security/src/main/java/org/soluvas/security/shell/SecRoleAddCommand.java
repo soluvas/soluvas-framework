@@ -26,7 +26,7 @@ import com.google.common.collect.ImmutableSet;
 @Command(scope = "sec", name = "roleadd", description = "Add a Role to the Security Repository")
 public class SecRoleAddCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecRoleAddCommand.class);
+	private static final Logger log = LoggerFactory.getLogger(SecRoleAddCommand.class);
 
 	private final ServiceLookup svcLookup;
 

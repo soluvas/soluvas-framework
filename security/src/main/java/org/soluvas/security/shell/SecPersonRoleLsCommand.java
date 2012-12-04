@@ -23,7 +23,7 @@ import com.google.common.collect.Ordering;
 @Command(scope = "sec", name = "personrolels", description = "List roles of a person.")
 public class SecPersonRoleLsCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecPersonRoleLsCommand.class);
+	private static final Logger log = LoggerFactory.getLogger(SecPersonRoleLsCommand.class);
 
 	private final ServiceLookup svcLookup;
 	

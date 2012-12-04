@@ -26,7 +26,7 @@ import com.google.common.collect.Lists;
  */
 public class UserListParser {
 	
-	private transient Logger log = LoggerFactory.getLogger(UserListParser.class);
+	private static final Logger log = LoggerFactory.getLogger(UserListParser.class);
 	@Inject private ExecutorService executor;
 	private ObjectMapper mapper = new ObjectMapper();
 	

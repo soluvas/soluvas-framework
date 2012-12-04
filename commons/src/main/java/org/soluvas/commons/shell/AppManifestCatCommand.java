@@ -15,7 +15,7 @@ import org.soluvas.commons.tenant.ServiceLookup;
 @Command(scope="app", name="manifestcat", description="Show current AppManifest.")
 public class AppManifestCatCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(AppManifestCatCommand.class);
+	private static final Logger log = LoggerFactory.getLogger(AppManifestCatCommand.class);
 
 	private final ServiceLookup svcLookup;
 

@@ -32,7 +32,7 @@ import com.google.common.collect.Lists;
 @Path("org.soluvas.image")
 public class ImageResource {
 	
-	private transient Logger log = LoggerFactory.getLogger(ImageResource.class);
+	private static final Logger log = LoggerFactory.getLogger(ImageResource.class);
 	@Deprecated
 	private transient BundleContext bundleContext;
 	private transient @Context UriInfo uriInfo;

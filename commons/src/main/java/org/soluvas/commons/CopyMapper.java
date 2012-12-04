@@ -22,7 +22,7 @@ import com.google.common.base.Function;
  */
 public class CopyMapper<T> implements Function<Object, T> {
 	
-	private transient Logger log = LoggerFactory.getLogger(CopyMapper.class);
+	private static final Logger log = LoggerFactory.getLogger(CopyMapper.class);
 	private Class<T> targetClazz;
 
 	public CopyMapper(Class<T> targetClazz) {

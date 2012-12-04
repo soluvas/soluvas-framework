@@ -23,7 +23,7 @@ import com.rabbitmq.client.Connection;
  */
 public class BroadcastingRepository<T, ID extends Serializable> implements SyncRepository<T, ID> {
 
-	private transient Logger log = LoggerFactory.getLogger(BroadcastingRepository.class);
+	private static final Logger log = LoggerFactory.getLogger(BroadcastingRepository.class);
 	private final SyncRepository<T, ID> delegate;
 	private final Channel channel;
 	private final String trackingId;

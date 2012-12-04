@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
  */
 public class LoggingCallback<S, P, T> implements UpdatingCallback<S, P, T> {
 
-	private transient Logger log = LoggerFactory.getLogger(LoggingCallback.class);
+	private static final Logger log = LoggerFactory.getLogger(LoggingCallback.class);
 	
 	/* (non-Javadoc)
 	 * @see org.soluvas.async.Callback#success(java.lang.Object)

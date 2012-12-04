@@ -37,7 +37,7 @@ import com.google.common.collect.Ordering;
  */
 public class LdapMapperTest {
 
-	private transient Logger log = LoggerFactory.getLogger(LdapMapperTest.class);
+	private static final Logger log = LoggerFactory.getLogger(LdapMapperTest.class);
 	private LdapMapper mapper;
 
 	/**

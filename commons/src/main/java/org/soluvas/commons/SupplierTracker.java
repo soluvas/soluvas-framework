@@ -17,7 +17,7 @@ import com.google.common.base.Supplier;
 public class SupplierTracker<T extends EObject> implements
 		ServiceTrackerCustomizer<Supplier<T>, Supplier<T>> {
 
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(SupplierTracker.class);
 	private final BundleContext bundleContext;
 	private final DelegatingSupplier<T> delegate;

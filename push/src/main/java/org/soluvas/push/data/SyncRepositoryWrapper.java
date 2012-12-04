@@ -18,7 +18,7 @@ import com.google.common.base.Function;
  */
 public class SyncRepositoryWrapper<T, ID extends Serializable> implements SyncRepository<T, ID> {
 
-	private transient Logger log = LoggerFactory.getLogger(SyncRepositoryWrapper.class);
+	private static final Logger log = LoggerFactory.getLogger(SyncRepositoryWrapper.class);
 	private final CallbackRepository<T, ID> delegateRepository;
 
 	public SyncRepositoryWrapper(CallbackRepository<T, ID> delegateRepository) {

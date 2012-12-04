@@ -25,7 +25,7 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
  */
 public class FacebookUtilsTest {
 
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(FacebookUtilsTest.class);
 //	private ActorSystem actorSystem;
 	private ExecutorService executor;

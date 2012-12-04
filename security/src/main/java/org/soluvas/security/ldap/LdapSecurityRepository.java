@@ -34,7 +34,7 @@ import com.google.common.collect.Iterables;
  */
 public class LdapSecurityRepository implements SecurityRepository {
 	
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(LdapSecurityRepository.class);
 	/**
 	 * {@link LdapConnection} pool which full access used to read entries.

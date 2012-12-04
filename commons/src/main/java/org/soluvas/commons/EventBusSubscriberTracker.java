@@ -71,7 +71,7 @@ import com.google.common.eventbus.EventBus;
  */
 public class EventBusSubscriberTracker implements ServiceTrackerCustomizer {
 
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(EventBusSubscriberTracker.class);
 	private EventBus eventBus;
 	

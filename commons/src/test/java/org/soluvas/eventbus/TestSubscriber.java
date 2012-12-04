@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 public class TestSubscriber {
 
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(TestSubscriber.class);
 	
 	public TestSubscriber() {

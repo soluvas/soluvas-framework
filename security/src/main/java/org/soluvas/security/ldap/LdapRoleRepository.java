@@ -35,7 +35,7 @@ import com.google.common.collect.Iterables;
  */
 public class LdapRoleRepository implements CrudRepository<Role, String> {
 
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(LdapRoleRepository.class);
 	/**
 	 * {@link LdapConnection} pool which full access used to read entries.

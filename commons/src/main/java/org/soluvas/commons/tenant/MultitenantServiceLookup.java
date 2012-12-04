@@ -38,7 +38,7 @@ import com.google.common.util.concurrent.FutureCallback;
 @Deprecated
 public class MultitenantServiceLookup implements ServiceLookup {
 	
-	private transient Logger log = LoggerFactory.getLogger(MultitenantServiceLookup.class);
+	private static final Logger log = LoggerFactory.getLogger(MultitenantServiceLookup.class);
 	private final BundleContext bundleContext;
 	private final String defaultTenantEnv = "dev";
 	private final String defaultClientId = "berbatik";

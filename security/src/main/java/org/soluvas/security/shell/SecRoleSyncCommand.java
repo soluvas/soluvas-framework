@@ -29,7 +29,7 @@ import com.google.common.collect.Iterables;
 @Command(scope = "sec", name = "roleadd", description = "Synchronize Roles from the SecurityCatalog to the SecurityRepository.")
 public class SecRoleSyncCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecRoleSyncCommand.class);
+	private static final Logger log = LoggerFactory.getLogger(SecRoleSyncCommand.class);
 
 	private final ServiceLookup svcLookup;
 

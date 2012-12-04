@@ -45,7 +45,7 @@ import com.google.common.collect.ImmutableList.Builder;
 @SuppressWarnings("rawtypes")
 public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistration<Supplier>>> {
 
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(XmiTracker.class);
 	private final String tenantId;
 	private final String tenantEnv;

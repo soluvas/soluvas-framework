@@ -20,7 +20,7 @@ import org.soluvas.security.SecurityCatalog;
 @Command(scope = "secd", name = "rolels", description = "List available Roles")
 public class SecdRoleLsCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecdRoleLsCommand.class);
+	private static final Logger log = LoggerFactory.getLogger(SecdRoleLsCommand.class);
 
 	private final ServiceLookup svcLookup;
 

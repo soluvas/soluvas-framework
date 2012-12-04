@@ -21,7 +21,7 @@ import com.google.common.collect.ImmutableSet;
 @Command(scope = "sec", name = "rolememberset", description = "Set members of a security role.")
 public class SecRoleMemberSetCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecRoleMemberSetCommand.class);
+	private static final Logger log = LoggerFactory.getLogger(SecRoleMemberSetCommand.class);
 
 	private final ServiceLookup svcLookup;
 	

@@ -20,7 +20,7 @@ import org.soluvas.security.SecurityCatalog;
 @Command(scope = "secd", name = "domainls", description = "List available Domains")
 public class SecdDomainLsCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecdDomainLsCommand.class);
+	private static final Logger log = LoggerFactory.getLogger(SecdDomainLsCommand.class);
 
 	private final ServiceLookup svcLookup;
 

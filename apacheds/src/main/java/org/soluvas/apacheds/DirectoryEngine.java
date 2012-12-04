@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
  */
 public class DirectoryEngine {
 
-	private transient Logger log = LoggerFactory.getLogger(DirectoryEngine.class);
+	private static final Logger log = LoggerFactory.getLogger(DirectoryEngine.class);
 	
     /** The directory service */
     private DirectoryService service;

@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableSet;
  */
 public class LdapUtilsTest {
 
-	private transient Logger log = LoggerFactory.getLogger(LdapUtilsTest.class);
+	private static final Logger log = LoggerFactory.getLogger(LdapUtilsTest.class);
 	
 	private transient LdapMapper mapper;
 	private transient LdapConnection conn;

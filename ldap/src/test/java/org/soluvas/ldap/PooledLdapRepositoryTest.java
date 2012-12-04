@@ -25,7 +25,7 @@ import com.google.common.collect.Lists;
  */
 public class PooledLdapRepositoryTest {
 
-	private transient Logger log = LoggerFactory.getLogger(PooledLdapRepositoryTest.class);
+	private static final Logger log = LoggerFactory.getLogger(PooledLdapRepositoryTest.class);
 	private LdapNetworkConnection conn;
 	private LdapRepository<SocialPerson> personRepo;
 	private LdapConnectionPool pool;

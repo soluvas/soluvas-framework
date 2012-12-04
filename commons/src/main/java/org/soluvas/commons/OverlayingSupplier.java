@@ -28,7 +28,7 @@ import com.google.common.collect.Maps;
  */
 public class OverlayingSupplier<T extends EObject> implements Supplier<T>, DelegatingSupplier<T> {
 
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(OverlayingSupplier.class);
 	private final EClass eClass;
 	/**

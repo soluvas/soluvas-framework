@@ -12,7 +12,7 @@ import com.google.common.eventbus.Subscribe;
  */
 public class DummyPushListener implements PushListener {
 
-	private transient Logger log = LoggerFactory.getLogger(DummyPushListener.class);
+	private static final Logger log = LoggerFactory.getLogger(DummyPushListener.class);
 
 	/* (non-Javadoc)
 	 * @see id.co.bippo.commerce.push.PushListener#publishPublic(java.lang.String, org.soluvas.push.PushMessage)

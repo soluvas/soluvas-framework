@@ -26,7 +26,7 @@ import com.google.common.collect.Lists;
  */
 public class FriendListDownloader {
 
-	private transient Logger log = LoggerFactory.getLogger(FriendListDownloader.class);
+	private static final Logger log = LoggerFactory.getLogger(FriendListDownloader.class);
 	@Inject HttpClient httpClient;
 	@Inject ExecutorService executor;
 	

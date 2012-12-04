@@ -20,7 +20,7 @@ import com.google.common.base.Joiner;
 @Command(scope = "secd", name = "permls", description = "List available Permissions")
 public class SecdPermLsCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecdPermLsCommand.class);
+	private static final Logger log = LoggerFactory.getLogger(SecdPermLsCommand.class);
 
 	private final ServiceLookup svcLookup;
 

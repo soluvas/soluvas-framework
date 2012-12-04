@@ -21,7 +21,7 @@ import org.soluvas.security.SecurityRepository;
 @Command(scope = "sec", name = "rolels", description = "List Roles in the SecurityRepository.")
 public class SecRoleLsCommand extends OsgiCommandSupport {
 
-	private transient Logger log = LoggerFactory.getLogger(SecRoleLsCommand.class);
+	private static final Logger log = LoggerFactory.getLogger(SecRoleLsCommand.class);
 
 	private final ServiceLookup svcLookup;
 

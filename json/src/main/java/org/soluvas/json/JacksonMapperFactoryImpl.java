@@ -27,7 +27,7 @@ import com.google.common.collect.Lists;
  */
 public class JacksonMapperFactoryImpl implements JacksonMapperFactory {
 	
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(JacksonMapperFactoryImpl.class);
 	private List<Supplier<Module>> moduleSuppliers = ImmutableList.of();
 	private ObjectMapper objectMapper;

@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableList;
  */
 public class EnhancedSupplier<T> implements Supplier<T> {
 	
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(EnhancedSupplier.class);
 	private Supplier<T> delegate;
 	private List<Enhancer<T>> enhancers;

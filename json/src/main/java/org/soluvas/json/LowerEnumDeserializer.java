@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.deser.std.StdScalarDeserializer;
  */
 public class LowerEnumDeserializer extends StdScalarDeserializer<Enum<?>> {
 
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(LowerEnumDeserializer.class);
 	
 	protected LowerEnumDeserializer(Class<Enum<?>> clazz) {

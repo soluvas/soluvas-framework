@@ -35,7 +35,7 @@ import com.google.common.collect.Lists;
  */
 public class ResourceInjector {
 
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(ResourceInjector.class);
 	
 	public static enum InjectMode {

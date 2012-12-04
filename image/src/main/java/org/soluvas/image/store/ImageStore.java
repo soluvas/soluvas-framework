@@ -77,7 +77,7 @@ import com.mongodb.MongoURI;
 @Deprecated
 public class ImageStore extends MongoImageRepository {
 
-	private transient Logger log = LoggerFactory.getLogger(ImageStore.class);
+	private static final Logger log = LoggerFactory.getLogger(ImageStore.class);
 	
 	/**
 	 * Name of the predefined "original" image style.

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Command(scope="as", name="json", description="Format any object as JSON.")
 public class AsJsonCommand extends OsgiCommandSupport {
 	
-//	private transient Logger log = LoggerFactory.getLogger(AsJsonCommand.class);
+//	private static final Logger log = LoggerFactory.getLogger(AsJsonCommand.class);
 	
 	private ObjectMapper mapper;
 	

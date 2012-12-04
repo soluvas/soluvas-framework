@@ -18,7 +18,7 @@ import com.google.common.cache.LoadingCache;
  */
 public class CachingEntityLookup<ID extends Serializable, T> implements Function<ID, T> {
 
-	private transient Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(CachingEntityLookup.class);
 	private SyncRepository<T, ID> repository;
 	private LoadingCache<ID, T> cache;
