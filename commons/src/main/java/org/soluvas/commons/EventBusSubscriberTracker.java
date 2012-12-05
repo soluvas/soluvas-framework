@@ -89,7 +89,7 @@ public class EventBusSubscriberTracker implements ServiceTrackerCustomizer {
 	 */
 	@Override
 	public Object addingService(ServiceReference reference) {
-		Supplier<?> supplier = (Supplier<?>)reference.getBundle().getBundleContext().getService(reference);
+		final Supplier<?> supplier = (Supplier<?>)reference.getBundle().getBundleContext().getService(reference);
 		try {
 			Object subscriber = supplier.get();
 			log.info("Registering {} to {}", subscriber, eventBus);
