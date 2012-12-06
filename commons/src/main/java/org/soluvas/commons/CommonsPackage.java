@@ -358,6 +358,87 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>List</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.List
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
+	 * @generated
+	 */
+	int LIST = 10;
+
+	/**
+	 * The meta object id for the '<em>Map</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.Map
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
+	 * @generated
+	 */
+	int MAP = 11;
+
+	/**
+	 * The meta object id for the '<em>Set</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.Set
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
+	 * @generated
+	 */
+	int SET = 12;
+
+	/**
+	 * The meta object id for the '<em>Collection</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.Collection
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
+	 * @generated
+	 */
+	int COLLECTION = 13;
+
+	/**
+	 * The meta object id for the '<em>Multimap</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.google.common.collect.Multimap
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
+	 * @generated
+	 */
+	int MULTIMAP = 14;
+
+	/**
+	 * The meta object id for the '<em>Navigable Map</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.NavigableMap
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
+	 * @generated
+	 */
+	int NAVIGABLE_MAP = 15;
+
+	/**
+	 * The meta object id for the '<em>Queue</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.Queue
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
+	 * @generated
+	 */
+	int QUEUE = 16;
+
+	/**
+	 * The meta object id for the '<em>Multiset</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.Multiset
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
+	 * @generated
+	 */
+	int MULTISET = 17;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -604,6 +685,94 @@ public interface CommonsPackage extends EPackage {
 	EDataType getUnit();
 
 	/**
+	 * Returns the meta object for data type '{@link java.util.List <em>List</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>List</em>'.
+	 * @see java.util.List
+	 * @model instanceClass="java.util.List" typeParameters="T"
+	 * @generated
+	 */
+	EDataType getList();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.Map <em>Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Map</em>'.
+	 * @see java.util.Map
+	 * @model instanceClass="java.util.Map" typeParameters="K V"
+	 * @generated
+	 */
+	EDataType getMap();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.Set <em>Set</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Set</em>'.
+	 * @see java.util.Set
+	 * @model instanceClass="java.util.Set" typeParameters="T"
+	 * @generated
+	 */
+	EDataType getSet();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.Collection <em>Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Collection</em>'.
+	 * @see java.util.Collection
+	 * @model instanceClass="java.util.Collection" typeParameters="T"
+	 * @generated
+	 */
+	EDataType getCollection();
+
+	/**
+	 * Returns the meta object for data type '{@link com.google.common.collect.Multimap <em>Multimap</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Multimap</em>'.
+	 * @see com.google.common.collect.Multimap
+	 * @model instanceClass="com.google.common.collect.Multimap" typeParameters="K V"
+	 * @generated
+	 */
+	EDataType getMultimap();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.NavigableMap <em>Navigable Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Navigable Map</em>'.
+	 * @see java.util.NavigableMap
+	 * @model instanceClass="java.util.NavigableMap" typeParameters="K V"
+	 * @generated
+	 */
+	EDataType getNavigableMap();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.Queue <em>Queue</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Queue</em>'.
+	 * @see java.util.Queue
+	 * @model instanceClass="java.util.Queue" typeParameters="T"
+	 * @generated
+	 */
+	EDataType getQueue();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.Multiset <em>Multiset</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Multiset</em>'.
+	 * @see java.util.Multiset
+	 * @model instanceClass="java.util.Multiset" typeParameters="T"
+	 * @generated
+	 */
+	EDataType getMultiset();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -828,6 +997,86 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType UNIT = eINSTANCE.getUnit();
+
+		/**
+		 * The meta object literal for the '<em>List</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.List
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
+		 * @generated
+		 */
+		EDataType LIST = eINSTANCE.getList();
+
+		/**
+		 * The meta object literal for the '<em>Map</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.Map
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
+		 * @generated
+		 */
+		EDataType MAP = eINSTANCE.getMap();
+
+		/**
+		 * The meta object literal for the '<em>Set</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.Set
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
+		 * @generated
+		 */
+		EDataType SET = eINSTANCE.getSet();
+
+		/**
+		 * The meta object literal for the '<em>Collection</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.Collection
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
+		 * @generated
+		 */
+		EDataType COLLECTION = eINSTANCE.getCollection();
+
+		/**
+		 * The meta object literal for the '<em>Multimap</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.google.common.collect.Multimap
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
+		 * @generated
+		 */
+		EDataType MULTIMAP = eINSTANCE.getMultimap();
+
+		/**
+		 * The meta object literal for the '<em>Navigable Map</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.NavigableMap
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
+		 * @generated
+		 */
+		EDataType NAVIGABLE_MAP = eINSTANCE.getNavigableMap();
+
+		/**
+		 * The meta object literal for the '<em>Queue</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.Queue
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
+		 * @generated
+		 */
+		EDataType QUEUE = eINSTANCE.getQueue();
+
+		/**
+		 * The meta object literal for the '<em>Multiset</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.Multiset
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
+		 * @generated
+		 */
+		EDataType MULTISET = eINSTANCE.getMultiset();
 
 	}
 

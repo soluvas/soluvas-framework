@@ -2,6 +2,13 @@
  */
 package org.soluvas.commons.impl;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.Queue;
+import java.util.Set;
+
 import javax.measure.unit.Unit;
 
 import org.eclipse.emf.ecore.EClass;
@@ -18,6 +25,9 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.ResourceType;
+
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multiset;
 
 /**
  * <!-- begin-user-doc -->
@@ -88,6 +98,22 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createCurrencyUnitFromString(eDataType, initialValue);
 			case CommonsPackage.UNIT:
 				return createUnitFromString(eDataType, initialValue);
+			case CommonsPackage.LIST:
+				return createListFromString(eDataType, initialValue);
+			case CommonsPackage.MAP:
+				return createMapFromString(eDataType, initialValue);
+			case CommonsPackage.SET:
+				return createSetFromString(eDataType, initialValue);
+			case CommonsPackage.COLLECTION:
+				return createCollectionFromString(eDataType, initialValue);
+			case CommonsPackage.MULTIMAP:
+				return createMultimapFromString(eDataType, initialValue);
+			case CommonsPackage.NAVIGABLE_MAP:
+				return createNavigableMapFromString(eDataType, initialValue);
+			case CommonsPackage.QUEUE:
+				return createQueueFromString(eDataType, initialValue);
+			case CommonsPackage.MULTISET:
+				return createMultisetFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -111,6 +137,22 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertCurrencyUnitToString(eDataType, instanceValue);
 			case CommonsPackage.UNIT:
 				return convertUnitToString(eDataType, instanceValue);
+			case CommonsPackage.LIST:
+				return convertListToString(eDataType, instanceValue);
+			case CommonsPackage.MAP:
+				return convertMapToString(eDataType, instanceValue);
+			case CommonsPackage.SET:
+				return convertSetToString(eDataType, instanceValue);
+			case CommonsPackage.COLLECTION:
+				return convertCollectionToString(eDataType, instanceValue);
+			case CommonsPackage.MULTIMAP:
+				return convertMultimapToString(eDataType, instanceValue);
+			case CommonsPackage.NAVIGABLE_MAP:
+				return convertNavigableMapToString(eDataType, instanceValue);
+			case CommonsPackage.QUEUE:
+				return convertQueueToString(eDataType, instanceValue);
+			case CommonsPackage.MULTISET:
+				return convertMultisetToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -230,6 +272,150 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 */
 	public String convertUnitToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<?> createListFromString(EDataType eDataType, String initialValue) {
+		return (List<?>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertListToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map<?, ?> createMapFromString(EDataType eDataType, String initialValue) {
+		return (Map<?, ?>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertMapToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Set<?> createSetFromString(EDataType eDataType, String initialValue) {
+		return (Set<?>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSetToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Collection<?> createCollectionFromString(EDataType eDataType, String initialValue) {
+		return (Collection<?>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertCollectionToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Multimap<?, ?> createMultimapFromString(EDataType eDataType, String initialValue) {
+		return (Multimap<?, ?>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertMultimapToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NavigableMap<?, ?> createNavigableMapFromString(EDataType eDataType, String initialValue) {
+		return (NavigableMap<?, ?>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertNavigableMapToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Queue<?> createQueueFromString(EDataType eDataType, String initialValue) {
+		return (Queue<?>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertQueueToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Multiset<?> createMultisetFromString(EDataType eDataType, String initialValue) {
+		return (Multiset<?>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertMultisetToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
 	}
 
 	/**

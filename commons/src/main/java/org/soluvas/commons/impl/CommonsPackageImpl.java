@@ -2,15 +2,21 @@
  */
 package org.soluvas.commons.impl;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.Queue;
+import java.util.Set;
+
 import javax.measure.unit.Unit;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.soluvas.commons.AppManifest;
@@ -18,10 +24,13 @@ import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.Timestamped;
-import org.soluvas.commons.Positionable;
+
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multiset;
 
 /**
  * <!-- begin-user-doc -->
@@ -101,6 +110,62 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	private EDataType unitEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType listEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType mapEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType setEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType collectionEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType multimapEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType navigableMapEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType queueEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType multisetEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -166,6 +231,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getResourceAware() {
 		return resourceAwareEClass;
 	}
@@ -175,6 +241,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getResourceAware_ResourceUri() {
 		return (EAttribute)resourceAwareEClass.getEStructuralFeatures().get(1);
 	}
@@ -184,6 +251,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getResourceAware_ResourceName() {
 		return (EAttribute)resourceAwareEClass.getEStructuralFeatures().get(2);
 	}
@@ -193,6 +261,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPositionable() {
 		return positionableEClass;
 	}
@@ -202,6 +271,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPositionable_Positioner() {
 		return (EAttribute)positionableEClass.getEStructuralFeatures().get(0);
 	}
@@ -211,6 +281,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getResourceAware_ResourceType() {
 		return (EAttribute)resourceAwareEClass.getEStructuralFeatures().get(0);
 	}
@@ -220,6 +291,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAppManifest() {
 		return appManifestEClass;
 	}
@@ -229,6 +301,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_Title() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(0);
 	}
@@ -238,6 +311,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_Description() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(1);
 	}
@@ -247,6 +321,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPersonInfo() {
 		return personInfoEClass;
 	}
@@ -256,6 +331,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPersonInfo_Id() {
 		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(0);
 	}
@@ -265,6 +341,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPersonInfo_Slug() {
 		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(1);
 	}
@@ -274,6 +351,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPersonInfo_Name() {
 		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(2);
 	}
@@ -283,6 +361,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPersonInfo_PhotoId() {
 		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(3);
 	}
@@ -292,6 +371,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPersonInfo_Gender() {
 		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(4);
 	}
@@ -301,6 +381,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTimestamped() {
 		return timestampedEClass;
 	}
@@ -310,6 +391,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTimestamped_CreationTime() {
 		return (EAttribute)timestampedEClass.getEStructuralFeatures().get(0);
 	}
@@ -319,6 +401,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTimestamped_ModificationTime() {
 		return (EAttribute)timestampedEClass.getEStructuralFeatures().get(1);
 	}
@@ -328,6 +411,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
 	}
@@ -337,6 +421,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getGender() {
 		return genderEEnum;
 	}
@@ -346,6 +431,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getDateTime() {
 		return dateTimeEDataType;
 	}
@@ -355,6 +441,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getCurrencyUnit() {
 		return currencyUnitEDataType;
 	}
@@ -364,6 +451,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getUnit() {
 		return unitEDataType;
 	}
@@ -373,6 +461,87 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EDataType getList() {
+		return listEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getMap() {
+		return mapEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getSet() {
+		return setEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getCollection() {
+		return collectionEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getMultimap() {
+		return multimapEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getNavigableMap() {
+		return navigableMapEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getQueue() {
+		return queueEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getMultiset() {
+		return multisetEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
 	}
@@ -427,6 +596,14 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		dateTimeEDataType = createEDataType(DATE_TIME);
 		currencyUnitEDataType = createEDataType(CURRENCY_UNIT);
 		unitEDataType = createEDataType(UNIT);
+		listEDataType = createEDataType(LIST);
+		mapEDataType = createEDataType(MAP);
+		setEDataType = createEDataType(SET);
+		collectionEDataType = createEDataType(COLLECTION);
+		multimapEDataType = createEDataType(MULTIMAP);
+		navigableMapEDataType = createEDataType(NAVIGABLE_MAP);
+		queueEDataType = createEDataType(QUEUE);
+		multisetEDataType = createEDataType(MULTISET);
 	}
 
 	/**
@@ -453,6 +630,17 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		setNsURI(eNS_URI);
 
 		// Create type parameters
+		addETypeParameter(listEDataType, "T");
+		addETypeParameter(mapEDataType, "K");
+		addETypeParameter(mapEDataType, "V");
+		addETypeParameter(setEDataType, "T");
+		addETypeParameter(collectionEDataType, "T");
+		addETypeParameter(multimapEDataType, "K");
+		addETypeParameter(multimapEDataType, "V");
+		addETypeParameter(navigableMapEDataType, "K");
+		addETypeParameter(navigableMapEDataType, "V");
+		addETypeParameter(queueEDataType, "T");
+		addETypeParameter(multisetEDataType, "T");
 
 		// Set bounds for type parameters
 
@@ -498,6 +686,14 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(dateTimeEDataType, DateTime.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(currencyUnitEDataType, CurrencyUnit.class, "CurrencyUnit", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(unitEDataType, Unit.class, "Unit", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(listEDataType, List.class, "List", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(mapEDataType, Map.class, "Map", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(setEDataType, Set.class, "Set", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(collectionEDataType, Collection.class, "Collection", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(multimapEDataType, Multimap.class, "Multimap", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(navigableMapEDataType, NavigableMap.class, "NavigableMap", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(queueEDataType, Queue.class, "Queue", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(multisetEDataType, Multiset.class, "Multiset", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
