@@ -922,12 +922,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Last modification time (raw)."
 		   });		
 		addAnnotation
-		  (null, 
-		   source, 
-		   new String[] {
-			 "documentation", "Object type of the data structure values."
-		   });		
-		addAnnotation
 		  (identifiableEClass, 
 		   source, 
 		   new String[] {

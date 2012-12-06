@@ -88,11 +88,7 @@
     <eTypeParameters name="T"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Multiset" instanceClassName="com.google.common.collect.Multiset">
-    <eTypeParameters name="T">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Object type of the data structure values."/>
-      </eAnnotations>
-    </eTypeParameters>
+    <eTypeParameters name="T"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Serializable" instanceClassName="java.io.Serializable"/>
   <eClassifiers xsi:type="ecore:EClass" name="Identifiable" abstract="true" interface="true">

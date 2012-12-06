@@ -13,22 +13,77 @@
       <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ResourceType/file"/>
       <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ResourceType/database"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//Gender">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//Gender/male"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//Gender/female"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="commons.ecore#//DateTime"/>
+    <genDataTypes ecoreDataType="commons.ecore#//CurrencyUnit"/>
+    <genDataTypes ecoreDataType="commons.ecore#//Unit"/>
+    <genDataTypes ecoreDataType="commons.ecore#//List">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//List/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Map">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Map/K"/>
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Map/V"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Set">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Set/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Collection">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Collection/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Multimap">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Multimap/K"/>
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Multimap/V"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//NavigableMap">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//NavigableMap/K"/>
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//NavigableMap/V"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Queue">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Queue/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Multiset">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Multiset/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Serializable"/>
     <genClasses image="false" ecoreClass="commons.ecore#//ResourceAware">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ResourceAware/resourceUri"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ResourceAware/resourceType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ResourceAware/resourceUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ResourceAware/resourceName"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="commons.ecore#//Weightable">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Weightable/weight"/>
+    <genClasses image="false" ecoreClass="commons.ecore#//Positionable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Positionable/positioner"/>
     </genClasses>
     <genClasses ecoreClass="commons.ecore#//AppManifest">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/title"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/description"/>
     </genClasses>
     <genClasses ecoreClass="commons.ecore#//PersonInfo">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/slug"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/photoId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/gender"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Timestamped">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Timestamped/creationTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Timestamped/modificationTime"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Identifiable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Identifiable/id"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Sluggable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Sluggable/slug"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Nameable">
+      <genOperations ecoreOperation="commons.ecore#//Nameable/getName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Imageable">
+      <genOperations ecoreOperation="commons.ecore#//Imageable/getImageId"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//PhotoIdContainer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PhotoIdContainer/photoId"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//NameContainer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//NameContainer/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
