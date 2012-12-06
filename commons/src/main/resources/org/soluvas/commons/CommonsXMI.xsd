@@ -70,39 +70,36 @@
     <xsd:annotation>
       <xsd:documentation>Person partial value object that is stored in Graph database (usually Neo4j) or embedded in a MongoDB document.
 
+The ID is Directory entry uid attribute.
 </xsd:documentation>
     </xsd:annotation>
-    <xsd:choice maxOccurs="unbounded" minOccurs="0">
-      <xsd:element ref="xmi:Extension"/>
-    </xsd:choice>
-    <xsd:attribute ref="xmi:id"/>
-    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="id" type="xsd:string" use="required">
-      <xsd:annotation>
-        <xsd:documentation>Directory entry uid attribute.</xsd:documentation>
-      </xsd:annotation>
-    </xsd:attribute>
-    <xsd:attribute name="slug" type="xsd:string" use="required">
-      <xsd:annotation>
-        <xsd:documentation>Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs.</xsd:documentation>
-      </xsd:annotation>
-    </xsd:attribute>
-    <xsd:attribute name="name" type="xsd:string" use="required">
-      <xsd:annotation>
-        <xsd:documentation>Display name (can be full name, nickname, slug, screen name, etc. whatever is commonly used by the particular app).</xsd:documentation>
-      </xsd:annotation>
-    </xsd:attribute>
-    <xsd:attribute name="photoId" type="xsd:string">
-      <xsd:annotation>
-        <xsd:documentation>Avatar Photo ID directly usable by Image Store.</xsd:documentation>
-      </xsd:annotation>
-    </xsd:attribute>
-    <xsd:attribute name="gender" type="commons:Gender"/>
+    <xsd:complexContent>
+      <xsd:extension base="commons:Identifiable">
+        <xsd:attribute name="photoId" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Avatar Photo ID directly usable by Image Store. Used by {#getImageId()}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="slug" type="xsd:string" use="required">
+          <xsd:annotation>
+            <xsd:documentation>Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="name" type="xsd:string" use="required">
+          <xsd:annotation>
+            <xsd:documentation>Display name (can be full name, nickname, slug, screen name, etc. whatever is commonly used by the particular app).
+Used by {#getName()}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="gender" type="commons:Gender"/>
+      </xsd:extension>
+    </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="PersonInfo" type="commons:PersonInfo">
     <xsd:annotation>
       <xsd:documentation>Person partial value object that is stored in Graph database (usually Neo4j) or embedded in a MongoDB document.
 
+The ID is Directory entry uid attribute.
 </xsd:documentation>
     </xsd:annotation>
   </xsd:element>
@@ -129,6 +126,106 @@
   <xsd:element name="Timestamped" type="commons:Timestamped">
     <xsd:annotation>
       <xsd:documentation>Can be used by any EObject that wants to preserve creationTime/modificationTime.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType abstract="true" name="Identifiable">
+    <xsd:annotation>
+      <xsd:documentation>Object that has ID as String.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="id" type="xsd:string" use="required">
+      <xsd:annotation>
+        <xsd:documentation>ID of the object. Usually either lowercase_underscored or UUID.
+
+In LDAP, it can either be 'uid' or 'uniqueIdentifier'.
+
+RFC1274: unique identifer.
+LDAP: uniqueIdentifier</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="Identifiable" type="commons:Identifiable">
+    <xsd:annotation>
+      <xsd:documentation>Object that has ID as String.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType abstract="true" name="Sluggable">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="slug" type="xsd:string" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="Sluggable" type="commons:Sluggable"/>
+  <xsd:complexType abstract="true" name="Nameable">
+    <xsd:annotation>
+      <xsd:documentation>An object that can provide a name.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="Nameable" type="commons:Nameable">
+    <xsd:annotation>
+      <xsd:documentation>An object that can provide a name.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType abstract="true" name="Imageable">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="Imageable" type="commons:Imageable"/>
+  <xsd:complexType name="PhotoIdContainer">
+    <xsd:annotation>
+      <xsd:documentation>Contains image ID as photoId attribute and has default implementation for {#getImageId()}.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="commons:Imageable">
+        <xsd:attribute name="photoId" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Avatar Photo ID directly usable by Image Store. Used by {#getImageId()}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="PhotoIdContainer" type="commons:PhotoIdContainer">
+    <xsd:annotation>
+      <xsd:documentation>Contains image ID as photoId attribute and has default implementation for {#getImageId()}.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="NameContainer">
+    <xsd:annotation>
+      <xsd:documentation>Contains a name attribute named 'name' and has default implementation for {@link #getName()}.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="commons:Nameable">
+        <xsd:attribute name="name" type="xsd:string" use="required">
+          <xsd:annotation>
+            <xsd:documentation>Display name (can be full name, nickname, slug, screen name, etc. whatever is commonly used by the particular app).
+Used by {#getName()}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="NameContainer" type="commons:NameContainer">
+    <xsd:annotation>
+      <xsd:documentation>Contains a name attribute named 'name' and has default implementation for {@link #getName()}.</xsd:documentation>
     </xsd:annotation>
   </xsd:element>
 </xsd:schema>

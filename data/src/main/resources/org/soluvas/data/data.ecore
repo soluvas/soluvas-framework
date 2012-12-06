@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="data" nsURI="http://www.soluvas.org/schema/data/1.0" nsPrefix="data">
+  <eClassifiers xsi:type="ecore:EDataType" name="CrudRepository" instanceClassName="org.soluvas.data.repository.CrudRepository">
+    <eTypeParameters name="T">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Object type of the data structure values."/>
+      </eAnnotations>
+    </eTypeParameters>
+    <eTypeParameters name="ID">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="ID type of the data structure identifiers, usually String."/>
+      </eAnnotations>
+      <eBounds eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Serializable"/>
+    </eTypeParameters>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="PagingAndSortingRepository" instanceClassName="org.soluvas.data.repository.PagingAndSortingRepository">
+    <eTypeParameters name="T">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Object type of the data structure values."/>
+      </eAnnotations>
+    </eTypeParameters>
+    <eTypeParameters name="ID">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="ID type of the data structure identifiers, usually String."/>
+      </eAnnotations>
+      <eBounds eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Serializable"/>
+    </eTypeParameters>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="CrudRepositoryBase" instanceClassName="org.soluvas.data.repository.CrudRepositoryBase">
+    <eTypeParameters name="T">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Object type of the data structure values."/>
+      </eAnnotations>
+    </eTypeParameters>
+    <eTypeParameters name="ID">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="ID type of the data structure identifiers, usually String."/>
+      </eAnnotations>
+      <eBounds eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Serializable"/>
+    </eTypeParameters>
+  </eClassifiers>
+</ecore:EPackage>

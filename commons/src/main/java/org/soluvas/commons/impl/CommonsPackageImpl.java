@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -23,10 +24,16 @@ import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Gender;
+import org.soluvas.commons.Identifiable;
+import org.soluvas.commons.Imageable;
+import org.soluvas.commons.NameContainer;
+import org.soluvas.commons.Nameable;
 import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.PhotoIdContainer;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.Sluggable;
 import org.soluvas.commons.Timestamped;
 
 import com.google.common.collect.Multimap;
@@ -73,6 +80,48 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass timestampedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass identifiableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sluggableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass nameableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imageableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass photoIdContainerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass nameContainerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -166,6 +215,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	private EDataType multisetEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType serializableEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -242,6 +298,16 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getResourceAware_ResourceType() {
+		return (EAttribute)resourceAwareEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EAttribute getResourceAware_ResourceUri() {
 		return (EAttribute)resourceAwareEClass.getEStructuralFeatures().get(1);
 	}
@@ -274,16 +340,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	@Override
 	public EAttribute getPositionable_Positioner() {
 		return (EAttribute)positionableEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getResourceAware_ResourceType() {
-		return (EAttribute)resourceAwareEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -332,48 +388,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getPersonInfo_Id() {
-		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getPersonInfo_Slug() {
-		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getPersonInfo_Name() {
-		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getPersonInfo_PhotoId() {
-		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EAttribute getPersonInfo_Gender() {
-		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -404,6 +420,106 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	@Override
 	public EAttribute getTimestamped_ModificationTime() {
 		return (EAttribute)timestampedEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getIdentifiable() {
+		return identifiableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getIdentifiable_Id() {
+		return (EAttribute)identifiableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getSluggable() {
+		return sluggableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getSluggable_Slug() {
+		return (EAttribute)sluggableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getNameable() {
+		return nameableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getImageable() {
+		return imageableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getPhotoIdContainer() {
+		return photoIdContainerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPhotoIdContainer_PhotoId() {
+		return (EAttribute)photoIdContainerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getNameContainer() {
+		return nameContainerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getNameContainer_Name() {
+		return (EAttribute)nameContainerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -542,6 +658,16 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
+	public EDataType getSerializable() {
+		return serializableEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
 	}
@@ -578,15 +704,27 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__DESCRIPTION);
 
 		personInfoEClass = createEClass(PERSON_INFO);
-		createEAttribute(personInfoEClass, PERSON_INFO__ID);
-		createEAttribute(personInfoEClass, PERSON_INFO__SLUG);
-		createEAttribute(personInfoEClass, PERSON_INFO__NAME);
-		createEAttribute(personInfoEClass, PERSON_INFO__PHOTO_ID);
 		createEAttribute(personInfoEClass, PERSON_INFO__GENDER);
 
 		timestampedEClass = createEClass(TIMESTAMPED);
 		createEAttribute(timestampedEClass, TIMESTAMPED__CREATION_TIME);
 		createEAttribute(timestampedEClass, TIMESTAMPED__MODIFICATION_TIME);
+
+		identifiableEClass = createEClass(IDENTIFIABLE);
+		createEAttribute(identifiableEClass, IDENTIFIABLE__ID);
+
+		sluggableEClass = createEClass(SLUGGABLE);
+		createEAttribute(sluggableEClass, SLUGGABLE__SLUG);
+
+		nameableEClass = createEClass(NAMEABLE);
+
+		imageableEClass = createEClass(IMAGEABLE);
+
+		photoIdContainerEClass = createEClass(PHOTO_ID_CONTAINER);
+		createEAttribute(photoIdContainerEClass, PHOTO_ID_CONTAINER__PHOTO_ID);
+
+		nameContainerEClass = createEClass(NAME_CONTAINER);
+		createEAttribute(nameContainerEClass, NAME_CONTAINER__NAME);
 
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
@@ -604,6 +742,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		navigableMapEDataType = createEDataType(NAVIGABLE_MAP);
 		queueEDataType = createEDataType(QUEUE);
 		multisetEDataType = createEDataType(MULTISET);
+		serializableEDataType = createEDataType(SERIALIZABLE);
 	}
 
 	/**
@@ -647,6 +786,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		// Add supertypes to classes
 		appManifestEClass.getESuperTypes().add(this.getPositionable());
 		appManifestEClass.getESuperTypes().add(this.getResourceAware());
+		personInfoEClass.getESuperTypes().add(this.getIdentifiable());
+		personInfoEClass.getESuperTypes().add(this.getPhotoIdContainer());
+		personInfoEClass.getESuperTypes().add(this.getSluggable());
+		personInfoEClass.getESuperTypes().add(this.getNameContainer());
+		photoIdContainerEClass.getESuperTypes().add(this.getImageable());
+		nameContainerEClass.getESuperTypes().add(this.getNameable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -662,15 +807,31 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_Description(), ecorePackage.getEString(), "description", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(personInfoEClass, PersonInfo.class, "PersonInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPersonInfo_Id(), ecorePackage.getEString(), "id", null, 1, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPersonInfo_Slug(), ecorePackage.getEString(), "slug", null, 1, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPersonInfo_Name(), ecorePackage.getEString(), "name", null, 1, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPersonInfo_PhotoId(), ecorePackage.getEString(), "photoId", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPersonInfo_Gender(), this.getGender(), "gender", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(timestampedEClass, Timestamped.class, "Timestamped", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTimestamped_CreationTime(), this.getDateTime(), "creationTime", null, 0, 1, Timestamped.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTimestamped_ModificationTime(), this.getDateTime(), "modificationTime", null, 0, 1, Timestamped.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(identifiableEClass, Identifiable.class, "Identifiable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getIdentifiable_Id(), ecorePackage.getEString(), "id", null, 1, 1, Identifiable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(sluggableEClass, Sluggable.class, "Sluggable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSluggable_Slug(), ecorePackage.getEString(), "slug", null, 1, 1, Sluggable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(nameableEClass, Nameable.class, "Nameable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(nameableEClass, ecorePackage.getEString(), "getName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(imageableEClass, Imageable.class, "Imageable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(imageableEClass, ecorePackage.getEString(), "getImageId", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(photoIdContainerEClass, PhotoIdContainer.class, "PhotoIdContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPhotoIdContainer_PhotoId(), ecorePackage.getEString(), "photoId", null, 0, 1, PhotoIdContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(nameContainerEClass, NameContainer.class, "NameContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNameContainer_Name(), ecorePackage.getEString(), "name", null, 1, 1, NameContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -694,6 +855,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(navigableMapEDataType, NavigableMap.class, "NavigableMap", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(queueEDataType, Queue.class, "Queue", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(multisetEDataType, Multiset.class, "Multiset", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(serializableEDataType, Serializable.class, "Serializable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -739,31 +901,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (personInfoEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Person partial value object that is stored in Graph database (usually Neo4j) or embedded in a MongoDB document.\n\n"
-		   });		
-		addAnnotation
-		  (getPersonInfo_Id(), 
-		   source, 
-		   new String[] {
-			 "documentation", "Directory entry uid attribute."
-		   });		
-		addAnnotation
-		  (getPersonInfo_Slug(), 
-		   source, 
-		   new String[] {
-			 "documentation", "Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs."
-		   });		
-		addAnnotation
-		  (getPersonInfo_Name(), 
-		   source, 
-		   new String[] {
-			 "documentation", "Display name (can be full name, nickname, slug, screen name, etc. whatever is commonly used by the particular app)."
-		   });		
-		addAnnotation
-		  (getPersonInfo_PhotoId(), 
-		   source, 
-		   new String[] {
-			 "documentation", "Avatar Photo ID directly usable by Image Store."
+			 "documentation", "Person partial value object that is stored in Graph database (usually Neo4j) or embedded in a MongoDB document.\n\nThe ID is Directory entry uid attribute.\n"
 		   });		
 		addAnnotation
 		  (timestampedEClass, 
@@ -782,6 +920,66 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Last modification time (raw)."
+		   });		
+		addAnnotation
+		  (null, 
+		   source, 
+		   new String[] {
+			 "documentation", "Object type of the data structure values."
+		   });		
+		addAnnotation
+		  (identifiableEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Object that has ID as String."
+		   });		
+		addAnnotation
+		  (getIdentifiable_Id(), 
+		   source, 
+		   new String[] {
+			 "documentation", "ID of the object. Usually either lowercase_underscored or UUID.\n\nIn LDAP, it can either be \'uid\' or \'uniqueIdentifier\'.\n\nRFC1274: unique identifer.\nLDAP: uniqueIdentifier"
+		   });		
+		addAnnotation
+		  (getSluggable_Slug(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs."
+		   });		
+		addAnnotation
+		  (nameableEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "An object that can provide a name."
+		   });		
+		addAnnotation
+		  (imageableEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return the primary image ID for square proportion."
+		   });		
+		addAnnotation
+		  (photoIdContainerEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Contains image ID as photoId attribute and has default implementation for {#getImageId()}."
+		   });		
+		addAnnotation
+		  (getPhotoIdContainer_PhotoId(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Avatar Photo ID directly usable by Image Store. Used by {#getImageId()}."
+		   });		
+		addAnnotation
+		  (nameContainerEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Contains a name attribute named \'name\' and has default implementation for {@link #getName()}."
+		   });		
+		addAnnotation
+		  (getNameContainer_Name(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Display name (can be full name, nickname, slug, screen name, etc. whatever is commonly used by the particular app).\nUsed by {#getName()}."
 		   });
 	}
 

@@ -204,6 +204,34 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 5;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.Identifiable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getIdentifiable()
+	 * @generated
+	 */
+	int IDENTIFIABLE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIABLE__ID = 0;
+
+	/**
+	 * The number of structural features of the '<em>Identifiable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIABLE_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -220,25 +248,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_INFO__ID = 0;
-
-	/**
-	 * The feature id for the '<em><b>Slug</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_INFO__SLUG = 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_INFO__NAME = 2;
+	int PERSON_INFO__ID = IDENTIFIABLE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Photo Id</b></em>' attribute.
@@ -247,7 +257,25 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_INFO__PHOTO_ID = 3;
+	int PERSON_INFO__PHOTO_ID = IDENTIFIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Slug</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_INFO__SLUG = IDENTIFIABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_INFO__NAME = IDENTIFIABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Gender</b></em>' attribute.
@@ -256,7 +284,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_INFO__GENDER = 4;
+	int PERSON_INFO__GENDER = IDENTIFIABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Person Info</em>' class.
@@ -265,7 +293,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_INFO_FEATURE_COUNT = 5;
+	int PERSON_INFO_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Timestamped <em>Timestamped</em>}' class.
@@ -305,6 +333,128 @@ public interface CommonsPackage extends EPackage {
 	int TIMESTAMPED_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.Sluggable <em>Sluggable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.Sluggable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSluggable()
+	 * @generated
+	 */
+	int SLUGGABLE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Slug</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLUGGABLE__SLUG = 0;
+
+	/**
+	 * The number of structural features of the '<em>Sluggable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLUGGABLE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.Nameable <em>Nameable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.Nameable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNameable()
+	 * @generated
+	 */
+	int NAMEABLE = 7;
+
+	/**
+	 * The number of structural features of the '<em>Nameable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMEABLE_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.Imageable <em>Imageable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.Imageable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getImageable()
+	 * @generated
+	 */
+	int IMAGEABLE = 8;
+
+	/**
+	 * The number of structural features of the '<em>Imageable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGEABLE_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.PhotoIdContainerImpl <em>Photo Id Container</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.PhotoIdContainerImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPhotoIdContainer()
+	 * @generated
+	 */
+	int PHOTO_ID_CONTAINER = 9;
+
+	/**
+	 * The feature id for the '<em><b>Photo Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHOTO_ID_CONTAINER__PHOTO_ID = IMAGEABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Photo Id Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHOTO_ID_CONTAINER_FEATURE_COUNT = IMAGEABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.NameContainerImpl <em>Name Container</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.NameContainerImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNameContainer()
+	 * @generated
+	 */
+	int NAME_CONTAINER = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_CONTAINER__NAME = NAMEABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Name Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_CONTAINER_FEATURE_COUNT = NAMEABLE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -312,7 +462,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 5;
+	int RESOURCE_TYPE = 11;
 
 
 	/**
@@ -323,7 +473,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 6;
+	int GENDER = 12;
 
 
 	/**
@@ -334,7 +484,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 7;
+	int DATE_TIME = 13;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -344,7 +494,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 8;
+	int CURRENCY_UNIT = 14;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -354,7 +504,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 9;
+	int UNIT = 15;
 
 
 	/**
@@ -365,7 +515,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 10;
+	int LIST = 16;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -375,7 +525,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 11;
+	int MAP = 17;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -385,7 +535,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 12;
+	int SET = 18;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -395,7 +545,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 13;
+	int COLLECTION = 19;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -405,7 +555,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 14;
+	int MULTIMAP = 20;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -415,7 +565,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 15;
+	int NAVIGABLE_MAP = 21;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -425,17 +575,28 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 16;
+	int QUEUE = 22;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see java.util.Multiset
+	 * @see com.google.common.collect.Multiset
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 17;
+	int MULTISET = 23;
+
+
+	/**
+	 * The meta object id for the '<em>Serializable</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.io.Serializable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
+	 * @generated
+	 */
+	int SERIALIZABLE = 24;
 
 
 	/**
@@ -545,50 +706,6 @@ public interface CommonsPackage extends EPackage {
 	EClass getPersonInfo();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PersonInfo#getId <em>Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see org.soluvas.commons.PersonInfo#getId()
-	 * @see #getPersonInfo()
-	 * @generated
-	 */
-	EAttribute getPersonInfo_Id();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PersonInfo#getSlug <em>Slug</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Slug</em>'.
-	 * @see org.soluvas.commons.PersonInfo#getSlug()
-	 * @see #getPersonInfo()
-	 * @generated
-	 */
-	EAttribute getPersonInfo_Slug();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PersonInfo#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.soluvas.commons.PersonInfo#getName()
-	 * @see #getPersonInfo()
-	 * @generated
-	 */
-	EAttribute getPersonInfo_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PersonInfo#getPhotoId <em>Photo Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Photo Id</em>'.
-	 * @see org.soluvas.commons.PersonInfo#getPhotoId()
-	 * @see #getPersonInfo()
-	 * @generated
-	 */
-	EAttribute getPersonInfo_PhotoId();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PersonInfo#getGender <em>Gender</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -630,6 +747,110 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTimestamped_ModificationTime();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Identifiable</em>'.
+	 * @see org.soluvas.commons.Identifiable
+	 * @generated
+	 */
+	EClass getIdentifiable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Identifiable#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.soluvas.commons.Identifiable#getId()
+	 * @see #getIdentifiable()
+	 * @generated
+	 */
+	EAttribute getIdentifiable_Id();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Sluggable <em>Sluggable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Sluggable</em>'.
+	 * @see org.soluvas.commons.Sluggable
+	 * @generated
+	 */
+	EClass getSluggable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Sluggable#getSlug <em>Slug</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Slug</em>'.
+	 * @see org.soluvas.commons.Sluggable#getSlug()
+	 * @see #getSluggable()
+	 * @generated
+	 */
+	EAttribute getSluggable_Slug();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Nameable <em>Nameable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Nameable</em>'.
+	 * @see org.soluvas.commons.Nameable
+	 * @generated
+	 */
+	EClass getNameable();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Imageable <em>Imageable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Imageable</em>'.
+	 * @see org.soluvas.commons.Imageable
+	 * @generated
+	 */
+	EClass getImageable();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.PhotoIdContainer <em>Photo Id Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Photo Id Container</em>'.
+	 * @see org.soluvas.commons.PhotoIdContainer
+	 * @generated
+	 */
+	EClass getPhotoIdContainer();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PhotoIdContainer#getPhotoId <em>Photo Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Photo Id</em>'.
+	 * @see org.soluvas.commons.PhotoIdContainer#getPhotoId()
+	 * @see #getPhotoIdContainer()
+	 * @generated
+	 */
+	EAttribute getPhotoIdContainer_PhotoId();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.NameContainer <em>Name Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Name Container</em>'.
+	 * @see org.soluvas.commons.NameContainer
+	 * @generated
+	 */
+	EClass getNameContainer();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.NameContainer#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.soluvas.commons.NameContainer#getName()
+	 * @see #getNameContainer()
+	 * @generated
+	 */
+	EAttribute getNameContainer_Name();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -762,15 +983,26 @@ public interface CommonsPackage extends EPackage {
 	EDataType getQueue();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.Multiset <em>Multiset</em>}'.
+	 * Returns the meta object for data type '{@link com.google.common.collect.Multiset <em>Multiset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Multiset</em>'.
-	 * @see java.util.Multiset
-	 * @model instanceClass="java.util.Multiset" typeParameters="T"
+	 * @see com.google.common.collect.Multiset
+	 * @model instanceClass="com.google.common.collect.Multiset" typeParameters="T"
 	 * @generated
 	 */
 	EDataType getMultiset();
+
+	/**
+	 * Returns the meta object for data type '{@link java.io.Serializable <em>Serializable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Serializable</em>'.
+	 * @see java.io.Serializable
+	 * @model instanceClass="java.io.Serializable"
+	 * @generated
+	 */
+	EDataType getSerializable();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -883,38 +1115,6 @@ public interface CommonsPackage extends EPackage {
 		EClass PERSON_INFO = eINSTANCE.getPersonInfo();
 
 		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERSON_INFO__ID = eINSTANCE.getPersonInfo_Id();
-
-		/**
-		 * The meta object literal for the '<em><b>Slug</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERSON_INFO__SLUG = eINSTANCE.getPersonInfo_Slug();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERSON_INFO__NAME = eINSTANCE.getPersonInfo_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Photo Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERSON_INFO__PHOTO_ID = eINSTANCE.getPersonInfo_PhotoId();
-
-		/**
 		 * The meta object literal for the '<em><b>Gender</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -947,6 +1147,98 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TIMESTAMPED__MODIFICATION_TIME = eINSTANCE.getTimestamped_ModificationTime();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.Identifiable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getIdentifiable()
+		 * @generated
+		 */
+		EClass IDENTIFIABLE = eINSTANCE.getIdentifiable();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IDENTIFIABLE__ID = eINSTANCE.getIdentifiable_Id();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.Sluggable <em>Sluggable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.Sluggable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSluggable()
+		 * @generated
+		 */
+		EClass SLUGGABLE = eINSTANCE.getSluggable();
+
+		/**
+		 * The meta object literal for the '<em><b>Slug</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SLUGGABLE__SLUG = eINSTANCE.getSluggable_Slug();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.Nameable <em>Nameable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.Nameable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNameable()
+		 * @generated
+		 */
+		EClass NAMEABLE = eINSTANCE.getNameable();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.Imageable <em>Imageable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.Imageable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getImageable()
+		 * @generated
+		 */
+		EClass IMAGEABLE = eINSTANCE.getImageable();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.PhotoIdContainerImpl <em>Photo Id Container</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.PhotoIdContainerImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPhotoIdContainer()
+		 * @generated
+		 */
+		EClass PHOTO_ID_CONTAINER = eINSTANCE.getPhotoIdContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Photo Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PHOTO_ID_CONTAINER__PHOTO_ID = eINSTANCE.getPhotoIdContainer_PhotoId();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.NameContainerImpl <em>Name Container</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.NameContainerImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNameContainer()
+		 * @generated
+		 */
+		EClass NAME_CONTAINER = eINSTANCE.getNameContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAME_CONTAINER__NAME = eINSTANCE.getNameContainer_Name();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
@@ -1072,11 +1364,21 @@ public interface CommonsPackage extends EPackage {
 		 * The meta object literal for the '<em>Multiset</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see java.util.Multiset
+		 * @see com.google.common.collect.Multiset
 		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 		 * @generated
 		 */
 		EDataType MULTISET = eINSTANCE.getMultiset();
+
+		/**
+		 * The meta object literal for the '<em>Serializable</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.io.Serializable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
+		 * @generated
+		 */
+		EDataType SERIALIZABLE = eINSTANCE.getSerializable();
 
 	}
 

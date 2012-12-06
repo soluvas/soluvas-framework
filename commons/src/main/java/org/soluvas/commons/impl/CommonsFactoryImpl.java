@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +20,14 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
+import org.soluvas.commons.*;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Gender;
+import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.PhotoIdContainer;
 import org.soluvas.commons.ResourceType;
 
 import com.google.common.collect.Multimap;
@@ -73,8 +77,10 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CommonsPackage.APP_MANIFEST: return createAppManifest();
-			case CommonsPackage.PERSON_INFO: return createPersonInfo();
+			case CommonsPackage.APP_MANIFEST: return (EObject)createAppManifest();
+			case CommonsPackage.PERSON_INFO: return (EObject)createPersonInfo();
+			case CommonsPackage.PHOTO_ID_CONTAINER: return (EObject)createPhotoIdContainer();
+			case CommonsPackage.NAME_CONTAINER: return (EObject)createNameContainer();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -114,6 +120,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createQueueFromString(eDataType, initialValue);
 			case CommonsPackage.MULTISET:
 				return createMultisetFromString(eDataType, initialValue);
+			case CommonsPackage.SERIALIZABLE:
+				return createSerializableFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -153,6 +161,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertQueueToString(eDataType, instanceValue);
 			case CommonsPackage.MULTISET:
 				return convertMultisetToString(eDataType, instanceValue);
+			case CommonsPackage.SERIALIZABLE:
+				return convertSerializableToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -178,6 +188,28 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	public PersonInfo createPersonInfo() {
 		PersonInfoImpl personInfo = new PersonInfoImpl();
 		return personInfo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PhotoIdContainer createPhotoIdContainer() {
+		PhotoIdContainerImpl photoIdContainer = new PhotoIdContainerImpl();
+		return photoIdContainer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NameContainer createNameContainer() {
+		NameContainerImpl nameContainer = new NameContainerImpl();
+		return nameContainer;
 	}
 
 	/**
@@ -416,6 +448,24 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 */
 	public String convertMultisetToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Serializable createSerializableFromString(EDataType eDataType, String initialValue) {
+		return (Serializable)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSerializableToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
