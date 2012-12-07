@@ -455,6 +455,25 @@ public interface CommonsPackage extends EPackage {
 	int NAME_CONTAINER_FEATURE_COUNT = NAMEABLE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.Informer <em>Informer</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.Informer
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getInformer()
+	 * @generated
+	 */
+	int INFORMER = 11;
+
+	/**
+	 * The number of structural features of the '<em>Informer</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INFORMER_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -462,7 +481,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 11;
+	int RESOURCE_TYPE = 12;
 
 
 	/**
@@ -473,7 +492,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 12;
+	int GENDER = 13;
 
 
 	/**
@@ -484,7 +503,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 13;
+	int DATE_TIME = 14;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -494,7 +513,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 14;
+	int CURRENCY_UNIT = 15;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -504,7 +523,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 15;
+	int UNIT = 16;
 
 
 	/**
@@ -515,7 +534,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 16;
+	int LIST = 17;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -525,7 +544,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 17;
+	int MAP = 18;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -535,7 +554,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 18;
+	int SET = 19;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -545,7 +564,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 19;
+	int COLLECTION = 20;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -555,7 +574,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 20;
+	int MULTIMAP = 21;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -565,7 +584,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 21;
+	int NAVIGABLE_MAP = 22;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -575,7 +594,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 22;
+	int QUEUE = 23;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -585,7 +604,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 23;
+	int MULTISET = 24;
 
 
 	/**
@@ -596,7 +615,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 24;
+	int SERIALIZABLE = 25;
 
 
 	/**
@@ -851,6 +870,16 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getNameContainer_Name();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Informer <em>Informer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Informer</em>'.
+	 * @see org.soluvas.commons.Informer
+	 * @generated
+	 */
+	EClass getInformer();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -1239,6 +1268,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NAME_CONTAINER__NAME = eINSTANCE.getNameContainer_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.Informer <em>Informer</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.Informer
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getInformer()
+		 * @generated
+		 */
+		EClass INFORMER = eINSTANCE.getInformer();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

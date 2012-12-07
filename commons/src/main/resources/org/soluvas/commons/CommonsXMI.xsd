@@ -228,4 +228,19 @@ Used by {#getName()}.</xsd:documentation>
       <xsd:documentation>Contains a name attribute named 'name' and has default implementation for {@link #getName()}.</xsd:documentation>
     </xsd:annotation>
   </xsd:element>
+  <xsd:complexType abstract="true" name="Informer">
+    <xsd:annotation>
+      <xsd:documentation>Can transform itself an "Info" object.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="Informer" type="commons:Informer">
+    <xsd:annotation>
+      <xsd:documentation>Can transform itself an "Info" object.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
 </xsd:schema>

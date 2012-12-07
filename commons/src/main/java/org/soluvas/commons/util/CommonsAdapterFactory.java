@@ -112,6 +112,10 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createNameContainerAdapter();
 			}
 			@Override
+			public <T extends Identifiable> Adapter caseInformer(Informer<T> object) {
+				return createInformerAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -282,6 +286,20 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNameContainerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Informer <em>Informer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Informer
+	 * @generated
+	 */
+	public Adapter createInformerAdapter() {
 		return null;
 	}
 

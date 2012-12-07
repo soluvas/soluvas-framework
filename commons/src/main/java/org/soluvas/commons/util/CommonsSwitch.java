@@ -22,7 +22,7 @@ import org.soluvas.commons.*;
  * @see org.soluvas.commons.CommonsPackage
  * @generated
  */
-public class CommonsSwitch<T> extends Switch<T> {
+public class CommonsSwitch<T1> extends Switch<T1> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -64,23 +64,23 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	protected T doSwitch(int classifierID, EObject theEObject) {
+	protected T1 doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case CommonsPackage.RESOURCE_AWARE: {
 				ResourceAware resourceAware = (ResourceAware)theEObject;
-				T result = caseResourceAware(resourceAware);
+				T1 result = caseResourceAware(resourceAware);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case CommonsPackage.POSITIONABLE: {
 				Positionable positionable = (Positionable)theEObject;
-				T result = casePositionable(positionable);
+				T1 result = casePositionable(positionable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case CommonsPackage.APP_MANIFEST: {
 				AppManifest appManifest = (AppManifest)theEObject;
-				T result = caseAppManifest(appManifest);
+				T1 result = caseAppManifest(appManifest);
 				if (result == null) result = casePositionable(appManifest);
 				if (result == null) result = caseResourceAware(appManifest);
 				if (result == null) result = defaultCase(theEObject);
@@ -88,7 +88,7 @@ public class CommonsSwitch<T> extends Switch<T> {
 			}
 			case CommonsPackage.PERSON_INFO: {
 				PersonInfo personInfo = (PersonInfo)theEObject;
-				T result = casePersonInfo(personInfo);
+				T1 result = casePersonInfo(personInfo);
 				if (result == null) result = caseIdentifiable(personInfo);
 				if (result == null) result = casePhotoIdContainer(personInfo);
 				if (result == null) result = caseSluggable(personInfo);
@@ -100,45 +100,51 @@ public class CommonsSwitch<T> extends Switch<T> {
 			}
 			case CommonsPackage.TIMESTAMPED: {
 				Timestamped timestamped = (Timestamped)theEObject;
-				T result = caseTimestamped(timestamped);
+				T1 result = caseTimestamped(timestamped);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case CommonsPackage.IDENTIFIABLE: {
 				Identifiable identifiable = (Identifiable)theEObject;
-				T result = caseIdentifiable(identifiable);
+				T1 result = caseIdentifiable(identifiable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case CommonsPackage.SLUGGABLE: {
 				Sluggable sluggable = (Sluggable)theEObject;
-				T result = caseSluggable(sluggable);
+				T1 result = caseSluggable(sluggable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case CommonsPackage.NAMEABLE: {
 				Nameable nameable = (Nameable)theEObject;
-				T result = caseNameable(nameable);
+				T1 result = caseNameable(nameable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case CommonsPackage.IMAGEABLE: {
 				Imageable imageable = (Imageable)theEObject;
-				T result = caseImageable(imageable);
+				T1 result = caseImageable(imageable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case CommonsPackage.PHOTO_ID_CONTAINER: {
 				PhotoIdContainer photoIdContainer = (PhotoIdContainer)theEObject;
-				T result = casePhotoIdContainer(photoIdContainer);
+				T1 result = casePhotoIdContainer(photoIdContainer);
 				if (result == null) result = caseImageable(photoIdContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case CommonsPackage.NAME_CONTAINER: {
 				NameContainer nameContainer = (NameContainer)theEObject;
-				T result = caseNameContainer(nameContainer);
+				T1 result = caseNameContainer(nameContainer);
 				if (result == null) result = caseNameable(nameContainer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.INFORMER: {
+				Informer<?> informer = (Informer<?>)theEObject;
+				T1 result = caseInformer(informer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -157,7 +163,7 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseResourceAware(ResourceAware object) {
+	public T1 caseResourceAware(ResourceAware object) {
 		return null;
 	}
 
@@ -172,7 +178,7 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePositionable(Positionable object) {
+	public T1 casePositionable(Positionable object) {
 		return null;
 	}
 
@@ -187,7 +193,7 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAppManifest(AppManifest object) {
+	public T1 caseAppManifest(AppManifest object) {
 		return null;
 	}
 
@@ -202,7 +208,7 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePersonInfo(PersonInfo object) {
+	public T1 casePersonInfo(PersonInfo object) {
 		return null;
 	}
 
@@ -217,7 +223,7 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTimestamped(Timestamped object) {
+	public T1 caseTimestamped(Timestamped object) {
 		return null;
 	}
 
@@ -232,7 +238,7 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseIdentifiable(Identifiable object) {
+	public T1 caseIdentifiable(Identifiable object) {
 		return null;
 	}
 
@@ -247,7 +253,7 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSluggable(Sluggable object) {
+	public T1 caseSluggable(Sluggable object) {
 		return null;
 	}
 
@@ -262,7 +268,7 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNameable(Nameable object) {
+	public T1 caseNameable(Nameable object) {
 		return null;
 	}
 
@@ -277,7 +283,7 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseImageable(Imageable object) {
+	public T1 caseImageable(Imageable object) {
 		return null;
 	}
 
@@ -292,7 +298,7 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePhotoIdContainer(PhotoIdContainer object) {
+	public T1 casePhotoIdContainer(PhotoIdContainer object) {
 		return null;
 	}
 
@@ -307,7 +313,22 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNameContainer(NameContainer object) {
+	public T1 caseNameContainer(NameContainer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Informer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Informer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends Identifiable> T1 caseInformer(Informer<T> object) {
 		return null;
 	}
 
@@ -323,7 +344,7 @@ public class CommonsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	public T defaultCase(EObject object) {
+	public T1 defaultCase(EObject object) {
 		return null;
 	}
 

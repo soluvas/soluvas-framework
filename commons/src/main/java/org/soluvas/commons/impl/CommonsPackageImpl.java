@@ -16,7 +16,10 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
@@ -26,6 +29,7 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
+import org.soluvas.commons.Informer;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.PersonInfo;
@@ -122,6 +126,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass nameContainerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass informerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -527,6 +538,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getInformer() {
+		return informerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -726,6 +746,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		nameContainerEClass = createEClass(NAME_CONTAINER);
 		createEAttribute(nameContainerEClass, NAME_CONTAINER__NAME);
 
+		informerEClass = createEClass(INFORMER);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -769,6 +791,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		setNsURI(eNS_URI);
 
 		// Create type parameters
+		ETypeParameter informerEClass_T = addETypeParameter(informerEClass, "T");
 		addETypeParameter(listEDataType, "T");
 		addETypeParameter(mapEDataType, "K");
 		addETypeParameter(mapEDataType, "V");
@@ -782,6 +805,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addETypeParameter(multisetEDataType, "T");
 
 		// Set bounds for type parameters
+		EGenericType g1 = createEGenericType(this.getIdentifiable());
+		informerEClass_T.getEBounds().add(g1);
 
 		// Add supertypes to classes
 		appManifestEClass.getESuperTypes().add(this.getPositionable());
@@ -832,6 +857,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(nameContainerEClass, NameContainer.class, "NameContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNameContainer_Name(), ecorePackage.getEString(), "name", null, 1, 1, NameContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(informerEClass, Informer.class, "Informer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		EOperation op = addEOperation(informerEClass, null, "toInfo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(informerEClass_T);
+		initEOperation(op, g1);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -974,6 +1005,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Display name (can be full name, nickname, slug, screen name, etc. whatever is commonly used by the particular app).\nUsed by {#getName()}."
+		   });		
+		addAnnotation
+		  (informerEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Can transform itself an \"Info\" object."
+		   });		
+		addAnnotation
+		  (informerEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Transforms to its \"Info\" model."
 		   });
 	}
 
