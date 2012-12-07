@@ -82,7 +82,7 @@ public class TenantInjection {
 			
 			log.trace("Field {}#{} looking up {} for tenantId={} tenantEnv={} namespace={} filter: {}",
 					componentId, field.getName(), serviceClass.getName(), tenantId, tenantEnv, namespace, additionalFilter );
-			final String filter = String.format("(&(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*)))",
+			final String filter = String.format("(&(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))%s%s)",
 					tenantId, tenantEnv, namespaceFilter, additionalFilter);
 			
 			final ServiceReference<?> serviceRef;
