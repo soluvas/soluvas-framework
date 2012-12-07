@@ -155,4 +155,5 @@
       <eGenericType eTypeParameter="#//Informer/T"/>
     </eOperations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Describable" abstract="true" interface="true"/>
 </ecore:EPackage>

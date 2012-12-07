@@ -474,6 +474,34 @@ public interface CommonsPackage extends EPackage {
 	int INFORMER_FEATURE_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.Describable <em>Describable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.Describable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDescribable()
+	 * @generated
+	 */
+	int DESCRIBABLE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIBABLE__DESCRIPTION = 0;
+
+	/**
+	 * The number of structural features of the '<em>Describable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIBABLE_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -481,7 +509,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 12;
+	int RESOURCE_TYPE = 13;
 
 
 	/**
@@ -492,7 +520,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 13;
+	int GENDER = 14;
 
 
 	/**
@@ -503,7 +531,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 14;
+	int DATE_TIME = 15;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -513,7 +541,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 15;
+	int CURRENCY_UNIT = 16;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -523,7 +551,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 16;
+	int UNIT = 17;
 
 
 	/**
@@ -534,7 +562,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 17;
+	int LIST = 18;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -544,7 +572,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 18;
+	int MAP = 19;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -554,7 +582,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 19;
+	int SET = 20;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -564,7 +592,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 20;
+	int COLLECTION = 21;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -574,7 +602,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 21;
+	int MULTIMAP = 22;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -584,7 +612,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 22;
+	int NAVIGABLE_MAP = 23;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -594,7 +622,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 23;
+	int QUEUE = 24;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -604,7 +632,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 24;
+	int MULTISET = 25;
 
 
 	/**
@@ -615,7 +643,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 25;
+	int SERIALIZABLE = 26;
 
 
 	/**
@@ -880,6 +908,27 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getInformer();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Describable <em>Describable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Describable</em>'.
+	 * @see org.soluvas.commons.Describable
+	 * @generated
+	 */
+	EClass getDescribable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Describable#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.soluvas.commons.Describable#getDescription()
+	 * @see #getDescribable()
+	 * @generated
+	 */
+	EAttribute getDescribable_Description();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -1278,6 +1327,24 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass INFORMER = eINSTANCE.getInformer();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.Describable <em>Describable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.Describable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDescribable()
+		 * @generated
+		 */
+		EClass DESCRIBABLE = eINSTANCE.getDescribable();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DESCRIBABLE__DESCRIPTION = eINSTANCE.getDescribable_Description();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

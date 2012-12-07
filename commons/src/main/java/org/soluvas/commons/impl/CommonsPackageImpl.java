@@ -26,6 +26,7 @@ import org.joda.time.DateTime;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Describable;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
@@ -133,6 +134,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass informerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass describableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -547,6 +555,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDescribable() {
+		return describableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDescribable_Description() {
+		return (EAttribute)describableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -748,6 +774,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		informerEClass = createEClass(INFORMER);
 
+		describableEClass = createEClass(DESCRIBABLE);
+		createEAttribute(describableEClass, DESCRIBABLE__DESCRIPTION);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -863,6 +892,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		EOperation op = addEOperation(informerEClass, null, "toInfo", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(informerEClass_T);
 		initEOperation(op, g1);
+
+		initEClass(describableEClass, Describable.class, "Describable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDescribable_Description(), ecorePackage.getEString(), "description", null, 0, 1, Describable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -1017,6 +1049,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Transforms to its \"Info\" model."
+		   });		
+		addAnnotation
+		  (getDescribable_Description(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Optional description, containing a reason or any additional information.\n\nMIME Format: text/plain, but can be text/html. But even with text/html it is recommended to use RDFa+HTML5 in the content for Linked Data support.\n\nSee http://rayofsolaris.net/blog/2009/serving-xhtml-rdfa for issues."
 		   });
 	}
 

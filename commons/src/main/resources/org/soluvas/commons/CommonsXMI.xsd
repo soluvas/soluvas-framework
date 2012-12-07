@@ -243,4 +243,21 @@ Used by {#getName()}.</xsd:documentation>
       <xsd:documentation>Can transform itself an "Info" object.</xsd:documentation>
     </xsd:annotation>
   </xsd:element>
+  <xsd:complexType abstract="true" name="Describable">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="description" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Optional description, containing a reason or any additional information.
+
+MIME Format: text/plain, but can be text/html. But even with text/html it is recommended to use RDFa+HTML5 in the content for Linked Data support.
+
+See http://rayofsolaris.net/blog/2009/serving-xhtml-rdfa for issues.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="Describable" type="commons:Describable"/>
 </xsd:schema>
