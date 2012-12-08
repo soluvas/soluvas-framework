@@ -343,4 +343,12 @@ However, Soluvas can load from other non-bundle resources as well, etc. JCR, Git
       <xsd:documentation>Implementation is in {@link org.soluvas.commons.util.EClassLinked.Trait}.</xsd:documentation>
     </xsd:annotation>
   </xsd:element>
+  <xsd:complexType abstract="true" name="SchemaVersionable">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="SchemaVersionable" type="commons:SchemaVersionable"/>
 </xsd:schema>

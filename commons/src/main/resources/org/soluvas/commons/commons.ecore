@@ -248,4 +248,7 @@
     <eLiterals name="unresolved"/>
     <eLiterals name="resolved" value="1"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SchemaVersionable" abstract="true" interface="true">
+    <eOperations name="getSchemaVersion" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong"/>
+  </eClassifiers>
 </ecore:EPackage>

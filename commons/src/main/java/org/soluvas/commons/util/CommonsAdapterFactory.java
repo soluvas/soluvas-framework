@@ -132,6 +132,10 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createEClassLinkedAdapter();
 			}
 			@Override
+			public Adapter caseSchemaVersionable(SchemaVersionable object) {
+				return createSchemaVersionableAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -372,6 +376,20 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEClassLinkedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.SchemaVersionable <em>Schema Versionable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.SchemaVersionable
+	 * @generated
+	 */
+	public Adapter createSchemaVersionableAdapter() {
 		return null;
 	}
 

@@ -46,6 +46,7 @@ import org.soluvas.commons.PhotoIdContainer;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.commons.Timestamped;
 
@@ -170,6 +171,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass eClassLinkedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass schemaVersionableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -729,6 +737,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSchemaVersionable() {
+		return schemaVersionableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -976,6 +993,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(eClassLinkedEClass, ECLASS_LINKED__ECLASS_NAME);
 		createEAttribute(eClassLinkedEClass, ECLASS_LINKED__EPACKAGE_NAME);
 
+		schemaVersionableEClass = createEClass(SCHEMA_VERSIONABLE);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -1128,6 +1147,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		g2 = createEGenericType(theEcorePackage.getEClass());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "eClassMap", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(schemaVersionableEClass, SchemaVersionable.class, "SchemaVersionable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(schemaVersionableEClass, theEcorePackage.getELong(), "getSchemaVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");

@@ -623,6 +623,25 @@ public interface CommonsPackage extends EPackage {
 	int ECLASS_LINKED_FEATURE_COUNT = 4;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.SchemaVersionable <em>Schema Versionable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.SchemaVersionable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSchemaVersionable()
+	 * @generated
+	 */
+	int SCHEMA_VERSIONABLE = 16;
+
+	/**
+	 * The number of structural features of the '<em>Schema Versionable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA_VERSIONABLE_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -630,7 +649,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 16;
+	int RESOURCE_TYPE = 17;
 
 
 	/**
@@ -641,7 +660,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 17;
+	int GENDER = 18;
 
 
 	/**
@@ -652,7 +671,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 18;
+	int ECLASS_STATUS = 19;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -662,7 +681,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 19;
+	int JAVA_CLASS_STATUS = 20;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -672,7 +691,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 20;
+	int DATE_TIME = 21;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -682,7 +701,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 21;
+	int CURRENCY_UNIT = 22;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -692,7 +711,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 22;
+	int UNIT = 23;
 
 
 	/**
@@ -703,7 +722,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 23;
+	int LIST = 24;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -713,7 +732,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 24;
+	int MAP = 25;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -723,7 +742,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 25;
+	int SET = 26;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -733,7 +752,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 26;
+	int COLLECTION = 27;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -743,7 +762,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 27;
+	int MULTIMAP = 28;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -753,7 +772,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 28;
+	int NAVIGABLE_MAP = 29;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -763,7 +782,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 29;
+	int QUEUE = 30;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -773,7 +792,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 30;
+	int MULTISET = 31;
 
 
 	/**
@@ -784,7 +803,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 31;
+	int SERIALIZABLE = 32;
 
 
 	/**
@@ -795,7 +814,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 32;
+	int BUNDLE = 33;
 
 
 	/**
@@ -1188,6 +1207,16 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEClassLinked_EPackageName();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.SchemaVersionable <em>Schema Versionable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Schema Versionable</em>'.
+	 * @see org.soluvas.commons.SchemaVersionable
+	 * @generated
+	 */
+	EClass getSchemaVersionable();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -1721,6 +1750,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ECLASS_LINKED__EPACKAGE_NAME = eINSTANCE.getEClassLinked_EPackageName();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.SchemaVersionable <em>Schema Versionable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.SchemaVersionable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSchemaVersionable()
+		 * @generated
+		 */
+		EClass SCHEMA_VERSIONABLE = eINSTANCE.getSchemaVersionable();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
