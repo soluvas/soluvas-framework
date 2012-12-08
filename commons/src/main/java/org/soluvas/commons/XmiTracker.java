@@ -97,26 +97,26 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 	@Nullable
 	public List<ServiceRegistration<Supplier>> addingBundle(@Nonnull Bundle bundle,
 			@Nonnull BundleEvent event) {
-		String path = bundle.getSymbolicName().replace('.', '/');
-		String filePattern = "*." + suppliedClassSimpleName + ".xmi";
+		final String path = bundle.getSymbolicName().replace('.', '/');
+		final String filePattern = "*." + suppliedClassSimpleName + ".xmi";
 		log.trace("Scanning {} [{}] for {}/{}", bundle.getSymbolicName(), bundle.getBundleId(),
 				path , filePattern);
-		Enumeration<URL> entries = bundle.findEntries(path, filePattern, false);
+		final Enumeration<URL> entries = bundle.findEntries(path, filePattern, false);
 		if (entries == null) {
 			return null;
 		}
-		Builder<ServiceRegistration<Supplier>> svcRegs = ImmutableList.builder();
+		final Builder<ServiceRegistration<Supplier>> svcRegs = ImmutableList.builder();
 		while (entries.hasMoreElements()) {
-			URL url = entries.nextElement();
+			final URL url = entries.nextElement();
 			log.debug("Registering Supplier for {} from {}", suppliedClassName, url);
-			XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(ePackage, url,
-					ResourceType.BUNDLE);
-			Dictionary<String, String> props = new Hashtable<String, String>();
+			final XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(ePackage, url,
+					bundle);
+			final Dictionary<String, String> props = new Hashtable<String, String>();
 			props.put("suppliedClass", suppliedClassName);
 			props.put("layer", "module");
 			props.put("tenantId", tenantId);
 			props.put("tenantEnv", tenantEnv);
-			ServiceRegistration<Supplier> svcReg = bundle.getBundleContext()
+			final ServiceRegistration<Supplier> svcReg = bundle.getBundleContext()
 					.registerService(Supplier.class, loader, props);
 			svcRegs.add(svcReg);
 		}

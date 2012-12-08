@@ -228,8 +228,7 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 	public String getImageId() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
-//		throw new UnsupportedOperationException();
-		return photoId;
+		throw new UnsupportedOperationException();
 	}
 
 	/**

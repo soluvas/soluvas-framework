@@ -156,4 +156,91 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Describable" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Bundle" instanceClassName="org.osgi.framework.Bundle"
+      serializable="false">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An installed bundle in the Framework.&#xA;&#xA;A Bundle object is the access point to define the lifecycle of an installed bundle. Each bundle installed in the OSGi environment must have an associated Bundle object.&#xA;&#xA;A bundle must have a unique identity, a long, chosen by the Framework. This identity must not change during the lifecycle of a bundle, even when the bundle is updated. Uninstalling and then reinstalling the bundle must create a new unique identity.&#xA;&#xA;A bundle can be in one of six states:&#xA;&#xA;UNINSTALLED&#xA;INSTALLED&#xA;RESOLVED&#xA;STARTING&#xA;STOPPING&#xA;ACTIVE&#xA;Values assigned to these states have no specified ordering; they represent bit values that may be ORed together to determine if a bundle is in one of the valid states.&#xA;&#xA;A bundle should only have active threads of execution when its state is one of STARTING,ACTIVE, or STOPPING. An UNINSTALLED bundle can not be set to another state; it is a zombie and can only be reached because references are kept somewhere.&#xA;&#xA;The Framework is the only entity that is allowed to create Bundle objects, and these objects are only valid within the Framework that created them.&#xA;&#xA;Bundles have a natural ordering such that if two Bundles have the same bundle id they are equal. A Bundle is less than another Bundle if it has a lower bundle id and is greater if it has a higher bundle id."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleAware" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="BundleAware classes are usually also ResourceAware (since Bundle is a resource).&#xA;However, Soluvas can load from other non-bundle resources as well, etc. JCR, Git, filesystem, database, HTTP, etc."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundle" eType="#//Bundle"
+        transient="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Only available if resolved."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaClassLinked">
+    <eTypeParameters name="T"/>
+    <eOperations name="resolveJavaClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Resolve referenced Java Class."/>
+      </eAnnotations>
+      <eParameters name="bundle" eType="#//Bundle">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Resolve referenced Java Class using the specified Bundle."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaClassName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        transient="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Java class name linked to this type. Used to resolve the Java Class instance."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Java class linked to this type. Only available when resolved."/>
+      </eAnnotations>
+      <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EJavaClass">
+        <eTypeArguments eTypeParameter="#//JavaClassLinked/T"/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaClassStatus" eType="#//JavaClassStatus"
+        transient="true" defaultValueLiteral="unresolved"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClassLinked">
+    <eOperations name="resolveEClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Resolve referenced EClass."/>
+      </eAnnotations>
+      <eParameters name="eClassMap">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Keys are {ePackageName}.{eClassName}.&#xA;Values are EClass instances themselves."/>
+        </eAnnotations>
+        <eGenericType eClassifier="#//Map">
+          <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+          <eTypeArguments eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eClass" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="EClass for this instances of this type."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eClassStatus" eType="#//EClassStatus"
+        transient="true" defaultValueLiteral="unresolved"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eClassName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Name of EClass, used for resolving the EClass instance."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ePackageName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Name of EPackage, used for resolving the EClass instance."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EClassStatus">
+    <eLiterals name="unresolved"/>
+    <eLiterals name="resolved" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="JavaClassStatus">
+    <eLiterals name="unresolved"/>
+    <eLiterals name="resolved" value="1"/>
+  </eClassifiers>
 </ecore:EPackage>

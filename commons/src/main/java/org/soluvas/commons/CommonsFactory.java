@@ -57,6 +57,24 @@ public interface CommonsFactory extends EFactory {
 	 */
 	NameContainer createNameContainer();
 
+	/**
+	 * Returns a new object of class '<em>Java Class Linked</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Java Class Linked</em>'.
+	 * @generated
+	 */
+	<T> JavaClassLinked<T> createJavaClassLinked();
+
+	/**
+	 * Returns a new object of class '<em>EClass Linked</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>EClass Linked</em>'.
+	 * @generated
+	 */
+	EClassLinked createEClassLinked();
+
 	PersonInfo createPersonInfo(String id, String slug, String name, String photoId, Gender gender);
 
 	/**

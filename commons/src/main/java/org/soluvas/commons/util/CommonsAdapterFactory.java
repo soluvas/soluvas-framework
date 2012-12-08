@@ -120,6 +120,18 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createDescribableAdapter();
 			}
 			@Override
+			public Adapter caseBundleAware(BundleAware object) {
+				return createBundleAwareAdapter();
+			}
+			@Override
+			public <T> Adapter caseJavaClassLinked(JavaClassLinked<T> object) {
+				return createJavaClassLinkedAdapter();
+			}
+			@Override
+			public Adapter caseEClassLinked(EClassLinked object) {
+				return createEClassLinkedAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -318,6 +330,48 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDescribableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.BundleAware <em>Bundle Aware</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.BundleAware
+	 * @generated
+	 */
+	public Adapter createBundleAwareAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.JavaClassLinked <em>Java Class Linked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.JavaClassLinked
+	 * @generated
+	 */
+	public Adapter createJavaClassLinkedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.EClassLinked <em>EClass Linked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.EClassLinked
+	 * @generated
+	 */
+	public Adapter createEClassLinkedAdapter() {
 		return null;
 	}
 

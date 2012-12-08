@@ -13,9 +13,11 @@ import org.soluvas.commons.XmiObjectLoaderFactory;
 
 /**
  * Creates {@link XmiObjectLoader}. This is not necessary, but simply attempt to workaround
- * for Karaf/Blueprint bug.
+ * for Karaf/Blueprint bug. which didn't work anyway.
  * @author ceefour
+ * @deprecated Delete this class after not referenced.
  */
+@Deprecated
 public class XmiObjectLoaderFactoryImpl implements XmiObjectLoaderFactory {
 	
 	/* (non-Javadoc)

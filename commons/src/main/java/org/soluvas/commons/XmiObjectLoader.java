@@ -51,7 +51,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s using class %s",
 				resourcePath, loaderClass.getName());
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourcePath);
+		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourcePath, null);
 	}
 
 	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final String fileName) {
@@ -61,7 +61,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		this.resourceUri = URI.createFileURI(fileName);
-		this.obj = load(ePackage, ResourceType.FILE, resourceUri, fileName);
+		this.obj = load(ePackage, ResourceType.FILE, resourceUri, fileName, null);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s in bundle %s [%s]",
 				fileName, bundle.getSymbolicName(), bundle.getBundleId());
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, fileName);
+		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, fileName, null);
 	}
 
 	/**
@@ -98,9 +98,17 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		this.resourceUri = URI.createFileURI(baseDir + "/" + fileName);
-		this.obj = load(ePackage, ResourceType.FILE, resourceUri, fileName);
+		this.obj = load(ePackage, ResourceType.FILE, resourceUri, fileName, null);
 	}
 
+	/**
+	 * 
+	 * @param ePackage
+	 * @param resourceUrl
+	 * @param resourceType
+	 * @deprecated Use {@link #XmiObjectLoader(EPackage, URL, Bundle)}.
+	 */
+	@Deprecated
 	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final URL resourceUrl,
 			@Nonnull final ResourceType resourceType) {
 		super();
@@ -110,7 +118,19 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		this.obj = load(ePackage, resourceType, resourceUri, resourceUri.toString());
+		this.obj = load(ePackage, resourceType, resourceUri, resourceUri.toString(), null);
+	}
+	
+	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final URL resourceUrl,
+			@Nonnull final Bundle bundle) {
+		super();
+		Preconditions.checkNotNull(ePackage, "ePackage cannot be null");
+		Preconditions.checkNotNull(resourceUrl, "resourceUrl cannot be null");
+		Preconditions.checkNotNull(bundle, "bundle cannot be null");
+		this.ePackageName = ePackage.getName();
+		this.ePackageNsUri = ePackage.getNsURI();
+		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
+		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourceUri.toString(), bundle);
 	}
 	
 	@PreDestroy
@@ -130,7 +150,8 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 
 	@SuppressWarnings("unchecked")
 	protected T load(@Nonnull final EPackage ePackage, @Nonnull final ResourceType resourceType,
-			@Nonnull final URI resourceUri, @Nonnull final String resourceName) {
+			@Nonnull final URI resourceUri, @Nonnull final String resourceName,
+			@Nullable final Bundle bundle) {
 		log.debug("Loading XMI from URI: {}", resourceUri);
 		
 		final ResourceSetImpl rset = new ResourceSetImpl();
@@ -150,16 +171,32 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		}
 		
 		// Augment resource information
-		augmentResourceInfo(resourceType, resourceUri, resourceName, obj);
-		final TreeIterator<EObject> allContents = obj.eAllContents();
-		long augmented = 0;
-		while (allContents.hasNext()) {
-			EObject content = allContents.next();
-			augmented += augmentResourceInfo(resourceType, resourceUri, resourceName, content);
+		{
+			augmentResourceInfo(resourceType, resourceUri, resourceName, obj);
+			final TreeIterator<EObject> allContents = obj.eAllContents();
+			long augmented = 0;
+			while (allContents.hasNext()) {
+				EObject content = allContents.next();
+				augmented += augmentResourceInfo(resourceType, resourceUri, resourceName, content);
+			}
+			if (augmented > 0)
+				log.debug("Augmented {} EObjects with resource information from {}",
+						augmented, resourceUri);
 		}
-		if (augmented > 0)
-			log.debug("Augmented {} EObjects with resource information from {}",
-					augmented, resourceUri);
+		
+		// Augment bundle information
+		if (bundle != null) {
+			augmentBundleInfo(bundle, obj);
+			final TreeIterator<EObject> allContents = obj.eAllContents();
+			long augmented = 0;
+			while (allContents.hasNext()) {
+				EObject content = allContents.next();
+				augmented += augmentBundleInfo(bundle, content);
+			}
+			if (augmented > 0)
+				log.debug("Augmented {} EObjects with Bundle information from {} [{}]",
+						augmented, bundle.getSymbolicName(), bundle.getBundleId());
+		}
 		
 		return obj;
 	}
@@ -167,11 +204,20 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	protected long augmentResourceInfo(@Nonnull final ResourceType resourceType, @Nonnull final URI resourceUri,
 			@Nonnull final String resourceName, @Nonnull final EObject content) {
 		if (content instanceof ResourceAware) {
-			// TODO: add the resourcePath, relative to parent resource
 			final ResourceAware resourceContent = (ResourceAware) content;
 			resourceContent.setResourceType(resourceType);
 			resourceContent.setResourceUri(resourceUri.toString());
 			resourceContent.setResourceName(resourceName);
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	protected long augmentBundleInfo(@Nonnull final Bundle bundle, @Nonnull final EObject content) {
+		if (content instanceof BundleAware) {
+			final BundleAware bundleContent = (BundleAware) content;
+			bundleContent.setBundle(bundle);
 			return 1;
 		} else {
 			return 0;

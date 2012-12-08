@@ -19,18 +19,26 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
+import org.osgi.framework.Bundle;
 import org.soluvas.commons.AppManifest;
+import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Describable;
+import org.soluvas.commons.EClassLinked;
+import org.soluvas.commons.EClassStatus;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.Informer;
+import org.soluvas.commons.JavaClassLinked;
+import org.soluvas.commons.JavaClassStatus;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.PersonInfo;
@@ -147,6 +155,27 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass bundleAwareEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass javaClassLinkedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eClassLinkedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum resourceTypeEEnum = null;
 
 	/**
@@ -155,6 +184,20 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EEnum genderEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum eClassStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum javaClassStatusEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -241,6 +284,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	private EDataType serializableEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType bundleEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -285,6 +335,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		CommonsPackageImpl theCommonsPackage = (CommonsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CommonsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new CommonsPackageImpl());
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		EcorePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theCommonsPackage.createPackageContents();
@@ -546,6 +599,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInformer() {
 		return informerEClass;
 	}
@@ -555,6 +609,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDescribable() {
 		return describableEClass;
 	}
@@ -564,8 +619,109 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDescribable_Description() {
-		return (EAttribute)describableEClass.getEStructuralFeatures().get(0);
+	@Override
+	public EClass getBundleAware() {
+		return bundleAwareEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getBundleAware_Bundle() {
+		return (EAttribute)bundleAwareEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getJavaClassLinked() {
+		return javaClassLinkedEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getJavaClassLinked_JavaClassName() {
+		return (EAttribute)javaClassLinkedEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getJavaClassLinked_JavaClass() {
+		return (EAttribute)javaClassLinkedEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getJavaClassLinked_JavaClassStatus() {
+		return (EAttribute)javaClassLinkedEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getEClassLinked() {
+		return eClassLinkedEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEClassLinked_EClass() {
+		return (EReference)eClassLinkedEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getEClassLinked_EClassStatus() {
+		return (EAttribute)eClassLinkedEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getEClassLinked_EClassName() {
+		return (EAttribute)eClassLinkedEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getEClassLinked_EPackageName() {
+		return (EAttribute)eClassLinkedEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -586,6 +742,26 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	@Override
 	public EEnum getGender() {
 		return genderEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EEnum getEClassStatus() {
+		return eClassStatusEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EEnum getJavaClassStatus() {
+		return javaClassStatusEEnum;
 	}
 
 	/**
@@ -714,6 +890,16 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
+	public EDataType getBundle() {
+		return bundleEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
 	}
@@ -775,11 +961,26 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		informerEClass = createEClass(INFORMER);
 
 		describableEClass = createEClass(DESCRIBABLE);
-		createEAttribute(describableEClass, DESCRIBABLE__DESCRIPTION);
+
+		bundleAwareEClass = createEClass(BUNDLE_AWARE);
+		createEAttribute(bundleAwareEClass, BUNDLE_AWARE__BUNDLE);
+
+		javaClassLinkedEClass = createEClass(JAVA_CLASS_LINKED);
+		createEAttribute(javaClassLinkedEClass, JAVA_CLASS_LINKED__JAVA_CLASS_NAME);
+		createEAttribute(javaClassLinkedEClass, JAVA_CLASS_LINKED__JAVA_CLASS);
+		createEAttribute(javaClassLinkedEClass, JAVA_CLASS_LINKED__JAVA_CLASS_STATUS);
+
+		eClassLinkedEClass = createEClass(ECLASS_LINKED);
+		createEReference(eClassLinkedEClass, ECLASS_LINKED__ECLASS);
+		createEAttribute(eClassLinkedEClass, ECLASS_LINKED__ECLASS_STATUS);
+		createEAttribute(eClassLinkedEClass, ECLASS_LINKED__ECLASS_NAME);
+		createEAttribute(eClassLinkedEClass, ECLASS_LINKED__EPACKAGE_NAME);
 
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
+		eClassStatusEEnum = createEEnum(ECLASS_STATUS);
+		javaClassStatusEEnum = createEEnum(JAVA_CLASS_STATUS);
 
 		// Create data types
 		dateTimeEDataType = createEDataType(DATE_TIME);
@@ -794,6 +995,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		queueEDataType = createEDataType(QUEUE);
 		multisetEDataType = createEDataType(MULTISET);
 		serializableEDataType = createEDataType(SERIALIZABLE);
+		bundleEDataType = createEDataType(BUNDLE);
 	}
 
 	/**
@@ -819,8 +1021,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
 		// Create type parameters
 		ETypeParameter informerEClass_T = addETypeParameter(informerEClass, "T");
+		ETypeParameter javaClassLinkedEClass_T = addETypeParameter(javaClassLinkedEClass, "T");
 		addETypeParameter(listEDataType, "T");
 		addETypeParameter(mapEDataType, "K");
 		addETypeParameter(mapEDataType, "V");
@@ -894,7 +1100,34 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEOperation(op, g1);
 
 		initEClass(describableEClass, Describable.class, "Describable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDescribable_Description(), ecorePackage.getEString(), "description", null, 0, 1, Describable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(bundleAwareEClass, BundleAware.class, "BundleAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBundleAware_Bundle(), this.getBundle(), "bundle", null, 0, 1, BundleAware.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(javaClassLinkedEClass, JavaClassLinked.class, "JavaClassLinked", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getJavaClassLinked_JavaClassName(), theEcorePackage.getEString(), "javaClassName", null, 0, 1, JavaClassLinked.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(theEcorePackage.getEJavaClass());
+		EGenericType g2 = createEGenericType(javaClassLinkedEClass_T);
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getJavaClassLinked_JavaClass(), g1, "javaClass", null, 0, 1, JavaClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJavaClassLinked_JavaClassStatus(), this.getJavaClassStatus(), "javaClassStatus", "unresolved", 0, 1, JavaClassLinked.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(javaClassLinkedEClass, null, "resolveJavaClass", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getBundle(), "bundle", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(eClassLinkedEClass, EClassLinked.class, "EClassLinked", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEClassLinked_EClass(), theEcorePackage.getEClass(), null, "eClass", null, 0, 1, EClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEClassLinked_EClassStatus(), this.getEClassStatus(), "eClassStatus", "unresolved", 0, 1, EClassLinked.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEClassLinked_EClassName(), theEcorePackage.getEString(), "eClassName", null, 0, 1, EClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEClassLinked_EPackageName(), theEcorePackage.getEString(), "ePackageName", null, 0, 1, EClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(eClassLinkedEClass, null, "resolveEClass", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getMap());
+		g2 = createEGenericType(theEcorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(theEcorePackage.getEClass());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "eClassMap", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -905,6 +1138,14 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEEnum(genderEEnum, Gender.class, "Gender");
 		addEEnumLiteral(genderEEnum, Gender.MALE);
 		addEEnumLiteral(genderEEnum, Gender.FEMALE);
+
+		initEEnum(eClassStatusEEnum, EClassStatus.class, "EClassStatus");
+		addEEnumLiteral(eClassStatusEEnum, EClassStatus.UNRESOLVED);
+		addEEnumLiteral(eClassStatusEEnum, EClassStatus.RESOLVED);
+
+		initEEnum(javaClassStatusEEnum, JavaClassStatus.class, "JavaClassStatus");
+		addEEnumLiteral(javaClassStatusEEnum, JavaClassStatus.UNRESOLVED);
+		addEEnumLiteral(javaClassStatusEEnum, JavaClassStatus.RESOLVED);
 
 		// Initialize data types
 		initEDataType(dateTimeEDataType, DateTime.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -919,6 +1160,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(queueEDataType, Queue.class, "Queue", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(multisetEDataType, Multiset.class, "Multiset", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(serializableEDataType, Serializable.class, "Serializable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(bundleEDataType, Bundle.class, "Bundle", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1051,10 +1293,76 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Transforms to its \"Info\" model."
 		   });		
 		addAnnotation
-		  (getDescribable_Description(), 
+		  (bundleEDataType, 
 		   source, 
 		   new String[] {
-			 "documentation", "Optional description, containing a reason or any additional information.\n\nMIME Format: text/plain, but can be text/html. But even with text/html it is recommended to use RDFa+HTML5 in the content for Linked Data support.\n\nSee http://rayofsolaris.net/blog/2009/serving-xhtml-rdfa for issues."
+			 "documentation", "An installed bundle in the Framework.\n\nA Bundle object is the access point to define the lifecycle of an installed bundle. Each bundle installed in the OSGi environment must have an associated Bundle object.\n\nA bundle must have a unique identity, a long, chosen by the Framework. This identity must not change during the lifecycle of a bundle, even when the bundle is updated. Uninstalling and then reinstalling the bundle must create a new unique identity.\n\nA bundle can be in one of six states:\n\nUNINSTALLED\nINSTALLED\nRESOLVED\nSTARTING\nSTOPPING\nACTIVE\nValues assigned to these states have no specified ordering; they represent bit values that may be ORed together to determine if a bundle is in one of the valid states.\n\nA bundle should only have active threads of execution when its state is one of STARTING,ACTIVE, or STOPPING. An UNINSTALLED bundle can not be set to another state; it is a zombie and can only be reached because references are kept somewhere.\n\nThe Framework is the only entity that is allowed to create Bundle objects, and these objects are only valid within the Framework that created them.\n\nBundles have a natural ordering such that if two Bundles have the same bundle id they are equal. A Bundle is less than another Bundle if it has a lower bundle id and is greater if it has a higher bundle id."
+		   });		
+		addAnnotation
+		  (bundleAwareEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "BundleAware classes are usually also ResourceAware (since Bundle is a resource).\nHowever, Soluvas can load from other non-bundle resources as well, etc. JCR, Git, filesystem, database, HTTP, etc."
+		   });		
+		addAnnotation
+		  (getBundleAware_Bundle(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Only available if resolved."
+		   });		
+		addAnnotation
+		  (javaClassLinkedEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Resolve referenced Java Class."
+		   });		
+		addAnnotation
+		  ((javaClassLinkedEClass.getEOperations().get(0)).getEParameters().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Resolve referenced Java Class using the specified Bundle."
+		   });		
+		addAnnotation
+		  (getJavaClassLinked_JavaClassName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The Java class name linked to this type. Used to resolve the Java Class instance."
+		   });		
+		addAnnotation
+		  (getJavaClassLinked_JavaClass(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The Java class linked to this type. Only available when resolved."
+		   });		
+		addAnnotation
+		  (eClassLinkedEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Resolve referenced EClass."
+		   });		
+		addAnnotation
+		  ((eClassLinkedEClass.getEOperations().get(0)).getEParameters().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Keys are {ePackageName}.{eClassName}.\nValues are EClass instances themselves."
+		   });		
+		addAnnotation
+		  (getEClassLinked_EClass(), 
+		   source, 
+		   new String[] {
+			 "documentation", "EClass for this instances of this type."
+		   });		
+		addAnnotation
+		  (getEClassLinked_EClassName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Name of EClass, used for resolving the EClass instance."
+		   });		
+		addAnnotation
+		  (getEClassLinked_EPackageName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Name of EPackage, used for resolving the EClass instance."
 		   });
 	}
 

@@ -25,6 +25,20 @@
 			<organization>Soluvas</organization>
 			<organizationUrl>http://www.soluvas.com/</organizationUrl>
 		</developer>
+		<developer>
+			<id>rudi</id>
+			<name>Rudi Wijaya</name>
+			<email>rudi@berbatik.com</email>
+			<organization>Bippo</organization>
+			<organizationUrl>http://www.bippo.co.id/</organizationUrl>
+		</developer>
+		<developer>
+			<id>atang</id>
+			<name>Atang Sutisna</name>
+			<email>atang@berbatik.com</email>
+			<organization>Bippo</organization>
+			<organizationUrl>http://www.bippo.co.id/</organizationUrl>
+		</developer>
 	</developers>
 	<licenses>
 		<license>

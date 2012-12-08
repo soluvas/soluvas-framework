@@ -16,7 +16,6 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.BundleTrackerCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.XmiObjectLoader;
 import org.soluvas.commons.XmiTracker;
 
@@ -65,26 +64,26 @@ public class SecurityCatalogXmiTracker implements BundleTrackerCustomizer<List<S
 	@Nullable
 	public List<ServiceRegistration<Supplier>> addingBundle(@Nonnull Bundle bundle,
 			@Nonnull BundleEvent event) {
-		String path = bundle.getSymbolicName().replace('.', '/');
-		String filePattern = "*.SecurityCatalog.xmi";
+		final String path = bundle.getSymbolicName().replace('.', '/');
+		final String filePattern = "*.SecurityCatalog.xmi";
 		log.trace("Scanning {} [{}] for {}/{}", bundle.getSymbolicName(), bundle.getBundleId(),
 				path , filePattern);
-		Enumeration<URL> entries = bundle.findEntries(path, filePattern, false);
+		final Enumeration<URL> entries = bundle.findEntries(path, filePattern, false);
 		if (entries == null) {
 			return null;
 		}
 		Builder<ServiceRegistration<Supplier>> svcRegs = ImmutableList.builder();
 		while (entries.hasMoreElements()) {
-			URL url = entries.nextElement();
+			final URL url = entries.nextElement();
 			log.debug("Loading SecurityCatalog from {}", url);
-			XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(SecurityPackage.eINSTANCE, url,
-					ResourceType.BUNDLE);
-			Dictionary<String, String> props = new Hashtable<String, String>();
+			final XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(SecurityPackage.eINSTANCE, url,
+					bundle);
+			final Dictionary<String, String> props = new Hashtable<String, String>();
 			props.put("suppliedClass", SecurityCatalog.class.getName());
 			props.put("layer", "module");
 			props.put("tenantId", tenantId);
 			props.put("tenantEnv", tenantEnv);
-			ServiceRegistration<Supplier> svcReg = bundle.getBundleContext().registerService(Supplier.class, loader, props);
+			final ServiceRegistration<Supplier> svcReg = bundle.getBundleContext().registerService(Supplier.class, loader, props);
 			svcRegs.add(svcReg);
 		}
 		final List<ServiceRegistration<Supplier>> svcRegList = svcRegs.build();

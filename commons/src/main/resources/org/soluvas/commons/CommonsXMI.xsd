@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<xsd:schema xmlns:commons="http://www.soluvas.org/schema/commons/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/commons/1.0">
+<xsd:schema xmlns:commons="http://www.soluvas.org/schema/commons/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/commons/1.0">
+  <xsd:import namespace="http://www.eclipse.org/emf/2002/Ecore" schemaLocation="ecore.xsd"/>
   <xsd:import namespace="http://www.omg.org/XMI" schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/XMI.xsd"/>
   <xsd:simpleType name="ResourceType">
     <xsd:restriction base="xsd:NCName">
@@ -24,6 +25,18 @@
     <xsd:restriction base="xsd:NCName">
       <xsd:enumeration value="male"/>
       <xsd:enumeration value="female"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="EClassStatus">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="unresolved"/>
+      <xsd:enumeration value="resolved"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="JavaClassStatus">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="unresolved"/>
+      <xsd:enumeration value="resolved"/>
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:complexType abstract="true" name="ResourceAware">
@@ -249,15 +262,64 @@ Used by {#getName()}.</xsd:documentation>
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="description" type="xsd:string">
+  </xsd:complexType>
+  <xsd:element name="Describable" type="commons:Describable"/>
+  <xsd:complexType abstract="true" name="BundleAware">
+    <xsd:annotation>
+      <xsd:documentation>BundleAware classes are usually also ResourceAware (since Bundle is a resource).
+However, Soluvas can load from other non-bundle resources as well, etc. JCR, Git, filesystem, database, HTTP, etc.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="BundleAware" type="commons:BundleAware">
+    <xsd:annotation>
+      <xsd:documentation>BundleAware classes are usually also ResourceAware (since Bundle is a resource).
+However, Soluvas can load from other non-bundle resources as well, etc. JCR, Git, filesystem, database, HTTP, etc.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="JavaClassLinked">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="javaClass" type="xsd:string">
       <xsd:annotation>
-        <xsd:documentation>Optional description, containing a reason or any additional information.
-
-MIME Format: text/plain, but can be text/html. But even with text/html it is recommended to use RDFa+HTML5 in the content for Linked Data support.
-
-See http://rayofsolaris.net/blog/2009/serving-xhtml-rdfa for issues.</xsd:documentation>
+        <xsd:documentation>The Java class linked to this type. Only available when resolved.</xsd:documentation>
       </xsd:annotation>
     </xsd:attribute>
   </xsd:complexType>
-  <xsd:element name="Describable" type="commons:Describable"/>
+  <xsd:element name="JavaClassLinked" type="commons:JavaClassLinked"/>
+  <xsd:complexType name="EClassLinked">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="eClass" type="ecore:EClass">
+        <xsd:annotation>
+          <xsd:documentation>EClass for this instances of this type.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="eClassName" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Name of EClass, used for resolving the EClass instance.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="ePackageName" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Name of EPackage, used for resolving the EClass instance.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="eClass" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>EClass for this instances of this type.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="EClassLinked" type="commons:EClassLinked"/>
 </xsd:schema>

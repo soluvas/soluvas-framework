@@ -81,6 +81,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 			case CommonsPackage.PERSON_INFO: return (EObject)createPersonInfo();
 			case CommonsPackage.PHOTO_ID_CONTAINER: return (EObject)createPhotoIdContainer();
 			case CommonsPackage.NAME_CONTAINER: return (EObject)createNameContainer();
+			case CommonsPackage.JAVA_CLASS_LINKED: return (EObject)createJavaClassLinked();
+			case CommonsPackage.ECLASS_LINKED: return (EObject)createEClassLinked();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -98,6 +100,10 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createResourceTypeFromString(eDataType, initialValue);
 			case CommonsPackage.GENDER:
 				return createGenderFromString(eDataType, initialValue);
+			case CommonsPackage.ECLASS_STATUS:
+				return createEClassStatusFromString(eDataType, initialValue);
+			case CommonsPackage.JAVA_CLASS_STATUS:
+				return createJavaClassStatusFromString(eDataType, initialValue);
 			case CommonsPackage.DATE_TIME:
 				return createDateTimeFromString(eDataType, initialValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -139,6 +145,10 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertResourceTypeToString(eDataType, instanceValue);
 			case CommonsPackage.GENDER:
 				return convertGenderToString(eDataType, instanceValue);
+			case CommonsPackage.ECLASS_STATUS:
+				return convertEClassStatusToString(eDataType, instanceValue);
+			case CommonsPackage.JAVA_CLASS_STATUS:
+				return convertJavaClassStatusToString(eDataType, instanceValue);
 			case CommonsPackage.DATE_TIME:
 				return convertDateTimeToString(eDataType, instanceValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -217,6 +227,26 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public <T> JavaClassLinked<T> createJavaClassLinked() {
+		JavaClassLinkedImpl<T> javaClassLinked = new JavaClassLinkedImpl<T>();
+		return javaClassLinked;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClassLinked createEClassLinked() {
+		EClassLinkedImpl eClassLinked = new EClassLinkedImpl();
+		return eClassLinked;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ResourceType createResourceTypeFromString(EDataType eDataType, String initialValue) {
 		ResourceType result = ResourceType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -249,6 +279,46 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertGenderToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClassStatus createEClassStatusFromString(EDataType eDataType, String initialValue) {
+		EClassStatus result = EClassStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertEClassStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JavaClassStatus createJavaClassStatusFromString(EDataType eDataType, String initialValue) {
+		JavaClassStatus result = JavaClassStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertJavaClassStatusToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

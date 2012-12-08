@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -484,22 +485,142 @@ public interface CommonsPackage extends EPackage {
 	int DESCRIBABLE = 12;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIBABLE__DESCRIPTION = 0;
-
-	/**
 	 * The number of structural features of the '<em>Describable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIBABLE_FEATURE_COUNT = 1;
+	int DESCRIBABLE_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.BundleAware <em>Bundle Aware</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.BundleAware
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundleAware()
+	 * @generated
+	 */
+	int BUNDLE_AWARE = 13;
+
+	/**
+	 * The feature id for the '<em><b>Bundle</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE_AWARE__BUNDLE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Bundle Aware</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE_AWARE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.JavaClassLinkedImpl <em>Java Class Linked</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.JavaClassLinkedImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassLinked()
+	 * @generated
+	 */
+	int JAVA_CLASS_LINKED = 14;
+
+	/**
+	 * The feature id for the '<em><b>Java Class Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_CLASS_LINKED__JAVA_CLASS_NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Java Class</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_CLASS_LINKED__JAVA_CLASS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Java Class Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_CLASS_LINKED__JAVA_CLASS_STATUS = 2;
+
+	/**
+	 * The number of structural features of the '<em>Java Class Linked</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_CLASS_LINKED_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.EClassLinkedImpl <em>EClass Linked</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.EClassLinkedImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassLinked()
+	 * @generated
+	 */
+	int ECLASS_LINKED = 15;
+
+	/**
+	 * The feature id for the '<em><b>EClass</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECLASS_LINKED__ECLASS = 0;
+
+	/**
+	 * The feature id for the '<em><b>EClass Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECLASS_LINKED__ECLASS_STATUS = 1;
+
+	/**
+	 * The feature id for the '<em><b>EClass Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECLASS_LINKED__ECLASS_NAME = 2;
+
+	/**
+	 * The feature id for the '<em><b>EPackage Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECLASS_LINKED__EPACKAGE_NAME = 3;
+
+	/**
+	 * The number of structural features of the '<em>EClass Linked</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECLASS_LINKED_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
@@ -509,7 +630,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 13;
+	int RESOURCE_TYPE = 16;
 
 
 	/**
@@ -520,8 +641,28 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 14;
+	int GENDER = 17;
 
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.EClassStatus <em>EClass Status</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.EClassStatus
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
+	 * @generated
+	 */
+	int ECLASS_STATUS = 18;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.JavaClassStatus
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
+	 * @generated
+	 */
+	int JAVA_CLASS_STATUS = 19;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -531,7 +672,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 15;
+	int DATE_TIME = 20;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -541,7 +682,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 16;
+	int CURRENCY_UNIT = 21;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -551,7 +692,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 17;
+	int UNIT = 22;
 
 
 	/**
@@ -562,7 +703,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 18;
+	int LIST = 23;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -572,7 +713,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 19;
+	int MAP = 24;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -582,7 +723,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 20;
+	int SET = 25;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -592,7 +733,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 21;
+	int COLLECTION = 26;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -602,7 +743,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 22;
+	int MULTIMAP = 27;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -612,7 +753,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 23;
+	int NAVIGABLE_MAP = 28;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -622,7 +763,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 24;
+	int QUEUE = 29;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -632,7 +773,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 25;
+	int MULTISET = 30;
 
 
 	/**
@@ -643,7 +784,18 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 26;
+	int SERIALIZABLE = 31;
+
+
+	/**
+	 * The meta object id for the '<em>Bundle</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.osgi.framework.Bundle
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
+	 * @generated
+	 */
+	int BUNDLE = 32;
 
 
 	/**
@@ -920,15 +1072,122 @@ public interface CommonsPackage extends EPackage {
 	EClass getDescribable();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Describable#getDescription <em>Description</em>}'.
+	 * Returns the meta object for class '{@link org.soluvas.commons.BundleAware <em>Bundle Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see org.soluvas.commons.Describable#getDescription()
-	 * @see #getDescribable()
+	 * @return the meta object for class '<em>Bundle Aware</em>'.
+	 * @see org.soluvas.commons.BundleAware
 	 * @generated
 	 */
-	EAttribute getDescribable_Description();
+	EClass getBundleAware();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.BundleAware#getBundle <em>Bundle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bundle</em>'.
+	 * @see org.soluvas.commons.BundleAware#getBundle()
+	 * @see #getBundleAware()
+	 * @generated
+	 */
+	EAttribute getBundleAware_Bundle();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.JavaClassLinked <em>Java Class Linked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Java Class Linked</em>'.
+	 * @see org.soluvas.commons.JavaClassLinked
+	 * @generated
+	 */
+	EClass getJavaClassLinked();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.JavaClassLinked#getJavaClassName <em>Java Class Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Java Class Name</em>'.
+	 * @see org.soluvas.commons.JavaClassLinked#getJavaClassName()
+	 * @see #getJavaClassLinked()
+	 * @generated
+	 */
+	EAttribute getJavaClassLinked_JavaClassName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.JavaClassLinked#getJavaClass <em>Java Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Java Class</em>'.
+	 * @see org.soluvas.commons.JavaClassLinked#getJavaClass()
+	 * @see #getJavaClassLinked()
+	 * @generated
+	 */
+	EAttribute getJavaClassLinked_JavaClass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.JavaClassLinked#getJavaClassStatus <em>Java Class Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Java Class Status</em>'.
+	 * @see org.soluvas.commons.JavaClassLinked#getJavaClassStatus()
+	 * @see #getJavaClassLinked()
+	 * @generated
+	 */
+	EAttribute getJavaClassLinked_JavaClassStatus();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.EClassLinked <em>EClass Linked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>EClass Linked</em>'.
+	 * @see org.soluvas.commons.EClassLinked
+	 * @generated
+	 */
+	EClass getEClassLinked();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.commons.EClassLinked#getEClass <em>EClass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EClass</em>'.
+	 * @see org.soluvas.commons.EClassLinked#getEClass()
+	 * @see #getEClassLinked()
+	 * @generated
+	 */
+	EReference getEClassLinked_EClass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.EClassLinked#getEClassStatus <em>EClass Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>EClass Status</em>'.
+	 * @see org.soluvas.commons.EClassLinked#getEClassStatus()
+	 * @see #getEClassLinked()
+	 * @generated
+	 */
+	EAttribute getEClassLinked_EClassStatus();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.EClassLinked#getEClassName <em>EClass Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>EClass Name</em>'.
+	 * @see org.soluvas.commons.EClassLinked#getEClassName()
+	 * @see #getEClassLinked()
+	 * @generated
+	 */
+	EAttribute getEClassLinked_EClassName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.EClassLinked#getEPackageName <em>EPackage Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>EPackage Name</em>'.
+	 * @see org.soluvas.commons.EClassLinked#getEPackageName()
+	 * @see #getEClassLinked()
+	 * @generated
+	 */
+	EAttribute getEClassLinked_EPackageName();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -949,6 +1208,26 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getGender();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.commons.EClassStatus <em>EClass Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>EClass Status</em>'.
+	 * @see org.soluvas.commons.EClassStatus
+	 * @generated
+	 */
+	EEnum getEClassStatus();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Java Class Status</em>'.
+	 * @see org.soluvas.commons.JavaClassStatus
+	 * @generated
+	 */
+	EEnum getJavaClassStatus();
 
 	/**
 	 * Returns the meta object for data type '{@link org.joda.time.DateTime <em>Date Time</em>}'.
@@ -1081,6 +1360,17 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getSerializable();
+
+	/**
+	 * Returns the meta object for data type '{@link org.osgi.framework.Bundle <em>Bundle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Bundle</em>'.
+	 * @see org.osgi.framework.Bundle
+	 * @model instanceClass="org.osgi.framework.Bundle" serializeable="false"
+	 * @generated
+	 */
+	EDataType getBundle();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1339,12 +1629,98 @@ public interface CommonsPackage extends EPackage {
 		EClass DESCRIBABLE = eINSTANCE.getDescribable();
 
 		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * The meta object literal for the '{@link org.soluvas.commons.BundleAware <em>Bundle Aware</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.BundleAware
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundleAware()
+		 * @generated
+		 */
+		EClass BUNDLE_AWARE = eINSTANCE.getBundleAware();
+
+		/**
+		 * The meta object literal for the '<em><b>Bundle</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DESCRIBABLE__DESCRIPTION = eINSTANCE.getDescribable_Description();
+		EAttribute BUNDLE_AWARE__BUNDLE = eINSTANCE.getBundleAware_Bundle();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.JavaClassLinkedImpl <em>Java Class Linked</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.JavaClassLinkedImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassLinked()
+		 * @generated
+		 */
+		EClass JAVA_CLASS_LINKED = eINSTANCE.getJavaClassLinked();
+
+		/**
+		 * The meta object literal for the '<em><b>Java Class Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JAVA_CLASS_LINKED__JAVA_CLASS_NAME = eINSTANCE.getJavaClassLinked_JavaClassName();
+
+		/**
+		 * The meta object literal for the '<em><b>Java Class</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JAVA_CLASS_LINKED__JAVA_CLASS = eINSTANCE.getJavaClassLinked_JavaClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Java Class Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JAVA_CLASS_LINKED__JAVA_CLASS_STATUS = eINSTANCE.getJavaClassLinked_JavaClassStatus();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.EClassLinkedImpl <em>EClass Linked</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.EClassLinkedImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassLinked()
+		 * @generated
+		 */
+		EClass ECLASS_LINKED = eINSTANCE.getEClassLinked();
+
+		/**
+		 * The meta object literal for the '<em><b>EClass</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ECLASS_LINKED__ECLASS = eINSTANCE.getEClassLinked_EClass();
+
+		/**
+		 * The meta object literal for the '<em><b>EClass Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECLASS_LINKED__ECLASS_STATUS = eINSTANCE.getEClassLinked_EClassStatus();
+
+		/**
+		 * The meta object literal for the '<em><b>EClass Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECLASS_LINKED__ECLASS_NAME = eINSTANCE.getEClassLinked_EClassName();
+
+		/**
+		 * The meta object literal for the '<em><b>EPackage Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECLASS_LINKED__EPACKAGE_NAME = eINSTANCE.getEClassLinked_EPackageName();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
@@ -1365,6 +1741,26 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum GENDER = eINSTANCE.getGender();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.EClassStatus <em>EClass Status</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.EClassStatus
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
+		 * @generated
+		 */
+		EEnum ECLASS_STATUS = eINSTANCE.getEClassStatus();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.JavaClassStatus
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
+		 * @generated
+		 */
+		EEnum JAVA_CLASS_STATUS = eINSTANCE.getJavaClassStatus();
 
 		/**
 		 * The meta object literal for the '<em>Date Time</em>' data type.
@@ -1485,6 +1881,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType SERIALIZABLE = eINSTANCE.getSerializable();
+
+		/**
+		 * The meta object literal for the '<em>Bundle</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.osgi.framework.Bundle
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
+		 * @generated
+		 */
+		EDataType BUNDLE = eINSTANCE.getBundle();
 
 	}
 
