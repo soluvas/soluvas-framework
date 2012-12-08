@@ -173,7 +173,10 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JavaClassLinked">
+  <eClassifiers xsi:type="ecore:EClass" name="JavaClassLinked" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Implementation is in {@link org.soluvas.commons.JavaClassLinked.Trait}."/>
+    </eAnnotations>
     <eTypeParameters name="T"/>
     <eOperations name="resolveJavaClass">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -185,8 +188,7 @@
         </eAnnotations>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaClassName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
-        transient="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaClassName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Java class name linked to this type. Used to resolve the Java Class instance."/>
       </eAnnotations>
@@ -200,9 +202,12 @@
       </eGenericType>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaClassStatus" eType="#//JavaClassStatus"
-        transient="true" defaultValueLiteral="unresolved"/>
+        defaultValueLiteral="unresolved"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EClassLinked">
+  <eClassifiers xsi:type="ecore:EClass" name="EClassLinked" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Implementation is in {@link org.soluvas.commons.util.EClassLinked.Trait}."/>
+    </eAnnotations>
     <eOperations name="resolveEClass">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Resolve referenced EClass."/>
@@ -223,7 +228,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="eClassStatus" eType="#//EClassStatus"
-        transient="true" defaultValueLiteral="unresolved"/>
+        defaultValueLiteral="unresolved"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="eClassName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Name of EClass, used for resolving the EClass instance."/>

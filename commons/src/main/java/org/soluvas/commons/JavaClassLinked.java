@@ -2,13 +2,22 @@
  */
 package org.soluvas.commons;
 
+import javax.annotation.Nonnull;
+
 import org.osgi.framework.Bundle;
+
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Java Class Linked</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * Implementation is in {@link org.soluvas.commons.JavaClassLinked.Trait}.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -20,11 +29,36 @@ import org.osgi.framework.Bundle;
  * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getJavaClassLinked()
- * @model
+ * @model interface="true" abstract="true"
  * @extends SerializableEObject
  * @generated
  */
 public interface JavaClassLinked<T> extends SerializableEObject {
+	
+	public static class Trait {
+
+		/**
+		 * Implementation for {@link JavaClassLinked#resolveJavaClass(Bundle)}.
+		 * @param obj
+		 * @param bundle
+		 */
+		@SuppressWarnings("unchecked")
+		public static <T> void resolveJavaClass(@Nonnull final JavaClassLinked<T> obj, @Nonnull final Bundle bundle) {
+			Preconditions.checkState(!Strings.isNullOrEmpty(obj.getJavaClassName()),
+					"Cannot resolve empty Java class from bundle %s", bundle);
+			Preconditions.checkNotNull(bundle, "Cannot resolve class %s because specified bundle is null", obj.getJavaClassName());
+			try {
+				final Class<T> clazz = (Class<T>) bundle.loadClass(obj.getJavaClassName());
+				obj.setJavaClass(clazz);
+				obj.setJavaClassStatus(JavaClassStatus.RESOLVED);
+			} catch (ClassNotFoundException e) {
+				throw new CommonsException(String.format("Cannot resolve class %s from bundle %s [%d]",
+						obj.getJavaClassName(), bundle.getSymbolicName(), bundle.getBundleId()), e);
+			}
+		}
+		
+	}
+	
 	/**
 	 * Returns the value of the '<em><b>Java Class Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -35,7 +69,7 @@ public interface JavaClassLinked<T> extends SerializableEObject {
 	 * @return the value of the '<em>Java Class Name</em>' attribute.
 	 * @see #setJavaClassName(String)
 	 * @see org.soluvas.commons.CommonsPackage#getJavaClassLinked_JavaClassName()
-	 * @model transient="true"
+	 * @model
 	 * @generated
 	 */
 	String getJavaClassName();
@@ -89,7 +123,7 @@ public interface JavaClassLinked<T> extends SerializableEObject {
 	 * @see org.soluvas.commons.JavaClassStatus
 	 * @see #setJavaClassStatus(JavaClassStatus)
 	 * @see org.soluvas.commons.CommonsPackage#getJavaClassLinked_JavaClassStatus()
-	 * @model default="unresolved" transient="true"
+	 * @model default="unresolved"
 	 * @generated
 	 */
 	JavaClassStatus getJavaClassStatus();

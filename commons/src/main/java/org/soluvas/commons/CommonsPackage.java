@@ -522,10 +522,10 @@ public interface CommonsPackage extends EPackage {
 	int BUNDLE_AWARE_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.commons.impl.JavaClassLinkedImpl <em>Java Class Linked</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.commons.JavaClassLinked <em>Java Class Linked</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.commons.impl.JavaClassLinkedImpl
+	 * @see org.soluvas.commons.JavaClassLinked
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassLinked()
 	 * @generated
 	 */
@@ -568,10 +568,10 @@ public interface CommonsPackage extends EPackage {
 	int JAVA_CLASS_LINKED_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.commons.impl.EClassLinkedImpl <em>EClass Linked</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.commons.EClassLinked <em>EClass Linked</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.commons.impl.EClassLinkedImpl
+	 * @see org.soluvas.commons.EClassLinked
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassLinked()
 	 * @generated
 	 */
@@ -1647,10 +1647,10 @@ public interface CommonsPackage extends EPackage {
 		EAttribute BUNDLE_AWARE__BUNDLE = eINSTANCE.getBundleAware_Bundle();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.commons.impl.JavaClassLinkedImpl <em>Java Class Linked</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.commons.JavaClassLinked <em>Java Class Linked</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.commons.impl.JavaClassLinkedImpl
+		 * @see org.soluvas.commons.JavaClassLinked
 		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassLinked()
 		 * @generated
 		 */
@@ -1681,10 +1681,10 @@ public interface CommonsPackage extends EPackage {
 		EAttribute JAVA_CLASS_LINKED__JAVA_CLASS_STATUS = eINSTANCE.getJavaClassLinked_JavaClassStatus();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.commons.impl.EClassLinkedImpl <em>EClass Linked</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.commons.EClassLinked <em>EClass Linked</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.commons.impl.EClassLinkedImpl
+		 * @see org.soluvas.commons.EClassLinked
 		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassLinked()
 		 * @generated
 		 */

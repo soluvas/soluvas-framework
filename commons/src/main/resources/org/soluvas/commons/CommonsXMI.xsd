@@ -281,20 +281,36 @@ However, Soluvas can load from other non-bundle resources as well, etc. JCR, Git
 However, Soluvas can load from other non-bundle resources as well, etc. JCR, Git, filesystem, database, HTTP, etc.</xsd:documentation>
     </xsd:annotation>
   </xsd:element>
-  <xsd:complexType name="JavaClassLinked">
+  <xsd:complexType abstract="true" name="JavaClassLinked">
+    <xsd:annotation>
+      <xsd:documentation>Implementation is in {@link org.soluvas.commons.JavaClassLinked.Trait}.</xsd:documentation>
+    </xsd:annotation>
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element ref="xmi:Extension"/>
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="javaClassName" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>The Java class name linked to this type. Used to resolve the Java Class instance.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
     <xsd:attribute name="javaClass" type="xsd:string">
       <xsd:annotation>
         <xsd:documentation>The Java class linked to this type. Only available when resolved.</xsd:documentation>
       </xsd:annotation>
     </xsd:attribute>
+    <xsd:attribute name="javaClassStatus" type="commons:JavaClassStatus"/>
   </xsd:complexType>
-  <xsd:element name="JavaClassLinked" type="commons:JavaClassLinked"/>
-  <xsd:complexType name="EClassLinked">
+  <xsd:element name="JavaClassLinked" type="commons:JavaClassLinked">
+    <xsd:annotation>
+      <xsd:documentation>Implementation is in {@link org.soluvas.commons.JavaClassLinked.Trait}.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType abstract="true" name="EClassLinked">
+    <xsd:annotation>
+      <xsd:documentation>Implementation is in {@link org.soluvas.commons.util.EClassLinked.Trait}.</xsd:documentation>
+    </xsd:annotation>
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element name="eClass" type="ecore:EClass">
         <xsd:annotation>
@@ -305,6 +321,7 @@ However, Soluvas can load from other non-bundle resources as well, etc. JCR, Git
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="eClassStatus" type="commons:EClassStatus"/>
     <xsd:attribute name="eClassName" type="xsd:string">
       <xsd:annotation>
         <xsd:documentation>Name of EClass, used for resolving the EClass instance.</xsd:documentation>
@@ -321,5 +338,9 @@ However, Soluvas can load from other non-bundle resources as well, etc. JCR, Git
       </xsd:annotation>
     </xsd:attribute>
   </xsd:complexType>
-  <xsd:element name="EClassLinked" type="commons:EClassLinked"/>
+  <xsd:element name="EClassLinked" type="commons:EClassLinked">
+    <xsd:annotation>
+      <xsd:documentation>Implementation is in {@link org.soluvas.commons.util.EClassLinked.Trait}.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
 </xsd:schema>

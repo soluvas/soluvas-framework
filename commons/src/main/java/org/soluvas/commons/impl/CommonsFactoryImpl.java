@@ -81,8 +81,6 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 			case CommonsPackage.PERSON_INFO: return (EObject)createPersonInfo();
 			case CommonsPackage.PHOTO_ID_CONTAINER: return (EObject)createPhotoIdContainer();
 			case CommonsPackage.NAME_CONTAINER: return (EObject)createNameContainer();
-			case CommonsPackage.JAVA_CLASS_LINKED: return (EObject)createJavaClassLinked();
-			case CommonsPackage.ECLASS_LINKED: return (EObject)createEClassLinked();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -220,26 +218,6 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	public NameContainer createNameContainer() {
 		NameContainerImpl nameContainer = new NameContainerImpl();
 		return nameContainer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <T> JavaClassLinked<T> createJavaClassLinked() {
-		JavaClassLinkedImpl<T> javaClassLinked = new JavaClassLinkedImpl<T>();
-		return javaClassLinked;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClassLinked createEClassLinked() {
-		EClassLinkedImpl eClassLinked = new EClassLinkedImpl();
-		return eClassLinked;
 	}
 
 	/**

@@ -1,6 +1,8 @@
 package org.soluvas.commons;
 
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -13,6 +15,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.osgi.framework.Bundle;
 import org.slf4j.Logger;
@@ -130,8 +133,24 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourceUri.toString(), bundle);
+		final Matcher matcher = Pattern.compile("([^.]+).*").matcher(resourceUri.lastSegment());
+		final String resourceName = matcher.matches() ? matcher.group(1) : resourceUri.lastSegment();
+		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourceName, bundle);
 	}
+	
+//	@Deprecated
+//	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final URL resourceUrl,
+//			@Nonnull final String resourceName, @Nonnull final Bundle bundle) {
+//		super();
+//		Preconditions.checkNotNull(ePackage, "ePackage cannot be null");
+//		Preconditions.checkNotNull(resourceUrl, "resourceUrl cannot be null");
+//		Preconditions.checkNotNull(resourceName, "resourceName cannot be null");
+//		Preconditions.checkNotNull(bundle, "bundle cannot be null");
+//		this.ePackageName = ePackage.getName();
+//		this.ePackageNsUri = ePackage.getNsURI();
+//		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
+//		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourceName, bundle);
+//	}
 	
 	@PreDestroy
 	public void destroy() {
@@ -155,6 +174,8 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		log.debug("Loading XMI from URI: {}", resourceUri);
 		
 		final ResourceSetImpl rset = new ResourceSetImpl();
+		rset.getResourceFactoryRegistry().getExtensionToFactoryMap()
+			.put("ecore", new EcoreResourceFactoryImpl());
 		rset.getResourceFactoryRegistry().getExtensionToFactoryMap()
 			.put("xmi", new XMIResourceFactoryImpl());
 		
