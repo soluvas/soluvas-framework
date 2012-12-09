@@ -1,5 +1,6 @@
 package org.soluvas.commons.tenant;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.HashMap;
@@ -28,7 +29,8 @@ import com.google.common.base.Throwables;
  * inject and uninject.
  * @author ceefour
  */
-public class TenantInjection {
+@SuppressWarnings("serial")
+public class TenantInjection implements Serializable {
 	
 	private static Logger log = LoggerFactory
 			.getLogger(TenantInjection.class);
