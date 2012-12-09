@@ -213,6 +213,7 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -223,12 +224,10 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
+	@Override
 	public String getImageId() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return getPhotoId();
 	}
 
 	/**
@@ -259,6 +258,7 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Gender getGender() {
 		return gender;
 	}
@@ -268,6 +268,7 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGender(Gender newGender) {
 		Gender oldGender = gender;
 		gender = newGender == null ? GENDER_EDEFAULT : newGender;
