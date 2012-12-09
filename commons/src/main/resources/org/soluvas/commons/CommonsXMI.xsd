@@ -322,6 +322,11 @@ However, Soluvas can load from other non-bundle resources as well, etc. JCR, Git
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
     <xsd:attribute name="eClassStatus" type="commons:EClassStatus"/>
+    <xsd:attribute name="ePackageNsPrefix" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Used to resolve agains NS Prefix instead of EPackage name. The key format will be "{ePackage.nsPrefix}:{eClass.name}".</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
     <xsd:attribute name="eClassName" type="xsd:string">
       <xsd:annotation>
         <xsd:documentation>Name of EClass, used for resolving the EClass instance.</xsd:documentation>
@@ -329,7 +334,7 @@ However, Soluvas can load from other non-bundle resources as well, etc. JCR, Git
     </xsd:attribute>
     <xsd:attribute name="ePackageName" type="xsd:string">
       <xsd:annotation>
-        <xsd:documentation>Name of EPackage, used for resolving the EClass instance.</xsd:documentation>
+        <xsd:documentation>Name of EPackage, used for resolving the EClass instance.  The key format will be "{ePackage.name}.{eClass.name}".</xsd:documentation>
       </xsd:annotation>
     </xsd:attribute>
     <xsd:attribute name="eClass" type="xsd:string">

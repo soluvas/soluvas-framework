@@ -229,6 +229,11 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="eClassStatus" eType="#//EClassStatus"
         defaultValueLiteral="unresolved"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ePackageNsPrefix" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Used to resolve agains NS Prefix instead of EPackage name. The key format will be &quot;{ePackage.nsPrefix}:{eClass.name}&quot;."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="eClassName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Name of EClass, used for resolving the EClass instance."/>
@@ -236,7 +241,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ePackageName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Name of EPackage, used for resolving the EClass instance."/>
+        <details key="documentation" value="Name of EPackage, used for resolving the EClass instance.  The key format will be &quot;{ePackage.name}.{eClass.name}&quot;."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

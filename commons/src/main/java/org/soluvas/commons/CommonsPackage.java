@@ -596,13 +596,22 @@ public interface CommonsPackage extends EPackage {
 	int ECLASS_LINKED__ECLASS_STATUS = 1;
 
 	/**
+	 * The feature id for the '<em><b>EPackage Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECLASS_LINKED__EPACKAGE_NS_PREFIX = 2;
+
+	/**
 	 * The feature id for the '<em><b>EClass Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS_LINKED__ECLASS_NAME = 2;
+	int ECLASS_LINKED__ECLASS_NAME = 3;
 
 	/**
 	 * The feature id for the '<em><b>EPackage Name</b></em>' attribute.
@@ -611,7 +620,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS_LINKED__EPACKAGE_NAME = 3;
+	int ECLASS_LINKED__EPACKAGE_NAME = 4;
 
 	/**
 	 * The number of structural features of the '<em>EClass Linked</em>' class.
@@ -620,7 +629,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS_LINKED_FEATURE_COUNT = 4;
+	int ECLASS_LINKED_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.SchemaVersionable <em>Schema Versionable</em>}' class.
@@ -1187,6 +1196,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getEClassLinked_EClassStatus();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.EClassLinked#getEPackageNsPrefix <em>EPackage Ns Prefix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>EPackage Ns Prefix</em>'.
+	 * @see org.soluvas.commons.EClassLinked#getEPackageNsPrefix()
+	 * @see #getEClassLinked()
+	 * @generated
+	 */
+	EAttribute getEClassLinked_EPackageNsPrefix();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.EClassLinked#getEClassName <em>EClass Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1734,6 +1754,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ECLASS_LINKED__ECLASS_STATUS = eINSTANCE.getEClassLinked_EClassStatus();
+
+		/**
+		 * The meta object literal for the '<em><b>EPackage Ns Prefix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECLASS_LINKED__EPACKAGE_NS_PREFIX = eINSTANCE.getEClassLinked_EPackageNsPrefix();
 
 		/**
 		 * The meta object literal for the '<em><b>EClass Name</b></em>' attribute feature.

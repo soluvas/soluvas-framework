@@ -717,8 +717,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getEClassLinked_EClassName() {
+	public EAttribute getEClassLinked_EPackageNsPrefix() {
 		return (EAttribute)eClassLinkedEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -728,8 +727,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getEClassLinked_EPackageName() {
+	public EAttribute getEClassLinked_EClassName() {
 		return (EAttribute)eClassLinkedEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getEClassLinked_EPackageName() {
+		return (EAttribute)eClassLinkedEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -990,6 +999,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		eClassLinkedEClass = createEClass(ECLASS_LINKED);
 		createEReference(eClassLinkedEClass, ECLASS_LINKED__ECLASS);
 		createEAttribute(eClassLinkedEClass, ECLASS_LINKED__ECLASS_STATUS);
+		createEAttribute(eClassLinkedEClass, ECLASS_LINKED__EPACKAGE_NS_PREFIX);
 		createEAttribute(eClassLinkedEClass, ECLASS_LINKED__ECLASS_NAME);
 		createEAttribute(eClassLinkedEClass, ECLASS_LINKED__EPACKAGE_NAME);
 
@@ -1137,6 +1147,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEClass(eClassLinkedEClass, EClassLinked.class, "EClassLinked", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEClassLinked_EClass(), theEcorePackage.getEClass(), null, "eClass", null, 0, 1, EClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEClassLinked_EClassStatus(), this.getEClassStatus(), "eClassStatus", "unresolved", 0, 1, EClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEClassLinked_EPackageNsPrefix(), theEcorePackage.getEString(), "ePackageNsPrefix", null, 0, 1, EClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEClassLinked_EClassName(), theEcorePackage.getEString(), "eClassName", null, 0, 1, EClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEClassLinked_EPackageName(), theEcorePackage.getEString(), "ePackageName", null, 0, 1, EClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1388,6 +1399,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "EClass for this instances of this type."
 		   });		
 		addAnnotation
+		  (getEClassLinked_EPackageNsPrefix(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Used to resolve agains NS Prefix instead of EPackage name. The key format will be \"{ePackage.nsPrefix}:{eClass.name}\"."
+		   });		
+		addAnnotation
 		  (getEClassLinked_EClassName(), 
 		   source, 
 		   new String[] {
@@ -1397,7 +1414,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (getEClassLinked_EPackageName(), 
 		   source, 
 		   new String[] {
-			 "documentation", "Name of EPackage, used for resolving the EClass instance."
+			 "documentation", "Name of EPackage, used for resolving the EClass instance.  The key format will be \"{ePackage.name}.{eClass.name}\"."
 		   });
 	}
 

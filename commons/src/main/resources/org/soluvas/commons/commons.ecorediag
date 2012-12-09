@@ -375,6 +375,10 @@
         <element xmi:type="ecore:EAttribute" href="commons.ecore#//EClassLinked/ePackageName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_gAAiMUDvEeKetZZWJAKPoA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_UVSroEGsEeKiOZ-zBWQrSQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="commons.ecore#//EClassLinked/ePackageNsPrefix"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_UVSroUGsEeKiOZ-zBWQrSQ"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_d4AT4EDvEeKetZZWJAKPoA" type="2001">
         <element xmi:type="ecore:EAttribute" href="commons.ecore#//EClassLinked/eClassName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_d4AT4UDvEeKetZZWJAKPoA"/>
