@@ -39,24 +39,6 @@ public interface CommonsFactory extends EFactory {
 	 */
 	PersonInfo createPersonInfo();
 	
-	/**
-	 * Returns a new object of class '<em>Photo Id Container</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Photo Id Container</em>'.
-	 * @generated
-	 */
-	PhotoIdContainer createPhotoIdContainer();
-
-	/**
-	 * Returns a new object of class '<em>Name Container</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Name Container</em>'.
-	 * @generated
-	 */
-	NameContainer createNameContainer();
-
 	PersonInfo createPersonInfo(String id, String slug, String name, String photoId, Gender gender);
 
 	/**

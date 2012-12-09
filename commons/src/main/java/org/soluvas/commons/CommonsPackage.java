@@ -400,10 +400,10 @@ public interface CommonsPackage extends EPackage {
 	int IMAGEABLE_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.commons.impl.PhotoIdContainerImpl <em>Photo Id Container</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.commons.PhotoIdContainer <em>Photo Id Container</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.commons.impl.PhotoIdContainerImpl
+	 * @see org.soluvas.commons.PhotoIdContainer
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPhotoIdContainer()
 	 * @generated
 	 */
@@ -428,10 +428,10 @@ public interface CommonsPackage extends EPackage {
 	int PHOTO_ID_CONTAINER_FEATURE_COUNT = IMAGEABLE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.commons.impl.NameContainerImpl <em>Name Container</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.commons.NameContainer <em>Name Container</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.commons.impl.NameContainerImpl
+	 * @see org.soluvas.commons.NameContainer
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNameContainer()
 	 * @generated
 	 */
@@ -1691,10 +1691,10 @@ public interface CommonsPackage extends EPackage {
 		EClass IMAGEABLE = eINSTANCE.getImageable();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.commons.impl.PhotoIdContainerImpl <em>Photo Id Container</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.commons.PhotoIdContainer <em>Photo Id Container</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.commons.impl.PhotoIdContainerImpl
+		 * @see org.soluvas.commons.PhotoIdContainer
 		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPhotoIdContainer()
 		 * @generated
 		 */
@@ -1709,10 +1709,10 @@ public interface CommonsPackage extends EPackage {
 		EAttribute PHOTO_ID_CONTAINER__PHOTO_ID = eINSTANCE.getPhotoIdContainer_PhotoId();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.commons.impl.NameContainerImpl <em>Name Container</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.commons.NameContainer <em>Name Container</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.commons.impl.NameContainerImpl
+		 * @see org.soluvas.commons.NameContainer
 		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNameContainer()
 		 * @generated
 		 */

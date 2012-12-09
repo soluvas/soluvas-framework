@@ -121,7 +121,8 @@
       </eAnnotations>
     </eOperations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PhotoIdContainer" eSuperTypes="#//Imageable">
+  <eClassifiers xsi:type="ecore:EClass" name="PhotoIdContainer" abstract="true" interface="true"
+      eSuperTypes="#//Imageable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Contains image ID as photoId attribute and has default implementation for {#getImageId()}."/>
     </eAnnotations>
@@ -131,7 +132,8 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NameContainer" eSuperTypes="#//Nameable">
+  <eClassifiers xsi:type="ecore:EClass" name="NameContainer" abstract="true" interface="true"
+      eSuperTypes="#//Nameable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Contains a name attribute named 'name' and has default implementation for {@link #getName()}."/>
     </eAnnotations>

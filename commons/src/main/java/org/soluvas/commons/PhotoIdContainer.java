@@ -20,7 +20,7 @@ package org.soluvas.commons;
  * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getPhotoIdContainer()
- * @model
+ * @model interface="true" abstract="true"
  * @generated
  */
 public interface PhotoIdContainer extends Imageable {

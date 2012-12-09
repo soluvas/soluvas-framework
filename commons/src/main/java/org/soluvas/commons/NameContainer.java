@@ -20,7 +20,7 @@ package org.soluvas.commons;
  * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getNameContainer()
- * @model
+ * @model interface="true" abstract="true"
  * @generated
  */
 public interface NameContainer extends Nameable {

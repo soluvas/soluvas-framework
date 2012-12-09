@@ -202,7 +202,7 @@ LDAP: uniqueIdentifier</xsd:documentation>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
   </xsd:complexType>
   <xsd:element name="Imageable" type="commons:Imageable"/>
-  <xsd:complexType name="PhotoIdContainer">
+  <xsd:complexType abstract="true" name="PhotoIdContainer">
     <xsd:annotation>
       <xsd:documentation>Contains image ID as photoId attribute and has default implementation for {#getImageId()}.</xsd:documentation>
     </xsd:annotation>
@@ -221,7 +221,7 @@ LDAP: uniqueIdentifier</xsd:documentation>
       <xsd:documentation>Contains image ID as photoId attribute and has default implementation for {#getImageId()}.</xsd:documentation>
     </xsd:annotation>
   </xsd:element>
-  <xsd:complexType name="NameContainer">
+  <xsd:complexType abstract="true" name="NameContainer">
     <xsd:annotation>
       <xsd:documentation>Contains a name attribute named 'name' and has default implementation for {@link #getName()}.</xsd:documentation>
     </xsd:annotation>
