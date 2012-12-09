@@ -356,4 +356,29 @@ However, Soluvas can load from other non-bundle resources as well, etc. JCR, Git
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
   </xsd:complexType>
   <xsd:element name="SchemaVersionable" type="commons:SchemaVersionable"/>
+  <xsd:complexType abstract="true" name="EFactoryLinked">
+    <xsd:annotation>
+      <xsd:documentation>Useful for schema classes, e.g. {@code com.soluvas.story.schema.ActionType}, {@code com.soluvas.story.schema.TargetType}.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="eFactory" type="ecore:EFactory">
+        <xsd:annotation>
+          <xsd:documentation>Useful for schema classes, e.g. {@code com.soluvas.story.schema.ActionType}, {@code com.soluvas.story.schema.TargetType}. Only accessible when resolved.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="eFactory" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Useful for schema classes, e.g. {@code com.soluvas.story.schema.ActionType}, {@code com.soluvas.story.schema.TargetType}. Only accessible when resolved.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="EFactoryLinked" type="commons:EFactoryLinked">
+    <xsd:annotation>
+      <xsd:documentation>Useful for schema classes, e.g. {@code com.soluvas.story.schema.ActionType}, {@code com.soluvas.story.schema.TargetType}.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
 </xsd:schema>

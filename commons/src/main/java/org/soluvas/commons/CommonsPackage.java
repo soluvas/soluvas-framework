@@ -651,6 +651,34 @@ public interface CommonsPackage extends EPackage {
 	int SCHEMA_VERSIONABLE_FEATURE_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.EFactoryLinked <em>EFactory Linked</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.EFactoryLinked
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEFactoryLinked()
+	 * @generated
+	 */
+	int EFACTORY_LINKED = 17;
+
+	/**
+	 * The feature id for the '<em><b>EFactory</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EFACTORY_LINKED__EFACTORY = 0;
+
+	/**
+	 * The number of structural features of the '<em>EFactory Linked</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EFACTORY_LINKED_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -658,7 +686,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 17;
+	int RESOURCE_TYPE = 18;
 
 
 	/**
@@ -669,7 +697,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 18;
+	int GENDER = 19;
 
 
 	/**
@@ -680,7 +708,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 19;
+	int ECLASS_STATUS = 20;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -690,7 +718,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 20;
+	int JAVA_CLASS_STATUS = 21;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -700,7 +728,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 21;
+	int DATE_TIME = 22;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -710,7 +738,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 22;
+	int CURRENCY_UNIT = 23;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -720,7 +748,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 23;
+	int UNIT = 24;
 
 
 	/**
@@ -731,7 +759,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 24;
+	int LIST = 25;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -741,7 +769,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 25;
+	int MAP = 26;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -751,7 +779,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 26;
+	int SET = 27;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -761,7 +789,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 27;
+	int COLLECTION = 28;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -771,7 +799,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 28;
+	int MULTIMAP = 29;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -781,7 +809,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 29;
+	int NAVIGABLE_MAP = 30;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -791,7 +819,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 30;
+	int QUEUE = 31;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -801,7 +829,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 31;
+	int MULTISET = 32;
 
 
 	/**
@@ -812,7 +840,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 32;
+	int SERIALIZABLE = 33;
 
 
 	/**
@@ -823,7 +851,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 33;
+	int BUNDLE = 34;
 
 
 	/**
@@ -1237,6 +1265,27 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getSchemaVersionable();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.EFactoryLinked <em>EFactory Linked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>EFactory Linked</em>'.
+	 * @see org.soluvas.commons.EFactoryLinked
+	 * @generated
+	 */
+	EClass getEFactoryLinked();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.commons.EFactoryLinked#getEFactory <em>EFactory</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EFactory</em>'.
+	 * @see org.soluvas.commons.EFactoryLinked#getEFactory()
+	 * @see #getEFactoryLinked()
+	 * @generated
+	 */
+	EReference getEFactoryLinked_EFactory();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -1788,6 +1837,24 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SCHEMA_VERSIONABLE = eINSTANCE.getSchemaVersionable();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.EFactoryLinked <em>EFactory Linked</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.EFactoryLinked
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEFactoryLinked()
+		 * @generated
+		 */
+		EClass EFACTORY_LINKED = eINSTANCE.getEFactoryLinked();
+
+		/**
+		 * The meta object literal for the '<em><b>EFactory</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EFACTORY_LINKED__EFACTORY = eINSTANCE.getEFactoryLinked_EFactory();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

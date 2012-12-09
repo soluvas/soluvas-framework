@@ -33,6 +33,7 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.EClassLinked;
 import org.soluvas.commons.EClassStatus;
+import org.soluvas.commons.EFactoryLinked;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
@@ -178,6 +179,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass schemaVersionableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eFactoryLinkedEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -755,6 +763,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEFactoryLinked() {
+		return eFactoryLinkedEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEFactoryLinked_EFactory() {
+		return (EReference)eFactoryLinkedEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -1005,6 +1031,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		schemaVersionableEClass = createEClass(SCHEMA_VERSIONABLE);
 
+		eFactoryLinkedEClass = createEClass(EFACTORY_LINKED);
+		createEReference(eFactoryLinkedEClass, EFACTORY_LINKED__EFACTORY);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -1162,6 +1191,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEClass(schemaVersionableEClass, SchemaVersionable.class, "SchemaVersionable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		addEOperation(schemaVersionableEClass, theEcorePackage.getELong(), "getSchemaVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(eFactoryLinkedEClass, EFactoryLinked.class, "EFactoryLinked", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEFactoryLinked_EFactory(), theEcorePackage.getEFactory(), null, "eFactory", null, 0, 1, EFactoryLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -1415,6 +1447,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Name of EPackage, used for resolving the EClass instance.  The key format will be \"{ePackage.name}.{eClass.name}\"."
+		   });		
+		addAnnotation
+		  (eFactoryLinkedEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Useful for schema classes, e.g. {@code com.soluvas.story.schema.ActionType}, {@code com.soluvas.story.schema.TargetType}."
+		   });		
+		addAnnotation
+		  (getEFactoryLinked_EFactory(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Useful for schema classes, e.g. {@code com.soluvas.story.schema.ActionType}, {@code com.soluvas.story.schema.TargetType}. Only accessible when resolved."
 		   });
 	}
 

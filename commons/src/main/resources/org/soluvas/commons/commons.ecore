@@ -256,4 +256,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="SchemaVersionable" abstract="true" interface="true">
     <eOperations name="getSchemaVersion" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EFactoryLinked" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Useful for schema classes, e.g. {@code com.soluvas.story.schema.ActionType}, {@code com.soluvas.story.schema.TargetType}."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eFactory" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFactory">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Useful for schema classes, e.g. {@code com.soluvas.story.schema.ActionType}, {@code com.soluvas.story.schema.TargetType}. Only accessible when resolved."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
 </ecore:EPackage>
