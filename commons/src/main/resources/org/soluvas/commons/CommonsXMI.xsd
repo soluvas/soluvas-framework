@@ -257,13 +257,21 @@ Used by {#getName()}.</xsd:documentation>
     </xsd:annotation>
   </xsd:element>
   <xsd:complexType abstract="true" name="Describable">
+    <xsd:annotation>
+      <xsd:documentation>Has description.</xsd:documentation>
+    </xsd:annotation>
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element ref="xmi:Extension"/>
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="description" type="xsd:string"/>
   </xsd:complexType>
-  <xsd:element name="Describable" type="commons:Describable"/>
+  <xsd:element name="Describable" type="commons:Describable">
+    <xsd:annotation>
+      <xsd:documentation>Has description.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
   <xsd:complexType abstract="true" name="BundleAware">
     <xsd:annotation>
       <xsd:documentation>BundleAware classes are usually also ResourceAware (since Bundle is a resource).

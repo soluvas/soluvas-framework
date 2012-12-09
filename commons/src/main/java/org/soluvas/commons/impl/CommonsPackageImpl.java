@@ -635,6 +635,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDescribable_Description() {
+		return (EAttribute)describableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getBundleAware() {
 		return bundleAwareEClass;
@@ -1013,6 +1022,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		informerEClass = createEClass(INFORMER);
 
 		describableEClass = createEClass(DESCRIBABLE);
+		createEAttribute(describableEClass, DESCRIBABLE__DESCRIPTION);
 
 		bundleAwareEClass = createEClass(BUNDLE_AWARE);
 		createEAttribute(bundleAwareEClass, BUNDLE_AWARE__BUNDLE);
@@ -1158,6 +1168,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEOperation(op, g1);
 
 		initEClass(describableEClass, Describable.class, "Describable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDescribable_Description(), theEcorePackage.getEString(), "description", null, 0, 1, Describable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bundleAwareEClass, BundleAware.class, "BundleAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBundleAware_Bundle(), this.getBundle(), "bundle", null, 0, 1, BundleAware.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1357,6 +1368,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Transforms to its \"Info\" model."
+		   });		
+		addAnnotation
+		  (describableEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Has description."
 		   });		
 		addAnnotation
 		  (bundleEDataType, 

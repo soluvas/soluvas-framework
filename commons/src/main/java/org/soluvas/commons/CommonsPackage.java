@@ -485,13 +485,22 @@ public interface CommonsPackage extends EPackage {
 	int DESCRIBABLE = 12;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIBABLE__DESCRIPTION = 0;
+
+	/**
 	 * The number of structural features of the '<em>Describable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIBABLE_FEATURE_COUNT = 0;
+	int DESCRIBABLE_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.BundleAware <em>Bundle Aware</em>}' class.
@@ -1128,6 +1137,17 @@ public interface CommonsPackage extends EPackage {
 	EClass getDescribable();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Describable#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.soluvas.commons.Describable#getDescription()
+	 * @see #getDescribable()
+	 * @generated
+	 */
+	EAttribute getDescribable_Description();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.BundleAware <em>Bundle Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1725,6 +1745,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DESCRIBABLE = eINSTANCE.getDescribable();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DESCRIBABLE__DESCRIPTION = eINSTANCE.getDescribable_Description();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.BundleAware <em>Bundle Aware</em>}' class.

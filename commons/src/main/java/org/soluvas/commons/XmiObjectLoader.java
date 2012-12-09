@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,7 +55,8 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s using class %s",
 				resourcePath, loaderClass.getName());
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourcePath, null);
+		final Bundle bundle = FrameworkUtil.getBundle(loaderClass);
+		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourcePath, bundle);
 	}
 
 	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final String fileName) {
@@ -84,7 +86,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s in bundle %s [%s]",
 				fileName, bundle.getSymbolicName(), bundle.getBundleId());
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, fileName, null);
+		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, fileName, bundle);
 	}
 
 	/**

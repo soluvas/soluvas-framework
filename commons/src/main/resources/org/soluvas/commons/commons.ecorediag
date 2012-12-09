@@ -304,6 +304,10 @@
   <children xmi:type="notation:Node" xmi:id="_-7AiMEAoEeK5YpDLTcBChw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_-7CXYEAoEeK5YpDLTcBChw" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_-7C-cEAoEeK5YpDLTcBChw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_psUHAEHBEeKEE6Z_bbqluQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="commons.ecore#//Describable/description"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_psUHAUHBEeKEE6Z_bbqluQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_-7C-cUAoEeK5YpDLTcBChw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_-7C-ckAoEeK5YpDLTcBChw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_-7C-c0AoEeK5YpDLTcBChw"/>
