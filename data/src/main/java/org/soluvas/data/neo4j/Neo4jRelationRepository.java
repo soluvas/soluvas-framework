@@ -33,6 +33,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSortedMap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Multimap;
 
 /**
@@ -298,7 +299,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 		final Map<String, Object> params = paramsBuilder.build();
 		
 		final ExecutionResult totalResult = executionEngine.execute(totalQuery, params);
-		long total = totalResult.<Long>columnAs("total").next();
+		final long total = Iterators.getNext(totalResult.<Long>columnAs("total"), 0L);
 		
 		final ExecutionResult rows = executionEngine.execute(query, params);
 		
@@ -334,7 +335,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 		final Map<String, Object> params = paramsBuilder.build();
 		
 		final ExecutionResult totalResult = executionEngine.execute(totalQuery, params);
-		long total = totalResult.<Long>columnAs("total").next();
+		final long total = Iterators.getNext(totalResult.<Long>columnAs("total"), 0L);
 		
 		if (total > 0) {
 			final String leftQuery = "START left = node:" + leftIdxName + "(_rowId={leftId}) " +
@@ -396,7 +397,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 		final Map<String, Object> params = paramsBuilder.build();
 		
 		final ExecutionResult totalResult = executionEngine.execute(totalQuery, params);
-		long total = totalResult.<Long>columnAs("total").next();
+		final long total = Iterators.getNext(totalResult.<Long>columnAs("total"), 0L);
 		
 		final ExecutionResult rows = executionEngine.execute(query, params);
 		final List<Node> matchingLeftNodes = ImmutableList.copyOf(rows.<Node>columnAs("left"));
@@ -427,7 +428,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 		final Map<String, Object> params = paramsBuilder.build();
 		
 		final ExecutionResult totalResult = executionEngine.execute(totalQuery, params);
-		long total = totalResult.<Long>columnAs("total").next();
+		final long total = Iterators.getNext(totalResult.<Long>columnAs("total"), 0L);
 		
 		if (total > 0) {
 			final String rightQuery = "START right = node:" + rightIdxName + "(_rowId={rightId}) " +
