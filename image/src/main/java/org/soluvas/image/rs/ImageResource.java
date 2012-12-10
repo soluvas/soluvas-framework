@@ -58,7 +58,7 @@ public class ImageResource {
 				}
 			});
 			log.trace("Got {} image repositories for {}: {}", imageRepos.size(), tenant, imageRepos);
-			URL stgUrl = ImageResource.class.getResource("imageConfigs.stg");
+			URL stgUrl = ImageResource.class.getResource("imageConfigs.js.stg");
 			STGroupFile stg = new STGroupFile(stgUrl, "UTF-8", '~', '~');
 			ST configsSt = stg.getInstanceOf("imageConfigs");
 			configsSt.add("imageRepos", imageRepos);

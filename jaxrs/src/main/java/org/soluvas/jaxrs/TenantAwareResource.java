@@ -60,10 +60,12 @@ import com.google.common.base.Supplier;
  * </service>
  * }</pre>
  * 
- * @todo Inject dependencies using real objects, and use the {@link #destroy()} lifecycle to uninject.
+ * @deprecated Not working very well, due to unavailable dependencies not waited at start.
+ * 		Please use constructor arguments and Blueprint instead.
  * @see TenantServiceProxy
  * @author rully
  */
+@Deprecated
 public class TenantAwareResource {
 	
 	private static final Logger log = LoggerFactory
