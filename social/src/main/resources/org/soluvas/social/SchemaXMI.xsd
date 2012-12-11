@@ -22,6 +22,7 @@
         <xsd:attribute name="ePackageName" type="xsd:string"/>
         <xsd:attribute name="eClass" type="xsd:string"/>
         <xsd:attribute name="eFactory" type="xsd:string"/>
+        <xsd:attribute name="nsPrefix" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>

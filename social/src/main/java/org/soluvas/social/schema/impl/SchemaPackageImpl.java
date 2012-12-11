@@ -300,6 +300,8 @@ public class SchemaPackageImpl extends EPackageImpl implements SchemaPackage {
 		targetTypeEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(theCommonsPackage.getEFactoryLinked());
 		targetTypeEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getNsPrefixable());
+		targetTypeEClass.getEGenericSuperTypes().add(g1);
 		socialSchemaCatalogEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 		socialSchemaCatalogEClass.getESuperTypes().add(theCommonsPackage.getBundleAware());
 

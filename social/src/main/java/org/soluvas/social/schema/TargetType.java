@@ -7,6 +7,7 @@ import org.soluvas.commons.EClassLinked;
 import org.soluvas.commons.EFactoryLinked;
 import org.soluvas.commons.JavaClassLinked;
 import org.soluvas.commons.NameContainer;
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.social.Target;
 
@@ -17,10 +18,10 @@ import org.soluvas.social.Target;
  *
  *
  * @see org.soluvas.social.schema.SchemaPackage#getTargetType()
- * @model superTypes="org.soluvas.commons.NameContainer org.soluvas.commons.BundleAware org.soluvas.commons.ResourceAware org.soluvas.commons.JavaClassLinked<org.soluvas.social.schema.Target> org.soluvas.commons.EClassLinked org.soluvas.commons.EFactoryLinked"
+ * @model superTypes="org.soluvas.commons.NameContainer org.soluvas.commons.BundleAware org.soluvas.commons.ResourceAware org.soluvas.commons.JavaClassLinked<org.soluvas.social.schema.Target> org.soluvas.commons.EClassLinked org.soluvas.commons.EFactoryLinked org.soluvas.commons.NsPrefixable"
  * @generated
  */
-public interface TargetType extends NameContainer, BundleAware, ResourceAware, JavaClassLinked<Target>, EClassLinked, EFactoryLinked {
+public interface TargetType extends NameContainer, BundleAware, ResourceAware, JavaClassLinked<Target>, EClassLinked, EFactoryLinked, NsPrefixable {
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -13,6 +13,7 @@ import org.soluvas.commons.EFactoryLinked;
 import org.soluvas.commons.JavaClassLinked;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ResourceAware;
 
 import org.soluvas.social.schema.*;
@@ -83,6 +84,7 @@ public class SchemaSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseJavaClassLinked(targetType);
 				if (result == null) result = caseEClassLinked(targetType);
 				if (result == null) result = caseEFactoryLinked(targetType);
+				if (result == null) result = caseNsPrefixable(targetType);
 				if (result == null) result = caseNameable(targetType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -273,6 +275,21 @@ public class SchemaSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseEFactoryLinked(EFactoryLinked object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ns Prefixable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ns Prefixable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseNsPrefixable(NsPrefixable object) {
 		return null;
 	}
 

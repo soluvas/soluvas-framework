@@ -18,6 +18,7 @@ import org.soluvas.commons.EClassStatus;
 import org.soluvas.commons.EFactoryLinked;
 import org.soluvas.commons.JavaClassLinked;
 import org.soluvas.commons.JavaClassStatus;
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.social.Target;
@@ -47,6 +48,7 @@ import com.google.common.base.Preconditions;
  *   <li>{@link org.soluvas.social.schema.impl.TargetTypeImpl#getEClassName <em>EClass Name</em>}</li>
  *   <li>{@link org.soluvas.social.schema.impl.TargetTypeImpl#getEPackageName <em>EPackage Name</em>}</li>
  *   <li>{@link org.soluvas.social.schema.impl.TargetTypeImpl#getEFactory <em>EFactory</em>}</li>
+ *   <li>{@link org.soluvas.social.schema.impl.TargetTypeImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  * </ul>
  * </p>
  *
@@ -302,6 +304,26 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 	 * @ordered
 	 */
 	protected EFactory eFactory;
+
+	/**
+	 * The default value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NS_PREFIX_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String nsPrefix = NS_PREFIX_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -681,6 +703,27 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getNsPrefix() {
+		return nsPrefix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNsPrefix(String newNsPrefix) {
+		String oldNsPrefix = nsPrefix;
+		nsPrefix = newNsPrefix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.TARGET_TYPE__NS_PREFIX, oldNsPrefix, nsPrefix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public Target create() {
@@ -747,6 +790,8 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 			case SchemaPackage.TARGET_TYPE__EFACTORY:
 				if (resolve) return getEFactory();
 				return basicGetEFactory();
+			case SchemaPackage.TARGET_TYPE__NS_PREFIX:
+				return getNsPrefix();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -802,6 +847,9 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 			case SchemaPackage.TARGET_TYPE__EFACTORY:
 				setEFactory((EFactory)newValue);
 				return;
+			case SchemaPackage.TARGET_TYPE__NS_PREFIX:
+				setNsPrefix((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -856,6 +904,9 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 			case SchemaPackage.TARGET_TYPE__EFACTORY:
 				setEFactory((EFactory)null);
 				return;
+			case SchemaPackage.TARGET_TYPE__NS_PREFIX:
+				setNsPrefix(NS_PREFIX_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -896,6 +947,8 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 				return EPACKAGE_NAME_EDEFAULT == null ? ePackageName != null : !EPACKAGE_NAME_EDEFAULT.equals(ePackageName);
 			case SchemaPackage.TARGET_TYPE__EFACTORY:
 				return eFactory != null;
+			case SchemaPackage.TARGET_TYPE__NS_PREFIX:
+				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -942,6 +995,12 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 		if (baseClass == EFactoryLinked.class) {
 			switch (derivedFeatureID) {
 				case SchemaPackage.TARGET_TYPE__EFACTORY: return CommonsPackage.EFACTORY_LINKED__EFACTORY;
+				default: return -1;
+			}
+		}
+		if (baseClass == NsPrefixable.class) {
+			switch (derivedFeatureID) {
+				case SchemaPackage.TARGET_TYPE__NS_PREFIX: return CommonsPackage.NS_PREFIXABLE__NS_PREFIX;
 				default: return -1;
 			}
 		}
@@ -993,6 +1052,12 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 				default: return -1;
 			}
 		}
+		if (baseClass == NsPrefixable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.NS_PREFIXABLE__NS_PREFIX: return SchemaPackage.TARGET_TYPE__NS_PREFIX;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -1030,6 +1095,8 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 		result.append(eClassName);
 		result.append(", ePackageName: ");
 		result.append(ePackageName);
+		result.append(", nsPrefix: ");
+		result.append(nsPrefix);
 		result.append(')');
 		return result.toString();
 	}

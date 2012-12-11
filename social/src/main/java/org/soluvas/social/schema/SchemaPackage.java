@@ -195,13 +195,22 @@ public interface SchemaPackage extends EPackage {
 	int TARGET_TYPE__EFACTORY = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 12;
 
 	/**
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_TYPE__NS_PREFIX = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 13;
+
+	/**
 	 * The number of structural features of the '<em>Target Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_TYPE_FEATURE_COUNT = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 13;
+	int TARGET_TYPE_FEATURE_COUNT = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 14;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.social.schema.impl.SocialSchemaCatalogImpl <em>Social Schema Catalog</em>}' class.

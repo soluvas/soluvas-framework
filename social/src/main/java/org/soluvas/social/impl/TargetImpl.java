@@ -286,7 +286,7 @@ public abstract class TargetImpl extends EObjectImpl implements Target {
 		if (newTargetType != null) {
 			setTypeName(newTargetType.getName());
 			if (newTargetType.getEClass() != null)
-				setNsPrefix(newTargetType.getEClass().getEPackage().getNsPrefix());
+				setNsPrefix(newTargetType.getNsPrefix());
 		}
 	}
 

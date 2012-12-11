@@ -15,6 +15,7 @@ import org.soluvas.commons.EFactoryLinked;
 import org.soluvas.commons.JavaClassLinked;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ResourceAware;
 
 import org.soluvas.social.schema.*;
@@ -118,6 +119,10 @@ public class SchemaAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseEFactoryLinked(EFactoryLinked object) {
 				return createEFactoryLinkedAdapter();
+			}
+			@Override
+			public Adapter caseNsPrefixable(NsPrefixable object) {
+				return createNsPrefixableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -290,6 +295,20 @@ public class SchemaAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEFactoryLinkedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.NsPrefixable <em>Ns Prefixable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.NsPrefixable
+	 * @generated
+	 */
+	public Adapter createNsPrefixableAdapter() {
 		return null;
 	}
 

@@ -17,6 +17,7 @@
     </eGenericSuperTypes>
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//EClassLinked"/>
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//EFactoryLinked"/>
+    <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NsPrefixable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SocialSchemaCatalog" eSuperTypes="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ResourceAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

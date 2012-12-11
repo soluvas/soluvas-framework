@@ -197,9 +197,12 @@ public class SocialSchemaCatalogXmiTracker implements BundleTrackerCustomizer<Li
 						bundle);
 				final SocialSchemaCatalog storySchemaCatalog = loader.get();
 				
+				final String catalogNsPrefix = ePackage.getNsPrefix().replaceAll("-social", "");
+				
 				for (final TargetType targetType : ImmutableList.copyOf(storySchemaCatalog.getTargetTypes())) {
 					log.debug("Adding TargetType {} from {}", targetType.getName(), url);
 					final TargetType added = EcoreUtil.copy(targetType);
+					added.setNsPrefix(catalogNsPrefix);
 					added.setEFactory(eFactory);
 					added.setEPackageNsPrefix(ePackage.getNsPrefix());
 					final String eClassName = CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, added.getName());
