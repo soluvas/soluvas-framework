@@ -61,18 +61,22 @@ public class LdapUtils {
 		Preconditions.checkNotNull(bindDn, "Bind DN must not be empty");
 		
 		log.debug("Creating LDAP server configuration to {} as {}", ldapUri, bindDn);
-		LdapUrl ldapUrlObj;
+		final LdapUrl ldapUrlObj;
 		try {
 			ldapUrlObj = new LdapUrl(ldapUri);
 		} catch (LdapURLEncodingException e) {
 			throw new RuntimeException("Cannot parse LDAP URI " + ldapUri, e);
 		}
 
-		LdapConnectionConfig ldapConfig = new LdapConnectionConfig();
+		final LdapConnectionConfig ldapConfig = new LdapConnectionConfig();
 		ldapConfig.setLdapHost(ldapUrlObj.getHost());
-		ldapConfig.setLdapPort(ldapUrlObj.getPort());
-		ldapConfig.setUseSsl(LdapUrl.LDAPS_SCHEME.equalsIgnoreCase(ldapUrlObj.getScheme()));
-		X509TrustManager alwaysTrustManager = new X509TrustManager() {
+		final boolean secured = LdapUrl.LDAPS_SCHEME.equalsIgnoreCase(ldapUrlObj.getScheme());
+		ldapConfig.setUseSsl(secured);
+		if (ldapUrlObj.getPort() > 0)
+			ldapConfig.setLdapPort(ldapUrlObj.getPort());
+		else
+			ldapConfig.setLdapPort(secured ? ldapConfig.getDefaultLdapsPort() : ldapConfig.getDefaultLdapPort());
+		final X509TrustManager alwaysTrustManager = new X509TrustManager() {
 			@Override public X509Certificate[] getAcceptedIssuers() {
 				return null;
 			}
