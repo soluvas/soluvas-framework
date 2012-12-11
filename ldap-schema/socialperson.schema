@@ -1,6 +1,6 @@
 attributetype ( 2.25.31030703689307962575270284666844839901.1 
 	NAME 'photoId' 
-	DESC 'Application-specific identifier of the person's photo.' 
+	DESC 'Application-specific identifier of the photo of the person.' 
 	EQUALITY caseExactMatch 
 	ORDERING caseExactOrderingMatch 
 	SUBSTR caseExactSubstringsMatch 
@@ -126,7 +126,7 @@ objectclass ( 2.25.31030703689307962575270284666844839901.4
 objectclass ( 2.25.31030703689307962575270284666844839901.9 
 	NAME 'address' 
 	STRUCTURAL 
-	MAY ( c $ cn $ description $ facsimileTelephoneNumber $ l $ mail $ mobile $ postalCode $ st $ street $ telephoneNumber $ uniqueIdentifier $ o ) 
+	MAY ( cn $ description $ c $ facsimileTelephoneNumber $ l $ mail $ mobile $ uniqueIdentifier $ postalCode $ street $ st $ telephoneNumber $ o ) 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.10 

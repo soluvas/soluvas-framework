@@ -60,7 +60,7 @@ public class LdapUtils {
 		Preconditions.checkNotNull(ldapUri, "LDAP URI must not be empty");
 		Preconditions.checkNotNull(bindDn, "Bind DN must not be empty");
 		
-		log.debug("Creating LDAP server configuration to {} as {}", new Object[] { ldapUri, bindDn });
+		log.debug("Creating LDAP server configuration to {} as {}", ldapUri, bindDn);
 		LdapUrl ldapUrlObj;
 		try {
 			ldapUrlObj = new LdapUrl(ldapUri);
