@@ -1,0 +1,37 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0
+        http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0">
+
+	<reference id="commonsPackage" interface="org.soluvas.commons.CommonsPackage" />
+	<bean class="org.soluvas.commons.EPackageRegistration" init-method="init" destroy-method="destroy"
+		depends-on="commonsPackage">
+		<argument ref="blueprintBundleContext"/>
+		<argument>
+			<list value-type="java.lang.Class">
+				<value>org.soluvas.social.schema.SchemaPackage</value>
+				<value>org.soluvas.social.SocialPackage</value>
+				<value>org.soluvas.social.builtin.BuiltinPackage</value>
+			</list>
+		</argument>
+	</bean>
+	
+	<reference id="globalEventBus" interface="com.google.common.eventbus.EventBus"
+		filter="(tenantId=\*)" ext:proxy-method="classes" />
+
+	<bean id="socialSchemaFactory" class="org.soluvas.social.schema.impl.SchemaFactoryImpl" factory-method="getInstance" />
+	<bean id="socialSchemaCatalog" factory-ref="socialSchemaFactory" factory-method="createSocialSchemaCatalog" />
+	<service ref="socialSchemaCatalog" auto-export="interfaces" />
+
+	<bean id="socialSchemaCatalogXmiTracker" class="org.soluvas.social.util.SocialSchemaCatalogXmiTracker">
+		<argument ref="socialSchemaCatalog" />
+		<argument ref="globalEventBus" />
+	</bean>
+	<bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close">
+		<argument ref="blueprintBundleContext" />
+		<argument value="32" />
+		<argument ref="socialSchemaCatalogXmiTracker" />
+	</bean>	
+
+</blueprint>

@@ -190,7 +190,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 			log.info("Loaded {} from {}", obj, resourceUri);
 		} catch (Exception e) {
 			log.error("Cannot load " + resourceUri + " using package " + ePackage, e);
-			throw new RuntimeException("Cannot load " + resourceUri + " using package " + ePackage, e);
+			throw new CommonsException("Cannot load " + resourceUri + " using package " + ePackage, e);
 		}
 		
 		// Augment resource information

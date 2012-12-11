@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:commons="http://www.soluvas.org/schema/commons/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:social-schema="http://www.soluvas.org/schema/social.schema/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/social.schema/1.0">
+  <xsd:import namespace="http://www.omg.org/XMI" schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/XMI.xsd"/>
+  <xsd:import namespace="http://www.eclipse.org/emf/2002/Ecore" schemaLocation="ecore.xsd"/>
+  <xsd:import namespace="http://www.soluvas.org/schema/commons/1.0" schemaLocation="commons.xsd"/>
+  <xsd:complexType name="TargetType">
+    <xsd:complexContent>
+      <xsd:extension base="commons:NameContainer">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="eClass" type="ecore:EClass"/>
+          <xsd:element name="eFactory" type="ecore:EFactory"/>
+        </xsd:choice>
+        <xsd:attribute name="resourceType" type="commons:ResourceType"/>
+        <xsd:attribute name="resourceUri" type="xsd:string"/>
+        <xsd:attribute name="resourceName" type="xsd:string"/>
+        <xsd:attribute name="javaClassName" type="xsd:string"/>
+        <xsd:attribute name="javaClass" type="xsd:string"/>
+        <xsd:attribute name="javaClassStatus" type="commons:JavaClassStatus"/>
+        <xsd:attribute name="eClassStatus" type="commons:EClassStatus"/>
+        <xsd:attribute name="ePackageNsPrefix" type="xsd:string"/>
+        <xsd:attribute name="eClassName" type="xsd:string"/>
+        <xsd:attribute name="ePackageName" type="xsd:string"/>
+        <xsd:attribute name="eClass" type="xsd:string"/>
+        <xsd:attribute name="eFactory" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="TargetType" type="social-schema:TargetType"/>
+  <xsd:complexType name="SocialSchemaCatalog">
+    <xsd:annotation>
+      <xsd:documentation>The loader will load two files for each catalog:
+
+1. &lt;catalogName&gt;.StorySchemaCatalog.xmi, declaring the action/target/aggregation/story types, but not the structure.
+2. &lt;catalogName&gt;.ecore. This defines the structure of the types.
+
+The loader will resolve eClass names mentioned in the StorySchemaCatalog inside the related ecore file.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="commons:ResourceAware">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="targetTypes" type="social-schema:TargetType"/>
+        </xsd:choice>
+        <xsd:attribute name="nsPrefix" type="xsd:string" use="required">
+          <xsd:annotation>
+            <xsd:documentation>Used to resolve a TargetType subject types inside ActionType.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="SocialSchemaCatalog" type="social-schema:SocialSchemaCatalog">
+    <xsd:annotation>
+      <xsd:documentation>The loader will load two files for each catalog:
+
+1. &lt;catalogName&gt;.StorySchemaCatalog.xmi, declaring the action/target/aggregation/story types, but not the structure.
+2. &lt;catalogName&gt;.ecore. This defines the structure of the types.
+
+The loader will resolve eClass names mentioned in the StorySchemaCatalog inside the related ecore file.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="TargetTypeAdded">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="targetTypes" type="social-schema:TargetType"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="targetTypes" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="TargetTypeAdded" type="social-schema:TargetTypeAdded"/>
+  <xsd:complexType name="TargetTypeRemoved">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="targetTypes" type="social-schema:TargetType"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="targetTypes" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="TargetTypeRemoved" type="social-schema:TargetTypeRemoved"/>
+</xsd:schema>

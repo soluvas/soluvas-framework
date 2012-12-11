@@ -688,6 +688,34 @@ public interface CommonsPackage extends EPackage {
 	int EFACTORY_LINKED_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.NsPrefixable <em>Ns Prefixable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.NsPrefixable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNsPrefixable()
+	 * @generated
+	 */
+	int NS_PREFIXABLE = 18;
+
+	/**
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NS_PREFIXABLE__NS_PREFIX = 0;
+
+	/**
+	 * The number of structural features of the '<em>Ns Prefixable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NS_PREFIXABLE_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -695,7 +723,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 18;
+	int RESOURCE_TYPE = 19;
 
 
 	/**
@@ -706,7 +734,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 19;
+	int GENDER = 20;
 
 
 	/**
@@ -717,7 +745,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 20;
+	int ECLASS_STATUS = 21;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -727,7 +755,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 21;
+	int JAVA_CLASS_STATUS = 22;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -737,7 +765,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 22;
+	int DATE_TIME = 23;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -747,7 +775,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 23;
+	int CURRENCY_UNIT = 24;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -757,7 +785,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 24;
+	int UNIT = 25;
 
 
 	/**
@@ -768,7 +796,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 25;
+	int LIST = 26;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -778,7 +806,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 26;
+	int MAP = 27;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -788,7 +816,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 27;
+	int SET = 28;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -798,7 +826,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 28;
+	int COLLECTION = 29;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -808,7 +836,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 29;
+	int MULTIMAP = 30;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -818,7 +846,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 30;
+	int NAVIGABLE_MAP = 31;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -828,7 +856,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 31;
+	int QUEUE = 32;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -838,7 +866,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 32;
+	int MULTISET = 33;
 
 
 	/**
@@ -849,7 +877,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 33;
+	int SERIALIZABLE = 34;
 
 
 	/**
@@ -860,7 +888,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 34;
+	int BUNDLE = 35;
 
 
 	/**
@@ -1306,6 +1334,27 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEFactoryLinked_EFactory();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.NsPrefixable <em>Ns Prefixable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Ns Prefixable</em>'.
+	 * @see org.soluvas.commons.NsPrefixable
+	 * @generated
+	 */
+	EClass getNsPrefixable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.NsPrefixable#getNsPrefix <em>Ns Prefix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ns Prefix</em>'.
+	 * @see org.soluvas.commons.NsPrefixable#getNsPrefix()
+	 * @see #getNsPrefixable()
+	 * @generated
+	 */
+	EAttribute getNsPrefixable_NsPrefix();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -1883,6 +1932,24 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EFACTORY_LINKED__EFACTORY = eINSTANCE.getEFactoryLinked_EFactory();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.NsPrefixable <em>Ns Prefixable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.NsPrefixable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNsPrefixable()
+		 * @generated
+		 */
+		EClass NS_PREFIXABLE = eINSTANCE.getNsPrefixable();
+
+		/**
+		 * The meta object literal for the '<em><b>Ns Prefix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NS_PREFIXABLE__NS_PREFIX = eINSTANCE.getNsPrefixable_NsPrefix();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

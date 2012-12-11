@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:builtin-social="http://www.soluvas.org/schema/social.builtin/1.0" xmlns:commons="http://www.soluvas.org/schema/commons/1.0" xmlns:social="http://www.soluvas.org/schema/social/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/social.builtin/1.0">
+  <xsd:annotation>
+    <xsd:documentation>Can comment on a Target, or even another activity.</xsd:documentation>
+  </xsd:annotation>
+  <xsd:import namespace="http://www.soluvas.org/schema/commons/1.0" schemaLocation="commons.xsd"/>
+  <xsd:import namespace="http://www.soluvas.org/schema/social/1.0" schemaLocation="social.xsd"/>
+  <xsd:complexType name="Person">
+    <xsd:annotation>
+      <xsd:documentation>Internal Person profile.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="social:Target">
+        <xsd:attribute name="id" type="xsd:string" use="required"/>
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+        <xsd:attribute name="photoId" type="xsd:string"/>
+        <xsd:attribute name="slug" type="xsd:string" use="required"/>
+        <xsd:attribute name="firstName" type="xsd:string"/>
+        <xsd:attribute name="lastName" type="xsd:string"/>
+        <xsd:attribute name="username" type="xsd:string"/>
+        <xsd:attribute name="gender" type="commons:Gender"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Person" type="builtin-social:Person">
+    <xsd:annotation>
+      <xsd:documentation>Internal Person profile.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="Article">
+    <xsd:complexContent>
+      <xsd:extension base="social:Target"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Article" type="builtin-social:Article"/>
+  <xsd:complexType name="Blog">
+    <xsd:complexContent>
+      <xsd:extension base="social:Target"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Blog" type="builtin-social:Blog"/>
+  <xsd:complexType name="Book">
+    <xsd:complexContent>
+      <xsd:extension base="social:Target"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Book" type="builtin-social:Book"/>
+  <xsd:complexType name="ExternalProfile">
+    <xsd:annotation>
+      <xsd:documentation>name = Profile Name.
+
+    Getting Started
+    Core Concepts
+    Advanced Topics
+    Technical Guides
+        Login
+        Open Graph
+        FQL
+        Mobile App Install Ads
+        Samples &amp; How Tos
+    API Reference
+    SDK Reference
+
+    Getting Started
+        Open Graph Insights
+        Open Graph Tutorial
+        Open Graph Video Tutorials
+    Actions
+        How-To: Built-In Actions
+        How-To: Built-In Like
+        How-To: Define an Action Type
+        How-To: Publish Watch Actions
+        How-To: Publish an Action
+        Introduction to the Built-In Watch Action
+    Objects
+        How-To: Complex Object Types
+        How-To: Custom Object Properties
+        How-To: Defining an Object
+        How-To: Defining an Object (Using the Online Tool)
+        How-To: Simple Object Types
+        How-To: Using Built-In Objects
+    Aggregations
+        How-To: Defining an Aggregation
+        How-To: Using Templates to Build Aggregations
+    Advanced
+        How To: Customize Per-Post Privacy
+        How-To: Action Links
+        How-To: Explicit Sharing
+        How-To: Follows (on Open Graph)
+        How-To: Mention Tagging
+        How-To: Open Graph Internationalization
+        How-To: Parse Parameters from Open Graph Links
+        How-To: Posting Past Actions
+        How-To: Publishing With an App Token
+        How-To: Title-less Objects
+        How-To: User Restrictions
+        Introduction to Tagging People &amp; Places
+    Authentication
+        How-To: Open Graph Auth Referrals
+        How-To: Open Graph Authentication Dialogs and Permissions
+    Submission Process
+        Open Graph Guidelines
+        Understanding the Open Graph Submission Process
+    Best Practices
+        Best Practices: Creating Open Graph Stories
+        Best Practices: Creating Timeline Aggregations
+        Best Practices: Creating Usage Instructions
+        Best Practices: Grow Your App With Open Graph
+        Best Practices: Working With Custom Properties
+        Best Practices: Working With Multiple Objects
+        Tips &amp; Tricks for Using Open Graph
+
+How-To: Using Built-In Objects
+Technical Guides › Open Graph › How-To: Using Built-In Objects
+
+Facebook has defined a set of common object types for use in your apps. Certain Built-in Object Types are designed to work with Built-in Action Types. However, you can also define Custom Action Types to act on any Built-in Object Type. In order to use Built-in Objects in your app, you will need to register them in the App Dashboard. The following Built-in Object Types are available:
+
+    Article
+    Blog
+    Book
+    Profile (External)
+    Movie
+    TV Episode
+    TV Show
+    Video
+    Website
+
+Built-in Object Types are defined with object properties, represented as Open Graph meta tags with Simple Types. In addition, we have created a set of predefined groups of meta tags that can be used as a property of any Open Graph object, called Complex Types.
+
+Article
+Property Name	Description	Type
+Title	Article Name	String
+Description	Description of Article	String
+Image	Array of images.
+The images must be at least 50px by 50px (though minimum 200px by 200px is preferred) and have a maximum aspect ratio of 3:1. We support PNG, JPEG and GIF formats.	Image[]
+URL	Open Graph URL for the article	URL
+Site Name	Human-readable name of site hosting the article	String
+Published Time	Time when article was published	DateTime
+Modified Time	Time when article was last updated	DateTime
+Expiration Time 	Time when the article should expire.
+
+The expiration time is used as a signal to determine when stories are promoted and for how long. Stories will be naturally expired. 	DateTime
+Author	Array of authors of the article	Profile[]
+Section	Section this article belongs to
+(e.g. Sports, Lifestyle)	String
+Tag	Key words for the article	String[]
+Example
+
+&lt;html&gt;
+    &lt;head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
+                  article: http://ogp.me/ns/article#"&gt;
+     &lt;meta property="fb:app_id"               content="YOUR_APP_ID"&gt; 
+     &lt;meta property="og:type"                 content="article"&gt; 
+     &lt;meta property="og:url"                  content="URL of this object"&gt;
+     &lt;meta property="og:site_name"            content="Name of site hosting article"&gt;
+     &lt;meta property="og:image"                content="URL to an image"&gt;
+     &lt;meta property="og:title"                content="Name of article"&gt;
+     &lt;meta property="og:description"          content="Description of object"&gt; 
+     &lt;meta property="article:published_time"  content="DateTime"&gt; 
+     &lt;meta property="article:modified_time"   content="DateTime"&gt; 
+     &lt;meta property="article:expiration_time" content="DateTime"&gt;
+     &lt;meta property="article:author"          content="URL to Author object"&gt;
+     &lt;meta property="article:section"         content="Section of article"&gt;
+     &lt;meta property="article:tag"             content="Keyword"&gt;
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- main article body --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+Example OG markup of http://www.stanforddaily.com/2011/01/24/card-trounces-trojans/
+
+&lt;html&gt;
+    &lt;head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
+                  article: http://ogp.me/ns/article#"&gt;
+     &lt;meta property="fb:app_id"               content="YOUR_APP_ID"&gt; 
+     &lt;meta property="og:type"                 content="article"&gt; 
+     &lt;meta property="og:url"                  content="http://www.stanforddaily.com/2011/01/24/card-trounces-trojans/"&gt;
+     &lt;meta property="og:site_name"            content="The Stanford Daily"/&gt;
+     &lt;meta property="og:image"                content="http://www.stanforddaily.com/wp-content/uploads/2011/01/SPO.012411.wbb_.jpg"&gt;
+     &lt;meta property="og:title"                content="W. Basketball: Trojans trounced"&gt;
+     &lt;meta property="og:description"          content="It might be a little early to give Stanford the national trophy, but that didn't stop USC head coach Michael Cooper from making a firm prediction following his team's 95-51 loss to No. 4 Stanford women's basketball on Saturday afternoon."&gt; 
+     &lt;meta property="article:published_time"  content="2010-01-24"&gt;
+     &lt;meta property="article:expiration_time" content="2010-01-26"&gt;
+     &lt;meta property="article:author"          content="http://www.stanforddaily.com/author/ivynguyen/"&gt;
+     &lt;meta property="article:section"         content="Sports"&gt;
+     &lt;meta property="article:tag"             content="Stanford women's basketball"&gt;
+     &lt;meta property="article:tag"             content="USC"&gt;
+     &lt;meta property="article:tag"             content="Jeanette Pohlen"&gt;
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;!--main article body --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+Blog
+Property Name	Description	Type
+Title	Blog Name	String
+Description	Description of Blog	String
+Image	Array of images	Image[]
+URL	Open Graph URL for the blog	URL
+Example
+
+&lt;html&gt;
+    &lt;head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
+                  blog: http://ogp.me/ns/blog#"&gt;
+     &lt;meta property="fb:app_id"               content="YOUR_APP_ID"&gt; 
+     &lt;meta property="og:type"                 content="blog"&gt; 
+     &lt;meta property="og:url"                  content="URL of this object"&gt; 
+     &lt;meta property="og:image"                content="URL to an image"&gt;
+     &lt;meta property="og:title"                content="Name of blog"&gt;
+     &lt;meta property="og:description"          content="Description of object"&gt; 
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;!--a wonderful blog  --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+Book
+Property Name	Description	Type
+Title	Book Name	String
+Description	Description of Book	String
+Image	Array of images	Image[]
+URL	Open Graph URL for the book	URL
+Author	Array of authors of the book	Profile[]
+ISBN	ISBN of book	String
+Release Date	When the book was published	DateTime
+Tag	Key words for the book	String[]
+Example
+
+&lt;html&gt;
+    &lt;head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
+                  book: http://ogp.me/ns/book#"&gt;
+     &lt;meta property="fb:app_id"               content="YOUR_APP_ID"&gt; 
+     &lt;meta property="og:type"                 content="book"&gt; 
+     &lt;meta property="og:url"                  content="URL of this object"&gt;
+     &lt;meta property="og:image"                content="URL to an image"&gt;
+     &lt;meta property="og:description"          content="Description of content"&gt;
+     &lt;meta property="og:title"                content="Name of book"&gt;
+     &lt;meta property="book:release_date"       content="DateTime"&gt;
+     &lt;meta property="book:author"             content="Who wrote this"&gt;
+     &lt;meta property="book:isbn"               content="ISBN Number"&gt;
+     &lt;meta property="book:tag"                content="keywords"&gt;
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;!--a wonderful book --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+Profile (External)
+Property Name	Description	Type
+Title	Profile Name	String
+Description	Description of Profile Object	String
+Image	Array of images	Image[]
+URL	Open Graph URL of the Profile	URL
+First Name	First Name of Profile	String
+Last Name	Last Name of Profile	String
+Username	Username of Profile, if applicable	String
+Gender	male or female	Enum
+Profile ID	The equivalent Facebook User ID of this user profile, if known. We strongly recommend using the encrypted version of the Facebook User ID, known as the Third-Party FB UID	String
+Example
+
+&lt;html&gt;
+    &lt;head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
+                  profile: http://ogp.me/ns/profile#"&gt;
+     &lt;meta property="fb:app_id"               content="YOUR_APP_ID"&gt; 
+     &lt;meta property="og:type"                 content="profile"&gt; 
+     &lt;meta property="og:url"                  content="URL of this object"&gt;
+     &lt;meta property="og:image"                content="URL to an image"&gt;
+     &lt;meta property="og:title"                content="Name of User"&gt;
+     &lt;meta property="og:description"          content="Description of content"&gt;
+     &lt;meta property="profile:first_name"      content="First Name"&gt;
+     &lt;meta property="profile:last_name"       content="Last Name"&gt;
+     &lt;meta property="profile:username"        content="UserName"&gt;
+     &lt;meta property="profile:gender"          content="male | female"&gt;
+     &lt;meta property="fb:profile_id"           content="THIRD_PARTY_FB_UID"&gt;
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;!--a wonderful user profile --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+Reference: http://developers.facebook.com/docs/technical-guides/opengraph/built-in-objects/#external_profile</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="social:Target">
+        <xsd:attribute name="firstName" type="xsd:string"/>
+        <xsd:attribute name="lastName" type="xsd:string"/>
+        <xsd:attribute name="username" type="xsd:string"/>
+        <xsd:attribute name="gender" type="commons:Gender"/>
+        <xsd:attribute name="profileId" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The equivalent Facebook User ID of this user profile, if known. We strongly recommend using the encrypted version of the Facebook User ID, known as the Third-Party FB UID</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="ExternalProfile" type="builtin-social:ExternalProfile">
+    <xsd:annotation>
+      <xsd:documentation>name = Profile Name.
+
+    Getting Started
+    Core Concepts
+    Advanced Topics
+    Technical Guides
+        Login
+        Open Graph
+        FQL
+        Mobile App Install Ads
+        Samples &amp; How Tos
+    API Reference
+    SDK Reference
+
+    Getting Started
+        Open Graph Insights
+        Open Graph Tutorial
+        Open Graph Video Tutorials
+    Actions
+        How-To: Built-In Actions
+        How-To: Built-In Like
+        How-To: Define an Action Type
+        How-To: Publish Watch Actions
+        How-To: Publish an Action
+        Introduction to the Built-In Watch Action
+    Objects
+        How-To: Complex Object Types
+        How-To: Custom Object Properties
+        How-To: Defining an Object
+        How-To: Defining an Object (Using the Online Tool)
+        How-To: Simple Object Types
+        How-To: Using Built-In Objects
+    Aggregations
+        How-To: Defining an Aggregation
+        How-To: Using Templates to Build Aggregations
+    Advanced
+        How To: Customize Per-Post Privacy
+        How-To: Action Links
+        How-To: Explicit Sharing
+        How-To: Follows (on Open Graph)
+        How-To: Mention Tagging
+        How-To: Open Graph Internationalization
+        How-To: Parse Parameters from Open Graph Links
+        How-To: Posting Past Actions
+        How-To: Publishing With an App Token
+        How-To: Title-less Objects
+        How-To: User Restrictions
+        Introduction to Tagging People &amp; Places
+    Authentication
+        How-To: Open Graph Auth Referrals
+        How-To: Open Graph Authentication Dialogs and Permissions
+    Submission Process
+        Open Graph Guidelines
+        Understanding the Open Graph Submission Process
+    Best Practices
+        Best Practices: Creating Open Graph Stories
+        Best Practices: Creating Timeline Aggregations
+        Best Practices: Creating Usage Instructions
+        Best Practices: Grow Your App With Open Graph
+        Best Practices: Working With Custom Properties
+        Best Practices: Working With Multiple Objects
+        Tips &amp; Tricks for Using Open Graph
+
+How-To: Using Built-In Objects
+Technical Guides › Open Graph › How-To: Using Built-In Objects
+
+Facebook has defined a set of common object types for use in your apps. Certain Built-in Object Types are designed to work with Built-in Action Types. However, you can also define Custom Action Types to act on any Built-in Object Type. In order to use Built-in Objects in your app, you will need to register them in the App Dashboard. The following Built-in Object Types are available:
+
+    Article
+    Blog
+    Book
+    Profile (External)
+    Movie
+    TV Episode
+    TV Show
+    Video
+    Website
+
+Built-in Object Types are defined with object properties, represented as Open Graph meta tags with Simple Types. In addition, we have created a set of predefined groups of meta tags that can be used as a property of any Open Graph object, called Complex Types.
+
+Article
+Property Name	Description	Type
+Title	Article Name	String
+Description	Description of Article	String
+Image	Array of images.
+The images must be at least 50px by 50px (though minimum 200px by 200px is preferred) and have a maximum aspect ratio of 3:1. We support PNG, JPEG and GIF formats.	Image[]
+URL	Open Graph URL for the article	URL
+Site Name	Human-readable name of site hosting the article	String
+Published Time	Time when article was published	DateTime
+Modified Time	Time when article was last updated	DateTime
+Expiration Time 	Time when the article should expire.
+
+The expiration time is used as a signal to determine when stories are promoted and for how long. Stories will be naturally expired. 	DateTime
+Author	Array of authors of the article	Profile[]
+Section	Section this article belongs to
+(e.g. Sports, Lifestyle)	String
+Tag	Key words for the article	String[]
+Example
+
+&lt;html&gt;
+    &lt;head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
+                  article: http://ogp.me/ns/article#"&gt;
+     &lt;meta property="fb:app_id"               content="YOUR_APP_ID"&gt; 
+     &lt;meta property="og:type"                 content="article"&gt; 
+     &lt;meta property="og:url"                  content="URL of this object"&gt;
+     &lt;meta property="og:site_name"            content="Name of site hosting article"&gt;
+     &lt;meta property="og:image"                content="URL to an image"&gt;
+     &lt;meta property="og:title"                content="Name of article"&gt;
+     &lt;meta property="og:description"          content="Description of object"&gt; 
+     &lt;meta property="article:published_time"  content="DateTime"&gt; 
+     &lt;meta property="article:modified_time"   content="DateTime"&gt; 
+     &lt;meta property="article:expiration_time" content="DateTime"&gt;
+     &lt;meta property="article:author"          content="URL to Author object"&gt;
+     &lt;meta property="article:section"         content="Section of article"&gt;
+     &lt;meta property="article:tag"             content="Keyword"&gt;
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- main article body --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+Example OG markup of http://www.stanforddaily.com/2011/01/24/card-trounces-trojans/
+
+&lt;html&gt;
+    &lt;head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
+                  article: http://ogp.me/ns/article#"&gt;
+     &lt;meta property="fb:app_id"               content="YOUR_APP_ID"&gt; 
+     &lt;meta property="og:type"                 content="article"&gt; 
+     &lt;meta property="og:url"                  content="http://www.stanforddaily.com/2011/01/24/card-trounces-trojans/"&gt;
+     &lt;meta property="og:site_name"            content="The Stanford Daily"/&gt;
+     &lt;meta property="og:image"                content="http://www.stanforddaily.com/wp-content/uploads/2011/01/SPO.012411.wbb_.jpg"&gt;
+     &lt;meta property="og:title"                content="W. Basketball: Trojans trounced"&gt;
+     &lt;meta property="og:description"          content="It might be a little early to give Stanford the national trophy, but that didn't stop USC head coach Michael Cooper from making a firm prediction following his team's 95-51 loss to No. 4 Stanford women's basketball on Saturday afternoon."&gt; 
+     &lt;meta property="article:published_time"  content="2010-01-24"&gt;
+     &lt;meta property="article:expiration_time" content="2010-01-26"&gt;
+     &lt;meta property="article:author"          content="http://www.stanforddaily.com/author/ivynguyen/"&gt;
+     &lt;meta property="article:section"         content="Sports"&gt;
+     &lt;meta property="article:tag"             content="Stanford women's basketball"&gt;
+     &lt;meta property="article:tag"             content="USC"&gt;
+     &lt;meta property="article:tag"             content="Jeanette Pohlen"&gt;
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;!--main article body --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+Blog
+Property Name	Description	Type
+Title	Blog Name	String
+Description	Description of Blog	String
+Image	Array of images	Image[]
+URL	Open Graph URL for the blog	URL
+Example
+
+&lt;html&gt;
+    &lt;head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
+                  blog: http://ogp.me/ns/blog#"&gt;
+     &lt;meta property="fb:app_id"               content="YOUR_APP_ID"&gt; 
+     &lt;meta property="og:type"                 content="blog"&gt; 
+     &lt;meta property="og:url"                  content="URL of this object"&gt; 
+     &lt;meta property="og:image"                content="URL to an image"&gt;
+     &lt;meta property="og:title"                content="Name of blog"&gt;
+     &lt;meta property="og:description"          content="Description of object"&gt; 
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;!--a wonderful blog  --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+Book
+Property Name	Description	Type
+Title	Book Name	String
+Description	Description of Book	String
+Image	Array of images	Image[]
+URL	Open Graph URL for the book	URL
+Author	Array of authors of the book	Profile[]
+ISBN	ISBN of book	String
+Release Date	When the book was published	DateTime
+Tag	Key words for the book	String[]
+Example
+
+&lt;html&gt;
+    &lt;head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
+                  book: http://ogp.me/ns/book#"&gt;
+     &lt;meta property="fb:app_id"               content="YOUR_APP_ID"&gt; 
+     &lt;meta property="og:type"                 content="book"&gt; 
+     &lt;meta property="og:url"                  content="URL of this object"&gt;
+     &lt;meta property="og:image"                content="URL to an image"&gt;
+     &lt;meta property="og:description"          content="Description of content"&gt;
+     &lt;meta property="og:title"                content="Name of book"&gt;
+     &lt;meta property="book:release_date"       content="DateTime"&gt;
+     &lt;meta property="book:author"             content="Who wrote this"&gt;
+     &lt;meta property="book:isbn"               content="ISBN Number"&gt;
+     &lt;meta property="book:tag"                content="keywords"&gt;
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;!--a wonderful book --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+Profile (External)
+Property Name	Description	Type
+Title	Profile Name	String
+Description	Description of Profile Object	String
+Image	Array of images	Image[]
+URL	Open Graph URL of the Profile	URL
+First Name	First Name of Profile	String
+Last Name	Last Name of Profile	String
+Username	Username of Profile, if applicable	String
+Gender	male or female	Enum
+Profile ID	The equivalent Facebook User ID of this user profile, if known. We strongly recommend using the encrypted version of the Facebook User ID, known as the Third-Party FB UID	String
+Example
+
+&lt;html&gt;
+    &lt;head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
+                  profile: http://ogp.me/ns/profile#"&gt;
+     &lt;meta property="fb:app_id"               content="YOUR_APP_ID"&gt; 
+     &lt;meta property="og:type"                 content="profile"&gt; 
+     &lt;meta property="og:url"                  content="URL of this object"&gt;
+     &lt;meta property="og:image"                content="URL to an image"&gt;
+     &lt;meta property="og:title"                content="Name of User"&gt;
+     &lt;meta property="og:description"          content="Description of content"&gt;
+     &lt;meta property="profile:first_name"      content="First Name"&gt;
+     &lt;meta property="profile:last_name"       content="Last Name"&gt;
+     &lt;meta property="profile:username"        content="UserName"&gt;
+     &lt;meta property="profile:gender"          content="male | female"&gt;
+     &lt;meta property="fb:profile_id"           content="THIRD_PARTY_FB_UID"&gt;
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;!--a wonderful user profile --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+Reference: http://developers.facebook.com/docs/technical-guides/opengraph/built-in-objects/#external_profile</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="Movie">
+    <xsd:complexContent>
+      <xsd:extension base="social:Target"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Movie" type="builtin-social:Movie"/>
+  <xsd:complexType name="TvEpisode">
+    <xsd:complexContent>
+      <xsd:extension base="social:Target"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="TvEpisode" type="builtin-social:TvEpisode"/>
+  <xsd:complexType name="TvShow">
+    <xsd:complexContent>
+      <xsd:extension base="social:Target"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="TvShow" type="builtin-social:TvShow"/>
+  <xsd:complexType name="Video">
+    <xsd:complexContent>
+      <xsd:extension base="social:Target"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Video" type="builtin-social:Video"/>
+  <xsd:complexType name="Website">
+    <xsd:complexContent>
+      <xsd:extension base="social:Target"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Website" type="builtin-social:Website"/>
+  <xsd:complexType name="Activity">
+    <xsd:annotation>
+      <xsd:documentation>Another action.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="social:Target"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Activity" type="builtin-social:Activity">
+    <xsd:annotation>
+      <xsd:documentation>Another action.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

@@ -70,7 +70,7 @@ public class EmfUtils {
 				try {
 					current.eSet(attr, attrValue);
 				} catch (Exception e) {
-					throw new RuntimeException(String.format("Cannot override %s.%s to %s", 
+					throw new CommonsException(String.format("Cannot override %s.%s to %s", 
 							current.eClass().getName(), attr.getName(), attrValue), e);
 				}
 			}

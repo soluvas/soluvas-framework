@@ -12,6 +12,7 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.CommonsException;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -35,11 +36,11 @@ public class TenantUtils {
 		} catch (Exception e) {
 			log.error(String.format("Cannot find service %s for filter %s",
 						clazz.getName(), filter), e);
-			throw new RuntimeException(String.format("Cannot find service %s for filter %s",
+			throw new CommonsException(String.format("Cannot find service %s for filter %s",
 					clazz.getName(), filter), e);
 		}
 		if (refs == null || refs.length <= 0)
-			throw new RuntimeException(String.format("Cannot find service %s for filter %s",
+			throw new CommonsException(String.format("Cannot find service %s for filter %s",
 					clazz, filter));
 		ServiceReference<T> ref = refs[0];
 		S svc = (S) bundleContext.getService(ref);
@@ -89,7 +90,7 @@ public class TenantUtils {
 			serviceRef = foundRefs.iterator().next();
 			return (ServiceReference<S>) serviceRef;
 		} catch (InvalidSyntaxException e) {
-			throw new RuntimeException("Cannot find " + ifaceName + " service for " + tenant + " with filter " + realFilter, e);
+			throw new CommonsException("Cannot find " + ifaceName + " service for " + tenant + " with filter " + realFilter, e);
 		}
 	}
 

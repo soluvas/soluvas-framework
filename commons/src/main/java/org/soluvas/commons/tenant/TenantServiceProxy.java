@@ -12,6 +12,7 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.CommonsException;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
@@ -73,12 +74,12 @@ public class TenantServiceProxy implements InvocationHandler {
 		try {
 			final Collection<ServiceReference<?>> foundRefs = bundleContext.getServiceReferences(clazz, filter);
 			if (foundRefs == null || foundRefs.isEmpty()) {
-				throw new RuntimeException("Cannot invoke " + method + " on " + name + ", " +
+				throw new CommonsException("Cannot invoke " + method + " on " + name + ", " +
 						clazz.getName() + " service with " + filter + " not found");
 			}
 			serviceRef = foundRefs.iterator().next();
 		} catch (InvalidSyntaxException e) {
-			throw new RuntimeException("Cannot invoke " + method + " on " + name + ", invalid " +
+			throw new CommonsException("Cannot invoke " + method + " on " + name + ", invalid " +
 					clazz.getName() + " service with filter " + filter, e);
 		}
 		final Object bean = bundleContext.getService(serviceRef);

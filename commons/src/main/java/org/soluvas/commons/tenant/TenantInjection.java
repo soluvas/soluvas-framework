@@ -18,6 +18,7 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.ReflectionUtils;
 import org.soluvas.commons.inject.Filter;
 import org.soluvas.commons.inject.Namespace;
@@ -91,12 +92,12 @@ public class TenantInjection implements Serializable {
 			try {
 				final Collection<ServiceReference<?>> foundRefs = bundleContext.getServiceReferences(serviceClass, filter);
 				if (foundRefs == null || foundRefs.isEmpty()) {
-					throw new RuntimeException("Cannot inject " + componentId + "#" + field.getName() + ", " +
+					throw new CommonsException("Cannot inject " + componentId + "#" + field.getName() + ", " +
 							serviceClass.getName() + " service with " + filter + " not found");
 				}
 				serviceRef = foundRefs.iterator().next();
 			} catch (InvalidSyntaxException e) {
-				throw new RuntimeException("Cannot inject " + componentId + "#" + field.getName() + ", invalid " +
+				throw new CommonsException("Cannot inject " + componentId + "#" + field.getName() + ", invalid " +
 						serviceClass.getName() + " service with " + filter);
 			}
 			final Object bean = bundleContext.getService(serviceRef);
@@ -107,7 +108,7 @@ public class TenantInjection implements Serializable {
 			} catch (Exception e) {
 				bundleContext.ungetService(serviceRef);
 				serviceRefs.remove(field);
-				throw new RuntimeException("Cannot set field " + componentId + "#" + field.getName() + " using " +
+				throw new CommonsException("Cannot set field " + componentId + "#" + field.getName() + " using " +
 						serviceClass.getName() + " service with " + filter, e);
 			}
 		}

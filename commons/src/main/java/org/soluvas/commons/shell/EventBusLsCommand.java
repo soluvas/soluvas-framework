@@ -24,7 +24,8 @@ public class EventBusLsCommand extends OsgiCommandSupport {
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected Object doExecute() throws Exception {
-		final Collection<ServiceReference<Supplier>> serviceRefs = bundleContext.getServiceReferences(Supplier.class, "(type=eventbus)");
+		final Collection<ServiceReference<Supplier>> serviceRefs = bundleContext.getServiceReferences(
+				Supplier.class, "(type=eventbus)");
 		
 		System.out.println(ansi().render("@|negative_on %3s|%-35s|%-34s|@",
 				"№", "Class", "Bundle" ));

@@ -14,6 +14,7 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.CommonsException;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -158,12 +159,12 @@ public class MultitenantServiceLookup implements ServiceLookup {
 			Collection<ServiceReference<T>> foundRefs = bundleContext
 					.getServiceReferences(iface, realFilter);
 			if (foundRefs == null || foundRefs.isEmpty())
-				throw new RuntimeException("Cannot find " + ifaceName
+				throw new CommonsException("Cannot find " + ifaceName
 						+ " service with filter " + realFilter);
 			serviceRef = foundRefs.iterator().next();
 			return serviceRef;
 		} catch (InvalidSyntaxException e) {
-			throw new RuntimeException("Cannot find " + ifaceName + " service for " + tenant + " with filter " + realFilter, e);
+			throw new CommonsException("Cannot find " + ifaceName + " service for " + tenant + " with filter " + realFilter, e);
 		}
 	}
 
@@ -211,7 +212,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 				return namespaceSet;
 			}
 		} catch (InvalidSyntaxException e) {
-			throw new RuntimeException("Cannot find " + ifaceName + " service for " + tenant + " with filter " + realFilter, e);
+			throw new CommonsException("Cannot find " + ifaceName + " service for " + tenant + " with filter " + realFilter, e);
 		}
 	}
 

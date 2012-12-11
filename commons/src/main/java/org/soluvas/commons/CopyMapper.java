@@ -38,7 +38,7 @@ public class CopyMapper<T> implements Function<Object, T> {
 			return target;
 		} catch (Exception e) {
 			log.error("Cannot copy as " + targetClazz + " from " + input, e);
-			throw new RuntimeException("Cannot copy as " + targetClazz + " from " + input, e);
+			throw new CommonsException("Cannot copy as " + targetClazz + " from " + input, e);
 		}
 	}
 

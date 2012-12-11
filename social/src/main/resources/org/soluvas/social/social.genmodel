@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.soluvas.social/src/main/java" modelPluginID="org.soluvas.social"
+    modelName="Social" generateSchema="true" rootExtendsInterface="org.soluvas.commons.SerializableEObject"
+    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="6.0"
+    suppressGenModelAnnotations="false" copyrightFields="false" publicConstructors="true"
+    usedGenPackages="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.genmodel#//commons platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore schema.genmodel#//schema"
+    interfaceNamePattern="">
+  <foreignModel>social.ecore</foreignModel>
+  <genPackages prefix="Social" basePackage="org.soluvas" disposableProviderFactory="true"
+      ecorePackage="social.ecore#/">
+    <genClasses image="false" ecoreClass="social.ecore#//Target">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EReference social.ecore#//Target/targetType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute social.ecore#//Target/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute social.ecore#//Target/images"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute social.ecore#//Target/uri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute social.ecore#//Target/typeName"/>
+    </genClasses>
+    <genClasses ecoreClass="social.ecore#//Person"/>
+    <genClasses ecoreClass="social.ecore#//ExternalProfile">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute social.ecore#//ExternalProfile/profileId"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="social.ecore#//PersonLike">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute social.ecore#//PersonLike/firstName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute social.ecore#//PersonLike/lastName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute social.ecore#//PersonLike/username"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute social.ecore#//PersonLike/gender"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

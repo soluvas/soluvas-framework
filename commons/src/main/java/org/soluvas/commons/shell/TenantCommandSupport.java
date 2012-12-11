@@ -16,6 +16,7 @@ import org.apache.felix.service.command.CommandSession;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
+import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.inject.Filter;
 import org.soluvas.commons.inject.Namespace;
 import org.soluvas.commons.inject.Supplied;
@@ -104,12 +105,12 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 				try {
 					final Collection<ServiceReference<?>> foundRefs = bundleContext.getServiceReferences(serviceClass, filter);
 					if (foundRefs == null || foundRefs.isEmpty()) {
-						throw new RuntimeException("Cannot inject " + componentId + "#" + field.getName() + ", " +
+						throw new CommonsException("Cannot inject " + componentId + "#" + field.getName() + ", " +
 								serviceClass.getName() + " service with " + filter + " not found");
 					}
 					serviceRef = foundRefs.iterator().next();
 				} catch (InvalidSyntaxException e) {
-					throw new RuntimeException("Cannot inject " + componentId + "#" + field.getName() + ", invalid " +
+					throw new CommonsException("Cannot inject " + componentId + "#" + field.getName() + ", invalid " +
 							serviceClass.getName() + " service with " + filter);
 				}
 				final Object bean = bundleContext.getService(serviceRef);
@@ -120,7 +121,7 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 				} catch (Exception e) {
 					bundleContext.ungetService(serviceRef);
 					serviceRefs.remove(field);
-					throw new RuntimeException("Cannot set field " + componentId + "#" + field.getName() + " using " +
+					throw new CommonsException("Cannot set field " + componentId + "#" + field.getName() + " using " +
 							serviceClass.getName() + " service with " + filter, e);
 				}
 			} else {
@@ -136,11 +137,11 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 				try {
 					foundServiceRefs = bundleContext.getServiceReferences(Supplier.class, filter);
 				} catch (InvalidSyntaxException e) {
-					throw new RuntimeException("Cannot inject " + componentId + "#" + field.getName() + ", invalid " +
+					throw new CommonsException("Cannot inject " + componentId + "#" + field.getName() + ", invalid " +
 							suppliedClass.getName() + " Supplier service with filter " + filter, e);
 				}
 				if (foundServiceRefs == null || foundServiceRefs.isEmpty()) {
-					throw new RuntimeException("Cannot find " + suppliedClass.getName() + " supplier for " + componentId + "#" + field.getName() + ", " +
+					throw new CommonsException("Cannot find " + suppliedClass.getName() + " supplier for " + componentId + "#" + field.getName() + ", " +
 							"Supplier with " + filter + " not found");
 				}
 				final ServiceReference<Supplier> serviceRef = foundServiceRefs.iterator().next();
@@ -151,7 +152,7 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 					FieldUtils.writeField(field, this, suppliedObj, true);
 				} catch (Exception e) {
 					log.error("Cannot inject " + componentId + "#" + field.getName() + " from " + supplier, e);
-					throw new RuntimeException("Cannot inject " + componentId + "#" + field.getName() + " from " + supplier, e);
+					throw new CommonsException("Cannot inject " + componentId + "#" + field.getName() + " from " + supplier, e);
 				} finally {
 					bundleContext.ungetService(serviceRef);
 				}

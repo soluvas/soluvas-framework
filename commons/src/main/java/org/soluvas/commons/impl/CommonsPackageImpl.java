@@ -42,6 +42,7 @@ import org.soluvas.commons.JavaClassLinked;
 import org.soluvas.commons.JavaClassStatus;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.PhotoIdContainer;
 import org.soluvas.commons.Positionable;
@@ -186,6 +187,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass eFactoryLinkedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass nsPrefixableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -790,6 +798,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getNsPrefixable() {
+		return nsPrefixableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNsPrefixable_NsPrefix() {
+		return (EAttribute)nsPrefixableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -1044,6 +1070,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		eFactoryLinkedEClass = createEClass(EFACTORY_LINKED);
 		createEReference(eFactoryLinkedEClass, EFACTORY_LINKED__EFACTORY);
 
+		nsPrefixableEClass = createEClass(NS_PREFIXABLE);
+		createEAttribute(nsPrefixableEClass, NS_PREFIXABLE__NS_PREFIX);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -1205,6 +1234,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(eFactoryLinkedEClass, EFactoryLinked.class, "EFactoryLinked", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEFactoryLinked_EFactory(), theEcorePackage.getEFactory(), null, "eFactory", null, 0, 1, EFactoryLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(nsPrefixableEClass, NsPrefixable.class, "NsPrefixable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNsPrefixable_NsPrefix(), theEcorePackage.getEString(), "nsPrefix", "", 0, 1, NsPrefixable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -1476,6 +1508,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Useful for schema classes, e.g. {@code com.soluvas.story.schema.ActionType}, {@code com.soluvas.story.schema.TargetType}. Only accessible when resolved."
+		   });		
+		addAnnotation
+		  (getNsPrefixable_NsPrefix(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Context-specific NS prefix.\n\nComes from: getActionType().getEClass().getEPackage().getNsPrefix()."
 		   });
 	}
 

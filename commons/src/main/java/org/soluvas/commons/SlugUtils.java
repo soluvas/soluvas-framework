@@ -106,7 +106,7 @@ public class SlugUtils {
 				if (validator.apply(id))
 					return id;
 			}
-			throw new RuntimeException("Cannot generate valid ID for '" + name + "' after 99 retries.");
+			throw new CommonsException("Cannot generate valid ID for '" + name + "' after 99 retries.");
 		}
 	}
 	
@@ -127,7 +127,7 @@ public class SlugUtils {
 				if (validator.apply(id))
 					return id;
 			}
-			throw new RuntimeException("Cannot generate valid segment for '" + name + "' after 99 retries.");
+			throw new CommonsException("Cannot generate valid segment for '" + name + "' after 99 retries.");
 		}
 	}
 	
@@ -148,7 +148,7 @@ public class SlugUtils {
 				if (validator.apply(id))
 					return id;
 			}
-			throw new RuntimeException("Cannot generate valid screen name for '" + name + "' after 99 retries.");
+			throw new CommonsException("Cannot generate valid screen name for '" + name + "' after 99 retries.");
 		}
 	}
 	

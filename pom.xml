@@ -17,6 +17,8 @@
 		<!-- Infrastructure -->
 		<module>commons</module>
 		<module>data</module>
+		<module>social</module>
+		<module>social.shell</module>
 		<module>json</module>
 		<module>cdi</module>
 		<module>jaxrs</module>
