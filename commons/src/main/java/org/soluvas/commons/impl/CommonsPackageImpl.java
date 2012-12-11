@@ -1236,7 +1236,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEReference(getEFactoryLinked_EFactory(), theEcorePackage.getEFactory(), null, "eFactory", null, 0, 1, EFactoryLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nsPrefixableEClass, NsPrefixable.class, "NsPrefixable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNsPrefixable_NsPrefix(), theEcorePackage.getEString(), "nsPrefix", "", 0, 1, NsPrefixable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNsPrefixable_NsPrefix(), theEcorePackage.getEString(), "nsPrefix", null, 0, 1, NsPrefixable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");

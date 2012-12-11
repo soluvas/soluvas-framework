@@ -2,6 +2,8 @@
  */
 package org.soluvas.social.schema;
 
+import javax.annotation.Nullable;
+
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.EClassLinked;
 import org.soluvas.commons.EFactoryLinked;
@@ -10,6 +12,8 @@ import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.social.Target;
+
+import com.google.common.base.Function;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,6 +26,13 @@ import org.soluvas.social.Target;
  * @generated
  */
 public interface TargetType extends NameContainer, BundleAware, ResourceAware, JavaClassLinked<Target>, EClassLinked, EFactoryLinked, NsPrefixable {
+	
+	public static class ToQName implements Function<TargetType, String> {
+		@Override @Nullable
+		public String apply(@Nullable TargetType input) {
+			return input != null ? input.getNsPrefix() + ":" + input.getName() : null;
+		}
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

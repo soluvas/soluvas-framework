@@ -23,7 +23,6 @@ package org.soluvas.commons;
 public interface NsPrefixable extends SerializableEObject {
 	/**
 	 * Returns the value of the '<em><b>Ns Prefix</b></em>' attribute.
-	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -34,7 +33,7 @@ public interface NsPrefixable extends SerializableEObject {
 	 * @return the value of the '<em>Ns Prefix</em>' attribute.
 	 * @see #setNsPrefix(String)
 	 * @see org.soluvas.commons.CommonsPackage#getNsPrefixable_NsPrefix()
-	 * @model default=""
+	 * @model
 	 * @generated
 	 */
 	String getNsPrefix();
