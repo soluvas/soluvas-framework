@@ -9,13 +9,12 @@ import org.soluvas.commons.PersonInfo;
 import com.google.common.base.Function;
 
 /**
+ * Converts {@link SocialPerson} to {@link PersonInfo}.
  * @author ceefour
- *
  */
 public class ToPersonInfo implements Function<SocialPerson, PersonInfo> {
 
-	@Override
-	@Nullable
+	@Override @Nullable
 	public PersonInfo apply(@Nullable final SocialPerson input) {
 		if (input == null)
 			return null;
@@ -24,13 +23,15 @@ public class ToPersonInfo implements Function<SocialPerson, PersonInfo> {
 		personInfo.setSlug(input.getSlug());
 		personInfo.setName(input.getName());
 		personInfo.setPhotoId(input.getPhotoId());
-		switch (input.getGender()) {
-		case MALE:
-			personInfo.setGender(Gender.MALE);
-			break;
-		case FEMALE:
-			personInfo.setGender(Gender.FEMALE);
-			break;
+		if (input.getGender() != null) {
+			switch (input.getGender()) {
+			case MALE:
+				personInfo.setGender(Gender.MALE);
+				break;
+			case FEMALE:
+				personInfo.setGender(Gender.FEMALE);
+				break;
+			}
 		}
 		return personInfo;
 	}
