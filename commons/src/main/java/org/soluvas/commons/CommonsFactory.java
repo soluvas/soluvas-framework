@@ -39,6 +39,15 @@ public interface CommonsFactory extends EFactory {
 	 */
 	PersonInfo createPersonInfo();
 	
+	/**
+	 * Returns a new object of class '<em>Web Address</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Web Address</em>'.
+	 * @generated
+	 */
+	WebAddress createWebAddress();
+
 	PersonInfo createPersonInfo(String id, String slug, String name, String photoId, Gender gender);
 
 	/**

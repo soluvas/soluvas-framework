@@ -144,6 +144,10 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createNsPrefixableAdapter();
 			}
 			@Override
+			public Adapter caseWebAddress(WebAddress object) {
+				return createWebAddressAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -426,6 +430,20 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNsPrefixableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.WebAddress <em>Web Address</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.WebAddress
+	 * @generated
+	 */
+	public Adapter createWebAddressAdapter() {
 		return null;
 	}
 

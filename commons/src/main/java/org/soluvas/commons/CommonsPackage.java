@@ -716,6 +716,115 @@ public interface CommonsPackage extends EPackage {
 	int NS_PREFIXABLE_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.WebAddressImpl <em>Web Address</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.WebAddressImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getWebAddress()
+	 * @generated
+	 */
+	int WEB_ADDRESS = 19;
+
+	/**
+	 * The feature id for the '<em><b>Base Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__BASE_URI = 0;
+
+	/**
+	 * The feature id for the '<em><b>Base Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__BASE_PATH = 1;
+
+	/**
+	 * The feature id for the '<em><b>Api Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__API_PATH = 2;
+
+	/**
+	 * The feature id for the '<em><b>Images Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__IMAGES_URI = 3;
+
+	/**
+	 * The feature id for the '<em><b>Skin Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__SKIN_URI = 4;
+
+	/**
+	 * The feature id for the '<em><b>Js Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__JS_URI = 5;
+
+	/**
+	 * The feature id for the '<em><b>Secure Base Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__SECURE_BASE_URI = 6;
+
+	/**
+	 * The feature id for the '<em><b>Secure Images Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__SECURE_IMAGES_URI = 7;
+
+	/**
+	 * The feature id for the '<em><b>Secure Skin Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__SECURE_SKIN_URI = 8;
+
+	/**
+	 * The feature id for the '<em><b>Secure Js Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__SECURE_JS_URI = 9;
+
+	/**
+	 * The number of structural features of the '<em>Web Address</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS_FEATURE_COUNT = 10;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -723,7 +832,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 19;
+	int RESOURCE_TYPE = 20;
 
 
 	/**
@@ -734,7 +843,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 20;
+	int GENDER = 21;
 
 
 	/**
@@ -745,7 +854,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 21;
+	int ECLASS_STATUS = 22;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -755,7 +864,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 22;
+	int JAVA_CLASS_STATUS = 23;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -765,7 +874,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 23;
+	int DATE_TIME = 24;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -775,7 +884,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 24;
+	int CURRENCY_UNIT = 25;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -785,7 +894,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 25;
+	int UNIT = 26;
 
 
 	/**
@@ -796,7 +905,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 26;
+	int LIST = 27;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -806,7 +915,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 27;
+	int MAP = 28;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -816,7 +925,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 28;
+	int SET = 29;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -826,7 +935,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 29;
+	int COLLECTION = 30;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -836,7 +945,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 30;
+	int MULTIMAP = 31;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -846,7 +955,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 31;
+	int NAVIGABLE_MAP = 32;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -856,7 +965,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 32;
+	int QUEUE = 33;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -866,7 +975,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 33;
+	int MULTISET = 34;
 
 
 	/**
@@ -877,7 +986,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 34;
+	int SERIALIZABLE = 35;
 
 
 	/**
@@ -888,7 +997,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 35;
+	int BUNDLE = 36;
 
 
 	/**
@@ -1355,6 +1464,126 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getNsPrefixable_NsPrefix();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.WebAddress <em>Web Address</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Web Address</em>'.
+	 * @see org.soluvas.commons.WebAddress
+	 * @generated
+	 */
+	EClass getWebAddress();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.WebAddress#getBaseUri <em>Base Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Base Uri</em>'.
+	 * @see org.soluvas.commons.WebAddress#getBaseUri()
+	 * @see #getWebAddress()
+	 * @generated
+	 */
+	EAttribute getWebAddress_BaseUri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.WebAddress#getBasePath <em>Base Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Base Path</em>'.
+	 * @see org.soluvas.commons.WebAddress#getBasePath()
+	 * @see #getWebAddress()
+	 * @generated
+	 */
+	EAttribute getWebAddress_BasePath();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.WebAddress#getApiPath <em>Api Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Api Path</em>'.
+	 * @see org.soluvas.commons.WebAddress#getApiPath()
+	 * @see #getWebAddress()
+	 * @generated
+	 */
+	EAttribute getWebAddress_ApiPath();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.WebAddress#getImagesUri <em>Images Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Images Uri</em>'.
+	 * @see org.soluvas.commons.WebAddress#getImagesUri()
+	 * @see #getWebAddress()
+	 * @generated
+	 */
+	EAttribute getWebAddress_ImagesUri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.WebAddress#getSkinUri <em>Skin Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Skin Uri</em>'.
+	 * @see org.soluvas.commons.WebAddress#getSkinUri()
+	 * @see #getWebAddress()
+	 * @generated
+	 */
+	EAttribute getWebAddress_SkinUri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.WebAddress#getJsUri <em>Js Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Js Uri</em>'.
+	 * @see org.soluvas.commons.WebAddress#getJsUri()
+	 * @see #getWebAddress()
+	 * @generated
+	 */
+	EAttribute getWebAddress_JsUri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.WebAddress#getSecureBaseUri <em>Secure Base Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Secure Base Uri</em>'.
+	 * @see org.soluvas.commons.WebAddress#getSecureBaseUri()
+	 * @see #getWebAddress()
+	 * @generated
+	 */
+	EAttribute getWebAddress_SecureBaseUri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.WebAddress#getSecureImagesUri <em>Secure Images Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Secure Images Uri</em>'.
+	 * @see org.soluvas.commons.WebAddress#getSecureImagesUri()
+	 * @see #getWebAddress()
+	 * @generated
+	 */
+	EAttribute getWebAddress_SecureImagesUri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.WebAddress#getSecureSkinUri <em>Secure Skin Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Secure Skin Uri</em>'.
+	 * @see org.soluvas.commons.WebAddress#getSecureSkinUri()
+	 * @see #getWebAddress()
+	 * @generated
+	 */
+	EAttribute getWebAddress_SecureSkinUri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.WebAddress#getSecureJsUri <em>Secure Js Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Secure Js Uri</em>'.
+	 * @see org.soluvas.commons.WebAddress#getSecureJsUri()
+	 * @see #getWebAddress()
+	 * @generated
+	 */
+	EAttribute getWebAddress_SecureJsUri();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -1950,6 +2179,96 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NS_PREFIXABLE__NS_PREFIX = eINSTANCE.getNsPrefixable_NsPrefix();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.WebAddressImpl <em>Web Address</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.WebAddressImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getWebAddress()
+		 * @generated
+		 */
+		EClass WEB_ADDRESS = eINSTANCE.getWebAddress();
+
+		/**
+		 * The meta object literal for the '<em><b>Base Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEB_ADDRESS__BASE_URI = eINSTANCE.getWebAddress_BaseUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Base Path</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEB_ADDRESS__BASE_PATH = eINSTANCE.getWebAddress_BasePath();
+
+		/**
+		 * The meta object literal for the '<em><b>Api Path</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEB_ADDRESS__API_PATH = eINSTANCE.getWebAddress_ApiPath();
+
+		/**
+		 * The meta object literal for the '<em><b>Images Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEB_ADDRESS__IMAGES_URI = eINSTANCE.getWebAddress_ImagesUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Skin Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEB_ADDRESS__SKIN_URI = eINSTANCE.getWebAddress_SkinUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Js Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEB_ADDRESS__JS_URI = eINSTANCE.getWebAddress_JsUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Secure Base Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEB_ADDRESS__SECURE_BASE_URI = eINSTANCE.getWebAddress_SecureBaseUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Secure Images Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEB_ADDRESS__SECURE_IMAGES_URI = eINSTANCE.getWebAddress_SecureImagesUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Secure Skin Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEB_ADDRESS__SECURE_SKIN_URI = eINSTANCE.getWebAddress_SecureSkinUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Secure Js Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEB_ADDRESS__SECURE_JS_URI = eINSTANCE.getWebAddress_SecureJsUri();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

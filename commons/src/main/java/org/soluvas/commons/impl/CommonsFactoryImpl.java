@@ -79,6 +79,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 		switch (eClass.getClassifierID()) {
 			case CommonsPackage.APP_MANIFEST: return (EObject)createAppManifest();
 			case CommonsPackage.PERSON_INFO: return (EObject)createPersonInfo();
+			case CommonsPackage.WEB_ADDRESS: return (EObject)createWebAddress();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -194,6 +195,16 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	public PersonInfo createPersonInfo() {
 		PersonInfoImpl personInfo = new PersonInfoImpl();
 		return personInfo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WebAddress createWebAddress() {
+		WebAddressImpl webAddress = new WebAddressImpl();
+		return webAddress;
 	}
 
 	/**
