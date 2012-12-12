@@ -41,7 +41,6 @@ import com.google.common.collect.Lists;
  * 		<list value-type="java.lang.Class">
  * 			<value>org.soluvas.web.site.SitePackage</value>
  * 			<value>org.soluvas.web.site.pagemeta.PagemetaPackage</value>
- * 			<value>org.soluvas.web.site.webaddress.WebaddressPackage</value>
  * 		</list>
  * 	</argument>
  * </bean>

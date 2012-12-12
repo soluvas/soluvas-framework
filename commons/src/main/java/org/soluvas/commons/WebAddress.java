@@ -9,41 +9,33 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Web Address</b></em>'. <!-- end-user-doc -->
- * 
- * <!-- begin-model-doc --> Tenant-wide website URI configuration. <!--
- * end-model-doc -->
- * 
+ *
+ * <!-- begin-model-doc -->
+ * Tenant-wide website URI configuration.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.soluvas.commons.WebAddress#getBaseUri <em>Base Uri
- * </em>}</li>
- * <li>{@link org.soluvas.commons.WebAddress#getBasePath <em>Base
- * Path</em>}</li>
- * <li>{@link org.soluvas.commons.WebAddress#getApiPath <em>Api Path
- * </em>}</li>
- * <li>{@link org.soluvas.commons.WebAddress#getImagesUri <em>Images
- * Uri</em>}</li>
- * <li>{@link org.soluvas.commons.WebAddress#getSkinUri <em>Skin Uri
- * </em>}</li>
- * <li>{@link org.soluvas.commons.WebAddress#getJsUri <em>Js Uri
- * </em>}</li>
- * <li>{@link org.soluvas.commons.WebAddress#getSecureBaseUri <em>
- * Secure Base Uri</em>}</li>
- * <li>{@link org.soluvas.commons.WebAddress#getSecureImagesUri <em>
- * Secure Images Uri</em>}</li>
- * <li>{@link org.soluvas.commons.WebAddress#getSecureSkinUri <em>
- * Secure Skin Uri</em>}</li>
- * <li>{@link org.soluvas.commons.WebAddress#getSecureJsUri <em>
- * Secure Js Uri</em>}</li>
+ *   <li>{@link org.soluvas.commons.WebAddress#getBaseUri <em>Base Uri</em>}</li>
+ *   <li>{@link org.soluvas.commons.WebAddress#getBasePath <em>Base Path</em>}</li>
+ *   <li>{@link org.soluvas.commons.WebAddress#getApiPath <em>Api Path</em>}</li>
+ *   <li>{@link org.soluvas.commons.WebAddress#getImagesUri <em>Images Uri</em>}</li>
+ *   <li>{@link org.soluvas.commons.WebAddress#getSkinUri <em>Skin Uri</em>}</li>
+ *   <li>{@link org.soluvas.commons.WebAddress#getJsUri <em>Js Uri</em>}</li>
+ *   <li>{@link org.soluvas.commons.WebAddress#getSecureBaseUri <em>Secure Base Uri</em>}</li>
+ *   <li>{@link org.soluvas.commons.WebAddress#getSecureImagesUri <em>Secure Images Uri</em>}</li>
+ *   <li>{@link org.soluvas.commons.WebAddress#getSecureSkinUri <em>Secure Skin Uri</em>}</li>
+ *   <li>{@link org.soluvas.commons.WebAddress#getSecureJsUri <em>Secure Js Uri</em>}</li>
  * </ul>
  * </p>
- * 
- * @see org.soluvas.web.site.webaddress.WebaddressPackage#getWebAddress()
+ *
+ * @see org.soluvas.commons.CommonsPackage#getWebAddress()
  * @model
- * @generated NOT
+ * @extends SerializableEObject
+ * @generated
  */
-public interface WebAddress extends EObject, Serializable {
+public interface WebAddress extends SerializableEObject {
 	/**
 	 * Returns the value of the '<em><b>Base Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -53,7 +45,7 @@ public interface WebAddress extends EObject, Serializable {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Base Uri</em>' attribute.
 	 * @see #setBaseUri(String)
-	 * @see org.soluvas.web.site.webaddress.WebaddressPackage#getWebAddress_BaseUri()
+	 * @see org.soluvas.commons.CommonsPackage#getWebAddress_BaseUri()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -78,7 +70,7 @@ public interface WebAddress extends EObject, Serializable {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Base Path</em>' attribute.
 	 * @see #setBasePath(String)
-	 * @see org.soluvas.web.site.webaddress.WebaddressPackage#getWebAddress_BasePath()
+	 * @see org.soluvas.commons.CommonsPackage#getWebAddress_BasePath()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -104,7 +96,7 @@ public interface WebAddress extends EObject, Serializable {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Api Path</em>' attribute.
 	 * @see #setApiPath(String)
-	 * @see org.soluvas.web.site.webaddress.WebaddressPackage#getWebAddress_ApiPath()
+	 * @see org.soluvas.commons.CommonsPackage#getWebAddress_ApiPath()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -129,7 +121,7 @@ public interface WebAddress extends EObject, Serializable {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Images Uri</em>' attribute.
 	 * @see #setImagesUri(String)
-	 * @see org.soluvas.web.site.webaddress.WebaddressPackage#getWebAddress_ImagesUri()
+	 * @see org.soluvas.commons.CommonsPackage#getWebAddress_ImagesUri()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -154,7 +146,7 @@ public interface WebAddress extends EObject, Serializable {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Skin Uri</em>' attribute.
 	 * @see #setSkinUri(String)
-	 * @see org.soluvas.web.site.webaddress.WebaddressPackage#getWebAddress_SkinUri()
+	 * @see org.soluvas.commons.CommonsPackage#getWebAddress_SkinUri()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -179,7 +171,7 @@ public interface WebAddress extends EObject, Serializable {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Js Uri</em>' attribute.
 	 * @see #setJsUri(String)
-	 * @see org.soluvas.web.site.webaddress.WebaddressPackage#getWebAddress_JsUri()
+	 * @see org.soluvas.commons.CommonsPackage#getWebAddress_JsUri()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -204,7 +196,7 @@ public interface WebAddress extends EObject, Serializable {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Secure Base Uri</em>' attribute.
 	 * @see #setSecureBaseUri(String)
-	 * @see org.soluvas.web.site.webaddress.WebaddressPackage#getWebAddress_SecureBaseUri()
+	 * @see org.soluvas.commons.CommonsPackage#getWebAddress_SecureBaseUri()
 	 * @model
 	 * @generated
 	 */
@@ -229,7 +221,7 @@ public interface WebAddress extends EObject, Serializable {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Secure Images Uri</em>' attribute.
 	 * @see #setSecureImagesUri(String)
-	 * @see org.soluvas.web.site.webaddress.WebaddressPackage#getWebAddress_SecureImagesUri()
+	 * @see org.soluvas.commons.CommonsPackage#getWebAddress_SecureImagesUri()
 	 * @model
 	 * @generated
 	 */
@@ -254,7 +246,7 @@ public interface WebAddress extends EObject, Serializable {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Secure Skin Uri</em>' attribute.
 	 * @see #setSecureSkinUri(String)
-	 * @see org.soluvas.web.site.webaddress.WebaddressPackage#getWebAddress_SecureSkinUri()
+	 * @see org.soluvas.commons.CommonsPackage#getWebAddress_SecureSkinUri()
 	 * @model
 	 * @generated
 	 */
@@ -280,7 +272,7 @@ public interface WebAddress extends EObject, Serializable {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Secure Js Uri</em>' attribute.
 	 * @see #setSecureJsUri(String)
-	 * @see org.soluvas.web.site.webaddress.WebaddressPackage#getWebAddress_SecureJsUri()
+	 * @see org.soluvas.commons.CommonsPackage#getWebAddress_SecureJsUri()
 	 * @model
 	 * @generated
 	 */
