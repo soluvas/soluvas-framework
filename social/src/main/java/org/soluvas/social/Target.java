@@ -6,7 +6,10 @@ import java.util.List;
 
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.NsPrefixable;
+import org.soluvas.social.impl.TargetImpl;
 import org.soluvas.social.schema.TargetType;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * <!-- begin-user-doc -->
@@ -82,6 +85,7 @@ import org.soluvas.social.schema.TargetType;
  * @model abstract="true"
  * @generated
  */
+@JsonDeserialize(as=TargetImpl.class)
 public interface Target extends NsPrefixable, Describable {
 
 	/**
