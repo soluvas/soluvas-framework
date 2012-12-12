@@ -135,6 +135,16 @@
 				<artifactId>org.soluvas.social.shell</artifactId>
 				<version>${soluvas-framework.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.soluvas</groupId>
+				<artifactId>org.soluvas.email</artifactId>
+				<version>${soluvas-framework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.soluvas</groupId>
+				<artifactId>org.soluvas.email.shell</artifactId>
+				<version>${soluvas-framework.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.apache.karaf.shell</groupId>
@@ -237,6 +247,19 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			
+			<dependency>
+				<groupId>com.github.spullara.mustache.java</groupId>
+				<artifactId>compiler</artifactId>
+				<version>0.8.8</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.antlr</groupId>
+				<artifactId>stringtemplate</artifactId>
+				<version>4.0.2</version>
+			</dependency>
+			
 			<dependency>
 				<groupId>com.fasterxml.jackson.datatype</groupId>
 				<artifactId>jackson-datatype-guava</artifactId>

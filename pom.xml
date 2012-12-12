@@ -27,6 +27,8 @@
 		<module>push</module>
 		<module>security</module>
 		<module>mongo</module>
+		<module>email</module>
+		<module>email.shell</module>
 		<!-- Backends -->
 		<module>image</module>
 		<module>apacheds</module>
