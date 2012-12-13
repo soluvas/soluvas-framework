@@ -1,11 +1,15 @@
 package org.soluvas.ldap;
 
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.directory.shared.ldap.model.entry.DefaultEntry;
@@ -28,6 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.ldap.SocialPerson.Gender;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Ordering;
 
@@ -144,7 +149,7 @@ public class LdapMapperTest {
 		assertEquals("Hendy", entry.get("gn").getString());
 		assertEquals("Irawan", entry.get("sn").getString());
 		assertEquals("Hendy Irawan", entry.get("cn").getString());
-		assertTrue( entry.contains("mail", "hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com") );
+		assertTrue(entry.contains("mail", "hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com") );
 		
 		assertEquals("hendy", entry.get("photoId").getString());
 		assertEquals("596326671", entry.get("fbId").getString());
@@ -331,7 +336,7 @@ public class LdapMapperTest {
 		final ModifyRequest request = mapper.createModifyRequest(existingEntry, oldLiz, newLiz);
 		log.info("Modify request: {}", request);
 		assertNotNull(request);
-		assertEquals(1, request.getModifications().size());
+		assertThat(request.getModifications(), hasSize(1));
 		final Modification modification = request.getModifications().iterator().next();
 		assertEquals(ModificationOperation.ADD_ATTRIBUTE, modification.getOperation());
 		assertEquals("objectClass", modification.getAttribute().getUpId());
@@ -357,9 +362,9 @@ public class LdapMapperTest {
 		final ModifyRequest request = mapper.createModifyRequest(existingEntry, oldLiz, newLiz);
 		log.info("Modify request: {}", request);
 		assertNotNull(request);
-		assertEquals(1, request.getModifications().size());
+		assertThat(request.getModifications(), hasSize(1));
 		final Modification modification = request.getModifications().iterator().next();
-		assertEquals(ModificationOperation.REPLACE_ATTRIBUTE, modification.getOperation());
+		assertEquals(ModificationOperation.ADD_ATTRIBUTE, modification.getOperation());
 		assertEquals("mobile", modification.getAttribute().getUpId());
 	}
 
@@ -383,7 +388,7 @@ public class LdapMapperTest {
 		final ModifyRequest request = mapper.createModifyRequest(existingEntry, oldLiz, newLiz);
 		log.info("Modify request: {}", request);
 		assertNotNull(request);
-		assertEquals(1, request.getModifications().size());
+		assertThat(request.getModifications(), hasSize(1));
 		final Modification modification = request.getModifications().iterator().next();
 		assertEquals(ModificationOperation.ADD_ATTRIBUTE, modification.getOperation());
 		assertEquals("fbAccessToken", modification.getAttribute().getUpId());
@@ -408,7 +413,7 @@ public class LdapMapperTest {
 		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
 		log.info("Modify request: {}", request);
 		assertNotNull(request);
-		assertEquals(1, request.getModifications().size());
+		assertThat(request.getModifications(), hasSize(1));
 		final Modification modification = request.getModifications().iterator().next();
 		assertEquals(ModificationOperation.REPLACE_ATTRIBUTE, modification.getOperation());
 		assertEquals("cn", modification.getAttribute().getUpId());
@@ -433,7 +438,7 @@ public class LdapMapperTest {
 		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
 		log.info("Modify request: {}", request);
 		assertNotNull(request);
-		assertEquals(1, request.getModifications().size());
+		assertThat(request.getModifications(), hasSize(1));
 		final Modification modification = request.getModifications().iterator().next();
 		assertEquals(ModificationOperation.REPLACE_ATTRIBUTE, modification.getOperation());
 		assertEquals("gn", modification.getAttribute().getUpId());
@@ -457,7 +462,7 @@ public class LdapMapperTest {
 		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
 		log.info("Modify request: {}", request);
 		assertNotNull(request);
-		assertEquals(1, request.getModifications().size());
+		assertThat(request.getModifications(), hasSize(1));
 		final Modification modification = request.getModifications().iterator().next();
 		assertEquals(ModificationOperation.ADD_ATTRIBUTE, modification.getOperation());
 		assertEquals("cn", modification.getAttribute().getUpId());
@@ -483,10 +488,36 @@ public class LdapMapperTest {
 		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
 		log.info("Modify request: {}", request);
 		assertNotNull(request);
-		assertEquals(1, request.getModifications().size());
+		assertThat(request.getModifications(), hasSize(1));
 		final Modification modification = request.getModifications().iterator().next();
 		assertEquals(ModificationOperation.REMOVE_ATTRIBUTE, modification.getOperation());
 		assertEquals("sn", modification.getAttribute().getUpId());
+	}
+
+	@Test public void addAndRemoveMultiAttributeModifyRequest() throws LdapException {
+		Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("mail", "atang@yahoo.com");
+		log.info("Existing Entry: {}", existing);
+		
+		final Person oldObj = mapper.fromEntry(existing, Person.class);
+		final Person newObj = mapper.fromEntry(existing, Person.class);
+		newObj.setEmails(ImmutableSet.of("atang@keren.com"));
+		
+		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertThat(request.getModifications(), hasSize(2));
+		final List<Modification> modifications = ImmutableList.copyOf(request.getModifications());
+		final Modification modification1 = modifications.get(0);
+		assertEquals(ModificationOperation.ADD_ATTRIBUTE, modification1.getOperation());
+		assertEquals("mail", modification1.getAttribute().getUpId());
+		assertEquals("atang@keren.com", modification1.getAttribute().getString());
+		final Modification modification2 = modifications.get(1);
+		assertEquals(ModificationOperation.REMOVE_ATTRIBUTE, modification2.getOperation());
+		assertEquals("mail", modification2.getAttribute().getUpId());
+		assertEquals("atang@yahoo.com", modification2.getAttribute().getString());
 	}
 
 	@Test public void doNotRemoveAttributeWithAlias() throws LdapException {
@@ -508,7 +539,7 @@ public class LdapMapperTest {
 		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
 		log.info("Modify request: {}", request);
 		assertNotNull(request);
-		assertEquals(0, request.getModifications().size());
+		assertThat(request.getModifications(), empty());
 	}
 
 	@Test public void stringEqualsBytesPassword() throws LdapException {
@@ -534,7 +565,7 @@ public class LdapMapperTest {
 		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
 		log.info("Modify request: {}", request);
 		assertNotNull(request);
-		assertEquals(0, request.getModifications().size());
+		assertThat(request.getModifications(), empty());
 	}
 
 	@Test public void canChangePassword() throws LdapException {
@@ -560,7 +591,7 @@ public class LdapMapperTest {
 		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
 		log.info("Modify request: {}", request);
 		assertNotNull(request);
-		assertEquals(1, request.getModifications().size());
+		assertThat(request.getModifications(), hasSize(1));
 		final Modification modification = request.getModifications().iterator().next();
 		assertEquals(ModificationOperation.REPLACE_ATTRIBUTE, modification.getOperation());
 		assertEquals("userPassword", modification.getAttribute().getUpId());
