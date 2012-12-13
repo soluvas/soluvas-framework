@@ -512,7 +512,7 @@ public class LdapMapper {
 							return convertFromPropertyValue(attr.getField().getType(), input);
 						}
 					}), String.class);
-					request.remove(attr.getName(), addedValueArr);
+					request.add(attr.getName(), addedValueArr);
 					// Bye guys
 					final SetView<?> removedValues = Sets.difference(oldValues, newValues);
 					final String[] removedValueArr = Iterables.toArray(Iterables.transform(removedValues, new Function<Object, String>() {
