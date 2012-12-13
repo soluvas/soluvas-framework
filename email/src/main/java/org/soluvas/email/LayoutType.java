@@ -13,5 +13,5 @@ package org.soluvas.email;
  * @model
  * @generated
  */
-public interface LayoutType extends EmailTemplate {
+public interface LayoutType extends TemplateType<Layout> {
 } // LayoutType

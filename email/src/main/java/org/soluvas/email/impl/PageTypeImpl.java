@@ -4,6 +4,7 @@ package org.soluvas.email.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.soluvas.email.EmailPackage;
+import org.soluvas.email.Page;
 import org.soluvas.email.PageType;
 
 /**
@@ -15,7 +16,7 @@ import org.soluvas.email.PageType;
  *
  * @generated
  */
-public class PageTypeImpl extends EmailTemplateImpl implements PageType {
+public class PageTypeImpl extends TemplateTypeImpl<Page> implements PageType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

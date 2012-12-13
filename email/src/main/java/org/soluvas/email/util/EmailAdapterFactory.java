@@ -11,8 +11,11 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.EClassLinked;
+import org.soluvas.commons.EFactoryLinked;
+import org.soluvas.commons.JavaClassLinked;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ResourceAware;
 
 import org.soluvas.email.*;
@@ -78,20 +81,20 @@ public class EmailAdapterFactory extends AdapterFactoryImpl {
 				return createEmailCatalogAdapter();
 			}
 			@Override
-			public Adapter casePageType(PageType object) {
-				return createPageTypeAdapter();
+			public <T extends Template> Adapter caseTemplateType(TemplateType<T> object) {
+				return createTemplateTypeAdapter();
 			}
 			@Override
-			public Adapter caseTemplate(Template object) {
-				return createTemplateAdapter();
+			public Adapter casePageType(PageType object) {
+				return createPageTypeAdapter();
 			}
 			@Override
 			public Adapter caseLayoutType(LayoutType object) {
 				return createLayoutTypeAdapter();
 			}
 			@Override
-			public Adapter caseEmailTemplate(EmailTemplate object) {
-				return createEmailTemplateAdapter();
+			public Adapter caseTemplate(Template object) {
+				return createTemplateAdapter();
 			}
 			@Override
 			public Adapter caseRecipient(Recipient object) {
@@ -110,6 +113,10 @@ public class EmailAdapterFactory extends AdapterFactoryImpl {
 				return createTemplateLikeAdapter();
 			}
 			@Override
+			public Adapter caseNsPrefixable(NsPrefixable object) {
+				return createNsPrefixableAdapter();
+			}
+			@Override
 			public Adapter caseResourceAware(ResourceAware object) {
 				return createResourceAwareAdapter();
 			}
@@ -124,6 +131,14 @@ public class EmailAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNameContainer(NameContainer object) {
 				return createNameContainerAdapter();
+			}
+			@Override
+			public <T> Adapter caseJavaClassLinked(JavaClassLinked<T> object) {
+				return createJavaClassLinkedAdapter();
+			}
+			@Override
+			public Adapter caseEFactoryLinked(EFactoryLinked object) {
+				return createEFactoryLinkedAdapter();
 			}
 			@Override
 			public Adapter caseEClassLinked(EClassLinked object) {
@@ -160,6 +175,20 @@ public class EmailAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEmailCatalogAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.TemplateType <em>Template Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.email.TemplateType
+	 * @generated
+	 */
+	public Adapter createTemplateTypeAdapter() {
 		return null;
 	}
 
@@ -202,20 +231,6 @@ public class EmailAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLayoutTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.email.EmailTemplate <em>Template</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.soluvas.email.EmailTemplate
-	 * @generated
-	 */
-	public Adapter createEmailTemplateAdapter() {
 		return null;
 	}
 
@@ -276,6 +291,20 @@ public class EmailAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.NsPrefixable <em>Ns Prefixable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.NsPrefixable
+	 * @generated
+	 */
+	public Adapter createNsPrefixableAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -328,6 +357,34 @@ public class EmailAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNameContainerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.JavaClassLinked <em>Java Class Linked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.JavaClassLinked
+	 * @generated
+	 */
+	public Adapter createJavaClassLinkedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.EFactoryLinked <em>EFactory Linked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.EFactoryLinked
+	 * @generated
+	 */
+	public Adapter createEFactoryLinkedAdapter() {
 		return null;
 	}
 

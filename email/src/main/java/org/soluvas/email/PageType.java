@@ -13,5 +13,5 @@ package org.soluvas.email;
  * @model
  * @generated
  */
-public interface PageType extends EmailTemplate {
+public interface PageType extends TemplateType<Page> {
 } // PageType

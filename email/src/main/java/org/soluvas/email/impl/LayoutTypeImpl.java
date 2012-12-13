@@ -3,8 +3,8 @@
 package org.soluvas.email.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.soluvas.email.EmailPackage;
+import org.soluvas.email.Layout;
 import org.soluvas.email.LayoutType;
 
 /**
@@ -16,7 +16,7 @@ import org.soluvas.email.LayoutType;
  *
  * @generated
  */
-public class LayoutTypeImpl extends EmailTemplateImpl implements LayoutType {
+public class LayoutTypeImpl extends TemplateTypeImpl<Layout> implements LayoutType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

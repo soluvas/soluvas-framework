@@ -9,8 +9,11 @@ import org.eclipse.emf.ecore.util.Switch;
 
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.EClassLinked;
+import org.soluvas.commons.EFactoryLinked;
+import org.soluvas.commons.JavaClassLinked;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ResourceAware;
 
 import org.soluvas.email.*;
@@ -28,7 +31,7 @@ import org.soluvas.email.*;
  * @see org.soluvas.email.EmailPackage
  * @generated
  */
-public class EmailSwitch<T> extends Switch<T> {
+public class EmailSwitch<T1> extends Switch<T1> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -70,84 +73,94 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	protected T doSwitch(int classifierID, EObject theEObject) {
+	protected T1 doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case EmailPackage.EMAIL_CATALOG: {
 				EmailCatalog emailCatalog = (EmailCatalog)theEObject;
-				T result = caseEmailCatalog(emailCatalog);
+				T1 result = caseEmailCatalog(emailCatalog);
+				if (result == null) result = caseNsPrefixable(emailCatalog);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EmailPackage.TEMPLATE_TYPE: {
+				TemplateType<?> templateType = (TemplateType<?>)theEObject;
+				T1 result = caseTemplateType(templateType);
+				if (result == null) result = caseResourceAware(templateType);
+				if (result == null) result = caseBundleAware(templateType);
+				if (result == null) result = caseNameContainer(templateType);
+				if (result == null) result = caseTemplateLike(templateType);
+				if (result == null) result = caseNsPrefixable(templateType);
+				if (result == null) result = caseJavaClassLinked(templateType);
+				if (result == null) result = caseEFactoryLinked(templateType);
+				if (result == null) result = caseEClassLinked(templateType);
+				if (result == null) result = caseNameable(templateType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case EmailPackage.PAGE_TYPE: {
 				PageType pageType = (PageType)theEObject;
-				T result = casePageType(pageType);
-				if (result == null) result = caseEmailTemplate(pageType);
+				T1 result = casePageType(pageType);
+				if (result == null) result = caseTemplateType(pageType);
 				if (result == null) result = caseResourceAware(pageType);
 				if (result == null) result = caseBundleAware(pageType);
 				if (result == null) result = caseNameContainer(pageType);
 				if (result == null) result = caseTemplateLike(pageType);
+				if (result == null) result = caseNsPrefixable(pageType);
+				if (result == null) result = caseJavaClassLinked(pageType);
+				if (result == null) result = caseEFactoryLinked(pageType);
+				if (result == null) result = caseEClassLinked(pageType);
 				if (result == null) result = caseNameable(pageType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case EmailPackage.TEMPLATE: {
-				Template template = (Template)theEObject;
-				T result = caseTemplate(template);
-				if (result == null) result = caseEClassLinked(template);
-				if (result == null) result = caseTemplateLike(template);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case EmailPackage.LAYOUT_TYPE: {
 				LayoutType layoutType = (LayoutType)theEObject;
-				T result = caseLayoutType(layoutType);
-				if (result == null) result = caseEmailTemplate(layoutType);
+				T1 result = caseLayoutType(layoutType);
+				if (result == null) result = caseTemplateType(layoutType);
 				if (result == null) result = caseResourceAware(layoutType);
 				if (result == null) result = caseBundleAware(layoutType);
 				if (result == null) result = caseNameContainer(layoutType);
 				if (result == null) result = caseTemplateLike(layoutType);
+				if (result == null) result = caseNsPrefixable(layoutType);
+				if (result == null) result = caseJavaClassLinked(layoutType);
+				if (result == null) result = caseEFactoryLinked(layoutType);
+				if (result == null) result = caseEClassLinked(layoutType);
 				if (result == null) result = caseNameable(layoutType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EmailPackage.EMAIL_TEMPLATE: {
-				EmailTemplate emailTemplate = (EmailTemplate)theEObject;
-				T result = caseEmailTemplate(emailTemplate);
-				if (result == null) result = caseResourceAware(emailTemplate);
-				if (result == null) result = caseBundleAware(emailTemplate);
-				if (result == null) result = caseNameContainer(emailTemplate);
-				if (result == null) result = caseTemplateLike(emailTemplate);
-				if (result == null) result = caseNameable(emailTemplate);
+			case EmailPackage.TEMPLATE: {
+				Template template = (Template)theEObject;
+				T1 result = caseTemplate(template);
+				if (result == null) result = caseTemplateLike(template);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case EmailPackage.RECIPIENT: {
 				Recipient recipient = (Recipient)theEObject;
-				T result = caseRecipient(recipient);
+				T1 result = caseRecipient(recipient);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case EmailPackage.LAYOUT: {
 				Layout layout = (Layout)theEObject;
-				T result = caseLayout(layout);
+				T1 result = caseLayout(layout);
 				if (result == null) result = caseTemplate(layout);
-				if (result == null) result = caseEClassLinked(layout);
 				if (result == null) result = caseTemplateLike(layout);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case EmailPackage.PAGE: {
 				Page page = (Page)theEObject;
-				T result = casePage(page);
+				T1 result = casePage(page);
 				if (result == null) result = caseTemplate(page);
-				if (result == null) result = caseEClassLinked(page);
 				if (result == null) result = caseTemplateLike(page);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case EmailPackage.TEMPLATE_LIKE: {
 				TemplateLike templateLike = (TemplateLike)theEObject;
-				T result = caseTemplateLike(templateLike);
+				T1 result = caseTemplateLike(templateLike);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -166,7 +179,22 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEmailCatalog(EmailCatalog object) {
+	public T1 caseEmailCatalog(EmailCatalog object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Template Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Template Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends Template> T1 caseTemplateType(TemplateType<T> object) {
 		return null;
 	}
 
@@ -181,7 +209,7 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePageType(PageType object) {
+	public T1 casePageType(PageType object) {
 		return null;
 	}
 
@@ -196,7 +224,7 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTemplate(Template object) {
+	public T1 caseTemplate(Template object) {
 		return null;
 	}
 
@@ -211,22 +239,7 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLayoutType(LayoutType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Template</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Template</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEmailTemplate(EmailTemplate object) {
+	public T1 caseLayoutType(LayoutType object) {
 		return null;
 	}
 
@@ -241,7 +254,7 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRecipient(Recipient object) {
+	public T1 caseRecipient(Recipient object) {
 		return null;
 	}
 
@@ -256,7 +269,7 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLayout(Layout object) {
+	public T1 caseLayout(Layout object) {
 		return null;
 	}
 
@@ -271,7 +284,7 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePage(Page object) {
+	public T1 casePage(Page object) {
 		return null;
 	}
 
@@ -286,7 +299,22 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTemplateLike(TemplateLike object) {
+	public T1 caseTemplateLike(TemplateLike object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ns Prefixable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ns Prefixable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseNsPrefixable(NsPrefixable object) {
 		return null;
 	}
 
@@ -301,7 +329,7 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseResourceAware(ResourceAware object) {
+	public T1 caseResourceAware(ResourceAware object) {
 		return null;
 	}
 
@@ -316,7 +344,7 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBundleAware(BundleAware object) {
+	public T1 caseBundleAware(BundleAware object) {
 		return null;
 	}
 
@@ -331,7 +359,7 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNameable(Nameable object) {
+	public T1 caseNameable(Nameable object) {
 		return null;
 	}
 
@@ -346,7 +374,37 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNameContainer(NameContainer object) {
+	public T1 caseNameContainer(NameContainer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Java Class Linked</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Java Class Linked</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T> T1 caseJavaClassLinked(JavaClassLinked<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EFactory Linked</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EFactory Linked</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseEFactoryLinked(EFactoryLinked object) {
 		return null;
 	}
 
@@ -361,7 +419,7 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEClassLinked(EClassLinked object) {
+	public T1 caseEClassLinked(EClassLinked object) {
 		return null;
 	}
 
@@ -377,7 +435,7 @@ public class EmailSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	public T defaultCase(EObject object) {
+	public T1 defaultCase(EObject object) {
 		return null;
 	}
 
