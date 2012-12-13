@@ -92,12 +92,10 @@
     <xsd:complexContent>
       <xsd:extension base="email:TemplateLike">
         <xsd:choice maxOccurs="unbounded" minOccurs="0">
-          <xsd:element name="template" type="email:PageType"/>
           <xsd:element name="recipients" type="email:Recipient"/>
           <xsd:element name="appManifest" type="commons:AppManifest"/>
           <xsd:element name="webAddress" type="commons:WebAddress"/>
         </xsd:choice>
-        <xsd:attribute name="template" type="xsd:string"/>
         <xsd:attribute name="recipients" type="xsd:string"/>
         <xsd:attribute name="appManifest" type="xsd:string"/>
         <xsd:attribute name="webAddress" type="xsd:string"/>
@@ -127,6 +125,9 @@
   <xsd:complexType abstract="true" name="Layout">
     <xsd:complexContent>
       <xsd:extension base="email:Template">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="layoutType" type="email:LayoutType"/>
+        </xsd:choice>
         <xsd:attribute name="pageSubject" type="xsd:string" use="required">
           <xsd:annotation>
             <xsd:documentation>Rendered subject by Page, to be used as input for the layout.</xsd:documentation>
@@ -142,6 +143,7 @@
             <xsd:documentation>Rendered text/html content by Page, to be used as input for the layout.</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
+        <xsd:attribute name="layoutType" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
@@ -151,8 +153,10 @@
       <xsd:extension base="email:Template">
         <xsd:choice maxOccurs="unbounded" minOccurs="0">
           <xsd:element name="layout" type="email:Layout"/>
+          <xsd:element name="pageType" type="email:PageType"/>
         </xsd:choice>
         <xsd:attribute name="layout" type="xsd:string"/>
+        <xsd:attribute name="pageType" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>

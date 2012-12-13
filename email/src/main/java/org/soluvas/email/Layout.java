@@ -14,6 +14,7 @@ package org.soluvas.email;
  *   <li>{@link org.soluvas.email.Layout#getPageSubject <em>Page Subject</em>}</li>
  *   <li>{@link org.soluvas.email.Layout#getPagePlain <em>Page Plain</em>}</li>
  *   <li>{@link org.soluvas.email.Layout#getPageHtml <em>Page Html</em>}</li>
+ *   <li>{@link org.soluvas.email.Layout#getLayoutType <em>Layout Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,5 +97,31 @@ public interface Layout extends Template {
 	 * @generated
 	 */
 	void setPageHtml(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Layout Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Layout Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Layout Type</em>' reference.
+	 * @see #setLayoutType(LayoutType)
+	 * @see org.soluvas.email.EmailPackage#getLayout_LayoutType()
+	 * @model required="true"
+	 * @generated
+	 */
+	LayoutType getLayoutType();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.email.Layout#getLayoutType <em>Layout Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Layout Type</em>' reference.
+	 * @see #getLayoutType()
+	 * @generated
+	 */
+	void setLayoutType(LayoutType value);
 
 } // Layout

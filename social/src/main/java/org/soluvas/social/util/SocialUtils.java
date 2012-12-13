@@ -34,13 +34,13 @@ public class SocialUtils {
 	 */
 	public static <T extends Target> T createTarget(@Nonnull final Class<T> targetClass) {
 		final BundleContext bundleContext = FrameworkUtil.getBundle(SocialUtils.class).getBundleContext();
-		final ServiceReference<SocialSchemaCatalog> storySchemaCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(SocialSchemaCatalog.class),
+		final ServiceReference<SocialSchemaCatalog> socialSchemaCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(SocialSchemaCatalog.class),
 				"Cannot get %s service reference", SocialSchemaCatalog.class.getName());
-		final SocialSchemaCatalog storySchemaCatalog = Preconditions.checkNotNull(
-				bundleContext.getService(storySchemaCatalogRef),
+		final SocialSchemaCatalog socialSchemaCatalog = Preconditions.checkNotNull(
+				bundleContext.getService(socialSchemaCatalogRef),
 				"Cannot get %s service", SocialSchemaCatalog.class.getName());
 		try {
-			final TargetType targetType = Iterables.find(storySchemaCatalog.getTargetTypes(),
+			final TargetType targetType = Iterables.find(socialSchemaCatalog.getTargetTypes(),
 					new Predicate<TargetType>() {
 				@Override
 				public boolean apply(@Nullable final TargetType input) {
@@ -55,11 +55,11 @@ public class SocialUtils {
 					return input.getJavaClass().getName();
 				}
 			};
-			final List<String> supportedTargetTypeQNames = Lists.transform(storySchemaCatalog.getTargetTypes(), targetTypeQName);
+			final List<String> supportedTargetTypeQNames = Lists.transform(socialSchemaCatalog.getTargetTypes(), targetTypeQName);
 			throw new SocialException(String.format("Cannot find target type %s, %s supported types are: %s",
 					targetClass.getName(), supportedTargetTypeQNames.size(), supportedTargetTypeQNames), e);
 		} finally {
-			bundleContext.ungetService(storySchemaCatalogRef);
+			bundleContext.ungetService(socialSchemaCatalogRef);
 		}
 	}
 
@@ -74,14 +74,14 @@ public class SocialUtils {
 	public static <T extends Target> T createTarget(@Nonnull final String nsPrefix,
 			@Nonnull final String name) {
 		final BundleContext bundleContext = FrameworkUtil.getBundle(SocialUtils.class).getBundleContext();
-		final ServiceReference<SocialSchemaCatalog> storySchemaCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(SocialSchemaCatalog.class),
+		final ServiceReference<SocialSchemaCatalog> socialSchemaCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(SocialSchemaCatalog.class),
 				"Cannot get %s service reference", SocialSchemaCatalog.class.getName());
-		final SocialSchemaCatalog storySchemaCatalog = Preconditions.checkNotNull(
-				bundleContext.getService(storySchemaCatalogRef),
+		final SocialSchemaCatalog socialSchemaCatalog = Preconditions.checkNotNull(
+				bundleContext.getService(socialSchemaCatalogRef),
 				"Cannot get %s service", SocialSchemaCatalog.class.getName());
 		final String qName = nsPrefix + ":" + name;
 		try {
-			final TargetType targetType = Iterables.find(storySchemaCatalog.getTargetTypes(),
+			final TargetType targetType = Iterables.find(socialSchemaCatalog.getTargetTypes(),
 					new Predicate<TargetType>() {
 				@Override
 				public boolean apply(@Nullable final TargetType input) {
@@ -96,11 +96,11 @@ public class SocialUtils {
 					return input.getEPackageNsPrefix() + ":" + input.getName();
 				}
 			};
-			final List<String> supportedTargetTypeQNames = Lists.transform(storySchemaCatalog.getTargetTypes(), targetTypeQName);
+			final List<String> supportedTargetTypeQNames = Lists.transform(socialSchemaCatalog.getTargetTypes(), targetTypeQName);
 			throw new SocialException(String.format("Cannot find target type %s, %s supported types are: %s",
 					qName, supportedTargetTypeQNames.size(), supportedTargetTypeQNames), e);
 		} finally {
-			bundleContext.ungetService(storySchemaCatalogRef);
+			bundleContext.ungetService(socialSchemaCatalogRef);
 		}
 	}
 

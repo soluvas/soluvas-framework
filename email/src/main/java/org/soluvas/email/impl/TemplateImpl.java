@@ -2,6 +2,8 @@
  */
 package org.soluvas.email.impl;
 
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.Collection;
 import java.util.Map;
 
@@ -14,13 +16,15 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.soluvas.commons.AppManifest;
-import org.soluvas.commons.EClassStatus;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.email.EmailPackage;
-import org.soluvas.email.PageType;
 import org.soluvas.email.Recipient;
 import org.soluvas.email.Template;
-import org.soluvas.email.TemplateLike;
+
+import com.github.mustachejava.DefaultMustacheFactory;
+import com.github.mustachejava.Mustache;
+import com.github.mustachejava.MustacheFactory;
+import com.google.common.collect.ImmutableMap;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +36,6 @@ import org.soluvas.email.TemplateLike;
  *   <li>{@link org.soluvas.email.impl.TemplateImpl#getSubjectTemplate <em>Subject Template</em>}</li>
  *   <li>{@link org.soluvas.email.impl.TemplateImpl#getPlainTemplate <em>Plain Template</em>}</li>
  *   <li>{@link org.soluvas.email.impl.TemplateImpl#getHtmlTemplate <em>Html Template</em>}</li>
- *   <li>{@link org.soluvas.email.impl.TemplateImpl#getTemplate <em>Template</em>}</li>
  *   <li>{@link org.soluvas.email.impl.TemplateImpl#getRecipients <em>Recipients</em>}</li>
  *   <li>{@link org.soluvas.email.impl.TemplateImpl#getAppManifest <em>App Manifest</em>}</li>
  *   <li>{@link org.soluvas.email.impl.TemplateImpl#getWebAddress <em>Web Address</em>}</li>
@@ -101,16 +104,6 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 	 * @ordered
 	 */
 	protected String htmlTemplate = HTML_TEMPLATE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getTemplate() <em>Template</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTemplate()
-	 * @generated
-	 * @ordered
-	 */
-	protected PageType template;
 
 	/**
 	 * The cached value of the '{@link #getRecipients() <em>Recipients</em>}' reference list.
@@ -236,46 +229,6 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 	 * @generated
 	 */
 	@Override
-	public PageType getTemplate() {
-		if (template != null && ((EObject)template).eIsProxy()) {
-			InternalEObject oldTemplate = (InternalEObject)template;
-			template = (PageType)eResolveProxy(oldTemplate);
-			if (template != oldTemplate) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EmailPackage.TEMPLATE__TEMPLATE, oldTemplate, template));
-			}
-		}
-		return template;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PageType basicGetTemplate() {
-		return template;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setTemplate(PageType newTemplate) {
-		PageType oldTemplate = template;
-		template = newTemplate;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.TEMPLATE__TEMPLATE, oldTemplate, template));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<Recipient> getRecipients() {
 		if (recipients == null) {
 			recipients = new EObjectResolvingEList<Recipient>(Recipient.class, this, EmailPackage.TEMPLATE__RECIPIENTS);
@@ -366,37 +319,40 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public String renderSubject(Recipient recipient) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return doRender(getSubjectTemplate(), recipient);
+	}
+
+	/**
+	 * @return
+	 */
+	protected String doRender(String template, Recipient recipient) {
+		final MustacheFactory mf = new DefaultMustacheFactory();
+		final Mustache mustache = mf.compile(new StringReader(template), "subject");
+		final StringWriter stringWriter = new StringWriter();
+		final Map<String, Recipient> extras = ImmutableMap.of("recipient", recipient);
+		mustache.execute(stringWriter, new Object[] { extras, this });
+		return stringWriter.toString();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public String renderText(Recipient recipient) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return doRender(getPlainTemplate(), recipient);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public String renderHtml(Recipient recipient) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return doRender(getHtmlTemplate(), recipient);
 	}
 
 	/**
@@ -413,9 +369,6 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 				return getPlainTemplate();
 			case EmailPackage.TEMPLATE__HTML_TEMPLATE:
 				return getHtmlTemplate();
-			case EmailPackage.TEMPLATE__TEMPLATE:
-				if (resolve) return getTemplate();
-				return basicGetTemplate();
 			case EmailPackage.TEMPLATE__RECIPIENTS:
 				return getRecipients();
 			case EmailPackage.TEMPLATE__APP_MANIFEST:
@@ -445,9 +398,6 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 				return;
 			case EmailPackage.TEMPLATE__HTML_TEMPLATE:
 				setHtmlTemplate((String)newValue);
-				return;
-			case EmailPackage.TEMPLATE__TEMPLATE:
-				setTemplate((PageType)newValue);
 				return;
 			case EmailPackage.TEMPLATE__RECIPIENTS:
 				getRecipients().clear();
@@ -480,9 +430,6 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 			case EmailPackage.TEMPLATE__HTML_TEMPLATE:
 				setHtmlTemplate(HTML_TEMPLATE_EDEFAULT);
 				return;
-			case EmailPackage.TEMPLATE__TEMPLATE:
-				setTemplate((PageType)null);
-				return;
 			case EmailPackage.TEMPLATE__RECIPIENTS:
 				getRecipients().clear();
 				return;
@@ -510,8 +457,6 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 				return PLAIN_TEMPLATE_EDEFAULT == null ? plainTemplate != null : !PLAIN_TEMPLATE_EDEFAULT.equals(plainTemplate);
 			case EmailPackage.TEMPLATE__HTML_TEMPLATE:
 				return HTML_TEMPLATE_EDEFAULT == null ? htmlTemplate != null : !HTML_TEMPLATE_EDEFAULT.equals(htmlTemplate);
-			case EmailPackage.TEMPLATE__TEMPLATE:
-				return template != null;
 			case EmailPackage.TEMPLATE__RECIPIENTS:
 				return recipients != null && !recipients.isEmpty();
 			case EmailPackage.TEMPLATE__APP_MANIFEST:

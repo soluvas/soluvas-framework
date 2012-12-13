@@ -2,6 +2,7 @@
  */
 package org.soluvas.email;
 
+import java.util.List;
 import org.apache.commons.mail.Email;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.email.Page#getLayout <em>Layout</em>}</li>
+ *   <li>{@link org.soluvas.email.Page#getPageType <em>Page Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,6 +52,32 @@ public interface Page extends Template {
 	void setLayout(Layout value);
 
 	/**
+	 * Returns the value of the '<em><b>Page Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Page Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Page Type</em>' reference.
+	 * @see #setPageType(PageType)
+	 * @see org.soluvas.email.EmailPackage#getPage_PageType()
+	 * @model required="true"
+	 * @generated
+	 */
+	PageType getPageType();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.email.Page#getPageType <em>Page Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Page Type</em>' reference.
+	 * @see #getPageType()
+	 * @generated
+	 */
+	void setPageType(PageType value);
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -66,9 +94,9 @@ public interface Page extends Template {
 	 * <!-- begin-model-doc -->
 	 * Compose emails based on attributes, using the provided layout.
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.soluvas.email.Email"
+	 * @model dataType="org.soluvas.commons.List<org.soluvas.email.Email>" required="true" many="false"
 	 * @generated
 	 */
-	EList<Email> composeAll();
+	List<Email> composeAll();
 
 } // Page

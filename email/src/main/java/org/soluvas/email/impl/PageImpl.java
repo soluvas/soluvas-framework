@@ -2,22 +2,32 @@
  */
 package org.soluvas.email.impl;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import org.apache.commons.mail.Email;
-
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.SimpleEmail;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.soluvas.email.EmailFormat;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Layout;
 import org.soluvas.email.Page;
+import org.soluvas.email.PageType;
 import org.soluvas.email.Recipient;
+
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,12 +37,16 @@ import org.soluvas.email.Recipient;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.soluvas.email.impl.PageImpl#getLayout <em>Layout</em>}</li>
+ *   <li>{@link org.soluvas.email.impl.PageImpl#getPageType <em>Page Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public abstract class PageImpl extends TemplateImpl implements Page {
+	
+	private static final Logger log = LoggerFactory.getLogger(PageImpl.class);
+	
 	/**
 	 * The cached value of the '{@link #getLayout() <em>Layout</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -42,6 +56,16 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * @ordered
 	 */
 	protected Layout layout;
+
+	/**
+	 * The cached value of the '{@link #getPageType() <em>Page Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPageType()
+	 * @generated
+	 * @ordered
+	 */
+	protected PageType pageType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -67,6 +91,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Layout getLayout() {
 		if (layout != null && ((EObject)layout).eIsProxy()) {
 			InternalEObject oldLayout = (InternalEObject)layout;
@@ -93,6 +118,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLayout(Layout newLayout) {
 		Layout oldLayout = layout;
 		layout = newLayout;
@@ -105,10 +131,17 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Email compose(Recipient recipient) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	@Override
+	public PageType getPageType() {
+		if (pageType != null && ((EObject)pageType).eIsProxy()) {
+			InternalEObject oldPageType = (InternalEObject)pageType;
+			pageType = (PageType)eResolveProxy(oldPageType);
+			if (pageType != oldPageType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EmailPackage.PAGE__PAGE_TYPE, oldPageType, pageType));
+			}
+		}
+		return pageType;
 	}
 
 	/**
@@ -116,10 +149,85 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Email> composeAll() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public PageType basicGetPageType() {
+		return pageType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public void setPageType(PageType newPageType) {
+		PageType oldPageType = pageType;
+		pageType = newPageType;
+		
+		setSubjectTemplate(newPageType.getSubjectTemplate());
+		setPlainTemplate(newPageType.getPlainTemplate());
+		setHtmlTemplate(newPageType.getHtmlTemplate());
+		
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.PAGE__PAGE_TYPE, oldPageType, pageType));
+		
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public Email compose(Recipient recipient) {
+		final String subject = renderSubject(recipient);
+		final EmailFormat format = Optional.fromNullable(recipient.getPreferredFormat()).or(EmailFormat.MULTIPART);
+		try {
+			final Email email;
+			final String pageText = renderText(recipient);
+			final String pageHtml = renderHtml(recipient);
+			layout.setPagePlain(pageText);
+			layout.setPageHtml(pageHtml);
+			layout.setPageSubject(subject);
+			switch (format) {
+			case MULTIPART:
+				email = new HtmlEmail();
+				((HtmlEmail) email).setTextMsg(layout.renderText(recipient));
+				((HtmlEmail) email).setHtmlMsg(layout.renderHtml(recipient));
+				break;
+			case PLAIN:
+				email = new SimpleEmail();
+				email.setMsg(pageText);
+				break;
+			case HTML:
+				email = new HtmlEmail();
+				((HtmlEmail) email).setHtmlMsg(pageHtml);
+				break;
+			default:
+				throw new org.soluvas.email.EmailException("Unknown format: " + format);
+			}
+			email.setFrom("cantik@berbatik.com", "Berbatik");
+			email.setSubject(layout.renderSubject(recipient));
+			email.addTo(recipient.getEmail(), recipient.getName());
+			return email;
+		} catch (EmailException e) {
+			throw new org.soluvas.email.EmailException("Cannot compose " + pageType.getNsPrefix() + ":" + pageType.getName() +
+					" email to " + recipient, e);
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public List<Email> composeAll() {
+		log.info("Composing {}:{} email to {} recipients", getPageType().getNsPrefix(), getPageType().getName(),
+				recipients.size());
+		final List<Email> emails = ImmutableList.copyOf( Lists.transform(recipients, new Function<Recipient, Email>() {
+			@Override @Nullable
+			public Email apply(@Nullable Recipient input) {
+				return compose(input);
+			}
+		}) );
+		return emails;
 	}
 
 	/**
@@ -133,6 +241,9 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 			case EmailPackage.PAGE__LAYOUT:
 				if (resolve) return getLayout();
 				return basicGetLayout();
+			case EmailPackage.PAGE__PAGE_TYPE:
+				if (resolve) return getPageType();
+				return basicGetPageType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -147,6 +258,9 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 		switch (featureID) {
 			case EmailPackage.PAGE__LAYOUT:
 				setLayout((Layout)newValue);
+				return;
+			case EmailPackage.PAGE__PAGE_TYPE:
+				setPageType((PageType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -163,6 +277,9 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 			case EmailPackage.PAGE__LAYOUT:
 				setLayout((Layout)null);
 				return;
+			case EmailPackage.PAGE__PAGE_TYPE:
+				setPageType((PageType)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -177,6 +294,8 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 		switch (featureID) {
 			case EmailPackage.PAGE__LAYOUT:
 				return layout != null;
+			case EmailPackage.PAGE__PAGE_TYPE:
+				return pageType != null;
 		}
 		return super.eIsSet(featureID);
 	}

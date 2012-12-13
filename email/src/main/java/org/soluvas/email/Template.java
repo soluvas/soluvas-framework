@@ -15,7 +15,6 @@ import org.soluvas.commons.WebAddress;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.soluvas.email.Template#getTemplate <em>Template</em>}</li>
  *   <li>{@link org.soluvas.email.Template#getRecipients <em>Recipients</em>}</li>
  *   <li>{@link org.soluvas.email.Template#getAppManifest <em>App Manifest</em>}</li>
  *   <li>{@link org.soluvas.email.Template#getWebAddress <em>Web Address</em>}</li>
@@ -27,32 +26,6 @@ import org.soluvas.commons.WebAddress;
  * @generated
  */
 public interface Template extends TemplateLike {
-	/**
-	 * Returns the value of the '<em><b>Template</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Template</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Template</em>' reference.
-	 * @see #setTemplate(PageType)
-	 * @see org.soluvas.email.EmailPackage#getTemplate_Template()
-	 * @model
-	 * @generated
-	 */
-	PageType getTemplate();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.email.Template#getTemplate <em>Template</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Template</em>' reference.
-	 * @see #getTemplate()
-	 * @generated
-	 */
-	void setTemplate(PageType value);
-
 	/**
 	 * Returns the value of the '<em><b>Recipients</b></em>' reference list.
 	 * The list contents are of type {@link org.soluvas.email.Recipient}.

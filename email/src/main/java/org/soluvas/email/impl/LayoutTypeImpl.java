@@ -7,6 +7,8 @@ import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Layout;
 import org.soluvas.email.LayoutType;
 
+import com.google.common.base.Preconditions;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Layout Type</b></em>'.
@@ -39,12 +41,14 @@ public class LayoutTypeImpl extends TemplateTypeImpl<Layout> implements LayoutTy
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
+	@Override
 	public Layout create() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		Preconditions.checkNotNull(getEFactory(),
+				"Cannot create Layout %s because eFactory is null", getName());
+		final Layout target = (Layout) getEFactory().create(getEClass());
+		target.setLayoutType(this);
+		return target;
 	}
 
 } //LayoutTypeImpl

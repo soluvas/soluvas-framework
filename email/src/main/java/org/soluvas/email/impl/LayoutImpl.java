@@ -3,13 +3,13 @@
 package org.soluvas.email.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Layout;
+import org.soluvas.email.LayoutType;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,6 +21,7 @@ import org.soluvas.email.Layout;
  *   <li>{@link org.soluvas.email.impl.LayoutImpl#getPageSubject <em>Page Subject</em>}</li>
  *   <li>{@link org.soluvas.email.impl.LayoutImpl#getPagePlain <em>Page Plain</em>}</li>
  *   <li>{@link org.soluvas.email.impl.LayoutImpl#getPageHtml <em>Page Html</em>}</li>
+ *   <li>{@link org.soluvas.email.impl.LayoutImpl#getLayoutType <em>Layout Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -88,6 +89,16 @@ public abstract class LayoutImpl extends TemplateImpl implements Layout {
 	protected String pageHtml = PAGE_HTML_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getLayoutType() <em>Layout Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLayoutType()
+	 * @generated
+	 * @ordered
+	 */
+	protected LayoutType layoutType;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -111,6 +122,7 @@ public abstract class LayoutImpl extends TemplateImpl implements Layout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPageSubject() {
 		return pageSubject;
 	}
@@ -120,6 +132,7 @@ public abstract class LayoutImpl extends TemplateImpl implements Layout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPageSubject(String newPageSubject) {
 		String oldPageSubject = pageSubject;
 		pageSubject = newPageSubject;
@@ -132,6 +145,7 @@ public abstract class LayoutImpl extends TemplateImpl implements Layout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPagePlain() {
 		return pagePlain;
 	}
@@ -141,6 +155,7 @@ public abstract class LayoutImpl extends TemplateImpl implements Layout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPagePlain(String newPagePlain) {
 		String oldPagePlain = pagePlain;
 		pagePlain = newPagePlain;
@@ -153,6 +168,7 @@ public abstract class LayoutImpl extends TemplateImpl implements Layout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPageHtml() {
 		return pageHtml;
 	}
@@ -162,11 +178,56 @@ public abstract class LayoutImpl extends TemplateImpl implements Layout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPageHtml(String newPageHtml) {
 		String oldPageHtml = pageHtml;
 		pageHtml = newPageHtml;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.LAYOUT__PAGE_HTML, oldPageHtml, pageHtml));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public LayoutType getLayoutType() {
+		if (layoutType != null && ((EObject)layoutType).eIsProxy()) {
+			InternalEObject oldLayoutType = (InternalEObject)layoutType;
+			layoutType = (LayoutType)eResolveProxy(oldLayoutType);
+			if (layoutType != oldLayoutType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EmailPackage.LAYOUT__LAYOUT_TYPE, oldLayoutType, layoutType));
+			}
+		}
+		return layoutType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LayoutType basicGetLayoutType() {
+		return layoutType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public void setLayoutType(LayoutType newLayoutType) {
+		LayoutType oldLayoutType = layoutType;
+		layoutType = newLayoutType;
+		
+		setSubjectTemplate(newLayoutType.getSubjectTemplate());
+		setPlainTemplate(newLayoutType.getPlainTemplate());
+		setHtmlTemplate(newLayoutType.getHtmlTemplate());
+		
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.LAYOUT__LAYOUT_TYPE, oldLayoutType, layoutType));
 	}
 
 	/**
@@ -183,6 +244,9 @@ public abstract class LayoutImpl extends TemplateImpl implements Layout {
 				return getPagePlain();
 			case EmailPackage.LAYOUT__PAGE_HTML:
 				return getPageHtml();
+			case EmailPackage.LAYOUT__LAYOUT_TYPE:
+				if (resolve) return getLayoutType();
+				return basicGetLayoutType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -203,6 +267,9 @@ public abstract class LayoutImpl extends TemplateImpl implements Layout {
 				return;
 			case EmailPackage.LAYOUT__PAGE_HTML:
 				setPageHtml((String)newValue);
+				return;
+			case EmailPackage.LAYOUT__LAYOUT_TYPE:
+				setLayoutType((LayoutType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -225,6 +292,9 @@ public abstract class LayoutImpl extends TemplateImpl implements Layout {
 			case EmailPackage.LAYOUT__PAGE_HTML:
 				setPageHtml(PAGE_HTML_EDEFAULT);
 				return;
+			case EmailPackage.LAYOUT__LAYOUT_TYPE:
+				setLayoutType((LayoutType)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -243,6 +313,8 @@ public abstract class LayoutImpl extends TemplateImpl implements Layout {
 				return PAGE_PLAIN_EDEFAULT == null ? pagePlain != null : !PAGE_PLAIN_EDEFAULT.equals(pagePlain);
 			case EmailPackage.LAYOUT__PAGE_HTML:
 				return PAGE_HTML_EDEFAULT == null ? pageHtml != null : !PAGE_HTML_EDEFAULT.equals(pageHtml);
+			case EmailPackage.LAYOUT__LAYOUT_TYPE:
+				return layoutType != null;
 		}
 		return super.eIsSet(featureID);
 	}

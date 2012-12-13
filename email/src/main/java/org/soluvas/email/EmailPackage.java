@@ -762,22 +762,13 @@ public interface EmailPackage extends EPackage {
 	int TEMPLATE__HTML_TEMPLATE = TEMPLATE_LIKE__HTML_TEMPLATE;
 
 	/**
-	 * The feature id for the '<em><b>Template</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE__TEMPLATE = TEMPLATE_LIKE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Recipients</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE__RECIPIENTS = TEMPLATE_LIKE_FEATURE_COUNT + 1;
+	int TEMPLATE__RECIPIENTS = TEMPLATE_LIKE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>App Manifest</b></em>' reference.
@@ -786,7 +777,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE__APP_MANIFEST = TEMPLATE_LIKE_FEATURE_COUNT + 2;
+	int TEMPLATE__APP_MANIFEST = TEMPLATE_LIKE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Web Address</b></em>' reference.
@@ -795,7 +786,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE__WEB_ADDRESS = TEMPLATE_LIKE_FEATURE_COUNT + 3;
+	int TEMPLATE__WEB_ADDRESS = TEMPLATE_LIKE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Template</em>' class.
@@ -804,7 +795,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_FEATURE_COUNT = TEMPLATE_LIKE_FEATURE_COUNT + 4;
+	int TEMPLATE_FEATURE_COUNT = TEMPLATE_LIKE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Email</b></em>' attribute.
@@ -906,15 +897,6 @@ public interface EmailPackage extends EPackage {
 	int LAYOUT__HTML_TEMPLATE = TEMPLATE__HTML_TEMPLATE;
 
 	/**
-	 * The feature id for the '<em><b>Template</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LAYOUT__TEMPLATE = TEMPLATE__TEMPLATE;
-
-	/**
 	 * The feature id for the '<em><b>Recipients</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -969,13 +951,22 @@ public interface EmailPackage extends EPackage {
 	int LAYOUT__PAGE_HTML = TEMPLATE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Layout Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT__LAYOUT_TYPE = TEMPLATE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Layout</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUT_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 3;
+	int LAYOUT_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
@@ -1003,15 +994,6 @@ public interface EmailPackage extends EPackage {
 	 * @ordered
 	 */
 	int PAGE__HTML_TEMPLATE = TEMPLATE__HTML_TEMPLATE;
-
-	/**
-	 * The feature id for the '<em><b>Template</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGE__TEMPLATE = TEMPLATE__TEMPLATE;
 
 	/**
 	 * The feature id for the '<em><b>Recipients</b></em>' reference list.
@@ -1050,13 +1032,22 @@ public interface EmailPackage extends EPackage {
 	int PAGE__LAYOUT = TEMPLATE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Page Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__PAGE_TYPE = TEMPLATE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Page</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 1;
+	int PAGE_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.EmailFormat <em>Format</em>}' enum.
@@ -1149,17 +1140,6 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTemplate();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.soluvas.email.Template#getTemplate <em>Template</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Template</em>'.
-	 * @see org.soluvas.email.Template#getTemplate()
-	 * @see #getTemplate()
-	 * @generated
-	 */
-	EReference getTemplate_Template();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.soluvas.email.Template#getRecipients <em>Recipients</em>}'.
@@ -1335,6 +1315,17 @@ public interface EmailPackage extends EPackage {
 	EAttribute getLayout_PageHtml();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.email.Layout#getLayoutType <em>Layout Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Layout Type</em>'.
+	 * @see org.soluvas.email.Layout#getLayoutType()
+	 * @see #getLayout()
+	 * @generated
+	 */
+	EReference getLayout_LayoutType();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.Page <em>Page</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1354,6 +1345,17 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPage_Layout();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.email.Page#getPageType <em>Page Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Page Type</em>'.
+	 * @see org.soluvas.email.Page#getPageType()
+	 * @see #getPage()
+	 * @generated
+	 */
+	EReference getPage_PageType();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.TemplateLike <em>Template Like</em>}'.
@@ -1508,14 +1510,6 @@ public interface EmailPackage extends EPackage {
 		EClass TEMPLATE = eINSTANCE.getTemplate();
 
 		/**
-		 * The meta object literal for the '<em><b>Template</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TEMPLATE__TEMPLATE = eINSTANCE.getTemplate_Template();
-
-		/**
 		 * The meta object literal for the '<em><b>Recipients</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1650,6 +1644,14 @@ public interface EmailPackage extends EPackage {
 		EAttribute LAYOUT__PAGE_HTML = eINSTANCE.getLayout_PageHtml();
 
 		/**
+		 * The meta object literal for the '<em><b>Layout Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LAYOUT__LAYOUT_TYPE = eINSTANCE.getLayout_LayoutType();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.email.impl.PageImpl <em>Page</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1666,6 +1668,14 @@ public interface EmailPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PAGE__LAYOUT = eINSTANCE.getPage_Layout();
+
+		/**
+		 * The meta object literal for the '<em><b>Page Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PAGE__PAGE_TYPE = eINSTANCE.getPage_PageType();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.email.TemplateLike <em>Template Like</em>}' class.

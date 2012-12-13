@@ -58,7 +58,6 @@
       </eAnnotations>
       <eParameters name="recipient" eType="#//Recipient"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="#//PageType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="recipients" upperBound="-1"
         eType="#//Recipient"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="appManifest" eType="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//AppManifest"/>
@@ -101,6 +100,8 @@
         <details key="documentation" value="Rendered text/html content by Page, to be used as input for the layout."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layoutType" lowerBound="1"
+        eType="#//LayoutType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Page" abstract="true" eSuperTypes="#//Template">
     <eOperations name="compose" eType="#//Email">
@@ -109,12 +110,17 @@
       </eAnnotations>
       <eParameters name="recipient" eType="#//Recipient"/>
     </eOperations>
-    <eOperations name="composeAll" upperBound="-1" eType="#//Email">
+    <eOperations name="composeAll" lowerBound="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Compose emails based on attributes, using the provided layout."/>
       </eAnnotations>
+      <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//List">
+        <eTypeArguments eClassifier="#//Email"/>
+      </eGenericType>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//Layout"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pageType" lowerBound="1"
+        eType="#//PageType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Email" instanceClassName="org.apache.commons.mail.Email"/>
   <eClassifiers xsi:type="ecore:EClass" name="TemplateLike" abstract="true" interface="true">

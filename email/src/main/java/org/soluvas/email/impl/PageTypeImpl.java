@@ -8,6 +8,8 @@ import org.soluvas.email.Layout;
 import org.soluvas.email.Page;
 import org.soluvas.email.PageType;
 
+import com.google.common.base.Preconditions;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Page Type</b></em>'.
@@ -40,12 +42,15 @@ public class PageTypeImpl extends TemplateTypeImpl<Page> implements PageType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
+	@Override
 	public Page create(Layout layout) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		Preconditions.checkNotNull(getEFactory(),
+				"Cannot create Page %s because eFactory is null", getName());
+		final Page target = (Page) getEFactory().create(getEClass());
+		target.setPageType(this);
+		target.setLayout(layout);
+		return target;
 	}
 
 } //PageTypeImpl
