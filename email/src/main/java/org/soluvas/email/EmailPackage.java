@@ -79,22 +79,22 @@ public interface EmailPackage extends EPackage {
 	int EMAIL_CATALOG__NS_PREFIX = CommonsPackage.NS_PREFIXABLE__NS_PREFIX;
 
 	/**
-	 * The feature id for the '<em><b>Pages</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Page Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_CATALOG__PAGES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 0;
+	int EMAIL_CATALOG__PAGE_TYPES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Layouts</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Layout Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_CATALOG__LAYOUTS = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 1;
+	int EMAIL_CATALOG__LAYOUT_TYPES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Catalog</em>' class.
@@ -1099,26 +1099,26 @@ public interface EmailPackage extends EPackage {
 	EClass getEmailCatalog();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.soluvas.email.EmailCatalog#getPages <em>Pages</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.soluvas.email.EmailCatalog#getPageTypes <em>Page Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Pages</em>'.
-	 * @see org.soluvas.email.EmailCatalog#getPages()
+	 * @return the meta object for the containment reference list '<em>Page Types</em>'.
+	 * @see org.soluvas.email.EmailCatalog#getPageTypes()
 	 * @see #getEmailCatalog()
 	 * @generated
 	 */
-	EReference getEmailCatalog_Pages();
+	EReference getEmailCatalog_PageTypes();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.soluvas.email.EmailCatalog#getLayouts <em>Layouts</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.soluvas.email.EmailCatalog#getLayoutTypes <em>Layout Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Layouts</em>'.
-	 * @see org.soluvas.email.EmailCatalog#getLayouts()
+	 * @return the meta object for the containment reference list '<em>Layout Types</em>'.
+	 * @see org.soluvas.email.EmailCatalog#getLayoutTypes()
 	 * @see #getEmailCatalog()
 	 * @generated
 	 */
-	EReference getEmailCatalog_Layouts();
+	EReference getEmailCatalog_LayoutTypes();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.TemplateType <em>Template Type</em>}'.
@@ -1462,20 +1462,20 @@ public interface EmailPackage extends EPackage {
 		EClass EMAIL_CATALOG = eINSTANCE.getEmailCatalog();
 
 		/**
-		 * The meta object literal for the '<em><b>Pages</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Page Types</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EMAIL_CATALOG__PAGES = eINSTANCE.getEmailCatalog_Pages();
+		EReference EMAIL_CATALOG__PAGE_TYPES = eINSTANCE.getEmailCatalog_PageTypes();
 
 		/**
-		 * The meta object literal for the '<em><b>Layouts</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Layout Types</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EMAIL_CATALOG__LAYOUTS = eINSTANCE.getEmailCatalog_Layouts();
+		EReference EMAIL_CATALOG__LAYOUT_TYPES = eINSTANCE.getEmailCatalog_LayoutTypes();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.email.impl.TemplateTypeImpl <em>Template Type</em>}' class.

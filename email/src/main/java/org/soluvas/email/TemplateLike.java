@@ -35,7 +35,7 @@ public interface TemplateLike extends SerializableEObject {
 	 * @return the value of the '<em>Subject Template</em>' attribute.
 	 * @see #setSubjectTemplate(String)
 	 * @see org.soluvas.email.EmailPackage#getTemplateLike_SubjectTemplate()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getSubjectTemplate();
@@ -60,7 +60,7 @@ public interface TemplateLike extends SerializableEObject {
 	 * @return the value of the '<em>Plain Template</em>' attribute.
 	 * @see #setPlainTemplate(String)
 	 * @see org.soluvas.email.EmailPackage#getTemplateLike_PlainTemplate()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getPlainTemplate();

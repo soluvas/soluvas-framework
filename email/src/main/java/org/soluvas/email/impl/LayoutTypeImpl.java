@@ -36,4 +36,15 @@ public class LayoutTypeImpl extends TemplateTypeImpl<Layout> implements LayoutTy
 		return EmailPackage.Literals.LAYOUT_TYPE;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Layout create() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
 } //LayoutTypeImpl

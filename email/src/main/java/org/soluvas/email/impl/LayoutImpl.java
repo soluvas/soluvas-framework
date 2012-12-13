@@ -26,7 +26,7 @@ import org.soluvas.email.Layout;
  *
  * @generated
  */
-public class LayoutImpl extends TemplateImpl implements Layout {
+public abstract class LayoutImpl extends TemplateImpl implements Layout {
 	/**
 	 * The default value of the '{@link #getPageSubject() <em>Page Subject</em>}' attribute.
 	 * <!-- begin-user-doc -->

@@ -1,5 +1,6 @@
 package org.soluvas.email.util;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -9,12 +10,13 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.xml.validation.SchemaFactory;
 
+import org.apache.commons.io.IOUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.osgi.framework.Bundle;
@@ -44,7 +46,7 @@ import com.google.common.eventbus.EventBus;
  * @author ceefour
  *
  */
-public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<Map<String, EmailCatalog>> {
+public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObject>> {
 	
 	private static Logger log = LoggerFactory
 			.getLogger(EmailCatalogXmiTracker.class);
@@ -67,7 +69,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<Map<Strin
 	}
 
 	@Override
-	public Map<String, EmailCatalog> addingBundle(final Bundle bundle, BundleEvent event) {
+	public List<EObject> addingBundle(final Bundle bundle, BundleEvent event) {
 		final String path = bundle.getSymbolicName().replace('.', '/');
 		
 		// ------------------ Scan EmailCatalogs ------------
@@ -76,10 +78,10 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<Map<Strin
 				path , xmiFilePattern);
 		final Enumeration<URL> entries = bundle.findEntries(path, xmiFilePattern, false);
 		if (entries == null)
-			return ImmutableMap.of();
+			return ImmutableList.of();
 		final List<URL> xmiFiles = ImmutableList.copyOf(Iterators.forEnumeration(entries));
 		if (xmiFiles.isEmpty())
-			return ImmutableMap.of();
+			return ImmutableList.of();
 
 		// ------------------ Ecore package files ------------
 		final ImmutableMap.Builder<URL, URL> xmiToEcoreMapBuilder = ImmutableMap.builder();
@@ -168,7 +170,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<Map<Strin
 				eClassMap.keySet() );
 
 		// ------------------ EmailCatalog XMI files ------------
-		final List<EmailCatalog> xmiFileObjs = ImmutableList.copyOf(Lists.transform(xmiFiles, new Function<URL, EmailCatalog>() {
+		final List<EmailCatalog> catalogs = ImmutableList.copyOf(Lists.transform(xmiFiles, new Function<URL, EmailCatalog>() {
 			@Override @Nullable
 			public EmailCatalog apply(@Nullable URL url) {
 				final URL ecoreUrl = xmiToEcoreMap.get(url);
@@ -190,18 +192,33 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<Map<Strin
 						bundle);
 				final EmailCatalog emailCatalog = loader.get();
 				
-				for (final LayoutType layoutType : emailCatalog.getLayouts()) {
+				for (final LayoutType layoutType : emailCatalog.getLayoutTypes()) {
 					log.debug("Realizing LayoutType {} from {}", layoutType.getName(), url);
 					layoutType.setNsPrefix(emailCatalog.getNsPrefix());
 					layoutType.setEPackageNsPrefix(emailCatalog.getNsPrefix() + "-email");
 					layoutType.setEPackageName(emailCatalog.getNsPrefix());
 					layoutType.setEFactory(eFactory);
-					final String eClassName = CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, pageType.getName());
+					final String eClassName = CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, layoutType.getName());
 					layoutType.setEClassName(eClassName);
 					layoutType.setJavaClassName(genPackage + "." + eClassName);
+					
+					final String plainFileName = genPackage.replace('.', '/') + "/" + eClassName + ".txt.mustache";
+					try {
+						final String plain = IOUtils.toString(bundle.getEntry(plainFileName).openStream());
+						layoutType.setPlainTemplate(plain);
+					} catch (IOException e) {
+						throw new EmailException("Cannot read " + plainFileName + " in " + bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]", e);
+					}
+					final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
+					try {
+						final String html = IOUtils.toString(bundle.getEntry(htmlFileName).openStream());
+						layoutType.setHtmlTemplate(html);
+					} catch (IOException e) {
+						throw new EmailException("Cannot read " + htmlFileName + " in " + bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]", e);
+					}
 				}
 				
-				for (final PageType pageType : emailCatalog.getPages()) {
+				for (final PageType pageType : emailCatalog.getPageTypes()) {
 					log.debug("Realizing PageType {} from {}", pageType.getName(), url);
 					pageType.setNsPrefix(emailCatalog.getNsPrefix());
 					pageType.setEPackageNsPrefix(emailCatalog.getNsPrefix() + "-email");
@@ -210,10 +227,25 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<Map<Strin
 					final String eClassName = CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, pageType.getName());
 					pageType.setEClassName(eClassName);
 					pageType.setJavaClassName(genPackage + "." + eClassName);
+					
+					final String plainFileName = genPackage.replace('.', '/') + "/" + eClassName + ".txt.mustache";
+					try {
+						final String plain = IOUtils.toString(bundle.getEntry(plainFileName).openStream());
+						pageType.setPlainTemplate(plain);
+					} catch (Exception e) {
+						throw new EmailException("Cannot read " + plainFileName + " in " + bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]", e);
+					}
+					final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
+					try {
+						final String html = IOUtils.toString(bundle.getEntry(htmlFileName).openStream());
+						pageType.setHtmlTemplate(html);
+					} catch (Exception e) {
+						throw new EmailException("Cannot read " + htmlFileName + " in " + bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]", e);
+					}
 				}
 				
 				log.debug("Loaded {} LayoutTypes and {} PageTypes from EmailSchema {} in {} [{}]",
-						emailCatalog.getLayouts().size(), emailCatalog.getPages().size(),
+						emailCatalog.getLayoutTypes().size(), emailCatalog.getPageTypes().size(),
 						url, bundle.getSymbolicName(), bundle.getBundleId() );
 				return emailCatalog;
 			}
@@ -221,24 +253,30 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<Map<Strin
 		
 		// -------------- Concatenate everything ------------
 		final List<LayoutType> layoutTypes = ImmutableList.copyOf(Iterables.concat(
-				Lists.transform(xmiFileObjs, new Function<EmailCatalog, List<LayoutType>>() {
+				Lists.transform(catalogs, new Function<EmailCatalog, List<LayoutType>>() {
 			@Override @Nullable
 			public List<LayoutType> apply(@Nullable final EmailCatalog input) {
-				return input.getLayouts();
+				return input.getLayoutTypes();
 			}
 		})));
 		log.info("Loaded {} LayoutTypes from {} [{}]",
 				layoutTypes.size(), bundle.getSymbolicName(), bundle.getBundleId());
 		final List<PageType> pageTypes = ImmutableList.copyOf(Iterables.concat(
-				Lists.transform(xmiFileObjs, new Function<EmailCatalog, List<PageType>>() {
+				Lists.transform(catalogs, new Function<EmailCatalog, List<PageType>>() {
 			@Override @Nullable
 			public List<PageType> apply(@Nullable final EmailCatalog input) {
-				return input.getPages();
+				return input.getPageTypes();
 			}
 		})));
 		log.info("Loaded {} PageTypes from {} [{}]",
 				pageTypes.size(), bundle.getSymbolicName(), bundle.getBundleId());
-		
+
+		// Add these objects to repo
+		synchronized (repo) {
+			repo.getLayoutTypes().addAll(layoutTypes);
+			repo.getPageTypes().addAll(pageTypes);
+		}
+
 		// -------- Resolve EClass-es & JavaClass-es -----------
 		log.info("Resolving EClass & JavaClass in {} LayoutTypes from {} [{}]",
 				layoutTypes.size(), bundle.getSymbolicName(), bundle.getBundleId());
@@ -252,42 +290,51 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<Map<Strin
 			pageType.resolveEClass(eClassMap);
 			pageType.resolveJavaClass(bundle);
 		}
-
+		
 		// Notify StorySchemaCatalogXmiTracker
 //		final TargetTypeAdded added = SchemaFactory.eINSTANCE.createTargetTypeAdded();
 //		added.getTargetTypes().addAll(targetTypes);
 //		eventBus.post(added);
 		
-		return emailCatalog;
+		final List<EObject> objects = ImmutableList.copyOf(Iterables.<EObject>concat(layoutTypes, pageTypes));
+		return objects;
 	}
 
 	@Override
 	public void modifiedBundle(Bundle bundle, BundleEvent event,
-			List<TargetType> object) {
+			List<EObject> objects) {
 	}
 
 	@Override
 	public void removedBundle(Bundle bundle, BundleEvent event,
-			Map<String, EmailCatalog> catalogs) {
-		if (catalogs.isEmpty())
+			@Nonnull final List<EObject> objects) {
+		if (objects.isEmpty())
 			return;
-
-		log.debug("Removing {} TargetTypes provided by {} [{}]",
-				catalogs.size(), bundle.getSymbolicName(), bundle.getBundleId());
+		
+		log.debug("Removing {} EObjects provided by {} [{}]",
+				objects.size(), bundle.getSymbolicName(), bundle.getBundleId());
 		long removedCount = 0;
-		for (final TargetType eobject : catalogs) {
+		for (final EObject eobject : objects) {
 			// Unresolve: not strictly necessary
 			// Unregister from repo
-			if (eobject instanceof TargetType) {
-				final TargetType targetType = eobject;
-				log.debug("Removing TargetType {} from {} [{}]", targetType.getName(),
+			if (eobject instanceof LayoutType) {
+				final LayoutType layoutType = (LayoutType) eobject;
+				log.debug("Removing LayoutType {} from {} [{}]", layoutType.getName(),
 						bundle.getSymbolicName(), bundle.getBundleId());
 				synchronized (repo) {
-					if (repo.getTargetTypes().remove(targetType))
+					if (repo.getLayoutTypes().remove(layoutType))
+						removedCount++;
+				}
+			} else if (eobject instanceof PageType) {
+				final PageType pageType = (PageType) eobject;
+				log.debug("Removing PageType {} from {} [{}]", pageType.getName(),
+						bundle.getSymbolicName(), bundle.getBundleId());
+				synchronized (repo) {
+					if (repo.getPageTypes().remove(pageType))
 						removedCount++;
 				}
 			} else {
-				throw new EmailException("Unknown TargetType " + eobject.getClass().getName() + " from " + 
+				throw new EmailException("Unknown EObject " + eobject.getClass().getName() + " from " + 
 						bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]");
 			}
 		}
@@ -295,9 +342,9 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<Map<Strin
 				removedCount, bundle.getSymbolicName(), bundle.getBundleId());
 		
 		// Notify StorySchemaCatalogXmiTracker
-		final TargetTypeRemoved removed = SchemaFactory.eINSTANCE.createTargetTypeRemoved();
-		removed.getTargetTypes().addAll(catalogs);
-		eventBus.post(removed);
+//			final TargetTypeRemoved removed = SchemaFactory.eINSTANCE.createTargetTypeRemoved();
+//			removed.getTargetTypes().addAll(catalogs);
+//			eventBus.post(removed);
 	}
 
 }

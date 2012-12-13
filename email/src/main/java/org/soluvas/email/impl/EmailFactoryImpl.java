@@ -19,6 +19,7 @@ import org.soluvas.email.LayoutType;
 import org.soluvas.email.Page;
 import org.soluvas.email.PageType;
 import org.soluvas.email.Recipient;
+import org.soluvas.email.WebSecurity;
 
 /**
  * <!-- begin-user-doc -->
@@ -68,8 +69,6 @@ public class EmailFactoryImpl extends EFactoryImpl implements EmailFactory {
 			case EmailPackage.PAGE_TYPE: return (EObject)createPageType();
 			case EmailPackage.LAYOUT_TYPE: return (EObject)createLayoutType();
 			case EmailPackage.RECIPIENT: return (EObject)createRecipient();
-			case EmailPackage.LAYOUT: return (EObject)createLayout();
-			case EmailPackage.PAGE: return (EObject)createPage();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -162,28 +161,6 @@ public class EmailFactoryImpl extends EFactoryImpl implements EmailFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Layout createLayout() {
-		LayoutImpl layout = new LayoutImpl();
-		return layout;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Page createPage() {
-		PageImpl page = new PageImpl();
-		return page;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EmailFormat createEmailFormatFromString(EDataType eDataType, String initialValue) {
 		EmailFormat result = EmailFormat.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -256,6 +233,10 @@ public class EmailFactoryImpl extends EFactoryImpl implements EmailFactory {
 	@Deprecated
 	public static EmailPackage getPackage() {
 		return EmailPackage.eINSTANCE;
+	}
+	
+	public static EmailFactory getInstance() {
+		return EmailFactory.eINSTANCE;
 	}
 
 } //EmailFactoryImpl

@@ -2,18 +2,15 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="email" nsURI="http://www.soluvas.org/schema/email/1.0" nsPrefix="email">
   <eClassifiers xsi:type="ecore:EClass" name="EmailCatalog" eSuperTypes="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NsPrefixable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pages" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pageTypes" upperBound="-1"
         eType="#//PageType" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="layouts" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layoutTypes" upperBound="-1"
         eType="#//LayoutType" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TemplateType" abstract="true">
     <eTypeParameters name="T">
       <eBounds eClassifier="#//Template"/>
     </eTypeParameters>
-    <eOperations name="create">
-      <eGenericType eTypeParameter="#//TemplateType/T"/>
-    </eOperations>
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ResourceAware"/>
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware"/>
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer"/>
@@ -26,11 +23,18 @@
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//EClassLinked"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PageType">
+    <eOperations name="create" eType="#//Page">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Create Page using the specified layout."/>
+      </eAnnotations>
+      <eParameters name="layout" eType="#//Layout"/>
+    </eOperations>
     <eGenericSuperTypes eClassifier="#//TemplateType">
       <eTypeArguments eClassifier="#//Page"/>
     </eGenericSuperTypes>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LayoutType">
+    <eOperations name="create" eType="#//Layout"/>
     <eGenericSuperTypes eClassifier="#//TemplateType">
       <eTypeArguments eClassifier="#//Layout"/>
     </eGenericSuperTypes>
@@ -78,7 +82,7 @@
     <eLiterals name="plain" value="1"/>
     <eLiterals name="html" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Layout" eSuperTypes="#//Template">
+  <eClassifiers xsi:type="ecore:EClass" name="Layout" abstract="true" eSuperTypes="#//Template">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pageSubject" lowerBound="1"
         eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -98,7 +102,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//Template">
+  <eClassifiers xsi:type="ecore:EClass" name="Page" abstract="true" eSuperTypes="#//Template">
     <eOperations name="compose" eType="#//Email">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Compose an Email to a recipient, using the provided layout."/>
@@ -114,10 +118,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Email" instanceClassName="org.apache.commons.mail.Email"/>
   <eClassifiers xsi:type="ecore:EClass" name="TemplateLike" abstract="true" interface="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subjectTemplate" lowerBound="1"
-        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="plainTemplate" lowerBound="1"
-        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subjectTemplate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="plainTemplate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Plain text template."/>
       </eAnnotations>

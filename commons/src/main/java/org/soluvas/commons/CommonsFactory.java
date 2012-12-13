@@ -3,6 +3,7 @@
 package org.soluvas.commons;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,6 +48,69 @@ public interface CommonsFactory extends EFactory {
 	 * @generated
 	 */
 	WebAddress createWebAddress();
+
+	/**
+	 * Returns a new object of class '<em>Added</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Added</em>'.
+	 * @generated
+	 */
+	<T extends EObject> Added<T> createAdded();
+
+	/**
+	 * Returns a new object of class '<em>Attribute Set</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Attribute Set</em>'.
+	 * @generated
+	 */
+	<T extends EObject, V> AttributeSet<T, V> createAttributeSet();
+
+	/**
+	 * Returns a new object of class '<em>Attribute Unset</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Attribute Unset</em>'.
+	 * @generated
+	 */
+	<T extends EObject, V> AttributeUnset<T, V> createAttributeUnset();
+
+	/**
+	 * Returns a new object of class '<em>Removed</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Removed</em>'.
+	 * @generated
+	 */
+	<T extends EObject> Removed<T> createRemoved();
+
+	/**
+	 * Returns a new object of class '<em>Attribute Notification</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Attribute Notification</em>'.
+	 * @generated
+	 */
+	<T extends EObject, V> AttributeNotification<T, V> createAttributeNotification();
+
+	/**
+	 * Returns a new object of class '<em>Added Many</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Added Many</em>'.
+	 * @generated
+	 */
+	<T extends EObject> AddedMany<T> createAddedMany();
+
+	/**
+	 * Returns a new object of class '<em>Removed Many</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Removed Many</em>'.
+	 * @generated
+	 */
+	<T extends EObject> RemovedMany<T> createRemovedMany();
 
 	PersonInfo createPersonInfo(String id, String slug, String name, String photoId, Gender gender);
 

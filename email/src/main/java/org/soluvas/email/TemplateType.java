@@ -21,12 +21,4 @@ import org.soluvas.commons.ResourceAware;
  * @generated
  */
 public interface TemplateType<T extends Template> extends ResourceAware, BundleAware, NameContainer, TemplateLike, NsPrefixable, JavaClassLinked<T>, EFactoryLinked, EClassLinked {
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	T create();
 } // EmailTemplate

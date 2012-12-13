@@ -18,7 +18,7 @@ package org.soluvas.email;
  * </p>
  *
  * @see org.soluvas.email.EmailPackage#getLayout()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Layout extends Template {

@@ -14,4 +14,15 @@ package org.soluvas.email;
  * @generated
  */
 public interface PageType extends TemplateType<Page> {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Create Page using the specified layout.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	Page create(Layout layout);
 } // PageType

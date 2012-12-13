@@ -20,15 +20,22 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
-import org.soluvas.commons.*;
+import org.soluvas.commons.Added;
+import org.soluvas.commons.AddedMany;
 import org.soluvas.commons.AppManifest;
+import org.soluvas.commons.AttributeNotification;
+import org.soluvas.commons.AttributeSet;
+import org.soluvas.commons.AttributeUnset;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.EClassStatus;
 import org.soluvas.commons.Gender;
-import org.soluvas.commons.NameContainer;
+import org.soluvas.commons.JavaClassStatus;
 import org.soluvas.commons.PersonInfo;
-import org.soluvas.commons.PhotoIdContainer;
+import org.soluvas.commons.Removed;
+import org.soluvas.commons.RemovedMany;
 import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.WebAddress;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
@@ -77,9 +84,16 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CommonsPackage.APP_MANIFEST: return (EObject)createAppManifest();
-			case CommonsPackage.PERSON_INFO: return (EObject)createPersonInfo();
-			case CommonsPackage.WEB_ADDRESS: return (EObject)createWebAddress();
+			case CommonsPackage.APP_MANIFEST: return createAppManifest();
+			case CommonsPackage.PERSON_INFO: return createPersonInfo();
+			case CommonsPackage.WEB_ADDRESS: return createWebAddress();
+			case CommonsPackage.ADDED: return createAdded();
+			case CommonsPackage.ATTRIBUTE_SET: return createAttributeSet();
+			case CommonsPackage.ATTRIBUTE_UNSET: return createAttributeUnset();
+			case CommonsPackage.REMOVED: return createRemoved();
+			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return createAttributeNotification();
+			case CommonsPackage.ADDED_MANY: return createAddedMany();
+			case CommonsPackage.REMOVED_MANY: return createRemovedMany();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -202,9 +216,93 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public WebAddress createWebAddress() {
 		WebAddressImpl webAddress = new WebAddressImpl();
 		return webAddress;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public <T extends EObject> Added<T> createAdded() {
+		AddedImpl<T> added = new AddedImpl<T>();
+		return added;
+	}
+
+	public <T extends EObject> Added<T> createAdded(T object) {
+		AddedImpl<T> added = new AddedImpl<T>();
+		added.setObject(object);
+		return added;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public <T extends EObject, V> AttributeSet<T, V> createAttributeSet() {
+		AttributeSetImpl<T, V> attributeSet = new AttributeSetImpl<T, V>();
+		return attributeSet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public <T extends EObject, V> AttributeUnset<T, V> createAttributeUnset() {
+		AttributeUnsetImpl<T, V> attributeUnset = new AttributeUnsetImpl<T, V>();
+		return attributeUnset;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public <T extends EObject> Removed<T> createRemoved() {
+		RemovedImpl<T> removed = new RemovedImpl<T>();
+		return removed;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public <T extends EObject, V> AttributeNotification<T, V> createAttributeNotification() {
+		AttributeNotificationImpl<T, V> attributeNotification = new AttributeNotificationImpl<T, V>();
+		return attributeNotification;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public <T extends EObject> AddedMany<T> createAddedMany() {
+		AddedManyImpl<T> addedMany = new AddedManyImpl<T>();
+		return addedMany;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public <T extends EObject> RemovedMany<T> createRemovedMany() {
+		RemovedManyImpl<T> removedMany = new RemovedManyImpl<T>();
+		return removedMany;
 	}
 
 	/**

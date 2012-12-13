@@ -26,7 +26,12 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.osgi.framework.Bundle;
+import org.soluvas.commons.Added;
+import org.soluvas.commons.AddedMany;
 import org.soluvas.commons.AppManifest;
+import org.soluvas.commons.AttributeNotification;
+import org.soluvas.commons.AttributeSet;
+import org.soluvas.commons.AttributeUnset;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
@@ -34,18 +39,24 @@ import org.soluvas.commons.Describable;
 import org.soluvas.commons.EClassLinked;
 import org.soluvas.commons.EClassStatus;
 import org.soluvas.commons.EFactoryLinked;
+import org.soluvas.commons.EObjectLinked;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.Informer;
 import org.soluvas.commons.JavaClassLinked;
 import org.soluvas.commons.JavaClassStatus;
+import org.soluvas.commons.ModelNotification;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.NsPrefixable;
+import org.soluvas.commons.ObjectNotification;
+import org.soluvas.commons.ObjectsNotification;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.PhotoIdContainer;
 import org.soluvas.commons.Positionable;
+import org.soluvas.commons.Removed;
+import org.soluvas.commons.RemovedMany;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.SchemaVersionable;
@@ -202,6 +213,83 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass webAddressEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass addedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelNotificationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass attributeSetEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass attributeUnsetEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass removedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass objectNotificationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass attributeNotificationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass addedManyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass removedManyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass objectsNotificationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eObjectLinkedEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -923,6 +1011,168 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAdded() {
+		return addedEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModelNotification() {
+		return modelNotificationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelNotification_Container() {
+		return (EReference)modelNotificationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAttributeSet() {
+		return attributeSetEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAttributeUnset() {
+		return attributeUnsetEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRemoved() {
+		return removedEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getObjectNotification() {
+		return objectNotificationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getObjectNotification_Object() {
+		return (EAttribute)objectNotificationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAttributeNotification() {
+		return attributeNotificationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAttributeNotification_Attribute() {
+		return (EReference)attributeNotificationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAttributeNotification_Object() {
+		return (EAttribute)attributeNotificationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAttributeNotification_OldValue() {
+		return (EAttribute)attributeNotificationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAttributeNotification_NewValue() {
+		return (EAttribute)attributeNotificationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAddedMany() {
+		return addedManyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRemovedMany() {
+		return removedManyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getObjectsNotification() {
+		return objectsNotificationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getObjectsNotification_Objects() {
+		return (EAttribute)objectsNotificationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEObjectLinked() {
+		return eObjectLinkedEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -1192,6 +1442,35 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(webAddressEClass, WEB_ADDRESS__SECURE_SKIN_URI);
 		createEAttribute(webAddressEClass, WEB_ADDRESS__SECURE_JS_URI);
 
+		addedEClass = createEClass(ADDED);
+
+		modelNotificationEClass = createEClass(MODEL_NOTIFICATION);
+		createEReference(modelNotificationEClass, MODEL_NOTIFICATION__CONTAINER);
+
+		attributeSetEClass = createEClass(ATTRIBUTE_SET);
+
+		attributeUnsetEClass = createEClass(ATTRIBUTE_UNSET);
+
+		removedEClass = createEClass(REMOVED);
+
+		objectNotificationEClass = createEClass(OBJECT_NOTIFICATION);
+		createEAttribute(objectNotificationEClass, OBJECT_NOTIFICATION__OBJECT);
+
+		attributeNotificationEClass = createEClass(ATTRIBUTE_NOTIFICATION);
+		createEReference(attributeNotificationEClass, ATTRIBUTE_NOTIFICATION__ATTRIBUTE);
+		createEAttribute(attributeNotificationEClass, ATTRIBUTE_NOTIFICATION__OBJECT);
+		createEAttribute(attributeNotificationEClass, ATTRIBUTE_NOTIFICATION__OLD_VALUE);
+		createEAttribute(attributeNotificationEClass, ATTRIBUTE_NOTIFICATION__NEW_VALUE);
+
+		addedManyEClass = createEClass(ADDED_MANY);
+
+		removedManyEClass = createEClass(REMOVED_MANY);
+
+		objectsNotificationEClass = createEClass(OBJECTS_NOTIFICATION);
+		createEAttribute(objectsNotificationEClass, OBJECTS_NOTIFICATION__OBJECTS);
+
+		eObjectLinkedEClass = createEClass(EOBJECT_LINKED);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -1243,6 +1522,20 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		// Create type parameters
 		ETypeParameter informerEClass_T = addETypeParameter(informerEClass, "T");
 		ETypeParameter javaClassLinkedEClass_T = addETypeParameter(javaClassLinkedEClass, "T");
+		ETypeParameter addedEClass_T = addETypeParameter(addedEClass, "T");
+		ETypeParameter modelNotificationEClass_T = addETypeParameter(modelNotificationEClass, "T");
+		ETypeParameter attributeSetEClass_T = addETypeParameter(attributeSetEClass, "T");
+		ETypeParameter attributeSetEClass_V = addETypeParameter(attributeSetEClass, "V");
+		ETypeParameter attributeUnsetEClass_T = addETypeParameter(attributeUnsetEClass, "T");
+		ETypeParameter attributeUnsetEClass_V = addETypeParameter(attributeUnsetEClass, "V");
+		ETypeParameter removedEClass_T = addETypeParameter(removedEClass, "T");
+		ETypeParameter objectNotificationEClass_T = addETypeParameter(objectNotificationEClass, "T");
+		ETypeParameter attributeNotificationEClass_T = addETypeParameter(attributeNotificationEClass, "T");
+		ETypeParameter attributeNotificationEClass_V = addETypeParameter(attributeNotificationEClass, "V");
+		ETypeParameter addedManyEClass_T = addETypeParameter(addedManyEClass, "T");
+		ETypeParameter removedManyEClass_T = addETypeParameter(removedManyEClass, "T");
+		ETypeParameter objectsNotificationEClass_T = addETypeParameter(objectsNotificationEClass, "T");
+		ETypeParameter eObjectLinkedEClass_T = addETypeParameter(eObjectLinkedEClass, "T");
 		addETypeParameter(listEDataType, "T");
 		addETypeParameter(mapEDataType, "K");
 		addETypeParameter(mapEDataType, "V");
@@ -1258,6 +1551,28 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		// Set bounds for type parameters
 		EGenericType g1 = createEGenericType(this.getIdentifiable());
 		informerEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(theEcorePackage.getEObject());
+		addedEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(theEcorePackage.getEObject());
+		modelNotificationEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(theEcorePackage.getEObject());
+		attributeSetEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(theEcorePackage.getEObject());
+		attributeUnsetEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(theEcorePackage.getEObject());
+		removedEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(theEcorePackage.getEObject());
+		objectNotificationEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(theEcorePackage.getEObject());
+		attributeNotificationEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(theEcorePackage.getEObject());
+		addedManyEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(theEcorePackage.getEObject());
+		removedManyEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(theEcorePackage.getEObject());
+		objectsNotificationEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(theEcorePackage.getEObject());
+		eObjectLinkedEClass_T.getEBounds().add(g1);
 
 		// Add supertypes to classes
 		appManifestEClass.getESuperTypes().add(this.getPositionable());
@@ -1268,6 +1583,54 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		personInfoEClass.getESuperTypes().add(this.getNameContainer());
 		photoIdContainerEClass.getESuperTypes().add(this.getImageable());
 		nameContainerEClass.getESuperTypes().add(this.getNameable());
+		g1 = createEGenericType(this.getObjectNotification());
+		EGenericType g2 = createEGenericType(addedEClass_T);
+		g1.getETypeArguments().add(g2);
+		addedEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getEObjectLinked());
+		g2 = createEGenericType(modelNotificationEClass_T);
+		g1.getETypeArguments().add(g2);
+		modelNotificationEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getAttributeNotification());
+		g2 = createEGenericType(attributeSetEClass_T);
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(attributeSetEClass_V);
+		g1.getETypeArguments().add(g2);
+		attributeSetEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getAttributeNotification());
+		g2 = createEGenericType(attributeUnsetEClass_T);
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(attributeUnsetEClass_V);
+		g1.getETypeArguments().add(g2);
+		attributeUnsetEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getObjectNotification());
+		g2 = createEGenericType(removedEClass_T);
+		g1.getETypeArguments().add(g2);
+		removedEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getModelNotification());
+		g2 = createEGenericType(objectNotificationEClass_T);
+		g1.getETypeArguments().add(g2);
+		objectNotificationEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getModelNotification());
+		g2 = createEGenericType(attributeNotificationEClass_T);
+		g1.getETypeArguments().add(g2);
+		attributeNotificationEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getEObjectLinked());
+		g2 = createEGenericType(attributeNotificationEClass_T);
+		g1.getETypeArguments().add(g2);
+		attributeNotificationEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getObjectsNotification());
+		g2 = createEGenericType(addedManyEClass_T);
+		g1.getETypeArguments().add(g2);
+		addedManyEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getObjectsNotification());
+		g2 = createEGenericType(removedManyEClass_T);
+		g1.getETypeArguments().add(g2);
+		removedManyEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getModelNotification());
+		g2 = createEGenericType(objectsNotificationEClass_T);
+		g1.getETypeArguments().add(g2);
+		objectsNotificationEClass.getEGenericSuperTypes().add(g1);
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1324,7 +1687,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEClass(javaClassLinkedEClass, JavaClassLinked.class, "JavaClassLinked", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJavaClassLinked_JavaClassName(), theEcorePackage.getEString(), "javaClassName", null, 0, 1, JavaClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		g1 = createEGenericType(theEcorePackage.getEJavaClass());
-		EGenericType g2 = createEGenericType(javaClassLinkedEClass_T);
+		g2 = createEGenericType(javaClassLinkedEClass_T);
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getJavaClassLinked_JavaClass(), g1, "javaClass", null, 0, 1, JavaClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJavaClassLinked_JavaClassStatus(), this.getJavaClassStatus(), "javaClassStatus", "unresolved", 0, 1, JavaClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1368,6 +1731,44 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getWebAddress_SecureImagesUri(), ecorePackage.getEString(), "secureImagesUri", null, 0, 1, WebAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getWebAddress_SecureSkinUri(), ecorePackage.getEString(), "secureSkinUri", null, 0, 1, WebAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getWebAddress_SecureJsUri(), ecorePackage.getEString(), "secureJsUri", null, 0, 1, WebAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(addedEClass, Added.class, "Added", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(modelNotificationEClass, ModelNotification.class, "ModelNotification", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelNotification_Container(), theEcorePackage.getEObject(), null, "container", null, 0, 1, ModelNotification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(attributeSetEClass, AttributeSet.class, "AttributeSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(attributeUnsetEClass, AttributeUnset.class, "AttributeUnset", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(removedEClass, Removed.class, "Removed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(objectNotificationEClass, ObjectNotification.class, "ObjectNotification", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		g1 = createEGenericType(objectNotificationEClass_T);
+		initEAttribute(getObjectNotification_Object(), g1, "object", null, 1, 1, ObjectNotification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(attributeNotificationEClass, AttributeNotification.class, "AttributeNotification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAttributeNotification_Attribute(), theEcorePackage.getEAttribute(), null, "attribute", null, 1, 1, AttributeNotification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(attributeNotificationEClass_T);
+		initEAttribute(getAttributeNotification_Object(), g1, "object", null, 1, 1, AttributeNotification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(attributeNotificationEClass_V);
+		initEAttribute(getAttributeNotification_OldValue(), g1, "oldValue", null, 0, 1, AttributeNotification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(attributeNotificationEClass_V);
+		initEAttribute(getAttributeNotification_NewValue(), g1, "newValue", null, 0, 1, AttributeNotification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(addedManyEClass, AddedMany.class, "AddedMany", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(removedManyEClass, RemovedMany.class, "RemovedMany", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(objectsNotificationEClass, ObjectsNotification.class, "ObjectsNotification", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		g1 = createEGenericType(objectsNotificationEClass_T);
+		initEAttribute(getObjectsNotification_Objects(), g1, "objects", null, 1, -1, ObjectsNotification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(eObjectLinkedEClass, EObjectLinked.class, "EObjectLinked", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(eObjectLinkedEClass, null, "getObject", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(eObjectLinkedEClass_T);
+		initEOperation(op, g1);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -1705,6 +2106,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Absolute secure URI to CSS files and dependencies (sprite images, fonts, etc.), e.g. http://skin.berbatik.com/"
+		   });		
+		addAnnotation
+		  (addedEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Inspired by {@link org.eclipse.emf.common.notify.Notification}."
+		   });		
+		addAnnotation
+		  (modelNotificationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Inspired by {@link org.eclipse.emf.common.notify.Notification}."
 		   });
 	}
 

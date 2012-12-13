@@ -825,6 +825,467 @@ public interface CommonsPackage extends EPackage {
 	int WEB_ADDRESS_FEATURE_COUNT = 10;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.EObjectLinked <em>EObject Linked</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.EObjectLinked
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEObjectLinked()
+	 * @generated
+	 */
+	int EOBJECT_LINKED = 30;
+
+	/**
+	 * The number of structural features of the '<em>EObject Linked</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOBJECT_LINKED_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.ModelNotificationImpl <em>Model Notification</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.ModelNotificationImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getModelNotification()
+	 * @generated
+	 */
+	int MODEL_NOTIFICATION = 21;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_NOTIFICATION__CONTAINER = EOBJECT_LINKED_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Model Notification</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_NOTIFICATION_FEATURE_COUNT = EOBJECT_LINKED_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.ObjectNotificationImpl <em>Object Notification</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.ObjectNotificationImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getObjectNotification()
+	 * @generated
+	 */
+	int OBJECT_NOTIFICATION = 25;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_NOTIFICATION__CONTAINER = MODEL_NOTIFICATION__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Object</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_NOTIFICATION__OBJECT = MODEL_NOTIFICATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Object Notification</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_NOTIFICATION_FEATURE_COUNT = MODEL_NOTIFICATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.AddedImpl <em>Added</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.AddedImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAdded()
+	 * @generated
+	 */
+	int ADDED = 20;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDED__CONTAINER = OBJECT_NOTIFICATION__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Object</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDED__OBJECT = OBJECT_NOTIFICATION__OBJECT;
+
+	/**
+	 * The number of structural features of the '<em>Added</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDED_FEATURE_COUNT = OBJECT_NOTIFICATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.AttributeNotificationImpl <em>Attribute Notification</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.AttributeNotificationImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAttributeNotification()
+	 * @generated
+	 */
+	int ATTRIBUTE_NOTIFICATION = 26;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOTIFICATION__CONTAINER = MODEL_NOTIFICATION__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Attribute</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOTIFICATION__ATTRIBUTE = MODEL_NOTIFICATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Object</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOTIFICATION__OBJECT = MODEL_NOTIFICATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Old Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOTIFICATION__OLD_VALUE = MODEL_NOTIFICATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>New Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOTIFICATION__NEW_VALUE = MODEL_NOTIFICATION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Attribute Notification</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOTIFICATION_FEATURE_COUNT = MODEL_NOTIFICATION_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.AttributeSetImpl <em>Attribute Set</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.AttributeSetImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAttributeSet()
+	 * @generated
+	 */
+	int ATTRIBUTE_SET = 22;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_SET__CONTAINER = ATTRIBUTE_NOTIFICATION__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Attribute</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_SET__ATTRIBUTE = ATTRIBUTE_NOTIFICATION__ATTRIBUTE;
+
+	/**
+	 * The feature id for the '<em><b>Object</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_SET__OBJECT = ATTRIBUTE_NOTIFICATION__OBJECT;
+
+	/**
+	 * The feature id for the '<em><b>Old Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_SET__OLD_VALUE = ATTRIBUTE_NOTIFICATION__OLD_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>New Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_SET__NEW_VALUE = ATTRIBUTE_NOTIFICATION__NEW_VALUE;
+
+	/**
+	 * The number of structural features of the '<em>Attribute Set</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_SET_FEATURE_COUNT = ATTRIBUTE_NOTIFICATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.AttributeUnsetImpl <em>Attribute Unset</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.AttributeUnsetImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAttributeUnset()
+	 * @generated
+	 */
+	int ATTRIBUTE_UNSET = 23;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_UNSET__CONTAINER = ATTRIBUTE_NOTIFICATION__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Attribute</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_UNSET__ATTRIBUTE = ATTRIBUTE_NOTIFICATION__ATTRIBUTE;
+
+	/**
+	 * The feature id for the '<em><b>Object</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_UNSET__OBJECT = ATTRIBUTE_NOTIFICATION__OBJECT;
+
+	/**
+	 * The feature id for the '<em><b>Old Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_UNSET__OLD_VALUE = ATTRIBUTE_NOTIFICATION__OLD_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>New Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_UNSET__NEW_VALUE = ATTRIBUTE_NOTIFICATION__NEW_VALUE;
+
+	/**
+	 * The number of structural features of the '<em>Attribute Unset</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_UNSET_FEATURE_COUNT = ATTRIBUTE_NOTIFICATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.RemovedImpl <em>Removed</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.RemovedImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getRemoved()
+	 * @generated
+	 */
+	int REMOVED = 24;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REMOVED__CONTAINER = OBJECT_NOTIFICATION__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Object</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REMOVED__OBJECT = OBJECT_NOTIFICATION__OBJECT;
+
+	/**
+	 * The number of structural features of the '<em>Removed</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REMOVED_FEATURE_COUNT = OBJECT_NOTIFICATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.ObjectsNotificationImpl <em>Objects Notification</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.ObjectsNotificationImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getObjectsNotification()
+	 * @generated
+	 */
+	int OBJECTS_NOTIFICATION = 29;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECTS_NOTIFICATION__CONTAINER = MODEL_NOTIFICATION__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Objects</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECTS_NOTIFICATION__OBJECTS = MODEL_NOTIFICATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Objects Notification</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECTS_NOTIFICATION_FEATURE_COUNT = MODEL_NOTIFICATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.AddedManyImpl <em>Added Many</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.AddedManyImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAddedMany()
+	 * @generated
+	 */
+	int ADDED_MANY = 27;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDED_MANY__CONTAINER = OBJECTS_NOTIFICATION__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Objects</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDED_MANY__OBJECTS = OBJECTS_NOTIFICATION__OBJECTS;
+
+	/**
+	 * The number of structural features of the '<em>Added Many</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDED_MANY_FEATURE_COUNT = OBJECTS_NOTIFICATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.RemovedManyImpl <em>Removed Many</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.RemovedManyImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getRemovedMany()
+	 * @generated
+	 */
+	int REMOVED_MANY = 28;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REMOVED_MANY__CONTAINER = OBJECTS_NOTIFICATION__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Objects</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REMOVED_MANY__OBJECTS = OBJECTS_NOTIFICATION__OBJECTS;
+
+	/**
+	 * The number of structural features of the '<em>Removed Many</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REMOVED_MANY_FEATURE_COUNT = OBJECTS_NOTIFICATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -832,7 +1293,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 20;
+	int RESOURCE_TYPE = 31;
 
 
 	/**
@@ -843,7 +1304,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 21;
+	int GENDER = 32;
 
 
 	/**
@@ -854,7 +1315,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 22;
+	int ECLASS_STATUS = 33;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -864,7 +1325,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 23;
+	int JAVA_CLASS_STATUS = 34;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -874,7 +1335,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 24;
+	int DATE_TIME = 35;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -884,7 +1345,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 25;
+	int CURRENCY_UNIT = 36;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -894,7 +1355,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 26;
+	int UNIT = 37;
 
 
 	/**
@@ -905,7 +1366,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 27;
+	int LIST = 38;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -915,7 +1376,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 28;
+	int MAP = 39;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -925,7 +1386,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 29;
+	int SET = 40;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -935,7 +1396,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 30;
+	int COLLECTION = 41;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -945,7 +1406,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 31;
+	int MULTIMAP = 42;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -955,7 +1416,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 32;
+	int NAVIGABLE_MAP = 43;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -965,7 +1426,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 33;
+	int QUEUE = 44;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -975,7 +1436,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 34;
+	int MULTISET = 45;
 
 
 	/**
@@ -986,7 +1447,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 35;
+	int SERIALIZABLE = 46;
 
 
 	/**
@@ -997,7 +1458,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 36;
+	int BUNDLE = 47;
 
 
 	/**
@@ -1584,6 +2045,193 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getWebAddress_SecureJsUri();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Added <em>Added</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Added</em>'.
+	 * @see org.soluvas.commons.Added
+	 * @generated
+	 */
+	EClass getAdded();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.ModelNotification <em>Model Notification</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Notification</em>'.
+	 * @see org.soluvas.commons.ModelNotification
+	 * @generated
+	 */
+	EClass getModelNotification();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.commons.ModelNotification#getContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Container</em>'.
+	 * @see org.soluvas.commons.ModelNotification#getContainer()
+	 * @see #getModelNotification()
+	 * @generated
+	 */
+	EReference getModelNotification_Container();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.AttributeSet <em>Attribute Set</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Attribute Set</em>'.
+	 * @see org.soluvas.commons.AttributeSet
+	 * @generated
+	 */
+	EClass getAttributeSet();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.AttributeUnset <em>Attribute Unset</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Attribute Unset</em>'.
+	 * @see org.soluvas.commons.AttributeUnset
+	 * @generated
+	 */
+	EClass getAttributeUnset();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Removed <em>Removed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Removed</em>'.
+	 * @see org.soluvas.commons.Removed
+	 * @generated
+	 */
+	EClass getRemoved();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.ObjectNotification <em>Object Notification</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Object Notification</em>'.
+	 * @see org.soluvas.commons.ObjectNotification
+	 * @generated
+	 */
+	EClass getObjectNotification();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.ObjectNotification#getObject <em>Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Object</em>'.
+	 * @see org.soluvas.commons.ObjectNotification#getObject()
+	 * @see #getObjectNotification()
+	 * @generated
+	 */
+	EAttribute getObjectNotification_Object();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.AttributeNotification <em>Attribute Notification</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Attribute Notification</em>'.
+	 * @see org.soluvas.commons.AttributeNotification
+	 * @generated
+	 */
+	EClass getAttributeNotification();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.commons.AttributeNotification#getAttribute <em>Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Attribute</em>'.
+	 * @see org.soluvas.commons.AttributeNotification#getAttribute()
+	 * @see #getAttributeNotification()
+	 * @generated
+	 */
+	EReference getAttributeNotification_Attribute();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AttributeNotification#getObject <em>Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Object</em>'.
+	 * @see org.soluvas.commons.AttributeNotification#getObject()
+	 * @see #getAttributeNotification()
+	 * @generated
+	 */
+	EAttribute getAttributeNotification_Object();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AttributeNotification#getOldValue <em>Old Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Old Value</em>'.
+	 * @see org.soluvas.commons.AttributeNotification#getOldValue()
+	 * @see #getAttributeNotification()
+	 * @generated
+	 */
+	EAttribute getAttributeNotification_OldValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AttributeNotification#getNewValue <em>New Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>New Value</em>'.
+	 * @see org.soluvas.commons.AttributeNotification#getNewValue()
+	 * @see #getAttributeNotification()
+	 * @generated
+	 */
+	EAttribute getAttributeNotification_NewValue();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.AddedMany <em>Added Many</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Added Many</em>'.
+	 * @see org.soluvas.commons.AddedMany
+	 * @generated
+	 */
+	EClass getAddedMany();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.RemovedMany <em>Removed Many</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Removed Many</em>'.
+	 * @see org.soluvas.commons.RemovedMany
+	 * @generated
+	 */
+	EClass getRemovedMany();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.ObjectsNotification <em>Objects Notification</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Objects Notification</em>'.
+	 * @see org.soluvas.commons.ObjectsNotification
+	 * @generated
+	 */
+	EClass getObjectsNotification();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.commons.ObjectsNotification#getObjects <em>Objects</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Objects</em>'.
+	 * @see org.soluvas.commons.ObjectsNotification#getObjects()
+	 * @see #getObjectsNotification()
+	 * @generated
+	 */
+	EAttribute getObjectsNotification_Objects();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.EObjectLinked <em>EObject Linked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>EObject Linked</em>'.
+	 * @see org.soluvas.commons.EObjectLinked
+	 * @generated
+	 */
+	EClass getEObjectLinked();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -2269,6 +2917,172 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute WEB_ADDRESS__SECURE_JS_URI = eINSTANCE.getWebAddress_SecureJsUri();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.AddedImpl <em>Added</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.AddedImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAdded()
+		 * @generated
+		 */
+		EClass ADDED = eINSTANCE.getAdded();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.ModelNotificationImpl <em>Model Notification</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.ModelNotificationImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getModelNotification()
+		 * @generated
+		 */
+		EClass MODEL_NOTIFICATION = eINSTANCE.getModelNotification();
+
+		/**
+		 * The meta object literal for the '<em><b>Container</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_NOTIFICATION__CONTAINER = eINSTANCE.getModelNotification_Container();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.AttributeSetImpl <em>Attribute Set</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.AttributeSetImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAttributeSet()
+		 * @generated
+		 */
+		EClass ATTRIBUTE_SET = eINSTANCE.getAttributeSet();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.AttributeUnsetImpl <em>Attribute Unset</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.AttributeUnsetImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAttributeUnset()
+		 * @generated
+		 */
+		EClass ATTRIBUTE_UNSET = eINSTANCE.getAttributeUnset();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.RemovedImpl <em>Removed</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.RemovedImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getRemoved()
+		 * @generated
+		 */
+		EClass REMOVED = eINSTANCE.getRemoved();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.ObjectNotificationImpl <em>Object Notification</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.ObjectNotificationImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getObjectNotification()
+		 * @generated
+		 */
+		EClass OBJECT_NOTIFICATION = eINSTANCE.getObjectNotification();
+
+		/**
+		 * The meta object literal for the '<em><b>Object</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OBJECT_NOTIFICATION__OBJECT = eINSTANCE.getObjectNotification_Object();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.AttributeNotificationImpl <em>Attribute Notification</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.AttributeNotificationImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAttributeNotification()
+		 * @generated
+		 */
+		EClass ATTRIBUTE_NOTIFICATION = eINSTANCE.getAttributeNotification();
+
+		/**
+		 * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ATTRIBUTE_NOTIFICATION__ATTRIBUTE = eINSTANCE.getAttributeNotification_Attribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Object</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE_NOTIFICATION__OBJECT = eINSTANCE.getAttributeNotification_Object();
+
+		/**
+		 * The meta object literal for the '<em><b>Old Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE_NOTIFICATION__OLD_VALUE = eINSTANCE.getAttributeNotification_OldValue();
+
+		/**
+		 * The meta object literal for the '<em><b>New Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE_NOTIFICATION__NEW_VALUE = eINSTANCE.getAttributeNotification_NewValue();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.AddedManyImpl <em>Added Many</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.AddedManyImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAddedMany()
+		 * @generated
+		 */
+		EClass ADDED_MANY = eINSTANCE.getAddedMany();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.RemovedManyImpl <em>Removed Many</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.RemovedManyImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getRemovedMany()
+		 * @generated
+		 */
+		EClass REMOVED_MANY = eINSTANCE.getRemovedMany();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.ObjectsNotificationImpl <em>Objects Notification</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.ObjectsNotificationImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getObjectsNotification()
+		 * @generated
+		 */
+		EClass OBJECTS_NOTIFICATION = eINSTANCE.getObjectsNotification();
+
+		/**
+		 * The meta object literal for the '<em><b>Objects</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OBJECTS_NOTIFICATION__OBJECTS = eINSTANCE.getObjectsNotification_Objects();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.EObjectLinked <em>EObject Linked</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.EObjectLinked
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEObjectLinked()
+		 * @generated
+		 */
+		EClass EOBJECT_LINKED = eINSTANCE.getEObjectLinked();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

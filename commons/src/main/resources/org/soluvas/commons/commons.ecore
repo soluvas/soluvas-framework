@@ -335,4 +335,125 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="secureJsUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Added">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Inspired by {@link org.eclipse.emf.common.notify.Notification}."/>
+    </eAnnotations>
+    <eTypeParameters name="T">
+      <eBounds eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    </eTypeParameters>
+    <eGenericSuperTypes eClassifier="#//ObjectNotification">
+      <eTypeArguments eTypeParameter="#//Added/T"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelNotification" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Inspired by {@link org.eclipse.emf.common.notify.Notification}."/>
+    </eAnnotations>
+    <eTypeParameters name="T">
+      <eBounds eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    </eTypeParameters>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    <eGenericSuperTypes eClassifier="#//EObjectLinked">
+      <eTypeArguments eTypeParameter="#//ModelNotification/T"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeSet">
+    <eTypeParameters name="T">
+      <eBounds eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    </eTypeParameters>
+    <eTypeParameters name="V"/>
+    <eGenericSuperTypes eClassifier="#//AttributeNotification">
+      <eTypeArguments eTypeParameter="#//AttributeSet/T"/>
+      <eTypeArguments eTypeParameter="#//AttributeSet/V"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeUnset">
+    <eTypeParameters name="T">
+      <eBounds eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    </eTypeParameters>
+    <eTypeParameters name="V"/>
+    <eGenericSuperTypes eClassifier="#//AttributeNotification">
+      <eTypeArguments eTypeParameter="#//AttributeUnset/T"/>
+      <eTypeArguments eTypeParameter="#//AttributeUnset/V"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Removed">
+    <eTypeParameters name="T">
+      <eBounds eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    </eTypeParameters>
+    <eGenericSuperTypes eClassifier="#//ObjectNotification">
+      <eTypeArguments eTypeParameter="#//Removed/T"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectNotification" abstract="true">
+    <eTypeParameters name="T">
+      <eBounds eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    </eTypeParameters>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="object" lowerBound="1">
+      <eGenericType eTypeParameter="#//ObjectNotification/T"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="#//ModelNotification">
+      <eTypeArguments eTypeParameter="#//ObjectNotification/T"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeNotification">
+    <eTypeParameters name="T">
+      <eBounds eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    </eTypeParameters>
+    <eTypeParameters name="V"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="object" lowerBound="1">
+      <eGenericType eTypeParameter="#//AttributeNotification/T"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="oldValue">
+      <eGenericType eTypeParameter="#//AttributeNotification/V"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="newValue">
+      <eGenericType eTypeParameter="#//AttributeNotification/V"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="#//ModelNotification">
+      <eTypeArguments eTypeParameter="#//AttributeNotification/T"/>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="#//EObjectLinked">
+      <eTypeArguments eTypeParameter="#//AttributeNotification/T"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AddedMany">
+    <eTypeParameters name="T">
+      <eBounds eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    </eTypeParameters>
+    <eGenericSuperTypes eClassifier="#//ObjectsNotification">
+      <eTypeArguments eTypeParameter="#//AddedMany/T"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RemovedMany">
+    <eTypeParameters name="T">
+      <eBounds eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    </eTypeParameters>
+    <eGenericSuperTypes eClassifier="#//ObjectsNotification">
+      <eTypeArguments eTypeParameter="#//RemovedMany/T"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectsNotification" abstract="true">
+    <eTypeParameters name="T">
+      <eBounds eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    </eTypeParameters>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="objects" lowerBound="1"
+        upperBound="-1">
+      <eGenericType eTypeParameter="#//ObjectsNotification/T"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="#//ModelNotification">
+      <eTypeArguments eTypeParameter="#//ObjectsNotification/T"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EObjectLinked" abstract="true" interface="true">
+    <eTypeParameters name="T">
+      <eBounds eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    </eTypeParameters>
+    <eOperations name="getObject">
+      <eGenericType eTypeParameter="#//EObjectLinked/T"/>
+    </eOperations>
+  </eClassifiers>
 </ecore:EPackage>

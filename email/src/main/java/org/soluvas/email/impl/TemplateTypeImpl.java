@@ -858,37 +858,19 @@ public abstract class TemplateTypeImpl<T extends Template> extends EObjectImpl i
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public T create() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public void resolveEClass(Map<String, EClass> eClassMap) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		EClassLinked.Trait.resolveEClass(this, eClassMap);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public void resolveJavaClass(Bundle bundle) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		JavaClassLinked.Trait.resolveJavaClass(this, bundle);
 	}
 
 	/**

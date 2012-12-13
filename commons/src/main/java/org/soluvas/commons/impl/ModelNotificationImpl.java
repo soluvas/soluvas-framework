@@ -1,54 +1,49 @@
 /**
  */
-package org.soluvas.email.impl;
-
-import org.apache.commons.mail.Email;
+package org.soluvas.commons.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.soluvas.email.EmailPackage;
-import org.soluvas.email.Layout;
-import org.soluvas.email.Page;
-import org.soluvas.email.Recipient;
+import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.ModelNotification;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Page</b></em>'.
+ * An implementation of the model object '<em><b>Model Notification</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.soluvas.email.impl.PageImpl#getLayout <em>Layout</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.ModelNotificationImpl#getContainer <em>Container</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class PageImpl extends TemplateImpl implements Page {
+public abstract class ModelNotificationImpl<T extends EObject> extends EObjectImpl implements ModelNotification<T> {
 	/**
-	 * The cached value of the '{@link #getLayout() <em>Layout</em>}' reference.
+	 * The cached value of the '{@link #getContainer() <em>Container</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLayout()
+	 * @see #getContainer()
 	 * @generated
 	 * @ordered
 	 */
-	protected Layout layout;
+	protected EObject container;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PageImpl() {
+	public ModelNotificationImpl() {
 		super();
 	}
 
@@ -59,7 +54,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return EmailPackage.Literals.PAGE;
+		return CommonsPackage.Literals.MODEL_NOTIFICATION;
 	}
 
 	/**
@@ -67,16 +62,16 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Layout getLayout() {
-		if (layout != null && ((EObject)layout).eIsProxy()) {
-			InternalEObject oldLayout = (InternalEObject)layout;
-			layout = (Layout)eResolveProxy(oldLayout);
-			if (layout != oldLayout) {
+	public EObject getContainer() {
+		if (container != null && container.eIsProxy()) {
+			InternalEObject oldContainer = (InternalEObject)container;
+			container = eResolveProxy(oldContainer);
+			if (container != oldContainer) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EmailPackage.PAGE__LAYOUT, oldLayout, layout));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CommonsPackage.MODEL_NOTIFICATION__CONTAINER, oldContainer, container));
 			}
 		}
-		return layout;
+		return container;
 	}
 
 	/**
@@ -84,8 +79,8 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Layout basicGetLayout() {
-		return layout;
+	public EObject basicGetContainer() {
+		return container;
 	}
 
 	/**
@@ -93,11 +88,11 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLayout(Layout newLayout) {
-		Layout oldLayout = layout;
-		layout = newLayout;
+	public void setContainer(EObject newContainer) {
+		EObject oldContainer = container;
+		container = newContainer;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.PAGE__LAYOUT, oldLayout, layout));
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.MODEL_NOTIFICATION__CONTAINER, oldContainer, container));
 	}
 
 	/**
@@ -105,18 +100,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Email compose(Recipient recipient) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Email> composeAll() {
+	public T getObject() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -130,9 +114,9 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EmailPackage.PAGE__LAYOUT:
-				if (resolve) return getLayout();
-				return basicGetLayout();
+			case CommonsPackage.MODEL_NOTIFICATION__CONTAINER:
+				if (resolve) return getContainer();
+				return basicGetContainer();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -145,8 +129,8 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EmailPackage.PAGE__LAYOUT:
-				setLayout((Layout)newValue);
+			case CommonsPackage.MODEL_NOTIFICATION__CONTAINER:
+				setContainer((EObject)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -160,8 +144,8 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EmailPackage.PAGE__LAYOUT:
-				setLayout((Layout)null);
+			case CommonsPackage.MODEL_NOTIFICATION__CONTAINER:
+				setContainer((EObject)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -175,10 +159,10 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EmailPackage.PAGE__LAYOUT:
-				return layout != null;
+			case CommonsPackage.MODEL_NOTIFICATION__CONTAINER:
+				return container != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //PageImpl
+} //ModelNotificationImpl

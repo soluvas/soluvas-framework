@@ -196,6 +196,97 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CommonsPackage.ADDED: {
+				Added<?> added = (Added<?>)theEObject;
+				T1 result = caseAdded(added);
+				if (result == null) result = caseObjectNotification(added);
+				if (result == null) result = caseModelNotification(added);
+				if (result == null) result = caseEObjectLinked(added);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.MODEL_NOTIFICATION: {
+				ModelNotification<?> modelNotification = (ModelNotification<?>)theEObject;
+				T1 result = caseModelNotification(modelNotification);
+				if (result == null) result = caseEObjectLinked(modelNotification);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.ATTRIBUTE_SET: {
+				AttributeSet<?, ?> attributeSet = (AttributeSet<?, ?>)theEObject;
+				T1 result = caseAttributeSet(attributeSet);
+				if (result == null) result = caseAttributeNotification(attributeSet);
+				if (result == null) result = caseModelNotification(attributeSet);
+				if (result == null) result = caseEObjectLinked(attributeSet);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.ATTRIBUTE_UNSET: {
+				AttributeUnset<?, ?> attributeUnset = (AttributeUnset<?, ?>)theEObject;
+				T1 result = caseAttributeUnset(attributeUnset);
+				if (result == null) result = caseAttributeNotification(attributeUnset);
+				if (result == null) result = caseModelNotification(attributeUnset);
+				if (result == null) result = caseEObjectLinked(attributeUnset);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.REMOVED: {
+				Removed<?> removed = (Removed<?>)theEObject;
+				T1 result = caseRemoved(removed);
+				if (result == null) result = caseObjectNotification(removed);
+				if (result == null) result = caseModelNotification(removed);
+				if (result == null) result = caseEObjectLinked(removed);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.OBJECT_NOTIFICATION: {
+				ObjectNotification<?> objectNotification = (ObjectNotification<?>)theEObject;
+				T1 result = caseObjectNotification(objectNotification);
+				if (result == null) result = caseModelNotification(objectNotification);
+				if (result == null) result = caseEObjectLinked(objectNotification);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.ATTRIBUTE_NOTIFICATION: {
+				AttributeNotification<?, ?> attributeNotification = (AttributeNotification<?, ?>)theEObject;
+				T1 result = caseAttributeNotification(attributeNotification);
+				if (result == null) result = caseModelNotification(attributeNotification);
+				if (result == null) result = caseEObjectLinked(attributeNotification);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.ADDED_MANY: {
+				AddedMany<?> addedMany = (AddedMany<?>)theEObject;
+				T1 result = caseAddedMany(addedMany);
+				if (result == null) result = caseObjectsNotification(addedMany);
+				if (result == null) result = caseModelNotification(addedMany);
+				if (result == null) result = caseEObjectLinked(addedMany);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.REMOVED_MANY: {
+				RemovedMany<?> removedMany = (RemovedMany<?>)theEObject;
+				T1 result = caseRemovedMany(removedMany);
+				if (result == null) result = caseObjectsNotification(removedMany);
+				if (result == null) result = caseModelNotification(removedMany);
+				if (result == null) result = caseEObjectLinked(removedMany);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.OBJECTS_NOTIFICATION: {
+				ObjectsNotification<?> objectsNotification = (ObjectsNotification<?>)theEObject;
+				T1 result = caseObjectsNotification(objectsNotification);
+				if (result == null) result = caseModelNotification(objectsNotification);
+				if (result == null) result = caseEObjectLinked(objectsNotification);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.EOBJECT_LINKED: {
+				EObjectLinked<?> eObjectLinked = (EObjectLinked<?>)theEObject;
+				T1 result = caseEObjectLinked(eObjectLinked);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -497,6 +588,171 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseWebAddress(WebAddress object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Added</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Added</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends EObject> T1 caseAdded(Added<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Notification</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Notification</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends EObject> T1 caseModelNotification(ModelNotification<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute Set</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute Set</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends EObject, V> T1 caseAttributeSet(AttributeSet<T, V> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute Unset</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute Unset</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends EObject, V> T1 caseAttributeUnset(AttributeUnset<T, V> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Removed</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Removed</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends EObject> T1 caseRemoved(Removed<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Object Notification</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Object Notification</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends EObject> T1 caseObjectNotification(ObjectNotification<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute Notification</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute Notification</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends EObject, V> T1 caseAttributeNotification(AttributeNotification<T, V> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Added Many</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Added Many</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends EObject> T1 caseAddedMany(AddedMany<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Removed Many</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Removed Many</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends EObject> T1 caseRemovedMany(RemovedMany<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Objects Notification</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Objects Notification</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends EObject> T1 caseObjectsNotification(ObjectsNotification<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EObject Linked</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EObject Linked</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends EObject> T1 caseEObjectLinked(EObjectLinked<T> object) {
 		return null;
 	}
 

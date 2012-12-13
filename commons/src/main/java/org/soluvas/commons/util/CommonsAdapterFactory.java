@@ -148,6 +148,50 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createWebAddressAdapter();
 			}
 			@Override
+			public <T extends EObject> Adapter caseAdded(Added<T> object) {
+				return createAddedAdapter();
+			}
+			@Override
+			public <T extends EObject> Adapter caseModelNotification(ModelNotification<T> object) {
+				return createModelNotificationAdapter();
+			}
+			@Override
+			public <T extends EObject, V> Adapter caseAttributeSet(AttributeSet<T, V> object) {
+				return createAttributeSetAdapter();
+			}
+			@Override
+			public <T extends EObject, V> Adapter caseAttributeUnset(AttributeUnset<T, V> object) {
+				return createAttributeUnsetAdapter();
+			}
+			@Override
+			public <T extends EObject> Adapter caseRemoved(Removed<T> object) {
+				return createRemovedAdapter();
+			}
+			@Override
+			public <T extends EObject> Adapter caseObjectNotification(ObjectNotification<T> object) {
+				return createObjectNotificationAdapter();
+			}
+			@Override
+			public <T extends EObject, V> Adapter caseAttributeNotification(AttributeNotification<T, V> object) {
+				return createAttributeNotificationAdapter();
+			}
+			@Override
+			public <T extends EObject> Adapter caseAddedMany(AddedMany<T> object) {
+				return createAddedManyAdapter();
+			}
+			@Override
+			public <T extends EObject> Adapter caseRemovedMany(RemovedMany<T> object) {
+				return createRemovedManyAdapter();
+			}
+			@Override
+			public <T extends EObject> Adapter caseObjectsNotification(ObjectsNotification<T> object) {
+				return createObjectsNotificationAdapter();
+			}
+			@Override
+			public <T extends EObject> Adapter caseEObjectLinked(EObjectLinked<T> object) {
+				return createEObjectLinkedAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -444,6 +488,160 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createWebAddressAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Added <em>Added</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Added
+	 * @generated
+	 */
+	public Adapter createAddedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.ModelNotification <em>Model Notification</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.ModelNotification
+	 * @generated
+	 */
+	public Adapter createModelNotificationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.AttributeSet <em>Attribute Set</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.AttributeSet
+	 * @generated
+	 */
+	public Adapter createAttributeSetAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.AttributeUnset <em>Attribute Unset</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.AttributeUnset
+	 * @generated
+	 */
+	public Adapter createAttributeUnsetAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Removed <em>Removed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Removed
+	 * @generated
+	 */
+	public Adapter createRemovedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.ObjectNotification <em>Object Notification</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.ObjectNotification
+	 * @generated
+	 */
+	public Adapter createObjectNotificationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.AttributeNotification <em>Attribute Notification</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.AttributeNotification
+	 * @generated
+	 */
+	public Adapter createAttributeNotificationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.AddedMany <em>Added Many</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.AddedMany
+	 * @generated
+	 */
+	public Adapter createAddedManyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.RemovedMany <em>Removed Many</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.RemovedMany
+	 * @generated
+	 */
+	public Adapter createRemovedManyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.ObjectsNotification <em>Objects Notification</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.ObjectsNotification
+	 * @generated
+	 */
+	public Adapter createObjectsNotificationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.EObjectLinked <em>EObject Linked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.EObjectLinked
+	 * @generated
+	 */
+	public Adapter createEObjectLinkedAdapter() {
 		return null;
 	}
 

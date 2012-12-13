@@ -14,4 +14,12 @@ package org.soluvas.email;
  * @generated
  */
 public interface LayoutType extends TemplateType<Layout> {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Layout create();
 } // LayoutType

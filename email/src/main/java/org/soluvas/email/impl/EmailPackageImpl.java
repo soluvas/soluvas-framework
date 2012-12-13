@@ -199,8 +199,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EReference getEmailCatalog_Pages() {
+	public EReference getEmailCatalog_PageTypes() {
 		return (EReference)emailCatalogEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -209,8 +208,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EReference getEmailCatalog_Layouts() {
+	public EReference getEmailCatalog_LayoutTypes() {
 		return (EReference)emailCatalogEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -531,8 +529,8 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 
 		// Create classes and their features
 		emailCatalogEClass = createEClass(EMAIL_CATALOG);
-		createEReference(emailCatalogEClass, EMAIL_CATALOG__PAGES);
-		createEReference(emailCatalogEClass, EMAIL_CATALOG__LAYOUTS);
+		createEReference(emailCatalogEClass, EMAIL_CATALOG__PAGE_TYPES);
+		createEReference(emailCatalogEClass, EMAIL_CATALOG__LAYOUT_TYPES);
 
 		templateTypeEClass = createEClass(TEMPLATE_TYPE);
 
@@ -644,18 +642,19 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(emailCatalogEClass, EmailCatalog.class, "EmailCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEmailCatalog_Pages(), this.getPageType(), null, "pages", null, 0, -1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEmailCatalog_Layouts(), this.getLayoutType(), null, "layouts", null, 0, -1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEmailCatalog_PageTypes(), this.getPageType(), null, "pageTypes", null, 0, -1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEmailCatalog_LayoutTypes(), this.getLayoutType(), null, "layoutTypes", null, 0, -1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateTypeEClass, TemplateType.class, "TemplateType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		EOperation op = addEOperation(templateTypeEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(templateTypeEClass_T);
-		initEOperation(op, g1);
-
 		initEClass(pageTypeEClass, PageType.class, "PageType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		EOperation op = addEOperation(pageTypeEClass, this.getPage(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getLayout(), "layout", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(layoutTypeEClass, LayoutType.class, "LayoutType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(layoutTypeEClass, this.getLayout(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(templateEClass, Template.class, "Template", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTemplate_Template(), this.getPageType(), null, "template", null, 0, 1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -681,12 +680,12 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		initEAttribute(getRecipient_PreferredFormat(), this.getEmailFormat(), "preferredFormat", null, 0, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRecipient_PreferredWebSecurity(), this.getWebSecurity(), "preferredWebSecurity", null, 0, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(layoutEClass, Layout.class, "Layout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(layoutEClass, Layout.class, "Layout", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLayout_PageSubject(), theEcorePackage.getEString(), "pageSubject", null, 1, 1, Layout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLayout_PagePlain(), theEcorePackage.getEString(), "pagePlain", null, 1, 1, Layout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLayout_PageHtml(), theEcorePackage.getEString(), "pageHtml", null, 1, 1, Layout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(pageEClass, Page.class, "Page", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(pageEClass, Page.class, "Page", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPage_Layout(), this.getLayout(), null, "layout", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(pageEClass, this.getEmail(), "compose", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -695,8 +694,8 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		addEOperation(pageEClass, this.getEmail(), "composeAll", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(templateLikeEClass, TemplateLike.class, "TemplateLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTemplateLike_SubjectTemplate(), theEcorePackage.getEString(), "subjectTemplate", null, 1, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTemplateLike_PlainTemplate(), theEcorePackage.getEString(), "plainTemplate", null, 1, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTemplateLike_SubjectTemplate(), theEcorePackage.getEString(), "subjectTemplate", null, 0, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTemplateLike_PlainTemplate(), theEcorePackage.getEString(), "plainTemplate", null, 0, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTemplateLike_HtmlTemplate(), theEcorePackage.getEString(), "htmlTemplate", null, 0, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
@@ -729,6 +728,12 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 */
 	protected void createGenModelAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		addAnnotation
+		  (pageTypeEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Create Page using the specified layout."
+		   });		
 		addAnnotation
 		  (templateEClass.getEOperations().get(0), 
 		   source, 

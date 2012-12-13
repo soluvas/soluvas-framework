@@ -466,4 +466,105 @@ Comes from: getActionType().getEClass().getEPackage().getNsPrefix().</xsd:docume
       <xsd:documentation>Tenant-wide website URI configuration.</xsd:documentation>
     </xsd:annotation>
   </xsd:element>
+  <xsd:complexType name="Added">
+    <xsd:annotation>
+      <xsd:documentation>Inspired by {@link org.eclipse.emf.common.notify.Notification}.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="commons:ObjectNotification"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Added" type="commons:Added">
+    <xsd:annotation>
+      <xsd:documentation>Inspired by {@link org.eclipse.emf.common.notify.Notification}.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType abstract="true" name="ModelNotification">
+    <xsd:annotation>
+      <xsd:documentation>Inspired by {@link org.eclipse.emf.common.notify.Notification}.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="commons:EObjectLinked">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="container" type="ecore:EObject"/>
+        </xsd:choice>
+        <xsd:attribute name="container" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="ModelNotification" type="commons:ModelNotification">
+    <xsd:annotation>
+      <xsd:documentation>Inspired by {@link org.eclipse.emf.common.notify.Notification}.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="AttributeSet">
+    <xsd:complexContent>
+      <xsd:extension base="commons:AttributeNotification"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="AttributeSet" type="commons:AttributeSet"/>
+  <xsd:complexType name="AttributeUnset">
+    <xsd:complexContent>
+      <xsd:extension base="commons:AttributeNotification"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="AttributeUnset" type="commons:AttributeUnset"/>
+  <xsd:complexType name="Removed">
+    <xsd:complexContent>
+      <xsd:extension base="commons:ObjectNotification"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Removed" type="commons:Removed"/>
+  <xsd:complexType abstract="true" name="ObjectNotification">
+    <xsd:complexContent>
+      <xsd:extension base="commons:ModelNotification">
+        <xsd:attribute name="object" type="xsd:string" use="required"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="ObjectNotification" type="commons:ObjectNotification"/>
+  <xsd:complexType name="AttributeNotification">
+    <xsd:complexContent>
+      <xsd:extension base="commons:ModelNotification">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="attribute" type="ecore:EAttribute"/>
+        </xsd:choice>
+        <xsd:attribute name="object" type="xsd:string" use="required"/>
+        <xsd:attribute name="oldValue" type="xsd:string"/>
+        <xsd:attribute name="newValue" type="xsd:string"/>
+        <xsd:attribute name="attribute" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="AttributeNotification" type="commons:AttributeNotification"/>
+  <xsd:complexType name="AddedMany">
+    <xsd:complexContent>
+      <xsd:extension base="commons:ObjectsNotification"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="AddedMany" type="commons:AddedMany"/>
+  <xsd:complexType name="RemovedMany">
+    <xsd:complexContent>
+      <xsd:extension base="commons:ObjectsNotification"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="RemovedMany" type="commons:RemovedMany"/>
+  <xsd:complexType abstract="true" name="ObjectsNotification">
+    <xsd:complexContent>
+      <xsd:extension base="commons:ModelNotification">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="objects" nillable="true" type="xsd:string"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="ObjectsNotification" type="commons:ObjectsNotification"/>
+  <xsd:complexType abstract="true" name="EObjectLinked">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="EObjectLinked" type="commons:EObjectLinked"/>
 </xsd:schema>

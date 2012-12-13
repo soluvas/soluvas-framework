@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.soluvas.email.EmailPackage#getPage()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Page extends Template {

@@ -36,8 +36,8 @@
     <xsd:complexContent>
       <xsd:extension base="commons:NsPrefixable">
         <xsd:choice maxOccurs="unbounded" minOccurs="0">
-          <xsd:element name="pages" type="email:PageType"/>
-          <xsd:element name="layouts" type="email:LayoutType"/>
+          <xsd:element name="pageTypes" type="email:PageType"/>
+          <xsd:element name="layoutTypes" type="email:LayoutType"/>
         </xsd:choice>
       </xsd:extension>
     </xsd:complexContent>
@@ -51,8 +51,8 @@
           <xsd:element name="eClass" type="ecore:EClass"/>
         </xsd:choice>
         <xsd:attribute name="name" type="xsd:string" use="required"/>
-        <xsd:attribute name="subjectTemplate" type="xsd:string" use="required"/>
-        <xsd:attribute name="plainTemplate" type="xsd:string" use="required">
+        <xsd:attribute name="subjectTemplate" type="xsd:string"/>
+        <xsd:attribute name="plainTemplate" type="xsd:string">
           <xsd:annotation>
             <xsd:documentation>Plain text template.</xsd:documentation>
           </xsd:annotation>
@@ -124,7 +124,7 @@
     <xsd:attribute name="preferredWebSecurity" type="email:WebSecurity"/>
   </xsd:complexType>
   <xsd:element name="Recipient" type="email:Recipient"/>
-  <xsd:complexType name="Layout">
+  <xsd:complexType abstract="true" name="Layout">
     <xsd:complexContent>
       <xsd:extension base="email:Template">
         <xsd:attribute name="pageSubject" type="xsd:string" use="required">
@@ -146,7 +146,7 @@
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="Layout" type="email:Layout"/>
-  <xsd:complexType name="Page">
+  <xsd:complexType abstract="true" name="Page">
     <xsd:complexContent>
       <xsd:extension base="email:Template">
         <xsd:choice maxOccurs="unbounded" minOccurs="0">
@@ -163,8 +163,8 @@
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="subjectTemplate" type="xsd:string" use="required"/>
-    <xsd:attribute name="plainTemplate" type="xsd:string" use="required">
+    <xsd:attribute name="subjectTemplate" type="xsd:string"/>
+    <xsd:attribute name="plainTemplate" type="xsd:string">
       <xsd:annotation>
         <xsd:documentation>Plain text template.</xsd:documentation>
       </xsd:annotation>
