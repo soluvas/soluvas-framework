@@ -33,6 +33,7 @@ public class Person implements Serializable, User {
 	@LdapAttribute("l") private String city;
 	@LdapAttribute("st") private String state;
 	@LdapAttribute("c") private String country;
+	@LdapAttribute("description") private String description;
 	
 	public Person() {
 	}
@@ -54,6 +55,7 @@ public class Person implements Serializable, User {
 	/**
 	 * @return the id
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -258,6 +260,14 @@ public class Person implements Serializable, User {
 	@Override
 	public String getKey() {
 		return getId();
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
