@@ -70,13 +70,22 @@ public interface EmailPackage extends EPackage {
 	int EMAIL_CATALOG = 0;
 
 	/**
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_CATALOG__NS_PREFIX = CommonsPackage.NS_PREFIXABLE__NS_PREFIX;
+
+	/**
 	 * The feature id for the '<em><b>Pages</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_CATALOG__PAGES = 0;
+	int EMAIL_CATALOG__PAGES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Layouts</b></em>' containment reference list.
@@ -85,7 +94,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_CATALOG__LAYOUTS = 1;
+	int EMAIL_CATALOG__LAYOUTS = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Catalog</em>' class.
@@ -94,17 +103,17 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_CATALOG_FEATURE_COUNT = 2;
+	int EMAIL_CATALOG_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.email.impl.EmailTemplateImpl <em>Template</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.email.impl.TemplateTypeImpl <em>Template Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.email.impl.EmailTemplateImpl
-	 * @see org.soluvas.email.impl.EmailPackageImpl#getEmailTemplate()
+	 * @see org.soluvas.email.impl.TemplateTypeImpl
+	 * @see org.soluvas.email.impl.EmailPackageImpl#getTemplateType()
 	 * @generated
 	 */
-	int EMAIL_TEMPLATE = 4;
+	int TEMPLATE_TYPE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
@@ -113,7 +122,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_TEMPLATE__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
+	int TEMPLATE_TYPE__RESOURCE_TYPE = CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
@@ -122,7 +131,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_TEMPLATE__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
+	int TEMPLATE_TYPE__RESOURCE_URI = CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
 
 	/**
 	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
@@ -131,7 +140,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_TEMPLATE__RESOURCE_NAME = CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
+	int TEMPLATE_TYPE__RESOURCE_NAME = CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Bundle</b></em>' attribute.
@@ -140,7 +149,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_TEMPLATE__BUNDLE = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
+	int TEMPLATE_TYPE__BUNDLE = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -149,7 +158,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_TEMPLATE__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
+	int TEMPLATE_TYPE__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
@@ -158,7 +167,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_TEMPLATE__SUBJECT_TEMPLATE = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
+	int TEMPLATE_TYPE__SUBJECT_TEMPLATE = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Plain Template</b></em>' attribute.
@@ -167,7 +176,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_TEMPLATE__PLAIN_TEMPLATE = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 3;
+	int TEMPLATE_TYPE__PLAIN_TEMPLATE = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Html Template</b></em>' attribute.
@@ -176,16 +185,106 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_TEMPLATE__HTML_TEMPLATE = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 4;
+	int TEMPLATE_TYPE__HTML_TEMPLATE = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 4;
 
 	/**
-	 * The number of structural features of the '<em>Template</em>' class.
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_TEMPLATE_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 5;
+	int TEMPLATE_TYPE__NS_PREFIX = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Java Class Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE__JAVA_CLASS_NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Java Class</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE__JAVA_CLASS = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Java Class Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE__JAVA_CLASS_STATUS = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>EFactory</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE__EFACTORY = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>EClass</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE__ECLASS = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>EClass Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE__ECLASS_STATUS = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>EPackage Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE__EPACKAGE_NS_PREFIX = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>EClass Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE__ECLASS_NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>EPackage Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE__EPACKAGE_NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 14;
+
+	/**
+	 * The number of structural features of the '<em>Template Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 15;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.PageTypeImpl <em>Page Type</em>}' class.
@@ -195,7 +294,7 @@ public interface EmailPackage extends EPackage {
 	 * @see org.soluvas.email.impl.EmailPackageImpl#getPageType()
 	 * @generated
 	 */
-	int PAGE_TYPE = 1;
+	int PAGE_TYPE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
@@ -204,7 +303,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_TYPE__RESOURCE_TYPE = EMAIL_TEMPLATE__RESOURCE_TYPE;
+	int PAGE_TYPE__RESOURCE_TYPE = TEMPLATE_TYPE__RESOURCE_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
@@ -213,7 +312,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_TYPE__RESOURCE_URI = EMAIL_TEMPLATE__RESOURCE_URI;
+	int PAGE_TYPE__RESOURCE_URI = TEMPLATE_TYPE__RESOURCE_URI;
 
 	/**
 	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
@@ -222,7 +321,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_TYPE__RESOURCE_NAME = EMAIL_TEMPLATE__RESOURCE_NAME;
+	int PAGE_TYPE__RESOURCE_NAME = TEMPLATE_TYPE__RESOURCE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Bundle</b></em>' attribute.
@@ -231,7 +330,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_TYPE__BUNDLE = EMAIL_TEMPLATE__BUNDLE;
+	int PAGE_TYPE__BUNDLE = TEMPLATE_TYPE__BUNDLE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -240,7 +339,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_TYPE__NAME = EMAIL_TEMPLATE__NAME;
+	int PAGE_TYPE__NAME = TEMPLATE_TYPE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
@@ -249,7 +348,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_TYPE__SUBJECT_TEMPLATE = EMAIL_TEMPLATE__SUBJECT_TEMPLATE;
+	int PAGE_TYPE__SUBJECT_TEMPLATE = TEMPLATE_TYPE__SUBJECT_TEMPLATE;
 
 	/**
 	 * The feature id for the '<em><b>Plain Template</b></em>' attribute.
@@ -258,7 +357,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_TYPE__PLAIN_TEMPLATE = EMAIL_TEMPLATE__PLAIN_TEMPLATE;
+	int PAGE_TYPE__PLAIN_TEMPLATE = TEMPLATE_TYPE__PLAIN_TEMPLATE;
 
 	/**
 	 * The feature id for the '<em><b>Html Template</b></em>' attribute.
@@ -267,7 +366,97 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_TYPE__HTML_TEMPLATE = EMAIL_TEMPLATE__HTML_TEMPLATE;
+	int PAGE_TYPE__HTML_TEMPLATE = TEMPLATE_TYPE__HTML_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE__NS_PREFIX = TEMPLATE_TYPE__NS_PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Java Class Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE__JAVA_CLASS_NAME = TEMPLATE_TYPE__JAVA_CLASS_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Java Class</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE__JAVA_CLASS = TEMPLATE_TYPE__JAVA_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Java Class Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE__JAVA_CLASS_STATUS = TEMPLATE_TYPE__JAVA_CLASS_STATUS;
+
+	/**
+	 * The feature id for the '<em><b>EFactory</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE__EFACTORY = TEMPLATE_TYPE__EFACTORY;
+
+	/**
+	 * The feature id for the '<em><b>EClass</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE__ECLASS = TEMPLATE_TYPE__ECLASS;
+
+	/**
+	 * The feature id for the '<em><b>EClass Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE__ECLASS_STATUS = TEMPLATE_TYPE__ECLASS_STATUS;
+
+	/**
+	 * The feature id for the '<em><b>EPackage Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE__EPACKAGE_NS_PREFIX = TEMPLATE_TYPE__EPACKAGE_NS_PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>EClass Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE__ECLASS_NAME = TEMPLATE_TYPE__ECLASS_NAME;
+
+	/**
+	 * The feature id for the '<em><b>EPackage Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE__EPACKAGE_NAME = TEMPLATE_TYPE__EPACKAGE_NAME;
 
 	/**
 	 * The number of structural features of the '<em>Page Type</em>' class.
@@ -276,7 +465,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_TYPE_FEATURE_COUNT = EMAIL_TEMPLATE_FEATURE_COUNT + 0;
+	int PAGE_TYPE_FEATURE_COUNT = TEMPLATE_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.TemplateImpl <em>Template</em>}' class.
@@ -286,124 +475,7 @@ public interface EmailPackage extends EPackage {
 	 * @see org.soluvas.email.impl.EmailPackageImpl#getTemplate()
 	 * @generated
 	 */
-	int TEMPLATE = 2;
-
-	/**
-	 * The feature id for the '<em><b>EClass</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE__ECLASS = CommonsPackage.ECLASS_LINKED__ECLASS;
-
-	/**
-	 * The feature id for the '<em><b>EClass Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE__ECLASS_STATUS = CommonsPackage.ECLASS_LINKED__ECLASS_STATUS;
-
-	/**
-	 * The feature id for the '<em><b>EPackage Ns Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE__EPACKAGE_NS_PREFIX = CommonsPackage.ECLASS_LINKED__EPACKAGE_NS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>EClass Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE__ECLASS_NAME = CommonsPackage.ECLASS_LINKED__ECLASS_NAME;
-
-	/**
-	 * The feature id for the '<em><b>EPackage Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE__EPACKAGE_NAME = CommonsPackage.ECLASS_LINKED__EPACKAGE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE__SUBJECT_TEMPLATE = CommonsPackage.ECLASS_LINKED_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Plain Template</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE__PLAIN_TEMPLATE = CommonsPackage.ECLASS_LINKED_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Html Template</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE__HTML_TEMPLATE = CommonsPackage.ECLASS_LINKED_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Template</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE__TEMPLATE = CommonsPackage.ECLASS_LINKED_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Recipients</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE__RECIPIENTS = CommonsPackage.ECLASS_LINKED_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>App Manifest</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE__APP_MANIFEST = CommonsPackage.ECLASS_LINKED_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Web Address</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE__WEB_ADDRESS = CommonsPackage.ECLASS_LINKED_FEATURE_COUNT + 6;
-
-	/**
-	 * The number of structural features of the '<em>Template</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE_FEATURE_COUNT = CommonsPackage.ECLASS_LINKED_FEATURE_COUNT + 7;
+	int TEMPLATE = 4;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.LayoutTypeImpl <em>Layout Type</em>}' class.
@@ -422,7 +494,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUT_TYPE__RESOURCE_TYPE = EMAIL_TEMPLATE__RESOURCE_TYPE;
+	int LAYOUT_TYPE__RESOURCE_TYPE = TEMPLATE_TYPE__RESOURCE_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
@@ -431,7 +503,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUT_TYPE__RESOURCE_URI = EMAIL_TEMPLATE__RESOURCE_URI;
+	int LAYOUT_TYPE__RESOURCE_URI = TEMPLATE_TYPE__RESOURCE_URI;
 
 	/**
 	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
@@ -440,7 +512,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUT_TYPE__RESOURCE_NAME = EMAIL_TEMPLATE__RESOURCE_NAME;
+	int LAYOUT_TYPE__RESOURCE_NAME = TEMPLATE_TYPE__RESOURCE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Bundle</b></em>' attribute.
@@ -449,7 +521,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUT_TYPE__BUNDLE = EMAIL_TEMPLATE__BUNDLE;
+	int LAYOUT_TYPE__BUNDLE = TEMPLATE_TYPE__BUNDLE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -458,7 +530,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUT_TYPE__NAME = EMAIL_TEMPLATE__NAME;
+	int LAYOUT_TYPE__NAME = TEMPLATE_TYPE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
@@ -467,7 +539,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUT_TYPE__SUBJECT_TEMPLATE = EMAIL_TEMPLATE__SUBJECT_TEMPLATE;
+	int LAYOUT_TYPE__SUBJECT_TEMPLATE = TEMPLATE_TYPE__SUBJECT_TEMPLATE;
 
 	/**
 	 * The feature id for the '<em><b>Plain Template</b></em>' attribute.
@@ -476,7 +548,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUT_TYPE__PLAIN_TEMPLATE = EMAIL_TEMPLATE__PLAIN_TEMPLATE;
+	int LAYOUT_TYPE__PLAIN_TEMPLATE = TEMPLATE_TYPE__PLAIN_TEMPLATE;
 
 	/**
 	 * The feature id for the '<em><b>Html Template</b></em>' attribute.
@@ -485,7 +557,97 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUT_TYPE__HTML_TEMPLATE = EMAIL_TEMPLATE__HTML_TEMPLATE;
+	int LAYOUT_TYPE__HTML_TEMPLATE = TEMPLATE_TYPE__HTML_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE__NS_PREFIX = TEMPLATE_TYPE__NS_PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Java Class Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE__JAVA_CLASS_NAME = TEMPLATE_TYPE__JAVA_CLASS_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Java Class</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE__JAVA_CLASS = TEMPLATE_TYPE__JAVA_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Java Class Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE__JAVA_CLASS_STATUS = TEMPLATE_TYPE__JAVA_CLASS_STATUS;
+
+	/**
+	 * The feature id for the '<em><b>EFactory</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE__EFACTORY = TEMPLATE_TYPE__EFACTORY;
+
+	/**
+	 * The feature id for the '<em><b>EClass</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE__ECLASS = TEMPLATE_TYPE__ECLASS;
+
+	/**
+	 * The feature id for the '<em><b>EClass Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE__ECLASS_STATUS = TEMPLATE_TYPE__ECLASS_STATUS;
+
+	/**
+	 * The feature id for the '<em><b>EPackage Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE__EPACKAGE_NS_PREFIX = TEMPLATE_TYPE__EPACKAGE_NS_PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>EClass Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE__ECLASS_NAME = TEMPLATE_TYPE__ECLASS_NAME;
+
+	/**
+	 * The feature id for the '<em><b>EPackage Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE__EPACKAGE_NAME = TEMPLATE_TYPE__EPACKAGE_NAME;
 
 	/**
 	 * The number of structural features of the '<em>Layout Type</em>' class.
@@ -494,7 +656,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUT_TYPE_FEATURE_COUNT = EMAIL_TEMPLATE_FEATURE_COUNT + 0;
+	int LAYOUT_TYPE_FEATURE_COUNT = TEMPLATE_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.RecipientImpl <em>Recipient</em>}' class.
@@ -505,6 +667,144 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 */
 	int RECIPIENT = 5;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.email.impl.LayoutImpl <em>Layout</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.email.impl.LayoutImpl
+	 * @see org.soluvas.email.impl.EmailPackageImpl#getLayout()
+	 * @generated
+	 */
+	int LAYOUT = 6;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.email.impl.PageImpl <em>Page</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.email.impl.PageImpl
+	 * @see org.soluvas.email.impl.EmailPackageImpl#getPage()
+	 * @generated
+	 */
+	int PAGE = 7;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.email.TemplateLike <em>Template Like</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.email.TemplateLike
+	 * @see org.soluvas.email.impl.EmailPackageImpl#getTemplateLike()
+	 * @generated
+	 */
+	int TEMPLATE_LIKE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_LIKE__SUBJECT_TEMPLATE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Plain Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_LIKE__PLAIN_TEMPLATE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Html Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_LIKE__HTML_TEMPLATE = 2;
+
+	/**
+	 * The number of structural features of the '<em>Template Like</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_LIKE_FEATURE_COUNT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE__SUBJECT_TEMPLATE = TEMPLATE_LIKE__SUBJECT_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Plain Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE__PLAIN_TEMPLATE = TEMPLATE_LIKE__PLAIN_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Html Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE__HTML_TEMPLATE = TEMPLATE_LIKE__HTML_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Template</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE__TEMPLATE = TEMPLATE_LIKE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Recipients</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE__RECIPIENTS = TEMPLATE_LIKE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>App Manifest</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE__APP_MANIFEST = TEMPLATE_LIKE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Web Address</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE__WEB_ADDRESS = TEMPLATE_LIKE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Template</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_FEATURE_COUNT = TEMPLATE_LIKE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Email</b></em>' attribute.
@@ -577,61 +877,6 @@ public interface EmailPackage extends EPackage {
 	 * @ordered
 	 */
 	int RECIPIENT_FEATURE_COUNT = 7;
-
-	/**
-	 * The meta object id for the '{@link org.soluvas.email.impl.LayoutImpl <em>Layout</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.soluvas.email.impl.LayoutImpl
-	 * @see org.soluvas.email.impl.EmailPackageImpl#getLayout()
-	 * @generated
-	 */
-	int LAYOUT = 6;
-
-	/**
-	 * The feature id for the '<em><b>EClass</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LAYOUT__ECLASS = TEMPLATE__ECLASS;
-
-	/**
-	 * The feature id for the '<em><b>EClass Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LAYOUT__ECLASS_STATUS = TEMPLATE__ECLASS_STATUS;
-
-	/**
-	 * The feature id for the '<em><b>EPackage Ns Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LAYOUT__EPACKAGE_NS_PREFIX = TEMPLATE__EPACKAGE_NS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>EClass Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LAYOUT__ECLASS_NAME = TEMPLATE__ECLASS_NAME;
-
-	/**
-	 * The feature id for the '<em><b>EPackage Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LAYOUT__EPACKAGE_NAME = TEMPLATE__EPACKAGE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
@@ -733,61 +978,6 @@ public interface EmailPackage extends EPackage {
 	int LAYOUT_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.email.impl.PageImpl <em>Page</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.soluvas.email.impl.PageImpl
-	 * @see org.soluvas.email.impl.EmailPackageImpl#getPage()
-	 * @generated
-	 */
-	int PAGE = 7;
-
-	/**
-	 * The feature id for the '<em><b>EClass</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGE__ECLASS = TEMPLATE__ECLASS;
-
-	/**
-	 * The feature id for the '<em><b>EClass Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGE__ECLASS_STATUS = TEMPLATE__ECLASS_STATUS;
-
-	/**
-	 * The feature id for the '<em><b>EPackage Ns Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGE__EPACKAGE_NS_PREFIX = TEMPLATE__EPACKAGE_NS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>EClass Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGE__ECLASS_NAME = TEMPLATE__ECLASS_NAME;
-
-	/**
-	 * The feature id for the '<em><b>EPackage Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PAGE__EPACKAGE_NAME = TEMPLATE__EPACKAGE_NAME;
-
-	/**
 	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -869,52 +1059,6 @@ public interface EmailPackage extends EPackage {
 	int PAGE_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.email.TemplateLike <em>Template Like</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.soluvas.email.TemplateLike
-	 * @see org.soluvas.email.impl.EmailPackageImpl#getTemplateLike()
-	 * @generated
-	 */
-	int TEMPLATE_LIKE = 8;
-
-	/**
-	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE_LIKE__SUBJECT_TEMPLATE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Plain Template</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE_LIKE__PLAIN_TEMPLATE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Html Template</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE_LIKE__HTML_TEMPLATE = 2;
-
-	/**
-	 * The number of structural features of the '<em>Template Like</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE_LIKE_FEATURE_COUNT = 3;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.email.EmailFormat <em>Format</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -975,6 +1119,16 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEmailCatalog_Layouts();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.email.TemplateType <em>Template Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Template Type</em>'.
+	 * @see org.soluvas.email.TemplateType
+	 * @generated
+	 */
+	EClass getTemplateType();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.PageType <em>Page Type</em>}'.
@@ -1049,16 +1203,6 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getLayoutType();
-
-	/**
-	 * Returns the meta object for class '{@link org.soluvas.email.EmailTemplate <em>Template</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Template</em>'.
-	 * @see org.soluvas.email.EmailTemplate
-	 * @generated
-	 */
-	EClass getEmailTemplate();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.Recipient <em>Recipient</em>}'.
@@ -1334,6 +1478,16 @@ public interface EmailPackage extends EPackage {
 		EReference EMAIL_CATALOG__LAYOUTS = eINSTANCE.getEmailCatalog_Layouts();
 
 		/**
+		 * The meta object literal for the '{@link org.soluvas.email.impl.TemplateTypeImpl <em>Template Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.email.impl.TemplateTypeImpl
+		 * @see org.soluvas.email.impl.EmailPackageImpl#getTemplateType()
+		 * @generated
+		 */
+		EClass TEMPLATE_TYPE = eINSTANCE.getTemplateType();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.email.impl.PageTypeImpl <em>Page Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1394,16 +1548,6 @@ public interface EmailPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LAYOUT_TYPE = eINSTANCE.getLayoutType();
-
-		/**
-		 * The meta object literal for the '{@link org.soluvas.email.impl.EmailTemplateImpl <em>Template</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.soluvas.email.impl.EmailTemplateImpl
-		 * @see org.soluvas.email.impl.EmailPackageImpl#getEmailTemplate()
-		 * @generated
-		 */
-		EClass EMAIL_TEMPLATE = eINSTANCE.getEmailTemplate();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.email.impl.RecipientImpl <em>Recipient</em>}' class.

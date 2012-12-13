@@ -29,11 +29,6 @@ import org.soluvas.email.TemplateLike;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.soluvas.email.impl.TemplateImpl#getEClass <em>EClass</em>}</li>
- *   <li>{@link org.soluvas.email.impl.TemplateImpl#getEClassStatus <em>EClass Status</em>}</li>
- *   <li>{@link org.soluvas.email.impl.TemplateImpl#getEPackageNsPrefix <em>EPackage Ns Prefix</em>}</li>
- *   <li>{@link org.soluvas.email.impl.TemplateImpl#getEClassName <em>EClass Name</em>}</li>
- *   <li>{@link org.soluvas.email.impl.TemplateImpl#getEPackageName <em>EPackage Name</em>}</li>
  *   <li>{@link org.soluvas.email.impl.TemplateImpl#getSubjectTemplate <em>Subject Template</em>}</li>
  *   <li>{@link org.soluvas.email.impl.TemplateImpl#getPlainTemplate <em>Plain Template</em>}</li>
  *   <li>{@link org.soluvas.email.impl.TemplateImpl#getHtmlTemplate <em>Html Template</em>}</li>
@@ -47,96 +42,6 @@ import org.soluvas.email.TemplateLike;
  * @generated
  */
 public abstract class TemplateImpl extends EObjectImpl implements Template {
-	/**
-	 * The cached value of the '{@link #getEClass() <em>EClass</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEClass()
-	 * @generated
-	 * @ordered
-	 */
-	protected EClass eClass;
-
-	/**
-	 * The default value of the '{@link #getEClassStatus() <em>EClass Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEClassStatus()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final EClassStatus ECLASS_STATUS_EDEFAULT = EClassStatus.UNRESOLVED;
-
-	/**
-	 * The cached value of the '{@link #getEClassStatus() <em>EClass Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEClassStatus()
-	 * @generated
-	 * @ordered
-	 */
-	protected EClassStatus eClassStatus = ECLASS_STATUS_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getEPackageNsPrefix() <em>EPackage Ns Prefix</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEPackageNsPrefix()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String EPACKAGE_NS_PREFIX_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getEPackageNsPrefix() <em>EPackage Ns Prefix</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEPackageNsPrefix()
-	 * @generated
-	 * @ordered
-	 */
-	protected String ePackageNsPrefix = EPACKAGE_NS_PREFIX_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getEClassName() <em>EClass Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEClassName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String ECLASS_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getEClassName() <em>EClass Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEClassName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String eClassName = ECLASS_NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getEPackageName() <em>EPackage Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEPackageName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String EPACKAGE_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getEPackageName() <em>EPackage Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEPackageName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String ePackageName = EPACKAGE_NAME_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getSubjectTemplate() <em>Subject Template</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -254,138 +159,6 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 	@Override
 	protected EClass eStaticClass() {
 		return EmailPackage.Literals.TEMPLATE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getEClass() {
-		if (eClass != null && eClass.eIsProxy()) {
-			InternalEObject oldEClass = (InternalEObject)eClass;
-			eClass = (EClass)eResolveProxy(oldEClass);
-			if (eClass != oldEClass) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EmailPackage.TEMPLATE__ECLASS, oldEClass, eClass));
-			}
-		}
-		return eClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass basicGetEClass() {
-		return eClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setEClass(EClass newEClass) {
-		EClass oldEClass = eClass;
-		eClass = newEClass;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.TEMPLATE__ECLASS, oldEClass, eClass));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClassStatus getEClassStatus() {
-		return eClassStatus;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setEClassStatus(EClassStatus newEClassStatus) {
-		EClassStatus oldEClassStatus = eClassStatus;
-		eClassStatus = newEClassStatus == null ? ECLASS_STATUS_EDEFAULT : newEClassStatus;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.TEMPLATE__ECLASS_STATUS, oldEClassStatus, eClassStatus));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getEPackageNsPrefix() {
-		return ePackageNsPrefix;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setEPackageNsPrefix(String newEPackageNsPrefix) {
-		String oldEPackageNsPrefix = ePackageNsPrefix;
-		ePackageNsPrefix = newEPackageNsPrefix;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.TEMPLATE__EPACKAGE_NS_PREFIX, oldEPackageNsPrefix, ePackageNsPrefix));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getEClassName() {
-		return eClassName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setEClassName(String newEClassName) {
-		String oldEClassName = eClassName;
-		eClassName = newEClassName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.TEMPLATE__ECLASS_NAME, oldEClassName, eClassName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getEPackageName() {
-		return ePackageName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setEPackageName(String newEPackageName) {
-		String oldEPackageName = ePackageName;
-		ePackageName = newEPackageName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.TEMPLATE__EPACKAGE_NAME, oldEPackageName, ePackageName));
 	}
 
 	/**
@@ -632,31 +405,8 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 	 * @generated
 	 */
 	@Override
-	public void resolveEClass(Map<String, EClass> eClassMap) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EmailPackage.TEMPLATE__ECLASS:
-				if (resolve) return getEClass();
-				return basicGetEClass();
-			case EmailPackage.TEMPLATE__ECLASS_STATUS:
-				return getEClassStatus();
-			case EmailPackage.TEMPLATE__EPACKAGE_NS_PREFIX:
-				return getEPackageNsPrefix();
-			case EmailPackage.TEMPLATE__ECLASS_NAME:
-				return getEClassName();
-			case EmailPackage.TEMPLATE__EPACKAGE_NAME:
-				return getEPackageName();
 			case EmailPackage.TEMPLATE__SUBJECT_TEMPLATE:
 				return getSubjectTemplate();
 			case EmailPackage.TEMPLATE__PLAIN_TEMPLATE:
@@ -687,21 +437,6 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EmailPackage.TEMPLATE__ECLASS:
-				setEClass((EClass)newValue);
-				return;
-			case EmailPackage.TEMPLATE__ECLASS_STATUS:
-				setEClassStatus((EClassStatus)newValue);
-				return;
-			case EmailPackage.TEMPLATE__EPACKAGE_NS_PREFIX:
-				setEPackageNsPrefix((String)newValue);
-				return;
-			case EmailPackage.TEMPLATE__ECLASS_NAME:
-				setEClassName((String)newValue);
-				return;
-			case EmailPackage.TEMPLATE__EPACKAGE_NAME:
-				setEPackageName((String)newValue);
-				return;
 			case EmailPackage.TEMPLATE__SUBJECT_TEMPLATE:
 				setSubjectTemplate((String)newValue);
 				return;
@@ -736,21 +471,6 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EmailPackage.TEMPLATE__ECLASS:
-				setEClass((EClass)null);
-				return;
-			case EmailPackage.TEMPLATE__ECLASS_STATUS:
-				setEClassStatus(ECLASS_STATUS_EDEFAULT);
-				return;
-			case EmailPackage.TEMPLATE__EPACKAGE_NS_PREFIX:
-				setEPackageNsPrefix(EPACKAGE_NS_PREFIX_EDEFAULT);
-				return;
-			case EmailPackage.TEMPLATE__ECLASS_NAME:
-				setEClassName(ECLASS_NAME_EDEFAULT);
-				return;
-			case EmailPackage.TEMPLATE__EPACKAGE_NAME:
-				setEPackageName(EPACKAGE_NAME_EDEFAULT);
-				return;
 			case EmailPackage.TEMPLATE__SUBJECT_TEMPLATE:
 				setSubjectTemplate(SUBJECT_TEMPLATE_EDEFAULT);
 				return;
@@ -784,16 +504,6 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EmailPackage.TEMPLATE__ECLASS:
-				return eClass != null;
-			case EmailPackage.TEMPLATE__ECLASS_STATUS:
-				return eClassStatus != ECLASS_STATUS_EDEFAULT;
-			case EmailPackage.TEMPLATE__EPACKAGE_NS_PREFIX:
-				return EPACKAGE_NS_PREFIX_EDEFAULT == null ? ePackageNsPrefix != null : !EPACKAGE_NS_PREFIX_EDEFAULT.equals(ePackageNsPrefix);
-			case EmailPackage.TEMPLATE__ECLASS_NAME:
-				return ECLASS_NAME_EDEFAULT == null ? eClassName != null : !ECLASS_NAME_EDEFAULT.equals(eClassName);
-			case EmailPackage.TEMPLATE__EPACKAGE_NAME:
-				return EPACKAGE_NAME_EDEFAULT == null ? ePackageName != null : !EPACKAGE_NAME_EDEFAULT.equals(ePackageName);
 			case EmailPackage.TEMPLATE__SUBJECT_TEMPLATE:
 				return SUBJECT_TEMPLATE_EDEFAULT == null ? subjectTemplate != null : !SUBJECT_TEMPLATE_EDEFAULT.equals(subjectTemplate);
 			case EmailPackage.TEMPLATE__PLAIN_TEMPLATE:
@@ -818,55 +528,11 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 	 * @generated
 	 */
 	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == TemplateLike.class) {
-			switch (derivedFeatureID) {
-				case EmailPackage.TEMPLATE__SUBJECT_TEMPLATE: return EmailPackage.TEMPLATE_LIKE__SUBJECT_TEMPLATE;
-				case EmailPackage.TEMPLATE__PLAIN_TEMPLATE: return EmailPackage.TEMPLATE_LIKE__PLAIN_TEMPLATE;
-				case EmailPackage.TEMPLATE__HTML_TEMPLATE: return EmailPackage.TEMPLATE_LIKE__HTML_TEMPLATE;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == TemplateLike.class) {
-			switch (baseFeatureID) {
-				case EmailPackage.TEMPLATE_LIKE__SUBJECT_TEMPLATE: return EmailPackage.TEMPLATE__SUBJECT_TEMPLATE;
-				case EmailPackage.TEMPLATE_LIKE__PLAIN_TEMPLATE: return EmailPackage.TEMPLATE__PLAIN_TEMPLATE;
-				case EmailPackage.TEMPLATE_LIKE__HTML_TEMPLATE: return EmailPackage.TEMPLATE__HTML_TEMPLATE;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (eClassStatus: ");
-		result.append(eClassStatus);
-		result.append(", ePackageNsPrefix: ");
-		result.append(ePackageNsPrefix);
-		result.append(", eClassName: ");
-		result.append(eClassName);
-		result.append(", ePackageName: ");
-		result.append(ePackageName);
-		result.append(", subjectTemplate: ");
+		result.append(" (subjectTemplate: ");
 		result.append(subjectTemplate);
 		result.append(", plainTemplate: ");
 		result.append(plainTemplate);

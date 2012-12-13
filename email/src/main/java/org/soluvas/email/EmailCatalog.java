@@ -4,6 +4,7 @@ package org.soluvas.email;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.SerializableEObject;
 
 /**
@@ -21,10 +22,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.email.EmailPackage#getEmailCatalog()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface EmailCatalog extends SerializableEObject {
+public interface EmailCatalog extends NsPrefixable {
 	/**
 	 * Returns the value of the '<em><b>Pages</b></em>' containment reference list.
 	 * The list contents are of type {@link org.soluvas.email.PageType}.

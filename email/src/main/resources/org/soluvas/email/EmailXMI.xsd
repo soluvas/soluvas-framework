@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<xsd:schema xmlns:commons="http://www.soluvas.org/schema/commons/1.0" xmlns:email="http://www.soluvas.org/schema/email/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/email/1.0">
-  <xsd:import namespace="http://www.soluvas.org/schema/commons/1.0" schemaLocation="commons.xsd"/>
+<xsd:schema xmlns:commons="http://www.soluvas.org/schema/commons/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:email="http://www.soluvas.org/schema/email/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/email/1.0">
   <xsd:import namespace="http://www.omg.org/XMI" schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/XMI.xsd"/>
+  <xsd:import namespace="http://www.eclipse.org/emf/2002/Ecore" schemaLocation="ecore.xsd"/>
+  <xsd:import namespace="http://www.soluvas.org/schema/commons/1.0" schemaLocation="commons.xsd"/>
   <xsd:simpleType name="EmailFormat">
     <xsd:restriction base="xsd:NCName">
       <xsd:enumeration value="multipart"/>
@@ -32,58 +33,23 @@
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:complexType name="EmailCatalog">
-    <xsd:choice maxOccurs="unbounded" minOccurs="0">
-      <xsd:element name="pages" type="email:PageType"/>
-      <xsd:element name="layouts" type="email:LayoutType"/>
-      <xsd:element ref="xmi:Extension"/>
-    </xsd:choice>
-    <xsd:attribute ref="xmi:id"/>
-    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-  </xsd:complexType>
-  <xsd:element name="EmailCatalog" type="email:EmailCatalog"/>
-  <xsd:complexType name="PageType">
     <xsd:complexContent>
-      <xsd:extension base="email:EmailTemplate"/>
-    </xsd:complexContent>
-  </xsd:complexType>
-  <xsd:element name="PageType" type="email:PageType"/>
-  <xsd:complexType abstract="true" name="Template">
-    <xsd:complexContent>
-      <xsd:extension base="commons:EClassLinked">
+      <xsd:extension base="commons:NsPrefixable">
         <xsd:choice maxOccurs="unbounded" minOccurs="0">
-          <xsd:element name="template" type="email:PageType"/>
-          <xsd:element name="recipients" type="email:Recipient"/>
-          <xsd:element name="appManifest" type="commons:AppManifest"/>
-          <xsd:element name="webAddress" type="commons:WebAddress"/>
+          <xsd:element name="pages" type="email:PageType"/>
+          <xsd:element name="layouts" type="email:LayoutType"/>
         </xsd:choice>
-        <xsd:attribute name="subjectTemplate" type="xsd:string" use="required"/>
-        <xsd:attribute name="plainTemplate" type="xsd:string" use="required">
-          <xsd:annotation>
-            <xsd:documentation>Plain text template.</xsd:documentation>
-          </xsd:annotation>
-        </xsd:attribute>
-        <xsd:attribute name="htmlTemplate" type="xsd:string">
-          <xsd:annotation>
-            <xsd:documentation>If this is null, the html template will be synthesized from plain template.</xsd:documentation>
-          </xsd:annotation>
-        </xsd:attribute>
-        <xsd:attribute name="template" type="xsd:string"/>
-        <xsd:attribute name="recipients" type="xsd:string"/>
-        <xsd:attribute name="appManifest" type="xsd:string"/>
-        <xsd:attribute name="webAddress" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
-  <xsd:element name="Template" type="email:Template"/>
-  <xsd:complexType name="LayoutType">
-    <xsd:complexContent>
-      <xsd:extension base="email:EmailTemplate"/>
-    </xsd:complexContent>
-  </xsd:complexType>
-  <xsd:element name="LayoutType" type="email:LayoutType"/>
-  <xsd:complexType abstract="true" name="EmailTemplate">
+  <xsd:element name="EmailCatalog" type="email:EmailCatalog"/>
+  <xsd:complexType abstract="true" name="TemplateType">
     <xsd:complexContent>
       <xsd:extension base="commons:ResourceAware">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="eFactory" type="ecore:EFactory"/>
+          <xsd:element name="eClass" type="ecore:EClass"/>
+        </xsd:choice>
         <xsd:attribute name="name" type="xsd:string" use="required"/>
         <xsd:attribute name="subjectTemplate" type="xsd:string" use="required"/>
         <xsd:attribute name="plainTemplate" type="xsd:string" use="required">
@@ -96,10 +62,49 @@
             <xsd:documentation>If this is null, the html template will be synthesized from plain template.</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
+        <xsd:attribute name="nsPrefix" type="xsd:string"/>
+        <xsd:attribute name="javaClassName" type="xsd:string"/>
+        <xsd:attribute name="javaClass" type="xsd:string"/>
+        <xsd:attribute name="javaClassStatus" type="commons:JavaClassStatus"/>
+        <xsd:attribute name="eFactory" type="xsd:string"/>
+        <xsd:attribute name="eClassStatus" type="commons:EClassStatus"/>
+        <xsd:attribute name="ePackageNsPrefix" type="xsd:string"/>
+        <xsd:attribute name="eClassName" type="xsd:string"/>
+        <xsd:attribute name="ePackageName" type="xsd:string"/>
+        <xsd:attribute name="eClass" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
-  <xsd:element name="EmailTemplate" type="email:EmailTemplate"/>
+  <xsd:element name="TemplateType" type="email:TemplateType"/>
+  <xsd:complexType name="PageType">
+    <xsd:complexContent>
+      <xsd:extension base="email:TemplateType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="PageType" type="email:PageType"/>
+  <xsd:complexType name="LayoutType">
+    <xsd:complexContent>
+      <xsd:extension base="email:TemplateType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="LayoutType" type="email:LayoutType"/>
+  <xsd:complexType abstract="true" name="Template">
+    <xsd:complexContent>
+      <xsd:extension base="email:TemplateLike">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="template" type="email:PageType"/>
+          <xsd:element name="recipients" type="email:Recipient"/>
+          <xsd:element name="appManifest" type="commons:AppManifest"/>
+          <xsd:element name="webAddress" type="commons:WebAddress"/>
+        </xsd:choice>
+        <xsd:attribute name="template" type="xsd:string"/>
+        <xsd:attribute name="recipients" type="xsd:string"/>
+        <xsd:attribute name="appManifest" type="xsd:string"/>
+        <xsd:attribute name="webAddress" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Template" type="email:Template"/>
   <xsd:complexType name="Recipient">
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element ref="xmi:Extension"/>

@@ -26,7 +26,7 @@ import org.soluvas.commons.WebAddress;
  * @model abstract="true"
  * @generated
  */
-public interface Template extends EClassLinked, TemplateLike {
+public interface Template extends TemplateLike {
 	/**
 	 * Returns the value of the '<em><b>Template</b></em>' reference.
 	 * <!-- begin-user-doc -->
