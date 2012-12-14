@@ -180,4 +180,12 @@
     </xsd:attribute>
   </xsd:complexType>
   <xsd:element name="TemplateLike" type="email:TemplateLike"/>
+  <xsd:complexType name="EmailManager">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="EmailManager" type="email:EmailManager"/>
 </xsd:schema>

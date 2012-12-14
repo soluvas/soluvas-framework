@@ -113,6 +113,10 @@ public class EmailAdapterFactory extends AdapterFactoryImpl {
 				return createTemplateLikeAdapter();
 			}
 			@Override
+			public Adapter caseEmailManager(EmailManager object) {
+				return createEmailManagerAdapter();
+			}
+			@Override
 			public Adapter caseNsPrefixable(NsPrefixable object) {
 				return createNsPrefixableAdapter();
 			}
@@ -287,6 +291,20 @@ public class EmailAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTemplateLikeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.EmailManager <em>Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.email.EmailManager
+	 * @generated
+	 */
+	public Adapter createEmailManagerAdapter() {
 		return null;
 	}
 

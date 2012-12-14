@@ -1050,6 +1050,25 @@ public interface EmailPackage extends EPackage {
 	int PAGE_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.email.impl.EmailManagerImpl <em>Manager</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.email.impl.EmailManagerImpl
+	 * @see org.soluvas.email.impl.EmailPackageImpl#getEmailManager()
+	 * @generated
+	 */
+	int EMAIL_MANAGER = 9;
+
+	/**
+	 * The number of structural features of the '<em>Manager</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_MANAGER_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.email.EmailFormat <em>Format</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1057,7 +1076,7 @@ public interface EmailPackage extends EPackage {
 	 * @see org.soluvas.email.impl.EmailPackageImpl#getEmailFormat()
 	 * @generated
 	 */
-	int EMAIL_FORMAT = 9;
+	int EMAIL_FORMAT = 10;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.WebSecurity <em>Web Security</em>}' enum.
@@ -1067,7 +1086,7 @@ public interface EmailPackage extends EPackage {
 	 * @see org.soluvas.email.impl.EmailPackageImpl#getWebSecurity()
 	 * @generated
 	 */
-	int WEB_SECURITY = 10;
+	int WEB_SECURITY = 11;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -1077,7 +1096,7 @@ public interface EmailPackage extends EPackage {
 	 * @see org.soluvas.email.impl.EmailPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 11;
+	int EMAIL = 12;
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.EmailCatalog <em>Catalog</em>}'.
@@ -1401,6 +1420,16 @@ public interface EmailPackage extends EPackage {
 	EAttribute getTemplateLike_HtmlTemplate();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.email.EmailManager <em>Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Manager</em>'.
+	 * @see org.soluvas.email.EmailManager
+	 * @generated
+	 */
+	EClass getEmailManager();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.email.EmailFormat <em>Format</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1710,6 +1739,16 @@ public interface EmailPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TEMPLATE_LIKE__HTML_TEMPLATE = eINSTANCE.getTemplateLike_HtmlTemplate();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.email.impl.EmailManagerImpl <em>Manager</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.email.impl.EmailManagerImpl
+		 * @see org.soluvas.email.impl.EmailPackageImpl#getEmailManager()
+		 * @generated
+		 */
+		EClass EMAIL_MANAGER = eINSTANCE.getEmailManager();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.email.EmailFormat <em>Format</em>}' enum.

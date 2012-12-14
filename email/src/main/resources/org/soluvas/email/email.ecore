@@ -156,4 +156,20 @@
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EmailManager">
+    <eOperations name="createPage">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Create an email Page using the tenant-wide default layout."/>
+      </eAnnotations>
+      <eGenericType eTypeParameter="#//EmailManager/createPage/T"/>
+      <eTypeParameters name="T">
+        <eBounds eClassifier="#//Page"/>
+      </eTypeParameters>
+      <eParameters name="pageClass">
+        <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EJavaClass">
+          <eTypeArguments eTypeParameter="#//EmailManager/createPage/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+  </eClassifiers>
 </ecore:EPackage>

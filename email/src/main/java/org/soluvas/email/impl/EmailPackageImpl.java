@@ -18,6 +18,7 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailFactory;
 import org.soluvas.email.EmailFormat;
+import org.soluvas.email.EmailManager;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.TemplateType;
 import org.soluvas.email.Layout;
@@ -98,6 +99,13 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * @generated
 	 */
 	private EClass templateLikeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass emailManagerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -483,6 +491,15 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEmailManager() {
+		return emailManagerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getEmailFormat() {
 		return emailFormatEEnum;
@@ -574,6 +591,8 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		createEAttribute(templateLikeEClass, TEMPLATE_LIKE__SUBJECT_TEMPLATE);
 		createEAttribute(templateLikeEClass, TEMPLATE_LIKE__PLAIN_TEMPLATE);
 		createEAttribute(templateLikeEClass, TEMPLATE_LIKE__HTML_TEMPLATE);
+
+		emailManagerEClass = createEClass(EMAIL_MANAGER);
 
 		// Create enums
 		emailFormatEEnum = createEEnum(EMAIL_FORMAT);
@@ -712,6 +731,19 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		initEAttribute(getTemplateLike_PlainTemplate(), theEcorePackage.getEString(), "plainTemplate", null, 0, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTemplateLike_HtmlTemplate(), theEcorePackage.getEString(), "htmlTemplate", null, 0, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(emailManagerEClass, EmailManager.class, "EmailManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(emailManagerEClass, null, "createPage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		ETypeParameter t1 = addETypeParameter(op, "T");
+		g1 = createEGenericType(this.getPage());
+		t1.getEBounds().add(g1);
+		g1 = createEGenericType(theEcorePackage.getEJavaClass());
+		g2 = createEGenericType(t1);
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "pageClass", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(t1);
+		initEOperation(op, g1);
+
 		// Initialize enums and add enum literals
 		initEEnum(emailFormatEEnum, EmailFormat.class, "EmailFormat");
 		addEEnumLiteral(emailFormatEEnum, EmailFormat.MULTIPART);
@@ -837,6 +869,12 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Always use plain HTTP for all content, including content with sensitive URIs. (not recommended, but sometimes required for older mobile devices, or for development purposes.)"
+		   });		
+		addAnnotation
+		  (emailManagerEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Create an email Page using the tenant-wide default layout."
 		   });
 	}
 

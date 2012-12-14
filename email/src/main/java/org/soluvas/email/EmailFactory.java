@@ -58,6 +58,15 @@ public interface EmailFactory extends EFactory {
 	Recipient createRecipient();
 
 	/**
+	 * Returns a new object of class '<em>Manager</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Manager</em>'.
+	 * @generated
+	 */
+	EmailManager createEmailManager();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
