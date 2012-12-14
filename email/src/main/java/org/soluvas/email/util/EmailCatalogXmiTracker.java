@@ -108,8 +108,14 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 			@Override @Nullable
 			public Map<String, EClass> apply(@Nullable URL url) {
 				log.debug("Getting {} from {} in {} [{}]", suppliedClassName, url, bundle.getSymbolicName(), bundle.getBundleId());
-				final XmiObjectLoader<EPackage> loader = new XmiObjectLoader<EPackage>(EcorePackage.eINSTANCE, url,
-						bundle);
+				XmiObjectLoader<EPackage> loader;
+//				try {
+					loader = new XmiObjectLoader<EPackage>(EcorePackage.eINSTANCE, url,
+							bundle);
+//				} catch (Exception e1) {
+//					log.warn("Cannot load " + url, e1);
+//					return ImmutableMap.of();
+//				}
 				final EPackage ecorePackage = loader.get();
 				log.debug("Loaded {} EPackage {} ({}={}) from {} in {} [{}]", suppliedClassName, 
 						ecorePackage.getName(), ecorePackage.getNsPrefix(), ecorePackage.getNsURI(),

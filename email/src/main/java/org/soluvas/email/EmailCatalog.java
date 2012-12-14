@@ -17,6 +17,7 @@ import org.soluvas.commons.SerializableEObject;
  * <ul>
  *   <li>{@link org.soluvas.email.EmailCatalog#getPageTypes <em>Page Types</em>}</li>
  *   <li>{@link org.soluvas.email.EmailCatalog#getLayoutTypes <em>Layout Types</em>}</li>
+ *   <li>{@link org.soluvas.email.EmailCatalog#getSenderTypes <em>Sender Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,5 +57,21 @@ public interface EmailCatalog extends NsPrefixable {
 	 * @generated
 	 */
 	EList<LayoutType> getLayoutTypes();
+
+	/**
+	 * Returns the value of the '<em><b>Sender Types</b></em>' containment reference list.
+	 * The list contents are of type {@link org.soluvas.email.SenderType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sender Types</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sender Types</em>' containment reference list.
+	 * @see org.soluvas.email.EmailPackage#getEmailCatalog_SenderTypes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<SenderType> getSenderTypes();
 
 } // EmailCatalog

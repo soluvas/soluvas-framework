@@ -73,8 +73,25 @@
             <xsd:documentation>Name relative to parent resource.</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
-        <xsd:attribute name="title" type="xsd:string"/>
-        <xsd:attribute name="description" type="xsd:string"/>
+        <xsd:attribute name="title" type="xsd:string" use="required"/>
+        <xsd:attribute name="description" type="xsd:string" use="required"/>
+        <xsd:attribute name="domain" type="xsd:string" use="required">
+          <xsd:annotation>
+            <xsd:documentation>Primary domain name of the application, e.g. "berbatik.com". Used by Email system.
+
+&lt;p&gt;For development, use e.g. "berbatik.annafi.dev".
+
+&lt;p&gt;TODO: title &amp; domain should probably be moved somewhere else, since it's tenant &amp; environment specific.
+
+&lt;p&gt;Production: title=Berbatik, domain=berbatik.com
+
+&lt;p&gt;Staging: title=Berbatik stg, domain=stg.berbatik.com
+
+&lt;p&gt;Development: title=Berbatik Annafi, domain=berbatik.annafi.dev
+
+&lt;p&gt;Description usually stays the same, but can be different too.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>

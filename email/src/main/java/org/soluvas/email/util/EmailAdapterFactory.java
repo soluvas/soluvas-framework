@@ -117,6 +117,22 @@ public class EmailAdapterFactory extends AdapterFactoryImpl {
 				return createEmailManagerAdapter();
 			}
 			@Override
+			public Adapter caseSender(Sender object) {
+				return createSenderAdapter();
+			}
+			@Override
+			public Adapter caseSenderType(SenderType object) {
+				return createSenderTypeAdapter();
+			}
+			@Override
+			public Adapter caseSenderLike(SenderLike object) {
+				return createSenderLikeAdapter();
+			}
+			@Override
+			public Adapter caseDefaultScope(DefaultScope object) {
+				return createDefaultScopeAdapter();
+			}
+			@Override
 			public Adapter caseNsPrefixable(NsPrefixable object) {
 				return createNsPrefixableAdapter();
 			}
@@ -305,6 +321,62 @@ public class EmailAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEmailManagerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.Sender <em>Sender</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.email.Sender
+	 * @generated
+	 */
+	public Adapter createSenderAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.SenderType <em>Sender Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.email.SenderType
+	 * @generated
+	 */
+	public Adapter createSenderTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.SenderLike <em>Sender Like</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.email.SenderLike
+	 * @generated
+	 */
+	public Adapter createSenderLikeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.DefaultScope <em>Default Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.email.DefaultScope
+	 * @generated
+	 */
+	public Adapter createDefaultScopeAdapter() {
 		return null;
 	}
 

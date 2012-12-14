@@ -32,6 +32,17 @@ public interface TemplateLike extends SerializableEObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Some subjects include tracking ID, e.g.
+	 * 
+	 * <pre>[#MCV-529-28864]: Email forwarding not working</pre>
+	 * 
+	 * <p>Such subject would use this template:
+	 * 
+	 * <pre>[#{{{ticket.formalId}}}]: {{{ticket.subject}}}</pre>
+	 * 
+	 * <p>It's not recommended to put company name in the subject. Best practice is to put the company name as Sender's name, optionally suffixed with "Support" etc. Also, most services (Facebook, NameCheap) do not put the recipient name in the subject.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Subject Template</em>' attribute.
 	 * @see #setSubjectTemplate(String)
 	 * @see org.soluvas.email.EmailPackage#getTemplateLike_SubjectTemplate()

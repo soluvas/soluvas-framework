@@ -196,13 +196,22 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__DESCRIPTION = POSITIONABLE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Domain</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__DOMAIN = POSITIONABLE_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 5;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}' class.
@@ -1558,6 +1567,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_Description();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDomain <em>Domain</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Domain</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDomain()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_Domain();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonInfo <em>Person Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2515,6 +2535,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__DESCRIPTION = eINSTANCE.getAppManifest_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Domain</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DOMAIN = eINSTANCE.getAppManifest_Domain();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.

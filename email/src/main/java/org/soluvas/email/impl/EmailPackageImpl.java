@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.email.DefaultScope;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailFactory;
 import org.soluvas.email.EmailFormat;
@@ -26,6 +27,9 @@ import org.soluvas.email.LayoutType;
 import org.soluvas.email.Page;
 import org.soluvas.email.PageType;
 import org.soluvas.email.Recipient;
+import org.soluvas.email.Sender;
+import org.soluvas.email.SenderLike;
+import org.soluvas.email.SenderType;
 import org.soluvas.email.Template;
 import org.soluvas.email.TemplateLike;
 import org.soluvas.email.WebSecurity;
@@ -106,6 +110,34 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * @generated
 	 */
 	private EClass emailManagerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass senderEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass senderTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass senderLikeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass defaultScopeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -225,6 +257,15 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getEmailCatalog_SenderTypes() {
+		return (EReference)emailCatalogEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTemplateType() {
 		return templateTypeEClass;
 	}
@@ -257,26 +298,6 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	@Override
 	public EReference getTemplate_Recipients() {
 		return (EReference)templateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTemplate_WebAddress() {
-		return (EReference)templateEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTemplate_AppManifest() {
-		return (EReference)templateEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -500,6 +521,96 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSender() {
+		return senderEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSender_SenderType() {
+		return (EReference)senderEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSenderType() {
+		return senderTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSenderLike() {
+		return senderLikeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSenderLike_From() {
+		return (EAttribute)senderLikeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSenderLike_Email() {
+		return (EAttribute)senderLikeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSenderLike_ReplyTo() {
+		return (EAttribute)senderLikeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDefaultScope() {
+		return defaultScopeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDefaultScope_WebAddress() {
+		return (EReference)defaultScopeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDefaultScope_AppManifest() {
+		return (EReference)defaultScopeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getEmailFormat() {
 		return emailFormatEEnum;
@@ -556,6 +667,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		emailCatalogEClass = createEClass(EMAIL_CATALOG);
 		createEReference(emailCatalogEClass, EMAIL_CATALOG__PAGE_TYPES);
 		createEReference(emailCatalogEClass, EMAIL_CATALOG__LAYOUT_TYPES);
+		createEReference(emailCatalogEClass, EMAIL_CATALOG__SENDER_TYPES);
 
 		templateTypeEClass = createEClass(TEMPLATE_TYPE);
 
@@ -565,8 +677,6 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 
 		templateEClass = createEClass(TEMPLATE);
 		createEReference(templateEClass, TEMPLATE__RECIPIENTS);
-		createEReference(templateEClass, TEMPLATE__APP_MANIFEST);
-		createEReference(templateEClass, TEMPLATE__WEB_ADDRESS);
 
 		recipientEClass = createEClass(RECIPIENT);
 		createEAttribute(recipientEClass, RECIPIENT__EMAIL);
@@ -593,6 +703,20 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		createEAttribute(templateLikeEClass, TEMPLATE_LIKE__HTML_TEMPLATE);
 
 		emailManagerEClass = createEClass(EMAIL_MANAGER);
+
+		senderEClass = createEClass(SENDER);
+		createEReference(senderEClass, SENDER__SENDER_TYPE);
+
+		senderTypeEClass = createEClass(SENDER_TYPE);
+
+		senderLikeEClass = createEClass(SENDER_LIKE);
+		createEAttribute(senderLikeEClass, SENDER_LIKE__FROM);
+		createEAttribute(senderLikeEClass, SENDER_LIKE__EMAIL);
+		createEAttribute(senderLikeEClass, SENDER_LIKE__REPLY_TO);
+
+		defaultScopeEClass = createEClass(DEFAULT_SCOPE);
+		createEReference(defaultScopeEClass, DEFAULT_SCOPE__WEB_ADDRESS);
+		createEReference(defaultScopeEClass, DEFAULT_SCOPE__APP_MANIFEST);
 
 		// Create enums
 		emailFormatEEnum = createEEnum(EMAIL_FORMAT);
@@ -665,13 +789,33 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		g1.getETypeArguments().add(g2);
 		layoutTypeEClass.getEGenericSuperTypes().add(g1);
 		templateEClass.getESuperTypes().add(this.getTemplateLike());
+		templateEClass.getESuperTypes().add(this.getDefaultScope());
 		layoutEClass.getESuperTypes().add(this.getTemplate());
 		pageEClass.getESuperTypes().add(this.getTemplate());
+		senderEClass.getESuperTypes().add(this.getSenderLike());
+		senderEClass.getESuperTypes().add(this.getDefaultScope());
+		g1 = createEGenericType(theCommonsPackage.getNameContainer());
+		senderTypeEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getBundleAware());
+		senderTypeEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getNsPrefixable());
+		senderTypeEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getEClassLinked());
+		senderTypeEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getJavaClassLinked());
+		g2 = createEGenericType(this.getSender());
+		g1.getETypeArguments().add(g2);
+		senderTypeEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getEFactoryLinked());
+		senderTypeEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getSenderLike());
+		senderTypeEClass.getEGenericSuperTypes().add(g1);
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(emailCatalogEClass, EmailCatalog.class, "EmailCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEmailCatalog_PageTypes(), this.getPageType(), null, "pageTypes", null, 0, -1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEmailCatalog_LayoutTypes(), this.getLayoutType(), null, "layoutTypes", null, 0, -1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEmailCatalog_SenderTypes(), this.getSenderType(), null, "senderTypes", null, 0, -1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateTypeEClass, TemplateType.class, "TemplateType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -686,8 +830,6 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 
 		initEClass(templateEClass, Template.class, "Template", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTemplate_Recipients(), this.getRecipient(), null, "recipients", null, 0, -1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTemplate_AppManifest(), theCommonsPackage.getAppManifest(), null, "appManifest", null, 0, 1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTemplate_WebAddress(), theCommonsPackage.getWebAddress(), null, "webAddress", null, 0, 1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(templateEClass, theEcorePackage.getEString(), "renderSubject", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getRecipient(), "recipient", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -743,6 +885,20 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		addEParameter(op, g1, "pageClass", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(t1);
 		initEOperation(op, g1);
+
+		initEClass(senderEClass, Sender.class, "Sender", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSender_SenderType(), this.getSenderType(), null, "senderType", null, 1, 1, Sender.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(senderTypeEClass, SenderType.class, "SenderType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(senderLikeEClass, SenderLike.class, "SenderLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSenderLike_From(), theEcorePackage.getEString(), "from", null, 0, 1, SenderLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSenderLike_Email(), theEcorePackage.getEString(), "email", null, 0, 1, SenderLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSenderLike_ReplyTo(), theEcorePackage.getEString(), "replyTo", null, 0, 1, SenderLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(defaultScopeEClass, DefaultScope.class, "DefaultScope", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDefaultScope_WebAddress(), theCommonsPackage.getWebAddress(), null, "webAddress", null, 0, 1, DefaultScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefaultScope_AppManifest(), theCommonsPackage.getAppManifest(), null, "appManifest", null, 0, 1, DefaultScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(emailFormatEEnum, EmailFormat.class, "EmailFormat");
@@ -835,6 +991,12 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 			 "documentation", "Compose emails based on attributes, using the provided layout."
 		   });		
 		addAnnotation
+		  (getTemplateLike_SubjectTemplate(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Some subjects include tracking ID, e.g.\n\n<pre>[#MCV-529-28864]: Email forwarding not working</pre>\n\n<p>Such subject would use this template:\n\n<pre>[#{{{ticket.formalId}}}]: {{{ticket.subject}}}</pre>\n\n<p>It\'s not recommended to put company name in the subject. Best practice is to put the company name as Sender\'s name, optionally suffixed with \"Support\" etc. Also, most services (Facebook, NameCheap) do not put the recipient name in the subject."
+		   });		
+		addAnnotation
 		  (getTemplateLike_PlainTemplate(), 
 		   source, 
 		   new String[] {
@@ -875,6 +1037,24 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Create an email Page using the tenant-wide default layout."
+		   });		
+		addAnnotation
+		  (senderEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Sender information. Mustache variables are supported."
+		   });		
+		addAnnotation
+		  (getSenderLike_From(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Best practice is to put the company name as Sender\'s name, optionally suffixed with \"Support\" etc.\n\n<p>Most notifications should consist only of company name. Actual conversations with support (i.e. tickets) would be suffixed with \"Support\"."
+		   });		
+		addAnnotation
+		  (getSenderLike_Email(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Email address of the sender. This can be:\n\n<ol>\n<li>a fully static text, e.g. \"support@berbatik.com\", very seldom used</li>\n<li>a variable, e.g. \"{{{generalEmail}}}\", most common</li>\n<li>a partial variable, e.g. \"support@{{{appManifest.domain}}}\", sometimes used</li>\n<li>multiple variables for randomly generated drop boxes, e.g. \"{{{dropbox.code}}}@{{{postEmailDomain}}}\" or \"{{{dropbox.code}}}@post.{{{appManifest.domain}}}\", which expands to \"yummy234food@post.berbatik.com\"</li>\n<li>a tracking address, e.g. \"notification+mwkuhkji@facebookmail.com\". Template is: \"notification+{{{tracker.code}}}@notification.{{{appManifest.domain}}}\" or \"notification+{{{tracker.code}}}@{{{notificationEmailDomain}}}\"</li>\n\n<p>WARNING: A suffix like \"+something\" is not recommended for non-tracking emails, some mail servers like NameCheap email forwarding does not support it, and many email forms do not accept \"+\"."
 		   });
 	}
 

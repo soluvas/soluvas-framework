@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_ucHuoEWeEeK1qbOICpWDVg" type="EcoreTools" name="builtin-email" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_PQMBoEWfEeK1qbOICpWDVg" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_PQNPwEWfEeK1qbOICpWDVg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_PQNPwUWfEeK1qbOICpWDVg" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_PQNPwkWfEeK1qbOICpWDVg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_PQNPw0WfEeK1qbOICpWDVg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_PQNPxEWfEeK1qbOICpWDVg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_PQNPxUWfEeK1qbOICpWDVg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_PQNPxkWfEeK1qbOICpWDVg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_PQN20EWfEeK1qbOICpWDVg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_PQN20UWfEeK1qbOICpWDVg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_PQMosEWfEeK1qbOICpWDVg" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="builtin-email.ecore#//Test"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PQMosUWfEeK1qbOICpWDVg" x="227" y="236"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_ucHuoUWeEeK1qbOICpWDVg"/>
+  <element xmi:type="ecore:EPackage" href="builtin-email.ecore#/"/>
+</notation:Diagram>

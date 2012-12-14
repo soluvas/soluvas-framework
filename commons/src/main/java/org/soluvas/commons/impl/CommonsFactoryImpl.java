@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
+import org.soluvas.commons.*;
 import org.soluvas.commons.Added;
 import org.soluvas.commons.AddedMany;
 import org.soluvas.commons.AppManifest;
@@ -84,16 +85,16 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CommonsPackage.APP_MANIFEST: return createAppManifest();
-			case CommonsPackage.PERSON_INFO: return createPersonInfo();
-			case CommonsPackage.WEB_ADDRESS: return createWebAddress();
-			case CommonsPackage.ADDED: return createAdded();
-			case CommonsPackage.ATTRIBUTE_SET: return createAttributeSet();
-			case CommonsPackage.ATTRIBUTE_UNSET: return createAttributeUnset();
-			case CommonsPackage.REMOVED: return createRemoved();
-			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return createAttributeNotification();
-			case CommonsPackage.ADDED_MANY: return createAddedMany();
-			case CommonsPackage.REMOVED_MANY: return createRemovedMany();
+			case CommonsPackage.APP_MANIFEST: return (EObject)createAppManifest();
+			case CommonsPackage.PERSON_INFO: return (EObject)createPersonInfo();
+			case CommonsPackage.WEB_ADDRESS: return (EObject)createWebAddress();
+			case CommonsPackage.ADDED: return (EObject)createAdded();
+			case CommonsPackage.ATTRIBUTE_SET: return (EObject)createAttributeSet();
+			case CommonsPackage.ATTRIBUTE_UNSET: return (EObject)createAttributeUnset();
+			case CommonsPackage.REMOVED: return (EObject)createRemoved();
+			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return (EObject)createAttributeNotification();
+			case CommonsPackage.ADDED_MANY: return (EObject)createAddedMany();
+			case CommonsPackage.REMOVED_MANY: return (EObject)createRemovedMany();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

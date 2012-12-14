@@ -133,6 +133,7 @@ public class EmailSwitch<T1> extends Switch<T1> {
 				Template template = (Template)theEObject;
 				T1 result = caseTemplate(template);
 				if (result == null) result = caseTemplateLike(template);
+				if (result == null) result = caseDefaultScope(template);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -147,6 +148,7 @@ public class EmailSwitch<T1> extends Switch<T1> {
 				T1 result = caseLayout(layout);
 				if (result == null) result = caseTemplate(layout);
 				if (result == null) result = caseTemplateLike(layout);
+				if (result == null) result = caseDefaultScope(layout);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -155,6 +157,7 @@ public class EmailSwitch<T1> extends Switch<T1> {
 				T1 result = casePage(page);
 				if (result == null) result = caseTemplate(page);
 				if (result == null) result = caseTemplateLike(page);
+				if (result == null) result = caseDefaultScope(page);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -167,6 +170,40 @@ public class EmailSwitch<T1> extends Switch<T1> {
 			case EmailPackage.EMAIL_MANAGER: {
 				EmailManager emailManager = (EmailManager)theEObject;
 				T1 result = caseEmailManager(emailManager);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EmailPackage.SENDER: {
+				Sender sender = (Sender)theEObject;
+				T1 result = caseSender(sender);
+				if (result == null) result = caseSenderLike(sender);
+				if (result == null) result = caseDefaultScope(sender);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EmailPackage.SENDER_TYPE: {
+				SenderType senderType = (SenderType)theEObject;
+				T1 result = caseSenderType(senderType);
+				if (result == null) result = caseNameContainer(senderType);
+				if (result == null) result = caseBundleAware(senderType);
+				if (result == null) result = caseNsPrefixable(senderType);
+				if (result == null) result = caseEClassLinked(senderType);
+				if (result == null) result = caseJavaClassLinked(senderType);
+				if (result == null) result = caseEFactoryLinked(senderType);
+				if (result == null) result = caseSenderLike(senderType);
+				if (result == null) result = caseNameable(senderType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EmailPackage.SENDER_LIKE: {
+				SenderLike senderLike = (SenderLike)theEObject;
+				T1 result = caseSenderLike(senderLike);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EmailPackage.DEFAULT_SCOPE: {
+				DefaultScope defaultScope = (DefaultScope)theEObject;
+				T1 result = caseDefaultScope(defaultScope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -321,6 +358,66 @@ public class EmailSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseEmailManager(EmailManager object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sender</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sender</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseSender(Sender object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sender Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sender Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseSenderType(SenderType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sender Like</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sender Like</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseSenderLike(SenderLike object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Default Scope</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Default Scope</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseDefaultScope(DefaultScope object) {
 		return null;
 	}
 

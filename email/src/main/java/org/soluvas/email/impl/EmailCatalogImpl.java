@@ -22,6 +22,7 @@ import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.LayoutType;
 import org.soluvas.email.PageType;
+import org.soluvas.email.SenderType;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,6 +34,7 @@ import org.soluvas.email.PageType;
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getPageTypes <em>Page Types</em>}</li>
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getLayoutTypes <em>Layout Types</em>}</li>
+ *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getSenderTypes <em>Sender Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,6 +80,16 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 	 * @ordered
 	 */
 	protected EList<LayoutType> layoutTypes;
+
+	/**
+	 * The cached value of the '{@link #getSenderTypes() <em>Sender Types</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSenderTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<SenderType> senderTypes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -148,6 +160,18 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<SenderType> getSenderTypes() {
+		if (senderTypes == null) {
+			senderTypes = new EObjectContainmentEList<SenderType>(SenderType.class, this, EmailPackage.EMAIL_CATALOG__SENDER_TYPES);
+		}
+		return senderTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -155,6 +179,8 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 				return ((InternalEList<?>)getPageTypes()).basicRemove(otherEnd, msgs);
 			case EmailPackage.EMAIL_CATALOG__LAYOUT_TYPES:
 				return ((InternalEList<?>)getLayoutTypes()).basicRemove(otherEnd, msgs);
+			case EmailPackage.EMAIL_CATALOG__SENDER_TYPES:
+				return ((InternalEList<?>)getSenderTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -173,6 +199,8 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 				return getPageTypes();
 			case EmailPackage.EMAIL_CATALOG__LAYOUT_TYPES:
 				return getLayoutTypes();
+			case EmailPackage.EMAIL_CATALOG__SENDER_TYPES:
+				return getSenderTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -197,6 +225,10 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 				getLayoutTypes().clear();
 				getLayoutTypes().addAll((Collection<? extends LayoutType>)newValue);
 				return;
+			case EmailPackage.EMAIL_CATALOG__SENDER_TYPES:
+				getSenderTypes().clear();
+				getSenderTypes().addAll((Collection<? extends SenderType>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -218,6 +250,9 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 			case EmailPackage.EMAIL_CATALOG__LAYOUT_TYPES:
 				getLayoutTypes().clear();
 				return;
+			case EmailPackage.EMAIL_CATALOG__SENDER_TYPES:
+				getSenderTypes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -236,6 +271,8 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 				return pageTypes != null && !pageTypes.isEmpty();
 			case EmailPackage.EMAIL_CATALOG__LAYOUT_TYPES:
 				return layoutTypes != null && !layoutTypes.isEmpty();
+			case EmailPackage.EMAIL_CATALOG__SENDER_TYPES:
+				return senderTypes != null && !senderTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

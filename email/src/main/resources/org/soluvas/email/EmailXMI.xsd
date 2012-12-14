@@ -38,6 +38,7 @@
         <xsd:choice maxOccurs="unbounded" minOccurs="0">
           <xsd:element name="pageTypes" type="email:PageType"/>
           <xsd:element name="layoutTypes" type="email:LayoutType"/>
+          <xsd:element name="senderTypes" type="email:SenderType"/>
         </xsd:choice>
       </xsd:extension>
     </xsd:complexContent>
@@ -51,7 +52,19 @@
           <xsd:element name="eClass" type="ecore:EClass"/>
         </xsd:choice>
         <xsd:attribute name="name" type="xsd:string" use="required"/>
-        <xsd:attribute name="subjectTemplate" type="xsd:string"/>
+        <xsd:attribute name="subjectTemplate" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Some subjects include tracking ID, e.g.
+
+&lt;pre&gt;[#MCV-529-28864]: Email forwarding not working&lt;/pre&gt;
+
+&lt;p&gt;Such subject would use this template:
+
+&lt;pre&gt;[#{{{ticket.formalId}}}]: {{{ticket.subject}}}&lt;/pre&gt;
+
+&lt;p&gt;It's not recommended to put company name in the subject. Best practice is to put the company name as Sender's name, optionally suffixed with "Support" etc. Also, most services (Facebook, NameCheap) do not put the recipient name in the subject.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
         <xsd:attribute name="plainTemplate" type="xsd:string">
           <xsd:annotation>
             <xsd:documentation>Plain text template.</xsd:documentation>
@@ -92,13 +105,13 @@
     <xsd:complexContent>
       <xsd:extension base="email:TemplateLike">
         <xsd:choice maxOccurs="unbounded" minOccurs="0">
-          <xsd:element name="recipients" type="email:Recipient"/>
-          <xsd:element name="appManifest" type="commons:AppManifest"/>
           <xsd:element name="webAddress" type="commons:WebAddress"/>
+          <xsd:element name="appManifest" type="commons:AppManifest"/>
+          <xsd:element name="recipients" type="email:Recipient"/>
         </xsd:choice>
-        <xsd:attribute name="recipients" type="xsd:string"/>
-        <xsd:attribute name="appManifest" type="xsd:string"/>
         <xsd:attribute name="webAddress" type="xsd:string"/>
+        <xsd:attribute name="appManifest" type="xsd:string"/>
+        <xsd:attribute name="recipients" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
@@ -167,7 +180,19 @@
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="subjectTemplate" type="xsd:string"/>
+    <xsd:attribute name="subjectTemplate" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Some subjects include tracking ID, e.g.
+
+&lt;pre&gt;[#MCV-529-28864]: Email forwarding not working&lt;/pre&gt;
+
+&lt;p&gt;Such subject would use this template:
+
+&lt;pre&gt;[#{{{ticket.formalId}}}]: {{{ticket.subject}}}&lt;/pre&gt;
+
+&lt;p&gt;It's not recommended to put company name in the subject. Best practice is to put the company name as Sender's name, optionally suffixed with "Support" etc. Also, most services (Facebook, NameCheap) do not put the recipient name in the subject.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
     <xsd:attribute name="plainTemplate" type="xsd:string">
       <xsd:annotation>
         <xsd:documentation>Plain text template.</xsd:documentation>
@@ -188,4 +213,111 @@
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
   </xsd:complexType>
   <xsd:element name="EmailManager" type="email:EmailManager"/>
+  <xsd:complexType name="Sender">
+    <xsd:annotation>
+      <xsd:documentation>Sender information. Mustache variables are supported.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="email:SenderLike">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="webAddress" type="commons:WebAddress"/>
+          <xsd:element name="appManifest" type="commons:AppManifest"/>
+          <xsd:element name="senderType" type="email:SenderType"/>
+        </xsd:choice>
+        <xsd:attribute name="webAddress" type="xsd:string"/>
+        <xsd:attribute name="appManifest" type="xsd:string"/>
+        <xsd:attribute name="senderType" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Sender" type="email:Sender">
+    <xsd:annotation>
+      <xsd:documentation>Sender information. Mustache variables are supported.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="SenderType">
+    <xsd:complexContent>
+      <xsd:extension base="commons:NameContainer">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="eClass" type="ecore:EClass"/>
+          <xsd:element name="eFactory" type="ecore:EFactory"/>
+        </xsd:choice>
+        <xsd:attribute name="nsPrefix" type="xsd:string"/>
+        <xsd:attribute name="eClassStatus" type="commons:EClassStatus"/>
+        <xsd:attribute name="ePackageNsPrefix" type="xsd:string"/>
+        <xsd:attribute name="eClassName" type="xsd:string"/>
+        <xsd:attribute name="ePackageName" type="xsd:string"/>
+        <xsd:attribute name="eClass" type="xsd:string"/>
+        <xsd:attribute name="javaClassName" type="xsd:string"/>
+        <xsd:attribute name="javaClass" type="xsd:string"/>
+        <xsd:attribute name="javaClassStatus" type="commons:JavaClassStatus"/>
+        <xsd:attribute name="eFactory" type="xsd:string"/>
+        <xsd:attribute name="from" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Best practice is to put the company name as Sender's name, optionally suffixed with "Support" etc.
+
+&lt;p&gt;Most notifications should consist only of company name. Actual conversations with support (i.e. tickets) would be suffixed with "Support".</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="email" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Email address of the sender. This can be:
+
+&lt;ol&gt;
+&lt;li&gt;a fully static text, e.g. "support@berbatik.com", very seldom used&lt;/li&gt;
+&lt;li&gt;a variable, e.g. "{{{generalEmail}}}", most common&lt;/li&gt;
+&lt;li&gt;a partial variable, e.g. "support@{{{appManifest.domain}}}", sometimes used&lt;/li&gt;
+&lt;li&gt;multiple variables for randomly generated drop boxes, e.g. "{{{dropbox.code}}}@{{{postEmailDomain}}}" or "{{{dropbox.code}}}@post.{{{appManifest.domain}}}", which expands to "yummy234food@post.berbatik.com"&lt;/li&gt;
+&lt;li&gt;a tracking address, e.g. "notification+mwkuhkji@facebookmail.com". Template is: "notification+{{{tracker.code}}}@notification.{{{appManifest.domain}}}" or "notification+{{{tracker.code}}}@{{{notificationEmailDomain}}}"&lt;/li&gt;
+
+&lt;p&gt;WARNING: A suffix like "+something" is not recommended for non-tracking emails, some mail servers like NameCheap email forwarding does not support it, and many email forms do not accept "+".</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="replyTo" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="SenderType" type="email:SenderType"/>
+  <xsd:complexType abstract="true" name="SenderLike">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="from" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Best practice is to put the company name as Sender's name, optionally suffixed with "Support" etc.
+
+&lt;p&gt;Most notifications should consist only of company name. Actual conversations with support (i.e. tickets) would be suffixed with "Support".</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="email" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Email address of the sender. This can be:
+
+&lt;ol&gt;
+&lt;li&gt;a fully static text, e.g. "support@berbatik.com", very seldom used&lt;/li&gt;
+&lt;li&gt;a variable, e.g. "{{{generalEmail}}}", most common&lt;/li&gt;
+&lt;li&gt;a partial variable, e.g. "support@{{{appManifest.domain}}}", sometimes used&lt;/li&gt;
+&lt;li&gt;multiple variables for randomly generated drop boxes, e.g. "{{{dropbox.code}}}@{{{postEmailDomain}}}" or "{{{dropbox.code}}}@post.{{{appManifest.domain}}}", which expands to "yummy234food@post.berbatik.com"&lt;/li&gt;
+&lt;li&gt;a tracking address, e.g. "notification+mwkuhkji@facebookmail.com". Template is: "notification+{{{tracker.code}}}@notification.{{{appManifest.domain}}}" or "notification+{{{tracker.code}}}@{{{notificationEmailDomain}}}"&lt;/li&gt;
+
+&lt;p&gt;WARNING: A suffix like "+something" is not recommended for non-tracking emails, some mail servers like NameCheap email forwarding does not support it, and many email forms do not accept "+".</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="replyTo" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="SenderLike" type="email:SenderLike"/>
+  <xsd:complexType abstract="true" name="DefaultScope">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="webAddress" type="commons:WebAddress"/>
+      <xsd:element name="appManifest" type="commons:AppManifest"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="webAddress" type="xsd:string"/>
+    <xsd:attribute name="appManifest" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="DefaultScope" type="email:DefaultScope"/>
 </xsd:schema>

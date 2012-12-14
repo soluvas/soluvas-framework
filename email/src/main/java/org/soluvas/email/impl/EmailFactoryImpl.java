@@ -70,6 +70,8 @@ public class EmailFactoryImpl extends EFactoryImpl implements EmailFactory {
 			case EmailPackage.LAYOUT_TYPE: return (EObject)createLayoutType();
 			case EmailPackage.RECIPIENT: return (EObject)createRecipient();
 			case EmailPackage.EMAIL_MANAGER: return (EObject)createEmailManager();
+			case EmailPackage.SENDER: return (EObject)createSender();
+			case EmailPackage.SENDER_TYPE: return (EObject)createSenderType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -165,6 +167,26 @@ public class EmailFactoryImpl extends EFactoryImpl implements EmailFactory {
 	public EmailManager createEmailManager() {
 		EmailManagerImpl emailManager = new EmailManagerImpl();
 		return emailManager;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Sender createSender() {
+		SenderImpl sender = new SenderImpl();
+		return sender;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SenderType createSenderType() {
+		SenderTypeImpl senderType = new SenderTypeImpl();
+		return senderType;
 	}
 
 	/**

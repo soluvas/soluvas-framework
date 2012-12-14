@@ -1,5 +1,3 @@
-/**
- */
 package org.soluvas.email.impl;
 
 import java.util.List;
@@ -9,6 +7,9 @@ import javax.annotation.Nullable;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.soluvas.commons.AppManifest;
+import org.soluvas.commons.WebAddress;
+import org.soluvas.email.DefaultScope;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailException;
 import org.soluvas.email.EmailManager;
@@ -43,6 +44,8 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	private final EmailCatalog emailCatalog;
 	private final String defaultLayoutNsPrefix;
 	private final String defaultLayoutName;
+	private final AppManifest appManifest;
+	private final WebAddress webAddress;
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -56,13 +59,19 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	 * @param emailCatalog
 	 * @param defaultLayoutNsPrefix
 	 * @param defaultLayoutName
+	 * @param appManifest
+	 * @param webAddress
 	 */
 	public EmailManagerImpl(EmailCatalog emailCatalog,
-			String defaultLayoutNsPrefix, String defaultLayoutName) {
+			String defaultLayoutNsPrefix, String defaultLayoutName,
+			AppManifest appManifest,
+			WebAddress webAddress) {
 		super();
 		this.emailCatalog = emailCatalog;
 		this.defaultLayoutNsPrefix = defaultLayoutNsPrefix;
 		this.defaultLayoutName = defaultLayoutName;
+		this.appManifest = appManifest;
+		this.webAddress = webAddress;
 	}
 
 	/**
@@ -74,6 +83,11 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	protected EClass eStaticClass() {
 		return EmailPackage.Literals.EMAIL_MANAGER;
 	}
+	
+	protected void injectDefaultScope(DefaultScope scope) {
+		scope.setAppManifest(appManifest);
+		scope.setWebAddress(webAddress);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,6 +97,7 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	public <T extends Page> T createPage(Class<T> pageClass) {
 		final Layout layout = getDefaultLayout();
 		final T page = EmailUtils.createPage(pageClass, layout);
+		injectDefaultScope(page);
 		return page;
 	}
 	
@@ -95,7 +110,9 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 							&& Objects.equal(defaultLayoutName, input.getName());
 				}
 			});
-			return layoutType.create();
+			final Layout layout = layoutType.create();
+			injectDefaultScope(layout);
+			return layout;
 		} catch (NoSuchElementException e) {
 			final List<String> layoutNames = Lists.transform(emailCatalog.getLayoutTypes(), new Function<LayoutType, String>() {
 				@Override @Nullable

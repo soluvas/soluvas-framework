@@ -27,6 +27,7 @@ import org.soluvas.commons.ResourceType;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDomain <em>Domain</em>}</li>
  * </ul>
  * </p>
  *
@@ -152,6 +153,26 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDomain() <em>Domain</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomain()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DOMAIN_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDomain() <em>Domain</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomain()
+	 * @generated
+	 * @ordered
+	 */
+	protected String domain = DOMAIN_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -303,6 +324,27 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDomain() {
+		return domain;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDomain(String newDomain) {
+		String oldDomain = domain;
+		domain = newDomain;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DOMAIN, oldDomain, domain));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -318,6 +360,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return getTitle();
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				return getDescription();
+			case CommonsPackage.APP_MANIFEST__DOMAIN:
+				return getDomain();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -347,6 +391,9 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return;
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				setDescription((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__DOMAIN:
+				setDomain((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -378,6 +425,9 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__DOMAIN:
+				setDomain(DOMAIN_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -402,6 +452,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case CommonsPackage.APP_MANIFEST__DOMAIN:
+				return DOMAIN_EDEFAULT == null ? domain != null : !DOMAIN_EDEFAULT.equals(domain);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -464,6 +516,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 		result.append(title);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", domain: ");
+		result.append(domain);
 		result.append(')');
 		return result.toString();
 	}

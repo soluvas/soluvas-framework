@@ -569,6 +569,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAppManifest_Domain() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getPersonInfo() {
 		return personInfoEClass;
@@ -1378,6 +1387,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		appManifestEClass = createEClass(APP_MANIFEST);
 		createEAttribute(appManifestEClass, APP_MANIFEST__TITLE);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DESCRIPTION);
+		createEAttribute(appManifestEClass, APP_MANIFEST__DOMAIN);
 
 		personInfoEClass = createEClass(PERSON_INFO);
 		createEAttribute(personInfoEClass, PERSON_INFO__GENDER);
@@ -1642,8 +1652,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPositionable_Positioner(), ecorePackage.getEIntegerObject(), "positioner", "0", 0, 1, Positionable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(appManifestEClass, AppManifest.class, "AppManifest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAppManifest_Title(), ecorePackage.getEString(), "title", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppManifest_Description(), ecorePackage.getEString(), "description", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_Title(), ecorePackage.getEString(), "title", null, 1, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_Description(), ecorePackage.getEString(), "description", null, 1, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_Domain(), theEcorePackage.getEString(), "domain", null, 1, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(personInfoEClass, PersonInfo.class, "PersonInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPersonInfo_Gender(), this.getGender(), "gender", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1842,6 +1853,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "The resource is from a persistence storage."
+		   });		
+		addAnnotation
+		  (getAppManifest_Domain(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Primary domain name of the application, e.g. \"berbatik.com\". Used by Email system.\n\n<p>For development, use e.g. \"berbatik.annafi.dev\".\n\n<p>TODO: title & domain should probably be moved somewhere else, since it\'s tenant & environment specific.\n\n<p>Production: title=Berbatik, domain=berbatik.com\n\n<p>Staging: title=Berbatik stg, domain=stg.berbatik.com\n\n<p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev\n\n<p>Description usually stays the same, but can be different too."
 		   });		
 		addAnnotation
 		  (personInfoEClass, 

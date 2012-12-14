@@ -80,7 +80,8 @@
 				<artifactId>maven-bundle-plugin</artifactId>
 				<configuration>
 					<instructions>
-						<Export-Package>org.soluvas.email.*</Export-Package>
+						<Export-Package>org.soluvas.email.*,
+							org.soluvas.email.builtin.*</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>
