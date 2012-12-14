@@ -285,6 +285,15 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPageType_SenderTypeName() {
+		return (EAttribute)pageTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getTemplate() {
 		return templateEClass;
@@ -465,6 +474,15 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 */
 	public EReference getPage_PageType() {
 		return (EReference)pageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPage_Sender() {
+		return (EReference)pageEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -672,6 +690,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		templateTypeEClass = createEClass(TEMPLATE_TYPE);
 
 		pageTypeEClass = createEClass(PAGE_TYPE);
+		createEAttribute(pageTypeEClass, PAGE_TYPE__SENDER_TYPE_NAME);
 
 		layoutTypeEClass = createEClass(LAYOUT_TYPE);
 
@@ -696,6 +715,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		pageEClass = createEClass(PAGE);
 		createEReference(pageEClass, PAGE__LAYOUT);
 		createEReference(pageEClass, PAGE__PAGE_TYPE);
+		createEReference(pageEClass, PAGE__SENDER);
 
 		templateLikeEClass = createEClass(TEMPLATE_LIKE);
 		createEAttribute(templateLikeEClass, TEMPLATE_LIKE__SUBJECT_TEMPLATE);
@@ -794,22 +814,10 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		pageEClass.getESuperTypes().add(this.getTemplate());
 		senderEClass.getESuperTypes().add(this.getSenderLike());
 		senderEClass.getESuperTypes().add(this.getDefaultScope());
-		g1 = createEGenericType(theCommonsPackage.getNameContainer());
-		senderTypeEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(theCommonsPackage.getBundleAware());
-		senderTypeEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(theCommonsPackage.getNsPrefixable());
-		senderTypeEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(theCommonsPackage.getEClassLinked());
-		senderTypeEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(theCommonsPackage.getJavaClassLinked());
-		g2 = createEGenericType(this.getSender());
-		g1.getETypeArguments().add(g2);
-		senderTypeEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(theCommonsPackage.getEFactoryLinked());
-		senderTypeEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getSenderLike());
-		senderTypeEClass.getEGenericSuperTypes().add(g1);
+		senderTypeEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
+		senderTypeEClass.getESuperTypes().add(theCommonsPackage.getBundleAware());
+		senderTypeEClass.getESuperTypes().add(theCommonsPackage.getNsPrefixable());
+		senderTypeEClass.getESuperTypes().add(this.getSenderLike());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(emailCatalogEClass, EmailCatalog.class, "EmailCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -820,6 +828,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		initEClass(templateTypeEClass, TemplateType.class, "TemplateType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(pageTypeEClass, PageType.class, "PageType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPageType_SenderTypeName(), theEcorePackage.getEString(), "senderTypeName", null, 0, 1, PageType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(pageTypeEClass, this.getPage(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getLayout(), "layout", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -858,6 +867,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		initEClass(pageEClass, Page.class, "Page", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPage_Layout(), this.getLayout(), null, "layout", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPage_PageType(), this.getPageType(), null, "pageType", null, 1, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPage_Sender(), this.getSender(), null, "sender", null, 1, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(pageEClass, this.getEmail(), "compose", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getRecipient(), "recipient", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -935,6 +945,12 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Create Page using the specified layout."
+		   });		
+		addAnnotation
+		  (getPageType_SenderTypeName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Sender type name, including prefix. If not set, \"builtin:general\" is default."
 		   });		
 		addAnnotation
 		  (templateEClass.getEOperations().get(0), 

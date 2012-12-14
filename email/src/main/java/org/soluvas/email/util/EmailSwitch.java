@@ -187,9 +187,6 @@ public class EmailSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseNameContainer(senderType);
 				if (result == null) result = caseBundleAware(senderType);
 				if (result == null) result = caseNsPrefixable(senderType);
-				if (result == null) result = caseEClassLinked(senderType);
-				if (result == null) result = caseJavaClassLinked(senderType);
-				if (result == null) result = caseEFactoryLinked(senderType);
 				if (result == null) result = caseSenderLike(senderType);
 				if (result == null) result = caseNameable(senderType);
 				if (result == null) result = defaultCase(theEObject);

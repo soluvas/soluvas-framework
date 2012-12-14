@@ -24,6 +24,7 @@ import org.soluvas.email.Page;
 import org.soluvas.email.PageType;
 import org.soluvas.email.Recipient;
 
+import org.soluvas.email.Sender;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
@@ -38,6 +39,7 @@ import com.google.common.collect.Lists;
  * <ul>
  *   <li>{@link org.soluvas.email.impl.PageImpl#getLayout <em>Layout</em>}</li>
  *   <li>{@link org.soluvas.email.impl.PageImpl#getPageType <em>Page Type</em>}</li>
+ *   <li>{@link org.soluvas.email.impl.PageImpl#getSender <em>Sender</em>}</li>
  * </ul>
  * </p>
  *
@@ -66,6 +68,16 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * @ordered
 	 */
 	protected PageType pageType;
+
+	/**
+	 * The cached value of the '{@link #getSender() <em>Sender</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSender()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sender sender;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -174,6 +186,44 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Sender getSender() {
+		if (sender != null && ((EObject)sender).eIsProxy()) {
+			InternalEObject oldSender = (InternalEObject)sender;
+			sender = (Sender)eResolveProxy(oldSender);
+			if (sender != oldSender) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EmailPackage.PAGE__SENDER, oldSender, sender));
+			}
+		}
+		return sender;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Sender basicGetSender() {
+		return sender;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSender(Sender newSender) {
+		Sender oldSender = sender;
+		sender = newSender;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.PAGE__SENDER, oldSender, sender));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public Email compose(Recipient recipient) {
@@ -244,6 +294,9 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 			case EmailPackage.PAGE__PAGE_TYPE:
 				if (resolve) return getPageType();
 				return basicGetPageType();
+			case EmailPackage.PAGE__SENDER:
+				if (resolve) return getSender();
+				return basicGetSender();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -261,6 +314,9 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 				return;
 			case EmailPackage.PAGE__PAGE_TYPE:
 				setPageType((PageType)newValue);
+				return;
+			case EmailPackage.PAGE__SENDER:
+				setSender((Sender)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -280,6 +336,9 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 			case EmailPackage.PAGE__PAGE_TYPE:
 				setPageType((PageType)null);
 				return;
+			case EmailPackage.PAGE__SENDER:
+				setSender((Sender)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -296,6 +355,8 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 				return layout != null;
 			case EmailPackage.PAGE__PAGE_TYPE:
 				return pageType != null;
+			case EmailPackage.PAGE__SENDER:
+				return sender != null;
 		}
 		return super.eIsSet(featureID);
 	}

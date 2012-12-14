@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.soluvas.email.Page#getLayout <em>Layout</em>}</li>
  *   <li>{@link org.soluvas.email.Page#getPageType <em>Page Type</em>}</li>
+ *   <li>{@link org.soluvas.email.Page#getSender <em>Sender</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,6 +77,32 @@ public interface Page extends Template {
 	 * @generated
 	 */
 	void setPageType(PageType value);
+
+	/**
+	 * Returns the value of the '<em><b>Sender</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sender</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sender</em>' reference.
+	 * @see #setSender(Sender)
+	 * @see org.soluvas.email.EmailPackage#getPage_Sender()
+	 * @model required="true"
+	 * @generated
+	 */
+	Sender getSender();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.email.Page#getSender <em>Sender</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Sender</em>' reference.
+	 * @see #getSender()
+	 * @generated
+	 */
+	void setSender(Sender value);
 
 	/**
 	 * <!-- begin-user-doc -->

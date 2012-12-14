@@ -19,5 +19,5 @@ import org.soluvas.commons.NsPrefixable;
  * @model
  * @generated
  */
-public interface SenderType extends NameContainer, BundleAware, NsPrefixable, EClassLinked, JavaClassLinked<Sender>, EFactoryLinked, SenderLike {
+public interface SenderType extends NameContainer, BundleAware, NsPrefixable, SenderLike {
 } // SenderType

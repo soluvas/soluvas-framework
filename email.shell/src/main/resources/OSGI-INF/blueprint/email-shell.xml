@@ -16,6 +16,9 @@
 		<command name="email/pagels">
 			<action class="org.soluvas.email.shell.EmailPageLsCommand" />
 		</command>
+		<command name="email/senderls">
+			<action class="org.soluvas.email.shell.EmailSenderLsCommand" />
+		</command>
 		
 	</command-bundle>
 

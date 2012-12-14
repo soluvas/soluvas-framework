@@ -5,8 +5,6 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
-import javax.annotation.Nullable;
-
 import org.fusesource.jansi.Ansi;
 
 import com.google.common.base.Joiner;
@@ -143,6 +141,17 @@ public class NameUtils {
 		} else {
 			return "@|bold " + Strings.padEnd(shortened, targetLength, ' ') + "|@";
 		}
+	}
+	
+	/**
+	 * Shorten Mustache template.
+	 */
+	public static String shortenMustache(final String template) {
+		if (template == null)
+			return null;
+		final String shortened = template.replace("{{{", "◁").replace("}}}", "▷")
+				.replace("{{", "«").replace("}}", "»");
+		return shortened;
 	}
 	
 }

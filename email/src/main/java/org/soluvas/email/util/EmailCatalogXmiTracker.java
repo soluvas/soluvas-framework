@@ -30,6 +30,7 @@ import org.soluvas.email.EmailException;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.LayoutType;
 import org.soluvas.email.PageType;
+import org.soluvas.email.SenderType;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Function;
@@ -250,8 +251,14 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					}
 				}
 				
-				log.debug("Loaded {} LayoutTypes and {} PageTypes from EmailSchema {} in {} [{}]",
+				for (final SenderType senderType : emailCatalog.getSenderTypes()) {
+					log.debug("Realizing SenderType {} from {}", senderType.getName(), url);
+					senderType.setNsPrefix(emailCatalog.getNsPrefix());
+				}
+				
+				log.debug("Loaded {} LayoutTypes, {} PageTypes, and {} SenderTypes from EmailSchema {} in {} [{}]",
 						emailCatalog.getLayoutTypes().size(), emailCatalog.getPageTypes().size(),
+						emailCatalog.getSenderTypes().size(),
 						url, bundle.getSymbolicName(), bundle.getBundleId() );
 				return emailCatalog;
 			}
@@ -267,6 +274,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 		})));
 		log.info("Loaded {} LayoutTypes from {} [{}]",
 				layoutTypes.size(), bundle.getSymbolicName(), bundle.getBundleId());
+		
 		final List<PageType> pageTypes = ImmutableList.copyOf(Iterables.concat(
 				Lists.transform(catalogs, new Function<EmailCatalog, List<PageType>>() {
 			@Override @Nullable
@@ -277,10 +285,21 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 		log.info("Loaded {} PageTypes from {} [{}]",
 				pageTypes.size(), bundle.getSymbolicName(), bundle.getBundleId());
 
+		final List<SenderType> senderTypes = ImmutableList.copyOf(Iterables.concat(
+				Lists.transform(catalogs, new Function<EmailCatalog, List<SenderType>>() {
+			@Override @Nullable
+			public List<SenderType> apply(@Nullable final EmailCatalog input) {
+				return input.getSenderTypes();
+			}
+		})));
+		log.info("Loaded {} SenderTypes from {} [{}]",
+				senderTypes.size(), bundle.getSymbolicName(), bundle.getBundleId());
+
 		// Add these objects to repo
 		synchronized (repo) {
 			repo.getLayoutTypes().addAll(layoutTypes);
 			repo.getPageTypes().addAll(pageTypes);
+			repo.getSenderTypes().addAll(senderTypes);
 		}
 
 		// -------- Resolve EClass-es & JavaClass-es -----------
@@ -337,6 +356,14 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 						bundle.getSymbolicName(), bundle.getBundleId());
 				synchronized (repo) {
 					if (repo.getPageTypes().remove(pageType))
+						removedCount++;
+				}
+			} else if (eobject instanceof SenderType) {
+				final SenderType senderType = (SenderType) eobject;
+				log.debug("Removing SenderType {} from {} [{}]", senderType.getName(),
+						bundle.getSymbolicName(), bundle.getBundleId());
+				synchronized (repo) {
+					if (repo.getSenderTypes().remove(senderType))
 						removedCount++;
 				}
 			} else {

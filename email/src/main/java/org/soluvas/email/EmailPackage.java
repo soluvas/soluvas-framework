@@ -468,13 +468,22 @@ public interface EmailPackage extends EPackage {
 	int PAGE_TYPE__EPACKAGE_NAME = TEMPLATE_TYPE__EPACKAGE_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Sender Type Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE__SENDER_TYPE_NAME = TEMPLATE_TYPE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Page Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_TYPE_FEATURE_COUNT = TEMPLATE_TYPE_FEATURE_COUNT + 0;
+	int PAGE_TYPE_FEATURE_COUNT = TEMPLATE_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.TemplateImpl <em>Template</em>}' class.
@@ -1050,13 +1059,22 @@ public interface EmailPackage extends EPackage {
 	int PAGE__PAGE_TYPE = TEMPLATE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Sender</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__SENDER = TEMPLATE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Page</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 2;
+	int PAGE_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.EmailManagerImpl <em>Manager</em>}' class.
@@ -1234,94 +1252,13 @@ public interface EmailPackage extends EPackage {
 	int SENDER_TYPE__NS_PREFIX = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>EClass</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SENDER_TYPE__ECLASS = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>EClass Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SENDER_TYPE__ECLASS_STATUS = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>EPackage Ns Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SENDER_TYPE__EPACKAGE_NS_PREFIX = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>EClass Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SENDER_TYPE__ECLASS_NAME = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>EPackage Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SENDER_TYPE__EPACKAGE_NAME = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Java Class Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SENDER_TYPE__JAVA_CLASS_NAME = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Java Class</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SENDER_TYPE__JAVA_CLASS = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Java Class Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SENDER_TYPE__JAVA_CLASS_STATUS = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 9;
-
-	/**
-	 * The feature id for the '<em><b>EFactory</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SENDER_TYPE__EFACTORY = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 10;
-
-	/**
 	 * The feature id for the '<em><b>From</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SENDER_TYPE__FROM = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 11;
+	int SENDER_TYPE__FROM = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Email</b></em>' attribute.
@@ -1330,7 +1267,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SENDER_TYPE__EMAIL = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 12;
+	int SENDER_TYPE__EMAIL = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Reply To</b></em>' attribute.
@@ -1339,7 +1276,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SENDER_TYPE__REPLY_TO = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 13;
+	int SENDER_TYPE__REPLY_TO = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Sender Type</em>' class.
@@ -1348,7 +1285,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SENDER_TYPE_FEATURE_COUNT = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 14;
+	int SENDER_TYPE_FEATURE_COUNT = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.DefaultScope <em>Default Scope</em>}' class.
@@ -1479,6 +1416,17 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getPageType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.PageType#getSenderTypeName <em>Sender Type Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sender Type Name</em>'.
+	 * @see org.soluvas.email.PageType#getSenderTypeName()
+	 * @see #getPageType()
+	 * @generated
+	 */
+	EAttribute getPageType_SenderTypeName();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.Template <em>Template</em>}'.
@@ -1683,6 +1631,17 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPage_PageType();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.email.Page#getSender <em>Sender</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Sender</em>'.
+	 * @see org.soluvas.email.Page#getSender()
+	 * @see #getPage()
+	 * @generated
+	 */
+	EReference getPage_Sender();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.TemplateLike <em>Template Like</em>}'.
@@ -1951,6 +1910,14 @@ public interface EmailPackage extends EPackage {
 		EClass PAGE_TYPE = eINSTANCE.getPageType();
 
 		/**
+		 * The meta object literal for the '<em><b>Sender Type Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PAGE_TYPE__SENDER_TYPE_NAME = eINSTANCE.getPageType_SenderTypeName();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.email.impl.TemplateImpl <em>Template</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2111,6 +2078,14 @@ public interface EmailPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PAGE__PAGE_TYPE = eINSTANCE.getPage_PageType();
+
+		/**
+		 * The meta object literal for the '<em><b>Sender</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PAGE__SENDER = eINSTANCE.getPage_Sender();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.email.TemplateLike <em>Template Like</em>}' class.
