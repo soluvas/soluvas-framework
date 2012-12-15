@@ -50,4 +50,15 @@ public interface Sender extends SenderLike, DefaultScope {
 	 */
 	void setSenderType(SenderType value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Expand the Mustache templates.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	void expand();
+
 } // Sender

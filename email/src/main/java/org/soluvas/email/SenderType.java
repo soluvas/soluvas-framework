@@ -20,4 +20,12 @@ import org.soluvas.commons.NsPrefixable;
  * @generated
  */
 public interface SenderType extends NameContainer, BundleAware, NsPrefixable, SenderLike {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Sender create();
 } // SenderType

@@ -69,6 +69,7 @@ public class PageTypeImpl extends TemplateTypeImpl<Page> implements PageType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSenderTypeName() {
 		return senderTypeName;
 	}
@@ -78,6 +79,7 @@ public class PageTypeImpl extends TemplateTypeImpl<Page> implements PageType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSenderTypeName(String newSenderTypeName) {
 		String oldSenderTypeName = senderTypeName;
 		senderTypeName = newSenderTypeName;
@@ -95,6 +97,7 @@ public class PageTypeImpl extends TemplateTypeImpl<Page> implements PageType {
 				"Cannot create Page %s because eFactory is null", getName());
 		final Page target = (Page) getEFactory().create(getEClass());
 		target.setPageType(this);
+		// set layout
 		target.setLayout(layout);
 		return target;
 	}

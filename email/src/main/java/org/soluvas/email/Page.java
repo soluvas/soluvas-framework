@@ -3,6 +3,7 @@
 package org.soluvas.email;
 
 import java.util.List;
+import javax.mail.Session;
 import org.apache.commons.mail.Email;
 
 import org.eclipse.emf.common.util.EList;
@@ -18,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.soluvas.email.Page#getLayout <em>Layout</em>}</li>
  *   <li>{@link org.soluvas.email.Page#getPageType <em>Page Type</em>}</li>
  *   <li>{@link org.soluvas.email.Page#getSender <em>Sender</em>}</li>
+ *   <li>{@link org.soluvas.email.Page#getMailSession <em>Mail Session</em>}</li>
  * </ul>
  * </p>
  *
@@ -103,6 +105,32 @@ public interface Page extends Template {
 	 * @generated
 	 */
 	void setSender(Sender value);
+
+	/**
+	 * Returns the value of the '<em><b>Mail Session</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mail Session</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mail Session</em>' attribute.
+	 * @see #setMailSession(Session)
+	 * @see org.soluvas.email.EmailPackage#getPage_MailSession()
+	 * @model dataType="org.soluvas.email.MailSession" required="true" transient="true"
+	 * @generated
+	 */
+	Session getMailSession();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.email.Page#getMailSession <em>Mail Session</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Mail Session</em>' attribute.
+	 * @see #getMailSession()
+	 * @generated
+	 */
+	void setMailSession(Session value);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -2,6 +2,7 @@
  */
 package org.soluvas.email.impl;
 
+import javax.mail.Session;
 import org.apache.commons.mail.Email;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -159,6 +160,13 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * @generated
 	 */
 	private EDataType emailEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType mailSessionEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -490,6 +498,15 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPage_MailSession() {
+		return (EAttribute)pageEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getTemplateLike() {
 		return templateLikeEClass;
@@ -658,6 +675,15 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getMailSession() {
+		return mailSessionEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EmailFactory getEmailFactory() {
 		return (EmailFactory)getEFactoryInstance();
@@ -716,6 +742,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		createEReference(pageEClass, PAGE__LAYOUT);
 		createEReference(pageEClass, PAGE__PAGE_TYPE);
 		createEReference(pageEClass, PAGE__SENDER);
+		createEAttribute(pageEClass, PAGE__MAIL_SESSION);
 
 		templateLikeEClass = createEClass(TEMPLATE_LIKE);
 		createEAttribute(templateLikeEClass, TEMPLATE_LIKE__SUBJECT_TEMPLATE);
@@ -744,6 +771,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 
 		// Create data types
 		emailEDataType = createEDataType(EMAIL);
+		mailSessionEDataType = createEDataType(MAIL_SESSION);
 	}
 
 	/**
@@ -868,6 +896,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		initEReference(getPage_Layout(), this.getLayout(), null, "layout", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPage_PageType(), this.getPageType(), null, "pageType", null, 1, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPage_Sender(), this.getSender(), null, "sender", null, 1, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPage_MailSession(), this.getMailSession(), "mailSession", null, 1, 1, Page.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(pageEClass, this.getEmail(), "compose", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getRecipient(), "recipient", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -896,10 +925,17 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		g1 = createEGenericType(t1);
 		initEOperation(op, g1);
 
+		op = addEOperation(emailManagerEClass, this.getSender(), "createSender", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "qname", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(senderEClass, Sender.class, "Sender", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSender_SenderType(), this.getSenderType(), null, "senderType", null, 1, 1, Sender.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(senderEClass, null, "expand", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(senderTypeEClass, SenderType.class, "SenderType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(senderTypeEClass, this.getSender(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(senderLikeEClass, SenderLike.class, "SenderLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSenderLike_From(), theEcorePackage.getEString(), "from", null, 0, 1, SenderLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -923,6 +959,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 
 		// Initialize data types
 		initEDataType(emailEDataType, Email.class, "Email", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(mailSessionEDataType, Session.class, "MailSession", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1059,6 +1096,12 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Sender information. Mustache variables are supported."
+		   });		
+		addAnnotation
+		  (senderEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Expand the Mustache templates."
 		   });		
 		addAnnotation
 		  (getSenderLike_From(), 

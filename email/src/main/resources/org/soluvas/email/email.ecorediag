@@ -261,6 +261,10 @@
   <children xmi:type="notation:Node" xmi:id="_9SQaIESmEeKo8LL0vNXkRQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_9SRBMESmEeKo8LL0vNXkRQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_9SRBMUSmEeKo8LL0vNXkRQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_HNeSQEa5EeKlFLgpnxJY1g" type="2001">
+        <element xmi:type="ecore:EAttribute" href="email.ecore#//Page/mailSession"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_HNeSQUa5EeKlFLgpnxJY1g"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_9SRBMkSmEeKo8LL0vNXkRQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_9SRBM0SmEeKo8LL0vNXkRQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_9SRBNESmEeKo8LL0vNXkRQ"/>
@@ -466,6 +470,10 @@
         <element xmi:type="ecore:EOperation" href="email.ecore#//EmailManager/createPage"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_9JOE8UWNEeK1qbOICpWDVg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_gWiasEa0EeKlFLgpnxJY1g" type="2002">
+        <element xmi:type="ecore:EOperation" href="email.ecore#//EmailManager/createSender"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_gWiasUa0EeKlFLgpnxJY1g"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_8a_F8UWNEeK1qbOICpWDVg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_8a_F8kWNEeK1qbOICpWDVg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_8a_F80WNEeK1qbOICpWDVg"/>
@@ -482,6 +490,10 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Vf4-xEWXEeK1qbOICpWDVg"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_Vf5l0EWXEeK1qbOICpWDVg" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_gXH0EEa1EeKlFLgpnxJY1g" type="2002">
+        <element xmi:type="ecore:EOperation" href="email.ecore#//Sender/expand"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_gXH0EUa1EeKlFLgpnxJY1g"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Vf5l0UWXEeK1qbOICpWDVg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_Vf5l0kWXEeK1qbOICpWDVg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Vf5l00WXEeK1qbOICpWDVg"/>
@@ -498,6 +510,10 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fDjtY0WXEeK1qbOICpWDVg"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_fDjtZEWXEeK1qbOICpWDVg" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_M4o3kUa0EeKlFLgpnxJY1g" type="2002">
+        <element xmi:type="ecore:EOperation" href="email.ecore#//SenderType/create"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_M4o3kka0EeKlFLgpnxJY1g"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_fDjtZUWXEeK1qbOICpWDVg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_fDjtZkWXEeK1qbOICpWDVg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fDjtZ0WXEeK1qbOICpWDVg"/>
@@ -549,6 +565,13 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_vBmFIUWcEeK1qbOICpWDVg" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="email.ecore#//DefaultScope"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vBmFIkWcEeK1qbOICpWDVg" x="684" y="456"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_H8LLUEa5EeKlFLgpnxJY1g" type="1004">
+    <children xmi:type="notation:Node" xmi:id="_H8NAgEa5EeKlFLgpnxJY1g" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_H8NAgUa5EeKlFLgpnxJY1g" type="4009"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_H8LLUUa5EeKlFLgpnxJY1g" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EDataType" href="email.ecore#//MailSession"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_H8LyYEa5EeKlFLgpnxJY1g" x="1563" y="934"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Dlbd0kSmEeKo8LL0vNXkRQ"/>
   <element xmi:type="ecore:EPackage" href="email.ecore#/"/>

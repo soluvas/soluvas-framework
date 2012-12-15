@@ -64,6 +64,9 @@
   </xsd:complexType>
   <xsd:element name="Positionable" type="commons:Positionable"/>
   <xsd:complexType name="AppManifest">
+    <xsd:annotation>
+      <xsd:documentation>Attributes are optional because can use OverlayingSupplier.</xsd:documentation>
+    </xsd:annotation>
     <xsd:complexContent>
       <xsd:extension base="commons:Positionable">
         <xsd:attribute name="resourceType" type="commons:ResourceType"/>
@@ -73,9 +76,9 @@
             <xsd:documentation>Name relative to parent resource.</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
-        <xsd:attribute name="title" type="xsd:string" use="required"/>
-        <xsd:attribute name="description" type="xsd:string" use="required"/>
-        <xsd:attribute name="domain" type="xsd:string" use="required">
+        <xsd:attribute name="title" type="xsd:string"/>
+        <xsd:attribute name="description" type="xsd:string"/>
+        <xsd:attribute name="domain" type="xsd:string">
           <xsd:annotation>
             <xsd:documentation>Primary domain name of the application, e.g. "berbatik.com". Used by Email system.
 
@@ -95,7 +98,11 @@
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
-  <xsd:element name="AppManifest" type="commons:AppManifest"/>
+  <xsd:element name="AppManifest" type="commons:AppManifest">
+    <xsd:annotation>
+      <xsd:documentation>Attributes are optional because can use OverlayingSupplier.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
   <xsd:complexType name="PersonInfo">
     <xsd:annotation>
       <xsd:documentation>Person partial value object that is stored in Graph database (usually Neo4j) or embedded in a MongoDB document.

@@ -2,9 +2,14 @@ package org.soluvas.email.impl;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
+import javax.mail.Session;
 
+import org.apache.commons.mail.Email;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.soluvas.commons.AppManifest;
@@ -17,10 +22,12 @@ import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Layout;
 import org.soluvas.email.LayoutType;
 import org.soluvas.email.Page;
+import org.soluvas.email.Sender;
 import org.soluvas.email.util.EmailUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Objects;
+import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -46,6 +53,7 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	private final String defaultLayoutName;
 	private final AppManifest appManifest;
 	private final WebAddress webAddress;
+	private final Session mailSession;
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -59,17 +67,27 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	 * @param emailCatalog
 	 * @param defaultLayoutNsPrefix
 	 * @param defaultLayoutName
+	 * @param smtpHost
+	 * @param smtpPort
+	 * @param smtpUser
+	 * @param smtpPassword
 	 * @param appManifest
 	 * @param webAddress
 	 */
 	public EmailManagerImpl(EmailCatalog emailCatalog,
 			String defaultLayoutNsPrefix, String defaultLayoutName,
-			AppManifest appManifest,
-			WebAddress webAddress) {
+			String smtpHost, int smtpPort, String smtpUser,
+			String smtpPassword, AppManifest appManifest, WebAddress webAddress) {
 		super();
 		this.emailCatalog = emailCatalog;
 		this.defaultLayoutNsPrefix = defaultLayoutNsPrefix;
 		this.defaultLayoutName = defaultLayoutName;
+		final Properties props = new Properties();
+		props.setProperty(Email.MAIL_HOST, smtpHost);
+		props.setProperty(Email.MAIL_PORT, Integer.toString(smtpPort));
+		props.setProperty(Email.MAIL_SMTP_USER, smtpUser);
+		props.setProperty(Email.MAIL_SMTP_PASSWORD, smtpPassword);
+		mailSession = Session.getInstance(props);
 		this.appManifest = appManifest;
 		this.webAddress = webAddress;
 	}
@@ -98,9 +116,28 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 		final Layout layout = getDefaultLayout();
 		final T page = EmailUtils.createPage(pageClass, layout);
 		injectDefaultScope(page);
+		final Sender sender = createSender(page.getPageType().getSenderTypeName());
+		sender.expand();
+		page.setSender(sender);
+		page.setMailSession(mailSession);
 		return page;
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public Sender createSender(String qname) {
+		final String senderQName = Optional.fromNullable(qname).or("builtin:general");
+		final Matcher qnameMatcher = Pattern.compile("(.+):(.+)").matcher(senderQName);
+		final String senderNsPrefix = qnameMatcher.matches() ? qnameMatcher.group(1) : "builtin";
+		final String senderName = qnameMatcher.matches() ? qnameMatcher.group(2) : senderQName;
+		final Sender sender = EmailUtils.createSender(senderNsPrefix, senderName);
+		injectDefaultScope(sender);
+		return sender;
+	}
+
 	protected Layout getDefaultLayout() {
 		try {
 			final LayoutType layoutType = Iterables.find(emailCatalog.getLayoutTypes(), new Predicate<LayoutType>() {

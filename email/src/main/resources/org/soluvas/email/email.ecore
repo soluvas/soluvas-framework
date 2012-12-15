@@ -128,6 +128,8 @@
         eType="#//PageType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sender" lowerBound="1"
         eType="#//Sender"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mailSession" lowerBound="1"
+        eType="#//MailSession" transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Email" instanceClassName="org.apache.commons.mail.Email"/>
   <eClassifiers xsi:type="ecore:EClass" name="TemplateLike" abstract="true" interface="true">
@@ -182,15 +184,25 @@
         </eGenericType>
       </eParameters>
     </eOperations>
+    <eOperations name="createSender" eType="#//Sender">
+      <eParameters name="qname" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Sender" eSuperTypes="#//SenderLike #//DefaultScope">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Sender information. Mustache variables are supported."/>
     </eAnnotations>
+    <eOperations name="expand">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Expand the Mustache templates."/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="senderType" lowerBound="1"
         eType="#//SenderType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SenderType" eSuperTypes="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NsPrefixable #//SenderLike"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SenderType" eSuperTypes="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NsPrefixable #//SenderLike">
+    <eOperations name="create" eType="#//Sender"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SenderLike" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -208,4 +220,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="webAddress" eType="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//WebAddress"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="appManifest" eType="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//AppManifest"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="MailSession" instanceClassName="javax.mail.Session"
+      serializable="false"/>
 </ecore:EPackage>

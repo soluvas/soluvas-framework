@@ -2,21 +2,26 @@
  */
 package org.soluvas.email.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.io.StringReader;
+import java.io.StringWriter;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.email.DefaultScope;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Sender;
 import org.soluvas.email.SenderType;
+
+import com.github.mustachejava.DefaultMustacheFactory;
+import com.github.mustachejava.Mustache;
+import com.github.mustachejava.MustacheFactory;
+import com.google.common.base.Strings;
 
 /**
  * <!-- begin-user-doc -->
@@ -151,6 +156,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFrom() {
 		return from;
 	}
@@ -160,6 +166,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFrom(String newFrom) {
 		String oldFrom = from;
 		from = newFrom;
@@ -172,6 +179,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getEmail() {
 		return email;
 	}
@@ -181,6 +189,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEmail(String newEmail) {
 		String oldEmail = email;
 		email = newEmail;
@@ -193,6 +202,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getReplyTo() {
 		return replyTo;
 	}
@@ -202,6 +212,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReplyTo(String newReplyTo) {
 		String oldReplyTo = replyTo;
 		replyTo = newReplyTo;
@@ -214,6 +225,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public WebAddress getWebAddress() {
 		if (webAddress != null && ((EObject)webAddress).eIsProxy()) {
 			InternalEObject oldWebAddress = (InternalEObject)webAddress;
@@ -240,6 +252,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWebAddress(WebAddress newWebAddress) {
 		WebAddress oldWebAddress = webAddress;
 		webAddress = newWebAddress;
@@ -252,6 +265,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AppManifest getAppManifest() {
 		if (appManifest != null && ((EObject)appManifest).eIsProxy()) {
 			InternalEObject oldAppManifest = (InternalEObject)appManifest;
@@ -278,6 +292,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAppManifest(AppManifest newAppManifest) {
 		AppManifest oldAppManifest = appManifest;
 		appManifest = newAppManifest;
@@ -290,6 +305,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SenderType getSenderType() {
 		if (senderType != null && ((EObject)senderType).eIsProxy()) {
 			InternalEObject oldSenderType = (InternalEObject)senderType;
@@ -314,13 +330,38 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
+	@Override
 	public void setSenderType(SenderType newSenderType) {
 		SenderType oldSenderType = senderType;
 		senderType = newSenderType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.SENDER__SENDER_TYPE, oldSenderType, senderType));
+		
+		setFrom(newSenderType.getFrom());
+		setEmail(newSenderType.getEmail());
+		setReplyTo(newSenderType.getReplyTo());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public void expand() {
+		setFrom(doExpand(getFrom()));
+		setEmail(doExpand(getEmail()));
+		if (!Strings.isNullOrEmpty(getReplyTo())) {
+			setReplyTo(doExpand(getReplyTo()));
+		}
+	}
+	
+	protected String doExpand(String template) {
+		final MustacheFactory mf = new DefaultMustacheFactory();
+		final Mustache mustache = mf.compile(new StringReader(template), "sender");
+		final StringWriter stringWriter = new StringWriter();
+		mustache.execute(stringWriter, this);
+		return stringWriter.toString();
 	}
 
 	/**

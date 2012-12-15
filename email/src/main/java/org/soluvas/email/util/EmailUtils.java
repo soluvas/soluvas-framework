@@ -15,6 +15,8 @@ import org.soluvas.email.Layout;
 import org.soluvas.email.LayoutType;
 import org.soluvas.email.Page;
 import org.soluvas.email.PageType;
+import org.soluvas.email.Sender;
+import org.soluvas.email.SenderType;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -98,6 +100,43 @@ public class EmailUtils {
 			final List<String> supportedPageTypeQNames = Lists.transform(emailCatalog.getPageTypes(), targetTypeQName);
 			throw new EmailException(String.format("Cannot find page type %s, %s supported types are: %s",
 					targetClass.getName(), supportedPageTypeQNames.size(), supportedPageTypeQNames), e);
+		} finally {
+			bundleContext.ungetService(emailCatalogRef);
+		}
+	}
+
+	/**
+	 * Helper method to create a {@link Sender}.
+	 * @param nsPrefix
+	 * @param name
+	 * @return
+	 */
+	public static Sender createSender(@Nonnull final String nsPrefix, @Nonnull final String name) {
+		final BundleContext bundleContext = FrameworkUtil.getBundle(EmailUtils.class).getBundleContext();
+		final ServiceReference<EmailCatalog> emailCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(EmailCatalog.class),
+				"Cannot get %s service reference", EmailCatalog.class.getName());
+		final EmailCatalog emailCatalog = Preconditions.checkNotNull(
+				bundleContext.getService(emailCatalogRef),
+				"Cannot get %s service", EmailCatalog.class.getName());
+		try {
+			final SenderType type = Iterables.find(emailCatalog.getSenderTypes(),
+					new Predicate<SenderType>() {
+				@Override
+				public boolean apply(@Nullable final SenderType input) {
+					return nsPrefix.equals(input.getNsPrefix()) && name.equals(input.getName());
+				}
+			});
+			return type.create();
+		} catch (final NoSuchElementException e) {
+			final Function<SenderType, String> targetTypeQName = new Function<SenderType, String>() {
+				@Override @Nullable
+				public String apply(@Nullable SenderType input) {
+					return input.getNsPrefix() + ":" + input.getName();
+				}
+			};
+			final List<String> supportedSenderTypeQNames = Lists.transform(emailCatalog.getSenderTypes(), targetTypeQName);
+			throw new EmailException(String.format("Cannot find sender type %s:%s, %s supported types are: %s",
+					nsPrefix, name, supportedSenderTypeQNames.size(), supportedSenderTypeQNames), e);
 		} finally {
 			bundleContext.ungetService(emailCatalogRef);
 		}

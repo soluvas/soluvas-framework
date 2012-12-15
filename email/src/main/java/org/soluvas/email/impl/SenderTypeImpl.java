@@ -2,28 +2,15 @@
  */
 package org.soluvas.email.impl;
 
-import java.util.Map;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EFactory;
-import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.osgi.framework.Bundle;
-
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsPackage;
-import org.soluvas.commons.EClassLinked;
-import org.soluvas.commons.EClassStatus;
-import org.soluvas.commons.EFactoryLinked;
-import org.soluvas.commons.JavaClassLinked;
-import org.soluvas.commons.JavaClassStatus;
 import org.soluvas.commons.NsPrefixable;
-
+import org.soluvas.email.EmailFactory;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Sender;
 import org.soluvas.email.SenderLike;
@@ -192,6 +179,7 @@ public class SenderTypeImpl extends EObjectImpl implements SenderType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -201,6 +189,7 @@ public class SenderTypeImpl extends EObjectImpl implements SenderType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -213,6 +202,7 @@ public class SenderTypeImpl extends EObjectImpl implements SenderType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Bundle getBundle() {
 		return bundle;
 	}
@@ -222,6 +212,7 @@ public class SenderTypeImpl extends EObjectImpl implements SenderType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBundle(Bundle newBundle) {
 		Bundle oldBundle = bundle;
 		bundle = newBundle;
@@ -234,6 +225,7 @@ public class SenderTypeImpl extends EObjectImpl implements SenderType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNsPrefix() {
 		return nsPrefix;
 	}
@@ -243,6 +235,7 @@ public class SenderTypeImpl extends EObjectImpl implements SenderType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNsPrefix(String newNsPrefix) {
 		String oldNsPrefix = nsPrefix;
 		nsPrefix = newNsPrefix;
@@ -255,6 +248,7 @@ public class SenderTypeImpl extends EObjectImpl implements SenderType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFrom() {
 		return from;
 	}
@@ -264,6 +258,7 @@ public class SenderTypeImpl extends EObjectImpl implements SenderType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFrom(String newFrom) {
 		String oldFrom = from;
 		from = newFrom;
@@ -276,6 +271,7 @@ public class SenderTypeImpl extends EObjectImpl implements SenderType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getEmail() {
 		return email;
 	}
@@ -285,6 +281,7 @@ public class SenderTypeImpl extends EObjectImpl implements SenderType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEmail(String newEmail) {
 		String oldEmail = email;
 		email = newEmail;
@@ -297,6 +294,7 @@ public class SenderTypeImpl extends EObjectImpl implements SenderType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getReplyTo() {
 		return replyTo;
 	}
@@ -306,11 +304,23 @@ public class SenderTypeImpl extends EObjectImpl implements SenderType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReplyTo(String newReplyTo) {
 		String oldReplyTo = replyTo;
 		replyTo = newReplyTo;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.SENDER_TYPE__REPLY_TO, oldReplyTo, replyTo));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public Sender create() {
+		final Sender sender = EmailFactory.eINSTANCE.createSender();
+		sender.setSenderType(this);
+		return sender;
 	}
 
 	/**

@@ -8,6 +8,10 @@ package org.soluvas.commons;
  * A representation of the model object '<em><b>App Manifest</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Attributes are optional because can use OverlayingSupplier.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -33,7 +37,7 @@ public interface AppManifest extends Positionable, ResourceAware {
 	 * @return the value of the '<em>Title</em>' attribute.
 	 * @see #setTitle(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_Title()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getTitle();
@@ -59,7 +63,7 @@ public interface AppManifest extends Positionable, ResourceAware {
 	 * @return the value of the '<em>Description</em>' attribute.
 	 * @see #setDescription(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_Description()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getDescription();
@@ -96,7 +100,7 @@ public interface AppManifest extends Positionable, ResourceAware {
 	 * @return the value of the '<em>Domain</em>' attribute.
 	 * @see #setDomain(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_Domain()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getDomain();

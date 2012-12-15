@@ -4,10 +4,11 @@ package org.soluvas.email.impl;
 
 import java.util.List;
 
+import javax.mail.Session;
 import javax.annotation.Nullable;
+import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.SimpleEmail;
 import org.eclipse.emf.common.notify.Notification;
@@ -15,18 +16,21 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.soluvas.email.EmailFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.email.EmailException;
 import org.soluvas.email.EmailFormat;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Layout;
 import org.soluvas.email.Page;
 import org.soluvas.email.PageType;
 import org.soluvas.email.Recipient;
-
 import org.soluvas.email.Sender;
+
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
@@ -40,6 +44,7 @@ import com.google.common.collect.Lists;
  *   <li>{@link org.soluvas.email.impl.PageImpl#getLayout <em>Layout</em>}</li>
  *   <li>{@link org.soluvas.email.impl.PageImpl#getPageType <em>Page Type</em>}</li>
  *   <li>{@link org.soluvas.email.impl.PageImpl#getSender <em>Sender</em>}</li>
+ *   <li>{@link org.soluvas.email.impl.PageImpl#getMailSession <em>Mail Session</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,6 +83,26 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * @ordered
 	 */
 	protected Sender sender;
+
+	/**
+	 * The default value of the '{@link #getMailSession() <em>Mail Session</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMailSession()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Session MAIL_SESSION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMailSession() <em>Mail Session</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMailSession()
+	 * @generated
+	 * @ordered
+	 */
+	protected Session mailSession = MAIL_SESSION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -188,6 +213,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sender getSender() {
 		if (sender != null && ((EObject)sender).eIsProxy()) {
 			InternalEObject oldSender = (InternalEObject)sender;
@@ -214,11 +240,33 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSender(Sender newSender) {
 		Sender oldSender = sender;
 		sender = newSender;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.PAGE__SENDER, oldSender, sender));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Session getMailSession() {
+		return mailSession;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMailSession(Session newMailSession) {
+		Session oldMailSession = mailSession;
+		mailSession = newMailSession;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.PAGE__MAIL_SESSION, oldMailSession, mailSession));
 	}
 
 	/**
@@ -253,11 +301,25 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 			default:
 				throw new org.soluvas.email.EmailException("Unknown format: " + format);
 			}
-			email.setFrom("cantik@berbatik.com", "Berbatik");
+//			email.setFrom("cantik@berbatik.com", "Berbatik");
+			try {
+				email.setFrom(getSender().getEmail(), getSender().getFrom());
+			} catch (Exception e) {
+				throw new EmailException(String.format("Invalid Sender: \"%s\" <%s>",
+						getSender().getFrom(), getSender().getEmail()), e);
+			}
+			if (!Strings.isNullOrEmpty(getSender().getReplyTo())) {
+				email.setReplyTo(ImmutableList.of(new InternetAddress(getSender().getReplyTo())));
+			}
 			email.setSubject(layout.renderSubject(recipient));
 			email.addTo(recipient.getEmail(), recipient.getName());
+			email.setDebug(true);
+//			email.buildMimeMessage();
+//			final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//			email.getMimeMessage().writeTo(outputStream);
+//			log.info("Composed {}", outputStream);
 			return email;
-		} catch (EmailException e) {
+		} catch (Exception e) {
 			throw new org.soluvas.email.EmailException("Cannot compose " + pageType.getNsPrefix() + ":" + pageType.getName() +
 					" email to " + recipient, e);
 		}
@@ -297,6 +359,8 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 			case EmailPackage.PAGE__SENDER:
 				if (resolve) return getSender();
 				return basicGetSender();
+			case EmailPackage.PAGE__MAIL_SESSION:
+				return getMailSession();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -317,6 +381,9 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 				return;
 			case EmailPackage.PAGE__SENDER:
 				setSender((Sender)newValue);
+				return;
+			case EmailPackage.PAGE__MAIL_SESSION:
+				setMailSession((Session)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -339,6 +406,9 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 			case EmailPackage.PAGE__SENDER:
 				setSender((Sender)null);
 				return;
+			case EmailPackage.PAGE__MAIL_SESSION:
+				setMailSession(MAIL_SESSION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -357,8 +427,26 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 				return pageType != null;
 			case EmailPackage.PAGE__SENDER:
 				return sender != null;
+			case EmailPackage.PAGE__MAIL_SESSION:
+				return MAIL_SESSION_EDEFAULT == null ? mailSession != null : !MAIL_SESSION_EDEFAULT.equals(mailSession);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (mailSession: ");
+		result.append(mailSession);
+		result.append(')');
+		return result.toString();
 	}
 
 } //PageImpl

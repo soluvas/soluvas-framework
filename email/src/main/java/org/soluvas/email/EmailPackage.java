@@ -1068,13 +1068,22 @@ public interface EmailPackage extends EPackage {
 	int PAGE__SENDER = TEMPLATE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Mail Session</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__MAIL_SESSION = TEMPLATE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Page</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 3;
+	int PAGE_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.EmailManagerImpl <em>Manager</em>}' class.
@@ -1353,6 +1362,16 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 */
 	int EMAIL = 16;
+
+	/**
+	 * The meta object id for the '<em>Mail Session</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see javax.mail.Session
+	 * @see org.soluvas.email.impl.EmailPackageImpl#getMailSession()
+	 * @generated
+	 */
+	int MAIL_SESSION = 17;
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.EmailCatalog <em>Catalog</em>}'.
@@ -1644,6 +1663,17 @@ public interface EmailPackage extends EPackage {
 	EReference getPage_Sender();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.Page#getMailSession <em>Mail Session</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Mail Session</em>'.
+	 * @see org.soluvas.email.Page#getMailSession()
+	 * @see #getPage()
+	 * @generated
+	 */
+	EAttribute getPage_MailSession();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.TemplateLike <em>Template Like</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1832,6 +1862,17 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getEmail();
+
+	/**
+	 * Returns the meta object for data type '{@link javax.mail.Session <em>Mail Session</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Mail Session</em>'.
+	 * @see javax.mail.Session
+	 * @model instanceClass="javax.mail.Session" serializeable="false"
+	 * @generated
+	 */
+	EDataType getMailSession();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2088,6 +2129,14 @@ public interface EmailPackage extends EPackage {
 		EReference PAGE__SENDER = eINSTANCE.getPage_Sender();
 
 		/**
+		 * The meta object literal for the '<em><b>Mail Session</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PAGE__MAIL_SESSION = eINSTANCE.getPage_MailSession();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.email.TemplateLike <em>Template Like</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2248,6 +2297,16 @@ public interface EmailPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType EMAIL = eINSTANCE.getEmail();
+
+		/**
+		 * The meta object literal for the '<em>Mail Session</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see javax.mail.Session
+		 * @see org.soluvas.email.impl.EmailPackageImpl#getMailSession()
+		 * @generated
+		 */
+		EDataType MAIL_SESSION = eINSTANCE.getMailSession();
 
 	}
 

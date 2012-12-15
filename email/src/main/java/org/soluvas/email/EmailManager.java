@@ -27,4 +27,12 @@ public interface EmailManager extends SerializableEObject {
 	 */
 	<T extends Page> T createPage(Class<T> pageClass);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Sender createSender(String qname);
+
 } // EmailManager
