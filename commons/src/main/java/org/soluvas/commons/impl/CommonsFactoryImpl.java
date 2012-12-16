@@ -95,6 +95,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return (EObject)createAttributeNotification();
 			case CommonsPackage.ADDED_MANY: return (EObject)createAddedMany();
 			case CommonsPackage.REMOVED_MANY: return (EObject)createRemovedMany();
+			case CommonsPackage.CATEGORY_INFO: return (EObject)createCategoryInfo();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -304,6 +305,16 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	public <T extends EObject> RemovedMany<T> createRemovedMany() {
 		RemovedManyImpl<T> removedMany = new RemovedManyImpl<T>();
 		return removedMany;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CategoryInfo createCategoryInfo() {
+		CategoryInfoImpl categoryInfo = new CategoryInfoImpl();
+		return categoryInfo;
 	}
 
 	/**

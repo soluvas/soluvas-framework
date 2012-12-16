@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:category="http://www.soluvas.org/schema/category/1.0" xmlns:commons="http://www.soluvas.org/schema/commons/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/category/1.0">
+  <xsd:import namespace="http://www.omg.org/XMI" schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/XMI.xsd"/>
+  <xsd:import namespace="http://www.soluvas.org/schema/commons/1.0" schemaLocation="commons.xsd"/>
+  <xsd:simpleType name="CategoryStatus">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="draft"/>
+      <xsd:enumeration value="active"/>
+      <xsd:enumeration value="inactive"/>
+      <xsd:enumeration value="void"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="Category">
+    <xsd:complexContent>
+      <xsd:extension base="commons:Parentable">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="categories" type="category:Category">
+            <xsd:annotation>
+              <xsd:documentation>List of categories or children.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:choice>
+        <xsd:attribute name="positioner" type="xsd:int"/>
+        <xsd:attribute name="slug" type="xsd:string" use="required"/>
+        <xsd:attribute name="id" type="xsd:string" use="required"/>
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+        <xsd:attribute name="slugPath" type="xsd:string"/>
+        <xsd:attribute name="color" type="xsd:string"/>
+        <xsd:attribute name="imageId" type="xsd:string"/>
+        <xsd:attribute name="level" type="xsd:int"/>
+        <xsd:attribute name="categoryCount" type="xsd:long"/>
+        <xsd:attribute name="resourceType" type="commons:ResourceType"/>
+        <xsd:attribute name="resourceUri" type="xsd:string"/>
+        <xsd:attribute name="resourceName" type="xsd:string"/>
+        <xsd:attribute name="status" type="category:CategoryStatus"/>
+        <xsd:attribute name="description" type="xsd:string"/>
+        <xsd:attribute name="metaDescription" type="xsd:string"/>
+        <xsd:attribute name="metaKeywords" type="xsd:string"/>
+        <xsd:attribute name="metaTitle" type="xsd:string"/>
+        <xsd:attribute name="availableSortBy" type="xsd:string"/>
+        <xsd:attribute name="defaultSortBy" type="xsd:string"/>
+        <xsd:attribute name="anchor" type="xsd:boolean"/>
+        <xsd:attribute name="includeInMenu" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Category" type="category:Category"/>
+  <xsd:complexType abstract="true" name="CategoryContainer">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="categories" type="category:Category">
+        <xsd:annotation>
+          <xsd:documentation>List of categories or children.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="CategoryContainer" type="category:CategoryContainer"/>
+  <xsd:complexType name="CategoryCatalog">
+    <xsd:complexContent>
+      <xsd:extension base="category:CategoryContainer"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CategoryCatalog" type="category:CategoryCatalog"/>
+  <xsd:complexType name="CategoryManager">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="CategoryManager" type="category:CategoryManager"/>
+</xsd:schema>

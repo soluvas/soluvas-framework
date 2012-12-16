@@ -287,6 +287,38 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CommonsPackage.PARENTABLE: {
+				Parentable<?> parentable = (Parentable<?>)theEObject;
+				T1 result = caseParentable(parentable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.CATEGORY_LIKE: {
+				CategoryLike categoryLike = (CategoryLike)theEObject;
+				T1 result = caseCategoryLike(categoryLike);
+				if (result == null) result = casePositionable(categoryLike);
+				if (result == null) result = caseSluggable(categoryLike);
+				if (result == null) result = caseImageable(categoryLike);
+				if (result == null) result = caseIdentifiable(categoryLike);
+				if (result == null) result = caseNameContainer(categoryLike);
+				if (result == null) result = caseNameable(categoryLike);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.CATEGORY_INFO: {
+				CategoryInfo categoryInfo = (CategoryInfo)theEObject;
+				T1 result = caseCategoryInfo(categoryInfo);
+				if (result == null) result = caseCategoryLike(categoryInfo);
+				if (result == null) result = caseParentable(categoryInfo);
+				if (result == null) result = casePositionable(categoryInfo);
+				if (result == null) result = caseSluggable(categoryInfo);
+				if (result == null) result = caseImageable(categoryInfo);
+				if (result == null) result = caseIdentifiable(categoryInfo);
+				if (result == null) result = caseNameContainer(categoryInfo);
+				if (result == null) result = caseNameable(categoryInfo);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -753,6 +785,51 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public <T extends EObject> T1 caseEObjectLinked(EObjectLinked<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parentable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parentable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <P> T1 caseParentable(Parentable<P> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Category Like</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Category Like</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseCategoryLike(CategoryLike object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Category Info</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Category Info</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseCategoryInfo(CategoryInfo object) {
 		return null;
 	}
 

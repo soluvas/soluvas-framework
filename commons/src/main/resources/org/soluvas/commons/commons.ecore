@@ -464,4 +464,43 @@
       <eGenericType eTypeParameter="#//EObjectLinked/T"/>
     </eOperations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parentable" abstract="true" interface="true">
+    <eTypeParameters name="P"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent">
+      <eGenericType eTypeParameter="#//Parentable/P"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CategoryLike" abstract="true" interface="true"
+      eSuperTypes="#//Positionable #//Sluggable #//Imageable #//Identifiable #//NameContainer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="ID is UUID, it won't change when categories are reordered are moved/restructured.&#xA;&#xA;&lt;p>Slug is used as name in JCR repositories.&#xA;&#xA;&lt;p>Name is used as displayName in JCR repositories."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slugPath" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Automatically updated based on slug and parent slugs, separated by '/'."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="HTML color code name or hexadecimal code (i.e. &quot;#3356ff&quot;) of category color (usually used as background)."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EIntegerObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The &quot;implicit root category&quot; has level 0. So a Category without a parent has level 1. Automatically updated on save."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="categoryCount" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELongObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Number of children categories. Automatically updated when categories are restructured."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CategoryInfo">
+    <eGenericSuperTypes eClassifier="#//CategoryLike"/>
+    <eGenericSuperTypes eClassifier="#//Parentable">
+      <eTypeArguments eClassifier="#//CategoryInfo"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
 </ecore:EPackage>

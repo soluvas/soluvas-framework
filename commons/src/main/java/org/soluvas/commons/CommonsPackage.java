@@ -1295,6 +1295,243 @@ public interface CommonsPackage extends EPackage {
 	int REMOVED_MANY_FEATURE_COUNT = OBJECTS_NOTIFICATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.Parentable <em>Parentable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.Parentable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getParentable()
+	 * @generated
+	 */
+	int PARENTABLE = 31;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARENTABLE__PARENT = 0;
+
+	/**
+	 * The number of structural features of the '<em>Parentable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARENTABLE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.CategoryLike <em>Category Like</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.CategoryLike
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCategoryLike()
+	 * @generated
+	 */
+	int CATEGORY_LIKE = 32;
+
+	/**
+	 * The feature id for the '<em><b>Positioner</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_LIKE__POSITIONER = POSITIONABLE__POSITIONER;
+
+	/**
+	 * The feature id for the '<em><b>Slug</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_LIKE__SLUG = POSITIONABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_LIKE__ID = POSITIONABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_LIKE__NAME = POSITIONABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Slug Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_LIKE__SLUG_PATH = POSITIONABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Color</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_LIKE__COLOR = POSITIONABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_LIKE__IMAGE_ID = POSITIONABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Level</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_LIKE__LEVEL = POSITIONABLE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Category Count</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_LIKE__CATEGORY_COUNT = POSITIONABLE_FEATURE_COUNT + 7;
+
+	/**
+	 * The number of structural features of the '<em>Category Like</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_LIKE_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 8;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.CategoryInfoImpl <em>Category Info</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.CategoryInfoImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCategoryInfo()
+	 * @generated
+	 */
+	int CATEGORY_INFO = 33;
+
+	/**
+	 * The feature id for the '<em><b>Positioner</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__POSITIONER = CATEGORY_LIKE__POSITIONER;
+
+	/**
+	 * The feature id for the '<em><b>Slug</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__SLUG = CATEGORY_LIKE__SLUG;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__ID = CATEGORY_LIKE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__NAME = CATEGORY_LIKE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Slug Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__SLUG_PATH = CATEGORY_LIKE__SLUG_PATH;
+
+	/**
+	 * The feature id for the '<em><b>Color</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__COLOR = CATEGORY_LIKE__COLOR;
+
+	/**
+	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__IMAGE_ID = CATEGORY_LIKE__IMAGE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Level</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__LEVEL = CATEGORY_LIKE__LEVEL;
+
+	/**
+	 * The feature id for the '<em><b>Category Count</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__CATEGORY_COUNT = CATEGORY_LIKE__CATEGORY_COUNT;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__PARENT = CATEGORY_LIKE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Category Info</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO_FEATURE_COUNT = CATEGORY_LIKE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1302,7 +1539,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 31;
+	int RESOURCE_TYPE = 34;
 
 
 	/**
@@ -1313,7 +1550,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 32;
+	int GENDER = 35;
 
 
 	/**
@@ -1324,7 +1561,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 33;
+	int ECLASS_STATUS = 36;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -1334,7 +1571,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 34;
+	int JAVA_CLASS_STATUS = 37;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -1344,7 +1581,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 35;
+	int DATE_TIME = 38;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -1354,7 +1591,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 36;
+	int CURRENCY_UNIT = 39;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -1364,7 +1601,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 37;
+	int UNIT = 40;
 
 
 	/**
@@ -1375,7 +1612,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 38;
+	int LIST = 41;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -1385,7 +1622,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 39;
+	int MAP = 42;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -1395,7 +1632,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 40;
+	int SET = 43;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -1405,7 +1642,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 41;
+	int COLLECTION = 44;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -1415,7 +1652,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 42;
+	int MULTIMAP = 45;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -1425,7 +1662,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 43;
+	int NAVIGABLE_MAP = 46;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -1435,7 +1672,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 44;
+	int QUEUE = 47;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -1445,7 +1682,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 45;
+	int MULTISET = 48;
 
 
 	/**
@@ -1456,7 +1693,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 46;
+	int SERIALIZABLE = 49;
 
 
 	/**
@@ -1467,7 +1704,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 47;
+	int BUNDLE = 50;
 
 
 	/**
@@ -2252,6 +2489,102 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getEObjectLinked();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Parentable <em>Parentable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Parentable</em>'.
+	 * @see org.soluvas.commons.Parentable
+	 * @generated
+	 */
+	EClass getParentable();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.commons.Parentable#getParent <em>Parent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Parent</em>'.
+	 * @see org.soluvas.commons.Parentable#getParent()
+	 * @see #getParentable()
+	 * @generated
+	 */
+	EReference getParentable_Parent();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.CategoryLike <em>Category Like</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Category Like</em>'.
+	 * @see org.soluvas.commons.CategoryLike
+	 * @generated
+	 */
+	EClass getCategoryLike();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CategoryLike#getSlugPath <em>Slug Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Slug Path</em>'.
+	 * @see org.soluvas.commons.CategoryLike#getSlugPath()
+	 * @see #getCategoryLike()
+	 * @generated
+	 */
+	EAttribute getCategoryLike_SlugPath();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CategoryLike#getColor <em>Color</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Color</em>'.
+	 * @see org.soluvas.commons.CategoryLike#getColor()
+	 * @see #getCategoryLike()
+	 * @generated
+	 */
+	EAttribute getCategoryLike_Color();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CategoryLike#getImageId <em>Image Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Image Id</em>'.
+	 * @see org.soluvas.commons.CategoryLike#getImageId()
+	 * @see #getCategoryLike()
+	 * @generated
+	 */
+	EAttribute getCategoryLike_ImageId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CategoryLike#getLevel <em>Level</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Level</em>'.
+	 * @see org.soluvas.commons.CategoryLike#getLevel()
+	 * @see #getCategoryLike()
+	 * @generated
+	 */
+	EAttribute getCategoryLike_Level();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CategoryLike#getCategoryCount <em>Category Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Category Count</em>'.
+	 * @see org.soluvas.commons.CategoryLike#getCategoryCount()
+	 * @see #getCategoryLike()
+	 * @generated
+	 */
+	EAttribute getCategoryLike_CategoryCount();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.CategoryInfo <em>Category Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Category Info</em>'.
+	 * @see org.soluvas.commons.CategoryInfo
+	 * @generated
+	 */
+	EClass getCategoryInfo();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -3111,6 +3444,84 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EOBJECT_LINKED = eINSTANCE.getEObjectLinked();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.Parentable <em>Parentable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.Parentable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getParentable()
+		 * @generated
+		 */
+		EClass PARENTABLE = eINSTANCE.getParentable();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARENTABLE__PARENT = eINSTANCE.getParentable_Parent();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.CategoryLike <em>Category Like</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.CategoryLike
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCategoryLike()
+		 * @generated
+		 */
+		EClass CATEGORY_LIKE = eINSTANCE.getCategoryLike();
+
+		/**
+		 * The meta object literal for the '<em><b>Slug Path</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY_LIKE__SLUG_PATH = eINSTANCE.getCategoryLike_SlugPath();
+
+		/**
+		 * The meta object literal for the '<em><b>Color</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY_LIKE__COLOR = eINSTANCE.getCategoryLike_Color();
+
+		/**
+		 * The meta object literal for the '<em><b>Image Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY_LIKE__IMAGE_ID = eINSTANCE.getCategoryLike_ImageId();
+
+		/**
+		 * The meta object literal for the '<em><b>Level</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY_LIKE__LEVEL = eINSTANCE.getCategoryLike_Level();
+
+		/**
+		 * The meta object literal for the '<em><b>Category Count</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY_LIKE__CATEGORY_COUNT = eINSTANCE.getCategoryLike_CategoryCount();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.CategoryInfoImpl <em>Category Info</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.CategoryInfoImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCategoryInfo()
+		 * @generated
+		 */
+		EClass CATEGORY_INFO = eINSTANCE.getCategoryInfo();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

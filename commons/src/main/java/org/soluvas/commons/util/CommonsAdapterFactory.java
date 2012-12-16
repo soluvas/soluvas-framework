@@ -192,6 +192,18 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createEObjectLinkedAdapter();
 			}
 			@Override
+			public <P> Adapter caseParentable(Parentable<P> object) {
+				return createParentableAdapter();
+			}
+			@Override
+			public Adapter caseCategoryLike(CategoryLike object) {
+				return createCategoryLikeAdapter();
+			}
+			@Override
+			public Adapter caseCategoryInfo(CategoryInfo object) {
+				return createCategoryInfoAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -642,6 +654,48 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEObjectLinkedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Parentable <em>Parentable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Parentable
+	 * @generated
+	 */
+	public Adapter createParentableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.CategoryLike <em>Category Like</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.CategoryLike
+	 * @generated
+	 */
+	public Adapter createCategoryLikeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.CategoryInfo <em>Category Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.CategoryInfo
+	 * @generated
+	 */
+	public Adapter createCategoryInfoAdapter() {
 		return null;
 	}
 

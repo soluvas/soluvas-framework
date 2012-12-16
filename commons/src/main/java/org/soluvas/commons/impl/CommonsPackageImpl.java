@@ -33,6 +33,8 @@ import org.soluvas.commons.AttributeNotification;
 import org.soluvas.commons.AttributeSet;
 import org.soluvas.commons.AttributeUnset;
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.CategoryInfo;
+import org.soluvas.commons.CategoryLike;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Describable;
@@ -52,6 +54,7 @@ import org.soluvas.commons.Nameable;
 import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ObjectNotification;
 import org.soluvas.commons.ObjectsNotification;
+import org.soluvas.commons.Parentable;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.PhotoIdContainer;
 import org.soluvas.commons.Positionable;
@@ -290,6 +293,27 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass eObjectLinkedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass parentableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass categoryLikeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass categoryInfoEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1182,6 +1206,87 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getParentable() {
+		return parentableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParentable_Parent() {
+		return (EReference)parentableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCategoryLike() {
+		return categoryLikeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCategoryLike_SlugPath() {
+		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCategoryLike_Color() {
+		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCategoryLike_ImageId() {
+		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCategoryLike_Level() {
+		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCategoryLike_CategoryCount() {
+		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCategoryInfo() {
+		return categoryInfoEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -1481,6 +1586,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		eObjectLinkedEClass = createEClass(EOBJECT_LINKED);
 
+		parentableEClass = createEClass(PARENTABLE);
+		createEReference(parentableEClass, PARENTABLE__PARENT);
+
+		categoryLikeEClass = createEClass(CATEGORY_LIKE);
+		createEAttribute(categoryLikeEClass, CATEGORY_LIKE__SLUG_PATH);
+		createEAttribute(categoryLikeEClass, CATEGORY_LIKE__COLOR);
+		createEAttribute(categoryLikeEClass, CATEGORY_LIKE__IMAGE_ID);
+		createEAttribute(categoryLikeEClass, CATEGORY_LIKE__LEVEL);
+		createEAttribute(categoryLikeEClass, CATEGORY_LIKE__CATEGORY_COUNT);
+
+		categoryInfoEClass = createEClass(CATEGORY_INFO);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -1546,6 +1663,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		ETypeParameter removedManyEClass_T = addETypeParameter(removedManyEClass, "T");
 		ETypeParameter objectsNotificationEClass_T = addETypeParameter(objectsNotificationEClass, "T");
 		ETypeParameter eObjectLinkedEClass_T = addETypeParameter(eObjectLinkedEClass, "T");
+		ETypeParameter parentableEClass_P = addETypeParameter(parentableEClass, "P");
 		addETypeParameter(listEDataType, "T");
 		addETypeParameter(mapEDataType, "K");
 		addETypeParameter(mapEDataType, "V");
@@ -1641,6 +1759,17 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		g2 = createEGenericType(objectsNotificationEClass_T);
 		g1.getETypeArguments().add(g2);
 		objectsNotificationEClass.getEGenericSuperTypes().add(g1);
+		categoryLikeEClass.getESuperTypes().add(this.getPositionable());
+		categoryLikeEClass.getESuperTypes().add(this.getSluggable());
+		categoryLikeEClass.getESuperTypes().add(this.getImageable());
+		categoryLikeEClass.getESuperTypes().add(this.getIdentifiable());
+		categoryLikeEClass.getESuperTypes().add(this.getNameContainer());
+		g1 = createEGenericType(this.getCategoryLike());
+		categoryInfoEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getParentable());
+		g2 = createEGenericType(this.getCategoryInfo());
+		g1.getETypeArguments().add(g2);
+		categoryInfoEClass.getEGenericSuperTypes().add(g1);
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1780,6 +1909,19 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		op = addEOperation(eObjectLinkedEClass, null, "getObject", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(eObjectLinkedEClass_T);
 		initEOperation(op, g1);
+
+		initEClass(parentableEClass, Parentable.class, "Parentable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		g1 = createEGenericType(parentableEClass_P);
+		initEReference(getParentable_Parent(), g1, null, "parent", null, 0, 1, Parentable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(categoryLikeEClass, CategoryLike.class, "CategoryLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCategoryLike_SlugPath(), theEcorePackage.getEString(), "slugPath", null, 0, 1, CategoryLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategoryLike_Color(), theEcorePackage.getEString(), "color", null, 0, 1, CategoryLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategoryLike_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, CategoryLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategoryLike_Level(), theEcorePackage.getEIntegerObject(), "level", null, 0, 1, CategoryLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategoryLike_CategoryCount(), theEcorePackage.getELongObject(), "categoryCount", null, 0, 1, CategoryLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(categoryInfoEClass, CategoryInfo.class, "CategoryInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -2141,6 +2283,36 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Inspired by {@link org.eclipse.emf.common.notify.Notification}."
+		   });		
+		addAnnotation
+		  (categoryLikeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "ID is UUID, it won\'t change when categories are reordered are moved/restructured.\n\n<p>Slug is used as name in JCR repositories.\n\n<p>Name is used as displayName in JCR repositories."
+		   });		
+		addAnnotation
+		  (getCategoryLike_SlugPath(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Automatically updated based on slug and parent slugs, separated by \'/\'."
+		   });		
+		addAnnotation
+		  (getCategoryLike_Color(), 
+		   source, 
+		   new String[] {
+			 "documentation", "HTML color code name or hexadecimal code (i.e. \"#3356ff\") of category color (usually used as background)."
+		   });		
+		addAnnotation
+		  (getCategoryLike_Level(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The \"implicit root category\" has level 0. So a Category without a parent has level 1. Automatically updated on save."
+		   });		
+		addAnnotation
+		  (getCategoryLike_CategoryCount(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Number of children categories. Automatically updated when categories are restructured."
 		   });
 	}
 

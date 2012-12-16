@@ -29,6 +29,10 @@
 		<module>mongo</module>
 		<module>email</module>
 		<module>email.shell</module>
+		<module>category</module>
+		<module>category.shell</module>
+		<module>folder</module>
+		<module>folder.shell</module>
 		<!-- Backends -->
 		<module>image</module>
 		<module>apacheds</module>

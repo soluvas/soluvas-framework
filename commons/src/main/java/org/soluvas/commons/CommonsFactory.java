@@ -112,6 +112,15 @@ public interface CommonsFactory extends EFactory {
 	 */
 	<T extends EObject> RemovedMany<T> createRemovedMany();
 
+	/**
+	 * Returns a new object of class '<em>Category Info</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Category Info</em>'.
+	 * @generated
+	 */
+	CategoryInfo createCategoryInfo();
+
 	PersonInfo createPersonInfo(String id, String slug, String name, String photoId, Gender gender);
 
 	/**

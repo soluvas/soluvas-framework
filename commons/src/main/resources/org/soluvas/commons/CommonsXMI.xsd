@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<xsd:schema xmlns:commons="http://www.soluvas.org/schema/commons/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/commons/1.0">
+<xsd:schema xmlns:commons="http://www.soluvas.org/schema/commons/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:ecore_1="http://www.eclipse.org/emf/2002/Ecore" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/commons/1.0">
+  <xsd:import namespace="http://www.eclipse.org/emf/2002/Ecore" schemaLocation="ecore.xsd"/>
   <xsd:import namespace="http://www.eclipse.org/emf/2002/Ecore" schemaLocation="ecore.xsd"/>
   <xsd:import namespace="http://www.omg.org/XMI" schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/XMI.xsd"/>
   <xsd:simpleType name="ResourceType">
@@ -591,4 +592,89 @@ Comes from: getActionType().getEClass().getEPackage().getNsPrefix().</xsd:docume
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
   </xsd:complexType>
   <xsd:element name="EObjectLinked" type="commons:EObjectLinked"/>
+  <xsd:complexType abstract="true" name="Parentable">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="parent" type="ecore:EObject"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="parent" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="Parentable" type="commons:Parentable"/>
+  <xsd:complexType abstract="true" name="CategoryLike">
+    <xsd:annotation>
+      <xsd:documentation>ID is UUID, it won't change when categories are reordered are moved/restructured.
+
+&lt;p&gt;Slug is used as name in JCR repositories.
+
+&lt;p&gt;Name is used as displayName in JCR repositories.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="commons:Positionable">
+        <xsd:attribute name="slug" type="xsd:string" use="required">
+          <xsd:annotation>
+            <xsd:documentation>Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="id" type="xsd:string" use="required">
+          <xsd:annotation>
+            <xsd:documentation>ID of the object. Usually either lowercase_underscored or UUID.
+
+In LDAP, it can either be 'uid' or 'uniqueIdentifier'.
+
+RFC1274: unique identifer.
+LDAP: uniqueIdentifier</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="name" type="xsd:string" use="required">
+          <xsd:annotation>
+            <xsd:documentation>Display name (can be full name, nickname, slug, screen name, etc. whatever is commonly used by the particular app).
+Used by {#getName()}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="slugPath" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Automatically updated based on slug and parent slugs, separated by '/'.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="color" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>HTML color code name or hexadecimal code (i.e. "#3356ff") of category color (usually used as background).</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="imageId" type="xsd:string"/>
+        <xsd:attribute name="level" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>The "implicit root category" has level 0. So a Category without a parent has level 1. Automatically updated on save.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="categoryCount" type="xsd:long">
+          <xsd:annotation>
+            <xsd:documentation>Number of children categories. Automatically updated when categories are restructured.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CategoryLike" type="commons:CategoryLike">
+    <xsd:annotation>
+      <xsd:documentation>ID is UUID, it won't change when categories are reordered are moved/restructured.
+
+&lt;p&gt;Slug is used as name in JCR repositories.
+
+&lt;p&gt;Name is used as displayName in JCR repositories.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CategoryInfo">
+    <xsd:complexContent>
+      <xsd:extension base="commons:CategoryLike">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="parent" type="ecore:EObject"/>
+        </xsd:choice>
+        <xsd:attribute name="parent" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CategoryInfo" type="commons:CategoryInfo"/>
 </xsd:schema>
