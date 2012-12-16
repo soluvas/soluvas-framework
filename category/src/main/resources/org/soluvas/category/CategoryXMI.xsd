@@ -21,8 +21,8 @@
           </xsd:element>
         </xsd:choice>
         <xsd:attribute name="positioner" type="xsd:int"/>
-        <xsd:attribute name="slug" type="xsd:string" use="required"/>
-        <xsd:attribute name="id" type="xsd:string" use="required"/>
+        <xsd:attribute name="slug" type="xsd:string"/>
+        <xsd:attribute name="id" type="xsd:string"/>
         <xsd:attribute name="name" type="xsd:string" use="required"/>
         <xsd:attribute name="slugPath" type="xsd:string"/>
         <xsd:attribute name="color" type="xsd:string"/>
@@ -32,8 +32,8 @@
         <xsd:attribute name="resourceType" type="commons:ResourceType"/>
         <xsd:attribute name="resourceUri" type="xsd:string"/>
         <xsd:attribute name="resourceName" type="xsd:string"/>
-        <xsd:attribute name="status" type="category:CategoryStatus"/>
         <xsd:attribute name="description" type="xsd:string"/>
+        <xsd:attribute name="status" type="category:CategoryStatus"/>
         <xsd:attribute name="metaDescription" type="xsd:string"/>
         <xsd:attribute name="metaKeywords" type="xsd:string"/>
         <xsd:attribute name="metaTitle" type="xsd:string"/>

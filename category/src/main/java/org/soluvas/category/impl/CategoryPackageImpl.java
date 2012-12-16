@@ -151,7 +151,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCategory_Description() {
+	public EAttribute getCategory_MetaDescription() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -160,7 +160,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCategory_MetaDescription() {
+	public EAttribute getCategory_MetaKeywords() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -169,7 +169,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCategory_MetaKeywords() {
+	public EAttribute getCategory_MetaTitle() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -178,7 +178,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCategory_MetaTitle() {
+	public EAttribute getCategory_AvailableSortBy() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -187,7 +187,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCategory_AvailableSortBy() {
+	public EAttribute getCategory_DefaultSortBy() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -196,7 +196,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCategory_DefaultSortBy() {
+	public EAttribute getCategory_Anchor() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -205,17 +205,8 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCategory_Anchor() {
-		return (EAttribute)categoryEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getCategory_IncludeInMenu() {
-		return (EAttribute)categoryEClass.getEStructuralFeatures().get(8);
+		return (EAttribute)categoryEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -293,7 +284,6 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		// Create classes and their features
 		categoryEClass = createEClass(CATEGORY);
 		createEAttribute(categoryEClass, CATEGORY__STATUS);
-		createEAttribute(categoryEClass, CATEGORY__DESCRIPTION);
 		createEAttribute(categoryEClass, CATEGORY__META_DESCRIPTION);
 		createEAttribute(categoryEClass, CATEGORY__META_KEYWORDS);
 		createEAttribute(categoryEClass, CATEGORY__META_TITLE);
@@ -357,12 +347,13 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		categoryEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getCategoryContainer());
 		categoryEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getDescribable());
+		categoryEClass.getEGenericSuperTypes().add(g1);
 		categoryCatalogEClass.getESuperTypes().add(this.getCategoryContainer());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(categoryEClass, Category.class, "Category", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCategory_Status(), this.getCategoryStatus(), "status", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCategory_Description(), theEcorePackage.getEString(), "description", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_MetaDescription(), theEcorePackage.getEString(), "metaDescription", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_MetaKeywords(), theEcorePackage.getEString(), "metaKeywords", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_MetaTitle(), theEcorePackage.getEString(), "metaTitle", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

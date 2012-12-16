@@ -204,22 +204,22 @@ public interface CategoryPackage extends EPackage {
 	int CATEGORY__CATEGORIES = CommonsPackage.PARENTABLE_FEATURE_COUNT + 13;
 
 	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY__STATUS = CommonsPackage.PARENTABLE_FEATURE_COUNT + 14;
-
-	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__DESCRIPTION = CommonsPackage.PARENTABLE_FEATURE_COUNT + 15;
+	int CATEGORY__DESCRIPTION = CommonsPackage.PARENTABLE_FEATURE_COUNT + 14;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__STATUS = CommonsPackage.PARENTABLE_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Meta Description</b></em>' attribute.
@@ -401,17 +401,6 @@ public interface CategoryPackage extends EPackage {
 	EAttribute getCategory_Status();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.category.Category#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see org.soluvas.category.Category#getDescription()
-	 * @see #getCategory()
-	 * @generated
-	 */
-	EAttribute getCategory_Description();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.category.Category#getMetaDescription <em>Meta Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -578,14 +567,6 @@ public interface CategoryPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CATEGORY__STATUS = eINSTANCE.getCategory_Status();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CATEGORY__DESCRIPTION = eINSTANCE.getCategory_Description();
 
 		/**
 		 * The meta object literal for the '<em><b>Meta Description</b></em>' attribute feature.

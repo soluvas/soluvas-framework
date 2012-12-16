@@ -30,6 +30,7 @@ import org.soluvas.category.CategoryStatus;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CategoryLike;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Describable;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
@@ -61,8 +62,8 @@ import org.soluvas.commons.Sluggable;
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getBundle <em>Bundle</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getCategories <em>Categories</em>}</li>
- *   <li>{@link org.soluvas.category.impl.CategoryImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getMetaDescription <em>Meta Description</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getMetaKeywords <em>Meta Keywords</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getMetaTitle <em>Meta Title</em>}</li>
@@ -357,26 +358,6 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	protected EList<Category> categories;
 
 	/**
-	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStatus()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final CategoryStatus STATUS_EDEFAULT = CategoryStatus.DRAFT;
-
-	/**
-	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStatus()
-	 * @generated
-	 * @ordered
-	 */
-	protected CategoryStatus status = STATUS_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -395,6 +376,26 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final CategoryStatus STATUS_EDEFAULT = CategoryStatus.DRAFT;
+
+	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected CategoryStatus status = STATUS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getMetaDescription() <em>Meta Description</em>}' attribute.
@@ -1110,10 +1111,10 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return getBundle();
 			case CategoryPackage.CATEGORY__CATEGORIES:
 				return getCategories();
-			case CategoryPackage.CATEGORY__STATUS:
-				return getStatus();
 			case CategoryPackage.CATEGORY__DESCRIPTION:
 				return getDescription();
+			case CategoryPackage.CATEGORY__STATUS:
+				return getStatus();
 			case CategoryPackage.CATEGORY__META_DESCRIPTION:
 				return getMetaDescription();
 			case CategoryPackage.CATEGORY__META_KEYWORDS:
@@ -1187,11 +1188,11 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				getCategories().clear();
 				getCategories().addAll((Collection<? extends Category>)newValue);
 				return;
-			case CategoryPackage.CATEGORY__STATUS:
-				setStatus((CategoryStatus)newValue);
-				return;
 			case CategoryPackage.CATEGORY__DESCRIPTION:
 				setDescription((String)newValue);
+				return;
+			case CategoryPackage.CATEGORY__STATUS:
+				setStatus((CategoryStatus)newValue);
 				return;
 			case CategoryPackage.CATEGORY__META_DESCRIPTION:
 				setMetaDescription((String)newValue);
@@ -1271,11 +1272,11 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__CATEGORIES:
 				getCategories().clear();
 				return;
-			case CategoryPackage.CATEGORY__STATUS:
-				setStatus(STATUS_EDEFAULT);
-				return;
 			case CategoryPackage.CATEGORY__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
+				return;
+			case CategoryPackage.CATEGORY__STATUS:
+				setStatus(STATUS_EDEFAULT);
 				return;
 			case CategoryPackage.CATEGORY__META_DESCRIPTION:
 				setMetaDescription(META_DESCRIPTION_EDEFAULT);
@@ -1340,10 +1341,10 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return BUNDLE_EDEFAULT == null ? bundle != null : !BUNDLE_EDEFAULT.equals(bundle);
 			case CategoryPackage.CATEGORY__CATEGORIES:
 				return categories != null && !categories.isEmpty();
-			case CategoryPackage.CATEGORY__STATUS:
-				return status != STATUS_EDEFAULT;
 			case CategoryPackage.CATEGORY__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case CategoryPackage.CATEGORY__STATUS:
+				return status != STATUS_EDEFAULT;
 			case CategoryPackage.CATEGORY__META_DESCRIPTION:
 				return META_DESCRIPTION_EDEFAULT == null ? metaDescription != null : !META_DESCRIPTION_EDEFAULT.equals(metaDescription);
 			case CategoryPackage.CATEGORY__META_KEYWORDS:
@@ -1433,6 +1434,12 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				default: return -1;
 			}
 		}
+		if (baseClass == Describable.class) {
+			switch (derivedFeatureID) {
+				case CategoryPackage.CATEGORY__DESCRIPTION: return CommonsPackage.DESCRIBABLE__DESCRIPTION;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1507,6 +1514,12 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				default: return -1;
 			}
 		}
+		if (baseClass == Describable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.DESCRIBABLE__DESCRIPTION: return CategoryPackage.CATEGORY__DESCRIPTION;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -1546,10 +1559,10 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		result.append(resourceName);
 		result.append(", bundle: ");
 		result.append(bundle);
-		result.append(", status: ");
-		result.append(status);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", status: ");
+		result.append(status);
 		result.append(", metaDescription: ");
 		result.append(metaDescription);
 		result.append(", metaKeywords: ");

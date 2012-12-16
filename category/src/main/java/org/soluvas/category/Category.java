@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CategoryLike;
+import org.soluvas.commons.Describable;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.ResourceAware;
 
@@ -18,7 +19,6 @@ import org.soluvas.commons.ResourceAware;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.category.Category#getStatus <em>Status</em>}</li>
- *   <li>{@link org.soluvas.category.Category#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getMetaDescription <em>Meta Description</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getMetaKeywords <em>Meta Keywords</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getMetaTitle <em>Meta Title</em>}</li>
@@ -33,7 +33,7 @@ import org.soluvas.commons.ResourceAware;
  * @model
  * @generated
  */
-public interface Category extends Parentable<Category>, CategoryLike, ResourceAware, BundleAware, CategoryContainer {
+public interface Category extends Parentable<Category>, CategoryLike, ResourceAware, BundleAware, CategoryContainer, Describable {
 	/**
 	 * Returns the value of the '<em><b>Status</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.soluvas.category.CategoryStatus}.
@@ -62,32 +62,6 @@ public interface Category extends Parentable<Category>, CategoryLike, ResourceAw
 	 * @generated
 	 */
 	void setStatus(CategoryStatus value);
-
-	/**
-	 * Returns the value of the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Description</em>' attribute.
-	 * @see #setDescription(String)
-	 * @see org.soluvas.category.CategoryPackage#getCategory_Description()
-	 * @model
-	 * @generated
-	 */
-	String getDescription();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.category.Category#getDescription <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Description</em>' attribute.
-	 * @see #getDescription()
-	 * @generated
-	 */
-	void setDescription(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Meta Description</b></em>' attribute.

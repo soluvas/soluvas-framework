@@ -13,6 +13,7 @@ import org.soluvas.category.*;
 
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CategoryLike;
+import org.soluvas.commons.Describable;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
@@ -133,6 +134,10 @@ public class CategoryAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseBundleAware(BundleAware object) {
 				return createBundleAwareAdapter();
+			}
+			@Override
+			public Adapter caseDescribable(Describable object) {
+				return createDescribableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -347,6 +352,20 @@ public class CategoryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBundleAwareAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Describable <em>Describable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Describable
+	 * @generated
+	 */
+	public Adapter createDescribableAdapter() {
 		return null;
 	}
 

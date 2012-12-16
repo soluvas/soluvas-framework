@@ -26,12 +26,12 @@ public interface Sluggable extends SerializableEObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs.
+	 * Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs. Optional because some implementations (e.g. CategoryCatalog) can generate slugs dynamically when loading from Catalogs.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Slug</em>' attribute.
 	 * @see #setSlug(String)
 	 * @see org.soluvas.commons.CommonsPackage#getSluggable_Slug()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getSlug();

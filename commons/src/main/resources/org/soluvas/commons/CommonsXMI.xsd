@@ -118,9 +118,9 @@ The ID is Directory entry uid attribute.
             <xsd:documentation>Avatar Photo ID directly usable by Image Store. Used by {#getImageId()}.</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
-        <xsd:attribute name="slug" type="xsd:string" use="required">
+        <xsd:attribute name="slug" type="xsd:string">
           <xsd:annotation>
-            <xsd:documentation>Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs.</xsd:documentation>
+            <xsd:documentation>Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs. Optional because some implementations (e.g. CategoryCatalog) can generate slugs dynamically when loading from Catalogs.</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
         <xsd:attribute name="name" type="xsd:string" use="required">
@@ -175,13 +175,13 @@ The ID is Directory entry uid attribute.
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="id" type="xsd:string" use="required">
+    <xsd:attribute name="id" type="xsd:string">
       <xsd:annotation>
-        <xsd:documentation>ID of the object. Usually either lowercase_underscored or UUID.
+        <xsd:documentation>ID of the object. Usually either lowercase_underscored or UUID. Optional because some implementations (e.g. CategoryCatalog) can generate IDs dynamically when loading from Catalog.
 
-In LDAP, it can either be 'uid' or 'uniqueIdentifier'.
+&lt;p&gt;In LDAP, it can either be 'uid' or 'uniqueIdentifier'.
 
-RFC1274: unique identifer.
+&lt;p&gt;RFC1274: unique identifer.
 LDAP: uniqueIdentifier</xsd:documentation>
       </xsd:annotation>
     </xsd:attribute>
@@ -197,9 +197,9 @@ LDAP: uniqueIdentifier</xsd:documentation>
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="slug" type="xsd:string" use="required">
+    <xsd:attribute name="slug" type="xsd:string">
       <xsd:annotation>
-        <xsd:documentation>Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs.</xsd:documentation>
+        <xsd:documentation>Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs. Optional because some implementations (e.g. CategoryCatalog) can generate slugs dynamically when loading from Catalogs.</xsd:documentation>
       </xsd:annotation>
     </xsd:attribute>
   </xsd:complexType>
@@ -604,26 +604,26 @@ Comes from: getActionType().getEClass().getEPackage().getNsPrefix().</xsd:docume
   <xsd:element name="Parentable" type="commons:Parentable"/>
   <xsd:complexType abstract="true" name="CategoryLike">
     <xsd:annotation>
-      <xsd:documentation>ID is UUID, it won't change when categories are reordered are moved/restructured.
+      <xsd:documentation>ID is prefixed with parent IDs then concatenated by '_', it won't change when categories are reordered are moved/restructured. IDs cannot be duplicate (even draft/inactive/void categories). Slugs can be duplicates only within same parent. Names can be duplicates.
 
-&lt;p&gt;Slug is used as name in JCR repositories.
+&lt;p&gt;Slug is used as name in JCR repositories. If not specified, should be generated based on Name.
 
 &lt;p&gt;Name is used as displayName in JCR repositories.</xsd:documentation>
     </xsd:annotation>
     <xsd:complexContent>
       <xsd:extension base="commons:Positionable">
-        <xsd:attribute name="slug" type="xsd:string" use="required">
+        <xsd:attribute name="slug" type="xsd:string">
           <xsd:annotation>
-            <xsd:documentation>Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs.</xsd:documentation>
+            <xsd:documentation>Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs. Optional because some implementations (e.g. CategoryCatalog) can generate slugs dynamically when loading from Catalogs.</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
-        <xsd:attribute name="id" type="xsd:string" use="required">
+        <xsd:attribute name="id" type="xsd:string">
           <xsd:annotation>
-            <xsd:documentation>ID of the object. Usually either lowercase_underscored or UUID.
+            <xsd:documentation>ID of the object. Usually either lowercase_underscored or UUID. Optional because some implementations (e.g. CategoryCatalog) can generate IDs dynamically when loading from Catalog.
 
-In LDAP, it can either be 'uid' or 'uniqueIdentifier'.
+&lt;p&gt;In LDAP, it can either be 'uid' or 'uniqueIdentifier'.
 
-RFC1274: unique identifer.
+&lt;p&gt;RFC1274: unique identifer.
 LDAP: uniqueIdentifier</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
@@ -659,9 +659,9 @@ Used by {#getName()}.</xsd:documentation>
   </xsd:complexType>
   <xsd:element name="CategoryLike" type="commons:CategoryLike">
     <xsd:annotation>
-      <xsd:documentation>ID is UUID, it won't change when categories are reordered are moved/restructured.
+      <xsd:documentation>ID is prefixed with parent IDs then concatenated by '_', it won't change when categories are reordered are moved/restructured. IDs cannot be duplicate (even draft/inactive/void categories). Slugs can be duplicates only within same parent. Names can be duplicates.
 
-&lt;p&gt;Slug is used as name in JCR repositories.
+&lt;p&gt;Slug is used as name in JCR repositories. If not specified, should be generated based on Name.
 
 &lt;p&gt;Name is used as displayName in JCR repositories.</xsd:documentation>
     </xsd:annotation>

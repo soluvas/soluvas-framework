@@ -9,9 +9,9 @@ package org.soluvas.commons;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * ID is UUID, it won't change when categories are reordered are moved/restructured.
+ * ID is prefixed with parent IDs then concatenated by '_', it won't change when categories are reordered are moved/restructured. IDs cannot be duplicate (even draft/inactive/void categories). Slugs can be duplicates only within same parent. Names can be duplicates.
  * 
- * <p>Slug is used as name in JCR repositories.
+ * <p>Slug is used as name in JCR repositories. If not specified, should be generated based on Name.
  * 
  * <p>Name is used as displayName in JCR repositories.
  * <!-- end-model-doc -->

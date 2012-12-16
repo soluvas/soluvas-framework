@@ -103,16 +103,16 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Object that has ID as String."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="ID of the object. Usually either lowercase_underscored or UUID.&#xA;&#xA;In LDAP, it can either be 'uid' or 'uniqueIdentifier'.&#xA;&#xA;RFC1274: unique identifer.&#xA;LDAP: uniqueIdentifier"/>
+        <details key="documentation" value="ID of the object. Usually either lowercase_underscored or UUID. Optional because some implementations (e.g. CategoryCatalog) can generate IDs dynamically when loading from Catalog.&#xA;&#xA;&lt;p>In LDAP, it can either be 'uid' or 'uniqueIdentifier'.&#xA;&#xA;&lt;p>RFC1274: unique identifer.&#xA;LDAP: uniqueIdentifier"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Sluggable" abstract="true" interface="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slug" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slug" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs."/>
+        <details key="documentation" value="Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs. Optional because some implementations (e.g. CategoryCatalog) can generate slugs dynamically when loading from Catalogs."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -473,7 +473,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="CategoryLike" abstract="true" interface="true"
       eSuperTypes="#//Positionable #//Sluggable #//Imageable #//Identifiable #//NameContainer">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="ID is UUID, it won't change when categories are reordered are moved/restructured.&#xA;&#xA;&lt;p>Slug is used as name in JCR repositories.&#xA;&#xA;&lt;p>Name is used as displayName in JCR repositories."/>
+      <details key="documentation" value="ID is prefixed with parent IDs then concatenated by '_', it won't change when categories are reordered are moved/restructured. IDs cannot be duplicate (even draft/inactive/void categories). Slugs can be duplicates only within same parent. Names can be duplicates.&#xA;&#xA;&lt;p>Slug is used as name in JCR repositories. If not specified, should be generated based on Name.&#xA;&#xA;&lt;p>Name is used as displayName in JCR repositories."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="slugPath" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

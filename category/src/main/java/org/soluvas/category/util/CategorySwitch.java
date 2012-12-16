@@ -11,6 +11,7 @@ import org.soluvas.category.*;
 
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CategoryLike;
+import org.soluvas.commons.Describable;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
@@ -85,6 +86,7 @@ public class CategorySwitch<T> extends Switch<T> {
 				if (result == null) result = caseResourceAware(category);
 				if (result == null) result = caseBundleAware(category);
 				if (result == null) result = caseCategoryContainer(category);
+				if (result == null) result = caseDescribable(category);
 				if (result == null) result = casePositionable(category);
 				if (result == null) result = caseSluggable(category);
 				if (result == null) result = caseImageable(category);
@@ -324,6 +326,21 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBundleAware(BundleAware object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Describable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Describable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDescribable(Describable object) {
 		return null;
 	}
 

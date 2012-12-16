@@ -30,17 +30,17 @@ public interface Identifiable extends SerializableEObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * ID of the object. Usually either lowercase_underscored or UUID.
+	 * ID of the object. Usually either lowercase_underscored or UUID. Optional because some implementations (e.g. CategoryCatalog) can generate IDs dynamically when loading from Catalog.
 	 * 
-	 * In LDAP, it can either be 'uid' or 'uniqueIdentifier'.
+	 * <p>In LDAP, it can either be 'uid' or 'uniqueIdentifier'.
 	 * 
-	 * RFC1274: unique identifer.
+	 * <p>RFC1274: unique identifer.
 	 * LDAP: uniqueIdentifier
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
 	 * @see org.soluvas.commons.CommonsPackage#getIdentifiable_Id()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getId();
