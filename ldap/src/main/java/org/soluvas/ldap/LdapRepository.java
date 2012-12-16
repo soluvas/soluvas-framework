@@ -87,7 +87,7 @@ public interface LdapRepository<T> extends EntityLookup<T, String> {
 	/**
 	 * @return the entityClass
 	 */
-	Class<T> getEntityClass();
+	Class<? extends T> getEntityClass();
 
 	/**
 	 * @return the mapper

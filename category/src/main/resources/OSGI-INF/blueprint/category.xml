@@ -20,7 +20,13 @@
 
 	<bean id="categoryFactory" class="org.soluvas.category.impl.CategoryFactoryImpl" factory-method="getInstance" />
 	<bean id="categoryCatalog" factory-ref="categoryFactory" factory-method="createCategoryCatalog" />
-	<service ref="categoryCatalog" auto-export="interfaces" />
+	<service ref="categoryCatalog" auto-export="interfaces">
+		<service-properties>
+			<entry key="clientId" value="*" />
+			<entry key="tenantId" value="*" />
+			<entry key="tenantEnv" value="*" />
+		</service-properties>
+	</service>
 
 	<bean id="categoryCatalogXmiTracker" class="org.soluvas.category.util.CategoryCatalogXmiTracker">
 		<argument ref="categoryCatalog" />

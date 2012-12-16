@@ -35,9 +35,9 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	private final ObjectPool<LdapConnection> pool;
 	private final LdapMapper mapper;
 	private final String baseDn;
-	private final Class<T> entityClass;
+	private final Class<? extends T> entityClass;
 
-	public PooledLdapRepository(@Nonnull final Class<T> entityClass, @Nonnull final ObjectPool<LdapConnection> pool, @Nonnull final String baseDn) {
+	public PooledLdapRepository(@Nonnull final Class<? extends T> entityClass, @Nonnull final ObjectPool<LdapConnection> pool, @Nonnull final String baseDn) {
 		super();
 		this.entityClass = entityClass;
 		this.pool = pool;
@@ -314,7 +314,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * @return the entityClass
 	 */
 	@Override
-	public Class<T> getEntityClass() {
+	public Class<? extends T> getEntityClass() {
 		return entityClass;
 	}
 
