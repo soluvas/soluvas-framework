@@ -285,13 +285,22 @@ public interface CategoryPackage extends EPackage {
 	int CATEGORY__INCLUDE_IN_MENU = CommonsPackage.PARENTABLE_FEATURE_COUNT + 22;
 
 	/**
+	 * The feature id for the '<em><b>Catalog Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__CATALOG_NAME = CommonsPackage.PARENTABLE_FEATURE_COUNT + 23;
+
+	/**
 	 * The number of structural features of the '<em>Category</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_FEATURE_COUNT = CommonsPackage.PARENTABLE_FEATURE_COUNT + 23;
+	int CATEGORY_FEATURE_COUNT = CommonsPackage.PARENTABLE_FEATURE_COUNT + 24;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.
@@ -341,13 +350,58 @@ public interface CategoryPackage extends EPackage {
 	int CATEGORY_CATALOG__CATEGORIES = CATEGORY_CONTAINER__CATEGORIES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_CATALOG__NAME = CATEGORY_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_CATALOG__RESOURCE_TYPE = CATEGORY_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_CATALOG__RESOURCE_URI = CATEGORY_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_CATALOG__RESOURCE_NAME = CATEGORY_CONTAINER_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Bundle</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_CATALOG__BUNDLE = CATEGORY_CONTAINER_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Catalog</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_CATALOG_FEATURE_COUNT = CATEGORY_CONTAINER_FEATURE_COUNT + 0;
+	int CATEGORY_CATALOG_FEATURE_COUNT = CATEGORY_CONTAINER_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.category.impl.CategoryManagerImpl <em>Manager</em>}' class.
@@ -476,6 +530,17 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCategory_IncludeInMenu();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.category.Category#getCatalogName <em>Catalog Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Catalog Name</em>'.
+	 * @see org.soluvas.category.Category#getCatalogName()
+	 * @see #getCategory()
+	 * @generated
+	 */
+	EAttribute getCategory_CatalogName();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.category.CategoryContainer <em>Container</em>}'.
@@ -623,6 +688,14 @@ public interface CategoryPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CATEGORY__INCLUDE_IN_MENU = eINSTANCE.getCategory_IncludeInMenu();
+
+		/**
+		 * The meta object literal for the '<em><b>Catalog Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY__CATALOG_NAME = eINSTANCE.getCategory_CatalogName();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.

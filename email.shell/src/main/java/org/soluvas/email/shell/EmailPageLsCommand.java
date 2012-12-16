@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceReference;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.NameUtils;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.PageType;
 
@@ -40,7 +41,7 @@ public class EmailPageLsCommand extends OsgiCommandSupport {
 				"Cannot get %s service reference", EmailCatalog.class.getName());
 		final EmailCatalog emailCatalog = Preconditions.checkNotNull(getService(EmailCatalog.class, emailCatalogRef),
 				"Cannot get %s service", EmailCatalog.class.getName());
-		System.out.println(ansi().render("@|negative_on %3s|%-22s|%-10s|%-25s|%-20s|%-20s|%-34s|@",
+		System.out.println(ansi().render("@|negative_on %3s|%-22s|%-10s|%-25s|%-20s|%-20s|%-20s|@",
 				"№", "Page", "Catalog", "Features", "Subject", "Template", "Bundle"));
 		int i = 0;
 		for (final PageType pageType : emailCatalog.getPageTypes()) {
@@ -68,12 +69,12 @@ public class EmailPageLsCommand extends OsgiCommandSupport {
 			
 			final String subject = pageType.getSubjectTemplate().substring(0, 20);
 			final String template = pageType.getPlainTemplate().substring(0, 20);
+			final String bundleAnsi = NameUtils.shortenBundleAnsi(bundle, 20);
 			
-			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-22s|@@|bold,black ||@%-10s@|bold,black ||@%-25s@|bold,black ||@%-20s@|bold,black ||@%-20s@|bold,black ||@%-30s@|bold,yellow %4d|@",
+			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-22s|@@|bold,black ||@%-10s@|bold,black ||@%-25s@|bold,black ||@%-20s@|bold,black ||@%-20s@|bold,black ||@" + bundleAnsi,
 				++i, pageType.getName(), pageType.getResourceName(),
 				Joiner.on(' ').join(featureNames),
-				subject, template,
-				bundle.getSymbolicName(), bundle.getBundleId() ));
+				subject, template ));
 		}
 		System.out.println(ansi().render("@|bold %d|@ pageTypes", i));
 		return null;

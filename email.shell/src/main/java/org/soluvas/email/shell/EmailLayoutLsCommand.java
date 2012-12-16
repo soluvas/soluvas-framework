@@ -11,9 +11,9 @@ import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceReference;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.NameUtils;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.LayoutType;
 
@@ -40,11 +40,11 @@ public class EmailLayoutLsCommand extends OsgiCommandSupport {
 				"Cannot get %s service reference", EmailCatalog.class.getName());
 		final EmailCatalog emailCatalog = Preconditions.checkNotNull(getService(EmailCatalog.class, emailCatalogRef),
 				"Cannot get %s service", EmailCatalog.class.getName());
-		System.out.println(ansi().render("@|negative_on %3s|%-10s|%-10s|%-25s|%-20s|%-20s|%-34s|@",
+		System.out.println(ansi().render("@|negative_on %3s|%-10s|%-10s|%-25s|%-20s|%-20s|%-20s|@",
 				"№", "Layout", "Catalog", "Features", "Subject", "Template", "Bundle"));
 		int i = 0;
 		for (final LayoutType layoutType : emailCatalog.getLayoutTypes()) {
-			final Bundle bundle = layoutType.getBundle(); // TODO: Use BundleAware, and either use bridge pattern or merge into one class
+			final String bundleAnsi = NameUtils.shortenBundleAnsi(layoutType.getBundle(), 20);
 //			final String classNameAnsi = NameUtils.shortenClassAnsi(layoutType.getJavaClassName(), 25);
 			
 			final EClass typeEClass = layoutType.getEClass();
@@ -69,11 +69,10 @@ public class EmailLayoutLsCommand extends OsgiCommandSupport {
 			final String subject = layoutType.getSubjectTemplate().substring(0, 20);
 			final String template = layoutType.getPlainTemplate().substring(0, 20);
 			
-			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-10s|@@|bold,black ||@%-10s@|bold,black ||@%-25s@|bold,black ||@%-20s@|bold,black ||@%-20s@|bold,black ||@%-30s@|bold,yellow %4d|@",
+			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-10s|@@|bold,black ||@%-10s@|bold,black ||@%-25s@|bold,black ||@%-20s@|bold,black ||@%-20s@|bold,black ||@" + bundleAnsi,
 				++i, layoutType.getName(), layoutType.getResourceName(),
 				Joiner.on(' ').join(featureNames),
-				subject, template,
-				bundle.getSymbolicName(), bundle.getBundleId() ));
+				subject, template ));
 		}
 		System.out.println(ansi().render("@|bold %d|@ layoutTypes", i));
 		return null;

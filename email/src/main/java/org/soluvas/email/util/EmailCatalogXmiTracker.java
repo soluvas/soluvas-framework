@@ -371,7 +371,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 						bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]");
 			}
 		}
-		log.info("Removed {} TargetTypes from {} [{}]",
+		log.info("Removed {} email Types from {} [{}]",
 				removedCount, bundle.getSymbolicName(), bundle.getBundleId());
 		
 		// Notify StorySchemaCatalogXmiTracker

@@ -106,6 +106,10 @@ public class CategorySwitch<T> extends Switch<T> {
 				CategoryCatalog categoryCatalog = (CategoryCatalog)theEObject;
 				T result = caseCategoryCatalog(categoryCatalog);
 				if (result == null) result = caseCategoryContainer(categoryCatalog);
+				if (result == null) result = caseNameContainer(categoryCatalog);
+				if (result == null) result = caseResourceAware(categoryCatalog);
+				if (result == null) result = caseBundleAware(categoryCatalog);
+				if (result == null) result = caseNameable(categoryCatalog);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

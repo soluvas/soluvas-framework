@@ -6,12 +6,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.soluvas.category.*;
+import org.soluvas.category.Category;
+import org.soluvas.category.CategoryCatalog;
+import org.soluvas.category.CategoryFactory;
+import org.soluvas.category.CategoryManager;
+import org.soluvas.category.CategoryPackage;
+import org.soluvas.category.CategoryStatus;
 
 /**
  * <!-- begin-user-doc -->
@@ -57,9 +59,9 @@ public class CategoryFactoryImpl extends EFactoryImpl implements CategoryFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CategoryPackage.CATEGORY: return (EObject)createCategory();
-			case CategoryPackage.CATEGORY_CATALOG: return (EObject)createCategoryCatalog();
-			case CategoryPackage.CATEGORY_MANAGER: return (EObject)createCategoryManager();
+			case CategoryPackage.CATEGORY: return createCategory();
+			case CategoryPackage.CATEGORY_CATALOG: return createCategoryCatalog();
+			case CategoryPackage.CATEGORY_MANAGER: return createCategoryManager();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -100,6 +102,7 @@ public class CategoryFactoryImpl extends EFactoryImpl implements CategoryFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Category createCategory() {
 		CategoryImpl category = new CategoryImpl();
 		return category;
@@ -110,6 +113,7 @@ public class CategoryFactoryImpl extends EFactoryImpl implements CategoryFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CategoryCatalog createCategoryCatalog() {
 		CategoryCatalogImpl categoryCatalog = new CategoryCatalogImpl();
 		return categoryCatalog;
@@ -120,6 +124,7 @@ public class CategoryFactoryImpl extends EFactoryImpl implements CategoryFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CategoryManager createCategoryManager() {
 		CategoryManagerImpl categoryManager = new CategoryManagerImpl();
 		return categoryManager;
@@ -150,6 +155,7 @@ public class CategoryFactoryImpl extends EFactoryImpl implements CategoryFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CategoryPackage getCategoryPackage() {
 		return (CategoryPackage)getEPackage();
 	}
@@ -163,6 +169,10 @@ public class CategoryFactoryImpl extends EFactoryImpl implements CategoryFactory
 	@Deprecated
 	public static CategoryPackage getPackage() {
 		return CategoryPackage.eINSTANCE;
+	}
+	
+	public static CategoryFactory getInstance() {
+		return CategoryFactory.eINSTANCE;
 	}
 
 } //CategoryFactoryImpl

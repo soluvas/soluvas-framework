@@ -2,6 +2,10 @@
  */
 package org.soluvas.category;
 
+import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.NameContainer;
+import org.soluvas.commons.ResourceAware;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -13,5 +17,5 @@ package org.soluvas.category;
  * @model
  * @generated
  */
-public interface CategoryCatalog extends CategoryContainer {
+public interface CategoryCatalog extends CategoryContainer, NameContainer, ResourceAware, BundleAware {
 } // CategoryCatalog

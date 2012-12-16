@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 
 import org.fusesource.jansi.Ansi;
+import org.osgi.framework.Bundle;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
@@ -84,6 +85,67 @@ public class NameUtils {
 		final String padding = Strings.repeat(" ", targetLength - shortened.length());
 		return formatClassAnsi(shortened) + padding;
 	}
+
+	/**
+	 * Shorten a package/bundle name by abbreviating package prefixes, then replacing with ellipsis
+	 * as last resort.
+	 * @param name
+	 * @param targetLength
+	 * @return
+	 */
+	public static String shortenPackage(final String name, final int targetLength) {
+		if (Strings.isNullOrEmpty(name))
+			return Strings.repeat(" ", targetLength);
+		String current = name;
+		if (current.length() <= targetLength)
+			return current;
+		// Split into segments
+		final List<String> split = Lists.newArrayList(Splitter.on('.').split(name));
+		// get rid of first to second-from-last segment
+		for (int i = 0; i < split.size() - 1; i++) {
+			split.set(i, split.get(i).substring(0, 1));
+			current = Joiner.on('.').join(split);
+			if (current.length() <= targetLength)
+				return current;
+		}
+		// last resort, force cut then replace with ellipsis
+		return "…" + current.substring(current.length() - targetLength + 1);
+	}
+	
+	/**
+	 * Shorten a package/bundle name by abbreviating package prefixes, then replacing with ellipsis
+	 * as last resort.
+	 * 
+	 * The result is right-padded with space and contain {@link Ansi}-style color instructions.
+	 * 
+	 * @param name
+	 * @param targetLength
+	 * @return
+	 */
+	public static String shortenPackageAnsi(final String name, final int targetLength) {
+		final String shortened = shortenPackage(name, targetLength);
+		final String padding = Strings.repeat(" ", targetLength - shortened.length());
+		return formatClassAnsi(shortened) + padding;
+	}
+	
+	/**
+	 * Shorten a bundle symbolic name plus bundle ID by abbreviating package prefixes, then replacing with ellipsis
+	 * as last resort.
+	 * 
+	 * The result is right-padded with space and contain {@link Ansi}-style color instructions.
+	 * 
+	 * @param bundle {@literal null} is gracefully handled.
+	 * @param targetLength Includes the 5 characters used by space and 4-digit bundle ID.
+	 * 		Recommended is 20.
+	 * @return
+	 */
+	public static String shortenBundleAnsi(final Bundle bundle, final int targetLength) {
+		if (bundle == null)
+			return Strings.repeat(" ", targetLength);
+		final String packageAnsi = shortenPackageAnsi(bundle.getSymbolicName(), targetLength - 5);
+		final String idAnsi = String.format(" @|bold,yellow %4d|@", bundle.getBundleId());
+		return packageAnsi + idAnsi;
+	}
 	
 	/**
 	 * Format a class name as {@link Ansi}-style color codes.
@@ -152,6 +214,30 @@ public class NameUtils {
 		final String shortened = template.replace("{{{", "◁").replace("}}}", "▷")
 				.replace("{{", "«").replace("}}", "»");
 		return shortened;
+	}
+	
+	/**
+	 * Shorten any string with ellipsis, avoiding any exceptions.
+	 */
+	public static String shorten(final String input, final int maxLength) {
+		if (input == null)
+			return null;
+		if (input.length() <= maxLength)
+			return input;
+		else
+			return input.substring(0, maxLength - 1) + "…";
+	}
+	
+	/**
+	 * Shorten any string with ellipsis any ANSI colors, avoiding any exceptions, padded to targetLength.
+	 */
+	public static String shortenAnsi(final String input, final int targetLength) {
+		if (input == null)
+			return null;
+		if (input.length() <= targetLength)
+			return Strings.padEnd(input, targetLength, ' ');
+		else
+			return input.substring(0, targetLength - 1) + "@|bold,black …|@";
 	}
 	
 }

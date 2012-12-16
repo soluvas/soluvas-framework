@@ -71,6 +71,7 @@ import org.soluvas.commons.Sluggable;
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getDefaultSortBy <em>Default Sort By</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#isAnchor <em>Anchor</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#isIncludeInMenu <em>Include In Menu</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getCatalogName <em>Catalog Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -526,6 +527,26 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * @ordered
 	 */
 	protected boolean includeInMenu = INCLUDE_IN_MENU_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getCatalogName() <em>Catalog Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCatalogName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CATALOG_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCatalogName() <em>Catalog Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCatalogName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String catalogName = CATALOG_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1063,6 +1084,27 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getCatalogName() {
+		return catalogName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCatalogName(String newCatalogName) {
+		String oldCatalogName = catalogName;
+		catalogName = newCatalogName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CategoryPackage.CATEGORY__CATALOG_NAME, oldCatalogName, catalogName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -1129,6 +1171,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return isAnchor();
 			case CategoryPackage.CATEGORY__INCLUDE_IN_MENU:
 				return isIncludeInMenu();
+			case CategoryPackage.CATEGORY__CATALOG_NAME:
+				return getCatalogName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1215,6 +1259,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__INCLUDE_IN_MENU:
 				setIncludeInMenu((Boolean)newValue);
 				return;
+			case CategoryPackage.CATEGORY__CATALOG_NAME:
+				setCatalogName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1299,6 +1346,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__INCLUDE_IN_MENU:
 				setIncludeInMenu(INCLUDE_IN_MENU_EDEFAULT);
 				return;
+			case CategoryPackage.CATEGORY__CATALOG_NAME:
+				setCatalogName(CATALOG_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1359,6 +1409,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return anchor != ANCHOR_EDEFAULT;
 			case CategoryPackage.CATEGORY__INCLUDE_IN_MENU:
 				return includeInMenu != INCLUDE_IN_MENU_EDEFAULT;
+			case CategoryPackage.CATEGORY__CATALOG_NAME:
+				return CATALOG_NAME_EDEFAULT == null ? catalogName != null : !CATALOG_NAME_EDEFAULT.equals(catalogName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1577,6 +1629,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		result.append(anchor);
 		result.append(", includeInMenu: ");
 		result.append(includeInMenu);
+		result.append(", catalogName: ");
+		result.append(catalogName);
 		result.append(')');
 		return result.toString();
 	}

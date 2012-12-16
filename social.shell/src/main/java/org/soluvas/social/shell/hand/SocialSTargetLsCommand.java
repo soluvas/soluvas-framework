@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceReference;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.NameUtils;
 import org.soluvas.social.SocialPackage;
 import org.soluvas.social.schema.SocialSchemaCatalog;
 import org.soluvas.social.schema.TargetType;
@@ -41,7 +42,7 @@ public class SocialSTargetLsCommand extends OsgiCommandSupport {
 				"Cannot get %s service reference", SocialSchemaCatalog.class.getName());
 		final SocialSchemaCatalog storySchemaCatalog = Preconditions.checkNotNull(getService(SocialSchemaCatalog.class, storySchemaCatalogRef),
 				"Cannot get %s service", SocialSchemaCatalog.class.getName());
-		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-10s|%-30s|%-34s|@",
+		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-10s|%-30s|%-20s|@",
 				"№", "Target", "Catalog", "Attributes", "Bundle"));
 		int i = 0;
 		for (final TargetType targetType : storySchemaCatalog.getTargetTypes()) {
@@ -68,9 +69,9 @@ public class SocialSTargetLsCommand extends OsgiCommandSupport {
 					return attr.getName();
 				}
 			});
-			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-15s|@@|bold,black ||@%-10s@|bold,black ||@%-30s@|bold,black ||@%-30s@|bold,yellow %4d|@",
-				++i, targetType.getName(), targetType.getResourceName(), Joiner.on(' ').join(attrNames),
-				bundle.getSymbolicName(), bundle.getBundleId() ));
+			final String bundleAnsi = NameUtils.shortenBundleAnsi(bundle, 20);
+			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-15s|@@|bold,black ||@%-10s@|bold,black ||@%-30s@|bold,black ||@" + bundleAnsi,
+				++i, targetType.getName(), targetType.getResourceName(), Joiner.on(' ').join(attrNames) ));
 		}
 		System.out.println(ansi().render("@|bold %d|@ targetTypes", i));
 		return null;

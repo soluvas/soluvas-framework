@@ -11,7 +11,6 @@ import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceReference;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.NameUtils;
@@ -42,11 +41,11 @@ public class EmailSenderLsCommand extends OsgiCommandSupport {
 				"Cannot get %s service reference", EmailCatalog.class.getName());
 		final EmailCatalog emailCatalog = Preconditions.checkNotNull(getService(EmailCatalog.class, emailCatalogRef),
 				"Cannot get %s service", EmailCatalog.class.getName());
-		System.out.println(ansi().render("@|negative_on %3s|%-20s|%-10s|%-25s|%-25s|%-20s|%-34s|@",
+		System.out.println(ansi().render("@|negative_on %3s|%-20s|%-10s|%-25s|%-25s|%-20s|%-20s|@",
 				"№", "Sender", "Catalog", "From", "Email", "Features", "Bundle"));
 		int i = 0;
 		for (final SenderType senderType : emailCatalog.getSenderTypes()) {
-			final Bundle bundle = senderType.getBundle(); // TODO: Use BundleAware, and either use bridge pattern or merge into one class
+			final String bundleAnsi = NameUtils.shortenBundleAnsi(senderType.getBundle(), 20);
 //			final String classNameAnsi = NameUtils.shortenClassAnsi(senderType.getJavaClassName(), 25);
 			
 			final EClass typeEClass = EmailPackage.Literals.SENDER_TYPE;
@@ -68,11 +67,10 @@ public class EmailSenderLsCommand extends OsgiCommandSupport {
 				}
 			});
 			System.out.println(ansi().render(
-					"@|bold,black %3d||@@|bold %-20s|@@|bold,black ||@%-10s@|bold,black ||@%-25s@|bold,black ||@%-25s@|bold,black ||@%-25s@|bold,black ||@%-30s@|bold,yellow %4d|@",
+					"@|bold,black %3d||@@|bold %-20s|@@|bold,black ||@%-10s@|bold,black ||@%-25s@|bold,black ||@%-25s@|bold,black ||@%-25s@|bold,black ||@" + bundleAnsi,
 				++i, senderType.getName(), senderType.getNsPrefix(),
 				NameUtils.shortenMustache(senderType.getFrom()), NameUtils.shortenMustache(senderType.getEmail()),
-				Joiner.on(' ').join(featureNames),
-				bundle.getSymbolicName(), bundle.getBundleId() ));
+				Joiner.on(' ').join(featureNames) ));
 		}
 		System.out.println(ansi().render("@|bold %d|@ senderTypes", i));
 		return null;

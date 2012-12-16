@@ -26,6 +26,7 @@ import org.soluvas.commons.ResourceAware;
  *   <li>{@link org.soluvas.category.Category#getDefaultSortBy <em>Default Sort By</em>}</li>
  *   <li>{@link org.soluvas.category.Category#isAnchor <em>Anchor</em>}</li>
  *   <li>{@link org.soluvas.category.Category#isIncludeInMenu <em>Include In Menu</em>}</li>
+ *   <li>{@link org.soluvas.category.Category#getCatalogName <em>Catalog Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -244,5 +245,30 @@ public interface Category extends Parentable<Category>, CategoryLike, ResourceAw
 	 * @generated
 	 */
 	void setIncludeInMenu(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Catalog Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Name of the category catalog.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Catalog Name</em>' attribute.
+	 * @see #setCatalogName(String)
+	 * @see org.soluvas.category.CategoryPackage#getCategory_CatalogName()
+	 * @model
+	 * @generated
+	 */
+	String getCatalogName();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.category.Category#getCatalogName <em>Catalog Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Catalog Name</em>' attribute.
+	 * @see #getCatalogName()
+	 * @generated
+	 */
+	void setCatalogName(String value);
 
 } // Category

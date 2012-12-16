@@ -15,4 +15,21 @@
 		</argument>
 	</bean>
 	
+	<reference id="globalEventBus" interface="com.google.common.eventbus.EventBus"
+		filter="(tenantId=\*)" ext:proxy-method="classes" />
+
+	<bean id="categoryFactory" class="org.soluvas.category.impl.CategoryFactoryImpl" factory-method="getInstance" />
+	<bean id="categoryCatalog" factory-ref="categoryFactory" factory-method="createCategoryCatalog" />
+	<service ref="categoryCatalog" auto-export="interfaces" />
+
+	<bean id="categoryCatalogXmiTracker" class="org.soluvas.category.util.CategoryCatalogXmiTracker">
+		<argument ref="categoryCatalog" />
+		<argument ref="globalEventBus" />
+	</bean>
+	<bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close">
+		<argument ref="blueprintBundleContext" />
+		<argument value="32" />
+		<argument ref="categoryCatalogXmiTracker" />
+	</bean>	
+
 </blueprint>

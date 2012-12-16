@@ -41,6 +41,11 @@
         <xsd:attribute name="defaultSortBy" type="xsd:string"/>
         <xsd:attribute name="anchor" type="xsd:boolean"/>
         <xsd:attribute name="includeInMenu" type="xsd:boolean"/>
+        <xsd:attribute name="catalogName" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Name of the category catalog.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
@@ -60,7 +65,12 @@
   <xsd:element name="CategoryContainer" type="category:CategoryContainer"/>
   <xsd:complexType name="CategoryCatalog">
     <xsd:complexContent>
-      <xsd:extension base="category:CategoryContainer"/>
+      <xsd:extension base="category:CategoryContainer">
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+        <xsd:attribute name="resourceType" type="commons:ResourceType"/>
+        <xsd:attribute name="resourceUri" type="xsd:string"/>
+        <xsd:attribute name="resourceName" type="xsd:string"/>
+      </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="CategoryCatalog" type="category:CategoryCatalog"/>
