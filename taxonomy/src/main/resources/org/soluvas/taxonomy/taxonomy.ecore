@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="taxonomy" nsURI="http://www.soluvas.org/schema/taxonomy/1.0"
+    nsPrefix="taxonomy">
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeType" abstract="true" interface="true"
+      eSuperTypes="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NsPrefixable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ResourceAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="EXPERIMENTAL.&#xA;&#xA;Two/three approaches:&#xA;&#xA;1. Mixin must be statically designed into Ecore EClass, e.g. BerbatikBags, which inherits from BerbatikMixin (inherits ClothingMixin = SizeMixin + ColorMixin), BatikMixin, and BagsMixin. The upside is all attributes/references merge into the EObject. Downside is we need to permutate all combinations into EClass.&#xA;Not sure yet how it goes with MongoDB, JSON, and XMI import/export. Not sure yet how it goes with VariedProduct, BundleProduct, SubscribedProduct, SharedProduct, etc.&#xA;&#xA;2. Mixin is dynamic. Each product object maintain a list of MixinTypes (which is by default specified when the product is created), and filled mixins are put in an EList. Mixins can be added and removed during runtime, without any build-time project rebuild or EMF regeneration.&#xA;So store owner, even staff, can define new mixin and manipulate existing products with ease. No Mall admin or schema changes required.&#xA;Store staff can browse available mixin types and just add any mixin they want.&#xA;Similar approach with Drupal taxonomy or JCR mixin. Magento is more restrictive because of its inflexible AttributeSet concept. Mixin is like AttributeSet but with cardinality 0..*.&#xA;Probably need better name than mixin though.&#xA;Seems to be most flexible, for Jackson we can have custom converter. My concern is MongoDB and XMI.&#xA;Not sure yet how it goes with MongoDB, JSON, and XMI import/export. Not sure yet how it goes with VariedProduct, BundleProduct, SubscribedProduct, SharedProduct, etc.&#xA;&#xA;3. Hybrid. Mixin is by default static, which hopefully covers 80% use case.&#xA;When you want dynamic, you can add more mixins.&#xA;But ain't this too complicated?&#xA;On the web client side, it's also more work. Not to mention inventory, etc. integration with other systems.&#xA;ProductInfo &amp; principal etc. also use the fully dynamic approach."/>
+    </eAnnotations>
+    <eOperations name="valueOf" eType="#//Attribute">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Convert the string value to a mixin instance."/>
+      </eAnnotations>
+      <eParameters name="stringValue" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eOperations>
+    <eOperations name="create" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiple" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Attribute having single or multiple values."/>
+    </eAnnotations>
+    <eTypeParameters name="T"/>
+    <eOperations name="getString" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Convert the mixin value(s) to a single string. Multiple values are separated with comma.&#xA;&#xA;&lt;p>9 cm would be &quot;9cm&quot;.&#xA;&#xA;&lt;p>9 cm, 20 km would be &quot;9cm,20km&quot;."/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getStrings">
+      <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//List">
+        <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      </eGenericType>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mixinType" eType="#//AttributeType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" transient="true"
+        derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Primary value of the attribute in native type. There may be complementary values like unit.&#xA;In multiple attribute values, this returns the first value.&#xA;&#xA;&lt;p>Note: setting the value will clear all values and reset to a list with 1 element."/>
+      </eAnnotations>
+      <eGenericType eTypeParameter="#//Attribute/T"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values">
+      <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//List">
+        <eTypeArguments eTypeParameter="#//Attribute/T"/>
+      </eGenericType>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TermAttribute">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Use a taxonomy term."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term" eType="#//Term"/>
+    <eGenericSuperTypes eClassifier="#//Attribute">
+      <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnitAttribute">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Mixin with measured unit."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueUnit" eType="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Unit"/>
+    <eGenericSuperTypes eClassifier="#//Attribute">
+      <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBigDecimal"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CurrencyAttribute">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Mixin with monetary value and currency code."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="currencyUnit" eType="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//CurrencyUnit"/>
+    <eGenericSuperTypes eClassifier="#//Attribute">
+      <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBigDecimal"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleAttribute" eSuperTypes="#//Attribute">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Usable for string, int, double, BigDecimal without unit, boolean, and any other primitive type. Latitude/longitude/elevation can be using SimpleAttribute o UnitAttribute since they can either standard units or a custom units (radian?).&#xA;&#xA;How about Enum???"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Vocabulary" abstract="true" eSuperTypes="#//TermContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ResourceAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NsPrefixable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Describable">
+    <eOperations name="isRequired" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="True if minValues > 0."/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiple" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minValues" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="0 means optional, 1 means required, and so on."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxValues" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="-1 means no maximum number of values."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Term" eSuperTypes="#//TermContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ResourceAware">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vocabulary" eType="#//Vocabulary"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ListVocabulary" eSuperTypes="#//Vocabulary"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TreeVocabulary" eSuperTypes="#//Vocabulary"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FreeVocabulary" eSuperTypes="#//Vocabulary"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TermContainer" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terms" upperBound="-1"
+        eType="#//Term">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="List of terms in a Vocabulary or if the Term is nested (tree vocabulary)."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TaxonomyCatalog" eSuperTypes="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ResourceAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vocabularies" upperBound="-1"
+        eType="#//Vocabulary" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

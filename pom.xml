@@ -29,6 +29,8 @@
 		<module>mongo</module>
 		<module>email</module>
 		<module>email.shell</module>
+		<module>taxonomy</module>
+		<module>taxonomy.shell</module>
 		<module>category</module>
 		<module>category.shell</module>
 		<module>folder</module>
