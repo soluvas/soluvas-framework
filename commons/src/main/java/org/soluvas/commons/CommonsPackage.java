@@ -1601,7 +1601,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 40;
+	int UNIT = 41;
 
 
 	/**
@@ -1612,7 +1612,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 41;
+	int LIST = 42;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -1622,7 +1622,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 42;
+	int MAP = 43;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -1632,7 +1632,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 43;
+	int SET = 44;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -1642,7 +1642,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 44;
+	int COLLECTION = 45;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -1652,7 +1652,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 45;
+	int MULTIMAP = 46;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -1662,7 +1662,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 46;
+	int NAVIGABLE_MAP = 47;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -1672,7 +1672,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 47;
+	int QUEUE = 48;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -1682,7 +1682,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 48;
+	int MULTISET = 49;
 
 
 	/**
@@ -1693,7 +1693,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 49;
+	int SERIALIZABLE = 50;
 
 
 	/**
@@ -1704,7 +1704,49 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 50;
+	int BUNDLE = 51;
+
+
+	/**
+	 * The meta object id for the '<em>Big Money Provider</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.joda.money.BigMoneyProvider
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
+	 * @generated
+	 */
+	int BIG_MONEY_PROVIDER = 52;
+
+	/**
+	 * The meta object id for the '<em>Quantity</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see javax.measure.quantity.Quantity
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQuantity()
+	 * @generated
+	 */
+	int QUANTITY = 40;
+
+	/**
+	 * The meta object id for the '<em>Measurable</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see javax.measure.Measurable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMeasurable()
+	 * @generated
+	 */
+	int MEASURABLE = 53;
+
+
+	/**
+	 * The meta object id for the '<em>Big Decimal</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.math.BigDecimal
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigDecimal()
+	 * @generated
+	 */
+	int BIG_DECIMAL = 54;
 
 
 	/**
@@ -2654,7 +2696,7 @@ public interface CommonsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Unit</em>'.
 	 * @see javax.measure.unit.Unit
-	 * @model instanceClass="javax.measure.unit.Unit"
+	 * @model instanceClass="javax.measure.unit.Unit" typeParameters="Q" QBounds="org.soluvas.commons.Quantity"
 	 * @generated
 	 */
 	EDataType getUnit();
@@ -2768,6 +2810,50 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getBundle();
+
+	/**
+	 * Returns the meta object for data type '{@link org.joda.money.BigMoneyProvider <em>Big Money Provider</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Big Money Provider</em>'.
+	 * @see org.joda.money.BigMoneyProvider
+	 * @model instanceClass="org.joda.money.BigMoneyProvider"
+	 * @generated
+	 */
+	EDataType getBigMoneyProvider();
+
+	/**
+	 * Returns the meta object for data type '{@link javax.measure.quantity.Quantity <em>Quantity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Quantity</em>'.
+	 * @see javax.measure.quantity.Quantity
+	 * @model instanceClass="javax.measure.quantity.Quantity"
+	 * @generated
+	 */
+	EDataType getQuantity();
+
+	/**
+	 * Returns the meta object for data type '{@link javax.measure.Measurable <em>Measurable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Measurable</em>'.
+	 * @see javax.measure.Measurable
+	 * @model instanceClass="javax.measure.Measurable" typeParameters="Q" QBounds="org.soluvas.commons.Quantity"
+	 * @generated
+	 */
+	EDataType getMeasurable();
+
+	/**
+	 * Returns the meta object for data type '{@link java.math.BigDecimal <em>Big Decimal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Big Decimal</em>'.
+	 * @see java.math.BigDecimal
+	 * @model instanceClass="java.math.BigDecimal"
+	 * @generated
+	 */
+	EDataType getBigDecimal();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -3692,6 +3778,46 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType BUNDLE = eINSTANCE.getBundle();
+
+		/**
+		 * The meta object literal for the '<em>Big Money Provider</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.joda.money.BigMoneyProvider
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
+		 * @generated
+		 */
+		EDataType BIG_MONEY_PROVIDER = eINSTANCE.getBigMoneyProvider();
+
+		/**
+		 * The meta object literal for the '<em>Quantity</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see javax.measure.quantity.Quantity
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQuantity()
+		 * @generated
+		 */
+		EDataType QUANTITY = eINSTANCE.getQuantity();
+
+		/**
+		 * The meta object literal for the '<em>Measurable</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see javax.measure.Measurable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMeasurable()
+		 * @generated
+		 */
+		EDataType MEASURABLE = eINSTANCE.getMeasurable();
+
+		/**
+		 * The meta object literal for the '<em>Big Decimal</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.math.BigDecimal
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigDecimal()
+		 * @generated
+		 */
+		EDataType BIG_DECIMAL = eINSTANCE.getBigDecimal();
 
 	}
 

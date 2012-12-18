@@ -3,6 +3,7 @@
 package org.soluvas.commons.impl;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,8 @@ import java.util.NavigableMap;
 import java.util.Queue;
 import java.util.Set;
 
+import javax.measure.Measurable;
+import javax.measure.quantity.Quantity;
 import javax.measure.unit.Unit;
 
 import org.eclipse.emf.ecore.EClass;
@@ -18,15 +21,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.joda.money.BigMoneyProvider;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
-import org.soluvas.commons.*;
 import org.soluvas.commons.Added;
 import org.soluvas.commons.AddedMany;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.AttributeNotification;
 import org.soluvas.commons.AttributeSet;
 import org.soluvas.commons.AttributeUnset;
+import org.soluvas.commons.CategoryInfo;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.EClassStatus;
@@ -85,17 +89,17 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CommonsPackage.APP_MANIFEST: return (EObject)createAppManifest();
-			case CommonsPackage.PERSON_INFO: return (EObject)createPersonInfo();
-			case CommonsPackage.WEB_ADDRESS: return (EObject)createWebAddress();
-			case CommonsPackage.ADDED: return (EObject)createAdded();
-			case CommonsPackage.ATTRIBUTE_SET: return (EObject)createAttributeSet();
-			case CommonsPackage.ATTRIBUTE_UNSET: return (EObject)createAttributeUnset();
-			case CommonsPackage.REMOVED: return (EObject)createRemoved();
-			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return (EObject)createAttributeNotification();
-			case CommonsPackage.ADDED_MANY: return (EObject)createAddedMany();
-			case CommonsPackage.REMOVED_MANY: return (EObject)createRemovedMany();
-			case CommonsPackage.CATEGORY_INFO: return (EObject)createCategoryInfo();
+			case CommonsPackage.APP_MANIFEST: return createAppManifest();
+			case CommonsPackage.PERSON_INFO: return createPersonInfo();
+			case CommonsPackage.WEB_ADDRESS: return createWebAddress();
+			case CommonsPackage.ADDED: return createAdded();
+			case CommonsPackage.ATTRIBUTE_SET: return createAttributeSet();
+			case CommonsPackage.ATTRIBUTE_UNSET: return createAttributeUnset();
+			case CommonsPackage.REMOVED: return createRemoved();
+			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return createAttributeNotification();
+			case CommonsPackage.ADDED_MANY: return createAddedMany();
+			case CommonsPackage.REMOVED_MANY: return createRemovedMany();
+			case CommonsPackage.CATEGORY_INFO: return createCategoryInfo();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -121,6 +125,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createDateTimeFromString(eDataType, initialValue);
 			case CommonsPackage.CURRENCY_UNIT:
 				return createCurrencyUnitFromString(eDataType, initialValue);
+			case CommonsPackage.QUANTITY:
+				return createQuantityFromString(eDataType, initialValue);
 			case CommonsPackage.UNIT:
 				return createUnitFromString(eDataType, initialValue);
 			case CommonsPackage.LIST:
@@ -141,6 +147,12 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createMultisetFromString(eDataType, initialValue);
 			case CommonsPackage.SERIALIZABLE:
 				return createSerializableFromString(eDataType, initialValue);
+			case CommonsPackage.BIG_MONEY_PROVIDER:
+				return createBigMoneyProviderFromString(eDataType, initialValue);
+			case CommonsPackage.MEASURABLE:
+				return createMeasurableFromString(eDataType, initialValue);
+			case CommonsPackage.BIG_DECIMAL:
+				return createBigDecimalFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -166,6 +178,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertDateTimeToString(eDataType, instanceValue);
 			case CommonsPackage.CURRENCY_UNIT:
 				return convertCurrencyUnitToString(eDataType, instanceValue);
+			case CommonsPackage.QUANTITY:
+				return convertQuantityToString(eDataType, instanceValue);
 			case CommonsPackage.UNIT:
 				return convertUnitToString(eDataType, instanceValue);
 			case CommonsPackage.LIST:
@@ -186,6 +200,12 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertMultisetToString(eDataType, instanceValue);
 			case CommonsPackage.SERIALIZABLE:
 				return convertSerializableToString(eDataType, instanceValue);
+			case CommonsPackage.BIG_MONEY_PROVIDER:
+				return convertBigMoneyProviderToString(eDataType, instanceValue);
+			case CommonsPackage.MEASURABLE:
+				return convertMeasurableToString(eDataType, instanceValue);
+			case CommonsPackage.BIG_DECIMAL:
+				return convertBigDecimalToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -312,6 +332,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CategoryInfo createCategoryInfo() {
 		CategoryInfoImpl categoryInfo = new CategoryInfoImpl();
 		return categoryInfo;
@@ -436,19 +457,17 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public Unit createUnitFromString(EDataType eDataType, String initialValue) {
-		return (Unit)super.createFromString(eDataType, initialValue);
+	public Unit<?> createUnitFromString(EDataType eDataType, String initialValue) {
+		return initialValue != null ? (Unit<?>)Unit.valueOf(initialValue) : null;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public String convertUnitToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
+		return instanceValue != null ? instanceValue.toString() : null;
 	}
 
 	/**
@@ -613,6 +632,76 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BigMoneyProvider createBigMoneyProviderFromString(EDataType eDataType, String initialValue) {
+		return (BigMoneyProvider)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertBigMoneyProviderToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Quantity createQuantityFromString(EDataType eDataType, String initialValue) {
+		return (Quantity)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertQuantityToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Measurable<?> createMeasurableFromString(EDataType eDataType, String initialValue) {
+		return (Measurable<?>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertMeasurableToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public BigDecimal createBigDecimalFromString(EDataType eDataType, String initialValue) {
+		return initialValue != null ? new BigDecimal(initialValue) : null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public String convertBigDecimalToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue != null ? instanceValue.toString() : null;
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

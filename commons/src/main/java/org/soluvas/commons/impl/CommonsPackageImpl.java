@@ -3,6 +3,7 @@
 package org.soluvas.commons.impl;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,8 @@ import java.util.NavigableMap;
 import java.util.Queue;
 import java.util.Set;
 
+import javax.measure.Measurable;
+import javax.measure.quantity.Quantity;
 import javax.measure.unit.Unit;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -23,6 +26,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.joda.money.BigMoneyProvider;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.osgi.framework.Bundle;
@@ -433,6 +437,34 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EDataType bundleEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType bigMoneyProviderEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType quantityEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType measurableEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType bigDecimalEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1457,6 +1489,42 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getBigMoneyProvider() {
+		return bigMoneyProviderEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getQuantity() {
+		return quantityEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getMeasurable() {
+		return measurableEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getBigDecimal() {
+		return bigDecimalEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
@@ -1607,6 +1675,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		// Create data types
 		dateTimeEDataType = createEDataType(DATE_TIME);
 		currencyUnitEDataType = createEDataType(CURRENCY_UNIT);
+		quantityEDataType = createEDataType(QUANTITY);
 		unitEDataType = createEDataType(UNIT);
 		listEDataType = createEDataType(LIST);
 		mapEDataType = createEDataType(MAP);
@@ -1618,6 +1687,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		multisetEDataType = createEDataType(MULTISET);
 		serializableEDataType = createEDataType(SERIALIZABLE);
 		bundleEDataType = createEDataType(BUNDLE);
+		bigMoneyProviderEDataType = createEDataType(BIG_MONEY_PROVIDER);
+		measurableEDataType = createEDataType(MEASURABLE);
+		bigDecimalEDataType = createEDataType(BIG_DECIMAL);
 	}
 
 	/**
@@ -1664,6 +1736,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		ETypeParameter objectsNotificationEClass_T = addETypeParameter(objectsNotificationEClass, "T");
 		ETypeParameter eObjectLinkedEClass_T = addETypeParameter(eObjectLinkedEClass, "T");
 		ETypeParameter parentableEClass_P = addETypeParameter(parentableEClass, "P");
+		ETypeParameter unitEDataType_Q = addETypeParameter(unitEDataType, "Q");
 		addETypeParameter(listEDataType, "T");
 		addETypeParameter(mapEDataType, "K");
 		addETypeParameter(mapEDataType, "V");
@@ -1675,6 +1748,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addETypeParameter(navigableMapEDataType, "V");
 		addETypeParameter(queueEDataType, "T");
 		addETypeParameter(multisetEDataType, "T");
+		ETypeParameter measurableEDataType_Q = addETypeParameter(measurableEDataType, "Q");
 
 		// Set bounds for type parameters
 		EGenericType g1 = createEGenericType(this.getIdentifiable());
@@ -1701,6 +1775,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		objectsNotificationEClass_T.getEBounds().add(g1);
 		g1 = createEGenericType(theEcorePackage.getEObject());
 		eObjectLinkedEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getQuantity());
+		unitEDataType_Q.getEBounds().add(g1);
+		g1 = createEGenericType(this.getQuantity());
+		measurableEDataType_Q.getEBounds().add(g1);
 
 		// Add supertypes to classes
 		appManifestEClass.getESuperTypes().add(this.getPositionable());
@@ -1944,6 +2022,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		// Initialize data types
 		initEDataType(dateTimeEDataType, DateTime.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(currencyUnitEDataType, CurrencyUnit.class, "CurrencyUnit", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(quantityEDataType, Quantity.class, "Quantity", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(unitEDataType, Unit.class, "Unit", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(listEDataType, List.class, "List", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(mapEDataType, Map.class, "Map", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1955,6 +2034,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(multisetEDataType, Multiset.class, "Multiset", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(serializableEDataType, Serializable.class, "Serializable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(bundleEDataType, Bundle.class, "Bundle", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(bigMoneyProviderEDataType, BigMoneyProvider.class, "BigMoneyProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(measurableEDataType, Measurable.class, "Measurable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(bigDecimalEDataType, BigDecimal.class, "BigDecimal", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

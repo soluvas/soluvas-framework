@@ -16,6 +16,7 @@ import org.soluvas.commons.CommonsException;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
 
@@ -118,7 +119,9 @@ public class TenantUtils {
 	 * @return
 	 */
 	public static TenantRef getTenant(@Nonnull final CommandSession session) {
-		final BundleContext bundleContext = FrameworkUtil.getBundle(TenantUtils.class).getBundleContext();
+		final BundleContext bundleContext = Preconditions.checkNotNull(
+				FrameworkUtil.getBundle(TenantUtils.class).getBundleContext(),
+				"Cannot get bundleContext for %s", TenantUtils.class.getName());
 		final ServiceReference<ServiceLookup> serviceLookupRef = bundleContext.getServiceReference(ServiceLookup.class);
 		final ServiceLookup svcLookup = bundleContext.getService(serviceLookupRef);
 		try {

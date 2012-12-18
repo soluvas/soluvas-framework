@@ -27,12 +27,12 @@ public class EmfUtils {
 	
 	public static EPackage getEPackage(Class<? extends EPackage> pkg) {
 		try {
-			Field eInstanceField = pkg.getDeclaredField("eINSTANCE");
-			EPackage ePackage = (EPackage) eInstanceField.get(pkg);
+			final Field eInstanceField = pkg.getDeclaredField("eINSTANCE");
+			final EPackage ePackage = (EPackage) eInstanceField.get(pkg);
 			return ePackage;
 		} catch (Exception e) {
-			Throwables.propagate(e);
-			return null;
+			throw new CommonsException(e, "Cannot get EPackage for %s",
+					pkg.getName());
 		}
 	}
 

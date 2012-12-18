@@ -2,16 +2,38 @@
  */
 package org.soluvas.data.impl;
 
+import javax.measure.DecimalMeasure;
+import javax.measure.Measure;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
-
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.ETypeParameter;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.soluvas.commons.CommonsPackage;
-
+import org.soluvas.data.AttributeSemantic;
+import org.soluvas.data.AttributeType;
+import org.soluvas.data.CurrencyValue;
+import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataFactory;
 import org.soluvas.data.DataPackage;
-
+import org.soluvas.data.FreeVocab;
+import org.soluvas.data.ListVocab;
+import org.soluvas.data.MeasureValue;
+import org.soluvas.data.Mixin;
+import org.soluvas.data.RangeValue;
+import org.soluvas.data.Term;
+import org.soluvas.data.TermContainer;
+import org.soluvas.data.TermValue;
+import org.soluvas.data.TreeVocab;
+import org.soluvas.data.Value;
+import org.soluvas.data.Vocab;
 import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.data.repository.CrudRepositoryBase;
 import org.soluvas.data.repository.PagingAndSortingRepository;
@@ -23,6 +45,111 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
  * @generated
  */
 public class DataPackageImpl extends EPackageImpl implements DataPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass attributeTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass valueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass measureValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass currencyValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mixinEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass rangeValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass termValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass vocabEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass termEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass listVocabEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass treeVocabEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass freeVocabEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass termContainerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataCatalogEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum attributeSemanticEEnum = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -43,6 +170,20 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	private EDataType crudRepositoryBaseEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType measureEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType decimalMeasureEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -113,6 +254,365 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EClass getAttributeType() {
+		return attributeTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getAttributeType_Label() {
+		return (EAttribute)attributeTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getAttributeType_MinValues() {
+		return (EAttribute)attributeTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getAttributeType_MaxValues() {
+		return (EAttribute)attributeTypeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getAttributeType_DataTypeName() {
+		return (EAttribute)attributeTypeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getValue() {
+		return valueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getValue_Semantic() {
+		return (EAttribute)valueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getValue_DisplayValue() {
+		return (EAttribute)valueEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMeasureValue() {
+		return measureValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMeasureValue_ValueUnit() {
+		return (EAttribute)measureValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMeasureValue_Value() {
+		return (EAttribute)measureValueEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCurrencyValue() {
+		return currencyValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getCurrencyValue_CurrencyUnit() {
+		return (EAttribute)currencyValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMixin() {
+		return mixinEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getMixin_AttributeTypes() {
+		return (EReference)mixinEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getRangeValue() {
+		return rangeValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getRangeValue_StartValue() {
+		return (EAttribute)rangeValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getRangeValue_EndValue() {
+		return (EAttribute)rangeValueEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTermValue() {
+		return termValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTermValue_Term() {
+		return (EReference)termValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTermValue_SlugPath() {
+		return (EAttribute)termValueEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTermValue_Value() {
+		return (EAttribute)termValueEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getVocab() {
+		return vocabEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTerm() {
+		return termEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTerm_Vocab() {
+		return (EReference)termEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getListVocab() {
+		return listVocabEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTreeVocab() {
+		return treeVocabEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getFreeVocab() {
+		return freeVocabEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTermContainer() {
+		return termContainerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTermContainer_Terms() {
+		return (EReference)termContainerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDataCatalog() {
+		return dataCatalogEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDataCatalog_Vocabs() {
+		return (EReference)dataCatalogEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDataCatalog_Mixins() {
+		return (EReference)dataCatalogEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDataCatalog_Terms() {
+		return (EReference)dataCatalogEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDataCatalog_AttributeTypes() {
+		return (EReference)dataCatalogEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EEnum getAttributeSemantic() {
+		return attributeSemanticEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EDataType getCrudRepository() {
 		return crudRepositoryEDataType;
 	}
@@ -122,6 +622,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getPagingAndSortingRepository() {
 		return pagingAndSortingRepositoryEDataType;
 	}
@@ -131,6 +632,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getCrudRepositoryBase() {
 		return crudRepositoryBaseEDataType;
 	}
@@ -140,6 +642,27 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EDataType getMeasure() {
+		return measureEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getDecimalMeasure() {
+		return decimalMeasureEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public DataFactory getDataFactory() {
 		return (DataFactory)getEFactoryInstance();
 	}
@@ -162,10 +685,65 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		if (isCreated) return;
 		isCreated = true;
 
+		// Create classes and their features
+		attributeTypeEClass = createEClass(ATTRIBUTE_TYPE);
+		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__LABEL);
+		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__MIN_VALUES);
+		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__MAX_VALUES);
+		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__DATA_TYPE_NAME);
+
+		valueEClass = createEClass(VALUE);
+		createEAttribute(valueEClass, VALUE__SEMANTIC);
+		createEAttribute(valueEClass, VALUE__DISPLAY_VALUE);
+
+		measureValueEClass = createEClass(MEASURE_VALUE);
+		createEAttribute(measureValueEClass, MEASURE_VALUE__VALUE_UNIT);
+		createEAttribute(measureValueEClass, MEASURE_VALUE__VALUE);
+
+		currencyValueEClass = createEClass(CURRENCY_VALUE);
+		createEAttribute(currencyValueEClass, CURRENCY_VALUE__CURRENCY_UNIT);
+
+		mixinEClass = createEClass(MIXIN);
+		createEReference(mixinEClass, MIXIN__ATTRIBUTE_TYPES);
+
+		rangeValueEClass = createEClass(RANGE_VALUE);
+		createEAttribute(rangeValueEClass, RANGE_VALUE__START_VALUE);
+		createEAttribute(rangeValueEClass, RANGE_VALUE__END_VALUE);
+
+		termValueEClass = createEClass(TERM_VALUE);
+		createEReference(termValueEClass, TERM_VALUE__TERM);
+		createEAttribute(termValueEClass, TERM_VALUE__SLUG_PATH);
+		createEAttribute(termValueEClass, TERM_VALUE__VALUE);
+
+		vocabEClass = createEClass(VOCAB);
+
+		termEClass = createEClass(TERM);
+		createEReference(termEClass, TERM__VOCAB);
+
+		listVocabEClass = createEClass(LIST_VOCAB);
+
+		treeVocabEClass = createEClass(TREE_VOCAB);
+
+		freeVocabEClass = createEClass(FREE_VOCAB);
+
+		termContainerEClass = createEClass(TERM_CONTAINER);
+		createEReference(termContainerEClass, TERM_CONTAINER__TERMS);
+
+		dataCatalogEClass = createEClass(DATA_CATALOG);
+		createEReference(dataCatalogEClass, DATA_CATALOG__VOCABS);
+		createEReference(dataCatalogEClass, DATA_CATALOG__MIXINS);
+		createEReference(dataCatalogEClass, DATA_CATALOG__TERMS);
+		createEReference(dataCatalogEClass, DATA_CATALOG__ATTRIBUTE_TYPES);
+
+		// Create enums
+		attributeSemanticEEnum = createEEnum(ATTRIBUTE_SEMANTIC);
+
 		// Create data types
 		crudRepositoryEDataType = createEDataType(CRUD_REPOSITORY);
 		pagingAndSortingRepositoryEDataType = createEDataType(PAGING_AND_SORTING_REPOSITORY);
 		crudRepositoryBaseEDataType = createEDataType(CRUD_REPOSITORY_BASE);
+		measureEDataType = createEDataType(MEASURE);
+		decimalMeasureEDataType = createEDataType(DECIMAL_MEASURE);
 	}
 
 	/**
@@ -193,11 +771,172 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		// Obtain other dependent packages
 		CommonsPackage theCommonsPackage = (CommonsPackage)EPackage.Registry.INSTANCE.getEPackage(CommonsPackage.eNS_URI);
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
+		// Create type parameters
+		ETypeParameter valueEClass_T = addETypeParameter(valueEClass, "T");
+		ETypeParameter measureValueEClass_Q = addETypeParameter(measureValueEClass, "Q");
+		ETypeParameter rangeValueEClass_T = addETypeParameter(rangeValueEClass, "T");
+		addETypeParameter(crudRepositoryEDataType, "T");
+		ETypeParameter crudRepositoryEDataType_ID = addETypeParameter(crudRepositoryEDataType, "ID");
+		addETypeParameter(pagingAndSortingRepositoryEDataType, "T");
+		ETypeParameter pagingAndSortingRepositoryEDataType_ID = addETypeParameter(pagingAndSortingRepositoryEDataType, "ID");
+		addETypeParameter(crudRepositoryBaseEDataType, "T");
+		ETypeParameter crudRepositoryBaseEDataType_ID = addETypeParameter(crudRepositoryBaseEDataType, "ID");
+		addETypeParameter(measureEDataType, "V");
+		ETypeParameter measureEDataType_Q = addETypeParameter(measureEDataType, "Q");
+		ETypeParameter decimalMeasureEDataType_Q = addETypeParameter(decimalMeasureEDataType, "Q");
+
+		// Set bounds for type parameters
+		EGenericType g1 = createEGenericType(theCommonsPackage.getQuantity());
+		measureValueEClass_Q.getEBounds().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getSerializable());
+		crudRepositoryEDataType_ID.getEBounds().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getSerializable());
+		pagingAndSortingRepositoryEDataType_ID.getEBounds().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getSerializable());
+		crudRepositoryBaseEDataType_ID.getEBounds().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getQuantity());
+		measureEDataType_Q.getEBounds().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getQuantity());
+		decimalMeasureEDataType_Q.getEBounds().add(g1);
+
+		// Add supertypes to classes
+		attributeTypeEClass.getESuperTypes().add(theCommonsPackage.getNsPrefixable());
+		attributeTypeEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
+		attributeTypeEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		attributeTypeEClass.getESuperTypes().add(theCommonsPackage.getBundleAware());
+		g1 = createEGenericType(this.getValue());
+		EGenericType g2 = createEGenericType(theEcorePackage.getEBigDecimal());
+		g1.getETypeArguments().add(g2);
+		measureValueEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getValue());
+		g2 = createEGenericType(theEcorePackage.getEBigDecimal());
+		g1.getETypeArguments().add(g2);
+		currencyValueEClass.getEGenericSuperTypes().add(g1);
+		mixinEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
+		mixinEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		mixinEClass.getESuperTypes().add(theCommonsPackage.getBundleAware());
+		mixinEClass.getESuperTypes().add(theCommonsPackage.getNsPrefixable());
+		mixinEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
+		g1 = createEGenericType(this.getValue());
+		g2 = createEGenericType(rangeValueEClass_T);
+		g1.getETypeArguments().add(g2);
+		rangeValueEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getValue());
+		g2 = createEGenericType(theEcorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		termValueEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getIdentifiable());
+		termValueEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getSluggable());
+		termValueEClass.getEGenericSuperTypes().add(g1);
+		vocabEClass.getESuperTypes().add(this.getTermContainer());
+		vocabEClass.getESuperTypes().add(theCommonsPackage.getBundleAware());
+		vocabEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		vocabEClass.getESuperTypes().add(theCommonsPackage.getNsPrefixable());
+		vocabEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
+		termEClass.getESuperTypes().add(this.getTermContainer());
+		termEClass.getESuperTypes().add(theCommonsPackage.getBundleAware());
+		termEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
+		termEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		listVocabEClass.getESuperTypes().add(this.getVocab());
+		treeVocabEClass.getESuperTypes().add(this.getVocab());
+		freeVocabEClass.getESuperTypes().add(this.getVocab());
+		dataCatalogEClass.getESuperTypes().add(theCommonsPackage.getBundleAware());
+		dataCatalogEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		dataCatalogEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
+
+		// Initialize classes and features; add operations and parameters
+		initEClass(attributeTypeEClass, AttributeType.class, "AttributeType", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAttributeType_Label(), ecorePackage.getEString(), "label", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttributeType_MinValues(), theEcorePackage.getELong(), "minValues", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttributeType_MaxValues(), theEcorePackage.getELong(), "maxValues", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttributeType_DataTypeName(), ecorePackage.getEString(), "dataTypeName", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		EOperation op = addEOperation(attributeTypeEClass, this.getValue(), "valueOf", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "stringValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(attributeTypeEClass, this.getValue(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(attributeTypeEClass, theEcorePackage.getEBoolean(), "isRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(attributeTypeEClass, theEcorePackage.getEBoolean(), "isMultiple", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getValue_Semantic(), this.getAttributeSemantic(), "semantic", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getValue_DisplayValue(), ecorePackage.getEString(), "displayValue", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(valueEClass, theEcorePackage.getEString(), "getString", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(valueEClass, null, "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(valueEClass_T);
+		initEOperation(op, g1);
+
+		initEClass(measureValueEClass, MeasureValue.class, "MeasureValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		g1 = createEGenericType(theCommonsPackage.getUnit());
+		g2 = createEGenericType(measureValueEClass_Q);
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getMeasureValue_ValueUnit(), g1, "valueUnit", null, 0, 1, MeasureValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMeasureValue_Value(), theEcorePackage.getEBigDecimal(), "value", null, 0, 1, MeasureValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(measureValueEClass, null, "getMeasure", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getDecimalMeasure());
+		g2 = createEGenericType(measureValueEClass_Q);
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		initEClass(currencyValueEClass, CurrencyValue.class, "CurrencyValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCurrencyValue_CurrencyUnit(), theCommonsPackage.getCurrencyUnit(), "currencyUnit", null, 0, 1, CurrencyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mixinEClass, Mixin.class, "Mixin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMixin_AttributeTypes(), this.getAttributeType(), null, "attributeTypes", null, 0, -1, Mixin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(rangeValueEClass, RangeValue.class, "RangeValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		g1 = createEGenericType(rangeValueEClass_T);
+		initEAttribute(getRangeValue_StartValue(), g1, "startValue", null, 0, 1, RangeValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(rangeValueEClass_T);
+		initEAttribute(getRangeValue_EndValue(), g1, "endValue", null, 0, 1, RangeValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(termValueEClass, TermValue.class, "TermValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTermValue_Term(), this.getTerm(), null, "term", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTermValue_SlugPath(), theEcorePackage.getEString(), "slugPath", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTermValue_Value(), theEcorePackage.getEString(), "value", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(vocabEClass, Vocab.class, "Vocab", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(termEClass, Term.class, "Term", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTerm_Vocab(), this.getVocab(), null, "vocab", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(listVocabEClass, ListVocab.class, "ListVocab", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(treeVocabEClass, TreeVocab.class, "TreeVocab", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(freeVocabEClass, FreeVocab.class, "FreeVocab", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(termContainerEClass, TermContainer.class, "TermContainer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTermContainer_Terms(), this.getTerm(), null, "terms", null, 0, -1, TermContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dataCatalogEClass, DataCatalog.class, "DataCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDataCatalog_Vocabs(), this.getVocab(), null, "vocabs", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataCatalog_Mixins(), this.getMixin(), null, "mixins", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataCatalog_Terms(), this.getTerm(), null, "terms", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataCatalog_AttributeTypes(), this.getAttributeType(), null, "attributeTypes", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(attributeSemanticEEnum, AttributeSemantic.class, "AttributeSemantic");
+		addEEnumLiteral(attributeSemanticEEnum, AttributeSemantic.EQUAL);
+		addEEnumLiteral(attributeSemanticEEnum, AttributeSemantic.LESS_THAN);
+		addEEnumLiteral(attributeSemanticEEnum, AttributeSemantic.LESS_THAN_OR_EQUAL);
+		addEEnumLiteral(attributeSemanticEEnum, AttributeSemantic.GREATER_THAN);
+		addEEnumLiteral(attributeSemanticEEnum, AttributeSemantic.GREATER_THAN_OR_EQUAL);
 
 		// Initialize data types
 		initEDataType(crudRepositoryEDataType, CrudRepository.class, "CrudRepository", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(pagingAndSortingRepositoryEDataType, PagingAndSortingRepository.class, "PagingAndSortingRepository", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(crudRepositoryBaseEDataType, CrudRepositoryBase.class, "CrudRepositoryBase", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(measureEDataType, Measure.class, "Measure", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(decimalMeasureEDataType, DecimalMeasure.class, "DecimalMeasure", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -205,6 +944,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		// Create annotations
 		// http://www.eclipse.org/emf/2002/GenModel
 		createGenModelAnnotations();
+		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
+		createExtendedMetaDataAnnotations();
 	}
 
 	/**
@@ -216,40 +957,146 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	protected void createGenModelAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/GenModel";		
 		addAnnotation
-		  (null, 
+		  (attributeTypeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Object type of the data structure values."
+			 "documentation", "EXPERIMENTAL.\n\nTwo/three approaches:\n\n1. Mixin must be statically designed into Ecore EClass, e.g. BerbatikBags, which inherits from BerbatikMixin (inherits ClothingMixin = SizeMixin + ColorMixin), BatikMixin, and BagsMixin. The upside is all attributes/references merge into the EObject. Downside is we need to permutate all combinations into EClass.\nNot sure yet how it goes with MongoDB, JSON, and XMI import/export. Not sure yet how it goes with VariedProduct, BundleProduct, SubscribedProduct, SharedProduct, etc.\n\n2. Mixin is dynamic. Each product object maintain a list of MixinTypes (which is by default specified when the product is created), and filled mixins are put in an EList. Mixins can be added and removed during runtime, without any build-time project rebuild or EMF regeneration.\nSo store owner, even staff, can define new mixin and manipulate existing products with ease. No Mall admin or schema changes required.\nStore staff can browse available mixin types and just add any mixin they want.\nSimilar approach with Drupal taxonomy or JCR mixin. Magento is more restrictive because of its inflexible AttributeSet concept. Mixin is like AttributeSet but with cardinality 0..*.\nProbably need better name than mixin though.\nSeems to be most flexible, for Jackson we can have custom converter. My concern is MongoDB and XMI.\nNot sure yet how it goes with MongoDB, JSON, and XMI import/export. Not sure yet how it goes with VariedProduct, BundleProduct, SubscribedProduct, SharedProduct, etc.\n\n3. Hybrid #1. Mixin is by default static, which hopefully covers 80% use case.\nWhen you want dynamic, you can add more mixins.\nBut ain\'t this too complicated?\nOn the web client side, it\'s also more work. Not to mention inventory, etc. integration with other systems.\nProductInfo & principal etc. also use the fully dynamic approach.\n\n4. Hybrid #2. Mixin is by default dynamic, which covers 80% of the customization.\nAnd for things like category, tag, color, size, they\'re static, with code support. i.e. must be generated by EMF.\n"
 		   });		
 		addAnnotation
-		  (null, 
+		  (attributeTypeEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "documentation", "ID type of the data structure identifiers, usually String."
+			 "documentation", "Convert the string value to a mixin instance."
 		   });		
 		addAnnotation
-		  (null, 
+		  (attributeTypeEClass.getEOperations().get(2), 
 		   source, 
 		   new String[] {
-			 "documentation", "Object type of the data structure values."
+			 "documentation", "True if minValues > 0."
 		   });		
 		addAnnotation
-		  (null, 
+		  (attributeTypeEClass.getEOperations().get(3), 
 		   source, 
 		   new String[] {
-			 "documentation", "ID type of the data structure identifiers, usually String."
+			 "documentation", "true if maxValues is > 1."
 		   });		
 		addAnnotation
-		  (null, 
+		  (getAttributeType_MinValues(), 
 		   source, 
 		   new String[] {
-			 "documentation", "Object type of the data structure values."
+			 "documentation", "0 means optional, 1 means required, and so on."
 		   });		
 		addAnnotation
-		  (null, 
+		  (getAttributeType_MaxValues(), 
 		   source, 
 		   new String[] {
-			 "documentation", "ID type of the data structure identifiers, usually String."
+			 "documentation", "1 means singular. -1 means no maximum number of values."
+		   });		
+		addAnnotation
+		  (valueEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Attribute having single or multiple values.\n\n{\nattributes:\n  color: [{value: \"red\", displayValue: \"Merah\"}],\n  berbatikMaterial: [{value: \"katun\", displayValue: \"Katun\"}],\n  berbatikShawlLength: [{value: \"90cm\", displayValue: \"90 cm\"}],\nmixins: {\n  \"color\": {\n    attributeTypes: {\n      color: {className: \"TermValue\", \"name\": \"color\", \"label\": \"Warna\"}, // nsPrefix: builtin\n    },\n  \"berbatik\": {\n    attributeTypes: {\n      berbatikMaterial: {className: \"TermValue\", nsPrefix: \"berbatik\", name: \"material\", label: \"Material\"},\n      berbatikBatikAge: {className: \"TermValue\", nsPrefix: \"berbatik\", name: \"batikAge\", label: \"Batik Age\"},\n    }\n  },\n}\n\n\n\"berbatik:material\": [{value: \"Katun\"}],\n\nnggak enak:\nproduct[\'berbatik:material\'][0].displayValue\n\nlebih enak:\n\n<p>Warna: {{product.attributes.color.0.displayValue}}</p>\n<p>Material: {{product.attributes.berbatikMaterial.0.displayValue}}</p>\n"
+		   });		
+		addAnnotation
+		  (valueEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Convert the mixin value to a single string. Paths are separated with \'/\'. Ranges are separated with \"-\" or \"..\" (TODO: which one?).\nSemantics are prefixed: \"<\", \"<=\", \">\", \">=\". equal \"=\" is default if not specified.\n\n<p>9 cm would be \"9cm\". Bags > Hobos would be \"bags_hobos\" (using ID) or \"bags/hobos\" (using slugPath).\n\n<p>9 cm, 20 km would be \"9cm,20km\".\n\n<p>\"2012-12-30-2012-12-30\"\n\"2012-12-30..2012-12-30\"\n\"2012-12-30T15:15:70.863+0700-2012-12-30T15:15:70.863+0700\"\n\"2012-12-30T15:15:70.863+0700..2012-12-30T15:15:70.863+0700\"\n\"atang-sutisna-rudi-wijaya\"\n\"atang-sutisna..rudi-wijaya\"\n\"atang_sutisna-rudi_wijaya\"\n\"atang_sutisna..rudi_wijaya\"\n"
+		   });		
+		addAnnotation
+		  (valueEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Primary value of the attribute in native type. There may be complementary values like unit.\nIn multiple attribute values, this returns the first value.\n\n<p>Note: setting the value will clear all values and reset to a list with 1 element."
+		   });		
+		addAnnotation
+		  (getValue_Semantic(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Optional semantic of this value.\n\ni.e. value = 50 cm, semantic = less than, means \"< 50 cm\"."
+		   });		
+		addAnnotation
+		  (measureValueEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Mixin with measured unit."
+		   });		
+		addAnnotation
+		  (currencyValueEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Mixin with monetary value and currency code."
+		   });		
+		addAnnotation
+		  (rangeValueEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Range attribute\'s primary value can be either the start or end value."
+		   });		
+		addAnnotation
+		  (termValueEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Use a taxonomy term. \'value\' is the ID of the term."
+		   });		
+		addAnnotation
+		  (getTermValue_SlugPath(), 
+		   source, 
+		   new String[] {
+			 "documentation", "\'/\'-separated slug path."
+		   });		
+		addAnnotation
+		  (vocabEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "pindah jd attributetype."
+		   });						
+		addAnnotation
+		  (getTermContainer_Terms(), 
+		   source, 
+		   new String[] {
+			 "documentation", "List of terms in a Vocabulary or if the Term is nested (tree vocabulary)."
+		   });	
+	}
+
+	/**
+	 * Initializes the annotations for <b>http:///org/eclipse/emf/ecore/util/ExtendedMetaData</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createExtendedMetaDataAnnotations() {
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																		
+		addAnnotation
+		  (vocabEClass, 
+		   source, 
+		   new String[] {
+			 "name", "Vocab"
+		   });		
+		addAnnotation
+		  (listVocabEClass, 
+		   source, 
+		   new String[] {
+			 "name", "ListVocab"
+		   });		
+		addAnnotation
+		  (treeVocabEClass, 
+		   source, 
+		   new String[] {
+			 "name", "TreeVocab"
+		   });		
+		addAnnotation
+		  (freeVocabEClass, 
+		   source, 
+		   new String[] {
+			 "name", "FreeVocab"
+		   });			
+		addAnnotation
+		  (dataCatalogEClass, 
+		   source, 
+		   new String[] {
+			 "name", "DataCatalog"
 		   });
 	}
 

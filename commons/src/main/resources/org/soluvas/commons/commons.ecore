@@ -55,7 +55,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="DateTime" instanceClassName="org.joda.time.DateTime"/>
   <eClassifiers xsi:type="ecore:EDataType" name="CurrencyUnit" instanceClassName="org.joda.money.CurrencyUnit"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Unit" instanceClassName="javax.measure.unit.Unit"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Quantity" instanceClassName="javax.measure.quantity.Quantity"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Unit" instanceClassName="javax.measure.unit.Unit">
+    <eTypeParameters name="Q">
+      <eBounds eClassifier="#//Quantity"/>
+    </eTypeParameters>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Timestamped" abstract="true" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Can be used by any EObject that wants to preserve creationTime/modificationTime."/>
@@ -503,4 +508,11 @@
       <eTypeArguments eClassifier="#//CategoryInfo"/>
     </eGenericSuperTypes>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="BigMoneyProvider" instanceClassName="org.joda.money.BigMoneyProvider"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Measurable" instanceClassName="javax.measure.Measurable">
+    <eTypeParameters name="Q">
+      <eBounds eClassifier="#//Quantity"/>
+    </eTypeParameters>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="BigDecimal" instanceClassName="java.math.BigDecimal"/>
 </ecore:EPackage>
