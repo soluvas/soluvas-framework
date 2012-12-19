@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 /**
  * @author ceefour
  */
+@SuppressWarnings("serial")
 public class LowerEnumModule extends SimpleModule {
 	
 	public LowerEnumModule() {

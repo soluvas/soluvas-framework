@@ -17,6 +17,8 @@ public class JsonUtils {
 		final ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
+		mapper.registerModule(new LowerEnumModule());
+		mapper.registerModule(new EmfModule());
 		mapper.registerModule(new JodaModule());
 //		mapper.registerModule(new GuavaModule());
 		writer = mapper.writer();
