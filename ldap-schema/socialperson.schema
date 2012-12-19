@@ -109,18 +109,27 @@ attributetype ( 2.25.31030703689307962575270284666844839901.16
 	SINGLE-VALUE 
  )
 
+attributetype ( 2.25.31030703689307962575270284666844839901.17 
+	NAME 'bannerImageId' 
+	DESC 'Image ID used for banner, usually Billboard size (970x250).' 
+	EQUALITY caseExactMatch 
+	ORDERING caseExactOrderingMatch 
+	SUBSTR caseExactSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+ )
+
 objectclass ( 2.25.31030703689307962575270284666844839901.2 
 	NAME 'socialPerson' 
 	DESC 'Person in the Web 2.0 age.' 
 	AUXILIARY 
-	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier ) 
+	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier $ bannerImageId ) 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.4 
 	NAME 'socialObject' 
 	DESC 'Any object that wants to have social attributes.' 
 	AUXILIARY 
-	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier ) 
+	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier $ bannerImageId ) 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.9 
