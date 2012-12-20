@@ -421,10 +421,9 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public DateTime createDateTimeFromString(EDataType eDataType, String initialValue) {
-		return (DateTime)super.createFromString(eDataType, initialValue);
+		return initialValue != null ? new DateTime(initialValue) : null;
 	}
 
 	/**
