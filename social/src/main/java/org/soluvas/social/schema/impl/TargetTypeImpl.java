@@ -25,6 +25,7 @@ import org.soluvas.social.Target;
 import org.soluvas.social.schema.SchemaPackage;
 import org.soluvas.social.schema.TargetType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Preconditions;
 
 /**
@@ -370,9 +371,8 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	@Override
+	@Override @JsonIgnore
 	public Bundle getBundle() {
 		return bundle;
 	}
@@ -485,9 +485,8 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	@Override
+	@Override @JsonIgnore
 	public Class<Target> getJavaClass() {
 		return javaClass;
 	}
@@ -531,9 +530,8 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	@Override
+	@Override @JsonIgnore
 	public EClass getEClass() {
 		if (eClass != null && eClass.eIsProxy()) {
 			InternalEObject oldEClass = (InternalEObject)eClass;
@@ -663,9 +661,8 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	@Override
+	@Override @JsonIgnore
 	public EFactory getEFactory() {
 		if (eFactory != null && eFactory.eIsProxy()) {
 			InternalEObject oldEFactory = (InternalEObject)eFactory;
@@ -705,6 +702,7 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNsPrefix() {
 		return nsPrefix;
 	}
@@ -714,6 +712,7 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNsPrefix(String newNsPrefix) {
 		String oldNsPrefix = nsPrefix;
 		nsPrefix = newNsPrefix;

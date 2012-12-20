@@ -45,38 +45,48 @@ public class PushMessageTrackerImpl implements PushMessageTracker {
 		if (trackingId == null)
 			return;
 		
-		synchronized (queues) {
-			Queue<PushMessage> queue = queues.get(trackingId);
-			if (queue == null) {
-				queue = new ConcurrentLinkedQueue<PushMessage>();
-				queues.put(trackingId, queue);
-			}
-			log.debug("Tracking {} push message: {}", trackingId, message);
-			queue.add(message);
+		Queue<PushMessage> queue = queues.get(trackingId);
+		if (queue == null) {
+			queue = new ConcurrentLinkedQueue<PushMessage>();
+			queues.put(trackingId, queue);
 		}
+		log.debug("Tracking {} push message: {}", trackingId, message);
+		queue.add(message);
 	}
+	
+	protected Map<String, PushMessage> doGetPushesAndRemove(String trackingId) {
+		final Queue<PushMessage> queue = queues.get(trackingId);
+		if (queue == null) {
+			log.debug("Queue tracker {} empty", trackingId);
+			return ImmutableMap.of();
+		}
+		final Map<String, PushMessage> pushes = Maps.uniqueIndex(queue, new Function<PushMessage, String>() {
+			@Override
+			public String apply(PushMessage input) {
+				return "/topic/" + input.getTopic();
+			}
+		});
+		log.debug("Queue tracker {} contained {} messages, now removing", trackingId, pushes.size());
+		queues.remove(trackingId);
+		return pushes;
+	}
+	
 	
 	/* (non-Javadoc)
 	 * @see org.soluvas.push.PushMessageTracker#getPushesAndRemove(java.lang.String)
 	 */
 	@Override
 	public Map<String, PushMessage> getPushesAndRemove(String trackingId) {
-		synchronized (queues) {
-			Queue<PushMessage> queue = queues.get(trackingId);
-			if (queue == null) {
-				log.debug("Queue tracker {} empty", trackingId);
-				return ImmutableMap.of();
-			}
-			ImmutableMap<String, PushMessage> pushes = Maps.uniqueIndex(queue, new Function<PushMessage, String>() {
-				@Override
-				public String apply(PushMessage input) {
-					return "/topic/" + input.getTopic();
-				}
-			});
-			log.debug("Queue tracker {} contained {} messages, now removing", trackingId, pushes.size());
-			queues.remove(trackingId);
+		final Map<String, PushMessage> pushes = doGetPushesAndRemove(trackingId);
+		// We expect at least 1 push
+		if (!pushes.isEmpty())
 			return pushes;
+		// wait a bit, who knows something else is processing
+		try {
+			Thread.sleep(50);
+		} catch (InterruptedException e) {
 		}
+		return doGetPushesAndRemove(trackingId);
 	}
 
 }
