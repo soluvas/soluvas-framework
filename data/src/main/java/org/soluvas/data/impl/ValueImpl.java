@@ -150,13 +150,10 @@ public class ValueImpl<T> extends EObjectImpl implements Value<T> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public String getString() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return getValue() != null ? getValue().toString() : null;
 	}
 
 	/**

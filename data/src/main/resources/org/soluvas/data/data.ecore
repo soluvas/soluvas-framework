@@ -92,17 +92,14 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Mixin with measured unit."/>
     </eAnnotations>
-    <eTypeParameters name="Q">
-      <eBounds eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Quantity"/>
-    </eTypeParameters>
     <eOperations name="getMeasure">
       <eGenericType eClassifier="#//DecimalMeasure">
-        <eTypeArguments eTypeParameter="#//MeasureValue/Q"/>
+        <eTypeArguments/>
       </eGenericType>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueUnit">
       <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Unit">
-        <eTypeArguments eTypeParameter="#//MeasureValue/Q"/>
+        <eTypeArguments/>
       </eGenericType>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBigDecimal"/>

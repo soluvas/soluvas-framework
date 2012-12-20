@@ -145,8 +145,8 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <Q extends Quantity> MeasureValue<Q> createMeasureValue() {
-		MeasureValueImpl<Q> measureValue = new MeasureValueImpl<Q>();
+	public MeasureValue createMeasureValue() {
+		MeasureValueImpl measureValue = new MeasureValueImpl();
 		return measureValue;
 	}
 

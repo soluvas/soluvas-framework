@@ -5,7 +5,6 @@ package org.soluvas.data.impl;
 import java.math.BigDecimal;
 
 import javax.measure.DecimalMeasure;
-import javax.measure.quantity.Quantity;
 import javax.measure.unit.Unit;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -13,6 +12,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.MeasureValue;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +29,7 @@ import org.soluvas.data.MeasureValue;
  *
  * @generated
  */
-public class MeasureValueImpl<Q extends Quantity> extends ValueImpl<BigDecimal> implements MeasureValue<Q> {
+public class MeasureValueImpl extends ValueImpl<BigDecimal> implements MeasureValue {
 	/**
 	 * The cached value of the '{@link #getValueUnit() <em>Value Unit</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -37,7 +38,7 @@ public class MeasureValueImpl<Q extends Quantity> extends ValueImpl<BigDecimal> 
 	 * @generated
 	 * @ordered
 	 */
-	protected Unit<Q> valueUnit;
+	protected Unit<?> valueUnit;
 
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -67,19 +68,19 @@ public class MeasureValueImpl<Q extends Quantity> extends ValueImpl<BigDecimal> 
 		super();
 	}
 
-	public MeasureValueImpl(DecimalMeasure<Q> measure) {
+	public MeasureValueImpl(DecimalMeasure<?> measure) {
 		super();
 		setValue(measure.getValue());
 		setValueUnit(measure.getUnit());
 	}
 
-	public MeasureValueImpl(Unit<Q> unit, BigDecimal value) {
+	public MeasureValueImpl(Unit<?> unit, BigDecimal value) {
 		super();
 		setValue(value);
 		setValueUnit(unit);
 	}
 
-	public MeasureValueImpl(Unit<Q> unit, double value) {
+	public MeasureValueImpl(Unit<?> unit, double value) {
 		super();
 		setValue(new BigDecimal(value));
 		setValueUnit(unit);
@@ -101,7 +102,7 @@ public class MeasureValueImpl<Q extends Quantity> extends ValueImpl<BigDecimal> 
 	 * @generated
 	 */
 	@Override
-	public Unit<Q> getValueUnit() {
+	public Unit<?> getValueUnit() {
 		return valueUnit;
 	}
 
@@ -110,8 +111,9 @@ public class MeasureValueImpl<Q extends Quantity> extends ValueImpl<BigDecimal> 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValueUnit(Unit<Q> newValueUnit) {
-		Unit<Q> oldValueUnit = valueUnit;
+	@Override
+	public void setValueUnit(Unit<?> newValueUnit) {
+		Unit<?> oldValueUnit = valueUnit;
 		valueUnit = newValueUnit;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.MEASURE_VALUE__VALUE_UNIT, oldValueUnit, valueUnit));
@@ -122,6 +124,7 @@ public class MeasureValueImpl<Q extends Quantity> extends ValueImpl<BigDecimal> 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BigDecimal getValue() {
 		return value;
 	}
@@ -142,13 +145,11 @@ public class MeasureValueImpl<Q extends Quantity> extends ValueImpl<BigDecimal> 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
+	@JsonIgnore
 	@Override
-	public DecimalMeasure<Q> getMeasure() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public DecimalMeasure<?> getMeasure() {
+		return DecimalMeasure.valueOf(getValue(), getValueUnit());
 	}
 
 	/**
@@ -177,7 +178,7 @@ public class MeasureValueImpl<Q extends Quantity> extends ValueImpl<BigDecimal> 
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DataPackage.MEASURE_VALUE__VALUE_UNIT:
-				setValueUnit((Unit<Q>)newValue);
+				setValueUnit((Unit<?>)newValue);
 				return;
 			case DataPackage.MEASURE_VALUE__VALUE:
 				setValue((BigDecimal)newValue);
@@ -195,7 +196,7 @@ public class MeasureValueImpl<Q extends Quantity> extends ValueImpl<BigDecimal> 
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DataPackage.MEASURE_VALUE__VALUE_UNIT:
-				setValueUnit((Unit<Q>)null);
+				setValueUnit((Unit<?>)null);
 				return;
 			case DataPackage.MEASURE_VALUE__VALUE:
 				setValue(VALUE_EDEFAULT);
@@ -236,6 +237,11 @@ public class MeasureValueImpl<Q extends Quantity> extends ValueImpl<BigDecimal> 
 		result.append(value);
 		result.append(')');
 		return result.toString();
+	}
+	
+	@Override
+	public String getString() {
+		return (getValue() != null ? getValue().toString() : "") + getValueUnit();
 	}
 
 } //MeasureValueImpl

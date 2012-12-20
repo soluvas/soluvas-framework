@@ -86,7 +86,7 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 				return createValueAdapter();
 			}
 			@Override
-			public <Q extends Quantity> Adapter caseMeasureValue(MeasureValue<Q> object) {
+			public Adapter caseMeasureValue(MeasureValue object) {
 				return createMeasureValueAdapter();
 			}
 			@Override

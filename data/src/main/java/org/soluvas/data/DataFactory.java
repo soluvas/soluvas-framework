@@ -38,7 +38,7 @@ public interface DataFactory extends EFactory {
 	 * @return a new object of class '<em>Measure Value</em>'.
 	 * @generated
 	 */
-	<Q extends Quantity> MeasureValue<Q> createMeasureValue();
+	MeasureValue createMeasureValue();
 
 	/**
 	 * Returns a new object of class '<em>Currency Value</em>'.

@@ -28,6 +28,7 @@ import org.soluvas.commons.Sluggable;
  * @generated
  */
 public interface TermValue extends Value<String>, Identifiable, Sluggable {
+	
 	/**
 	 * Returns the value of the '<em><b>Term</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -93,6 +94,7 @@ public interface TermValue extends Value<String>, Identifiable, Sluggable {
 	 * @model
 	 * @generated
 	 */
+	@Override
 	String getValue();
 
 	/**

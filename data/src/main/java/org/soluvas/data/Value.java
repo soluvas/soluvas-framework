@@ -4,6 +4,8 @@ package org.soluvas.data;
 
 import org.soluvas.commons.SerializableEObject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Value</b></em>'.
@@ -151,6 +153,7 @@ public interface Value<T> extends SerializableEObject {
 	 * @model kind="operation"
 	 * @generated
 	 */
+	@JsonIgnore
 	String getString();
 
 } // Value

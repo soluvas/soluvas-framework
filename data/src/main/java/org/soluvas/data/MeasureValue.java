@@ -5,9 +5,6 @@ package org.soluvas.data;
 import java.math.BigDecimal;
 
 import javax.measure.DecimalMeasure;
-
-import javax.measure.quantity.Quantity;
-
 import javax.measure.unit.Unit;
 
 /**
@@ -28,10 +25,10 @@ import javax.measure.unit.Unit;
  * </p>
  *
  * @see org.soluvas.data.DataPackage#getMeasureValue()
- * @model superTypes="org.soluvas.data.Value<org.eclipse.emf.ecore.EBigDecimal>" QBounds="org.soluvas.commons.Quantity"
+ * @model superTypes="org.soluvas.data.Value<org.eclipse.emf.ecore.EBigDecimal>"
  * @generated
  */
-public interface MeasureValue<Q extends Quantity> extends Value<BigDecimal> {
+public interface MeasureValue extends Value<BigDecimal> {
 	/**
 	 * Returns the value of the '<em><b>Value Unit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -43,10 +40,10 @@ public interface MeasureValue<Q extends Quantity> extends Value<BigDecimal> {
 	 * @return the value of the '<em>Value Unit</em>' attribute.
 	 * @see #setValueUnit(Unit)
 	 * @see org.soluvas.data.DataPackage#getMeasureValue_ValueUnit()
-	 * @model dataType="org.soluvas.commons.Unit<Q>"
+	 * @model dataType="org.soluvas.commons.Unit<?>"
 	 * @generated
 	 */
-	Unit<Q> getValueUnit();
+	Unit<?> getValueUnit();
 
 	/**
 	 * Sets the value of the '{@link org.soluvas.data.MeasureValue#getValueUnit <em>Value Unit</em>}' attribute.
@@ -56,7 +53,7 @@ public interface MeasureValue<Q extends Quantity> extends Value<BigDecimal> {
 	 * @see #getValueUnit()
 	 * @generated
 	 */
-	void setValueUnit(Unit<Q> value);
+	void setValueUnit(Unit<?> value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
@@ -72,6 +69,7 @@ public interface MeasureValue<Q extends Quantity> extends Value<BigDecimal> {
 	 * @model
 	 * @generated
 	 */
+	@Override
 	BigDecimal getValue();
 
 	/**
@@ -87,9 +85,9 @@ public interface MeasureValue<Q extends Quantity> extends Value<BigDecimal> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="org.soluvas.data.DecimalMeasure<Q>"
+	 * @model kind="operation" dataType="org.soluvas.data.DecimalMeasure<?>"
 	 * @generated
 	 */
-	DecimalMeasure<Q> getMeasure();
+	DecimalMeasure<?> getMeasure();
 
 } // MeasureValue

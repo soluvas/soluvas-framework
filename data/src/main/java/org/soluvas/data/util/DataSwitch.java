@@ -94,7 +94,7 @@ public class DataSwitch<T1> extends Switch<T1> {
 				return result;
 			}
 			case DataPackage.MEASURE_VALUE: {
-				MeasureValue<?> measureValue = (MeasureValue<?>)theEObject;
+				MeasureValue measureValue = (MeasureValue)theEObject;
 				T1 result = caseMeasureValue(measureValue);
 				if (result == null) result = caseValue(measureValue);
 				if (result == null) result = defaultCase(theEObject);
@@ -254,7 +254,7 @@ public class DataSwitch<T1> extends Switch<T1> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public <Q extends Quantity> T1 caseMeasureValue(MeasureValue<Q> object) {
+	public T1 caseMeasureValue(MeasureValue object) {
 		return null;
 	}
 

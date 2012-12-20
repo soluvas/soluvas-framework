@@ -775,7 +775,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		// Create type parameters
 		ETypeParameter valueEClass_T = addETypeParameter(valueEClass, "T");
-		ETypeParameter measureValueEClass_Q = addETypeParameter(measureValueEClass, "Q");
 		ETypeParameter rangeValueEClass_T = addETypeParameter(rangeValueEClass, "T");
 		addETypeParameter(crudRepositoryEDataType, "T");
 		ETypeParameter crudRepositoryEDataType_ID = addETypeParameter(crudRepositoryEDataType, "ID");
@@ -788,9 +787,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		ETypeParameter decimalMeasureEDataType_Q = addETypeParameter(decimalMeasureEDataType, "Q");
 
 		// Set bounds for type parameters
-		EGenericType g1 = createEGenericType(theCommonsPackage.getQuantity());
-		measureValueEClass_Q.getEBounds().add(g1);
-		g1 = createEGenericType(theCommonsPackage.getSerializable());
+		EGenericType g1 = createEGenericType(theCommonsPackage.getSerializable());
 		crudRepositoryEDataType_ID.getEBounds().add(g1);
 		g1 = createEGenericType(theCommonsPackage.getSerializable());
 		pagingAndSortingRepositoryEDataType_ID.getEBounds().add(g1);
@@ -875,14 +872,14 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		initEClass(measureValueEClass, MeasureValue.class, "MeasureValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		g1 = createEGenericType(theCommonsPackage.getUnit());
-		g2 = createEGenericType(measureValueEClass_Q);
+		g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getMeasureValue_ValueUnit(), g1, "valueUnit", null, 0, 1, MeasureValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMeasureValue_Value(), theEcorePackage.getEBigDecimal(), "value", null, 0, 1, MeasureValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(measureValueEClass, null, "getMeasure", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(this.getDecimalMeasure());
-		g2 = createEGenericType(measureValueEClass_Q);
+		g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
