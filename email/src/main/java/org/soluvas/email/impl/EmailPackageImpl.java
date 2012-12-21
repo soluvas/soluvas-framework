@@ -928,6 +928,13 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		op = addEOperation(emailManagerEClass, this.getSender(), "createSender", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "qname", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(emailManagerEClass, null, "sendAll", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getPage(), "page", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theCommonsPackage.getList());
+		g2 = createEGenericType(theEcorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
 		initEClass(senderEClass, Sender.class, "Sender", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSender_SenderType(), this.getSenderType(), null, "senderType", null, 1, 1, Sender.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1090,6 +1097,12 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Create an email Page using the tenant-wide default layout."
+		   });		
+		addAnnotation
+		  (emailManagerEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Compose the page to all recipients, then sends all of them. Returns the list of Email IDs returned by mailer."
 		   });		
 		addAnnotation
 		  (senderEClass, 

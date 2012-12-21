@@ -474,6 +474,10 @@
         <element xmi:type="ecore:EOperation" href="email.ecore#//EmailManager/createSender"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_gWiasUa0EeKlFLgpnxJY1g"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_RNEskEtnEeKVLpEb4QvQkA" type="2002">
+        <element xmi:type="ecore:EOperation" href="email.ecore#//EmailManager/sendAll"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_RNEskUtnEeKVLpEb4QvQkA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_8a_F8UWNEeK1qbOICpWDVg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_8a_F8kWNEeK1qbOICpWDVg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_8a_F80WNEeK1qbOICpWDVg"/>

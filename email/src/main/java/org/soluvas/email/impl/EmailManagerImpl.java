@@ -12,6 +12,8 @@ import javax.mail.Session;
 import org.apache.commons.mail.Email;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.email.DefaultScope;
@@ -29,6 +31,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -48,6 +51,8 @@ import com.google.common.collect.Lists;
 @SuppressWarnings("serial")
 public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	
+	private static final Logger log = LoggerFactory.getLogger(EmailManagerImpl.class);
+
 	private final EmailCatalog emailCatalog;
 	private final String defaultLayoutNsPrefix;
 	private final String defaultLayoutName;
@@ -136,6 +141,33 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 		final Sender sender = EmailUtils.createSender(senderNsPrefix, senderName);
 		injectDefaultScope(sender);
 		return sender;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public List<String> sendAll(Page page) {
+		final List<Email> emails = page.composeAll();
+		
+		final List<String> results = ImmutableList.copyOf(Lists.transform(emails, new Function<Email, String>() {
+			@Override @Nullable
+			public String apply(@Nullable Email email) {
+				String result;
+				try {
+					result = email.send();
+					log.info("Email sent from {} to {}: {} - {}",
+							email.getFromAddress(), email.getToAddresses(), result,
+							email.getSubject());
+					return result;
+				} catch (org.apache.commons.mail.EmailException e) {
+					throw new EmailException("Cannot send email from " + email.getFromAddress() + " to " +
+							email.getToAddresses() + " subject: " + email.getSubject(), e);
+				}
+			}
+		}));
+		return results;
 	}
 
 	protected Layout getDefaultLayout() {
