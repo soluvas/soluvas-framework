@@ -14,6 +14,7 @@ public class EmfModule extends SimpleModule {
 	public EmfModule() {
 		super("emf", new Version(2, 8, 1, "", "org.soluvas", "emf"));
 		addSerializer(EMap.class, new EMapSerializer());
+		addDeserializer(EMap.class, new EMapDeserializer());
 	}
 	
 }

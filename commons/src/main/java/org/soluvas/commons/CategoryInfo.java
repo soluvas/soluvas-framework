@@ -2,6 +2,10 @@
  */
 package org.soluvas.commons;
 
+import org.soluvas.commons.impl.CategoryInfoImpl;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -13,5 +17,6 @@ package org.soluvas.commons;
  * @model
  * @generated
  */
+@JsonDeserialize(as=CategoryInfoImpl.class)
 public interface CategoryInfo extends CategoryLike, Parentable<CategoryInfo> {
 } // CategoryInfo
