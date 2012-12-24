@@ -26,13 +26,13 @@ import com.google.common.base.Supplier;
  */
 public class TenantUtils {
 	
-	private static transient Logger log = LoggerFactory.getLogger(TenantUtils.class);
+	private static final Logger log = LoggerFactory.getLogger(TenantUtils.class);
 	
 	@SuppressWarnings("unchecked")
 	public static <T, R, S extends T> R withService(BundleContext bundleContext, Class<T> clazz, String filter, Function<S,R> callback) {
-		final ServiceReference<T>[] refs;
+		final ServiceReference<?>[] refs;
 		try {
-			refs = (ServiceReference<T>[]) bundleContext
+			refs = (ServiceReference<?>[]) bundleContext
 					.getServiceReferences(clazz.getName(), filter);
 		} catch (Exception e) {
 			log.error(String.format("Cannot find service %s for filter %s",
@@ -43,10 +43,10 @@ public class TenantUtils {
 		if (refs == null || refs.length <= 0)
 			throw new CommonsException(String.format("Cannot find service %s for filter %s",
 					clazz, filter));
-		ServiceReference<T> ref = refs[0];
-		S svc = (S) bundleContext.getService(ref);
+		final ServiceReference<?> ref = refs[0];
+		final S svc = (S) bundleContext.getService(ref);
 		try {
-			R result = callback.apply(svc);
+			final R result = callback.apply(svc);
 			return result;
 		} finally {
 			bundleContext.ungetService(ref);
@@ -62,6 +62,7 @@ public class TenantUtils {
 	 * @param filter
 	 * @return Desired {@link ServiceReference or exception if not found.
 	 */
+	@SuppressWarnings("unchecked")
 	@Nonnull
 	public static <T, S extends T> ServiceReference<S> getService(@Nonnull BundleContext bundleContext,
 			@Nonnull TenantRef tenant,
@@ -70,25 +71,22 @@ public class TenantUtils {
 			@Nullable String filter) {
 		final String ifaceName = iface.getName();
 		final String additionalFilter = Optional.fromNullable(filter).or("");
-		log.trace(
-				"Lookup {} for tenantId={} tenantEnv={} namespace={} filter: {}",
-				new Object[] { ifaceName, tenant.getTenantId(),
-						tenant.getTenantEnv(), namespace,
-						additionalFilter });
+		log.trace("Lookup {} for tenantId={} tenantEnv={} namespace={} filter: {}",
+				ifaceName, tenant.getTenantId(), tenant.getTenantEnv(), namespace,
+				additionalFilter );
 		final String namespaceFilter = !Strings.isNullOrEmpty(namespace) ? "(namespace="
 				+ namespace + ")"
 				: "";
-		String realFilter = "(&(|(tenantId=\\*)(tenantId=" + tenant.getTenantId() + "))(|(tenantEnv=\\*)(tenantEnv=" + tenant.getTenantEnv() + "))"
+		final String realFilter = "(&(|(tenantId=\\*)(tenantId=" + tenant.getTenantId() + "))(|(tenantEnv=\\*)(tenantEnv=" + tenant.getTenantEnv() + "))"
 				+ namespaceFilter + additionalFilter + ")";
 
-		ServiceReference<T> serviceRef = null;
 		try {
-			Collection<ServiceReference<T>> foundRefs = bundleContext
+			final Collection<ServiceReference<T>> foundRefs = bundleContext
 					.getServiceReferences(iface, realFilter);
 			if (foundRefs == null || foundRefs.isEmpty())
 				throw new IllegalStateException("Cannot find " + ifaceName
 						+ " service with filter " + realFilter);
-			serviceRef = foundRefs.iterator().next();
+			final ServiceReference<T> serviceRef = foundRefs.iterator().next();
 			return (ServiceReference<S>) serviceRef;
 		} catch (InvalidSyntaxException e) {
 			throw new CommonsException("Cannot find " + ifaceName + " service for " + tenant + " with filter " + realFilter, e);
