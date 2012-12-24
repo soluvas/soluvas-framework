@@ -31,6 +31,42 @@ public interface ImageFactory extends EFactory {
 	ImageConfig createImageConfig();
 
 	/**
+	 * Returns a new object of class '<em>S3 Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>S3 Connector</em>'.
+	 * @generated
+	 */
+	S3Connector createS3Connector();
+
+	/**
+	 * Returns a new object of class '<em>Blitline Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Blitline Connector</em>'.
+	 * @generated
+	 */
+	BlitlineConnector createBlitlineConnector();
+
+	/**
+	 * Returns a new object of class '<em>Cloudinary Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Cloudinary Connector</em>'.
+	 * @generated
+	 */
+	CloudinaryConnector createCloudinaryConnector();
+
+	/**
+	 * Returns a new object of class '<em>Web Dav Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Web Dav Connector</em>'.
+	 * @generated
+	 */
+	WebDavConnector createWebDavConnector();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

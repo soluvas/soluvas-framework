@@ -7,5 +7,9 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="publicUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EClass0"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageConnector" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="S3Connector" eSuperTypes="#//ImageConnector"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BlitlineConnector" eSuperTypes="#//ImageConnector"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CloudinaryConnector" eSuperTypes="#//ImageConnector"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WebDavConnector" eSuperTypes="#//ImageConnector"/>
 </ecore:EPackage>

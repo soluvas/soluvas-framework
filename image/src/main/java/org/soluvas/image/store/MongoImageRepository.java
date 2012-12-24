@@ -55,6 +55,8 @@ import org.bson.BasicBSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.SlugUtils;
+import org.soluvas.image.model.image.ImageConnector;
+import org.soluvas.image.model.image.impl.WebDavConnectorImpl;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -119,6 +121,7 @@ public class MongoImageRepository implements ImageRepository {
 	private String maleDefaultPhotoID;
 	private String femaleDefaultPhotoID;
 	private String defaultPhotoID;
+	private ImageConnector connector;
 	
 	public class DBObjectToImage implements Function<DBObject, Image> {
 		@Override
@@ -171,6 +174,7 @@ public class MongoImageRepository implements ImageRepository {
 		this.davUri = davUri;
 		this.publicUri = publicUri;
 		this.mongoUri = mongoUri;
+		this.connector = new WebDavConnectorImpl();
 	}
 
 	/* (non-Javadoc)
@@ -392,12 +396,12 @@ public class MongoImageRepository implements ImageRepository {
 		
 		try {
 			// Create styles and upload
-			Collection<StyledImage> styledImages = Collections2.transform(styles.values(), new com.google.common.base.Function<ImageStyle, StyledImage>() {
+			final Collection<StyledImage> styledImages = Collections2.transform(styles.values(), new com.google.common.base.Function<ImageStyle, StyledImage>() {
 				@Override
 				public StyledImage apply(final ImageStyle style) {
 					File styledFile = null;
-					int width;
-					int height;
+					final int width;
+					final int height;
 					try {
 						// I don't think Thumbnailer and/or ImageIO is thread-safe
 						synchronized (this) {
@@ -405,7 +409,7 @@ public class MongoImageRepository implements ImageRepository {
 							final boolean progressive = style.getMaxWidth() >= 512;
 							log.info("Resizing {} to {}, quality={} progressive={}", new Object[] {
 									originalFile, styledFile, style.getQuality(), progressive });
-							BufferedImage styledImage = Thumbnails.of(originalFile)
+							final BufferedImage styledImage = Thumbnails.of(originalFile)
 									.size(style.getMaxWidth(), style.getMaxHeight())
 									.crop(Positions.CENTER).asBufferedImage();
 							width = styledImage.getWidth();
@@ -432,20 +436,20 @@ public class MongoImageRepository implements ImageRepository {
 //						byte[] content = buf.toByteArray();
 //						ResizeResult result = new ResizeResult(style.getName(), contentType, "jpg", content.length, content,
 //								styledImage.getWidth(), styledImage.getHeight());
-					} catch (Exception e) {
+					} catch (final Exception e) {
 						throw new RuntimeException("Error resizing " + imageId + " to " + style.getCode() + ", destination: " + styledFile, e);
 					}
-					URI styledDavUri = getImageDavUri(imageId, style.getName());
+					final URI styledDavUri = getImageDavUri(imageId, style.getName());
 					try {
 						// upload directly for efficiency
 						final String styledContentType = "image/jpeg";
 						log.info("Uploading {} {} to {}", new Object[] { style.getName(), imageId, styledDavUri });
 						uploadFile(styledDavUri, new FileInputStream(styledFile), styledContentType, styledFile.length());
-						URI styledPublicUri = getImagePublicUri(imageId, style.getName());
-						StyledImage styled = new StyledImage(style.getName(), style.getCode(), styledPublicUri, styledContentType,
+						final URI styledPublicUri = getImagePublicUri(imageId, style.getName());
+						final StyledImage styled = new StyledImage(style.getName(), style.getCode(), styledPublicUri, styledContentType,
 								(int)styledFile.length(), width, height);
 						return styled;
-					} catch (Exception e) {
+					} catch (final Exception e) {
 						throw new RuntimeException("Error uploading " + style.getName() + " " + imageId + " to " + styledDavUri, e);
 					} finally {
 						log.info("Deleting temporary {} image {}", style.getName(), styledFile);
@@ -503,8 +507,8 @@ public class MongoImageRepository implements ImageRepository {
 
 //			Await.result(originalFuture, Timeout.never().duration());
 			
-			BasicBSONObject stylesObj = new BasicBSONObject();
-			for (StyledImage styled : styledImages) {
+			final BasicBSONObject stylesObj = new BasicBSONObject();
+			for (final StyledImage styled : styledImages) {
 //				StyledImage styled = Await.result(future, Timeout.never().duration());
 				Map<String, Object> bson = new HashMap<String, Object>();
 				bson.put("code", styled.getCode());
@@ -517,8 +521,8 @@ public class MongoImageRepository implements ImageRepository {
 			}
 			
 			// Create mongoDB
-			BasicDBObject dbo = new BasicDBObject();
-			URI originalPublicUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
+			final BasicDBObject dbo = new BasicDBObject();
+			final URI originalPublicUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
 					publicUri, namespace, 'o', imageId, 'o', extension));
 			dbo.put("_id", imageId);
 			dbo.put("name", name);
@@ -534,7 +538,7 @@ public class MongoImageRepository implements ImageRepository {
 			mongoColl.update(new BasicDBObject("_id", imageId), dbo, true, false);
 			
 			return imageId;
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new RuntimeException("Error processing image " + imageId, e);
 		}
 	}

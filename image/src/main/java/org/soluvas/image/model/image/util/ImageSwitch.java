@@ -72,6 +72,40 @@ public class ImageSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ImagePackage.IMAGE_CONNECTOR: {
+				ImageConnector imageConnector = (ImageConnector)theEObject;
+				T result = caseImageConnector(imageConnector);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.S3_CONNECTOR: {
+				S3Connector s3Connector = (S3Connector)theEObject;
+				T result = caseS3Connector(s3Connector);
+				if (result == null) result = caseImageConnector(s3Connector);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.BLITLINE_CONNECTOR: {
+				BlitlineConnector blitlineConnector = (BlitlineConnector)theEObject;
+				T result = caseBlitlineConnector(blitlineConnector);
+				if (result == null) result = caseImageConnector(blitlineConnector);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.CLOUDINARY_CONNECTOR: {
+				CloudinaryConnector cloudinaryConnector = (CloudinaryConnector)theEObject;
+				T result = caseCloudinaryConnector(cloudinaryConnector);
+				if (result == null) result = caseImageConnector(cloudinaryConnector);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.WEB_DAV_CONNECTOR: {
+				WebDavConnector webDavConnector = (WebDavConnector)theEObject;
+				T result = caseWebDavConnector(webDavConnector);
+				if (result == null) result = caseImageConnector(webDavConnector);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -88,6 +122,81 @@ public class ImageSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseImageConfig(ImageConfig object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Connector</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImageConnector(ImageConnector object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>S3 Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>S3 Connector</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseS3Connector(S3Connector object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Blitline Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Blitline Connector</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBlitlineConnector(BlitlineConnector object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Cloudinary Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Cloudinary Connector</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCloudinaryConnector(CloudinaryConnector object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Web Dav Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Web Dav Connector</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWebDavConnector(WebDavConnector object) {
 		return null;
 	}
 

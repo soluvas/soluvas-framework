@@ -56,7 +56,11 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ImagePackage.IMAGE_CONFIG: return createImageConfig();
+			case ImagePackage.IMAGE_CONFIG: return (EObject)createImageConfig();
+			case ImagePackage.S3_CONNECTOR: return (EObject)createS3Connector();
+			case ImagePackage.BLITLINE_CONNECTOR: return (EObject)createBlitlineConnector();
+			case ImagePackage.CLOUDINARY_CONNECTOR: return (EObject)createCloudinaryConnector();
+			case ImagePackage.WEB_DAV_CONNECTOR: return (EObject)createWebDavConnector();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -70,6 +74,46 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	public ImageConfig createImageConfig() {
 		ImageConfigImpl imageConfig = new ImageConfigImpl();
 		return imageConfig;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public S3Connector createS3Connector() {
+		S3ConnectorImpl s3Connector = new S3ConnectorImpl();
+		return s3Connector;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BlitlineConnector createBlitlineConnector() {
+		BlitlineConnectorImpl blitlineConnector = new BlitlineConnectorImpl();
+		return blitlineConnector;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CloudinaryConnector createCloudinaryConnector() {
+		CloudinaryConnectorImpl cloudinaryConnector = new CloudinaryConnectorImpl();
+		return cloudinaryConnector;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WebDavConnector createWebDavConnector() {
+		WebDavConnectorImpl webDavConnector = new WebDavConnectorImpl();
+		return webDavConnector;
 	}
 
 	/**

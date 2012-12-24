@@ -2,6 +2,7 @@
  */
 package org.soluvas.image.model.image;
 
+import org.soluvas.commons.SerializableEObject;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -38,9 +39,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.image.model.image.ImagePackage#getImageConfig()
  * @model
+ * @extends SerializableEObject
  * @generated
  */
-public interface ImageConfig extends EObject {
+public interface ImageConfig extends SerializableEObject {
 	/**
 	 * Returns the value of the '<em><b>Public Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->

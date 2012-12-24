@@ -5,12 +5,15 @@ package org.soluvas.image.model.image.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
+import org.soluvas.image.model.image.BlitlineConnector;
+import org.soluvas.image.model.image.CloudinaryConnector;
 import org.soluvas.image.model.image.ImageConfig;
+import org.soluvas.image.model.image.ImageConnector;
 import org.soluvas.image.model.image.ImageFactory;
 import org.soluvas.image.model.image.ImagePackage;
+import org.soluvas.image.model.image.S3Connector;
+import org.soluvas.image.model.image.WebDavConnector;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,6 +28,37 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	private EClass imageConfigEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imageConnectorEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass s3ConnectorEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass blitlineConnectorEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cloudinaryConnectorEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass webDavConnectorEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -110,6 +144,51 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getImageConnector() {
+		return imageConnectorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getS3Connector() {
+		return s3ConnectorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBlitlineConnector() {
+		return blitlineConnectorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCloudinaryConnector() {
+		return cloudinaryConnectorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getWebDavConnector() {
+		return webDavConnectorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ImageFactory getImageFactory() {
 		return (ImageFactory)getEFactoryInstance();
 	}
@@ -135,6 +214,16 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		// Create classes and their features
 		imageConfigEClass = createEClass(IMAGE_CONFIG);
 		createEAttribute(imageConfigEClass, IMAGE_CONFIG__PUBLIC_URI);
+
+		imageConnectorEClass = createEClass(IMAGE_CONNECTOR);
+
+		s3ConnectorEClass = createEClass(S3_CONNECTOR);
+
+		blitlineConnectorEClass = createEClass(BLITLINE_CONNECTOR);
+
+		cloudinaryConnectorEClass = createEClass(CLOUDINARY_CONNECTOR);
+
+		webDavConnectorEClass = createEClass(WEB_DAV_CONNECTOR);
 	}
 
 	/**
@@ -165,10 +254,24 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		s3ConnectorEClass.getESuperTypes().add(this.getImageConnector());
+		blitlineConnectorEClass.getESuperTypes().add(this.getImageConnector());
+		cloudinaryConnectorEClass.getESuperTypes().add(this.getImageConnector());
+		webDavConnectorEClass.getESuperTypes().add(this.getImageConnector());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(imageConfigEClass, ImageConfig.class, "ImageConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImageConfig_PublicUri(), ecorePackage.getEString(), "publicUri", null, 0, 1, ImageConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(imageConnectorEClass, ImageConnector.class, "ImageConnector", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(s3ConnectorEClass, S3Connector.class, "S3Connector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(blitlineConnectorEClass, BlitlineConnector.class, "BlitlineConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(cloudinaryConnectorEClass, CloudinaryConnector.class, "CloudinaryConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(webDavConnectorEClass, WebDavConnector.class, "WebDavConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

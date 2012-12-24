@@ -49,12 +49,36 @@ The domain name can also be different for each namespace, or even for each style
 </xsd:documentation>
     </xsd:annotation>
   </xsd:element>
-  <xsd:complexType name="EClass0">
+  <xsd:complexType abstract="true" name="ImageConnector">
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element ref="xmi:Extension"/>
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
   </xsd:complexType>
-  <xsd:element name="EClass0" type="image:EClass0"/>
+  <xsd:element name="ImageConnector" type="image:ImageConnector"/>
+  <xsd:complexType name="S3Connector">
+    <xsd:complexContent>
+      <xsd:extension base="image:ImageConnector"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="S3Connector" type="image:S3Connector"/>
+  <xsd:complexType name="BlitlineConnector">
+    <xsd:complexContent>
+      <xsd:extension base="image:ImageConnector"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="BlitlineConnector" type="image:BlitlineConnector"/>
+  <xsd:complexType name="CloudinaryConnector">
+    <xsd:complexContent>
+      <xsd:extension base="image:ImageConnector"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CloudinaryConnector" type="image:CloudinaryConnector"/>
+  <xsd:complexType name="WebDavConnector">
+    <xsd:complexContent>
+      <xsd:extension base="image:ImageConnector"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="WebDavConnector" type="image:WebDavConnector"/>
 </xsd:schema>

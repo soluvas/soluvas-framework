@@ -72,6 +72,26 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 				return createImageConfigAdapter();
 			}
 			@Override
+			public Adapter caseImageConnector(ImageConnector object) {
+				return createImageConnectorAdapter();
+			}
+			@Override
+			public Adapter caseS3Connector(S3Connector object) {
+				return createS3ConnectorAdapter();
+			}
+			@Override
+			public Adapter caseBlitlineConnector(BlitlineConnector object) {
+				return createBlitlineConnectorAdapter();
+			}
+			@Override
+			public Adapter caseCloudinaryConnector(CloudinaryConnector object) {
+				return createCloudinaryConnectorAdapter();
+			}
+			@Override
+			public Adapter caseWebDavConnector(WebDavConnector object) {
+				return createWebDavConnectorAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -102,6 +122,76 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImageConfigAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.model.image.ImageConnector <em>Connector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.model.image.ImageConnector
+	 * @generated
+	 */
+	public Adapter createImageConnectorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.model.image.S3Connector <em>S3 Connector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.model.image.S3Connector
+	 * @generated
+	 */
+	public Adapter createS3ConnectorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.model.image.BlitlineConnector <em>Blitline Connector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.model.image.BlitlineConnector
+	 * @generated
+	 */
+	public Adapter createBlitlineConnectorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.model.image.CloudinaryConnector <em>Cloudinary Connector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.model.image.CloudinaryConnector
+	 * @generated
+	 */
+	public Adapter createCloudinaryConnectorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.model.image.WebDavConnector <em>Web Dav Connector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.model.image.WebDavConnector
+	 * @generated
+	 */
+	public Adapter createWebDavConnectorAdapter() {
 		return null;
 	}
 
