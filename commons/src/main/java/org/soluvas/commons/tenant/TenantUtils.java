@@ -86,7 +86,7 @@ public class TenantUtils {
 			if (foundRefs == null || foundRefs.isEmpty())
 				throw new IllegalStateException("Cannot find " + ifaceName
 						+ " service with filter " + realFilter);
-			final ServiceReference<T> serviceRef = foundRefs.iterator().next();
+			final ServiceReference<?> serviceRef = foundRefs.iterator().next();
 			return (ServiceReference<S>) serviceRef;
 		} catch (InvalidSyntaxException e) {
 			throw new CommonsException("Cannot find " + ifaceName + " service for " + tenant + " with filter " + realFilter, e);
