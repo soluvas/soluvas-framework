@@ -243,5 +243,5 @@ public class MeasureValueImpl extends ValueImpl<BigDecimal> implements MeasureVa
 	public String getString() {
 		return (getValue() != null ? getValue().toString() : "") + getValueUnit();
 	}
-
+	
 } //MeasureValueImpl
