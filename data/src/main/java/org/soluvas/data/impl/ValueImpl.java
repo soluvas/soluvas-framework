@@ -24,6 +24,7 @@ import org.soluvas.data.Value;
  *
  * @generated
  */
+@SuppressWarnings("serial")
 public class ValueImpl<T> extends EObjectImpl implements Value<T> {
 	/**
 	 * The default value of the '{@link #getSemantic() <em>Semantic</em>}' attribute.
@@ -177,7 +178,6 @@ public class ValueImpl<T> extends EObjectImpl implements Value<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {

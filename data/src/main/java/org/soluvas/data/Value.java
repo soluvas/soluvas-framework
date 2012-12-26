@@ -5,6 +5,8 @@ package org.soluvas.data;
 import org.soluvas.commons.SerializableEObject;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,6 +60,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @extends SerializableEObject
  * @generated
  */
+@JsonTypeInfo(use=Id.CLASS)
 public interface Value<T> extends SerializableEObject {
 	/**
 	 * <!-- begin-user-doc -->

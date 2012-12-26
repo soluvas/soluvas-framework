@@ -3,12 +3,14 @@
 package org.soluvas.data;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ResourceAware;
+import org.soluvas.data.impl.MixinImpl;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,6 +28,7 @@ import org.soluvas.commons.ResourceAware;
  * @model
  * @generated
  */
+@JsonDeserialize(as=MixinImpl.class)
 public interface Mixin extends NameContainer, ResourceAware, BundleAware, NsPrefixable, Describable {
 	/**
 	 * Returns the value of the '<em><b>Attribute Types</b></em>' reference list.

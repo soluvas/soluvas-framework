@@ -33,6 +33,11 @@ import org.soluvas.data.TermValue;
  */
 public class TermValueImpl extends ValueImpl<String> implements TermValue {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -261,6 +266,7 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getValue() {
 		return value;
 	}
@@ -270,6 +276,7 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(String newValue) {
 		String oldValue = value;
 		value = newValue;

@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
 /**
@@ -39,19 +40,20 @@ public class EMapDeserializer extends StdDeserializer<EMap<Object, Object>> {
 	@Override
 	public EMap<Object, Object> deserialize(JsonParser jp, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {
-		JsonDeserializer<Map> mapDeser = (JsonDeserializer) ctxt.findRootValueDeserializer(ctxt.getTypeFactory().constructType(Map.class));
+		final JsonDeserializer<Map> mapDeser = (JsonDeserializer) ctxt.findRootValueDeserializer(ctxt.getTypeFactory().constructType(Map.class));
 		final Map<Object, Object> map = mapDeser.deserialize(jp, ctxt);
 		// convert List to EList
-		final Map<Object, Object> transformed = Maps.transformValues(map, new Function<Object, Object>() {
+		final Map<Object, Object> transformed = ImmutableMap.copyOf(Maps.transformValues(map, new Function<Object, Object>() {
+			@SuppressWarnings("unchecked")
 			@Override
 			public Object apply(Object input) {
 				if (input == null)
 					return null;
 				if (input instanceof List)
-					return new BasicEList((List) input);
-				return null;
+					return new BasicEList<Object>((List) input);
+				return input;
 			}
-		});
+		}));
 		return new BasicEMap<Object, Object>(transformed);
 	}
 
