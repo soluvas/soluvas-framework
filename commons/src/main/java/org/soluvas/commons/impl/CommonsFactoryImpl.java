@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.joda.money.BigMoneyProvider;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
-import org.soluvas.commons.*;
+import org.joda.time.DateTimeZone;
 import org.soluvas.commons.Added;
 import org.soluvas.commons.AddedMany;
 import org.soluvas.commons.AppManifest;
@@ -90,17 +90,17 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CommonsPackage.APP_MANIFEST: return (EObject)createAppManifest();
-			case CommonsPackage.PERSON_INFO: return (EObject)createPersonInfo();
-			case CommonsPackage.WEB_ADDRESS: return (EObject)createWebAddress();
-			case CommonsPackage.ADDED: return (EObject)createAdded();
-			case CommonsPackage.ATTRIBUTE_SET: return (EObject)createAttributeSet();
-			case CommonsPackage.ATTRIBUTE_UNSET: return (EObject)createAttributeUnset();
-			case CommonsPackage.REMOVED: return (EObject)createRemoved();
-			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return (EObject)createAttributeNotification();
-			case CommonsPackage.ADDED_MANY: return (EObject)createAddedMany();
-			case CommonsPackage.REMOVED_MANY: return (EObject)createRemovedMany();
-			case CommonsPackage.CATEGORY_INFO: return (EObject)createCategoryInfo();
+			case CommonsPackage.APP_MANIFEST: return createAppManifest();
+			case CommonsPackage.PERSON_INFO: return createPersonInfo();
+			case CommonsPackage.WEB_ADDRESS: return createWebAddress();
+			case CommonsPackage.ADDED: return createAdded();
+			case CommonsPackage.ATTRIBUTE_SET: return createAttributeSet();
+			case CommonsPackage.ATTRIBUTE_UNSET: return createAttributeUnset();
+			case CommonsPackage.REMOVED: return createRemoved();
+			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return createAttributeNotification();
+			case CommonsPackage.ADDED_MANY: return createAddedMany();
+			case CommonsPackage.REMOVED_MANY: return createRemovedMany();
+			case CommonsPackage.CATEGORY_INFO: return createCategoryInfo();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -154,6 +154,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createMeasurableFromString(eDataType, initialValue);
 			case CommonsPackage.BIG_DECIMAL:
 				return createBigDecimalFromString(eDataType, initialValue);
+			case CommonsPackage.DATE_TIME_ZONE:
+				return createDateTimeZoneFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -207,6 +209,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertMeasurableToString(eDataType, instanceValue);
 			case CommonsPackage.BIG_DECIMAL:
 				return convertBigDecimalToString(eDataType, instanceValue);
+			case CommonsPackage.DATE_TIME_ZONE:
+				return convertDateTimeZoneToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -702,6 +706,23 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 		return instanceValue != null ? instanceValue.toString() : null;
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public DateTimeZone createDateTimeZoneFromString(EDataType eDataType, String initialValue) {
+		return DateTimeZone.forID(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertDateTimeZoneToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

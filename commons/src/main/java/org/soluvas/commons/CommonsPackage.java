@@ -1750,6 +1750,17 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Date Time Zone</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.joda.time.DateTimeZone
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTimeZone()
+	 * @generated
+	 */
+	int DATE_TIME_ZONE = 55;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2856,6 +2867,17 @@ public interface CommonsPackage extends EPackage {
 	EDataType getBigDecimal();
 
 	/**
+	 * Returns the meta object for data type '{@link org.joda.time.DateTimeZone <em>Date Time Zone</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Date Time Zone</em>'.
+	 * @see org.joda.time.DateTimeZone
+	 * @model instanceClass="org.joda.time.DateTimeZone"
+	 * @generated
+	 */
+	EDataType getDateTimeZone();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3818,6 +3840,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType BIG_DECIMAL = eINSTANCE.getBigDecimal();
+
+		/**
+		 * The meta object literal for the '<em>Date Time Zone</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.joda.time.DateTimeZone
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTimeZone()
+		 * @generated
+		 */
+		EDataType DATE_TIME_ZONE = eINSTANCE.getDateTimeZone();
 
 	}
 

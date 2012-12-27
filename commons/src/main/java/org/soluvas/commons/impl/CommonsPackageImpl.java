@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.joda.money.BigMoneyProvider;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.Added;
 import org.soluvas.commons.AddedMany;
@@ -465,6 +466,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EDataType bigDecimalEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType dateTimeZoneEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1525,6 +1533,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getDateTimeZone() {
+		return dateTimeZoneEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
@@ -1690,6 +1707,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		bigMoneyProviderEDataType = createEDataType(BIG_MONEY_PROVIDER);
 		measurableEDataType = createEDataType(MEASURABLE);
 		bigDecimalEDataType = createEDataType(BIG_DECIMAL);
+		dateTimeZoneEDataType = createEDataType(DATE_TIME_ZONE);
 	}
 
 	/**
@@ -2037,6 +2055,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(bigMoneyProviderEDataType, BigMoneyProvider.class, "BigMoneyProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(measurableEDataType, Measurable.class, "Measurable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(bigDecimalEDataType, BigDecimal.class, "BigDecimal", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(dateTimeZoneEDataType, DateTimeZone.class, "DateTimeZone", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -515,4 +515,5 @@
     </eTypeParameters>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="BigDecimal" instanceClassName="java.math.BigDecimal"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="DateTimeZone" instanceClassName="org.joda.time.DateTimeZone"/>
 </ecore:EPackage>
