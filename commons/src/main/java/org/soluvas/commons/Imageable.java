@@ -2,6 +2,8 @@
  */
 package org.soluvas.commons;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -24,6 +26,7 @@ public interface Imageable extends SerializableEObject {
 	 * @model kind="operation"
 	 * @generated
 	 */
+	@JsonProperty
 	String getImageId();
 
 } // Imageable
