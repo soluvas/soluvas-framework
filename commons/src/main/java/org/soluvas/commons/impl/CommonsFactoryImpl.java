@@ -443,10 +443,9 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public CurrencyUnit createCurrencyUnitFromString(EDataType eDataType, String initialValue) {
-		return (CurrencyUnit)super.createFromString(eDataType, initialValue);
+		return CurrencyUnit.of(initialValue);
 	}
 
 	/**
