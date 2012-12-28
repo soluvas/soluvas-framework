@@ -152,6 +152,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 		return coll.count();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <S extends AppSession> S findOne(String id) {
 		if (id == null)
