@@ -2,6 +2,7 @@
  */
 package org.soluvas.security.impl;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -64,6 +65,8 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 			case SecurityPackage.SECURITY_CATALOG: return (EObject)createSecurityCatalog();
 			case SecurityPackage.PERMISSION: return (EObject)createPermission();
 			case SecurityPackage.DOMAIN_PERMISSION: return (EObject)createDomainPermission();
+			case SecurityPackage.APP_SESSION: return (EObject)createAppSession();
+			case SecurityPackage.APP_SESSION_ATTRIBUTE_ENTRY: return (EObject)createAppSessionAttributeEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -79,6 +82,8 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 		switch (eDataType.getClassifierID()) {
 			case SecurityPackage.ASSIGN_MODE:
 				return createAssignModeFromString(eDataType, initialValue);
+			case SecurityPackage.APP_SESSION_STATUS:
+				return createAppSessionStatusFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -94,6 +99,8 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 		switch (eDataType.getClassifierID()) {
 			case SecurityPackage.ASSIGN_MODE:
 				return convertAssignModeToString(eDataType, instanceValue);
+			case SecurityPackage.APP_SESSION_STATUS:
+				return convertAppSessionStatusToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -174,6 +181,26 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public AppSession createAppSession() {
+		AppSessionImpl appSession = new AppSessionImpl();
+		return appSession;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<Object, Object> createAppSessionAttributeEntry() {
+		AppSessionAttributeEntryImpl appSessionAttributeEntry = new AppSessionAttributeEntryImpl();
+		return appSessionAttributeEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AssignMode createAssignModeFromString(EDataType eDataType, String initialValue) {
 		AssignMode result = AssignMode.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -186,6 +213,26 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 	 * @generated
 	 */
 	public String convertAssignModeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AppSessionStatus createAppSessionStatusFromString(EDataType eDataType, String initialValue) {
+		AppSessionStatus result = AppSessionStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertAppSessionStatusToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

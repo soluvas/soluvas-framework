@@ -2,10 +2,13 @@
  */
 package org.soluvas.security.util;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.ResourceAware;
+import org.soluvas.commons.Timestamped;
 import org.soluvas.security.*;
 import org.soluvas.security.Action;
 import org.soluvas.security.Domain;
@@ -119,6 +122,20 @@ public class SecuritySwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SecurityPackage.APP_SESSION: {
+				AppSession appSession = (AppSession)theEObject;
+				T result = caseAppSession(appSession);
+				if (result == null) result = caseIdentifiable(appSession);
+				if (result == null) result = caseTimestamped(appSession);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SecurityPackage.APP_SESSION_ATTRIBUTE_ENTRY: {
+				@SuppressWarnings("unchecked") Map.Entry<Object, Object> appSessionAttributeEntry = (Map.Entry<Object, Object>)theEObject;
+				T result = caseAppSessionAttributeEntry(appSessionAttributeEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -229,6 +246,36 @@ public class SecuritySwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>App Session</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>App Session</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAppSession(AppSession object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>App Session Attribute Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>App Session Attribute Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAppSessionAttributeEntry(Map.Entry<Object, Object> object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Resource Aware</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -240,6 +287,36 @@ public class SecuritySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseResourceAware(ResourceAware object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Identifiable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Identifiable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIdentifiable(Identifiable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Timestamped</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Timestamped</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTimestamped(Timestamped object) {
 		return null;
 	}
 

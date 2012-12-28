@@ -85,6 +85,15 @@ public interface SecurityFactory extends EFactory {
 	DomainPermission createDomainPermission();
 
 	/**
+	 * Returns a new object of class '<em>App Session</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>App Session</em>'.
+	 * @generated
+	 */
+	AppSession createAppSession();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

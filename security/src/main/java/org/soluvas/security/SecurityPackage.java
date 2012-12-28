@@ -552,6 +552,206 @@ public interface SecurityPackage extends EPackage {
 	int DOMAIN_PERMISSION_FEATURE_COUNT = 3;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.security.impl.AppSessionImpl <em>App Session</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.security.impl.AppSessionImpl
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getAppSession()
+	 * @generated
+	 */
+	int APP_SESSION = 7;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__ID = CommonsPackage.IDENTIFIABLE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Creation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__CREATION_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Modification Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__MODIFICATION_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Person</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__PERSON = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__STATUS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Ip Address</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__IP_ADDRESS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Ipv6 Address</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__IPV6_ADDRESS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Ip Addresses</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__IP_ADDRESSES = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Ipv6 Addresses</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__IPV6_ADDRESSES = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>User Agent</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__USER_AGENT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>User Agents</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__USER_AGENTS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__ATTRIBUTES = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Access Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__ACCESS_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Expiry Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__EXPIRY_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Time Zone</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__TIME_ZONE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>Locale</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__LOCALE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 14;
+
+	/**
+	 * The number of structural features of the '<em>App Session</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION_FEATURE_COUNT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 15;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.security.impl.AppSessionAttributeEntryImpl <em>App Session Attribute Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.security.impl.AppSessionAttributeEntryImpl
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getAppSessionAttributeEntry()
+	 * @generated
+	 */
+	int APP_SESSION_ATTRIBUTE_ENTRY = 8;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION_ATTRIBUTE_ENTRY__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION_ATTRIBUTE_ENTRY__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>App Session Attribute Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION_ATTRIBUTE_ENTRY_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.security.AssignMode <em>Assign Mode</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -559,7 +759,18 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getAssignMode()
 	 * @generated
 	 */
-	int ASSIGN_MODE = 7;
+	int ASSIGN_MODE = 9;
+
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.security.AppSessionStatus <em>App Session Status</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.security.AppSessionStatus
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getAppSessionStatus()
+	 * @generated
+	 */
+	int APP_SESSION_STATUS = 10;
 
 
 	/**
@@ -908,6 +1119,193 @@ public interface SecurityPackage extends EPackage {
 	EAttribute getDomainPermission_Actions();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.security.AppSession <em>App Session</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>App Session</em>'.
+	 * @see org.soluvas.security.AppSession
+	 * @generated
+	 */
+	EClass getAppSession();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.security.AppSession#getPerson <em>Person</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Person</em>'.
+	 * @see org.soluvas.security.AppSession#getPerson()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EReference getAppSession_Person();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see org.soluvas.security.AppSession#getStatus()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EAttribute getAppSession_Status();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getIpAddress <em>Ip Address</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ip Address</em>'.
+	 * @see org.soluvas.security.AppSession#getIpAddress()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EAttribute getAppSession_IpAddress();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getIpv6Address <em>Ipv6 Address</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ipv6 Address</em>'.
+	 * @see org.soluvas.security.AppSession#getIpv6Address()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EAttribute getAppSession_Ipv6Address();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getIpAddresses <em>Ip Addresses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ip Addresses</em>'.
+	 * @see org.soluvas.security.AppSession#getIpAddresses()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EAttribute getAppSession_IpAddresses();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getIpv6Addresses <em>Ipv6 Addresses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ipv6 Addresses</em>'.
+	 * @see org.soluvas.security.AppSession#getIpv6Addresses()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EAttribute getAppSession_Ipv6Addresses();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getUserAgent <em>User Agent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>User Agent</em>'.
+	 * @see org.soluvas.security.AppSession#getUserAgent()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EAttribute getAppSession_UserAgent();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getUserAgents <em>User Agents</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>User Agents</em>'.
+	 * @see org.soluvas.security.AppSession#getUserAgents()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EAttribute getAppSession_UserAgents();
+
+	/**
+	 * Returns the meta object for the map '{@link org.soluvas.security.AppSession#getAttributes <em>Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Attributes</em>'.
+	 * @see org.soluvas.security.AppSession#getAttributes()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EReference getAppSession_Attributes();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getAccessTime <em>Access Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Access Time</em>'.
+	 * @see org.soluvas.security.AppSession#getAccessTime()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EAttribute getAppSession_AccessTime();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getExpiryTime <em>Expiry Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Expiry Time</em>'.
+	 * @see org.soluvas.security.AppSession#getExpiryTime()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EAttribute getAppSession_ExpiryTime();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getTimeZone <em>Time Zone</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Time Zone</em>'.
+	 * @see org.soluvas.security.AppSession#getTimeZone()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EAttribute getAppSession_TimeZone();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getLocale <em>Locale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Locale</em>'.
+	 * @see org.soluvas.security.AppSession#getLocale()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EAttribute getAppSession_Locale();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>App Session Attribute Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>App Session Attribute Entry</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EJavaObject"
+	 *        valueDataType="org.eclipse.emf.ecore.EJavaObject"
+	 * @generated
+	 */
+	EClass getAppSessionAttributeEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getAppSessionAttributeEntry()
+	 * @generated
+	 */
+	EAttribute getAppSessionAttributeEntry_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getAppSessionAttributeEntry()
+	 * @generated
+	 */
+	EAttribute getAppSessionAttributeEntry_Value();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.security.AssignMode <em>Assign Mode</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -916,6 +1314,16 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getAssignMode();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.security.AppSessionStatus <em>App Session Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>App Session Status</em>'.
+	 * @see org.soluvas.security.AppSessionStatus
+	 * @generated
+	 */
+	EEnum getAppSessionStatus();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1210,6 +1618,146 @@ public interface SecurityPackage extends EPackage {
 		EAttribute DOMAIN_PERMISSION__ACTIONS = eINSTANCE.getDomainPermission_Actions();
 
 		/**
+		 * The meta object literal for the '{@link org.soluvas.security.impl.AppSessionImpl <em>App Session</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.security.impl.AppSessionImpl
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getAppSession()
+		 * @generated
+		 */
+		EClass APP_SESSION = eINSTANCE.getAppSession();
+
+		/**
+		 * The meta object literal for the '<em><b>Person</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference APP_SESSION__PERSON = eINSTANCE.getAppSession_Person();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION__STATUS = eINSTANCE.getAppSession_Status();
+
+		/**
+		 * The meta object literal for the '<em><b>Ip Address</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION__IP_ADDRESS = eINSTANCE.getAppSession_IpAddress();
+
+		/**
+		 * The meta object literal for the '<em><b>Ipv6 Address</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION__IPV6_ADDRESS = eINSTANCE.getAppSession_Ipv6Address();
+
+		/**
+		 * The meta object literal for the '<em><b>Ip Addresses</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION__IP_ADDRESSES = eINSTANCE.getAppSession_IpAddresses();
+
+		/**
+		 * The meta object literal for the '<em><b>Ipv6 Addresses</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION__IPV6_ADDRESSES = eINSTANCE.getAppSession_Ipv6Addresses();
+
+		/**
+		 * The meta object literal for the '<em><b>User Agent</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION__USER_AGENT = eINSTANCE.getAppSession_UserAgent();
+
+		/**
+		 * The meta object literal for the '<em><b>User Agents</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION__USER_AGENTS = eINSTANCE.getAppSession_UserAgents();
+
+		/**
+		 * The meta object literal for the '<em><b>Attributes</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference APP_SESSION__ATTRIBUTES = eINSTANCE.getAppSession_Attributes();
+
+		/**
+		 * The meta object literal for the '<em><b>Access Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION__ACCESS_TIME = eINSTANCE.getAppSession_AccessTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Expiry Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION__EXPIRY_TIME = eINSTANCE.getAppSession_ExpiryTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Time Zone</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION__TIME_ZONE = eINSTANCE.getAppSession_TimeZone();
+
+		/**
+		 * The meta object literal for the '<em><b>Locale</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION__LOCALE = eINSTANCE.getAppSession_Locale();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.security.impl.AppSessionAttributeEntryImpl <em>App Session Attribute Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.security.impl.AppSessionAttributeEntryImpl
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getAppSessionAttributeEntry()
+		 * @generated
+		 */
+		EClass APP_SESSION_ATTRIBUTE_ENTRY = eINSTANCE.getAppSessionAttributeEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION_ATTRIBUTE_ENTRY__KEY = eINSTANCE.getAppSessionAttributeEntry_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION_ATTRIBUTE_ENTRY__VALUE = eINSTANCE.getAppSessionAttributeEntry_Value();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.security.AssignMode <em>Assign Mode</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1218,6 +1766,16 @@ public interface SecurityPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum ASSIGN_MODE = eINSTANCE.getAssignMode();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.security.AppSessionStatus <em>App Session Status</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.security.AppSessionStatus
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getAppSessionStatus()
+		 * @generated
+		 */
+		EEnum APP_SESSION_STATUS = eINSTANCE.getAppSessionStatus();
 
 	}
 

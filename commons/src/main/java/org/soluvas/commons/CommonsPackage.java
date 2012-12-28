@@ -1761,6 +1761,17 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Locale</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.Locale
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocale()
+	 * @generated
+	 */
+	int LOCALE = 56;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2878,6 +2889,17 @@ public interface CommonsPackage extends EPackage {
 	EDataType getDateTimeZone();
 
 	/**
+	 * Returns the meta object for data type '{@link java.util.Locale <em>Locale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Locale</em>'.
+	 * @see java.util.Locale
+	 * @model instanceClass="java.util.Locale"
+	 * @generated
+	 */
+	EDataType getLocale();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3850,6 +3872,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType DATE_TIME_ZONE = eINSTANCE.getDateTimeZone();
+
+		/**
+		 * The meta object literal for the '<em>Locale</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.Locale
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocale()
+		 * @generated
+		 */
+		EDataType LOCALE = eINSTANCE.getLocale();
 
 	}
 

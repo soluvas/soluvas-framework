@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Queue;
@@ -25,6 +26,7 @@ import org.joda.money.BigMoneyProvider;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.soluvas.commons.*;
 import org.soluvas.commons.Added;
 import org.soluvas.commons.AddedMany;
 import org.soluvas.commons.AppManifest;
@@ -90,17 +92,17 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CommonsPackage.APP_MANIFEST: return createAppManifest();
-			case CommonsPackage.PERSON_INFO: return createPersonInfo();
-			case CommonsPackage.WEB_ADDRESS: return createWebAddress();
-			case CommonsPackage.ADDED: return createAdded();
-			case CommonsPackage.ATTRIBUTE_SET: return createAttributeSet();
-			case CommonsPackage.ATTRIBUTE_UNSET: return createAttributeUnset();
-			case CommonsPackage.REMOVED: return createRemoved();
-			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return createAttributeNotification();
-			case CommonsPackage.ADDED_MANY: return createAddedMany();
-			case CommonsPackage.REMOVED_MANY: return createRemovedMany();
-			case CommonsPackage.CATEGORY_INFO: return createCategoryInfo();
+			case CommonsPackage.APP_MANIFEST: return (EObject)createAppManifest();
+			case CommonsPackage.PERSON_INFO: return (EObject)createPersonInfo();
+			case CommonsPackage.WEB_ADDRESS: return (EObject)createWebAddress();
+			case CommonsPackage.ADDED: return (EObject)createAdded();
+			case CommonsPackage.ATTRIBUTE_SET: return (EObject)createAttributeSet();
+			case CommonsPackage.ATTRIBUTE_UNSET: return (EObject)createAttributeUnset();
+			case CommonsPackage.REMOVED: return (EObject)createRemoved();
+			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return (EObject)createAttributeNotification();
+			case CommonsPackage.ADDED_MANY: return (EObject)createAddedMany();
+			case CommonsPackage.REMOVED_MANY: return (EObject)createRemovedMany();
+			case CommonsPackage.CATEGORY_INFO: return (EObject)createCategoryInfo();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -156,6 +158,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createBigDecimalFromString(eDataType, initialValue);
 			case CommonsPackage.DATE_TIME_ZONE:
 				return createDateTimeZoneFromString(eDataType, initialValue);
+			case CommonsPackage.LOCALE:
+				return createLocaleFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -211,6 +215,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertBigDecimalToString(eDataType, instanceValue);
 			case CommonsPackage.DATE_TIME_ZONE:
 				return convertDateTimeZoneToString(eDataType, instanceValue);
+			case CommonsPackage.LOCALE:
+				return convertLocaleToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -719,6 +725,24 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertDateTimeZoneToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Locale createLocaleFromString(EDataType eDataType, String initialValue) {
+		return (Locale)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertLocaleToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

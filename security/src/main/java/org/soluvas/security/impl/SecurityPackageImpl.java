@@ -2,14 +2,18 @@
  */
 package org.soluvas.security.impl;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.security.Action;
+import org.soluvas.security.AppSession;
+import org.soluvas.security.AppSessionStatus;
 import org.soluvas.security.AssignMode;
 import org.soluvas.security.Domain;
 import org.soluvas.security.DomainPermission;
@@ -81,7 +85,28 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass appSessionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass appSessionAttributeEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum assignModeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum appSessionStatusEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -463,9 +488,171 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAppSession() {
+		return appSessionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAppSession_Person() {
+		return (EReference)appSessionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSession_Status() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSession_IpAddress() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSession_Ipv6Address() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSession_IpAddresses() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSession_Ipv6Addresses() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSession_UserAgent() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSession_UserAgents() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAppSession_Attributes() {
+		return (EReference)appSessionEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSession_AccessTime() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSession_ExpiryTime() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSession_TimeZone() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSession_Locale() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAppSessionAttributeEntry() {
+		return appSessionAttributeEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSessionAttributeEntry_Key() {
+		return (EAttribute)appSessionAttributeEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSessionAttributeEntry_Value() {
+		return (EAttribute)appSessionAttributeEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getAssignMode() {
 		return assignModeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getAppSessionStatus() {
+		return appSessionStatusEEnum;
 	}
 
 	/**
@@ -536,8 +723,28 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		createEAttribute(domainPermissionEClass, DOMAIN_PERMISSION__DOMAIN_ROLES);
 		createEAttribute(domainPermissionEClass, DOMAIN_PERMISSION__ACTIONS);
 
+		appSessionEClass = createEClass(APP_SESSION);
+		createEReference(appSessionEClass, APP_SESSION__PERSON);
+		createEAttribute(appSessionEClass, APP_SESSION__STATUS);
+		createEAttribute(appSessionEClass, APP_SESSION__IP_ADDRESS);
+		createEAttribute(appSessionEClass, APP_SESSION__IPV6_ADDRESS);
+		createEAttribute(appSessionEClass, APP_SESSION__IP_ADDRESSES);
+		createEAttribute(appSessionEClass, APP_SESSION__IPV6_ADDRESSES);
+		createEAttribute(appSessionEClass, APP_SESSION__USER_AGENT);
+		createEAttribute(appSessionEClass, APP_SESSION__USER_AGENTS);
+		createEReference(appSessionEClass, APP_SESSION__ATTRIBUTES);
+		createEAttribute(appSessionEClass, APP_SESSION__ACCESS_TIME);
+		createEAttribute(appSessionEClass, APP_SESSION__EXPIRY_TIME);
+		createEAttribute(appSessionEClass, APP_SESSION__TIME_ZONE);
+		createEAttribute(appSessionEClass, APP_SESSION__LOCALE);
+
+		appSessionAttributeEntryEClass = createEClass(APP_SESSION_ATTRIBUTE_ENTRY);
+		createEAttribute(appSessionAttributeEntryEClass, APP_SESSION_ATTRIBUTE_ENTRY__KEY);
+		createEAttribute(appSessionAttributeEntryEClass, APP_SESSION_ATTRIBUTE_ENTRY__VALUE);
+
 		// Create enums
 		assignModeEEnum = createEEnum(ASSIGN_MODE);
+		appSessionStatusEEnum = createEEnum(APP_SESSION_STATUS);
 	}
 
 	/**
@@ -565,6 +772,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 
 		// Obtain other dependent packages
 		CommonsPackage theCommonsPackage = (CommonsPackage)EPackage.Registry.INSTANCE.getEPackage(CommonsPackage.eNS_URI);
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -576,6 +784,8 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		domainEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 		actionEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 		permissionEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		appSessionEClass.getESuperTypes().add(theCommonsPackage.getIdentifiable());
+		appSessionEClass.getESuperTypes().add(theCommonsPackage.getTimestamped());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -619,11 +829,34 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEAttribute(getDomainPermission_DomainRoles(), ecorePackage.getEString(), "domainRoles", null, 1, -1, DomainPermission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainPermission_Actions(), ecorePackage.getEString(), "actions", null, 1, -1, DomainPermission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(appSessionEClass, AppSession.class, "AppSession", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAppSession_Person(), theCommonsPackage.getPersonInfo(), null, "person", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_Status(), this.getAppSessionStatus(), "status", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_IpAddress(), theEcorePackage.getEString(), "ipAddress", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_Ipv6Address(), theEcorePackage.getEString(), "ipv6Address", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_IpAddresses(), theCommonsPackage.getList(), "ipAddresses", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_Ipv6Addresses(), theEcorePackage.getEString(), "ipv6Addresses", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_UserAgent(), theEcorePackage.getEString(), "userAgent", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_UserAgents(), theCommonsPackage.getList(), "userAgents", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAppSession_Attributes(), this.getAppSessionAttributeEntry(), null, "attributes", null, 0, -1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_AccessTime(), theCommonsPackage.getDateTime(), "accessTime", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_ExpiryTime(), theCommonsPackage.getDateTime(), "expiryTime", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_TimeZone(), theCommonsPackage.getDateTimeZone(), "timeZone", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_Locale(), theCommonsPackage.getLocale(), "locale", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(appSessionAttributeEntryEClass, Map.Entry.class, "AppSessionAttributeEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAppSessionAttributeEntry_Key(), theEcorePackage.getEJavaObject(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSessionAttributeEntry_Value(), theEcorePackage.getEJavaObject(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(assignModeEEnum, AssignMode.class, "AssignMode");
 		addEEnumLiteral(assignModeEEnum, AssignMode.MANUAL);
 		addEEnumLiteral(assignModeEEnum, AssignMode.GUEST);
 		addEEnumLiteral(assignModeEEnum, AssignMode.AUTHENTICATED);
+
+		initEEnum(appSessionStatusEEnum, AppSessionStatus.class, "AppSessionStatus");
+		addEEnumLiteral(appSessionStatusEEnum, AppSessionStatus.ACTIVE);
+		addEEnumLiteral(appSessionStatusEEnum, AppSessionStatus.INACTIVE);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -790,6 +1023,54 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		   source, 
 		   new String[] {
 			 "documentation", "Action permissions given to subjects having the specified domain roles of a particular domain."
+		   });		
+		addAnnotation
+		  (appSessionEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "An OAuth app session.\n\nid is used as the accessToken.\n\nSee: https://sites.google.com/a/bippo.co.id/dev/berbatik/oauth\n"
+		   });		
+		addAnnotation
+		  (getAppSession_IpAddress(), 
+		   source, 
+		   new String[] {
+			 "documentation", "IPv4 Address during initial sign in."
+		   });		
+		addAnnotation
+		  (getAppSession_Ipv6Address(), 
+		   source, 
+		   new String[] {
+			 "documentation", "IPv6 address during initial sign in."
+		   });		
+		addAnnotation
+		  (getAppSession_IpAddresses(), 
+		   source, 
+		   new String[] {
+			 "documentation", "IPv4 Addresses used during the whole session."
+		   });		
+		addAnnotation
+		  (getAppSession_Ipv6Addresses(), 
+		   source, 
+		   new String[] {
+			 "documentation", "IPv6 Addresses used during the whole session."
+		   });		
+		addAnnotation
+		  (getAppSession_UserAgents(), 
+		   source, 
+		   new String[] {
+			 "documentation", "HTTP user agents used during the whole session."
+		   });		
+		addAnnotation
+		  (getAppSession_AccessTime(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Returns the last time the application received a request or method invocation from the user associated with this session.\nApplication calls to this method do not affect this access time."
+		   });		
+		addAnnotation
+		  (getAppSession_ExpiryTime(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Returns the time that the session will expire (if it remains idle).\n\nIf there is activity, expiryTime may be extended.\n\n@see {@link getAccessTime()}"
 		   });
 	}
 

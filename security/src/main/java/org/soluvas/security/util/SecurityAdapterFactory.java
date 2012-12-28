@@ -2,11 +2,14 @@
  */
 package org.soluvas.security.util;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.ResourceAware;
+import org.soluvas.commons.Timestamped;
 import org.soluvas.security.*;
 import org.soluvas.security.Action;
 import org.soluvas.security.Domain;
@@ -101,8 +104,24 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 				return createDomainPermissionAdapter();
 			}
 			@Override
+			public Adapter caseAppSession(AppSession object) {
+				return createAppSessionAdapter();
+			}
+			@Override
+			public Adapter caseAppSessionAttributeEntry(Map.Entry<Object, Object> object) {
+				return createAppSessionAttributeEntryAdapter();
+			}
+			@Override
 			public Adapter caseResourceAware(ResourceAware object) {
 				return createResourceAwareAdapter();
+			}
+			@Override
+			public Adapter caseIdentifiable(Identifiable object) {
+				return createIdentifiableAdapter();
+			}
+			@Override
+			public Adapter caseTimestamped(Timestamped object) {
+				return createTimestampedAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -223,6 +242,34 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.security.AppSession <em>App Session</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.security.AppSession
+	 * @generated
+	 */
+	public Adapter createAppSessionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>App Session Attribute Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createAppSessionAttributeEntryAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -233,6 +280,34 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createResourceAwareAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Identifiable
+	 * @generated
+	 */
+	public Adapter createIdentifiableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Timestamped <em>Timestamped</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Timestamped
+	 * @generated
+	 */
+	public Adapter createTimestampedAdapter() {
 		return null;
 	}
 

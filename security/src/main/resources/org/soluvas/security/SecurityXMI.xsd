@@ -24,6 +24,12 @@
       </xsd:enumeration>
     </xsd:restriction>
   </xsd:simpleType>
+  <xsd:simpleType name="AppSessionStatus">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="active"/>
+      <xsd:enumeration value="inactive"/>
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType name="Role">
     <xsd:annotation>
       <xsd:documentation>Roles contain global permissions.</xsd:documentation>
@@ -271,4 +277,89 @@ action: edit,delete
 </xsd:documentation>
     </xsd:annotation>
   </xsd:element>
+  <xsd:complexType name="AppSession">
+    <xsd:annotation>
+      <xsd:documentation>An OAuth app session.
+
+id is used as the accessToken.
+
+See: https://sites.google.com/a/bippo.co.id/dev/berbatik/oauth
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="commons:Identifiable">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="person" type="commons:PersonInfo"/>
+          <xsd:element name="attributes" type="security:AppSessionAttributeEntry"/>
+        </xsd:choice>
+        <xsd:attribute name="creationTime" type="xsd:string"/>
+        <xsd:attribute name="modificationTime" type="xsd:string"/>
+        <xsd:attribute name="status" type="security:AppSessionStatus"/>
+        <xsd:attribute name="ipAddress" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>IPv4 Address during initial sign in.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ipv6Address" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>IPv6 address during initial sign in.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ipAddresses" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>IPv4 Addresses used during the whole session.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ipv6Addresses" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>IPv6 Addresses used during the whole session.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="userAgent" type="xsd:string"/>
+        <xsd:attribute name="userAgents" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>HTTP user agents used during the whole session.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="accessTime" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Returns the last time the application received a request or method invocation from the user associated with this session.
+Application calls to this method do not affect this access time.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="expiryTime" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Returns the time that the session will expire (if it remains idle).
+
+If there is activity, expiryTime may be extended.
+
+@see {@link getAccessTime()}</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="timeZone" type="xsd:string"/>
+        <xsd:attribute name="locale" type="xsd:string"/>
+        <xsd:attribute name="person" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="AppSession" type="security:AppSession">
+    <xsd:annotation>
+      <xsd:documentation>An OAuth app session.
+
+id is used as the accessToken.
+
+See: https://sites.google.com/a/bippo.co.id/dev/berbatik/oauth
+</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="AppSessionAttributeEntry">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="key" type="xsd:string"/>
+    <xsd:attribute name="value" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="AppSessionAttributeEntry" type="security:AppSessionAttributeEntry"/>
 </xsd:schema>
