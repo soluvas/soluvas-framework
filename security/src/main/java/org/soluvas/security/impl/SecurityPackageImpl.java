@@ -506,7 +506,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppSession_Status() {
+	public EAttribute getAppSession_SchemaVersion() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -515,7 +515,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppSession_IpAddress() {
+	public EAttribute getAppSession_Status() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -524,7 +524,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppSession_Ipv6Address() {
+	public EAttribute getAppSession_IpAddress() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -533,7 +533,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppSession_IpAddresses() {
+	public EAttribute getAppSession_Ipv6Address() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -542,7 +542,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppSession_Ipv6Addresses() {
+	public EAttribute getAppSession_IpAddresses() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -551,7 +551,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppSession_UserAgent() {
+	public EAttribute getAppSession_Ipv6Addresses() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -560,7 +560,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppSession_UserAgents() {
+	public EAttribute getAppSession_UserAgent() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -569,8 +569,17 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAppSession_UserAgents() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getAppSession_Attributes() {
-		return (EReference)appSessionEClass.getEStructuralFeatures().get(8);
+		return (EReference)appSessionEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -579,15 +588,6 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * @generated
 	 */
 	public EAttribute getAppSession_AccessTime() {
-		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAppSession_ExpiryTime() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -596,7 +596,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppSession_TimeZone() {
+	public EAttribute getAppSession_ExpiryTime() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -605,8 +605,17 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppSession_Locale() {
+	public EAttribute getAppSession_TimeZone() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSession_Locale() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -725,6 +734,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 
 		appSessionEClass = createEClass(APP_SESSION);
 		createEReference(appSessionEClass, APP_SESSION__PERSON);
+		createEAttribute(appSessionEClass, APP_SESSION__SCHEMA_VERSION);
 		createEAttribute(appSessionEClass, APP_SESSION__STATUS);
 		createEAttribute(appSessionEClass, APP_SESSION__IP_ADDRESS);
 		createEAttribute(appSessionEClass, APP_SESSION__IPV6_ADDRESS);
@@ -786,6 +796,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		permissionEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 		appSessionEClass.getESuperTypes().add(theCommonsPackage.getIdentifiable());
 		appSessionEClass.getESuperTypes().add(theCommonsPackage.getTimestamped());
+		appSessionEClass.getESuperTypes().add(theCommonsPackage.getSchemaVersionable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -831,6 +842,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 
 		initEClass(appSessionEClass, AppSession.class, "AppSession", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAppSession_Person(), theCommonsPackage.getPersonInfo(), null, "person", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_SchemaVersion(), theEcorePackage.getELong(), "schemaVersion", "2", 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_Status(), this.getAppSessionStatus(), "status", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_IpAddress(), theEcorePackage.getEString(), "ipAddress", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_Ipv6Address(), theEcorePackage.getEString(), "ipv6Address", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -845,7 +857,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEAttribute(getAppSession_Locale(), theCommonsPackage.getLocale(), "locale", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(appSessionAttributeEntryEClass, Map.Entry.class, "AppSessionAttributeEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAppSessionAttributeEntry_Key(), theEcorePackage.getEJavaObject(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSessionAttributeEntry_Key(), theEcorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSessionAttributeEntry_Value(), theEcorePackage.getEJavaObject(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals

@@ -162,6 +162,10 @@
   <children xmi:type="notation:Node" xmi:id="_1DjHwVDlEeK-uKzH-gVtLw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_1DkV4FDlEeK-uKzH-gVtLw" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_1Dk88FDlEeK-uKzH-gVtLw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_uUbZwVGoEeKa0uww3Nhhxg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="security.ecore#//AppSession/schemaVersion"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uUbZwlGoEeKa0uww3Nhhxg"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_YUvkgFDmEeK-uKzH-gVtLw" type="2001">
         <element xmi:type="ecore:EAttribute" href="security.ecore#//AppSession/status"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_YUvkgVDmEeK-uKzH-gVtLw"/>

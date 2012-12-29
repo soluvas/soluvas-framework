@@ -9,6 +9,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.ResourceAware;
+import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
 import org.soluvas.security.*;
 import org.soluvas.security.Action;
@@ -108,7 +109,7 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 				return createAppSessionAdapter();
 			}
 			@Override
-			public Adapter caseAppSessionAttributeEntry(Map.Entry<Object, Object> object) {
+			public Adapter caseAppSessionAttributeEntry(Map.Entry<String, Object> object) {
 				return createAppSessionAttributeEntryAdapter();
 			}
 			@Override
@@ -122,6 +123,10 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTimestamped(Timestamped object) {
 				return createTimestampedAdapter();
+			}
+			@Override
+			public Adapter caseSchemaVersionable(SchemaVersionable object) {
+				return createSchemaVersionableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -308,6 +313,20 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTimestampedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.SchemaVersionable <em>Schema Versionable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.SchemaVersionable
+	 * @generated
+	 */
+	public Adapter createSchemaVersionableAdapter() {
 		return null;
 	}
 

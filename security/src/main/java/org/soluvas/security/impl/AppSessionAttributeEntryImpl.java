@@ -29,7 +29,7 @@ import org.soluvas.security.SecurityPackage;
  *
  * @generated
  */
-public class AppSessionAttributeEntryImpl extends EObjectImpl implements BasicEMap.Entry<Object,Object> {
+public class AppSessionAttributeEntryImpl extends EObjectImpl implements BasicEMap.Entry<String,Object> {
 	/**
 	 * The default value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -38,7 +38,7 @@ public class AppSessionAttributeEntryImpl extends EObjectImpl implements BasicEM
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Object KEY_EDEFAULT = null;
+	protected static final String KEY_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
@@ -48,7 +48,7 @@ public class AppSessionAttributeEntryImpl extends EObjectImpl implements BasicEM
 	 * @generated
 	 * @ordered
 	 */
-	protected Object key = KEY_EDEFAULT;
+	protected String key = KEY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getTypedValue() <em>Value</em>}' attribute.
@@ -94,7 +94,7 @@ public class AppSessionAttributeEntryImpl extends EObjectImpl implements BasicEM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object getTypedKey() {
+	public String getTypedKey() {
 		return key;
 	}
 
@@ -103,8 +103,8 @@ public class AppSessionAttributeEntryImpl extends EObjectImpl implements BasicEM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTypedKey(Object newKey) {
-		Object oldKey = key;
+	public void setTypedKey(String newKey) {
+		String oldKey = key;
 		key = newKey;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.APP_SESSION_ATTRIBUTE_ENTRY__KEY, oldKey, key));
@@ -156,7 +156,7 @@ public class AppSessionAttributeEntryImpl extends EObjectImpl implements BasicEM
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SecurityPackage.APP_SESSION_ATTRIBUTE_ENTRY__KEY:
-				setTypedKey(newValue);
+				setTypedKey((String)newValue);
 				return;
 			case SecurityPackage.APP_SESSION_ATTRIBUTE_ENTRY__VALUE:
 				setTypedValue(newValue);
@@ -251,7 +251,7 @@ public class AppSessionAttributeEntryImpl extends EObjectImpl implements BasicEM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object getKey() {
+	public String getKey() {
 		return getTypedKey();
 	}
 
@@ -260,7 +260,7 @@ public class AppSessionAttributeEntryImpl extends EObjectImpl implements BasicEM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setKey(Object key) {
+	public void setKey(String key) {
 		setTypedKey(key);
 	}
 
@@ -290,9 +290,9 @@ public class AppSessionAttributeEntryImpl extends EObjectImpl implements BasicEM
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
-	public EMap<Object, Object> getEMap() {
+	public EMap<String, Object> getEMap() {
 		EObject container = eContainer();
-		return container == null ? null : (EMap<Object, Object>)container.eGet(eContainmentFeature());
+		return container == null ? null : (EMap<String, Object>)container.eGet(eContainmentFeature());
 	}
 
 } //AppSessionAttributeEntryImpl

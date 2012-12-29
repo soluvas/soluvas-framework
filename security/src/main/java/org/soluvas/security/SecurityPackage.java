@@ -598,13 +598,22 @@ public interface SecurityPackage extends EPackage {
 	int APP_SESSION__PERSON = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Schema Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__SCHEMA_VERSION = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__STATUS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 3;
+	int APP_SESSION__STATUS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Ip Address</b></em>' attribute.
@@ -613,7 +622,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__IP_ADDRESS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 4;
+	int APP_SESSION__IP_ADDRESS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Ipv6 Address</b></em>' attribute.
@@ -622,7 +631,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__IPV6_ADDRESS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 5;
+	int APP_SESSION__IPV6_ADDRESS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Ip Addresses</b></em>' attribute.
@@ -631,7 +640,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__IP_ADDRESSES = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 6;
+	int APP_SESSION__IP_ADDRESSES = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Ipv6 Addresses</b></em>' attribute.
@@ -640,7 +649,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__IPV6_ADDRESSES = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 7;
+	int APP_SESSION__IPV6_ADDRESSES = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>User Agent</b></em>' attribute.
@@ -649,7 +658,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__USER_AGENT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 8;
+	int APP_SESSION__USER_AGENT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>User Agents</b></em>' attribute.
@@ -658,7 +667,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__USER_AGENTS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 9;
+	int APP_SESSION__USER_AGENTS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' map.
@@ -667,7 +676,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__ATTRIBUTES = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 10;
+	int APP_SESSION__ATTRIBUTES = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Access Time</b></em>' attribute.
@@ -676,7 +685,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__ACCESS_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 11;
+	int APP_SESSION__ACCESS_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Expiry Time</b></em>' attribute.
@@ -685,7 +694,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__EXPIRY_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 12;
+	int APP_SESSION__EXPIRY_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Time Zone</b></em>' attribute.
@@ -694,7 +703,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__TIME_ZONE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 13;
+	int APP_SESSION__TIME_ZONE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Locale</b></em>' attribute.
@@ -703,7 +712,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__LOCALE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 14;
+	int APP_SESSION__LOCALE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 15;
 
 	/**
 	 * The number of structural features of the '<em>App Session</em>' class.
@@ -712,7 +721,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION_FEATURE_COUNT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 15;
+	int APP_SESSION_FEATURE_COUNT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 16;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.security.impl.AppSessionAttributeEntryImpl <em>App Session Attribute Entry</em>}' class.
@@ -1140,6 +1149,17 @@ public interface SecurityPackage extends EPackage {
 	EReference getAppSession_Person();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getSchemaVersion <em>Schema Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Schema Version</em>'.
+	 * @see org.soluvas.security.AppSession#getSchemaVersion()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EAttribute getAppSession_SchemaVersion();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getStatus <em>Status</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1277,7 +1297,7 @@ public interface SecurityPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>App Session Attribute Entry</em>'.
 	 * @see java.util.Map.Entry
-	 * @model keyDataType="org.eclipse.emf.ecore.EJavaObject"
+	 * @model keyDataType="org.eclipse.emf.ecore.EString"
 	 *        valueDataType="org.eclipse.emf.ecore.EJavaObject"
 	 * @generated
 	 */
@@ -1634,6 +1654,14 @@ public interface SecurityPackage extends EPackage {
 		 * @generated
 		 */
 		EReference APP_SESSION__PERSON = eINSTANCE.getAppSession_Person();
+
+		/**
+		 * The meta object literal for the '<em><b>Schema Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION__SCHEMA_VERSION = eINSTANCE.getAppSession_SchemaVersion();
 
 		/**
 		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.

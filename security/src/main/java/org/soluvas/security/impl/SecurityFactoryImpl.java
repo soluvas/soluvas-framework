@@ -191,7 +191,7 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map.Entry<Object, Object> createAppSessionAttributeEntry() {
+	public Map.Entry<String, Object> createAppSessionAttributeEntry() {
 		AppSessionAttributeEntryImpl appSessionAttributeEntry = new AppSessionAttributeEntryImpl();
 		return appSessionAttributeEntry;
 	}

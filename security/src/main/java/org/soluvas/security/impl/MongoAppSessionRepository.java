@@ -1,16 +1,18 @@
-package org.soluvas.security;
+package org.soluvas.security.impl;
 
 import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.PreDestroy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.repository.CrudRepositoryBase;
 import org.soluvas.mongo.MongoUtils;
-import org.soluvas.security.impl.AppSessionImpl;
+import org.soluvas.security.AppSession;
+import org.soluvas.security.AppSessionRepository;
 
 import com.google.code.morphia.Morphia;
 import com.google.common.base.Function;
@@ -52,7 +54,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 				db.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
 			coll  = db.getCollection("appSession");
 			coll.ensureIndex(new BasicDBObject("className", 1));
-			coll.ensureIndex(new BasicDBObject("id", 1));
+			coll.ensureIndex(new BasicDBObject("schemaVersion", 1));
 			coll.ensureIndex(new BasicDBObject("status", 1));
 			coll.ensureIndex(new BasicDBObject("person.id", 1));
 			coll.ensureIndex(new BasicDBObject("creationTime", -1));
@@ -67,6 +69,15 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 		} catch (Exception e) {
 			throw new RuntimeException("Cannot connect to mongo DB "+ realMongoUri.getHosts() +
 					" for AppSessionRepository", e);
+		}
+	}
+
+	@PreDestroy
+	public void destroy() {
+		log.info("Shutting down AppSessionRepository");
+		if (coll != null) {
+			coll.getDB().cleanCursors(true);
+			coll.getDB().getMongo().close();
 		}
 	}
 

@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.ResourceAware;
+import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
 import org.soluvas.security.*;
 import org.soluvas.security.Action;
@@ -127,11 +128,12 @@ public class SecuritySwitch<T> extends Switch<T> {
 				T result = caseAppSession(appSession);
 				if (result == null) result = caseIdentifiable(appSession);
 				if (result == null) result = caseTimestamped(appSession);
+				if (result == null) result = caseSchemaVersionable(appSession);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case SecurityPackage.APP_SESSION_ATTRIBUTE_ENTRY: {
-				@SuppressWarnings("unchecked") Map.Entry<Object, Object> appSessionAttributeEntry = (Map.Entry<Object, Object>)theEObject;
+				@SuppressWarnings("unchecked") Map.Entry<String, Object> appSessionAttributeEntry = (Map.Entry<String, Object>)theEObject;
 				T result = caseAppSessionAttributeEntry(appSessionAttributeEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -271,7 +273,7 @@ public class SecuritySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAppSessionAttributeEntry(Map.Entry<Object, Object> object) {
+	public T caseAppSessionAttributeEntry(Map.Entry<String, Object> object) {
 		return null;
 	}
 
@@ -317,6 +319,21 @@ public class SecuritySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTimestamped(Timestamped object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Schema Versionable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Schema Versionable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSchemaVersionable(SchemaVersionable object) {
 		return null;
 	}
 

@@ -294,6 +294,7 @@ See: https://sites.google.com/a/bippo.co.id/dev/berbatik/oauth
         </xsd:choice>
         <xsd:attribute name="creationTime" type="xsd:string"/>
         <xsd:attribute name="modificationTime" type="xsd:string"/>
+        <xsd:attribute name="schemaVersion" type="xsd:long"/>
         <xsd:attribute name="status" type="security:AppSessionStatus"/>
         <xsd:attribute name="ipAddress" type="xsd:string">
           <xsd:annotation>

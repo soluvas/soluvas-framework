@@ -12,6 +12,7 @@ import org.joda.time.DateTimeZone;
 
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
 
 /**
@@ -32,6 +33,7 @@ import org.soluvas.commons.Timestamped;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.security.AppSession#getPerson <em>Person</em>}</li>
+ *   <li>{@link org.soluvas.security.AppSession#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.security.AppSession#getStatus <em>Status</em>}</li>
  *   <li>{@link org.soluvas.security.AppSession#getIpAddress <em>Ip Address</em>}</li>
  *   <li>{@link org.soluvas.security.AppSession#getIpv6Address <em>Ipv6 Address</em>}</li>
@@ -51,7 +53,7 @@ import org.soluvas.commons.Timestamped;
  * @model
  * @generated
  */
-public interface AppSession extends Identifiable, Timestamped {
+public interface AppSession extends Identifiable, Timestamped, SchemaVersionable {
 	/**
 	 * Returns the value of the '<em><b>Person</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -77,6 +79,33 @@ public interface AppSession extends Identifiable, Timestamped {
 	 * @generated
 	 */
 	void setPerson(PersonInfo value);
+
+	/**
+	 * Returns the value of the '<em><b>Schema Version</b></em>' attribute.
+	 * The default value is <code>"2"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Schema Version</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Schema Version</em>' attribute.
+	 * @see #setSchemaVersion(long)
+	 * @see org.soluvas.security.SecurityPackage#getAppSession_SchemaVersion()
+	 * @model default="2"
+	 * @generated
+	 */
+	long getSchemaVersion();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.security.AppSession#getSchemaVersion <em>Schema Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Schema Version</em>' attribute.
+	 * @see #getSchemaVersion()
+	 * @generated
+	 */
+	void setSchemaVersion(long value);
 
 	/**
 	 * Returns the value of the '<em><b>Status</b></em>' attribute.
@@ -260,7 +289,7 @@ public interface AppSession extends Identifiable, Timestamped {
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' map.
-	 * The key is of type {@link java.lang.Object},
+	 * The key is of type {@link java.lang.String},
 	 * and the value is of type {@link java.lang.Object},
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -270,10 +299,10 @@ public interface AppSession extends Identifiable, Timestamped {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Attributes</em>' map.
 	 * @see org.soluvas.security.SecurityPackage#getAppSession_Attributes()
-	 * @model mapType="org.soluvas.security.AppSessionAttributeEntry<org.eclipse.emf.ecore.EJavaObject, org.eclipse.emf.ecore.EJavaObject>"
+	 * @model mapType="org.soluvas.security.AppSessionAttributeEntry<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EJavaObject>"
 	 * @generated
 	 */
-	EMap<Object, Object> getAttributes();
+	EMap<String, Object> getAttributes();
 
 	/**
 	 * Returns the value of the '<em><b>Access Time</b></em>' attribute.

@@ -7,30 +7,27 @@ import java.util.Locale;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EMap;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
-
 import org.soluvas.security.AppSession;
 import org.soluvas.security.AppSessionStatus;
 import org.soluvas.security.SecurityPackage;
+
+import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Id;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,6 +40,7 @@ import org.soluvas.security.SecurityPackage;
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getCreationTime <em>Creation Time</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getModificationTime <em>Modification Time</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getPerson <em>Person</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getIpAddress <em>Ip Address</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getIpv6Address <em>Ipv6 Address</em>}</li>
@@ -60,6 +58,7 @@ import org.soluvas.security.SecurityPackage;
  *
  * @generated
  */
+@Entity
 public class AppSessionImpl extends EObjectImpl implements AppSession {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -79,6 +78,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * @generated
 	 * @ordered
 	 */
+	@Id
 	protected String id = ID_EDEFAULT;
 
 	/**
@@ -130,6 +130,26 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * @ordered
 	 */
 	protected PersonInfo person;
+
+	/**
+	 * The default value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSchemaVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long SCHEMA_VERSION_EDEFAULT = 2L;
+
+	/**
+	 * The cached value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSchemaVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected long schemaVersion = SCHEMA_VERSION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
@@ -259,7 +279,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * @generated
 	 * @ordered
 	 */
-	protected EMap<Object, Object> attributes;
+	protected EMap<String, Object> attributes;
 
 	/**
 	 * The default value of the '{@link #getAccessTime() <em>Access Time</em>}' attribute.
@@ -365,6 +385,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -374,6 +395,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(String newId) {
 		String oldId = id;
 		id = newId;
@@ -386,6 +408,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getCreationTime() {
 		return creationTime;
 	}
@@ -395,6 +418,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCreationTime(DateTime newCreationTime) {
 		DateTime oldCreationTime = creationTime;
 		creationTime = newCreationTime;
@@ -407,6 +431,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getModificationTime() {
 		return modificationTime;
 	}
@@ -416,6 +441,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setModificationTime(DateTime newModificationTime) {
 		DateTime oldModificationTime = modificationTime;
 		modificationTime = newModificationTime;
@@ -428,6 +454,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PersonInfo getPerson() {
 		if (person != null && ((EObject)person).eIsProxy()) {
 			InternalEObject oldPerson = (InternalEObject)person;
@@ -454,6 +481,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPerson(PersonInfo newPerson) {
 		PersonInfo oldPerson = person;
 		person = newPerson;
@@ -466,6 +494,28 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public long getSchemaVersion() {
+		return schemaVersion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSchemaVersion(long newSchemaVersion) {
+		long oldSchemaVersion = schemaVersion;
+		schemaVersion = newSchemaVersion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.APP_SESSION__SCHEMA_VERSION, oldSchemaVersion, schemaVersion));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public AppSessionStatus getStatus() {
 		return status;
 	}
@@ -475,6 +525,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatus(AppSessionStatus newStatus) {
 		AppSessionStatus oldStatus = status;
 		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
@@ -487,6 +538,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getIpAddress() {
 		return ipAddress;
 	}
@@ -496,6 +548,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIpAddress(String newIpAddress) {
 		String oldIpAddress = ipAddress;
 		ipAddress = newIpAddress;
@@ -508,6 +561,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getIpv6Address() {
 		return ipv6Address;
 	}
@@ -517,6 +571,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIpv6Address(String newIpv6Address) {
 		String oldIpv6Address = ipv6Address;
 		ipv6Address = newIpv6Address;
@@ -529,6 +584,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List getIpAddresses() {
 		return ipAddresses;
 	}
@@ -538,6 +594,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIpAddresses(List newIpAddresses) {
 		List oldIpAddresses = ipAddresses;
 		ipAddresses = newIpAddresses;
@@ -550,6 +607,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getIpv6Addresses() {
 		return ipv6Addresses;
 	}
@@ -559,6 +617,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIpv6Addresses(String newIpv6Addresses) {
 		String oldIpv6Addresses = ipv6Addresses;
 		ipv6Addresses = newIpv6Addresses;
@@ -571,6 +630,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getUserAgent() {
 		return userAgent;
 	}
@@ -580,6 +640,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUserAgent(String newUserAgent) {
 		String oldUserAgent = userAgent;
 		userAgent = newUserAgent;
@@ -592,6 +653,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List getUserAgents() {
 		return userAgents;
 	}
@@ -601,6 +663,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUserAgents(List newUserAgents) {
 		List oldUserAgents = userAgents;
 		userAgents = newUserAgents;
@@ -613,9 +676,10 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EMap<Object, Object> getAttributes() {
+	@Override
+	public EMap<String, Object> getAttributes() {
 		if (attributes == null) {
-			attributes = new EcoreEMap<Object,Object>(SecurityPackage.Literals.APP_SESSION_ATTRIBUTE_ENTRY, AppSessionAttributeEntryImpl.class, this, SecurityPackage.APP_SESSION__ATTRIBUTES);
+			attributes = new EcoreEMap<String,Object>(SecurityPackage.Literals.APP_SESSION_ATTRIBUTE_ENTRY, AppSessionAttributeEntryImpl.class, this, SecurityPackage.APP_SESSION__ATTRIBUTES);
 		}
 		return attributes;
 	}
@@ -625,6 +689,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getAccessTime() {
 		return accessTime;
 	}
@@ -634,6 +699,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAccessTime(DateTime newAccessTime) {
 		DateTime oldAccessTime = accessTime;
 		accessTime = newAccessTime;
@@ -646,6 +712,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getExpiryTime() {
 		return expiryTime;
 	}
@@ -655,6 +722,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpiryTime(DateTime newExpiryTime) {
 		DateTime oldExpiryTime = expiryTime;
 		expiryTime = newExpiryTime;
@@ -667,6 +735,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTimeZone getTimeZone() {
 		return timeZone;
 	}
@@ -676,6 +745,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTimeZone(DateTimeZone newTimeZone) {
 		DateTimeZone oldTimeZone = timeZone;
 		timeZone = newTimeZone;
@@ -688,6 +758,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Locale getLocale() {
 		return locale;
 	}
@@ -697,6 +768,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLocale(Locale newLocale) {
 		Locale oldLocale = locale;
 		locale = newLocale;
@@ -735,6 +807,8 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 			case SecurityPackage.APP_SESSION__PERSON:
 				if (resolve) return getPerson();
 				return basicGetPerson();
+			case SecurityPackage.APP_SESSION__SCHEMA_VERSION:
+				return getSchemaVersion();
 			case SecurityPackage.APP_SESSION__STATUS:
 				return getStatus();
 			case SecurityPackage.APP_SESSION__IP_ADDRESS:
@@ -783,6 +857,9 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 				return;
 			case SecurityPackage.APP_SESSION__PERSON:
 				setPerson((PersonInfo)newValue);
+				return;
+			case SecurityPackage.APP_SESSION__SCHEMA_VERSION:
+				setSchemaVersion((Long)newValue);
 				return;
 			case SecurityPackage.APP_SESSION__STATUS:
 				setStatus((AppSessionStatus)newValue);
@@ -844,6 +921,9 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 			case SecurityPackage.APP_SESSION__PERSON:
 				setPerson((PersonInfo)null);
 				return;
+			case SecurityPackage.APP_SESSION__SCHEMA_VERSION:
+				setSchemaVersion(SCHEMA_VERSION_EDEFAULT);
+				return;
 			case SecurityPackage.APP_SESSION__STATUS:
 				setStatus(STATUS_EDEFAULT);
 				return;
@@ -900,6 +980,8 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 				return MODIFICATION_TIME_EDEFAULT == null ? modificationTime != null : !MODIFICATION_TIME_EDEFAULT.equals(modificationTime);
 			case SecurityPackage.APP_SESSION__PERSON:
 				return person != null;
+			case SecurityPackage.APP_SESSION__SCHEMA_VERSION:
+				return schemaVersion != SCHEMA_VERSION_EDEFAULT;
 			case SecurityPackage.APP_SESSION__STATUS:
 				return status != STATUS_EDEFAULT;
 			case SecurityPackage.APP_SESSION__IP_ADDRESS:
@@ -942,6 +1024,11 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 				default: return -1;
 			}
 		}
+		if (baseClass == SchemaVersionable.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -956,6 +1043,11 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 			switch (baseFeatureID) {
 				case CommonsPackage.TIMESTAMPED__CREATION_TIME: return SecurityPackage.APP_SESSION__CREATION_TIME;
 				case CommonsPackage.TIMESTAMPED__MODIFICATION_TIME: return SecurityPackage.APP_SESSION__MODIFICATION_TIME;
+				default: return -1;
+			}
+		}
+		if (baseClass == SchemaVersionable.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}
@@ -978,6 +1070,8 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 		result.append(creationTime);
 		result.append(", modificationTime: ");
 		result.append(modificationTime);
+		result.append(", schemaVersion: ");
+		result.append(schemaVersion);
 		result.append(", status: ");
 		result.append(status);
 		result.append(", ipAddress: ");
