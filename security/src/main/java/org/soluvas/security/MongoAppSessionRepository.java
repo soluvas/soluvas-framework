@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.repository.CrudRepositoryBase;
 import org.soluvas.mongo.MongoUtils;
+import org.soluvas.security.impl.AppSessionImpl;
 
 import com.google.code.morphia.Morphia;
 import com.google.common.base.Function;
@@ -33,70 +34,49 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 	implements AppSessionRepository {
 	private static final Logger log = LoggerFactory.getLogger(MongoAppSessionRepository.class);
 	
-	private String mongoUri;
-	private String nameSpace;
-	private DBCollection coll;
-	private Morphia morphia;
+	private final String mongoUri;
+	private final DBCollection coll;
+	private final Morphia morphia;
 	
-	public MongoAppSessionRepository(String mongoUri, String nameSpace) {
+	public MongoAppSessionRepository(String mongoUri) {
 		super();
+		// WARNING: mongoUri may contain password!
 		this.mongoUri = mongoUri;
-		this.nameSpace = nameSpace;
-	}
-
-	/* (non-Javadoc)
-	 * @see tmp.org.soluvas.app.AppSessionDao#init()
-	 */
-	@Override
-	public void init() {
+		final MongoURI realMongoUri = new MongoURI(mongoUri);
 		try {
-			log.info("Connecting to MongoDB database {}", mongoUri);
+			log.info("Connecting to MongoDB database {} for AppSessionRepository",
+					realMongoUri.getHosts());
 			// connecting to mongoDB
-			MongoURI realMongoUri = new MongoURI(mongoUri);
-			DB db = realMongoUri.connectDB();
+			final DB db = realMongoUri.connectDB();
 			if (realMongoUri.getUsername() != null)
 				db.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
-			coll  = db.getCollection(getNameSpace() + "Session");
+			coll  = db.getCollection("appSession");
+			coll.ensureIndex(new BasicDBObject("className", 1));
+			coll.ensureIndex(new BasicDBObject("id", 1));
+			coll.ensureIndex(new BasicDBObject("status", 1));
+			coll.ensureIndex(new BasicDBObject("person.id", 1));
+			coll.ensureIndex(new BasicDBObject("creationTime", -1));
+			coll.ensureIndex(new BasicDBObject("modificationTime", -1));
+			coll.ensureIndex(new BasicDBObject("accessTime", -1));
+			coll.ensureIndex(new BasicDBObject("ipAddress", 1));
+			coll.ensureIndex(new BasicDBObject("ipv6Address", 1));
+			coll.ensureIndex(new BasicDBObject("userAgent", 1));
 			
 			morphia = new Morphia();
-			morphia.map(AppSession.class);
+			morphia.map(AppSessionImpl.class);
 		} catch (Exception e) {
-			throw new RuntimeException("Cannot connect to mongo DB "+ mongoUri, e);
+			throw new RuntimeException("Cannot connect to mongo DB "+ realMongoUri.getHosts() +
+					" for AppSessionRepository", e);
 		}
-	}
-
-	/* (non-Javadoc)
-	 * @see tmp.org.soluvas.app.AppSessionDao#getNameSpace()
-	 */
-	@Override
-	public String getNameSpace() {
-		return nameSpace;
-	}
-
-	/* (non-Javadoc)
-	 * @see tmp.org.soluvas.app.AppSessionDao#setNameSpace(java.lang.String)
-	 */
-	@Override
-	public void setNameSpace(String nameSpace) {
-		this.nameSpace = nameSpace;
 	}
 
 	/* (non-Javadoc)
 	 * @see tmp.org.soluvas.app.AppSessionDao#getMongoUri()
 	 */
-	@Override
 	public String getMongoUri() {
 		return mongoUri;
 	}
 
-	/* (non-Javadoc)
-	 * @see tmp.org.soluvas.app.AppSessionDao#setMongoUri(java.lang.String)
-	 */
-	@Override
-	public void setMongoUri(String mongoUri) {
-		this.mongoUri = mongoUri;
-	}
-	
 	/* (non-Javadoc)
 	 * @see tmp.org.soluvas.app.AppSessionDao#findOneByActive(java.lang.String)
 	 */
@@ -104,8 +84,8 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 	public AppSession findOneByActive(String _id) {
 		if (_id == null)
 			return null;
-		DBCursor cursor = coll.find(new BasicDBObject(ImmutableMap.of("_id", _id, "status", "active")));
-		AppSession webSession = Iterables.getOnlyElement(MongoUtils.transform(cursor, new Function<DBObject, AppSession>() {
+		final DBCursor cursor = coll.find(new BasicDBObject(ImmutableMap.of("_id", _id, "status", "active")));
+		final AppSession webSession = Iterables.getOnlyElement(MongoUtils.transform(cursor, new Function<DBObject, AppSession>() {
 			@Override
 			public AppSession apply(DBObject input) {
 				return morphia.fromDBObject(AppSession.class, input);
@@ -117,8 +97,8 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 
 	@Override
 	public <S extends AppSession> S add(@Nonnull final S appSession) {
-		log.info("Insert {} Web Session for {} with User Agent: {} (dated: {})",
-				nameSpace, appSession.getPerson().getId(), appSession.getUserAgent(),
+		log.info("Insert AppSession for {} with User Agent: {} (dated: {})",
+				appSession.getPerson().getId(), appSession.getUserAgent(),
 				appSession.getCreationTime() );
 		final DBObject obj = morphia.toDBObject(appSession);
 		coll.insert(obj);
@@ -127,9 +107,8 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 
 	@Override
 	public <S extends AppSession> S modify(@Nonnull final String id, @Nonnull final S appSession) {
-		log.info("Update {} Web Session for {} to {}({})",
-				nameSpace, id, appSession.getStatus(),
-				appSession.getModificationTime() );
+		log.info("Update AppSession for {} to {}({})",
+				id, appSession.getStatus(), appSession.getModificationTime() );
 		final DBObject obj = morphia.toDBObject(appSession);
 		coll.update(new BasicDBObject("_id", id), obj, true, false);
 		return appSession;
@@ -137,14 +116,21 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 
 	@Override
 	public boolean exists(String id) {
-		// TODO Auto-generated method stub
-		return false;
+		final long count = coll.count(new BasicDBObject("_id", id));
+		return count >= 1;
 	}
 
 	@Override
 	public Collection<AppSession> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		final DBCursor cursor = coll.find().sort(new BasicDBObject("creationTime", -1));
+		final List<AppSession> appSessions = MongoUtils.transform(cursor, new Function<DBObject, AppSession>() {
+			@Override
+			public AppSession apply(DBObject input) {
+				return morphia.fromDBObject(AppSession.class, input);
+			}
+		});
+		log.debug("findAll returns {} documents", appSessions.size());
+		return appSessions;
 	}
 
 	@Override
@@ -169,11 +155,9 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 		return (S) webSession;
 	}
 
-	@Override
-	@Nullable
+	@Override @Nullable
 	protected String getId(AppSession entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return entity.getId();
 	}
 
 	@Override
