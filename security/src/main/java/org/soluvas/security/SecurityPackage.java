@@ -4,6 +4,7 @@ package org.soluvas.security;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -634,7 +635,7 @@ public interface SecurityPackage extends EPackage {
 	int APP_SESSION__IPV6_ADDRESS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Ip Addresses</b></em>' attribute.
+	 * The feature id for the '<em><b>Ip Addresses</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -643,7 +644,7 @@ public interface SecurityPackage extends EPackage {
 	int APP_SESSION__IP_ADDRESSES = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Ipv6 Addresses</b></em>' attribute.
+	 * The feature id for the '<em><b>Ipv6 Addresses</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -679,13 +680,22 @@ public interface SecurityPackage extends EPackage {
 	int APP_SESSION__ATTRIBUTES = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 11;
 
 	/**
+	 * The feature id for the '<em><b>Timeout</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION__TIMEOUT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 12;
+
+	/**
 	 * The feature id for the '<em><b>Access Time</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__ACCESS_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 12;
+	int APP_SESSION__ACCESS_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Expiry Time</b></em>' attribute.
@@ -694,7 +704,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__EXPIRY_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 13;
+	int APP_SESSION__EXPIRY_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Time Zone</b></em>' attribute.
@@ -703,7 +713,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__TIME_ZONE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 14;
+	int APP_SESSION__TIME_ZONE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Locale</b></em>' attribute.
@@ -712,7 +722,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION__LOCALE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 15;
+	int APP_SESSION__LOCALE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 16;
 
 	/**
 	 * The number of structural features of the '<em>App Session</em>' class.
@@ -721,7 +731,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_SESSION_FEATURE_COUNT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 16;
+	int APP_SESSION_FEATURE_COUNT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 17;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.security.impl.AppSessionAttributeEntryImpl <em>App Session Attribute Entry</em>}' class.
@@ -780,6 +790,17 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 */
 	int APP_SESSION_STATUS = 10;
+
+
+	/**
+	 * The meta object id for the '<em>Session</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.apache.shiro.session.Session
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getSession()
+	 * @generated
+	 */
+	int SESSION = 11;
 
 
 	/**
@@ -1193,10 +1214,10 @@ public interface SecurityPackage extends EPackage {
 	EAttribute getAppSession_Ipv6Address();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getIpAddresses <em>Ip Addresses</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.soluvas.security.AppSession#getIpAddresses <em>Ip Addresses</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Ip Addresses</em>'.
+	 * @return the meta object for the attribute list '<em>Ip Addresses</em>'.
 	 * @see org.soluvas.security.AppSession#getIpAddresses()
 	 * @see #getAppSession()
 	 * @generated
@@ -1204,10 +1225,10 @@ public interface SecurityPackage extends EPackage {
 	EAttribute getAppSession_IpAddresses();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getIpv6Addresses <em>Ipv6 Addresses</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.soluvas.security.AppSession#getIpv6Addresses <em>Ipv6 Addresses</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Ipv6 Addresses</em>'.
+	 * @return the meta object for the attribute list '<em>Ipv6 Addresses</em>'.
 	 * @see org.soluvas.security.AppSession#getIpv6Addresses()
 	 * @see #getAppSession()
 	 * @generated
@@ -1246,6 +1267,17 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAppSession_Attributes();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getTimeout <em>Timeout</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Timeout</em>'.
+	 * @see org.soluvas.security.AppSession#getTimeout()
+	 * @see #getAppSession()
+	 * @generated
+	 */
+	EAttribute getAppSession_Timeout();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSession#getAccessTime <em>Access Time</em>}'.
@@ -1344,6 +1376,17 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getAppSessionStatus();
+
+	/**
+	 * Returns the meta object for data type '{@link org.apache.shiro.session.Session <em>Session</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Session</em>'.
+	 * @see org.apache.shiro.session.Session
+	 * @model instanceClass="org.apache.shiro.session.Session"
+	 * @generated
+	 */
+	EDataType getSession();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1688,7 +1731,7 @@ public interface SecurityPackage extends EPackage {
 		EAttribute APP_SESSION__IPV6_ADDRESS = eINSTANCE.getAppSession_Ipv6Address();
 
 		/**
-		 * The meta object literal for the '<em><b>Ip Addresses</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Ip Addresses</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1696,7 +1739,7 @@ public interface SecurityPackage extends EPackage {
 		EAttribute APP_SESSION__IP_ADDRESSES = eINSTANCE.getAppSession_IpAddresses();
 
 		/**
-		 * The meta object literal for the '<em><b>Ipv6 Addresses</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Ipv6 Addresses</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1726,6 +1769,14 @@ public interface SecurityPackage extends EPackage {
 		 * @generated
 		 */
 		EReference APP_SESSION__ATTRIBUTES = eINSTANCE.getAppSession_Attributes();
+
+		/**
+		 * The meta object literal for the '<em><b>Timeout</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION__TIMEOUT = eINSTANCE.getAppSession_Timeout();
 
 		/**
 		 * The meta object literal for the '<em><b>Access Time</b></em>' attribute feature.
@@ -1804,6 +1855,16 @@ public interface SecurityPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum APP_SESSION_STATUS = eINSTANCE.getAppSessionStatus();
+
+		/**
+		 * The meta object literal for the '<em>Session</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.apache.shiro.session.Session
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getSession()
+		 * @generated
+		 */
+		EDataType SESSION = eINSTANCE.getSession();
 
 	}
 

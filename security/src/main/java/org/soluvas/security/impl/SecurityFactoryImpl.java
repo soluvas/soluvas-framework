@@ -3,6 +3,7 @@
 package org.soluvas.security.impl;
 
 import java.util.Map;
+import org.apache.shiro.session.Session;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -84,6 +85,8 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 				return createAssignModeFromString(eDataType, initialValue);
 			case SecurityPackage.APP_SESSION_STATUS:
 				return createAppSessionStatusFromString(eDataType, initialValue);
+			case SecurityPackage.SESSION:
+				return createSessionFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -101,6 +104,8 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 				return convertAssignModeToString(eDataType, instanceValue);
 			case SecurityPackage.APP_SESSION_STATUS:
 				return convertAppSessionStatusToString(eDataType, instanceValue);
+			case SecurityPackage.SESSION:
+				return convertSessionToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -234,6 +239,24 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 	 */
 	public String convertAppSessionStatusToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Session createSessionFromString(EDataType eDataType, String initialValue) {
+		return (Session)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSessionToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

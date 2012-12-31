@@ -3,8 +3,11 @@ package org.soluvas.security;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.annotation.Nonnull;
+
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
+import org.apache.shiro.session.mgt.SimpleSession;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 
 /**
@@ -13,11 +16,13 @@ import org.apache.shiro.session.mgt.eis.SessionDAO;
  */
 public class SoluvasSessionDAO implements SessionDAO {
 
+	private AppSessionRepository appSessionRepo;
+
 	/**
 	 * 
 	 */
-	public SoluvasSessionDAO() {
-		// TODO Auto-generated constructor stub
+	public SoluvasSessionDAO(@Nonnull final AppSessionRepository appSessionRepo) {
+		this.appSessionRepo = appSessionRepo;
 	}
 
 	/* (non-Javadoc)
@@ -25,8 +30,9 @@ public class SoluvasSessionDAO implements SessionDAO {
 	 */
 	@Override
 	public Serializable create(Session session) {
-		// TODO Auto-generated method stub
-		return null;
+		final AppSession appSession = new AppSession.FromSession().apply(session);
+		final AppSession added = appSessionRepo.add(appSession);
+		return added;
 	}
 
 	/* (non-Javadoc)
@@ -35,6 +41,7 @@ public class SoluvasSessionDAO implements SessionDAO {
 	@Override
 	public Session readSession(Serializable sessionId)
 			throws UnknownSessionException {
+		
 		// TODO Auto-generated method stub
 		return null;
 	}

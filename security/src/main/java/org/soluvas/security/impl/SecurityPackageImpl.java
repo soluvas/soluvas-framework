@@ -3,8 +3,10 @@
 package org.soluvas.security.impl;
 
 import java.util.Map;
+import org.apache.shiro.session.Session;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -107,6 +109,13 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * @generated
 	 */
 	private EEnum appSessionStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType sessionEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -587,7 +596,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppSession_AccessTime() {
+	public EAttribute getAppSession_Timeout() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -596,7 +605,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppSession_ExpiryTime() {
+	public EAttribute getAppSession_AccessTime() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -605,7 +614,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppSession_TimeZone() {
+	public EAttribute getAppSession_ExpiryTime() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(12);
 	}
 
@@ -614,8 +623,17 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppSession_Locale() {
+	public EAttribute getAppSession_TimeZone() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppSession_Locale() {
+		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -662,6 +680,15 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 */
 	public EEnum getAppSessionStatus() {
 		return appSessionStatusEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getSession() {
+		return sessionEDataType;
 	}
 
 	/**
@@ -743,6 +770,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		createEAttribute(appSessionEClass, APP_SESSION__USER_AGENT);
 		createEAttribute(appSessionEClass, APP_SESSION__USER_AGENTS);
 		createEReference(appSessionEClass, APP_SESSION__ATTRIBUTES);
+		createEAttribute(appSessionEClass, APP_SESSION__TIMEOUT);
 		createEAttribute(appSessionEClass, APP_SESSION__ACCESS_TIME);
 		createEAttribute(appSessionEClass, APP_SESSION__EXPIRY_TIME);
 		createEAttribute(appSessionEClass, APP_SESSION__TIME_ZONE);
@@ -755,6 +783,9 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		// Create enums
 		assignModeEEnum = createEEnum(ASSIGN_MODE);
 		appSessionStatusEEnum = createEEnum(APP_SESSION_STATUS);
+
+		// Create data types
+		sessionEDataType = createEDataType(SESSION);
 	}
 
 	/**
@@ -846,15 +877,18 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEAttribute(getAppSession_Status(), this.getAppSessionStatus(), "status", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_IpAddress(), theEcorePackage.getEString(), "ipAddress", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_Ipv6Address(), theEcorePackage.getEString(), "ipv6Address", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppSession_IpAddresses(), theCommonsPackage.getList(), "ipAddresses", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppSession_Ipv6Addresses(), theEcorePackage.getEString(), "ipv6Addresses", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_IpAddresses(), theEcorePackage.getEString(), "ipAddresses", null, 0, -1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_Ipv6Addresses(), theEcorePackage.getEString(), "ipv6Addresses", null, 0, -1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_UserAgent(), theEcorePackage.getEString(), "userAgent", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_UserAgents(), theCommonsPackage.getList(), "userAgents", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAppSession_Attributes(), this.getAppSessionAttributeEntry(), null, "attributes", null, 0, -1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_Timeout(), theEcorePackage.getELongObject(), "timeout", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_AccessTime(), theCommonsPackage.getDateTime(), "accessTime", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_ExpiryTime(), theCommonsPackage.getDateTime(), "expiryTime", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_TimeZone(), theCommonsPackage.getDateTimeZone(), "timeZone", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_Locale(), theCommonsPackage.getLocale(), "locale", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(appSessionEClass, this.getSession(), "toSession", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(appSessionAttributeEntryEClass, Map.Entry.class, "AppSessionAttributeEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAppSessionAttributeEntry_Key(), theEcorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -869,6 +903,9 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEEnum(appSessionStatusEEnum, AppSessionStatus.class, "AppSessionStatus");
 		addEEnumLiteral(appSessionStatusEEnum, AppSessionStatus.ACTIVE);
 		addEEnumLiteral(appSessionStatusEEnum, AppSessionStatus.INACTIVE);
+
+		// Initialize data types
+		initEDataType(sessionEDataType, Session.class, "Session", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1071,6 +1108,12 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		   source, 
 		   new String[] {
 			 "documentation", "HTTP user agents used during the whole session."
+		   });		
+		addAnnotation
+		  (getAppSession_Timeout(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Sets the time in milliseconds that the session may remain idle before expiring.\n<ul>\n <li>A negative value means the session will never expire.</li>\n <li>A non-negative value (0 or greater) means the session expiration will occur if idle for that\n length of time.</li>\n</ul>\n<p/>\n<b>*Note:</b> if you are used to the {@code HttpSession}\'s {@code getMaxInactiveInterval()} method, the scale on\nthis method is different: Shiro Sessions use millisecond values for timeout whereas\n{@code HttpSession.getMaxInactiveInterval} uses seconds.  Always use millisecond values with Shiro sessions.\n"
 		   });		
 		addAnnotation
 		  (getAppSession_AccessTime(), 

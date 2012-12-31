@@ -2,11 +2,14 @@
  */
 package org.soluvas.security.impl;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.shiro.session.Session;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -14,6 +17,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.joda.time.DateTime;
@@ -49,6 +53,7 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getUserAgent <em>User Agent</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getUserAgents <em>User Agents</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getTimeout <em>Timeout</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getAccessTime <em>Access Time</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getExpiryTime <em>Expiry Time</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getTimeZone <em>Time Zone</em>}</li>
@@ -212,34 +217,24 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	protected String ipv6Address = IPV6_ADDRESS_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getIpAddresses() <em>Ip Addresses</em>}' attribute.
+	 * The cached value of the '{@link #getIpAddresses() <em>Ip Addresses</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIpAddresses()
 	 * @generated
 	 * @ordered
 	 */
-	protected List ipAddresses;
+	protected EList<String> ipAddresses;
 
 	/**
-	 * The default value of the '{@link #getIpv6Addresses() <em>Ipv6 Addresses</em>}' attribute.
+	 * The cached value of the '{@link #getIpv6Addresses() <em>Ipv6 Addresses</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIpv6Addresses()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String IPV6_ADDRESSES_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getIpv6Addresses() <em>Ipv6 Addresses</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIpv6Addresses()
-	 * @generated
-	 * @ordered
-	 */
-	protected String ipv6Addresses = IPV6_ADDRESSES_EDEFAULT;
+	protected EList<String> ipv6Addresses;
 
 	/**
 	 * The default value of the '{@link #getUserAgent() <em>User Agent</em>}' attribute.
@@ -280,6 +275,26 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * @ordered
 	 */
 	protected EMap<String, Object> attributes;
+
+	/**
+	 * The default value of the '{@link #getTimeout() <em>Timeout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTimeout()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long TIMEOUT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTimeout() <em>Timeout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTimeout()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long timeout = TIMEOUT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getAccessTime() <em>Access Time</em>}' attribute.
@@ -585,7 +600,10 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * @generated
 	 */
 	@Override
-	public List getIpAddresses() {
+	public EList<String> getIpAddresses() {
+		if (ipAddresses == null) {
+			ipAddresses = new EDataTypeUniqueEList<String>(String.class, this, SecurityPackage.APP_SESSION__IP_ADDRESSES);
+		}
 		return ipAddresses;
 	}
 
@@ -595,34 +613,11 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * @generated
 	 */
 	@Override
-	public void setIpAddresses(List newIpAddresses) {
-		List oldIpAddresses = ipAddresses;
-		ipAddresses = newIpAddresses;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.APP_SESSION__IP_ADDRESSES, oldIpAddresses, ipAddresses));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getIpv6Addresses() {
+	public EList<String> getIpv6Addresses() {
+		if (ipv6Addresses == null) {
+			ipv6Addresses = new EDataTypeUniqueEList<String>(String.class, this, SecurityPackage.APP_SESSION__IPV6_ADDRESSES);
+		}
 		return ipv6Addresses;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIpv6Addresses(String newIpv6Addresses) {
-		String oldIpv6Addresses = ipv6Addresses;
-		ipv6Addresses = newIpv6Addresses;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.APP_SESSION__IPV6_ADDRESSES, oldIpv6Addresses, ipv6Addresses));
 	}
 
 	/**
@@ -682,6 +677,27 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 			attributes = new EcoreEMap<String,Object>(SecurityPackage.Literals.APP_SESSION_ATTRIBUTE_ENTRY, AppSessionAttributeEntryImpl.class, this, SecurityPackage.APP_SESSION__ATTRIBUTES);
 		}
 		return attributes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Long getTimeout() {
+		return timeout;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTimeout(Long newTimeout) {
+		Long oldTimeout = timeout;
+		timeout = newTimeout;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.APP_SESSION__TIMEOUT, oldTimeout, timeout));
 	}
 
 	/**
@@ -779,6 +795,14 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 */
+	public Session toSession() {
+		return new ToSession().apply(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -826,6 +850,8 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 			case SecurityPackage.APP_SESSION__ATTRIBUTES:
 				if (coreType) return getAttributes();
 				else return getAttributes().map();
+			case SecurityPackage.APP_SESSION__TIMEOUT:
+				return getTimeout();
 			case SecurityPackage.APP_SESSION__ACCESS_TIME:
 				return getAccessTime();
 			case SecurityPackage.APP_SESSION__EXPIRY_TIME:
@@ -843,6 +869,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -871,10 +898,12 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 				setIpv6Address((String)newValue);
 				return;
 			case SecurityPackage.APP_SESSION__IP_ADDRESSES:
-				setIpAddresses((List)newValue);
+				getIpAddresses().clear();
+				getIpAddresses().addAll((Collection<? extends String>)newValue);
 				return;
 			case SecurityPackage.APP_SESSION__IPV6_ADDRESSES:
-				setIpv6Addresses((String)newValue);
+				getIpv6Addresses().clear();
+				getIpv6Addresses().addAll((Collection<? extends String>)newValue);
 				return;
 			case SecurityPackage.APP_SESSION__USER_AGENT:
 				setUserAgent((String)newValue);
@@ -884,6 +913,9 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 				return;
 			case SecurityPackage.APP_SESSION__ATTRIBUTES:
 				((EStructuralFeature.Setting)getAttributes()).set(newValue);
+				return;
+			case SecurityPackage.APP_SESSION__TIMEOUT:
+				setTimeout((Long)newValue);
 				return;
 			case SecurityPackage.APP_SESSION__ACCESS_TIME:
 				setAccessTime((DateTime)newValue);
@@ -934,10 +966,10 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 				setIpv6Address(IPV6_ADDRESS_EDEFAULT);
 				return;
 			case SecurityPackage.APP_SESSION__IP_ADDRESSES:
-				setIpAddresses((List)null);
+				getIpAddresses().clear();
 				return;
 			case SecurityPackage.APP_SESSION__IPV6_ADDRESSES:
-				setIpv6Addresses(IPV6_ADDRESSES_EDEFAULT);
+				getIpv6Addresses().clear();
 				return;
 			case SecurityPackage.APP_SESSION__USER_AGENT:
 				setUserAgent(USER_AGENT_EDEFAULT);
@@ -947,6 +979,9 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 				return;
 			case SecurityPackage.APP_SESSION__ATTRIBUTES:
 				getAttributes().clear();
+				return;
+			case SecurityPackage.APP_SESSION__TIMEOUT:
+				setTimeout(TIMEOUT_EDEFAULT);
 				return;
 			case SecurityPackage.APP_SESSION__ACCESS_TIME:
 				setAccessTime(ACCESS_TIME_EDEFAULT);
@@ -989,15 +1024,17 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 			case SecurityPackage.APP_SESSION__IPV6_ADDRESS:
 				return IPV6_ADDRESS_EDEFAULT == null ? ipv6Address != null : !IPV6_ADDRESS_EDEFAULT.equals(ipv6Address);
 			case SecurityPackage.APP_SESSION__IP_ADDRESSES:
-				return ipAddresses != null;
+				return ipAddresses != null && !ipAddresses.isEmpty();
 			case SecurityPackage.APP_SESSION__IPV6_ADDRESSES:
-				return IPV6_ADDRESSES_EDEFAULT == null ? ipv6Addresses != null : !IPV6_ADDRESSES_EDEFAULT.equals(ipv6Addresses);
+				return ipv6Addresses != null && !ipv6Addresses.isEmpty();
 			case SecurityPackage.APP_SESSION__USER_AGENT:
 				return USER_AGENT_EDEFAULT == null ? userAgent != null : !USER_AGENT_EDEFAULT.equals(userAgent);
 			case SecurityPackage.APP_SESSION__USER_AGENTS:
 				return userAgents != null;
 			case SecurityPackage.APP_SESSION__ATTRIBUTES:
 				return attributes != null && !attributes.isEmpty();
+			case SecurityPackage.APP_SESSION__TIMEOUT:
+				return TIMEOUT_EDEFAULT == null ? timeout != null : !TIMEOUT_EDEFAULT.equals(timeout);
 			case SecurityPackage.APP_SESSION__ACCESS_TIME:
 				return ACCESS_TIME_EDEFAULT == null ? accessTime != null : !ACCESS_TIME_EDEFAULT.equals(accessTime);
 			case SecurityPackage.APP_SESSION__EXPIRY_TIME:
@@ -1086,6 +1123,8 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 		result.append(userAgent);
 		result.append(", userAgents: ");
 		result.append(userAgents);
+		result.append(", timeout: ");
+		result.append(timeout);
 		result.append(", accessTime: ");
 		result.append(accessTime);
 		result.append(", expiryTime: ");

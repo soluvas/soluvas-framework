@@ -289,6 +289,16 @@ See: https://sites.google.com/a/bippo.co.id/dev/berbatik/oauth
     <xsd:complexContent>
       <xsd:extension base="commons:Identifiable">
         <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="ipAddresses" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>IPv4 Addresses used during the whole session.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="ipv6Addresses" nillable="true" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>IPv6 Addresses used during the whole session.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
           <xsd:element name="person" type="commons:PersonInfo"/>
           <xsd:element name="attributes" type="security:AppSessionAttributeEntry"/>
         </xsd:choice>
@@ -306,20 +316,25 @@ See: https://sites.google.com/a/bippo.co.id/dev/berbatik/oauth
             <xsd:documentation>IPv6 address during initial sign in.</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
-        <xsd:attribute name="ipAddresses" type="xsd:string">
-          <xsd:annotation>
-            <xsd:documentation>IPv4 Addresses used during the whole session.</xsd:documentation>
-          </xsd:annotation>
-        </xsd:attribute>
-        <xsd:attribute name="ipv6Addresses" type="xsd:string">
-          <xsd:annotation>
-            <xsd:documentation>IPv6 Addresses used during the whole session.</xsd:documentation>
-          </xsd:annotation>
-        </xsd:attribute>
         <xsd:attribute name="userAgent" type="xsd:string"/>
         <xsd:attribute name="userAgents" type="xsd:string">
           <xsd:annotation>
             <xsd:documentation>HTTP user agents used during the whole session.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="timeout" type="xsd:long">
+          <xsd:annotation>
+            <xsd:documentation>Sets the time in milliseconds that the session may remain idle before expiring.
+<ul>
+ <li>A negative value means the session will never expire.</li>
+ <li>A non-negative value (0 or greater) means the session expiration will occur if idle for that
+ length of time.</li>
+</ul>
+<p/>
+<b>*Note:</b> if you are used to the {@code HttpSession}'s {@code getMaxInactiveInterval()} method, the scale on
+this method is different: Shiro Sessions use millisecond values for timeout whereas
+{@code HttpSession.getMaxInactiveInterval} uses seconds.  Always use millisecond values with Shiro sessions.
+</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
         <xsd:attribute name="accessTime" type="xsd:string">

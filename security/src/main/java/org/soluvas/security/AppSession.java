@@ -4,16 +4,23 @@ package org.soluvas.security;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
+import javax.annotation.Nullable;
+
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.SimpleSession;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
+
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableMap;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,6 +49,7 @@ import org.soluvas.commons.Timestamped;
  *   <li>{@link org.soluvas.security.AppSession#getUserAgent <em>User Agent</em>}</li>
  *   <li>{@link org.soluvas.security.AppSession#getUserAgents <em>User Agents</em>}</li>
  *   <li>{@link org.soluvas.security.AppSession#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.soluvas.security.AppSession#getTimeout <em>Timeout</em>}</li>
  *   <li>{@link org.soluvas.security.AppSession#getAccessTime <em>Access Time</em>}</li>
  *   <li>{@link org.soluvas.security.AppSession#getExpiryTime <em>Expiry Time</em>}</li>
  *   <li>{@link org.soluvas.security.AppSession#getTimeZone <em>Time Zone</em>}</li>
@@ -54,6 +62,39 @@ import org.soluvas.commons.Timestamped;
  * @generated
  */
 public interface AppSession extends Identifiable, Timestamped, SchemaVersionable {
+	
+	public class FromSession implements Function<Session, AppSession> {
+		@Override @Nullable
+		public AppSession apply(@Nullable Session input) {
+			final AppSession appSession = SecurityFactory.eINSTANCE.createAppSession();
+			appSession.setId((String) input.getId());
+			appSession.setIpAddress(input.getHost());
+			appSession.getIpAddresses().add(input.getHost());
+			appSession.setCreationTime(new DateTime(input.getStartTimestamp()));
+			appSession.setAccessTime(new DateTime(input.getLastAccessTime()));
+			appSession.setTimeout(input.getTimeout());
+			appSession.setExpiryTime(new DateTime(input.getLastAccessTime()).plus(input.getTimeout()));
+			for (final Object key : input.getAttributeKeys()) {
+				appSession.getAttributes().put((String) key, input.getAttribute(key));
+			}
+			return appSession;
+		}
+	}
+	
+	public class ToSession implements Function<AppSession, Session> {
+		@SuppressWarnings({ "unchecked", "rawtypes" })
+		@Override @Nullable
+		public Session apply(@Nullable AppSession input) {
+			SimpleSession session = new SimpleSession(input.getIpAddress());
+			session.setId(input.getId());
+			session.setStartTimestamp(input.getCreationTime().toDate());
+			session.setLastAccessTime(input.getAccessTime().toDate());
+			session.setTimeout(input.getTimeout());
+			session.setAttributes(ImmutableMap.copyOf((Map) input.getAttributes().map()));
+			return session;
+		}
+	}
+	
 	/**
 	 * Returns the value of the '<em><b>Person</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -187,54 +228,34 @@ public interface AppSession extends Identifiable, Timestamped, SchemaVersionable
 	void setIpv6Address(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Ip Addresses</b></em>' attribute.
+	 * Returns the value of the '<em><b>Ip Addresses</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * IPv4 Addresses used during the whole session.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Ip Addresses</em>' attribute.
-	 * @see #setIpAddresses(List)
+	 * @return the value of the '<em>Ip Addresses</em>' attribute list.
 	 * @see org.soluvas.security.SecurityPackage#getAppSession_IpAddresses()
-	 * @model dataType="org.soluvas.commons.List" many="false"
+	 * @model
 	 * @generated
 	 */
-	List getIpAddresses();
+	EList<String> getIpAddresses();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.security.AppSession#getIpAddresses <em>Ip Addresses</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Ip Addresses</em>' attribute.
-	 * @see #getIpAddresses()
-	 * @generated
-	 */
-	void setIpAddresses(List value);
-
-	/**
-	 * Returns the value of the '<em><b>Ipv6 Addresses</b></em>' attribute.
+	 * Returns the value of the '<em><b>Ipv6 Addresses</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * IPv6 Addresses used during the whole session.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Ipv6 Addresses</em>' attribute.
-	 * @see #setIpv6Addresses(String)
+	 * @return the value of the '<em>Ipv6 Addresses</em>' attribute list.
 	 * @see org.soluvas.security.SecurityPackage#getAppSession_Ipv6Addresses()
 	 * @model
 	 * @generated
 	 */
-	String getIpv6Addresses();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.security.AppSession#getIpv6Addresses <em>Ipv6 Addresses</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Ipv6 Addresses</em>' attribute.
-	 * @see #getIpv6Addresses()
-	 * @generated
-	 */
-	void setIpv6Addresses(String value);
+	EList<String> getIpv6Addresses();
 
 	/**
 	 * Returns the value of the '<em><b>User Agent</b></em>' attribute.
@@ -303,6 +324,41 @@ public interface AppSession extends Identifiable, Timestamped, SchemaVersionable
 	 * @generated
 	 */
 	EMap<String, Object> getAttributes();
+
+	/**
+	 * Returns the value of the '<em><b>Timeout</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Sets the time in milliseconds that the session may remain idle before expiring.
+	 * <ul>
+	 *  <li>A negative value means the session will never expire.</li>
+	 *  <li>A non-negative value (0 or greater) means the session expiration will occur if idle for that
+	 *  length of time.</li>
+	 * </ul>
+	 * <p/>
+	 * <b>*Note:</b> if you are used to the {@code HttpSession}'s {@code getMaxInactiveInterval()} method, the scale on
+	 * this method is different: Shiro Sessions use millisecond values for timeout whereas
+	 * {@code HttpSession.getMaxInactiveInterval} uses seconds.  Always use millisecond values with Shiro sessions.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Timeout</em>' attribute.
+	 * @see #setTimeout(Long)
+	 * @see org.soluvas.security.SecurityPackage#getAppSession_Timeout()
+	 * @model
+	 * @generated
+	 */
+	Long getTimeout();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.security.AppSession#getTimeout <em>Timeout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Timeout</em>' attribute.
+	 * @see #getTimeout()
+	 * @generated
+	 */
+	void setTimeout(Long value);
 
 	/**
 	 * Returns the value of the '<em><b>Access Time</b></em>' attribute.
@@ -410,5 +466,13 @@ public interface AppSession extends Identifiable, Timestamped, SchemaVersionable
 	 * @generated
 	 */
 	void setLocale(Locale value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="org.soluvas.security.Session"
+	 * @generated
+	 */
+	Session toSession();
 
 } // AppSession
