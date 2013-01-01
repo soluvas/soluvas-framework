@@ -2,6 +2,7 @@ package org.soluvas.security.impl;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -13,6 +14,7 @@ import org.soluvas.data.repository.CrudRepositoryBase;
 import org.soluvas.mongo.MongoUtils;
 import org.soluvas.security.AppSession;
 import org.soluvas.security.AppSessionRepository;
+import org.soluvas.security.AppSessionStatus;
 
 import com.google.code.morphia.Morphia;
 import com.google.common.base.Function;
@@ -133,7 +135,8 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 
 	@Override
 	public Collection<AppSession> findAll() {
-		final DBCursor cursor = coll.find().sort(new BasicDBObject("creationTime", -1));
+		final DBCursor cursor = coll.find(new BasicDBObject("schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT))
+				.sort(new BasicDBObject("creationTime", -1));
 		final List<AppSession> appSessions = MongoUtils.transform(cursor, new Function<DBObject, AppSession>() {
 			@Override
 			public AppSession apply(DBObject input) {
@@ -154,7 +157,10 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 	public <S extends AppSession> S findOne(String id) {
 		if (id == null)
 			return null;
-		final DBCursor cursor = coll.find(new BasicDBObject("_id", id));
+		final Map<String, Object> queryMap = ImmutableMap.<String, Object>of(
+				"schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT,
+				"_id", id);
+		final DBCursor cursor = coll.find(new BasicDBObject(queryMap));
 		final List<AppSession> webSessionIterable = MongoUtils.transform(cursor, new Function<DBObject, AppSession>() {
 			@Override
 			public AppSession apply(DBObject input) {
@@ -179,6 +185,23 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 		log.info("Trying to remove Web Session with ID {} ", basicObj.get("_id"));
 		coll.remove(basicObj);
 		return true;
+	}
+
+	@Override
+	public List<AppSession> findAllByActive() {
+		final Map<String, Object> queryMap = ImmutableMap.<String, Object>of(
+				"schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT,
+				"status", AppSessionStatus.ACTIVE.getLiteral());
+		final DBCursor cursor = coll.find(new BasicDBObject(queryMap))
+				.sort(new BasicDBObject("creationTime", -1));
+		final List<AppSession> appSessions = MongoUtils.transform(cursor, new Function<DBObject, AppSession>() {
+			@Override
+			public AppSession apply(DBObject input) {
+				return morphia.fromDBObject(AppSession.class, input);
+			}
+		});
+		log.debug("findAllByActive returns {} AppSessions", appSessions.size());
+		return appSessions;
 	}
 
 }
