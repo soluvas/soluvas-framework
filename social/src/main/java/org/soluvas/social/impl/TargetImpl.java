@@ -16,6 +16,8 @@ import org.soluvas.social.SocialPackage;
 import org.soluvas.social.Target;
 import org.soluvas.social.schema.TargetType;
 
+import com.google.code.morphia.annotations.Transient;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Target</b></em>'.
@@ -84,6 +86,7 @@ public abstract class TargetImpl extends EObjectImpl implements Target {
 	 * @generated
 	 * @ordered
 	 */
+	@Transient
 	protected TargetType targetType;
 
 	/**
