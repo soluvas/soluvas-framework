@@ -294,13 +294,22 @@ public interface CategoryPackage extends EPackage {
 	int CATEGORY__CATALOG_NAME = CommonsPackage.PARENTABLE_FEATURE_COUNT + 23;
 
 	/**
+	 * The feature id for the '<em><b>Default Mixin</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__DEFAULT_MIXIN = CommonsPackage.PARENTABLE_FEATURE_COUNT + 24;
+
+	/**
 	 * The number of structural features of the '<em>Category</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_FEATURE_COUNT = CommonsPackage.PARENTABLE_FEATURE_COUNT + 24;
+	int CATEGORY_FEATURE_COUNT = CommonsPackage.PARENTABLE_FEATURE_COUNT + 25;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.
@@ -543,6 +552,17 @@ public interface CategoryPackage extends EPackage {
 	EAttribute getCategory_CatalogName();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.category.Category#getDefaultMixin <em>Default Mixin</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Mixin</em>'.
+	 * @see org.soluvas.category.Category#getDefaultMixin()
+	 * @see #getCategory()
+	 * @generated
+	 */
+	EAttribute getCategory_DefaultMixin();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.category.CategoryContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -696,6 +716,14 @@ public interface CategoryPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CATEGORY__CATALOG_NAME = eINSTANCE.getCategory_CatalogName();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Mixin</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY__DEFAULT_MIXIN = eINSTANCE.getCategory_DefaultMixin();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.

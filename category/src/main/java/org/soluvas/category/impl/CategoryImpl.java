@@ -72,6 +72,7 @@ import org.soluvas.commons.Sluggable;
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#isAnchor <em>Anchor</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#isIncludeInMenu <em>Include In Menu</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getCatalogName <em>Catalog Name</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getDefaultMixin <em>Default Mixin</em>}</li>
  * </ul>
  * </p>
  *
@@ -547,6 +548,26 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * @ordered
 	 */
 	protected String catalogName = CATALOG_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDefaultMixin() <em>Default Mixin</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultMixin()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DEFAULT_MIXIN_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDefaultMixin() <em>Default Mixin</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultMixin()
+	 * @generated
+	 * @ordered
+	 */
+	protected String defaultMixin = DEFAULT_MIXIN_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1105,6 +1126,27 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDefaultMixin() {
+		return defaultMixin;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefaultMixin(String newDefaultMixin) {
+		String oldDefaultMixin = defaultMixin;
+		defaultMixin = newDefaultMixin;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CategoryPackage.CATEGORY__DEFAULT_MIXIN, oldDefaultMixin, defaultMixin));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -1173,6 +1215,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return isIncludeInMenu();
 			case CategoryPackage.CATEGORY__CATALOG_NAME:
 				return getCatalogName();
+			case CategoryPackage.CATEGORY__DEFAULT_MIXIN:
+				return getDefaultMixin();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1262,6 +1306,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__CATALOG_NAME:
 				setCatalogName((String)newValue);
 				return;
+			case CategoryPackage.CATEGORY__DEFAULT_MIXIN:
+				setDefaultMixin((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1349,6 +1396,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__CATALOG_NAME:
 				setCatalogName(CATALOG_NAME_EDEFAULT);
 				return;
+			case CategoryPackage.CATEGORY__DEFAULT_MIXIN:
+				setDefaultMixin(DEFAULT_MIXIN_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1411,6 +1461,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return includeInMenu != INCLUDE_IN_MENU_EDEFAULT;
 			case CategoryPackage.CATEGORY__CATALOG_NAME:
 				return CATALOG_NAME_EDEFAULT == null ? catalogName != null : !CATALOG_NAME_EDEFAULT.equals(catalogName);
+			case CategoryPackage.CATEGORY__DEFAULT_MIXIN:
+				return DEFAULT_MIXIN_EDEFAULT == null ? defaultMixin != null : !DEFAULT_MIXIN_EDEFAULT.equals(defaultMixin);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1631,6 +1683,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		result.append(includeInMenu);
 		result.append(", catalogName: ");
 		result.append(catalogName);
+		result.append(", defaultMixin: ");
+		result.append(defaultMixin);
 		result.append(')');
 		return result.toString();
 	}

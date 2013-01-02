@@ -3,14 +3,11 @@
 package org.soluvas.commons.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.soluvas.commons.CategoryInfo;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Identifiable;
@@ -43,6 +40,7 @@ import org.soluvas.commons.Sluggable;
  * @generated
  */
 public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
+	
 	/**
 	 * The default value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -257,6 +255,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getPositioner() {
 		return positioner;
 	}
@@ -266,6 +265,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPositioner(Integer newPositioner) {
 		Integer oldPositioner = positioner;
 		positioner = newPositioner;
@@ -278,6 +278,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSlug() {
 		return slug;
 	}
@@ -287,6 +288,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSlug(String newSlug) {
 		String oldSlug = slug;
 		slug = newSlug;
@@ -299,6 +301,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -308,6 +311,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(String newId) {
 		String oldId = id;
 		id = newId;
@@ -320,6 +324,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -329,6 +334,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -341,6 +347,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSlugPath() {
 		return slugPath;
 	}
@@ -350,6 +357,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSlugPath(String newSlugPath) {
 		String oldSlugPath = slugPath;
 		slugPath = newSlugPath;
@@ -362,6 +370,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getColor() {
 		return color;
 	}
@@ -371,6 +380,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setColor(String newColor) {
 		String oldColor = color;
 		color = newColor;
@@ -383,6 +393,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getImageId() {
 		return imageId;
 	}
@@ -392,6 +403,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setImageId(String newImageId) {
 		String oldImageId = imageId;
 		imageId = newImageId;
@@ -404,6 +416,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getLevel() {
 		return level;
 	}
@@ -413,6 +426,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLevel(Integer newLevel) {
 		Integer oldLevel = level;
 		level = newLevel;
@@ -425,6 +439,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getCategoryCount() {
 		return categoryCount;
 	}
@@ -434,6 +449,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCategoryCount(Long newCategoryCount) {
 		Long oldCategoryCount = categoryCount;
 		categoryCount = newCategoryCount;
@@ -446,6 +462,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CategoryInfo getParent() {
 		if (parent != null && ((EObject)parent).eIsProxy()) {
 			InternalEObject oldParent = (InternalEObject)parent;
@@ -472,6 +489,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParent(CategoryInfo newParent) {
 		CategoryInfo oldParent = parent;
 		parent = newParent;

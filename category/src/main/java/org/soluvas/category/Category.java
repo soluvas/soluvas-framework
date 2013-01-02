@@ -27,6 +27,7 @@ import org.soluvas.commons.ResourceAware;
  *   <li>{@link org.soluvas.category.Category#isAnchor <em>Anchor</em>}</li>
  *   <li>{@link org.soluvas.category.Category#isIncludeInMenu <em>Include In Menu</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getCatalogName <em>Catalog Name</em>}</li>
+ *   <li>{@link org.soluvas.category.Category#getDefaultMixin <em>Default Mixin</em>}</li>
  * </ul>
  * </p>
  *
@@ -270,5 +271,31 @@ public interface Category extends Parentable<Category>, CategoryLike, ResourceAw
 	 * @generated
 	 */
 	void setCatalogName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Default Mixin</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Default Mixin</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Default Mixin</em>' attribute.
+	 * @see #setDefaultMixin(String)
+	 * @see org.soluvas.category.CategoryPackage#getCategory_DefaultMixin()
+	 * @model
+	 * @generated
+	 */
+	String getDefaultMixin();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.category.Category#getDefaultMixin <em>Default Mixin</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default Mixin</em>' attribute.
+	 * @see #getDefaultMixin()
+	 * @generated
+	 */
+	void setDefaultMixin(String value);
 
 } // Category
