@@ -63,9 +63,7 @@
 		</command>
 		
 		<command name="app/manifestcat">
-			<action class="org.soluvas.commons.shell.AppManifestCatCommand">
-				<argument ref="svcLookup" />
-			</action>
+			<action class="org.soluvas.commons.shell.AppManifestCatCommand" />
 		</command>
 	</command-bundle>
 
