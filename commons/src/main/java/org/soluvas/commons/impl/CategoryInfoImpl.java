@@ -2,12 +2,17 @@
  */
 package org.soluvas.commons.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.soluvas.commons.CategoryInfo;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Identifiable;
@@ -34,6 +39,7 @@ import org.soluvas.commons.Sluggable;
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getLevel <em>Level</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getCategoryCount <em>Category Count</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getParents <em>Parents</em>}</li>
  * </ul>
  * </p>
  *
@@ -230,6 +236,16 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * @ordered
 	 */
 	protected CategoryInfo parent;
+
+	/**
+	 * The cached value of the '{@link #getParents() <em>Parents</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParents()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CategoryInfo> parents;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -502,6 +518,32 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<CategoryInfo> getParents() {
+		if (parents == null) {
+			parents = new EObjectContainmentEList<CategoryInfo>(CategoryInfo.class, this, CommonsPackage.CATEGORY_INFO__PARENTS);
+		}
+		return parents;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case CommonsPackage.CATEGORY_INFO__PARENTS:
+				return ((InternalEList<?>)getParents()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -526,6 +568,8 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 			case CommonsPackage.CATEGORY_INFO__PARENT:
 				if (resolve) return getParent();
 				return basicGetParent();
+			case CommonsPackage.CATEGORY_INFO__PARENTS:
+				return getParents();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -535,6 +579,7 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -567,6 +612,10 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 				return;
 			case CommonsPackage.CATEGORY_INFO__PARENT:
 				setParent((CategoryInfo)newValue);
+				return;
+			case CommonsPackage.CATEGORY_INFO__PARENTS:
+				getParents().clear();
+				getParents().addAll((Collection<? extends CategoryInfo>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -610,6 +659,9 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 			case CommonsPackage.CATEGORY_INFO__PARENT:
 				setParent((CategoryInfo)null);
 				return;
+			case CommonsPackage.CATEGORY_INFO__PARENTS:
+				getParents().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -642,6 +694,8 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 				return CATEGORY_COUNT_EDEFAULT == null ? categoryCount != null : !CATEGORY_COUNT_EDEFAULT.equals(categoryCount);
 			case CommonsPackage.CATEGORY_INFO__PARENT:
 				return parent != null;
+			case CommonsPackage.CATEGORY_INFO__PARENTS:
+				return parents != null && !parents.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

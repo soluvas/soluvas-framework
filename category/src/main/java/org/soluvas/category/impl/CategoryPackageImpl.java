@@ -369,6 +369,10 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		categoryEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(theCommonsPackage.getDescribable());
 		categoryEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getInformer());
+		g2 = createEGenericType(theCommonsPackage.getCategoryInfo());
+		g1.getETypeArguments().add(g2);
+		categoryEClass.getEGenericSuperTypes().add(g1);
 		categoryCatalogEClass.getESuperTypes().add(this.getCategoryContainer());
 		categoryCatalogEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
 		categoryCatalogEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
