@@ -67,6 +67,7 @@ public class Image {
 	public Image(ImageRepository imageStore, BasicBSONObject dbo) {
 		super();
 		id = dbo.getString("_id");
+		name = dbo.getString("name");
 		uri = imageStore.getImagePublicUri(id, MongoImageRepository.ORIGINAL_NAME);
 		contentType = dbo.getString("contentType");
 		fileName = dbo.getString("fileName");
