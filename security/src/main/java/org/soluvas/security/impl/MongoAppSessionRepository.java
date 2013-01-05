@@ -18,6 +18,7 @@ import org.soluvas.security.AppSessionStatus;
 
 import com.google.code.morphia.Morphia;
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.mongodb.BasicDBObject;
@@ -97,21 +98,25 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 	public AppSession findOneByActive(String _id) {
 		if (_id == null)
 			return null;
-		final DBCursor cursor = coll.find(new BasicDBObject(ImmutableMap.of("_id", _id, "status", "active")));
-		final AppSession webSession = Iterables.getOnlyElement(MongoUtils.transform(cursor, new Function<DBObject, AppSession>() {
-			@Override
-			public AppSession apply(DBObject input) {
-				return morphia.fromDBObject(AppSession.class, input);
-			}
-		}), null);
-		log.debug("findOneByActive {} returns {}", _id, webSession);
-		return webSession;
+		final DBObject dbo = coll.findOne(new BasicDBObject(ImmutableMap.of(
+				"schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT,
+				"status", AppSessionStatus.ACTIVE.name(),
+				"_id", _id)));
+		log.debug("findOneByActive {} returns {}", _id, dbo);
+		if (dbo != null) {
+			return morphia.fromDBObject(AppSession.class, dbo);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
 	public <S extends AppSession> S add(@Nonnull final S appSession) {
+		Preconditions.checkNotNull(appSession, "Cannot add null AppSession");
+		Preconditions.checkNotNull(appSession.getId(), "Cannot add AppSession with null ID");
 		log.info("Insert AppSession for {} with User Agent: {} (dated: {})",
-				appSession.getPerson().getId(), appSession.getUserAgent(),
+				appSession.getPerson() != null ? appSession.getPerson().getId() : null,
+				appSession.getUserAgent(),
 				appSession.getCreationTime() );
 		final DBObject obj = morphia.toDBObject(appSession);
 		coll.insert(obj);
@@ -191,7 +196,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 	public List<AppSession> findAllByActive() {
 		final Map<String, Object> queryMap = ImmutableMap.<String, Object>of(
 				"schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT,
-				"status", AppSessionStatus.ACTIVE.getLiteral());
+				"status", AppSessionStatus.ACTIVE.name());
 		final DBCursor cursor = coll.find(new BasicDBObject(queryMap))
 				.sort(new BasicDBObject("creationTime", -1));
 		final List<AppSession> appSessions = MongoUtils.transform(cursor, new Function<DBObject, AppSession>() {

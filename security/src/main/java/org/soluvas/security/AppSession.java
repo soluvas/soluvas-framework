@@ -2,6 +2,9 @@
  */
 package org.soluvas.security;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -14,13 +17,18 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
+import org.soluvas.security.impl.AppSessionImpl;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.common.base.Charsets;
 import com.google.common.base.Function;
-import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 
 /**
  * <!-- begin-user-doc -->
@@ -61,21 +69,40 @@ import com.google.common.collect.ImmutableMap;
  * @model
  * @generated
  */
+@JsonDeserialize(as=AppSessionImpl.class)
 public interface AppSession extends Identifiable, Timestamped, SchemaVersionable {
 	
 	public class FromSession implements Function<Session, AppSession> {
+		private static final Logger log = LoggerFactory
+				.getLogger(AppSession.FromSession.class);
+		
 		@Override @Nullable
 		public AppSession apply(@Nullable Session input) {
 			final AppSession appSession = SecurityFactory.eINSTANCE.createAppSession();
 			appSession.setId((String) input.getId());
 			appSession.setIpAddress(input.getHost());
-			appSession.getIpAddresses().add(input.getHost());
+//			appSession.getIpAddresses().add(input.getHost());
 			appSession.setCreationTime(new DateTime(input.getStartTimestamp()));
 			appSession.setAccessTime(new DateTime(input.getLastAccessTime()));
 			appSession.setTimeout(input.getTimeout());
 			appSession.setExpiryTime(new DateTime(input.getLastAccessTime()).plus(input.getTimeout()));
 			for (final Object key : input.getAttributeKeys()) {
-				appSession.getAttributes().put((String) key, input.getAttribute(key));
+				final Object value = input.getAttribute(key);
+//				if (value instanceof Serializable && !(value instanceof Class)) {
+				if (value instanceof String) {
+					appSession.getAttributes().put((String) key, value);
+				} else {
+					final ByteArrayOutputStream out = new ByteArrayOutputStream();
+					try {
+						new ObjectOutputStream(out).writeObject(value);
+						appSession.getAttributes().put((String) key, out.toString(Charsets.UTF_8.name()));
+					} catch (IOException e) {
+						throw new SecurityException(e, "Cannot put in AppSession unserializable session %s attribute %s=%s",
+								input.getId(), key, value);
+					}
+//					log.warn("Cannot put in AppSession unserializable session {} attribute {}={}",
+//							input.getId(), key, value);
+				}
 			}
 			return appSession;
 		}
@@ -85,12 +112,13 @@ public interface AppSession extends Identifiable, Timestamped, SchemaVersionable
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		@Override @Nullable
 		public Session apply(@Nullable AppSession input) {
-			SimpleSession session = new SimpleSession(input.getIpAddress());
+			final SimpleSession session = new SimpleSession(input.getIpAddress());
 			session.setId(input.getId());
 			session.setStartTimestamp(input.getCreationTime().toDate());
 			session.setLastAccessTime(input.getAccessTime().toDate());
 			session.setTimeout(input.getTimeout());
-			session.setAttributes(ImmutableMap.copyOf((Map) input.getAttributes().map()));
+			// can't use ImmutableMap here!
+			session.setAttributes(Maps.newHashMap((Map) input.getAttributes().map()));
 			return session;
 		}
 	}
@@ -136,6 +164,7 @@ public interface AppSession extends Identifiable, Timestamped, SchemaVersionable
 	 * @model default="2"
 	 * @generated
 	 */
+	@Override
 	long getSchemaVersion();
 
 	/**
