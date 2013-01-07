@@ -7,32 +7,27 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.osgi.framework.Bundle;
-
 import org.soluvas.category.Category;
 import org.soluvas.category.CategoryContainer;
 import org.soluvas.category.CategoryPackage;
 import org.soluvas.category.CategoryStatus;
-
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.CategoryInfo;
 import org.soluvas.commons.CategoryLike;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
+import org.soluvas.commons.Informer;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.Positionable;
@@ -593,6 +588,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Category getParent() {
 		if (parent != null && ((EObject)parent).eIsProxy()) {
 			InternalEObject oldParent = (InternalEObject)parent;
@@ -619,6 +615,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParent(Category newParent) {
 		Category oldParent = parent;
 		parent = newParent;
@@ -631,6 +628,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getPositioner() {
 		return positioner;
 	}
@@ -640,6 +638,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPositioner(Integer newPositioner) {
 		Integer oldPositioner = positioner;
 		positioner = newPositioner;
@@ -652,6 +651,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSlug() {
 		return slug;
 	}
@@ -661,6 +661,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSlug(String newSlug) {
 		String oldSlug = slug;
 		slug = newSlug;
@@ -673,6 +674,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -682,6 +684,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(String newId) {
 		String oldId = id;
 		id = newId;
@@ -694,6 +697,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -703,6 +707,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -715,6 +720,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSlugPath() {
 		return slugPath;
 	}
@@ -724,6 +730,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSlugPath(String newSlugPath) {
 		String oldSlugPath = slugPath;
 		slugPath = newSlugPath;
@@ -736,6 +743,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getColor() {
 		return color;
 	}
@@ -745,6 +753,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setColor(String newColor) {
 		String oldColor = color;
 		color = newColor;
@@ -757,6 +766,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getImageId() {
 		return imageId;
 	}
@@ -766,6 +776,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setImageId(String newImageId) {
 		String oldImageId = imageId;
 		imageId = newImageId;
@@ -778,6 +789,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getLevel() {
 		return level;
 	}
@@ -787,6 +799,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLevel(Integer newLevel) {
 		Integer oldLevel = level;
 		level = newLevel;
@@ -799,6 +812,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getCategoryCount() {
 		return categoryCount;
 	}
@@ -808,6 +822,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCategoryCount(Long newCategoryCount) {
 		Long oldCategoryCount = categoryCount;
 		categoryCount = newCategoryCount;
@@ -820,6 +835,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResourceType getResourceType() {
 		return resourceType;
 	}
@@ -829,6 +845,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceType(ResourceType newResourceType) {
 		ResourceType oldResourceType = resourceType;
 		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
@@ -841,6 +858,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceUri() {
 		return resourceUri;
 	}
@@ -850,6 +868,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceUri(String newResourceUri) {
 		String oldResourceUri = resourceUri;
 		resourceUri = newResourceUri;
@@ -862,6 +881,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceName() {
 		return resourceName;
 	}
@@ -871,6 +891,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceName(String newResourceName) {
 		String oldResourceName = resourceName;
 		resourceName = newResourceName;
@@ -883,6 +904,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Bundle getBundle() {
 		return bundle;
 	}
@@ -892,6 +914,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBundle(Bundle newBundle) {
 		Bundle oldBundle = bundle;
 		bundle = newBundle;
@@ -904,6 +927,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Category> getCategories() {
 		if (categories == null) {
 			categories = new EObjectContainmentEList<Category>(Category.class, this, CategoryPackage.CATEGORY__CATEGORIES);
@@ -916,6 +940,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CategoryStatus getStatus() {
 		return status;
 	}
@@ -925,6 +950,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatus(CategoryStatus newStatus) {
 		CategoryStatus oldStatus = status;
 		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
@@ -937,6 +963,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -946,6 +973,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		String oldDescription = description;
 		description = newDescription;
@@ -958,6 +986,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMetaDescription() {
 		return metaDescription;
 	}
@@ -967,6 +996,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMetaDescription(String newMetaDescription) {
 		String oldMetaDescription = metaDescription;
 		metaDescription = newMetaDescription;
@@ -979,6 +1009,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMetaKeywords() {
 		return metaKeywords;
 	}
@@ -988,6 +1019,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMetaKeywords(String newMetaKeywords) {
 		String oldMetaKeywords = metaKeywords;
 		metaKeywords = newMetaKeywords;
@@ -1000,6 +1032,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMetaTitle() {
 		return metaTitle;
 	}
@@ -1009,6 +1042,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMetaTitle(String newMetaTitle) {
 		String oldMetaTitle = metaTitle;
 		metaTitle = newMetaTitle;
@@ -1021,6 +1055,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<String> getAvailableSortBy() {
 		return availableSortBy;
 	}
@@ -1030,6 +1065,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAvailableSortBy(List<String> newAvailableSortBy) {
 		List<String> oldAvailableSortBy = availableSortBy;
 		availableSortBy = newAvailableSortBy;
@@ -1042,6 +1078,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDefaultSortBy() {
 		return defaultSortBy;
 	}
@@ -1051,6 +1088,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefaultSortBy(String newDefaultSortBy) {
 		String oldDefaultSortBy = defaultSortBy;
 		defaultSortBy = newDefaultSortBy;
@@ -1063,6 +1101,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isAnchor() {
 		return anchor;
 	}
@@ -1072,6 +1111,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnchor(boolean newAnchor) {
 		boolean oldAnchor = anchor;
 		anchor = newAnchor;
@@ -1084,6 +1124,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIncludeInMenu() {
 		return includeInMenu;
 	}
@@ -1093,6 +1134,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIncludeInMenu(boolean newIncludeInMenu) {
 		boolean oldIncludeInMenu = includeInMenu;
 		includeInMenu = newIncludeInMenu;
@@ -1105,6 +1147,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getCatalogName() {
 		return catalogName;
 	}
@@ -1114,6 +1157,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCatalogName(String newCatalogName) {
 		String oldCatalogName = catalogName;
 		catalogName = newCatalogName;
@@ -1126,6 +1170,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDefaultMixin() {
 		return defaultMixin;
 	}
@@ -1135,11 +1180,21 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefaultMixin(String newDefaultMixin) {
 		String oldDefaultMixin = defaultMixin;
 		defaultMixin = newDefaultMixin;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CategoryPackage.CATEGORY__DEFAULT_MIXIN, oldDefaultMixin, defaultMixin));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public CategoryInfo toInfo() {
+		return new ToCategoryInfo().apply(this);
 	}
 
 	/**
@@ -1544,6 +1599,11 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				default: return -1;
 			}
 		}
+		if (baseClass == Informer.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1621,6 +1681,11 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		if (baseClass == Describable.class) {
 			switch (baseFeatureID) {
 				case CommonsPackage.DESCRIBABLE__DESCRIPTION: return CategoryPackage.CATEGORY__DESCRIPTION;
+				default: return -1;
+			}
+		}
+		if (baseClass == Informer.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

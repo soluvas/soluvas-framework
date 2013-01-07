@@ -4,11 +4,20 @@ package org.soluvas.category;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.CategoryInfo;
 import org.soluvas.commons.CategoryLike;
+import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Describable;
+import org.soluvas.commons.Informer;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.ResourceAware;
+
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +44,41 @@ import org.soluvas.commons.ResourceAware;
  * @model
  * @generated
  */
-public interface Category extends Parentable<Category>, CategoryLike, ResourceAware, BundleAware, CategoryContainer, Describable {
+public interface Category extends Parentable<Category>, CategoryLike, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo> {
+	
+	public class ToCategoryInfo implements Function<Category, CategoryInfo> {
+		
+		private Iterable<Category> getParents(Category child) {
+			if (child.getParent() != null) {
+				return Iterables.concat(getParents(child.getParent()), ImmutableList.of(child.getParent()));
+			} else {
+				return ImmutableList.of();
+			}
+		}
+		
+		@Override @Nullable
+		public CategoryInfo apply(@Nullable Category cat) {
+			final CategoryInfo catInfo = CommonsFactory.eINSTANCE.createCategoryInfo();
+			catInfo.setCategoryCount(cat.getCategoryCount());
+			catInfo.setColor(cat.getColor());
+			catInfo.setId(cat.getId());
+			catInfo.setImageId(cat.getImageId());
+			catInfo.setLevel(cat.getLevel());
+			catInfo.setName(cat.getName());
+			if (cat.getParent() != null) {
+				catInfo.setParent(cat.getParent().toInfo());
+			}
+			final List<Category> parentCats = ImmutableList.copyOf(getParents(cat));
+			final List<CategoryInfo> parentInfos = ImmutableList.copyOf(Iterables.transform(parentCats, this));
+			catInfo.getParents().addAll(parentInfos);
+			catInfo.setPositioner(cat.getPositioner());
+			catInfo.setSlug(cat.getSlug());
+			catInfo.setSlugPath(cat.getSlugPath());
+			
+			return catInfo;
+		}
+	}
+	
 	/**
 	 * Returns the value of the '<em><b>Status</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.soluvas.category.CategoryStatus}.

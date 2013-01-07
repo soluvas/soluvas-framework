@@ -14,6 +14,7 @@ import org.soluvas.commons.CategoryLike;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
+import org.soluvas.commons.Informer;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.Parentable;
@@ -34,7 +35,7 @@ import org.soluvas.commons.Sluggable;
  * @see org.soluvas.category.CategoryPackage
  * @generated
  */
-public class CategorySwitch<T> extends Switch<T> {
+public class CategorySwitch<T1> extends Switch<T1> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -76,17 +77,18 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	protected T doSwitch(int classifierID, EObject theEObject) {
+	protected T1 doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case CategoryPackage.CATEGORY: {
 				Category category = (Category)theEObject;
-				T result = caseCategory(category);
+				T1 result = caseCategory(category);
 				if (result == null) result = caseParentable(category);
 				if (result == null) result = caseCategoryLike(category);
 				if (result == null) result = caseResourceAware(category);
 				if (result == null) result = caseBundleAware(category);
 				if (result == null) result = caseCategoryContainer(category);
 				if (result == null) result = caseDescribable(category);
+				if (result == null) result = caseInformer(category);
 				if (result == null) result = casePositionable(category);
 				if (result == null) result = caseSluggable(category);
 				if (result == null) result = caseImageable(category);
@@ -98,13 +100,13 @@ public class CategorySwitch<T> extends Switch<T> {
 			}
 			case CategoryPackage.CATEGORY_CONTAINER: {
 				CategoryContainer categoryContainer = (CategoryContainer)theEObject;
-				T result = caseCategoryContainer(categoryContainer);
+				T1 result = caseCategoryContainer(categoryContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case CategoryPackage.CATEGORY_CATALOG: {
 				CategoryCatalog categoryCatalog = (CategoryCatalog)theEObject;
-				T result = caseCategoryCatalog(categoryCatalog);
+				T1 result = caseCategoryCatalog(categoryCatalog);
 				if (result == null) result = caseCategoryContainer(categoryCatalog);
 				if (result == null) result = caseNameContainer(categoryCatalog);
 				if (result == null) result = caseResourceAware(categoryCatalog);
@@ -115,7 +117,7 @@ public class CategorySwitch<T> extends Switch<T> {
 			}
 			case CategoryPackage.CATEGORY_MANAGER: {
 				CategoryManager categoryManager = (CategoryManager)theEObject;
-				T result = caseCategoryManager(categoryManager);
+				T1 result = caseCategoryManager(categoryManager);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -134,7 +136,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCategory(Category object) {
+	public T1 caseCategory(Category object) {
 		return null;
 	}
 
@@ -149,7 +151,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCategoryContainer(CategoryContainer object) {
+	public T1 caseCategoryContainer(CategoryContainer object) {
 		return null;
 	}
 
@@ -164,7 +166,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCategoryCatalog(CategoryCatalog object) {
+	public T1 caseCategoryCatalog(CategoryCatalog object) {
 		return null;
 	}
 
@@ -179,7 +181,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCategoryManager(CategoryManager object) {
+	public T1 caseCategoryManager(CategoryManager object) {
 		return null;
 	}
 
@@ -194,7 +196,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public <P> T caseParentable(Parentable<P> object) {
+	public <P> T1 caseParentable(Parentable<P> object) {
 		return null;
 	}
 
@@ -209,7 +211,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePositionable(Positionable object) {
+	public T1 casePositionable(Positionable object) {
 		return null;
 	}
 
@@ -224,7 +226,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSluggable(Sluggable object) {
+	public T1 caseSluggable(Sluggable object) {
 		return null;
 	}
 
@@ -239,7 +241,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseImageable(Imageable object) {
+	public T1 caseImageable(Imageable object) {
 		return null;
 	}
 
@@ -254,7 +256,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseIdentifiable(Identifiable object) {
+	public T1 caseIdentifiable(Identifiable object) {
 		return null;
 	}
 
@@ -269,7 +271,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNameable(Nameable object) {
+	public T1 caseNameable(Nameable object) {
 		return null;
 	}
 
@@ -284,7 +286,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNameContainer(NameContainer object) {
+	public T1 caseNameContainer(NameContainer object) {
 		return null;
 	}
 
@@ -299,7 +301,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCategoryLike(CategoryLike object) {
+	public T1 caseCategoryLike(CategoryLike object) {
 		return null;
 	}
 
@@ -314,7 +316,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseResourceAware(ResourceAware object) {
+	public T1 caseResourceAware(ResourceAware object) {
 		return null;
 	}
 
@@ -329,7 +331,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBundleAware(BundleAware object) {
+	public T1 caseBundleAware(BundleAware object) {
 		return null;
 	}
 
@@ -344,7 +346,22 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDescribable(Describable object) {
+	public T1 caseDescribable(Describable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Informer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Informer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T extends Identifiable> T1 caseInformer(Informer<T> object) {
 		return null;
 	}
 
@@ -360,7 +377,7 @@ public class CategorySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	public T defaultCase(EObject object) {
+	public T1 defaultCase(EObject object) {
 		return null;
 	}
 

@@ -23,4 +23,8 @@ public class SecurityException extends RuntimeException {
 		super(cause);
 	}
 	
+	public SecurityException(Throwable cause, String message, Object... args) {
+		super(String.format(message, args), cause);
+	}
+
 }

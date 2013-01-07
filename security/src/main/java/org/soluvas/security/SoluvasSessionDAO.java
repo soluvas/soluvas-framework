@@ -41,7 +41,9 @@ public class SoluvasSessionDAO implements SessionDAO {
 	@Override
 	public Session readSession(@Nonnull final Serializable sessionId)
 			throws UnknownSessionException {
-		final AppSession appSession = appSessionRepo.findOne((String) sessionId);
+		final AppSession appSession = appSessionRepo.findOneByActive((String) sessionId);
+		if (appSession == null)
+			throw new UnknownSessionException("Cannot find active session " + sessionId);
 		return appSession.toSession();
 	}
 
@@ -59,7 +61,10 @@ public class SoluvasSessionDAO implements SessionDAO {
 	 */
 	@Override
 	public void delete(Session session) {
-		appSessionRepo.delete((String) session.getId());
+		final AppSession newAppSession = new AppSession.FromSession().apply(session);
+		newAppSession.setStatus(AppSessionStatus.INACTIVE);
+		appSessionRepo.modify((String) session.getId(), newAppSession);
+//		appSessionRepo.delete((String) session.getId());
 	}
 
 	/* (non-Javadoc)
