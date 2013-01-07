@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.soluvas.commons.impl.CategoryInfoImpl;
 
@@ -44,5 +45,6 @@ public interface CategoryInfo extends CategoryLike, Parentable<CategoryInfo> {
 	 * @model containment="true"
 	 * @generated
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	EList<CategoryInfo> getParents();
 } // CategoryInfo
