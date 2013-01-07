@@ -62,6 +62,7 @@ public class JacksonMapperFactoryImpl implements JacksonMapperFactory {
 		lastModuleNames = getModuleNames(moduleSuppliers);
 		log.info("Creating Jackson ObjectMapper with {} modules: {}", modules.size(), lastModuleNames);
 		objectMapper = new ObjectMapper();
+//		objectMapper.enableDefaultTypingAsProperty(DefaultTyping.OBJECT_AND_NON_CONCRETE, "@class");
 		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 		for (Module module : modules) {

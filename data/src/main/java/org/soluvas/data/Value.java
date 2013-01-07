@@ -60,7 +60,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
  * @extends SerializableEObject
  * @generated
  */
-@JsonTypeInfo(use=Id.CLASS)
+@JsonTypeInfo(use=Id.CLASS, property="@class")
 public interface Value<T> extends SerializableEObject {
 	/**
 	 * <!-- begin-user-doc -->

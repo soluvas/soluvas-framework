@@ -10,6 +10,7 @@ import javax.ws.rs.ext.Provider;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectMapper.DefaultTyping;
 import org.codehaus.jackson.map.SerializationConfig.Feature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,11 +19,12 @@ import org.slf4j.LoggerFactory;
 public class Jackson19ContextResolver implements ContextResolver<ObjectMapper> {
 
 	private static final Logger log = LoggerFactory.getLogger(Jackson19ContextResolver.class);
-	private ObjectMapper objectMapper;
+	private final ObjectMapper objectMapper;
 
 	public Jackson19ContextResolver() throws JsonGenerationException, JsonMappingException, IOException {
 		log.info("Configuring Jackson ObjectMapper to indent output and write dates as ISO-8601");
 		objectMapper = new ObjectMapper();
+		objectMapper.enableDefaultTypingAsProperty(DefaultTyping.OBJECT_AND_NON_CONCRETE, "@class");
 		objectMapper.enable(Feature.INDENT_OUTPUT);
 		objectMapper.disable(Feature.WRITE_DATES_AS_TIMESTAMPS);
 		objectMapper.disable(Feature.WRITE_DATE_KEYS_AS_TIMESTAMPS);
