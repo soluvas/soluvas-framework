@@ -46,6 +46,7 @@
             <xsd:documentation>Name of the category catalog.</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
+        <xsd:attribute name="defaultMixin" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>

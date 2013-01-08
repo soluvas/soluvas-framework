@@ -13,6 +13,9 @@
 		<command name="cat/ls">
 			<action class="org.soluvas.category.shell.CatLsCommand" />
 		</command>
+		<command name="cat/cat">
+			<action class="org.soluvas.category.shell.CatCatCommand" />
+		</command>
 		
 	</command-bundle>
 

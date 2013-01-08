@@ -503,6 +503,12 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CategoryInfo">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parents" upperBound="-1"
+        eType="#//CategoryInfo" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Used to help query performance. And also to display breadcrumbs."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eGenericSuperTypes eClassifier="#//CategoryLike"/>
     <eGenericSuperTypes eClassifier="#//Parentable">
       <eTypeArguments eClassifier="#//CategoryInfo"/>

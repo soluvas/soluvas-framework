@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.soluvas.category.*;
 import org.soluvas.category.Category;
 import org.soluvas.category.CategoryCatalog;
 import org.soluvas.category.CategoryFactory;
@@ -59,9 +60,9 @@ public class CategoryFactoryImpl extends EFactoryImpl implements CategoryFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CategoryPackage.CATEGORY: return createCategory();
-			case CategoryPackage.CATEGORY_CATALOG: return createCategoryCatalog();
-			case CategoryPackage.CATEGORY_MANAGER: return createCategoryManager();
+			case CategoryPackage.CATEGORY: return (EObject)createCategory();
+			case CategoryPackage.CATEGORY_CATALOG: return (EObject)createCategoryCatalog();
+			case CategoryPackage.CATEGORY_MANAGER: return (EObject)createCategoryManager();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

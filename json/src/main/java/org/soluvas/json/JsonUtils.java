@@ -5,27 +5,43 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.json.jscience.JscienceModule;
 import org.soluvas.json.money.JodaMoneyModule;
 
+import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
+import com.google.common.collect.ImmutableList;
 
 public class JsonUtils {
 	private static transient Logger log = LoggerFactory.getLogger(JsonUtils.class);
 
 	private static ObjectWriter writer;
 	public static final ObjectMapper mapper;
-	
+	@SuppressWarnings("unchecked")
+	private static final Supplier<Module>[] modules = new Supplier[] {
+		Suppliers.ofInstance(new JodaModule()),
+		Suppliers.ofInstance(new GuavaModule()),
+		Suppliers.ofInstance(new LowerEnumModule()),
+		Suppliers.ofInstance(new JodaMoneyModule()),
+		Suppliers.ofInstance(new EmfModule()),
+		Suppliers.ofInstance(new JscienceModule())
+	};
+
 	static {
-		mapper = new ObjectMapper();
-		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-		mapper.enable(SerializationFeature.INDENT_OUTPUT);
-		mapper.registerModule(new JodaModule());
+		final JacksonMapperFactory jacksonMapperFactory = new JacksonMapperFactoryImpl(
+				ImmutableList.copyOf(modules));
+		mapper = jacksonMapperFactory.get();
+//		mapper.enableDefaultTypingAsProperty(DefaultTyping.OBJECT_AND_NON_CONCRETE, "@class");
+//		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+//		mapper.enable(SerializationFeature.INDENT_OUTPUT);
+//		mapper.registerModule(new JodaModule());
 //		mapper.registerModule(new GuavaModule());
-		mapper.registerModule(new LowerEnumModule());
-		mapper.registerModule(new JodaMoneyModule());
-		mapper.registerModule(new EmfModule());
-		mapper.registerModule(new JscienceModule());
+//		mapper.registerModule(new LowerEnumModule());
+//		mapper.registerModule(new JodaMoneyModule());
+//		mapper.registerModule(new EmfModule());
+//		mapper.registerModule(new JscienceModule());
 		writer = mapper.writer();
 	}
 	

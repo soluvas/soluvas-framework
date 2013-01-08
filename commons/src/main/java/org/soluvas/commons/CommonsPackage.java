@@ -1523,13 +1523,22 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_INFO__PARENT = CATEGORY_LIKE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Parents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__PARENTS = CATEGORY_LIKE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Category Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO_FEATURE_COUNT = CATEGORY_LIKE_FEATURE_COUNT + 1;
+	int CATEGORY_INFO_FEATURE_COUNT = CATEGORY_LIKE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
@@ -2651,6 +2660,17 @@ public interface CommonsPackage extends EPackage {
 	EClass getCategoryInfo();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.soluvas.commons.CategoryInfo#getParents <em>Parents</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parents</em>'.
+	 * @see org.soluvas.commons.CategoryInfo#getParents()
+	 * @see #getCategoryInfo()
+	 * @generated
+	 */
+	EReference getCategoryInfo_Parents();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3652,6 +3672,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CATEGORY_INFO = eINSTANCE.getCategoryInfo();
+
+		/**
+		 * The meta object literal for the '<em><b>Parents</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CATEGORY_INFO__PARENTS = eINSTANCE.getCategoryInfo_Parents();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

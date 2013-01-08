@@ -26,10 +26,15 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
+import org.soluvas.mongo.BigDecimalConverter;
+import org.soluvas.mongo.CurrencyUnitConverter;
+import org.soluvas.mongo.DateTimeConverter;
+import org.soluvas.mongo.UnitConverter;
 import org.soluvas.security.AppSession;
 import org.soluvas.security.AppSessionStatus;
 import org.soluvas.security.SecurityPackage;
 
+import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
 
@@ -64,6 +69,8 @@ import com.google.code.morphia.annotations.Id;
  * @generated
  */
 @Entity
+@Converters({BigDecimalConverter.class, DateTimeConverter.class,
+	CurrencyUnitConverter.class, UnitConverter.class})
 public class AppSessionImpl extends EObjectImpl implements AppSession {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -509,6 +516,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public long getSchemaVersion() {
 		return schemaVersion;
 	}
@@ -518,6 +526,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSchemaVersion(long newSchemaVersion) {
 		long oldSchemaVersion = schemaVersion;
 		schemaVersion = newSchemaVersion;
@@ -684,6 +693,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getTimeout() {
 		return timeout;
 	}
@@ -693,6 +703,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTimeout(Long newTimeout) {
 		Long oldTimeout = timeout;
 		timeout = newTimeout;
@@ -796,6 +807,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
+	@Override
 	public Session toSession() {
 		return new ToSession().apply(this);
 	}

@@ -671,6 +671,11 @@ Used by {#getName()}.</xsd:documentation>
       <xsd:extension base="commons:CategoryLike">
         <xsd:choice maxOccurs="unbounded" minOccurs="0">
           <xsd:element name="parent" type="ecore:EObject"/>
+          <xsd:element name="parents" type="commons:CategoryInfo">
+            <xsd:annotation>
+              <xsd:documentation>Used to help query performance. And also to display breadcrumbs.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
         </xsd:choice>
         <xsd:attribute name="parent" type="xsd:string"/>
       </xsd:extension>

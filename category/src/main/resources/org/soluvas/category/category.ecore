@@ -20,6 +20,7 @@
         <details key="documentation" value="Name of the category catalog."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultMixin" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Parentable">
       <eTypeArguments eClassifier="#//Category"/>
     </eGenericSuperTypes>
@@ -28,6 +29,9 @@
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware"/>
     <eGenericSuperTypes eClassifier="#//CategoryContainer"/>
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Describable"/>
+    <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Informer">
+      <eTypeArguments eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//CategoryInfo"/>
+    </eGenericSuperTypes>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CategoryContainer" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="categories" upperBound="-1"

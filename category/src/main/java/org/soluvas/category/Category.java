@@ -4,11 +4,20 @@ package org.soluvas.category;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.CategoryInfo;
 import org.soluvas.commons.CategoryLike;
+import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Describable;
+import org.soluvas.commons.Informer;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.ResourceAware;
+
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +36,7 @@ import org.soluvas.commons.ResourceAware;
  *   <li>{@link org.soluvas.category.Category#isAnchor <em>Anchor</em>}</li>
  *   <li>{@link org.soluvas.category.Category#isIncludeInMenu <em>Include In Menu</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getCatalogName <em>Catalog Name</em>}</li>
+ *   <li>{@link org.soluvas.category.Category#getDefaultMixin <em>Default Mixin</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,7 +44,41 @@ import org.soluvas.commons.ResourceAware;
  * @model
  * @generated
  */
-public interface Category extends Parentable<Category>, CategoryLike, ResourceAware, BundleAware, CategoryContainer, Describable {
+public interface Category extends Parentable<Category>, CategoryLike, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo> {
+	
+	public class ToCategoryInfo implements Function<Category, CategoryInfo> {
+		
+		private Iterable<Category> getParents(Category child) {
+			if (child.getParent() != null) {
+				return Iterables.concat(getParents(child.getParent()), ImmutableList.of(child.getParent()));
+			} else {
+				return ImmutableList.of();
+			}
+		}
+		
+		@Override @Nullable
+		public CategoryInfo apply(@Nullable Category cat) {
+			final CategoryInfo catInfo = CommonsFactory.eINSTANCE.createCategoryInfo();
+			catInfo.setCategoryCount(cat.getCategoryCount());
+			catInfo.setColor(cat.getColor());
+			catInfo.setId(cat.getId());
+			catInfo.setImageId(cat.getImageId());
+			catInfo.setLevel(cat.getLevel());
+			catInfo.setName(cat.getName());
+			if (cat.getParent() != null) {
+				catInfo.setParent(cat.getParent().toInfo());
+			}
+			final List<Category> parentCats = ImmutableList.copyOf(getParents(cat));
+			final List<CategoryInfo> parentInfos = ImmutableList.copyOf(Iterables.transform(parentCats, this));
+			catInfo.getParents().addAll(parentInfos);
+			catInfo.setPositioner(cat.getPositioner());
+			catInfo.setSlug(cat.getSlug());
+			catInfo.setSlugPath(cat.getSlugPath());
+			
+			return catInfo;
+		}
+	}
+	
 	/**
 	 * Returns the value of the '<em><b>Status</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.soluvas.category.CategoryStatus}.
@@ -270,5 +314,31 @@ public interface Category extends Parentable<Category>, CategoryLike, ResourceAw
 	 * @generated
 	 */
 	void setCatalogName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Default Mixin</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Default Mixin</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Default Mixin</em>' attribute.
+	 * @see #setDefaultMixin(String)
+	 * @see org.soluvas.category.CategoryPackage#getCategory_DefaultMixin()
+	 * @model
+	 * @generated
+	 */
+	String getDefaultMixin();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.category.Category#getDefaultMixin <em>Default Mixin</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default Mixin</em>' attribute.
+	 * @see #getDefaultMixin()
+	 * @generated
+	 */
+	void setDefaultMixin(String value);
 
 } // Category
