@@ -65,9 +65,4 @@ public class SoluvasSecurityManager extends DefaultWebSecurityManager {
 		return sessionKey;
 	}
 
-	@Override
-	protected SubjectContext resolveSession(SubjectContext context) {
-		return super.resolveSession(context);
-	}
-
 }
