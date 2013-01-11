@@ -18,17 +18,19 @@
 	</bean>
 	
 	<reference id="globalEventBus" interface="com.google.common.eventbus.EventBus"
-		filter="(tenantId=\*)" ext:proxy-method="classes" />
+		filter="(tenantId=\*)" ext:proxy-method="classes" timeout="5" />
 
 	<bean id="socialSchemaFactory" class="org.soluvas.social.schema.impl.SchemaFactoryImpl" factory-method="getInstance" />
 	<bean id="socialSchemaCatalog" factory-ref="socialSchemaFactory" factory-method="createSocialSchemaCatalog" />
 	<service ref="socialSchemaCatalog" auto-export="interfaces" />
 
-	<bean id="socialSchemaCatalogXmiTracker" class="org.soluvas.social.util.SocialSchemaCatalogXmiTracker">
+	<bean id="socialSchemaCatalogXmiTracker" class="org.soluvas.social.util.SocialSchemaCatalogXmiTracker"
+		depends-on="globalEventBus">
 		<argument ref="socialSchemaCatalog" />
 		<argument ref="globalEventBus" />
 	</bean>
-	<bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close">
+	<bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close"
+		depends-on="socialSchemaCatalogXmiTracker">
 		<argument ref="blueprintBundleContext" />
 		<argument value="32" />
 		<argument ref="socialSchemaCatalogXmiTracker" />

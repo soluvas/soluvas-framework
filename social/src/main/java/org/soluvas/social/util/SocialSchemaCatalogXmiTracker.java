@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleEvent;
+import org.osgi.service.blueprint.container.ServiceUnavailableException;
 import org.osgi.util.tracker.BundleTrackerCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -296,7 +297,12 @@ public class SocialSchemaCatalogXmiTracker implements BundleTrackerCustomizer<Li
 		// Notify StorySchemaCatalogXmiTracker
 		final TargetTypeRemoved removed = SchemaFactory.eINSTANCE.createTargetTypeRemoved();
 		removed.getTargetTypes().addAll(targetTypes);
-		eventBus.post(removed);
+		try {
+			eventBus.post(removed);
+		} catch (ServiceUnavailableException e) {
+			// can happen if bundles are stopped, i.e. during mass update/refresh
+			log.warn("Cannot post TargetTypeRemoved event: " + removed, e);
+		}
 	}
 
 }
