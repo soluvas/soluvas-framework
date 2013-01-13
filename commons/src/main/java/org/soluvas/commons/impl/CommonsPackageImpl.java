@@ -75,6 +75,7 @@ import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.WebAddress;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
+import java.io.File;
 
 /**
  * <!-- begin-user-doc -->
@@ -481,6 +482,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EDataType localeEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType fileEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1568,6 +1576,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getFile() {
+		return fileEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
@@ -1736,6 +1753,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		bigDecimalEDataType = createEDataType(BIG_DECIMAL);
 		dateTimeZoneEDataType = createEDataType(DATE_TIME_ZONE);
 		localeEDataType = createEDataType(LOCALE);
+		fileEDataType = createEDataType(FILE);
 	}
 
 	/**
@@ -2086,6 +2104,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(bigDecimalEDataType, BigDecimal.class, "BigDecimal", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(dateTimeZoneEDataType, DateTimeZone.class, "DateTimeZone", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(localeEDataType, Locale.class, "Locale", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(fileEDataType, File.class, "File", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

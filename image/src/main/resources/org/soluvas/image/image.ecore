@@ -7,9 +7,42 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="publicUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImageConnector" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageConnector" abstract="true" interface="true">
+    <eOperations name="upload" eType="#//UploadedImage">
+      <eParameters name="namespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="imageId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="styleCode" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="extension" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="file" eType="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//File"/>
+      <eParameters name="contentType" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="S3Connector" eSuperTypes="#//ImageConnector"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BlitlineConnector" eSuperTypes="#//ImageConnector"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CloudinaryConnector" eSuperTypes="#//ImageConnector"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BlitlineTransformer" eSuperTypes="#//ImageTransformer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Processes using Blitline. The source image must be publicly hosted, for example using S3.&#xA;&#xA;The destination image is directly written into an S3 bucket."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WebDavConnector" eSuperTypes="#//ImageConnector"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageTransformer" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ThumbnailatorTransformer" eSuperTypes="#//ImageTransformer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//ImageConnector"
+        changeable="false" transient="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Where to upload transformed images."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UploadedImage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Public URI, usually CDN. This may be cached, so it's not a good fit for input to ImageTransformer."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="originUri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="URI for direct access to object storage."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
 </ecore:EPackage>

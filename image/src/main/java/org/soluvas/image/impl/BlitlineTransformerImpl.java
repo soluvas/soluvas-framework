@@ -6,25 +6,25 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.soluvas.image.BlitlineConnector;
+import org.soluvas.image.BlitlineTransformer;
 import org.soluvas.image.ImagePackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Blitline Connector</b></em>'.
+ * An implementation of the model object '<em><b>Blitline Transformer</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class BlitlineConnectorImpl extends EObjectImpl implements BlitlineConnector {
+public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTransformer {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BlitlineConnectorImpl() {
+	public BlitlineTransformerImpl() {
 		super();
 	}
 
@@ -35,7 +35,7 @@ public class BlitlineConnectorImpl extends EObjectImpl implements BlitlineConnec
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ImagePackage.Literals.BLITLINE_CONNECTOR;
+		return ImagePackage.Literals.BLITLINE_TRANSFORMER;
 	}
 
-} //BlitlineConnectorImpl
+} //BlitlineTransformerImpl

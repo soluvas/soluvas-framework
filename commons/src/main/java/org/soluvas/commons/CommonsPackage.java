@@ -1781,6 +1781,17 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>File</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.io.File
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFile()
+	 * @generated
+	 */
+	int FILE = 57;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2920,6 +2931,17 @@ public interface CommonsPackage extends EPackage {
 	EDataType getLocale();
 
 	/**
+	 * Returns the meta object for data type '{@link java.io.File <em>File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>File</em>'.
+	 * @see java.io.File
+	 * @model instanceClass="java.io.File"
+	 * @generated
+	 */
+	EDataType getFile();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3910,6 +3932,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType LOCALE = eINSTANCE.getLocale();
+
+		/**
+		 * The meta object literal for the '<em>File</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.io.File
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFile()
+		 * @generated
+		 */
+		EDataType FILE = eINSTANCE.getFile();
 
 	}
 

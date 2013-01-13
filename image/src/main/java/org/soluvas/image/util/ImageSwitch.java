@@ -85,17 +85,10 @@ public class ImageSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImagePackage.BLITLINE_CONNECTOR: {
-				BlitlineConnector blitlineConnector = (BlitlineConnector)theEObject;
-				T result = caseBlitlineConnector(blitlineConnector);
-				if (result == null) result = caseImageConnector(blitlineConnector);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ImagePackage.CLOUDINARY_CONNECTOR: {
-				CloudinaryConnector cloudinaryConnector = (CloudinaryConnector)theEObject;
-				T result = caseCloudinaryConnector(cloudinaryConnector);
-				if (result == null) result = caseImageConnector(cloudinaryConnector);
+			case ImagePackage.BLITLINE_TRANSFORMER: {
+				BlitlineTransformer blitlineTransformer = (BlitlineTransformer)theEObject;
+				T result = caseBlitlineTransformer(blitlineTransformer);
+				if (result == null) result = caseImageTransformer(blitlineTransformer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -103,6 +96,25 @@ public class ImageSwitch<T> extends Switch<T> {
 				WebDavConnector webDavConnector = (WebDavConnector)theEObject;
 				T result = caseWebDavConnector(webDavConnector);
 				if (result == null) result = caseImageConnector(webDavConnector);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.IMAGE_TRANSFORMER: {
+				ImageTransformer imageTransformer = (ImageTransformer)theEObject;
+				T result = caseImageTransformer(imageTransformer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.THUMBNAILATOR_TRANSFORMER: {
+				ThumbnailatorTransformer thumbnailatorTransformer = (ThumbnailatorTransformer)theEObject;
+				T result = caseThumbnailatorTransformer(thumbnailatorTransformer);
+				if (result == null) result = caseImageTransformer(thumbnailatorTransformer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.UPLOADED_IMAGE: {
+				UploadedImage uploadedImage = (UploadedImage)theEObject;
+				T result = caseUploadedImage(uploadedImage);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -156,32 +168,17 @@ public class ImageSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Blitline Connector</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Blitline Transformer</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Blitline Connector</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Blitline Transformer</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBlitlineConnector(BlitlineConnector object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Cloudinary Connector</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Cloudinary Connector</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCloudinaryConnector(CloudinaryConnector object) {
+	public T caseBlitlineTransformer(BlitlineTransformer object) {
 		return null;
 	}
 
@@ -197,6 +194,51 @@ public class ImageSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseWebDavConnector(WebDavConnector object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Transformer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Transformer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImageTransformer(ImageTransformer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Thumbnailator Transformer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Thumbnailator Transformer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseThumbnailatorTransformer(ThumbnailatorTransformer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Uploaded Image</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Uploaded Image</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUploadedImage(UploadedImage object) {
 		return null;
 	}
 

@@ -556,7 +556,7 @@ public class MongoImageRepository implements ImageRepository {
 	 */
 	@Deprecated
 	protected void uploadFile(URI uri, InputStream source, String contentType, long length) throws ClientProtocolException, IOException {
-		log.info("Uploading {} ({} bytes) to {}", new Object[] { contentType, length, uri });
+		log.info("Uploading {} ({} bytes) to {}", contentType, length, uri );
 		
 		HttpPut httpPut = new HttpPut(uri);
 		httpPut.setHeader("Content-Type", contentType);

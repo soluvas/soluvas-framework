@@ -4,15 +4,21 @@ package org.soluvas.image.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.soluvas.image.BlitlineConnector;
-import org.soluvas.image.CloudinaryConnector;
+import org.soluvas.commons.CommonsPackage;
+import org.soluvas.image.BlitlineTransformer;
 import org.soluvas.image.ImageConfig;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImagePackage;
+import org.soluvas.image.ImageTransformer;
 import org.soluvas.image.S3Connector;
+import org.soluvas.image.ThumbnailatorTransformer;
+import org.soluvas.image.UploadedImage;
 import org.soluvas.image.WebDavConnector;
 
 /**
@@ -46,19 +52,35 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass blitlineConnectorEClass = null;
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass cloudinaryConnectorEClass = null;
+	private EClass blitlineTransformerEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass webDavConnectorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imageTransformerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass thumbnailatorTransformerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass uploadedImageEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -106,6 +128,9 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		isInited = true;
 
+		// Initialize simple dependencies
+		CommonsPackage.eINSTANCE.eClass();
+
 		// Create package meta-data objects
 		theImagePackage.createPackageContents();
 
@@ -126,6 +151,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getImageConfig() {
 		return imageConfigEClass;
 	}
@@ -135,6 +161,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getImageConfig_PublicUri() {
 		return (EAttribute)imageConfigEClass.getEStructuralFeatures().get(0);
 	}
@@ -144,6 +171,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getImageConnector() {
 		return imageConnectorEClass;
 	}
@@ -153,6 +181,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getS3Connector() {
 		return s3ConnectorEClass;
 	}
@@ -162,8 +191,9 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBlitlineConnector() {
-		return blitlineConnectorEClass;
+	@Override
+	public EClass getBlitlineTransformer() {
+		return blitlineTransformerEClass;
 	}
 
 	/**
@@ -171,15 +201,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getCloudinaryConnector() {
-		return cloudinaryConnectorEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@Override
 	public EClass getWebDavConnector() {
 		return webDavConnectorEClass;
 	}
@@ -189,6 +211,67 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EClass getImageTransformer() {
+		return imageTransformerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getThumbnailatorTransformer() {
+		return thumbnailatorTransformerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getThumbnailatorTransformer_Destination() {
+		return (EReference)thumbnailatorTransformerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getUploadedImage() {
+		return uploadedImageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getUploadedImage_Uri() {
+		return (EAttribute)uploadedImageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getUploadedImage_OriginUri() {
+		return (EAttribute)uploadedImageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public ImageFactory getImageFactory() {
 		return (ImageFactory)getEFactoryInstance();
 	}
@@ -219,11 +302,18 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		s3ConnectorEClass = createEClass(S3_CONNECTOR);
 
-		blitlineConnectorEClass = createEClass(BLITLINE_CONNECTOR);
-
-		cloudinaryConnectorEClass = createEClass(CLOUDINARY_CONNECTOR);
+		blitlineTransformerEClass = createEClass(BLITLINE_TRANSFORMER);
 
 		webDavConnectorEClass = createEClass(WEB_DAV_CONNECTOR);
+
+		imageTransformerEClass = createEClass(IMAGE_TRANSFORMER);
+
+		thumbnailatorTransformerEClass = createEClass(THUMBNAILATOR_TRANSFORMER);
+		createEReference(thumbnailatorTransformerEClass, THUMBNAILATOR_TRANSFORMER__DESTINATION);
+
+		uploadedImageEClass = createEClass(UPLOADED_IMAGE);
+		createEAttribute(uploadedImageEClass, UPLOADED_IMAGE__URI);
+		createEAttribute(uploadedImageEClass, UPLOADED_IMAGE__ORIGIN_URI);
 	}
 
 	/**
@@ -249,15 +339,19 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+		CommonsPackage theCommonsPackage = (CommonsPackage)EPackage.Registry.INSTANCE.getEPackage(CommonsPackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
 		s3ConnectorEClass.getESuperTypes().add(this.getImageConnector());
-		blitlineConnectorEClass.getESuperTypes().add(this.getImageConnector());
-		cloudinaryConnectorEClass.getESuperTypes().add(this.getImageConnector());
+		blitlineTransformerEClass.getESuperTypes().add(this.getImageTransformer());
 		webDavConnectorEClass.getESuperTypes().add(this.getImageConnector());
+		thumbnailatorTransformerEClass.getESuperTypes().add(this.getImageTransformer());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(imageConfigEClass, ImageConfig.class, "ImageConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -265,13 +359,28 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		initEClass(imageConnectorEClass, ImageConnector.class, "ImageConnector", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		EOperation op = addEOperation(imageConnectorEClass, this.getUploadedImage(), "upload", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "styleCode", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "extension", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theCommonsPackage.getFile(), "file", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "contentType", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(s3ConnectorEClass, S3Connector.class, "S3Connector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(blitlineConnectorEClass, BlitlineConnector.class, "BlitlineConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(cloudinaryConnectorEClass, CloudinaryConnector.class, "CloudinaryConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(blitlineTransformerEClass, BlitlineTransformer.class, "BlitlineTransformer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(webDavConnectorEClass, WebDavConnector.class, "WebDavConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(imageTransformerEClass, ImageTransformer.class, "ImageTransformer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(thumbnailatorTransformerEClass, ThumbnailatorTransformer.class, "ThumbnailatorTransformer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getThumbnailatorTransformer_Destination(), this.getImageConnector(), null, "destination", null, 0, 1, ThumbnailatorTransformer.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(uploadedImageEClass, UploadedImage.class, "UploadedImage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUploadedImage_Uri(), theEcorePackage.getEString(), "uri", null, 0, 1, UploadedImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUploadedImage_OriginUri(), theEcorePackage.getEString(), "originUri", null, 0, 1, UploadedImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -294,6 +403,30 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Image module configuration.\n\nThe URI pattern is hardcoded as folows:\n\nFor normal styles:\n\n* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}.{extension}\n\nFor variant styles: (styleCode is usually \'x\', but can be anything else except \'o\')\n\n* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}_{variantCode}.{extension}\n\nIn the future, URI pattern (\"template\") should be configurable, based on http://tools.ietf.org/html/rfc6570\nand can be expanded both by server and client scripts.\n\nThe domain name can also be different for each namespace, or even for each styleCode or variantCode.\n"
+		   });		
+		addAnnotation
+		  (blitlineTransformerEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Processes using Blitline. The source image must be publicly hosted, for example using S3.\n\nThe destination image is directly written into an S3 bucket."
+		   });		
+		addAnnotation
+		  (getThumbnailatorTransformer_Destination(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Where to upload transformed images."
+		   });		
+		addAnnotation
+		  (getUploadedImage_Uri(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Public URI, usually CDN. This may be cached, so it\'s not a good fit for input to ImageTransformer."
+		   });		
+		addAnnotation
+		  (getUploadedImage_OriginUri(), 
+		   source, 
+		   new String[] {
+			 "documentation", "URI for direct access to object storage."
 		   });
 	}
 

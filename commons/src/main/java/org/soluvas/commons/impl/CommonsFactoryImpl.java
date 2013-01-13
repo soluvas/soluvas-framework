@@ -47,6 +47,7 @@ import org.soluvas.commons.WebAddress;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
+import java.io.File;
 
 /**
  * <!-- begin-user-doc -->
@@ -160,6 +161,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createDateTimeZoneFromString(eDataType, initialValue);
 			case CommonsPackage.LOCALE:
 				return createLocaleFromString(eDataType, initialValue);
+			case CommonsPackage.FILE:
+				return createFileFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -217,6 +220,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertDateTimeZoneToString(eDataType, instanceValue);
 			case CommonsPackage.LOCALE:
 				return convertLocaleToString(eDataType, instanceValue);
+			case CommonsPackage.FILE:
+				return convertFileToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -743,6 +748,24 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertLocaleToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public File createFileFromString(EDataType eDataType, String initialValue) {
+		return (File)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertFileToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

@@ -80,16 +80,24 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 				return createS3ConnectorAdapter();
 			}
 			@Override
-			public Adapter caseBlitlineConnector(BlitlineConnector object) {
-				return createBlitlineConnectorAdapter();
-			}
-			@Override
-			public Adapter caseCloudinaryConnector(CloudinaryConnector object) {
-				return createCloudinaryConnectorAdapter();
+			public Adapter caseBlitlineTransformer(BlitlineTransformer object) {
+				return createBlitlineTransformerAdapter();
 			}
 			@Override
 			public Adapter caseWebDavConnector(WebDavConnector object) {
 				return createWebDavConnectorAdapter();
+			}
+			@Override
+			public Adapter caseImageTransformer(ImageTransformer object) {
+				return createImageTransformerAdapter();
+			}
+			@Override
+			public Adapter caseThumbnailatorTransformer(ThumbnailatorTransformer object) {
+				return createThumbnailatorTransformerAdapter();
+			}
+			@Override
+			public Adapter caseUploadedImage(UploadedImage object) {
+				return createUploadedImageAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -154,30 +162,16 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.image.BlitlineConnector <em>Blitline Connector</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.BlitlineTransformer <em>Blitline Transformer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.soluvas.image.BlitlineConnector
+	 * @see org.soluvas.image.BlitlineTransformer
 	 * @generated
 	 */
-	public Adapter createBlitlineConnectorAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.image.CloudinaryConnector <em>Cloudinary Connector</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.soluvas.image.CloudinaryConnector
-	 * @generated
-	 */
-	public Adapter createCloudinaryConnectorAdapter() {
+	public Adapter createBlitlineTransformerAdapter() {
 		return null;
 	}
 
@@ -192,6 +186,48 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createWebDavConnectorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.ImageTransformer <em>Transformer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.ImageTransformer
+	 * @generated
+	 */
+	public Adapter createImageTransformerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.ThumbnailatorTransformer <em>Thumbnailator Transformer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.ThumbnailatorTransformer
+	 * @generated
+	 */
+	public Adapter createThumbnailatorTransformerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.UploadedImage <em>Uploaded Image</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.UploadedImage
+	 * @generated
+	 */
+	public Adapter createUploadedImageAdapter() {
 		return null;
 	}
 

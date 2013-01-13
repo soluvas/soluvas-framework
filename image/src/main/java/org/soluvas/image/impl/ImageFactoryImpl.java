@@ -58,9 +58,10 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 		switch (eClass.getClassifierID()) {
 			case ImagePackage.IMAGE_CONFIG: return (EObject)createImageConfig();
 			case ImagePackage.S3_CONNECTOR: return (EObject)createS3Connector();
-			case ImagePackage.BLITLINE_CONNECTOR: return (EObject)createBlitlineConnector();
-			case ImagePackage.CLOUDINARY_CONNECTOR: return (EObject)createCloudinaryConnector();
+			case ImagePackage.BLITLINE_TRANSFORMER: return (EObject)createBlitlineTransformer();
 			case ImagePackage.WEB_DAV_CONNECTOR: return (EObject)createWebDavConnector();
+			case ImagePackage.THUMBNAILATOR_TRANSFORMER: return (EObject)createThumbnailatorTransformer();
+			case ImagePackage.UPLOADED_IMAGE: return (EObject)createUploadedImage();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -91,19 +92,9 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BlitlineConnector createBlitlineConnector() {
-		BlitlineConnectorImpl blitlineConnector = new BlitlineConnectorImpl();
-		return blitlineConnector;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CloudinaryConnector createCloudinaryConnector() {
-		CloudinaryConnectorImpl cloudinaryConnector = new CloudinaryConnectorImpl();
-		return cloudinaryConnector;
+	public BlitlineTransformer createBlitlineTransformer() {
+		BlitlineTransformerImpl blitlineTransformer = new BlitlineTransformerImpl();
+		return blitlineTransformer;
 	}
 
 	/**
@@ -114,6 +105,26 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	public WebDavConnector createWebDavConnector() {
 		WebDavConnectorImpl webDavConnector = new WebDavConnectorImpl();
 		return webDavConnector;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ThumbnailatorTransformer createThumbnailatorTransformer() {
+		ThumbnailatorTransformerImpl thumbnailatorTransformer = new ThumbnailatorTransformerImpl();
+		return thumbnailatorTransformer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UploadedImage createUploadedImage() {
+		UploadedImageImpl uploadedImage = new UploadedImageImpl();
+		return uploadedImage;
 	}
 
 	/**

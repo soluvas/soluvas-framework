@@ -5,6 +5,7 @@ package org.soluvas.image;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -122,42 +123,42 @@ public interface ImagePackage extends EPackage {
 	int S3_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.impl.BlitlineConnectorImpl <em>Blitline Connector</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.image.ImageTransformer <em>Transformer</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.impl.BlitlineConnectorImpl
-	 * @see org.soluvas.image.impl.ImagePackageImpl#getBlitlineConnector()
+	 * @see org.soluvas.image.ImageTransformer
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformer()
 	 * @generated
 	 */
-	int BLITLINE_CONNECTOR = 3;
+	int IMAGE_TRANSFORMER = 5;
 
 	/**
-	 * The number of structural features of the '<em>Blitline Connector</em>' class.
+	 * The number of structural features of the '<em>Transformer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BLITLINE_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
+	int IMAGE_TRANSFORMER_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.impl.CloudinaryConnectorImpl <em>Cloudinary Connector</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.image.impl.BlitlineTransformerImpl <em>Blitline Transformer</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.impl.CloudinaryConnectorImpl
-	 * @see org.soluvas.image.impl.ImagePackageImpl#getCloudinaryConnector()
+	 * @see org.soluvas.image.impl.BlitlineTransformerImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getBlitlineTransformer()
 	 * @generated
 	 */
-	int CLOUDINARY_CONNECTOR = 4;
+	int BLITLINE_TRANSFORMER = 3;
 
 	/**
-	 * The number of structural features of the '<em>Cloudinary Connector</em>' class.
+	 * The number of structural features of the '<em>Blitline Transformer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLOUDINARY_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
+	int BLITLINE_TRANSFORMER_FEATURE_COUNT = IMAGE_TRANSFORMER_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.WebDavConnectorImpl <em>Web Dav Connector</em>}' class.
@@ -167,7 +168,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getWebDavConnector()
 	 * @generated
 	 */
-	int WEB_DAV_CONNECTOR = 5;
+	int WEB_DAV_CONNECTOR = 4;
 
 	/**
 	 * The number of structural features of the '<em>Web Dav Connector</em>' class.
@@ -177,6 +178,72 @@ public interface ImagePackage extends EPackage {
 	 * @ordered
 	 */
 	int WEB_DAV_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
+
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.ThumbnailatorTransformerImpl <em>Thumbnailator Transformer</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.ThumbnailatorTransformerImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getThumbnailatorTransformer()
+	 * @generated
+	 */
+	int THUMBNAILATOR_TRANSFORMER = 6;
+
+	/**
+	 * The feature id for the '<em><b>Destination</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THUMBNAILATOR_TRANSFORMER__DESTINATION = IMAGE_TRANSFORMER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Thumbnailator Transformer</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THUMBNAILATOR_TRANSFORMER_FEATURE_COUNT = IMAGE_TRANSFORMER_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.UploadedImageImpl <em>Uploaded Image</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.UploadedImageImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getUploadedImage()
+	 * @generated
+	 */
+	int UPLOADED_IMAGE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPLOADED_IMAGE__URI = 0;
+
+	/**
+	 * The feature id for the '<em><b>Origin Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPLOADED_IMAGE__ORIGIN_URI = 1;
+
+	/**
+	 * The number of structural features of the '<em>Uploaded Image</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPLOADED_IMAGE_FEATURE_COUNT = 2;
 
 
 	/**
@@ -221,24 +288,14 @@ public interface ImagePackage extends EPackage {
 	EClass getS3Connector();
 
 	/**
-	 * Returns the meta object for class '{@link org.soluvas.image.BlitlineConnector <em>Blitline Connector</em>}'.
+	 * Returns the meta object for class '{@link org.soluvas.image.BlitlineTransformer <em>Blitline Transformer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Blitline Connector</em>'.
-	 * @see org.soluvas.image.BlitlineConnector
+	 * @return the meta object for class '<em>Blitline Transformer</em>'.
+	 * @see org.soluvas.image.BlitlineTransformer
 	 * @generated
 	 */
-	EClass getBlitlineConnector();
-
-	/**
-	 * Returns the meta object for class '{@link org.soluvas.image.CloudinaryConnector <em>Cloudinary Connector</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Cloudinary Connector</em>'.
-	 * @see org.soluvas.image.CloudinaryConnector
-	 * @generated
-	 */
-	EClass getCloudinaryConnector();
+	EClass getBlitlineTransformer();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.WebDavConnector <em>Web Dav Connector</em>}'.
@@ -249,6 +306,69 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getWebDavConnector();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.ImageTransformer <em>Transformer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Transformer</em>'.
+	 * @see org.soluvas.image.ImageTransformer
+	 * @generated
+	 */
+	EClass getImageTransformer();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.ThumbnailatorTransformer <em>Thumbnailator Transformer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Thumbnailator Transformer</em>'.
+	 * @see org.soluvas.image.ThumbnailatorTransformer
+	 * @generated
+	 */
+	EClass getThumbnailatorTransformer();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.image.ThumbnailatorTransformer#getDestination <em>Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Destination</em>'.
+	 * @see org.soluvas.image.ThumbnailatorTransformer#getDestination()
+	 * @see #getThumbnailatorTransformer()
+	 * @generated
+	 */
+	EReference getThumbnailatorTransformer_Destination();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.UploadedImage <em>Uploaded Image</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Uploaded Image</em>'.
+	 * @see org.soluvas.image.UploadedImage
+	 * @generated
+	 */
+	EClass getUploadedImage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.UploadedImage#getUri <em>Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uri</em>'.
+	 * @see org.soluvas.image.UploadedImage#getUri()
+	 * @see #getUploadedImage()
+	 * @generated
+	 */
+	EAttribute getUploadedImage_Uri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.UploadedImage#getOriginUri <em>Origin Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Origin Uri</em>'.
+	 * @see org.soluvas.image.UploadedImage#getOriginUri()
+	 * @see #getUploadedImage()
+	 * @generated
+	 */
+	EAttribute getUploadedImage_OriginUri();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -311,24 +431,14 @@ public interface ImagePackage extends EPackage {
 		EClass S3_CONNECTOR = eINSTANCE.getS3Connector();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.image.impl.BlitlineConnectorImpl <em>Blitline Connector</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.image.impl.BlitlineTransformerImpl <em>Blitline Transformer</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.image.impl.BlitlineConnectorImpl
-		 * @see org.soluvas.image.impl.ImagePackageImpl#getBlitlineConnector()
+		 * @see org.soluvas.image.impl.BlitlineTransformerImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getBlitlineTransformer()
 		 * @generated
 		 */
-		EClass BLITLINE_CONNECTOR = eINSTANCE.getBlitlineConnector();
-
-		/**
-		 * The meta object literal for the '{@link org.soluvas.image.impl.CloudinaryConnectorImpl <em>Cloudinary Connector</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.soluvas.image.impl.CloudinaryConnectorImpl
-		 * @see org.soluvas.image.impl.ImagePackageImpl#getCloudinaryConnector()
-		 * @generated
-		 */
-		EClass CLOUDINARY_CONNECTOR = eINSTANCE.getCloudinaryConnector();
+		EClass BLITLINE_TRANSFORMER = eINSTANCE.getBlitlineTransformer();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.WebDavConnectorImpl <em>Web Dav Connector</em>}' class.
@@ -339,6 +449,60 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EClass WEB_DAV_CONNECTOR = eINSTANCE.getWebDavConnector();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.ImageTransformer <em>Transformer</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.ImageTransformer
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformer()
+		 * @generated
+		 */
+		EClass IMAGE_TRANSFORMER = eINSTANCE.getImageTransformer();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.ThumbnailatorTransformerImpl <em>Thumbnailator Transformer</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.ThumbnailatorTransformerImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getThumbnailatorTransformer()
+		 * @generated
+		 */
+		EClass THUMBNAILATOR_TRANSFORMER = eINSTANCE.getThumbnailatorTransformer();
+
+		/**
+		 * The meta object literal for the '<em><b>Destination</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference THUMBNAILATOR_TRANSFORMER__DESTINATION = eINSTANCE.getThumbnailatorTransformer_Destination();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.UploadedImageImpl <em>Uploaded Image</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.UploadedImageImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getUploadedImage()
+		 * @generated
+		 */
+		EClass UPLOADED_IMAGE = eINSTANCE.getUploadedImage();
+
+		/**
+		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UPLOADED_IMAGE__URI = eINSTANCE.getUploadedImage_Uri();
+
+		/**
+		 * The meta object literal for the '<em><b>Origin Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UPLOADED_IMAGE__ORIGIN_URI = eINSTANCE.getUploadedImage_OriginUri();
 
 	}
 

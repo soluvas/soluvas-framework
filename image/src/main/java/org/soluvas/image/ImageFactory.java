@@ -40,22 +40,13 @@ public interface ImageFactory extends EFactory {
 	S3Connector createS3Connector();
 
 	/**
-	 * Returns a new object of class '<em>Blitline Connector</em>'.
+	 * Returns a new object of class '<em>Blitline Transformer</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Blitline Connector</em>'.
+	 * @return a new object of class '<em>Blitline Transformer</em>'.
 	 * @generated
 	 */
-	BlitlineConnector createBlitlineConnector();
-
-	/**
-	 * Returns a new object of class '<em>Cloudinary Connector</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Cloudinary Connector</em>'.
-	 * @generated
-	 */
-	CloudinaryConnector createCloudinaryConnector();
+	BlitlineTransformer createBlitlineTransformer();
 
 	/**
 	 * Returns a new object of class '<em>Web Dav Connector</em>'.
@@ -65,6 +56,24 @@ public interface ImageFactory extends EFactory {
 	 * @generated
 	 */
 	WebDavConnector createWebDavConnector();
+
+	/**
+	 * Returns a new object of class '<em>Thumbnailator Transformer</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Thumbnailator Transformer</em>'.
+	 * @generated
+	 */
+	ThumbnailatorTransformer createThumbnailatorTransformer();
+
+	/**
+	 * Returns a new object of class '<em>Uploaded Image</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Uploaded Image</em>'.
+	 * @generated
+	 */
+	UploadedImage createUploadedImage();
 
 	/**
 	 * Returns the package supported by this factory.

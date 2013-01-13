@@ -523,4 +523,5 @@
   <eClassifiers xsi:type="ecore:EDataType" name="BigDecimal" instanceClassName="java.math.BigDecimal"/>
   <eClassifiers xsi:type="ecore:EDataType" name="DateTimeZone" instanceClassName="org.joda.time.DateTimeZone"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Locale" instanceClassName="java.util.Locale"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="File" instanceClassName="java.io.File"/>
 </ecore:EPackage>

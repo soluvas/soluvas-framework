@@ -63,22 +63,59 @@ The domain name can also be different for each namespace, or even for each style
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="S3Connector" type="image:S3Connector"/>
-  <xsd:complexType name="BlitlineConnector">
+  <xsd:complexType name="BlitlineTransformer">
+    <xsd:annotation>
+      <xsd:documentation>Processes using Blitline. The source image must be publicly hosted, for example using S3.
+
+The destination image is directly written into an S3 bucket.</xsd:documentation>
+    </xsd:annotation>
     <xsd:complexContent>
-      <xsd:extension base="image:ImageConnector"/>
+      <xsd:extension base="image:ImageTransformer"/>
     </xsd:complexContent>
   </xsd:complexType>
-  <xsd:element name="BlitlineConnector" type="image:BlitlineConnector"/>
-  <xsd:complexType name="CloudinaryConnector">
-    <xsd:complexContent>
-      <xsd:extension base="image:ImageConnector"/>
-    </xsd:complexContent>
-  </xsd:complexType>
-  <xsd:element name="CloudinaryConnector" type="image:CloudinaryConnector"/>
+  <xsd:element name="BlitlineTransformer" type="image:BlitlineTransformer">
+    <xsd:annotation>
+      <xsd:documentation>Processes using Blitline. The source image must be publicly hosted, for example using S3.
+
+The destination image is directly written into an S3 bucket.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
   <xsd:complexType name="WebDavConnector">
     <xsd:complexContent>
       <xsd:extension base="image:ImageConnector"/>
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="WebDavConnector" type="image:WebDavConnector"/>
+  <xsd:complexType abstract="true" name="ImageTransformer">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="ImageTransformer" type="image:ImageTransformer"/>
+  <xsd:complexType name="ThumbnailatorTransformer">
+    <xsd:complexContent>
+      <xsd:extension base="image:ImageTransformer"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="ThumbnailatorTransformer" type="image:ThumbnailatorTransformer"/>
+  <xsd:complexType name="UploadedImage">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="uri" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Public URI, usually CDN. This may be cached, so it's not a good fit for input to ImageTransformer.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="originUri" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>URI for direct access to object storage.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="UploadedImage" type="image:UploadedImage"/>
 </xsd:schema>
