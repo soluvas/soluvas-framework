@@ -1,13 +1,13 @@
 /**
  */
-package org.soluvas.image.model.image.impl;
+package org.soluvas.image.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.soluvas.image.model.image.CloudinaryConnector;
-import org.soluvas.image.model.image.ImagePackage;
+import org.soluvas.image.CloudinaryConnector;
+import org.soluvas.image.ImagePackage;
 
 /**
  * <!-- begin-user-doc -->

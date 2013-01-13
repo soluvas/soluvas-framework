@@ -1,6 +1,6 @@
 /**
  */
-package org.soluvas.image.model.image;
+package org.soluvas.image;
 
 import org.soluvas.commons.SerializableEObject;
 
@@ -10,7 +10,7 @@ import org.soluvas.commons.SerializableEObject;
  * <!-- end-user-doc -->
  *
  *
- * @see org.soluvas.image.model.image.ImagePackage#getImageConnector()
+ * @see org.soluvas.image.ImagePackage#getImageConnector()
  * @model interface="true" abstract="true"
  * @extends SerializableEObject
  * @generated

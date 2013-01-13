@@ -1,13 +1,13 @@
 /**
  */
-package org.soluvas.image.model.image.util;
+package org.soluvas.image.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import org.soluvas.image.model.image.*;
+import org.soluvas.image.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +19,7 @@ import org.soluvas.image.model.image.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.soluvas.image.model.image.ImagePackage
+ * @see org.soluvas.image.ImagePackage
  * @generated
  */
 public class ImageSwitch<T> extends Switch<T> {

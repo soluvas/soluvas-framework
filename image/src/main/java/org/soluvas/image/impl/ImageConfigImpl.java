@@ -1,6 +1,6 @@
 /**
  */
-package org.soluvas.image.model.image.impl;
+package org.soluvas.image.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -9,8 +9,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.soluvas.image.model.image.ImageConfig;
-import org.soluvas.image.model.image.ImagePackage;
+import org.soluvas.image.ImageConfig;
+import org.soluvas.image.ImagePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +19,7 @@ import org.soluvas.image.model.image.ImagePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.soluvas.image.model.image.impl.ImageConfigImpl#getPublicUri <em>Public Uri</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.ImageConfigImpl#getPublicUri <em>Public Uri</em>}</li>
  * </ul>
  * </p>
  *

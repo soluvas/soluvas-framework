@@ -1,6 +1,6 @@
 /**
  */
-package org.soluvas.image.model.image.util;
+package org.soluvas.image.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -9,14 +9,14 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.soluvas.image.model.image.*;
+import org.soluvas.image.*;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.soluvas.image.model.image.ImagePackage
+ * @see org.soluvas.image.ImagePackage
  * @generated
  */
 public class ImageAdapterFactory extends AdapterFactoryImpl {
@@ -112,13 +112,13 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.image.model.image.ImageConfig <em>Config</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.ImageConfig <em>Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.soluvas.image.model.image.ImageConfig
+	 * @see org.soluvas.image.ImageConfig
 	 * @generated
 	 */
 	public Adapter createImageConfigAdapter() {
@@ -126,13 +126,13 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.image.model.image.ImageConnector <em>Connector</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.ImageConnector <em>Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.soluvas.image.model.image.ImageConnector
+	 * @see org.soluvas.image.ImageConnector
 	 * @generated
 	 */
 	public Adapter createImageConnectorAdapter() {
@@ -140,13 +140,13 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.image.model.image.S3Connector <em>S3 Connector</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.S3Connector <em>S3 Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.soluvas.image.model.image.S3Connector
+	 * @see org.soluvas.image.S3Connector
 	 * @generated
 	 */
 	public Adapter createS3ConnectorAdapter() {
@@ -154,13 +154,13 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.image.model.image.BlitlineConnector <em>Blitline Connector</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.BlitlineConnector <em>Blitline Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.soluvas.image.model.image.BlitlineConnector
+	 * @see org.soluvas.image.BlitlineConnector
 	 * @generated
 	 */
 	public Adapter createBlitlineConnectorAdapter() {
@@ -168,13 +168,13 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.image.model.image.CloudinaryConnector <em>Cloudinary Connector</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.CloudinaryConnector <em>Cloudinary Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.soluvas.image.model.image.CloudinaryConnector
+	 * @see org.soluvas.image.CloudinaryConnector
 	 * @generated
 	 */
 	public Adapter createCloudinaryConnectorAdapter() {
@@ -182,13 +182,13 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.image.model.image.WebDavConnector <em>Web Dav Connector</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.WebDavConnector <em>Web Dav Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.soluvas.image.model.image.WebDavConnector
+	 * @see org.soluvas.image.WebDavConnector
 	 * @generated
 	 */
 	public Adapter createWebDavConnectorAdapter() {

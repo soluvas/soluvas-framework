@@ -55,8 +55,8 @@ import org.bson.BasicBSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.SlugUtils;
-import org.soluvas.image.model.image.ImageConnector;
-import org.soluvas.image.model.image.impl.WebDavConnectorImpl;
+import org.soluvas.image.ImageConnector;
+import org.soluvas.image.impl.WebDavConnectorImpl;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;

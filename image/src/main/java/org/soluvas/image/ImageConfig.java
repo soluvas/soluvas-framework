@@ -1,6 +1,6 @@
 /**
  */
-package org.soluvas.image.model.image;
+package org.soluvas.image;
 
 import org.soluvas.commons.SerializableEObject;
 import org.eclipse.emf.ecore.EObject;
@@ -33,11 +33,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.soluvas.image.model.image.ImageConfig#getPublicUri <em>Public Uri</em>}</li>
+ *   <li>{@link org.soluvas.image.ImageConfig#getPublicUri <em>Public Uri</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.soluvas.image.model.image.ImagePackage#getImageConfig()
+ * @see org.soluvas.image.ImagePackage#getImageConfig()
  * @model
  * @extends SerializableEObject
  * @generated
@@ -53,14 +53,14 @@ public interface ImageConfig extends SerializableEObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Public Uri</em>' attribute.
 	 * @see #setPublicUri(String)
-	 * @see org.soluvas.image.model.image.ImagePackage#getImageConfig_PublicUri()
+	 * @see org.soluvas.image.ImagePackage#getImageConfig_PublicUri()
 	 * @model
 	 * @generated
 	 */
 	String getPublicUri();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.image.model.image.ImageConfig#getPublicUri <em>Public Uri</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.image.ImageConfig#getPublicUri <em>Public Uri</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Public Uri</em>' attribute.

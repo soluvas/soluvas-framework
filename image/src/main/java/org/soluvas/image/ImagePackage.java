@@ -1,6 +1,6 @@
 /**
  */
-package org.soluvas.image.model.image;
+package org.soluvas.image;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see org.soluvas.image.model.image.ImageFactory
+ * @see org.soluvas.image.ImageFactory
  * @model kind="package"
  * @generated
  */
@@ -52,14 +52,14 @@ public interface ImagePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ImagePackage eINSTANCE = org.soluvas.image.model.image.impl.ImagePackageImpl.init();
+	ImagePackage eINSTANCE = org.soluvas.image.impl.ImagePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.model.image.impl.ImageConfigImpl <em>Config</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.image.impl.ImageConfigImpl <em>Config</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.model.image.impl.ImageConfigImpl
-	 * @see org.soluvas.image.model.image.impl.ImagePackageImpl#getImageConfig()
+	 * @see org.soluvas.image.impl.ImageConfigImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageConfig()
 	 * @generated
 	 */
 	int IMAGE_CONFIG = 0;
@@ -84,11 +84,11 @@ public interface ImagePackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.model.image.ImageConnector <em>Connector</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.image.ImageConnector <em>Connector</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.model.image.ImageConnector
-	 * @see org.soluvas.image.model.image.impl.ImagePackageImpl#getImageConnector()
+	 * @see org.soluvas.image.ImageConnector
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageConnector()
 	 * @generated
 	 */
 	int IMAGE_CONNECTOR = 1;
@@ -103,11 +103,11 @@ public interface ImagePackage extends EPackage {
 	int IMAGE_CONNECTOR_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.model.image.impl.S3ConnectorImpl <em>S3 Connector</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.image.impl.S3ConnectorImpl <em>S3 Connector</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.model.image.impl.S3ConnectorImpl
-	 * @see org.soluvas.image.model.image.impl.ImagePackageImpl#getS3Connector()
+	 * @see org.soluvas.image.impl.S3ConnectorImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getS3Connector()
 	 * @generated
 	 */
 	int S3_CONNECTOR = 2;
@@ -122,11 +122,11 @@ public interface ImagePackage extends EPackage {
 	int S3_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.model.image.impl.BlitlineConnectorImpl <em>Blitline Connector</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.image.impl.BlitlineConnectorImpl <em>Blitline Connector</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.model.image.impl.BlitlineConnectorImpl
-	 * @see org.soluvas.image.model.image.impl.ImagePackageImpl#getBlitlineConnector()
+	 * @see org.soluvas.image.impl.BlitlineConnectorImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getBlitlineConnector()
 	 * @generated
 	 */
 	int BLITLINE_CONNECTOR = 3;
@@ -141,11 +141,11 @@ public interface ImagePackage extends EPackage {
 	int BLITLINE_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.model.image.impl.CloudinaryConnectorImpl <em>Cloudinary Connector</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.image.impl.CloudinaryConnectorImpl <em>Cloudinary Connector</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.model.image.impl.CloudinaryConnectorImpl
-	 * @see org.soluvas.image.model.image.impl.ImagePackageImpl#getCloudinaryConnector()
+	 * @see org.soluvas.image.impl.CloudinaryConnectorImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getCloudinaryConnector()
 	 * @generated
 	 */
 	int CLOUDINARY_CONNECTOR = 4;
@@ -160,11 +160,11 @@ public interface ImagePackage extends EPackage {
 	int CLOUDINARY_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.model.image.impl.WebDavConnectorImpl <em>Web Dav Connector</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.image.impl.WebDavConnectorImpl <em>Web Dav Connector</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.model.image.impl.WebDavConnectorImpl
-	 * @see org.soluvas.image.model.image.impl.ImagePackageImpl#getWebDavConnector()
+	 * @see org.soluvas.image.impl.WebDavConnectorImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getWebDavConnector()
 	 * @generated
 	 */
 	int WEB_DAV_CONNECTOR = 5;
@@ -180,72 +180,72 @@ public interface ImagePackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link org.soluvas.image.model.image.ImageConfig <em>Config</em>}'.
+	 * Returns the meta object for class '{@link org.soluvas.image.ImageConfig <em>Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Config</em>'.
-	 * @see org.soluvas.image.model.image.ImageConfig
+	 * @see org.soluvas.image.ImageConfig
 	 * @generated
 	 */
 	EClass getImageConfig();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.image.model.image.ImageConfig#getPublicUri <em>Public Uri</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageConfig#getPublicUri <em>Public Uri</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Public Uri</em>'.
-	 * @see org.soluvas.image.model.image.ImageConfig#getPublicUri()
+	 * @see org.soluvas.image.ImageConfig#getPublicUri()
 	 * @see #getImageConfig()
 	 * @generated
 	 */
 	EAttribute getImageConfig_PublicUri();
 
 	/**
-	 * Returns the meta object for class '{@link org.soluvas.image.model.image.ImageConnector <em>Connector</em>}'.
+	 * Returns the meta object for class '{@link org.soluvas.image.ImageConnector <em>Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Connector</em>'.
-	 * @see org.soluvas.image.model.image.ImageConnector
+	 * @see org.soluvas.image.ImageConnector
 	 * @generated
 	 */
 	EClass getImageConnector();
 
 	/**
-	 * Returns the meta object for class '{@link org.soluvas.image.model.image.S3Connector <em>S3 Connector</em>}'.
+	 * Returns the meta object for class '{@link org.soluvas.image.S3Connector <em>S3 Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>S3 Connector</em>'.
-	 * @see org.soluvas.image.model.image.S3Connector
+	 * @see org.soluvas.image.S3Connector
 	 * @generated
 	 */
 	EClass getS3Connector();
 
 	/**
-	 * Returns the meta object for class '{@link org.soluvas.image.model.image.BlitlineConnector <em>Blitline Connector</em>}'.
+	 * Returns the meta object for class '{@link org.soluvas.image.BlitlineConnector <em>Blitline Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Blitline Connector</em>'.
-	 * @see org.soluvas.image.model.image.BlitlineConnector
+	 * @see org.soluvas.image.BlitlineConnector
 	 * @generated
 	 */
 	EClass getBlitlineConnector();
 
 	/**
-	 * Returns the meta object for class '{@link org.soluvas.image.model.image.CloudinaryConnector <em>Cloudinary Connector</em>}'.
+	 * Returns the meta object for class '{@link org.soluvas.image.CloudinaryConnector <em>Cloudinary Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Cloudinary Connector</em>'.
-	 * @see org.soluvas.image.model.image.CloudinaryConnector
+	 * @see org.soluvas.image.CloudinaryConnector
 	 * @generated
 	 */
 	EClass getCloudinaryConnector();
 
 	/**
-	 * Returns the meta object for class '{@link org.soluvas.image.model.image.WebDavConnector <em>Web Dav Connector</em>}'.
+	 * Returns the meta object for class '{@link org.soluvas.image.WebDavConnector <em>Web Dav Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Web Dav Connector</em>'.
-	 * @see org.soluvas.image.model.image.WebDavConnector
+	 * @see org.soluvas.image.WebDavConnector
 	 * @generated
 	 */
 	EClass getWebDavConnector();
@@ -273,11 +273,11 @@ public interface ImagePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.soluvas.image.model.image.impl.ImageConfigImpl <em>Config</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.image.impl.ImageConfigImpl <em>Config</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.image.model.image.impl.ImageConfigImpl
-		 * @see org.soluvas.image.model.image.impl.ImagePackageImpl#getImageConfig()
+		 * @see org.soluvas.image.impl.ImageConfigImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageConfig()
 		 * @generated
 		 */
 		EClass IMAGE_CONFIG = eINSTANCE.getImageConfig();
@@ -291,51 +291,51 @@ public interface ImagePackage extends EPackage {
 		EAttribute IMAGE_CONFIG__PUBLIC_URI = eINSTANCE.getImageConfig_PublicUri();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.image.model.image.ImageConnector <em>Connector</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.image.ImageConnector <em>Connector</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.image.model.image.ImageConnector
-		 * @see org.soluvas.image.model.image.impl.ImagePackageImpl#getImageConnector()
+		 * @see org.soluvas.image.ImageConnector
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageConnector()
 		 * @generated
 		 */
 		EClass IMAGE_CONNECTOR = eINSTANCE.getImageConnector();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.image.model.image.impl.S3ConnectorImpl <em>S3 Connector</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.image.impl.S3ConnectorImpl <em>S3 Connector</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.image.model.image.impl.S3ConnectorImpl
-		 * @see org.soluvas.image.model.image.impl.ImagePackageImpl#getS3Connector()
+		 * @see org.soluvas.image.impl.S3ConnectorImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getS3Connector()
 		 * @generated
 		 */
 		EClass S3_CONNECTOR = eINSTANCE.getS3Connector();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.image.model.image.impl.BlitlineConnectorImpl <em>Blitline Connector</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.image.impl.BlitlineConnectorImpl <em>Blitline Connector</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.image.model.image.impl.BlitlineConnectorImpl
-		 * @see org.soluvas.image.model.image.impl.ImagePackageImpl#getBlitlineConnector()
+		 * @see org.soluvas.image.impl.BlitlineConnectorImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getBlitlineConnector()
 		 * @generated
 		 */
 		EClass BLITLINE_CONNECTOR = eINSTANCE.getBlitlineConnector();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.image.model.image.impl.CloudinaryConnectorImpl <em>Cloudinary Connector</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.image.impl.CloudinaryConnectorImpl <em>Cloudinary Connector</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.image.model.image.impl.CloudinaryConnectorImpl
-		 * @see org.soluvas.image.model.image.impl.ImagePackageImpl#getCloudinaryConnector()
+		 * @see org.soluvas.image.impl.CloudinaryConnectorImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getCloudinaryConnector()
 		 * @generated
 		 */
 		EClass CLOUDINARY_CONNECTOR = eINSTANCE.getCloudinaryConnector();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.image.model.image.impl.WebDavConnectorImpl <em>Web Dav Connector</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.image.impl.WebDavConnectorImpl <em>Web Dav Connector</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.image.model.image.impl.WebDavConnectorImpl
-		 * @see org.soluvas.image.model.image.impl.ImagePackageImpl#getWebDavConnector()
+		 * @see org.soluvas.image.impl.WebDavConnectorImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getWebDavConnector()
 		 * @generated
 		 */
 		EClass WEB_DAV_CONNECTOR = eINSTANCE.getWebDavConnector();

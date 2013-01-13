@@ -1,30 +1,30 @@
 /**
  */
-package org.soluvas.image.model.image.impl;
+package org.soluvas.image.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.soluvas.image.model.image.ImagePackage;
-import org.soluvas.image.model.image.S3Connector;
+import org.soluvas.image.BlitlineConnector;
+import org.soluvas.image.ImagePackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>S3 Connector</b></em>'.
+ * An implementation of the model object '<em><b>Blitline Connector</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class S3ConnectorImpl extends EObjectImpl implements S3Connector {
+public class BlitlineConnectorImpl extends EObjectImpl implements BlitlineConnector {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public S3ConnectorImpl() {
+	public BlitlineConnectorImpl() {
 		super();
 	}
 
@@ -35,7 +35,7 @@ public class S3ConnectorImpl extends EObjectImpl implements S3Connector {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ImagePackage.Literals.S3_CONNECTOR;
+		return ImagePackage.Literals.BLITLINE_CONNECTOR;
 	}
 
-} //S3ConnectorImpl
+} //BlitlineConnectorImpl

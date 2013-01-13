@@ -1,6 +1,6 @@
 /**
  */
-package org.soluvas.image.model.image.impl;
+package org.soluvas.image.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.soluvas.image.model.image.*;
+import org.soluvas.image.*;
 
 /**
  * <!-- begin-user-doc -->

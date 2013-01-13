@@ -1,19 +1,19 @@
 /**
  */
-package org.soluvas.image.model.image.impl;
+package org.soluvas.image.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.soluvas.image.model.image.BlitlineConnector;
-import org.soluvas.image.model.image.CloudinaryConnector;
-import org.soluvas.image.model.image.ImageConfig;
-import org.soluvas.image.model.image.ImageConnector;
-import org.soluvas.image.model.image.ImageFactory;
-import org.soluvas.image.model.image.ImagePackage;
-import org.soluvas.image.model.image.S3Connector;
-import org.soluvas.image.model.image.WebDavConnector;
+import org.soluvas.image.BlitlineConnector;
+import org.soluvas.image.CloudinaryConnector;
+import org.soluvas.image.ImageConfig;
+import org.soluvas.image.ImageConnector;
+import org.soluvas.image.ImageFactory;
+import org.soluvas.image.ImagePackage;
+import org.soluvas.image.S3Connector;
+import org.soluvas.image.WebDavConnector;
 
 /**
  * <!-- begin-user-doc -->
@@ -71,7 +71,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.soluvas.image.model.image.ImagePackage#eNS_URI
+	 * @see org.soluvas.image.ImagePackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

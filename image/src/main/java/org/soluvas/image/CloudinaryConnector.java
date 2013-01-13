@@ -1,6 +1,6 @@
 /**
  */
-package org.soluvas.image.model.image;
+package org.soluvas.image;
 
 
 /**
@@ -9,7 +9,7 @@ package org.soluvas.image.model.image;
  * <!-- end-user-doc -->
  *
  *
- * @see org.soluvas.image.model.image.ImagePackage#getCloudinaryConnector()
+ * @see org.soluvas.image.ImagePackage#getCloudinaryConnector()
  * @model
  * @generated
  */

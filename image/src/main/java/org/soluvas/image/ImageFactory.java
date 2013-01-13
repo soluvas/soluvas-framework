@@ -1,6 +1,6 @@
 /**
  */
-package org.soluvas.image.model.image;
+package org.soluvas.image;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see org.soluvas.image.model.image.ImagePackage
+ * @see org.soluvas.image.ImagePackage
  * @generated
  */
 public interface ImageFactory extends EFactory {
@@ -19,7 +19,7 @@ public interface ImageFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ImageFactory eINSTANCE = org.soluvas.image.model.image.impl.ImageFactoryImpl.init();
+	ImageFactory eINSTANCE = org.soluvas.image.impl.ImageFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Config</em>'.
