@@ -92,10 +92,10 @@ public class ImageSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImagePackage.WEB_DAV_CONNECTOR: {
-				WebDavConnector webDavConnector = (WebDavConnector)theEObject;
-				T result = caseWebDavConnector(webDavConnector);
-				if (result == null) result = caseImageConnector(webDavConnector);
+			case ImagePackage.DAV_CONNECTOR: {
+				DavConnector davConnector = (DavConnector)theEObject;
+				T result = caseDavConnector(davConnector);
+				if (result == null) result = caseImageConnector(davConnector);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -115,6 +115,12 @@ public class ImageSwitch<T> extends Switch<T> {
 			case ImagePackage.UPLOADED_IMAGE: {
 				UploadedImage uploadedImage = (UploadedImage)theEObject;
 				T result = caseUploadedImage(uploadedImage);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.IMAGE_MANAGER: {
+				ImageManager imageManager = (ImageManager)theEObject;
+				T result = caseImageManager(imageManager);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -183,17 +189,17 @@ public class ImageSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Web Dav Connector</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Dav Connector</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Web Dav Connector</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Dav Connector</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWebDavConnector(WebDavConnector object) {
+	public T caseDavConnector(DavConnector object) {
 		return null;
 	}
 
@@ -239,6 +245,21 @@ public class ImageSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseUploadedImage(UploadedImage object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Manager</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Manager</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImageManager(ImageManager object) {
 		return null;
 	}
 

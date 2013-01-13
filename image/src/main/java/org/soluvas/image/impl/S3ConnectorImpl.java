@@ -26,6 +26,7 @@ import com.amazonaws.services.s3.model.Permission;
 import com.amazonaws.services.s3.model.ProgressEvent;
 import com.amazonaws.services.s3.model.ProgressListener;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.StorageClass;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 import com.amazonaws.services.s3.transfer.model.UploadResult;
@@ -53,12 +54,35 @@ import com.google.common.base.Strings;
  
  * <!-- end-user-doc -->
  * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getHiUriTemplate <em>Hi Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getLoUriTemplate <em>Lo Uri Template</em>}</li>
+ * </ul>
  * </p>
  *
  * @generated
  */
 public class S3ConnectorImpl extends EObjectImpl implements S3Connector {
 	
+	/**
+	 * The default value of the '{@link #getHiUriTemplate() <em>Hi Uri Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHiUriTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String HI_URI_TEMPLATE_EDEFAULT = null;
+	/**
+	 * The default value of the '{@link #getLoUriTemplate() <em>Lo Uri Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLoUriTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LO_URI_TEMPLATE_EDEFAULT = null;
 	private static final Logger log = LoggerFactory
 			.getLogger(S3ConnectorImpl.class);
 	private final String hiBucket;
@@ -130,6 +154,28 @@ public class S3ConnectorImpl extends EObjectImpl implements S3Connector {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
+	public String getHiUriTemplate() {
+		String cdnAlias = Strings.isNullOrEmpty(hiCdnAlias) ? hiBucket + ".s3.amazonaws.com" : hiCdnAlias;
+		return "http://" + cdnAlias + Strings.nullToEmpty(prefix) +
+				"{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public String getLoUriTemplate() {
+		String cdnAlias = Strings.isNullOrEmpty(loCdnAlias) ? loBucket + ".s3.amazonaws.com" : loCdnAlias;
+		return "http://" + cdnAlias + Strings.nullToEmpty(prefix) +
+				"{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
 	public UploadedImage upload(String namespace, String imageId, String styleCode, String extension, final File file, String contentType) {
 		boolean useHi = MongoImageRepository.ORIGINAL_CODE.equals(styleCode);
 		String bucket = useHi ? hiBucket : loBucket;
@@ -138,7 +184,8 @@ public class S3ConnectorImpl extends EObjectImpl implements S3Connector {
 		AccessControlList acl = new AccessControlList();
 		acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
 		PutObjectRequest putReq = new PutObjectRequest(bucket, key, file)
-			.withAccessControlList(acl);
+			.withAccessControlList(acl)
+			.withStorageClass(useHi ? StorageClass.Standard : StorageClass.ReducedRedundancy);
 		Upload upload = transferMgr.upload(putReq);
 		final String s3Uri = "s3://" + bucket + "/" + key;
 		upload.addProgressListener(new ProgressListener() {
@@ -191,6 +238,60 @@ public class S3ConnectorImpl extends EObjectImpl implements S3Connector {
 		uploadedImage.setOriginUri("http://" + originAlias + "/" + key);
 		uploadedImage.setUri("http://" + cdnAlias + "/" + key);
 		return uploadedImage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void delete(String namespace, String imageId, String styleCode, String extension) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void destroy() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case ImagePackage.S3_CONNECTOR__HI_URI_TEMPLATE:
+				return getHiUriTemplate();
+			case ImagePackage.S3_CONNECTOR__LO_URI_TEMPLATE:
+				return getLoUriTemplate();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case ImagePackage.S3_CONNECTOR__HI_URI_TEMPLATE:
+				return HI_URI_TEMPLATE_EDEFAULT == null ? getHiUriTemplate() != null : !HI_URI_TEMPLATE_EDEFAULT.equals(getHiUriTemplate());
+			case ImagePackage.S3_CONNECTOR__LO_URI_TEMPLATE:
+				return LO_URI_TEMPLATE_EDEFAULT == null ? getLoUriTemplate() != null : !LO_URI_TEMPLATE_EDEFAULT.equals(getLoUriTemplate());
+		}
+		return super.eIsSet(featureID);
 	}
 
 } //S3ConnectorImpl

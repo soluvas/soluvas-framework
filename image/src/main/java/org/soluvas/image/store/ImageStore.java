@@ -287,7 +287,7 @@ public class ImageStore extends MongoImageRepository {
 	 * 
 	 * @param styles Source styles that will be copied.
 	 */
-	public void setStyles(List<ImageStyle> styles) {
+	public void setStyles(Collection<ImageStyle> styles) {
 		this.styles.clear();
 		for (ImageStyle style : styles) {
 			addStyle(style.getName(), style.getCode(), style.getMaxWidth(), style.getMaxHeight());
@@ -311,7 +311,7 @@ public class ImageStore extends MongoImageRepository {
 	 * Scheme: ${publicUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
 	 * @return
 	 */
-	public URI getImagePublicUri(String id, String styleName) {
+	public String getImageUri(String id, String styleName) {
 		String extension = "jpg";
 		String code = styleName == ORIGINAL_NAME ? ORIGINAL_CODE : styles.get(styleName).getCode(); 
 		return URI.create(String.format("%s%s/%s/%s_%s.%s", publicUri, namespace, code, id, code, extension));
@@ -453,8 +453,8 @@ public class ImageStore extends MongoImageRepository {
 						// upload directly for efficiency
 						final String styledContentType = "image/jpeg";
 						log.info("Uploading {} {} to {}", new Object[] { style.getName(), imageId, styledDavUri });
-						uploadFile(styledDavUri, new FileInputStream(styledFile), styledContentType, styledFile.length());
-						URI styledPublicUri = getImagePublicUri(imageId, style.getName());
+						uploadFileDav(styledDavUri, new FileInputStream(styledFile), styledContentType, styledFile.length());
+						URI styledPublicUri = getImageUri(imageId, style.getName());
 						StyledImage styled = new StyledImage(style.getName(), style.getCode(), styledPublicUri, styledContentType,
 								(int)styledFile.length(), width, height);
 						return styled;
@@ -475,7 +475,7 @@ public class ImageStore extends MongoImageRepository {
 						final URI originalDavUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
 								safeDavUri, namespace, 'o', imageId, 'o', extension));
 						try {
-							uploadFile(originalDavUri, new FileInputStream(originalFile), contentType, length);
+							uploadFileDav(originalDavUri, new FileInputStream(originalFile), contentType, length);
 							return null;
 						} catch (Exception e) {
 							throw new RuntimeException("Error uploading original " + imageId + " to " + originalDavUri, e);
@@ -564,7 +564,7 @@ public class ImageStore extends MongoImageRepository {
 	 * 		because InputStream can only be read once.
 	 */
 	@Deprecated
-	protected void uploadFile(URI uri, InputStream source, String contentType, long length) throws ClientProtocolException, IOException {
+	protected void uploadFileDav(URI uri, InputStream source, String contentType, long length) throws ClientProtocolException, IOException {
 		log.info("Uploading {} ({} bytes) to {}", new Object[] { contentType, length, uri });
 		
 		HttpPut httpPut = new HttpPut(uri);

@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <xsd:schema xmlns:image="http://www.soluvas.org/schema/image/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/image/1.0">
   <xsd:import namespace="http://www.omg.org/XMI" schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/XMI.xsd"/>
+  <xsd:simpleType name="ImageTransform">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="resize_to_fit">
+        <xsd:annotation>
+          <xsd:documentation>Create thumbnail with same aspect ratio.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="resize_to_fill">
+        <xsd:annotation>
+          <xsd:documentation>Fill thumbnail dimension.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType name="ImageConfig">
     <xsd:annotation>
       <xsd:documentation>Image module configuration.
@@ -58,16 +72,23 @@ The domain name can also be different for each namespace, or even for each style
   </xsd:complexType>
   <xsd:element name="ImageConnector" type="image:ImageConnector"/>
   <xsd:complexType name="S3Connector">
+    <xsd:annotation>
+      <xsd:documentation>Store images using Amazon S3 or S3 API-compatible servers such as Ceph, Parkplace, Boardwalk. fakes3 is not working due to it creating folders, not actually storing files.</xsd:documentation>
+    </xsd:annotation>
     <xsd:complexContent>
       <xsd:extension base="image:ImageConnector"/>
     </xsd:complexContent>
   </xsd:complexType>
-  <xsd:element name="S3Connector" type="image:S3Connector"/>
+  <xsd:element name="S3Connector" type="image:S3Connector">
+    <xsd:annotation>
+      <xsd:documentation>Store images using Amazon S3 or S3 API-compatible servers such as Ceph, Parkplace, Boardwalk. fakes3 is not working due to it creating folders, not actually storing files.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
   <xsd:complexType name="BlitlineTransformer">
     <xsd:annotation>
       <xsd:documentation>Processes using Blitline. The source image must be publicly hosted, for example using S3.
 
-The destination image is directly written into an S3 bucket.</xsd:documentation>
+The destination image is directly written into an S3 bucket. Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions</xsd:documentation>
     </xsd:annotation>
     <xsd:complexContent>
       <xsd:extension base="image:ImageTransformer"/>
@@ -77,15 +98,22 @@ The destination image is directly written into an S3 bucket.</xsd:documentation>
     <xsd:annotation>
       <xsd:documentation>Processes using Blitline. The source image must be publicly hosted, for example using S3.
 
-The destination image is directly written into an S3 bucket.</xsd:documentation>
+The destination image is directly written into an S3 bucket. Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions</xsd:documentation>
     </xsd:annotation>
   </xsd:element>
-  <xsd:complexType name="WebDavConnector">
+  <xsd:complexType name="DavConnector">
+    <xsd:annotation>
+      <xsd:documentation>Store images using any WebDAV Protocol compatible server, such as Apache, nginx, Sling, Alfresco, Magnolia.</xsd:documentation>
+    </xsd:annotation>
     <xsd:complexContent>
       <xsd:extension base="image:ImageConnector"/>
     </xsd:complexContent>
   </xsd:complexType>
-  <xsd:element name="WebDavConnector" type="image:WebDavConnector"/>
+  <xsd:element name="DavConnector" type="image:DavConnector">
+    <xsd:annotation>
+      <xsd:documentation>Store images using any WebDAV Protocol compatible server, such as Apache, nginx, Sling, Alfresco, Magnolia.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
   <xsd:complexType abstract="true" name="ImageTransformer">
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element ref="xmi:Extension"/>
@@ -118,4 +146,12 @@ The destination image is directly written into an S3 bucket.</xsd:documentation>
     </xsd:attribute>
   </xsd:complexType>
   <xsd:element name="UploadedImage" type="image:UploadedImage"/>
+  <xsd:complexType name="ImageManager">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="ImageManager" type="image:ImageManager"/>
 </xsd:schema>

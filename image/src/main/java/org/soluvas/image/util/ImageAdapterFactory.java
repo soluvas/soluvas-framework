@@ -84,8 +84,8 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 				return createBlitlineTransformerAdapter();
 			}
 			@Override
-			public Adapter caseWebDavConnector(WebDavConnector object) {
-				return createWebDavConnectorAdapter();
+			public Adapter caseDavConnector(DavConnector object) {
+				return createDavConnectorAdapter();
 			}
 			@Override
 			public Adapter caseImageTransformer(ImageTransformer object) {
@@ -98,6 +98,10 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseUploadedImage(UploadedImage object) {
 				return createUploadedImageAdapter();
+			}
+			@Override
+			public Adapter caseImageManager(ImageManager object) {
+				return createImageManagerAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -176,16 +180,16 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.image.WebDavConnector <em>Web Dav Connector</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.DavConnector <em>Dav Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.soluvas.image.WebDavConnector
+	 * @see org.soluvas.image.DavConnector
 	 * @generated
 	 */
-	public Adapter createWebDavConnectorAdapter() {
+	public Adapter createDavConnectorAdapter() {
 		return null;
 	}
 
@@ -228,6 +232,20 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUploadedImageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.ImageManager <em>Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.ImageManager
+	 * @generated
+	 */
+	public Adapter createImageManagerAdapter() {
 		return null;
 	}
 

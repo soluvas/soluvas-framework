@@ -10,14 +10,8 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Nullable;
-import javax.annotation.PreDestroy;
 
 public interface ImageRepository {
-
-	public abstract void init();
-
-	@PreDestroy
-	public abstract void destroy();
 
 	/**
 	 * Ensure folders exists based on namespace and image styles.
@@ -46,7 +40,7 @@ public interface ImageRepository {
 	 * 
 	 * @param styles Source styles that will be copied.
 	 */
-	public abstract void setStyles(List<ImageStyle> styles);
+	public abstract void setStyles(Collection<ImageStyle> styles);
 
 	/**
 	 * Scheme: ${safeDavUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
@@ -61,13 +55,7 @@ public interface ImageRepository {
 	 * Scheme: ${publicUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
 	 * @return
 	 */
-	public abstract URI getImagePublicUri(String id, String styleName);
-
-	/**
-	 * @param gender
-	 * @return default default image user according by gender
-	 */
-	public abstract String getDefaultUserImage(String gender);
+	public abstract String getImageUri(String id, String styleName);
 
 	/**
 	 * Add an {@link Image} from an {@link InputStream}. This method makes use of a temporary file.
@@ -154,19 +142,11 @@ public interface ImageRepository {
 
 	public abstract String getNamespace();
 
-	public abstract void setNamespace(String namespace);
-
 	public abstract String getDavUri();
-
-	public abstract void setDavUri(String davUri);
 
 	public abstract String getPublicUri();
 
-	public abstract void setPublicUri(String publicUri);
-
 	public abstract String getMongoUri();
-
-	public abstract void setMongoUri(String mongoUri);
 
 	/**
 	 * Note: For now Akka is not used, but for backwards compatibility it is simply ignored.
@@ -176,26 +156,6 @@ public interface ImageRepository {
 	//		this.system = system;
 	//	}
 	public abstract void setSystem(Object system);
-
-	/**
-	 * @return the maleDefaultPhotoID
-	 */
-	public abstract String getMaleDefaultPhotoID();
-
-	/**
-	 * @return the femaleDefaultPhotoID
-	 */
-	public abstract String getFemaleDefaultPhotoID();
-
-	/**
-	 * @param maleDefaultPhotoID the maleDefaultPhotoID to set
-	 */
-	public abstract void setMaleDefaultPhotoID(String maleDefaultPhotoID);
-
-	/**
-	 * @param femaleDefaultPhotoID the femaleDefaultPhotoID to set
-	 */
-	public abstract void setFemaleDefaultPhotoID(String femaleDefaultPhotoID);
 
 	public abstract void updateUriAll();
 

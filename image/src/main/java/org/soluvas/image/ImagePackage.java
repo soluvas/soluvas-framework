@@ -4,6 +4,7 @@ package org.soluvas.image;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -95,13 +96,31 @@ public interface ImagePackage extends EPackage {
 	int IMAGE_CONNECTOR = 1;
 
 	/**
+	 * The feature id for the '<em><b>Hi Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_CONNECTOR__HI_URI_TEMPLATE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Lo Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_CONNECTOR__LO_URI_TEMPLATE = 1;
+
+	/**
 	 * The number of structural features of the '<em>Connector</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMAGE_CONNECTOR_FEATURE_COUNT = 0;
+	int IMAGE_CONNECTOR_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.S3ConnectorImpl <em>S3 Connector</em>}' class.
@@ -112,6 +131,24 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	int S3_CONNECTOR = 2;
+
+	/**
+	 * The feature id for the '<em><b>Hi Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int S3_CONNECTOR__HI_URI_TEMPLATE = IMAGE_CONNECTOR__HI_URI_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Lo Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int S3_CONNECTOR__LO_URI_TEMPLATE = IMAGE_CONNECTOR__LO_URI_TEMPLATE;
 
 	/**
 	 * The number of structural features of the '<em>S3 Connector</em>' class.
@@ -161,24 +198,41 @@ public interface ImagePackage extends EPackage {
 	int BLITLINE_TRANSFORMER_FEATURE_COUNT = IMAGE_TRANSFORMER_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.impl.WebDavConnectorImpl <em>Web Dav Connector</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.image.impl.DavConnectorImpl <em>Dav Connector</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.impl.WebDavConnectorImpl
-	 * @see org.soluvas.image.impl.ImagePackageImpl#getWebDavConnector()
+	 * @see org.soluvas.image.impl.DavConnectorImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getDavConnector()
 	 * @generated
 	 */
-	int WEB_DAV_CONNECTOR = 4;
+	int DAV_CONNECTOR = 4;
 
 	/**
-	 * The number of structural features of the '<em>Web Dav Connector</em>' class.
+	 * The feature id for the '<em><b>Hi Uri Template</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_DAV_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
+	int DAV_CONNECTOR__HI_URI_TEMPLATE = IMAGE_CONNECTOR__HI_URI_TEMPLATE;
 
+	/**
+	 * The feature id for the '<em><b>Lo Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAV_CONNECTOR__LO_URI_TEMPLATE = IMAGE_CONNECTOR__LO_URI_TEMPLATE;
+
+	/**
+	 * The number of structural features of the '<em>Dav Connector</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAV_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.ThumbnailatorTransformerImpl <em>Thumbnailator Transformer</em>}' class.
@@ -247,6 +301,37 @@ public interface ImagePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.ImageManagerImpl <em>Manager</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.ImageManagerImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageManager()
+	 * @generated
+	 */
+	int IMAGE_MANAGER = 8;
+
+	/**
+	 * The number of structural features of the '<em>Manager</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_MANAGER_FEATURE_COUNT = 0;
+
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.ImageTransform <em>Transform</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.ImageTransform
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransform()
+	 * @generated
+	 */
+	int IMAGE_TRANSFORM = 9;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.ImageConfig <em>Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -278,6 +363,28 @@ public interface ImagePackage extends EPackage {
 	EClass getImageConnector();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageConnector#getHiUriTemplate <em>Hi Uri Template</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Hi Uri Template</em>'.
+	 * @see org.soluvas.image.ImageConnector#getHiUriTemplate()
+	 * @see #getImageConnector()
+	 * @generated
+	 */
+	EAttribute getImageConnector_HiUriTemplate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageConnector#getLoUriTemplate <em>Lo Uri Template</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Lo Uri Template</em>'.
+	 * @see org.soluvas.image.ImageConnector#getLoUriTemplate()
+	 * @see #getImageConnector()
+	 * @generated
+	 */
+	EAttribute getImageConnector_LoUriTemplate();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.S3Connector <em>S3 Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -298,14 +405,14 @@ public interface ImagePackage extends EPackage {
 	EClass getBlitlineTransformer();
 
 	/**
-	 * Returns the meta object for class '{@link org.soluvas.image.WebDavConnector <em>Web Dav Connector</em>}'.
+	 * Returns the meta object for class '{@link org.soluvas.image.DavConnector <em>Dav Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Web Dav Connector</em>'.
-	 * @see org.soluvas.image.WebDavConnector
+	 * @return the meta object for class '<em>Dav Connector</em>'.
+	 * @see org.soluvas.image.DavConnector
 	 * @generated
 	 */
-	EClass getWebDavConnector();
+	EClass getDavConnector();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.ImageTransformer <em>Transformer</em>}'.
@@ -371,6 +478,26 @@ public interface ImagePackage extends EPackage {
 	EAttribute getUploadedImage_OriginUri();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.ImageManager <em>Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Manager</em>'.
+	 * @see org.soluvas.image.ImageManager
+	 * @generated
+	 */
+	EClass getImageManager();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.image.ImageTransform <em>Transform</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Transform</em>'.
+	 * @see org.soluvas.image.ImageTransform
+	 * @generated
+	 */
+	EEnum getImageTransform();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -421,6 +548,22 @@ public interface ImagePackage extends EPackage {
 		EClass IMAGE_CONNECTOR = eINSTANCE.getImageConnector();
 
 		/**
+		 * The meta object literal for the '<em><b>Hi Uri Template</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE_CONNECTOR__HI_URI_TEMPLATE = eINSTANCE.getImageConnector_HiUriTemplate();
+
+		/**
+		 * The meta object literal for the '<em><b>Lo Uri Template</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE_CONNECTOR__LO_URI_TEMPLATE = eINSTANCE.getImageConnector_LoUriTemplate();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.S3ConnectorImpl <em>S3 Connector</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -441,14 +584,14 @@ public interface ImagePackage extends EPackage {
 		EClass BLITLINE_TRANSFORMER = eINSTANCE.getBlitlineTransformer();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.image.impl.WebDavConnectorImpl <em>Web Dav Connector</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.image.impl.DavConnectorImpl <em>Dav Connector</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.image.impl.WebDavConnectorImpl
-		 * @see org.soluvas.image.impl.ImagePackageImpl#getWebDavConnector()
+		 * @see org.soluvas.image.impl.DavConnectorImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getDavConnector()
 		 * @generated
 		 */
-		EClass WEB_DAV_CONNECTOR = eINSTANCE.getWebDavConnector();
+		EClass DAV_CONNECTOR = eINSTANCE.getDavConnector();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.ImageTransformer <em>Transformer</em>}' class.
@@ -503,6 +646,26 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute UPLOADED_IMAGE__ORIGIN_URI = eINSTANCE.getUploadedImage_OriginUri();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.ImageManagerImpl <em>Manager</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.ImageManagerImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageManager()
+		 * @generated
+		 */
+		EClass IMAGE_MANAGER = eINSTANCE.getImageManager();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.ImageTransform <em>Transform</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.ImageTransform
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransform()
+		 * @generated
+		 */
+		EEnum IMAGE_TRANSFORM = eINSTANCE.getImageTransform();
 
 	}
 

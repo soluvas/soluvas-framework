@@ -16,14 +16,41 @@
       <eParameters name="file" eType="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//File"/>
       <eParameters name="contentType" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     </eOperations>
+    <eOperations name="delete">
+      <eParameters name="namespace" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="imageId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="styleCode" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="extension" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eOperations>
+    <eOperations name="destroy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hiUriTemplate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="URI template for 'hi' (original) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, ext.&#xA;&#xA;return &quot;http://cdn.alias/&quot; + &quot;prefix/&quot; + &quot;{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}&quot;;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loUriTemplate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="URI template for 'lo' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, ext.&#xA;&#xA;return &quot;http://origin.alias/&quot; + &quot;prefix/&quot; + &quot;{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}&quot;;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="S3Connector" eSuperTypes="#//ImageConnector"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BlitlineTransformer" eSuperTypes="#//ImageTransformer">
+  <eClassifiers xsi:type="ecore:EClass" name="S3Connector" eSuperTypes="#//ImageConnector">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Processes using Blitline. The source image must be publicly hosted, for example using S3.&#xA;&#xA;The destination image is directly written into an S3 bucket."/>
+      <details key="documentation" value="Store images using Amazon S3 or S3 API-compatible servers such as Ceph, Parkplace, Boardwalk. fakes3 is not working due to it creating folders, not actually storing files."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WebDavConnector" eSuperTypes="#//ImageConnector"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BlitlineTransformer" eSuperTypes="#//ImageTransformer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Processes using Blitline. The source image must be publicly hosted, for example using S3.&#xA;&#xA;The destination image is directly written into an S3 bucket. Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DavConnector" eSuperTypes="#//ImageConnector">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Store images using any WebDAV Protocol compatible server, such as Apache, nginx, Sling, Alfresco, Magnolia."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImageTransformer" abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="ThumbnailatorTransformer" eSuperTypes="#//ImageTransformer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//ImageConnector"
@@ -44,5 +71,22 @@
         <details key="documentation" value="URI for direct access to object storage."/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageManager">
+    <eOperations name="getDefaultPhotoId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eParameters name="gender" eType="ecore:EEnum ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Gender"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ImageTransform">
+    <eLiterals name="resize_to_fit">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Create thumbnail with same aspect ratio."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="resize_to_fill" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Fill thumbnail dimension."/>
+      </eAnnotations>
+    </eLiterals>
   </eClassifiers>
 </ecore:EPackage>

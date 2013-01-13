@@ -4,6 +4,7 @@ package org.soluvas.image.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -14,12 +15,14 @@ import org.soluvas.image.BlitlineTransformer;
 import org.soluvas.image.ImageConfig;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImageFactory;
+import org.soluvas.image.ImageManager;
 import org.soluvas.image.ImagePackage;
+import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageTransformer;
 import org.soluvas.image.S3Connector;
 import org.soluvas.image.ThumbnailatorTransformer;
 import org.soluvas.image.UploadedImage;
-import org.soluvas.image.WebDavConnector;
+import org.soluvas.image.DavConnector;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,7 +62,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass webDavConnectorEClass = null;
+	private EClass davConnectorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -81,6 +84,20 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	private EClass uploadedImageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imageManagerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum imageTransformEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -181,6 +198,24 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getImageConnector_HiUriTemplate() {
+		return (EAttribute)imageConnectorEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImageConnector_LoUriTemplate() {
+		return (EAttribute)imageConnectorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getS3Connector() {
 		return s3ConnectorEClass;
@@ -201,9 +236,8 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EClass getWebDavConnector() {
-		return webDavConnectorEClass;
+	public EClass getDavConnector() {
+		return davConnectorEClass;
 	}
 
 	/**
@@ -271,6 +305,24 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getImageManager() {
+		return imageManagerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getImageTransform() {
+		return imageTransformEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public ImageFactory getImageFactory() {
 		return (ImageFactory)getEFactoryInstance();
@@ -299,12 +351,14 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		createEAttribute(imageConfigEClass, IMAGE_CONFIG__PUBLIC_URI);
 
 		imageConnectorEClass = createEClass(IMAGE_CONNECTOR);
+		createEAttribute(imageConnectorEClass, IMAGE_CONNECTOR__HI_URI_TEMPLATE);
+		createEAttribute(imageConnectorEClass, IMAGE_CONNECTOR__LO_URI_TEMPLATE);
 
 		s3ConnectorEClass = createEClass(S3_CONNECTOR);
 
 		blitlineTransformerEClass = createEClass(BLITLINE_TRANSFORMER);
 
-		webDavConnectorEClass = createEClass(WEB_DAV_CONNECTOR);
+		davConnectorEClass = createEClass(DAV_CONNECTOR);
 
 		imageTransformerEClass = createEClass(IMAGE_TRANSFORMER);
 
@@ -314,6 +368,11 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		uploadedImageEClass = createEClass(UPLOADED_IMAGE);
 		createEAttribute(uploadedImageEClass, UPLOADED_IMAGE__URI);
 		createEAttribute(uploadedImageEClass, UPLOADED_IMAGE__ORIGIN_URI);
+
+		imageManagerEClass = createEClass(IMAGE_MANAGER);
+
+		// Create enums
+		imageTransformEEnum = createEEnum(IMAGE_TRANSFORM);
 	}
 
 	/**
@@ -350,7 +409,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		// Add supertypes to classes
 		s3ConnectorEClass.getESuperTypes().add(this.getImageConnector());
 		blitlineTransformerEClass.getESuperTypes().add(this.getImageTransformer());
-		webDavConnectorEClass.getESuperTypes().add(this.getImageConnector());
+		davConnectorEClass.getESuperTypes().add(this.getImageConnector());
 		thumbnailatorTransformerEClass.getESuperTypes().add(this.getImageTransformer());
 
 		// Initialize classes and features; add operations and parameters
@@ -358,6 +417,8 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEAttribute(getImageConfig_PublicUri(), ecorePackage.getEString(), "publicUri", null, 0, 1, ImageConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(imageConnectorEClass, ImageConnector.class, "ImageConnector", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getImageConnector_HiUriTemplate(), theEcorePackage.getEString(), "hiUriTemplate", null, 0, 1, ImageConnector.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImageConnector_LoUriTemplate(), theEcorePackage.getEString(), "loUriTemplate", null, 0, 1, ImageConnector.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(imageConnectorEClass, this.getUploadedImage(), "upload", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -367,11 +428,19 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEParameter(op, theCommonsPackage.getFile(), "file", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "contentType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(imageConnectorEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "styleCode", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "extension", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(imageConnectorEClass, null, "destroy", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(s3ConnectorEClass, S3Connector.class, "S3Connector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(blitlineTransformerEClass, BlitlineTransformer.class, "BlitlineTransformer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(webDavConnectorEClass, WebDavConnector.class, "WebDavConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(davConnectorEClass, DavConnector.class, "DavConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(imageTransformerEClass, ImageTransformer.class, "ImageTransformer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -381,6 +450,16 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEClass(uploadedImageEClass, UploadedImage.class, "UploadedImage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUploadedImage_Uri(), theEcorePackage.getEString(), "uri", null, 0, 1, UploadedImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUploadedImage_OriginUri(), theEcorePackage.getEString(), "originUri", null, 0, 1, UploadedImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(imageManagerEClass, ImageManager.class, "ImageManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getDefaultPhotoId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theCommonsPackage.getGender(), "gender", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(imageTransformEEnum, ImageTransform.class, "ImageTransform");
+		addEEnumLiteral(imageTransformEEnum, ImageTransform.RESIZE_TO_FIT);
+		addEEnumLiteral(imageTransformEEnum, ImageTransform.RESIZE_TO_FILL);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -405,10 +484,34 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 			 "documentation", "Image module configuration.\n\nThe URI pattern is hardcoded as folows:\n\nFor normal styles:\n\n* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}.{extension}\n\nFor variant styles: (styleCode is usually \'x\', but can be anything else except \'o\')\n\n* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}_{variantCode}.{extension}\n\nIn the future, URI pattern (\"template\") should be configurable, based on http://tools.ietf.org/html/rfc6570\nand can be expanded both by server and client scripts.\n\nThe domain name can also be different for each namespace, or even for each styleCode or variantCode.\n"
 		   });		
 		addAnnotation
+		  (getImageConnector_HiUriTemplate(), 
+		   source, 
+		   new String[] {
+			 "documentation", "URI template for \'hi\' (original) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.\n\nVariables are: namespace, styleCode, imageId, styleVariant, ext.\n\nreturn \"http://cdn.alias/\" + \"prefix/\" + \"{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}\";"
+		   });		
+		addAnnotation
+		  (getImageConnector_LoUriTemplate(), 
+		   source, 
+		   new String[] {
+			 "documentation", "URI template for \'lo\' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.\n\nVariables are: namespace, styleCode, imageId, styleVariant, ext.\n\nreturn \"http://origin.alias/\" + \"prefix/\" + \"{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}\";"
+		   });		
+		addAnnotation
+		  (s3ConnectorEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Store images using Amazon S3 or S3 API-compatible servers such as Ceph, Parkplace, Boardwalk. fakes3 is not working due to it creating folders, not actually storing files."
+		   });		
+		addAnnotation
 		  (blitlineTransformerEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Processes using Blitline. The source image must be publicly hosted, for example using S3.\n\nThe destination image is directly written into an S3 bucket."
+			 "documentation", "Processes using Blitline. The source image must be publicly hosted, for example using S3.\n\nThe destination image is directly written into an S3 bucket. Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions"
+		   });		
+		addAnnotation
+		  (davConnectorEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Store images using any WebDAV Protocol compatible server, such as Apache, nginx, Sling, Alfresco, Magnolia."
 		   });		
 		addAnnotation
 		  (getThumbnailatorTransformer_Destination(), 
@@ -427,6 +530,18 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "URI for direct access to object storage."
+		   });		
+		addAnnotation
+		  (imageTransformEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Create thumbnail with same aspect ratio."
+		   });		
+		addAnnotation
+		  (imageTransformEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Fill thumbnail dimension."
 		   });
 	}
 

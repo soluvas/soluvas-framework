@@ -49,13 +49,13 @@ public interface ImageFactory extends EFactory {
 	BlitlineTransformer createBlitlineTransformer();
 
 	/**
-	 * Returns a new object of class '<em>Web Dav Connector</em>'.
+	 * Returns a new object of class '<em>Dav Connector</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Web Dav Connector</em>'.
+	 * @return a new object of class '<em>Dav Connector</em>'.
 	 * @generated
 	 */
-	WebDavConnector createWebDavConnector();
+	DavConnector createDavConnector();
 
 	/**
 	 * Returns a new object of class '<em>Thumbnailator Transformer</em>'.
@@ -74,6 +74,15 @@ public interface ImageFactory extends EFactory {
 	 * @generated
 	 */
 	UploadedImage createUploadedImage();
+
+	/**
+	 * Returns a new object of class '<em>Manager</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Manager</em>'.
+	 * @generated
+	 */
+	ImageManager createImageManager();
 
 	/**
 	 * Returns the package supported by this factory.

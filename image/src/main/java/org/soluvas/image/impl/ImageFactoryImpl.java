@@ -3,6 +3,7 @@
 package org.soluvas.image.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -59,11 +60,42 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 			case ImagePackage.IMAGE_CONFIG: return (EObject)createImageConfig();
 			case ImagePackage.S3_CONNECTOR: return (EObject)createS3Connector();
 			case ImagePackage.BLITLINE_TRANSFORMER: return (EObject)createBlitlineTransformer();
-			case ImagePackage.WEB_DAV_CONNECTOR: return (EObject)createWebDavConnector();
+			case ImagePackage.DAV_CONNECTOR: return (EObject)createDavConnector();
 			case ImagePackage.THUMBNAILATOR_TRANSFORMER: return (EObject)createThumbnailatorTransformer();
 			case ImagePackage.UPLOADED_IMAGE: return (EObject)createUploadedImage();
+			case ImagePackage.IMAGE_MANAGER: return (EObject)createImageManager();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case ImagePackage.IMAGE_TRANSFORM:
+				return createImageTransformFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case ImagePackage.IMAGE_TRANSFORM:
+				return convertImageTransformToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -102,9 +134,9 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WebDavConnector createWebDavConnector() {
-		WebDavConnectorImpl webDavConnector = new WebDavConnectorImpl();
-		return webDavConnector;
+	public DavConnector createDavConnector() {
+		DavConnectorImpl davConnector = new DavConnectorImpl();
+		return davConnector;
 	}
 
 	/**
@@ -125,6 +157,36 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	public UploadedImage createUploadedImage() {
 		UploadedImageImpl uploadedImage = new UploadedImageImpl();
 		return uploadedImage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageManager createImageManager() {
+		ImageManagerImpl imageManager = new ImageManagerImpl();
+		return imageManager;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageTransform createImageTransformFromString(EDataType eDataType, String initialValue) {
+		ImageTransform result = ImageTransform.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertImageTransformToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
