@@ -20,6 +20,7 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.AccessControlList;
+import com.amazonaws.services.s3.model.CanonicalGrantee;
 import com.amazonaws.services.s3.model.GroupGrantee;
 import com.amazonaws.services.s3.model.Permission;
 import com.amazonaws.services.s3.model.ProgressEvent;
@@ -70,6 +71,8 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	private final TransferManager transferMgr;
 	private String hiCdnAlias;
 	private String loCdnAlias;
+	private String canonicalUserId;
+	private AmazonS3Client s3Client;
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -97,10 +100,14 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	 * 		Otherwise use default "berbatik-stg-pichi.s3.amazonaws.com".
 	 */
 	public S3ConnectorImpl(String endpoint, Protocol protocol,
-			String accessKey, String secretKey, String hiBucket,
-			String loBucket, String prefix, String hiOriginAlias, String loOriginAlias,
+			String accessKey, String secretKey, String canonicalUserId,
+			String hiBucket, String loBucket, String prefix, String hiOriginAlias, String loOriginAlias,
 			String hiCdnAlias, String loCdnAlias) {
 		super();
+		this.canonicalUserId = canonicalUserId;
+		if (Strings.isNullOrEmpty(canonicalUserId)) {
+			log.warn("Canonical user ID should be filled, otherwise you can't control the S3 objects you uploaded.");
+		}
 		this.hiBucket = hiBucket;
 		this.loBucket = loBucket;
 		this.prefix = prefix;
@@ -109,7 +116,7 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 		this.hiCdnAlias = hiCdnAlias;
 		this.loCdnAlias = loCdnAlias;
 		final AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
-		AmazonS3Client s3Client = new AmazonS3Client(credentials,
+		s3Client = new AmazonS3Client(credentials,
 				new ClientConfiguration().withProtocol(protocol));
 		if (!Strings.isNullOrEmpty(endpoint))
 			s3Client.setEndpoint(endpoint);
@@ -159,6 +166,9 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 		String key = String.format("%s%s/%s/%s_%s.%s",
 				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleCode, extension);
 		AccessControlList acl = new AccessControlList();
+		if (!Strings.isNullOrEmpty(canonicalUserId)) {
+			acl.grantPermission(new CanonicalGrantee(canonicalUserId), Permission.FullControl);
+		}
 		acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
 		PutObjectRequest putReq = new PutObjectRequest(bucket, key, file)
 			.withAccessControlList(acl)
@@ -223,7 +233,16 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	@Override
 	public void delete(String namespace, String imageId, String styleCode,
 			String extension) {
-		// TODO Auto-generated method stub
+		boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
+		String bucket = useHi ? hiBucket : loBucket;
+		String key = String.format("%s%s/%s/%s_%s.%s",
+				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleCode, extension);
+		try {
+			s3Client.deleteObject(bucket, key);
+			log.debug("Deleted s3://{}/{}", bucket, key);
+		} catch (Exception e) {
+			throw new ImageException(e, "Cannot delete %s from %s", key, bucket);
+		}
 	}
 
 	/* (non-Javadoc)

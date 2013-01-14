@@ -34,7 +34,7 @@ public class S3ConnectorImplTest {
 //				"berbatik-dev-pichi", "berbatik-dev-piclo", "berbatik_dev/",
 //				"berbatik-dev-pichi.s3.annafi.dev:4567", "berbatik-dev-piclo.s3.annafi.dev:4567");
 		s3Conn = new S3ConnectorImpl(null, Protocol.HTTPS,
-				"AKIAJKBALZX7EEJOXYNQ", "*",
+				"AKIAJKBALZX7EEJOXYNQ", "*", null,
 				"berbatik-stg-pichi", "berbatik-stg-piclo", "",
 				null, null,
 				"pic.stg.berbatik.com", "pic.stg.berbatik.com");
