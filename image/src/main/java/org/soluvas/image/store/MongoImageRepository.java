@@ -149,7 +149,7 @@ public class MongoImageRepository implements ImageRepository {
 	
 	// URI: ~repo.publicUri~{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}
 	public MongoImageRepository(String namespace, String mongoUri, ImageConnector connector,
-			Collection<ImageStyle> imageStyles) {
+			List<ImageStyle> imageStyles) {
 		super();
 		this.namespace = namespace;
 		this.mongoUri = mongoUri;
@@ -241,7 +241,7 @@ public class MongoImageRepository implements ImageRepository {
 	 * @see org.soluvas.image.store.ImageRepository#setStyles(java.util.List)
 	 */
 	@Override
-	public void setStyles(Collection<ImageStyle> styles) {
+	public void setStyles(List<ImageStyle> styles) {
 		this.styles.clear();
 		for (ImageStyle style : styles) {
 			addStyle(style.getName(), style.getCode(), style.getMaxWidth(), style.getMaxHeight());
@@ -735,7 +735,7 @@ public class MongoImageRepository implements ImageRepository {
 			final String newUri = getImageUri(image.getId(), ORIGINAL_NAME);
 			final BasicDBObject dbo = new BasicDBObject();
 			dbo.put("uri", newUri.toString());
-			log.debug("updating {} image {} to {}", namespace, image.getId(), newUri);
+			log.debug("Updating {} image {} to {}", namespace, image.getId(), newUri);
 			mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", dbo));
 			
 			final Map<String, StyledImage> imageStyles = image.getStyles();

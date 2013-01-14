@@ -48,7 +48,7 @@ public interface ImageRepository {
 	 * 
 	 * @param styles Source styles that will be copied.
 	 */
-	public abstract void setStyles(Collection<ImageStyle> styles);
+	public abstract void setStyles(List<ImageStyle> styles);
 
 	/**
 	 * Scheme: ${publicUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}

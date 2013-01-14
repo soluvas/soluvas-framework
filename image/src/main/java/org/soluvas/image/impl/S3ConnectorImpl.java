@@ -133,7 +133,7 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	@Override
 	public String getHiUriTemplate() {
 		String cdnAlias = Strings.isNullOrEmpty(hiCdnAlias) ? hiBucket + ".s3.amazonaws.com" : hiCdnAlias;
-		return "http://" + cdnAlias + Strings.nullToEmpty(prefix) +
+		return "http://" + cdnAlias + "/" + Strings.nullToEmpty(prefix) +
 				"{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
 	}
 
@@ -144,7 +144,7 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	@Override
 	public String getLoUriTemplate() {
 		String cdnAlias = Strings.isNullOrEmpty(loCdnAlias) ? loBucket + ".s3.amazonaws.com" : loCdnAlias;
-		return "http://" + cdnAlias + Strings.nullToEmpty(prefix) +
+		return "http://" + cdnAlias + "/" + Strings.nullToEmpty(prefix) +
 				"{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
 	}
 
