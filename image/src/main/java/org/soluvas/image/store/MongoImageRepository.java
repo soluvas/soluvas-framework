@@ -28,9 +28,6 @@ import net.coobird.thumbnailator.geometry.Positions;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.HttpClientUtils;
 import org.bson.BasicBSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +38,6 @@ import org.soluvas.image.ImageException;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.image.impl.DavConnectorImpl;
 
-import com.damnhandy.uri.template.UriTemplate;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
@@ -83,14 +79,6 @@ public class MongoImageRepository implements ImageRepository {
 
 	private static final Logger log = LoggerFactory.getLogger(MongoImageRepository.class);
 	
-	/**
-	 * Name of the predefined "original" image style.
-	 */
-	public static String ORIGINAL_NAME = "original";
-	/**
-	 * Short code for predefined "original" image style.
-	 */
-	public static String ORIGINAL_CODE = "o";
 	private String namespace;
 	private String mongoUri;
 	private DBCollection mongoColl;
@@ -166,7 +154,7 @@ public class MongoImageRepository implements ImageRepository {
 		this.namespace = namespace;
 		this.mongoUri = mongoUri;
 		this.connector = connector;
-		setStyles(styles);
+		setStyles(imageStyles);
 	}
 	
 	/* (non-Javadoc)
@@ -267,19 +255,14 @@ public class MongoImageRepository implements ImageRepository {
 	public String getImageUri(String id, String styleName) {
 		// TODO: don't hardcode extension
 		String extension = "jpg";
-		String code;
-		String uriTemplate;
+		String styleCode;
 		if (ORIGINAL_NAME.equals(styleName)) {
-			code = ORIGINAL_CODE;
-			uriTemplate = connector.getHiUriTemplate();
+			styleCode = ORIGINAL_CODE;
 		} else {
-			code = styles.get(styleName).getCode();
-			uriTemplate = connector.getLoUriTemplate();
+			styleCode = styles.get(styleName).getCode();
 		}
-		// namespace, styleCode, imageId, styleVariant, ext
-		final Map<String, Object> uriVars = ImmutableMap.<String, Object>of("namespace", namespace, "styleCode", code, "imageId", id, "styleVariant", code,
-				"ext", extension);
-		return UriTemplate.fromTemplate(uriTemplate).expand(uriVars);
+		String styleVariant = styleCode;
+		return connector.getUri(namespace, id, styleCode, styleVariant, extension);
 	}
 	
 	/* (non-Javadoc)
@@ -381,20 +364,22 @@ public class MongoImageRepository implements ImageRepository {
 					} catch (final Exception e) {
 						throw new ImageException("Error resizing " + imageId + " to " + style.getCode() + ", destination: " + styledFile, e);
 					}
-					final URI styledDavUri = getImageDavUri(imageId, style.getName());
+//					final URI styledDavUri = getImageDavUri(imageId, style.getName());
 					try {
 						// upload directly for efficiency
 						// TODO: not hardcode styled content type and extension
 						final String styledContentType = "image/jpeg";
 						String styledExtension = "jpg";
-						log.info("Uploading {} {} to {}", style.getName(), imageId, styledDavUri );
-						UploadedImage styledUpload = connector.upload(namespace, imageId, style.getCode(), styledExtension, styledFile, styledContentType);
+						log.info("Uploading {} {} using {}", style.getName(), imageId, connector );
+						UploadedImage styledUpload = connector.upload(namespace, imageId, style.getCode(),
+								styledExtension, styledFile, styledContentType);
 						final String styledPublicUri = styledUpload.getOriginUri();
-						final StyledImage styled = new StyledImage(style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
+						final StyledImage styled = new StyledImage(
+								style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
 								(int)styledFile.length(), width, height);
 						return styled;
 					} catch (final Exception e) {
-						throw new ImageException("Error uploading " + style.getName() + " " + imageId + " to " + styledDavUri, e);
+						throw new ImageException("Error uploading " + style.getName() + " " + imageId + " using " + connector, e);
 					} finally {
 						log.info("Deleting temporary {} image {}", style.getName(), styledFile);
 						styledFile.delete();
@@ -651,6 +636,19 @@ public class MongoImageRepository implements ImageRepository {
 		Map<String, Image> images = findAllByIds(ids);
 		doReprocess(images.values());
 	}
+	
+	/**
+	 * Usage:
+	 * 
+	 * getExtensionOrJpg(image.getFileName());
+	 * 
+	 * @param fileName
+	 * @return
+	 */
+	public String getExtensionOrJpg(String fileName) {
+		// TODO: so don't hardcode extension!
+		return !Strings.isNullOrEmpty(fileName) ? FilenameUtils.getExtension(fileName) : "jpg";
+	}
 
 	/**
 	 * @param images
@@ -659,36 +657,25 @@ public class MongoImageRepository implements ImageRepository {
 		log.info("Reprocessing {} images", Iterables.size(images));
 		for (Image image : images) {
 			log.info("Downloading {} from {}", image.getId(), image.getUri());
-			HttpGet httpGet = new HttpGet(image.getUri());
+			String extension = getExtensionOrJpg(image.getFileName());
+			
 			try {
-				HttpResponse response = client.execute(davHost, httpGet, createHttpContext());
+				File tempFile = File.createTempFile(image.getId(), "." + extension);
 				try {
-					if (response.getStatusLine().getStatusCode() >= 200 && response.getStatusLine().getStatusCode() < 300) {
-						log.trace("Download {} successful: {}", image.getUri(), response.getStatusLine());
-						File tempFile = File.createTempFile(image.getId(), ".tmp");
-						log.info("Writing {} bytes to {}", response.getEntity().getContentLength(), tempFile);
-						FileUtils.copyInputStreamToFile(response.getEntity().getContent(), tempFile);
-						try {
-							if (tempFile.length() != image.getSize())
-								log.warn("Downloaded file size is {} bytes, expected {} bytes",
-										tempFile.length(), image.getSize() );
-							doCreate(image.getId(), tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
-									image.getFileName(), false);
-						} catch (Exception e) {
-							log.error("Cannot reprocess " + image.getId(), e);
-						} finally {
-							log.debug("Deleting {}", tempFile);
-							tempFile.delete();
-						}
+					boolean downloaded = connector.download(namespace, image.getId(), ORIGINAL_CODE, extension, tempFile);
+					if (downloaded) {
+						doCreate(image.getId(), tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
+								image.getFileName(), false);
 					} else {
-						log.error("Download {} returned: {}", image.getUri(), response.getStatusLine());
+						log.error("Cannot download {} because connector returned false", image.getId());
 					}
 				} finally {
-					HttpClientUtils.closeQuietly(response);
+					log.trace("Deleting temporary file {} (image {})", tempFile, image.getId());
+					tempFile.delete();
 				}
 			} catch (Exception e) {
 				// log, but continue
-				log.error("Cannot download " + image.getId() + " from " + image.getUri(), e);
+				log.error("Cannot reprocess image " + image.getId(), e);
 			}
 		}
 	}
@@ -708,22 +695,6 @@ public class MongoImageRepository implements ImageRepository {
 	@Override
 	public String getNamespace() {
 		return namespace;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.image.store.ImageRepository#getDavUri()
-	 */
-	@Override
-	public String getDavUri() {
-		return davUri;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.image.store.ImageRepository#getPublicUri()
-	 */
-	@Override
-	public String getPublicUri() {
-		return publicUri;
 	}
 
 	/* (non-Javadoc)
@@ -761,7 +732,7 @@ public class MongoImageRepository implements ImageRepository {
 	protected void doUpdateUri(final Collection<Image> images) {
 		log.info("Updating {} {} image URIs", images.size(), namespace);
 		for (Image image : images) {
-			final URI newUri = getImageUri(image.getId(), ORIGINAL_NAME);
+			final String newUri = getImageUri(image.getId(), ORIGINAL_NAME);
 			final BasicDBObject dbo = new BasicDBObject();
 			dbo.put("uri", newUri.toString());
 			log.debug("updating {} image {} to {}", namespace, image.getId(), newUri);
@@ -770,7 +741,7 @@ public class MongoImageRepository implements ImageRepository {
 			final Map<String, StyledImage> imageStyles = image.getStyles();
 			for (Entry<String, StyledImage> styleImage : imageStyles.entrySet()) {
 				final String styleName = styleImage.getKey();
-				final URI newStyleUri = getImageUri(image.getId(), styleName);
+				final String newStyleUri = getImageUri(image.getId(), styleName);
 				final BasicDBObject updatedStyleUri = new BasicDBObject("styles."+ styleName +".uri", newStyleUri.toString());
 				log.debug("Updating {} image id {} to {} with style {}", namespace, image.getId(), newStyleUri, styleName);
 				mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", updatedStyleUri));
@@ -789,6 +760,16 @@ public class MongoImageRepository implements ImageRepository {
 			}
 		});
 		doUpdateUri(images);
+	}
+
+	@Override
+	public String getHiUriTemplate() {
+		return connector.getHiUriTemplate();
+	}
+
+	@Override
+	public String getLoUriTemplate() {
+		return connector.getLoUriTemplate();
 	}
 
 }

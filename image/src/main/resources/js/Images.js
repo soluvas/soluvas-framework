@@ -17,7 +17,10 @@ var Images = {
 			console.error('imageConfigs does not contain namespace', namespace);
 			return null;
 		}
-		return imageConfigs[namespace].publicUriExpander.expand({namespace: namespace, imageId: imageId,
+		
+		var expander = styleCode == 'o' ? imageConfigs[namespace].hiUriExpander : imageConfigs[namespace].loUriExpander; 
+		
+		return expander.expand({namespace: namespace, imageId: imageId,
 			styleCode: styleCode, variantCode: variantCode, styleVariant: styleVariant, ext: ext});
 	},
 };

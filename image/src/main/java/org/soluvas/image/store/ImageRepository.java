@@ -3,7 +3,6 @@ package org.soluvas.image.store;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +11,15 @@ import java.util.Set;
 import javax.annotation.Nullable;
 
 public interface ImageRepository {
+
+	/**
+	 * Name of the predefined "original" image style.
+	 */
+	public static String ORIGINAL_NAME = "original";
+	/**
+	 * Short code for predefined "original" image style.
+	 */
+	public static String ORIGINAL_CODE = "o";
 
 	/**
 	 * Ensure folders exists based on namespace and image styles.
@@ -41,15 +49,6 @@ public interface ImageRepository {
 	 * @param styles Source styles that will be copied.
 	 */
 	public abstract void setStyles(Collection<ImageStyle> styles);
-
-	/**
-	 * Scheme: ${safeDavUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
-	 * 
-	 * This only works for non-original image styles.
-	 * 
-	 * @return
-	 */
-	public abstract URI getImageDavUri(String id, String styleName);
 
 	/**
 	 * Scheme: ${publicUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
@@ -142,10 +141,6 @@ public interface ImageRepository {
 
 	public abstract String getNamespace();
 
-	public abstract String getDavUri();
-
-	public abstract String getPublicUri();
-
 	public abstract String getMongoUri();
 
 	/**
@@ -160,5 +155,8 @@ public interface ImageRepository {
 	public abstract void updateUriAll();
 
 	public abstract void updateUri(Collection<String> imageIds);
+	
+	public String getHiUriTemplate();
+	public String getLoUriTemplate();
 
 }

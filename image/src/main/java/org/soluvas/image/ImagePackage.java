@@ -86,10 +86,10 @@ public interface ImagePackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.ImageConnector <em>Connector</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.image.impl.ImageConnectorImpl <em>Connector</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.ImageConnector
+	 * @see org.soluvas.image.impl.ImageConnectorImpl
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageConnector()
 	 * @generated
 	 */
@@ -538,10 +538,10 @@ public interface ImagePackage extends EPackage {
 		EAttribute IMAGE_CONFIG__PUBLIC_URI = eINSTANCE.getImageConfig_PublicUri();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.image.ImageConnector <em>Connector</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.image.impl.ImageConnectorImpl <em>Connector</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.image.ImageConnector
+		 * @see org.soluvas.image.impl.ImageConnectorImpl
 		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageConnector()
 		 * @generated
 		 */

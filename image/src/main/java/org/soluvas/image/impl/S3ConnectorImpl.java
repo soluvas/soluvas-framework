@@ -5,7 +5,6 @@ package org.soluvas.image.impl;
 import java.io.File;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.image.ImageException;
@@ -13,7 +12,7 @@ import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.S3Connector;
 import org.soluvas.image.UploadedImage;
-import org.soluvas.image.store.MongoImageRepository;
+import org.soluvas.image.store.ImageRepository;
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.Protocol;
@@ -27,6 +26,7 @@ import com.amazonaws.services.s3.model.ProgressEvent;
 import com.amazonaws.services.s3.model.ProgressListener;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.StorageClass;
+import com.amazonaws.services.s3.transfer.Download;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 import com.amazonaws.services.s3.transfer.model.UploadResult;
@@ -54,35 +54,12 @@ import com.google.common.base.Strings;
  
  * <!-- end-user-doc -->
  * <p>
- * The following features are implemented:
- * <ul>
- *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getHiUriTemplate <em>Hi Uri Template</em>}</li>
- *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getLoUriTemplate <em>Lo Uri Template</em>}</li>
- * </ul>
  * </p>
  *
  * @generated
  */
-public class S3ConnectorImpl extends EObjectImpl implements S3Connector {
+public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	
-	/**
-	 * The default value of the '{@link #getHiUriTemplate() <em>Hi Uri Template</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getHiUriTemplate()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String HI_URI_TEMPLATE_EDEFAULT = null;
-	/**
-	 * The default value of the '{@link #getLoUriTemplate() <em>Lo Uri Template</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLoUriTemplate()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String LO_URI_TEMPLATE_EDEFAULT = null;
 	private static final Logger log = LoggerFactory
 			.getLogger(S3ConnectorImpl.class);
 	private final String hiBucket;
@@ -177,7 +154,7 @@ public class S3ConnectorImpl extends EObjectImpl implements S3Connector {
 	 */
 	@Override
 	public UploadedImage upload(String namespace, String imageId, String styleCode, String extension, final File file, String contentType) {
-		boolean useHi = MongoImageRepository.ORIGINAL_CODE.equals(styleCode);
+		boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
 		String bucket = useHi ? hiBucket : loBucket;
 		String key = String.format("%s%s/%s/%s_%s.%s",
 				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleCode, extension);
@@ -240,58 +217,41 @@ public class S3ConnectorImpl extends EObjectImpl implements S3Connector {
 		return uploadedImage;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	/* (non-Javadoc)
+	 * @see org.soluvas.image.impl.ImageConnectorImpl#delete(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
-	public void delete(String namespace, String imageId, String styleCode, String extension) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	@Override
+	public void delete(String namespace, String imageId, String styleCode,
+			String extension) {
+		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	/* (non-Javadoc)
+	 * @see org.soluvas.image.impl.ImageConnectorImpl#destroy()
 	 */
+	@Override
 	public void destroy() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		transferMgr.shutdownNow();
+		super.destroy();
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ImagePackage.S3_CONNECTOR__HI_URI_TEMPLATE:
-				return getHiUriTemplate();
-			case ImagePackage.S3_CONNECTOR__LO_URI_TEMPLATE:
-				return getLoUriTemplate();
+	public boolean download(String namespace, String imageId, String styleCode,
+			String extension, File file) {
+		boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
+		String bucket = useHi ? hiBucket : loBucket;
+		String key = String.format("%s%s/%s/%s_%s.%s",
+				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleCode, extension);
+		try {
+			Download download = transferMgr.download(bucket, key, file);
+			download.waitForCompletion();
+			log.debug("Downloaded s3://{}/{} versionId={} desc={} meta={}",
+					download.getBucketName(), download.getKey(),
+					download.getDescription(), download.getObjectMetadata());
+			return true;
+		} catch (Exception e) {
+			throw new ImageException(e, "Cannot download %s from %s", key, bucket);
 		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ImagePackage.S3_CONNECTOR__HI_URI_TEMPLATE:
-				return HI_URI_TEMPLATE_EDEFAULT == null ? getHiUriTemplate() != null : !HI_URI_TEMPLATE_EDEFAULT.equals(getHiUriTemplate());
-			case ImagePackage.S3_CONNECTOR__LO_URI_TEMPLATE:
-				return LO_URI_TEMPLATE_EDEFAULT == null ? getLoUriTemplate() != null : !LO_URI_TEMPLATE_EDEFAULT.equals(getLoUriTemplate());
-		}
-		return super.eIsSet(featureID);
 	}
 
 } //S3ConnectorImpl

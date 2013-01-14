@@ -416,7 +416,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEClass(imageConfigEClass, ImageConfig.class, "ImageConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImageConfig_PublicUri(), ecorePackage.getEString(), "publicUri", null, 0, 1, ImageConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(imageConnectorEClass, ImageConnector.class, "ImageConnector", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(imageConnectorEClass, ImageConnector.class, "ImageConnector", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImageConnector_HiUriTemplate(), theEcorePackage.getEString(), "hiUriTemplate", null, 0, 1, ImageConnector.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImageConnector_LoUriTemplate(), theEcorePackage.getEString(), "loUriTemplate", null, 0, 1, ImageConnector.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
@@ -435,6 +435,20 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEParameter(op, theEcorePackage.getEString(), "extension", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(imageConnectorEClass, null, "destroy", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(imageConnectorEClass, theEcorePackage.getEBoolean(), "download", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "styleCode", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "extension", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theCommonsPackage.getFile(), "file", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(imageConnectorEClass, theEcorePackage.getEString(), "getUri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "styleCode", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "styleVariant", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "extension", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(s3ConnectorEClass, S3Connector.class, "S3Connector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -482,6 +496,18 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Image module configuration.\n\nThe URI pattern is hardcoded as folows:\n\nFor normal styles:\n\n* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}.{extension}\n\nFor variant styles: (styleCode is usually \'x\', but can be anything else except \'o\')\n\n* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}_{variantCode}.{extension}\n\nIn the future, URI pattern (\"template\") should be configurable, based on http://tools.ietf.org/html/rfc6570\nand can be expanded both by server and client scripts.\n\nThe domain name can also be different for each namespace, or even for each styleCode or variantCode.\n"
+		   });		
+		addAnnotation
+		  (imageConnectorEClass.getEOperations().get(3), 
+		   source, 
+		   new String[] {
+			 "documentation", "Download the object from the object storage. Usually via HTTP, but the actual mechanism is encapsulated."
+		   });		
+		addAnnotation
+		  (imageConnectorEClass.getEOperations().get(4), 
+		   source, 
+		   new String[] {
+			 "documentation", "Get the public (optionally CDN) URI of the image.\n\nThis simply expands the hiUriTemplate or loUriTemplate, depending on styleCode."
 		   });		
 		addAnnotation
 		  (getImageConnector_HiUriTemplate(), 

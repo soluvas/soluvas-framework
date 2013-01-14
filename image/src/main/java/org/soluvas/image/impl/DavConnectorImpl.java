@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -15,6 +17,7 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.AuthCache;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.HttpClientUtils;
@@ -28,53 +31,30 @@ import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.image.DavConnector;
+import org.soluvas.image.ImageException;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.UploadedImage;
 
+import com.damnhandy.uri.template.UriTemplate;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableMap;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Web Dav Connector</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * The following features are implemented:
- * <ul>
- *   <li>{@link org.soluvas.image.impl.DavConnectorImpl#getHiUriTemplate <em>Hi Uri Template</em>}</li>
- *   <li>{@link org.soluvas.image.impl.DavConnectorImpl#getLoUriTemplate <em>Lo Uri Template</em>}</li>
- * </ul>
  * </p>
  *
  * @generated
  */
-public class DavConnectorImpl extends EObjectImpl implements DavConnector {
+public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector {
 	
-	/**
-	 * The default value of the '{@link #getHiUriTemplate() <em>Hi Uri Template</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getHiUriTemplate()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String HI_URI_TEMPLATE_EDEFAULT = null;
-
-	/**
-	 * The default value of the '{@link #getLoUriTemplate() <em>Lo Uri Template</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLoUriTemplate()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String LO_URI_TEMPLATE_EDEFAULT = null;
-
 	private static final Logger log = LoggerFactory
 			.getLogger(DavConnectorImpl.class);
 	
@@ -160,6 +140,10 @@ public class DavConnectorImpl extends EObjectImpl implements DavConnector {
 		return publicUri /*+ "prefix/"*/ + "{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
 	}
 
+	public String getOriginUriTemplate() {
+		return publicUri /*+ "prefix/"*/ + "{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * Note: Use File, because if uploading using InputStream, can throw org.apache.http.client.NonRepeatableRequestException: Cannot retry request with a non-repeatable request entity.
@@ -207,42 +191,23 @@ public class DavConnectorImpl extends EObjectImpl implements DavConnector {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ImagePackage.DAV_CONNECTOR__HI_URI_TEMPLATE:
-				return getHiUriTemplate();
-			case ImagePackage.DAV_CONNECTOR__LO_URI_TEMPLATE:
-				return getLoUriTemplate();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ImagePackage.DAV_CONNECTOR__HI_URI_TEMPLATE:
-				return HI_URI_TEMPLATE_EDEFAULT == null ? getHiUriTemplate() != null : !HI_URI_TEMPLATE_EDEFAULT.equals(getHiUriTemplate());
-			case ImagePackage.DAV_CONNECTOR__LO_URI_TEMPLATE:
-				return LO_URI_TEMPLATE_EDEFAULT == null ? getLoUriTemplate() != null : !LO_URI_TEMPLATE_EDEFAULT.equals(getLoUriTemplate());
-		}
-		return super.eIsSet(featureID);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.image.store.ImageRepository#getImageDavUri(java.lang.String, java.lang.String)
+	 * Scheme: ${safeDavUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
+	 * 
+	 * This only works for non-original image styles.
+	 * 
+	 * @return
 	 */
 	public String getImageDavUri(String namespace, String id, String styleCode, String extension) {
 		return String.format("%s%s/%s/%s_%s.%s", safeDavUri, namespace, styleCode, id, styleCode, extension);
+	}
+
+	public String getImageOriginUri(String namespace, String id, String styleCode, String styleVariant, String extension) {
+		String uriTemplate = getOriginUriTemplate();
+		// namespace, styleCode, imageId, styleVariant, ext
+		final Map<String, Object> uriVars = ImmutableMap.<String, Object>of(
+				"namespace", namespace, "styleCode", styleCode, "imageId", id, "styleVariant", styleVariant,
+				"ext", extension);
+		return UriTemplate.fromTemplate(uriTemplate).expand(uriVars);
 	}
 	
 	/**
@@ -279,4 +244,48 @@ public class DavConnectorImpl extends EObjectImpl implements DavConnector {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.soluvas.image.store.ImageRepository#getDavUri()
+	 */
+	public String getDavUri() {
+		return davUri;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.soluvas.image.store.ImageRepository#getPublicUri()
+	 */
+	public String getPublicUri() {
+		return publicUri;
+	}
+
+	@Override
+	public boolean download(String namespace, String imageId, String styleCode,
+			String extension, File file) {
+		String imageUri = getImageOriginUri(namespace, imageId, styleCode, styleCode, extension);
+		log.info("Downloading {} from {}", imageId, imageUri);
+		HttpGet httpGet = new HttpGet(imageUri);
+		try {
+			HttpResponse response = client.execute(davHost, httpGet, createHttpContext());
+			try {
+				if (response.getStatusLine().getStatusCode() >= 200 && response.getStatusLine().getStatusCode() < 300) {
+					log.trace("Download {} successful: {}", imageUri, response.getStatusLine());
+					final long contentLength = response.getEntity().getContentLength();
+					log.debug("Writing {} bytes to {}", contentLength, file);
+					FileUtils.copyInputStreamToFile(response.getEntity().getContent(), file);
+					Preconditions.checkState(contentLength == file.length(),
+							"Image %s has Content-Length of %s bytes, but downloaded %s bytes as %s",
+							imageId, contentLength, file.length(), file); 
+					return true;
+				} else {
+					log.error("Download {} returned: {}", imageUri, response.getStatusLine());
+					throw new ImageException(String.format("Download %s returned: %s", imageUri, response.getStatusLine()));
+				}
+			} finally {
+				HttpClientUtils.closeQuietly(response);
+			}
+		} catch (Exception e) {
+			throw new ImageException(e, "Cannot download %s from %s", imageId, imageUri);
+		}
+	}
+
 } //DavConnectorImpl

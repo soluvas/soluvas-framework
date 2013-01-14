@@ -68,7 +68,7 @@ public class Image {
 		super();
 		id = dbo.getString("_id");
 		name = dbo.getString("name");
-		uri = imageStore.getImageUri(id, MongoImageRepository.ORIGINAL_NAME);
+		uri = URI.create(imageStore.getImageUri(id, MongoImageRepository.ORIGINAL_NAME));
 		contentType = dbo.getString("contentType");
 		fileName = dbo.getString("fileName");
 		size = dbo.getLong("size");

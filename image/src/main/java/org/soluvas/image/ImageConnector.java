@@ -19,7 +19,7 @@ import org.soluvas.commons.SerializableEObject;
  * </p>
  *
  * @see org.soluvas.image.ImagePackage#getImageConnector()
- * @model interface="true" abstract="true"
+ * @model abstract="true"
  * @extends SerializableEObject
  * @generated
  */
@@ -84,4 +84,28 @@ public interface ImageConnector extends SerializableEObject {
 	 * @generated
 	 */
 	void destroy();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Download the object from the object storage. Usually via HTTP, but the actual mechanism is encapsulated.
+	 * <!-- end-model-doc -->
+	 * @model fileDataType="org.soluvas.commons.File"
+	 * @generated
+	 */
+	boolean download(String namespace, String imageId, String styleCode, String extension, File file);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Get the public (optionally CDN) URI of the image.
+	 * 
+	 * This simply expands the hiUriTemplate or loUriTemplate, depending on styleCode.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	String getUri(String namespace, String imageId, String styleCode, String styleVariant, String extension);
 } // ImageConnector
