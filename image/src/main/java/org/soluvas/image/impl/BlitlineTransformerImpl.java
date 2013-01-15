@@ -238,6 +238,17 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void transform(String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public void transform(ImageVariant sourceVariant, ImageTransform imageTransform, ImageVariant destVariant) {

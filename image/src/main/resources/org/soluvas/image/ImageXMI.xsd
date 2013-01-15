@@ -227,8 +227,6 @@ Blitline will use it to get the origin URI, but processing will be done by Blitl
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="namespace" type="xsd:string"/>
-    <xsd:attribute name="imageId" type="xsd:string"/>
     <xsd:attribute name="styleCode" type="xsd:string"/>
     <xsd:attribute name="styleVariant" type="xsd:string"/>
     <xsd:attribute name="extension" type="xsd:string"/>

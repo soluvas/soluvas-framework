@@ -525,31 +525,13 @@ public interface ImagePackage extends EPackage {
 	int IMAGE_VARIANT = 13;
 
 	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMAGE_VARIANT__NAMESPACE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMAGE_VARIANT__IMAGE_ID = 1;
-
-	/**
 	 * The feature id for the '<em><b>Style Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMAGE_VARIANT__STYLE_CODE = 2;
+	int IMAGE_VARIANT__STYLE_CODE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Style Variant</b></em>' attribute.
@@ -558,7 +540,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMAGE_VARIANT__STYLE_VARIANT = 3;
+	int IMAGE_VARIANT__STYLE_VARIANT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' attribute.
@@ -567,7 +549,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMAGE_VARIANT__EXTENSION = 4;
+	int IMAGE_VARIANT__EXTENSION = 2;
 
 	/**
 	 * The number of structural features of the '<em>Variant</em>' class.
@@ -576,7 +558,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMAGE_VARIANT_FEATURE_COUNT = 5;
+	int IMAGE_VARIANT_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
@@ -871,28 +853,6 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getImageVariant();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageVariant#getNamespace <em>Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Namespace</em>'.
-	 * @see org.soluvas.image.ImageVariant#getNamespace()
-	 * @see #getImageVariant()
-	 * @generated
-	 */
-	EAttribute getImageVariant_Namespace();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageVariant#getImageId <em>Image Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Image Id</em>'.
-	 * @see org.soluvas.image.ImageVariant#getImageId()
-	 * @see #getImageVariant()
-	 * @generated
-	 */
-	EAttribute getImageVariant_ImageId();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageVariant#getStyleCode <em>Style Code</em>}'.
@@ -1202,22 +1162,6 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EClass IMAGE_VARIANT = eINSTANCE.getImageVariant();
-
-		/**
-		 * The meta object literal for the '<em><b>Namespace</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMAGE_VARIANT__NAMESPACE = eINSTANCE.getImageVariant_Namespace();
-
-		/**
-		 * The meta object literal for the '<em><b>Image Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMAGE_VARIANT__IMAGE_ID = eINSTANCE.getImageVariant_ImageId();
 
 		/**
 		 * The meta object literal for the '<em><b>Style Code</b></em>' attribute feature.

@@ -2,6 +2,7 @@
  */
 package org.soluvas.image;
 
+import java.util.Map;
 import org.soluvas.commons.SerializableEObject;
 
 /**
@@ -51,5 +52,5 @@ public interface ImageTransformer extends SerializableEObject {
 	 * @model
 	 * @generated
 	 */
-	void transform(ImageVariant sourceVariant, ImageTransform imageTransform, ImageVariant destVariant);
+	void transform(String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms);
 } // ImageTransformer

@@ -67,7 +67,7 @@ public interface ImageConnector extends SerializableEObject {
 	 * @model fileDataType="org.soluvas.commons.File"
 	 * @generated
 	 */
-	UploadedImage upload(String namespace, String imageId, String styleCode, String extension, File file, String contentType);
+	UploadedImage upload(String namespace, String imageId, String styleCode, String styleVariant, String extension, File file, String contentType);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,7 +86,7 @@ public interface ImageConnector extends SerializableEObject {
 	 * @model fileDataType="org.soluvas.commons.File"
 	 * @generated
 	 */
-	boolean download(String namespace, String imageId, String styleCode, String extension, File file);
+	boolean download(String namespace, String imageId, String styleCode, String styleVariant, String extension, File file);
 
 	/**
 	 * <!-- begin-user-doc -->

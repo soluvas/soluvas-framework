@@ -4,7 +4,8 @@ package org.soluvas.image.impl;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.net.URI;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -28,9 +29,12 @@ import org.soluvas.image.ImageException;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageVariant;
+import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.ThumbnailatorTransformer;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.image.store.StyledImage;
+
+import com.google.common.base.Preconditions;
 
 /**
  * <!-- begin-user-doc -->
@@ -148,69 +152,91 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public void transform(ImageVariant sourceVariant, ImageTransform imageTransform, ImageVariant destVariant) {
-		File styledFile = null;
-		final int width;
-		final int height;
+	public void transform(String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms) {
+		// download original
+		File originalFile = File.createTempFile(imageId + "_", "_" + sourceVariant.getStyleVariant() + "." + sourceVariant.getExtension());
+		source.download(namespace, imageId, sourceVariant.getStyleCode(), sourceVariant.getStyleVariant(), sourceVariant.getExtension(), originalFile);
 		try {
-			// I don't think Thumbnailer and/or ImageIO is thread-safe
-			synchronized (this) {
-				styledFile = File.createTempFile(imageId + "_", "_" + style.getCode() + ".jpg");
-				final boolean progressive = style.getMaxWidth() >= 512;
-				log.info("Resizing {} to {}, quality={} progressive={}", new Object[] {
-						originalFile, styledFile, style.getQuality(), progressive });
-				final BufferedImage styledImage = Thumbnails.of(originalFile)
-						.size(style.getMaxWidth(), style.getMaxHeight())
-						.crop(Positions.CENTER).asBufferedImage();
-				width = styledImage.getWidth();
-				height = styledImage.getHeight();
-				log.info("Dimensions of {} is {}x{}", styledFile, width, height);
-				ImageWriter jpegWriter = ImageIO.getImageWritersByFormatName("jpg").next();
-				final FileImageOutputStream styledOutput = new FileImageOutputStream(styledFile);
-				jpegWriter.setOutput(styledOutput);
+			for (Entry<ImageTransform, ImageVariant> entry : transforms.entrySet()) {
+				ImageTransform transform = entry.getKey();
+				ImageVariant dest = entry.getValue();
+				final File styledFile;
+				final int width;
+				final int height;
+				// TODO: do not hardcode quality
+				final float quality = 0.9f;
 				try {
-					ImageWriteParam jpegParam = jpegWriter.getDefaultWriteParam();
-					jpegParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-					jpegParam.setCompressionQuality(style.getQuality());
-					// Enable progressive if width >= 512, else disable
-					jpegParam.setProgressiveMode(progressive ? ImageWriteParam.MODE_DEFAULT : ImageWriteParam.MODE_DISABLED);
-					jpegWriter.write(null, new IIOImage(styledImage, null, null), jpegParam);
-//					ImageIO.write(styledImage, "jpg", styledFile); // no quality control
+					// I don't think Thumbnailer and/or ImageIO is thread-safe
+					synchronized (this) {
+						styledFile = File.createTempFile(imageId + "_", "_" + dest.getStyleVariant() + "." + dest.getExtension());
+						if (transform instanceof ResizeToFill) {
+							ResizeToFill fx = (ResizeToFill) transform;
+							final boolean progressive = fx.getWidth() >= 512;
+							log.info("Resizing {} to {}, quality={} progressive={}",
+									originalFile, styledFile, quality, progressive );
+							Preconditions.checkNotNull(fx.getWidth(), "ResizeToFill.width must not be null");
+							Preconditions.checkNotNull(fx.getHeight(), "ResizeToFill.height must not be null");
+							// TODO: support other gravity / cropping
+							final BufferedImage styledImage = Thumbnails.of(originalFile)
+									.size(fx.getWidth(), fx.getHeight())
+									.crop(Positions.CENTER).asBufferedImage();
+							width = styledImage.getWidth();
+							height = styledImage.getHeight();
+							log.info("Dimensions of {} is {}x{}", styledFile, width, height);
+							ImageWriter jpegWriter = ImageIO.getImageWritersByFormatName("jpg").next();
+							final FileImageOutputStream styledOutput = new FileImageOutputStream(styledFile);
+							jpegWriter.setOutput(styledOutput);
+							try {
+								ImageWriteParam jpegParam = jpegWriter.getDefaultWriteParam();
+								jpegParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+								jpegParam.setCompressionQuality(quality);
+								// Enable progressive if width >= 512, else disable
+								jpegParam.setProgressiveMode(progressive ? ImageWriteParam.MODE_DEFAULT : ImageWriteParam.MODE_DISABLED);
+								jpegWriter.write(null, new IIOImage(styledImage, null, null), jpegParam);
+//								ImageIO.write(styledImage, "jpg", styledFile); // no quality control
+							} finally {
+								styledOutput.close();
+							}
+						} else {
+							throw new ImageException("Unsupported transform: " + transform);
+						}
+					}
+					
+//					ByteArrayOutputStream buf = new ByteArrayOutputStream();
+//					ImageIO.write(styledImage, "jpg", buf);
+//					byte[] content = buf.toByteArray();
+//					ResizeResult result = new ResizeResult(style.getName(), contentType, "jpg", content.length, content,
+//							styledImage.getWidth(), styledImage.getHeight());
+				} catch (final Exception e) {
+					throw new ImageException("Error resizing " + imageId + " to " + dest.getStyleCode() + ", destination: " + styledFile, e);
+				}
+				
+				// Upload the styled image
+//				final URI styledDavUri = getImageDavUri(imageId, style.getName());
+				try {
+					// upload directly for efficiency
+					// TODO: not hardcode styled content type and extension
+					final String styledContentType = "image/jpeg";
+					String styledExtension = "jpg";
+					log.info("Uploading {} {} using {}", dest.getStyleCode(), imageId, destination );
+					UploadedImage styledUpload = destination.upload(namespace, imageId, dest.getStyleCode(),
+							dest.getStyleVariant(), styledExtension, styledFile, styledContentType);
+					final String styledPublicUri = styledUpload.getOriginUri();
+					final StyledImage styled = new StyledImage(
+							style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
+							(int)styledFile.length(), width, height);
+					return styled;
+				} catch (final Exception e) {
+					throw new ImageException("Error uploading " + style.getName() + " " + imageId + " using " + connector, e);
 				} finally {
-					styledOutput.close();
+					log.info("Deleting temporary {} image {}", style.getName(), styledFile);
+					styledFile.delete();
 				}
 			}
 			
-//			ByteArrayOutputStream buf = new ByteArrayOutputStream();
-//			ImageIO.write(styledImage, "jpg", buf);
-//			byte[] content = buf.toByteArray();
-//			ResizeResult result = new ResizeResult(style.getName(), contentType, "jpg", content.length, content,
-//					styledImage.getWidth(), styledImage.getHeight());
-		} catch (final Exception e) {
-			throw new ImageException("Error resizing " + imageId + " to " + style.getCode() + ", destination: " + styledFile, e);
-		}
-		
-		// Upload the styled image
-		
-//		final URI styledDavUri = getImageDavUri(imageId, style.getName());
-		try {
-			// upload directly for efficiency
-			// TODO: not hardcode styled content type and extension
-			final String styledContentType = "image/jpeg";
-			String styledExtension = "jpg";
-			log.info("Uploading {} {} using {}", style.getName(), imageId, connector );
-			UploadedImage styledUpload = connector.upload(namespace, imageId, style.getCode(),
-					styledExtension, styledFile, styledContentType);
-			final String styledPublicUri = styledUpload.getOriginUri();
-			final StyledImage styled = new StyledImage(
-					style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
-					(int)styledFile.length(), width, height);
-			return styled;
-		} catch (final Exception e) {
-			throw new ImageException("Error uploading " + style.getName() + " " + imageId + " using " + connector, e);
 		} finally {
-			log.info("Deleting temporary {} image {}", style.getName(), styledFile);
-			styledFile.delete();
+			log.debug("Deleting original file {}", originalFile);
+			originalFile.delete();
 		}
 	}
 

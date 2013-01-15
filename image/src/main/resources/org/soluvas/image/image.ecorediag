@@ -322,14 +322,6 @@
   <children xmi:type="notation:Node" xmi:id="_KUlc8F5OEeKnN8JJXSOw5w" type="1001">
     <children xmi:type="notation:Node" xmi:id="_KUmrEF5OEeKnN8JJXSOw5w" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_KUmrEV5OEeKnN8JJXSOw5w" type="5001">
-      <children xmi:type="notation:Node" xmi:id="_LAlAQF5OEeKnN8JJXSOw5w" type="2001">
-        <element xmi:type="ecore:EAttribute" href="image.ecore#//ImageVariant/namespace"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_LAlAQV5OEeKnN8JJXSOw5w"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_Le1CgF5OEeKnN8JJXSOw5w" type="2001">
-        <element xmi:type="ecore:EAttribute" href="image.ecore#//ImageVariant/imageId"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_Le1CgV5OEeKnN8JJXSOw5w"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_MG02oF5OEeKnN8JJXSOw5w" type="2001">
         <element xmi:type="ecore:EAttribute" href="image.ecore#//ImageVariant/styleCode"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_MG02oV5OEeKnN8JJXSOw5w"/>

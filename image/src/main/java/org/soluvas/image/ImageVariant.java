@@ -12,8 +12,6 @@ import org.soluvas.commons.SerializableEObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.soluvas.image.ImageVariant#getNamespace <em>Namespace</em>}</li>
- *   <li>{@link org.soluvas.image.ImageVariant#getImageId <em>Image Id</em>}</li>
  *   <li>{@link org.soluvas.image.ImageVariant#getStyleCode <em>Style Code</em>}</li>
  *   <li>{@link org.soluvas.image.ImageVariant#getStyleVariant <em>Style Variant</em>}</li>
  *   <li>{@link org.soluvas.image.ImageVariant#getExtension <em>Extension</em>}</li>
@@ -26,58 +24,6 @@ import org.soluvas.commons.SerializableEObject;
  * @generated
  */
 public interface ImageVariant extends SerializableEObject {
-	/**
-	 * Returns the value of the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Namespace</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Namespace</em>' attribute.
-	 * @see #setNamespace(String)
-	 * @see org.soluvas.image.ImagePackage#getImageVariant_Namespace()
-	 * @model
-	 * @generated
-	 */
-	String getNamespace();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.image.ImageVariant#getNamespace <em>Namespace</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Namespace</em>' attribute.
-	 * @see #getNamespace()
-	 * @generated
-	 */
-	void setNamespace(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Image Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Image Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Image Id</em>' attribute.
-	 * @see #setImageId(String)
-	 * @see org.soluvas.image.ImagePackage#getImageVariant_ImageId()
-	 * @model
-	 * @generated
-	 */
-	String getImageId();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.image.ImageVariant#getImageId <em>Image Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Image Id</em>' attribute.
-	 * @see #getImageId()
-	 * @generated
-	 */
-	void setImageId(String value);
-
 	/**
 	 * Returns the value of the '<em><b>Style Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->

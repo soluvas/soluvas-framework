@@ -5,6 +5,7 @@ package org.soluvas.image.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -462,7 +463,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getImageVariant_Namespace() {
+	public EAttribute getImageVariant_StyleCode() {
 		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -471,7 +472,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getImageVariant_ImageId() {
+	public EAttribute getImageVariant_StyleVariant() {
 		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -480,26 +481,8 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getImageVariant_StyleCode() {
-		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getImageVariant_StyleVariant() {
-		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getImageVariant_Extension() {
-		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -580,8 +563,6 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		createEAttribute(dimensionLikeEClass, DIMENSION_LIKE__HEIGHT);
 
 		imageVariantEClass = createEClass(IMAGE_VARIANT);
-		createEAttribute(imageVariantEClass, IMAGE_VARIANT__NAMESPACE);
-		createEAttribute(imageVariantEClass, IMAGE_VARIANT__IMAGE_ID);
 		createEAttribute(imageVariantEClass, IMAGE_VARIANT__STYLE_CODE);
 		createEAttribute(imageVariantEClass, IMAGE_VARIANT__STYLE_VARIANT);
 		createEAttribute(imageVariantEClass, IMAGE_VARIANT__EXTENSION);
@@ -643,6 +624,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEParameter(op, ecorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "styleCode", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "styleVariant", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "extension", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theCommonsPackage.getFile(), "file", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "contentType", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -657,6 +639,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEParameter(op, theEcorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "styleCode", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "styleVariant", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "extension", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theCommonsPackage.getFile(), "file", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -692,9 +675,15 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEReference(getImageTransformer_Source(), this.getImageConnector(), null, "source", null, 0, 1, ImageTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(imageTransformerEClass, null, "transform", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageVariant(), "sourceVariant", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getImageTransform(), "imageTransform", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getImageVariant(), "destVariant", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(theEcorePackage.getEMap());
+		EGenericType g2 = createEGenericType(this.getImageTransform());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(this.getImageVariant());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "transforms", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(thumbnailatorTransformerEClass, ThumbnailatorTransformer.class, "ThumbnailatorTransformer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getThumbnailatorTransformer_Destination(), this.getImageConnector(), null, "destination", null, 0, 1, ThumbnailatorTransformer.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -719,8 +708,6 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEAttribute(getDimensionLike_Height(), theEcorePackage.getEIntegerObject(), "height", null, 0, 1, DimensionLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(imageVariantEClass, ImageVariant.class, "ImageVariant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getImageVariant_Namespace(), theEcorePackage.getEString(), "namespace", null, 0, 1, ImageVariant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getImageVariant_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, ImageVariant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImageVariant_StyleCode(), theEcorePackage.getEString(), "styleCode", null, 0, 1, ImageVariant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImageVariant_StyleVariant(), theEcorePackage.getEString(), "styleVariant", null, 0, 1, ImageVariant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImageVariant_Extension(), theEcorePackage.getEString(), "extension", null, 0, 1, ImageVariant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
