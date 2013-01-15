@@ -22,7 +22,6 @@
       <eParameters name="styleCode" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
       <eParameters name="extension" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     </eOperations>
-    <eOperations name="destroy"/>
     <eOperations name="download" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Download the object from the object storage. Usually via HTTP, but the actual mechanism is encapsulated."/>
@@ -36,6 +35,16 @@
     <eOperations name="getUri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Get the public (optionally CDN) URI of the image.&#xA;&#xA;This simply expands the hiUriTemplate or loUriTemplate, depending on styleCode."/>
+      </eAnnotations>
+      <eParameters name="namespace" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="imageId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="styleCode" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="styleVariant" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="extension" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getOriginUri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Get the public origin URI (never uses CDN) of the image.&#xA;&#xA;The default implementation uses getUri(), but some implementations, like S3Connector, will return the S3 alias for the origin URI (not CloudFront CDN)."/>
       </eAnnotations>
       <eParameters name="namespace" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
       <eParameters name="imageId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
@@ -60,18 +69,47 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Store images using Amazon S3 or S3 API-compatible servers such as Ceph, Parkplace, Boardwalk. fakes3 is not working due to it creating folders, not actually storing files."/>
     </eAnnotations>
+    <eOperations name="destroy"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BlitlineTransformer" eSuperTypes="#//ImageTransformer">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Processes using Blitline. The source image must be publicly hosted, for example using S3.&#xA;&#xA;The destination image is directly written into an S3 bucket. Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions"/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bucket" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="keyTemplate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false" defaultValueLiteral="{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="key template in URI template format.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, extension.&#xA;&#xA;Default is: &quot;{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}&quot;;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DavConnector" eSuperTypes="#//ImageConnector">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Store images using any WebDAV Protocol compatible server, such as Apache, nginx, Sling, Alfresco, Magnolia."/>
     </eAnnotations>
+    <eOperations name="destroy"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImageTransformer" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageTransformer" abstract="true" interface="true">
+    <eOperations name="transform">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Transform the image and saves it to the configured destination. The mechanism to assign destination is transformer-specific.&#xA;Thumbnailator saves it to a file and then uploads it using an ImageConnector. Blitline saves directly to an S3 bucket."/>
+      </eAnnotations>
+      <eParameters name="sourceVariant" eType="#//ImageVariant"/>
+      <eParameters name="imageTransform" eType="#//ImageTransform"/>
+      <eParameters name="destVariant" eType="#//ImageVariant"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//ImageConnector"
+        changeable="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Source image connector.&#xA;&#xA;Thumbnailator will use this to get the origin URI and download the  image, before transforming it locally.&#xA;&#xA;Blitline will use it to get the origin URI, but processing will be done by Blitline itself."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ThumbnailatorTransformer" eSuperTypes="#//ImageTransformer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//ImageConnector"
         changeable="false" transient="true">
@@ -97,7 +135,7 @@
       <eParameters name="gender" eType="ecore:EEnum ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Gender"/>
     </eOperations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="ImageTransform">
+  <eClassifiers xsi:type="ecore:EEnum" name="ImageTransformType">
     <eLiterals name="resize_to_fit">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Create thumbnail with same aspect ratio."/>
@@ -108,5 +146,19 @@
         <details key="documentation" value="Fill thumbnail dimension."/>
       </eAnnotations>
     </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageTransform" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ResizeToFit" eSuperTypes="#//ImageTransform #//DimensionLike"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ResizeToFill" eSuperTypes="#//ImageTransform #//DimensionLike"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DimensionLike" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EIntegerObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageVariant">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="namespace" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="styleCode" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="styleVariant" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

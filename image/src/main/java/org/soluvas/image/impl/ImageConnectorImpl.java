@@ -12,7 +12,7 @@ import org.soluvas.image.ImagePackage;
 import org.soluvas.image.UploadedImage;
 
 import com.damnhandy.uri.template.UriTemplate;
-import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 
 /**
  * <!-- begin-user-doc -->
@@ -119,11 +119,24 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 	@Override
 	public final String getUri(String namespace, String imageId, String styleCode, String styleVariant, String extension) {
 		String uriTemplate = "o".equals(styleCode) ? getHiUriTemplate() : getLoUriTemplate();
-		// namespace, styleCode, imageId, styleVariant, ext
-		final Map<String, Object> uriVars = ImmutableMap.<String, Object>of(
-				"namespace", namespace, "styleCode", styleCode, "imageId", imageId, "styleVariant", styleVariant,
-				"ext", extension);
+		// namespace, styleCode, imageId, styleVariant, extension
+		final Map<String, Object> uriVars = Maps.newHashMap();
+		uriVars.put("namespace", namespace);
+		uriVars.put("styleCode", styleCode);
+		uriVars.put("imageId", imageId);
+		uriVars.put("styleVariant", styleVariant);
+		uriVars.put("extension", extension);
+		uriVars.put("ext", extension);
 		return UriTemplate.fromTemplate(uriTemplate).expand(uriVars);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public String getOriginUri(String namespace, String imageId, String styleCode, String styleVariant, String extension) {
+		return getUri(namespace, imageId, styleCode, styleVariant, extension);
 	}
 
 	/**

@@ -85,6 +85,33 @@ public interface ImageFactory extends EFactory {
 	ImageManager createImageManager();
 
 	/**
+	 * Returns a new object of class '<em>Resize To Fit</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Resize To Fit</em>'.
+	 * @generated
+	 */
+	ResizeToFit createResizeToFit();
+
+	/**
+	 * Returns a new object of class '<em>Resize To Fill</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Resize To Fill</em>'.
+	 * @generated
+	 */
+	ResizeToFill createResizeToFill();
+
+	/**
+	 * Returns a new object of class '<em>Variant</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Variant</em>'.
+	 * @generated
+	 */
+	ImageVariant createImageVariant();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

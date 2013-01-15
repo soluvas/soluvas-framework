@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <xsd:schema xmlns:image="http://www.soluvas.org/schema/image/1.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.soluvas.org/schema/image/1.0">
   <xsd:import namespace="http://www.omg.org/XMI" schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/XMI.xsd"/>
-  <xsd:simpleType name="ImageTransform">
+  <xsd:simpleType name="ImageTransformType">
     <xsd:restriction base="xsd:NCName">
       <xsd:enumeration value="resize_to_fit">
         <xsd:annotation>
@@ -91,7 +91,20 @@ The domain name can also be different for each namespace, or even for each style
 The destination image is directly written into an S3 bucket. Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions</xsd:documentation>
     </xsd:annotation>
     <xsd:complexContent>
-      <xsd:extension base="image:ImageTransformer"/>
+      <xsd:extension base="image:ImageTransformer">
+        <xsd:attribute name="applicationId" type="xsd:string"/>
+        <xsd:attribute name="bucket" type="xsd:string"/>
+        <xsd:attribute name="prefix" type="xsd:string"/>
+        <xsd:attribute name="keyTemplate" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>key template in URI template format.
+
+Variables are: namespace, styleCode, imageId, styleVariant, extension.
+
+Default is: "{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="BlitlineTransformer" type="image:BlitlineTransformer">
@@ -116,10 +129,28 @@ The destination image is directly written into an S3 bucket. Make sure to set th
   </xsd:element>
   <xsd:complexType abstract="true" name="ImageTransformer">
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="source" type="image:ImageConnector">
+        <xsd:annotation>
+          <xsd:documentation>Source image connector.
+
+Thumbnailator will use this to get the origin URI and download the  image, before transforming it locally.
+
+Blitline will use it to get the origin URI, but processing will be done by Blitline itself.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
       <xsd:element ref="xmi:Extension"/>
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="source" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Source image connector.
+
+Thumbnailator will use this to get the origin URI and download the  image, before transforming it locally.
+
+Blitline will use it to get the origin URI, but processing will be done by Blitline itself.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
   </xsd:complexType>
   <xsd:element name="ImageTransformer" type="image:ImageTransformer"/>
   <xsd:complexType name="ThumbnailatorTransformer">
@@ -154,4 +185,53 @@ The destination image is directly written into an S3 bucket. Make sure to set th
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
   </xsd:complexType>
   <xsd:element name="ImageManager" type="image:ImageManager"/>
+  <xsd:complexType abstract="true" name="ImageTransform">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="ImageTransform" type="image:ImageTransform"/>
+  <xsd:complexType name="ResizeToFit">
+    <xsd:complexContent>
+      <xsd:extension base="image:ImageTransform">
+        <xsd:attribute name="width" type="xsd:int"/>
+        <xsd:attribute name="height" type="xsd:int"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="ResizeToFit" type="image:ResizeToFit"/>
+  <xsd:complexType name="ResizeToFill">
+    <xsd:complexContent>
+      <xsd:extension base="image:ImageTransform">
+        <xsd:attribute name="width" type="xsd:int"/>
+        <xsd:attribute name="height" type="xsd:int"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="ResizeToFill" type="image:ResizeToFill"/>
+  <xsd:complexType abstract="true" name="DimensionLike">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="width" type="xsd:int"/>
+    <xsd:attribute name="height" type="xsd:int"/>
+  </xsd:complexType>
+  <xsd:element name="DimensionLike" type="image:DimensionLike"/>
+  <xsd:complexType name="ImageVariant">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="namespace" type="xsd:string"/>
+    <xsd:attribute name="imageId" type="xsd:string"/>
+    <xsd:attribute name="styleCode" type="xsd:string"/>
+    <xsd:attribute name="styleVariant" type="xsd:string"/>
+    <xsd:attribute name="extension" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="ImageVariant" type="image:ImageVariant"/>
 </xsd:schema>

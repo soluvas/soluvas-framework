@@ -64,6 +64,9 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 			case ImagePackage.THUMBNAILATOR_TRANSFORMER: return (EObject)createThumbnailatorTransformer();
 			case ImagePackage.UPLOADED_IMAGE: return (EObject)createUploadedImage();
 			case ImagePackage.IMAGE_MANAGER: return (EObject)createImageManager();
+			case ImagePackage.RESIZE_TO_FIT: return (EObject)createResizeToFit();
+			case ImagePackage.RESIZE_TO_FILL: return (EObject)createResizeToFill();
+			case ImagePackage.IMAGE_VARIANT: return (EObject)createImageVariant();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -77,8 +80,8 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case ImagePackage.IMAGE_TRANSFORM:
-				return createImageTransformFromString(eDataType, initialValue);
+			case ImagePackage.IMAGE_TRANSFORM_TYPE:
+				return createImageTransformTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -92,8 +95,8 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case ImagePackage.IMAGE_TRANSFORM:
-				return convertImageTransformToString(eDataType, instanceValue);
+			case ImagePackage.IMAGE_TRANSFORM_TYPE:
+				return convertImageTransformTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -174,8 +177,38 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ImageTransform createImageTransformFromString(EDataType eDataType, String initialValue) {
-		ImageTransform result = ImageTransform.get(initialValue);
+	public ResizeToFit createResizeToFit() {
+		ResizeToFitImpl resizeToFit = new ResizeToFitImpl();
+		return resizeToFit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ResizeToFill createResizeToFill() {
+		ResizeToFillImpl resizeToFill = new ResizeToFillImpl();
+		return resizeToFill;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageVariant createImageVariant() {
+		ImageVariantImpl imageVariant = new ImageVariantImpl();
+		return imageVariant;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageTransformType createImageTransformTypeFromString(EDataType eDataType, String initialValue) {
+		ImageTransformType result = ImageTransformType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -185,7 +218,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertImageTransformToString(EDataType eDataType, Object instanceValue) {
+	public String convertImageTransformTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

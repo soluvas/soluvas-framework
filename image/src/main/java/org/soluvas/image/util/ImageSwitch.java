@@ -124,6 +124,40 @@ public class ImageSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ImagePackage.IMAGE_TRANSFORM: {
+				ImageTransform imageTransform = (ImageTransform)theEObject;
+				T result = caseImageTransform(imageTransform);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.RESIZE_TO_FIT: {
+				ResizeToFit resizeToFit = (ResizeToFit)theEObject;
+				T result = caseResizeToFit(resizeToFit);
+				if (result == null) result = caseImageTransform(resizeToFit);
+				if (result == null) result = caseDimensionLike(resizeToFit);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.RESIZE_TO_FILL: {
+				ResizeToFill resizeToFill = (ResizeToFill)theEObject;
+				T result = caseResizeToFill(resizeToFill);
+				if (result == null) result = caseImageTransform(resizeToFill);
+				if (result == null) result = caseDimensionLike(resizeToFill);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.DIMENSION_LIKE: {
+				DimensionLike dimensionLike = (DimensionLike)theEObject;
+				T result = caseDimensionLike(dimensionLike);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.IMAGE_VARIANT: {
+				ImageVariant imageVariant = (ImageVariant)theEObject;
+				T result = caseImageVariant(imageVariant);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -260,6 +294,81 @@ public class ImageSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseImageManager(ImageManager object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Transform</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Transform</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImageTransform(ImageTransform object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Resize To Fit</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Resize To Fit</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseResizeToFit(ResizeToFit object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Resize To Fill</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Resize To Fill</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseResizeToFill(ResizeToFill object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dimension Like</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dimension Like</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDimensionLike(DimensionLike object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variant</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variant</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImageVariant(ImageVariant object) {
 		return null;
 	}
 

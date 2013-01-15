@@ -18,4 +18,12 @@ package org.soluvas.image;
  * @generated
  */
 public interface S3Connector extends ImageConnector {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void destroy();
 } // S3Connector

@@ -170,13 +170,22 @@ public interface ImagePackage extends EPackage {
 	int IMAGE_TRANSFORMER = 5;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_TRANSFORMER__SOURCE = 0;
+
+	/**
 	 * The number of structural features of the '<em>Transformer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMAGE_TRANSFORMER_FEATURE_COUNT = 0;
+	int IMAGE_TRANSFORMER_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.BlitlineTransformerImpl <em>Blitline Transformer</em>}' class.
@@ -189,13 +198,58 @@ public interface ImagePackage extends EPackage {
 	int BLITLINE_TRANSFORMER = 3;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLITLINE_TRANSFORMER__SOURCE = IMAGE_TRANSFORMER__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Application Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLITLINE_TRANSFORMER__APPLICATION_ID = IMAGE_TRANSFORMER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Bucket</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLITLINE_TRANSFORMER__BUCKET = IMAGE_TRANSFORMER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLITLINE_TRANSFORMER__PREFIX = IMAGE_TRANSFORMER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Key Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLITLINE_TRANSFORMER__KEY_TEMPLATE = IMAGE_TRANSFORMER_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Blitline Transformer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BLITLINE_TRANSFORMER_FEATURE_COUNT = IMAGE_TRANSFORMER_FEATURE_COUNT + 0;
+	int BLITLINE_TRANSFORMER_FEATURE_COUNT = IMAGE_TRANSFORMER_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.DavConnectorImpl <em>Dav Connector</em>}' class.
@@ -243,6 +297,15 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	int THUMBNAILATOR_TRANSFORMER = 6;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THUMBNAILATOR_TRANSFORMER__SOURCE = IMAGE_TRANSFORMER__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Destination</b></em>' reference.
@@ -321,7 +384,7 @@ public interface ImagePackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.ImageTransform <em>Transform</em>}' enum.
+	 * The meta object id for the '{@link org.soluvas.image.ImageTransform <em>Transform</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.soluvas.image.ImageTransform
@@ -329,6 +392,201 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	int IMAGE_TRANSFORM = 9;
+
+
+	/**
+	 * The number of structural features of the '<em>Transform</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_TRANSFORM_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.ResizeToFitImpl <em>Resize To Fit</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.ResizeToFitImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getResizeToFit()
+	 * @generated
+	 */
+	int RESIZE_TO_FIT = 10;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FIT__WIDTH = IMAGE_TRANSFORM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Height</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FIT__HEIGHT = IMAGE_TRANSFORM_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Resize To Fit</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FIT_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.ResizeToFillImpl <em>Resize To Fill</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.ResizeToFillImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getResizeToFill()
+	 * @generated
+	 */
+	int RESIZE_TO_FILL = 11;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FILL__WIDTH = IMAGE_TRANSFORM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Height</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FILL__HEIGHT = IMAGE_TRANSFORM_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Resize To Fill</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FILL_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.DimensionLike <em>Dimension Like</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.DimensionLike
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getDimensionLike()
+	 * @generated
+	 */
+	int DIMENSION_LIKE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIMENSION_LIKE__WIDTH = 0;
+
+	/**
+	 * The feature id for the '<em><b>Height</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIMENSION_LIKE__HEIGHT = 1;
+
+	/**
+	 * The number of structural features of the '<em>Dimension Like</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIMENSION_LIKE_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.ImageVariantImpl <em>Variant</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.ImageVariantImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageVariant()
+	 * @generated
+	 */
+	int IMAGE_VARIANT = 13;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_VARIANT__NAMESPACE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_VARIANT__IMAGE_ID = 1;
+
+	/**
+	 * The feature id for the '<em><b>Style Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_VARIANT__STYLE_CODE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Style Variant</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_VARIANT__STYLE_VARIANT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_VARIANT__EXTENSION = 4;
+
+	/**
+	 * The number of structural features of the '<em>Variant</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_VARIANT_FEATURE_COUNT = 5;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.ImageTransformType
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformType()
+	 * @generated
+	 */
+	int IMAGE_TRANSFORM_TYPE = 14;
 
 
 	/**
@@ -405,6 +663,50 @@ public interface ImagePackage extends EPackage {
 	EClass getBlitlineTransformer();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.BlitlineTransformer#getApplicationId <em>Application Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Application Id</em>'.
+	 * @see org.soluvas.image.BlitlineTransformer#getApplicationId()
+	 * @see #getBlitlineTransformer()
+	 * @generated
+	 */
+	EAttribute getBlitlineTransformer_ApplicationId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.BlitlineTransformer#getBucket <em>Bucket</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bucket</em>'.
+	 * @see org.soluvas.image.BlitlineTransformer#getBucket()
+	 * @see #getBlitlineTransformer()
+	 * @generated
+	 */
+	EAttribute getBlitlineTransformer_Bucket();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.BlitlineTransformer#getPrefix <em>Prefix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Prefix</em>'.
+	 * @see org.soluvas.image.BlitlineTransformer#getPrefix()
+	 * @see #getBlitlineTransformer()
+	 * @generated
+	 */
+	EAttribute getBlitlineTransformer_Prefix();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.BlitlineTransformer#getKeyTemplate <em>Key Template</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key Template</em>'.
+	 * @see org.soluvas.image.BlitlineTransformer#getKeyTemplate()
+	 * @see #getBlitlineTransformer()
+	 * @generated
+	 */
+	EAttribute getBlitlineTransformer_KeyTemplate();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.DavConnector <em>Dav Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -423,6 +725,17 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getImageTransformer();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.image.ImageTransformer#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Source</em>'.
+	 * @see org.soluvas.image.ImageTransformer#getSource()
+	 * @see #getImageTransformer()
+	 * @generated
+	 */
+	EReference getImageTransformer_Source();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.ThumbnailatorTransformer <em>Thumbnailator Transformer</em>}'.
@@ -488,14 +801,141 @@ public interface ImagePackage extends EPackage {
 	EClass getImageManager();
 
 	/**
-	 * Returns the meta object for enum '{@link org.soluvas.image.ImageTransform <em>Transform</em>}'.
+	 * Returns the meta object for class '{@link org.soluvas.image.ImageTransform <em>Transform</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Transform</em>'.
+	 * @return the meta object for class '<em>Transform</em>'.
 	 * @see org.soluvas.image.ImageTransform
 	 * @generated
 	 */
-	EEnum getImageTransform();
+	EClass getImageTransform();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.ResizeToFit <em>Resize To Fit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Resize To Fit</em>'.
+	 * @see org.soluvas.image.ResizeToFit
+	 * @generated
+	 */
+	EClass getResizeToFit();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.ResizeToFill <em>Resize To Fill</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Resize To Fill</em>'.
+	 * @see org.soluvas.image.ResizeToFill
+	 * @generated
+	 */
+	EClass getResizeToFill();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.DimensionLike <em>Dimension Like</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Dimension Like</em>'.
+	 * @see org.soluvas.image.DimensionLike
+	 * @generated
+	 */
+	EClass getDimensionLike();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.DimensionLike#getWidth <em>Width</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Width</em>'.
+	 * @see org.soluvas.image.DimensionLike#getWidth()
+	 * @see #getDimensionLike()
+	 * @generated
+	 */
+	EAttribute getDimensionLike_Width();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.DimensionLike#getHeight <em>Height</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Height</em>'.
+	 * @see org.soluvas.image.DimensionLike#getHeight()
+	 * @see #getDimensionLike()
+	 * @generated
+	 */
+	EAttribute getDimensionLike_Height();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.ImageVariant <em>Variant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variant</em>'.
+	 * @see org.soluvas.image.ImageVariant
+	 * @generated
+	 */
+	EClass getImageVariant();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageVariant#getNamespace <em>Namespace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Namespace</em>'.
+	 * @see org.soluvas.image.ImageVariant#getNamespace()
+	 * @see #getImageVariant()
+	 * @generated
+	 */
+	EAttribute getImageVariant_Namespace();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageVariant#getImageId <em>Image Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Image Id</em>'.
+	 * @see org.soluvas.image.ImageVariant#getImageId()
+	 * @see #getImageVariant()
+	 * @generated
+	 */
+	EAttribute getImageVariant_ImageId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageVariant#getStyleCode <em>Style Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Style Code</em>'.
+	 * @see org.soluvas.image.ImageVariant#getStyleCode()
+	 * @see #getImageVariant()
+	 * @generated
+	 */
+	EAttribute getImageVariant_StyleCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageVariant#getStyleVariant <em>Style Variant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Style Variant</em>'.
+	 * @see org.soluvas.image.ImageVariant#getStyleVariant()
+	 * @see #getImageVariant()
+	 * @generated
+	 */
+	EAttribute getImageVariant_StyleVariant();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageVariant#getExtension <em>Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Extension</em>'.
+	 * @see org.soluvas.image.ImageVariant#getExtension()
+	 * @see #getImageVariant()
+	 * @generated
+	 */
+	EAttribute getImageVariant_Extension();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Transform Type</em>'.
+	 * @see org.soluvas.image.ImageTransformType
+	 * @generated
+	 */
+	EEnum getImageTransformType();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -584,6 +1024,38 @@ public interface ImagePackage extends EPackage {
 		EClass BLITLINE_TRANSFORMER = eINSTANCE.getBlitlineTransformer();
 
 		/**
+		 * The meta object literal for the '<em><b>Application Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BLITLINE_TRANSFORMER__APPLICATION_ID = eINSTANCE.getBlitlineTransformer_ApplicationId();
+
+		/**
+		 * The meta object literal for the '<em><b>Bucket</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BLITLINE_TRANSFORMER__BUCKET = eINSTANCE.getBlitlineTransformer_Bucket();
+
+		/**
+		 * The meta object literal for the '<em><b>Prefix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BLITLINE_TRANSFORMER__PREFIX = eINSTANCE.getBlitlineTransformer_Prefix();
+
+		/**
+		 * The meta object literal for the '<em><b>Key Template</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BLITLINE_TRANSFORMER__KEY_TEMPLATE = eINSTANCE.getBlitlineTransformer_KeyTemplate();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.DavConnectorImpl <em>Dav Connector</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -602,6 +1074,14 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EClass IMAGE_TRANSFORMER = eINSTANCE.getImageTransformer();
+
+		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IMAGE_TRANSFORMER__SOURCE = eINSTANCE.getImageTransformer_Source();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.ThumbnailatorTransformerImpl <em>Thumbnailator Transformer</em>}' class.
@@ -658,14 +1138,120 @@ public interface ImagePackage extends EPackage {
 		EClass IMAGE_MANAGER = eINSTANCE.getImageManager();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.image.ImageTransform <em>Transform</em>}' enum.
+		 * The meta object literal for the '{@link org.soluvas.image.ImageTransform <em>Transform</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.soluvas.image.ImageTransform
 		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransform()
 		 * @generated
 		 */
-		EEnum IMAGE_TRANSFORM = eINSTANCE.getImageTransform();
+		EClass IMAGE_TRANSFORM = eINSTANCE.getImageTransform();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.ResizeToFitImpl <em>Resize To Fit</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.ResizeToFitImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getResizeToFit()
+		 * @generated
+		 */
+		EClass RESIZE_TO_FIT = eINSTANCE.getResizeToFit();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.ResizeToFillImpl <em>Resize To Fill</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.ResizeToFillImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getResizeToFill()
+		 * @generated
+		 */
+		EClass RESIZE_TO_FILL = eINSTANCE.getResizeToFill();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.DimensionLike <em>Dimension Like</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.DimensionLike
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getDimensionLike()
+		 * @generated
+		 */
+		EClass DIMENSION_LIKE = eINSTANCE.getDimensionLike();
+
+		/**
+		 * The meta object literal for the '<em><b>Width</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DIMENSION_LIKE__WIDTH = eINSTANCE.getDimensionLike_Width();
+
+		/**
+		 * The meta object literal for the '<em><b>Height</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DIMENSION_LIKE__HEIGHT = eINSTANCE.getDimensionLike_Height();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.ImageVariantImpl <em>Variant</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.ImageVariantImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageVariant()
+		 * @generated
+		 */
+		EClass IMAGE_VARIANT = eINSTANCE.getImageVariant();
+
+		/**
+		 * The meta object literal for the '<em><b>Namespace</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE_VARIANT__NAMESPACE = eINSTANCE.getImageVariant_Namespace();
+
+		/**
+		 * The meta object literal for the '<em><b>Image Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE_VARIANT__IMAGE_ID = eINSTANCE.getImageVariant_ImageId();
+
+		/**
+		 * The meta object literal for the '<em><b>Style Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE_VARIANT__STYLE_CODE = eINSTANCE.getImageVariant_StyleCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Style Variant</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE_VARIANT__STYLE_VARIANT = eINSTANCE.getImageVariant_StyleVariant();
+
+		/**
+		 * The meta object literal for the '<em><b>Extension</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE_VARIANT__EXTENSION = eINSTANCE.getImageVariant_Extension();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.ImageTransformType
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformType()
+		 * @generated
+		 */
+		EEnum IMAGE_TRANSFORM_TYPE = eINSTANCE.getImageTransformType();
 
 	}
 

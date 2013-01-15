@@ -104,6 +104,26 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 				return createImageManagerAdapter();
 			}
 			@Override
+			public Adapter caseImageTransform(ImageTransform object) {
+				return createImageTransformAdapter();
+			}
+			@Override
+			public Adapter caseResizeToFit(ResizeToFit object) {
+				return createResizeToFitAdapter();
+			}
+			@Override
+			public Adapter caseResizeToFill(ResizeToFill object) {
+				return createResizeToFillAdapter();
+			}
+			@Override
+			public Adapter caseDimensionLike(DimensionLike object) {
+				return createDimensionLikeAdapter();
+			}
+			@Override
+			public Adapter caseImageVariant(ImageVariant object) {
+				return createImageVariantAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -246,6 +266,76 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImageManagerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.ImageTransform <em>Transform</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.ImageTransform
+	 * @generated
+	 */
+	public Adapter createImageTransformAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.ResizeToFit <em>Resize To Fit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.ResizeToFit
+	 * @generated
+	 */
+	public Adapter createResizeToFitAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.ResizeToFill <em>Resize To Fill</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.ResizeToFill
+	 * @generated
+	 */
+	public Adapter createResizeToFillAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.DimensionLike <em>Dimension Like</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.DimensionLike
+	 * @generated
+	 */
+	public Adapter createDimensionLikeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.ImageVariant <em>Variant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.ImageVariant
+	 * @generated
+	 */
+	public Adapter createImageVariantAdapter() {
 		return null;
 	}
 

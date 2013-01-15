@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.image.DavConnector;
 import org.soluvas.image.ImageException;
+import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.UploadedImage;
 
@@ -152,9 +153,17 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	 */
 	@Override
 	public UploadedImage upload(String namespace, String imageId, String styleCode, String extension, File file, String contentType) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		String uri = getImageDavUri(namespace, imageId, styleCode, extension);
+		try {
+			uploadFileDav(uri, file, contentType);
+			String originUri = getUri(namespace, imageId, styleCode, styleCode, extension);
+			UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
+			uploadedImage.setOriginUri(originUri);
+			uploadedImage.setUri(originUri);
+			return uploadedImage;
+		} catch (Exception e) {
+			throw new ImageException("Cannot upload to " + uri, e);
+		}
 	}
 
 	/**
@@ -222,10 +231,9 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	protected void uploadFileDav(URI uri, File source, String contentType) throws ClientProtocolException, IOException {
+	protected void uploadFileDav(String uri, File source, String contentType) throws ClientProtocolException, IOException {
 		// final URI originalDavUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
 		// safeDavUri, namespace, 'o', imageId, 'o', extension));
-		
 		
 		long length = source.length();
 		log.info("Uploading {} ({} bytes) to {}", contentType, length, uri );

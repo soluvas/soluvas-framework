@@ -18,11 +18,16 @@ import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImageManager;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageTransform;
+import org.soluvas.image.ImageTransformType;
 import org.soluvas.image.ImageTransformer;
+import org.soluvas.image.ImageVariant;
+import org.soluvas.image.ResizeToFill;
+import org.soluvas.image.ResizeToFit;
 import org.soluvas.image.S3Connector;
 import org.soluvas.image.ThumbnailatorTransformer;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.image.DavConnector;
+import org.soluvas.image.DimensionLike;
 
 /**
  * <!-- begin-user-doc -->
@@ -97,7 +102,42 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum imageTransformEEnum = null;
+	private EClass imageTransformEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass resizeToFitEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass resizeToFillEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dimensionLikeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imageVariantEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum imageTransformTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -236,6 +276,42 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBlitlineTransformer_ApplicationId() {
+		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBlitlineTransformer_Bucket() {
+		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBlitlineTransformer_Prefix() {
+		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBlitlineTransformer_KeyTemplate() {
+		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDavConnector() {
 		return davConnectorEClass;
 	}
@@ -248,6 +324,15 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	@Override
 	public EClass getImageTransformer() {
 		return imageTransformerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getImageTransformer_Source() {
+		return (EReference)imageTransformerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -314,8 +399,116 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getImageTransform() {
-		return imageTransformEEnum;
+	public EClass getImageTransform() {
+		return imageTransformEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getResizeToFit() {
+		return resizeToFitEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getResizeToFill() {
+		return resizeToFillEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDimensionLike() {
+		return dimensionLikeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDimensionLike_Width() {
+		return (EAttribute)dimensionLikeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDimensionLike_Height() {
+		return (EAttribute)dimensionLikeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getImageVariant() {
+		return imageVariantEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImageVariant_Namespace() {
+		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImageVariant_ImageId() {
+		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImageVariant_StyleCode() {
+		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImageVariant_StyleVariant() {
+		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImageVariant_Extension() {
+		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getImageTransformType() {
+		return imageTransformTypeEEnum;
 	}
 
 	/**
@@ -357,10 +550,15 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		s3ConnectorEClass = createEClass(S3_CONNECTOR);
 
 		blitlineTransformerEClass = createEClass(BLITLINE_TRANSFORMER);
+		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__APPLICATION_ID);
+		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__BUCKET);
+		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__PREFIX);
+		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__KEY_TEMPLATE);
 
 		davConnectorEClass = createEClass(DAV_CONNECTOR);
 
 		imageTransformerEClass = createEClass(IMAGE_TRANSFORMER);
+		createEReference(imageTransformerEClass, IMAGE_TRANSFORMER__SOURCE);
 
 		thumbnailatorTransformerEClass = createEClass(THUMBNAILATOR_TRANSFORMER);
 		createEReference(thumbnailatorTransformerEClass, THUMBNAILATOR_TRANSFORMER__DESTINATION);
@@ -371,8 +569,25 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		imageManagerEClass = createEClass(IMAGE_MANAGER);
 
+		imageTransformEClass = createEClass(IMAGE_TRANSFORM);
+
+		resizeToFitEClass = createEClass(RESIZE_TO_FIT);
+
+		resizeToFillEClass = createEClass(RESIZE_TO_FILL);
+
+		dimensionLikeEClass = createEClass(DIMENSION_LIKE);
+		createEAttribute(dimensionLikeEClass, DIMENSION_LIKE__WIDTH);
+		createEAttribute(dimensionLikeEClass, DIMENSION_LIKE__HEIGHT);
+
+		imageVariantEClass = createEClass(IMAGE_VARIANT);
+		createEAttribute(imageVariantEClass, IMAGE_VARIANT__NAMESPACE);
+		createEAttribute(imageVariantEClass, IMAGE_VARIANT__IMAGE_ID);
+		createEAttribute(imageVariantEClass, IMAGE_VARIANT__STYLE_CODE);
+		createEAttribute(imageVariantEClass, IMAGE_VARIANT__STYLE_VARIANT);
+		createEAttribute(imageVariantEClass, IMAGE_VARIANT__EXTENSION);
+
 		// Create enums
-		imageTransformEEnum = createEEnum(IMAGE_TRANSFORM);
+		imageTransformTypeEEnum = createEEnum(IMAGE_TRANSFORM_TYPE);
 	}
 
 	/**
@@ -411,6 +626,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		blitlineTransformerEClass.getESuperTypes().add(this.getImageTransformer());
 		davConnectorEClass.getESuperTypes().add(this.getImageConnector());
 		thumbnailatorTransformerEClass.getESuperTypes().add(this.getImageTransformer());
+		resizeToFitEClass.getESuperTypes().add(this.getImageTransform());
+		resizeToFitEClass.getESuperTypes().add(this.getDimensionLike());
+		resizeToFillEClass.getESuperTypes().add(this.getImageTransform());
+		resizeToFillEClass.getESuperTypes().add(this.getDimensionLike());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(imageConfigEClass, ImageConfig.class, "ImageConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -434,8 +653,6 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEParameter(op, theEcorePackage.getEString(), "styleCode", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "extension", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(imageConnectorEClass, null, "destroy", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		op = addEOperation(imageConnectorEClass, theEcorePackage.getEBoolean(), "download", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -450,13 +667,34 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEParameter(op, theEcorePackage.getEString(), "styleVariant", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "extension", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(imageConnectorEClass, theEcorePackage.getEString(), "getOriginUri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "styleCode", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "styleVariant", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "extension", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(s3ConnectorEClass, S3Connector.class, "S3Connector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		addEOperation(s3ConnectorEClass, null, "destroy", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(blitlineTransformerEClass, BlitlineTransformer.class, "BlitlineTransformer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBlitlineTransformer_ApplicationId(), theEcorePackage.getEString(), "applicationId", null, 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBlitlineTransformer_Bucket(), theEcorePackage.getEString(), "bucket", null, 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBlitlineTransformer_Prefix(), theEcorePackage.getEString(), "prefix", null, 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBlitlineTransformer_KeyTemplate(), theEcorePackage.getEString(), "keyTemplate", "{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}", 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(davConnectorEClass, DavConnector.class, "DavConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		addEOperation(davConnectorEClass, null, "destroy", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(imageTransformerEClass, ImageTransformer.class, "ImageTransformer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getImageTransformer_Source(), this.getImageConnector(), null, "source", null, 0, 1, ImageTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(imageTransformerEClass, null, "transform", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageVariant(), "sourceVariant", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageTransform(), "imageTransform", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageVariant(), "destVariant", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(thumbnailatorTransformerEClass, ThumbnailatorTransformer.class, "ThumbnailatorTransformer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getThumbnailatorTransformer_Destination(), this.getImageConnector(), null, "destination", null, 0, 1, ThumbnailatorTransformer.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -470,10 +708,27 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		op = addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getDefaultPhotoId", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theCommonsPackage.getGender(), "gender", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		initEClass(imageTransformEClass, ImageTransform.class, "ImageTransform", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(resizeToFitEClass, ResizeToFit.class, "ResizeToFit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(resizeToFillEClass, ResizeToFill.class, "ResizeToFill", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(dimensionLikeEClass, DimensionLike.class, "DimensionLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDimensionLike_Width(), theEcorePackage.getEIntegerObject(), "width", null, 0, 1, DimensionLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDimensionLike_Height(), theEcorePackage.getEIntegerObject(), "height", null, 0, 1, DimensionLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(imageVariantEClass, ImageVariant.class, "ImageVariant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getImageVariant_Namespace(), theEcorePackage.getEString(), "namespace", null, 0, 1, ImageVariant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImageVariant_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, ImageVariant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImageVariant_StyleCode(), theEcorePackage.getEString(), "styleCode", null, 0, 1, ImageVariant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImageVariant_StyleVariant(), theEcorePackage.getEString(), "styleVariant", null, 0, 1, ImageVariant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImageVariant_Extension(), theEcorePackage.getEString(), "extension", null, 0, 1, ImageVariant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
-		initEEnum(imageTransformEEnum, ImageTransform.class, "ImageTransform");
-		addEEnumLiteral(imageTransformEEnum, ImageTransform.RESIZE_TO_FIT);
-		addEEnumLiteral(imageTransformEEnum, ImageTransform.RESIZE_TO_FILL);
+		initEEnum(imageTransformTypeEEnum, ImageTransformType.class, "ImageTransformType");
+		addEEnumLiteral(imageTransformTypeEEnum, ImageTransformType.RESIZE_TO_FIT);
+		addEEnumLiteral(imageTransformTypeEEnum, ImageTransformType.RESIZE_TO_FILL);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -498,16 +753,22 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 			 "documentation", "Image module configuration.\n\nThe URI pattern is hardcoded as folows:\n\nFor normal styles:\n\n* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}.{extension}\n\nFor variant styles: (styleCode is usually \'x\', but can be anything else except \'o\')\n\n* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}_{variantCode}.{extension}\n\nIn the future, URI pattern (\"template\") should be configurable, based on http://tools.ietf.org/html/rfc6570\nand can be expanded both by server and client scripts.\n\nThe domain name can also be different for each namespace, or even for each styleCode or variantCode.\n"
 		   });		
 		addAnnotation
-		  (imageConnectorEClass.getEOperations().get(3), 
+		  (imageConnectorEClass.getEOperations().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "Download the object from the object storage. Usually via HTTP, but the actual mechanism is encapsulated."
 		   });		
 		addAnnotation
-		  (imageConnectorEClass.getEOperations().get(4), 
+		  (imageConnectorEClass.getEOperations().get(3), 
 		   source, 
 		   new String[] {
 			 "documentation", "Get the public (optionally CDN) URI of the image.\n\nThis simply expands the hiUriTemplate or loUriTemplate, depending on styleCode."
+		   });		
+		addAnnotation
+		  (imageConnectorEClass.getEOperations().get(4), 
+		   source, 
+		   new String[] {
+			 "documentation", "Get the public origin URI (never uses CDN) of the image.\n\nThe default implementation uses getUri(), but some implementations, like S3Connector, will return the S3 alias for the origin URI (not CloudFront CDN)."
 		   });		
 		addAnnotation
 		  (getImageConnector_HiUriTemplate(), 
@@ -534,10 +795,28 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 			 "documentation", "Processes using Blitline. The source image must be publicly hosted, for example using S3.\n\nThe destination image is directly written into an S3 bucket. Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions"
 		   });		
 		addAnnotation
+		  (getBlitlineTransformer_KeyTemplate(), 
+		   source, 
+		   new String[] {
+			 "documentation", "key template in URI template format.\n\nVariables are: namespace, styleCode, imageId, styleVariant, extension.\n\nDefault is: \"{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}\";"
+		   });		
+		addAnnotation
 		  (davConnectorEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Store images using any WebDAV Protocol compatible server, such as Apache, nginx, Sling, Alfresco, Magnolia."
+		   });		
+		addAnnotation
+		  (imageTransformerEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Transform the image and saves it to the configured destination. The mechanism to assign destination is transformer-specific.\nThumbnailator saves it to a file and then uploads it using an ImageConnector. Blitline saves directly to an S3 bucket."
+		   });		
+		addAnnotation
+		  (getImageTransformer_Source(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Source image connector.\n\nThumbnailator will use this to get the origin URI and download the  image, before transforming it locally.\n\nBlitline will use it to get the origin URI, but processing will be done by Blitline itself."
 		   });		
 		addAnnotation
 		  (getThumbnailatorTransformer_Destination(), 
@@ -558,13 +837,13 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 			 "documentation", "URI for direct access to object storage."
 		   });		
 		addAnnotation
-		  (imageTransformEEnum.getELiterals().get(0), 
+		  (imageTransformTypeEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Create thumbnail with same aspect ratio."
 		   });		
 		addAnnotation
-		  (imageTransformEEnum.getELiterals().get(1), 
+		  (imageTransformTypeEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Fill thumbnail dimension."

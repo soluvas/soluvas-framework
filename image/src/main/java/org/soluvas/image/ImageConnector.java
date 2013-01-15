@@ -80,14 +80,6 @@ public interface ImageConnector extends SerializableEObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void destroy();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Download the object from the object storage. Usually via HTTP, but the actual mechanism is encapsulated.
 	 * <!-- end-model-doc -->
@@ -108,4 +100,17 @@ public interface ImageConnector extends SerializableEObject {
 	 * @generated
 	 */
 	String getUri(String namespace, String imageId, String styleCode, String styleVariant, String extension);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Get the public origin URI (never uses CDN) of the image.
+	 * 
+	 * The default implementation uses getUri(), but some implementations, like S3Connector, will return the S3 alias for the origin URI (not CloudFront CDN).
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	String getOriginUri(String namespace, String imageId, String styleCode, String styleVariant, String extension);
 } // ImageConnector

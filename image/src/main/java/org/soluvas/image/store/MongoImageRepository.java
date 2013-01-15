@@ -1,6 +1,5 @@
 package org.soluvas.image.store;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,14 +16,6 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
-import javax.imageio.IIOImage;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
-import javax.imageio.stream.FileImageOutputStream;
-
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.geometry.Positions;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -35,8 +26,10 @@ import org.soluvas.commons.SlugUtils;
 import org.soluvas.image.DavConnector;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImageException;
+import org.soluvas.image.ImageTransformer;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.image.impl.DavConnectorImpl;
+import org.soluvas.image.impl.ThumbnailatorTransformerImpl;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -84,7 +77,9 @@ public class MongoImageRepository implements ImageRepository {
 	private DBCollection mongoColl;
 	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<String, ImageStyle>();
 	
+	private DavConnector innerConnector;
 	private ImageConnector connector;
+	private ImageTransformer transformer;
 	
 	public class DBObjectToImage implements Function<DBObject, Image> {
 		@Override
@@ -144,16 +139,20 @@ public class MongoImageRepository implements ImageRepository {
 		super();
 		this.namespace = namespace;
 		this.mongoUri = mongoUri;
-		this.connector = new DavConnectorImpl(davUri, publicUri);
+		this.innerConnector = new DavConnectorImpl(davUri, publicUri); 
+		this.connector = innerConnector;
+		this.transformer = new ThumbnailatorTransformerImpl();
 	}
 	
 	// URI: ~repo.publicUri~{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}
 	public MongoImageRepository(String namespace, String mongoUri, ImageConnector connector,
+			ImageTransformer transformer,
 			List<ImageStyle> imageStyles) {
 		super();
 		this.namespace = namespace;
 		this.mongoUri = mongoUri;
 		this.connector = connector;
+		this.transformer = transformer;
 		setStyles(imageStyles);
 	}
 	
@@ -200,7 +199,8 @@ public class MongoImageRepository implements ImageRepository {
 //			system.shutdown();
 //			system.awaitTermination();
 //		}
-		connector.destroy();
+		if (innerConnector != null)
+			innerConnector.destroy();
 		if (mongoColl != null) {
 			mongoColl.getDB().cleanCursors(false);
 			mongoColl.getDB().getMongo().close();
@@ -324,66 +324,6 @@ public class MongoImageRepository implements ImageRepository {
 			final Collection<StyledImage> styledImages = Collections2.transform(styles.values(), new com.google.common.base.Function<ImageStyle, StyledImage>() {
 				@Override
 				public StyledImage apply(final ImageStyle style) {
-					File styledFile = null;
-					final int width;
-					final int height;
-					try {
-						// I don't think Thumbnailer and/or ImageIO is thread-safe
-						synchronized (this) {
-							styledFile = File.createTempFile(imageId + "_", "_" + style.getCode() + ".jpg");
-							final boolean progressive = style.getMaxWidth() >= 512;
-							log.info("Resizing {} to {}, quality={} progressive={}", new Object[] {
-									originalFile, styledFile, style.getQuality(), progressive });
-							final BufferedImage styledImage = Thumbnails.of(originalFile)
-									.size(style.getMaxWidth(), style.getMaxHeight())
-									.crop(Positions.CENTER).asBufferedImage();
-							width = styledImage.getWidth();
-							height = styledImage.getHeight();
-							log.info("Dimensions of {} is {}x{}", new Object[] { styledFile, width, height });
-							ImageWriter jpegWriter = ImageIO.getImageWritersByFormatName("jpg").next();
-							final FileImageOutputStream styledOutput = new FileImageOutputStream(styledFile);
-							jpegWriter.setOutput(styledOutput);
-							try {
-								ImageWriteParam jpegParam = jpegWriter.getDefaultWriteParam();
-								jpegParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-								jpegParam.setCompressionQuality(style.getQuality());
-								// Enable progressive if width >= 512, else disable
-								jpegParam.setProgressiveMode(progressive ? ImageWriteParam.MODE_DEFAULT : ImageWriteParam.MODE_DISABLED);
-								jpegWriter.write(null, new IIOImage(styledImage, null, null), jpegParam);
-//								ImageIO.write(styledImage, "jpg", styledFile); // no quality control
-							} finally {
-								styledOutput.close();
-							}
-						}
-						
-//						ByteArrayOutputStream buf = new ByteArrayOutputStream();
-//						ImageIO.write(styledImage, "jpg", buf);
-//						byte[] content = buf.toByteArray();
-//						ResizeResult result = new ResizeResult(style.getName(), contentType, "jpg", content.length, content,
-//								styledImage.getWidth(), styledImage.getHeight());
-					} catch (final Exception e) {
-						throw new ImageException("Error resizing " + imageId + " to " + style.getCode() + ", destination: " + styledFile, e);
-					}
-//					final URI styledDavUri = getImageDavUri(imageId, style.getName());
-					try {
-						// upload directly for efficiency
-						// TODO: not hardcode styled content type and extension
-						final String styledContentType = "image/jpeg";
-						String styledExtension = "jpg";
-						log.info("Uploading {} {} using {}", style.getName(), imageId, connector );
-						UploadedImage styledUpload = connector.upload(namespace, imageId, style.getCode(),
-								styledExtension, styledFile, styledContentType);
-						final String styledPublicUri = styledUpload.getOriginUri();
-						final StyledImage styled = new StyledImage(
-								style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
-								(int)styledFile.length(), width, height);
-						return styled;
-					} catch (final Exception e) {
-						throw new ImageException("Error uploading " + style.getName() + " " + imageId + " using " + connector, e);
-					} finally {
-						log.info("Deleting temporary {} image {}", style.getName(), styledFile);
-						styledFile.delete();
-					}
 				}
 			});
 

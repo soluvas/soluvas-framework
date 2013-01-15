@@ -3,6 +3,7 @@
 package org.soluvas.image.impl;
 
 import java.io.File;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.slf4j.Logger;
@@ -31,7 +32,9 @@ import com.amazonaws.services.s3.transfer.Download;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 import com.amazonaws.services.s3.transfer.model.UploadResult;
+import com.damnhandy.uri.template.UriTemplate;
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 
 /**
  * <!-- begin-user-doc -->
@@ -272,5 +275,26 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 			throw new ImageException(e, "Cannot download %s from %s", key, bucket);
 		}
 	}
-
+	
+	@Override
+	public String getOriginUri(String namespace, String imageId,
+			String styleCode, String styleVariant, String extension) {
+		String originAlias; 
+		if ("o".equals(styleCode)) {
+			originAlias = Strings.isNullOrEmpty(hiOriginAlias) ? hiBucket + ".s3.amazonaws.com" : hiOriginAlias;
+		} else {
+			originAlias = Strings.isNullOrEmpty(loOriginAlias) ? loBucket + ".s3.amazonaws.com" : loOriginAlias;
+		}
+		String uriTemplate = "http://" + originAlias + "/" + Strings.nullToEmpty(prefix) +
+				"{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
+		// namespace, styleCode, imageId, styleVariant, extension
+		final Map<String, Object> uriVars = Maps.newHashMap();
+		uriVars.put("namespace", namespace);
+		uriVars.put("styleCode", styleCode);
+		uriVars.put("imageId", imageId);
+		uriVars.put("styleVariant", styleVariant);
+		uriVars.put("extension", extension);
+		return UriTemplate.fromTemplate(uriTemplate).expand(uriVars);
+	}
+	
 } //S3ConnectorImpl
