@@ -459,8 +459,12 @@ public class MongoImageRepository implements ImageRepository {
 	 * @see org.soluvas.image.store.ImageRepository#delete(java.lang.String)
 	 */
 	@Override
-	public void delete(final String id) {
+	public boolean delete(final String id) {
 		final Image image = findOne(id);
+		if (image == null) {
+			log.warn("Not deleting non-existing {} image {}", namespace, id);
+			return false;
+		}
 
 		// --------- Delete styleds --------
 //		Future<Iterable<StatusLine>> styledsFuture = Futures.traverse(image.getStyles().values(), new Function<StyledImage, Future<StatusLine>>() {
@@ -544,6 +548,8 @@ public class MongoImageRepository implements ImageRepository {
 		} catch (Exception e) {
 			log.error("Error deleting " + namespace + " image metadata " + id, e);
 		}
+		
+		return true;
 	}
 
 	/* (non-Javadoc)
@@ -765,6 +771,11 @@ public class MongoImageRepository implements ImageRepository {
 	@Override
 	public String getLoUriTemplate() {
 		return connector.getLoUriTemplate();
+	}
+
+	@Override
+	public ImageConnector getConnector() {
+		return connector;
 	}
 
 }

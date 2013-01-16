@@ -10,6 +10,8 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import org.soluvas.image.ImageConnector;
+
 public interface ImageRepository {
 
 	/**
@@ -106,8 +108,9 @@ public interface ImageRepository {
 	/**
 	 * Delete the image with the specified ID, from the MongoDB metadata including all files and styled images from WebDAV.
 	 * @param id Image ID.
+	 * @return TODO
 	 */
-	public abstract void delete(String id);
+	public abstract boolean delete(String id);
 	
 	/**
 	 * Delete multiple images with the specified ID, from the MongoDB metadata including all files and styled images from WebDAV.
@@ -158,5 +161,7 @@ public interface ImageRepository {
 	
 	public String getHiUriTemplate();
 	public String getLoUriTemplate();
+	
+	public ImageConnector getConnector();
 
 }
