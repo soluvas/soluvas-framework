@@ -16,11 +16,7 @@ import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +43,6 @@ import com.google.common.collect.Maps;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getSource <em>Source</em>}</li>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getApplicationId <em>Application Id</em>}</li>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getBucket <em>Bucket</em>}</li>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getPrefix <em>Prefix</em>}</li>
@@ -67,15 +62,6 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 			.getLogger(BlitlineTransformerImpl.class);
 	private final DefaultHttpClient client = new DefaultHttpClient(new PoolingClientConnectionManager());
 	
-	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSource()
-	 * @generated
-	 * @ordered
-	 */
-	protected ImageConnector source;
 	/**
 	 * The default value of the '{@link #getApplicationId() <em>Application Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -213,12 +199,9 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 		throw new UnsupportedOperationException();
 	}
 	
-	public BlitlineTransformerImpl(ImageConnector source, String applicationId, String bucket, String prefix,
+	public BlitlineTransformerImpl(String applicationId, String bucket, String prefix,
 			String cdnAlias) {
-		// FIXME: source shouldn't a field, it should be parameter to transform, so we can reuse the same
-		// blitline transformer multiple times
 		super();
-		this.source = source;
 		this.applicationId = applicationId;
 		this.bucket = bucket;
 		this.prefix = prefix;
@@ -237,33 +220,6 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	@Override
 	protected EClass eStaticClass() {
 		return ImagePackage.Literals.BLITLINE_TRANSFORMER;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ImageConnector getSource() {
-		if (source != null && ((EObject)source).eIsProxy()) {
-			InternalEObject oldSource = (InternalEObject)source;
-			source = (ImageConnector)eResolveProxy(oldSource);
-			if (source != oldSource) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImagePackage.BLITLINE_TRANSFORMER__SOURCE, oldSource, source));
-			}
-		}
-		return source;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ImageConnector basicGetSource() {
-		return source;
 	}
 
 	/**
@@ -341,7 +297,7 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public List<UploadedImage> transform(String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms) {
+	public List<UploadedImage> transform(ImageConnector source, String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms) {
 		final UriTemplate originUriExpander = UriTemplate.fromTemplate(getOriginUriTemplate());
 		final UriTemplate uriExpander = UriTemplate.fromTemplate(getUriTemplate());
 		
@@ -439,9 +395,6 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImagePackage.BLITLINE_TRANSFORMER__SOURCE:
-				if (resolve) return getSource();
-				return basicGetSource();
 			case ImagePackage.BLITLINE_TRANSFORMER__APPLICATION_ID:
 				return getApplicationId();
 			case ImagePackage.BLITLINE_TRANSFORMER__BUCKET:
@@ -468,8 +421,6 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImagePackage.BLITLINE_TRANSFORMER__SOURCE:
-				return source != null;
 			case ImagePackage.BLITLINE_TRANSFORMER__APPLICATION_ID:
 				return APPLICATION_ID_EDEFAULT == null ? applicationId != null : !APPLICATION_ID_EDEFAULT.equals(applicationId);
 			case ImagePackage.BLITLINE_TRANSFORMER__BUCKET:

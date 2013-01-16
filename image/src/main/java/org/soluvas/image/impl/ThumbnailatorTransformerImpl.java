@@ -46,7 +46,6 @@ import com.google.common.collect.ImmutableList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.soluvas.image.impl.ThumbnailatorTransformerImpl#getSource <em>Source</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ThumbnailatorTransformerImpl#getDestination <em>Destination</em>}</li>
  * </ul>
  * </p>
@@ -58,15 +57,6 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	private static final Logger log = LoggerFactory
 			.getLogger(ThumbnailatorTransformerImpl.class);
 	
-	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSource()
-	 * @generated
-	 * @ordered
-	 */
-	protected ImageConnector source;
 	/**
 	 * The cached value of the '{@link #getDestination() <em>Destination</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -102,33 +92,6 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	 * @generated
 	 */
 	@Override
-	public ImageConnector getSource() {
-		if (source != null && ((EObject)source).eIsProxy()) {
-			InternalEObject oldSource = (InternalEObject)source;
-			source = (ImageConnector)eResolveProxy(oldSource);
-			if (source != oldSource) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImagePackage.THUMBNAILATOR_TRANSFORMER__SOURCE, oldSource, source));
-			}
-		}
-		return source;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ImageConnector basicGetSource() {
-		return source;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public ImageConnector getDestination() {
 		if (destination != null && ((EObject)destination).eIsProxy()) {
 			InternalEObject oldDestination = (InternalEObject)destination;
@@ -155,7 +118,7 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public List<UploadedImage> transform(String namespace, String imageId, ImageVariant sourceVariant,
+	public List<UploadedImage> transform(ImageConnector source, String namespace, String imageId, ImageVariant sourceVariant,
 			Map<ImageTransform, ImageVariant> transforms) {
 		// download original
 		final File originalFile;
@@ -284,9 +247,6 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImagePackage.THUMBNAILATOR_TRANSFORMER__SOURCE:
-				if (resolve) return getSource();
-				return basicGetSource();
 			case ImagePackage.THUMBNAILATOR_TRANSFORMER__DESTINATION:
 				if (resolve) return getDestination();
 				return basicGetDestination();
@@ -302,8 +262,6 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImagePackage.THUMBNAILATOR_TRANSFORMER__SOURCE:
-				return source != null;
 			case ImagePackage.THUMBNAILATOR_TRANSFORMER__DESTINATION:
 				return destination != null;
 		}

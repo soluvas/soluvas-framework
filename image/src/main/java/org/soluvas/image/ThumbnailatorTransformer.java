@@ -8,6 +8,10 @@ package org.soluvas.image;
  * A representation of the model object '<em><b>Thumbnailator Transformer</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Thumbnailator will use this to get the origin URI and download the  image, before transforming it locally.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

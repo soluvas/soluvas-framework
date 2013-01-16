@@ -11,12 +11,6 @@ import org.soluvas.commons.SerializableEObject;
  * A representation of the model object '<em><b>Transformer</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.soluvas.image.ImageTransformer#getSource <em>Source</em>}</li>
- * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getImageTransformer()
  * @model interface="true" abstract="true"
@@ -26,32 +20,16 @@ import org.soluvas.commons.SerializableEObject;
 public interface ImageTransformer extends SerializableEObject {
 
 	/**
-	 * Returns the value of the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Source image connector.
-	 * 
-	 * Thumbnailator will use this to get the origin URI and download the  image, before transforming it locally.
-	 * 
-	 * Blitline will use it to get the origin URI, but processing will be done by Blitline itself.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Source</em>' reference.
-	 * @see org.soluvas.image.ImagePackage#getImageTransformer_Source()
-	 * @model changeable="false"
-	 * @generated
-	 */
-	ImageConnector getSource();
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Transform the image and saves it to the configured destination. The mechanism to assign destination is transformer-specific.
 	 * Thumbnailator saves it to a file and then uploads it using an ImageConnector. Blitline saves directly to an S3 bucket.
+	 * 
+	 * source shouldn't a field, it should be parameter to transform, so we can reuse the same blitline transformer multiple times.
 	 * <!-- end-model-doc -->
 	 * @model dataType="org.soluvas.commons.List<org.soluvas.image.UploadedImage>" many="false"
 	 * @generated
 	 */
-	List<UploadedImage> transform(String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms);
+	List<UploadedImage> transform(ImageConnector source, String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms);
 } // ImageTransformer

@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="image" nsURI="http://www.soluvas.org/schema/image/1.0" nsPrefix="image">
-  <eClassifiers xsi:type="ecore:EClass" name="ImageConfig">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Image module configuration.&#xA;&#xA;The URI pattern is hardcoded as folows:&#xA;&#xA;For normal styles:&#xA;&#xA;* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}.{extension}&#xA;&#xA;For variant styles: (styleCode is usually 'x', but can be anything else except 'o')&#xA;&#xA;* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}_{variantCode}.{extension}&#xA;&#xA;In the future, URI pattern (&quot;template&quot;) should be configurable, based on http://tools.ietf.org/html/rfc6570&#xA;and can be expanded both by server and client scripts.&#xA;&#xA;The domain name can also be different for each namespace, or even for each styleCode or variantCode.&#xA;"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="publicUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImageConnector" abstract="true">
     <eOperations name="upload" eType="#//UploadedImage">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -86,11 +80,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="ImageTransformer" abstract="true" interface="true">
     <eOperations name="transform">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Transform the image and saves it to the configured destination. The mechanism to assign destination is transformer-specific.&#xA;Thumbnailator saves it to a file and then uploads it using an ImageConnector. Blitline saves directly to an S3 bucket."/>
+        <details key="documentation" value="Transform the image and saves it to the configured destination. The mechanism to assign destination is transformer-specific.&#xA;Thumbnailator saves it to a file and then uploads it using an ImageConnector. Blitline saves directly to an S3 bucket.&#xA;&#xA;source shouldn't a field, it should be parameter to transform, so we can reuse the same blitline transformer multiple times."/>
       </eAnnotations>
       <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//List">
         <eTypeArguments eClassifier="#//UploadedImage"/>
       </eGenericType>
+      <eParameters name="source" eType="#//ImageConnector"/>
       <eParameters name="namespace" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
       <eParameters name="imageId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
       <eParameters name="sourceVariant" eType="#//ImageVariant"/>
@@ -101,16 +96,10 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//ImageConnector"
-        changeable="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Source image connector.&#xA;&#xA;Thumbnailator will use this to get the origin URI and download the  image, before transforming it locally.&#xA;&#xA;Blitline will use it to get the origin URI, but processing will be done by Blitline itself."/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BlitlineTransformer" eSuperTypes="#//ImageTransformer">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Processes using Blitline. The source image must be publicly hosted, for example using S3.&#xA;&#xA;The destination image is directly written into an S3 bucket.&#xA;&#xA;You must have an S3 account and have permissions to change the policy on your bucket&#xA;For these instructions, you must use the Amazon AWS Console&#xA;See: http://www.blitline.com/docs/s3_permissions&#xA;&#xA;Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions"/>
+      <details key="documentation" value="Processes using Blitline. The source image must be publicly hosted, for example using S3.&#xA;Blitline will use source to get the origin URI, but processing will be done by Blitline itself.&#xA;&#xA;The destination image is directly written into an S3 bucket.&#xA;&#xA;You must have an S3 account and have permissions to change the policy on your bucket&#xA;For these instructions, you must use the Amazon AWS Console&#xA;See: http://www.blitline.com/docs/s3_permissions&#xA;&#xA;Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         changeable="false"/>
@@ -144,6 +133,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ThumbnailatorTransformer" eSuperTypes="#//ImageTransformer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Thumbnailator will use this to get the origin URI and download the  image, before transforming it locally."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//ImageConnector"
         changeable="false" transient="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -231,5 +223,59 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="styleCode" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="styleVariant" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Image" eSuperTypes="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Identifiable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//SchemaVersionable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Timestamped #//DimensionLike">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="The v1 structure is as follows:&#xA;&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;_id&quot;, imageId);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;name&quot;, name); // in v1: Only used for creating/uploading new image. Otherwise it's always null.&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;uri&quot;, originalUri);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;fileName&quot;, originalName);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;contentType&quot;, contentType);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;size&quot;, (int)length);&#xA;&#x9;&#x9;&#x9;final Date creationTime = new Date();&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;created&quot;, creationTime);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;styles&quot;, stylesObj);&#xA;- originalFile : transient&#xA;&#xA;v2 adds:&#xA;&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;name&quot;, name); // in v2: serialized&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;originUri&quot;, originalOriginUri);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;extension&quot;, extension);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;creationTime&quot;, creationTime);&#xA;- modificationTime&#xA;- width&#xA;- height&#xA;- linkedFile"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="styles" upperBound="-1"
+        eType="#//StyledImage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="schemaVersion" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong"
+        changeable="false" defaultValueLiteral="2"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentType" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELongObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="created" eType="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//DateTime">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="DEPRECATED."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="originUri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkedFile" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Image file name, relative to XMI file path inside the export folder or archive file. Only used for XMI data."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="originalFile" eType="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//File"
+        transient="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Only used for creating/uploading new image. Otherwise it's always null."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StyledImage" eSuperTypes="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//SchemaVersionable #//DimensionLike ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Timestamped">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="StyledImage v1 is as follows:&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;bson.put(&quot;code&quot;, transformed.getStyleCode());&#xA;&#x9;&#x9;&#x9;&#x9;bson.put(&quot;uri&quot;, transformed.getUri());&#xA;&#x9;&#x9;&#x9;&#x9;bson.put(&quot;size&quot;, transformed.getSize());&#xA;&#x9;&#x9;&#x9;&#x9;bson.put(&quot;width&quot;, transformed.getWidth());&#xA;&#x9;&#x9;&#x9;&#x9;bson.put(&quot;height&quot;, transformed.getHeight());&#xA;&#xA;v2 adds:&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;bson.put(&quot;className&quot;, StyledImage.class.getName()); // META&#xA;&#x9;&#x9;&#x9;&#x9;bson.put(&quot;name&quot;, style.getName());&#xA;&#x9;&#x9;&#x9;&#x9;bson.put(&quot;variant&quot;, transformed.getStyleVariant());&#xA;&#x9;&#x9;&#x9;&#x9;bson.put(&quot;extension&quot;, transformed.getExtension());&#xA;&#x9;&#x9;&#x9;&#x9;bson.put(&quot;originUri&quot;, transformed.getOriginUri());&#xA;&#x9;&#x9;&#x9;&#x9;bson.put(&quot;contentType&quot;, &quot;image/jpeg&quot;); // TODO: don't hardcode content type&#xA;- creationTime&#xA;- modificationTime&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="schemaVersion" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong"
+        changeable="false" defaultValueLiteral="2"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELongObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variant" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="originUri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentType" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkedFile" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Image file name, relative to XMI file path inside the export folder or archive file. Only used for XMI data."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageCatalog">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="images" upperBound="-1"
+        eType="#//Image" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

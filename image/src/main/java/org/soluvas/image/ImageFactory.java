@@ -22,15 +22,6 @@ public interface ImageFactory extends EFactory {
 	ImageFactory eINSTANCE = org.soluvas.image.impl.ImageFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Config</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Config</em>'.
-	 * @generated
-	 */
-	ImageConfig createImageConfig();
-
-	/**
 	 * Returns a new object of class '<em>S3 Connector</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -110,6 +101,33 @@ public interface ImageFactory extends EFactory {
 	 * @generated
 	 */
 	ImageVariant createImageVariant();
+
+	/**
+	 * Returns a new object of class '<em>Image</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Image</em>'.
+	 * @generated
+	 */
+	Image createImage();
+
+	/**
+	 * Returns a new object of class '<em>Styled Image</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Styled Image</em>'.
+	 * @generated
+	 */
+	StyledImage createStyledImage();
+
+	/**
+	 * Returns a new object of class '<em>Catalog</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Catalog</em>'.
+	 * @generated
+	 */
+	ImageCatalog createImageCatalog();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -18,8 +18,15 @@ import com.google.common.collect.ImmutableList;
  *
  * <!-- begin-model-doc -->
  * Processes using Blitline. The source image must be publicly hosted, for example using S3.
+ * Blitline will use source to get the origin URI, but processing will be done by Blitline itself.
  * 
- * The destination image is directly written into an S3 bucket. Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions
+ * The destination image is directly written into an S3 bucket.
+ * 
+ * You must have an S3 account and have permissions to change the policy on your bucket
+ * For these instructions, you must use the Amazon AWS Console
+ * See: http://www.blitline.com/docs/s3_permissions
+ * 
+ * Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions
  * <!-- end-model-doc -->
  *
  * <p>

@@ -57,7 +57,6 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ImagePackage.IMAGE_CONFIG: return (EObject)createImageConfig();
 			case ImagePackage.DAV_CONNECTOR: return (EObject)createDavConnector();
 			case ImagePackage.S3_CONNECTOR: return (EObject)createS3Connector();
 			case ImagePackage.BLITLINE_TRANSFORMER: return (EObject)createBlitlineTransformer();
@@ -67,6 +66,9 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 			case ImagePackage.RESIZE_TO_FIT: return (EObject)createResizeToFit();
 			case ImagePackage.RESIZE_TO_FILL: return (EObject)createResizeToFill();
 			case ImagePackage.IMAGE_VARIANT: return (EObject)createImageVariant();
+			case ImagePackage.IMAGE: return (EObject)createImage();
+			case ImagePackage.STYLED_IMAGE: return (EObject)createStyledImage();
+			case ImagePackage.IMAGE_CATALOG: return (EObject)createImageCatalog();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -100,16 +102,6 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ImageConfig createImageConfig() {
-		ImageConfigImpl imageConfig = new ImageConfigImpl();
-		return imageConfig;
 	}
 
 	/**
@@ -200,6 +192,36 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	public ImageVariant createImageVariant() {
 		ImageVariantImpl imageVariant = new ImageVariantImpl();
 		return imageVariant;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Image createImage() {
+		ImageImpl image = new ImageImpl();
+		return image;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StyledImage createStyledImage() {
+		StyledImageImpl styledImage = new StyledImageImpl();
+		return styledImage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageCatalog createImageCatalog() {
+		ImageCatalogImpl imageCatalog = new ImageCatalogImpl();
+		return imageCatalog;
 	}
 
 	/**

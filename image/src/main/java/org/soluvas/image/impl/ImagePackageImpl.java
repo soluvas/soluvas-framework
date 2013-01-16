@@ -13,7 +13,10 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.image.BlitlineTransformer;
-import org.soluvas.image.ImageConfig;
+import org.soluvas.image.DavConnector;
+import org.soluvas.image.DimensionLike;
+import org.soluvas.image.Image;
+import org.soluvas.image.ImageCatalog;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImageManager;
@@ -25,10 +28,9 @@ import org.soluvas.image.ImageVariant;
 import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.ResizeToFit;
 import org.soluvas.image.S3Connector;
+import org.soluvas.image.StyledImage;
 import org.soluvas.image.ThumbnailatorTransformer;
 import org.soluvas.image.UploadedImage;
-import org.soluvas.image.DavConnector;
-import org.soluvas.image.DimensionLike;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,13 +39,6 @@ import org.soluvas.image.DimensionLike;
  * @generated
  */
 public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass imageConfigEClass = null;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -138,6 +133,27 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass imageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass styledImageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imageCatalogEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum imageTransformTypeEEnum = null;
 
 	/**
@@ -210,26 +226,6 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getImageConfig() {
-		return imageConfigEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getImageConfig_PublicUri() {
-		return (EAttribute)imageConfigEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getImageConnector() {
 		return imageConnectorEClass;
 	}
@@ -239,6 +235,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getImageConnector_HiUriTemplate() {
 		return (EAttribute)imageConnectorEClass.getEStructuralFeatures().get(0);
 	}
@@ -248,6 +245,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getImageConnector_LoUriTemplate() {
 		return (EAttribute)imageConnectorEClass.getEStructuralFeatures().get(1);
 	}
@@ -277,6 +275,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getBlitlineTransformer_ApplicationId() {
 		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(0);
 	}
@@ -286,6 +285,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getBlitlineTransformer_Bucket() {
 		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(1);
 	}
@@ -295,6 +295,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getBlitlineTransformer_Prefix() {
 		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(2);
 	}
@@ -304,6 +305,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getBlitlineTransformer_CdnAlias() {
 		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(3);
 	}
@@ -313,6 +315,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getBlitlineTransformer_KeyTemplate() {
 		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(4);
 	}
@@ -322,6 +325,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getBlitlineTransformer_UriTemplate() {
 		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(5);
 	}
@@ -331,6 +335,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getBlitlineTransformer_OriginUriTemplate() {
 		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(6);
 	}
@@ -340,6 +345,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDavConnector() {
 		return davConnectorEClass;
 	}
@@ -352,15 +358,6 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	@Override
 	public EClass getImageTransformer() {
 		return imageTransformerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getImageTransformer_Source() {
-		return (EReference)imageTransformerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -418,6 +415,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUploadedImage_StyleCode() {
 		return (EAttribute)uploadedImageEClass.getEStructuralFeatures().get(2);
 	}
@@ -427,6 +425,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUploadedImage_StyleVariant() {
 		return (EAttribute)uploadedImageEClass.getEStructuralFeatures().get(3);
 	}
@@ -436,6 +435,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUploadedImage_Extension() {
 		return (EAttribute)uploadedImageEClass.getEStructuralFeatures().get(4);
 	}
@@ -445,6 +445,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUploadedImage_Size() {
 		return (EAttribute)uploadedImageEClass.getEStructuralFeatures().get(5);
 	}
@@ -454,6 +455,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUploadedImage_Width() {
 		return (EAttribute)uploadedImageEClass.getEStructuralFeatures().get(6);
 	}
@@ -463,6 +465,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUploadedImage_Height() {
 		return (EAttribute)uploadedImageEClass.getEStructuralFeatures().get(7);
 	}
@@ -472,6 +475,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getImageManager() {
 		return imageManagerEClass;
 	}
@@ -481,6 +485,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getImageTransform() {
 		return imageTransformEClass;
 	}
@@ -490,6 +495,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getResizeToFit() {
 		return resizeToFitEClass;
 	}
@@ -499,6 +505,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getResizeToFill() {
 		return resizeToFillEClass;
 	}
@@ -508,6 +515,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getResizeToFill_Gravity() {
 		return (EAttribute)resizeToFillEClass.getEStructuralFeatures().get(0);
 	}
@@ -517,6 +525,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getResizeToFill_OnlyShrinkLarger() {
 		return (EAttribute)resizeToFillEClass.getEStructuralFeatures().get(1);
 	}
@@ -526,6 +535,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDimensionLike() {
 		return dimensionLikeEClass;
 	}
@@ -535,6 +545,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDimensionLike_Width() {
 		return (EAttribute)dimensionLikeEClass.getEStructuralFeatures().get(0);
 	}
@@ -544,6 +555,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDimensionLike_Height() {
 		return (EAttribute)dimensionLikeEClass.getEStructuralFeatures().get(1);
 	}
@@ -553,6 +565,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getImageVariant() {
 		return imageVariantEClass;
 	}
@@ -562,6 +575,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getImageVariant_StyleCode() {
 		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(0);
 	}
@@ -571,6 +585,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getImageVariant_StyleVariant() {
 		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(1);
 	}
@@ -580,6 +595,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getImageVariant_Extension() {
 		return (EAttribute)imageVariantEClass.getEStructuralFeatures().get(2);
 	}
@@ -589,6 +605,243 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EClass getImage() {
+		return imageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getImage_Styles() {
+		return (EReference)imageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getImage_SchemaVersion() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getImage_Uri() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getImage_FileName() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getImage_ContentType() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getImage_Size() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getImage_Created() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getImage_OriginUri() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getImage_Extension() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImage_LinkedFile() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImage_OriginalFile() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getStyledImage() {
+		return styledImageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getStyledImage_SchemaVersion() {
+		return (EAttribute)styledImageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getStyledImage_Code() {
+		return (EAttribute)styledImageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getStyledImage_Uri() {
+		return (EAttribute)styledImageEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getStyledImage_Size() {
+		return (EAttribute)styledImageEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getStyledImage_Variant() {
+		return (EAttribute)styledImageEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getStyledImage_Extension() {
+		return (EAttribute)styledImageEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getStyledImage_OriginUri() {
+		return (EAttribute)styledImageEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getStyledImage_ContentType() {
+		return (EAttribute)styledImageEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStyledImage_LinkedFile() {
+		return (EAttribute)styledImageEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getImageCatalog() {
+		return imageCatalogEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getImageCatalog_Images() {
+		return (EReference)imageCatalogEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getImageTransformType() {
 		return imageTransformTypeEEnum;
 	}
@@ -622,9 +875,6 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		imageConfigEClass = createEClass(IMAGE_CONFIG);
-		createEAttribute(imageConfigEClass, IMAGE_CONFIG__PUBLIC_URI);
-
 		imageConnectorEClass = createEClass(IMAGE_CONNECTOR);
 		createEAttribute(imageConnectorEClass, IMAGE_CONNECTOR__HI_URI_TEMPLATE);
 		createEAttribute(imageConnectorEClass, IMAGE_CONNECTOR__LO_URI_TEMPLATE);
@@ -634,7 +884,6 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		s3ConnectorEClass = createEClass(S3_CONNECTOR);
 
 		imageTransformerEClass = createEClass(IMAGE_TRANSFORMER);
-		createEReference(imageTransformerEClass, IMAGE_TRANSFORMER__SOURCE);
 
 		blitlineTransformerEClass = createEClass(BLITLINE_TRANSFORMER);
 		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__APPLICATION_ID);
@@ -676,6 +925,33 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		createEAttribute(imageVariantEClass, IMAGE_VARIANT__STYLE_CODE);
 		createEAttribute(imageVariantEClass, IMAGE_VARIANT__STYLE_VARIANT);
 		createEAttribute(imageVariantEClass, IMAGE_VARIANT__EXTENSION);
+
+		imageEClass = createEClass(IMAGE);
+		createEReference(imageEClass, IMAGE__STYLES);
+		createEAttribute(imageEClass, IMAGE__SCHEMA_VERSION);
+		createEAttribute(imageEClass, IMAGE__URI);
+		createEAttribute(imageEClass, IMAGE__FILE_NAME);
+		createEAttribute(imageEClass, IMAGE__CONTENT_TYPE);
+		createEAttribute(imageEClass, IMAGE__SIZE);
+		createEAttribute(imageEClass, IMAGE__CREATED);
+		createEAttribute(imageEClass, IMAGE__ORIGIN_URI);
+		createEAttribute(imageEClass, IMAGE__EXTENSION);
+		createEAttribute(imageEClass, IMAGE__LINKED_FILE);
+		createEAttribute(imageEClass, IMAGE__ORIGINAL_FILE);
+
+		styledImageEClass = createEClass(STYLED_IMAGE);
+		createEAttribute(styledImageEClass, STYLED_IMAGE__SCHEMA_VERSION);
+		createEAttribute(styledImageEClass, STYLED_IMAGE__CODE);
+		createEAttribute(styledImageEClass, STYLED_IMAGE__URI);
+		createEAttribute(styledImageEClass, STYLED_IMAGE__SIZE);
+		createEAttribute(styledImageEClass, STYLED_IMAGE__VARIANT);
+		createEAttribute(styledImageEClass, STYLED_IMAGE__EXTENSION);
+		createEAttribute(styledImageEClass, STYLED_IMAGE__ORIGIN_URI);
+		createEAttribute(styledImageEClass, STYLED_IMAGE__CONTENT_TYPE);
+		createEAttribute(styledImageEClass, STYLED_IMAGE__LINKED_FILE);
+
+		imageCatalogEClass = createEClass(IMAGE_CATALOG);
+		createEReference(imageCatalogEClass, IMAGE_CATALOG__IMAGES);
 
 		// Create enums
 		imageTransformTypeEEnum = createEEnum(IMAGE_TRANSFORM_TYPE);
@@ -721,11 +997,17 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		resizeToFitEClass.getESuperTypes().add(this.getDimensionLike());
 		resizeToFillEClass.getESuperTypes().add(this.getImageTransform());
 		resizeToFillEClass.getESuperTypes().add(this.getDimensionLike());
+		imageEClass.getESuperTypes().add(theCommonsPackage.getIdentifiable());
+		imageEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
+		imageEClass.getESuperTypes().add(theCommonsPackage.getSchemaVersionable());
+		imageEClass.getESuperTypes().add(theCommonsPackage.getTimestamped());
+		imageEClass.getESuperTypes().add(this.getDimensionLike());
+		styledImageEClass.getESuperTypes().add(theCommonsPackage.getSchemaVersionable());
+		styledImageEClass.getESuperTypes().add(this.getDimensionLike());
+		styledImageEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
+		styledImageEClass.getESuperTypes().add(theCommonsPackage.getTimestamped());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(imageConfigEClass, ImageConfig.class, "ImageConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getImageConfig_PublicUri(), ecorePackage.getEString(), "publicUri", null, 0, 1, ImageConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(imageConnectorEClass, ImageConnector.class, "ImageConnector", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImageConnector_HiUriTemplate(), theEcorePackage.getEString(), "hiUriTemplate", null, 0, 1, ImageConnector.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImageConnector_LoUriTemplate(), theEcorePackage.getEString(), "loUriTemplate", null, 0, 1, ImageConnector.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -777,9 +1059,9 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEOperation(s3ConnectorEClass, null, "destroy", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(imageTransformerEClass, ImageTransformer.class, "ImageTransformer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getImageTransformer_Source(), this.getImageConnector(), null, "source", null, 0, 1, ImageTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(imageTransformerEClass, null, "transform", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageConnector(), "source", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageVariant(), "sourceVariant", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -838,6 +1120,33 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEAttribute(getImageVariant_StyleVariant(), theEcorePackage.getEString(), "styleVariant", null, 0, 1, ImageVariant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImageVariant_Extension(), theEcorePackage.getEString(), "extension", null, 0, 1, ImageVariant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(imageEClass, Image.class, "Image", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getImage_Styles(), this.getStyledImage(), null, "styles", null, 0, -1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_SchemaVersion(), theEcorePackage.getELong(), "schemaVersion", "2", 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_Uri(), theEcorePackage.getEString(), "uri", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_FileName(), theEcorePackage.getEString(), "fileName", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_ContentType(), theEcorePackage.getEString(), "contentType", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_Size(), theEcorePackage.getELongObject(), "size", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_Created(), theCommonsPackage.getDateTime(), "created", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_OriginUri(), theEcorePackage.getEString(), "originUri", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_Extension(), theEcorePackage.getEString(), "extension", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_LinkedFile(), theEcorePackage.getEString(), "linkedFile", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_OriginalFile(), theCommonsPackage.getFile(), "originalFile", null, 0, 1, Image.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(styledImageEClass, StyledImage.class, "StyledImage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStyledImage_SchemaVersion(), theEcorePackage.getELong(), "schemaVersion", "2", 0, 1, StyledImage.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStyledImage_Code(), theEcorePackage.getEString(), "code", null, 0, 1, StyledImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStyledImage_Uri(), theEcorePackage.getEString(), "uri", null, 0, 1, StyledImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStyledImage_Size(), theEcorePackage.getELongObject(), "size", null, 0, 1, StyledImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStyledImage_Variant(), theEcorePackage.getEString(), "variant", null, 0, 1, StyledImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStyledImage_Extension(), theEcorePackage.getEString(), "extension", null, 0, 1, StyledImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStyledImage_OriginUri(), theEcorePackage.getEString(), "originUri", null, 0, 1, StyledImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStyledImage_ContentType(), theEcorePackage.getEString(), "contentType", null, 0, 1, StyledImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStyledImage_LinkedFile(), theEcorePackage.getEString(), "linkedFile", null, 0, 1, StyledImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(imageCatalogEClass, ImageCatalog.class, "ImageCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getImageCatalog_Images(), this.getImage(), null, "images", null, 0, -1, ImageCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(imageTransformTypeEEnum, ImageTransformType.class, "ImageTransformType");
 		addEEnumLiteral(imageTransformTypeEEnum, ImageTransformType.RESIZE_TO_FIT);
@@ -859,12 +1168,6 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 */
 	protected void createGenModelAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/GenModel";		
-		addAnnotation
-		  (imageConfigEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "Image module configuration.\n\nThe URI pattern is hardcoded as folows:\n\nFor normal styles:\n\n* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}.{extension}\n\nFor variant styles: (styleCode is usually \'x\', but can be anything else except \'o\')\n\n* {publicUri}/{namespace}/{styleCode}/{id}_{styleCode}_{variantCode}.{extension}\n\nIn the future, URI pattern (\"template\") should be configurable, based on http://tools.ietf.org/html/rfc6570\nand can be expanded both by server and client scripts.\n\nThe domain name can also be different for each namespace, or even for each styleCode or variantCode.\n"
-		   });		
 		addAnnotation
 		  (imageConnectorEClass.getEOperations().get(0), 
 		   source, 
@@ -917,19 +1220,13 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		  (imageTransformerEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "documentation", "Transform the image and saves it to the configured destination. The mechanism to assign destination is transformer-specific.\nThumbnailator saves it to a file and then uploads it using an ImageConnector. Blitline saves directly to an S3 bucket."
-		   });		
-		addAnnotation
-		  (getImageTransformer_Source(), 
-		   source, 
-		   new String[] {
-			 "documentation", "Source image connector.\n\nThumbnailator will use this to get the origin URI and download the  image, before transforming it locally.\n\nBlitline will use it to get the origin URI, but processing will be done by Blitline itself."
+			 "documentation", "Transform the image and saves it to the configured destination. The mechanism to assign destination is transformer-specific.\nThumbnailator saves it to a file and then uploads it using an ImageConnector. Blitline saves directly to an S3 bucket.\n\nsource shouldn\'t a field, it should be parameter to transform, so we can reuse the same blitline transformer multiple times."
 		   });		
 		addAnnotation
 		  (blitlineTransformerEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Processes using Blitline. The source image must be publicly hosted, for example using S3.\n\nThe destination image is directly written into an S3 bucket. Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions"
+			 "documentation", "Processes using Blitline. The source image must be publicly hosted, for example using S3.\nBlitline will use source to get the origin URI, but processing will be done by Blitline itself.\n\nThe destination image is directly written into an S3 bucket.\n\nYou must have an S3 account and have permissions to change the policy on your bucket\nFor these instructions, you must use the Amazon AWS Console\nSee: http://www.blitline.com/docs/s3_permissions\n\nMake sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions"
 		   });		
 		addAnnotation
 		  (getBlitlineTransformer_CdnAlias(), 
@@ -954,6 +1251,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "URI template for \'lo\' (derived) images, without CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.\n\nVariables are: namespace, styleCode, imageId, styleVariant, ext.\n\nDefault is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"
+		   });		
+		addAnnotation
+		  (thumbnailatorTransformerEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Thumbnailator will use this to get the origin URI and download the  image, before transforming it locally."
 		   });		
 		addAnnotation
 		  (getThumbnailatorTransformer_Destination(), 
@@ -1032,6 +1335,42 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Height of desired image"
+		   });		
+		addAnnotation
+		  (imageEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "The v1 structure is as follows:\n\n\t\t\tdbo.put(\"_id\", imageId);\n\t\t\tdbo.put(\"name\", name); // in v1: Only used for creating/uploading new image. Otherwise it\'s always null.\n\t\t\tdbo.put(\"uri\", originalUri);\n\t\t\tdbo.put(\"fileName\", originalName);\n\t\t\tdbo.put(\"contentType\", contentType);\n\t\t\tdbo.put(\"size\", (int)length);\n\t\t\tfinal Date creationTime = new Date();\n\t\t\tdbo.put(\"created\", creationTime);\n\t\t\tdbo.put(\"styles\", stylesObj);\n- originalFile : transient\n\nv2 adds:\n\n\t\t\tdbo.put(\"name\", name); // in v2: serialized\n\t\t\tdbo.put(\"originUri\", originalOriginUri);\n\t\t\tdbo.put(\"extension\", extension);\n\t\t\tdbo.put(\"creationTime\", creationTime);\n- modificationTime\n- width\n- height\n- linkedFile"
+		   });		
+		addAnnotation
+		  (getImage_Created(), 
+		   source, 
+		   new String[] {
+			 "documentation", "DEPRECATED."
+		   });		
+		addAnnotation
+		  (getImage_LinkedFile(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Image file name, relative to XMI file path inside the export folder or archive file. Only used for XMI data."
+		   });		
+		addAnnotation
+		  (getImage_OriginalFile(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Only used for creating/uploading new image. Otherwise it\'s always null."
+		   });		
+		addAnnotation
+		  (styledImageEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "StyledImage v1 is as follows:\n\n\t\t\t\tbson.put(\"code\", transformed.getStyleCode());\n\t\t\t\tbson.put(\"uri\", transformed.getUri());\n\t\t\t\tbson.put(\"size\", transformed.getSize());\n\t\t\t\tbson.put(\"width\", transformed.getWidth());\n\t\t\t\tbson.put(\"height\", transformed.getHeight());\n\nv2 adds:\n\n\t\t\t\tbson.put(\"className\", StyledImage.class.getName()); // META\n\t\t\t\tbson.put(\"name\", style.getName());\n\t\t\t\tbson.put(\"variant\", transformed.getStyleVariant());\n\t\t\t\tbson.put(\"extension\", transformed.getExtension());\n\t\t\t\tbson.put(\"originUri\", transformed.getOriginUri());\n\t\t\t\tbson.put(\"contentType\", \"image/jpeg\"); // TODO: don\'t hardcode content type\n- creationTime\n- modificationTime\n"
+		   });		
+		addAnnotation
+		  (getStyledImage_LinkedFile(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Image file name, relative to XMI file path inside the export folder or archive file. Only used for XMI data."
 		   });
 	}
 

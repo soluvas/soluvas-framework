@@ -372,7 +372,7 @@ public class MongoImageRepository implements ImageRepository {
 			final Map<ImageTransform, ImageVariant> transforms = transformsBuilder.build();
 			// FIXME: transform and upload
 			log.debug("Transforming {} into {} variants using {}", imageId, transforms.size(), transformer.getClass().getName());
-			final List<UploadedImage> transformeds = transformer.transform(namespace, imageId, sourceVariant, transforms);
+			final List<UploadedImage> transformeds = transformer.transform(connector, namespace, imageId, sourceVariant, transforms);
 			log.info("Got {} transformed images of {} from {}", transformeds.size(), imageId, transformer.getClass().getName());
 
 //			// Upload these thumbnails

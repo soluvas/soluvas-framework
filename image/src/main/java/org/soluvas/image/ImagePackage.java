@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.soluvas.commons.CommonsPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -57,35 +58,6 @@ public interface ImagePackage extends EPackage {
 	ImagePackage eINSTANCE = org.soluvas.image.impl.ImagePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.impl.ImageConfigImpl <em>Config</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.impl.ImageConfigImpl
-	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageConfig()
-	 * @generated
-	 */
-	int IMAGE_CONFIG = 0;
-
-	/**
-	 * The feature id for the '<em><b>Public Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMAGE_CONFIG__PUBLIC_URI = 0;
-
-	/**
-	 * The number of structural features of the '<em>Config</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMAGE_CONFIG_FEATURE_COUNT = 1;
-
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.ImageConnectorImpl <em>Connector</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -93,7 +65,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageConnector()
 	 * @generated
 	 */
-	int IMAGE_CONNECTOR = 1;
+	int IMAGE_CONNECTOR = 0;
 
 	/**
 	 * The feature id for the '<em><b>Hi Uri Template</b></em>' attribute.
@@ -130,7 +102,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getS3Connector()
 	 * @generated
 	 */
-	int S3_CONNECTOR = 3;
+	int S3_CONNECTOR = 2;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTransformer <em>Transformer</em>}' class.
@@ -140,7 +112,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformer()
 	 * @generated
 	 */
-	int IMAGE_TRANSFORMER = 4;
+	int IMAGE_TRANSFORMER = 3;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.BlitlineTransformerImpl <em>Blitline Transformer</em>}' class.
@@ -150,7 +122,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getBlitlineTransformer()
 	 * @generated
 	 */
-	int BLITLINE_TRANSFORMER = 5;
+	int BLITLINE_TRANSFORMER = 4;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.DavConnectorImpl <em>Dav Connector</em>}' class.
@@ -160,7 +132,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getDavConnector()
 	 * @generated
 	 */
-	int DAV_CONNECTOR = 2;
+	int DAV_CONNECTOR = 1;
 
 	/**
 	 * The feature id for the '<em><b>Hi Uri Template</b></em>' attribute.
@@ -217,31 +189,13 @@ public interface ImagePackage extends EPackage {
 	int S3_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMAGE_TRANSFORMER__SOURCE = 0;
-
-	/**
 	 * The number of structural features of the '<em>Transformer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMAGE_TRANSFORMER_FEATURE_COUNT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BLITLINE_TRANSFORMER__SOURCE = IMAGE_TRANSFORMER__SOURCE;
+	int IMAGE_TRANSFORMER_FEATURE_COUNT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Application Id</b></em>' attribute.
@@ -323,16 +277,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getThumbnailatorTransformer()
 	 * @generated
 	 */
-	int THUMBNAILATOR_TRANSFORMER = 6;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int THUMBNAILATOR_TRANSFORMER__SOURCE = IMAGE_TRANSFORMER__SOURCE;
+	int THUMBNAILATOR_TRANSFORMER = 5;
 
 	/**
 	 * The feature id for the '<em><b>Destination</b></em>' reference.
@@ -360,7 +305,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getUploadedImage()
 	 * @generated
 	 */
-	int UPLOADED_IMAGE = 7;
+	int UPLOADED_IMAGE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Uri</b></em>' attribute.
@@ -452,7 +397,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageManager()
 	 * @generated
 	 */
-	int IMAGE_MANAGER = 8;
+	int IMAGE_MANAGER = 7;
 
 	/**
 	 * The number of structural features of the '<em>Manager</em>' class.
@@ -472,7 +417,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransform()
 	 * @generated
 	 */
-	int IMAGE_TRANSFORM = 9;
+	int IMAGE_TRANSFORM = 8;
 
 
 	/**
@@ -492,7 +437,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getResizeToFit()
 	 * @generated
 	 */
-	int RESIZE_TO_FIT = 10;
+	int RESIZE_TO_FIT = 9;
 
 	/**
 	 * The feature id for the '<em><b>Width</b></em>' attribute.
@@ -529,7 +474,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getResizeToFill()
 	 * @generated
 	 */
-	int RESIZE_TO_FILL = 11;
+	int RESIZE_TO_FILL = 10;
 
 	/**
 	 * The feature id for the '<em><b>Width</b></em>' attribute.
@@ -584,7 +529,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getDimensionLike()
 	 * @generated
 	 */
-	int DIMENSION_LIKE = 12;
+	int DIMENSION_LIKE = 11;
 
 	/**
 	 * The feature id for the '<em><b>Width</b></em>' attribute.
@@ -621,7 +566,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageVariant()
 	 * @generated
 	 */
-	int IMAGE_VARIANT = 13;
+	int IMAGE_VARIANT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Style Code</b></em>' attribute.
@@ -660,6 +605,351 @@ public interface ImagePackage extends EPackage {
 	int IMAGE_VARIANT_FEATURE_COUNT = 3;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.ImageImpl <em>Image</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.ImageImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImage()
+	 * @generated
+	 */
+	int IMAGE = 13;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__ID = CommonsPackage.IDENTIFIABLE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__NAME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Creation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__CREATION_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Modification Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__MODIFICATION_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__WIDTH = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Height</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__HEIGHT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Styles</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__STYLES = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Schema Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__SCHEMA_VERSION = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__URI = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__FILE_NAME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Content Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__CONTENT_TYPE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__SIZE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Created</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__CREATED = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Origin Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__ORIGIN_URI = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__EXTENSION = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>Linked File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__LINKED_FILE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 14;
+
+	/**
+	 * The feature id for the '<em><b>Original File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__ORIGINAL_FILE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 15;
+
+	/**
+	 * The number of structural features of the '<em>Image</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FEATURE_COUNT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 16;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.StyledImageImpl <em>Styled Image</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.StyledImageImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getStyledImage()
+	 * @generated
+	 */
+	int STYLED_IMAGE = 14;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__WIDTH = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Height</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__HEIGHT = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__NAME = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Creation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__CREATION_TIME = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Modification Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__MODIFICATION_TIME = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Schema Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__SCHEMA_VERSION = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__CODE = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__URI = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__SIZE = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Variant</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__VARIANT = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__EXTENSION = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Origin Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__ORIGIN_URI = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Content Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__CONTENT_TYPE = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Linked File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE__LINKED_FILE = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 13;
+
+	/**
+	 * The number of structural features of the '<em>Styled Image</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE_FEATURE_COUNT = CommonsPackage.SCHEMA_VERSIONABLE_FEATURE_COUNT + 14;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.ImageCatalogImpl <em>Catalog</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.ImageCatalogImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageCatalog()
+	 * @generated
+	 */
+	int IMAGE_CATALOG = 15;
+
+	/**
+	 * The feature id for the '<em><b>Images</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_CATALOG__IMAGES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Catalog</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_CATALOG_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -667,29 +957,8 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformType()
 	 * @generated
 	 */
-	int IMAGE_TRANSFORM_TYPE = 14;
+	int IMAGE_TRANSFORM_TYPE = 16;
 
-
-	/**
-	 * Returns the meta object for class '{@link org.soluvas.image.ImageConfig <em>Config</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Config</em>'.
-	 * @see org.soluvas.image.ImageConfig
-	 * @generated
-	 */
-	EClass getImageConfig();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageConfig#getPublicUri <em>Public Uri</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Public Uri</em>'.
-	 * @see org.soluvas.image.ImageConfig#getPublicUri()
-	 * @see #getImageConfig()
-	 * @generated
-	 */
-	EAttribute getImageConfig_PublicUri();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.ImageConnector <em>Connector</em>}'.
@@ -839,17 +1108,6 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getImageTransformer();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.soluvas.image.ImageTransformer#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see org.soluvas.image.ImageTransformer#getSource()
-	 * @see #getImageTransformer()
-	 * @generated
-	 */
-	EReference getImageTransformer_Source();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.ThumbnailatorTransformer <em>Thumbnailator Transformer</em>}'.
@@ -1108,6 +1366,267 @@ public interface ImagePackage extends EPackage {
 	EAttribute getImageVariant_Extension();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.Image <em>Image</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Image</em>'.
+	 * @see org.soluvas.image.Image
+	 * @generated
+	 */
+	EClass getImage();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.soluvas.image.Image#getStyles <em>Styles</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Styles</em>'.
+	 * @see org.soluvas.image.Image#getStyles()
+	 * @see #getImage()
+	 * @generated
+	 */
+	EReference getImage_Styles();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.Image#getSchemaVersion <em>Schema Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Schema Version</em>'.
+	 * @see org.soluvas.image.Image#getSchemaVersion()
+	 * @see #getImage()
+	 * @generated
+	 */
+	EAttribute getImage_SchemaVersion();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.Image#getUri <em>Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uri</em>'.
+	 * @see org.soluvas.image.Image#getUri()
+	 * @see #getImage()
+	 * @generated
+	 */
+	EAttribute getImage_Uri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.Image#getFileName <em>File Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>File Name</em>'.
+	 * @see org.soluvas.image.Image#getFileName()
+	 * @see #getImage()
+	 * @generated
+	 */
+	EAttribute getImage_FileName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.Image#getContentType <em>Content Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Content Type</em>'.
+	 * @see org.soluvas.image.Image#getContentType()
+	 * @see #getImage()
+	 * @generated
+	 */
+	EAttribute getImage_ContentType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.Image#getSize <em>Size</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Size</em>'.
+	 * @see org.soluvas.image.Image#getSize()
+	 * @see #getImage()
+	 * @generated
+	 */
+	EAttribute getImage_Size();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.Image#getCreated <em>Created</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Created</em>'.
+	 * @see org.soluvas.image.Image#getCreated()
+	 * @see #getImage()
+	 * @generated
+	 */
+	EAttribute getImage_Created();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.Image#getOriginUri <em>Origin Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Origin Uri</em>'.
+	 * @see org.soluvas.image.Image#getOriginUri()
+	 * @see #getImage()
+	 * @generated
+	 */
+	EAttribute getImage_OriginUri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.Image#getExtension <em>Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Extension</em>'.
+	 * @see org.soluvas.image.Image#getExtension()
+	 * @see #getImage()
+	 * @generated
+	 */
+	EAttribute getImage_Extension();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.Image#getLinkedFile <em>Linked File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Linked File</em>'.
+	 * @see org.soluvas.image.Image#getLinkedFile()
+	 * @see #getImage()
+	 * @generated
+	 */
+	EAttribute getImage_LinkedFile();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.Image#getOriginalFile <em>Original File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Original File</em>'.
+	 * @see org.soluvas.image.Image#getOriginalFile()
+	 * @see #getImage()
+	 * @generated
+	 */
+	EAttribute getImage_OriginalFile();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.StyledImage <em>Styled Image</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Styled Image</em>'.
+	 * @see org.soluvas.image.StyledImage
+	 * @generated
+	 */
+	EClass getStyledImage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.StyledImage#getSchemaVersion <em>Schema Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Schema Version</em>'.
+	 * @see org.soluvas.image.StyledImage#getSchemaVersion()
+	 * @see #getStyledImage()
+	 * @generated
+	 */
+	EAttribute getStyledImage_SchemaVersion();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.StyledImage#getCode <em>Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Code</em>'.
+	 * @see org.soluvas.image.StyledImage#getCode()
+	 * @see #getStyledImage()
+	 * @generated
+	 */
+	EAttribute getStyledImage_Code();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.StyledImage#getUri <em>Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uri</em>'.
+	 * @see org.soluvas.image.StyledImage#getUri()
+	 * @see #getStyledImage()
+	 * @generated
+	 */
+	EAttribute getStyledImage_Uri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.StyledImage#getSize <em>Size</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Size</em>'.
+	 * @see org.soluvas.image.StyledImage#getSize()
+	 * @see #getStyledImage()
+	 * @generated
+	 */
+	EAttribute getStyledImage_Size();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.StyledImage#getVariant <em>Variant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Variant</em>'.
+	 * @see org.soluvas.image.StyledImage#getVariant()
+	 * @see #getStyledImage()
+	 * @generated
+	 */
+	EAttribute getStyledImage_Variant();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.StyledImage#getExtension <em>Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Extension</em>'.
+	 * @see org.soluvas.image.StyledImage#getExtension()
+	 * @see #getStyledImage()
+	 * @generated
+	 */
+	EAttribute getStyledImage_Extension();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.StyledImage#getOriginUri <em>Origin Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Origin Uri</em>'.
+	 * @see org.soluvas.image.StyledImage#getOriginUri()
+	 * @see #getStyledImage()
+	 * @generated
+	 */
+	EAttribute getStyledImage_OriginUri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.StyledImage#getContentType <em>Content Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Content Type</em>'.
+	 * @see org.soluvas.image.StyledImage#getContentType()
+	 * @see #getStyledImage()
+	 * @generated
+	 */
+	EAttribute getStyledImage_ContentType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.StyledImage#getLinkedFile <em>Linked File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Linked File</em>'.
+	 * @see org.soluvas.image.StyledImage#getLinkedFile()
+	 * @see #getStyledImage()
+	 * @generated
+	 */
+	EAttribute getStyledImage_LinkedFile();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.ImageCatalog <em>Catalog</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Catalog</em>'.
+	 * @see org.soluvas.image.ImageCatalog
+	 * @generated
+	 */
+	EClass getImageCatalog();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.soluvas.image.ImageCatalog#getImages <em>Images</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Images</em>'.
+	 * @see org.soluvas.image.ImageCatalog#getImages()
+	 * @see #getImageCatalog()
+	 * @generated
+	 */
+	EReference getImageCatalog_Images();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1139,24 +1658,6 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
-		/**
-		 * The meta object literal for the '{@link org.soluvas.image.impl.ImageConfigImpl <em>Config</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.soluvas.image.impl.ImageConfigImpl
-		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageConfig()
-		 * @generated
-		 */
-		EClass IMAGE_CONFIG = eINSTANCE.getImageConfig();
-
-		/**
-		 * The meta object literal for the '<em><b>Public Uri</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMAGE_CONFIG__PUBLIC_URI = eINSTANCE.getImageConfig_PublicUri();
-
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.ImageConnectorImpl <em>Connector</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -1278,14 +1779,6 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EClass IMAGE_TRANSFORMER = eINSTANCE.getImageTransformer();
-
-		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference IMAGE_TRANSFORMER__SOURCE = eINSTANCE.getImageTransformer_Source();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.ThumbnailatorTransformerImpl <em>Thumbnailator Transformer</em>}' class.
@@ -1494,6 +1987,204 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute IMAGE_VARIANT__EXTENSION = eINSTANCE.getImageVariant_Extension();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.ImageImpl <em>Image</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.ImageImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImage()
+		 * @generated
+		 */
+		EClass IMAGE = eINSTANCE.getImage();
+
+		/**
+		 * The meta object literal for the '<em><b>Styles</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IMAGE__STYLES = eINSTANCE.getImage_Styles();
+
+		/**
+		 * The meta object literal for the '<em><b>Schema Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE__SCHEMA_VERSION = eINSTANCE.getImage_SchemaVersion();
+
+		/**
+		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE__URI = eINSTANCE.getImage_Uri();
+
+		/**
+		 * The meta object literal for the '<em><b>File Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE__FILE_NAME = eINSTANCE.getImage_FileName();
+
+		/**
+		 * The meta object literal for the '<em><b>Content Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE__CONTENT_TYPE = eINSTANCE.getImage_ContentType();
+
+		/**
+		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE__SIZE = eINSTANCE.getImage_Size();
+
+		/**
+		 * The meta object literal for the '<em><b>Created</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE__CREATED = eINSTANCE.getImage_Created();
+
+		/**
+		 * The meta object literal for the '<em><b>Origin Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE__ORIGIN_URI = eINSTANCE.getImage_OriginUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Extension</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE__EXTENSION = eINSTANCE.getImage_Extension();
+
+		/**
+		 * The meta object literal for the '<em><b>Linked File</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE__LINKED_FILE = eINSTANCE.getImage_LinkedFile();
+
+		/**
+		 * The meta object literal for the '<em><b>Original File</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE__ORIGINAL_FILE = eINSTANCE.getImage_OriginalFile();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.StyledImageImpl <em>Styled Image</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.StyledImageImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getStyledImage()
+		 * @generated
+		 */
+		EClass STYLED_IMAGE = eINSTANCE.getStyledImage();
+
+		/**
+		 * The meta object literal for the '<em><b>Schema Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STYLED_IMAGE__SCHEMA_VERSION = eINSTANCE.getStyledImage_SchemaVersion();
+
+		/**
+		 * The meta object literal for the '<em><b>Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STYLED_IMAGE__CODE = eINSTANCE.getStyledImage_Code();
+
+		/**
+		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STYLED_IMAGE__URI = eINSTANCE.getStyledImage_Uri();
+
+		/**
+		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STYLED_IMAGE__SIZE = eINSTANCE.getStyledImage_Size();
+
+		/**
+		 * The meta object literal for the '<em><b>Variant</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STYLED_IMAGE__VARIANT = eINSTANCE.getStyledImage_Variant();
+
+		/**
+		 * The meta object literal for the '<em><b>Extension</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STYLED_IMAGE__EXTENSION = eINSTANCE.getStyledImage_Extension();
+
+		/**
+		 * The meta object literal for the '<em><b>Origin Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STYLED_IMAGE__ORIGIN_URI = eINSTANCE.getStyledImage_OriginUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Content Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STYLED_IMAGE__CONTENT_TYPE = eINSTANCE.getStyledImage_ContentType();
+
+		/**
+		 * The meta object literal for the '<em><b>Linked File</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STYLED_IMAGE__LINKED_FILE = eINSTANCE.getStyledImage_LinkedFile();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.ImageCatalogImpl <em>Catalog</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.ImageCatalogImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageCatalog()
+		 * @generated
+		 */
+		EClass IMAGE_CATALOG = eINSTANCE.getImageCatalog();
+
+		/**
+		 * The meta object literal for the '<em><b>Images</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IMAGE_CATALOG__IMAGES = eINSTANCE.getImageCatalog_Images();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.

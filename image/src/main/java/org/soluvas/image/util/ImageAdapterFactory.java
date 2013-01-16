@@ -9,6 +9,11 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.soluvas.commons.Identifiable;
+import org.soluvas.commons.NameContainer;
+import org.soluvas.commons.Nameable;
+import org.soluvas.commons.SchemaVersionable;
+import org.soluvas.commons.Timestamped;
 import org.soluvas.image.*;
 
 /**
@@ -68,10 +73,6 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	protected ImageSwitch<Adapter> modelSwitch =
 		new ImageSwitch<Adapter>() {
 			@Override
-			public Adapter caseImageConfig(ImageConfig object) {
-				return createImageConfigAdapter();
-			}
-			@Override
 			public Adapter caseImageConnector(ImageConnector object) {
 				return createImageConnectorAdapter();
 			}
@@ -124,6 +125,38 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 				return createImageVariantAdapter();
 			}
 			@Override
+			public Adapter caseImage(Image object) {
+				return createImageAdapter();
+			}
+			@Override
+			public Adapter caseStyledImage(StyledImage object) {
+				return createStyledImageAdapter();
+			}
+			@Override
+			public Adapter caseImageCatalog(ImageCatalog object) {
+				return createImageCatalogAdapter();
+			}
+			@Override
+			public Adapter caseIdentifiable(Identifiable object) {
+				return createIdentifiableAdapter();
+			}
+			@Override
+			public Adapter caseNameable(Nameable object) {
+				return createNameableAdapter();
+			}
+			@Override
+			public Adapter caseNameContainer(NameContainer object) {
+				return createNameContainerAdapter();
+			}
+			@Override
+			public Adapter caseSchemaVersionable(SchemaVersionable object) {
+				return createSchemaVersionableAdapter();
+			}
+			@Override
+			public Adapter caseTimestamped(Timestamped object) {
+				return createTimestampedAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -142,20 +175,6 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.image.ImageConfig <em>Config</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.soluvas.image.ImageConfig
-	 * @generated
-	 */
-	public Adapter createImageConfigAdapter() {
-		return null;
-	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.soluvas.image.ImageConnector <em>Connector</em>}'.
@@ -336,6 +355,118 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImageVariantAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.Image <em>Image</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.Image
+	 * @generated
+	 */
+	public Adapter createImageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.StyledImage <em>Styled Image</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.StyledImage
+	 * @generated
+	 */
+	public Adapter createStyledImageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.ImageCatalog <em>Catalog</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.ImageCatalog
+	 * @generated
+	 */
+	public Adapter createImageCatalogAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Identifiable
+	 * @generated
+	 */
+	public Adapter createIdentifiableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Nameable <em>Nameable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Nameable
+	 * @generated
+	 */
+	public Adapter createNameableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.NameContainer <em>Name Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.NameContainer
+	 * @generated
+	 */
+	public Adapter createNameContainerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.SchemaVersionable <em>Schema Versionable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.SchemaVersionable
+	 * @generated
+	 */
+	public Adapter createSchemaVersionableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Timestamped <em>Timestamped</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Timestamped
+	 * @generated
+	 */
+	public Adapter createTimestampedAdapter() {
 		return null;
 	}
 
