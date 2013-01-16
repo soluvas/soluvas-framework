@@ -121,6 +121,24 @@ public interface CommonsFactory extends EFactory {
 	 */
 	CategoryInfo createCategoryInfo();
 
+	/**
+	 * Returns a new object of class '<em>Shell Progress Monitor</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Shell Progress Monitor</em>'.
+	 * @generated
+	 */
+	ShellProgressMonitor createShellProgressMonitor();
+
+	/**
+	 * Returns a new object of class '<em>Progress Monitor Wrapper</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Progress Monitor Wrapper</em>'.
+	 * @generated
+	 */
+	ProgressMonitorWrapper createProgressMonitorWrapper();
+
 	PersonInfo createPersonInfo(String id, String slug, String name, String photoId, Gender gender);
 
 	/**

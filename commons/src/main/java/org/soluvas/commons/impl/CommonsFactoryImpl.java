@@ -104,6 +104,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 			case CommonsPackage.ADDED_MANY: return (EObject)createAddedMany();
 			case CommonsPackage.REMOVED_MANY: return (EObject)createRemovedMany();
 			case CommonsPackage.CATEGORY_INFO: return (EObject)createCategoryInfo();
+			case CommonsPackage.SHELL_PROGRESS_MONITOR: return (EObject)createShellProgressMonitor();
+			case CommonsPackage.PROGRESS_MONITOR_WRAPPER: return (EObject)createProgressMonitorWrapper();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -125,6 +127,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createEClassStatusFromString(eDataType, initialValue);
 			case CommonsPackage.JAVA_CLASS_STATUS:
 				return createJavaClassStatusFromString(eDataType, initialValue);
+			case CommonsPackage.PROGRESS_STATUS:
+				return createProgressStatusFromString(eDataType, initialValue);
 			case CommonsPackage.DATE_TIME:
 				return createDateTimeFromString(eDataType, initialValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -184,6 +188,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertEClassStatusToString(eDataType, instanceValue);
 			case CommonsPackage.JAVA_CLASS_STATUS:
 				return convertJavaClassStatusToString(eDataType, instanceValue);
+			case CommonsPackage.PROGRESS_STATUS:
+				return convertProgressStatusToString(eDataType, instanceValue);
 			case CommonsPackage.DATE_TIME:
 				return convertDateTimeToString(eDataType, instanceValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -359,6 +365,26 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ShellProgressMonitor createShellProgressMonitor() {
+		ShellProgressMonitorImpl shellProgressMonitor = new ShellProgressMonitorImpl();
+		return shellProgressMonitor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ProgressMonitorWrapper createProgressMonitorWrapper() {
+		ProgressMonitorWrapperImpl progressMonitorWrapper = new ProgressMonitorWrapperImpl();
+		return progressMonitorWrapper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ResourceType createResourceTypeFromString(EDataType eDataType, String initialValue) {
 		ResourceType result = ResourceType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -431,6 +457,26 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertJavaClassStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ProgressStatus createProgressStatusFromString(EDataType eDataType, String initialValue) {
+		ProgressStatus result = ProgressStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertProgressStatusToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

@@ -2,13 +2,17 @@
  */
 package org.soluvas.image.impl;
 
+import java.io.File;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Gender;
+import org.soluvas.image.FileExport;
 import org.soluvas.image.ImageManager;
 import org.soluvas.image.ImagePackage;
+import org.soluvas.image.store.ImageRepository;
 
 /**
  * <!-- begin-user-doc -->
@@ -61,6 +65,15 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		default:
 			return unknownDefaultPhotoId;
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public long export(ImageRepository imageRepo, boolean metadata, FileExport files, File destFolder) {
+		
 	}
 
 } //ImageManagerImpl

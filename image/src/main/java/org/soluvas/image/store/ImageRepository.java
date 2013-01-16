@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.image.ImageConnector;
 
 public interface ImageRepository {
@@ -138,9 +139,9 @@ public interface ImageRepository {
 	 * For each image, redownloads the original file from WebDAV repository, reprocesses each image style, and re-uploads the processed images to WebDAV repository.
 	 * @param ids
 	 */
-	public abstract void reprocess(Iterable<String> ids);
+	public abstract void reprocess(Iterable<String> ids, ProgressMonitor pm);
 
-	public abstract void reprocessAll();
+	public abstract void reprocessAll(ProgressMonitor pm);
 
 	public abstract String getNamespace();
 
@@ -155,9 +156,9 @@ public interface ImageRepository {
 	//	}
 	public abstract void setSystem(Object system);
 
-	public abstract void updateUriAll();
+	public abstract void updateUriAll(ProgressMonitor monitor);
 
-	public abstract void updateUri(Collection<String> imageIds);
+	public abstract void updateUri(Collection<String> imageIds, ProgressMonitor monitor);
 	
 	public String getHiUriTemplate();
 	public String getLoUriTemplate();

@@ -75,6 +75,9 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	
 	public DavConnectorImpl(String davUri, String publicUri) {
 		super();
+		this.davUri = davUri;
+		this.publicUri = publicUri;
+		
 		// Sanity checks
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(davUri), "DAV URI cannot be empty");
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(publicUri), "Public URI cannot be empty");

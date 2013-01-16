@@ -177,6 +177,15 @@
     <eOperations name="getDefaultPhotoId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
       <eParameters name="gender" eType="ecore:EEnum ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Gender"/>
     </eOperations>
+    <eOperations name="export" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Downloads all images and exports them to a folder."/>
+      </eAnnotations>
+      <eParameters name="imageRepo" eType="#//ImageRepository"/>
+      <eParameters name="metadata" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+      <eParameters name="files" eType="#//FileExport"/>
+      <eParameters name="destFolder" eType="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//File"/>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ImageTransformType">
     <eLiterals name="resize_to_fit">
@@ -278,4 +287,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="images" upperBound="-1"
         eType="#//Image" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FileExport">
+    <eLiterals name="original"/>
+    <eLiterals name="style" value="1"/>
+    <eLiterals name="all" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ImageRepository" instanceClassName="org.soluvas.image.store.ImageRepository"
+      serializable="false"/>
 </ecore:EPackage>

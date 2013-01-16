@@ -64,11 +64,15 @@ import org.soluvas.commons.Parentable;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.PhotoIdContainer;
 import org.soluvas.commons.Positionable;
+import org.soluvas.commons.ProgressMonitor;
+import org.soluvas.commons.ProgressMonitorWrapper;
+import org.soluvas.commons.ProgressStatus;
 import org.soluvas.commons.Removed;
 import org.soluvas.commons.RemovedMany;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.SchemaVersionable;
+import org.soluvas.commons.ShellProgressMonitor;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.commons.Timestamped;
 
@@ -327,6 +331,27 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass progressMonitorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass shellProgressMonitorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass progressMonitorWrapperEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum resourceTypeEEnum = null;
 
 	/**
@@ -349,6 +374,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EEnum javaClassStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum progressStatusEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1352,6 +1384,60 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getProgressMonitor() {
+		return progressMonitorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProgressMonitor_Canceled() {
+		return (EAttribute)progressMonitorEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProgressMonitor_TaskName() {
+		return (EAttribute)progressMonitorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getShellProgressMonitor() {
+		return shellProgressMonitorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getProgressMonitorWrapper() {
+		return progressMonitorWrapperEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProgressMonitorWrapper_Delegate() {
+		return (EReference)progressMonitorWrapperEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -1385,6 +1471,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	@Override
 	public EEnum getJavaClassStatus() {
 		return javaClassStatusEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getProgressStatus() {
+		return progressStatusEEnum;
 	}
 
 	/**
@@ -1727,11 +1822,21 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		categoryInfoEClass = createEClass(CATEGORY_INFO);
 		createEReference(categoryInfoEClass, CATEGORY_INFO__PARENTS);
 
+		progressMonitorEClass = createEClass(PROGRESS_MONITOR);
+		createEAttribute(progressMonitorEClass, PROGRESS_MONITOR__CANCELED);
+		createEAttribute(progressMonitorEClass, PROGRESS_MONITOR__TASK_NAME);
+
+		shellProgressMonitorEClass = createEClass(SHELL_PROGRESS_MONITOR);
+
+		progressMonitorWrapperEClass = createEClass(PROGRESS_MONITOR_WRAPPER);
+		createEReference(progressMonitorWrapperEClass, PROGRESS_MONITOR_WRAPPER__DELEGATE);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
 		eClassStatusEEnum = createEEnum(ECLASS_STATUS);
 		javaClassStatusEEnum = createEEnum(JAVA_CLASS_STATUS);
+		progressStatusEEnum = createEEnum(PROGRESS_STATUS);
 
 		// Create data types
 		dateTimeEDataType = createEDataType(DATE_TIME);
@@ -1912,6 +2017,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		g2 = createEGenericType(this.getCategoryInfo());
 		g1.getETypeArguments().add(g2);
 		categoryInfoEClass.getEGenericSuperTypes().add(g1);
+		shellProgressMonitorEClass.getESuperTypes().add(this.getProgressMonitor());
+		progressMonitorWrapperEClass.getESuperTypes().add(this.getProgressMonitor());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2066,6 +2173,37 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEClass(categoryInfoEClass, CategoryInfo.class, "CategoryInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCategoryInfo_Parents(), this.getCategoryInfo(), null, "parents", null, 0, -1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(progressMonitorEClass, ProgressMonitor.class, "ProgressMonitor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getProgressMonitor_Canceled(), theEcorePackage.getEBoolean(), "canceled", null, 0, 1, ProgressMonitor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProgressMonitor_TaskName(), theEcorePackage.getEString(), "taskName", null, 0, 1, ProgressMonitor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(progressMonitorEClass, null, "beginTask", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEInt(), "totalWork", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(progressMonitorEClass, null, "done", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(progressMonitorEClass, null, "internalWorked", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEDouble(), "work", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(progressMonitorEClass, null, "subTask", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(progressMonitorEClass, null, "worked", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEInt(), "work", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(progressMonitorEClass, null, "done", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getProgressStatus(), "status", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(progressMonitorEClass, null, "worked", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEInt(), "work", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getProgressStatus(), "status", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(shellProgressMonitorEClass, ShellProgressMonitor.class, "ShellProgressMonitor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(progressMonitorWrapperEClass, ProgressMonitorWrapper.class, "ProgressMonitorWrapper", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getProgressMonitorWrapper_Delegate(), this.getProgressMonitor(), null, "delegate", null, 0, 1, ProgressMonitorWrapper.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.BUNDLE);
@@ -2083,6 +2221,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEEnum(javaClassStatusEEnum, JavaClassStatus.class, "JavaClassStatus");
 		addEEnumLiteral(javaClassStatusEEnum, JavaClassStatus.UNRESOLVED);
 		addEEnumLiteral(javaClassStatusEEnum, JavaClassStatus.RESOLVED);
+
+		initEEnum(progressStatusEEnum, ProgressStatus.class, "ProgressStatus");
+		addEEnumLiteral(progressStatusEEnum, ProgressStatus.OK);
+		addEEnumLiteral(progressStatusEEnum, ProgressStatus.ERROR);
+		addEEnumLiteral(progressStatusEEnum, ProgressStatus.WARNING);
+		addEEnumLiteral(progressStatusEEnum, ProgressStatus.DELETED);
+		addEEnumLiteral(progressStatusEEnum, ProgressStatus.SKIPPED);
 
 		// Initialize data types
 		initEDataType(dateTimeEDataType, DateTime.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -2469,6 +2614,84 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Used to help query performance. And also to display breadcrumbs."
+		   });		
+		addAnnotation
+		  (progressMonitorEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", " * The <code>IProgressMonitor</code> interface is implemented\n * by objects that monitor the progress of an activity; the methods\n * in this interface are invoked by code that performs the activity.\n * <p>\n * All activity is broken down into a linear sequence of tasks against\n * which progress is reported. When a task begins, a <code>beginTask(String, int)\n * </code> notification is reported, followed by any number and mixture of \n * progress reports (<code>worked()</code>) and subtask notifications \n * (<code>subTask(String)</code>).  When the task is eventually completed, a \n * <code>done()</code> notification is reported.  After the <code>done()</code>\n * notification, the progress monitor cannot be reused;  i.e., <code>\n * beginTask(String, int)</code> cannot be called again after the call to \n * <code>done()</code>.\n * </p>\n * <p>\n * A request to cancel an operation can be signaled using the \n * <code>setCanceled</code> method.  Operations taking a progress\n * monitor are expected to poll the monitor (using <code>isCanceled</code>)\n * periodically and abort at their earliest convenience.  Operation can however \n * choose to ignore cancelation requests.\n * </p>\n * <p>\n * Since notification is synchronous with the activity itself, the listener should \n * provide a fast and robust implementation. If the handling of notifications would \n * involve blocking operations, or operations which might throw uncaught exceptions, \n * the notifications should be queued, and the actual processing deferred (or perhaps\n * delegated to a separate thread).\n * </p><p>\n * This interface can be used without OSGi running.\n * </p><p>\n * Clients may implement this interface.\n * </p>\n\n\nInspired by: org.eclipse.core.runtime.IProgressMonitor\n"
+		   });		
+		addAnnotation
+		  (progressMonitorEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "\t * Notifies that the main task is beginning.  This must only be called once\n\t * on a given progress monitor instance.\n\t * \n\t * @param name the name (or description) of the main task\n\t * @param totalWork the total number of work units into which\n\t *  the main task is been subdivided. If the value is <code>UNKNOWN</code> \n\t *  the implementation is free to indicate progress in a way which \n\t *  doesn\'t require the total number of work units in advance.\n\nTODO: support formatting in the task name, probably using HTML5 or RDFa, which will be converted (in shell) into ANSI codes."
+		   });		
+		addAnnotation
+		  (progressMonitorEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "\t * Notifies that the work is done; that is, either the main task is completed \n\t * or the user canceled it. This method may be called more than once \n\t * (implementations should be prepared to handle this case).\n"
+		   });		
+		addAnnotation
+		  (progressMonitorEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "\t * Internal method to handle scaling correctly. This method\n\t * must not be called by a client. Clients should \n\t * always use the method </code>worked(int)</code>.\n\t * \n\t * @param work the amount of work done\n"
+		   });		
+		addAnnotation
+		  (getProgressMonitor_Canceled(), 
+		   source, 
+		   new String[] {
+			 "documentation", "\t * Returns whether cancelation of current operation has been requested.\n\t * Long-running operations should poll to see if cancelation\n\t * has been requested.\n\t *\n\t * @return <code>true</code> if cancellation has been requested,\n\t *    and <code>false</code> otherwise\n\t * @see #setCanceled(boolean)\n"
+		   });		
+		addAnnotation
+		  (getProgressMonitor_TaskName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "\t * Sets the task name to the given value. This method is used to \n\t * restore the task label after a nested operation was executed. \n\t * Normally there is no need for clients to call this method.\n\t *\n\t * @param name the name (or description) of the main task\n\t * @see #beginTask(java.lang.String, int)\n"
+		   });		
+		addAnnotation
+		  (shellProgressMonitorEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Use ansi.render() to report progress."
+		   });		
+		addAnnotation
+		  (progressStatusEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Completed successfully."
+		   });		
+		addAnnotation
+		  (progressStatusEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Error occurred."
+		   });		
+		addAnnotation
+		  (progressStatusEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Process completed with warnings."
+		   });		
+		addAnnotation
+		  (progressStatusEEnum.getELiterals().get(3), 
+		   source, 
+		   new String[] {
+			 "documentation", "OK but destructive."
+		   });		
+		addAnnotation
+		  (progressStatusEEnum.getELiterals().get(4), 
+		   source, 
+		   new String[] {
+			 "documentation", "Skipped for some reason."
+		   });		
+		addAnnotation
+		  (progressMonitorWrapperEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", " * An abstract wrapper around a progress monitor which,\n * unless overridden, forwards <code>IProgressMonitor</code>\n * and <code>IProgressMonitorWithBlocking</code> methods to the wrapped progress monitor.\n * <p>\n * This class can be used without OSGi running.\n * </p><p>\n * Clients may subclass.\n * </p>\n"
 		   });
 	}
 

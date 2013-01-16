@@ -16,6 +16,13 @@
       </xsd:enumeration>
     </xsd:restriction>
   </xsd:simpleType>
+  <xsd:simpleType name="FileExport">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="original"/>
+      <xsd:enumeration value="style"/>
+      <xsd:enumeration value="all"/>
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType abstract="true" name="ImageConnector">
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element ref="xmi:Extension"/>

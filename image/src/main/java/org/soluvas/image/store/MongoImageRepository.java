@@ -22,7 +22,10 @@ import org.apache.commons.io.FilenameUtils;
 import org.bson.BasicBSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.ProgressMonitor;
+import org.soluvas.commons.ProgressStatus;
 import org.soluvas.commons.SlugUtils;
+import org.soluvas.commons.impl.ProgressMonitorImpl;
 import org.soluvas.image.DavConnector;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImageException;
@@ -631,9 +634,9 @@ public class MongoImageRepository implements ImageRepository {
 	 * @see org.soluvas.image.store.ImageRepository#reprocess(java.lang.Iterable)
 	 */
 	@Override
-	public void reprocess(Iterable<String> ids) {
+	public void reprocess(Iterable<String> ids, ProgressMonitor monitor) {
 		Map<String, Image> images = findAllByIds(ids);
-		doReprocess(images.values());
+		doReprocess(images.values(), monitor);
 	}
 	
 	/**
@@ -652,13 +655,17 @@ public class MongoImageRepository implements ImageRepository {
 	/**
 	 * @param images
 	 */
-	protected void doReprocess(Collection<Image> images) {
+	protected void doReprocess(Collection<Image> images, ProgressMonitor monitor) {
+		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, images.size());
 		log.info("Reprocessing {} images", images.size());
+		submon.beginTask("Reprocessing " + images.size() + " images", images.size());
+		ProgressStatus finalStatus = ProgressStatus.OK;
 		for (final Image image : images) {
 			final String extension = getExtensionOrJpg(image.getFileName());
 			try {
 				// TODO: reprocessing should not require download (esp. for blitline transformer) 
 				final File tempFile = File.createTempFile(image.getId(), "." + extension);
+//				submon.beginTask("Fetching " + image.getId() + " from " + image.getUri() + " to " + tempFile, 1);
 				log.info("Downloading {} from {} to {}", image.getId(), image.getUri(), tempFile);
 				try {
 					final boolean downloaded = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE,
@@ -669,7 +676,9 @@ public class MongoImageRepository implements ImageRepository {
 					} else {
 						log.error("Cannot download {} because connector {} returned false",
 								image.getId(), connector.getClass().getName());
+						finalStatus = ProgressStatus.WARNING;
 					}
+					submon.worked(1);
 				} finally {
 					log.trace("Deleting temporary file {} (image {})", tempFile, image.getId());
 					tempFile.delete();
@@ -677,17 +686,24 @@ public class MongoImageRepository implements ImageRepository {
 			} catch (Exception e) {
 				// log, but continue
 				log.error("Cannot reprocess image " + image.getId(), e);
+				submon.worked(1, ProgressStatus.ERROR);
+				finalStatus = ProgressStatus.ERROR;
 			}
 		}
+		submon.done(finalStatus); // TODO: shouldn't be done in proper implementation
 	}
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.image.store.ImageRepository#reprocessAll()
 	 */
 	@Override
-	public void reprocessAll() {
-		List<Image> images = findAll();
-		doReprocess(images);
+	public void reprocessAll(ProgressMonitor monitor) {
+		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, 2);
+		submon.beginTask("Finding all " + namespace + " images", 1);
+		final List<Image> images = findAll();
+		submon.worked(1);
+		submon.done(); // TODO: shouldn't be done in proper implementation
+		doReprocess(images, monitor);
 	}
 
 	/* (non-Javadoc)
@@ -725,13 +741,19 @@ public class MongoImageRepository implements ImageRepository {
 	}
 
 	@Override
-	public void updateUriAll() {
+	public void updateUriAll(ProgressMonitor monitor) {
+		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, 2);
+		submon.beginTask("Finding all " + namespace + " images", 1);
 		final List<Image> images = findAll();
-		doUpdateUri(images);
+		submon.worked(1);
+		submon.done(); // TODO: shouldn't be done in proper implementation
+		doUpdateUri(images, submon);
 	}
 
-	protected void doUpdateUri(final Collection<Image> images) {
+	protected void doUpdateUri(final Collection<Image> images, ProgressMonitor monitor) {
 		log.info("Updating {} {} image URIs", images.size(), namespace);
+		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, 2);
+		submon.beginTask("Updating URIs for " + images.size() + " images", images.size());
 		for (Image image : images) {
 			final String newUri = getImageUri(image.getId(), ORIGINAL_NAME);
 			final BasicDBObject dbo = new BasicDBObject();
@@ -747,12 +769,14 @@ public class MongoImageRepository implements ImageRepository {
 				log.debug("Updating {} image id {} to {} with style {}", namespace, image.getId(), newStyleUri, styleName);
 				mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", updatedStyleUri));
 			}
+			submon.worked(1);
 		}
+		submon.done(); // TODO: shouldn't be done in proper implementation
 	}
 
 	@Override
-	public void updateUri(Collection<String> imageIds) {
-		Collection<Image> images = Collections2.transform(imageIds, new Function<String, Image>() {
+	public void updateUri(Collection<String> imageIds, ProgressMonitor monitor) {
+		final Collection<Image> images = Collections2.transform(imageIds, new Function<String, Image>() {
 			@Override @Nullable
 			public Image apply(@Nullable String imageId) {
 				final Image image = findOne(imageId);
@@ -760,7 +784,7 @@ public class MongoImageRepository implements ImageRepository {
 				return image;
 			}
 		});
-		doUpdateUri(images);
+		doUpdateUri(images, monitor);
 	}
 
 	@Override

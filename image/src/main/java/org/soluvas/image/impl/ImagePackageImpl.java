@@ -4,6 +4,7 @@ package org.soluvas.image.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
@@ -15,6 +16,7 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.image.BlitlineTransformer;
 import org.soluvas.image.DavConnector;
 import org.soluvas.image.DimensionLike;
+import org.soluvas.image.FileExport;
 import org.soluvas.image.Image;
 import org.soluvas.image.ImageCatalog;
 import org.soluvas.image.ImageConnector;
@@ -31,6 +33,7 @@ import org.soluvas.image.S3Connector;
 import org.soluvas.image.StyledImage;
 import org.soluvas.image.ThumbnailatorTransformer;
 import org.soluvas.image.UploadedImage;
+import org.soluvas.image.store.ImageRepository;
 
 /**
  * <!-- begin-user-doc -->
@@ -155,6 +158,19 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	private EEnum imageTransformTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum fileExportEEnum = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType imageRepositoryEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -851,6 +867,24 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getFileExport() {
+		return fileExportEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getImageRepository() {
+		return imageRepositoryEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public ImageFactory getImageFactory() {
 		return (ImageFactory)getEFactoryInstance();
@@ -955,6 +989,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		// Create enums
 		imageTransformTypeEEnum = createEEnum(IMAGE_TRANSFORM_TYPE);
+		fileExportEEnum = createEEnum(FILE_EXPORT);
+
+		// Create data types
+		imageRepositoryEDataType = createEDataType(IMAGE_REPOSITORY);
 	}
 
 	/**
@@ -1103,6 +1141,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		op = addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getDefaultPhotoId", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theCommonsPackage.getGender(), "gender", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(imageManagerEClass, theEcorePackage.getELong(), "export", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageRepository(), "imageRepo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEBoolean(), "metadata", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getFileExport(), "files", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theCommonsPackage.getFile(), "destFolder", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(imageTransformEClass, ImageTransform.class, "ImageTransform", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(resizeToFitEClass, ResizeToFit.class, "ResizeToFit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1151,6 +1195,14 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEEnum(imageTransformTypeEEnum, ImageTransformType.class, "ImageTransformType");
 		addEEnumLiteral(imageTransformTypeEEnum, ImageTransformType.RESIZE_TO_FIT);
 		addEEnumLiteral(imageTransformTypeEEnum, ImageTransformType.RESIZE_TO_FILL);
+
+		initEEnum(fileExportEEnum, FileExport.class, "FileExport");
+		addEEnumLiteral(fileExportEEnum, FileExport.ORIGINAL);
+		addEEnumLiteral(fileExportEEnum, FileExport.STYLE);
+		addEEnumLiteral(fileExportEEnum, FileExport.ALL);
+
+		// Initialize data types
+		initEDataType(imageRepositoryEDataType, ImageRepository.class, "ImageRepository", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1293,6 +1345,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Height in pixels, useful for IMG tag.\n\nNote: Connectors won\'t return this, but Transformers would."
+		   });		
+		addAnnotation
+		  (imageManagerEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Downloads all images and exports them to a folder."
 		   });		
 		addAnnotation
 		  (imageTransformTypeEEnum.getELiterals().get(0), 

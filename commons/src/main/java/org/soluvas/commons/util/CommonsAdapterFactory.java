@@ -204,6 +204,18 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createCategoryInfoAdapter();
 			}
 			@Override
+			public Adapter caseProgressMonitor(ProgressMonitor object) {
+				return createProgressMonitorAdapter();
+			}
+			@Override
+			public Adapter caseShellProgressMonitor(ShellProgressMonitor object) {
+				return createShellProgressMonitorAdapter();
+			}
+			@Override
+			public Adapter caseProgressMonitorWrapper(ProgressMonitorWrapper object) {
+				return createProgressMonitorWrapperAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -696,6 +708,48 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCategoryInfoAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.ProgressMonitor <em>Progress Monitor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.ProgressMonitor
+	 * @generated
+	 */
+	public Adapter createProgressMonitorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.ShellProgressMonitor <em>Shell Progress Monitor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.ShellProgressMonitor
+	 * @generated
+	 */
+	public Adapter createShellProgressMonitorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.ProgressMonitorWrapper <em>Progress Monitor Wrapper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.ProgressMonitorWrapper
+	 * @generated
+	 */
+	public Adapter createProgressMonitorWrapperAdapter() {
 		return null;
 	}
 

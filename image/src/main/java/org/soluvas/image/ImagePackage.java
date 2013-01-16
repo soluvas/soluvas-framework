@@ -4,6 +4,7 @@ package org.soluvas.image;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -961,6 +962,27 @@ public interface ImagePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.image.FileExport <em>File Export</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.FileExport
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getFileExport()
+	 * @generated
+	 */
+	int FILE_EXPORT = 17;
+
+	/**
+	 * The meta object id for the '<em>Repository</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.store.ImageRepository
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageRepository()
+	 * @generated
+	 */
+	int IMAGE_REPOSITORY = 18;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.ImageConnector <em>Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1637,6 +1659,27 @@ public interface ImagePackage extends EPackage {
 	EEnum getImageTransformType();
 
 	/**
+	 * Returns the meta object for enum '{@link org.soluvas.image.FileExport <em>File Export</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>File Export</em>'.
+	 * @see org.soluvas.image.FileExport
+	 * @generated
+	 */
+	EEnum getFileExport();
+
+	/**
+	 * Returns the meta object for data type '{@link org.soluvas.image.store.ImageRepository <em>Repository</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Repository</em>'.
+	 * @see org.soluvas.image.store.ImageRepository
+	 * @model instanceClass="org.soluvas.image.store.ImageRepository" serializeable="false"
+	 * @generated
+	 */
+	EDataType getImageRepository();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2195,6 +2238,26 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum IMAGE_TRANSFORM_TYPE = eINSTANCE.getImageTransformType();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.FileExport <em>File Export</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.FileExport
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getFileExport()
+		 * @generated
+		 */
+		EEnum FILE_EXPORT = eINSTANCE.getFileExport();
+
+		/**
+		 * The meta object literal for the '<em>Repository</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.store.ImageRepository
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageRepository()
+		 * @generated
+		 */
+		EDataType IMAGE_REPOSITORY = eINSTANCE.getImageRepository();
 
 	}
 

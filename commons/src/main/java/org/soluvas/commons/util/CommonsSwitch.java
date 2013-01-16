@@ -319,6 +319,26 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CommonsPackage.PROGRESS_MONITOR: {
+				ProgressMonitor progressMonitor = (ProgressMonitor)theEObject;
+				T1 result = caseProgressMonitor(progressMonitor);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.SHELL_PROGRESS_MONITOR: {
+				ShellProgressMonitor shellProgressMonitor = (ShellProgressMonitor)theEObject;
+				T1 result = caseShellProgressMonitor(shellProgressMonitor);
+				if (result == null) result = caseProgressMonitor(shellProgressMonitor);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.PROGRESS_MONITOR_WRAPPER: {
+				ProgressMonitorWrapper progressMonitorWrapper = (ProgressMonitorWrapper)theEObject;
+				T1 result = caseProgressMonitorWrapper(progressMonitorWrapper);
+				if (result == null) result = caseProgressMonitor(progressMonitorWrapper);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -830,6 +850,51 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseCategoryInfo(CategoryInfo object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Progress Monitor</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Progress Monitor</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseProgressMonitor(ProgressMonitor object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Shell Progress Monitor</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Shell Progress Monitor</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseShellProgressMonitor(ShellProgressMonitor object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Progress Monitor Wrapper</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Progress Monitor Wrapper</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseProgressMonitorWrapper(ProgressMonitorWrapper object) {
 		return null;
 	}
 

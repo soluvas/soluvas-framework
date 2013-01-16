@@ -5,6 +5,17 @@
     xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0
         http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0">
 
+	<reference id="commonsPackage" interface="org.soluvas.commons.CommonsPackage" />
+	<bean class="org.soluvas.commons.EPackageRegistration" init-method="init" destroy-method="destroy"
+		depends-on="commonsPackage">
+		<argument ref="blueprintBundleContext"/>
+		<argument>
+			<list value-type="java.lang.Class">
+				<value>org.soluvas.image.ImagePackage</value>
+			</list>
+		</argument>
+	</bean>
+
 	<!-- JavaScript helpers -->
 	<service auto-export="interfaces">
 		<bean class="org.ops4j.pax.web.extender.whiteboard.runtime.DefaultResourceMapping">

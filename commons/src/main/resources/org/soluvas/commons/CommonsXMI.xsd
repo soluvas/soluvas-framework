@@ -40,6 +40,35 @@
       <xsd:enumeration value="resolved"/>
     </xsd:restriction>
   </xsd:simpleType>
+  <xsd:simpleType name="ProgressStatus">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="ok">
+        <xsd:annotation>
+          <xsd:documentation>Completed successfully.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="error">
+        <xsd:annotation>
+          <xsd:documentation>Error occurred.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="warning">
+        <xsd:annotation>
+          <xsd:documentation>Process completed with warnings.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="deleted">
+        <xsd:annotation>
+          <xsd:documentation>OK but destructive.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="skipped">
+        <xsd:annotation>
+          <xsd:documentation>Skipped for some reason.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType abstract="true" name="ResourceAware">
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element ref="xmi:Extension"/>
@@ -682,4 +711,159 @@ Used by {#getName()}.</xsd:documentation>
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="CategoryInfo" type="commons:CategoryInfo"/>
+  <xsd:complexType abstract="true" name="ProgressMonitor">
+    <xsd:annotation>
+      <xsd:documentation> * The &lt;code&gt;IProgressMonitor&lt;/code&gt; interface is implemented
+ * by objects that monitor the progress of an activity; the methods
+ * in this interface are invoked by code that performs the activity.
+ * &lt;p&gt;
+ * All activity is broken down into a linear sequence of tasks against
+ * which progress is reported. When a task begins, a &lt;code&gt;beginTask(String, int)
+ * &lt;/code&gt; notification is reported, followed by any number and mixture of 
+ * progress reports (&lt;code&gt;worked()&lt;/code&gt;) and subtask notifications 
+ * (&lt;code&gt;subTask(String)&lt;/code&gt;).  When the task is eventually completed, a 
+ * &lt;code&gt;done()&lt;/code&gt; notification is reported.  After the &lt;code&gt;done()&lt;/code&gt;
+ * notification, the progress monitor cannot be reused;  i.e., &lt;code&gt;
+ * beginTask(String, int)&lt;/code&gt; cannot be called again after the call to 
+ * &lt;code&gt;done()&lt;/code&gt;.
+ * &lt;/p&gt;
+ * &lt;p&gt;
+ * A request to cancel an operation can be signaled using the 
+ * &lt;code&gt;setCanceled&lt;/code&gt; method.  Operations taking a progress
+ * monitor are expected to poll the monitor (using &lt;code&gt;isCanceled&lt;/code&gt;)
+ * periodically and abort at their earliest convenience.  Operation can however 
+ * choose to ignore cancelation requests.
+ * &lt;/p&gt;
+ * &lt;p&gt;
+ * Since notification is synchronous with the activity itself, the listener should 
+ * provide a fast and robust implementation. If the handling of notifications would 
+ * involve blocking operations, or operations which might throw uncaught exceptions, 
+ * the notifications should be queued, and the actual processing deferred (or perhaps
+ * delegated to a separate thread).
+ * &lt;/p&gt;&lt;p&gt;
+ * This interface can be used without OSGi running.
+ * &lt;/p&gt;&lt;p&gt;
+ * Clients may implement this interface.
+ * &lt;/p&gt;
+
+
+Inspired by: org.eclipse.core.runtime.IProgressMonitor
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="canceled" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation>	 * Returns whether cancelation of current operation has been requested.
+	 * Long-running operations should poll to see if cancelation
+	 * has been requested.
+	 *
+	 * @return &lt;code&gt;true&lt;/code&gt; if cancellation has been requested,
+	 *    and &lt;code&gt;false&lt;/code&gt; otherwise
+	 * @see #setCanceled(boolean)
+</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="taskName" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>	 * Sets the task name to the given value. This method is used to 
+	 * restore the task label after a nested operation was executed. 
+	 * Normally there is no need for clients to call this method.
+	 *
+	 * @param name the name (or description) of the main task
+	 * @see #beginTask(java.lang.String, int)
+</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="ProgressMonitor" type="commons:ProgressMonitor">
+    <xsd:annotation>
+      <xsd:documentation> * The &lt;code&gt;IProgressMonitor&lt;/code&gt; interface is implemented
+ * by objects that monitor the progress of an activity; the methods
+ * in this interface are invoked by code that performs the activity.
+ * &lt;p&gt;
+ * All activity is broken down into a linear sequence of tasks against
+ * which progress is reported. When a task begins, a &lt;code&gt;beginTask(String, int)
+ * &lt;/code&gt; notification is reported, followed by any number and mixture of 
+ * progress reports (&lt;code&gt;worked()&lt;/code&gt;) and subtask notifications 
+ * (&lt;code&gt;subTask(String)&lt;/code&gt;).  When the task is eventually completed, a 
+ * &lt;code&gt;done()&lt;/code&gt; notification is reported.  After the &lt;code&gt;done()&lt;/code&gt;
+ * notification, the progress monitor cannot be reused;  i.e., &lt;code&gt;
+ * beginTask(String, int)&lt;/code&gt; cannot be called again after the call to 
+ * &lt;code&gt;done()&lt;/code&gt;.
+ * &lt;/p&gt;
+ * &lt;p&gt;
+ * A request to cancel an operation can be signaled using the 
+ * &lt;code&gt;setCanceled&lt;/code&gt; method.  Operations taking a progress
+ * monitor are expected to poll the monitor (using &lt;code&gt;isCanceled&lt;/code&gt;)
+ * periodically and abort at their earliest convenience.  Operation can however 
+ * choose to ignore cancelation requests.
+ * &lt;/p&gt;
+ * &lt;p&gt;
+ * Since notification is synchronous with the activity itself, the listener should 
+ * provide a fast and robust implementation. If the handling of notifications would 
+ * involve blocking operations, or operations which might throw uncaught exceptions, 
+ * the notifications should be queued, and the actual processing deferred (or perhaps
+ * delegated to a separate thread).
+ * &lt;/p&gt;&lt;p&gt;
+ * This interface can be used without OSGi running.
+ * &lt;/p&gt;&lt;p&gt;
+ * Clients may implement this interface.
+ * &lt;/p&gt;
+
+
+Inspired by: org.eclipse.core.runtime.IProgressMonitor
+</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="ShellProgressMonitor">
+    <xsd:annotation>
+      <xsd:documentation>Use ansi.render() to report progress.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="commons:ProgressMonitor"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="ShellProgressMonitor" type="commons:ShellProgressMonitor">
+    <xsd:annotation>
+      <xsd:documentation>Use ansi.render() to report progress.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="ProgressMonitorWrapper">
+    <xsd:annotation>
+      <xsd:documentation> * An abstract wrapper around a progress monitor which,
+ * unless overridden, forwards &lt;code&gt;IProgressMonitor&lt;/code&gt;
+ * and &lt;code&gt;IProgressMonitorWithBlocking&lt;/code&gt; methods to the wrapped progress monitor.
+ * &lt;p&gt;
+ * This class can be used without OSGi running.
+ * &lt;/p&gt;&lt;p&gt;
+ * Clients may subclass.
+ * &lt;/p&gt;
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="commons:ProgressMonitor">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="delegate" type="commons:ProgressMonitor"/>
+        </xsd:choice>
+        <xsd:attribute name="delegate" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="ProgressMonitorWrapper" type="commons:ProgressMonitorWrapper">
+    <xsd:annotation>
+      <xsd:documentation> * An abstract wrapper around a progress monitor which,
+ * unless overridden, forwards &lt;code&gt;IProgressMonitor&lt;/code&gt;
+ * and &lt;code&gt;IProgressMonitorWithBlocking&lt;/code&gt; methods to the wrapped progress monitor.
+ * &lt;p&gt;
+ * This class can be used without OSGi running.
+ * &lt;/p&gt;&lt;p&gt;
+ * Clients may subclass.
+ * &lt;/p&gt;
+</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
 </xsd:schema>

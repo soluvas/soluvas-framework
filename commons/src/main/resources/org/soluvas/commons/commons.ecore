@@ -524,4 +524,89 @@
   <eClassifiers xsi:type="ecore:EDataType" name="DateTimeZone" instanceClassName="org.joda.time.DateTimeZone"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Locale" instanceClassName="java.util.Locale"/>
   <eClassifiers xsi:type="ecore:EDataType" name="File" instanceClassName="java.io.File"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProgressMonitor" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value=" * The &lt;code>IProgressMonitor&lt;/code> interface is implemented&#xA; * by objects that monitor the progress of an activity; the methods&#xA; * in this interface are invoked by code that performs the activity.&#xA; * &lt;p>&#xA; * All activity is broken down into a linear sequence of tasks against&#xA; * which progress is reported. When a task begins, a &lt;code>beginTask(String, int)&#xA; * &lt;/code> notification is reported, followed by any number and mixture of &#xA; * progress reports (&lt;code>worked()&lt;/code>) and subtask notifications &#xA; * (&lt;code>subTask(String)&lt;/code>).  When the task is eventually completed, a &#xA; * &lt;code>done()&lt;/code> notification is reported.  After the &lt;code>done()&lt;/code>&#xA; * notification, the progress monitor cannot be reused;  i.e., &lt;code>&#xA; * beginTask(String, int)&lt;/code> cannot be called again after the call to &#xA; * &lt;code>done()&lt;/code>.&#xA; * &lt;/p>&#xA; * &lt;p>&#xA; * A request to cancel an operation can be signaled using the &#xA; * &lt;code>setCanceled&lt;/code> method.  Operations taking a progress&#xA; * monitor are expected to poll the monitor (using &lt;code>isCanceled&lt;/code>)&#xA; * periodically and abort at their earliest convenience.  Operation can however &#xA; * choose to ignore cancelation requests.&#xA; * &lt;/p>&#xA; * &lt;p>&#xA; * Since notification is synchronous with the activity itself, the listener should &#xA; * provide a fast and robust implementation. If the handling of notifications would &#xA; * involve blocking operations, or operations which might throw uncaught exceptions, &#xA; * the notifications should be queued, and the actual processing deferred (or perhaps&#xA; * delegated to a separate thread).&#xA; * &lt;/p>&lt;p>&#xA; * This interface can be used without OSGi running.&#xA; * &lt;/p>&lt;p>&#xA; * Clients may implement this interface.&#xA; * &lt;/p>&#xA;&#xA;&#xA;Inspired by: org.eclipse.core.runtime.IProgressMonitor&#xA;"/>
+    </eAnnotations>
+    <eOperations name="beginTask">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#x9; * Notifies that the main task is beginning.  This must only be called once&#xA;&#x9; * on a given progress monitor instance.&#xA;&#x9; * &#xA;&#x9; * @param name the name (or description) of the main task&#xA;&#x9; * @param totalWork the total number of work units into which&#xA;&#x9; *  the main task is been subdivided. If the value is &lt;code>UNKNOWN&lt;/code> &#xA;&#x9; *  the implementation is free to indicate progress in a way which &#xA;&#x9; *  doesn't require the total number of work units in advance.&#xA;&#xA;TODO: support formatting in the task name, probably using HTML5 or RDFa, which will be converted (in shell) into ANSI codes."/>
+      </eAnnotations>
+      <eParameters name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="totalWork" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="done">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#x9; * Notifies that the work is done; that is, either the main task is completed &#xA;&#x9; * or the user canceled it. This method may be called more than once &#xA;&#x9; * (implementations should be prepared to handle this case).&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="internalWorked">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#x9; * Internal method to handle scaling correctly. This method&#xA;&#x9; * must not be called by a client. Clients should &#xA;&#x9; * always use the method &lt;/code>worked(int)&lt;/code>.&#xA;&#x9; * &#xA;&#x9; * @param work the amount of work done&#xA;"/>
+      </eAnnotations>
+      <eParameters name="work" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="subTask">
+      <eParameters name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eOperations>
+    <eOperations name="worked">
+      <eParameters name="work" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="done">
+      <eParameters name="status" eType="#//ProgressStatus"/>
+    </eOperations>
+    <eOperations name="worked">
+      <eParameters name="work" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+      <eParameters name="status" eType="#//ProgressStatus"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canceled" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#x9; * Returns whether cancelation of current operation has been requested.&#xA;&#x9; * Long-running operations should poll to see if cancelation&#xA;&#x9; * has been requested.&#xA;&#x9; *&#xA;&#x9; * @return &lt;code>true&lt;/code> if cancellation has been requested,&#xA;&#x9; *    and &lt;code>false&lt;/code> otherwise&#xA;&#x9; * @see #setCanceled(boolean)&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="taskName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#x9; * Sets the task name to the given value. This method is used to &#xA;&#x9; * restore the task label after a nested operation was executed. &#xA;&#x9; * Normally there is no need for clients to call this method.&#xA;&#x9; *&#xA;&#x9; * @param name the name (or description) of the main task&#xA;&#x9; * @see #beginTask(java.lang.String, int)&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShellProgressMonitor" eSuperTypes="#//ProgressMonitor">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Use ansi.render() to report progress."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ProgressStatus">
+    <eLiterals name="ok">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Completed successfully."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="error" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Error occurred."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="warning" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Process completed with warnings."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="deleted" value="3">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="OK but destructive."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="skipped" value="4">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Skipped for some reason."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProgressMonitorWrapper" eSuperTypes="#//ProgressMonitor">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value=" * An abstract wrapper around a progress monitor which,&#xA; * unless overridden, forwards &lt;code>IProgressMonitor&lt;/code>&#xA; * and &lt;code>IProgressMonitorWithBlocking&lt;/code> methods to the wrapped progress monitor.&#xA; * &lt;p>&#xA; * This class can be used without OSGi running.&#xA; * &lt;/p>&lt;p>&#xA; * Clients may subclass.&#xA; * &lt;/p>&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="delegate" eType="#//ProgressMonitor"
+        changeable="false"/>
+  </eClassifiers>
 </ecore:EPackage>
