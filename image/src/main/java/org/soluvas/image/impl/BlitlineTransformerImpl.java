@@ -2,12 +2,14 @@
  */
 package org.soluvas.image.impl;
 
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.HttpClientUtils;
@@ -24,14 +26,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.image.BlitlineTransformer;
 import org.soluvas.image.ImageConnector;
+import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageVariant;
-import org.soluvas.image.UploadedImage;
 import org.soluvas.image.ResizeToFill;
+import org.soluvas.image.UploadedImage;
 import org.soluvas.json.JsonUtils;
 
 import com.damnhandy.uri.template.UriTemplate;
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
@@ -46,7 +50,10 @@ import com.google.common.collect.Maps;
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getApplicationId <em>Application Id</em>}</li>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getBucket <em>Bucket</em>}</li>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getPrefix <em>Prefix</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getCdnAlias <em>Cdn Alias</em>}</li>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getKeyTemplate <em>Key Template</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getUriTemplate <em>Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getOriginUriTemplate <em>Origin Uri Template</em>}</li>
  * </ul>
  * </p>
  *
@@ -123,6 +130,24 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	 */
 	protected String prefix = PREFIX_EDEFAULT;
 	/**
+	 * The default value of the '{@link #getCdnAlias() <em>Cdn Alias</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCdnAlias()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CDN_ALIAS_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getCdnAlias() <em>Cdn Alias</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCdnAlias()
+	 * @generated
+	 * @ordered
+	 */
+	protected String cdnAlias = CDN_ALIAS_EDEFAULT;
+	/**
 	 * The default value of the '{@link #getKeyTemplate() <em>Key Template</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -142,6 +167,43 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	protected String keyTemplate = KEY_TEMPLATE_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getUriTemplate() <em>Uri Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUriTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String URI_TEMPLATE_EDEFAULT = "{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
+	/**
+	 * The cached value of the '{@link #getUriTemplate() <em>Uri Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUriTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected String uriTemplate = URI_TEMPLATE_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getOriginUriTemplate() <em>Origin Uri Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOriginUriTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ORIGIN_URI_TEMPLATE_EDEFAULT = "{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
+	/**
+	 * The cached value of the '{@link #getOriginUriTemplate() <em>Origin Uri Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOriginUriTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected String originUriTemplate = ORIGIN_URI_TEMPLATE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
@@ -149,12 +211,14 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 		throw new UnsupportedOperationException();
 	}
 	
-	public BlitlineTransformerImpl(ImageConnector source, String applicationId, String bucket, String prefix) {
+	public BlitlineTransformerImpl(ImageConnector source, String applicationId, String bucket, String prefix,
+			String cdnAlias) {
 		super();
 		this.applicationId = applicationId;
 		this.source = source;
 		this.bucket = bucket;
 		this.prefix = prefix;
+		this.cdnAlias = cdnAlias;
 	}
 	
 	public void destroy() {
@@ -234,6 +298,16 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	 * @generated
 	 */
 	@Override
+	public String getCdnAlias() {
+		return cdnAlias;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getKeyTemplate() {
 		return keyTemplate;
 	}
@@ -241,11 +315,35 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	@Override
-	public void transform(String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms) {
+	public String getUriTemplate() {
+		return uriTemplate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getOriginUriTemplate() {
+		return originUriTemplate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public List<UploadedImage> transform(String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms) {
+		final UriTemplate originUriExpander = UriTemplate.fromTemplate(getOriginUriTemplate());
+		final UriTemplate uriExpander = UriTemplate.fromTemplate(getUriTemplate());
+		
 		final String sourceUri = source.getOriginUri(namespace, imageId,
 				sourceVariant.getStyleCode(), sourceVariant.getStyleVariant(), sourceVariant.getExtension());
+		final ImmutableList.Builder<UploadedImage> uploads = ImmutableList.builder();
 		for (final Entry<ImageTransform, ImageVariant> entry : transforms.entrySet()) {
 			final ImageTransform transform = entry.getKey();
 			final ImageVariant dest = entry.getValue();
@@ -271,16 +369,44 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 				final Job job = new Job(applicationId, sourceUri, new JobFunction("resize_to_fill", params,
 						new JobSave(jobId, new JobS3Destination(bucket, key))));
 				final String jobJson = JsonUtils.asJson(job);
-				log.debug("Sending job {}", jobJson);
+				log.debug("Sending transform {}", jobJson);
 				try {
 					final HttpPost postReq = new HttpPost("http://api.blitline.com/job");
 					postReq.setEntity(new UrlEncodedFormEntity(ImmutableList.of(new BasicNameValuePair("json", jobJson))));
 					final HttpResponse response = client.execute(postReq);
 					try {
-						if (response.getStatusLine().getStatusCode() >= 200 && response.getStatusLine().getStatusCode() < 300)
-							log.debug("Job {} returned: {}", jobId, response.getStatusLine());
+						final StatusLine responseStatus = response.getStatusLine();
+						final String responseBody;
+						if (response.getEntity() != null)
+							responseBody = IOUtils.toString(response.getEntity().getContent());
 						else
-							log.error("Job {} returned: {}", jobId, response.getStatusLine());
+							responseBody = null;
+						if (responseStatus.getStatusCode() >= 200 && responseStatus.getStatusCode() < 300) {
+							log.info("Transform {} returned {}: {}", jobId, responseStatus,
+									responseBody);
+							final String originAlias = bucket + ".s3.amazonaws.com";
+							
+							final Map<String, Object> originVars = Maps.newHashMap(uriVars);
+							originVars.put("alias", originAlias);
+							final String originUri = originUriExpander.expand(originVars);
+							
+							final Map<String, Object> cdnVars = Maps.newHashMap(uriVars);
+							cdnVars.put("alias", Optional.fromNullable(cdnAlias).or(originAlias));
+							final String cdnUri = originUriExpander.expand(originVars);
+							
+							final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
+							uploadedImage.setStyleCode(dest.getStyleCode());
+							uploadedImage.setStyleVariant(dest.getStyleVariant());
+							uploadedImage.setExtension(dest.getExtension());
+							uploadedImage.setOriginUri(originUri);
+							uploadedImage.setUri(cdnUri);
+							uploadedImage.setWidth(fx.getWidth());
+							uploadedImage.setHeight(fx.getHeight());
+							uploadedImage.setSize(null); // TODO: update size when Blitline gives us a postback
+							uploads.add(uploadedImage);
+						} else
+							log.error("Transform {} returned {}: {}", jobId, responseStatus,
+									responseBody);
 					} finally {
 						HttpClientUtils.closeQuietly(response);
 					}
@@ -291,6 +417,7 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 				throw new UnsupportedOperationException("Transform not supported: " + transform);
 			}
 		}
+		return uploads.build();
 	}
 
 	/**
@@ -310,8 +437,14 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 				return getBucket();
 			case ImagePackage.BLITLINE_TRANSFORMER__PREFIX:
 				return getPrefix();
+			case ImagePackage.BLITLINE_TRANSFORMER__CDN_ALIAS:
+				return getCdnAlias();
 			case ImagePackage.BLITLINE_TRANSFORMER__KEY_TEMPLATE:
 				return getKeyTemplate();
+			case ImagePackage.BLITLINE_TRANSFORMER__URI_TEMPLATE:
+				return getUriTemplate();
+			case ImagePackage.BLITLINE_TRANSFORMER__ORIGIN_URI_TEMPLATE:
+				return getOriginUriTemplate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -332,8 +465,14 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 				return BUCKET_EDEFAULT == null ? bucket != null : !BUCKET_EDEFAULT.equals(bucket);
 			case ImagePackage.BLITLINE_TRANSFORMER__PREFIX:
 				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
+			case ImagePackage.BLITLINE_TRANSFORMER__CDN_ALIAS:
+				return CDN_ALIAS_EDEFAULT == null ? cdnAlias != null : !CDN_ALIAS_EDEFAULT.equals(cdnAlias);
 			case ImagePackage.BLITLINE_TRANSFORMER__KEY_TEMPLATE:
 				return KEY_TEMPLATE_EDEFAULT == null ? keyTemplate != null : !KEY_TEMPLATE_EDEFAULT.equals(keyTemplate);
+			case ImagePackage.BLITLINE_TRANSFORMER__URI_TEMPLATE:
+				return URI_TEMPLATE_EDEFAULT == null ? uriTemplate != null : !URI_TEMPLATE_EDEFAULT.equals(uriTemplate);
+			case ImagePackage.BLITLINE_TRANSFORMER__ORIGIN_URI_TEMPLATE:
+				return ORIGIN_URI_TEMPLATE_EDEFAULT == null ? originUriTemplate != null : !ORIGIN_URI_TEMPLATE_EDEFAULT.equals(originUriTemplate);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -354,8 +493,14 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 		result.append(bucket);
 		result.append(", prefix: ");
 		result.append(prefix);
+		result.append(", cdnAlias: ");
+		result.append(cdnAlias);
 		result.append(", keyTemplate: ");
 		result.append(keyTemplate);
+		result.append(", uriTemplate: ");
+		result.append(uriTemplate);
+		result.append(", originUriTemplate: ");
+		result.append(originUriTemplate);
 		result.append(')');
 		return result.toString();
 	}

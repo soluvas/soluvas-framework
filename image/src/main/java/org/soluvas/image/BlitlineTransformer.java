@@ -24,7 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *   <li>{@link org.soluvas.image.BlitlineTransformer#getApplicationId <em>Application Id</em>}</li>
  *   <li>{@link org.soluvas.image.BlitlineTransformer#getBucket <em>Bucket</em>}</li>
  *   <li>{@link org.soluvas.image.BlitlineTransformer#getPrefix <em>Prefix</em>}</li>
+ *   <li>{@link org.soluvas.image.BlitlineTransformer#getCdnAlias <em>Cdn Alias</em>}</li>
  *   <li>{@link org.soluvas.image.BlitlineTransformer#getKeyTemplate <em>Key Template</em>}</li>
+ *   <li>{@link org.soluvas.image.BlitlineTransformer#getUriTemplate <em>Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.image.BlitlineTransformer#getOriginUriTemplate <em>Origin Uri Template</em>}</li>
  * </ul>
  * </p>
  *
@@ -213,6 +216,20 @@ public interface BlitlineTransformer extends ImageTransformer {
 	String getPrefix();
 
 	/**
+	 * Returns the value of the '<em><b>Cdn Alias</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * CDN alias (if available), e.g. pic.stg.berbatik.com.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Cdn Alias</em>' attribute.
+	 * @see org.soluvas.image.ImagePackage#getBlitlineTransformer_CdnAlias()
+	 * @model changeable="false"
+	 * @generated
+	 */
+	String getCdnAlias();
+
+	/**
 	 * Returns the value of the '<em><b>Key Template</b></em>' attribute.
 	 * The default value is <code>"{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"</code>.
 	 * <!-- begin-user-doc -->
@@ -230,4 +247,42 @@ public interface BlitlineTransformer extends ImageTransformer {
 	 * @generated
 	 */
 	String getKeyTemplate();
+
+	/**
+	 * Returns the value of the '<em><b>Uri Template</b></em>' attribute.
+	 * The default value is <code>"{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * URI template for 'lo' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.
+	 * 
+	 * Variables are: namespace, styleCode, imageId, styleVariant, ext.
+	 * 
+	 * Default is: {+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Uri Template</em>' attribute.
+	 * @see org.soluvas.image.ImagePackage#getBlitlineTransformer_UriTemplate()
+	 * @model default="{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}" changeable="false"
+	 * @generated
+	 */
+	String getUriTemplate();
+
+	/**
+	 * Returns the value of the '<em><b>Origin Uri Template</b></em>' attribute.
+	 * The default value is <code>"{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * URI template for 'lo' (derived) images, without CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.
+	 * 
+	 * Variables are: namespace, styleCode, imageId, styleVariant, ext.
+	 * 
+	 * Default is: {+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Origin Uri Template</em>' attribute.
+	 * @see org.soluvas.image.ImagePackage#getBlitlineTransformer_OriginUriTemplate()
+	 * @model default="{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}" changeable="false"
+	 * @generated
+	 */
+	String getOriginUriTemplate();
 } // BlitlineTransformer

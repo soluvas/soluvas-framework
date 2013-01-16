@@ -304,8 +304,35 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBlitlineTransformer_KeyTemplate() {
+	public EAttribute getBlitlineTransformer_CdnAlias() {
 		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBlitlineTransformer_KeyTemplate() {
+		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBlitlineTransformer_UriTemplate() {
+		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBlitlineTransformer_OriginUriTemplate() {
+		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -613,7 +640,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__APPLICATION_ID);
 		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__BUCKET);
 		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__PREFIX);
+		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__CDN_ALIAS);
 		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__KEY_TEMPLATE);
+		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__URI_TEMPLATE);
+		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__ORIGIN_URI_TEMPLATE);
 
 		thumbnailatorTransformerEClass = createEClass(THUMBNAILATOR_TRANSFORMER);
 		createEReference(thumbnailatorTransformerEClass, THUMBNAILATOR_TRANSFORMER__DESTINATION);
@@ -768,7 +798,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEAttribute(getBlitlineTransformer_ApplicationId(), theEcorePackage.getEString(), "applicationId", null, 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBlitlineTransformer_Bucket(), theEcorePackage.getEString(), "bucket", null, 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBlitlineTransformer_Prefix(), theEcorePackage.getEString(), "prefix", null, 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBlitlineTransformer_CdnAlias(), theEcorePackage.getEString(), "cdnAlias", null, 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBlitlineTransformer_KeyTemplate(), theEcorePackage.getEString(), "keyTemplate", "{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}", 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBlitlineTransformer_UriTemplate(), theEcorePackage.getEString(), "uriTemplate", "{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}", 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBlitlineTransformer_OriginUriTemplate(), theEcorePackage.getEString(), "originUriTemplate", "{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}", 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(thumbnailatorTransformerEClass, ThumbnailatorTransformer.class, "ThumbnailatorTransformer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getThumbnailatorTransformer_Destination(), this.getImageConnector(), null, "destination", null, 0, 1, ThumbnailatorTransformer.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -779,7 +812,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEAttribute(getUploadedImage_StyleCode(), theEcorePackage.getEString(), "styleCode", null, 0, 1, UploadedImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUploadedImage_StyleVariant(), theEcorePackage.getEString(), "styleVariant", null, 0, 1, UploadedImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUploadedImage_Extension(), theEcorePackage.getEString(), "extension", null, 0, 1, UploadedImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getUploadedImage_Size(), theEcorePackage.getELong(), "size", null, 0, 1, UploadedImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUploadedImage_Size(), theEcorePackage.getELongObject(), "size", null, 0, 1, UploadedImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUploadedImage_Width(), theEcorePackage.getEIntegerObject(), "width", null, 0, 1, UploadedImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUploadedImage_Height(), theEcorePackage.getEIntegerObject(), "height", null, 0, 1, UploadedImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -899,10 +932,28 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 			 "documentation", "Processes using Blitline. The source image must be publicly hosted, for example using S3.\n\nThe destination image is directly written into an S3 bucket. Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions"
 		   });		
 		addAnnotation
+		  (getBlitlineTransformer_CdnAlias(), 
+		   source, 
+		   new String[] {
+			 "documentation", "CDN alias (if available), e.g. pic.stg.berbatik.com."
+		   });		
+		addAnnotation
 		  (getBlitlineTransformer_KeyTemplate(), 
 		   source, 
 		   new String[] {
 			 "documentation", "key template in URI template format.\n\nVariables are: namespace, styleCode, imageId, styleVariant, extension.\n\nDefault is: \"{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}\";"
+		   });		
+		addAnnotation
+		  (getBlitlineTransformer_UriTemplate(), 
+		   source, 
+		   new String[] {
+			 "documentation", "URI template for \'lo\' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.\n\nVariables are: namespace, styleCode, imageId, styleVariant, ext.\n\nDefault is: {+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}"
+		   });		
+		addAnnotation
+		  (getBlitlineTransformer_OriginUriTemplate(), 
+		   source, 
+		   new String[] {
+			 "documentation", "URI template for \'lo\' (derived) images, without CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.\n\nVariables are: namespace, styleCode, imageId, styleVariant, ext.\n\nDefault is: {+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}"
 		   });		
 		addAnnotation
 		  (getThumbnailatorTransformer_Destination(), 
@@ -926,7 +977,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		  (getUploadedImage_Size(), 
 		   source, 
 		   new String[] {
-			 "documentation", "File size in bytes."
+			 "documentation", "File size in bytes. A transformer like Blitlines is unable to provide this information immediately, an enhanced Blitlines transformer can update the size independently and asynchronously."
 		   });		
 		addAnnotation
 		  (getUploadedImage_Width(), 

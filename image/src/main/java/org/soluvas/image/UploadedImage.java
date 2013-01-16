@@ -162,15 +162,15 @@ public interface UploadedImage extends SerializableEObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * File size in bytes.
+	 * File size in bytes. A transformer like Blitlines is unable to provide this information immediately, an enhanced Blitlines transformer can update the size independently and asynchronously.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Size</em>' attribute.
-	 * @see #setSize(long)
+	 * @see #setSize(Long)
 	 * @see org.soluvas.image.ImagePackage#getUploadedImage_Size()
 	 * @model
 	 * @generated
 	 */
-	long getSize();
+	Long getSize();
 
 	/**
 	 * Sets the value of the '{@link org.soluvas.image.UploadedImage#getSize <em>Size</em>}' attribute.
@@ -180,7 +180,7 @@ public interface UploadedImage extends SerializableEObject {
 	 * @see #getSize()
 	 * @generated
 	 */
-	void setSize(long value);
+	void setSize(Long value);
 
 	/**
 	 * Returns the value of the '<em><b>Width</b></em>' attribute.

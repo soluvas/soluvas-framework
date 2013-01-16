@@ -141,7 +141,7 @@ public class UploadedImageImpl extends EObjectImpl implements UploadedImage {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long SIZE_EDEFAULT = 0L;
+	protected static final Long SIZE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getSize() <em>Size</em>}' attribute.
@@ -151,7 +151,7 @@ public class UploadedImageImpl extends EObjectImpl implements UploadedImage {
 	 * @generated
 	 * @ordered
 	 */
-	protected long size = SIZE_EDEFAULT;
+	protected Long size = SIZE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getWidth() <em>Width</em>}' attribute.
@@ -322,7 +322,7 @@ public class UploadedImageImpl extends EObjectImpl implements UploadedImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public long getSize() {
+	public Long getSize() {
 		return size;
 	}
 
@@ -331,8 +331,8 @@ public class UploadedImageImpl extends EObjectImpl implements UploadedImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSize(long newSize) {
-		long oldSize = size;
+	public void setSize(Long newSize) {
+		Long oldSize = size;
 		size = newSize;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ImagePackage.UPLOADED_IMAGE__SIZE, oldSize, size));
@@ -499,7 +499,7 @@ public class UploadedImageImpl extends EObjectImpl implements UploadedImage {
 			case ImagePackage.UPLOADED_IMAGE__EXTENSION:
 				return EXTENSION_EDEFAULT == null ? extension != null : !EXTENSION_EDEFAULT.equals(extension);
 			case ImagePackage.UPLOADED_IMAGE__SIZE:
-				return size != SIZE_EDEFAULT;
+				return SIZE_EDEFAULT == null ? size != null : !SIZE_EDEFAULT.equals(size);
 			case ImagePackage.UPLOADED_IMAGE__WIDTH:
 				return WIDTH_EDEFAULT == null ? width != null : !WIDTH_EDEFAULT.equals(width);
 			case ImagePackage.UPLOADED_IMAGE__HEIGHT:

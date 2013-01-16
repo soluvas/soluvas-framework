@@ -271,13 +271,40 @@ public interface ImagePackage extends EPackage {
 	int BLITLINE_TRANSFORMER__PREFIX = IMAGE_TRANSFORMER_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Cdn Alias</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLITLINE_TRANSFORMER__CDN_ALIAS = IMAGE_TRANSFORMER_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Key Template</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BLITLINE_TRANSFORMER__KEY_TEMPLATE = IMAGE_TRANSFORMER_FEATURE_COUNT + 3;
+	int BLITLINE_TRANSFORMER__KEY_TEMPLATE = IMAGE_TRANSFORMER_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLITLINE_TRANSFORMER__URI_TEMPLATE = IMAGE_TRANSFORMER_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Origin Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLITLINE_TRANSFORMER__ORIGIN_URI_TEMPLATE = IMAGE_TRANSFORMER_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Blitline Transformer</em>' class.
@@ -286,7 +313,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BLITLINE_TRANSFORMER_FEATURE_COUNT = IMAGE_TRANSFORMER_FEATURE_COUNT + 4;
+	int BLITLINE_TRANSFORMER_FEATURE_COUNT = IMAGE_TRANSFORMER_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.ThumbnailatorTransformerImpl <em>Thumbnailator Transformer</em>}' class.
@@ -750,6 +777,17 @@ public interface ImagePackage extends EPackage {
 	EAttribute getBlitlineTransformer_Prefix();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.BlitlineTransformer#getCdnAlias <em>Cdn Alias</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Cdn Alias</em>'.
+	 * @see org.soluvas.image.BlitlineTransformer#getCdnAlias()
+	 * @see #getBlitlineTransformer()
+	 * @generated
+	 */
+	EAttribute getBlitlineTransformer_CdnAlias();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.image.BlitlineTransformer#getKeyTemplate <em>Key Template</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -759,6 +797,28 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBlitlineTransformer_KeyTemplate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.BlitlineTransformer#getUriTemplate <em>Uri Template</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uri Template</em>'.
+	 * @see org.soluvas.image.BlitlineTransformer#getUriTemplate()
+	 * @see #getBlitlineTransformer()
+	 * @generated
+	 */
+	EAttribute getBlitlineTransformer_UriTemplate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.BlitlineTransformer#getOriginUriTemplate <em>Origin Uri Template</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Origin Uri Template</em>'.
+	 * @see org.soluvas.image.BlitlineTransformer#getOriginUriTemplate()
+	 * @see #getBlitlineTransformer()
+	 * @generated
+	 */
+	EAttribute getBlitlineTransformer_OriginUriTemplate();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.DavConnector <em>Dav Connector</em>}'.
@@ -1168,12 +1228,36 @@ public interface ImagePackage extends EPackage {
 		EAttribute BLITLINE_TRANSFORMER__PREFIX = eINSTANCE.getBlitlineTransformer_Prefix();
 
 		/**
+		 * The meta object literal for the '<em><b>Cdn Alias</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BLITLINE_TRANSFORMER__CDN_ALIAS = eINSTANCE.getBlitlineTransformer_CdnAlias();
+
+		/**
 		 * The meta object literal for the '<em><b>Key Template</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute BLITLINE_TRANSFORMER__KEY_TEMPLATE = eINSTANCE.getBlitlineTransformer_KeyTemplate();
+
+		/**
+		 * The meta object literal for the '<em><b>Uri Template</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BLITLINE_TRANSFORMER__URI_TEMPLATE = eINSTANCE.getBlitlineTransformer_UriTemplate();
+
+		/**
+		 * The meta object literal for the '<em><b>Origin Uri Template</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BLITLINE_TRANSFORMER__ORIGIN_URI_TEMPLATE = eINSTANCE.getBlitlineTransformer_OriginUriTemplate();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.DavConnectorImpl <em>Dav Connector</em>}' class.

@@ -38,6 +38,7 @@ import org.soluvas.image.impl.ThumbnailatorTransformerImpl;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
@@ -326,19 +327,23 @@ public class MongoImageRepository implements ImageRepository {
 		try {
 			// <del>Upload originals last, so that unreadable images aren't uploaded at all</del>
 			// Originals must be uploaded first, because Blitline transformer requires them!
-			final String originalPublicUri;
+			
+			final String originalUri;
+			final String originalOriginUri;
 			if (alsoUploadOriginal) {
 				try {
-					UploadedImage originalUpload = connector.upload(namespace, imageId, ORIGINAL_CODE, ORIGINAL_CODE, extension,
+					final UploadedImage originalUpload = connector.upload(namespace, imageId, ORIGINAL_CODE, ORIGINAL_CODE, extension,
 							originalFile, contentType);
-					originalPublicUri = originalUpload.getOriginUri();
+					originalUri = originalUpload.getUri();
+					originalOriginUri = originalUpload.getOriginUri();
 				} catch (Exception e) {
 					throw new ImageException("Error uploading original " + imageId + " using " + connector, e);
 				}
 			} else {
 				log.info("Not uploading original {} using {} because requested by caller (probably for reprocess)",
 						imageId, connector);
-				originalPublicUri = "";
+				originalUri = connector.getUri(namespace, imageId, ORIGINAL_CODE, ORIGINAL_CODE, extension);
+				originalOriginUri = connector.getOriginUri(namespace, imageId, ORIGINAL_CODE, ORIGINAL_CODE, extension);
 			}
 //			Future<Object> originalFuture = Futures.future(uploadOriginal, system.dispatcher());
 
@@ -366,7 +371,7 @@ public class MongoImageRepository implements ImageRepository {
 			}
 			final Map<ImageTransform, ImageVariant> transforms = transformsBuilder.build();
 			// FIXME: transform and upload
-			transformer.transform(namespace, imageId, sourceVariant, transforms);
+			final List<UploadedImage> transformeds = transformer.transform(namespace, imageId, sourceVariant, transforms);
 
 //			// Upload these thumbnails
 //			List<Future<StyledImage>> uploadedFutures = Lists.transform(styledFutures, new com.google.common.base.Function<Future<ResizeResult>, Future<StyledImage>>() {
@@ -399,31 +404,47 @@ public class MongoImageRepository implements ImageRepository {
 //			Await.result(originalFuture, Timeout.never().duration());
 			
 			final BasicBSONObject stylesObj = new BasicBSONObject();
-			for (final StyledImage styled : styledImages) {
+			for (final UploadedImage transformed : transformeds) {
 //				StyledImage styled = Await.result(future, Timeout.never().duration());
-				Map<String, Object> bson = new HashMap<String, Object>();
-				bson.put("code", styled.getCode());
-				bson.put("uri", styled.getUri().toString());
-				bson.put("contentType", styled.getContentType());
-				bson.put("size", styled.getSize());
-				bson.put("width", styled.getWidth());
-				bson.put("height", styled.getHeight());
-				stylesObj.put(styled.getStyleName(), bson);
+				final ImageStyle style = Iterables.find(styles.values(), new Predicate<ImageStyle>() {
+					@Override
+					public boolean apply(@Nullable ImageStyle input) {
+						return transformed.getStyleCode().equals(input.getCode());
+					}
+				});
+				final Map<String, Object> bson = new HashMap<String, Object>();
+				bson.put("className", StyledImage.class.getName());
+				bson.put("name", style.getName());
+				bson.put("code", transformed.getStyleCode());
+				bson.put("styleCode", transformed.getStyleCode());
+				bson.put("styleVariant", transformed.getStyleVariant());
+				bson.put("extension", transformed.getExtension());
+				bson.put("uri", transformed.getUri());
+				bson.put("originUri", transformed.getOriginUri());
+				bson.put("contentType", "image/jpeg"); // TODO: don't hardcode content type
+				bson.put("size", transformed.getSize());
+				bson.put("width", transformed.getWidth());
+				bson.put("height", transformed.getHeight());
+				stylesObj.put(style.getName(), bson);
 			}
 			
 			// Create mongoDB
 			final BasicDBObject dbo = new BasicDBObject();
 			dbo.put("_id", imageId);
 			dbo.put("name", name);
-			dbo.put("uri", originalPublicUri.toString());
+			dbo.put("uri", originalUri);
+			dbo.put("originUri", originalOriginUri);
 			dbo.put("fileName", originalName);
 			dbo.put("contentType", contentType);
+			dbo.put("extension", extension);
 			dbo.put("size", (int)length);
-			dbo.put("created", new Date());
+			final Date creationTime = new Date();
+			dbo.put("created", creationTime);
+			dbo.put("creationTime", creationTime);
 			dbo.put("styles", stylesObj);
 			
-			log.info("Upserting image {} ({}) metadata into MongoDB collection {}", new Object[] { 
-					imageId, name, mongoColl.getName() });
+			log.info("Upserting image {} ({}) metadata into MongoDB collection {}", 
+					imageId, name, mongoColl.getName() );
 			mongoColl.update(new BasicDBObject("_id", imageId), dbo, true, false);
 			
 			return imageId;

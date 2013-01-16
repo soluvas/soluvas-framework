@@ -2,10 +2,10 @@
  */
 package org.soluvas.image.impl;
 
-import java.util.List;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImageException;
+import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageVariant;
@@ -36,6 +37,7 @@ import org.soluvas.image.ThumbnailatorTransformer;
 import org.soluvas.image.UploadedImage;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 
 /**
  * <!-- begin-user-doc -->
@@ -153,7 +155,7 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public void transform(String namespace, String imageId, ImageVariant sourceVariant,
+	public List<UploadedImage> transform(String namespace, String imageId, ImageVariant sourceVariant,
 			Map<ImageTransform, ImageVariant> transforms) {
 		// download original
 		final File originalFile;
@@ -165,6 +167,8 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 					sourceVariant.getStyleCode(), imageId);
 		}
 		source.download(namespace, imageId, sourceVariant.getStyleCode(), sourceVariant.getStyleVariant(), sourceVariant.getExtension(), originalFile);
+		
+		final ImmutableList.Builder<UploadedImage> uploads = ImmutableList.builder();
 		try {
 			for (Entry<ImageTransform, ImageVariant> entry : transforms.entrySet()) {
 				final ImageTransform transform = entry.getKey();
@@ -243,19 +247,33 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 //								style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
 //								(int)styledFile.length(), width, height);
 //						return styled;
+						
+						final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
+						uploadedImage.setStyleCode(dest.getStyleCode());
+						uploadedImage.setStyleVariant(dest.getStyleVariant());
+						uploadedImage.setExtension(dest.getExtension());
+						uploadedImage.setOriginUri(styledPublicUri);
+						uploadedImage.setUri(styledPublicUri);
+						uploadedImage.setWidth(width);
+						uploadedImage.setHeight(height);
+						uploadedImage.setSize(styledFile.length());
+						uploads.add(uploadedImage);
+						
 					} catch (final Exception e) {
 						throw new ImageException("Error uploading " + dest.getStyleCode() + " " + imageId + " using " + destination, e);
 					}
-					
+
 				} finally {
 					log.debug("Deleting temporary {} {} styled image {}", dest.getStyleCode(), imageId, styledFile);
 					styledFile.delete();
 				}
+				
 			}
 		} finally {
 			log.debug("Deleting original file {}", originalFile);
 			originalFile.delete();
 		}
+		return uploads.build();
 	}
 
 	/**

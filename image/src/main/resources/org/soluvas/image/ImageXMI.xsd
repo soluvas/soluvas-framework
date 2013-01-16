@@ -134,6 +134,11 @@ The destination image is directly written into an S3 bucket. Make sure to set th
         <xsd:attribute name="applicationId" type="xsd:string"/>
         <xsd:attribute name="bucket" type="xsd:string"/>
         <xsd:attribute name="prefix" type="xsd:string"/>
+        <xsd:attribute name="cdnAlias" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>CDN alias (if available), e.g. pic.stg.berbatik.com.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
         <xsd:attribute name="keyTemplate" type="xsd:string">
           <xsd:annotation>
             <xsd:documentation>key template in URI template format.
@@ -141,6 +146,24 @@ The destination image is directly written into an S3 bucket. Make sure to set th
 Variables are: namespace, styleCode, imageId, styleVariant, extension.
 
 Default is: "{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="uriTemplate" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>URI template for 'lo' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.
+
+Variables are: namespace, styleCode, imageId, styleVariant, ext.
+
+Default is: {+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="originUriTemplate" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>URI template for 'lo' (derived) images, without CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.
+
+Variables are: namespace, styleCode, imageId, styleVariant, ext.
+
+Default is: {+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
       </xsd:extension>
@@ -180,7 +203,7 @@ The destination image is directly written into an S3 bucket. Make sure to set th
     <xsd:attribute name="extension" type="xsd:string"/>
     <xsd:attribute name="size" type="xsd:long">
       <xsd:annotation>
-        <xsd:documentation>File size in bytes.</xsd:documentation>
+        <xsd:documentation>File size in bytes. A transformer like Blitlines is unable to provide this information immediately, an enhanced Blitlines transformer can update the size independently and asynchronously.</xsd:documentation>
       </xsd:annotation>
     </xsd:attribute>
     <xsd:attribute name="width" type="xsd:int">
