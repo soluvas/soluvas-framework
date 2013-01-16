@@ -4,6 +4,8 @@ package org.soluvas.image;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -43,6 +45,7 @@ public interface BlitlineTransformer extends ImageTransformer {
 	 * "functions" : [ {"name": "blur", "params" : {"radius" : 0.0, "sigma" : 2.0}, "save" : { "image_identifier" : "MY_CLIENT_ID" }} ]}'	
 	 */
 		
+	@JsonInclude(Include.NON_NULL)
 	public static class JobS3Destination {
 		public String bucket;
 		public String key;
@@ -72,6 +75,8 @@ public interface BlitlineTransformer extends ImageTransformer {
 		}
 		
 	}
+	
+	@JsonInclude(Include.NON_NULL)
 	public static class JobSave {
 		@JsonProperty("image_identifier")
 		public String imageIdentifier;
@@ -104,6 +109,7 @@ public interface BlitlineTransformer extends ImageTransformer {
 		
 	}
 	
+	@JsonInclude(Include.NON_NULL)
 	public static class JobFunction {
 		public String name;
 		public Map<String, Object> params;
@@ -139,6 +145,7 @@ public interface BlitlineTransformer extends ImageTransformer {
 		
 	}
 	
+	@JsonInclude(Include.NON_NULL)
 	public static class Job {
 		@JsonProperty("application_id")
 		public String applicationId;
@@ -250,7 +257,7 @@ public interface BlitlineTransformer extends ImageTransformer {
 
 	/**
 	 * Returns the value of the '<em><b>Uri Template</b></em>' attribute.
-	 * The default value is <code>"{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}"</code>.
+	 * The default value is <code>"http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -258,18 +265,18 @@ public interface BlitlineTransformer extends ImageTransformer {
 	 * 
 	 * Variables are: namespace, styleCode, imageId, styleVariant, ext.
 	 * 
-	 * Default is: {+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}
+	 * Default is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Uri Template</em>' attribute.
 	 * @see org.soluvas.image.ImagePackage#getBlitlineTransformer_UriTemplate()
-	 * @model default="{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}" changeable="false"
+	 * @model default="http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}" changeable="false"
 	 * @generated
 	 */
 	String getUriTemplate();
 
 	/**
 	 * Returns the value of the '<em><b>Origin Uri Template</b></em>' attribute.
-	 * The default value is <code>"{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}"</code>.
+	 * The default value is <code>"http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -277,11 +284,11 @@ public interface BlitlineTransformer extends ImageTransformer {
 	 * 
 	 * Variables are: namespace, styleCode, imageId, styleVariant, ext.
 	 * 
-	 * Default is: {+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}
+	 * Default is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Origin Uri Template</em>' attribute.
 	 * @see org.soluvas.image.ImagePackage#getBlitlineTransformer_OriginUriTemplate()
-	 * @model default="{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}" changeable="false"
+	 * @model default="http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}" changeable="false"
 	 * @generated
 	 */
 	String getOriginUriTemplate();

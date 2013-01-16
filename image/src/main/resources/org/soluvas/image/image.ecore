@@ -110,7 +110,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BlitlineTransformer" eSuperTypes="#//ImageTransformer">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Processes using Blitline. The source image must be publicly hosted, for example using S3.&#xA;&#xA;The destination image is directly written into an S3 bucket. Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions"/>
+      <details key="documentation" value="Processes using Blitline. The source image must be publicly hosted, for example using S3.&#xA;&#xA;The destination image is directly written into an S3 bucket.&#xA;&#xA;You must have an S3 account and have permissions to change the policy on your bucket&#xA;For these instructions, you must use the Amazon AWS Console&#xA;See: http://www.blitline.com/docs/s3_permissions&#xA;&#xA;Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         changeable="false"/>
@@ -131,15 +131,15 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uriTemplate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
-        changeable="false" defaultValueLiteral="{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}">
+        changeable="false" defaultValueLiteral="http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="URI template for 'lo' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, ext.&#xA;&#xA;Default is: {+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}"/>
+        <details key="documentation" value="URI template for 'lo' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, ext.&#xA;&#xA;Default is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="originUriTemplate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
-        changeable="false" defaultValueLiteral="{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}">
+        changeable="false" defaultValueLiteral="http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="URI template for 'lo' (derived) images, without CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, ext.&#xA;&#xA;Default is: {+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}"/>
+        <details key="documentation" value="URI template for 'lo' (derived) images, without CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, ext.&#xA;&#xA;Default is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -167,7 +167,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELongObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="File size in bytes. A transformer like Blitlines is unable to provide this information immediately, an enhanced Blitlines transformer can update the size independently and asynchronously."/>
+        <details key="documentation" value="File size in bytes. A transformer like Blitline is unable to provide this information immediately, an enhanced Blitlines transformer can update the size independently and asynchronously"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EIntegerObject">

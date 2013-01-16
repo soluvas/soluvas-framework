@@ -37,6 +37,7 @@ import org.soluvas.json.JsonUtils;
 import com.damnhandy.uri.template.UriTemplate;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
 /**
@@ -59,6 +60,7 @@ import com.google.common.collect.Maps;
  *
  * @generated
  */
+@SuppressWarnings("serial")
 public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTransformer {
 
 	private static final Logger log = LoggerFactory
@@ -174,7 +176,7 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String URI_TEMPLATE_EDEFAULT = "{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
+	protected static final String URI_TEMPLATE_EDEFAULT = "http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
 	/**
 	 * The cached value of the '{@link #getUriTemplate() <em>Uri Template</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -192,7 +194,7 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ORIGIN_URI_TEMPLATE_EDEFAULT = "{+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
+	protected static final String ORIGIN_URI_TEMPLATE_EDEFAULT = "http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
 	/**
 	 * The cached value of the '{@link #getOriginUriTemplate() <em>Origin Uri Template</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -213,9 +215,11 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	
 	public BlitlineTransformerImpl(ImageConnector source, String applicationId, String bucket, String prefix,
 			String cdnAlias) {
+		// FIXME: source shouldn't a field, it should be parameter to transform, so we can reuse the same
+		// blitline transformer multiple times
 		super();
-		this.applicationId = applicationId;
 		this.source = source;
+		this.applicationId = applicationId;
 		this.bucket = bucket;
 		this.prefix = prefix;
 		this.cdnAlias = cdnAlias;
@@ -355,8 +359,8 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 				if (fx.getHeight() != null)
 					params.put("height", fx.getHeight());
 				final String jobId = String.format("%s/%s/%s_%s.%s",
-						namespace, imageId,
-						dest.getStyleCode(), dest.getStyleVariant(), dest.getExtension());
+						namespace, dest.getStyleCode(), imageId,
+						dest.getStyleVariant(), dest.getExtension());
 				// namespace, styleCode, imageId, styleVariant, extension
 				final Map<String, Object> uriVars = Maps.newHashMap();
 				uriVars.put("prefix", prefix);
@@ -366,8 +370,10 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 				uriVars.put("styleVariant", dest.getStyleVariant());
 				uriVars.put("extension", dest.getExtension());
 				final String key = UriTemplate.fromTemplate(keyTemplate).expand(uriVars);
+				final JobS3Destination s3dest = new JobS3Destination(bucket, key,
+						ImmutableMap.of("x-amz-storage-class", "REDUCED_REDUNDANCY"));
 				final Job job = new Job(applicationId, sourceUri, new JobFunction("resize_to_fill", params,
-						new JobSave(jobId, new JobS3Destination(bucket, key))));
+						new JobSave(jobId, s3dest)));
 				final String jobJson = JsonUtils.asJson(job);
 				log.debug("Sending transform {}", jobJson);
 				try {
@@ -392,7 +398,7 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 							
 							final Map<String, Object> cdnVars = Maps.newHashMap(uriVars);
 							cdnVars.put("alias", Optional.fromNullable(cdnAlias).or(originAlias));
-							final String cdnUri = originUriExpander.expand(originVars);
+							final String cdnUri = uriExpander.expand(cdnVars);
 							
 							final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
 							uploadedImage.setStyleCode(dest.getStyleCode());

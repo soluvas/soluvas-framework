@@ -154,7 +154,7 @@ Default is: "{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extensio
 
 Variables are: namespace, styleCode, imageId, styleVariant, ext.
 
-Default is: {+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}</xsd:documentation>
+Default is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
         <xsd:attribute name="originUriTemplate" type="xsd:string">
@@ -163,7 +163,7 @@ Default is: {+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{e
 
 Variables are: namespace, styleCode, imageId, styleVariant, ext.
 
-Default is: {+alias}{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}</xsd:documentation>
+Default is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
       </xsd:extension>
@@ -203,7 +203,7 @@ The destination image is directly written into an S3 bucket. Make sure to set th
     <xsd:attribute name="extension" type="xsd:string"/>
     <xsd:attribute name="size" type="xsd:long">
       <xsd:annotation>
-        <xsd:documentation>File size in bytes. A transformer like Blitlines is unable to provide this information immediately, an enhanced Blitlines transformer can update the size independently and asynchronously.</xsd:documentation>
+        <xsd:documentation>File size in bytes. A transformer like Blitline is unable to provide this information immediately, an enhanced Blitlines transformer can update the size independently and asynchronously</xsd:documentation>
       </xsd:annotation>
     </xsd:attribute>
     <xsd:attribute name="width" type="xsd:int">

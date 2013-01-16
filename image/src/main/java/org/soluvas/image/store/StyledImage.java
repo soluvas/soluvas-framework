@@ -11,16 +11,16 @@ import java.net.URI;
  */
 public class StyledImage {
 
-	private String styleName;
-	private String code;
-	private URI uri;
-	private String contentType;
-	private int size;
-	private int width;
-	private int height;
+	private final String styleName;
+	private final String code;
+	private final URI uri;
+	private final String contentType;
+	private final Long size;
+	private final int width;
+	private final int height;
 	
 	public StyledImage(String styleName, String code, URI uri,
-			String contentType, int size, int width, int height) {
+			String contentType, Long size, int width, int height) {
 		super();
 		this.styleName = styleName;
 		this.code = code;
@@ -47,7 +47,7 @@ public class StyledImage {
 		return contentType;
 	}
 
-	public int getSize() {
+	public Long getSize() {
 		return size;
 	}
 
@@ -57,6 +57,20 @@ public class StyledImage {
 
 	public int getHeight() {
 		return height;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "StyledImage ["
+				+ (styleName != null ? "styleName=" + styleName + ", " : "")
+				+ (code != null ? "code=" + code + ", " : "")
+				+ (uri != null ? "uri=" + uri + ", " : "")
+				+ (contentType != null ? "contentType=" + contentType + ", "
+						: "") + (size != null ? "size=" + size + ", " : "")
+				+ "width=" + width + ", height=" + height + "]";
 	}
 	
 }

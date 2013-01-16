@@ -79,9 +79,10 @@ public class Image {
 			@Override
 			public StyledImage transformEntry(String key, Object value) {
 				BasicBSONObject styleBson = (BasicBSONObject)value;
+				final Long size = styleBson.get("size") != null ? (Long)styleBson.get("size") : null;
 				return new StyledImage(key, styleBson.getString("code"),
 						URI.create(styleBson.getString("uri")),
-						styleBson.getString("contentType"), styleBson.getInt("size"),
+						styleBson.getString("contentType"), size,
 						styleBson.getInt("width"), styleBson.getInt("height"));
 			}
 		});

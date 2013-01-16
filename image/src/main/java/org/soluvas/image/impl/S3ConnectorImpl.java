@@ -162,19 +162,19 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	public UploadedImage upload(String namespace, String imageId,
 			String styleCode, String styleVariant, String extension, final File file,
 			String contentType) {
-		boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
-		String bucket = useHi ? hiBucket : loBucket;
-		String key = String.format("%s%s/%s/%s_%s.%s",
+		final boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
+		final String bucket = useHi ? hiBucket : loBucket;
+		final String key = String.format("%s%s/%s/%s_%s.%s",
 				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleVariant, extension);
-		AccessControlList acl = new AccessControlList();
+		final AccessControlList acl = new AccessControlList();
 		if (!Strings.isNullOrEmpty(canonicalUserId)) {
 			acl.grantPermission(new CanonicalGrantee(canonicalUserId), Permission.FullControl);
 		}
 		acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
-		PutObjectRequest putReq = new PutObjectRequest(bucket, key, file)
+		final PutObjectRequest putReq = new PutObjectRequest(bucket, key, file)
 			.withAccessControlList(acl)
 			.withStorageClass(useHi ? StorageClass.Standard : StorageClass.ReducedRedundancy);
-		Upload upload = transferMgr.upload(putReq);
+		final Upload upload = transferMgr.upload(putReq);
 		final String s3Uri = "s3://" + bucket + "/" + key;
 		upload.addProgressListener(new ProgressListener() {
 			@Override
@@ -203,13 +203,13 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 		});
 		
 		try {
-			UploadResult uploadResult = upload.waitForUploadResult();
+			final UploadResult uploadResult = upload.waitForUploadResult();
 			log.info("Upload {} to {} result: etag={} versionId={} bucket={} key={}",
 					uploadResult.getETag(),
 					uploadResult.getVersionId(),
 					uploadResult.getBucketName(),
 					uploadResult.getKey() );
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new ImageException(e, "Cannot upload %s to %s", file, s3Uri);
 		}
 		
@@ -222,7 +222,7 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 			originAlias = Strings.isNullOrEmpty(loOriginAlias) ? loBucket + ".s3.amazonaws.com" : loOriginAlias;
 			cdnAlias = Strings.isNullOrEmpty(loCdnAlias) ? loBucket + ".s3.amazonaws.com" : loCdnAlias;
 		}
-		UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
+		final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
 		uploadedImage.setOriginUri("http://" + originAlias + "/" + key);
 		uploadedImage.setUri("http://" + cdnAlias + "/" + key);
 		return uploadedImage;
@@ -231,9 +231,9 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	@Override
 	public void delete(String namespace, String imageId, String styleCode,
 			String styleVariant, String extension) {
-		boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
-		String bucket = useHi ? hiBucket : loBucket;
-		String key = String.format("%s%s/%s/%s_%s.%s",
+		final boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
+		final String bucket = useHi ? hiBucket : loBucket;
+		final String key = String.format("%s%s/%s/%s_%s.%s",
 				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleVariant, extension);
 		try {
 			s3Client.deleteObject(bucket, key);
@@ -254,14 +254,14 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	@Override
 	public boolean download(String namespace, String imageId, String styleCode,
 			String styleVariant, String extension, File file) {
-		boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
-		String bucket = useHi ? hiBucket : loBucket;
-		String key = String.format("%s%s/%s/%s_%s.%s",
+		final boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
+		final String bucket = useHi ? hiBucket : loBucket;
+		final String key = String.format("%s%s/%s/%s_%s.%s",
 				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleVariant, extension);
 		try {
-			Download download = transferMgr.download(bucket, key, file);
+			final Download download = transferMgr.download(bucket, key, file);
 			download.waitForCompletion();
-			log.debug("Downloaded s3://{}/{} versionId={} desc={} meta={}",
+			log.debug("Downloaded s3://{}/{} desc={} meta={}",
 					download.getBucketName(), download.getKey(),
 					download.getDescription(), download.getObjectMetadata());
 			return true;
@@ -273,13 +273,13 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	@Override
 	public String getOriginUri(String namespace, String imageId,
 			String styleCode, String styleVariant, String extension) {
-		String originAlias; 
+		final String originAlias; 
 		if ("o".equals(styleCode)) {
 			originAlias = Strings.isNullOrEmpty(hiOriginAlias) ? hiBucket + ".s3.amazonaws.com" : hiOriginAlias;
 		} else {
 			originAlias = Strings.isNullOrEmpty(loOriginAlias) ? loBucket + ".s3.amazonaws.com" : loOriginAlias;
 		}
-		String uriTemplate = "http://" + originAlias + "/" + Strings.nullToEmpty(prefix) +
+		final String uriTemplate = "http://" + originAlias + "/" + Strings.nullToEmpty(prefix) +
 				"{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
 		// namespace, styleCode, imageId, styleVariant, extension
 		final Map<String, Object> uriVars = Maps.newHashMap();

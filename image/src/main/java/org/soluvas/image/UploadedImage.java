@@ -162,7 +162,7 @@ public interface UploadedImage extends SerializableEObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * File size in bytes. A transformer like Blitlines is unable to provide this information immediately, an enhanced Blitlines transformer can update the size independently and asynchronously.
+	 * File size in bytes. A transformer like Blitline is unable to provide this information immediately, an enhanced Blitlines transformer can update the size independently and asynchronously
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Size</em>' attribute.
 	 * @see #setSize(Long)

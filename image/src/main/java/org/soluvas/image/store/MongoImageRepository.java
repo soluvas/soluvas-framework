@@ -151,8 +151,7 @@ public class MongoImageRepository implements ImageRepository {
 	
 	// URI: ~repo.publicUri~{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}
 	public MongoImageRepository(String namespace, String mongoUri, ImageConnector connector,
-			ImageTransformer transformer,
-			List<ImageStyle> imageStyles) {
+			ImageTransformer transformer, List<ImageStyle> imageStyles) {
 		super();
 		this.namespace = namespace;
 		this.mongoUri = mongoUri;
@@ -165,7 +164,7 @@ public class MongoImageRepository implements ImageRepository {
 	 * @see org.soluvas.image.store.ImageRepository#init()
 	 */
 	public void init() {
-		log.info("Starting MongoImageRepository {}", namespace);
+		log.info("Starting MongoImageRepository {} with {} styles", namespace, styles.size());
 		
 		// Sanity checks
 		if (mongoUri == null || mongoUri.isEmpty())
@@ -337,11 +336,11 @@ public class MongoImageRepository implements ImageRepository {
 					originalUri = originalUpload.getUri();
 					originalOriginUri = originalUpload.getOriginUri();
 				} catch (Exception e) {
-					throw new ImageException("Error uploading original " + imageId + " using " + connector, e);
+					throw new ImageException("Error uploading original " + imageId + " using " + connector.getClass().getName(), e);
 				}
 			} else {
 				log.info("Not uploading original {} using {} because requested by caller (probably for reprocess)",
-						imageId, connector);
+						imageId, connector.getClass().getName());
 				originalUri = connector.getUri(namespace, imageId, ORIGINAL_CODE, ORIGINAL_CODE, extension);
 				originalOriginUri = connector.getOriginUri(namespace, imageId, ORIGINAL_CODE, ORIGINAL_CODE, extension);
 			}
@@ -367,11 +366,14 @@ public class MongoImageRepository implements ImageRepository {
 				// TODO: support variant
 				dest.setStyleVariant(style.getCode());
 				// TODO: don't hardcode extension
-				dest.setStyleVariant("jpg");
+				dest.setExtension("jpg");
+				transformsBuilder.put(fx, dest);
 			}
 			final Map<ImageTransform, ImageVariant> transforms = transformsBuilder.build();
 			// FIXME: transform and upload
+			log.debug("Transforming {} into {} variants using {}", imageId, transforms.size(), transformer.getClass().getName());
 			final List<UploadedImage> transformeds = transformer.transform(namespace, imageId, sourceVariant, transforms);
+			log.info("Got {} transformed images of {} from {}", transformeds.size(), imageId, transformer.getClass().getName());
 
 //			// Upload these thumbnails
 //			List<Future<StyledImage>> uploadedFutures = Lists.transform(styledFutures, new com.google.common.base.Function<Future<ResizeResult>, Future<StyledImage>>() {
@@ -534,7 +536,7 @@ public class MongoImageRepository implements ImageRepository {
 		// TODO: should store extension of original, also the styleds
 		String fileName = image.getFileName();
 		String originalExtension = !Strings.isNullOrEmpty(fileName) ? FilenameUtils.getExtension(fileName) : "jpg";
-		connector.delete(namespace, id, "o", "o", originalExtension);
+		connector.delete(namespace, id, ImageRepository.ORIGINAL_CODE, ImageRepository.ORIGINAL_CODE, originalExtension);
 		
 		log.debug("Deleting {} image metadata {}", namespace, id);
 		try {
@@ -644,22 +646,23 @@ public class MongoImageRepository implements ImageRepository {
 	/**
 	 * @param images
 	 */
-	protected void doReprocess(Iterable<Image> images) {
-		log.info("Reprocessing {} images", Iterables.size(images));
-		for (Image image : images) {
-			log.info("Downloading {} from {}", image.getId(), image.getUri());
-			String extension = getExtensionOrJpg(image.getFileName());
-			
+	protected void doReprocess(Collection<Image> images) {
+		log.info("Reprocessing {} images", images.size());
+		for (final Image image : images) {
+			final String extension = getExtensionOrJpg(image.getFileName());
 			try {
-				File tempFile = File.createTempFile(image.getId(), "." + extension);
+				// TODO: reprocessing should not require download (esp. for blitline transformer) 
+				final File tempFile = File.createTempFile(image.getId(), "." + extension);
+				log.info("Downloading {} from {} to {}", image.getId(), image.getUri(), tempFile);
 				try {
-					boolean downloaded = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE,
+					final boolean downloaded = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE,
 							extension, tempFile);
 					if (downloaded) {
 						doCreate(image.getId(), tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
 								image.getFileName(), false);
 					} else {
-						log.error("Cannot download {} because connector returned false", image.getId());
+						log.error("Cannot download {} because connector {} returned false",
+								image.getId(), connector.getClass().getName());
 					}
 				} finally {
 					log.trace("Deleting temporary file {} (image {})", tempFile, image.getId());
