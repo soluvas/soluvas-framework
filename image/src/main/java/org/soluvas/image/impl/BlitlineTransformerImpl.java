@@ -347,7 +347,8 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 		
 		final String sourceUri = source.getOriginUri(namespace, imageId,
 				sourceVariant.getStyleCode(), sourceVariant.getStyleVariant(), sourceVariant.getExtension());
-		final ImmutableList.Builder<UploadedImage> uploads = ImmutableList.builder();
+		final ImmutableList.Builder<UploadedImage> uploadsBuilder = ImmutableList.builder();
+		final ImmutableList.Builder<JobFunction> jobFuncsBuilder = ImmutableList.builder();
 		for (final Entry<ImageTransform, ImageVariant> entry : transforms.entrySet()) {
 			final ImageTransform transform = entry.getKey();
 			final ImageVariant dest = entry.getValue();
@@ -358,7 +359,7 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 					params.put("width", fx.getWidth());
 				if (fx.getHeight() != null)
 					params.put("height", fx.getHeight());
-				final String jobId = String.format("%s/%s/%s_%s.%s",
+				final String funcId = String.format("%s/%s/%s_%s.%s",
 						namespace, dest.getStyleCode(), imageId,
 						dest.getStyleVariant(), dest.getExtension());
 				// namespace, styleCode, imageId, styleVariant, extension
@@ -372,58 +373,62 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 				final String key = UriTemplate.fromTemplate(keyTemplate).expand(uriVars);
 				final JobS3Destination s3dest = new JobS3Destination(bucket, key,
 						ImmutableMap.of("x-amz-storage-class", "REDUCED_REDUNDANCY"));
-				final Job job = new Job(applicationId, sourceUri, new JobFunction("resize_to_fill", params,
-						new JobSave(jobId, s3dest)));
-				final String jobJson = JsonUtils.asJson(job);
-				log.debug("Sending transform {}", jobJson);
-				try {
-					final HttpPost postReq = new HttpPost("http://api.blitline.com/job");
-					postReq.setEntity(new UrlEncodedFormEntity(ImmutableList.of(new BasicNameValuePair("json", jobJson))));
-					final HttpResponse response = client.execute(postReq);
-					try {
-						final StatusLine responseStatus = response.getStatusLine();
-						final String responseBody;
-						if (response.getEntity() != null)
-							responseBody = IOUtils.toString(response.getEntity().getContent());
-						else
-							responseBody = null;
-						if (responseStatus.getStatusCode() >= 200 && responseStatus.getStatusCode() < 300) {
-							log.info("Transform {} returned {}: {}", jobId, responseStatus,
-									responseBody);
-							final String originAlias = bucket + ".s3.amazonaws.com";
-							
-							final Map<String, Object> originVars = Maps.newHashMap(uriVars);
-							originVars.put("alias", originAlias);
-							final String originUri = originUriExpander.expand(originVars);
-							
-							final Map<String, Object> cdnVars = Maps.newHashMap(uriVars);
-							cdnVars.put("alias", Optional.fromNullable(cdnAlias).or(originAlias));
-							final String cdnUri = uriExpander.expand(cdnVars);
-							
-							final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
-							uploadedImage.setStyleCode(dest.getStyleCode());
-							uploadedImage.setStyleVariant(dest.getStyleVariant());
-							uploadedImage.setExtension(dest.getExtension());
-							uploadedImage.setOriginUri(originUri);
-							uploadedImage.setUri(cdnUri);
-							uploadedImage.setWidth(fx.getWidth());
-							uploadedImage.setHeight(fx.getHeight());
-							uploadedImage.setSize(null); // TODO: update size when Blitline gives us a postback
-							uploads.add(uploadedImage);
-						} else
-							log.error("Transform {} returned {}: {}", jobId, responseStatus,
-									responseBody);
-					} finally {
-						HttpClientUtils.closeQuietly(response);
-					}
-				} catch (Exception e) {
-					log.error("Error processing " + sourceVariant + " as " + transform + " to " + dest, e);
-				}
+				final JobFunction jobFunc = new JobFunction("resize_to_fill", params, new JobSave(funcId, s3dest));
+				jobFuncsBuilder.add(jobFunc);
+				
+				// predict what will be returned
+				final String originAlias = bucket + ".s3.amazonaws.com";
+				
+				final Map<String, Object> originVars = Maps.newHashMap(uriVars);
+				originVars.put("alias", originAlias);
+				final String originUri = originUriExpander.expand(originVars);
+				
+				final Map<String, Object> cdnVars = Maps.newHashMap(uriVars);
+				cdnVars.put("alias", Optional.fromNullable(cdnAlias).or(originAlias));
+				final String cdnUri = uriExpander.expand(cdnVars);
+				
+				final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
+				uploadedImage.setStyleCode(dest.getStyleCode());
+				uploadedImage.setStyleVariant(dest.getStyleVariant());
+				uploadedImage.setExtension(dest.getExtension());
+				uploadedImage.setOriginUri(originUri);
+				uploadedImage.setUri(cdnUri);
+				uploadedImage.setWidth(fx.getWidth());
+				uploadedImage.setHeight(fx.getHeight());
+				uploadedImage.setSize(null); // TODO: update size when Blitline gives us a postback
+				uploadsBuilder.add(uploadedImage);
 			} else {
 				throw new UnsupportedOperationException("Transform not supported: " + transform);
 			}
 		}
-		return uploads.build();
+		
+		final List<JobFunction> jobFuncs = jobFuncsBuilder.build();
+		final Job job = new Job(applicationId, sourceUri, jobFuncs);
+		final String jobJson = JsonUtils.asJson(job);
+		log.debug("Sending job with {} functions: {}", jobFuncs.size(), jobJson);
+		try {
+			final HttpPost postReq = new HttpPost("http://api.blitline.com/job");
+			postReq.setEntity(new UrlEncodedFormEntity(ImmutableList.of(new BasicNameValuePair("json", jobJson))));
+			final HttpResponse response = client.execute(postReq);
+			try {
+				final StatusLine responseStatus = response.getStatusLine();
+				final String responseBody;
+				if (response.getEntity() != null)
+					responseBody = IOUtils.toString(response.getEntity().getContent());
+				else
+					responseBody = null;
+				if (responseStatus.getStatusCode() >= 200 && responseStatus.getStatusCode() < 300) {
+					log.info("Job returned {}: {}", responseStatus, responseBody);
+				} else
+					log.error("Job returned {}: {}", responseStatus, responseBody);
+			} finally {
+				HttpClientUtils.closeQuietly(response);
+			}
+		} catch (Exception e) {
+			log.error("Error transforming " + sourceVariant + " with " + jobFuncs.size() + " functions: " + jobJson, e);
+		}
+		
+		return uploadsBuilder.build();
 	}
 
 	/**

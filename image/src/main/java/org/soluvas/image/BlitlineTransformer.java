@@ -2,11 +2,13 @@
  */
 package org.soluvas.image;
 
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.ImmutableList;
 
 
 /**
@@ -114,7 +116,7 @@ public interface BlitlineTransformer extends ImageTransformer {
 		public String name;
 		public Map<String, Object> params;
 		public JobSave save;
-		public JobFunction[] functions;
+		public List<JobFunction> functions;
 		
 		/**
 		 * @param name
@@ -123,7 +125,7 @@ public interface BlitlineTransformer extends ImageTransformer {
 		 * @param functions
 		 */
 		public JobFunction(String name, Map<String, Object> params, JobSave save,
-				JobFunction[] functions) {
+				List<JobFunction> functions) {
 			super();
 			this.name = name;
 			this.params = params;
@@ -150,14 +152,14 @@ public interface BlitlineTransformer extends ImageTransformer {
 		@JsonProperty("application_id")
 		public String applicationId;
 		public String src;
-		public JobFunction[] functions;
+		public List<JobFunction> functions;
 		
 		/**
 		 * @param applicationId
 		 * @param src
 		 * @param functions
 		 */
-		public Job(String applicationId, String src, JobFunction[] functions) {
+		public Job(String applicationId, String src, List<JobFunction> functions) {
 			super();
 			this.applicationId = applicationId;
 			this.src = src;
@@ -172,7 +174,7 @@ public interface BlitlineTransformer extends ImageTransformer {
 			super();
 			this.applicationId = applicationId;
 			this.src = src;
-			this.functions = new JobFunction[] { function };
+			this.functions = ImmutableList.of(function);
 		}
 		
 	}
