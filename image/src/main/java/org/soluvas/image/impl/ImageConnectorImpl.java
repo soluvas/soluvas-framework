@@ -85,54 +85,23 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public UploadedImage upload(String namespace, String imageId, String styleCode, String styleVariant, String extension, File file, String contentType) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+	@Override
+	public abstract UploadedImage upload(String namespace, String imageId, String styleCode, String styleVariant, String extension, File file, String contentType);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public abstract UploadedImage upload(String namespace, String imageId, String styleCode, String extension, File file, String contentType);
+	public abstract boolean download(String namespace, String imageId, String styleCode, String styleVariant, String extension, File file);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public abstract void delete(String namespace, String imageId, String styleCode, String extension);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean download(String namespace, String imageId, String styleCode, String styleVariant, String extension, File file) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	@Override
-	public void destroy() {
-		// nothing
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	@Override
-	public abstract boolean download(String namespace, String imageId, String styleCode, String extension, File file);
+	public abstract void delete(String namespace, String imageId, String styleCode, String styleVariant, String extension);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -78,20 +78,6 @@ public class ImageSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImagePackage.S3_CONNECTOR: {
-				S3Connector s3Connector = (S3Connector)theEObject;
-				T result = caseS3Connector(s3Connector);
-				if (result == null) result = caseImageConnector(s3Connector);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ImagePackage.BLITLINE_TRANSFORMER: {
-				BlitlineTransformer blitlineTransformer = (BlitlineTransformer)theEObject;
-				T result = caseBlitlineTransformer(blitlineTransformer);
-				if (result == null) result = caseImageTransformer(blitlineTransformer);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ImagePackage.DAV_CONNECTOR: {
 				DavConnector davConnector = (DavConnector)theEObject;
 				T result = caseDavConnector(davConnector);
@@ -99,9 +85,23 @@ public class ImageSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ImagePackage.S3_CONNECTOR: {
+				S3Connector s3Connector = (S3Connector)theEObject;
+				T result = caseS3Connector(s3Connector);
+				if (result == null) result = caseImageConnector(s3Connector);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ImagePackage.IMAGE_TRANSFORMER: {
 				ImageTransformer imageTransformer = (ImageTransformer)theEObject;
 				T result = caseImageTransformer(imageTransformer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.BLITLINE_TRANSFORMER: {
+				BlitlineTransformer blitlineTransformer = (BlitlineTransformer)theEObject;
+				T result = caseBlitlineTransformer(blitlineTransformer);
+				if (result == null) result = caseImageTransformer(blitlineTransformer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

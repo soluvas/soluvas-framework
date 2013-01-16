@@ -58,9 +58,9 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ImagePackage.IMAGE_CONFIG: return (EObject)createImageConfig();
+			case ImagePackage.DAV_CONNECTOR: return (EObject)createDavConnector();
 			case ImagePackage.S3_CONNECTOR: return (EObject)createS3Connector();
 			case ImagePackage.BLITLINE_TRANSFORMER: return (EObject)createBlitlineTransformer();
-			case ImagePackage.DAV_CONNECTOR: return (EObject)createDavConnector();
 			case ImagePackage.THUMBNAILATOR_TRANSFORMER: return (EObject)createThumbnailatorTransformer();
 			case ImagePackage.UPLOADED_IMAGE: return (EObject)createUploadedImage();
 			case ImagePackage.IMAGE_MANAGER: return (EObject)createImageManager();

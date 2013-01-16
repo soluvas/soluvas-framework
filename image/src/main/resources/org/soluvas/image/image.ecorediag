@@ -195,6 +195,30 @@
         <element xmi:type="ecore:EAttribute" href="image.ecore#//UploadedImage/originUri"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_9wVCUV11EeKHsp4J123rug"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_WY5ucF-CEeK5foAZhP7dzg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="image.ecore#//UploadedImage/styleCode"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_WY5ucV-CEeK5foAZhP7dzg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_XCsSUF-CEeK5foAZhP7dzg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="image.ecore#//UploadedImage/styleVariant"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_XCsSUV-CEeK5foAZhP7dzg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_XX9XsF-CEeK5foAZhP7dzg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="image.ecore#//UploadedImage/extension"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_XX9XsV-CEeK5foAZhP7dzg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_X7AaYF-CEeK5foAZhP7dzg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="image.ecore#//UploadedImage/size"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_X7AaYV-CEeK5foAZhP7dzg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_YNOy0F-CEeK5foAZhP7dzg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="image.ecore#//UploadedImage/width"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_YNOy0V-CEeK5foAZhP7dzg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_YivIwF-CEeK5foAZhP7dzg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="image.ecore#//UploadedImage/height"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_YivIwV-CEeK5foAZhP7dzg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_8nd80l11EeKHsp4J123rug"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_8nd80111EeKHsp4J123rug"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_8nd81F11EeKHsp4J123rug"/>
@@ -206,7 +230,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_8ndVwV11EeKHsp4J123rug" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="image.ecore#//UploadedImage"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8ndVwl11EeKHsp4J123rug" x="1104" y="24"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8ndVwl11EeKHsp4J123rug" x="1152" y="120"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_U5twAV2HEeK8n5vmF4w3tA" type="1001">
     <children xmi:type="notation:Node" xmi:id="_U5vlMF2HEeK8n5vmF4w3tA" type="4001"/>
@@ -282,6 +306,14 @@
   <children xmi:type="notation:Node" xmi:id="_RXxoUF5NEeKnN8JJXSOw5w" type="1001">
     <children xmi:type="notation:Node" xmi:id="_RXyPYF5NEeKnN8JJXSOw5w" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_RXy2cF5NEeKnN8JJXSOw5w" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_JeA-oV99EeK5foAZhP7dzg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="image.ecore#//ResizeToFill/gravity"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_JeA-ol99EeK5foAZhP7dzg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_NJSWgF99EeK5foAZhP7dzg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="image.ecore#//ResizeToFill/onlyShrinkLarger"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_NJSWgV99EeK5foAZhP7dzg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_RXy2cV5NEeKnN8JJXSOw5w"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_RXy2cl5NEeKnN8JJXSOw5w"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_RXy2c15NEeKnN8JJXSOw5w"/>

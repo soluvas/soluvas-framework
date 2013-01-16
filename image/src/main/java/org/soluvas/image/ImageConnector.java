@@ -64,18 +64,13 @@ public interface ImageConnector extends SerializableEObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Note: Use File, because if uploading using InputStream, can throw org.apache.http.client.NonRepeatableRequestException: Cannot retry request with a non-repeatable request entity; because InputStream can only be read once.
+	 * <!-- end-model-doc -->
 	 * @model fileDataType="org.soluvas.commons.File"
 	 * @generated
 	 */
 	UploadedImage upload(String namespace, String imageId, String styleCode, String styleVariant, String extension, File file, String contentType);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void delete(String namespace, String imageId, String styleCode, String extension);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -87,6 +82,14 @@ public interface ImageConnector extends SerializableEObject {
 	 * @generated
 	 */
 	boolean download(String namespace, String imageId, String styleCode, String styleVariant, String extension, File file);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void delete(String namespace, String imageId, String styleCode, String styleVariant, String extension);
 
 	/**
 	 * <!-- begin-user-doc -->

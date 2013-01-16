@@ -2,8 +2,10 @@
  */
 package org.soluvas.image.impl;
 
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -25,6 +27,7 @@ import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageVariant;
+import org.soluvas.image.UploadedImage;
 import org.soluvas.image.ResizeToFill;
 import org.soluvas.json.JsonUtils;
 
@@ -238,62 +241,55 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void transform(String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public void transform(ImageVariant sourceVariant, ImageTransform imageTransform, ImageVariant destVariant) {
-		String sourceUri = source.getOriginUri(sourceVariant.getNamespace(), sourceVariant.getImageId(),
+	public void transform(String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms) {
+		final String sourceUri = source.getOriginUri(namespace, imageId,
 				sourceVariant.getStyleCode(), sourceVariant.getStyleVariant(), sourceVariant.getExtension());
-		if (imageTransform instanceof ResizeToFill) {
-			ResizeToFill fx = (ResizeToFill) imageTransform;
-			Map<String, Object> params = new HashMap<String, Object>();
-			if (fx.getWidth() != null)
-				params.put("width", fx.getWidth());
-			if (fx.getHeight() != null)
-				params.put("height", fx.getHeight());
-			String jobId = String.format("%s/%s/%s_%s.%s",
-					destVariant.getNamespace(), destVariant.getImageId(),
-					destVariant.getStyleCode(), destVariant.getStyleVariant(), destVariant.getExtension());
-			// namespace, styleCode, imageId, styleVariant, extension
-			final Map<String, Object> uriVars = Maps.newHashMap();
-			uriVars.put("prefix", prefix);
-			uriVars.put("namespace", destVariant.getNamespace());
-			uriVars.put("styleCode", destVariant.getStyleCode());
-			uriVars.put("imageId", destVariant.getImageId());
-			uriVars.put("styleVariant", destVariant.getStyleVariant());
-			uriVars.put("extension", destVariant.getExtension());
-			String key = UriTemplate.fromTemplate(keyTemplate).expand(uriVars);
-			Job job = new Job(applicationId, sourceUri, new JobFunction("resize_to_fill", params,
-					new JobSave(jobId, new JobS3Destination(bucket, key))));
-			String jobJson = JsonUtils.asJson(job);
-			log.debug("Sending job {}", jobJson);
-			try {
-				HttpPost postReq = new HttpPost("http://api.blitline.com/job");
-				postReq.setEntity(new UrlEncodedFormEntity(ImmutableList.of(new BasicNameValuePair("json", jobJson))));
-				HttpResponse response = client.execute(postReq);
+		for (final Entry<ImageTransform, ImageVariant> entry : transforms.entrySet()) {
+			final ImageTransform transform = entry.getKey();
+			final ImageVariant dest = entry.getValue();
+			if (transform instanceof ResizeToFill) {
+				final ResizeToFill fx = (ResizeToFill) transform;
+				final Map<String, Object> params = new HashMap<String, Object>();
+				if (fx.getWidth() != null)
+					params.put("width", fx.getWidth());
+				if (fx.getHeight() != null)
+					params.put("height", fx.getHeight());
+				final String jobId = String.format("%s/%s/%s_%s.%s",
+						namespace, imageId,
+						dest.getStyleCode(), dest.getStyleVariant(), dest.getExtension());
+				// namespace, styleCode, imageId, styleVariant, extension
+				final Map<String, Object> uriVars = Maps.newHashMap();
+				uriVars.put("prefix", prefix);
+				uriVars.put("namespace", namespace);
+				uriVars.put("styleCode", dest.getStyleCode());
+				uriVars.put("imageId", imageId);
+				uriVars.put("styleVariant", dest.getStyleVariant());
+				uriVars.put("extension", dest.getExtension());
+				final String key = UriTemplate.fromTemplate(keyTemplate).expand(uriVars);
+				final Job job = new Job(applicationId, sourceUri, new JobFunction("resize_to_fill", params,
+						new JobSave(jobId, new JobS3Destination(bucket, key))));
+				final String jobJson = JsonUtils.asJson(job);
+				log.debug("Sending job {}", jobJson);
 				try {
-					if (response.getStatusLine().getStatusCode() >= 200 && response.getStatusLine().getStatusCode() < 300)
-						log.debug("Job {} returned: {}", jobId, response.getStatusLine());
-					else
-						log.error("Job {} returned: {}", jobId, response.getStatusLine());
-				} finally {
-					HttpClientUtils.closeQuietly(response);
+					final HttpPost postReq = new HttpPost("http://api.blitline.com/job");
+					postReq.setEntity(new UrlEncodedFormEntity(ImmutableList.of(new BasicNameValuePair("json", jobJson))));
+					final HttpResponse response = client.execute(postReq);
+					try {
+						if (response.getStatusLine().getStatusCode() >= 200 && response.getStatusLine().getStatusCode() < 300)
+							log.debug("Job {} returned: {}", jobId, response.getStatusLine());
+						else
+							log.error("Job {} returned: {}", jobId, response.getStatusLine());
+					} finally {
+						HttpClientUtils.closeQuietly(response);
+					}
+				} catch (Exception e) {
+					log.error("Error processing " + sourceVariant + " as " + transform + " to " + dest, e);
 				}
-			} catch (Exception e) {
-				log.error("Error processing " + sourceVariant + " as " + imageTransform + " to " + destVariant, e);
+			} else {
+				throw new UnsupportedOperationException("Transform not supported: " + transform);
 			}
-		} else {
-			throw new UnsupportedOperationException("Transform not supported: " + imageTransform);
 		}
 	}
 

@@ -22,6 +22,8 @@ import org.soluvas.image.ResizeToFill;
  * <ul>
  *   <li>{@link org.soluvas.image.impl.ResizeToFillImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFillImpl#getHeight <em>Height</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.ResizeToFillImpl#getGravity <em>Gravity</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.ResizeToFillImpl#getOnlyShrinkLarger <em>Only Shrink Larger</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,6 +69,46 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * @ordered
 	 */
 	protected Integer height = HEIGHT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getGravity() <em>Gravity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGravity()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String GRAVITY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGravity() <em>Gravity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGravity()
+	 * @generated
+	 * @ordered
+	 */
+	protected String gravity = GRAVITY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOnlyShrinkLarger() <em>Only Shrink Larger</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnlyShrinkLarger()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean ONLY_SHRINK_LARGER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOnlyShrinkLarger() <em>Only Shrink Larger</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnlyShrinkLarger()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean onlyShrinkLarger = ONLY_SHRINK_LARGER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -134,6 +176,48 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getGravity() {
+		return gravity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGravity(String newGravity) {
+		String oldGravity = gravity;
+		gravity = newGravity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImagePackage.RESIZE_TO_FILL__GRAVITY, oldGravity, gravity));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getOnlyShrinkLarger() {
+		return onlyShrinkLarger;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOnlyShrinkLarger(Boolean newOnlyShrinkLarger) {
+		Boolean oldOnlyShrinkLarger = onlyShrinkLarger;
+		onlyShrinkLarger = newOnlyShrinkLarger;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImagePackage.RESIZE_TO_FILL__ONLY_SHRINK_LARGER, oldOnlyShrinkLarger, onlyShrinkLarger));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -141,6 +225,10 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 				return getWidth();
 			case ImagePackage.RESIZE_TO_FILL__HEIGHT:
 				return getHeight();
+			case ImagePackage.RESIZE_TO_FILL__GRAVITY:
+				return getGravity();
+			case ImagePackage.RESIZE_TO_FILL__ONLY_SHRINK_LARGER:
+				return getOnlyShrinkLarger();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,6 +246,12 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 				return;
 			case ImagePackage.RESIZE_TO_FILL__HEIGHT:
 				setHeight((Integer)newValue);
+				return;
+			case ImagePackage.RESIZE_TO_FILL__GRAVITY:
+				setGravity((String)newValue);
+				return;
+			case ImagePackage.RESIZE_TO_FILL__ONLY_SHRINK_LARGER:
+				setOnlyShrinkLarger((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -177,6 +271,12 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 			case ImagePackage.RESIZE_TO_FILL__HEIGHT:
 				setHeight(HEIGHT_EDEFAULT);
 				return;
+			case ImagePackage.RESIZE_TO_FILL__GRAVITY:
+				setGravity(GRAVITY_EDEFAULT);
+				return;
+			case ImagePackage.RESIZE_TO_FILL__ONLY_SHRINK_LARGER:
+				setOnlyShrinkLarger(ONLY_SHRINK_LARGER_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -193,6 +293,10 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 				return WIDTH_EDEFAULT == null ? width != null : !WIDTH_EDEFAULT.equals(width);
 			case ImagePackage.RESIZE_TO_FILL__HEIGHT:
 				return HEIGHT_EDEFAULT == null ? height != null : !HEIGHT_EDEFAULT.equals(height);
+			case ImagePackage.RESIZE_TO_FILL__GRAVITY:
+				return GRAVITY_EDEFAULT == null ? gravity != null : !GRAVITY_EDEFAULT.equals(gravity);
+			case ImagePackage.RESIZE_TO_FILL__ONLY_SHRINK_LARGER:
+				return ONLY_SHRINK_LARGER_EDEFAULT == null ? onlyShrinkLarger != null : !ONLY_SHRINK_LARGER_EDEFAULT.equals(onlyShrinkLarger);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -245,6 +349,10 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 		result.append(width);
 		result.append(", height: ");
 		result.append(height);
+		result.append(", gravity: ");
+		result.append(gravity);
+		result.append(", onlyShrinkLarger: ");
+		result.append(onlyShrinkLarger);
 		result.append(')');
 		return result.toString();
 	}

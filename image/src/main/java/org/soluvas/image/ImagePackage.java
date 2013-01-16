@@ -130,7 +130,64 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getS3Connector()
 	 * @generated
 	 */
-	int S3_CONNECTOR = 2;
+	int S3_CONNECTOR = 3;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.ImageTransformer <em>Transformer</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.ImageTransformer
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformer()
+	 * @generated
+	 */
+	int IMAGE_TRANSFORMER = 4;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.BlitlineTransformerImpl <em>Blitline Transformer</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.BlitlineTransformerImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getBlitlineTransformer()
+	 * @generated
+	 */
+	int BLITLINE_TRANSFORMER = 5;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.DavConnectorImpl <em>Dav Connector</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.DavConnectorImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getDavConnector()
+	 * @generated
+	 */
+	int DAV_CONNECTOR = 2;
+
+	/**
+	 * The feature id for the '<em><b>Hi Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAV_CONNECTOR__HI_URI_TEMPLATE = IMAGE_CONNECTOR__HI_URI_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Lo Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAV_CONNECTOR__LO_URI_TEMPLATE = IMAGE_CONNECTOR__LO_URI_TEMPLATE;
+
+	/**
+	 * The number of structural features of the '<em>Dav Connector</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAV_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Hi Uri Template</b></em>' attribute.
@@ -160,16 +217,6 @@ public interface ImagePackage extends EPackage {
 	int S3_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.ImageTransformer <em>Transformer</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.ImageTransformer
-	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformer()
-	 * @generated
-	 */
-	int IMAGE_TRANSFORMER = 5;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -186,16 +233,6 @@ public interface ImagePackage extends EPackage {
 	 * @ordered
 	 */
 	int IMAGE_TRANSFORMER_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link org.soluvas.image.impl.BlitlineTransformerImpl <em>Blitline Transformer</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.impl.BlitlineTransformerImpl
-	 * @see org.soluvas.image.impl.ImagePackageImpl#getBlitlineTransformer()
-	 * @generated
-	 */
-	int BLITLINE_TRANSFORMER = 3;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -250,43 +287,6 @@ public interface ImagePackage extends EPackage {
 	 * @ordered
 	 */
 	int BLITLINE_TRANSFORMER_FEATURE_COUNT = IMAGE_TRANSFORMER_FEATURE_COUNT + 4;
-
-	/**
-	 * The meta object id for the '{@link org.soluvas.image.impl.DavConnectorImpl <em>Dav Connector</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.impl.DavConnectorImpl
-	 * @see org.soluvas.image.impl.ImagePackageImpl#getDavConnector()
-	 * @generated
-	 */
-	int DAV_CONNECTOR = 4;
-
-	/**
-	 * The feature id for the '<em><b>Hi Uri Template</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAV_CONNECTOR__HI_URI_TEMPLATE = IMAGE_CONNECTOR__HI_URI_TEMPLATE;
-
-	/**
-	 * The feature id for the '<em><b>Lo Uri Template</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAV_CONNECTOR__LO_URI_TEMPLATE = IMAGE_CONNECTOR__LO_URI_TEMPLATE;
-
-	/**
-	 * The number of structural features of the '<em>Dav Connector</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAV_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.ThumbnailatorTransformerImpl <em>Thumbnailator Transformer</em>}' class.
@@ -354,13 +354,67 @@ public interface ImagePackage extends EPackage {
 	int UPLOADED_IMAGE__ORIGIN_URI = 1;
 
 	/**
+	 * The feature id for the '<em><b>Style Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPLOADED_IMAGE__STYLE_CODE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Style Variant</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPLOADED_IMAGE__STYLE_VARIANT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPLOADED_IMAGE__EXTENSION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPLOADED_IMAGE__SIZE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPLOADED_IMAGE__WIDTH = 6;
+
+	/**
+	 * The feature id for the '<em><b>Height</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPLOADED_IMAGE__HEIGHT = 7;
+
+	/**
 	 * The number of structural features of the '<em>Uploaded Image</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UPLOADED_IMAGE_FEATURE_COUNT = 2;
+	int UPLOADED_IMAGE_FEATURE_COUNT = 8;
 
 
 	/**
@@ -469,13 +523,31 @@ public interface ImagePackage extends EPackage {
 	int RESIZE_TO_FILL__HEIGHT = IMAGE_TRANSFORM_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Gravity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FILL__GRAVITY = IMAGE_TRANSFORM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Only Shrink Larger</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FILL__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Resize To Fill</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FILL_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 2;
+	int RESIZE_TO_FILL_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.DimensionLike <em>Dimension Like</em>}' class.
@@ -773,6 +845,72 @@ public interface ImagePackage extends EPackage {
 	EAttribute getUploadedImage_OriginUri();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.UploadedImage#getStyleCode <em>Style Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Style Code</em>'.
+	 * @see org.soluvas.image.UploadedImage#getStyleCode()
+	 * @see #getUploadedImage()
+	 * @generated
+	 */
+	EAttribute getUploadedImage_StyleCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.UploadedImage#getStyleVariant <em>Style Variant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Style Variant</em>'.
+	 * @see org.soluvas.image.UploadedImage#getStyleVariant()
+	 * @see #getUploadedImage()
+	 * @generated
+	 */
+	EAttribute getUploadedImage_StyleVariant();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.UploadedImage#getExtension <em>Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Extension</em>'.
+	 * @see org.soluvas.image.UploadedImage#getExtension()
+	 * @see #getUploadedImage()
+	 * @generated
+	 */
+	EAttribute getUploadedImage_Extension();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.UploadedImage#getSize <em>Size</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Size</em>'.
+	 * @see org.soluvas.image.UploadedImage#getSize()
+	 * @see #getUploadedImage()
+	 * @generated
+	 */
+	EAttribute getUploadedImage_Size();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.UploadedImage#getWidth <em>Width</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Width</em>'.
+	 * @see org.soluvas.image.UploadedImage#getWidth()
+	 * @see #getUploadedImage()
+	 * @generated
+	 */
+	EAttribute getUploadedImage_Width();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.UploadedImage#getHeight <em>Height</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Height</em>'.
+	 * @see org.soluvas.image.UploadedImage#getHeight()
+	 * @see #getUploadedImage()
+	 * @generated
+	 */
+	EAttribute getUploadedImage_Height();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.ImageManager <em>Manager</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -811,6 +949,28 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getResizeToFill();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ResizeToFill#getGravity <em>Gravity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Gravity</em>'.
+	 * @see org.soluvas.image.ResizeToFill#getGravity()
+	 * @see #getResizeToFill()
+	 * @generated
+	 */
+	EAttribute getResizeToFill_Gravity();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ResizeToFill#getOnlyShrinkLarger <em>Only Shrink Larger</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Only Shrink Larger</em>'.
+	 * @see org.soluvas.image.ResizeToFill#getOnlyShrinkLarger()
+	 * @see #getResizeToFill()
+	 * @generated
+	 */
+	EAttribute getResizeToFill_OnlyShrinkLarger();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.DimensionLike <em>Dimension Like</em>}'.
@@ -1088,6 +1248,54 @@ public interface ImagePackage extends EPackage {
 		EAttribute UPLOADED_IMAGE__ORIGIN_URI = eINSTANCE.getUploadedImage_OriginUri();
 
 		/**
+		 * The meta object literal for the '<em><b>Style Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UPLOADED_IMAGE__STYLE_CODE = eINSTANCE.getUploadedImage_StyleCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Style Variant</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UPLOADED_IMAGE__STYLE_VARIANT = eINSTANCE.getUploadedImage_StyleVariant();
+
+		/**
+		 * The meta object literal for the '<em><b>Extension</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UPLOADED_IMAGE__EXTENSION = eINSTANCE.getUploadedImage_Extension();
+
+		/**
+		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UPLOADED_IMAGE__SIZE = eINSTANCE.getUploadedImage_Size();
+
+		/**
+		 * The meta object literal for the '<em><b>Width</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UPLOADED_IMAGE__WIDTH = eINSTANCE.getUploadedImage_Width();
+
+		/**
+		 * The meta object literal for the '<em><b>Height</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UPLOADED_IMAGE__HEIGHT = eINSTANCE.getUploadedImage_Height();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.ImageManagerImpl <em>Manager</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1126,6 +1334,22 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EClass RESIZE_TO_FILL = eINSTANCE.getResizeToFill();
+
+		/**
+		 * The meta object literal for the '<em><b>Gravity</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESIZE_TO_FILL__GRAVITY = eINSTANCE.getResizeToFill_Gravity();
+
+		/**
+		 * The meta object literal for the '<em><b>Only Shrink Larger</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESIZE_TO_FILL__ONLY_SHRINK_LARGER = eINSTANCE.getResizeToFill_OnlyShrinkLarger();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.DimensionLike <em>Dimension Like</em>}' class.

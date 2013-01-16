@@ -71,6 +71,19 @@ The domain name can also be different for each namespace, or even for each style
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
   </xsd:complexType>
   <xsd:element name="ImageConnector" type="image:ImageConnector"/>
+  <xsd:complexType name="DavConnector">
+    <xsd:annotation>
+      <xsd:documentation>Store images using any WebDAV Protocol compatible server, such as Apache, nginx, Sling, Alfresco, Magnolia.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="image:ImageConnector"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="DavConnector" type="image:DavConnector">
+    <xsd:annotation>
+      <xsd:documentation>Store images using any WebDAV Protocol compatible server, such as Apache, nginx, Sling, Alfresco, Magnolia.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
   <xsd:complexType name="S3Connector">
     <xsd:annotation>
       <xsd:documentation>Store images using Amazon S3 or S3 API-compatible servers such as Ceph, Parkplace, Boardwalk. fakes3 is not working due to it creating folders, not actually storing files.</xsd:documentation>
@@ -84,6 +97,32 @@ The domain name can also be different for each namespace, or even for each style
       <xsd:documentation>Store images using Amazon S3 or S3 API-compatible servers such as Ceph, Parkplace, Boardwalk. fakes3 is not working due to it creating folders, not actually storing files.</xsd:documentation>
     </xsd:annotation>
   </xsd:element>
+  <xsd:complexType abstract="true" name="ImageTransformer">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="source" type="image:ImageConnector">
+        <xsd:annotation>
+          <xsd:documentation>Source image connector.
+
+Thumbnailator will use this to get the origin URI and download the  image, before transforming it locally.
+
+Blitline will use it to get the origin URI, but processing will be done by Blitline itself.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="source" type="xsd:string">
+      <xsd:annotation>
+        <xsd:documentation>Source image connector.
+
+Thumbnailator will use this to get the origin URI and download the  image, before transforming it locally.
+
+Blitline will use it to get the origin URI, but processing will be done by Blitline itself.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="ImageTransformer" type="image:ImageTransformer"/>
   <xsd:complexType name="BlitlineTransformer">
     <xsd:annotation>
       <xsd:documentation>Processes using Blitline. The source image must be publicly hosted, for example using S3.
@@ -114,45 +153,6 @@ Default is: "{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extensio
 The destination image is directly written into an S3 bucket. Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions</xsd:documentation>
     </xsd:annotation>
   </xsd:element>
-  <xsd:complexType name="DavConnector">
-    <xsd:annotation>
-      <xsd:documentation>Store images using any WebDAV Protocol compatible server, such as Apache, nginx, Sling, Alfresco, Magnolia.</xsd:documentation>
-    </xsd:annotation>
-    <xsd:complexContent>
-      <xsd:extension base="image:ImageConnector"/>
-    </xsd:complexContent>
-  </xsd:complexType>
-  <xsd:element name="DavConnector" type="image:DavConnector">
-    <xsd:annotation>
-      <xsd:documentation>Store images using any WebDAV Protocol compatible server, such as Apache, nginx, Sling, Alfresco, Magnolia.</xsd:documentation>
-    </xsd:annotation>
-  </xsd:element>
-  <xsd:complexType abstract="true" name="ImageTransformer">
-    <xsd:choice maxOccurs="unbounded" minOccurs="0">
-      <xsd:element name="source" type="image:ImageConnector">
-        <xsd:annotation>
-          <xsd:documentation>Source image connector.
-
-Thumbnailator will use this to get the origin URI and download the  image, before transforming it locally.
-
-Blitline will use it to get the origin URI, but processing will be done by Blitline itself.</xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element ref="xmi:Extension"/>
-    </xsd:choice>
-    <xsd:attribute ref="xmi:id"/>
-    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="source" type="xsd:string">
-      <xsd:annotation>
-        <xsd:documentation>Source image connector.
-
-Thumbnailator will use this to get the origin URI and download the  image, before transforming it locally.
-
-Blitline will use it to get the origin URI, but processing will be done by Blitline itself.</xsd:documentation>
-      </xsd:annotation>
-    </xsd:attribute>
-  </xsd:complexType>
-  <xsd:element name="ImageTransformer" type="image:ImageTransformer"/>
   <xsd:complexType name="ThumbnailatorTransformer">
     <xsd:complexContent>
       <xsd:extension base="image:ImageTransformer"/>
@@ -173,6 +173,28 @@ Blitline will use it to get the origin URI, but processing will be done by Blitl
     <xsd:attribute name="originUri" type="xsd:string">
       <xsd:annotation>
         <xsd:documentation>URI for direct access to object storage.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="styleCode" type="xsd:string"/>
+    <xsd:attribute name="styleVariant" type="xsd:string"/>
+    <xsd:attribute name="extension" type="xsd:string"/>
+    <xsd:attribute name="size" type="xsd:long">
+      <xsd:annotation>
+        <xsd:documentation>File size in bytes.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="width" type="xsd:int">
+      <xsd:annotation>
+        <xsd:documentation>Width in pixels, useful for IMG tag.
+
+Note: Connectors won't return this, but Transformers would.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="height" type="xsd:int">
+      <xsd:annotation>
+        <xsd:documentation>Height in pixels, useful for IMG tag.
+
+Note: Connectors won't return this, but Transformers would.</xsd:documentation>
       </xsd:annotation>
     </xsd:attribute>
   </xsd:complexType>
@@ -196,29 +218,80 @@ Blitline will use it to get the origin URI, but processing will be done by Blitl
   <xsd:complexType name="ResizeToFit">
     <xsd:complexContent>
       <xsd:extension base="image:ImageTransform">
-        <xsd:attribute name="width" type="xsd:int"/>
-        <xsd:attribute name="height" type="xsd:int"/>
+        <xsd:attribute name="width" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>Width of desired image</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="height" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>Height of desired image</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="ResizeToFit" type="image:ResizeToFit"/>
   <xsd:complexType name="ResizeToFill">
+    <xsd:annotation>
+      <xsd:documentation>Resize the image to fit within the specified dimensions while retaining the aspect ratio of the original image. If necessary, crop the image in the larger dimension
+
+Common English Translation: This is probably the crop you want if you want to cut a center piece out of a photo and use it as a thumbnail. This wont do any scaling, only cut out the center (by default) to your defined size.
+
+"name": "resize_to_fill",
+"params" : { "width" : 40, "height" : 40 }</xsd:documentation>
+    </xsd:annotation>
     <xsd:complexContent>
       <xsd:extension base="image:ImageTransform">
-        <xsd:attribute name="width" type="xsd:int"/>
-        <xsd:attribute name="height" type="xsd:int"/>
+        <xsd:attribute name="width" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>Width of desired image</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="height" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>Height of desired image</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="gravity" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Location of crop (defaults to 'CenterGravity')</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="onlyShrinkLarger" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Don’t upsize image (defaults to false)</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
-  <xsd:element name="ResizeToFill" type="image:ResizeToFill"/>
+  <xsd:element name="ResizeToFill" type="image:ResizeToFill">
+    <xsd:annotation>
+      <xsd:documentation>Resize the image to fit within the specified dimensions while retaining the aspect ratio of the original image. If necessary, crop the image in the larger dimension
+
+Common English Translation: This is probably the crop you want if you want to cut a center piece out of a photo and use it as a thumbnail. This wont do any scaling, only cut out the center (by default) to your defined size.
+
+"name": "resize_to_fill",
+"params" : { "width" : 40, "height" : 40 }</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
   <xsd:complexType abstract="true" name="DimensionLike">
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element ref="xmi:Extension"/>
     </xsd:choice>
     <xsd:attribute ref="xmi:id"/>
     <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
-    <xsd:attribute name="width" type="xsd:int"/>
-    <xsd:attribute name="height" type="xsd:int"/>
+    <xsd:attribute name="width" type="xsd:int">
+      <xsd:annotation>
+        <xsd:documentation>Width of desired image</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="height" type="xsd:int">
+      <xsd:annotation>
+        <xsd:documentation>Height of desired image</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
   </xsd:complexType>
   <xsd:element name="DimensionLike" type="image:DimensionLike"/>
   <xsd:complexType name="ImageVariant">

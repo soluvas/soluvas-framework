@@ -157,17 +157,15 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 		return "http://" + cdnAlias + "/" + Strings.nullToEmpty(prefix) +
 				"{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
+	
 	@Override
-	public UploadedImage upload(String namespace, String imageId, String styleCode, String extension, final File file, String contentType) {
+	public UploadedImage upload(String namespace, String imageId,
+			String styleCode, String styleVariant, String extension, final File file,
+			String contentType) {
 		boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
 		String bucket = useHi ? hiBucket : loBucket;
 		String key = String.format("%s%s/%s/%s_%s.%s",
-				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleCode, extension);
+				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleVariant, extension);
 		AccessControlList acl = new AccessControlList();
 		if (!Strings.isNullOrEmpty(canonicalUserId)) {
 			acl.grantPermission(new CanonicalGrantee(canonicalUserId), Permission.FullControl);
@@ -229,17 +227,14 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 		uploadedImage.setUri("http://" + cdnAlias + "/" + key);
 		return uploadedImage;
 	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.image.impl.ImageConnectorImpl#delete(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
-	 */
+	
 	@Override
 	public void delete(String namespace, String imageId, String styleCode,
-			String extension) {
+			String styleVariant, String extension) {
 		boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
 		String bucket = useHi ? hiBucket : loBucket;
 		String key = String.format("%s%s/%s/%s_%s.%s",
-				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleCode, extension);
+				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleVariant, extension);
 		try {
 			s3Client.deleteObject(bucket, key);
 			log.debug("Deleted s3://{}/{}", bucket, key);
@@ -254,16 +249,15 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	@Override
 	public void destroy() {
 		transferMgr.shutdownNow();
-		super.destroy();
 	}
 	
 	@Override
 	public boolean download(String namespace, String imageId, String styleCode,
-			String extension, File file) {
+			String styleVariant, String extension, File file) {
 		boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
 		String bucket = useHi ? hiBucket : loBucket;
 		String key = String.format("%s%s/%s/%s_%s.%s",
-				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleCode, extension);
+				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleVariant, extension);
 		try {
 			Download download = transferMgr.download(bucket, key, file);
 			download.waitForCompletion();

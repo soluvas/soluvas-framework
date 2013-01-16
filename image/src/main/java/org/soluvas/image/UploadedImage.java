@@ -14,6 +14,12 @@ import org.soluvas.commons.SerializableEObject;
  * <ul>
  *   <li>{@link org.soluvas.image.UploadedImage#getUri <em>Uri</em>}</li>
  *   <li>{@link org.soluvas.image.UploadedImage#getOriginUri <em>Origin Uri</em>}</li>
+ *   <li>{@link org.soluvas.image.UploadedImage#getStyleCode <em>Style Code</em>}</li>
+ *   <li>{@link org.soluvas.image.UploadedImage#getStyleVariant <em>Style Variant</em>}</li>
+ *   <li>{@link org.soluvas.image.UploadedImage#getExtension <em>Extension</em>}</li>
+ *   <li>{@link org.soluvas.image.UploadedImage#getSize <em>Size</em>}</li>
+ *   <li>{@link org.soluvas.image.UploadedImage#getWidth <em>Width</em>}</li>
+ *   <li>{@link org.soluvas.image.UploadedImage#getHeight <em>Height</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,5 +78,162 @@ public interface UploadedImage extends SerializableEObject {
 	 * @generated
 	 */
 	void setOriginUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Style Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Style Code</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Style Code</em>' attribute.
+	 * @see #setStyleCode(String)
+	 * @see org.soluvas.image.ImagePackage#getUploadedImage_StyleCode()
+	 * @model
+	 * @generated
+	 */
+	String getStyleCode();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.image.UploadedImage#getStyleCode <em>Style Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Style Code</em>' attribute.
+	 * @see #getStyleCode()
+	 * @generated
+	 */
+	void setStyleCode(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Style Variant</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Style Variant</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Style Variant</em>' attribute.
+	 * @see #setStyleVariant(String)
+	 * @see org.soluvas.image.ImagePackage#getUploadedImage_StyleVariant()
+	 * @model
+	 * @generated
+	 */
+	String getStyleVariant();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.image.UploadedImage#getStyleVariant <em>Style Variant</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Style Variant</em>' attribute.
+	 * @see #getStyleVariant()
+	 * @generated
+	 */
+	void setStyleVariant(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Extension</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Extension</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Extension</em>' attribute.
+	 * @see #setExtension(String)
+	 * @see org.soluvas.image.ImagePackage#getUploadedImage_Extension()
+	 * @model
+	 * @generated
+	 */
+	String getExtension();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.image.UploadedImage#getExtension <em>Extension</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Extension</em>' attribute.
+	 * @see #getExtension()
+	 * @generated
+	 */
+	void setExtension(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * File size in bytes.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Size</em>' attribute.
+	 * @see #setSize(long)
+	 * @see org.soluvas.image.ImagePackage#getUploadedImage_Size()
+	 * @model
+	 * @generated
+	 */
+	long getSize();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.image.UploadedImage#getSize <em>Size</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Size</em>' attribute.
+	 * @see #getSize()
+	 * @generated
+	 */
+	void setSize(long value);
+
+	/**
+	 * Returns the value of the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Width in pixels, useful for IMG tag.
+	 * 
+	 * Note: Connectors won't return this, but Transformers would.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Width</em>' attribute.
+	 * @see #setWidth(Integer)
+	 * @see org.soluvas.image.ImagePackage#getUploadedImage_Width()
+	 * @model
+	 * @generated
+	 */
+	Integer getWidth();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.image.UploadedImage#getWidth <em>Width</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Width</em>' attribute.
+	 * @see #getWidth()
+	 * @generated
+	 */
+	void setWidth(Integer value);
+
+	/**
+	 * Returns the value of the '<em><b>Height</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Height in pixels, useful for IMG tag.
+	 * 
+	 * Note: Connectors won't return this, but Transformers would.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Height</em>' attribute.
+	 * @see #setHeight(Integer)
+	 * @see org.soluvas.image.ImagePackage#getUploadedImage_Height()
+	 * @model
+	 * @generated
+	 */
+	Integer getHeight();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.image.UploadedImage#getHeight <em>Height</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Height</em>' attribute.
+	 * @see #getHeight()
+	 * @generated
+	 */
+	void setHeight(Integer value);
 
 } // UploadedImage

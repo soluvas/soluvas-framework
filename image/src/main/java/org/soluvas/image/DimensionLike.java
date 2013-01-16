@@ -31,6 +31,9 @@ public interface DimensionLike extends SerializableEObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Width of desired image
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Width</em>' attribute.
 	 * @see #setWidth(Integer)
 	 * @see org.soluvas.image.ImagePackage#getDimensionLike_Width()
@@ -57,6 +60,9 @@ public interface DimensionLike extends SerializableEObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Height of desired image
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Height</em>' attribute.
 	 * @see #setHeight(Integer)
 	 * @see org.soluvas.image.ImagePackage#getDimensionLike_Height()

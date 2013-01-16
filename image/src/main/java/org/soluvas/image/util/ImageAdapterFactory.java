@@ -76,20 +76,20 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 				return createImageConnectorAdapter();
 			}
 			@Override
-			public Adapter caseS3Connector(S3Connector object) {
-				return createS3ConnectorAdapter();
-			}
-			@Override
-			public Adapter caseBlitlineTransformer(BlitlineTransformer object) {
-				return createBlitlineTransformerAdapter();
-			}
-			@Override
 			public Adapter caseDavConnector(DavConnector object) {
 				return createDavConnectorAdapter();
 			}
 			@Override
+			public Adapter caseS3Connector(S3Connector object) {
+				return createS3ConnectorAdapter();
+			}
+			@Override
 			public Adapter caseImageTransformer(ImageTransformer object) {
 				return createImageTransformerAdapter();
+			}
+			@Override
+			public Adapter caseBlitlineTransformer(BlitlineTransformer object) {
+				return createBlitlineTransformerAdapter();
 			}
 			@Override
 			public Adapter caseThumbnailatorTransformer(ThumbnailatorTransformer object) {

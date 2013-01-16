@@ -2,6 +2,7 @@
  */
 package org.soluvas.image;
 
+import java.util.List;
 import java.util.Map;
 import org.soluvas.commons.SerializableEObject;
 
@@ -49,8 +50,8 @@ public interface ImageTransformer extends SerializableEObject {
 	 * Transform the image and saves it to the configured destination. The mechanism to assign destination is transformer-specific.
 	 * Thumbnailator saves it to a file and then uploads it using an ImageConnector. Blitline saves directly to an S3 bucket.
 	 * <!-- end-model-doc -->
-	 * @model
+	 * @model dataType="org.soluvas.commons.List<org.soluvas.image.UploadedImage>" many="false"
 	 * @generated
 	 */
-	void transform(String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms);
+	List<UploadedImage> transform(String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms);
 } // ImageTransformer

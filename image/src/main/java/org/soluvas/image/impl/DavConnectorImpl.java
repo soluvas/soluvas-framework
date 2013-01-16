@@ -144,35 +144,14 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	public String getOriginUriTemplate() {
 		return publicUri /*+ "prefix/"*/ + "{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * Note: Use File, because if uploading using InputStream, can throw org.apache.http.client.NonRepeatableRequestException: Cannot retry request with a non-repeatable request entity.
-	 * 		because InputStream can only be read once.
-	 * <!-- end-user-doc -->
-	 */
-	@Override
-	public UploadedImage upload(String namespace, String imageId, String styleCode, String extension, File file, String contentType) {
-		String uri = getImageDavUri(namespace, imageId, styleCode, extension);
-		try {
-			uploadFileDav(uri, file, contentType);
-			String originUri = getUri(namespace, imageId, styleCode, styleCode, extension);
-			UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
-			uploadedImage.setOriginUri(originUri);
-			uploadedImage.setUri(originUri);
-			return uploadedImage;
-		} catch (Exception e) {
-			throw new ImageException("Cannot upload to " + uri, e);
-		}
-	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public void delete(String namespace, String imageId, String styleCode, String extension) {
-		String uri = getImageDavUri(namespace, imageId, styleCode, extension);
+	public void delete(String namespace, String imageId, String styleCode, String styleVariant, String extension) {
+		String uri = getImageDavUri(namespace, imageId, styleCode, styleVariant, extension);
 		HttpDelete deleteOriginal = new HttpDelete(uri);
 		try {
 			HttpResponse response = client.execute(davHost, deleteOriginal, createHttpContext());
@@ -206,8 +185,8 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	 * 
 	 * @return
 	 */
-	public String getImageDavUri(String namespace, String id, String styleCode, String extension) {
-		return String.format("%s%s/%s/%s_%s.%s", safeDavUri, namespace, styleCode, id, styleCode, extension);
+	public String getImageDavUri(String namespace, String id, String styleCode, String styleVariant, String extension) {
+		return String.format("%s%s/%s/%s_%s.%s", safeDavUri, namespace, styleCode, id, styleVariant, extension);
 	}
 
 	public String getImageOriginUri(String namespace, String id, String styleCode, String styleVariant, String extension) {
@@ -265,15 +244,15 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	public String getPublicUri() {
 		return publicUri;
 	}
-
+	
 	@Override
 	public boolean download(String namespace, String imageId, String styleCode,
-			String extension, File file) {
-		String imageUri = getImageOriginUri(namespace, imageId, styleCode, styleCode, extension);
+			String styleVariant, String extension, File file) {
+		final String imageUri = getImageOriginUri(namespace, imageId, styleCode, styleCode, extension);
 		log.info("Downloading {} from {}", imageId, imageUri);
-		HttpGet httpGet = new HttpGet(imageUri);
+		final HttpGet httpGet = new HttpGet(imageUri);
 		try {
-			HttpResponse response = client.execute(davHost, httpGet, createHttpContext());
+			final HttpResponse response = client.execute(davHost, httpGet, createHttpContext());
 			try {
 				if (response.getStatusLine().getStatusCode() >= 200 && response.getStatusLine().getStatusCode() < 300) {
 					log.trace("Download {} successful: {}", imageUri, response.getStatusLine());
@@ -293,6 +272,23 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 			}
 		} catch (Exception e) {
 			throw new ImageException(e, "Cannot download %s from %s", imageId, imageUri);
+		}
+	}
+
+	@Override
+	public UploadedImage upload(String namespace, String imageId,
+			String styleCode, String styleVariant, String extension, File file,
+			String contentType) {
+		String uri = getImageDavUri(namespace, imageId, styleCode, styleVariant, extension);
+		try {
+			uploadFileDav(uri, file, contentType);
+			String originUri = getUri(namespace, imageId, styleCode, styleVariant, extension);
+			UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
+			uploadedImage.setOriginUri(originUri);
+			uploadedImage.setUri(originUri);
+			return uploadedImage;
+		} catch (Exception e) {
+			throw new ImageException("Cannot upload to " + uri, e);
 		}
 	}
 

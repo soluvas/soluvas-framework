@@ -26,7 +26,11 @@ import org.soluvas.commons.SlugUtils;
 import org.soluvas.image.DavConnector;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImageException;
+import org.soluvas.image.ImageFactory;
+import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageTransformer;
+import org.soluvas.image.ImageVariant;
+import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.image.impl.DavConnectorImpl;
 import org.soluvas.image.impl.ThumbnailatorTransformerImpl;
@@ -221,10 +225,10 @@ public class MongoImageRepository implements ImageRepository {
 	@Override
 	@Deprecated
 	public void addStyle(String name, String code, int maxWidth, int maxHeight) {
-		if ("o".equals(code))
+		if (ORIGINAL_CODE.equals(code))
 			throw new ImageException("Cannot use code 'o' for image style");
-		log.info("Added image style {}:{} {}x{}", new Object[] { 
-				code, name, maxWidth, maxHeight });
+		log.info("Added image style {}:{} {}x{}", 
+				code, name, maxWidth, maxHeight );
 		ImageStyle style = new ImageStyle(name, code, maxWidth, maxHeight);
 		styles.put(name, style);
 	}
@@ -316,30 +320,53 @@ public class MongoImageRepository implements ImageRepository {
 		final String imageId = Optional.fromNullable(existingImageId).or( seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2 );
 		final String extension = FilenameUtils.getExtension(originalName);
 		
-		log.debug("Adding image from {} ({} {} bytes) as {}", new Object[] {
-				originalFile.getName(), contentType, length, imageId });
+		log.debug("Adding image from {} ({} {} bytes) as {}",
+				originalFile.getName(), contentType, length, imageId );
 		
 		try {
-			// Create styles and upload
-			final Collection<StyledImage> styledImages = Collections2.transform(styles.values(), new com.google.common.base.Function<ImageStyle, StyledImage>() {
-				@Override
-				public StyledImage apply(final ImageStyle style) {
-				}
-			});
-
-			// Upload originals last, so that unreadable images aren't uploaded at all
+			// <del>Upload originals last, so that unreadable images aren't uploaded at all</del>
+			// Originals must be uploaded first, because Blitline transformer requires them!
 			final String originalPublicUri;
 			if (alsoUploadOriginal) {
 				try {
-					UploadedImage originalUpload = connector.upload(namespace, imageId, "o", extension, originalFile, contentType);
+					UploadedImage originalUpload = connector.upload(namespace, imageId, ORIGINAL_CODE, ORIGINAL_CODE, extension,
+							originalFile, contentType);
 					originalPublicUri = originalUpload.getOriginUri();
 				} catch (Exception e) {
 					throw new ImageException("Error uploading original " + imageId + " using " + connector, e);
 				}
 			} else {
+				log.info("Not uploading original {} using {} because requested by caller (probably for reprocess)",
+						imageId, connector);
 				originalPublicUri = "";
 			}
 //			Future<Object> originalFuture = Futures.future(uploadOriginal, system.dispatcher());
+
+			// Create styles and upload
+//			final Collection<StyledImage> styledImages = Collections2.transform(styles.values(), new com.google.common.base.Function<ImageStyle, StyledImage>() {
+//				@Override
+//				public StyledImage apply(final ImageStyle style) {
+//				}
+//			});
+			final ImageVariant sourceVariant = ImageFactory.eINSTANCE.createImageVariant();
+			sourceVariant.setStyleCode(ORIGINAL_CODE);
+			sourceVariant.setStyleVariant(ORIGINAL_CODE);
+			sourceVariant.setExtension(extension);
+			final ImmutableMap.Builder<ImageTransform, ImageVariant> transformsBuilder = ImmutableMap.builder();
+			for (final ImageStyle style : styles.values()) {
+				final ResizeToFill fx = ImageFactory.eINSTANCE.createResizeToFill();
+				fx.setWidth(style.getMaxWidth());
+				fx.setHeight(style.getMaxHeight());
+				final ImageVariant dest = ImageFactory.eINSTANCE.createImageVariant();
+				dest.setStyleCode(style.getCode());
+				// TODO: support variant
+				dest.setStyleVariant(style.getCode());
+				// TODO: don't hardcode extension
+				dest.setStyleVariant("jpg");
+			}
+			final Map<ImageTransform, ImageVariant> transforms = transformsBuilder.build();
+			// FIXME: transform and upload
+			transformer.transform(namespace, imageId, sourceVariant, transforms);
 
 //			// Upload these thumbnails
 //			List<Future<StyledImage>> uploadedFutures = Lists.transform(styledFutures, new com.google.common.base.Function<Future<ResizeResult>, Future<StyledImage>>() {
@@ -411,7 +438,55 @@ public class MongoImageRepository implements ImageRepository {
 	@Override
 	public void delete(final String id) {
 		final Image image = findOne(id);
-		
+
+		// --------- Delete styleds --------
+//		Future<Iterable<StatusLine>> styledsFuture = Futures.traverse(image.getStyles().values(), new Function<StyledImage, Future<StatusLine>>() {
+//		@Override
+//		public Future<StatusLine> apply(final StyledImage styled) {
+//			return Futures.future(new Callable<StatusLine>() {
+//				@Override
+//				public StatusLine call() throws Exception {
+//					log.info("Deleting {} image {} - {}: {}", new Object[] { 
+//							namespace, id, styled.getStyleName(), styled.getUri() });
+//					HttpDelete deleteThumb = new HttpDelete(styled.getUri());
+//					try {
+//						HttpResponse response = client.execute(davHost, deleteThumb, createHttpContext());
+//						final StatusLine statusLine = response.getStatusLine();
+//						HttpClientUtils.closeQuietly(response);
+//						log.info("Delete {} returned: {}", styled.getUri(), statusLine);
+//						return statusLine;
+//					} catch (Exception e) {
+//						log.error("Error deleting "+ styled.getUri(), e);
+//						return null;
+//					}
+//				}
+//			}, system.dispatcher());
+//		}
+//	}, system.dispatcher());
+
+		for (StyledImage styled : image.getStyles().values()) {
+			log.info("Deleting {} image {} - {}: {}",
+					namespace, id, styled.getStyleName(), styled.getUri() );
+			try {
+				// TODO: don't hardcode extension
+				String styledExtension = "jpg";
+				// TODO: support variant
+				connector.delete(namespace, id, styled.getCode(), styled.getCode(), styledExtension);
+			} catch (Exception e) {
+				log.error("Cannot delete " + namespace + " image " + id + ": " + styled.getStyleName() + " at " + styled.getUri(), e);
+			}
+		}
+	
+		try {
+	//		Iterable<StatusLine> statuses = Await.result(styledsFuture, Duration.create(60, TimeUnit.SECONDS));
+	//		log.info("Delete styled {} image {} status codes: {}", new Object[] { namespace, id, statuses });
+	//		StatusLine status = Await.result(originalFuture, Duration.create(60, TimeUnit.SECONDS));
+	//		log.info("Delete original {} image {} status code: {}", new Object[] { namespace, id, status });
+		} catch (Exception e) {
+			log.error("Error deleting " + namespace + " image " + id + " from WebDAV", e);
+		}
+
+	// -------- Delete originals -------
 //		Future<StatusLine> originalFuture = Futures.future(new Callable<StatusLine>() {
 //			@Override
 //			public StatusLine call() throws Exception {
@@ -438,53 +513,8 @@ public class MongoImageRepository implements ImageRepository {
 		// TODO: should store extension of original, also the styleds
 		String fileName = image.getFileName();
 		String originalExtension = !Strings.isNullOrEmpty(fileName) ? FilenameUtils.getExtension(fileName) : "jpg";
-		connector.delete(namespace, id, "o", originalExtension);
+		connector.delete(namespace, id, "o", "o", originalExtension);
 		
-//		Future<Iterable<StatusLine>> styledsFuture = Futures.traverse(image.getStyles().values(), new Function<StyledImage, Future<StatusLine>>() {
-//			@Override
-//			public Future<StatusLine> apply(final StyledImage styled) {
-//				return Futures.future(new Callable<StatusLine>() {
-//					@Override
-//					public StatusLine call() throws Exception {
-//						log.info("Deleting {} image {} - {}: {}", new Object[] { 
-//								namespace, id, styled.getStyleName(), styled.getUri() });
-//						HttpDelete deleteThumb = new HttpDelete(styled.getUri());
-//						try {
-//							HttpResponse response = client.execute(davHost, deleteThumb, createHttpContext());
-//							final StatusLine statusLine = response.getStatusLine();
-//							HttpClientUtils.closeQuietly(response);
-//							log.info("Delete {} returned: {}", styled.getUri(), statusLine);
-//							return statusLine;
-//						} catch (Exception e) {
-//							log.error("Error deleting "+ styled.getUri(), e);
-//							return null;
-//						}
-//					}
-//				}, system.dispatcher());
-//			}
-//		}, system.dispatcher());
-
-		for (StyledImage styled : image.getStyles().values()) {
-			log.info("Deleting {} image {} - {}: {}",
-					namespace, id, styled.getStyleName(), styled.getUri() );
-			try {
-				// TODO: don't hardcode
-				String styledExtension = "jpg";
-				connector.delete(namespace, id, styled.getCode(), styledExtension);
-			} catch (Exception e) {
-				log.error("Cannot delete " + namespace + " image " + id + ": " + styled.getStyleName() + " at " + styled.getUri(), e);
-			}
-		}
-
-		try {
-//			Iterable<StatusLine> statuses = Await.result(styledsFuture, Duration.create(60, TimeUnit.SECONDS));
-//			log.info("Delete styled {} image {} status codes: {}", new Object[] { namespace, id, statuses });
-//			StatusLine status = Await.result(originalFuture, Duration.create(60, TimeUnit.SECONDS));
-//			log.info("Delete original {} image {} status code: {}", new Object[] { namespace, id, status });
-		} catch (Exception e) {
-			log.error("Error deleting " + namespace + " image " + id + " from WebDAV", e);
-		}
-
 		log.debug("Deleting {} image metadata {}", namespace, id);
 		try {
 			mongoColl.remove(new BasicDBObject("_id", id));
@@ -602,7 +632,8 @@ public class MongoImageRepository implements ImageRepository {
 			try {
 				File tempFile = File.createTempFile(image.getId(), "." + extension);
 				try {
-					boolean downloaded = connector.download(namespace, image.getId(), ORIGINAL_CODE, extension, tempFile);
+					boolean downloaded = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE,
+							extension, tempFile);
 					if (downloaded) {
 						doCreate(image.getId(), tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
 								image.getFileName(), false);
