@@ -10,6 +10,7 @@ import org.bson.BasicBSONObject;
 import org.joda.time.DateTime;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Maps.EntryTransformer;
 
@@ -78,7 +79,8 @@ public class Image {
 //		width = dbo.getInt("width");
 //		height = dbo.getInt("height");
 		BasicBSONObject stylesBson = (BasicBSONObject) dbo.get("styles");
-		styles = Maps.transformEntries(stylesBson, new EntryTransformer<String, Object, StyledImage>() {
+		styles = ImmutableMap.copyOf(Maps.transformEntries(
+				stylesBson, new EntryTransformer<String, Object, StyledImage>() {
 			@Override
 			public StyledImage transformEntry(String key, Object value) {
 				BasicBSONObject styleBson = (BasicBSONObject)value;
@@ -88,7 +90,7 @@ public class Image {
 						styleBson.getString("contentType"), size,
 						styleBson.getInt("width"), styleBson.getInt("height"));
 			}
-		});
+		}));
 		
 		// v1 field but forgotten in API
 		created = dbo.get("created") != null ? new DateTime(dbo.get("created")) : null;
