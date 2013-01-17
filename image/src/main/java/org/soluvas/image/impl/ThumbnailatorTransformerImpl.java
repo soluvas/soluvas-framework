@@ -70,10 +70,14 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public ThumbnailatorTransformerImpl() {
+	protected ThumbnailatorTransformerImpl() {
+		throw new UnsupportedOperationException();
+	}
+
+	public ThumbnailatorTransformerImpl(ImageConnector destination) {
 		super();
+		this.destination = destination;
 	}
 
 	/**
@@ -223,7 +227,8 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 						uploads.add(uploadedImage);
 						
 					} catch (final Exception e) {
-						throw new ImageException("Error uploading " + dest.getStyleCode() + " " + imageId + " using " + destination, e);
+						throw new ImageException(e, "Error uploading %s %s using %s",
+								dest.getStyleCode(), imageId, destination.getClass().getName());
 					}
 
 				} finally {

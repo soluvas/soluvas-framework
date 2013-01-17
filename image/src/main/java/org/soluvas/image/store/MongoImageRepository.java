@@ -150,7 +150,7 @@ public class MongoImageRepository implements ImageRepository {
 		this.mongoUri = mongoUri;
 		this.innerConnector = new DavConnectorImpl(davUri, publicUri); 
 		this.connector = innerConnector;
-		this.transformer = new ThumbnailatorTransformerImpl();
+		this.transformer = new ThumbnailatorTransformerImpl(innerConnector);
 	}
 	
 	// URI: ~repo.publicUri~{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}
