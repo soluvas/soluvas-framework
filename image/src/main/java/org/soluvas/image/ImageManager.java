@@ -39,4 +39,17 @@ public interface ImageManager extends SerializableEObject {
 	 */
 	long export(ImageRepository imageRepo, boolean metadata, FileExport files, File destFolder, ProgressMonitor monitor);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Import from metadata file and images.
+	 * 
+	 * Can't have "import" as name because it's a reserved keyword.
+	 * <!-- end-model-doc -->
+	 * @model srcFolderDataType="org.soluvas.commons.File" imageRepoDataType="org.soluvas.image.ImageRepository"
+	 * @generated
+	 */
+	long importImages(File srcFolder, boolean metadata, FileExport files, ImageRepository imageRepo, ProgressMonitor monitor);
+
 } // ImageManager

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -33,6 +34,7 @@ import org.soluvas.image.store.ImageRepository;
 import org.soluvas.image.store.StyledImage;
 import org.soluvas.image.util.ImageUtils;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 
 /**
@@ -239,6 +241,47 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		}
 		
 		return images.size();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public long importImages(File srcFolder, boolean metadata, FileExport files, ImageRepository imageRepo, ProgressMonitor monitor) {
+		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, 2);
+		final File file = new File(srcFolder, imageRepo.getNamespace() + ".ImageCatalog.xmi");
+		
+		submon.beginTask("Reading " + file, 1);
+		final ResourceSet rsi = new ResourceSetImpl();
+		rsi.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+		final Resource rs = rsi.getResource(URI.createFileURI(file.getPath()), true);
+		final ImageCatalog catalog = (ImageCatalog) rs.getContents().get(0);
+		submon.done();
+		
+		long importedCount = 0;
+		ProgressStatus importStatus = ProgressStatus.OK;
+		final EList<org.soluvas.image.Image> images = catalog.getImages();
+		submon.beginTask("Importing " + images.size() + " images from " + file, images.size());
+		log.info("Importing {} images from {}", images.size(), file);
+		for (final org.soluvas.image.Image image : images) {
+			final File originalFile = new File(srcFolder, image.getLinkedFile());
+			try {
+				final Image newImage = new Image(originalFile, image.getContentType(),
+						Optional.fromNullable(image.getName()).or(image.getId()));
+				final String imageId = imageRepo.add(newImage);
+				importedCount++;
+				submon.worked(1);
+			} catch (Exception e) {
+				log.error("Cannot import " + image.getId() + " from " + originalFile, e);
+				submon.worked(1, ProgressStatus.ERROR);
+				importStatus = ProgressStatus.WARNING;
+			}
+		}
+		log.info("Imported {} of {} images from {}", importedCount, images.size(), srcFolder);
+		submon.done(importStatus);
+		
+		return importedCount;
 	}
 
 } //ImageManagerImpl
