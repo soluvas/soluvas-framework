@@ -185,6 +185,7 @@
       <eParameters name="metadata" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
       <eParameters name="files" eType="#//FileExport"/>
       <eParameters name="destFolder" eType="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//File"/>
+      <eParameters name="monitor" eType="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ProgressMonitor"/>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ImageTransformType">

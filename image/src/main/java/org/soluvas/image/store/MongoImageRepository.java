@@ -37,6 +37,7 @@ import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.image.impl.DavConnectorImpl;
 import org.soluvas.image.impl.ThumbnailatorTransformerImpl;
+import org.soluvas.image.util.ImageUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -640,19 +641,6 @@ public class MongoImageRepository implements ImageRepository {
 	}
 	
 	/**
-	 * Usage:
-	 * 
-	 * getExtensionOrJpg(image.getFileName());
-	 * 
-	 * @param fileName
-	 * @return
-	 */
-	public String getExtensionOrJpg(String fileName) {
-		// TODO: so don't hardcode extension!
-		return !Strings.isNullOrEmpty(fileName) ? FilenameUtils.getExtension(fileName) : "jpg";
-	}
-
-	/**
 	 * @param images
 	 */
 	protected void doReprocess(Collection<Image> images, ProgressMonitor monitor) {
@@ -661,7 +649,7 @@ public class MongoImageRepository implements ImageRepository {
 		submon.beginTask("Reprocessing " + images.size() + " images", images.size());
 		ProgressStatus finalStatus = ProgressStatus.OK;
 		for (final Image image : images) {
-			final String extension = getExtensionOrJpg(image.getFileName());
+			final String extension = ImageUtils.getExtensionOrJpg(image.getFileName());
 			try {
 				// TODO: reprocessing should not require download (esp. for blitline transformer) 
 				final File tempFile = File.createTempFile(image.getId(), "." + extension);

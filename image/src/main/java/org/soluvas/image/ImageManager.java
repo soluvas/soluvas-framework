@@ -4,6 +4,7 @@ package org.soluvas.image;
 
 import java.io.File;
 import org.soluvas.commons.Gender;
+import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.SerializableEObject;
 import org.soluvas.image.store.ImageRepository;
 
@@ -36,6 +37,6 @@ public interface ImageManager extends SerializableEObject {
 	 * @model imageRepoDataType="org.soluvas.image.ImageRepository" destFolderDataType="org.soluvas.commons.File"
 	 * @generated
 	 */
-	long export(ImageRepository imageRepo, boolean metadata, FileExport files, File destFolder);
+	long export(ImageRepository imageRepo, boolean metadata, FileExport files, File destFolder, ProgressMonitor monitor);
 
 } // ImageManager

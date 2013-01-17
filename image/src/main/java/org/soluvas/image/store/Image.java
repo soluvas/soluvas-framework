@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 import org.bson.BasicBSONObject;
+import org.joda.time.DateTime;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
@@ -29,6 +30,7 @@ public class Image {
 
 	private String id;
 	private URI uri;
+	private String originUri;
 	private String contentType;
 	private String fileName;
 	private Long size;
@@ -46,6 +48,7 @@ public class Image {
 	 * @see MongoImageRepository#add(Image)
 	 */
 	private String name;
+	private DateTime created;
 	
 	public Image() {
 		super();
@@ -86,6 +89,11 @@ public class Image {
 						styleBson.getInt("width"), styleBson.getInt("height"));
 			}
 		});
+		
+		// v1 field but forgotten in API
+		created = dbo.get("created") != null ? new DateTime(dbo.get("created")) : null;
+		// v2 field
+		originUri = dbo.get("originUri") != null ? dbo.getString("originUri") : uri.toString();
 	}
 
 	public String getId() {
@@ -98,6 +106,20 @@ public class Image {
 	 */
 	public URI getUri() {
 		return uri;
+	}
+	
+	/**
+	 * @return the originUri
+	 */
+	public String getOriginUri() {
+		return originUri;
+	}
+
+	/**
+	 * @param originUri the originUri to set
+	 */
+	public void setOriginUri(String originUri) {
+		this.originUri = originUri;
 	}
 
 	public String getContentType() {
@@ -154,6 +176,20 @@ public class Image {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	/**
+	 * @return the created
+	 */
+	public DateTime getCreated() {
+		return created;
+	}
+
+	/**
+	 * @param created the created to set
+	 */
+	public void setCreated(DateTime created) {
+		this.created = created;
 	}
 
 	@Override

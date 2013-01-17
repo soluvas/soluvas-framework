@@ -1146,6 +1146,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEParameter(op, theEcorePackage.getEBoolean(), "metadata", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getFileExport(), "files", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theCommonsPackage.getFile(), "destFolder", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theCommonsPackage.getProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(imageTransformEClass, ImageTransform.class, "ImageTransform", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -17,6 +17,8 @@ import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.soluvas.commons.CommonsException;
+import org.soluvas.commons.ShellProgressMonitor;
+import org.soluvas.commons.impl.ShellProgressMonitorImpl;
 import org.soluvas.commons.inject.Filter;
 import org.soluvas.commons.inject.Namespace;
 import org.soluvas.commons.inject.Supplied;
@@ -42,10 +44,12 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 	 * @todo Proper locale support.
 	 */
 	protected LocaleContext localeContext = new LocaleContext();
+	protected ShellProgressMonitor monitor;
 	
 	@Override
 	public Object execute(final CommandSession session) throws Exception {
 		tenant = TenantUtils.getTenant(session);
+		monitor = new ShellProgressMonitorImpl();
 		final Map<Field, ServiceReference<?>> serviceRefs = inject(session);
 		try {
 			return super.execute(session);
