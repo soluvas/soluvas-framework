@@ -8,8 +8,9 @@ import java.util.Locale;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.joda.money.BigMoney;
+import org.joda.money.BigMoneyProvider;
 import org.joda.money.CurrencyUnit;
-import org.joda.money.Money;
 import org.joda.money.format.MoneyFormatter;
 import org.joda.money.format.MoneyFormatterBuilder;
 import org.joda.time.DateTime;
@@ -159,11 +160,29 @@ public class LocaleContext {
 //		format.setCurrency(currency);
 //		format.setMaximumFractionDigits(0);
 //		return format.format(amount);
-		return formatMoney(Money.of(CurrencyUnit.of(currency), amount));
+		return formatMoney(BigMoney.of(CurrencyUnit.of(currency), amount));
 	}
 
 	@Nullable
-	public String formatMoney(Money total) {
+	public String formatMoney(BigDecimal amount, CurrencyUnit currency) {
+		if (amount == null || currency == null)
+			return null;
+//		NumberFormat format = NumberFormat.getCurrencyInstance(getLocale());
+//		format.setCurrency(currency);
+//		format.setMaximumFractionDigits(0);
+//		return format.format(amount);
+		return formatMoney(BigMoney.of(currency, amount));
+	}
+
+	@Nullable
+	public String formatMoney(BigDecimal amount, String currency) {
+		if (amount == null || currency == null)
+			return null;
+		return formatMoney(amount, CurrencyUnit.of(currency));
+	}
+
+	@Nullable
+	public String formatMoney(BigMoneyProvider total) {
 		if (total == null)
 			return null;
 		MoneyFormatter formatter = new MoneyFormatterBuilder().appendCurrencySymbolLocalized().appendLiteral(" ").appendAmountLocalized()
