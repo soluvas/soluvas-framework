@@ -59,11 +59,13 @@ public class ShellProgressMonitorImpl extends ProgressMonitorImpl implements She
 	}
 	
 	protected void renderProgressBar() {
-		final int blocksWorked = (int)(worked / totalWork * 19.0); 
+		final int totalBlocks = 19;
+		final int blocksWorked = Math.min((int)(worked / totalWork * totalBlocks), totalBlocks);
+		final int blocksUnworked = Math.min(totalBlocks - blocksWorked, totalBlocks);
 		System.out.print(ansi().restorCursorPosition());
 		System.out.print(ansi().saveCursorPosition());
 		System.out.print(ansi().render("@|bold,blue " + Strings.repeat("❱", blocksWorked) + "|@" +
-			"@|bold,black " + Strings.repeat("▪", 19 - blocksWorked) + "|@ "));
+			"@|bold,black " + Strings.repeat("▪", blocksUnworked) + "|@ "));
 		System.out.flush();
 	}
 
@@ -85,13 +87,13 @@ public class ShellProgressMonitorImpl extends ProgressMonitorImpl implements She
 			System.out.println(ansi().render("@|bold,bg_red,yellow  ERROR |@ "));
 			break;
 		case WARNING:
-			System.out.println(ansi().render("@|bold,bg_white,green  WARN  |@ "));
+			System.out.println(ansi().render("@|bold,bg_yellow,white  WARN  |@ "));
 			break;
 		case DELETED:
 			System.out.println(ansi().render("@|bold,bg_blue,yellow   DEL  |@ "));
 			break;
 		case SKIPPED:
-			System.out.println(ansi().render("@|bold,bg_cyan,white  SKIP |@ "));
+			System.out.println(ansi().render("@|bold,bg_cyan,white  SKIP  |@ "));
 			break;
 		}
 	}
