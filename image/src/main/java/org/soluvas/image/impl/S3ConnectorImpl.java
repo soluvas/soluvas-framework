@@ -58,23 +58,100 @@ import com.google.common.collect.Maps;
  
  * <!-- end-user-doc -->
  * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getCanonicalUserId <em>Canonical User Id</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getBucket <em>Bucket</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getTenantId <em>Tenant Id</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getTenantEnv <em>Tenant Env</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getOriginAlias <em>Origin Alias</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getCdnAlias <em>Cdn Alias</em>}</li>
+ * </ul>
  * </p>
  *
  * @generated
  */
 public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	
+	/**
+	 * The default value of the '{@link #getCanonicalUserId() <em>Canonical User Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCanonicalUserId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CANONICAL_USER_ID_EDEFAULT = null;
 	private static final Logger log = LoggerFactory
 			.getLogger(S3ConnectorImpl.class);
-	private final String hiBucket;
-	private final String loBucket;
-	private final String prefix;
-	private final String hiOriginAlias;
-	private final String loOriginAlias;
 	private final TransferManager transferMgr;
-	private String hiCdnAlias;
-	private String loCdnAlias;
 	private String canonicalUserId;
+	/**
+	 * The default value of the '{@link #getBucket() <em>Bucket</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBucket()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String BUCKET_EDEFAULT = null;
+	private final String bucket;
+	/**
+	 * The default value of the '{@link #getTenantId() <em>Tenant Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTenantId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TENANT_ID_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getTenantId() <em>Tenant Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTenantId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String tenantId = TENANT_ID_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getTenantEnv() <em>Tenant Env</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTenantEnv()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TENANT_ENV_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getTenantEnv() <em>Tenant Env</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTenantEnv()
+	 * @generated
+	 * @ordered
+	 */
+	protected String tenantEnv = TENANT_ENV_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getOriginAlias() <em>Origin Alias</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOriginAlias()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ORIGIN_ALIAS_EDEFAULT = null;
+	private final String originAlias;
+	/**
+	 * The default value of the '{@link #getCdnAlias() <em>Cdn Alias</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCdnAlias()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CDN_ALIAS_EDEFAULT = null;
+	private String cdnAlias;
 	private AmazonS3Client s3Client;
 	
 	/**
@@ -91,33 +168,31 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	 * @param protocol {@link Protocol#HTTPS} is recommended for Amazon S3.
 	 * @param accessKey Cannot be empty, even if fake.
 	 * @param secretKey Cannot be empty, even if fake.
-	 * @param hiBucket Bucket name for original images, e.g. {@literal berbatik-stg-pichi}.
+	 * @param bucket Bucket name for original images, e.g. {@literal berbatik-stg-pichi}.
 	 * @param loBucket Bucket name for disposable images, e.g. {@literal berbatik-stg-piclo}.
-	 * 		Images will be stored using RRS. Can be the same as hiBucket.
+	 * 		Images will be stored using RRS. Can be the same as bucket.
 	 * @param prefix Application-provided prefix, this is usually "${tenantId}_${tenantEnv}/",
 	 * 		e.g. "berbatik_dev/".
 	 * 		Namespace will be passed by the repository during upload, so it is not needed.
-	 * @param hiOriginAlias If specified, can be used as alias e.g. using CloudFront.
+	 * @param originAlias If specified, can be used as alias e.g. using CloudFront.
 	 * 		Otherwise use default "berbatik-stg-pichi.s3.amazonaws.com".
 	 * @param loOriginAlias If specified, can be used as alias e.g. using CloudFront.
 	 * 		Otherwise use default "berbatik-stg-pichi.s3.amazonaws.com".
 	 */
 	public S3ConnectorImpl(String endpoint, Protocol protocol,
 			String accessKey, String secretKey, String canonicalUserId,
-			String hiBucket, String loBucket, String prefix, String hiOriginAlias, String loOriginAlias,
-			String hiCdnAlias, String loCdnAlias) {
+			String bucket, String tenantId, String tenantEnv, String originAlias,
+			String cdnAlias) {
 		super();
 		this.canonicalUserId = canonicalUserId;
 		if (Strings.isNullOrEmpty(canonicalUserId)) {
 			log.warn("Canonical user ID should be filled, otherwise you can't control the S3 objects you uploaded.");
 		}
-		this.hiBucket = hiBucket;
-		this.loBucket = loBucket;
-		this.prefix = prefix;
-		this.hiOriginAlias = hiOriginAlias;
-		this.loOriginAlias = loOriginAlias;
-		this.hiCdnAlias = hiCdnAlias;
-		this.loCdnAlias = loCdnAlias;
+		this.bucket = bucket;
+		this.tenantId = tenantId;
+		this.tenantEnv = tenantEnv;
+		this.originAlias = originAlias;
+		this.cdnAlias = cdnAlias;
 		final AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
 		s3Client = new AmazonS3Client(credentials,
 				new ClientConfiguration().withProtocol(protocol));
@@ -139,12 +214,61 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	@Override
-	public String getHiUriTemplate() {
-		String cdnAlias = Strings.isNullOrEmpty(hiCdnAlias) ? hiBucket + ".s3.amazonaws.com" : hiCdnAlias;
-		return "http://" + cdnAlias + "/" + Strings.nullToEmpty(prefix) +
-				"{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
+	public String getCanonicalUserId() {
+		return canonicalUserId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getBucket() {
+		return bucket;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getTenantEnv() {
+		return tenantEnv;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getOriginAlias() {
+		return originAlias;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCdnAlias() {
+		return cdnAlias;
 	}
 
 	/**
@@ -152,10 +276,10 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public String getLoUriTemplate() {
-		String cdnAlias = Strings.isNullOrEmpty(loCdnAlias) ? loBucket + ".s3.amazonaws.com" : loCdnAlias;
-		return "http://" + cdnAlias + "/" + Strings.nullToEmpty(prefix) +
-				"{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
+	public String getUriTemplate() {
+		final String realCdnAlias = Strings.isNullOrEmpty(cdnAlias) ? bucket + ".s3.amazonaws.com" : cdnAlias;
+		return "http://" + realCdnAlias + "/" + tenantId + "_" + tenantEnv + "/" +
+				"{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
 	}
 	
 	@Override
@@ -163,9 +287,8 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 			String styleCode, String styleVariant, String extension, final File file,
 			String contentType) {
 		final boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
-		final String bucket = useHi ? hiBucket : loBucket;
-		final String key = String.format("%s%s/%s/%s_%s.%s",
-				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleVariant, extension);
+		final String key = String.format("%s_%s/%s/%s/%s_%s.%s",
+				tenantId, tenantEnv, namespace, styleCode, imageId, styleVariant, extension);
 		final AccessControlList acl = new AccessControlList();
 		if (!Strings.isNullOrEmpty(canonicalUserId)) {
 			acl.grantPermission(new CanonicalGrantee(canonicalUserId), Permission.FullControl);
@@ -213,28 +336,19 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 			throw new ImageException(e, "Cannot upload %s to %s", file, s3Uri);
 		}
 		
-		final String originAlias;
-		final String cdnAlias;
-		if (useHi) {
-			originAlias = Strings.isNullOrEmpty(hiOriginAlias) ? hiBucket + ".s3.amazonaws.com" : hiOriginAlias;
-			cdnAlias = Strings.isNullOrEmpty(hiCdnAlias) ? hiBucket + ".s3.amazonaws.com" : hiCdnAlias;
-		} else {
-			originAlias = Strings.isNullOrEmpty(loOriginAlias) ? loBucket + ".s3.amazonaws.com" : loOriginAlias;
-			cdnAlias = Strings.isNullOrEmpty(loCdnAlias) ? loBucket + ".s3.amazonaws.com" : loCdnAlias;
-		}
+		final String realOriginAlias = Strings.isNullOrEmpty(originAlias) ? bucket + ".s3.amazonaws.com" : originAlias;
+		final String realCdnAlias = Strings.isNullOrEmpty(cdnAlias) ? bucket + ".s3.amazonaws.com" : cdnAlias;
 		final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
-		uploadedImage.setOriginUri("http://" + originAlias + "/" + key);
-		uploadedImage.setUri("http://" + cdnAlias + "/" + key);
+		uploadedImage.setOriginUri("http://" + realOriginAlias + "/" + key);
+		uploadedImage.setUri("http://" + realCdnAlias + "/" + key);
 		return uploadedImage;
 	}
 	
 	@Override
 	public void delete(String namespace, String imageId, String styleCode,
 			String styleVariant, String extension) {
-		final boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
-		final String bucket = useHi ? hiBucket : loBucket;
-		final String key = String.format("%s%s/%s/%s_%s.%s",
-				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleVariant, extension);
+		final String key = String.format("%s_%s/%s/%s/%s_%s.%s",
+				tenantId, tenantEnv, namespace, styleCode, imageId, styleVariant, extension);
 		try {
 			s3Client.deleteObject(bucket, key);
 			log.debug("Deleted s3://{}/{}", bucket, key);
@@ -251,13 +365,85 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 		transferMgr.shutdownNow();
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case ImagePackage.S3_CONNECTOR__CANONICAL_USER_ID:
+				return getCanonicalUserId();
+			case ImagePackage.S3_CONNECTOR__BUCKET:
+				return getBucket();
+			case ImagePackage.S3_CONNECTOR__TENANT_ID:
+				return getTenantId();
+			case ImagePackage.S3_CONNECTOR__TENANT_ENV:
+				return getTenantEnv();
+			case ImagePackage.S3_CONNECTOR__ORIGIN_ALIAS:
+				return getOriginAlias();
+			case ImagePackage.S3_CONNECTOR__CDN_ALIAS:
+				return getCdnAlias();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case ImagePackage.S3_CONNECTOR__CANONICAL_USER_ID:
+				return CANONICAL_USER_ID_EDEFAULT == null ? canonicalUserId != null : !CANONICAL_USER_ID_EDEFAULT.equals(canonicalUserId);
+			case ImagePackage.S3_CONNECTOR__BUCKET:
+				return BUCKET_EDEFAULT == null ? bucket != null : !BUCKET_EDEFAULT.equals(bucket);
+			case ImagePackage.S3_CONNECTOR__TENANT_ID:
+				return TENANT_ID_EDEFAULT == null ? tenantId != null : !TENANT_ID_EDEFAULT.equals(tenantId);
+			case ImagePackage.S3_CONNECTOR__TENANT_ENV:
+				return TENANT_ENV_EDEFAULT == null ? tenantEnv != null : !TENANT_ENV_EDEFAULT.equals(tenantEnv);
+			case ImagePackage.S3_CONNECTOR__ORIGIN_ALIAS:
+				return ORIGIN_ALIAS_EDEFAULT == null ? originAlias != null : !ORIGIN_ALIAS_EDEFAULT.equals(originAlias);
+			case ImagePackage.S3_CONNECTOR__CDN_ALIAS:
+				return CDN_ALIAS_EDEFAULT == null ? cdnAlias != null : !CDN_ALIAS_EDEFAULT.equals(cdnAlias);
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (canonicalUserId: ");
+		result.append(canonicalUserId);
+		result.append(", bucket: ");
+		result.append(bucket);
+		result.append(", tenantId: ");
+		result.append(tenantId);
+		result.append(", tenantEnv: ");
+		result.append(tenantEnv);
+		result.append(", originAlias: ");
+		result.append(originAlias);
+		result.append(", cdnAlias: ");
+		result.append(cdnAlias);
+		result.append(')');
+		return result.toString();
+	}
+
 	@Override
 	public boolean download(String namespace, String imageId, String styleCode,
 			String styleVariant, String extension, File file) {
-		final boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
-		final String bucket = useHi ? hiBucket : loBucket;
-		final String key = String.format("%s%s/%s/%s_%s.%s",
-				Strings.nullToEmpty(prefix), namespace, styleCode, imageId, styleVariant, extension);
+		final String key = String.format("%s_%s/%s/%s/%s_%s.%s",
+				tenantId, tenantEnv, namespace, styleCode, imageId, styleVariant, extension);
 		try {
 			final Download download = transferMgr.download(bucket, key, file);
 			download.waitForCompletion();
@@ -273,13 +459,8 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	@Override
 	public String getOriginUri(String namespace, String imageId,
 			String styleCode, String styleVariant, String extension) {
-		final String originAlias; 
-		if ("o".equals(styleCode)) {
-			originAlias = Strings.isNullOrEmpty(hiOriginAlias) ? hiBucket + ".s3.amazonaws.com" : hiOriginAlias;
-		} else {
-			originAlias = Strings.isNullOrEmpty(loOriginAlias) ? loBucket + ".s3.amazonaws.com" : loOriginAlias;
-		}
-		final String uriTemplate = "http://" + originAlias + "/" + Strings.nullToEmpty(prefix) +
+		final String realOriginAlias = Strings.isNullOrEmpty(originAlias) ? bucket + ".s3.amazonaws.com" : originAlias;
+		final String uriTemplate = "http://" + realOriginAlias + "/" + tenantId + "_" + tenantEnv + "/" +
 				"{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
 		// namespace, styleCode, imageId, styleVariant, extension
 		final Map<String, Object> uriVars = Maps.newHashMap();

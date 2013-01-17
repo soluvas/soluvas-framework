@@ -34,7 +34,8 @@ import com.google.common.collect.ImmutableList;
  * <ul>
  *   <li>{@link org.soluvas.image.BlitlineTransformer#getApplicationId <em>Application Id</em>}</li>
  *   <li>{@link org.soluvas.image.BlitlineTransformer#getBucket <em>Bucket</em>}</li>
- *   <li>{@link org.soluvas.image.BlitlineTransformer#getPrefix <em>Prefix</em>}</li>
+ *   <li>{@link org.soluvas.image.BlitlineTransformer#getTenantId <em>Tenant Id</em>}</li>
+ *   <li>{@link org.soluvas.image.BlitlineTransformer#getTenantEnv <em>Tenant Env</em>}</li>
  *   <li>{@link org.soluvas.image.BlitlineTransformer#getCdnAlias <em>Cdn Alias</em>}</li>
  *   <li>{@link org.soluvas.image.BlitlineTransformer#getKeyTemplate <em>Key Template</em>}</li>
  *   <li>{@link org.soluvas.image.BlitlineTransformer#getUriTemplate <em>Uri Template</em>}</li>
@@ -217,19 +218,34 @@ public interface BlitlineTransformer extends ImageTransformer {
 	String getBucket();
 
 	/**
-	 * Returns the value of the '<em><b>Prefix</b></em>' attribute.
+	 * Returns the value of the '<em><b>Tenant Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Prefix</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Tenant Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Prefix</em>' attribute.
-	 * @see org.soluvas.image.ImagePackage#getBlitlineTransformer_Prefix()
+	 * @return the value of the '<em>Tenant Id</em>' attribute.
+	 * @see org.soluvas.image.ImagePackage#getBlitlineTransformer_TenantId()
 	 * @model changeable="false"
 	 * @generated
 	 */
-	String getPrefix();
+	String getTenantId();
+
+	/**
+	 * Returns the value of the '<em><b>Tenant Env</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Tenant Env</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tenant Env</em>' attribute.
+	 * @see org.soluvas.image.ImagePackage#getBlitlineTransformer_TenantEnv()
+	 * @model changeable="false"
+	 * @generated
+	 */
+	String getTenantEnv();
 
 	/**
 	 * Returns the value of the '<em><b>Cdn Alias</b></em>' attribute.
@@ -247,26 +263,27 @@ public interface BlitlineTransformer extends ImageTransformer {
 
 	/**
 	 * Returns the value of the '<em><b>Key Template</b></em>' attribute.
-	 * The default value is <code>"{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"</code>.
+	 * The default value is <code>"{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * key template in URI template format.
 	 * 
-	 * Variables are: namespace, styleCode, imageId, styleVariant, extension.
+	 * Variables are: tenantId, tenantEnv,
+	 * namespace, styleCode, imageId, styleVariant, extension.
 	 * 
-	 * Default is: "{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
+	 * Default is: "{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Key Template</em>' attribute.
 	 * @see org.soluvas.image.ImagePackage#getBlitlineTransformer_KeyTemplate()
-	 * @model default="{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}" changeable="false"
+	 * @model default="{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}" changeable="false"
 	 * @generated
 	 */
 	String getKeyTemplate();
 
 	/**
 	 * Returns the value of the '<em><b>Uri Template</b></em>' attribute.
-	 * The default value is <code>"http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"</code>.
+	 * The default value is <code>"http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -274,18 +291,18 @@ public interface BlitlineTransformer extends ImageTransformer {
 	 * 
 	 * Variables are: namespace, styleCode, imageId, styleVariant, ext.
 	 * 
-	 * Default is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}
+	 * Default is: http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Uri Template</em>' attribute.
 	 * @see org.soluvas.image.ImagePackage#getBlitlineTransformer_UriTemplate()
-	 * @model default="http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}" changeable="false"
+	 * @model default="http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}" changeable="false"
 	 * @generated
 	 */
 	String getUriTemplate();
 
 	/**
 	 * Returns the value of the '<em><b>Origin Uri Template</b></em>' attribute.
-	 * The default value is <code>"http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"</code>.
+	 * The default value is <code>"http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -293,11 +310,11 @@ public interface BlitlineTransformer extends ImageTransformer {
 	 * 
 	 * Variables are: namespace, styleCode, imageId, styleVariant, ext.
 	 * 
-	 * Default is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}
+	 * Default is: http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Origin Uri Template</em>' attribute.
 	 * @see org.soluvas.image.ImagePackage#getBlitlineTransformer_OriginUriTemplate()
-	 * @model default="http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}" changeable="false"
+	 * @model default="http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}" changeable="false"
 	 * @generated
 	 */
 	String getOriginUriTemplate();

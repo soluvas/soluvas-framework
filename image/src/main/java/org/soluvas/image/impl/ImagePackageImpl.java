@@ -251,7 +251,6 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getImageConnector_HiUriTemplate() {
 		return (EAttribute)imageConnectorEClass.getEStructuralFeatures().get(0);
 	}
@@ -261,8 +260,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getImageConnector_LoUriTemplate() {
+	public EAttribute getImageConnector_UriTemplate() {
 		return (EAttribute)imageConnectorEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -274,6 +272,60 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	@Override
 	public EClass getS3Connector() {
 		return s3ConnectorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getS3Connector_CanonicalUserId() {
+		return (EAttribute)s3ConnectorEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getS3Connector_Bucket() {
+		return (EAttribute)s3ConnectorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getS3Connector_TenantId() {
+		return (EAttribute)s3ConnectorEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getS3Connector_TenantEnv() {
+		return (EAttribute)s3ConnectorEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getS3Connector_OriginAlias() {
+		return (EAttribute)s3ConnectorEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getS3Connector_CdnAlias() {
+		return (EAttribute)s3ConnectorEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -311,8 +363,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getBlitlineTransformer_Prefix() {
+	public EAttribute getBlitlineTransformer_TenantId() {
 		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -321,8 +372,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getBlitlineTransformer_CdnAlias() {
+	public EAttribute getBlitlineTransformer_TenantEnv() {
 		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -332,7 +382,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getBlitlineTransformer_KeyTemplate() {
+	public EAttribute getBlitlineTransformer_CdnAlias() {
 		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -342,7 +392,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getBlitlineTransformer_UriTemplate() {
+	public EAttribute getBlitlineTransformer_KeyTemplate() {
 		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -352,8 +402,18 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getBlitlineTransformer_OriginUriTemplate() {
+	public EAttribute getBlitlineTransformer_UriTemplate() {
 		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getBlitlineTransformer_OriginUriTemplate() {
+		return (EAttribute)blitlineTransformerEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -911,18 +971,25 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		// Create classes and their features
 		imageConnectorEClass = createEClass(IMAGE_CONNECTOR);
 		createEAttribute(imageConnectorEClass, IMAGE_CONNECTOR__HI_URI_TEMPLATE);
-		createEAttribute(imageConnectorEClass, IMAGE_CONNECTOR__LO_URI_TEMPLATE);
+		createEAttribute(imageConnectorEClass, IMAGE_CONNECTOR__URI_TEMPLATE);
 
 		davConnectorEClass = createEClass(DAV_CONNECTOR);
 
 		s3ConnectorEClass = createEClass(S3_CONNECTOR);
+		createEAttribute(s3ConnectorEClass, S3_CONNECTOR__CANONICAL_USER_ID);
+		createEAttribute(s3ConnectorEClass, S3_CONNECTOR__BUCKET);
+		createEAttribute(s3ConnectorEClass, S3_CONNECTOR__TENANT_ID);
+		createEAttribute(s3ConnectorEClass, S3_CONNECTOR__TENANT_ENV);
+		createEAttribute(s3ConnectorEClass, S3_CONNECTOR__ORIGIN_ALIAS);
+		createEAttribute(s3ConnectorEClass, S3_CONNECTOR__CDN_ALIAS);
 
 		imageTransformerEClass = createEClass(IMAGE_TRANSFORMER);
 
 		blitlineTransformerEClass = createEClass(BLITLINE_TRANSFORMER);
 		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__APPLICATION_ID);
 		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__BUCKET);
-		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__PREFIX);
+		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__TENANT_ID);
+		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__TENANT_ENV);
 		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__CDN_ALIAS);
 		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__KEY_TEMPLATE);
 		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__URI_TEMPLATE);
@@ -1048,7 +1115,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(imageConnectorEClass, ImageConnector.class, "ImageConnector", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImageConnector_HiUriTemplate(), theEcorePackage.getEString(), "hiUriTemplate", null, 0, 1, ImageConnector.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getImageConnector_LoUriTemplate(), theEcorePackage.getEString(), "loUriTemplate", null, 0, 1, ImageConnector.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImageConnector_UriTemplate(), theEcorePackage.getEString(), "uriTemplate", null, 0, 1, ImageConnector.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(imageConnectorEClass, this.getUploadedImage(), "upload", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1093,6 +1160,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEOperation(davConnectorEClass, null, "destroy", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(s3ConnectorEClass, S3Connector.class, "S3Connector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getS3Connector_CanonicalUserId(), theEcorePackage.getEString(), "canonicalUserId", null, 0, 1, S3Connector.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getS3Connector_Bucket(), theEcorePackage.getEString(), "bucket", null, 0, 1, S3Connector.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getS3Connector_TenantId(), theEcorePackage.getEString(), "tenantId", null, 0, 1, S3Connector.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getS3Connector_TenantEnv(), theEcorePackage.getEString(), "tenantEnv", null, 0, 1, S3Connector.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getS3Connector_OriginAlias(), theEcorePackage.getEString(), "originAlias", null, 0, 1, S3Connector.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getS3Connector_CdnAlias(), theEcorePackage.getEString(), "cdnAlias", null, 0, 1, S3Connector.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(s3ConnectorEClass, null, "destroy", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1117,11 +1190,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEClass(blitlineTransformerEClass, BlitlineTransformer.class, "BlitlineTransformer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBlitlineTransformer_ApplicationId(), theEcorePackage.getEString(), "applicationId", null, 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBlitlineTransformer_Bucket(), theEcorePackage.getEString(), "bucket", null, 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBlitlineTransformer_Prefix(), theEcorePackage.getEString(), "prefix", null, 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBlitlineTransformer_TenantId(), theEcorePackage.getEString(), "tenantId", null, 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBlitlineTransformer_TenantEnv(), theEcorePackage.getEString(), "tenantEnv", null, 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBlitlineTransformer_CdnAlias(), theEcorePackage.getEString(), "cdnAlias", null, 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBlitlineTransformer_KeyTemplate(), theEcorePackage.getEString(), "keyTemplate", "{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}", 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBlitlineTransformer_UriTemplate(), theEcorePackage.getEString(), "uriTemplate", "http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}", 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBlitlineTransformer_OriginUriTemplate(), theEcorePackage.getEString(), "originUriTemplate", "http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}", 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBlitlineTransformer_KeyTemplate(), theEcorePackage.getEString(), "keyTemplate", "{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}", 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBlitlineTransformer_UriTemplate(), theEcorePackage.getEString(), "uriTemplate", "http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}", 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBlitlineTransformer_OriginUriTemplate(), theEcorePackage.getEString(), "originUriTemplate", "http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}", 0, 1, BlitlineTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(thumbnailatorTransformerEClass, ThumbnailatorTransformer.class, "ThumbnailatorTransformer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getThumbnailatorTransformer_Destination(), this.getImageConnector(), null, "destination", null, 0, 1, ThumbnailatorTransformer.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1259,10 +1333,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 			 "documentation", "URI template for \'hi\' (original) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.\n\nVariables are: namespace, styleCode, imageId, styleVariant, ext.\n\nreturn \"http://cdn.alias/\" + \"prefix/\" + \"{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}\";"
 		   });		
 		addAnnotation
-		  (getImageConnector_LoUriTemplate(), 
+		  (getImageConnector_UriTemplate(), 
 		   source, 
 		   new String[] {
-			 "documentation", "URI template for \'lo\' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.\n\nVariables are: namespace, styleCode, imageId, styleVariant, ext.\n\nreturn \"http://origin.alias/\" + \"prefix/\" + \"{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}\";"
+			 "documentation", "URI template for images (both hi=original and lo=derived), optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.\n\nVariables are: namespace, styleCode, imageId, styleVariant, extension.\n\nreturn \"http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}\";\n"
 		   });		
 		addAnnotation
 		  (davConnectorEClass, 
@@ -1298,19 +1372,19 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		  (getBlitlineTransformer_KeyTemplate(), 
 		   source, 
 		   new String[] {
-			 "documentation", "key template in URI template format.\n\nVariables are: namespace, styleCode, imageId, styleVariant, extension.\n\nDefault is: \"{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}\";"
+			 "documentation", "key template in URI template format.\n\nVariables are: tenantId, tenantEnv,\nnamespace, styleCode, imageId, styleVariant, extension.\n\nDefault is: \"{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}\";"
 		   });		
 		addAnnotation
 		  (getBlitlineTransformer_UriTemplate(), 
 		   source, 
 		   new String[] {
-			 "documentation", "URI template for \'lo\' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.\n\nVariables are: namespace, styleCode, imageId, styleVariant, ext.\n\nDefault is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"
+			 "documentation", "URI template for \'lo\' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.\n\nVariables are: namespace, styleCode, imageId, styleVariant, ext.\n\nDefault is: http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"
 		   });		
 		addAnnotation
 		  (getBlitlineTransformer_OriginUriTemplate(), 
 		   source, 
 		   new String[] {
-			 "documentation", "URI template for \'lo\' (derived) images, without CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.\n\nVariables are: namespace, styleCode, imageId, styleVariant, ext.\n\nDefault is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"
+			 "documentation", "URI template for \'lo\' (derived) images, without CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.\n\nVariables are: namespace, styleCode, imageId, styleVariant, ext.\n\nDefault is: http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"
 		   });		
 		addAnnotation
 		  (thumbnailatorTransformerEClass, 

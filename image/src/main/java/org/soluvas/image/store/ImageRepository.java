@@ -160,8 +160,7 @@ public interface ImageRepository {
 
 	public abstract void updateUri(Collection<String> imageIds, ProgressMonitor monitor);
 	
-	public String getHiUriTemplate();
-	public String getLoUriTemplate();
+	public String getUriTemplate();
 	
 	public ImageConnector getConnector();
 

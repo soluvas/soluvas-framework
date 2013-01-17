@@ -22,7 +22,7 @@ import com.google.common.collect.Maps;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.soluvas.image.impl.ImageConnectorImpl#getHiUriTemplate <em>Hi Uri Template</em>}</li>
- *   <li>{@link org.soluvas.image.impl.ImageConnectorImpl#getLoUriTemplate <em>Lo Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.ImageConnectorImpl#getUriTemplate <em>Uri Template</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,16 +38,15 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 	 * @ordered
 	 */
 	protected static final String HI_URI_TEMPLATE_EDEFAULT = null;
-
 	/**
-	 * The default value of the '{@link #getLoUriTemplate() <em>Lo Uri Template</em>}' attribute.
+	 * The default value of the '{@link #getUriTemplate() <em>Uri Template</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLoUriTemplate()
+	 * @see #getUriTemplate()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LO_URI_TEMPLATE_EDEFAULT = null;
+	protected static final String URI_TEMPLATE_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -71,16 +70,20 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	@Override
-	public abstract String getHiUriTemplate();
+	public String getHiUriTemplate() {
+		// TODO: implement this method to return the 'Hi Uri Template' attribute
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public abstract String getLoUriTemplate();
+	public abstract String getUriTemplate();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -109,7 +112,6 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 	 */
 	@Override
 	public final String getUri(String namespace, String imageId, String styleCode, String styleVariant, String extension) {
-		String uriTemplate = "o".equals(styleCode) ? getHiUriTemplate() : getLoUriTemplate();
 		// namespace, styleCode, imageId, styleVariant, extension
 		final Map<String, Object> uriVars = Maps.newHashMap();
 		uriVars.put("namespace", namespace);
@@ -117,8 +119,7 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 		uriVars.put("imageId", imageId);
 		uriVars.put("styleVariant", styleVariant);
 		uriVars.put("extension", extension);
-		uriVars.put("ext", extension);
-		return UriTemplate.fromTemplate(uriTemplate).expand(uriVars);
+		return UriTemplate.fromTemplate(getUriTemplate()).expand(uriVars);
 	}
 
 	/**
@@ -140,8 +141,8 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 		switch (featureID) {
 			case ImagePackage.IMAGE_CONNECTOR__HI_URI_TEMPLATE:
 				return getHiUriTemplate();
-			case ImagePackage.IMAGE_CONNECTOR__LO_URI_TEMPLATE:
-				return getLoUriTemplate();
+			case ImagePackage.IMAGE_CONNECTOR__URI_TEMPLATE:
+				return getUriTemplate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,8 +157,8 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 		switch (featureID) {
 			case ImagePackage.IMAGE_CONNECTOR__HI_URI_TEMPLATE:
 				return HI_URI_TEMPLATE_EDEFAULT == null ? getHiUriTemplate() != null : !HI_URI_TEMPLATE_EDEFAULT.equals(getHiUriTemplate());
-			case ImagePackage.IMAGE_CONNECTOR__LO_URI_TEMPLATE:
-				return LO_URI_TEMPLATE_EDEFAULT == null ? getLoUriTemplate() != null : !LO_URI_TEMPLATE_EDEFAULT.equals(getLoUriTemplate());
+			case ImagePackage.IMAGE_CONNECTOR__URI_TEMPLATE:
+				return URI_TEMPLATE_EDEFAULT == null ? getUriTemplate() != null : !URI_TEMPLATE_EDEFAULT.equals(getUriTemplate());
 		}
 		return super.eIsSet(featureID);
 	}

@@ -58,10 +58,10 @@
         <details key="documentation" value="URI template for 'hi' (original) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, ext.&#xA;&#xA;return &quot;http://cdn.alias/&quot; + &quot;prefix/&quot; + &quot;{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}&quot;;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loUriTemplate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uriTemplate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="URI template for 'lo' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, ext.&#xA;&#xA;return &quot;http://origin.alias/&quot; + &quot;prefix/&quot; + &quot;{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}&quot;;"/>
+        <details key="documentation" value="URI template for images (both hi=original and lo=derived), optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, extension.&#xA;&#xA;return &quot;http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}&quot;;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -76,6 +76,18 @@
       <details key="documentation" value="Store images using Amazon S3 or S3 API-compatible servers such as Ceph, Parkplace, Boardwalk. fakes3 is not working due to it creating folders, not actually storing files."/>
     </eAnnotations>
     <eOperations name="destroy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canonicalUserId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bucket" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tenantId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tenantEnv" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="originAlias" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cdnAlias" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImageTransformer" abstract="true" interface="true">
     <eOperations name="transform">
@@ -105,7 +117,9 @@
         changeable="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="bucket" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         changeable="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tenantId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tenantEnv" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         changeable="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cdnAlias" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         changeable="false">
@@ -114,21 +128,21 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="keyTemplate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
-        changeable="false" defaultValueLiteral="{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}">
+        changeable="false" defaultValueLiteral="{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="key template in URI template format.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, extension.&#xA;&#xA;Default is: &quot;{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}&quot;;"/>
+        <details key="documentation" value="key template in URI template format.&#xA;&#xA;Variables are: tenantId, tenantEnv,&#xA;namespace, styleCode, imageId, styleVariant, extension.&#xA;&#xA;Default is: &quot;{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}&quot;;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uriTemplate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
-        changeable="false" defaultValueLiteral="http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}">
+        changeable="false" defaultValueLiteral="http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="URI template for 'lo' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, ext.&#xA;&#xA;Default is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"/>
+        <details key="documentation" value="URI template for 'lo' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, ext.&#xA;&#xA;Default is: http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="originUriTemplate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
-        changeable="false" defaultValueLiteral="http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}">
+        changeable="false" defaultValueLiteral="http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="URI template for 'lo' (derived) images, without CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, ext.&#xA;&#xA;Default is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"/>
+        <details key="documentation" value="URI template for 'lo' (derived) images, without CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.&#xA;&#xA;Variables are: namespace, styleCode, imageId, styleVariant, ext.&#xA;&#xA;Default is: http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

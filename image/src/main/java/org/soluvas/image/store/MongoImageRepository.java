@@ -153,7 +153,7 @@ public class MongoImageRepository implements ImageRepository {
 		this.transformer = new ThumbnailatorTransformerImpl(innerConnector);
 	}
 	
-	// URI: ~repo.publicUri~{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}
+	// URI: ~repo.publicUri~{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}
 	public MongoImageRepository(String namespace, String mongoUri, ImageConnector connector,
 			ImageTransformer transformer, List<ImageStyle> imageStyles) {
 		super();
@@ -776,13 +776,8 @@ public class MongoImageRepository implements ImageRepository {
 	}
 
 	@Override
-	public String getHiUriTemplate() {
-		return connector.getHiUriTemplate();
-	}
-
-	@Override
-	public String getLoUriTemplate() {
-		return connector.getLoUriTemplate();
+	public String getUriTemplate() {
+		return connector.getUriTemplate();
 	}
 
 	@Override

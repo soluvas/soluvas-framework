@@ -16,7 +16,9 @@ import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +47,8 @@ import com.google.common.collect.Maps;
  * <ul>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getApplicationId <em>Application Id</em>}</li>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getBucket <em>Bucket</em>}</li>
- *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getPrefix <em>Prefix</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getTenantId <em>Tenant Id</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getTenantEnv <em>Tenant Env</em>}</li>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getCdnAlias <em>Cdn Alias</em>}</li>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getKeyTemplate <em>Key Template</em>}</li>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getUriTemplate <em>Uri Template</em>}</li>
@@ -100,23 +103,41 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	 */
 	protected String bucket = BUCKET_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getPrefix() <em>Prefix</em>}' attribute.
+	 * The default value of the '{@link #getTenantId() <em>Tenant Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPrefix()
+	 * @see #getTenantId()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PREFIX_EDEFAULT = null;
+	protected static final String TENANT_ID_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getPrefix() <em>Prefix</em>}' attribute.
+	 * The cached value of the '{@link #getTenantId() <em>Tenant Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPrefix()
+	 * @see #getTenantId()
 	 * @generated
 	 * @ordered
 	 */
-	protected String prefix = PREFIX_EDEFAULT;
+	protected String tenantId = TENANT_ID_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getTenantEnv() <em>Tenant Env</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTenantEnv()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TENANT_ENV_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getTenantEnv() <em>Tenant Env</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTenantEnv()
+	 * @generated
+	 * @ordered
+	 */
+	protected String tenantEnv = TENANT_ENV_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getCdnAlias() <em>Cdn Alias</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -143,7 +164,7 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String KEY_TEMPLATE_EDEFAULT = "{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
+	protected static final String KEY_TEMPLATE_EDEFAULT = "{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
 	/**
 	 * The cached value of the '{@link #getKeyTemplate() <em>Key Template</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -162,7 +183,7 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String URI_TEMPLATE_EDEFAULT = "http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
+	protected static final String URI_TEMPLATE_EDEFAULT = "http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
 	/**
 	 * The cached value of the '{@link #getUriTemplate() <em>Uri Template</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -180,7 +201,7 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ORIGIN_URI_TEMPLATE_EDEFAULT = "http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
+	protected static final String ORIGIN_URI_TEMPLATE_EDEFAULT = "http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
 	/**
 	 * The cached value of the '{@link #getOriginUriTemplate() <em>Origin Uri Template</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -195,16 +216,17 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public BlitlineTransformerImpl() {
+	protected BlitlineTransformerImpl() {
 		throw new UnsupportedOperationException();
 	}
 	
-	public BlitlineTransformerImpl(String applicationId, String bucket, String prefix,
+	public BlitlineTransformerImpl(String applicationId, String bucket, String tenantId, String tenantEnv,
 			String cdnAlias) {
 		super();
 		this.applicationId = applicationId;
 		this.bucket = bucket;
-		this.prefix = prefix;
+		this.tenantId = tenantId;
+		this.tenantEnv = tenantEnv;
 		this.cdnAlias = cdnAlias;
 	}
 	
@@ -248,8 +270,18 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 	 * @generated
 	 */
 	@Override
-	public String getPrefix() {
-		return prefix;
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getTenantEnv() {
+		return tenantEnv;
 	}
 
 	/**
@@ -320,7 +352,8 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 						dest.getStyleVariant(), dest.getExtension());
 				// namespace, styleCode, imageId, styleVariant, extension
 				final Map<String, Object> uriVars = Maps.newHashMap();
-				uriVars.put("prefix", prefix);
+				uriVars.put("tenantId", tenantId);
+				uriVars.put("tenantEnv", tenantEnv);
 				uriVars.put("namespace", namespace);
 				uriVars.put("styleCode", dest.getStyleCode());
 				uriVars.put("imageId", imageId);
@@ -399,8 +432,10 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 				return getApplicationId();
 			case ImagePackage.BLITLINE_TRANSFORMER__BUCKET:
 				return getBucket();
-			case ImagePackage.BLITLINE_TRANSFORMER__PREFIX:
-				return getPrefix();
+			case ImagePackage.BLITLINE_TRANSFORMER__TENANT_ID:
+				return getTenantId();
+			case ImagePackage.BLITLINE_TRANSFORMER__TENANT_ENV:
+				return getTenantEnv();
 			case ImagePackage.BLITLINE_TRANSFORMER__CDN_ALIAS:
 				return getCdnAlias();
 			case ImagePackage.BLITLINE_TRANSFORMER__KEY_TEMPLATE:
@@ -425,8 +460,10 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 				return APPLICATION_ID_EDEFAULT == null ? applicationId != null : !APPLICATION_ID_EDEFAULT.equals(applicationId);
 			case ImagePackage.BLITLINE_TRANSFORMER__BUCKET:
 				return BUCKET_EDEFAULT == null ? bucket != null : !BUCKET_EDEFAULT.equals(bucket);
-			case ImagePackage.BLITLINE_TRANSFORMER__PREFIX:
-				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
+			case ImagePackage.BLITLINE_TRANSFORMER__TENANT_ID:
+				return TENANT_ID_EDEFAULT == null ? tenantId != null : !TENANT_ID_EDEFAULT.equals(tenantId);
+			case ImagePackage.BLITLINE_TRANSFORMER__TENANT_ENV:
+				return TENANT_ENV_EDEFAULT == null ? tenantEnv != null : !TENANT_ENV_EDEFAULT.equals(tenantEnv);
 			case ImagePackage.BLITLINE_TRANSFORMER__CDN_ALIAS:
 				return CDN_ALIAS_EDEFAULT == null ? cdnAlias != null : !CDN_ALIAS_EDEFAULT.equals(cdnAlias);
 			case ImagePackage.BLITLINE_TRANSFORMER__KEY_TEMPLATE:
@@ -453,8 +490,10 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 		result.append(applicationId);
 		result.append(", bucket: ");
 		result.append(bucket);
-		result.append(", prefix: ");
-		result.append(prefix);
+		result.append(", tenantId: ");
+		result.append(tenantId);
+		result.append(", tenantEnv: ");
+		result.append(tenantEnv);
 		result.append(", cdnAlias: ");
 		result.append(cdnAlias);
 		result.append(", keyTemplate: ");

@@ -131,21 +131,12 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public String getHiUriTemplate() {
-		return publicUri /*+ "prefix/"*/ + "{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	@Override
-	public String getLoUriTemplate() {
-		return publicUri /*+ "prefix/"*/ + "{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
+	public String getUriTemplate() {
+		return publicUri /*+ "prefix/"*/ + "{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
 	}
 
 	public String getOriginUriTemplate() {
-		return publicUri /*+ "prefix/"*/ + "{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
+		return publicUri /*+ "prefix/"*/ + "{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
 	}
 	
 	/**

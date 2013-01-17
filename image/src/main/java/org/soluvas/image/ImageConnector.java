@@ -14,7 +14,7 @@ import org.soluvas.commons.SerializableEObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.image.ImageConnector#getHiUriTemplate <em>Hi Uri Template</em>}</li>
- *   <li>{@link org.soluvas.image.ImageConnector#getLoUriTemplate <em>Lo Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.image.ImageConnector#getUriTemplate <em>Uri Template</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,22 +44,23 @@ public interface ImageConnector extends SerializableEObject {
 	String getHiUriTemplate();
 
 	/**
-	 * Returns the value of the '<em><b>Lo Uri Template</b></em>' attribute.
+	 * Returns the value of the '<em><b>Uri Template</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * URI template for 'lo' (derived) images, optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.
+	 * URI template for images (both hi=original and lo=derived), optionally with CDN. This template will be used on 3 areas: server-side, email templating, and client-side JavaScript.
 	 * 
-	 * Variables are: namespace, styleCode, imageId, styleVariant, ext.
+	 * Variables are: namespace, styleCode, imageId, styleVariant, extension.
 	 * 
-	 * return "http://origin.alias/" + "prefix/" + "{namespace}/{styleCode}/{imageId}_{styleVariant}.{ext}";
+	 * return "http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
+	 * 
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Lo Uri Template</em>' attribute.
-	 * @see org.soluvas.image.ImagePackage#getImageConnector_LoUriTemplate()
+	 * @return the value of the '<em>Uri Template</em>' attribute.
+	 * @see org.soluvas.image.ImagePackage#getImageConnector_UriTemplate()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	String getLoUriTemplate();
+	String getUriTemplate();
 
 	/**
 	 * <!-- begin-user-doc -->

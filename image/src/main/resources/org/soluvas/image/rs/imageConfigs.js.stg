@@ -14,10 +14,8 @@ return imageConfigs;
 
 imageRepo(repo) ::= <<
 	'~repo.namespace~': {
-		hiUriTemplate: '~repo.hiUriTemplate~',
-		hiUriExpander: UriTemplate.parse('~repo.hiUriTemplate~'),
-		loUriTemplate: '~repo.loUriTemplate~',
-		loUriExpander: UriTemplate.parse('~repo.loUriTemplate~'),
+		uriTemplate: '~repo.uriTemplate~',
+		uriExpander: UriTemplate.parse('~repo.uriTemplate~'),
 	},
 
 >>

@@ -20,8 +20,8 @@ public class ImageUtils {
 	 */
 	public static String getExtensionOrJpg(String fileName) {
 		// TODO: so don't hardcode extension!
-		return !Strings.isNullOrEmpty(fileName) ? FilenameUtils.getExtension(fileName) : "jpg";
+		final String fileExtension = FilenameUtils.getExtension(Strings.nullToEmpty(fileName));
+		return !Strings.isNullOrEmpty(fileExtension) ? fileExtension : "jpg";
 	}
-
 
 }

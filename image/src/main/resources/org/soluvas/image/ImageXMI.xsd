@@ -49,7 +49,14 @@
       <xsd:documentation>Store images using Amazon S3 or S3 API-compatible servers such as Ceph, Parkplace, Boardwalk. fakes3 is not working due to it creating folders, not actually storing files.</xsd:documentation>
     </xsd:annotation>
     <xsd:complexContent>
-      <xsd:extension base="image:ImageConnector"/>
+      <xsd:extension base="image:ImageConnector">
+        <xsd:attribute name="canonicalUserId" type="xsd:string"/>
+        <xsd:attribute name="bucket" type="xsd:string"/>
+        <xsd:attribute name="tenantId" type="xsd:string"/>
+        <xsd:attribute name="tenantEnv" type="xsd:string"/>
+        <xsd:attribute name="originAlias" type="xsd:string"/>
+        <xsd:attribute name="cdnAlias" type="xsd:string"/>
+      </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="S3Connector" type="image:S3Connector">
@@ -82,7 +89,8 @@ Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740
       <xsd:extension base="image:ImageTransformer">
         <xsd:attribute name="applicationId" type="xsd:string"/>
         <xsd:attribute name="bucket" type="xsd:string"/>
-        <xsd:attribute name="prefix" type="xsd:string"/>
+        <xsd:attribute name="tenantId" type="xsd:string"/>
+        <xsd:attribute name="tenantEnv" type="xsd:string"/>
         <xsd:attribute name="cdnAlias" type="xsd:string">
           <xsd:annotation>
             <xsd:documentation>CDN alias (if available), e.g. pic.stg.berbatik.com.</xsd:documentation>
@@ -92,9 +100,10 @@ Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740
           <xsd:annotation>
             <xsd:documentation>key template in URI template format.
 
-Variables are: namespace, styleCode, imageId, styleVariant, extension.
+Variables are: tenantId, tenantEnv,
+namespace, styleCode, imageId, styleVariant, extension.
 
-Default is: "{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";</xsd:documentation>
+Default is: "{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
         <xsd:attribute name="uriTemplate" type="xsd:string">
@@ -103,7 +112,7 @@ Default is: "{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extensio
 
 Variables are: namespace, styleCode, imageId, styleVariant, ext.
 
-Default is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}</xsd:documentation>
+Default is: http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
         <xsd:attribute name="originUriTemplate" type="xsd:string">
@@ -112,7 +121,7 @@ Default is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVar
 
 Variables are: namespace, styleCode, imageId, styleVariant, ext.
 
-Default is: http://{+alias}/{+prefix}{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}</xsd:documentation>
+Default is: http://{+alias}/{tenantId}_{tenantEnv}/{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
       </xsd:extension>

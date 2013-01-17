@@ -78,13 +78,13 @@ public interface ImagePackage extends EPackage {
 	int IMAGE_CONNECTOR__HI_URI_TEMPLATE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Lo Uri Template</b></em>' attribute.
+	 * The feature id for the '<em><b>Uri Template</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMAGE_CONNECTOR__LO_URI_TEMPLATE = 1;
+	int IMAGE_CONNECTOR__URI_TEMPLATE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Connector</em>' class.
@@ -145,13 +145,13 @@ public interface ImagePackage extends EPackage {
 	int DAV_CONNECTOR__HI_URI_TEMPLATE = IMAGE_CONNECTOR__HI_URI_TEMPLATE;
 
 	/**
-	 * The feature id for the '<em><b>Lo Uri Template</b></em>' attribute.
+	 * The feature id for the '<em><b>Uri Template</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAV_CONNECTOR__LO_URI_TEMPLATE = IMAGE_CONNECTOR__LO_URI_TEMPLATE;
+	int DAV_CONNECTOR__URI_TEMPLATE = IMAGE_CONNECTOR__URI_TEMPLATE;
 
 	/**
 	 * The number of structural features of the '<em>Dav Connector</em>' class.
@@ -172,13 +172,67 @@ public interface ImagePackage extends EPackage {
 	int S3_CONNECTOR__HI_URI_TEMPLATE = IMAGE_CONNECTOR__HI_URI_TEMPLATE;
 
 	/**
-	 * The feature id for the '<em><b>Lo Uri Template</b></em>' attribute.
+	 * The feature id for the '<em><b>Uri Template</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int S3_CONNECTOR__LO_URI_TEMPLATE = IMAGE_CONNECTOR__LO_URI_TEMPLATE;
+	int S3_CONNECTOR__URI_TEMPLATE = IMAGE_CONNECTOR__URI_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Canonical User Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int S3_CONNECTOR__CANONICAL_USER_ID = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Bucket</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int S3_CONNECTOR__BUCKET = IMAGE_CONNECTOR_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Tenant Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int S3_CONNECTOR__TENANT_ID = IMAGE_CONNECTOR_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Tenant Env</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int S3_CONNECTOR__TENANT_ENV = IMAGE_CONNECTOR_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Origin Alias</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int S3_CONNECTOR__ORIGIN_ALIAS = IMAGE_CONNECTOR_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Cdn Alias</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int S3_CONNECTOR__CDN_ALIAS = IMAGE_CONNECTOR_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>S3 Connector</em>' class.
@@ -187,7 +241,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int S3_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
+	int S3_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Transformer</em>' class.
@@ -217,13 +271,22 @@ public interface ImagePackage extends EPackage {
 	int BLITLINE_TRANSFORMER__BUCKET = IMAGE_TRANSFORMER_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * The feature id for the '<em><b>Tenant Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BLITLINE_TRANSFORMER__PREFIX = IMAGE_TRANSFORMER_FEATURE_COUNT + 2;
+	int BLITLINE_TRANSFORMER__TENANT_ID = IMAGE_TRANSFORMER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Tenant Env</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLITLINE_TRANSFORMER__TENANT_ENV = IMAGE_TRANSFORMER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Cdn Alias</b></em>' attribute.
@@ -232,7 +295,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BLITLINE_TRANSFORMER__CDN_ALIAS = IMAGE_TRANSFORMER_FEATURE_COUNT + 3;
+	int BLITLINE_TRANSFORMER__CDN_ALIAS = IMAGE_TRANSFORMER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Key Template</b></em>' attribute.
@@ -241,7 +304,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BLITLINE_TRANSFORMER__KEY_TEMPLATE = IMAGE_TRANSFORMER_FEATURE_COUNT + 4;
+	int BLITLINE_TRANSFORMER__KEY_TEMPLATE = IMAGE_TRANSFORMER_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Uri Template</b></em>' attribute.
@@ -250,7 +313,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BLITLINE_TRANSFORMER__URI_TEMPLATE = IMAGE_TRANSFORMER_FEATURE_COUNT + 5;
+	int BLITLINE_TRANSFORMER__URI_TEMPLATE = IMAGE_TRANSFORMER_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Origin Uri Template</b></em>' attribute.
@@ -259,7 +322,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BLITLINE_TRANSFORMER__ORIGIN_URI_TEMPLATE = IMAGE_TRANSFORMER_FEATURE_COUNT + 6;
+	int BLITLINE_TRANSFORMER__ORIGIN_URI_TEMPLATE = IMAGE_TRANSFORMER_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Blitline Transformer</em>' class.
@@ -268,7 +331,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BLITLINE_TRANSFORMER_FEATURE_COUNT = IMAGE_TRANSFORMER_FEATURE_COUNT + 7;
+	int BLITLINE_TRANSFORMER_FEATURE_COUNT = IMAGE_TRANSFORMER_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.ThumbnailatorTransformerImpl <em>Thumbnailator Transformer</em>}' class.
@@ -1004,15 +1067,15 @@ public interface ImagePackage extends EPackage {
 	EAttribute getImageConnector_HiUriTemplate();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageConnector#getLoUriTemplate <em>Lo Uri Template</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageConnector#getUriTemplate <em>Uri Template</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Lo Uri Template</em>'.
-	 * @see org.soluvas.image.ImageConnector#getLoUriTemplate()
+	 * @return the meta object for the attribute '<em>Uri Template</em>'.
+	 * @see org.soluvas.image.ImageConnector#getUriTemplate()
 	 * @see #getImageConnector()
 	 * @generated
 	 */
-	EAttribute getImageConnector_LoUriTemplate();
+	EAttribute getImageConnector_UriTemplate();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.S3Connector <em>S3 Connector</em>}'.
@@ -1023,6 +1086,72 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getS3Connector();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.S3Connector#getCanonicalUserId <em>Canonical User Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Canonical User Id</em>'.
+	 * @see org.soluvas.image.S3Connector#getCanonicalUserId()
+	 * @see #getS3Connector()
+	 * @generated
+	 */
+	EAttribute getS3Connector_CanonicalUserId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.S3Connector#getBucket <em>Bucket</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bucket</em>'.
+	 * @see org.soluvas.image.S3Connector#getBucket()
+	 * @see #getS3Connector()
+	 * @generated
+	 */
+	EAttribute getS3Connector_Bucket();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.S3Connector#getTenantId <em>Tenant Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tenant Id</em>'.
+	 * @see org.soluvas.image.S3Connector#getTenantId()
+	 * @see #getS3Connector()
+	 * @generated
+	 */
+	EAttribute getS3Connector_TenantId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.S3Connector#getTenantEnv <em>Tenant Env</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tenant Env</em>'.
+	 * @see org.soluvas.image.S3Connector#getTenantEnv()
+	 * @see #getS3Connector()
+	 * @generated
+	 */
+	EAttribute getS3Connector_TenantEnv();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.S3Connector#getOriginAlias <em>Origin Alias</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Origin Alias</em>'.
+	 * @see org.soluvas.image.S3Connector#getOriginAlias()
+	 * @see #getS3Connector()
+	 * @generated
+	 */
+	EAttribute getS3Connector_OriginAlias();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.S3Connector#getCdnAlias <em>Cdn Alias</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Cdn Alias</em>'.
+	 * @see org.soluvas.image.S3Connector#getCdnAlias()
+	 * @see #getS3Connector()
+	 * @generated
+	 */
+	EAttribute getS3Connector_CdnAlias();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.BlitlineTransformer <em>Blitline Transformer</em>}'.
@@ -1057,15 +1186,26 @@ public interface ImagePackage extends EPackage {
 	EAttribute getBlitlineTransformer_Bucket();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.image.BlitlineTransformer#getPrefix <em>Prefix</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.BlitlineTransformer#getTenantId <em>Tenant Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Prefix</em>'.
-	 * @see org.soluvas.image.BlitlineTransformer#getPrefix()
+	 * @return the meta object for the attribute '<em>Tenant Id</em>'.
+	 * @see org.soluvas.image.BlitlineTransformer#getTenantId()
 	 * @see #getBlitlineTransformer()
 	 * @generated
 	 */
-	EAttribute getBlitlineTransformer_Prefix();
+	EAttribute getBlitlineTransformer_TenantId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.BlitlineTransformer#getTenantEnv <em>Tenant Env</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tenant Env</em>'.
+	 * @see org.soluvas.image.BlitlineTransformer#getTenantEnv()
+	 * @see #getBlitlineTransformer()
+	 * @generated
+	 */
+	EAttribute getBlitlineTransformer_TenantEnv();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.image.BlitlineTransformer#getCdnAlias <em>Cdn Alias</em>}'.
@@ -1720,12 +1860,12 @@ public interface ImagePackage extends EPackage {
 		EAttribute IMAGE_CONNECTOR__HI_URI_TEMPLATE = eINSTANCE.getImageConnector_HiUriTemplate();
 
 		/**
-		 * The meta object literal for the '<em><b>Lo Uri Template</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Uri Template</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute IMAGE_CONNECTOR__LO_URI_TEMPLATE = eINSTANCE.getImageConnector_LoUriTemplate();
+		EAttribute IMAGE_CONNECTOR__URI_TEMPLATE = eINSTANCE.getImageConnector_UriTemplate();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.S3ConnectorImpl <em>S3 Connector</em>}' class.
@@ -1736,6 +1876,54 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EClass S3_CONNECTOR = eINSTANCE.getS3Connector();
+
+		/**
+		 * The meta object literal for the '<em><b>Canonical User Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute S3_CONNECTOR__CANONICAL_USER_ID = eINSTANCE.getS3Connector_CanonicalUserId();
+
+		/**
+		 * The meta object literal for the '<em><b>Bucket</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute S3_CONNECTOR__BUCKET = eINSTANCE.getS3Connector_Bucket();
+
+		/**
+		 * The meta object literal for the '<em><b>Tenant Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute S3_CONNECTOR__TENANT_ID = eINSTANCE.getS3Connector_TenantId();
+
+		/**
+		 * The meta object literal for the '<em><b>Tenant Env</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute S3_CONNECTOR__TENANT_ENV = eINSTANCE.getS3Connector_TenantEnv();
+
+		/**
+		 * The meta object literal for the '<em><b>Origin Alias</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute S3_CONNECTOR__ORIGIN_ALIAS = eINSTANCE.getS3Connector_OriginAlias();
+
+		/**
+		 * The meta object literal for the '<em><b>Cdn Alias</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute S3_CONNECTOR__CDN_ALIAS = eINSTANCE.getS3Connector_CdnAlias();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.BlitlineTransformerImpl <em>Blitline Transformer</em>}' class.
@@ -1764,12 +1952,20 @@ public interface ImagePackage extends EPackage {
 		EAttribute BLITLINE_TRANSFORMER__BUCKET = eINSTANCE.getBlitlineTransformer_Bucket();
 
 		/**
-		 * The meta object literal for the '<em><b>Prefix</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Tenant Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BLITLINE_TRANSFORMER__PREFIX = eINSTANCE.getBlitlineTransformer_Prefix();
+		EAttribute BLITLINE_TRANSFORMER__TENANT_ID = eINSTANCE.getBlitlineTransformer_TenantId();
+
+		/**
+		 * The meta object literal for the '<em><b>Tenant Env</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BLITLINE_TRANSFORMER__TENANT_ENV = eINSTANCE.getBlitlineTransformer_TenantEnv();
 
 		/**
 		 * The meta object literal for the '<em><b>Cdn Alias</b></em>' attribute feature.
