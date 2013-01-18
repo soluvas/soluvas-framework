@@ -205,11 +205,14 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 						// TODO: not hardcode styled content type and extension
 						final String styledContentType = "image/jpeg";
 						final String styledExtension = "jpg";
-						log.debug("Uploading {} {} using {}", dest.getStyleCode(), imageId, destination );
+						log.debug("Uploading {} {} using {} from {} ({} bytes)",
+								dest.getStyleCode(), imageId, destination.getClass().getName(),
+								styledFile, styledFile.length());
 						final UploadedImage styledUpload = destination.upload(namespace, imageId, dest.getStyleCode(),
 								dest.getStyleVariant(), styledExtension, styledFile, styledContentType);
 						final String styledPublicUri = styledUpload.getOriginUri();
-						log.info("Uploaded {} {} as {}", dest.getStyleCode(), imageId, styledPublicUri );
+						log.info("Uploaded {} {} as {} from {} ({} bytes)", dest.getStyleCode(), imageId, styledPublicUri,
+								styledFile, styledFile.length());
 //						final StyledImage styled = new StyledImage(
 //								style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
 //								(int)styledFile.length(), width, height);

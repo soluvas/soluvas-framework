@@ -3,6 +3,7 @@
 package org.soluvas.image.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,7 +24,8 @@ import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
-import org.apache.http.entity.FileEntity;
+import org.apache.http.entity.InputStreamEntity;
+import org.apache.http.impl.NoConnectionReuseStrategy;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -59,7 +61,7 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	private static final Logger log = LoggerFactory
 			.getLogger(DavConnectorImpl.class);
 	
-	private final DefaultHttpClient client = new DefaultHttpClient(new PoolingClientConnectionManager());
+	private final DefaultHttpClient client;
 	private String davUri;
 	private String safeDavUri;
 	private HttpHost davHost;
@@ -77,6 +79,10 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 		super();
 		this.davUri = davUri;
 		this.publicUri = publicUri;
+		
+		client = new DefaultHttpClient(new PoolingClientConnectionManager());
+		// workaround for nginx dav bug, see upload() method
+		client.setReuseStrategy(new NoConnectionReuseStrategy());
 		
 		// Sanity checks
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(davUri), "DAV URI cannot be empty");
@@ -188,7 +194,7 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 		// namespace, styleCode, imageId, styleVariant, ext
 		final Map<String, Object> uriVars = ImmutableMap.<String, Object>of(
 				"namespace", namespace, "styleCode", styleCode, "imageId", id, "styleVariant", styleVariant,
-				"ext", extension);
+				"extension", extension);
 		return UriTemplate.fromTemplate(uriTemplate).expand(uriVars);
 	}
 	
@@ -205,16 +211,61 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	 * @throws IOException
 	 */
 	protected void uploadFileDav(String uri, File source, String contentType) throws ClientProtocolException, IOException {
+		Preconditions.checkArgument(source.exists(), "File %s to be uploaded must exists", source);
 		// final URI originalDavUri = URI.create(String.format("%s%s/%s/%s_%s.%s",
 		// safeDavUri, namespace, 'o', imageId, 'o', extension));
 		
-		long length = source.length();
-		log.info("Uploading {} ({} bytes) to {}", contentType, length, uri );
+		final long length = source.length();
+		log.info("Uploading {} from {} ({} bytes) to {}", contentType, source, length, uri );
 		
-		HttpPut httpPut = new HttpPut(uri);
+		final HttpPut httpPut = new HttpPut(uri);
 		httpPut.setHeader("Content-Type", contentType);
-		httpPut.setEntity(new FileEntity(source, ContentType.create(contentType)));
-		HttpResponse response = client.execute(davHost, httpPut, createHttpContext());
+/*
+For some strange reason, nginx dav 1.1.19-1ubuntu0.1 on Ubuntu 12.04-x86 is unstable, but worked well (at that time) with InputStreamEntity.
+tried with FileEntity, ByteArrayEntity, and InputStreamEntity, not working.
+
+Caused by: org.soluvas.image.ImageException: Cannot upload to http://dav.berbatik.com/shop/t/canting_ayu3_square_imageadd_8229662526285897097_t.jpg
+        at org.soluvas.image.impl.DavConnectorImpl.upload(DavConnectorImpl.java:286)[2886:org.soluvas.image:2.0.0.SNAPSHOT]
+        at org.soluvas.image.impl.ThumbnailatorTransformerImpl.transform(ThumbnailatorTransformerImpl.java:210)[2886:org.soluvas.image:2.0.0.SNAPSHOT]
+        ... 22 more
+Caused by: java.net.SocketException: Connection reset
+        at java.net.SocketInputStream.read(SocketInputStream.java:189)[:1.7.0_09]
+        at java.net.SocketInputStream.read(SocketInputStream.java:121)[:1.7.0_09]
+        at org.apache.http.impl.io.AbstractSessionInputBuffer.fillBuffer(AbstractSessionInputBuffer.java:166)[2498:org.apache.httpcomponents.httpcore:4.2.2]
+        at org.apache.http.impl.io.SocketInputBuffer.fillBuffer(SocketInputBuffer.java:90)[2498:org.apache.httpcomponents.httpcore:4.2.2]
+        at org.apache.http.impl.io.AbstractSessionInputBuffer.readLine(AbstractSessionInputBuffer.java:281)[2498:org.apache.httpcomponents.httpcore:4.2.2]
+        at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:92)[2511:org.apache.httpcomponents.httpclient:4.2.2]
+        at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:62)[2511:org.apache.httpcomponents.httpclient:4.2.2]
+        at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:254)[2498:org.apache.httpcomponents.httpcore:4.2.2]
+        at org.apache.http.impl.AbstractHttpClientConnection.receiveResponseHeader(AbstractHttpClientConnection.java:289)[2498:org.apache.httpcomponents.httpcore:4.2.2]
+        at org.apache.http.impl.conn.DefaultClientConnection.receiveResponseHeader(DefaultClientConnection.java:252)[2511:org.apache.httpcomponents.httpclient:4.2.2]
+        at org.apache.http.impl.conn.ManagedClientConnectionImpl.receiveResponseHeader(ManagedClientConnectionImpl.java:191)[2511:org.apache.httpcomponents.httpclient:4.2.2]
+        at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:300)[2498:org.apache.httpcomponents.httpcore:4.2.2]
+        at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:127)[2498:org.apache.httpcomponents.httpcore:4.2.2]
+        at org.apache.http.impl.client.DefaultRequestDirector.tryExecute(DefaultRequestDirector.java:712)[2511:org.apache.httpcomponents.httpclient:4.2.2]
+        at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:517)[2511:org.apache.httpcomponents.httpclient:4.2.2]
+        at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:906)[2511:org.apache.httpcomponents.httpclient:4.2.2]
+        at org.soluvas.image.impl.DavConnectorImpl.uploadFileDav(DavConnectorImpl.java:218)[2886:org.soluvas.image:2.0.0.SNAPSHOT]
+        at org.soluvas.image.impl.DavConnectorImpl.upload(DavConnectorImpl.java:279)[2886:org.soluvas.image:2.0.0.SNAPSHOT]
+        ... 23 more
+        
+nginx side:
+worker process 32408 exited on signal 11 (core dumped)
+
+probably:
+http://trac.nginx.org/nginx/ticket/238
+http://forum.nginx.org/read.php?21,231434,231434
+
+I *think* it's due to Connector uploading the original, then downloading the original before transforming (requested by Thumbnailator),
+and uploading again, and because of HTTP pipelining which isn't supported by nginx's dav.
+         
+*/
+//		httpPut.setEntity(new FileEntity(source, ContentType.create(contentType)));
+//		httpPut.setEntity(new ByteArrayEntity(FileUtils.readFileToByteArray(source),
+//				ContentType.create(contentType)));
+		httpPut.setEntity(
+				new InputStreamEntity(new FileInputStream(source), source.length(), ContentType.create(contentType)));
+		final HttpResponse response = client.execute(davHost, httpPut, createHttpContext());
 		try {
 			if (response.getStatusLine().getStatusCode() >= 200 && response.getStatusLine().getStatusCode() < 300)
 				log.info("Upload {} returned: {}", uri, response.getStatusLine());
