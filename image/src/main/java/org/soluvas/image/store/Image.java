@@ -61,11 +61,22 @@ public class Image {
 	 * @param contentType
 	 * @param name
 	 */
-	public Image(File originalFile, String contentType, String name) {
+	public Image(String id, File originalFile, String contentType, String name) {
 		super();
+		this.id = id;
 		this.originalFile = originalFile;
 		this.contentType = contentType;
 		this.name = name;
+	}
+
+	/**
+	 * Convenience constructor for passing to {@link MongoImageRepository#add(Image)}.
+	 * @param originalFile
+	 * @param contentType
+	 * @param name
+	 */
+	public Image(File originalFile, String contentType, String name) {
+		this(null, originalFile, contentType, name);
 	}
 
 	public Image(ImageRepository imageStore, BasicBSONObject dbo) {

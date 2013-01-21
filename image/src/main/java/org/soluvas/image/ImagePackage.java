@@ -1035,6 +1035,16 @@ public interface ImagePackage extends EPackage {
 	int FILE_EXPORT = 17;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.image.DuplicateIdHandling <em>Duplicate Id Handling</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.DuplicateIdHandling
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getDuplicateIdHandling()
+	 * @generated
+	 */
+	int DUPLICATE_ID_HANDLING = 18;
+
+	/**
 	 * The meta object id for the '<em>Repository</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1042,7 +1052,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageRepository()
 	 * @generated
 	 */
-	int IMAGE_REPOSITORY = 18;
+	int IMAGE_REPOSITORY = 19;
 
 
 	/**
@@ -1809,6 +1819,16 @@ public interface ImagePackage extends EPackage {
 	EEnum getFileExport();
 
 	/**
+	 * Returns the meta object for enum '{@link org.soluvas.image.DuplicateIdHandling <em>Duplicate Id Handling</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Duplicate Id Handling</em>'.
+	 * @see org.soluvas.image.DuplicateIdHandling
+	 * @generated
+	 */
+	EEnum getDuplicateIdHandling();
+
+	/**
 	 * Returns the meta object for data type '{@link org.soluvas.image.store.ImageRepository <em>Repository</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2444,6 +2464,16 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum FILE_EXPORT = eINSTANCE.getFileExport();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.DuplicateIdHandling <em>Duplicate Id Handling</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.DuplicateIdHandling
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getDuplicateIdHandling()
+		 * @generated
+		 */
+		EEnum DUPLICATE_ID_HANDLING = eINSTANCE.getDuplicateIdHandling();
 
 		/**
 		 * The meta object literal for the '<em>Repository</em>' data type.

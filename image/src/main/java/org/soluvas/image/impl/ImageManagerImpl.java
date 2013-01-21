@@ -23,6 +23,7 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.ProgressStatus;
 import org.soluvas.commons.impl.ProgressMonitorImpl;
+import org.soluvas.image.DuplicateIdHandling;
 import org.soluvas.image.FileExport;
 import org.soluvas.image.ImageCatalog;
 import org.soluvas.image.ImageException;
@@ -159,6 +160,8 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 					exportedStyled.setLinkedFile(new File(styledImageRelFolder , image.getId() + "_" + exportedStyled.getVariant() + "." + extension).getPath());
 				}
 				catalog.getImages().add(exportedImage);
+				
+				submon.worked(1);
 			}
 			rs.getContents().add(catalog);
 			try {
@@ -248,7 +251,8 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public long importImages(File srcFolder, boolean metadata, FileExport files, ImageRepository imageRepo, ProgressMonitor monitor) {
+	public long importImages(File srcFolder, boolean metadata, FileExport files, ImageRepository imageRepo,
+			DuplicateIdHandling duplicateIdHandling, ProgressMonitor monitor) {
 		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, 2);
 		final File file = new File(srcFolder, imageRepo.getNamespace() + ".ImageCatalog.xmi");
 		
@@ -267,11 +271,42 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		for (final org.soluvas.image.Image image : images) {
 			final File originalFile = new File(srcFolder, image.getLinkedFile());
 			try {
-				final Image newImage = new Image(originalFile, image.getContentType(),
-						Optional.fromNullable(image.getName()).or(image.getId()));
-				final String imageId = imageRepo.add(newImage);
-				importedCount++;
-				submon.worked(1);
+				final boolean existed = imageRepo.exists(image.getId());
+				final Image newImage;
+				if (existed) {
+					// handling for existing image is more complex
+					switch (duplicateIdHandling) {
+					case SKIP:
+						log.info("Skipping import of {} because already exists", image.getId());
+						submon.worked(1, ProgressStatus.SKIPPED);
+						break;
+					case ADD:
+						final Image addImage = new Image(image.getId(), originalFile, image.getContentType(),
+								Optional.fromNullable(image.getName()).or(image.getId()));
+						final String addImageId = imageRepo.add(addImage);
+						log.info("Added possibly duplicate image {} as {}", image.getId(), addImageId);
+						importedCount++;
+						submon.worked(1);
+						break;
+					case OVERWRITE:
+						final Image overwriteImage = new Image(image.getId(), originalFile, image.getContentType(),
+								Optional.fromNullable(image.getName()).or(image.getId()));
+						final String overwriteImageId = imageRepo.add(overwriteImage);
+						log.info("Overwritten image {} as {}", image.getId(), overwriteImageId);
+						importedCount++;
+						submon.worked(1);
+						break;
+					case ERROR:
+						throw new ImageException("Image " + image.getId() + " already exists.");
+					}
+				} else {
+					newImage = new Image(image.getId(), originalFile, image.getContentType(),
+							Optional.fromNullable(image.getName()).or(image.getId()));
+					final String newImageId = imageRepo.add(newImage);
+					log.info("Imported image {} as {}", image.getId(), newImageId);
+					importedCount++;
+					submon.worked(1);
+				}
 			} catch (Exception e) {
 				log.error("Cannot import " + image.getId() + " from " + originalFile, e);
 				submon.worked(1, ProgressStatus.ERROR);

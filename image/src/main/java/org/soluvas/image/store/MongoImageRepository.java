@@ -295,7 +295,7 @@ public class MongoImageRepository implements ImageRepository {
 	 * @see org.soluvas.image.store.ImageRepository#create(java.io.File, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public String create(File originalFile, final String contentType, String name) throws IOException {
+	public String create(String imageId, File originalFile, final String contentType, String name) throws IOException {
 		Preconditions.checkNotNull(originalFile, "Original file to be added must not be null");
 		return doCreate(null, originalFile, contentType, originalFile.length(), name, originalFile.getName(), true);
 	}
@@ -306,7 +306,7 @@ public class MongoImageRepository implements ImageRepository {
 	@Override
 	public String add(Image newImage) {
 		try {
-			return create(newImage.getOriginalFile(), newImage.getContentType(), newImage.getName());
+			return create(newImage.getId(), newImage.getOriginalFile(), newImage.getContentType(), newImage.getName());
 		} catch (IOException e) {
 			throw new ImageException("Error adding image " + newImage, e);
 		}
@@ -564,7 +564,7 @@ public class MongoImageRepository implements ImageRepository {
 		log.trace("Get {} Image {}", namespace, id);
 		if (id == null)
 			return null;
-		DBObject dbo = mongoColl.findOne(new BasicDBObject("_id", id));
+		final DBObject dbo = mongoColl.findOne(new BasicDBObject("_id", id));
 		if (dbo == null)
 			return null;
 		return new Image(this, (BasicBSONObject)dbo);
@@ -783,6 +783,15 @@ public class MongoImageRepository implements ImageRepository {
 	@Override
 	public ImageConnector getConnector() {
 		return connector;
+	}
+	
+	@Override
+	public boolean exists(String id) {
+		log.trace("Exists {} Image {}?", namespace, id);
+		if (id == null)
+			return false;
+		final long count = mongoColl.count(new BasicDBObject("_id", id));
+		return count >= 1;
 	}
 
 }

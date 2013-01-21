@@ -209,6 +209,7 @@
       <eParameters name="metadata" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
       <eParameters name="files" eType="#//FileExport"/>
       <eParameters name="imageRepo" eType="#//ImageRepository"/>
+      <eParameters name="duplicateIdHandling" eType="#//DuplicateIdHandling"/>
       <eParameters name="monitor" eType="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ProgressMonitor"/>
     </eOperations>
   </eClassifiers>
@@ -319,4 +320,26 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ImageRepository" instanceClassName="org.soluvas.image.store.ImageRepository"
       serializable="false"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="DuplicateIdHandling">
+    <eLiterals name="skip">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If ID already exists, skip (default, safest)"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="overwrite" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If ID already exists, overwrite (common use)"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="add" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If ID already exists, upload new image (not very useful)"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="error" value="3">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If ID already exists, throw error (strict)"/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
 </ecore:EPackage>

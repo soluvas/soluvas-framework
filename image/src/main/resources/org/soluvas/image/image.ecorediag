@@ -625,6 +625,33 @@
     <element xmi:type="ecore:EDataType" href="image.ecore#//ImageRepository"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rMtqEl_OEeK5foAZhP7dzg" x="3636" y="24"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_-sDgsWOJEeKAeeKTYjwLpQ" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_-sFV4GOJEeKAeeKTYjwLpQ" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_-sF88GOJEeKAeeKTYjwLpQ" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_BFI38GOKEeKAeeKTYjwLpQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="image.ecore#//DuplicateIdHandling/skip"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_BFI38WOKEeKAeeKTYjwLpQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_DCHiAGOKEeKAeeKTYjwLpQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="image.ecore#//DuplicateIdHandling/overwrite"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DCHiAWOKEeKAeeKTYjwLpQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_D37IoGOKEeKAeeKTYjwLpQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="image.ecore#//DuplicateIdHandling/add"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_D37IoWOKEeKAeeKTYjwLpQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_H79l0GOKEeKAeeKTYjwLpQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="image.ecore#//DuplicateIdHandling/error"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_H79l0WOKEeKAeeKTYjwLpQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_-sF88WOJEeKAeeKTYjwLpQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-sF88mOJEeKAeeKTYjwLpQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-sF882OJEeKAeeKTYjwLpQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_-sDgsmOJEeKAeeKTYjwLpQ" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="image.ecore#//DuplicateIdHandling"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-sDgs2OJEeKAeeKTYjwLpQ" x="213" y="493"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_OHGaMBnPEeKuD9M24pvFUQ"/>
   <element xmi:type="ecore:EPackage" href="image.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_3D-PAE3SEeKyY_kAWxaufg" type="3003" source="_3D2TME3SEeKyY_kAWxaufg" target="_gxLLYF11EeKHsp4J123rug">

@@ -16,6 +16,7 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.image.BlitlineTransformer;
 import org.soluvas.image.DavConnector;
 import org.soluvas.image.DimensionLike;
+import org.soluvas.image.DuplicateIdHandling;
 import org.soluvas.image.FileExport;
 import org.soluvas.image.Image;
 import org.soluvas.image.ImageCatalog;
@@ -165,6 +166,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	private EEnum fileExportEEnum = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum duplicateIdHandlingEEnum = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -936,6 +943,15 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getDuplicateIdHandling() {
+		return duplicateIdHandlingEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getImageRepository() {
 		return imageRepositoryEDataType;
 	}
@@ -1057,6 +1073,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		// Create enums
 		imageTransformTypeEEnum = createEEnum(IMAGE_TRANSFORM_TYPE);
 		fileExportEEnum = createEEnum(FILE_EXPORT);
+		duplicateIdHandlingEEnum = createEEnum(DUPLICATE_ID_HANDLING);
 
 		// Create data types
 		imageRepositoryEDataType = createEDataType(IMAGE_REPOSITORY);
@@ -1227,6 +1244,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEParameter(op, theEcorePackage.getEBoolean(), "metadata", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getFileExport(), "files", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageRepository(), "imageRepo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getDuplicateIdHandling(), "duplicateIdHandling", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theCommonsPackage.getProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(imageTransformEClass, ImageTransform.class, "ImageTransform", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1282,6 +1300,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEEnumLiteral(fileExportEEnum, FileExport.ORIGINAL);
 		addEEnumLiteral(fileExportEEnum, FileExport.STYLE);
 		addEEnumLiteral(fileExportEEnum, FileExport.ALL);
+
+		initEEnum(duplicateIdHandlingEEnum, DuplicateIdHandling.class, "DuplicateIdHandling");
+		addEEnumLiteral(duplicateIdHandlingEEnum, DuplicateIdHandling.SKIP);
+		addEEnumLiteral(duplicateIdHandlingEEnum, DuplicateIdHandling.OVERWRITE);
+		addEEnumLiteral(duplicateIdHandlingEEnum, DuplicateIdHandling.ADD);
+		addEEnumLiteral(duplicateIdHandlingEEnum, DuplicateIdHandling.ERROR);
 
 		// Initialize data types
 		initEDataType(imageRepositoryEDataType, ImageRepository.class, "ImageRepository", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1517,6 +1541,30 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Image file name, relative to XMI file path inside the export folder or archive file. Only used for XMI data."
+		   });		
+		addAnnotation
+		  (duplicateIdHandlingEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "If ID already exists, skip (default, safest)"
+		   });		
+		addAnnotation
+		  (duplicateIdHandlingEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "If ID already exists, overwrite (common use)"
+		   });		
+		addAnnotation
+		  (duplicateIdHandlingEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "If ID already exists, upload new image (not very useful)"
+		   });		
+		addAnnotation
+		  (duplicateIdHandlingEEnum.getELiterals().get(3), 
+		   source, 
+		   new String[] {
+			 "documentation", "If ID already exists, throw error (strict)"
 		   });
 	}
 

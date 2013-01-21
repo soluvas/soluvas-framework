@@ -86,6 +86,8 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 				return createImageTransformTypeFromString(eDataType, initialValue);
 			case ImagePackage.FILE_EXPORT:
 				return createFileExportFromString(eDataType, initialValue);
+			case ImagePackage.DUPLICATE_ID_HANDLING:
+				return createDuplicateIdHandlingFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -103,6 +105,8 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 				return convertImageTransformTypeToString(eDataType, instanceValue);
 			case ImagePackage.FILE_EXPORT:
 				return convertFileExportToString(eDataType, instanceValue);
+			case ImagePackage.DUPLICATE_ID_HANDLING:
+				return convertDuplicateIdHandlingToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -265,6 +269,26 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * @generated
 	 */
 	public String convertFileExportToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DuplicateIdHandling createDuplicateIdHandlingFromString(EDataType eDataType, String initialValue) {
+		DuplicateIdHandling result = DuplicateIdHandling.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertDuplicateIdHandlingToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

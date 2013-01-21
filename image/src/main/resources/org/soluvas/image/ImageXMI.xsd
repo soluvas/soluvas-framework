@@ -23,6 +23,30 @@
       <xsd:enumeration value="all"/>
     </xsd:restriction>
   </xsd:simpleType>
+  <xsd:simpleType name="DuplicateIdHandling">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="skip">
+        <xsd:annotation>
+          <xsd:documentation>If ID already exists, skip (default, safest)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="overwrite">
+        <xsd:annotation>
+          <xsd:documentation>If ID already exists, overwrite (common use)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="add">
+        <xsd:annotation>
+          <xsd:documentation>If ID already exists, upload new image (not very useful)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="error">
+        <xsd:annotation>
+          <xsd:documentation>If ID already exists, throw error (strict)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType abstract="true" name="ImageConnector">
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element ref="xmi:Extension"/>

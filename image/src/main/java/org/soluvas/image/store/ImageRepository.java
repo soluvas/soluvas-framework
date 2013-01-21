@@ -11,9 +11,16 @@ import java.util.Set;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.ProgressMonitor;
+import org.soluvas.data.EntityLookup;
+import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.image.ImageConnector;
 
-public interface ImageRepository {
+/**
+ * @todo extend {@link PagingAndSortingRepository}
+ * @author ceefour
+ */
+// TODO: extend PagingAndSortingRepository
+public interface ImageRepository extends EntityLookup<Image, String> {
 
 	/**
 	 * Name of the predefined "original" image style.
@@ -79,15 +86,16 @@ public interface ImageRepository {
 	 * 
 	 * Note: To comply with Soluvas Data, the add() method should accept a VO object (that can be deserialized from
 	 * JSON, AMQP, RDF, XMI, etc.). See add().
-	 * 
+	 * @param imageId If provided, will use the imageId (possibly overwrite image with same ID). If not provided, will generate a new image ID.
 	 * @param originalFile
 	 * @param contentType
 	 * @param name
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
-	public abstract String create(File originalFile, String contentType,
-			String name) throws IOException;
+	public abstract String create(String imageId, File originalFile,
+			String contentType, String name) throws IOException;
 
 	/**
 	 * Upload a file.
@@ -96,6 +104,9 @@ public interface ImageRepository {
 	 * JSON, AMQP, RDF, XMI, etc.). All exceptions are rethrown as runtime exceptions.
 	 * 
 	 * Required attributes for new {@link Image} are: originalFile, contentType, name.
+	 * 
+	 * If {@literal id} attribute is provided, will use it (possibly overwrite image with same ID).
+	 * If not provided, will generate a new image ID.
 	 * 
 	 * @param newImage
 	 * @return
@@ -119,6 +130,7 @@ public interface ImageRepository {
 	 */
 	public abstract void deleteMultiple(Set<String> ids);
 
+	@Override
 	public abstract Image findOne(@Nullable String id);
 
 	public abstract Map<String, Image> findAllByIds(Iterable<String> ids);
@@ -163,5 +175,7 @@ public interface ImageRepository {
 	public String getUriTemplate();
 	
 	public ImageConnector getConnector();
+	
+	public abstract boolean exists(String id);
 
 }
