@@ -297,7 +297,7 @@ public class MongoImageRepository implements ImageRepository {
 	@Override
 	public String create(String imageId, File originalFile, final String contentType, String name) throws IOException {
 		Preconditions.checkNotNull(originalFile, "Original file to be added must not be null");
-		return doCreate(null, originalFile, contentType, originalFile.length(), name, originalFile.getName(), true);
+		return doCreate(imageId, originalFile, contentType, originalFile.length(), name, originalFile.getName(), true);
 	}
 
 	/* (non-Javadoc)

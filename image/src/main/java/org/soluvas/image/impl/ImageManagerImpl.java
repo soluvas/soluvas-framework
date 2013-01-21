@@ -281,7 +281,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 						submon.worked(1, ProgressStatus.SKIPPED);
 						break;
 					case ADD:
-						final Image addImage = new Image(image.getId(), originalFile, image.getContentType(),
+						final Image addImage = new Image(null, originalFile, image.getContentType(),
 								Optional.fromNullable(image.getName()).or(image.getId()));
 						final String addImageId = imageRepo.add(addImage);
 						log.info("Added possibly duplicate image {} as {}", image.getId(), addImageId);
