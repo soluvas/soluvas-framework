@@ -228,6 +228,7 @@ public class ResourceInjector {
 		return injectables.build();
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public <T> T getInstance(Class<T> clazz) {
 		final List<Injectable> injectables = analyzeClass(clazz);
 		log.debug("Creating {} JAX-RS resource for {} in {} [{}] with {} injectables: {}", clazz.getName(), tenant,
@@ -240,14 +241,16 @@ public class ResourceInjector {
 			for (Injectable injectable : injectables) {
 				switch (injectable.getMode()) {
 				case SERVICE: {
-						final ServiceReference<?> ref = TenantUtils.getService(bundleContext, tenant, injectable.getClazz(), injectable.getNamespace(), injectable.getFilter());
+						final ServiceReference ref = TenantUtils.getService(bundleContext,
+								tenant, injectable.getClazz(), injectable.getNamespace(), injectable.getFilter());
 						final Object dep = bundleContext.getService(ref);
 						injections.add( new Injection(ref, injectable.getField()) );
 						FieldUtils.writeField(injectable.getField(), obj, dep, true);
 						break;
 					}
 				case SUPPLIED: {
-						final Object dep = TenantUtils.getSupplied(bundleContext, tenant, injectable.getClazz());
+						final Object dep = TenantUtils.getSupplied(bundleContext,
+								tenant, injectable.getClazz());
 						injections.add( new Injection(null, injectable.getField()) );
 						FieldUtils.writeField(injectable.getField(), obj, dep, true);
 						break;
