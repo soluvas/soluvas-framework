@@ -33,6 +33,7 @@ import org.soluvas.image.ResizeToFit;
 import org.soluvas.image.S3Connector;
 import org.soluvas.image.StyledImage;
 import org.soluvas.image.ThumbnailatorTransformer;
+import org.soluvas.image.TransformGravity;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.image.store.ImageRepository;
 
@@ -172,6 +173,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	private EEnum duplicateIdHandlingEEnum = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum transformGravityEEnum = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -588,6 +595,15 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getResizeToFit_OnlyShrinkLarger() {
+		return (EAttribute)resizeToFitEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getResizeToFill() {
 		return resizeToFillEClass;
@@ -952,6 +968,15 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getTransformGravity() {
+		return transformGravityEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getImageRepository() {
 		return imageRepositoryEDataType;
 	}
@@ -1029,6 +1054,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		imageTransformEClass = createEClass(IMAGE_TRANSFORM);
 
 		resizeToFitEClass = createEClass(RESIZE_TO_FIT);
+		createEAttribute(resizeToFitEClass, RESIZE_TO_FIT__ONLY_SHRINK_LARGER);
 
 		resizeToFillEClass = createEClass(RESIZE_TO_FILL);
 		createEAttribute(resizeToFillEClass, RESIZE_TO_FILL__GRAVITY);
@@ -1074,6 +1100,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		imageTransformTypeEEnum = createEEnum(IMAGE_TRANSFORM_TYPE);
 		fileExportEEnum = createEEnum(FILE_EXPORT);
 		duplicateIdHandlingEEnum = createEEnum(DUPLICATE_ID_HANDLING);
+		transformGravityEEnum = createEEnum(TRANSFORM_GRAVITY);
 
 		// Create data types
 		imageRepositoryEDataType = createEDataType(IMAGE_REPOSITORY);
@@ -1250,9 +1277,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEClass(imageTransformEClass, ImageTransform.class, "ImageTransform", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(resizeToFitEClass, ResizeToFit.class, "ResizeToFit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getResizeToFit_OnlyShrinkLarger(), theEcorePackage.getEBooleanObject(), "onlyShrinkLarger", null, 0, 1, ResizeToFit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(resizeToFillEClass, ResizeToFill.class, "ResizeToFill", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getResizeToFill_Gravity(), theEcorePackage.getEString(), "gravity", null, 0, 1, ResizeToFill.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResizeToFill_Gravity(), this.getTransformGravity(), "gravity", null, 0, 1, ResizeToFill.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResizeToFill_OnlyShrinkLarger(), theEcorePackage.getEBooleanObject(), "onlyShrinkLarger", null, 0, 1, ResizeToFill.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dimensionLikeEClass, DimensionLike.class, "DimensionLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1306,6 +1334,17 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEEnumLiteral(duplicateIdHandlingEEnum, DuplicateIdHandling.OVERWRITE);
 		addEEnumLiteral(duplicateIdHandlingEEnum, DuplicateIdHandling.ADD);
 		addEEnumLiteral(duplicateIdHandlingEEnum, DuplicateIdHandling.ERROR);
+
+		initEEnum(transformGravityEEnum, TransformGravity.class, "TransformGravity");
+		addEEnumLiteral(transformGravityEEnum, TransformGravity.CENTER);
+		addEEnumLiteral(transformGravityEEnum, TransformGravity.TOP_CENTER);
+		addEEnumLiteral(transformGravityEEnum, TransformGravity.BOTTOM_CENTER);
+		addEEnumLiteral(transformGravityEEnum, TransformGravity.CENTER_LEFT);
+		addEEnumLiteral(transformGravityEEnum, TransformGravity.CENTER_RIGHT);
+		addEEnumLiteral(transformGravityEEnum, TransformGravity.TOP_LEFT);
+		addEEnumLiteral(transformGravityEEnum, TransformGravity.TOP_RIGHT);
+		addEEnumLiteral(transformGravityEEnum, TransformGravity.BOTTOM_LEFT);
+		addEEnumLiteral(transformGravityEEnum, TransformGravity.BOTTOM_RIGHT);
 
 		// Initialize data types
 		initEDataType(imageRepositoryEDataType, ImageRepository.class, "ImageRepository", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

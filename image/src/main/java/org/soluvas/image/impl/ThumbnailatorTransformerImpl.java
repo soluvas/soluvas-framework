@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.Nullable;
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
@@ -16,6 +17,7 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
 
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Position;
 import net.coobird.thumbnailator.geometry.Positions;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -34,8 +36,11 @@ import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageVariant;
 import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.ThumbnailatorTransformer;
+import org.soluvas.image.TransformGravity;
 import org.soluvas.image.UploadedImage;
 
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 
@@ -52,8 +57,23 @@ import com.google.common.collect.ImmutableList;
  *
  * @generated
  */
+@SuppressWarnings("serial")
 public class ThumbnailatorTransformerImpl extends EObjectImpl implements ThumbnailatorTransformer {
 	
+	/**
+	 * Convert {@link TransformGravity} to Thumbnailator's {@link Positions}.
+	 * @author rully
+	 */
+	public static class ToPositions implements
+			Function<TransformGravity, Positions> {
+		@Override @Nullable
+		public Positions apply(TransformGravity input) {
+			if (input == null)
+				return null;
+			return Positions.valueOf(input.name());
+		};
+	}
+
 	private static final Logger log = LoggerFactory
 			.getLogger(ThumbnailatorTransformerImpl.class);
 	
@@ -133,7 +153,8 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 			throw new ImageException(e, "Cannot create temporary file for downloading %s %s",
 					sourceVariant.getStyleCode(), imageId);
 		}
-		source.download(namespace, imageId, sourceVariant.getStyleCode(), sourceVariant.getStyleVariant(), sourceVariant.getExtension(), originalFile);
+		source.download(namespace, imageId, sourceVariant.getStyleCode(),
+				sourceVariant.getStyleVariant(), sourceVariant.getExtension(), originalFile);
 		
 		final ImmutableList.Builder<UploadedImage> uploads = ImmutableList.builder();
 		try {
@@ -156,17 +177,50 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 					try {
 						// I don't think Thumbnailer and/or ImageIO is thread-safe
 						synchronized (this) {
+							final BufferedImage originalImage = ImageIO.read(originalFile);
+//							final int origWidth = originalImage.getWidth();
+//							final int origHeight = originalImage.getHeight();
 							if (transform instanceof ResizeToFill) {
 								final ResizeToFill fx = (ResizeToFill) transform;
 								final boolean progressive = fx.getWidth() >= 512;
-								log.info("Resizing {} to {}, quality={} progressive={}",
-										originalFile, styledFile, quality, progressive );
 								Preconditions.checkNotNull(fx.getWidth(), "ResizeToFill.width must not be null");
 								Preconditions.checkNotNull(fx.getHeight(), "ResizeToFill.height must not be null");
+								final Position cropPosition = Optional.fromNullable(new ToPositions().apply(fx.getGravity())).or(Positions.CENTER);
+								
+								// Scaling is not needed! crop(TOP_CENTER) already does its job
+								// my "failed" experiment was due to an already padded source image, sigh!
+//								// Scale up/down first, use the biggest scale
+//								final double targetRatio = (double) fx.getWidth() / fx.getHeight();
+//								final double origRatio = (double) origWidth / origHeight;
+//								final int sourceWidth;
+//								final int sourceHeight;
+//								if (targetRatio > origRatio) {
+//									// target ratio is wider than original, so sacrifice height
+//									sourceWidth = origWidth;
+//									sourceHeight = (int) Math.round(1f/targetRatio * origWidth);
+//								} else {
+//									// target ratio is narrower than original, so sacrifice width
+//									sourceWidth = (int) Math.round(targetRatio * origHeight);
+//									sourceHeight = origHeight;
+//									
+//								}
+//								final double widthScale = (double) fx.getWidth() / origWidth;
+//								final double heightScale = (double) fx.getHeight() / origHeight;
+//								final double targetScale = Math.max(widthScale, heightScale);
+
+								log.info("Resizing {} to {} position={}, quality={} progressive={}",
+										originalFile, styledFile, cropPosition, quality, progressive );
+								
+								// Before cropping
 								// TODO: support other gravity / cropping
+//								final BufferedImage scaledImage = Thumbnails.of(originalFile)
+//										.scale(targetScale)
+//										.asBufferedImage();
 								final BufferedImage styledImage = Thumbnails.of(originalFile)
+//										.sourceRegion(cropPosition, sourceWidth, sourceHeight)
+										.crop(cropPosition)
 										.size(fx.getWidth(), fx.getHeight())
-										.crop(Positions.CENTER).asBufferedImage();
+										.asBufferedImage();
 								width = styledImage.getWidth();
 								height = styledImage.getHeight();
 								log.info("Dimensions of {} is {}x{}", styledFile, width, height);

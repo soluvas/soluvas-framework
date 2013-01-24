@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.Nullable;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -16,23 +18,24 @@ import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.image.BlitlineTransformer;
 import org.soluvas.image.ImageConnector;
+import org.soluvas.image.ImageException;
 import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageVariant;
 import org.soluvas.image.ResizeToFill;
+import org.soluvas.image.TransformGravity;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.json.JsonUtils;
 
 import com.damnhandy.uri.template.UriTemplate;
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -60,6 +63,32 @@ import com.google.common.collect.Maps;
  */
 @SuppressWarnings("serial")
 public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTransformer {
+	
+	public static class ToGravity implements Function<TransformGravity, String> {
+		@Override @Nullable
+		public String apply(@Nullable TransformGravity input) {
+			if (input == null)
+				return null;
+			switch (input) {
+			case CENTER:
+				return "CenterGravity";
+			case TOP_CENTER:
+				return "NorthGravity";
+			case TOP_LEFT:
+				return "NorthEastGravity";
+			case TOP_RIGHT:
+				return "NorthWestGravity";
+			case BOTTOM_CENTER:
+				return "SouthGravity";
+			case BOTTOM_LEFT:
+				return "SouthEastGravity";
+			case BOTTOM_RIGHT:
+				return "SouthWestGravity";
+			default:
+				throw new ImageException("Unsupported gravity: " + input);
+			}
+		}
+	}
 
 	private static final Logger log = LoggerFactory
 			.getLogger(BlitlineTransformerImpl.class);
@@ -347,6 +376,7 @@ public class BlitlineTransformerImpl extends EObjectImpl implements BlitlineTran
 					params.put("width", fx.getWidth());
 				if (fx.getHeight() != null)
 					params.put("height", fx.getHeight());
+				params.put("gravity", new ToGravity().apply(fx.getGravity()));
 				final String funcId = String.format("%s/%s/%s_%s.%s",
 						namespace, dest.getStyleCode(), imageId,
 						dest.getStyleVariant(), dest.getExtension());

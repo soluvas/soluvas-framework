@@ -522,13 +522,22 @@ public interface ImagePackage extends EPackage {
 	int RESIZE_TO_FIT__HEIGHT = IMAGE_TRANSFORM_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Only Shrink Larger</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FIT__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Resize To Fit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FIT_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 2;
+	int RESIZE_TO_FIT_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.ResizeToFillImpl <em>Resize To Fill</em>}' class.
@@ -1045,6 +1054,16 @@ public interface ImagePackage extends EPackage {
 	int DUPLICATE_ID_HANDLING = 18;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.image.TransformGravity <em>Transform Gravity</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.TransformGravity
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getTransformGravity()
+	 * @generated
+	 */
+	int TRANSFORM_GRAVITY = 19;
+
+	/**
 	 * The meta object id for the '<em>Repository</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1052,7 +1071,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageRepository()
 	 * @generated
 	 */
-	int IMAGE_REPOSITORY = 19;
+	int IMAGE_REPOSITORY = 20;
 
 
 	/**
@@ -1429,6 +1448,17 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getResizeToFit();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ResizeToFit#getOnlyShrinkLarger <em>Only Shrink Larger</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Only Shrink Larger</em>'.
+	 * @see org.soluvas.image.ResizeToFit#getOnlyShrinkLarger()
+	 * @see #getResizeToFit()
+	 * @generated
+	 */
+	EAttribute getResizeToFit_OnlyShrinkLarger();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.ResizeToFill <em>Resize To Fill</em>}'.
@@ -1829,6 +1859,16 @@ public interface ImagePackage extends EPackage {
 	EEnum getDuplicateIdHandling();
 
 	/**
+	 * Returns the meta object for enum '{@link org.soluvas.image.TransformGravity <em>Transform Gravity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Transform Gravity</em>'.
+	 * @see org.soluvas.image.TransformGravity
+	 * @generated
+	 */
+	EEnum getTransformGravity();
+
+	/**
 	 * Returns the meta object for data type '{@link org.soluvas.image.store.ImageRepository <em>Repository</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2162,6 +2202,14 @@ public interface ImagePackage extends EPackage {
 		EClass RESIZE_TO_FIT = eINSTANCE.getResizeToFit();
 
 		/**
+		 * The meta object literal for the '<em><b>Only Shrink Larger</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESIZE_TO_FIT__ONLY_SHRINK_LARGER = eINSTANCE.getResizeToFit_OnlyShrinkLarger();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.ResizeToFillImpl <em>Resize To Fill</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2474,6 +2522,16 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum DUPLICATE_ID_HANDLING = eINSTANCE.getDuplicateIdHandling();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.TransformGravity <em>Transform Gravity</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.TransformGravity
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getTransformGravity()
+		 * @generated
+		 */
+		EEnum TRANSFORM_GRAVITY = eINSTANCE.getTransformGravity();
 
 		/**
 		 * The meta object literal for the '<em>Repository</em>' data type.

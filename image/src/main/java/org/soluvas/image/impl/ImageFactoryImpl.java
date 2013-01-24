@@ -88,6 +88,8 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 				return createFileExportFromString(eDataType, initialValue);
 			case ImagePackage.DUPLICATE_ID_HANDLING:
 				return createDuplicateIdHandlingFromString(eDataType, initialValue);
+			case ImagePackage.TRANSFORM_GRAVITY:
+				return createTransformGravityFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -107,6 +109,8 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 				return convertFileExportToString(eDataType, instanceValue);
 			case ImagePackage.DUPLICATE_ID_HANDLING:
 				return convertDuplicateIdHandlingToString(eDataType, instanceValue);
+			case ImagePackage.TRANSFORM_GRAVITY:
+				return convertTransformGravityToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -289,6 +293,26 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * @generated
 	 */
 	public String convertDuplicateIdHandlingToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TransformGravity createTransformGravityFromString(EDataType eDataType, String initialValue) {
+		TransformGravity result = TransformGravity.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertTransformGravityToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

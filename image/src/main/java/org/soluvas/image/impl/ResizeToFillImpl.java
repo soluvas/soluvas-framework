@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.soluvas.image.DimensionLike;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ResizeToFill;
+import org.soluvas.image.TransformGravity;
 
 /**
  * <!-- begin-user-doc -->
@@ -78,7 +79,7 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String GRAVITY_EDEFAULT = null;
+	protected static final TransformGravity GRAVITY_EDEFAULT = TransformGravity.CENTER;
 
 	/**
 	 * The cached value of the '{@link #getGravity() <em>Gravity</em>}' attribute.
@@ -88,7 +89,7 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * @generated
 	 * @ordered
 	 */
-	protected String gravity = GRAVITY_EDEFAULT;
+	protected TransformGravity gravity = GRAVITY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getOnlyShrinkLarger() <em>Only Shrink Larger</em>}' attribute.
@@ -176,7 +177,7 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getGravity() {
+	public TransformGravity getGravity() {
 		return gravity;
 	}
 
@@ -185,9 +186,9 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setGravity(String newGravity) {
-		String oldGravity = gravity;
-		gravity = newGravity;
+	public void setGravity(TransformGravity newGravity) {
+		TransformGravity oldGravity = gravity;
+		gravity = newGravity == null ? GRAVITY_EDEFAULT : newGravity;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ImagePackage.RESIZE_TO_FILL__GRAVITY, oldGravity, gravity));
 	}
@@ -248,7 +249,7 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 				setHeight((Integer)newValue);
 				return;
 			case ImagePackage.RESIZE_TO_FILL__GRAVITY:
-				setGravity((String)newValue);
+				setGravity((TransformGravity)newValue);
 				return;
 			case ImagePackage.RESIZE_TO_FILL__ONLY_SHRINK_LARGER:
 				setOnlyShrinkLarger((Boolean)newValue);
@@ -294,7 +295,7 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 			case ImagePackage.RESIZE_TO_FILL__HEIGHT:
 				return HEIGHT_EDEFAULT == null ? height != null : !HEIGHT_EDEFAULT.equals(height);
 			case ImagePackage.RESIZE_TO_FILL__GRAVITY:
-				return GRAVITY_EDEFAULT == null ? gravity != null : !GRAVITY_EDEFAULT.equals(gravity);
+				return gravity != GRAVITY_EDEFAULT;
 			case ImagePackage.RESIZE_TO_FILL__ONLY_SHRINK_LARGER:
 				return ONLY_SHRINK_LARGER_EDEFAULT == null ? onlyShrinkLarger != null : !ONLY_SHRINK_LARGER_EDEFAULT.equals(onlyShrinkLarger);
 		}

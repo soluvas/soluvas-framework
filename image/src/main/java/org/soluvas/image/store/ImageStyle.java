@@ -1,5 +1,7 @@
 package org.soluvas.image.store;
 
+import org.soluvas.image.TransformGravity;
+
 /**
  * Description on how to process an image to a different style like thumbnail.
  * 
@@ -8,15 +10,12 @@ package org.soluvas.image.store;
  */
 public class ImageStyle {
 
-	private String name;
-	private String code;
-	private int maxWidth;
-	private int maxHeight;
-	private float quality = 0.85f;
-
-	public ImageStyle() {
-		super();
-	}
+	private final String name;
+	private final String code;
+	private final int maxWidth;
+	private final int maxHeight;
+	private final float quality = 0.85f;
+	private final TransformGravity gravity;
 
 	public ImageStyle(String name, String code, int maxWidth, int maxHeight) {
 		super();
@@ -24,6 +23,24 @@ public class ImageStyle {
 		this.code = code;
 		this.maxWidth = maxWidth;
 		this.maxHeight = maxHeight;
+		this.gravity = TransformGravity.CENTER;
+	}
+	
+	/**
+	 * @param name
+	 * @param code
+	 * @param maxWidth
+	 * @param maxHeight
+	 * @param gravity
+	 */
+	public ImageStyle(String name, String code, int maxWidth, int maxHeight,
+			TransformGravity gravity) {
+		super();
+		this.name = name;
+		this.code = code;
+		this.maxWidth = maxWidth;
+		this.maxHeight = maxHeight;
+		this.gravity = gravity;
 	}
 
 	/**
@@ -33,10 +50,6 @@ public class ImageStyle {
 	 */
 	public String getCode() {
 		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
 	}
 
 	/**
@@ -49,10 +62,6 @@ public class ImageStyle {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	/**
 	 * Maximum width of this style.
 	 * 
@@ -60,10 +69,6 @@ public class ImageStyle {
 	 */
 	public int getMaxWidth() {
 		return maxWidth;
-	}
-
-	public void setMaxWidth(int maxWidth) {
-		this.maxWidth = maxWidth;
 	}
 
 	/**
@@ -75,23 +80,24 @@ public class ImageStyle {
 		return maxHeight;
 	}
 
-	public void setMaxHeight(int maxHeight) {
-		this.maxHeight = maxHeight;
-	}
-
 	public float getQuality() {
 		return quality;
 	}
 
-	public void setQuality(float quality) {
-		this.quality = quality;
+	public TransformGravity getGravity() {
+		return gravity;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return String.format(
-				"ImageStyle [name=%s, code=%s, maxWidth=%s, maxHeight=%s]",
-				name, code, maxWidth, maxHeight);
+		return "ImageStyle [" + (name != null ? "name=" + name + ", " : "")
+				+ (code != null ? "code=" + code + ", " : "") + "maxWidth="
+				+ maxWidth + ", maxHeight=" + maxHeight + ", quality="
+				+ quality + ", "
+				+ (gravity != null ? "gravity=" + gravity : "") + "]";
 	}
 
 }

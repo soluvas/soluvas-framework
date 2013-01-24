@@ -47,6 +47,19 @@
       </xsd:enumeration>
     </xsd:restriction>
   </xsd:simpleType>
+  <xsd:simpleType name="TransformGravity">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="center"/>
+      <xsd:enumeration value="top_center"/>
+      <xsd:enumeration value="bottom_center"/>
+      <xsd:enumeration value="center_left"/>
+      <xsd:enumeration value="center_right"/>
+      <xsd:enumeration value="top_left"/>
+      <xsd:enumeration value="top_right"/>
+      <xsd:enumeration value="bottom_left"/>
+      <xsd:enumeration value="bottom_right"/>
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType abstract="true" name="ImageConnector">
     <xsd:choice maxOccurs="unbounded" minOccurs="0">
       <xsd:element ref="xmi:Extension"/>
@@ -247,6 +260,7 @@ Note: Connectors won't return this, but Transformers would.</xsd:documentation>
             <xsd:documentation>Height of desired image</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
+        <xsd:attribute name="onlyShrinkLarger" type="xsd:boolean"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
@@ -272,7 +286,7 @@ Common English Translation: This is probably the crop you want if you want to cu
             <xsd:documentation>Height of desired image</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
-        <xsd:attribute name="gravity" type="xsd:string">
+        <xsd:attribute name="gravity" type="image:TransformGravity">
           <xsd:annotation>
             <xsd:documentation>Location of crop (defaults to 'CenterGravity')</xsd:documentation>
           </xsd:annotation>

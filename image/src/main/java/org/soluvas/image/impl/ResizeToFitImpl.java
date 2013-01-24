@@ -22,6 +22,7 @@ import org.soluvas.image.ResizeToFit;
  * <ul>
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getHeight <em>Height</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getOnlyShrinkLarger <em>Only Shrink Larger</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,6 +68,26 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * @ordered
 	 */
 	protected Integer height = HEIGHT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOnlyShrinkLarger() <em>Only Shrink Larger</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnlyShrinkLarger()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean ONLY_SHRINK_LARGER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOnlyShrinkLarger() <em>Only Shrink Larger</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnlyShrinkLarger()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean onlyShrinkLarger = ONLY_SHRINK_LARGER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -134,6 +155,27 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Boolean getOnlyShrinkLarger() {
+		return onlyShrinkLarger;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOnlyShrinkLarger(Boolean newOnlyShrinkLarger) {
+		Boolean oldOnlyShrinkLarger = onlyShrinkLarger;
+		onlyShrinkLarger = newOnlyShrinkLarger;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER, oldOnlyShrinkLarger, onlyShrinkLarger));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -141,6 +183,8 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				return getWidth();
 			case ImagePackage.RESIZE_TO_FIT__HEIGHT:
 				return getHeight();
+			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
+				return getOnlyShrinkLarger();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,6 +202,9 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				return;
 			case ImagePackage.RESIZE_TO_FIT__HEIGHT:
 				setHeight((Integer)newValue);
+				return;
+			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
+				setOnlyShrinkLarger((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -177,6 +224,9 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 			case ImagePackage.RESIZE_TO_FIT__HEIGHT:
 				setHeight(HEIGHT_EDEFAULT);
 				return;
+			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
+				setOnlyShrinkLarger(ONLY_SHRINK_LARGER_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -193,6 +243,8 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				return WIDTH_EDEFAULT == null ? width != null : !WIDTH_EDEFAULT.equals(width);
 			case ImagePackage.RESIZE_TO_FIT__HEIGHT:
 				return HEIGHT_EDEFAULT == null ? height != null : !HEIGHT_EDEFAULT.equals(height);
+			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
+				return ONLY_SHRINK_LARGER_EDEFAULT == null ? onlyShrinkLarger != null : !ONLY_SHRINK_LARGER_EDEFAULT.equals(onlyShrinkLarger);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -245,6 +297,8 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 		result.append(width);
 		result.append(", height: ");
 		result.append(height);
+		result.append(", onlyShrinkLarger: ");
+		result.append(onlyShrinkLarger);
 		result.append(')');
 		return result.toString();
 	}

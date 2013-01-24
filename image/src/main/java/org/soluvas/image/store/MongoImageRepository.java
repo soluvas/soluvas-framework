@@ -233,7 +233,7 @@ public class MongoImageRepository implements ImageRepository {
 			throw new ImageException("Cannot use code 'o' for image style");
 		log.info("Added image style {}:{} {}x{}", 
 				code, name, maxWidth, maxHeight );
-		ImageStyle style = new ImageStyle(name, code, maxWidth, maxHeight);
+		final ImageStyle style = new ImageStyle(name, code, maxWidth, maxHeight);
 		styles.put(name, style);
 	}
 	
@@ -252,7 +252,7 @@ public class MongoImageRepository implements ImageRepository {
 	public void setStyles(List<ImageStyle> styles) {
 		this.styles.clear();
 		for (ImageStyle style : styles) {
-			addStyle(style.getName(), style.getCode(), style.getMaxWidth(), style.getMaxHeight());
+			this.styles.put(style.getName(), style);
 		}
 	}
 	
@@ -365,6 +365,7 @@ public class MongoImageRepository implements ImageRepository {
 				final ResizeToFill fx = ImageFactory.eINSTANCE.createResizeToFill();
 				fx.setWidth(style.getMaxWidth());
 				fx.setHeight(style.getMaxHeight());
+				fx.setGravity(style.getGravity());
 				final ImageVariant dest = ImageFactory.eINSTANCE.createImageVariant();
 				dest.setStyleCode(style.getCode());
 				// TODO: support variant

@@ -14,6 +14,7 @@ import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.image.ImageConnector;
+import org.soluvas.image.TransformGravity;
 
 /**
  * @todo extend {@link EntityLookup}. However, namespace needs to be changed, e.g. image_person, otherwise REAL 'person' repo/lookup will conflict with IMAGE 'person' repo/lookup. 
@@ -45,7 +46,7 @@ public interface ImageRepository { // extends EntityLookup<Image, String> {
 	 * @param code
 	 * @param maxWidth
 	 * @param maxHeight
-	 * @deprecated Use setStyles().
+	 * @deprecated Use setStyles(). This doesn't support {@link TransformGravity}.
 	 */
 	@Deprecated
 	public abstract void addStyle(String name, String code, int maxWidth,

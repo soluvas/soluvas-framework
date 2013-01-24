@@ -226,12 +226,14 @@
     </eLiterals>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImageTransform" abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ResizeToFit" eSuperTypes="#//ImageTransform #//DimensionLike"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ResizeToFit" eSuperTypes="#//ImageTransform #//DimensionLike">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="onlyShrinkLarger" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBooleanObject"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ResizeToFill" eSuperTypes="#//ImageTransform #//DimensionLike">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Resize the image to fit within the specified dimensions while retaining the aspect ratio of the original image. If necessary, crop the image in the larger dimension&#xA;&#xA;Common English Translation: This is probably the crop you want if you want to cut a center piece out of a photo and use it as a thumbnail. This wont do any scaling, only cut out the center (by default) to your defined size.&#xA;&#xA;&quot;name&quot;: &quot;resize_to_fill&quot;,&#xA;&quot;params&quot; : { &quot;width&quot; : 40, &quot;height&quot; : 40 }"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gravity" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gravity" eType="#//TransformGravity">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Location of crop (defaults to 'CenterGravity')"/>
       </eAnnotations>
@@ -341,5 +343,16 @@
         <details key="documentation" value="If ID already exists, throw error (strict)"/>
       </eAnnotations>
     </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TransformGravity">
+    <eLiterals name="center"/>
+    <eLiterals name="top_center" value="1"/>
+    <eLiterals name="bottom_center" value="6"/>
+    <eLiterals name="center_left" value="4"/>
+    <eLiterals name="center_right" value="5"/>
+    <eLiterals name="top_left" value="2"/>
+    <eLiterals name="top_right" value="3"/>
+    <eLiterals name="bottom_left" value="7"/>
+    <eLiterals name="bottom_right" value="8"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -33,28 +33,31 @@ public interface ResizeToFill extends ImageTransform, DimensionLike {
 
 	/**
 	 * Returns the value of the '<em><b>Gravity</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.soluvas.image.TransformGravity}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Location of crop (defaults to 'CenterGravity')
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Gravity</em>' attribute.
-	 * @see #setGravity(String)
+	 * @see org.soluvas.image.TransformGravity
+	 * @see #setGravity(TransformGravity)
 	 * @see org.soluvas.image.ImagePackage#getResizeToFill_Gravity()
 	 * @model
 	 * @generated
 	 */
-	String getGravity();
+	TransformGravity getGravity();
 
 	/**
 	 * Sets the value of the '{@link org.soluvas.image.ResizeToFill#getGravity <em>Gravity</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Gravity</em>' attribute.
+	 * @see org.soluvas.image.TransformGravity
 	 * @see #getGravity()
 	 * @generated
 	 */
-	void setGravity(String value);
+	void setGravity(TransformGravity value);
 
 	/**
 	 * Returns the value of the '<em><b>Only Shrink Larger</b></em>' attribute.
