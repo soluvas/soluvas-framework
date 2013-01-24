@@ -110,6 +110,21 @@ public class SlugUtils {
 		}
 	}
 	
+	public static String generateValidSlug(@Nonnull String name, @Nonnull Predicate<String> validator) {
+		Preconditions.checkNotNull(validator, "Validator must not be null");
+		String slug = generateSegment(name, 0);
+		if (validator.apply(slug))
+			return slug;
+		else {
+			for (int i = 2; i <= 99; i++) {
+				slug = generateSegment(name, i);
+				if (validator.apply(slug))
+					return slug;
+			}
+			throw new CommonsException("Cannot generate valid Slug for '" + name + "' after 99 retries.");
+		}
+	}
+	
 	/**
 	 * Retries 99 times (using suffix 2 to 99) to get a valid segment, otherwise throw Exception.
 	 * @param name
