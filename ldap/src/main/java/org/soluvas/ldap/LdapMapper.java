@@ -219,24 +219,29 @@ public class LdapMapper {
 					// Set value as multi attribute
 					final Set<?> objValues = (Set<?>) PropertyUtils.getProperty(obj, attr.getField().getName());
 					if (objValues != null) {
-						Set<String> attrValues = ImmutableSet.copyOf( Iterables.transform(objValues, new Function<Object, String>() {
-							@Override
-							public String apply(Object input) {
-								return convertFromPropertyValue(attr.getField().getType(), input);
-							}
-						}) );
-						log.trace("Map {}#{} as multi {}: {}",
-								clazz.getName(), attr.getField().getName(), attr.getName(), attrValues );
-						entry.put(attr.getName(), attrValues.toArray(new String[] { }));
+						if (!objValues.isEmpty()) {
+							final Set<String> attrValues = ImmutableSet.copyOf( Iterables.transform(objValues, new Function<Object, String>() {
+								@Override
+								public String apply(Object input) {
+									return convertFromPropertyValue(attr.getField().getType(), input);
+								}
+							}) );
+							log.trace("Map {}#{} as multi {}: {}",
+									clazz.getName(), attr.getField().getName(), attr.getName(), attrValues );
+							entry.put(attr.getName(), attrValues.toArray(new String[] { }));
+						} else {
+							log.trace("Not mapping {}#{} as multi {} because it is empty",
+									clazz.getName(), attr.getField().getName(), attr.getName() );
+						}
 					} else {
 						log.trace("Not mapping null {}#{} as multi {}",
 								clazz.getName(), attr.getField(), attr.getName() );
 					}
 				} else {
 					// Set value as single attribute
-					Object objValue = PropertyUtils.getProperty(obj, attr.getField().getName());
+					final Object objValue = PropertyUtils.getProperty(obj, attr.getField().getName());
 					if (objValue != null) {
-						String attrValue = convertFromPropertyValue(attr.getField().getType(), objValue);
+						final String attrValue = convertFromPropertyValue(attr.getField().getType(), objValue);
 						log.trace("Map {}#{} as {}: {}",
 								clazz.getName(), attr.getField().getName(), attr.getName(), attrValue );
 						entry.put(attr.getName(), attrValue);

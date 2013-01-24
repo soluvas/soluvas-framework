@@ -3,6 +3,7 @@ package org.soluvas.ldap;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -319,6 +320,17 @@ public class LdapMapperTest {
 		assertEquals("Hendy", person.getFirstName());
 	}
 	
+	@Test public void mapsEmptyCollectionToNothing() throws LdapInvalidAttributeValueException {
+		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "hendy@soluvas.com");
+		hendy.setEmails(ImmutableSet.<String>of());
+		log.info("Input Person: {}", hendy);
+		
+		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
+		log.info("Output Entry: {}", entry);
+		
+		assertFalse(entry.containsAttribute("mail"));
+	}
+
 	@Test public void canAddObjectClasses() throws LdapException {
 		final Entry existingEntry = new DefaultEntry("uid=budi,ou=users,dc=dev,dc=berbatik,dc=com");
 		existingEntry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject");
