@@ -2,7 +2,10 @@ package org.soluvas.commons;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.fusesource.jansi.Ansi;
@@ -19,6 +22,30 @@ import com.google.common.collect.Lists;
  */
 public class NameUtils {
 	
+	/**
+	 * @author haidar
+	 *
+	 */
+	public static class PersonName {
+		private final String firstName;
+		private final String lastName;
+		
+		public PersonName(String firstName, String lastName) {
+			super();
+			this.firstName = firstName;
+			this.lastName = lastName;
+		}
+
+		public String getFirstName() {
+			return firstName;
+		}
+
+		public String getLastName() {
+			return lastName;
+		}
+		
+	}
+
 	/**
 	 * Shorten a class name by abbreviating package prefixes, then replacing with ellipsis
 	 * as last resort.
@@ -240,4 +267,21 @@ public class NameUtils {
 			return input.substring(0, targetLength - 1) + "@|bold,black …|@";
 	}
 	
+	/**
+	 * Splits a name to first name and last name. It will never return null. If name cannot be split, it will return "name name".
+	 * If name is empty, it will return "- -".  
+	 * @param name
+	 * @return
+	 */
+	@Nonnull
+	public static PersonName splitName(String name) {
+		if (Strings.isNullOrEmpty(name))
+			name = "-";
+		final Matcher matcher = Pattern.compile("(.+) (.+)").matcher(name);
+		if (matcher.matches()) {
+			return new PersonName(matcher.group(1), matcher.group(2));
+		} else {
+			return new PersonName(name, name);
+		}
+	}
 }

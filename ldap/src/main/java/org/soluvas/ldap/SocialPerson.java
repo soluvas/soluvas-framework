@@ -32,6 +32,10 @@ public class SocialPerson extends Person {
 	private Long twitterId;
 	@LdapAttribute("twitterScreenName")
 	private String twitterScreenName;
+	@LdapAttribute("twitterAccessToken")
+	private String twitterAccessToken;
+	@LdapAttribute("twitterAccessTokenSecret")
+	private String twitterAccessTokenSecret;
 	@LdapAttribute("virtualMail")
 	private String virtualMail;
 	@LdapAttribute("nickname")
@@ -54,6 +58,22 @@ public class SocialPerson extends Person {
 		this.gender = gender;
 	}
 
+	public String getTwitterAccessToken() {
+		return twitterAccessToken;
+	}
+
+	public void setTwitterAccessToken(String twitterAccessToken) {
+		this.twitterAccessToken = twitterAccessToken;
+	}
+
+	public String getTwitterAccessTokenSecret() {
+		return twitterAccessTokenSecret;
+	}
+
+	public void setTwitterAccessTokenSecret(String twitterAccessTokenSecret) {
+		this.twitterAccessTokenSecret = twitterAccessTokenSecret;
+	}
+	
 	/**
 	 * @return the primaryEmail
 	 */

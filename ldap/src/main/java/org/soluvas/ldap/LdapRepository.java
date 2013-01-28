@@ -102,5 +102,7 @@ public interface LdapRepository<T> extends EntityLookup<T, String> {
 	String toDn(String id);
 
 	boolean exists(String id);
-	
+
+	boolean existsByAttribute(String attribute, String value);
+
 }

@@ -384,5 +384,11 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 			throw new RuntimeException("Error searching LDAP in " + shopDn + " filter " + filter, e);
 		}
 	}
+
+	@Override
+	public boolean existsByAttribute(String attribute, String value) {
+		final T found = findOneByAttribute(attribute, value);
+		return found != null;
+	}
 	
 }
