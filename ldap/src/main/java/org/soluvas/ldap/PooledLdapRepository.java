@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -289,12 +290,12 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 				}
 			});
 			log.info("LDAP search {} filter {} returned {} entries", new Object[] { shopDn, filter, entries.size() });
-			final List<T> entities = Lists.transform(entries, new Function<Entry, T>() {
+			final List<T> entities = ImmutableList.copyOf(Lists.transform(entries, new Function<Entry, T>() {
 				@Override
 				public T apply(Entry input) {
 					return mapper.fromEntry(input, entityClass);
 				}
-			});
+			}));
 			return entities;
 		} catch (Exception e) {
 			log.error("Error searching LDAP in " + shopDn + " filter " + filter, e);
