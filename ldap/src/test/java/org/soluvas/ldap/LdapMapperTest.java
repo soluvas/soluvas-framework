@@ -608,5 +608,5 @@ public class LdapMapperTest {
 		assertEquals(ModificationOperation.REPLACE_ATTRIBUTE, modification.getOperation());
 		assertEquals("userPassword", modification.getAttribute().getUpId());
 	}
-
+	
 }
