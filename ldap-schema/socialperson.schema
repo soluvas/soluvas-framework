@@ -118,18 +118,38 @@ attributetype ( 2.25.31030703689307962575270284666844839901.17
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
  )
 
+attributetype ( 2.25.31030703689307962575270284666844839901.18 
+	NAME 'googleAccessToken' 
+	DESC 'Google Access Token' 
+	EQUALITY caseExactMatch 
+	ORDERING caseExactOrderingMatch 
+	SUBSTR caseExactSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+	SINGLE-VALUE 
+ )
+
+attributetype ( 2.25.31030703689307962575270284666844839901.19 
+	NAME 'yahooAccessToken' 
+	DESC 'Yahoo Access Token' 
+	EQUALITY caseExactMatch 
+	ORDERING caseExactOrderingMatch 
+	SUBSTR caseExactSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+	SINGLE-VALUE 
+ )
+
 objectclass ( 2.25.31030703689307962575270284666844839901.2 
 	NAME 'socialPerson' 
 	DESC 'Person in the Web 2.0 age.' 
 	AUXILIARY 
-	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier $ bannerImageId ) 
+	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier $ bannerImageId $ googleAccessToken $ yahooAccessToken ) 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.4 
 	NAME 'socialObject' 
 	DESC 'Any object that wants to have social attributes.' 
 	AUXILIARY 
-	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier $ bannerImageId ) 
+	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier $ bannerImageId $ googleAccessToken $ yahooAccessToken ) 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.9 

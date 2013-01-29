@@ -7051,6 +7051,28 @@
           <ordering>caseExactOrderingMatch</ordering>
           <substring>caseExactSubstringsMatch</substring>
         </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.18" obsolete="false" singlevalue="true" collective="false" nousermodification="false">
+          <aliases>
+            <alias>googleAccessToken</alias>
+          </aliases>
+          <description>Google Access Token</description>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseExactMatch</equality>
+          <ordering>caseExactOrderingMatch</ordering>
+          <substring>caseExactSubstringsMatch</substring>
+        </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.19" obsolete="false" singlevalue="true" collective="false" nousermodification="false">
+          <aliases>
+            <alias>yahooAccessToken</alias>
+          </aliases>
+          <description>Yahoo Access Token</description>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseExactMatch</equality>
+          <ordering>caseExactOrderingMatch</ordering>
+          <substring>caseExactSubstringsMatch</substring>
+        </attributetype>
       </attributetypes>
       <objectclasses>
         <objectclass oid="2.25.31030703689307962575270284666844839901.2" obsolete="false">
@@ -7072,6 +7094,8 @@
             <attributetype>nickname</attributetype>
             <attributetype>canonicalIdentifier</attributetype>
             <attributetype>bannerImageId</attributetype>
+            <attributetype>googleAccessToken</attributetype>
+            <attributetype>yahooAccessToken</attributetype>
           </optional>
         </objectclass>
         <objectclass oid="2.25.31030703689307962575270284666844839901.4" obsolete="false">
@@ -7093,6 +7117,8 @@
             <attributetype>nickname</attributetype>
             <attributetype>canonicalIdentifier</attributetype>
             <attributetype>bannerImageId</attributetype>
+            <attributetype>googleAccessToken</attributetype>
+            <attributetype>yahooAccessToken</attributetype>
           </optional>
         </objectclass>
         <objectclass oid="2.25.31030703689307962575270284666844839901.9" obsolete="false">
