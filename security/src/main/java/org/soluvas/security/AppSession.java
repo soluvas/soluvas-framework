@@ -116,7 +116,9 @@ public interface AppSession extends Identifiable, Timestamped, SchemaVersionable
 				// special support for org___apache___shiro___subject___support___DefaultSubjectContext_PRINCIPALS_SESSION_KEY
 				if (DefaultSubjectContext.PRINCIPALS_SESSION_KEY.equals(stringKey)) {
 					final PrincipalCollection principals = (PrincipalCollection)value;
-					value = ImmutableMap.of("principals", principals.asList(),
+					value = ImmutableMap.of(
+							"className", principals.getClass().getName(),
+							"principals", principals.asList(),
 							"realmNames", principals.getRealmNames());
 				}
 				
