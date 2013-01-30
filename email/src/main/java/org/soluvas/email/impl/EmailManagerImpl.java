@@ -30,6 +30,7 @@ import org.soluvas.email.util.EmailUtils;
 import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -151,11 +152,16 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	public List<String> sendAll(Page page) {
 		final List<Email> emails = page.composeAll();
 		
+		log.info("Sending {} emails using {}@{}:{}",
+				emails.size(), mailSession.getProperty(Email.MAIL_SMTP_USER),
+				mailSession.getProperty(Email.MAIL_HOST), mailSession.getProperty(Email.MAIL_PORT));
 		final List<String> results = ImmutableList.copyOf(Lists.transform(emails, new Function<Email, String>() {
 			@Override @Nullable
 			public String apply(@Nullable Email email) {
 				String result;
 				try {
+					Preconditions.checkNotNull(email.getMailSession(),
+							"Invalid mailSession for %s", email);
 					result = email.send();
 					log.info("Email sent from {} to {}: {} - {}",
 							email.getFromAddress(), email.getToAddresses(), result,

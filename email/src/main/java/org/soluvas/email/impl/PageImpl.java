@@ -4,8 +4,8 @@ package org.soluvas.email.impl;
 
 import java.util.List;
 
-import javax.mail.Session;
 import javax.annotation.Nullable;
+import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.mail.Email;
@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.soluvas.email.EmailFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.email.EmailException;
@@ -253,6 +252,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Session getMailSession() {
 		return mailSession;
 	}
@@ -262,6 +262,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMailSession(Session newMailSession) {
 		Session oldMailSession = mailSession;
 		mailSession = newMailSession;
@@ -301,6 +302,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 			default:
 				throw new org.soluvas.email.EmailException("Unknown format: " + format);
 			}
+			email.setMailSession(mailSession);
 //			email.setFrom("cantik@berbatik.com", "Berbatik");
 			try {
 				email.setFrom(getSender().getEmail(), getSender().getFrom());
