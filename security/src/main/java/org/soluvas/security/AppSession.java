@@ -2,17 +2,18 @@
  */
 package org.soluvas.security;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.Nullable;
 
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SimpleSession;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.joda.time.DateTime;
@@ -26,8 +27,9 @@ import org.soluvas.commons.Timestamped;
 import org.soluvas.security.impl.AppSessionImpl;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.base.Charsets;
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
 /**
@@ -87,22 +89,55 @@ public interface AppSession extends Identifiable, Timestamped, SchemaVersionable
 			appSession.setTimeout(input.getTimeout());
 			appSession.setExpiryTime(new DateTime(input.getLastAccessTime()).plus(input.getTimeout()));
 			for (final Object key : input.getAttributeKeys()) {
-				final Object value = input.getAttribute(key);
+				Object value = input.getAttribute(key);
 //				if (value instanceof Serializable && !(value instanceof Class)) {
-				if (value instanceof String) {
-					appSession.getAttributes().put((String) key, value);
-				} else {
-					final ByteArrayOutputStream out = new ByteArrayOutputStream();
-					try {
-						new ObjectOutputStream(out).writeObject(value);
-						appSession.getAttributes().put((String) key, out.toString(Charsets.UTF_8.name()));
-					} catch (IOException e) {
-						throw new SecurityException(e, "Cannot put in AppSession unserializable session %s attribute %s=%s",
-								input.getId(), key, value);
-					}
-//					log.warn("Cannot put in AppSession unserializable session {} attribute {}={}",
-//							input.getId(), key, value);
+				
+				// just put it, let Mongo mapping handle the (hopefully serializable?) object
+				// but not always: (seems bug in Morphia that doesn't properly serialize the EMap Entry's value) 
+//				Caused by: java.lang.IllegalArgumentException: can't serialize class org.apache.wicket.session.HttpSessionStore$SessionBindingListener
+//				at org.bson.BasicBSONEncoder._putObjectField(BasicBSONEncoder.java:270)
+//				at org.bson.BasicBSONEncoder.putMap(BasicBSONEncoder.java:310)
+//				at org.bson.BasicBSONEncoder._putObjectField(BasicBSONEncoder.java:232)
+//				at org.bson.BasicBSONEncoder.putObject(BasicBSONEncoder.java:174)
+//				at org.bson.BasicBSONEncoder.putObject(BasicBSONEncoder.java:120)
+//				at com.mongodb.DefaultDBEncoder.writeObject(DefaultDBEncoder.java:27)
+//				at com.mongodb.OutMessage.putObject(OutMessage.java:289)
+//				at com.mongodb.OutMessage.writeUpdate(OutMessage.java:175)
+//				at com.mongodb.OutMessage.update(OutMessage.java:62)
+//				at com.mongodb.DBApiLayer$MyCollection.update(DBApiLayer.java:347)
+//				at com.mongodb.DBCollection.update(DBCollection.java:177)
+//				at com.mongodb.DBCollection.update(DBCollection.java:208)
+				final String stringKey = (String) key;
+				
+				// ignore Wicket attributes
+				if (stringKey.startsWith("Wicket:") || stringKey.startsWith("wicket:")) {
+					continue;
 				}
+				// special support for org___apache___shiro___subject___support___DefaultSubjectContext_PRINCIPALS_SESSION_KEY
+				if (DefaultSubjectContext.PRINCIPALS_SESSION_KEY.equals(stringKey)) {
+					final PrincipalCollection principals = (PrincipalCollection)value;
+					value = ImmutableMap.of("principals", principals.asList(),
+							"realmNames", principals.getRealmNames());
+				}
+				
+				final String encodedKey = stringKey.replace(".", "___");
+				appSession.getAttributes().put(encodedKey, value);
+				
+				// attempt to serialize as bytearraystream if not string
+//				if (value instanceof String) {
+//					appSession.getAttributes().put((String) key, value);
+//				} else {
+//					final ByteArrayOutputStream out = new ByteArrayOutputStream();
+//					try {
+//						new ObjectOutputStream(out).writeObject(value);
+//						appSession.getAttributes().put((String) key, out.toString(Charsets.UTF_8.name()));
+//					} catch (IOException e) {
+//						throw new SecurityException(e, "Cannot put in AppSession unserializable session %s attribute %s=%s",
+//								input.getId(), key, value);
+//					}
+////					log.warn("Cannot put in AppSession unserializable session {} attribute {}={}",
+////							input.getId(), key, value);
+//				}
 			}
 			return appSession;
 		}
@@ -117,8 +152,24 @@ public interface AppSession extends Identifiable, Timestamped, SchemaVersionable
 			session.setStartTimestamp(input.getCreationTime().toDate());
 			session.setLastAccessTime(input.getAccessTime().toDate());
 			session.setTimeout(input.getTimeout());
+			final Map<Object, Object> attrs = Maps.<Object, Object>newHashMap();
+			for (final Entry<String, Object> entry : input.getAttributes()) {
+				final String decodedKey = entry.getKey().replace("___", ".");
+				
+				Object value = entry.getValue();
+				// special support for org___apache___shiro___subject___support___DefaultSubjectContext_PRINCIPALS_SESSION_KEY
+				if (DefaultSubjectContext.PRINCIPALS_SESSION_KEY.equals(decodedKey)) {
+					final Map<String, Object> mapValue = (Map<String, Object>)value;
+					final List<String> realmNames = (List<String>) mapValue.get("realmNames");
+					Preconditions.checkArgument(realmNames.size() == 1,
+							"realmNames must have exactly 1 value: %s", realmNames); 
+					value = new SimplePrincipalCollection(mapValue.get("principals"), realmNames.get(0));
+				}
+				
+				attrs.put(decodedKey, value);
+			}
 			// can't use ImmutableMap here!
-			session.setAttributes(Maps.newHashMap((Map) input.getAttributes().map()));
+			session.setAttributes(attrs);
 			return session;
 		}
 	}

@@ -27,8 +27,25 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.wicket</groupId> -->
+<!-- 			<artifactId>wicket-core</artifactId> -->
+<!-- 			<version>1.5.9</version> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+
+		<dependency>
 			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.mongo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.morphia</groupId>
+			<artifactId>morphia-logging-slf4j</artifactId>
+			<version>0.99</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -79,6 +96,10 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

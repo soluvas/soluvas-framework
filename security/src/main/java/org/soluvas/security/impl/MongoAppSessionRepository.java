@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.repository.CrudRepositoryBase;
@@ -37,6 +38,69 @@ import com.mongodb.MongoURI;
  */
 public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, String>
 	implements AppSessionRepository {
+	
+	public class FromDBObject implements Function<DBObject, AppSession> {
+		@Override @Nullable
+		public AppSession apply(@Nullable DBObject input) {
+			if (input == null)
+				return null;
+			// create "standard" DBObject
+			final AppSession session = morphia.fromDBObject(AppSession.class, input);
+//			// deserialize attributes, the difficult part
+//			final DBObject attrsObj = (DBObject) input.get("attributes");
+//			for (final String encodedKey : attrsObj.keySet()) {
+////				final String key = URLDecoder.decode(encodedKey);
+//				final String key = encodedKey.replace("__dot__", ".");
+//				if (attrsObj.get(encodedKey) instanceof DBObject) {
+//					final DBObject valueObj = (DBObject) attrsObj.get(encodedKey);
+//					final String className = (String) valueObj.get("className");
+//					Class<?> clazz;
+//					try {
+//						clazz = getClass().getClassLoader().loadClass(className);
+//					} catch (ClassNotFoundException e) {
+//						throw new SecurityException("Cannot deserialize " + key + " = " + valueObj, e);
+//					}
+//					Object value = morphia.getMapper().fromDBObject(clazz, valueObj, morphia.getMapper().createEntityCache());
+////					final Object value = morphia.fromDBObject(clazz, valueObj);
+//					session.getAttributes().put(key, value);
+//				} else {
+//					session.getAttributes().put(key, attrsObj.get(encodedKey));
+//				}
+//			}
+			return session;
+		}
+	}
+	
+	public class ToDBObject implements Function<AppSession, DBObject> {
+		@Override @Nullable
+		public DBObject apply(@Nullable AppSession input) {
+			if (input == null)
+				return null;
+			// add attributes, the difficult part
+//			final BasicDBObject attrs = new BasicDBObject();
+//			final List<Object> ignoredAttrs = Lists.newArrayList();
+//			for (final Entry<String, Object> entry : input.getAttributes()) {
+//				// Wicket:SessionUnbindingListener-berbatik_dev
+//				if (entry.getKey().startsWith("Wicket:") || entry.getKey().startsWith("wicket:")) {
+//					ignoredAttrs.add(entry.getKey());
+//					continue;
+//				}
+//				log.debug("Mapping AppSession {} attribute {} from {}",
+//						input.getId(), entry.getKey(), entry.getValue() != null ? entry.getValue().getClass().getName() : null);
+//				final DBObject entryObj = morphia.toDBObject(entry.getValue());
+////				final String encodedKey = URLEncoder.encode(entry.getKey());
+//				final String encodedKey = entry.getKey().replace(".", "__dot__");
+//				attrs.put(encodedKey, entryObj);
+//			}
+//			log.debug("Mongo AppSession {} Attributes is {}, ignored: {}",
+//					input.getId(), attrs, ignoredAttrs);
+			// create "standard" DBObject 
+			DBObject dbo = morphia.toDBObject(input);
+//			dbo.put("attributes", attrs);
+			return dbo;
+		}
+	}
+	
 	private static final Logger log = LoggerFactory.getLogger(MongoAppSessionRepository.class);
 	
 	private final String mongoUri;
@@ -95,40 +159,39 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 	 * @see tmp.org.soluvas.app.AppSessionDao#findOneByActive(java.lang.String)
 	 */
 	@Override
-	public AppSession findOneByActive(String _id) {
-		if (_id == null)
+	public AppSession findOneByActive(String id) {
+		if (id == null)
 			return null;
 		final DBObject dbo = coll.findOne(new BasicDBObject(ImmutableMap.of(
 				"schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT,
 				"status", AppSessionStatus.ACTIVE.name(),
-				"_id", _id)));
-		log.debug("findOneByActive {} returns {}", _id, dbo);
-		if (dbo != null) {
-			return morphia.fromDBObject(AppSession.class, dbo);
-		} else {
-			return null;
-		}
+				"_id", id)));
+		log.debug("findOneByActive {} returns {}", id, dbo);
+		return new FromDBObject().apply(dbo);
 	}
 
 	@Override
 	public <S extends AppSession> S add(@Nonnull final S appSession) {
 		Preconditions.checkNotNull(appSession, "Cannot add null AppSession");
 		Preconditions.checkNotNull(appSession.getId(), "Cannot add AppSession with null ID");
-		log.info("Insert AppSession for {} with User Agent: {} (dated: {})",
+		log.info("Insert AppSession {} for {} with User Agent: {} (dated: {})",
+				appSession.getId(),
 				appSession.getPerson() != null ? appSession.getPerson().getId() : null,
 				appSession.getUserAgent(),
 				appSession.getCreationTime() );
-		final DBObject obj = morphia.toDBObject(appSession);
+		final DBObject obj = new ToDBObject().apply(appSession);
 		coll.insert(obj);
 		return appSession;
 	}
 
 	@Override
 	public <S extends AppSession> S modify(@Nonnull final String id, @Nonnull final S appSession) {
-		log.info("Update AppSession for {} to {}({})",
+		log.debug("Updating AppSession for {} to {} (modificationTime={})",
 				id, appSession.getStatus(), appSession.getModificationTime() );
-		final DBObject obj = morphia.toDBObject(appSession);
+		final DBObject obj = new ToDBObject().apply(appSession);
 		coll.update(new BasicDBObject("_id", id), obj, true, false);
+		log.info("Updated AppSession for {} to {} (modificationTime={})",
+				id, appSession.getStatus(), appSession.getModificationTime() );
 		return appSession;
 	}
 
@@ -142,12 +205,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 	public Collection<AppSession> findAll() {
 		final DBCursor cursor = coll.find(new BasicDBObject("schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT))
 				.sort(new BasicDBObject("creationTime", -1));
-		final List<AppSession> appSessions = MongoUtils.transform(cursor, new Function<DBObject, AppSession>() {
-			@Override
-			public AppSession apply(DBObject input) {
-				return morphia.fromDBObject(AppSession.class, input);
-			}
-		});
+		final List<AppSession> appSessions = MongoUtils.transform(cursor, new FromDBObject());
 		log.debug("findAll returns {} documents", appSessions.size());
 		return appSessions;
 	}
@@ -157,8 +215,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 		return coll.count();
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
+	@SuppressWarnings("unchecked") @Override
 	public <S extends AppSession> S findOne(String id) {
 		if (id == null)
 			return null;
@@ -166,13 +223,8 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 				"schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT,
 				"_id", id);
 		final DBCursor cursor = coll.find(new BasicDBObject(queryMap));
-		final List<AppSession> webSessionIterable = MongoUtils.transform(cursor, new Function<DBObject, AppSession>() {
-			@Override
-			public AppSession apply(DBObject input) {
-				return morphia.fromDBObject(AppSession.class, input);
-			}
-		});
-		final AppSession webSession = Iterables.getOnlyElement(webSessionIterable, null);
+		final List<AppSession> appSessions = MongoUtils.transform(cursor, new FromDBObject());
+		final AppSession webSession = Iterables.getOnlyElement(appSessions, null);
 		log.debug("findOneByAny {} returns {}", id, webSession);
 		return (S) webSession;
 	}
@@ -199,14 +251,22 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 				"status", AppSessionStatus.ACTIVE.name());
 		final DBCursor cursor = coll.find(new BasicDBObject(queryMap))
 				.sort(new BasicDBObject("creationTime", -1));
-		final List<AppSession> appSessions = MongoUtils.transform(cursor, new Function<DBObject, AppSession>() {
-			@Override
-			public AppSession apply(DBObject input) {
-				return morphia.fromDBObject(AppSession.class, input);
-			}
-		});
+		final List<AppSession> appSessions = MongoUtils.transform(cursor, new FromDBObject());
 		log.debug("findAllByActive returns {} AppSessions", appSessions.size());
 		return appSessions;
+	}
+
+	@Override
+	public boolean touch(String id) {
+		final DateTime accessTime = new DateTime();
+		log.trace("Touching AppSession {} as {}", id, accessTime);
+		coll.update(new BasicDBObject("_id", id),
+				new BasicDBObject("$set", new BasicDBObject("accessTime", accessTime.toDate())));
+		return true;
+	}
+	
+	protected AppSession fromDbObject(DBObject dbo) {
+		return new FromDBObject().apply(dbo);
 	}
 
 }
