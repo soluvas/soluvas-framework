@@ -15,6 +15,14 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.soluvas</groupId>
+			<artifactId>org.soluvas.jaxrs</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>jsr311-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.ldap</artifactId>
 		</dependency>
 		<dependency>

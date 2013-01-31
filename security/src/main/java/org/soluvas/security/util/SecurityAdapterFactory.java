@@ -113,6 +113,10 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 				return createAppSessionAttributeEntryAdapter();
 			}
 			@Override
+			public Adapter caseAppSessionManager(AppSessionManager object) {
+				return createAppSessionManagerAdapter();
+			}
+			@Override
 			public Adapter caseResourceAware(ResourceAware object) {
 				return createResourceAwareAdapter();
 			}
@@ -271,6 +275,20 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAppSessionAttributeEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.security.AppSessionManager <em>App Session Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.security.AppSessionManager
+	 * @generated
+	 */
+	public Adapter createAppSessionManagerAdapter() {
 		return null;
 	}
 

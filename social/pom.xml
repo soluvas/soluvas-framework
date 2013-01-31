@@ -46,16 +46,20 @@
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>stringtemplate</artifactId>
-			<version>4.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>jsr311-api</artifactId>
 		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>net.coobird</groupId> -->
+<!-- 			<artifactId>thumbnailator</artifactId> -->
+<!-- 			<version>0.4.1</version> -->
+<!-- 		</dependency> -->
 		<dependency>
-			<groupId>net.coobird</groupId>
-			<artifactId>thumbnailator</artifactId>
-			<version>0.4.1</version>
+			<groupId>com.google.code.morphia</groupId>
+			<artifactId>morphia</artifactId>
+			<version>0.99.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mongodb</groupId>

@@ -378,4 +378,19 @@ See: https://sites.google.com/a/bippo.co.id/dev/berbatik/oauth
     <xsd:attribute name="value" type="xsd:string"/>
   </xsd:complexType>
   <xsd:element name="AppSessionAttributeEntry" type="security:AppSessionAttributeEntry"/>
+  <xsd:complexType name="AppSessionManager">
+    <xsd:annotation>
+      <xsd:documentation>Allows universal access to security Subject and derivatives (i.e. Person) from Wicket, JAX-RS, or other means.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="AppSessionManager" type="security:AppSessionManager">
+    <xsd:annotation>
+      <xsd:documentation>Allows universal access to security Subject and derivatives (i.e. Person) from Wicket, JAX-RS, or other means.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
 </xsd:schema>

@@ -223,4 +223,43 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EJavaObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Session" instanceClassName="org.apache.shiro.session.Session"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AppSessionManager">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Allows universal access to security Subject and derivatives (i.e. Person) from Wicket, JAX-RS, or other means."/>
+    </eAnnotations>
+    <eOperations name="requirePerson">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value=" Ensure personId is set. If not, throw Exception.&#xA;The IP Address and User Agent is required for security purposes.&#xA;Convenience method for {@link #requirePerson(RequestIdentity)}."/>
+      </eAnnotations>
+      <eGenericType eTypeParameter="#//AppSessionManager/requirePerson/T"/>
+      <eTypeParameters name="T">
+        <eBounds eClassifier="#//Person"/>
+      </eTypeParameters>
+      <eParameters name="httpRequest" eType="#//HttpServletRequest"/>
+      <eParameters name="httpResponse" eType="#//HttpServletResponse"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="securityManager" eType="#//SecurityManager"
+        changeable="false" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="personLookup" changeable="false"
+        transient="true">
+      <eGenericType eClassifier="#//EntityLookup">
+        <eTypeArguments>
+          <eUpperBound eClassifier="#//Person"/>
+        </eTypeArguments>
+        <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eGenericType>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="HttpServletRequest" instanceClassName="javax.servlet.http.HttpServletRequest"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="HttpServletResponse" instanceClassName="javax.servlet.http.HttpServletResponse"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Person" instanceClassName="org.soluvas.ldap.Person"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="SecurityManager" instanceClassName="org.apache.shiro.mgt.SecurityManager"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EntityLookup" instanceClassName="org.soluvas.data.EntityLookup"
+      serializable="false">
+    <eTypeParameters name="T"/>
+    <eTypeParameters name="ID">
+      <eBounds eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Serializable"/>
+    </eTypeParameters>
+  </eClassifiers>
 </ecore:EPackage>

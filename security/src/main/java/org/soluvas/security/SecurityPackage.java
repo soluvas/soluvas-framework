@@ -771,6 +771,43 @@ public interface SecurityPackage extends EPackage {
 	int APP_SESSION_ATTRIBUTE_ENTRY_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.security.impl.AppSessionManagerImpl <em>App Session Manager</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.security.impl.AppSessionManagerImpl
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getAppSessionManager()
+	 * @generated
+	 */
+	int APP_SESSION_MANAGER = 9;
+
+	/**
+	 * The feature id for the '<em><b>Security Manager</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION_MANAGER__SECURITY_MANAGER = 0;
+
+	/**
+	 * The feature id for the '<em><b>Person Lookup</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION_MANAGER__PERSON_LOOKUP = 1;
+
+	/**
+	 * The number of structural features of the '<em>App Session Manager</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_SESSION_MANAGER_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.security.AssignMode <em>Assign Mode</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -778,7 +815,7 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getAssignMode()
 	 * @generated
 	 */
-	int ASSIGN_MODE = 9;
+	int ASSIGN_MODE = 10;
 
 
 	/**
@@ -789,7 +826,7 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getAppSessionStatus()
 	 * @generated
 	 */
-	int APP_SESSION_STATUS = 10;
+	int APP_SESSION_STATUS = 11;
 
 
 	/**
@@ -800,7 +837,61 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getSession()
 	 * @generated
 	 */
-	int SESSION = 11;
+	int SESSION = 12;
+
+
+	/**
+	 * The meta object id for the '<em>Http Servlet Request</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getHttpServletRequest()
+	 * @generated
+	 */
+	int HTTP_SERVLET_REQUEST = 13;
+
+	/**
+	 * The meta object id for the '<em>Http Servlet Response</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see javax.servlet.http.HttpServletResponse
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getHttpServletResponse()
+	 * @generated
+	 */
+	int HTTP_SERVLET_RESPONSE = 14;
+
+
+	/**
+	 * The meta object id for the '<em>Person</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.ldap.Person
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getPerson()
+	 * @generated
+	 */
+	int PERSON = 15;
+
+
+	/**
+	 * The meta object id for the '<em>Manager</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.apache.shiro.mgt.SecurityManager
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getSecurityManager()
+	 * @generated
+	 */
+	int SECURITY_MANAGER = 16;
+
+
+	/**
+	 * The meta object id for the '<em>Entity Lookup</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.data.EntityLookup
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getEntityLookup()
+	 * @generated
+	 */
+	int ENTITY_LOOKUP = 17;
 
 
 	/**
@@ -1358,6 +1449,38 @@ public interface SecurityPackage extends EPackage {
 	EAttribute getAppSessionAttributeEntry_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.security.AppSessionManager <em>App Session Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>App Session Manager</em>'.
+	 * @see org.soluvas.security.AppSessionManager
+	 * @generated
+	 */
+	EClass getAppSessionManager();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSessionManager#getSecurityManager <em>Security Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Security Manager</em>'.
+	 * @see org.soluvas.security.AppSessionManager#getSecurityManager()
+	 * @see #getAppSessionManager()
+	 * @generated
+	 */
+	EAttribute getAppSessionManager_SecurityManager();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.AppSessionManager#getPersonLookup <em>Person Lookup</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Person Lookup</em>'.
+	 * @see org.soluvas.security.AppSessionManager#getPersonLookup()
+	 * @see #getAppSessionManager()
+	 * @generated
+	 */
+	EAttribute getAppSessionManager_PersonLookup();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.security.AssignMode <em>Assign Mode</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1387,6 +1510,61 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getSession();
+
+	/**
+	 * Returns the meta object for data type '{@link javax.servlet.http.HttpServletRequest <em>Http Servlet Request</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Http Servlet Request</em>'.
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @model instanceClass="javax.servlet.http.HttpServletRequest"
+	 * @generated
+	 */
+	EDataType getHttpServletRequest();
+
+	/**
+	 * Returns the meta object for data type '{@link javax.servlet.http.HttpServletResponse <em>Http Servlet Response</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Http Servlet Response</em>'.
+	 * @see javax.servlet.http.HttpServletResponse
+	 * @model instanceClass="javax.servlet.http.HttpServletResponse"
+	 * @generated
+	 */
+	EDataType getHttpServletResponse();
+
+	/**
+	 * Returns the meta object for data type '{@link org.soluvas.ldap.Person <em>Person</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Person</em>'.
+	 * @see org.soluvas.ldap.Person
+	 * @model instanceClass="org.soluvas.ldap.Person"
+	 * @generated
+	 */
+	EDataType getPerson();
+
+	/**
+	 * Returns the meta object for data type '{@link org.apache.shiro.mgt.SecurityManager <em>Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Manager</em>'.
+	 * @see org.apache.shiro.mgt.SecurityManager
+	 * @model instanceClass="org.apache.shiro.mgt.SecurityManager" serializeable="false"
+	 * @generated
+	 */
+	EDataType getSecurityManager();
+
+	/**
+	 * Returns the meta object for data type '{@link org.soluvas.data.EntityLookup <em>Entity Lookup</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Entity Lookup</em>'.
+	 * @see org.soluvas.data.EntityLookup
+	 * @model instanceClass="org.soluvas.data.EntityLookup" serializeable="false" typeParameters="T ID" IDBounds="org.soluvas.commons.Serializable"
+	 * @generated
+	 */
+	EDataType getEntityLookup();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1837,6 +2015,32 @@ public interface SecurityPackage extends EPackage {
 		EAttribute APP_SESSION_ATTRIBUTE_ENTRY__VALUE = eINSTANCE.getAppSessionAttributeEntry_Value();
 
 		/**
+		 * The meta object literal for the '{@link org.soluvas.security.impl.AppSessionManagerImpl <em>App Session Manager</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.security.impl.AppSessionManagerImpl
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getAppSessionManager()
+		 * @generated
+		 */
+		EClass APP_SESSION_MANAGER = eINSTANCE.getAppSessionManager();
+
+		/**
+		 * The meta object literal for the '<em><b>Security Manager</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION_MANAGER__SECURITY_MANAGER = eINSTANCE.getAppSessionManager_SecurityManager();
+
+		/**
+		 * The meta object literal for the '<em><b>Person Lookup</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_SESSION_MANAGER__PERSON_LOOKUP = eINSTANCE.getAppSessionManager_PersonLookup();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.security.AssignMode <em>Assign Mode</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1865,6 +2069,56 @@ public interface SecurityPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType SESSION = eINSTANCE.getSession();
+
+		/**
+		 * The meta object literal for the '<em>Http Servlet Request</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see javax.servlet.http.HttpServletRequest
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getHttpServletRequest()
+		 * @generated
+		 */
+		EDataType HTTP_SERVLET_REQUEST = eINSTANCE.getHttpServletRequest();
+
+		/**
+		 * The meta object literal for the '<em>Http Servlet Response</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see javax.servlet.http.HttpServletResponse
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getHttpServletResponse()
+		 * @generated
+		 */
+		EDataType HTTP_SERVLET_RESPONSE = eINSTANCE.getHttpServletResponse();
+
+		/**
+		 * The meta object literal for the '<em>Person</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.ldap.Person
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getPerson()
+		 * @generated
+		 */
+		EDataType PERSON = eINSTANCE.getPerson();
+
+		/**
+		 * The meta object literal for the '<em>Manager</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.apache.shiro.mgt.SecurityManager
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getSecurityManager()
+		 * @generated
+		 */
+		EDataType SECURITY_MANAGER = eINSTANCE.getSecurityManager();
+
+		/**
+		 * The meta object literal for the '<em>Entity Lookup</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.data.EntityLookup
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getEntityLookup()
+		 * @generated
+		 */
+		EDataType ENTITY_LOOKUP = eINSTANCE.getEntityLookup();
 
 	}
 

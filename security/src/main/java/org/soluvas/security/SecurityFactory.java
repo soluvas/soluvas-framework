@@ -94,6 +94,15 @@ public interface SecurityFactory extends EFactory {
 	AppSession createAppSession();
 
 	/**
+	 * Returns a new object of class '<em>App Session Manager</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>App Session Manager</em>'.
+	 * @generated
+	 */
+	AppSessionManager createAppSessionManager();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

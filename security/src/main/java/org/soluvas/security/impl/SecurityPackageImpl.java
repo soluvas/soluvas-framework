@@ -3,18 +3,28 @@
 package org.soluvas.security.impl;
 
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.shiro.session.Session;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.data.EntityLookup;
+import org.soluvas.ldap.Person;
 import org.soluvas.security.Action;
 import org.soluvas.security.AppSession;
+import org.soluvas.security.AppSessionManager;
 import org.soluvas.security.AppSessionStatus;
 import org.soluvas.security.AssignMode;
 import org.soluvas.security.Domain;
@@ -101,6 +111,13 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass appSessionManagerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum assignModeEEnum = null;
 
 	/**
@@ -116,6 +133,41 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * @generated
 	 */
 	private EDataType sessionEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType httpServletRequestEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType httpServletResponseEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType personEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType securityManagerEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType entityLookupEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -226,6 +278,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDomainRole() {
 		return domainRoleEClass;
 	}
@@ -235,6 +288,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomainRole_Name() {
 		return (EAttribute)domainRoleEClass.getEStructuralFeatures().get(0);
 	}
@@ -244,6 +298,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomainRole_Description() {
 		return (EAttribute)domainRoleEClass.getEStructuralFeatures().get(1);
 	}
@@ -253,6 +308,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomainRole_Domain() {
 		return (EAttribute)domainRoleEClass.getEStructuralFeatures().get(2);
 	}
@@ -402,6 +458,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSecurityCatalog_DomainPermissions() {
 		return (EReference)securityCatalogEClass.getEStructuralFeatures().get(5);
 	}
@@ -461,6 +518,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDomainPermission() {
 		return domainPermissionEClass;
 	}
@@ -470,6 +528,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomainPermission_Domain() {
 		return (EAttribute)domainPermissionEClass.getEStructuralFeatures().get(0);
 	}
@@ -479,6 +538,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomainPermission_DomainRoles() {
 		return (EAttribute)domainPermissionEClass.getEStructuralFeatures().get(1);
 	}
@@ -488,6 +548,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomainPermission_Actions() {
 		return (EAttribute)domainPermissionEClass.getEStructuralFeatures().get(2);
 	}
@@ -497,6 +558,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAppSession() {
 		return appSessionEClass;
 	}
@@ -506,6 +568,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAppSession_Person() {
 		return (EReference)appSessionEClass.getEStructuralFeatures().get(0);
 	}
@@ -515,6 +578,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSession_SchemaVersion() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(1);
 	}
@@ -524,6 +588,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSession_Status() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(2);
 	}
@@ -533,6 +598,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSession_IpAddress() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(3);
 	}
@@ -542,6 +608,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSession_Ipv6Address() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(4);
 	}
@@ -551,6 +618,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSession_IpAddresses() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(5);
 	}
@@ -560,6 +628,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSession_Ipv6Addresses() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(6);
 	}
@@ -569,6 +638,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSession_UserAgent() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(7);
 	}
@@ -578,6 +648,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSession_UserAgents() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(8);
 	}
@@ -587,6 +658,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAppSession_Attributes() {
 		return (EReference)appSessionEClass.getEStructuralFeatures().get(9);
 	}
@@ -596,6 +668,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSession_Timeout() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(10);
 	}
@@ -605,6 +678,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSession_AccessTime() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(11);
 	}
@@ -614,6 +688,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSession_ExpiryTime() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(12);
 	}
@@ -623,6 +698,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSession_TimeZone() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(13);
 	}
@@ -632,6 +708,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSession_Locale() {
 		return (EAttribute)appSessionEClass.getEStructuralFeatures().get(14);
 	}
@@ -641,6 +718,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAppSessionAttributeEntry() {
 		return appSessionAttributeEntryEClass;
 	}
@@ -650,6 +728,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSessionAttributeEntry_Key() {
 		return (EAttribute)appSessionAttributeEntryEClass.getEStructuralFeatures().get(0);
 	}
@@ -659,8 +738,39 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppSessionAttributeEntry_Value() {
 		return (EAttribute)appSessionAttributeEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAppSessionManager() {
+		return appSessionManagerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getAppSessionManager_SecurityManager() {
+		return (EAttribute)appSessionManagerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getAppSessionManager_PersonLookup() {
+		return (EAttribute)appSessionManagerEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -678,6 +788,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getAppSessionStatus() {
 		return appSessionStatusEEnum;
 	}
@@ -687,8 +798,59 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getSession() {
 		return sessionEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getHttpServletRequest() {
+		return httpServletRequestEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getHttpServletResponse() {
+		return httpServletResponseEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getPerson() {
+		return personEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getSecurityManager() {
+		return securityManagerEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getEntityLookup() {
+		return entityLookupEDataType;
 	}
 
 	/**
@@ -780,12 +942,21 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		createEAttribute(appSessionAttributeEntryEClass, APP_SESSION_ATTRIBUTE_ENTRY__KEY);
 		createEAttribute(appSessionAttributeEntryEClass, APP_SESSION_ATTRIBUTE_ENTRY__VALUE);
 
+		appSessionManagerEClass = createEClass(APP_SESSION_MANAGER);
+		createEAttribute(appSessionManagerEClass, APP_SESSION_MANAGER__SECURITY_MANAGER);
+		createEAttribute(appSessionManagerEClass, APP_SESSION_MANAGER__PERSON_LOOKUP);
+
 		// Create enums
 		assignModeEEnum = createEEnum(ASSIGN_MODE);
 		appSessionStatusEEnum = createEEnum(APP_SESSION_STATUS);
 
 		// Create data types
 		sessionEDataType = createEDataType(SESSION);
+		httpServletRequestEDataType = createEDataType(HTTP_SERVLET_REQUEST);
+		httpServletResponseEDataType = createEDataType(HTTP_SERVLET_RESPONSE);
+		personEDataType = createEDataType(PERSON);
+		securityManagerEDataType = createEDataType(SECURITY_MANAGER);
+		entityLookupEDataType = createEDataType(ENTITY_LOOKUP);
 	}
 
 	/**
@@ -816,8 +987,12 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
+		addETypeParameter(entityLookupEDataType, "T");
+		ETypeParameter entityLookupEDataType_ID = addETypeParameter(entityLookupEDataType, "ID");
 
 		// Set bounds for type parameters
+		EGenericType g1 = createEGenericType(theCommonsPackage.getSerializable());
+		entityLookupEDataType_ID.getEBounds().add(g1);
 
 		// Add supertypes to classes
 		roleEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
@@ -894,6 +1069,26 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEAttribute(getAppSessionAttributeEntry_Key(), theEcorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSessionAttributeEntry_Value(), theEcorePackage.getEJavaObject(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(appSessionManagerEClass, AppSessionManager.class, "AppSessionManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAppSessionManager_SecurityManager(), this.getSecurityManager(), "securityManager", null, 0, 1, AppSessionManager.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(this.getEntityLookup());
+		EGenericType g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		EGenericType g3 = createEGenericType(this.getPerson());
+		g2.setEUpperBound(g3);
+		g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getAppSessionManager_PersonLookup(), g1, "personLookup", null, 0, 1, AppSessionManager.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		EOperation op = addEOperation(appSessionManagerEClass, null, "requirePerson", 0, 1, IS_UNIQUE, IS_ORDERED);
+		ETypeParameter t1 = addETypeParameter(op, "T");
+		g1 = createEGenericType(this.getPerson());
+		t1.getEBounds().add(g1);
+		addEParameter(op, this.getHttpServletRequest(), "httpRequest", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getHttpServletResponse(), "httpResponse", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(t1);
+		initEOperation(op, g1);
+
 		// Initialize enums and add enum literals
 		initEEnum(assignModeEEnum, AssignMode.class, "AssignMode");
 		addEEnumLiteral(assignModeEEnum, AssignMode.MANUAL);
@@ -906,6 +1101,11 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 
 		// Initialize data types
 		initEDataType(sessionEDataType, Session.class, "Session", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(httpServletRequestEDataType, HttpServletRequest.class, "HttpServletRequest", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(httpServletResponseEDataType, HttpServletResponse.class, "HttpServletResponse", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(personEDataType, Person.class, "Person", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(securityManagerEDataType, org.apache.shiro.mgt.SecurityManager.class, "SecurityManager", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(entityLookupEDataType, EntityLookup.class, "EntityLookup", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1126,6 +1326,18 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		   source, 
 		   new String[] {
 			 "documentation", "Returns the time that the session will expire (if it remains idle).\n\nIf there is activity, expiryTime may be extended.\n\n@see {@link getAccessTime()}"
+		   });		
+		addAnnotation
+		  (appSessionManagerEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Allows universal access to security Subject and derivatives (i.e. Person) from Wicket, JAX-RS, or other means."
+		   });		
+		addAnnotation
+		  (appSessionManagerEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", " Ensure personId is set. If not, throw Exception.\nThe IP Address and User Agent is required for security purposes.\nConvenience method for {@link #requirePerson(RequestIdentity)}."
 		   });
 	}
 
