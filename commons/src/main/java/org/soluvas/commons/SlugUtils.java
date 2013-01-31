@@ -109,20 +109,16 @@ public class SlugUtils {
 			throw new CommonsException("Cannot generate valid ID for '" + name + "' after 99 retries.");
 		}
 	}
-	
+
+	/**
+	 * @param name
+	 * @param validator
+	 * @return
+	 * @deprecated Use {@link #generateValidSegment(String, Predicate)}.
+	 */
+	@Deprecated
 	public static String generateValidSlug(@Nonnull String name, @Nonnull Predicate<String> validator) {
-		Preconditions.checkNotNull(validator, "Validator must not be null");
-		String slug = generateSegment(name, 0);
-		if (validator.apply(slug))
-			return slug;
-		else {
-			for (int i = 2; i <= 99; i++) {
-				slug = generateSegment(name, i);
-				if (validator.apply(slug))
-					return slug;
-			}
-			throw new CommonsException("Cannot generate valid Slug for '" + name + "' after 99 retries.");
-		}
+		return generateValidSegment(name, validator);
 	}
 	
 	/**
@@ -133,14 +129,14 @@ public class SlugUtils {
 	 */
 	public static String generateValidSegment(@Nonnull String name, @Nonnull Predicate<String> validator) {
 		Preconditions.checkNotNull(validator, "validator must not be null");
-		String id = generateSegment(name, 0);
-		if (validator.apply(id))
-			return id;
+		String segment = generateSegment(name, 0);
+		if (validator.apply(segment))
+			return segment;
 		else {
 			for (int i = 2; i <= 99; i++) {
-				id = generateSegment(name, i);
-				if (validator.apply(id))
-					return id;
+				segment = generateSegment(name, i);
+				if (validator.apply(segment))
+					return segment;
 			}
 			throw new CommonsException("Cannot generate valid segment for '" + name + "' after 99 retries.");
 		}

@@ -36,12 +36,19 @@ public class SocialPerson extends Person {
 	private String twitterAccessToken;
 	@LdapAttribute("twitterAccessTokenSecret")
 	private String twitterAccessTokenSecret;
+	@LdapAttribute("googlePlusId")
+	private String googlePlusId;
+	@LdapAttribute("googleAccessToken")
+	private String googleAccessToken;
+	@LdapAttribute("googleUsername")
+	private String googleUsername;
 	@LdapAttribute("virtualMail")
 	private String virtualMail;
 	@LdapAttribute("nickname")
 	private String nickname;
 	@LdapAttribute("primaryShippingAddress")
 	private String primaryShippingAddress;
+	
 	
 	public SocialPerson() {
 		super();
@@ -74,6 +81,30 @@ public class SocialPerson extends Person {
 		this.twitterAccessTokenSecret = twitterAccessTokenSecret;
 	}
 	
+	public String getGooglePlusId() {
+		return googlePlusId;
+	}
+
+	public void setGooglePlusId(String googlePlusId) {
+		this.googlePlusId = googlePlusId;
+	}
+
+	public String getGoogleAccessToken() {
+		return googleAccessToken;
+	}
+
+	public void setGoogleAccessToken(String googleAccessToken) {
+		this.googleAccessToken = googleAccessToken;
+	}
+
+	public String getGoogleUsername() {
+		return googleUsername;
+	}
+
+	public void setGoogleUsername(String googleUsername) {
+		this.googleUsername = googleUsername;
+	}
+
 	/**
 	 * @return the primaryEmail
 	 */
