@@ -6,7 +6,6 @@ import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 import org.apache.directory.ldap.client.api.LdapConnectionPool;
 import org.apache.directory.ldap.client.api.LdapNetworkConnection;
 import org.apache.directory.ldap.client.api.PoolableLdapConnectionFactory;
-import org.apache.directory.shared.ldap.model.exception.LdapException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

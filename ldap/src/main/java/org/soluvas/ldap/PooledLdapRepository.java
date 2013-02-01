@@ -7,12 +7,12 @@ import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.apache.commons.pool.ObjectPool;
+import org.apache.directory.api.ldap.model.entry.Entry;
+import org.apache.directory.api.ldap.model.exception.LdapException;
+import org.apache.directory.api.ldap.model.message.ModifyRequest;
+import org.apache.directory.api.ldap.model.message.ModifyResponse;
+import org.apache.directory.api.ldap.model.message.SearchScope;
 import org.apache.directory.ldap.client.api.LdapConnection;
-import org.apache.directory.shared.ldap.model.entry.Entry;
-import org.apache.directory.shared.ldap.model.exception.LdapException;
-import org.apache.directory.shared.ldap.model.message.ModifyRequest;
-import org.apache.directory.shared.ldap.model.message.ModifyResponse;
-import org.apache.directory.shared.ldap.model.message.SearchScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -13,7 +13,7 @@
 	<description>LDAP Utilities and POJO Object Mapper for LDAP entries.</description>
 	
 	<properties>
-		<apache-ldap-api.version>1.0.0-M13</apache-ldap-api.version>
+		<apache-ldap-api.version>1.0.0-M15</apache-ldap-api.version>
 	</properties>
 	
 	<dependencies>
@@ -48,25 +48,25 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.apache.directory.shared</groupId>
-			<artifactId>shared-ldap-client-api</artifactId>
+			<groupId>org.apache.directory.api</groupId>
+			<artifactId>api-ldap-client-api</artifactId>
 			<version>${apache-ldap-api.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.directory.shared</groupId>
-			<artifactId>shared-ldap-codec-standalone</artifactId>
-			<version>${apache-ldap-api.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.directory.shared</groupId>
-			<artifactId>shared-ldap-extras-aci</artifactId>
+			<groupId>org.apache.directory.api</groupId>
+			<artifactId>api-ldap-codec-standalone</artifactId>
 			<version>${apache-ldap-api.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.directory.shared</groupId>
-			<artifactId>shared-ldap-model</artifactId>
+			<groupId>org.apache.directory.api</groupId>
+			<artifactId>api-ldap-extras-aci</artifactId>
+			<version>${apache-ldap-api.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.directory.api</groupId>
+			<artifactId>api-ldap-model</artifactId>
 			<version>${apache-ldap-api.version}</version>
 		</dependency>
 

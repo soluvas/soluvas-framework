@@ -14,16 +14,16 @@ import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.pool.ObjectPool;
+import org.apache.directory.api.ldap.model.cursor.EntryCursor;
+import org.apache.directory.api.ldap.model.entry.Entry;
+import org.apache.directory.api.ldap.model.entry.Value;
+import org.apache.directory.api.ldap.model.exception.LdapException;
+import org.apache.directory.api.ldap.model.exception.LdapURLEncodingException;
+import org.apache.directory.api.ldap.model.message.SearchScope;
+import org.apache.directory.api.ldap.model.url.LdapUrl;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 import org.apache.directory.ldap.client.api.PoolableLdapConnectionFactory;
-import org.apache.directory.shared.ldap.model.cursor.EntryCursor;
-import org.apache.directory.shared.ldap.model.entry.Entry;
-import org.apache.directory.shared.ldap.model.entry.Value;
-import org.apache.directory.shared.ldap.model.exception.LdapException;
-import org.apache.directory.shared.ldap.model.exception.LdapURLEncodingException;
-import org.apache.directory.shared.ldap.model.message.SearchScope;
-import org.apache.directory.shared.ldap.model.url.LdapUrl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
