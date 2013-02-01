@@ -28,6 +28,7 @@ import org.soluvas.data.ListVocab;
 import org.soluvas.data.MeasureValue;
 import org.soluvas.data.Mixin;
 import org.soluvas.data.RangeValue;
+import org.soluvas.data.StringValue;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermContainer;
 import org.soluvas.data.TermValue;
@@ -58,6 +59,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	private EClass valueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stringValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -335,6 +343,26 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getStringValue() {
+		return stringValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getStringValue_Value() {
+		return (EAttribute)stringValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getMeasureValue() {
 		return measureValueEClass;
 	}
@@ -354,6 +382,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getMeasureValue_Value() {
 		return (EAttribute)measureValueEClass.getEStructuralFeatures().get(1);
 	}
@@ -463,6 +492,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTermValue_Value() {
 		return (EAttribute)termValueEClass.getEStructuralFeatures().get(2);
 	}
@@ -696,6 +726,9 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		createEAttribute(valueEClass, VALUE__SEMANTIC);
 		createEAttribute(valueEClass, VALUE__DISPLAY_VALUE);
 
+		stringValueEClass = createEClass(STRING_VALUE);
+		createEAttribute(stringValueEClass, STRING_VALUE__VALUE);
+
 		measureValueEClass = createEClass(MEASURE_VALUE);
 		createEAttribute(measureValueEClass, MEASURE_VALUE__VALUE_UNIT);
 		createEAttribute(measureValueEClass, MEASURE_VALUE__VALUE);
@@ -804,7 +837,11 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		attributeTypeEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 		attributeTypeEClass.getESuperTypes().add(theCommonsPackage.getBundleAware());
 		g1 = createEGenericType(this.getValue());
-		EGenericType g2 = createEGenericType(theEcorePackage.getEBigDecimal());
+		EGenericType g2 = createEGenericType(theEcorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		stringValueEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getValue());
+		g2 = createEGenericType(theEcorePackage.getEBigDecimal());
 		g1.getETypeArguments().add(g2);
 		measureValueEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getValue());
@@ -860,7 +897,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		addEOperation(attributeTypeEClass, theEcorePackage.getEBoolean(), "isMultiple", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(valueEClass, Value.class, "Value", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getValue_Semantic(), this.getAttributeSemantic(), "semantic", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getValue_DisplayValue(), ecorePackage.getEString(), "displayValue", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -869,6 +906,9 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		op = addEOperation(valueEClass, null, "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(valueEClass_T);
 		initEOperation(op, g1);
+
+		initEClass(stringValueEClass, StringValue.class, "StringValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStringValue_Value(), theEcorePackage.getEString(), "value", null, 0, 1, StringValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(measureValueEClass, MeasureValue.class, "MeasureValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		g1 = createEGenericType(theCommonsPackage.getUnit());

@@ -87,7 +87,7 @@ And for things like category, tag, color, size, they're static, with code suppor
 </xsd:documentation>
     </xsd:annotation>
   </xsd:element>
-  <xsd:complexType name="Value">
+  <xsd:complexType abstract="true" name="Value">
     <xsd:annotation>
       <xsd:documentation>Attribute having single or multiple values.
 
@@ -165,11 +165,19 @@ product['berbatik:material'][0].displayValue
 
 lebih enak:
 
-&lt;p&gt;Warna: {{product.attributes.color.0.displayValue}}&lt;/p&gt;
-&lt;p&gt;Material: {{product.attributes.berbatikMaterial.0.displayValue}}&lt;/p&gt;
+<p>Warna: {{product.attributes.color.0.displayValue}}</p>
+<p>Material: {{product.attributes.berbatikMaterial.0.displayValue}}</p>
 </xsd:documentation>
     </xsd:annotation>
   </xsd:element>
+  <xsd:complexType name="StringValue">
+    <xsd:complexContent>
+      <xsd:extension base="data:Value">
+        <xsd:attribute name="value" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="StringValue" type="data:StringValue"/>
   <xsd:complexType name="MeasureValue">
     <xsd:annotation>
       <xsd:documentation>Mixin with measured unit.</xsd:documentation>

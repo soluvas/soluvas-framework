@@ -93,6 +93,13 @@ public class DataSwitch<T1> extends Switch<T1> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DataPackage.STRING_VALUE: {
+				StringValue stringValue = (StringValue)theEObject;
+				T1 result = caseStringValue(stringValue);
+				if (result == null) result = caseValue(stringValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case DataPackage.MEASURE_VALUE: {
 				MeasureValue measureValue = (MeasureValue)theEObject;
 				T1 result = caseMeasureValue(measureValue);
@@ -240,6 +247,21 @@ public class DataSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public <T> T1 caseValue(Value<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseStringValue(StringValue object) {
 		return null;
 	}
 

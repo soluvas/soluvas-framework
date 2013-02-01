@@ -56,7 +56,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
  * </p>
  *
  * @see org.soluvas.data.DataPackage#getValue()
- * @model
+ * @model abstract="true"
  * @extends SerializableEObject
  * @generated
  */

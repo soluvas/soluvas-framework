@@ -2,7 +2,6 @@
  */
 package org.soluvas.data;
 
-import javax.measure.quantity.Quantity;
 import org.eclipse.emf.ecore.EFactory;
 
 /**
@@ -23,13 +22,13 @@ public interface DataFactory extends EFactory {
 	DataFactory eINSTANCE = org.soluvas.data.impl.DataFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Value</em>'.
+	 * Returns a new object of class '<em>String Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Value</em>'.
+	 * @return a new object of class '<em>String Value</em>'.
 	 * @generated
 	 */
-	<T> Value<T> createValue();
+	StringValue createStringValue();
 
 	/**
 	 * Returns a new object of class '<em>Measure Value</em>'.
@@ -129,5 +128,9 @@ public interface DataFactory extends EFactory {
 	 * @generated
 	 */
 	DataPackage getDataPackage();
+
+	TermValue createTermValue(String value, String displayValue);
+
+	StringValue createStringValue(String value);
 
 } //DataFactory

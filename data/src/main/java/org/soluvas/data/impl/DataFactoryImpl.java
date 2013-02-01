@@ -4,18 +4,27 @@ package org.soluvas.data.impl;
 
 import javax.measure.DecimalMeasure;
 import javax.measure.Measure;
-import javax.measure.quantity.Quantity;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.soluvas.data.*;
-
+import org.soluvas.data.AttributeSemantic;
+import org.soluvas.data.CurrencyValue;
+import org.soluvas.data.DataCatalog;
+import org.soluvas.data.DataFactory;
+import org.soluvas.data.DataPackage;
+import org.soluvas.data.FreeVocab;
+import org.soluvas.data.ListVocab;
+import org.soluvas.data.MeasureValue;
+import org.soluvas.data.Mixin;
+import org.soluvas.data.RangeValue;
+import org.soluvas.data.StringValue;
+import org.soluvas.data.Term;
+import org.soluvas.data.TermValue;
+import org.soluvas.data.TreeVocab;
 import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.data.repository.CrudRepositoryBase;
 import org.soluvas.data.repository.PagingAndSortingRepository;
@@ -64,17 +73,17 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case DataPackage.VALUE: return (EObject)createValue();
-			case DataPackage.MEASURE_VALUE: return (EObject)createMeasureValue();
-			case DataPackage.CURRENCY_VALUE: return (EObject)createCurrencyValue();
-			case DataPackage.MIXIN: return (EObject)createMixin();
-			case DataPackage.RANGE_VALUE: return (EObject)createRangeValue();
-			case DataPackage.TERM_VALUE: return (EObject)createTermValue();
-			case DataPackage.TERM: return (EObject)createTerm();
-			case DataPackage.LIST_VOCAB: return (EObject)createListVocab();
-			case DataPackage.TREE_VOCAB: return (EObject)createTreeVocab();
-			case DataPackage.FREE_VOCAB: return (EObject)createFreeVocab();
-			case DataPackage.DATA_CATALOG: return (EObject)createDataCatalog();
+			case DataPackage.STRING_VALUE: return createStringValue();
+			case DataPackage.MEASURE_VALUE: return createMeasureValue();
+			case DataPackage.CURRENCY_VALUE: return createCurrencyValue();
+			case DataPackage.MIXIN: return createMixin();
+			case DataPackage.RANGE_VALUE: return createRangeValue();
+			case DataPackage.TERM_VALUE: return createTermValue();
+			case DataPackage.TERM: return createTerm();
+			case DataPackage.LIST_VOCAB: return createListVocab();
+			case DataPackage.TREE_VOCAB: return createTreeVocab();
+			case DataPackage.FREE_VOCAB: return createFreeVocab();
+			case DataPackage.DATA_CATALOG: return createDataCatalog();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -135,9 +144,18 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <T> Value<T> createValue() {
-		ValueImpl<T> value = new ValueImpl<T>();
-		return value;
+	@Override
+	public StringValue createStringValue() {
+		StringValueImpl stringValue = new StringValueImpl();
+		return stringValue;
+	}
+
+	@Override
+	public StringValue createStringValue(String value) {
+		StringValueImpl StringValue = new StringValueImpl();
+		StringValue.setValue(value);
+		StringValue.setDisplayValue(value);
+		return StringValue;
 	}
 
 	/**
@@ -145,6 +163,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MeasureValue createMeasureValue() {
 		MeasureValueImpl measureValue = new MeasureValueImpl();
 		return measureValue;
@@ -155,6 +174,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CurrencyValue createCurrencyValue() {
 		CurrencyValueImpl currencyValue = new CurrencyValueImpl();
 		return currencyValue;
@@ -165,6 +185,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Mixin createMixin() {
 		MixinImpl mixin = new MixinImpl();
 		return mixin;
@@ -175,6 +196,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public <T> RangeValue<T> createRangeValue() {
 		RangeValueImpl<T> rangeValue = new RangeValueImpl<T>();
 		return rangeValue;
@@ -185,8 +207,18 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TermValue createTermValue() {
 		TermValueImpl termValue = new TermValueImpl();
+		return termValue;
+	}
+
+	@Override
+	public TermValue createTermValue(String value, String displayValue) {
+		TermValueImpl termValue = new TermValueImpl();
+		termValue.setId(value);
+		termValue.setValue(value);
+		termValue.setDisplayValue(displayValue);
 		return termValue;
 	}
 
@@ -195,6 +227,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term createTerm() {
 		TermImpl term = new TermImpl();
 		return term;
@@ -205,6 +238,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ListVocab createListVocab() {
 		ListVocabImpl listVocab = new ListVocabImpl();
 		return listVocab;
@@ -215,6 +249,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TreeVocab createTreeVocab() {
 		TreeVocabImpl treeVocab = new TreeVocabImpl();
 		return treeVocab;
@@ -225,6 +260,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FreeVocab createFreeVocab() {
 		FreeVocabImpl freeVocab = new FreeVocabImpl();
 		return freeVocab;
@@ -235,6 +271,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DataCatalog createDataCatalog() {
 		DataCatalogImpl dataCatalog = new DataCatalogImpl();
 		return dataCatalog;
@@ -355,6 +392,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DataPackage getDataPackage() {
 		return (DataPackage)getEPackage();
 	}

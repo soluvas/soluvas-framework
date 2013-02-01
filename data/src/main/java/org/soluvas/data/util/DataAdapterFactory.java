@@ -86,6 +86,10 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 				return createValueAdapter();
 			}
 			@Override
+			public Adapter caseStringValue(StringValue object) {
+				return createStringValueAdapter();
+			}
+			@Override
 			public Adapter caseMeasureValue(MeasureValue object) {
 				return createMeasureValueAdapter();
 			}
@@ -210,6 +214,20 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.data.StringValue <em>String Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.data.StringValue
+	 * @generated
+	 */
+	public Adapter createStringValueAdapter() {
 		return null;
 	}
 

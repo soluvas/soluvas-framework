@@ -54,7 +54,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataTypeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Value">
+  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Attribute having single or multiple values.&#xA;&#xA;{&#xA;attributes:&#xA;  color: [{value: &quot;red&quot;, displayValue: &quot;Merah&quot;}],&#xA;  berbatikMaterial: [{value: &quot;katun&quot;, displayValue: &quot;Katun&quot;}],&#xA;  berbatikShawlLength: [{value: &quot;90cm&quot;, displayValue: &quot;90 cm&quot;}],&#xA;mixins: {&#xA;  &quot;color&quot;: {&#xA;    attributeTypes: {&#xA;      color: {className: &quot;TermValue&quot;, &quot;name&quot;: &quot;color&quot;, &quot;label&quot;: &quot;Warna&quot;}, // nsPrefix: builtin&#xA;    },&#xA;  &quot;berbatik&quot;: {&#xA;    attributeTypes: {&#xA;      berbatikMaterial: {className: &quot;TermValue&quot;, nsPrefix: &quot;berbatik&quot;, name: &quot;material&quot;, label: &quot;Material&quot;},&#xA;      berbatikBatikAge: {className: &quot;TermValue&quot;, nsPrefix: &quot;berbatik&quot;, name: &quot;batikAge&quot;, label: &quot;Batik Age&quot;},&#xA;    }&#xA;  },&#xA;}&#xA;&#xA;&#xA;&quot;berbatik:material&quot;: [{value: &quot;Katun&quot;}],&#xA;&#xA;nggak enak:&#xA;product['berbatik:material'][0].displayValue&#xA;&#xA;lebih enak:&#xA;&#xA;&lt;p>Warna: {{product.attributes.color.0.displayValue}}&lt;/p>&#xA;&lt;p>Material: {{product.attributes.berbatikMaterial.0.displayValue}}&lt;/p>&#xA;"/>
     </eAnnotations>
@@ -76,6 +76,12 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eGenericSuperTypes eClassifier="#//Value">
+      <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eGenericSuperTypes>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Measure" instanceClassName="javax.measure.Measure">
     <eTypeParameters name="V"/>

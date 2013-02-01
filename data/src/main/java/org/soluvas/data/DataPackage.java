@@ -205,6 +205,52 @@ public interface DataPackage extends EPackage {
 	int VALUE_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.data.impl.StringValueImpl <em>String Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.data.impl.StringValueImpl
+	 * @see org.soluvas.data.impl.DataPackageImpl#getStringValue()
+	 * @generated
+	 */
+	int STRING_VALUE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Semantic</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_VALUE__SEMANTIC = VALUE__SEMANTIC;
+
+	/**
+	 * The feature id for the '<em><b>Display Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_VALUE__DISPLAY_VALUE = VALUE__DISPLAY_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_VALUE__VALUE = VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>String Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.MeasureValueImpl <em>Measure Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -212,7 +258,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getMeasureValue()
 	 * @generated
 	 */
-	int MEASURE_VALUE = 2;
+	int MEASURE_VALUE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Semantic</b></em>' attribute.
@@ -267,7 +313,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCurrencyValue()
 	 * @generated
 	 */
-	int CURRENCY_VALUE = 3;
+	int CURRENCY_VALUE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Semantic</b></em>' attribute.
@@ -313,7 +359,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getMixin()
 	 * @generated
 	 */
-	int MIXIN = 4;
+	int MIXIN = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -404,7 +450,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getRangeValue()
 	 * @generated
 	 */
-	int RANGE_VALUE = 5;
+	int RANGE_VALUE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Semantic</b></em>' attribute.
@@ -459,7 +505,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getTermValue()
 	 * @generated
 	 */
-	int TERM_VALUE = 6;
+	int TERM_VALUE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Semantic</b></em>' attribute.
@@ -541,7 +587,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getTermContainer()
 	 * @generated
 	 */
-	int TERM_CONTAINER = 12;
+	int TERM_CONTAINER = 13;
 
 	/**
 	 * The feature id for the '<em><b>Terms</b></em>' reference list.
@@ -569,7 +615,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getVocab()
 	 * @generated
 	 */
-	int VOCAB = 7;
+	int VOCAB = 8;
 
 	/**
 	 * The feature id for the '<em><b>Terms</b></em>' reference list.
@@ -651,7 +697,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getTerm()
 	 * @generated
 	 */
-	int TERM = 8;
+	int TERM = 9;
 
 	/**
 	 * The feature id for the '<em><b>Terms</b></em>' reference list.
@@ -733,7 +779,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getListVocab()
 	 * @generated
 	 */
-	int LIST_VOCAB = 9;
+	int LIST_VOCAB = 10;
 
 	/**
 	 * The feature id for the '<em><b>Terms</b></em>' reference list.
@@ -815,7 +861,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getTreeVocab()
 	 * @generated
 	 */
-	int TREE_VOCAB = 10;
+	int TREE_VOCAB = 11;
 
 	/**
 	 * The feature id for the '<em><b>Terms</b></em>' reference list.
@@ -897,7 +943,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getFreeVocab()
 	 * @generated
 	 */
-	int FREE_VOCAB = 11;
+	int FREE_VOCAB = 12;
 
 	/**
 	 * The feature id for the '<em><b>Terms</b></em>' reference list.
@@ -979,7 +1025,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getDataCatalog()
 	 * @generated
 	 */
-	int DATA_CATALOG = 13;
+	int DATA_CATALOG = 14;
 
 	/**
 	 * The feature id for the '<em><b>Bundle</b></em>' attribute.
@@ -1079,7 +1125,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getAttributeSemantic()
 	 * @generated
 	 */
-	int ATTRIBUTE_SEMANTIC = 14;
+	int ATTRIBUTE_SEMANTIC = 15;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository</em>' data type.
@@ -1089,7 +1135,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepository()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY = 15;
+	int CRUD_REPOSITORY = 16;
 
 	/**
 	 * The meta object id for the '<em>Paging And Sorting Repository</em>' data type.
@@ -1099,7 +1145,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPagingAndSortingRepository()
 	 * @generated
 	 */
-	int PAGING_AND_SORTING_REPOSITORY = 16;
+	int PAGING_AND_SORTING_REPOSITORY = 17;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository Base</em>' data type.
@@ -1109,7 +1155,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepositoryBase()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY_BASE = 17;
+	int CRUD_REPOSITORY_BASE = 18;
 
 
 	/**
@@ -1120,7 +1166,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getMeasure()
 	 * @generated
 	 */
-	int MEASURE = 18;
+	int MEASURE = 19;
 
 	/**
 	 * The meta object id for the '<em>Decimal Measure</em>' data type.
@@ -1130,7 +1176,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getDecimalMeasure()
 	 * @generated
 	 */
-	int DECIMAL_MEASURE = 19;
+	int DECIMAL_MEASURE = 20;
 
 
 	/**
@@ -1218,6 +1264,27 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getValue_DisplayValue();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.data.StringValue <em>String Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>String Value</em>'.
+	 * @see org.soluvas.data.StringValue
+	 * @generated
+	 */
+	EClass getStringValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.StringValue#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.soluvas.data.StringValue#getValue()
+	 * @see #getStringValue()
+	 * @generated
+	 */
+	EAttribute getStringValue_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.MeasureValue <em>Measure Value</em>}'.
@@ -1658,6 +1725,24 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute VALUE__DISPLAY_VALUE = eINSTANCE.getValue_DisplayValue();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.data.impl.StringValueImpl <em>String Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.data.impl.StringValueImpl
+		 * @see org.soluvas.data.impl.DataPackageImpl#getStringValue()
+		 * @generated
+		 */
+		EClass STRING_VALUE = eINSTANCE.getStringValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_VALUE__VALUE = eINSTANCE.getStringValue_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.MeasureValueImpl <em>Measure Value</em>}' class.
