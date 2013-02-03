@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.api.ldap.model.entry.Entry;
 import org.apache.directory.api.ldap.model.exception.LdapException;
+import org.apache.directory.api.ldap.model.filter.FilterEncoder;
 import org.apache.directory.api.ldap.model.message.ModifyRequest;
 import org.apache.directory.api.ldap.model.message.ModifyResponse;
 import org.apache.directory.api.ldap.model.message.SearchScope;
@@ -30,6 +31,13 @@ import com.google.common.collect.Lists;
  * @author ceefour
  */
 public class PooledLdapRepository<T> implements LdapRepository<T> {
+
+	private final class EntryToEntity implements Function<Entry, T> {
+		@Override
+		public T apply(Entry input) {
+			return mapper.fromEntry(input, entityClass);
+		}
+	}
 
 	private static Logger log = LoggerFactory.getLogger(PooledLdapRepository.class);
 	@Inject
@@ -350,18 +358,19 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	@Override
 	public List<T> search(String searchText) {
 		final String primaryObjectClass = mapper.getMapping(entityClass).getPrimaryObjectClass();
+		final String encodedSearchText = FilterEncoder.encodeFilterValue(searchText);
 //		String filter = "(&";
 //		for (String objectClass : objectClasses) {
 //			filter += "(objectClass=" + objectClass + ")";
 //		}
 //		filter += ")";
 		// Only search based on first objectClass, this is the typical use case
-		// TODO: escape searchText
+		// escape searchText using https://issues.apache.org/jira/browse/DIRSHARED-143
 		final String filter = String.format("(&(objectClass=%s)(|(cn=*%s*)(gn=*%s*)(sn=*%s*)(uid=*%s*)(mail=*%s*)))",
-				primaryObjectClass, searchText, searchText, searchText, searchText, searchText);
-		log.info("Searching LDAP {} filter: {}", shopDn, filter); 
+				primaryObjectClass, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText);
+		log.debug("Searching LDAP {} filter: {}", shopDn, filter); 
 		try {
-			List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
+			final List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
 				@Override @Nullable
 				public List<Entry> apply(@Nullable LdapConnection conn) {
 					try {
@@ -372,17 +381,11 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 					}
 				}
 			});
-			log.info("LDAP search {} filter {} returned {} entries", new Object[] { shopDn, filter, entries.size() });
-			List<T> entities = Lists.transform(entries, new Function<Entry, T>() {
-				@Override
-				public T apply(Entry input) {
-					return mapper.fromEntry(input, entityClass);
-				}
-			});
+			log.info("LDAP search {} filter {} returned {} entries", shopDn, filter, entries.size());
+			final List<T> entities = Lists.transform(entries, new EntryToEntity());
 			return entities;
 		} catch (Exception e) {
-			log.error("Error searching LDAP in " + shopDn + " filter " + filter, e);
-			throw new RuntimeException("Error searching LDAP in " + shopDn + " filter " + filter, e);
+			throw new LdapRepositoryException("Error searching LDAP in " + shopDn + " filter " + filter, e);
 		}
 	}
 
@@ -390,6 +393,32 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	public boolean existsByAttribute(String attribute, String value) {
 		final T found = findOneByAttribute(attribute, value);
 		return found != null;
+	}
+
+	@Override
+	public List<T> findAllByFilter(String filter) {
+		final String primaryObjectClass = mapper.getMapping(entityClass).getPrimaryObjectClass();
+		final String realFilter = String.format("(&(objectClass=%s)%s)",
+				primaryObjectClass, filter);
+		log.debug("Searching LDAP {} filter: {}", shopDn, realFilter); 
+		try {
+			final List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
+				@Override @Nullable
+				public List<Entry> apply(@Nullable LdapConnection conn) {
+					try {
+						return LdapUtils.asList( conn.search(shopDn, realFilter, SearchScope.ONELEVEL) );
+					} catch (LdapException e) {
+						Throwables.propagate(e);
+						return null;
+					}
+				}
+			});
+			log.info("LDAP search {} filter {} returned {} entries", shopDn, filter, entries.size());
+			final List<T> entities = Lists.transform(entries, new EntryToEntity());
+			return entities;
+		} catch (Exception e) {
+			throw new LdapRepositoryException("Error searching LDAP in " + shopDn + " filter " + filter, e);
+		}
 	}
 	
 }

@@ -48,7 +48,8 @@ public class SocialPerson extends Person {
 	private String nickname;
 	@LdapAttribute("primaryShippingAddress")
 	private String primaryShippingAddress;
-	
+	@LdapAttribute("primaryBillingAddress")
+	private String primaryBillingAddress;
 	
 	public SocialPerson() {
 		super();
@@ -270,6 +271,20 @@ public class SocialPerson extends Person {
 	 */
 	public void setPrimaryShippingAddress(String primaryShippingAddress) {
 		this.primaryShippingAddress = primaryShippingAddress;
+	}
+
+	/**
+	 * @return the primaryBillingAddress
+	 */
+	public String getPrimaryBillingAddress() {
+		return primaryBillingAddress;
+	}
+
+	/**
+	 * @param primaryBillingAddress the primaryBillingAddress to set
+	 */
+	public void setPrimaryBillingAddress(String primaryBillingAddress) {
+		this.primaryBillingAddress = primaryBillingAddress;
 	}
 	
 }

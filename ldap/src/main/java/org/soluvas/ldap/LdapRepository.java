@@ -80,6 +80,13 @@ public interface LdapRepository<T> extends EntityLookup<T, String> {
 	List<T> search(String searchText);
 
 	/**
+	 * Find all LDAP entries matching a custom LDAP filter.
+	 * @param obj
+	 * @throws LdapException
+	 */
+	List<T> findAllByFilter(String filter);
+
+	/**
 	 * @return the baseDn
 	 */
 	String getBaseDn();
