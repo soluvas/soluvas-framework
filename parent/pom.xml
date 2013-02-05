@@ -201,6 +201,12 @@
 			</dependency>
 
 			<dependency>
+			    <groupId>com.restfb</groupId>
+			    <artifactId>restfb</artifactId>
+			    <version>1.6.11</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.eclipse.emf</groupId>
 				<artifactId>org.eclipse.emf.common</artifactId>
 				<version>${emf.version}</version>
