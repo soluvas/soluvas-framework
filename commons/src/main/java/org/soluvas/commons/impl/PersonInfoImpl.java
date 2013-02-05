@@ -15,6 +15,9 @@ import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.PhotoIdContainer;
 import org.soluvas.commons.Sluggable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>PersonInfo</b></em>'.
@@ -226,8 +229,14 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
+	@JsonProperty
 	public String getImageId() {
 		return getPhotoId();
+	}
+	
+	@JsonIgnore
+	private void setImageId(String imageId) {
+		throw new UnsupportedOperationException();
 	}
 
 	/**
