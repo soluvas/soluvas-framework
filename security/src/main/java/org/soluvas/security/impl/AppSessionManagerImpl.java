@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.ldap.Person;
 import org.soluvas.security.AppSessionManager;
+import org.soluvas.security.NotLoggedInException;
 import org.soluvas.security.SecurityPackage;
 
 import com.google.common.base.Preconditions;
@@ -166,9 +167,12 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 * @return
 	 */
 	public Session requireSession(@Nonnull final HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
-		return Preconditions.checkNotNull(getSubject(httpRequest, httpResponse).getSession(false),
-				"Cannot get security session for %s Request: %s",
-				Thread.currentThread().getName(), httpRequest.getRequestURL());
+		final Session session = getSubject(httpRequest, httpResponse).getSession(false);
+		if (session == null) {
+			throw new NotLoggedInException(String.format("Cannot get security session for %s Request: %s",
+				Thread.currentThread().getName(), httpRequest.getRequestURL()) );
+		}
+		return session;
 	}
 
 	/**
