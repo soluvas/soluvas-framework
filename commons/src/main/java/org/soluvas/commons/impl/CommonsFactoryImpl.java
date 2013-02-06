@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons.impl;
 
+import java.io.File;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -26,7 +27,6 @@ import org.joda.money.BigMoneyProvider;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.soluvas.commons.*;
 import org.soluvas.commons.Added;
 import org.soluvas.commons.AddedMany;
 import org.soluvas.commons.AppManifest;
@@ -40,14 +40,16 @@ import org.soluvas.commons.EClassStatus;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.JavaClassStatus;
 import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.ProgressMonitorWrapper;
+import org.soluvas.commons.ProgressStatus;
 import org.soluvas.commons.Removed;
 import org.soluvas.commons.RemovedMany;
 import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.ShellProgressMonitor;
 import org.soluvas.commons.WebAddress;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
-import java.io.File;
 
 /**
  * <!-- begin-user-doc -->
@@ -93,19 +95,19 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CommonsPackage.APP_MANIFEST: return (EObject)createAppManifest();
-			case CommonsPackage.PERSON_INFO: return (EObject)createPersonInfo();
-			case CommonsPackage.WEB_ADDRESS: return (EObject)createWebAddress();
-			case CommonsPackage.ADDED: return (EObject)createAdded();
-			case CommonsPackage.ATTRIBUTE_SET: return (EObject)createAttributeSet();
-			case CommonsPackage.ATTRIBUTE_UNSET: return (EObject)createAttributeUnset();
-			case CommonsPackage.REMOVED: return (EObject)createRemoved();
-			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return (EObject)createAttributeNotification();
-			case CommonsPackage.ADDED_MANY: return (EObject)createAddedMany();
-			case CommonsPackage.REMOVED_MANY: return (EObject)createRemovedMany();
-			case CommonsPackage.CATEGORY_INFO: return (EObject)createCategoryInfo();
-			case CommonsPackage.SHELL_PROGRESS_MONITOR: return (EObject)createShellProgressMonitor();
-			case CommonsPackage.PROGRESS_MONITOR_WRAPPER: return (EObject)createProgressMonitorWrapper();
+			case CommonsPackage.APP_MANIFEST: return createAppManifest();
+			case CommonsPackage.PERSON_INFO: return createPersonInfo();
+			case CommonsPackage.WEB_ADDRESS: return createWebAddress();
+			case CommonsPackage.ADDED: return createAdded();
+			case CommonsPackage.ATTRIBUTE_SET: return createAttributeSet();
+			case CommonsPackage.ATTRIBUTE_UNSET: return createAttributeUnset();
+			case CommonsPackage.REMOVED: return createRemoved();
+			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return createAttributeNotification();
+			case CommonsPackage.ADDED_MANY: return createAddedMany();
+			case CommonsPackage.REMOVED_MANY: return createRemovedMany();
+			case CommonsPackage.CATEGORY_INFO: return createCategoryInfo();
+			case CommonsPackage.SHELL_PROGRESS_MONITOR: return createShellProgressMonitor();
+			case CommonsPackage.PROGRESS_MONITOR_WRAPPER: return createProgressMonitorWrapper();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -365,6 +367,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ShellProgressMonitor createShellProgressMonitor() {
 		ShellProgressMonitorImpl shellProgressMonitor = new ShellProgressMonitorImpl();
 		return shellProgressMonitor;
@@ -375,6 +378,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ProgressMonitorWrapper createProgressMonitorWrapper() {
 		ProgressMonitorWrapperImpl progressMonitorWrapper = new ProgressMonitorWrapperImpl();
 		return progressMonitorWrapper;

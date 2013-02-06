@@ -152,7 +152,7 @@ public abstract class Neo4jIdRelationRepository<LID  extends Serializable, RID e
 		final long rightNodeId = right.getId();
 		final Map<String, Object> params = ImmutableMap.<String, Object>of(
 				"leftNodeId", leftNodeId, "rightNodeId", rightNodeId);
-		final ExecutionResult rows = executionEngine.execute(query, params);
+		final List<Map<String, Object>> rows = ImmutableList.copyOf(executionEngine.execute(query, params));
 		log.trace("getRelationship {} #{} -{}-> {} #{} returned {}: {} - {}",
 				leftKind, leftNodeId, relationshipType, rightKind, rightNodeId, rows, query, params);
 		final Map<String, Object> row = Iterables.getFirst(rows, null);
@@ -177,13 +177,15 @@ public abstract class Neo4jIdRelationRepository<LID  extends Serializable, RID e
 				"MATCH left -[rel:" + relationshipType + "]-> right " +
 				"RETURN rel";
 		final Map<String, Object> params = ImmutableMap.<String, Object>of("leftId", leftId, "rightId", rightId);
-		final ExecutionResult rows = executionEngine.execute(query, params);
+		final List<Map<String, Object>> rows = ImmutableList.copyOf(executionEngine.execute(query, params));
 		log.debug("getRelationship {} {} -{}-> {} {} returned {}: {} - {}",
 				leftKind, leftId, relationshipType, rightKind, rightId, rows, query, params);
 		final Map<String, Object> row = Iterables.getFirst(rows, null);
 		if (row != null) {
+			log.debug("Row {}", row);
 			return (Relationship) row.get("rel");
 		} else {
+			log.debug("Row {}", row);
 			return null;
 		}
 	}

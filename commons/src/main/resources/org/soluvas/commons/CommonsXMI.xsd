@@ -781,38 +781,40 @@ Inspired by: org.eclipse.core.runtime.IProgressMonitor
   </xsd:complexType>
   <xsd:element name="ProgressMonitor" type="commons:ProgressMonitor">
     <xsd:annotation>
-      <xsd:documentation> * The &lt;code&gt;IProgressMonitor&lt;/code&gt; interface is implemented
+      <xsd:documentation> * The <code>IProgressMonitor</code> interface is implemented
  * by objects that monitor the progress of an activity; the methods
  * in this interface are invoked by code that performs the activity.
- * &lt;p&gt;
+ * <p>
  * All activity is broken down into a linear sequence of tasks against
- * which progress is reported. When a task begins, a &lt;code&gt;beginTask(String, int)
- * &lt;/code&gt; notification is reported, followed by any number and mixture of 
- * progress reports (&lt;code&gt;worked()&lt;/code&gt;) and subtask notifications 
- * (&lt;code&gt;subTask(String)&lt;/code&gt;).  When the task is eventually completed, a 
- * &lt;code&gt;done()&lt;/code&gt; notification is reported.  After the &lt;code&gt;done()&lt;/code&gt;
- * notification, the progress monitor cannot be reused;  i.e., &lt;code&gt;
- * beginTask(String, int)&lt;/code&gt; cannot be called again after the call to 
- * &lt;code&gt;done()&lt;/code&gt;.
- * &lt;/p&gt;
- * &lt;p&gt;
+ * which progress is reported. When a task begins, a <code>beginTask(String, int)
+ * </code> notification is reported, followed by any number and mixture of 
+ * progress reports (<code>worked()</code>) and subtask notifications 
+ * (<code>subTask(String)</code>).  When the task is eventually completed, a 
+ * <code>done()</code> notification is reported.  After the <code>done()</code>
+ * notification, the progress monitor cannot be reused;  i.e., <code>
+ * beginTask(String, int)</code> cannot be called again after the call to 
+ * <code>done()</code>.
+ * </p>
+ * <p>
  * A request to cancel an operation can be signaled using the 
- * &lt;code&gt;setCanceled&lt;/code&gt; method.  Operations taking a progress
- * monitor are expected to poll the monitor (using &lt;code&gt;isCanceled&lt;/code&gt;)
+ * <code>setCanceled</code> method.  Operations taking a progress
+ * monitor are expected to poll the monitor (using <code>isCanceled</code>)
  * periodically and abort at their earliest convenience.  Operation can however 
  * choose to ignore cancelation requests.
- * &lt;/p&gt;
- * &lt;p&gt;
+ * </p>
+ * <p>
  * Since notification is synchronous with the activity itself, the listener should 
  * provide a fast and robust implementation. If the handling of notifications would 
  * involve blocking operations, or operations which might throw uncaught exceptions, 
  * the notifications should be queued, and the actual processing deferred (or perhaps
  * delegated to a separate thread).
- * &lt;/p&gt;&lt;p&gt;
+ * </p>
+        <p>
  * This interface can be used without OSGi running.
- * &lt;/p&gt;&lt;p&gt;
+ * </p>
+        <p>
  * Clients may implement this interface.
- * &lt;/p&gt;
+ * </p>
 
 
 Inspired by: org.eclipse.core.runtime.IProgressMonitor
@@ -835,13 +837,14 @@ Inspired by: org.eclipse.core.runtime.IProgressMonitor
   <xsd:complexType name="ProgressMonitorWrapper">
     <xsd:annotation>
       <xsd:documentation> * An abstract wrapper around a progress monitor which,
- * unless overridden, forwards &lt;code&gt;IProgressMonitor&lt;/code&gt;
- * and &lt;code&gt;IProgressMonitorWithBlocking&lt;/code&gt; methods to the wrapped progress monitor.
- * &lt;p&gt;
+ * unless overridden, forwards <code>IProgressMonitor</code>
+ * and <code>IProgressMonitorWithBlocking</code> methods to the wrapped progress monitor.
+ * <p>
  * This class can be used without OSGi running.
- * &lt;/p&gt;&lt;p&gt;
+ * </p>
+        <p>
  * Clients may subclass.
- * &lt;/p&gt;
+ * </p>
 </xsd:documentation>
     </xsd:annotation>
     <xsd:complexContent>

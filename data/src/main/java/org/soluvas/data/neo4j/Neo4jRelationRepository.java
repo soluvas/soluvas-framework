@@ -464,7 +464,9 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 	
 	@Override
 	public boolean exists(String leftId, String rightId) {
-		return idRepository.getRelationship(leftId, rightId) != null;
+		final Relationship rel = idRepository.getRelationship(leftId, rightId);
+		log.debug("exists {} -{}-> {} : {}", leftId, relationshipType, rightId, rel);
+		return rel != null;
 	}
 	
 	@Override
