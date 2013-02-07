@@ -32,7 +32,7 @@ public class TenantUtils {
 	public static <T, R, S extends T> R withService(BundleContext bundleContext, Class<T> clazz, String filter, Function<S,R> callback) {
 		final ServiceReference<?>[] refs;
 		try {
-			refs = (ServiceReference<?>[]) bundleContext
+			refs = bundleContext
 					.getServiceReferences(clazz.getName(), filter);
 		} catch (Exception e) {
 			log.error(String.format("Cannot find service %s for filter %s",
@@ -69,6 +69,8 @@ public class TenantUtils {
 			@Nonnull Class<T> iface,
 			@Nullable String namespace,
 			@Nullable String filter) {
+		Preconditions.checkNotNull(bundleContext, "null bundleContext given to getService tenant=%s iface=%s namespace=%s filter=%s",
+				tenant, iface, namespace, filter);
 		final String ifaceName = iface.getName();
 		final String additionalFilter = Optional.fromNullable(filter).or("");
 		log.trace("Lookup {} for tenantId={} tenantEnv={} namespace={} filter: {}",
