@@ -1,7 +1,16 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
     xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0
+    	http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
         http://karaf.apache.org/xmlns/shell/v1.1.0 http://karaf.apache.org/xmlns/shell/v1.1.0">
+
+	<cm:property-placeholder persistent-id="org.soluvas.commons" update-strategy="none">
+		<cm:default-properties>
+			<cm:property name="defaultClientId"				value="tuneeca" />
+			<cm:property name="defaultTenantEnv"			value="dev" />
+		</cm:default-properties>
+	</cm:property-placeholder>
 
 	<bean id="networkExecutor" class="java.util.concurrent.Executors" factory-method="newFixedThreadPool">
 		<argument value="32" />
@@ -45,6 +54,8 @@
 
 	<bean id="svcLookup" class="org.soluvas.commons.tenant.MultitenantServiceLookup">
 		<argument ref="blueprintBundleContext"/>
+		<argument value="${defaultClientId}"/>
+		<argument value="${defaultTenantEnv}"/>
 	</bean>
 	<service ref="svcLookup" auto-export="interfaces"/>
 	
