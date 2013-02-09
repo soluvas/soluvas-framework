@@ -41,12 +41,15 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	
 	private static final Logger log = LoggerFactory.getLogger(MultitenantServiceLookup.class);
 	private final BundleContext bundleContext;
-	private final String defaultTenantEnv = "dev";
-	private final String defaultClientId = "berbatik";
+	private final String defaultTenantEnv;
+	private final String defaultClientId;
 	
-	public MultitenantServiceLookup(BundleContext bundleContext) {
+	public MultitenantServiceLookup(@Nonnull final BundleContext bundleContext,
+			@Nonnull final String defaultClientId, @Nonnull final String defaultTenantEnv) {
 		super();
 		this.bundleContext = bundleContext;
+		this.defaultClientId = defaultClientId;
+		this.defaultTenantEnv = defaultTenantEnv;
 	}
 
 	@Deprecated
