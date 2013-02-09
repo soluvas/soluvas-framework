@@ -166,7 +166,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 				"schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT,
 				"status", AppSessionStatus.ACTIVE.name(),
 				"_id", id)));
-		log.debug("findOneByActive {} returns {}", id, dbo);
+		log.trace("findOneByActive {} returns {}", id, dbo);
 		return new FromDBObject().apply(dbo);
 	}
 

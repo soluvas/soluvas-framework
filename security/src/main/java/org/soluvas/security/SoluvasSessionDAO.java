@@ -75,7 +75,7 @@ public class SoluvasSessionDAO implements SessionDAO {
 	@Override
 	public Session readSession(@Nonnull final Serializable sessionId)
 			throws UnknownSessionException {
-		log.debug("Reading Shiro Session {}", sessionId);
+		log.trace("Reading Shiro Session {}", sessionId);
 		appSessionRepo.touch((String) sessionId);
 		final AppSession appSession = appSessionRepo.findOneByActive((String) sessionId);
 		if (appSession == null)
