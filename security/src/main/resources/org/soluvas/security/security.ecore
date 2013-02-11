@@ -238,6 +238,13 @@
       <eParameters name="httpRequest" eType="#//HttpServletRequest"/>
       <eParameters name="httpResponse" eType="#//HttpServletResponse"/>
     </eOperations>
+    <eOperations name="requirePerson">
+      <eGenericType eTypeParameter="#//AppSessionManager/requirePerson.1/T"/>
+      <eTypeParameters name="T">
+        <eBounds eClassifier="#//Person"/>
+      </eTypeParameters>
+      <eParameters name="subject" eType="#//Subject"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="securityManager" eType="#//SecurityManager"
         changeable="false" transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="personLookup" changeable="false"
@@ -262,4 +269,6 @@
       <eBounds eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Serializable"/>
     </eTypeParameters>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Subject" instanceClassName="org.apache.shiro.subject.Subject"
+      serializable="false"/>
 </ecore:EPackage>

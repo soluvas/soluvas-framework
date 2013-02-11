@@ -364,6 +364,10 @@
         <element xmi:type="ecore:EOperation" href="security.ecore#//AppSessionManager/requirePerson"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Gc0qcWvyEeK2dfJpqMewKw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_2GqkMHQcEeKxsMd0fOD4uQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="security.ecore#//AppSessionManager/requirePerson.1"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_2GqkMXQcEeKxsMd0fOD4uQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_-HBdImvxEeK2dfJpqMewKw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_-HBdI2vxEeK2dfJpqMewKw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_-HBdJGvxEeK2dfJpqMewKw"/>
@@ -406,6 +410,25 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_yozmAWv0EeK2dfJpqMewKw" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EDataType" href="security.ecore#//EntityLookup"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_yozmAmv0EeK2dfJpqMewKw" x="3852" y="24"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_yPF1sHQcEeKxsMd0fOD4uQ" type="1004">
+    <children xmi:type="notation:Node" xmi:id="_yPGcwHQcEeKxsMd0fOD4uQ" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_yPGcwXQcEeKxsMd0fOD4uQ" type="4009"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_yPF1sXQcEeKxsMd0fOD4uQ" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EDataType" href="security.ecore#//Subject"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_yPF1snQcEeKxsMd0fOD4uQ" x="1648" y="363"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_QWJzEHQhEeKxsMd0fOD4uQ" type="Note" fontName="DejaVu Sans" description="Need documentation" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_QWM2YHQhEeKxsMd0fOD4uQ" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_QWM2YXQhEeKxsMd0fOD4uQ" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:TextStyle" xmi:id="_QWJzEXQhEeKxsMd0fOD4uQ"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_QWJzEnQhEeKxsMd0fOD4uQ"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QWJzE3QhEeKxsMd0fOD4uQ" x="92" y="302"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Tc3gEiMGEeKl8MxWFdVCpA"/>
   <element xmi:type="ecore:EPackage" href="security.ecore#/"/>

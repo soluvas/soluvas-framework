@@ -179,10 +179,19 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends Person> T requirePerson(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
 		final Subject subject = getSubject(httpRequest, httpResponse);
+		return requirePerson(subject);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T extends Person> T requirePerson(Subject subject) {
 		final String personId = (String) Preconditions.checkNotNull(subject.getPrincipal(),
 				"User is not logged in");
 		final Person person = Preconditions.checkNotNull(personLookup.findOne(personId),

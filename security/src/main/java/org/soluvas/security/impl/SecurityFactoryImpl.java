@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.soluvas.ldap.Person;
+import org.soluvas.security.*;
 import org.soluvas.security.Action;
 import org.soluvas.security.AppSession;
 import org.soluvas.security.AppSessionManager;
@@ -73,16 +74,16 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case SecurityPackage.ROLE: return createRole();
-			case SecurityPackage.DOMAIN_ROLE: return createDomainRole();
-			case SecurityPackage.DOMAIN: return createDomain();
-			case SecurityPackage.ACTION: return createAction();
-			case SecurityPackage.SECURITY_CATALOG: return createSecurityCatalog();
-			case SecurityPackage.PERMISSION: return createPermission();
-			case SecurityPackage.DOMAIN_PERMISSION: return createDomainPermission();
-			case SecurityPackage.APP_SESSION: return createAppSession();
+			case SecurityPackage.ROLE: return (EObject)createRole();
+			case SecurityPackage.DOMAIN_ROLE: return (EObject)createDomainRole();
+			case SecurityPackage.DOMAIN: return (EObject)createDomain();
+			case SecurityPackage.ACTION: return (EObject)createAction();
+			case SecurityPackage.SECURITY_CATALOG: return (EObject)createSecurityCatalog();
+			case SecurityPackage.PERMISSION: return (EObject)createPermission();
+			case SecurityPackage.DOMAIN_PERMISSION: return (EObject)createDomainPermission();
+			case SecurityPackage.APP_SESSION: return (EObject)createAppSession();
 			case SecurityPackage.APP_SESSION_ATTRIBUTE_ENTRY: return (EObject)createAppSessionAttributeEntry();
-			case SecurityPackage.APP_SESSION_MANAGER: return createAppSessionManager();
+			case SecurityPackage.APP_SESSION_MANAGER: return (EObject)createAppSessionManager();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

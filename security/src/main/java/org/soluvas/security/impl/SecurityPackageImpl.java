@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -168,6 +169,13 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * @generated
 	 */
 	private EDataType entityLookupEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType subjectEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -858,6 +866,15 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getSubject() {
+		return subjectEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public SecurityFactory getSecurityFactory() {
 		return (SecurityFactory)getEFactoryInstance();
@@ -957,6 +974,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		personEDataType = createEDataType(PERSON);
 		securityManagerEDataType = createEDataType(SECURITY_MANAGER);
 		entityLookupEDataType = createEDataType(ENTITY_LOOKUP);
+		subjectEDataType = createEDataType(SUBJECT);
 	}
 
 	/**
@@ -1089,6 +1107,14 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		g1 = createEGenericType(t1);
 		initEOperation(op, g1);
 
+		op = addEOperation(appSessionManagerEClass, null, "requirePerson", 0, 1, IS_UNIQUE, IS_ORDERED);
+		t1 = addETypeParameter(op, "T");
+		g1 = createEGenericType(this.getPerson());
+		t1.getEBounds().add(g1);
+		addEParameter(op, this.getSubject(), "subject", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(t1);
+		initEOperation(op, g1);
+
 		// Initialize enums and add enum literals
 		initEEnum(assignModeEEnum, AssignMode.class, "AssignMode");
 		addEEnumLiteral(assignModeEEnum, AssignMode.MANUAL);
@@ -1106,6 +1132,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEDataType(personEDataType, Person.class, "Person", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(securityManagerEDataType, org.apache.shiro.mgt.SecurityManager.class, "SecurityManager", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(entityLookupEDataType, EntityLookup.class, "EntityLookup", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(subjectEDataType, Subject.class, "Subject", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

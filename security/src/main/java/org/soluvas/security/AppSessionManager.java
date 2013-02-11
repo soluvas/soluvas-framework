@@ -5,6 +5,7 @@ package org.soluvas.security;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.subject.Subject;
 import org.soluvas.commons.SerializableEObject;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.ldap.Person;
@@ -74,5 +75,13 @@ public interface AppSessionManager extends SerializableEObject {
 	 * @generated
 	 */
 	<T extends Person> T requirePerson(HttpServletRequest httpRequest, HttpServletResponse httpResponse);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model subjectDataType="org.soluvas.security.Subject" TBounds="org.soluvas.security.Person"
+	 * @generated
+	 */
+	<T extends Person> T requirePerson(Subject subject);
 
 } // AppSessionManager

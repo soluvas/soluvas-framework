@@ -895,6 +895,17 @@ public interface SecurityPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Subject</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.apache.shiro.subject.Subject
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getSubject()
+	 * @generated
+	 */
+	int SUBJECT = 18;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.security.Role <em>Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1567,6 +1578,17 @@ public interface SecurityPackage extends EPackage {
 	EDataType getEntityLookup();
 
 	/**
+	 * Returns the meta object for data type '{@link org.apache.shiro.subject.Subject <em>Subject</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Subject</em>'.
+	 * @see org.apache.shiro.subject.Subject
+	 * @model instanceClass="org.apache.shiro.subject.Subject" serializeable="false"
+	 * @generated
+	 */
+	EDataType getSubject();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2119,6 +2141,16 @@ public interface SecurityPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType ENTITY_LOOKUP = eINSTANCE.getEntityLookup();
+
+		/**
+		 * The meta object literal for the '<em>Subject</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.apache.shiro.subject.Subject
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getSubject()
+		 * @generated
+		 */
+		EDataType SUBJECT = eINSTANCE.getSubject();
 
 	}
 
