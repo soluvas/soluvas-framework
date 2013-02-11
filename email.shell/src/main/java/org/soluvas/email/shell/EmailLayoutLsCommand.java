@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.eclipse.emf.ecore.EClass;
@@ -66,8 +67,8 @@ public class EmailLayoutLsCommand extends OsgiCommandSupport {
 				}
 			});
 			
-			final String subject = layoutType.getSubjectTemplate().substring(0, 20);
-			final String template = layoutType.getPlainTemplate().substring(0, 20);
+			final String subject = StringUtils.substring(layoutType.getSubjectTemplate(), 0, 20);
+			final String template = StringUtils.substring(layoutType.getPlainTemplate(), 0, 20);
 			
 			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-10s|@@|bold,black ||@%-10s@|bold,black ||@%-25s@|bold,black ||@%-20s@|bold,black ||@%-20s@|bold,black ||@" + bundleAnsi,
 				++i, layoutType.getName(), layoutType.getResourceName(),
