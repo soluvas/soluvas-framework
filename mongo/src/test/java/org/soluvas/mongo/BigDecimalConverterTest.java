@@ -16,7 +16,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
 public class BigDecimalConverterTest {
-
+	
 	private Morphia morphia;
 
 	@Before

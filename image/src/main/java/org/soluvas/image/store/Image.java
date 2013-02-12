@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 
 import org.bson.BasicBSONObject;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
@@ -21,13 +23,13 @@ import com.google.common.collect.Maps.EntryTransformer;
 public class Image {
 	
 	public static class ToId implements Function<Image, String> {
-		
 		@Override @Nullable
 		public String apply(@Nullable Image input) {
 			return input.getId();
 		}
-		
 	}
+	
+	private static final Logger log = LoggerFactory.getLogger(Image.class);
 
 	private String id;
 	private URI uri;
@@ -86,10 +88,14 @@ public class Image {
 		uri = URI.create(imageStore.getImageUri(id, MongoImageRepository.ORIGINAL_NAME));
 		contentType = dbo.getString("contentType");
 		fileName = dbo.getString("fileName");
-		size = dbo.getLong("size");
+		size = dbo.get("size") != null ? dbo.getLong("size") : null;
 //		width = dbo.getInt("width");
 //		height = dbo.getInt("height");
 		BasicBSONObject stylesBson = (BasicBSONObject) dbo.get("styles");
+		if (stylesBson == null) {
+			log.warn("Image {} has null styles", id);
+			stylesBson = new BasicBSONObject();
+		}
 		styles = ImmutableMap.copyOf(Maps.transformEntries(
 				stylesBson, new EntryTransformer<String, Object, StyledImage>() {
 			@Override

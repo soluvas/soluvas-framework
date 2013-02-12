@@ -89,6 +89,9 @@ public class MongoImageRepository implements ImageRepository {
 	private DavConnector innerConnector;
 	private ImageConnector connector;
 	private ImageTransformer transformer;
+
+	private List<String> mongoHosts;
+	private String mongoDatabase;
 	
 	public class DBObjectToImage implements Function<DBObject, Image> {
 		@Override
@@ -175,8 +178,10 @@ public class MongoImageRepository implements ImageRepository {
 			throw new ImageException("MongoDB URI for " + namespace + " Image Store cannot be empty");
 
 		MongoURI mongoUriDetail = new MongoURI(mongoUri);
+		mongoHosts = mongoUriDetail.getHosts();
+		mongoDatabase = mongoUriDetail.getDatabase();
 		try {
-			log.info("Connecting to MongoDB {} database {}", mongoUriDetail.getHosts(), mongoUriDetail.getDatabase());
+			log.info("Connecting to MongoDB {} database {}", mongoHosts, mongoDatabase);
 			DB db = mongoUriDetail.connectDB();
 			if (mongoUriDetail.getUsername() != null)
 				db.authenticate(mongoUriDetail.getUsername(), mongoUriDetail.getPassword());
@@ -185,7 +190,7 @@ public class MongoImageRepository implements ImageRepository {
 			mongoColl = db.getCollection(collName);
 			mongoColl.ensureIndex(new BasicDBObject("created", -1));
 		} catch (Exception e) {
-			throw new ImageException("Cannot connect to MongoDB "+ mongoUriDetail.getHosts() + " database " + mongoUriDetail.getDatabase(), e);
+			throw new ImageException("Cannot connect to MongoDB "+ mongoHosts + " database " + mongoDatabase, e);
 		}
 		
 		createFolders();
@@ -793,6 +798,11 @@ public class MongoImageRepository implements ImageRepository {
 			return false;
 		final long count = mongoColl.count(new BasicDBObject("_id", id));
 		return count >= 1;
+	}
+	
+	@Override
+	public String toString() {
+		return "MongoImageRepository " + mongoHosts + "/" + mongoDatabase;
 	}
 
 }
