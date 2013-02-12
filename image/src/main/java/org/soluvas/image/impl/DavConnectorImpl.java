@@ -1,5 +1,3 @@
-/**
- */
 package org.soluvas.image.impl;
 
 import java.io.File;
@@ -25,7 +23,6 @@ import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.InputStreamEntity;
-import org.apache.http.impl.NoConnectionReuseStrategy;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -56,6 +53,7 @@ import com.google.common.collect.ImmutableMap;
  *
  * @generated
  */
+@SuppressWarnings("serial")
 public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector {
 	
 	private static final Logger log = LoggerFactory
@@ -81,8 +79,9 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 		this.publicUri = publicUri;
 		
 		client = new DefaultHttpClient(new PoolingClientConnectionManager());
-		// workaround for nginx dav bug, see upload() method
-		client.setReuseStrategy(new NoConnectionReuseStrategy());
+		// NO MORE, workaround for nginx dav bug, see upload() method
+		// Note: please use puppet-nginx which gives you at least nginx 1.2.6 on both precise & quantal
+//		client.setReuseStrategy(new NoConnectionReuseStrategy());
 		
 		// Sanity checks
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(davUri), "DAV URI cannot be empty");
