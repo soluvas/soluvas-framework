@@ -362,7 +362,7 @@ public class LdapMapper {
 				return input.getName() + ": " + input.getType().getSimpleName();
 			}
 		});
-		log.debug("Mapping Entry attributes to fields in {}: {}", clazz.getName(), fieldNames);
+		log.trace("Mapping Entry attributes to fields in {}: {}", clazz.getName(), fieldNames);
 		for (Field field : fields) {
 			LdapAttribute ldapAttribute = field.getAnnotation(LdapAttribute.class);
 			if (ldapAttribute == null)

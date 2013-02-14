@@ -113,7 +113,7 @@ public class TenantInjection implements Serializable {
 			}
 		}
 		if (!serviceRefs.isEmpty()) {
-			log.debug("Injected {} services to {} in {}", serviceRefs.size(), componentId, phase);
+			log.trace("Injected {} services to {} in {}", serviceRefs.size(), componentId, phase);
 		}
 	}
 	
@@ -124,7 +124,7 @@ public class TenantInjection implements Serializable {
 	 */
 	public void uninject(@Nonnull final Object component, @Nonnull final String componentId, @Nonnull final String phase) {
 		if (!serviceRefs.isEmpty()) {
-			log.debug("Uninjecting {} services from {} due to {}", serviceRefs.size(), componentId, phase);
+			log.trace("Uninjecting {} services from {} due to {}", serviceRefs.size(), componentId, phase);
 			final Iterator<Entry<Field, ServiceReference<?>>> serviceRefIterator = serviceRefs.entrySet().iterator();
 			while (serviceRefIterator.hasNext()) {
 				final Entry<Field, ServiceReference<?>> entry = serviceRefIterator.next();
