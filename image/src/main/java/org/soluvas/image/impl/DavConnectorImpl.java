@@ -23,6 +23,7 @@ import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.InputStreamEntity;
+import org.apache.http.impl.NoConnectionReuseStrategy;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -79,9 +80,11 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 		this.publicUri = publicUri;
 		
 		client = new DefaultHttpClient(new PoolingClientConnectionManager());
-		// NO MORE, workaround for nginx dav bug, see upload() method
-		// Note: please use puppet-nginx which gives you at least nginx 1.2.6 on both precise & quantal
-//		client.setReuseStrategy(new NoConnectionReuseStrategy());
+		// workaround for nginx dav bug, see #uploadFileDav() method
+		// see http://trac.nginx.org/nginx/ticket/284#comment:5
+		// Note: please use puppet-nginx which gives you at least nginx 1.2.7 on both precise & quantal
+		// Bug still happens on nginx 1.2.7 though, in a more detailed way
+		client.setReuseStrategy(new NoConnectionReuseStrategy());
 		
 		// Sanity checks
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(davUri), "DAV URI cannot be empty");
@@ -219,6 +222,7 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 		
 		final HttpPut httpPut = new HttpPut(uri);
 		httpPut.setHeader("Content-Type", contentType);
+		// My new bug report is here: http://trac.nginx.org/nginx/ticket/284
 /*
 For some strange reason, nginx dav 1.1.19-1ubuntu0.1 on Ubuntu 12.04-x86 is unstable, but worked well (at that time) with InputStreamEntity.
 tried with FileEntity, ByteArrayEntity, and InputStreamEntity, not working.
