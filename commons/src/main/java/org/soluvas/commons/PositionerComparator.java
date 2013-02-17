@@ -17,10 +17,10 @@ public class PositionerComparator<T extends EObject> implements Comparator<T> {
 	 */
 	@Override
 	public int compare(T o1, T o2) {
-		Integer positioner1 = o1 != null
-				? Optional.fromNullable((Integer) o1.eGet(CommonsPackage.Literals.POSITIONABLE__POSITIONER)).or(0) : 0;
-		Integer positioner2 = o2 != null
-				? Optional.fromNullable((Integer) o2.eGet(CommonsPackage.Literals.POSITIONABLE__POSITIONER)).or(0) : 0;
+		Integer positioner1 = o1 != null && o1 instanceof Positionable
+				? Optional.fromNullable(((Positionable) o1).getPositioner()).or(0) : 0;
+		Integer positioner2 = o2 != null && o2 instanceof Positionable
+				? Optional.fromNullable(((Positionable) o2).getPositioner()).or(0) : 0;
 		return positioner1 - positioner2;
 	}
 

@@ -23,21 +23,23 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 
 /**
- * Tracks files named <tt>(bundle).SecurityCatalog.xmi</tt> and registers
- * them as {@link SecurityCatalog} {@link Supplier}.
+ * Tracks files named <tt>(bundle).{suppliedClassSimpleName}.xmi</tt> and registers
+ * them as {suppliedClassSimpleName} {@link Supplier}.
  * 
  * Usage:
  * 
  * <pre>{@code
- * <bean id="securityCatalogXmiTracker" class="org.soluvas.security.SecurityCatalogXmiTracker">
- * 	<argument value="berbatik" />
- * 	<argument value="dev" />
- * </bean>
- * <bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close">
- * 	<argument ref="blueprintBundleContext" />
- * 	<argument value="32" />
- * 	<argument ref="securityCatalogXmiTracker" />
- * </bean>
+ * 	<bean id="securityCatalogXmiTracker" class="org.soluvas.commons.XmiTracker">
+ * 		<argument value="org.soluvas.security.SecurityPackage" />
+ * 		<argument value="org.soluvas.security.SecurityCatalog" />
+ * 		<argument value="${tenantId}" />
+ * 		<argument value="${tenantEnv}" />
+ * 	</bean>
+ * 	<bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close">
+ * 		<argument ref="blueprintBundleContext" />
+ * 		<argument value="32" />
+ * 		<argument ref="securityCatalogXmiTracker" />
+ * 	</bean>
  * }</pre>
  * 
  * @author ceefour
@@ -97,33 +99,51 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 	@Nullable
 	public List<ServiceRegistration<Supplier>> addingBundle(@Nonnull Bundle bundle,
 			@Nonnull BundleEvent event) {
-		final String path = bundle.getSymbolicName().replace('.', '/');
-		final String filePattern = "*." + suppliedClassSimpleName + ".xmi";
-		log.trace("Scanning {} [{}] for {}/{}", bundle.getSymbolicName(), bundle.getBundleId(),
-				path , filePattern);
-		final Enumeration<URL> entries = bundle.findEntries(path, filePattern, false);
-		if (entries == null) {
+		final Builder<ServiceRegistration<Supplier>> svcRegs = ImmutableList.builder();
+		try {
+			final String path = bundle.getSymbolicName().replace('.', '/');
+			final String filePattern = "*." + suppliedClassSimpleName + ".xmi";
+			log.trace("Scanning {} [{}] for {}/{}", bundle.getSymbolicName(), bundle.getBundleId(),
+					path , filePattern);
+			final Enumeration<URL> entries = bundle.findEntries(path, filePattern, false);
+			if (entries == null) {
+				return null;
+			}
+			while (entries.hasMoreElements()) {
+				final URL url = entries.nextElement();
+				log.debug("Registering Supplier for {} from {}", suppliedClassName, url);
+				final XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(ePackage, url,
+						bundle);
+				final Dictionary<String, String> props = new Hashtable<String, String>();
+				props.put("suppliedClass", suppliedClassName);
+				props.put("layer", "module");
+				props.put("tenantId", tenantId);
+				props.put("tenantEnv", tenantEnv);
+				final ServiceRegistration<Supplier> svcReg = bundle.getBundleContext()
+						.registerService(Supplier.class, loader, props);
+				svcRegs.add(svcReg);
+			}
+			final List<ServiceRegistration<Supplier>> svcRegList = svcRegs.build();
+			log.info("Registered {} {} suppliers from {} [{}]",
+					svcRegList.size(), suppliedClassSimpleName, bundle.getSymbolicName(), bundle.getBundleId());
+			return svcRegList;
+		} catch (Exception e) {
+			final List<ServiceRegistration<Supplier>> svcRegList = svcRegs.build();
+			// Undo registrations
+			if (!svcRegList.isEmpty()) {
+				log.info("Unregistering {} {} suppliers due to {}",
+						svcRegList.size(), suppliedClassSimpleName, e);
+				for (final ServiceRegistration<Supplier> svcReg : svcRegList) {
+					try {
+						svcReg.unregister();
+					} catch (Exception e1) {
+						log.warn("Cannot unregister " + svcReg, e);
+					}
+				}
+			}
+			log.error("Cannot scan " + bundle + " for " + suppliedClassSimpleName, e);
 			return null;
 		}
-		final Builder<ServiceRegistration<Supplier>> svcRegs = ImmutableList.builder();
-		while (entries.hasMoreElements()) {
-			final URL url = entries.nextElement();
-			log.debug("Registering Supplier for {} from {}", suppliedClassName, url);
-			final XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(ePackage, url,
-					bundle);
-			final Dictionary<String, String> props = new Hashtable<String, String>();
-			props.put("suppliedClass", suppliedClassName);
-			props.put("layer", "module");
-			props.put("tenantId", tenantId);
-			props.put("tenantEnv", tenantEnv);
-			final ServiceRegistration<Supplier> svcReg = bundle.getBundleContext()
-					.registerService(Supplier.class, loader, props);
-			svcRegs.add(svcReg);
-		}
-		final List<ServiceRegistration<Supplier>> svcRegList = svcRegs.build();
-		log.info("Registered {} SecurityCatalog suppliers from {} [{}]",
-				svcRegList.size(), bundle.getSymbolicName(), bundle.getBundleId());
-		return svcRegList;
 	}
 
 	@Override
@@ -136,9 +156,9 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 			@Nullable List<ServiceRegistration<Supplier>> svcRegs) {
 		if (svcRegs == null)
 			return;
-		log.debug("Unregistering {} SecurityCatalog suppliers from {} [{}]",
-				svcRegs.size(), bundle.getSymbolicName(), bundle.getBundleId());
-		for (ServiceRegistration<Supplier> svcReg : svcRegs) {
+		log.debug("Unregistering {} {} suppliers from {} [{}]",
+				svcRegs.size(), suppliedClassSimpleName, bundle.getSymbolicName(), bundle.getBundleId());
+		for (final ServiceRegistration<Supplier> svcReg : svcRegs) {
 			try {
 				svcReg.unregister();
 			} catch (Exception e) {
@@ -146,8 +166,8 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 						bundle.getSymbolicName(), bundle.getBundleId());
 			}
 		}
-		log.info("Unregistered {} SecurityCatalog suppliers from {} [{}]",
-				svcRegs.size(), bundle.getSymbolicName(), bundle.getBundleId());
+		log.info("Unregistered {} {} suppliers from {} [{}]",
+				svcRegs.size(), suppliedClassSimpleName, bundle.getSymbolicName(), bundle.getBundleId());
 	}
 
 }

@@ -247,4 +247,14 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "XmiObjectLoader ["
+				+ (ePackageName != null ? "ePackageName=" + ePackageName : "")
+				+ "]";
+	}
+
 }

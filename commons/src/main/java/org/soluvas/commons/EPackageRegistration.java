@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -72,10 +73,25 @@ public class EPackageRegistration {
 	}
 
 	@SuppressWarnings("unchecked")
-	public EPackageRegistration(@Nonnull BundleContext bundleContext, @Nonnull Iterable<?> packageClasses) {
+	public EPackageRegistration(@Nonnull final BundleContext bundleContext, @Nonnull Iterable<?> packageClasses) {
 		super();
 		this.bundleContext = bundleContext;
-		this.packages = (Iterable<Class<EPackage>>) packageClasses;
+		this.packages = ImmutableList.copyOf(Iterables.transform(packageClasses, new Function<Object, Class<EPackage>>() {
+			@Override
+			@Nullable
+			public Class<EPackage> apply(@Nullable Object input) {
+				if (input instanceof Class) {
+					return (Class<EPackage>) input;
+				} else if (input instanceof String) {
+					try {
+						return (Class<EPackage>) bundleContext.getBundle().loadClass((String) input);
+					} catch (ClassNotFoundException e) {
+						throw new IllegalArgumentException("Cannot load EPackage class " + input, e);
+					}
+				} else
+					throw new IllegalArgumentException("Unrecognized EPackage class: " + input);
+			}
+		}));
 	}
 
 	/**
