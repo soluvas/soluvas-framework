@@ -159,5 +159,5 @@ public class ServiceXmiTracker<T extends EObject> implements BundleTrackerCustom
 		log.info("Unregistered {} {} svcRegs from {} [{}]",
 				svcRegs.size(), suppliedClassSimpleName, bundle.getSymbolicName(), bundle.getBundleId());
 	}
-
+	
 }
