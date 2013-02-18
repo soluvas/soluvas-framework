@@ -83,6 +83,7 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				T1 result = caseAppManifest(appManifest);
 				if (result == null) result = casePositionable(appManifest);
 				if (result == null) result = caseResourceAware(appManifest);
+				if (result == null) result = caseBundleAware(appManifest);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -193,6 +194,9 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 			case CommonsPackage.WEB_ADDRESS: {
 				WebAddress webAddress = (WebAddress)theEObject;
 				T1 result = caseWebAddress(webAddress);
+				if (result == null) result = casePositionable(webAddress);
+				if (result == null) result = caseBundleAware(webAddress);
+				if (result == null) result = caseResourceAware(webAddress);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

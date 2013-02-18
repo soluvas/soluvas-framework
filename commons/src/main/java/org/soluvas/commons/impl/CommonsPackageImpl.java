@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons.impl;
 
+import java.io.File;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -75,11 +76,10 @@ import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.ShellProgressMonitor;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.commons.Timestamped;
-
 import org.soluvas.commons.WebAddress;
+
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
-import java.io.File;
 
 /**
  * <!-- begin-user-doc -->
@@ -681,6 +681,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_Domain() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(2);
 	}
@@ -860,6 +861,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDescribable_Description() {
 		return (EAttribute)describableEClass.getEStructuralFeatures().get(0);
 	}
@@ -959,6 +961,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEClassLinked_EPackageNsPrefix() {
 		return (EAttribute)eClassLinkedEClass.getEStructuralFeatures().get(2);
 	}
@@ -988,6 +991,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSchemaVersionable() {
 		return schemaVersionableEClass;
 	}
@@ -997,6 +1001,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEFactoryLinked() {
 		return eFactoryLinkedEClass;
 	}
@@ -1006,6 +1011,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEFactoryLinked_EFactory() {
 		return (EReference)eFactoryLinkedEClass.getEStructuralFeatures().get(0);
 	}
@@ -1015,6 +1021,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNsPrefixable() {
 		return nsPrefixableEClass;
 	}
@@ -1024,6 +1031,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNsPrefixable_NsPrefix() {
 		return (EAttribute)nsPrefixableEClass.getEStructuralFeatures().get(0);
 	}
@@ -1033,6 +1041,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getWebAddress() {
 		return webAddressEClass;
 	}
@@ -1042,6 +1051,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWebAddress_BaseUri() {
 		return (EAttribute)webAddressEClass.getEStructuralFeatures().get(0);
 	}
@@ -1051,6 +1061,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWebAddress_BasePath() {
 		return (EAttribute)webAddressEClass.getEStructuralFeatures().get(1);
 	}
@@ -1060,6 +1071,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWebAddress_ApiPath() {
 		return (EAttribute)webAddressEClass.getEStructuralFeatures().get(2);
 	}
@@ -1069,6 +1081,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWebAddress_ImagesUri() {
 		return (EAttribute)webAddressEClass.getEStructuralFeatures().get(3);
 	}
@@ -1078,6 +1091,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWebAddress_SkinUri() {
 		return (EAttribute)webAddressEClass.getEStructuralFeatures().get(4);
 	}
@@ -1087,6 +1101,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWebAddress_JsUri() {
 		return (EAttribute)webAddressEClass.getEStructuralFeatures().get(5);
 	}
@@ -1096,6 +1111,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWebAddress_SecureBaseUri() {
 		return (EAttribute)webAddressEClass.getEStructuralFeatures().get(6);
 	}
@@ -1105,6 +1121,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWebAddress_SecureImagesUri() {
 		return (EAttribute)webAddressEClass.getEStructuralFeatures().get(7);
 	}
@@ -1114,6 +1131,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWebAddress_SecureSkinUri() {
 		return (EAttribute)webAddressEClass.getEStructuralFeatures().get(8);
 	}
@@ -1123,6 +1141,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWebAddress_SecureJsUri() {
 		return (EAttribute)webAddressEClass.getEStructuralFeatures().get(9);
 	}
@@ -1132,6 +1151,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAdded() {
 		return addedEClass;
 	}
@@ -1141,6 +1161,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getModelNotification() {
 		return modelNotificationEClass;
 	}
@@ -1150,6 +1171,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getModelNotification_Container() {
 		return (EReference)modelNotificationEClass.getEStructuralFeatures().get(0);
 	}
@@ -1159,6 +1181,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAttributeSet() {
 		return attributeSetEClass;
 	}
@@ -1168,6 +1191,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAttributeUnset() {
 		return attributeUnsetEClass;
 	}
@@ -1177,6 +1201,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRemoved() {
 		return removedEClass;
 	}
@@ -1186,6 +1211,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getObjectNotification() {
 		return objectNotificationEClass;
 	}
@@ -1195,6 +1221,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getObjectNotification_Object() {
 		return (EAttribute)objectNotificationEClass.getEStructuralFeatures().get(0);
 	}
@@ -1204,6 +1231,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAttributeNotification() {
 		return attributeNotificationEClass;
 	}
@@ -1213,6 +1241,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAttributeNotification_Attribute() {
 		return (EReference)attributeNotificationEClass.getEStructuralFeatures().get(0);
 	}
@@ -1222,6 +1251,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttributeNotification_Object() {
 		return (EAttribute)attributeNotificationEClass.getEStructuralFeatures().get(1);
 	}
@@ -1231,6 +1261,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttributeNotification_OldValue() {
 		return (EAttribute)attributeNotificationEClass.getEStructuralFeatures().get(2);
 	}
@@ -1240,6 +1271,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttributeNotification_NewValue() {
 		return (EAttribute)attributeNotificationEClass.getEStructuralFeatures().get(3);
 	}
@@ -1249,6 +1281,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAddedMany() {
 		return addedManyEClass;
 	}
@@ -1258,6 +1291,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRemovedMany() {
 		return removedManyEClass;
 	}
@@ -1267,6 +1301,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getObjectsNotification() {
 		return objectsNotificationEClass;
 	}
@@ -1276,6 +1311,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getObjectsNotification_Objects() {
 		return (EAttribute)objectsNotificationEClass.getEStructuralFeatures().get(0);
 	}
@@ -1285,6 +1321,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEObjectLinked() {
 		return eObjectLinkedEClass;
 	}
@@ -1294,6 +1331,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getParentable() {
 		return parentableEClass;
 	}
@@ -1303,6 +1341,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getParentable_Parent() {
 		return (EReference)parentableEClass.getEStructuralFeatures().get(0);
 	}
@@ -1312,6 +1351,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCategoryLike() {
 		return categoryLikeEClass;
 	}
@@ -1321,6 +1361,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategoryLike_SlugPath() {
 		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(0);
 	}
@@ -1330,6 +1371,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategoryLike_Color() {
 		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(1);
 	}
@@ -1339,6 +1381,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategoryLike_ImageId() {
 		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(2);
 	}
@@ -1348,6 +1391,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategoryLike_Level() {
 		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(3);
 	}
@@ -1357,6 +1401,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategoryLike_CategoryCount() {
 		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(4);
 	}
@@ -1366,6 +1411,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCategoryInfo() {
 		return categoryInfoEClass;
 	}
@@ -1375,6 +1421,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCategoryInfo_Parents() {
 		return (EReference)categoryInfoEClass.getEStructuralFeatures().get(0);
 	}
@@ -1384,6 +1431,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getProgressMonitor() {
 		return progressMonitorEClass;
 	}
@@ -1393,6 +1441,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getProgressMonitor_Canceled() {
 		return (EAttribute)progressMonitorEClass.getEStructuralFeatures().get(0);
 	}
@@ -1402,6 +1451,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getProgressMonitor_TaskName() {
 		return (EAttribute)progressMonitorEClass.getEStructuralFeatures().get(1);
 	}
@@ -1411,6 +1461,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getShellProgressMonitor() {
 		return shellProgressMonitorEClass;
 	}
@@ -1420,6 +1471,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getProgressMonitorWrapper() {
 		return progressMonitorWrapperEClass;
 	}
@@ -1429,6 +1481,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getProgressMonitorWrapper_Delegate() {
 		return (EReference)progressMonitorWrapperEClass.getEStructuralFeatures().get(0);
 	}
@@ -1478,6 +1531,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getProgressStatus() {
 		return progressStatusEEnum;
 	}
@@ -1617,6 +1671,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getBigMoneyProvider() {
 		return bigMoneyProviderEDataType;
 	}
@@ -1626,6 +1681,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getQuantity() {
 		return quantityEDataType;
 	}
@@ -1635,6 +1691,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getMeasurable() {
 		return measurableEDataType;
 	}
@@ -1644,6 +1701,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getBigDecimal() {
 		return bigDecimalEDataType;
 	}
@@ -1653,6 +1711,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getDateTimeZone() {
 		return dateTimeZoneEDataType;
 	}
@@ -1662,6 +1721,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getLocale() {
 		return localeEDataType;
 	}
@@ -1671,6 +1731,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getFile() {
 		return fileEDataType;
 	}
@@ -1952,12 +2013,16 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		// Add supertypes to classes
 		appManifestEClass.getESuperTypes().add(this.getPositionable());
 		appManifestEClass.getESuperTypes().add(this.getResourceAware());
+		appManifestEClass.getESuperTypes().add(this.getBundleAware());
 		personInfoEClass.getESuperTypes().add(this.getIdentifiable());
 		personInfoEClass.getESuperTypes().add(this.getPhotoIdContainer());
 		personInfoEClass.getESuperTypes().add(this.getSluggable());
 		personInfoEClass.getESuperTypes().add(this.getNameContainer());
 		photoIdContainerEClass.getESuperTypes().add(this.getImageable());
 		nameContainerEClass.getESuperTypes().add(this.getNameable());
+		webAddressEClass.getESuperTypes().add(this.getPositionable());
+		webAddressEClass.getESuperTypes().add(this.getBundleAware());
+		webAddressEClass.getESuperTypes().add(this.getResourceAware());
 		g1 = createEGenericType(this.getObjectNotification());
 		EGenericType g2 = createEGenericType(addedEClass_T);
 		g1.getETypeArguments().add(g2);
@@ -2693,6 +2758,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   new String[] {
 			 "documentation", " * An abstract wrapper around a progress monitor which,\n * unless overridden, forwards <code>IProgressMonitor</code>\n * and <code>IProgressMonitorWithBlocking</code> methods to the wrapped progress monitor.\n * <p>\n * This class can be used without OSGi running.\n * </p><p>\n * Clients may subclass.\n * </p>\n"
 		   });
+	}
+	
+	public static CommonsPackage getInstance() {
+		return eINSTANCE;
 	}
 
 } //CommonsPackageImpl

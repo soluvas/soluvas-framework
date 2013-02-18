@@ -3,16 +3,17 @@
 package org.soluvas.commons.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.osgi.framework.Bundle;
 import org.soluvas.commons.AppManifest;
+import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,6 +26,7 @@ import org.soluvas.commons.ResourceType;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getResourceUri <em>Resource Uri</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getResourceName <em>Resource Name</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getBundle <em>Bundle</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDomain <em>Domain</em>}</li>
@@ -34,6 +36,11 @@ import org.soluvas.commons.ResourceType;
  * @generated
  */
 public class AppManifestImpl extends EObjectImpl implements AppManifest {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The default value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -113,6 +120,26 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * @ordered
 	 */
 	protected String resourceName = RESOURCE_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getBundle() <em>Bundle</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBundle()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Bundle BUNDLE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getBundle() <em>Bundle</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBundle()
+	 * @generated
+	 * @ordered
+	 */
+	protected Bundle bundle = BUNDLE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
@@ -198,6 +225,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getPositioner() {
 		return positioner;
 	}
@@ -207,6 +235,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPositioner(Integer newPositioner) {
 		Integer oldPositioner = positioner;
 		positioner = newPositioner;
@@ -219,6 +248,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	@JsonIgnore
 	public String getResourceUri() {
 		return resourceUri;
 	}
@@ -228,6 +259,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceUri(String newResourceUri) {
 		String oldResourceUri = resourceUri;
 		resourceUri = newResourceUri;
@@ -240,6 +272,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	@JsonIgnore
 	public String getResourceName() {
 		return resourceName;
 	}
@@ -249,6 +283,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceName(String newResourceName) {
 		String oldResourceName = resourceName;
 		resourceName = newResourceName;
@@ -261,6 +296,32 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	@JsonIgnore
+	public Bundle getBundle() {
+		return bundle;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setBundle(Bundle newBundle) {
+		Bundle oldBundle = bundle;
+		bundle = newBundle;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__BUNDLE, oldBundle, bundle));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@JsonIgnore
 	public ResourceType getResourceType() {
 		return resourceType;
 	}
@@ -270,6 +331,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceType(ResourceType newResourceType) {
 		ResourceType oldResourceType = resourceType;
 		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
@@ -282,6 +344,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getTitle() {
 		return title;
 	}
@@ -291,6 +354,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTitle(String newTitle) {
 		String oldTitle = title;
 		title = newTitle;
@@ -303,6 +367,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -312,6 +377,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		String oldDescription = description;
 		description = newDescription;
@@ -324,6 +390,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDomain() {
 		return domain;
 	}
@@ -333,6 +400,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomain(String newDomain) {
 		String oldDomain = domain;
 		domain = newDomain;
@@ -356,6 +424,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return getResourceUri();
 			case CommonsPackage.APP_MANIFEST__RESOURCE_NAME:
 				return getResourceName();
+			case CommonsPackage.APP_MANIFEST__BUNDLE:
+				return getBundle();
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				return getTitle();
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
@@ -385,6 +455,9 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return;
 			case CommonsPackage.APP_MANIFEST__RESOURCE_NAME:
 				setResourceName((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__BUNDLE:
+				setBundle((Bundle)newValue);
 				return;
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				setTitle((String)newValue);
@@ -419,6 +492,9 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 			case CommonsPackage.APP_MANIFEST__RESOURCE_NAME:
 				setResourceName(RESOURCE_NAME_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__BUNDLE:
+				setBundle(BUNDLE_EDEFAULT);
+				return;
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				setTitle(TITLE_EDEFAULT);
 				return;
@@ -448,6 +524,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
 			case CommonsPackage.APP_MANIFEST__RESOURCE_NAME:
 				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
+			case CommonsPackage.APP_MANIFEST__BUNDLE:
+				return BUNDLE_EDEFAULT == null ? bundle != null : !BUNDLE_EDEFAULT.equals(bundle);
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
@@ -473,6 +551,12 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				default: return -1;
 			}
 		}
+		if (baseClass == BundleAware.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.APP_MANIFEST__BUNDLE: return CommonsPackage.BUNDLE_AWARE__BUNDLE;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -488,6 +572,12 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				case CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE: return CommonsPackage.APP_MANIFEST__RESOURCE_TYPE;
 				case CommonsPackage.RESOURCE_AWARE__RESOURCE_URI: return CommonsPackage.APP_MANIFEST__RESOURCE_URI;
 				case CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME: return CommonsPackage.APP_MANIFEST__RESOURCE_NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == BundleAware.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.BUNDLE_AWARE__BUNDLE: return CommonsPackage.APP_MANIFEST__BUNDLE;
 				default: return -1;
 			}
 		}
@@ -512,6 +602,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 		result.append(resourceUri);
 		result.append(", resourceName: ");
 		result.append(resourceName);
+		result.append(", bundle: ");
+		result.append(bundle);
 		result.append(", title: ");
 		result.append(title);
 		result.append(", description: ");

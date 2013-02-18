@@ -25,7 +25,7 @@ package org.soluvas.commons;
  * @model
  * @generated
  */
-public interface AppManifest extends Positionable, ResourceAware {
+public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 	/**
 	 * Returns the value of the '<em><b>Title</b></em>' attribute.
 	 * <!-- begin-user-doc -->
