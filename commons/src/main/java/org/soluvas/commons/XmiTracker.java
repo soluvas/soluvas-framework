@@ -2,7 +2,6 @@ package org.soluvas.commons;
 
 import java.net.URL;
 import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -17,6 +16,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.BundleTrackerCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.impl.XmiTrackerUtils;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
@@ -101,16 +101,11 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 			@Nonnull BundleEvent event) {
 		final Builder<ServiceRegistration<Supplier>> svcRegs = ImmutableList.builder();
 		try {
-			final String path = bundle.getSymbolicName().replace('.', '/');
-			final String filePattern = "*." + suppliedClassSimpleName + ".xmi";
-			log.trace("Scanning {} [{}] for {}/{}", bundle.getSymbolicName(), bundle.getBundleId(),
-					path , filePattern);
-			final Enumeration<URL> entries = bundle.findEntries(path, filePattern, false);
-			if (entries == null) {
+			final List<URL> entries = XmiTrackerUtils.scan(bundle, suppliedClassSimpleName);
+			if (entries.isEmpty()) {
 				return null;
 			}
-			while (entries.hasMoreElements()) {
-				final URL url = entries.nextElement();
+			for (final URL url : entries) {
 				log.debug("Registering Supplier for {} from {}", suppliedClassName, url);
 				final XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(ePackage, url,
 						bundle);

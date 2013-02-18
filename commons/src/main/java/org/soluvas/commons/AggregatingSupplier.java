@@ -148,7 +148,7 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 						return existingPositioner > childPositioner;
 					}
 				});
-				log.debug("Adding {}[{}] at {} of {}", copiedChild.eClass().getName(),
+				log.trace("Adding {}[{}] at {} of {}", copiedChild.eClass().getName(),
 						copiedChild instanceof Positionable ? childPositioner : "NA",
 							newIndex, aggregateContainment.size());
 				if (newIndex >= 0) {

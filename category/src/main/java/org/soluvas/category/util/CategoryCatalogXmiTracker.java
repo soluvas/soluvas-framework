@@ -1,7 +1,6 @@
 package org.soluvas.category.util;
 
 import java.net.URL;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -17,12 +16,12 @@ import org.soluvas.category.CategoryCatalog;
 import org.soluvas.category.CategoryPackage;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.XmiObjectLoader;
+import org.soluvas.commons.impl.XmiTrackerUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 
@@ -75,13 +74,7 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 		final String path = bundle.getSymbolicName().replace('.', '/');
 		
 		// ------------------ Scan CategoryCatalogs ------------
-		final String xmiFilePattern = "*." + suppliedClassSimpleName + ".xmi";
-		log.trace("Scanning {} [{}] for {}/{}", bundle.getSymbolicName(), bundle.getBundleId(),
-				path , xmiFilePattern);
-		final Enumeration<URL> entries = bundle.findEntries(path, xmiFilePattern, false);
-		if (entries == null)
-			return ImmutableList.of();
-		final List<URL> xmiFiles = ImmutableList.copyOf(Iterators.forEnumeration(entries));
+		final List<URL> xmiFiles = XmiTrackerUtils.scan(bundle, suppliedClassSimpleName);
 		if (xmiFiles.isEmpty())
 			return ImmutableList.of();
 
