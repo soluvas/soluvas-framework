@@ -7,8 +7,6 @@
 
 	<cm:property-placeholder persistent-id="org.soluvas" update-strategy="none">
 		<cm:default-properties>
-			<cm:property name="defaultClientId"				value="tuneeca" />
-			<cm:property name="defaultTenantEnv"			value="dev" />
 		</cm:default-properties>
 	</cm:property-placeholder>
 
@@ -54,8 +52,8 @@
 
 	<bean id="svcLookup" class="org.soluvas.commons.tenant.MultitenantServiceLookup">
 		<argument ref="blueprintBundleContext"/>
-		<argument value="${defaultClientId}"/>
-		<argument value="${defaultTenantEnv}"/>
+		<argument value="${clientId}"/>
+		<argument value="${tenantEnv}"/>
 	</bean>
 	<service ref="svcLookup" auto-export="interfaces"/>
 	
