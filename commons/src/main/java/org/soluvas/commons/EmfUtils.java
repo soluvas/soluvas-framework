@@ -25,7 +25,12 @@ public class EmfUtils {
 
 	private static transient Logger log = LoggerFactory.getLogger(EmfUtils.class);
 	
-	public static EPackage getEPackage(Class<? extends EPackage> pkg) {
+	/**
+	 * Synchronized so that access to global {@link EPackage} Registry is safe.
+	 * @param pkg
+	 * @return
+	 */
+	public static synchronized EPackage getEPackage(Class<? extends EPackage> pkg) {
 		try {
 			final Field eInstanceField = pkg.getDeclaredField("eINSTANCE");
 			final EPackage ePackage = (EPackage) eInstanceField.get(pkg);
@@ -36,7 +41,13 @@ public class EmfUtils {
 		}
 	}
 
-	public static EFactory getEFactory(@Nonnull Class<? extends EFactory> eFactoryClass) {
+	/**
+	 * Synchronized so that access to global {@link EFactory} Registry (is there any?) is safe.
+	 * The EFactory will access EPackage anyway.
+	 * @param eFactoryClass
+	 * @return
+	 */
+	public static synchronized EFactory getEFactory(@Nonnull Class<? extends EFactory> eFactoryClass) {
 		try {
 			Field eInstanceField = eFactoryClass.getDeclaredField("eINSTANCE");
 			EFactory eFactory = (EFactory) eInstanceField.get(eFactoryClass);
