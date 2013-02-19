@@ -1,12 +1,14 @@
 package org.soluvas.commons;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.osgi.framework.BundleContext;
@@ -98,23 +100,32 @@ public class EPackageRegistration {
 	 * Call this to register the {@link EPackage}s.
 	 */
 	public void init() {
-		for (Class<? extends EPackage> pkg : packages) {
+		for (final Class<? extends EPackage> pkg : packages) {
 			try {
-				log.debug("Registering EPackage {}", pkg.getName());
-				EPackage ePackage = EmfUtils.getEPackage(pkg);
+				log.trace("Registering EPackage {}", pkg.getName());
+				final EPackage ePackage = EmfUtils.getEPackage(pkg);
 				EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
+				log.debug("Registered EPackage {}, global registry now has {} entries",
+						pkg.getName(), EPackage.Registry.INSTANCE.size());
 				
-				List<String> pkgInterfaces = Lists.transform( ImmutableList.copyOf(ePackage.getClass().getInterfaces()), new ClassToName());
-				ServiceRegistration<?> reg = bundleContext.registerService(pkgInterfaces.toArray(new String[] {}),
-						ePackage, new Hashtable<String, Object>());
-				log.trace("Registered EPackage service {}", reg);
+				final List<Class<?>> ePackageInterfaces = ClassUtils.getAllInterfaces(ePackage.getClass());
+				final List<String> ePackageInterfaceNames = Lists.transform( ePackageInterfaces, new ClassToName());
+				final Dictionary<String, Object> svcProps = new Hashtable<String, Object>();
+				svcProps.put("name", ePackage.getName());
+				svcProps.put("nsURI", ePackage.getNsURI());
+				svcProps.put("nsPrefix", ePackage.getNsPrefix());
+				final ServiceRegistration<?> reg = bundleContext.registerService(ePackageInterfaceNames.toArray(new String[] {}),
+						ePackage, svcProps);
+				log.trace("Registered EPackage service {} using {}", reg, ePackageInterfaceNames);
 				pkgRegs.add(reg);
 				
-				EFactory eFactory = ePackage.getEFactoryInstance();
-				Preconditions.checkNotNull(eFactory, "Cannot get EFactory for EPackage %s [%s]", ePackage.getName(), ePackage.getNsURI());
-				List<String> factoryInterfaces = Lists.transform( ImmutableList.copyOf(eFactory.getClass().getInterfaces()), new ClassToName());
-				ServiceRegistration<?> factoryReg = bundleContext.registerService(factoryInterfaces.toArray(new String[] {}),
-						eFactory, new Hashtable<String, Object>());
+				final EFactory eFactory = Preconditions.checkNotNull(ePackage.getEFactoryInstance(),
+					"Cannot get EFactory for EPackage %s [%s]",
+					ePackage.getName(), ePackage.getNsURI());
+				final List<Class<?>> eFactoryInterfaces = ClassUtils.getAllInterfaces(eFactory.getClass());
+				final List<String> eFactoryInterfaceNames = Lists.transform( eFactoryInterfaces, new ClassToName());
+				final ServiceRegistration<?> factoryReg = bundleContext.registerService(eFactoryInterfaceNames.toArray(new String[] {}),
+						eFactory, svcProps);
 				log.trace("Registered EFactory service {}", factoryReg);
 				factoryRegs.add(factoryReg);
 			} catch (Exception e) {
@@ -143,9 +154,9 @@ public class EPackageRegistration {
 			try {
 				String packageNsUri = (String) pkg.getDeclaredField("eNS_URI")
 						.get(pkg);
-				log.debug("Unloading EMF Package {} by {}", packageNsUri,
-						pkg.getName());
 				EPackage.Registry.INSTANCE.remove(packageNsUri);
+				log.debug("Unregistered EMF Package {} by {}, global registry now has {} entries",
+						packageNsUri, pkg.getName(), EPackage.Registry.INSTANCE.size());
 			} catch (Exception e) {
 				log.error("Cannot unload EMF Package " + pkg.getName(), e);
 			}
