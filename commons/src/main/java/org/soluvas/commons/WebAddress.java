@@ -32,10 +32,9 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.commons.CommonsPackage#getWebAddress()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface WebAddress extends SerializableEObject {
+public interface WebAddress extends Positionable, BundleAware, ResourceAware {
 	/**
 	 * Returns the value of the '<em><b>Base Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->

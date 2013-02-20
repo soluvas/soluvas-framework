@@ -31,7 +31,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="positioner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
         defaultValueLiteral="0"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AppManifest" eSuperTypes="#//Positionable #//ResourceAware">
+  <eClassifiers xsi:type="ecore:EClass" name="AppManifest" eSuperTypes="#//Positionable #//ResourceAware #//BundleAware">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Attributes are optional because can use OverlayingSupplier."/>
     </eAnnotations>
@@ -293,7 +293,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WebAddress">
+  <eClassifiers xsi:type="ecore:EClass" name="WebAddress" eSuperTypes="#//Positionable #//BundleAware #//ResourceAware">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Tenant-wide website URI configuration."/>
     </eAnnotations>

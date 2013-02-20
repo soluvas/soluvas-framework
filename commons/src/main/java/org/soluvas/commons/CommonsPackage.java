@@ -178,13 +178,22 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__RESOURCE_NAME = POSITIONABLE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Bundle</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__BUNDLE = POSITIONABLE_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__TITLE = POSITIONABLE_FEATURE_COUNT + 3;
+	int APP_MANIFEST__TITLE = POSITIONABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -193,7 +202,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DESCRIPTION = POSITIONABLE_FEATURE_COUNT + 4;
+	int APP_MANIFEST__DESCRIPTION = POSITIONABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Domain</b></em>' attribute.
@@ -202,7 +211,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DOMAIN = POSITIONABLE_FEATURE_COUNT + 5;
+	int APP_MANIFEST__DOMAIN = POSITIONABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
@@ -211,7 +220,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 6;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}' class.
@@ -744,13 +753,58 @@ public interface CommonsPackage extends EPackage {
 	int WEB_ADDRESS = 19;
 
 	/**
+	 * The feature id for the '<em><b>Positioner</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__POSITIONER = POSITIONABLE__POSITIONER;
+
+	/**
+	 * The feature id for the '<em><b>Bundle</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__BUNDLE = POSITIONABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__RESOURCE_TYPE = POSITIONABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__RESOURCE_URI = POSITIONABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__RESOURCE_NAME = POSITIONABLE_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Base Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__BASE_URI = 0;
+	int WEB_ADDRESS__BASE_URI = POSITIONABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Base Path</b></em>' attribute.
@@ -759,7 +813,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__BASE_PATH = 1;
+	int WEB_ADDRESS__BASE_PATH = POSITIONABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Api Path</b></em>' attribute.
@@ -768,7 +822,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__API_PATH = 2;
+	int WEB_ADDRESS__API_PATH = POSITIONABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Images Uri</b></em>' attribute.
@@ -777,7 +831,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__IMAGES_URI = 3;
+	int WEB_ADDRESS__IMAGES_URI = POSITIONABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Skin Uri</b></em>' attribute.
@@ -786,7 +840,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__SKIN_URI = 4;
+	int WEB_ADDRESS__SKIN_URI = POSITIONABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Js Uri</b></em>' attribute.
@@ -795,7 +849,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__JS_URI = 5;
+	int WEB_ADDRESS__JS_URI = POSITIONABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Secure Base Uri</b></em>' attribute.
@@ -804,7 +858,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__SECURE_BASE_URI = 6;
+	int WEB_ADDRESS__SECURE_BASE_URI = POSITIONABLE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Secure Images Uri</b></em>' attribute.
@@ -813,7 +867,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__SECURE_IMAGES_URI = 7;
+	int WEB_ADDRESS__SECURE_IMAGES_URI = POSITIONABLE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Secure Skin Uri</b></em>' attribute.
@@ -822,7 +876,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__SECURE_SKIN_URI = 8;
+	int WEB_ADDRESS__SECURE_SKIN_URI = POSITIONABLE_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Secure Js Uri</b></em>' attribute.
@@ -831,7 +885,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__SECURE_JS_URI = 9;
+	int WEB_ADDRESS__SECURE_JS_URI = POSITIONABLE_FEATURE_COUNT + 13;
 
 	/**
 	 * The number of structural features of the '<em>Web Address</em>' class.
@@ -840,7 +894,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS_FEATURE_COUNT = 10;
+	int WEB_ADDRESS_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 14;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.EObjectLinked <em>EObject Linked</em>}' class.

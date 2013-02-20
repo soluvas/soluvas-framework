@@ -21,7 +21,9 @@ import org.soluvas.security.impl.SoluvasSessionFactory;
 
 /**
  * @author rio
- *
+ * @todo Should this extend DefaultSecurityManager of DefaultWebSecurityManager?
+ * 		Because DefaultWebSecurityManager expects an implementation of
+ * 		WebSessionManager, it's not compatible with DefaultSessionManager.
  */
 public class SoluvasSecurityManager extends DefaultWebSecurityManager {
 
@@ -30,7 +32,7 @@ public class SoluvasSecurityManager extends DefaultWebSecurityManager {
 	
 	public SoluvasSecurityManager(SessionDAO sessionDao) {
 		super();
-		final DefaultSessionManager sessionManager = new DefaultSessionManager();
+		final DefaultSessionManager sessionManager = new SoluvasSessionManager();
 		sessionManager.setSessionFactory(new SoluvasSessionFactory());
 		sessionManager.setSessionDAO(sessionDao);
 		setSessionManager(sessionManager);
