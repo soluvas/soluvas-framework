@@ -30,6 +30,7 @@ public class ShellProgressMonitorImpl extends ProgressMonitorImpl implements She
 	protected double totalWork = 100.0;
 	protected double worked = 0.0;
 	protected DateTime startTime;
+	protected Long lastRenderTime;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -96,6 +97,7 @@ public class ShellProgressMonitorImpl extends ProgressMonitorImpl implements She
 		}
 
 		System.out.flush();
+		lastRenderTime = System.currentTimeMillis();
 	}
 
 	@Override
@@ -130,7 +132,10 @@ public class ShellProgressMonitorImpl extends ProgressMonitorImpl implements She
 	@Override
 	public void worked(int work, ProgressStatus status) {
 		worked = worked + work;
-		renderProgressBar();
+		// only render after 100ms has elapsed, so won't slow down operation
+		if (lastRenderTime == null || System.currentTimeMillis() - lastRenderTime >= 100) {
+			renderProgressBar();
+		}
 	}
 
 } //ShellProgressMonitorImpl

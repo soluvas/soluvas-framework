@@ -30,6 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getSlug <em>Slug</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getGender <em>Gender</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getEmail <em>Email</em>}</li>
  * </ul>
  * </p>
  *
@@ -135,6 +136,26 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 	 * @ordered
 	 */
 	protected Gender gender = GENDER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getEmail() <em>Email</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEmail()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EMAIL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getEmail() <em>Email</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEmail()
+	 * @generated
+	 * @ordered
+	 */
+	protected String email = EMAIL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -290,6 +311,27 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEmail(String newEmail) {
+		String oldEmail = email;
+		email = newEmail;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON_INFO__EMAIL, oldEmail, email));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -303,6 +345,8 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 				return getName();
 			case CommonsPackage.PERSON_INFO__GENDER:
 				return getGender();
+			case CommonsPackage.PERSON_INFO__EMAIL:
+				return getEmail();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -329,6 +373,9 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 				return;
 			case CommonsPackage.PERSON_INFO__GENDER:
 				setGender((Gender)newValue);
+				return;
+			case CommonsPackage.PERSON_INFO__EMAIL:
+				setEmail((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -357,6 +404,9 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 			case CommonsPackage.PERSON_INFO__GENDER:
 				setGender(GENDER_EDEFAULT);
 				return;
+			case CommonsPackage.PERSON_INFO__EMAIL:
+				setEmail(EMAIL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -379,6 +429,8 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case CommonsPackage.PERSON_INFO__GENDER:
 				return gender != GENDER_EDEFAULT;
+			case CommonsPackage.PERSON_INFO__EMAIL:
+				return EMAIL_EDEFAULT == null ? email != null : !EMAIL_EDEFAULT.equals(email);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -479,6 +531,8 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 		result.append(name);
 		result.append(", gender: ");
 		result.append(gender);
+		result.append(", email: ");
+		result.append(email);
 		result.append(')');
 		return result.toString();
 	}

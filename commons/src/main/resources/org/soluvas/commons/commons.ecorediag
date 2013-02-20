@@ -113,6 +113,10 @@
         <element xmi:type="ecore:EAttribute" href="commons.ecore#//PersonInfo/gender"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_In9ZgTJQEeKBp9P6a8Rz8A"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_EYUx8HsuEeKzcpgurvL3VQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="commons.ecore#//PersonInfo/email"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EYUx8XsuEeKzcpgurvL3VQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_IQbqUTJQEeKBp9P6a8Rz8A"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_IQbqUjJQEeKBp9P6a8Rz8A"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_IQbqUzJQEeKBp9P6a8Rz8A"/>

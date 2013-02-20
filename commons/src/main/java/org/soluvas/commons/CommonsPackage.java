@@ -297,13 +297,22 @@ public interface CommonsPackage extends EPackage {
 	int PERSON_INFO__GENDER = IDENTIFIABLE_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Email</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_INFO__EMAIL = IDENTIFIABLE_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Person Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_INFO_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 4;
+	int PERSON_INFO_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Timestamped <em>Timestamped</em>}' class.
@@ -2050,6 +2059,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getPersonInfo_Gender();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PersonInfo#getEmail <em>Email</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Email</em>'.
+	 * @see org.soluvas.commons.PersonInfo#getEmail()
+	 * @see #getPersonInfo()
+	 * @generated
+	 */
+	EAttribute getPersonInfo_Email();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.Timestamped <em>Timestamped</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3269,6 +3289,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERSON_INFO__GENDER = eINSTANCE.getPersonInfo_Gender();
+
+		/**
+		 * The meta object literal for the '<em><b>Email</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON_INFO__EMAIL = eINSTANCE.getPersonInfo_Email();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.Timestamped <em>Timestamped</em>}' class.

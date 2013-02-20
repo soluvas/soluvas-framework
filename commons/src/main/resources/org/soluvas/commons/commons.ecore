@@ -48,6 +48,7 @@
       <details key="documentation" value="Person partial value object that is stored in Graph database (usually Neo4j) or embedded in a MongoDB document.&#xA;&#xA;The ID is Directory entry uid attribute.&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" eType="#//Gender"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Gender">
     <eLiterals name="male"/>
