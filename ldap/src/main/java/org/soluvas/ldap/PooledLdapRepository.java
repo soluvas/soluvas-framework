@@ -40,6 +40,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	}
 
 	private static Logger log = LoggerFactory.getLogger(PooledLdapRepository.class);
+	
 	@Inject
 	private final ObjectPool<LdapConnection> pool;
 	private final LdapMapper mapper;
