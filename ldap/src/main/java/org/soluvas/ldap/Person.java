@@ -33,6 +33,8 @@ public class Person implements Serializable, User {
 	@LdapAttribute("l") private String city;
 	@LdapAttribute("st") private String state;
 	@LdapAttribute("c") private String country;
+	@LdapAttribute("co") private String countryName;
+	
 	@LdapAttribute("description") private String description;
 	
 	public Person() {
@@ -236,6 +238,7 @@ public class Person implements Serializable, User {
 	}
 
 	/**
+	 * Country code.
 	 * @return the country
 	 */
 	public String getCountry() {
@@ -247,6 +250,22 @@ public class Person implements Serializable, User {
 	 */
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	/**
+	 * RFC1274: friendly country name
+	 * @return the countryName
+	 */
+	public String getCountryName() {
+		return countryName;
+	}
+
+	/**
+	 * RFC1274: friendly country name
+	 * @param countryName the countryName to set
+	 */
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
 	}
 
 	@Override
