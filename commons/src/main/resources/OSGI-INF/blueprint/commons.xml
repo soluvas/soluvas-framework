@@ -35,7 +35,8 @@
 		</service-properties>
 	</service>
 	<bean id="globalEventBusFilter" class="org.osgi.framework.FrameworkUtil" factory-method="createFilter">
-		<argument value="(&amp;(objectClass=com.google.common.base.Supplier)(tenantId=\*)(type=eventbus))" />
+		<!-- there is only one eventBus, no more (tenantId=\*) filter -->
+		<argument value="(&amp;(objectClass=com.google.common.base.Supplier)(type=eventbus))" />
 	</bean>
 	<bean id="globalEventBusSubscriberTracker" class="org.soluvas.commons.EventBusSubscriberTracker">
 		<argument ref="globalEventBus" />
