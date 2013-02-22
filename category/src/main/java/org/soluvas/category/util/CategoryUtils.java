@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.category.Category;
 
 import com.google.common.base.Function;
@@ -17,6 +19,9 @@ import com.google.common.collect.Lists;
  * 
  */
 public class CategoryUtils {
+	
+	private static final Logger log = LoggerFactory
+			.getLogger(CategoryUtils.class);
 
 	public static final class CategoryExpander implements
 			Function<Category, Iterable<Category>> {
@@ -30,6 +35,7 @@ public class CategoryUtils {
 	}
 
 	public static List<Category> flatten(@Nonnull final Iterable<Category> nestedCategories) {
+		log.debug("Found nestedCategories: {}", nestedCategories);
 		final List<Category> flatCategories = ImmutableList.copyOf(Iterables.concat(Iterables.transform(
 				nestedCategories, new CategoryExpander())));
 		return flatCategories;
