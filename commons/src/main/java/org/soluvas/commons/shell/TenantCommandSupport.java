@@ -101,9 +101,14 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 				
 				log.trace("Field {}#{} looking up {} for tenantId={} tenantEnv={} namespace={} filter: {}", new Object[] {
 						componentId, field.getName(), serviceClass.getName(), tenantId, tenantEnv, namespace, additionalFilter });
-				final String filter = "(&" + String.format("(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))",
-						tenantId, tenantEnv)
-					+ namespaceFilter + additionalFilter + ")";
+				// HACK: disable tenantId/tenantEnv filtering due to tenantId services prematurely removed
+//				final String filter = "(&" + String.format("(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))",
+//						tenantId, tenantEnv)
+//					+ namespaceFilter + additionalFilter + ")";
+				String filter = "(&" + namespaceFilter + additionalFilter + ")";
+				if ("(&)".equals(filter)) {
+					filter = null;
+				}
 				
 				final ServiceReference<?> serviceRef;
 				try {
