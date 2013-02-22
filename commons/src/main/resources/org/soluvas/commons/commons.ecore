@@ -610,4 +610,74 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="delegate" eType="#//ProgressMonitor"
         changeable="false"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AccountStatus">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Status of Account, can be use for shop , person , or mall"/>
+    </eAnnotations>
+    <eLiterals name="draft">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Member belum aktif."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="validated" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Email sudah divalidasi tapi belum aktif (bila membership dimoderasi)."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="active" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Akun aktif dan dapat digunakan."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="verified" value="3">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Akun aktif dan dapat digunakan, dan sudah diverifikasi bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator)."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="inactive" value="4">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value=" Member dinonaktifkan / suspended."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="void" value="5">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Member dihapus."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PublicationStatus">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="atribut untuk draft/published, editing. Semanticnya Drafts (Edit kayanya beda lagi, bikin ticket baru aja dech untuk Edit)."/>
+    </eAnnotations>
+    <eLiterals name="draft">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Not Yet Published"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="published" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Has published and can be viewed by authorized viewers."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="unpublished" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Was published but taken down"/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ArchivalStatus">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value=" atribut untuk new/fresh/inbox. Kalau fresh maka masuk Inbox / New Products / bolded, tidak fresh maka masuk All Mail / All Products. Semanticnya Archive. Tidak termasuk read/unread ya."/>
+    </eAnnotations>
+    <eLiterals name="fresh">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="New item"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="archived" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Old Item"/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
 </ecore:EPackage>

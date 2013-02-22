@@ -2,6 +2,11 @@ package org.soluvas.ldap;
 
 import java.util.Set;
 
+import org.joda.time.DateTime;
+import org.soluvas.commons.AccountStatus;
+import org.soluvas.commons.ArchivalStatus;
+import org.soluvas.commons.PublicationStatus;
+
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
@@ -22,6 +27,8 @@ public class SocialPerson extends Person {
 	private String photoId;
 	@LdapAttribute("gender")
 	private Gender gender;
+	@LdapAttribute("birthdate")
+	private DateTime birthDate;
 	@LdapAttribute({ "fbId", "facebookId" })
 	private Long facebookId;
 	@LdapAttribute({ "fbUser", "facebookUsername" })
@@ -67,33 +74,35 @@ public class SocialPerson extends Person {
 	@LdapAttribute("lastIpAddress")
 	private String lastIpAddress;
 	@LdapAttribute("creationTime")
-	private String creationTime;
+	private DateTime creationTime;
 	@LdapAttribute("modificationTime")
-	private String modificationTime;
+	private DateTime modificationTime;
 	@LdapAttribute("lastLoginTime")
-	private String lastLoginTime;
+	private DateTime lastLoginTime;
 	@LdapAttribute("validationTime")
-	private String validationTime;
+	private DateTime validationTime;
 	@LdapAttribute("activationTime")
-	private String activationTime;
+	private DateTime activationTime;
 	@LdapAttribute("verificationTime")
-	private String verificationTime;
+	private DateTime verificationTime;
 	@LdapAttribute("accountStatus")
-	private String accountStatus;
+	private AccountStatus accountStatus;
 	@LdapAttribute("newsletterSubscriptionTime")
-	private String newsletterSubscriptionTime;
+	private DateTime newsletterSubscriptionTime;
 	@LdapAttribute("newsletterSubscriptionEnabled")
-	private String newsletterSubscriptionEnabled;
+	private Boolean newsletterSubscriptionEnabled;
 	@LdapAttribute("socialSharingEnabled")
-	private String socialSharingEnabled;
+	private Boolean socialSharingEnabled;
 	@LdapAttribute("validMail")
-	private String validMail;
+	private Set<String> validMails;
 	@LdapAttribute("publicationStatus")
-	private String publicationStatus;
+	private PublicationStatus publicationStatus;
 	@LdapAttribute("archivalStatus")
-	private String archivalStatus;
+	private ArchivalStatus archivalStatus;
 	@LdapAttribute("folder")
 	private String folder;
+	@LdapAttribute("religion")
+	private String religion;
 	
 	public SocialPerson() {
 		super();
@@ -203,6 +212,20 @@ public class SocialPerson extends Person {
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+
+	/**
+	 * @return the birthDate
+	 */
+	public DateTime getBirthDate() {
+		return birthDate;
+	}
+
+	/**
+	 * @param birthDate the birthDate to set
+	 */
+	public void setBirthDate(DateTime birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	/**
@@ -475,7 +498,7 @@ public class SocialPerson extends Person {
 	 * kapan entry pertama kali dibuat
 	 * @return the creationTime
 	 */
-	public String getCreationTime() {
+	public DateTime getCreationTime() {
 		return creationTime;
 	}
 
@@ -483,7 +506,7 @@ public class SocialPerson extends Person {
 	 * kapan entry pertama kali dibuat
 	 * @param creationTime the creationTime to set
 	 */
-	public void setCreationTime(String creationTime) {
+	public void setCreationTime(DateTime creationTime) {
 		this.creationTime = creationTime;
 	}
 
@@ -491,7 +514,7 @@ public class SocialPerson extends Person {
 	 * kapan terakhir di-update
 	 * @return the modificationTime
 	 */
-	public String getModificationTime() {
+	public DateTime getModificationTime() {
 		return modificationTime;
 	}
 
@@ -499,7 +522,7 @@ public class SocialPerson extends Person {
 	 * kapan terakhir di-update
 	 * @param modificationTime the modificationTime to set
 	 */
-	public void setModificationTime(String modificationTime) {
+	public void setModificationTime(DateTime modificationTime) {
 		this.modificationTime = modificationTime;
 	}
 
@@ -507,7 +530,7 @@ public class SocialPerson extends Person {
 	 * kapan terakhir kali login
 	 * @return the lastLoginTime
 	 */
-	public String getLastLoginTime() {
+	public DateTime getLastLoginTime() {
 		return lastLoginTime;
 	}
 
@@ -515,7 +538,7 @@ public class SocialPerson extends Person {
 	 * kapan terakhir kali login
 	 * @param lastLoginTime the lastLoginTime to set
 	 */
-	public void setLastLoginTime(String lastLoginTime) {
+	public void setLastLoginTime(DateTime lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
 	}
 
@@ -523,7 +546,7 @@ public class SocialPerson extends Person {
 	 * kapan dia validate email
 	 * @return the validationTime
 	 */
-	public String getValidationTime() {
+	public DateTime getValidationTime() {
 		return validationTime;
 	}
 
@@ -531,7 +554,7 @@ public class SocialPerson extends Person {
 	 * kapan dia validate email
 	 * @param validationTime the validationTime to set
 	 */
-	public void setValidationTime(String validationTime) {
+	public void setValidationTime(DateTime validationTime) {
 		this.validationTime = validationTime;
 	}
 
@@ -539,7 +562,7 @@ public class SocialPerson extends Person {
 	 * kapan akun dia aktif (bila dimoderasi)
 	 * @return the activationTime
 	 */
-	public String getActivationTime() {
+	public DateTime getActivationTime() {
 		return activationTime;
 	}
 
@@ -547,7 +570,7 @@ public class SocialPerson extends Person {
 	 * kapan akun dia aktif (bila dimoderasi)
 	 * @param activationTime the activationTime to set
 	 */
-	public void setActivationTime(String activationTime) {
+	public void setActivationTime(DateTime activationTime) {
 		this.activationTime = activationTime;
 	}
 
@@ -555,7 +578,7 @@ public class SocialPerson extends Person {
 	 * kapan dia menjadi verified member
 	 * @return the verificationTime
 	 */
-	public String getVerificationTime() {
+	public DateTime getVerificationTime() {
 		return verificationTime;
 	}
 
@@ -563,7 +586,7 @@ public class SocialPerson extends Person {
 	 * kapan dia menjadi verified member
 	 * @param verificationTime the verificationTime to set
 	 */
-	public void setVerificationTime(String verificationTime) {
+	public void setVerificationTime(DateTime verificationTime) {
 		this.verificationTime = verificationTime;
 	}
 
@@ -577,7 +600,7 @@ public class SocialPerson extends Person {
 	 *     inactive: Member dinonaktifkan / suspended.
 	 *     void: Member dihapus.@return the accountStatus
 	 */
-	public String getAccountStatus() {
+	public AccountStatus getAccountStatus() {
 		return accountStatus;
 	}
 
@@ -592,7 +615,7 @@ public class SocialPerson extends Person {
 	 *     void: Member dihapus.@return the accountStatus
 	 * @param accountStatus the accountStatus to set
 	 */
-	public void setAccountStatus(String accountStatus) {
+	public void setAccountStatus(AccountStatus accountStatus) {
 		this.accountStatus = accountStatus;
 	}
 
@@ -600,7 +623,7 @@ public class SocialPerson extends Person {
 	 * Kapan dia terdaftar di newsletter
 	 * @return the newsletterSubscriptionTime
 	 */
-	public String getNewsletterSubscriptionTime() {
+	public DateTime getNewsletterSubscriptionTime() {
 		return newsletterSubscriptionTime;
 	}
 
@@ -608,7 +631,7 @@ public class SocialPerson extends Person {
 	 * Apakah dia ingin menerima newsletter.
 	 * @param newsletterSubscriptionTime the newsletterSubscriptionTime to set
 	 */
-	public void setNewsletterSubscriptionTime(String newsletterSubscriptionTime) {
+	public void setNewsletterSubscriptionTime(DateTime newsletterSubscriptionTime) {
 		this.newsletterSubscriptionTime = newsletterSubscriptionTime;
 	}
 
@@ -616,7 +639,7 @@ public class SocialPerson extends Person {
 	 * Apakah dia ingin menerima newsletter.
 	 * @return the newsletterSubscriptionEnabled
 	 */
-	public String getNewsletterSubscriptionEnabled() {
+	public Boolean getNewsletterSubscriptionEnabled() {
 		return newsletterSubscriptionEnabled;
 	}
 
@@ -624,8 +647,7 @@ public class SocialPerson extends Person {
 	 * Apakah dia ingin menerima newsletter.
 	 * @param newsletterSubscriptionEnabled the newsletterSubscriptionEnabled to set
 	 */
-	public void setNewsletterSubscriptionEnabled(
-			String newsletterSubscriptionEnabled) {
+	public void setNewsletterSubscriptionEnabled(Boolean newsletterSubscriptionEnabled) {
 		this.newsletterSubscriptionEnabled = newsletterSubscriptionEnabled;
 	}
 
@@ -633,7 +655,7 @@ public class SocialPerson extends Person {
 	 *  Apakah dia ingin mensharing aktivitasnya di social network seperti Twitter, Facebook, Path, Google+, dll. (secara umum, konfigurasi spesifik di tempat lain)
 	 * @return the socialSharingEnabled
 	 */
-	public String getSocialSharingEnabled() {
+	public Boolean getSocialSharingEnabled() {
 		return socialSharingEnabled;
 	}
 
@@ -641,7 +663,7 @@ public class SocialPerson extends Person {
 	 *  Apakah dia ingin mensharing aktivitasnya di social network seperti Twitter, Facebook, Path, Google+, dll. (secara umum, konfigurasi spesifik di tempat lain)
 	 * @param socialSharingEnabled the socialSharingEnabled to set
 	 */
-	public void setSocialSharingEnabled(String socialSharingEnabled) {
+	public void setSocialSharingEnabled(Boolean socialSharingEnabled) {
 		this.socialSharingEnabled = socialSharingEnabled;
 	}
 
@@ -649,16 +671,16 @@ public class SocialPerson extends Person {
 	 * daftar email yang sudah divalidasi, bisa multi (apakah email sudah confirmed atau belum). Bila akun confirmed, maka validMail.size() >= 1. Bila semua mail confirmed, maka validMail.equals(mail).
 	 * @return the validMail
 	 */
-	public String getValidMail() {
-		return validMail;
+	public Set<String> getValidMails() {
+		return validMails;
 	}
 
 	/**
 	 * daftar email yang sudah divalidasi, bisa multi (apakah email sudah confirmed atau belum). Bila akun confirmed, maka validMail.size() >= 1. Bila semua mail confirmed, maka validMail.equals(mail).
 	 * @param validMail the validMail to set
 	 */
-	public void setValidMail(String validMail) {
-		this.validMail = validMail;
+	public void setValidMails(Set<String> validMails) {
+		this.validMails = validMails;
 	}
 
 	/**
@@ -669,7 +691,7 @@ public class SocialPerson extends Person {
 	 *  
 	 * @return the publicationStatus
 	 */
-	public String getPublicationStatus() {
+	public PublicationStatus getPublicationStatus() {
 		return publicationStatus;
 	}
 
@@ -681,7 +703,7 @@ public class SocialPerson extends Person {
 	 * 
 	 * @param publicationStatus the publicationStatus to set
 	 */
-	public void setPublicationStatus(String publicationStatus) {
+	public void setPublicationStatus(PublicationStatus publicationStatus) {
 		this.publicationStatus = publicationStatus;
 	}
 
@@ -693,7 +715,7 @@ public class SocialPerson extends Person {
 	 * 
 	 * @return the archivalStatus
 	 */
-	public String getArchivalStatus() {
+	public ArchivalStatus getArchivalStatus() {
 		return archivalStatus;
 	}
 
@@ -705,7 +727,7 @@ public class SocialPerson extends Person {
 	 * 
 	 * @param archivalStatus the archivalStatus to set
 	 */
-	public void setArchivalStatus(String archivalStatus) {
+	public void setArchivalStatus(ArchivalStatus archivalStatus) {
 		this.archivalStatus = archivalStatus;
 	}
 
@@ -723,6 +745,20 @@ public class SocialPerson extends Person {
 	 */
 	public void setFolder(String folder) {
 		this.folder = folder;
+	}
+
+	/**
+	 * @return the religion
+	 */
+	public String getReligion() {
+		return religion;
+	}
+
+	/**
+	 * @param religion the religion to set
+	 */
+	public void setReligion(String religion) {
+		this.religion = religion;
 	}
 	
 }
