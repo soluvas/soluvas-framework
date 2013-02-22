@@ -29,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  * @generated
  */
+@SuppressWarnings("serial")
 public class MeasureValueImpl extends ValueImpl<BigDecimal> implements MeasureValue {
 	/**
 	 * The cached value of the '{@link #getValueUnit() <em>Value Unit</em>}' attribute.
