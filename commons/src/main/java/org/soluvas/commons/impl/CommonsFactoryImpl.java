@@ -132,6 +132,12 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createJavaClassStatusFromString(eDataType, initialValue);
 			case CommonsPackage.PROGRESS_STATUS:
 				return createProgressStatusFromString(eDataType, initialValue);
+			case CommonsPackage.ACCOUNT_STATUS:
+				return createAccountStatusFromString(eDataType, initialValue);
+			case CommonsPackage.PUBLICATION_STATUS:
+				return createPublicationStatusFromString(eDataType, initialValue);
+			case CommonsPackage.ARCHIVAL_STATUS:
+				return createArchivalStatusFromString(eDataType, initialValue);
 			case CommonsPackage.DATE_TIME:
 				return createDateTimeFromString(eDataType, initialValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -193,6 +199,12 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertJavaClassStatusToString(eDataType, instanceValue);
 			case CommonsPackage.PROGRESS_STATUS:
 				return convertProgressStatusToString(eDataType, instanceValue);
+			case CommonsPackage.ACCOUNT_STATUS:
+				return convertAccountStatusToString(eDataType, instanceValue);
+			case CommonsPackage.PUBLICATION_STATUS:
+				return convertPublicationStatusToString(eDataType, instanceValue);
+			case CommonsPackage.ARCHIVAL_STATUS:
+				return convertArchivalStatusToString(eDataType, instanceValue);
 			case CommonsPackage.DATE_TIME:
 				return convertDateTimeToString(eDataType, instanceValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -482,6 +494,66 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertProgressStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AccountStatus createAccountStatusFromString(EDataType eDataType, String initialValue) {
+		AccountStatus result = AccountStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertAccountStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PublicationStatus createPublicationStatusFromString(EDataType eDataType, String initialValue) {
+		PublicationStatus result = PublicationStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPublicationStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ArchivalStatus createArchivalStatusFromString(EDataType eDataType, String initialValue) {
+		ArchivalStatus result = ArchivalStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertArchivalStatusToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

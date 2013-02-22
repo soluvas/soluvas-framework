@@ -33,9 +33,11 @@ import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.osgi.framework.Bundle;
+import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Added;
 import org.soluvas.commons.AddedMany;
 import org.soluvas.commons.AppManifest;
+import org.soluvas.commons.ArchivalStatus;
 import org.soluvas.commons.AttributeNotification;
 import org.soluvas.commons.AttributeSet;
 import org.soluvas.commons.AttributeUnset;
@@ -68,6 +70,7 @@ import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.ProgressMonitorWrapper;
 import org.soluvas.commons.ProgressStatus;
+import org.soluvas.commons.PublicationStatus;
 import org.soluvas.commons.Removed;
 import org.soluvas.commons.RemovedMany;
 import org.soluvas.commons.ResourceAware;
@@ -381,6 +384,27 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EEnum progressStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum accountStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum publicationStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum archivalStatusEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1550,6 +1574,33 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getAccountStatus() {
+		return accountStatusEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getPublicationStatus() {
+		return publicationStatusEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getArchivalStatus() {
+		return archivalStatusEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EDataType getDateTime() {
 		return dateTimeEDataType;
@@ -1908,6 +1959,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		eClassStatusEEnum = createEEnum(ECLASS_STATUS);
 		javaClassStatusEEnum = createEEnum(JAVA_CLASS_STATUS);
 		progressStatusEEnum = createEEnum(PROGRESS_STATUS);
+		accountStatusEEnum = createEEnum(ACCOUNT_STATUS);
+		publicationStatusEEnum = createEEnum(PUBLICATION_STATUS);
+		archivalStatusEEnum = createEEnum(ARCHIVAL_STATUS);
 
 		// Create data types
 		dateTimeEDataType = createEDataType(DATE_TIME);
@@ -2304,6 +2358,23 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addEEnumLiteral(progressStatusEEnum, ProgressStatus.WARNING);
 		addEEnumLiteral(progressStatusEEnum, ProgressStatus.DELETED);
 		addEEnumLiteral(progressStatusEEnum, ProgressStatus.SKIPPED);
+
+		initEEnum(accountStatusEEnum, AccountStatus.class, "AccountStatus");
+		addEEnumLiteral(accountStatusEEnum, AccountStatus.DRAFT);
+		addEEnumLiteral(accountStatusEEnum, AccountStatus.VALIDATED);
+		addEEnumLiteral(accountStatusEEnum, AccountStatus.ACTIVE);
+		addEEnumLiteral(accountStatusEEnum, AccountStatus.VERIFIED);
+		addEEnumLiteral(accountStatusEEnum, AccountStatus.INACTIVE);
+		addEEnumLiteral(accountStatusEEnum, AccountStatus.VOID);
+
+		initEEnum(publicationStatusEEnum, PublicationStatus.class, "PublicationStatus");
+		addEEnumLiteral(publicationStatusEEnum, PublicationStatus.DRAFT);
+		addEEnumLiteral(publicationStatusEEnum, PublicationStatus.PUBLISHED);
+		addEEnumLiteral(publicationStatusEEnum, PublicationStatus.UNPUBLISHED);
+
+		initEEnum(archivalStatusEEnum, ArchivalStatus.class, "ArchivalStatus");
+		addEEnumLiteral(archivalStatusEEnum, ArchivalStatus.FRESH);
+		addEEnumLiteral(archivalStatusEEnum, ArchivalStatus.ARCHIVED);
 
 		// Initialize data types
 		initEDataType(dateTimeEDataType, DateTime.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -2768,6 +2839,90 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", " * An abstract wrapper around a progress monitor which,\n * unless overridden, forwards <code>IProgressMonitor</code>\n * and <code>IProgressMonitorWithBlocking</code> methods to the wrapped progress monitor.\n * <p>\n * This class can be used without OSGi running.\n * </p><p>\n * Clients may subclass.\n * </p>\n"
+		   });		
+		addAnnotation
+		  (accountStatusEEnum, 
+		   source, 
+		   new String[] {
+			 "documentation", "Status of Account, can be use for shop , person , or mall"
+		   });		
+		addAnnotation
+		  (accountStatusEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Member belum aktif."
+		   });		
+		addAnnotation
+		  (accountStatusEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Email sudah divalidasi tapi belum aktif (bila membership dimoderasi)."
+		   });		
+		addAnnotation
+		  (accountStatusEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Akun aktif dan dapat digunakan."
+		   });		
+		addAnnotation
+		  (accountStatusEEnum.getELiterals().get(3), 
+		   source, 
+		   new String[] {
+			 "documentation", "Akun aktif dan dapat digunakan, dan sudah diverifikasi bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator)."
+		   });		
+		addAnnotation
+		  (accountStatusEEnum.getELiterals().get(4), 
+		   source, 
+		   new String[] {
+			 "documentation", " Member dinonaktifkan / suspended."
+		   });		
+		addAnnotation
+		  (accountStatusEEnum.getELiterals().get(5), 
+		   source, 
+		   new String[] {
+			 "documentation", "Member dihapus."
+		   });		
+		addAnnotation
+		  (publicationStatusEEnum, 
+		   source, 
+		   new String[] {
+			 "documentation", "atribut untuk draft/published, editing. Semanticnya Drafts (Edit kayanya beda lagi, bikin ticket baru aja dech untuk Edit)."
+		   });		
+		addAnnotation
+		  (publicationStatusEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Not Yet Published"
+		   });		
+		addAnnotation
+		  (publicationStatusEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Has published and can be viewed by authorized viewers."
+		   });		
+		addAnnotation
+		  (publicationStatusEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Was published but taken down"
+		   });		
+		addAnnotation
+		  (archivalStatusEEnum, 
+		   source, 
+		   new String[] {
+			 "documentation", " atribut untuk new/fresh/inbox. Kalau fresh maka masuk Inbox / New Products / bolded, tidak fresh maka masuk All Mail / All Products. Semanticnya Archive. Tidak termasuk read/unread ya."
+		   });		
+		addAnnotation
+		  (archivalStatusEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "New item"
+		   });		
+		addAnnotation
+		  (archivalStatusEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Old Item"
 		   });
 	}
 	
