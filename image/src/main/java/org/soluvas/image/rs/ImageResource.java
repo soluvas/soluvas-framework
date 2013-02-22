@@ -46,7 +46,7 @@ public class ImageResource {
 	@Produces("text/javascript")
 	public String getImageConfigs() throws InvalidSyntaxException {
 		final TenantRef tenant = JaxrsUtils.getTenant(uriInfo);
-		final String filter = String.format("(&(tenantId=%s)(tenantEnv=%s))", tenant.getTenantId(), tenant.getTenantEnv());
+		final String filter = null;
 		log.trace("Getting imageConfigs.js for {} using {}", tenant, filter);
 		List<ServiceReference<ImageRepository>> refs = ImmutableList.copyOf(bundleContext.getServiceReferences(ImageRepository.class,
 				filter));
