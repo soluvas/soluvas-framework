@@ -1776,6 +1776,36 @@ public interface CommonsPackage extends EPackage {
 	int PROGRESS_STATUS = 41;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.AccountStatus <em>Account Status</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.AccountStatus
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAccountStatus()
+	 * @generated
+	 */
+	int ACCOUNT_STATUS = 42;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.PublicationStatus <em>Publication Status</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.PublicationStatus
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPublicationStatus()
+	 * @generated
+	 */
+	int PUBLICATION_STATUS = 43;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.ArchivalStatus <em>Archival Status</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.ArchivalStatus
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getArchivalStatus()
+	 * @generated
+	 */
+	int ARCHIVAL_STATUS = 44;
+
+	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1783,7 +1813,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 42;
+	int DATE_TIME = 45;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -1793,7 +1823,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 43;
+	int CURRENCY_UNIT = 46;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -1803,7 +1833,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 45;
+	int UNIT = 48;
 
 
 	/**
@@ -1814,7 +1844,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 46;
+	int LIST = 49;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -1824,7 +1854,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 47;
+	int MAP = 50;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -1834,7 +1864,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 48;
+	int SET = 51;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -1844,7 +1874,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 49;
+	int COLLECTION = 52;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -1854,7 +1884,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 50;
+	int MULTIMAP = 53;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -1864,7 +1894,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 51;
+	int NAVIGABLE_MAP = 54;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -1874,7 +1904,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 52;
+	int QUEUE = 55;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -1884,7 +1914,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 53;
+	int MULTISET = 56;
 
 
 	/**
@@ -1895,7 +1925,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 54;
+	int SERIALIZABLE = 57;
 
 
 	/**
@@ -1906,7 +1936,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 55;
+	int BUNDLE = 58;
 
 
 	/**
@@ -1917,7 +1947,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
 	 * @generated
 	 */
-	int BIG_MONEY_PROVIDER = 56;
+	int BIG_MONEY_PROVIDER = 59;
 
 	/**
 	 * The meta object id for the '<em>Quantity</em>' data type.
@@ -1927,7 +1957,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQuantity()
 	 * @generated
 	 */
-	int QUANTITY = 44;
+	int QUANTITY = 47;
 
 	/**
 	 * The meta object id for the '<em>Measurable</em>' data type.
@@ -1937,7 +1967,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMeasurable()
 	 * @generated
 	 */
-	int MEASURABLE = 57;
+	int MEASURABLE = 60;
 
 
 	/**
@@ -1948,7 +1978,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigDecimal()
 	 * @generated
 	 */
-	int BIG_DECIMAL = 58;
+	int BIG_DECIMAL = 61;
 
 
 	/**
@@ -1959,7 +1989,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTimeZone()
 	 * @generated
 	 */
-	int DATE_TIME_ZONE = 59;
+	int DATE_TIME_ZONE = 62;
 
 
 	/**
@@ -1970,7 +2000,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 60;
+	int LOCALE = 63;
 
 
 	/**
@@ -1981,7 +2011,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFile()
 	 * @generated
 	 */
-	int FILE = 61;
+	int FILE = 64;
 
 
 	/**
@@ -2997,6 +3027,36 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getProgressStatus();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.commons.AccountStatus <em>Account Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Account Status</em>'.
+	 * @see org.soluvas.commons.AccountStatus
+	 * @generated
+	 */
+	EEnum getAccountStatus();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.commons.PublicationStatus <em>Publication Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Publication Status</em>'.
+	 * @see org.soluvas.commons.PublicationStatus
+	 * @generated
+	 */
+	EEnum getPublicationStatus();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.commons.ArchivalStatus <em>Archival Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Archival Status</em>'.
+	 * @see org.soluvas.commons.ArchivalStatus
+	 * @generated
+	 */
+	EEnum getArchivalStatus();
 
 	/**
 	 * Returns the meta object for data type '{@link org.joda.time.DateTime <em>Date Time</em>}'.
@@ -4091,6 +4151,36 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum PROGRESS_STATUS = eINSTANCE.getProgressStatus();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.AccountStatus <em>Account Status</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.AccountStatus
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAccountStatus()
+		 * @generated
+		 */
+		EEnum ACCOUNT_STATUS = eINSTANCE.getAccountStatus();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.PublicationStatus <em>Publication Status</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.PublicationStatus
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPublicationStatus()
+		 * @generated
+		 */
+		EEnum PUBLICATION_STATUS = eINSTANCE.getPublicationStatus();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.ArchivalStatus <em>Archival Status</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.ArchivalStatus
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getArchivalStatus()
+		 * @generated
+		 */
+		EEnum ARCHIVAL_STATUS = eINSTANCE.getArchivalStatus();
 
 		/**
 		 * The meta object literal for the '<em>Date Time</em>' data type.

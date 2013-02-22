@@ -1002,6 +1002,83 @@
     <element xmi:type="ecore:EClass" href="commons.ecore#//ProgressMonitorWrapper"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iUiqUl_gEeK_ar6YE6Wb1Q" x="6720" y="264"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_qBcRkXydEeKHT_K5b05Hgw" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_qBeGwHydEeKHT_K5b05Hgw" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_qBet0HydEeKHT_K5b05Hgw" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_3TxqUHydEeKHT_K5b05Hgw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//AccountStatus/draft"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_3TxqUXydEeKHT_K5b05Hgw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_4flWIHydEeKHT_K5b05Hgw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//AccountStatus/validated"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4flWIXydEeKHT_K5b05Hgw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_58vQoHydEeKHT_K5b05Hgw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//AccountStatus/active"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_58vQoXydEeKHT_K5b05Hgw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_6gJfsHydEeKHT_K5b05Hgw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//AccountStatus/verified"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_6gJfsXydEeKHT_K5b05Hgw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_7EimMHydEeKHT_K5b05Hgw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//AccountStatus/inactive"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_7EimMXydEeKHT_K5b05Hgw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_7mQMIHydEeKHT_K5b05Hgw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//AccountStatus/void"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_7mQMIXydEeKHT_K5b05Hgw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_qBet0XydEeKHT_K5b05Hgw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_qBet0nydEeKHT_K5b05Hgw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_qBet03ydEeKHT_K5b05Hgw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_qBcRknydEeKHT_K5b05Hgw" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="commons.ecore#//AccountStatus"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_qBcRk3ydEeKHT_K5b05Hgw" x="3624" y="276" width="171" height="147"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_9fjQEHydEeKHT_K5b05Hgw" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_9fj3IHydEeKHT_K5b05Hgw" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_9fj3IXydEeKHT_K5b05Hgw" type="5008">
+      <children xmi:type="notation:Node" xmi:id="__r3WoHydEeKHT_K5b05Hgw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//PublicationStatus/draft"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__r3WoXydEeKHT_K5b05Hgw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_AvFHIHyeEeKHT_K5b05Hgw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//PublicationStatus/published"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_AvFuMHyeEeKHT_K5b05Hgw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_BwAYoHyeEeKHT_K5b05Hgw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//PublicationStatus/unpublished"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_BwAYoXyeEeKHT_K5b05Hgw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_9fj3InydEeKHT_K5b05Hgw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_9fj3I3ydEeKHT_K5b05Hgw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_9fj3JHydEeKHT_K5b05Hgw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_9fjQEXydEeKHT_K5b05Hgw" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="commons.ecore#//PublicationStatus"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9fjQEnydEeKHT_K5b05Hgw" x="3609" y="466"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_EFvg8HyeEeKHT_K5b05Hgw" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_EFwIAHyeEeKHT_K5b05Hgw" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_EFwvEHyeEeKHT_K5b05Hgw" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_FmlooHyeEeKHT_K5b05Hgw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//ArchivalStatus/fresh"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_FmlooXyeEeKHT_K5b05Hgw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_GiP_oHyeEeKHT_K5b05Hgw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//ArchivalStatus/archived"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GiP_oXyeEeKHT_K5b05Hgw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_EFwvEXyeEeKHT_K5b05Hgw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_EFwvEnyeEeKHT_K5b05Hgw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_EFwvE3yeEeKHT_K5b05Hgw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_EFvg8XyeEeKHT_K5b05Hgw" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="commons.ecore#//ArchivalStatus"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EFvg8nyeEeKHT_K5b05Hgw" x="3440" y="481"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Hn9XoSQDEeKL8qHxNHEWSw"/>
   <element xmi:type="ecore:EPackage" href="commons.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_Rrm-sCSDEeKyUdMfH4dSfg" type="3003" source="_J57LECSDEeKyUdMfH4dSfg" target="_aOshcSSAEeKyUdMfH4dSfg">
