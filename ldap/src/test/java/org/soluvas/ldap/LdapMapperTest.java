@@ -26,6 +26,8 @@ import org.apache.directory.api.ldap.model.schema.registries.Schema;
 import org.apache.directory.api.ldap.model.schema.registries.SchemaLoader;
 import org.apache.directory.api.ldap.schemaloader.LdifSchemaLoader;
 import org.apache.directory.api.ldap.schemamanager.impl.DefaultSchemaManager;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -607,6 +609,20 @@ public class LdapMapperTest {
 		final Modification modification = request.getModifications().iterator().next();
 		assertEquals(ModificationOperation.REPLACE_ATTRIBUTE, modification.getOperation());
 		assertEquals("userPassword", modification.getAttribute().getUpId());
+	}
+	
+	@Test
+	public void canMapFromDateToDateTime() throws LdapException {
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("cn", "Hendy Irawan");
+		existing.put("birthDate", "19831213170000Z");
+		log.info("Input Entry: {}", existing);
+		
+		final SocialPerson person = mapper.fromEntry(existing, SocialPerson.class);
+		final DateTimeZone wib = DateTimeZone.forID("Asia/Jakarta");
+		assertEquals(new DateTime(1983, 12, 14, 0, 0, wib), person.getBirthDate());
 	}
 	
 }

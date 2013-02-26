@@ -51,10 +51,13 @@
 		interface="com.google.common.base.Supplier" availability="optional"
 		filter="(type=eventbus)" />
 
-	<bean id="svcLookup" class="org.soluvas.commons.tenant.MultitenantServiceLookup">
+	<!-- bean id="svcLookup" class="org.soluvas.commons.tenant.MultitenantServiceLookup">
 		<argument ref="blueprintBundleContext"/>
 		<argument value="${clientId}"/>
 		<argument value="${tenantEnv}"/>
+	</bean-->
+	<bean id="svcLookup" class="org.soluvas.commons.tenant.OsgiServiceLookup">
+		<argument ref="blueprintBundleContext"/>
 	</bean>
 	<service ref="svcLookup" auto-export="interfaces"/>
 	

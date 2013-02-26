@@ -4,6 +4,9 @@ package org.soluvas.data;
 
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Sluggable;
+import org.soluvas.data.impl.TermValueImpl;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +30,7 @@ import org.soluvas.commons.Sluggable;
  * @model superTypes="org.soluvas.data.Value<org.eclipse.emf.ecore.EString> org.soluvas.commons.Identifiable org.soluvas.commons.Sluggable"
  * @generated
  */
+@JsonDeserialize(as=TermValueImpl.class)
 public interface TermValue extends Value<String>, Identifiable, Sluggable {
 	
 	/**

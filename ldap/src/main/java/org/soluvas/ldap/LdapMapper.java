@@ -22,6 +22,9 @@ import org.apache.directory.api.ldap.model.exception.LdapInvalidDnException;
 import org.apache.directory.api.ldap.model.message.ModifyRequest;
 import org.apache.directory.api.ldap.model.message.ModifyRequestImpl;
 import org.apache.directory.api.ldap.model.name.Rdn;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.ReflectionUtils;
@@ -419,7 +422,7 @@ public class LdapMapper {
 			}
 		}
 	}
-
+	
 	/**
 	 * Convert from an LDAP value (usually string) to a Bean property value. 
 	 * @param bean
@@ -445,6 +448,23 @@ public class LdapMapper {
 		} else if (value instanceof byte[]) {
 			// Byte array, usually userPassword
 			return (R) new String((byte[])value, Charsets.UTF_8);
+		} else if (DateTime.class.isAssignableFrom(fieldType)) {
+			try {
+				// ISO format
+				return (R) new DateTime(value);
+			} catch (Exception e) {
+				// generalized date time format, e.g. "19831213170000Z"
+				 final DateTimeFormatter ldapExotic = new DateTimeFormatterBuilder()
+				     .appendYear(4, 4)
+				     .appendMonthOfYear(2)
+				     .appendDayOfMonth(2)
+				     .appendHourOfDay(2)
+				     .appendMinuteOfHour(2)
+				     .appendSecondOfMinute(2)
+				     .appendTimeZoneOffset("Z", false, 2, 2)
+				     .toFormatter();
+				 return (R) ldapExotic.parseDateTime((String) value);
+			}
 		} else {
 			return (R) value;
 		}

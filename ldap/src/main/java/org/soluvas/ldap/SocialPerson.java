@@ -27,7 +27,7 @@ public class SocialPerson extends Person {
 	private String photoId;
 	@LdapAttribute("gender")
 	private Gender gender;
-	@LdapAttribute("birthdate")
+	@LdapAttribute("birthDate")
 	private DateTime birthDate;
 	@LdapAttribute({ "fbId", "facebookId" })
 	private Long facebookId;

@@ -35,7 +35,7 @@ public class CategoryUtils {
 	}
 
 	public static List<Category> flatten(@Nonnull final Iterable<Category> nestedCategories) {
-		log.debug("Found nestedCategories: {}", nestedCategories);
+//		log.debug("Found nestedCategories: {}", nestedCategories);
 		final List<Category> flatCategories = ImmutableList.copyOf(Iterables.concat(Iterables.transform(
 				nestedCategories, new CategoryExpander())));
 		return flatCategories;
