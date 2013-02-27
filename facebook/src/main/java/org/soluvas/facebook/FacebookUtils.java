@@ -1,17 +1,25 @@
 package org.soluvas.facebook;
 
+import java.io.File;
 import java.net.URI;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import javax.inject.Inject;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.image.store.Image;
+import org.soluvas.image.store.ImageRepository;
+import org.soluvas.ldap.SocialPerson;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Function;
@@ -19,7 +27,6 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
  * Inspired by org.soluvas.fbcli.FriendListDownloader.
@@ -91,6 +98,40 @@ public class FacebookUtils {
 		} catch (ExecutionException e) {
 			log.error("Cannot find friends", e);
 			throw new RuntimeException("Cannot find friends", e);
+		}
+	}
+	
+	/**
+	 * Fetches Facebook user photo from Facebook, uploads it to ImageRepository, but not modify any {@link SocialPerson}.
+	 * @param facebookId Facebook User ID.
+	 * @param personName Person name, used for the image name and for logging purposes.
+	 * @return ImageID from the ImageRepository.
+	 */
+	public static String refreshPhotoFromFacebook(final Long facebookId, final String personName,
+			ImageRepository imageRepo) {
+		// Get Image
+		final String photoUrl = "https://graph.facebook.com/"+ facebookId + "/picture?type=large";
+		final HttpClient httpClient = new DefaultHttpClient();
+		try {
+			final HttpGet httpGet = new HttpGet(photoUrl);
+			log.debug("Photo URL for Facebook user {} ({}) is {}", facebookId, personName, photoUrl);
+			final HttpResponse response = httpClient.execute(httpGet);
+			final File tmpFile = File.createTempFile("fb_", ".jpg");
+			try {
+				FileUtils.copyInputStreamToFile(response.getEntity().getContent(), tmpFile);
+				log.debug("Photo Status Line {}",  response.getStatusLine());
+				final Image newImage = new Image(tmpFile, ".jpg", personName + " Facebook " + facebookId);
+				final String imageId = imageRepo.add(newImage);
+				log.debug("tmp file path from Facebook user {} is {}", tmpFile);
+				return imageId;
+			} finally {
+				tmpFile.delete();
+				HttpClientUtils.closeQuietly(response);
+			}
+		} catch (final Exception e) {
+			throw new RuntimeException("Cannot refresh Facebook user " + facebookId + " (" + personName +") from Facebook URI " + photoUrl, e);
+		} finally {
+			HttpClientUtils.closeQuietly(httpClient);
 		}
 	}
 	

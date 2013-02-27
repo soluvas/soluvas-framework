@@ -1,0 +1,9 @@
+h1. Soluvas.org Twitter
+
+h2. Usage from Blueprint
+
+bc. <reference id="twitterUtils" interface="org.soluvas.twitter.TwitterUtils" />
+
+Java:
+
+bc. List<HintPerson> hints = twitterUtils.findFriends("**ACCESS TOKEN**");
