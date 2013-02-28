@@ -17,10 +17,14 @@ import org.soluvas.data.DataPackage;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermManager;
 
+import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 
 /**
  * <!-- begin-user-doc -->
@@ -112,6 +116,21 @@ public class TermManagerImpl extends EObjectImpl implements TermManager {
 			}
 		}));
 		return terms;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public Multimap<String, Term> getTermsByAttributeTypes() {
+		final Multimap<String, Term> multimap = Multimaps.index(dataCatalog.getTerms(), new Function<Term, String>() {
+			@Override @Nullable
+			public String apply(@Nullable Term input) {
+				return Strings.nullToEmpty(input.getAttributeTypeNsPrefix()) + "_" + Strings.nullToEmpty(input.getAttributeTypeName());
+			}
+		});
+		return multimap;
 	}
 
 	/**

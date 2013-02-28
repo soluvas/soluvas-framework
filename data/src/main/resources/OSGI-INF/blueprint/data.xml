@@ -28,6 +28,9 @@
 			<entry key="layer" value="application" />
 		</service-properties>
 	</service>
+	<service auto-export="interfaces">
+		<bean factory-ref="dataCatalogSupplier" factory-method="get"/>
+	</service>
 	<bean id="dataCatalogXmiTracker" class="org.soluvas.commons.SupplierXmiTracker">
 		<argument value="org.soluvas.data.DataPackage" />
 		<argument value="org.soluvas.data.DataCatalog" />
@@ -39,7 +42,20 @@
 		<argument ref="dataCatalogXmiTracker" />
 	</bean>
 	
-	<bean id="termMgr" class="org.soluvas.data.impl.TermManagerImpl"/>
+	<bean id="termMgr" class="org.soluvas.data.impl.TermManagerImpl">
+		<argument>
+			<bean factory-ref="dataCatalogSupplier" factory-method="get"/>
+		</argument>
+	</bean>
 	<service ref="termMgr" auto-export="interfaces"/>
+
+	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
+		<command name="term/ls">
+			<action class="org.soluvas.data.shell.TermLsCommand" />
+		</command>
+		<command name="term/attrs">
+			<action class="org.soluvas.data.shell.TermAttrsCommand" />
+		</command>
+	</command-bundle>
 
 </blueprint>

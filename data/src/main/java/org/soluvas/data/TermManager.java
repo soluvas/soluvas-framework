@@ -2,7 +2,9 @@
  */
 package org.soluvas.data;
 
+import com.google.common.collect.Multimap;
 import java.util.List;
+import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 
 import org.soluvas.commons.SerializableEObject;
@@ -47,5 +49,16 @@ public interface TermManager extends SerializableEObject {
 	 * @generated
 	 */
 	List<Term> findTerms(String attributeTypeNsPrefix, String attributeTypeName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * List all terms partitioned by attribute type ({nsPrefix}_{name}).
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" dataType="org.soluvas.commons.Multimap<org.eclipse.emf.ecore.EString, org.soluvas.data.Term>"
+	 * @generated
+	 */
+	Multimap<String, Term> getTermsByAttributeTypes();
 
 } // TermManager

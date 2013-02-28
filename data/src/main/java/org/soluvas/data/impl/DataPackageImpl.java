@@ -1054,6 +1054,14 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
+		op = addEOperation(termManagerEClass, null, "getTermsByAttributeTypes", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theCommonsPackage.getMultimap());
+		g2 = createEGenericType(theEcorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(this.getTerm());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
 		// Initialize enums and add enum literals
 		initEEnum(attributeSemanticEEnum, AttributeSemantic.class, "AttributeSemantic");
 		addEEnumLiteral(attributeSemanticEEnum, AttributeSemantic.EQUAL);
@@ -1218,7 +1226,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "List of terms in a Vocabulary or if the Term is nested (tree vocabulary)."
-		   });	
+		   });			
+		addAnnotation
+		  (termManagerEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "List all terms partitioned by attribute type ({nsPrefix}_{name})."
+		   });
 	}
 
 	/**
@@ -1258,7 +1272,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "name", "DataCatalog"
-		   });
+		   });	
 	}
 	
 	public static DataPackage getInstance() {
