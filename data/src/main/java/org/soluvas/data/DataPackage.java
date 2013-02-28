@@ -1181,6 +1181,34 @@ public interface DataPackage extends EPackage {
 	int DATA_CATALOG_FEATURE_COUNT = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 8;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.data.impl.TermManagerImpl <em>Term Manager</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.data.impl.TermManagerImpl
+	 * @see org.soluvas.data.impl.DataPackageImpl#getTermManager()
+	 * @generated
+	 */
+	int TERM_MANAGER = 15;
+
+	/**
+	 * The feature id for the '<em><b>Data Catalog</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM_MANAGER__DATA_CATALOG = 0;
+
+	/**
+	 * The number of structural features of the '<em>Term Manager</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM_MANAGER_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1188,7 +1216,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getAttributeSemantic()
 	 * @generated
 	 */
-	int ATTRIBUTE_SEMANTIC = 15;
+	int ATTRIBUTE_SEMANTIC = 16;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository</em>' data type.
@@ -1198,7 +1226,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepository()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY = 16;
+	int CRUD_REPOSITORY = 17;
 
 	/**
 	 * The meta object id for the '<em>Paging And Sorting Repository</em>' data type.
@@ -1208,7 +1236,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPagingAndSortingRepository()
 	 * @generated
 	 */
-	int PAGING_AND_SORTING_REPOSITORY = 17;
+	int PAGING_AND_SORTING_REPOSITORY = 18;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository Base</em>' data type.
@@ -1218,7 +1246,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepositoryBase()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY_BASE = 18;
+	int CRUD_REPOSITORY_BASE = 19;
 
 
 	/**
@@ -1229,7 +1257,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getMeasure()
 	 * @generated
 	 */
-	int MEASURE = 19;
+	int MEASURE = 20;
 
 	/**
 	 * The meta object id for the '<em>Decimal Measure</em>' data type.
@@ -1239,7 +1267,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getDecimalMeasure()
 	 * @generated
 	 */
-	int DECIMAL_MEASURE = 20;
+	int DECIMAL_MEASURE = 21;
 
 
 	/**
@@ -1677,6 +1705,27 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDataCatalog_AttributeTypes();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.data.TermManager <em>Term Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Term Manager</em>'.
+	 * @see org.soluvas.data.TermManager
+	 * @generated
+	 */
+	EClass getTermManager();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.data.TermManager#getDataCatalog <em>Data Catalog</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Data Catalog</em>'.
+	 * @see org.soluvas.data.TermManager#getDataCatalog()
+	 * @see #getTermManager()
+	 * @generated
+	 */
+	EReference getTermManager_DataCatalog();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}'.
@@ -2122,6 +2171,24 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DATA_CATALOG__ATTRIBUTE_TYPES = eINSTANCE.getDataCatalog_AttributeTypes();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.data.impl.TermManagerImpl <em>Term Manager</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.data.impl.TermManagerImpl
+		 * @see org.soluvas.data.impl.DataPackageImpl#getTermManager()
+		 * @generated
+		 */
+		EClass TERM_MANAGER = eINSTANCE.getTermManager();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Catalog</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TERM_MANAGER__DATA_CATALOG = eINSTANCE.getTermManager_DataCatalog();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}' enum.

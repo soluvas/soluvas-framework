@@ -23,9 +23,18 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.apache.karaf.shell</groupId>
+			<artifactId>org.apache.karaf.shell.console</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j-cypher</artifactId>
@@ -86,6 +95,12 @@
 				<configuration>
 					<instructions>
 						<Export-Package>org.soluvas.data.*</Export-Package>
+						<Import-Package>
+							org.apache.felix.service.command;resolution:=optional,
+							org.apache.felix.gogo.commands;resolution:=optional,
+							org.apache.karaf.shell.console;resolution:=optional,
+							*
+						</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>

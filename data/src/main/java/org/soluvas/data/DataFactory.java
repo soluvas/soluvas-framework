@@ -121,6 +121,15 @@ public interface DataFactory extends EFactory {
 	DataCatalog createDataCatalog();
 
 	/**
+	 * Returns a new object of class '<em>Term Manager</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Term Manager</em>'.
+	 * @generated
+	 */
+	TermManager createTermManager();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
