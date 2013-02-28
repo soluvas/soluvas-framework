@@ -123,13 +123,13 @@ public interface DataPackage extends EPackage {
 	int ATTRIBUTE_TYPE__BUNDLE = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Display Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE__LABEL = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
+	int ATTRIBUTE_TYPE__DISPLAY_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Min Values</b></em>' attribute.
@@ -754,13 +754,49 @@ public interface DataPackage extends EPackage {
 	int TERM__RESOURCE_NAME = TERM_CONTAINER_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__NS_PREFIX = TERM_CONTAINER_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Color</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__COLOR = TERM_CONTAINER_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Vocab</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__VOCAB = TERM_CONTAINER_FEATURE_COUNT + 5;
+	int TERM__VOCAB = TERM_CONTAINER_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Display Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__DISPLAY_NAME = TERM_CONTAINER_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__IMAGE_ID = TERM_CONTAINER_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Attribute Type Ns Prefix</b></em>' attribute.
@@ -769,7 +805,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__ATTRIBUTE_TYPE_NS_PREFIX = TERM_CONTAINER_FEATURE_COUNT + 6;
+	int TERM__ATTRIBUTE_TYPE_NS_PREFIX = TERM_CONTAINER_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Attribute Type Name</b></em>' attribute.
@@ -778,7 +814,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__ATTRIBUTE_TYPE_NAME = TERM_CONTAINER_FEATURE_COUNT + 7;
+	int TERM__ATTRIBUTE_TYPE_NAME = TERM_CONTAINER_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>Term</em>' class.
@@ -787,7 +823,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM_FEATURE_COUNT = TERM_CONTAINER_FEATURE_COUNT + 8;
+	int TERM_FEATURE_COUNT = TERM_CONTAINER_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.ListVocabImpl <em>List Vocab</em>}' class.
@@ -1208,15 +1244,15 @@ public interface DataPackage extends EPackage {
 	EClass getAttributeType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.data.AttributeType#getLabel <em>Label</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.AttributeType#getDisplayName <em>Display Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Label</em>'.
-	 * @see org.soluvas.data.AttributeType#getLabel()
+	 * @return the meta object for the attribute '<em>Display Name</em>'.
+	 * @see org.soluvas.data.AttributeType#getDisplayName()
 	 * @see #getAttributeType()
 	 * @generated
 	 */
-	EAttribute getAttributeType_Label();
+	EAttribute getAttributeType_DisplayName();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.data.AttributeType#getMinValues <em>Min Values</em>}'.
@@ -1485,6 +1521,28 @@ public interface DataPackage extends EPackage {
 	EReference getTerm_Vocab();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Term#getDisplayName <em>Display Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Display Name</em>'.
+	 * @see org.soluvas.data.Term#getDisplayName()
+	 * @see #getTerm()
+	 * @generated
+	 */
+	EAttribute getTerm_DisplayName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Term#getImageId <em>Image Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Image Id</em>'.
+	 * @see org.soluvas.data.Term#getImageId()
+	 * @see #getTerm()
+	 * @generated
+	 */
+	EAttribute getTerm_ImageId();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.data.Term#getAttributeTypeNsPrefix <em>Attribute Type Ns Prefix</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1709,12 +1767,12 @@ public interface DataPackage extends EPackage {
 		EClass ATTRIBUTE_TYPE = eINSTANCE.getAttributeType();
 
 		/**
-		 * The meta object literal for the '<em><b>Label</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Display Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ATTRIBUTE_TYPE__LABEL = eINSTANCE.getAttributeType_Label();
+		EAttribute ATTRIBUTE_TYPE__DISPLAY_NAME = eINSTANCE.getAttributeType_DisplayName();
 
 		/**
 		 * The meta object literal for the '<em><b>Min Values</b></em>' attribute feature.
@@ -1933,6 +1991,22 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TERM__VOCAB = eINSTANCE.getTerm_Vocab();
+
+		/**
+		 * The meta object literal for the '<em><b>Display Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TERM__DISPLAY_NAME = eINSTANCE.getTerm_DisplayName();
+
+		/**
+		 * The meta object literal for the '<em><b>Image Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TERM__IMAGE_ID = eINSTANCE.getTerm_ImageId();
 
 		/**
 		 * The meta object literal for the '<em><b>Attribute Type Ns Prefix</b></em>' attribute feature.

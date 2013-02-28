@@ -20,9 +20,12 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.osgi.framework.Bundle;
 
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.Colorable;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 
@@ -43,7 +46,11 @@ import org.soluvas.data.Vocab;
  *   <li>{@link org.soluvas.data.impl.TermImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getResourceUri <em>Resource Uri</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getResourceName <em>Resource Name</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getNsPrefix <em>Ns Prefix</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getColor <em>Color</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getVocab <em>Vocab</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getDisplayName <em>Display Name</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getImageId <em>Image Id</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getAttributeTypeNsPrefix <em>Attribute Type Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getAttributeTypeName <em>Attribute Type Name</em>}</li>
  * </ul>
@@ -163,6 +170,46 @@ public class TermImpl extends EObjectImpl implements Term {
 	protected String resourceName = RESOURCE_NAME_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NS_PREFIX_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String nsPrefix = NS_PREFIX_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getColor() <em>Color</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getColor()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COLOR_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getColor() <em>Color</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getColor()
+	 * @generated
+	 * @ordered
+	 */
+	protected String color = COLOR_EDEFAULT;
+
+	/**
 	 * The cached value of the '{@link #getVocab() <em>Vocab</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -171,6 +218,46 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @ordered
 	 */
 	protected Vocab vocab;
+
+	/**
+	 * The default value of the '{@link #getDisplayName() <em>Display Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDisplayName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DISPLAY_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDisplayName() <em>Display Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDisplayName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String displayName = DISPLAY_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getImageId() <em>Image Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImageId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String IMAGE_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getImageId() <em>Image Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImageId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String imageId = IMAGE_ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getAttributeTypeNsPrefix() <em>Attribute Type Ns Prefix</em>}' attribute.
@@ -353,6 +440,48 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getNsPrefix() {
+		return nsPrefix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNsPrefix(String newNsPrefix) {
+		String oldNsPrefix = nsPrefix;
+		nsPrefix = newNsPrefix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__NS_PREFIX, oldNsPrefix, nsPrefix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getColor() {
+		return color;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setColor(String newColor) {
+		String oldColor = color;
+		color = newColor;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__COLOR, oldColor, color));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Vocab getVocab() {
 		if (vocab != null && ((EObject)vocab).eIsProxy()) {
 			InternalEObject oldVocab = (InternalEObject)vocab;
@@ -384,6 +513,48 @@ public class TermImpl extends EObjectImpl implements Term {
 		vocab = newVocab;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__VOCAB, oldVocab, vocab));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDisplayName(String newDisplayName) {
+		String oldDisplayName = displayName;
+		displayName = newDisplayName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__DISPLAY_NAME, oldDisplayName, displayName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getImageId() {
+		return imageId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setImageId(String newImageId) {
+		String oldImageId = imageId;
+		imageId = newImageId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__IMAGE_ID, oldImageId, imageId));
 	}
 
 	/**
@@ -448,9 +619,17 @@ public class TermImpl extends EObjectImpl implements Term {
 				return getResourceUri();
 			case DataPackage.TERM__RESOURCE_NAME:
 				return getResourceName();
+			case DataPackage.TERM__NS_PREFIX:
+				return getNsPrefix();
+			case DataPackage.TERM__COLOR:
+				return getColor();
 			case DataPackage.TERM__VOCAB:
 				if (resolve) return getVocab();
 				return basicGetVocab();
+			case DataPackage.TERM__DISPLAY_NAME:
+				return getDisplayName();
+			case DataPackage.TERM__IMAGE_ID:
+				return getImageId();
 			case DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX:
 				return getAttributeTypeNsPrefix();
 			case DataPackage.TERM__ATTRIBUTE_TYPE_NAME:
@@ -487,8 +666,20 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__RESOURCE_NAME:
 				setResourceName((String)newValue);
 				return;
+			case DataPackage.TERM__NS_PREFIX:
+				setNsPrefix((String)newValue);
+				return;
+			case DataPackage.TERM__COLOR:
+				setColor((String)newValue);
+				return;
 			case DataPackage.TERM__VOCAB:
 				setVocab((Vocab)newValue);
+				return;
+			case DataPackage.TERM__DISPLAY_NAME:
+				setDisplayName((String)newValue);
+				return;
+			case DataPackage.TERM__IMAGE_ID:
+				setImageId((String)newValue);
 				return;
 			case DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX:
 				setAttributeTypeNsPrefix((String)newValue);
@@ -526,8 +717,20 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__RESOURCE_NAME:
 				setResourceName(RESOURCE_NAME_EDEFAULT);
 				return;
+			case DataPackage.TERM__NS_PREFIX:
+				setNsPrefix(NS_PREFIX_EDEFAULT);
+				return;
+			case DataPackage.TERM__COLOR:
+				setColor(COLOR_EDEFAULT);
+				return;
 			case DataPackage.TERM__VOCAB:
 				setVocab((Vocab)null);
+				return;
+			case DataPackage.TERM__DISPLAY_NAME:
+				setDisplayName(DISPLAY_NAME_EDEFAULT);
+				return;
+			case DataPackage.TERM__IMAGE_ID:
+				setImageId(IMAGE_ID_EDEFAULT);
 				return;
 			case DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX:
 				setAttributeTypeNsPrefix(ATTRIBUTE_TYPE_NS_PREFIX_EDEFAULT);
@@ -559,8 +762,16 @@ public class TermImpl extends EObjectImpl implements Term {
 				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
 			case DataPackage.TERM__RESOURCE_NAME:
 				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
+			case DataPackage.TERM__NS_PREFIX:
+				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
+			case DataPackage.TERM__COLOR:
+				return COLOR_EDEFAULT == null ? color != null : !COLOR_EDEFAULT.equals(color);
 			case DataPackage.TERM__VOCAB:
 				return vocab != null;
+			case DataPackage.TERM__DISPLAY_NAME:
+				return DISPLAY_NAME_EDEFAULT == null ? displayName != null : !DISPLAY_NAME_EDEFAULT.equals(displayName);
+			case DataPackage.TERM__IMAGE_ID:
+				return IMAGE_ID_EDEFAULT == null ? imageId != null : !IMAGE_ID_EDEFAULT.equals(imageId);
 			case DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX:
 				return ATTRIBUTE_TYPE_NS_PREFIX_EDEFAULT == null ? attributeTypeNsPrefix != null : !ATTRIBUTE_TYPE_NS_PREFIX_EDEFAULT.equals(attributeTypeNsPrefix);
 			case DataPackage.TERM__ATTRIBUTE_TYPE_NAME:
@@ -601,6 +812,23 @@ public class TermImpl extends EObjectImpl implements Term {
 				default: return -1;
 			}
 		}
+		if (baseClass == NsPrefixable.class) {
+			switch (derivedFeatureID) {
+				case DataPackage.TERM__NS_PREFIX: return CommonsPackage.NS_PREFIXABLE__NS_PREFIX;
+				default: return -1;
+			}
+		}
+		if (baseClass == Colorable.class) {
+			switch (derivedFeatureID) {
+				case DataPackage.TERM__COLOR: return CommonsPackage.COLORABLE__COLOR;
+				default: return -1;
+			}
+		}
+		if (baseClass == Imageable.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -636,6 +864,23 @@ public class TermImpl extends EObjectImpl implements Term {
 				default: return -1;
 			}
 		}
+		if (baseClass == NsPrefixable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.NS_PREFIXABLE__NS_PREFIX: return DataPackage.TERM__NS_PREFIX;
+				default: return -1;
+			}
+		}
+		if (baseClass == Colorable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.COLORABLE__COLOR: return DataPackage.TERM__COLOR;
+				default: return -1;
+			}
+		}
+		if (baseClass == Imageable.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -659,6 +904,14 @@ public class TermImpl extends EObjectImpl implements Term {
 		result.append(resourceUri);
 		result.append(", resourceName: ");
 		result.append(resourceName);
+		result.append(", nsPrefix: ");
+		result.append(nsPrefix);
+		result.append(", color: ");
+		result.append(color);
+		result.append(", displayName: ");
+		result.append(displayName);
+		result.append(", imageId: ");
+		result.append(imageId);
 		result.append(", attributeTypeNsPrefix: ");
 		result.append(attributeTypeNsPrefix);
 		result.append(", attributeTypeName: ");

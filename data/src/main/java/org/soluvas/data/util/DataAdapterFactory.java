@@ -11,8 +11,10 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.Colorable;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Identifiable;
+import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.NsPrefixable;
@@ -168,6 +170,14 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSluggable(Sluggable object) {
 				return createSluggableAdapter();
+			}
+			@Override
+			public Adapter caseColorable(Colorable object) {
+				return createColorableAdapter();
+			}
+			@Override
+			public Adapter caseImageable(Imageable object) {
+				return createImageableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -508,6 +518,34 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSluggableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Colorable <em>Colorable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Colorable
+	 * @generated
+	 */
+	public Adapter createColorableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Imageable <em>Imageable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Imageable
+	 * @generated
+	 */
+	public Adapter createImageableAdapter() {
 		return null;
 	}
 

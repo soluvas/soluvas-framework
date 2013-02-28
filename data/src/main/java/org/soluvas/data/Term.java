@@ -3,7 +3,10 @@
 package org.soluvas.data;
 
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.Colorable;
+import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ResourceAware;
 
 /**
@@ -15,6 +18,8 @@ import org.soluvas.commons.ResourceAware;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.data.Term#getVocab <em>Vocab</em>}</li>
+ *   <li>{@link org.soluvas.data.Term#getDisplayName <em>Display Name</em>}</li>
+ *   <li>{@link org.soluvas.data.Term#getImageId <em>Image Id</em>}</li>
  *   <li>{@link org.soluvas.data.Term#getAttributeTypeNsPrefix <em>Attribute Type Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.Term#getAttributeTypeName <em>Attribute Type Name</em>}</li>
  * </ul>
@@ -24,7 +29,7 @@ import org.soluvas.commons.ResourceAware;
  * @model
  * @generated
  */
-public interface Term extends TermContainer, BundleAware, NameContainer, ResourceAware {
+public interface Term extends TermContainer, BundleAware, NameContainer, ResourceAware, NsPrefixable, Colorable, Imageable {
 	/**
 	 * Returns the value of the '<em><b>Vocab</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -50,6 +55,58 @@ public interface Term extends TermContainer, BundleAware, NameContainer, Resourc
 	 * @generated
 	 */
 	void setVocab(Vocab value);
+
+	/**
+	 * Returns the value of the '<em><b>Display Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Human friendly name.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Display Name</em>' attribute.
+	 * @see #setDisplayName(String)
+	 * @see org.soluvas.data.DataPackage#getTerm_DisplayName()
+	 * @model
+	 * @generated
+	 */
+	String getDisplayName();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Term#getDisplayName <em>Display Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Display Name</em>' attribute.
+	 * @see #getDisplayName()
+	 * @generated
+	 */
+	void setDisplayName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Image Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Image ID of the term in the repository (if available). The ImageRepository is usually using "term" namespace.
+	 * 
+	 * TODO: provide a way to specify a static image instead (using 'imagesUri').
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Image Id</em>' attribute.
+	 * @see #setImageId(String)
+	 * @see org.soluvas.data.DataPackage#getTerm_ImageId()
+	 * @model
+	 * @generated
+	 */
+	String getImageId();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Term#getImageId <em>Image Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Image Id</em>' attribute.
+	 * @see #getImageId()
+	 * @generated
+	 */
+	void setImageId(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Attribute Type Ns Prefix</b></em>' attribute.

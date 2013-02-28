@@ -42,7 +42,7 @@ import org.soluvas.commons.ResourceAware;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.soluvas.data.AttributeType#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.soluvas.data.AttributeType#getDisplayName <em>Display Name</em>}</li>
  *   <li>{@link org.soluvas.data.AttributeType#getMinValues <em>Min Values</em>}</li>
  *   <li>{@link org.soluvas.data.AttributeType#getMaxValues <em>Max Values</em>}</li>
  *   <li>{@link org.soluvas.data.AttributeType#getDataTypeName <em>Data Type Name</em>}</li>
@@ -55,30 +55,29 @@ import org.soluvas.commons.ResourceAware;
  */
 public interface AttributeType extends NsPrefixable, NameContainer, ResourceAware, BundleAware {
 	/**
-	 * Returns the value of the '<em><b>Label</b></em>' attribute.
+	 * Returns the value of the '<em><b>Display Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Label</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Label</em>' attribute.
-	 * @see #setLabel(String)
-	 * @see org.soluvas.data.DataPackage#getAttributeType_Label()
+	 * <!-- begin-model-doc -->
+	 * Human friendly name.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Display Name</em>' attribute.
+	 * @see #setDisplayName(String)
+	 * @see org.soluvas.data.DataPackage#getAttributeType_DisplayName()
 	 * @model
 	 * @generated
 	 */
-	String getLabel();
+	String getDisplayName();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.data.AttributeType#getLabel <em>Label</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.data.AttributeType#getDisplayName <em>Display Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Label</em>' attribute.
-	 * @see #getLabel()
+	 * @param value the new value of the '<em>Display Name</em>' attribute.
+	 * @see #getDisplayName()
 	 * @generated
 	 */
-	void setLabel(String value);
+	void setDisplayName(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Min Values</b></em>' attribute.

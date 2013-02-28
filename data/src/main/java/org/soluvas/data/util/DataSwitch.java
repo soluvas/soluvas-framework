@@ -9,8 +9,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.Colorable;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Identifiable;
+import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.NsPrefixable;
@@ -160,6 +162,9 @@ public class DataSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseBundleAware(term);
 				if (result == null) result = caseNameContainer(term);
 				if (result == null) result = caseResourceAware(term);
+				if (result == null) result = caseNsPrefixable(term);
+				if (result == null) result = caseColorable(term);
+				if (result == null) result = caseImageable(term);
 				if (result == null) result = caseNameable(term);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -562,6 +567,36 @@ public class DataSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseSluggable(Sluggable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Colorable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Colorable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseColorable(Colorable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Imageable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Imageable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseImageable(Imageable object) {
 		return null;
 	}
 

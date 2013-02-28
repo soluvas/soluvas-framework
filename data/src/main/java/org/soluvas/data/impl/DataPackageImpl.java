@@ -272,8 +272,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getAttributeType_Label() {
+	public EAttribute getAttributeType_DisplayName() {
 		return (EAttribute)attributeTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -532,7 +531,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTerm_AttributeTypeNsPrefix() {
+	public EAttribute getTerm_DisplayName() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -541,8 +540,26 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTerm_AttributeTypeName() {
+	public EAttribute getTerm_ImageId() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTerm_AttributeTypeNsPrefix() {
+		return (EAttribute)termEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTerm_AttributeTypeName() {
+		return (EAttribute)termEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -735,7 +752,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		// Create classes and their features
 		attributeTypeEClass = createEClass(ATTRIBUTE_TYPE);
-		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__LABEL);
+		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__DISPLAY_NAME);
 		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__MIN_VALUES);
 		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__MAX_VALUES);
 		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__DATA_TYPE_NAME);
@@ -770,6 +787,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		termEClass = createEClass(TERM);
 		createEReference(termEClass, TERM__VOCAB);
+		createEAttribute(termEClass, TERM__DISPLAY_NAME);
+		createEAttribute(termEClass, TERM__IMAGE_ID);
 		createEAttribute(termEClass, TERM__ATTRIBUTE_TYPE_NS_PREFIX);
 		createEAttribute(termEClass, TERM__ATTRIBUTE_TYPE_NAME);
 
@@ -894,6 +913,9 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		termEClass.getESuperTypes().add(theCommonsPackage.getBundleAware());
 		termEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
 		termEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		termEClass.getESuperTypes().add(theCommonsPackage.getNsPrefixable());
+		termEClass.getESuperTypes().add(theCommonsPackage.getColorable());
+		termEClass.getESuperTypes().add(theCommonsPackage.getImageable());
 		listVocabEClass.getESuperTypes().add(this.getVocab());
 		treeVocabEClass.getESuperTypes().add(this.getVocab());
 		freeVocabEClass.getESuperTypes().add(this.getVocab());
@@ -903,7 +925,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(attributeTypeEClass, AttributeType.class, "AttributeType", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAttributeType_Label(), ecorePackage.getEString(), "label", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttributeType_DisplayName(), ecorePackage.getEString(), "displayName", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttributeType_MinValues(), theEcorePackage.getELong(), "minValues", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttributeType_MaxValues(), theEcorePackage.getELong(), "maxValues", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttributeType_DataTypeName(), ecorePackage.getEString(), "dataTypeName", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -964,6 +986,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		initEClass(termEClass, Term.class, "Term", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTerm_Vocab(), this.getVocab(), null, "vocab", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTerm_DisplayName(), theEcorePackage.getEString(), "displayName", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTerm_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTerm_AttributeTypeNsPrefix(), theEcorePackage.getEString(), "attributeTypeNsPrefix", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTerm_AttributeTypeName(), theEcorePackage.getEString(), "attributeTypeName", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1040,6 +1064,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 			 "documentation", "true if maxValues is > 1."
 		   });		
 		addAnnotation
+		  (getAttributeType_DisplayName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Human friendly name."
+		   });		
+		addAnnotation
 		  (getAttributeType_MinValues(), 
 		   source, 
 		   new String[] {
@@ -1112,6 +1142,18 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 			 "documentation", "pindah jd attributetype."
 		   });			
 		addAnnotation
+		  (getTerm_DisplayName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Human friendly name."
+		   });		
+		addAnnotation
+		  (getTerm_ImageId(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Image ID of the term in the repository (if available). The ImageRepository is usually using \"term\" namespace.\n\nTODO: provide a way to specify a static image instead (using \'imagesUri\')."
+		   });		
+		addAnnotation
 		  (getTerm_AttributeTypeNsPrefix(), 
 		   source, 
 		   new String[] {
@@ -1138,13 +1180,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																		
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																			
 		addAnnotation
 		  (vocabEClass, 
 		   source, 
 		   new String[] {
 			 "name", "Vocab"
-		   });				
+		   });						
 		addAnnotation
 		  (listVocabEClass, 
 		   source, 
