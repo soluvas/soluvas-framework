@@ -24,7 +24,7 @@ public class TermLsCommand extends OsgiCommandSupport {
 		final ServiceReference<DataCatalog> dataCatalogRef = bundleContext.getServiceReference(DataCatalog.class);
 		final DataCatalog dataCatalog = getService(DataCatalog.class, dataCatalogRef);
 		System.out.println(ansi().render("@|negative_on %3s|%-10s|%-15s|%-20s|%-10s|%-10s|%-20s|@",
-				"№", "NsPrefix", "Name", "Display Name", "Attr NP", "Attr Name", "Bundle"));
+				"№", "NsPrefix", "Name", "Display Name", "AType NP", "AType Name", "Bundle"));
 		int i = 0;
 		for (final Term term : dataCatalog.getTerms()) {
 			final String bundleAnsi = NameUtils.shortenBundleAnsi(term.getBundle(), 20);
