@@ -61,8 +61,8 @@ public class SocialPerson extends Person {
 	private String customerRole;
 	@LdapAttribute("memberRole")
 	private String memberRole;
-	@LdapAttribute("administrativeRole")
-	private String administrativeRole;
+	@LdapAttribute("managerRole")
+	private String managerRole;
 	@LdapAttribute("timezone")
 	private String timezone;
 	@LdapAttribute("referrer")
@@ -387,19 +387,25 @@ public class SocialPerson extends Person {
 	}
 
 	/**
-	 * Name of Administrative Role or Group for example : regular, moderator , administrator, sysadmin
+	 * Name of Manager Role or Group for example : regular, moderator , administrator, sysadmin.
+	 * 
+	 * (administrativeRole attribute OID 2.5.18.5 is already used by LDAP standard)
+	 *   
 	 * @return the administrativeRole
 	 */
-	public String getAdministrativeRole() {
-		return administrativeRole;
+	public String getManagerRole() {
+		return managerRole;
 	}
 
 	/**
-	 * Name of Administrative Role or Group for example : regular, moderator , administrator, sysadmin
-	 * @param administrativeRole the administrativeRole to set
+	 * Name of Manager Role or Group for example : regular, moderator , administrator, sysadmin
+	 * 
+	 * (administrativeRole attribute OID 2.5.18.5 is already used by LDAP standard)
+	 *   
+	 * @param managerRole the administrativeRole to set
 	 */
-	public void setAdministrativeRole(String administrativeRole) {
-		this.administrativeRole = administrativeRole;
+	public void setManagerRole(String managerRole) {
+		this.managerRole = managerRole;
 	}
 
 	/**
@@ -593,12 +599,14 @@ public class SocialPerson extends Person {
 	/**
 	 * accountStatus itu delete (move to Trash)/undelete, untuk normal repository :
 	 * 
-	 *     draft: Member belum aktif.
-	 *     validated: Email sudah divalidasi tapi belum aktif (bila membership dimoderasi).
-	 *     active: Akun aktif dan dapat digunakan.
-	 *     verified: Akun aktif dan dapat digunakan, dan sudah diverifikasi bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator).
-	 *     inactive: Member dinonaktifkan / suspended.
-	 *     void: Member dihapus.@return the accountStatus
+	 * <ol>
+	 * 	<li>draft: Member belum aktif.</li>
+	 * 	<li>validated: Email sudah divalidasi tapi belum aktif (bila membership dimoderasi).</li>
+	 * 	<li>active: Akun aktif dan dapat digunakan.</li>
+	 * 	<li>verified: Akun aktif dan dapat digunakan, dan sudah diverifikasi bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator).</li>
+	 * 	<li>inactive: Member dinonaktifkan / suspended.</li>
+	 * 	<li>void: Member dihapus.@return the accountStatus</li>
+	 * </ol>
 	 */
 	public AccountStatus getAccountStatus() {
 		return accountStatus;
@@ -607,12 +615,15 @@ public class SocialPerson extends Person {
 	/**
 	 * accountStatus itu delete (move to Trash)/undelete, untuk normal repository :
 	 * 
-	 *     draft: Member belum aktif.
-	 *     validated: Email sudah divalidasi tapi belum aktif (bila membership dimoderasi).
-	 *     active: Akun aktif dan dapat digunakan.
-	 *     verified: Akun aktif dan dapat digunakan, dan sudah diverifikasi bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator).
-	 *     inactive: Member dinonaktifkan / suspended.
-	 *     void: Member dihapus.@return the accountStatus
+	 * <ol>
+	 * 	<li>draft: Member belum aktif.</li>
+	 * 	<li>validated: Email sudah divalidasi tapi belum aktif (bila membership dimoderasi).</li>
+	 * 	<li>active: Akun aktif dan dapat digunakan.</li>
+	 * 	<li>verified: Akun aktif dan dapat digunakan, dan sudah diverifikasi bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator).</li>
+	 * 	<li>inactive: Member dinonaktifkan / suspended.</li>
+	 * 	<li>void: Member dihapus.@return the accountStatus</li>
+	 * </ol>
+	 * 
 	 * @param accountStatus the accountStatus to set
 	 */
 	public void setAccountStatus(AccountStatus accountStatus) {
@@ -652,7 +663,7 @@ public class SocialPerson extends Person {
 	}
 
 	/**
-	 *  Apakah dia ingin mensharing aktivitasnya di social network seperti Twitter, Facebook, Path, Google+, dll. (secara umum, konfigurasi spesifik di tempat lain)
+	 * Apakah dia ingin mensharing aktivitasnya di social network seperti Twitter, Facebook, Path, Google+, dll. (secara umum, konfigurasi spesifik di tempat lain)
 	 * @return the socialSharingEnabled
 	 */
 	public Boolean getSocialSharingEnabled() {
