@@ -16,6 +16,7 @@ import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.NsPrefixable;
+import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 
 import org.soluvas.commons.Sluggable;
@@ -165,6 +166,7 @@ public class DataSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseNsPrefixable(term);
 				if (result == null) result = caseColorable(term);
 				if (result == null) result = caseImageable(term);
+				if (result == null) result = casePositionable(term);
 				if (result == null) result = caseNameable(term);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -597,6 +599,21 @@ public class DataSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseImageable(Imageable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Positionable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Positionable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 casePositionable(Positionable object) {
 		return null;
 	}
 

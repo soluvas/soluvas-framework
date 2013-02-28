@@ -26,6 +26,7 @@ import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.NsPrefixable;
+import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 
@@ -48,6 +49,7 @@ import org.soluvas.data.Vocab;
  *   <li>{@link org.soluvas.data.impl.TermImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getColor <em>Color</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getPositioner <em>Positioner</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getVocab <em>Vocab</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getDisplayName <em>Display Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getImageId <em>Image Id</em>}</li>
@@ -208,6 +210,26 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @ordered
 	 */
 	protected String color = COLOR_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPositioner()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer POSITIONER_EDEFAULT = new Integer(0);
+
+	/**
+	 * The cached value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPositioner()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer positioner = POSITIONER_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getVocab() <em>Vocab</em>}' reference.
@@ -482,6 +504,27 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Integer getPositioner() {
+		return positioner;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPositioner(Integer newPositioner) {
+		Integer oldPositioner = positioner;
+		positioner = newPositioner;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__POSITIONER, oldPositioner, positioner));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Vocab getVocab() {
 		if (vocab != null && ((EObject)vocab).eIsProxy()) {
 			InternalEObject oldVocab = (InternalEObject)vocab;
@@ -623,6 +666,8 @@ public class TermImpl extends EObjectImpl implements Term {
 				return getNsPrefix();
 			case DataPackage.TERM__COLOR:
 				return getColor();
+			case DataPackage.TERM__POSITIONER:
+				return getPositioner();
 			case DataPackage.TERM__VOCAB:
 				if (resolve) return getVocab();
 				return basicGetVocab();
@@ -671,6 +716,9 @@ public class TermImpl extends EObjectImpl implements Term {
 				return;
 			case DataPackage.TERM__COLOR:
 				setColor((String)newValue);
+				return;
+			case DataPackage.TERM__POSITIONER:
+				setPositioner((Integer)newValue);
 				return;
 			case DataPackage.TERM__VOCAB:
 				setVocab((Vocab)newValue);
@@ -723,6 +771,9 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__COLOR:
 				setColor(COLOR_EDEFAULT);
 				return;
+			case DataPackage.TERM__POSITIONER:
+				setPositioner(POSITIONER_EDEFAULT);
+				return;
 			case DataPackage.TERM__VOCAB:
 				setVocab((Vocab)null);
 				return;
@@ -766,6 +817,8 @@ public class TermImpl extends EObjectImpl implements Term {
 				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
 			case DataPackage.TERM__COLOR:
 				return COLOR_EDEFAULT == null ? color != null : !COLOR_EDEFAULT.equals(color);
+			case DataPackage.TERM__POSITIONER:
+				return POSITIONER_EDEFAULT == null ? positioner != null : !POSITIONER_EDEFAULT.equals(positioner);
 			case DataPackage.TERM__VOCAB:
 				return vocab != null;
 			case DataPackage.TERM__DISPLAY_NAME:
@@ -829,6 +882,12 @@ public class TermImpl extends EObjectImpl implements Term {
 				default: return -1;
 			}
 		}
+		if (baseClass == Positionable.class) {
+			switch (derivedFeatureID) {
+				case DataPackage.TERM__POSITIONER: return CommonsPackage.POSITIONABLE__POSITIONER;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -881,6 +940,12 @@ public class TermImpl extends EObjectImpl implements Term {
 				default: return -1;
 			}
 		}
+		if (baseClass == Positionable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.POSITIONABLE__POSITIONER: return DataPackage.TERM__POSITIONER;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -908,6 +973,8 @@ public class TermImpl extends EObjectImpl implements Term {
 		result.append(nsPrefix);
 		result.append(", color: ");
 		result.append(color);
+		result.append(", positioner: ");
+		result.append(positioner);
 		result.append(", displayName: ");
 		result.append(displayName);
 		result.append(", imageId: ");
