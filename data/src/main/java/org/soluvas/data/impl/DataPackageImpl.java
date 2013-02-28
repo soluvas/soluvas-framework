@@ -532,6 +532,24 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTerm_AttributeTypeNsPrefix() {
+		return (EAttribute)termEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTerm_AttributeTypeName() {
+		return (EAttribute)termEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getListVocab() {
 		return listVocabEClass;
@@ -752,6 +770,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		termEClass = createEClass(TERM);
 		createEReference(termEClass, TERM__VOCAB);
+		createEAttribute(termEClass, TERM__ATTRIBUTE_TYPE_NS_PREFIX);
+		createEAttribute(termEClass, TERM__ATTRIBUTE_TYPE_NAME);
 
 		listVocabEClass = createEClass(LIST_VOCAB);
 
@@ -944,6 +964,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		initEClass(termEClass, Term.class, "Term", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTerm_Vocab(), this.getVocab(), null, "vocab", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTerm_AttributeTypeNsPrefix(), theEcorePackage.getEString(), "attributeTypeNsPrefix", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTerm_AttributeTypeName(), theEcorePackage.getEString(), "attributeTypeName", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(listVocabEClass, ListVocab.class, "ListVocab", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1088,7 +1110,19 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "pindah jd attributetype."
-		   });						
+		   });			
+		addAnnotation
+		  (getTerm_AttributeTypeNsPrefix(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The nsPrefix of the attributeType of this term. For example, for attribute type \"base_color\", nsPrefix is \"base\"."
+		   });		
+		addAnnotation
+		  (getTerm_AttributeTypeName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The name of the attributeType of this term. For example, for attribute type \"base_color\", attributeTypeName is \"color\"."
+		   });					
 		addAnnotation
 		  (getTermContainer_Terms(), 
 		   source, 
@@ -1110,7 +1144,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "name", "Vocab"
-		   });		
+		   });				
 		addAnnotation
 		  (listVocabEClass, 
 		   source, 

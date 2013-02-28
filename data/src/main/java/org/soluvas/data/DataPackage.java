@@ -763,13 +763,31 @@ public interface DataPackage extends EPackage {
 	int TERM__VOCAB = TERM_CONTAINER_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Attribute Type Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__ATTRIBUTE_TYPE_NS_PREFIX = TERM_CONTAINER_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Attribute Type Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__ATTRIBUTE_TYPE_NAME = TERM_CONTAINER_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Term</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TERM_FEATURE_COUNT = TERM_CONTAINER_FEATURE_COUNT + 6;
+	int TERM_FEATURE_COUNT = TERM_CONTAINER_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.ListVocabImpl <em>List Vocab</em>}' class.
@@ -1467,6 +1485,28 @@ public interface DataPackage extends EPackage {
 	EReference getTerm_Vocab();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Term#getAttributeTypeNsPrefix <em>Attribute Type Ns Prefix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Attribute Type Ns Prefix</em>'.
+	 * @see org.soluvas.data.Term#getAttributeTypeNsPrefix()
+	 * @see #getTerm()
+	 * @generated
+	 */
+	EAttribute getTerm_AttributeTypeNsPrefix();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Term#getAttributeTypeName <em>Attribute Type Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Attribute Type Name</em>'.
+	 * @see org.soluvas.data.Term#getAttributeTypeName()
+	 * @see #getTerm()
+	 * @generated
+	 */
+	EAttribute getTerm_AttributeTypeName();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.ListVocab <em>List Vocab</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1893,6 +1933,22 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TERM__VOCAB = eINSTANCE.getTerm_Vocab();
+
+		/**
+		 * The meta object literal for the '<em><b>Attribute Type Ns Prefix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TERM__ATTRIBUTE_TYPE_NS_PREFIX = eINSTANCE.getTerm_AttributeTypeNsPrefix();
+
+		/**
+		 * The meta object literal for the '<em><b>Attribute Type Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TERM__ATTRIBUTE_TYPE_NAME = eINSTANCE.getTerm_AttributeTypeName();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.ListVocabImpl <em>List Vocab</em>}' class.

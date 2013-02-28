@@ -41,7 +41,11 @@
         <details key="documentation" value="true if maxValues is > 1."/>
       </eAnnotations>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Human friendly name."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="minValues" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="0 means optional, 1 means required, and so on."/>
@@ -173,8 +177,29 @@
       <details key="name" value="Vocab"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Term" eSuperTypes="#//TermContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ResourceAware">
+  <eClassifiers xsi:type="ecore:EClass" name="Term" eSuperTypes="#//TermContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ResourceAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NsPrefixable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Colorable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Imageable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="vocab" eType="#//Vocab"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Human friendly name."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Image ID of the term in the repository (if available). The ImageRepository is usually using &quot;term&quot; namespace.&#xA;&#xA;TODO: provide a way to specify a static image instead (using 'imagesUri')."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attributeTypeNsPrefix"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The nsPrefix of the attributeType of this term. For example, for attribute type &quot;base_color&quot;, nsPrefix is &quot;base&quot;."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attributeTypeName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The name of the attributeType of this term. For example, for attribute type &quot;base_color&quot;, attributeTypeName is &quot;color&quot;."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ListVocab" eSuperTypes="#//Vocab">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">

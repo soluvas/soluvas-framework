@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.soluvas.commons.CategoryInfo;
+import org.soluvas.commons.Colorable;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
@@ -33,8 +34,8 @@ import org.soluvas.commons.Sluggable;
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getSlug <em>Slug</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getSlugPath <em>Slug Path</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getColor <em>Color</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getSlugPath <em>Slug Path</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getImageId <em>Image Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getLevel <em>Level</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getCategoryCount <em>Category Count</em>}</li>
@@ -128,26 +129,6 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getSlugPath() <em>Slug Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSlugPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SLUG_PATH_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSlugPath() <em>Slug Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSlugPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected String slugPath = SLUG_PATH_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getColor() <em>Color</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -166,6 +147,26 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * @ordered
 	 */
 	protected String color = COLOR_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSlugPath() <em>Slug Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSlugPath()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SLUG_PATH_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSlugPath() <em>Slug Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSlugPath()
+	 * @generated
+	 * @ordered
+	 */
+	protected String slugPath = SLUG_PATH_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getImageId() <em>Image Id</em>}' attribute.
@@ -555,10 +556,10 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 				return getId();
 			case CommonsPackage.CATEGORY_INFO__NAME:
 				return getName();
-			case CommonsPackage.CATEGORY_INFO__SLUG_PATH:
-				return getSlugPath();
 			case CommonsPackage.CATEGORY_INFO__COLOR:
 				return getColor();
+			case CommonsPackage.CATEGORY_INFO__SLUG_PATH:
+				return getSlugPath();
 			case CommonsPackage.CATEGORY_INFO__IMAGE_ID:
 				return getImageId();
 			case CommonsPackage.CATEGORY_INFO__LEVEL:
@@ -595,11 +596,11 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 			case CommonsPackage.CATEGORY_INFO__NAME:
 				setName((String)newValue);
 				return;
-			case CommonsPackage.CATEGORY_INFO__SLUG_PATH:
-				setSlugPath((String)newValue);
-				return;
 			case CommonsPackage.CATEGORY_INFO__COLOR:
 				setColor((String)newValue);
+				return;
+			case CommonsPackage.CATEGORY_INFO__SLUG_PATH:
+				setSlugPath((String)newValue);
 				return;
 			case CommonsPackage.CATEGORY_INFO__IMAGE_ID:
 				setImageId((String)newValue);
@@ -641,11 +642,11 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 			case CommonsPackage.CATEGORY_INFO__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case CommonsPackage.CATEGORY_INFO__SLUG_PATH:
-				setSlugPath(SLUG_PATH_EDEFAULT);
-				return;
 			case CommonsPackage.CATEGORY_INFO__COLOR:
 				setColor(COLOR_EDEFAULT);
+				return;
+			case CommonsPackage.CATEGORY_INFO__SLUG_PATH:
+				setSlugPath(SLUG_PATH_EDEFAULT);
 				return;
 			case CommonsPackage.CATEGORY_INFO__IMAGE_ID:
 				setImageId(IMAGE_ID_EDEFAULT);
@@ -682,10 +683,10 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case CommonsPackage.CATEGORY_INFO__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case CommonsPackage.CATEGORY_INFO__SLUG_PATH:
-				return SLUG_PATH_EDEFAULT == null ? slugPath != null : !SLUG_PATH_EDEFAULT.equals(slugPath);
 			case CommonsPackage.CATEGORY_INFO__COLOR:
 				return COLOR_EDEFAULT == null ? color != null : !COLOR_EDEFAULT.equals(color);
+			case CommonsPackage.CATEGORY_INFO__SLUG_PATH:
+				return SLUG_PATH_EDEFAULT == null ? slugPath != null : !SLUG_PATH_EDEFAULT.equals(slugPath);
 			case CommonsPackage.CATEGORY_INFO__IMAGE_ID:
 				return IMAGE_ID_EDEFAULT == null ? imageId != null : !IMAGE_ID_EDEFAULT.equals(imageId);
 			case CommonsPackage.CATEGORY_INFO__LEVEL:
@@ -735,6 +736,12 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 				default: return -1;
 			}
 		}
+		if (baseClass == Colorable.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.CATEGORY_INFO__COLOR: return CommonsPackage.COLORABLE__COLOR;
+				default: return -1;
+			}
+		}
 		if (baseClass == Parentable.class) {
 			switch (derivedFeatureID) {
 				case CommonsPackage.CATEGORY_INFO__PARENT: return CommonsPackage.PARENTABLE__PARENT;
@@ -779,6 +786,12 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 				default: return -1;
 			}
 		}
+		if (baseClass == Colorable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.COLORABLE__COLOR: return CommonsPackage.CATEGORY_INFO__COLOR;
+				default: return -1;
+			}
+		}
 		if (baseClass == Parentable.class) {
 			switch (baseFeatureID) {
 				case CommonsPackage.PARENTABLE__PARENT: return CommonsPackage.CATEGORY_INFO__PARENT;
@@ -806,10 +819,10 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 		result.append(id);
 		result.append(", name: ");
 		result.append(name);
-		result.append(", slugPath: ");
-		result.append(slugPath);
 		result.append(", color: ");
 		result.append(color);
+		result.append(", slugPath: ");
+		result.append(slugPath);
 		result.append(", imageId: ");
 		result.append(imageId);
 		result.append(", level: ");

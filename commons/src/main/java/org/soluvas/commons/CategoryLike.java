@@ -20,7 +20,6 @@ package org.soluvas.commons;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.commons.CategoryLike#getSlugPath <em>Slug Path</em>}</li>
- *   <li>{@link org.soluvas.commons.CategoryLike#getColor <em>Color</em>}</li>
  *   <li>{@link org.soluvas.commons.CategoryLike#getImageId <em>Image Id</em>}</li>
  *   <li>{@link org.soluvas.commons.CategoryLike#getLevel <em>Level</em>}</li>
  *   <li>{@link org.soluvas.commons.CategoryLike#getCategoryCount <em>Category Count</em>}</li>
@@ -31,7 +30,7 @@ package org.soluvas.commons;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface CategoryLike extends Positionable, Sluggable, Imageable, Identifiable, NameContainer {
+public interface CategoryLike extends Positionable, Sluggable, Imageable, Identifiable, NameContainer, Colorable {
 	/**
 	 * Returns the value of the '<em><b>Slug Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -56,31 +55,6 @@ public interface CategoryLike extends Positionable, Sluggable, Imageable, Identi
 	 * @generated
 	 */
 	void setSlugPath(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Color</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * HTML color code name or hexadecimal code (i.e. "#3356ff") of category color (usually used as background).
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Color</em>' attribute.
-	 * @see #setColor(String)
-	 * @see org.soluvas.commons.CommonsPackage#getCategoryLike_Color()
-	 * @model
-	 * @generated
-	 */
-	String getColor();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.commons.CategoryLike#getColor <em>Color</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Color</em>' attribute.
-	 * @see #getColor()
-	 * @generated
-	 */
-	void setColor(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Image Id</b></em>' attribute.

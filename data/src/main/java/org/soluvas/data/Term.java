@@ -15,6 +15,8 @@ import org.soluvas.commons.ResourceAware;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.data.Term#getVocab <em>Vocab</em>}</li>
+ *   <li>{@link org.soluvas.data.Term#getAttributeTypeNsPrefix <em>Attribute Type Ns Prefix</em>}</li>
+ *   <li>{@link org.soluvas.data.Term#getAttributeTypeName <em>Attribute Type Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,5 +50,55 @@ public interface Term extends TermContainer, BundleAware, NameContainer, Resourc
 	 * @generated
 	 */
 	void setVocab(Vocab value);
+
+	/**
+	 * Returns the value of the '<em><b>Attribute Type Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The nsPrefix of the attributeType of this term. For example, for attribute type "base_color", nsPrefix is "base".
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Attribute Type Ns Prefix</em>' attribute.
+	 * @see #setAttributeTypeNsPrefix(String)
+	 * @see org.soluvas.data.DataPackage#getTerm_AttributeTypeNsPrefix()
+	 * @model
+	 * @generated
+	 */
+	String getAttributeTypeNsPrefix();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Term#getAttributeTypeNsPrefix <em>Attribute Type Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Attribute Type Ns Prefix</em>' attribute.
+	 * @see #getAttributeTypeNsPrefix()
+	 * @generated
+	 */
+	void setAttributeTypeNsPrefix(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Attribute Type Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The name of the attributeType of this term. For example, for attribute type "base_color", attributeTypeName is "color".
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Attribute Type Name</em>' attribute.
+	 * @see #setAttributeTypeName(String)
+	 * @see org.soluvas.data.DataPackage#getTerm_AttributeTypeName()
+	 * @model
+	 * @generated
+	 */
+	String getAttributeTypeName();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Term#getAttributeTypeName <em>Attribute Type Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Attribute Type Name</em>' attribute.
+	 * @see #getAttributeTypeName()
+	 * @generated
+	 */
+	void setAttributeTypeName(String value);
 
 } // Term

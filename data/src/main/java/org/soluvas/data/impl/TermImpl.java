@@ -44,6 +44,8 @@ import org.soluvas.data.Vocab;
  *   <li>{@link org.soluvas.data.impl.TermImpl#getResourceUri <em>Resource Uri</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getVocab <em>Vocab</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getAttributeTypeNsPrefix <em>Attribute Type Ns Prefix</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getAttributeTypeName <em>Attribute Type Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -169,6 +171,46 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @ordered
 	 */
 	protected Vocab vocab;
+
+	/**
+	 * The default value of the '{@link #getAttributeTypeNsPrefix() <em>Attribute Type Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttributeTypeNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ATTRIBUTE_TYPE_NS_PREFIX_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAttributeTypeNsPrefix() <em>Attribute Type Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttributeTypeNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String attributeTypeNsPrefix = ATTRIBUTE_TYPE_NS_PREFIX_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAttributeTypeName() <em>Attribute Type Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttributeTypeName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ATTRIBUTE_TYPE_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAttributeTypeName() <em>Attribute Type Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttributeTypeName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String attributeTypeName = ATTRIBUTE_TYPE_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -349,6 +391,48 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getAttributeTypeNsPrefix() {
+		return attributeTypeNsPrefix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAttributeTypeNsPrefix(String newAttributeTypeNsPrefix) {
+		String oldAttributeTypeNsPrefix = attributeTypeNsPrefix;
+		attributeTypeNsPrefix = newAttributeTypeNsPrefix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX, oldAttributeTypeNsPrefix, attributeTypeNsPrefix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getAttributeTypeName() {
+		return attributeTypeName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAttributeTypeName(String newAttributeTypeName) {
+		String oldAttributeTypeName = attributeTypeName;
+		attributeTypeName = newAttributeTypeName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__ATTRIBUTE_TYPE_NAME, oldAttributeTypeName, attributeTypeName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -367,6 +451,10 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__VOCAB:
 				if (resolve) return getVocab();
 				return basicGetVocab();
+			case DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX:
+				return getAttributeTypeNsPrefix();
+			case DataPackage.TERM__ATTRIBUTE_TYPE_NAME:
+				return getAttributeTypeName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -402,6 +490,12 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__VOCAB:
 				setVocab((Vocab)newValue);
 				return;
+			case DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX:
+				setAttributeTypeNsPrefix((String)newValue);
+				return;
+			case DataPackage.TERM__ATTRIBUTE_TYPE_NAME:
+				setAttributeTypeName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -435,6 +529,12 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__VOCAB:
 				setVocab((Vocab)null);
 				return;
+			case DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX:
+				setAttributeTypeNsPrefix(ATTRIBUTE_TYPE_NS_PREFIX_EDEFAULT);
+				return;
+			case DataPackage.TERM__ATTRIBUTE_TYPE_NAME:
+				setAttributeTypeName(ATTRIBUTE_TYPE_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -461,6 +561,10 @@ public class TermImpl extends EObjectImpl implements Term {
 				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
 			case DataPackage.TERM__VOCAB:
 				return vocab != null;
+			case DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX:
+				return ATTRIBUTE_TYPE_NS_PREFIX_EDEFAULT == null ? attributeTypeNsPrefix != null : !ATTRIBUTE_TYPE_NS_PREFIX_EDEFAULT.equals(attributeTypeNsPrefix);
+			case DataPackage.TERM__ATTRIBUTE_TYPE_NAME:
+				return ATTRIBUTE_TYPE_NAME_EDEFAULT == null ? attributeTypeName != null : !ATTRIBUTE_TYPE_NAME_EDEFAULT.equals(attributeTypeName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -555,6 +659,10 @@ public class TermImpl extends EObjectImpl implements Term {
 		result.append(resourceUri);
 		result.append(", resourceName: ");
 		result.append(resourceName);
+		result.append(", attributeTypeNsPrefix: ");
+		result.append(attributeTypeNsPrefix);
+		result.append(", attributeTypeName: ");
+		result.append(attributeTypeName);
 		result.append(')');
 		return result.toString();
 	}
