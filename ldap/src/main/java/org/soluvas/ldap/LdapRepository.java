@@ -99,7 +99,7 @@ public interface LdapRepository<T> extends EntityLookup<T, String> {
 	/**
 	 * @return the mapper
 	 */
-	LdapMapper getMapper();
+	LdapMapper<T> getMapper();
 
 	/**
 	 * Get the entry {@link Dn} for the specified entry ID.

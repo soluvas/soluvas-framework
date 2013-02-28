@@ -43,7 +43,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	
 	@Inject
 	private final ObjectPool<LdapConnection> pool;
-	private final LdapMapper mapper;
+	private final LdapMapper<T> mapper;
 	private final String shopDn;
 	private final Class<? extends T> entityClass;
 
@@ -52,7 +52,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 		this.entityClass = entityClass;
 		this.pool = pool;
 		this.shopDn = baseDn;
-		this.mapper = new LdapMapper();
+		this.mapper = new LdapMapper<T>();
 	}
 	
 	protected <V> V withConnection(@Nonnull final Function<LdapConnection, V> function) {
@@ -332,7 +332,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * @return the mapper
 	 */
 	@Override
-	public LdapMapper getMapper() {
+	public LdapMapper<T> getMapper() {
 		return mapper;
 	}
 

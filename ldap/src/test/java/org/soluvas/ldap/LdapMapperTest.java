@@ -47,14 +47,12 @@ import com.google.common.collect.Ordering;
 public class LdapMapperTest {
 
 	private static final Logger log = LoggerFactory.getLogger(LdapMapperTest.class);
-	private LdapMapper mapper;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		mapper = new LdapMapper();
 	}
 
 	/**
@@ -65,10 +63,12 @@ public class LdapMapperTest {
 	}
 
 	@Test public void mapsSimpleClassToEntry() throws LdapInvalidAttributeValueException {
-		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "hendy@soluvas.com");
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
+		final Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "hendy@soluvas.com");
 		log.info("Input Person: {}", hendy);
 		
-		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
+		final Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
 		log.info("Output Entry: {}", entry);
 		
 		assertTrue(entry.contains("objectClass", "inetOrgPerson", "uidObject", "extensibleObject") );
@@ -82,6 +82,8 @@ public class LdapMapperTest {
 	}
 
 	@Test public void mapsEntryWithProperAttributeTypes() throws LdapInvalidAttributeValueException {
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
 		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "hendy@soluvas.com");
 		log.info("Input Person: {}", hendy);
 		
@@ -98,6 +100,8 @@ public class LdapMapperTest {
 	}
 
 	@Test public void mapsSimpleClassWithProperAlias() throws LdapInvalidAttributeValueException {
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
 		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "hendy@soluvas.com");
 		log.info("Input Person: {}", hendy);
 		
@@ -109,7 +113,9 @@ public class LdapMapperTest {
 	}
 
 	@Test public void mapsMultiValuesToEntry() throws LdapInvalidAttributeValueException {
-		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
+		final Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
 		hendy.setEmails(ImmutableSet.of("hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com"));
 		log.info("Input Person: {}", hendy);
 		
@@ -127,12 +133,12 @@ public class LdapMapperTest {
 	}
 	
 	@Test public void mapsSubclassToEntry() throws Exception {
-		SchemaLoader customSchemaLoader = new LdifSchemaLoader(new File("/var/lib/apacheds-2.0.0-M7/default/partitions/schema/"));
-		SchemaManager customSchemaMgr = new DefaultSchemaManager(customSchemaLoader);
+		final SchemaLoader customSchemaLoader = new LdifSchemaLoader(new File("/var/lib/apacheds-2.0.0-M7/default/partitions/schema/"));
+		final SchemaManager customSchemaMgr = new DefaultSchemaManager(customSchemaLoader);
 		final Collection<Schema> schemas = customSchemaLoader.getAllEnabled();
 		log.info("Loaded {} LDAP schemas: {}", schemas.size(), schemas);
 		customSchemaMgr.enable(schemas.toArray(new Schema[] {}));
-		LdapMapper customMapper = new LdapMapper();
+		final LdapMapper<SocialPerson> customMapper = new LdapMapper<SocialPerson>();
 		
 		SocialPerson hendy = new SocialPerson("hendy", "hendy.irawan", "Hendy", "Irawan", Gender.MALE);
 		hendy.setEmails(ImmutableSet.of("hendy@soluvas.com", "hendy@bippo.co.id", "ceefour666@gmail.com"));
@@ -163,7 +169,9 @@ public class LdapMapperTest {
 	}
 
 	@Test public void mapsEntryToSimpleClass() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
-		Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
+		final Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		entry.put("objectClass", "organizationalPerson", "extensibleObject");
 		entry.put("uid", "hendy");
 		entry.put("uniqueIdentifier", "hendy.irawan");
@@ -173,7 +181,7 @@ public class LdapMapperTest {
 		entry.put("mail", "hendy@soluvas.com");
 		log.info("Input Entry: {}", entry);
 		
-		Person person = mapper.fromEntry(entry, Person.class);
+		final Person person = mapper.fromEntry(entry, Person.class);
 		log.info("Output Person: {}", person);
 		
 		assertEquals("hendy", person.getId());
@@ -185,14 +193,16 @@ public class LdapMapperTest {
 	}
 
 	@Test public void mapsUserPasswordCorrectly() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
-		Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
+		final Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		entry.put("objectClass", "organizationalPerson", "extensibleObject");
 		entry.put("uid", "hendy");
 		final String password = "{SSHA}BacKnhFVjpSunHYgivCVPAzcavAZZe9QFtd51A==";
 		entry.put("userPassword", password.getBytes());
 		log.info("Input Entry: {}", entry);
 		
-		Person person = mapper.fromEntry(entry, Person.class);
+		final Person person = mapper.fromEntry(entry, Person.class);
 		log.info("Output Person: {}", person);
 		
 		assertEquals(password, person.getPassword());
@@ -200,7 +210,9 @@ public class LdapMapperTest {
 
 	@Test
 	public void mapsMultiToSimpleClass() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
-		Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
+		final Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		entry.put("objectClass", "organizationalPerson", "extensibleObject");
 		entry.put("uid", "hendy");
 		entry.put("uniqueIdentifier", "hendy.irawan");
@@ -210,7 +222,7 @@ public class LdapMapperTest {
 		entry.put("mail", "hendy@soluvas.com", "ceefour666@gmail.com", "hendy@bippo.co.id");
 		log.info("Input Entry: {}", entry);
 		
-		Person person = mapper.fromEntry(entry, Person.class);
+		final Person person = mapper.fromEntry(entry, Person.class);
 		log.info("Output Person: {}", person);
 		
 		assertEquals("hendy", person.getId());
@@ -224,7 +236,9 @@ public class LdapMapperTest {
 
 	@Test
 	public void mapsEntryToSubclass() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
-		Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
+		final Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		entry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject");
 		entry.put("uid", "hendy");
 		entry.put("uniqueIdentifier", "hendy.irawan");
@@ -240,7 +254,7 @@ public class LdapMapperTest {
 		entry.put("twitterScreenName", "hendyirawan");
 		log.info("Input Entry: {}", entry);
 		
-		SocialPerson person = mapper.fromEntry(entry, SocialPerson.class);
+		final SocialPerson person = mapper.fromEntry(entry, SocialPerson.class);
 		log.info("Output Person: {}", person);
 		
 		assertEquals("hendy", person.getId());
@@ -259,6 +273,8 @@ public class LdapMapperTest {
 
 	@Test
 	public void includesSuperClassAttributes() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
 		final Set<String> expectedAttributeIds = ImmutableSet.of(
 			// Person:
 			"uid", "uniqueIdentifier", "gn", "givenName", "sn", "cn",
@@ -275,17 +291,21 @@ public class LdapMapperTest {
 	}
 
 	@Test public void mapsLongToEntry() throws LdapInvalidAttributeValueException {
-		PersonWithLong hendy = new PersonWithLong("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
+		final LdapMapper<PersonWithLong> mapper = new LdapMapper<PersonWithLong>();
+		
+		final PersonWithLong hendy = new PersonWithLong("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
 		hendy.setEmployeeNumber(123L);
 		log.info("Input Person: {}", hendy);
 		
-		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
+		final Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
 		log.info("Output Entry: {}", entry);
 		
 		assertEquals("123", entry.get("employeeNumber").getString());
 	}
 	
 	@Test public void mapsAttributeToLong() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
+		final LdapMapper<PersonWithLong> mapper = new LdapMapper<PersonWithLong>();
+		
 		final Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		entry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject");
 		entry.put("uid", "hendy");
@@ -305,7 +325,9 @@ public class LdapMapperTest {
 	}
 	
 	@Test public void mapsAttributeAlias() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
-		Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
+		final Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		entry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject");
 		entry.put("uid", "hendy");
 		entry.put("uniqueIdentifier", "hendy.irawan");
@@ -317,24 +339,28 @@ public class LdapMapperTest {
 		
 		log.info("Input Entry: {}", entry);
 		
-		SocialPerson person = mapper.fromEntry(entry, SocialPerson.class);
+		final SocialPerson person = mapper.fromEntry(entry, SocialPerson.class);
 		log.info("Output Person: {}", person);
 		
 		assertEquals("Hendy", person.getFirstName());
 	}
 	
 	@Test public void mapsEmptyCollectionToNothing() throws LdapInvalidAttributeValueException {
-		Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "hendy@soluvas.com");
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
+		final Person hendy = new Person("hendy", "hendy.irawan", "Hendy", "Irawan", "hendy@soluvas.com");
 		hendy.setEmails(ImmutableSet.<String>of());
 		log.info("Input Person: {}", hendy);
 		
-		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
+		final Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
 		log.info("Output Entry: {}", entry);
 		
 		assertFalse(entry.containsAttribute("mail"));
 	}
 
 	@Test public void canAddObjectClasses() throws LdapException {
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
 		final Entry existingEntry = new DefaultEntry("uid=budi,ou=users,dc=dev,dc=berbatik,dc=com");
 		existingEntry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject");
 //		existing.put("uid", "hendy");
@@ -359,6 +385,8 @@ public class LdapMapperTest {
 	}
 
 	@Test public void properModificationWhenUpdatingStandardPerson() throws LdapException {
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
 		final Entry existingEntry = new DefaultEntry("uid=budi,ou=users,dc=dev,dc=berbatik,dc=com");
 		existingEntry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject",
 				"inetOrgPerson", "uidObject");
@@ -384,6 +412,8 @@ public class LdapMapperTest {
 	}
 
 	@Test public void canUpdateSocialPerson() throws LdapException {
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
 		final Entry existingEntry = new DefaultEntry("uid=budi,ou=users,dc=dev,dc=berbatik,dc=com");
 		existingEntry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject",
 				"inetOrgPerson", "uidObject");
@@ -410,13 +440,15 @@ public class LdapMapperTest {
 	}
 
 	@Test public void replaceAttributeModifyRequest() throws LdapException {
-		Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
 		existing.put("uid", "hendy");
 		existing.put("cn", "Hendy Irawan");
 		log.info("Existing Entry: {}", existing);
 		
-		Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		final Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		updating.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
 		updating.put("uid", "hendy");
 		updating.put("cn", "Hendy Irawan 2");
@@ -435,6 +467,8 @@ public class LdapMapperTest {
 	}
 
 	@Test public void replaceAttributeAliasModifyRequest() throws LdapException {
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
 		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
 		existing.put("uid", "hendy");
@@ -460,6 +494,8 @@ public class LdapMapperTest {
 	}
 
 	@Test public void addAttributeModifyRequest() throws LdapException {
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
 		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
 		existing.put("uid", "hendy");
@@ -484,14 +520,16 @@ public class LdapMapperTest {
 	}
 
 	@Test public void removeAttributeModifyRequest() throws LdapException {
-		Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
 		existing.put("uid", "hendy");
 		existing.put("cn", "Hendy Irawan");
 		existing.put("sn", "Irawan");
 		log.info("Existing Entry: {}", existing);
 		
-		Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		final Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		updating.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
 		updating.put("uid", "hendy");
 		updating.put("cn", "Hendy Irawan");
@@ -510,7 +548,9 @@ public class LdapMapperTest {
 	}
 
 	@Test public void addAndRemoveMultiAttributeModifyRequest() throws LdapException {
-		Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
 		existing.put("uid", "hendy");
 		existing.put("mail", "atang@yahoo.com");
@@ -536,13 +576,15 @@ public class LdapMapperTest {
 	}
 
 	@Test public void doNotRemoveAttributeWithAlias() throws LdapException {
-		Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
 		existing.put("uid", "hendy");
 		existing.put("gn", "Hendy");
 		log.info("Existing Entry: {}", existing);
 		
-		Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		final Entry updating = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		updating.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
 		updating.put("uid", "hendy");
 		updating.put("givenName", "Hendy");
@@ -558,6 +600,8 @@ public class LdapMapperTest {
 	}
 
 	@Test public void stringEqualsBytesPassword() throws LdapException {
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
 		final String password = "{SSHA}BacKnhFVjpSunHYgivCVPAzcavAZZe9QFtd51A==";
 
 		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
@@ -584,6 +628,8 @@ public class LdapMapperTest {
 	}
 
 	@Test public void canChangePassword() throws LdapException {
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
 		final String password = "{SSHA}BacKnhFVjpSunHYgivCVPAzcavAZZe9QFtd51A==";
 
 		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
@@ -614,6 +660,8 @@ public class LdapMapperTest {
 	
 	@Test
 	public void canMapFromDateToDateTime() throws LdapException {
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
 		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
 		existing.put("uid", "hendy");
@@ -628,6 +676,8 @@ public class LdapMapperTest {
 	
 	@Test
 	public void canMapFromCurrencyUnit() throws LdapException {
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
 		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
 		existing.put("uid", "hendy");
@@ -642,6 +692,8 @@ public class LdapMapperTest {
 	
 	@Test
 	public void canMapToCurrencyUnit() throws LdapException {
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
 		final SocialPerson hendy = new SocialPerson("hendy", "hendy", "Hendy", "Irawan");
 		hendy.setCurrency(CurrencyUnit.of("IDR"));
 		log.info("Input Person: {}", hendy);

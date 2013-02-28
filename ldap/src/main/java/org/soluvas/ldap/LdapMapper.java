@@ -54,7 +54,7 @@ import com.google.common.collect.Sets.SetView;
  *  
  * @author ceefour
  */
-public class LdapMapper {
+public class LdapMapper<T> {
 
 	private static Logger log = LoggerFactory.getLogger(LdapMapper.class);
 	/**
@@ -263,16 +263,16 @@ public class LdapMapper {
 	/**
 	 * Map an LDAP {@link Entry} to a POJO object.
 	 * @param entry
-	 * @param clazz
+	 * @param entityClass
 	 * @return
 	 */
-	public <T> T fromEntry(Entry entry, Class<T> clazz) {
+	public T fromEntry(Entry entry, Class<? extends T> entityClass) {
 		if (entry.getDn() == null)
 			throw new LdapMappingException("LDAP Entry DN cannot be null");
 		try {
-			final T bean = clazz.newInstance();
+			final T bean = entityClass.newInstance();
 
-			Class<?> currentClass = clazz;
+			Class<?> currentClass = entityClass;
 			while (currentClass != null) {
 				mapToProperties(entry, currentClass, bean);
 				currentClass = currentClass.getSuperclass();
@@ -282,20 +282,20 @@ public class LdapMapper {
 			
 			return bean;
 		} catch (InstantiationException e) {
-			log.error("Error mapping Entry " + entry.getDn() + " to " + clazz.getName(), e);
-			throw new LdapMappingException("Error mapping Entry " + entry.getDn() + " to " + clazz.getName(), e);
+			log.error("Error mapping Entry " + entry.getDn() + " to " + entityClass.getName(), e);
+			throw new LdapMappingException("Error mapping Entry " + entry.getDn() + " to " + entityClass.getName(), e);
 		} catch (IllegalAccessException e) {
-			log.error("Error mapping Entry " + entry.getDn() + " to " + clazz.getName(), e);
-			throw new LdapMappingException("Error mapping Entry " + entry.getDn() + " to " + clazz.getName(), e);
+			log.error("Error mapping Entry " + entry.getDn() + " to " + entityClass.getName(), e);
+			throw new LdapMappingException("Error mapping Entry " + entry.getDn() + " to " + entityClass.getName(), e);
 		} catch (InvocationTargetException e) {
-			log.error("Error mapping Entry " + entry.getDn() + " to " + clazz.getName(), e);
-			throw new LdapMappingException("Error mapping Entry " + entry.getDn() + " to " + clazz.getName(), e);
+			log.error("Error mapping Entry " + entry.getDn() + " to " + entityClass.getName(), e);
+			throw new LdapMappingException("Error mapping Entry " + entry.getDn() + " to " + entityClass.getName(), e);
 		} catch (LdapInvalidAttributeValueException e) {
-			log.error("Error mapping Entry " + entry.getDn() + " to " + clazz.getName(), e);
-			throw new LdapMappingException("Error mapping Entry " + entry.getDn() + " to " + clazz.getName(), e);
+			log.error("Error mapping Entry " + entry.getDn() + " to " + entityClass.getName(), e);
+			throw new LdapMappingException("Error mapping Entry " + entry.getDn() + " to " + entityClass.getName(), e);
 		} catch (NoSuchMethodException e) {
-			log.error("Error mapping Entry " + entry.getDn() + " to " + clazz.getName(), e);
-			throw new LdapMappingException("Error mapping Entry " + entry.getDn() + " to " + clazz.getName(), e);
+			log.error("Error mapping Entry " + entry.getDn() + " to " + entityClass.getName(), e);
+			throw new LdapMappingException("Error mapping Entry " + entry.getDn() + " to " + entityClass.getName(), e);
 		}
 	}
 	
@@ -356,7 +356,7 @@ public class LdapMapper {
 	 * @throws NoSuchMethodException
 	 * @throws LdapInvalidAttributeValueException
 	 */
-	protected <T> void mapToProperties(Entry entry, Class<?> clazz, T bean)
+	protected void mapToProperties(Entry entry, Class<?> clazz, T bean)
 			throws IllegalAccessException, InvocationTargetException,
 			NoSuchMethodException, LdapInvalidAttributeValueException {
 		final Field[] fields = clazz.getDeclaredFields();
@@ -433,7 +433,7 @@ public class LdapMapper {
 	 * @throws InvocationTargetException
 	 */
 	@SuppressWarnings("unchecked")
-	protected <T, R> R convertToPropertyValue(Class<R> fieldType, final Object value) {
+	protected <R> R convertToPropertyValue(Class<R> fieldType, final Object value) {
 		if (fieldType.isEnum()) {
 			final R[] enumConstants = fieldType.getEnumConstants();
 			R found = Iterables.find( ImmutableList.copyOf(enumConstants), new Predicate<R>() {
@@ -498,7 +498,7 @@ public class LdapMapper {
 	 * @param up
 	 * @return
 	 */
-	public <T> ModifyRequest createModifyRequest(@Nonnull final Entry existingEntry, @Nonnull final T existing, @Nonnull final T up) {
+	public ModifyRequest createModifyRequest(@Nonnull final Entry existingEntry, @Nonnull final T existing, @Nonnull final T up) {
 		final ModifyRequestImpl request = new ModifyRequestImpl();
 		request.setName(existingEntry.getDn());
 		// Object classes
