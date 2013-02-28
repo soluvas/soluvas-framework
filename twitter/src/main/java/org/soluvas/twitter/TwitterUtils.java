@@ -14,6 +14,8 @@ import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 import org.soluvas.ldap.SocialPerson;
 
+import com.google.common.base.Strings;
+
 /**
  * Inspired by org.soluvas.fbcli.FriendListDownloader.
  * @author ceefour
@@ -34,13 +36,16 @@ public class TwitterUtils {
 	 */
 	public static String refreshPhotoFromTwitter(final String twitterScreenName, final String personName,
 			ImageRepository imageRepo) {
+		if (Strings.isNullOrEmpty(twitterScreenName)) {
+			log.warn("Twitter Screen Name is {}", twitterScreenName);
+		}
 		final String photoUrl = "https://api.twitter.com/1/users/profile_image?screen_name=" + twitterScreenName + "&size=bigger";
 		final HttpClient httpClient = new DefaultHttpClient();
 		try {
 			final HttpGet httpGet = new HttpGet(photoUrl);
 			log.debug("Photo URL for twitter user {} ({}) is {}", twitterScreenName, personName, photoUrl);
 			final HttpResponse response = httpClient.execute(httpGet);
-			final File tmpFile = File.createTempFile("fb_", ".jpg");
+			final File tmpFile = File.createTempFile("twitter_", ".jpg");
 			try {
 				FileUtils.copyInputStreamToFile(response.getEntity().getContent(), tmpFile);
 				log.debug("Photo Status Line {}",  response.getStatusLine());
