@@ -1432,22 +1432,22 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_LIKE__NAME = POSITIONABLE_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Color</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_LIKE__COLOR = POSITIONABLE_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>Slug Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_LIKE__SLUG_PATH = POSITIONABLE_FEATURE_COUNT + 4;
+	int CATEGORY_LIKE__SLUG_PATH = POSITIONABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Color</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_LIKE__COLOR = POSITIONABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
@@ -1532,15 +1532,6 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_INFO__NAME = CATEGORY_LIKE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Color</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_INFO__COLOR = CATEGORY_LIKE__COLOR;
-
-	/**
 	 * The feature id for the '<em><b>Slug Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1548,6 +1539,15 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CATEGORY_INFO__SLUG_PATH = CATEGORY_LIKE__SLUG_PATH;
+
+	/**
+	 * The feature id for the '<em><b>Color</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__COLOR = CATEGORY_LIKE__COLOR;
 
 	/**
 	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
@@ -1724,34 +1724,6 @@ public interface CommonsPackage extends EPackage {
 	int PROGRESS_MONITOR_WRAPPER_FEATURE_COUNT = PROGRESS_MONITOR_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.commons.Colorable <em>Colorable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.soluvas.commons.Colorable
-	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getColorable()
-	 * @generated
-	 */
-	int COLORABLE = 37;
-
-	/**
-	 * The feature id for the '<em><b>Color</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLORABLE__COLOR = 0;
-
-	/**
-	 * The number of structural features of the '<em>Colorable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLORABLE_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1759,7 +1731,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 38;
+	int RESOURCE_TYPE = 37;
 
 
 	/**
@@ -1770,7 +1742,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 39;
+	int GENDER = 38;
 
 
 	/**
@@ -1781,7 +1753,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 40;
+	int ECLASS_STATUS = 39;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -1791,7 +1763,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 41;
+	int JAVA_CLASS_STATUS = 40;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ProgressStatus <em>Progress Status</em>}' enum.
@@ -1801,7 +1773,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getProgressStatus()
 	 * @generated
 	 */
-	int PROGRESS_STATUS = 42;
+	int PROGRESS_STATUS = 41;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.AccountStatus <em>Account Status</em>}' enum.
@@ -1811,7 +1783,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAccountStatus()
 	 * @generated
 	 */
-	int ACCOUNT_STATUS = 43;
+	int ACCOUNT_STATUS = 42;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.PublicationStatus <em>Publication Status</em>}' enum.
@@ -1821,7 +1793,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPublicationStatus()
 	 * @generated
 	 */
-	int PUBLICATION_STATUS = 44;
+	int PUBLICATION_STATUS = 43;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ArchivalStatus <em>Archival Status</em>}' enum.
@@ -1831,7 +1803,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getArchivalStatus()
 	 * @generated
 	 */
-	int ARCHIVAL_STATUS = 45;
+	int ARCHIVAL_STATUS = 44;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -1841,7 +1813,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 46;
+	int DATE_TIME = 45;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -1851,7 +1823,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 47;
+	int CURRENCY_UNIT = 46;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -1861,7 +1833,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 49;
+	int UNIT = 48;
 
 
 	/**
@@ -1872,7 +1844,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 50;
+	int LIST = 49;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -1882,7 +1854,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 51;
+	int MAP = 50;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -1892,7 +1864,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 52;
+	int SET = 51;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -1902,7 +1874,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 53;
+	int COLLECTION = 52;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -1912,7 +1884,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 54;
+	int MULTIMAP = 53;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -1922,7 +1894,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 55;
+	int NAVIGABLE_MAP = 54;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -1932,7 +1904,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 56;
+	int QUEUE = 55;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -1942,7 +1914,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 57;
+	int MULTISET = 56;
 
 
 	/**
@@ -1953,7 +1925,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 58;
+	int SERIALIZABLE = 57;
 
 
 	/**
@@ -1964,7 +1936,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 59;
+	int BUNDLE = 58;
 
 
 	/**
@@ -1975,7 +1947,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
 	 * @generated
 	 */
-	int BIG_MONEY_PROVIDER = 60;
+	int BIG_MONEY_PROVIDER = 59;
 
 	/**
 	 * The meta object id for the '<em>Quantity</em>' data type.
@@ -1985,7 +1957,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQuantity()
 	 * @generated
 	 */
-	int QUANTITY = 48;
+	int QUANTITY = 47;
 
 	/**
 	 * The meta object id for the '<em>Measurable</em>' data type.
@@ -1995,7 +1967,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMeasurable()
 	 * @generated
 	 */
-	int MEASURABLE = 61;
+	int MEASURABLE = 60;
 
 
 	/**
@@ -2006,7 +1978,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigDecimal()
 	 * @generated
 	 */
-	int BIG_DECIMAL = 62;
+	int BIG_DECIMAL = 61;
 
 
 	/**
@@ -2017,7 +1989,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTimeZone()
 	 * @generated
 	 */
-	int DATE_TIME_ZONE = 63;
+	int DATE_TIME_ZONE = 62;
 
 
 	/**
@@ -2028,7 +2000,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 64;
+	int LOCALE = 63;
 
 
 	/**
@@ -2039,7 +2011,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFile()
 	 * @generated
 	 */
-	int FILE = 65;
+	int FILE = 64;
 
 
 	/**
@@ -2879,6 +2851,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getCategoryLike_SlugPath();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CategoryLike#getColor <em>Color</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Color</em>'.
+	 * @see org.soluvas.commons.CategoryLike#getColor()
+	 * @see #getCategoryLike()
+	 * @generated
+	 */
+	EAttribute getCategoryLike_Color();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CategoryLike#getImageId <em>Image Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2994,27 +2977,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getProgressMonitorWrapper_Delegate();
-
-	/**
-	 * Returns the meta object for class '{@link org.soluvas.commons.Colorable <em>Colorable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Colorable</em>'.
-	 * @see org.soluvas.commons.Colorable
-	 * @generated
-	 */
-	EClass getColorable();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Colorable#getColor <em>Color</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Color</em>'.
-	 * @see org.soluvas.commons.Colorable#getColor()
-	 * @see #getColorable()
-	 * @generated
-	 */
-	EAttribute getColorable_Color();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -4037,6 +3999,14 @@ public interface CommonsPackage extends EPackage {
 		EAttribute CATEGORY_LIKE__SLUG_PATH = eINSTANCE.getCategoryLike_SlugPath();
 
 		/**
+		 * The meta object literal for the '<em><b>Color</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY_LIKE__COLOR = eINSTANCE.getCategoryLike_Color();
+
+		/**
 		 * The meta object literal for the '<em><b>Image Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4131,24 +4101,6 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROGRESS_MONITOR_WRAPPER__DELEGATE = eINSTANCE.getProgressMonitorWrapper_Delegate();
-
-		/**
-		 * The meta object literal for the '{@link org.soluvas.commons.Colorable <em>Colorable</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.soluvas.commons.Colorable
-		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getColorable()
-		 * @generated
-		 */
-		EClass COLORABLE = eINSTANCE.getColorable();
-
-		/**
-		 * The meta object literal for the '<em><b>Color</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute COLORABLE__COLOR = eINSTANCE.getColorable_Color();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

@@ -305,7 +305,6 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseImageable(categoryLike);
 				if (result == null) result = caseIdentifiable(categoryLike);
 				if (result == null) result = caseNameContainer(categoryLike);
-				if (result == null) result = caseColorable(categoryLike);
 				if (result == null) result = caseNameable(categoryLike);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -320,7 +319,6 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseImageable(categoryInfo);
 				if (result == null) result = caseIdentifiable(categoryInfo);
 				if (result == null) result = caseNameContainer(categoryInfo);
-				if (result == null) result = caseColorable(categoryInfo);
 				if (result == null) result = caseNameable(categoryInfo);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -342,12 +340,6 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				ProgressMonitorWrapper progressMonitorWrapper = (ProgressMonitorWrapper)theEObject;
 				T1 result = caseProgressMonitorWrapper(progressMonitorWrapper);
 				if (result == null) result = caseProgressMonitor(progressMonitorWrapper);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CommonsPackage.COLORABLE: {
-				Colorable colorable = (Colorable)theEObject;
-				T1 result = caseColorable(colorable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -907,21 +899,6 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseProgressMonitorWrapper(ProgressMonitorWrapper object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Colorable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Colorable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T1 caseColorable(Colorable object) {
 		return null;
 	}
 

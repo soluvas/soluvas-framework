@@ -356,13 +356,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass colorableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EEnum resourceTypeEEnum = null;
 
 	/**
@@ -1412,8 +1405,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getCategoryLike_ImageId() {
+	public EAttribute getCategoryLike_Color() {
 		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1423,7 +1415,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getCategoryLike_Level() {
+	public EAttribute getCategoryLike_ImageId() {
 		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1433,8 +1425,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getCategoryLike_CategoryCount() {
+	public EAttribute getCategoryLike_Level() {
 		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getCategoryLike_CategoryCount() {
+		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1515,24 +1517,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	@Override
 	public EReference getProgressMonitorWrapper_Delegate() {
 		return (EReference)progressMonitorWrapperEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getColorable() {
-		return colorableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getColorable_Color() {
-		return (EAttribute)colorableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1952,6 +1936,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		categoryLikeEClass = createEClass(CATEGORY_LIKE);
 		createEAttribute(categoryLikeEClass, CATEGORY_LIKE__SLUG_PATH);
+		createEAttribute(categoryLikeEClass, CATEGORY_LIKE__COLOR);
 		createEAttribute(categoryLikeEClass, CATEGORY_LIKE__IMAGE_ID);
 		createEAttribute(categoryLikeEClass, CATEGORY_LIKE__LEVEL);
 		createEAttribute(categoryLikeEClass, CATEGORY_LIKE__CATEGORY_COUNT);
@@ -1967,9 +1952,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		progressMonitorWrapperEClass = createEClass(PROGRESS_MONITOR_WRAPPER);
 		createEReference(progressMonitorWrapperEClass, PROGRESS_MONITOR_WRAPPER__DELEGATE);
-
-		colorableEClass = createEClass(COLORABLE);
-		createEAttribute(colorableEClass, COLORABLE__COLOR);
 
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
@@ -2158,7 +2140,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		categoryLikeEClass.getESuperTypes().add(this.getImageable());
 		categoryLikeEClass.getESuperTypes().add(this.getIdentifiable());
 		categoryLikeEClass.getESuperTypes().add(this.getNameContainer());
-		categoryLikeEClass.getESuperTypes().add(this.getColorable());
 		g1 = createEGenericType(this.getCategoryLike());
 		categoryInfoEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getParentable());
@@ -2314,6 +2295,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(categoryLikeEClass, CategoryLike.class, "CategoryLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCategoryLike_SlugPath(), theEcorePackage.getEString(), "slugPath", null, 0, 1, CategoryLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategoryLike_Color(), theEcorePackage.getEString(), "color", null, 0, 1, CategoryLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategoryLike_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, CategoryLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategoryLike_Level(), theEcorePackage.getEIntegerObject(), "level", null, 0, 1, CategoryLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategoryLike_CategoryCount(), theEcorePackage.getELongObject(), "categoryCount", null, 0, 1, CategoryLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2351,9 +2333,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(progressMonitorWrapperEClass, ProgressMonitorWrapper.class, "ProgressMonitorWrapper", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProgressMonitorWrapper_Delegate(), this.getProgressMonitor(), null, "delegate", null, 0, 1, ProgressMonitorWrapper.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(colorableEClass, Colorable.class, "Colorable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getColorable_Color(), theEcorePackage.getEString(), "color", null, 0, 1, Colorable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -2760,6 +2739,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Automatically updated based on slug and parent slugs, separated by \'/\'."
 		   });		
 		addAnnotation
+		  (getCategoryLike_Color(), 
+		   source, 
+		   new String[] {
+			 "documentation", "HTML color code name or hexadecimal code (i.e. \"#3356ff\") of category color (usually used as background)."
+		   });		
+		addAnnotation
 		  (getCategoryLike_Level(), 
 		   source, 
 		   new String[] {
@@ -2938,18 +2923,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Old Item"
-		   });		
-		addAnnotation
-		  (colorableEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "An object that can display itself as color."
-		   });		
-		addAnnotation
-		  (getColorable_Color(), 
-		   source, 
-		   new String[] {
-			 "documentation", "HTML color code name or hexadecimal code (i.e. \"#3356ff\") of category color (usually used as background)."
 		   });
 	}
 	
