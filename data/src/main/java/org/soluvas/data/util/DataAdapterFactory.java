@@ -2,16 +2,11 @@
  */
 package org.soluvas.data.util;
 
-import javax.measure.quantity.Quantity;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.soluvas.commons.BundleAware;
-import org.soluvas.commons.Colorable;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
@@ -20,9 +15,23 @@ import org.soluvas.commons.Nameable;
 import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
-
 import org.soluvas.commons.Sluggable;
-import org.soluvas.data.*;
+import org.soluvas.data.AttributeType;
+import org.soluvas.data.CurrencyValue;
+import org.soluvas.data.DataCatalog;
+import org.soluvas.data.DataPackage;
+import org.soluvas.data.FreeVocab;
+import org.soluvas.data.ListVocab;
+import org.soluvas.data.MeasureValue;
+import org.soluvas.data.Mixin;
+import org.soluvas.data.RangeValue;
+import org.soluvas.data.StringValue;
+import org.soluvas.data.Term;
+import org.soluvas.data.TermContainer;
+import org.soluvas.data.TermValue;
+import org.soluvas.data.TreeVocab;
+import org.soluvas.data.Value;
+import org.soluvas.data.Vocab;
 
 /**
  * <!-- begin-user-doc -->
@@ -171,10 +180,6 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSluggable(Sluggable object) {
 				return createSluggableAdapter();
-			}
-			@Override
-			public Adapter caseColorable(Colorable object) {
-				return createColorableAdapter();
 			}
 			@Override
 			public Adapter caseImageable(Imageable object) {
@@ -523,20 +528,6 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSluggableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Colorable <em>Colorable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.soluvas.commons.Colorable
-	 * @generated
-	 */
-	public Adapter createColorableAdapter() {
 		return null;
 	}
 

@@ -5,22 +5,15 @@ package org.soluvas.data.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.osgi.framework.Bundle;
-
 import org.soluvas.commons.BundleAware;
-import org.soluvas.commons.Colorable;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
@@ -29,7 +22,6 @@ import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
-
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.Term;
 import org.soluvas.data.Vocab;
@@ -48,7 +40,6 @@ import org.soluvas.data.Vocab;
  *   <li>{@link org.soluvas.data.impl.TermImpl#getResourceUri <em>Resource Uri</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getNsPrefix <em>Ns Prefix</em>}</li>
- *   <li>{@link org.soluvas.data.impl.TermImpl#getColor <em>Color</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getPositioner <em>Positioner</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getVocab <em>Vocab</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getDisplayName <em>Display Name</em>}</li>
@@ -192,26 +183,6 @@ public class TermImpl extends EObjectImpl implements Term {
 	protected String nsPrefix = NS_PREFIX_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getColor() <em>Color</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getColor()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String COLOR_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getColor() <em>Color</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getColor()
-	 * @generated
-	 * @ordered
-	 */
-	protected String color = COLOR_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -345,6 +316,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Term> getTerms() {
 		if (terms == null) {
 			terms = new EObjectResolvingEList<Term>(Term.class, this, DataPackage.TERM__TERMS);
@@ -357,6 +329,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Bundle getBundle() {
 		return bundle;
 	}
@@ -366,6 +339,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBundle(Bundle newBundle) {
 		Bundle oldBundle = bundle;
 		bundle = newBundle;
@@ -378,6 +352,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -387,6 +362,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -399,6 +375,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResourceType getResourceType() {
 		return resourceType;
 	}
@@ -408,6 +385,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceType(ResourceType newResourceType) {
 		ResourceType oldResourceType = resourceType;
 		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
@@ -420,6 +398,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceUri() {
 		return resourceUri;
 	}
@@ -429,6 +408,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceUri(String newResourceUri) {
 		String oldResourceUri = resourceUri;
 		resourceUri = newResourceUri;
@@ -441,6 +421,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceName() {
 		return resourceName;
 	}
@@ -450,6 +431,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceName(String newResourceName) {
 		String oldResourceName = resourceName;
 		resourceName = newResourceName;
@@ -462,6 +444,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNsPrefix() {
 		return nsPrefix;
 	}
@@ -471,6 +454,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNsPrefix(String newNsPrefix) {
 		String oldNsPrefix = nsPrefix;
 		nsPrefix = newNsPrefix;
@@ -483,27 +467,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getColor() {
-		return color;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setColor(String newColor) {
-		String oldColor = color;
-		color = newColor;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__COLOR, oldColor, color));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@Override
 	public Integer getPositioner() {
 		return positioner;
 	}
@@ -513,6 +477,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPositioner(Integer newPositioner) {
 		Integer oldPositioner = positioner;
 		positioner = newPositioner;
@@ -525,6 +490,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Vocab getVocab() {
 		if (vocab != null && ((EObject)vocab).eIsProxy()) {
 			InternalEObject oldVocab = (InternalEObject)vocab;
@@ -551,6 +517,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVocab(Vocab newVocab) {
 		Vocab oldVocab = vocab;
 		vocab = newVocab;
@@ -563,6 +530,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDisplayName() {
 		return displayName;
 	}
@@ -572,6 +540,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDisplayName(String newDisplayName) {
 		String oldDisplayName = displayName;
 		displayName = newDisplayName;
@@ -584,6 +553,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getImageId() {
 		return imageId;
 	}
@@ -593,6 +563,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setImageId(String newImageId) {
 		String oldImageId = imageId;
 		imageId = newImageId;
@@ -605,6 +576,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getAttributeTypeNsPrefix() {
 		return attributeTypeNsPrefix;
 	}
@@ -614,6 +586,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAttributeTypeNsPrefix(String newAttributeTypeNsPrefix) {
 		String oldAttributeTypeNsPrefix = attributeTypeNsPrefix;
 		attributeTypeNsPrefix = newAttributeTypeNsPrefix;
@@ -626,6 +599,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getAttributeTypeName() {
 		return attributeTypeName;
 	}
@@ -635,6 +609,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAttributeTypeName(String newAttributeTypeName) {
 		String oldAttributeTypeName = attributeTypeName;
 		attributeTypeName = newAttributeTypeName;
@@ -664,8 +639,6 @@ public class TermImpl extends EObjectImpl implements Term {
 				return getResourceName();
 			case DataPackage.TERM__NS_PREFIX:
 				return getNsPrefix();
-			case DataPackage.TERM__COLOR:
-				return getColor();
 			case DataPackage.TERM__POSITIONER:
 				return getPositioner();
 			case DataPackage.TERM__VOCAB:
@@ -713,9 +686,6 @@ public class TermImpl extends EObjectImpl implements Term {
 				return;
 			case DataPackage.TERM__NS_PREFIX:
 				setNsPrefix((String)newValue);
-				return;
-			case DataPackage.TERM__COLOR:
-				setColor((String)newValue);
 				return;
 			case DataPackage.TERM__POSITIONER:
 				setPositioner((Integer)newValue);
@@ -768,9 +738,6 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__NS_PREFIX:
 				setNsPrefix(NS_PREFIX_EDEFAULT);
 				return;
-			case DataPackage.TERM__COLOR:
-				setColor(COLOR_EDEFAULT);
-				return;
 			case DataPackage.TERM__POSITIONER:
 				setPositioner(POSITIONER_EDEFAULT);
 				return;
@@ -815,8 +782,6 @@ public class TermImpl extends EObjectImpl implements Term {
 				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
 			case DataPackage.TERM__NS_PREFIX:
 				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
-			case DataPackage.TERM__COLOR:
-				return COLOR_EDEFAULT == null ? color != null : !COLOR_EDEFAULT.equals(color);
 			case DataPackage.TERM__POSITIONER:
 				return POSITIONER_EDEFAULT == null ? positioner != null : !POSITIONER_EDEFAULT.equals(positioner);
 			case DataPackage.TERM__VOCAB:
@@ -868,12 +833,6 @@ public class TermImpl extends EObjectImpl implements Term {
 		if (baseClass == NsPrefixable.class) {
 			switch (derivedFeatureID) {
 				case DataPackage.TERM__NS_PREFIX: return CommonsPackage.NS_PREFIXABLE__NS_PREFIX;
-				default: return -1;
-			}
-		}
-		if (baseClass == Colorable.class) {
-			switch (derivedFeatureID) {
-				case DataPackage.TERM__COLOR: return CommonsPackage.COLORABLE__COLOR;
 				default: return -1;
 			}
 		}
@@ -929,12 +888,6 @@ public class TermImpl extends EObjectImpl implements Term {
 				default: return -1;
 			}
 		}
-		if (baseClass == Colorable.class) {
-			switch (baseFeatureID) {
-				case CommonsPackage.COLORABLE__COLOR: return DataPackage.TERM__COLOR;
-				default: return -1;
-			}
-		}
 		if (baseClass == Imageable.class) {
 			switch (baseFeatureID) {
 				default: return -1;
@@ -971,8 +924,6 @@ public class TermImpl extends EObjectImpl implements Term {
 		result.append(resourceName);
 		result.append(", nsPrefix: ");
 		result.append(nsPrefix);
-		result.append(", color: ");
-		result.append(color);
 		result.append(", positioner: ");
 		result.append(positioner);
 		result.append(", displayName: ");
