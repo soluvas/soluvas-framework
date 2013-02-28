@@ -772,13 +772,22 @@ public interface DataPackage extends EPackage {
 	int TERM__POSITIONER = TERM_CONTAINER_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Color</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__COLOR = TERM_CONTAINER_FEATURE_COUNT + 7;
+
+	/**
 	 * The feature id for the '<em><b>Vocab</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__VOCAB = TERM_CONTAINER_FEATURE_COUNT + 7;
+	int TERM__VOCAB = TERM_CONTAINER_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Display Name</b></em>' attribute.
@@ -787,7 +796,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__DISPLAY_NAME = TERM_CONTAINER_FEATURE_COUNT + 8;
+	int TERM__DISPLAY_NAME = TERM_CONTAINER_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
@@ -796,7 +805,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__IMAGE_ID = TERM_CONTAINER_FEATURE_COUNT + 9;
+	int TERM__IMAGE_ID = TERM_CONTAINER_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Attribute Type Ns Prefix</b></em>' attribute.
@@ -805,7 +814,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__ATTRIBUTE_TYPE_NS_PREFIX = TERM_CONTAINER_FEATURE_COUNT + 10;
+	int TERM__ATTRIBUTE_TYPE_NS_PREFIX = TERM_CONTAINER_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Attribute Type Name</b></em>' attribute.
@@ -814,7 +823,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__ATTRIBUTE_TYPE_NAME = TERM_CONTAINER_FEATURE_COUNT + 11;
+	int TERM__ATTRIBUTE_TYPE_NAME = TERM_CONTAINER_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>Term</em>' class.
@@ -823,7 +832,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM_FEATURE_COUNT = TERM_CONTAINER_FEATURE_COUNT + 12;
+	int TERM_FEATURE_COUNT = TERM_CONTAINER_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.ListVocabImpl <em>List Vocab</em>}' class.

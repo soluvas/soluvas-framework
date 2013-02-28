@@ -7,6 +7,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.Colorable;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
@@ -16,6 +17,7 @@ import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.Sluggable;
+import org.soluvas.data.*;
 import org.soluvas.data.AttributeType;
 import org.soluvas.data.CurrencyValue;
 import org.soluvas.data.DataCatalog;
@@ -188,6 +190,10 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePositionable(Positionable object) {
 				return createPositionableAdapter();
+			}
+			@Override
+			public Adapter caseColorable(Colorable object) {
+				return createColorableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -556,6 +562,20 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPositionableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Colorable <em>Colorable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Colorable
+	 * @generated
+	 */
+	public Adapter createColorableAdapter() {
 		return null;
 	}
 
