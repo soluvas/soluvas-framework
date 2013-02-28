@@ -44,7 +44,6 @@ import org.soluvas.commons.AttributeUnset;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CategoryInfo;
 import org.soluvas.commons.CategoryLike;
-import org.soluvas.commons.Colorable;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Describable;
@@ -736,6 +735,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPersonInfo_Email() {
 		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(1);
 	}
@@ -1405,6 +1405,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategoryLike_Color() {
 		return (EAttribute)categoryLikeEClass.getEStructuralFeatures().get(1);
 	}
@@ -1574,6 +1575,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getAccountStatus() {
 		return accountStatusEEnum;
 	}
@@ -1583,6 +1585,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getPublicationStatus() {
 		return publicationStatusEEnum;
 	}
@@ -1592,6 +1595,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getArchivalStatus() {
 		return archivalStatusEEnum;
 	}
