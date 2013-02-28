@@ -31,6 +31,7 @@ import org.soluvas.data.RangeValue;
 import org.soluvas.data.StringValue;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermContainer;
+import org.soluvas.data.TermManager;
 import org.soluvas.data.TermValue;
 import org.soluvas.data.TreeVocab;
 import org.soluvas.data.Value;
@@ -156,6 +157,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass termManagerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum attributeSemanticEEnum = null;
 
 	/**
@@ -272,6 +280,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttributeType_DisplayName() {
 		return (EAttribute)attributeTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -531,6 +540,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTerm_DisplayName() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(1);
 	}
@@ -540,6 +550,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTerm_ImageId() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(2);
 	}
@@ -549,6 +560,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTerm_AttributeTypeNsPrefix() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(3);
 	}
@@ -558,6 +570,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTerm_AttributeTypeName() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(4);
 	}
@@ -660,6 +673,26 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	@Override
 	public EReference getDataCatalog_AttributeTypes() {
 		return (EReference)dataCatalogEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTermManager() {
+		return termManagerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTermManager_DataCatalog() {
+		return (EReference)termManagerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -806,6 +839,9 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		createEReference(dataCatalogEClass, DATA_CATALOG__MIXINS);
 		createEReference(dataCatalogEClass, DATA_CATALOG__TERMS);
 		createEReference(dataCatalogEClass, DATA_CATALOG__ATTRIBUTE_TYPES);
+
+		termManagerEClass = createEClass(TERM_MANAGER);
+		createEReference(termManagerEClass, TERM_MANAGER__DATA_CATALOG);
 
 		// Create enums
 		attributeSemanticEEnum = createEEnum(ATTRIBUTE_SEMANTIC);
@@ -1006,6 +1042,17 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEReference(getDataCatalog_Mixins(), this.getMixin(), null, "mixins", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataCatalog_Terms(), this.getTerm(), null, "terms", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataCatalog_AttributeTypes(), this.getAttributeType(), null, "attributeTypes", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(termManagerEClass, TermManager.class, "TermManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTermManager_DataCatalog(), this.getDataCatalog(), null, "dataCatalog", null, 0, 1, TermManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(termManagerEClass, null, "findTerms", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "attributeTypeNsPrefix", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "attributeTypeName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theCommonsPackage.getList());
+		g2 = createEGenericType(this.getTerm());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
 
 		// Initialize enums and add enum literals
 		initEEnum(attributeSemanticEEnum, AttributeSemantic.class, "AttributeSemantic");
@@ -1212,6 +1259,10 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   new String[] {
 			 "name", "DataCatalog"
 		   });
+	}
+	
+	public static DataPackage getInstance() {
+		return eINSTANCE;
 	}
 
 } //DataPackageImpl

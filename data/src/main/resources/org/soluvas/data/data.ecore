@@ -237,4 +237,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributeTypes" upperBound="-1"
         eType="#//AttributeType" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TermManager">
+    <eOperations name="findTerms">
+      <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//List">
+        <eTypeArguments eClassifier="#//Term"/>
+      </eGenericType>
+      <eParameters name="attributeTypeNsPrefix" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="attributeTypeName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataCatalog" eType="#//DataCatalog"
+        changeable="false"/>
+  </eClassifiers>
 </ecore:EPackage>
