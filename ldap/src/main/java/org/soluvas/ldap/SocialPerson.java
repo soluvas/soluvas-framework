@@ -2,6 +2,7 @@ package org.soluvas.ldap;
 
 import java.util.Set;
 
+import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.ArchivalStatus;
@@ -29,6 +30,10 @@ public class SocialPerson extends Person {
 	private Gender gender;
 	@LdapAttribute("birthDate")
 	private DateTime birthDate;
+	@LdapAttribute("lang")
+	private String languageCode;
+	@LdapAttribute("currency")
+	private CurrencyUnit currency;
 	@LdapAttribute({ "fbId", "facebookId" })
 	private Long facebookId;
 	@LdapAttribute({ "fbUser", "facebookUsername" })
@@ -226,6 +231,42 @@ public class SocialPerson extends Person {
 	 */
 	public void setBirthDate(DateTime birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	/**
+	 * Preferred language as language identifier,
+	 * as defined by IETF RFC 4646 (http://www.ietf.org/rfc/rfc4646.txt) or successor,
+	 * or ISO 639-1 Language Codes. 
+	 * @return the languageCode
+	 */
+	public String getLanguageCode() {
+		return languageCode;
+	}
+
+	/**
+	 * Preferred language as language identifier,
+	 * as defined by IETF RFC 4646 (http://www.ietf.org/rfc/rfc4646.txt) or successor, 
+	 * or ISO 639-1 Language Codes. 
+	 * @param languageCode the languageCode to set
+	 */
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
+	}
+
+	/**
+	 * Preferred currency as ISO 4217. The purpose of ISO 4217:2008 is to establish internationally recognised codes for the representation of currencies.
+	 * @return the currency
+	 */
+	public CurrencyUnit getCurrency() {
+		return currency;
+	}
+
+	/**
+	 * Preferred currency as ISO 4217. The purpose of ISO 4217:2008 is to establish internationally recognised codes for the representation of currencies.
+	 * @param currency the currency to set
+	 */
+	public void setCurrency(CurrencyUnit currency) {
+		this.currency = currency;
 	}
 
 	/**

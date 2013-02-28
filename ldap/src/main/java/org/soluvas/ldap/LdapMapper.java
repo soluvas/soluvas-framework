@@ -22,6 +22,7 @@ import org.apache.directory.api.ldap.model.exception.LdapInvalidDnException;
 import org.apache.directory.api.ldap.model.message.ModifyRequest;
 import org.apache.directory.api.ldap.model.message.ModifyRequestImpl;
 import org.apache.directory.api.ldap.model.name.Rdn;
+import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
@@ -465,6 +466,8 @@ public class LdapMapper {
 				     .toFormatter();
 				 return (R) ldapExotic.parseDateTime((String) value);
 			}
+		} else if (CurrencyUnit.class.isAssignableFrom(fieldType)) {
+			return (R) CurrencyUnit.of((String) value);
 		} else {
 			return (R) value;
 		}

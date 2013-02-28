@@ -26,6 +26,7 @@ import org.apache.directory.api.ldap.model.schema.registries.Schema;
 import org.apache.directory.api.ldap.model.schema.registries.SchemaLoader;
 import org.apache.directory.api.ldap.schemaloader.LdifSchemaLoader;
 import org.apache.directory.api.ldap.schemamanager.impl.DefaultSchemaManager;
+import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.After;
@@ -285,7 +286,7 @@ public class LdapMapperTest {
 	}
 	
 	@Test public void mapsAttributeToLong() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
-		Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		final Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
 		entry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject");
 		entry.put("uid", "hendy");
 		entry.put("uniqueIdentifier", "hendy.irawan");
@@ -297,7 +298,7 @@ public class LdapMapperTest {
 		
 		log.info("Input Entry: {}", entry);
 		
-		PersonWithLong person = mapper.fromEntry(entry, PersonWithLong.class);
+		final PersonWithLong person = mapper.fromEntry(entry, PersonWithLong.class);
 		log.info("Output Person: {}", person);
 		
 		assertEquals((Long)123L, person.getEmployeeNumber());
@@ -623,6 +624,30 @@ public class LdapMapperTest {
 		final SocialPerson person = mapper.fromEntry(existing, SocialPerson.class);
 		final DateTimeZone wib = DateTimeZone.forID("Asia/Jakarta");
 		assertEquals(new DateTime(1983, 12, 14, 0, 0, wib), person.getBirthDate());
+	}
+	
+	@Test
+	public void canMapFromCurrencyUnit() throws LdapException {
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("cn", "Hendy Irawan");
+		existing.put("currency", "IDR");
+		log.info("Input Entry: {}", existing);
+		
+		final SocialPerson person = mapper.fromEntry(existing, SocialPerson.class);
+		final CurrencyUnit idr = CurrencyUnit.of("IDR");
+		assertEquals(idr, person.getCurrency());
+	}
+	
+	@Test
+	public void canMapToCurrencyUnit() throws LdapException {
+		final SocialPerson hendy = new SocialPerson("hendy", "hendy", "Hendy", "Irawan");
+		hendy.setCurrency(CurrencyUnit.of("IDR"));
+		log.info("Input Person: {}", hendy);
+		
+		final Entry personEntry = mapper.toEntry(hendy, "ou=users");
+		assertEquals("IDR", personEntry.get("currency").getString());
 	}
 	
 }
