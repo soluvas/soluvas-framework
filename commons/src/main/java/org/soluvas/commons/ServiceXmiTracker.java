@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.osgi.framework.Bundle;
@@ -19,9 +20,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.impl.XmiTrackerUtils;
 
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 /**
  * Tracks files named <tt>(bundle).{suppliedClassSimpleName}.xmi</tt> and
@@ -86,6 +89,7 @@ public class ServiceXmiTracker<T extends EObject> implements BundleTrackerCustom
 		this.suppliedClassSimpleName = suppliedClass.getSimpleName();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override @Nullable
 	public List<ServiceRegistration<T>> addingBundle(@Nonnull Bundle bundle,
 			@Nonnull BundleEvent event) {
@@ -105,7 +109,16 @@ public class ServiceXmiTracker<T extends EObject> implements BundleTrackerCustom
 					props.put(Constants.SERVICE_RANKING, Optional.fromNullable(((Positionable) root).getPositioner()).or(0));
 				}
 				props.put("resourceUri", url);
-				final ServiceRegistration<T> svcReg = (ServiceRegistration<T>) bundle.getBundleContext().registerService(suppliedClassName, root, props);
+				final List<Class<?>> allInterfaces = ClassUtils.getAllInterfaces(root.getClass());
+				final List<String> allInterfaceNames = Lists.transform(allInterfaces, new Function<Class<?>, String>() {
+					@Override @Nullable
+					public String apply(@Nullable Class<?> input) {
+						return input.getName();
+					}
+				});
+//				final ServiceRegistration<T> svcReg = (ServiceRegistration<T>) bundle.getBundleContext().registerService(suppliedClassName, root, props);
+				final ServiceRegistration<T> svcReg = (ServiceRegistration<T>) bundle.getBundleContext().registerService(
+						allInterfaceNames.toArray(new String[] {}), root, props);
 				svcRegsBuilder.add(svcReg);
 			}
 			final List<ServiceRegistration<T>> svcRegs = svcRegsBuilder.build();
