@@ -2,24 +2,16 @@
  */
 package org.soluvas.image.impl;
 
-import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.annotation.Nullable;
-import javax.imageio.IIOImage;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
-import javax.imageio.stream.FileImageOutputStream;
-
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.geometry.Position;
-import net.coobird.thumbnailator.geometry.Positions;
-
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.PumpStreamHandler;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -31,51 +23,35 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImageException;
 import org.soluvas.image.ImageFactory;
+import org.soluvas.image.ImageMagickTransformer;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageVariant;
 import org.soluvas.image.ResizeToFill;
-import org.soluvas.image.ThumbnailatorTransformer;
 import org.soluvas.image.TransformGravity;
 import org.soluvas.image.UploadedImage;
 
-import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Thumbnailator Transformer</b></em>'.
+ * An implementation of the model object '<em><b>Magick Transformer</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.soluvas.image.impl.ThumbnailatorTransformerImpl#getDestination <em>Destination</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.ImageMagickTransformerImpl#getDestination <em>Destination</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-@SuppressWarnings("serial")
-public class ThumbnailatorTransformerImpl extends EObjectImpl implements ThumbnailatorTransformer {
+public class ImageMagickTransformerImpl extends EObjectImpl implements ImageMagickTransformer {
 	
-	/**
-	 * Convert {@link TransformGravity} to Thumbnailator's {@link Positions}.
-	 * @author rully
-	 */
-	public static class ToPositions implements
-			Function<TransformGravity, Positions> {
-		@Override @Nullable
-		public Positions apply(TransformGravity input) {
-			if (input == null)
-				return null;
-			return Positions.valueOf(input.name());
-		};
-	}
-
 	private static final Logger log = LoggerFactory
-			.getLogger(ThumbnailatorTransformerImpl.class);
+			.getLogger(ImageMagickTransformerImpl.class);
 	
 	/**
 	 * The cached value of the '{@link #getDestination() <em>Destination</em>}' reference.
@@ -91,11 +67,11 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	protected ThumbnailatorTransformerImpl() {
+	protected ImageMagickTransformerImpl() {
 		throw new UnsupportedOperationException();
 	}
 
-	public ThumbnailatorTransformerImpl(ImageConnector destination) {
+	public ImageMagickTransformerImpl(ImageConnector destination) {
 		super();
 		this.destination = destination;
 	}
@@ -107,7 +83,7 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ImagePackage.Literals.THUMBNAILATOR_TRANSFORMER;
+		return ImagePackage.Literals.IMAGE_MAGICK_TRANSFORMER;
 	}
 
 	/**
@@ -122,7 +98,7 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 			destination = (ImageConnector)eResolveProxy(oldDestination);
 			if (destination != oldDestination) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImagePackage.THUMBNAILATOR_TRANSFORMER__DESTINATION, oldDestination, destination));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImagePackage.IMAGE_MAGICK_TRANSFORMER__DESTINATION, oldDestination, destination));
 			}
 		}
 		return destination;
@@ -138,12 +114,15 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	}
 
 	/**
+	 * haidar@haidar ~/tmp $ convert -verbose -resize 64x64^ -extent 64x64 -gravity North  *.jpg
+	 * test1.jpg JPEG 527x700 527x700+0+0 8-bit DirectClass 99.9KB 0.010u 0:00.010
+	 * test1.jpg=>test1_n.jpg JPEG 527x700=>64x64 64x64+0+0 8-bit DirectClass 20.5KB 0.000u 0:00.000
+	 * 
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public List<UploadedImage> transform(ImageConnector source, String namespace, String imageId, ImageVariant sourceVariant,
-			Map<ImageTransform, ImageVariant> transforms) {
+	public List<UploadedImage> transform(ImageConnector source, String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms) {
 		// download original
 		final File originalFile;
 		try {
@@ -175,73 +154,72 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 				
 				try {
 					try {
-						// I don't think Thumbnailer and/or ImageIO is thread-safe
-						//synchronized (this) {
-//							final BufferedImage originalImage = ImageIO.read(originalFile);
-//							final int origWidth = originalImage.getWidth();
-//							final int origHeight = originalImage.getHeight();
-							if (transform instanceof ResizeToFill) {
-								final ResizeToFill fx = (ResizeToFill) transform;
-								final boolean progressive = fx.getWidth() >= 512;
-								Preconditions.checkNotNull(fx.getWidth(), "ResizeToFill.width must not be null");
-								Preconditions.checkNotNull(fx.getHeight(), "ResizeToFill.height must not be null");
-								final Position cropPosition = Optional.fromNullable(new ToPositions().apply(fx.getGravity())).or(Positions.CENTER);
-								
-								// Scaling is not needed! crop(TOP_CENTER) already does its job
-								// my "failed" experiment was due to an already padded source image, sigh!
-//								// Scale up/down first, use the biggest scale
-//								final double targetRatio = (double) fx.getWidth() / fx.getHeight();
-//								final double origRatio = (double) origWidth / origHeight;
-//								final int sourceWidth;
-//								final int sourceHeight;
-//								if (targetRatio > origRatio) {
-//									// target ratio is wider than original, so sacrifice height
-//									sourceWidth = origWidth;
-//									sourceHeight = (int) Math.round(1f/targetRatio * origWidth);
-//								} else {
-//									// target ratio is narrower than original, so sacrifice width
-//									sourceWidth = (int) Math.round(targetRatio * origHeight);
-//									sourceHeight = origHeight;
-//									
-//								}
-//								final double widthScale = (double) fx.getWidth() / origWidth;
-//								final double heightScale = (double) fx.getHeight() / origHeight;
-//								final double targetScale = Math.max(widthScale, heightScale);
-
-								log.info("Resizing {} to {} position={}, quality={} progressive={}",
-										originalFile, styledFile, cropPosition, quality, progressive );
-								
-								// Before cropping
-								// TODO: support other gravity / cropping
-//								final BufferedImage scaledImage = Thumbnails.of(originalFile)
-//										.scale(targetScale)
-//										.asBufferedImage();
-								final BufferedImage styledImage = Thumbnails.of(originalFile)
-//										.sourceRegion(cropPosition, sourceWidth, sourceHeight)
-										.crop(cropPosition)
-										.size(fx.getWidth(), fx.getHeight())
-										.asBufferedImage();
-								width = styledImage.getWidth();
-								height = styledImage.getHeight();
-								log.info("Dimensions of {} is {}x{}", styledFile, width, height);
-								final ImageWriter jpegWriter = ImageIO.getImageWritersByFormatName("jpg").next();
-								final FileImageOutputStream styledOutput = new FileImageOutputStream(styledFile);
-								jpegWriter.setOutput(styledOutput);
-								try {
-									final ImageWriteParam jpegParam = jpegWriter.getDefaultWriteParam();
-									jpegParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-									jpegParam.setCompressionQuality(quality);
-									// Enable progressive if width >= 512, else disable
-									jpegParam.setProgressiveMode(progressive ? ImageWriteParam.MODE_DEFAULT : ImageWriteParam.MODE_DISABLED);
-									jpegWriter.write(null, new IIOImage(styledImage, null, null), jpegParam);
-//									ImageIO.write(styledImage, "jpg", styledFile); // no quality control
-								} finally {
-									styledOutput.close();
-								}
-							} else {
-								throw new ImageException("Unsupported transform: " + transform);
+						if (transform instanceof ResizeToFill) {
+							final ResizeToFill fx = (ResizeToFill) transform;
+							final boolean progressive = fx.getWidth() >= 512;
+							Preconditions.checkNotNull(fx.getWidth(), "ResizeToFill.width must not be null");
+							Preconditions.checkNotNull(fx.getHeight(), "ResizeToFill.height must not be null");
+							final String gravity;
+							switch (Optional.fromNullable(fx.getGravity()).or(TransformGravity.CENTER)) {
+							case CENTER:
+								gravity = "Center";
+								break;
+							case BOTTOM_CENTER:
+								gravity = "South";
+								break;
+							case BOTTOM_LEFT:
+								gravity = "SouthWest";
+								break;
+							case BOTTOM_RIGHT:
+								gravity = "SouthEast";
+								break;
+							case TOP_LEFT:
+								gravity = "NorthWest";
+								break;
+							case TOP_RIGHT:
+								gravity = "NorthEast";
+								break;
+							case TOP_CENTER:
+								gravity = "North";
+								break;
+							case CENTER_LEFT:
+								gravity = "West";
+								break;
+							case CENTER_RIGHT:
+								gravity = "East";
+								break;
+							default:
+								throw new ImageException("Unknown gravity: "  + fx.getGravity());
 							}
-						//}
+							
+							final CommandLine cmd = new CommandLine("convert");
+							cmd.addArgument("-verbose");
+							cmd.addArgument(originalFile.getPath());
+							cmd.addArgument("-resize");
+							cmd.addArgument(fx.getWidth() + "x" + fx.getHeight() + "^");
+							cmd.addArgument("-extent");
+							cmd.addArgument(fx.getWidth() + "x" + fx.getHeight());
+							cmd.addArgument("-gravity");
+							cmd.addArgument(gravity);
+							cmd.addArgument("-quality");
+							cmd.addArgument("90"); // TODO: do not hardcode quality
+							cmd.addArgument(styledFile.getPath());
+							
+							log.debug("Resizing {} to {} position={}, gravity={} progressive={} using: {}",
+									originalFile, styledFile, gravity, quality, progressive, cmd );
+							
+							final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+							final DefaultExecutor executor = new DefaultExecutor();
+							executor.setStreamHandler(new PumpStreamHandler(buffer));
+							final int executionResult = executor.execute(cmd);
+							log.info("{} returned {}: {}", cmd, executionResult, buffer);
+							
+							width = fx.getWidth();
+							height = fx.getHeight();
+							log.trace("Dimensions of {} is {}x{}", styledFile, width, height);
+						} else {
+							throw new ImageException("Unsupported transform: " + transform);
+						}
 						
 //						ByteArrayOutputStream buf = new ByteArrayOutputStream();
 //						ImageIO.write(styledImage, "jpg", buf);
@@ -311,7 +289,7 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImagePackage.THUMBNAILATOR_TRANSFORMER__DESTINATION:
+			case ImagePackage.IMAGE_MAGICK_TRANSFORMER__DESTINATION:
 				if (resolve) return getDestination();
 				return basicGetDestination();
 		}
@@ -326,10 +304,10 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImagePackage.THUMBNAILATOR_TRANSFORMER__DESTINATION:
+			case ImagePackage.IMAGE_MAGICK_TRANSFORMER__DESTINATION:
 				return destination != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //ThumbnailatorTransformerImpl
+} //ImageMagickTransformerImpl

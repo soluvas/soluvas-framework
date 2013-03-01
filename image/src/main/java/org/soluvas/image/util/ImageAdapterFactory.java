@@ -137,6 +137,10 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 				return createImageCatalogAdapter();
 			}
 			@Override
+			public Adapter caseImageMagickTransformer(ImageMagickTransformer object) {
+				return createImageMagickTransformerAdapter();
+			}
+			@Override
 			public Adapter caseIdentifiable(Identifiable object) {
 				return createIdentifiableAdapter();
 			}
@@ -397,6 +401,20 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImageCatalogAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.ImageMagickTransformer <em>Magick Transformer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.ImageMagickTransformer
+	 * @generated
+	 */
+	public Adapter createImageMagickTransformerAdapter() {
 		return null;
 	}
 

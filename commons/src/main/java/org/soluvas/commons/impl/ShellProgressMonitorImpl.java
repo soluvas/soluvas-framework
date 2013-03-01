@@ -66,7 +66,7 @@ public class ShellProgressMonitorImpl extends ProgressMonitorImpl implements She
 		renderProgressBar();
 	}
 	
-	protected void renderProgressBar() {
+	protected synchronized void renderProgressBar() {
 		final int totalBlocks = 19;
 		final int blocksWorked = Math.min((int)(worked / totalWork * totalBlocks), totalBlocks);
 		final int blocksUnworked = Math.min(totalBlocks - blocksWorked, totalBlocks);

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.ProgressMonitor;
@@ -115,6 +116,7 @@ public interface ImageRepository { // extends EntityLookup<Image, String> {
 	 * @return
 	 */
 	public abstract String add(Image newImage);
+	public abstract List<String> add(@Nonnull List<Image> newImages, ProgressMonitor monitor);
 
 	public abstract String doCreate(String existingImageId, File originalFile,
 			String contentType, long length, String name, String originalName,

@@ -355,4 +355,8 @@
     <eLiterals name="bottom_left" value="7"/>
     <eLiterals name="bottom_right" value="8"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageMagickTransformer" eSuperTypes="#//ImageTransformer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//ImageConnector"
+        changeable="false"/>
+  </eClassifiers>
 </ecore:EPackage>
