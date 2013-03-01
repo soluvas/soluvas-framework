@@ -31,7 +31,7 @@ public class SocialPerson extends Person {
 	@LdapAttribute("birthDate")
 	private DateTime birthDate;
 	@LdapAttribute("lang")
-	private String languageCode;
+	private String language;
 	@LdapAttribute("currency")
 	private CurrencyUnit currency;
 	@LdapAttribute({ "fbId", "facebookId" })
@@ -239,18 +239,18 @@ public class SocialPerson extends Person {
 	 * or ISO 639-1 Language Codes. 
 	 * @return the languageCode
 	 */
-	public String getLanguageCode() {
-		return languageCode;
+	public String getLanguage() {
+		return language;
 	}
 
 	/**
 	 * Preferred language as language identifier,
 	 * as defined by IETF RFC 4646 (http://www.ietf.org/rfc/rfc4646.txt) or successor, 
 	 * or ISO 639-1 Language Codes. 
-	 * @param languageCode the languageCode to set
+	 * @param language the languageCode to set
 	 */
-	public void setLanguageCode(String languageCode) {
-		this.languageCode = languageCode;
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 	/**
