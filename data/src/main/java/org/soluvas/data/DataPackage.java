@@ -159,13 +159,31 @@ public interface DataPackage extends EPackage {
 	int ATTRIBUTE_TYPE__DATA_TYPE_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Kind Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_TYPE__KIND_NS_PREFIX = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Kind Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_TYPE__KIND_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>Attribute Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 9;
+	int ATTRIBUTE_TYPE_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.ValueImpl <em>Value</em>}' class.
@@ -434,13 +452,22 @@ public interface DataPackage extends EPackage {
 	int MIXIN__ATTRIBUTE_TYPES = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Display Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIXIN__DISPLAY_NAME = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Mixin</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MIXIN_FEATURE_COUNT = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 7;
+	int MIXIN_FEATURE_COUNT = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.RangeValueImpl <em>Range Value</em>}' class.
@@ -1163,13 +1190,22 @@ public interface DataPackage extends EPackage {
 	int DATA_CATALOG__TERMS = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Kinds</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CATALOG__KINDS = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 7;
+
+	/**
 	 * The feature id for the '<em><b>Attribute Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_CATALOG__ATTRIBUTE_TYPES = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 7;
+	int DATA_CATALOG__ATTRIBUTE_TYPES = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Catalog</em>' class.
@@ -1178,7 +1214,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_CATALOG_FEATURE_COUNT = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 8;
+	int DATA_CATALOG_FEATURE_COUNT = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.TermManagerImpl <em>Term Manager</em>}' class.
@@ -1209,6 +1245,79 @@ public interface DataPackage extends EPackage {
 	int TERM_MANAGER_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.data.impl.KindImpl <em>Kind</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.data.impl.KindImpl
+	 * @see org.soluvas.data.impl.DataPackageImpl#getKind()
+	 * @generated
+	 */
+	int KIND = 16;
+
+	/**
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KIND__NS_PREFIX = CommonsPackage.NS_PREFIXABLE__NS_PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Bundle</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KIND__BUNDLE = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KIND__NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KIND__RESOURCE_TYPE = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KIND__RESOURCE_URI = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KIND__RESOURCE_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Kind</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KIND_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1216,7 +1325,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getAttributeSemantic()
 	 * @generated
 	 */
-	int ATTRIBUTE_SEMANTIC = 16;
+	int ATTRIBUTE_SEMANTIC = 17;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository</em>' data type.
@@ -1226,7 +1335,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepository()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY = 17;
+	int CRUD_REPOSITORY = 18;
 
 	/**
 	 * The meta object id for the '<em>Paging And Sorting Repository</em>' data type.
@@ -1236,7 +1345,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPagingAndSortingRepository()
 	 * @generated
 	 */
-	int PAGING_AND_SORTING_REPOSITORY = 18;
+	int PAGING_AND_SORTING_REPOSITORY = 19;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository Base</em>' data type.
@@ -1246,7 +1355,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepositoryBase()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY_BASE = 19;
+	int CRUD_REPOSITORY_BASE = 20;
 
 
 	/**
@@ -1257,7 +1366,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getMeasure()
 	 * @generated
 	 */
-	int MEASURE = 20;
+	int MEASURE = 21;
 
 	/**
 	 * The meta object id for the '<em>Decimal Measure</em>' data type.
@@ -1267,7 +1376,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getDecimalMeasure()
 	 * @generated
 	 */
-	int DECIMAL_MEASURE = 21;
+	int DECIMAL_MEASURE = 22;
 
 
 	/**
@@ -1323,6 +1432,28 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAttributeType_DataTypeName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.AttributeType#getKindNsPrefix <em>Kind Ns Prefix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Kind Ns Prefix</em>'.
+	 * @see org.soluvas.data.AttributeType#getKindNsPrefix()
+	 * @see #getAttributeType()
+	 * @generated
+	 */
+	EAttribute getAttributeType_KindNsPrefix();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.AttributeType#getKindName <em>Kind Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Kind Name</em>'.
+	 * @see org.soluvas.data.AttributeType#getKindName()
+	 * @see #getAttributeType()
+	 * @generated
+	 */
+	EAttribute getAttributeType_KindName();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.Value <em>Value</em>}'.
@@ -1450,6 +1581,17 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMixin_AttributeTypes();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Mixin#getDisplayName <em>Display Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Display Name</em>'.
+	 * @see org.soluvas.data.Mixin#getDisplayName()
+	 * @see #getMixin()
+	 * @generated
+	 */
+	EAttribute getMixin_DisplayName();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.RangeValue <em>Range Value</em>}'.
@@ -1696,6 +1838,17 @@ public interface DataPackage extends EPackage {
 	EReference getDataCatalog_Terms();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.soluvas.data.DataCatalog#getKinds <em>Kinds</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Kinds</em>'.
+	 * @see org.soluvas.data.DataCatalog#getKinds()
+	 * @see #getDataCatalog()
+	 * @generated
+	 */
+	EReference getDataCatalog_Kinds();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.soluvas.data.DataCatalog#getAttributeTypes <em>Attribute Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1726,6 +1879,16 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTermManager_DataCatalog();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.data.Kind <em>Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Kind</em>'.
+	 * @see org.soluvas.data.Kind
+	 * @generated
+	 */
+	EClass getKind();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}'.
@@ -1857,6 +2020,22 @@ public interface DataPackage extends EPackage {
 		EAttribute ATTRIBUTE_TYPE__DATA_TYPE_NAME = eINSTANCE.getAttributeType_DataTypeName();
 
 		/**
+		 * The meta object literal for the '<em><b>Kind Ns Prefix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE_TYPE__KIND_NS_PREFIX = eINSTANCE.getAttributeType_KindNsPrefix();
+
+		/**
+		 * The meta object literal for the '<em><b>Kind Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE_TYPE__KIND_NAME = eINSTANCE.getAttributeType_KindName();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.ValueImpl <em>Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1961,6 +2140,14 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MIXIN__ATTRIBUTE_TYPES = eINSTANCE.getMixin_AttributeTypes();
+
+		/**
+		 * The meta object literal for the '<em><b>Display Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MIXIN__DISPLAY_NAME = eINSTANCE.getMixin_DisplayName();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.RangeValueImpl <em>Range Value</em>}' class.
@@ -2165,6 +2352,14 @@ public interface DataPackage extends EPackage {
 		EReference DATA_CATALOG__TERMS = eINSTANCE.getDataCatalog_Terms();
 
 		/**
+		 * The meta object literal for the '<em><b>Kinds</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_CATALOG__KINDS = eINSTANCE.getDataCatalog_Kinds();
+
+		/**
 		 * The meta object literal for the '<em><b>Attribute Types</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2189,6 +2384,16 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TERM_MANAGER__DATA_CATALOG = eINSTANCE.getTermManager_DataCatalog();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.data.impl.KindImpl <em>Kind</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.data.impl.KindImpl
+		 * @see org.soluvas.data.impl.DataPackageImpl#getKind()
+		 * @generated
+		 */
+		EClass KIND = eINSTANCE.getKind();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}' enum.

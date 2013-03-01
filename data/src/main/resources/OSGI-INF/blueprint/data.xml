@@ -50,6 +50,9 @@
 	<service ref="termMgr" auto-export="interfaces"/>
 
 	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
+		<command name="mixin/ls">
+			<action class="org.soluvas.data.shell.MixinLsCommand" />
+		</command>
 		<command name="term/ls">
 			<action class="org.soluvas.data.shell.TermLsCommand" />
 		</command>

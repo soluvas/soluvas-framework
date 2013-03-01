@@ -24,6 +24,7 @@ import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataFactory;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.FreeVocab;
+import org.soluvas.data.Kind;
 import org.soluvas.data.ListVocab;
 import org.soluvas.data.MeasureValue;
 import org.soluvas.data.Mixin;
@@ -158,6 +159,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	private EClass termManagerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass kindEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -320,6 +328,24 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAttributeType_KindNsPrefix() {
+		return (EAttribute)attributeTypeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAttributeType_KindName() {
+		return (EAttribute)attributeTypeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getValue() {
 		return valueEClass;
@@ -433,6 +459,15 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	@Override
 	public EReference getMixin_AttributeTypes() {
 		return (EReference)mixinEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMixin_DisplayName() {
+		return (EAttribute)mixinEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -670,9 +705,18 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDataCatalog_Kinds() {
+		return (EReference)dataCatalogEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EReference getDataCatalog_AttributeTypes() {
-		return (EReference)dataCatalogEClass.getEStructuralFeatures().get(3);
+		return (EReference)dataCatalogEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -693,6 +737,15 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	@Override
 	public EReference getTermManager_DataCatalog() {
 		return (EReference)termManagerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getKind() {
+		return kindEClass;
 	}
 
 	/**
@@ -789,6 +842,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__MIN_VALUES);
 		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__MAX_VALUES);
 		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__DATA_TYPE_NAME);
+		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__KIND_NS_PREFIX);
+		createEAttribute(attributeTypeEClass, ATTRIBUTE_TYPE__KIND_NAME);
 
 		valueEClass = createEClass(VALUE);
 		createEAttribute(valueEClass, VALUE__SEMANTIC);
@@ -806,6 +861,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		mixinEClass = createEClass(MIXIN);
 		createEReference(mixinEClass, MIXIN__ATTRIBUTE_TYPES);
+		createEAttribute(mixinEClass, MIXIN__DISPLAY_NAME);
 
 		rangeValueEClass = createEClass(RANGE_VALUE);
 		createEAttribute(rangeValueEClass, RANGE_VALUE__START_VALUE);
@@ -838,10 +894,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		createEReference(dataCatalogEClass, DATA_CATALOG__VOCABS);
 		createEReference(dataCatalogEClass, DATA_CATALOG__MIXINS);
 		createEReference(dataCatalogEClass, DATA_CATALOG__TERMS);
+		createEReference(dataCatalogEClass, DATA_CATALOG__KINDS);
 		createEReference(dataCatalogEClass, DATA_CATALOG__ATTRIBUTE_TYPES);
 
 		termManagerEClass = createEClass(TERM_MANAGER);
 		createEReference(termManagerEClass, TERM_MANAGER__DATA_CATALOG);
+
+		kindEClass = createEClass(KIND);
 
 		// Create enums
 		attributeSemanticEEnum = createEEnum(ATTRIBUTE_SEMANTIC);
@@ -959,6 +1018,10 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		dataCatalogEClass.getESuperTypes().add(theCommonsPackage.getBundleAware());
 		dataCatalogEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 		dataCatalogEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
+		kindEClass.getESuperTypes().add(theCommonsPackage.getNsPrefixable());
+		kindEClass.getESuperTypes().add(theCommonsPackage.getBundleAware());
+		kindEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
+		kindEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(attributeTypeEClass, AttributeType.class, "AttributeType", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -966,6 +1029,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEAttribute(getAttributeType_MinValues(), theEcorePackage.getELong(), "minValues", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttributeType_MaxValues(), theEcorePackage.getELong(), "maxValues", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttributeType_DataTypeName(), ecorePackage.getEString(), "dataTypeName", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttributeType_KindNsPrefix(), theEcorePackage.getEString(), "kindNsPrefix", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttributeType_KindName(), theEcorePackage.getEString(), "kindName", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(attributeTypeEClass, this.getValue(), "valueOf", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "stringValue", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1007,6 +1072,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		initEClass(mixinEClass, Mixin.class, "Mixin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMixin_AttributeTypes(), this.getAttributeType(), null, "attributeTypes", null, 0, -1, Mixin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMixin_DisplayName(), theEcorePackage.getEString(), "displayName", null, 0, 1, Mixin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(rangeValueEClass, RangeValue.class, "RangeValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		g1 = createEGenericType(rangeValueEClass_T);
@@ -1041,6 +1107,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEReference(getDataCatalog_Vocabs(), this.getVocab(), null, "vocabs", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataCatalog_Mixins(), this.getMixin(), null, "mixins", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataCatalog_Terms(), this.getTerm(), null, "terms", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataCatalog_Kinds(), this.getKind(), null, "kinds", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataCatalog_AttributeTypes(), this.getAttributeType(), null, "attributeTypes", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(termManagerEClass, TermManager.class, "TermManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1061,6 +1128,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		g2 = createEGenericType(this.getTerm());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
+
+		initEClass(kindEClass, Kind.class, "Kind", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(attributeSemanticEEnum, AttributeSemantic.class, "AttributeSemantic");
@@ -1228,10 +1297,22 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 			 "documentation", "List of terms in a Vocabulary or if the Term is nested (tree vocabulary)."
 		   });			
 		addAnnotation
+		  (getDataCatalog_AttributeTypes(), 
+		   source, 
+		   new String[] {
+			 "documentation", "TEMPORARY : WILL BE REPLACED BY kinds"
+		   });		
+		addAnnotation
 		  (termManagerEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "List all terms partitioned by attribute type ({nsPrefix}_{name})."
+		   });		
+		addAnnotation
+		  (kindEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "1. Kind (Attribute Type / Vocab) is like an EMF DataType or Enum.\nA Kind is always type-agnostic, but a default input method & unit can be hinted by the attribute (see below).\nA Kind is always cardinality agnostic.\nFor example, Length kind is hinted as \"measure\" with \"cm\" unit, however all the attribute values below are valid:\n1. 9 cm (just like the hint)\n2. 10 km (different unit)\n3. 9-12 cm (use unit like the hint, but RangeValue instead)\n4. 5-6 kg (different unit and use RangeValue)\n5. \"cukup panjang untuk orang dewasa\" (StringValue)\n6. base_very_long (TermValue from base nsPrefix)\n7. tuneeca_half_a_mile (TermValue from tuneeca nsPrefix)\nIn addition, all of the above can have multiple cardinality or no value."
 		   });
 	}
 
@@ -1272,7 +1353,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "name", "DataCatalog"
-		   });	
+		   });			
 	}
 	
 	public static DataPackage getInstance() {

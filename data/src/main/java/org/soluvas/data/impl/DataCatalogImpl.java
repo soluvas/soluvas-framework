@@ -29,6 +29,7 @@ import org.soluvas.commons.ResourceType;
 import org.soluvas.data.AttributeType;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataPackage;
+import org.soluvas.data.Kind;
 import org.soluvas.data.Mixin;
 import org.soluvas.data.Term;
 import org.soluvas.data.Vocab;
@@ -48,6 +49,7 @@ import org.soluvas.data.Vocab;
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getVocabs <em>Vocabs</em>}</li>
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getMixins <em>Mixins</em>}</li>
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getTerms <em>Terms</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getKinds <em>Kinds</em>}</li>
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getAttributeTypes <em>Attribute Types</em>}</li>
  * </ul>
  * </p>
@@ -184,6 +186,16 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * @ordered
 	 */
 	protected EList<Term> terms;
+
+	/**
+	 * The cached value of the '{@link #getKinds() <em>Kinds</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKinds()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Kind> kinds;
 
 	/**
 	 * The cached value of the '{@link #getAttributeTypes() <em>Attribute Types</em>}' containment reference list.
@@ -360,6 +372,18 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Kind> getKinds() {
+		if (kinds == null) {
+			kinds = new EObjectContainmentEList<Kind>(Kind.class, this, DataPackage.DATA_CATALOG__KINDS);
+		}
+		return kinds;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<AttributeType> getAttributeTypes() {
 		if (attributeTypes == null) {
 			attributeTypes = new EObjectContainmentEList<AttributeType>(AttributeType.class, this, DataPackage.DATA_CATALOG__ATTRIBUTE_TYPES);
@@ -381,6 +405,8 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 				return ((InternalEList<?>)getMixins()).basicRemove(otherEnd, msgs);
 			case DataPackage.DATA_CATALOG__TERMS:
 				return ((InternalEList<?>)getTerms()).basicRemove(otherEnd, msgs);
+			case DataPackage.DATA_CATALOG__KINDS:
+				return ((InternalEList<?>)getKinds()).basicRemove(otherEnd, msgs);
 			case DataPackage.DATA_CATALOG__ATTRIBUTE_TYPES:
 				return ((InternalEList<?>)getAttributeTypes()).basicRemove(otherEnd, msgs);
 		}
@@ -411,6 +437,8 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 				return getMixins();
 			case DataPackage.DATA_CATALOG__TERMS:
 				return getTerms();
+			case DataPackage.DATA_CATALOG__KINDS:
+				return getKinds();
 			case DataPackage.DATA_CATALOG__ATTRIBUTE_TYPES:
 				return getAttributeTypes();
 		}
@@ -453,6 +481,10 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 				getTerms().clear();
 				getTerms().addAll((Collection<? extends Term>)newValue);
 				return;
+			case DataPackage.DATA_CATALOG__KINDS:
+				getKinds().clear();
+				getKinds().addAll((Collection<? extends Kind>)newValue);
+				return;
 			case DataPackage.DATA_CATALOG__ATTRIBUTE_TYPES:
 				getAttributeTypes().clear();
 				getAttributeTypes().addAll((Collection<? extends AttributeType>)newValue);
@@ -493,6 +525,9 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 			case DataPackage.DATA_CATALOG__TERMS:
 				getTerms().clear();
 				return;
+			case DataPackage.DATA_CATALOG__KINDS:
+				getKinds().clear();
+				return;
 			case DataPackage.DATA_CATALOG__ATTRIBUTE_TYPES:
 				getAttributeTypes().clear();
 				return;
@@ -524,6 +559,8 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 				return mixins != null && !mixins.isEmpty();
 			case DataPackage.DATA_CATALOG__TERMS:
 				return terms != null && !terms.isEmpty();
+			case DataPackage.DATA_CATALOG__KINDS:
+				return kinds != null && !kinds.isEmpty();
 			case DataPackage.DATA_CATALOG__ATTRIBUTE_TYPES:
 				return attributeTypes != null && !attributeTypes.isEmpty();
 		}

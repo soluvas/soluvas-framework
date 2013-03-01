@@ -46,6 +46,8 @@ import org.soluvas.commons.ResourceAware;
  *   <li>{@link org.soluvas.data.AttributeType#getMinValues <em>Min Values</em>}</li>
  *   <li>{@link org.soluvas.data.AttributeType#getMaxValues <em>Max Values</em>}</li>
  *   <li>{@link org.soluvas.data.AttributeType#getDataTypeName <em>Data Type Name</em>}</li>
+ *   <li>{@link org.soluvas.data.AttributeType#getKindNsPrefix <em>Kind Ns Prefix</em>}</li>
+ *   <li>{@link org.soluvas.data.AttributeType#getKindName <em>Kind Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,6 +156,58 @@ public interface AttributeType extends NsPrefixable, NameContainer, ResourceAwar
 	 * @generated
 	 */
 	void setDataTypeName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Kind Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Kind Ns Prefix</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Kind Ns Prefix</em>' attribute.
+	 * @see #setKindNsPrefix(String)
+	 * @see org.soluvas.data.DataPackage#getAttributeType_KindNsPrefix()
+	 * @model
+	 * @generated
+	 */
+	String getKindNsPrefix();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.AttributeType#getKindNsPrefix <em>Kind Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kind Ns Prefix</em>' attribute.
+	 * @see #getKindNsPrefix()
+	 * @generated
+	 */
+	void setKindNsPrefix(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Kind Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Kind Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Kind Name</em>' attribute.
+	 * @see #setKindName(String)
+	 * @see org.soluvas.data.DataPackage#getAttributeType_KindName()
+	 * @model
+	 * @generated
+	 */
+	String getKindName();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.AttributeType#getKindName <em>Kind Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kind Name</em>' attribute.
+	 * @see #getKindName()
+	 * @generated
+	 */
+	void setKindName(String value);
 
 	/**
 	 * <!-- begin-user-doc -->
