@@ -241,6 +241,17 @@ public class DataSwitch<T1> extends Switch<T1> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DataPackage.KIND: {
+				Kind kind = (Kind)theEObject;
+				T1 result = caseKind(kind);
+				if (result == null) result = caseNsPrefixable(kind);
+				if (result == null) result = caseBundleAware(kind);
+				if (result == null) result = caseNameContainer(kind);
+				if (result == null) result = caseResourceAware(kind);
+				if (result == null) result = caseNameable(kind);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -482,6 +493,21 @@ public class DataSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseTermManager(TermManager object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Kind</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Kind</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseKind(Kind object) {
 		return null;
 	}
 

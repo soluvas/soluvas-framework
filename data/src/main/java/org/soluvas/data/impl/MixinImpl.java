@@ -38,6 +38,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.data.impl.MixinImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.impl.MixinImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.data.impl.MixinImpl#getAttributeTypes <em>Attribute Types</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.MixinImpl#getDisplayName <em>Display Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -194,6 +195,26 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * @ordered
 	 */
 	protected EList<AttributeType> attributeTypes;
+
+	/**
+	 * The default value of the '{@link #getDisplayName() <em>Display Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDisplayName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DISPLAY_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDisplayName() <em>Display Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDisplayName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String displayName = DISPLAY_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -388,6 +409,27 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 		return attributeTypes;
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDisplayName(String newDisplayName) {
+		String oldDisplayName = displayName;
+		displayName = newDisplayName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.MIXIN__DISPLAY_NAME, oldDisplayName, displayName));
+	}
+
 	@JsonIgnore
 	private void setAttributeTypes(EList<AttributeType> attributeTypes) {
 		throw new UnsupportedOperationException();
@@ -417,6 +459,8 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 				return getDescription();
 			case DataPackage.MIXIN__ATTRIBUTE_TYPES:
 				return getAttributeTypes();
+			case DataPackage.MIXIN__DISPLAY_NAME:
+				return getDisplayName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -455,6 +499,9 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 				getAttributeTypes().clear();
 				getAttributeTypes().addAll((Collection<? extends AttributeType>)newValue);
 				return;
+			case DataPackage.MIXIN__DISPLAY_NAME:
+				setDisplayName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -491,6 +538,9 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 			case DataPackage.MIXIN__ATTRIBUTE_TYPES:
 				getAttributeTypes().clear();
 				return;
+			case DataPackage.MIXIN__DISPLAY_NAME:
+				setDisplayName(DISPLAY_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -519,6 +569,8 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case DataPackage.MIXIN__ATTRIBUTE_TYPES:
 				return attributeTypes != null && !attributeTypes.isEmpty();
+			case DataPackage.MIXIN__DISPLAY_NAME:
+				return DISPLAY_NAME_EDEFAULT == null ? displayName != null : !DISPLAY_NAME_EDEFAULT.equals(displayName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -619,6 +671,8 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 		result.append(nsPrefix);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", displayName: ");
+		result.append(displayName);
 		result.append(')');
 		return result.toString();
 	}

@@ -19,6 +19,7 @@ import org.soluvas.commons.ResourceAware;
  *   <li>{@link org.soluvas.data.DataCatalog#getVocabs <em>Vocabs</em>}</li>
  *   <li>{@link org.soluvas.data.DataCatalog#getMixins <em>Mixins</em>}</li>
  *   <li>{@link org.soluvas.data.DataCatalog#getTerms <em>Terms</em>}</li>
+ *   <li>{@link org.soluvas.data.DataCatalog#getKinds <em>Kinds</em>}</li>
  *   <li>{@link org.soluvas.data.DataCatalog#getAttributeTypes <em>Attribute Types</em>}</li>
  * </ul>
  * </p>
@@ -77,6 +78,22 @@ public interface DataCatalog extends BundleAware, ResourceAware, NameContainer {
 	EList<Term> getTerms();
 
 	/**
+	 * Returns the value of the '<em><b>Kinds</b></em>' containment reference list.
+	 * The list contents are of type {@link org.soluvas.data.Kind}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Kinds</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Kinds</em>' containment reference list.
+	 * @see org.soluvas.data.DataPackage#getDataCatalog_Kinds()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Kind> getKinds();
+
+	/**
 	 * Returns the value of the '<em><b>Attribute Types</b></em>' containment reference list.
 	 * The list contents are of type {@link org.soluvas.data.AttributeType}.
 	 * <!-- begin-user-doc -->
@@ -85,6 +102,9 @@ public interface DataCatalog extends BundleAware, ResourceAware, NameContainer {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * TEMPORARY : WILL BE REPLACED BY kinds
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Attribute Types</em>' containment reference list.
 	 * @see org.soluvas.data.DataPackage#getDataCatalog_AttributeTypes()
 	 * @model containment="true"
