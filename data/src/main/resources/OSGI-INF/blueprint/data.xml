@@ -50,6 +50,9 @@
 	<service ref="termMgr" auto-export="interfaces"/>
 
 	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
+		<command name="kind/ls">
+			<action class="org.soluvas.data.shell.KindLsCommand" />
+		</command>
 		<command name="mixin/ls">
 			<action class="org.soluvas.data.shell.MixinLsCommand" />
 		</command>
@@ -57,7 +60,7 @@
 			<action class="org.soluvas.data.shell.TermLsCommand" />
 		</command>
 		<command name="term/attrs">
-			<action class="org.soluvas.data.shell.TermAttrsCommand" />
+			<action class="org.soluvas.data.shell.TermKindsCommand" />
 		</command>
 	</command-bundle>
 

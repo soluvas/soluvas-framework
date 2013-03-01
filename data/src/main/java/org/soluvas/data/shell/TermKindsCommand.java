@@ -9,7 +9,6 @@ import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.osgi.framework.ServiceReference;
 import org.soluvas.commons.NameFunction;
-import org.soluvas.data.AttributeType;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermManager;
 
@@ -18,11 +17,11 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.Multimap;
 
 /**
- * Display number of {@link Term}s for all recognized {@link AttributeType}s.
+ * Display number of {@link Term}s for all recognized {@link Kind}s.
  * @author rully
  */
-@Command(scope="term", name="attrs", description="Display Terms grouped by recognized AttributeTypes.")
-public class TermAttrsCommand extends OsgiCommandSupport {
+@Command(scope="term", name="kinds", description="Display Terms grouped by recognized Kinds.")
+public class TermKindsCommand extends OsgiCommandSupport {
 
 	/* (non-Javadoc)
 	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
@@ -32,7 +31,7 @@ public class TermAttrsCommand extends OsgiCommandSupport {
 		final ServiceReference<TermManager> dataCatalogRef = bundleContext.getServiceReference(TermManager.class);
 		final TermManager termMgr = getService(TermManager.class, dataCatalogRef);
 		System.out.println(ansi().render("@|negative_on %3s|%-20s|%3s|%-40s|@",
-				"№", "Attribute", "∑", "Terms"));
+				"№", "Kind", "∑", "Terms"));
 		final Multimap<String, Term> terms = termMgr.getTermsByAttributeTypes();
 		int i = 0;
 		for (final Entry<String, Collection<Term>> entry : terms.asMap().entrySet()) {
