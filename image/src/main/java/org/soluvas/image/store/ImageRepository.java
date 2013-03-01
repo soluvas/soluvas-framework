@@ -144,6 +144,12 @@ public interface ImageRepository { // extends EntityLookup<Image, String> {
 	 * @return
 	 */
 	public abstract List<Image> findAll();
+	
+	/**
+	 * List all {@link Image} IDs (sorted).
+	 * @return
+	 */
+	public abstract List<String> findAllIds();
 
 	/**
 	 * Search {@link Image}s by ID, fileName, URL. Sorted by ID.

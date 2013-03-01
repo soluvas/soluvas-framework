@@ -347,7 +347,8 @@ public class MongoImageRepository implements ImageRepository {
 				imageIdFutures.add(future);
 			}
 			
-			final List<String> imageIds = ImmutableList.copyOf( Lists.transform(imageIdFutures, new Function<Future<String>, String>() {
+			// use ArrayList because can contain nulls
+			final List<String> imageIds = Lists.newArrayList( Lists.transform(imageIdFutures, new Function<Future<String>, String>() {
 				@Override @Nullable
 				public String apply(@Nullable Future<String> input) {
 					try {
@@ -653,10 +654,27 @@ public class MongoImageRepository implements ImageRepository {
 	 */
 	@Override
 	public List<Image> findAll() {
-		DBCursor cursor = mongoColl.find().sort(new BasicDBObject("_id", "1"));
+		final DBCursor cursor = mongoColl.find().sort(new BasicDBObject("_id", "1"));
 		try {
-			ImmutableList<Image> images = ImmutableList.copyOf( Iterables.transform(cursor, new DBObjectToImage()) );
+			final List<Image> images = ImmutableList.copyOf( Iterables.transform(cursor, new DBObjectToImage()) );
 			return images;
+		} finally {
+			cursor.close();
+		}
+	}
+	
+	@Override
+	public List<String> findAllIds() {
+		final DBCursor cursor = mongoColl.find(new BasicDBObject(), new BasicDBObject("_id", 1))
+				.sort(new BasicDBObject("_id", "1"));
+		try {
+			final List<String> imageIds = ImmutableList.copyOf( Iterables.transform(cursor, new Function<DBObject, String>() {
+				@Override @Nullable
+				public String apply(@Nullable DBObject input) {
+					return (String) input.get("_id");
+				}
+			}));
+			return imageIds;
 		} finally {
 			cursor.close();
 		}

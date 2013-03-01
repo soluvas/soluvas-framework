@@ -328,6 +328,7 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 		try {
 			final UploadResult uploadResult = upload.waitForUploadResult();
 			log.info("Upload {} to {} result: etag={} versionId={} bucket={} key={}",
+					file, s3Uri,
 					uploadResult.getETag(),
 					uploadResult.getVersionId(),
 					uploadResult.getBucketName(),
