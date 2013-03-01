@@ -1752,6 +1752,191 @@ public interface CommonsPackage extends EPackage {
 	int COLORABLE_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.Translatable <em>Translatable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.Translatable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslatable()
+	 * @generated
+	 */
+	int TRANSLATABLE = 38;
+
+	/**
+	 * The feature id for the '<em><b>Translation State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATABLE__TRANSLATION_STATE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Original Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATABLE__ORIGINAL_LANGUAGE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATABLE__LANGUAGE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Translations</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATABLE__TRANSLATIONS = 3;
+
+	/**
+	 * The number of structural features of the '<em>Translatable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATABLE_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.TranslationImpl <em>Translation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.TranslationImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslation()
+	 * @generated
+	 */
+	int TRANSLATION = 39;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATION__LANGUAGE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Messages</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATION__MESSAGES = 1;
+
+	/**
+	 * The number of structural features of the '<em>Translation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATION_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.TranslationMessageEntryImpl <em>Translation Message Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.TranslationMessageEntryImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationMessageEntry()
+	 * @generated
+	 */
+	int TRANSLATION_MESSAGE_ENTRY = 40;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATION_MESSAGE_ENTRY__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATION_MESSAGE_ENTRY__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Translation Message Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATION_MESSAGE_ENTRY_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.TranslationManagerImpl <em>Translation Manager</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.TranslationManagerImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationManager()
+	 * @generated
+	 */
+	int TRANSLATION_MANAGER = 41;
+
+	/**
+	 * The number of structural features of the '<em>Translation Manager</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATION_MANAGER_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.TranslationEntryImpl <em>Translation Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.TranslationEntryImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationEntry()
+	 * @generated
+	 */
+	int TRANSLATION_ENTRY = 42;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATION_ENTRY__VALUE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATION_ENTRY__KEY = 1;
+
+	/**
+	 * The number of structural features of the '<em>Translation Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSLATION_ENTRY_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1759,7 +1944,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 38;
+	int RESOURCE_TYPE = 43;
 
 
 	/**
@@ -1770,7 +1955,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 39;
+	int GENDER = 44;
 
 
 	/**
@@ -1781,7 +1966,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 40;
+	int ECLASS_STATUS = 45;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -1791,7 +1976,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 41;
+	int JAVA_CLASS_STATUS = 46;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ProgressStatus <em>Progress Status</em>}' enum.
@@ -1801,7 +1986,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getProgressStatus()
 	 * @generated
 	 */
-	int PROGRESS_STATUS = 42;
+	int PROGRESS_STATUS = 47;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.AccountStatus <em>Account Status</em>}' enum.
@@ -1811,7 +1996,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAccountStatus()
 	 * @generated
 	 */
-	int ACCOUNT_STATUS = 43;
+	int ACCOUNT_STATUS = 48;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.PublicationStatus <em>Publication Status</em>}' enum.
@@ -1821,7 +2006,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPublicationStatus()
 	 * @generated
 	 */
-	int PUBLICATION_STATUS = 44;
+	int PUBLICATION_STATUS = 49;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ArchivalStatus <em>Archival Status</em>}' enum.
@@ -1831,7 +2016,17 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getArchivalStatus()
 	 * @generated
 	 */
-	int ARCHIVAL_STATUS = 45;
+	int ARCHIVAL_STATUS = 50;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.TranslationState <em>Translation State</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.TranslationState
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationState()
+	 * @generated
+	 */
+	int TRANSLATION_STATE = 51;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -1841,7 +2036,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 46;
+	int DATE_TIME = 52;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -1851,7 +2046,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 47;
+	int CURRENCY_UNIT = 53;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -1861,7 +2056,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 49;
+	int UNIT = 55;
 
 
 	/**
@@ -1872,7 +2067,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 50;
+	int LIST = 56;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -1882,7 +2077,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 51;
+	int MAP = 57;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -1892,7 +2087,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 52;
+	int SET = 58;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -1902,7 +2097,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 53;
+	int COLLECTION = 59;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -1912,7 +2107,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 54;
+	int MULTIMAP = 60;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -1922,7 +2117,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 55;
+	int NAVIGABLE_MAP = 61;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -1932,7 +2127,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 56;
+	int QUEUE = 62;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -1942,7 +2137,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 57;
+	int MULTISET = 63;
 
 
 	/**
@@ -1953,7 +2148,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 58;
+	int SERIALIZABLE = 64;
 
 
 	/**
@@ -1964,7 +2159,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 59;
+	int BUNDLE = 65;
 
 
 	/**
@@ -1975,7 +2170,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
 	 * @generated
 	 */
-	int BIG_MONEY_PROVIDER = 60;
+	int BIG_MONEY_PROVIDER = 66;
 
 	/**
 	 * The meta object id for the '<em>Quantity</em>' data type.
@@ -1985,7 +2180,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQuantity()
 	 * @generated
 	 */
-	int QUANTITY = 48;
+	int QUANTITY = 54;
 
 	/**
 	 * The meta object id for the '<em>Measurable</em>' data type.
@@ -1995,7 +2190,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMeasurable()
 	 * @generated
 	 */
-	int MEASURABLE = 61;
+	int MEASURABLE = 67;
 
 
 	/**
@@ -2006,7 +2201,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigDecimal()
 	 * @generated
 	 */
-	int BIG_DECIMAL = 62;
+	int BIG_DECIMAL = 68;
 
 
 	/**
@@ -2017,7 +2212,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTimeZone()
 	 * @generated
 	 */
-	int DATE_TIME_ZONE = 63;
+	int DATE_TIME_ZONE = 69;
 
 
 	/**
@@ -2028,7 +2223,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 64;
+	int LOCALE = 70;
 
 
 	/**
@@ -2039,7 +2234,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFile()
 	 * @generated
 	 */
-	int FILE = 65;
+	int FILE = 71;
 
 
 	/**
@@ -3028,6 +3223,171 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getColorable_Color();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Translatable <em>Translatable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Translatable</em>'.
+	 * @see org.soluvas.commons.Translatable
+	 * @generated
+	 */
+	EClass getTranslatable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Translatable#getTranslationState <em>Translation State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Translation State</em>'.
+	 * @see org.soluvas.commons.Translatable#getTranslationState()
+	 * @see #getTranslatable()
+	 * @generated
+	 */
+	EAttribute getTranslatable_TranslationState();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Translatable#getOriginalLanguage <em>Original Language</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Original Language</em>'.
+	 * @see org.soluvas.commons.Translatable#getOriginalLanguage()
+	 * @see #getTranslatable()
+	 * @generated
+	 */
+	EAttribute getTranslatable_OriginalLanguage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Translatable#getLanguage <em>Language</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Language</em>'.
+	 * @see org.soluvas.commons.Translatable#getLanguage()
+	 * @see #getTranslatable()
+	 * @generated
+	 */
+	EAttribute getTranslatable_Language();
+
+	/**
+	 * Returns the meta object for the map '{@link org.soluvas.commons.Translatable#getTranslations <em>Translations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Translations</em>'.
+	 * @see org.soluvas.commons.Translatable#getTranslations()
+	 * @see #getTranslatable()
+	 * @generated
+	 */
+	EReference getTranslatable_Translations();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Translation <em>Translation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Translation</em>'.
+	 * @see org.soluvas.commons.Translation
+	 * @generated
+	 */
+	EClass getTranslation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Translation#getLanguage <em>Language</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Language</em>'.
+	 * @see org.soluvas.commons.Translation#getLanguage()
+	 * @see #getTranslation()
+	 * @generated
+	 */
+	EAttribute getTranslation_Language();
+
+	/**
+	 * Returns the meta object for the map '{@link org.soluvas.commons.Translation#getMessages <em>Messages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Messages</em>'.
+	 * @see org.soluvas.commons.Translation#getMessages()
+	 * @see #getTranslation()
+	 * @generated
+	 */
+	EReference getTranslation_Messages();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Translation Message Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Translation Message Entry</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString"
+	 *        valueDataType="org.eclipse.emf.ecore.EString"
+	 * @generated
+	 */
+	EClass getTranslationMessageEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getTranslationMessageEntry()
+	 * @generated
+	 */
+	EAttribute getTranslationMessageEntry_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getTranslationMessageEntry()
+	 * @generated
+	 */
+	EAttribute getTranslationMessageEntry_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.TranslationManager <em>Translation Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Translation Manager</em>'.
+	 * @see org.soluvas.commons.TranslationManager
+	 * @generated
+	 */
+	EClass getTranslationManager();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Translation Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Translation Entry</em>'.
+	 * @see java.util.Map.Entry
+	 * @model features="value key" 
+	 *        valueType="org.soluvas.commons.Translation" valueContainment="true"
+	 *        keyDataType="org.eclipse.emf.ecore.EString"
+	 * @generated
+	 */
+	EClass getTranslationEntry();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getTranslationEntry()
+	 * @generated
+	 */
+	EReference getTranslationEntry_Value();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getTranslationEntry()
+	 * @generated
+	 */
+	EAttribute getTranslationEntry_Key();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3106,6 +3466,16 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getArchivalStatus();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.commons.TranslationState <em>Translation State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Translation State</em>'.
+	 * @see org.soluvas.commons.TranslationState
+	 * @generated
+	 */
+	EEnum getTranslationState();
 
 	/**
 	 * Returns the meta object for data type '{@link org.joda.time.DateTime <em>Date Time</em>}'.
@@ -4170,6 +4540,136 @@ public interface CommonsPackage extends EPackage {
 		EAttribute COLORABLE__COLOR = eINSTANCE.getColorable_Color();
 
 		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.Translatable <em>Translatable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.Translatable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslatable()
+		 * @generated
+		 */
+		EClass TRANSLATABLE = eINSTANCE.getTranslatable();
+
+		/**
+		 * The meta object literal for the '<em><b>Translation State</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSLATABLE__TRANSLATION_STATE = eINSTANCE.getTranslatable_TranslationState();
+
+		/**
+		 * The meta object literal for the '<em><b>Original Language</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSLATABLE__ORIGINAL_LANGUAGE = eINSTANCE.getTranslatable_OriginalLanguage();
+
+		/**
+		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSLATABLE__LANGUAGE = eINSTANCE.getTranslatable_Language();
+
+		/**
+		 * The meta object literal for the '<em><b>Translations</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSLATABLE__TRANSLATIONS = eINSTANCE.getTranslatable_Translations();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.TranslationImpl <em>Translation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.TranslationImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslation()
+		 * @generated
+		 */
+		EClass TRANSLATION = eINSTANCE.getTranslation();
+
+		/**
+		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSLATION__LANGUAGE = eINSTANCE.getTranslation_Language();
+
+		/**
+		 * The meta object literal for the '<em><b>Messages</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSLATION__MESSAGES = eINSTANCE.getTranslation_Messages();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.TranslationMessageEntryImpl <em>Translation Message Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.TranslationMessageEntryImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationMessageEntry()
+		 * @generated
+		 */
+		EClass TRANSLATION_MESSAGE_ENTRY = eINSTANCE.getTranslationMessageEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSLATION_MESSAGE_ENTRY__KEY = eINSTANCE.getTranslationMessageEntry_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSLATION_MESSAGE_ENTRY__VALUE = eINSTANCE.getTranslationMessageEntry_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.TranslationManagerImpl <em>Translation Manager</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.TranslationManagerImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationManager()
+		 * @generated
+		 */
+		EClass TRANSLATION_MANAGER = eINSTANCE.getTranslationManager();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.TranslationEntryImpl <em>Translation Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.TranslationEntryImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationEntry()
+		 * @generated
+		 */
+		EClass TRANSLATION_ENTRY = eINSTANCE.getTranslationEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSLATION_ENTRY__VALUE = eINSTANCE.getTranslationEntry_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSLATION_ENTRY__KEY = eINSTANCE.getTranslationEntry_Key();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4248,6 +4748,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum ARCHIVAL_STATUS = eINSTANCE.getArchivalStatus();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.TranslationState <em>Translation State</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.TranslationState
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationState()
+		 * @generated
+		 */
+		EEnum TRANSLATION_STATE = eINSTANCE.getTranslationState();
 
 		/**
 		 * The meta object literal for the '<em>Date Time</em>' data type.

@@ -139,6 +139,24 @@ public interface CommonsFactory extends EFactory {
 	 */
 	ProgressMonitorWrapper createProgressMonitorWrapper();
 
+	/**
+	 * Returns a new object of class '<em>Translation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Translation</em>'.
+	 * @generated
+	 */
+	Translation createTranslation();
+
+	/**
+	 * Returns a new object of class '<em>Translation Manager</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Translation Manager</em>'.
+	 * @generated
+	 */
+	TranslationManager createTranslationManager();
+
 	PersonInfo createPersonInfo(String id, String slug, String name, String photoId, Gender gender);
 
 	/**

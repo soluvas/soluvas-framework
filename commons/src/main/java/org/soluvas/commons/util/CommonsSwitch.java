@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons.util;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -346,6 +347,36 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 			case CommonsPackage.COLORABLE: {
 				Colorable colorable = (Colorable)theEObject;
 				T1 result = caseColorable(colorable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.TRANSLATABLE: {
+				Translatable translatable = (Translatable)theEObject;
+				T1 result = caseTranslatable(translatable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.TRANSLATION: {
+				Translation translation = (Translation)theEObject;
+				T1 result = caseTranslation(translation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.TRANSLATION_MESSAGE_ENTRY: {
+				@SuppressWarnings("unchecked") Map.Entry<String, String> translationMessageEntry = (Map.Entry<String, String>)theEObject;
+				T1 result = caseTranslationMessageEntry(translationMessageEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.TRANSLATION_MANAGER: {
+				TranslationManager translationManager = (TranslationManager)theEObject;
+				T1 result = caseTranslationManager(translationManager);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.TRANSLATION_ENTRY: {
+				@SuppressWarnings("unchecked") Map.Entry<String, Translation> translationEntry = (Map.Entry<String, Translation>)theEObject;
+				T1 result = caseTranslationEntry(translationEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -920,6 +951,81 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseColorable(Colorable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Translatable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Translatable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseTranslatable(Translatable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Translation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Translation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseTranslation(Translation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Translation Message Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Translation Message Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseTranslationMessageEntry(Map.Entry<String, String> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Translation Manager</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Translation Manager</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseTranslationManager(TranslationManager object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Translation Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Translation Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseTranslationEntry(Map.Entry<String, Translation> object) {
 		return null;
 	}
 

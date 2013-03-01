@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons.util;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -218,6 +219,26 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseColorable(Colorable object) {
 				return createColorableAdapter();
+			}
+			@Override
+			public Adapter caseTranslatable(Translatable object) {
+				return createTranslatableAdapter();
+			}
+			@Override
+			public Adapter caseTranslation(Translation object) {
+				return createTranslationAdapter();
+			}
+			@Override
+			public Adapter caseTranslationMessageEntry(Map.Entry<String, String> object) {
+				return createTranslationMessageEntryAdapter();
+			}
+			@Override
+			public Adapter caseTranslationManager(TranslationManager object) {
+				return createTranslationManagerAdapter();
+			}
+			@Override
+			public Adapter caseTranslationEntry(Map.Entry<String, Translation> object) {
+				return createTranslationEntryAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -768,6 +789,76 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createColorableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Translatable <em>Translatable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Translatable
+	 * @generated
+	 */
+	public Adapter createTranslatableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Translation <em>Translation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Translation
+	 * @generated
+	 */
+	public Adapter createTranslationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Translation Message Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createTranslationMessageEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.TranslationManager <em>Translation Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.TranslationManager
+	 * @generated
+	 */
+	public Adapter createTranslationManagerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Translation Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createTranslationEntryAdapter() {
 		return null;
 	}
 

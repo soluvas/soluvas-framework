@@ -109,6 +109,10 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 			case CommonsPackage.CATEGORY_INFO: return (EObject)createCategoryInfo();
 			case CommonsPackage.SHELL_PROGRESS_MONITOR: return (EObject)createShellProgressMonitor();
 			case CommonsPackage.PROGRESS_MONITOR_WRAPPER: return (EObject)createProgressMonitorWrapper();
+			case CommonsPackage.TRANSLATION: return (EObject)createTranslation();
+			case CommonsPackage.TRANSLATION_MESSAGE_ENTRY: return (EObject)createTranslationMessageEntry();
+			case CommonsPackage.TRANSLATION_MANAGER: return (EObject)createTranslationManager();
+			case CommonsPackage.TRANSLATION_ENTRY: return (EObject)createTranslationEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -138,6 +142,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createPublicationStatusFromString(eDataType, initialValue);
 			case CommonsPackage.ARCHIVAL_STATUS:
 				return createArchivalStatusFromString(eDataType, initialValue);
+			case CommonsPackage.TRANSLATION_STATE:
+				return createTranslationStateFromString(eDataType, initialValue);
 			case CommonsPackage.DATE_TIME:
 				return createDateTimeFromString(eDataType, initialValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -205,6 +211,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertPublicationStatusToString(eDataType, instanceValue);
 			case CommonsPackage.ARCHIVAL_STATUS:
 				return convertArchivalStatusToString(eDataType, instanceValue);
+			case CommonsPackage.TRANSLATION_STATE:
+				return convertTranslationStateToString(eDataType, instanceValue);
 			case CommonsPackage.DATE_TIME:
 				return convertDateTimeToString(eDataType, instanceValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -402,6 +410,46 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Translation createTranslation() {
+		TranslationImpl translation = new TranslationImpl();
+		return translation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<String, String> createTranslationMessageEntry() {
+		TranslationMessageEntryImpl translationMessageEntry = new TranslationMessageEntryImpl();
+		return translationMessageEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TranslationManager createTranslationManager() {
+		TranslationManagerImpl translationManager = new TranslationManagerImpl();
+		return translationManager;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<String, Translation> createTranslationEntry() {
+		TranslationEntryImpl translationEntry = new TranslationEntryImpl();
+		return translationEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ResourceType createResourceTypeFromString(EDataType eDataType, String initialValue) {
 		ResourceType result = ResourceType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -554,6 +602,26 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertArchivalStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TranslationState createTranslationStateFromString(EDataType eDataType, String initialValue) {
+		TranslationState result = TranslationState.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertTranslationStateToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

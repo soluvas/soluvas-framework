@@ -690,4 +690,68 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Translatable" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Entity Translation&#xA;Multi-locale &amp; multi-language support for entities/nodes/database objects&#xA;Allow entities (like Product) to have different description / price / custom attribute values (fabric, origin, technique, etc.) for each locale/language."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="translationState" eType="#//TranslationState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="originalLanguage" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The language of original values."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Current language code (if translationState == translated) or same as originalLanguage."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="translations" upperBound="-1"
+        eType="#//TranslationEntry" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="EMap[ language: String, Translation ]&#xA;Where Translation object contains language: String and the localized messages keyed by attribute QName.&#xA;Example translations is as follows:&#xA;1. en&#xA;1. base_description : Very good style.&#xA;2. base_fabric : Super funky.&#xA;2. id&#xA;1. base_description : Sangat bagus untuk Anda.&#xA;2. base_fabric : Katun keren.&#xA;3. base_origin : Jakarta area.&#xA;Country codes in language codes:&#xA;en and en_US are identical and interchangeable.&#xA;id and id_ID are identical and interchangeable."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TranslationState">
+    <eLiterals name="original">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="1. Values are in their original language as specified by originalLanguage (usually the mother tongue, i.e. id)."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="translated" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="2. Values are translated and language attribute is set as the current language."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Translation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="It's not an EMap so it won't be complex to create the underlying EMap (messages)."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="messages" upperBound="-1"
+        eType="#//TranslationMessageEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TranslationMessageEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TranslationManager">
+    <eOperations name="translate">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Processes available translations and sets language to the targetLanguage.&#xA;Will throw Exception if it's not already in the targetLanguage and translationState is translated."/>
+      </eAnnotations>
+      <eParameters name="entity" eType="#//Translatable"/>
+      <eParameters name="targetLanguage" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TranslationEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Translation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Language of the translation."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
 </ecore:EPackage>

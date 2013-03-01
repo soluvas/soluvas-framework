@@ -80,6 +80,10 @@ import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.ShellProgressMonitor;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.commons.Timestamped;
+import org.soluvas.commons.Translatable;
+import org.soluvas.commons.Translation;
+import org.soluvas.commons.TranslationManager;
+import org.soluvas.commons.TranslationState;
 import org.soluvas.commons.WebAddress;
 
 import com.google.common.collect.Multimap;
@@ -363,6 +367,41 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass translatableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass translationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass translationMessageEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass translationManagerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass translationEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum resourceTypeEEnum = null;
 
 	/**
@@ -413,6 +452,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EEnum archivalStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum translationStateEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1551,6 +1597,141 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTranslatable() {
+		return translatableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTranslatable_TranslationState() {
+		return (EAttribute)translatableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTranslatable_OriginalLanguage() {
+		return (EAttribute)translatableEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTranslatable_Language() {
+		return (EAttribute)translatableEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTranslatable_Translations() {
+		return (EReference)translatableEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTranslation() {
+		return translationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTranslation_Language() {
+		return (EAttribute)translationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTranslation_Messages() {
+		return (EReference)translationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTranslationMessageEntry() {
+		return translationMessageEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTranslationMessageEntry_Key() {
+		return (EAttribute)translationMessageEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTranslationMessageEntry_Value() {
+		return (EAttribute)translationMessageEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTranslationManager() {
+		return translationManagerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTranslationEntry() {
+		return translationEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTranslationEntry_Value() {
+		return (EReference)translationEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTranslationEntry_Key() {
+		return (EAttribute)translationEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -1624,6 +1805,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	@Override
 	public EEnum getArchivalStatus() {
 		return archivalStatusEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getTranslationState() {
+		return translationStateEEnum;
 	}
 
 	/**
@@ -1986,6 +2176,26 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		colorableEClass = createEClass(COLORABLE);
 		createEAttribute(colorableEClass, COLORABLE__COLOR);
 
+		translatableEClass = createEClass(TRANSLATABLE);
+		createEAttribute(translatableEClass, TRANSLATABLE__TRANSLATION_STATE);
+		createEAttribute(translatableEClass, TRANSLATABLE__ORIGINAL_LANGUAGE);
+		createEAttribute(translatableEClass, TRANSLATABLE__LANGUAGE);
+		createEReference(translatableEClass, TRANSLATABLE__TRANSLATIONS);
+
+		translationEClass = createEClass(TRANSLATION);
+		createEAttribute(translationEClass, TRANSLATION__LANGUAGE);
+		createEReference(translationEClass, TRANSLATION__MESSAGES);
+
+		translationMessageEntryEClass = createEClass(TRANSLATION_MESSAGE_ENTRY);
+		createEAttribute(translationMessageEntryEClass, TRANSLATION_MESSAGE_ENTRY__KEY);
+		createEAttribute(translationMessageEntryEClass, TRANSLATION_MESSAGE_ENTRY__VALUE);
+
+		translationManagerEClass = createEClass(TRANSLATION_MANAGER);
+
+		translationEntryEClass = createEClass(TRANSLATION_ENTRY);
+		createEReference(translationEntryEClass, TRANSLATION_ENTRY__VALUE);
+		createEAttribute(translationEntryEClass, TRANSLATION_ENTRY__KEY);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -1995,6 +2205,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		accountStatusEEnum = createEEnum(ACCOUNT_STATUS);
 		publicationStatusEEnum = createEEnum(PUBLICATION_STATUS);
 		archivalStatusEEnum = createEEnum(ARCHIVAL_STATUS);
+		translationStateEEnum = createEEnum(TRANSLATION_STATE);
 
 		// Create data types
 		dateTimeEDataType = createEDataType(DATE_TIME);
@@ -2370,6 +2581,30 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEClass(colorableEClass, Colorable.class, "Colorable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getColorable_Color(), theEcorePackage.getEString(), "color", null, 0, 1, Colorable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(translatableEClass, Translatable.class, "Translatable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTranslatable_TranslationState(), this.getTranslationState(), "translationState", null, 0, 1, Translatable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTranslatable_OriginalLanguage(), theEcorePackage.getEString(), "originalLanguage", null, 0, 1, Translatable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTranslatable_Language(), theEcorePackage.getEString(), "language", null, 0, 1, Translatable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTranslatable_Translations(), this.getTranslationEntry(), null, "translations", null, 0, -1, Translatable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(translationEClass, Translation.class, "Translation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTranslation_Language(), theEcorePackage.getEString(), "language", null, 0, 1, Translation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTranslation_Messages(), this.getTranslationMessageEntry(), null, "messages", null, 0, -1, Translation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(translationMessageEntryEClass, Map.Entry.class, "TranslationMessageEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTranslationMessageEntry_Key(), theEcorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTranslationMessageEntry_Value(), theEcorePackage.getEString(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(translationManagerEClass, TranslationManager.class, "TranslationManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(translationManagerEClass, null, "translate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getTranslatable(), "entity", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "targetLanguage", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(translationEntryEClass, Map.Entry.class, "TranslationEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTranslationEntry_Value(), this.getTranslation(), null, "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTranslationEntry_Key(), theEcorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.BUNDLE);
@@ -2411,6 +2646,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEEnum(archivalStatusEEnum, ArchivalStatus.class, "ArchivalStatus");
 		addEEnumLiteral(archivalStatusEEnum, ArchivalStatus.FRESH);
 		addEEnumLiteral(archivalStatusEEnum, ArchivalStatus.ARCHIVED);
+
+		initEEnum(translationStateEEnum, TranslationState.class, "TranslationState");
+		addEEnumLiteral(translationStateEEnum, TranslationState.ORIGINAL);
+		addEEnumLiteral(translationStateEEnum, TranslationState.TRANSLATED);
 
 		// Initialize data types
 		initEDataType(dateTimeEDataType, DateTime.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -2971,6 +3210,60 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "HTML color code name or hexadecimal code (i.e. \"#3356ff\") of category color (usually used as background)."
+		   });		
+		addAnnotation
+		  (translatableEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Entity Translation\nMulti-locale & multi-language support for entities/nodes/database objects\nAllow entities (like Product) to have different description / price / custom attribute values (fabric, origin, technique, etc.) for each locale/language."
+		   });		
+		addAnnotation
+		  (getTranslatable_OriginalLanguage(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The language of original values."
+		   });		
+		addAnnotation
+		  (getTranslatable_Language(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Current language code (if translationState == translated) or same as originalLanguage."
+		   });		
+		addAnnotation
+		  (getTranslatable_Translations(), 
+		   source, 
+		   new String[] {
+			 "documentation", "EMap[ language: String, Translation ]\nWhere Translation object contains language: String and the localized messages keyed by attribute QName.\nExample translations is as follows:\n1. en\n1. base_description : Very good style.\n2. base_fabric : Super funky.\n2. id\n1. base_description : Sangat bagus untuk Anda.\n2. base_fabric : Katun keren.\n3. base_origin : Jakarta area.\nCountry codes in language codes:\nen and en_US are identical and interchangeable.\nid and id_ID are identical and interchangeable."
+		   });		
+		addAnnotation
+		  (translationStateEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "1. Values are in their original language as specified by originalLanguage (usually the mother tongue, i.e. id)."
+		   });		
+		addAnnotation
+		  (translationStateEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "2. Values are translated and language attribute is set as the current language."
+		   });		
+		addAnnotation
+		  (translationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "It\'s not an EMap so it won\'t be complex to create the underlying EMap (messages)."
+		   });		
+		addAnnotation
+		  (translationManagerEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Processes available translations and sets language to the targetLanguage.\nWill throw Exception if it\'s not already in the targetLanguage and translationState is translated."
+		   });		
+		addAnnotation
+		  (getTranslationEntry_Key(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Language of the translation."
 		   });
 	}
 	
