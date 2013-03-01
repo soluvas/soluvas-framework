@@ -69,6 +69,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 			case ImagePackage.IMAGE: return (EObject)createImage();
 			case ImagePackage.STYLED_IMAGE: return (EObject)createStyledImage();
 			case ImagePackage.IMAGE_CATALOG: return (EObject)createImageCatalog();
+			case ImagePackage.IMAGE_MAGICK_TRANSFORMER: return (EObject)createImageMagickTransformer();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -234,6 +235,16 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	public ImageCatalog createImageCatalog() {
 		ImageCatalogImpl imageCatalog = new ImageCatalogImpl();
 		return imageCatalog;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageMagickTransformer createImageMagickTransformer() {
+		ImageMagickTransformerImpl imageMagickTransformer = new ImageMagickTransformerImpl();
+		return imageMagickTransformer;
 	}
 
 	/**

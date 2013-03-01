@@ -22,6 +22,7 @@ import org.soluvas.image.Image;
 import org.soluvas.image.ImageCatalog;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImageFactory;
+import org.soluvas.image.ImageMagickTransformer;
 import org.soluvas.image.ImageManager;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageTransform;
@@ -154,6 +155,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 */
 	private EClass imageCatalogEClass = null;
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imageMagickTransformerEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -940,6 +947,24 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getImageMagickTransformer() {
+		return imageMagickTransformerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getImageMagickTransformer_Destination() {
+		return (EReference)imageMagickTransformerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getImageTransformType() {
 		return imageTransformTypeEEnum;
@@ -1096,6 +1121,9 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		imageCatalogEClass = createEClass(IMAGE_CATALOG);
 		createEReference(imageCatalogEClass, IMAGE_CATALOG__IMAGES);
 
+		imageMagickTransformerEClass = createEClass(IMAGE_MAGICK_TRANSFORMER);
+		createEReference(imageMagickTransformerEClass, IMAGE_MAGICK_TRANSFORMER__DESTINATION);
+
 		// Create enums
 		imageTransformTypeEEnum = createEEnum(IMAGE_TRANSFORM_TYPE);
 		fileExportEEnum = createEEnum(FILE_EXPORT);
@@ -1155,6 +1183,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		styledImageEClass.getESuperTypes().add(this.getDimensionLike());
 		styledImageEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
 		styledImageEClass.getESuperTypes().add(theCommonsPackage.getTimestamped());
+		imageMagickTransformerEClass.getESuperTypes().add(this.getImageTransformer());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(imageConnectorEClass, ImageConnector.class, "ImageConnector", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1318,6 +1347,9 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		initEClass(imageCatalogEClass, ImageCatalog.class, "ImageCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getImageCatalog_Images(), this.getImage(), null, "images", null, 0, -1, ImageCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(imageMagickTransformerEClass, ImageMagickTransformer.class, "ImageMagickTransformer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getImageMagickTransformer_Destination(), this.getImageConnector(), null, "destination", null, 0, 1, ImageMagickTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(imageTransformTypeEEnum, ImageTransformType.class, "ImageTransformType");

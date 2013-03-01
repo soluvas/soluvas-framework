@@ -1023,6 +1023,34 @@ public interface ImagePackage extends EPackage {
 	int IMAGE_CATALOG_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.ImageMagickTransformerImpl <em>Magick Transformer</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.ImageMagickTransformerImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageMagickTransformer()
+	 * @generated
+	 */
+	int IMAGE_MAGICK_TRANSFORMER = 16;
+
+	/**
+	 * The feature id for the '<em><b>Destination</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_MAGICK_TRANSFORMER__DESTINATION = IMAGE_TRANSFORMER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Magick Transformer</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_MAGICK_TRANSFORMER_FEATURE_COUNT = IMAGE_TRANSFORMER_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1030,7 +1058,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformType()
 	 * @generated
 	 */
-	int IMAGE_TRANSFORM_TYPE = 16;
+	int IMAGE_TRANSFORM_TYPE = 17;
 
 
 	/**
@@ -1041,7 +1069,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getFileExport()
 	 * @generated
 	 */
-	int FILE_EXPORT = 17;
+	int FILE_EXPORT = 18;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.DuplicateIdHandling <em>Duplicate Id Handling</em>}' enum.
@@ -1051,7 +1079,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getDuplicateIdHandling()
 	 * @generated
 	 */
-	int DUPLICATE_ID_HANDLING = 18;
+	int DUPLICATE_ID_HANDLING = 19;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.TransformGravity <em>Transform Gravity</em>}' enum.
@@ -1061,7 +1089,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getTransformGravity()
 	 * @generated
 	 */
-	int TRANSFORM_GRAVITY = 19;
+	int TRANSFORM_GRAVITY = 20;
 
 	/**
 	 * The meta object id for the '<em>Repository</em>' data type.
@@ -1071,7 +1099,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageRepository()
 	 * @generated
 	 */
-	int IMAGE_REPOSITORY = 20;
+	int IMAGE_REPOSITORY = 21;
 
 
 	/**
@@ -1829,6 +1857,27 @@ public interface ImagePackage extends EPackage {
 	EReference getImageCatalog_Images();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.ImageMagickTransformer <em>Magick Transformer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Magick Transformer</em>'.
+	 * @see org.soluvas.image.ImageMagickTransformer
+	 * @generated
+	 */
+	EClass getImageMagickTransformer();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.image.ImageMagickTransformer#getDestination <em>Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Destination</em>'.
+	 * @see org.soluvas.image.ImageMagickTransformer#getDestination()
+	 * @see #getImageMagickTransformer()
+	 * @generated
+	 */
+	EReference getImageMagickTransformer_Destination();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2492,6 +2541,24 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EReference IMAGE_CATALOG__IMAGES = eINSTANCE.getImageCatalog_Images();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.ImageMagickTransformerImpl <em>Magick Transformer</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.ImageMagickTransformerImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageMagickTransformer()
+		 * @generated
+		 */
+		EClass IMAGE_MAGICK_TRANSFORMER = eINSTANCE.getImageMagickTransformer();
+
+		/**
+		 * The meta object literal for the '<em><b>Destination</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IMAGE_MAGICK_TRANSFORMER__DESTINATION = eINSTANCE.getImageMagickTransformer_Destination();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.

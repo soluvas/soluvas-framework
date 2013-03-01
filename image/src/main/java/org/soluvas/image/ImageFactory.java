@@ -130,6 +130,15 @@ public interface ImageFactory extends EFactory {
 	ImageCatalog createImageCatalog();
 
 	/**
+	 * Returns a new object of class '<em>Magick Transformer</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Magick Transformer</em>'.
+	 * @generated
+	 */
+	ImageMagickTransformer createImageMagickTransformer();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

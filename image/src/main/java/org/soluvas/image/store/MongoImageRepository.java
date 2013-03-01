@@ -11,9 +11,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
@@ -26,6 +31,7 @@ import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.ProgressStatus;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.ProgressMonitorImpl;
+import org.soluvas.commons.impl.ProgressMonitorWrapperImpl;
 import org.soluvas.image.DavConnector;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImageException;
@@ -36,7 +42,7 @@ import org.soluvas.image.ImageVariant;
 import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.image.impl.DavConnectorImpl;
-import org.soluvas.image.impl.ThumbnailatorTransformerImpl;
+import org.soluvas.image.impl.ImageMagickTransformerImpl;
 import org.soluvas.image.util.ImageUtils;
 
 import com.google.common.base.Function;
@@ -48,6 +54,7 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -153,7 +160,8 @@ public class MongoImageRepository implements ImageRepository {
 		this.mongoUri = mongoUri;
 		this.innerConnector = new DavConnectorImpl(davUri, publicUri); 
 		this.connector = innerConnector;
-		this.transformer = new ThumbnailatorTransformerImpl(innerConnector);
+//		this.transformer = new ThumbnailatorTransformerImpl(innerConnector);
+		this.transformer = new ImageMagickTransformerImpl(innerConnector);
 	}
 	
 	// URI: ~repo.publicUri~{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}
@@ -310,10 +318,51 @@ public class MongoImageRepository implements ImageRepository {
 	 */
 	@Override
 	public String add(Image newImage) {
+		return add(ImmutableList.of(newImage), new ProgressMonitorWrapperImpl(null)).get(0);
+	}
+	
+	@Override
+	public List<String> add(@Nonnull List<Image> newImages, final ProgressMonitor monitor) {
+		final ExecutorService executor = Executors.newFixedThreadPool(8);
 		try {
-			return create(newImage.getId(), newImage.getOriginalFile(), newImage.getContentType(), newImage.getName());
-		} catch (IOException e) {
-			throw new ImageException("Error adding image " + newImage, e);
+			final List<Future<String>> imageIdFutures = Lists.newArrayList();
+			
+			// TODO: optimize!
+			monitor.beginTask("Uploading " + newImages.size() + " images", newImages.size());
+			for (final Image newImage : newImages) {
+				final Future<String> future = executor.submit(new Callable<String>() {
+					@Override
+					public String call() throws Exception {
+						try {
+							String imageId = create(newImage.getId(), newImage.getOriginalFile(), newImage.getContentType(), newImage.getName());
+							monitor.worked(1);
+							return imageId;
+						} catch (IOException e) {
+							monitor.worked(1, ProgressStatus.ERROR);
+							log.error("Error adding image " + newImage, e);
+							return null;
+						}
+					}
+				});
+				imageIdFutures.add(future);
+			}
+			
+			final List<String> imageIds = ImmutableList.copyOf( Lists.transform(imageIdFutures, new Function<Future<String>, String>() {
+				@Override @Nullable
+				public String apply(@Nullable Future<String> input) {
+					try {
+						return input.get();
+					} catch (Exception e) {
+						log.error("Cannot get Image execution result", e);
+						return null;
+					}
+				}
+			}) );
+			
+			monitor.done();
+			return imageIds;
+		} finally {
+			executor.shutdown();
 		}
 	}
 
