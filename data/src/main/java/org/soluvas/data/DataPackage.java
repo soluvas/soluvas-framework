@@ -59,14 +59,14 @@ public interface DataPackage extends EPackage {
 	DataPackage eINSTANCE = org.soluvas.data.impl.DataPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.data.AttributeType <em>Attribute Type</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.data.impl.AttributeImpl <em>Attribute</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.data.AttributeType
-	 * @see org.soluvas.data.impl.DataPackageImpl#getAttributeType()
+	 * @see org.soluvas.data.impl.AttributeImpl
+	 * @see org.soluvas.data.impl.DataPackageImpl#getAttribute()
 	 * @generated
 	 */
-	int ATTRIBUTE_TYPE = 0;
+	int ATTRIBUTE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
@@ -75,7 +75,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE__NS_PREFIX = CommonsPackage.NS_PREFIXABLE__NS_PREFIX;
+	int ATTRIBUTE__NS_PREFIX = CommonsPackage.NS_PREFIXABLE__NS_PREFIX;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -84,7 +84,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE__NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 0;
+	int ATTRIBUTE__NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
@@ -93,7 +93,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE__RESOURCE_TYPE = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 1;
+	int ATTRIBUTE__RESOURCE_TYPE = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
@@ -102,7 +102,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE__RESOURCE_URI = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 2;
+	int ATTRIBUTE__RESOURCE_URI = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
@@ -111,7 +111,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE__RESOURCE_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 3;
+	int ATTRIBUTE__RESOURCE_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Bundle</b></em>' attribute.
@@ -120,7 +120,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE__BUNDLE = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 4;
+	int ATTRIBUTE__BUNDLE = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Display Name</b></em>' attribute.
@@ -129,7 +129,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE__DISPLAY_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
+	int ATTRIBUTE__DISPLAY_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Min Values</b></em>' attribute.
@@ -138,7 +138,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE__MIN_VALUES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 6;
+	int ATTRIBUTE__MIN_VALUES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Max Values</b></em>' attribute.
@@ -147,7 +147,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE__MAX_VALUES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 7;
+	int ATTRIBUTE__MAX_VALUES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Data Type Name</b></em>' attribute.
@@ -156,7 +156,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE__DATA_TYPE_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 8;
+	int ATTRIBUTE__DATA_TYPE_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Kind Ns Prefix</b></em>' attribute.
@@ -165,7 +165,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE__KIND_NS_PREFIX = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 9;
+	int ATTRIBUTE__KIND_NS_PREFIX = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Kind Name</b></em>' attribute.
@@ -174,16 +174,34 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE__KIND_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 10;
+	int ATTRIBUTE__KIND_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 10;
 
 	/**
-	 * The number of structural features of the '<em>Attribute Type</em>' class.
+	 * The feature id for the '<em><b>Input Method</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_TYPE_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 11;
+	int ATTRIBUTE__INPUT_METHOD = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Input Unit Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__INPUT_UNIT_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 12;
+
+	/**
+	 * The number of structural features of the '<em>Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.ValueImpl <em>Value</em>}' class.
@@ -443,13 +461,13 @@ public interface DataPackage extends EPackage {
 	int MIXIN__DESCRIPTION = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Attribute Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MIXIN__ATTRIBUTE_TYPES = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 6;
+	int MIXIN__ATTRIBUTES = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Display Name</b></em>' attribute.
@@ -835,22 +853,22 @@ public interface DataPackage extends EPackage {
 	int TERM__IMAGE_ID = TERM_CONTAINER_FEATURE_COUNT + 10;
 
 	/**
-	 * The feature id for the '<em><b>Attribute Type Ns Prefix</b></em>' attribute.
+	 * The feature id for the '<em><b>Kind Ns Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__ATTRIBUTE_TYPE_NS_PREFIX = TERM_CONTAINER_FEATURE_COUNT + 11;
+	int TERM__KIND_NS_PREFIX = TERM_CONTAINER_FEATURE_COUNT + 11;
 
 	/**
-	 * The feature id for the '<em><b>Attribute Type Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Kind Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__ATTRIBUTE_TYPE_NAME = TERM_CONTAINER_FEATURE_COUNT + 12;
+	int TERM__KIND_NAME = TERM_CONTAINER_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>Term</em>' class.
@@ -1199,22 +1217,13 @@ public interface DataPackage extends EPackage {
 	int DATA_CATALOG__KINDS = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Attribute Types</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_CATALOG__ATTRIBUTE_TYPES = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 8;
-
-	/**
 	 * The number of structural features of the '<em>Catalog</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_CATALOG_FEATURE_COUNT = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 9;
+	int DATA_CATALOG_FEATURE_COUNT = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.TermManagerImpl <em>Term Manager</em>}' class.
@@ -1328,6 +1337,16 @@ public interface DataPackage extends EPackage {
 	int ATTRIBUTE_SEMANTIC = 17;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.data.InputMethod <em>Input Method</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.data.InputMethod
+	 * @see org.soluvas.data.impl.DataPackageImpl#getInputMethod()
+	 * @generated
+	 */
+	int INPUT_METHOD = 18;
+
+	/**
 	 * The meta object id for the '<em>Crud Repository</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1335,7 +1354,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepository()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY = 18;
+	int CRUD_REPOSITORY = 19;
 
 	/**
 	 * The meta object id for the '<em>Paging And Sorting Repository</em>' data type.
@@ -1345,7 +1364,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPagingAndSortingRepository()
 	 * @generated
 	 */
-	int PAGING_AND_SORTING_REPOSITORY = 19;
+	int PAGING_AND_SORTING_REPOSITORY = 20;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository Base</em>' data type.
@@ -1355,7 +1374,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepositoryBase()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY_BASE = 20;
+	int CRUD_REPOSITORY_BASE = 21;
 
 
 	/**
@@ -1366,7 +1385,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getMeasure()
 	 * @generated
 	 */
-	int MEASURE = 21;
+	int MEASURE = 22;
 
 	/**
 	 * The meta object id for the '<em>Decimal Measure</em>' data type.
@@ -1376,84 +1395,106 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getDecimalMeasure()
 	 * @generated
 	 */
-	int DECIMAL_MEASURE = 22;
+	int DECIMAL_MEASURE = 23;
 
 
 	/**
-	 * Returns the meta object for class '{@link org.soluvas.data.AttributeType <em>Attribute Type</em>}'.
+	 * Returns the meta object for class '{@link org.soluvas.data.Attribute <em>Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Attribute Type</em>'.
-	 * @see org.soluvas.data.AttributeType
+	 * @return the meta object for class '<em>Attribute</em>'.
+	 * @see org.soluvas.data.Attribute
 	 * @generated
 	 */
-	EClass getAttributeType();
+	EClass getAttribute();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.data.AttributeType#getDisplayName <em>Display Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#getDisplayName <em>Display Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Display Name</em>'.
-	 * @see org.soluvas.data.AttributeType#getDisplayName()
-	 * @see #getAttributeType()
+	 * @see org.soluvas.data.Attribute#getDisplayName()
+	 * @see #getAttribute()
 	 * @generated
 	 */
-	EAttribute getAttributeType_DisplayName();
+	EAttribute getAttribute_DisplayName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.data.AttributeType#getMinValues <em>Min Values</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#getMinValues <em>Min Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Min Values</em>'.
-	 * @see org.soluvas.data.AttributeType#getMinValues()
-	 * @see #getAttributeType()
+	 * @see org.soluvas.data.Attribute#getMinValues()
+	 * @see #getAttribute()
 	 * @generated
 	 */
-	EAttribute getAttributeType_MinValues();
+	EAttribute getAttribute_MinValues();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.data.AttributeType#getMaxValues <em>Max Values</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#getMaxValues <em>Max Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Max Values</em>'.
-	 * @see org.soluvas.data.AttributeType#getMaxValues()
-	 * @see #getAttributeType()
+	 * @see org.soluvas.data.Attribute#getMaxValues()
+	 * @see #getAttribute()
 	 * @generated
 	 */
-	EAttribute getAttributeType_MaxValues();
+	EAttribute getAttribute_MaxValues();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.data.AttributeType#getDataTypeName <em>Data Type Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#getDataTypeName <em>Data Type Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Data Type Name</em>'.
-	 * @see org.soluvas.data.AttributeType#getDataTypeName()
-	 * @see #getAttributeType()
+	 * @see org.soluvas.data.Attribute#getDataTypeName()
+	 * @see #getAttribute()
 	 * @generated
 	 */
-	EAttribute getAttributeType_DataTypeName();
+	EAttribute getAttribute_DataTypeName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.data.AttributeType#getKindNsPrefix <em>Kind Ns Prefix</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#getKindNsPrefix <em>Kind Ns Prefix</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Kind Ns Prefix</em>'.
-	 * @see org.soluvas.data.AttributeType#getKindNsPrefix()
-	 * @see #getAttributeType()
+	 * @see org.soluvas.data.Attribute#getKindNsPrefix()
+	 * @see #getAttribute()
 	 * @generated
 	 */
-	EAttribute getAttributeType_KindNsPrefix();
+	EAttribute getAttribute_KindNsPrefix();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.data.AttributeType#getKindName <em>Kind Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#getKindName <em>Kind Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Kind Name</em>'.
-	 * @see org.soluvas.data.AttributeType#getKindName()
-	 * @see #getAttributeType()
+	 * @see org.soluvas.data.Attribute#getKindName()
+	 * @see #getAttribute()
 	 * @generated
 	 */
-	EAttribute getAttributeType_KindName();
+	EAttribute getAttribute_KindName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#getInputMethod <em>Input Method</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Input Method</em>'.
+	 * @see org.soluvas.data.Attribute#getInputMethod()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_InputMethod();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#getInputUnitName <em>Input Unit Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Input Unit Name</em>'.
+	 * @see org.soluvas.data.Attribute#getInputUnitName()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_InputUnitName();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.Value <em>Value</em>}'.
@@ -1572,15 +1613,15 @@ public interface DataPackage extends EPackage {
 	EClass getMixin();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.soluvas.data.Mixin#getAttributeTypes <em>Attribute Types</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.soluvas.data.Mixin#getAttributes <em>Attributes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Attribute Types</em>'.
-	 * @see org.soluvas.data.Mixin#getAttributeTypes()
+	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
+	 * @see org.soluvas.data.Mixin#getAttributes()
 	 * @see #getMixin()
 	 * @generated
 	 */
-	EReference getMixin_AttributeTypes();
+	EReference getMixin_Attributes();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.data.Mixin#getDisplayName <em>Display Name</em>}'.
@@ -1722,26 +1763,26 @@ public interface DataPackage extends EPackage {
 	EAttribute getTerm_ImageId();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.data.Term#getAttributeTypeNsPrefix <em>Attribute Type Ns Prefix</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Term#getKindNsPrefix <em>Kind Ns Prefix</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Attribute Type Ns Prefix</em>'.
-	 * @see org.soluvas.data.Term#getAttributeTypeNsPrefix()
+	 * @return the meta object for the attribute '<em>Kind Ns Prefix</em>'.
+	 * @see org.soluvas.data.Term#getKindNsPrefix()
 	 * @see #getTerm()
 	 * @generated
 	 */
-	EAttribute getTerm_AttributeTypeNsPrefix();
+	EAttribute getTerm_KindNsPrefix();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.data.Term#getAttributeTypeName <em>Attribute Type Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Term#getKindName <em>Kind Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Attribute Type Name</em>'.
-	 * @see org.soluvas.data.Term#getAttributeTypeName()
+	 * @return the meta object for the attribute '<em>Kind Name</em>'.
+	 * @see org.soluvas.data.Term#getKindName()
 	 * @see #getTerm()
 	 * @generated
 	 */
-	EAttribute getTerm_AttributeTypeName();
+	EAttribute getTerm_KindName();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.ListVocab <em>List Vocab</em>}'.
@@ -1849,17 +1890,6 @@ public interface DataPackage extends EPackage {
 	EReference getDataCatalog_Kinds();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.soluvas.data.DataCatalog#getAttributeTypes <em>Attribute Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Attribute Types</em>'.
-	 * @see org.soluvas.data.DataCatalog#getAttributeTypes()
-	 * @see #getDataCatalog()
-	 * @generated
-	 */
-	EReference getDataCatalog_AttributeTypes();
-
-	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.TermManager <em>Term Manager</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1899,6 +1929,16 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getAttributeSemantic();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.data.InputMethod <em>Input Method</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Input Method</em>'.
+	 * @see org.soluvas.data.InputMethod
+	 * @generated
+	 */
+	EEnum getInputMethod();
 
 	/**
 	 * Returns the meta object for data type '{@link org.soluvas.data.repository.CrudRepository <em>Crud Repository</em>}'.
@@ -1978,14 +2018,14 @@ public interface DataPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.soluvas.data.AttributeType <em>Attribute Type</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.data.impl.AttributeImpl <em>Attribute</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.data.AttributeType
-		 * @see org.soluvas.data.impl.DataPackageImpl#getAttributeType()
+		 * @see org.soluvas.data.impl.AttributeImpl
+		 * @see org.soluvas.data.impl.DataPackageImpl#getAttribute()
 		 * @generated
 		 */
-		EClass ATTRIBUTE_TYPE = eINSTANCE.getAttributeType();
+		EClass ATTRIBUTE = eINSTANCE.getAttribute();
 
 		/**
 		 * The meta object literal for the '<em><b>Display Name</b></em>' attribute feature.
@@ -1993,7 +2033,7 @@ public interface DataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ATTRIBUTE_TYPE__DISPLAY_NAME = eINSTANCE.getAttributeType_DisplayName();
+		EAttribute ATTRIBUTE__DISPLAY_NAME = eINSTANCE.getAttribute_DisplayName();
 
 		/**
 		 * The meta object literal for the '<em><b>Min Values</b></em>' attribute feature.
@@ -2001,7 +2041,7 @@ public interface DataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ATTRIBUTE_TYPE__MIN_VALUES = eINSTANCE.getAttributeType_MinValues();
+		EAttribute ATTRIBUTE__MIN_VALUES = eINSTANCE.getAttribute_MinValues();
 
 		/**
 		 * The meta object literal for the '<em><b>Max Values</b></em>' attribute feature.
@@ -2009,7 +2049,7 @@ public interface DataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ATTRIBUTE_TYPE__MAX_VALUES = eINSTANCE.getAttributeType_MaxValues();
+		EAttribute ATTRIBUTE__MAX_VALUES = eINSTANCE.getAttribute_MaxValues();
 
 		/**
 		 * The meta object literal for the '<em><b>Data Type Name</b></em>' attribute feature.
@@ -2017,7 +2057,7 @@ public interface DataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ATTRIBUTE_TYPE__DATA_TYPE_NAME = eINSTANCE.getAttributeType_DataTypeName();
+		EAttribute ATTRIBUTE__DATA_TYPE_NAME = eINSTANCE.getAttribute_DataTypeName();
 
 		/**
 		 * The meta object literal for the '<em><b>Kind Ns Prefix</b></em>' attribute feature.
@@ -2025,7 +2065,7 @@ public interface DataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ATTRIBUTE_TYPE__KIND_NS_PREFIX = eINSTANCE.getAttributeType_KindNsPrefix();
+		EAttribute ATTRIBUTE__KIND_NS_PREFIX = eINSTANCE.getAttribute_KindNsPrefix();
 
 		/**
 		 * The meta object literal for the '<em><b>Kind Name</b></em>' attribute feature.
@@ -2033,7 +2073,23 @@ public interface DataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ATTRIBUTE_TYPE__KIND_NAME = eINSTANCE.getAttributeType_KindName();
+		EAttribute ATTRIBUTE__KIND_NAME = eINSTANCE.getAttribute_KindName();
+
+		/**
+		 * The meta object literal for the '<em><b>Input Method</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__INPUT_METHOD = eINSTANCE.getAttribute_InputMethod();
+
+		/**
+		 * The meta object literal for the '<em><b>Input Unit Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__INPUT_UNIT_NAME = eINSTANCE.getAttribute_InputUnitName();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.ValueImpl <em>Value</em>}' class.
@@ -2134,12 +2190,12 @@ public interface DataPackage extends EPackage {
 		EClass MIXIN = eINSTANCE.getMixin();
 
 		/**
-		 * The meta object literal for the '<em><b>Attribute Types</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MIXIN__ATTRIBUTE_TYPES = eINSTANCE.getMixin_AttributeTypes();
+		EReference MIXIN__ATTRIBUTES = eINSTANCE.getMixin_Attributes();
 
 		/**
 		 * The meta object literal for the '<em><b>Display Name</b></em>' attribute feature.
@@ -2254,20 +2310,20 @@ public interface DataPackage extends EPackage {
 		EAttribute TERM__IMAGE_ID = eINSTANCE.getTerm_ImageId();
 
 		/**
-		 * The meta object literal for the '<em><b>Attribute Type Ns Prefix</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Kind Ns Prefix</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TERM__ATTRIBUTE_TYPE_NS_PREFIX = eINSTANCE.getTerm_AttributeTypeNsPrefix();
+		EAttribute TERM__KIND_NS_PREFIX = eINSTANCE.getTerm_KindNsPrefix();
 
 		/**
-		 * The meta object literal for the '<em><b>Attribute Type Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Kind Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TERM__ATTRIBUTE_TYPE_NAME = eINSTANCE.getTerm_AttributeTypeName();
+		EAttribute TERM__KIND_NAME = eINSTANCE.getTerm_KindName();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.ListVocabImpl <em>List Vocab</em>}' class.
@@ -2360,14 +2416,6 @@ public interface DataPackage extends EPackage {
 		EReference DATA_CATALOG__KINDS = eINSTANCE.getDataCatalog_Kinds();
 
 		/**
-		 * The meta object literal for the '<em><b>Attribute Types</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATA_CATALOG__ATTRIBUTE_TYPES = eINSTANCE.getDataCatalog_AttributeTypes();
-
-		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.TermManagerImpl <em>Term Manager</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2404,6 +2452,16 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum ATTRIBUTE_SEMANTIC = eINSTANCE.getAttributeSemantic();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.data.InputMethod <em>Input Method</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.data.InputMethod
+		 * @see org.soluvas.data.impl.DataPackageImpl#getInputMethod()
+		 * @generated
+		 */
+		EEnum INPUT_METHOD = eINSTANCE.getInputMethod();
 
 		/**
 		 * The meta object literal for the '<em>Crud Repository</em>' data type.

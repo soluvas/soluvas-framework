@@ -18,7 +18,7 @@ import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.data.*;
-import org.soluvas.data.AttributeType;
+import org.soluvas.data.Attribute;
 import org.soluvas.data.CurrencyValue;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataPackage;
@@ -92,8 +92,8 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 	protected DataSwitch<Adapter> modelSwitch =
 		new DataSwitch<Adapter>() {
 			@Override
-			public Adapter caseAttributeType(AttributeType object) {
-				return createAttributeTypeAdapter();
+			public Adapter caseAttribute(Attribute object) {
+				return createAttributeAdapter();
 			}
 			@Override
 			public <T> Adapter caseValue(Value<T> object) {
@@ -224,16 +224,16 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.data.AttributeType <em>Attribute Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.data.Attribute <em>Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.soluvas.data.AttributeType
+	 * @see org.soluvas.data.Attribute
 	 * @generated
 	 */
-	public Adapter createAttributeTypeAdapter() {
+	public Adapter createAttributeAdapter() {
 		return null;
 	}
 

@@ -46,8 +46,8 @@ import org.soluvas.data.Vocab;
  *   <li>{@link org.soluvas.data.impl.TermImpl#getVocab <em>Vocab</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getDisplayName <em>Display Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getImageId <em>Image Id</em>}</li>
- *   <li>{@link org.soluvas.data.impl.TermImpl#getAttributeTypeNsPrefix <em>Attribute Type Ns Prefix</em>}</li>
- *   <li>{@link org.soluvas.data.impl.TermImpl#getAttributeTypeName <em>Attribute Type Name</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getKindNsPrefix <em>Kind Ns Prefix</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getKindName <em>Kind Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -275,44 +275,44 @@ public class TermImpl extends EObjectImpl implements Term {
 	protected String imageId = IMAGE_ID_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getAttributeTypeNsPrefix() <em>Attribute Type Ns Prefix</em>}' attribute.
+	 * The default value of the '{@link #getKindNsPrefix() <em>Kind Ns Prefix</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAttributeTypeNsPrefix()
+	 * @see #getKindNsPrefix()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ATTRIBUTE_TYPE_NS_PREFIX_EDEFAULT = null;
+	protected static final String KIND_NS_PREFIX_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getAttributeTypeNsPrefix() <em>Attribute Type Ns Prefix</em>}' attribute.
+	 * The cached value of the '{@link #getKindNsPrefix() <em>Kind Ns Prefix</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAttributeTypeNsPrefix()
+	 * @see #getKindNsPrefix()
 	 * @generated
 	 * @ordered
 	 */
-	protected String attributeTypeNsPrefix = ATTRIBUTE_TYPE_NS_PREFIX_EDEFAULT;
+	protected String kindNsPrefix = KIND_NS_PREFIX_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getAttributeTypeName() <em>Attribute Type Name</em>}' attribute.
+	 * The default value of the '{@link #getKindName() <em>Kind Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAttributeTypeName()
+	 * @see #getKindName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ATTRIBUTE_TYPE_NAME_EDEFAULT = null;
+	protected static final String KIND_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getAttributeTypeName() <em>Attribute Type Name</em>}' attribute.
+	 * The cached value of the '{@link #getKindName() <em>Kind Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAttributeTypeName()
+	 * @see #getKindName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String attributeTypeName = ATTRIBUTE_TYPE_NAME_EDEFAULT;
+	protected String kindName = KIND_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -619,9 +619,8 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public String getAttributeTypeNsPrefix() {
-		return attributeTypeNsPrefix;
+	public String getKindNsPrefix() {
+		return kindNsPrefix;
 	}
 
 	/**
@@ -629,12 +628,11 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setAttributeTypeNsPrefix(String newAttributeTypeNsPrefix) {
-		String oldAttributeTypeNsPrefix = attributeTypeNsPrefix;
-		attributeTypeNsPrefix = newAttributeTypeNsPrefix;
+	public void setKindNsPrefix(String newKindNsPrefix) {
+		String oldKindNsPrefix = kindNsPrefix;
+		kindNsPrefix = newKindNsPrefix;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX, oldAttributeTypeNsPrefix, attributeTypeNsPrefix));
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__KIND_NS_PREFIX, oldKindNsPrefix, kindNsPrefix));
 	}
 
 	/**
@@ -642,9 +640,8 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public String getAttributeTypeName() {
-		return attributeTypeName;
+	public String getKindName() {
+		return kindName;
 	}
 
 	/**
@@ -652,12 +649,11 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setAttributeTypeName(String newAttributeTypeName) {
-		String oldAttributeTypeName = attributeTypeName;
-		attributeTypeName = newAttributeTypeName;
+	public void setKindName(String newKindName) {
+		String oldKindName = kindName;
+		kindName = newKindName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__ATTRIBUTE_TYPE_NAME, oldAttributeTypeName, attributeTypeName));
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__KIND_NAME, oldKindName, kindName));
 	}
 
 	/**
@@ -693,10 +689,10 @@ public class TermImpl extends EObjectImpl implements Term {
 				return getDisplayName();
 			case DataPackage.TERM__IMAGE_ID:
 				return getImageId();
-			case DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX:
-				return getAttributeTypeNsPrefix();
-			case DataPackage.TERM__ATTRIBUTE_TYPE_NAME:
-				return getAttributeTypeName();
+			case DataPackage.TERM__KIND_NS_PREFIX:
+				return getKindNsPrefix();
+			case DataPackage.TERM__KIND_NAME:
+				return getKindName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -747,11 +743,11 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__IMAGE_ID:
 				setImageId((String)newValue);
 				return;
-			case DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX:
-				setAttributeTypeNsPrefix((String)newValue);
+			case DataPackage.TERM__KIND_NS_PREFIX:
+				setKindNsPrefix((String)newValue);
 				return;
-			case DataPackage.TERM__ATTRIBUTE_TYPE_NAME:
-				setAttributeTypeName((String)newValue);
+			case DataPackage.TERM__KIND_NAME:
+				setKindName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -801,11 +797,11 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__IMAGE_ID:
 				setImageId(IMAGE_ID_EDEFAULT);
 				return;
-			case DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX:
-				setAttributeTypeNsPrefix(ATTRIBUTE_TYPE_NS_PREFIX_EDEFAULT);
+			case DataPackage.TERM__KIND_NS_PREFIX:
+				setKindNsPrefix(KIND_NS_PREFIX_EDEFAULT);
 				return;
-			case DataPackage.TERM__ATTRIBUTE_TYPE_NAME:
-				setAttributeTypeName(ATTRIBUTE_TYPE_NAME_EDEFAULT);
+			case DataPackage.TERM__KIND_NAME:
+				setKindName(KIND_NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -843,10 +839,10 @@ public class TermImpl extends EObjectImpl implements Term {
 				return DISPLAY_NAME_EDEFAULT == null ? displayName != null : !DISPLAY_NAME_EDEFAULT.equals(displayName);
 			case DataPackage.TERM__IMAGE_ID:
 				return IMAGE_ID_EDEFAULT == null ? imageId != null : !IMAGE_ID_EDEFAULT.equals(imageId);
-			case DataPackage.TERM__ATTRIBUTE_TYPE_NS_PREFIX:
-				return ATTRIBUTE_TYPE_NS_PREFIX_EDEFAULT == null ? attributeTypeNsPrefix != null : !ATTRIBUTE_TYPE_NS_PREFIX_EDEFAULT.equals(attributeTypeNsPrefix);
-			case DataPackage.TERM__ATTRIBUTE_TYPE_NAME:
-				return ATTRIBUTE_TYPE_NAME_EDEFAULT == null ? attributeTypeName != null : !ATTRIBUTE_TYPE_NAME_EDEFAULT.equals(attributeTypeName);
+			case DataPackage.TERM__KIND_NS_PREFIX:
+				return KIND_NS_PREFIX_EDEFAULT == null ? kindNsPrefix != null : !KIND_NS_PREFIX_EDEFAULT.equals(kindNsPrefix);
+			case DataPackage.TERM__KIND_NAME:
+				return KIND_NAME_EDEFAULT == null ? kindName != null : !KIND_NAME_EDEFAULT.equals(kindName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -997,10 +993,10 @@ public class TermImpl extends EObjectImpl implements Term {
 		result.append(displayName);
 		result.append(", imageId: ");
 		result.append(imageId);
-		result.append(", attributeTypeNsPrefix: ");
-		result.append(attributeTypeNsPrefix);
-		result.append(", attributeTypeName: ");
-		result.append(attributeTypeName);
+		result.append(", kindNsPrefix: ");
+		result.append(kindNsPrefix);
+		result.append(", kindName: ");
+		result.append(kindName);
 		result.append(')');
 		return result.toString();
 	}

@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.soluvas.data.Mixin#getAttributeTypes <em>Attribute Types</em>}</li>
+ *   <li>{@link org.soluvas.data.Mixin#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.soluvas.data.Mixin#getDisplayName <em>Display Name</em>}</li>
  * </ul>
  * </p>
@@ -32,20 +32,20 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(as=MixinImpl.class)
 public interface Mixin extends NameContainer, ResourceAware, BundleAware, NsPrefixable, Describable {
 	/**
-	 * Returns the value of the '<em><b>Attribute Types</b></em>' reference list.
-	 * The list contents are of type {@link org.soluvas.data.AttributeType}.
+	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.soluvas.data.Attribute}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Attribute Types</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Attributes</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Attribute Types</em>' reference list.
-	 * @see org.soluvas.data.DataPackage#getMixin_AttributeTypes()
-	 * @model
+	 * @return the value of the '<em>Attributes</em>' containment reference list.
+	 * @see org.soluvas.data.DataPackage#getMixin_Attributes()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<AttributeType> getAttributeTypes();
+	EList<Attribute> getAttributes();
 
 	/**
 	 * Returns the value of the '<em><b>Display Name</b></em>' attribute.

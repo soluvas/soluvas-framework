@@ -2,6 +2,7 @@
  */
 package org.soluvas.data;
 
+import javax.measure.unit.Unit;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.NsPrefixable;
@@ -42,20 +43,22 @@ import org.soluvas.commons.ResourceAware;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.soluvas.data.AttributeType#getDisplayName <em>Display Name</em>}</li>
- *   <li>{@link org.soluvas.data.AttributeType#getMinValues <em>Min Values</em>}</li>
- *   <li>{@link org.soluvas.data.AttributeType#getMaxValues <em>Max Values</em>}</li>
- *   <li>{@link org.soluvas.data.AttributeType#getDataTypeName <em>Data Type Name</em>}</li>
- *   <li>{@link org.soluvas.data.AttributeType#getKindNsPrefix <em>Kind Ns Prefix</em>}</li>
- *   <li>{@link org.soluvas.data.AttributeType#getKindName <em>Kind Name</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#getDisplayName <em>Display Name</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#getMinValues <em>Min Values</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#getMaxValues <em>Max Values</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#getDataTypeName <em>Data Type Name</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#getKindNsPrefix <em>Kind Ns Prefix</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#getKindName <em>Kind Name</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#getInputMethod <em>Input Method</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#getInputUnitName <em>Input Unit Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.soluvas.data.DataPackage#getAttributeType()
- * @model interface="true" abstract="true"
+ * @see org.soluvas.data.DataPackage#getAttribute()
+ * @model
  * @generated
  */
-public interface AttributeType extends NsPrefixable, NameContainer, ResourceAware, BundleAware {
+public interface Attribute extends NsPrefixable, NameContainer, ResourceAware, BundleAware {
 	/**
 	 * Returns the value of the '<em><b>Display Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -65,14 +68,14 @@ public interface AttributeType extends NsPrefixable, NameContainer, ResourceAwar
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Display Name</em>' attribute.
 	 * @see #setDisplayName(String)
-	 * @see org.soluvas.data.DataPackage#getAttributeType_DisplayName()
+	 * @see org.soluvas.data.DataPackage#getAttribute_DisplayName()
 	 * @model
 	 * @generated
 	 */
 	String getDisplayName();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.data.AttributeType#getDisplayName <em>Display Name</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#getDisplayName <em>Display Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Display Name</em>' attribute.
@@ -90,14 +93,14 @@ public interface AttributeType extends NsPrefixable, NameContainer, ResourceAwar
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min Values</em>' attribute.
 	 * @see #setMinValues(long)
-	 * @see org.soluvas.data.DataPackage#getAttributeType_MinValues()
+	 * @see org.soluvas.data.DataPackage#getAttribute_MinValues()
 	 * @model
 	 * @generated
 	 */
 	long getMinValues();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.data.AttributeType#getMinValues <em>Min Values</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#getMinValues <em>Min Values</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Min Values</em>' attribute.
@@ -115,14 +118,14 @@ public interface AttributeType extends NsPrefixable, NameContainer, ResourceAwar
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max Values</em>' attribute.
 	 * @see #setMaxValues(long)
-	 * @see org.soluvas.data.DataPackage#getAttributeType_MaxValues()
+	 * @see org.soluvas.data.DataPackage#getAttribute_MaxValues()
 	 * @model
 	 * @generated
 	 */
 	long getMaxValues();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.data.AttributeType#getMaxValues <em>Max Values</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#getMaxValues <em>Max Values</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Max Values</em>' attribute.
@@ -141,14 +144,14 @@ public interface AttributeType extends NsPrefixable, NameContainer, ResourceAwar
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Data Type Name</em>' attribute.
 	 * @see #setDataTypeName(String)
-	 * @see org.soluvas.data.DataPackage#getAttributeType_DataTypeName()
+	 * @see org.soluvas.data.DataPackage#getAttribute_DataTypeName()
 	 * @model
 	 * @generated
 	 */
 	String getDataTypeName();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.data.AttributeType#getDataTypeName <em>Data Type Name</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#getDataTypeName <em>Data Type Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Data Type Name</em>' attribute.
@@ -167,14 +170,14 @@ public interface AttributeType extends NsPrefixable, NameContainer, ResourceAwar
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Kind Ns Prefix</em>' attribute.
 	 * @see #setKindNsPrefix(String)
-	 * @see org.soluvas.data.DataPackage#getAttributeType_KindNsPrefix()
+	 * @see org.soluvas.data.DataPackage#getAttribute_KindNsPrefix()
 	 * @model
 	 * @generated
 	 */
 	String getKindNsPrefix();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.data.AttributeType#getKindNsPrefix <em>Kind Ns Prefix</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#getKindNsPrefix <em>Kind Ns Prefix</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Kind Ns Prefix</em>' attribute.
@@ -193,14 +196,14 @@ public interface AttributeType extends NsPrefixable, NameContainer, ResourceAwar
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Kind Name</em>' attribute.
 	 * @see #setKindName(String)
-	 * @see org.soluvas.data.DataPackage#getAttributeType_KindName()
+	 * @see org.soluvas.data.DataPackage#getAttribute_KindName()
 	 * @model
 	 * @generated
 	 */
 	String getKindName();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.data.AttributeType#getKindName <em>Kind Name</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#getKindName <em>Kind Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Kind Name</em>' attribute.
@@ -208,6 +211,75 @@ public interface AttributeType extends NsPrefixable, NameContainer, ResourceAwar
 	 * @generated
 	 */
 	void setKindName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Input Method</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.soluvas.data.InputMethod}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Input Method</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Input Method</em>' attribute.
+	 * @see org.soluvas.data.InputMethod
+	 * @see #setInputMethod(InputMethod)
+	 * @see org.soluvas.data.DataPackage#getAttribute_InputMethod()
+	 * @model
+	 * @generated
+	 */
+	InputMethod getInputMethod();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#getInputMethod <em>Input Method</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Input Method</em>' attribute.
+	 * @see org.soluvas.data.InputMethod
+	 * @see #getInputMethod()
+	 * @generated
+	 */
+	void setInputMethod(InputMethod value);
+
+	/**
+	 * Returns the value of the '<em><b>Input Unit Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This is a String to make it easy to edit using Eclipse Generic XMI editor.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Input Unit Name</em>' attribute.
+	 * @see #setInputUnitName(String)
+	 * @see org.soluvas.data.DataPackage#getAttribute_InputUnitName()
+	 * @model
+	 * @generated
+	 */
+	String getInputUnitName();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#getInputUnitName <em>Input Unit Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Input Unit Name</em>' attribute.
+	 * @see #getInputUnitName()
+	 * @generated
+	 */
+	void setInputUnitName(String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Input Unit</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns the Unit object based on {@link #inputUnitName}.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" dataType="org.soluvas.commons.Unit"
+	 * @generated
+	 */
+	Unit getInputUnit();
 
 	/**
 	 * <!-- begin-user-doc -->

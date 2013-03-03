@@ -1,150 +1,150 @@
 <?xml version="1.0" encoding="ASCII"?>
 <data:DataCatalog xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:data="http://www.soluvas.org/schema/data/1.0" xsi:schemaLocation="http://www.soluvas.org/schema/data/1.0 data.ecore" name="base_Color-base">
-  <terms name="aliceblue" nsPrefix="base" color="aliceblue" displayName="Alice Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="antiquewhite" nsPrefix="base" color="antiquewhite" displayName="Antique White" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="aqua" nsPrefix="base" color="aqua" displayName="Aqua" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="aquamarine" nsPrefix="base" color="aquamarine" displayName="Aquamarine" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="azure" nsPrefix="base" color="azure" displayName="Azure" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="beige" nsPrefix="base" color="beige" displayName="Beige" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="bisque" nsPrefix="base" color="bisque" displayName="Bisque" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="black" nsPrefix="base" color="black" displayName="Black" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="blanchedalmond" nsPrefix="base" color="blanchedalmond" displayName="Blanched Almond" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="blue" nsPrefix="base" color="blue" displayName="Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="blueviolet" nsPrefix="base" color="blueviolet" displayName="Blue Violet" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="brown" nsPrefix="base" color="brown" displayName="Brown" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="burlywood" nsPrefix="base" color="burlywood" displayName="Burly Wood" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="cadetblue" nsPrefix="base" color="cadetblue" displayName="Cadet Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="chartreuse" nsPrefix="base" color="chartreuse" displayName="Chartreuse" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="chocolate" nsPrefix="base" color="chocolate" displayName="Chocolate" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="coral" nsPrefix="base" color="coral" displayName="Coral" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="cornflowerblue" nsPrefix="base" color="cornflowerblue" displayName="Cornflower Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="cornsilk" nsPrefix="base" color="cornsilk" displayName="Cornsilk" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="crimson" nsPrefix="base" color="crimson" displayName="Crimson" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="cyan" nsPrefix="base" color="cyan" displayName="Cyan" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkblue" nsPrefix="base" color="darkblue" displayName="Dark Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkcyan" nsPrefix="base" color="darkcyan" displayName="Dark Cyan" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkgoldenrod" nsPrefix="base" color="darkgoldenrod" displayName="Dark Golden Rod" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkgray" nsPrefix="base" color="darkgray" displayName="Dark Gray" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkgrey" nsPrefix="base" color="darkgrey" displayName="Dark Grey" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkgreen" nsPrefix="base" color="darkgreen" displayName="Dark Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkkhaki" nsPrefix="base" color="darkkhaki" displayName="Dark Khaki" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkmagenta" nsPrefix="base" color="darkmagenta" displayName="Dark Magenta" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkolivegreen" nsPrefix="base" color="darkolivegreen" displayName="Dark Olive Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkorange" nsPrefix="base" color="darkorange" displayName="Dark Orange" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkorchid" nsPrefix="base" color="darkorchid" displayName="Dark Orchid" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkred" nsPrefix="base" color="darkred" displayName="Dark Red" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darksalmon" nsPrefix="base" color="darksalmon" displayName="Dark Salmon" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkseagreen" nsPrefix="base" color="darkseagreen" displayName="Dark Sea Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkslateblue" nsPrefix="base" color="darkslateblue" displayName="Dark Slate Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkslategray" nsPrefix="base" color="darkslategray" displayName="Dark Slate Gray" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkslategrey" nsPrefix="base" color="darkslategrey" displayName="Dark Slate Grey" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkturquoise" nsPrefix="base" color="darkturquoise" displayName="Dark Turquoise" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="darkviolet" nsPrefix="base" color="darkviolet" displayName="Dark Violet" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="deeppink" nsPrefix="base" color="deeppink" displayName="Deep Pink" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="deepskyblue" nsPrefix="base" color="deepskyblue" displayName="Deep Sky Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="dimgray" nsPrefix="base" color="dimgray" displayName="Dim Gray" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="dimgrey" nsPrefix="base" color="dimgrey" displayName="Dim Grey" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="dodgerblue" nsPrefix="base" color="dodgerblue" displayName="Dodger Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="firebrick" nsPrefix="base" color="firebrick" displayName="Fire Brick" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="floralwhite" nsPrefix="base" color="floralwhite" displayName="Floral White" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="forestgreen" nsPrefix="base" color="forestgreen" displayName="Forest Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="fuchsia" nsPrefix="base" color="fuchsia" displayName="Fuchsia" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="gainsboro" nsPrefix="base" color="gainsboro" displayName="Gainsboro" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="ghostwhite" nsPrefix="base" color="ghostwhite" displayName="Ghost White" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="gold" nsPrefix="base" color="gold" displayName="Gold" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="goldenrod" nsPrefix="base" color="goldenrod" displayName="Golden Rod" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="gray" nsPrefix="base" color="gray" displayName="Gray" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="grey" nsPrefix="base" color="grey" displayName="Grey" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="green" nsPrefix="base" color="green" displayName="Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="greenyellow" nsPrefix="base" color="greenyellow" displayName="Green Yellow" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="honeydew" nsPrefix="base" color="honeydew" displayName="Honey Dew" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="hotpink" nsPrefix="base" color="hotpink" displayName="Hot Pink" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="indianred " nsPrefix="base" color="indianred " displayName="Indian Red " attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="indigo " nsPrefix="base" color="indigo " displayName="Indigo " attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="ivory" nsPrefix="base" color="ivory" displayName="Ivory" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="khaki" nsPrefix="base" color="khaki" displayName="Khaki" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lavender" nsPrefix="base" color="lavender" displayName="Lavender" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lavenderblush" nsPrefix="base" color="lavenderblush" displayName="Lavender Blush" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lawngreen" nsPrefix="base" color="lawngreen" displayName="Lawn Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lemonchiffon" nsPrefix="base" color="lemonchiffon" displayName="Lemon Chiffon" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightblue" nsPrefix="base" color="lightblue" displayName="Light Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightcoral" nsPrefix="base" color="lightcoral" displayName="Light Coral" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightcyan" nsPrefix="base" color="lightcyan" displayName="Light Cyan" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightgoldenrodyellow" nsPrefix="base" color="lightgoldenrodyellow" displayName="Light Golden Rod Yellow" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightgray" nsPrefix="base" color="lightgray" displayName="Light Gray" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightgrey" nsPrefix="base" color="lightgrey" displayName="Light Grey" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightgreen" nsPrefix="base" color="lightgreen" displayName="Light Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightpink" nsPrefix="base" color="lightpink" displayName="Light Pink" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightsalmon" nsPrefix="base" color="lightsalmon" displayName="Light Salmon" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightseagreen" nsPrefix="base" color="lightseagreen" displayName="Light Sea Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightskyblue" nsPrefix="base" color="lightskyblue" displayName="Light Sky Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightslategray" nsPrefix="base" color="lightslategray" displayName="Light Slate Gray" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightslategrey" nsPrefix="base" color="lightslategrey" displayName="Light Slate Grey" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightsteelblue" nsPrefix="base" color="lightsteelblue" displayName="Light Steel Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lightyellow" nsPrefix="base" color="lightyellow" displayName="Light Yellow" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="lime" nsPrefix="base" color="lime" displayName="Lime" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="limegreen" nsPrefix="base" color="limegreen" displayName="Lime Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="linen" nsPrefix="base" color="linen" displayName="Linen" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="magenta" nsPrefix="base" color="magenta" displayName="Magenta" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="maroon" nsPrefix="base" color="maroon" displayName="Maroon" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="mediumaquamarine" nsPrefix="base" color="mediumaquamarine" displayName="Medium Aqua Marine" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="mediumblue" nsPrefix="base" color="mediumblue" displayName="Medium Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="mediumorchid" nsPrefix="base" color="mediumorchid" displayName="Medium Orchid" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="mediumpurple" nsPrefix="base" color="mediumpurple" displayName="Medium Purple" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="mediumseagreen" nsPrefix="base" color="mediumseagreen" displayName="Medium Sea Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="mediumslateblue" nsPrefix="base" color="mediumslateblue" displayName="Medium Slate Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="mediumspringgreen" nsPrefix="base" color="mediumspringgreen" displayName="Medium Spring Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="mediumturquoise" nsPrefix="base" color="mediumturquoise" displayName="Medium Turquoise" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="mediumvioletred" nsPrefix="base" color="mediumvioletred" displayName="Medium Violet Red" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="midnightblue" nsPrefix="base" color="midnightblue" displayName="Midnight Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="mintcream" nsPrefix="base" color="mintcream" displayName="Mint Cream" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="mistyrose" nsPrefix="base" color="mistyrose" displayName="Misty Rose" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="moccasin" nsPrefix="base" color="moccasin" displayName="Moccasin" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="navajowhite" nsPrefix="base" color="navajowhite" displayName="Navajo White" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="navy" nsPrefix="base" color="navy" displayName="Navy" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="oldlace" nsPrefix="base" color="oldlace" displayName="Old Lace" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="olive" nsPrefix="base" color="olive" displayName="Olive" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="olivedrab" nsPrefix="base" color="olivedrab" displayName="Olive Drab" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="orange" nsPrefix="base" color="orange" displayName="Orange" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="orangered" nsPrefix="base" color="orangered" displayName="Orange Red" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="orchid" nsPrefix="base" color="orchid" displayName="Orchid" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="palegoldenrod" nsPrefix="base" color="palegoldenrod" displayName="Pale Golden Rod" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="palegreen" nsPrefix="base" color="palegreen" displayName="Pale Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="paleturquoise" nsPrefix="base" color="paleturquoise" displayName="Pale Turquoise" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="palevioletred" nsPrefix="base" color="palevioletred" displayName="Pale Violet Red" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="papayawhip" nsPrefix="base" color="papayawhip" displayName="Papaya Whip" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="peachpuff" nsPrefix="base" color="peachpuff" displayName="Peach Puff" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="peru" nsPrefix="base" color="peru" displayName="Peru" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="pink" nsPrefix="base" color="pink" displayName="Pink" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="plum" nsPrefix="base" color="plum" displayName="Plum" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="powderblue" nsPrefix="base" color="powderblue" displayName="Powder Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="purple" nsPrefix="base" color="purple" displayName="Purple" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="red" nsPrefix="base" color="red" displayName="Red" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="rosybrown" nsPrefix="base" color="rosybrown" displayName="Rosy Brown" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="royalblue" nsPrefix="base" color="royalblue" displayName="Royal Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="saddlebrown" nsPrefix="base" color="saddlebrown" displayName="Saddle Brown" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="salmon" nsPrefix="base" color="salmon" displayName="Salmon" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="sandybrown" nsPrefix="base" color="sandybrown" displayName="Sandy Brown" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="seagreen" nsPrefix="base" color="seagreen" displayName="Sea Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="seashell" nsPrefix="base" color="seashell" displayName="Sea Shell" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="sienna" nsPrefix="base" color="sienna" displayName="Sienna" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="silver" nsPrefix="base" color="silver" displayName="Silver" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="skyblue" nsPrefix="base" color="skyblue" displayName="Sky Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="slateblue" nsPrefix="base" color="slateblue" displayName="Slate Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="slategray" nsPrefix="base" color="slategray" displayName="Slate Gray" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="slategrey" nsPrefix="base" color="slategrey" displayName="Slate Grey" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="snow" nsPrefix="base" color="snow" displayName="Snow" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="springgreen" nsPrefix="base" color="springgreen" displayName="Spring Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="steelblue" nsPrefix="base" color="steelblue" displayName="Steel Blue" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="tan" nsPrefix="base" color="tan" displayName="Tan" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="teal" nsPrefix="base" color="teal" displayName="Teal" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="thistle" nsPrefix="base" color="thistle" displayName="Thistle" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="tomato" nsPrefix="base" color="tomato" displayName="Tomato" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="turquoise" nsPrefix="base" color="turquoise" displayName="Turquoise" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="violet" nsPrefix="base" color="violet" displayName="Violet" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="wheat" nsPrefix="base" color="wheat" displayName="Wheat" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="white" nsPrefix="base" color="white" displayName="White" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="whitesmoke" nsPrefix="base" color="whitesmoke" displayName="White Smoke" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="yellow" nsPrefix="base" color="yellow" displayName="Yellow" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
-  <terms name="yellowgreen" nsPrefix="base" color="yellowgreen" displayName="Yellow Green" attributeTypeNsPrefix="base" attributeTypeName="Color"/>
+  <terms name="aliceblue" nsPrefix="base" color="aliceblue" displayName="Alice Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="antiquewhite" nsPrefix="base" color="antiquewhite" displayName="Antique White" kindNsPrefix="base" kindName="Color"/>
+  <terms name="aqua" nsPrefix="base" color="aqua" displayName="Aqua" kindNsPrefix="base" kindName="Color"/>
+  <terms name="aquamarine" nsPrefix="base" color="aquamarine" displayName="Aquamarine" kindNsPrefix="base" kindName="Color"/>
+  <terms name="azure" nsPrefix="base" color="azure" displayName="Azure" kindNsPrefix="base" kindName="Color"/>
+  <terms name="beige" nsPrefix="base" color="beige" displayName="Beige" kindNsPrefix="base" kindName="Color"/>
+  <terms name="bisque" nsPrefix="base" color="bisque" displayName="Bisque" kindNsPrefix="base" kindName="Color"/>
+  <terms name="black" nsPrefix="base" color="black" displayName="Black" kindNsPrefix="base" kindName="Color"/>
+  <terms name="blanchedalmond" nsPrefix="base" color="blanchedalmond" displayName="Blanched Almond" kindNsPrefix="base" kindName="Color"/>
+  <terms name="blue" nsPrefix="base" color="blue" displayName="Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="blueviolet" nsPrefix="base" color="blueviolet" displayName="Blue Violet" kindNsPrefix="base" kindName="Color"/>
+  <terms name="brown" nsPrefix="base" color="brown" displayName="Brown" kindNsPrefix="base" kindName="Color"/>
+  <terms name="burlywood" nsPrefix="base" color="burlywood" displayName="Burly Wood" kindNsPrefix="base" kindName="Color"/>
+  <terms name="cadetblue" nsPrefix="base" color="cadetblue" displayName="Cadet Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="chartreuse" nsPrefix="base" color="chartreuse" displayName="Chartreuse" kindNsPrefix="base" kindName="Color"/>
+  <terms name="chocolate" nsPrefix="base" color="chocolate" displayName="Chocolate" kindNsPrefix="base" kindName="Color"/>
+  <terms name="coral" nsPrefix="base" color="coral" displayName="Coral" kindNsPrefix="base" kindName="Color"/>
+  <terms name="cornflowerblue" nsPrefix="base" color="cornflowerblue" displayName="Cornflower Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="cornsilk" nsPrefix="base" color="cornsilk" displayName="Cornsilk" kindNsPrefix="base" kindName="Color"/>
+  <terms name="crimson" nsPrefix="base" color="crimson" displayName="Crimson" kindNsPrefix="base" kindName="Color"/>
+  <terms name="cyan" nsPrefix="base" color="cyan" displayName="Cyan" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkblue" nsPrefix="base" color="darkblue" displayName="Dark Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkcyan" nsPrefix="base" color="darkcyan" displayName="Dark Cyan" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkgoldenrod" nsPrefix="base" color="darkgoldenrod" displayName="Dark Golden Rod" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkgray" nsPrefix="base" color="darkgray" displayName="Dark Gray" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkgrey" nsPrefix="base" color="darkgrey" displayName="Dark Grey" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkgreen" nsPrefix="base" color="darkgreen" displayName="Dark Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkkhaki" nsPrefix="base" color="darkkhaki" displayName="Dark Khaki" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkmagenta" nsPrefix="base" color="darkmagenta" displayName="Dark Magenta" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkolivegreen" nsPrefix="base" color="darkolivegreen" displayName="Dark Olive Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkorange" nsPrefix="base" color="darkorange" displayName="Dark Orange" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkorchid" nsPrefix="base" color="darkorchid" displayName="Dark Orchid" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkred" nsPrefix="base" color="darkred" displayName="Dark Red" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darksalmon" nsPrefix="base" color="darksalmon" displayName="Dark Salmon" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkseagreen" nsPrefix="base" color="darkseagreen" displayName="Dark Sea Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkslateblue" nsPrefix="base" color="darkslateblue" displayName="Dark Slate Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkslategray" nsPrefix="base" color="darkslategray" displayName="Dark Slate Gray" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkslategrey" nsPrefix="base" color="darkslategrey" displayName="Dark Slate Grey" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkturquoise" nsPrefix="base" color="darkturquoise" displayName="Dark Turquoise" kindNsPrefix="base" kindName="Color"/>
+  <terms name="darkviolet" nsPrefix="base" color="darkviolet" displayName="Dark Violet" kindNsPrefix="base" kindName="Color"/>
+  <terms name="deeppink" nsPrefix="base" color="deeppink" displayName="Deep Pink" kindNsPrefix="base" kindName="Color"/>
+  <terms name="deepskyblue" nsPrefix="base" color="deepskyblue" displayName="Deep Sky Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="dimgray" nsPrefix="base" color="dimgray" displayName="Dim Gray" kindNsPrefix="base" kindName="Color"/>
+  <terms name="dimgrey" nsPrefix="base" color="dimgrey" displayName="Dim Grey" kindNsPrefix="base" kindName="Color"/>
+  <terms name="dodgerblue" nsPrefix="base" color="dodgerblue" displayName="Dodger Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="firebrick" nsPrefix="base" color="firebrick" displayName="Fire Brick" kindNsPrefix="base" kindName="Color"/>
+  <terms name="floralwhite" nsPrefix="base" color="floralwhite" displayName="Floral White" kindNsPrefix="base" kindName="Color"/>
+  <terms name="forestgreen" nsPrefix="base" color="forestgreen" displayName="Forest Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="fuchsia" nsPrefix="base" color="fuchsia" displayName="Fuchsia" kindNsPrefix="base" kindName="Color"/>
+  <terms name="gainsboro" nsPrefix="base" color="gainsboro" displayName="Gainsboro" kindNsPrefix="base" kindName="Color"/>
+  <terms name="ghostwhite" nsPrefix="base" color="ghostwhite" displayName="Ghost White" kindNsPrefix="base" kindName="Color"/>
+  <terms name="gold" nsPrefix="base" color="gold" displayName="Gold" kindNsPrefix="base" kindName="Color"/>
+  <terms name="goldenrod" nsPrefix="base" color="goldenrod" displayName="Golden Rod" kindNsPrefix="base" kindName="Color"/>
+  <terms name="gray" nsPrefix="base" color="gray" displayName="Gray" kindNsPrefix="base" kindName="Color"/>
+  <terms name="grey" nsPrefix="base" color="grey" displayName="Grey" kindNsPrefix="base" kindName="Color"/>
+  <terms name="green" nsPrefix="base" color="green" displayName="Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="greenyellow" nsPrefix="base" color="greenyellow" displayName="Green Yellow" kindNsPrefix="base" kindName="Color"/>
+  <terms name="honeydew" nsPrefix="base" color="honeydew" displayName="Honey Dew" kindNsPrefix="base" kindName="Color"/>
+  <terms name="hotpink" nsPrefix="base" color="hotpink" displayName="Hot Pink" kindNsPrefix="base" kindName="Color"/>
+  <terms name="indianred " nsPrefix="base" color="indianred " displayName="Indian Red " kindNsPrefix="base" kindName="Color"/>
+  <terms name="indigo " nsPrefix="base" color="indigo " displayName="Indigo " kindNsPrefix="base" kindName="Color"/>
+  <terms name="ivory" nsPrefix="base" color="ivory" displayName="Ivory" kindNsPrefix="base" kindName="Color"/>
+  <terms name="khaki" nsPrefix="base" color="khaki" displayName="Khaki" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lavender" nsPrefix="base" color="lavender" displayName="Lavender" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lavenderblush" nsPrefix="base" color="lavenderblush" displayName="Lavender Blush" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lawngreen" nsPrefix="base" color="lawngreen" displayName="Lawn Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lemonchiffon" nsPrefix="base" color="lemonchiffon" displayName="Lemon Chiffon" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightblue" nsPrefix="base" color="lightblue" displayName="Light Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightcoral" nsPrefix="base" color="lightcoral" displayName="Light Coral" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightcyan" nsPrefix="base" color="lightcyan" displayName="Light Cyan" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightgoldenrodyellow" nsPrefix="base" color="lightgoldenrodyellow" displayName="Light Golden Rod Yellow" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightgray" nsPrefix="base" color="lightgray" displayName="Light Gray" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightgrey" nsPrefix="base" color="lightgrey" displayName="Light Grey" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightgreen" nsPrefix="base" color="lightgreen" displayName="Light Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightpink" nsPrefix="base" color="lightpink" displayName="Light Pink" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightsalmon" nsPrefix="base" color="lightsalmon" displayName="Light Salmon" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightseagreen" nsPrefix="base" color="lightseagreen" displayName="Light Sea Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightskyblue" nsPrefix="base" color="lightskyblue" displayName="Light Sky Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightslategray" nsPrefix="base" color="lightslategray" displayName="Light Slate Gray" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightslategrey" nsPrefix="base" color="lightslategrey" displayName="Light Slate Grey" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightsteelblue" nsPrefix="base" color="lightsteelblue" displayName="Light Steel Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lightyellow" nsPrefix="base" color="lightyellow" displayName="Light Yellow" kindNsPrefix="base" kindName="Color"/>
+  <terms name="lime" nsPrefix="base" color="lime" displayName="Lime" kindNsPrefix="base" kindName="Color"/>
+  <terms name="limegreen" nsPrefix="base" color="limegreen" displayName="Lime Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="linen" nsPrefix="base" color="linen" displayName="Linen" kindNsPrefix="base" kindName="Color"/>
+  <terms name="magenta" nsPrefix="base" color="magenta" displayName="Magenta" kindNsPrefix="base" kindName="Color"/>
+  <terms name="maroon" nsPrefix="base" color="maroon" displayName="Maroon" kindNsPrefix="base" kindName="Color"/>
+  <terms name="mediumaquamarine" nsPrefix="base" color="mediumaquamarine" displayName="Medium Aqua Marine" kindNsPrefix="base" kindName="Color"/>
+  <terms name="mediumblue" nsPrefix="base" color="mediumblue" displayName="Medium Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="mediumorchid" nsPrefix="base" color="mediumorchid" displayName="Medium Orchid" kindNsPrefix="base" kindName="Color"/>
+  <terms name="mediumpurple" nsPrefix="base" color="mediumpurple" displayName="Medium Purple" kindNsPrefix="base" kindName="Color"/>
+  <terms name="mediumseagreen" nsPrefix="base" color="mediumseagreen" displayName="Medium Sea Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="mediumslateblue" nsPrefix="base" color="mediumslateblue" displayName="Medium Slate Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="mediumspringgreen" nsPrefix="base" color="mediumspringgreen" displayName="Medium Spring Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="mediumturquoise" nsPrefix="base" color="mediumturquoise" displayName="Medium Turquoise" kindNsPrefix="base" kindName="Color"/>
+  <terms name="mediumvioletred" nsPrefix="base" color="mediumvioletred" displayName="Medium Violet Red" kindNsPrefix="base" kindName="Color"/>
+  <terms name="midnightblue" nsPrefix="base" color="midnightblue" displayName="Midnight Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="mintcream" nsPrefix="base" color="mintcream" displayName="Mint Cream" kindNsPrefix="base" kindName="Color"/>
+  <terms name="mistyrose" nsPrefix="base" color="mistyrose" displayName="Misty Rose" kindNsPrefix="base" kindName="Color"/>
+  <terms name="moccasin" nsPrefix="base" color="moccasin" displayName="Moccasin" kindNsPrefix="base" kindName="Color"/>
+  <terms name="navajowhite" nsPrefix="base" color="navajowhite" displayName="Navajo White" kindNsPrefix="base" kindName="Color"/>
+  <terms name="navy" nsPrefix="base" color="navy" displayName="Navy" kindNsPrefix="base" kindName="Color"/>
+  <terms name="oldlace" nsPrefix="base" color="oldlace" displayName="Old Lace" kindNsPrefix="base" kindName="Color"/>
+  <terms name="olive" nsPrefix="base" color="olive" displayName="Olive" kindNsPrefix="base" kindName="Color"/>
+  <terms name="olivedrab" nsPrefix="base" color="olivedrab" displayName="Olive Drab" kindNsPrefix="base" kindName="Color"/>
+  <terms name="orange" nsPrefix="base" color="orange" displayName="Orange" kindNsPrefix="base" kindName="Color"/>
+  <terms name="orangered" nsPrefix="base" color="orangered" displayName="Orange Red" kindNsPrefix="base" kindName="Color"/>
+  <terms name="orchid" nsPrefix="base" color="orchid" displayName="Orchid" kindNsPrefix="base" kindName="Color"/>
+  <terms name="palegoldenrod" nsPrefix="base" color="palegoldenrod" displayName="Pale Golden Rod" kindNsPrefix="base" kindName="Color"/>
+  <terms name="palegreen" nsPrefix="base" color="palegreen" displayName="Pale Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="paleturquoise" nsPrefix="base" color="paleturquoise" displayName="Pale Turquoise" kindNsPrefix="base" kindName="Color"/>
+  <terms name="palevioletred" nsPrefix="base" color="palevioletred" displayName="Pale Violet Red" kindNsPrefix="base" kindName="Color"/>
+  <terms name="papayawhip" nsPrefix="base" color="papayawhip" displayName="Papaya Whip" kindNsPrefix="base" kindName="Color"/>
+  <terms name="peachpuff" nsPrefix="base" color="peachpuff" displayName="Peach Puff" kindNsPrefix="base" kindName="Color"/>
+  <terms name="peru" nsPrefix="base" color="peru" displayName="Peru" kindNsPrefix="base" kindName="Color"/>
+  <terms name="pink" nsPrefix="base" color="pink" displayName="Pink" kindNsPrefix="base" kindName="Color"/>
+  <terms name="plum" nsPrefix="base" color="plum" displayName="Plum" kindNsPrefix="base" kindName="Color"/>
+  <terms name="powderblue" nsPrefix="base" color="powderblue" displayName="Powder Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="purple" nsPrefix="base" color="purple" displayName="Purple" kindNsPrefix="base" kindName="Color"/>
+  <terms name="red" nsPrefix="base" color="red" displayName="Red" kindNsPrefix="base" kindName="Color"/>
+  <terms name="rosybrown" nsPrefix="base" color="rosybrown" displayName="Rosy Brown" kindNsPrefix="base" kindName="Color"/>
+  <terms name="royalblue" nsPrefix="base" color="royalblue" displayName="Royal Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="saddlebrown" nsPrefix="base" color="saddlebrown" displayName="Saddle Brown" kindNsPrefix="base" kindName="Color"/>
+  <terms name="salmon" nsPrefix="base" color="salmon" displayName="Salmon" kindNsPrefix="base" kindName="Color"/>
+  <terms name="sandybrown" nsPrefix="base" color="sandybrown" displayName="Sandy Brown" kindNsPrefix="base" kindName="Color"/>
+  <terms name="seagreen" nsPrefix="base" color="seagreen" displayName="Sea Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="seashell" nsPrefix="base" color="seashell" displayName="Sea Shell" kindNsPrefix="base" kindName="Color"/>
+  <terms name="sienna" nsPrefix="base" color="sienna" displayName="Sienna" kindNsPrefix="base" kindName="Color"/>
+  <terms name="silver" nsPrefix="base" color="silver" displayName="Silver" kindNsPrefix="base" kindName="Color"/>
+  <terms name="skyblue" nsPrefix="base" color="skyblue" displayName="Sky Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="slateblue" nsPrefix="base" color="slateblue" displayName="Slate Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="slategray" nsPrefix="base" color="slategray" displayName="Slate Gray" kindNsPrefix="base" kindName="Color"/>
+  <terms name="slategrey" nsPrefix="base" color="slategrey" displayName="Slate Grey" kindNsPrefix="base" kindName="Color"/>
+  <terms name="snow" nsPrefix="base" color="snow" displayName="Snow" kindNsPrefix="base" kindName="Color"/>
+  <terms name="springgreen" nsPrefix="base" color="springgreen" displayName="Spring Green" kindNsPrefix="base" kindName="Color"/>
+  <terms name="steelblue" nsPrefix="base" color="steelblue" displayName="Steel Blue" kindNsPrefix="base" kindName="Color"/>
+  <terms name="tan" nsPrefix="base" color="tan" displayName="Tan" kindNsPrefix="base" kindName="Color"/>
+  <terms name="teal" nsPrefix="base" color="teal" displayName="Teal" kindNsPrefix="base" kindName="Color"/>
+  <terms name="thistle" nsPrefix="base" color="thistle" displayName="Thistle" kindNsPrefix="base" kindName="Color"/>
+  <terms name="tomato" nsPrefix="base" color="tomato" displayName="Tomato" kindNsPrefix="base" kindName="Color"/>
+  <terms name="turquoise" nsPrefix="base" color="turquoise" displayName="Turquoise" kindNsPrefix="base" kindName="Color"/>
+  <terms name="violet" nsPrefix="base" color="violet" displayName="Violet" kindNsPrefix="base" kindName="Color"/>
+  <terms name="wheat" nsPrefix="base" color="wheat" displayName="Wheat" kindNsPrefix="base" kindName="Color"/>
+  <terms name="white" nsPrefix="base" color="white" displayName="White" kindNsPrefix="base" kindName="Color"/>
+  <terms name="whitesmoke" nsPrefix="base" color="whitesmoke" displayName="White Smoke" kindNsPrefix="base" kindName="Color"/>
+  <terms name="yellow" nsPrefix="base" color="yellow" displayName="Yellow" kindNsPrefix="base" kindName="Color"/>
+  <terms name="yellowgreen" nsPrefix="base" color="yellowgreen" displayName="Yellow Green" kindNsPrefix="base" kindName="Color"/>
 </data:DataCatalog>

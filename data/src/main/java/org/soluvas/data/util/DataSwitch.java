@@ -17,7 +17,7 @@ import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.data.*;
-import org.soluvas.data.AttributeType;
+import org.soluvas.data.Attribute;
 import org.soluvas.data.CurrencyValue;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataPackage;
@@ -91,14 +91,14 @@ public class DataSwitch<T1> extends Switch<T1> {
 	@Override
 	protected T1 doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case DataPackage.ATTRIBUTE_TYPE: {
-				AttributeType attributeType = (AttributeType)theEObject;
-				T1 result = caseAttributeType(attributeType);
-				if (result == null) result = caseNsPrefixable(attributeType);
-				if (result == null) result = caseNameContainer(attributeType);
-				if (result == null) result = caseResourceAware(attributeType);
-				if (result == null) result = caseBundleAware(attributeType);
-				if (result == null) result = caseNameable(attributeType);
+			case DataPackage.ATTRIBUTE: {
+				Attribute attribute = (Attribute)theEObject;
+				T1 result = caseAttribute(attribute);
+				if (result == null) result = caseNsPrefixable(attribute);
+				if (result == null) result = caseNameContainer(attribute);
+				if (result == null) result = caseResourceAware(attribute);
+				if (result == null) result = caseBundleAware(attribute);
+				if (result == null) result = caseNameable(attribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -257,17 +257,17 @@ public class DataSwitch<T1> extends Switch<T1> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Attribute Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Attribute Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T1 caseAttributeType(AttributeType object) {
+	public T1 caseAttribute(Attribute object) {
 		return null;
 	}
 

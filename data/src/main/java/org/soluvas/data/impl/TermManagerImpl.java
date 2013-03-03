@@ -112,7 +112,7 @@ public class TermManagerImpl extends EObjectImpl implements TermManager {
 		final List<Term> terms = ImmutableList.copyOf(Iterables.filter(dataCatalog.getTerms(), new Predicate<Term>() {
 			@Override
 			public boolean apply(@Nullable Term input) {
-				return Objects.equal(input.getNsPrefix(), attributeTypeNsPrefix) && Objects.equal(input.getAttributeTypeName(), attributeTypeName);
+				return Objects.equal(input.getNsPrefix(), attributeTypeNsPrefix) && Objects.equal(input.getKindName(), attributeTypeName);
 			}
 		}));
 		return terms;
@@ -127,7 +127,7 @@ public class TermManagerImpl extends EObjectImpl implements TermManager {
 		final Multimap<String, Term> multimap = Multimaps.index(dataCatalog.getTerms(), new Function<Term, String>() {
 			@Override @Nullable
 			public String apply(@Nullable Term input) {
-				return Strings.nullToEmpty(input.getAttributeTypeNsPrefix()) + "_" + Strings.nullToEmpty(input.getAttributeTypeName());
+				return Strings.nullToEmpty(input.getKindNsPrefix()) + "_" + Strings.nullToEmpty(input.getKindName());
 			}
 		});
 		return multimap;

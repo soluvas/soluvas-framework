@@ -26,7 +26,7 @@ import org.soluvas.commons.Nameable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 
-import org.soluvas.data.AttributeType;
+import org.soluvas.data.Attribute;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.Kind;
@@ -50,7 +50,6 @@ import org.soluvas.data.Vocab;
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getMixins <em>Mixins</em>}</li>
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getTerms <em>Terms</em>}</li>
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getKinds <em>Kinds</em>}</li>
- *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getAttributeTypes <em>Attribute Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -196,16 +195,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * @ordered
 	 */
 	protected EList<Kind> kinds;
-
-	/**
-	 * The cached value of the '{@link #getAttributeTypes() <em>Attribute Types</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAttributeTypes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<AttributeType> attributeTypes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -384,18 +373,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AttributeType> getAttributeTypes() {
-		if (attributeTypes == null) {
-			attributeTypes = new EObjectContainmentEList<AttributeType>(AttributeType.class, this, DataPackage.DATA_CATALOG__ATTRIBUTE_TYPES);
-		}
-		return attributeTypes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -407,8 +384,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 				return ((InternalEList<?>)getTerms()).basicRemove(otherEnd, msgs);
 			case DataPackage.DATA_CATALOG__KINDS:
 				return ((InternalEList<?>)getKinds()).basicRemove(otherEnd, msgs);
-			case DataPackage.DATA_CATALOG__ATTRIBUTE_TYPES:
-				return ((InternalEList<?>)getAttributeTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -439,8 +414,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 				return getTerms();
 			case DataPackage.DATA_CATALOG__KINDS:
 				return getKinds();
-			case DataPackage.DATA_CATALOG__ATTRIBUTE_TYPES:
-				return getAttributeTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -485,10 +458,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 				getKinds().clear();
 				getKinds().addAll((Collection<? extends Kind>)newValue);
 				return;
-			case DataPackage.DATA_CATALOG__ATTRIBUTE_TYPES:
-				getAttributeTypes().clear();
-				getAttributeTypes().addAll((Collection<? extends AttributeType>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -528,9 +497,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 			case DataPackage.DATA_CATALOG__KINDS:
 				getKinds().clear();
 				return;
-			case DataPackage.DATA_CATALOG__ATTRIBUTE_TYPES:
-				getAttributeTypes().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -561,8 +527,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 				return terms != null && !terms.isEmpty();
 			case DataPackage.DATA_CATALOG__KINDS:
 				return kinds != null && !kinds.isEmpty();
-			case DataPackage.DATA_CATALOG__ATTRIBUTE_TYPES:
-				return attributeTypes != null && !attributeTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

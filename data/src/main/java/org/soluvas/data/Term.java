@@ -21,8 +21,8 @@ import org.soluvas.commons.ResourceAware;
  *   <li>{@link org.soluvas.data.Term#getVocab <em>Vocab</em>}</li>
  *   <li>{@link org.soluvas.data.Term#getDisplayName <em>Display Name</em>}</li>
  *   <li>{@link org.soluvas.data.Term#getImageId <em>Image Id</em>}</li>
- *   <li>{@link org.soluvas.data.Term#getAttributeTypeNsPrefix <em>Attribute Type Ns Prefix</em>}</li>
- *   <li>{@link org.soluvas.data.Term#getAttributeTypeName <em>Attribute Type Name</em>}</li>
+ *   <li>{@link org.soluvas.data.Term#getKindNsPrefix <em>Kind Ns Prefix</em>}</li>
+ *   <li>{@link org.soluvas.data.Term#getKindName <em>Kind Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -111,53 +111,57 @@ public interface Term extends TermContainer, BundleAware, NameContainer, Resourc
 	void setImageId(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Attribute Type Ns Prefix</b></em>' attribute.
+	 * Returns the value of the '<em><b>Kind Ns Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The nsPrefix of the attributeType of this term. For example, for attribute type "base_color", nsPrefix is "base".
+	 * The nsPrefix of the {@link Kind} of this term. For example, for kind "base_Color", nsPrefix is "base".
+	 * 
+	 * Term is optionally linked to {@link Kind}, not to {@link Attribute}.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Attribute Type Ns Prefix</em>' attribute.
-	 * @see #setAttributeTypeNsPrefix(String)
-	 * @see org.soluvas.data.DataPackage#getTerm_AttributeTypeNsPrefix()
+	 * @return the value of the '<em>Kind Ns Prefix</em>' attribute.
+	 * @see #setKindNsPrefix(String)
+	 * @see org.soluvas.data.DataPackage#getTerm_KindNsPrefix()
 	 * @model
 	 * @generated
 	 */
-	String getAttributeTypeNsPrefix();
+	String getKindNsPrefix();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.data.Term#getAttributeTypeNsPrefix <em>Attribute Type Ns Prefix</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.data.Term#getKindNsPrefix <em>Kind Ns Prefix</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Attribute Type Ns Prefix</em>' attribute.
-	 * @see #getAttributeTypeNsPrefix()
+	 * @param value the new value of the '<em>Kind Ns Prefix</em>' attribute.
+	 * @see #getKindNsPrefix()
 	 * @generated
 	 */
-	void setAttributeTypeNsPrefix(String value);
+	void setKindNsPrefix(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Attribute Type Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Kind Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The name of the attributeType of this term. For example, for attribute type "base_color", attributeTypeName is "color".
+	 * The name of the {@link Kind} of this term. For example, for kind "base_Color", name is "Color".
+	 * 
+	 * Term is optionally linked to {@link Kind}, not to {@link Attribute}.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Attribute Type Name</em>' attribute.
-	 * @see #setAttributeTypeName(String)
-	 * @see org.soluvas.data.DataPackage#getTerm_AttributeTypeName()
+	 * @return the value of the '<em>Kind Name</em>' attribute.
+	 * @see #setKindName(String)
+	 * @see org.soluvas.data.DataPackage#getTerm_KindName()
 	 * @model
 	 * @generated
 	 */
-	String getAttributeTypeName();
+	String getKindName();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.data.Term#getAttributeTypeName <em>Attribute Type Name</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.data.Term#getKindName <em>Kind Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Attribute Type Name</em>' attribute.
-	 * @see #getAttributeTypeName()
+	 * @param value the new value of the '<em>Kind Name</em>' attribute.
+	 * @see #getKindName()
 	 * @generated
 	 */
-	void setAttributeTypeName(String value);
+	void setKindName(String value);
 
 } // Term

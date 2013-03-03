@@ -9,11 +9,11 @@
   <terms name="good_condition"
       nsPrefix="base"
       displayName="Mulus"
-      attributeTypeNsPrefix="base"
-      attributeTypeName="Condition"/>
+      kindNsPrefix="base"
+      kindName="Condition"/>
   <terms name="bad_condition"
       nsPrefix="base"
       displayName="Cacat"
-      attributeTypeNsPrefix="base"
-      attributeTypeName="Condition"/>
+      kindNsPrefix="base"
+      kindName="Condition"/>
 </data:DataCatalog>

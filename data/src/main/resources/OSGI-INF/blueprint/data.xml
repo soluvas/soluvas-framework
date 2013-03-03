@@ -59,7 +59,7 @@
 		<command name="term/ls">
 			<action class="org.soluvas.data.shell.TermLsCommand" />
 		</command>
-		<command name="term/attrs">
+		<command name="term/kinds">
 			<action class="org.soluvas.data.shell.TermKindsCommand" />
 		</command>
 	</command-bundle>

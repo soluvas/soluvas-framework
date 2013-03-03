@@ -22,6 +22,15 @@ public interface DataFactory extends EFactory {
 	DataFactory eINSTANCE = org.soluvas.data.impl.DataFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Attribute</em>'.
+	 * @generated
+	 */
+	Attribute createAttribute();
+
+	/**
 	 * Returns a new object of class '<em>String Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -74,6 +74,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case DataPackage.ATTRIBUTE: return (EObject)createAttribute();
 			case DataPackage.STRING_VALUE: return (EObject)createStringValue();
 			case DataPackage.MEASURE_VALUE: return (EObject)createMeasureValue();
 			case DataPackage.CURRENCY_VALUE: return (EObject)createCurrencyValue();
@@ -102,6 +103,8 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 		switch (eDataType.getClassifierID()) {
 			case DataPackage.ATTRIBUTE_SEMANTIC:
 				return createAttributeSemanticFromString(eDataType, initialValue);
+			case DataPackage.INPUT_METHOD:
+				return createInputMethodFromString(eDataType, initialValue);
 			case DataPackage.CRUD_REPOSITORY:
 				return createCrudRepositoryFromString(eDataType, initialValue);
 			case DataPackage.PAGING_AND_SORTING_REPOSITORY:
@@ -127,6 +130,8 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 		switch (eDataType.getClassifierID()) {
 			case DataPackage.ATTRIBUTE_SEMANTIC:
 				return convertAttributeSemanticToString(eDataType, instanceValue);
+			case DataPackage.INPUT_METHOD:
+				return convertInputMethodToString(eDataType, instanceValue);
 			case DataPackage.CRUD_REPOSITORY:
 				return convertCrudRepositoryToString(eDataType, instanceValue);
 			case DataPackage.PAGING_AND_SORTING_REPOSITORY:
@@ -140,6 +145,16 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Attribute createAttribute() {
+		AttributeImpl attribute = new AttributeImpl();
+		return attribute;
 	}
 
 	/**
@@ -317,6 +332,26 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * @generated
 	 */
 	public String convertAttributeSemanticToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InputMethod createInputMethodFromString(EDataType eDataType, String initialValue) {
+		InputMethod result = InputMethod.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertInputMethodToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

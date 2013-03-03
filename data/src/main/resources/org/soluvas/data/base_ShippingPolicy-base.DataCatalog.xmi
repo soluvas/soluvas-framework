@@ -9,11 +9,11 @@
   <terms name="normal_shipping"
       nsPrefix="base"
       displayName="Normal"
-      attributeTypeNsPrefix="base"
-      attributeTypeName="ShippingPolicy"/>
+      kindNsPrefix="base"
+      kindName="ShippingPolicy"/>
   <terms name="free_shipping"
       nsPrefix="base"
       displayName="Free"
-      attributeTypeNsPrefix="base"
-      attributeTypeName="ShippingPolicy"/>
+      kindNsPrefix="base"
+      kindName="ShippingPolicy"/>
 </data:DataCatalog>

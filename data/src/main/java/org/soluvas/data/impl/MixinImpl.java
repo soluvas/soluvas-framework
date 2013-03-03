@@ -5,10 +5,14 @@ package org.soluvas.data.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.BundleAware;
@@ -17,7 +21,7 @@ import org.soluvas.commons.Describable;
 import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
-import org.soluvas.data.AttributeType;
+import org.soluvas.data.Attribute;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.Mixin;
 
@@ -37,7 +41,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.data.impl.MixinImpl#getBundle <em>Bundle</em>}</li>
  *   <li>{@link org.soluvas.data.impl.MixinImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.impl.MixinImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.soluvas.data.impl.MixinImpl#getAttributeTypes <em>Attribute Types</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.MixinImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.soluvas.data.impl.MixinImpl#getDisplayName <em>Display Name</em>}</li>
  * </ul>
  * </p>
@@ -187,14 +191,14 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getAttributeTypes() <em>Attribute Types</em>}' reference list.
+	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAttributeTypes()
+	 * @see #getAttributes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AttributeType> attributeTypes;
+	protected EList<Attribute> attributes;
 
 	/**
 	 * The default value of the '{@link #getDisplayName() <em>Display Name</em>}' attribute.
@@ -401,14 +405,13 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EList<AttributeType> getAttributeTypes() {
-		if (attributeTypes == null) {
-			attributeTypes = new EObjectResolvingEList<AttributeType>(AttributeType.class, this, DataPackage.MIXIN__ATTRIBUTE_TYPES);
+	public EList<Attribute> getAttributes() {
+		if (attributes == null) {
+			attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, DataPackage.MIXIN__ATTRIBUTES);
 		}
-		return attributeTypes;
+		return attributes;
 	}
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -430,8 +433,22 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.MIXIN__DISPLAY_NAME, oldDisplayName, displayName));
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DataPackage.MIXIN__ATTRIBUTES:
+				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
 	@JsonIgnore
-	private void setAttributeTypes(EList<AttributeType> attributeTypes) {
+	private void setAttributeTypes(EList<Attribute> attributeTypes) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -457,8 +474,8 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 				return getNsPrefix();
 			case DataPackage.MIXIN__DESCRIPTION:
 				return getDescription();
-			case DataPackage.MIXIN__ATTRIBUTE_TYPES:
-				return getAttributeTypes();
+			case DataPackage.MIXIN__ATTRIBUTES:
+				return getAttributes();
 			case DataPackage.MIXIN__DISPLAY_NAME:
 				return getDisplayName();
 		}
@@ -495,9 +512,9 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 			case DataPackage.MIXIN__DESCRIPTION:
 				setDescription((String)newValue);
 				return;
-			case DataPackage.MIXIN__ATTRIBUTE_TYPES:
-				getAttributeTypes().clear();
-				getAttributeTypes().addAll((Collection<? extends AttributeType>)newValue);
+			case DataPackage.MIXIN__ATTRIBUTES:
+				getAttributes().clear();
+				getAttributes().addAll((Collection<? extends Attribute>)newValue);
 				return;
 			case DataPackage.MIXIN__DISPLAY_NAME:
 				setDisplayName((String)newValue);
@@ -535,8 +552,8 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 			case DataPackage.MIXIN__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
-			case DataPackage.MIXIN__ATTRIBUTE_TYPES:
-				getAttributeTypes().clear();
+			case DataPackage.MIXIN__ATTRIBUTES:
+				getAttributes().clear();
 				return;
 			case DataPackage.MIXIN__DISPLAY_NAME:
 				setDisplayName(DISPLAY_NAME_EDEFAULT);
@@ -567,8 +584,8 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
 			case DataPackage.MIXIN__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-			case DataPackage.MIXIN__ATTRIBUTE_TYPES:
-				return attributeTypes != null && !attributeTypes.isEmpty();
+			case DataPackage.MIXIN__ATTRIBUTES:
+				return attributes != null && !attributes.isEmpty();
 			case DataPackage.MIXIN__DISPLAY_NAME:
 				return DISPLAY_NAME_EDEFAULT == null ? displayName != null : !DISPLAY_NAME_EDEFAULT.equals(displayName);
 		}

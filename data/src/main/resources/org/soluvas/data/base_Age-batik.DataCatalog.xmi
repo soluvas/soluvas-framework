@@ -9,16 +9,16 @@
   <terms name="lawas"
       nsPrefix="batik"
       displayName="Lawas"
-      attributeTypeNsPrefix="base"
-      attributeTypeName="Age"/>
+      kindNsPrefix="base"
+      kindName="Age"/>
   <terms name="baru"
       nsPrefix="batik"
       displayName="Baru"
-      attributeTypeNsPrefix="base"
-      attributeTypeName="Age"/>
+      kindNsPrefix="base"
+      kindName="Age"/>
   <terms name="kuno"
       nsPrefix="batik"
       displayName="Kuno"
-      attributeTypeNsPrefix="base"
-      attributeTypeName="Age"/>
+      kindNsPrefix="base"
+      kindName="Age"/>
 </data:DataCatalog>

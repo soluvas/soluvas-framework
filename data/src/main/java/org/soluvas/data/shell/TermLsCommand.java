@@ -24,13 +24,13 @@ public class TermLsCommand extends OsgiCommandSupport {
 		final ServiceReference<DataCatalog> dataCatalogRef = bundleContext.getServiceReference(DataCatalog.class);
 		final DataCatalog dataCatalog = getService(DataCatalog.class, dataCatalogRef);
 		System.out.println(ansi().render("@|negative_on %3s|%-10s|%-15s|%-20s|%-10s|%-10s|%-20s|@",
-				"№", "NsPrefix", "Name", "Display Name", "AType NP", "AType Name", "Bundle"));
+				"№", "NsPrefix", "Name", "Display Name", "Kind NsP", "Kind Name", "Bundle"));
 		int i = 0;
 		for (final Term term : dataCatalog.getTerms()) {
 			final String bundleAnsi = NameUtils.shortenBundleAnsi(term.getBundle(), 20);
 			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-10s|@@|bold,black ||@%-15s@|bold,black ||@%-20s@|bold,black ||@%-10s@|bold,black ||@%-10s@|bold,black ||@" + bundleAnsi,
 					++i, term.getNsPrefix(), term.getName(), term.getDisplayName(),
-					term.getAttributeTypeNsPrefix(), term.getAttributeTypeName() ));
+					term.getKindNsPrefix(), term.getKindName() ));
 		}
 		return null;
 	}

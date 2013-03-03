@@ -29,15 +29,15 @@ public class MixinLsCommand extends OsgiCommandSupport {
 	protected Object doExecute() throws Exception {
 		final ServiceReference<DataCatalog> dataCatalogRef = bundleContext.getServiceReference(DataCatalog.class);
 		final DataCatalog dataCatalog = getService(DataCatalog.class, dataCatalogRef);
-		System.out.println(ansi().render("@|negative_on %3s|%-10s|%-15s|%-20s|%3s|%-30s|%-20s|@",
-				"№", "NsPrefix", "Name", "Display Name", "Σ", "Attributes", "Bundle"));
+		System.out.println(ansi().render("@|negative_on %3s|%-10s|%-15s|%3s|%-30s|%-20s|@",
+				"№", "NsPrefix", "Name", "Σ", "Attributes", "Bundle"));
 		int i = 0;
 		for (final Mixin mixin : dataCatalog.getMixins()) {
-			final List<String> mixinNames = Lists.transform(mixin.getAttributeTypes(), new NameFunction());
+			final List<String> mixinNames = Lists.transform(mixin.getAttributes(), new NameFunction());
 			final String bundleAnsi = NameUtils.shortenBundleAnsi(mixin.getBundle(), 20);
-			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-10s|@@|bold,black ||@%-15s@|bold,black ||@%-20s@|bold,black ||@%3d@|bold,black ||@%-30s@|bold,black ||@" + bundleAnsi,
-					++i, mixin.getNsPrefix(), mixin.getName(), mixin.getDisplayName(),
-					mixin.getAttributeTypes().size(), Joiner.on(' ').join(mixinNames) ));
+			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-10s|@@|bold,black ||@%-15s@|bold,black ||@%3d@|bold,black ||@%-30s@|bold,black ||@" + bundleAnsi,
+					++i, mixin.getNsPrefix(), mixin.getName(),
+					mixin.getAttributes().size(), Joiner.on(' ').join(mixinNames) ));
 		}
 		return null;
 	}
