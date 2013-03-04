@@ -1,5 +1,7 @@
 package org.soluvas.mongo;
 
+import java.util.Date;
+
 import org.joda.time.DateTime;
 
 import com.google.code.morphia.converters.SimpleValueConverter;
@@ -10,6 +12,9 @@ import com.mongodb.DBObject;
 
 /**
  * Converts {@link DateTime} to/from {@link DBObject}.
+ * 
+ * <p>the target representation uses {@link Date}.
+ * 
  * @author ceefour
  */
 public class DateTimeConverter extends TypeConverter implements SimpleValueConverter {
@@ -33,7 +38,7 @@ public class DateTimeConverter extends TypeConverter implements SimpleValueConve
 
 	@Override
 	public Object encode(Object value, MappedField optionalExtraInfo) {
-		return value != null ? value.toString() : null;
+		return value != null ? ((DateTime)value).toDate() : null;
 	}
 
 }
