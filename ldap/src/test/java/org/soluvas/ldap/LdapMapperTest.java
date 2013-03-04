@@ -675,6 +675,21 @@ public class LdapMapperTest {
 	}
 	
 	@Test
+	public void canMapToDateTime() throws LdapException {
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
+		final SocialPerson hendy = new SocialPerson("hendy", "hendy.irawan", "Hendy", "Irawan");
+		final DateTimeZone wib = DateTimeZone.forID("Asia/Jakarta");
+		hendy.setBirthDate(new DateTime(1983, 12, 14, 0, 0, wib));
+		log.info("Input Person: {}", hendy);
+		
+		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
+		log.info("Output Entry: {}", entry);
+
+		assertEquals("19831213170000Z", entry.get("birthDate").getString());//, "19831213170000Z");
+	}
+	
+	@Test
 	public void canMapFromCurrencyUnit() throws LdapException {
 		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
 		

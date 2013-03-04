@@ -10,9 +10,14 @@ import com.mongodb.DBObject;
 
 /**
  * Converts {@link BigDecimal} to/from {@link DBObject}.
+ * 
+ * <p>The MongoDB representation is the {@link BigDecimal#doubleValue()}.
+ * 
  * @author atang
  */
 public class BigDecimalConverter extends TypeConverter implements SimpleValueConverter {
+
+//	private static final BigDecimal MULTIPLICAND = new BigDecimal(10000);
 
 	public BigDecimalConverter() {
 		super(BigDecimal.class);
@@ -25,8 +30,20 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 	@Override
 	public Object decode(Class targetClass, Object fromDBObject,
 			MappedField optionalExtraInfo) throws MappingException {
+		// long x 10000 is no longer used, we now use double.
+		// 12345 => 1.2345
+		// 12300 => 1.23
+		// (because preferred decimal precision is 0, but max decimal precision is 4)
 		if (fromDBObject == null)
 			return null;
+//		else if (fromDBObject instanceof Long)
+//			return new BigDecimal((Long)fromDBObject).divide(MULTIPLICAND);
+//		else if (fromDBObject instanceof Integer)
+//			return new BigDecimal((Integer)fromDBObject).divide(MULTIPLICAND);
+		else if (fromDBObject instanceof Long)
+			return new BigDecimal((Long)fromDBObject);
+		else if (fromDBObject instanceof Integer)
+			return new BigDecimal((Integer)fromDBObject);
 		else if (fromDBObject instanceof Double)
 			return new BigDecimal((Double)fromDBObject);
 		else
@@ -35,7 +52,8 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 
 	@Override
 	public Object encode(Object value, MappedField optionalExtraInfo) {
-		return value != null ? value.toString() : null;
+//		return value != null ? ((BigDecimal) value).multiply(MULTIPLICAND).longValue() : null;
+		return value != null ? ((BigDecimal) value).doubleValue() : null;
 	}
 
 }

@@ -22,10 +22,9 @@ import org.apache.directory.api.ldap.model.exception.LdapInvalidDnException;
 import org.apache.directory.api.ldap.model.message.ModifyRequest;
 import org.apache.directory.api.ldap.model.message.ModifyRequestImpl;
 import org.apache.directory.api.ldap.model.name.Rdn;
+import org.apache.directory.api.util.GeneralizedTime;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.DateTimeFormatterBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.ReflectionUtils;
@@ -451,20 +450,21 @@ public class LdapMapper<T> {
 			return (R) new String((byte[])value, Charsets.UTF_8);
 		} else if (DateTime.class.isAssignableFrom(fieldType)) {
 			try {
+				// generalized date time format, e.g. "19831213170000Z"
+				return (R) new DateTime(GeneralizedTime.getDate((String) value));
+//				final DateTimeFormatter ldapExotic = new DateTimeFormatterBuilder()
+//				     .appendYear(4, 4)
+//				     .appendMonthOfYear(2)
+//				     .appendDayOfMonth(2)
+//				     .appendHourOfDay(2)
+//				     .appendMinuteOfHour(2)
+//				     .appendSecondOfMinute(2)
+//				     .appendTimeZoneOffset("Z", false, 2, 2)
+//				     .toFormatter();
+//				return (R) ldapExotic.parseDateTime((String) value);
+			} catch (Exception e) {
 				// ISO format
 				return (R) new DateTime(value);
-			} catch (Exception e) {
-				// generalized date time format, e.g. "19831213170000Z"
-				 final DateTimeFormatter ldapExotic = new DateTimeFormatterBuilder()
-				     .appendYear(4, 4)
-				     .appendMonthOfYear(2)
-				     .appendDayOfMonth(2)
-				     .appendHourOfDay(2)
-				     .appendMinuteOfHour(2)
-				     .appendSecondOfMinute(2)
-				     .appendTimeZoneOffset("Z", false, 2, 2)
-				     .toFormatter();
-				 return (R) ldapExotic.parseDateTime((String) value);
 			}
 		} else if (CurrencyUnit.class.isAssignableFrom(fieldType)) {
 			return (R) CurrencyUnit.of((String) value);
@@ -486,6 +486,8 @@ public class LdapMapper<T> {
 			return null;
 		} else if (fieldType.isEnum()) {
 			return ((Enum<?>) value).name().toLowerCase();
+		} else if (DateTime.class.isAssignableFrom(fieldType)) {
+			return new GeneralizedTime(((DateTime)value).toDate()).toGeneralizedTime();
 		} else {
 			return value.toString();
 		}

@@ -1,11 +1,13 @@
 package org.soluvas.ldap;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 import org.apache.directory.ldap.client.api.LdapConnectionPool;
 import org.apache.directory.ldap.client.api.LdapNetworkConnection;
 import org.apache.directory.ldap.client.api.PoolableLdapConnectionFactory;
+import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -34,9 +36,9 @@ public class PooledLdapRepositoryTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		LdapConnectionConfig config = LdapUtils.createTrustingConfig("ldap://localhost:10389", "uid=admin,ou=system", "secret");
+		LdapConnectionConfig config = LdapUtils.createTrustingConfig("ldap://localhost:389", "cn=admin,dc=dev,dc=berbatik,dc=com", "secret");
 		pool = new LdapConnectionPool(new PoolableLdapConnectionFactory(config));
-		personRepo = new PooledLdapRepository<SocialPerson>(SocialPerson.class, pool, "ou=users,dc=aksimata,dc=com");
+		personRepo = new PooledLdapRepository<SocialPerson>(SocialPerson.class, pool, "ou=users,dc=dev,dc=berbatik,dc=com");
 		personRepo.init();
 	}
 
@@ -88,6 +90,7 @@ public class PooledLdapRepositoryTest {
 		liz.setFacebookUsername("liz.lemon");
 		liz.setTwitterId(123456L);
 		liz.setTwitterScreenName("liz.lemon");
+		liz.setBirthDate(new DateTime(new Date()));
 		log.info("Input Person: {}", liz);
 		
 		SocialPerson newLiz = personRepo.add(liz);
