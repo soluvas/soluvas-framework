@@ -209,8 +209,8 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	@Nonnull
 	public Page<T> findAll(Pageable pageable) {
 		final Collection<T> entities = findAll(pageable.getSort());
-		final Iterable<T> skipped = Iterables.skip(entities, pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize());
-		final Iterable<T> limited = Iterables.limit(skipped, pageable.getPageSize());
+		final Iterable<T> skipped = Iterables.skip(entities, (int) (pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize()));
+		final Iterable<T> limited = Iterables.limit(skipped, (int) pageable.getPageSize());
 		final List<T> content = ImmutableList.copyOf(limited);
 		return new PageImpl<T>(content, pageable, entities.size());
 	}

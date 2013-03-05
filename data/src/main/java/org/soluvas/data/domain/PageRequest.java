@@ -30,8 +30,8 @@ public class PageRequest implements Pageable, Serializable {
 
 	private static final long serialVersionUID = 8280485938848398236L;
 
-	private final int page;
-	private final int size;
+	private final long page;
+	private final long size;
 	private final Sort sort;
 
 	/**
@@ -41,7 +41,7 @@ public class PageRequest implements Pageable, Serializable {
 	 * @param size
 	 * @param page
 	 */
-	public PageRequest(int page, int size) {
+	public PageRequest(long page, long size) {
 
 		this(page, size, null);
 	}
@@ -54,7 +54,7 @@ public class PageRequest implements Pageable, Serializable {
 	 * @param direction
 	 * @param properties
 	 */
-	public PageRequest(int page, int size, Direction direction, String... properties) {
+	public PageRequest(long page, long size, Direction direction, String... properties) {
 
 		this(page, size, new Sort(direction, properties));
 	}
@@ -66,7 +66,7 @@ public class PageRequest implements Pageable, Serializable {
 	 * @param size
 	 * @param sort
 	 */
-	public PageRequest(int page, int size, Sort sort) {
+	public PageRequest(long page, long size, Sort sort) {
 
 		if (0 > page) {
 			throw new IllegalArgumentException("Page index must not be less than zero!");
@@ -87,8 +87,7 @@ public class PageRequest implements Pageable, Serializable {
 			 * @see org.springframework.data.domain.Pageable#getPageSize()
 			 */
 	@Override
-	public int getPageSize() {
-
+	public long getPageSize() {
 		return size;
 	}
 
@@ -98,8 +97,7 @@ public class PageRequest implements Pageable, Serializable {
 			 * @see org.springframework.data.domain.Pageable#getPageNumber()
 			 */
 	@Override
-	public int getPageNumber() {
-
+	public long getPageNumber() {
 		return page;
 	}
 
@@ -109,8 +107,7 @@ public class PageRequest implements Pageable, Serializable {
 			 * @see org.springframework.data.domain.Pageable#getFirstItem()
 			 */
 	@Override
-	public int getOffset() {
-
+	public long getOffset() {
 		return page * size;
 	}
 
@@ -151,18 +148,13 @@ public class PageRequest implements Pageable, Serializable {
 		return pageEqual && sizeEqual && sortEqual;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 
 		int result = 17;
 
-		result = 31 * result + page;
-		result = 31 * result + size;
+		result = (int) (31 * result + page);
+		result = (int) (31 * result + size);
 		result = 31 * result + (null == sort ? 0 : sort.hashCode());
 
 		return result;

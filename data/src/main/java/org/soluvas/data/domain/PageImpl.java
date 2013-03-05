@@ -70,8 +70,7 @@ public class PageImpl<T> implements Page<T>, Serializable {
 			 * @see org.springframework.data.domain.Page#getNumber()
 			 */
 	@Override
-	public int getNumber() {
-
+	public long getNumber() {
 		return pageable == null ? 0 : pageable.getPageNumber();
 	}
 
@@ -81,8 +80,7 @@ public class PageImpl<T> implements Page<T>, Serializable {
 			 * @see org.springframework.data.domain.Page#getSize()
 			 */
 	@Override
-	public int getSize() {
-
+	public long getSize() {
 		return pageable == null ? 0 : pageable.getPageSize();
 	}
 
