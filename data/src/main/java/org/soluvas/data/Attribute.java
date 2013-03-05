@@ -3,10 +3,13 @@
 package org.soluvas.data;
 
 import javax.measure.unit.Unit;
-import org.soluvas.commons.BundleAware;
+
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.NsPrefixable;
-import org.soluvas.commons.ResourceAware;
+import org.soluvas.data.impl.AttributeImpl;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,6 +61,7 @@ import org.soluvas.commons.ResourceAware;
  * @model
  * @generated
  */
+@JsonDeserialize(as=AttributeImpl.class)
 public interface Attribute extends NsPrefixable, NameContainer {
 	/**
 	 * Returns the value of the '<em><b>Display Name</b></em>' attribute.
@@ -309,6 +313,7 @@ public interface Attribute extends NsPrefixable, NameContainer {
 	 * @model kind="operation"
 	 * @generated
 	 */
+	@JsonIgnore
 	boolean isRequired();
 
 	/**
@@ -320,6 +325,7 @@ public interface Attribute extends NsPrefixable, NameContainer {
 	 * @model kind="operation"
 	 * @generated
 	 */
+	@JsonIgnore
 	boolean isMultiple();
 
 } // AttributeType

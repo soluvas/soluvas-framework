@@ -27,6 +27,7 @@ import org.soluvas.data.Mixin;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.code.morphia.annotations.Transient;
 import com.google.common.base.Strings;
@@ -155,7 +156,7 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * @generated
 	 * @ordered
 	 */
-	@Transient
+	@JsonIgnore @Transient
 	protected Bundle bundle = BUNDLE_EDEFAULT;
 
 	/**
@@ -206,7 +207,7 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * @generated
 	 * @ordered
 	 */
-    @JsonDeserialize(as=BasicEList.class)
+	@JsonDeserialize(as=BasicEList.class)
     protected EList<Attribute> attributes;
 
 	/**
@@ -414,8 +415,7 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@JsonProperty
-	@Override
+	@Override @JsonProperty
 	public EList<Attribute> getAttributes() {
 		if (attributes == null) {
 			attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, DataPackage.MIXIN__ATTRIBUTES);
@@ -423,10 +423,13 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 		return attributes;
 	}
 	
-//	@JsonIgnore
-//	public void setAttributes() {
-//		throw new UnsupportedOperationException();
-//	}
+	/**
+	 * @param attributes the attributes to set
+	 */
+	@Override @JsonIgnore @JsonDeserialize(as=BasicEList.class) @JsonSetter
+	public void setAttributes(EList<Attribute> attributes) {
+		throw new UnsupportedOperationException();
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -455,9 +458,14 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@Override
+	@Override @JsonProperty
 	public String getQName() {
 		return Strings.nullToEmpty(getNsPrefix()) + "_" + Strings.nullToEmpty(getName());
+	}
+	
+	@JsonIgnore
+	public void setQName(String qName) {
+		throw new UnsupportedOperationException();
 	}
 
 	/**

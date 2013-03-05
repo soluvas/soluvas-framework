@@ -84,4 +84,6 @@ public interface Mixin extends NameContainer, ResourceAware, BundleAware, NsPref
 	 */
 	String getQName();
 
+	void setAttributes(EList<Attribute> attributes);
+
 } // Mixin

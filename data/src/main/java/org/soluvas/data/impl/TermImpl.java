@@ -28,6 +28,9 @@ import org.soluvas.data.Term;
 import org.soluvas.data.TermValue;
 import org.soluvas.data.Vocab;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Strings;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Term</b></em>'.
@@ -83,6 +86,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonIgnore
 	protected Bundle bundle = BUNDLE_EDEFAULT;
 
 	/**
@@ -123,6 +127,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonIgnore
 	protected ResourceType resourceType = RESOURCE_TYPE_EDEFAULT;
 
 	/**
@@ -143,6 +148,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonIgnore
 	protected String resourceUri = RESOURCE_URI_EDEFAULT;
 
 	/**
@@ -163,6 +169,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonIgnore
 	protected String resourceName = RESOURCE_NAME_EDEFAULT;
 
 	/**
@@ -666,13 +673,10 @@ public class TermImpl extends EObjectImpl implements Term {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public String getQName() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return Strings.nullToEmpty(getNsPrefix()) + "_" + Strings.nullToEmpty(getName());
 	}
 
 	/**

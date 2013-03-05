@@ -8,17 +8,15 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.osgi.framework.Bundle;
-import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
-import org.soluvas.commons.ResourceAware;
-import org.soluvas.commons.ResourceType;
 import org.soluvas.data.Attribute;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.InputMethod;
 import org.soluvas.data.Value;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * <!-- begin-user-doc -->
@@ -496,7 +494,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@Override
+	@Override @JsonIgnore
 	public Unit getInputUnit() {
 		return getInputUnitName() != null ? Unit.valueOf(getInputUnitName()) : null;
 	}
