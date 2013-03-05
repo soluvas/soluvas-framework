@@ -34,14 +34,14 @@ public interface Page<T> extends Iterable<T> {
 	 * 
 	 * @return the number of the current page
 	 */
-	int getNumber();
+	long getNumber();
 
 	/**
 	 * Returns the size of the page.
 	 * 
 	 * @return the size of the page
 	 */
-	int getSize();
+	long getSize();
 
 	/**
 	 * Returns the number of total pages.

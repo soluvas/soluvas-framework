@@ -34,21 +34,21 @@ public interface Pageable {
 	 * 
 	 * @return the page to be returned.
 	 */
-	int getPageNumber();
+	long getPageNumber();
 
 	/**
 	 * Returns the number of items to be returned.
 	 * 
 	 * @return the number of items of that page
 	 */
-	int getPageSize();
+	long getPageSize();
 
 	/**
 	 * Returns the offset to be taken according to the underlying page and page size.
 	 * 
 	 * @return the offset to be taken
 	 */
-	int getOffset();
+	long getOffset();
 
 	/**
 	 * Returns the sorting parameters.

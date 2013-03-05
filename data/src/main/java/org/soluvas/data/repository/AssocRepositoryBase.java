@@ -302,8 +302,8 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	public Page<Entry<L, R>> findAll(Pageable pageable) {
 		final Collection<Entry<L, R>> entries = findAll(pageable.getSort());
 		final Iterable<Entry<L, R>> skipped = Iterables.skip(
-				entries, pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize());
-		final Iterable<Entry<L, R>> limited = Iterables.limit(skipped, pageable.getPageSize());
+				entries, (int) (pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize()));
+		final Iterable<Entry<L, R>> limited = Iterables.limit(skipped, (int) pageable.getPageSize());
 		final List<Entry<L, R>> content = ImmutableList.copyOf(limited);
 		return new PageImpl<Entry<L, R>>(content, pageable, entries.size());
 	}
@@ -347,8 +347,8 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	public Page<R> getLeft(L left, Pageable pageable) {
 		final Collection<R> allRights = getLeft(left); // TODO: support sort
 		final Iterable<R> skipped = Iterables.skip(
-				allRights, pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize());
-		final Iterable<R> limited = Iterables.limit(skipped, pageable.getPageSize());
+				allRights, (int) (pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize()));
+		final Iterable<R> limited = Iterables.limit(skipped, (int) pageable.getPageSize());
 		final List<R> content = ImmutableList.copyOf(limited);
 		return new PageImpl<R>(content, pageable, allRights.size());
 	}
@@ -360,8 +360,8 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	public Page<L> getRight(R right, Pageable pageable) {
 		final Collection<L> allLefts = getRight(right); // TODO: support sort
 		final Iterable<L> skipped = Iterables.skip(
-				allLefts, pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize());
-		final Iterable<L> limited = Iterables.limit(skipped, pageable.getPageSize());
+				allLefts, (int) (pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize()));
+		final Iterable<L> limited = Iterables.limit(skipped, (int) pageable.getPageSize());
 		final List<L> content = ImmutableList.copyOf(limited);
 		return new PageImpl<L>(content, pageable, allLefts.size());
 	}
