@@ -42,6 +42,13 @@
 		<argument ref="dataCatalogXmiTracker" />
 	</bean>
 	
+	<bean id="mixinMgr" class="org.soluvas.data.impl.MixinManagerImpl">
+		<argument>
+			<bean factory-ref="dataCatalogSupplier" factory-method="get"/>
+		</argument>
+	</bean>
+	<service ref="mixinMgr" auto-export="interfaces"/>
+
 	<bean id="termMgr" class="org.soluvas.data.impl.TermManagerImpl">
 		<argument>
 			<bean factory-ref="dataCatalogSupplier" factory-method="get"/>

@@ -73,4 +73,12 @@ public interface Mixin extends NameContainer, ResourceAware, BundleAware, NsPref
 	 */
 	void setDisplayName(String value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getQName();
+
 } // Mixin

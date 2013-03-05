@@ -29,10 +29,6 @@ import org.soluvas.data.Value;
  * <ul>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.soluvas.data.impl.AttributeImpl#getResourceType <em>Resource Type</em>}</li>
- *   <li>{@link org.soluvas.data.impl.AttributeImpl#getResourceUri <em>Resource Uri</em>}</li>
- *   <li>{@link org.soluvas.data.impl.AttributeImpl#getResourceName <em>Resource Name</em>}</li>
- *   <li>{@link org.soluvas.data.impl.AttributeImpl#getBundle <em>Bundle</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getDisplayName <em>Display Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getMinValues <em>Min Values</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getMaxValues <em>Max Values</em>}</li>
@@ -86,86 +82,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getResourceType()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final ResourceType RESOURCE_TYPE_EDEFAULT = ResourceType.BUNDLE;
-
-	/**
-	 * The cached value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getResourceType()
-	 * @generated
-	 * @ordered
-	 */
-	protected ResourceType resourceType = RESOURCE_TYPE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getResourceUri() <em>Resource Uri</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getResourceUri()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String RESOURCE_URI_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getResourceUri() <em>Resource Uri</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getResourceUri()
-	 * @generated
-	 * @ordered
-	 */
-	protected String resourceUri = RESOURCE_URI_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getResourceName() <em>Resource Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getResourceName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String RESOURCE_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getResourceName() <em>Resource Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getResourceName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String resourceName = RESOURCE_NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getBundle() <em>Bundle</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBundle()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Bundle BUNDLE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getBundle() <em>Bundle</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBundle()
-	 * @generated
-	 * @ordered
-	 */
-	protected Bundle bundle = BUNDLE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDisplayName() <em>Display Name</em>}' attribute.
@@ -398,98 +314,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * @generated
 	 */
 	@Override
-	public ResourceType getResourceType() {
-		return resourceType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setResourceType(ResourceType newResourceType) {
-		ResourceType oldResourceType = resourceType;
-		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__RESOURCE_TYPE, oldResourceType, resourceType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getResourceUri() {
-		return resourceUri;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setResourceUri(String newResourceUri) {
-		String oldResourceUri = resourceUri;
-		resourceUri = newResourceUri;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__RESOURCE_URI, oldResourceUri, resourceUri));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getResourceName() {
-		return resourceName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setResourceName(String newResourceName) {
-		String oldResourceName = resourceName;
-		resourceName = newResourceName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__RESOURCE_NAME, oldResourceName, resourceName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Bundle getBundle() {
-		return bundle;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setBundle(Bundle newBundle) {
-		Bundle oldBundle = bundle;
-		bundle = newBundle;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__BUNDLE, oldBundle, bundle));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String getDisplayName() {
 		return displayName;
 	}
@@ -704,25 +528,19 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public boolean isRequired() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return getMinValues() > 0;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public boolean isMultiple() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return getMaxValues() > 1;
 	}
 
 	/**
@@ -737,14 +555,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return getNsPrefix();
 			case DataPackage.ATTRIBUTE__NAME:
 				return getName();
-			case DataPackage.ATTRIBUTE__RESOURCE_TYPE:
-				return getResourceType();
-			case DataPackage.ATTRIBUTE__RESOURCE_URI:
-				return getResourceUri();
-			case DataPackage.ATTRIBUTE__RESOURCE_NAME:
-				return getResourceName();
-			case DataPackage.ATTRIBUTE__BUNDLE:
-				return getBundle();
 			case DataPackage.ATTRIBUTE__DISPLAY_NAME:
 				return getDisplayName();
 			case DataPackage.ATTRIBUTE__MIN_VALUES:
@@ -778,18 +588,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return;
 			case DataPackage.ATTRIBUTE__NAME:
 				setName((String)newValue);
-				return;
-			case DataPackage.ATTRIBUTE__RESOURCE_TYPE:
-				setResourceType((ResourceType)newValue);
-				return;
-			case DataPackage.ATTRIBUTE__RESOURCE_URI:
-				setResourceUri((String)newValue);
-				return;
-			case DataPackage.ATTRIBUTE__RESOURCE_NAME:
-				setResourceName((String)newValue);
-				return;
-			case DataPackage.ATTRIBUTE__BUNDLE:
-				setBundle((Bundle)newValue);
 				return;
 			case DataPackage.ATTRIBUTE__DISPLAY_NAME:
 				setDisplayName((String)newValue);
@@ -833,18 +631,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 			case DataPackage.ATTRIBUTE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case DataPackage.ATTRIBUTE__RESOURCE_TYPE:
-				setResourceType(RESOURCE_TYPE_EDEFAULT);
-				return;
-			case DataPackage.ATTRIBUTE__RESOURCE_URI:
-				setResourceUri(RESOURCE_URI_EDEFAULT);
-				return;
-			case DataPackage.ATTRIBUTE__RESOURCE_NAME:
-				setResourceName(RESOURCE_NAME_EDEFAULT);
-				return;
-			case DataPackage.ATTRIBUTE__BUNDLE:
-				setBundle(BUNDLE_EDEFAULT);
-				return;
 			case DataPackage.ATTRIBUTE__DISPLAY_NAME:
 				setDisplayName(DISPLAY_NAME_EDEFAULT);
 				return;
@@ -885,14 +671,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
 			case DataPackage.ATTRIBUTE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case DataPackage.ATTRIBUTE__RESOURCE_TYPE:
-				return resourceType != RESOURCE_TYPE_EDEFAULT;
-			case DataPackage.ATTRIBUTE__RESOURCE_URI:
-				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
-			case DataPackage.ATTRIBUTE__RESOURCE_NAME:
-				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
-			case DataPackage.ATTRIBUTE__BUNDLE:
-				return BUNDLE_EDEFAULT == null ? bundle != null : !BUNDLE_EDEFAULT.equals(bundle);
 			case DataPackage.ATTRIBUTE__DISPLAY_NAME:
 				return DISPLAY_NAME_EDEFAULT == null ? displayName != null : !DISPLAY_NAME_EDEFAULT.equals(displayName);
 			case DataPackage.ATTRIBUTE__MIN_VALUES:
@@ -931,20 +709,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				default: return -1;
 			}
 		}
-		if (baseClass == ResourceAware.class) {
-			switch (derivedFeatureID) {
-				case DataPackage.ATTRIBUTE__RESOURCE_TYPE: return CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
-				case DataPackage.ATTRIBUTE__RESOURCE_URI: return CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
-				case DataPackage.ATTRIBUTE__RESOURCE_NAME: return CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
-				default: return -1;
-			}
-		}
-		if (baseClass == BundleAware.class) {
-			switch (derivedFeatureID) {
-				case DataPackage.ATTRIBUTE__BUNDLE: return CommonsPackage.BUNDLE_AWARE__BUNDLE;
-				default: return -1;
-			}
-		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -966,20 +730,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				default: return -1;
 			}
 		}
-		if (baseClass == ResourceAware.class) {
-			switch (baseFeatureID) {
-				case CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE: return DataPackage.ATTRIBUTE__RESOURCE_TYPE;
-				case CommonsPackage.RESOURCE_AWARE__RESOURCE_URI: return DataPackage.ATTRIBUTE__RESOURCE_URI;
-				case CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME: return DataPackage.ATTRIBUTE__RESOURCE_NAME;
-				default: return -1;
-			}
-		}
-		if (baseClass == BundleAware.class) {
-			switch (baseFeatureID) {
-				case CommonsPackage.BUNDLE_AWARE__BUNDLE: return DataPackage.ATTRIBUTE__BUNDLE;
-				default: return -1;
-			}
-		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -997,14 +747,6 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 		result.append(nsPrefix);
 		result.append(", name: ");
 		result.append(name);
-		result.append(", resourceType: ");
-		result.append(resourceType);
-		result.append(", resourceUri: ");
-		result.append(resourceUri);
-		result.append(", resourceName: ");
-		result.append(resourceName);
-		result.append(", bundle: ");
-		result.append(bundle);
 		result.append(", displayName: ");
 		result.append(displayName);
 		result.append(", minValues: ");

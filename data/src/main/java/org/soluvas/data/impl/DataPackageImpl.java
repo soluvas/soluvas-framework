@@ -29,6 +29,7 @@ import org.soluvas.data.Kind;
 import org.soluvas.data.ListVocab;
 import org.soluvas.data.MeasureValue;
 import org.soluvas.data.Mixin;
+import org.soluvas.data.MixinManager;
 import org.soluvas.data.RangeValue;
 import org.soluvas.data.StringValue;
 import org.soluvas.data.Term;
@@ -167,6 +168,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	private EClass kindEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mixinManagerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -761,6 +769,24 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMixinManager() {
+		return mixinManagerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMixinManager_DataCatalog() {
+		return (EReference)mixinManagerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getAttributeSemantic() {
 		return attributeSemanticEEnum;
@@ -920,6 +946,9 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		kindEClass = createEClass(KIND);
 
+		mixinManagerEClass = createEClass(MIXIN_MANAGER);
+		createEReference(mixinManagerEClass, MIXIN_MANAGER__DATA_CATALOG);
+
 		// Create enums
 		attributeSemanticEEnum = createEEnum(ATTRIBUTE_SEMANTIC);
 		inputMethodEEnum = createEEnum(INPUT_METHOD);
@@ -987,8 +1016,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		// Add supertypes to classes
 		attributeEClass.getESuperTypes().add(theCommonsPackage.getNsPrefixable());
 		attributeEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
-		attributeEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
-		attributeEClass.getESuperTypes().add(theCommonsPackage.getBundleAware());
 		g1 = createEGenericType(this.getValue());
 		EGenericType g2 = createEGenericType(theEcorePackage.getEString());
 		g1.getETypeArguments().add(g2);
@@ -1097,6 +1124,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEReference(getMixin_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, Mixin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMixin_DisplayName(), theEcorePackage.getEString(), "displayName", null, 0, 1, Mixin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(mixinEClass, theEcorePackage.getEString(), "getQName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(rangeValueEClass, RangeValue.class, "RangeValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		g1 = createEGenericType(rangeValueEClass_T);
 		initEAttribute(getRangeValue_StartValue(), g1, "startValue", null, 0, 1, RangeValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1152,6 +1181,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEOperation(op, g1);
 
 		initEClass(kindEClass, Kind.class, "Kind", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(mixinManagerEClass, MixinManager.class, "MixinManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMixinManager_DataCatalog(), this.getDataCatalog(), null, "dataCatalog", null, 0, 1, MixinManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(mixinManagerEClass, this.getMixin(), "findMixin", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "qName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(attributeSemanticEEnum, AttributeSemantic.class, "AttributeSemantic");
@@ -1354,6 +1389,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Attribute can hint the inputMethod (string, measure, range, currency, term)  and inputUnit. But user can always override this.\n\nFor currency, the default currency depends on user setting, which if absent, defaults to Shop/Mall setting."
+		   });		
+		addAnnotation
+		  (mixinManagerEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Find mixin by QName, i.e. it must contain nsPrefix, e.g. \"base_Apparel\"."
 		   });
 	}
 
@@ -1394,7 +1435,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "name", "DataCatalog"
-		   });			
+		   });				
 	}
 	
 	public static DataPackage getInstance() {

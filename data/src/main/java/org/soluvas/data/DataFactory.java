@@ -148,6 +148,15 @@ public interface DataFactory extends EFactory {
 	Kind createKind();
 
 	/**
+	 * Returns a new object of class '<em>Mixin Manager</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mixin Manager</em>'.
+	 * @generated
+	 */
+	MixinManager createMixinManager();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

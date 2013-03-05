@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsPackage;
@@ -26,6 +25,8 @@ import org.soluvas.data.DataPackage;
 import org.soluvas.data.Mixin;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.code.morphia.annotations.Transient;
+import com.google.common.base.Strings;
 
 /**
  * <!-- begin-user-doc -->
@@ -148,6 +149,7 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * @generated
 	 * @ordered
 	 */
+	@Transient
 	protected Bundle bundle = BUNDLE_EDEFAULT;
 
 	/**
@@ -405,6 +407,7 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Attribute> getAttributes() {
 		if (attributes == null) {
 			attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, DataPackage.MIXIN__ATTRIBUTES);
@@ -417,6 +420,7 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDisplayName() {
 		return displayName;
 	}
@@ -426,11 +430,21 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDisplayName(String newDisplayName) {
 		String oldDisplayName = displayName;
 		displayName = newDisplayName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.MIXIN__DISPLAY_NAME, oldDisplayName, displayName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public String getQName() {
+		return Strings.nullToEmpty(getNsPrefix()) + "_" + Strings.nullToEmpty(getName());
 	}
 
 	/**

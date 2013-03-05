@@ -4,6 +4,8 @@ package org.soluvas.commons;
 
 import org.osgi.framework.Bundle;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Bundle Aware</b></em>'.
@@ -40,6 +42,7 @@ public interface BundleAware extends SerializableEObject {
 	 * @model dataType="org.soluvas.commons.Bundle" transient="true"
 	 * @generated
 	 */
+	@JsonIgnore
 	Bundle getBundle();
 
 	/**

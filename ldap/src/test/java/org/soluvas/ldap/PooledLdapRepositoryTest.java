@@ -91,6 +91,8 @@ public class PooledLdapRepositoryTest {
 		liz.setTwitterId(123456L);
 		liz.setTwitterScreenName("liz.lemon");
 		liz.setBirthDate(new DateTime(new Date()));
+		liz.setNewsletterSubscriptionEnabled(true);
+		liz.setNewsletterSubscriptionTime(new DateTime());
 		log.info("Input Person: {}", liz);
 		
 		SocialPerson newLiz = personRepo.add(liz);

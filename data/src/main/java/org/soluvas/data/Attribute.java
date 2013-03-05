@@ -58,7 +58,7 @@ import org.soluvas.commons.ResourceAware;
  * @model
  * @generated
  */
-public interface Attribute extends NsPrefixable, NameContainer, ResourceAware, BundleAware {
+public interface Attribute extends NsPrefixable, NameContainer {
 	/**
 	 * Returns the value of the '<em><b>Display Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
