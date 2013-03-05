@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -25,6 +26,8 @@ import org.soluvas.data.DataPackage;
 import org.soluvas.data.Mixin;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.code.morphia.annotations.Transient;
 import com.google.common.base.Strings;
 
@@ -89,6 +92,7 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonIgnore @Transient
 	protected ResourceType resourceType = RESOURCE_TYPE_EDEFAULT;
 
 	/**
@@ -109,6 +113,7 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonIgnore @Transient
 	protected String resourceUri = RESOURCE_URI_EDEFAULT;
 
 	/**
@@ -129,6 +134,7 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonIgnore @Transient
 	protected String resourceName = RESOURCE_NAME_EDEFAULT;
 
 	/**
@@ -200,7 +206,8 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Attribute> attributes;
+    @JsonDeserialize(as=BasicEList.class)
+    protected EList<Attribute> attributes;
 
 	/**
 	 * The default value of the '{@link #getDisplayName() <em>Display Name</em>}' attribute.
@@ -407,6 +414,7 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@JsonProperty
 	@Override
 	public EList<Attribute> getAttributes() {
 		if (attributes == null) {
@@ -414,6 +422,11 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 		}
 		return attributes;
 	}
+	
+//	@JsonIgnore
+//	public void setAttributes() {
+//		throw new UnsupportedOperationException();
+//	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -459,11 +472,6 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	@JsonIgnore
-	private void setAttributeTypes(EList<Attribute> attributeTypes) {
-		throw new UnsupportedOperationException();
 	}
 
 	/**

@@ -139,7 +139,11 @@
     </eGenericSuperTypes>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Mixin" eSuperTypes="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ResourceAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NsPrefixable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Describable">
-    <eOperations name="getQName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eOperations name="getQName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return the nsPrefix_name."/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//Attribute" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
@@ -192,6 +196,12 @@
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Term" eSuperTypes="#//TermContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ResourceAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NsPrefixable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Imageable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Positionable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Colorable">
+    <eOperations name="getQName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return the nsPrefix_name."/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="toValue" eType="#//TermValue"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vocab" eType="#//Vocab"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -250,26 +260,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="kinds" upperBound="-1"
         eType="#//Kind" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TermManager">
-    <eOperations name="findTerms">
-      <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//List">
-        <eTypeArguments eClassifier="#//Term"/>
-      </eGenericType>
-      <eParameters name="attributeTypeNsPrefix" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-      <eParameters name="attributeTypeName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-    </eOperations>
-    <eOperations name="getTermsByAttributeTypes">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="List all terms partitioned by attribute type ({nsPrefix}_{name})."/>
-      </eAnnotations>
-      <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Multimap">
-        <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-        <eTypeArguments eClassifier="#//Term"/>
-      </eGenericType>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dataCatalog" eType="#//DataCatalog"
-        changeable="false"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Kind" eSuperTypes="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NsPrefixable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ResourceAware">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="1. Kind (Attribute Type / Vocab) is like an EMF DataType or Enum.&#xA;A Kind is always type-agnostic, but a default input method &amp; unit can be hinted by the attribute (see below).&#xA;A Kind is always cardinality agnostic.&#xA;For example, Length kind is hinted as &quot;measure&quot; with &quot;cm&quot; unit, however all the attribute values below are valid:&#xA;1. 9 cm (just like the hint)&#xA;2. 10 km (different unit)&#xA;3. 9-12 cm (use unit like the hint, but RangeValue instead)&#xA;4. 5-6 kg (different unit and use RangeValue)&#xA;5. &quot;cukup panjang untuk orang dewasa&quot; (StringValue)&#xA;6. base_very_long (TermValue from base nsPrefix)&#xA;7. tuneeca_half_a_mile (TermValue from tuneeca nsPrefix)&#xA;In addition, all of the above can have multiple cardinality or no value."/>
@@ -284,15 +274,5 @@
     <eLiterals name="range" value="2"/>
     <eLiterals name="currency" value="3"/>
     <eLiterals name="term" value="4"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MixinManager">
-    <eOperations name="findMixin" eType="#//Mixin">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Find mixin by QName, i.e. it must contain nsPrefix, e.g. &quot;base_Apparel&quot;."/>
-      </eAnnotations>
-      <eParameters name="qName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dataCatalog" eType="#//DataCatalog"
-        changeable="false"/>
   </eClassifiers>
 </ecore:EPackage>

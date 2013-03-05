@@ -2,12 +2,9 @@
  */
 package org.soluvas.data;
 
-import com.google.common.collect.Multimap;
 import java.util.List;
-import java.util.Map;
-import org.eclipse.emf.common.util.EList;
 
-import org.soluvas.commons.SerializableEObject;
+import com.google.common.collect.Multimap;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +23,7 @@ import org.soluvas.commons.SerializableEObject;
  * @extends SerializableEObject
  * @generated
  */
-public interface TermManager extends SerializableEObject {
+public interface TermManager {
 	/**
 	 * Returns the value of the '<em><b>Data Catalog</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -60,5 +57,7 @@ public interface TermManager extends SerializableEObject {
 	 * @generated
 	 */
 	Multimap<String, Term> getTermsByAttributeTypes();
+	
+	Term findTerm(String qName);
 
 } // TermManager

@@ -160,21 +160,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass termManagerEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass kindEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass mixinManagerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -740,46 +726,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EClass getTermManager() {
-		return termManagerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTermManager_DataCatalog() {
-		return (EReference)termManagerEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getKind() {
 		return kindEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getMixinManager() {
-		return mixinManagerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getMixinManager_DataCatalog() {
-		return (EReference)mixinManagerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -941,13 +889,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		createEReference(dataCatalogEClass, DATA_CATALOG__TERMS);
 		createEReference(dataCatalogEClass, DATA_CATALOG__KINDS);
 
-		termManagerEClass = createEClass(TERM_MANAGER);
-		createEReference(termManagerEClass, TERM_MANAGER__DATA_CATALOG);
-
 		kindEClass = createEClass(KIND);
-
-		mixinManagerEClass = createEClass(MIXIN_MANAGER);
-		createEReference(mixinManagerEClass, MIXIN_MANAGER__DATA_CATALOG);
 
 		// Create enums
 		attributeSemanticEEnum = createEEnum(ATTRIBUTE_SEMANTIC);
@@ -1146,6 +1088,10 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEAttribute(getTerm_KindNsPrefix(), theEcorePackage.getEString(), "kindNsPrefix", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTerm_KindName(), theEcorePackage.getEString(), "kindName", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(termEClass, theEcorePackage.getEString(), "getQName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(termEClass, this.getTermValue(), "toValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(listVocabEClass, ListVocab.class, "ListVocab", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(treeVocabEClass, TreeVocab.class, "TreeVocab", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1161,32 +1107,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEReference(getDataCatalog_Terms(), this.getTerm(), null, "terms", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataCatalog_Kinds(), this.getKind(), null, "kinds", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(termManagerEClass, TermManager.class, "TermManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTermManager_DataCatalog(), this.getDataCatalog(), null, "dataCatalog", null, 0, 1, TermManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(termManagerEClass, null, "findTerms", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEString(), "attributeTypeNsPrefix", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEString(), "attributeTypeName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(theCommonsPackage.getList());
-		g2 = createEGenericType(this.getTerm());
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
-
-		op = addEOperation(termManagerEClass, null, "getTermsByAttributeTypes", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(theCommonsPackage.getMultimap());
-		g2 = createEGenericType(theEcorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(this.getTerm());
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
-
 		initEClass(kindEClass, Kind.class, "Kind", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(mixinManagerEClass, MixinManager.class, "MixinManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMixinManager_DataCatalog(), this.getDataCatalog(), null, "dataCatalog", null, 0, 1, MixinManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(mixinManagerEClass, this.getMixin(), "findMixin", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEString(), "qName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(attributeSemanticEEnum, AttributeSemantic.class, "AttributeSemantic");
@@ -1319,6 +1240,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 			 "documentation", "Mixin with monetary value and currency code."
 		   });		
 		addAnnotation
+		  (mixinEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return the nsPrefix_name."
+		   });		
+		addAnnotation
 		  (rangeValueEClass, 
 		   source, 
 		   new String[] {
@@ -1342,6 +1269,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   new String[] {
 			 "documentation", "pindah jd attributetype."
 		   });			
+		addAnnotation
+		  (termEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return the nsPrefix_name."
+		   });		
 		addAnnotation
 		  (getTerm_DisplayName(), 
 		   source, 
@@ -1373,12 +1306,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 			 "documentation", "List of terms in a Vocabulary or if the Term is nested (tree vocabulary)."
 		   });			
 		addAnnotation
-		  (termManagerEClass.getEOperations().get(1), 
-		   source, 
-		   new String[] {
-			 "documentation", "List all terms partitioned by attribute type ({nsPrefix}_{name})."
-		   });		
-		addAnnotation
 		  (kindEClass, 
 		   source, 
 		   new String[] {
@@ -1389,12 +1316,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Attribute can hint the inputMethod (string, measure, range, currency, term)  and inputUnit. But user can always override this.\n\nFor currency, the default currency depends on user setting, which if absent, defaults to Shop/Mall setting."
-		   });		
-		addAnnotation
-		  (mixinManagerEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "documentation", "Find mixin by QName, i.e. it must contain nsPrefix, e.g. \"base_Apparel\"."
 		   });
 	}
 
@@ -1405,13 +1326,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																					
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																						
 		addAnnotation
 		  (vocabEClass, 
 		   source, 
 		   new String[] {
 			 "name", "Vocab"
-		   });						
+		   });							
 		addAnnotation
 		  (listVocabEClass, 
 		   source, 
@@ -1435,7 +1356,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "name", "DataCatalog"
-		   });				
+		   });		
 	}
 	
 	public static DataPackage getInstance() {

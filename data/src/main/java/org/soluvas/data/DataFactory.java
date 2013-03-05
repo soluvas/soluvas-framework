@@ -130,15 +130,6 @@ public interface DataFactory extends EFactory {
 	DataCatalog createDataCatalog();
 
 	/**
-	 * Returns a new object of class '<em>Term Manager</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Term Manager</em>'.
-	 * @generated
-	 */
-	TermManager createTermManager();
-
-	/**
 	 * Returns a new object of class '<em>Kind</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,15 +137,6 @@ public interface DataFactory extends EFactory {
 	 * @generated
 	 */
 	Kind createKind();
-
-	/**
-	 * Returns a new object of class '<em>Mixin Manager</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mixin Manager</em>'.
-	 * @generated
-	 */
-	MixinManager createMixinManager();
 
 	/**
 	 * Returns the package supported by this factory.

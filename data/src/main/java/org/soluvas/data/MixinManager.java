@@ -2,7 +2,6 @@
  */
 package org.soluvas.data;
 
-import org.soluvas.commons.SerializableEObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +20,7 @@ import org.soluvas.commons.SerializableEObject;
  * @extends SerializableEObject
  * @generated
  */
-public interface MixinManager extends SerializableEObject {
+public interface MixinManager {
 	/**
 	 * Returns the value of the '<em><b>Data Catalog</b></em>' reference.
 	 * <!-- begin-user-doc -->

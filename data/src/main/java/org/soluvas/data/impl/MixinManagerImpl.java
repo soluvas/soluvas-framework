@@ -9,17 +9,10 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.QNameFunction;
 import org.soluvas.data.DataCatalog;
-import org.soluvas.data.DataPackage;
 import org.soluvas.data.Mixin;
 import org.soluvas.data.MixinManager;
 
@@ -42,7 +35,7 @@ import com.google.common.collect.Iterables;
  *
  * @generated
  */
-public class MixinManagerImpl extends EObjectImpl implements MixinManager {
+public class MixinManagerImpl implements MixinManager {
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(MixinManagerImpl.class);
@@ -76,25 +69,7 @@ public class MixinManagerImpl extends EObjectImpl implements MixinManager {
 	 * @generated
 	 */
 	@Override
-	protected EClass eStaticClass() {
-		return DataPackage.Literals.MIXIN_MANAGER;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public DataCatalog getDataCatalog() {
-		if (dataCatalog != null && ((EObject)dataCatalog).eIsProxy()) {
-			InternalEObject oldDataCatalog = (InternalEObject)dataCatalog;
-			dataCatalog = (DataCatalog)eResolveProxy(oldDataCatalog);
-			if (dataCatalog != oldDataCatalog) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DataPackage.MIXIN_MANAGER__DATA_CATALOG, oldDataCatalog, dataCatalog));
-			}
-		}
 		return dataCatalog;
 	}
 
@@ -134,35 +109,6 @@ public class MixinManagerImpl extends EObjectImpl implements MixinManager {
 					nsPrefix, mixinName, mixinNames.size(), mixinNames));
 			return null;
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case DataPackage.MIXIN_MANAGER__DATA_CATALOG:
-				if (resolve) return getDataCatalog();
-				return basicGetDataCatalog();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case DataPackage.MIXIN_MANAGER__DATA_CATALOG:
-				return dataCatalog != null;
-		}
-		return super.eIsSet(featureID);
 	}
 
 } //MixinManagerImpl

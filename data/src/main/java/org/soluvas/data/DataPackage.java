@@ -1190,34 +1190,6 @@ public interface DataPackage extends EPackage {
 	int DATA_CATALOG_FEATURE_COUNT = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 8;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.data.impl.TermManagerImpl <em>Term Manager</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.soluvas.data.impl.TermManagerImpl
-	 * @see org.soluvas.data.impl.DataPackageImpl#getTermManager()
-	 * @generated
-	 */
-	int TERM_MANAGER = 15;
-
-	/**
-	 * The feature id for the '<em><b>Data Catalog</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TERM_MANAGER__DATA_CATALOG = 0;
-
-	/**
-	 * The number of structural features of the '<em>Term Manager</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TERM_MANAGER_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.KindImpl <em>Kind</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1225,7 +1197,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getKind()
 	 * @generated
 	 */
-	int KIND = 16;
+	int KIND = 15;
 
 	/**
 	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
@@ -1291,34 +1263,6 @@ public interface DataPackage extends EPackage {
 	int KIND_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.data.impl.MixinManagerImpl <em>Mixin Manager</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.soluvas.data.impl.MixinManagerImpl
-	 * @see org.soluvas.data.impl.DataPackageImpl#getMixinManager()
-	 * @generated
-	 */
-	int MIXIN_MANAGER = 17;
-
-	/**
-	 * The feature id for the '<em><b>Data Catalog</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MIXIN_MANAGER__DATA_CATALOG = 0;
-
-	/**
-	 * The number of structural features of the '<em>Mixin Manager</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MIXIN_MANAGER_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1326,7 +1270,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getAttributeSemantic()
 	 * @generated
 	 */
-	int ATTRIBUTE_SEMANTIC = 18;
+	int ATTRIBUTE_SEMANTIC = 16;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.InputMethod <em>Input Method</em>}' enum.
@@ -1336,7 +1280,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getInputMethod()
 	 * @generated
 	 */
-	int INPUT_METHOD = 19;
+	int INPUT_METHOD = 17;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository</em>' data type.
@@ -1346,7 +1290,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepository()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY = 20;
+	int CRUD_REPOSITORY = 18;
 
 	/**
 	 * The meta object id for the '<em>Paging And Sorting Repository</em>' data type.
@@ -1356,7 +1300,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPagingAndSortingRepository()
 	 * @generated
 	 */
-	int PAGING_AND_SORTING_REPOSITORY = 21;
+	int PAGING_AND_SORTING_REPOSITORY = 19;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository Base</em>' data type.
@@ -1366,7 +1310,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepositoryBase()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY_BASE = 22;
+	int CRUD_REPOSITORY_BASE = 20;
 
 
 	/**
@@ -1377,7 +1321,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getMeasure()
 	 * @generated
 	 */
-	int MEASURE = 23;
+	int MEASURE = 21;
 
 	/**
 	 * The meta object id for the '<em>Decimal Measure</em>' data type.
@@ -1387,7 +1331,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getDecimalMeasure()
 	 * @generated
 	 */
-	int DECIMAL_MEASURE = 24;
+	int DECIMAL_MEASURE = 22;
 
 
 	/**
@@ -1882,27 +1826,6 @@ public interface DataPackage extends EPackage {
 	EReference getDataCatalog_Kinds();
 
 	/**
-	 * Returns the meta object for class '{@link org.soluvas.data.TermManager <em>Term Manager</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Term Manager</em>'.
-	 * @see org.soluvas.data.TermManager
-	 * @generated
-	 */
-	EClass getTermManager();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.soluvas.data.TermManager#getDataCatalog <em>Data Catalog</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Data Catalog</em>'.
-	 * @see org.soluvas.data.TermManager#getDataCatalog()
-	 * @see #getTermManager()
-	 * @generated
-	 */
-	EReference getTermManager_DataCatalog();
-
-	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.Kind <em>Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1911,27 +1834,6 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getKind();
-
-	/**
-	 * Returns the meta object for class '{@link org.soluvas.data.MixinManager <em>Mixin Manager</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Mixin Manager</em>'.
-	 * @see org.soluvas.data.MixinManager
-	 * @generated
-	 */
-	EClass getMixinManager();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.soluvas.data.MixinManager#getDataCatalog <em>Data Catalog</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Data Catalog</em>'.
-	 * @see org.soluvas.data.MixinManager#getDataCatalog()
-	 * @see #getMixinManager()
-	 * @generated
-	 */
-	EReference getMixinManager_DataCatalog();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}'.
@@ -2429,24 +2331,6 @@ public interface DataPackage extends EPackage {
 		EReference DATA_CATALOG__KINDS = eINSTANCE.getDataCatalog_Kinds();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.data.impl.TermManagerImpl <em>Term Manager</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.soluvas.data.impl.TermManagerImpl
-		 * @see org.soluvas.data.impl.DataPackageImpl#getTermManager()
-		 * @generated
-		 */
-		EClass TERM_MANAGER = eINSTANCE.getTermManager();
-
-		/**
-		 * The meta object literal for the '<em><b>Data Catalog</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TERM_MANAGER__DATA_CATALOG = eINSTANCE.getTermManager_DataCatalog();
-
-		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.KindImpl <em>Kind</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2455,24 +2339,6 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EClass KIND = eINSTANCE.getKind();
-
-		/**
-		 * The meta object literal for the '{@link org.soluvas.data.impl.MixinManagerImpl <em>Mixin Manager</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.soluvas.data.impl.MixinManagerImpl
-		 * @see org.soluvas.data.impl.DataPackageImpl#getMixinManager()
-		 * @generated
-		 */
-		EClass MIXIN_MANAGER = eINSTANCE.getMixinManager();
-
-		/**
-		 * The meta object literal for the '<em><b>Data Catalog</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MIXIN_MANAGER__DATA_CATALOG = eINSTANCE.getMixinManager_DataCatalog();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}' enum.

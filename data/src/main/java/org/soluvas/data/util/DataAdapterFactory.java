@@ -152,16 +152,8 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 				return createDataCatalogAdapter();
 			}
 			@Override
-			public Adapter caseTermManager(TermManager object) {
-				return createTermManagerAdapter();
-			}
-			@Override
 			public Adapter caseKind(Kind object) {
 				return createKindAdapter();
-			}
-			@Override
-			public Adapter caseMixinManager(MixinManager object) {
-				return createMixinManagerAdapter();
 			}
 			@Override
 			public Adapter caseNsPrefixable(NsPrefixable object) {
@@ -438,20 +430,6 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.data.TermManager <em>Term Manager</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.soluvas.data.TermManager
-	 * @generated
-	 */
-	public Adapter createTermManagerAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.soluvas.data.Kind <em>Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -462,20 +440,6 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createKindAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.data.MixinManager <em>Mixin Manager</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.soluvas.data.MixinManager
-	 * @generated
-	 */
-	public Adapter createMixinManagerAdapter() {
 		return null;
 	}
 

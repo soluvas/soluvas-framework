@@ -25,6 +25,7 @@ import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.Term;
+import org.soluvas.data.TermValue;
 import org.soluvas.data.Vocab;
 
 /**
@@ -512,6 +513,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getColor() {
 		return color;
 	}
@@ -521,6 +523,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setColor(String newColor) {
 		String oldColor = color;
 		color = newColor;
@@ -619,6 +622,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getKindNsPrefix() {
 		return kindNsPrefix;
 	}
@@ -628,6 +632,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKindNsPrefix(String newKindNsPrefix) {
 		String oldKindNsPrefix = kindNsPrefix;
 		kindNsPrefix = newKindNsPrefix;
@@ -640,6 +645,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getKindName() {
 		return kindName;
 	}
@@ -649,11 +655,34 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKindName(String newKindName) {
 		String oldKindName = kindName;
 		kindName = newKindName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__KIND_NAME, oldKindName, kindName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getQName() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public TermValue toValue() {
+		final TermValue value = new TermValueImpl(getQName(), getDisplayName());
+		return value;
 	}
 
 	/**

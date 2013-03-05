@@ -76,6 +76,9 @@ public interface Mixin extends NameContainer, ResourceAware, BundleAware, NsPref
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Return the nsPrefix_name.
+	 * <!-- end-model-doc -->
 	 * @model kind="operation"
 	 * @generated
 	 */
