@@ -74,6 +74,10 @@ public class SocialPerson extends Person {
 	private String referrer;
 	@LdapAttribute("referrerType")
 	private String referrerType;
+	@LdapAttribute("signupSource")
+	private String signupSource;
+	@LdapAttribute("signupSourceType")
+	private SignupSourceType signupSourceType;
 	@LdapAttribute("ipAddress")
 	private String ipAddress;
 	@LdapAttribute("lastIpAddress")
@@ -507,6 +511,38 @@ public class SocialPerson extends Person {
 	 */
 	public void setReferrerType(String referrerType) {
 		this.referrerType = referrerType;
+	}
+
+	/**
+	 * Signup source name, e.g. "Rudi Wijaya" for {@link SignupSourceType#FACEBOOK_FRIEND}.
+	 * @return the signupSource
+	 */
+	public String getSignupSource() {
+		return signupSource;
+	}
+
+	/**
+	 * Signup source name, e.g. "Rudi Wijaya" for {@link SignupSourceType#FACEBOOK_FRIEND}.
+	 * @param signupSource the signupSource to set
+	 */
+	public void setSignupSource(String signupSource) {
+		this.signupSource = signupSource;
+	}
+
+	/**
+	 * Signup source type, e.g. {@link SignupSourceType#FACEBOOK_FRIEND}.
+	 * @return the signupSourceType
+	 */
+	public SignupSourceType getSignupSourceType() {
+		return signupSourceType;
+	}
+
+	/**
+	 * Signup source type, e.g. {@link SignupSourceType#FACEBOOK_FRIEND}.
+	 * @param signupSourceType the signupSourceType to set
+	 */
+	public void setSignupSourceType(SignupSourceType signupSourceType) {
+		this.signupSourceType = signupSourceType;
 	}
 
 	/**
