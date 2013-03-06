@@ -62,7 +62,7 @@ public class LdapBindCredentialsMatcher implements CredentialsMatcher {
 				return true;
 			} catch (LdapAuthenticationException e) {
 				log.info("Invalid credentials supplied for "
-								+ token.getPrincipal(), e);
+								+ token.getPrincipal() + " aka LDAP user " + userDn + " at " + ldapConfig.getLdapHost(), e);
 				return false;
 			} catch (Exception e) {
 				log.error("Error authenticating to LDAP Server "
