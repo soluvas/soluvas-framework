@@ -86,7 +86,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 			case DataPackage.TREE_VOCAB: return (EObject)createTreeVocab();
 			case DataPackage.FREE_VOCAB: return (EObject)createFreeVocab();
 			case DataPackage.DATA_CATALOG: return (EObject)createDataCatalog();
-			case DataPackage.TERM_MANAGER: return (EObject)createTermManager();
 			case DataPackage.KIND: return (EObject)createKind();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -293,16 +292,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	public DataCatalog createDataCatalog() {
 		DataCatalogImpl dataCatalog = new DataCatalogImpl();
 		return dataCatalog;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TermManager createTermManager() {
-		TermManagerImpl termManager = new TermManagerImpl();
-		return termManager;
 	}
 
 	/**

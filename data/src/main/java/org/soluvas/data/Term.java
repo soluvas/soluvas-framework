@@ -164,4 +164,23 @@ public interface Term extends TermContainer, BundleAware, NameContainer, Resourc
 	 */
 	void setKindName(String value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Return the nsPrefix_name.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getQName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	TermValue toValue();
+
 } // Term

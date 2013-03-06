@@ -25,7 +25,11 @@ import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.Term;
+import org.soluvas.data.TermValue;
 import org.soluvas.data.Vocab;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Strings;
 
 /**
  * <!-- begin-user-doc -->
@@ -82,6 +86,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonIgnore
 	protected Bundle bundle = BUNDLE_EDEFAULT;
 
 	/**
@@ -122,6 +127,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonIgnore
 	protected ResourceType resourceType = RESOURCE_TYPE_EDEFAULT;
 
 	/**
@@ -142,6 +148,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonIgnore
 	protected String resourceUri = RESOURCE_URI_EDEFAULT;
 
 	/**
@@ -162,6 +169,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonIgnore
 	protected String resourceName = RESOURCE_NAME_EDEFAULT;
 
 	/**
@@ -512,6 +520,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getColor() {
 		return color;
 	}
@@ -521,6 +530,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setColor(String newColor) {
 		String oldColor = color;
 		color = newColor;
@@ -619,6 +629,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getKindNsPrefix() {
 		return kindNsPrefix;
 	}
@@ -628,6 +639,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKindNsPrefix(String newKindNsPrefix) {
 		String oldKindNsPrefix = kindNsPrefix;
 		kindNsPrefix = newKindNsPrefix;
@@ -640,6 +652,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getKindName() {
 		return kindName;
 	}
@@ -649,11 +662,31 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKindName(String newKindName) {
 		String oldKindName = kindName;
 		kindName = newKindName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__KIND_NAME, oldKindName, kindName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public String getQName() {
+		return Strings.nullToEmpty(getNsPrefix()) + "_" + Strings.nullToEmpty(getName());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public TermValue toValue() {
+		final TermValue value = new TermValueImpl(getQName(), getDisplayName());
+		return value;
 	}
 
 	/**

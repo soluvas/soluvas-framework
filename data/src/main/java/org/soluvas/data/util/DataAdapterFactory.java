@@ -152,10 +152,6 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 				return createDataCatalogAdapter();
 			}
 			@Override
-			public Adapter caseTermManager(TermManager object) {
-				return createTermManagerAdapter();
-			}
-			@Override
 			public Adapter caseKind(Kind object) {
 				return createKindAdapter();
 			}
@@ -172,6 +168,18 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 				return createNameContainerAdapter();
 			}
 			@Override
+			public Adapter caseImageable(Imageable object) {
+				return createImageableAdapter();
+			}
+			@Override
+			public Adapter caseDescribable(Describable object) {
+				return createDescribableAdapter();
+			}
+			@Override
+			public Adapter casePositionable(Positionable object) {
+				return createPositionableAdapter();
+			}
+			@Override
 			public Adapter caseResourceAware(ResourceAware object) {
 				return createResourceAwareAdapter();
 			}
@@ -180,24 +188,12 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 				return createBundleAwareAdapter();
 			}
 			@Override
-			public Adapter caseDescribable(Describable object) {
-				return createDescribableAdapter();
-			}
-			@Override
 			public Adapter caseIdentifiable(Identifiable object) {
 				return createIdentifiableAdapter();
 			}
 			@Override
 			public Adapter caseSluggable(Sluggable object) {
 				return createSluggableAdapter();
-			}
-			@Override
-			public Adapter caseImageable(Imageable object) {
-				return createImageableAdapter();
-			}
-			@Override
-			public Adapter casePositionable(Positionable object) {
-				return createPositionableAdapter();
 			}
 			@Override
 			public Adapter caseColorable(Colorable object) {
@@ -430,20 +426,6 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDataCatalogAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.data.TermManager <em>Term Manager</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.soluvas.data.TermManager
-	 * @generated
-	 */
-	public Adapter createTermManagerAdapter() {
 		return null;
 	}
 

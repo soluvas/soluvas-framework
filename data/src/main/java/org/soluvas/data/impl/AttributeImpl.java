@@ -8,17 +8,18 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.osgi.framework.Bundle;
-import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Describable;
+import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
-import org.soluvas.commons.ResourceAware;
-import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.Positionable;
 import org.soluvas.data.Attribute;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.InputMethod;
 import org.soluvas.data.Value;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,10 +30,8 @@ import org.soluvas.data.Value;
  * <ul>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.soluvas.data.impl.AttributeImpl#getResourceType <em>Resource Type</em>}</li>
- *   <li>{@link org.soluvas.data.impl.AttributeImpl#getResourceUri <em>Resource Uri</em>}</li>
- *   <li>{@link org.soluvas.data.impl.AttributeImpl#getResourceName <em>Resource Name</em>}</li>
- *   <li>{@link org.soluvas.data.impl.AttributeImpl#getBundle <em>Bundle</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.AttributeImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.AttributeImpl#getPositioner <em>Positioner</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getDisplayName <em>Display Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getMinValues <em>Min Values</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getMaxValues <em>Max Values</em>}</li>
@@ -41,6 +40,10 @@ import org.soluvas.data.Value;
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getKindName <em>Kind Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getInputMethod <em>Input Method</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getInputUnitName <em>Input Unit Name</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.AttributeImpl#isVisibleInSimple <em>Visible In Simple</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.AttributeImpl#isSearchableInQuick <em>Searchable In Quick</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.AttributeImpl#getImageId <em>Image Id</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.AttributeImpl#getFieldWidth <em>Field Width</em>}</li>
  * </ul>
  * </p>
  *
@@ -88,84 +91,44 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResourceType()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ResourceType RESOURCE_TYPE_EDEFAULT = ResourceType.BUNDLE;
+	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResourceType()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected ResourceType resourceType = RESOURCE_TYPE_EDEFAULT;
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getResourceUri() <em>Resource Uri</em>}' attribute.
+	 * The default value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResourceUri()
+	 * @see #getPositioner()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String RESOURCE_URI_EDEFAULT = null;
+	protected static final Integer POSITIONER_EDEFAULT = new Integer(0);
 
 	/**
-	 * The cached value of the '{@link #getResourceUri() <em>Resource Uri</em>}' attribute.
+	 * The cached value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResourceUri()
+	 * @see #getPositioner()
 	 * @generated
 	 * @ordered
 	 */
-	protected String resourceUri = RESOURCE_URI_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getResourceName() <em>Resource Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getResourceName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String RESOURCE_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getResourceName() <em>Resource Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getResourceName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String resourceName = RESOURCE_NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getBundle() <em>Bundle</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBundle()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Bundle BUNDLE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getBundle() <em>Bundle</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBundle()
-	 * @generated
-	 * @ordered
-	 */
-	protected Bundle bundle = BUNDLE_EDEFAULT;
+	protected Integer positioner = POSITIONER_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDisplayName() <em>Display Name</em>}' attribute.
@@ -328,6 +291,86 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	protected String inputUnitName = INPUT_UNIT_NAME_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #isVisibleInSimple() <em>Visible In Simple</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisibleInSimple()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VISIBLE_IN_SIMPLE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isVisibleInSimple() <em>Visible In Simple</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisibleInSimple()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean visibleInSimple = VISIBLE_IN_SIMPLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isSearchableInQuick() <em>Searchable In Quick</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSearchableInQuick()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean SEARCHABLE_IN_QUICK_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isSearchableInQuick() <em>Searchable In Quick</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSearchableInQuick()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean searchableInQuick = SEARCHABLE_IN_QUICK_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getImageId() <em>Image Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImageId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String IMAGE_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getImageId() <em>Image Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImageId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String imageId = IMAGE_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getFieldWidth() <em>Field Width</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFieldWidth()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int FIELD_WIDTH_EDEFAULT = 20;
+
+	/**
+	 * The cached value of the '{@link #getFieldWidth() <em>Field Width</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFieldWidth()
+	 * @generated
+	 * @ordered
+	 */
+	protected int fieldWidth = FIELD_WIDTH_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -397,9 +440,8 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public ResourceType getResourceType() {
-		return resourceType;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
@@ -407,12 +449,11 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setResourceType(ResourceType newResourceType) {
-		ResourceType oldResourceType = resourceType;
-		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__RESOURCE_TYPE, oldResourceType, resourceType));
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -420,9 +461,8 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public String getResourceUri() {
-		return resourceUri;
+	public Integer getPositioner() {
+		return positioner;
 	}
 
 	/**
@@ -430,58 +470,11 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setResourceUri(String newResourceUri) {
-		String oldResourceUri = resourceUri;
-		resourceUri = newResourceUri;
+	public void setPositioner(Integer newPositioner) {
+		Integer oldPositioner = positioner;
+		positioner = newPositioner;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__RESOURCE_URI, oldResourceUri, resourceUri));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getResourceName() {
-		return resourceName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setResourceName(String newResourceName) {
-		String oldResourceName = resourceName;
-		resourceName = newResourceName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__RESOURCE_NAME, oldResourceName, resourceName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Bundle getBundle() {
-		return bundle;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setBundle(Bundle newBundle) {
-		Bundle oldBundle = bundle;
-		bundle = newBundle;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__BUNDLE, oldBundle, bundle));
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__POSITIONER, oldPositioner, positioner));
 	}
 
 	/**
@@ -671,8 +664,92 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	@Override
+	public boolean isVisibleInSimple() {
+		return visibleInSimple;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisibleInSimple(boolean newVisibleInSimple) {
+		boolean oldVisibleInSimple = visibleInSimple;
+		visibleInSimple = newVisibleInSimple;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__VISIBLE_IN_SIMPLE, oldVisibleInSimple, visibleInSimple));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSearchableInQuick() {
+		return searchableInQuick;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSearchableInQuick(boolean newSearchableInQuick) {
+		boolean oldSearchableInQuick = searchableInQuick;
+		searchableInQuick = newSearchableInQuick;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__SEARCHABLE_IN_QUICK, oldSearchableInQuick, searchableInQuick));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getImageId() {
+		return imageId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setImageId(String newImageId) {
+		String oldImageId = imageId;
+		imageId = newImageId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__IMAGE_ID, oldImageId, imageId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getFieldWidth() {
+		return fieldWidth;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFieldWidth(int newFieldWidth) {
+		int oldFieldWidth = fieldWidth;
+		fieldWidth = newFieldWidth;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__FIELD_WIDTH, oldFieldWidth, fieldWidth));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override @JsonIgnore
 	public Unit getInputUnit() {
 		return getInputUnitName() != null ? Unit.valueOf(getInputUnitName()) : null;
 	}
@@ -704,25 +781,19 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public boolean isRequired() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return getMinValues() > 0;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public boolean isMultiple() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return getMaxValues() > 1;
 	}
 
 	/**
@@ -737,14 +808,10 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return getNsPrefix();
 			case DataPackage.ATTRIBUTE__NAME:
 				return getName();
-			case DataPackage.ATTRIBUTE__RESOURCE_TYPE:
-				return getResourceType();
-			case DataPackage.ATTRIBUTE__RESOURCE_URI:
-				return getResourceUri();
-			case DataPackage.ATTRIBUTE__RESOURCE_NAME:
-				return getResourceName();
-			case DataPackage.ATTRIBUTE__BUNDLE:
-				return getBundle();
+			case DataPackage.ATTRIBUTE__DESCRIPTION:
+				return getDescription();
+			case DataPackage.ATTRIBUTE__POSITIONER:
+				return getPositioner();
 			case DataPackage.ATTRIBUTE__DISPLAY_NAME:
 				return getDisplayName();
 			case DataPackage.ATTRIBUTE__MIN_VALUES:
@@ -761,6 +828,14 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return getInputMethod();
 			case DataPackage.ATTRIBUTE__INPUT_UNIT_NAME:
 				return getInputUnitName();
+			case DataPackage.ATTRIBUTE__VISIBLE_IN_SIMPLE:
+				return isVisibleInSimple();
+			case DataPackage.ATTRIBUTE__SEARCHABLE_IN_QUICK:
+				return isSearchableInQuick();
+			case DataPackage.ATTRIBUTE__IMAGE_ID:
+				return getImageId();
+			case DataPackage.ATTRIBUTE__FIELD_WIDTH:
+				return getFieldWidth();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -779,17 +854,11 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 			case DataPackage.ATTRIBUTE__NAME:
 				setName((String)newValue);
 				return;
-			case DataPackage.ATTRIBUTE__RESOURCE_TYPE:
-				setResourceType((ResourceType)newValue);
+			case DataPackage.ATTRIBUTE__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
-			case DataPackage.ATTRIBUTE__RESOURCE_URI:
-				setResourceUri((String)newValue);
-				return;
-			case DataPackage.ATTRIBUTE__RESOURCE_NAME:
-				setResourceName((String)newValue);
-				return;
-			case DataPackage.ATTRIBUTE__BUNDLE:
-				setBundle((Bundle)newValue);
+			case DataPackage.ATTRIBUTE__POSITIONER:
+				setPositioner((Integer)newValue);
 				return;
 			case DataPackage.ATTRIBUTE__DISPLAY_NAME:
 				setDisplayName((String)newValue);
@@ -815,6 +884,18 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 			case DataPackage.ATTRIBUTE__INPUT_UNIT_NAME:
 				setInputUnitName((String)newValue);
 				return;
+			case DataPackage.ATTRIBUTE__VISIBLE_IN_SIMPLE:
+				setVisibleInSimple((Boolean)newValue);
+				return;
+			case DataPackage.ATTRIBUTE__SEARCHABLE_IN_QUICK:
+				setSearchableInQuick((Boolean)newValue);
+				return;
+			case DataPackage.ATTRIBUTE__IMAGE_ID:
+				setImageId((String)newValue);
+				return;
+			case DataPackage.ATTRIBUTE__FIELD_WIDTH:
+				setFieldWidth((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -833,17 +914,11 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 			case DataPackage.ATTRIBUTE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case DataPackage.ATTRIBUTE__RESOURCE_TYPE:
-				setResourceType(RESOURCE_TYPE_EDEFAULT);
+			case DataPackage.ATTRIBUTE__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
-			case DataPackage.ATTRIBUTE__RESOURCE_URI:
-				setResourceUri(RESOURCE_URI_EDEFAULT);
-				return;
-			case DataPackage.ATTRIBUTE__RESOURCE_NAME:
-				setResourceName(RESOURCE_NAME_EDEFAULT);
-				return;
-			case DataPackage.ATTRIBUTE__BUNDLE:
-				setBundle(BUNDLE_EDEFAULT);
+			case DataPackage.ATTRIBUTE__POSITIONER:
+				setPositioner(POSITIONER_EDEFAULT);
 				return;
 			case DataPackage.ATTRIBUTE__DISPLAY_NAME:
 				setDisplayName(DISPLAY_NAME_EDEFAULT);
@@ -869,6 +944,18 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 			case DataPackage.ATTRIBUTE__INPUT_UNIT_NAME:
 				setInputUnitName(INPUT_UNIT_NAME_EDEFAULT);
 				return;
+			case DataPackage.ATTRIBUTE__VISIBLE_IN_SIMPLE:
+				setVisibleInSimple(VISIBLE_IN_SIMPLE_EDEFAULT);
+				return;
+			case DataPackage.ATTRIBUTE__SEARCHABLE_IN_QUICK:
+				setSearchableInQuick(SEARCHABLE_IN_QUICK_EDEFAULT);
+				return;
+			case DataPackage.ATTRIBUTE__IMAGE_ID:
+				setImageId(IMAGE_ID_EDEFAULT);
+				return;
+			case DataPackage.ATTRIBUTE__FIELD_WIDTH:
+				setFieldWidth(FIELD_WIDTH_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -885,14 +972,10 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
 			case DataPackage.ATTRIBUTE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case DataPackage.ATTRIBUTE__RESOURCE_TYPE:
-				return resourceType != RESOURCE_TYPE_EDEFAULT;
-			case DataPackage.ATTRIBUTE__RESOURCE_URI:
-				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
-			case DataPackage.ATTRIBUTE__RESOURCE_NAME:
-				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
-			case DataPackage.ATTRIBUTE__BUNDLE:
-				return BUNDLE_EDEFAULT == null ? bundle != null : !BUNDLE_EDEFAULT.equals(bundle);
+			case DataPackage.ATTRIBUTE__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case DataPackage.ATTRIBUTE__POSITIONER:
+				return POSITIONER_EDEFAULT == null ? positioner != null : !POSITIONER_EDEFAULT.equals(positioner);
 			case DataPackage.ATTRIBUTE__DISPLAY_NAME:
 				return DISPLAY_NAME_EDEFAULT == null ? displayName != null : !DISPLAY_NAME_EDEFAULT.equals(displayName);
 			case DataPackage.ATTRIBUTE__MIN_VALUES:
@@ -909,6 +992,14 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return inputMethod != INPUT_METHOD_EDEFAULT;
 			case DataPackage.ATTRIBUTE__INPUT_UNIT_NAME:
 				return INPUT_UNIT_NAME_EDEFAULT == null ? inputUnitName != null : !INPUT_UNIT_NAME_EDEFAULT.equals(inputUnitName);
+			case DataPackage.ATTRIBUTE__VISIBLE_IN_SIMPLE:
+				return visibleInSimple != VISIBLE_IN_SIMPLE_EDEFAULT;
+			case DataPackage.ATTRIBUTE__SEARCHABLE_IN_QUICK:
+				return searchableInQuick != SEARCHABLE_IN_QUICK_EDEFAULT;
+			case DataPackage.ATTRIBUTE__IMAGE_ID:
+				return IMAGE_ID_EDEFAULT == null ? imageId != null : !IMAGE_ID_EDEFAULT.equals(imageId);
+			case DataPackage.ATTRIBUTE__FIELD_WIDTH:
+				return fieldWidth != FIELD_WIDTH_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -931,17 +1022,20 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				default: return -1;
 			}
 		}
-		if (baseClass == ResourceAware.class) {
+		if (baseClass == Imageable.class) {
 			switch (derivedFeatureID) {
-				case DataPackage.ATTRIBUTE__RESOURCE_TYPE: return CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
-				case DataPackage.ATTRIBUTE__RESOURCE_URI: return CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
-				case DataPackage.ATTRIBUTE__RESOURCE_NAME: return CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
 				default: return -1;
 			}
 		}
-		if (baseClass == BundleAware.class) {
+		if (baseClass == Describable.class) {
 			switch (derivedFeatureID) {
-				case DataPackage.ATTRIBUTE__BUNDLE: return CommonsPackage.BUNDLE_AWARE__BUNDLE;
+				case DataPackage.ATTRIBUTE__DESCRIPTION: return CommonsPackage.DESCRIBABLE__DESCRIPTION;
+				default: return -1;
+			}
+		}
+		if (baseClass == Positionable.class) {
+			switch (derivedFeatureID) {
+				case DataPackage.ATTRIBUTE__POSITIONER: return CommonsPackage.POSITIONABLE__POSITIONER;
 				default: return -1;
 			}
 		}
@@ -966,17 +1060,20 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				default: return -1;
 			}
 		}
-		if (baseClass == ResourceAware.class) {
+		if (baseClass == Imageable.class) {
 			switch (baseFeatureID) {
-				case CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE: return DataPackage.ATTRIBUTE__RESOURCE_TYPE;
-				case CommonsPackage.RESOURCE_AWARE__RESOURCE_URI: return DataPackage.ATTRIBUTE__RESOURCE_URI;
-				case CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME: return DataPackage.ATTRIBUTE__RESOURCE_NAME;
 				default: return -1;
 			}
 		}
-		if (baseClass == BundleAware.class) {
+		if (baseClass == Describable.class) {
 			switch (baseFeatureID) {
-				case CommonsPackage.BUNDLE_AWARE__BUNDLE: return DataPackage.ATTRIBUTE__BUNDLE;
+				case CommonsPackage.DESCRIBABLE__DESCRIPTION: return DataPackage.ATTRIBUTE__DESCRIPTION;
+				default: return -1;
+			}
+		}
+		if (baseClass == Positionable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.POSITIONABLE__POSITIONER: return DataPackage.ATTRIBUTE__POSITIONER;
 				default: return -1;
 			}
 		}
@@ -997,14 +1094,10 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 		result.append(nsPrefix);
 		result.append(", name: ");
 		result.append(name);
-		result.append(", resourceType: ");
-		result.append(resourceType);
-		result.append(", resourceUri: ");
-		result.append(resourceUri);
-		result.append(", resourceName: ");
-		result.append(resourceName);
-		result.append(", bundle: ");
-		result.append(bundle);
+		result.append(", description: ");
+		result.append(description);
+		result.append(", positioner: ");
+		result.append(positioner);
 		result.append(", displayName: ");
 		result.append(displayName);
 		result.append(", minValues: ");
@@ -1021,6 +1114,14 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 		result.append(inputMethod);
 		result.append(", inputUnitName: ");
 		result.append(inputUnitName);
+		result.append(", visibleInSimple: ");
+		result.append(visibleInSimple);
+		result.append(", searchableInQuick: ");
+		result.append(searchableInQuick);
+		result.append(", imageId: ");
+		result.append(imageId);
+		result.append(", fieldWidth: ");
+		result.append(fieldWidth);
 		result.append(')');
 		return result.toString();
 	}
