@@ -192,8 +192,10 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends Person> T requirePerson(Subject subject) {
-		final String personId = (String) Preconditions.checkNotNull(subject.getPrincipal(),
-				"User is not logged in");
+		final String personId = (String) subject.getPrincipal();
+		if (personId == null) {
+			throw new NotLoggedInException("User is not logged in");
+		}
 		final Person person = Preconditions.checkNotNull(personLookup.findOne(personId),
 				"Cannot find user %s", personId);
 		return (T) person;

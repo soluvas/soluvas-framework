@@ -68,6 +68,8 @@ public class ServiceXmiTracker<T extends EObject> implements BundleTrackerCustom
 	private final String suppliedClassName;
 	private final String suppliedClassSimpleName;
 	
+	private final List<ServiceRegistration<T>> allSvcRegs = Lists.newCopyOnWriteArrayList();
+	
 	/**
 	 * Do not use this constructor in Blueprint XML due to classloading problems, use {@link #XmiTracker(Class, Class, String, String)}.
 	 * @param ePackage
@@ -87,6 +89,16 @@ public class ServiceXmiTracker<T extends EObject> implements BundleTrackerCustom
 		this.ePackage = EmfUtils.getEPackage(ePackageClass);
 		this.suppliedClassName = suppliedClass.getName();
 		this.suppliedClassSimpleName = suppliedClass.getSimpleName();
+	}
+	
+	public void destroy() {
+		for (final ServiceRegistration<T> reg : allSvcRegs) {
+			try {
+				reg.unregister();
+			} catch (Exception e) {
+				log.warn("Cannot unregister", e);
+			}
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -124,6 +136,7 @@ public class ServiceXmiTracker<T extends EObject> implements BundleTrackerCustom
 			final List<ServiceRegistration<T>> svcRegs = svcRegsBuilder.build();
 			log.info("Registered {} {} svcRegs from {} [{}]",
 					svcRegs.size(), suppliedClassSimpleName, bundle.getSymbolicName(), bundle.getBundleId());
+			allSvcRegs.addAll(svcRegs);
 			return svcRegs;
 		} catch (final Exception e) {
 			final List<ServiceRegistration<T>> svcRegs = svcRegsBuilder.build();
@@ -162,6 +175,8 @@ public class ServiceXmiTracker<T extends EObject> implements BundleTrackerCustom
 			} catch (Exception e) {
 				log.warn("Cannot unregister {} from {} [{}]", svcReg,
 						bundle.getSymbolicName(), bundle.getBundleId());
+			} finally {
+				allSvcRegs.remove(svcReg);
 			}
 		}
 		log.info("Unregistered {} {} svcRegs from {} [{}]",

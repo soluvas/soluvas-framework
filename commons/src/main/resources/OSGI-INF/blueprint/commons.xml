@@ -87,6 +87,17 @@
 
 	<bean id="webAddressPackage" class="org.soluvas.commons.impl.CommonsPackageImpl"
 		factory-method="getInstance" />
+	<bean id="webAddressXmiTracker" class="org.soluvas.commons.ServiceXmiTracker" destroy-method="destroy">
+		<argument value="org.soluvas.commons.CommonsPackage" />
+		<argument value="org.soluvas.commons.WebAddress" />
+	</bean>
+	<bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close">
+		<argument ref="blueprintBundleContext" />
+		<argument value="32" />
+		<argument ref="webAddressXmiTracker" />
+	</bean>
+	
+	<!-- 
 	<bean id="webAddressSupplier" class="org.soluvas.commons.OverridingSupplier"
 		destroy-method="destroy">
 		<argument ref="webAddressPackage"/>
@@ -112,5 +123,6 @@
 		<argument value="32" />
 		<argument ref="webAddressXmiTracker" />
 	</bean>
+	-->
 	
  </blueprint>

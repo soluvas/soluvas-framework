@@ -33,8 +33,6 @@ public class XmiTrackerUtils {
 		final Builder<URL> scannedsBuilder = ImmutableList.builder();
 		
 		final String filePattern = "*." + suppliedClassSimpleName + ".xmi";
-		log.trace("Scanning {} [{}] for {}", bundle.getSymbolicName(), bundle.getBundleId(),
-				filePattern);
 		final String path = bundle.getSymbolicName().replace('.', '/');
 		
 		final Enumeration<URL> rootEntries = bundle.findEntries("", filePattern, false);
@@ -47,7 +45,11 @@ public class XmiTrackerUtils {
 			scannedsBuilder.add(innerEntries.nextElement());
 		}
 		
-		return scannedsBuilder.build();
+		final List<URL> found = scannedsBuilder.build();
+		log.trace("Scanned {} [{}] for {} and found {}: {}",
+				bundle.getSymbolicName(), bundle.getBundleId(), filePattern,
+				found.size(), found);
+		return found;
 	}
 	
 }
