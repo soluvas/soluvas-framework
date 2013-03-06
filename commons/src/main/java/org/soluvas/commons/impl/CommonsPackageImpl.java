@@ -577,13 +577,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDataType bigDecimalEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EDataType dateTimeZoneEDataType = null;
 
 	/**
@@ -1982,16 +1975,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EDataType getBigDecimal() {
-		return bigDecimalEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EDataType getDateTimeZone() {
 		return dateTimeZoneEDataType;
 	}
@@ -2224,7 +2207,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		bundleEDataType = createEDataType(BUNDLE);
 		bigMoneyProviderEDataType = createEDataType(BIG_MONEY_PROVIDER);
 		measurableEDataType = createEDataType(MEASURABLE);
-		bigDecimalEDataType = createEDataType(BIG_DECIMAL);
 		dateTimeZoneEDataType = createEDataType(DATE_TIME_ZONE);
 		localeEDataType = createEDataType(LOCALE);
 		fileEDataType = createEDataType(FILE);
@@ -2668,7 +2650,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(bundleEDataType, Bundle.class, "Bundle", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(bigMoneyProviderEDataType, BigMoneyProvider.class, "BigMoneyProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(measurableEDataType, Measurable.class, "Measurable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(bigDecimalEDataType, BigDecimal.class, "BigDecimal", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(dateTimeZoneEDataType, DateTimeZone.class, "DateTimeZone", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(localeEDataType, Locale.class, "Locale", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(fileEDataType, File.class, "File", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

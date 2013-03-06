@@ -2194,17 +2194,6 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '<em>Big Decimal</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.math.BigDecimal
-	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigDecimal()
-	 * @generated
-	 */
-	int BIG_DECIMAL = 68;
-
-
-	/**
 	 * The meta object id for the '<em>Date Time Zone</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2212,7 +2201,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTimeZone()
 	 * @generated
 	 */
-	int DATE_TIME_ZONE = 69;
+	int DATE_TIME_ZONE = 68;
 
 
 	/**
@@ -2223,7 +2212,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 70;
+	int LOCALE = 69;
 
 
 	/**
@@ -2234,7 +2223,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFile()
 	 * @generated
 	 */
-	int FILE = 71;
+	int FILE = 70;
 
 
 	/**
@@ -3654,17 +3643,6 @@ public interface CommonsPackage extends EPackage {
 	EDataType getMeasurable();
 
 	/**
-	 * Returns the meta object for data type '{@link java.math.BigDecimal <em>Big Decimal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Big Decimal</em>'.
-	 * @see java.math.BigDecimal
-	 * @model instanceClass="java.math.BigDecimal"
-	 * @generated
-	 */
-	EDataType getBigDecimal();
-
-	/**
 	 * Returns the meta object for data type '{@link org.joda.time.DateTimeZone <em>Date Time Zone</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4918,16 +4896,6 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType MEASURABLE = eINSTANCE.getMeasurable();
-
-		/**
-		 * The meta object literal for the '<em>Big Decimal</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.math.BigDecimal
-		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigDecimal()
-		 * @generated
-		 */
-		EDataType BIG_DECIMAL = eINSTANCE.getBigDecimal();
 
 		/**
 		 * The meta object literal for the '<em>Date Time Zone</em>' data type.

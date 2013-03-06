@@ -174,8 +174,6 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createBigMoneyProviderFromString(eDataType, initialValue);
 			case CommonsPackage.MEASURABLE:
 				return createMeasurableFromString(eDataType, initialValue);
-			case CommonsPackage.BIG_DECIMAL:
-				return createBigDecimalFromString(eDataType, initialValue);
 			case CommonsPackage.DATE_TIME_ZONE:
 				return createDateTimeZoneFromString(eDataType, initialValue);
 			case CommonsPackage.LOCALE:
@@ -243,8 +241,6 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertBigMoneyProviderToString(eDataType, instanceValue);
 			case CommonsPackage.MEASURABLE:
 				return convertMeasurableToString(eDataType, instanceValue);
-			case CommonsPackage.BIG_DECIMAL:
-				return convertBigDecimalToString(eDataType, instanceValue);
 			case CommonsPackage.DATE_TIME_ZONE:
 				return convertDateTimeZoneToString(eDataType, instanceValue);
 			case CommonsPackage.LOCALE:
