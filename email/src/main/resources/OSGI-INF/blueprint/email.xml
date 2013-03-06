@@ -1,9 +1,21 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-    xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+    xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0"
     xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0
+    	http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
         http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0">
 
+	<cm:property-placeholder persistent-id="org.soluvas" update-strategy="none">
+		<cm:default-properties>
+			<!-- Email -->
+			<cm:property name="emailSmtpHost"			value="localhost" />
+			<cm:property name="emailSmtpPort"			value="25" />
+			<cm:property name="emailSmtpUser"			value="" />
+			<cm:property name="emailSmtpPassword"		value="bippo" />
+		</cm:default-properties>
+	</cm:property-placeholder>
+	
 	<reference id="commonsPackage" interface="org.soluvas.commons.CommonsPackage" />
 	<bean class="org.soluvas.commons.EPackageRegistration" init-method="init" destroy-method="destroy"
 		depends-on="commonsPackage">
@@ -15,11 +27,16 @@
 		</argument>
 	</bean>
 	
+	<reference id="appManifest" interface="org.soluvas.commons.AppManifest"/>
+	<reference id="webAddress" interface="org.soluvas.commons.WebAddress"/>
+	
 	<reference id="globalEventBus" interface="com.google.common.eventbus.EventBus"
-		filter="(tenantId=\*)" ext:proxy-method="classes" />
+		ext:proxy-method="classes" />
 
-	<bean id="emailFactory" class="org.soluvas.email.impl.EmailFactoryImpl" factory-method="getInstance" />
-	<bean id="emailCatalog" factory-ref="emailFactory" factory-method="createEmailCatalog" />
+	<bean id="emailFactory" class="org.soluvas.email.impl.EmailFactoryImpl" factory-method="getInstance"
+		depends-on="commonsPackage"/>
+	<bean id="emailCatalog" factory-ref="emailFactory" factory-method="createEmailCatalog"
+		depends-on="commonsPackage"/>
 	<service ref="emailCatalog" auto-export="interfaces" />
 
 	<bean id="emailCatalogXmiTracker" class="org.soluvas.email.util.EmailCatalogXmiTracker">
@@ -31,5 +48,19 @@
 		<argument value="32" />
 		<argument ref="emailCatalogXmiTracker" />
 	</bean>	
+
+    <bean id="emailMgr" class="org.soluvas.email.impl.EmailManagerImpl"
+    	depends-on="appManifest webAddress">
+    	<argument ref="emailCatalog" />
+    	<argument value="bippo" />
+    	<argument value="bippo" />
+    	<argument value="${emailSmtpHost}" />
+    	<argument value="${emailSmtpPort}" />
+    	<argument value="${emailSmtpUser}" />
+    	<argument value="${emailSmtpPassword}" />
+    	<argument ref="appManifest"/>
+    	<argument ref="webAddress"/>
+    </bean>
+	<service ref="emailMgr" auto-export="interfaces"/>
 
 </blueprint>

@@ -866,6 +866,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getSubject() {
 		return subjectEDataType;
 	}
@@ -1366,6 +1367,10 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		   new String[] {
 			 "documentation", " Ensure personId is set. If not, throw Exception.\nThe IP Address and User Agent is required for security purposes.\nConvenience method for {@link #requirePerson(RequestIdentity)}."
 		   });
+	}
+	
+	public static SecurityPackage getInstance() {
+		return eINSTANCE;
 	}
 
 } //SecurityPackageImpl

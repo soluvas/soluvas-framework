@@ -1,11 +1,141 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
     xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
-    xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0
         http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
-        http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0
         http://karaf.apache.org/xmlns/shell/v1.1.0 http://karaf.apache.org/xmlns/shell/v1.1.0">
+
+	<cm:property-placeholder persistent-id="org.soluvas" update-strategy="none">
+		<cm:default-properties>
+			<!-- App Session -->
+			<cm:property name="securityMongoUri"			value="mongodb://127.0.0.1:27017/berbatik_dev" />
+			<!-- Auth -->
+			<cm:property name="mallLdapBaseDn"				value="dc=dev,dc=berbatik,dc=com" />
+		</cm:default-properties>
+	</cm:property-placeholder>
+
+	<reference id="commonsPackage" interface="org.soluvas.commons.CommonsPackage" />
+	
+	<bean class="org.soluvas.commons.EPackageRegistration" init-method="init" destroy-method="destroy"
+		depends-on="commonsPackage">
+		<argument ref="blueprintBundleContext"/>
+		<argument value="org.soluvas.security.SecurityPackage" />
+	</bean>
+
+	<bean id="securityPackage" class="org.soluvas.security.impl.SecurityPackageImpl"
+		factory-method="getInstance" depends-on="commonsPackage"/>
+	<bean id="aggregatingSecurityCatalogSupplier" class="org.soluvas.commons.AggregatingSupplier"
+		destroy-method="destroy" depends-on="securityPackage">
+		<argument ref="securityPackage" />
+		<argument value="SecurityCatalog" />
+		<argument>
+			<list />
+		</argument>
+	</bean>
+	<service ref="aggregatingSecurityCatalogSupplier" auto-export="interfaces">
+		<service-properties>
+			<entry key="suppliedClass" value="org.soluvas.security.SecurityCatalog" />
+			<entry key="layer" value="application" />
+		</service-properties>
+	</service>
+	
+	<bean id="securityCatalogSupplierTracker" class="org.soluvas.commons.SupplierTracker">
+		<argument ref="blueprintBundleContext" />
+		<argument ref="aggregatingSecurityCatalogSupplier" />
+	</bean>
+	<bean class="org.osgi.util.tracker.ServiceTracker" init-method="open" destroy-method="close">
+		<argument ref="blueprintBundleContext" />
+		<argument>
+			<bean class="org.osgi.framework.FrameworkUtil" factory-method="createFilter">
+				<argument value="(&amp;(objectClass=com.google.common.base.Supplier)(suppliedClass=org.soluvas.security.SecurityCatalog)(layer=module))" />
+			</bean>
+		</argument>
+		<argument ref="securityCatalogSupplierTracker" />
+	</bean>
+	
+	<bean id="securityCatalogXmiTracker" class="org.soluvas.commons.XmiTracker">
+		<argument value="org.soluvas.security.SecurityPackage" />
+		<argument value="org.soluvas.security.SecurityCatalog" />
+		<argument value="*" />
+		<argument value="*" />
+	</bean>
+	<bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close">
+		<argument ref="blueprintBundleContext" />
+		<argument value="32" />
+		<argument ref="securityCatalogXmiTracker" />
+	</bean>
+
+	<reference id="ldapPool" interface="org.apache.commons.pool.ObjectPool"
+		filter="(namespace=ldap)" />
+	<reference id="ldapConfigSupplier" interface="com.google.common.base.Supplier"
+		filter="(suppliedClass=org.apache.directory.ldap.client.api.LdapConnectionConfig)" />
+		
+	<bean id="appSessionRepo" class="org.soluvas.security.impl.MongoAppSessionRepository"
+		destroy-method="destroy">
+		<argument value="${securityMongoUri}" />
+	</bean>
+	<service ref="appSessionRepo" auto-export="interfaces">
+		<service-properties>
+			<entry key="namespace" value="appsession" />
+		</service-properties>
+	</service>
+	
+	<bean id="sessionDao" class="org.soluvas.security.SoluvasSessionDAO">
+		<argument ref="appSessionRepo" />
+	</bean>
+	
+	<bean id="rolePersonAssoc" class="org.soluvas.ldap.LdapRolePersonAssoc">
+		<argument ref="ldapPool" />
+		<argument value="${mallLdapBaseDn}" />
+	</bean>
+	<service ref="rolePersonAssoc" auto-export="interfaces">
+		<service-properties>
+			<entry key="namespace" value="role-person" />
+		</service-properties>
+	</service>
+	<bean id="securityRepo" class="org.soluvas.security.ldap.LdapSecurityRepository">
+		<argument ref="ldapPool" />
+		<argument value="${mallLdapBaseDn}" />
+		<argument>
+			<bean factory-ref="ldapConfigSupplier" factory-method="get" />
+		</argument>
+		<argument ref="rolePersonAssoc" />
+	</bean>
+	<service ref="securityRepo" auto-export="interfaces"/>
+	
+	<bean id="shiroRealm" class="org.soluvas.security.SoluvasRealm" init-method="init">
+		<argument ref="aggregatingSecurityCatalogSupplier" />
+		<argument ref="securityRepo" />
+	</bean>
+
+	<bean id="securityManager" class="org.soluvas.security.SoluvasSecurityManager"
+		destroy-method="destroy">
+		<argument ref="sessionDao" />
+		<property name="realm" ref="shiroRealm" />
+	</bean>
+	<service ref="securityManager" auto-export="interfaces"/>
+
+<!-- 	<bean id="shiroFilterFactory" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"> -->
+<!-- 		<property name="securityManager" ref="securityManager" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="securityFilter" class="org.soluvas.web.login.DelegatingFilterFactory" -->
+<!-- 		init-method="register"> -->
+<!-- 		<argument ref="blueprintBundleContext" /> -->
+<!-- 		<argument value="${tenantId}_${tenantEnv}" />				Wicket application name -->
+<!-- 		<argument value="2" />										Priority -->
+<!-- 		<property name="filter"> -->
+<!-- 			<bean factory-ref="shiroFilterFactory" factory-method="getObject" /> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+	<reference id="personRepo" interface="org.soluvas.data.EntityLookup"
+		filter="(&amp;(namespace=person)(repositoryMode=normal))" />
+	<bean id="appSessionMgr" class="org.soluvas.security.impl.AppSessionManagerImpl">
+		<argument ref="securityManager"/>
+		<argument ref="personRepo"/>
+	</bean>
+	<service ref="appSessionMgr" auto-export="interfaces"/>
 
 	<reference id="svcLookup" interface="org.soluvas.commons.tenant.ServiceLookup"/>
 
@@ -72,12 +202,4 @@
 		<!-- Security Runtime -->
 	</command-bundle>
 	
-	<reference id="commonsPackage" interface="org.soluvas.commons.CommonsPackage" />
-	
-	<bean class="org.soluvas.commons.EPackageRegistration" init-method="init" destroy-method="destroy"
-		depends-on="commonsPackage">
-		<argument ref="blueprintBundleContext"/>
-		<argument value="org.soluvas.security.SecurityPackage" />
-	</bean>
-
 </blueprint>
