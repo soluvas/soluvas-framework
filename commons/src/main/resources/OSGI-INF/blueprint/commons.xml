@@ -1,14 +1,7 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
     xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0
-    	http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
         http://karaf.apache.org/xmlns/shell/v1.1.0 http://karaf.apache.org/xmlns/shell/v1.1.0">
-
-	<cm:property-placeholder persistent-id="org.soluvas" update-strategy="none">
-		<cm:default-properties>
-		</cm:default-properties>
-	</cm:property-placeholder>
 
 	<bean id="networkExecutor" class="java.util.concurrent.Executors" factory-method="newFixedThreadPool">
 		<argument value="32" />
@@ -51,11 +44,6 @@
 		interface="com.google.common.base.Supplier" availability="optional"
 		filter="(type=eventbus)" />
 
-	<!-- bean id="svcLookup" class="org.soluvas.commons.tenant.MultitenantServiceLookup">
-		<argument ref="blueprintBundleContext"/>
-		<argument value="${clientId}"/>
-		<argument value="${tenantEnv}"/>
-	</bean-->
 	<bean id="svcLookup" class="org.soluvas.commons.tenant.OsgiServiceLookup">
 		<argument ref="blueprintBundleContext"/>
 	</bean>
@@ -85,8 +73,6 @@
 		<argument value="org.soluvas.commons.CommonsPackage" />
 	</bean>
 
-	<bean id="webAddressPackage" class="org.soluvas.commons.impl.CommonsPackageImpl"
-		factory-method="getInstance" />
 	<bean id="webAddressXmiTracker" class="org.soluvas.commons.ServiceXmiTracker" destroy-method="destroy">
 		<argument value="org.soluvas.commons.CommonsPackage" />
 		<argument value="org.soluvas.commons.WebAddress" />
@@ -97,32 +83,14 @@
 		<argument ref="webAddressXmiTracker" />
 	</bean>
 	
-	<!-- 
-	<bean id="webAddressSupplier" class="org.soluvas.commons.OverridingSupplier"
-		destroy-method="destroy">
-		<argument ref="webAddressPackage"/>
-		<argument value="WebAddress"/>
-		<argument><list /></argument>
-	</bean>
-	<service ref="webAddressSupplier" auto-export="interfaces">
-		<service-properties>
-			<entry key="clientId" value="${clientId}" />
-			<entry key="tenantId" value="${tenantId}" />
-			<entry key="tenantEnv" value="${tenantEnv}" />
-			<entry key="suppliedClass" value="org.soluvas.commons.WebAddress" />
-			<entry key="layer" value="application" />
-		</service-properties>
-	</service>
-	<bean id="webAddressXmiTracker" class="org.soluvas.commons.SupplierXmiTracker">
+	<bean id="appManifestXmiTracker" class="org.soluvas.commons.ServiceXmiTracker" destroy-method="destroy">
 		<argument value="org.soluvas.commons.CommonsPackage" />
-		<argument value="org.soluvas.commons.WebAddress" />
-		<argument ref="webAddressSupplier" />
+		<argument value="org.soluvas.commons.AppManifest" />
 	</bean>
 	<bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close">
 		<argument ref="blueprintBundleContext" />
 		<argument value="32" />
-		<argument ref="webAddressXmiTracker" />
+		<argument ref="appManifestXmiTracker" />
 	</bean>
-	-->
 	
  </blueprint>
