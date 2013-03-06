@@ -3,6 +3,8 @@
 package org.soluvas.data;
 
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.Describable;
+import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ResourceAware;
@@ -27,10 +29,42 @@ import org.soluvas.commons.ResourceAware;
  * In addition, all of the above can have multiple cardinality or no value.
  * <!-- end-model-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link org.soluvas.data.Kind#getImageId <em>Image Id</em>}</li>
+ * </ul>
+ * </p>
  *
  * @see org.soluvas.data.DataPackage#getKind()
  * @model
  * @generated
  */
-public interface Kind extends NsPrefixable, BundleAware, NameContainer, ResourceAware {
+public interface Kind extends NsPrefixable, BundleAware, NameContainer, ResourceAware, Imageable, Describable {
+
+	/**
+	 * Returns the value of the '<em><b>Image Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Image Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Image Id</em>' attribute.
+	 * @see #setImageId(String)
+	 * @see org.soluvas.data.DataPackage#getKind_ImageId()
+	 * @model
+	 * @generated
+	 */
+	String getImageId();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Kind#getImageId <em>Image Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Image Id</em>' attribute.
+	 * @see #getImageId()
+	 * @generated
+	 */
+	void setImageId(String value);
 } // Kind

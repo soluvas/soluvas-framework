@@ -361,6 +361,42 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAttribute_VisibleInSimple() {
+		return (EAttribute)attributeEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAttribute_SearchableInQuick() {
+		return (EAttribute)attributeEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAttribute_ImageId() {
+		return (EAttribute)attributeEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAttribute_FieldWidth() {
+		return (EAttribute)attributeEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getValue() {
 		return valueEClass;
@@ -735,6 +771,15 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getKind_ImageId() {
+		return (EAttribute)kindEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getAttributeSemantic() {
 		return attributeSemanticEEnum;
@@ -837,6 +882,10 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		createEAttribute(attributeEClass, ATTRIBUTE__KIND_NAME);
 		createEAttribute(attributeEClass, ATTRIBUTE__INPUT_METHOD);
 		createEAttribute(attributeEClass, ATTRIBUTE__INPUT_UNIT_NAME);
+		createEAttribute(attributeEClass, ATTRIBUTE__VISIBLE_IN_SIMPLE);
+		createEAttribute(attributeEClass, ATTRIBUTE__SEARCHABLE_IN_QUICK);
+		createEAttribute(attributeEClass, ATTRIBUTE__IMAGE_ID);
+		createEAttribute(attributeEClass, ATTRIBUTE__FIELD_WIDTH);
 
 		valueEClass = createEClass(VALUE);
 		createEAttribute(valueEClass, VALUE__SEMANTIC);
@@ -890,6 +939,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		createEReference(dataCatalogEClass, DATA_CATALOG__KINDS);
 
 		kindEClass = createEClass(KIND);
+		createEAttribute(kindEClass, KIND__IMAGE_ID);
 
 		// Create enums
 		attributeSemanticEEnum = createEEnum(ATTRIBUTE_SEMANTIC);
@@ -958,6 +1008,9 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		// Add supertypes to classes
 		attributeEClass.getESuperTypes().add(theCommonsPackage.getNsPrefixable());
 		attributeEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
+		attributeEClass.getESuperTypes().add(theCommonsPackage.getImageable());
+		attributeEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
+		attributeEClass.getESuperTypes().add(theCommonsPackage.getPositionable());
 		g1 = createEGenericType(this.getValue());
 		EGenericType g2 = createEGenericType(theEcorePackage.getEString());
 		g1.getETypeArguments().add(g2);
@@ -1010,6 +1063,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		kindEClass.getESuperTypes().add(theCommonsPackage.getBundleAware());
 		kindEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
 		kindEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		kindEClass.getESuperTypes().add(theCommonsPackage.getImageable());
+		kindEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1021,6 +1076,10 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEAttribute(getAttribute_KindName(), theEcorePackage.getEString(), "kindName", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_InputMethod(), this.getInputMethod(), "inputMethod", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_InputUnitName(), theEcorePackage.getEString(), "inputUnitName", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_VisibleInSimple(), ecorePackage.getEBoolean(), "visibleInSimple", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_SearchableInQuick(), ecorePackage.getEBoolean(), "searchableInQuick", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_FieldWidth(), ecorePackage.getEInt(), "fieldWidth", "20", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(attributeEClass, this.getValue(), "valueOf", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "stringValue", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1108,6 +1167,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEReference(getDataCatalog_Kinds(), this.getKind(), null, "kinds", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kindEClass, Kind.class, "Kind", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getKind_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, Kind.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(attributeSemanticEEnum, AttributeSemantic.class, "AttributeSemantic");
@@ -1202,6 +1262,24 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "This is a String to make it easy to edit using Eclipse Generic XMI editor."
+		   });		
+		addAnnotation
+		  (getAttribute_VisibleInSimple(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Whether this attribute is visible in simple entity listing (e.g. \'ls\' shell command)."
+		   });		
+		addAnnotation
+		  (getAttribute_SearchableInQuick(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Whether this attribute is included in quick searches (e.g. \'search\' shell command.)\n\nNote: If the repository is not code-generated, the search behavior depends on Repository.search() implementation.\nHowever, it is used for generation of \'search\' shell command and soon, search UI."
+		   });		
+		addAnnotation
+		  (getAttribute_FieldWidth(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Field width, in characters. Used by text-based UI like Shell."
 		   });		
 		addAnnotation
 		  (valueEClass, 
@@ -1326,7 +1404,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																						
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																									
 		addAnnotation
 		  (vocabEClass, 
 		   source, 

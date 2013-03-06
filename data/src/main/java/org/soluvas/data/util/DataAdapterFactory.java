@@ -168,6 +168,18 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 				return createNameContainerAdapter();
 			}
 			@Override
+			public Adapter caseImageable(Imageable object) {
+				return createImageableAdapter();
+			}
+			@Override
+			public Adapter caseDescribable(Describable object) {
+				return createDescribableAdapter();
+			}
+			@Override
+			public Adapter casePositionable(Positionable object) {
+				return createPositionableAdapter();
+			}
+			@Override
 			public Adapter caseResourceAware(ResourceAware object) {
 				return createResourceAwareAdapter();
 			}
@@ -176,24 +188,12 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 				return createBundleAwareAdapter();
 			}
 			@Override
-			public Adapter caseDescribable(Describable object) {
-				return createDescribableAdapter();
-			}
-			@Override
 			public Adapter caseIdentifiable(Identifiable object) {
 				return createIdentifiableAdapter();
 			}
 			@Override
 			public Adapter caseSluggable(Sluggable object) {
 				return createSluggableAdapter();
-			}
-			@Override
-			public Adapter caseImageable(Imageable object) {
-				return createImageableAdapter();
-			}
-			@Override
-			public Adapter casePositionable(Positionable object) {
-				return createPositionableAdapter();
 			}
 			@Override
 			public Adapter caseColorable(Colorable object) {

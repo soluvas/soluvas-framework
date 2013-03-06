@@ -4,8 +4,11 @@ package org.soluvas.data;
 
 import javax.measure.unit.Unit;
 
+import org.soluvas.commons.Describable;
+import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.NsPrefixable;
+import org.soluvas.commons.Positionable;
 import org.soluvas.data.impl.AttributeImpl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -54,6 +57,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.data.Attribute#getKindName <em>Kind Name</em>}</li>
  *   <li>{@link org.soluvas.data.Attribute#getInputMethod <em>Input Method</em>}</li>
  *   <li>{@link org.soluvas.data.Attribute#getInputUnitName <em>Input Unit Name</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#isVisibleInSimple <em>Visible In Simple</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#isSearchableInQuick <em>Searchable In Quick</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#getImageId <em>Image Id</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#getFieldWidth <em>Field Width</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,7 +69,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @generated
  */
 @JsonDeserialize(as=AttributeImpl.class)
-public interface Attribute extends NsPrefixable, NameContainer {
+public interface Attribute extends NsPrefixable, NameContainer, Imageable, Describable, Positionable {
 	/**
 	 * Returns the value of the '<em><b>Display Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -269,6 +276,111 @@ public interface Attribute extends NsPrefixable, NameContainer {
 	 * @generated
 	 */
 	void setInputUnitName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Visible In Simple</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Whether this attribute is visible in simple entity listing (e.g. 'ls' shell command).
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Visible In Simple</em>' attribute.
+	 * @see #setVisibleInSimple(boolean)
+	 * @see org.soluvas.data.DataPackage#getAttribute_VisibleInSimple()
+	 * @model
+	 * @generated
+	 */
+	boolean isVisibleInSimple();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#isVisibleInSimple <em>Visible In Simple</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Visible In Simple</em>' attribute.
+	 * @see #isVisibleInSimple()
+	 * @generated
+	 */
+	void setVisibleInSimple(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Searchable In Quick</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Whether this attribute is included in quick searches (e.g. 'search' shell command.)
+	 * 
+	 * Note: If the repository is not code-generated, the search behavior depends on Repository.search() implementation.
+	 * However, it is used for generation of 'search' shell command and soon, search UI.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Searchable In Quick</em>' attribute.
+	 * @see #setSearchableInQuick(boolean)
+	 * @see org.soluvas.data.DataPackage#getAttribute_SearchableInQuick()
+	 * @model
+	 * @generated
+	 */
+	boolean isSearchableInQuick();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#isSearchableInQuick <em>Searchable In Quick</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Searchable In Quick</em>' attribute.
+	 * @see #isSearchableInQuick()
+	 * @generated
+	 */
+	void setSearchableInQuick(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Image Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Image Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Image Id</em>' attribute.
+	 * @see #setImageId(String)
+	 * @see org.soluvas.data.DataPackage#getAttribute_ImageId()
+	 * @model
+	 * @generated
+	 */
+	String getImageId();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#getImageId <em>Image Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Image Id</em>' attribute.
+	 * @see #getImageId()
+	 * @generated
+	 */
+	void setImageId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Field Width</b></em>' attribute.
+	 * The default value is <code>"20"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Field width, in characters. Used by text-based UI like Shell.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Field Width</em>' attribute.
+	 * @see #setFieldWidth(int)
+	 * @see org.soluvas.data.DataPackage#getAttribute_FieldWidth()
+	 * @model default="20"
+	 * @generated
+	 */
+	int getFieldWidth();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#getFieldWidth <em>Field Width</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Field Width</em>' attribute.
+	 * @see #getFieldWidth()
+	 * @generated
+	 */
+	void setFieldWidth(int value);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -96,6 +96,9 @@ public class DataSwitch<T1> extends Switch<T1> {
 				T1 result = caseAttribute(attribute);
 				if (result == null) result = caseNsPrefixable(attribute);
 				if (result == null) result = caseNameContainer(attribute);
+				if (result == null) result = caseImageable(attribute);
+				if (result == null) result = caseDescribable(attribute);
+				if (result == null) result = casePositionable(attribute);
 				if (result == null) result = caseNameable(attribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -240,6 +243,8 @@ public class DataSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseBundleAware(kind);
 				if (result == null) result = caseNameContainer(kind);
 				if (result == null) result = caseResourceAware(kind);
+				if (result == null) result = caseImageable(kind);
+				if (result == null) result = caseDescribable(kind);
 				if (result == null) result = caseNameable(kind);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

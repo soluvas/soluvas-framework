@@ -13,6 +13,8 @@ import org.osgi.framework.Bundle;
 
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Describable;
+import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.ResourceAware;
@@ -34,6 +36,8 @@ import org.soluvas.data.Kind;
  *   <li>{@link org.soluvas.data.impl.KindImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.data.impl.KindImpl#getResourceUri <em>Resource Uri</em>}</li>
  *   <li>{@link org.soluvas.data.impl.KindImpl#getResourceName <em>Resource Name</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.KindImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.KindImpl#getImageId <em>Image Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -159,6 +163,46 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * @ordered
 	 */
 	protected String resourceName = RESOURCE_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getImageId() <em>Image Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImageId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String IMAGE_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getImageId() <em>Image Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImageId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String imageId = IMAGE_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -310,6 +354,48 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.KIND__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getImageId() {
+		return imageId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setImageId(String newImageId) {
+		String oldImageId = imageId;
+		imageId = newImageId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.KIND__IMAGE_ID, oldImageId, imageId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -325,6 +411,10 @@ public class KindImpl extends EObjectImpl implements Kind {
 				return getResourceUri();
 			case DataPackage.KIND__RESOURCE_NAME:
 				return getResourceName();
+			case DataPackage.KIND__DESCRIPTION:
+				return getDescription();
+			case DataPackage.KIND__IMAGE_ID:
+				return getImageId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -354,6 +444,12 @@ public class KindImpl extends EObjectImpl implements Kind {
 				return;
 			case DataPackage.KIND__RESOURCE_NAME:
 				setResourceName((String)newValue);
+				return;
+			case DataPackage.KIND__DESCRIPTION:
+				setDescription((String)newValue);
+				return;
+			case DataPackage.KIND__IMAGE_ID:
+				setImageId((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -385,6 +481,12 @@ public class KindImpl extends EObjectImpl implements Kind {
 			case DataPackage.KIND__RESOURCE_NAME:
 				setResourceName(RESOURCE_NAME_EDEFAULT);
 				return;
+			case DataPackage.KIND__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
+			case DataPackage.KIND__IMAGE_ID:
+				setImageId(IMAGE_ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -409,6 +511,10 @@ public class KindImpl extends EObjectImpl implements Kind {
 				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
 			case DataPackage.KIND__RESOURCE_NAME:
 				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
+			case DataPackage.KIND__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case DataPackage.KIND__IMAGE_ID:
+				return IMAGE_ID_EDEFAULT == null ? imageId != null : !IMAGE_ID_EDEFAULT.equals(imageId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -442,6 +548,17 @@ public class KindImpl extends EObjectImpl implements Kind {
 				case DataPackage.KIND__RESOURCE_TYPE: return CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE;
 				case DataPackage.KIND__RESOURCE_URI: return CommonsPackage.RESOURCE_AWARE__RESOURCE_URI;
 				case DataPackage.KIND__RESOURCE_NAME: return CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == Imageable.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Describable.class) {
+			switch (derivedFeatureID) {
+				case DataPackage.KIND__DESCRIPTION: return CommonsPackage.DESCRIBABLE__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -480,6 +597,17 @@ public class KindImpl extends EObjectImpl implements Kind {
 				default: return -1;
 			}
 		}
+		if (baseClass == Imageable.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Describable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.DESCRIBABLE__DESCRIPTION: return DataPackage.KIND__DESCRIPTION;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -505,6 +633,10 @@ public class KindImpl extends EObjectImpl implements Kind {
 		result.append(resourceUri);
 		result.append(", resourceName: ");
 		result.append(resourceName);
+		result.append(", description: ");
+		result.append(description);
+		result.append(", imageId: ");
+		result.append(imageId);
 		result.append(')');
 		return result.toString();
 	}

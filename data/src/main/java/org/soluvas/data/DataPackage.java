@@ -87,13 +87,31 @@ public interface DataPackage extends EPackage {
 	int ATTRIBUTE__NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__DESCRIPTION = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Positioner</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__POSITIONER = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Display Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__DISPLAY_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 1;
+	int ATTRIBUTE__DISPLAY_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Min Values</b></em>' attribute.
@@ -102,7 +120,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__MIN_VALUES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 2;
+	int ATTRIBUTE__MIN_VALUES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Max Values</b></em>' attribute.
@@ -111,7 +129,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__MAX_VALUES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 3;
+	int ATTRIBUTE__MAX_VALUES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Data Type Name</b></em>' attribute.
@@ -120,7 +138,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__DATA_TYPE_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 4;
+	int ATTRIBUTE__DATA_TYPE_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Kind Ns Prefix</b></em>' attribute.
@@ -129,7 +147,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__KIND_NS_PREFIX = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
+	int ATTRIBUTE__KIND_NS_PREFIX = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Kind Name</b></em>' attribute.
@@ -138,7 +156,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__KIND_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 6;
+	int ATTRIBUTE__KIND_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Input Method</b></em>' attribute.
@@ -147,7 +165,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__INPUT_METHOD = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 7;
+	int ATTRIBUTE__INPUT_METHOD = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Input Unit Name</b></em>' attribute.
@@ -156,7 +174,43 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__INPUT_UNIT_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 8;
+	int ATTRIBUTE__INPUT_UNIT_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Visible In Simple</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__VISIBLE_IN_SIMPLE = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Searchable In Quick</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__SEARCHABLE_IN_QUICK = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__IMAGE_ID = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>Field Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__FIELD_WIDTH = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 14;
 
 	/**
 	 * The number of structural features of the '<em>Attribute</em>' class.
@@ -165,7 +219,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 9;
+	int ATTRIBUTE_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 15;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.ValueImpl <em>Value</em>}' class.
@@ -1254,13 +1308,31 @@ public interface DataPackage extends EPackage {
 	int KIND__RESOURCE_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KIND__DESCRIPTION = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KIND__IMAGE_ID = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Kind</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KIND_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
+	int KIND_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}' enum.
@@ -1431,6 +1503,50 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAttribute_InputUnitName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#isVisibleInSimple <em>Visible In Simple</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Visible In Simple</em>'.
+	 * @see org.soluvas.data.Attribute#isVisibleInSimple()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_VisibleInSimple();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#isSearchableInQuick <em>Searchable In Quick</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Searchable In Quick</em>'.
+	 * @see org.soluvas.data.Attribute#isSearchableInQuick()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_SearchableInQuick();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#getImageId <em>Image Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Image Id</em>'.
+	 * @see org.soluvas.data.Attribute#getImageId()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_ImageId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#getFieldWidth <em>Field Width</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Field Width</em>'.
+	 * @see org.soluvas.data.Attribute#getFieldWidth()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_FieldWidth();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.Value <em>Value</em>}'.
@@ -1836,6 +1952,17 @@ public interface DataPackage extends EPackage {
 	EClass getKind();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Kind#getImageId <em>Image Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Image Id</em>'.
+	 * @see org.soluvas.data.Kind#getImageId()
+	 * @see #getKind()
+	 * @generated
+	 */
+	EAttribute getKind_ImageId();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2005,6 +2132,38 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ATTRIBUTE__INPUT_UNIT_NAME = eINSTANCE.getAttribute_InputUnitName();
+
+		/**
+		 * The meta object literal for the '<em><b>Visible In Simple</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__VISIBLE_IN_SIMPLE = eINSTANCE.getAttribute_VisibleInSimple();
+
+		/**
+		 * The meta object literal for the '<em><b>Searchable In Quick</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__SEARCHABLE_IN_QUICK = eINSTANCE.getAttribute_SearchableInQuick();
+
+		/**
+		 * The meta object literal for the '<em><b>Image Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__IMAGE_ID = eINSTANCE.getAttribute_ImageId();
+
+		/**
+		 * The meta object literal for the '<em><b>Field Width</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__FIELD_WIDTH = eINSTANCE.getAttribute_FieldWidth();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.ValueImpl <em>Value</em>}' class.
@@ -2339,6 +2498,14 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EClass KIND = eINSTANCE.getKind();
+
+		/**
+		 * The meta object literal for the '<em><b>Image Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KIND__IMAGE_ID = eINSTANCE.getKind_ImageId();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}' enum.
