@@ -445,6 +445,8 @@ public class LdapMapper<T> {
 				throw new IllegalArgumentException("Cannot convert '" + value +"' to " + fieldType.getName() +
 						". Valid values are: " + enumConstants);
 			return found;
+		} else if (Boolean.class.isAssignableFrom(fieldType)) {
+			return (R) Boolean.valueOf(value.toString().toLowerCase());
 		} else if (value instanceof byte[]) {
 			// Byte array, usually userPassword
 			return (R) new String((byte[])value, Charsets.UTF_8);
@@ -488,6 +490,8 @@ public class LdapMapper<T> {
 			return ((Enum<?>) value).name().toLowerCase();
 		} else if (DateTime.class.isAssignableFrom(fieldType)) {
 			return new GeneralizedTime(((DateTime)value).toDate()).toGeneralizedTime();
+		} else if (value instanceof Boolean) {
+			return value.toString().toUpperCase();
 		} else {
 			return value.toString();
 		}
