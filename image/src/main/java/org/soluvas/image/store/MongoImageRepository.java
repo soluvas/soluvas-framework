@@ -24,6 +24,7 @@ import javax.annotation.PreDestroy;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.StringUtils;
 import org.bson.BasicBSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,20 +87,6 @@ import com.mongodb.MongoURI;
  */
 public class MongoImageRepository implements ImageRepository {
 
-	private static final Logger log = LoggerFactory.getLogger(MongoImageRepository.class);
-	
-	private String namespace;
-	private String mongoUri;
-	private DBCollection mongoColl;
-	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<String, ImageStyle>();
-	
-	private DavConnector innerConnector;
-	private ImageConnector connector;
-	private ImageTransformer transformer;
-
-	private List<String> mongoHosts;
-	private String mongoDatabase;
-	
 	public class DBObjectToImage implements Function<DBObject, Image> {
 		@Override
 		public Image apply(DBObject input) {
@@ -136,6 +123,28 @@ public class MongoImageRepository implements ImageRepository {
 		}
 		
 	}
+	
+	private static final Logger log = LoggerFactory.getLogger(MongoImageRepository.class);
+	
+	private String namespace;
+	private String mongoUri;
+	private DBCollection mongoColl;
+	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<String, ImageStyle>();
+	
+	private DavConnector innerConnector;
+	private ImageConnector connector;
+	private ImageTransformer transformer;
+
+	private List<String> mongoHosts;
+	private String mongoDatabase;
+	
+	/**
+	 * Map between content type (image/jpeg) to extension (jpg); 
+	 */
+	private static final Map<String, String> supportedContentTypes = ImmutableMap.of(
+			"image/jpeg", "jpg",
+			"image/png", "png",
+			"image/gif", "gif");
 	
 	/**
 	 * Required by CDI apps i.e. LDAP Tools CLI.
@@ -286,10 +295,11 @@ public class MongoImageRepository implements ImageRepository {
 		return connector.getUri(namespace, id, styleCode, styleVariant, extension);
 	}
 	
-	/* (non-Javadoc)
+	/**
+	 * @deprecated use {@link #add(Image)}.
 	 * @see org.soluvas.image.store.ImageRepository#create(java.lang.String, java.io.InputStream, java.lang.String, long, java.lang.String)
 	 */
-	@Override
+	@Override @Deprecated
 	public String create(String fileName, InputStream content, final String contentType, final long length, String name) throws IOException {
 		final File originalFile = File.createTempFile(getNamespace() + "_", "_" + fileName);
 		try {
@@ -366,7 +376,7 @@ public class MongoImageRepository implements ImageRepository {
 			executor.shutdown();
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.soluvas.image.store.ImageRepository#doCreate(java.lang.String, java.io.File, java.lang.String, long, java.lang.String, java.lang.String, boolean)
 	 */
@@ -377,11 +387,18 @@ public class MongoImageRepository implements ImageRepository {
 		final String seoName1 = SlugUtils.generateId(name, 0);
 		final String seoName2 = SlugUtils.generateId(FilenameUtils.getBaseName(originalName), 0);
 		final String imageId = Optional.fromNullable(existingImageId).or( seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2 );
-		final String extension = FilenameUtils.getExtension(originalName);
+		String extension = StringUtils.lowerCase(FilenameUtils.getExtension(originalName));
+		if (Strings.isNullOrEmpty(extension)) {
+			extension = supportedContentTypes.get(contentType);
+			if (Strings.isNullOrEmpty(extension)) {
+				throw new ImageException(String.format("Cannot get extension from originalName=%s for existingImageId=%s originalFile=%s, with unsupported content type %s, supported content types are: %s",
+						originalName, existingImageId, originalFile, contentType, supportedContentTypes.keySet()));
+			}
+		}
 		
-		log.debug("Adding image from {} ({} {} bytes) as {}",
-				originalFile.getName(), contentType, length, imageId );
-		
+		log.debug("Adding image from {} ({} {} bytes) as {}, originalName={} extension={}",
+				originalFile.getName(), contentType, length, imageId,
+				originalName, extension);
 		try {
 			// <del>Upload originals last, so that unreadable images aren't uploaded at all</del>
 			// Originals must be uploaded first, because Blitline transformer requires them!
