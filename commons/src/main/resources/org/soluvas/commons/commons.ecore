@@ -753,4 +753,15 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StyleConfiguration" abstract="true"
+      interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Used by {@link org.soluvas.web.site.SiteResource} to get the current Mall's default style."/>
+    </eAnnotations>
+    <eOperations name="getDefaultStyle" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Default style name for Wicket, e.g. &quot;fluid&quot; (Cinta Lama's original theme, created by Ahmad Syarif Farsiado)."/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
 </ecore:EPackage>

@@ -1210,6 +1210,26 @@
     <element xmi:type="ecore:EClass" href="commons.ecore#//TranslationEntry"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AOiaEoIpEeKSN8FOWsdSnw" x="6420" y="468"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_kSC0oIb3EeKsK4i2oWomjQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_kSDbsIb3EeKsK4i2oWomjQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_kSECwIb3EeKsK4i2oWomjQ" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_kSECwYb3EeKsK4i2oWomjQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_kSECwob3EeKsK4i2oWomjQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_kSECw4b3EeKsK4i2oWomjQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_kSEp0Ib3EeKsK4i2oWomjQ" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_nTLDUIb3EeKsK4i2oWomjQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="commons.ecore#//StyleConfiguration/getDefaultStyle"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_nTLDUYb3EeKsK4i2oWomjQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_kSEp0Yb3EeKsK4i2oWomjQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_kSEp0ob3EeKsK4i2oWomjQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_kSEp04b3EeKsK4i2oWomjQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_kSC0oYb3EeKsK4i2oWomjQ" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="commons.ecore#//StyleConfiguration"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kSC0oob3EeKsK4i2oWomjQ" x="298" y="294"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Hn9XoSQDEeKL8qHxNHEWSw"/>
   <element xmi:type="ecore:EPackage" href="commons.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_Rrm-sCSDEeKyUdMfH4dSfg" type="3003" source="_J57LECSDEeKyUdMfH4dSfg" target="_aOshcSSAEeKyUdMfH4dSfg">
