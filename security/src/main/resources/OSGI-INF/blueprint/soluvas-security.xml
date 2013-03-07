@@ -7,10 +7,13 @@
 
 	<cm:property-placeholder persistent-id="org.soluvas" update-strategy="none">
 		<cm:default-properties>
+		<!-- 			FIXME: Hard coded -->
 			<!-- App Session -->
-			<cm:property name="securityMongoUri"			value="mongodb://127.0.0.1:27017/berbatik_dev" />
+<!-- 			<cm:property name="securityMongoUri"			value="mongodb://127.0.0.1:27017/berbatik_dev" /> -->
+			<cm:property name="securityMongoUri"			value="mongodb://127.0.0.1:27017/tuneeca_dev" />
 			<!-- Auth -->
-			<cm:property name="mallLdapBaseDn"				value="dc=dev,dc=berbatik,dc=com" />
+<!-- 			<cm:property name="mallLdapBaseDn"				value="dc=dev,dc=berbatik,dc=com" /> -->
+			<cm:property name="mallLdapBaseDn"				value="dc=dev,dc=tuneeca,dc=com" />
 		</cm:default-properties>
 	</cm:property-placeholder>
 
