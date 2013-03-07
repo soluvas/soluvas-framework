@@ -30,16 +30,48 @@ public class BigDecimalConverterTest {
 
 	@Test
 	public void fromProduct() {
-		BigDecimalProduct product = new BigDecimalProduct(new BigDecimal(2500));
-		DBObject dbo = morphia.toDBObject(product);
+		final BigDecimalProduct product = new BigDecimalProduct(new BigDecimal(2500));
+		final DBObject dbo = morphia.toDBObject(product);
 		assertNotNull(dbo);
-		assertEquals("2500", dbo.get("price"));
+		assertEquals(2500.0d, dbo.get("price"));
 	}
 
 	@Test
-	public void toProduct() {
+	public void fromStringToProduct() {
 		final BasicDBObject dbo = new BasicDBObject(ImmutableMap.of("_id", "1", "price", "12900"));
-		BigDecimalProduct product = morphia.fromDBObject(BigDecimalProduct.class, dbo);
+		final BigDecimalProduct product = morphia.fromDBObject(BigDecimalProduct.class, dbo);
+		assertNotNull(product);
+		assertEquals(new BigDecimal(12900), product.getPrice());
+	}
+
+	@Test
+	public void fromIntToProduct() {
+		final BasicDBObject dbo = new BasicDBObject(ImmutableMap.of("_id", "1", "price", 12900));
+		final BigDecimalProduct product = morphia.fromDBObject(BigDecimalProduct.class, dbo);
+		assertNotNull(product);
+		assertEquals(new BigDecimal(12900), product.getPrice());
+	}
+
+	@Test
+	public void fromLongToProduct() {
+		final BasicDBObject dbo = new BasicDBObject(ImmutableMap.of("_id", "1", "price", 12900L));
+		final BigDecimalProduct product = morphia.fromDBObject(BigDecimalProduct.class, dbo);
+		assertNotNull(product);
+		assertEquals(new BigDecimal(12900), product.getPrice());
+	}
+
+	@Test
+	public void fromFloatToProduct() {
+		final BasicDBObject dbo = new BasicDBObject(ImmutableMap.of("_id", "1", "price", 12900.0f));
+		final BigDecimalProduct product = morphia.fromDBObject(BigDecimalProduct.class, dbo);
+		assertNotNull(product);
+		assertEquals(new BigDecimal(12900), product.getPrice());
+	}
+
+	@Test
+	public void fromDoubleToProduct() {
+		final BasicDBObject dbo = new BasicDBObject(ImmutableMap.of("_id", "1", "price", 12900.0d));
+		final BigDecimalProduct product = morphia.fromDBObject(BigDecimalProduct.class, dbo);
 		assertNotNull(product);
 		assertEquals(new BigDecimal(12900), product.getPrice());
 	}

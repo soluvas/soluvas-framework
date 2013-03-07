@@ -46,6 +46,8 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 			return new BigDecimal((Integer)fromDBObject);
 		else if (fromDBObject instanceof Double)
 			return new BigDecimal((Double)fromDBObject);
+		else if (fromDBObject instanceof Float)
+			return new BigDecimal((Float)fromDBObject);
 		else
 			return new BigDecimal((String)fromDBObject);
 	}
