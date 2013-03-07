@@ -2,6 +2,7 @@ package org.soluvas.ldap;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 import org.apache.directory.ldap.client.api.LdapConnectionPool;
@@ -102,6 +103,40 @@ public class PooledLdapRepositoryTest {
 		Assert.assertNotNull(foundLiz);
 		Assert.assertEquals("liz", foundLiz.getId());
 		Assert.assertEquals("Liz Lemon", foundLiz.getName());
+	}
+
+	@Test
+	public void modifyWithRename() {
+		final String oldId = "liz";
+		final String newId = "lix";
+		final String newName = UUID.randomUUID().toString();
+		
+		final SocialPerson liz = personRepo.findOne(oldId);
+		log.info("Input Person: {}", liz);
+		liz.setId(newId);
+		liz.setName(newName);
+		
+		final SocialPerson newLiz = personRepo.modify(oldId, liz);
+		Assert.assertNotNull(newLiz);
+		Assert.assertEquals(newId, newLiz.getId());
+		Assert.assertEquals(newName, newLiz.getName());
+	}
+
+	@Test
+	public void modifyWithRename2() {
+		final String oldId = "lix";
+		final String newId = "liz";
+		final String newName = UUID.randomUUID().toString();
+		
+		final SocialPerson liz = personRepo.findOne(oldId);
+		log.info("Input Person: {}", liz);
+		liz.setId(newId);
+		liz.setName(newName);
+		
+		final SocialPerson newLiz = personRepo.modify(oldId, liz);
+		Assert.assertNotNull(newLiz);
+		Assert.assertEquals(newId, newLiz.getId());
+		Assert.assertEquals(newName, newLiz.getName());
 	}
 
 	@Test(expected=Exception.class)

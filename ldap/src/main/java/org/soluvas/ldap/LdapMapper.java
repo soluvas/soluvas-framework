@@ -332,6 +332,11 @@ public class LdapMapper<T> {
 		return getDn(getRdnValue(obj), clazz, baseDn);
 	}
 	
+	/**
+	 * Returns the RDN value (aka "ID") for the LDAP entity object.
+	 * @param obj
+	 * @return
+	 */
 	@Nullable
 	public String getRdnValue(@Nonnull final Object obj) {
 		final Class<? extends Object> clazz = obj.getClass();

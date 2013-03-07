@@ -189,7 +189,7 @@ public class LdapUtils {
 			} catch (Exception e1) {
 				log.warn("Cannot invalidate LDAP connection after " + e + " exception", e1);
 			}
-			throw new RuntimeException("Cannot perform LDAP operation", e);
+			throw new RuntimeException("Cannot perform LDAP operation: " + e, e);
 		}
 	}
 	

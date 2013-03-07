@@ -2,6 +2,8 @@ package org.soluvas.ldap;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.apache.directory.api.ldap.model.entry.Entry;
 import org.apache.directory.api.ldap.model.exception.LdapException;
 import org.apache.directory.api.ldap.model.name.Dn;
@@ -31,6 +33,15 @@ public interface LdapRepository<T> extends EntityLookup<T, String> {
 	 * @throws LdapException
 	 */
 	T modify(T obj);
+
+	/**
+	 * Modifies a given entity. Some repositories may allow modifying the {@code id} attribute.
+	 * 
+	 * @param entities
+	 * @return the modified entities
+	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
+	 */
+	public abstract T modify(@Nonnull String id, @Nonnull T entity);
 
 	/**
 	 * Delete an LDAP entry.

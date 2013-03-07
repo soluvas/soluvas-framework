@@ -13,6 +13,7 @@ import org.apache.directory.api.ldap.model.filter.FilterEncoder;
 import org.apache.directory.api.ldap.model.message.ModifyRequest;
 import org.apache.directory.api.ldap.model.message.ModifyResponse;
 import org.apache.directory.api.ldap.model.message.SearchScope;
+import org.apache.directory.api.ldap.model.name.Dn;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,39 +97,52 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	/**
 	 * Modify an LDAP {@link Entry} from typed POJO object.
 	 * <tt>uid</tt> attribute cannot be replaced.
-	 * @param obj
+	 * @param entity
 	 * @return
 	 * @throws LdapException
 	 */
 	@Override @Nonnull
-	public T modify(@Nonnull final T obj) {
-		Preconditions.checkNotNull(obj, "LDAP object to modify cannot be null");
-		final String dn = mapper.getDn(obj, baseDn);
-		final String rdnValue = mapper.getRdnValue(obj);
-		log.info("Modify LDAP Entity {} with ID {}: {}", getEntityClass().getName(), rdnValue, dn); 
+	public T modify(@Nonnull final T entity) {
+		final String rdnValue = mapper.getRdnValue(entity);
+		return modify(rdnValue, entity);
+	}
+	
+	@Override
+	public T modify(String id, final T entity) {
+		Preconditions.checkNotNull(entity, "LDAP object to modify cannot be null");
+//		final String dn = mapper.getDn(entity, baseDn);
+		final String oldDn = mapper.getDn(id, entityClass, baseDn);
+		log.info("Modify LDAP Entity {} with ID {} at {}", getEntityClass().getName(), id, oldDn); 
 		final T modifiedObj = withConnection(new Function<LdapConnection, T>() {
 			@Override @Nullable
 			public T apply(@Nullable LdapConnection conn) {
 				try {
-					final Entry existingEntry = conn.lookup(dn);
+					final String newDn = mapper.getDn(entity, baseDn);
+					if (!oldDn.equals(newDn)) {
+						final String newRdn = new Dn(newDn).getRdn().toString();
+						log.info("Renaming LDAP Entity {} to {}", oldDn, newRdn);
+						conn.rename(oldDn, newRdn);
+					}
+					
+					final Entry existingEntry = conn.lookup(newDn);
 					if (existingEntry == null) {
-						throw new RuntimeException("Cannot find LDAP Entry to modify: " + dn);
+						throw new RuntimeException("Cannot find LDAP Entry to modify: " + newDn);
 					}
 					final T existing = mapper.fromEntry(existingEntry, entityClass);
-					final ModifyRequest modifyRequest = mapper.createModifyRequest(existingEntry, existing, obj);
+					final ModifyRequest modifyRequest = mapper.createModifyRequest(existingEntry, existing, entity);
 					if (modifyRequest.getModifications().isEmpty()) {
-						log.info("Not modifying unmodified LDAP Entry {}", dn);
+						log.info("Not modifying unmodified LDAP Entry {}", newDn);
 						return existing;
 					} else {
-						log.info("Modifying LDAP Entry {} with {}", dn, modifyRequest);
+						log.info("Modifying LDAP Entry {} with {}", newDn, modifyRequest);
 						final ModifyResponse modifyResponse = conn.modify(modifyRequest);
-						log.info("Modified LDAP Entry {} returned {}", dn, modifyResponse);
-						final Entry modifiedEntry = conn.lookup(dn);
+						log.info("Modified LDAP Entry {} returned: {}", newDn, modifyResponse);
+						final Entry modifiedEntry = conn.lookup(newDn);
 						final T newObj = mapper.fromEntry(modifiedEntry, entityClass);
 						return newObj;
 					}
 				} catch (LdapException e) {
-					throw new RuntimeException("Error updating LDAP Entry " + dn, e);
+					throw new RuntimeException("Error updating LDAP Entry " + oldDn, e);
 				}
 			}
 		});
