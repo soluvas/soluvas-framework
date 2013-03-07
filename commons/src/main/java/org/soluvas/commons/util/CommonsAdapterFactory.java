@@ -241,6 +241,10 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createTranslationEntryAdapter();
 			}
 			@Override
+			public Adapter caseStyleConfiguration(StyleConfiguration object) {
+				return createStyleConfigurationAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -859,6 +863,20 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTranslationEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.StyleConfiguration <em>Style Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.StyleConfiguration
+	 * @generated
+	 */
+	public Adapter createStyleConfigurationAdapter() {
 		return null;
 	}
 

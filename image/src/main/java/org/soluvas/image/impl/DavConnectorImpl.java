@@ -153,10 +153,10 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	 */
 	@Override
 	public void delete(String namespace, String imageId, String styleCode, String styleVariant, String extension) {
-		String uri = getImageDavUri(namespace, imageId, styleCode, styleVariant, extension);
-		HttpDelete deleteOriginal = new HttpDelete(uri);
+		final String uri = getImageDavUri(namespace, imageId, styleCode, styleVariant, extension);
+		final HttpDelete deleteOriginal = new HttpDelete(uri);
 		try {
-			HttpResponse response = client.execute(davHost, deleteOriginal, createHttpContext());
+			final HttpResponse response = client.execute(davHost, deleteOriginal, createHttpContext());
 			try {
 				final StatusLine statusLine = response.getStatusLine();
 				if (statusLine.getStatusCode() >= 200 && statusLine.getStatusCode() < 300)
@@ -327,11 +327,11 @@ and uploading again, and because of HTTP pipelining which isn't supported by ngi
 	public UploadedImage upload(String namespace, String imageId,
 			String styleCode, String styleVariant, String extension, File file,
 			String contentType) {
-		String uri = getImageDavUri(namespace, imageId, styleCode, styleVariant, extension);
+		final String uri = getImageDavUri(namespace, imageId, styleCode, styleVariant, extension);
 		try {
 			uploadFileDav(uri, file, contentType);
-			String originUri = getUri(namespace, imageId, styleCode, styleVariant, extension);
-			UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
+			final String originUri = getUri(namespace, imageId, styleCode, styleVariant, extension);
+			final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
 			uploadedImage.setOriginUri(originUri);
 			uploadedImage.setUri(originUri);
 			return uploadedImage;

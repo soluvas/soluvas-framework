@@ -79,6 +79,7 @@ import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.ShellProgressMonitor;
 import org.soluvas.commons.Sluggable;
+import org.soluvas.commons.StyleConfiguration;
 import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.Translatable;
 import org.soluvas.commons.Translation;
@@ -396,6 +397,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass translationEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass styleConfigurationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1725,6 +1733,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getStyleConfiguration() {
+		return styleConfigurationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -2179,6 +2196,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEReference(translationEntryEClass, TRANSLATION_ENTRY__VALUE);
 		createEAttribute(translationEntryEClass, TRANSLATION_ENTRY__KEY);
 
+		styleConfigurationEClass = createEClass(STYLE_CONFIGURATION);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -2586,6 +2605,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEClass(translationEntryEClass, Map.Entry.class, "TranslationEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTranslationEntry_Value(), this.getTranslation(), null, "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTranslationEntry_Key(), theEcorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(styleConfigurationEClass, StyleConfiguration.class, "StyleConfiguration", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(styleConfigurationEClass, theEcorePackage.getEString(), "getDefaultStyle", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -3245,6 +3268,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Language of the translation."
+		   });		
+		addAnnotation
+		  (styleConfigurationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Used by {@link org.soluvas.web.site.SiteResource} to get the current Mall\'s default style."
+		   });		
+		addAnnotation
+		  (styleConfigurationEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Default style name for Wicket, e.g. \"fluid\" (Cinta Lama\'s original theme, created by Ahmad Syarif Farsiado)."
 		   });
 	}
 	
