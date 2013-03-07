@@ -168,8 +168,10 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 							email.getSubject());
 					return result;
 				} catch (org.apache.commons.mail.EmailException e) {
-					throw new EmailException("Cannot send email from " + email.getFromAddress() + " to " +
+					log.error("Cannot send email from " + email.getFromAddress() + " to " +
 							email.getToAddresses() + " subject: " + email.getSubject(), e);
+					// cannot be null because ImmutableList
+					return "";
 				}
 			}
 		}));
