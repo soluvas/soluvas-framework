@@ -8,8 +8,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -21,11 +19,7 @@ import org.apache.directory.api.ldap.model.exception.LdapException;
 import org.apache.directory.api.ldap.model.exception.LdapInvalidAttributeValueException;
 import org.apache.directory.api.ldap.model.exception.LdapInvalidDnException;
 import org.apache.directory.api.ldap.model.message.ModifyRequest;
-import org.apache.directory.api.ldap.model.schema.SchemaManager;
-import org.apache.directory.api.ldap.model.schema.registries.Schema;
-import org.apache.directory.api.ldap.model.schema.registries.SchemaLoader;
-import org.apache.directory.api.ldap.schemaloader.LdifSchemaLoader;
-import org.apache.directory.api.ldap.schemamanager.impl.DefaultSchemaManager;
+import org.hamcrest.Matchers;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -38,7 +32,6 @@ import org.soluvas.ldap.SocialPerson.Gender;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Ordering;
 
 /**
  * Test mapping of {@link Person} to {@link Entry} and back.
@@ -133,11 +126,11 @@ public class LdapMapperTest {
 	}
 	
 	@Test public void mapsSubclassToEntry() throws Exception {
-		final SchemaLoader customSchemaLoader = new LdifSchemaLoader(new File("/var/lib/apacheds-2.0.0-M7/default/partitions/schema/"));
-		final SchemaManager customSchemaMgr = new DefaultSchemaManager(customSchemaLoader);
-		final Collection<Schema> schemas = customSchemaLoader.getAllEnabled();
-		log.info("Loaded {} LDAP schemas: {}", schemas.size(), schemas);
-		customSchemaMgr.enable(schemas.toArray(new Schema[] {}));
+//		final SchemaLoader customSchemaLoader = new LdifSchemaLoader(new File("/var/lib/apacheds-2.0.0-M7/default/partitions/schema/"));
+//		final SchemaManager customSchemaMgr = new DefaultSchemaManager(customSchemaLoader);
+//		final Collection<Schema> schemas = customSchemaLoader.getAllEnabled();
+//		log.info("Loaded {} LDAP schemas: {}", schemas.size(), schemas);
+//		customSchemaMgr.enable(schemas.toArray(new Schema[] {}));
 		final LdapMapper<SocialPerson> customMapper = new LdapMapper<SocialPerson>();
 		
 		SocialPerson hendy = new SocialPerson("hendy", "hendy.irawan", "Hendy", "Irawan", Gender.MALE);
@@ -287,7 +280,8 @@ public class LdapMapperTest {
 			"primaryShippingAddress" );
 		final Set<String> attributeIds = mapper.getAttributeIds(SocialPerson.class);
 		log.info("Attribute IDs of SocialPerson: {}", attributeIds);
-		assertEquals(Ordering.natural().immutableSortedCopy(expectedAttributeIds), Ordering.natural().immutableSortedCopy(attributeIds));
+		assertThat(attributeIds, Matchers.hasItems(expectedAttributeIds.toArray(new String[] {})));
+//		assertEquals(Ordering.natural().immutableSortedCopy(expectedAttributeIds), Ordering.natural().immutableSortedCopy(attributeIds));
 	}
 
 	@Test public void mapsLongToEntry() throws LdapInvalidAttributeValueException {
@@ -686,7 +680,7 @@ public class LdapMapperTest {
 		Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
 		log.info("Output Entry: {}", entry);
 
-		assertEquals("19831213170000Z", entry.get("birthDate").getString());//, "19831213170000Z");
+		assertEquals("19831213170000.000Z", entry.get("birthDate").getString());//, "19831213170000Z");
 	}
 	
 	@Test
@@ -715,6 +709,90 @@ public class LdapMapperTest {
 		
 		final Entry personEntry = mapper.toEntry(hendy, "ou=users");
 		assertEquals("IDR", personEntry.get("currency").getString());
+	}
+	
+	@Test
+	public void canMapFromBooleanTrue() throws LdapException {
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("cn", "Hendy Irawan");
+		existing.put("newsletterSubscriptionEnabled", "TRUE");
+		log.info("Input Entry: {}", existing);
+		
+		final SocialPerson person = mapper.fromEntry(existing, SocialPerson.class);
+		assertEquals(true, person.getNewsletterSubscriptionEnabled());
+	}
+	
+	@Test
+	public void canMapFromBooleanTrue2() throws LdapException {
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("cn", "Hendy Irawan");
+		existing.put("newsletterSubscriptionEnabled", "true");
+		log.info("Input Entry: {}", existing);
+		
+		final SocialPerson person = mapper.fromEntry(existing, SocialPerson.class);
+		assertEquals(true, person.getNewsletterSubscriptionEnabled());
+	}
+	
+	@Test
+	public void canMapToBooleanTrue() throws LdapException {
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
+		final SocialPerson hendy = new SocialPerson("hendy", "hendy", "Hendy", "Irawan");
+		hendy.setNewsletterSubscriptionEnabled(true);
+		log.info("Input Person: {}", hendy);
+		
+		final Entry personEntry = mapper.toEntry(hendy, "ou=users");
+		assertEquals("TRUE", personEntry.get("newsletterSubscriptionEnabled").getString());
+	}
+	
+	@Test
+	public void canMapFromBooleanFalse() throws LdapException {
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("cn", "Hendy Irawan");
+		existing.put("newsletterSubscriptionEnabled", "FALSE");
+		log.info("Input Entry: {}", existing);
+		
+		final SocialPerson person = mapper.fromEntry(existing, SocialPerson.class);
+		assertEquals(false, person.getNewsletterSubscriptionEnabled());
+	}
+	
+	@Test
+	public void canMapFromBooleanFalse2() throws LdapException {
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("cn", "Hendy Irawan");
+		existing.put("newsletterSubscriptionEnabled", "false");
+		log.info("Input Entry: {}", existing);
+		
+		final SocialPerson person = mapper.fromEntry(existing, SocialPerson.class);
+		assertEquals(false, person.getNewsletterSubscriptionEnabled());
+	}
+	
+	@Test
+	public void canMapToBooleanFalse() throws LdapException {
+		final LdapMapper<SocialPerson> mapper = new LdapMapper<SocialPerson>();
+		
+		final SocialPerson hendy = new SocialPerson("hendy", "hendy", "Hendy", "Irawan");
+		hendy.setNewsletterSubscriptionEnabled(false);
+		log.info("Input Person: {}", hendy);
+		
+		final Entry personEntry = mapper.toEntry(hendy, "ou=users");
+		assertEquals("FALSE", personEntry.get("newsletterSubscriptionEnabled").getString());
 	}
 	
 }
