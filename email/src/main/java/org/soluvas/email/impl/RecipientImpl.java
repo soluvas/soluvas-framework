@@ -2,13 +2,13 @@
  */
 package org.soluvas.email.impl;
 
+import java.util.HashSet;
+
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.soluvas.email.EmailFormat;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Recipient;
@@ -198,6 +198,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getEmail() {
 		return email;
 	}
@@ -207,6 +208,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEmail(String newEmail) {
 		String oldEmail = email;
 		email = newEmail;
@@ -219,6 +221,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -228,6 +231,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -240,6 +244,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFirstName() {
 		return firstName;
 	}
@@ -249,6 +254,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFirstName(String newFirstName) {
 		String oldFirstName = firstName;
 		firstName = newFirstName;
@@ -261,6 +267,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLastName() {
 		return lastName;
 	}
@@ -270,6 +277,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLastName(String newLastName) {
 		String oldLastName = lastName;
 		lastName = newLastName;
@@ -282,6 +290,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EmailFormat getPreferredFormat() {
 		return preferredFormat;
 	}
@@ -291,6 +300,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPreferredFormat(EmailFormat newPreferredFormat) {
 		EmailFormat oldPreferredFormat = preferredFormat;
 		preferredFormat = newPreferredFormat == null ? PREFERRED_FORMAT_EDEFAULT : newPreferredFormat;
@@ -303,6 +313,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public WebSecurity getPreferredWebSecurity() {
 		return preferredWebSecurity;
 	}
@@ -312,6 +323,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPreferredWebSecurity(WebSecurity newPreferredWebSecurity) {
 		WebSecurity oldPreferredWebSecurity = preferredWebSecurity;
 		preferredWebSecurity = newPreferredWebSecurity == null ? PREFERRED_WEB_SECURITY_EDEFAULT : newPreferredWebSecurity;
@@ -324,6 +336,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getRoleName() {
 		return roleName;
 	}
@@ -333,6 +346,7 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRoleName(String newRoleName) {
 		String oldRoleName = roleName;
 		roleName = newRoleName;
@@ -484,6 +498,18 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 		result.append(preferredWebSecurity);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * Hash code is based on lowercased email, so can be used in a {@link HashSet}.
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : StringUtils.lowerCase(email).hashCode());
+		return result;
 	}
 
 } //RecipientImpl

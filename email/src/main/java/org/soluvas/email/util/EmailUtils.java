@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.StringUtils;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
@@ -15,6 +16,7 @@ import org.soluvas.email.Layout;
 import org.soluvas.email.LayoutType;
 import org.soluvas.email.Page;
 import org.soluvas.email.PageType;
+import org.soluvas.email.Recipient;
 import org.soluvas.email.Sender;
 import org.soluvas.email.SenderType;
 
@@ -142,4 +144,19 @@ public class EmailUtils {
 		}
 	}
 
+	/**
+	 * Check if a Recipient with the specified email already in a list of {@link Recipient}s. 
+	 * @param recipients
+	 * @param needle
+	 * @return
+	 */
+	public static boolean hasRecipient(Iterable<Recipient> recipients, final String needle) {
+		return Iterables.any(recipients, new Predicate<Recipient>() {
+			@Override
+			public boolean apply(@Nullable Recipient input) {
+				return StringUtils.equalsIgnoreCase(input.getEmail(), needle);
+			}
+		});
+	}
+	
 }

@@ -28,6 +28,7 @@ import org.soluvas.commons.SerializableEObject;
  * @generated
  */
 public interface Recipient extends SerializableEObject {
+	
 	/**
 	 * Returns the value of the '<em><b>Email</b></em>' attribute.
 	 * <!-- begin-user-doc -->

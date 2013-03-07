@@ -56,6 +56,8 @@ public interface EmailFactory extends EFactory {
 	 * @generated
 	 */
 	Recipient createRecipient();
+	
+	Recipient createRecipient(String name, String email, String roleName);
 
 	/**
 	 * Returns a new object of class '<em>Manager</em>'.
