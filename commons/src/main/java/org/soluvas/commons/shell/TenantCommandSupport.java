@@ -138,10 +138,10 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 				log.trace("Field {}#{} needs Supplier<{}> for tenantId={} tenantEnv={} namespace={} filter: {}", new Object[] {
 						componentId, field.getName(), suppliedClass.getName(), tenantId, tenantEnv, namespace, additionalFilter });
 				final String suppliedClassFilter = supplied != null ? "(suppliedClass=" + field.getType().getName() + ")(layer=application)" : "";
-				final String filter = "(&" + String.format("(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))",
-						tenantId, tenantEnv)
-					+ namespaceFilter + suppliedClassFilter + additionalFilter + ")";
-				
+//				final String filter = "(&" + String.format("(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))",
+//						tenantId, tenantEnv)
+//					+ namespaceFilter + suppliedClassFilter + additionalFilter + ")";
+				String filter = "(&" + namespaceFilter + additionalFilter + ")";
 				final Collection<ServiceReference<Supplier>> foundServiceRefs;
 				try {
 					foundServiceRefs = bundleContext.getServiceReferences(Supplier.class, filter);

@@ -79,9 +79,10 @@ public class TenantUtils {
 		final String namespaceFilter = !Strings.isNullOrEmpty(namespace) ? "(namespace="
 				+ namespace + ")"
 				: "";
-		final String realFilter = "(&(|(tenantId=\\*)(tenantId=" + tenant.getTenantId() + "))(|(tenantEnv=\\*)(tenantEnv=" + tenant.getTenantEnv() + "))"
-				+ namespaceFilter + additionalFilter + ")";
-
+//		final String realFilter = "(&(|(tenantId=\\*)(tenantId=" + tenant.getTenantId() + "))(|(tenantEnv=\\*)(tenantEnv=" + tenant.getTenantEnv() + "))"
+//				+ namespaceFilter + additionalFilter + ")";
+		
+		String realFilter = "(&" + namespaceFilter + additionalFilter + ")";
 		try {
 			final Collection<ServiceReference<T>> foundRefs = bundleContext
 					.getServiceReferences(iface, realFilter);
