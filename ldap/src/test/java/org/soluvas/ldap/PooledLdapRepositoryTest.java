@@ -125,18 +125,22 @@ public class PooledLdapRepositoryTest {
 	@Test
 	public void modifyWithRename2() {
 		final String oldId = "lix";
-		final String newId = "liz";
-		final String newName = UUID.randomUUID().toString();
+		final String newId = "rudi";
+		final String newName = "Rudi Wijaya";
+		final String slug = "rudi123";
+		final String primaryEmail = "rudi@yahoo.com";
 		
-		final SocialPerson liz = personRepo.findOne(oldId);
-		log.info("Input Person: {}", liz);
-		liz.setId(newId);
-		liz.setName(newName);
+		final SocialPerson oldTONew = personRepo.findOne(oldId);
+		log.info("Input Person: {}", oldTONew);
+		oldTONew.setId(newId);
+		oldTONew.setName(newName);
+		oldTONew.setSlug(slug);
+		oldTONew.setPrimaryEmail(primaryEmail);
 		
-		final SocialPerson newLiz = personRepo.modify(oldId, liz);
-		Assert.assertNotNull(newLiz);
-		Assert.assertEquals(newId, newLiz.getId());
-		Assert.assertEquals(newName, newLiz.getName());
+		final SocialPerson newLix = personRepo.modify(oldId, oldTONew);
+		Assert.assertNotNull(newLix);
+		Assert.assertEquals(newId, newLix.getId());
+		Assert.assertEquals(newName, newLix.getName());
 	}
 
 	@Test(expected=Exception.class)
