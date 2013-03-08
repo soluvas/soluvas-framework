@@ -513,6 +513,50 @@ public class LdapMapperTest {
 		assertEquals("cn", modification.getAttribute().getUpId());
 	}
 
+	@Test public void addMultiAttributeModifyRequest() throws LdapException {
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		log.info("Existing Entry: {}", existing);
+		
+		final Person oldObj = mapper.fromEntry(existing, Person.class);
+		final Person newObj = mapper.fromEntry(existing, Person.class);
+		newObj.setEmails(ImmutableSet.of("hendy@member.dev.aksimata.com"));
+		
+		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertThat(request.getModifications(), hasSize(1));
+		final Modification modification = request.getModifications().iterator().next();
+		assertEquals(ModificationOperation.ADD_ATTRIBUTE, modification.getOperation());
+		assertEquals("mail", modification.getAttribute().getUpId());
+		assertEquals("hendy@member.dev.aksimata.com", modification.getAttribute().getString());
+	}
+
+	@Test public void removeMultiAttributeModifyRequest1() throws LdapException {
+		final LdapMapper<Person> mapper = new LdapMapper<Person>();
+		
+		final Entry existing = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		existing.put("objectClass", "organizationalPerson", "extensibleObject", "inetOrgPerson", "uidObject");
+		existing.put("uid", "hendy");
+		existing.put("mail", "hendy@member.dev.aksimata.com");
+		log.info("Existing Entry: {}", existing);
+		
+		final Person oldObj = mapper.fromEntry(existing, Person.class);
+		final Person newObj = mapper.fromEntry(existing, Person.class);
+		newObj.setEmails(ImmutableSet.<String>of());
+		
+		final ModifyRequest request = mapper.createModifyRequest(existing, oldObj, newObj);
+		log.info("Modify request: {}", request);
+		assertNotNull(request);
+		assertThat(request.getModifications(), hasSize(1));
+		final Modification modification = request.getModifications().iterator().next();
+		assertEquals(ModificationOperation.REMOVE_ATTRIBUTE, modification.getOperation());
+		assertEquals("mail", modification.getAttribute().getUpId());
+	}
+
 	@Test public void removeAttributeModifyRequest() throws LdapException {
 		final LdapMapper<Person> mapper = new LdapMapper<Person>();
 		

@@ -528,8 +528,8 @@ public class LdapMapper<T> {
 			log.debug("Adding {} new objectClass-es to {}: {}", newObjectClasses.size(), existingEntry.getDn().getName(), newObjectClasses);
 		}
 		// Attributes
-		try {
-			for (final LdapAttributeMapping attr : mapping.getAttributes()) {
+		for (final LdapAttributeMapping attr : mapping.getAttributes()) {
+			try {
 				final Object oldValue = PropertyUtils.getProperty(existing, attr.getField().getName());
 				final Object newValue = PropertyUtils.getProperty(up, attr.getField().getName());
 				if (Objects.equal(oldValue, newValue))
@@ -540,28 +540,30 @@ public class LdapMapper<T> {
 							" but changing RDN is not supported");
 				}
 				if (attr.isMulti()) {
-					final Set<?> newValues = (Set<?>) newValue;
-					final Set<?> oldValues = (Set<?>) oldValue;
+					final Set<?> newValues = newValue != null ? (Set<?>) newValue : ImmutableSet.of();
+					final Set<?> oldValues = oldValue != null ? (Set<?>) oldValue : ImmutableSet.of();
 					// Welcome guys
 					final SetView<?> addedValues = Sets.difference(newValues, oldValues);
-					final String[] addedValueArr = Iterables.toArray(Iterables.transform(addedValues, new Function<Object, String>() {
-						@Override
-						@Nullable
-						public String apply(@Nullable Object input) {
-							return convertFromPropertyValue(attr.getField().getType(), input);
-						}
-					}), String.class);
-					request.add(attr.getName(), addedValueArr);
+					if (!addedValues.isEmpty()) {
+						final String[] addedValueArr = Iterables.toArray(Iterables.transform(addedValues, new Function<Object, String>() {
+							@Override @Nullable
+							public String apply(@Nullable Object input) {
+								return convertFromPropertyValue(attr.getField().getType(), input);
+							}
+						}), String.class);
+						request.add(attr.getName(), addedValueArr);
+					}
 					// Bye guys
 					final SetView<?> removedValues = Sets.difference(oldValues, newValues);
-					final String[] removedValueArr = Iterables.toArray(Iterables.transform(removedValues, new Function<Object, String>() {
-						@Override
-						@Nullable
-						public String apply(@Nullable Object input) {
-							return convertFromPropertyValue(attr.getField().getType(), input);
-						}
-					}), String.class);
-					request.remove(attr.getName(), removedValueArr);
+					if (!removedValues.isEmpty()) {
+						final String[] removedValueArr = Iterables.toArray(Iterables.transform(removedValues, new Function<Object, String>() {
+							@Override @Nullable
+							public String apply(@Nullable Object input) {
+								return convertFromPropertyValue(attr.getField().getType(), input);
+							}
+						}), String.class);
+						request.remove(attr.getName(), removedValueArr);
+					}
 				} else {
 					if (newValue == null || "".equals(newValue)) {
 						// Bye!
@@ -574,9 +576,11 @@ public class LdapMapper<T> {
 						request.replace(attr.getName(), convertFromPropertyValue(attr.getField().getType(), newValue));
 					}
 				}
+			} catch (Exception e) {
+				throw new LdapMappingException("Cannot map attribute " + attr.getName() +
+						" (" + attr.getField().getName() + ": " + attr.getField().getType().getName() +
+						") in " + existingEntry.getDn().getName() + " from " + up, e);
 			}
-		} catch (Exception e) {
-			throw new LdapMappingException("Cannot map " + existingEntry.getDn().getName() + " from " + up, e);
 		}
 		return request;
 	}
