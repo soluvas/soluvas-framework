@@ -13,10 +13,10 @@
 	<bean id="userListParser" class="org.soluvas.facebook.UserListParser">
 		<argument ref="executor"/>
 	</bean>
-	<bean id="facebookUtils" class="org.soluvas.facebook.FacebookUtils">
+	<bean id="facebookUtils" class="org.soluvas.facebook.FacebookUtilsImpl">
 		<argument ref="friendListDownloader"/>
 		<argument ref="userListParser"/>
 	</bean>
-	<service ref="facebookUtils" auto-export="all-classes"/>
+	<service ref="facebookUtils" auto-export="interfaces"/>
 	
 </blueprint>

@@ -44,7 +44,7 @@ public class FacebookUtilsTest {
 		httpClient = new DecompressingHttpClient(new DefaultHttpClient());
 		friendListDownloader = new FriendListDownloader(httpClient, executor);
 		userListParser = new UserListParser(executor);
-		facebookUtils = new FacebookUtils(friendListDownloader, userListParser);
+		facebookUtils = new FacebookUtilsImpl(friendListDownloader, userListParser);
 	}
 
 	/**

@@ -2,7 +2,7 @@ h1. Soluvas.org Facebook
 
 h2. Usage from Blueprint
 
-bc. <reference id="facebookUtils" interface="org.soluvas.facebook.FacebookUtils" />
+bc. <reference id="facebookUtils" interface="org.soluvas.facebook.FacebookUtilsImpl" />
 
 Java:
 
