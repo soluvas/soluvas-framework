@@ -29,7 +29,7 @@ import com.google.common.collect.Lists;
  * Provides ImageConfig.
  * @author ceefour
  */
-@Path("org.soluvas.image")
+//@Path("org.soluvas.image")
 public class ImageResource {
 	
 	private static final Logger log = LoggerFactory.getLogger(ImageResource.class);
