@@ -53,21 +53,6 @@
 		<bean class="org.soluvas.commons.impl.XmiObjectLoaderFactoryImpl" />
 	</service>
 
-	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
-		<command name="emf/pkgls">
-			<action class="org.soluvas.commons.shell.EmfPkgLsCommand" />
-		</command>
-	
-		<!-- EventBus -->
-		<command name="eventbus/ls">
-			<action class="org.soluvas.commons.shell.EventBusLsCommand" />
-		</command>
-		
-		<command name="app/manifestcat">
-			<action class="org.soluvas.commons.shell.AppManifestCatCommand" />
-		</command>
-	</command-bundle>
-
 	<bean class="org.soluvas.commons.EPackageRegistration" init-method="init" destroy-method="destroy">
 		<argument ref="blueprintBundleContext"/>
 		<argument value="org.soluvas.commons.CommonsPackage" />
@@ -93,4 +78,22 @@
 		<argument ref="appManifestXmiTracker" />
 	</bean>
 	
+	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
+		<command name="emf/pkgls">
+			<action class="org.soluvas.commons.shell.EmfPkgLsCommand" />
+		</command>
+	
+		<!-- EventBus -->
+		<command name="eventbus/ls">
+			<action class="org.soluvas.commons.shell.EventBusLsCommand" />
+		</command>
+		
+		<command name="app/manifest">
+			<action class="org.soluvas.commons.shell.AppManifestCommand" />
+		</command>
+		<command name="app/webaddress">
+			<action class="org.soluvas.commons.shell.AppWebAddressCommand" />
+		</command>
+	</command-bundle>
+
  </blueprint>

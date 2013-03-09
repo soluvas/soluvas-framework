@@ -52,6 +52,8 @@ import org.soluvas.commons.EClassLinked;
 import org.soluvas.commons.EClassStatus;
 import org.soluvas.commons.EFactoryLinked;
 import org.soluvas.commons.EObjectLinked;
+import org.soluvas.commons.Expandable;
+import org.soluvas.commons.ExpansionState;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
@@ -410,6 +412,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass expandableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum resourceTypeEEnum = null;
 
 	/**
@@ -467,6 +476,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EEnum translationStateEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum expansionStateEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1742,6 +1758,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getExpandable() {
+		return expandableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getExpandable_ExpansionState() {
+		return (EAttribute)expandableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -1824,6 +1858,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	public EEnum getTranslationState() {
 		return translationStateEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getExpansionState() {
+		return expansionStateEEnum;
 	}
 
 	/**
@@ -2198,6 +2241,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		styleConfigurationEClass = createEClass(STYLE_CONFIGURATION);
 
+		expandableEClass = createEClass(EXPANDABLE);
+		createEAttribute(expandableEClass, EXPANDABLE__EXPANSION_STATE);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -2208,6 +2254,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		publicationStatusEEnum = createEEnum(PUBLICATION_STATUS);
 		archivalStatusEEnum = createEEnum(ARCHIVAL_STATUS);
 		translationStateEEnum = createEEnum(TRANSLATION_STATE);
+		expansionStateEEnum = createEEnum(EXPANSION_STATE);
 
 		// Create data types
 		dateTimeEDataType = createEDataType(DATE_TIME);
@@ -2332,6 +2379,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		webAddressEClass.getESuperTypes().add(this.getPositionable());
 		webAddressEClass.getESuperTypes().add(this.getBundleAware());
 		webAddressEClass.getESuperTypes().add(this.getResourceAware());
+		webAddressEClass.getESuperTypes().add(this.getExpandable());
 		g1 = createEGenericType(this.getObjectNotification());
 		EGenericType g2 = createEGenericType(addedEClass_T);
 		g1.getETypeArguments().add(g2);
@@ -2396,9 +2444,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getResourceAware_ResourceType(), this.getResourceType(), "resourceType", null, 0, 1, ResourceAware.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getResourceAware_ResourceUri(), ecorePackage.getEString(), "resourceUri", null, 0, 1, ResourceAware.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getResourceAware_ResourceName(), ecorePackage.getEString(), "resourceName", null, 0, 1, ResourceAware.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResourceAware_ResourceType(), this.getResourceType(), "resourceType", null, 0, 1, ResourceAware.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResourceAware_ResourceUri(), ecorePackage.getEString(), "resourceUri", null, 0, 1, ResourceAware.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResourceAware_ResourceName(), ecorePackage.getEString(), "resourceName", null, 0, 1, ResourceAware.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(positionableEClass, Positionable.class, "Positionable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPositionable_Positioner(), ecorePackage.getEIntegerObject(), "positioner", "0", 0, 1, Positionable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2610,6 +2658,17 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		addEOperation(styleConfigurationEClass, theEcorePackage.getEString(), "getDefaultStyle", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		initEClass(expandableEClass, Expandable.class, "Expandable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getExpandable_ExpansionState(), this.getExpansionState(), "expansionState", null, 0, 1, Expandable.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(expandableEClass, null, "expand", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getMap());
+		g2 = createEGenericType(theEcorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(theEcorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "scope", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.BUNDLE);
@@ -2655,6 +2714,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEEnum(translationStateEEnum, TranslationState.class, "TranslationState");
 		addEEnumLiteral(translationStateEEnum, TranslationState.ORIGINAL);
 		addEEnumLiteral(translationStateEEnum, TranslationState.TRANSLATED);
+
+		initEEnum(expansionStateEEnum, ExpansionState.class, "ExpansionState");
+		addEEnumLiteral(expansionStateEEnum, ExpansionState.UNEXPANDED);
+		addEEnumLiteral(expansionStateEEnum, ExpansionState.EXPANDED);
 
 		// Initialize data types
 		initEDataType(dateTimeEDataType, DateTime.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -3280,6 +3343,36 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Default style name for Wicket, e.g. \"fluid\" (Cinta Lama\'s original theme, created by Ahmad Syarif Farsiado)."
+		   });		
+		addAnnotation
+		  (expandableEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Can be expanded upon loading by XmiObjectLoader.\n\nExample is WebAddress, it will replace {+fqdn} with FQDN (useful for development)."
+		   });		
+		addAnnotation
+		  (expandableEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Expand attribute values."
+		   });		
+		addAnnotation
+		  (getExpandable_ExpansionState(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Whether attribute values are already expanded. If so, calling expand() will do nothing."
+		   });		
+		addAnnotation
+		  (expansionStateEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Attribute values are unexpanded, for example baseUri=\"http://www.cintalama5.{+fqdn}/\""
+		   });		
+		addAnnotation
+		  (expansionStateEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Attribute values are expanded, for example baseUri=\"http://www.cintalama5.{+fqdn}/\" becomes \"http://www.cintalama5.rudi.dev/\""
 		   });
 	}
 	

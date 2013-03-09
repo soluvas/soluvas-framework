@@ -144,6 +144,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createArchivalStatusFromString(eDataType, initialValue);
 			case CommonsPackage.TRANSLATION_STATE:
 				return createTranslationStateFromString(eDataType, initialValue);
+			case CommonsPackage.EXPANSION_STATE:
+				return createExpansionStateFromString(eDataType, initialValue);
 			case CommonsPackage.DATE_TIME:
 				return createDateTimeFromString(eDataType, initialValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -211,6 +213,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertArchivalStatusToString(eDataType, instanceValue);
 			case CommonsPackage.TRANSLATION_STATE:
 				return convertTranslationStateToString(eDataType, instanceValue);
+			case CommonsPackage.EXPANSION_STATE:
+				return convertExpansionStateToString(eDataType, instanceValue);
 			case CommonsPackage.DATE_TIME:
 				return convertDateTimeToString(eDataType, instanceValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -618,6 +622,26 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertTranslationStateToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExpansionState createExpansionStateFromString(EDataType eDataType, String initialValue) {
+		ExpansionState result = ExpansionState.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertExpansionStateToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

@@ -2,9 +2,12 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="commons" nsURI="http://www.soluvas.org/schema/commons/1.0" nsPrefix="commons">
   <eClassifiers xsi:type="ecore:EClass" name="ResourceAware" abstract="true" interface="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceType" eType="#//ResourceType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceType" eType="#//ResourceType"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        transient="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Name relative to parent resource."/>
       </eAnnotations>
@@ -293,7 +296,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WebAddress" eSuperTypes="#//Positionable #//BundleAware #//ResourceAware">
+  <eClassifiers xsi:type="ecore:EClass" name="WebAddress" eSuperTypes="#//Positionable #//BundleAware #//ResourceAware #//Expandable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Tenant-wide website URI configuration."/>
     </eAnnotations>
@@ -763,5 +766,39 @@
         <details key="documentation" value="Default style name for Wicket, e.g. &quot;fluid&quot; (Cinta Lama's original theme, created by Ahmad Syarif Farsiado)."/>
       </eAnnotations>
     </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expandable" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Can be expanded upon loading by XmiObjectLoader.&#xA;&#xA;Example is WebAddress, it will replace {+fqdn} with FQDN (useful for development)."/>
+    </eAnnotations>
+    <eOperations name="expand">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Expand attribute values."/>
+      </eAnnotations>
+      <eParameters name="scope">
+        <eGenericType eClassifier="#//Map">
+          <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+          <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expansionState" eType="#//ExpansionState"
+        changeable="false" transient="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Whether attribute values are already expanded. If so, calling expand() will do nothing."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ExpansionState">
+    <eLiterals name="unexpanded">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Attribute values are unexpanded, for example baseUri=&quot;http://www.cintalama5.{+fqdn}/&quot;"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="expanded" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Attribute values are expanded, for example baseUri=&quot;http://www.cintalama5.{+fqdn}/&quot; becomes &quot;http://www.cintalama5.rudi.dev/&quot;"/>
+      </eAnnotations>
+    </eLiterals>
   </eClassifiers>
 </ecore:EPackage>

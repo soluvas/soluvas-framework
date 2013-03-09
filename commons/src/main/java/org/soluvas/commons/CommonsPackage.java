@@ -798,13 +798,22 @@ public interface CommonsPackage extends EPackage {
 	int WEB_ADDRESS__RESOURCE_NAME = POSITIONABLE_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Expansion State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS__EXPANSION_STATE = POSITIONABLE_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Base Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__BASE_URI = POSITIONABLE_FEATURE_COUNT + 4;
+	int WEB_ADDRESS__BASE_URI = POSITIONABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Base Path</b></em>' attribute.
@@ -813,7 +822,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__BASE_PATH = POSITIONABLE_FEATURE_COUNT + 5;
+	int WEB_ADDRESS__BASE_PATH = POSITIONABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Api Path</b></em>' attribute.
@@ -822,7 +831,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__API_PATH = POSITIONABLE_FEATURE_COUNT + 6;
+	int WEB_ADDRESS__API_PATH = POSITIONABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Images Uri</b></em>' attribute.
@@ -831,7 +840,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__IMAGES_URI = POSITIONABLE_FEATURE_COUNT + 7;
+	int WEB_ADDRESS__IMAGES_URI = POSITIONABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Skin Uri</b></em>' attribute.
@@ -840,7 +849,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__SKIN_URI = POSITIONABLE_FEATURE_COUNT + 8;
+	int WEB_ADDRESS__SKIN_URI = POSITIONABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Js Uri</b></em>' attribute.
@@ -849,7 +858,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__JS_URI = POSITIONABLE_FEATURE_COUNT + 9;
+	int WEB_ADDRESS__JS_URI = POSITIONABLE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Secure Base Uri</b></em>' attribute.
@@ -858,7 +867,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__SECURE_BASE_URI = POSITIONABLE_FEATURE_COUNT + 10;
+	int WEB_ADDRESS__SECURE_BASE_URI = POSITIONABLE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Secure Images Uri</b></em>' attribute.
@@ -867,7 +876,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__SECURE_IMAGES_URI = POSITIONABLE_FEATURE_COUNT + 11;
+	int WEB_ADDRESS__SECURE_IMAGES_URI = POSITIONABLE_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Secure Skin Uri</b></em>' attribute.
@@ -876,7 +885,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__SECURE_SKIN_URI = POSITIONABLE_FEATURE_COUNT + 12;
+	int WEB_ADDRESS__SECURE_SKIN_URI = POSITIONABLE_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Secure Js Uri</b></em>' attribute.
@@ -885,7 +894,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS__SECURE_JS_URI = POSITIONABLE_FEATURE_COUNT + 13;
+	int WEB_ADDRESS__SECURE_JS_URI = POSITIONABLE_FEATURE_COUNT + 14;
 
 	/**
 	 * The number of structural features of the '<em>Web Address</em>' class.
@@ -894,7 +903,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 14;
+	int WEB_ADDRESS_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 15;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.EObjectLinked <em>EObject Linked</em>}' class.
@@ -1956,6 +1965,34 @@ public interface CommonsPackage extends EPackage {
 	int STYLE_CONFIGURATION_FEATURE_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.Expandable <em>Expandable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.Expandable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getExpandable()
+	 * @generated
+	 */
+	int EXPANDABLE = 44;
+
+	/**
+	 * The feature id for the '<em><b>Expansion State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDABLE__EXPANSION_STATE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Expandable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDABLE_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1963,7 +2000,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 44;
+	int RESOURCE_TYPE = 45;
 
 
 	/**
@@ -1974,7 +2011,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 45;
+	int GENDER = 46;
 
 
 	/**
@@ -1985,7 +2022,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 46;
+	int ECLASS_STATUS = 47;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -1995,7 +2032,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 47;
+	int JAVA_CLASS_STATUS = 48;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ProgressStatus <em>Progress Status</em>}' enum.
@@ -2005,7 +2042,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getProgressStatus()
 	 * @generated
 	 */
-	int PROGRESS_STATUS = 48;
+	int PROGRESS_STATUS = 49;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.AccountStatus <em>Account Status</em>}' enum.
@@ -2015,7 +2052,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAccountStatus()
 	 * @generated
 	 */
-	int ACCOUNT_STATUS = 49;
+	int ACCOUNT_STATUS = 50;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.PublicationStatus <em>Publication Status</em>}' enum.
@@ -2025,7 +2062,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPublicationStatus()
 	 * @generated
 	 */
-	int PUBLICATION_STATUS = 50;
+	int PUBLICATION_STATUS = 51;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ArchivalStatus <em>Archival Status</em>}' enum.
@@ -2035,7 +2072,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getArchivalStatus()
 	 * @generated
 	 */
-	int ARCHIVAL_STATUS = 51;
+	int ARCHIVAL_STATUS = 52;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.TranslationState <em>Translation State</em>}' enum.
@@ -2045,7 +2082,17 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationState()
 	 * @generated
 	 */
-	int TRANSLATION_STATE = 52;
+	int TRANSLATION_STATE = 53;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.ExpansionState <em>Expansion State</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.ExpansionState
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getExpansionState()
+	 * @generated
+	 */
+	int EXPANSION_STATE = 54;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -2055,7 +2102,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 53;
+	int DATE_TIME = 55;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -2065,7 +2112,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 54;
+	int CURRENCY_UNIT = 56;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -2075,7 +2122,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 56;
+	int UNIT = 58;
 
 
 	/**
@@ -2086,7 +2133,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 57;
+	int LIST = 59;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -2096,7 +2143,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 58;
+	int MAP = 60;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -2106,7 +2153,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 59;
+	int SET = 61;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -2116,7 +2163,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 60;
+	int COLLECTION = 62;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -2126,7 +2173,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 61;
+	int MULTIMAP = 63;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -2136,7 +2183,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 62;
+	int NAVIGABLE_MAP = 64;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -2146,7 +2193,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 63;
+	int QUEUE = 65;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -2156,7 +2203,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 64;
+	int MULTISET = 66;
 
 
 	/**
@@ -2167,7 +2214,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 65;
+	int SERIALIZABLE = 67;
 
 
 	/**
@@ -2178,7 +2225,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 66;
+	int BUNDLE = 68;
 
 
 	/**
@@ -2189,7 +2236,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
 	 * @generated
 	 */
-	int BIG_MONEY_PROVIDER = 67;
+	int BIG_MONEY_PROVIDER = 69;
 
 	/**
 	 * The meta object id for the '<em>Quantity</em>' data type.
@@ -2199,7 +2246,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQuantity()
 	 * @generated
 	 */
-	int QUANTITY = 55;
+	int QUANTITY = 57;
 
 	/**
 	 * The meta object id for the '<em>Measurable</em>' data type.
@@ -2209,7 +2256,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMeasurable()
 	 * @generated
 	 */
-	int MEASURABLE = 68;
+	int MEASURABLE = 70;
 
 
 	/**
@@ -2220,7 +2267,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTimeZone()
 	 * @generated
 	 */
-	int DATE_TIME_ZONE = 69;
+	int DATE_TIME_ZONE = 71;
 
 
 	/**
@@ -2231,7 +2278,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 70;
+	int LOCALE = 72;
 
 
 	/**
@@ -2242,7 +2289,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFile()
 	 * @generated
 	 */
-	int FILE = 71;
+	int FILE = 73;
 
 
 	/**
@@ -3406,6 +3453,27 @@ public interface CommonsPackage extends EPackage {
 	EClass getStyleConfiguration();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Expandable <em>Expandable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expandable</em>'.
+	 * @see org.soluvas.commons.Expandable
+	 * @generated
+	 */
+	EClass getExpandable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Expandable#getExpansionState <em>Expansion State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Expansion State</em>'.
+	 * @see org.soluvas.commons.Expandable#getExpansionState()
+	 * @see #getExpandable()
+	 * @generated
+	 */
+	EAttribute getExpandable_ExpansionState();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3494,6 +3562,16 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getTranslationState();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.commons.ExpansionState <em>Expansion State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Expansion State</em>'.
+	 * @see org.soluvas.commons.ExpansionState
+	 * @generated
+	 */
+	EEnum getExpansionState();
 
 	/**
 	 * Returns the meta object for data type '{@link org.joda.time.DateTime <em>Date Time</em>}'.
@@ -4687,6 +4765,24 @@ public interface CommonsPackage extends EPackage {
 		EClass STYLE_CONFIGURATION = eINSTANCE.getStyleConfiguration();
 
 		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.Expandable <em>Expandable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.Expandable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getExpandable()
+		 * @generated
+		 */
+		EClass EXPANDABLE = eINSTANCE.getExpandable();
+
+		/**
+		 * The meta object literal for the '<em><b>Expansion State</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXPANDABLE__EXPANSION_STATE = eINSTANCE.getExpandable_ExpansionState();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4775,6 +4871,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TRANSLATION_STATE = eINSTANCE.getTranslationState();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.ExpansionState <em>Expansion State</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.ExpansionState
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getExpansionState()
+		 * @generated
+		 */
+		EEnum EXPANSION_STATE = eINSTANCE.getExpansionState();
 
 		/**
 		 * The meta object literal for the '<em>Date Time</em>' data type.

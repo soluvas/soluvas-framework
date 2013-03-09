@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface WebAddress extends Positionable, BundleAware, ResourceAware {
+public interface WebAddress extends Positionable, BundleAware, ResourceAware, Expandable {
 	/**
 	 * Returns the value of the '<em><b>Base Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->

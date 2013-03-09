@@ -2,18 +2,26 @@
  */
 package org.soluvas.commons.impl;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Expandable;
+import org.soluvas.commons.ExpansionState;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.WebAddress;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Strings;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +35,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.WebAddressImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.WebAddressImpl#getResourceUri <em>Resource Uri</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.WebAddressImpl#getResourceName <em>Resource Name</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.WebAddressImpl#getExpansionState <em>Expansion State</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.WebAddressImpl#getBaseUri <em>Base Uri</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.WebAddressImpl#getBasePath <em>Base Path</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.WebAddressImpl#getApiPath <em>Api Path</em>}</li>
@@ -147,6 +156,26 @@ public class WebAddressImpl extends EObjectImpl implements WebAddress {
 	 * @ordered
 	 */
 	protected String resourceName = RESOURCE_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getExpansionState() <em>Expansion State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExpansionState()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ExpansionState EXPANSION_STATE_EDEFAULT = ExpansionState.UNEXPANDED;
+
+	/**
+	 * The cached value of the '{@link #getExpansionState() <em>Expansion State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExpansionState()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExpansionState expansionState = EXPANSION_STATE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getBaseUri() <em>Base Uri</em>}' attribute.
@@ -492,6 +521,16 @@ public class WebAddressImpl extends EObjectImpl implements WebAddress {
 	 * @generated
 	 */
 	@Override
+	public ExpansionState getExpansionState() {
+		return expansionState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getBaseUri() {
 		return baseUri;
 	}
@@ -717,6 +756,32 @@ public class WebAddressImpl extends EObjectImpl implements WebAddress {
 	}
 
 	/**
+	 * scope is not used. The only supported expansion variables are: fqdn.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public void expand(Map scope) {
+		if (expansionState == ExpansionState.EXPANDED) {
+			return;
+		}
+		try {
+			String fqdn = InetAddress.getLocalHost().getCanonicalHostName();
+			setBaseUri(Strings.nullToEmpty(getBaseUri()).replace("{+fqdn}", fqdn));
+			setImagesUri(Strings.nullToEmpty(getImagesUri()).replace("{+fqdn}", fqdn));
+			setJsUri(Strings.nullToEmpty(getJsUri()).replace("{+fqdn}", fqdn));
+			setSkinUri(Strings.nullToEmpty(getSkinUri()).replace("{+fqdn}", fqdn));
+			setSecureBaseUri(Strings.nullToEmpty(getSecureBaseUri()).replace("{+fqdn}", fqdn));
+			setSecureImagesUri(Strings.nullToEmpty(getSecureImagesUri()).replace("{+fqdn}", fqdn));
+			setSecureJsUri(Strings.nullToEmpty(getSecureJsUri()).replace("{+fqdn}", fqdn));
+			setSecureSkinUri(Strings.nullToEmpty(getSecureSkinUri()).replace("{+fqdn}", fqdn));
+			expansionState = ExpansionState.EXPANDED;
+		} catch (UnknownHostException e) {
+			throw new CommonsException("Cannot get FQDN", e);
+		}
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -734,6 +799,8 @@ public class WebAddressImpl extends EObjectImpl implements WebAddress {
 				return getResourceUri();
 			case CommonsPackage.WEB_ADDRESS__RESOURCE_NAME:
 				return getResourceName();
+			case CommonsPackage.WEB_ADDRESS__EXPANSION_STATE:
+				return getExpansionState();
 			case CommonsPackage.WEB_ADDRESS__BASE_URI:
 				return getBaseUri();
 			case CommonsPackage.WEB_ADDRESS__BASE_PATH:
@@ -890,6 +957,8 @@ public class WebAddressImpl extends EObjectImpl implements WebAddress {
 				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
 			case CommonsPackage.WEB_ADDRESS__RESOURCE_NAME:
 				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
+			case CommonsPackage.WEB_ADDRESS__EXPANSION_STATE:
+				return expansionState != EXPANSION_STATE_EDEFAULT;
 			case CommonsPackage.WEB_ADDRESS__BASE_URI:
 				return BASE_URI_EDEFAULT == null ? baseUri != null : !BASE_URI_EDEFAULT.equals(baseUri);
 			case CommonsPackage.WEB_ADDRESS__BASE_PATH:
@@ -935,6 +1004,12 @@ public class WebAddressImpl extends EObjectImpl implements WebAddress {
 				default: return -1;
 			}
 		}
+		if (baseClass == Expandable.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.WEB_ADDRESS__EXPANSION_STATE: return CommonsPackage.EXPANDABLE__EXPANSION_STATE;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -956,6 +1031,12 @@ public class WebAddressImpl extends EObjectImpl implements WebAddress {
 				case CommonsPackage.RESOURCE_AWARE__RESOURCE_TYPE: return CommonsPackage.WEB_ADDRESS__RESOURCE_TYPE;
 				case CommonsPackage.RESOURCE_AWARE__RESOURCE_URI: return CommonsPackage.WEB_ADDRESS__RESOURCE_URI;
 				case CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME: return CommonsPackage.WEB_ADDRESS__RESOURCE_NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == Expandable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.EXPANDABLE__EXPANSION_STATE: return CommonsPackage.WEB_ADDRESS__EXPANSION_STATE;
 				default: return -1;
 			}
 		}
@@ -982,6 +1063,8 @@ public class WebAddressImpl extends EObjectImpl implements WebAddress {
 		result.append(resourceUri);
 		result.append(", resourceName: ");
 		result.append(resourceName);
+		result.append(", expansionState: ");
+		result.append(expansionState);
 		result.append(", baseUri: ");
 		result.append(baseUri);
 		result.append(", basePath: ");

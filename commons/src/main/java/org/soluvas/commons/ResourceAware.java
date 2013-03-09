@@ -35,7 +35,7 @@ public interface ResourceAware extends SerializableEObject {
 	 * @return the value of the '<em>Resource Uri</em>' attribute.
 	 * @see #setResourceUri(String)
 	 * @see org.soluvas.commons.CommonsPackage#getResourceAware_ResourceUri()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	String getResourceUri();
@@ -60,7 +60,7 @@ public interface ResourceAware extends SerializableEObject {
 	 * @return the value of the '<em>Resource Name</em>' attribute.
 	 * @see #setResourceName(String)
 	 * @see org.soluvas.commons.CommonsPackage#getResourceAware_ResourceName()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	String getResourceName();
@@ -88,7 +88,7 @@ public interface ResourceAware extends SerializableEObject {
 	 * @see org.soluvas.commons.ResourceType
 	 * @see #setResourceType(ResourceType)
 	 * @see org.soluvas.commons.CommonsPackage#getResourceAware_ResourceType()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	ResourceType getResourceType();

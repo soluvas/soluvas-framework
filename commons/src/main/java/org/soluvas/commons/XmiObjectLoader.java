@@ -1,6 +1,7 @@
 package org.soluvas.commons;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +26,7 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
+import com.google.common.collect.ImmutableMap;
 
 /**
  * Loads a predefined EMF object from an XMI file.
@@ -221,6 +223,19 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 						augmented, bundle.getSymbolicName(), bundle.getBundleId());
 		}
 		
+		// Expand with scope
+		final Map<String, Object> scope = ImmutableMap.of(); // TODO: support scope or supplier of scope
+		expand(scope, obj);
+		final TreeIterator<EObject> allContents = obj.eAllContents();
+		long augmented = 0;
+		while (allContents.hasNext()) {
+			EObject content = allContents.next();
+			augmented += augmentBundleInfo(bundle, content);
+		}
+		if (augmented > 0)
+			log.debug("Expanded {} EObjects with Scope {}",
+					augmented, scope);
+		
 		return obj;
 	}
 
@@ -241,6 +256,15 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		if (content instanceof BundleAware) {
 			final BundleAware bundleContent = (BundleAware) content;
 			bundleContent.setBundle(bundle);
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	protected long expand(@Nonnull final Map<String, Object> scope, @Nonnull final EObject content) {
+		if (content instanceof Expandable) {
+			((Expandable) content).expand(scope);
 			return 1;
 		} else {
 			return 0;

@@ -9,8 +9,8 @@ import org.soluvas.commons.AppManifest;
  *
  * @author ceefour
  */
-@Command(scope="app", name="manifestcat", description="Show current AppManifest.")
-public class AppManifestCatCommand extends OsgiCommandSupport {
+@Command(scope="app", name="manifest", description="Show current AppManifest.")
+public class AppManifestCommand extends OsgiCommandSupport {
 
 	/* (non-Javadoc)
 	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()

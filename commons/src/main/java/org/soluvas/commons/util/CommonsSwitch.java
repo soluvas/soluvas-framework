@@ -198,6 +198,7 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = casePositionable(webAddress);
 				if (result == null) result = caseBundleAware(webAddress);
 				if (result == null) result = caseResourceAware(webAddress);
+				if (result == null) result = caseExpandable(webAddress);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -383,6 +384,12 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 			case CommonsPackage.STYLE_CONFIGURATION: {
 				StyleConfiguration styleConfiguration = (StyleConfiguration)theEObject;
 				T1 result = caseStyleConfiguration(styleConfiguration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.EXPANDABLE: {
+				Expandable expandable = (Expandable)theEObject;
+				T1 result = caseExpandable(expandable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1047,6 +1054,21 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseStyleConfiguration(StyleConfiguration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expandable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expandable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseExpandable(Expandable object) {
 		return null;
 	}
 
