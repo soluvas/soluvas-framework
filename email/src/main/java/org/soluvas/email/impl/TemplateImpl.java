@@ -15,8 +15,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.WebAddress;
+import org.soluvas.commons.locale.FormatCurrency;
 import org.soluvas.email.DefaultScope;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Recipient;
@@ -46,6 +49,10 @@ import com.google.common.collect.ImmutableMap;
  * @generated
  */
 public abstract class TemplateImpl extends EObjectImpl implements Template {
+	
+	private static final Logger log = LoggerFactory
+			.getLogger(TemplateImpl.class);
+	
 	/**
 	 * The default value of the '{@link #getSubjectTemplate() <em>Subject Template</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -333,7 +340,8 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 		final MustacheFactory mf = new DefaultMustacheFactory();
 		final Mustache mustache = mf.compile(new StringReader(template), "subject");
 		final StringWriter stringWriter = new StringWriter();
-		final Map<String, Recipient> extras = ImmutableMap.of("recipient", recipient);
+		final Map<String, Object> extras = ImmutableMap.of("recipient", recipient,
+				"formatCurrency", new FormatCurrency());
 		mustache.execute(stringWriter, new Object[] { extras, this });
 		return stringWriter.toString();
 	}
