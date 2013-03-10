@@ -16,7 +16,7 @@
 	</bean>
 	
 	<reference id="globalEventBus" interface="com.google.common.eventbus.EventBus"
-		filter="(tenantId=\*)" ext:proxy-method="classes" />
+		ext:proxy-method="classes" />
 
 	<bean id="categoryFactory" class="org.soluvas.category.impl.CategoryFactoryImpl" factory-method="getInstance" />
 	<bean id="categoryCatalog" factory-ref="categoryFactory" factory-method="createCategoryCatalog" />

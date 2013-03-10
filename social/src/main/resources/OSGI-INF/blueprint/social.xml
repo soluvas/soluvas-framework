@@ -18,7 +18,7 @@
 	</bean>
 	
 	<reference id="globalEventBus" interface="com.google.common.eventbus.EventBus"
-		filter="(tenantId=\*)" ext:proxy-method="classes" timeout="5" />
+		ext:proxy-method="classes" timeout="5" />
 
 	<bean id="socialSchemaFactory" class="org.soluvas.social.schema.impl.SchemaFactoryImpl" factory-method="getInstance" />
 	<bean id="socialSchemaCatalog" factory-ref="socialSchemaFactory" factory-method="createSocialSchemaCatalog" />
