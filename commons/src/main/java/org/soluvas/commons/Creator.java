@@ -1,5 +1,6 @@
 package org.soluvas.commons;
 
+
 /**
  * Factory for creating raw entities.
  * @author rudi
@@ -18,5 +19,7 @@ public interface Creator<T> {
 	 * @return
 	 */
 	T newDefault();
+	
+	T newDefaultVaried();
 
 }
