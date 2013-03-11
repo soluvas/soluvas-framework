@@ -4,7 +4,6 @@ package org.soluvas.email.impl;
 
 import java.util.HashSet;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -13,6 +12,8 @@ import org.soluvas.email.EmailFormat;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Recipient;
 import org.soluvas.email.WebSecurity;
+
+import com.google.common.base.Objects;
 
 /**
  * <!-- begin-user-doc -->
@@ -508,8 +509,17 @@ public class RecipientImpl extends EObjectImpl implements Recipient {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((email == null) ? 0 : StringUtils.lowerCase(email).hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Recipient) {
+			return Objects.equal(email, ((Recipient) obj).getEmail());
+		} else {
+			return false;
+		}
 	}
 
 } //RecipientImpl

@@ -32,19 +32,21 @@ public class SocialPersonToRecipients implements
 	@Override @Nullable
 	public Set<Recipient> apply(@Nullable SocialPerson socialPerson) {
 		final Set<Recipient> recipients = Sets.newHashSet();
-		if (!Strings.isNullOrEmpty(socialPerson.getPrimaryEmail())) {
-			recipients.add(EmailFactory.eINSTANCE.createRecipient(
-					socialPerson.getName(), socialPerson.getPrimaryEmail(), roleName));
-		}
-		if (socialPerson.getEmails() != null) {
-			for (final String email : socialPerson.getEmails()) {
+		if (socialPerson != null) {
+			if (!Strings.isNullOrEmpty(socialPerson.getPrimaryEmail())) {
 				recipients.add(EmailFactory.eINSTANCE.createRecipient(
-						socialPerson.getName(), email, roleName));
+						socialPerson.getName(), socialPerson.getPrimaryEmail(), roleName));
 			}
-		}
-		if (!Strings.isNullOrEmpty(socialPerson.getVirtualMail())) {
-			recipients.add(EmailFactory.eINSTANCE.createRecipient(
-					socialPerson.getName(), socialPerson.getVirtualMail(), roleName));
+			if (socialPerson.getEmails() != null) {
+				for (final String email : socialPerson.getEmails()) {
+					recipients.add(EmailFactory.eINSTANCE.createRecipient(
+							socialPerson.getName(), email, roleName));
+				}
+			}
+			if (!Strings.isNullOrEmpty(socialPerson.getVirtualMail())) {
+				recipients.add(EmailFactory.eINSTANCE.createRecipient(
+						socialPerson.getName(), socialPerson.getVirtualMail(), roleName));
+			}
 		}
 		return recipients;
 	}
