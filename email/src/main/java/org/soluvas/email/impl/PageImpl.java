@@ -280,22 +280,25 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 		final EmailFormat format = Optional.fromNullable(recipient.getPreferredFormat()).or(EmailFormat.MULTIPART);
 		try {
 			final Email email;
-			final String pageText = renderText(recipient);
+			// Render the page first, then set the output of Page rendering to the layout's
 			final String pageHtml = renderHtml(recipient);
-			layout.setPagePlain(pageText);
 			layout.setPageHtml(pageHtml);
 			layout.setPageSubject(subject);
 			switch (format) {
 			case MULTIPART:
 				email = new HtmlEmail();
-				if (Strings.isNullOrEmpty(getPlainTemplate())) {
+				if (!Strings.isNullOrEmpty(getPlainTemplate())) {
 					// only if Page has plainTemplate, which due to our laziness, not all does
+					final String pageText = renderText(recipient);
+					layout.setPagePlain(pageText);
 					((HtmlEmail) email).setTextMsg(layout.renderText(recipient));
 				}
 				((HtmlEmail) email).setHtmlMsg(layout.renderHtml(recipient));
 				break;
 			case PLAIN:
 				email = new SimpleEmail();
+				final String pageText = renderText(recipient);
+				layout.setPagePlain(pageText);
 				email.setMsg(pageText);
 				break;
 			case HTML:

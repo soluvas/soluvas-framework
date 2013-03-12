@@ -119,14 +119,18 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	 */
 	@Override
 	public <T extends Page> T createPage(Class<T> pageClass) {
-		final Layout layout = getDefaultLayout();
-		final T page = EmailUtils.createPage(pageClass, layout);
-		injectDefaultScope(page);
-		final Sender sender = createSender(page.getPageType().getSenderTypeName());
-		sender.expand();
-		page.setSender(sender);
-		page.setMailSession(mailSession);
-		return page;
+		try {
+			final Layout layout = getDefaultLayout();
+			final T page = EmailUtils.createPage(pageClass, layout);
+			injectDefaultScope(page);
+			final Sender sender = createSender(page.getPageType().getSenderTypeName());
+			sender.expand();
+			page.setSender(sender);
+			page.setMailSession(mailSession);
+			return page;
+		} catch (Exception e) {
+			throw new EmailException("Cannot create Page " + pageClass.getName(), e);
+		}
 	}
 	
 	/**
