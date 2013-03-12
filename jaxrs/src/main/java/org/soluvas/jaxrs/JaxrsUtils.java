@@ -15,7 +15,9 @@ import org.soluvas.commons.tenant.TenantRef;
 
 /**
  * @author ceefour
+ * @deprecated single-tenant for now
  */
+@Deprecated
 public class JaxrsUtils {
 	
 	private static transient Logger log = LoggerFactory.getLogger(JaxrsUtils.class);
@@ -23,8 +25,10 @@ public class JaxrsUtils {
 	
 	/**
 	 * Use {@code @Context UriInfo uriInfo} in JAX-RS.
+	 * @deprecated single-tenant for now
 	 * @return
 	 */
+	@Deprecated
 	public static TenantRef getTenant(@Nonnull final UriInfo uriInfo) {
 		final String pathInfo = uriInfo.getBaseUri().getPath();
 		return getTenant(pathInfo);
@@ -32,8 +36,10 @@ public class JaxrsUtils {
 
 	/**
 	 * Use {@code @Context HttpServletRequest httpReq} in JAX-RS.
+	 * @deprecated single-tenant for now
 	 * @return
 	 */
+	@Deprecated
 	public static TenantRef getTenant(@Nonnull final HttpServletRequest httpReq) {
 		final String pathInfo = httpReq.getPathInfo();
 		return getTenant(pathInfo);
@@ -41,8 +47,10 @@ public class JaxrsUtils {
 
 	/**
 	 * @param pathInfo
+	 * @deprecated single-tenant for now
 	 * @return
 	 */
+	@Deprecated
 	public static TenantRef getTenant(@Nonnull final String pathInfo) {
 		final Pattern apiPathPattern = Pattern.compile(".*\\/api\\/(.+)_([^_/]+).*");
 		final Matcher apiPathMatcher = apiPathPattern.matcher(pathInfo);
