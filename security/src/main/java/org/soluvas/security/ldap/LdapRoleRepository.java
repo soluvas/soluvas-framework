@@ -132,7 +132,7 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	}
 
 	@Override
-	public Collection<Role> findAll() {
+	public List<Role> findAll() {
 		return LdapUtils.withConnection(ldapPool,
 				new Function<LdapConnection, List<Role>>() {
 			@Override @Nullable
@@ -140,8 +140,8 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 				try {
 					final Dn groupsDn = new Dn(groupsRdn, domainBase);
 					log.trace("Searching onelevel of {}", groupsDn.getName());
-					EntryCursor cursor = ldap.search(groupsDn, "(objectClass=groupOfUniqueNames)", SearchScope.ONELEVEL);
-					List<Role> roles = LdapUtils.transform(cursor, new Function<Entry, Role>() {
+					final EntryCursor cursor = ldap.search(groupsDn, "(objectClass=groupOfUniqueNames)", SearchScope.ONELEVEL);
+					final List<Role> roles = LdapUtils.transform(cursor, new Function<Entry, Role>() {
 						@Override
 						@Nullable
 						public Role apply(@Nullable Entry input) {
@@ -168,7 +168,7 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	}
 
 	@Override
-	public Collection<Role> findAll(Iterable<String> ids) {
+	public List<Role> findAll(Iterable<String> ids) {
 		throw new UnsupportedOperationException();
 	}
 

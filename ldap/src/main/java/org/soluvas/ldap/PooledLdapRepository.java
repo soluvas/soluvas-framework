@@ -7,8 +7,10 @@ import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.apache.commons.pool.ObjectPool;
+import org.apache.directory.api.ldap.model.cursor.EntryCursor;
 import org.apache.directory.api.ldap.model.entry.Entry;
 import org.apache.directory.api.ldap.model.exception.LdapException;
+import org.apache.directory.api.ldap.model.exception.LdapInvalidDnException;
 import org.apache.directory.api.ldap.model.filter.FilterEncoder;
 import org.apache.directory.api.ldap.model.message.ModifyRequest;
 import org.apache.directory.api.ldap.model.message.ModifyResponse;
@@ -17,6 +19,7 @@ import org.apache.directory.api.ldap.model.name.Dn;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.data.repository.CrudRepositoryBase;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -31,7 +34,8 @@ import com.google.common.collect.Lists;
  * This repository is thread-safe.
  * @author ceefour
  */
-public class PooledLdapRepository<T> implements LdapRepository<T> {
+public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
+	implements LdapRepository<T> {
 
 	private final class EntryToEntity implements Function<Entry, T> {
 		@Override
@@ -71,8 +75,8 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * @throws LdapException
 	 */
 	@Override
-	public T add(T obj) {
-		final Entry entry = mapper.toEntry(obj, baseDn);
+	public <S extends T> S add(S entity) {
+		final Entry entry = mapper.toEntry(entity, baseDn);
 		log.info("Add LDAP Entry {}: {}", entry.getDn(), entry);
 		try {
 			Entry newEntry = withConnection(new Function<LdapConnection, Entry>() {
@@ -87,7 +91,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 					}
 				}
 			});
-			return mapper.fromEntry(newEntry, entityClass);
+			return (S) mapper.fromEntry(newEntry, entityClass);
 		} catch (Exception e) {
 			log.error("Error adding LDAP Entry " + entry.getDn(), e);
 			throw new RuntimeException("Error adding LDAP Entry " + entry.getDn(), e);
@@ -108,7 +112,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	}
 	
 	@Override
-	public T modify(String id, final T entity) {
+	public <S extends T> S modify(String id, final S entity) {
 		Preconditions.checkNotNull(entity, "LDAP object to modify cannot be null");
 //		final String dn = mapper.getDn(entity, baseDn);
 		final String oldDn = mapper.getDn(id, entityClass, baseDn);
@@ -146,52 +150,28 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 				}
 			}
 		});
-		return modifiedObj;
+		return (S) modifiedObj;
 	}
 
-	/**
-	 * Delete an LDAP entry.
-	 * @param obj
-	 * @throws LdapException
-	 */
-	@Override
-	public void delete(T obj) {
-		final Entry entry = mapper.toEntry(obj, baseDn);
-		log.info("Delete LDAP Entry {}", entry.getDn()); 
-		try {
-			withConnection(new Function<LdapConnection, Void>() {
-				@Override @Nullable
-				public Void apply(@Nullable LdapConnection conn) {
-					try {
-						conn.delete(entry.getDn());
-						return null;
-					} catch (LdapException e) {
-						throw new RuntimeException(e);
-					}
-				}
-			});
-		} catch (Exception e) {
-			log.error("Error deleting LDAP Entry " + entry.getDn(), e);
-			throw new RuntimeException("Error deleting LDAP Entry " + entry.getDn(), e);
-		}
-	}
-	
 	/**
 	 * Delete an LDAP entry based on ID, a {@link LdapRdn} annotated property.
 	 * @param obj
 	 * @throws LdapException
 	 */
 	@Override
-	public void delete(String id) {
+	public boolean delete(String id) {
 		final String dn = toDn(id);
-		log.info("Delete LDAP Entry {}", dn); 
+		log.info("Deleting LDAP Entry {}", dn); 
 		try {
-			withConnection(new Function<LdapConnection, Void>() {
+			return withConnection(new Function<LdapConnection, Boolean>() {
 				@Override @Nullable
-				public Void apply(@Nullable LdapConnection conn) {
+				public Boolean apply(@Nullable LdapConnection conn) {
 					try {
 						conn.delete(dn);
-						return null;
+						return true;
+					} catch (LdapInvalidDnException e) {
+						log.info("Not deleting non-existing DN " + dn, e);
+						return false;
 					} catch (LdapException e) {
 						throw new RuntimeException(e);
 					}
@@ -209,8 +189,7 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 	 * @throws LdapException
 	 * @return T entity or <tt>null</tt> if none found.
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
+	@SuppressWarnings("unchecked") @Override
 	public <U extends T> U findOne(String id) {
 		final String dn = toDn(id);
 		log.info("Lookup LDAP Entry {}", dn); 
@@ -434,6 +413,43 @@ public class PooledLdapRepository<T> implements LdapRepository<T> {
 		} catch (Exception e) {
 			throw new LdapRepositoryException("Error searching LDAP in " + baseDn + " filter " + filter, e);
 		}
+	}
+
+	@Override
+	public long count() {
+		final String primaryObjectClass = mapper.getMapping(entityClass).getPrimaryObjectClass();
+		// Only search based on first objectClass, this is the typical use case
+		final String filter = "(objectClass=" + primaryObjectClass + ")";
+		log.info("Counting LDAP {} filter: {}", baseDn, filter); 
+		try {
+			final Long entries = withConnection(new Function<LdapConnection, Long>() {
+				@Override @Nullable
+				public Long apply(@Nullable LdapConnection conn) {
+					EntryCursor cursor = null;
+					try {
+						cursor = conn.search(baseDn, filter, SearchScope.ONELEVEL);
+						return (long) Iterables.size(cursor);
+					} catch (LdapException e) {
+						Throwables.propagate(e);
+						return null;
+					} finally {
+						if (cursor != null) {
+							cursor.close();
+						}
+					}
+				}
+			});
+			log.info("LDAP count {} filter {} returned {} entries", baseDn, filter, entries);
+			return entries;
+		} catch (Exception e) {
+			log.error("Error searching LDAP in " + baseDn + " filter " + filter, e);
+			throw new RuntimeException("Error searching LDAP in " + baseDn + " filter " + filter, e);
+		}
+	}
+
+	@Override @Nullable
+	protected String getId(T entity) {
+		return mapper.getRdnValue(entity);
 	}
 	
 }

@@ -33,7 +33,7 @@ import com.google.common.base.Strings;
 public class PersonFixAddressCommand extends TenantCommandSupport {
 
 	@Inject @Namespace("person") @Filter("(repositoryMode=raw)")
-	private LdapRepository<SocialPerson> personRepo;
+	private LdapRepository<SocialPerson> personLdapRepo;
 	
 	@Inject @Namespace("ldap")
 	private ObjectPool<LdapConnection> ldapPool;
@@ -43,7 +43,7 @@ public class PersonFixAddressCommand extends TenantCommandSupport {
 	 */
 	@Override
 	protected Object doExecute() throws Exception {
-		final List<SocialPerson> people = personRepo.findAll();
+		final List<SocialPerson> people = personLdapRepo.findAll();
 		System.err.println(ansi().render("Checking addresses in @|bold,yellow %d|@ people...",
 				people.size()));
 		
@@ -69,7 +69,7 @@ public class PersonFixAddressCommand extends TenantCommandSupport {
 				person.setPrimaryBillingAddress(Strings.emptyToNull(newBillingAddress));
 			}
 			// Fix invalid address reference
-			final String personDn = personRepo.toDn(person.getId());
+			final String personDn = personLdapRepo.toDn(person.getId());
 			if (person.getPrimaryShippingAddress() != null) {
 				final String shippingDn = "uniqueIdentifier=" + person.getPrimaryShippingAddress() + ",ou=addresses," + personDn;
 				fixed = fixed || LdapUtils.withConnection(ldapPool, new Function<LdapConnection, Boolean>() {
@@ -132,7 +132,7 @@ public class PersonFixAddressCommand extends TenantCommandSupport {
 			}
 			
 			if (fixed) {
-				personRepo.modify(person);
+				personLdapRepo.modify(person.getId(), person);
 				log.info("Fixed address of {}, oldShipping={}, newShipping={}, oldBilling={}, newBilling={}",
 						person.getId(), oldShippingAddress, person.getPrimaryShippingAddress(),
 						oldBillingAddress, person.getPrimaryBillingAddress());

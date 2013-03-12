@@ -17,6 +17,7 @@ package org.soluvas.data.repository;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
@@ -137,9 +138,11 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	/**
 	 * Returns all instances of the type.
 	 * 
+	 * <p>WARNING: You usually would want {@link PageableAndSortable#findAll(org.soluvas.data.domain.Pageable)} instead.
+	 * 
 	 * @return all entities
 	 */
-	Collection<T> findAll();
+	List<T> findAll();
 
 	/**
 	 * Returns all instances of the type with the given IDs.
@@ -148,7 +151,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @param ids
 	 * @return
 	 */
-	Collection<T> findAll(Iterable<ID> ids);
+	List<T> findAll(Iterable<ID> ids);
 
     /**
 	 * Returns the number of entities matching the given ids.
