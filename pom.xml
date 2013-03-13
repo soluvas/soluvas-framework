@@ -29,7 +29,6 @@
 		<module>email</module>
 		<module>taxonomy</module>
 		<module>category</module>
-		<module>category.shell</module>
 		<module>folder</module>
 		<!-- Backends -->
 		<module>image</module>
