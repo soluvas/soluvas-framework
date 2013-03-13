@@ -30,11 +30,9 @@
 		<module>email</module>
 		<module>email.shell</module>
 		<module>taxonomy</module>
-		<module>taxonomy.shell</module>
 		<module>category</module>
 		<module>category.shell</module>
 		<module>folder</module>
-		<module>folder.shell</module>
 		<!-- Backends -->
 		<module>image</module>
 		<!-- Others -->
