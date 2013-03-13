@@ -278,6 +278,10 @@
         <element xmi:type="ecore:EOperation" href="email.ecore#//Page/composeAll"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_AEOygUSnEeKo8LL0vNXkRQ"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_KSVfcIvbEeKJmMgUsHjsVg" type="2002">
+        <element xmi:type="ecore:EOperation" href="email.ecore#//Page/attach"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_KSVfcYvbEeKJmMgUsHjsVg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_9SRoQUSmEeKo8LL0vNXkRQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_9SRoQkSmEeKo8LL0vNXkRQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_9SRoQ0SmEeKo8LL0vNXkRQ"/>

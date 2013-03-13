@@ -123,6 +123,10 @@
         <eTypeArguments eClassifier="#//Email"/>
       </eGenericType>
     </eOperations>
+    <eOperations name="attach">
+      <eParameters name="content" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EByteArray"/>
+      <eParameters name="fileName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//Layout"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pageType" lowerBound="1"
         eType="#//PageType"/>

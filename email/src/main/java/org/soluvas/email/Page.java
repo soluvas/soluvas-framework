@@ -154,4 +154,12 @@ public interface Page extends Template {
 	 */
 	List<Email> composeAll();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void attach(byte[] content, String fileName);
+
 } // Page

@@ -3,16 +3,20 @@
 package org.soluvas.email.impl;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.activation.URLDataSource;
 import javax.annotation.Nullable;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 
+import org.apache.commons.mail.ByteArrayDataSource;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.HtmlEmail;
-import org.apache.commons.mail.SimpleEmail;
+import org.apache.commons.mail.MultiPartEmail;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -54,6 +58,7 @@ import com.google.common.collect.Lists;
 public abstract class PageImpl extends TemplateImpl implements Page {
 	
 	private static final Logger log = LoggerFactory.getLogger(PageImpl.class);
+	private final Map<String, byte[]> attachments = new HashMap<>();
 	
 	/**
 	 * The cached value of the '{@link #getLayout() <em>Layout</em>}' reference.
@@ -281,7 +286,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 		final String subject = renderSubject(recipient);
 		final EmailFormat format = Optional.fromNullable(recipient.getPreferredFormat()).or(EmailFormat.MULTIPART);
 		try {
-			final Email email;
+			final MultiPartEmail email;
 			// Render the page first, then set the output of Page rendering to the layout's
 			final String pageHtml = renderHtml(recipient);
 			layout.setPageHtml(pageHtml);
@@ -306,7 +311,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 				}
 				break;
 			case PLAIN:
-				email = new SimpleEmail();
+				email = new MultiPartEmail();
 				final String pageText = renderText(recipient);
 				layout.setPagePlain(pageText);
 				email.setMsg(pageText);
@@ -331,6 +336,12 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 			}
 			email.setSubject(layout.renderSubject(recipient));
 			email.addTo(recipient.getEmail(), recipient.getName());
+			
+			for (final Entry<String, byte[]> attachment : attachments.entrySet()) {
+				email.attach(new ByteArrayDataSource(attachment.getValue(), "application/octet-stream"),
+						attachment.getKey(), attachment.getKey());
+			}
+			
 			email.setDebug(true);
 //			email.buildMimeMessage();
 //			final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -358,6 +369,15 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 			}
 		}) );
 		return emails;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public void attach(byte[] content, String fileName) {
+		attachments.put(fileName, content);
 	}
 
 	/**

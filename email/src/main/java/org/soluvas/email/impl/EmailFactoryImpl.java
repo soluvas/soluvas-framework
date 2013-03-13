@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.soluvas.email.*;
 import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.NameUtils.PersonName;
 import org.soluvas.email.EmailCatalog;
@@ -67,13 +68,13 @@ public class EmailFactoryImpl extends EFactoryImpl implements EmailFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case EmailPackage.EMAIL_CATALOG: return createEmailCatalog();
-			case EmailPackage.PAGE_TYPE: return createPageType();
-			case EmailPackage.LAYOUT_TYPE: return createLayoutType();
-			case EmailPackage.RECIPIENT: return createRecipient();
-			case EmailPackage.EMAIL_MANAGER: return createEmailManager();
-			case EmailPackage.SENDER: return createSender();
-			case EmailPackage.SENDER_TYPE: return createSenderType();
+			case EmailPackage.EMAIL_CATALOG: return (EObject)createEmailCatalog();
+			case EmailPackage.PAGE_TYPE: return (EObject)createPageType();
+			case EmailPackage.LAYOUT_TYPE: return (EObject)createLayoutType();
+			case EmailPackage.RECIPIENT: return (EObject)createRecipient();
+			case EmailPackage.EMAIL_MANAGER: return (EObject)createEmailManager();
+			case EmailPackage.SENDER: return (EObject)createSender();
+			case EmailPackage.SENDER_TYPE: return (EObject)createSenderType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
