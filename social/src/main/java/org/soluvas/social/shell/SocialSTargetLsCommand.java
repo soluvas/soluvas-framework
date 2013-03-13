@@ -1,4 +1,4 @@
-package org.soluvas.social.shell.hand;
+package org.soluvas.social.shell;
 
 import static org.fusesource.jansi.Ansi.ansi;
 

@@ -31,6 +31,10 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.apache.karaf.shell</groupId>
+			<artifactId>org.apache.karaf.shell.console</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.compendium</artifactId>
 		</dependency>
@@ -125,6 +129,12 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
+						<Import-Package>
+							org.apache.felix.service.command;resolution:=optional,
+							org.apache.felix.gogo.commands;resolution:=optional,
+							org.apache.karaf.shell.console;resolution:=optional,
+							*
+						</Import-Package>
 						<Export-Package>org.soluvas.social.*,
 							org.soluvas.social.schema.*,
 							org.soluvas.social.builtin.*
