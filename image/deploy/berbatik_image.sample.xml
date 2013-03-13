@@ -1,0 +1,152 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+    xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0"
+    xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0
+    	http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
+    	http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0 http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0">
+
+	<cm:property-placeholder persistent-id="berbatik" update-strategy="reload">
+		<cm:default-properties>
+			<!-- Tenant Info -->
+			<cm:property name="clientId"				value="berbatik" />
+			<cm:property name="tenantId"				value="berbatik" />
+			<cm:property name="tenantEnv"				value="dev" />
+			<!-- Image -->
+			<!-- DAV URI for upload includes username and password -->
+			<cm:property name="imageDavUri"				value="http://berbatik_dev:bippo@dav.berbatik.rnd.dev/" />
+			<!-- Do NOT include username and password in public URI! It can be CDN. -->
+			<cm:property name="imagePublicUri"			value="http://dav.berbatik.rnd.dev/" />
+			<!-- MongoDB URI should include username (if required) but NOT password
+				 Collection name is always ${namespace}Image = personImage
+				 If possible, Image MongoDB should be separate than data MongoDB -->
+			<cm:property name="imageMongoUri"			value="mongodb://127.0.0.1:27017/berbatik_dev_image" />
+			<cm:property name="maleDefaultPhotoId"		value="eman_sipasi_facebook_photo_3547984243812347111" />
+			<cm:property name="femaleDefaultPhotoId"	value="arum_puspita" />
+		</cm:default-properties>
+	</cm:property-placeholder>
+    
+	<!-- Person Image Store -->
+	<bean id="personImageRepo" class="org.soluvas.image.store.MongoImageRepository"
+		init-method="init" destroy-method="destroy">
+		<argument value="person" />
+		<argument value="${imageDavUri}" />
+		<argument value="${imagePublicUri}" />
+		<argument value="${imageMongoUri}" />
+		<property name="styles">
+			<list>
+				<bean class="org.soluvas.image.store.ImageStyle">
+					<argument value="thumbnail" />
+					<argument value="t" />
+					<argument value="75" />
+					<argument value="75" />
+				</bean>
+				<bean class="org.soluvas.image.store.ImageStyle">
+					<argument value="small" />
+					<argument value="s" />
+					<argument value="128" />
+					<argument value="128" />
+				</bean>
+				<bean class="org.soluvas.image.store.ImageStyle">
+					<argument value="normal" />
+					<argument value="n" />
+					<argument value="672" />
+					<argument value="840" />
+				</bean>
+				<bean class="org.soluvas.image.store.ImageStyle">
+					<argument value="large" />
+					<argument value="l" />
+					<argument value="960" />
+					<argument value="1200" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<service ref="personImageRepo" auto-export="interfaces">
+		<service-properties>
+			<entry key="clientId" value="${clientId}" />
+			<entry key="tenantEnv" value="${tenantEnv}" />
+			<entry key="tenantId" value="${tenantId}" />
+			<entry key="namespace" value="person" />
+		</service-properties>
+	</service>
+
+	<!-- Shop Image Store -->
+	<bean id="shopImageRepo" class="org.soluvas.image.store.MongoImageRepository"
+		init-method="init" destroy-method="destroy">
+		<argument value="shop" />
+		<argument value="${imageDavUri}" />
+		<argument value="${imagePublicUri}" />
+		<argument value="${imageMongoUri}" />
+		<property name="styles">
+			<list>
+				<bean class="org.soluvas.image.store.ImageStyle">
+					<argument value="thumbnail" />
+					<argument value="t" />
+					<argument value="75" />
+					<argument value="75" />
+				</bean>
+				<bean class="org.soluvas.image.store.ImageStyle">
+					<argument value="small" />
+					<argument value="s" />
+					<argument value="128" />
+					<argument value="128" />
+				</bean>
+				<bean class="org.soluvas.image.store.ImageStyle">
+					<argument value="normal" />
+					<argument value="n" />
+					<argument value="240" />
+					<argument value="320" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<service ref="shopImageRepo" auto-export="interfaces">
+		<service-properties>
+			<entry key="clientId" value="${clientId}" />
+			<entry key="tenantEnv" value="${tenantEnv}" />
+			<entry key="tenantId" value="${tenantId}" />
+			<entry key="namespace" value="shop" />
+		</service-properties>
+	</service>
+
+	<!-- Product Image Store -->
+	<bean id="productImageRepo" class="org.soluvas.image.store.MongoImageRepository"
+		init-method="init" destroy-method="destroy">
+		<argument value="product" />
+		<argument value="${imageDavUri}" />
+		<argument value="${imagePublicUri}" />
+		<argument value="${imageMongoUri}" />
+		<property name="styles">
+			<list>
+				<bean class="org.soluvas.image.store.ImageStyle">
+					<argument value="thumbnail" />
+					<argument value="t" />
+					<argument value="75" />
+					<argument value="75" />
+				</bean>
+				<bean class="org.soluvas.image.store.ImageStyle">
+					<argument value="small" />
+					<argument value="s" />
+					<argument value="190" />
+					<argument value="155" />
+				</bean>
+				<bean class="org.soluvas.image.store.ImageStyle">
+					<argument value="normal" />
+					<argument value="n" />
+					<argument value="240" />
+					<argument value="320" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<service ref="productImageRepo" auto-export="interfaces">
+		<service-properties>
+			<entry key="clientId" value="${clientId}" />
+			<entry key="tenantEnv" value="${tenantEnv}" />
+			<entry key="tenantId" value="${tenantId}" />
+			<entry key="namespace" value="product" />
+		</service-properties>
+	</service>
+
+</blueprint>

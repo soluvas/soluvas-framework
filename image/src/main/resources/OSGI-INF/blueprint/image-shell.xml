@@ -1,0 +1,64 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0
+        http://karaf.apache.org/xmlns/shell/v1.1.0 http://karaf.apache.org/xmlns/shell/v1.1.0">
+
+	<reference id="svcLookup" interface="org.soluvas.commons.tenant.ServiceLookup"
+		availability="optional"/>
+		
+	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
+
+		<!-- Image shell commands -->
+		<command name="image/info">
+			<action class="org.soluvas.image.shell.ImageInfoCommand"/>
+ 		</command>
+		<command name="image/ls">
+			<action class="org.soluvas.image.shell.ImageLsCommand"/>
+		</command>
+		<command name="image/cat">
+			<action class="org.soluvas.image.shell.ImageCatCommand">
+				<argument ref="svcLookup"/>
+			</action>
+		</command>
+<!-- 		<command name="image/mod"> -->
+<!-- 			<action class="com.soluvas.image.shell.ImageModCommand"> -->
+<!-- 				<argument ref="svcLookup"/> -->
+<!-- 			</action> -->
+<!-- 		</command> -->
+		<command name="image/add">
+			<action class="org.soluvas.image.shell.ImageAddCommand">
+				<argument ref="svcLookup"/>
+			</action>
+		</command>
+		<command name="image/rm">
+			<action class="org.soluvas.image.shell.ImageRmCommand"/>
+		</command>
+		<command name="image/search">
+			<action class="org.soluvas.image.shell.ImageSearchCommand">
+				<argument ref="svcLookup"/>
+			</action>
+		</command>
+<!-- 		<command name="image/clear"> -->
+<!-- 			<action class="com.soluvas.image.shell.ImageClearCommand"> -->
+<!-- 				<argument ref="svcLookup"/> -->
+<!-- 			</action> -->
+<!-- 		</command> -->
+
+		<!-- Image Actions -->
+		<command name="image/reprocess">
+			<action class="org.soluvas.image.shell.ImageReprocessCommand"/>
+		</command>
+		<command name="image/updateuri">
+			<action class="org.soluvas.image.shell.ImageUpdateUriCommand"/>
+ 		</command>
+ 		
+ 		<!-- Migrations -->
+		<command name="image/export">
+			<action class="org.soluvas.image.shell.ImageExportCommand"/>
+ 		</command>
+		<command name="image/import">
+			<action class="org.soluvas.image.shell.ImageImportCommand"/>
+ 		</command>
+	</command-bundle>
+
+</blueprint>
