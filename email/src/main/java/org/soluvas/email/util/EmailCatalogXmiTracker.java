@@ -240,7 +240,8 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 						final String plain = IOUtils.toString(bundle.getEntry(plainFileName).openStream());
 						pageType.setPlainTemplate(plain);
 					} catch (Exception e) {
-						throw new EmailException("Cannot read " + plainFileName + " in " + bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]", e);
+						log.info("No plain email template found for " + pageType.getName() + ". Cannot read " +
+							plainFileName + " in " + bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]", e);
 					}
 					final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
 					try {

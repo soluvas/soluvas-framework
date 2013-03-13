@@ -18,6 +18,9 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.AppManifest#getTitle <em>Title</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDomain <em>Domain</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getGeneralEmail <em>General Email</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationName <em>Organization Name</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationAddress <em>Organization Address</em>}</li>
  * </ul>
  * </p>
  *
@@ -114,5 +117,80 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 	 * @generated
 	 */
 	void setDomain(String value);
+
+	/**
+	 * Returns the value of the '<em><b>General Email</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Email address used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>General Email</em>' attribute.
+	 * @see #setGeneralEmail(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_GeneralEmail()
+	 * @model
+	 * @generated
+	 */
+	String getGeneralEmail();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getGeneralEmail <em>General Email</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>General Email</em>' attribute.
+	 * @see #getGeneralEmail()
+	 * @generated
+	 */
+	void setGeneralEmail(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Organization Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Used in email notifications, e.g. "PT Berniaga Digital".
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Organization Name</em>' attribute.
+	 * @see #setOrganizationName(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_OrganizationName()
+	 * @model
+	 * @generated
+	 */
+	String getOrganizationName();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getOrganizationName <em>Organization Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Organization Name</em>' attribute.
+	 * @see #getOrganizationName()
+	 * @generated
+	 */
+	void setOrganizationName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Organization Address</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Used in email notifications, e.g. "Talavera Office Park, Jl. TB Simatupang KAV 20-22 Jakarta".
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Organization Address</em>' attribute.
+	 * @see #setOrganizationAddress(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_OrganizationAddress()
+	 * @model
+	 * @generated
+	 */
+	String getOrganizationAddress();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getOrganizationAddress <em>Organization Address</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Organization Address</em>' attribute.
+	 * @see #getOrganizationAddress()
+	 * @generated
+	 */
+	void setOrganizationAddress(String value);
 
 } // AppManifest

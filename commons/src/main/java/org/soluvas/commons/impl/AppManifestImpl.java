@@ -30,6 +30,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDomain <em>Domain</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getGeneralEmail <em>General Email</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getOrganizationName <em>Organization Name</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getOrganizationAddress <em>Organization Address</em>}</li>
  * </ul>
  * </p>
  *
@@ -200,6 +203,66 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * @ordered
 	 */
 	protected String domain = DOMAIN_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getGeneralEmail() <em>General Email</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneralEmail()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String GENERAL_EMAIL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGeneralEmail() <em>General Email</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneralEmail()
+	 * @generated
+	 * @ordered
+	 */
+	protected String generalEmail = GENERAL_EMAIL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOrganizationName() <em>Organization Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOrganizationName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ORGANIZATION_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOrganizationName() <em>Organization Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOrganizationName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String organizationName = ORGANIZATION_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOrganizationAddress() <em>Organization Address</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOrganizationAddress()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ORGANIZATION_ADDRESS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOrganizationAddress() <em>Organization Address</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOrganizationAddress()
+	 * @generated
+	 * @ordered
+	 */
+	protected String organizationAddress = ORGANIZATION_ADDRESS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -413,6 +476,69 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getGeneralEmail() {
+		return generalEmail;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGeneralEmail(String newGeneralEmail) {
+		String oldGeneralEmail = generalEmail;
+		generalEmail = newGeneralEmail;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__GENERAL_EMAIL, oldGeneralEmail, generalEmail));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getOrganizationName() {
+		return organizationName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOrganizationName(String newOrganizationName) {
+		String oldOrganizationName = organizationName;
+		organizationName = newOrganizationName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__ORGANIZATION_NAME, oldOrganizationName, organizationName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getOrganizationAddress() {
+		return organizationAddress;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOrganizationAddress(String newOrganizationAddress) {
+		String oldOrganizationAddress = organizationAddress;
+		organizationAddress = newOrganizationAddress;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS, oldOrganizationAddress, organizationAddress));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -432,6 +558,12 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return getDescription();
 			case CommonsPackage.APP_MANIFEST__DOMAIN:
 				return getDomain();
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL:
+				return getGeneralEmail();
+			case CommonsPackage.APP_MANIFEST__ORGANIZATION_NAME:
+				return getOrganizationName();
+			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
+				return getOrganizationAddress();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -467,6 +599,15 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return;
 			case CommonsPackage.APP_MANIFEST__DOMAIN:
 				setDomain((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL:
+				setGeneralEmail((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__ORGANIZATION_NAME:
+				setOrganizationName((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
+				setOrganizationAddress((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -504,6 +645,15 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 			case CommonsPackage.APP_MANIFEST__DOMAIN:
 				setDomain(DOMAIN_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL:
+				setGeneralEmail(GENERAL_EMAIL_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__ORGANIZATION_NAME:
+				setOrganizationName(ORGANIZATION_NAME_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
+				setOrganizationAddress(ORGANIZATION_ADDRESS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -532,6 +682,12 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CommonsPackage.APP_MANIFEST__DOMAIN:
 				return DOMAIN_EDEFAULT == null ? domain != null : !DOMAIN_EDEFAULT.equals(domain);
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL:
+				return GENERAL_EMAIL_EDEFAULT == null ? generalEmail != null : !GENERAL_EMAIL_EDEFAULT.equals(generalEmail);
+			case CommonsPackage.APP_MANIFEST__ORGANIZATION_NAME:
+				return ORGANIZATION_NAME_EDEFAULT == null ? organizationName != null : !ORGANIZATION_NAME_EDEFAULT.equals(organizationName);
+			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
+				return ORGANIZATION_ADDRESS_EDEFAULT == null ? organizationAddress != null : !ORGANIZATION_ADDRESS_EDEFAULT.equals(organizationAddress);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -610,6 +766,12 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 		result.append(description);
 		result.append(", domain: ");
 		result.append(domain);
+		result.append(", generalEmail: ");
+		result.append(generalEmail);
+		result.append(", organizationName: ");
+		result.append(organizationName);
+		result.append(", organizationAddress: ");
+		result.append(organizationAddress);
 		result.append(')');
 		return result.toString();
 	}

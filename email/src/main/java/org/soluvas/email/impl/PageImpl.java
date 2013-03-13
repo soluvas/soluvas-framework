@@ -2,8 +2,10 @@
  */
 package org.soluvas.email.impl;
 
+import java.net.URL;
 import java.util.List;
 
+import javax.activation.URLDataSource;
 import javax.annotation.Nullable;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
@@ -280,19 +282,33 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 		final EmailFormat format = Optional.fromNullable(recipient.getPreferredFormat()).or(EmailFormat.MULTIPART);
 		try {
 			final Email email;
-			final String pageText = renderText(recipient);
+			// Render the page first, then set the output of Page rendering to the layout's
 			final String pageHtml = renderHtml(recipient);
-			layout.setPagePlain(pageText);
 			layout.setPageHtml(pageHtml);
 			layout.setPageSubject(subject);
 			switch (format) {
 			case MULTIPART:
 				email = new HtmlEmail();
-				((HtmlEmail) email).setTextMsg(layout.renderText(recipient));
+				if (!Strings.isNullOrEmpty(getPlainTemplate())) {
+					// only if Page has plainTemplate, which due to our laziness, not all does
+					final String pageText = renderText(recipient);
+					layout.setPagePlain(pageText);
+					((HtmlEmail) email).setTextMsg(layout.renderText(recipient));
+				}
 				((HtmlEmail) email).setHtmlMsg(layout.renderHtml(recipient));
+				final URL logoResource = appManifest.getBundle().getResource("logo_email.png");
+				if (logoResource != null) {
+					((HtmlEmail) email).embed(new URLDataSource(logoResource),
+							"logo_email.png", "logo_email.png");
+				} else {
+					log.warn("Cannot get logo_email.png resource from AppManifest bundle {}",
+							appManifest.getBundle());
+				}
 				break;
 			case PLAIN:
 				email = new SimpleEmail();
+				final String pageText = renderText(recipient);
+				layout.setPagePlain(pageText);
 				email.setMsg(pageText);
 				break;
 			case HTML:

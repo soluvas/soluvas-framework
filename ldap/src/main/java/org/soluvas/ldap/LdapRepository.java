@@ -2,20 +2,21 @@ package org.soluvas.ldap;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
 import org.apache.directory.api.ldap.model.entry.Entry;
 import org.apache.directory.api.ldap.model.exception.LdapException;
 import org.apache.directory.api.ldap.model.name.Dn;
 import org.soluvas.data.EntityLookup;
+import org.soluvas.data.repository.BasicRepository;
 import org.soluvas.data.repository.CrudRepository;
+import org.soluvas.data.repository.Repository;
 
 /**
  * Manages LDAP entry POJO objects annotated with {@link LdapEntry}.
  * @author ceefour
  * @todo Extend {@link CrudRepository}.
  */
-public interface LdapRepository<T> extends EntityLookup<T, String> {
+public interface LdapRepository<T> extends EntityLookup<T, String>, Repository<T, String>,
+	BasicRepository, CrudRepository<T, String> {
 
 	void init();
 	
@@ -24,7 +25,7 @@ public interface LdapRepository<T> extends EntityLookup<T, String> {
 	 * @param obj
 	 * @throws LdapException
 	 */
-	T add(T obj);
+//	public abstract T add(T obj);
 	
 	/**
 	 * Modify an LDAP {@link Entry} from typed POJO object.
@@ -41,21 +42,23 @@ public interface LdapRepository<T> extends EntityLookup<T, String> {
 	 * @return the modified entities
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
-	public abstract T modify(@Nonnull String id, @Nonnull T entity);
+//	public abstract T modify(@Nonnull String id, @Nonnull T entity);
 
 	/**
 	 * Delete an LDAP entry.
 	 * @param obj
 	 * @throws LdapException
 	 */
-	void delete(T obj);
+//	@Override
+//	void delete(T obj);
 	
 	/**
 	 * Delete an LDAP entry based on ID, a {@link LdapRdn} annotated property.
 	 * @param obj
 	 * @throws LdapException
 	 */
-	void delete(String id);
+//	@Override
+//	void delete(String id);
 	
 	/**
 	 * Find LDAP entry based on ID, a {@link LdapRdn} annotated property.
@@ -81,6 +84,7 @@ public interface LdapRepository<T> extends EntityLookup<T, String> {
 	 * @param obj
 	 * @throws LdapException
 	 */
+	@Override
 	List<T> findAll();
 
 	/**
@@ -119,6 +123,7 @@ public interface LdapRepository<T> extends EntityLookup<T, String> {
 	 */
 	String toDn(String id);
 
+	@Override
 	boolean exists(String id);
 
 	boolean existsByAttribute(String attribute, String value);

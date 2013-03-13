@@ -28,9 +28,12 @@
 			<argument value="org.soluvas.image"/>
 		</bean>
 	</service>
+	
+	<reference-list id="imageRepos" interface="org.soluvas.image.store.ImageRepository"
+		availability="optional"/>
 
 	<bean id="imageRs" class="org.soluvas.image.rs.ImageResource">
-		<argument ref="blueprintBundleContext" />
+		<argument ref="imageRepos" />
 	</bean>
 	<reference id="jacksonMapperFactory" interface="org.soluvas.json.JacksonMapperFactory" />
 	<bean id="jacksonContextResolver" class="org.soluvas.jaxrs.Jackson2ContextResolver">

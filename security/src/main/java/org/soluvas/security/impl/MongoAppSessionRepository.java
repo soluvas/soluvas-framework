@@ -1,6 +1,5 @@
 package org.soluvas.security.impl;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -202,7 +201,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 	}
 
 	@Override
-	public Collection<AppSession> findAll() {
+	public List<AppSession> findAll() {
 		final DBCursor cursor = coll.find(new BasicDBObject("schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT))
 				.sort(new BasicDBObject("creationTime", -1));
 		final List<AppSession> appSessions = MongoUtils.transform(cursor, new FromDBObject());
