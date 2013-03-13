@@ -161,6 +161,7 @@
 					<instructions>
 						<Import-Package>
 							org.apache.directory.api.util,
+							org.apache.directory.server.*;resolution:=optional,
 							org.apache.felix.service.command;resolution:=optional,
 							org.apache.felix.gogo.commands;resolution:=optional,
 							org.apache.karaf.shell.console;resolution:=optional,
