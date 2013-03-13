@@ -1,4 +1,4 @@
-package org.soluvas.apacheds;
+package org.soluvas.ldap.apacheds;
 
 import java.io.File;
 import java.util.HashSet;
@@ -6,6 +6,14 @@ import java.util.Set;
 
 import javax.annotation.PreDestroy;
 
+import org.apache.directory.api.ldap.model.entry.DefaultEntry;
+import org.apache.directory.api.ldap.model.entry.Entry;
+import org.apache.directory.api.ldap.model.name.Dn;
+import org.apache.directory.api.ldap.model.schema.SchemaManager;
+import org.apache.directory.api.ldap.schemaextractor.SchemaLdifExtractor;
+import org.apache.directory.api.ldap.schemaextractor.impl.DefaultSchemaLdifExtractor;
+import org.apache.directory.api.ldap.schemaloader.LdifSchemaLoader;
+import org.apache.directory.api.ldap.schemamanager.impl.DefaultSchemaManager;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.server.constants.ServerDNConstants;
 import org.apache.directory.server.core.DefaultDirectoryService;
@@ -20,14 +28,6 @@ import org.apache.directory.server.core.partition.ldif.LdifPartition;
 import org.apache.directory.server.ldap.LdapServer;
 import org.apache.directory.server.protocol.shared.transport.TcpTransport;
 import org.apache.directory.server.xdbm.Index;
-import org.apache.directory.shared.ldap.model.entry.DefaultEntry;
-import org.apache.directory.shared.ldap.model.entry.Entry;
-import org.apache.directory.shared.ldap.model.name.Dn;
-import org.apache.directory.shared.ldap.model.schema.SchemaManager;
-import org.apache.directory.shared.ldap.schemaextractor.SchemaLdifExtractor;
-import org.apache.directory.shared.ldap.schemaextractor.impl.DefaultSchemaLdifExtractor;
-import org.apache.directory.shared.ldap.schemaloader.LdifSchemaLoader;
-import org.apache.directory.shared.ldap.schemamanager.impl.DefaultSchemaManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

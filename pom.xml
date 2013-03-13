@@ -37,7 +37,6 @@
 		<module>folder.shell</module>
 		<!-- Backends -->
 		<module>image</module>
-		<module>apacheds</module>
 		<!-- Others -->
 		<module>facebook</module>
 		<module>twitter</module>
