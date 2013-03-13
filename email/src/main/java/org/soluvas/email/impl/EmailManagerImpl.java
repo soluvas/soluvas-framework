@@ -152,9 +152,11 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	public List<String> sendAll(Page page) {
 		final List<Email> emails = page.composeAll();
 		
-		log.info("Sending {} emails using {}@{}:{}",
-				emails.size(), mailSession.getProperty(Email.MAIL_SMTP_USER),
-				mailSession.getProperty(Email.MAIL_HOST), mailSession.getProperty(Email.MAIL_PORT));
+		log.info("Sending {} {} emails using {}@{}:{} to {}",
+				emails.size(), page.getPageType().getName(),
+				mailSession.getProperty(Email.MAIL_SMTP_USER),
+				mailSession.getProperty(Email.MAIL_HOST), mailSession.getProperty(Email.MAIL_PORT),
+				page.getRecipients());
 		final List<String> results = ImmutableList.copyOf(Lists.transform(emails, new Function<Email, String>() {
 			@Override @Nullable
 			public String apply(@Nullable Email email) {
@@ -163,9 +165,9 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 					Preconditions.checkNotNull(email.getMailSession(),
 							"Invalid mailSession for %s", email);
 					result = email.send();
-					log.info("Email sent from {} to {}: {} - {}",
-							email.getFromAddress(), email.getToAddresses(), result,
-							email.getSubject());
+					log.info("Email '{}' sent from {} to {}: {}",
+							email.getSubject(),
+							email.getFromAddress(), email.getToAddresses(), result);
 					return result;
 				} catch (org.apache.commons.mail.EmailException e) {
 					log.error("Cannot send email from " + email.getFromAddress() + " to " +
