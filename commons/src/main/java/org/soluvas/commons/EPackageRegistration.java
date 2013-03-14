@@ -54,8 +54,7 @@ import com.google.common.collect.Lists;
 public class EPackageRegistration {
 
 	public static final class ClassToName implements Function<Class<?>, String> {
-		@Override
-		@Nullable
+		@Override @Nullable
 		public String apply(@Nullable Class<?> input) {
 			return input.getName();
 		}
@@ -140,13 +139,21 @@ public class EPackageRegistration {
 	public void destroy() {
 		for (ServiceRegistration<?> reg : factoryRegs) {
 			log.trace("Unregistering EFactory service {}", reg);
-			reg.unregister();
+			try {
+				reg.unregister();
+			} catch (Exception e) {
+				log.warn("Cannot unregister EFactory service " + reg, e);
+			}
 		}
 		factoryRegs.clear();
 
 		for (ServiceRegistration<?> reg : pkgRegs) {
 			log.trace("Unregistering EPackage service {}", reg);
-			reg.unregister();
+			try {
+				reg.unregister();
+			} catch (Exception e) {
+				log.warn("Cannot unregister EPackage service " + reg, e);
+			}
 		}
 		pkgRegs.clear();
 		
@@ -158,7 +165,7 @@ public class EPackageRegistration {
 				log.debug("Unregistered EMF Package {} by {}, global registry now has {} entries",
 						packageNsUri, pkg.getName(), EPackage.Registry.INSTANCE.size());
 			} catch (Exception e) {
-				log.error("Cannot unload EMF Package " + pkg.getName(), e);
+				log.warn("Cannot unload EMF Package " + pkg.getName(), e);
 			}
 		}
 	}
