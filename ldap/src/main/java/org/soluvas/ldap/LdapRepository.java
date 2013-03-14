@@ -53,7 +53,8 @@ public interface LdapRepository<T> extends EntityLookup<T, String>, Repository<T
 //	void delete(T obj);
 	
 	/**
-	 * Delete an LDAP entry based on ID, a {@link LdapRdn} annotated property.
+	 * Delete an LDAP entry based on ID, a {@link LdapRdn} annotated property, including all
+	 * its subentries. Uses {@link LdapUtils#deleteRecursively(org.apache.directory.ldap.client.api.LdapConnection, String)}.
 	 * @param obj
 	 * @throws LdapException
 	 */
