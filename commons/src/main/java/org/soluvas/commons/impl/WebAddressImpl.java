@@ -765,17 +765,25 @@ public class WebAddressImpl extends EObjectImpl implements WebAddress {
 		if (expansionState == ExpansionState.EXPANDED) {
 			return;
 		}
+		final String fqdn = getFqdn();
+		setBaseUri(Strings.nullToEmpty(getBaseUri()).replace("{+fqdn}", fqdn));
+		setImagesUri(Strings.nullToEmpty(getImagesUri()).replace("{+fqdn}", fqdn));
+		setJsUri(Strings.nullToEmpty(getJsUri()).replace("{+fqdn}", fqdn));
+		setSkinUri(Strings.nullToEmpty(getSkinUri()).replace("{+fqdn}", fqdn));
+		setSecureBaseUri(Strings.nullToEmpty(getSecureBaseUri()).replace("{+fqdn}", fqdn));
+		setSecureImagesUri(Strings.nullToEmpty(getSecureImagesUri()).replace("{+fqdn}", fqdn));
+		setSecureJsUri(Strings.nullToEmpty(getSecureJsUri()).replace("{+fqdn}", fqdn));
+		setSecureSkinUri(Strings.nullToEmpty(getSecureSkinUri()).replace("{+fqdn}", fqdn));
+		expansionState = ExpansionState.EXPANDED;
+	}
+
+	/**
+	 * @return
+	 * @throws UnknownHostException
+	 */
+	public static String getFqdn() {
 		try {
-			String fqdn = InetAddress.getLocalHost().getCanonicalHostName();
-			setBaseUri(Strings.nullToEmpty(getBaseUri()).replace("{+fqdn}", fqdn));
-			setImagesUri(Strings.nullToEmpty(getImagesUri()).replace("{+fqdn}", fqdn));
-			setJsUri(Strings.nullToEmpty(getJsUri()).replace("{+fqdn}", fqdn));
-			setSkinUri(Strings.nullToEmpty(getSkinUri()).replace("{+fqdn}", fqdn));
-			setSecureBaseUri(Strings.nullToEmpty(getSecureBaseUri()).replace("{+fqdn}", fqdn));
-			setSecureImagesUri(Strings.nullToEmpty(getSecureImagesUri()).replace("{+fqdn}", fqdn));
-			setSecureJsUri(Strings.nullToEmpty(getSecureJsUri()).replace("{+fqdn}", fqdn));
-			setSecureSkinUri(Strings.nullToEmpty(getSecureSkinUri()).replace("{+fqdn}", fqdn));
-			expansionState = ExpansionState.EXPANDED;
+			return InetAddress.getLocalHost().getCanonicalHostName();
 		} catch (UnknownHostException e) {
 			throw new CommonsException("Cannot get FQDN", e);
 		}
