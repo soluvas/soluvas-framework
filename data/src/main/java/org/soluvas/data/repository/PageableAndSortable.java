@@ -59,4 +59,5 @@ public interface PageableAndSortable<T> extends BasicRepository {
 	 */
 	@Nonnull
 	public Page<T> findAll(@Nonnull Pageable pageable);
+
 }
