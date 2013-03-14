@@ -69,13 +69,13 @@
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<configuration>
-					<Import-Package>
-						org.apache.felix.service.command;resolution:=optional,
-						org.apache.felix.gogo.commands;resolution:=optional,
-						org.apache.karaf.shell.console;resolution:=optional,
-						*
-					</Import-Package>
 					<instructions>
+						<Import-Package>
+							org.apache.felix.service.command;resolution:="optional",
+							org.apache.felix.gogo.commands;resolution:="optional",
+							org.apache.karaf.shell.console;resolution:="optional",
+							*
+						</Import-Package>
 						<Export-Package>org.soluvas.category.*</Export-Package>
 					</instructions>
 				</configuration>
