@@ -2,13 +2,11 @@
  */
 package org.soluvas.email.impl;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.activation.URLDataSource;
 import javax.annotation.Nullable;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
@@ -301,14 +299,17 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 					((HtmlEmail) email).setTextMsg(layout.renderText(recipient));
 				}
 				((HtmlEmail) email).setHtmlMsg(layout.renderHtml(recipient));
-				final URL logoResource = appManifest.getBundle().getResource("logo_email.png");
-				if (logoResource != null) {
-					((HtmlEmail) email).embed(new URLDataSource(logoResource),
-							"logo_email.png", "logo_email.png");
-				} else {
-					log.warn("Cannot get logo_email.png resource from AppManifest bundle {}",
-							appManifest.getBundle());
-				}
+
+				// email logo is now using direct URI
+//				final URL logoResource = appManifest.getBundle().getResource("logo_email.png");
+//				if (logoResource != null) {
+//					((HtmlEmail) email).embed(new URLDataSource(logoResource),
+//							"logo_email.png", "logo_email.png");
+//				} else {
+//					log.warn("Cannot get logo_email.png resource from AppManifest bundle {}",
+//							appManifest.getBundle());
+//				}
+				
 				break;
 			case PLAIN:
 				email = new MultiPartEmail();

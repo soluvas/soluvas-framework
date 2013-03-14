@@ -27,7 +27,7 @@ public class EntityLookupFunction<ID extends Serializable, T> implements Functio
 		this(entityLookup, false);
 	}
 
-	public EntityLookupFunction(@Nonnull final EntityLookup<T, ID> entityLookup, @Nonnull final boolean allowNull) {
+	public EntityLookupFunction(@Nonnull final EntityLookup<T, ID> entityLookup, final boolean allowNull) {
 		super();
 		this.entityLookup = entityLookup;
 		this.allowNull = allowNull;

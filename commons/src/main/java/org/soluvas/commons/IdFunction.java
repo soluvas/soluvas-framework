@@ -15,7 +15,7 @@ public class IdFunction implements Function<Identifiable, String> {
 	 */
 	@Override @Nullable
 	public String apply(@Nullable Identifiable input) {
-		return input != null ? input.getId() : null;
+		return input != null ? input.getId().toUpperCase() : null;
 	}
 
 }
