@@ -109,7 +109,6 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	 * it's used by {@link #deleteAll()}.
 	 */
 	@Override
-	@Nonnull
 	public long deleteAllRights(L left) {
 		Collection<R> rights = getLeft(left);
 		long removed = 0;
@@ -121,7 +120,6 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	}
 
 	@Override
-	@Nonnull
 	public long deleteAllLefts(R right) {
 		Collection<L> lefts = getRight(right);
 		long removed = 0;
@@ -184,7 +182,6 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	}
 
 	@Override
-	@Nonnull
 	public long replaceRights(L left, Iterable<? extends R> rights) {
 		long removeAllRights = deleteAllRights(left);
 		long putAll = put(left, rights);
@@ -202,7 +199,6 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	}
 
 	@Override
-	@Nonnull
 	public void replaceLefts(R right, Iterable<? extends L> lefts) {
 		deleteAllLefts(right);
 		put(lefts, right);

@@ -84,7 +84,6 @@ public interface BasicAssocRepository<L, R> extends BasicRepository {
 	 *     <i>may</i> be modifiable, but updating it will have no effect on the
 	 *     multimap.
 	 */
-	@Nonnull
 	public abstract long deleteAllRights(@Nonnull L left);
 
 	/**
@@ -96,7 +95,6 @@ public interface BasicAssocRepository<L, R> extends BasicRepository {
 	 *     <i>may</i> be modifiable, but updating it will have no effect on the
 	 *     multimap.
 	 */
-	@Nonnull
 	public abstract long deleteAllLefts(@Nonnull R right);
 
 	/**
@@ -116,7 +114,7 @@ public interface BasicAssocRepository<L, R> extends BasicRepository {
 	 * @return the collection of rights that the key maps to
 	 */
 	@Nonnull
-	public abstract List<R> getLeft(@Nonnull L left);
+	public abstract List<R> getLeft(@Nonnull final L left);
 
 	/**
 	 * Returns a collection view of all lefts associated with a key. If no

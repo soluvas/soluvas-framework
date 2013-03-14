@@ -210,7 +210,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 	public long deleteAllRights(String role) {
 		return replaceRights(role, ImmutableList.<String>of());
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.AssocRepository#getLeft(java.lang.Object)
 	 */
