@@ -10,7 +10,6 @@ import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.api.ldap.model.cursor.EntryCursor;
 import org.apache.directory.api.ldap.model.entry.Entry;
 import org.apache.directory.api.ldap.model.exception.LdapException;
-import org.apache.directory.api.ldap.model.exception.LdapInvalidDnException;
 import org.apache.directory.api.ldap.model.filter.FilterEncoder;
 import org.apache.directory.api.ldap.model.message.ModifyRequest;
 import org.apache.directory.api.ldap.model.message.ModifyResponse;
@@ -154,31 +153,23 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	}
 
 	/**
-	 * Delete an LDAP entry based on ID, a {@link LdapRdn} annotated property.
+	 * Delete an LDAP entry based on ID, a {@link LdapRdn} annotated property, including all
+	 * its subentries. Uses {@link LdapUtils#deleteRecursively(org.apache.directory.ldap.client.api.LdapConnection, String)}.
 	 * @param obj
 	 * @throws LdapException
 	 */
 	@Override
 	public boolean delete(String id) {
 		final String dn = toDn(id);
-		log.info("Deleting LDAP Entry {}", dn); 
+		log.info("Deleting LDAP Entry {} recursively", dn); 
 		try {
 			return withConnection(new Function<LdapConnection, Boolean>() {
 				@Override @Nullable
 				public Boolean apply(@Nullable LdapConnection conn) {
-					try {
-						conn.delete(dn);
-						return true;
-					} catch (LdapInvalidDnException e) {
-						log.info("Not deleting non-existing DN " + dn, e);
-						return false;
-					} catch (LdapException e) {
-						throw new RuntimeException(e);
-					}
+					return LdapUtils.deleteRecursively(conn, dn) >= 1;
 				}
 			});
 		} catch (Exception e) {
-			log.error("Error deleting LDAP Entry " + dn, e);
 			throw new RuntimeException("Error deleting LDAP Entry " + dn, e);
 		}
 	}

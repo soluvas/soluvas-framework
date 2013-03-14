@@ -18,6 +18,7 @@ import org.apache.directory.api.ldap.model.cursor.EntryCursor;
 import org.apache.directory.api.ldap.model.entry.Entry;
 import org.apache.directory.api.ldap.model.entry.Value;
 import org.apache.directory.api.ldap.model.exception.LdapException;
+import org.apache.directory.api.ldap.model.exception.LdapInvalidDnException;
 import org.apache.directory.api.ldap.model.exception.LdapURLEncodingException;
 import org.apache.directory.api.ldap.model.message.SearchScope;
 import org.apache.directory.api.ldap.model.url.LdapUrl;
@@ -249,20 +250,23 @@ public class LdapUtils {
 	 * @param dn
 	 * @return Total number of deleted entries.
 	 */
-	public static long delete(@Nonnull final LdapConnection ldap, @Nonnull final String dn) {
+	public static long deleteRecursively(@Nonnull final LdapConnection ldap, @Nonnull final String dn) {
 		try {
 			final List<Entry> children = LdapUtils.asList(ldap.search(dn, "(objectclass=*)", SearchScope.ONELEVEL));
 			log.debug("Deleting {} and its {} children", dn, children.size());
 			long deletedEntries = 0;
 			for (Entry child : children) {
-				deletedEntries += delete(ldap, child.getDn().getName());
+				deletedEntries += deleteRecursively(ldap, child.getDn().getName());
 			}
 			ldap.delete(dn);
 			deletedEntries++;
 			log.info("Deleted {} including {} sub-entries", dn, deletedEntries);
 			return deletedEntries;
+		} catch (LdapInvalidDnException e) {
+			log.info("Not deleting non-existing DN " + dn, e);
+			return 0;
 		} catch (LdapException e) {
-			throw new RuntimeException("Cannot delete " + dn, e);
+			throw new RuntimeException("Cannot delete " + dn + " recursively", e);
 		}
 	}
 
