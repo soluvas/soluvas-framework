@@ -18,12 +18,8 @@
 		<module>commons</module>
 		<module>data</module>
 		<module>social</module>
-		<module>json</module>
-		<module>cdi</module>
 		<module>jaxrs</module>
 		<module>ldap</module>
-		<module>async</module>
-		<module>push</module>
 		<module>security</module>
 		<module>mongo</module>
 		<module>email</module>

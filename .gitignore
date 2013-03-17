@@ -11,3 +11,7 @@ target
 /category.shell
 /facebook
 /twitter
+/async
+/cdi
+/push
+/json
