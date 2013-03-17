@@ -130,6 +130,7 @@
 					<instructions>
 						<Export-Package>
 							org.soluvas.commons.*,
+							org.soluvas.async.*,
 							org.soluvas.json.*,
 							org.soluvas.push.*
 						</Export-Package>

@@ -24,10 +24,6 @@ public class TwitterUtils {
 	
 	private transient static Logger log = LoggerFactory.getLogger(TwitterUtils.class);
 	
-	public TwitterUtils() {
-		super();
-	}
-	
 	/**
 	 * Fetches twitter user photo from twitter, uploads it to ImageRepository, but not modify any {@link SocialPerson}.
 	 * @param twitterScreenName twitter User ID.
