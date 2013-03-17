@@ -33,8 +33,7 @@
 		<!-- Backends -->
 		<module>image</module>
 		<!-- Others -->
-		<module>facebook</module>
-		<module>twitter</module>
+		<module>socmed</module>
 	</modules>
 
 </project>

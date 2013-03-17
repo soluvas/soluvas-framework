@@ -7,10 +7,10 @@
 		<version>2.0.0-SNAPSHOT</version>
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>org.soluvas.facebook</artifactId>
+	<artifactId>org.soluvas.socmed</artifactId>
 	<packaging>bundle</packaging>
-	<name>Soluvas Facebook</name>
-	<description>Facebook utilities.</description>
+	<name>Soluvas Social Media</name>
+	<description>Facebook, Twitter, Google, Yahoo, etc. utilities.</description>
 
 	<dependencies>
 		<dependency>
