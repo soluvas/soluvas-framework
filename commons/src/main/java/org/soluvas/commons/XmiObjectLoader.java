@@ -57,7 +57,8 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s using class %s",
 				resourcePath, loaderClass.getName());
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		final Bundle bundle = FrameworkUtil.getBundle(loaderClass);
+		final Bundle bundle = Preconditions.checkNotNull(FrameworkUtil.getBundle(loaderClass),
+				"Cannot get bundle for %s", loaderClass);
 		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourcePath, bundle);
 	}
 
@@ -175,7 +176,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	protected T load(@Nonnull final EPackage ePackage, @Nonnull final ResourceType resourceType,
 			@Nonnull final URI resourceUri, @Nonnull final String resourceName,
 			@Nullable final Bundle bundle) {
-		log.debug("Loading XMI from URI: {}", resourceUri);
+		log.debug("Loading XMI from URI: {} using bundle {}", resourceUri, bundle);
 		
 		final ResourceSetImpl rset = new ResourceSetImpl();
 		rset.getResourceFactoryRegistry().getExtensionToFactoryMap()
@@ -201,7 +202,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 			final TreeIterator<EObject> allContents = obj.eAllContents();
 			long augmented = 0;
 			while (allContents.hasNext()) {
-				EObject content = allContents.next();
+				final EObject content = allContents.next();
 				augmented += augmentResourceInfo(resourceType, resourceUri, resourceName, content);
 			}
 			if (augmented > 0)
@@ -215,12 +216,17 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 			final TreeIterator<EObject> allContents = obj.eAllContents();
 			long augmented = 0;
 			while (allContents.hasNext()) {
-				EObject content = allContents.next();
+				final EObject content = allContents.next();
 				augmented += augmentBundleInfo(bundle, content);
 			}
-			if (augmented > 0)
+			if (augmented > 0) {
 				log.debug("Augmented {} EObjects with Bundle information from {} [{}]",
 						augmented, bundle.getSymbolicName(), bundle.getBundleId());
+			} else {
+//				final int allContentsSize = Iterators.size(allContents);
+//				log.warn("Not augmenting {} EObjects with Bundle information from {} [{}] because not implementing BundleAware",
+//						allContentsSize, bundle.getSymbolicName(), bundle.getBundleId());
+			}
 		}
 		
 		// Expand with scope
