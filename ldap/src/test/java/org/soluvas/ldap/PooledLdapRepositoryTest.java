@@ -37,9 +37,9 @@ public class PooledLdapRepositoryTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		LdapConnectionConfig config = LdapUtils.createTrustingConfig("ldap://localhost:389", "cn=admin,dc=dev,dc=berbatik,dc=com", "secret");
+		final LdapConnectionConfig config = LdapUtils.createTrustingConfig("ldap://localhost:389", "cn=admin,dc=dev,dc=tuneeca,dc=com", "secret");
 		pool = new LdapConnectionPool(new PoolableLdapConnectionFactory(config));
-		personRepo = new PooledLdapRepository<SocialPerson>(SocialPerson.class, pool, "ou=users,dc=dev,dc=berbatik,dc=com");
+		personRepo = new PooledLdapRepository<SocialPerson>(SocialPerson.class, pool, "ou=users,dc=dev,dc=tuneeca,dc=com");
 		personRepo.init();
 	}
 
@@ -149,6 +149,15 @@ public class PooledLdapRepositoryTest {
 		person.setId("nana");
 		SocialPerson modified = personRepo.modify(person);
 		log.info("Modified person: ", modified);
+	}
+	
+	@Test
+	public void findAllByFilter() {
+		final String filter = "(cn=*ang*)";
+		
+		final List<SocialPerson> people = personRepo.findAllByFilter(filter);
+		
+		log.info("User by filter has {} records", people.size());
 	}
 
 }

@@ -225,7 +225,8 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	public T findOneByAttribute(String attribute, String value) {
 		final String primaryObjectClass = mapper.getMapping(entityClass).getPrimaryObjectClass();
 		// Only search based on first objectClass, this is the typical use case
-		final String filter = "(&(objectClass=" + primaryObjectClass + ")(" + attribute + "=" + value + "))";
+//		final String filter = "(&(objectClass=" + primaryObjectClass + ")(" + attribute + "=" + value + "))";
+		final String filter = "(&(objectClass=*)(" + attribute + "=" + value + "))";
 		log.info("Searching LDAP {} filter: {}", baseDn, filter); 
 		try {
 			final Entry entry = withConnection(new Function<LdapConnection, Entry>() {
@@ -268,7 +269,8 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 //		}
 //		filter += ")";
 		// Only search based on first objectClass, this is the typical use case
-		final String filter = "(objectClass=" + primaryObjectClass + ")";
+//		final String filter = "(objectClass=" + primaryObjectClass + ")";
+		final String filter = "(objectClass=*)";
 		log.info("Searching LDAP {} filter: {}", baseDn, filter); 
 		try {
 			final List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
@@ -351,8 +353,10 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 //		filter += ")";
 		// Only search based on first objectClass, this is the typical use case
 		// escape searchText using https://issues.apache.org/jira/browse/DIRSHARED-143
-		final String filter = String.format("(&(objectClass=%s)(|(cn=*%s*)(gn=*%s*)(sn=*%s*)(uid=*%s*)(mail=*%s*)))",
-				primaryObjectClass, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText);
+//		final String filter = String.format("(&(objectClass=%s)(|(cn=*%s*)(gn=*%s*)(sn=*%s*)(uid=*%s*)(mail=*%s*)))",
+//				primaryObjectClass, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText);
+		final String filter = String.format("(&(objectClass=*)(|(cn=*%s*)(gn=*%s*)(sn=*%s*)(uid=*%s*)(mail=*%s*)))",
+				encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText);
 		log.debug("Searching LDAP {} filter: {}", baseDn, filter); 
 		try {
 			final List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
@@ -383,8 +387,10 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	@Override
 	public List<T> findAllByFilter(String filter) {
 		final String primaryObjectClass = mapper.getMapping(entityClass).getPrimaryObjectClass();
-		final String realFilter = String.format("(&(objectClass=%s)%s)",
-				primaryObjectClass, filter);
+//		final String realFilter = String.format("(&(objectClass=%s)%s)",
+//				primaryObjectClass, filter);
+		final String realFilter = String.format("(&(objectClass=*)%s)",
+				filter);
 		log.debug("Searching LDAP {} filter: {}", baseDn, realFilter); 
 		try {
 			final List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
@@ -410,7 +416,8 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	public long count() {
 		final String primaryObjectClass = mapper.getMapping(entityClass).getPrimaryObjectClass();
 		// Only search based on first objectClass, this is the typical use case
-		final String filter = "(objectClass=" + primaryObjectClass + ")";
+//		final String filter = "(objectClass=" + primaryObjectClass + ")";
+		final String filter = "(objectClass=*)";
 		log.info("Counting LDAP {} filter: {}", baseDn, filter); 
 		try {
 			final Long entries = withConnection(new Function<LdapConnection, Long>() {
