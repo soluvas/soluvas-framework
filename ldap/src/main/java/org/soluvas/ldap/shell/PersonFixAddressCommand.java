@@ -72,7 +72,7 @@ public class PersonFixAddressCommand extends TenantCommandSupport {
 			final String personDn = personLdapRepo.toDn(person.getId());
 			if (person.getPrimaryShippingAddress() != null) {
 				final String shippingDn = "uniqueIdentifier=" + person.getPrimaryShippingAddress() + ",ou=addresses," + personDn;
-				fixed = fixed || LdapUtils.withConnection(ldapPool, new Function<LdapConnection, Boolean>() {
+				final boolean fixedThisOne = LdapUtils.withConnection(ldapPool, new Function<LdapConnection, Boolean>() {
 					@Override @Nullable
 					public Boolean apply(@Nullable LdapConnection conn) {
 						try {
@@ -87,10 +87,11 @@ public class PersonFixAddressCommand extends TenantCommandSupport {
 						}
 					}
 				});
+				fixed |= fixedThisOne;
 			}
 			if (person.getPrimaryBillingAddress() != null) {
 				final String billingDn = "uniqueIdentifier=" + person.getPrimaryBillingAddress() + ",ou=addresses," + personDn;
-				fixed = fixed || LdapUtils.withConnection(ldapPool, new Function<LdapConnection, Boolean>() {
+				final boolean fixedThisOne = LdapUtils.withConnection(ldapPool, new Function<LdapConnection, Boolean>() {
 					@Override @Nullable
 					public Boolean apply(@Nullable LdapConnection conn) {
 						try {
@@ -105,6 +106,7 @@ public class PersonFixAddressCommand extends TenantCommandSupport {
 						}
 					}
 				});
+				fixed |= fixedThisOne;
 			}
 			// Add address reference, if exists
 			final String firstAddressId = LdapUtils.withConnection(ldapPool, new Function<LdapConnection, String>() {
