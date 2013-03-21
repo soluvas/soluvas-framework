@@ -1053,6 +1053,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		termEClass.getESuperTypes().add(theCommonsPackage.getImageable());
 		termEClass.getESuperTypes().add(theCommonsPackage.getPositionable());
 		termEClass.getESuperTypes().add(theCommonsPackage.getColorable());
+		termEClass.getESuperTypes().add(theCommonsPackage.getTranslatable());
 		listVocabEClass.getESuperTypes().add(this.getVocab());
 		treeVocabEClass.getESuperTypes().add(this.getVocab());
 		freeVocabEClass.getESuperTypes().add(this.getVocab());

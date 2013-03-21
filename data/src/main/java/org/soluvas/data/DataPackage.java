@@ -844,13 +844,49 @@ public interface DataPackage extends EPackage {
 	int TERM__COLOR = TERM_CONTAINER_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Translation State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__TRANSLATION_STATE = TERM_CONTAINER_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Original Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__ORIGINAL_LANGUAGE = TERM_CONTAINER_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__LANGUAGE = TERM_CONTAINER_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Translations</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__TRANSLATIONS = TERM_CONTAINER_FEATURE_COUNT + 11;
+
+	/**
 	 * The feature id for the '<em><b>Vocab</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__VOCAB = TERM_CONTAINER_FEATURE_COUNT + 8;
+	int TERM__VOCAB = TERM_CONTAINER_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Display Name</b></em>' attribute.
@@ -859,7 +895,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__DISPLAY_NAME = TERM_CONTAINER_FEATURE_COUNT + 9;
+	int TERM__DISPLAY_NAME = TERM_CONTAINER_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
@@ -868,7 +904,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__IMAGE_ID = TERM_CONTAINER_FEATURE_COUNT + 10;
+	int TERM__IMAGE_ID = TERM_CONTAINER_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Kind Ns Prefix</b></em>' attribute.
@@ -877,7 +913,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__KIND_NS_PREFIX = TERM_CONTAINER_FEATURE_COUNT + 11;
+	int TERM__KIND_NS_PREFIX = TERM_CONTAINER_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Kind Name</b></em>' attribute.
@@ -886,7 +922,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__KIND_NAME = TERM_CONTAINER_FEATURE_COUNT + 12;
+	int TERM__KIND_NAME = TERM_CONTAINER_FEATURE_COUNT + 16;
 
 	/**
 	 * The number of structural features of the '<em>Term</em>' class.
@@ -895,7 +931,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM_FEATURE_COUNT = TERM_CONTAINER_FEATURE_COUNT + 13;
+	int TERM_FEATURE_COUNT = TERM_CONTAINER_FEATURE_COUNT + 17;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.ListVocabImpl <em>List Vocab</em>}' class.
