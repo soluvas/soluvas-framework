@@ -3,12 +3,9 @@
 package org.soluvas.image.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.soluvas.image.DimensionLike;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ResizeToFill;
@@ -119,6 +116,14 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	public ResizeToFillImpl() {
 		super();
 	}
+	
+	public ResizeToFillImpl(Integer width, Integer height,
+			TransformGravity gravity) {
+		super();
+		this.width = width;
+		this.height = height;
+		this.gravity = gravity;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -135,6 +140,7 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getWidth() {
 		return width;
 	}
@@ -144,6 +150,7 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWidth(Integer newWidth) {
 		Integer oldWidth = width;
 		width = newWidth;
@@ -156,6 +163,7 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getHeight() {
 		return height;
 	}
@@ -165,6 +173,7 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHeight(Integer newHeight) {
 		Integer oldHeight = height;
 		height = newHeight;
@@ -177,6 +186,7 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TransformGravity getGravity() {
 		return gravity;
 	}
@@ -186,6 +196,7 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGravity(TransformGravity newGravity) {
 		TransformGravity oldGravity = gravity;
 		gravity = newGravity == null ? GRAVITY_EDEFAULT : newGravity;
@@ -198,6 +209,7 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Boolean getOnlyShrinkLarger() {
 		return onlyShrinkLarger;
 	}
@@ -207,6 +219,7 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOnlyShrinkLarger(Boolean newOnlyShrinkLarger) {
 		Boolean oldOnlyShrinkLarger = onlyShrinkLarger;
 		onlyShrinkLarger = newOnlyShrinkLarger;

@@ -141,6 +141,10 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 				return createImageMagickTransformerAdapter();
 			}
 			@Override
+			public Adapter caseFolderConnector(FolderConnector object) {
+				return createFolderConnectorAdapter();
+			}
+			@Override
 			public Adapter caseIdentifiable(Identifiable object) {
 				return createIdentifiableAdapter();
 			}
@@ -415,6 +419,20 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImageMagickTransformerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.FolderConnector <em>Folder Connector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.FolderConnector
+	 * @generated
+	 */
+	public Adapter createFolderConnectorAdapter() {
 		return null;
 	}
 

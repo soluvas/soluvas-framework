@@ -12,12 +12,12 @@ public class ImageStyle {
 
 	private final String name;
 	private final String code;
-	private final int maxWidth;
-	private final int maxHeight;
+	private final Integer maxWidth;
+	private final Integer maxHeight;
 	private final float quality = 0.85f;
 	private final TransformGravity gravity;
 
-	public ImageStyle(String name, String code, int maxWidth, int maxHeight) {
+	public ImageStyle(String name, String code, Integer maxWidth, Integer maxHeight) {
 		super();
 		this.name = name;
 		this.code = code;
@@ -33,7 +33,7 @@ public class ImageStyle {
 	 * @param maxHeight
 	 * @param gravity
 	 */
-	public ImageStyle(String name, String code, int maxWidth, int maxHeight,
+	public ImageStyle(String name, String code, Integer maxWidth, Integer maxHeight,
 			TransformGravity gravity) {
 		super();
 		this.name = name;
@@ -67,7 +67,7 @@ public class ImageStyle {
 	 * 
 	 * @return
 	 */
-	public int getMaxWidth() {
+	public Integer getMaxWidth() {
 		return maxWidth;
 	}
 
@@ -76,7 +76,7 @@ public class ImageStyle {
 	 * 
 	 * @return
 	 */
-	public int getMaxHeight() {
+	public Integer getMaxHeight() {
 		return maxHeight;
 	}
 

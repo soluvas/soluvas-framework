@@ -3,12 +3,9 @@
 package org.soluvas.image.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.soluvas.image.DimensionLike;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ResizeToFit;
@@ -97,6 +94,13 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	public ResizeToFitImpl() {
 		super();
 	}
+	
+	public ResizeToFitImpl(Integer width, Integer height) {
+		super();
+		this.width = width;
+		this.height = height;
+		this.onlyShrinkLarger = false; // also enlarge small images
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,6 +117,7 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getWidth() {
 		return width;
 	}
@@ -122,6 +127,7 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWidth(Integer newWidth) {
 		Integer oldWidth = width;
 		width = newWidth;
@@ -134,6 +140,7 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getHeight() {
 		return height;
 	}
@@ -143,6 +150,7 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHeight(Integer newHeight) {
 		Integer oldHeight = height;
 		height = newHeight;
@@ -155,6 +163,7 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Boolean getOnlyShrinkLarger() {
 		return onlyShrinkLarger;
 	}
@@ -164,6 +173,7 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOnlyShrinkLarger(Boolean newOnlyShrinkLarger) {
 		Boolean oldOnlyShrinkLarger = onlyShrinkLarger;
 		onlyShrinkLarger = newOnlyShrinkLarger;

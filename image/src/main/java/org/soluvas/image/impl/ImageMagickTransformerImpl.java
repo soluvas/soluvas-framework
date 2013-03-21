@@ -2,6 +2,7 @@
  */
 package org.soluvas.image.impl;
 
+import java.awt.Dimension;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -28,8 +29,10 @@ import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageVariant;
 import org.soluvas.image.ResizeToFill;
+import org.soluvas.image.ResizeToFit;
 import org.soluvas.image.TransformGravity;
 import org.soluvas.image.UploadedImage;
+import org.soluvas.image.util.ImageUtils;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
@@ -202,11 +205,12 @@ public class ImageMagickTransformerImpl extends EObjectImpl implements ImageMagi
 							cmd.addArgument("-gravity");
 							cmd.addArgument(gravity);
 							cmd.addArgument("-quality");
-							cmd.addArgument("90"); // TODO: do not hardcode quality
+							cmd.addArgument(String.valueOf((int)(quality * 100f)));
 							cmd.addArgument(styledFile.getPath());
 							
-							log.debug("Resizing {} to {} position={}, gravity={} progressive={} using: {}",
-									originalFile, styledFile, gravity, quality, progressive, cmd );
+							log.debug("ResizeToFill {} to {}, {}x{} gravity={} quality={} progressive={} using: {}",
+									originalFile, styledFile, fx.getWidth(), fx.getHeight(),
+									gravity, quality, progressive, cmd );
 							
 							final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 							final DefaultExecutor executor = new DefaultExecutor();
@@ -217,6 +221,38 @@ public class ImageMagickTransformerImpl extends EObjectImpl implements ImageMagi
 							width = fx.getWidth();
 							height = fx.getHeight();
 							log.trace("Dimensions of {} is {}x{}", styledFile, width, height);
+						} else if (transform instanceof ResizeToFit) {
+							final ResizeToFit fx = (ResizeToFit) transform;
+							Preconditions.checkArgument(fx.getWidth() != null || fx.getHeight() != null,
+									"For ResizeToFit, at least one of height or width must be specified");
+							final boolean progressive = fx.getWidth() != null ? fx.getWidth() >= 512 : fx.getHeight() >= 512;
+							
+							final CommandLine cmd = new CommandLine("convert");
+							cmd.addArgument("-verbose");
+							cmd.addArgument(originalFile.getPath());
+							cmd.addArgument("-resize");
+							final String widthStr = fx.getWidth() != null ? fx.getWidth().toString() : "";
+							final String heightStr = fx.getHeight() != null ? fx.getHeight().toString() : "";
+							final String onlyShrinkLargerFlag = fx.getOnlyShrinkLarger() ? ">" : "";
+							cmd.addArgument(widthStr + "x" + heightStr + onlyShrinkLargerFlag);
+							cmd.addArgument("-quality");
+							cmd.addArgument(String.valueOf((int)(quality * 100f)));
+							cmd.addArgument(styledFile.getPath());
+							
+							log.debug("ResizeToFit {} to {}, {}x{} onlyShrinkLarger={} quality={} progressive={} using: {}",
+									originalFile, styledFile, fx.getWidth(), fx.getHeight(), fx.getOnlyShrinkLarger(),
+									quality, progressive, cmd );
+							
+							final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+							final DefaultExecutor executor = new DefaultExecutor();
+							executor.setStreamHandler(new PumpStreamHandler(buffer));
+							final int executionResult = executor.execute(cmd);
+							log.info("{} returned {}: {}", cmd, executionResult, buffer);
+							
+							final Dimension styledDim = ImageUtils.getDimension(styledFile);
+							width = (int) styledDim.getWidth();
+							height = (int) styledDim.getHeight();
+							log.debug("Dimensions of {} is {}x{}", styledFile, width, height);
 						} else {
 							throw new ImageException("Unsupported transform: " + transform);
 						}

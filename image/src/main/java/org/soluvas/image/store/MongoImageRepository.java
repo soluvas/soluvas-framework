@@ -40,10 +40,11 @@ import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageTransformer;
 import org.soluvas.image.ImageVariant;
-import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.image.impl.DavConnectorImpl;
 import org.soluvas.image.impl.ImageMagickTransformerImpl;
+import org.soluvas.image.impl.ResizeToFillImpl;
+import org.soluvas.image.impl.ResizeToFitImpl;
 import org.soluvas.image.util.ImageUtils;
 
 import com.google.common.base.Function;
@@ -434,10 +435,14 @@ public class MongoImageRepository implements ImageRepository {
 			sourceVariant.setExtension(extension);
 			final ImmutableMap.Builder<ImageTransform, ImageVariant> transformsBuilder = ImmutableMap.builder();
 			for (final ImageStyle style : styles.values()) {
-				final ResizeToFill fx = ImageFactory.eINSTANCE.createResizeToFill();
-				fx.setWidth(style.getMaxWidth());
-				fx.setHeight(style.getMaxHeight());
-				fx.setGravity(style.getGravity());
+				final ImageTransform fx;
+				if (style.getMaxWidth() != null && style.getMaxHeight() != null) {
+					// create ResizeToFill if both maxWidth and maxHeight is filled
+					fx = new ResizeToFillImpl(style.getMaxWidth(), style.getMaxHeight(), style.getGravity());
+				} else {
+					// otherwise assume ResizeToFit
+					fx = new ResizeToFitImpl(style.getMaxWidth(), style.getMaxHeight());
+				}
 				final ImageVariant dest = ImageFactory.eINSTANCE.createImageVariant();
 				dest.setStyleCode(style.getCode());
 				// TODO: support variant

@@ -18,6 +18,7 @@ import org.soluvas.image.DavConnector;
 import org.soluvas.image.DimensionLike;
 import org.soluvas.image.DuplicateIdHandling;
 import org.soluvas.image.FileExport;
+import org.soluvas.image.FolderConnector;
 import org.soluvas.image.Image;
 import org.soluvas.image.ImageCatalog;
 import org.soluvas.image.ImageConnector;
@@ -161,6 +162,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	private EClass imageMagickTransformerEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass folderConnectorEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -965,6 +972,24 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getFolderConnector() {
+		return folderConnectorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFolderConnector_Folder() {
+		return (EAttribute)folderConnectorEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getImageTransformType() {
 		return imageTransformTypeEEnum;
@@ -1124,6 +1149,9 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		imageMagickTransformerEClass = createEClass(IMAGE_MAGICK_TRANSFORMER);
 		createEReference(imageMagickTransformerEClass, IMAGE_MAGICK_TRANSFORMER__DESTINATION);
 
+		folderConnectorEClass = createEClass(FOLDER_CONNECTOR);
+		createEAttribute(folderConnectorEClass, FOLDER_CONNECTOR__FOLDER);
+
 		// Create enums
 		imageTransformTypeEEnum = createEEnum(IMAGE_TRANSFORM_TYPE);
 		fileExportEEnum = createEEnum(FILE_EXPORT);
@@ -1184,6 +1212,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		styledImageEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
 		styledImageEClass.getESuperTypes().add(theCommonsPackage.getTimestamped());
 		imageMagickTransformerEClass.getESuperTypes().add(this.getImageTransformer());
+		folderConnectorEClass.getESuperTypes().add(this.getImageConnector());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(imageConnectorEClass, ImageConnector.class, "ImageConnector", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1350,6 +1379,9 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		initEClass(imageMagickTransformerEClass, ImageMagickTransformer.class, "ImageMagickTransformer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getImageMagickTransformer_Destination(), this.getImageConnector(), null, "destination", null, 0, 1, ImageMagickTransformer.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(folderConnectorEClass, FolderConnector.class, "FolderConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFolderConnector_Folder(), theEcorePackage.getEString(), "folder", null, 1, 1, FolderConnector.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(imageTransformTypeEEnum, ImageTransformType.class, "ImageTransformType");
@@ -1636,6 +1668,18 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "If ID already exists, throw error (strict)"
+		   });		
+		addAnnotation
+		  (folderConnectorEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Directly save to filesytem folder, useful for testing."
+		   });		
+		addAnnotation
+		  (getFolderConnector_Folder(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Location to save."
 		   });
 	}
 

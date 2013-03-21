@@ -3,12 +3,9 @@
 package org.soluvas.image.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageVariant;
 
@@ -96,6 +93,14 @@ public class ImageVariantImpl extends EObjectImpl implements ImageVariant {
 	public ImageVariantImpl() {
 		super();
 	}
+	
+	public ImageVariantImpl(String styleCode, String styleVariant,
+			String extension) {
+		super();
+		this.styleCode = styleCode;
+		this.styleVariant = styleVariant;
+		this.extension = extension;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,6 +117,7 @@ public class ImageVariantImpl extends EObjectImpl implements ImageVariant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getStyleCode() {
 		return styleCode;
 	}
@@ -121,6 +127,7 @@ public class ImageVariantImpl extends EObjectImpl implements ImageVariant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStyleCode(String newStyleCode) {
 		String oldStyleCode = styleCode;
 		styleCode = newStyleCode;
@@ -133,6 +140,7 @@ public class ImageVariantImpl extends EObjectImpl implements ImageVariant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getStyleVariant() {
 		return styleVariant;
 	}
@@ -142,6 +150,7 @@ public class ImageVariantImpl extends EObjectImpl implements ImageVariant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStyleVariant(String newStyleVariant) {
 		String oldStyleVariant = styleVariant;
 		styleVariant = newStyleVariant;
@@ -154,6 +163,7 @@ public class ImageVariantImpl extends EObjectImpl implements ImageVariant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getExtension() {
 		return extension;
 	}
@@ -163,6 +173,7 @@ public class ImageVariantImpl extends EObjectImpl implements ImageVariant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExtension(String newExtension) {
 		String oldExtension = extension;
 		extension = newExtension;

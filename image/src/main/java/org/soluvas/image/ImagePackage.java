@@ -1051,6 +1051,52 @@ public interface ImagePackage extends EPackage {
 	int IMAGE_MAGICK_TRANSFORMER_FEATURE_COUNT = IMAGE_TRANSFORMER_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.FolderConnectorImpl <em>Folder Connector</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.FolderConnectorImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getFolderConnector()
+	 * @generated
+	 */
+	int FOLDER_CONNECTOR = 17;
+
+	/**
+	 * The feature id for the '<em><b>Hi Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOLDER_CONNECTOR__HI_URI_TEMPLATE = IMAGE_CONNECTOR__HI_URI_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOLDER_CONNECTOR__URI_TEMPLATE = IMAGE_CONNECTOR__URI_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Folder</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOLDER_CONNECTOR__FOLDER = IMAGE_CONNECTOR_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Folder Connector</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOLDER_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1058,7 +1104,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformType()
 	 * @generated
 	 */
-	int IMAGE_TRANSFORM_TYPE = 17;
+	int IMAGE_TRANSFORM_TYPE = 18;
 
 
 	/**
@@ -1069,7 +1115,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getFileExport()
 	 * @generated
 	 */
-	int FILE_EXPORT = 18;
+	int FILE_EXPORT = 19;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.DuplicateIdHandling <em>Duplicate Id Handling</em>}' enum.
@@ -1079,7 +1125,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getDuplicateIdHandling()
 	 * @generated
 	 */
-	int DUPLICATE_ID_HANDLING = 19;
+	int DUPLICATE_ID_HANDLING = 20;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.TransformGravity <em>Transform Gravity</em>}' enum.
@@ -1089,7 +1135,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getTransformGravity()
 	 * @generated
 	 */
-	int TRANSFORM_GRAVITY = 20;
+	int TRANSFORM_GRAVITY = 21;
 
 	/**
 	 * The meta object id for the '<em>Repository</em>' data type.
@@ -1099,7 +1145,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageRepository()
 	 * @generated
 	 */
-	int IMAGE_REPOSITORY = 21;
+	int IMAGE_REPOSITORY = 22;
 
 
 	/**
@@ -1878,6 +1924,27 @@ public interface ImagePackage extends EPackage {
 	EReference getImageMagickTransformer_Destination();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.FolderConnector <em>Folder Connector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Folder Connector</em>'.
+	 * @see org.soluvas.image.FolderConnector
+	 * @generated
+	 */
+	EClass getFolderConnector();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.FolderConnector#getFolder <em>Folder</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Folder</em>'.
+	 * @see org.soluvas.image.FolderConnector#getFolder()
+	 * @see #getFolderConnector()
+	 * @generated
+	 */
+	EAttribute getFolderConnector_Folder();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2559,6 +2626,24 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EReference IMAGE_MAGICK_TRANSFORMER__DESTINATION = eINSTANCE.getImageMagickTransformer_Destination();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.FolderConnectorImpl <em>Folder Connector</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.FolderConnectorImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getFolderConnector()
+		 * @generated
+		 */
+		EClass FOLDER_CONNECTOR = eINSTANCE.getFolderConnector();
+
+		/**
+		 * The meta object literal for the '<em><b>Folder</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FOLDER_CONNECTOR__FOLDER = eINSTANCE.getFolderConnector_Folder();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.

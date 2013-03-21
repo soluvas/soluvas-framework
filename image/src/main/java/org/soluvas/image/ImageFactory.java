@@ -139,6 +139,15 @@ public interface ImageFactory extends EFactory {
 	ImageMagickTransformer createImageMagickTransformer();
 
 	/**
+	 * Returns a new object of class '<em>Folder Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Folder Connector</em>'.
+	 * @generated
+	 */
+	FolderConnector createFolderConnector();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
