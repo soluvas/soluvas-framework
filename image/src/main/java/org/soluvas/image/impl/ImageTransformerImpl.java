@@ -2,19 +2,28 @@
  */
 package org.soluvas.image.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.image.ImageConnector;
+import org.soluvas.image.ImageException;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageTransformer;
 import org.soluvas.image.ImageVariant;
 import org.soluvas.image.UploadedImage;
 
+import com.google.common.base.Preconditions;
+import com.google.common.util.concurrent.AsyncFunction;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -33,6 +42,9 @@ import com.google.common.util.concurrent.MoreExecutors;
  * @generated
  */
 public abstract class ImageTransformerImpl extends EObjectImpl implements ImageTransformer {
+	private static final Logger log = LoggerFactory
+			.getLogger(ImageTransformerImpl.class);
+	
 	/**
 	 * The default value of the '{@link #getExecutor() <em>Executor</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -92,7 +104,7 @@ public abstract class ImageTransformerImpl extends EObjectImpl implements ImageT
 	 * @generated
 	 */
 	@Override
-	public ListenableFuture<List<UploadedImage>> transform(ImageConnector source, String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms) {
+	public ListenableFuture<List<UploadedImage>> transform(ImageConnector source, File sourceFile, String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -140,6 +152,59 @@ public abstract class ImageTransformerImpl extends EObjectImpl implements ImageT
 		result.append(executor);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * @param source
+	 * @param sourceFile
+	 * @param namespace
+	 * @param imageId
+	 * @param sourceVariant
+	 * @param transforms
+	 * @param processor 
+	 * @return
+	 */
+	protected ListenableFuture<List<UploadedImage>> processLocallyThenDelete(final ImageConnector source, final File sourceFile,
+			final String namespace, final String imageId, final ImageVariant sourceVariant, final Map<ImageTransform, ImageVariant> transforms, AsyncFunction<File, List<UploadedImage>> processor) {
+		final ListenableFuture<File> originalFileFuture;
+		final boolean deleteAfterProcess;
+		if (sourceFile != null) {
+			deleteAfterProcess = false;
+			originalFileFuture = Futures.immediateFuture(sourceFile);
+		} else {
+			deleteAfterProcess = true;
+			originalFileFuture = getExecutor().submit(new Callable<File>() {
+				@Override
+				public File call() throws Exception {
+					// download original
+					final File originalFile;
+					try {
+						originalFile = File.createTempFile(imageId + "_",
+								"_" + sourceVariant.getStyleVariant() + "." + sourceVariant.getExtension());
+					} catch (IOException e) {
+						throw new ImageException(e, "Cannot create temporary file for downloading %s %s",
+								sourceVariant.getStyleCode(), imageId);
+					}
+					boolean downloaded = source.download(namespace, imageId, sourceVariant.getStyleCode(),
+							sourceVariant.getStyleVariant(), sourceVariant.getExtension(), originalFile);
+					Preconditions.checkState(downloaded, "Cannot download %s %s", sourceVariant.getStyleCode(), imageId);
+					return originalFile;
+				}
+			});
+		}
+		final ListenableFuture<List<UploadedImage>> styledImagesFuture = Futures.transform(originalFileFuture, processor, getExecutor());
+		if (deleteAfterProcess) {
+			styledImagesFuture.addListener(new Runnable() {
+				@Override
+				public void run() {
+					final File originalFile = Futures.getUnchecked(originalFileFuture);
+					log.trace("Deleting original file {}", originalFile);
+					originalFile.delete();
+					log.debug("Deleted original file {}", originalFile);
+				}
+			}, getExecutor());
+		}
+		return styledImagesFuture;
 	}
 
 } //ImageTransformerImpl

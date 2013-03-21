@@ -2,6 +2,7 @@
  */
 package org.soluvas.image.impl;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -359,7 +360,7 @@ public class BlitlineTransformerImpl extends ImageTransformerImpl implements Bli
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public ListenableFuture<List<UploadedImage>> transform(final ImageConnector source, 
+	public ListenableFuture<List<UploadedImage>> transform(final ImageConnector source, final File sourceFile,
 			final String namespace, final String imageId, final ImageVariant sourceVariant, 
 			final Map<ImageTransform, ImageVariant> transforms) {
 		return getExecutor().submit(new Callable<List<UploadedImage>>() {

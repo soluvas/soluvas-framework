@@ -43,7 +43,7 @@ public class ImageMagickTransformerImplTest {
 	public static final ListeningExecutorService multi = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(
 			Runtime.getRuntime().availableProcessors()));
 	
-	private ImageMagickTransformerImpl transformer;
+	private ImageTransformerImpl transformer;
 	private FolderConnectorImpl conn;
 	private final ListeningExecutorService executor;
 	
@@ -88,7 +88,8 @@ public class ImageMagickTransformerImplTest {
 		// constrain to width only, but free height, this is useful for dynamic grid layout, product view, and zoom view
 		final ResizeToFitImpl transform = new ResizeToFitImpl(75, null);
 		final Map<ImageTransform, ImageVariant> transforms = ImmutableMap.<ImageTransform, ImageVariant>of(transform, destVariant);
-		final List<UploadedImage> uploadeds = transformer.transform(conn, "product", "neneng", sourceVariant, transforms).get();
+		final List<UploadedImage> uploadeds = transformer.transform(
+				conn, null, "product", "neneng", sourceVariant, transforms).get();
 		log.info("Result: {}", uploadeds);
 	}
 
@@ -104,7 +105,8 @@ public class ImageMagickTransformerImplTest {
 				EcoreUtil.copy(transform), destVariant1,
 				EcoreUtil.copy(transform), destVariant2,
 				EcoreUtil.copy(transform), destVariant3);
-		final List<UploadedImage> uploadeds = transformer.transform(conn, "product", "neneng", sourceVariant, transforms).get();
+		final List<UploadedImage> uploadeds = transformer.transform(
+				conn, null, "product", "neneng", sourceVariant, transforms).get();
 		log.info("Result: {}", uploadeds);
 	}
 

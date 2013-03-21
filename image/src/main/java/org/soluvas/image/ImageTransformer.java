@@ -4,6 +4,7 @@ package org.soluvas.image;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 import org.soluvas.commons.SerializableEObject;
@@ -50,9 +51,11 @@ public interface ImageTransformer extends SerializableEObject {
 	 * Thumbnailator saves it to a file and then uploads it using an ImageConnector. Blitline saves directly to an S3 bucket.
 	 * 
 	 * source shouldn't a field, it should be parameter to transform, so we can reuse the same blitline transformer multiple times.
+	 * 
+	 * sourceFile can be null. If filled, that means it's just being uploaded and available locally. If null, that means the file can only be accessed using ImageConnector.
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.soluvas.commons.ListenableFuture<org.soluvas.commons.List<org.soluvas.image.UploadedImage>>"
+	 * @model dataType="org.soluvas.commons.ListenableFuture<org.soluvas.commons.List<org.soluvas.image.UploadedImage>>" sourceFileDataType="org.soluvas.commons.File"
 	 * @generated
 	 */
-	ListenableFuture<List<UploadedImage>> transform(ImageConnector source, String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms);
+	ListenableFuture<List<UploadedImage>> transform(ImageConnector source, File sourceFile, String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms);
 } // ImageTransformer

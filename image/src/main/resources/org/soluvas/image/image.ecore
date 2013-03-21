@@ -98,7 +98,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ImageTransformer" abstract="true">
     <eOperations name="transform">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Transform the image and saves it to the configured destination. The mechanism to assign destination is transformer-specific.&#xA;Thumbnailator saves it to a file and then uploads it using an ImageConnector. Blitline saves directly to an S3 bucket.&#xA;&#xA;source shouldn't a field, it should be parameter to transform, so we can reuse the same blitline transformer multiple times."/>
+        <details key="documentation" value="Transform the image and saves it to the configured destination. The mechanism to assign destination is transformer-specific.&#xA;Thumbnailator saves it to a file and then uploads it using an ImageConnector. Blitline saves directly to an S3 bucket.&#xA;&#xA;source shouldn't a field, it should be parameter to transform, so we can reuse the same blitline transformer multiple times.&#xA;&#xA;sourceFile can be null. If filled, that means it's just being uploaded and available locally. If null, that means the file can only be accessed using ImageConnector."/>
       </eAnnotations>
       <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ListenableFuture">
         <eTypeArguments eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//List">
@@ -106,6 +106,7 @@
         </eTypeArguments>
       </eGenericType>
       <eParameters name="source" eType="#//ImageConnector"/>
+      <eParameters name="sourceFile" eType="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//File"/>
       <eParameters name="namespace" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
       <eParameters name="imageId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
       <eParameters name="sourceVariant" eType="#//ImageVariant"/>

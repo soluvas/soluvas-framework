@@ -249,7 +249,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 		}
 	}
 
-	private static final Logger log = LoggerFactory
+	static final Logger log = LoggerFactory
 			.getLogger(ImageMagickTransformerImpl.class);
 	
 	/**
@@ -326,27 +326,9 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public ListenableFuture<List<UploadedImage>> transform(final ImageConnector source, final String namespace, 
+	public ListenableFuture<List<UploadedImage>> transform(final ImageConnector source, final File sourceFile, final String namespace, 
 			final String imageId, final ImageVariant sourceVariant, final Map<ImageTransform, ImageVariant> transforms) {
-		final ListenableFuture<File> originalFileFuture = getExecutor().submit(new Callable<File>() {
-			@Override
-			public File call() throws Exception {
-				// download original
-				final File originalFile;
-				try {
-					originalFile = File.createTempFile(imageId + "_",
-							"_" + sourceVariant.getStyleVariant() + "." + sourceVariant.getExtension());
-				} catch (IOException e) {
-					throw new ImageException(e, "Cannot create temporary file for downloading %s %s",
-							sourceVariant.getStyleCode(), imageId);
-				}
-				boolean downloaded = source.download(namespace, imageId, sourceVariant.getStyleCode(),
-						sourceVariant.getStyleVariant(), sourceVariant.getExtension(), originalFile);
-				Preconditions.checkState(downloaded, "Cannot download %s %s", sourceVariant.getStyleCode(), imageId);
-				return originalFile;
-			}
-		});
-		final ListenableFuture<List<UploadedImage>> styledImagesFuture = Futures.transform(originalFileFuture, new AsyncFunction<File, List<UploadedImage>>() {
+		final AsyncFunction<File, List<UploadedImage>> processor = new AsyncFunction<File, List<UploadedImage>>() {
 			@Override
 			public ListenableFuture<List<UploadedImage>> apply(final File originalFile)
 					throws Exception {
@@ -358,17 +340,9 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 				final ListenableFuture<List<UploadedImage>> styledImagesFuture = Futures.allAsList(taskFutures);
 				return styledImagesFuture;
 			}
-		}, getExecutor());
-		styledImagesFuture.addListener(new Runnable() {
-			@Override
-			public void run() {
-				File originalFile = Futures.getUnchecked(originalFileFuture);
-				log.trace("Deleting original file {}", originalFile);
-				originalFile.delete();
-				log.debug("Deleted original file {}", originalFile);
-			}
-		}, getExecutor());
-		return styledImagesFuture;
+		};
+		return processLocallyThenDelete(source, sourceFile, namespace, imageId,
+				sourceVariant, transforms, processor);
 	}
 
 	/**

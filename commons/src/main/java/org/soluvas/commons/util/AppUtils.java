@@ -2,8 +2,11 @@ package org.soluvas.commons.util;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 
 import org.soluvas.commons.WebAddress;
+
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
  * @author agus
@@ -28,7 +31,13 @@ public class AppUtils {
 	}
 	
 	public static ExecutorService newCpuExecutor() {
-		return Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+		final ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("CPU-%d").build();
+		return Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors(), threadFactory);
+	}
+
+	public static ExecutorService newNetworkExecutor() {
+		final ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("Network-%02d").build();
+		return Executors.newFixedThreadPool(32, threadFactory);
 	}
 
 }
