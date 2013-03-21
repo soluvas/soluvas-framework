@@ -17,6 +17,7 @@ import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.Sluggable;
+import org.soluvas.commons.Translatable;
 import org.soluvas.data.*;
 import org.soluvas.data.Attribute;
 import org.soluvas.data.CurrencyValue;
@@ -198,6 +199,10 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseColorable(Colorable object) {
 				return createColorableAdapter();
+			}
+			@Override
+			public Adapter caseTranslatable(Translatable object) {
+				return createTranslatableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -594,6 +599,20 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createColorableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Translatable <em>Translatable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Translatable
+	 * @generated
+	 */
+	public Adapter createTranslatableAdapter() {
 		return null;
 	}
 

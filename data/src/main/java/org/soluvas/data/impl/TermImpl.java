@@ -5,13 +5,18 @@ package org.soluvas.data.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreEMap;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.Colorable;
@@ -23,6 +28,10 @@ import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.Translatable;
+import org.soluvas.commons.Translation;
+import org.soluvas.commons.TranslationState;
+import org.soluvas.commons.impl.TranslationEntryImpl;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermValue;
@@ -47,6 +56,10 @@ import com.google.common.base.Strings;
  *   <li>{@link org.soluvas.data.impl.TermImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getPositioner <em>Positioner</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getColor <em>Color</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getTranslationState <em>Translation State</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getOriginalLanguage <em>Original Language</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getLanguage <em>Language</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getTranslations <em>Translations</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getVocab <em>Vocab</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getDisplayName <em>Display Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getImageId <em>Image Id</em>}</li>
@@ -231,6 +244,76 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @ordered
 	 */
 	protected String color = COLOR_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTranslationState() <em>Translation State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTranslationState()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final TranslationState TRANSLATION_STATE_EDEFAULT = TranslationState.ORIGINAL;
+
+	/**
+	 * The cached value of the '{@link #getTranslationState() <em>Translation State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTranslationState()
+	 * @generated
+	 * @ordered
+	 */
+	protected TranslationState translationState = TRANSLATION_STATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOriginalLanguage() <em>Original Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOriginalLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ORIGINAL_LANGUAGE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOriginalLanguage() <em>Original Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOriginalLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected String originalLanguage = ORIGINAL_LANGUAGE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LANGUAGE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected String language = LANGUAGE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTranslations() <em>Translations</em>}' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTranslations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<String, Translation> translations;
 
 	/**
 	 * The cached value of the '{@link #getVocab() <em>Vocab</em>}' reference.
@@ -543,6 +626,81 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TranslationState getTranslationState() {
+		return translationState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTranslationState(TranslationState newTranslationState) {
+		TranslationState oldTranslationState = translationState;
+		translationState = newTranslationState == null ? TRANSLATION_STATE_EDEFAULT : newTranslationState;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__TRANSLATION_STATE, oldTranslationState, translationState));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getOriginalLanguage() {
+		return originalLanguage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOriginalLanguage(String newOriginalLanguage) {
+		String oldOriginalLanguage = originalLanguage;
+		originalLanguage = newOriginalLanguage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__ORIGINAL_LANGUAGE, oldOriginalLanguage, originalLanguage));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLanguage() {
+		return language;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLanguage(String newLanguage) {
+		String oldLanguage = language;
+		language = newLanguage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__LANGUAGE, oldLanguage, language));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EMap<String, Translation> getTranslations() {
+		if (translations == null) {
+			translations = new EcoreEMap<String,Translation>(CommonsPackage.Literals.TRANSLATION_ENTRY, TranslationEntryImpl.class, this, DataPackage.TERM__TRANSLATIONS);
+		}
+		return translations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Vocab getVocab() {
 		if (vocab != null && ((EObject)vocab).eIsProxy()) {
@@ -695,6 +853,20 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DataPackage.TERM__TRANSLATIONS:
+				return ((InternalEList<?>)getTranslations()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DataPackage.TERM__TERMS:
@@ -715,6 +887,15 @@ public class TermImpl extends EObjectImpl implements Term {
 				return getPositioner();
 			case DataPackage.TERM__COLOR:
 				return getColor();
+			case DataPackage.TERM__TRANSLATION_STATE:
+				return getTranslationState();
+			case DataPackage.TERM__ORIGINAL_LANGUAGE:
+				return getOriginalLanguage();
+			case DataPackage.TERM__LANGUAGE:
+				return getLanguage();
+			case DataPackage.TERM__TRANSLATIONS:
+				if (coreType) return getTranslations();
+				else return getTranslations().map();
 			case DataPackage.TERM__VOCAB:
 				if (resolve) return getVocab();
 				return basicGetVocab();
@@ -766,6 +947,18 @@ public class TermImpl extends EObjectImpl implements Term {
 				return;
 			case DataPackage.TERM__COLOR:
 				setColor((String)newValue);
+				return;
+			case DataPackage.TERM__TRANSLATION_STATE:
+				setTranslationState((TranslationState)newValue);
+				return;
+			case DataPackage.TERM__ORIGINAL_LANGUAGE:
+				setOriginalLanguage((String)newValue);
+				return;
+			case DataPackage.TERM__LANGUAGE:
+				setLanguage((String)newValue);
+				return;
+			case DataPackage.TERM__TRANSLATIONS:
+				((EStructuralFeature.Setting)getTranslations()).set(newValue);
 				return;
 			case DataPackage.TERM__VOCAB:
 				setVocab((Vocab)newValue);
@@ -821,6 +1014,18 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__COLOR:
 				setColor(COLOR_EDEFAULT);
 				return;
+			case DataPackage.TERM__TRANSLATION_STATE:
+				setTranslationState(TRANSLATION_STATE_EDEFAULT);
+				return;
+			case DataPackage.TERM__ORIGINAL_LANGUAGE:
+				setOriginalLanguage(ORIGINAL_LANGUAGE_EDEFAULT);
+				return;
+			case DataPackage.TERM__LANGUAGE:
+				setLanguage(LANGUAGE_EDEFAULT);
+				return;
+			case DataPackage.TERM__TRANSLATIONS:
+				getTranslations().clear();
+				return;
 			case DataPackage.TERM__VOCAB:
 				setVocab((Vocab)null);
 				return;
@@ -866,6 +1071,14 @@ public class TermImpl extends EObjectImpl implements Term {
 				return POSITIONER_EDEFAULT == null ? positioner != null : !POSITIONER_EDEFAULT.equals(positioner);
 			case DataPackage.TERM__COLOR:
 				return COLOR_EDEFAULT == null ? color != null : !COLOR_EDEFAULT.equals(color);
+			case DataPackage.TERM__TRANSLATION_STATE:
+				return translationState != TRANSLATION_STATE_EDEFAULT;
+			case DataPackage.TERM__ORIGINAL_LANGUAGE:
+				return ORIGINAL_LANGUAGE_EDEFAULT == null ? originalLanguage != null : !ORIGINAL_LANGUAGE_EDEFAULT.equals(originalLanguage);
+			case DataPackage.TERM__LANGUAGE:
+				return LANGUAGE_EDEFAULT == null ? language != null : !LANGUAGE_EDEFAULT.equals(language);
+			case DataPackage.TERM__TRANSLATIONS:
+				return translations != null && !translations.isEmpty();
 			case DataPackage.TERM__VOCAB:
 				return vocab != null;
 			case DataPackage.TERM__DISPLAY_NAME:
@@ -935,6 +1148,15 @@ public class TermImpl extends EObjectImpl implements Term {
 				default: return -1;
 			}
 		}
+		if (baseClass == Translatable.class) {
+			switch (derivedFeatureID) {
+				case DataPackage.TERM__TRANSLATION_STATE: return CommonsPackage.TRANSLATABLE__TRANSLATION_STATE;
+				case DataPackage.TERM__ORIGINAL_LANGUAGE: return CommonsPackage.TRANSLATABLE__ORIGINAL_LANGUAGE;
+				case DataPackage.TERM__LANGUAGE: return CommonsPackage.TRANSLATABLE__LANGUAGE;
+				case DataPackage.TERM__TRANSLATIONS: return CommonsPackage.TRANSLATABLE__TRANSLATIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -993,6 +1215,15 @@ public class TermImpl extends EObjectImpl implements Term {
 				default: return -1;
 			}
 		}
+		if (baseClass == Translatable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.TRANSLATABLE__TRANSLATION_STATE: return DataPackage.TERM__TRANSLATION_STATE;
+				case CommonsPackage.TRANSLATABLE__ORIGINAL_LANGUAGE: return DataPackage.TERM__ORIGINAL_LANGUAGE;
+				case CommonsPackage.TRANSLATABLE__LANGUAGE: return DataPackage.TERM__LANGUAGE;
+				case CommonsPackage.TRANSLATABLE__TRANSLATIONS: return DataPackage.TERM__TRANSLATIONS;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -1022,6 +1253,12 @@ public class TermImpl extends EObjectImpl implements Term {
 		result.append(positioner);
 		result.append(", color: ");
 		result.append(color);
+		result.append(", translationState: ");
+		result.append(translationState);
+		result.append(", originalLanguage: ");
+		result.append(originalLanguage);
+		result.append(", language: ");
+		result.append(language);
 		result.append(", displayName: ");
 		result.append(displayName);
 		result.append(", imageId: ");

@@ -9,6 +9,7 @@ import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
+import org.soluvas.commons.Translatable;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +31,7 @@ import org.soluvas.commons.ResourceAware;
  * @model
  * @generated
  */
-public interface Term extends TermContainer, BundleAware, NameContainer, ResourceAware, NsPrefixable, Imageable, Positionable, Colorable {
+public interface Term extends TermContainer, BundleAware, NameContainer, ResourceAware, NsPrefixable, Imageable, Positionable, Colorable, Translatable {
 	/**
 	 * Returns the value of the '<em><b>Vocab</b></em>' reference.
 	 * <!-- begin-user-doc -->
