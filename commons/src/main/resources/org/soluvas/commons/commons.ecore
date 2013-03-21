@@ -816,4 +816,10 @@
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ListenableFuture" instanceClassName="com.google.common.util.concurrent.ListenableFuture"
+      serializable="false">
+    <eTypeParameters name="V"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ListeningExecutorService" instanceClassName="com.google.common.util.concurrent.ListeningExecutorService"
+      serializable="false"/>
 </ecore:EPackage>

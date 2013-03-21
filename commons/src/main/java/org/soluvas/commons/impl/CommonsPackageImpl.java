@@ -91,6 +91,8 @@ import org.soluvas.commons.WebAddress;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
 
 /**
  * <!-- begin-user-doc -->
@@ -616,6 +618,20 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EDataType fileEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType listenableFutureEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType listeningExecutorServiceEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -2091,6 +2107,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getListenableFuture() {
+		return listenableFutureEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getListeningExecutorService() {
+		return listeningExecutorServiceEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
@@ -2306,6 +2340,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		dateTimeZoneEDataType = createEDataType(DATE_TIME_ZONE);
 		localeEDataType = createEDataType(LOCALE);
 		fileEDataType = createEDataType(FILE);
+		listenableFutureEDataType = createEDataType(LISTENABLE_FUTURE);
+		listeningExecutorServiceEDataType = createEDataType(LISTENING_EXECUTOR_SERVICE);
 	}
 
 	/**
@@ -2365,6 +2401,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addETypeParameter(queueEDataType, "T");
 		addETypeParameter(multisetEDataType, "T");
 		ETypeParameter measurableEDataType_Q = addETypeParameter(measurableEDataType, "Q");
+		addETypeParameter(listenableFutureEDataType, "V");
 
 		// Set bounds for type parameters
 		EGenericType g1 = createEGenericType(this.getIdentifiable());
@@ -2772,6 +2809,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(dateTimeZoneEDataType, DateTimeZone.class, "DateTimeZone", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(localeEDataType, Locale.class, "Locale", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(fileEDataType, File.class, "File", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(listenableFutureEDataType, ListenableFuture.class, "ListenableFuture", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(listeningExecutorServiceEDataType, ListeningExecutorService.class, "ListeningExecutorService", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

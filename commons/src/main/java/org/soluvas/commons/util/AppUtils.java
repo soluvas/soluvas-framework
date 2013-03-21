@@ -1,5 +1,8 @@
 package org.soluvas.commons.util;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.soluvas.commons.WebAddress;
 
 /**
@@ -22,6 +25,10 @@ public class AppUtils {
 	 */
 	public static String getEmailLogoUri(WebAddress webAddress) {
 		return webAddress.getImagesUri() + "common/logo_email.png";
+	}
+	
+	public static ExecutorService newCpuExecutor() {
+		return Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 	}
 
 }

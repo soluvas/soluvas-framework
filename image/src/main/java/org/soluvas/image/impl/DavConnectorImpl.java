@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpHost;
@@ -44,6 +46,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /**
  * <!-- begin-user-doc -->
@@ -75,7 +78,11 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	}
 	
 	public DavConnectorImpl(String davUri, String publicUri) {
-		super();
+		this(davUri, publicUri, EXECUTOR_EDEFAULT);
+	}
+	
+	public DavConnectorImpl(String davUri, String publicUri, ExecutorService executor) {
+		super(executor);
 		this.davUri = davUri;
 		this.publicUri = publicUri;
 		
@@ -110,6 +117,8 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 			Throwables.propagate(e1);
 		}
 	}
+	
+	
 
 	/**
 	 * Create {@link HttpContext} with {@link AuthCache} pre-populated,
@@ -322,22 +331,27 @@ and uploading again, and because of HTTP pipelining which isn't supported by ngi
 			throw new ImageException(e, "Cannot download %s from %s", imageId, imageUri);
 		}
 	}
-
+	
 	@Override
-	public UploadedImage upload(String namespace, String imageId,
-			String styleCode, String styleVariant, String extension, File file,
-			String contentType) {
-		final String uri = getImageDavUri(namespace, imageId, styleCode, styleVariant, extension);
-		try {
-			uploadFileDav(uri, file, contentType);
-			final String originUri = getUri(namespace, imageId, styleCode, styleVariant, extension);
-			final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
-			uploadedImage.setOriginUri(originUri);
-			uploadedImage.setUri(originUri);
-			return uploadedImage;
-		} catch (Exception e) {
-			throw new ImageException("Cannot upload to " + uri, e);
-		}
+	public ListenableFuture<UploadedImage> upload(final String namespace, final String imageId,
+			final String styleCode, final String styleVariant, final String extension, final File file,
+			final String contentType) {
+		return getExecutor().submit(new Callable<UploadedImage>() {
+			@Override
+			public UploadedImage call() throws Exception {
+				final String uri = getImageDavUri(namespace, imageId, styleCode, styleVariant, extension);
+				try {
+					uploadFileDav(uri, file, contentType);
+					final String originUri = getUri(namespace, imageId, styleCode, styleVariant, extension);
+					final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
+					uploadedImage.setOriginUri(originUri);
+					uploadedImage.setUri(originUri);
+					return uploadedImage;
+				} catch (Exception e) {
+					throw new ImageException("Cannot upload to " + uri, e);
+				}
+			}
+		});
 	}
 
 } //DavConnectorImpl

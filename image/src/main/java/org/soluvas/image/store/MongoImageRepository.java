@@ -11,11 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
@@ -58,6 +54,10 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.util.concurrent.AsyncFunction;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -207,6 +207,7 @@ public class MongoImageRepository implements ImageRepository {
 			log.info("Authenticated to MongoDB. Collection name is {}", collName);
 			mongoColl = db.getCollection(collName);
 			mongoColl.ensureIndex(new BasicDBObject("created", -1));
+			mongoColl.ensureIndex(new BasicDBObject("creationTime", -1));
 		} catch (Exception e) {
 			throw new ImageException("Cannot connect to MongoDB "+ mongoHosts + " database " + mongoDatabase, e);
 		}
@@ -308,20 +309,23 @@ public class MongoImageRepository implements ImageRepository {
 					contentType, length, originalFile });
 			FileUtils.copyInputStreamToFile(content, originalFile);
 			
-			return doCreate(null, originalFile, contentType, originalFile.length(), name, fileName, true);
+			final ListenableFuture<String> imageIdFuture = doCreate(null, originalFile, contentType, originalFile.length(), name, fileName, true);
+			return Futures.getUnchecked(imageIdFuture);
 		} finally {
 			log.info("Deleting temporary original image {}", originalFile);
 			originalFile.delete();
 		}
 	}
 	
-	/* (non-Javadoc)
+	/**
 	 * @see org.soluvas.image.store.ImageRepository#create(java.io.File, java.lang.String, java.lang.String)
+	 * @deprecated Use {@link #add(Image)}. 
 	 */
-	@Override
+	@Override @Deprecated
 	public String create(String imageId, File originalFile, final String contentType, String name) throws IOException {
-		Preconditions.checkNotNull(originalFile, "Original file to be added must not be null");
-		return doCreate(imageId, originalFile, contentType, originalFile.length(), name, originalFile.getName(), true);
+		final ListenableFuture<String> imageIdFuture = doCreate(imageId, originalFile, contentType, originalFile.length(), name,
+				originalFile.getName(), true);
+		return Futures.getUnchecked(imageIdFuture);
 	}
 
 	/* (non-Javadoc)
@@ -334,47 +338,57 @@ public class MongoImageRepository implements ImageRepository {
 	
 	@Override
 	public List<String> add(@Nonnull List<Image> newImages, final ProgressMonitor monitor) {
-		final ExecutorService executor = Executors.newFixedThreadPool(8);
-		try {
-			final List<Future<String>> imageIdFutures = Lists.newArrayList();
-			
-			// TODO: optimize!
-			monitor.beginTask("Uploading " + newImages.size() + " images", newImages.size());
-			for (final Image newImage : newImages) {
-				final Future<String> future = executor.submit(new Callable<String>() {
-					@Override
-					public String call() throws Exception {
-						try {
-							String imageId = create(newImage.getId(), newImage.getOriginalFile(), newImage.getContentType(), newImage.getName());
-							monitor.worked(1);
-							return imageId;
-						} catch (IOException e) {
-							monitor.worked(1, ProgressStatus.ERROR);
-							log.error("Error adding image " + newImage, e);
-							return null;
-						}
-					}
-				});
-				imageIdFutures.add(future);
-			}
-			
-			// use ArrayList because can contain nulls
-			final List<String> imageIds = Lists.newArrayList( Lists.transform(imageIdFutures, new Function<Future<String>, String>() {
-				@Override @Nullable
-				public String apply(@Nullable Future<String> input) {
-					try {
-						return input.get();
-					} catch (Exception e) {
-						log.error("Cannot get Image execution result", e);
-						return null;
-					}
+		final List<ListenableFuture<String>> imageIdFutures = Lists.newArrayList();
+		
+		// TODO: optimize!
+		monitor.beginTask("Uploading " + newImages.size() + " images", newImages.size());
+		for (final Image newImage : newImages) {
+			final ListenableFuture<String> imageIdFuture = doCreate(newImage.getId(), newImage.getOriginalFile(), newImage.getContentType(),
+					newImage.getOriginalFile().length(), newImage.getName(),
+					newImage.getOriginalFile().getName(), true);
+			Futures.addCallback(imageIdFuture, new FutureCallback<String>() {
+				@Override
+				public void onSuccess(String imageId) {
+					log.info("Added image {} from {}", imageId, newImage);
+					monitor.worked(1);
 				}
-			}) );
-			
-			monitor.done();
-			return imageIds;
-		} finally {
-			executor.shutdown();
+				
+				@Override
+				public void onFailure(Throwable t) {
+					log.error("Error adding image " + newImage, t);
+					monitor.worked(1, ProgressStatus.ERROR);
+				}
+			});
+			imageIdFutures.add(imageIdFuture);
+		}
+		
+		// use ArrayList because can contain nulls
+		final ListenableFuture<List<String>> imageIdsFuture = Futures.successfulAsList(imageIdFutures);
+		Futures.addCallback(imageIdsFuture, new FutureCallback<List<String>>() {
+			@Override
+			public void onSuccess(List<String> result) {
+				log.info("Uploaded {} images: {}", result.size(), result);
+				monitor.done();
+			}
+
+			@Override
+			public void onFailure(Throwable t) {
+				monitor.done(ProgressStatus.ERROR);
+				throw new ImageException("Cannot add " + imageIdFutures.size() + " images", t);
+			}
+		});
+		
+		return Futures.getUnchecked(imageIdsFuture);
+	}
+	
+	private static class OriginalUpload {
+		final public String uri;
+		final public String originUri;
+		
+		public OriginalUpload(String originalUri, String originalOriginUri) {
+			super();
+			this.uri = originalUri;
+			this.originUri = originalOriginUri;
 		}
 	}
 	
@@ -382,81 +396,94 @@ public class MongoImageRepository implements ImageRepository {
 	 * @see org.soluvas.image.store.ImageRepository#doCreate(java.lang.String, java.io.File, java.lang.String, long, java.lang.String, java.lang.String, boolean)
 	 */
 	@Override
-	public String doCreate(String existingImageId, final File originalFile, final String contentType,
-			final long length, final String name, final String originalName, boolean alsoUploadOriginal) throws IOException {
+	public ListenableFuture<String> doCreate(String existingImageId, final File originalFile, final String contentType,
+			final long length, final String name, final String originalName, boolean alsoUploadOriginal) {
+		Preconditions.checkNotNull(originalFile, "Original file to be added must not be null");
+		
 //		final String seoName = name + " " + FilenameUtils.getBaseName(fileName);
 		final String seoName1 = SlugUtils.generateId(name, 0);
 		final String seoName2 = SlugUtils.generateId(FilenameUtils.getBaseName(originalName), 0);
 		final String imageId = Optional.fromNullable(existingImageId).or( seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2 );
-		String extension = StringUtils.lowerCase(FilenameUtils.getExtension(originalName));
-		if (Strings.isNullOrEmpty(extension)) {
+		String tmpExtension = StringUtils.lowerCase(FilenameUtils.getExtension(originalName));
+		final String extension;
+		if (Strings.isNullOrEmpty(tmpExtension)) {
 			extension = supportedContentTypes.get(contentType);
 			if (Strings.isNullOrEmpty(extension)) {
 				throw new ImageException(String.format("Cannot get extension from originalName=%s for existingImageId=%s originalFile=%s, with unsupported content type %s, supported content types are: %s",
 						originalName, existingImageId, originalFile, contentType, supportedContentTypes.keySet()));
 			}
+		} else {
+			extension = tmpExtension;
 		}
 		
 		log.debug("Adding image from {} ({} {} bytes) as {}, originalName={} extension={}",
 				originalFile.getName(), contentType, length, imageId,
 				originalName, extension);
-		try {
-			// <del>Upload originals last, so that unreadable images aren't uploaded at all</del>
-			// Originals must be uploaded first, because Blitline transformer requires them!
-			
-			final String originalUri;
-			final String originalOriginUri;
-			if (alsoUploadOriginal) {
-				try {
-					final UploadedImage originalUpload = connector.upload(namespace, imageId, ORIGINAL_CODE, ORIGINAL_CODE, extension,
-							originalFile, contentType);
-					originalUri = originalUpload.getUri();
-					originalOriginUri = originalUpload.getOriginUri();
-				} catch (Exception e) {
-					throw new ImageException("Error uploading original " + imageId + " using " + connector.getClass().getName(), e);
+		
+		// <del>Upload originals last, so that unreadable images aren't uploaded at all</del>
+		// Originals must be uploaded first, because Blitline transformer requires them!
+		
+		final ListenableFuture<OriginalUpload> original;
+		
+		if (alsoUploadOriginal) {
+			final ListenableFuture<UploadedImage> originalUploadFuture = connector.upload(namespace, imageId, ORIGINAL_CODE, ORIGINAL_CODE, extension,
+					originalFile, contentType);
+			original = Futures.transform(originalUploadFuture, new Function<UploadedImage, OriginalUpload>() {
+				@Override @Nullable
+				public OriginalUpload apply(@Nullable UploadedImage originalUpload) {
+					return new OriginalUpload( originalUpload.getUri(), originalUpload.getOriginUri() );
 				}
-			} else {
-				log.info("Not uploading original {} using {} because requested by caller (probably for reprocess)",
-						imageId, connector.getClass().getName());
-				originalUri = connector.getUri(namespace, imageId, ORIGINAL_CODE, ORIGINAL_CODE, extension);
-				originalOriginUri = connector.getOriginUri(namespace, imageId, ORIGINAL_CODE, ORIGINAL_CODE, extension);
-			}
+			});
+		} else {
+			log.info("Not uploading original {} using {} because requested by caller (probably for reprocess)",
+					imageId, connector.getClass().getName());
+			original = Futures.immediateFuture(new OriginalUpload(
+				connector.getUri(namespace, imageId, ORIGINAL_CODE, ORIGINAL_CODE, extension),
+				connector.getOriginUri(namespace, imageId, ORIGINAL_CODE, ORIGINAL_CODE, extension) ));
+		}
 //			Future<Object> originalFuture = Futures.future(uploadOriginal, system.dispatcher());
 
-			// Create styles and upload
+		// Create styles and upload
 //			final Collection<StyledImage> styledImages = Collections2.transform(styles.values(), new com.google.common.base.Function<ImageStyle, StyledImage>() {
 //				@Override
 //				public StyledImage apply(final ImageStyle style) {
 //				}
 //			});
-			final ImageVariant sourceVariant = ImageFactory.eINSTANCE.createImageVariant();
-			sourceVariant.setStyleCode(ORIGINAL_CODE);
-			sourceVariant.setStyleVariant(ORIGINAL_CODE);
-			sourceVariant.setExtension(extension);
-			final ImmutableMap.Builder<ImageTransform, ImageVariant> transformsBuilder = ImmutableMap.builder();
-			for (final ImageStyle style : styles.values()) {
-				final ImageTransform fx;
-				if (style.getMaxWidth() != null && style.getMaxHeight() != null) {
-					// create ResizeToFill if both maxWidth and maxHeight is filled
-					fx = new ResizeToFillImpl(style.getMaxWidth(), style.getMaxHeight(), style.getGravity());
-				} else {
-					// otherwise assume ResizeToFit
-					fx = new ResizeToFitImpl(style.getMaxWidth(), style.getMaxHeight());
-				}
-				final ImageVariant dest = ImageFactory.eINSTANCE.createImageVariant();
-				dest.setStyleCode(style.getCode());
-				// TODO: support variant
-				dest.setStyleVariant(style.getCode());
-				// TODO: don't hardcode extension
-				dest.setExtension("jpg");
-				transformsBuilder.put(fx, dest);
+		final ImageVariant sourceVariant = ImageFactory.eINSTANCE.createImageVariant();
+		sourceVariant.setStyleCode(ORIGINAL_CODE);
+		sourceVariant.setStyleVariant(ORIGINAL_CODE);
+		sourceVariant.setExtension(extension);
+		final ImmutableMap.Builder<ImageTransform, ImageVariant> transformsBuilder = ImmutableMap.builder();
+		for (final ImageStyle style : styles.values()) {
+			final ImageTransform fx;
+			if (style.getMaxWidth() != null && style.getMaxHeight() != null) {
+				// create ResizeToFill if both maxWidth and maxHeight is filled
+				fx = new ResizeToFillImpl(style.getMaxWidth(), style.getMaxHeight(), style.getGravity());
+			} else {
+				// otherwise assume ResizeToFit
+				fx = new ResizeToFitImpl(style.getMaxWidth(), style.getMaxHeight());
 			}
-			final Map<ImageTransform, ImageVariant> transforms = transformsBuilder.build();
-			// FIXME: transform and upload
-			log.debug("Transforming {} into {} variants using {}", imageId, transforms.size(), transformer.getClass().getName());
-			final List<UploadedImage> transformeds = transformer.transform(connector, namespace, imageId, sourceVariant, transforms);
-			log.info("Got {} transformed images of {} from {}", transformeds.size(), imageId, transformer.getClass().getName());
-
+			final ImageVariant dest = ImageFactory.eINSTANCE.createImageVariant();
+			dest.setStyleCode(style.getCode());
+			// TODO: support variant
+			dest.setStyleVariant(style.getCode());
+			// TODO: don't hardcode extension
+			dest.setExtension("jpg");
+			transformsBuilder.put(fx, dest);
+		}
+		final Map<ImageTransform, ImageVariant> transforms = transformsBuilder.build();
+		
+		final ListenableFuture<List<UploadedImage>> transformedsFuture = Futures.transform(original, new AsyncFunction<OriginalUpload, List<UploadedImage>>() {
+			@Override @Nullable
+			public ListenableFuture<List<UploadedImage>> apply(@Nullable OriginalUpload input) {
+				// at this point, the original will have been uploaded, so Blitline can transform
+				log.debug("Transforming {} into {} variants using {}", imageId, transforms.size(), transformer.getClass().getName());
+				final ListenableFuture<List<UploadedImage>> transformedsFuture = transformer.transform(
+						connector, namespace, imageId, sourceVariant, transforms);
+				return transformedsFuture;
+			}
+		});
+		
 //			// Upload these thumbnails
 //			List<Future<StyledImage>> uploadedFutures = Lists.transform(styledFutures, new com.google.common.base.Function<Future<ResizeResult>, Future<StyledImage>>() {
 //				@Override
@@ -486,55 +513,62 @@ public class MongoImageRepository implements ImageRepository {
 //			});
 
 //			Await.result(originalFuture, Timeout.never().duration());
-			
-			final BasicBSONObject stylesObj = new BasicBSONObject();
-			for (final UploadedImage transformed : transformeds) {
-//				StyledImage styled = Await.result(future, Timeout.never().duration());
-				final ImageStyle style = Iterables.find(styles.values(), new Predicate<ImageStyle>() {
-					@Override
-					public boolean apply(@Nullable ImageStyle input) {
-						return transformed.getStyleCode().equals(input.getCode());
-					}
-				});
-				final Map<String, Object> bson = new HashMap<String, Object>();
-				bson.put("className", StyledImage.class.getName());
-				bson.put("name", style.getName());
-				bson.put("code", transformed.getStyleCode());
-				bson.put("styleCode", transformed.getStyleCode());
-				bson.put("styleVariant", transformed.getStyleVariant());
-				bson.put("extension", transformed.getExtension());
-				bson.put("uri", transformed.getUri());
-				bson.put("originUri", transformed.getOriginUri());
-				bson.put("contentType", "image/jpeg"); // TODO: don't hardcode content type
-				bson.put("size", transformed.getSize());
-				bson.put("width", transformed.getWidth());
-				bson.put("height", transformed.getHeight());
-				stylesObj.put(style.getName(), bson);
+		
+		final ListenableFuture<String> imageIdFuture = Futures.transform(transformedsFuture, new Function<List<UploadedImage>, String>() {
+			@Override @Nullable
+			public String apply(@Nullable List<UploadedImage> transformeds) {
+				log.info("Got {} transformed images of {} from {}", transformeds.size(), imageId,
+						transformer.getClass().getName());
+				final BasicBSONObject stylesObj = new BasicBSONObject();
+				for (final UploadedImage transformed : transformeds) {
+//						StyledImage styled = Await.result(future, Timeout.never().duration());
+					final ImageStyle style = Iterables.find(styles.values(), new Predicate<ImageStyle>() {
+						@Override
+						public boolean apply(@Nullable ImageStyle input) {
+							return transformed.getStyleCode().equals(input.getCode());
+						}
+					});
+					final Map<String, Object> bson = new HashMap<String, Object>();
+					bson.put("className", StyledImage.class.getName());
+					bson.put("name", style.getName());
+					bson.put("code", transformed.getStyleCode());
+					bson.put("styleCode", transformed.getStyleCode());
+					bson.put("styleVariant", transformed.getStyleVariant());
+					bson.put("extension", transformed.getExtension());
+					bson.put("uri", transformed.getUri());
+					bson.put("originUri", transformed.getOriginUri());
+					bson.put("contentType", "image/jpeg"); // TODO: don't hardcode content type
+					bson.put("size", transformed.getSize());
+					bson.put("width", transformed.getWidth());
+					bson.put("height", transformed.getHeight());
+					stylesObj.put(style.getName(), bson);
+				}
+				
+				// Create mongoDB
+				final OriginalUpload originalUpload = Futures.getUnchecked(original);
+				final BasicDBObject dbo = new BasicDBObject();
+				dbo.put("_id", imageId);
+				dbo.put("name", name);
+				dbo.put("uri", originalUpload.uri);
+				dbo.put("originUri", originalUpload.originUri);
+				dbo.put("fileName", originalName);
+				dbo.put("contentType", contentType);
+				dbo.put("extension", extension);
+				dbo.put("size", (int)length);
+				final Date creationTime = new Date();
+				dbo.put("created", creationTime);
+				dbo.put("creationTime", creationTime);
+				dbo.put("styles", stylesObj);
+				
+				log.info("Upserting image {} ({}) metadata into MongoDB collection {}", 
+						imageId, name, mongoColl.getName() );
+				mongoColl.update(new BasicDBObject("_id", imageId), dbo, true, false);
+				
+				return imageId;
 			}
-			
-			// Create mongoDB
-			final BasicDBObject dbo = new BasicDBObject();
-			dbo.put("_id", imageId);
-			dbo.put("name", name);
-			dbo.put("uri", originalUri);
-			dbo.put("originUri", originalOriginUri);
-			dbo.put("fileName", originalName);
-			dbo.put("contentType", contentType);
-			dbo.put("extension", extension);
-			dbo.put("size", (int)length);
-			final Date creationTime = new Date();
-			dbo.put("created", creationTime);
-			dbo.put("creationTime", creationTime);
-			dbo.put("styles", stylesObj);
-			
-			log.info("Upserting image {} ({}) metadata into MongoDB collection {}", 
-					imageId, name, mongoColl.getName() );
-			mongoColl.update(new BasicDBObject("_id", imageId), dbo, true, false);
-			
-			return imageId;
-		} catch (final Exception e) {
-			throw new ImageException("Error processing image " + imageId, e);
-		}
+		});
+		
+		return imageIdFuture;
 	}
 	
 	/* (non-Javadoc)
