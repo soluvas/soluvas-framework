@@ -153,8 +153,8 @@ public class PooledLdapRepositoryTest {
 	
 	@Test
 	public void findAllByFilter() {
-		final String filter = "(cn=*ang*)";
-		
+//		final String filter = "(cn=*ang*)";
+		final String filter = "(|(cn=*ang*)(mobile=*0856*))";
 		final List<SocialPerson> people = personRepo.findAllByFilter(filter);
 		
 		log.info("User by filter has {} records", people.size());

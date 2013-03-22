@@ -3,6 +3,10 @@
   <children xmi:type="notation:Node" xmi:id="_oMAVME3SEeKyY_kAWxaufg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_oMBjUE3SEeKyY_kAWxaufg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_oMBjUU3SEeKyY_kAWxaufg" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_aJjw8JHoEeKfzf1vFtZCfA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="image.ecore#//ImageConnector/executor"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_aJjw8ZHoEeKfzf1vFtZCfA"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_Rr3sQF2NEeK8n5vmF4w3tA" type="2001">
         <element xmi:type="ecore:EAttribute" href="image.ecore#//ImageConnector/hiUriTemplate"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Rr3sQV2NEeK8n5vmF4w3tA"/>
@@ -159,6 +163,10 @@
   <children xmi:type="notation:Node" xmi:id="_gxLLYF11EeKHsp4J123rug" type="1001">
     <children xmi:type="notation:Node" xmi:id="_gxOOsF11EeKHsp4J123rug" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_gxPc0F11EeKHsp4J123rug" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_K7ylQJHzEeKfzf1vFtZCfA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="image.ecore#//ImageTransformer/executor"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_K7ylQZHzEeKfzf1vFtZCfA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_gxPc0V11EeKHsp4J123rug"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_gxPc0l11EeKHsp4J123rug"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_gxPc0111EeKHsp4J123rug"/>

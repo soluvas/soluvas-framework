@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.Callable;
 
 import javax.annotation.Nullable;
 import javax.imageio.IIOImage;
@@ -25,7 +26,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.image.ImageConnector;
@@ -43,6 +43,8 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import com.google.common.util.concurrent.AsyncFunction;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,7 +60,7 @@ import com.google.common.collect.ImmutableList;
  * @generated
  */
 @SuppressWarnings("serial")
-public class ThumbnailatorTransformerImpl extends EObjectImpl implements ThumbnailatorTransformer {
+public class ThumbnailatorTransformerImpl extends ImageTransformerImpl implements ThumbnailatorTransformer {
 	
 	/**
 	 * Convert {@link TransformGravity} to Thumbnailator's {@link Positions}.
@@ -142,165 +144,161 @@ public class ThumbnailatorTransformerImpl extends EObjectImpl implements Thumbna
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public List<UploadedImage> transform(ImageConnector source, String namespace, String imageId, ImageVariant sourceVariant,
-			Map<ImageTransform, ImageVariant> transforms) {
-		// download original
-		final File originalFile;
-		try {
-			originalFile = File.createTempFile(imageId + "_",
-					"_" + sourceVariant.getStyleVariant() + "." + sourceVariant.getExtension());
-		} catch (IOException e) {
-			throw new ImageException(e, "Cannot create temporary file for downloading %s %s",
-					sourceVariant.getStyleCode(), imageId);
-		}
-		source.download(namespace, imageId, sourceVariant.getStyleCode(),
-				sourceVariant.getStyleVariant(), sourceVariant.getExtension(), originalFile);
-		
-		final ImmutableList.Builder<UploadedImage> uploads = ImmutableList.builder();
-		try {
-			for (Entry<ImageTransform, ImageVariant> entry : transforms.entrySet()) {
-				final ImageTransform transform = entry.getKey();
-				final ImageVariant dest = entry.getValue();
-				final int width;
-				final int height;
-				// TODO: do not hardcode quality
-				final float quality = 0.9f;
-				final File styledFile;
-				try {
-					styledFile = File.createTempFile(imageId + "_", "_" + dest.getStyleVariant() + "." + dest.getExtension());
-				} catch (IOException e1) {
-					throw new ImageException(e1, "Cannot create temporary file for styled %s %s",
-							dest.getStyleCode(), imageId);
-				}
-				
-				try {
-					try {
-						// I don't think Thumbnailer and/or ImageIO is thread-safe
-						//synchronized (this) {
-//							final BufferedImage originalImage = ImageIO.read(originalFile);
-//							final int origWidth = originalImage.getWidth();
-//							final int origHeight = originalImage.getHeight();
-							if (transform instanceof ResizeToFill) {
-								final ResizeToFill fx = (ResizeToFill) transform;
-								final boolean progressive = fx.getWidth() >= 512;
-								Preconditions.checkNotNull(fx.getWidth(), "ResizeToFill.width must not be null");
-								Preconditions.checkNotNull(fx.getHeight(), "ResizeToFill.height must not be null");
-								final Position cropPosition = Optional.fromNullable(new ToPositions().apply(fx.getGravity())).or(Positions.CENTER);
-								
-								// Scaling is not needed! crop(TOP_CENTER) already does its job
-								// my "failed" experiment was due to an already padded source image, sigh!
-//								// Scale up/down first, use the biggest scale
-//								final double targetRatio = (double) fx.getWidth() / fx.getHeight();
-//								final double origRatio = (double) origWidth / origHeight;
-//								final int sourceWidth;
-//								final int sourceHeight;
-//								if (targetRatio > origRatio) {
-//									// target ratio is wider than original, so sacrifice height
-//									sourceWidth = origWidth;
-//									sourceHeight = (int) Math.round(1f/targetRatio * origWidth);
-//								} else {
-//									// target ratio is narrower than original, so sacrifice width
-//									sourceWidth = (int) Math.round(targetRatio * origHeight);
-//									sourceHeight = origHeight;
-//									
-//								}
-//								final double widthScale = (double) fx.getWidth() / origWidth;
-//								final double heightScale = (double) fx.getHeight() / origHeight;
-//								final double targetScale = Math.max(widthScale, heightScale);
-
-								log.info("Resizing {} to {} position={}, quality={} progressive={}",
-										originalFile, styledFile, cropPosition, quality, progressive );
-								
-								// Before cropping
-								// TODO: support other gravity / cropping
-//								final BufferedImage scaledImage = Thumbnails.of(originalFile)
-//										.scale(targetScale)
-//										.asBufferedImage();
-								final BufferedImage styledImage = Thumbnails.of(originalFile)
-//										.sourceRegion(cropPosition, sourceWidth, sourceHeight)
-										.crop(cropPosition)
-										.size(fx.getWidth(), fx.getHeight())
-										.asBufferedImage();
-								width = styledImage.getWidth();
-								height = styledImage.getHeight();
-								log.info("Dimensions of {} is {}x{}", styledFile, width, height);
-								final ImageWriter jpegWriter = ImageIO.getImageWritersByFormatName("jpg").next();
-								final FileImageOutputStream styledOutput = new FileImageOutputStream(styledFile);
-								jpegWriter.setOutput(styledOutput);
-								try {
-									final ImageWriteParam jpegParam = jpegWriter.getDefaultWriteParam();
-									jpegParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-									jpegParam.setCompressionQuality(quality);
-									// Enable progressive if width >= 512, else disable
-									jpegParam.setProgressiveMode(progressive ? ImageWriteParam.MODE_DEFAULT : ImageWriteParam.MODE_DISABLED);
-									jpegWriter.write(null, new IIOImage(styledImage, null, null), jpegParam);
-//									ImageIO.write(styledImage, "jpg", styledFile); // no quality control
-								} finally {
-									styledOutput.close();
-								}
-							} else {
-								throw new ImageException("Unsupported transform: " + transform);
+	public ListenableFuture<List<UploadedImage>> transform(final ImageConnector source, final File sourceFile,
+			final String namespace, final String imageId, final ImageVariant sourceVariant,
+			final Map<ImageTransform, ImageVariant> transforms) {
+		final AsyncFunction<File, List<UploadedImage>> processor = new AsyncFunction<File, List<UploadedImage>>() {
+			@Override
+			public ListenableFuture<List<UploadedImage>> apply(final File originalFile)
+					throws Exception {
+				return getExecutor().submit(new Callable<List<UploadedImage>>() {
+					@Override
+					public List<UploadedImage> call() throws Exception {
+						final ImmutableList.Builder<UploadedImage> uploads = ImmutableList.builder();
+						for (Entry<ImageTransform, ImageVariant> entry : transforms.entrySet()) {
+							final ImageTransform transform = entry.getKey();
+							final ImageVariant dest = entry.getValue();
+							final int width;
+							final int height;
+							// TODO: do not hardcode quality
+							final float quality = 0.9f;
+							final File styledFile;
+							try {
+								styledFile = File.createTempFile(imageId + "_", "_" + dest.getStyleVariant() + "." + dest.getExtension());
+							} catch (IOException e1) {
+								throw new ImageException(e1, "Cannot create temporary file for styled %s %s",
+										dest.getStyleCode(), imageId);
 							}
-						//}
-						
-//						ByteArrayOutputStream buf = new ByteArrayOutputStream();
-//						ImageIO.write(styledImage, "jpg", buf);
-//						byte[] content = buf.toByteArray();
-//						ResizeResult result = new ResizeResult(style.getName(), contentType, "jpg", content.length, content,
-//								styledImage.getWidth(), styledImage.getHeight());
-					} catch (final Exception e) {
-						throw new ImageException("Error resizing " + imageId + " to " + dest.getStyleCode() + ", destination: " + styledFile, e);
-					}
-					
-					// Upload the styled image
-//					final URI styledDavUri = getImageDavUri(imageId, style.getName());
-					try {
-						// upload directly for efficiency
-						// TODO: not hardcode styled content type and extension
-						final String styledContentType = "image/jpeg";
-						final String styledExtension = "jpg";
-						log.debug("Uploading {} {} using {} from {} ({} bytes)",
-								dest.getStyleCode(), imageId, destination.getClass().getName(),
-								styledFile, styledFile.length());
-						final UploadedImage styledUpload = destination.upload(namespace, imageId, dest.getStyleCode(),
-								dest.getStyleVariant(), styledExtension, styledFile, styledContentType);
-						final String styledPublicUri = styledUpload.getOriginUri();
-						log.info("Uploaded {} {} as {} from {} ({} bytes)", dest.getStyleCode(), imageId, styledPublicUri,
-								styledFile, styledFile.length());
-//						final StyledImage styled = new StyledImage(
-//								style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
-//								(int)styledFile.length(), width, height);
-//						return styled;
-						
-						final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
-						uploadedImage.setStyleCode(dest.getStyleCode());
-						uploadedImage.setStyleVariant(dest.getStyleVariant());
-						uploadedImage.setExtension(dest.getExtension());
-						uploadedImage.setOriginUri(styledPublicUri);
-						uploadedImage.setUri(styledPublicUri);
-						uploadedImage.setWidth(width);
-						uploadedImage.setHeight(height);
-						uploadedImage.setSize(styledFile.length());
-						uploads.add(uploadedImage);
-						
-					} catch (final Exception e) {
-						throw new ImageException(e, "Error uploading %s %s using %s",
-								dest.getStyleCode(), imageId, destination.getClass().getName());
-					}
+							
+							try {
+								try {
+									// I don't think Thumbnailer and/or ImageIO is thread-safe
+									//synchronized (this) {
+//											final BufferedImage originalImage = ImageIO.read(originalFile);
+//											final int origWidth = originalImage.getWidth();
+//											final int origHeight = originalImage.getHeight();
+										if (transform instanceof ResizeToFill) {
+											final ResizeToFill fx = (ResizeToFill) transform;
+											final boolean progressive = fx.getWidth() >= 512;
+											Preconditions.checkNotNull(fx.getWidth(), "ResizeToFill.width must not be null");
+											Preconditions.checkNotNull(fx.getHeight(), "ResizeToFill.height must not be null");
+											final Position cropPosition = Optional.fromNullable(new ToPositions().apply(fx.getGravity())).or(Positions.CENTER);
+											
+											// Scaling is not needed! crop(TOP_CENTER) already does its job
+											// my "failed" experiment was due to an already padded source image, sigh!
+//												// Scale up/down first, use the biggest scale
+//												final double targetRatio = (double) fx.getWidth() / fx.getHeight();
+//												final double origRatio = (double) origWidth / origHeight;
+//												final int sourceWidth;
+//												final int sourceHeight;
+//												if (targetRatio > origRatio) {
+//													// target ratio is wider than original, so sacrifice height
+//													sourceWidth = origWidth;
+//													sourceHeight = (int) Math.round(1f/targetRatio * origWidth);
+//												} else {
+//													// target ratio is narrower than original, so sacrifice width
+//													sourceWidth = (int) Math.round(targetRatio * origHeight);
+//													sourceHeight = origHeight;
+//													
+//												}
+//												final double widthScale = (double) fx.getWidth() / origWidth;
+//												final double heightScale = (double) fx.getHeight() / origHeight;
+//												final double targetScale = Math.max(widthScale, heightScale);
 
-				} finally {
-					log.trace("Deleting temporary {} {} styled image {}", dest.getStyleCode(), imageId, styledFile);
-					styledFile.delete();
-					log.debug("Deleted temporary {} {} styled image {}", dest.getStyleCode(), imageId, styledFile);
-				}
-				
+											log.info("Resizing {} to {} position={}, quality={} progressive={}",
+													originalFile, styledFile, cropPosition, quality, progressive );
+											
+											// Before cropping
+											// TODO: support other gravity / cropping
+//												final BufferedImage scaledImage = Thumbnails.of(originalFile)
+//														.scale(targetScale)
+//														.asBufferedImage();
+											final BufferedImage styledImage = Thumbnails.of(originalFile)
+//														.sourceRegion(cropPosition, sourceWidth, sourceHeight)
+													.crop(cropPosition)
+													.size(fx.getWidth(), fx.getHeight())
+													.asBufferedImage();
+											width = styledImage.getWidth();
+											height = styledImage.getHeight();
+											log.info("Dimensions of {} is {}x{}", styledFile, width, height);
+											final ImageWriter jpegWriter = ImageIO.getImageWritersByFormatName("jpg").next();
+											final FileImageOutputStream styledOutput = new FileImageOutputStream(styledFile);
+											jpegWriter.setOutput(styledOutput);
+											try {
+												final ImageWriteParam jpegParam = jpegWriter.getDefaultWriteParam();
+												jpegParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+												jpegParam.setCompressionQuality(quality);
+												// Enable progressive if width >= 512, else disable
+												jpegParam.setProgressiveMode(progressive ? ImageWriteParam.MODE_DEFAULT : ImageWriteParam.MODE_DISABLED);
+												jpegWriter.write(null, new IIOImage(styledImage, null, null), jpegParam);
+//													ImageIO.write(styledImage, "jpg", styledFile); // no quality control
+											} finally {
+												styledOutput.close();
+											}
+										} else {
+											throw new ImageException("Unsupported transform: " + transform);
+										}
+									//}
+									
+//										ByteArrayOutputStream buf = new ByteArrayOutputStream();
+//										ImageIO.write(styledImage, "jpg", buf);
+//										byte[] content = buf.toByteArray();
+//										ResizeResult result = new ResizeResult(style.getName(), contentType, "jpg", content.length, content,
+//												styledImage.getWidth(), styledImage.getHeight());
+								} catch (final Exception e) {
+									throw new ImageException("Error resizing " + imageId + " to " + dest.getStyleCode() + ", destination: " + styledFile, e);
+								}
+								
+								// Upload the styled image
+//									final URI styledDavUri = getImageDavUri(imageId, style.getName());
+								try {
+									// upload directly for efficiency
+									// TODO: not hardcode styled content type and extension
+									final String styledContentType = "image/jpeg";
+									final String styledExtension = "jpg";
+									log.debug("Uploading {} {} using {} from {} ({} bytes)",
+											dest.getStyleCode(), imageId, destination.getClass().getName(),
+											styledFile, styledFile.length());
+									final UploadedImage styledUpload = destination.upload(namespace, imageId, dest.getStyleCode(),
+											dest.getStyleVariant(), styledExtension, styledFile, styledContentType).get();
+									final String styledPublicUri = styledUpload.getOriginUri();
+									log.info("Uploaded {} {} as {} from {} ({} bytes)", dest.getStyleCode(), imageId, styledPublicUri,
+											styledFile, styledFile.length());
+//										final StyledImage styled = new StyledImage(
+//												style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
+//												(int)styledFile.length(), width, height);
+//										return styled;
+									
+									final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
+									uploadedImage.setStyleCode(dest.getStyleCode());
+									uploadedImage.setStyleVariant(dest.getStyleVariant());
+									uploadedImage.setExtension(dest.getExtension());
+									uploadedImage.setOriginUri(styledPublicUri);
+									uploadedImage.setUri(styledPublicUri);
+									uploadedImage.setWidth(width);
+									uploadedImage.setHeight(height);
+									uploadedImage.setSize(styledFile.length());
+									uploads.add(uploadedImage);
+									
+								} catch (final Exception e) {
+									throw new ImageException(e, "Error uploading %s %s using %s",
+											dest.getStyleCode(), imageId, destination.getClass().getName());
+								}
+
+							} finally {
+								log.trace("Deleting temporary {} {} styled image {}", dest.getStyleCode(), imageId, styledFile);
+								styledFile.delete();
+								log.debug("Deleted temporary {} {} styled image {}", dest.getStyleCode(), imageId, styledFile);
+							}
+						}
+						return uploads.build();
+					}
+				});
 			}
-		} finally {
-			log.trace("Deleting original file {}", originalFile);
-			originalFile.delete();
-			log.debug("Deleted original file {}", originalFile);
-		}
-		return uploads.build();
+		};
+		return processLocallyThenDelete(source, sourceFile, namespace, imageId,
+				sourceVariant, transforms, processor);
+		
 	}
 
 	/**

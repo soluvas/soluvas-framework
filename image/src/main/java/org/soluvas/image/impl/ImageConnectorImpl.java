@@ -4,6 +4,7 @@ package org.soluvas.image.impl;
 
 import java.io.File;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -13,6 +14,9 @@ import org.soluvas.image.UploadedImage;
 
 import com.damnhandy.uri.template.UriTemplate;
 import com.google.common.collect.Maps;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +27,7 @@ import com.google.common.collect.Maps;
  * <ul>
  *   <li>{@link org.soluvas.image.impl.ImageConnectorImpl#getHiUriTemplate <em>Hi Uri Template</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ImageConnectorImpl#getUriTemplate <em>Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.ImageConnectorImpl#getExecutor <em>Executor</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,12 +54,35 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 	protected static final String URI_TEMPLATE_EDEFAULT = null;
 
 	/**
+	 * The default value of the '{@link #getExecutor() <em>Executor</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExecutor()
+	 * @ordered
+	 */
+	protected static final ListeningExecutorService EXECUTOR_EDEFAULT = MoreExecutors.sameThreadExecutor();
+	/**
+	 * The cached value of the '{@link #getExecutor() <em>Executor</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExecutor()
+	 * @generated
+	 * @ordered
+	 */
+	protected ListeningExecutorService executor = EXECUTOR_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ImageConnectorImpl() {
 		super();
+	}
+	
+	public ImageConnectorImpl(ExecutorService executor) {
+		super();
+		this.executor = MoreExecutors.listeningDecorator(executor);
 	}
 
 	/**
@@ -72,6 +100,7 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getHiUriTemplate() {
 		// TODO: implement this method to return the 'Hi Uri Template' attribute
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -88,9 +117,19 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	@Override
-	public abstract UploadedImage upload(String namespace, String imageId, String styleCode, String styleVariant, String extension, File file, String contentType);
+	public ListeningExecutorService getExecutor() {
+		return executor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public abstract ListenableFuture<UploadedImage> upload(String namespace, String imageId, String styleCode, String styleVariant, String extension, File file, String contentType);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -143,6 +182,8 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 				return getHiUriTemplate();
 			case ImagePackage.IMAGE_CONNECTOR__URI_TEMPLATE:
 				return getUriTemplate();
+			case ImagePackage.IMAGE_CONNECTOR__EXECUTOR:
+				return getExecutor();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -159,8 +200,26 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 				return HI_URI_TEMPLATE_EDEFAULT == null ? getHiUriTemplate() != null : !HI_URI_TEMPLATE_EDEFAULT.equals(getHiUriTemplate());
 			case ImagePackage.IMAGE_CONNECTOR__URI_TEMPLATE:
 				return URI_TEMPLATE_EDEFAULT == null ? getUriTemplate() != null : !URI_TEMPLATE_EDEFAULT.equals(getUriTemplate());
+			case ImagePackage.IMAGE_CONNECTOR__EXECUTOR:
+				return EXECUTOR_EDEFAULT == null ? executor != null : !EXECUTOR_EDEFAULT.equals(executor);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (executor: ");
+		result.append(executor);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ImageConnectorImpl

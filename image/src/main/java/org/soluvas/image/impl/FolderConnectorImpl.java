@@ -4,6 +4,7 @@ package org.soluvas.image.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.Callable;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.ecore.EClass;
@@ -11,6 +12,9 @@ import org.soluvas.image.FolderConnector;
 import org.soluvas.image.ImageException;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.UploadedImage;
+
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,6 +60,11 @@ public class FolderConnectorImpl extends ImageConnectorImpl implements FolderCon
 	
 	public FolderConnectorImpl(String folder) {
 		super();
+		this.folder = folder;
+	}
+	
+	public FolderConnectorImpl(ListeningExecutorService executor, String folder) {
+		super(executor);
 		this.folder = folder;
 	}
 
@@ -135,19 +144,24 @@ public class FolderConnectorImpl extends ImageConnectorImpl implements FolderCon
 	}
 
 	@Override
-	public UploadedImage upload(String namespace, String imageId,
-			String styleCode, String styleVariant, String extension, File file,
-			String contentType) {
-		final File destFile = getLocation(namespace, imageId, styleCode, styleVariant, extension);
-		try {
-			destFile.getParentFile().mkdirs();
-			FileUtils.copyFile(file, destFile);
-			final UploadedImageImpl uploaded = new UploadedImageImpl();
-			// FIXME: fill
-			return uploaded;
-		} catch (IOException e) {
-			throw new ImageException("Cannot copy " + file + " to " + destFile, e);
-		}
+	public ListenableFuture<UploadedImage> upload(final String namespace, final String imageId,
+			final String styleCode, final String styleVariant, final String extension, final File file,
+			final String contentType) {
+		return getExecutor().submit(new Callable<UploadedImage>() {
+			@Override
+			public UploadedImage call() throws Exception {
+				final File destFile = getLocation(namespace, imageId, styleCode, styleVariant, extension);
+				try {
+					destFile.getParentFile().mkdirs();
+					FileUtils.copyFile(file, destFile);
+					final UploadedImageImpl uploaded = new UploadedImageImpl();
+					// FIXME: fill
+					return uploaded;
+				} catch (IOException e) {
+					throw new ImageException("Cannot copy " + file + " to " + destFile, e);
+				}
+			}
+		});
 	}
 
 	@Override

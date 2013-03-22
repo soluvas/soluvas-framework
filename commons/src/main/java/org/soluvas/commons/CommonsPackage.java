@@ -2320,6 +2320,28 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Listenable Future</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.google.common.util.concurrent.ListenableFuture
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListenableFuture()
+	 * @generated
+	 */
+	int LISTENABLE_FUTURE = 74;
+
+
+	/**
+	 * The meta object id for the '<em>Listening Executor Service</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.google.common.util.concurrent.ListeningExecutorService
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListeningExecutorService()
+	 * @generated
+	 */
+	int LISTENING_EXECUTOR_SERVICE = 75;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3843,6 +3865,28 @@ public interface CommonsPackage extends EPackage {
 	EDataType getFile();
 
 	/**
+	 * Returns the meta object for data type '{@link com.google.common.util.concurrent.ListenableFuture <em>Listenable Future</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Listenable Future</em>'.
+	 * @see com.google.common.util.concurrent.ListenableFuture
+	 * @model instanceClass="com.google.common.util.concurrent.ListenableFuture" serializeable="false" typeParameters="V"
+	 * @generated
+	 */
+	EDataType getListenableFuture();
+
+	/**
+	 * Returns the meta object for data type '{@link com.google.common.util.concurrent.ListeningExecutorService <em>Listening Executor Service</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Listening Executor Service</em>'.
+	 * @see com.google.common.util.concurrent.ListeningExecutorService
+	 * @model instanceClass="com.google.common.util.concurrent.ListeningExecutorService" serializeable="false"
+	 * @generated
+	 */
+	EDataType getListeningExecutorService();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5155,6 +5199,26 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType FILE = eINSTANCE.getFile();
+
+		/**
+		 * The meta object literal for the '<em>Listenable Future</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.google.common.util.concurrent.ListenableFuture
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListenableFuture()
+		 * @generated
+		 */
+		EDataType LISTENABLE_FUTURE = eINSTANCE.getListenableFuture();
+
+		/**
+		 * The meta object literal for the '<em>Listening Executor Service</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.google.common.util.concurrent.ListeningExecutorService
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListeningExecutorService()
+		 * @generated
+		 */
+		EDataType LISTENING_EXECUTOR_SERVICE = eINSTANCE.getListeningExecutorService();
 
 	}
 

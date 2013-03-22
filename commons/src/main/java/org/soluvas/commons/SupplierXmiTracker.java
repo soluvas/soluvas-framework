@@ -61,8 +61,7 @@ import com.google.common.collect.ImmutableList;
  */
 public class SupplierXmiTracker<T extends EObject> implements BundleTrackerCustomizer<List<Supplier<T>>> {
 
-	private static final Logger log = LoggerFactory
-			.getLogger(SupplierXmiTracker.class);
+	private final Logger log;
 	private final EPackage ePackage;
 	private final String suppliedClassName;
 	private final String suppliedClassSimpleName;
@@ -82,6 +81,7 @@ public class SupplierXmiTracker<T extends EObject> implements BundleTrackerCusto
 		this.suppliedClassName = suppliedClass.getName();
 		this.suppliedClassSimpleName = suppliedClass.getSimpleName();
 		this.delegate = delegate;
+		log = LoggerFactory.getLogger(SupplierXmiTracker.class.getName() + "." + suppliedClassSimpleName);
 	}
 
 	public SupplierXmiTracker(final @Nonnull Class<EPackage> ePackageClass, final @Nonnull Class<T> suppliedClass,
@@ -91,6 +91,7 @@ public class SupplierXmiTracker<T extends EObject> implements BundleTrackerCusto
 		this.suppliedClassName = suppliedClass.getName();
 		this.suppliedClassSimpleName = suppliedClass.getSimpleName();
 		this.delegate = delegate;
+		log = LoggerFactory.getLogger(SupplierXmiTracker.class.getName() + "." + suppliedClassSimpleName);
 	}
 	
 	@Override @Nullable

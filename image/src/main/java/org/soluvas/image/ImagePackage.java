@@ -87,13 +87,22 @@ public interface ImagePackage extends EPackage {
 	int IMAGE_CONNECTOR__URI_TEMPLATE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Executor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_CONNECTOR__EXECUTOR = 2;
+
+	/**
 	 * The number of structural features of the '<em>Connector</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMAGE_CONNECTOR_FEATURE_COUNT = 2;
+	int IMAGE_CONNECTOR_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.S3ConnectorImpl <em>S3 Connector</em>}' class.
@@ -106,10 +115,10 @@ public interface ImagePackage extends EPackage {
 	int S3_CONNECTOR = 2;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.image.ImageTransformer <em>Transformer</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.image.impl.ImageTransformerImpl <em>Transformer</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.image.ImageTransformer
+	 * @see org.soluvas.image.impl.ImageTransformerImpl
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformer()
 	 * @generated
 	 */
@@ -154,6 +163,15 @@ public interface ImagePackage extends EPackage {
 	int DAV_CONNECTOR__URI_TEMPLATE = IMAGE_CONNECTOR__URI_TEMPLATE;
 
 	/**
+	 * The feature id for the '<em><b>Executor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAV_CONNECTOR__EXECUTOR = IMAGE_CONNECTOR__EXECUTOR;
+
+	/**
 	 * The number of structural features of the '<em>Dav Connector</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -179,6 +197,15 @@ public interface ImagePackage extends EPackage {
 	 * @ordered
 	 */
 	int S3_CONNECTOR__URI_TEMPLATE = IMAGE_CONNECTOR__URI_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Executor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int S3_CONNECTOR__EXECUTOR = IMAGE_CONNECTOR__EXECUTOR;
 
 	/**
 	 * The feature id for the '<em><b>Canonical User Id</b></em>' attribute.
@@ -244,13 +271,31 @@ public interface ImagePackage extends EPackage {
 	int S3_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Executor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_TRANSFORMER__EXECUTOR = 0;
+
+	/**
 	 * The number of structural features of the '<em>Transformer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMAGE_TRANSFORMER_FEATURE_COUNT = 0;
+	int IMAGE_TRANSFORMER_FEATURE_COUNT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Executor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLITLINE_TRANSFORMER__EXECUTOR = IMAGE_TRANSFORMER__EXECUTOR;
 
 	/**
 	 * The feature id for the '<em><b>Application Id</b></em>' attribute.
@@ -342,6 +387,15 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	int THUMBNAILATOR_TRANSFORMER = 5;
+
+	/**
+	 * The feature id for the '<em><b>Executor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THUMBNAILATOR_TRANSFORMER__EXECUTOR = IMAGE_TRANSFORMER__EXECUTOR;
 
 	/**
 	 * The feature id for the '<em><b>Destination</b></em>' reference.
@@ -1033,6 +1087,15 @@ public interface ImagePackage extends EPackage {
 	int IMAGE_MAGICK_TRANSFORMER = 16;
 
 	/**
+	 * The feature id for the '<em><b>Executor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_MAGICK_TRANSFORMER__EXECUTOR = IMAGE_TRANSFORMER__EXECUTOR;
+
+	/**
 	 * The feature id for the '<em><b>Destination</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1077,6 +1140,15 @@ public interface ImagePackage extends EPackage {
 	 * @ordered
 	 */
 	int FOLDER_CONNECTOR__URI_TEMPLATE = IMAGE_CONNECTOR__URI_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Executor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOLDER_CONNECTOR__EXECUTOR = IMAGE_CONNECTOR__EXECUTOR;
 
 	/**
 	 * The feature id for the '<em><b>Folder</b></em>' attribute.
@@ -1179,6 +1251,17 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getImageConnector_UriTemplate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageConnector#getExecutor <em>Executor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Executor</em>'.
+	 * @see org.soluvas.image.ImageConnector#getExecutor()
+	 * @see #getImageConnector()
+	 * @generated
+	 */
+	EAttribute getImageConnector_Executor();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.S3Connector <em>S3 Connector</em>}'.
@@ -1373,6 +1456,17 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getImageTransformer();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ImageTransformer#getExecutor <em>Executor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Executor</em>'.
+	 * @see org.soluvas.image.ImageTransformer#getExecutor()
+	 * @see #getImageTransformer()
+	 * @generated
+	 */
+	EAttribute getImageTransformer_Executor();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.ThumbnailatorTransformer <em>Thumbnailator Transformer</em>}'.
@@ -2044,6 +2138,14 @@ public interface ImagePackage extends EPackage {
 		EAttribute IMAGE_CONNECTOR__URI_TEMPLATE = eINSTANCE.getImageConnector_UriTemplate();
 
 		/**
+		 * The meta object literal for the '<em><b>Executor</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE_CONNECTOR__EXECUTOR = eINSTANCE.getImageConnector_Executor();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.S3ConnectorImpl <em>S3 Connector</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2186,14 +2288,22 @@ public interface ImagePackage extends EPackage {
 		EClass DAV_CONNECTOR = eINSTANCE.getDavConnector();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.image.ImageTransformer <em>Transformer</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.image.impl.ImageTransformerImpl <em>Transformer</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.image.ImageTransformer
+		 * @see org.soluvas.image.impl.ImageTransformerImpl
 		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformer()
 		 * @generated
 		 */
 		EClass IMAGE_TRANSFORMER = eINSTANCE.getImageTransformer();
+
+		/**
+		 * The meta object literal for the '<em><b>Executor</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE_TRANSFORMER__EXECUTOR = eINSTANCE.getImageTransformer_Executor();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.ThumbnailatorTransformerImpl <em>Thumbnailator Transformer</em>}' class.

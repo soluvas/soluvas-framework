@@ -400,7 +400,7 @@ public class SocialPerson extends Person {
 	}
 
 	/**
-	 * Name of Customer Role or Group for example : agen_biasa, agen_special , dropship
+	 * Name of Customer Role or Group, for example in Tuneeca there are 5: ag-sp, agen, biasa, drops, membr
 	 * @return the customerRole
 	 */
 	public String getCustomerRole() {
@@ -408,7 +408,7 @@ public class SocialPerson extends Person {
 	}
 
 	/**
-	 * Name of Customer Role or Group for example : agen_biasa, agen_special , dropship
+	 * Name of Customer Role or Group, for example in Tuneeca there are 5: ag-sp, agen, biasa, drops, membr
 	 * @param customerRole the customerRole to set
 	 */
 	public void setCustomerRole(String customerRole) {

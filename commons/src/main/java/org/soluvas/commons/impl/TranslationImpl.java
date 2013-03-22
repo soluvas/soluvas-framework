@@ -2,6 +2,8 @@
  */
 package org.soluvas.commons.impl;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EMap;
@@ -67,6 +69,12 @@ public class TranslationImpl extends EObjectImpl implements Translation {
 	 */
 	public TranslationImpl() {
 		super();
+	}
+	
+	public TranslationImpl(String language, Map<String, String> messages) {
+		super();
+		this.language = language;
+		getMessages().putAll(messages);
 	}
 
 	/**

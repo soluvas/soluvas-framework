@@ -2,6 +2,8 @@
  */
 package org.soluvas.image;
 
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
 import java.io.File;
 import org.soluvas.commons.SerializableEObject;
 
@@ -15,6 +17,7 @@ import org.soluvas.commons.SerializableEObject;
  * <ul>
  *   <li>{@link org.soluvas.image.ImageConnector#getHiUriTemplate <em>Hi Uri Template</em>}</li>
  *   <li>{@link org.soluvas.image.ImageConnector#getUriTemplate <em>Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.image.ImageConnector#getExecutor <em>Executor</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,15 +66,30 @@ public interface ImageConnector extends SerializableEObject {
 	String getUriTemplate();
 
 	/**
+	 * Returns the value of the '<em><b>Executor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Executor</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Executor</em>' attribute.
+	 * @see org.soluvas.image.ImagePackage#getImageConnector_Executor()
+	 * @model dataType="org.soluvas.commons.ListeningExecutorService" required="true" transient="true" changeable="false"
+	 * @generated
+	 */
+	ListeningExecutorService getExecutor();
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Note: Use File, because if uploading using InputStream, can throw org.apache.http.client.NonRepeatableRequestException: Cannot retry request with a non-repeatable request entity; because InputStream can only be read once.
 	 * <!-- end-model-doc -->
-	 * @model fileDataType="org.soluvas.commons.File"
+	 * @model dataType="org.soluvas.commons.ListenableFuture<org.soluvas.image.UploadedImage>" fileDataType="org.soluvas.commons.File"
 	 * @generated
 	 */
-	UploadedImage upload(String namespace, String imageId, String styleCode, String styleVariant, String extension, File file, String contentType);
+	ListenableFuture<UploadedImage> upload(String namespace, String imageId, String styleCode, String styleVariant, String extension, File file, String contentType);
 
 	/**
 	 * <!-- begin-user-doc -->

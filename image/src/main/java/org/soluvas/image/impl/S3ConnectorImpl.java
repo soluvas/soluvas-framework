@@ -4,6 +4,7 @@ package org.soluvas.image.impl;
 
 import java.io.File;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import org.eclipse.emf.ecore.EClass;
 import org.slf4j.Logger;
@@ -35,6 +36,7 @@ import com.amazonaws.services.s3.transfer.model.UploadResult;
 import com.damnhandy.uri.template.UriTemplate;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /**
  * <!-- begin-user-doc -->
@@ -283,66 +285,71 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	}
 	
 	@Override
-	public UploadedImage upload(String namespace, String imageId,
-			String styleCode, String styleVariant, String extension, final File file,
-			String contentType) {
-		final boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
-		final String key = String.format("%s_%s/%s/%s/%s_%s.%s",
-				tenantId, tenantEnv, namespace, styleCode, imageId, styleVariant, extension);
-		final AccessControlList acl = new AccessControlList();
-		if (!Strings.isNullOrEmpty(canonicalUserId)) {
-			acl.grantPermission(new CanonicalGrantee(canonicalUserId), Permission.FullControl);
-		}
-		acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
-		final PutObjectRequest putReq = new PutObjectRequest(bucket, key, file)
-			.withAccessControlList(acl)
-			.withStorageClass(useHi ? StorageClass.Standard : StorageClass.ReducedRedundancy);
-		final Upload upload = transferMgr.upload(putReq);
-		final String s3Uri = "s3://" + bucket + "/" + key;
-		upload.addProgressListener(new ProgressListener() {
+	public ListenableFuture<UploadedImage> upload(final String namespace, final String imageId,
+			final String styleCode, final String styleVariant, final String extension, final File file,
+			final String contentType) {
+		return getExecutor().submit(new Callable<UploadedImage>() {
 			@Override
-			public void progressChanged(ProgressEvent ev) {
-				switch (ev.getEventCode()) {
-				case ProgressEvent.STARTED_EVENT_CODE:
-					log.debug("Starting upload {} to {}", file, s3Uri);
-					break;
-				case ProgressEvent.COMPLETED_EVENT_CODE:
-					log.info("Completed upload {} to {}, {} bytes transferred", file, s3Uri,
-							ev.getBytesTransfered());
-					break;
-				case ProgressEvent.FAILED_EVENT_CODE:
-					log.error("Failed upload {} to {}, {} bytes transferred", file, s3Uri,
-							ev.getBytesTransfered());
-					break;
-				case 0:
-					// nothing...?
-					break;
-				default:
-					log.error("Unknown error code {} during upload {} to {}, {} bytes transferred",
-							ev.getEventCode(), file, s3Uri, ev.getBytesTransfered());
-					break;
+			public UploadedImage call() throws Exception {
+				final boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
+				final String key = String.format("%s_%s/%s/%s/%s_%s.%s",
+						tenantId, tenantEnv, namespace, styleCode, imageId, styleVariant, extension);
+				final AccessControlList acl = new AccessControlList();
+				if (!Strings.isNullOrEmpty(canonicalUserId)) {
+					acl.grantPermission(new CanonicalGrantee(canonicalUserId), Permission.FullControl);
 				}
+				acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
+				final PutObjectRequest putReq = new PutObjectRequest(bucket, key, file)
+					.withAccessControlList(acl)
+					.withStorageClass(useHi ? StorageClass.Standard : StorageClass.ReducedRedundancy);
+				final Upload upload = transferMgr.upload(putReq);
+				final String s3Uri = "s3://" + bucket + "/" + key;
+				upload.addProgressListener(new ProgressListener() {
+					@Override
+					public void progressChanged(ProgressEvent ev) {
+						switch (ev.getEventCode()) {
+						case ProgressEvent.STARTED_EVENT_CODE:
+							log.debug("Starting upload {} to {}", file, s3Uri);
+							break;
+						case ProgressEvent.COMPLETED_EVENT_CODE:
+							log.info("Completed upload {} to {}, {} bytes transferred", file, s3Uri,
+									ev.getBytesTransfered());
+							break;
+						case ProgressEvent.FAILED_EVENT_CODE:
+							log.error("Failed upload {} to {}, {} bytes transferred", file, s3Uri,
+									ev.getBytesTransfered());
+							break;
+						case 0:
+							// nothing...?
+							break;
+						default:
+							log.error("Unknown error code {} during upload {} to {}, {} bytes transferred",
+									ev.getEventCode(), file, s3Uri, ev.getBytesTransfered());
+							break;
+						}
+					}
+				});
+				
+				try {
+					final UploadResult uploadResult = upload.waitForUploadResult();
+					log.info("Upload {} to {} result: etag={} versionId={} bucket={} key={}",
+							file, s3Uri,
+							uploadResult.getETag(),
+							uploadResult.getVersionId(),
+							uploadResult.getBucketName(),
+							uploadResult.getKey() );
+				} catch (final Exception e) {
+					throw new ImageException(e, "Cannot upload %s to %s", file, s3Uri);
+				}
+				
+				final String realOriginAlias = Strings.isNullOrEmpty(originAlias) ? bucket + ".s3.amazonaws.com" : originAlias;
+				final String realCdnAlias = Strings.isNullOrEmpty(cdnAlias) ? bucket + ".s3.amazonaws.com" : cdnAlias;
+				final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
+				uploadedImage.setOriginUri("http://" + realOriginAlias + "/" + key);
+				uploadedImage.setUri("http://" + realCdnAlias + "/" + key);
+				return uploadedImage;
 			}
 		});
-		
-		try {
-			final UploadResult uploadResult = upload.waitForUploadResult();
-			log.info("Upload {} to {} result: etag={} versionId={} bucket={} key={}",
-					file, s3Uri,
-					uploadResult.getETag(),
-					uploadResult.getVersionId(),
-					uploadResult.getBucketName(),
-					uploadResult.getKey() );
-		} catch (final Exception e) {
-			throw new ImageException(e, "Cannot upload %s to %s", file, s3Uri);
-		}
-		
-		final String realOriginAlias = Strings.isNullOrEmpty(originAlias) ? bucket + ".s3.amazonaws.com" : originAlias;
-		final String realCdnAlias = Strings.isNullOrEmpty(cdnAlias) ? bucket + ".s3.amazonaws.com" : cdnAlias;
-		final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
-		uploadedImage.setOriginUri("http://" + realOriginAlias + "/" + key);
-		uploadedImage.setUri("http://" + realCdnAlias + "/" + key);
-		return uploadedImage;
 	}
 	
 	@Override

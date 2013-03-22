@@ -118,10 +118,6 @@ public interface ImageRepository { // extends EntityLookup<Image, String> {
 	public abstract String add(Image newImage);
 	public abstract List<String> add(@Nonnull List<Image> newImages, ProgressMonitor monitor);
 
-	public abstract String doCreate(String existingImageId, File originalFile,
-			String contentType, long length, String name, String originalName,
-			boolean alsoUploadOriginal) throws IOException;
-
 	/**
 	 * Delete the image with the specified ID, from the MongoDB metadata including all files and styled images from WebDAV.
 	 * @param id Image ID.

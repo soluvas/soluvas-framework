@@ -297,6 +297,15 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getImageConnector_Executor() {
+		return (EAttribute)imageConnectorEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getS3Connector() {
 		return s3ConnectorEClass;
@@ -462,6 +471,15 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	@Override
 	public EClass getImageTransformer() {
 		return imageTransformerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImageTransformer_Executor() {
+		return (EAttribute)imageTransformerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1063,6 +1081,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		imageConnectorEClass = createEClass(IMAGE_CONNECTOR);
 		createEAttribute(imageConnectorEClass, IMAGE_CONNECTOR__HI_URI_TEMPLATE);
 		createEAttribute(imageConnectorEClass, IMAGE_CONNECTOR__URI_TEMPLATE);
+		createEAttribute(imageConnectorEClass, IMAGE_CONNECTOR__EXECUTOR);
 
 		davConnectorEClass = createEClass(DAV_CONNECTOR);
 
@@ -1075,6 +1094,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		createEAttribute(s3ConnectorEClass, S3_CONNECTOR__CDN_ALIAS);
 
 		imageTransformerEClass = createEClass(IMAGE_TRANSFORMER);
+		createEAttribute(imageTransformerEClass, IMAGE_TRANSFORMER__EXECUTOR);
 
 		blitlineTransformerEClass = createEClass(BLITLINE_TRANSFORMER);
 		createEAttribute(blitlineTransformerEClass, BLITLINE_TRANSFORMER__APPLICATION_ID);
@@ -1218,8 +1238,9 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEClass(imageConnectorEClass, ImageConnector.class, "ImageConnector", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImageConnector_HiUriTemplate(), theEcorePackage.getEString(), "hiUriTemplate", null, 0, 1, ImageConnector.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImageConnector_UriTemplate(), theEcorePackage.getEString(), "uriTemplate", null, 0, 1, ImageConnector.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImageConnector_Executor(), theCommonsPackage.getListeningExecutorService(), "executor", null, 1, 1, ImageConnector.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(imageConnectorEClass, this.getUploadedImage(), "upload", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(imageConnectorEClass, null, "upload", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "styleCode", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1227,6 +1248,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEParameter(op, theEcorePackage.getEString(), "extension", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theCommonsPackage.getFile(), "file", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "contentType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(theCommonsPackage.getListenableFuture());
+		EGenericType g2 = createEGenericType(this.getUploadedImage());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
 
 		op = addEOperation(imageConnectorEClass, theEcorePackage.getEBoolean(), "download", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1271,22 +1296,26 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		addEOperation(s3ConnectorEClass, null, "destroy", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(imageTransformerEClass, ImageTransformer.class, "ImageTransformer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(imageTransformerEClass, ImageTransformer.class, "ImageTransformer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getImageTransformer_Executor(), theCommonsPackage.getListeningExecutorService(), "executor", null, 1, 1, ImageTransformer.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(imageTransformerEClass, null, "transform", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageConnector(), "source", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theCommonsPackage.getFile(), "sourceFile", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageVariant(), "sourceVariant", 0, 1, IS_UNIQUE, IS_ORDERED);
-		EGenericType g1 = createEGenericType(theEcorePackage.getEMap());
-		EGenericType g2 = createEGenericType(this.getImageTransform());
+		g1 = createEGenericType(theEcorePackage.getEMap());
+		g2 = createEGenericType(this.getImageTransform());
 		g1.getETypeArguments().add(g2);
 		g2 = createEGenericType(this.getImageVariant());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "transforms", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(theCommonsPackage.getList());
-		g2 = createEGenericType(this.getUploadedImage());
+		g1 = createEGenericType(theCommonsPackage.getListenableFuture());
+		g2 = createEGenericType(theCommonsPackage.getList());
 		g1.getETypeArguments().add(g2);
+		EGenericType g3 = createEGenericType(this.getUploadedImage());
+		g2.getETypeArguments().add(g3);
 		initEOperation(op, g1);
 
 		initEClass(blitlineTransformerEClass, BlitlineTransformer.class, "BlitlineTransformer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1481,7 +1510,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		  (imageTransformerEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "documentation", "Transform the image and saves it to the configured destination. The mechanism to assign destination is transformer-specific.\nThumbnailator saves it to a file and then uploads it using an ImageConnector. Blitline saves directly to an S3 bucket.\n\nsource shouldn\'t a field, it should be parameter to transform, so we can reuse the same blitline transformer multiple times."
+			 "documentation", "Transform the image and saves it to the configured destination. The mechanism to assign destination is transformer-specific.\nThumbnailator saves it to a file and then uploads it using an ImageConnector. Blitline saves directly to an S3 bucket.\n\nsource shouldn\'t a field, it should be parameter to transform, so we can reuse the same blitline transformer multiple times.\n\nsourceFile can be null. If filled, that means it\'s just being uploaded and available locally. If null, that means the file can only be accessed using ImageConnector."
 		   });		
 		addAnnotation
 		  (blitlineTransformerEClass, 
@@ -1578,6 +1607,18 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Fill thumbnail dimension."
+		   });		
+		addAnnotation
+		  (resizeToFitEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "At least width or height must be present.\n\nIf both width and height are present, the image will be constrained to specified dimensions.\nIf only width or height are present, the image will be resized proportionally to conform to the specified width/height."
+		   });		
+		addAnnotation
+		  (getResizeToFit_OnlyShrinkLarger(), 
+		   source, 
+		   new String[] {
+			 "documentation", "If true, only shrink larger images, but do not enlarge small images.\nIf false, both shrinking and enlarging are performed."
 		   });		
 		addAnnotation
 		  (resizeToFillEClass, 

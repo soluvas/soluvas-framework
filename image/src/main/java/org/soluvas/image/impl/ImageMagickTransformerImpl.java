@@ -1,14 +1,17 @@
-/**
- */
 package org.soluvas.image.impl;
 
 import java.awt.Dimension;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+
+import javax.annotation.Nullable;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
@@ -18,7 +21,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.image.ImageConnector;
@@ -34,9 +36,12 @@ import org.soluvas.image.TransformGravity;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.image.util.ImageUtils;
 
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
+import com.google.common.util.concurrent.AsyncFunction;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,111 +56,40 @@ import com.google.common.collect.ImmutableList;
  *
  * @generated
  */
-public class ImageMagickTransformerImpl extends EObjectImpl implements ImageMagickTransformer {
+@SuppressWarnings("serial")
+public class ImageMagickTransformerImpl extends ImageTransformerImpl implements ImageMagickTransformer {
 	
-	private static final Logger log = LoggerFactory
-			.getLogger(ImageMagickTransformerImpl.class);
-	
-	/**
-	 * The cached value of the '{@link #getDestination() <em>Destination</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDestination()
-	 * @generated
-	 * @ordered
-	 */
-	protected ImageConnector destination;
+	public final class TransformFunc implements AsyncFunction<Entry<ImageTransform, ImageVariant>, UploadedImage> {
+		private final String namespace;
+		private final File originalFile;
+		private final String imageId;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	protected ImageMagickTransformerImpl() {
-		throw new UnsupportedOperationException();
-	}
-
-	public ImageMagickTransformerImpl(ImageConnector destination) {
-		super();
-		this.destination = destination;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return ImagePackage.Literals.IMAGE_MAGICK_TRANSFORMER;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ImageConnector getDestination() {
-		if (destination != null && ((EObject)destination).eIsProxy()) {
-			InternalEObject oldDestination = (InternalEObject)destination;
-			destination = (ImageConnector)eResolveProxy(oldDestination);
-			if (destination != oldDestination) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImagePackage.IMAGE_MAGICK_TRANSFORMER__DESTINATION, oldDestination, destination));
-			}
+		public TransformFunc(String namespace, File originalFile, String imageId) {
+			this.namespace = namespace;
+			this.originalFile = originalFile;
+			this.imageId = imageId;
 		}
-		return destination;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ImageConnector basicGetDestination() {
-		return destination;
-	}
-
-	/**
-	 * haidar@haidar ~/tmp $ convert -verbose -resize 64x64^ -extent 64x64 -gravity North  *.jpg
-	 * test1.jpg JPEG 527x700 527x700+0+0 8-bit DirectClass 99.9KB 0.010u 0:00.010
-	 * test1.jpg=>test1_n.jpg JPEG 527x700=>64x64 64x64+0+0 8-bit DirectClass 20.5KB 0.000u 0:00.000
-	 * 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	@Override
-	public List<UploadedImage> transform(ImageConnector source, String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms) {
-		// download original
-		final File originalFile;
-		try {
-			originalFile = File.createTempFile(imageId + "_",
-					"_" + sourceVariant.getStyleVariant() + "." + sourceVariant.getExtension());
-		} catch (IOException e) {
-			throw new ImageException(e, "Cannot create temporary file for downloading %s %s",
-					sourceVariant.getStyleCode(), imageId);
-		}
-		source.download(namespace, imageId, sourceVariant.getStyleCode(),
-				sourceVariant.getStyleVariant(), sourceVariant.getExtension(), originalFile);
 		
-		final ImmutableList.Builder<UploadedImage> uploads = ImmutableList.builder();
-		try {
-			for (Entry<ImageTransform, ImageVariant> entry : transforms.entrySet()) {
-				final ImageTransform transform = entry.getKey();
-				final ImageVariant dest = entry.getValue();
-				final int width;
-				final int height;
-				// TODO: do not hardcode quality
-				final float quality = 0.9f;
-				final File styledFile;
-				try {
-					styledFile = File.createTempFile(imageId + "_", "_" + dest.getStyleVariant() + "." + dest.getExtension());
-				} catch (IOException e1) {
-					throw new ImageException(e1, "Cannot create temporary file for styled %s %s",
-							dest.getStyleCode(), imageId);
-				}
-				
-				try {
+		@Override
+		public ListenableFuture<UploadedImage> apply(
+				Entry<ImageTransform, ImageVariant> input) throws Exception {
+			final ImageTransform transform = input.getKey();
+			final ImageVariant dest = input.getValue();
+			
+			// TODO: do not hardcode quality
+			final float quality = 0.9f;
+			
+			final ListenableFuture<File> styledFileFuture = getExecutor().submit(new Callable<File>() {
+				@Override
+				public File call() throws Exception {
+					final File styledFile;
+					try {
+						styledFile = File.createTempFile(imageId + "_", "_" + dest.getStyleVariant() + "." + dest.getExtension());
+					} catch (IOException e1) {
+						throw new ImageException(e1, "Cannot create temporary file for styled %s %s",
+								dest.getStyleCode(), imageId);
+					}
+					
 					try {
 						if (transform instanceof ResizeToFill) {
 							final ResizeToFill fx = (ResizeToFill) transform;
@@ -217,10 +151,6 @@ public class ImageMagickTransformerImpl extends EObjectImpl implements ImageMagi
 							executor.setStreamHandler(new PumpStreamHandler(buffer));
 							final int executionResult = executor.execute(cmd);
 							log.info("{} returned {}: {}", cmd, executionResult, buffer);
-							
-							width = fx.getWidth();
-							height = fx.getHeight();
-							log.trace("Dimensions of {} is {}x{}", styledFile, width, height);
 						} else if (transform instanceof ResizeToFit) {
 							final ResizeToFit fx = (ResizeToFit) transform;
 							Preconditions.checkArgument(fx.getWidth() != null || fx.getHeight() != null,
@@ -248,43 +178,54 @@ public class ImageMagickTransformerImpl extends EObjectImpl implements ImageMagi
 							executor.setStreamHandler(new PumpStreamHandler(buffer));
 							final int executionResult = executor.execute(cmd);
 							log.info("{} returned {}: {}", cmd, executionResult, buffer);
-							
-							final Dimension styledDim = ImageUtils.getDimension(styledFile);
-							width = (int) styledDim.getWidth();
-							height = (int) styledDim.getHeight();
-							log.debug("Dimensions of {} is {}x{}", styledFile, width, height);
 						} else {
 							throw new ImageException("Unsupported transform: " + transform);
 						}
 						
-//						ByteArrayOutputStream buf = new ByteArrayOutputStream();
-//						ImageIO.write(styledImage, "jpg", buf);
-//						byte[] content = buf.toByteArray();
-//						ResizeResult result = new ResizeResult(style.getName(), contentType, "jpg", content.length, content,
-//								styledImage.getWidth(), styledImage.getHeight());
+						return styledFile;
 					} catch (final Exception e) {
 						throw new ImageException("Error resizing " + imageId + " to " + dest.getStyleCode() + ", destination: " + styledFile, e);
 					}
-					
+				}
+			});
+			
+			final ListenableFuture<UploadedImage> styledImageFuture = Futures.transform(styledFileFuture, new AsyncFunction<File, UploadedImage>() {
+				@Override
+				public ListenableFuture<UploadedImage> apply(File styledFile)
+						throws Exception {
 					// Upload the styled image
 //					final URI styledDavUri = getImageDavUri(imageId, style.getName());
+					
+					// upload directly for efficiency
+					// TODO: not hardcode styled content type and extension
+					final String styledContentType = "image/jpeg";
+					final String styledExtension = "jpg";
+					log.debug("Uploading {} {} using {} from {} ({} bytes)",
+						dest.getStyleCode(), imageId, destination.getClass().getName(),
+						styledFile, styledFile.length());
+					final ListenableFuture<UploadedImage> styledUploadFuture = destination.upload(namespace, imageId, dest.getStyleCode(),
+						dest.getStyleVariant(), styledExtension, styledFile, styledContentType);
+					return styledUploadFuture;
+				}
+			});
+			
+			final ListenableFuture<UploadedImage> transformedFuture = Futures.transform(styledImageFuture, new Function<UploadedImage, UploadedImage>() {
+				@Override @Nullable
+				public UploadedImage apply(@Nullable UploadedImage styledUpload) {
+					final File styledFile = Futures.getUnchecked(styledFileFuture);
 					try {
-						// upload directly for efficiency
-						// TODO: not hardcode styled content type and extension
-						final String styledContentType = "image/jpeg";
-						final String styledExtension = "jpg";
-						log.debug("Uploading {} {} using {} from {} ({} bytes)",
-								dest.getStyleCode(), imageId, destination.getClass().getName(),
-								styledFile, styledFile.length());
-						final UploadedImage styledUpload = destination.upload(namespace, imageId, dest.getStyleCode(),
-								dest.getStyleVariant(), styledExtension, styledFile, styledContentType);
+						final Dimension styledDim = ImageUtils.getDimension(styledFile);
+						final int width = (int) styledDim.getWidth();
+						final int height = (int) styledDim.getHeight();
+						log.debug("Dimensions of {} is {}x{}", styledFile, width, height);
+
 						final String styledPublicUri = styledUpload.getOriginUri();
 						log.info("Uploaded {} {} as {} from {} ({} bytes)", dest.getStyleCode(), imageId, styledPublicUri,
 								styledFile, styledFile.length());
-//						final StyledImage styled = new StyledImage(
-//								style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
-//								(int)styledFile.length(), width, height);
-//						return styled;
+	//											final StyledImage styled = new StyledImage(
+	//													style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
+	//													(int)styledFile.length(), width, height);
+	//											return styled;
 						
 						final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
 						uploadedImage.setStyleCode(dest.getStyleCode());
@@ -295,26 +236,113 @@ public class ImageMagickTransformerImpl extends EObjectImpl implements ImageMagi
 						uploadedImage.setWidth(width);
 						uploadedImage.setHeight(height);
 						uploadedImage.setSize(styledFile.length());
-						uploads.add(uploadedImage);
-						
-					} catch (final Exception e) {
-						throw new ImageException(e, "Error uploading %s %s using %s",
-								dest.getStyleCode(), imageId, destination.getClass().getName());
+						return uploadedImage;
+					} finally {
+						log.trace("Deleting temporary {} {} styled image {}", dest.getStyleCode(), imageId, styledFile);
+						styledFile.delete();
+						log.debug("Deleted temporary {} {} styled image {}", dest.getStyleCode(), imageId, styledFile);
 					}
-
-				} finally {
-					log.trace("Deleting temporary {} {} styled image {}", dest.getStyleCode(), imageId, styledFile);
-					styledFile.delete();
-					log.debug("Deleted temporary {} {} styled image {}", dest.getStyleCode(), imageId, styledFile);
 				}
-				
-			}
-		} finally {
-			log.trace("Deleting original file {}", originalFile);
-			originalFile.delete();
-			log.debug("Deleted original file {}", originalFile);
+			}, getExecutor());
+			
+			return transformedFuture;
 		}
-		return uploads.build();
+	}
+
+	static final Logger log = LoggerFactory
+			.getLogger(ImageMagickTransformerImpl.class);
+	
+	/**
+	 * The cached value of the '{@link #getDestination() <em>Destination</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDestination()
+	 * @generated
+	 * @ordered
+	 */
+	protected ImageConnector destination;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	protected ImageMagickTransformerImpl() {
+		throw new UnsupportedOperationException();
+	}
+
+	public ImageMagickTransformerImpl(ImageConnector destination) {
+		super();
+		this.destination = destination;
+	}
+	
+	public ImageMagickTransformerImpl(ExecutorService executor, ImageConnector destination) {
+		super(executor);
+		this.destination = destination;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ImagePackage.Literals.IMAGE_MAGICK_TRANSFORMER;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ImageConnector getDestination() {
+		if (destination != null && ((EObject)destination).eIsProxy()) {
+			InternalEObject oldDestination = (InternalEObject)destination;
+			destination = (ImageConnector)eResolveProxy(oldDestination);
+			if (destination != oldDestination) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImagePackage.IMAGE_MAGICK_TRANSFORMER__DESTINATION, oldDestination, destination));
+			}
+		}
+		return destination;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageConnector basicGetDestination() {
+		return destination;
+	}
+
+	/**
+	 * haidar@haidar ~/tmp $ convert -verbose -resize 64x64^ -extent 64x64 -gravity North  *.jpg
+	 * test1.jpg JPEG 527x700 527x700+0+0 8-bit DirectClass 99.9KB 0.010u 0:00.010
+	 * test1.jpg=>test1_n.jpg JPEG 527x700=>64x64 64x64+0+0 8-bit DirectClass 20.5KB 0.000u 0:00.000
+	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public ListenableFuture<List<UploadedImage>> transform(final ImageConnector source, final File sourceFile, final String namespace, 
+			final String imageId, final ImageVariant sourceVariant, final Map<ImageTransform, ImageVariant> transforms) {
+		final AsyncFunction<File, List<UploadedImage>> processor = new AsyncFunction<File, List<UploadedImage>>() {
+			@Override
+			public ListenableFuture<List<UploadedImage>> apply(final File originalFile)
+					throws Exception {
+				final TransformFunc transformFunc = new TransformFunc(namespace, originalFile, imageId);
+				final List<ListenableFuture<UploadedImage>> taskFutures = new ArrayList<>();
+				for (Entry<ImageTransform, ImageVariant> entry : transforms.entrySet()) {
+					taskFutures.add(transformFunc.apply(entry));
+				}
+				final ListenableFuture<List<UploadedImage>> styledImagesFuture = Futures.allAsList(taskFutures);
+				return styledImagesFuture;
+			}
+		};
+		return processLocallyThenDelete(source, sourceFile, namespace, imageId,
+				sourceVariant, transforms, processor);
 	}
 
 	/**

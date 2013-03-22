@@ -3,6 +3,7 @@ package org.soluvas.image.impl;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
+import java.util.concurrent.ExecutionException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -48,9 +49,9 @@ public class S3ConnectorImplTest {
 	}
 
 	@Test
-	public void uploadFile() {
+	public void uploadFile() throws InterruptedException, ExecutionException {
 		UploadedImage up = s3Conn.upload("activity", "mamadekadhis2", ImageRepository.ORIGINAL_CODE, ImageRepository.ORIGINAL_CODE, "jpg",
-				new File("/home/ceefour/Pictures/Family/hendy mama dek adhis Trans Studio 388540_2728662699516_1538068978_n.jpg"), "image/jpeg");
+				new File("/home/ceefour/Pictures/Family/hendy mama dek adhis Trans Studio 388540_2728662699516_1538068978_n.jpg"), "image/jpeg").get();
 		log.info("Uploaded: {}", up);
 		assertNotNull(up);
 	}
