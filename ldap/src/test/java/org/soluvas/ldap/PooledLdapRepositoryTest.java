@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.AccountStatus;
 import org.soluvas.ldap.SocialPerson.Gender;
 
 import com.google.common.base.Function;
@@ -95,6 +96,8 @@ public class PooledLdapRepositoryTest {
 		liz.setNewsletterSubscriptionEnabled(true);
 		liz.setNewsletterSubscriptionTime(new DateTime());
 		liz.setSignupSourceType(SignupSourceType.ALIA_MAGAZINE);
+		liz.setAccountStatus(AccountStatus.ACTIVE);
+		
 		log.info("Input Person: {}", liz);
 		
 		SocialPerson newLiz = personRepo.add(liz);
