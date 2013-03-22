@@ -132,12 +132,12 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 							final CommandLine cmd = new CommandLine("convert");
 							cmd.addArgument("-verbose");
 							cmd.addArgument(originalFile.getPath());
+							cmd.addArgument("-gravity");
+							cmd.addArgument(gravity);
 							cmd.addArgument("-resize");
 							cmd.addArgument(fx.getWidth() + "x" + fx.getHeight() + "^");
 							cmd.addArgument("-extent");
 							cmd.addArgument(fx.getWidth() + "x" + fx.getHeight());
-							cmd.addArgument("-gravity");
-							cmd.addArgument(gravity);
 							cmd.addArgument("-quality");
 							cmd.addArgument(String.valueOf((int)(quality * 100f)));
 							cmd.addArgument(styledFile.getPath());
