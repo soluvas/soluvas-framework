@@ -17,6 +17,9 @@ import com.google.common.collect.ImmutableList;
 /**
  * For each image, redownloads the original file from WebDAV repository, reprocesses each image style, and re-uploads the processed images to WebDAV repository.
  *
+ * <p>On OVH server, reprocessing 433 Berbatik product images took 7m41s, including
+ * downloading the original images from S3 then reuploading the transformed images.
+ * 
  * @author ceefour
  */
 @Command(scope="image", name="reprocess", description="For each image, redownloads the original file from WebDAV repository, reprocesses each image style, and re-uploads the processed images to WebDAV repository.")
