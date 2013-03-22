@@ -213,13 +213,22 @@ public interface DataPackage extends EPackage {
 	int ATTRIBUTE__FIELD_WIDTH = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 14;
 
 	/**
+	 * The feature id for the '<em><b>Principal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__PRINCIPAL = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 15;
+
+	/**
 	 * The number of structural features of the '<em>Attribute</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 15;
+	int ATTRIBUTE_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 16;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.ValueImpl <em>Value</em>}' class.
@@ -1585,6 +1594,17 @@ public interface DataPackage extends EPackage {
 	EAttribute getAttribute_FieldWidth();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#isPrincipal <em>Principal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Principal</em>'.
+	 * @see org.soluvas.data.Attribute#isPrincipal()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_Principal();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.Value <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2200,6 +2220,14 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ATTRIBUTE__FIELD_WIDTH = eINSTANCE.getAttribute_FieldWidth();
+
+		/**
+		 * The meta object literal for the '<em><b>Principal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__PRINCIPAL = eINSTANCE.getAttribute_Principal();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.ValueImpl <em>Value</em>}' class.

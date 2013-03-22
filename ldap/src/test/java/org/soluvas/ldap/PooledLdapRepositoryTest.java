@@ -94,6 +94,7 @@ public class PooledLdapRepositoryTest {
 		liz.setBirthDate(new DateTime(new Date()));
 		liz.setNewsletterSubscriptionEnabled(true);
 		liz.setNewsletterSubscriptionTime(new DateTime());
+		liz.setSignupSourceType(SignupSourceType.ALIA_MAGAZINE);
 		log.info("Input Person: {}", liz);
 		
 		SocialPerson newLiz = personRepo.add(liz);

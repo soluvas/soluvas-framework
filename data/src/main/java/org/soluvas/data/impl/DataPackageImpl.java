@@ -397,6 +397,15 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAttribute_Principal() {
+		return (EAttribute)attributeEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getValue() {
 		return valueEClass;
@@ -886,6 +895,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		createEAttribute(attributeEClass, ATTRIBUTE__SEARCHABLE_IN_QUICK);
 		createEAttribute(attributeEClass, ATTRIBUTE__IMAGE_ID);
 		createEAttribute(attributeEClass, ATTRIBUTE__FIELD_WIDTH);
+		createEAttribute(attributeEClass, ATTRIBUTE__PRINCIPAL);
 
 		valueEClass = createEClass(VALUE);
 		createEAttribute(valueEClass, VALUE__SEMANTIC);
@@ -1081,6 +1091,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEAttribute(getAttribute_SearchableInQuick(), ecorePackage.getEBoolean(), "searchableInQuick", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_FieldWidth(), ecorePackage.getEInt(), "fieldWidth", "20", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_Principal(), theEcorePackage.getEBoolean(), "principal", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(attributeEClass, this.getValue(), "valueOf", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "stringValue", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1283,6 +1294,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 			 "documentation", "Field width, in characters. Used by text-based UI like Shell."
 		   });		
 		addAnnotation
+		  (getAttribute_Principal(), 
+		   source, 
+		   new String[] {
+			 "documentation", "If true, this attribute will be used as principal in VariedProduct (has no effect in SimpleProduct).\n\nA VariedProduct may also override the principals in use for that specific product (this mechanism is not yet defined)."
+		   });		
+		addAnnotation
 		  (valueEClass, 
 		   source, 
 		   new String[] {
@@ -1405,7 +1422,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																									
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																										
 		addAnnotation
 		  (vocabEClass, 
 		   source, 

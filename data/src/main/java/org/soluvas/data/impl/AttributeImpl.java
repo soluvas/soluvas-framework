@@ -44,6 +44,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#isSearchableInQuick <em>Searchable In Quick</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getImageId <em>Image Id</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getFieldWidth <em>Field Width</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.AttributeImpl#isPrincipal <em>Principal</em>}</li>
  * </ul>
  * </p>
  *
@@ -369,6 +370,26 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * @ordered
 	 */
 	protected int fieldWidth = FIELD_WIDTH_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isPrincipal() <em>Principal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isPrincipal()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean PRINCIPAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isPrincipal() <em>Principal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isPrincipal()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean principal = PRINCIPAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -748,6 +769,27 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isPrincipal() {
+		return principal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPrincipal(boolean newPrincipal) {
+		boolean oldPrincipal = principal;
+		principal = newPrincipal;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__PRINCIPAL, oldPrincipal, principal));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override @JsonIgnore
 	public Unit getInputUnit() {
@@ -836,6 +878,8 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return getImageId();
 			case DataPackage.ATTRIBUTE__FIELD_WIDTH:
 				return getFieldWidth();
+			case DataPackage.ATTRIBUTE__PRINCIPAL:
+				return isPrincipal();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -895,6 +939,9 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return;
 			case DataPackage.ATTRIBUTE__FIELD_WIDTH:
 				setFieldWidth((Integer)newValue);
+				return;
+			case DataPackage.ATTRIBUTE__PRINCIPAL:
+				setPrincipal((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -956,6 +1003,9 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 			case DataPackage.ATTRIBUTE__FIELD_WIDTH:
 				setFieldWidth(FIELD_WIDTH_EDEFAULT);
 				return;
+			case DataPackage.ATTRIBUTE__PRINCIPAL:
+				setPrincipal(PRINCIPAL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1000,6 +1050,8 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return IMAGE_ID_EDEFAULT == null ? imageId != null : !IMAGE_ID_EDEFAULT.equals(imageId);
 			case DataPackage.ATTRIBUTE__FIELD_WIDTH:
 				return fieldWidth != FIELD_WIDTH_EDEFAULT;
+			case DataPackage.ATTRIBUTE__PRINCIPAL:
+				return principal != PRINCIPAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1122,6 +1174,8 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 		result.append(imageId);
 		result.append(", fieldWidth: ");
 		result.append(fieldWidth);
+		result.append(", principal: ");
+		result.append(principal);
 		result.append(')');
 		return result.toString();
 	}
