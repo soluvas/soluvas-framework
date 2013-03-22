@@ -319,7 +319,7 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 //								uploadResult.getBucketName(),
 //								uploadResult.getKey() );
 					log.info("Uploaded {} to {}, {} bytes transferred: bucket={} key={}",
-							file, s3Uri, ev.getBytesTransfered(), bucket, key );
+							file, s3Uri, upload.getProgress().getBytesTransfered(), bucket, key );
 					final String realOriginAlias = Strings.isNullOrEmpty(originAlias) ? bucket + ".s3.amazonaws.com" : originAlias;
 					final String realCdnAlias = Strings.isNullOrEmpty(cdnAlias) ? bucket + ".s3.amazonaws.com" : cdnAlias;
 					final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
@@ -329,18 +329,18 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 					break;
 				case ProgressEvent.FAILED_EVENT_CODE:
 					log.error("Failed upload {} to {}, {} bytes transferred", file, s3Uri,
-							ev.getBytesTransfered());
+							upload.getProgress().getBytesTransfered());
 					future.setException(new ImageException("Failed upload " + file + " to " + s3Uri + ". " +
-							ev.getBytesTransfered() + " bytes transferred"));
+							upload.getProgress().getBytesTransfered() + " bytes transferred"));
 					break;
 				case 0:
 					// nothing...?
 					break;
 				default:
 					log.error("Unknown error code {} during upload {} to {}, {} bytes transferred",
-							ev.getEventCode(), file, s3Uri, ev.getBytesTransfered());
+							ev.getEventCode(), file, s3Uri, upload.getProgress().getBytesTransfered());
 					future.setException(new ImageException(String.format("Unknown error code %s during upload %s to %s, %s bytes transferred",
-							ev.getEventCode(), file, s3Uri, ev.getBytesTransfered())));
+							ev.getEventCode(), file, s3Uri, upload.getProgress().getBytesTransfered())));
 					break;
 				}
 			}
