@@ -4,20 +4,15 @@ package org.soluvas.commons.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EMap;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.SerializableEMap;
 import org.soluvas.commons.Translation;
 
 /**
@@ -89,6 +84,7 @@ public class TranslationImpl extends EObjectImpl implements Translation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLanguage() {
 		return language;
 	}
@@ -98,6 +94,7 @@ public class TranslationImpl extends EObjectImpl implements Translation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLanguage(String newLanguage) {
 		String oldLanguage = language;
 		language = newLanguage;
@@ -108,11 +105,11 @@ public class TranslationImpl extends EObjectImpl implements Translation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
+	@Override
 	public EMap<String, String> getMessages() {
 		if (messages == null) {
-			messages = new EcoreEMap<String,String>(CommonsPackage.Literals.TRANSLATION_MESSAGE_ENTRY, TranslationMessageEntryImpl.class, this, CommonsPackage.TRANSLATION__MESSAGES);
+			messages = new SerializableEMap<String,String>(CommonsPackage.Literals.TRANSLATION_MESSAGE_ENTRY, TranslationMessageEntryImpl.class, this, CommonsPackage.TRANSLATION__MESSAGES);
 		}
 		return messages;
 	}
