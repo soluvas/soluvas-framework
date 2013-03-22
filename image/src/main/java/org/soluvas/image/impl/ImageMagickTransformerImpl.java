@@ -219,8 +219,9 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 						final int height = (int) styledDim.getHeight();
 						log.debug("Dimensions of {} is {}x{}", styledFile, width, height);
 
-						final String styledPublicUri = styledUpload.getOriginUri();
-						log.info("Uploaded {} {} as {} from {} ({} bytes)", dest.getStyleCode(), imageId, styledPublicUri,
+						final String styledOriginUri = styledUpload.getOriginUri();
+						final String styledCdnUri = styledUpload.getUri();
+						log.info("Uploaded {} {} as {}/{} from {} ({} bytes)", dest.getStyleCode(), imageId, styledOriginUri, styledCdnUri,
 								styledFile, styledFile.length());
 	//											final StyledImage styled = new StyledImage(
 	//													style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
@@ -231,8 +232,8 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 						uploadedImage.setStyleCode(dest.getStyleCode());
 						uploadedImage.setStyleVariant(dest.getStyleVariant());
 						uploadedImage.setExtension(dest.getExtension());
-						uploadedImage.setOriginUri(styledPublicUri);
-						uploadedImage.setUri(styledPublicUri);
+						uploadedImage.setOriginUri(styledOriginUri);
+						uploadedImage.setUri(styledCdnUri);
 						uploadedImage.setWidth(width);
 						uploadedImage.setHeight(height);
 						uploadedImage.setSize(styledFile.length());
