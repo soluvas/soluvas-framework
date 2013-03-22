@@ -31,12 +31,12 @@ public class AppUtils {
 	}
 	
 	public static ExecutorService newCpuExecutor() {
-		final ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("CPU-%d").build();
+		final ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("CPU-%02d").build();
 		return Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors(), threadFactory);
 	}
 
 	public static ExecutorService newNetworkExecutor() {
-		final ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("Network-%02d").build();
+		final ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("Net-%02d").build();
 		return Executors.newFixedThreadPool(32, threadFactory);
 	}
 
