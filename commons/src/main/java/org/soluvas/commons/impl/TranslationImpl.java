@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.SerializableEMap;
 import org.soluvas.commons.Translation;
 
 /**
@@ -113,12 +114,11 @@ public class TranslationImpl extends EObjectImpl implements Translation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public EMap<String, String> getMessages() {
 		if (messages == null) {
-			messages = new EcoreEMap<String,String>(CommonsPackage.Literals.TRANSLATION_MESSAGE_ENTRY, TranslationMessageEntryImpl.class, this, CommonsPackage.TRANSLATION__MESSAGES);
+			messages = new SerializableEMap<String,String>(CommonsPackage.Literals.TRANSLATION_MESSAGE_ENTRY, TranslationMessageEntryImpl.class, this, CommonsPackage.TRANSLATION__MESSAGES);
 		}
 		return messages;
 	}

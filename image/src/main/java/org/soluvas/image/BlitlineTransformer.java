@@ -27,6 +27,8 @@ import com.google.common.collect.ImmutableList;
  * See: http://www.blitline.com/docs/s3_permissions
  * 
  * Make sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions
+ * 
+ * WARNING: BlitlineTransformer currently does not support ResizeToFit especially with dynamic width/height (because need to either calculate dimensions or read the resulting image sizes via callback). Use ImageMagickTransformer instead if you need it.
  * <!-- end-model-doc -->
  *
  * <p>

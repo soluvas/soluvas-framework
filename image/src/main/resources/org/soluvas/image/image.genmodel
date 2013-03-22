@@ -1,32 +1,198 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-	xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-	xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
-	modelDirectory="/org.soluvas.image/src/main/java" modelPluginID="org.soluvas.image"
-	modelName="Image"
-	rootExtendsInterface="org.soluvas.commons.SerializableEObject"
-	importerID="org.eclipse.emf.importer.ecore" bundleManifest="false"
-	complianceLevel="6.0" suppressGenModelAnnotations="false"
-	copyrightFields="false" publicConstructors="true"
-	usedGenPackages="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.genmodel#//commons platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
-	<foreignModel>image.ecore</foreignModel>
-	<genPackages prefix="Image" basePackage="org.soluvas"
-		disposableProviderFactory="true" ecorePackage="image.ecore#/">
-		<genClasses ecoreClass="image.ecore#//ImageConfig">
-			<genFeatures createChild="false"
-				ecoreFeature="ecore:EAttribute image.ecore#//ImageConfig/publicUri" />
-		</genClasses>
-		<genClasses image="false" ecoreClass="image.ecore#//ImageConnector">
-			<genOperations ecoreOperation="image.ecore#//ImageConnector/upload">
-				<genParameters ecoreParameter="image.ecore#//ImageConnector/upload/namespace" />
-				<genParameters ecoreParameter="image.ecore#//ImageConnector/upload/id" />
-				<genParameters ecoreParameter="image.ecore#//ImageConnector/upload/file" />
-				<genParameters ecoreParameter="image.ecore#//ImageConnector/upload/contentType" />
-			</genOperations>
-		</genClasses>
-		<genClasses ecoreClass="image.ecore#//S3Connector" />
-		<genClasses ecoreClass="image.ecore#//BlitlineConnector" />
-		<genClasses ecoreClass="image.ecore#//CloudinaryConnector" />
-		<genClasses ecoreClass="image.ecore#//WebDavConnector" />
-	</genPackages>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.soluvas.image/src/main/java" modelPluginID="org.soluvas.image"
+    modelName="Image" rootExtendsInterface="org.soluvas.commons.SerializableEObject"
+    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="7.0"
+    suppressGenModelAnnotations="false" copyrightFields="false" publicConstructors="true"
+    usedGenPackages="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.genmodel#//commons platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <foreignModel>image.ecore</foreignModel>
+  <genPackages prefix="Image" basePackage="org.soluvas" disposableProviderFactory="true"
+      ecorePackage="image.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="image.ecore#//ImageTransformType">
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//ImageTransformType/resize_to_fit"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//ImageTransformType/resize_to_fill"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="image.ecore#//FileExport">
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//FileExport/original"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//FileExport/style"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//FileExport/all"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="image.ecore#//DuplicateIdHandling">
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//DuplicateIdHandling/skip"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//DuplicateIdHandling/overwrite"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//DuplicateIdHandling/add"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//DuplicateIdHandling/error"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="image.ecore#//TransformGravity">
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//TransformGravity/center"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//TransformGravity/top_center"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//TransformGravity/bottom_center"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//TransformGravity/center_left"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//TransformGravity/center_right"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//TransformGravity/top_left"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//TransformGravity/top_right"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//TransformGravity/bottom_left"/>
+      <genEnumLiterals ecoreEnumLiteral="image.ecore#//TransformGravity/bottom_right"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="image.ecore#//ImageRepository"/>
+    <genClasses image="false" ecoreClass="image.ecore#//ImageConnector">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//ImageConnector/hiUriTemplate"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//ImageConnector/uriTemplate"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//ImageConnector/executor"/>
+      <genOperations ecoreOperation="image.ecore#//ImageConnector/upload">
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/upload/namespace"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/upload/imageId"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/upload/styleCode"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/upload/styleVariant"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/upload/extension"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/upload/file"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/upload/contentType"/>
+      </genOperations>
+      <genOperations ecoreOperation="image.ecore#//ImageConnector/download">
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/download/namespace"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/download/imageId"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/download/styleCode"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/download/styleVariant"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/download/extension"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/download/file"/>
+      </genOperations>
+      <genOperations ecoreOperation="image.ecore#//ImageConnector/delete">
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/delete/namespace"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/delete/imageId"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/delete/styleCode"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/delete/styleVariant"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/delete/extension"/>
+      </genOperations>
+      <genOperations ecoreOperation="image.ecore#//ImageConnector/getUri">
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/getUri/namespace"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/getUri/imageId"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/getUri/styleCode"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/getUri/styleVariant"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/getUri/extension"/>
+      </genOperations>
+      <genOperations ecoreOperation="image.ecore#//ImageConnector/getOriginUri">
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/getOriginUri/namespace"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/getOriginUri/imageId"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/getOriginUri/styleCode"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/getOriginUri/styleVariant"/>
+        <genParameters ecoreParameter="image.ecore#//ImageConnector/getOriginUri/extension"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="image.ecore#//DavConnector">
+      <genOperations ecoreOperation="image.ecore#//DavConnector/destroy"/>
+    </genClasses>
+    <genClasses ecoreClass="image.ecore#//S3Connector">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//S3Connector/canonicalUserId"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//S3Connector/bucket"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//S3Connector/tenantId"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//S3Connector/tenantEnv"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//S3Connector/originAlias"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//S3Connector/cdnAlias"/>
+      <genOperations ecoreOperation="image.ecore#//S3Connector/destroy"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="image.ecore#//ImageTransformer">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//ImageTransformer/executor"/>
+      <genOperations ecoreOperation="image.ecore#//ImageTransformer/transform">
+        <genParameters ecoreParameter="image.ecore#//ImageTransformer/transform/source"/>
+        <genParameters ecoreParameter="image.ecore#//ImageTransformer/transform/sourceFile"/>
+        <genParameters ecoreParameter="image.ecore#//ImageTransformer/transform/namespace"/>
+        <genParameters ecoreParameter="image.ecore#//ImageTransformer/transform/imageId"/>
+        <genParameters ecoreParameter="image.ecore#//ImageTransformer/transform/sourceVariant"/>
+        <genParameters ecoreParameter="image.ecore#//ImageTransformer/transform/transforms"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="image.ecore#//BlitlineTransformer">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//BlitlineTransformer/applicationId"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//BlitlineTransformer/bucket"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//BlitlineTransformer/tenantId"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//BlitlineTransformer/tenantEnv"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//BlitlineTransformer/cdnAlias"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//BlitlineTransformer/keyTemplate"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//BlitlineTransformer/uriTemplate"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//BlitlineTransformer/originUriTemplate"/>
+    </genClasses>
+    <genClasses ecoreClass="image.ecore#//ThumbnailatorTransformer">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference image.ecore#//ThumbnailatorTransformer/destination"/>
+    </genClasses>
+    <genClasses ecoreClass="image.ecore#//UploadedImage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//UploadedImage/uri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//UploadedImage/originUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//UploadedImage/styleCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//UploadedImage/styleVariant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//UploadedImage/extension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//UploadedImage/size"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//UploadedImage/width"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//UploadedImage/height"/>
+    </genClasses>
+    <genClasses ecoreClass="image.ecore#//ImageManager">
+      <genOperations ecoreOperation="image.ecore#//ImageManager/getDefaultPhotoId">
+        <genParameters ecoreParameter="image.ecore#//ImageManager/getDefaultPhotoId/gender"/>
+      </genOperations>
+      <genOperations ecoreOperation="image.ecore#//ImageManager/export">
+        <genParameters ecoreParameter="image.ecore#//ImageManager/export/imageRepo"/>
+        <genParameters ecoreParameter="image.ecore#//ImageManager/export/metadata"/>
+        <genParameters ecoreParameter="image.ecore#//ImageManager/export/files"/>
+        <genParameters ecoreParameter="image.ecore#//ImageManager/export/destFolder"/>
+        <genParameters ecoreParameter="image.ecore#//ImageManager/export/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="image.ecore#//ImageManager/importImages">
+        <genParameters ecoreParameter="image.ecore#//ImageManager/importImages/srcFolder"/>
+        <genParameters ecoreParameter="image.ecore#//ImageManager/importImages/metadata"/>
+        <genParameters ecoreParameter="image.ecore#//ImageManager/importImages/files"/>
+        <genParameters ecoreParameter="image.ecore#//ImageManager/importImages/imageRepo"/>
+        <genParameters ecoreParameter="image.ecore#//ImageManager/importImages/duplicateIdHandling"/>
+        <genParameters ecoreParameter="image.ecore#//ImageManager/importImages/monitor"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="image.ecore#//ImageTransform"/>
+    <genClasses ecoreClass="image.ecore#//ResizeToFit">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//ResizeToFit/onlyShrinkLarger"/>
+    </genClasses>
+    <genClasses ecoreClass="image.ecore#//ResizeToFill">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//ResizeToFill/gravity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//ResizeToFill/onlyShrinkLarger"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="image.ecore#//DimensionLike">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//DimensionLike/width"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//DimensionLike/height"/>
+    </genClasses>
+    <genClasses ecoreClass="image.ecore#//ImageVariant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//ImageVariant/styleCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//ImageVariant/styleVariant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//ImageVariant/extension"/>
+    </genClasses>
+    <genClasses ecoreClass="image.ecore#//Image">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference image.ecore#//Image/styles"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//Image/schemaVersion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//Image/uri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//Image/fileName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//Image/contentType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//Image/size"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//Image/created"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//Image/originUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//Image/extension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//Image/linkedFile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//Image/originalFile"/>
+    </genClasses>
+    <genClasses ecoreClass="image.ecore#//StyledImage">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//StyledImage/schemaVersion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//StyledImage/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//StyledImage/uri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//StyledImage/size"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//StyledImage/variant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//StyledImage/extension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//StyledImage/originUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//StyledImage/contentType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//StyledImage/linkedFile"/>
+    </genClasses>
+    <genClasses ecoreClass="image.ecore#//ImageCatalog">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference image.ecore#//ImageCatalog/images"/>
+    </genClasses>
+    <genClasses ecoreClass="image.ecore#//ImageMagickTransformer">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference image.ecore#//ImageMagickTransformer/destination"/>
+    </genClasses>
+    <genClasses ecoreClass="image.ecore#//FolderConnector">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute image.ecore#//FolderConnector/folder"/>
+    </genClasses>
+  </genPackages>
 </genmodel:GenModel>

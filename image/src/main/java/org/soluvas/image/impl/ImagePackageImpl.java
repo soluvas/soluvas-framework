@@ -1516,7 +1516,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		  (blitlineTransformerEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Processes using Blitline. The source image must be publicly hosted, for example using S3.\nBlitline will use source to get the origin URI, but processing will be done by Blitline itself.\n\nThe destination image is directly written into an S3 bucket.\n\nYou must have an S3 account and have permissions to change the policy on your bucket\nFor these instructions, you must use the Amazon AWS Console\nSee: http://www.blitline.com/docs/s3_permissions\n\nMake sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions"
+			 "documentation", "Processes using Blitline. The source image must be publicly hosted, for example using S3.\nBlitline will use source to get the origin URI, but processing will be done by Blitline itself.\n\nThe destination image is directly written into an S3 bucket.\n\nYou must have an S3 account and have permissions to change the policy on your bucket\nFor these instructions, you must use the Amazon AWS Console\nSee: http://www.blitline.com/docs/s3_permissions\n\nMake sure to set the Canonical ID, see http://blog.blitline.com/post/32296310740/canonical-id-s3-permissions\n\nWARNING: BlitlineTransformer currently does not support ResizeToFit especially with dynamic width/height (because need to either calculate dimensions or read the resulting image sizes via callback). Use ImageMagickTransformer instead if you need it."
 		   });		
 		addAnnotation
 		  (getBlitlineTransformer_CdnAlias(), 

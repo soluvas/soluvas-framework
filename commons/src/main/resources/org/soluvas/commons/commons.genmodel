@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.soluvas.commons/src/main/java" modelPluginID="org.soluvas.commons"
     modelName="Commons" rootExtendsInterface="org.soluvas.commons.SerializableEObject"
     rootImplementsInterface="" importerID="org.eclipse.emf.importer.ecore" bundleManifest="false"
-    complianceLevel="6.0" suppressGenModelAnnotations="false" copyrightFields="false"
+    complianceLevel="7.0" suppressGenModelAnnotations="false" copyrightFields="false"
     publicConstructors="true" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <foreignModel>commons.ecore</foreignModel>
   <genPackages prefix="Commons" basePackage="org.soluvas" disposableProviderFactory="true"

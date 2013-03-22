@@ -323,6 +323,9 @@ public interface Category extends Parentable<Category>, CategoryLike, ResourceAw
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Default mixin using the syntax "{nsPrefix}_{name}".
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Default Mixin</em>' attribute.
 	 * @see #setDefaultMixin(String)
 	 * @see org.soluvas.category.CategoryPackage#getCategory_DefaultMixin()
