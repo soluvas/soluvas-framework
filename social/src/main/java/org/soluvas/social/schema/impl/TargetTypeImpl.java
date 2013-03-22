@@ -314,7 +314,7 @@ public class TargetTypeImpl extends EObjectImpl implements TargetType {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NS_PREFIX_EDEFAULT = "";
+	protected static final String NS_PREFIX_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.

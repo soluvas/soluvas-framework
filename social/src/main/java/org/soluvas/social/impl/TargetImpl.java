@@ -46,7 +46,7 @@ public abstract class TargetImpl extends EObjectImpl implements Target {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NS_PREFIX_EDEFAULT = "";
+	protected static final String NS_PREFIX_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
