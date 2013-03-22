@@ -61,6 +61,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.data.Attribute#isSearchableInQuick <em>Searchable In Quick</em>}</li>
  *   <li>{@link org.soluvas.data.Attribute#getImageId <em>Image Id</em>}</li>
  *   <li>{@link org.soluvas.data.Attribute#getFieldWidth <em>Field Width</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#isPrincipal <em>Principal</em>}</li>
  * </ul>
  * </p>
  *
@@ -381,6 +382,33 @@ public interface Attribute extends NsPrefixable, NameContainer, Imageable, Descr
 	 * @generated
 	 */
 	void setFieldWidth(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Principal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * If true, this attribute will be used as principal in VariedProduct (has no effect in SimpleProduct).
+	 * 
+	 * A VariedProduct may also override the principals in use for that specific product (this mechanism is not yet defined).
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Principal</em>' attribute.
+	 * @see #setPrincipal(boolean)
+	 * @see org.soluvas.data.DataPackage#getAttribute_Principal()
+	 * @model
+	 * @generated
+	 */
+	boolean isPrincipal();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#isPrincipal <em>Principal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Principal</em>' attribute.
+	 * @see #isPrincipal()
+	 * @generated
+	 */
+	void setPrincipal(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

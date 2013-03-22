@@ -86,6 +86,11 @@
         <details key="documentation" value="Field width, in characters. Used by text-based UI like Shell."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="principal" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If true, this attribute will be used as principal in VariedProduct (has no effect in SimpleProduct).&#xA;&#xA;A VariedProduct may also override the principals in use for that specific product (this mechanism is not yet defined)."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

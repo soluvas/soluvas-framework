@@ -123,6 +123,10 @@
         <element xmi:type="ecore:EAttribute" href="data.ecore#//Attribute/inputUnitName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_qZE2AYQSEeKMtM0xzHppWQ"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_zxkmgZKkEeKzp4NeGgJ5yg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="data.ecore#//Attribute/principal"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_zxkmgpKkEeKzp4NeGgJ5yg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_IwrOMUjZEeKiGv-Fpyd8oQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_IwrOMkjZEeKiGv-Fpyd8oQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_IwrOM0jZEeKiGv-Fpyd8oQ"/>
