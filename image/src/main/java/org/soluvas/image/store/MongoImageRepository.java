@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
@@ -908,6 +910,7 @@ public class MongoImageRepository implements ImageRepository {
 		log.info("Reprocessing {} images", images.size());
 		submon.beginTask("Reprocessing " + images.size() + " images", images.size());
 		ProgressStatus finalStatus = ProgressStatus.OK;
+		final List<ListenableFuture<String>> imageIdFutures = new ArrayList<>();
 		for (final Image image : images) {
 			final String extension = ImageUtils.getExtensionOrJpg(image.getFileName());
 			try {
@@ -915,21 +918,41 @@ public class MongoImageRepository implements ImageRepository {
 				final File tempFile = File.createTempFile(image.getId(), "." + extension);
 //				submon.beginTask("Fetching " + image.getId() + " from " + image.getUri() + " to " + tempFile, 1);
 				log.info("Downloading {} from {} to {}", image.getId(), image.getUri(), tempFile);
-				try {
-					final boolean downloaded = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE,
-							extension, tempFile);
-					if (downloaded) {
-						doCreate(image.getId(), tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
-								image.getFileName(), false);
-					} else {
-						log.error("Cannot download {} because connector {} returned false",
-								image.getId(), connector.getClass().getName());
-						finalStatus = ProgressStatus.WARNING;
-					}
-					submon.worked(1);
-				} finally {
-					log.trace("Deleting temporary file {} (image {})", tempFile, image.getId());
-					tempFile.delete();
+				final boolean downloaded = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE,
+						extension, tempFile);
+				if (downloaded) {
+					final ListenableFuture<String> imageIdFuture = doCreate(image.getId(), tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
+							image.getFileName(), false);
+					Futures.addCallback(imageIdFuture, new FutureCallback<String>() {
+						@Override
+						public void onSuccess(String result) {
+							deleteOriginal();
+							log.info("Reprocessed {}", result);
+							submon.worked(1);
+						}
+
+						@Override
+						public void onFailure(Throwable t) {
+							deleteOriginal();
+							log.error("Cannot reprocess " + image.getId(), t);
+							submon.worked(1, ProgressStatus.ERROR);
+						}
+
+						/**
+						 * @param image
+						 * @param tempFile
+						 */
+						protected void deleteOriginal() {
+							log.trace("Deleting temporary file {} (image {})", tempFile, image.getId());
+							tempFile.delete();
+						}
+					});
+					imageIdFutures.add(imageIdFuture);
+				} else {
+					log.error("Cannot download {} because connector {} returned false",
+							image.getId(), connector.getClass().getName());
+					finalStatus = ProgressStatus.WARNING;
+					submon.worked(1, ProgressStatus.ERROR);
 				}
 			} catch (Exception e) {
 				// log, but continue
@@ -938,6 +961,16 @@ public class MongoImageRepository implements ImageRepository {
 				finalStatus = ProgressStatus.ERROR;
 			}
 		}
+		
+		final ListenableFuture<List<String>> imageIdsFuture = Futures.successfulAsList(imageIdFutures);
+		try {
+			final List<String> imageIds = imageIdsFuture.get();
+			log.info("Reprocessed {} images successfully out of {} requested: {}", imageIds.size(),
+					images.size(), imageIds);
+		} catch (InterruptedException | ExecutionException e) {
+			log.error("Cannot reprocess {} images", images.size());
+		}
+		
 		submon.done(finalStatus); // TODO: shouldn't be done in proper implementation
 	}
 
