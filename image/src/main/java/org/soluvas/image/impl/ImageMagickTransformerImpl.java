@@ -39,9 +39,11 @@ import org.soluvas.image.util.ImageUtils;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.MoreExecutors;
 
 /**
  * <!-- begin-user-doc -->
@@ -91,6 +93,9 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 					}
 					
 					try {
+						final CommandLine cmd = new CommandLine("convert");
+						cmd.addArgument("-verbose");
+						cmd.addArgument(originalFile.getPath());
 						if (transform instanceof ResizeToFill) {
 							final ResizeToFill fx = (ResizeToFill) transform;
 							final boolean progressive = fx.getWidth() >= 512;
@@ -129,58 +134,48 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 								throw new ImageException("Unknown gravity: "  + fx.getGravity());
 							}
 							
-							final CommandLine cmd = new CommandLine("convert");
-							cmd.addArgument("-verbose");
-							cmd.addArgument(originalFile.getPath());
 							cmd.addArgument("-gravity");
 							cmd.addArgument(gravity);
 							cmd.addArgument("-resize");
 							cmd.addArgument(fx.getWidth() + "x" + fx.getHeight() + "^");
 							cmd.addArgument("-extent");
 							cmd.addArgument(fx.getWidth() + "x" + fx.getHeight());
-							cmd.addArgument("-quality");
-							cmd.addArgument(String.valueOf((int)(quality * 100f)));
-							cmd.addArgument(styledFile.getPath());
 							
 							log.debug("ResizeToFill {} to {}, {}x{} gravity={} quality={} progressive={} using: {}",
 									originalFile, styledFile, fx.getWidth(), fx.getHeight(),
 									gravity, quality, progressive, cmd );
-							
-							final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-							final DefaultExecutor executor = new DefaultExecutor();
-							executor.setStreamHandler(new PumpStreamHandler(buffer));
-							final int executionResult = executor.execute(cmd);
-							log.info("{} returned {}: {}", cmd, executionResult, buffer);
 						} else if (transform instanceof ResizeToFit) {
 							final ResizeToFit fx = (ResizeToFit) transform;
 							Preconditions.checkArgument(fx.getWidth() != null || fx.getHeight() != null,
 									"For ResizeToFit, at least one of height or width must be specified");
 							final boolean progressive = fx.getWidth() != null ? fx.getWidth() >= 512 : fx.getHeight() >= 512;
 							
-							final CommandLine cmd = new CommandLine("convert");
-							cmd.addArgument("-verbose");
-							cmd.addArgument(originalFile.getPath());
 							cmd.addArgument("-resize");
 							final String widthStr = fx.getWidth() != null ? fx.getWidth().toString() : "";
 							final String heightStr = fx.getHeight() != null ? fx.getHeight().toString() : "";
 							final String onlyShrinkLargerFlag = fx.getOnlyShrinkLarger() ? ">" : "";
 							cmd.addArgument(widthStr + "x" + heightStr + onlyShrinkLargerFlag);
-							cmd.addArgument("-quality");
-							cmd.addArgument(String.valueOf((int)(quality * 100f)));
-							cmd.addArgument(styledFile.getPath());
 							
 							log.debug("ResizeToFit {} to {}, {}x{} onlyShrinkLarger={} quality={} progressive={} using: {}",
 									originalFile, styledFile, fx.getWidth(), fx.getHeight(), fx.getOnlyShrinkLarger(),
 									quality, progressive, cmd );
-							
-							final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-							final DefaultExecutor executor = new DefaultExecutor();
-							executor.setStreamHandler(new PumpStreamHandler(buffer));
-							final int executionResult = executor.execute(cmd);
-							log.info("{} returned {}: {}", cmd, executionResult, buffer);
 						} else {
 							throw new ImageException("Unsupported transform: " + transform);
 						}
+						
+						// common arguments
+						cmd.addArgument("-quality");
+						cmd.addArgument(String.valueOf((int)(quality * 100f)));
+						cmd.addArgument(styledFile.getPath());
+						// Execute the cmd
+						final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+						final DefaultExecutor executor = new DefaultExecutor();
+						executor.setStreamHandler(new PumpStreamHandler(buffer));
+						// limit ImageMagick to single-threaded if we use custom executor
+						final Map<String, String> environment = getExecutor() == MoreExecutors.sameThreadExecutor() ? ImmutableMap.<String, String>of()
+								: ImmutableMap.of("MAGICK_THREAD_LIMIT", "1");
+						final int executionResult = executor.execute(cmd, environment);
+						log.info("{} {} returned {}: {}", environment, cmd, executionResult, buffer);
 						
 						return styledFile;
 					} catch (final Exception e) {

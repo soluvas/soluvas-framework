@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.tenant.ServiceLookup;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
+import org.soluvas.image.util.ImageUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -32,7 +33,7 @@ public class ImageAddCommand extends OsgiCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(ImageAddCommand.class);
 
-	private ServiceLookup svcLookup;
+	private final ServiceLookup svcLookup;
 	@Option(name="-n", aliases={"--ns", "--namespace"},
 		description="Namespace, e.g. person, shop, product. Default is 'person'.")
 	private String namespace;
@@ -41,8 +42,8 @@ public class ImageAddCommand extends OsgiCommandSupport {
 		description="File or URL to upload.")
 	private String originalFile;
 	@Argument(index=1, name="contentType", required=false,
-		description="Content type, e.g. image/jpeg.")
-	private String contentType = "image/jpeg";
+		description="Content type, e.g. image/png.")
+	private String contentType;
 	@Argument(index=2, name="name", required=false,
 		description="Short descriptive name. Default: (base filename).")
 	private String name;
@@ -59,7 +60,7 @@ public class ImageAddCommand extends OsgiCommandSupport {
 	@Override
 	protected Object doExecute() throws Exception {
 		final Image newImage = new Image();
-		final File tmpFile = File.createTempFile("imageadd_", ".jpg");
+		final File tmpFile = File.createTempFile("imageadd_", "." + ImageUtils.getExtensionOrJpg(originalFile));
 		try {
 			if (originalFile != null)
 				if (originalFile.matches("[a-z]{2,}:.*")) {

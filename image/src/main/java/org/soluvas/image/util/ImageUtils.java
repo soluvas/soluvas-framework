@@ -12,6 +12,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.soluvas.image.ImageException;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterators;
 
 /**
@@ -19,6 +22,14 @@ import com.google.common.collect.Iterators;
  *
  */
 public class ImageUtils {
+
+	/**
+	 * Map between content type (image/jpeg) to extension (jpg); 
+	 */
+	public static final BiMap<String, String> supportedContentTypes = HashBiMap.create(ImmutableMap.of(
+			"image/jpeg", "jpg",
+			"image/png", "png",
+			"image/gif", "gif"));
 
 	/**
 	 * Usage:
@@ -32,6 +43,10 @@ public class ImageUtils {
 		// TODO: so don't hardcode extension!
 		final String fileExtension = FilenameUtils.getExtension(Strings.nullToEmpty(fileName));
 		return !Strings.isNullOrEmpty(fileExtension) ? fileExtension : "jpg";
+	}
+	
+	public static String getExtensionFromMime(String mimeType) {
+		return supportedContentTypes.inverse().get(mimeType);
 	}
 	
 	public static Dimension getDimension(File file) {

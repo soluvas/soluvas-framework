@@ -145,14 +145,6 @@ public class MongoImageRepository implements ImageRepository {
 	private List<String> mongoHosts;
 	private String mongoDatabase;
 	
-	/**
-	 * Map between content type (image/jpeg) to extension (jpg); 
-	 */
-	private static final Map<String, String> supportedContentTypes = ImmutableMap.of(
-			"image/jpeg", "jpg",
-			"image/png", "png",
-			"image/gif", "gif");
-
 	// should be network executor, to perform mongodb operations concurrently
 	// although probably better to do it in bulk instead, or both (i.e. 32 bulk inserts in the executor, of 10 documents each)
 	private final ListeningExecutorService executor = MoreExecutors.sameThreadExecutor();
@@ -547,7 +539,7 @@ public class MongoImageRepository implements ImageRepository {
 	/* (non-Javadoc)
 	 * @see org.soluvas.image.store.ImageRepository#doCreate(java.lang.String, java.io.File, java.lang.String, long, java.lang.String, java.lang.String, boolean)
 	 */
-	protected ListenableFuture<OriginalUpload> doCreateOriginal(String existingImageId, final File originalFile, final String contentType,
+	protected ListenableFuture<OriginalUpload> doCreateOriginal(String existingImageId, final File originalFile, final String upContentType,
 			final long length, final String name, final String originalName, boolean alsoUploadOriginal) {
 		Preconditions.checkNotNull(originalFile, "Original file to be added must not be null");
 		if (!originalFile.exists()) {
@@ -561,14 +553,17 @@ public class MongoImageRepository implements ImageRepository {
 		String tmpExtension = StringUtils.lowerCase(FilenameUtils.getExtension(originalName));
 		final String extension;
 		if (Strings.isNullOrEmpty(tmpExtension)) {
-			extension = supportedContentTypes.get(contentType);
+			extension = ImageUtils.supportedContentTypes.get(upContentType);
 			if (Strings.isNullOrEmpty(extension)) {
 				throw new ImageException(String.format("Cannot get extension from originalName=%s for existingImageId=%s originalFile=%s, with unsupported content type %s, supported content types are: %s",
-						originalName, existingImageId, originalFile, contentType, supportedContentTypes.keySet()));
+						originalName, existingImageId, originalFile, upContentType, ImageUtils.supportedContentTypes.keySet()));
 			}
 		} else {
 			extension = tmpExtension;
 		}
+		// if necessary, guess content type from extension
+		final String contentType = Optional.fromNullable(upContentType)
+				.or(ImageUtils.getExtensionFromMime(extension));
 		
 		log.debug("Adding image from {} ({} {} bytes) as {}, originalName={} extension={}",
 				originalFile.getName(), contentType, length, imageId,
