@@ -2,6 +2,8 @@
 .project
 .settings
 target
+build
+.gradle
 .directory
 /apacheds
 /folder.shell

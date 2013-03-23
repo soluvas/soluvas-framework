@@ -1,0 +1,2 @@
+include 'commons', 'data', 'ldap', 'jaxrs',
+    'mongo', 'image', 'socmed'

@@ -1,0 +1,8 @@
+dependencies {
+    compile libraries.jackson
+    compile libraries.emf
+    compile libraries.osgi,
+	libraries.karaf_shell_console
+    compile 'com.rabbitmq:amqp-client:2.8.7'
+    compile libraries.mongo, libraries.morphia
+}
