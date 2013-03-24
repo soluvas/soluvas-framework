@@ -1,0 +1,5 @@
+dependencies {
+    compile project(':ldap'), project(':mongo')
+    compile libraries.servlet,
+	libraries.shiro, libraries.shiro_web
+}

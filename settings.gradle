@@ -1,2 +1,4 @@
 include 'commons', 'data', 'ldap', 'jaxrs',
-    'mongo', 'image', 'socmed'
+    'mongo', 'image', 'socmed', 'email',
+    'social', 'category', 'folder', 'security'
+// include 'taxonomy'
