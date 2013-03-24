@@ -13,7 +13,7 @@ import com.google.common.base.Supplier;
  *
  * @param <T>
  */
-public interface DelegatingSupplier<T extends EObject> {
+public interface DelegatingSupplier<T extends EObject> extends Supplier<T> {
 
 	public abstract void addSupplier(Supplier<T> supplier);
 
