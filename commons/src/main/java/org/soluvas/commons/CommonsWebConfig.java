@@ -1,8 +1,12 @@
 package org.soluvas.commons;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,7 +24,6 @@ import org.soluvas.json.LowerEnumModule;
 import org.soluvas.json.jscience.JscienceModule;
 import org.soluvas.json.money.JodaMoneyModule;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -69,13 +72,20 @@ public class CommonsWebConfig {
 	public String dataFolder() {
 		return System.getProperty("user.home") + "/" + tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv();
 	}
+	
+	@Bean
+	public Properties soluvasProperties() throws FileNotFoundException, IOException {
+		final Properties props = new Properties();
+		props.load(new FileReader(dataFolder() + "/etc/org.soluvas.cfg"));
+		return props;
+	}
 
-	@Bean(destroyMethod="shutdown")
+	@Bean(destroyMethod="shutdown") @Network
 	public ExecutorService networkExecutor() {
 		return AppUtils.newNetworkExecutor();
 	}
 	
-	@Bean(destroyMethod="shutdown")
+	@Bean(destroyMethod="shutdown") @Cpu
 	public ExecutorService cpuExecutor() {
 		return AppUtils.newCpuExecutor();
 	}

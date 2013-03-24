@@ -19,6 +19,7 @@ import org.stringtemplate.v4.STGroupFile;
  * @author ceefour
  */
 //@Path("org.soluvas.image")
+@Path("/")
 public class ImageResource {
 	
 	private static final Logger log = LoggerFactory.getLogger(ImageResource.class);

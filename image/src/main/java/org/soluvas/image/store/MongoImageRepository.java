@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.apache.commons.io.FileUtils;
@@ -190,6 +191,7 @@ public class MongoImageRepository implements ImageRepository {
 	/* (non-Javadoc)
 	 * @see org.soluvas.image.store.ImageRepository#init()
 	 */
+	@PostConstruct
 	public void init() {
 		log.info("Starting MongoImageRepository {} with {} styles", namespace, styles.size());
 		
