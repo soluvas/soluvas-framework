@@ -24,6 +24,7 @@ import org.soluvas.json.LowerEnumModule;
 import org.soluvas.json.jscience.JscienceModule;
 import org.soluvas.json.money.JodaMoneyModule;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -73,12 +74,12 @@ public class CommonsWebConfig {
 		return System.getProperty("user.home") + "/" + tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv();
 	}
 	
-	@Bean
-	public Properties soluvasProperties() throws FileNotFoundException, IOException {
-		final Properties props = new Properties();
-		props.load(new FileReader(dataFolder() + "/etc/org.soluvas.cfg"));
-		return props;
-	}
+//	@Bean
+//	public Properties soluvasProperties() throws FileNotFoundException, IOException {
+//		final Properties props = new Properties();
+//		props.load(new FileReader(dataFolder() + "/etc/org.soluvas.cfg"));
+//		return props;
+//	}
 
 	@Bean(destroyMethod="shutdown") @Network
 	public ExecutorService networkExecutor() {
