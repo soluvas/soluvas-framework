@@ -75,6 +75,8 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	 */
 	@Override
 	public <S extends T> S add(S entity) {
+		Preconditions.checkNotNull(entity, "Cannot add null object to %s, expected %s",
+				baseDn, getEntityClass().getName());
 		final Entry entry = mapper.toEntry(entity, baseDn);
 		log.info("Add LDAP Entry {}: {}", entry.getDn(), entry);
 		try {

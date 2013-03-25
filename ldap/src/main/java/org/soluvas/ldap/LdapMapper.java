@@ -128,8 +128,9 @@ public class LdapMapper<T> {
 	 * @return
 	 */
 	public Entry toEntry(Object obj, String baseDn) {
+		Preconditions.checkNotNull(obj, "Cannot map null object in %s", baseDn);
 		final Class<?> clazz = obj.getClass();
-		log.trace("Mapping {} {} as Entry in {}", new Object[] { clazz.getName(), obj, baseDn });
+		log.trace("Mapping {} {} as Entry in {}", clazz.getName(), obj, baseDn);
 		
 		// Create the Entry (TODO: should be after mapping is prepared)
 		final DefaultEntry entry = new DefaultEntry();
