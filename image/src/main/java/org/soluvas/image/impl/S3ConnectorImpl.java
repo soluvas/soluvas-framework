@@ -3,6 +3,8 @@ package org.soluvas.image.impl;
 import java.io.File;
 import java.util.Map;
 
+import javax.annotation.PreDestroy;
+
 import org.eclipse.emf.ecore.EClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -364,7 +366,7 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	/* (non-Javadoc)
 	 * @see org.soluvas.image.impl.ImageConnectorImpl#destroy()
 	 */
-	@Override
+	@Override @PreDestroy
 	public void destroy() {
 		transferMgr.shutdownNow();
 	}

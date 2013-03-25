@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
+import javax.annotation.PreDestroy;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -184,7 +186,7 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@Override
+	@Override @PreDestroy
 	public void destroy() {
 		client.getConnectionManager().shutdown();
 	}
