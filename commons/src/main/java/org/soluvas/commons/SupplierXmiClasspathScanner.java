@@ -112,7 +112,7 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 		final Resource[] resources;
 		try {
 			log.debug("Scanning *.{}.xmi in classpath {}", suppliedClassSimpleName, pkg);
-			resources = resolver.getResources(packageToScan.replace('.', '/') + "/*." + suppliedClassSimpleName + ".xmi");
+			resources = resolver.getResources(pkg.replace('.', '/') + "/*." + suppliedClassSimpleName + ".xmi");
 			log.info("Scanned *.{}.xmi in classpath {} returned {} resources: {}",
 					suppliedClassSimpleName, pkg, resources.length, resources);
 			if (resources == null || resources.length == 0) {
@@ -130,7 +130,7 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 			for (final Resource resource : resources) {
 				log.debug("Registering Supplier for {} from {}", suppliedClassName, resource);
 				final XmiObjectLoader<T> loader = new XmiObjectLoader<T>(ePackage, resource.getURL(),
-						ResourceType.BUNDLE);
+						ResourceType.CLASSPATH);
 				delegate.addSupplier(loader);
 				suppliersBuilder.add(loader);
 			}

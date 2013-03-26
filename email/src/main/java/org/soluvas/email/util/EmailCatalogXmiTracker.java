@@ -1,15 +1,19 @@
 package org.soluvas.email.util;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.PreDestroy;
 
 import org.apache.commons.io.IOUtils;
 import org.eclipse.emf.common.util.EList;
@@ -24,6 +28,7 @@ import org.osgi.framework.BundleEvent;
 import org.osgi.util.tracker.BundleTrackerCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.XmiObjectLoader;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailException;
@@ -31,6 +36,8 @@ import org.soluvas.email.EmailPackage;
 import org.soluvas.email.LayoutType;
 import org.soluvas.email.PageType;
 import org.soluvas.email.SenderType;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Function;
@@ -56,6 +63,10 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 	private static final EmailPackage xmiEPackage = EmailPackage.eINSTANCE;
 	private final EmailCatalog repo;
 	private final EventBus eventBus;
+	/**
+	 * Used for plain Java.
+	 */
+	private final Map<String, List<EObject>> eObjects = new HashMap<>();
 	
 	/**
 	 * @param repo Access to this repo from this class is guaranteed to be synchronized,
@@ -67,6 +78,11 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 		super();
 		this.repo = repo;
 		this.eventBus = eventBus;
+	}
+	
+	public void add(Class<?> class1, String packageToScan) {
+		final List<EObject> objs = addingBundle(class1.getClassLoader(), packageToScan);
+		eObjects.put(packageToScan, objs);
 	}
 
 	@Override
@@ -81,6 +97,11 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 		if (entries == null)
 			return ImmutableList.of();
 		final List<URL> xmiFiles = ImmutableList.copyOf(Iterators.forEnumeration(entries));
+		return extractObjects(xmiFiles, bundle, null, bundle.getSymbolicName());
+	}
+
+	private List<EObject> extractObjects(final List<URL> xmiFiles,
+			@Nullable final Bundle bundle, final ClassLoader classLoader, final String packageToScan) {
 		if (xmiFiles.isEmpty())
 			return ImmutableList.of();
 
@@ -97,9 +118,12 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 			xmiToEcoreMapBuilder.put(xmiUrl, ecoreUrl);
 		}
 		final Map<URL, URL> xmiToEcoreMap = xmiToEcoreMapBuilder.build();
+		
+		final String resourceContainer = bundle != null ? bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]"
+				: packageToScan;
 
-		log.info("Scanning {} Ecore packages: {} from {} [{}]", xmiToEcoreMap.size(), xmiToEcoreMap.values(),
-				bundle.getSymbolicName(), bundle.getBundleId());
+		log.info("Scanning {} Ecore packages: {} from {}", xmiToEcoreMap.size(), xmiToEcoreMap.values(),
+				resourceContainer);
 		final ImmutableMap.Builder<URL, EPackage> ePackageMapBuilder = ImmutableMap.builder();
 		final ImmutableMap.Builder<URL, String> genPackageMapBuilder = ImmutableMap.builder();
 		final ImmutableMap.Builder<URL, EFactory> eFactoryMapBuilder = ImmutableMap.builder();
@@ -108,41 +132,50 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 			@SuppressWarnings("unchecked")
 			@Override @Nullable
 			public Map<String, EClass> apply(@Nullable URL url) {
-				log.debug("Getting {} from {} in {} [{}]", suppliedClassName, url, bundle.getSymbolicName(), bundle.getBundleId());
+				log.debug("Getting {} from {} in {}", suppliedClassName, url, resourceContainer);
 				XmiObjectLoader<EPackage> loader;
-//				try {
+				if (bundle != null) {
 					loader = new XmiObjectLoader<EPackage>(EcorePackage.eINSTANCE, url,
 							bundle);
+				} else {
+					loader = new XmiObjectLoader<EPackage>(EcorePackage.eINSTANCE, url,
+							ResourceType.CLASSPATH);
+				}
 //				} catch (Exception e1) {
 //					log.warn("Cannot load " + url, e1);
 //					return ImmutableMap.of();
 //				}
 				final EPackage ecorePackage = loader.get();
-				log.debug("Loaded {} EPackage {} ({}={}) from {} in {} [{}]", suppliedClassName, 
+				log.debug("Loaded {} EPackage {} ({}={}) from {} in {}", suppliedClassName, 
 						ecorePackage.getName(), ecorePackage.getNsPrefix(), ecorePackage.getNsURI(),
-						url, bundle.getSymbolicName(), bundle.getBundleId());
+						url, resourceContainer);
 				ePackageMapBuilder.put(url, ecorePackage);
 				
 				// Determine generated package name. "email" is a special package suffix
-				final String genPackage = bundle.getSymbolicName() +
-						("email".equals(ecorePackage.getName()) && bundle.getSymbolicName().endsWith(".email") ? "" : "." + ecorePackage.getName());
+				final String genPackage = packageToScan +
+						("email".equals(ecorePackage.getName()) && packageToScan.endsWith(".email") ? "" : "." + ecorePackage.getName());
 				genPackageMapBuilder.put(url, genPackage);
 				
 				// Instantiate EFactory
 				final String eFactoryClassName = genPackage + "." +
 						CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, ecorePackage.getName()) + "Factory";
 				try {
-					final Class<EFactory> eFactoryClass = (Class<EFactory>) bundle.loadClass(eFactoryClassName);
+					final Class<EFactory> eFactoryClass;
+					if (bundle != null) {
+						eFactoryClass = (Class<EFactory>) bundle.loadClass(eFactoryClassName);
+					} else {
+						eFactoryClass = (Class<EFactory>) classLoader.loadClass(eFactoryClassName);
+					}
 					final Field eInstanceField = eFactoryClass.getField("eINSTANCE");
 					final EFactory eFactory = (EFactory) eInstanceField.get(eFactoryClass);
-					log.debug("Loaded EFactory {} for EPackage {} ({}={}) from {} in {} [{}]",
+					log.debug("Loaded EFactory {} for EPackage {} ({}={}) from {} in {}",
 							eFactory, ecorePackage.getName(), ecorePackage.getNsPrefix(), ecorePackage.getNsURI(),
-							url, bundle.getSymbolicName(), bundle.getBundleId());
+							url, resourceContainer);
 					eFactoryMapBuilder.put(url, eFactory);
 				} catch (Exception e) {
-					throw new EmailException(String.format("Cannot load EFactory class %s for EPackage %s (%s=%s) from %s in %s [%s]",
+					throw new EmailException(String.format("Cannot load EFactory class %s for EPackage %s (%s=%s) from %s in %s",
 							eFactoryClassName, ecorePackage.getName(), ecorePackage.getNsPrefix(), ecorePackage.getNsURI(),
-							url, bundle.getSymbolicName(), bundle.getBundleId()), e);
+							url, resourceContainer), e);
 				}
 				
 				final ImmutableMap.Builder<String, EClass> eClassMapBuilder = ImmutableMap.builder();
@@ -151,16 +184,16 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					if (!(eClassifier instanceof EClass))
 						continue;
 					EClass eClass = (EClass) eClassifier;
-					log.debug("Mapping EClass {}.{} as {}:{} from {} in {} [{}]",
+					log.debug("Mapping EClass {}.{} as {}:{} from {} in {}",
 							ecorePackage.getName(), eClass.getName(),
 							ecorePackage.getNsPrefix(), eClass.getName(),
-							url, bundle.getSymbolicName(), bundle.getBundleId());
+							url, resourceContainer);
 					eClassMapBuilder.put(ecorePackage.getNsPrefix() + ":" + eClass.getName(), eClass);
 				}
 				
 				final Map<String, EClass> eClassMap = eClassMapBuilder.build();
-				log.debug("Loaded {} EClasses from EmailSchema ecore package {} in {} [{}]",
-						eClassMap.size(), url, bundle.getSymbolicName(), bundle.getBundleId() );
+				log.debug("Loaded {} EClasses from EmailSchema ecore package {} in {}",
+						eClassMap.size(), url, resourceContainer );
 				return eClassMap;
 			}
 		}));
@@ -172,8 +205,8 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 			eClassMapBuilder.putAll(ecoreFileObj);
 		}
 		final Map<String, EClass> eClassMap = eClassMapBuilder.build();
-		log.info("Loaded {} EPackages, {} EFactory-es, and {} EClasses from {} EmailSchema ecore packages in {} [{}]: {}",
-				ePackageMap.size(), eFactoryMap.size(), eClassMap.size(), ecoreFileObjs.size(), bundle.getSymbolicName(), bundle.getBundleId(),
+		log.info("Loaded {} EPackages, {} EFactory-es, and {} EClasses from {} EmailSchema ecore packages in {}: {}",
+				ePackageMap.size(), eFactoryMap.size(), eClassMap.size(), ecoreFileObjs.size(), resourceContainer,
 				eClassMap.keySet() );
 
 		// ------------------ EmailCatalog XMI files ------------
@@ -193,10 +226,15 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 				Preconditions.checkNotNull(eFactory, "Cannot find companion EFactory for XMI %s, Ecore %s. %s map entries: %s",
 						url, ecoreUrl, eFactoryMap.size(), eFactoryMap);
 
-				log.debug("Getting EmailCatalog XMI {} from {} in {} [{}], EPackage {} ({}={})", suppliedClassName, url,
-						bundle.getSymbolicName(), bundle.getBundleId(), ePackage.getName(), ePackage.getNsPrefix(), ePackage.getNsURI() );
-				final XmiObjectLoader<EmailCatalog> loader = new XmiObjectLoader<EmailCatalog>(xmiEPackage, url,
-						bundle);
+				log.debug("Getting EmailCatalog XMI {} from {} in {}, EPackage {} ({}={})", suppliedClassName, url,
+						resourceContainer, ePackage.getName(), ePackage.getNsPrefix(), ePackage.getNsURI() );
+				final XmiObjectLoader<EmailCatalog> loader;
+				if (bundle != null) {
+					loader = new XmiObjectLoader<EmailCatalog>(xmiEPackage, url, bundle);
+				} else {
+					loader = new XmiObjectLoader<EmailCatalog>(xmiEPackage, url, ResourceType.CLASSPATH);
+				}
+
 				final EmailCatalog emailCatalog = loader.get();
 				
 				for (final LayoutType layoutType : emailCatalog.getLayoutTypes()) {
@@ -211,17 +249,19 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					
 					final String plainFileName = genPackage.replace('.', '/') + "/" + eClassName + ".txt.mustache";
 					try {
-						final String plain = IOUtils.toString(bundle.getEntry(plainFileName).openStream());
+						final URL resource = bundle != null ? bundle.getEntry(plainFileName) : classLoader.getResource(plainFileName);
+						final String plain = IOUtils.toString(resource);
 						layoutType.setPlainTemplate(plain);
 					} catch (IOException e) {
-						throw new EmailException("Cannot read " + plainFileName + " in " + bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]", e);
+						throw new EmailException("Cannot read " + plainFileName + " in " + resourceContainer, e);
 					}
 					final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
 					try {
-						final String html = IOUtils.toString(bundle.getEntry(htmlFileName).openStream());
+						final URL resource = bundle != null ? bundle.getEntry(htmlFileName) : classLoader.getResource(htmlFileName);
+						final String html = IOUtils.toString(resource);
 						layoutType.setHtmlTemplate(html);
 					} catch (IOException e) {
-						throw new EmailException("Cannot read " + htmlFileName + " in " + bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]", e);
+						throw new EmailException("Cannot read " + htmlFileName + " in " + resourceContainer, e);
 					}
 				}
 				
@@ -237,18 +277,20 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					
 					final String plainFileName = genPackage.replace('.', '/') + "/" + eClassName + ".txt.mustache";
 					try {
-						final String plain = IOUtils.toString(bundle.getEntry(plainFileName).openStream());
+						final URL resource = bundle != null ? bundle.getEntry(plainFileName) : classLoader.getResource(plainFileName);
+						final String plain = IOUtils.toString(resource);
 						pageType.setPlainTemplate(plain);
 					} catch (Exception e) {
 						log.info("No plain email template found for " + pageType.getName() + ". Cannot read " +
-							plainFileName + " in " + bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]", e);
+							plainFileName + " in " + resourceContainer, e);
 					}
 					final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
 					try {
-						final String html = IOUtils.toString(bundle.getEntry(htmlFileName).openStream());
+						final URL resource = bundle != null ? bundle.getEntry(htmlFileName) : classLoader.getResource(htmlFileName);
+						final String html = IOUtils.toString(resource);
 						pageType.setHtmlTemplate(html);
 					} catch (Exception e) {
-						throw new EmailException("Cannot read " + htmlFileName + " in " + bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]", e);
+						throw new EmailException("Cannot read " + htmlFileName + " in " + resourceContainer, e);
 					}
 				}
 				
@@ -257,10 +299,10 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					senderType.setNsPrefix(emailCatalog.getNsPrefix());
 				}
 				
-				log.debug("Loaded {} LayoutTypes, {} PageTypes, and {} SenderTypes from EmailSchema {} in {} [{}]",
+				log.debug("Loaded {} LayoutTypes, {} PageTypes, and {} SenderTypes from EmailSchema {} in {}",
 						emailCatalog.getLayoutTypes().size(), emailCatalog.getPageTypes().size(),
 						emailCatalog.getSenderTypes().size(),
-						url, bundle.getSymbolicName(), bundle.getBundleId() );
+						url, resourceContainer );
 				return emailCatalog;
 			}
 		}));
@@ -273,8 +315,8 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 				return input.getLayoutTypes();
 			}
 		})));
-		log.info("Loaded {} LayoutTypes from {} [{}]",
-				layoutTypes.size(), bundle.getSymbolicName(), bundle.getBundleId());
+		log.info("Loaded {} LayoutTypes from {}",
+				layoutTypes.size(), resourceContainer);
 		
 		final List<PageType> pageTypes = ImmutableList.copyOf(Iterables.concat(
 				Lists.transform(catalogs, new Function<EmailCatalog, List<PageType>>() {
@@ -283,8 +325,8 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 				return input.getPageTypes();
 			}
 		})));
-		log.info("Loaded {} PageTypes from {} [{}]",
-				pageTypes.size(), bundle.getSymbolicName(), bundle.getBundleId());
+		log.info("Loaded {} PageTypes from {}",
+				pageTypes.size(), resourceContainer);
 
 		final List<SenderType> senderTypes = ImmutableList.copyOf(Iterables.concat(
 				Lists.transform(catalogs, new Function<EmailCatalog, List<SenderType>>() {
@@ -293,8 +335,8 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 				return input.getSenderTypes();
 			}
 		})));
-		log.info("Loaded {} SenderTypes from {} [{}]",
-				senderTypes.size(), bundle.getSymbolicName(), bundle.getBundleId());
+		log.info("Loaded {} SenderTypes from {}",
+				senderTypes.size(), resourceContainer);
 
 		// Add these objects to repo
 		synchronized (repo) {
@@ -304,14 +346,14 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 		}
 
 		// -------- Resolve EClass-es & JavaClass-es -----------
-		log.info("Resolving EClass & JavaClass in {} LayoutTypes from {} [{}]",
-				layoutTypes.size(), bundle.getSymbolicName(), bundle.getBundleId());
+		log.info("Resolving EClass & JavaClass in {} LayoutTypes from {}",
+				layoutTypes.size(), resourceContainer);
 		for (final LayoutType layoutType : layoutTypes) {
 			layoutType.resolveEClass(eClassMap);
 			layoutType.resolveJavaClass(bundle);
 		}
-		log.info("Resolving EClass & JavaClass in {} PageTypes from {} [{}]",
-				layoutTypes.size(), bundle.getSymbolicName(), bundle.getBundleId());
+		log.info("Resolving EClass & JavaClass in {} PageTypes from {}",
+				layoutTypes.size(), resourceContainer);
 		for (final PageType pageType : pageTypes) {
 			pageType.resolveEClass(eClassMap);
 			pageType.resolveJavaClass(bundle);
@@ -326,59 +368,104 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 		return objects;
 	}
 
+	@Nullable
+	protected List<EObject> addingBundle(@Nonnull ClassLoader classLoader, @Nonnull String pkg) {
+		final PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
+		final Resource[] resources;
+		try {
+			log.debug("Scanning *.{}.xmi in classpath {}", suppliedClassSimpleName, pkg);
+			resources = resolver.getResources(pkg.replace('.', '/') + "/*." + suppliedClassSimpleName + ".xmi");
+			log.info("Scanned *.{}.xmi in classpath {} returned {} resources: {}",
+					suppliedClassSimpleName, pkg, resources.length, resources);
+			if (resources == null || resources.length == 0) {
+				return null;
+			}
+		} catch (FileNotFoundException fnf) {
+			log.warn("Requested to scan " + pkg + " for " + suppliedClassSimpleName +
+					" but package not found in " + classLoader, fnf);
+			return null;
+		} catch (IOException e2) {
+			log.error("Cannot scan " + pkg + " for " + suppliedClassSimpleName, e2);
+			return null;
+		}
+		final List<URL> xmiUrls = Lists.transform(ImmutableList.copyOf(resources), new Function<Resource, URL>() {
+			@Override @Nullable
+			public URL apply(@Nullable Resource input) {
+				try {
+					return input.getURL();
+				} catch (IOException e) {
+					throw new RuntimeException("Cannot get URL for " + input, e);
+				}
+			}
+		});
+		return extractObjects(xmiUrls, null, classLoader, pkg);
+	}
+	
 	@Override
 	public void modifiedBundle(Bundle bundle, BundleEvent event,
 			List<EObject> objects) {
 	}
 
-	@Override
-	public void removedBundle(Bundle bundle, BundleEvent event,
-			@Nonnull final List<EObject> objects) {
+	private void removedBundle(@Nonnull final List<EObject> objects,
+			String resourceContainer) {
 		if (objects.isEmpty())
 			return;
 		
-		log.debug("Removing {} EObjects provided by {} [{}]",
-				objects.size(), bundle.getSymbolicName(), bundle.getBundleId());
+		log.debug("Removing {} EObjects provided by {}",
+				objects.size(), resourceContainer);
 		long removedCount = 0;
 		for (final EObject eobject : objects) {
 			// Unresolve: not strictly necessary
 			// Unregister from repo
 			if (eobject instanceof LayoutType) {
 				final LayoutType layoutType = (LayoutType) eobject;
-				log.debug("Removing LayoutType {} from {} [{}]", layoutType.getName(),
-						bundle.getSymbolicName(), bundle.getBundleId());
+				log.debug("Removing LayoutType {} from {}", layoutType.getName(),
+						resourceContainer);
 				synchronized (repo) {
 					if (repo.getLayoutTypes().remove(layoutType))
 						removedCount++;
 				}
 			} else if (eobject instanceof PageType) {
 				final PageType pageType = (PageType) eobject;
-				log.debug("Removing PageType {} from {} [{}]", pageType.getName(),
-						bundle.getSymbolicName(), bundle.getBundleId());
+				log.debug("Removing PageType {} from {}", pageType.getName(),
+						resourceContainer);
 				synchronized (repo) {
 					if (repo.getPageTypes().remove(pageType))
 						removedCount++;
 				}
 			} else if (eobject instanceof SenderType) {
 				final SenderType senderType = (SenderType) eobject;
-				log.debug("Removing SenderType {} from {} [{}]", senderType.getName(),
-						bundle.getSymbolicName(), bundle.getBundleId());
+				log.debug("Removing SenderType {} from {}", senderType.getName(),
+						resourceContainer);
 				synchronized (repo) {
 					if (repo.getSenderTypes().remove(senderType))
 						removedCount++;
 				}
 			} else {
 				throw new EmailException("Unknown EObject " + eobject.getClass().getName() + " from " + 
-						bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]");
+						resourceContainer);
 			}
 		}
-		log.info("Removed {} email Types from {} [{}]",
-				removedCount, bundle.getSymbolicName(), bundle.getBundleId());
+		log.info("Removed {} email Types from {}",
+				removedCount, resourceContainer);
 		
 		// Notify StorySchemaCatalogXmiTracker
 //			final TargetTypeRemoved removed = SchemaFactory.eINSTANCE.createTargetTypeRemoved();
 //			removed.getTargetTypes().addAll(catalogs);
 //			eventBus.post(removed);
 	}
-
+	
+	@Override
+	public void removedBundle(Bundle bundle, BundleEvent event,
+			@Nonnull final List<EObject> objects) {
+		removedBundle(objects, bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]");
+	}
+	
+	@PreDestroy
+	public void destroy() {
+		for (final Entry<String, List<EObject>> entry : eObjects.entrySet()) {
+			removedBundle(entry.getValue(), entry.getKey());
+		}
+	}
+	
 }

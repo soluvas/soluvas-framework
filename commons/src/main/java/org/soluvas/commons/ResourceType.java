@@ -46,7 +46,15 @@ public enum ResourceType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DATABASE(2, "database", "database");
+	DATABASE(2, "database", "database"), /**
+	 * The '<em><b>Classpath</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CLASSPATH_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	CLASSPATH(3, "classpath", "classpath");
 
 	/**
 	 * The '<em><b>Bundle</b></em>' literal value.
@@ -91,6 +99,20 @@ public enum ResourceType implements Enumerator {
 	public static final int DATABASE_VALUE = 2;
 
 	/**
+	 * The '<em><b>Classpath</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The resource is from a plain Java classpath.
+	 * <!-- end-model-doc -->
+	 * @see #CLASSPATH
+	 * @model name="classpath"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASSPATH_VALUE = 3;
+
+	/**
 	 * An array of all the '<em><b>Resource Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,6 +123,7 @@ public enum ResourceType implements Enumerator {
 			BUNDLE,
 			FILE,
 			DATABASE,
+			CLASSPATH,
 		};
 
 	/**
@@ -154,6 +177,7 @@ public enum ResourceType implements Enumerator {
 			case BUNDLE_VALUE: return BUNDLE;
 			case FILE_VALUE: return FILE;
 			case DATABASE_VALUE: return DATABASE;
+			case CLASSPATH_VALUE: return CLASSPATH;
 		}
 		return null;
 	}

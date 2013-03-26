@@ -634,6 +634,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	private EDataType listeningExecutorServiceEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType classLoaderEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -2125,6 +2132,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getClassLoader() {
+		return classLoaderEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
@@ -2342,6 +2358,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		fileEDataType = createEDataType(FILE);
 		listenableFutureEDataType = createEDataType(LISTENABLE_FUTURE);
 		listeningExecutorServiceEDataType = createEDataType(LISTENING_EXECUTOR_SERVICE);
+		classLoaderEDataType = createEDataType(CLASS_LOADER);
 	}
 
 	/**
@@ -2744,6 +2761,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.BUNDLE);
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.FILE);
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.DATABASE);
+		addEEnumLiteral(resourceTypeEEnum, ResourceType.CLASSPATH);
 
 		initEEnum(genderEEnum, Gender.class, "Gender");
 		addEEnumLiteral(genderEEnum, Gender.MALE);
@@ -2811,6 +2829,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(fileEDataType, File.class, "File", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(listenableFutureEDataType, ListenableFuture.class, "ListenableFuture", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(listeningExecutorServiceEDataType, ListeningExecutorService.class, "ListeningExecutorService", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(classLoaderEDataType, ClassLoader.class, "ClassLoader", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -2851,6 +2870,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "The resource is from a persistence storage."
+		   });		
+		addAnnotation
+		  (resourceTypeEEnum.getELiterals().get(3), 
+		   source, 
+		   new String[] {
+			 "documentation", "The resource is from a plain Java classpath."
 		   });		
 		addAnnotation
 		  (appManifestEClass, 

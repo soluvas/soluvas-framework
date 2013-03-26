@@ -29,6 +29,11 @@
         <details key="documentation" value="The resource is from a persistence storage."/>
       </eAnnotations>
     </eLiterals>
+    <eLiterals name="classpath" value="3" literal="classpath">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The resource is from a plain Java classpath."/>
+      </eAnnotations>
+    </eLiterals>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Positionable" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="positioner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
@@ -821,5 +826,7 @@
     <eTypeParameters name="V"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ListeningExecutorService" instanceClassName="com.google.common.util.concurrent.ListeningExecutorService"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ClassLoader" instanceClassName="java.lang.ClassLoader"
       serializable="false"/>
 </ecore:EPackage>

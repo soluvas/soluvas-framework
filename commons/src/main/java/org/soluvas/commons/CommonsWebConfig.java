@@ -106,7 +106,7 @@ public class CommonsWebConfig {
 	@Bean
 	public AppManifest appManifest() {
 		return new XmiObjectLoader<AppManifest>(CommonsPackage.eINSTANCE,
-				new File(dataFolder(), "common/" + tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv() + ".AppManifest.xmi").toString()).get();
+				new File(dataFolder(), "model/" + tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv() + ".AppManifest.xmi").toString()).get();
 	}
 	
 	@Bean

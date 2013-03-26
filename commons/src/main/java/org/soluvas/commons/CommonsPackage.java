@@ -2342,6 +2342,17 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Class Loader</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.ClassLoader
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getClassLoader()
+	 * @generated
+	 */
+	int CLASS_LOADER = 76;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3887,6 +3898,17 @@ public interface CommonsPackage extends EPackage {
 	EDataType getListeningExecutorService();
 
 	/**
+	 * Returns the meta object for data type '{@link java.lang.ClassLoader <em>Class Loader</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Class Loader</em>'.
+	 * @see java.lang.ClassLoader
+	 * @model instanceClass="java.lang.ClassLoader" serializeable="false"
+	 * @generated
+	 */
+	EDataType getClassLoader();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5219,6 +5241,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType LISTENING_EXECUTOR_SERVICE = eINSTANCE.getListeningExecutorService();
+
+		/**
+		 * The meta object literal for the '<em>Class Loader</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.ClassLoader
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getClassLoader()
+		 * @generated
+		 */
+		EDataType CLASS_LOADER = eINSTANCE.getClassLoader();
 
 	}
 
