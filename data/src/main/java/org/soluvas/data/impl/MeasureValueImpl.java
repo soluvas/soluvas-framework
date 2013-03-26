@@ -68,7 +68,7 @@ public class MeasureValueImpl extends ValueImpl<BigDecimal> implements MeasureVa
 	public MeasureValueImpl() {
 		super();
 	}
-
+	
 	public MeasureValueImpl(DecimalMeasure<?> measure) {
 		super();
 		setValue(measure.getValue());
