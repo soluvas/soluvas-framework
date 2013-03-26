@@ -7359,6 +7359,27 @@
           <ordering>caseIgnoreOrderingMatch</ordering>
           <substring>caseIgnoreSubstringsMatch</substring>
         </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.47" obsolete="false" singlevalue="true" collective="false" nousermodification="false">
+          <aliases>
+            <alias>passwordResetCode</alias>
+          </aliases>
+          <description>Code that can be used to perform password reset for a limited time.</description>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseExactMatch</equality>
+          <ordering>caseExactOrderingMatch</ordering>
+          <substring>caseExactSubstringsMatch</substring>
+        </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.48" obsolete="false" singlevalue="true" collective="false" nousermodification="false">
+          <aliases>
+            <alias>passwordResetExpiryTime</alias>
+          </aliases>
+          <description>The time when the passwordResetCode becomes no longer usable.</description>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.24</syntax>
+          <equality>generalizedTimeMatch</equality>
+          <ordering>generalizedTimeOrderingMatch</ordering>
+        </attributetype>
       </attributetypes>
       <objectclasses>
         <objectclass oid="2.25.31030703689307962575270284666844839901.2" obsolete="false">
@@ -7409,6 +7430,8 @@
             <attributetype>currency</attributetype>
             <attributetype>signupSource</attributetype>
             <attributetype>signupSourceType</attributetype>
+            <attributetype>passwordResetCode</attributetype>
+            <attributetype>passwordResetExpiryTime</attributetype>
           </optional>
         </objectclass>
         <objectclass oid="2.25.31030703689307962575270284666844839901.4" obsolete="false">

@@ -1,5 +1,8 @@
 package org.soluvas.ldap;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -164,4 +167,17 @@ public class PooledLdapRepositoryTest {
 		log.info("User by filter has {} records", people.size());
 	}
 
+	@Test
+	public void modifyPasswordResetSettings() {
+		final SocialPerson person = personRepo.findOne("hendy");
+		person.setPasswordResetCode("abc");
+		person.setPasswordResetExpiryTime(new DateTime().plusDays(2));
+		personRepo.modify(person.getId(), person);
+		
+		final SocialPerson modified = personRepo.findOne("hendy");
+		log.info("Modified person: {}", modified);
+		assertEquals("abc", modified.getPasswordResetCode());
+		assertTrue(modified.getPasswordResetExpiryTime().isAfterNow());
+	}
+	
 }

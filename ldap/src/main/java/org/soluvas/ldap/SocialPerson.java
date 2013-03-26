@@ -112,6 +112,10 @@ public class SocialPerson extends Person {
 	private String folder;
 	@LdapAttribute("religion")
 	private String religion;
+	@LdapAttribute("passwordResetCode")
+	private String passwordResetCode;
+	@LdapAttribute("passwordResetExpiryTime")
+	private DateTime passwordResetExpiryTime;
 	
 	public SocialPerson() {
 		super();
@@ -847,6 +851,38 @@ public class SocialPerson extends Person {
 	 */
 	public void setReligion(String religion) {
 		this.religion = religion;
+	}
+
+	/**
+	 * Code that can be used to perform password reset for a limited time.
+	 * @return
+	 */
+	public String getPasswordResetCode() {
+		return passwordResetCode;
+	}
+
+	/**
+	 * Code that can be used to perform password reset for a limited time.
+	 * @param passwordResetCode
+	 */
+	public void setPasswordResetCode(String passwordResetCode) {
+		this.passwordResetCode = passwordResetCode;
+	}
+
+	/**
+	 * The time when the passwordResetCode becomes no longer usable.
+	 * @return
+	 */
+	public DateTime getPasswordResetExpiryTime() {
+		return passwordResetExpiryTime;
+	}
+
+	/**
+	 * The time when the passwordResetCode becomes no longer usable.
+	 * @param passwordResetExpiryTime
+	 */
+	public void setPasswordResetExpiryTime(DateTime passwordResetExpiryTime) {
+		this.passwordResetExpiryTime = passwordResetExpiryTime;
 	}
 	
 }

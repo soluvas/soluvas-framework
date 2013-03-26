@@ -9,8 +9,10 @@
 	</appender>
 
 	<logger name="org.apache.directory.shared" level="INFO" />
+	<logger name="org.apache.directory.api.asn1.ber.Asn1Decoder" level="WARN" />
+	<logger name="org.soluvas" level="DEBUG" />
 
-	<root level="debug">
+	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 	</root>
 

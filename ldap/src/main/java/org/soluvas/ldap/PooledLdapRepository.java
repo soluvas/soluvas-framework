@@ -13,6 +13,7 @@ import org.apache.directory.api.ldap.model.exception.LdapException;
 import org.apache.directory.api.ldap.model.filter.FilterEncoder;
 import org.apache.directory.api.ldap.model.message.ModifyRequest;
 import org.apache.directory.api.ldap.model.message.ModifyResponse;
+import org.apache.directory.api.ldap.model.message.ResultCodeEnum;
 import org.apache.directory.api.ldap.model.message.SearchScope;
 import org.apache.directory.api.ldap.model.name.Dn;
 import org.apache.directory.ldap.client.api.LdapConnection;
@@ -141,10 +142,15 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 					} else {
 						log.info("Modifying LDAP Entry {} with {}", newDn, modifyRequest);
 						final ModifyResponse modifyResponse = conn.modify(modifyRequest);
-						log.info("Modified LDAP Entry {} returned: {}", newDn, modifyResponse);
-						final Entry modifiedEntry = conn.lookup(newDn);
-						final T newObj = mapper.fromEntry(modifiedEntry, entityClass);
-						return newObj;
+						if (modifyResponse.getLdapResult().getResultCode() == ResultCodeEnum.SUCCESS) {
+							log.info("Modified LDAP Entry {} returned: {}", newDn, modifyResponse);
+							final Entry modifiedEntry = conn.lookup(newDn);
+							final T newObj = mapper.fromEntry(modifiedEntry, entityClass);
+							return newObj;
+						} else {
+							log.error("Modified LDAP Entry {} returned: {}", newDn, modifyResponse);
+							throw new RuntimeException("Error updating LDAP Entry " + newDn + ", result: " + modifyResponse);
+						}
 					}
 				} catch (LdapException e) {
 					throw new RuntimeException("Error updating LDAP Entry " + oldDn, e);
