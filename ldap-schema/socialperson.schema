@@ -392,11 +392,30 @@ attributetype ( 2.25.31030703689307962575270284666844839901.46
 	SINGLE-VALUE 
  )
 
+attributetype ( 2.25.31030703689307962575270284666844839901.47 
+	NAME 'passwordResetCode' 
+	DESC 'Code that can be used to perform password reset for a limited time.' 
+	EQUALITY caseExactMatch 
+	ORDERING caseExactOrderingMatch 
+	SUBSTR caseExactSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+	SINGLE-VALUE 
+ )
+
+attributetype ( 2.25.31030703689307962575270284666844839901.48 
+	NAME 'passwordResetExpiryTime' 
+	DESC 'The time when the passwordResetCode becomes no longer usable.' 
+	EQUALITY generalizedTimeMatch 
+	ORDERING generalizedTimeOrderingMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.24 
+	SINGLE-VALUE 
+ )
+
 objectclass ( 2.25.31030703689307962575270284666844839901.2 
 	NAME 'socialPerson' 
 	DESC 'Person in the Web 2.0 age.' 
 	AUXILIARY 
-	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier $ bannerImageId $ googleAccessToken $ yahooAccessToken $ customerRole $ memberRole $ managerRole $ timezone $ referrer $ referrerType $ ipAddress $ lastIpAddress $ creationTime $ modificationTime $ lastLoginTime $ validationTime $ activationTime $ verificationTime $ accountStatus $ newsletterSubscriptionTime $ newsletterSubscriptionEnabled $ socialSharingEnabled $ validMail $ publicationStatus $ archivalStatus $ folder $ religion $ lang $ currency $ signupSource $ signupSourceType ) 
+	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier $ bannerImageId $ googleAccessToken $ yahooAccessToken $ customerRole $ memberRole $ managerRole $ timezone $ referrer $ referrerType $ ipAddress $ lastIpAddress $ creationTime $ modificationTime $ lastLoginTime $ validationTime $ activationTime $ verificationTime $ accountStatus $ newsletterSubscriptionTime $ newsletterSubscriptionEnabled $ socialSharingEnabled $ validMail $ publicationStatus $ archivalStatus $ folder $ religion $ lang $ currency $ signupSource $ signupSourceType $ passwordResetCode $ passwordResetExpiryTime ) 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.4 

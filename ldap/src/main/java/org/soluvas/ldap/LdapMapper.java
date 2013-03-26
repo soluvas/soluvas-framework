@@ -525,8 +525,12 @@ public class LdapMapper<T> {
 		final Set<String> upObjectClasses = mapping.getObjectClasses();
 		final Set<String> newObjectClasses = Sets.difference(upObjectClasses, existingObjectClasses);
 		if (!newObjectClasses.isEmpty()) {
-			request.add("objectClass", newObjectClasses.toArray(new String[] {}));
-			log.debug("Adding {} new objectClass-es to {}: {}", newObjectClasses.size(), existingEntry.getDn().getName(), newObjectClasses);
+//			request.add("objectClass", newObjectClasses.toArray(new String[] {}));
+//			log.debug("Adding {} new objectClass-es to {}: {}", newObjectClasses.size(), existingEntry.getDn().getName(), newObjectClasses);
+			log.warn("objectClass-es for {} do not match. {} existing objectClasses: {}. Expected {} more objectClasses: {}",
+					existingEntry.getDn().getName(),
+					upObjectClasses.size(), upObjectClasses,
+					newObjectClasses.size(), newObjectClasses);
 		}
 		// Attributes
 		for (final LdapAttributeMapping attr : mapping.getAttributes()) {
