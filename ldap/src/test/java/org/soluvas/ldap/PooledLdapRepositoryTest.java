@@ -1,6 +1,7 @@
 package org.soluvas.ldap;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
@@ -159,13 +160,23 @@ public class PooledLdapRepositoryTest {
 	}
 	
 	@Test
-	public void findAllByFilter() {
+	public void findAllByMultipleFilter() {
 //		final String filter = "(cn=*ang*)";
 		final String filter = "(|(cn=*ang*)(mobile=*0856*))";
 		final List<SocialPerson> people = personRepo.findAllByFilter(filter);
 		
 		log.info("User by filter has {} records", people.size());
 	}
+	
+	@Test
+	public void findAllByEmail() {
+		final String email = "atang.sutisna.87@gmail.com";
+		SocialPerson person = personRepo.findOneByAttribute("primaryMail", email);
+		log.info("Finding person with email {} : {}", email, person);
+		assertNotNull("Person must not be null", person);
+		assertEquals("atang", person.getId());
+	}
+
 
 	@Test
 	public void modifyPasswordResetSettings() {
