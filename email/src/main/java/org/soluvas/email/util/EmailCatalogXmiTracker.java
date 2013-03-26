@@ -248,7 +248,6 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					layoutType.setJavaClassName(genPackage + "." + eClassName);
 					
 					final String plainFileName = genPackage.replace('.', '/') + "/" + eClassName + ".txt.mustache";
-					final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
 					try {
 						final URL resource = bundle != null ? bundle.getEntry(plainFileName) : classLoader.getResource(plainFileName);
 						final String plain = IOUtils.toString(resource);
@@ -256,8 +255,9 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					} catch (IOException e) {
 						throw new EmailException("Cannot read " + plainFileName + " in " + resourceContainer, e);
 					}
+					final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
 					try {
-						final URL resource = bundle != null ? bundle.getEntry(plainFileName) : classLoader.getResource(plainFileName);
+						final URL resource = bundle != null ? bundle.getEntry(htmlFileName) : classLoader.getResource(htmlFileName);
 						final String html = IOUtils.toString(resource);
 						layoutType.setHtmlTemplate(html);
 					} catch (IOException e) {
@@ -286,7 +286,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					}
 					final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
 					try {
-						final URL resource = bundle != null ? bundle.getEntry(plainFileName) : classLoader.getResource(plainFileName);
+						final URL resource = bundle != null ? bundle.getEntry(htmlFileName) : classLoader.getResource(htmlFileName);
 						final String html = IOUtils.toString(resource);
 						pageType.setHtmlTemplate(html);
 					} catch (Exception e) {
