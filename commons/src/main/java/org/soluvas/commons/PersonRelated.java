@@ -1,4 +1,4 @@
-package org.soluvas.ldap;
+package org.soluvas.commons;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
