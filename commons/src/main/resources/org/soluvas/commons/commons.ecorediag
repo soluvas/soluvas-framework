@@ -372,6 +372,10 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_zqiolEDuEeKetZZWJAKPoA"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_zqiolUDuEeKetZZWJAKPoA" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_trLEMZW-EeKZ9q0284fnMg" type="2002">
+        <element xmi:type="ecore:EOperation" href="commons.ecore#//JavaClassLinked/resolveJavaClass"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_trLEMpW-EeKZ9q0284fnMg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_zqiolkDuEeKetZZWJAKPoA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_zqiol0DuEeKetZZWJAKPoA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_zqiomEDuEeKetZZWJAKPoA"/>
@@ -1286,6 +1290,13 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_S7uRQZHoEeKfzf1vFtZCfA" fontColor="4210752" fontName="Sans Serif" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EDataType" href="commons.ecore#//ListeningExecutorService"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_S7uRQpHoEeKfzf1vFtZCfA" x="163" y="369"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_wBUcMJW-EeKZ9q0284fnMg" type="1004">
+    <children xmi:type="notation:Node" xmi:id="_wBVDQJW-EeKZ9q0284fnMg" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_wBVqUJW-EeKZ9q0284fnMg" type="4009"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_wBUcMZW-EeKZ9q0284fnMg" fontColor="4210752" fontName="Sans Serif" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EDataType" href="commons.ecore#//ClassLoader"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wBUcMpW-EeKZ9q0284fnMg" x="2549" y="218"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Hn9XoSQDEeKL8qHxNHEWSw"/>
   <element xmi:type="ecore:EPackage" href="commons.ecore#/"/>

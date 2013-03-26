@@ -3,6 +3,7 @@
 package org.soluvas.commons;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.osgi.framework.Bundle;
 
@@ -40,20 +41,30 @@ public interface JavaClassLinked<T> extends SerializableEObject {
 		/**
 		 * Implementation for {@link JavaClassLinked#resolveJavaClass(Bundle)}.
 		 * @param obj
-		 * @param bundle
+		 * @param bundle If not provided, will use its own {@link ClassLoader}.
 		 */
 		@SuppressWarnings("unchecked")
-		public static <T> void resolveJavaClass(@Nonnull final JavaClassLinked<T> obj, @Nonnull final Bundle bundle) {
-			Preconditions.checkState(!Strings.isNullOrEmpty(obj.getJavaClassName()),
-					"Cannot resolve empty Java class from bundle %s", bundle);
-			Preconditions.checkNotNull(bundle, "Cannot resolve class %s because specified bundle is null", obj.getJavaClassName());
-			try {
-				final Class<T> clazz = (Class<T>) bundle.loadClass(obj.getJavaClassName());
-				obj.setJavaClass(clazz);
-				obj.setJavaClassStatus(JavaClassStatus.RESOLVED);
-			} catch (ClassNotFoundException e) {
-				throw new CommonsException(String.format("Cannot resolve class %s from bundle %s [%d]",
-						obj.getJavaClassName(), bundle.getSymbolicName(), bundle.getBundleId()), e);
+		public static <T> void resolveJavaClass(@Nonnull final JavaClassLinked<T> obj, @Nullable final Bundle bundle) {
+			Preconditions.checkArgument(!Strings.isNullOrEmpty(obj.getJavaClassName()),
+					"Cannot resolve empty Java class (bundle: %s)", bundle);
+			if (bundle != null) {
+				try {
+					final Class<T> clazz = (Class<T>) bundle.loadClass(obj.getJavaClassName());
+					obj.setJavaClass(clazz);
+					obj.setJavaClassStatus(JavaClassStatus.RESOLVED);
+				} catch (ClassNotFoundException e) {
+					throw new CommonsException(String.format("Cannot resolve class %s from bundle %s [%d]",
+							obj.getJavaClassName(), bundle.getSymbolicName(), bundle.getBundleId()), e);
+				}
+			} else {
+				try {
+					final Class<T> clazz = (Class<T>) Trait.class.getClassLoader().loadClass(obj.getJavaClassName());
+					obj.setJavaClass(clazz);
+					obj.setJavaClassStatus(JavaClassStatus.RESOLVED);
+				} catch (ClassNotFoundException e) {
+					throw new CommonsException(String.format("Cannot resolve class %s",
+							obj.getJavaClassName()), e);
+				}
 			}
 		}
 		

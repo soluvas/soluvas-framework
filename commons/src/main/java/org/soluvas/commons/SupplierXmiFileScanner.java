@@ -133,7 +133,7 @@ public class SupplierXmiFileScanner<T extends EObject> {
 			for (final Resource resource : resources) {
 				log.debug("Registering Supplier for {} from {}", suppliedClassName, resource);
 				final XmiObjectLoader<T> loader = new XmiObjectLoader<T>(ePackage, resource.getURL(),
-						ResourceType.BUNDLE);
+						ResourceType.CLASSPATH);
 				delegate.addSupplier(loader);
 				suppliersBuilder.add(loader);
 			}
