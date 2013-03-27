@@ -2,12 +2,14 @@ package org.soluvas.ldap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.directory.api.util.Strings;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 import org.apache.directory.ldap.client.api.LdapConnectionPool;
 import org.apache.directory.ldap.client.api.LdapNetworkConnection;
@@ -176,16 +178,28 @@ public class PooledLdapRepositoryTest {
 		assertNotNull("Person must not be null", person);
 		assertEquals("atang", person.getId());
 	}
+	
+	@Test
+	public void checkPasswordResetCode() {
+		SocialPerson person = personRepo.findOne("test");
+		log.debug("PasswordResetCode {}", person.getPasswordResetCode());
+		
+		if (Strings.isEmpty(person.getPasswordResetCode())) {
+			log.info("Password Reset Code is null");
+		}
+		assertNull(person.getPasswordResetCode());
+	}
+
 
 
 	@Test
 	public void modifyPasswordResetSettings() {
-		final SocialPerson person = personRepo.findOne("hendy");
+		final SocialPerson person = personRepo.findOne("test");
 		person.setPasswordResetCode("abc");
 		person.setPasswordResetExpiryTime(new DateTime().plusDays(2));
 		personRepo.modify(person.getId(), person);
 		
-		final SocialPerson modified = personRepo.findOne("hendy");
+		final SocialPerson modified = personRepo.findOne("test");
 		log.info("Modified person: {}", modified);
 		assertEquals("abc", modified.getPasswordResetCode());
 		assertTrue(modified.getPasswordResetExpiryTime().isAfterNow());
