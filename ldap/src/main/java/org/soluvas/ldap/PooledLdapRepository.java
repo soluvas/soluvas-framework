@@ -64,7 +64,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 		return LdapUtils.withConnection(pool, function);
 	}
 	
-	@Override
+	@Override @Deprecated
 	public void init() {
 		// No longer needed
 	}

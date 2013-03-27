@@ -57,9 +57,14 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s using class %s",
 				resourcePath, loaderClass.getName());
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		final Bundle bundle = Preconditions.checkNotNull(FrameworkUtil.getBundle(loaderClass),
-				"Cannot get bundle for %s", loaderClass);
-		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourcePath, bundle);
+		final Bundle bundle = FrameworkUtil.getBundle(loaderClass);
+//		final Bundle bundle = Preconditions.checkNotNull(FrameworkUtil.getBundle(loaderClass),
+//				"Cannot get bundle for %s", loaderClass);
+		if (bundle != null) {
+			this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourcePath, bundle);
+		} else {
+			this.obj = load(ePackage, ResourceType.CLASSPATH, resourceUri, resourcePath, null);
+		}
 	}
 
 	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final String fileName) {
