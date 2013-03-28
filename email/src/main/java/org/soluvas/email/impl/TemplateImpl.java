@@ -21,6 +21,7 @@ import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.locale.FormatCurrency;
 import org.soluvas.email.DefaultScope;
+import org.soluvas.email.EmailException;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Recipient;
 import org.soluvas.email.Template;
@@ -337,13 +338,17 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 	 * @return
 	 */
 	protected String doRender(String template, Recipient recipient) {
-		final MustacheFactory mf = new DefaultMustacheFactory();
-		final Mustache mustache = mf.compile(new StringReader(template), "subject");
-		final StringWriter stringWriter = new StringWriter();
-		final Map<String, Object> extras = ImmutableMap.of("recipient", recipient,
-				"formatCurrency", new FormatCurrency());
-		mustache.execute(stringWriter, new Object[] { extras, this });
-		return stringWriter.toString();
+		try {
+			final MustacheFactory mf = new DefaultMustacheFactory();
+			final Mustache mustache = mf.compile(new StringReader(template), "subject");
+			final StringWriter stringWriter = new StringWriter();
+			final Map<String, Object> extras = ImmutableMap.of("recipient", recipient,
+					"formatCurrency", new FormatCurrency());
+			mustache.execute(stringWriter, new Object[] { extras, this });
+			return stringWriter.toString();
+		} catch (Exception e) {
+			throw new EmailException("Cannot render template «" + template + "» recipient=" + recipient + " scope=" + this, e);
+		}
 	}
 
 	/**
