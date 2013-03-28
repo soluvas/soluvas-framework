@@ -109,7 +109,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 	public MongoAppSessionRepository(String mongoUri) {
 		super();
 		// WARNING: mongoUri may contain password!
-		this.mongoUri = mongoUri;
+		this.mongoUri = Preconditions.checkNotNull(mongoUri, "mongoUri must be specified");
 		final MongoURI realMongoUri = new MongoURI(mongoUri);
 		try {
 			log.info("Connecting to MongoDB database {} for AppSessionRepository",
