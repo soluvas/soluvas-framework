@@ -137,12 +137,6 @@
 				<artifactId>org.apache.karaf.shell.console</artifactId>
 				<version>${karaf.version}</version>
 				<scope>provided</scope>
-				<exclusions>
-					<exclusion>
-						<artifactId>org.osgi.core</artifactId>
-						<groupId>org.osgi</groupId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 
 			<dependency>
