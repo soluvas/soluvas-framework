@@ -32,7 +32,9 @@ import com.google.common.collect.ImmutableList;
 /**
  * Shell command base class which supports Inject, {@link Namespace}, {@link Supplied}, {@link Filter}.  
  * @author ceefour
+ * @deprecated Doesn't work well in Spring. Use {@link ExtCommandSupport} instead.
  */
+@Deprecated
 public abstract class TenantCommandSupport extends OsgiCommandSupport {
 
 	/**
