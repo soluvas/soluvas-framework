@@ -3,6 +3,7 @@
 package org.soluvas.security.impl;
 
 import javax.annotation.Nonnull;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,11 +16,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.PersonRelated;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.ldap.Person;
 import org.soluvas.security.AppSessionManager;
 import org.soluvas.security.NotLoggedInException;
 import org.soluvas.security.SecurityPackage;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
 
@@ -38,6 +42,7 @@ import com.google.common.base.Preconditions;
  * @generated
  */
 @SuppressWarnings("serial")
+@Service("appSessionMgr") @Lazy
 public class AppSessionManagerImpl extends EObjectImpl implements AppSessionManager {
 	
 	private static final Logger log = LoggerFactory
@@ -84,8 +89,9 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 * @param securityManager
 	 * @param personLookup
 	 */
+	@Inject
 	public AppSessionManagerImpl(SecurityManager securityManager,
-			EntityLookup<? extends Person, String> personLookup) {
+			@PersonRelated EntityLookup<? extends Person, String> personLookup) {
 		super();
 		this.securityManager = securityManager;
 		this.personLookup = personLookup;

@@ -1,6 +1,5 @@
 package org.soluvas.social;
 
-
 /**
  * @author rully
  *
