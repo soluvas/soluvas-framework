@@ -12,7 +12,7 @@
 			</action>
 		</command>
 		<command name="cat/cat">
-			<action class="org.soluvas.category.shell.CatCatCommand"
+			<action class="org.soluvas.category.shell.CatCatCommand">
 				<argument ref="categoryCatalog"/>
 			</action>
 		</command>
