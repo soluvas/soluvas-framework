@@ -1,11 +1,17 @@
 package org.soluvas.category.util;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.PreDestroy;
 
+import org.eclipse.emf.ecore.EObject;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleEvent;
 import org.osgi.util.tracker.BundleTrackerCustomizer;
@@ -13,10 +19,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.category.Category;
 import org.soluvas.category.CategoryCatalog;
+import org.soluvas.category.CategoryException;
 import org.soluvas.category.CategoryPackage;
+import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.SlugUtils;
+import org.soluvas.commons.SupplierXmiTracker;
 import org.soluvas.commons.XmiObjectLoader;
 import org.soluvas.commons.impl.XmiTrackerUtils;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -26,8 +38,9 @@ import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 
 /**
+ * Cannot use simple {@link SupplierXmiTracker} because need to calculate {@link Category#setSlugPath(String)}.
+ * And potentially other complications (merging sub-categories?).
  * @author ceefour
- *
  */
 public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<Category>> {
 	
@@ -38,6 +51,7 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 	private static final CategoryPackage xmiEPackage = CategoryPackage.eINSTANCE;
 	private final CategoryCatalog repo;
 	private final EventBus eventBus;
+	private Map<String, List<Category>> managedCategories;
 	
 	/**
 	 * @param repo Access to this repo from this class is guaranteed to be synchronized,
@@ -49,6 +63,13 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 		super();
 		this.repo = repo;
 		this.eventBus = eventBus;
+	}
+	
+	@PreDestroy
+	public void destroy() {
+		for (final Entry<String, List<Category>> entry : managedCategories.entrySet()) {
+			removedBundle(entry.getValue(), entry.getKey());
+		}
 	}
 	
 	protected List<String> getNameSegments(Category category) {
@@ -71,10 +92,54 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 
 	@Override
 	public List<Category> addingBundle(final Bundle bundle, BundleEvent event) {
-		final String path = bundle.getSymbolicName().replace('.', '/');
-		
 		// ------------------ Scan CategoryCatalogs ------------
 		final List<URL> xmiFiles = XmiTrackerUtils.scan(bundle, suppliedClassSimpleName);
+		return extractObjects(xmiFiles, bundle);
+	}
+
+	/**
+	 * Scan using classpath.
+	 * @todo Scanning multiple classpaths for resources is slow, so static or hybrid
+	 * 		approach is preferable.
+	 */
+	public void scan(ClassLoader classLoader) {
+		final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
+		// Due to JDK limitation, scanning of root won't work in webapp classpath,
+		// at least the root folder must be specified before wildcard
+		final List<String> locationPatterns = ImmutableList.of("classpath*:org/**/*.CategoryCatalog.xmi",
+				"classpath*:com/**/*.CategoryCatalog.xmi", "classpath*:id/**/*.CategoryCatalog.xmi");
+		log.trace("Scanning {} for {}", classLoader, locationPatterns);
+		try {
+			final List<Resource> allResources = new ArrayList<>();
+			for (String locationPattern : locationPatterns) {
+				final Resource[] resources = resolver.getResources(locationPattern);
+				allResources.addAll(ImmutableList.copyOf(resources));
+			}
+			log.info("Scanned {} returned {} resources: {}",
+					locationPatterns, allResources.size(), allResources);
+			final List<URL> xmiUrls = ImmutableList.copyOf(Lists.transform(
+					allResources, new Function<Resource, URL>() {
+				@Override @Nullable
+				public URL apply(@Nullable Resource input) {
+					try {
+						return input.getURL();
+					} catch (IOException e) {
+						throw new CategoryException("Cannot get URL for " + input, e);
+					}
+				}
+			}));
+			for (URL xmiUrl : xmiUrls) {
+				final List<Category> objs = extractObjects(ImmutableList.of(xmiUrl), null);
+				managedCategories.put(xmiUrl.toString(), objs);
+			}
+		} catch (IOException e) {
+			throw new CategoryException(e, "Cannot scan %s for %s",
+					classLoader, locationPatterns);
+		}
+	}
+
+	private List<Category> extractObjects(final List<URL> xmiFiles,
+			final Bundle bundle) {
 		if (xmiFiles.isEmpty())
 			return ImmutableList.of();
 
@@ -82,11 +147,15 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 		final List<CategoryCatalog> catalogs = ImmutableList.copyOf(Lists.transform(xmiFiles, new Function<URL, CategoryCatalog>() {
 			@Override @Nullable
 			public CategoryCatalog apply(@Nullable URL url) {
-				log.debug("Getting CategoryCatalog XMI {} from {} in {} [{}]", suppliedClassName, url,
-						bundle.getSymbolicName(), bundle.getBundleId() );
-				final XmiObjectLoader<CategoryCatalog> loader = new XmiObjectLoader<CategoryCatalog>(xmiEPackage, url,
-						bundle);
-				final CategoryCatalog categoryCatalog = loader.get();
+				log.debug("Getting CategoryCatalog XMI {} from {}", suppliedClassName, url);
+				final CategoryCatalog categoryCatalog;
+				if (bundle != null) {
+					categoryCatalog = new XmiObjectLoader<CategoryCatalog>(xmiEPackage, url,
+							bundle).get();
+				} else {
+					categoryCatalog = new XmiObjectLoader<CategoryCatalog>(xmiEPackage, url,
+							ResourceType.CLASSPATH).get();
+				}
 				
 				// Recursive expand as flat
 				final List<Category> flatCategories = CategoryUtils.flatten(categoryCatalog.getCategories());
@@ -109,9 +178,9 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 					}
 				}
 				
-				log.debug("Loaded {} Categories ({} root) from CategorySchema {} in {} [{}]",
+				log.debug("Loaded {} Categories ({} root) from CategorySchema {}",
 						flatCategories.size(), categoryCatalog.getCategories().size(),
-						url, bundle.getSymbolicName(), bundle.getBundleId() );
+						url );
 				return categoryCatalog;
 			}
 		}));
@@ -124,8 +193,7 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 				return input.getCategories();
 			}
 		})));
-		log.info("Loaded {} root Categories from {} [{}]",
-				categories.size(), bundle.getSymbolicName(), bundle.getBundleId());
+		log.info("Loaded {} root Categories from {}", categories.size(), xmiFiles);
 		
 		// Add these objects to repo
 		// TODO: support catalogs which "inject" into existing categories, but need resolution algorithm
@@ -149,25 +217,30 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 
 	@Override
 	public void removedBundle(Bundle bundle, BundleEvent event,
-			@Nonnull final List<Category> objects) {
+			List<Category> objects) {
+		removedBundle(objects, bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]");
+	}
+	
+	private void removedBundle(@Nonnull final List<Category> objects,
+			String resourceContainer) {
 		if (objects.isEmpty())
 			return;
 		
-		log.debug("Removing {} EObjects provided by {} [{}]",
-				objects.size(), bundle.getSymbolicName(), bundle.getBundleId());
+		log.debug("Removing {} EObjects provided by {}",
+				objects.size(), resourceContainer);
 		long removedCount = 0;
 		for (final Category category : objects) {
 			// Unresolve: not strictly necessary
 			// Unregister from repo
-			log.debug("Removing Category {} from {} [{}]", category.getName(),
-					bundle.getSymbolicName(), bundle.getBundleId());
+			log.debug("Removing Category {} from {}", category.getName(),
+					resourceContainer);
 			synchronized (repo) {
 				if (repo.getCategories().remove(category))
 					removedCount++;
 			}
 		}
-		log.info("Removed {} Categories from {} [{}]",
-				removedCount, bundle.getSymbolicName(), bundle.getBundleId());
+		log.info("Removed {} Categories from {}",
+				removedCount, resourceContainer);
 		
 		// Notify StorySchemaCatalogXmiTracker
 //			final TargetTypeRemoved removed = SchemaFactory.eINSTANCE.createTargetTypeRemoved();
