@@ -240,8 +240,8 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		final TreeIterator<EObject> allContents = obj.eAllContents();
 		long augmented = 0;
 		while (allContents.hasNext()) {
-			EObject content = allContents.next();
-			augmented += augmentBundleInfo(bundle, content);
+			final EObject content = allContents.next();
+			augmented += expand(scope, content);
 		}
 		if (augmented > 0)
 			log.debug("Expanded {} EObjects with Scope {}",

@@ -7,10 +7,14 @@
 	
 		<!-- Category -->
 		<command name="cat/ls">
-			<action class="org.soluvas.category.shell.CatLsCommand" />
+			<action class="org.soluvas.category.shell.CatLsCommand">
+				<argument ref="categoryCatalog"/>
+			</action>
 		</command>
 		<command name="cat/cat">
-			<action class="org.soluvas.category.shell.CatCatCommand" />
+			<action class="org.soluvas.category.shell.CatCatCommand"
+				<argument ref="categoryCatalog"/>
+			</action>
 		</command>
 		
 	</command-bundle>

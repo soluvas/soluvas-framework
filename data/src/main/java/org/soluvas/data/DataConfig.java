@@ -7,6 +7,7 @@ import org.soluvas.data.impl.MixinManagerImpl;
 import org.soluvas.data.impl.TermManagerImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
@@ -15,7 +16,7 @@ import com.google.common.collect.ImmutableList;
  * @author rudi
  *
  */
-@Configuration
+@Configuration @Lazy
 public class DataConfig {
 	
 	@Bean

@@ -4,34 +4,47 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.eclipse.emf.common.util.EList;
-import org.osgi.framework.ServiceReference;
 import org.soluvas.category.Category;
 import org.soluvas.category.CategoryCatalog;
 import org.soluvas.category.util.CategoryUtils;
 import org.soluvas.commons.NameUtils;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
-import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 /**
  * List registered {@link Category}s.
  * @author ceefour
  */
+@Service @Lazy
 @Command(scope="cat", name="ls", description="List registered Categories.")
 public class CatLsCommand extends OsgiCommandSupport {
 	
+	private CategoryCatalog categoryCatalog;
+	
+	@Inject
+	public CatLsCommand(CategoryCatalog categoryCatalog) {
+		super();
+		this.categoryCatalog = categoryCatalog;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
 	 */
 	@Override
 	protected Object doExecute() throws Exception {
-		final ServiceReference<CategoryCatalog> categoryCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(CategoryCatalog.class),
-				"Cannot get %s service reference", CategoryCatalog.class.getName());
-		final CategoryCatalog categoryCatalog = Preconditions.checkNotNull(getService(CategoryCatalog.class, categoryCatalogRef),
-				"Cannot get %s service", CategoryCatalog.class.getName());
+//		final ServiceReference<CategoryCatalog> categoryCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(CategoryCatalog.class),
+//				"Cannot get %s service reference", CategoryCatalog.class.getName());
+//		final CategoryCatalog categoryCatalog = Preconditions.checkNotNull(getService(CategoryCatalog.class, categoryCatalogRef),
+//				"Cannot get %s service", CategoryCatalog.class.getName());
 		System.out.println(ansi().render("@|negative_on %3s|%-25s|%-18s|%-15s|%1s|%-10s|%-20s|%-20s|@",
 				"№", "ID", "Name", "Slug", "L", "Catalog", "Description", "Bundle"));
 		int i = 0;

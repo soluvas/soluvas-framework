@@ -1,8 +1,10 @@
 package org.soluvas.category.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -51,7 +53,10 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 	private static final CategoryPackage xmiEPackage = CategoryPackage.eINSTANCE;
 	private final CategoryCatalog repo;
 	private final EventBus eventBus;
-	private Map<String, List<Category>> managedCategories;
+	/**
+	 * Used only for classpath, non-OSGi.
+	 */
+	private Map<String, List<Category>> managedCategories = new HashMap<>();
 	
 	/**
 	 * @param repo Access to this repo from this class is guaranteed to be synchronized,
@@ -65,6 +70,9 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 		this.eventBus = eventBus;
 	}
 	
+	/**
+	 * I guess this will never be called, and is not required anyway in non-OSGi environments.
+	 */
 	@PreDestroy
 	public void destroy() {
 		for (final Entry<String, List<Category>> entry : managedCategories.entrySet()) {
@@ -101,13 +109,15 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 	 * Scan using classpath.
 	 * @todo Scanning multiple classpaths for resources is slow, so static or hybrid
 	 * 		approach is preferable.
+	 * @param dataFolder TODO
 	 */
-	public void scan(ClassLoader classLoader) {
+	public void scan(ClassLoader classLoader, String dataFolder) {
 		final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
 		// Due to JDK limitation, scanning of root won't work in webapp classpath,
 		// at least the root folder must be specified before wildcard
 		final List<String> locationPatterns = ImmutableList.of("classpath*:org/**/*.CategoryCatalog.xmi",
-				"classpath*:com/**/*.CategoryCatalog.xmi", "classpath*:id/**/*.CategoryCatalog.xmi");
+				"classpath*:com/**/*.CategoryCatalog.xmi", "classpath*:id/**/*.CategoryCatalog.xmi",
+				"file:" + dataFolder + "/common/*.CategoryCatalog.xmi");
 		log.trace("Scanning {} for {}", classLoader, locationPatterns);
 		try {
 			final List<Resource> allResources = new ArrayList<>();

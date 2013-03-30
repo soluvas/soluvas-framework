@@ -113,8 +113,8 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 		this.suppliedClassSimpleName = suppliedClass.getSimpleName();
 		this.delegate = delegate;
 		this.classLoader = classLoader;
-		this.packageToScan = null;
-		log = LoggerFactory.getLogger(SupplierXmiClasspathScanner.class.getName() + "." + suppliedClassSimpleName + "." + this.packageToScan);
+		this.packageToScan = "classpath";
+		log = LoggerFactory.getLogger(SupplierXmiClasspathScanner.class.getName() + "." + suppliedClassSimpleName);
 		this.suppliers = scan(classLoader);
 	}
 	
