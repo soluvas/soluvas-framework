@@ -15,7 +15,13 @@ import org.codehaus.jackson.map.SerializationConfig.Feature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Provider @Produces(MediaType.APPLICATION_JSON)
+/**
+ * @author rudi
+ * @deprecated Should be deprecated because nobody uses it anyway.
+ * (we used it in JBoss AS 7.1.1 because it only supports Jackson 1.9)
+ */
+//@Provider @Produces(MediaType.APPLICATION_JSON)
+@Deprecated
 public class Jackson19ContextResolver implements ContextResolver<ObjectMapper> {
 
 	private static final Logger log = LoggerFactory.getLogger(Jackson19ContextResolver.class);

@@ -1,9 +1,15 @@
 package org.soluvas.jaxrs;
 
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.ContextResolver;
+import javax.ws.rs.ext.Provider;
+
+import org.soluvas.json.JsonUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 
 /**
  * This {@link ContextResolver} needs to be manually configured (via DI).
@@ -86,11 +92,22 @@ import com.google.common.base.Supplier;
  * 
  * @author ceefour
  */
-//@Provider @Produces(MediaType.APPLICATION_JSON)
+@Provider @Produces(MediaType.APPLICATION_JSON)
 public class Jackson2ContextResolver implements ContextResolver<ObjectMapper> {
 
 	private final Supplier<ObjectMapper> objectMapperSupplier;
 
+	/**
+	 * For Spring-Jersey or Java EE usage.
+	 */
+	public Jackson2ContextResolver() {
+		this(Suppliers.ofInstance(JsonUtils.mapper));
+	}
+	
+	/**
+	 * For OSGi usage.
+	 * @param objectMapperSupplier
+	 */
 	public Jackson2ContextResolver(Supplier<ObjectMapper> objectMapperSupplier) {
 		super();
 		this.objectMapperSupplier = objectMapperSupplier;
