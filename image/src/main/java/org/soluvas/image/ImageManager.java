@@ -7,6 +7,7 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.SerializableEObject;
 import org.soluvas.image.store.ImageRepository;
+import org.soluvas.ldap.SocialPerson;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,5 +52,7 @@ public interface ImageManager extends SerializableEObject {
 	 * @generated
 	 */
 	long importImages(File srcFolder, boolean metadata, FileExport files, ImageRepository imageRepo, DuplicateIdHandling duplicateIdHandling, ProgressMonitor monitor);
+
+	String getThumbnailPhotoUri(SocialPerson person);
 
 } // ImageManager

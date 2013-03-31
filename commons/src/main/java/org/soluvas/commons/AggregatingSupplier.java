@@ -168,9 +168,10 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 	 */
 	@Override
 	public synchronized void removeSupplier(Supplier<T> supplier) {
-		log.debug("Removing supplier {} for {}", supplier, eClass.getName());
+		log.debug("Removing supplier {} ({}) for {}", supplier, supplier.getClass().getName(), eClass.getName());
 		final int removedModelCount = doRemoveSupplier(supplier);
-		log.info("Removed {} models from supplier {} for {}", removedModelCount, supplier, eClass.getName());
+		log.info("Removed {} models from supplier {} ({}) for {}", 
+				removedModelCount, supplier, supplier.getClass().getName(), eClass.getName());
 	}
 
 	protected int doRemoveSupplier(Supplier<T> supplier) {

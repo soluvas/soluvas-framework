@@ -1,11 +1,11 @@
-/**
- */
 package org.soluvas.image.impl;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map.Entry;
+
+import javax.inject.Inject;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.ProgressStatus;
+import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.impl.ProgressMonitorImpl;
 import org.soluvas.image.DuplicateIdHandling;
 import org.soluvas.image.FileExport;
@@ -30,10 +31,14 @@ import org.soluvas.image.ImageException;
 import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImageManager;
 import org.soluvas.image.ImagePackage;
+import org.soluvas.image.PersonImage;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 import org.soluvas.image.store.StyledImage;
 import org.soluvas.image.util.ImageUtils;
+import org.soluvas.ldap.SocialPerson;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
@@ -47,6 +52,7 @@ import com.google.common.collect.ImmutableMap;
  *
  * @generated
  */
+@Service("imageMgr") @Lazy
 public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	
 	private static final Logger log = LoggerFactory
@@ -54,14 +60,23 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	private String maleDefaultPhotoId;
 	private String femaleDefaultPhotoId;
 	private String unknownDefaultPhotoId;
+	private WebAddress webAddress;
+	private ImageRepository personImageRepo;
 	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public ImageManagerImpl() {
+	protected ImageManagerImpl() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Inject
+	public ImageManagerImpl(WebAddress webAddress,
+			@PersonImage ImageRepository personImageRepo) {
 		super();
+		this.webAddress = webAddress;
+		this.personImageRepo = personImageRepo;
 	}
 
 	/**
@@ -319,4 +334,39 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		return importedCount;
 	}
 
+	public String getPersonPhotoUri(org.soluvas.ldap.SocialPerson.Gender gender) {
+		switch (gender) {
+		case MALE:
+			return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_male.png";
+		case FEMALE:
+			return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_female.png";
+		default:
+			return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_person.png";	
+		}
+	}
+
+	@Override
+	public String getThumbnailPhotoUri(SocialPerson person) {
+		if (person != null) {					
+			final String photoId = person.getPhotoId();
+			final Image personImage = personImageRepo.findOne(photoId);
+			if (personImage != null) {
+				log.debug("Photo id {}", personImage.getId());
+				final StyledImage personThumbnailImage = personImage.getStyles().get("thumbnail");
+				if (personThumbnailImage != null) {
+					return personThumbnailImage.getUri().toString();
+				} else {
+					log.warn("Cannot get thumbnail image {} for person {} using {}", photoId, person.getId(), personImageRepo);
+					return getPersonPhotoUri(person.getGender());
+				}
+			} else {
+				log.warn("Cannot find image {} for person {} using {}",
+						photoId, person.getId(), personImageRepo);
+				return getPersonPhotoUri(person.getGender());
+			}
+		} else {
+			return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_person.png";
+		}
+	}
+	
 } //ImageManagerImpl

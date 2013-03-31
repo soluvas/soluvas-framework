@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
+import javax.inject.Inject;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -15,6 +16,9 @@ import org.soluvas.mongo.MongoUtils;
 import org.soluvas.security.AppSession;
 import org.soluvas.security.AppSessionRepository;
 import org.soluvas.security.AppSessionStatus;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 import com.google.code.morphia.Morphia;
 import com.google.common.base.Function;
@@ -26,7 +30,6 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.Mongo;
 import com.mongodb.MongoURI;
 
 /**
@@ -36,6 +39,7 @@ import com.mongodb.MongoURI;
  * 
  * @author rudi
  */
+@Service("appSessionRepo") @Lazy
 public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, String>
 	implements AppSessionRepository {
 	
@@ -107,7 +111,8 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 	private final DBCollection coll;
 	private final Morphia morphia;
 	
-	public MongoAppSessionRepository(String mongoUri) {
+	@Inject
+	public MongoAppSessionRepository(@Value("#{soluvasProps.securityMongoUri}") String mongoUri) {
 		super();
 		// WARNING: mongoUri may contain password!
 		this.mongoUri = Preconditions.checkNotNull(mongoUri, "mongoUri must be specified");
