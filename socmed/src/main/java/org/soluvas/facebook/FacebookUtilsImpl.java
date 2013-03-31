@@ -20,6 +20,8 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 import org.soluvas.ldap.SocialPerson;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Function;
@@ -32,17 +34,19 @@ import com.google.common.collect.Lists;
  * Inspired by org.soluvas.fbcli.FriendListDownloader.
  * @author ceefour
  */
+@Service @Lazy
 public class FacebookUtilsImpl implements FacebookUtils {
 	
 	private transient static Logger log = LoggerFactory.getLogger(FacebookUtilsImpl.class);
-	@Inject private FriendListDownloader friendListDownloader;
-	@Inject private UserListParser userListParser;
+	private FriendListDownloader friendListDownloader;
+	private UserListParser userListParser;
 	private LoadingCache<String, List<HintPerson>> friendListCache;
 	
-	protected FacebookUtilsImpl() {
-		super();
-	}
+//	protected FacebookUtilsImpl() {
+//		super();
+//	}
 	
+	@Inject
 	public FacebookUtilsImpl(FriendListDownloader friendListDownloader,
 			UserListParser userListParser) {
 		super();

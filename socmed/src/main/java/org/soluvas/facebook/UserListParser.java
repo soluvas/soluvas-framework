@@ -11,6 +11,9 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.Cpu;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -24,16 +27,18 @@ import com.google.common.collect.Lists;
  * @author ceefour
  *
  */
+@Service @Lazy
 public class UserListParser {
 	
 	private static final Logger log = LoggerFactory.getLogger(UserListParser.class);
-	@Inject private ExecutorService executor;
+	private ExecutorService executor;
 	private ObjectMapper mapper = new ObjectMapper();
 	
-	public UserListParser() {
-	}
+//	public UserListParser() {
+//	}
 	
-	public UserListParser(ExecutorService executor) {
+	@Inject
+	public UserListParser(@Cpu ExecutorService executor) {
 		super();
 		this.executor = executor;
 	}

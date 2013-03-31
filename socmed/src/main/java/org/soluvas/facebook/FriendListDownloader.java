@@ -14,6 +14,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.Network;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,16 +27,18 @@ import com.google.common.collect.Lists;
  * Download list of friends.
  * @author ceefour
  */
+@Service @Lazy
 public class FriendListDownloader {
 
 	private static final Logger log = LoggerFactory.getLogger(FriendListDownloader.class);
-	@Inject HttpClient httpClient;
-	@Inject ExecutorService executor;
+	private HttpClient httpClient;
+	private ExecutorService executor;
 	
-	public FriendListDownloader() {
-	}
+//	public FriendListDownloader() {
+//	}
 	
-	public FriendListDownloader(HttpClient httpClient, ExecutorService executor) {
+	@Inject
+	public FriendListDownloader(HttpClient httpClient, @Network ExecutorService executor) {
 		super();
 		this.httpClient = httpClient;
 		this.executor = executor;

@@ -10,6 +10,8 @@ import javax.enterprise.context.ApplicationScoped;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
@@ -26,7 +28,7 @@ import com.google.common.eventbus.Subscribe;
  * FIXME: Use Multimap when it's done
  * @author ceefour
  */
-@ApplicationScoped
+@ApplicationScoped @Service("pushMessageTracker") @Lazy
 public class PushMessageTrackerImpl implements PushMessageTracker {
 
 	private static final Logger log = LoggerFactory.getLogger(PushMessageTrackerImpl.class);

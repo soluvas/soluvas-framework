@@ -13,6 +13,11 @@ import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.impl.client.DecompressingHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.tenant.TenantRef;
@@ -26,6 +31,7 @@ import org.soluvas.json.money.JodaMoneyModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
@@ -33,6 +39,8 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.google.code.morphia.logging.MorphiaLoggerFactory;
+import com.google.code.morphia.logging.slf4j.SLF4JLogrImplFactory;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
@@ -47,7 +55,12 @@ import com.google.common.eventbus.EventBus;
  * @author rudi
  */
 @Configuration @Lazy
+@ComponentScan("org.soluvas.push")
 public class CommonsWebConfig {
+	
+	static {
+		MorphiaLoggerFactory.registerLogger(SLF4JLogrImplFactory.class);
+	}
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(CommonsWebConfig.class);
@@ -95,6 +108,16 @@ public class CommonsWebConfig {
 	@Bean
 	public EventBus globalEventBus() {
 		return new AsyncEventBus("global", networkExecutor());
+	}
+	
+	@Bean(destroyMethod="shutdown")
+	public ClientConnectionManager httpClientConnMgr() {
+		return new PoolingClientConnectionManager();
+	}
+	
+	@Bean
+	public HttpClient httpClient() {
+		return new DecompressingHttpClient(new DefaultHttpClient(httpClientConnMgr()));
 	}
 	
 	@Bean
