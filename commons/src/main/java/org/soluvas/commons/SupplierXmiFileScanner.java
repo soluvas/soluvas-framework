@@ -115,7 +115,7 @@ public class SupplierXmiFileScanner<T extends EObject> {
 		final Resource[] resources;
 		try {
 			log.debug("Scanning *.{}.xmi in filesystem {}", suppliedClassSimpleName, pkg);
-			resources = resolver.getResources(packageToScan + "/*." + suppliedClassSimpleName + ".xmi");
+			resources = resolver.getResources("file:" + packageToScan + "/*." + suppliedClassSimpleName + ".xmi");
 			log.info("Scanned *.{}.xmi in filesystem {} returned {} resources: {}",
 					suppliedClassSimpleName, pkg, resources.length, resources);
 			if (resources == null || resources.length == 0) {
