@@ -98,7 +98,7 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 	}
 	
 	/**
-	 * Scan the entire org, com, and id classpath.
+	 * Scan the entire org, com, and id classpath, and the common folder.
 	 * @param ePackage
 	 * @param suppliedClass
 	 * @param tenantId
@@ -106,7 +106,8 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 	 * @todo Note that this is slow, but used for now to support lazy beans instantiation. Static or hybrid is preferable.
 	 */
 	public SupplierXmiClasspathScanner(final @Nonnull EPackage ePackage, final @Nonnull Class<T> suppliedClass,
-			@Nonnull final DelegatingSupplier<T> delegate, @Nonnull final ClassLoader classLoader) {
+			@Nonnull final DelegatingSupplier<T> delegate, @Nonnull final ClassLoader classLoader,
+			@Nonnull final String dataFolder) {
 		super();
 		this.ePackage = ePackage;
 		this.suppliedClassName = suppliedClass.getName();
@@ -115,7 +116,7 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 		this.classLoader = classLoader;
 		this.packageToScan = "classpath";
 		log = LoggerFactory.getLogger(SupplierXmiClasspathScanner.class.getName() + "." + suppliedClassSimpleName);
-		this.suppliers = scan(classLoader);
+		this.suppliers = scan(classLoader, dataFolder);
 	}
 	
 	@PreDestroy
@@ -124,12 +125,14 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 	}
 
 	@Nullable
-	public List<Supplier<T>> scan(@Nonnull ClassLoader classLoader) {
+	public List<Supplier<T>> scan(@Nonnull ClassLoader classLoader, String dataFolder) {
 		final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
 		// Due to JDK limitation, scanning of root won't work in webapp classpath,
 		// at least the root folder must be specified before wildcard
 		final List<String> locationPatterns = ImmutableList.of("classpath*:org/**/*." + suppliedClassSimpleName + ".xmi",
-				"classpath*:com/**/*." + suppliedClassSimpleName + ".xmi", "classpath*:id/**/*." + suppliedClassSimpleName +".xmi");
+				"classpath*:com/**/*." + suppliedClassSimpleName + ".xmi",
+				"classpath*:id/**/*." + suppliedClassSimpleName +".xmi",
+				"file:" + dataFolder + "/common/*." + suppliedClassSimpleName +".xmi");
 		log.trace("Scanning {} for {}", classLoader, locationPatterns);
 		try {
 			final List<Resource> allResources = new ArrayList<>();

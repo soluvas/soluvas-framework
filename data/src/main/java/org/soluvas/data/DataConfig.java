@@ -1,6 +1,9 @@
 package org.soluvas.data;
 
+import javax.inject.Inject;
+
 import org.soluvas.commons.AggregatingSupplier;
+import org.soluvas.commons.DataFolder;
 import org.soluvas.commons.DelegatingSupplier;
 import org.soluvas.commons.SupplierXmiClasspathScanner;
 import org.soluvas.data.impl.MixinManagerImpl;
@@ -19,12 +22,15 @@ import com.google.common.collect.ImmutableList;
 @Configuration @Lazy
 public class DataConfig {
 	
+	@Inject @DataFolder
+	private String dataFolder;
+	
 	@Bean
 	public DelegatingSupplier<DataCatalog> dataCatalogSupplier() {
 		final AggregatingSupplier<DataCatalog> aggregator = new AggregatingSupplier<DataCatalog>(DataFactory.eINSTANCE,
 				DataPackage.Literals.DATA_CATALOG, ImmutableList.<Supplier<DataCatalog>>of());
 		final SupplierXmiClasspathScanner<DataCatalog> scanner = new SupplierXmiClasspathScanner<DataCatalog>(DataPackage.eINSTANCE, DataCatalog.class,
-				aggregator, DataConfig.class.getClassLoader());
+				aggregator, DataConfig.class.getClassLoader(), dataFolder);
 		return aggregator;
 	}
 	

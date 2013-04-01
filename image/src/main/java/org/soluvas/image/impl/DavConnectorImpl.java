@@ -277,8 +277,9 @@ and uploading again, and because of HTTP pipelining which isn't supported by ngi
 //		httpPut.setEntity(new FileEntity(source, ContentType.create(contentType)));
 //		httpPut.setEntity(new ByteArrayEntity(FileUtils.readFileToByteArray(source),
 //				ContentType.create(contentType)));
-		httpPut.setEntity(
-				new InputStreamEntity(new FileInputStream(source), source.length(), ContentType.create(contentType)));
+		final InputStreamEntity entity = new InputStreamEntity(new FileInputStream(source), source.length());
+		entity.setContentType(contentType);
+		httpPut.setEntity(entity);
 		final HttpResponse response = client.execute(davHost, httpPut, createHttpContext());
 		try {
 			if (response.getStatusLine().getStatusCode() >= 200 && response.getStatusLine().getStatusCode() < 300)
