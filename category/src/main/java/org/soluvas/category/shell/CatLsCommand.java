@@ -7,15 +7,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.eclipse.emf.common.util.EList;
 import org.soluvas.category.Category;
 import org.soluvas.category.CategoryCatalog;
 import org.soluvas.category.util.CategoryUtils;
 import org.soluvas.commons.NameUtils;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.soluvas.commons.shell.ExtCommandSupport;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Strings;
@@ -26,7 +24,7 @@ import com.google.common.base.Strings;
  */
 @Service @Lazy
 @Command(scope="cat", name="ls", description="List registered Categories.")
-public class CatLsCommand extends OsgiCommandSupport {
+public class CatLsCommand extends ExtCommandSupport {
 	
 	private CategoryCatalog categoryCatalog;
 	
