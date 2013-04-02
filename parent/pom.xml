@@ -60,7 +60,7 @@
 		<jackson2.version>2.1.4</jackson2.version>
 
 		<slf4j.version>1.7.2</slf4j.version>
-		<logback.version>1.0.7</logback.version>
+		<logback.version>1.0.11</logback.version>
 		<junit.version>4.11</junit.version>
 	</properties>
 
