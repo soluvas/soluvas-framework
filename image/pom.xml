@@ -143,8 +143,8 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
+						<!-- org.soluvas.web.site;resolution:="optional", ; creates cyclic dependency -->
 						<Import-Package>
-							org.soluvas.web.site;resolution:="optional",
 							org.soluvas.jaxrs;resolution:="optional",
 							org.apache.felix.service.command;resolution:=optional,
 							org.apache.felix.gogo.commands;resolution:=optional,

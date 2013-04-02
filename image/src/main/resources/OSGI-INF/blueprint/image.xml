@@ -22,12 +22,13 @@
 			<property name="path" value="/js"/>
 		</bean>
 	</service>
-	<service auto-export="interfaces">
+	<!-- WORKAROUND to avoid cyclic dependency 
+	service auto-export="interfaces">
 		<bean class="org.soluvas.web.site.JavaScriptModuleImpl">
 			<argument value="org.soluvas.image"/>
 			<argument value="org.soluvas.image"/>
 		</bean>
-	</service>
+	</service-->
 	
 	<reference-list id="imageRepos" interface="org.soluvas.image.store.ImageRepository"
 		availability="optional"/>
