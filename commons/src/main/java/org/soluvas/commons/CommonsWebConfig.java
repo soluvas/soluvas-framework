@@ -103,7 +103,6 @@ public class CommonsWebConfig {
 	@Bean
 	public EventBus globalEventBus() {
 		return new AsyncEventBus("global", networkExecutor());
-//		return new EventBus("global");
 	}
 	
 	@Bean(destroyMethod="shutdown")

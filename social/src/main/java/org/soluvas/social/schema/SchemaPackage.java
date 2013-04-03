@@ -277,13 +277,58 @@ public interface SchemaPackage extends EPackage {
 	int SOCIAL_SCHEMA_CATALOG__NS_PREFIX = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Generated Package Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOCIAL_SCHEMA_CATALOG__GENERATED_PACKAGE_NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Xmi Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOCIAL_SCHEMA_CATALOG__XMI_URL = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Ecore Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOCIAL_SCHEMA_CATALOG__ECORE_URL = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>EPackage</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOCIAL_SCHEMA_CATALOG__EPACKAGE = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>EFactory</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOCIAL_SCHEMA_CATALOG__EFACTORY = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Social Schema Catalog</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SOCIAL_SCHEMA_CATALOG_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 3;
+	int SOCIAL_SCHEMA_CATALOG_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.social.schema.impl.TargetTypeAddedImpl <em>Target Type Added</em>}' class.
@@ -395,6 +440,61 @@ public interface SchemaPackage extends EPackage {
 	EAttribute getSocialSchemaCatalog_NsPrefix();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.social.schema.SocialSchemaCatalog#getGeneratedPackageName <em>Generated Package Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Generated Package Name</em>'.
+	 * @see org.soluvas.social.schema.SocialSchemaCatalog#getGeneratedPackageName()
+	 * @see #getSocialSchemaCatalog()
+	 * @generated
+	 */
+	EAttribute getSocialSchemaCatalog_GeneratedPackageName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.social.schema.SocialSchemaCatalog#getXmiUrl <em>Xmi Url</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Xmi Url</em>'.
+	 * @see org.soluvas.social.schema.SocialSchemaCatalog#getXmiUrl()
+	 * @see #getSocialSchemaCatalog()
+	 * @generated
+	 */
+	EAttribute getSocialSchemaCatalog_XmiUrl();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.social.schema.SocialSchemaCatalog#getEcoreUrl <em>Ecore Url</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ecore Url</em>'.
+	 * @see org.soluvas.social.schema.SocialSchemaCatalog#getEcoreUrl()
+	 * @see #getSocialSchemaCatalog()
+	 * @generated
+	 */
+	EAttribute getSocialSchemaCatalog_EcoreUrl();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.social.schema.SocialSchemaCatalog#getEPackage <em>EPackage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EPackage</em>'.
+	 * @see org.soluvas.social.schema.SocialSchemaCatalog#getEPackage()
+	 * @see #getSocialSchemaCatalog()
+	 * @generated
+	 */
+	EReference getSocialSchemaCatalog_EPackage();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.social.schema.SocialSchemaCatalog#getEFactory <em>EFactory</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EFactory</em>'.
+	 * @see org.soluvas.social.schema.SocialSchemaCatalog#getEFactory()
+	 * @see #getSocialSchemaCatalog()
+	 * @generated
+	 */
+	EReference getSocialSchemaCatalog_EFactory();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.social.schema.TargetTypeAdded <em>Target Type Added</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -504,6 +604,46 @@ public interface SchemaPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SOCIAL_SCHEMA_CATALOG__NS_PREFIX = eINSTANCE.getSocialSchemaCatalog_NsPrefix();
+
+		/**
+		 * The meta object literal for the '<em><b>Generated Package Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SOCIAL_SCHEMA_CATALOG__GENERATED_PACKAGE_NAME = eINSTANCE.getSocialSchemaCatalog_GeneratedPackageName();
+
+		/**
+		 * The meta object literal for the '<em><b>Xmi Url</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SOCIAL_SCHEMA_CATALOG__XMI_URL = eINSTANCE.getSocialSchemaCatalog_XmiUrl();
+
+		/**
+		 * The meta object literal for the '<em><b>Ecore Url</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SOCIAL_SCHEMA_CATALOG__ECORE_URL = eINSTANCE.getSocialSchemaCatalog_EcoreUrl();
+
+		/**
+		 * The meta object literal for the '<em><b>EPackage</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SOCIAL_SCHEMA_CATALOG__EPACKAGE = eINSTANCE.getSocialSchemaCatalog_EPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>EFactory</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SOCIAL_SCHEMA_CATALOG__EFACTORY = eINSTANCE.getSocialSchemaCatalog_EFactory();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.social.schema.impl.TargetTypeAddedImpl <em>Target Type Added</em>}' class.

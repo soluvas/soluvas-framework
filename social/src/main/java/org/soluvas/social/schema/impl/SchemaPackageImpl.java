@@ -170,6 +170,51 @@ public class SchemaPackageImpl extends EPackageImpl implements SchemaPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getSocialSchemaCatalog_GeneratedPackageName() {
+		return (EAttribute)socialSchemaCatalogEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSocialSchemaCatalog_XmiUrl() {
+		return (EAttribute)socialSchemaCatalogEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSocialSchemaCatalog_EcoreUrl() {
+		return (EAttribute)socialSchemaCatalogEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSocialSchemaCatalog_EPackage() {
+		return (EReference)socialSchemaCatalogEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSocialSchemaCatalog_EFactory() {
+		return (EReference)socialSchemaCatalogEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTargetTypeAdded() {
 		return targetTypeAddedEClass;
 	}
@@ -243,6 +288,11 @@ public class SchemaPackageImpl extends EPackageImpl implements SchemaPackage {
 		socialSchemaCatalogEClass = createEClass(SOCIAL_SCHEMA_CATALOG);
 		createEReference(socialSchemaCatalogEClass, SOCIAL_SCHEMA_CATALOG__TARGET_TYPES);
 		createEAttribute(socialSchemaCatalogEClass, SOCIAL_SCHEMA_CATALOG__NS_PREFIX);
+		createEAttribute(socialSchemaCatalogEClass, SOCIAL_SCHEMA_CATALOG__GENERATED_PACKAGE_NAME);
+		createEAttribute(socialSchemaCatalogEClass, SOCIAL_SCHEMA_CATALOG__XMI_URL);
+		createEAttribute(socialSchemaCatalogEClass, SOCIAL_SCHEMA_CATALOG__ECORE_URL);
+		createEReference(socialSchemaCatalogEClass, SOCIAL_SCHEMA_CATALOG__EPACKAGE);
+		createEReference(socialSchemaCatalogEClass, SOCIAL_SCHEMA_CATALOG__EFACTORY);
 
 		targetTypeAddedEClass = createEClass(TARGET_TYPE_ADDED);
 		createEReference(targetTypeAddedEClass, TARGET_TYPE_ADDED__TARGET_TYPES);
@@ -313,6 +363,11 @@ public class SchemaPackageImpl extends EPackageImpl implements SchemaPackage {
 		initEClass(socialSchemaCatalogEClass, SocialSchemaCatalog.class, "SocialSchemaCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSocialSchemaCatalog_TargetTypes(), this.getTargetType(), null, "targetTypes", null, 0, -1, SocialSchemaCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSocialSchemaCatalog_NsPrefix(), theEcorePackage.getEString(), "nsPrefix", null, 1, 1, SocialSchemaCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSocialSchemaCatalog_GeneratedPackageName(), theEcorePackage.getEString(), "generatedPackageName", null, 1, 1, SocialSchemaCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSocialSchemaCatalog_XmiUrl(), theCommonsPackage.getURL(), "xmiUrl", null, 0, 1, SocialSchemaCatalog.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSocialSchemaCatalog_EcoreUrl(), theCommonsPackage.getURL(), "ecoreUrl", null, 0, 1, SocialSchemaCatalog.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSocialSchemaCatalog_EPackage(), theEcorePackage.getEPackage(), null, "ePackage", null, 0, 1, SocialSchemaCatalog.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSocialSchemaCatalog_EFactory(), theEcorePackage.getEFactory(), null, "eFactory", null, 0, 1, SocialSchemaCatalog.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(targetTypeAddedEClass, TargetTypeAdded.class, "TargetTypeAdded", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTargetTypeAdded_TargetTypes(), this.getTargetType(), null, "targetTypes", null, 0, -1, TargetTypeAdded.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -356,6 +411,36 @@ public class SchemaPackageImpl extends EPackageImpl implements SchemaPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Used to resolve a TargetType subject types inside ActionType."
+		   });		
+		addAnnotation
+		  (getSocialSchemaCatalog_GeneratedPackageName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Used to lookup the Java class. e.g. \"id.co.bippo.person.story\"."
+		   });		
+		addAnnotation
+		  (getSocialSchemaCatalog_XmiUrl(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Only used at runtime by XmiTracker."
+		   });		
+		addAnnotation
+		  (getSocialSchemaCatalog_EcoreUrl(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Only used at runtime by XmiTracker."
+		   });		
+		addAnnotation
+		  (getSocialSchemaCatalog_EPackage(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Only used by XmiTracker."
+		   });		
+		addAnnotation
+		  (getSocialSchemaCatalog_EFactory(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Only used by XmiTracker."
 		   });
 	}
 

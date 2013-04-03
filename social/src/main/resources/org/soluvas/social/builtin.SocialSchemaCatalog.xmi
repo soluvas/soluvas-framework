@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="ASCII"?>
-<social-schema:SocialSchemaCatalog xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:social-schema="http://www.soluvas.org/schema/social.schema/1.0" xsi:schemaLocation="http://www.soluvas.org/schema/social.schema/1.0 schema.ecore" nsPrefix="builtin">
-  <targetTypes name="person"/>
-  <targetTypes name="article"/>
-  <targetTypes name="blog"/>
-  <targetTypes name="book"/>
-  <targetTypes name="externalProfile"/>
-  <targetTypes name="movie"/>
-  <targetTypes name="tvEpisode"/>
-  <targetTypes name="tvShow"/>
-  <targetTypes name="video"/>
-  <targetTypes name="website"/>
+<social-schema:SocialSchemaCatalog
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:social-schema="http://www.soluvas.org/schema/social.schema/1.0"
+    xsi:schemaLocation="http://www.soluvas.org/schema/social.schema/1.0 schema.ecore"
+    nsPrefix="builtin"
+    generatedPackageName="org.soluvas.social.builtin">
+  <targetTypes
+      name="person"/>
+  <targetTypes
+      name="article"/>
+  <targetTypes
+      name="blog"/>
+  <targetTypes
+      name="book"/>
+  <targetTypes
+      name="externalProfile"/>
+  <targetTypes
+      name="movie"/>
+  <targetTypes
+      name="tvEpisode"/>
+  <targetTypes
+      name="tvShow"/>
+  <targetTypes
+      name="video"/>
+  <targetTypes
+      name="website"/>
 </social-schema:SocialSchemaCatalog>

@@ -2,6 +2,7 @@
  */
 package org.soluvas.social.schema.impl;
 
+import java.net.URL;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -10,6 +11,8 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -41,6 +44,11 @@ import org.soluvas.social.schema.TargetType;
  *   <li>{@link org.soluvas.social.schema.impl.SocialSchemaCatalogImpl#getBundle <em>Bundle</em>}</li>
  *   <li>{@link org.soluvas.social.schema.impl.SocialSchemaCatalogImpl#getTargetTypes <em>Target Types</em>}</li>
  *   <li>{@link org.soluvas.social.schema.impl.SocialSchemaCatalogImpl#getNsPrefix <em>Ns Prefix</em>}</li>
+ *   <li>{@link org.soluvas.social.schema.impl.SocialSchemaCatalogImpl#getGeneratedPackageName <em>Generated Package Name</em>}</li>
+ *   <li>{@link org.soluvas.social.schema.impl.SocialSchemaCatalogImpl#getXmiUrl <em>Xmi Url</em>}</li>
+ *   <li>{@link org.soluvas.social.schema.impl.SocialSchemaCatalogImpl#getEcoreUrl <em>Ecore Url</em>}</li>
+ *   <li>{@link org.soluvas.social.schema.impl.SocialSchemaCatalogImpl#getEPackage <em>EPackage</em>}</li>
+ *   <li>{@link org.soluvas.social.schema.impl.SocialSchemaCatalogImpl#getEFactory <em>EFactory</em>}</li>
  * </ul>
  * </p>
  *
@@ -156,6 +164,86 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * @ordered
 	 */
 	protected String nsPrefix = NS_PREFIX_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getGeneratedPackageName() <em>Generated Package Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratedPackageName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String GENERATED_PACKAGE_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGeneratedPackageName() <em>Generated Package Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratedPackageName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String generatedPackageName = GENERATED_PACKAGE_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getXmiUrl() <em>Xmi Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getXmiUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final URL XMI_URL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getXmiUrl() <em>Xmi Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getXmiUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected URL xmiUrl = XMI_URL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getEcoreUrl() <em>Ecore Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEcoreUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final URL ECORE_URL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getEcoreUrl() <em>Ecore Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEcoreUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected URL ecoreUrl = ECORE_URL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getEPackage() <em>EPackage</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEPackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected EPackage ePackage;
+
+	/**
+	 * The cached value of the '{@link #getEFactory() <em>EFactory</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEFactory()
+	 * @generated
+	 * @ordered
+	 */
+	protected EFactory eFactory;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -298,6 +386,145 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getGeneratedPackageName() {
+		return generatedPackageName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGeneratedPackageName(String newGeneratedPackageName) {
+		String oldGeneratedPackageName = generatedPackageName;
+		generatedPackageName = newGeneratedPackageName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SOCIAL_SCHEMA_CATALOG__GENERATED_PACKAGE_NAME, oldGeneratedPackageName, generatedPackageName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public URL getXmiUrl() {
+		return xmiUrl;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setXmiUrl(URL newXmiUrl) {
+		URL oldXmiUrl = xmiUrl;
+		xmiUrl = newXmiUrl;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SOCIAL_SCHEMA_CATALOG__XMI_URL, oldXmiUrl, xmiUrl));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public URL getEcoreUrl() {
+		return ecoreUrl;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEcoreUrl(URL newEcoreUrl) {
+		URL oldEcoreUrl = ecoreUrl;
+		ecoreUrl = newEcoreUrl;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SOCIAL_SCHEMA_CATALOG__ECORE_URL, oldEcoreUrl, ecoreUrl));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EPackage getEPackage() {
+		if (ePackage != null && ePackage.eIsProxy()) {
+			InternalEObject oldEPackage = (InternalEObject)ePackage;
+			ePackage = (EPackage)eResolveProxy(oldEPackage);
+			if (ePackage != oldEPackage) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SchemaPackage.SOCIAL_SCHEMA_CATALOG__EPACKAGE, oldEPackage, ePackage));
+			}
+		}
+		return ePackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EPackage basicGetEPackage() {
+		return ePackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEPackage(EPackage newEPackage) {
+		EPackage oldEPackage = ePackage;
+		ePackage = newEPackage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SOCIAL_SCHEMA_CATALOG__EPACKAGE, oldEPackage, ePackage));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EFactory getEFactory() {
+		if (eFactory != null && eFactory.eIsProxy()) {
+			InternalEObject oldEFactory = (InternalEObject)eFactory;
+			eFactory = (EFactory)eResolveProxy(oldEFactory);
+			if (eFactory != oldEFactory) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SchemaPackage.SOCIAL_SCHEMA_CATALOG__EFACTORY, oldEFactory, eFactory));
+			}
+		}
+		return eFactory;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EFactory basicGetEFactory() {
+		return eFactory;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEFactory(EFactory newEFactory) {
+		EFactory oldEFactory = eFactory;
+		eFactory = newEFactory;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SOCIAL_SCHEMA_CATALOG__EFACTORY, oldEFactory, eFactory));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -327,6 +554,18 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 				return getTargetTypes();
 			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__NS_PREFIX:
 				return getNsPrefix();
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__GENERATED_PACKAGE_NAME:
+				return getGeneratedPackageName();
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__XMI_URL:
+				return getXmiUrl();
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__ECORE_URL:
+				return getEcoreUrl();
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__EPACKAGE:
+				if (resolve) return getEPackage();
+				return basicGetEPackage();
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__EFACTORY:
+				if (resolve) return getEFactory();
+				return basicGetEFactory();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -359,6 +598,21 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__NS_PREFIX:
 				setNsPrefix((String)newValue);
 				return;
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__GENERATED_PACKAGE_NAME:
+				setGeneratedPackageName((String)newValue);
+				return;
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__XMI_URL:
+				setXmiUrl((URL)newValue);
+				return;
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__ECORE_URL:
+				setEcoreUrl((URL)newValue);
+				return;
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__EPACKAGE:
+				setEPackage((EPackage)newValue);
+				return;
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__EFACTORY:
+				setEFactory((EFactory)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -389,6 +643,21 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__NS_PREFIX:
 				setNsPrefix(NS_PREFIX_EDEFAULT);
 				return;
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__GENERATED_PACKAGE_NAME:
+				setGeneratedPackageName(GENERATED_PACKAGE_NAME_EDEFAULT);
+				return;
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__XMI_URL:
+				setXmiUrl(XMI_URL_EDEFAULT);
+				return;
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__ECORE_URL:
+				setEcoreUrl(ECORE_URL_EDEFAULT);
+				return;
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__EPACKAGE:
+				setEPackage((EPackage)null);
+				return;
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__EFACTORY:
+				setEFactory((EFactory)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -413,6 +682,16 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 				return targetTypes != null && !targetTypes.isEmpty();
 			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__NS_PREFIX:
 				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__GENERATED_PACKAGE_NAME:
+				return GENERATED_PACKAGE_NAME_EDEFAULT == null ? generatedPackageName != null : !GENERATED_PACKAGE_NAME_EDEFAULT.equals(generatedPackageName);
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__XMI_URL:
+				return XMI_URL_EDEFAULT == null ? xmiUrl != null : !XMI_URL_EDEFAULT.equals(xmiUrl);
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__ECORE_URL:
+				return ECORE_URL_EDEFAULT == null ? ecoreUrl != null : !ECORE_URL_EDEFAULT.equals(ecoreUrl);
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__EPACKAGE:
+				return ePackage != null;
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG__EFACTORY:
+				return eFactory != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -469,6 +748,12 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 		result.append(bundle);
 		result.append(", nsPrefix: ");
 		result.append(nsPrefix);
+		result.append(", generatedPackageName: ");
+		result.append(generatedPackageName);
+		result.append(", xmiUrl: ");
+		result.append(xmiUrl);
+		result.append(", ecoreUrl: ");
+		result.append(ecoreUrl);
 		result.append(')');
 		return result.toString();
 	}

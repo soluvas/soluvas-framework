@@ -119,9 +119,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	 * @param ePackage
 	 * @param resourceUrl
 	 * @param resourceType
-	 * @deprecated Use {@link #XmiObjectLoader(EPackage, URL, Bundle)}.
 	 */
-	@Deprecated
 	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final URL resourceUrl,
 			@Nonnull final ResourceType resourceType) {
 		super();

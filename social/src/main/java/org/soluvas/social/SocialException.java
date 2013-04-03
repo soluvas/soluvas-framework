@@ -35,4 +35,8 @@ public class SocialException extends RuntimeException {
 		super(message, cause);
 	}
 
+	public SocialException(Throwable cause, String message, Object... args) {
+		super(String.format(message, args), cause);
+	}
+
 }
