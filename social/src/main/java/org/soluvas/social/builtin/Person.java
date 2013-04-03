@@ -11,7 +11,7 @@ import org.soluvas.commons.PhotoIdContainer;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.social.PersonLike;
 import org.soluvas.social.Target;
-import org.soluvas.social.util.SocialUtils;
+import org.soluvas.social.schema.SocialSchemaCatalog;
 
 import com.google.common.base.Function;
 
@@ -33,9 +33,16 @@ public interface Person extends Target, Identifiable, NameContainer, PhotoIdCont
 	
 	public static class FromInfo implements Function<PersonInfo, Person> {
 		
+		private final SocialSchemaCatalog socialSchemaCatalog;
+		
+		public FromInfo(SocialSchemaCatalog socialSchemaCatalog) {
+			super();
+			this.socialSchemaCatalog = socialSchemaCatalog;
+		}
+
 		@Override @Nullable
 		public Person apply(@Nullable PersonInfo input) {
-			final Person person = SocialUtils.createTarget(Person.class);
+			final Person person = socialSchemaCatalog.createTarget(Person.class);
 			person.setTitle(input.getName());
 			person.setName(input.getName());
 			person.setId(input.getId());

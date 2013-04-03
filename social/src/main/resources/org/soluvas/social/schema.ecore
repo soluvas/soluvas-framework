@@ -23,6 +23,20 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="The loader will load two files for each catalog:&#xA;&#xA;1. &lt;catalogName>.StorySchemaCatalog.xmi, declaring the action/target/aggregation/story types, but not the structure.&#xA;2. &lt;catalogName>.ecore. This defines the structure of the types.&#xA;&#xA;The loader will resolve eClass names mentioned in the StorySchemaCatalog inside the related ecore file."/>
     </eAnnotations>
+    <eOperations name="createTarget">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Helper method to create a {@link Target}. Useful for {@link TargetFinder} implementation."/>
+      </eAnnotations>
+      <eGenericType eTypeParameter="#//SocialSchemaCatalog/createTarget/T"/>
+      <eTypeParameters name="T">
+        <eBounds eClassifier="#//Target"/>
+      </eTypeParameters>
+      <eParameters name="targetClass">
+        <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EJavaClass">
+          <eTypeArguments eTypeParameter="#//SocialSchemaCatalog/createTarget/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetTypes" upperBound="-1"
         eType="#//TargetType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsPrefix" lowerBound="1"

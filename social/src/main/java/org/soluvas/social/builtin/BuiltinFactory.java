@@ -5,6 +5,7 @@ package org.soluvas.social.builtin;
 import org.eclipse.emf.ecore.EFactory;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo;
+import org.soluvas.social.schema.SocialSchemaCatalog;
 
 /**
  * <!-- begin-user-doc -->
@@ -131,9 +132,9 @@ public interface BuiltinFactory extends EFactory {
 	 */
 	BuiltinPackage getBuiltinPackage();
 
-	Person createPerson(PersonInfo personInfo);
+	Person createPerson(SocialSchemaCatalog socialSchemaCatalog, PersonInfo personInfo);
 
-	Person createPerson(String id, String slug, String name, String photoId,
-			Gender gender);
+	Person createPerson(SocialSchemaCatalog socialSchemaCatalog, String id, String slug, String name,
+			String photoId, Gender gender);
 
 } //BuiltinFactory

@@ -6,9 +6,11 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -369,6 +371,17 @@ public class SchemaPackageImpl extends EPackageImpl implements SchemaPackage {
 		initEReference(getSocialSchemaCatalog_EPackage(), theEcorePackage.getEPackage(), null, "ePackage", null, 0, 1, SocialSchemaCatalog.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSocialSchemaCatalog_EFactory(), theEcorePackage.getEFactory(), null, "eFactory", null, 0, 1, SocialSchemaCatalog.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		EOperation op = addEOperation(socialSchemaCatalogEClass, null, "createTarget", 0, 1, IS_UNIQUE, IS_ORDERED);
+		ETypeParameter t1 = addETypeParameter(op, "T");
+		g1 = createEGenericType(this.getTarget());
+		t1.getEBounds().add(g1);
+		g1 = createEGenericType(theEcorePackage.getEJavaClass());
+		g2 = createEGenericType(t1);
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "targetClass", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(t1);
+		initEOperation(op, g1);
+
 		initEClass(targetTypeAddedEClass, TargetTypeAdded.class, "TargetTypeAdded", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTargetTypeAdded_TargetTypes(), this.getTargetType(), null, "targetTypes", null, 0, -1, TargetTypeAdded.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -405,6 +418,12 @@ public class SchemaPackageImpl extends EPackageImpl implements SchemaPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "The loader will load two files for each catalog:\n\n1. <catalogName>.StorySchemaCatalog.xmi, declaring the action/target/aggregation/story types, but not the structure.\n2. <catalogName>.ecore. This defines the structure of the types.\n\nThe loader will resolve eClass names mentioned in the StorySchemaCatalog inside the related ecore file."
+		   });		
+		addAnnotation
+		  (socialSchemaCatalogEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Helper method to create a {@link Target}. Useful for {@link TargetFinder} implementation."
 		   });		
 		addAnnotation
 		  (getSocialSchemaCatalog_NsPrefix(), 

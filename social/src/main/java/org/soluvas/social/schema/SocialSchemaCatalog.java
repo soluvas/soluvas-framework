@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.ResourceAware;
+import org.soluvas.social.Target;
 
 /**
  * <!-- begin-user-doc -->
@@ -207,5 +208,16 @@ public interface SocialSchemaCatalog extends ResourceAware, BundleAware {
 	 * @generated
 	 */
 	void setEFactory(EFactory value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Helper method to create a {@link Target}. Useful for {@link TargetFinder} implementation.
+	 * <!-- end-model-doc -->
+	 * @model TBounds="org.soluvas.social.schema.Target"
+	 * @generated
+	 */
+	<T extends Target> T createTarget(Class<T> targetClass);
 
 } // SocialSchemaCatalog

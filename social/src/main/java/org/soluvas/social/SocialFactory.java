@@ -7,6 +7,7 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.social.builtin.ExternalProfile;
 import org.soluvas.social.builtin.Person;
+import org.soluvas.social.schema.SocialSchemaCatalog;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,9 +35,9 @@ public interface SocialFactory extends EFactory {
 	 */
 	SocialPackage getSocialPackage();
 
-	Person createPerson(PersonInfo personInfo);
+	Person createPerson(SocialSchemaCatalog socialSchemaCatalog, PersonInfo personInfo);
 
-	Person createPerson(String id, String slug, String name, String photoId,
-			Gender gender);
+	Person createPerson(SocialSchemaCatalog socialSchemaCatalog, String id, String slug, String name,
+			String photoId, Gender gender);
 
 } //SocialFactory

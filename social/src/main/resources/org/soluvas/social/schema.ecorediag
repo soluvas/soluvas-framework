@@ -234,6 +234,10 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_iHgaVJwtEeKRjqQ3bT1JZw"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_iHgaVZwtEeKRjqQ3bT1JZw" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_gJkvMJxHEeK6apxSFbagsA" type="2002">
+        <element xmi:type="ecore:EOperation" href="schema.ecore#//SocialSchemaCatalog/createTarget"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_gJkvMZxHEeK6apxSFbagsA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_iHgaVpwtEeKRjqQ3bT1JZw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_iHgaV5wtEeKRjqQ3bT1JZw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_iHgaWJwtEeKRjqQ3bT1JZw"/>

@@ -9,16 +9,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.soluvas.social.*;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.social.SocialFactory;
 import org.soluvas.social.SocialPackage;
-import org.soluvas.social.builtin.ExternalProfile;
 import org.soluvas.social.builtin.Person;
-import org.soluvas.social.builtin.impl.ExternalProfileImpl;
-import org.soluvas.social.builtin.impl.PersonImpl;
+import org.soluvas.social.schema.SocialSchemaCatalog;
 
 /**
  * <!-- begin-user-doc -->
@@ -91,16 +88,16 @@ public class SocialFactoryImpl extends EFactoryImpl implements SocialFactory {
 	}
 
 	@Override
-	public Person createPerson(@Nonnull final PersonInfo personInfo) {
-		return new Person.FromInfo().apply(personInfo);
+	public Person createPerson(SocialSchemaCatalog socialSchemaCatalog, @Nonnull final PersonInfo personInfo) {
+		return new Person.FromInfo(socialSchemaCatalog).apply(personInfo);
 	}
 
 	@Override
-	public Person createPerson(@Nonnull final String id, @Nonnull final String slug, @Nonnull final String name,
-			@Nonnull final String photoId, @Nonnull final Gender gender) {
+	public Person createPerson(SocialSchemaCatalog socialSchemaCatalog, @Nonnull final String id, @Nonnull final String slug,
+			@Nonnull final String name, @Nonnull final String photoId, @Nonnull final Gender gender) {
 		final PersonInfo personInfo = CommonsFactory.eINSTANCE.createPersonInfo(
 				id, slug, name, photoId, gender);
-		return createPerson(personInfo);
+		return createPerson(socialSchemaCatalog, personInfo);
 	}
 
 } //SocialFactoryImpl

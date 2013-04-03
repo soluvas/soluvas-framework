@@ -4,32 +4,36 @@ package org.soluvas.social.schema.impl;
 
 import java.net.URL;
 import java.util.Collection;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import javax.annotation.Nullable;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.osgi.framework.Bundle;
-
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.ResourceType;
-
+import org.soluvas.social.SocialException;
+import org.soluvas.social.Target;
 import org.soluvas.social.schema.SchemaPackage;
 import org.soluvas.social.schema.SocialSchemaCatalog;
 import org.soluvas.social.schema.TargetType;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /**
  * <!-- begin-user-doc -->
@@ -269,6 +273,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResourceType getResourceType() {
 		return resourceType;
 	}
@@ -278,6 +283,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceType(ResourceType newResourceType) {
 		ResourceType oldResourceType = resourceType;
 		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
@@ -290,6 +296,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceUri() {
 		return resourceUri;
 	}
@@ -299,6 +306,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceUri(String newResourceUri) {
 		String oldResourceUri = resourceUri;
 		resourceUri = newResourceUri;
@@ -311,6 +319,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceName() {
 		return resourceName;
 	}
@@ -320,6 +329,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceName(String newResourceName) {
 		String oldResourceName = resourceName;
 		resourceName = newResourceName;
@@ -332,6 +342,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Bundle getBundle() {
 		return bundle;
 	}
@@ -341,6 +352,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBundle(Bundle newBundle) {
 		Bundle oldBundle = bundle;
 		bundle = newBundle;
@@ -353,6 +365,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TargetType> getTargetTypes() {
 		if (targetTypes == null) {
 			targetTypes = new EObjectContainmentEList<TargetType>(TargetType.class, this, SchemaPackage.SOCIAL_SCHEMA_CATALOG__TARGET_TYPES);
@@ -365,6 +378,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNsPrefix() {
 		return nsPrefix;
 	}
@@ -374,6 +388,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNsPrefix(String newNsPrefix) {
 		String oldNsPrefix = nsPrefix;
 		nsPrefix = newNsPrefix;
@@ -386,6 +401,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getGeneratedPackageName() {
 		return generatedPackageName;
 	}
@@ -395,6 +411,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGeneratedPackageName(String newGeneratedPackageName) {
 		String oldGeneratedPackageName = generatedPackageName;
 		generatedPackageName = newGeneratedPackageName;
@@ -407,6 +424,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public URL getXmiUrl() {
 		return xmiUrl;
 	}
@@ -416,6 +434,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setXmiUrl(URL newXmiUrl) {
 		URL oldXmiUrl = xmiUrl;
 		xmiUrl = newXmiUrl;
@@ -428,6 +447,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public URL getEcoreUrl() {
 		return ecoreUrl;
 	}
@@ -437,6 +457,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEcoreUrl(URL newEcoreUrl) {
 		URL oldEcoreUrl = ecoreUrl;
 		ecoreUrl = newEcoreUrl;
@@ -449,6 +470,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EPackage getEPackage() {
 		if (ePackage != null && ePackage.eIsProxy()) {
 			InternalEObject oldEPackage = (InternalEObject)ePackage;
@@ -475,6 +497,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEPackage(EPackage newEPackage) {
 		EPackage oldEPackage = ePackage;
 		ePackage = newEPackage;
@@ -487,6 +510,7 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EFactory getEFactory() {
 		if (eFactory != null && eFactory.eIsProxy()) {
 			InternalEObject oldEFactory = (InternalEObject)eFactory;
@@ -513,11 +537,40 @@ public class SocialSchemaCatalogImpl extends EObjectImpl implements SocialSchema
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEFactory(EFactory newEFactory) {
 		EFactory oldEFactory = eFactory;
 		eFactory = newEFactory;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SOCIAL_SCHEMA_CATALOG__EFACTORY, oldEFactory, eFactory));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public <T extends Target> T createTarget(final Class<T> targetClass) {
+		try {
+			final TargetType targetType = Iterables.find(getTargetTypes(),
+					new Predicate<TargetType>() {
+				@Override
+				public boolean apply(@Nullable final TargetType input) {
+					return targetClass.equals( input.getJavaClass() );
+				}
+			});
+			return (T) targetType.create();
+		} catch (final NoSuchElementException e) {
+			final Function<TargetType, String> targetTypeQName = new Function<TargetType, String>() {
+				@Override @Nullable
+				public String apply(@Nullable TargetType input) {
+					return input.getJavaClass().getName();
+				}
+			};
+			final List<String> supportedTargetTypeQNames = Lists.transform(getTargetTypes(), targetTypeQName);
+			throw new SocialException(String.format("Cannot find target type %s, %s supported types are: %s",
+					targetClass.getName(), supportedTargetTypeQNames.size(), supportedTargetTypeQNames), e);
+		}
 	}
 
 	/**

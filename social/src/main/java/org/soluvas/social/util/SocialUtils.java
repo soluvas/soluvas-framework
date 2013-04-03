@@ -11,6 +11,8 @@ import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.soluvas.social.SocialException;
 import org.soluvas.social.Target;
+import org.soluvas.social.TargetFinder;
+import org.soluvas.social.builtin.impl.PersonTargetFinder;
 import org.soluvas.social.schema.SocialSchemaCatalog;
 import org.soluvas.social.schema.TargetType;
 
@@ -31,7 +33,9 @@ public class SocialUtils {
 	 * @param nsPrefix
 	 * @param name
 	 * @return
+	 * @deprecated Use {@link SocialSchemaCatalog#createTarget(Class)}.
 	 */
+	@Deprecated
 	public static <T extends Target> T createTarget(@Nonnull final Class<T> targetClass) {
 		final BundleContext bundleContext = FrameworkUtil.getBundle(SocialUtils.class).getBundleContext();
 		final ServiceReference<SocialSchemaCatalog> socialSchemaCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(SocialSchemaCatalog.class),
@@ -68,8 +72,9 @@ public class SocialUtils {
 	 * @param nsPrefix
 	 * @param name
 	 * @return
+	 * @deprecated No longer used. See {@link TargetFinder} implementation such as {@link PersonTargetFinder} to
+	 * see how to implement.
 	 */
-	@SuppressWarnings("unchecked")
 	@Deprecated
 	public static <T extends Target> T createTarget(@Nonnull final String nsPrefix,
 			@Nonnull final String name) {
