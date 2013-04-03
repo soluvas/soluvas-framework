@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreEMap;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
@@ -64,41 +65,50 @@ public class SerializableEMap<K, V> extends EcoreEMap<K, V> implements Serializa
 		private Object readResolve() {
 			final String entryEPackageNsUri = Preconditions.checkNotNull(this.entryEPackageNsUri,
 					"entryEPackageNsUri is null, was not properly serialized");
-			
+			final String entryEClassName = Preconditions.checkNotNull(this.entryEClassName,
+					"entryEClassName is null, was not properly serialized");
 			final EClass entryEClass;
 			
 			// OSGi style EPackage resolution, workaround for
 			// weird global EPackage.Registry behavior during deserialization
-			final BundleContext bundleContext = FrameworkUtil.getBundle(SerializableEMap.class).getBundleContext();
-			try {
-				/* Code below won't work:
-				 * 
-				 * java.lang.NullPointerException: Cannot find EPackage http://www.bippo.co.id/schema/product/1.0 in global EPackage Registry containing 0 entries: []
-				 *      at com.google.common.base.Preconditions.checkNotNull(Preconditions.java:235)
-				 *      at org.soluvas.commons.SerializableEMap$SerializationProxy.readResolve(SerializableEMap.java:70)
-				 *      at java.lang.reflect.Method.invoke(Method.java:601)
-				 *      at java.io.ObjectStreamClass.invokeReadResolve(ObjectStreamClass.java:1091)
-				 *      at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:1786)
-				 *      at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1347)
-				 *      at java.io.ObjectInputStream.defaultReadFields(ObjectInputStream.java:1970)
-				 */
+			final Bundle bundle = FrameworkUtil.getBundle(SerializableEMap.class);
+			if (bundle != null) {
+				final BundleContext bundleContext = bundle.getBundleContext();
+				try {
+					/* Code below won't work on OSGi:
+					 * 
+					 * java.lang.NullPointerException: Cannot find EPackage http://www.bippo.co.id/schema/product/1.0 in global EPackage Registry containing 0 entries: []
+					 *      at com.google.common.base.Preconditions.checkNotNull(Preconditions.java:235)
+					 *      at org.soluvas.commons.SerializableEMap$SerializationProxy.readResolve(SerializableEMap.java:70)
+					 *      at java.lang.reflect.Method.invoke(Method.java:601)
+					 *      at java.io.ObjectStreamClass.invokeReadResolve(ObjectStreamClass.java:1091)
+					 *      at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:1786)
+					 *      at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1347)
+					 *      at java.io.ObjectInputStream.defaultReadFields(ObjectInputStream.java:1970)
+					 */
 //				final EPackage entryEPackage = Preconditions.checkNotNull(EPackage.Registry.INSTANCE.getEPackage(entryEPackageNsUri),
 //						"Cannot find EPackage %s in global EPackage Registry containing %s entries: %s",
 //						entryEPackageNsUri, EPackage.Registry.INSTANCE.size(), EPackage.Registry.INSTANCE.keySet());
-				
-				final ServiceReference<EPackage> entryEPackageRef = bundleContext.getServiceReferences(EPackage.class, "(nsURI=" + entryEPackageNsUri + ")").iterator().next();
-				final EPackage entryEPackage = bundleContext.getService(entryEPackageRef);
-				try {
-					final String entryEClassName = Preconditions.checkNotNull(this.entryEClassName,
-							"entryEClassName is null, was not properly serialized");
-					entryEClass = (EClass) Preconditions.checkNotNull(entryEPackage.getEClassifier(entryEClassName),
-							"Cannot find EClass %s in EPackage %s (%s)", entryEClassName, entryEPackage.getName(),
-							entryEPackageNsUri);
-				} finally {
-					bundleContext.ungetService(entryEPackageRef);
+					
+					final ServiceReference<EPackage> entryEPackageRef = bundleContext.getServiceReferences(EPackage.class, "(nsURI=" + entryEPackageNsUri + ")").iterator().next();
+					final EPackage entryEPackage = bundleContext.getService(entryEPackageRef);
+					try {
+						entryEClass = (EClass) Preconditions.checkNotNull(entryEPackage.getEClassifier(entryEClassName),
+								"Cannot find EClass %s in EPackage %s (%s)", entryEClassName, entryEPackage.getName(),
+								entryEPackageNsUri);
+					} finally {
+						bundleContext.ungetService(entryEPackageRef);
+					}
+				} catch (Exception e) {
+					throw new CommonsException(e, "Cannot find EPackage %s in OSGi EPackage Registry", entryEPackageNsUri);
 				}
-			} catch (Exception e) {
-				throw new CommonsException(e, "Cannot find EPackage %s in OSGi EPackage Registry", entryEPackageNsUri);
+			} else {
+				final EPackage entryEPackage = Preconditions.checkNotNull(EPackage.Registry.INSTANCE.getEPackage(entryEPackageNsUri),
+					"Cannot find EPackage %s in global EPackage Registry containing %s entries: %s",
+					entryEPackageNsUri, EPackage.Registry.INSTANCE.size(), EPackage.Registry.INSTANCE.keySet());
+				entryEClass = (EClass) Preconditions.checkNotNull(entryEPackage.getEClassifier(entryEClassName),
+						"Cannot find EClass %s in EPackage %s (%s)", entryEClassName, entryEPackage.getName(),
+						entryEPackageNsUri);
 			}
 
 //			final BasicEMap<K, V> delegateEMap = new BasicEMap<K, V>(map);
