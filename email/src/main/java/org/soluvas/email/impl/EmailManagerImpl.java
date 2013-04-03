@@ -121,7 +121,7 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	public <T extends Page> T createPage(Class<T> pageClass) {
 		try {
 			final Layout layout = getDefaultLayout();
-			final T page = EmailUtils.createPage(pageClass, layout);
+			final T page = EmailUtils.createPage(pageClass, layout, emailCatalog);
 			injectDefaultScope(page);
 			final Sender sender = createSender(page.getPageType().getSenderTypeName());
 			sender.expand();
@@ -143,7 +143,7 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 		final Matcher qnameMatcher = Pattern.compile("(.+):(.+)").matcher(senderQName);
 		final String senderNsPrefix = qnameMatcher.matches() ? qnameMatcher.group(1) : "builtin";
 		final String senderName = qnameMatcher.matches() ? qnameMatcher.group(2) : senderQName;
-		final Sender sender = EmailUtils.createSender(senderNsPrefix, senderName);
+		final Sender sender = EmailUtils.createSender(senderNsPrefix, senderName, emailCatalog);
 		injectDefaultScope(sender);
 		return sender;
 	}

@@ -6,21 +6,22 @@ import java.util.Collection;
 import java.util.Set;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.osgi.framework.ServiceReference;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.NameUtils;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.SenderType;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableSet;
@@ -29,18 +30,27 @@ import com.google.common.collect.ImmutableSet;
  * List registered {@link SenderType}s.
  * @author ceefour
  */
+@Service @Lazy
 @Command(scope="email", name="senderls", description="List registered SenderTypes.")
 public class EmailSenderLsCommand extends OsgiCommandSupport {
+	
+	private final EmailCatalog emailCatalog;
+	
+	@Inject
+	public EmailSenderLsCommand(EmailCatalog emailCatalog) {
+		super();
+		this.emailCatalog = emailCatalog;
+	}
 	
 	/* (non-Javadoc)
 	 * @see org.apache.karaf.shell.console.AbstractSender#doExecute()
 	 */
 	@Override
 	protected Object doExecute() throws Exception {
-		final ServiceReference<EmailCatalog> emailCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(EmailCatalog.class),
-				"Cannot get %s service reference", EmailCatalog.class.getName());
-		final EmailCatalog emailCatalog = Preconditions.checkNotNull(getService(EmailCatalog.class, emailCatalogRef),
-				"Cannot get %s service", EmailCatalog.class.getName());
+//		final ServiceReference<EmailCatalog> emailCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(EmailCatalog.class),
+//				"Cannot get %s service reference", EmailCatalog.class.getName());
+//		final EmailCatalog emailCatalog = Preconditions.checkNotNull(getService(EmailCatalog.class, emailCatalogRef),
+//				"Cannot get %s service", EmailCatalog.class.getName());
 		System.out.println(ansi().render("@|negative_on %3s|%-20s|%-10s|%-25s|%-25s|%-20s|%-20s|@",
 				"№", "Sender", "Catalog", "From", "Email", "Features", "Bundle"));
 		int i = 0;

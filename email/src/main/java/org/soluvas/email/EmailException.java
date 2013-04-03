@@ -34,4 +34,8 @@ public class EmailException extends RuntimeException {
 		super(message, cause);
 	}
 
+	public EmailException(Throwable cause, String message, Object... args) {
+		super(String.format(message, args), cause);
+	}
+
 }

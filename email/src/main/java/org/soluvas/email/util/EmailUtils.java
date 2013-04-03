@@ -19,6 +19,7 @@ import org.soluvas.email.PageType;
 import org.soluvas.email.Recipient;
 import org.soluvas.email.Sender;
 import org.soluvas.email.SenderType;
+import org.soluvas.email.impl.EmailManagerImpl;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -36,8 +37,9 @@ public class EmailUtils {
 	 * @param nsPrefix
 	 * @param name
 	 * @return
+	 * @deprecated Only used by OSGi code. Nobody uses this anyway. See {@link EmailManagerImpl#getDefaultLayout()}.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") @Deprecated
 	public static <T extends Layout> T createLayout(@Nonnull final Class<T> targetClass) {
 		final BundleContext bundleContext = FrameworkUtil.getBundle(EmailUtils.class).getBundleContext();
 		final ServiceReference<EmailCatalog> emailCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(EmailCatalog.class),
@@ -74,8 +76,9 @@ public class EmailUtils {
 	 * @param nsPrefix
 	 * @param name
 	 * @return
+	 * @deprecated Only used by OSGi code.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") @Deprecated
 	public static <T extends Page> T createPage(@Nonnull final Class<T> targetClass, @Nonnull final Layout layout) {
 		final BundleContext bundleContext = FrameworkUtil.getBundle(EmailUtils.class).getBundleContext();
 		final ServiceReference<EmailCatalog> emailCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(EmailCatalog.class),
@@ -83,6 +86,23 @@ public class EmailUtils {
 		final EmailCatalog emailCatalog = Preconditions.checkNotNull(
 				bundleContext.getService(emailCatalogRef),
 				"Cannot get %s service", EmailCatalog.class.getName());
+		try {
+			return createPage(targetClass, layout, emailCatalog);
+		} finally {
+			bundleContext.ungetService(emailCatalogRef);
+		}
+	}
+
+	/**
+	 * @param targetClass
+	 * @param layout
+	 * @param bundleContext
+	 * @param emailCatalogRef
+	 * @param emailCatalog
+	 * @return
+	 */
+	public static <T extends Page> T createPage(final Class<T> targetClass,
+			final Layout layout, final EmailCatalog emailCatalog) {
 		try {
 			final PageType type = Iterables.find(emailCatalog.getPageTypes(),
 					new Predicate<PageType>() {
@@ -102,8 +122,6 @@ public class EmailUtils {
 			final List<String> supportedPageTypeQNames = Lists.transform(emailCatalog.getPageTypes(), targetTypeQName);
 			throw new EmailException(String.format("Cannot find page type %s, %s supported types are: %s",
 					targetClass.getName(), supportedPageTypeQNames.size(), supportedPageTypeQNames), e);
-		} finally {
-			bundleContext.ungetService(emailCatalogRef);
 		}
 	}
 
@@ -112,7 +130,9 @@ public class EmailUtils {
 	 * @param nsPrefix
 	 * @param name
 	 * @return
+	 * @deprecated Only used by OSGi.
 	 */
+	@Deprecated
 	public static Sender createSender(@Nonnull final String nsPrefix, @Nonnull final String name) {
 		final BundleContext bundleContext = FrameworkUtil.getBundle(EmailUtils.class).getBundleContext();
 		final ServiceReference<EmailCatalog> emailCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(EmailCatalog.class),
@@ -120,6 +140,21 @@ public class EmailUtils {
 		final EmailCatalog emailCatalog = Preconditions.checkNotNull(
 				bundleContext.getService(emailCatalogRef),
 				"Cannot get %s service", EmailCatalog.class.getName());
+		try {
+			return createSender(nsPrefix, name, emailCatalog);
+		} finally {
+			bundleContext.ungetService(emailCatalogRef);
+		}
+	}
+
+	/**
+	 * @param nsPrefix
+	 * @param name
+	 * @param emailCatalog
+	 * @return
+	 */
+	public static Sender createSender(final String nsPrefix, final String name,
+			final EmailCatalog emailCatalog) {
 		try {
 			final SenderType type = Iterables.find(emailCatalog.getSenderTypes(),
 					new Predicate<SenderType>() {
@@ -139,8 +174,6 @@ public class EmailUtils {
 			final List<String> supportedSenderTypeQNames = Lists.transform(emailCatalog.getSenderTypes(), targetTypeQName);
 			throw new EmailException(String.format("Cannot find sender type %s:%s, %s supported types are: %s",
 					nsPrefix, name, supportedSenderTypeQNames.size(), supportedSenderTypeQNames), e);
-		} finally {
-			bundleContext.ungetService(emailCatalogRef);
 		}
 	}
 

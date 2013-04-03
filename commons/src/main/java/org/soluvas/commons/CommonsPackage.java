@@ -2353,6 +2353,17 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>URL</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.net.URL
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getURL()
+	 * @generated
+	 */
+	int URL = 77;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3909,6 +3920,17 @@ public interface CommonsPackage extends EPackage {
 	EDataType getClassLoader();
 
 	/**
+	 * Returns the meta object for data type '{@link java.net.URL <em>URL</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>URL</em>'.
+	 * @see java.net.URL
+	 * @model instanceClass="java.net.URL" serializeable="false"
+	 * @generated
+	 */
+	EDataType getURL();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5251,6 +5273,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType CLASS_LOADER = eINSTANCE.getClassLoader();
+
+		/**
+		 * The meta object literal for the '<em>URL</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.net.URL
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getURL()
+		 * @generated
+		 */
+		EDataType URL = eINSTANCE.getURL();
 
 	}
 

@@ -6,22 +6,23 @@ import java.util.Collection;
 import java.util.Set;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.ServiceReference;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.NameUtils;
+import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.PageType;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableSet;
@@ -30,18 +31,27 @@ import com.google.common.collect.ImmutableSet;
  * List registered {@link PageType}s.
  * @author ceefour
  */
+@Service @Lazy
 @Command(scope="email", name="pagels", description="List registered PageTypes.")
-public class EmailPageLsCommand extends OsgiCommandSupport {
+public class EmailPageLsCommand extends ExtCommandSupport {
 	
+	private final EmailCatalog emailCatalog;
+	
+	@Inject
+	public EmailPageLsCommand(EmailCatalog emailCatalog) {
+		super();
+		this.emailCatalog = emailCatalog;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.apache.karaf.shell.console.AbstractPage#doExecute()
 	 */
 	@Override
 	protected Object doExecute() throws Exception {
-		final ServiceReference<EmailCatalog> emailCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(EmailCatalog.class),
-				"Cannot get %s service reference", EmailCatalog.class.getName());
-		final EmailCatalog emailCatalog = Preconditions.checkNotNull(getService(EmailCatalog.class, emailCatalogRef),
-				"Cannot get %s service", EmailCatalog.class.getName());
+//		final ServiceReference<EmailCatalog> emailCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(EmailCatalog.class),
+//				"Cannot get %s service reference", EmailCatalog.class.getName());
+//		final EmailCatalog emailCatalog = Preconditions.checkNotNull(getService(EmailCatalog.class, emailCatalogRef),
+//				"Cannot get %s service", EmailCatalog.class.getName());
 		System.out.println(ansi().render("@|negative_on %3s|%-22s|%-10s|%-25s|%-20s|%-20s|%-20s|@",
 				"№", "Page", "Catalog", "Features", "Subject", "Template", "Bundle"));
 		int i = 0;

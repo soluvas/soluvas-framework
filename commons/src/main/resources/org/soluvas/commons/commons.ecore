@@ -829,4 +829,6 @@
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="ClassLoader" instanceClassName="java.lang.ClassLoader"
       serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="URL" instanceClassName="java.net.URL"
+      serializable="false"/>
 </ecore:EPackage>

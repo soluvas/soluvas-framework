@@ -2,6 +2,7 @@
  */
 package org.soluvas.email.impl;
 
+import java.net.URL;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -10,6 +11,8 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -35,6 +38,10 @@ import org.soluvas.email.SenderType;
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getPageTypes <em>Page Types</em>}</li>
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getLayoutTypes <em>Layout Types</em>}</li>
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getSenderTypes <em>Sender Types</em>}</li>
+ *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getGeneratedPackageName <em>Generated Package Name</em>}</li>
+ *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getEcoreUrl <em>Ecore Url</em>}</li>
+ *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getEPackage <em>EPackage</em>}</li>
+ *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getEFactory <em>EFactory</em>}</li>
  * </ul>
  * </p>
  *
@@ -90,6 +97,66 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 	 * @ordered
 	 */
 	protected EList<SenderType> senderTypes;
+
+	/**
+	 * The default value of the '{@link #getGeneratedPackageName() <em>Generated Package Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratedPackageName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String GENERATED_PACKAGE_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGeneratedPackageName() <em>Generated Package Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratedPackageName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String generatedPackageName = GENERATED_PACKAGE_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getEcoreUrl() <em>Ecore Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEcoreUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final URL ECORE_URL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getEcoreUrl() <em>Ecore Url</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEcoreUrl()
+	 * @generated
+	 * @ordered
+	 */
+	protected URL ecoreUrl = ECORE_URL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getEPackage() <em>EPackage</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEPackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected EPackage ePackage;
+
+	/**
+	 * The cached value of the '{@link #getEFactory() <em>EFactory</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEFactory()
+	 * @generated
+	 * @ordered
+	 */
+	protected EFactory eFactory;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -172,6 +239,124 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getGeneratedPackageName() {
+		return generatedPackageName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGeneratedPackageName(String newGeneratedPackageName) {
+		String oldGeneratedPackageName = generatedPackageName;
+		generatedPackageName = newGeneratedPackageName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.EMAIL_CATALOG__GENERATED_PACKAGE_NAME, oldGeneratedPackageName, generatedPackageName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public URL getEcoreUrl() {
+		return ecoreUrl;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEcoreUrl(URL newEcoreUrl) {
+		URL oldEcoreUrl = ecoreUrl;
+		ecoreUrl = newEcoreUrl;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.EMAIL_CATALOG__ECORE_URL, oldEcoreUrl, ecoreUrl));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EPackage getEPackage() {
+		if (ePackage != null && ePackage.eIsProxy()) {
+			InternalEObject oldEPackage = (InternalEObject)ePackage;
+			ePackage = (EPackage)eResolveProxy(oldEPackage);
+			if (ePackage != oldEPackage) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EmailPackage.EMAIL_CATALOG__EPACKAGE, oldEPackage, ePackage));
+			}
+		}
+		return ePackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EPackage basicGetEPackage() {
+		return ePackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEPackage(EPackage newEPackage) {
+		EPackage oldEPackage = ePackage;
+		ePackage = newEPackage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.EMAIL_CATALOG__EPACKAGE, oldEPackage, ePackage));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EFactory getEFactory() {
+		if (eFactory != null && eFactory.eIsProxy()) {
+			InternalEObject oldEFactory = (InternalEObject)eFactory;
+			eFactory = (EFactory)eResolveProxy(oldEFactory);
+			if (eFactory != oldEFactory) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EmailPackage.EMAIL_CATALOG__EFACTORY, oldEFactory, eFactory));
+			}
+		}
+		return eFactory;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EFactory basicGetEFactory() {
+		return eFactory;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEFactory(EFactory newEFactory) {
+		EFactory oldEFactory = eFactory;
+		eFactory = newEFactory;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.EMAIL_CATALOG__EFACTORY, oldEFactory, eFactory));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -201,6 +386,16 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 				return getLayoutTypes();
 			case EmailPackage.EMAIL_CATALOG__SENDER_TYPES:
 				return getSenderTypes();
+			case EmailPackage.EMAIL_CATALOG__GENERATED_PACKAGE_NAME:
+				return getGeneratedPackageName();
+			case EmailPackage.EMAIL_CATALOG__ECORE_URL:
+				return getEcoreUrl();
+			case EmailPackage.EMAIL_CATALOG__EPACKAGE:
+				if (resolve) return getEPackage();
+				return basicGetEPackage();
+			case EmailPackage.EMAIL_CATALOG__EFACTORY:
+				if (resolve) return getEFactory();
+				return basicGetEFactory();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -229,6 +424,18 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 				getSenderTypes().clear();
 				getSenderTypes().addAll((Collection<? extends SenderType>)newValue);
 				return;
+			case EmailPackage.EMAIL_CATALOG__GENERATED_PACKAGE_NAME:
+				setGeneratedPackageName((String)newValue);
+				return;
+			case EmailPackage.EMAIL_CATALOG__ECORE_URL:
+				setEcoreUrl((URL)newValue);
+				return;
+			case EmailPackage.EMAIL_CATALOG__EPACKAGE:
+				setEPackage((EPackage)newValue);
+				return;
+			case EmailPackage.EMAIL_CATALOG__EFACTORY:
+				setEFactory((EFactory)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -253,6 +460,18 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 			case EmailPackage.EMAIL_CATALOG__SENDER_TYPES:
 				getSenderTypes().clear();
 				return;
+			case EmailPackage.EMAIL_CATALOG__GENERATED_PACKAGE_NAME:
+				setGeneratedPackageName(GENERATED_PACKAGE_NAME_EDEFAULT);
+				return;
+			case EmailPackage.EMAIL_CATALOG__ECORE_URL:
+				setEcoreUrl(ECORE_URL_EDEFAULT);
+				return;
+			case EmailPackage.EMAIL_CATALOG__EPACKAGE:
+				setEPackage((EPackage)null);
+				return;
+			case EmailPackage.EMAIL_CATALOG__EFACTORY:
+				setEFactory((EFactory)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -273,6 +492,14 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 				return layoutTypes != null && !layoutTypes.isEmpty();
 			case EmailPackage.EMAIL_CATALOG__SENDER_TYPES:
 				return senderTypes != null && !senderTypes.isEmpty();
+			case EmailPackage.EMAIL_CATALOG__GENERATED_PACKAGE_NAME:
+				return GENERATED_PACKAGE_NAME_EDEFAULT == null ? generatedPackageName != null : !GENERATED_PACKAGE_NAME_EDEFAULT.equals(generatedPackageName);
+			case EmailPackage.EMAIL_CATALOG__ECORE_URL:
+				return ECORE_URL_EDEFAULT == null ? ecoreUrl != null : !ECORE_URL_EDEFAULT.equals(ecoreUrl);
+			case EmailPackage.EMAIL_CATALOG__EPACKAGE:
+				return ePackage != null;
+			case EmailPackage.EMAIL_CATALOG__EFACTORY:
+				return eFactory != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -289,6 +516,10 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (nsPrefix: ");
 		result.append(nsPrefix);
+		result.append(", generatedPackageName: ");
+		result.append(generatedPackageName);
+		result.append(", ecoreUrl: ");
+		result.append(ecoreUrl);
 		result.append(')');
 		return result.toString();
 	}

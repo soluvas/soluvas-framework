@@ -641,6 +641,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	private EDataType classLoaderEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType urlEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -2141,6 +2148,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getURL() {
+		return urlEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
@@ -2359,6 +2375,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		listenableFutureEDataType = createEDataType(LISTENABLE_FUTURE);
 		listeningExecutorServiceEDataType = createEDataType(LISTENING_EXECUTOR_SERVICE);
 		classLoaderEDataType = createEDataType(CLASS_LOADER);
+		urlEDataType = createEDataType(URL);
 	}
 
 	/**
@@ -2830,6 +2847,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(listenableFutureEDataType, ListenableFuture.class, "ListenableFuture", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(listeningExecutorServiceEDataType, ListeningExecutorService.class, "ListeningExecutorService", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(classLoaderEDataType, ClassLoader.class, "ClassLoader", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(urlEDataType, java.net.URL.class, "URL", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

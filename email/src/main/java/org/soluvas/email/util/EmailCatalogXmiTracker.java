@@ -1,10 +1,10 @@
 package org.soluvas.email.util;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +38,7 @@ import org.soluvas.email.PageType;
 import org.soluvas.email.SenderType;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Function;
@@ -80,9 +81,52 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 		this.eventBus = eventBus;
 	}
 	
-	public void add(Class<?> class1, String packageToScan) {
-		final List<EObject> objs = addingBundle(class1.getClassLoader(), packageToScan);
-		eObjects.put(packageToScan, objs);
+//	public void add(Class<?> class1, String packageToScan) {
+//		final List<EObject> objs = addingBundle(class1.getClassLoader(), packageToScan);
+//		eObjects.put(packageToScan, objs);
+//	}
+
+	/**
+	 * Scan using classpath.
+	 * @todo Scanning multiple classpaths for resources is slow, so static or hybrid
+	 * 		approach is preferable.
+	 * @param dataFolder TODO
+	 */
+	public void scan(ClassLoader classLoader, String dataFolder) {
+		final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
+		// Due to JDK limitation, scanning of root won't work in webapp classpath,
+		// at least the root folder must be specified before wildcard
+		final List<String> locationPatterns = ImmutableList.of("classpath*:org/**/*.EmailCatalog.xmi",
+				"classpath*:com/**/*.EmailCatalog.xmi", "classpath*:id/**/*.EmailCatalog.xmi",
+				"file:" + dataFolder + "/common/*.EmailCatalog.xmi");
+		log.trace("Scanning {} for {}", classLoader, locationPatterns);
+		try {
+			final List<Resource> allResources = new ArrayList<>();
+			for (String locationPattern : locationPatterns) {
+				final Resource[] resources = resolver.getResources(locationPattern);
+				allResources.addAll(ImmutableList.copyOf(resources));
+			}
+			log.info("Scanned {} returned {} resources: {}",
+					locationPatterns, allResources.size(), allResources);
+			final List<URL> xmiUrls = ImmutableList.copyOf(Lists.transform(
+					allResources, new Function<Resource, URL>() {
+				@Override @Nullable
+				public URL apply(@Nullable Resource input) {
+					try {
+						return input.getURL();
+					} catch (IOException e) {
+						throw new EmailException("Cannot get URL for " + input, e);
+					}
+				}
+			}));
+			for (URL xmiUrl : xmiUrls) {
+				final List<EObject> objs = extractObjects(ImmutableList.of(xmiUrl), null, classLoader);
+				eObjects.put(xmiUrl.toString(), objs);
+			}
+		} catch (IOException e) {
+			throw new EmailException(e, "Cannot scan %s for %s",
+					classLoader, locationPatterns);
+		}
 	}
 
 	@Override
@@ -97,16 +141,20 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 		if (entries == null)
 			return ImmutableList.of();
 		final List<URL> xmiFiles = ImmutableList.copyOf(Iterators.forEnumeration(entries));
-		return extractObjects(xmiFiles, bundle, null, bundle.getSymbolicName());
+		return extractObjects(xmiFiles, bundle, null);//, bundle.getSymbolicName());
 	}
 
 	private List<EObject> extractObjects(final List<URL> xmiFiles,
-			@Nullable final Bundle bundle, final ClassLoader classLoader, final String packageToScan) {
+			@Nullable final Bundle bundle, final ClassLoader classLoader) {
 		if (xmiFiles.isEmpty())
 			return ImmutableList.of();
 
+		final String resourceContainer = xmiFiles.toString();
+		
 		// ------------------ Ecore package files ------------
-		final ImmutableMap.Builder<URL, URL> xmiToEcoreMapBuilder = ImmutableMap.builder();
+		final List<EmailCatalog> catalogs = new ArrayList<>();
+		// map from .ecore URL -> generatedPackageName
+		final Map<URL, String> genPackageMap = new HashMap<>();
 		for (final URL xmiUrl : xmiFiles) {
 			final URL ecoreUrl;
 			try {
@@ -115,46 +163,50 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 			} catch (MalformedURLException e) {
 				throw new EmailException("Cannot get ecore URL from XMI URL " + xmiUrl, e);
 			}
-			xmiToEcoreMapBuilder.put(xmiUrl, ecoreUrl);
+			
+			// Load EmailCatalog XMI files so we can get the generatedPackageName
+			log.debug("Getting EmailCatalog XMI {} from {} in {}", suppliedClassName, xmiUrl, resourceContainer );
+			final XmiObjectLoader<EmailCatalog> loader;
+			if (bundle != null) {
+				loader = new XmiObjectLoader<EmailCatalog>(xmiEPackage, xmiUrl, bundle);
+			} else {
+				loader = new XmiObjectLoader<EmailCatalog>(xmiEPackage, xmiUrl, ResourceType.CLASSPATH);
+			}
+			final EmailCatalog emailCatalog = loader.get();
+			catalogs.add(emailCatalog);
+			
+			emailCatalog.setEcoreUrl(ecoreUrl);
+			
+			final String genPackage = Preconditions.checkNotNull(emailCatalog.getGeneratedPackageName(),
+					"generatedPackageName for %s cannot be null", xmiUrl);
+			genPackageMap.put(ecoreUrl, genPackage);
 		}
-		final Map<URL, URL> xmiToEcoreMap = xmiToEcoreMapBuilder.build();
 		
-		final String resourceContainer = bundle != null ? bundle.getSymbolicName() + " [" + bundle.getBundleId() + "]"
-				: packageToScan;
-
-		log.info("Scanning {} Ecore packages: {} from {}", xmiToEcoreMap.size(), xmiToEcoreMap.values(),
-				resourceContainer);
-		final ImmutableMap.Builder<URL, EPackage> ePackageMapBuilder = ImmutableMap.builder();
-		final ImmutableMap.Builder<URL, String> genPackageMapBuilder = ImmutableMap.builder();
-		final ImmutableMap.Builder<URL, EFactory> eFactoryMapBuilder = ImmutableMap.builder();
+		log.info("Scanning {} Ecore packages from {}", catalogs.size(), resourceContainer);
 		// Must do ImmutableList.copyOf(), so the epackageMapBuilder gets used
-		final List<Map<String, EClass>> ecoreFileObjs = ImmutableList.copyOf(Collections2.transform(xmiToEcoreMap.values(), new Function<URL, Map<String, EClass>>() {
+		final List<Map<String, EClass>> ecoreFileObjs = ImmutableList.copyOf(Collections2.transform(
+				catalogs, new Function<EmailCatalog, Map<String, EClass>>() {
 			@SuppressWarnings("unchecked")
 			@Override @Nullable
-			public Map<String, EClass> apply(@Nullable URL url) {
-				log.debug("Getting {} from {} in {}", suppliedClassName, url, resourceContainer);
+			public Map<String, EClass> apply(@Nullable EmailCatalog catalog) {
+				final URL ecoreUrl = catalog.getEcoreUrl();
+				log.debug("Getting {} from {} in {}", suppliedClassName, ecoreUrl, resourceContainer);
 				XmiObjectLoader<EPackage> loader;
 				if (bundle != null) {
-					loader = new XmiObjectLoader<EPackage>(EcorePackage.eINSTANCE, url,
+					loader = new XmiObjectLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl,
 							bundle);
 				} else {
-					loader = new XmiObjectLoader<EPackage>(EcorePackage.eINSTANCE, url,
+					loader = new XmiObjectLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl,
 							ResourceType.CLASSPATH);
 				}
-//				} catch (Exception e1) {
-//					log.warn("Cannot load " + url, e1);
-//					return ImmutableMap.of();
-//				}
 				final EPackage ecorePackage = loader.get();
 				log.debug("Loaded {} EPackage {} ({}={}) from {} in {}", suppliedClassName, 
 						ecorePackage.getName(), ecorePackage.getNsPrefix(), ecorePackage.getNsURI(),
-						url, resourceContainer);
-				ePackageMapBuilder.put(url, ecorePackage);
+						ecoreUrl, resourceContainer);
+				catalog.setEPackage(ecorePackage);
 				
 				// Determine generated package name. "email" is a special package suffix
-				final String genPackage = packageToScan +
-						("email".equals(ecorePackage.getName()) && packageToScan.endsWith(".email") ? "" : "." + ecorePackage.getName());
-				genPackageMapBuilder.put(url, genPackage);
+				final String genPackage = genPackageMap.get(ecoreUrl);
 				
 				// Instantiate EFactory
 				final String eFactoryClassName = genPackage + "." +
@@ -170,12 +222,12 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					final EFactory eFactory = (EFactory) eInstanceField.get(eFactoryClass);
 					log.debug("Loaded EFactory {} for EPackage {} ({}={}) from {} in {}",
 							eFactory, ecorePackage.getName(), ecorePackage.getNsPrefix(), ecorePackage.getNsURI(),
-							url, resourceContainer);
-					eFactoryMapBuilder.put(url, eFactory);
+							ecoreUrl, resourceContainer);
+					catalog.setEFactory(eFactory);
 				} catch (Exception e) {
 					throw new EmailException(String.format("Cannot load EFactory class %s for EPackage %s (%s=%s) from %s in %s",
 							eFactoryClassName, ecorePackage.getName(), ecorePackage.getNsPrefix(), ecorePackage.getNsURI(),
-							url, resourceContainer), e);
+							ecoreUrl, resourceContainer), e);
 				}
 				
 				final ImmutableMap.Builder<String, EClass> eClassMapBuilder = ImmutableMap.builder();
@@ -187,125 +239,104 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					log.debug("Mapping EClass {}.{} as {}:{} from {} in {}",
 							ecorePackage.getName(), eClass.getName(),
 							ecorePackage.getNsPrefix(), eClass.getName(),
-							url, resourceContainer);
+							ecoreUrl, resourceContainer);
 					eClassMapBuilder.put(ecorePackage.getNsPrefix() + ":" + eClass.getName(), eClass);
 				}
 				
 				final Map<String, EClass> eClassMap = eClassMapBuilder.build();
 				log.debug("Loaded {} EClasses from EmailSchema ecore package {} in {}",
-						eClassMap.size(), url, resourceContainer );
+						eClassMap.size(), ecoreUrl, resourceContainer );
 				return eClassMap;
 			}
 		}));
-		final Map<URL, EPackage> ePackageMap = ePackageMapBuilder.build();
-		final Map<URL, String> genPackageMap = genPackageMapBuilder.build();
-		final Map<URL, EFactory> eFactoryMap = eFactoryMapBuilder.build();
+//		final Map<URL, EPackage> ePackageMap = ePackageMapBuilder.build();
+//		final Map<URL, EFactory> eFactoryMap = eFactoryMapBuilder.build();
 		final ImmutableMap.Builder<String, EClass> eClassMapBuilder = ImmutableMap.builder();
 		for (final Map<String, EClass> ecoreFileObj : ecoreFileObjs) {
 			eClassMapBuilder.putAll(ecoreFileObj);
 		}
 		final Map<String, EClass> eClassMap = eClassMapBuilder.build();
-		log.info("Loaded {} EPackages, {} EFactory-es, and {} EClasses from {} EmailSchema ecore packages in {}: {}",
-				ePackageMap.size(), eFactoryMap.size(), eClassMap.size(), ecoreFileObjs.size(), resourceContainer,
-				eClassMap.keySet() );
+		log.info("Loaded {} EClasses from {} EmailSchema ecore packages in {}: {}",
+				eClassMap.size(), ecoreFileObjs.size(), resourceContainer, eClassMap.keySet() );
 
 		// ------------------ EmailCatalog XMI files ------------
-		final List<EmailCatalog> catalogs = ImmutableList.copyOf(Lists.transform(xmiFiles, new Function<URL, EmailCatalog>() {
-			@Override @Nullable
-			public EmailCatalog apply(@Nullable URL url) {
-				final URL ecoreUrl = xmiToEcoreMap.get(url);
-				Preconditions.checkNotNull(xmiEPackage, "Cannot find companion Ecore for XMI %s. %s map entries: %s",
-						ecoreUrl, xmiToEcoreMap.size(), xmiToEcoreMap);
-				final EPackage ePackage = ePackageMap.get(ecoreUrl);
-				Preconditions.checkNotNull(ePackage, "Cannot find companion EPackage for XMI %s, Ecore %s. %s map entries: %s",
-						url, ecoreUrl, ePackageMap.size(), ePackageMap);
-				final String genPackage = genPackageMap.get(ecoreUrl);
-				Preconditions.checkNotNull(genPackage, "Cannot determine generated package for XMI %s, Ecore %s. %s map entries: %s",
-						url, ecoreUrl, genPackageMap.size(), genPackageMap);
-				final EFactory eFactory = eFactoryMap.get(ecoreUrl);
-				Preconditions.checkNotNull(eFactory, "Cannot find companion EFactory for XMI %s, Ecore %s. %s map entries: %s",
-						url, ecoreUrl, eFactoryMap.size(), eFactoryMap);
-
-				log.debug("Getting EmailCatalog XMI {} from {} in {}, EPackage {} ({}={})", suppliedClassName, url,
-						resourceContainer, ePackage.getName(), ePackage.getNsPrefix(), ePackage.getNsURI() );
-				final XmiObjectLoader<EmailCatalog> loader;
-				if (bundle != null) {
-					loader = new XmiObjectLoader<EmailCatalog>(xmiEPackage, url, bundle);
-				} else {
-					loader = new XmiObjectLoader<EmailCatalog>(xmiEPackage, url, ResourceType.CLASSPATH);
-				}
-
-				final EmailCatalog emailCatalog = loader.get();
+		for (EmailCatalog emailCatalog : catalogs) {
+			final String genPackage = emailCatalog.getGeneratedPackageName();
+//			final EPackage ePackage = ePackageMap.get(ecoreUrl);
+//			Preconditions.checkNotNull(ePackage, "Cannot find companion EPackage for XMI %s, Ecore %s. %s map entries: %s",
+//					url, ecoreUrl, ePackageMap.size(), ePackageMap);
+//			final String genPackage = genPackageMap.get(ecoreUrl);
+//			Preconditions.checkNotNull(genPackage, "Cannot determine generated package for XMI %s, Ecore %s. %s map entries: %s",
+//					url, ecoreUrl, genPackageMap.size(), genPackageMap);
+			final EFactory eFactory = emailCatalog.getEFactory();
+			
+			for (final LayoutType layoutType : emailCatalog.getLayoutTypes()) {
+				log.debug("Realizing LayoutType {} from {}", layoutType.getName(), emailCatalog.getEcoreUrl());
+				layoutType.setNsPrefix(emailCatalog.getNsPrefix());
+				layoutType.setEPackageNsPrefix(emailCatalog.getNsPrefix() + "-email");
+				layoutType.setEPackageName(emailCatalog.getNsPrefix());
+				layoutType.setEFactory(eFactory);
+				final String eClassName = CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, layoutType.getName());
+				layoutType.setEClassName(eClassName);
+				layoutType.setJavaClassName(genPackage + "." + eClassName);
 				
-				for (final LayoutType layoutType : emailCatalog.getLayoutTypes()) {
-					log.debug("Realizing LayoutType {} from {}", layoutType.getName(), url);
-					layoutType.setNsPrefix(emailCatalog.getNsPrefix());
-					layoutType.setEPackageNsPrefix(emailCatalog.getNsPrefix() + "-email");
-					layoutType.setEPackageName(emailCatalog.getNsPrefix());
-					layoutType.setEFactory(eFactory);
-					final String eClassName = CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, layoutType.getName());
-					layoutType.setEClassName(eClassName);
-					layoutType.setJavaClassName(genPackage + "." + eClassName);
-					
-					final String plainFileName = genPackage.replace('.', '/') + "/" + eClassName + ".txt.mustache";
-					try {
-						final URL resource = bundle != null ? bundle.getEntry(plainFileName) : classLoader.getResource(plainFileName);
-						final String plain = IOUtils.toString(resource);
-						layoutType.setPlainTemplate(plain);
-					} catch (IOException e) {
-						throw new EmailException("Cannot read " + plainFileName + " in " + resourceContainer, e);
-					}
-					final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
-					try {
-						final URL resource = bundle != null ? bundle.getEntry(htmlFileName) : classLoader.getResource(htmlFileName);
-						final String html = IOUtils.toString(resource);
-						layoutType.setHtmlTemplate(html);
-					} catch (IOException e) {
-						throw new EmailException("Cannot read " + htmlFileName + " in " + resourceContainer, e);
-					}
+				final String plainFileName = genPackage.replace('.', '/') + "/" + eClassName + ".txt.mustache";
+				try {
+					final URL resource = bundle != null ? bundle.getEntry(plainFileName) : classLoader.getResource(plainFileName);
+					final String plain = IOUtils.toString(resource);
+					layoutType.setPlainTemplate(plain);
+				} catch (IOException e) {
+					throw new EmailException("Cannot read " + plainFileName + " in " + resourceContainer, e);
 				}
-				
-				for (final PageType pageType : emailCatalog.getPageTypes()) {
-					log.debug("Realizing PageType {} from {}", pageType.getName(), url);
-					pageType.setNsPrefix(emailCatalog.getNsPrefix());
-					pageType.setEPackageNsPrefix(emailCatalog.getNsPrefix() + "-email");
-					pageType.setEPackageName(emailCatalog.getNsPrefix());
-					pageType.setEFactory(eFactory);
-					final String eClassName = CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, pageType.getName());
-					pageType.setEClassName(eClassName);
-					pageType.setJavaClassName(genPackage + "." + eClassName);
-					
-					final String plainFileName = genPackage.replace('.', '/') + "/" + eClassName + ".txt.mustache";
-					try {
-						final URL resource = bundle != null ? bundle.getEntry(plainFileName) : classLoader.getResource(plainFileName);
-						final String plain = IOUtils.toString(resource);
-						pageType.setPlainTemplate(plain);
-					} catch (Exception e) {
-						log.info("No plain email template found for " + pageType.getName() + ". Cannot read " +
-							plainFileName + " in " + resourceContainer, e);
-					}
-					final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
-					try {
-						final URL resource = bundle != null ? bundle.getEntry(htmlFileName) : classLoader.getResource(htmlFileName);
-						final String html = IOUtils.toString(resource);
-						pageType.setHtmlTemplate(html);
-					} catch (Exception e) {
-						throw new EmailException("Cannot read " + htmlFileName + " in " + resourceContainer, e);
-					}
+				final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
+				try {
+					final URL resource = bundle != null ? bundle.getEntry(htmlFileName) : classLoader.getResource(htmlFileName);
+					final String html = IOUtils.toString(resource);
+					layoutType.setHtmlTemplate(html);
+				} catch (IOException e) {
+					throw new EmailException("Cannot read " + htmlFileName + " in " + resourceContainer, e);
 				}
-				
-				for (final SenderType senderType : emailCatalog.getSenderTypes()) {
-					log.debug("Realizing SenderType {} from {}", senderType.getName(), url);
-					senderType.setNsPrefix(emailCatalog.getNsPrefix());
-				}
-				
-				log.debug("Loaded {} LayoutTypes, {} PageTypes, and {} SenderTypes from EmailSchema {} in {}",
-						emailCatalog.getLayoutTypes().size(), emailCatalog.getPageTypes().size(),
-						emailCatalog.getSenderTypes().size(),
-						url, resourceContainer );
-				return emailCatalog;
 			}
-		}));
+			
+			for (final PageType pageType : emailCatalog.getPageTypes()) {
+				log.debug("Realizing PageType {} from {}", pageType.getName(), emailCatalog.getEcoreUrl());
+				pageType.setNsPrefix(emailCatalog.getNsPrefix());
+				pageType.setEPackageNsPrefix(emailCatalog.getNsPrefix() + "-email");
+				pageType.setEPackageName(emailCatalog.getNsPrefix());
+				pageType.setEFactory(eFactory);
+				final String eClassName = CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, pageType.getName());
+				pageType.setEClassName(eClassName);
+				pageType.setJavaClassName(genPackage + "." + eClassName);
+				
+				final String plainFileName = genPackage.replace('.', '/') + "/" + eClassName + ".txt.mustache";
+				try {
+					final URL resource = bundle != null ? bundle.getEntry(plainFileName) : classLoader.getResource(plainFileName);
+					final String plain = IOUtils.toString(resource);
+					pageType.setPlainTemplate(plain);
+				} catch (Exception e) {
+					log.info("No plain email template found for " + pageType.getName() + ". Cannot read " +
+						plainFileName + " in " + resourceContainer, e);
+				}
+				final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
+				try {
+					final URL resource = bundle != null ? bundle.getEntry(htmlFileName) : classLoader.getResource(htmlFileName);
+					final String html = IOUtils.toString(resource);
+					pageType.setHtmlTemplate(html);
+				} catch (Exception e) {
+					throw new EmailException("Cannot read " + htmlFileName + " in " + resourceContainer, e);
+				}
+			}
+			
+			for (final SenderType senderType : emailCatalog.getSenderTypes()) {
+				log.debug("Realizing SenderType {} from {}", senderType.getName(), emailCatalog.getEcoreUrl());
+				senderType.setNsPrefix(emailCatalog.getNsPrefix());
+			}
+			
+			log.debug("Loaded {} LayoutTypes, {} PageTypes, and {} SenderTypes from EmailSchema {} in {}",
+					emailCatalog.getLayoutTypes().size(), emailCatalog.getPageTypes().size(),
+					emailCatalog.getSenderTypes().size(),
+					emailCatalog.getEcoreUrl(), resourceContainer );
+		}
 		
 		// -------------- Concatenate everything ------------
 		final List<LayoutType> layoutTypes = ImmutableList.copyOf(Iterables.concat(
@@ -368,38 +399,45 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 		return objects;
 	}
 
-	@Nullable
-	protected List<EObject> addingBundle(@Nonnull ClassLoader classLoader, @Nonnull String pkg) {
-		final PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
-		final Resource[] resources;
-		try {
-			log.debug("Scanning *.{}.xmi in classpath {}", suppliedClassSimpleName, pkg);
-			resources = resolver.getResources(pkg.replace('.', '/') + "/*." + suppliedClassSimpleName + ".xmi");
-			log.info("Scanned *.{}.xmi in classpath {} returned {} resources: {}",
-					suppliedClassSimpleName, pkg, resources.length, resources);
-			if (resources == null || resources.length == 0) {
-				return null;
-			}
-		} catch (FileNotFoundException fnf) {
-			log.warn("Requested to scan " + pkg + " for " + suppliedClassSimpleName +
-					" but package not found in " + classLoader, fnf);
-			return null;
-		} catch (IOException e2) {
-			log.error("Cannot scan " + pkg + " for " + suppliedClassSimpleName, e2);
-			return null;
-		}
-		final List<URL> xmiUrls = Lists.transform(ImmutableList.copyOf(resources), new Function<Resource, URL>() {
-			@Override @Nullable
-			public URL apply(@Nullable Resource input) {
-				try {
-					return input.getURL();
-				} catch (IOException e) {
-					throw new RuntimeException("Cannot get URL for " + input, e);
-				}
-			}
-		});
-		return extractObjects(xmiUrls, null, classLoader, pkg);
-	}
+	/**
+	 * Note: A global "scan using classpath" is not possible unless the packageToScan to get the package name
+	 * is embedded inside the XMI file.
+	 * @param classLoader
+	 * @param pkg
+	 * @return
+	 */
+//	@Nullable
+//	protected List<EObject> addingBundle(@Nonnull ClassLoader classLoader, @Nonnull String pkg) {
+//		final PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
+//		final Resource[] resources;
+//		try {
+//			log.debug("Scanning *.{}.xmi in classpath {}", suppliedClassSimpleName, pkg);
+//			resources = resolver.getResources(pkg.replace('.', '/') + "/*." + suppliedClassSimpleName + ".xmi");
+//			log.info("Scanned *.{}.xmi in classpath {} returned {} resources: {}",
+//					suppliedClassSimpleName, pkg, resources.length, resources);
+//			if (resources == null || resources.length == 0) {
+//				return null;
+//			}
+//		} catch (FileNotFoundException fnf) {
+//			log.warn("Requested to scan " + pkg + " for " + suppliedClassSimpleName +
+//					" but package not found in " + classLoader, fnf);
+//			return null;
+//		} catch (IOException e2) {
+//			log.error("Cannot scan " + pkg + " for " + suppliedClassSimpleName, e2);
+//			return null;
+//		}
+//		final List<URL> xmiUrls = Lists.transform(ImmutableList.copyOf(resources), new Function<Resource, URL>() {
+//			@Override @Nullable
+//			public URL apply(@Nullable Resource input) {
+//				try {
+//					return input.getURL();
+//				} catch (IOException e) {
+//					throw new RuntimeException("Cannot get URL for " + input, e);
+//				}
+//			}
+//		});
+//		return extractObjects(xmiUrls, null, classLoader, pkg);
+//	}
 	
 	@Override
 	public void modifiedBundle(Bundle bundle, BundleEvent event,

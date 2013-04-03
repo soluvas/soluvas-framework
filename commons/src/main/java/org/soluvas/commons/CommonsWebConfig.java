@@ -1,12 +1,8 @@
 package org.soluvas.commons;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +25,6 @@ import org.soluvas.json.LowerEnumModule;
 import org.soluvas.json.jscience.JscienceModule;
 import org.soluvas.json.money.JodaMoneyModule;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -108,6 +103,7 @@ public class CommonsWebConfig {
 	@Bean
 	public EventBus globalEventBus() {
 		return new AsyncEventBus("global", networkExecutor());
+//		return new EventBus("global");
 	}
 	
 	@Bean(destroyMethod="shutdown")
