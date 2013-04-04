@@ -179,7 +179,11 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	protected T load(@Nonnull final EPackage ePackage, @Nonnull final ResourceType resourceType,
 			@Nonnull final URI resourceUri, @Nonnull final String resourceName,
 			@Nullable final Bundle bundle) {
-		log.debug("Loading XMI from URI: {} using bundle {}", resourceUri, bundle);
+		if (bundle != null) {
+			log.debug("Loading XMI from URI: {} using bundle {}", resourceUri, bundle);
+		} else {
+			log.debug("Loading XMI from URI: {} using {}", resourceUri, resourceType);
+		}
 		
 		final ResourceSetImpl rset = new ResourceSetImpl();
 		rset.getResourceFactoryRegistry().getExtensionToFactoryMap()

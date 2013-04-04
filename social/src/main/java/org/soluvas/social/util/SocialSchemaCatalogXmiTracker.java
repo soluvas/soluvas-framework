@@ -50,9 +50,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
@@ -68,7 +66,7 @@ public class SocialSchemaCatalogXmiTracker implements BundleTrackerCustomizer<Li
 	private static final String suppliedClassSimpleName = SocialSchemaCatalog.class.getSimpleName();
 	private static final String suppliedClassName = SocialSchemaCatalog.class.getName();
 	private static final SchemaPackage xmiEPackage = SchemaPackage.eINSTANCE;
-	private final SocialSchemaCatalog repo;
+	private final SocialSchemaCatalog socialRepo;
 	private final EventBus eventBus;
 	/**
 	 * Used for plain Java.
@@ -83,7 +81,7 @@ public class SocialSchemaCatalogXmiTracker implements BundleTrackerCustomizer<Li
 	public SocialSchemaCatalogXmiTracker(@Nonnull final SocialSchemaCatalog repo,
 			@Nonnull final EventBus eventBus) {
 		super();
-		this.repo = repo;
+		this.socialRepo = repo;
 		this.eventBus = eventBus;
 	}
 
@@ -259,42 +257,36 @@ public class SocialSchemaCatalogXmiTracker implements BundleTrackerCustomizer<Li
 				eClassMap.size(), ecoreFileObjs.size(), xmiUrls, eClassMap.keySet() );
 
 		// ------------------ SocialSchemaCatalog XMI files ------------
-		final List<List<TargetType>> xmiFileObjs = Lists.transform(catalogs, 
-				new Function<SocialSchemaCatalog, List<TargetType>>() {
-			@Override @Nullable
-			public List<TargetType> apply(@Nullable SocialSchemaCatalog catalog) {
-				final Builder<TargetType> targetTypesBuilder = ImmutableList.builder();
-				
-				final String catalogNsPrefix = catalog.getEPackage().getNsPrefix().replaceAll("-social", "");
-				
-				for (final TargetType targetType : ImmutableList.copyOf(catalog.getTargetTypes())) {
-					log.debug("Adding TargetType {} from {}", targetType.getName(), catalog.getXmiUrl());
-					final TargetType added = EcoreUtil.copy(targetType);
-					added.setNsPrefix(catalogNsPrefix);
-					added.setEFactory(catalog.getEFactory());
-					added.setEPackageNsPrefix(catalog.getEPackage().getNsPrefix());
-					final String eClassName = CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, added.getName());
-					added.setEClassName(eClassName);
-					added.setJavaClassName(catalog.getGeneratedPackageName() + "." + eClassName);
-					synchronized (repo) {
-						repo.getTargetTypes().add(added);
-					}
-					targetTypesBuilder.add(added);
+		final List<TargetType> targetTypes = new ArrayList<>();
+		for (SocialSchemaCatalog catalog : catalogs) {
+			final List<TargetType> innerTargetTypes = new ArrayList<>();
+			
+			final String catalogNsPrefix = catalog.getEPackage().getNsPrefix().replaceAll("-social", "");
+			
+			for (final TargetType targetType : ImmutableList.copyOf(catalog.getTargetTypes())) {
+				log.debug("Adding TargetType {} from {}", targetType.getName(), catalog.getXmiUrl());
+				final TargetType added = EcoreUtil.copy(targetType);
+				added.setNsPrefix(catalogNsPrefix);
+				added.setEFactory(catalog.getEFactory());
+				added.setEPackageNsPrefix(catalog.getEPackage().getNsPrefix());
+				final String eClassName = CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, added.getName());
+				added.setEClassName(eClassName);
+				added.setJavaClassName(catalog.getGeneratedPackageName() + "." + eClassName);
+				synchronized (socialRepo) {
+					socialRepo.getTargetTypes().add(added);
 				}
-				
-				final List<TargetType> targetTypes = targetTypesBuilder.build();
-				log.debug("Loaded {} TargetTypes from SocialSchema {}",
-						targetTypes.size(), catalog.getXmiUrl() );
-				return targetTypes;
+				innerTargetTypes.add(added);
 			}
-		});
-		
-		// -------------- Concatenate everything ------------
-		final List<TargetType> targetTypes = ImmutableList.copyOf(Iterables.concat(xmiFileObjs));
+			log.debug("Loaded {} TargetTypes from SocialSchema {}",
+					innerTargetTypes.size(), catalog.getXmiUrl() );
+			
+			targetTypes.addAll(innerTargetTypes);
+		}
 		log.info("Loaded {} TargetTypes from {}", targetTypes.size(), xmiUrls);
 		
 		// -------- Resolve EClass-es -----------
-		final Collection<EClassLinked> eClassLinkeds = Collections2.filter(Lists.transform(targetTypes, new Function<TargetType, EClassLinked>() {
+		final Collection<EClassLinked> eClassLinkeds = Collections2.filter(Lists.transform(
+				targetTypes, new Function<TargetType, EClassLinked>() {
 			@Override @Nullable
 			public EClassLinked apply(@Nullable TargetType input) {
 				return input instanceof EClassLinked ? (EClassLinked) input : null;				
@@ -351,8 +343,8 @@ public class SocialSchemaCatalogXmiTracker implements BundleTrackerCustomizer<Li
 				final TargetType targetType = eobject;
 				log.debug("Removing TargetType {} from {}", targetType.getName(),
 						resourceContainer);
-				synchronized (repo) {
-					if (repo.getTargetTypes().remove(targetType))
+				synchronized (socialRepo) {
+					if (socialRepo.getTargetTypes().remove(targetType))
 						removedCount++;
 				}
 			} else {
