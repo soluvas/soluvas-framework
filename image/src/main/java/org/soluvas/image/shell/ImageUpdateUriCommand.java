@@ -1,10 +1,8 @@
  package org.soluvas.image.shell; 
 
-import id.co.bippo.common.annotation.ProductImage;
-import id.co.bippo.common.annotation.ProductRelated;
-import id.co.bippo.common.annotation.ShopImage;
-import id.co.bippo.common.annotation.ShopRelated;
+import java.util.List;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Argument;
@@ -12,18 +10,18 @@ import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.PersonRelated;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.impl.ShellProgressMonitorImpl;
 import org.soluvas.commons.shell.ExtCommandSupport;
-import org.soluvas.image.PersonImage;
+import org.soluvas.image.ImageException;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import com.google.common.base.Objects;
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 /**
  * Shell command to update an existing {@link Image} URI.
@@ -47,18 +45,12 @@ public class ImageUpdateUriCommand extends ExtCommandSupport {
 		description="Image ID(s)")
 	private String[] imageIds;
 	
-	private final ImageRepository personImageRepo;
-	private final ImageRepository productImageRepo;
-	private final ImageRepository shopImageRepo;
+	private final List<ImageRepository> imageRepos;
 	
 	@Inject
-	public ImageUpdateUriCommand(@PersonImage @PersonRelated ImageRepository personImageRepo,
-			@ProductImage @ProductRelated ImageRepository productImageRepo,
-			@ShopImage @ShopRelated ImageRepository shopImageRepo) {
+	public ImageUpdateUriCommand(List<ImageRepository> imageRepos) {
 		super();
-		this.personImageRepo = personImageRepo;
-		this.productImageRepo = productImageRepo;
-		this.shopImageRepo = shopImageRepo;
+		this.imageRepos = imageRepos;
 	}
 
 	/* (non-Javadoc)
@@ -68,20 +60,18 @@ public class ImageUpdateUriCommand extends ExtCommandSupport {
 	protected Object doExecute() throws Exception {
 //		final ServiceReference<ImageRepository> imageRepoRef = 
 //				bundleContext.getServiceReferences(ImageRepository.class, "(namespace=" + namespace + ")").iterator().next();
-		final ImageRepository imageRepo;
-		if (Objects.equal(namespace, "product")) {
-			imageRepo = productImageRepo;
-		} else if (Objects.equal(namespace, "shop")) {
-			imageRepo = shopImageRepo;
-		} else {
-			imageRepo = personImageRepo;
-		}
+		final ImageRepository imageRepo = Iterables.find(imageRepos, new Predicate<ImageRepository>() {
+			@Override
+			public boolean apply(@Nullable ImageRepository input) {
+				return namespace.equals(input.getNamespace());
+			}
+		});
 		
 		final ProgressMonitor monitor = new ShellProgressMonitorImpl();
 		
 		if (all) {
 			if (imageIds != null )
-				throw new RuntimeException("ImageId cannot be attached");
+				throw new ImageException("ImageId cannot be attached");
 			
 			imageRepo.updateUriAll(monitor);
 		} else {
