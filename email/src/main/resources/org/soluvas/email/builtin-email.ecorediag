@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_ucHuoEWeEeK1qbOICpWDVg" type="EcoreTools" name="builtin-email" measurementUnit="Pixel">
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_ucHuoEWeEeK1qbOICpWDVg" type="EcoreTools" name="builtin-email" measurementUnit="Pixel">
   <children xmi:type="notation:Node" xmi:id="_PQMBoEWfEeK1qbOICpWDVg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_PQNPwEWfEeK1qbOICpWDVg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_PQNPwUWfEeK1qbOICpWDVg" type="5001">
@@ -14,8 +14,51 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_PQMosEWfEeK1qbOICpWDVg" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="builtin-email.ecore#//Test"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PQMosUWfEeK1qbOICpWDVg" x="227" y="236"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PQMosUWfEeK1qbOICpWDVg" x="24" y="24"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_inJMQZ2kEeKcvr-UznVaHA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_inLBcJ2kEeKcvr-UznVaHA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_inLBcZ2kEeKcvr-UznVaHA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_inLBcp2kEeKcvr-UznVaHA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_inLBc52kEeKcvr-UznVaHA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_inLBdJ2kEeKcvr-UznVaHA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_inLogJ2kEeKcvr-UznVaHA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_inLogZ2kEeKcvr-UznVaHA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_inLogp2kEeKcvr-UznVaHA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_inLog52kEeKcvr-UznVaHA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_inJMQp2kEeKcvr-UznVaHA" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="builtin-email.ecore#//FeedbackToAdmin"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_inJMQ52kEeKcvr-UznVaHA" x="228" y="204"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_mAZAAJ2kEeKcvr-UznVaHA" type="1001">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_mBArEJ2kEeKcvr-UznVaHA" source="Shortcut">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_mBArEZ2kEeKcvr-UznVaHA" key="modelID" value="EcoreTools"/>
+    </eAnnotations>
+    <children xmi:type="notation:Node" xmi:id="_mAZnEJ2kEeKcvr-UznVaHA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_mAaOIJ2kEeKcvr-UznVaHA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_mAaOIZ2kEeKcvr-UznVaHA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_mAaOIp2kEeKcvr-UznVaHA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_mAaOI52kEeKcvr-UznVaHA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_mAa1MJ2kEeKcvr-UznVaHA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_mAa1MZ2kEeKcvr-UznVaHA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_mAa1Mp2kEeKcvr-UznVaHA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_mAa1M52kEeKcvr-UznVaHA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_mAZAAZ2kEeKcvr-UznVaHA" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="email.ecore#//Page"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mAZAAp2kEeKcvr-UznVaHA" x="192" y="24"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_ucHuoUWeEeK1qbOICpWDVg"/>
   <element xmi:type="ecore:EPackage" href="builtin-email.ecore#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_nJ0tQJ2kEeKcvr-UznVaHA" type="3003" source="_inJMQZ2kEeKcvr-UznVaHA" target="_mAZAAJ2kEeKcvr-UznVaHA">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_nJ0tQZ2kEeKcvr-UznVaHA" routing="Rectilinear" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_nJ0tQp2kEeKcvr-UznVaHA" fontName="DejaVu Sans"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_nJ0tQ52kEeKcvr-UznVaHA" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nrBV0J2kEeKcvr-UznVaHA" id="(0.4962962962962963,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nrBV0Z2kEeKcvr-UznVaHA" id="(0.5,1.0)"/>
+  </edges>
 </notation:Diagram>

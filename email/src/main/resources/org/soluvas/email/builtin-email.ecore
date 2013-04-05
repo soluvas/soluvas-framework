@@ -3,4 +3,9 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="builtin" nsURI="http://www.soluvas.org/schema/email.builtin/1.0"
     nsPrefix="builtin-email">
   <eClassifiers xsi:type="ecore:EClass" name="Test"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FeedbackToAdmin" eSuperTypes="email.ecore#//Page">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Feedback message for site/app administrator."/>
+    </eAnnotations>
+  </eClassifiers>
 </ecore:EPackage>
