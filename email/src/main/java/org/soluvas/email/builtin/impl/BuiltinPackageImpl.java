@@ -2,13 +2,17 @@
  */
 package org.soluvas.email.builtin.impl;
 
+import email.EmailPackage;
+import email.impl.EmailPackageImpl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.soluvas.commons.CommonsPackage;
 import org.soluvas.email.builtin.BuiltinFactory;
 import org.soluvas.email.builtin.BuiltinPackage;
+import org.soluvas.email.builtin.FeedbackToAdmin;
 import org.soluvas.email.builtin.Test;
 
 /**
@@ -24,6 +28,13 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 	 * @generated
 	 */
 	private EClass testEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass feedbackToAdminEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -71,11 +82,19 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 
 		isInited = true;
 
+		// Initialize simple dependencies
+		CommonsPackage.eINSTANCE.eClass();
+
+		// Obtain or create and register interdependencies
+		EmailPackageImpl theEmailPackage = (EmailPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EmailPackage.eNS_URI) instanceof EmailPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EmailPackage.eNS_URI) : EmailPackage.eINSTANCE);
+
 		// Create package meta-data objects
 		theBuiltinPackage.createPackageContents();
+		theEmailPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theBuiltinPackage.initializePackageContents();
+		theEmailPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theBuiltinPackage.freeze();
@@ -93,6 +112,15 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 	 */
 	public EClass getTest() {
 		return testEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFeedbackToAdmin() {
+		return feedbackToAdminEClass;
 	}
 
 	/**
@@ -124,6 +152,8 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 
 		// Create classes and their features
 		testEClass = createEClass(TEST);
+
+		feedbackToAdminEClass = createEClass(FEEDBACK_TO_ADMIN);
 	}
 
 	/**
@@ -149,17 +179,43 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		EmailPackage theEmailPackage = (EmailPackage)EPackage.Registry.INSTANCE.getEPackage(EmailPackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		feedbackToAdminEClass.getESuperTypes().add(theEmailPackage.getPage());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(testEClass, Test.class, "Test", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(feedbackToAdminEClass, FeedbackToAdmin.class, "FeedbackToAdmin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.eclipse.org/emf/2002/GenModel
+		createGenModelAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/GenModel</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createGenModelAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		addAnnotation
+		  (feedbackToAdminEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Feedback message for site/app administrator."
+		   });
 	}
 
 } //BuiltinPackageImpl

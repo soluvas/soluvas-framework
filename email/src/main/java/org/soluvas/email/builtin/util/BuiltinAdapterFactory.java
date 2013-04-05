@@ -2,6 +2,10 @@
  */
 package org.soluvas.email.builtin.util;
 
+import email.DefaultScope;
+import email.Page;
+import email.Template;
+import email.TemplateLike;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -72,6 +76,26 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 				return createTestAdapter();
 			}
 			@Override
+			public Adapter caseFeedbackToAdmin(FeedbackToAdmin object) {
+				return createFeedbackToAdminAdapter();
+			}
+			@Override
+			public Adapter caseTemplateLike(TemplateLike object) {
+				return createTemplateLikeAdapter();
+			}
+			@Override
+			public Adapter caseDefaultScope(DefaultScope object) {
+				return createDefaultScopeAdapter();
+			}
+			@Override
+			public Adapter caseTemplate(Template object) {
+				return createTemplateAdapter();
+			}
+			@Override
+			public Adapter casePage(Page object) {
+				return createPageAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -102,6 +126,76 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTestAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.builtin.FeedbackToAdmin <em>Feedback To Admin</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.email.builtin.FeedbackToAdmin
+	 * @generated
+	 */
+	public Adapter createFeedbackToAdminAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link email.TemplateLike <em>Template Like</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see email.TemplateLike
+	 * @generated
+	 */
+	public Adapter createTemplateLikeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link email.DefaultScope <em>Default Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see email.DefaultScope
+	 * @generated
+	 */
+	public Adapter createDefaultScopeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link email.Template <em>Template</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see email.Template
+	 * @generated
+	 */
+	public Adapter createTemplateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link email.Page <em>Page</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see email.Page
+	 * @generated
+	 */
+	public Adapter createPageAdapter() {
 		return null;
 	}
 

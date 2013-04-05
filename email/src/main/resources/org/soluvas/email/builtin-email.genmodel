@@ -1,10 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
-    modelDirectory="/org.soluvas.email/src/main/java" modelPluginID="org.soluvas.email"
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.soluvas.email/src/main/java" modelPluginID="org.soluvas.email"
     modelName="Builtin-email" rootExtendsInterface="org.soluvas.commons.SerializableEObject"
     importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="7.0"
     suppressGenModelAnnotations="false" copyrightFields="false" publicConstructors="true"
-    language="" interfaceNamePattern="">
+    language="" usedGenPackages="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.genmodel#//commons platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
+    interfaceNamePattern="">
   <foreignModel>builtin-email.ecore</foreignModel>
-  <genPackages prefix="Builtin" disposableProviderFactory="true" ecorePackage="builtin-email.ecore#/" basePackage="org.soluvas.email"/>
+  <genPackages prefix="Builtin" basePackage="org.soluvas.email" disposableProviderFactory="true"
+      ecorePackage="builtin-email.ecore#/">
+    <genClasses ecoreClass="builtin-email.ecore#//Test"/>
+    <genClasses ecoreClass="builtin-email.ecore#//FeedbackToAdmin"/>
+  </genPackages>
+  <genPackages prefix="Email" ecorePackage="email.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="email.ecore#//EmailFormat">
+      <genEnumLiterals ecoreEnumLiteral="email.ecore#//EmailFormat/multipart"/>
+      <genEnumLiterals ecoreEnumLiteral="email.ecore#//EmailFormat/plain"/>
+      <genEnumLiterals ecoreEnumLiteral="email.ecore#//EmailFormat/html"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="email.ecore#//WebSecurity">
+      <genEnumLiterals ecoreEnumLiteral="email.ecore#//WebSecurity/prefer_secure"/>
+      <genEnumLiterals ecoreEnumLiteral="email.ecore#//WebSecurity/always_secure"/>
+      <genEnumLiterals ecoreEnumLiteral="email.ecore#//WebSecurity/always_unsecure"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="email.ecore#//Email"/>
+    <genDataTypes ecoreDataType="email.ecore#//MailSession"/>
+    <genClasses ecoreClass="email.ecore#//EmailCatalog">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference email.ecore#//EmailCatalog/pageTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference email.ecore#//EmailCatalog/layoutTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference email.ecore#//EmailCatalog/senderTypes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//EmailCatalog/generatedPackageName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//EmailCatalog/ecoreUrl"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference email.ecore#//EmailCatalog/ePackage"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference email.ecore#//EmailCatalog/eFactory"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="email.ecore#//TemplateType">
+      <genTypeParameters ecoreTypeParameter="email.ecore#//TemplateType/T"/>
+    </genClasses>
+    <genClasses ecoreClass="email.ecore#//PageType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//PageType/senderTypeName"/>
+      <genOperations ecoreOperation="email.ecore#//PageType/create">
+        <genParameters ecoreParameter="email.ecore#//PageType/create/layout"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="email.ecore#//LayoutType">
+      <genOperations ecoreOperation="email.ecore#//LayoutType/create"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="email.ecore#//Template">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference email.ecore#//Template/recipients"/>
+      <genOperations ecoreOperation="email.ecore#//Template/renderSubject">
+        <genParameters ecoreParameter="email.ecore#//Template/renderSubject/recipient"/>
+      </genOperations>
+      <genOperations ecoreOperation="email.ecore#//Template/renderText">
+        <genParameters ecoreParameter="email.ecore#//Template/renderText/recipient"/>
+      </genOperations>
+      <genOperations ecoreOperation="email.ecore#//Template/renderHtml">
+        <genParameters ecoreParameter="email.ecore#//Template/renderHtml/recipient"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="email.ecore#//Recipient">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//Recipient/email"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//Recipient/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//Recipient/firstName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//Recipient/lastName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//Recipient/roleName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//Recipient/preferredFormat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//Recipient/preferredWebSecurity"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="email.ecore#//Layout">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//Layout/pageSubject"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//Layout/pagePlain"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//Layout/pageHtml"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference email.ecore#//Layout/layoutType"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="email.ecore#//Page">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference email.ecore#//Page/layout"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference email.ecore#//Page/pageType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference email.ecore#//Page/sender"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//Page/mailSession"/>
+      <genOperations ecoreOperation="email.ecore#//Page/compose">
+        <genParameters ecoreParameter="email.ecore#//Page/compose/recipient"/>
+      </genOperations>
+      <genOperations ecoreOperation="email.ecore#//Page/composeAll"/>
+      <genOperations ecoreOperation="email.ecore#//Page/attach">
+        <genParameters ecoreParameter="email.ecore#//Page/attach/content"/>
+        <genParameters ecoreParameter="email.ecore#//Page/attach/fileName"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="email.ecore#//TemplateLike">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//TemplateLike/subjectTemplate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//TemplateLike/plainTemplate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//TemplateLike/htmlTemplate"/>
+    </genClasses>
+    <genClasses ecoreClass="email.ecore#//EmailManager">
+      <genOperations ecoreOperation="email.ecore#//EmailManager/createPage">
+        <genParameters ecoreParameter="email.ecore#//EmailManager/createPage/pageClass"/>
+        <genTypeParameters ecoreTypeParameter="email.ecore#//EmailManager/createPage/T"/>
+      </genOperations>
+      <genOperations ecoreOperation="email.ecore#//EmailManager/createSender">
+        <genParameters ecoreParameter="email.ecore#//EmailManager/createSender/qname"/>
+      </genOperations>
+      <genOperations ecoreOperation="email.ecore#//EmailManager/sendAll">
+        <genParameters ecoreParameter="email.ecore#//EmailManager/sendAll/page"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="email.ecore#//Sender">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference email.ecore#//Sender/senderType"/>
+      <genOperations ecoreOperation="email.ecore#//Sender/expand"/>
+    </genClasses>
+    <genClasses ecoreClass="email.ecore#//SenderType">
+      <genOperations ecoreOperation="email.ecore#//SenderType/create"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="email.ecore#//SenderLike">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//SenderLike/from"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//SenderLike/email"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute email.ecore#//SenderLike/replyTo"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="email.ecore#//DefaultScope">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference email.ecore#//DefaultScope/webAddress"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference email.ecore#//DefaultScope/appManifest"/>
+    </genClasses>
+  </genPackages>
 </genmodel:GenModel>
