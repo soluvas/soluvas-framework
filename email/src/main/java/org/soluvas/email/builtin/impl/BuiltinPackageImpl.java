@@ -2,18 +2,21 @@
  */
 package org.soluvas.email.builtin.impl;
 
-import email.EmailPackage;
-import email.impl.EmailPackageImpl;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
-
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.email.builtin.BuiltinFactory;
 import org.soluvas.email.builtin.BuiltinPackage;
+import org.soluvas.email.builtin.Contact;
 import org.soluvas.email.builtin.FeedbackToAdmin;
-import org.soluvas.email.builtin.Test;
+import org.soluvas.email.builtin.FeedbackToAdminManager;
+
+import email.EmailPackage;
+import email.impl.EmailPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +30,7 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass testEClass = null;
+	private EClass contactEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -35,6 +38,13 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 	 * @generated
 	 */
 	private EClass feedbackToAdminEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass feedbackToAdminManagerEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -110,8 +120,9 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTest() {
-		return testEClass;
+	@Override
+	public EClass getContact() {
+		return contactEClass;
 	}
 
 	/**
@@ -119,6 +130,57 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EAttribute getContact_Name() {
+		return (EAttribute)contactEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getContact_Email() {
+		return (EAttribute)contactEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getContact_Mobile() {
+		return (EAttribute)contactEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getContact_Subject() {
+		return (EAttribute)contactEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getContact_Message() {
+		return (EAttribute)contactEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getFeedbackToAdmin() {
 		return feedbackToAdminEClass;
 	}
@@ -128,6 +190,27 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EReference getFeedbackToAdmin_Contact() {
+		return (EReference)feedbackToAdminEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getFeedbackToAdminManager() {
+		return feedbackToAdminManagerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public BuiltinFactory getBuiltinFactory() {
 		return (BuiltinFactory)getEFactoryInstance();
 	}
@@ -151,9 +234,17 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		testEClass = createEClass(TEST);
+		contactEClass = createEClass(CONTACT);
+		createEAttribute(contactEClass, CONTACT__NAME);
+		createEAttribute(contactEClass, CONTACT__EMAIL);
+		createEAttribute(contactEClass, CONTACT__MOBILE);
+		createEAttribute(contactEClass, CONTACT__SUBJECT);
+		createEAttribute(contactEClass, CONTACT__MESSAGE);
 
 		feedbackToAdminEClass = createEClass(FEEDBACK_TO_ADMIN);
+		createEReference(feedbackToAdminEClass, FEEDBACK_TO_ADMIN__CONTACT);
+
+		feedbackToAdminManagerEClass = createEClass(FEEDBACK_TO_ADMIN_MANAGER);
 	}
 
 	/**
@@ -180,6 +271,7 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 		EmailPackage theEmailPackage = (EmailPackage)EPackage.Registry.INSTANCE.getEPackage(EmailPackage.eNS_URI);
 
 		// Create type parameters
@@ -187,12 +279,21 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		feedbackToAdminEClass.getESuperTypes().add(theEmailPackage.getPage());
+		feedbackToAdminManagerEClass.getESuperTypes().add(theEmailPackage.getPage());
+		feedbackToAdminManagerEClass.getESuperTypes().add(this.getFeedbackToAdmin());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(testEClass, Test.class, "Test", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(contactEClass, Contact.class, "Contact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getContact_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Contact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContact_Email(), theEcorePackage.getEString(), "email", null, 0, 1, Contact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContact_Mobile(), theEcorePackage.getEString(), "mobile", null, 0, 1, Contact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContact_Subject(), theEcorePackage.getEString(), "subject", null, 0, 1, Contact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContact_Message(), theEcorePackage.getEString(), "message", null, 0, 1, Contact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(feedbackToAdminEClass, FeedbackToAdmin.class, "FeedbackToAdmin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(feedbackToAdminEClass, FeedbackToAdmin.class, "FeedbackToAdmin", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFeedbackToAdmin_Contact(), this.getContact(), null, "contact", null, 1, 1, FeedbackToAdmin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(feedbackToAdminManagerEClass, FeedbackToAdminManager.class, "FeedbackToAdminManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

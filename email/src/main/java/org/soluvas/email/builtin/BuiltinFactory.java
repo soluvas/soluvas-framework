@@ -22,22 +22,22 @@ public interface BuiltinFactory extends EFactory {
 	BuiltinFactory eINSTANCE = org.soluvas.email.builtin.impl.BuiltinFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Test</em>'.
+	 * Returns a new object of class '<em>Contact</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Test</em>'.
+	 * @return a new object of class '<em>Contact</em>'.
 	 * @generated
 	 */
-	Test createTest();
+	Contact createContact();
 
 	/**
-	 * Returns a new object of class '<em>Feedback To Admin</em>'.
+	 * Returns a new object of class '<em>Feedback To Admin Manager</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Feedback To Admin</em>'.
+	 * @return a new object of class '<em>Feedback To Admin Manager</em>'.
 	 * @generated
 	 */
-	FeedbackToAdmin createFeedbackToAdmin();
+	FeedbackToAdminManager createFeedbackToAdminManager();
 
 	/**
 	 * Returns the package supported by this factory.

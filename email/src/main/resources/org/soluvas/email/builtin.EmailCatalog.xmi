@@ -8,8 +8,8 @@
     nsPrefix="builtin"
     generatedPackageName="org.soluvas.email.builtin">
   <pageTypes
-      name="feedbackToAdmin"
-      subjectTemplate="User Feedback"/>
+      name="feedbackToAdminManager"
+      subjectTemplate="{{{contact.subject}}}"/>
   <senderTypes
       name="general"
       from="{{{appManifest.title}}}"

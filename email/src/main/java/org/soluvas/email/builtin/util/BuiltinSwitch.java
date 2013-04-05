@@ -70,19 +70,26 @@ public class BuiltinSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case BuiltinPackage.TEST: {
-				Test test = (Test)theEObject;
-				T result = caseTest(test);
+			case BuiltinPackage.CONTACT: {
+				Contact contact = (Contact)theEObject;
+				T result = caseContact(contact);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case BuiltinPackage.FEEDBACK_TO_ADMIN: {
 				FeedbackToAdmin feedbackToAdmin = (FeedbackToAdmin)theEObject;
 				T result = caseFeedbackToAdmin(feedbackToAdmin);
-				if (result == null) result = casePage(feedbackToAdmin);
-				if (result == null) result = caseTemplate(feedbackToAdmin);
-				if (result == null) result = caseTemplateLike(feedbackToAdmin);
-				if (result == null) result = caseDefaultScope(feedbackToAdmin);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BuiltinPackage.FEEDBACK_TO_ADMIN_MANAGER: {
+				FeedbackToAdminManager feedbackToAdminManager = (FeedbackToAdminManager)theEObject;
+				T result = caseFeedbackToAdminManager(feedbackToAdminManager);
+				if (result == null) result = casePage(feedbackToAdminManager);
+				if (result == null) result = caseFeedbackToAdmin(feedbackToAdminManager);
+				if (result == null) result = caseTemplate(feedbackToAdminManager);
+				if (result == null) result = caseTemplateLike(feedbackToAdminManager);
+				if (result == null) result = caseDefaultScope(feedbackToAdminManager);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -91,17 +98,17 @@ public class BuiltinSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Test</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Contact</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Test</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Contact</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTest(Test object) {
+	public T caseContact(Contact object) {
 		return null;
 	}
 
@@ -117,6 +124,21 @@ public class BuiltinSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseFeedbackToAdmin(FeedbackToAdmin object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Feedback To Admin Manager</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Feedback To Admin Manager</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFeedbackToAdminManager(FeedbackToAdminManager object) {
 		return null;
 	}
 

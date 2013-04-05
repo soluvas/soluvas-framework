@@ -72,12 +72,16 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 	protected BuiltinSwitch<Adapter> modelSwitch =
 		new BuiltinSwitch<Adapter>() {
 			@Override
-			public Adapter caseTest(Test object) {
-				return createTestAdapter();
+			public Adapter caseContact(Contact object) {
+				return createContactAdapter();
 			}
 			@Override
 			public Adapter caseFeedbackToAdmin(FeedbackToAdmin object) {
 				return createFeedbackToAdminAdapter();
+			}
+			@Override
+			public Adapter caseFeedbackToAdminManager(FeedbackToAdminManager object) {
+				return createFeedbackToAdminManagerAdapter();
 			}
 			@Override
 			public Adapter caseTemplateLike(TemplateLike object) {
@@ -116,16 +120,16 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.soluvas.email.builtin.Test <em>Test</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.builtin.Contact <em>Contact</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.soluvas.email.builtin.Test
+	 * @see org.soluvas.email.builtin.Contact
 	 * @generated
 	 */
-	public Adapter createTestAdapter() {
+	public Adapter createContactAdapter() {
 		return null;
 	}
 
@@ -140,6 +144,20 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFeedbackToAdminAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.builtin.FeedbackToAdminManager <em>Feedback To Admin Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.email.builtin.FeedbackToAdminManager
+	 * @generated
+	 */
+	public Adapter createFeedbackToAdminManagerAdapter() {
 		return null;
 	}
 

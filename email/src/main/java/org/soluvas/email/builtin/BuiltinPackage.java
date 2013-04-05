@@ -3,8 +3,10 @@
 package org.soluvas.email.builtin;
 
 import email.EmailPackage;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -55,124 +57,87 @@ public interface BuiltinPackage extends EPackage {
 	BuiltinPackage eINSTANCE = org.soluvas.email.builtin.impl.BuiltinPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.email.builtin.impl.TestImpl <em>Test</em>}' class.
+	 * The meta object id for the '{@link org.soluvas.email.builtin.impl.ContactImpl <em>Contact</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.email.builtin.impl.TestImpl
-	 * @see org.soluvas.email.builtin.impl.BuiltinPackageImpl#getTest()
+	 * @see org.soluvas.email.builtin.impl.ContactImpl
+	 * @see org.soluvas.email.builtin.impl.BuiltinPackageImpl#getContact()
 	 * @generated
 	 */
-	int TEST = 0;
+	int CONTACT = 0;
 
 	/**
-	 * The number of structural features of the '<em>Test</em>' class.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_FEATURE_COUNT = 0;
-
+	int CONTACT__NAME = 0;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.email.builtin.impl.FeedbackToAdminImpl <em>Feedback To Admin</em>}' class.
+	 * The feature id for the '<em><b>Email</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.email.builtin.impl.FeedbackToAdminImpl
+	 * @generated
+	 * @ordered
+	 */
+	int CONTACT__EMAIL = 1;
+
+	/**
+	 * The feature id for the '<em><b>Mobile</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTACT__MOBILE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Subject</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTACT__SUBJECT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Message</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTACT__MESSAGE = 4;
+
+	/**
+	 * The number of structural features of the '<em>Contact</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTACT_FEATURE_COUNT = 5;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.email.builtin.FeedbackToAdmin <em>Feedback To Admin</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.email.builtin.FeedbackToAdmin
 	 * @see org.soluvas.email.builtin.impl.BuiltinPackageImpl#getFeedbackToAdmin()
 	 * @generated
 	 */
 	int FEEDBACK_TO_ADMIN = 1;
 
 	/**
-	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
+	 * The feature id for the '<em><b>Contact</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEEDBACK_TO_ADMIN__SUBJECT_TEMPLATE = EmailPackage.PAGE__SUBJECT_TEMPLATE;
-
-	/**
-	 * The feature id for the '<em><b>Plain Template</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEEDBACK_TO_ADMIN__PLAIN_TEMPLATE = EmailPackage.PAGE__PLAIN_TEMPLATE;
-
-	/**
-	 * The feature id for the '<em><b>Html Template</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEEDBACK_TO_ADMIN__HTML_TEMPLATE = EmailPackage.PAGE__HTML_TEMPLATE;
-
-	/**
-	 * The feature id for the '<em><b>Web Address</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEEDBACK_TO_ADMIN__WEB_ADDRESS = EmailPackage.PAGE__WEB_ADDRESS;
-
-	/**
-	 * The feature id for the '<em><b>App Manifest</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEEDBACK_TO_ADMIN__APP_MANIFEST = EmailPackage.PAGE__APP_MANIFEST;
-
-	/**
-	 * The feature id for the '<em><b>Recipients</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEEDBACK_TO_ADMIN__RECIPIENTS = EmailPackage.PAGE__RECIPIENTS;
-
-	/**
-	 * The feature id for the '<em><b>Layout</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEEDBACK_TO_ADMIN__LAYOUT = EmailPackage.PAGE__LAYOUT;
-
-	/**
-	 * The feature id for the '<em><b>Page Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEEDBACK_TO_ADMIN__PAGE_TYPE = EmailPackage.PAGE__PAGE_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Sender</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEEDBACK_TO_ADMIN__SENDER = EmailPackage.PAGE__SENDER;
-
-	/**
-	 * The feature id for the '<em><b>Mail Session</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEEDBACK_TO_ADMIN__MAIL_SESSION = EmailPackage.PAGE__MAIL_SESSION;
+	int FEEDBACK_TO_ADMIN__CONTACT = 0;
 
 	/**
 	 * The number of structural features of the '<em>Feedback To Admin</em>' class.
@@ -181,18 +146,190 @@ public interface BuiltinPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEEDBACK_TO_ADMIN_FEATURE_COUNT = EmailPackage.PAGE_FEATURE_COUNT + 0;
-
+	int FEEDBACK_TO_ADMIN_FEATURE_COUNT = 1;
 
 	/**
-	 * Returns the meta object for class '{@link org.soluvas.email.builtin.Test <em>Test</em>}'.
+	 * The meta object id for the '{@link org.soluvas.email.builtin.impl.FeedbackToAdminManagerImpl <em>Feedback To Admin Manager</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Test</em>'.
-	 * @see org.soluvas.email.builtin.Test
+	 * @see org.soluvas.email.builtin.impl.FeedbackToAdminManagerImpl
+	 * @see org.soluvas.email.builtin.impl.BuiltinPackageImpl#getFeedbackToAdminManager()
 	 * @generated
 	 */
-	EClass getTest();
+	int FEEDBACK_TO_ADMIN_MANAGER = 2;
+
+	/**
+	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEEDBACK_TO_ADMIN_MANAGER__SUBJECT_TEMPLATE = EmailPackage.PAGE__SUBJECT_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Plain Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEEDBACK_TO_ADMIN_MANAGER__PLAIN_TEMPLATE = EmailPackage.PAGE__PLAIN_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Html Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEEDBACK_TO_ADMIN_MANAGER__HTML_TEMPLATE = EmailPackage.PAGE__HTML_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Web Address</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEEDBACK_TO_ADMIN_MANAGER__WEB_ADDRESS = EmailPackage.PAGE__WEB_ADDRESS;
+
+	/**
+	 * The feature id for the '<em><b>App Manifest</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEEDBACK_TO_ADMIN_MANAGER__APP_MANIFEST = EmailPackage.PAGE__APP_MANIFEST;
+
+	/**
+	 * The feature id for the '<em><b>Recipients</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEEDBACK_TO_ADMIN_MANAGER__RECIPIENTS = EmailPackage.PAGE__RECIPIENTS;
+
+	/**
+	 * The feature id for the '<em><b>Layout</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEEDBACK_TO_ADMIN_MANAGER__LAYOUT = EmailPackage.PAGE__LAYOUT;
+
+	/**
+	 * The feature id for the '<em><b>Page Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEEDBACK_TO_ADMIN_MANAGER__PAGE_TYPE = EmailPackage.PAGE__PAGE_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sender</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEEDBACK_TO_ADMIN_MANAGER__SENDER = EmailPackage.PAGE__SENDER;
+
+	/**
+	 * The feature id for the '<em><b>Mail Session</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEEDBACK_TO_ADMIN_MANAGER__MAIL_SESSION = EmailPackage.PAGE__MAIL_SESSION;
+
+	/**
+	 * The feature id for the '<em><b>Contact</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEEDBACK_TO_ADMIN_MANAGER__CONTACT = EmailPackage.PAGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Feedback To Admin Manager</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEEDBACK_TO_ADMIN_MANAGER_FEATURE_COUNT = EmailPackage.PAGE_FEATURE_COUNT + 1;
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.email.builtin.Contact <em>Contact</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Contact</em>'.
+	 * @see org.soluvas.email.builtin.Contact
+	 * @generated
+	 */
+	EClass getContact();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.builtin.Contact#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.soluvas.email.builtin.Contact#getName()
+	 * @see #getContact()
+	 * @generated
+	 */
+	EAttribute getContact_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.builtin.Contact#getEmail <em>Email</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Email</em>'.
+	 * @see org.soluvas.email.builtin.Contact#getEmail()
+	 * @see #getContact()
+	 * @generated
+	 */
+	EAttribute getContact_Email();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.builtin.Contact#getMobile <em>Mobile</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Mobile</em>'.
+	 * @see org.soluvas.email.builtin.Contact#getMobile()
+	 * @see #getContact()
+	 * @generated
+	 */
+	EAttribute getContact_Mobile();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.builtin.Contact#getSubject <em>Subject</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Subject</em>'.
+	 * @see org.soluvas.email.builtin.Contact#getSubject()
+	 * @see #getContact()
+	 * @generated
+	 */
+	EAttribute getContact_Subject();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.builtin.Contact#getMessage <em>Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Message</em>'.
+	 * @see org.soluvas.email.builtin.Contact#getMessage()
+	 * @see #getContact()
+	 * @generated
+	 */
+	EAttribute getContact_Message();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.builtin.FeedbackToAdmin <em>Feedback To Admin</em>}'.
@@ -203,6 +340,27 @@ public interface BuiltinPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getFeedbackToAdmin();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.email.builtin.FeedbackToAdmin#getContact <em>Contact</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Contact</em>'.
+	 * @see org.soluvas.email.builtin.FeedbackToAdmin#getContact()
+	 * @see #getFeedbackToAdmin()
+	 * @generated
+	 */
+	EReference getFeedbackToAdmin_Contact();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.email.builtin.FeedbackToAdminManager <em>Feedback To Admin Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Feedback To Admin Manager</em>'.
+	 * @see org.soluvas.email.builtin.FeedbackToAdminManager
+	 * @generated
+	 */
+	EClass getFeedbackToAdminManager();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -227,23 +385,74 @@ public interface BuiltinPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.soluvas.email.builtin.impl.TestImpl <em>Test</em>}' class.
+		 * The meta object literal for the '{@link org.soluvas.email.builtin.impl.ContactImpl <em>Contact</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.email.builtin.impl.TestImpl
-		 * @see org.soluvas.email.builtin.impl.BuiltinPackageImpl#getTest()
+		 * @see org.soluvas.email.builtin.impl.ContactImpl
+		 * @see org.soluvas.email.builtin.impl.BuiltinPackageImpl#getContact()
 		 * @generated
 		 */
-		EClass TEST = eINSTANCE.getTest();
+		EClass CONTACT = eINSTANCE.getContact();
 		/**
-		 * The meta object literal for the '{@link org.soluvas.email.builtin.impl.FeedbackToAdminImpl <em>Feedback To Admin</em>}' class.
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.email.builtin.impl.FeedbackToAdminImpl
+		 * @generated
+		 */
+		EAttribute CONTACT__NAME = eINSTANCE.getContact_Name();
+		/**
+		 * The meta object literal for the '<em><b>Email</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTACT__EMAIL = eINSTANCE.getContact_Email();
+		/**
+		 * The meta object literal for the '<em><b>Mobile</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTACT__MOBILE = eINSTANCE.getContact_Mobile();
+		/**
+		 * The meta object literal for the '<em><b>Subject</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTACT__SUBJECT = eINSTANCE.getContact_Subject();
+		/**
+		 * The meta object literal for the '<em><b>Message</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTACT__MESSAGE = eINSTANCE.getContact_Message();
+		/**
+		 * The meta object literal for the '{@link org.soluvas.email.builtin.FeedbackToAdmin <em>Feedback To Admin</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.email.builtin.FeedbackToAdmin
 		 * @see org.soluvas.email.builtin.impl.BuiltinPackageImpl#getFeedbackToAdmin()
 		 * @generated
 		 */
 		EClass FEEDBACK_TO_ADMIN = eINSTANCE.getFeedbackToAdmin();
+		/**
+		 * The meta object literal for the '<em><b>Contact</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FEEDBACK_TO_ADMIN__CONTACT = eINSTANCE.getFeedbackToAdmin_Contact();
+		/**
+		 * The meta object literal for the '{@link org.soluvas.email.builtin.impl.FeedbackToAdminManagerImpl <em>Feedback To Admin Manager</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.email.builtin.impl.FeedbackToAdminManagerImpl
+		 * @see org.soluvas.email.builtin.impl.BuiltinPackageImpl#getFeedbackToAdminManager()
+		 * @generated
+		 */
+		EClass FEEDBACK_TO_ADMIN_MANAGER = eINSTANCE.getFeedbackToAdminManager();
 
 	}
 
