@@ -45,10 +45,6 @@ import com.google.common.collect.Lists;
  *
  * @generated
  */
-/**
- * @author rully
- *
- */
 @SuppressWarnings("serial")
 public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	

@@ -2,18 +2,18 @@
  */
 package org.soluvas.email.builtin.util;
 
-import email.DefaultScope;
-import email.Page;
-import email.Template;
-import email.TemplateLike;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.soluvas.email.builtin.*;
+import org.soluvas.email.DefaultScope;
+import org.soluvas.email.Page;
+import org.soluvas.email.Template;
+import org.soluvas.email.TemplateLike;
+import org.soluvas.email.builtin.BuiltinPackage;
+import org.soluvas.email.builtin.Contact;
+import org.soluvas.email.builtin.FeedbackToAdmin;
+import org.soluvas.email.builtin.FeedbackToAdminManager;
 
 /**
  * <!-- begin-user-doc -->
@@ -162,13 +162,13 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link email.TemplateLike <em>Template Like</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.TemplateLike <em>Template Like</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see email.TemplateLike
+	 * @see org.soluvas.email.TemplateLike
 	 * @generated
 	 */
 	public Adapter createTemplateLikeAdapter() {
@@ -176,13 +176,13 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link email.DefaultScope <em>Default Scope</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.DefaultScope <em>Default Scope</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see email.DefaultScope
+	 * @see org.soluvas.email.DefaultScope
 	 * @generated
 	 */
 	public Adapter createDefaultScopeAdapter() {
@@ -190,13 +190,13 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link email.Template <em>Template</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.Template <em>Template</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see email.Template
+	 * @see org.soluvas.email.Template
 	 * @generated
 	 */
 	public Adapter createTemplateAdapter() {
@@ -204,13 +204,13 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link email.Page <em>Page</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.Page <em>Page</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see email.Page
+	 * @see org.soluvas.email.Page
 	 * @generated
 	 */
 	public Adapter createPageAdapter() {

@@ -2,11 +2,11 @@
  */
 package org.soluvas.email.builtin;
 
-import email.EmailPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.soluvas.email.EmailPackage;
 
 /**
  * <!-- begin-user-doc -->

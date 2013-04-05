@@ -3,7 +3,6 @@
 package org.soluvas.email.builtin;
 
 import org.soluvas.commons.SerializableEObject;
-import email.Page;
 
 /**
  * <!-- begin-user-doc -->

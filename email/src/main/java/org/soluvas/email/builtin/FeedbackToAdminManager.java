@@ -2,7 +2,7 @@
  */
 package org.soluvas.email.builtin;
 
-import email.Page;
+import org.soluvas.email.Page;
 
 
 /**

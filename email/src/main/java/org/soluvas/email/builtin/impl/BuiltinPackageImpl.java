@@ -8,15 +8,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.soluvas.commons.CommonsPackage;
+import org.soluvas.email.EmailPackage;
 import org.soluvas.email.builtin.BuiltinFactory;
 import org.soluvas.email.builtin.BuiltinPackage;
 import org.soluvas.email.builtin.Contact;
 import org.soluvas.email.builtin.FeedbackToAdmin;
 import org.soluvas.email.builtin.FeedbackToAdminManager;
-
-import email.EmailPackage;
-import email.impl.EmailPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -93,18 +90,13 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		CommonsPackage.eINSTANCE.eClass();
-
-		// Obtain or create and register interdependencies
-		EmailPackageImpl theEmailPackage = (EmailPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EmailPackage.eNS_URI) instanceof EmailPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EmailPackage.eNS_URI) : EmailPackage.eINSTANCE);
+		EmailPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theBuiltinPackage.createPackageContents();
-		theEmailPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theBuiltinPackage.initializePackageContents();
-		theEmailPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theBuiltinPackage.freeze();

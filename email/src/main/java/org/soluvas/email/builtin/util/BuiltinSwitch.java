@@ -2,16 +2,17 @@
  */
 package org.soluvas.email.builtin.util;
 
-import email.DefaultScope;
-import email.Page;
-import email.Template;
-import email.TemplateLike;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
-import org.soluvas.email.builtin.*;
+import org.soluvas.email.DefaultScope;
+import org.soluvas.email.Page;
+import org.soluvas.email.Template;
+import org.soluvas.email.TemplateLike;
+import org.soluvas.email.builtin.BuiltinPackage;
+import org.soluvas.email.builtin.Contact;
+import org.soluvas.email.builtin.FeedbackToAdmin;
+import org.soluvas.email.builtin.FeedbackToAdminManager;
 
 /**
  * <!-- begin-user-doc -->

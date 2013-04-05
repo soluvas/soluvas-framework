@@ -2,10 +2,8 @@
  */
 package org.soluvas.email.builtin.impl;
 
-import email.impl.PageImpl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -13,6 +11,7 @@ import org.soluvas.email.builtin.BuiltinPackage;
 import org.soluvas.email.builtin.Contact;
 import org.soluvas.email.builtin.FeedbackToAdmin;
 import org.soluvas.email.builtin.FeedbackToAdminManager;
+import org.soluvas.email.impl.PageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,6 +61,7 @@ public class FeedbackToAdminManagerImpl extends PageImpl implements FeedbackToAd
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Contact getContact() {
 		if (contact != null && ((EObject)contact).eIsProxy()) {
 			InternalEObject oldContact = (InternalEObject)contact;
@@ -88,6 +88,7 @@ public class FeedbackToAdminManagerImpl extends PageImpl implements FeedbackToAd
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setContact(Contact newContact) {
 		Contact oldContact = contact;
 		contact = newContact;

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.email.EmailFactory;
+import org.soluvas.email.EmailManager;
 import org.soluvas.email.Recipient;
 import org.soluvas.email.builtin.Contact;
 import org.soluvas.email.builtin.FeedbackToAdminManager;
@@ -16,8 +17,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.google.common.eventbus.Subscribe;
-
-import email.EmailManager;
 
 /**
  * @author haidar
@@ -49,7 +48,7 @@ public class FeedbackToAdminSubcriber {
 		recipients.add(recipientFromPrimaryEmail);
 		
 		final FeedbackToAdminManager page = emailMgr.createPage(FeedbackToAdminManager.class);
-		page.getRecipients().add((email.Recipient) recipients);
+		page.getRecipients().add((Recipient) recipients);
 		if (!recipients.isEmpty()) {
 			emailMgr.sendAll(page);
 		}
