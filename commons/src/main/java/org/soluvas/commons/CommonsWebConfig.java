@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
 
 import org.apache.http.client.HttpClient;
@@ -24,7 +25,6 @@ import org.soluvas.json.JacksonMapperFactoryImpl;
 import org.soluvas.json.LowerEnumModule;
 import org.soluvas.json.jscience.JscienceModule;
 import org.soluvas.json.money.JodaMoneyModule;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -59,14 +59,15 @@ public class CommonsWebConfig {
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(CommonsWebConfig.class);
-	@Autowired
+	@Inject
 	private ServletContext servletContext;
 //	@Value("#{systemProperties['user.home']}/${tenantId}_${tenantEnv}")
 //	public File dataDir;
 	
 	@Bean
 	public TenantRef tenantRef() {
-		final String contextPath = servletContext.getContextPath();
+		final String contextPath = Preconditions.checkNotNull(servletContext, "Cannot inject ServletContext")
+				.getContextPath();
 		final Matcher tenantMatcher = Pattern.compile("\\/([^_]+)_([^_]+)_([^_]+)").matcher(contextPath);
 		Preconditions.checkState(tenantMatcher.matches(),
 				"ContextPath %s must match pattern: /{tenantId}_{tenantEnv}_{appCode}",
