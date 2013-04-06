@@ -38,16 +38,19 @@ public class SerializableEMap<K, V> extends EcoreEMap<K, V> implements Serializa
 		private final String entryEClassName;
 		private final Class<?> entryClass;
 		private final Map<K, Object> map;
+		private String entryEPackageClassName;
 		
 		/**
 		 * @param entryEPackageNsUri
 		 * @param entryEClassName
+		 * @param string 
 		 * @param entryClass
 		 * @param map
 		 */
-		public SerializationProxy(String entryEPackageNsUri,
+		public SerializationProxy(String entryEPackageClassName, String entryEPackageNsUri,
 				String entryEClassName, Class<?> entryClass, Map<K, V> map) {
 			super();
+			this.entryEPackageClassName = entryEPackageClassName;
 			this.entryEPackageNsUri = entryEPackageNsUri;
 			this.entryEClassName = entryEClassName;
 			this.entryClass = entryClass;
@@ -103,9 +106,17 @@ public class SerializableEMap<K, V> extends EcoreEMap<K, V> implements Serializa
 					throw new CommonsException(e, "Cannot find EPackage %s in OSGi EPackage Registry", entryEPackageNsUri);
 				}
 			} else {
-				final EPackage entryEPackage = Preconditions.checkNotNull(EPackage.Registry.INSTANCE.getEPackage(entryEPackageNsUri),
-					"Cannot find EPackage %s in global EPackage Registry containing %s entries: %s",
-					entryEPackageNsUri, EPackage.Registry.INSTANCE.size(), EPackage.Registry.INSTANCE.keySet());
+				Class<EPackage> entryEPackageClass;
+				try {
+					entryEPackageClass = (Class<EPackage>) getClass().getClassLoader().loadClass(entryEPackageClassName);
+				} catch (ClassNotFoundException e) {
+					throw new CommonsException(e, "Cannot load EPackage %s (%s) to instantate EMap based on EClass %s",
+							entryEPackageClassName, entryEPackageNsUri, entryEClassName); 
+				}
+				final EPackage entryEPackage = EmfUtils.getEPackage(entryEPackageClass);
+//				final EPackage entryEPackage = Preconditions.checkNotNull(EPackage.Registry.INSTANCE.getEPackage(entryEPackageNsUri),
+//					"Cannot find EPackage %s in global EPackage Registry containing %s entries: %s",
+//					entryEPackageNsUri, EPackage.Registry.INSTANCE.size(), EPackage.Registry.INSTANCE.keySet());
 				entryEClass = (EClass) Preconditions.checkNotNull(entryEPackage.getEClassifier(entryEClassName),
 						"Cannot find EClass %s in EPackage %s (%s)", entryEClassName, entryEPackage.getName(),
 						entryEPackageNsUri);
@@ -151,8 +162,8 @@ public class SerializableEMap<K, V> extends EcoreEMap<K, V> implements Serializa
 	}
 	
 	private Object writeReplace() {
-		return new SerializationProxy<K, V>(entryEClass.getEPackage().getNsURI(), entryEClass.getName(),
-				entryClass, map());
+		return new SerializationProxy<K, V>(entryEClass.getEPackage().getClass().getName(),
+				entryEClass.getEPackage().getNsURI(), entryEClass.getName(), entryClass, map());
 	}
 
 }
