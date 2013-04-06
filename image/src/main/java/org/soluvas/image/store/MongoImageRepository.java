@@ -20,7 +20,6 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.apache.commons.io.FileUtils;
@@ -42,8 +41,6 @@ import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageTransformer;
 import org.soluvas.image.ImageVariant;
 import org.soluvas.image.UploadedImage;
-import org.soluvas.image.impl.DavConnectorImpl;
-import org.soluvas.image.impl.ImageMagickTransformerImpl;
 import org.soluvas.image.impl.ResizeToFillImpl;
 import org.soluvas.image.impl.ResizeToFitImpl;
 import org.soluvas.image.util.ImageUtils;
@@ -132,50 +129,23 @@ public class MongoImageRepository implements ImageRepository {
 		
 	}
 	
-	private static final Logger log = LoggerFactory.getLogger(MongoImageRepository.class);
+	private final Logger log;
 	
-	private String namespace;
-	private String mongoUri;
+	private final String namespace;
+	private final String mongoUri;
 	private DBCollection mongoColl;
 	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<String, ImageStyle>();
 	
 	private DavConnector innerConnector;
-	private ImageConnector connector;
-	private ImageTransformer transformer;
+	private final ImageConnector connector;
+	private final ImageTransformer transformer;
 
-	private List<String> mongoHosts;
-	private String mongoDatabase;
+	private final List<String> mongoHosts;
+	private final String mongoDatabase;
 	
 	// should be network executor, to perform mongodb operations concurrently
 	// although probably better to do it in bulk instead, or both (i.e. 32 bulk inserts in the executor, of 10 documents each)
 	private final ListeningExecutorService executor = MoreExecutors.sameThreadExecutor();
-	
-	/**
-	 * Required by CDI apps i.e. LDAP Tools CLI.
-	 */
-	public MongoImageRepository() {
-		super();
-	}
-	
-	/**
-	 * Create image repository powered by {@link DavConnector}.
-	 * @param namespace
-	 * @param davUri
-	 * @param publicUri
-	 * @param mongoUri
-	 * @deprecated Use {@link #MongoImageRepository(String, String, ImageConnector, Collection)}.
-	 */
-	@Deprecated
-	public MongoImageRepository(String namespace, String davUri, String publicUri,
-			String mongoUri) {
-		super();
-		this.namespace = namespace;
-		this.mongoUri = mongoUri;
-		this.innerConnector = new DavConnectorImpl(davUri, publicUri); 
-		this.connector = innerConnector;
-//		this.transformer = new ThumbnailatorTransformerImpl(innerConnector);
-		this.transformer = new ImageMagickTransformerImpl(innerConnector);
-	}
 	
 	// URI: ~repo.publicUri~{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}
 	public MongoImageRepository(String namespace, String mongoUri, ImageConnector connector,
@@ -186,20 +156,15 @@ public class MongoImageRepository implements ImageRepository {
 		this.connector = connector;
 		this.transformer = transformer;
 		setStyles(imageStyles);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.soluvas.image.store.ImageRepository#init()
-	 */
-	@PostConstruct
-	public void init() {
+		
+		final MongoURI mongoUriDetail = new MongoURI(mongoUri);
+		log = LoggerFactory.getLogger(MongoImageRepository.class.getName() + "/" + mongoUriDetail.getDatabase());
 		log.info("Starting MongoImageRepository {} with {} styles", namespace, styles.size());
 		
 		// Sanity checks
 		if (mongoUri == null || mongoUri.isEmpty())
 			throw new ImageException("MongoDB URI for " + namespace + " Image Store cannot be empty");
 
-		MongoURI mongoUriDetail = new MongoURI(mongoUri);
 		mongoHosts = mongoUriDetail.getHosts();
 		mongoDatabase = mongoUriDetail.getDatabase();
 		try {
