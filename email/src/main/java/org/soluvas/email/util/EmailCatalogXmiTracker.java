@@ -308,7 +308,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					pageType.setPlainTemplate(plain);
 				} catch (Exception e) {
 					log.info("No plain email template found for " + pageType.getName() + ". Cannot read " +
-						plainFileName + " in " + xmiUrls, e);
+						plainFileName + " in " + xmiUrls);
 				}
 				final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
 				try {
