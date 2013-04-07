@@ -38,7 +38,7 @@ public class SerializableEMap<K, V> extends EcoreEMap<K, V> implements Serializa
 		private final String entryEClassName;
 		private final Class<?> entryClass;
 		private final Map<K, Object> map;
-		private String entryEPackageClassName;
+		private String entryEPackageImplName;
 		
 		/**
 		 * @param entryEPackageNsUri
@@ -47,10 +47,10 @@ public class SerializableEMap<K, V> extends EcoreEMap<K, V> implements Serializa
 		 * @param entryClass
 		 * @param map
 		 */
-		public SerializationProxy(String entryEPackageClassName, String entryEPackageNsUri,
+		public SerializationProxy(String entryEPackageImplName, String entryEPackageNsUri,
 				String entryEClassName, Class<?> entryClass, Map<K, V> map) {
 			super();
-			this.entryEPackageClassName = entryEPackageClassName;
+			this.entryEPackageImplName = entryEPackageImplName;
 			this.entryEPackageNsUri = entryEPackageNsUri;
 			this.entryEClassName = entryEClassName;
 			this.entryClass = entryClass;
@@ -106,14 +106,15 @@ public class SerializableEMap<K, V> extends EcoreEMap<K, V> implements Serializa
 					throw new CommonsException(e, "Cannot find EPackage %s in OSGi EPackage Registry", entryEPackageNsUri);
 				}
 			} else {
-				Class<EPackage> entryEPackageClass;
+				final Class<EPackage> entryEPackageIntf;
 				try {
-					entryEPackageClass = (Class<EPackage>) getClass().getClassLoader().loadClass(entryEPackageClassName);
+					final Class<?> entryEPackageClass = getClass().getClassLoader().loadClass(entryEPackageImplName);
+					entryEPackageIntf = (Class<EPackage>) entryEPackageClass.getInterfaces()[0];
 				} catch (ClassNotFoundException e) {
 					throw new CommonsException(e, "Cannot load EPackage %s (%s) to instantate EMap based on EClass %s",
-							entryEPackageClassName, entryEPackageNsUri, entryEClassName); 
+							entryEPackageImplName, entryEPackageNsUri, entryEClassName); 
 				}
-				final EPackage entryEPackage = EmfUtils.getEPackage(entryEPackageClass);
+				final EPackage entryEPackage = EmfUtils.getEPackage(entryEPackageIntf);
 //				final EPackage entryEPackage = Preconditions.checkNotNull(EPackage.Registry.INSTANCE.getEPackage(entryEPackageNsUri),
 //					"Cannot find EPackage %s in global EPackage Registry containing %s entries: %s",
 //					entryEPackageNsUri, EPackage.Registry.INSTANCE.size(), EPackage.Registry.INSTANCE.keySet());
