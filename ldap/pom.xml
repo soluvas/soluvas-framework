@@ -28,6 +28,12 @@
 		</dependency>
 
 		<dependency>
+		    <groupId>com.yammer.metrics</groupId>
+		    <artifactId>metrics-core</artifactId>
+		    <version>3.0.0-BETA1</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.apache.karaf.shell</groupId>
 			<artifactId>org.apache.karaf.shell.console</artifactId>
 		</dependency>

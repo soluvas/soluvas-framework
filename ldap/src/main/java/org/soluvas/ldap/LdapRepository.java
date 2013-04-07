@@ -81,6 +81,16 @@ public interface LdapRepository<T> extends EntityLookup<T, String>, Repository<T
 	T findOneByAttribute(String attribute, String value);
 	
 	/**
+	 * Count LDAP entries based on an attribute value. The attribute does not need to be
+	 * {@link LdapAttribute} annotated.
+	 * 
+	 * @param attribute
+	 * @param value
+	 * @return
+	 */
+	long countByAttribute(String attribute, String value);
+
+	/**
 	 * Find all LDAP entries of the same <tt>objectClass</tt>-es as the {@link LdapEntity}#objectClasses() annotation.
 	 * @param obj
 	 * @throws LdapException

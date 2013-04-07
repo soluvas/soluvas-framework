@@ -457,5 +457,38 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	protected String getId(T entity) {
 		return mapper.getRdnValue(entity);
 	}
+
+	@Override
+	public long countByAttribute(String attribute, String value) {
+		final String primaryObjectClass = mapper.getMapping(entityClass).getPrimaryObjectClass();
+		// Only search based on first objectClass, this is the typical use case
+//		final String filter = "(objectClass=" + primaryObjectClass + ")";
+		final String filter = "(&(objectClass=*)(" + attribute + "=" + value + "))";
+		log.info("Counting LDAP {} filter: {}", baseDn, filter); 
+		try {
+			final Long entries = withConnection(new Function<LdapConnection, Long>() {
+				@Override @Nullable
+				public Long apply(@Nullable LdapConnection conn) {
+					EntryCursor cursor = null;
+					try {
+						cursor = conn.search(baseDn, filter, SearchScope.ONELEVEL);
+						return (long) Iterables.size(cursor);
+					} catch (LdapException e) {
+						Throwables.propagate(e);
+						return null;
+					} finally {
+						if (cursor != null) {
+							cursor.close();
+						}
+					}
+				}
+			});
+			log.info("LDAP count {} filter {} returned {} entries", baseDn, filter, entries);
+			return entries;
+		} catch (Exception e) {
+			log.error("Error searching LDAP in " + baseDn + " filter " + filter, e);
+			throw new RuntimeException("Error searching LDAP in " + baseDn + " filter " + filter, e);
+		}
+	}
 	
 }

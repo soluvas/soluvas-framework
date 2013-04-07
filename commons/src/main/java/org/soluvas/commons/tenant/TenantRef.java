@@ -2,6 +2,8 @@ package org.soluvas.commons.tenant;
 
 import java.io.Serializable;
 
+import com.google.common.base.Strings;
+
 /**
  * @author ceefour
  *
@@ -47,6 +49,14 @@ public class TenantRef implements Serializable {
 
 	public void setTenantEnv(String tenantEnv) {
 		this.tenantEnv = tenantEnv;
+	}
+	
+	/**
+	 * Returns e.g. <code>tuneeca_dev</code>.
+	 * @return
+	 */
+	public String getKey() {
+		return Strings.nullToEmpty(tenantId) + "_" + Strings.nullToEmpty(tenantEnv);
 	}
 
 	@Override
