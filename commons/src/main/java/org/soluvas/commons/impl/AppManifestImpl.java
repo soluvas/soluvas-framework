@@ -33,6 +33,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getGeneralEmail <em>General Email</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getOrganizationName <em>Organization Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getOrganizationAddress <em>Organization Address</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterSalutation <em>Letter Salutation</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterClosing <em>Letter Closing</em>}</li>
  * </ul>
  * </p>
  *
@@ -263,6 +265,46 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * @ordered
 	 */
 	protected String organizationAddress = ORGANIZATION_ADDRESS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLetterSalutation() <em>Letter Salutation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLetterSalutation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LETTER_SALUTATION_EDEFAULT = "Hai";
+
+	/**
+	 * The cached value of the '{@link #getLetterSalutation() <em>Letter Salutation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLetterSalutation()
+	 * @generated
+	 * @ordered
+	 */
+	protected String letterSalutation = LETTER_SALUTATION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLetterClosing() <em>Letter Closing</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLetterClosing()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LETTER_CLOSING_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLetterClosing() <em>Letter Closing</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLetterClosing()
+	 * @generated
+	 * @ordered
+	 */
+	protected String letterClosing = LETTER_CLOSING_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -539,6 +581,48 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getLetterSalutation() {
+		return letterSalutation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLetterSalutation(String newLetterSalutation) {
+		String oldLetterSalutation = letterSalutation;
+		letterSalutation = newLetterSalutation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__LETTER_SALUTATION, oldLetterSalutation, letterSalutation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLetterClosing() {
+		return letterClosing;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLetterClosing(String newLetterClosing) {
+		String oldLetterClosing = letterClosing;
+		letterClosing = newLetterClosing;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__LETTER_CLOSING, oldLetterClosing, letterClosing));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -564,6 +648,10 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return getOrganizationName();
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
 				return getOrganizationAddress();
+			case CommonsPackage.APP_MANIFEST__LETTER_SALUTATION:
+				return getLetterSalutation();
+			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
+				return getLetterClosing();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -608,6 +696,12 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return;
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
 				setOrganizationAddress((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__LETTER_SALUTATION:
+				setLetterSalutation((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
+				setLetterClosing((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -654,6 +748,12 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
 				setOrganizationAddress(ORGANIZATION_ADDRESS_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__LETTER_SALUTATION:
+				setLetterSalutation(LETTER_SALUTATION_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
+				setLetterClosing(LETTER_CLOSING_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -688,6 +788,10 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return ORGANIZATION_NAME_EDEFAULT == null ? organizationName != null : !ORGANIZATION_NAME_EDEFAULT.equals(organizationName);
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
 				return ORGANIZATION_ADDRESS_EDEFAULT == null ? organizationAddress != null : !ORGANIZATION_ADDRESS_EDEFAULT.equals(organizationAddress);
+			case CommonsPackage.APP_MANIFEST__LETTER_SALUTATION:
+				return LETTER_SALUTATION_EDEFAULT == null ? letterSalutation != null : !LETTER_SALUTATION_EDEFAULT.equals(letterSalutation);
+			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
+				return LETTER_CLOSING_EDEFAULT == null ? letterClosing != null : !LETTER_CLOSING_EDEFAULT.equals(letterClosing);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -772,6 +876,10 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 		result.append(organizationName);
 		result.append(", organizationAddress: ");
 		result.append(organizationAddress);
+		result.append(", letterSalutation: ");
+		result.append(letterSalutation);
+		result.append(", letterClosing: ");
+		result.append(letterClosing);
 		result.append(')');
 		return result.toString();
 	}

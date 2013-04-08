@@ -74,6 +74,26 @@
         <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/domain"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_BhN3kUWcEeK1qbOICpWDVg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_iPn5kKAUEeKZuq8VblqnLg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/generalEmail"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_iPn5kaAUEeKZuq8VblqnLg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_iPn5kqAUEeKZuq8VblqnLg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/organizationName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_iPogoKAUEeKZuq8VblqnLg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_iPogoaAUEeKZuq8VblqnLg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/organizationAddress"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_iPogoqAUEeKZuq8VblqnLg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zgzGcKAUEeKZuq8VblqnLg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/letterSalutation"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_zgzGcaAUEeKZuq8VblqnLg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_iPkPMaAUEeKZuq8VblqnLg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/letterClosing"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_iPkPMqAUEeKZuq8VblqnLg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_J59AQSSDEeKyUdMfH4dSfg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_J59AQiSDEeKyUdMfH4dSfg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_J59AQySDEeKyUdMfH4dSfg"/>
