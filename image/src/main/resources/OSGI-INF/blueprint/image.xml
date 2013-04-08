@@ -50,14 +50,16 @@
 		</jaxrs:serviceBeans>
 	</jaxrs:server>	
 
-	<service auto-export="interfaces">
+	<!--
+	WORKAROUND avoid cyclic dependency 
+	service auto-export="interfaces">
 		<bean class="org.soluvas.web.site.JavaScriptModuleImpl">
 			<argument value="org.soluvas.image/imageConfigs"/>
 			<argument value="org.soluvas.image/imageConfigs"/>
 			<argument value="org.soluvas.image/imageConfigs"/>
 			<argument value="DYNAMIC"/>
 		</bean>
-	</service>
+	</service-->
 
 	<bean id="imageMgr" class="org.soluvas.image.impl.ImageManagerImpl"/>
 	<service ref="imageMgr" auto-export="interfaces"/>

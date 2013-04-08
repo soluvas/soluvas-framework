@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.ldap.SocialPerson.Gender;
+import org.soluvas.commons.Gender;
 
 import com.google.common.collect.ImmutableSet;
 

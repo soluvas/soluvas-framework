@@ -200,8 +200,26 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImageManager">
+    <eOperations name="getNoImageUri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Object / non-person missing image URI."/>
+      </eAnnotations>
+    </eOperations>
     <eOperations name="getDefaultPhotoId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
       <eParameters name="gender" eType="ecore:EEnum ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Gender"/>
+    </eOperations>
+    <eOperations name="getPersonPhotoUri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns the provided URI if specified. Otherwise, return the default photo ID based on given gender.&#xA;If gender is not known, will return unknown gender photo URI."/>
+      </eAnnotations>
+      <eParameters name="uri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="gender" eType="ecore:EEnum ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Gender"/>
+    </eOperations>
+    <eOperations name="getObjectPhotoUri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return the non-object URI if not null, otherwise return the default non-object image URI."/>
+      </eAnnotations>
+      <eParameters name="uri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     </eOperations>
     <eOperations name="export" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

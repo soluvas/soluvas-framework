@@ -256,9 +256,21 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_U5wMQ12HEeK8n5vmF4w3tA"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_U5wMRF2HEeK8n5vmF4w3tA" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_CDd9gKBIEeK3iooBk0b4Bw" type="2002">
+        <element xmi:type="ecore:EOperation" href="image.ecore#//ImageManager/getNoImageUri"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_CDd9gaBIEeK3iooBk0b4Bw"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_XD2FQF2HEeK8n5vmF4w3tA" type="2002">
         <element xmi:type="ecore:EOperation" href="image.ecore#//ImageManager/getDefaultPhotoId"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_XD2FQV2HEeK8n5vmF4w3tA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_0evUkaBEEeK5wtp2GEy0EA" type="2002">
+        <element xmi:type="ecore:EOperation" href="image.ecore#//ImageManager/getPersonPhotoUri"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_0evUkqBEEeK5wtp2GEy0EA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Z76EMKBGEeK5wtp2GEy0EA" type="2002">
+        <element xmi:type="ecore:EOperation" href="image.ecore#//ImageManager/getObjectPhotoUri"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Z76EMaBGEeK5wtp2GEy0EA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_XenHwF_OEeK5foAZhP7dzg" type="2002">
         <element xmi:type="ecore:EOperation" href="image.ecore#//ImageManager/export"/>

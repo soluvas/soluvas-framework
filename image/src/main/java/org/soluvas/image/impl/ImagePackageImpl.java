@@ -1343,8 +1343,17 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		initEClass(imageManagerEClass, ImageManager.class, "ImageManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getNoImageUri", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		op = addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getDefaultPhotoId", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theCommonsPackage.getGender(), "gender", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getPersonPhotoUri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theCommonsPackage.getGender(), "gender", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getObjectPhotoUri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(imageManagerEClass, theEcorePackage.getELong(), "export", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageRepository(), "imageRepo", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1585,13 +1594,31 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 			 "documentation", "Height in pixels, useful for IMG tag.\n\nNote: Connectors won\'t return this, but Transformers would."
 		   });		
 		addAnnotation
-		  (imageManagerEClass.getEOperations().get(1), 
+		  (imageManagerEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Object / non-person missing image URI."
+		   });		
+		addAnnotation
+		  (imageManagerEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Returns the provided URI if specified. Otherwise, return the default photo ID based on given gender.\nIf gender is not known, will return unknown gender photo URI."
+		   });		
+		addAnnotation
+		  (imageManagerEClass.getEOperations().get(3), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return the non-object URI if not null, otherwise return the default non-object image URI."
+		   });		
+		addAnnotation
+		  (imageManagerEClass.getEOperations().get(4), 
 		   source, 
 		   new String[] {
 			 "documentation", "Downloads all images and exports them to a folder."
 		   });		
 		addAnnotation
-		  (imageManagerEClass.getEOperations().get(2), 
+		  (imageManagerEClass.getEOperations().get(5), 
 		   source, 
 		   new String[] {
 			 "documentation", "Import from metadata file and images.\n\nCan\'t have \"import\" as name because it\'s a reserved keyword."

@@ -6,6 +6,7 @@ import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.ArchivalStatus;
+import org.soluvas.commons.Gender;
 import org.soluvas.commons.PublicationStatus;
 
 import com.google.common.base.Strings;
@@ -20,8 +21,6 @@ import com.google.common.collect.ImmutableSet.Builder;
 @LdapEntry(objectClasses={"inetOrgPerson", "uidObject", "extensibleObject", "socialPerson", "facebookObject", "twitterObject"})
 public class SocialPerson extends Person {
 	
-	public static enum Gender { MALE, FEMALE };
-
 	@LdapAttribute("primaryMail")
 	private String primaryEmail;
 	@LdapAttribute("photoId")

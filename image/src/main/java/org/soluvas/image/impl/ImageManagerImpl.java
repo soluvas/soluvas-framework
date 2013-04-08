@@ -41,6 +41,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 
 /**
@@ -94,6 +95,15 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
+	public String getNoImageUri() {
+		return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_person.png";
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
 	public String getDefaultPhotoId(Gender gender) {
 		log.debug("Current User Gender {}", gender);
 		switch (gender) {
@@ -103,6 +113,32 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			return femaleDefaultPhotoId;
 		default:
 			return unknownDefaultPhotoId;
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public String getPersonPhotoUri(String uri, Gender gender) {
+		if (!Strings.isNullOrEmpty(uri)) {
+			return uri;
+		} else {
+			return getPersonPhotoUri(gender);
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public String getObjectPhotoUri(String uri) {
+		if (!Strings.isNullOrEmpty(uri)) {
+			return uri;
+		} else {
+			return getNoImageUri();
 		}
 	}
 
@@ -334,7 +370,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		return importedCount;
 	}
 
-	public String getPersonPhotoUri(org.soluvas.ldap.SocialPerson.Gender gender) {
+	public String getPersonPhotoUri(Gender gender) {
 		switch (gender) {
 		case MALE:
 			return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_male.png";
