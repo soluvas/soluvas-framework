@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,8 @@ import org.soluvas.commons.QNameFunction;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.Mixin;
 import org.soluvas.data.MixinManager;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
@@ -35,6 +38,7 @@ import com.google.common.collect.Iterables;
  *
  * @generated
  */
+@Service @Lazy
 public class MixinManagerImpl implements MixinManager {
 	
 	private static final Logger log = LoggerFactory
@@ -58,6 +62,7 @@ public class MixinManagerImpl implements MixinManager {
 		throw new UnsupportedOperationException();
 	}
 	
+	@Inject
 	public MixinManagerImpl(DataCatalog dataCatalog) {
 		super();
 		this.dataCatalog = dataCatalog;
