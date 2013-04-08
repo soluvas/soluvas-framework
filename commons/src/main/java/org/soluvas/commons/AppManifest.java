@@ -21,6 +21,8 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.AppManifest#getGeneralEmail <em>General Email</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationName <em>Organization Name</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationAddress <em>Organization Address</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getLetterSalutation <em>Letter Salutation</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getLetterClosing <em>Letter Closing</em>}</li>
  * </ul>
  * </p>
  *
@@ -192,5 +194,75 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 	 * @generated
 	 */
 	void setOrganizationAddress(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Letter Salutation</b></em>' attribute.
+	 * The default value is <code>"Hai"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The SALUTATION (C) of the letter starts on the left margin two lines below the inside address for a business letter or five lines below the heading of a personal letter, if typed. All words in the salutation are capitalized, and the last word is followed by a comma in a personal letter or a colon in a business letter.
+	 * Sample salutations are:
+	 * 
+	 * 
+	 * Personal:
+	 * Greetings Friend, Dear Bob, Hi Bob,
+	 * 
+	 * Business:
+	 * Dear Mr. Jones: Dear Sir:
+	 * Ladies and Gentlemen: Dear Mr./Mrs./Ms. Jones:
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Letter Salutation</em>' attribute.
+	 * @see #setLetterSalutation(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_LetterSalutation()
+	 * @model default="Hai"
+	 * @generated
+	 */
+	String getLetterSalutation();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getLetterSalutation <em>Letter Salutation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Letter Salutation</em>' attribute.
+	 * @see #getLetterSalutation()
+	 * @generated
+	 */
+	void setLetterSalutation(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Letter Closing</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The first word of the CLOSING (E), which is placed several lines below the body, lines up with the first word in the heading and is the only word capitalized. A comma follows the closing.
+	 * 
+	 * Possible closings include:
+	 * 
+	 * Personal:
+	 * Your friend, Missing you, Sincerely,
+	 * Confused, Affectionately,Cordially,
+	 * 
+	 * Business:
+	 * Sincerely yours, Yours truly,Respectfully yours,
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Letter Closing</em>' attribute.
+	 * @see #setLetterClosing(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_LetterClosing()
+	 * @model
+	 * @generated
+	 */
+	String getLetterClosing();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getLetterClosing <em>Letter Closing</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Letter Closing</em>' attribute.
+	 * @see #getLetterClosing()
+	 * @generated
+	 */
+	void setLetterClosing(String value);
 
 } // AppManifest

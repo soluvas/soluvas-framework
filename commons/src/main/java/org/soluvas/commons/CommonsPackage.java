@@ -241,13 +241,31 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__ORGANIZATION_ADDRESS = POSITIONABLE_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Letter Salutation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__LETTER_SALUTATION = POSITIONABLE_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Letter Closing</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__LETTER_CLOSING = POSITIONABLE_FEATURE_COUNT + 11;
+
+	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 10;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}' class.
@@ -2504,6 +2522,28 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_OrganizationAddress();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getLetterSalutation <em>Letter Salutation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Letter Salutation</em>'.
+	 * @see org.soluvas.commons.AppManifest#getLetterSalutation()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_LetterSalutation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getLetterClosing <em>Letter Closing</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Letter Closing</em>'.
+	 * @see org.soluvas.commons.AppManifest#getLetterClosing()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_LetterClosing();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonInfo <em>Person Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4061,6 +4101,22 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__ORGANIZATION_ADDRESS = eINSTANCE.getAppManifest_OrganizationAddress();
+
+		/**
+		 * The meta object literal for the '<em><b>Letter Salutation</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__LETTER_SALUTATION = eINSTANCE.getAppManifest_LetterSalutation();
+
+		/**
+		 * The meta object literal for the '<em><b>Letter Closing</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__LETTER_CLOSING = eINSTANCE.getAppManifest_LetterClosing();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.
