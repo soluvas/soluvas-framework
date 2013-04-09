@@ -26,7 +26,7 @@ import com.google.common.base.Strings;
 @Command(scope="cat", name="ls", description="List registered Categories.")
 public class CatLsCommand extends ExtCommandSupport {
 	
-	private CategoryCatalog categoryCatalog;
+	private final CategoryCatalog categoryCatalog;
 	
 	@Inject
 	public CatLsCommand(CategoryCatalog categoryCatalog) {
@@ -49,9 +49,10 @@ public class CatLsCommand extends ExtCommandSupport {
 		final EList<Category> nestedCategories = categoryCatalog.getCategories();
 		final List<Category> flatCategories = CategoryUtils.flatten(nestedCategories);
 		for (final Category category : flatCategories) {
-			final String bundleAnsi = NameUtils.shortenBundleAnsi(category.getBundle(), 20);
+//			final String bundleAnsi = NameUtils.shortenBundleAnsi(category.getBundle(), 20);
+			final String bundleAnsi = NameUtils.shortenAnsi(category.getResourceName(), 20);
 			final String descriptionAnsi = NameUtils.shortenAnsi(category.getDescription(), 20);
-			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-25s|@@|bold,black ||@%-18s@|bold,black ||@%-15s@|bold,black ||@%-1d@|bold,black ||@%-10s@|bold,black ||@" + descriptionAnsi + "@|bold,black ||@" + bundleAnsi,
+			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-25s|@@|bold,black ||@%-18s@|bold,black ||@%-15s@|bold,black ||@%-1d@|bold,black ||@%-10s@|bold,black ||@" + descriptionAnsi + "@|bold,black ||@" + bundleAnsi + " " + category.getSlugPath(),
 				++i, category.getId(), Strings.repeat("·", category.getLevel() - 1) + category.getName(),
 				category.getSlug(), category.getLevel(), category.getCatalogName() ));
 		}
