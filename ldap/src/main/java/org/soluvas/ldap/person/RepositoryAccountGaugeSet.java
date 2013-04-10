@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.soluvas.commons.AccountStatus;
+import org.soluvas.commons.metrics.FailTolerantGaugeDecorator;
 import org.soluvas.ldap.LdapRepository;
 import org.soluvas.ldap.SocialPerson;
 
@@ -33,19 +34,26 @@ public class RepositoryAccountGaugeSet implements MetricSet {
 	public Map<String, Metric> getMetrics() {
 		final Map<String, Metric> metrics = new HashMap<>();
 		metrics.put(MetricRegistry.name(LdapRepository.class, "person", "totalCount"),
-				new TotalAccountCountGauge(1, TimeUnit.MINUTES, repo));
+				new FailTolerantGaugeDecorator<>(
+					new TotalAccountCountGauge(1, TimeUnit.MINUTES, repo)));
 		metrics.put(MetricRegistry.name(LdapRepository.class, "person", "activeCount"),
-				new ActiveAccountCountGauge(1, TimeUnit.MINUTES, repo));
+				new FailTolerantGaugeDecorator<>(
+					new ActiveAccountCountGauge(1, TimeUnit.MINUTES, repo)));
 		metrics.put(MetricRegistry.name(LdapRepository.class, "person", "draftCount"),
-				new DraftAccountCountGauge(1, TimeUnit.MINUTES, repo));
+				new FailTolerantGaugeDecorator<>(
+					new DraftAccountCountGauge(1, TimeUnit.MINUTES, repo)));
 		metrics.put(MetricRegistry.name(LdapRepository.class, "person", "inactiveCount"),
-				new InactiveAccountCountGauge(1, TimeUnit.MINUTES, repo));
+				new FailTolerantGaugeDecorator<>(
+					new InactiveAccountCountGauge(1, TimeUnit.MINUTES, repo)));
 		metrics.put(MetricRegistry.name(LdapRepository.class, "person", "validatedCount"),
-				new ValidatedAccountCountGauge(1, TimeUnit.MINUTES, repo));
+				new FailTolerantGaugeDecorator<>(
+					new ValidatedAccountCountGauge(1, TimeUnit.MINUTES, repo)));
 		metrics.put(MetricRegistry.name(LdapRepository.class, "person", "verifiedCount"),
-				new VerifiedAccountCountGauge(1, TimeUnit.MINUTES, repo));
+				new FailTolerantGaugeDecorator<>(
+					new VerifiedAccountCountGauge(1, TimeUnit.MINUTES, repo)));
 		metrics.put(MetricRegistry.name(LdapRepository.class, "person", "voidCount"),
-				new VoidAccountCountGauge(1, TimeUnit.MINUTES, repo));
+				new FailTolerantGaugeDecorator<>(
+					new VoidAccountCountGauge(1, TimeUnit.MINUTES, repo)));
 		return metrics;
 	}
 
