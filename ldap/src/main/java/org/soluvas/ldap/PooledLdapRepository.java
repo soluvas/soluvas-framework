@@ -426,7 +426,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 		// Only search based on first objectClass, this is the typical use case
 //		final String filter = "(objectClass=" + primaryObjectClass + ")";
 		final String filter = "(objectClass=*)";
-		log.info("Counting LDAP {} filter: {}", baseDn, filter); 
+		log.debug("Counting LDAP {} filter: {}", baseDn, filter); 
 		try {
 			final Long entries = withConnection(new Function<LdapConnection, Long>() {
 				@Override @Nullable
