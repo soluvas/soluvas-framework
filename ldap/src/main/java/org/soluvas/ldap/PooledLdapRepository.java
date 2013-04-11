@@ -445,7 +445,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 					}
 				}
 			});
-			log.info("LDAP count {} filter {} returned {} entries", baseDn, filter, entries);
+			log.debug("LDAP count {} filter {} returned {} entries", baseDn, filter, entries);
 			return entries;
 		} catch (Exception e) {
 			log.error("Error searching LDAP in " + baseDn + " filter " + filter, e);
@@ -483,7 +483,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 					}
 				}
 			});
-			log.info("LDAP count {} filter {} returned {} entries", baseDn, filter, entries);
+			log.debug("LDAP count {} filter {} returned {} entries", baseDn, filter, entries);
 			return entries;
 		} catch (Exception e) {
 			log.error("Error searching LDAP in " + baseDn + " filter " + filter, e);
