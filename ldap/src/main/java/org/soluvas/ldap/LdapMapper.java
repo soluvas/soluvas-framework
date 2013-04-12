@@ -396,7 +396,7 @@ public class LdapMapper<T> {
 						if (Set.class.isAssignableFrom(field.getType())) {
 							// Set value as multi attribute
 							try {
-								HashSet<Object> values = new HashSet<Object>();
+								final HashSet<Object> values = new HashSet<Object>();
 								for (Value<?> v : attr) {
 									Object converted = convertToPropertyValue(field.getType(), v.getValue());
 									values.add(converted);
