@@ -43,8 +43,8 @@ public class CatLsCommand extends ExtCommandSupport {
 //				"Cannot get %s service reference", CategoryCatalog.class.getName());
 //		final CategoryCatalog categoryCatalog = Preconditions.checkNotNull(getService(CategoryCatalog.class, categoryCatalogRef),
 //				"Cannot get %s service", CategoryCatalog.class.getName());
-		System.out.println(ansi().render("@|negative_on %3s|%-25s|%-18s|%-15s|%1s|%-10s|%-20s|%-20s|@",
-				"№", "ID", "Name", "Slug", "L", "Catalog", "Description", "Bundle"));
+		System.out.println(ansi().render("@|negative_on %3s|%-25s|%-18s|%-25s|%1s|%-10s|%-20s|%-20s|@",
+				"№", "ID", "Name", "Slug Path", "L", "Catalog", "Description", "Bundle"));
 		int i = 0;
 		final EList<Category> nestedCategories = categoryCatalog.getCategories();
 		final List<Category> flatCategories = CategoryUtils.flatten(nestedCategories);
@@ -52,9 +52,9 @@ public class CatLsCommand extends ExtCommandSupport {
 //			final String bundleAnsi = NameUtils.shortenBundleAnsi(category.getBundle(), 20);
 			final String bundleAnsi = NameUtils.shortenAnsi(category.getResourceName(), 20);
 			final String descriptionAnsi = NameUtils.shortenAnsi(category.getDescription(), 20);
-			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-25s|@@|bold,black ||@%-18s@|bold,black ||@%-15s@|bold,black ||@%-1d@|bold,black ||@%-10s@|bold,black ||@" + descriptionAnsi + "@|bold,black ||@" + bundleAnsi + " " + category.getSlugPath(),
+			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-25s|@@|bold,black ||@%-18s@|bold,black ||@%-25s@|bold,black ||@%-1d@|bold,black ||@%-10s@|bold,black ||@" + descriptionAnsi + "@|bold,black ||@" + bundleAnsi,
 				++i, category.getId(), Strings.repeat("·", category.getLevel() - 1) + category.getName(),
-				category.getSlug(), category.getLevel(), category.getCatalogName() ));
+				category.getSlugPath(), category.getLevel(), category.getCatalogName() ));
 		}
 		System.out.println(ansi().render("@|bold %d|@ categories", i));
 		return null;

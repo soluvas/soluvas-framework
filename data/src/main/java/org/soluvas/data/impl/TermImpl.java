@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.BundleAware;
@@ -28,6 +27,7 @@ import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.SerializableEMap;
 import org.soluvas.commons.Translatable;
 import org.soluvas.commons.Translation;
 import org.soluvas.commons.TranslationState;
@@ -626,6 +626,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TranslationState getTranslationState() {
 		return translationState;
 	}
@@ -635,6 +636,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTranslationState(TranslationState newTranslationState) {
 		TranslationState oldTranslationState = translationState;
 		translationState = newTranslationState == null ? TRANSLATION_STATE_EDEFAULT : newTranslationState;
@@ -647,6 +649,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getOriginalLanguage() {
 		return originalLanguage;
 	}
@@ -656,6 +659,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOriginalLanguage(String newOriginalLanguage) {
 		String oldOriginalLanguage = originalLanguage;
 		originalLanguage = newOriginalLanguage;
@@ -668,6 +672,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLanguage() {
 		return language;
 	}
@@ -677,6 +682,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLanguage(String newLanguage) {
 		String oldLanguage = language;
 		language = newLanguage;
@@ -687,11 +693,11 @@ public class TermImpl extends EObjectImpl implements Term {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
+	@Override
 	public EMap<String, Translation> getTranslations() {
 		if (translations == null) {
-			translations = new EcoreEMap<String,Translation>(CommonsPackage.Literals.TRANSLATION_ENTRY, TranslationEntryImpl.class, this, DataPackage.TERM__TRANSLATIONS);
+			translations = new SerializableEMap<String,Translation>(CommonsPackage.Literals.TRANSLATION_ENTRY, TranslationEntryImpl.class, this, DataPackage.TERM__TRANSLATIONS);
 		}
 		return translations;
 	}
