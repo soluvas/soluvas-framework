@@ -40,14 +40,10 @@
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j-cypher</artifactId>
-			<version>1.8.1</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j-kernel</artifactId>
-			<version>1.8.1</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
