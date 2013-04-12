@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.directory.api.ldap.model.entry.Entry;
+import org.apache.directory.api.ldap.model.filter.FilterEncoder;
 import org.apache.directory.api.ldap.model.message.SearchScope;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 import org.apache.directory.ldap.client.api.LdapNetworkConnection;
@@ -138,7 +139,9 @@ public class SoluvasRealm extends AuthorizingRealm {
 					Preconditions.checkState(conn.connect(),
 							"Cannot connect to LDAP server %s", ldapConfig.getLdapHost());
 					conn.bind();
-					final String ldapFilter = "(&(mail=" + tokenUsername + ")(objectclass=person))";
+					final String ldapFilter = FilterEncoder.format(
+							"(&(objectclass=person)(|(mail={0})(primaryMail={1})))",
+							new String[] { tokenUsername, tokenUsername });
 					log.debug("Searching {} for {}", usersDn, ldapFilter);
 					final List<Entry> users = LdapUtils.asList(conn.search(
 							usersDn, ldapFilter, SearchScope.ONELEVEL, "uid"));
