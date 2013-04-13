@@ -181,28 +181,15 @@
 				OpenJDK Runtime Environment (IcedTea7 2.3.4) (7u9-2.3.4-0ubuntu1.12.10.1)
 				OpenJDK 64-Bit Server VM (build 23.2-b09, mixed mode)
 				please add manually to your webapp's POM -->
-				<groupId>bouncycastle</groupId>
-				<artifactId>bcprov-jdk15</artifactId>
-				<version>140</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>bouncycastle</groupId>
-				<artifactId>bcprov-jdk14</artifactId>
-				<version>140</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
 				<groupId>org.bouncycastle</groupId>
-				<artifactId>bcprov-jdk14</artifactId>
-				<version>1.48</version>
-				<scope>provided</scope>
+				<artifactId>bcprov-jdk16</artifactId>
+				<version>1.46</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.mongodb</groupId>
 				<artifactId>mongo-java-driver</artifactId>
-				<version>2.7.3</version>
+				<version>2.11.1</version>
 			</dependency>
 			
 			<dependency>
@@ -319,8 +306,8 @@
 			</dependency>
 			<dependency>
 				<groupId>javax.servlet</groupId>
-				<artifactId>servlet-api</artifactId>
-				<version>2.5</version>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.0.1</version>
 				<scope>provided</scope>
 			</dependency>
 
@@ -445,32 +432,27 @@
 				<groupId>org.osgi</groupId>
 				<artifactId>org.osgi.compendium</artifactId>
 				<version>4.3.1</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>org.osgi.core</artifactId>
 				<version>4.3.1</version>
-				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
 				<groupId>javax.ws.rs</groupId>
 				<artifactId>jsr311-api</artifactId>
 				<version>1.1.1</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>javax.enterprise</groupId>
 				<artifactId>cdi-api</artifactId>
 				<version>1.0-SP4</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.geronimo.specs</groupId>
 				<artifactId>geronimo-activation_1.1_spec</artifactId>
 				<version>1.1</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jboss.spec</groupId>
@@ -484,56 +466,36 @@
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.version}</version>
-				<scope>test</scope>
-				<optional>true</optional>
-			</dependency>
-			<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-				<version>1.1.1</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>log4j-over-slf4j</artifactId>
 				<version>${slf4j.version}</version>
-				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-jdk14</artifactId>
 				<version>${slf4j.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<artifactId>log4j</artifactId>
-				<groupId>log4j</groupId>
-				<version>1.2.16</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
 				<version>${slf4j.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-ext</artifactId>
 				<version>${slf4j.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>jul-to-slf4j</artifactId>
 				<version>${slf4j.version}</version>
-				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>jcl-over-slf4j</artifactId>
 				<version>${slf4j.version}</version>
-				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -551,7 +513,6 @@
 				<groupId>com.google.code.findbugs</groupId>
 				<artifactId>jsr305</artifactId>
 				<version>2.0.1</version>
-				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
