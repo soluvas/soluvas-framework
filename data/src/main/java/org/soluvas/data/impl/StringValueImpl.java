@@ -3,11 +3,8 @@
 package org.soluvas.data.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.StringValue;
 
@@ -69,6 +66,7 @@ public class StringValueImpl extends ValueImpl<String> implements StringValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getValue() {
 		return value;
 	}
@@ -78,6 +76,7 @@ public class StringValueImpl extends ValueImpl<String> implements StringValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(String newValue) {
 		String oldValue = value;
 		value = newValue;
@@ -158,5 +157,5 @@ public class StringValueImpl extends ValueImpl<String> implements StringValue {
 		result.append(')');
 		return result.toString();
 	}
-
+	
 } //StringValueImpl
