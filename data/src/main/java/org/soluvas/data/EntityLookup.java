@@ -2,7 +2,11 @@ package org.soluvas.data;
 
 import java.io.Serializable;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import org.soluvas.data.push.CachingEntityLookup;
+import org.soluvas.data.push.RepositoryEntityLookup;
 
 /**
  * A entity lookup function without cache.
@@ -10,6 +14,7 @@ import javax.annotation.Nonnull;
  * @see RepositoryEntityLookup
  * @author ceefour
  */
+@ParametersAreNonnullByDefault
 public interface EntityLookup<T, ID extends Serializable> {
 
 	/**
@@ -19,6 +24,7 @@ public interface EntityLookup<T, ID extends Serializable> {
 	 * @return the entity with the given id or {@literal null} if none found
 	 * @throws IllegalArgumentException if {@code id} is {@literal null}
 	 */
-	public <S extends T> S findOne(@Nonnull ID id);
+	@Nullable
+	public <S extends T> S findOne(ID id);
 	
 }

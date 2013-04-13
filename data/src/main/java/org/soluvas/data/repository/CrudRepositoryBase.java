@@ -159,7 +159,6 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	 * The default implementation delegates to {@link #findAll()}.
 	 */
 	@Override
-	@Nonnull
 	public Collection<T> findAll(Sort sort) {
 		Iterable<Comparator<T>> comparators = Iterables.transform(sort, new Function<Order, Comparator<T>>() {
 			@Override
@@ -206,7 +205,6 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	 * The default implementation delegates to {@link #findAll(Sort)}.
 	 */
 	@Override
-	@Nonnull
 	public Page<T> findAll(Pageable pageable) {
 		final Collection<T> entities = findAll(pageable.getSort());
 		final Iterable<T> skipped = Iterables.skip(entities, (int) (pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize()));

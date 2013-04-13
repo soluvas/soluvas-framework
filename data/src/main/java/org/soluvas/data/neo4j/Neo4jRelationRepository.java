@@ -59,8 +59,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 			this.right = right;
 		}
 
-		@Override
-		@Nullable
+		@Override @Nullable
 		public Edge<L, R> apply(@Nullable Relationship rel) {
 			final String creationTimeStr = (String) rel.getProperty("creationTime", null);
 			final DateTime creationTime = !Strings.isNullOrEmpty(creationTimeStr) ? new DateTime(creationTimeStr) : null;
@@ -173,7 +172,8 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 	 * @param left
 	 * @param right
 	 */
-	protected Relationship getRelationship(@Nonnull final Node left, @Nonnull final Node right) {
+	@Nullable
+	protected Relationship getRelationship(final Node left, final Node right) {
 		return idRepository.getRelationship(left, right);
 	}
 	
@@ -182,7 +182,8 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 	 * @param liking
 	 * @param liked
 	 */
-	protected Relationship getRelationship(@Nonnull final String leftId, @Nonnull final String rightId) {
+	@Nullable
+	protected Relationship getRelationship(final String leftId, final String rightId) {
 		return idRepository.getRelationship(leftId, rightId);
 	}
 	
@@ -229,12 +230,10 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 	}
 
 	@Override
-	@Nonnull
 	public Multimap<L, R> findAll() {
 		return findAllLimit(null);
 	}
 
-	@Nonnull
 	public Multimap<L, R> findAllLimit(@Nullable Long limit) {
 		final String query = "START left=node:" + leftIdxName + "('*:*') " +
 				"MATCH left -[:" + relationshipType.name() + "]-> right " +
@@ -273,7 +272,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.ExtendedAssocRepositoryBase#doGetLeft(java.io.Serializable, java.lang.Long, java.lang.Long)
 	 */
-	@Override @Nonnull
+	@Override
 	protected Page<R> doGetLeft(String leftId, Long skip, Long limit) {
 		final String totalQuery = "START left = node:" + leftIdxName + "(_rowId={leftId}) " +
 				"MATCH left -[:" + relationshipType.name() + "]-> right " +
@@ -315,7 +314,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.ExtendedAssocRepositoryBase#doGetLeft(java.io.Serializable, java.lang.Long, java.lang.Long)
 	 */
-	@Override @Nonnull
+	@Override
 	protected Page<Edge<L, R>> doGetLeftAsEdges(String leftId, Long skip, Long limit) {
 		final String totalQuery = "START left = node:" + leftIdxName + "(_rowId={leftId}) " +
 				"MATCH left -[:" + relationshipType.name() + "]-> right " +
@@ -372,7 +371,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.ExtendedAssocRepositoryBase#doGetRight(java.io.Serializable, java.lang.Long, java.lang.Long)
 	 */
-	@Override @Nonnull
+	@Override
 	protected Page<L> doGetRight(String rightId, Long skip, Long limit) {
 		final String totalQuery = "START right=node:" + rightIdxName + "(_rowId={rightId}) " +
 				"MATCH left -[:" + relationshipType + "]-> right " +
@@ -409,7 +408,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 		return new PageImpl<L>(matchingLefts, null, total);
 	}
 	
-	@Override @Nonnull
+	@Override
 	protected Page<Edge<L, R>> doGetRightAsEdges(String rightId, Long skip, Long limit) {
 		final String totalQuery = "START right=node:" + rightIdxName + "(_rowId={rightId}) " +
 				"MATCH left -[rel:" + relationshipType + "]-> right " +

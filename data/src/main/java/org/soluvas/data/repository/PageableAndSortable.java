@@ -18,6 +18,7 @@ package org.soluvas.data.repository;
 import java.util.Collection;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
@@ -40,6 +41,7 @@ import org.soluvas.data.domain.Sort;
  * @see Page
  */
 //@NoRepositoryBean
+@ParametersAreNonnullByDefault
 public interface PageableAndSortable<T> extends BasicRepository {
 
 	/**
@@ -48,8 +50,7 @@ public interface PageableAndSortable<T> extends BasicRepository {
 	 * @param sort
 	 * @return all entities sorted by the given options
 	 */
-	@Nonnull
-	public Collection<T> findAll(@Nonnull Sort sort);
+	public Collection<T> findAll(Sort sort);
 
 	/**
 	 * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object.
@@ -57,7 +58,6 @@ public interface PageableAndSortable<T> extends BasicRepository {
 	 * @param pageable
 	 * @return a page of entities
 	 */
-	@Nonnull
-	public Page<T> findAll(@Nonnull Pageable pageable);
+	public Page<T> findAll(Pageable pageable);
 
 }

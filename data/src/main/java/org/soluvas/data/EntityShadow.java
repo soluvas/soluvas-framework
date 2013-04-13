@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.neo4j.graphdb.Node;
 
@@ -23,6 +23,7 @@ import org.neo4j.graphdb.Node;
  * @see {@link EntityShadowBase}, {@link EntityLookup}
  * @author ceefour
  */
+@ParametersAreNonnullByDefault
 public interface EntityShadow<T, ID extends Serializable, D> {
 	
 	/**
@@ -44,7 +45,7 @@ public interface EntityShadow<T, ID extends Serializable, D> {
 	 * @param obj
 	 * @return
 	 */
-	public abstract ID getKey(@Nonnull final T obj);
+	public abstract ID getKey(final T obj);
 
 	/**
 	 * Ensures that the object exists in the index, and returns the index document.

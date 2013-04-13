@@ -56,7 +56,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @param entity
 	 * @return the saved entity
 	 */
-	public abstract <S extends T> S add(@Nonnull S entity);
+	public abstract <S extends T> S add(S entity);
 	
 	/**
 	 * Adds all given entities.
@@ -65,7 +65,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return the saved entities
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
-	public abstract <S extends T> Collection<S> add(@Nonnull Iterable<S> entities);
+	public abstract <S extends T> Collection<S> add(Iterable<S> entities);
 	
 	/**
 	 * Modifies a given entity. Some repositories may allow modifying the {@code id} attribute.
@@ -74,7 +74,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return the modified entities
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
-	public abstract <S extends T> S modify(@Nonnull ID id, @Nonnull S entity);
+	public abstract <S extends T> S modify(ID id, S entity);
 
 	/**
 	 * Modifies the given entities. Some repositories may allow modifying the {@code id} attribute.
@@ -83,7 +83,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return the modified entities
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
-	public abstract <S extends T> Collection<S> modify(@Nonnull Map<ID, S> entities);
+	public abstract <S extends T> Collection<S> modify(Map<ID, S> entities);
 
 	/**
 	 * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
@@ -96,7 +96,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return the saved entity
 	 */
 	@Deprecated
-	<S extends T> S save(@Nonnull final S entity);
+	<S extends T> S save(final S entity);
 	
 	/**
 	 * Saves all given entities.
@@ -106,7 +106,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
 	@Deprecated
-	<S extends T> Collection<S> save(@Nonnull final Iterable<S> entities);
+	<S extends T> Collection<S> save(final Iterable<S> entities);
 	
 	/**
 	 * Returns whether an entity with the given id exists.
@@ -115,7 +115,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return true if an entity with the given id exists, alse otherwise
 	 * @throws IllegalArgumentException if {@code id} is {@literal null}
 	 */
-	boolean exists(@Nonnull final ID id);
+	boolean exists(final ID id);
 
 	/**
 	 * Returns whether all entities with the given ids exists.
@@ -124,7 +124,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return true if an entity with the given id exists, alse otherwise
 	 * @throws IllegalArgumentException if {@code id} is {@literal null}
 	 */
-	boolean existsAll(@Nonnull final Iterable<ID> ids);
+	boolean existsAll(final Iterable<ID> ids);
 
 	/**
 	 * Returns whether any entity with one of the given ids exists.
@@ -133,7 +133,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return true if an entity with the given id exists, alse otherwise
 	 * @throws IllegalArgumentException if {@code id} is {@literal null}
 	 */
-	boolean existsAny(@Nonnull final Iterable<ID> ids);
+	boolean existsAny(final Iterable<ID> ids);
 
 	/**
 	 * Returns all instances of the type.
@@ -159,7 +159,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return the number of entities, the maximum number of returned
 	 * is always the size of ids parameter.
 	 */
-	long count(@Nonnull Iterable<ID> ids);
+	long count(Iterable<ID> ids);
 
 	/**
 	 * Deletes the entity with the given id.
@@ -168,7 +168,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return {@literal true} if deleted.
 	 * @throws IllegalArgumentException in case the given {@code id} is {@literal null}
 	 */
-	boolean delete(@Nonnull final ID id);
+	boolean delete(final ID id);
 
 	/**
 	 * Deletes a given entity.
@@ -177,7 +177,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return {@literal true} if deleted.
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
-	boolean delete(@Nonnull final T entity);
+	boolean delete(final T entity);
 
 	/**
 	 * Deletes the given entities.
@@ -186,7 +186,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return Number of deleted entities.
 	 * @throws IllegalArgumentException in case the given {@link Iterable} is (@literal null}.
 	 */
-	long delete(@Nonnull final Iterable<? extends T> entities);
+	long delete(final Iterable<? extends T> entities);
 
 	/**
 	 * This is usually (but not always) more efficient than calling

@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.NavigableMap;
 
-import javax.annotation.Nonnull;
-
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
@@ -72,17 +70,17 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
 //	 * @return true if an entity with the given id exists, alse otherwise
 //	 * @throws IllegalArgumentException if {@code id} is {@literal null}
 //	 */
-//	boolean exists(@Nonnull final L left, @Nonnull final R right);
+//	boolean exists(final L left, final R right);
 
 	/**
 	 * Returns the number of right values (should never be duplicates) for a particular left.
 	 */
-	public abstract long countRights(@Nonnull L left);
+	public abstract long countRights(L left);
 
 	/**
 	 * Returns the number of left values (should never be duplicates) for a particular right.
 	 */
-	public abstract long countLefts(@Nonnull R right);
+	public abstract long countLefts(R right);
 
 	/**
 	 * Returns a {@link Map} of all right counts associated with each left. If no
@@ -94,7 +92,6 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
 	 *
 	 * @return map of lefts and right counts
 	 */
-	@Nonnull
 	public abstract Map<L, Long> getRightCounts();
 
 	/**
@@ -107,7 +104,6 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
 	 *
 	 * @return map of rights and left counts
 	 */
-	@Nonnull
 	public abstract Map<R, Long> getLeftCounts();
 
 	/**
@@ -124,8 +120,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
 	 * @return the collection of rights that the key maps to
 	 * @todo Add a {@link Sort} variant, like {@link #findAll()}
 	 */
-	@Nonnull
-	public abstract Page<R> getLeft(@Nonnull L left, @Nonnull Pageable pageable);
+	public abstract Page<R> getLeft(L left, Pageable pageable);
 
 	/**
 	 * Returns a collection view of all lefts associated with a key. If no
@@ -141,8 +136,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
 	 * @return the collection of lefts that the key maps to
 	 * @todo Add a {@link Sort} variant, like {@link #findAll()}
 	 */
-	@Nonnull
-	public abstract Page<L> getRight(@Nonnull R right, @Nonnull Pageable pageable);
+	public abstract Page<L> getRight(R right, Pageable pageable);
 	
     // Modification Operations
 
@@ -160,7 +154,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      *     {@code false} if the multimap already contained the left-right pair and
      *     doesn't allow duplicates
      */
-    boolean put(@Nonnull L left, @Nonnull R right);
+    boolean put(L left, R right);
 
     /**
      * Removes a single left-right pair from the multimap.
@@ -169,7 +163,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param value value of entry to remove the multimap
      * @return {@code true} if the multimap changed
      */
-    boolean delete(@Nonnull L left, @Nonnull R right);
+    boolean delete(L left, R right);
 
     // Bulk Operations
 
@@ -180,7 +174,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param rights rights of entry to remove the multimap
      * @return {@code true} if the multimap changed
      */
-    long delete(@Nonnull L left, @Nonnull Iterable<R> rights);
+    long delete(L left, Iterable<R> rights);
 
     /**
      * Removes one or more left-right pairs with the same right from the multimap.
@@ -189,7 +183,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param right right of entry to remove the multimap
      * @return {@code true} if the multimap changed
      */
-    long delete(@Nonnull Iterable<L> lefts, @Nonnull R right);
+    long delete(Iterable<L> lefts, R right);
 
     /**
      * Stores a collection of rights with the same left.
@@ -198,7 +192,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param rights rights to store in the multimap
      * @return (Approximate) number of changed edges. 0 if multimap doesn't changed. -1 if changed, but number is not known.
      */
-    long put(@Nonnull L left, Iterable<? extends R> rights);
+    long put(L left, Iterable<? extends R> rights);
 
     /**
      * Stores a collection of lefts with the same right.
@@ -207,7 +201,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      *
      * @return {@code true} if the multimap changed
      */
-    long put(Iterable<? extends L> lefts, @Nonnull R right);
+    long put(Iterable<? extends L> lefts, R right);
 
     /**
      * Copies all of another multimap's left-right pairs into this multimap. The
@@ -237,7 +231,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param rights rights to store in the multimap
      * @return Number of replaced rights.
      */
-    long replaceRights(@Nonnull L left, Iterable<? extends R> rights);
+    long replaceRights(L left, Iterable<? extends R> rights);
 
     /**
      * Stores a collection of lefts with the same right, replacing any existing
@@ -246,7 +240,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      * @param key key to store in the multimap
      * @param rights rights to store in the multimap
      */
-    void replaceLefts(@Nonnull R right, Iterable<? extends L> lefts);
+    void replaceLefts(R right, Iterable<? extends L> lefts);
 
     // Views
 
@@ -256,7 +250,7 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      *
      * @return map entries
      */
-    @Nonnull Multimap<L, R> findAll();
+    Multimap<L, R> findAll();
 
     /**
      * Returns a collection of all left-right pairs. Changes to the returned
@@ -265,6 +259,6 @@ public interface AssocRepository<L, R> extends BasicRepository, BasicAssocReposi
      *
      * @return collection of map entries consisting of left-right pairs
      */
-    @Nonnull Collection<Map.Entry<L, R>> entries();
+    Collection<Map.Entry<L, R>> entries();
 
 }
