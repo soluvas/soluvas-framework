@@ -80,24 +80,19 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 				baseDn, getEntityClass().getName());
 		final Entry entry = mapper.toEntry(entity, baseDn);
 		log.info("Add LDAP Entry {}: {}", entry.getDn(), entry);
-		try {
-			Entry newEntry = withConnection(new Function<LdapConnection, Entry>() {
-				@Override @Nullable
-				public Entry apply(@Nullable LdapConnection conn) {
-					try {
-						conn.add(entry);
-						log.debug("Lookup added LDAP Entry {}", entry.getDn());
-						return conn.lookup(entry.getDn());
-					} catch (LdapException e) {
-						throw new RuntimeException(e);
-					}
+		final Entry newEntry = withConnection(new Function<LdapConnection, Entry>() {
+			@Override @Nullable
+			public Entry apply(@Nullable LdapConnection conn) {
+				try {
+					conn.add(entry);
+					log.debug("Lookup added LDAP Entry {}", entry.getDn());
+					return conn.lookup(entry.getDn());
+				} catch (LdapException e) {
+					throw new LdapRepositoryException(e, "Error adding LDAP Entry %s", entry.getDn());
 				}
-			});
-			return (S) mapper.fromEntry(newEntry, entityClass);
-		} catch (Exception e) {
-			log.error("Error adding LDAP Entry " + entry.getDn(), e);
-			throw new RuntimeException("Error adding LDAP Entry " + entry.getDn(), e);
-		}
+			}
+		});
+		return (S) mapper.fromEntry(newEntry, entityClass);
 	}
 	
 	/**
@@ -132,7 +127,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 					
 					final Entry existingEntry = conn.lookup(newDn);
 					if (existingEntry == null) {
-						throw new RuntimeException("Cannot find LDAP Entry to modify: " + newDn);
+						throw new LdapRepositoryException("Cannot find LDAP Entry to modify: " + newDn);
 					}
 					final T existing = mapper.fromEntry(existingEntry, entityClass);
 					final ModifyRequest modifyRequest = mapper.createModifyRequest(existingEntry, existing, entity);
@@ -140,7 +135,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 						log.info("Not modifying unmodified LDAP Entry {}", newDn);
 						return existing;
 					} else {
-						log.info("Modifying LDAP Entry {} with {}", newDn, modifyRequest);
+						log.debug("Modifying LDAP Entry {} with {}", newDn, modifyRequest);
 						final ModifyResponse modifyResponse = conn.modify(modifyRequest);
 						if (modifyResponse.getLdapResult().getResultCode() == ResultCodeEnum.SUCCESS) {
 							log.info("Modified LDAP Entry {} returned: {}", newDn, modifyResponse);
@@ -148,12 +143,11 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 							final T newObj = mapper.fromEntry(modifiedEntry, entityClass);
 							return newObj;
 						} else {
-							log.error("Modified LDAP Entry {} returned: {}", newDn, modifyResponse);
-							throw new RuntimeException("Error updating LDAP Entry " + newDn + ", result: " + modifyResponse);
+							throw new LdapRepositoryException("Error updating LDAP Entry " + newDn + ", result: " + modifyResponse);
 						}
 					}
 				} catch (LdapException e) {
-					throw new RuntimeException("Error updating LDAP Entry " + oldDn, e);
+					throw new LdapRepositoryException(e, "Error updating LDAP Entry %s", oldDn);
 				}
 			}
 		});
@@ -178,7 +172,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 				}
 			});
 		} catch (Exception e) {
-			throw new RuntimeException("Error deleting LDAP Entry " + dn, e);
+			throw new LdapRepositoryException(e, "Error deleting LDAP Entry %s", dn);
 		}
 	}
 	
@@ -191,28 +185,23 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	@SuppressWarnings("unchecked") @Override
 	public <U extends T> U findOne(String id) {
 		final String dn = toDn(id);
-		log.info("Lookup LDAP Entry {}", dn); 
-		try {
-			Entry entry = withConnection(new Function<LdapConnection, Entry>() {
-				@Override @Nullable
-				public Entry apply(@Nullable LdapConnection conn) {
-					try {
-						return conn.lookup(dn);
-					} catch (LdapException e) {
-						throw new RuntimeException(e);
-					}
+		log.debug("Lookup LDAP Entry {}", dn); 
+		final Entry entry = withConnection(new Function<LdapConnection, Entry>() {
+			@Override @Nullable
+			public Entry apply(@Nullable LdapConnection conn) {
+				try {
+					return conn.lookup(dn);
+				} catch (LdapException e) {
+					throw new LdapRepositoryException(e, "Error during lookup of LDAP Entry %s", dn);
 				}
-			});
-			if (entry != null) {
-				T obj = mapper.fromEntry(entry, entityClass);
-				return (U) obj;
-			} else {
-				log.trace("Lookup LDAP Entry " + dn + " returns nothing");
-				return null;
 			}
-		} catch (Exception e) {
-			log.error("Error during lookup of LDAP Entry " + dn, e);
-			throw new RuntimeException("Error during lookup of LDAP Entry " + dn, e);
+		});
+		if (entry != null) {
+			T obj = mapper.fromEntry(entry, entityClass);
+			return (U) obj;
+		} else {
+			log.trace("Lookup LDAP Entry " + dn + " returns nothing");
+			return null;
 		}
 	}
 
@@ -235,7 +224,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 		// Only search based on first objectClass, this is the typical use case
 //		final String filter = "(&(objectClass=" + primaryObjectClass + ")(" + attribute + "=" + value + "))";
 		final String filter = "(&(objectClass=*)(" + attribute + "=" + value + "))";
-		log.info("Searching LDAP {} filter: {}", baseDn, filter); 
+		log.debug("Searching LDAP {} filter: {}", baseDn, filter); 
 		try {
 			final Entry entry = withConnection(new Function<LdapConnection, Entry>() {
 				@Override @Nullable
@@ -258,8 +247,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 				return null;
 			}
 		} catch (Exception e) {
-			log.error("Error searching LDAP in " + baseDn + " filter " + filter, e);
-			throw new RuntimeException("Error searching LDAP in " + baseDn + " filter " + filter, e);
+			throw new LdapRepositoryException(e, "Error searching LDAP in %s filter %s", baseDn, filter);
 		}
 	}
 	
@@ -279,7 +267,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 		// Only search based on first objectClass, this is the typical use case
 //		final String filter = "(objectClass=" + primaryObjectClass + ")";
 		final String filter = "(objectClass=*)";
-		log.info("Searching LDAP {} filter: {}", baseDn, filter); 
+		log.debug("Searching LDAP {} filter: {}", baseDn, filter); 
 		try {
 			final List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
 				@Override @Nullable
@@ -301,8 +289,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 			}));
 			return entities;
 		} catch (Exception e) {
-			log.error("Error searching LDAP in " + baseDn + " filter " + filter, e);
-			throw new RuntimeException("Error searching LDAP in " + baseDn + " filter " + filter, e);
+			throw new LdapRepositoryException(e, "Error searching LDAP in %s filter %s", baseDn, filter);
 		}
 	}
 
@@ -382,7 +369,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 			final List<T> entities = Lists.transform(entries, new EntryToEntity());
 			return entities;
 		} catch (Exception e) {
-			throw new LdapRepositoryException("Error searching LDAP in " + baseDn + " filter " + filter, e);
+			throw new LdapRepositoryException(e, "Error searching LDAP in %s filter %s", baseDn, filter);
 		}
 	}
 
@@ -416,7 +403,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 			final List<T> entities = Lists.transform(entries, new EntryToEntity());
 			return entities;
 		} catch (Exception e) {
-			throw new LdapRepositoryException("Error searching LDAP in " + baseDn + " filter " + filter, e);
+			throw new LdapRepositoryException(e, "Error searching LDAP in %s filter %s", baseDn, filter);
 		}
 	}
 
@@ -448,8 +435,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 			log.debug("LDAP count {} filter {} returned {} entries", baseDn, filter, entries);
 			return entries;
 		} catch (Exception e) {
-			log.error("Error searching LDAP in " + baseDn + " filter " + filter, e);
-			throw new RuntimeException("Error searching LDAP in " + baseDn + " filter " + filter, e);
+			throw new LdapRepositoryException(e, "Error searching LDAP in %s filter %s", baseDn, filter);
 		}
 	}
 
@@ -486,8 +472,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 			log.debug("LDAP count {} filter {} returned {} entries", baseDn, filter, entries);
 			return entries;
 		} catch (Exception e) {
-			log.error("Error searching LDAP in " + baseDn + " filter " + filter, e);
-			throw new RuntimeException("Error searching LDAP in " + baseDn + " filter " + filter, e);
+			throw new LdapRepositoryException(e, "Error searching LDAP in %s filter %s", baseDn, filter);
 		}
 	}
 	

@@ -112,7 +112,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 						return false;
 					}
 				} catch (Exception e) {
-					throw new RuntimeException("Cannot add member " + personId + " to role " + role, e);
+					throw new LdapRepositoryException(e, "Cannot add member %s to role %s", personId, role);
 				}
 			}
 		});
@@ -150,8 +150,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 						return false;
 					}
 				} catch (Exception e) {
-					log.error("Cannot remove member " + personId + " from role " + role, e);
-					throw new RuntimeException("Cannot remove member " + personId + " from role " + role, e);
+					throw new LdapRepositoryException(e, "Cannot remove member %s from role %s", personId, role);
 				}
 			}
 		});
@@ -183,7 +182,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 								try {
 									return new Rdn("uid", input).getName() + "," + usersDn.getName();
 								} catch (LdapInvalidDnException e) {
-									throw new RuntimeException("Invalid person ID: " + input, e);
+									throw new LdapRepositoryException(e, "Invalid person ID: %s", input);
 								}
 							}
 						}), String.class);
@@ -194,9 +193,8 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 					ldap.modify(groupDn, modification);
 					return null;
 				} catch (Exception e) {
-					log.error("Cannot replace members for role " + role, e);
-					throw new RuntimeException(
-							"Cannot replace members for " + role, e);
+					throw new LdapRepositoryException(e,
+							"Cannot replace members for %s", role);
 				}
 			}
 		});
@@ -255,9 +253,8 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 						return ImmutableSet.of();
 					}
 				} catch (Exception e) {
-					log.error("Cannot get members for role " + role, e);
-					throw new RuntimeException(
-							"Cannot get members for " + role, e);
+					throw new LdapRepositoryException(e,
+							"Cannot get members for %s", role);
 				}
 			}
 		});
@@ -298,9 +295,8 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 							roles.size(), roles);
 					return roles;
 				} catch (Exception e) {
-					log.error("Cannot get roles for " + personId, e);
-					throw new RuntimeException(
-							"Cannot get roles for " + personId, e);
+					throw new LdapRepositoryException(e,
+							"Cannot get roles for %s", personId);
 				}
 			}
 		});
@@ -359,8 +355,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 					}
 					return builder.build();
 				} catch (Exception e) {
-					log.error("Cannot get roles", e);
-					throw new RuntimeException("Cannot get roles", e);
+					throw new LdapRepositoryException("Cannot get roles", e);
 				}
 			}
 		});
@@ -420,7 +415,7 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 					}
 					return builder.build();
 				} catch (Exception e) {
-					throw new RuntimeException("Cannot find all person-role associations", e);
+					throw new LdapRepositoryException("Cannot find all person-role associations", e);
 				}
 			}
 		});

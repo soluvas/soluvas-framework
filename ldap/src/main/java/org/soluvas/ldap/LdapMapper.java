@@ -86,7 +86,7 @@ public class LdapMapper<T> {
 				try {
 					if (ldapRdn != null) {
 						if (rdnMapping != null) {
-							throw new RuntimeException(clazz.getName() + " has multiple @LdapRdn");
+							throw new LdapMappingException(clazz.getName() + " has multiple @LdapRdn");
 						}
 						rdnMapping = new LdapAttributeMapping(field, attrName, false);
 						attrMappingBuilder.add(rdnMapping);
@@ -100,7 +100,8 @@ public class LdapMapper<T> {
 						}
 					}
 				} catch (Exception e) {
-					throw new RuntimeException("Error mapping " + clazz.getName() + " property " + fieldName + " to attribute " + attrName, e);
+					throw new LdapMappingException(e, "Error mapping %s property %s to attribute %s",
+							clazz.getName(), fieldName, attrName);
 				}
 			}
 			Preconditions.checkNotNull(rdnMapping, "%s has %s fields, one must have @LdapRdn annotation", clazz.getName(), fields.size());
@@ -117,7 +118,7 @@ public class LdapMapper<T> {
 		try {
 			return mappings.get(clazz);
 		} catch (ExecutionException e) {
-			throw new RuntimeException("Cannot get LDAP mapping for " + clazz.getName(), e);
+			throw new LdapMappingException(e, "Cannot get LDAP mapping for %s", clazz.getName());
 		}
 	}
 	
@@ -156,18 +157,8 @@ public class LdapMapper<T> {
 			}
 			
 			return entry;
-		} catch (LdapException e) {
-			log.error("Error mapping " + clazz.getName(), e);
-			throw new LdapMappingException("Error mapping " + clazz.getName(), e);
-		} catch (IllegalAccessException e) {
-			log.error("Error mapping " + clazz.getName(), e);
-			throw new LdapMappingException("Error mapping " + clazz.getName(), e);
-		} catch (InvocationTargetException e) {
-			log.error("Error mapping " + clazz.getName(), e);
-			throw new LdapMappingException("Error mapping " + clazz.getName(), e);
-		} catch (NoSuchMethodException e) {
-			log.error("Error mapping " + clazz.getName(), e);
-			throw new LdapMappingException("Error mapping " + clazz.getName(), e);
+		} catch (LdapException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+			throw new LdapMappingException(e, "Error mapping " + clazz.getName());
 		}
 	}
 	
@@ -255,7 +246,8 @@ public class LdapMapper<T> {
 					}
 				}
 			} catch (Exception e) {
-				throw new RuntimeException("Error mapping property " + attr.getField() + " to attribute " + attr.getName(), e);
+				throw new LdapMappingException(e, "Error mapping property %s to attribute %s", 
+						attr.getField(), attr.getName());
 			}
 		}
 	}

@@ -66,7 +66,7 @@ public class LdapUtils {
 		try {
 			ldapUrlObj = new LdapUrl(ldapUri);
 		} catch (LdapURLEncodingException e) {
-			throw new RuntimeException("Cannot parse LDAP URI " + ldapUri, e);
+			throw new LdapRepositoryException(e, "Cannot parse LDAP URI %s", ldapUri);
 		}
 
 		final LdapConnectionConfig ldapConfig = new LdapConnectionConfig();
@@ -178,7 +178,7 @@ public class LdapUtils {
 		try {
 			conn = ldapPool.borrowObject();
 		} catch (final Exception e) {
-			throw new RuntimeException("Cannot get LDAP connection", e);
+			throw new LdapRepositoryException(e, "Cannot get LDAP connection");
 		}
 		try {
 			final V result = function.apply(conn);
@@ -190,7 +190,11 @@ public class LdapUtils {
 			} catch (Exception e1) {
 				log.warn("Cannot invalidate LDAP connection after " + e + " exception", e1);
 			}
-			throw new RuntimeException("Cannot perform LDAP operation: " + e, e);
+			if (e instanceof LdapRepositoryException) {
+				throw (LdapRepositoryException) e;
+			} else {
+				throw new LdapRepositoryException(e, "Cannot perform LDAP operation: %s", e);
+			}
 		}
 	}
 	
@@ -236,7 +240,7 @@ public class LdapUtils {
 		try {
 			digest = calculateSsha(password, salt);
 		} catch (Exception e) {
-			throw new RuntimeException("Cannot calculate SHA using salt " + salt, e);
+			throw new LdapRepositoryException(e, "Cannot calculate SHA using salt %s", salt);
 		}
 		byte[] digestAndSalt = new byte[digest.length + salt.length];
 		System.arraycopy(digest, 0, digestAndSalt, 0, digest.length);
@@ -266,7 +270,7 @@ public class LdapUtils {
 			log.info("Not deleting non-existing DN " + dn, e);
 			return 0;
 		} catch (LdapException e) {
-			throw new RuntimeException("Cannot delete " + dn + " recursively", e);
+			throw new LdapRepositoryException(e, "Cannot delete %s recursively", dn);
 		}
 	}
 

@@ -23,4 +23,8 @@ public class LdapMappingException extends RuntimeException {
 		super(cause);
 	}
 
+	public LdapMappingException(Throwable cause, String message, Object... args) {
+		super(String.format(message, args), cause);
+	}
+
 }
