@@ -2,9 +2,16 @@ package org.soluvas.mongo;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
+import org.soluvas.data.domain.Sort;
+import org.soluvas.data.domain.Sort.Direction;
+import org.soluvas.data.domain.Sort.Order;
+
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
@@ -45,6 +52,24 @@ public class MongoUtils {
 		} finally {
 			cursor.close();
 		}
+	}
+	
+	public static BasicDBObject getSort(@Nullable Sort sort) {
+		final BasicDBObject sortObj = new BasicDBObject();
+		if (sort != null) {
+			for (final Order order : sort) {
+				sortObj.put(order.getProperty(), order.getDirection() == Direction.DESC ? -1 : 1);
+			}
+		}
+		return sortObj;
+	}
+	
+	public static BasicDBObject getSort(@Nullable Sort sort, String defaultSortField, int defaultSortOrder) {
+		final BasicDBObject sortObj = getSort(sort);
+		if (!sortObj.containsField(defaultSortField)) {
+			sortObj.put(defaultSortField, defaultSortOrder);
+		}
+		return sortObj;
 	}
 	
 }
