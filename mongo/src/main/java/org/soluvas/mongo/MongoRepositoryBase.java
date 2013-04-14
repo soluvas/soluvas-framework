@@ -11,9 +11,12 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import javax.annotation.PreDestroy;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Identifiable;
+import org.soluvas.commons.Timestamped;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
@@ -70,6 +73,12 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * Slow query threshold in milliseconds.
 	 */
 	protected static final long LONG_QUERY_THRESHOLD = 500;
+	/**
+	 * Usually used by {@link #beforeSave(Identifiable)} to set creationTime and modificationTime
+	 * based on default time zone.
+	 * TODO: Should use user's time zone (i.e. audit system).  
+	 */
+	protected static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Jakarta");
 	private MongoClient mongoClient;
 	protected final String collName;
 	private final Class<T> entityClass;
@@ -159,10 +168,18 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	
 	/**
 	 * Override this method to perform additional operations before adding/modifying an entity.
-	 * e.g. setModificationTime
+	 * setCreationTime and setModificationTime is already handled if entity implements
+	 * {@link Timestamped}.
 	 * @param entity
 	 */
 	protected void beforeSave(T entity) {
+		if (entity instanceof Timestamped) {
+			final Timestamped timestamped = (Timestamped) entity;
+			if (timestamped.getCreationTime() == null) {
+				timestamped.setCreationTime(new DateTime(timeZone));
+			}
+			timestamped.setModificationTime(new DateTime(timeZone));
+		}
 	}
 
 	protected final void beforeSave(Collection<? extends T> entities) {
