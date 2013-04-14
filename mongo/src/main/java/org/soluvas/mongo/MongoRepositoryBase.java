@@ -50,7 +50,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				return morphia.fromDBObject(entityClass, input);
 			} catch (Exception e) {
 				throw new MongoRepositoryException(e,
-						"Cannot deserialize MongoDB object to {}: {}",
+						"Cannot deserialize MongoDB object to %s: %s",
 								entityClass.getName(), input);
 			}
 		}
@@ -64,14 +64,14 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	}
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
-	private DBCollection coll;
+	protected DBCollection coll;
 	private Morphia morphia;
 	/**
 	 * Slow query threshold in milliseconds.
 	 */
-	private static final long LONG_QUERY_THRESHOLD = 500;
+	protected static final long LONG_QUERY_THRESHOLD = 500;
 	private MongoClient mongoClient;
-	private final String collName;
+	protected final String collName;
 	private final Class<T> entityClass;
 	
 	/**
