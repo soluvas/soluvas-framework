@@ -288,9 +288,9 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	
 	@Override
 	@Nonnull
-	public Collection<Entry<L, R>> findAll(Sort sort) {
+	public List<Entry<L, R>> findAll(Sort sort) {
 		log.warn("Sorting on {} not supported", getClass());
-		return findAll().entries();
+		return ImmutableList.copyOf(findAll().entries());
 	}
 	
 	@Override

@@ -3,6 +3,7 @@ package org.soluvas.mongo;
 import java.util.List;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Direction;
@@ -19,6 +20,7 @@ import com.mongodb.DBObject;
  * @author ceefour
  *
  */
+@ParametersAreNonnullByDefault
 public class MongoUtils {
 
 	/**
@@ -28,12 +30,8 @@ public class MongoUtils {
 	 * @return
 	 */
 	public static List<? extends DBObject> asList(DBCursor cursor) {
-		if (cursor == null)
-			return ImmutableList.of();
-		try {
-			return ImmutableList.copyOf((Iterable<? extends DBObject>) cursor);
-		} finally {
-			cursor.close();
+		try (DBCursor cur = cursor) {
+			return ImmutableList.copyOf((Iterable<? extends DBObject>) cur);
 		}
 	}
 	
@@ -45,12 +43,8 @@ public class MongoUtils {
 	 * @return
 	 */
 	public static <T> List<T> transform(DBCursor cursor, Function<DBObject, T> transformer) {
-		if (cursor == null)
-			return ImmutableList.of();
-		try {
-			return ImmutableList.copyOf( Iterables.transform(cursor, transformer) );
-		} finally {
-			cursor.close();
+		try (DBCursor cur = cursor) {
+			return ImmutableList.copyOf( Iterables.transform(cur, transformer) );
 		}
 	}
 	

@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.soluvas.data.EntityLookup;
 
@@ -31,7 +32,7 @@ import org.soluvas.data.EntityLookup;
  * <ol>
  * 	<li>@{@link Nonnull} annotations</li>
  *  <li>CrudRepository{@link #isEmpty()}</li>
- *  <li>Supports bulk delete by IDs: {@link CrudRepository#deleteIds(Iterable)}.</li>
+ *  <li>Supports bulk delete by IDs: {@link CrudRepository#deleteIds(Collection)}.</li>
  *  <li>Extends {@link BasicRepository}</li>
  *  <li>find methods return {@link Collection} instead of {@link Iterable}. Reason
  *  	is find methods are not supposed to return large results anyway. For that
@@ -47,6 +48,7 @@ import org.soluvas.data.EntityLookup;
  * @author Hendy Irawan
  */
 //@NoRepositoryBean
+@ParametersAreNonnullByDefault
 public interface CrudRepository<T, ID extends Serializable> extends Repository<T, ID>, BasicRepository, EntityLookup<T, ID> {
 
 	/**
@@ -65,7 +67,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return the saved entities
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
-	public abstract <S extends T> Collection<S> add(Iterable<S> entities);
+	public abstract <S extends T> Collection<S> add(Collection<S> entities);
 	
 	/**
 	 * Modifies a given entity. Some repositories may allow modifying the {@code id} attribute.
@@ -106,7 +108,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
 	@Deprecated
-	<S extends T> Collection<S> save(final Iterable<S> entities);
+	<S extends T> Collection<S> save(final Collection<S> entities);
 	
 	/**
 	 * Returns whether an entity with the given id exists.
@@ -124,7 +126,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return true if an entity with the given id exists, alse otherwise
 	 * @throws IllegalArgumentException if {@code id} is {@literal null}
 	 */
-	boolean existsAll(final Iterable<ID> ids);
+	boolean existsAll(final Collection<ID> ids);
 
 	/**
 	 * Returns whether any entity with one of the given ids exists.
@@ -133,7 +135,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return true if an entity with the given id exists, alse otherwise
 	 * @throws IllegalArgumentException if {@code id} is {@literal null}
 	 */
-	boolean existsAny(final Iterable<ID> ids);
+	boolean existsAny(final Collection<ID> ids);
 
 	/**
 	 * Returns all instances of the type.
@@ -151,7 +153,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @param ids
 	 * @return
 	 */
-	List<T> findAll(Iterable<ID> ids);
+	List<T> findAll(Collection<ID> ids);
 
     /**
 	 * Returns the number of entities matching the given ids.
@@ -159,7 +161,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return the number of entities, the maximum number of returned
 	 * is always the size of ids parameter.
 	 */
-	long count(Iterable<ID> ids);
+	long count(Collection<ID> ids);
 
 	/**
 	 * Deletes the entity with the given id.
@@ -186,7 +188,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @return Number of deleted entities.
 	 * @throws IllegalArgumentException in case the given {@link Iterable} is (@literal null}.
 	 */
-	long delete(final Iterable<? extends T> entities);
+	long delete(final Collection<? extends T> entities);
 
 	/**
 	 * This is usually (but not always) more efficient than calling
@@ -194,6 +196,6 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @param ids
 	 * @return Number of deleted entities.
 	 */
-	long deleteIds(Iterable<ID> ids);
+	long deleteIds(Collection<ID> ids);
 
 }

@@ -15,7 +15,8 @@
  */
 package org.soluvas.data.repository;
 
-import java.util.Collection;
+
+import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -50,7 +51,7 @@ public interface PageableAndSortable<T> extends BasicRepository {
 	 * @param sort
 	 * @return all entities sorted by the given options
 	 */
-	public Collection<T> findAll(Sort sort);
+	public List<T> findAll(Sort sort);
 
 	/**
 	 * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object.

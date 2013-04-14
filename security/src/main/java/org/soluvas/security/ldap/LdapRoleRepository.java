@@ -27,7 +27,7 @@ import org.soluvas.security.SecurityFactory;
 import com.google.common.base.Function;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.Collections2;
 
 /**
  * @author ceefour
@@ -103,7 +103,7 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	}
 
 	@Override
-	public <S extends Role> Collection<S> save(Iterable<S> entities) {
+	public <S extends Role> Collection<S> save(Collection<S> entities) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -168,7 +168,7 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	}
 
 	@Override
-	public List<Role> findAll(Iterable<String> ids) {
+	public List<Role> findAll(Collection<String> ids) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -204,10 +204,9 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	}
 
 	@Override
-	public long delete(Iterable<? extends Role> entities) {
-		Iterable<String> ids = Iterables.transform(entities, new Function<Role, String>() {
-			@Override
-			@Nullable
+	public long delete(Collection<? extends Role> entities) {
+		final Collection<String> ids = Collections2.transform(entities, new Function<Role, String>() {
+			@Override @Nullable
 			public String apply(@Nullable Role input) {
 				return input.getName();
 			}
@@ -221,7 +220,7 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	}
 
 	@Override
-	public long deleteIds(Iterable<String> ids) {
+	public long deleteIds(Collection<String> ids) {
 		long deleted = 0;
 		for (String id : ids) {
 			if (delete(id))
@@ -234,7 +233,7 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	 * @see org.soluvas.data.repository.CrudRepository#existsAll(java.lang.Iterable)
 	 */
 	@Override
-	public boolean existsAll(Iterable<String> ids) {
+	public boolean existsAll(Collection<String> ids) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -242,7 +241,7 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	 * @see org.soluvas.data.repository.CrudRepository#existsAny(java.lang.Iterable)
 	 */
 	@Override
-	public boolean existsAny(Iterable<String> ids) {
+	public boolean existsAny(Collection<String> ids) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -258,7 +257,7 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	 * @see org.soluvas.data.repository.CrudRepository#count(java.lang.Iterable)
 	 */
 	@Override
-	public long count(Iterable<String> ids) {
+	public long count(Collection<String> ids) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -268,7 +267,7 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	}
 
 	@Override
-	public <S extends Role> Collection<S> add(Iterable<S> entities) {
+	public <S extends Role> Collection<S> add(Collection<S> entities) {
 		throw new UnsupportedOperationException();
 	}
 

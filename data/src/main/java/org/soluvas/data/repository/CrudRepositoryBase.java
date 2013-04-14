@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.apache.commons.beanutils.PropertyUtils;
@@ -61,15 +60,16 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 		return saved;
 	}
 	
-	@Nullable protected abstract ID getId(T entity);
+	@Nullable 
+	protected abstract ID getId(T entity);
 	
 	@Override
-	public <S extends T> Collection<S> add(Iterable<S> entities) {
+	public <S extends T> Collection<S> add(Collection<S> entities) {
 		return ImmutableList.of( add(entities.iterator().next()) );
 	}
 	
 	@Override
-	public <S extends T> Collection<S> modify(@Nonnull final Map<ID, S> entities) {
+	public <S extends T> Collection<S> modify(final Map<ID, S> entities) {
 		final ImmutableList.Builder<S> resultBuilder = ImmutableList.builder();
 		for (final Map.Entry<ID, S> entity : entities.entrySet()) {
 			resultBuilder.add( modify(entity.getKey(), entity.getValue()) );
@@ -78,10 +78,9 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	}
 	
 	@Override
-	public <S extends T> Collection<S> save(Iterable<S> entities) {
-		List<S> saved = ImmutableList.copyOf(Iterables.transform(entities, new Function<S, S>() {
-			@Override
-			@Nullable
+	public <S extends T> Collection<S> save(Collection<S> entities) {
+		final List<S> saved = ImmutableList.copyOf(Iterables.transform(entities, new Function<S, S>() {
+			@Override @Nullable
 			public S apply(@Nullable S input) {
 				return save(input);
 			}
@@ -90,7 +89,7 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	}
 
 	@Override
-	public boolean existsAll(final Iterable<ID> ids) {
+	public boolean existsAll(final Collection<ID> ids) {
 		return Iterables.all(ids, new Predicate<ID>() {
 			@Override
 			public boolean apply(@Nullable ID input) {
@@ -100,7 +99,7 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	}
 
 	@Override
-	public boolean existsAny(final Iterable<ID> ids) {
+	public boolean existsAny(final Collection<ID> ids) {
 		return Iterables.any(ids, new Predicate<ID>() {
 			@Override
 			public boolean apply(@Nullable ID input) {
@@ -110,7 +109,7 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	}
 
 	@Override
-	public List<T> findAll(Iterable<ID> ids) {
+	public List<T> findAll(Collection<ID> ids) {
 		List<T> found = ImmutableList.copyOf(Iterables.filter(Iterables.transform(ids, new Function<ID, T>() {
 			@Override
 			@Nullable
@@ -125,7 +124,7 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	}
 
 	@Override
-	public long count(Iterable<ID> ids) {
+	public long count(Collection<ID> ids) {
 		return findAll(ids).size();
 	}
 
@@ -135,7 +134,7 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	}
 
 	@Override
-	public long delete(Iterable<? extends T> entities) {
+	public long delete(Collection<? extends T> entities) {
 		long deleted = 0;
 		for (T entity : entities) {
 			if (delete(entity))
@@ -145,7 +144,7 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	}
 
 	@Override
-	public long deleteIds(Iterable<ID> ids) {
+	public long deleteIds(Collection<ID> ids) {
 		long deleted = 0;
 		for (ID id : ids) {
 			if (delete(id))
@@ -159,7 +158,7 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	 * The default implementation delegates to {@link #findAll()}.
 	 */
 	@Override
-	public Collection<T> findAll(Sort sort) {
+	public List<T> findAll(Sort sort) {
 		Iterable<Comparator<T>> comparators = Iterables.transform(sort, new Function<Order, Comparator<T>>() {
 			@Override
 			@Nullable
