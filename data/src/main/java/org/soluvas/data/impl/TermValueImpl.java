@@ -142,6 +142,13 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 		setDisplayValue(displayValue);
 	}
 
+	public TermValueImpl(Term term) {
+		super();
+		setTerm(term);
+		setValue(term.getQName());
+		setDisplayValue(term.getDisplayName());
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
