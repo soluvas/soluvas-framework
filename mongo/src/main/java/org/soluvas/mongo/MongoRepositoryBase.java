@@ -101,7 +101,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				db.authenticate(realMongoUri.getUsername(),
 						realMongoUri.getPassword());
 			coll = db.getCollection(collName);
-			log.debug("Ensuring {} indexes on {}: {}", indexedFields.length, collName);
+			log.debug("Ensuring {} indexes on {}: {}", indexedFields.length, collName, indexedFields);
 			for (String field : indexedFields) {
 				coll.ensureIndex(new BasicDBObject(field, 1));
 			}
