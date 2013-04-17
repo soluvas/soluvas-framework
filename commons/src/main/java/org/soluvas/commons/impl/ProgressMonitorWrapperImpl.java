@@ -117,7 +117,7 @@ public class ProgressMonitorWrapperImpl extends ProgressMonitorImpl implements P
 	}
 
 	@Override
-	public void beginTask(String name, int totalWork) {
+	public void beginTask(String name, long totalWork) {
 		if (delegate != null)
 			delegate.beginTask(name, totalWork);
 	}
@@ -135,7 +135,7 @@ public class ProgressMonitorWrapperImpl extends ProgressMonitorImpl implements P
 	}
 
 	@Override
-	public void worked(int work, ProgressStatus status) {
+	public void worked(long work, ProgressStatus status) {
 		if (delegate != null)
 			delegate.worked(work, status);
 	}

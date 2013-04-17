@@ -155,7 +155,7 @@ public abstract class ProgressMonitorImpl extends EObjectImpl implements Progres
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public abstract void beginTask(String name, int totalWork);
+	public abstract void beginTask(String name, long totalWork);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,7 +190,7 @@ public abstract class ProgressMonitorImpl extends EObjectImpl implements Progres
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public final void worked(int work) {
+	public final void worked(long work) {
 		worked(work, ProgressStatus.OK);
 	}
 
@@ -206,7 +206,7 @@ public abstract class ProgressMonitorImpl extends EObjectImpl implements Progres
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public abstract void worked(int work, ProgressStatus status);
+	public abstract void worked(long work, ProgressStatus status);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -143,7 +143,7 @@ public interface ProgressMonitor extends SerializableEObject {
 	 * @model
 	 * @generated
 	 */
-	void beginTask(String name, int totalWork);
+	void beginTask(String name, long totalWork);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -189,7 +189,7 @@ public interface ProgressMonitor extends SerializableEObject {
 	 * @model
 	 * @generated
 	 */
-	void worked(int work);
+	void worked(long work);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -205,6 +205,6 @@ public interface ProgressMonitor extends SerializableEObject {
 	 * @model
 	 * @generated
 	 */
-	void worked(int work, ProgressStatus status);
+	void worked(long work, ProgressStatus status);
 
 } // ProgressMonitor

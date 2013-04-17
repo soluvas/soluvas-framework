@@ -26,6 +26,7 @@ import com.google.common.base.Strings;
  *
  * @generated
  */
+@SuppressWarnings("serial")
 public class ShellProgressMonitorImpl extends ProgressMonitorImpl implements ShellProgressMonitor {
 	protected double totalWork = 100.0;
 	protected double worked = 0.0;
@@ -56,7 +57,7 @@ public class ShellProgressMonitorImpl extends ProgressMonitorImpl implements She
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public void beginTask(String name, int totalWork) {
+	public void beginTask(String name, long totalWork) {
 		this.worked = 0.0d;
 		this.totalWork = totalWork;
 		this.startTime = new DateTime();
@@ -130,7 +131,7 @@ public class ShellProgressMonitorImpl extends ProgressMonitorImpl implements She
 	}
 
 	@Override
-	public void worked(int work, ProgressStatus status) {
+	public void worked(long work, ProgressStatus status) {
 		worked = worked + work;
 		// only render after 100ms has elapsed, so won't slow down operation
 		if (lastRenderTime == null || System.currentTimeMillis() - lastRenderTime >= 100) {
