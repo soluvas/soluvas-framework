@@ -567,7 +567,7 @@
         <details key="documentation" value="&#x9; * Notifies that the main task is beginning.  This must only be called once&#xA;&#x9; * on a given progress monitor instance.&#xA;&#x9; * &#xA;&#x9; * @param name the name (or description) of the main task&#xA;&#x9; * @param totalWork the total number of work units into which&#xA;&#x9; *  the main task is been subdivided. If the value is &lt;code>UNKNOWN&lt;/code> &#xA;&#x9; *  the implementation is free to indicate progress in a way which &#xA;&#x9; *  doesn't require the total number of work units in advance.&#xA;&#xA;TODO: support formatting in the task name, probably using HTML5 or RDFa, which will be converted (in shell) into ANSI codes."/>
       </eAnnotations>
       <eParameters name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-      <eParameters name="totalWork" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+      <eParameters name="totalWork" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong"/>
     </eOperations>
     <eOperations name="done">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -584,13 +584,13 @@
       <eParameters name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     </eOperations>
     <eOperations name="worked">
-      <eParameters name="work" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+      <eParameters name="work" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong"/>
     </eOperations>
     <eOperations name="done">
       <eParameters name="status" eType="#//ProgressStatus"/>
     </eOperations>
     <eOperations name="worked">
-      <eParameters name="work" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+      <eParameters name="work" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong"/>
       <eParameters name="status" eType="#//ProgressStatus"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="canceled" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean">
@@ -603,11 +603,6 @@
         <details key="documentation" value="&#x9; * Sets the task name to the given value. This method is used to &#xA;&#x9; * restore the task label after a nested operation was executed. &#xA;&#x9; * Normally there is no need for clients to call this method.&#xA;&#x9; *&#xA;&#x9; * @param name the name (or description) of the main task&#xA;&#x9; * @see #beginTask(java.lang.String, int)&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ShellProgressMonitor" eSuperTypes="#//ProgressMonitor">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Use ansi.render() to report progress."/>
-    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ProgressStatus">
     <eLiterals name="ok">
@@ -635,6 +630,20 @@
         <details key="documentation" value="Skipped for some reason."/>
       </eAnnotations>
     </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShellProgressMonitor" eSuperTypes="#//ProgressMonitor">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Use ansi.render() to report progress."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventBusProgressMonitor" eSuperTypes="#//ProgressMonitor">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Use Guava EventBus to report progress.&#xA;Can be used to implement web-based progress bar."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventBus" eType="#//EventBus"
+        changeable="false" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="trackingId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProgressMonitorWrapper" eSuperTypes="#//ProgressMonitor">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -841,5 +850,7 @@
   <eClassifiers xsi:type="ecore:EDataType" name="ClassLoader" instanceClassName="java.lang.ClassLoader"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="URL" instanceClassName="java.net.URL"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EventBus" instanceClassName="com.google.common.eventbus.EventBus"
       serializable="false"/>
 </ecore:EPackage>

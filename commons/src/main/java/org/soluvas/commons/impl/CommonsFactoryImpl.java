@@ -108,6 +108,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 			case CommonsPackage.REMOVED_MANY: return (EObject)createRemovedMany();
 			case CommonsPackage.CATEGORY_INFO: return (EObject)createCategoryInfo();
 			case CommonsPackage.SHELL_PROGRESS_MONITOR: return (EObject)createShellProgressMonitor();
+			case CommonsPackage.EVENT_BUS_PROGRESS_MONITOR: return (EObject)createEventBusProgressMonitor();
 			case CommonsPackage.PROGRESS_MONITOR_WRAPPER: return (EObject)createProgressMonitorWrapper();
 			case CommonsPackage.TRANSLATION: return (EObject)createTranslation();
 			case CommonsPackage.TRANSLATION_MESSAGE_ENTRY: return (EObject)createTranslationMessageEntry();
@@ -392,6 +393,16 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	public ShellProgressMonitor createShellProgressMonitor() {
 		ShellProgressMonitorImpl shellProgressMonitor = new ShellProgressMonitorImpl();
 		return shellProgressMonitor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventBusProgressMonitor createEventBusProgressMonitor() {
+		EventBusProgressMonitorImpl eventBusProgressMonitor = new EventBusProgressMonitorImpl();
+		return eventBusProgressMonitor;
 	}
 
 	/**

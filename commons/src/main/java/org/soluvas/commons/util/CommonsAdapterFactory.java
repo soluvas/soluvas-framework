@@ -213,6 +213,10 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createShellProgressMonitorAdapter();
 			}
 			@Override
+			public Adapter caseEventBusProgressMonitor(EventBusProgressMonitor object) {
+				return createEventBusProgressMonitorAdapter();
+			}
+			@Override
 			public Adapter caseProgressMonitorWrapper(ProgressMonitorWrapper object) {
 				return createProgressMonitorWrapperAdapter();
 			}
@@ -769,6 +773,20 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createShellProgressMonitorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.EventBusProgressMonitor <em>Event Bus Progress Monitor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.EventBusProgressMonitor
+	 * @generated
+	 */
+	public Adapter createEventBusProgressMonitorAdapter() {
 		return null;
 	}
 

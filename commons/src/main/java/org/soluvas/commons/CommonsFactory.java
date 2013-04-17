@@ -131,6 +131,15 @@ public interface CommonsFactory extends EFactory {
 	ShellProgressMonitor createShellProgressMonitor();
 
 	/**
+	 * Returns a new object of class '<em>Event Bus Progress Monitor</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Event Bus Progress Monitor</em>'.
+	 * @generated
+	 */
+	EventBusProgressMonitor createEventBusProgressMonitor();
+
+	/**
 	 * Returns a new object of class '<em>Progress Monitor Wrapper</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

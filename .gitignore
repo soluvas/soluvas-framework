@@ -5,6 +5,7 @@ target
 build
 .gradle
 .directory
+rebel.xml
 /apacheds
 /folder.shell
 /taxonomy.shell
