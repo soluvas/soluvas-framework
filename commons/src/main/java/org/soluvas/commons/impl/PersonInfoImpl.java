@@ -166,6 +166,13 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 		super();
 	}
 
+	public PersonInfoImpl(String personId) {
+		super();
+		setId(personId);
+		setSlug(personId);
+		setName(personId);
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -311,6 +318,7 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getEmail() {
 		return email;
 	}
@@ -320,6 +328,7 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEmail(String newEmail) {
 		String oldEmail = email;
 		email = newEmail;
