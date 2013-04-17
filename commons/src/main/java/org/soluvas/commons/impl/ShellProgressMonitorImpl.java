@@ -26,6 +26,7 @@ import com.google.common.base.Strings;
  *
  * @generated
  */
+@SuppressWarnings("serial")
 public class ShellProgressMonitorImpl extends ProgressMonitorImpl implements ShellProgressMonitor {
 	protected double totalWork = 100.0;
 	protected double worked = 0.0;
