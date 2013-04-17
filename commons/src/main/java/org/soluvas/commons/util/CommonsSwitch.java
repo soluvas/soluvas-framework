@@ -338,6 +338,13 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CommonsPackage.EVENT_BUS_PROGRESS_MONITOR: {
+				EventBusProgressMonitor eventBusProgressMonitor = (EventBusProgressMonitor)theEObject;
+				T1 result = caseEventBusProgressMonitor(eventBusProgressMonitor);
+				if (result == null) result = caseProgressMonitor(eventBusProgressMonitor);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CommonsPackage.PROGRESS_MONITOR_WRAPPER: {
 				ProgressMonitorWrapper progressMonitorWrapper = (ProgressMonitorWrapper)theEObject;
 				T1 result = caseProgressMonitorWrapper(progressMonitorWrapper);
@@ -934,6 +941,21 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseShellProgressMonitor(ShellProgressMonitor object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event Bus Progress Monitor</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event Bus Progress Monitor</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseEventBusProgressMonitor(EventBusProgressMonitor object) {
 		return null;
 	}
 

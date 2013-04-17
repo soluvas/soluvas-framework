@@ -6,6 +6,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.ProgressStatus;
@@ -26,6 +28,9 @@ import org.soluvas.commons.ProgressStatus;
  */
 @SuppressWarnings("serial")
 public abstract class ProgressMonitorImpl extends EObjectImpl implements ProgressMonitor {
+	
+	private static final Logger log = LoggerFactory
+			.getLogger(ProgressMonitorImpl.class);
 	
 	/**
 	 * <p>Converts an unknown (possibly null) IProgressMonitor into a SubMonitor allocated
@@ -176,13 +181,10 @@ public abstract class ProgressMonitorImpl extends EObjectImpl implements Progres
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public void subTask(String name) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		log.warn("Unsupported subTask {}", name);
 	}
 
 	/**

@@ -371,6 +371,9 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	}
 
 	public String getPersonPhotoUri(Gender gender) {
+		if (gender == null) {
+			return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_person.png";
+		}
 		switch (gender) {
 		case MALE:
 			return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_male.png";

@@ -1,10 +1,7 @@
-/**
- */
 package org.soluvas.commons.impl;
 
 import java.io.File;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -52,6 +49,7 @@ import org.soluvas.commons.EClassLinked;
 import org.soluvas.commons.EClassStatus;
 import org.soluvas.commons.EFactoryLinked;
 import org.soluvas.commons.EObjectLinked;
+import org.soluvas.commons.EventBusProgressMonitor;
 import org.soluvas.commons.Expandable;
 import org.soluvas.commons.ExpansionState;
 import org.soluvas.commons.Gender;
@@ -91,6 +89,7 @@ import org.soluvas.commons.WebAddress;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
+import com.google.common.eventbus.EventBus;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 
@@ -352,6 +351,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass shellProgressMonitorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eventBusProgressMonitorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -648,6 +654,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	private EDataType urlEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType eventBusEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -816,6 +829,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_GeneralEmail() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(3);
 	}
@@ -825,6 +839,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_OrganizationName() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(4);
 	}
@@ -834,6 +849,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_OrganizationAddress() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(5);
 	}
@@ -843,6 +859,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_LetterSalutation() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(6);
 	}
@@ -852,6 +869,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_LetterClosing() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(7);
 	}
@@ -1652,6 +1670,36 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getEventBusProgressMonitor() {
+		return eventBusProgressMonitorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getEventBusProgressMonitor_EventBus() {
+		return (EAttribute)eventBusProgressMonitorEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getEventBusProgressMonitor_TrackingId() {
+		return (EAttribute)eventBusProgressMonitorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getProgressMonitorWrapper() {
 		return progressMonitorWrapperEClass;
 	}
@@ -1671,6 +1719,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getColorable() {
 		return colorableEClass;
 	}
@@ -1680,6 +1729,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getColorable_Color() {
 		return (EAttribute)colorableEClass.getEStructuralFeatures().get(0);
 	}
@@ -1689,6 +1739,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTranslatable() {
 		return translatableEClass;
 	}
@@ -1698,6 +1749,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTranslatable_TranslationState() {
 		return (EAttribute)translatableEClass.getEStructuralFeatures().get(0);
 	}
@@ -1707,6 +1759,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTranslatable_OriginalLanguage() {
 		return (EAttribute)translatableEClass.getEStructuralFeatures().get(1);
 	}
@@ -1716,6 +1769,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTranslatable_Language() {
 		return (EAttribute)translatableEClass.getEStructuralFeatures().get(2);
 	}
@@ -1725,6 +1779,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTranslatable_Translations() {
 		return (EReference)translatableEClass.getEStructuralFeatures().get(3);
 	}
@@ -1734,6 +1789,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTranslation() {
 		return translationEClass;
 	}
@@ -1743,6 +1799,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTranslation_Language() {
 		return (EAttribute)translationEClass.getEStructuralFeatures().get(0);
 	}
@@ -1752,6 +1809,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTranslation_Messages() {
 		return (EReference)translationEClass.getEStructuralFeatures().get(1);
 	}
@@ -1761,6 +1819,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTranslationMessageEntry() {
 		return translationMessageEntryEClass;
 	}
@@ -1770,6 +1829,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTranslationMessageEntry_Key() {
 		return (EAttribute)translationMessageEntryEClass.getEStructuralFeatures().get(0);
 	}
@@ -1779,6 +1839,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTranslationMessageEntry_Value() {
 		return (EAttribute)translationMessageEntryEClass.getEStructuralFeatures().get(1);
 	}
@@ -1788,6 +1849,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTranslationManager() {
 		return translationManagerEClass;
 	}
@@ -1797,6 +1859,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTranslationEntry() {
 		return translationEntryEClass;
 	}
@@ -1806,6 +1869,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTranslationEntry_Value() {
 		return (EReference)translationEntryEClass.getEStructuralFeatures().get(0);
 	}
@@ -1815,6 +1879,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTranslationEntry_Key() {
 		return (EAttribute)translationEntryEClass.getEStructuralFeatures().get(1);
 	}
@@ -1824,6 +1889,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStyleConfiguration() {
 		return styleConfigurationEClass;
 	}
@@ -1833,6 +1899,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExpandable() {
 		return expandableEClass;
 	}
@@ -1842,6 +1909,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getExpandable_ExpansionState() {
 		return (EAttribute)expandableEClass.getEStructuralFeatures().get(0);
 	}
@@ -1931,6 +1999,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getTranslationState() {
 		return translationStateEEnum;
 	}
@@ -1940,6 +2009,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getExpansionState() {
 		return expansionStateEEnum;
 	}
@@ -2139,6 +2209,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getListenableFuture() {
 		return listenableFutureEDataType;
 	}
@@ -2148,6 +2219,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getListeningExecutorService() {
 		return listeningExecutorServiceEDataType;
 	}
@@ -2157,6 +2229,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getClassLoader() {
 		return classLoaderEDataType;
 	}
@@ -2166,8 +2239,19 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getURL() {
 		return urlEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getEventBus() {
+		return eventBusEDataType;
 	}
 
 	/**
@@ -2329,6 +2413,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		shellProgressMonitorEClass = createEClass(SHELL_PROGRESS_MONITOR);
 
+		eventBusProgressMonitorEClass = createEClass(EVENT_BUS_PROGRESS_MONITOR);
+		createEAttribute(eventBusProgressMonitorEClass, EVENT_BUS_PROGRESS_MONITOR__EVENT_BUS);
+		createEAttribute(eventBusProgressMonitorEClass, EVENT_BUS_PROGRESS_MONITOR__TRACKING_ID);
+
 		progressMonitorWrapperEClass = createEClass(PROGRESS_MONITOR_WRAPPER);
 		createEReference(progressMonitorWrapperEClass, PROGRESS_MONITOR_WRAPPER__DELEGATE);
 
@@ -2396,6 +2484,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		listeningExecutorServiceEDataType = createEDataType(LISTENING_EXECUTOR_SERVICE);
 		classLoaderEDataType = createEDataType(CLASS_LOADER);
 		urlEDataType = createEDataType(URL);
+		eventBusEDataType = createEDataType(EVENT_BUS);
 	}
 
 	/**
@@ -2561,6 +2650,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		g1.getETypeArguments().add(g2);
 		categoryInfoEClass.getEGenericSuperTypes().add(g1);
 		shellProgressMonitorEClass.getESuperTypes().add(this.getProgressMonitor());
+		eventBusProgressMonitorEClass.getESuperTypes().add(this.getProgressMonitor());
 		progressMonitorWrapperEClass.getESuperTypes().add(this.getProgressMonitor());
 
 		// Initialize classes and features; add operations and parameters
@@ -2728,7 +2818,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		op = addEOperation(progressMonitorEClass, null, "beginTask", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEInt(), "totalWork", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getELong(), "totalWork", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(progressMonitorEClass, null, "done", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -2739,16 +2829,20 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addEParameter(op, theEcorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(progressMonitorEClass, null, "worked", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEInt(), "work", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getELong(), "work", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(progressMonitorEClass, null, "done", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getProgressStatus(), "status", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(progressMonitorEClass, null, "worked", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEInt(), "work", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getELong(), "work", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getProgressStatus(), "status", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(shellProgressMonitorEClass, ShellProgressMonitor.class, "ShellProgressMonitor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(eventBusProgressMonitorEClass, EventBusProgressMonitor.class, "EventBusProgressMonitor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEventBusProgressMonitor_EventBus(), this.getEventBus(), "eventBus", null, 0, 1, EventBusProgressMonitor.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEventBusProgressMonitor_TrackingId(), theEcorePackage.getEString(), "trackingId", null, 0, 1, EventBusProgressMonitor.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(progressMonitorWrapperEClass, ProgressMonitorWrapper.class, "ProgressMonitorWrapper", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProgressMonitorWrapper_Delegate(), this.getProgressMonitor(), null, "delegate", null, 0, 1, ProgressMonitorWrapper.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2870,6 +2964,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(listeningExecutorServiceEDataType, ListeningExecutorService.class, "ListeningExecutorService", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(classLoaderEDataType, ClassLoader.class, "ClassLoader", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(urlEDataType, java.net.URL.class, "URL", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(eventBusEDataType, EventBus.class, "EventBus", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -3308,12 +3403,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "\t * Sets the task name to the given value. This method is used to \n\t * restore the task label after a nested operation was executed. \n\t * Normally there is no need for clients to call this method.\n\t *\n\t * @param name the name (or description) of the main task\n\t * @see #beginTask(java.lang.String, int)\n"
 		   });		
 		addAnnotation
-		  (shellProgressMonitorEClass, 
-		   source, 
-		   new String[] {
-			 "documentation", "Use ansi.render() to report progress."
-		   });		
-		addAnnotation
 		  (progressStatusEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
@@ -3342,6 +3431,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Skipped for some reason."
+		   });		
+		addAnnotation
+		  (shellProgressMonitorEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Use ansi.render() to report progress."
+		   });		
+		addAnnotation
+		  (eventBusProgressMonitorEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Use Guava EventBus to report progress.\nCan be used to implement web-based progress bar."
 		   });		
 		addAnnotation
 		  (progressMonitorWrapperEClass, 

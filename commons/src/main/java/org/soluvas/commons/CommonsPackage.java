@@ -1732,6 +1732,61 @@ public interface CommonsPackage extends EPackage {
 	int SHELL_PROGRESS_MONITOR_FEATURE_COUNT = PROGRESS_MONITOR_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.EventBusProgressMonitorImpl <em>Event Bus Progress Monitor</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.EventBusProgressMonitorImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEventBusProgressMonitor()
+	 * @generated
+	 */
+	int EVENT_BUS_PROGRESS_MONITOR = 36;
+
+	/**
+	 * The feature id for the '<em><b>Canceled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_BUS_PROGRESS_MONITOR__CANCELED = PROGRESS_MONITOR__CANCELED;
+
+	/**
+	 * The feature id for the '<em><b>Task Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_BUS_PROGRESS_MONITOR__TASK_NAME = PROGRESS_MONITOR__TASK_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Event Bus</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_BUS_PROGRESS_MONITOR__EVENT_BUS = PROGRESS_MONITOR_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Tracking Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_BUS_PROGRESS_MONITOR__TRACKING_ID = PROGRESS_MONITOR_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Event Bus Progress Monitor</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_BUS_PROGRESS_MONITOR_FEATURE_COUNT = PROGRESS_MONITOR_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.ProgressMonitorWrapperImpl <em>Progress Monitor Wrapper</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1739,7 +1794,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getProgressMonitorWrapper()
 	 * @generated
 	 */
-	int PROGRESS_MONITOR_WRAPPER = 36;
+	int PROGRESS_MONITOR_WRAPPER = 37;
 
 	/**
 	 * The feature id for the '<em><b>Canceled</b></em>' attribute.
@@ -1785,7 +1840,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getColorable()
 	 * @generated
 	 */
-	int COLORABLE = 37;
+	int COLORABLE = 38;
 
 	/**
 	 * The feature id for the '<em><b>Color</b></em>' attribute.
@@ -1813,7 +1868,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslatable()
 	 * @generated
 	 */
-	int TRANSLATABLE = 38;
+	int TRANSLATABLE = 39;
 
 	/**
 	 * The feature id for the '<em><b>Translation State</b></em>' attribute.
@@ -1868,7 +1923,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslation()
 	 * @generated
 	 */
-	int TRANSLATION = 39;
+	int TRANSLATION = 40;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -1905,7 +1960,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationMessageEntry()
 	 * @generated
 	 */
-	int TRANSLATION_MESSAGE_ENTRY = 40;
+	int TRANSLATION_MESSAGE_ENTRY = 41;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1942,7 +1997,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationManager()
 	 * @generated
 	 */
-	int TRANSLATION_MANAGER = 41;
+	int TRANSLATION_MANAGER = 42;
 
 	/**
 	 * The number of structural features of the '<em>Translation Manager</em>' class.
@@ -1961,7 +2016,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationEntry()
 	 * @generated
 	 */
-	int TRANSLATION_ENTRY = 42;
+	int TRANSLATION_ENTRY = 43;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1998,7 +2053,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getStyleConfiguration()
 	 * @generated
 	 */
-	int STYLE_CONFIGURATION = 43;
+	int STYLE_CONFIGURATION = 44;
 
 	/**
 	 * The number of structural features of the '<em>Style Configuration</em>' class.
@@ -2017,7 +2072,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getExpandable()
 	 * @generated
 	 */
-	int EXPANDABLE = 44;
+	int EXPANDABLE = 45;
 
 	/**
 	 * The feature id for the '<em><b>Expansion State</b></em>' attribute.
@@ -2045,7 +2100,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 45;
+	int RESOURCE_TYPE = 46;
 
 
 	/**
@@ -2056,7 +2111,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 46;
+	int GENDER = 47;
 
 
 	/**
@@ -2067,7 +2122,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 47;
+	int ECLASS_STATUS = 48;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -2077,7 +2132,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 48;
+	int JAVA_CLASS_STATUS = 49;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ProgressStatus <em>Progress Status</em>}' enum.
@@ -2087,7 +2142,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getProgressStatus()
 	 * @generated
 	 */
-	int PROGRESS_STATUS = 49;
+	int PROGRESS_STATUS = 50;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.AccountStatus <em>Account Status</em>}' enum.
@@ -2097,7 +2152,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAccountStatus()
 	 * @generated
 	 */
-	int ACCOUNT_STATUS = 50;
+	int ACCOUNT_STATUS = 51;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.PublicationStatus <em>Publication Status</em>}' enum.
@@ -2107,7 +2162,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPublicationStatus()
 	 * @generated
 	 */
-	int PUBLICATION_STATUS = 51;
+	int PUBLICATION_STATUS = 52;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ArchivalStatus <em>Archival Status</em>}' enum.
@@ -2117,7 +2172,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getArchivalStatus()
 	 * @generated
 	 */
-	int ARCHIVAL_STATUS = 52;
+	int ARCHIVAL_STATUS = 53;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.TranslationState <em>Translation State</em>}' enum.
@@ -2127,7 +2182,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationState()
 	 * @generated
 	 */
-	int TRANSLATION_STATE = 53;
+	int TRANSLATION_STATE = 54;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ExpansionState <em>Expansion State</em>}' enum.
@@ -2137,7 +2192,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getExpansionState()
 	 * @generated
 	 */
-	int EXPANSION_STATE = 54;
+	int EXPANSION_STATE = 55;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -2147,7 +2202,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 55;
+	int DATE_TIME = 56;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -2157,7 +2212,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 56;
+	int CURRENCY_UNIT = 57;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -2167,7 +2222,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 58;
+	int UNIT = 59;
 
 
 	/**
@@ -2178,7 +2233,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 59;
+	int LIST = 60;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -2188,7 +2243,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 60;
+	int MAP = 61;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -2198,7 +2253,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 61;
+	int SET = 62;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -2208,7 +2263,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 62;
+	int COLLECTION = 63;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -2218,7 +2273,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 63;
+	int MULTIMAP = 64;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -2228,7 +2283,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 64;
+	int NAVIGABLE_MAP = 65;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -2238,7 +2293,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 65;
+	int QUEUE = 66;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -2248,7 +2303,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 66;
+	int MULTISET = 67;
 
 
 	/**
@@ -2259,7 +2314,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 67;
+	int SERIALIZABLE = 68;
 
 
 	/**
@@ -2270,7 +2325,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 68;
+	int BUNDLE = 69;
 
 
 	/**
@@ -2281,7 +2336,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
 	 * @generated
 	 */
-	int BIG_MONEY_PROVIDER = 69;
+	int BIG_MONEY_PROVIDER = 70;
 
 	/**
 	 * The meta object id for the '<em>Quantity</em>' data type.
@@ -2291,7 +2346,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQuantity()
 	 * @generated
 	 */
-	int QUANTITY = 57;
+	int QUANTITY = 58;
 
 	/**
 	 * The meta object id for the '<em>Measurable</em>' data type.
@@ -2301,7 +2356,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMeasurable()
 	 * @generated
 	 */
-	int MEASURABLE = 70;
+	int MEASURABLE = 71;
 
 
 	/**
@@ -2312,7 +2367,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTimeZone()
 	 * @generated
 	 */
-	int DATE_TIME_ZONE = 71;
+	int DATE_TIME_ZONE = 72;
 
 
 	/**
@@ -2323,7 +2378,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 72;
+	int LOCALE = 73;
 
 
 	/**
@@ -2334,7 +2389,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFile()
 	 * @generated
 	 */
-	int FILE = 73;
+	int FILE = 74;
 
 
 	/**
@@ -2345,7 +2400,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListenableFuture()
 	 * @generated
 	 */
-	int LISTENABLE_FUTURE = 74;
+	int LISTENABLE_FUTURE = 75;
 
 
 	/**
@@ -2356,7 +2411,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListeningExecutorService()
 	 * @generated
 	 */
-	int LISTENING_EXECUTOR_SERVICE = 75;
+	int LISTENING_EXECUTOR_SERVICE = 76;
 
 
 	/**
@@ -2367,7 +2422,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getClassLoader()
 	 * @generated
 	 */
-	int CLASS_LOADER = 76;
+	int CLASS_LOADER = 77;
 
 
 	/**
@@ -2378,7 +2433,18 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getURL()
 	 * @generated
 	 */
-	int URL = 77;
+	int URL = 78;
+
+
+	/**
+	 * The meta object id for the '<em>Event Bus</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.google.common.eventbus.EventBus
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEventBus()
+	 * @generated
+	 */
+	int EVENT_BUS = 79;
 
 
 	/**
@@ -3380,6 +3446,38 @@ public interface CommonsPackage extends EPackage {
 	EClass getShellProgressMonitor();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.EventBusProgressMonitor <em>Event Bus Progress Monitor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Event Bus Progress Monitor</em>'.
+	 * @see org.soluvas.commons.EventBusProgressMonitor
+	 * @generated
+	 */
+	EClass getEventBusProgressMonitor();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.EventBusProgressMonitor#getEventBus <em>Event Bus</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Event Bus</em>'.
+	 * @see org.soluvas.commons.EventBusProgressMonitor#getEventBus()
+	 * @see #getEventBusProgressMonitor()
+	 * @generated
+	 */
+	EAttribute getEventBusProgressMonitor_EventBus();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.EventBusProgressMonitor#getTrackingId <em>Tracking Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tracking Id</em>'.
+	 * @see org.soluvas.commons.EventBusProgressMonitor#getTrackingId()
+	 * @see #getEventBusProgressMonitor()
+	 * @generated
+	 */
+	EAttribute getEventBusProgressMonitor_TrackingId();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ProgressMonitorWrapper <em>Progress Monitor Wrapper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3969,6 +4067,17 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getURL();
+
+	/**
+	 * Returns the meta object for data type '{@link com.google.common.eventbus.EventBus <em>Event Bus</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Event Bus</em>'.
+	 * @see com.google.common.eventbus.EventBus
+	 * @model instanceClass="com.google.common.eventbus.EventBus" serializeable="false"
+	 * @generated
+	 */
+	EDataType getEventBus();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -4817,6 +4926,32 @@ public interface CommonsPackage extends EPackage {
 		EClass SHELL_PROGRESS_MONITOR = eINSTANCE.getShellProgressMonitor();
 
 		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.EventBusProgressMonitorImpl <em>Event Bus Progress Monitor</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.EventBusProgressMonitorImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEventBusProgressMonitor()
+		 * @generated
+		 */
+		EClass EVENT_BUS_PROGRESS_MONITOR = eINSTANCE.getEventBusProgressMonitor();
+
+		/**
+		 * The meta object literal for the '<em><b>Event Bus</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EVENT_BUS_PROGRESS_MONITOR__EVENT_BUS = eINSTANCE.getEventBusProgressMonitor_EventBus();
+
+		/**
+		 * The meta object literal for the '<em><b>Tracking Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EVENT_BUS_PROGRESS_MONITOR__TRACKING_ID = eINSTANCE.getEventBusProgressMonitor_TrackingId();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.ProgressMonitorWrapperImpl <em>Progress Monitor Wrapper</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5339,6 +5474,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType URL = eINSTANCE.getURL();
+
+		/**
+		 * The meta object literal for the '<em>Event Bus</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.google.common.eventbus.EventBus
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEventBus()
+		 * @generated
+		 */
+		EDataType EVENT_BUS = eINSTANCE.getEventBus();
 
 	}
 
