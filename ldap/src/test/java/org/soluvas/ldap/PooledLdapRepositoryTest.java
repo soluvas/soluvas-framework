@@ -59,10 +59,10 @@ public class PooledLdapRepositoryTest {
 
 	@Test
 	public void findOne() {
-		SocialPerson hendy = personRepo.findOne("hendy");
-		Assert.assertNotNull(hendy);
-		Assert.assertEquals("hendy", hendy.getId());
-		Assert.assertEquals("Hendy Irawan", hendy.getName());
+		SocialPerson person = personRepo.findOne("atang");
+		Assert.assertNotNull(person);
+		Assert.assertEquals("atang", person.getId());
+		Assert.assertEquals("Atang Sutisna", person.getName());
 	}
 
 	@Test
