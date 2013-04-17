@@ -20,6 +20,4 @@ public interface Creator<T> {
 	 */
 	T newDefault();
 	
-	T newDefaultVaried();
-
 }
