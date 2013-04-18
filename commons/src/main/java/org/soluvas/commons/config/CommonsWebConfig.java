@@ -1,4 +1,4 @@
-package org.soluvas.commons;
+package org.soluvas.commons.config;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,6 +17,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.AppManifest;
+import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Cpu;
+import org.soluvas.commons.DataFolder;
+import org.soluvas.commons.Network;
+import org.soluvas.commons.WebAddress;
+import org.soluvas.commons.XmiObjectLoader;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.commons.util.AppUtils;
 import org.soluvas.json.EmfModule;
