@@ -2,6 +2,7 @@
  */
 package org.soluvas.image.util;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -203,6 +204,12 @@ public class ImageSwitch<T> extends Switch<T> {
 			case ImagePackage.DISPLAY_IMAGE: {
 				DisplayImage displayImage = (DisplayImage)theEObject;
 				T result = caseDisplayImage(displayImage);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.STYLED_IMAGE_ENTRY: {
+				@SuppressWarnings("unchecked") Map.Entry<String, StyledImage> styledImageEntry = (Map.Entry<String, StyledImage>)theEObject;
+				T result = caseStyledImageEntry(styledImageEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -492,6 +499,21 @@ public class ImageSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDisplayImage(DisplayImage object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Styled Image Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Styled Image Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStyledImageEntry(Map.Entry<String, StyledImage> object) {
 		return null;
 	}
 

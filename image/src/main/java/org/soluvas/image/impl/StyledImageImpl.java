@@ -3,19 +3,14 @@
 package org.soluvas.image.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.joda.time.DateTime;
-
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.Timestamped;
-
 import org.soluvas.image.DimensionLike;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.StyledImage;
@@ -336,6 +331,17 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 		super();
 	}
 
+	public StyledImageImpl(String code, String uri,
+			String contentType, Long size, int width, int height) {
+		super();
+		this.code = code;
+		this.uri = uri;
+		this.contentType = contentType;
+		this.size = size;
+		this.width = width;
+		this.height = height;
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -351,6 +357,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getWidth() {
 		return width;
 	}
@@ -360,6 +367,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWidth(Integer newWidth) {
 		Integer oldWidth = width;
 		width = newWidth;
@@ -372,6 +380,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getHeight() {
 		return height;
 	}
@@ -381,6 +390,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHeight(Integer newHeight) {
 		Integer oldHeight = height;
 		height = newHeight;
@@ -393,6 +403,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -402,6 +413,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -414,6 +426,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getCreationTime() {
 		return creationTime;
 	}
@@ -423,6 +436,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCreationTime(DateTime newCreationTime) {
 		DateTime oldCreationTime = creationTime;
 		creationTime = newCreationTime;
@@ -435,6 +449,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getModificationTime() {
 		return modificationTime;
 	}
@@ -444,6 +459,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setModificationTime(DateTime newModificationTime) {
 		DateTime oldModificationTime = modificationTime;
 		modificationTime = newModificationTime;
@@ -456,6 +472,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public long getSchemaVersion() {
 		return schemaVersion;
 	}
@@ -465,6 +482,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getCode() {
 		return code;
 	}
@@ -474,6 +492,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCode(String newCode) {
 		String oldCode = code;
 		code = newCode;
@@ -486,6 +505,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getUri() {
 		return uri;
 	}
@@ -495,6 +515,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUri(String newUri) {
 		String oldUri = uri;
 		uri = newUri;
@@ -507,6 +528,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getSize() {
 		return size;
 	}
@@ -516,6 +538,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSize(Long newSize) {
 		Long oldSize = size;
 		size = newSize;
@@ -528,6 +551,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getVariant() {
 		return variant;
 	}
@@ -537,6 +561,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVariant(String newVariant) {
 		String oldVariant = variant;
 		variant = newVariant;
@@ -549,6 +574,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getExtension() {
 		return extension;
 	}
@@ -558,6 +584,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExtension(String newExtension) {
 		String oldExtension = extension;
 		extension = newExtension;
@@ -570,6 +597,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getOriginUri() {
 		return originUri;
 	}
@@ -579,6 +607,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOriginUri(String newOriginUri) {
 		String oldOriginUri = originUri;
 		originUri = newOriginUri;
@@ -591,6 +620,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getContentType() {
 		return contentType;
 	}
@@ -600,6 +630,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setContentType(String newContentType) {
 		String oldContentType = contentType;
 		contentType = newContentType;
@@ -612,6 +643,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLinkedFile() {
 		return linkedFile;
 	}
@@ -621,6 +653,7 @@ public class StyledImageImpl extends EObjectImpl implements StyledImage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLinkedFile(String newLinkedFile) {
 		String oldLinkedFile = linkedFile;
 		linkedFile = newLinkedFile;

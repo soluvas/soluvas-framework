@@ -796,7 +796,7 @@ public interface ImagePackage extends EPackage {
 	int IMAGE__HEIGHT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Styles</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Styles</b></em>' map.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1233,6 +1233,43 @@ public interface ImagePackage extends EPackage {
 	int DISPLAY_IMAGE_FEATURE_COUNT = 5;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.StyledImageEntryImpl <em>Styled Image Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.StyledImageEntryImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getStyledImageEntry()
+	 * @generated
+	 */
+	int STYLED_IMAGE_ENTRY = 19;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE_ENTRY__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE_ENTRY__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Styled Image Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLED_IMAGE_ENTRY_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1240,7 +1277,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformType()
 	 * @generated
 	 */
-	int IMAGE_TRANSFORM_TYPE = 19;
+	int IMAGE_TRANSFORM_TYPE = 20;
 
 
 	/**
@@ -1251,7 +1288,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getFileExport()
 	 * @generated
 	 */
-	int FILE_EXPORT = 20;
+	int FILE_EXPORT = 21;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.DuplicateIdHandling <em>Duplicate Id Handling</em>}' enum.
@@ -1261,7 +1298,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getDuplicateIdHandling()
 	 * @generated
 	 */
-	int DUPLICATE_ID_HANDLING = 21;
+	int DUPLICATE_ID_HANDLING = 22;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.TransformGravity <em>Transform Gravity</em>}' enum.
@@ -1271,7 +1308,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getTransformGravity()
 	 * @generated
 	 */
-	int TRANSFORM_GRAVITY = 22;
+	int TRANSFORM_GRAVITY = 23;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTypes <em>Types</em>}' enum.
@@ -1281,7 +1318,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTypes()
 	 * @generated
 	 */
-	int IMAGE_TYPES = 23;
+	int IMAGE_TYPES = 24;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageStyles <em>Styles</em>}' enum.
@@ -1291,7 +1328,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyles()
 	 * @generated
 	 */
-	int IMAGE_STYLES = 24;
+	int IMAGE_STYLES = 25;
 
 	/**
 	 * The meta object id for the '<em>Repository</em>' data type.
@@ -1301,7 +1338,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageRepository()
 	 * @generated
 	 */
-	int IMAGE_REPOSITORY = 25;
+	int IMAGE_REPOSITORY = 26;
 
 
 	/**
@@ -1312,7 +1349,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageType()
 	 * @generated
 	 */
-	int IMAGE_TYPE = 26;
+	int IMAGE_TYPE = 27;
 
 	/**
 	 * The meta object id for the '<em>Style</em>' data type.
@@ -1322,7 +1359,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyle()
 	 * @generated
 	 */
-	int IMAGE_STYLE = 27;
+	int IMAGE_STYLE = 28;
 
 
 	/**
@@ -1851,10 +1888,10 @@ public interface ImagePackage extends EPackage {
 	EClass getImage();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.soluvas.image.Image#getStyles <em>Styles</em>}'.
+	 * Returns the meta object for the map '{@link org.soluvas.image.Image#getStyles <em>Styles</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Styles</em>'.
+	 * @return the meta object for the map '<em>Styles</em>'.
 	 * @see org.soluvas.image.Image#getStyles()
 	 * @see #getImage()
 	 * @generated
@@ -2207,6 +2244,40 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDisplayImage_Title();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Styled Image Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Styled Image Entry</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString"
+	 *        valueType="org.soluvas.image.StyledImage" valueContainment="true" valueRequired="true"
+	 * @generated
+	 */
+	EClass getStyledImageEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getStyledImageEntry()
+	 * @generated
+	 */
+	EAttribute getStyledImageEntry_Key();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getStyledImageEntry()
+	 * @generated
+	 */
+	EReference getStyledImageEntry_Value();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}'.
@@ -2744,7 +2815,7 @@ public interface ImagePackage extends EPackage {
 		EClass IMAGE = eINSTANCE.getImage();
 
 		/**
-		 * The meta object literal for the '<em><b>Styles</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Styles</b></em>' map feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -3016,6 +3087,32 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DISPLAY_IMAGE__TITLE = eINSTANCE.getDisplayImage_Title();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.StyledImageEntryImpl <em>Styled Image Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.StyledImageEntryImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getStyledImageEntry()
+		 * @generated
+		 */
+		EClass STYLED_IMAGE_ENTRY = eINSTANCE.getStyledImageEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STYLED_IMAGE_ENTRY__KEY = eINSTANCE.getStyledImageEntry_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STYLED_IMAGE_ENTRY__VALUE = eINSTANCE.getStyledImageEntry_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.

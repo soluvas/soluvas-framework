@@ -2,6 +2,7 @@
  */
 package org.soluvas.image.impl;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -72,6 +73,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 			case ImagePackage.IMAGE_MAGICK_TRANSFORMER: return (EObject)createImageMagickTransformer();
 			case ImagePackage.FOLDER_CONNECTOR: return (EObject)createFolderConnector();
 			case ImagePackage.DISPLAY_IMAGE: return (EObject)createDisplayImage();
+			case ImagePackage.STYLED_IMAGE_ENTRY: return (EObject)createStyledImageEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -283,6 +285,16 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	public DisplayImage createDisplayImage() {
 		DisplayImageImpl displayImage = new DisplayImageImpl();
 		return displayImage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<String, StyledImage> createStyledImageEntry() {
+		StyledImageEntryImpl styledImageEntry = new StyledImageEntryImpl();
+		return styledImageEntry;
 	}
 
 	/**

@@ -2,6 +2,7 @@
  */
 package org.soluvas.image.impl;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -179,6 +180,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	private EClass displayImageEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass styledImageEntryEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1098,6 +1105,33 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getStyledImageEntry() {
+		return styledImageEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStyledImageEntry_Key() {
+		return (EAttribute)styledImageEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStyledImageEntry_Value() {
+		return (EReference)styledImageEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getImageTransformType() {
 		return imageTransformTypeEEnum;
@@ -1304,6 +1338,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		createEAttribute(displayImageEClass, DISPLAY_IMAGE__HEIGHT);
 		createEAttribute(displayImageEClass, DISPLAY_IMAGE__ALT);
 		createEAttribute(displayImageEClass, DISPLAY_IMAGE__TITLE);
+
+		styledImageEntryEClass = createEClass(STYLED_IMAGE_ENTRY);
+		createEAttribute(styledImageEntryEClass, STYLED_IMAGE_ENTRY__KEY);
+		createEReference(styledImageEntryEClass, STYLED_IMAGE_ENTRY__VALUE);
 
 		// Create enums
 		imageTransformTypeEEnum = createEEnum(IMAGE_TRANSFORM_TYPE);
@@ -1537,7 +1575,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEAttribute(getImageVariant_Extension(), theEcorePackage.getEString(), "extension", null, 0, 1, ImageVariant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(imageEClass, Image.class, "Image", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getImage_Styles(), this.getStyledImage(), null, "styles", null, 0, -1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImage_Styles(), this.getStyledImageEntry(), null, "styles", null, 0, -1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImage_SchemaVersion(), theEcorePackage.getELong(), "schemaVersion", "2", 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImage_Uri(), theEcorePackage.getEString(), "uri", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImage_FileName(), theEcorePackage.getEString(), "fileName", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1575,6 +1613,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEAttribute(getDisplayImage_Height(), theEcorePackage.getEIntegerObject(), "height", null, 0, 1, DisplayImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDisplayImage_Alt(), theEcorePackage.getEString(), "alt", null, 0, 1, DisplayImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDisplayImage_Title(), theEcorePackage.getEString(), "title", null, 0, 1, DisplayImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(styledImageEntryEClass, Map.Entry.class, "StyledImageEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStyledImageEntry_Key(), theEcorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStyledImageEntry_Value(), this.getStyledImage(), null, "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(imageTransformTypeEEnum, ImageTransformType.class, "ImageTransformType");

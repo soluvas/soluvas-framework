@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.Enumerator;
  * Holds commonly used image styles.
  * <!-- end-model-doc -->
  * @see org.soluvas.image.ImagePackage#getImageStyles()
- * @model
  */
 public enum ImageStyles implements Enumerator, ImageStyle {
 	/**

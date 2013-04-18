@@ -3,6 +3,7 @@
 package org.soluvas.image;
 
 import java.io.File;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.EList;
 
 import org.joda.time.DateTime;
@@ -66,20 +67,21 @@ import org.soluvas.commons.Timestamped;
  */
 public interface Image extends Identifiable, NameContainer, SchemaVersionable, Timestamped, DimensionLike {
 	/**
-	 * Returns the value of the '<em><b>Styles</b></em>' containment reference list.
-	 * The list contents are of type {@link org.soluvas.image.StyledImage}.
+	 * Returns the value of the '<em><b>Styles</b></em>' map.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link org.soluvas.image.StyledImage},
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Styles</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Styles</em>' containment reference list.
+	 * @return the value of the '<em>Styles</em>' map.
 	 * @see org.soluvas.image.ImagePackage#getImage_Styles()
-	 * @model containment="true"
+	 * @model mapType="org.soluvas.image.StyledImageEntry<org.eclipse.emf.ecore.EString, org.soluvas.image.StyledImage>"
 	 * @generated
 	 */
-	EList<StyledImage> getStyles();
+	EMap<String, StyledImage> getStyles();
 
 	/**
 	 * Returns the value of the '<em><b>Schema Version</b></em>' attribute.

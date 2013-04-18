@@ -3,34 +3,36 @@
 package org.soluvas.image.impl;
 
 import java.io.File;
-import java.util.Collection;
 
+import org.bson.BasicBSONObject;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.joda.time.DateTime;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
-
 import org.soluvas.image.DimensionLike;
 import org.soluvas.image.Image;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.StyledImage;
+import org.soluvas.image.store.ImageRepository;
+import org.soluvas.image.store.MongoImageRepository;
+
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Maps.EntryTransformer;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,6 +64,8 @@ import org.soluvas.image.StyledImage;
  * @generated
  */
 public class ImageImpl extends EObjectImpl implements Image {
+	private static final Logger log = LoggerFactory.getLogger(ImageImpl.class);
+	
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -183,14 +187,14 @@ public class ImageImpl extends EObjectImpl implements Image {
 	protected Integer height = HEIGHT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getStyles() <em>Styles</em>}' containment reference list.
+	 * The cached value of the '{@link #getStyles() <em>Styles</em>}' map.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getStyles()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<StyledImage> styles;
+	protected EMap<String, StyledImage> styles;
 
 	/**
 	 * The default value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
@@ -402,6 +406,64 @@ public class ImageImpl extends EObjectImpl implements Image {
 	}
 
 	/**
+	 * Convenience constructor for passing to {@link MongoImageRepository#add(Image)}.
+	 * @param originalFile
+	 * @param contentType
+	 * @param name
+	 */
+	public ImageImpl(String id, File originalFile, String contentType, String name) {
+		super();
+		this.id = id;
+		this.originalFile = originalFile;
+		this.contentType = contentType;
+		this.name = name;
+	}
+
+	/**
+	 * Convenience constructor for passing to {@link MongoImageRepository#add(Image)}.
+	 * @param originalFile
+	 * @param contentType
+	 * @param name
+	 */
+	public ImageImpl(File originalFile, String contentType, String name) {
+		this(null, originalFile, contentType, name);
+	}
+
+	public ImageImpl(ImageRepository imageStore, BasicBSONObject dbo) {
+		super();
+		id = dbo.getString("_id");
+		name = dbo.getString("name");
+		uri = imageStore.getImageUri(id, MongoImageRepository.ORIGINAL_NAME);
+		contentType = dbo.getString("contentType");
+		fileName = dbo.getString("fileName");
+		size = dbo.get("size") != null ? dbo.getLong("size") : null;
+//		width = dbo.getInt("width");
+//		height = dbo.getInt("height");
+		BasicBSONObject stylesBson = (BasicBSONObject) dbo.get("styles");
+		if (stylesBson == null) {
+			log.warn("Image {} has null styles", id);
+			stylesBson = new BasicBSONObject();
+		}
+		getStyles().putAll( ImmutableMap.copyOf(Maps.transformEntries(
+				stylesBson, new EntryTransformer<String, Object, StyledImage>() {
+			@Override
+			public StyledImage transformEntry(String key, Object value) {
+				BasicBSONObject styleBson = (BasicBSONObject)value;
+				final Long size = styleBson.get("size") != null ? styleBson.getLong("size") : null;
+				return new StyledImageImpl(styleBson.getString("code"),
+						styleBson.getString("uri"),
+						styleBson.getString("contentType"), size,
+						styleBson.getInt("width"), styleBson.getInt("height"));
+			}
+		})) );
+		
+		// v1 field but forgotten in API
+		created = dbo.get("created") != null ? new DateTime(dbo.get("created")) : null;
+		// v2 field
+		originUri = dbo.get("originUri") != null ? dbo.getString("originUri") : uri.toString();
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -416,6 +478,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -425,6 +488,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(String newId) {
 		String oldId = id;
 		id = newId;
@@ -437,6 +501,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -446,6 +511,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -458,6 +524,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getCreationTime() {
 		return creationTime;
 	}
@@ -467,6 +534,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCreationTime(DateTime newCreationTime) {
 		DateTime oldCreationTime = creationTime;
 		creationTime = newCreationTime;
@@ -479,6 +547,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getModificationTime() {
 		return modificationTime;
 	}
@@ -488,6 +557,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setModificationTime(DateTime newModificationTime) {
 		DateTime oldModificationTime = modificationTime;
 		modificationTime = newModificationTime;
@@ -500,6 +570,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getWidth() {
 		return width;
 	}
@@ -509,6 +580,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWidth(Integer newWidth) {
 		Integer oldWidth = width;
 		width = newWidth;
@@ -521,6 +593,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getHeight() {
 		return height;
 	}
@@ -530,6 +603,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHeight(Integer newHeight) {
 		Integer oldHeight = height;
 		height = newHeight;
@@ -542,9 +616,10 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<StyledImage> getStyles() {
+	@Override
+	public EMap<String, StyledImage> getStyles() {
 		if (styles == null) {
-			styles = new EObjectContainmentEList<StyledImage>(StyledImage.class, this, ImagePackage.IMAGE__STYLES);
+			styles = new EcoreEMap<String,StyledImage>(ImagePackage.Literals.STYLED_IMAGE_ENTRY, StyledImageEntryImpl.class, this, ImagePackage.IMAGE__STYLES);
 		}
 		return styles;
 	}
@@ -554,6 +629,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public long getSchemaVersion() {
 		return schemaVersion;
 	}
@@ -563,6 +639,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getUri() {
 		return uri;
 	}
@@ -572,6 +649,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUri(String newUri) {
 		String oldUri = uri;
 		uri = newUri;
@@ -584,6 +662,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFileName() {
 		return fileName;
 	}
@@ -593,6 +672,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFileName(String newFileName) {
 		String oldFileName = fileName;
 		fileName = newFileName;
@@ -605,6 +685,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getContentType() {
 		return contentType;
 	}
@@ -614,6 +695,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setContentType(String newContentType) {
 		String oldContentType = contentType;
 		contentType = newContentType;
@@ -626,6 +708,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getSize() {
 		return size;
 	}
@@ -635,6 +718,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSize(Long newSize) {
 		Long oldSize = size;
 		size = newSize;
@@ -647,6 +731,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getCreated() {
 		return created;
 	}
@@ -656,6 +741,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCreated(DateTime newCreated) {
 		DateTime oldCreated = created;
 		created = newCreated;
@@ -668,6 +754,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getOriginUri() {
 		return originUri;
 	}
@@ -677,6 +764,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOriginUri(String newOriginUri) {
 		String oldOriginUri = originUri;
 		originUri = newOriginUri;
@@ -689,6 +777,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getExtension() {
 		return extension;
 	}
@@ -698,6 +787,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExtension(String newExtension) {
 		String oldExtension = extension;
 		extension = newExtension;
@@ -710,6 +800,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLinkedFile() {
 		return linkedFile;
 	}
@@ -719,6 +810,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLinkedFile(String newLinkedFile) {
 		String oldLinkedFile = linkedFile;
 		linkedFile = newLinkedFile;
@@ -731,6 +823,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public File getOriginalFile() {
 		return originalFile;
 	}
@@ -740,6 +833,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOriginalFile(File newOriginalFile) {
 		File oldOriginalFile = originalFile;
 		originalFile = newOriginalFile;
@@ -782,7 +876,8 @@ public class ImageImpl extends EObjectImpl implements Image {
 			case ImagePackage.IMAGE__HEIGHT:
 				return getHeight();
 			case ImagePackage.IMAGE__STYLES:
-				return getStyles();
+				if (coreType) return getStyles();
+				else return getStyles().map();
 			case ImagePackage.IMAGE__SCHEMA_VERSION:
 				return getSchemaVersion();
 			case ImagePackage.IMAGE__URI:
@@ -835,8 +930,7 @@ public class ImageImpl extends EObjectImpl implements Image {
 				setHeight((Integer)newValue);
 				return;
 			case ImagePackage.IMAGE__STYLES:
-				getStyles().clear();
-				getStyles().addAll((Collection<? extends StyledImage>)newValue);
+				((EStructuralFeature.Setting)getStyles()).set(newValue);
 				return;
 			case ImagePackage.IMAGE__URI:
 				setUri((String)newValue);

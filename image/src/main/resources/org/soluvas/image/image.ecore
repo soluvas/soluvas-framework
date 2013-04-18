@@ -320,7 +320,7 @@
       <details key="documentation" value="The v1 structure is as follows:&#xA;&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;_id&quot;, imageId);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;name&quot;, name); // in v1: Only used for creating/uploading new image. Otherwise it's always null.&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;uri&quot;, originalUri);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;fileName&quot;, originalName);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;contentType&quot;, contentType);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;size&quot;, (int)length);&#xA;&#x9;&#x9;&#x9;final Date creationTime = new Date();&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;created&quot;, creationTime);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;styles&quot;, stylesObj);&#xA;- originalFile : transient&#xA;&#xA;v2 adds:&#xA;&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;name&quot;, name); // in v2: serialized&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;originUri&quot;, originalOriginUri);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;extension&quot;, extension);&#xA;&#x9;&#x9;&#x9;dbo.put(&quot;creationTime&quot;, creationTime);&#xA;- modificationTime&#xA;- width&#xA;- height&#xA;- linkedFile"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="styles" upperBound="-1"
-        eType="#//StyledImage" containment="true"/>
+        eType="#//StyledImageEntry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="schemaVersion" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong"
         changeable="false" defaultValueLiteral="2"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
@@ -451,7 +451,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="ImageTypes">
+  <eClassifiers xsi:type="ecore:EEnum" name="ImageTypes" instanceClassName="org.soluvas.image.ImageTypes">
     <eLiterals name="person"/>
     <eLiterals name="shop" value="1"/>
     <eLiterals name="product" value="2"/>
@@ -472,4 +472,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ImageType" instanceClassName="org.soluvas.image.ImageType"/>
   <eClassifiers xsi:type="ecore:EDataType" name="ImageStyle" instanceClassName="org.soluvas.image.ImageStyle"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StyledImageEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//StyledImage"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

@@ -20,6 +20,7 @@ import com.google.common.collect.Maps.EntryTransformer;
  * @author ceefour
  * Image descriptor;
  */
+@Deprecated
 public class Image {
 	
 	public static class ToId implements Function<Image, String> {

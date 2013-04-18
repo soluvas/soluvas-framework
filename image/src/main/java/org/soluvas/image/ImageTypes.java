@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * @see org.soluvas.image.ImagePackage#getImageTypes()
- * @model
  */
 public enum ImageTypes implements Enumerator, ImageType {
 	/**

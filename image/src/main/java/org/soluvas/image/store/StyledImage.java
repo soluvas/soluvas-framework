@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.soluvas.image.store;
 
 import java.net.URI;
@@ -9,6 +6,7 @@ import java.net.URI;
  * @author ceefour
  *
  */
+@Deprecated
 public class StyledImage {
 
 	private final String styleName;
