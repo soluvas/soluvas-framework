@@ -189,7 +189,7 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 	 */
 	@Override @Deprecated
 	public final List<T> findAll() {
-		return findAll(new Sort(new String[] {}));
+		return findAll(new PageRequest(0, DEFAULT_PAGE_SIZE)).getContent();
 	}
 
 }
