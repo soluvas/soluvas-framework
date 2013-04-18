@@ -61,10 +61,20 @@ public class ShellProgressMonitorImpl extends ProgressMonitorImpl implements She
 		this.worked = 0.0d;
 		this.totalWork = totalWork;
 		this.startTime = new DateTime();
+		renderNameAndRenderProgressBar(name);
+	}
+
+	protected void renderNameAndRenderProgressBar(String name) {
 		final String nameAnsi = NameUtils.shortenAnsi(name, 39);
 		System.out.print(ansi().render(nameAnsi + " "));
 		System.out.print(ansi().saveCursorPosition());
 		renderProgressBar();
+	}
+	
+	@Override
+	public void subTask(String name) {
+		System.out.println();
+		renderNameAndRenderProgressBar(name);
 	}
 	
 	protected synchronized void renderProgressBar() {
