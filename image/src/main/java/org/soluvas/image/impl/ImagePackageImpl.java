@@ -16,6 +16,7 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.image.BlitlineTransformer;
 import org.soluvas.image.DavConnector;
 import org.soluvas.image.DimensionLike;
+import org.soluvas.image.DisplayImage;
 import org.soluvas.image.DuplicateIdHandling;
 import org.soluvas.image.FileExport;
 import org.soluvas.image.FolderConnector;
@@ -26,9 +27,13 @@ import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImageMagickTransformer;
 import org.soluvas.image.ImageManager;
 import org.soluvas.image.ImagePackage;
+import org.soluvas.image.ImageStyle;
+import org.soluvas.image.ImageStyles;
 import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageTransformType;
 import org.soluvas.image.ImageTransformer;
+import org.soluvas.image.ImageType;
+import org.soluvas.image.ImageTypes;
 import org.soluvas.image.ImageVariant;
 import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.ResizeToFit;
@@ -173,6 +178,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass displayImageEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum imageTransformTypeEEnum = null;
 
 	/**
@@ -198,7 +209,32 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EEnum imageTypesEEnum = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum imageStylesEEnum = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType imageRepositoryEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType imageTypeEDataType = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType imageStyleEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1008,6 +1044,60 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDisplayImage() {
+		return displayImageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDisplayImage_Src() {
+		return (EAttribute)displayImageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDisplayImage_Width() {
+		return (EAttribute)displayImageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDisplayImage_Height() {
+		return (EAttribute)displayImageEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDisplayImage_Alt() {
+		return (EAttribute)displayImageEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDisplayImage_Title() {
+		return (EAttribute)displayImageEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getImageTransformType() {
 		return imageTransformTypeEEnum;
@@ -1045,8 +1135,44 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getImageTypes() {
+		return imageTypesEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getImageStyles() {
+		return imageStylesEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getImageRepository() {
 		return imageRepositoryEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getImageType() {
+		return imageTypeEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getImageStyle() {
+		return imageStyleEDataType;
 	}
 
 	/**
@@ -1172,14 +1298,25 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		folderConnectorEClass = createEClass(FOLDER_CONNECTOR);
 		createEAttribute(folderConnectorEClass, FOLDER_CONNECTOR__FOLDER);
 
+		displayImageEClass = createEClass(DISPLAY_IMAGE);
+		createEAttribute(displayImageEClass, DISPLAY_IMAGE__SRC);
+		createEAttribute(displayImageEClass, DISPLAY_IMAGE__WIDTH);
+		createEAttribute(displayImageEClass, DISPLAY_IMAGE__HEIGHT);
+		createEAttribute(displayImageEClass, DISPLAY_IMAGE__ALT);
+		createEAttribute(displayImageEClass, DISPLAY_IMAGE__TITLE);
+
 		// Create enums
 		imageTransformTypeEEnum = createEEnum(IMAGE_TRANSFORM_TYPE);
 		fileExportEEnum = createEEnum(FILE_EXPORT);
 		duplicateIdHandlingEEnum = createEEnum(DUPLICATE_ID_HANDLING);
 		transformGravityEEnum = createEEnum(TRANSFORM_GRAVITY);
+		imageTypesEEnum = createEEnum(IMAGE_TYPES);
+		imageStylesEEnum = createEEnum(IMAGE_STYLES);
 
 		// Create data types
 		imageRepositoryEDataType = createEDataType(IMAGE_REPOSITORY);
+		imageTypeEDataType = createEDataType(IMAGE_TYPE);
+		imageStyleEDataType = createEDataType(IMAGE_STYLE);
 	}
 
 	/**
@@ -1370,6 +1507,17 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEParameter(op, this.getDuplicateIdHandling(), "duplicateIdHandling", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theCommonsPackage.getProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(imageManagerEClass, this.getDisplayImage(), "getSafeImage", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageType(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageStyle(), "style", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(imageManagerEClass, this.getDisplayImage(), "getSafePersonPhoto", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageType(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "imageId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageStyle(), "style", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theCommonsPackage.getGender(), "gender", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(imageTransformEClass, ImageTransform.class, "ImageTransform", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(resizeToFitEClass, ResizeToFit.class, "ResizeToFit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1421,6 +1569,13 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEClass(folderConnectorEClass, FolderConnector.class, "FolderConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFolderConnector_Folder(), theEcorePackage.getEString(), "folder", null, 1, 1, FolderConnector.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(displayImageEClass, DisplayImage.class, "DisplayImage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDisplayImage_Src(), theEcorePackage.getEString(), "src", null, 1, 1, DisplayImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDisplayImage_Width(), theEcorePackage.getEIntegerObject(), "width", null, 0, 1, DisplayImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDisplayImage_Height(), theEcorePackage.getEIntegerObject(), "height", null, 0, 1, DisplayImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDisplayImage_Alt(), theEcorePackage.getEString(), "alt", null, 0, 1, DisplayImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDisplayImage_Title(), theEcorePackage.getEString(), "title", null, 0, 1, DisplayImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(imageTransformTypeEEnum, ImageTransformType.class, "ImageTransformType");
 		addEEnumLiteral(imageTransformTypeEEnum, ImageTransformType.RESIZE_TO_FIT);
@@ -1448,8 +1603,26 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEEnumLiteral(transformGravityEEnum, TransformGravity.BOTTOM_LEFT);
 		addEEnumLiteral(transformGravityEEnum, TransformGravity.BOTTOM_RIGHT);
 
+		initEEnum(imageTypesEEnum, ImageTypes.class, "ImageTypes");
+		addEEnumLiteral(imageTypesEEnum, ImageTypes.PERSON);
+		addEEnumLiteral(imageTypesEEnum, ImageTypes.SHOP);
+		addEEnumLiteral(imageTypesEEnum, ImageTypes.PRODUCT);
+		addEEnumLiteral(imageTypesEEnum, ImageTypes.PLACE);
+		addEEnumLiteral(imageTypesEEnum, ImageTypes.TASK);
+		addEEnumLiteral(imageTypesEEnum, ImageTypes.ARTICLE);
+		addEEnumLiteral(imageTypesEEnum, ImageTypes.BANNER_SHOP);
+
+		initEEnum(imageStylesEEnum, ImageStyles.class, "ImageStyles");
+		addEEnumLiteral(imageStylesEEnum, ImageStyles.ORIGINAL);
+		addEEnumLiteral(imageStylesEEnum, ImageStyles.THUMBNAIL);
+		addEEnumLiteral(imageStylesEEnum, ImageStyles.SMALL);
+		addEEnumLiteral(imageStylesEEnum, ImageStyles.NORMAL);
+		addEEnumLiteral(imageStylesEEnum, ImageStyles.LARGE);
+
 		// Initialize data types
 		initEDataType(imageRepositoryEDataType, ImageRepository.class, "ImageRepository", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(imageTypeEDataType, ImageType.class, "ImageType", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(imageStyleEDataType, ImageStyle.class, "ImageStyle", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1624,6 +1797,18 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 			 "documentation", "Import from metadata file and images.\n\nCan\'t have \"import\" as name because it\'s a reserved keyword."
 		   });		
 		addAnnotation
+		  (imageManagerEClass.getEOperations().get(6), 
+		   source, 
+		   new String[] {
+			 "documentation", "Gets the DisplayImage for an imageId & styleName in a specified repository."
+		   });		
+		addAnnotation
+		  (imageManagerEClass.getEOperations().get(7), 
+		   source, 
+		   new String[] {
+			 "documentation", "Gets the DisplayImage for an imageId & styleName in a specified repository. If image is not available, use the gender to select the representation."
+		   });		
+		addAnnotation
 		  (imageTransformTypeEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
@@ -1748,6 +1933,42 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Location to save."
+		   });		
+		addAnnotation
+		  (displayImageEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Makes it easier to display an image with additional information like width, height, alt, and title."
+		   });		
+		addAnnotation
+		  (getDisplayImage_Width(), 
+		   source, 
+		   new String[] {
+			 "documentation", "TODO: not yet usable."
+		   });		
+		addAnnotation
+		  (getDisplayImage_Height(), 
+		   source, 
+		   new String[] {
+			 "documentation", "TODO: not yet usable."
+		   });		
+		addAnnotation
+		  (getDisplayImage_Alt(), 
+		   source, 
+		   new String[] {
+			 "documentation", "TODO: not yet usable."
+		   });		
+		addAnnotation
+		  (getDisplayImage_Title(), 
+		   source, 
+		   new String[] {
+			 "documentation", "TODO: not yet usable."
+		   });		
+		addAnnotation
+		  (imageStylesEEnum, 
+		   source, 
+		   new String[] {
+			 "documentation", "Holds commonly used image styles."
 		   });
 	}
 

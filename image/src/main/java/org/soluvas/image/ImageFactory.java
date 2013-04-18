@@ -148,6 +148,15 @@ public interface ImageFactory extends EFactory {
 	FolderConnector createFolderConnector();
 
 	/**
+	 * Returns a new object of class '<em>Display Image</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Display Image</em>'.
+	 * @generated
+	 */
+	DisplayImage createDisplayImage();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

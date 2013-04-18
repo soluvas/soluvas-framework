@@ -1169,6 +1169,70 @@ public interface ImagePackage extends EPackage {
 	int FOLDER_CONNECTOR_FEATURE_COUNT = IMAGE_CONNECTOR_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.DisplayImageImpl <em>Display Image</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.DisplayImageImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getDisplayImage()
+	 * @generated
+	 */
+	int DISPLAY_IMAGE = 18;
+
+	/**
+	 * The feature id for the '<em><b>Src</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DISPLAY_IMAGE__SRC = 0;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DISPLAY_IMAGE__WIDTH = 1;
+
+	/**
+	 * The feature id for the '<em><b>Height</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DISPLAY_IMAGE__HEIGHT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Alt</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DISPLAY_IMAGE__ALT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DISPLAY_IMAGE__TITLE = 4;
+
+	/**
+	 * The number of structural features of the '<em>Display Image</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DISPLAY_IMAGE_FEATURE_COUNT = 5;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1176,7 +1240,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformType()
 	 * @generated
 	 */
-	int IMAGE_TRANSFORM_TYPE = 18;
+	int IMAGE_TRANSFORM_TYPE = 19;
 
 
 	/**
@@ -1187,7 +1251,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getFileExport()
 	 * @generated
 	 */
-	int FILE_EXPORT = 19;
+	int FILE_EXPORT = 20;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.DuplicateIdHandling <em>Duplicate Id Handling</em>}' enum.
@@ -1197,7 +1261,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getDuplicateIdHandling()
 	 * @generated
 	 */
-	int DUPLICATE_ID_HANDLING = 20;
+	int DUPLICATE_ID_HANDLING = 21;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.TransformGravity <em>Transform Gravity</em>}' enum.
@@ -1207,7 +1271,27 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getTransformGravity()
 	 * @generated
 	 */
-	int TRANSFORM_GRAVITY = 21;
+	int TRANSFORM_GRAVITY = 22;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.ImageTypes <em>Types</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.ImageTypes
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTypes()
+	 * @generated
+	 */
+	int IMAGE_TYPES = 23;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.ImageStyles <em>Styles</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.ImageStyles
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyles()
+	 * @generated
+	 */
+	int IMAGE_STYLES = 24;
 
 	/**
 	 * The meta object id for the '<em>Repository</em>' data type.
@@ -1217,7 +1301,28 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageRepository()
 	 * @generated
 	 */
-	int IMAGE_REPOSITORY = 22;
+	int IMAGE_REPOSITORY = 25;
+
+
+	/**
+	 * The meta object id for the '<em>Type</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.ImageType
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageType()
+	 * @generated
+	 */
+	int IMAGE_TYPE = 26;
+
+	/**
+	 * The meta object id for the '<em>Style</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.ImageStyle
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyle()
+	 * @generated
+	 */
+	int IMAGE_STYLE = 27;
 
 
 	/**
@@ -2039,6 +2144,71 @@ public interface ImagePackage extends EPackage {
 	EAttribute getFolderConnector_Folder();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.DisplayImage <em>Display Image</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Display Image</em>'.
+	 * @see org.soluvas.image.DisplayImage
+	 * @generated
+	 */
+	EClass getDisplayImage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.DisplayImage#getSrc <em>Src</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Src</em>'.
+	 * @see org.soluvas.image.DisplayImage#getSrc()
+	 * @see #getDisplayImage()
+	 * @generated
+	 */
+	EAttribute getDisplayImage_Src();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.DisplayImage#getWidth <em>Width</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Width</em>'.
+	 * @see org.soluvas.image.DisplayImage#getWidth()
+	 * @see #getDisplayImage()
+	 * @generated
+	 */
+	EAttribute getDisplayImage_Width();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.DisplayImage#getHeight <em>Height</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Height</em>'.
+	 * @see org.soluvas.image.DisplayImage#getHeight()
+	 * @see #getDisplayImage()
+	 * @generated
+	 */
+	EAttribute getDisplayImage_Height();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.DisplayImage#getAlt <em>Alt</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Alt</em>'.
+	 * @see org.soluvas.image.DisplayImage#getAlt()
+	 * @see #getDisplayImage()
+	 * @generated
+	 */
+	EAttribute getDisplayImage_Alt();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.DisplayImage#getTitle <em>Title</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Title</em>'.
+	 * @see org.soluvas.image.DisplayImage#getTitle()
+	 * @see #getDisplayImage()
+	 * @generated
+	 */
+	EAttribute getDisplayImage_Title();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2079,6 +2249,26 @@ public interface ImagePackage extends EPackage {
 	EEnum getTransformGravity();
 
 	/**
+	 * Returns the meta object for enum '{@link org.soluvas.image.ImageTypes <em>Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Types</em>'.
+	 * @see org.soluvas.image.ImageTypes
+	 * @generated
+	 */
+	EEnum getImageTypes();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.image.ImageStyles <em>Styles</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Styles</em>'.
+	 * @see org.soluvas.image.ImageStyles
+	 * @generated
+	 */
+	EEnum getImageStyles();
+
+	/**
 	 * Returns the meta object for data type '{@link org.soluvas.image.store.ImageRepository <em>Repository</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2088,6 +2278,28 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getImageRepository();
+
+	/**
+	 * Returns the meta object for data type '{@link org.soluvas.image.ImageType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Type</em>'.
+	 * @see org.soluvas.image.ImageType
+	 * @model instanceClass="org.soluvas.image.ImageType"
+	 * @generated
+	 */
+	EDataType getImageType();
+
+	/**
+	 * Returns the meta object for data type '{@link org.soluvas.image.ImageStyle <em>Style</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Style</em>'.
+	 * @see org.soluvas.image.ImageStyle
+	 * @model instanceClass="org.soluvas.image.ImageStyle"
+	 * @generated
+	 */
+	EDataType getImageStyle();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2756,6 +2968,56 @@ public interface ImagePackage extends EPackage {
 		EAttribute FOLDER_CONNECTOR__FOLDER = eINSTANCE.getFolderConnector_Folder();
 
 		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.DisplayImageImpl <em>Display Image</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.DisplayImageImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getDisplayImage()
+		 * @generated
+		 */
+		EClass DISPLAY_IMAGE = eINSTANCE.getDisplayImage();
+
+		/**
+		 * The meta object literal for the '<em><b>Src</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DISPLAY_IMAGE__SRC = eINSTANCE.getDisplayImage_Src();
+
+		/**
+		 * The meta object literal for the '<em><b>Width</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DISPLAY_IMAGE__WIDTH = eINSTANCE.getDisplayImage_Width();
+
+		/**
+		 * The meta object literal for the '<em><b>Height</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DISPLAY_IMAGE__HEIGHT = eINSTANCE.getDisplayImage_Height();
+
+		/**
+		 * The meta object literal for the '<em><b>Alt</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DISPLAY_IMAGE__ALT = eINSTANCE.getDisplayImage_Alt();
+
+		/**
+		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DISPLAY_IMAGE__TITLE = eINSTANCE.getDisplayImage_Title();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2796,6 +3058,26 @@ public interface ImagePackage extends EPackage {
 		EEnum TRANSFORM_GRAVITY = eINSTANCE.getTransformGravity();
 
 		/**
+		 * The meta object literal for the '{@link org.soluvas.image.ImageTypes <em>Types</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.ImageTypes
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTypes()
+		 * @generated
+		 */
+		EEnum IMAGE_TYPES = eINSTANCE.getImageTypes();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.ImageStyles <em>Styles</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.ImageStyles
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyles()
+		 * @generated
+		 */
+		EEnum IMAGE_STYLES = eINSTANCE.getImageStyles();
+
+		/**
 		 * The meta object literal for the '<em>Repository</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2804,6 +3086,26 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EDataType IMAGE_REPOSITORY = eINSTANCE.getImageRepository();
+
+		/**
+		 * The meta object literal for the '<em>Type</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.ImageType
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageType()
+		 * @generated
+		 */
+		EDataType IMAGE_TYPE = eINSTANCE.getImageType();
+
+		/**
+		 * The meta object literal for the '<em>Style</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.ImageStyle
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyle()
+		 * @generated
+		 */
+		EDataType IMAGE_STYLE = eINSTANCE.getImageStyle();
 
 	}
 

@@ -3,8 +3,10 @@ package org.soluvas.image.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.eclipse.emf.common.util.EList;
@@ -24,6 +26,7 @@ import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.ProgressStatus;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.impl.ProgressMonitorImpl;
+import org.soluvas.image.DisplayImage;
 import org.soluvas.image.DuplicateIdHandling;
 import org.soluvas.image.FileExport;
 import org.soluvas.image.ImageCatalog;
@@ -31,16 +34,17 @@ import org.soluvas.image.ImageException;
 import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImageManager;
 import org.soluvas.image.ImagePackage;
-import org.soluvas.image.PersonImage;
+import org.soluvas.image.ImageStyle;
+import org.soluvas.image.ImageType;
+import org.soluvas.image.ImageTypes;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 import org.soluvas.image.store.StyledImage;
 import org.soluvas.image.util.ImageUtils;
 import org.soluvas.ldap.SocialPerson;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Service;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 
@@ -53,7 +57,6 @@ import com.google.common.collect.ImmutableMap;
  *
  * @generated
  */
-@Service("imageMgr") @Lazy
 public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	
 	private static final Logger log = LoggerFactory
@@ -62,7 +65,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	private String femaleDefaultPhotoId;
 	private String unknownDefaultPhotoId;
 	private WebAddress webAddress;
-	private ImageRepository personImageRepo;
+	final Map<ImageType, ImageRepository> imageRepos;
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -73,11 +76,22 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	}
 	
 	@Inject
-	public ImageManagerImpl(WebAddress webAddress,
-			@PersonImage ImageRepository personImageRepo) {
+	public ImageManagerImpl(WebAddress webAddress, Map<ImageType, ImageRepository> imageRepos) {
 		super();
 		this.webAddress = webAddress;
-		this.personImageRepo = personImageRepo;
+		this.imageRepos = imageRepos;
+	}
+	
+	protected ImageRepository getPersonImageRepository() {
+		return getImageRepositoryChecked(ImageTypes.PERSON);
+	}
+
+	/**
+	 * @return
+	 */
+	protected ImageRepository getImageRepositoryChecked(ImageType namespace) {
+		return Preconditions.checkNotNull(imageRepos.get(namespace),
+				"Cannot get %s image repository", namespace);
 	}
 
 	/**
@@ -370,7 +384,63 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		return importedCount;
 	}
 
-	public String getPersonPhotoUri(Gender gender) {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public DisplayImage getSafeImage(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style) {
+		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
+		final Image image = imageRepo.findOne(imageId);
+		
+		final DisplayImage displayImage = new DisplayImageImpl();
+		if (image != null) {
+			final String styleKey = style != null ? style.name().toLowerCase() : null;
+			if (style != null && image.getStyles() != null && image.getStyles().get(styleKey) != null
+					&& image.getStyles().get(styleKey).getUri() != null) {
+				displayImage.setSrc(image.getStyles().get(styleKey).getUri().toString());
+				displayImage.setAlt(image.getName());
+				displayImage.setTitle(image.getName());
+			} else {
+				displayImage.setSrc(getNoImageUri());
+				log.warn("Cannot get %s style for %s image %s", styleKey, namespace, imageId);
+			}
+		} else {
+			displayImage.setSrc(getNoImageUri());
+			log.warn("Cannot get %s image %s", namespace, imageId);
+		}
+		return displayImage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public DisplayImage getSafePersonPhoto(ImageType namespace, String imageId, ImageStyle style, Gender gender) {
+		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
+		final Image image = imageRepo.findOne(imageId);
+		
+		final DisplayImage displayImage = new DisplayImageImpl();
+		if (image != null) {
+			final String styleKey = style != null ? style.name().toLowerCase() : null;
+			if (image.getStyles() != null && image.getStyles().get(styleKey) != null
+					&& image.getStyles().get(styleKey).getUri() != null) {
+				displayImage.setSrc(image.getStyles().get(styleKey).getUri().toString());
+				displayImage.setAlt(image.getName());
+				displayImage.setTitle(image.getName());
+			} else {
+				displayImage.setSrc(getPersonPhotoUri(gender));
+				log.warn("Cannot get %s style for %s image %s", styleKey, namespace, imageId);
+			}
+		} else {
+			displayImage.setSrc(getPersonPhotoUri(gender));
+			log.warn("Cannot get %s image %s", namespace, imageId);
+		}
+		return displayImage;
+	}
+
+	public String getPersonPhotoUri(@Nullable Gender gender) {
 		if (gender == null) {
 			return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_person.png";
 		}
@@ -388,19 +458,19 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	public String getThumbnailPhotoUri(SocialPerson person) {
 		if (person != null) {					
 			final String photoId = person.getPhotoId();
-			final Image personImage = personImageRepo.findOne(photoId);
+			final Image personImage = getPersonImageRepository().findOne(photoId);
 			if (personImage != null) {
 				log.debug("Photo id {}", personImage.getId());
 				final StyledImage personThumbnailImage = personImage.getStyles().get("thumbnail");
 				if (personThumbnailImage != null) {
 					return personThumbnailImage.getUri().toString();
 				} else {
-					log.warn("Cannot get thumbnail image {} for person {} using {}", photoId, person.getId(), personImageRepo);
+					log.warn("Cannot get thumbnail image {} for person {} using {}", photoId, person.getId(), getPersonImageRepository());
 					return getPersonPhotoUri(person.getGender());
 				}
 			} else {
 				log.warn("Cannot find image {} for person {} using {}",
-						photoId, person.getId(), personImageRepo);
+						photoId, person.getId(), getPersonImageRepository());
 				return getPersonPhotoUri(person.getGender());
 			}
 		} else {

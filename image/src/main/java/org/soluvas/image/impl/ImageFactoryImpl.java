@@ -71,6 +71,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 			case ImagePackage.IMAGE_CATALOG: return (EObject)createImageCatalog();
 			case ImagePackage.IMAGE_MAGICK_TRANSFORMER: return (EObject)createImageMagickTransformer();
 			case ImagePackage.FOLDER_CONNECTOR: return (EObject)createFolderConnector();
+			case ImagePackage.DISPLAY_IMAGE: return (EObject)createDisplayImage();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -92,6 +93,14 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 				return createDuplicateIdHandlingFromString(eDataType, initialValue);
 			case ImagePackage.TRANSFORM_GRAVITY:
 				return createTransformGravityFromString(eDataType, initialValue);
+			case ImagePackage.IMAGE_TYPES:
+				return createImageTypesFromString(eDataType, initialValue);
+			case ImagePackage.IMAGE_STYLES:
+				return createImageStylesFromString(eDataType, initialValue);
+			case ImagePackage.IMAGE_TYPE:
+				return createImageTypeFromString(eDataType, initialValue);
+			case ImagePackage.IMAGE_STYLE:
+				return createImageStyleFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -113,6 +122,14 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 				return convertDuplicateIdHandlingToString(eDataType, instanceValue);
 			case ImagePackage.TRANSFORM_GRAVITY:
 				return convertTransformGravityToString(eDataType, instanceValue);
+			case ImagePackage.IMAGE_TYPES:
+				return convertImageTypesToString(eDataType, instanceValue);
+			case ImagePackage.IMAGE_STYLES:
+				return convertImageStylesToString(eDataType, instanceValue);
+			case ImagePackage.IMAGE_TYPE:
+				return convertImageTypeToString(eDataType, instanceValue);
+			case ImagePackage.IMAGE_STYLE:
+				return convertImageStyleToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -263,6 +280,16 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public DisplayImage createDisplayImage() {
+		DisplayImageImpl displayImage = new DisplayImageImpl();
+		return displayImage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ImageTransformType createImageTransformTypeFromString(EDataType eDataType, String initialValue) {
 		ImageTransformType result = ImageTransformType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -336,6 +363,82 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 */
 	public String convertTransformGravityToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageTypes createImageTypesFromString(EDataType eDataType, String initialValue) {
+		ImageTypes result = ImageTypes.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertImageTypesToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageStyles createImageStylesFromString(EDataType eDataType, String initialValue) {
+		ImageStyles result = ImageStyles.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertImageStylesToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageType createImageTypeFromString(EDataType eDataType, String initialValue) {
+		return (ImageType)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertImageTypeToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageStyle createImageStyleFromString(EDataType eDataType, String initialValue) {
+		return (ImageStyle)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertImageStyleToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

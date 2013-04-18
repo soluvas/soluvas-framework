@@ -3,6 +3,9 @@
 package org.soluvas.image;
 
 import java.io.File;
+
+import javax.annotation.Nullable;
+
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.SerializableEObject;
@@ -86,6 +89,26 @@ public interface ImageManager extends SerializableEObject {
 	 * @generated
 	 */
 	long importImages(File srcFolder, boolean metadata, FileExport files, ImageRepository imageRepo, DuplicateIdHandling duplicateIdHandling, ProgressMonitor monitor);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the DisplayImage for an imageId & styleName in a specified repository.
+	 * <!-- end-model-doc -->
+	 * @model required="true" namespaceDataType="org.soluvas.image.ImageType" styleDataType="org.soluvas.image.ImageStyle"
+	 */
+	DisplayImage getSafeImage(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the DisplayImage for an imageId & styleName in a specified repository. If image is not available, use the gender to select the representation.
+	 * <!-- end-model-doc -->
+	 * @model required="true" namespaceDataType="org.soluvas.image.ImageType" styleDataType="org.soluvas.image.ImageStyle"
+	 */
+	DisplayImage getSafePersonPhoto(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style, @Nullable Gender gender);
 
 	String getThumbnailPhotoUri(SocialPerson person);
 
