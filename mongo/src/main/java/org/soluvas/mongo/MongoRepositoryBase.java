@@ -42,7 +42,8 @@ import com.mongodb.WriteResult;
  *
  */
 @ParametersAreNonnullByDefault
-public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortingRepositoryBase<T, String> {
+public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortingRepositoryBase<T, String>
+	implements MongoRepository<T> {
 
 	public class DBObjectToEntity implements Function<DBObject, T> {
 		@Override
@@ -264,4 +265,28 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		return new PageImpl<>(entityIds, pageable, total);
 	}
 	
+	@Override
+	public long countByQuery(DBObject query) {
+		final long total = coll.count(query);
+		log.debug("count {} {} returned {}", total);
+		return total;
+	}
+	
+	@Override
+	public Page<T> findAllByQuery(DBObject query, Pageable pageable) {
+		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
+		log.debug("findAllByQuery {} {} sort {} skip {} limit {}",
+				collName, query, sortQuery, pageable.getOffset(), pageable.getPageSize());
+		final long total = coll.count(query);
+		final DBCursor cursor = coll.find(query)
+				.sort(sortQuery)
+				.skip((int) pageable.getOffset())
+				.limit((int) pageable.getPageSize());
+		final List<T> entities = MongoUtils
+				.transform(cursor, new DBObjectToEntity());
+		log.info("findAllByQuery {} {} returned {} out of {} documents, sort {} skip {} limit {}",
+				collName, query, entities.size(), total, sortQuery, pageable.getOffset(), pageable.getPageSize());
+		return new PageImpl<>(entities, pageable, total);		
+	}
+
 }
