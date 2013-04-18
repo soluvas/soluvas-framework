@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
@@ -976,7 +975,7 @@ public class MongoImageRepository implements ImageRepository {
 	}
 
 	@Override
-	public void deleteMultiple(Set<String> ids) {
+	public void deleteMultiple(Collection<String> ids) {
 		log.info("Multiple deleting images {}", ids);
 		for (String id : ids) {
 			delete(id);

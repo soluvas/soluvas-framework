@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -22,9 +21,8 @@ import org.soluvas.image.TransformGravity;
  * @todo extend {@link PagingAndSortingRepository}
  * @author ceefour
  */
-//TODO: extend EntityLookup
 // TODO: extend PagingAndSortingRepository
-public interface ImageRepository { // extends EntityLookup<Image, String> {
+public interface ImageRepository extends EntityLookup<Image, String> {
 
 	/**
 	 * Name of the predefined "original" image style.
@@ -129,8 +127,9 @@ public interface ImageRepository { // extends EntityLookup<Image, String> {
 	 * Delete multiple images with the specified ID, from the MongoDB metadata including all files and styled images from WebDAV.
 	 * @param id Image IDs.
 	 */
-	public abstract void deleteMultiple(Set<String> ids);
+	public abstract void deleteMultiple(Collection<String> ids);
 
+	@Override
 	public abstract Image findOne(@Nullable String id);
 
 	public abstract Map<String, Image> findAllByIds(Iterable<String> ids);
