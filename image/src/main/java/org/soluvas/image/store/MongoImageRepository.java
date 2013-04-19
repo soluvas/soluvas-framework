@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -751,12 +750,12 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 //				}
 //			}, system.dispatcher());
 
-			URI originalUri = image.getUri();
+			final String originalUri = image.getUri();
 			log.info("Deleting {} image {} - original: {}", 
 					namespace, id, originalUri);
 			// TODO: should store extension of original, also the styleds
-			String fileName = image.getFileName();
-			String originalExtension = !Strings.isNullOrEmpty(fileName) ? FilenameUtils.getExtension(fileName) : "jpg";
+			final String fileName = image.getFileName();
+			final String originalExtension = !Strings.isNullOrEmpty(fileName) ? FilenameUtils.getExtension(fileName) : "jpg";
 			connector.delete(namespace, id, ImageRepository.ORIGINAL_CODE, ImageRepository.ORIGINAL_CODE, originalExtension);
 			
 			log.debug("Deleting {} image metadata {}", namespace, id);

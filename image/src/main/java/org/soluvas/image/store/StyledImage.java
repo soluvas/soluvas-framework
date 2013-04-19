@@ -1,23 +1,22 @@
 package org.soluvas.image.store;
 
-import java.net.URI;
 
 /**
+ * @deprecated Will be replaced by EMF {@link org.soluvas.image.StyledImage}.
  * @author ceefour
- *
  */
 @Deprecated
 public class StyledImage {
 
 	private final String styleName;
 	private final String code;
-	private final URI uri;
+	private final String uri;
 	private final String contentType;
 	private final Long size;
 	private final int width;
 	private final int height;
 	
-	public StyledImage(String styleName, String code, URI uri,
+	public StyledImage(String styleName, String code, String uri,
 			String contentType, Long size, int width, int height) {
 		super();
 		this.styleName = styleName;
@@ -37,7 +36,7 @@ public class StyledImage {
 		return code;
 	}
 
-	public URI getUri() {
+	public String getUri() {
 		return uri;
 	}
 

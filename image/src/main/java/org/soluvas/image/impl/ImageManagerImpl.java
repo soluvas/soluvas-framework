@@ -200,7 +200,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 				//exportedImage.setOriginalFile(image.getOriginalFile()); // always null
 				exportedImage.setOriginUri(image.getOriginUri());
 				exportedImage.setSize(image.getSize());
-				exportedImage.setUri(image.getUri().toString());
+				exportedImage.setUri(image.getUri());
 				
 				// styleds
 				for (final Entry<String, StyledImage> entry : image.getStyles().entrySet()) {
@@ -214,7 +214,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 					exportedStyled.setModificationTime(image.getCreated());
 					final String styledExt = "jpg";  // TODO: do not hardcode
 					exportedStyled.setExtension(styledExt);
-					exportedStyled.setUri(styled.getUri().toString());
+					exportedStyled.setUri(styled.getUri());
 					final String originUri = imageRepo.getConnector().getOriginUri(imageRepo.getNamespace(), image.getId(), styled.getCode(), styled.getCode(), styledExt);
 					exportedStyled.setOriginUri(originUri);
 					exportedStyled.setSize(styled.getSize());
@@ -398,7 +398,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			final String styleKey = style != null ? style.name().toLowerCase() : null;
 			if (style != null && image.getStyles() != null && image.getStyles().get(styleKey) != null
 					&& image.getStyles().get(styleKey).getUri() != null) {
-				displayImage.setSrc(image.getStyles().get(styleKey).getUri().toString());
+				displayImage.setSrc(image.getStyles().get(styleKey).getUri());
 				displayImage.setAlt(image.getName());
 				displayImage.setTitle(image.getName());
 			} else {
@@ -426,7 +426,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			final String styleKey = style != null ? style.name().toLowerCase() : null;
 			if (image.getStyles() != null && image.getStyles().get(styleKey) != null
 					&& image.getStyles().get(styleKey).getUri() != null) {
-				displayImage.setSrc(image.getStyles().get(styleKey).getUri().toString());
+				displayImage.setSrc(image.getStyles().get(styleKey).getUri());
 				displayImage.setAlt(image.getName());
 				displayImage.setTitle(image.getName());
 			} else {
@@ -463,7 +463,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 				log.debug("Photo id {}", personImage.getId());
 				final StyledImage personThumbnailImage = personImage.getStyles().get("thumbnail");
 				if (personThumbnailImage != null) {
-					return personThumbnailImage.getUri().toString();
+					return personThumbnailImage.getUri();
 				} else {
 					log.warn("Cannot get thumbnail image {} for person {} using {}", photoId, person.getId(), getPersonImageRepository());
 					return getPersonPhotoUri(person.getGender());

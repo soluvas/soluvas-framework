@@ -1,7 +1,6 @@
 package org.soluvas.image.store;
 
 import java.io.File;
-import java.net.URI;
 import java.util.Map;
 
 import javax.annotation.Nullable;
@@ -17,8 +16,9 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Maps.EntryTransformer;
 
 /**
- * @author ceefour
  * Image descriptor;
+ * @deprecated Will be replaced by EMF {@link org.soluvas.image.Image}.
+ * @author ceefour
  */
 @Deprecated
 public class Image {
@@ -33,7 +33,7 @@ public class Image {
 	private static final Logger log = LoggerFactory.getLogger(Image.class);
 
 	private String id;
-	private URI uri;
+	private String uri;
 	private String originUri;
 	private String contentType;
 	private String fileName;
@@ -86,7 +86,7 @@ public class Image {
 		super();
 		id = dbo.getString("_id");
 		name = dbo.getString("name");
-		uri = URI.create(imageStore.getImageUri(id, MongoImageRepository.ORIGINAL_NAME));
+		uri = imageStore.getImageUri(id, MongoImageRepository.ORIGINAL_NAME);
 		contentType = dbo.getString("contentType");
 		fileName = dbo.getString("fileName");
 		size = dbo.get("size") != null ? dbo.getLong("size") : null;
@@ -104,7 +104,7 @@ public class Image {
 				BasicBSONObject styleBson = (BasicBSONObject)value;
 				final Long size = styleBson.get("size") != null ? styleBson.getLong("size") : null;
 				return new StyledImage(key, styleBson.getString("code"),
-						URI.create(styleBson.getString("uri")),
+						styleBson.getString("uri"),
 						styleBson.getString("contentType"), size,
 						styleBson.getInt("width"), styleBson.getInt("height"));
 			}
@@ -124,7 +124,7 @@ public class Image {
 	 * Public URI of the original image.
 	 * @return
 	 */
-	public URI getUri() {
+	public String getUri() {
 		return uri;
 	}
 	
