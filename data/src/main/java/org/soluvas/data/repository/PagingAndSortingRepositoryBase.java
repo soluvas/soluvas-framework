@@ -138,8 +138,12 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 	public abstract List<T> findAll(Collection<ID> ids);
 	
 	@Override @Nullable
-	public final <S extends T> S findOne(ID id) {
-		return (S) Iterables.getFirst(findAll(ImmutableList.of(id)), null);
+	public final <S extends T> S findOne(@Nullable ID id) {
+		if (id == null) {
+			return null;
+		} else {
+			return (S) Iterables.getFirst(findAll(ImmutableList.of(id)), null);
+		}
 	}
 
 	@Override
