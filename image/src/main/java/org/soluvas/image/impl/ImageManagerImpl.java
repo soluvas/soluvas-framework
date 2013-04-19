@@ -113,7 +113,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 */
 	@Override
 	public String getNoImageUri() {
-		return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_person.png";
+		return webAddress.getImagesUri() + "org.soluvas.commons/noimage.png";
 	}
 
 	/**
@@ -142,15 +142,15 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	@Override
 	public String getPersonIconUri(@Nullable Gender gender) {
 		if (gender == null) {
-			return webAddress.getImagesUri() + "org.soluvas.image/user_unknown.png";
+			return webAddress.getImagesUri() + "org.soluvas.commons/user_unknown.png";
 		}
 		switch (gender) {
 		case MALE:
-			return webAddress.getImagesUri() + "org.soluvas.image/user_male.png";
+			return webAddress.getImagesUri() + "org.soluvas.commons/user_male.png";
 		case FEMALE:
-			return webAddress.getImagesUri() + "org.soluvas.image/user_female.png";
+			return webAddress.getImagesUri() + "org.soluvas.commons/user_female.png";
 		default:
-			return webAddress.getImagesUri() + "org.soluvas.image/user_unknown.png";
+			return webAddress.getImagesUri() + "org.soluvas.commons/user_unknown.png";
 		}
 	}
 
@@ -504,15 +504,15 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 
 	public String getPersonPhotoUri(@Nullable Gender gender) {
 		if (gender == null) {
-			return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_person.png";
+			return webAddress.getImagesUri() + "org.soluvas.commons/nophoto_person.png";
 		}
 		switch (gender) {
 		case MALE:
-			return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_male.png";
+			return webAddress.getImagesUri() + "org.soluvas.commons/nophoto_male.png";
 		case FEMALE:
-			return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_female.png";
+			return webAddress.getImagesUri() + "org.soluvas.commons/nophoto_female.png";
 		default:
-			return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_person.png";	
+			return webAddress.getImagesUri() + "org.soluvas.commons/nophoto_person.png";	
 		}
 	}
 
@@ -536,7 +536,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 				return getPersonPhotoUri(person.getGender());
 			}
 		} else {
-			return webAddress.getImagesUri() + "org.soluvas.web.site/nophoto_person.png";
+			return webAddress.getImagesUri() + "org.soluvas.commons/nophoto_person.png";
 		}
 	}
 	
