@@ -79,7 +79,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 			final ImageVariant dest = input.getValue();
 			
 			// TODO: do not hardcode quality
-			final float quality = 0.9f;
+			final float quality = 0.85f;
 			
 			final ListenableFuture<File> styledFileFuture = getExecutor().submit(new Callable<File>() {
 				@Override
