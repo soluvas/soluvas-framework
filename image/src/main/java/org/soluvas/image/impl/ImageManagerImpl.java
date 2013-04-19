@@ -348,7 +348,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 					case ADD:
 						final Image addImage = new Image(null, originalFile, image.getContentType(),
 								Optional.fromNullable(image.getName()).or(image.getId()));
-						final String addImageId = imageRepo.add(addImage);
+						final String addImageId = imageRepo.add(addImage).getId();
 						log.info("Added possibly duplicate image {} as {}", image.getId(), addImageId);
 						importedCount++;
 						submon.worked(1);
@@ -356,7 +356,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 					case OVERWRITE:
 						final Image overwriteImage = new Image(image.getId(), originalFile, image.getContentType(),
 								Optional.fromNullable(image.getName()).or(image.getId()));
-						final String overwriteImageId = imageRepo.add(overwriteImage);
+						final String overwriteImageId = imageRepo.add(overwriteImage).getId();
 						log.info("Overwritten image {} as {}", image.getId(), overwriteImageId);
 						importedCount++;
 						submon.worked(1);
@@ -367,7 +367,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 				} else {
 					newImage = new Image(image.getId(), originalFile, image.getContentType(),
 							Optional.fromNullable(image.getName()).or(image.getId()));
-					final String newImageId = imageRepo.add(newImage);
+					final String newImageId = imageRepo.add(newImage).getId();
 					log.info("Imported image {} as {}", image.getId(), newImageId);
 					importedCount++;
 					submon.worked(1);

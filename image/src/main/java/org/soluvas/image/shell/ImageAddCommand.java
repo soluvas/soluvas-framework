@@ -83,7 +83,7 @@ public class ImageAddCommand extends OsgiCommandSupport {
 			return svcLookup.withService(ImageRepository.class, session, realNamespace,
 				new Function<ImageRepository, Object>() {
 					@Override @Nullable public Object apply(@Nullable ImageRepository imageStore) {
-						String addedImageId = imageStore.add(newImage);
+						String addedImageId = imageStore.add(newImage).getId();
 						return addedImageId;
 					}
 				});

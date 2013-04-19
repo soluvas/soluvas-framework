@@ -46,7 +46,7 @@ public class TwitterUtils {
 				FileUtils.copyInputStreamToFile(response.getEntity().getContent(), tmpFile);
 				log.debug("Photo Status Line {}",  response.getStatusLine());
 				final Image newImage = new Image(tmpFile, ".jpg", personName + " twitter " + twitterScreenName);
-				final String imageId = imageRepo.add(newImage);
+				final String imageId = imageRepo.add(newImage).getId();
 				log.debug("tmp file path from twitter user {} is {}", tmpFile);
 				return imageId;
 			} finally {

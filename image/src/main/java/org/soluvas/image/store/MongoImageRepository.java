@@ -12,12 +12,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
@@ -32,6 +32,10 @@ import org.soluvas.commons.ProgressStatus;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.ProgressMonitorImpl;
 import org.soluvas.commons.impl.ProgressMonitorWrapperImpl;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 import org.soluvas.image.DavConnector;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImageException;
@@ -43,6 +47,7 @@ import org.soluvas.image.UploadedImage;
 import org.soluvas.image.impl.ResizeToFillImpl;
 import org.soluvas.image.impl.ResizeToFitImpl;
 import org.soluvas.image.util.ImageUtils;
+import org.soluvas.mongo.MongoUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -52,6 +57,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -89,7 +95,8 @@ import com.mongodb.MongoURI;
  * 
  * @todo Make the name SEO friendly: prefix the UUID with the original name/title but slugged.
  */
-public class MongoImageRepository implements ImageRepository {
+public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, String> 
+	implements ImageRepository {
 
 	public class DBObjectToImage implements Function<DBObject, Image> {
 		@Override
@@ -270,15 +277,15 @@ public class MongoImageRepository implements ImageRepository {
 	 * @see org.soluvas.image.store.ImageRepository#create(java.lang.String, java.io.InputStream, java.lang.String, long, java.lang.String)
 	 */
 	@Override @Deprecated
-	public String create(String fileName, InputStream content, final String contentType, final long length, String name) throws IOException {
+	public Image create(String fileName, InputStream content, final String contentType, final long length, String name) throws IOException {
 		final File originalFile = File.createTempFile(getNamespace() + "_", "_" + fileName);
 		try {
 			log.info("Saving original image ({} {} bytes) to temporary file {}", new Object[] { 
 					contentType, length, originalFile });
 			FileUtils.copyInputStreamToFile(content, originalFile);
 			
-			final ListenableFuture<String> imageIdFuture = doCreate(null, originalFile, contentType, originalFile.length(), name, fileName, true);
-			return Futures.getUnchecked(imageIdFuture);
+			final ListenableFuture<Image> addedImageFuture = doCreate(null, originalFile, contentType, originalFile.length(), name, fileName, true);
+			return Futures.getUnchecked(addedImageFuture);
 		} finally {
 			log.info("Deleting temporary original image {}", originalFile);
 			originalFile.delete();
@@ -290,18 +297,15 @@ public class MongoImageRepository implements ImageRepository {
 	 * @deprecated Use {@link #add(Image)}. 
 	 */
 	@Override @Deprecated
-	public String create(String imageId, File originalFile, final String contentType, String name) throws IOException {
-		final ListenableFuture<String> imageIdFuture = doCreate(imageId, originalFile, contentType, originalFile.length(), name,
+	public Image create(String imageId, File originalFile, final String contentType, String name) throws IOException {
+		final ListenableFuture<Image> imageIdFuture = doCreate(imageId, originalFile, contentType, originalFile.length(), name,
 				originalFile.getName(), true);
 		return Futures.getUnchecked(imageIdFuture);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.soluvas.image.store.ImageRepository#add(org.soluvas.image.store.Image)
-	 */
 	@Override
-	public String add(Image newImage) {
-		return add(ImmutableList.of(newImage), new ProgressMonitorWrapperImpl(null)).get(0);
+	public <S extends Image> Collection<S> add(Collection<S> entities) {
+		return add(ImmutableList.copyOf(entities), new ProgressMonitorWrapperImpl(null));
 	}
 	
 	private static class OriginalUpload {
@@ -333,7 +337,7 @@ public class MongoImageRepository implements ImageRepository {
 	}
 	
 	@Override
-	public List<String> add(@Nonnull List<Image> newImages, final ProgressMonitor monitor) {
+	public <S extends Image> List<S> add(Collection<S> newImages, final ProgressMonitor monitor) {
 		// 1. Upload original images
 		final List<ListenableFuture<OriginalUpload>> originalFutures = Lists.newArrayList();
 		monitor.beginTask("Uploading " + newImages.size() + " original images", newImages.size());
@@ -421,24 +425,25 @@ public class MongoImageRepository implements ImageRepository {
 		});
 
 		// 3. Insert to MongoDB
-		final ListenableFuture<List<String>> imageIdsFuture = Futures.transform(transformedsFuture,
-				new AsyncFunction<List<OriginalUpload>, List<String>>() {
+		final ListenableFuture<List<Image>> imageIdsFuture = Futures.transform(transformedsFuture,
+				new AsyncFunction<List<OriginalUpload>, List<Image>>() {
 			@Override
-			public ListenableFuture<List<String>> apply(
+			public ListenableFuture<List<Image>> apply(
 					List<OriginalUpload> input) throws Exception {
 				monitor.beginTask("Inserting " + input.size() + " MongoDB documents", input.size());
-				final List<ListenableFuture<String>> imageIdFutures = Lists.transform(input, new Function<OriginalUpload, ListenableFuture<String>>() {
+				final List<ListenableFuture<Image>> imageIdFutures = Lists.transform(input, 
+						new Function<OriginalUpload, ListenableFuture<Image>>() {
 					@Override @Nullable
-					public ListenableFuture<String> apply(@Nullable final OriginalUpload input) {
+					public ListenableFuture<Image> apply(@Nullable final OriginalUpload input) {
 						if (input == null) {
 							monitor.worked(1, ProgressStatus.SKIPPED);
 							return Futures.immediateFailedFuture(new ImageException("Null input"));
 						}
-						final ListenableFuture<String> imageIdFuture = doInsertMongo(input);
-						Futures.addCallback(imageIdFuture, new FutureCallback<String>() {
+						final ListenableFuture<Image> imageIdFuture = doInsertMongo(input);
+						Futures.addCallback(imageIdFuture, new FutureCallback<Image>() {
 							@Override
-							public void onSuccess(String imageId) {
-								log.trace("Inserted image document {}", input.imageId);
+							public void onSuccess(Image image) {
+								log.trace("Inserted image document {}", image.getId());
 								monitor.worked(1);
 							}
 							
@@ -454,11 +459,11 @@ public class MongoImageRepository implements ImageRepository {
 				return Futures.successfulAsList(imageIdFutures);
 			}
 		});
-		Futures.addCallback(imageIdsFuture, new FutureCallback<List<String>>() {
+		Futures.addCallback(imageIdsFuture, new FutureCallback<List<Image>>() {
 			@Override
-			public void onSuccess(List<String> result) {
+			public void onSuccess(List<Image> result) {
 				log.info("Inserted {} image documents: {}", result.size(),
-						result);
+						Lists.transform(result, new IdFunction()));
 				monitor.done();
 			}
 
@@ -468,7 +473,7 @@ public class MongoImageRepository implements ImageRepository {
 				throw new ImageException("Cannot insert " + originalFutures.size() + " documents", t);
 			}
 		});
-		return Futures.getUnchecked(imageIdsFuture);
+		return (List) Futures.getUnchecked(imageIdsFuture);
 	}
 	
 	/**
@@ -482,7 +487,7 @@ public class MongoImageRepository implements ImageRepository {
 	 * @param alsoUploadOriginal
 	 * @return
 	 */
-	protected ListenableFuture<String> doCreate(String existingImageId, final File originalFile, final String contentType,
+	protected ListenableFuture<Image> doCreate(String existingImageId, final File originalFile, final String contentType,
 			final long length, final String name, final String originalName, boolean alsoUploadOriginal) {
 		final ListenableFuture<OriginalUpload> originalFuture = doCreateOriginal(existingImageId, originalFile, contentType, length, name, originalName, alsoUploadOriginal);
 		final ListenableFuture<OriginalUpload> transformedsFuture = Futures.transform(originalFuture, new AsyncFunction<OriginalUpload, OriginalUpload>() {
@@ -492,14 +497,15 @@ public class MongoImageRepository implements ImageRepository {
 				return doTransform(original);
 			}
 		});
-		final ListenableFuture<String> imageIdFuture = Futures.transform(transformedsFuture, new AsyncFunction<OriginalUpload, String>() {
+		final ListenableFuture<Image> addedImageFuture = Futures.transform(transformedsFuture, 
+				new AsyncFunction<OriginalUpload, Image>() {
 			@Override
-			public ListenableFuture<String> apply(OriginalUpload input)
+			public ListenableFuture<Image> apply(OriginalUpload input)
 					throws Exception {
 				return doInsertMongo(input);
 			}
 		});
-		return imageIdFuture;
+		return addedImageFuture;
 	}
 	
 	/* (non-Javadoc)
@@ -606,13 +612,13 @@ public class MongoImageRepository implements ImageRepository {
 		return updatedWipFuture;
 	}
 	
-	protected ListenableFuture<String> doInsertMongo(final OriginalUpload original) {
+	protected ListenableFuture<Image> doInsertMongo(final OriginalUpload original) {
 		// it's not possible to do it in bulk because it's an upsert, not insert, operation
 		// although we definitely can use insert (or bulk remove first then bulk insert)
 		// but image mongo is very fast anyway and also few documents, doesn't matter
-		final ListenableFuture<String> imageIdFuture = executor.submit(new Callable<String>() {
+		final ListenableFuture<Image> imageIdFuture = executor.submit(new Callable<Image>() {
 			@Override
-			public String call() throws Exception {
+			public Image call() throws Exception {
 				log.info("Got {} transformed images of {} from {}", original.transformeds.size(), original.imageId,
 						transformer.getClass().getName());
 				final BasicBSONObject stylesObj = new BasicBSONObject();
@@ -659,123 +665,117 @@ public class MongoImageRepository implements ImageRepository {
 						original.imageId, original.name, mongoColl.getName() );
 				mongoColl.update(new BasicDBObject("_id", original.imageId), dbo, true, false);
 				
-				return original.imageId;
+				final Image addedImage = new Image(original.imageId, null, original.contentType, original.name);
+				return addedImage;
 			}
 		});
 		return imageIdFuture;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.soluvas.image.store.ImageRepository#delete(java.lang.String)
-	 */
 	@Override
-	public boolean delete(final String id) {
-		final Image image = findOne(id);
-		if (image == null) {
-			log.warn("Not deleting non-existing {} image {}", namespace, id);
-			return false;
-		}
+	public long deleteIds(Collection<String> ids) {
+		log.info("Deleting {} {} images: {}", ids.size(), namespace, ids);
+		long deleted = 0;
+		for (String id : ids) {
+			final Image image = findOne(id);
+			if (image == null) {
+				log.warn("Not deleting non-existing {} image {}", namespace, id);
+				continue;
+			}
 
-		// --------- Delete styleds --------
-//		Future<Iterable<StatusLine>> styledsFuture = Futures.traverse(image.getStyles().values(), new Function<StyledImage, Future<StatusLine>>() {
-//		@Override
-//		public Future<StatusLine> apply(final StyledImage styled) {
-//			return Futures.future(new Callable<StatusLine>() {
+			// --------- Delete styleds --------
+//			Future<Iterable<StatusLine>> styledsFuture = Futures.traverse(image.getStyles().values(), new Function<StyledImage, Future<StatusLine>>() {
+//			@Override
+//			public Future<StatusLine> apply(final StyledImage styled) {
+//				return Futures.future(new Callable<StatusLine>() {
+//					@Override
+//					public StatusLine call() throws Exception {
+//						log.info("Deleting {} image {} - {}: {}", new Object[] { 
+//								namespace, id, styled.getStyleName(), styled.getUri() });
+//						HttpDelete deleteThumb = new HttpDelete(styled.getUri());
+//						try {
+//							HttpResponse response = client.execute(davHost, deleteThumb, createHttpContext());
+//							final StatusLine statusLine = response.getStatusLine();
+//							HttpClientUtils.closeQuietly(response);
+//							log.info("Delete {} returned: {}", styled.getUri(), statusLine);
+//							return statusLine;
+//						} catch (Exception e) {
+//							log.error("Error deleting "+ styled.getUri(), e);
+//							return null;
+//						}
+//					}
+//				}, system.dispatcher());
+//			}
+//		}, system.dispatcher());
+
+			for (StyledImage styled : image.getStyles().values()) {
+				log.info("Deleting {} image {} - {}: {}",
+						namespace, id, styled.getStyleName(), styled.getUri() );
+				try {
+					// TODO: don't hardcode extension
+					String styledExtension = "jpg";
+					// TODO: support variant
+					connector.delete(namespace, id, styled.getCode(), styled.getCode(), styledExtension);
+				} catch (Exception e) {
+					log.error("Cannot delete " + namespace + " image " + id + ": " + styled.getStyleName() + " at " + styled.getUri(), e);
+				}
+			}
+		
+			try {
+		//		Iterable<StatusLine> statuses = Await.result(styledsFuture, Duration.create(60, TimeUnit.SECONDS));
+		//		log.info("Delete styled {} image {} status codes: {}", new Object[] { namespace, id, statuses });
+		//		StatusLine status = Await.result(originalFuture, Duration.create(60, TimeUnit.SECONDS));
+		//		log.info("Delete original {} image {} status code: {}", new Object[] { namespace, id, status });
+			} catch (Exception e) {
+				log.error("Error deleting " + namespace + " image " + id + " from WebDAV", e);
+			}
+
+		// -------- Delete originals -------
+//			Future<StatusLine> originalFuture = Futures.future(new Callable<StatusLine>() {
 //				@Override
 //				public StatusLine call() throws Exception {
-//					log.info("Deleting {} image {} - {}: {}", new Object[] { 
-//							namespace, id, styled.getStyleName(), styled.getUri() });
-//					HttpDelete deleteThumb = new HttpDelete(styled.getUri());
+//					URI originalUri = image.getUri();
+//					log.info("Deleting {} image {} - original: {}", new Object[] { 
+//							namespace, id, originalUri });
+//					HttpDelete deleteOriginal = new HttpDelete(originalUri);
 //					try {
-//						HttpResponse response = client.execute(davHost, deleteThumb, createHttpContext());
+//						HttpResponse response = client.execute(davHost, deleteOriginal, createHttpContext());
 //						final StatusLine statusLine = response.getStatusLine();
+//						log.info("Delete {} returned: {}", originalUri, statusLine);
 //						HttpClientUtils.closeQuietly(response);
-//						log.info("Delete {} returned: {}", styled.getUri(), statusLine);
 //						return statusLine;
 //					} catch (Exception e) {
-//						log.error("Error deleting "+ styled.getUri(), e);
+//						log.error("Error deleting "+ originalUri, e);
 //						return null;
 //					}
 //				}
 //			}, system.dispatcher());
-//		}
-//	}, system.dispatcher());
 
-		for (StyledImage styled : image.getStyles().values()) {
-			log.info("Deleting {} image {} - {}: {}",
-					namespace, id, styled.getStyleName(), styled.getUri() );
+			URI originalUri = image.getUri();
+			log.info("Deleting {} image {} - original: {}", 
+					namespace, id, originalUri);
+			// TODO: should store extension of original, also the styleds
+			String fileName = image.getFileName();
+			String originalExtension = !Strings.isNullOrEmpty(fileName) ? FilenameUtils.getExtension(fileName) : "jpg";
+			connector.delete(namespace, id, ImageRepository.ORIGINAL_CODE, ImageRepository.ORIGINAL_CODE, originalExtension);
+			
+			log.debug("Deleting {} image metadata {}", namespace, id);
 			try {
-				// TODO: don't hardcode extension
-				String styledExtension = "jpg";
-				// TODO: support variant
-				connector.delete(namespace, id, styled.getCode(), styled.getCode(), styledExtension);
+				mongoColl.remove(new BasicDBObject("_id", id));
 			} catch (Exception e) {
-				log.error("Cannot delete " + namespace + " image " + id + ": " + styled.getStyleName() + " at " + styled.getUri(), e);
+				log.error("Error deleting " + namespace + " image metadata " + id, e);
 			}
+			
+			deleted++;
 		}
+		return deleted;
+	}
 	
-		try {
-	//		Iterable<StatusLine> statuses = Await.result(styledsFuture, Duration.create(60, TimeUnit.SECONDS));
-	//		log.info("Delete styled {} image {} status codes: {}", new Object[] { namespace, id, statuses });
-	//		StatusLine status = Await.result(originalFuture, Duration.create(60, TimeUnit.SECONDS));
-	//		log.info("Delete original {} image {} status code: {}", new Object[] { namespace, id, status });
-		} catch (Exception e) {
-			log.error("Error deleting " + namespace + " image " + id + " from WebDAV", e);
-		}
-
-	// -------- Delete originals -------
-//		Future<StatusLine> originalFuture = Futures.future(new Callable<StatusLine>() {
-//			@Override
-//			public StatusLine call() throws Exception {
-//				URI originalUri = image.getUri();
-//				log.info("Deleting {} image {} - original: {}", new Object[] { 
-//						namespace, id, originalUri });
-//				HttpDelete deleteOriginal = new HttpDelete(originalUri);
-//				try {
-//					HttpResponse response = client.execute(davHost, deleteOriginal, createHttpContext());
-//					final StatusLine statusLine = response.getStatusLine();
-//					log.info("Delete {} returned: {}", originalUri, statusLine);
-//					HttpClientUtils.closeQuietly(response);
-//					return statusLine;
-//				} catch (Exception e) {
-//					log.error("Error deleting "+ originalUri, e);
-//					return null;
-//				}
-//			}
-//		}, system.dispatcher());
-
-		URI originalUri = image.getUri();
-		log.info("Deleting {} image {} - original: {}", 
-				namespace, id, originalUri);
-		// TODO: should store extension of original, also the styleds
-		String fileName = image.getFileName();
-		String originalExtension = !Strings.isNullOrEmpty(fileName) ? FilenameUtils.getExtension(fileName) : "jpg";
-		connector.delete(namespace, id, ImageRepository.ORIGINAL_CODE, ImageRepository.ORIGINAL_CODE, originalExtension);
-		
-		log.debug("Deleting {} image metadata {}", namespace, id);
-		try {
-			mongoColl.remove(new BasicDBObject("_id", id));
-		} catch (Exception e) {
-			log.error("Error deleting " + namespace + " image metadata " + id, e);
-		}
-		
-		return true;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.image.store.ImageRepository#findOne(java.lang.String)
-	 */
 	@Override
-	public Image findOne(String id) {
-		log.trace("Get {} Image {}", namespace, id);
-		if (id == null)
-			return null;
-		final DBObject dbo = mongoColl.findOne(new BasicDBObject("_id", id));
-		if (dbo == null)
-			return null;
-		return new Image(this, (BasicBSONObject)dbo);
+	public List<Image> findAll(Collection<String> ids) {
+		return ImmutableList.copyOf(findAllByIds(ids).values());
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.soluvas.image.store.ImageRepository#findAllByIds(java.lang.Iterable)
 	 */
@@ -785,7 +785,7 @@ public class MongoImageRepository implements ImageRepository {
 		DBCursor dbCursor = mongoColl.find(
 				new BasicDBObject("_id", new BasicDBObject("$in", Iterables.toArray(ids, String.class))));
 		try {
-			ImmutableMap<String, Image> images = Maps.uniqueIndex( Iterables.transform(dbCursor, new DBObjectToImage()), new Function<Image, String>() {
+			final Map<String, Image> images = Maps.uniqueIndex( Iterables.transform(dbCursor, new DBObjectToImage()), new Function<Image, String>() {
 				@Override
 				public String apply(Image input) {
 					return input.getId();
@@ -798,21 +798,20 @@ public class MongoImageRepository implements ImageRepository {
 			dbCursor.close();
 		}
 	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.image.store.ImageRepository#findAll()
-	 */
+	
 	@Override
-	public List<Image> findAll() {
-		final DBCursor cursor = mongoColl.find().sort(new BasicDBObject("_id", "1"));
+	public Page<Image> findAll(Pageable pageable) {
+		final BasicDBObject sortDbo = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
+		final DBCursor cursor = mongoColl.find().sort(sortDbo)
+				.skip((int) pageable.getOffset()).limit((int) pageable.getPageSize());
 		try {
 			final List<Image> images = ImmutableList.copyOf( Iterables.transform(cursor, new DBObjectToImage()) );
-			return images;
+			return new PageImpl<>(images, pageable, mongoColl.count());
 		} finally {
 			cursor.close();
 		}
 	}
-	
+
 	@Override
 	public List<String> findAllIds() {
 		final DBCursor cursor = mongoColl.find(new BasicDBObject(), new BasicDBObject("_id", 1))
@@ -871,7 +870,7 @@ public class MongoImageRepository implements ImageRepository {
 		log.info("Reprocessing {} images", images.size());
 		submon.beginTask("Reprocessing " + images.size() + " images", images.size());
 		ProgressStatus finalStatus = ProgressStatus.OK;
-		final List<ListenableFuture<String>> imageIdFutures = new ArrayList<>();
+		final List<ListenableFuture<Image>> addedImageFutures = new ArrayList<>();
 		for (final Image image : images) {
 			final String extension = ImageUtils.getExtensionOrJpg(image.getFileName());
 			try {
@@ -882,13 +881,13 @@ public class MongoImageRepository implements ImageRepository {
 				final boolean downloaded = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE,
 						extension, tempFile);
 				if (downloaded) {
-					final ListenableFuture<String> imageIdFuture = doCreate(image.getId(), tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
+					final ListenableFuture<Image> imageIdFuture = doCreate(image.getId(), tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
 							image.getFileName(), false);
-					Futures.addCallback(imageIdFuture, new FutureCallback<String>() {
+					Futures.addCallback(imageIdFuture, new FutureCallback<Image>() {
 						@Override
-						public void onSuccess(String result) {
+						public void onSuccess(Image result) {
 							deleteOriginal();
-							log.info("Reprocessed {}", result);
+							log.info("Reprocessed {}", result.getId());
 							submon.worked(1);
 						}
 
@@ -908,7 +907,7 @@ public class MongoImageRepository implements ImageRepository {
 							tempFile.delete();
 						}
 					});
-					imageIdFutures.add(imageIdFuture);
+					addedImageFutures.add(imageIdFuture);
 				} else {
 					log.error("Cannot download {} because connector {} returned false",
 							image.getId(), connector.getClass().getName());
@@ -923,11 +922,11 @@ public class MongoImageRepository implements ImageRepository {
 			}
 		}
 		
-		final ListenableFuture<List<String>> imageIdsFuture = Futures.successfulAsList(imageIdFutures);
+		final ListenableFuture<List<Image>> addedImagesFuture = Futures.successfulAsList(addedImageFutures);
 		try {
-			final List<String> imageIds = imageIdsFuture.get();
-			log.info("Reprocessed {} images successfully out of {} requested: {}", imageIds.size(),
-					images.size(), imageIds);
+			final List<Image> addedImages = addedImagesFuture.get();
+			log.info("Reprocessed {} images successfully out of {} requested", addedImages.size(),
+					images.size());
 		} catch (InterruptedException | ExecutionException e) {
 			log.error("Cannot reprocess {} images", images.size());
 		}
@@ -972,14 +971,6 @@ public class MongoImageRepository implements ImageRepository {
 //	}
 	@Override
 	public void setSystem(Object system) {
-	}
-
-	@Override
-	public void deleteMultiple(Collection<String> ids) {
-		log.info("Multiple deleting images {}", ids);
-		for (String id : ids) {
-			delete(id);
-		}
 	}
 
 	@Override
@@ -1040,17 +1031,58 @@ public class MongoImageRepository implements ImageRepository {
 	}
 	
 	@Override
-	public boolean exists(String id) {
-		log.trace("Exists {} Image {}?", namespace, id);
-		if (id == null)
-			return false;
-		final long count = mongoColl.count(new BasicDBObject("_id", id));
-		return count >= 1;
-	}
-	
-	@Override
 	public String toString() {
 		return "MongoImageRepository " + mongoHosts + "/" + mongoDatabase;
+	}
+
+	@Override
+	public long count() {
+		return mongoColl.count();
+	}
+
+	@Override @Nullable
+	protected String getId(Image entity) {
+		return entity.getId();
+	}
+
+	@Override
+	public <S extends Image> Collection<S> modify(Map<String, S> entities) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Set<String> exists(Collection<String> ids) {
+		log.trace("Exists {} {} images? {}", ids.size(), namespace, ids);
+		final Set<String> existingIds = ImmutableSet.copyOf(MongoUtils.transform(mongoColl.find(new BasicDBObject("_id", new BasicDBObject("$in", ids)),
+				new BasicDBObject("_id", 1)).sort(new BasicDBObject("_id", 1)),
+				new Function<DBObject, String>() {
+			@Override @Nullable
+			public String apply(@Nullable DBObject input) {
+				return (String) input.get("_id");
+			}
+		}));
+		log.trace("{} out of {} asked {} images exist: {}", 
+				existingIds.size(), ids.size(), namespace, existingIds);
+		return existingIds;
+	}
+
+	@Override
+	public Page<String> findAllIds(Pageable pageable) {
+		final BasicDBObject sortDbo = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
+		final DBCursor cursor = mongoColl.find(new BasicDBObject(), new BasicDBObject("_id", 1))
+				.sort(sortDbo).skip((int) pageable.getOffset()).limit((int) pageable.getPageSize());
+		try {
+			final List<String> imageIds = ImmutableList.copyOf( Iterables.transform(cursor,
+					new Function<DBObject, String>() {
+				@Override @Nullable
+				public String apply(@Nullable DBObject input) {
+					return (String) input.get("_id");
+				}
+			}) );
+			return new PageImpl<>(imageIds, pageable, mongoColl.count());
+		} finally {
+			cursor.close();
+		}
 	}
 
 }

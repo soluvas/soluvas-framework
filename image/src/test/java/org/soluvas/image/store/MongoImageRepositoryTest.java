@@ -49,7 +49,7 @@ public class MongoImageRepositoryTest {
 	public void shouldCreateSuccessfully() throws FileNotFoundException, IOException {
 		File file = new File("/together/project/AksiMata/sample/Shaun-udah-mau-makan.jpg");
 //		String imageId = imageRepo.create(file.getName(), new FileInputStream(file), "image/jpeg", file.length(), "Shaun udah mau makan");
-		String imageId = imageRepo.add(new Image(file, "image/jpeg", "Shaun udah mau makan"));
+		String imageId = imageRepo.add(new Image(file, "image/jpeg", "Shaun udah mau makan")).getId();
 		System.out.println("Created image " + imageId);
 		assertNotNull(imageId);
 	}

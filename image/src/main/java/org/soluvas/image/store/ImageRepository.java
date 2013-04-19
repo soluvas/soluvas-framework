@@ -7,9 +7,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.data.repository.PagingAndSortingRepository;
@@ -21,8 +18,8 @@ import org.soluvas.image.TransformGravity;
  * @todo extend {@link PagingAndSortingRepository}
  * @author ceefour
  */
-// TODO: extend PagingAndSortingRepository
-public interface ImageRepository extends EntityLookup<Image, String> {
+public interface ImageRepository extends EntityLookup<Image, String>,
+	PagingAndSortingRepository<Image, String>{
 
 	/**
 	 * Name of the predefined "original" image style.
@@ -80,7 +77,7 @@ public interface ImageRepository extends EntityLookup<Image, String> {
 	 * @throws IOException
 	 */
 	@Deprecated
-	public abstract String create(String fileName, InputStream content,
+	public abstract Image create(String fileName, InputStream content,
 			String contentType, long length, String name) throws IOException;
 
 	/**
@@ -96,7 +93,7 @@ public interface ImageRepository extends EntityLookup<Image, String> {
 	 * @return
 	 * @throws IOException
 	 */
-	public abstract String create(String imageId, File originalFile,
+	public abstract Image create(String imageId, File originalFile,
 			String contentType, String name) throws IOException;
 
 	/**
@@ -113,31 +110,24 @@ public interface ImageRepository extends EntityLookup<Image, String> {
 	 * @param newImage
 	 * @return
 	 */
-	public abstract String add(Image newImage);
-	public abstract List<String> add(@Nonnull List<Image> newImages, ProgressMonitor monitor);
+	@Override
+	public abstract <S extends Image> S add(S newImage);
 
 	/**
 	 * Delete the image with the specified ID, from the MongoDB metadata including all files and styled images from WebDAV.
 	 * @param id Image ID.
 	 * @return TODO
 	 */
+	@Override
 	public abstract boolean delete(String id);
 	
-	/**
-	 * Delete multiple images with the specified ID, from the MongoDB metadata including all files and styled images from WebDAV.
-	 * @param id Image IDs.
-	 */
-	public abstract void deleteMultiple(Collection<String> ids);
-
-	@Override
-	public abstract Image findOne(@Nullable String id);
-
 	public abstract Map<String, Image> findAllByIds(Iterable<String> ids);
 
 	/**
 	 * List all {@link Image}s, ordered by Image ID.
 	 * @return
 	 */
+	@Override
 	public abstract List<Image> findAll();
 	
 	/**
@@ -181,6 +171,9 @@ public interface ImageRepository extends EntityLookup<Image, String> {
 	
 	public ImageConnector getConnector();
 	
+	@Override
 	public abstract boolean exists(String id);
+
+	<S extends Image> List<S> add(Collection<S> newImages, ProgressMonitor monitor);
 
 }
