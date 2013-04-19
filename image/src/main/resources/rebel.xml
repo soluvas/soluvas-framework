@@ -6,11 +6,4 @@
 		</dir>
 	</classpath>
 
-	<web>
-		<link target="/">
-			<dir name="${user.home}/git/soluvas/framework/image/target/classes/META-INF/resources">
-			</dir>
-		</link>
-	</web>
-
 </application>
