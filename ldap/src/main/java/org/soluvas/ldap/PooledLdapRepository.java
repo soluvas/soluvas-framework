@@ -252,6 +252,53 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	}
 	
 	/**
+	 * Find LDAP entry IDs based on an attribute value. The attribute does not need to be
+	 * {@link LdapAttribute} annotated.
+	 * 
+	 * @param obj
+	 * @throws LdapException
+	 * @return T entity or <tt>null</tt> if none found.
+	 */
+	@Override
+	public List<String> findIdsByAttribute(String attribute, String value) {
+		final LdapMapping mapping = mapper.getMapping(entityClass);
+		final String primaryObjectClass = mapping.getPrimaryObjectClass();
+		// Only search based on first objectClass, this is the typical use case
+//		final String filter = "(&(objectClass=" + primaryObjectClass + ")(" + attribute + "=" + value + "))";
+		final String filter = "(&(objectClass=*)(" + attribute + "=" + value + "))";
+		log.debug("Searching LDAP {} filter: {}", baseDn, filter); 
+		try {
+			final List<String> ids = withConnection(new Function<LdapConnection, List<String>>() {
+				@Override @Nullable
+				public List<String> apply(@Nullable LdapConnection conn) {
+					try {
+						final EntryCursor cursor = conn.search(baseDn, filter, SearchScope.ONELEVEL, mapping.getRdn().getName());
+						try {
+							final List<String> ids = LdapUtils.transform(cursor, new Function<Entry, String>() {
+								@Override @Nullable
+								public String apply(@Nullable Entry input) {
+									return input.getDn().getRdn().getValue().getString();
+								}
+							});
+							return ids;
+						} finally {
+							cursor.close();
+						}
+					} catch (LdapException e) {
+						Throwables.propagate(e);
+						return null;
+					}
+				}
+			});
+			log.info("LDAP search {} filter {} returned {} entries: {}", 
+					baseDn, filter, ids.size(), Iterables.limit(ids, 10));
+			return ids;
+		} catch (Exception e) {
+			throw new LdapRepositoryException(e, "Error searching LDAP in %s filter %s", baseDn, filter);
+		}
+	}
+	
+	/**
 	 * Find all LDAP entries of the same <tt>objectClass</tt>-es as the {@link LdapEntity}#objectClasses() annotation.
 	 * @param obj
 	 * @throws LdapException

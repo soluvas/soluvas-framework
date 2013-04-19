@@ -10,7 +10,7 @@ public class LdapAttributeMapping {
 	
 	/**
 	 * @param field
-	 * @param name
+	 * @param name LDAP Attribute name, e.g. 'mail'.
 	 * @param multi
 	 */
 	public LdapAttributeMapping(Field field, String name, boolean multi) {
@@ -28,6 +28,7 @@ public class LdapAttributeMapping {
 	}
 
 	/**
+	 * LDAP Attribute name, e.g. 'mail'.
 	 * @return the name
 	 */
 	public String getName() {

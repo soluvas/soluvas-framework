@@ -139,4 +139,6 @@ public interface LdapRepository<T> extends EntityLookup<T, String>, Repository<T
 
 	boolean existsByAttribute(String attribute, String value);
 
+	List<String> findIdsByAttribute(String attribute, String value);
+
 }

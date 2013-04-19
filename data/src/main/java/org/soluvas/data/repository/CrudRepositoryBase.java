@@ -23,6 +23,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.base.Throwables;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Ordering;
@@ -65,7 +66,12 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	
 	@Override
 	public <S extends T> Collection<S> add(Collection<S> entities) {
-		return ImmutableList.of( add(entities.iterator().next()) );
+		return ImmutableList.copyOf(Collections2.transform(entities, new Function<S, S>() {
+			@Override @Nullable
+			public S apply(@Nullable S input) {
+				return add(input);
+			}
+		}));
 	}
 	
 	@Override

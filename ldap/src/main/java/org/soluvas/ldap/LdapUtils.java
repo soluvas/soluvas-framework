@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.codec.binary.Base64;
@@ -29,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -273,5 +275,19 @@ public class LdapUtils {
 			throw new LdapRepositoryException(e, "Cannot delete %s recursively", dn);
 		}
 	}
+	
+	/**
+	 * Tries to make input LDAP compliant phone number. If fails, then return absent.
+	 * @param input
+	 * @return
+	 */
+	public static Optional<String> enforcePhoneNumber(@Nullable String input) {
+		if (input == null) {
+			return Optional.absent();
+		}
+		final String trimmed = input.replaceAll("[^0-9\\+\\,\\-\\(\\) ]+", "").trim();
+		final boolean containsNumber = input.matches(".*[0-9].*");
+		return containsNumber ? Optional.of(trimmed) : Optional.<String>absent();
+	}	
 
 }
