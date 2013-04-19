@@ -1518,16 +1518,19 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		initEClass(imageManagerEClass, ImageManager.class, "ImageManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getNoImageUri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getNoImageUri", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getDefaultPhotoId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getDefaultPhotoId", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theCommonsPackage.getGender(), "gender", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getPersonPhotoUri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getPersonIconUri", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theCommonsPackage.getGender(), "gender", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getPersonPhotoUri", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theCommonsPackage.getGender(), "gender", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getObjectPhotoUri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(imageManagerEClass, theEcorePackage.getEString(), "getObjectPhotoUri", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(imageManagerEClass, theEcorePackage.getELong(), "export", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1815,37 +1818,37 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 			 "documentation", "Object / non-person missing image URI."
 		   });		
 		addAnnotation
-		  (imageManagerEClass.getEOperations().get(2), 
+		  (imageManagerEClass.getEOperations().get(3), 
 		   source, 
 		   new String[] {
 			 "documentation", "Returns the provided URI if specified. Otherwise, return the default photo ID based on given gender.\nIf gender is not known, will return unknown gender photo URI."
 		   });		
 		addAnnotation
-		  (imageManagerEClass.getEOperations().get(3), 
+		  (imageManagerEClass.getEOperations().get(4), 
 		   source, 
 		   new String[] {
 			 "documentation", "Return the non-object URI if not null, otherwise return the default non-object image URI."
 		   });		
 		addAnnotation
-		  (imageManagerEClass.getEOperations().get(4), 
+		  (imageManagerEClass.getEOperations().get(5), 
 		   source, 
 		   new String[] {
 			 "documentation", "Downloads all images and exports them to a folder."
 		   });		
 		addAnnotation
-		  (imageManagerEClass.getEOperations().get(5), 
+		  (imageManagerEClass.getEOperations().get(6), 
 		   source, 
 		   new String[] {
 			 "documentation", "Import from metadata file and images.\n\nCan\'t have \"import\" as name because it\'s a reserved keyword."
 		   });		
 		addAnnotation
-		  (imageManagerEClass.getEOperations().get(6), 
+		  (imageManagerEClass.getEOperations().get(7), 
 		   source, 
 		   new String[] {
 			 "documentation", "Gets the DisplayImage for an imageId & styleName in a specified repository."
 		   });		
 		addAnnotation
-		  (imageManagerEClass.getEOperations().get(7), 
+		  (imageManagerEClass.getEOperations().get(8), 
 		   source, 
 		   new String[] {
 			 "documentation", "Gets the DisplayImage for an imageId & styleName in a specified repository. If image is not available, use the gender to select the representation."

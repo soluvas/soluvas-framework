@@ -30,7 +30,7 @@ public interface ImageManager extends SerializableEObject {
 	 * <!-- begin-model-doc -->
 	 * Object / non-person missing image URI.
 	 * <!-- end-model-doc -->
-	 * @model kind="operation"
+	 * @model kind="operation" required="true"
 	 * @generated
 	 */
 	String getNoImageUri();
@@ -38,10 +38,18 @@ public interface ImageManager extends SerializableEObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getDefaultPhotoId(Gender gender);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model required="true"
+	 * @generated
+	 */
+	String getPersonIconUri(Gender gender);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -50,7 +58,7 @@ public interface ImageManager extends SerializableEObject {
 	 * Returns the provided URI if specified. Otherwise, return the default photo ID based on given gender.
 	 * If gender is not known, will return unknown gender photo URI.
 	 * <!-- end-model-doc -->
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getPersonPhotoUri(String uri, Gender gender);
@@ -61,7 +69,7 @@ public interface ImageManager extends SerializableEObject {
 	 * <!-- begin-model-doc -->
 	 * Return the non-object URI if not null, otherwise return the default non-object image URI.
 	 * <!-- end-model-doc -->
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getObjectPhotoUri(String uri);

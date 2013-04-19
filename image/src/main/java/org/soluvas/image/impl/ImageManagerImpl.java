@@ -43,10 +43,13 @@ import org.soluvas.image.store.StyledImage;
 import org.soluvas.image.util.ImageUtils;
 import org.soluvas.ldap.SocialPerson;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
 
 /**
  * <!-- begin-user-doc -->
@@ -118,8 +121,10 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public String getDefaultPhotoId(Gender gender) {
-		log.debug("Current User Gender {}", gender);
+	public String getDefaultPhotoId(@Nullable Gender gender) {
+		if (gender == null) {
+			return unknownDefaultPhotoId;
+		}
 		switch (gender) {
 		case MALE:
 			return maleDefaultPhotoId;
@@ -127,6 +132,25 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			return femaleDefaultPhotoId;
 		default:
 			return unknownDefaultPhotoId;
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public String getPersonIconUri(@Nullable Gender gender) {
+		if (gender == null) {
+			return webAddress.getImagesUri() + "org.soluvas.image/user_unknown.png";
+		}
+		switch (gender) {
+		case MALE:
+			return webAddress.getImagesUri() + "org.soluvas.image/user_male.png";
+		case FEMALE:
+			return webAddress.getImagesUri() + "org.soluvas.image/user_female.png";
+		default:
+			return webAddress.getImagesUri() + "org.soluvas.image/user_unknown.png";
 		}
 	}
 
@@ -394,8 +418,8 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		final Image image = imageRepo.findOne(imageId);
 		
 		final DisplayImage displayImage = new DisplayImageImpl();
+		final String styleKey = style != null ? style.name().toLowerCase() : null;
 		if (image != null) {
-			final String styleKey = style != null ? style.name().toLowerCase() : null;
 			if (style != null && image.getStyles() != null && image.getStyles().get(styleKey) != null
 					&& image.getStyles().get(styleKey).getUri() != null) {
 				displayImage.setSrc(image.getStyles().get(styleKey).getUri());
@@ -409,6 +433,25 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			displayImage.setSrc(getNoImageUri());
 			log.warn("Cannot get %s image %s", namespace, imageId);
 		}
+		
+		final Optional<org.soluvas.image.store.ImageStyle> styleDef = Iterables.tryFind(imageRepo.getStyles(), new Predicate<org.soluvas.image.store.ImageStyle>() {
+			@Override
+			public boolean apply(
+					@Nullable org.soluvas.image.store.ImageStyle input) {
+				return Objects.equal(styleKey, input.getName());
+			}
+		});
+		if (styleDef.isPresent()) {
+			final Integer width = styleDef.get().getMaxWidth();
+			if (displayImage.getWidth() == null && width != null) {
+				displayImage.setWidth(width);
+			}
+			final Integer height = styleDef.get().getMaxHeight();
+			if (displayImage.getHeight() == null && height != null) {
+				displayImage.setHeight(height);
+			}
+		}
+		
 		return displayImage;
 	}
 
@@ -422,8 +465,8 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		final Image image = imageRepo.findOne(imageId);
 		
 		final DisplayImage displayImage = new DisplayImageImpl();
+		final String styleKey = style != null ? style.name().toLowerCase() : null;
 		if (image != null) {
-			final String styleKey = style != null ? style.name().toLowerCase() : null;
 			if (image.getStyles() != null && image.getStyles().get(styleKey) != null
 					&& image.getStyles().get(styleKey).getUri() != null) {
 				displayImage.setSrc(image.getStyles().get(styleKey).getUri());
@@ -437,6 +480,25 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			displayImage.setSrc(getPersonPhotoUri(gender));
 			log.warn("Cannot get %s image %s", namespace, imageId);
 		}
+
+		final Optional<org.soluvas.image.store.ImageStyle> styleDef = Iterables.tryFind(imageRepo.getStyles(), new Predicate<org.soluvas.image.store.ImageStyle>() {
+			@Override
+			public boolean apply(
+					@Nullable org.soluvas.image.store.ImageStyle input) {
+				return Objects.equal(styleKey, input.getName());
+			}
+		});
+		if (styleDef.isPresent()) {
+			final Integer width = styleDef.get().getMaxWidth();
+			if (displayImage.getWidth() == null && width != null) {
+				displayImage.setWidth(width);
+			}
+			final Integer height = styleDef.get().getMaxHeight();
+			if (displayImage.getHeight() == null && height != null) {
+				displayImage.setHeight(height);
+			}
+		}
+		
 		return displayImage;
 	}
 
