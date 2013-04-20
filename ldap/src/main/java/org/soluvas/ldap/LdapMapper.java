@@ -63,7 +63,7 @@ public class LdapMapper<T> {
 	 */
 	private final LoadingCache<Class<?>, LdapMapping> mappings = CacheBuilder.newBuilder().build(new CacheLoader<Class<?>, LdapMapping>() {
 		@Override
-		public LdapMapping load(@Nonnull Class<?> clazz) throws Exception {
+		public LdapMapping load(Class<?> clazz) throws Exception {
 			final List<Field> fields = ReflectionUtils.getAllFields(clazz);
 			
 			final LdapEntry entryAnn = clazz.getAnnotation(LdapEntry.class);
@@ -114,7 +114,7 @@ public class LdapMapper<T> {
 		super();
 	}
 
-	public LdapMapping getMapping(@Nonnull final Class<?> clazz) {
+	public LdapMapping getMapping(final Class<?> clazz) {
 		try {
 			return mappings.get(clazz);
 		} catch (ExecutionException e) {
@@ -195,8 +195,8 @@ public class LdapMapper<T> {
 	 * @throws LdapInvalidDnException
 	 * @todo Instead of mutable LDAP {@link Entry}, return {@link Set} of {@link Attribute}s instead.
 	 */
-	protected void mapFromProperties(@Nonnull final Object obj, String baseDn, @Nonnull final Class<?> clazz,
-			@Nonnull final Entry entry) throws IllegalAccessException,
+	protected void mapFromProperties(final Object obj, String baseDn, final Class<?> clazz,
+			final Entry entry) throws IllegalAccessException,
 			InvocationTargetException, NoSuchMethodException,
 			LdapInvalidDnException {
 		final String dn = getDn(obj, baseDn);
@@ -298,7 +298,7 @@ public class LdapMapper<T> {
 	 * @param baseDn
 	 * @return
 	 */
-	public String getDn(@Nonnull final String rdnValue, @Nonnull final Class<?> clazz, @Nonnull final String baseDn) {
+	public String getDn(final String rdnValue, final Class<?> clazz, final String baseDn) {
 		final LdapMapping mapping = getMapping(clazz);
 		// Set DN
 		try {
@@ -320,7 +320,7 @@ public class LdapMapper<T> {
 	 * @return
 	 */
 	@Nonnull
-	public String getDn(@Nonnull final Object obj, @Nonnull final String baseDn) {
+	public String getDn(final Object obj, final String baseDn) {
 		final Class<? extends Object> clazz = obj.getClass();
 		return getDn(getRdnValue(obj), clazz, baseDn);
 	}
@@ -331,7 +331,7 @@ public class LdapMapper<T> {
 	 * @return
 	 */
 	@Nullable
-	public String getRdnValue(@Nonnull final Object obj) {
+	public String getRdnValue(final Object obj) {
 		final Class<? extends Object> clazz = obj.getClass();
 		final LdapMapping mapping = getMapping(clazz);
 		// Set DN
@@ -502,7 +502,7 @@ public class LdapMapper<T> {
 	 * @param up
 	 * @return
 	 */
-	public ModifyRequest createModifyRequest(@Nonnull final Entry existingEntry, @Nonnull final T existing, @Nonnull final T up) {
+	public ModifyRequest createModifyRequest(final Entry existingEntry, final T existing, final T up) {
 		final ModifyRequestImpl request = new ModifyRequestImpl();
 		request.setName(existingEntry.getDn());
 		// Object classes

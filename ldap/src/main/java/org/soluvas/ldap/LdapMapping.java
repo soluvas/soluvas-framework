@@ -26,8 +26,8 @@ public class LdapMapping {
 	 * @param rdn
 	 * @param attributes
 	 */
-	public LdapMapping(@Nonnull final Collection<String> objectClasses, @Nonnull final LdapAttributeMapping rdn,
-			@Nonnull final List<LdapAttributeMapping> attributes) {
+	public LdapMapping(final Collection<String> objectClasses, final LdapAttributeMapping rdn,
+			final List<LdapAttributeMapping> attributes) {
 		super();
 		Preconditions.checkNotNull(objectClasses, "objectClass-es must not be null");
 		Preconditions.checkArgument(!objectClasses.isEmpty(), "objectClass-es must not be empty");

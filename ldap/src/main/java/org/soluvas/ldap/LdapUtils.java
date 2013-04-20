@@ -9,18 +9,20 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.api.ldap.model.cursor.EntryCursor;
+import org.apache.directory.api.ldap.model.cursor.SearchCursor;
 import org.apache.directory.api.ldap.model.entry.Entry;
 import org.apache.directory.api.ldap.model.entry.Value;
 import org.apache.directory.api.ldap.model.exception.LdapException;
 import org.apache.directory.api.ldap.model.exception.LdapInvalidDnException;
 import org.apache.directory.api.ldap.model.exception.LdapURLEncodingException;
+import org.apache.directory.api.ldap.model.message.Response;
+import org.apache.directory.api.ldap.model.message.SearchResultEntry;
 import org.apache.directory.api.ldap.model.message.SearchScope;
 import org.apache.directory.api.ldap.model.url.LdapUrl;
 import org.apache.directory.ldap.client.api.LdapConnection;
@@ -109,9 +111,34 @@ public class LdapUtils {
 	 * 
 	 * @param cursor
 	 */
-	public static List<Entry> asList(@Nonnull EntryCursor cursor) {
+	public static List<Entry> asList(EntryCursor cursor) {
 		try {
 			List<Entry> entries = ImmutableList.copyOf(cursor);
+			return entries;
+		} finally {
+			try {
+				cursor.close();
+			} catch (Exception e) {
+				log.warn("Error closing LDAP cursor", e);
+			}
+		}
+	}
+
+	/**
+	 * Convert an LDAP {@link EntryCursor} to a {@link List},
+	 * making sure the cursor is closed. Exceptions during close will be swallowed,
+	 * but logged as WARN.
+	 * 
+	 * @param cursor
+	 */
+	public static List<Entry> asList(SearchCursor cursor) {
+		try {
+			final List<Entry> entries = ImmutableList.copyOf(Iterables.transform(cursor, new Function<Response, Entry>() {
+				@Override @Nullable
+				public Entry apply(@Nullable Response input) {
+					return ((SearchResultEntry)input).getEntry();
+				}
+			}));
 			return entries;
 		} finally {
 			try {
@@ -130,7 +157,7 @@ public class LdapUtils {
 	 * @param function
 	 * @return
 	 */
-	public static <T> List<T> transform(@Nonnull EntryCursor cursor,
+	public static <T> List<T> transform(EntryCursor cursor,
 			Function<Entry, T> function) {
 		try {
 			return ImmutableList.copyOf(Iterables.transform(cursor, function));
@@ -151,7 +178,7 @@ public class LdapUtils {
 	 * @param function
 	 * @return
 	 */
-	public static <T> Set<T> transformSet(@Nonnull EntryCursor cursor,
+	public static <T> Set<T> transformSet(EntryCursor cursor,
 			Function<Entry, T> function) {
 		try {
 			Set<T> entries = ImmutableSet.copyOf(Iterables.transform(cursor,
@@ -174,8 +201,8 @@ public class LdapUtils {
 	 * @param function
 	 * @return
 	 */
-	public static <V> V withConnection(@Nonnull final ObjectPool<LdapConnection> ldapPool,
-			@Nonnull final Function<LdapConnection, V> function) {
+	public static <V> V withConnection(final ObjectPool<LdapConnection> ldapPool,
+			final Function<LdapConnection, V> function) {
 		final LdapConnection conn;
 		try {
 			conn = ldapPool.borrowObject();
@@ -256,7 +283,7 @@ public class LdapUtils {
 	 * @param dn
 	 * @return Total number of deleted entries.
 	 */
-	public static long deleteRecursively(@Nonnull final LdapConnection ldap, @Nonnull final String dn) {
+	public static long deleteRecursively(final LdapConnection ldap, final String dn) {
 		try {
 			final List<Entry> children = LdapUtils.asList(ldap.search(dn, "(objectclass=*)", SearchScope.ONELEVEL));
 			log.debug("Deleting {} and its {} children", dn, children.size());

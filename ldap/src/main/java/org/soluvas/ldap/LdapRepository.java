@@ -2,6 +2,8 @@ package org.soluvas.ldap;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import org.apache.directory.api.ldap.model.entry.Entry;
 import org.apache.directory.api.ldap.model.exception.LdapException;
 import org.apache.directory.api.ldap.model.name.Dn;
@@ -42,7 +44,7 @@ public interface LdapRepository<T> extends EntityLookup<T, String>, Repository<T
 	 * @return the modified entities
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
-//	public abstract T modify(@Nonnull String id, @Nonnull T entity);
+//	public abstract T modify(String id, T entity);
 
 	/**
 	 * Delete an LDAP entry.
@@ -99,11 +101,12 @@ public interface LdapRepository<T> extends EntityLookup<T, String>, Repository<T
 	List<T> findAll();
 
 	/**
-	 * Find all LDAP entries partially matching a specified searchText.
+	 * Find all LDAP entries partially matching a specified searchText,
+	 * and sorts it by name. Limited to 100 results.
 	 * @param obj
 	 * @throws LdapException
 	 */
-	List<T> search(String searchText);
+	List<T> search(@Nullable String searchText);
 
 	/**
 	 * Find all LDAP entries matching a custom LDAP filter.

@@ -10,10 +10,13 @@ import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.api.ldap.model.cursor.EntryCursor;
 import org.apache.directory.api.ldap.model.entry.Entry;
 import org.apache.directory.api.ldap.model.exception.LdapException;
+import org.apache.directory.api.ldap.model.exception.LdapInvalidAttributeValueException;
 import org.apache.directory.api.ldap.model.filter.FilterEncoder;
 import org.apache.directory.api.ldap.model.message.ModifyRequest;
 import org.apache.directory.api.ldap.model.message.ModifyResponse;
 import org.apache.directory.api.ldap.model.message.ResultCodeEnum;
+import org.apache.directory.api.ldap.model.message.SearchRequest;
+import org.apache.directory.api.ldap.model.message.SearchRequestImpl;
 import org.apache.directory.api.ldap.model.message.SearchScope;
 import org.apache.directory.api.ldap.model.name.Dn;
 import org.apache.directory.ldap.client.api.LdapConnection;
@@ -23,10 +26,12 @@ import org.soluvas.data.repository.CrudRepositoryBase;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
 
 /**
  * Manages LDAP entry POJO objects annotated with {@link LdapEntry}.
@@ -52,7 +57,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	private final String baseDn;
 	private final Class<? extends T> entityClass;
 
-	public PooledLdapRepository(@Nonnull final Class<? extends T> entityClass, @Nonnull final ObjectPool<LdapConnection> pool, @Nonnull final String baseDn) {
+	public PooledLdapRepository(final Class<? extends T> entityClass, final ObjectPool<LdapConnection> pool, final String baseDn) {
 		super();
 		this.entityClass = entityClass;
 		this.pool = pool;
@@ -60,7 +65,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 		this.mapper = new LdapMapper<T>();
 	}
 	
-	protected <V> V withConnection(@Nonnull final Function<LdapConnection, V> function) {
+	protected <V> V withConnection(final Function<LdapConnection, V> function) {
 		return LdapUtils.withConnection(pool, function);
 	}
 	
@@ -103,7 +108,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	 * @throws LdapException
 	 */
 	@Override @Nonnull
-	public T modify(@Nonnull final T entity) {
+	public T modify(final T entity) {
 		final String rdnValue = mapper.getRdnValue(entity);
 		return modify(rdnValue, entity);
 	}
@@ -385,35 +390,59 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	}
 
 	@Override
-	public List<T> search(String searchText) {
+	public List<T> search(@Nullable String searchText) {
 		final String primaryObjectClass = mapper.getMapping(entityClass).getPrimaryObjectClass();
-		final String encodedSearchText = FilterEncoder.encodeFilterValue(searchText);
-//		String filter = "(&";
-//		for (String objectClass : objectClasses) {
-//			filter += "(objectClass=" + objectClass + ")";
-//		}
-//		filter += ")";
-		// Only search based on first objectClass, this is the typical use case
-		// escape searchText using https://issues.apache.org/jira/browse/DIRSHARED-143
-//		final String filter = String.format("(&(objectClass=%s)(|(cn=*%s*)(gn=*%s*)(sn=*%s*)(uid=*%s*)(mail=*%s*)))",
-//				primaryObjectClass, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText);
-		final String filter = String.format("(&(objectClass=*)(|(cn=*%s*)(gn=*%s*)(sn=*%s*)(uid=*%s*)(mail=*%s*)))",
-				encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText);
+		final String filter;
+		if (!Strings.isNullOrEmpty(searchText)) {
+			final String encodedSearchText = FilterEncoder.encodeFilterValue(searchText);
+	//		String filter = "(&";
+	//		for (String objectClass : objectClasses) {
+	//			filter += "(objectClass=" + objectClass + ")";
+	//		}
+	//		filter += ")";
+			// Only search based on first objectClass, this is the typical use case
+			// escape searchText using https://issues.apache.org/jira/browse/DIRSHARED-143
+	//		final String filter = String.format("(&(objectClass=%s)(|(cn=*%s*)(gn=*%s*)(sn=*%s*)(uid=*%s*)(mail=*%s*)))",
+	//				primaryObjectClass, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText);
+			filter = String.format("(&(objectClass=*)(|(cn=*%s*)(gn=*%s*)(sn=*%s*)(uid=*%s*)(mail=*%s*)))",
+					encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText);
+		} else {
+			filter = "(objectClass=*)";
+		}
 		log.debug("Searching LDAP {} filter: {}", baseDn, filter); 
 		try {
 			final List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
 				@Override @Nullable
 				public List<Entry> apply(@Nullable LdapConnection conn) {
 					try {
-						return LdapUtils.asList( conn.search(baseDn, filter, SearchScope.ONELEVEL) );
+						final SearchRequest req = new SearchRequestImpl();
+						req.setBase(new Dn(baseDn));
+						req.setFilter(filter);
+						req.setScope(SearchScope.ONELEVEL);
+						req.setSizeLimit(100);
+						return LdapUtils.asList(conn.search(req));
 					} catch (LdapException e) {
 						Throwables.propagate(e);
 						return null;
 					}
 				}
 			});
-			log.info("LDAP search {} filter {} returned {} entries", baseDn, filter, entries.size());
-			final List<T> entities = Lists.transform(entries, new EntryToEntity());
+			final Ordering<Entry> cnOrdering = new Ordering<Entry>() {
+				@Override
+				public int compare(@Nullable Entry left, @Nullable Entry right) {
+					try {
+						final String leftCn = left.containsAttribute("cn") ? left.get("cn").getString() : "";
+						final String rightCn = right.containsAttribute("cn") ? right.get("cn").getString() : "";
+						return leftCn.compareToIgnoreCase(rightCn);
+					} catch (LdapInvalidAttributeValueException e) {
+						return 0;
+					}
+				}
+			}; 
+			final List<Entry> sortedEntries = cnOrdering.immutableSortedCopy(entries);
+			log.info("LDAP search {} filter {} returned {} entries: {}", 
+					baseDn, filter, entries.size(), Iterables.limit(entries, 10));
+			final List<T> entities = Lists.transform(sortedEntries, new EntryToEntity());
 			return entities;
 		} catch (Exception e) {
 			throw new LdapRepositoryException(e, "Error searching LDAP in %s filter %s", baseDn, filter);
