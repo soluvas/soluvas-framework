@@ -1363,6 +1363,17 @@ public interface ImagePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Social Person</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.ldap.SocialPerson
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getSocialPerson()
+	 * @generated
+	 */
+	int SOCIAL_PERSON = 29;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.ImageConnector <em>Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2373,6 +2384,17 @@ public interface ImagePackage extends EPackage {
 	EDataType getImageStyle();
 
 	/**
+	 * Returns the meta object for data type '{@link org.soluvas.ldap.SocialPerson <em>Social Person</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Social Person</em>'.
+	 * @see org.soluvas.ldap.SocialPerson
+	 * @model instanceClass="org.soluvas.ldap.SocialPerson"
+	 * @generated
+	 */
+	EDataType getSocialPerson();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3203,6 +3225,16 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EDataType IMAGE_STYLE = eINSTANCE.getImageStyle();
+
+		/**
+		 * The meta object literal for the '<em>Social Person</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.ldap.SocialPerson
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getSocialPerson()
+		 * @generated
+		 */
+		EDataType SOCIAL_PERSON = eINSTANCE.getSocialPerson();
 
 	}
 

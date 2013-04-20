@@ -44,6 +44,7 @@ import org.soluvas.image.ThumbnailatorTransformer;
 import org.soluvas.image.TransformGravity;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.image.store.ImageRepository;
+import org.soluvas.ldap.SocialPerson;
 
 /**
  * <!-- begin-user-doc -->
@@ -242,6 +243,13 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	private EDataType imageStyleEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType socialPersonEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1214,6 +1222,15 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getSocialPerson() {
+		return socialPersonEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public ImageFactory getImageFactory() {
 		return (ImageFactory)getEFactoryInstance();
@@ -1355,6 +1372,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		imageRepositoryEDataType = createEDataType(IMAGE_REPOSITORY);
 		imageTypeEDataType = createEDataType(IMAGE_TYPE);
 		imageStyleEDataType = createEDataType(IMAGE_STYLE);
+		socialPersonEDataType = createEDataType(SOCIAL_PERSON);
 	}
 
 	/**
@@ -1559,6 +1577,20 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEParameter(op, this.getImageStyle(), "style", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theCommonsPackage.getGender(), "gender", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(imageManagerEClass, null, "getSafePersonPhotos", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageType(), "namespace", 1, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theCommonsPackage.getList());
+		g2 = createEGenericType(this.getSocialPerson());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "imageId", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageStyle(), "style", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theCommonsPackage.getMap());
+		g2 = createEGenericType(theEcorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(this.getDisplayImage());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
 		initEClass(imageTransformEClass, ImageTransform.class, "ImageTransform", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(resizeToFitEClass, ResizeToFit.class, "ResizeToFit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1668,6 +1700,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEDataType(imageRepositoryEDataType, ImageRepository.class, "ImageRepository", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(imageTypeEDataType, ImageType.class, "ImageType", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(imageStyleEDataType, ImageStyle.class, "ImageStyle", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(socialPersonEDataType, SocialPerson.class, "SocialPerson", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1852,6 +1885,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Gets the DisplayImage for an imageId & styleName in a specified repository. If image is not available, use the gender to select the representation."
+		   });		
+		addAnnotation
+		  (imageManagerEClass.getEOperations().get(9), 
+		   source, 
+		   new String[] {
+			 "documentation", "Gets DisplayImages for SocialPersons & styleName in a specified repository.\nIf image is not available, use the gender to select the representation.\nReturns Map<personId, DisplayImage>"
 		   });		
 		addAnnotation
 		  (imageTransformTypeEEnum.getELiterals().get(0), 

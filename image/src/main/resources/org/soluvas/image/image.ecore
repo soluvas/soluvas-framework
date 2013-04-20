@@ -262,6 +262,22 @@
       <eParameters name="style" eType="#//ImageStyle"/>
       <eParameters name="gender" eType="ecore:EEnum ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Gender"/>
     </eOperations>
+    <eOperations name="getSafePersonPhotos" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Gets DisplayImages for SocialPersons &amp; styleName in a specified repository.&#xA;If image is not available, use the gender to select the representation.&#xA;Returns Map&lt;personId, DisplayImage>"/>
+      </eAnnotations>
+      <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Map">
+        <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+        <eTypeArguments eClassifier="#//DisplayImage"/>
+      </eGenericType>
+      <eParameters name="namespace" lowerBound="1" eType="#//ImageType"/>
+      <eParameters name="imageId" lowerBound="1">
+        <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//List">
+          <eTypeArguments eClassifier="#//SocialPerson"/>
+        </eGenericType>
+      </eParameters>
+      <eParameters name="style" eType="#//ImageStyle"/>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ImageTransformType">
     <eLiterals name="resize_to_fit">
@@ -480,4 +496,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//StyledImage"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="SocialPerson" instanceClassName="org.soluvas.ldap.SocialPerson"/>
 </ecore:EPackage>

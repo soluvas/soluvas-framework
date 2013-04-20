@@ -4,6 +4,8 @@ package org.soluvas.image;
 
 import java.io.File;
 
+import java.util.List;
+import java.util.Map;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.Gender;
@@ -117,6 +119,19 @@ public interface ImageManager extends SerializableEObject {
 	 * @model required="true" namespaceDataType="org.soluvas.image.ImageType" styleDataType="org.soluvas.image.ImageStyle"
 	 */
 	DisplayImage getSafePersonPhoto(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style, @Nullable Gender gender);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets DisplayImages for SocialPersons & styleName in a specified repository.
+	 * If image is not available, use the gender to select the representation.
+	 * Returns Map<personId, DisplayImage>
+	 * <!-- end-model-doc -->
+	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" imageIdDataType="org.soluvas.commons.List<org.soluvas.image.SocialPerson>" imageIdRequired="true" imageIdMany="false" styleDataType="org.soluvas.image.ImageStyle"
+	 * @generated
+	 */
+	Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, List<SocialPerson> imageId, ImageStyle style);
 
 	String getThumbnailPhotoUri(SocialPerson person);
 

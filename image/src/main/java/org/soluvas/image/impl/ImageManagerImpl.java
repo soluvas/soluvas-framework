@@ -22,6 +22,7 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Gender;
+import org.soluvas.commons.NotNullPredicate;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.ProgressStatus;
 import org.soluvas.commons.WebAddress;
@@ -43,13 +44,17 @@ import org.soluvas.image.store.StyledImage;
 import org.soluvas.image.util.ImageUtils;
 import org.soluvas.ldap.SocialPerson;
 
+import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * <!-- begin-user-doc -->
@@ -464,8 +469,53 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
 		final Image image = imageRepo.findOne(imageId);
 		
-		final DisplayImage displayImage = new DisplayImageImpl();
+		final DisplayImage displayImage = grabDisplayImage(namespace, imageRepo.getStyles(), 
+				imageId, style, image, gender);
+		
+		return displayImage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, List<SocialPerson> people, ImageStyle style) {
+		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
+		final List<String> imageIds = ImmutableList.copyOf(Iterables.filter(Lists.transform(people, new Function<SocialPerson, String>() {
+			@Override @Nullable
+			public String apply(@Nullable SocialPerson input) {
+				return input.getPhotoId();
+			}
+		}), new NotNullPredicate()));
+		final List<Image> images = imageRepo.findAll(imageIds);
+		final Map<String, Image> imageMap = Maps.uniqueIndex(images, new Function<Image, String>() {
+			@Override @Nullable
+			public String apply(@Nullable Image input) {
+				return input.getId();
+			}
+		});
+		
+		final ImmutableMap.Builder<String, DisplayImage> b = ImmutableMap.builder();
+		for (SocialPerson person : people) {
+			final Image image = person.getPhotoId() != null ? imageMap.get(person.getPhotoId()) : null;
+			final Gender gender = person.getGender();
+			
+			final DisplayImage displayImage = grabDisplayImage(namespace, imageRepo.getStyles(),
+					person.getId(), style, image, gender);
+			
+			b.put(person.getId(), displayImage);
+		}
+		return b.build();
+	}
+
+	private DisplayImage grabDisplayImage(ImageType namespace,
+			List<org.soluvas.image.store.ImageStyle> styleDefs, @Nullable final String imageId,
+			@Nullable final ImageStyle style, @Nullable final Image image,
+			@Nullable final Gender gender) {
 		final String styleKey = style != null ? style.name().toLowerCase() : null;
+		final DisplayImage displayImage = new DisplayImageImpl();
+		
 		if (image != null) {
 			if (image.getStyles() != null && image.getStyles().get(styleKey) != null
 					&& image.getStyles().get(styleKey).getUri() != null) {
@@ -474,14 +524,16 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 				displayImage.setTitle(image.getName());
 			} else {
 				displayImage.setSrc(getPersonPhotoUri(gender));
-				log.warn("Cannot get %s style for %s image %s", styleKey, namespace, imageId);
+				log.warn("Cannot get {} style for {} image {}", 
+						styleKey, namespace, imageId);
 			}
 		} else {
 			displayImage.setSrc(getPersonPhotoUri(gender));
-			log.warn("Cannot get %s image %s", namespace, imageId);
+			log.warn("Cannot get {} image {}", namespace, imageId);
 		}
 
-		final Optional<org.soluvas.image.store.ImageStyle> styleDef = Iterables.tryFind(imageRepo.getStyles(), new Predicate<org.soluvas.image.store.ImageStyle>() {
+		final Optional<org.soluvas.image.store.ImageStyle> styleDef = Iterables.tryFind(
+				styleDefs, new Predicate<org.soluvas.image.store.ImageStyle>() {
 			@Override
 			public boolean apply(
 					@Nullable org.soluvas.image.store.ImageStyle input) {
