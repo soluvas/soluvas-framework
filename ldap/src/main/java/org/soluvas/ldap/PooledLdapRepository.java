@@ -419,7 +419,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 						req.setBase(new Dn(baseDn));
 						req.setFilter(filter);
 						req.setScope(SearchScope.ONELEVEL);
-						req.setSizeLimit(100);
+						req.setSizeLimit(20);
 						return LdapUtils.asList(conn.search(req));
 					} catch (LdapException e) {
 						Throwables.propagate(e);

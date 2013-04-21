@@ -102,7 +102,7 @@ public interface LdapRepository<T> extends EntityLookup<T, String>, Repository<T
 
 	/**
 	 * Find all LDAP entries partially matching a specified searchText,
-	 * and sorts it by name. Limited to 100 results.
+	 * and sorts it by name. Limited to 20 results.
 	 * @param obj
 	 * @throws LdapException
 	 */
