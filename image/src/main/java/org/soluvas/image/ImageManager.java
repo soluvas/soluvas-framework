@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.Gender;
+import org.soluvas.commons.Imageable;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.SerializableEObject;
 import org.soluvas.image.store.ImageRepository;
@@ -114,6 +115,20 @@ public interface ImageManager extends SerializableEObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
+	 * Gets DisplayImages for [Identifiable & Imageable] & styleName in a specified repository.
+	 * If image is not available, use the default object noimage.
+	 * Returns Map<entityId, DisplayImage>.
+	 * Note the parameter must implement both Identifiable and Imageable.
+	 * <!-- end-model-doc -->
+	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" imageablesDataType="org.soluvas.commons.List<? extends org.soluvas.commons.Imageable>" imageablesRequired="true" imageablesMany="false" styleDataType="org.soluvas.image.ImageStyle"
+	 * @generated
+	 */
+	Map<String, DisplayImage> getSafeImages(ImageType namespace, List<? extends Imageable> imageables, ImageStyle style);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
 	 * Gets the DisplayImage for an imageId & styleName in a specified repository. If image is not available, use the gender to select the representation.
 	 * <!-- end-model-doc -->
 	 * @model required="true" namespaceDataType="org.soluvas.image.ImageType" styleDataType="org.soluvas.image.ImageStyle"
@@ -128,10 +143,10 @@ public interface ImageManager extends SerializableEObject {
 	 * If image is not available, use the gender to select the representation.
 	 * Returns Map<personId, DisplayImage>
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" imageIdDataType="org.soluvas.commons.List<org.soluvas.image.SocialPerson>" imageIdRequired="true" imageIdMany="false" styleDataType="org.soluvas.image.ImageStyle"
+	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" peopleDataType="org.soluvas.commons.List<org.soluvas.image.SocialPerson>" peopleRequired="true" peopleMany="false" styleDataType="org.soluvas.image.ImageStyle"
 	 * @generated
 	 */
-	Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, List<SocialPerson> imageId, ImageStyle style);
+	Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, List<SocialPerson> people, ImageStyle style);
 
 	String getThumbnailPhotoUri(SocialPerson person);
 

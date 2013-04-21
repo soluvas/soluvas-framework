@@ -22,6 +22,8 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Gender;
+import org.soluvas.commons.Identifiable;
+import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NotNullPredicate;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.ProgressStatus;
@@ -413,33 +415,30 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		return importedCount;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	@Override
-	public DisplayImage getSafeImage(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style) {
-		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
-		final Image image = imageRepo.findOne(imageId);
-		
-		final DisplayImage displayImage = new DisplayImageImpl();
+	private DisplayImage grabDisplayImage(ImageType namespace,
+			List<org.soluvas.image.store.ImageStyle> styleDefs, @Nullable final String imageId,
+			@Nullable final ImageStyle style, @Nullable final Image image) {
 		final String styleKey = style != null ? style.name().toLowerCase() : null;
+		final DisplayImage displayImage = new DisplayImageImpl();
+		
 		if (image != null) {
-			if (style != null && image.getStyles() != null && image.getStyles().get(styleKey) != null
+			if (image.getStyles() != null && image.getStyles().get(styleKey) != null
 					&& image.getStyles().get(styleKey).getUri() != null) {
 				displayImage.setSrc(image.getStyles().get(styleKey).getUri());
 				displayImage.setAlt(image.getName());
 				displayImage.setTitle(image.getName());
 			} else {
 				displayImage.setSrc(getNoImageUri());
-				log.warn("Cannot get %s style for %s image %s", styleKey, namespace, imageId);
+				log.warn("Cannot get {} style for {} image {}", 
+						styleKey, namespace, imageId);
 			}
 		} else {
 			displayImage.setSrc(getNoImageUri());
-			log.warn("Cannot get %s image %s", namespace, imageId);
+			log.warn("Cannot get {} image {}", namespace, imageId);
 		}
-		
-		final Optional<org.soluvas.image.store.ImageStyle> styleDef = Iterables.tryFind(imageRepo.getStyles(), new Predicate<org.soluvas.image.store.ImageStyle>() {
+
+		final Optional<org.soluvas.image.store.ImageStyle> styleDef = Iterables.tryFind(
+				styleDefs, new Predicate<org.soluvas.image.store.ImageStyle>() {
 			@Override
 			public boolean apply(
 					@Nullable org.soluvas.image.store.ImageStyle input) {
@@ -460,56 +459,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		return displayImage;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	@Override
-	public DisplayImage getSafePersonPhoto(ImageType namespace, String imageId, ImageStyle style, Gender gender) {
-		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
-		final Image image = imageRepo.findOne(imageId);
-		
-		final DisplayImage displayImage = grabDisplayImage(namespace, imageRepo.getStyles(), 
-				imageId, style, image, gender);
-		
-		return displayImage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	@Override
-	public Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, List<SocialPerson> people, ImageStyle style) {
-		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
-		final List<String> imageIds = ImmutableList.copyOf(Iterables.filter(Lists.transform(people, new Function<SocialPerson, String>() {
-			@Override @Nullable
-			public String apply(@Nullable SocialPerson input) {
-				return input.getPhotoId();
-			}
-		}), new NotNullPredicate()));
-		final List<Image> images = imageRepo.findAll(imageIds);
-		final Map<String, Image> imageMap = Maps.uniqueIndex(images, new Function<Image, String>() {
-			@Override @Nullable
-			public String apply(@Nullable Image input) {
-				return input.getId();
-			}
-		});
-		
-		final ImmutableMap.Builder<String, DisplayImage> b = ImmutableMap.builder();
-		for (SocialPerson person : people) {
-			final Image image = person.getPhotoId() != null ? imageMap.get(person.getPhotoId()) : null;
-			final Gender gender = person.getGender();
-			
-			final DisplayImage displayImage = grabDisplayImage(namespace, imageRepo.getStyles(),
-					person.getId(), style, image, gender);
-			
-			b.put(person.getId(), displayImage);
-		}
-		return b.build();
-	}
-
-	private DisplayImage grabDisplayImage(ImageType namespace,
+	private DisplayImage grabDisplayPhoto(ImageType namespace,
 			List<org.soluvas.image.store.ImageStyle> styleDefs, @Nullable final String imageId,
 			@Nullable final ImageStyle style, @Nullable final Image image,
 			@Nullable final Gender gender) {
@@ -552,6 +502,103 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		}
 		
 		return displayImage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public DisplayImage getSafeImage(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style) {
+		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
+		final Image image = imageRepo.findOne(imageId);
+		
+		final DisplayImage displayImage = grabDisplayImage(namespace, imageRepo.getStyles(), 
+				imageId, style, image);
+		return displayImage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public Map<String, DisplayImage> getSafeImages(ImageType namespace, List<? extends Imageable> imageables, ImageStyle style) {
+		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
+		final List<String> imageIds = ImmutableList.copyOf(Iterables.filter(Lists.transform(imageables, 
+				new Function<Imageable, String>() {
+			@Override @Nullable
+			public String apply(@Nullable Imageable input) {
+				return input.getImageId();
+			}
+		}), new NotNullPredicate()));
+		final List<Image> images = imageRepo.findAll(imageIds);
+		final Map<String, Image> imageMap = Maps.uniqueIndex(images, new Function<Image, String>() {
+			@Override @Nullable
+			public String apply(@Nullable Image input) {
+				return input.getId();
+			}
+		});
+		
+		final ImmutableMap.Builder<String, DisplayImage> b = ImmutableMap.builder();
+		for (final Imageable imageable : imageables) {
+			final Image image = imageable.getImageId() != null ? imageMap.get(imageable.getImageId()) : null;
+			
+			final DisplayImage displayImage = grabDisplayImage(namespace, imageRepo.getStyles(),
+					imageable.getImageId(), style, image);
+			
+			b.put(((Identifiable) imageable).getId(), displayImage);
+		}
+		return b.build();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public DisplayImage getSafePersonPhoto(ImageType namespace, String imageId, ImageStyle style, Gender gender) {
+		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
+		final Image image = imageRepo.findOne(imageId);
+		
+		final DisplayImage displayImage = grabDisplayPhoto(namespace, imageRepo.getStyles(), 
+				imageId, style, image, gender);
+		
+		return displayImage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, List<SocialPerson> people, ImageStyle style) {
+		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
+		final List<String> imageIds = ImmutableList.copyOf(Iterables.filter(Lists.transform(people, new Function<SocialPerson, String>() {
+			@Override @Nullable
+			public String apply(@Nullable SocialPerson input) {
+				return input.getPhotoId();
+			}
+		}), new NotNullPredicate()));
+		final List<Image> images = imageRepo.findAll(imageIds);
+		final Map<String, Image> imageMap = Maps.uniqueIndex(images, new Function<Image, String>() {
+			@Override @Nullable
+			public String apply(@Nullable Image input) {
+				return input.getId();
+			}
+		});
+		
+		final ImmutableMap.Builder<String, DisplayImage> b = ImmutableMap.builder();
+		for (SocialPerson person : people) {
+			final Image image = person.getPhotoId() != null ? imageMap.get(person.getPhotoId()) : null;
+			final Gender gender = person.getGender();
+			
+			final DisplayImage displayImage = grabDisplayPhoto(namespace, imageRepo.getStyles(),
+					person.getPhotoId(), style, image, gender);
+			
+			b.put(person.getId(), displayImage);
+		}
+		return b.build();
 	}
 
 	public String getPersonPhotoUri(@Nullable Gender gender) {
