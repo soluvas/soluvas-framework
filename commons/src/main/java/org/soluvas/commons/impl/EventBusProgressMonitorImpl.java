@@ -27,6 +27,7 @@ import com.google.common.eventbus.EventBus;
  *
  * @generated
  */
+@SuppressWarnings("serial")
 public class EventBusProgressMonitorImpl extends ProgressMonitorImpl implements EventBusProgressMonitor {
 	
 	protected double totalWork = 100.0;
