@@ -3,7 +3,6 @@ package org.soluvas.mongo;
 import java.util.List;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Direction;
@@ -20,7 +19,6 @@ import com.mongodb.DBObject;
  * @author ceefour
  *
  */
-@ParametersAreNonnullByDefault
 public class MongoUtils {
 
 	/**
