@@ -74,11 +74,11 @@ public class TermManagerImpl implements TermManager {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public List<Term> findTerms(final String attributeTypeNsPrefix, final String attributeTypeName) {
+	public List<Term> findTerms(final String kindNsPrefix, final String kindName) {
 		final List<Term> terms = ImmutableList.copyOf(Iterables.filter(dataCatalog.getTerms(), new Predicate<Term>() {
 			@Override
 			public boolean apply(@Nullable Term input) {
-				return Objects.equal(input.getNsPrefix(), attributeTypeNsPrefix) && Objects.equal(input.getKindName(), attributeTypeName);
+				return Objects.equal(input.getKindNsPrefix(), kindNsPrefix) && Objects.equal(input.getKindName(), kindName);
 			}
 		}));
 		return terms;

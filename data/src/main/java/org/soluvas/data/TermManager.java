@@ -45,7 +45,7 @@ public interface TermManager {
 	 * @model dataType="org.soluvas.commons.List<org.soluvas.data.Term>" many="false"
 	 * @generated
 	 */
-	List<Term> findTerms(String attributeTypeNsPrefix, String attributeTypeName);
+	List<Term> findTerms(String kindNsPrefix, String kindName);
 
 	/**
 	 * <!-- begin-user-doc -->
