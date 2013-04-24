@@ -139,5 +139,11 @@ public class ProgressMonitorWrapperImpl extends ProgressMonitorImpl implements P
 		if (delegate != null)
 			delegate.worked(work, status);
 	}
+	
+	@Override
+	public void subTask(String name) {
+		if (delegate != null)
+			delegate.subTask(name);
+	}
 
 } //ProgressMonitorWrapperImpl
