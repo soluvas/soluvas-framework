@@ -54,7 +54,7 @@ public class SecurityCatalogXmiTracker implements BundleTrackerCustomizer<List<S
 	private final String tenantId;
 	private final String tenantEnv;
 	
-	public SecurityCatalogXmiTracker(@Nonnull String tenantId, @Nonnull String tenantEnv) {
+	public SecurityCatalogXmiTracker(String tenantId, String tenantEnv) {
 		super();
 		this.tenantId = tenantId;
 		this.tenantEnv = tenantEnv;
@@ -62,8 +62,8 @@ public class SecurityCatalogXmiTracker implements BundleTrackerCustomizer<List<S
 
 	@Override
 	@Nullable
-	public List<ServiceRegistration<Supplier>> addingBundle(@Nonnull Bundle bundle,
-			@Nonnull BundleEvent event) {
+	public List<ServiceRegistration<Supplier>> addingBundle(Bundle bundle,
+			BundleEvent event) {
 		final String path = bundle.getSymbolicName().replace('.', '/');
 		final String filePattern = "*.SecurityCatalog.xmi";
 		log.trace("Scanning {} [{}] for {}/{}", bundle.getSymbolicName(), bundle.getBundleId(),
@@ -93,12 +93,12 @@ public class SecurityCatalogXmiTracker implements BundleTrackerCustomizer<List<S
 	}
 
 	@Override
-	public void modifiedBundle(@Nonnull Bundle bundle, @Nonnull BundleEvent event,
+	public void modifiedBundle(Bundle bundle, BundleEvent event,
 			@Nullable List<ServiceRegistration<Supplier>> object) {
 	}
 
 	@Override
-	public void removedBundle(@Nonnull Bundle bundle, @Nonnull BundleEvent event,
+	public void removedBundle(Bundle bundle, BundleEvent event,
 			@Nullable List<ServiceRegistration<Supplier>> svcRegs) {
 		if (svcRegs == null)
 			return;

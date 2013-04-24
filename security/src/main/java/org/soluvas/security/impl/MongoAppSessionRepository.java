@@ -176,7 +176,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 	}
 
 	@Override
-	public <S extends AppSession> S add(@Nonnull final S appSession) {
+	public <S extends AppSession> S add(final S appSession) {
 		Preconditions.checkNotNull(appSession, "Cannot add null AppSession");
 		Preconditions.checkNotNull(appSession.getId(), "Cannot add AppSession with null ID");
 		log.info("Insert AppSession {} for {} with User Agent: {} (dated: {})",
@@ -190,7 +190,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 	}
 
 	@Override
-	public <S extends AppSession> S modify(@Nonnull final String id, @Nonnull final S appSession) {
+	public <S extends AppSession> S modify(final String id, final S appSession) {
 		log.debug("Updating AppSession for {} to {} (modificationTime={})",
 				id, appSession.getStatus(), appSession.getModificationTime() );
 		final DBObject obj = new ToDBObject().apply(appSession);

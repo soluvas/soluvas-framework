@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -21,6 +20,9 @@ import org.soluvas.commons.tenant.TenantRef;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.google.common.base.Preconditions;
 import com.google.common.cache.Cache;
@@ -32,19 +34,31 @@ import com.google.common.cache.CacheBuilder;
  * Which means tenant is read per request.
  * @author rudi
  */
-@Configuration @Scope("request")
+@Configuration
 public class MultiTenantWebConfig {
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(MultiTenantWebConfig.class);
-	@Inject
-	private HttpServletRequest request;
+//	@Inject
+//	private HttpServletRequest request;
 	private static final Cache<String, AppManifest> appManifestCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build();
-	private static final Cache<String, WebAddress> webAddressCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build(); 
+	private static final Cache<String, WebAddress> webAddressCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build();
 	
-	@Bean @Scope("request")
+//	@Inject
+//	private BeanFactory beanFactory;
+	
+	/**
+	 * @todo Replace with annotation https://jira.springsource.org/browse/SPR-5192 when it's supported.
+	 * @return
+	 */
+	public HttpServletRequest getRequest() {
+		return ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+//		return beanFactory.getBean(HttpServletRequest.class); // doesn't work
+	}
+	
+	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
 	public TenantRef tenantRef() {
-		String pathInfo = request.getPathInfo();
+		String pathInfo = getRequest().getPathInfo();
 //		final String contextPath = Preconditions.checkNotNull(servletContext, "Cannot inject ServletContext")
 //				.getContextPath();
 		final Matcher tenantMatcher = Pattern.compile("\\/t/([^/]+)/([^/]+).*").matcher(pathInfo);
@@ -57,12 +71,12 @@ public class MultiTenantWebConfig {
 		return tenant;
 	}
 	
-	@Bean @DataFolder @Scope("request")
+	@Bean @DataFolder @Scope(value="request")
 	public String dataFolder() {
 		return System.getProperty("user.home") + "/" + tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv();
 	}
 	
-	@Bean @Scope("request")
+	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	public AppManifest appManifest() throws ExecutionException {
 		final String tenantKey = tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv();
 		return appManifestCache.get(tenantKey, new Callable<AppManifest>() {
@@ -74,7 +88,7 @@ public class MultiTenantWebConfig {
 		});
 	}
 	
-	@Bean @Scope("request")
+	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	public WebAddress webAddress() throws ExecutionException {
 		final String tenantKey = tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv();
 		return webAddressCache.get(tenantKey, new Callable<WebAddress>() {

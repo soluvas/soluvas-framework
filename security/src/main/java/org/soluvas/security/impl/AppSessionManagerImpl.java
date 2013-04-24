@@ -144,8 +144,8 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 * 
 	 * @return
 	 */
-	public Subject getSubject(@Nonnull final HttpServletRequest httpRequest,
-			@Nonnull final HttpServletResponse httpResponse) {
+	public Subject getSubject(final HttpServletRequest httpRequest,
+			final HttpServletResponse httpResponse) {
 		Subject subject = ThreadContext.getSubject();
 		if (subject == null) {
 			log.debug("Binding thread {} to Request {} using SecurityManager {}",
@@ -172,7 +172,7 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 * 
 	 * @return
 	 */
-	public Session requireSession(@Nonnull final HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+	public Session requireSession(final HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
 		final Session session = getSubject(httpRequest, httpResponse).getSession(false);
 		if (session == null) {
 			throw new NotLoggedInException(String.format("Cannot get security session for %s Request: %s",

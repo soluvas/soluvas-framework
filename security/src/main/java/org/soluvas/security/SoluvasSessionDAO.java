@@ -34,7 +34,7 @@ public class SoluvasSessionDAO implements SessionDAO {
 	 */
 	private final Map<String, Map<String, Object>> extraAttributes = Maps.newConcurrentMap();
 
-	public SoluvasSessionDAO(@Nonnull final AppSessionRepository appSessionRepo) {
+	public SoluvasSessionDAO(final AppSessionRepository appSessionRepo) {
 		this.appSessionRepo = appSessionRepo;
 	}
 
@@ -42,7 +42,7 @@ public class SoluvasSessionDAO implements SessionDAO {
 	 * @see org.apache.shiro.session.mgt.eis.SessionDAO#create(org.apache.shiro.session.Session)
 	 */
 	@Override
-	public Serializable create(@Nonnull final Session session) {
+	public Serializable create(final Session session) {
 		log.debug("Creating Shiro Session {}", session.getId());
 		final AppSession appSession = new AppSession.FromSession().apply(session);
 		final AppSession added = appSessionRepo.add(appSession);
@@ -73,7 +73,7 @@ public class SoluvasSessionDAO implements SessionDAO {
 	 * @see org.apache.shiro.session.mgt.eis.SessionDAO#readSession(java.io.Serializable)
 	 */
 	@Override
-	public Session readSession(@Nonnull final Serializable sessionId)
+	public Session readSession(final Serializable sessionId)
 			throws UnknownSessionException {
 		log.trace("Reading Shiro Session {}", sessionId);
 		appSessionRepo.touch((String) sessionId);
@@ -94,7 +94,7 @@ public class SoluvasSessionDAO implements SessionDAO {
 	 * @see org.apache.shiro.session.mgt.eis.SessionDAO#update(org.apache.shiro.session.Session)
 	 */
 	@Override
-	public void update(@Nonnull final Session session) throws UnknownSessionException {
+	public void update(final Session session) throws UnknownSessionException {
 		log.debug("Updating Shiro Session {}", session.getId());
 		final AppSession newAppSession = new AppSession.FromSession().apply(session);
 		newAppSession.setAccessTime(new DateTime());

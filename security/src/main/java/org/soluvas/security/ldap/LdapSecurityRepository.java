@@ -120,7 +120,6 @@ public class LdapSecurityRepository implements SecurityRepository {
 	/* (non-Javadoc)
 	 * @see org.soluvas.web.login.SecurityRepository#getGroupsRdn()
 	 */
-	@Override
 	public String getGroupsRdn() {
 		return groupsRdn;
 	}
@@ -136,7 +135,6 @@ public class LdapSecurityRepository implements SecurityRepository {
 	/* (non-Javadoc)
 	 * @see org.soluvas.web.login.SecurityRepository#getLdapPool()
 	 */
-	@Override
 	public ObjectPool<LdapConnection> getLdapPool() {
 		return ldapPool;
 	}
@@ -156,7 +154,7 @@ public class LdapSecurityRepository implements SecurityRepository {
 	}
 
 	@Override
-	public void replaceRoleMembers(@Nonnull final String role, @Nonnull final Set<String> personIds) {
+	public void replaceRoleMembers(final String role, final Set<String> personIds) {
 		LdapUtils.withConnection(ldapPool,
 				new Function<LdapConnection, Void>() {
 			@Override @Nullable
@@ -197,7 +195,7 @@ public class LdapSecurityRepository implements SecurityRepository {
 	}
 
 	@Override
-	public void addRole(@Nonnull final String name, @Nullable final String description, @Nullable final Set<String> personIds) {
+	public void addRole(final String name, @Nullable final String description, @Nullable final Set<String> personIds) {
 		roleRepository.addRole(name, description);
 		replaceRoleMembers(name, personIds);
 	}
@@ -209,7 +207,7 @@ public class LdapSecurityRepository implements SecurityRepository {
 	}
 
 	@Override
-	public void ensureRoles(@Nonnull Collection<Role> roles) {
+	public void ensureRoles(Collection<Role> roles) {
 		log.trace("Ensuring {} roles exist", roles.size());
 		long skipped = 0;
 		long added = 0;

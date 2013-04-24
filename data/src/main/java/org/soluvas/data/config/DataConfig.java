@@ -1,4 +1,4 @@
-package org.soluvas.data;
+package org.soluvas.data.config;
 
 import javax.inject.Inject;
 
@@ -6,6 +6,12 @@ import org.soluvas.commons.AggregatingSupplier;
 import org.soluvas.commons.DataFolder;
 import org.soluvas.commons.DelegatingSupplier;
 import org.soluvas.commons.SupplierXmiClasspathScanner;
+import org.soluvas.data.DataCatalog;
+import org.soluvas.data.DataFactory;
+import org.soluvas.data.DataPackage;
+import org.soluvas.data.MixinManager;
+import org.soluvas.data.TermManager;
+import org.soluvas.data.DataPackage.Literals;
 import org.soluvas.data.impl.MixinManagerImpl;
 import org.soluvas.data.impl.TermManagerImpl;
 import org.springframework.context.annotation.Bean;

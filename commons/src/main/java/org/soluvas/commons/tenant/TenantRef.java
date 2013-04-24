@@ -15,6 +15,14 @@ public class TenantRef implements Serializable {
 	private String tenantId;
 	private String tenantEnv;
 	
+	/**
+	 * make it CGLIB-proxiable.
+	 * @todo use interfaces instead.
+	 */
+	public TenantRef() {
+		super();
+	}
+	
 	public TenantRef(String clientId, String tenantId, String tenantEnv) {
 		super();
 		this.clientId = clientId;

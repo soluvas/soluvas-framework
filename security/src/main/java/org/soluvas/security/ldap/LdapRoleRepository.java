@@ -65,7 +65,7 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 		this.domainBase = domainBase;
 	}
 
-	protected void addRole(@Nonnull final String name, @Nullable final String description) {
+	protected void addRole(final String name, @Nullable final String description) {
 		LdapUtils.withConnection(ldapPool,
 				new Function<LdapConnection, Void>() {
 			@Override @Nullable

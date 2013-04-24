@@ -6,8 +6,6 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.apache.commons.pool.ObjectPool;
-import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.ldap.Person;
@@ -24,14 +22,14 @@ public interface SecurityRepository {
 	 * Returns a {@link Role} {@link CrudRepository} where roles can be added and removed.
 	 * @return
 	 */
-	@Nonnull CrudRepository<Role, String> getRoleRepository();
+	CrudRepository<Role, String> getRoleRepository();
 	
 	/**
 	 * Give a Person ID, return their roles in the LDAP repository.
 	 * @param personId
 	 * @return
 	 */
-	Set<String> getPersonRoles(@Nonnull final String personId);
+	Set<String> getPersonRoles(final String personId);
 
 	/**
 	 * Return the list of <strong>physical</strong> members (person IDs) of a particular <strong>physical</strong> role.
@@ -41,21 +39,21 @@ public interface SecurityRepository {
 	 * @param role
 	 * @return
 	 */
-	Set<String> getRoleMembers(@Nonnull final String role);
+	Set<String> getRoleMembers(final String role);
 	
 	/**
 	 * Replace all roles of a {@link Person} with specified {@link Role} names.
 	 * @param personId
 	 * @param roles
 	 */
-	void replacePersonRoles(@Nonnull final String personId, @Nonnull final Set<String> roles);
+	void replacePersonRoles(final String personId, final Set<String> roles);
 
 	/**
 	 * Replace all members of a {@link Role} with specified {@link Person} IDs.
 	 * @param role
 	 * @param personId
 	 */
-	void replaceRoleMembers(@Nonnull final String role, @Nonnull final Set<String> personIds);
+	void replaceRoleMembers(final String role, final Set<String> personIds);
 	
 	/**
 	 * Add a role to the <strong>repository</strong>. Note that this is different that security dictionary.
@@ -66,13 +64,13 @@ public interface SecurityRepository {
 	 * @param personIds TODO
 	 */
 	@Deprecated
-	void addRole(@Nonnull final String name, @Nullable final String description, @Nullable final Set<String> personIds);
+	void addRole(final String name, @Nullable final String description, @Nullable final Set<String> personIds);
 
 	/**
 	 * Make sure all the requested {@link Role}s exist in the repository.
 	 * @param roles
 	 */
-	void ensureRoles(@Nonnull final Collection<Role> roles);
+	void ensureRoles(final Collection<Role> roles);
 	
 	/**
 	 * @deprecated shouldn't be here
@@ -84,19 +82,7 @@ public interface SecurityRepository {
 	 * @deprecated shouldn't be here
 	 */
 	@Deprecated
-	public abstract String getGroupsRdn();
-
-	/**
-	 * @deprecated shouldn't be here
-	 */
-	@Deprecated
 	public abstract LdapConnectionConfig getBindConfig();
-
-	/**
-	 * @deprecated shouldn't be here
-	 */
-	@Deprecated
-	public abstract ObjectPool<LdapConnection> getLdapPool();
 
 	/**
 	 * @deprecated shouldn't be here
