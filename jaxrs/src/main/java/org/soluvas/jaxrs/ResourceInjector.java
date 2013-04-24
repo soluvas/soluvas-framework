@@ -17,6 +17,7 @@ import org.soluvas.commons.inject.Namespace;
 import org.soluvas.commons.inject.Supplied;
 import org.soluvas.commons.inject.Supplied.Layer;
 import org.soluvas.commons.tenant.TenantRef;
+import org.soluvas.commons.tenant.TenantRefImpl;
 import org.soluvas.commons.tenant.TenantUtils;
 
 import com.google.common.base.Throwables;
@@ -200,7 +201,7 @@ public class ResourceInjector {
 			String tenantEnv) {
 		super();
 		this.bundleContext = bundleContext;
-		this.tenant = new TenantRef(null, tenantId, tenantEnv);
+		this.tenant = new TenantRefImpl(null, tenantId, tenantEnv);
 	}
 
 	protected List<Field> getAllDeclaredFields(Class<?> clazz) {

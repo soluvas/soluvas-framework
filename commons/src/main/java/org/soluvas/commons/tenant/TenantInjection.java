@@ -26,7 +26,7 @@ import org.soluvas.commons.inject.Namespace;
 import com.google.common.base.Throwables;
 
 /**
- * Base implementation to injects {@link Inject} {@link TenantRef} services using lifecycle methods
+ * Base implementation to injects {@link Inject} {@link TenantRefImpl} services using lifecycle methods
  * inject and uninject.
  * @author ceefour
  */

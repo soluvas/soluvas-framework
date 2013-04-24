@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Cpu;
 import org.soluvas.commons.Network;
-import org.soluvas.commons.tenant.TenantRef;
+import org.soluvas.commons.tenant.TenantRefImpl;
 import org.soluvas.commons.util.AppUtils;
 import org.soluvas.json.EmfModule;
 import org.soluvas.json.JacksonMapperFactory;
@@ -43,7 +43,7 @@ import com.google.common.eventbus.EventBus;
  * Replacement of OSGI-INF/blueprint/commons.xml
  * for Spring applications.
  * Requires {@link ServletContext} aka WebApplicationContext
- * to determine the {@link TenantRef} hence, <code>dataDir</code>.
+ * to determine the {@link TenantRefImpl} hence, <code>dataDir</code>.
  * @author rudi
  */
 @Configuration @Lazy

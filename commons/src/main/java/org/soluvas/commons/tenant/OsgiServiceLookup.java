@@ -97,7 +97,7 @@ public class OsgiServiceLookup implements ServiceLookup {
 	}
 
 	/**
-	 * Get {@link TenantRef} for provided {@link CommandSession}.
+	 * Get {@link TenantRefImpl} for provided {@link CommandSession}.
 	 * 
 	 * @return
 	 */
@@ -107,7 +107,7 @@ public class OsgiServiceLookup implements ServiceLookup {
 		final String clientId = null;
 		final String tenantEnv = null;
 		final String tenantId = null;
-		return new TenantRef(clientId, tenantId, tenantEnv);
+		return new TenantRefImpl(clientId, tenantId, tenantEnv);
 	}
 
 	/**

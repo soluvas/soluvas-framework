@@ -2,75 +2,23 @@ package org.soluvas.commons.tenant;
 
 import java.io.Serializable;
 
-import com.google.common.base.Strings;
-
-/**
- * @author ceefour
- *
- */
-@SuppressWarnings("serial")
-public class TenantRef implements Serializable {
-
-	private String clientId;
-	private String tenantId;
-	private String tenantEnv;
-	
-	/**
-	 * make it CGLIB-proxiable.
-	 * @todo use interfaces instead.
-	 */
-	public TenantRef() {
-		super();
-	}
-	
-	public TenantRef(String clientId, String tenantId, String tenantEnv) {
-		super();
-		this.clientId = clientId;
-		this.tenantId = tenantId;
-		this.tenantEnv = tenantEnv;
-	}
+public interface TenantRef extends Serializable {
 
 	/**
 	 * Client ID is usually null. Only used by shell-based tenant usage.
 	 * 
 	 * @return
 	 */
-	public String getClientId() {
-		return clientId;
-	}
+	public abstract String getClientId();
 
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
-	}
+	public abstract String getTenantId();
 
-	public String getTenantId() {
-		return tenantId;
-	}
+	public abstract String getTenantEnv();
 
-	public void setTenantId(String tenantId) {
-		this.tenantId = tenantId;
-	}
-
-	public String getTenantEnv() {
-		return tenantEnv;
-	}
-
-	public void setTenantEnv(String tenantEnv) {
-		this.tenantEnv = tenantEnv;
-	}
-	
 	/**
 	 * Returns e.g. <code>tuneeca_dev</code>.
 	 * @return
 	 */
-	public String getKey() {
-		return Strings.nullToEmpty(tenantId) + "_" + Strings.nullToEmpty(tenantEnv);
-	}
+	public abstract String getKey();
 
-	@Override
-	public String toString() {
-		return "TenantRef [tenantId=" + tenantId + ", tenantEnv=" + tenantEnv
-				+ "]";
-	}
-	
 }

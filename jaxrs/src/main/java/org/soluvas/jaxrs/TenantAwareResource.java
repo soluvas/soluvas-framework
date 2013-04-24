@@ -21,12 +21,13 @@ import org.soluvas.commons.inject.Namespace;
 import org.soluvas.commons.inject.Supplied;
 import org.soluvas.commons.tenant.TenantInjection;
 import org.soluvas.commons.tenant.TenantRef;
+import org.soluvas.commons.tenant.TenantRefImpl;
 import org.soluvas.commons.tenant.TenantServiceProxy;
 
 import com.google.common.base.Supplier;
 
 /**
- * JAX-RS Resource base class for {@link TenantRef}-aware
+ * JAX-RS Resource base class for {@link TenantRefImpl}-aware
  * resources.
  * 
  * <p>Inspired by org.soluvas.web.site.ProxyTenantInjector.
@@ -84,7 +85,7 @@ public class TenantAwareResource {
 	 */
 	public TenantAwareResource(final BundleContext bundleContext, final String clientId, final String tenantId, final String tenantEnv) {
 		super();
-		tenant = new TenantRef(clientId, tenantId, tenantEnv);
+		tenant = new TenantRefImpl(clientId, tenantId, tenantEnv);
 		injectSupplied(bundleContext, tenantId, tenantEnv);
 		tenantInjection = new TenantInjection(bundleContext, tenantId, tenantEnv);
 		injectDependencies(bundleContext, tenantId, tenantEnv);

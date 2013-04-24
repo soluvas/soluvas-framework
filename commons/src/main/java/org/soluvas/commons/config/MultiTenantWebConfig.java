@@ -17,6 +17,7 @@ import org.soluvas.commons.DataFolder;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.XmiObjectLoader;
 import org.soluvas.commons.tenant.TenantRef;
+import org.soluvas.commons.tenant.TenantRefImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -56,7 +57,7 @@ public class MultiTenantWebConfig {
 //		return beanFactory.getBean(HttpServletRequest.class); // doesn't work
 	}
 	
-	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
+	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	public TenantRef tenantRef() {
 		String pathInfo = getRequest().getPathInfo();
 //		final String contextPath = Preconditions.checkNotNull(servletContext, "Cannot inject ServletContext")
@@ -65,7 +66,7 @@ public class MultiTenantWebConfig {
 		Preconditions.checkState(tenantMatcher.matches(),
 				"Path info %s must match pattern: /t/{tenantId}/{tenantEnv}",
 				pathInfo);
-		final TenantRef tenant = new TenantRef(tenantMatcher.group(1), tenantMatcher.group(1), tenantMatcher.group(2));
+		final TenantRef tenant = new TenantRefImpl(tenantMatcher.group(1), tenantMatcher.group(1), tenantMatcher.group(2));
 		log.debug("Multi-tenant Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
 				pathInfo, tenant.getClientId(), tenant.getTenantId(), tenant.getTenantEnv() );
 		return tenant;

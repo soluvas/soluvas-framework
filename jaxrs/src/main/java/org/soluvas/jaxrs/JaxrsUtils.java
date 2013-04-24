@@ -12,6 +12,7 @@ import org.osgi.framework.FrameworkUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.tenant.TenantRef;
+import org.soluvas.commons.tenant.TenantRefImpl;
 
 /**
  * @author ceefour
@@ -58,7 +59,7 @@ public class JaxrsUtils {
 			log.warn("REST path {} does not conform to multitenant REST API pattern", pathInfo);
 			return null;
 		}
-		final TenantRef tenantRef = new TenantRef(null, apiPathMatcher.group(1),
+		final TenantRef tenantRef = new TenantRefImpl(null, apiPathMatcher.group(1),
 				apiPathMatcher.group(2));
 		log.trace("REST path {} is for {}", pathInfo, tenantRef);
 		return tenantRef;

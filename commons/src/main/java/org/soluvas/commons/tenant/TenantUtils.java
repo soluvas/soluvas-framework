@@ -55,7 +55,7 @@ public class TenantUtils {
 
 	/**
 	 * Get OSGi {@link ServiceReference} scoped to the provided
-	 * {@link TenantRef}.
+	 * {@link TenantRefImpl}.
 	 * 
 	 * @param iface
 	 * @param namespace
@@ -115,7 +115,7 @@ public class TenantUtils {
 	}
 	
 	/**
-	 * Get {@link TenantRef} for provided {@link CommandSession}.
+	 * Get {@link TenantRefImpl} for provided {@link CommandSession}.
 	 * 
 	 * @return
 	 */

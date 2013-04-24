@@ -15,6 +15,7 @@ import org.soluvas.commons.DataFolder;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.XmiObjectLoader;
 import org.soluvas.commons.tenant.TenantRef;
+import org.soluvas.commons.tenant.TenantRefImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -42,7 +43,7 @@ public class SingleTenantWebConfig {
 		Preconditions.checkState(tenantMatcher.matches(),
 				"ContextPath %s must match pattern: /{tenantId}_{tenantEnv}_{appCode}",
 				contextPath);
-		final TenantRef tenant = new TenantRef(tenantMatcher.group(1), tenantMatcher.group(1), tenantMatcher.group(2));
+		final TenantRef tenant = new TenantRefImpl(tenantMatcher.group(1), tenantMatcher.group(1), tenantMatcher.group(2));
 		log.info("Single-tenant Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={} appCode={}",
 				contextPath, tenant.getClientId(), tenant.getTenantId(), tenant.getTenantEnv(), tenantMatcher.group(3));
 		return tenant;

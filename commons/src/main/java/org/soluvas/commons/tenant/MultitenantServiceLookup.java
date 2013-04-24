@@ -115,7 +115,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	}
 
 	/**
-	 * Get {@link TenantRef} for provided {@link CommandSession}.
+	 * Get {@link TenantRefImpl} for provided {@link CommandSession}.
 	 * 
 	 * @return
 	 */
@@ -128,7 +128,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 				(String) session.get("tenantEnv")).or(defaultTenantEnv);
 		final String tenantId = Optional.fromNullable(
 				(String) session.get("tenantId")).or(defaultClientId);
-		return new TenantRef(clientId, tenantId, tenantEnv);
+		return new TenantRefImpl(clientId, tenantId, tenantEnv);
 	}
 
 	/**
