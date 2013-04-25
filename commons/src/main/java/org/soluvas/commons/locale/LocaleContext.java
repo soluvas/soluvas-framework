@@ -15,6 +15,8 @@ import org.joda.money.format.MoneyFormatter;
 import org.joda.money.format.MoneyFormatterBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.ReadableInstant;
+import org.joda.time.ReadablePartial;
 import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,12 +91,20 @@ public class LocaleContext {
 	// medium time: hour minute second
 	
 	@Nullable
-	public String formatShortDateTime(@Nullable DateTime time) {
-		if (time == null)
+	public String formatShortDateTime(@Nullable ReadableInstant instant) {
+		if (instant == null)
 			return null;
 		else
 			return DateTimeFormat.shortDateTime().withLocale(getLocale()).withZone(getTimeZone())
-				.print(time);
+				.print(instant);
+	}
+
+	public String formatShortDate(@Nullable ReadablePartial partial) {
+		if (partial == null)
+			return "";
+		else
+			return DateTimeFormat.shortDate().withLocale(getLocale()).withZone(getTimeZone())
+				.print(partial);
 	}
 
 	@Nullable
@@ -111,12 +121,12 @@ public class LocaleContext {
 	 * We have workarounds to render proper WIB/WITA/WIT on Indonesian locale.
 	 * 
 	 * @param personId
-	 * @param time
+	 * @param instant
 	 * @return
 	 */
 	@Nullable
-	public String formatLongDateTime(@Nullable DateTime time) {
-		if (time == null)
+	public String formatLongDateTime(@Nullable ReadableInstant instant) {
+		if (instant == null)
 			return null;
 		final Locale locale = getLocale();
 		final DateTimeZone tz = getTimeZone();
@@ -134,15 +144,15 @@ public class LocaleContext {
 				//if Locale is in_ID and Timezone is unknown
 				//append a new formatter with 'z'
 				suffix = " " + DateTimeFormat.forPattern("z").withLocale(locale).withZone(tz)
-						.print(time);
+						.print(instant);
 			}
 		} else if (locale.equals(new Locale("in"))) {
 			 //if Locale is "in" without and language code is not "ID", show warning
 			log.warn("Using incomplete locale {} in {} to format {}, please use in_ID!", new Object[] {
-					locale, tz, time });
+					locale, tz, instant });
 		}
-		return DateTimeFormat.fullDate().withLocale(locale).withZone(tz).print(time) +
-				" " + DateTimeFormat.shortTime().withLocale(locale).withZone(tz).print(time) + suffix;
+		return DateTimeFormat.fullDate().withLocale(locale).withZone(tz).print(instant) +
+				" " + DateTimeFormat.shortTime().withLocale(locale).withZone(tz).print(instant) + suffix;
 	}
 
 	@Nullable

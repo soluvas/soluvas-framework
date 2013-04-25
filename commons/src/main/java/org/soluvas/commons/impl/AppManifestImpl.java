@@ -6,9 +6,11 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.joda.time.DateTimeZone;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
@@ -35,6 +37,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getOrganizationAddress <em>Organization Address</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterSalutation <em>Letter Salutation</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterClosing <em>Letter Closing</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultTimeZone <em>Default Time Zone</em>}</li>
  * </ul>
  * </p>
  *
@@ -305,6 +308,26 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * @ordered
 	 */
 	protected String letterClosing = LETTER_CLOSING_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDefaultTimeZone() <em>Default Time Zone</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultTimeZone()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DEFAULT_TIME_ZONE_EDEFAULT = "UTC";
+
+	/**
+	 * The cached value of the '{@link #getDefaultTimeZone() <em>Default Time Zone</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultTimeZone()
+	 * @generated
+	 * @ordered
+	 */
+	protected String defaultTimeZone = DEFAULT_TIME_ZONE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -623,6 +646,27 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDefaultTimeZone() {
+		return defaultTimeZone;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefaultTimeZone(String newDefaultTimeZone) {
+		String oldDefaultTimeZone = defaultTimeZone;
+		defaultTimeZone = newDefaultTimeZone;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE, oldDefaultTimeZone, defaultTimeZone));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -652,6 +696,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return getLetterSalutation();
 			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
 				return getLetterClosing();
+			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE:
+				return getDefaultTimeZone();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -702,6 +748,9 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return;
 			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
 				setLetterClosing((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE:
+				setDefaultTimeZone((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -754,6 +803,9 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
 				setLetterClosing(LETTER_CLOSING_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE:
+				setDefaultTimeZone(DEFAULT_TIME_ZONE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -792,6 +844,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return LETTER_SALUTATION_EDEFAULT == null ? letterSalutation != null : !LETTER_SALUTATION_EDEFAULT.equals(letterSalutation);
 			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
 				return LETTER_CLOSING_EDEFAULT == null ? letterClosing != null : !LETTER_CLOSING_EDEFAULT.equals(letterClosing);
+			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE:
+				return DEFAULT_TIME_ZONE_EDEFAULT == null ? defaultTimeZone != null : !DEFAULT_TIME_ZONE_EDEFAULT.equals(defaultTimeZone);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -880,6 +934,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 		result.append(letterSalutation);
 		result.append(", letterClosing: ");
 		result.append(letterClosing);
+		result.append(", defaultTimeZone: ");
+		result.append(defaultTimeZone);
 		result.append(')');
 		return result.toString();
 	}

@@ -2,6 +2,8 @@
  */
 package org.soluvas.commons;
 
+import org.joda.time.DateTimeZone;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +25,7 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationAddress <em>Organization Address</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getLetterSalutation <em>Letter Salutation</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getLetterClosing <em>Letter Closing</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDefaultTimeZone <em>Default Time Zone</em>}</li>
  * </ul>
  * </p>
  *
@@ -264,5 +267,32 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 	 * @generated
 	 */
 	void setLetterClosing(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Default Time Zone</b></em>' attribute.
+	 * The default value is <code>"UTC"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Default time zone for the application. For example this is used by perpetual inventory to store dates with a fixed reference timezone.
+	 * It's a String, not a DateTimeZone object, to make it easier to edit the *.AppManifest.xmi file using generic EMF editor.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Default Time Zone</em>' attribute.
+	 * @see #setDefaultTimeZone(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultTimeZone()
+	 * @model default="UTC"
+	 * @generated
+	 */
+	String getDefaultTimeZone();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDefaultTimeZone <em>Default Time Zone</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default Time Zone</em>' attribute.
+	 * @see #getDefaultTimeZone()
+	 * @generated
+	 */
+	void setDefaultTimeZone(String value);
 
 } // AppManifest
