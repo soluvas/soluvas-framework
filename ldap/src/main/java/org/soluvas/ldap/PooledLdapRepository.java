@@ -62,7 +62,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 		this.entityClass = entityClass;
 		this.pool = pool;
 		this.baseDn = baseDn;
-		this.mapper = new LdapMapper<T>();
+		this.mapper = new LdapMapper<>();
 	}
 	
 	protected <V> V withConnection(final Function<LdapConnection, V> function) {
