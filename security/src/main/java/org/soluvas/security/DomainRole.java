@@ -2,6 +2,8 @@
  */
 package org.soluvas.security;
 
+import org.soluvas.commons.Describable;
+import org.soluvas.commons.Nameable;
 import org.soluvas.commons.ResourceAware;
 
 /**
@@ -22,7 +24,6 @@ import org.soluvas.commons.ResourceAware;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.security.DomainRole#getName <em>Name</em>}</li>
- *   <li>{@link org.soluvas.security.DomainRole#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.security.DomainRole#getDomain <em>Domain</em>}</li>
  * </ul>
  * </p>
@@ -31,7 +32,7 @@ import org.soluvas.commons.ResourceAware;
  * @model
  * @generated
  */
-public interface DomainRole extends ResourceAware {
+public interface DomainRole extends ResourceAware, Nameable, Describable {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -58,32 +59,6 @@ public interface DomainRole extends ResourceAware {
 	 * @generated
 	 */
 	void setName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Description</em>' attribute.
-	 * @see #setDescription(String)
-	 * @see org.soluvas.security.SecurityPackage#getDomainRole_Description()
-	 * @model
-	 * @generated
-	 */
-	String getDescription();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.security.DomainRole#getDescription <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Description</em>' attribute.
-	 * @see #getDescription()
-	 * @generated
-	 */
-	void setDescription(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Domain</b></em>' attribute.

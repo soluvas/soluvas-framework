@@ -2,31 +2,35 @@
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.felix.gogo.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.EObjectNameOrdering;
-import org.soluvas.commons.tenant.ServiceLookup;
+import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.security.Domain;
 import org.soluvas.security.SecurityCatalog;
-
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 /**
  * Shell command to list available {@link Domain}s.
  * 
  * @author ceefour
  */
+@Service @Scope("prototype")
 @Command(scope = "secd", name = "domainls", description = "List available Domains")
-public class SecdDomainLsCommand extends OsgiCommandSupport {
+public class SecdDomainLsCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(SecdDomainLsCommand.class);
 
-	private final ServiceLookup svcLookup;
-
-	public SecdDomainLsCommand(ServiceLookup svcLookup) {
+	private final SecurityCatalog securityCatalog;
+	
+	@Inject
+	public SecdDomainLsCommand(final SecurityCatalog securityCatalog) {
 		super();
-		this.svcLookup = svcLookup;
+		this.securityCatalog = securityCatalog;
 	}
 
 	/* (non-Javadoc)
@@ -36,12 +40,10 @@ public class SecdDomainLsCommand extends OsgiCommandSupport {
 	protected Object doExecute() throws Exception {
 		System.out.format("%3s | %-15s | %-40s | %s\n", "#", "Name",
 				"Source", "Description");
-		SecurityCatalog securityCatalog = svcLookup.getSupplied(
-				SecurityCatalog.class, session);
-		List<Domain> sortedDomains = new EObjectNameOrdering()
+		final List<Domain> sortedDomains = new EObjectNameOrdering()
 				.immutableSortedCopy(securityCatalog.getDomains());
 		int i = 0;
-		for (Domain it : sortedDomains) {
+		for (final Domain it : sortedDomains) {
 			// TODO: use locale settings to format date, currency, amount,
 			// "and", many
 			// TODO: format products

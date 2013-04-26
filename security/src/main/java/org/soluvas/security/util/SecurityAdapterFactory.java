@@ -7,7 +7,9 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.soluvas.commons.Describable;
 import org.soluvas.commons.Identifiable;
+import org.soluvas.commons.Nameable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
@@ -119,6 +121,14 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseResourceAware(ResourceAware object) {
 				return createResourceAwareAdapter();
+			}
+			@Override
+			public Adapter caseNameable(Nameable object) {
+				return createNameableAdapter();
+			}
+			@Override
+			public Adapter caseDescribable(Describable object) {
+				return createDescribableAdapter();
 			}
 			@Override
 			public Adapter caseIdentifiable(Identifiable object) {
@@ -303,6 +313,34 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createResourceAwareAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Nameable <em>Nameable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Nameable
+	 * @generated
+	 */
+	public Adapter createNameableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Describable <em>Describable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Describable
+	 * @generated
+	 */
+	public Adapter createDescribableAdapter() {
 		return null;
 	}
 

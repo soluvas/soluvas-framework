@@ -96,22 +96,22 @@ public interface SecurityPackage extends EPackage {
 	int ROLE__RESOURCE_NAME = CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
+	int ROLE__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Assign Mode</b></em>' attribute.
@@ -169,22 +169,22 @@ public interface SecurityPackage extends EPackage {
 	int DOMAIN_ROLE__RESOURCE_NAME = CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_ROLE__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_ROLE__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
+	int DOMAIN_ROLE__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ROLE__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Domain</b></em>' attribute.
@@ -242,22 +242,22 @@ public interface SecurityPackage extends EPackage {
 	int DOMAIN__RESOURCE_NAME = CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
+	int DOMAIN__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Domain</em>' class.
@@ -306,13 +306,22 @@ public interface SecurityPackage extends EPackage {
 	int ACTION__RESOURCE_NAME = CommonsPackage.RESOURCE_AWARE__RESOURCE_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
+	int ACTION__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -321,7 +330,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION__GLOBAL = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
+	int ACTION__GLOBAL = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Domains</b></em>' attribute list.
@@ -330,16 +339,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION__DOMAINS = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 3;
+	int ACTION__DOMAINS = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Action</em>' class.
@@ -927,17 +927,6 @@ public interface SecurityPackage extends EPackage {
 	EAttribute getRole_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.security.Role#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see org.soluvas.security.Role#getDescription()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Description();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.security.Role#getAssignMode <em>Assign Mode</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -970,17 +959,6 @@ public interface SecurityPackage extends EPackage {
 	EAttribute getDomainRole_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.security.DomainRole#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see org.soluvas.security.DomainRole#getDescription()
-	 * @see #getDomainRole()
-	 * @generated
-	 */
-	EAttribute getDomainRole_Description();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.security.DomainRole#getDomain <em>Domain</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1011,17 +989,6 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDomain_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.security.Domain#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see org.soluvas.security.Domain#getDescription()
-	 * @see #getDomain()
-	 * @generated
-	 */
-	EAttribute getDomain_Description();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.security.Action <em>Action</em>}'.
@@ -1065,17 +1032,6 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAction_Domains();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.security.Action#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see org.soluvas.security.Action#getDescription()
-	 * @see #getAction()
-	 * @generated
-	 */
-	EAttribute getAction_Description();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.security.SecurityCatalog <em>Catalog</em>}'.
@@ -1629,14 +1585,6 @@ public interface SecurityPackage extends EPackage {
 		EAttribute ROLE__NAME = eINSTANCE.getRole_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__DESCRIPTION = eINSTANCE.getRole_Description();
-
-		/**
 		 * The meta object literal for the '<em><b>Assign Mode</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1663,14 +1611,6 @@ public interface SecurityPackage extends EPackage {
 		EAttribute DOMAIN_ROLE__NAME = eINSTANCE.getDomainRole_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DOMAIN_ROLE__DESCRIPTION = eINSTANCE.getDomainRole_Description();
-
-		/**
 		 * The meta object literal for the '<em><b>Domain</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1695,14 +1635,6 @@ public interface SecurityPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DOMAIN__NAME = eINSTANCE.getDomain_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DOMAIN__DESCRIPTION = eINSTANCE.getDomain_Description();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.security.impl.ActionImpl <em>Action</em>}' class.
@@ -1737,14 +1669,6 @@ public interface SecurityPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ACTION__DOMAINS = eINSTANCE.getAction_Domains();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTION__DESCRIPTION = eINSTANCE.getAction_Description();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.security.impl.SecurityCatalogImpl <em>Catalog</em>}' class.

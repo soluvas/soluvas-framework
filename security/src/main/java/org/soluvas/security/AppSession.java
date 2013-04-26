@@ -375,10 +375,10 @@ public interface AppSession extends Identifiable, Timestamped, SchemaVersionable
 	 * @return the value of the '<em>User Agents</em>' attribute.
 	 * @see #setUserAgents(List)
 	 * @see org.soluvas.security.SecurityPackage#getAppSession_UserAgents()
-	 * @model dataType="org.soluvas.commons.List" many="false"
+	 * @model dataType="org.soluvas.commons.List<org.eclipse.emf.ecore.EString>" many="false"
 	 * @generated
 	 */
-	List getUserAgents();
+	List<String> getUserAgents();
 
 	/**
 	 * Sets the value of the '{@link org.soluvas.security.AppSession#getUserAgents <em>User Agents</em>}' attribute.
@@ -388,7 +388,7 @@ public interface AppSession extends Identifiable, Timestamped, SchemaVersionable
 	 * @see #getUserAgents()
 	 * @generated
 	 */
-	void setUserAgents(List value);
+	void setUserAgents(List<String> value);
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' map.

@@ -149,8 +149,9 @@ public class LdapSecurityRepository implements SecurityRepository {
 
 	@Override
 	public void replacePersonRoles(String personId, Set<String> roles) {
-		// TODO Auto-generated method stub
-		
+		log.info("Replacing all security roles of {} with: {}", personId, roles);
+		rolePersonAssoc.deleteAllLefts(personId);
+		rolePersonAssoc.put(roles, personId);
 	}
 
 	@Override
@@ -208,21 +209,22 @@ public class LdapSecurityRepository implements SecurityRepository {
 
 	@Override
 	public void ensureRoles(Collection<Role> roles) {
-		log.trace("Ensuring {} roles exist", roles.size());
-		long skipped = 0;
+		log.trace("Ensuring {} security roles exist", roles.size());
+		long updated = 0;
 		long added = 0;
 		for (Role role : roles) {
-			if (!roleRepository.exists(role.getName())) {
-				log.info("Adding role {}", role.getName());
+			if (roleRepository.exists(role.getName())) {
+				log.trace("Updating security role {}", role.getName());
+				roleRepository.modify(role.getName(), role);
+				updated++;
+			} else {
+				log.info("Adding security role {}", role.getName());
 				roleRepository.save(role);
 				added++;
-			} else {
-				log.trace("Skipping role {}", role.getName());
-				skipped++;
 			}
 		}
-		log.info("Ensured {} roles exist, added {}, skipped {}", roles.size(),
-				added, skipped);
+		log.info("Ensured {} security roles exist, added {}, updated {}", roles.size(),
+				added, updated);
 	}
 	
 }

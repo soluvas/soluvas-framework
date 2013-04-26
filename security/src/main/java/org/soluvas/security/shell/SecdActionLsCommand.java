@@ -2,14 +2,17 @@
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.felix.gogo.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.EObjectNameOrdering;
-import org.soluvas.commons.tenant.ServiceLookup;
+import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.security.Action;
 import org.soluvas.security.SecurityCatalog;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Joiner;
 
@@ -18,16 +21,18 @@ import com.google.common.base.Joiner;
  * 
  * @author ceefour
  */
+@Service @Scope("prototype")
 @Command(scope = "secd", name = "actionls", description = "List available Actions")
-public class SecdActionLsCommand extends OsgiCommandSupport {
+public class SecdActionLsCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(SecdActionLsCommand.class);
 
-	private final ServiceLookup svcLookup;
-
-	public SecdActionLsCommand(ServiceLookup svcLookup) {
+	private final SecurityCatalog securityCatalog;
+	
+	@Inject
+	public SecdActionLsCommand(final SecurityCatalog securityCatalog) {
 		super();
-		this.svcLookup = svcLookup;
+		this.securityCatalog = securityCatalog;
 	}
 
 	/* (non-Javadoc)
@@ -37,12 +42,10 @@ public class SecdActionLsCommand extends OsgiCommandSupport {
 	protected Object doExecute() throws Exception {
 		System.out.format("%3s | %-20s | %1s | %-20s | %-40s | %s\n", "#",
 				"Name", "G", "Domains", "Source", "Description");
-		SecurityCatalog securityCatalog = svcLookup.getSupplied(
-				SecurityCatalog.class, session);
-		List<Action> sortedActions = new EObjectNameOrdering()
+		final List<Action> sortedActions = new EObjectNameOrdering()
 				.immutableSortedCopy(securityCatalog.getActions());
 		int i = 0;
-		for (Action it : sortedActions) {
+		for (final Action it : sortedActions) {
 			// TODO: use locale settings to format date, currency, amount,
 			// "and", many
 			// TODO: format products

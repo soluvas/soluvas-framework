@@ -25,7 +25,6 @@ import org.soluvas.ldap.LdapUtils;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -41,20 +40,20 @@ public class SoluvasRealm extends AuthorizingRealm {
 
 	transient Logger log = LoggerFactory.getLogger(SoluvasRealm.class);
 
-	private final Supplier<SecurityCatalog> securityCatalogSupplier;
+	private final SecurityCatalog securityCatalog;
 	private final SecurityRepository securityRepo;
 
 	private final String usersDn;
 
 	/**
 	 * 
-	 * @param securityCatalogSupplier Why not generics? See https://issues.apache.org/jira/browse/ARIES-960
+	 * @param securityCatalog Why not generics? See https://issues.apache.org/jira/browse/ARIES-960
 	 * @param securityRepo
 	 */
-	public SoluvasRealm(Supplier securityCatalogSupplier,
+	public SoluvasRealm(SecurityCatalog securityCatalog,
 			SecurityRepository securityRepo) {
 		super();
-		this.securityCatalogSupplier = securityCatalogSupplier;
+		this.securityCatalog = securityCatalog;
 		this.securityRepo = securityRepo;
 		setName(securityRepo.getDomainBase());
 		usersDn = securityRepo.getUsersRdn() + "," + securityRepo.getDomainBase();
@@ -76,9 +75,7 @@ public class SoluvasRealm extends AuthorizingRealm {
 		// TODO: permissions should be set somewhere else,
 		// using EMF models
 
-		final SecurityCatalog securityCatalog = securityCatalogSupplier.get();
-		log.debug(
-				"Processing security catalog for {} with {} roles, {} domains, {} actions, and {} permissions",
+		log.debug("Processing security catalog for {} with {} roles, {} domains, {} actions, and {} permissions",
 				userName, securityCatalog.getRoles().size(), securityCatalog
 						.getDomains().size(), securityCatalog.getActions()
 						.size(), securityCatalog.getPermissions().size());

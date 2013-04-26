@@ -4,13 +4,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.api.ldap.model.cursor.EntryCursor;
 import org.apache.directory.api.ldap.model.entry.DefaultEntry;
+import org.apache.directory.api.ldap.model.entry.DefaultModification;
 import org.apache.directory.api.ldap.model.entry.Entry;
+import org.apache.directory.api.ldap.model.entry.ModificationOperation;
 import org.apache.directory.api.ldap.model.exception.LdapInvalidAttributeValueException;
 import org.apache.directory.api.ldap.model.message.SearchScope;
 import org.apache.directory.api.ldap.model.name.Dn;
@@ -272,8 +273,24 @@ public class LdapRoleRepository implements CrudRepository<Role, String> {
 	}
 
 	@Override
-	public <S extends Role> S modify(String id, S entity) {
-		throw new UnsupportedOperationException();
+	public <S extends Role> S modify(final String id, final S entity) {
+		return LdapUtils.withConnection(ldapPool,
+				new Function<LdapConnection, S>() {
+			@Override @Nullable
+			public S apply(@Nullable LdapConnection ldap) {
+				try {
+					final Dn roleDn = new Dn(new Rdn("cn", id),
+							new Dn(groupsRdn, domainBase));
+					log.trace("Modifying group entry {} with description={}",
+							id, entity.getDescription());
+					ldap.modify(roleDn, new DefaultModification(ModificationOperation.REPLACE_ATTRIBUTE, "description", entity.getDescription()));
+					return entity;
+				} catch (Exception e) {
+					log.error("Cannot modify role " + id, e);
+					throw new SecurityException("Cannot modify role " + id, e);
+				}
+			}
+		});
 	}
 
 	@Override

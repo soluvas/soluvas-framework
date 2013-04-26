@@ -272,7 +272,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * @generated
 	 * @ordered
 	 */
-	protected List userAgents;
+	protected List<String> userAgents;
 
 	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' map.
@@ -659,7 +659,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * @generated
 	 */
 	@Override
-	public List getUserAgents() {
+	public List<String> getUserAgents() {
 		return userAgents;
 	}
 
@@ -669,8 +669,8 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * @generated
 	 */
 	@Override
-	public void setUserAgents(List newUserAgents) {
-		List oldUserAgents = userAgents;
+	public void setUserAgents(List<String> newUserAgents) {
+		List<String> oldUserAgents = userAgents;
 		userAgents = newUserAgents;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.APP_SESSION__USER_AGENTS, oldUserAgents, userAgents));
@@ -921,7 +921,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 				setUserAgent((String)newValue);
 				return;
 			case SecurityPackage.APP_SESSION__USER_AGENTS:
-				setUserAgents((List)newValue);
+				setUserAgents((List<String>)newValue);
 				return;
 			case SecurityPackage.APP_SESSION__ATTRIBUTES:
 				((EStructuralFeature.Setting)getAttributes()).set(newValue);
@@ -987,7 +987,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 				setUserAgent(USER_AGENT_EDEFAULT);
 				return;
 			case SecurityPackage.APP_SESSION__USER_AGENTS:
-				setUserAgents((List)null);
+				setUserAgents((List<String>)null);
 				return;
 			case SecurityPackage.APP_SESSION__ATTRIBUTES:
 				getAttributes().clear();

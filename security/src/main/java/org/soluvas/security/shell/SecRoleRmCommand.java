@@ -1,14 +1,16 @@
  package org.soluvas.security.shell; 
 
+import javax.inject.Inject;
+
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
-import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.tenant.ServiceLookup;
+import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityRepository;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
@@ -19,37 +21,30 @@ import com.google.common.collect.ImmutableList;
  * 
  * @author ceefour
  */
+@Service @Scope("prototype")
 @Command(scope = "sec", name = "rolerm", description = "Deletes a Role in the Security Repository.")
-public class SecRoleRmCommand extends OsgiCommandSupport {
+public class SecRoleRmCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(SecRoleRmCommand.class);
-
-	private final ServiceLookup svcLookup;
 
 	@Argument(index=0, name="role", required=true, multiValued=true,
 			description="Role name(s) to delete.")
 	private String roles[];
 
-	public SecRoleRmCommand(ServiceLookup svcLookup) {
+	private final SecurityRepository securityRepo;
+
+	@Inject
+	public SecRoleRmCommand(SecurityRepository securityRepo) {
 		super();
-		this.svcLookup = svcLookup;
+		this.securityRepo = securityRepo;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
-	 */
 	@Override
 	protected Object doExecute() throws Exception {
-		ServiceReference<SecurityRepository> securityRepoRef = svcLookup.getService(SecurityRepository.class, session, null, null);
-		SecurityRepository securityRepo = bundleContext.getService(securityRepoRef);
-		try {
-			System.out.format("Delete role(s): %s...", Joiner.on(", ").join(roles));
-			securityRepo.getRoleRepository().deleteIds(ImmutableList.copyOf(roles));
-			System.out.format(" OK\n");
-			return null;
-		} finally {
-			bundleContext.ungetService(securityRepoRef);
-		}
+		System.out.format("Delete role(s): %s...", Joiner.on(", ").join(roles));
+		securityRepo.getRoleRepository().deleteIds(ImmutableList.copyOf(roles));
+		System.out.format(" OK\n");
+		return null;
 	}
 
 }

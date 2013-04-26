@@ -6,7 +6,9 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.soluvas.commons.Describable;
 import org.soluvas.commons.Identifiable;
+import org.soluvas.commons.Nameable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
@@ -80,6 +82,8 @@ public class SecuritySwitch<T> extends Switch<T> {
 				Role role = (Role)theEObject;
 				T result = caseRole(role);
 				if (result == null) result = caseResourceAware(role);
+				if (result == null) result = caseNameable(role);
+				if (result == null) result = caseDescribable(role);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -87,6 +91,8 @@ public class SecuritySwitch<T> extends Switch<T> {
 				DomainRole domainRole = (DomainRole)theEObject;
 				T result = caseDomainRole(domainRole);
 				if (result == null) result = caseResourceAware(domainRole);
+				if (result == null) result = caseNameable(domainRole);
+				if (result == null) result = caseDescribable(domainRole);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -94,6 +100,8 @@ public class SecuritySwitch<T> extends Switch<T> {
 				Domain domain = (Domain)theEObject;
 				T result = caseDomain(domain);
 				if (result == null) result = caseResourceAware(domain);
+				if (result == null) result = caseNameable(domain);
+				if (result == null) result = caseDescribable(domain);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -101,6 +109,8 @@ public class SecuritySwitch<T> extends Switch<T> {
 				Action action = (Action)theEObject;
 				T result = caseAction(action);
 				if (result == null) result = caseResourceAware(action);
+				if (result == null) result = caseNameable(action);
+				if (result == null) result = caseDescribable(action);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -310,6 +320,36 @@ public class SecuritySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseResourceAware(ResourceAware object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Nameable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Nameable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNameable(Nameable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Describable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Describable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDescribable(Describable object) {
 		return null;
 	}
 

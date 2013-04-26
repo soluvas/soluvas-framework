@@ -2,16 +2,18 @@
 
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
-import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.tenant.ServiceLookup;
+import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityRepository;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
@@ -23,12 +25,11 @@ import com.google.common.collect.ImmutableSet;
  * 
  * @author ceefour
  */
+@Service @Scope("prototype")
 @Command(scope = "sec", name = "roleadd", description = "Add a Role to the Security Repository")
-public class SecRoleAddCommand extends OsgiCommandSupport {
+public class SecRoleAddCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(SecRoleAddCommand.class);
-
-	private final ServiceLookup svcLookup;
 
 	@Option(name="-d", aliases="--description", description="Role description.")
 	private String description;
@@ -37,9 +38,12 @@ public class SecRoleAddCommand extends OsgiCommandSupport {
 	@Argument(index=1, name="personId ...", required=false, description="Role members as Person ID(s).", multiValued=true)
 	private String[] personIds;
 
-	public SecRoleAddCommand(ServiceLookup svcLookup) {
+	private final SecurityRepository securityRepo;
+
+	@Inject
+	public SecRoleAddCommand(SecurityRepository securityRepo) {
 		super();
-		this.svcLookup = svcLookup;
+		this.securityRepo = securityRepo;
 	}
 
 	/* (non-Javadoc)
@@ -47,20 +51,14 @@ public class SecRoleAddCommand extends OsgiCommandSupport {
 	 */
 	@Override
 	protected Object doExecute() throws Exception {
-		ServiceReference<SecurityRepository> securityRepoRef = svcLookup.getService(SecurityRepository.class, session, null, null);
-		SecurityRepository securityRepo = bundleContext.getService(securityRepoRef);
-		try {
-			final Set<String> personIdSet = ImmutableSet.copyOf(Optional.fromNullable(personIds).or(new String[] {}));
-			System.out.format("Add role %s with members: %s and description '%s'...",
-					role,
-					Joiner.on(", ").join(personIdSet),
-					description);
-			securityRepo.addRole(role, description, personIdSet);
-			System.out.format(" OK\n");
-			return null;
-		} finally {
-			bundleContext.ungetService(securityRepoRef);
-		}
+		final Set<String> personIdSet = ImmutableSet.copyOf(Optional.fromNullable(personIds).or(new String[] {}));
+		System.out.format("Add role %s with members: %s and description '%s'...",
+				role,
+				Joiner.on(", ").join(personIdSet),
+				description);
+		securityRepo.addRole(role, description, personIdSet);
+		System.out.format(" OK\n");
+		return null;
 	}
 
 }

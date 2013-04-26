@@ -10,6 +10,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Describable;
+import org.soluvas.commons.Nameable;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.security.Action;
 import org.soluvas.security.SecurityPackage;
@@ -24,10 +27,10 @@ import org.soluvas.security.SecurityPackage;
  *   <li>{@link org.soluvas.security.impl.ActionImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.security.impl.ActionImpl#getResourceUri <em>Resource Uri</em>}</li>
  *   <li>{@link org.soluvas.security.impl.ActionImpl#getResourceName <em>Resource Name</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.ActionImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.security.impl.ActionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.security.impl.ActionImpl#getGlobal <em>Global</em>}</li>
  *   <li>{@link org.soluvas.security.impl.ActionImpl#getDomains <em>Domains</em>}</li>
- *   <li>{@link org.soluvas.security.impl.ActionImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -95,6 +98,26 @@ public class ActionImpl extends EObjectImpl implements Action {
 	protected String resourceName = RESOURCE_NAME_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -143,26 +166,6 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * @ordered
 	 */
 	protected EList<String> domains;
-
-	/**
-	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDescription()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String DESCRIPTION_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDescription()
-	 * @generated
-	 * @ordered
-	 */
-	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -346,14 +349,14 @@ public class ActionImpl extends EObjectImpl implements Action {
 				return getResourceUri();
 			case SecurityPackage.ACTION__RESOURCE_NAME:
 				return getResourceName();
+			case SecurityPackage.ACTION__DESCRIPTION:
+				return getDescription();
 			case SecurityPackage.ACTION__NAME:
 				return getName();
 			case SecurityPackage.ACTION__GLOBAL:
 				return getGlobal();
 			case SecurityPackage.ACTION__DOMAINS:
 				return getDomains();
-			case SecurityPackage.ACTION__DESCRIPTION:
-				return getDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -376,6 +379,9 @@ public class ActionImpl extends EObjectImpl implements Action {
 			case SecurityPackage.ACTION__RESOURCE_NAME:
 				setResourceName((String)newValue);
 				return;
+			case SecurityPackage.ACTION__DESCRIPTION:
+				setDescription((String)newValue);
+				return;
 			case SecurityPackage.ACTION__NAME:
 				setName((String)newValue);
 				return;
@@ -385,9 +391,6 @@ public class ActionImpl extends EObjectImpl implements Action {
 			case SecurityPackage.ACTION__DOMAINS:
 				getDomains().clear();
 				getDomains().addAll((Collection<? extends String>)newValue);
-				return;
-			case SecurityPackage.ACTION__DESCRIPTION:
-				setDescription((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -410,6 +413,9 @@ public class ActionImpl extends EObjectImpl implements Action {
 			case SecurityPackage.ACTION__RESOURCE_NAME:
 				setResourceName(RESOURCE_NAME_EDEFAULT);
 				return;
+			case SecurityPackage.ACTION__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
 			case SecurityPackage.ACTION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -418,9 +424,6 @@ public class ActionImpl extends EObjectImpl implements Action {
 				return;
 			case SecurityPackage.ACTION__DOMAINS:
 				getDomains().clear();
-				return;
-			case SecurityPackage.ACTION__DESCRIPTION:
-				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -440,16 +443,58 @@ public class ActionImpl extends EObjectImpl implements Action {
 				return RESOURCE_URI_EDEFAULT == null ? resourceUri != null : !RESOURCE_URI_EDEFAULT.equals(resourceUri);
 			case SecurityPackage.ACTION__RESOURCE_NAME:
 				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
+			case SecurityPackage.ACTION__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case SecurityPackage.ACTION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SecurityPackage.ACTION__GLOBAL:
 				return GLOBAL_EDEFAULT == null ? global != null : !GLOBAL_EDEFAULT.equals(global);
 			case SecurityPackage.ACTION__DOMAINS:
 				return domains != null && !domains.isEmpty();
-			case SecurityPackage.ACTION__DESCRIPTION:
-				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == Nameable.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Describable.class) {
+			switch (derivedFeatureID) {
+				case SecurityPackage.ACTION__DESCRIPTION: return CommonsPackage.DESCRIBABLE__DESCRIPTION;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == Nameable.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Describable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.DESCRIBABLE__DESCRIPTION: return SecurityPackage.ACTION__DESCRIPTION;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
@@ -468,14 +513,14 @@ public class ActionImpl extends EObjectImpl implements Action {
 		result.append(resourceUri);
 		result.append(", resourceName: ");
 		result.append(resourceName);
+		result.append(", description: ");
+		result.append(description);
 		result.append(", name: ");
 		result.append(name);
 		result.append(", global: ");
 		result.append(global);
 		result.append(", domains: ");
 		result.append(domains);
-		result.append(", description: ");
-		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

@@ -2,13 +2,16 @@
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.felix.gogo.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.tenant.ServiceLookup;
+import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.security.Permission;
 import org.soluvas.security.SecurityCatalog;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Joiner;
 
@@ -17,16 +20,18 @@ import com.google.common.base.Joiner;
  * 
  * @author ceefour
  */
+@Service @Scope("prototype")
 @Command(scope = "secd", name = "permls", description = "List available Permissions")
-public class SecdPermLsCommand extends OsgiCommandSupport {
+public class SecdPermLsCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(SecdPermLsCommand.class);
 
-	private final ServiceLookup svcLookup;
-
-	public SecdPermLsCommand(ServiceLookup svcLookup) {
+	private final SecurityCatalog securityCatalog;
+	
+	@Inject
+	public SecdPermLsCommand(SecurityCatalog securityCatalog) {
 		super();
-		this.svcLookup = svcLookup;
+		this.securityCatalog = securityCatalog;
 	}
 
 	/* (non-Javadoc)
@@ -36,9 +41,7 @@ public class SecdPermLsCommand extends OsgiCommandSupport {
 	protected Object doExecute() throws Exception {
 		System.out.format("%3s | %-15s | %-15s | %-15s | %-20s | %s\n", "#",
 				"Domain", "Action", "Instance", "Role", "Source");
-		SecurityCatalog securityCatalog = svcLookup.getSupplied(
-				SecurityCatalog.class, session);
-		List<Permission> permissions = securityCatalog.getPermissions();
+		final List<Permission> permissions = securityCatalog.getPermissions();
 		int i = 0;
 		for (Permission it : permissions) {
 			// TODO: use locale settings to format date, currency, amount,

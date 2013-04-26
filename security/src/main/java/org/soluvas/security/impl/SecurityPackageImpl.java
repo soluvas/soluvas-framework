@@ -267,18 +267,8 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * @generated
 	 */
 	@Override
-	public EAttribute getRole_Description() {
-		return (EAttribute)roleEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EAttribute getRole_AssignMode() {
-		return (EAttribute)roleEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)roleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -307,18 +297,8 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDomainRole_Description() {
-		return (EAttribute)domainRoleEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EAttribute getDomainRole_Domain() {
-		return (EAttribute)domainRoleEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)domainRoleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -339,16 +319,6 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	@Override
 	public EAttribute getDomain_Name() {
 		return (EAttribute)domainEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getDomain_Description() {
-		return (EAttribute)domainEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -389,16 +359,6 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	@Override
 	public EAttribute getAction_Domains() {
 		return (EAttribute)actionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getAction_Description() {
-		return (EAttribute)actionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -902,23 +862,19 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		// Create classes and their features
 		roleEClass = createEClass(ROLE);
 		createEAttribute(roleEClass, ROLE__NAME);
-		createEAttribute(roleEClass, ROLE__DESCRIPTION);
 		createEAttribute(roleEClass, ROLE__ASSIGN_MODE);
 
 		domainRoleEClass = createEClass(DOMAIN_ROLE);
 		createEAttribute(domainRoleEClass, DOMAIN_ROLE__NAME);
-		createEAttribute(domainRoleEClass, DOMAIN_ROLE__DESCRIPTION);
 		createEAttribute(domainRoleEClass, DOMAIN_ROLE__DOMAIN);
 
 		domainEClass = createEClass(DOMAIN);
 		createEAttribute(domainEClass, DOMAIN__NAME);
-		createEAttribute(domainEClass, DOMAIN__DESCRIPTION);
 
 		actionEClass = createEClass(ACTION);
 		createEAttribute(actionEClass, ACTION__NAME);
 		createEAttribute(actionEClass, ACTION__GLOBAL);
 		createEAttribute(actionEClass, ACTION__DOMAINS);
-		createEAttribute(actionEClass, ACTION__DESCRIPTION);
 
 		securityCatalogEClass = createEClass(SECURITY_CATALOG);
 		createEReference(securityCatalogEClass, SECURITY_CATALOG__ROLES);
@@ -1015,9 +971,17 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 
 		// Add supertypes to classes
 		roleEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		roleEClass.getESuperTypes().add(theCommonsPackage.getNameable());
+		roleEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
 		domainRoleEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		domainRoleEClass.getESuperTypes().add(theCommonsPackage.getNameable());
+		domainRoleEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
 		domainEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		domainEClass.getESuperTypes().add(theCommonsPackage.getNameable());
+		domainEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
 		actionEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
+		actionEClass.getESuperTypes().add(theCommonsPackage.getNameable());
+		actionEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
 		permissionEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 		appSessionEClass.getESuperTypes().add(theCommonsPackage.getIdentifiable());
 		appSessionEClass.getESuperTypes().add(theCommonsPackage.getTimestamped());
@@ -1026,23 +990,19 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		// Initialize classes and features; add operations and parameters
 		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRole_Name(), ecorePackage.getEString(), "name", null, 1, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRole_Description(), ecorePackage.getEString(), "description", null, 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRole_AssignMode(), this.getAssignMode(), "assignMode", "manual", 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainRoleEClass, DomainRole.class, "DomainRole", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomainRole_Name(), ecorePackage.getEString(), "name", null, 1, 1, DomainRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDomainRole_Description(), ecorePackage.getEString(), "description", null, 0, 1, DomainRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainRole_Domain(), ecorePackage.getEString(), "domain", null, 1, 1, DomainRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainEClass, Domain.class, "Domain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomain_Name(), ecorePackage.getEString(), "name", null, 1, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDomain_Description(), ecorePackage.getEString(), "description", null, 0, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(actionEClass, Action.class, "Action", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAction_Name(), ecorePackage.getEString(), "name", null, 1, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAction_Global(), ecorePackage.getEBooleanObject(), "global", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAction_Domains(), ecorePackage.getEString(), "domains", null, 0, -1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAction_Description(), ecorePackage.getEString(), "description", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(securityCatalogEClass, SecurityCatalog.class, "SecurityCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSecurityCatalog_Roles(), this.getRole(), null, "roles", null, 0, -1, SecurityCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1074,7 +1034,10 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEAttribute(getAppSession_IpAddresses(), theEcorePackage.getEString(), "ipAddresses", null, 0, -1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_Ipv6Addresses(), theEcorePackage.getEString(), "ipv6Addresses", null, 0, -1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_UserAgent(), theEcorePackage.getEString(), "userAgent", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppSession_UserAgents(), theCommonsPackage.getList(), "userAgents", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(theCommonsPackage.getList());
+		EGenericType g2 = createEGenericType(theEcorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getAppSession_UserAgents(), g1, "userAgents", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAppSession_Attributes(), this.getAppSessionAttributeEntry(), null, "attributes", null, 0, -1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_Timeout(), theEcorePackage.getELongObject(), "timeout", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_AccessTime(), theCommonsPackage.getDateTime(), "accessTime", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1091,7 +1054,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEClass(appSessionManagerEClass, AppSessionManager.class, "AppSessionManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAppSessionManager_SecurityManager(), this.getSecurityManager(), "securityManager", null, 0, 1, AppSessionManager.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		g1 = createEGenericType(this.getEntityLookup());
-		EGenericType g2 = createEGenericType();
+		g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
 		EGenericType g3 = createEGenericType(this.getPerson());
 		g2.setEUpperBound(g3);
@@ -1188,12 +1151,6 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 			 "documentation", "Name of the security domain (object class), e.g. \"shop\", \"person\", \"product\", in lower_underscore format."
 		   });		
 		addAnnotation
-		  (getDomain_Description(), 
-		   source, 
-		   new String[] {
-			 "documentation", "Provides human-readable description."
-		   });		
-		addAnnotation
 		  (actionEClass, 
 		   source, 
 		   new String[] {
@@ -1216,12 +1173,6 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		   source, 
 		   new String[] {
 			 "documentation", "The list of domains this action applies to."
-		   });		
-		addAnnotation
-		  (getAction_Description(), 
-		   source, 
-		   new String[] {
-			 "documentation", "Provides human-readable purpose of the action."
 		   });		
 		addAnnotation
 		  (securityCatalogEClass, 

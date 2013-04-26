@@ -3,6 +3,8 @@
 package org.soluvas.security;
 
 import org.eclipse.emf.common.util.EList;
+import org.soluvas.commons.Describable;
+import org.soluvas.commons.Nameable;
 import org.soluvas.commons.ResourceAware;
 
 /**
@@ -20,7 +22,6 @@ import org.soluvas.commons.ResourceAware;
  *   <li>{@link org.soluvas.security.Action#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.security.Action#getGlobal <em>Global</em>}</li>
  *   <li>{@link org.soluvas.security.Action#getDomains <em>Domains</em>}</li>
- *   <li>{@link org.soluvas.security.Action#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,7 +29,7 @@ import org.soluvas.commons.ResourceAware;
  * @model
  * @generated
  */
-public interface Action extends ResourceAware {
+public interface Action extends ResourceAware, Nameable, Describable {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -93,30 +94,5 @@ public interface Action extends ResourceAware {
 	 * @generated
 	 */
 	EList<String> getDomains();
-
-	/**
-	 * Returns the value of the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Provides human-readable purpose of the action.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Description</em>' attribute.
-	 * @see #setDescription(String)
-	 * @see org.soluvas.security.SecurityPackage#getAction_Description()
-	 * @model
-	 * @generated
-	 */
-	String getDescription();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.security.Action#getDescription <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Description</em>' attribute.
-	 * @see #getDescription()
-	 * @generated
-	 */
-	void setDescription(String value);
 
 } // Action

@@ -3,15 +3,17 @@ package org.soluvas.security.shell;
 import java.util.List;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
-import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.tenant.ServiceLookup;
+import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityRepository;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Ordering;
 
@@ -20,44 +22,37 @@ import com.google.common.collect.Ordering;
  * 
  * @author ceefour
  */
+@Service @Scope("prototype")
 @Command(scope = "sec", name = "personrolels", description = "List roles of a person.")
-public class SecPersonRoleLsCommand extends OsgiCommandSupport {
+public class SecPersonRoleLsCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(SecPersonRoleLsCommand.class);
 
-	private final ServiceLookup svcLookup;
+	private final SecurityRepository securityRepo;
 	
 	@Argument(name="personId", required=true, description="Person ID.")
 	private String personId;
-
-	public SecPersonRoleLsCommand(ServiceLookup svcLookup) {
+	
+	@Inject
+	public SecPersonRoleLsCommand(SecurityRepository securityRepo) {
 		super();
-		this.svcLookup = svcLookup;
+		this.securityRepo = securityRepo;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
-	 */
 	@Override
 	protected Object doExecute() throws Exception {
-		ServiceReference<SecurityRepository> securityRepoRef = svcLookup.getService(SecurityRepository.class, session, null, null);
-		SecurityRepository securityRepo = bundleContext.getService(securityRepoRef);
-		try {
-			Set<String> personRoles = securityRepo.getPersonRoles(personId);
-			System.out.format("%3s | %-40s\n", "#", "Role");
-			List<String> sortedRoles = Ordering.natural().immutableSortedCopy(personRoles);
-			int i = 0;
-			for (String it : sortedRoles) {
-				// TODO: use locale settings to format date, currency, amount,
-				// "and", many
-				// TODO: format products
-				System.out.format("%3d | %-40s\n", ++i, it );
-			}
-			System.out.format("%d roles\n", sortedRoles.size());
-			return null;
-		} finally {
-			bundleContext.ungetService(securityRepoRef);
+		final Set<String> personRoles = securityRepo.getPersonRoles(personId);
+		System.out.format("%3s | %-40s\n", "#", "Role");
+		final List<String> sortedRoles = Ordering.natural().immutableSortedCopy(personRoles);
+		int i = 0;
+		for (final String it : sortedRoles) {
+			// TODO: use locale settings to format date, currency, amount,
+			// "and", many
+			// TODO: format products
+			System.out.format("%3d | %-40s\n", ++i, it );
 		}
+		System.out.format("%d roles\n", sortedRoles.size());
+		return null;
 	}
 
 }
