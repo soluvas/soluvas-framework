@@ -26,7 +26,7 @@ import com.google.common.collect.ImmutableList;
  *
  */
 @Configuration @Lazy
-public class DataConfig {
+public class SingleTenantDataConfig {
 	
 	@Inject @DataFolder
 	private String dataFolder;
@@ -36,7 +36,7 @@ public class DataConfig {
 		final AggregatingSupplier<DataCatalog> aggregator = new AggregatingSupplier<DataCatalog>(DataFactory.eINSTANCE,
 				DataPackage.Literals.DATA_CATALOG, ImmutableList.<Supplier<DataCatalog>>of());
 		final SupplierXmiClasspathScanner<DataCatalog> scanner = new SupplierXmiClasspathScanner<DataCatalog>(DataPackage.eINSTANCE, DataCatalog.class,
-				aggregator, DataConfig.class.getClassLoader(), dataFolder);
+				aggregator, SingleTenantDataConfig.class.getClassLoader(), dataFolder);
 		return aggregator;
 	}
 	
