@@ -1,18 +1,25 @@
 package org.soluvas.image.shell; 
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+import javax.inject.Inject;
+
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
-import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.impl.ShellProgressMonitorImpl;
-import org.soluvas.commons.shell.TenantCommandSupport;
-import org.soluvas.commons.tenant.TenantUtils;
+import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.image.store.ImageRepository;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 /**
  * For each image, redownloads the original file from WebDAV repository, reprocesses each image style, and re-uploads the processed images to WebDAV repository.
@@ -22,8 +29,9 @@ import com.google.common.collect.ImmutableList;
  * 
  * @author ceefour
  */
+@Service @Scope("prototype")
 @Command(scope="image", name="reprocess", description="For each image, redownloads the original file from WebDAV repository, reprocesses each image style, and re-uploads the processed images to WebDAV repository.")
-public class ImageReprocessCommand extends TenantCommandSupport {
+public class ImageReprocessCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(ImageReprocessCommand.class);
 
@@ -37,15 +45,23 @@ public class ImageReprocessCommand extends TenantCommandSupport {
 	@Argument(index=0, name="id ...", required=false, multiValued=true,
 			description="Image ID(s).")
 	private String[] ids;
+	
+	private final List<ImageRepository> imageRepos;
 
-	/* (non-Javadoc)
-	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
-	 */
+	@Inject
+	public ImageReprocessCommand(List<ImageRepository> imageRepos) {
+		super();
+		this.imageRepos = imageRepos;
+	}
+	
 	@Override
 	protected Object doExecute() throws Exception {
-		final ServiceReference<ImageRepository> imageRepoRef = TenantUtils.getService(
-				bundleContext, tenant, ImageRepository.class, namespace, null);
-		final ImageRepository imageRepo = getService(ImageRepository.class, imageRepoRef);
+		final ImageRepository imageRepo = Iterables.find(imageRepos, new Predicate<ImageRepository>() {
+			@Override
+			public boolean apply(@Nullable ImageRepository input) {
+				return namespace.equals(input.getNamespace());
+			}
+		});
 		
 		final ProgressMonitor monitor = new ShellProgressMonitorImpl();
 		
