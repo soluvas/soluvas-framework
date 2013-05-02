@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
 
@@ -259,7 +261,41 @@ public class XmiTermRepository
 
 	@Override
 	public long deleteIds(Collection<String> ids) {
-		throw new UnsupportedOperationException();
+		log.debug("Deleting {} terms: {}", ids.size(), Iterables.limit(ids, 10));
+		// check existence
+		final Set<String> existingUNames = exists(ids);
+		if (existingUNames.size() != ids.size()) {
+			final SetView<String> missingUNames = Sets.difference(ImmutableSet.copyOf(ids), existingUNames);
+			throw new IllegalArgumentException("Term UName(s) do not exist: " + missingUNames);
+		}
+		// add
+		final Set<String> changedNsPrefixes = new HashSet<>();
+		final List<String> deletedTerms = new ArrayList<>();
+		final Pattern uNamePattern = Pattern.compile("([^_]+)\\_.+");
+		for (final String id : ids) {
+			final Matcher matcher = uNamePattern.matcher(id);
+			Preconditions.checkArgument(matcher.matches(), "Cannot get nsPrefix for %s", id);
+			final String nsPrefix = matcher.group(1);
+			final DataCatalog xmiCatalog = xmiCatalogs.get(nsPrefix);
+			if (xmiCatalog == null) {
+				throw new IllegalArgumentException("NsPrefix " + nsPrefix + " is read-only.");
+			}
+			
+			final Term toRemove = Iterables.find(xmiCatalog.getTerms(), new Predicate<Term>() {
+				@Override
+				public boolean apply(@Nullable Term input) {
+					return id.equals(input.getQName());
+				}
+			});
+			xmiCatalog.getTerms().remove(toRemove);
+			deletedTerms.add(id);
+			
+			changedNsPrefixes.add(nsPrefix);
+		}
+		updateCatalogFiles(changedNsPrefixes);
+		reload();
+		log.info("Deleted {} terms: {}", ids, Iterables.limit(ids, 10));
+		return deletedTerms.size();
 	}
 	
 	protected Iterable<Term> doFindAll(Pageable pageable) {

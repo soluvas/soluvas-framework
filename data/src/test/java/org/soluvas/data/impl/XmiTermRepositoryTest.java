@@ -88,4 +88,12 @@ public class XmiTermRepositoryTest {
 		assertEquals(148L, repo.count());
 	}
 
+	@Test
+	public void deleteTerm() {
+		assertEquals(148L, repo.count());
+		boolean deleted = repo.delete("berbatik_birucinta");
+		assertTrue(deleted);
+		assertEquals(147L, repo.count());
+	}
+
 }
