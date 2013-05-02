@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
@@ -64,6 +65,26 @@ public class XmiTermRepositoryTest {
 		log.info("Adding {}", term);
 		final Term added = repo.add(term);
 		assertNotNull(added);
+		assertEquals(148L, repo.count());
+	}
+
+	@Test
+	public void merahcintaExists() {
+		assertEquals(148L, repo.count());
+		assertTrue(repo.exists("berbatik_merahcinta"));
+	}
+	
+	@Test
+	public void modifyTerm() {
+		assertEquals(148L, repo.count());
+		final String origUName = "berbatik_merahcinta";
+		final Term term = repo.findOne(origUName);
+		term.setName("birucinta");
+		term.setDisplayName("Biru Cinta");
+		term.setColor("#ddddf0");
+		log.info("Modifying {} to {}", origUName, term);
+		final Term modified = repo.modify(origUName, term);
+		assertNotNull(modified);
 		assertEquals(148L, repo.count());
 	}
 

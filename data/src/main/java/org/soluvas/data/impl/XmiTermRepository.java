@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.EcoreCopyFunction;
 import org.soluvas.commons.QNameFunction;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.XmiObjectLoader;
@@ -53,6 +54,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Ordering;
+import com.google.common.collect.Sets;
+import com.google.common.collect.Sets.SetView;
 
 
 /**
@@ -107,7 +110,7 @@ public class XmiTermRepository
 			final DataCatalog loaded = (DataCatalog) new XmiObjectLoader<>(DataPackage.eINSTANCE, resource, ResourceType.CLASSPATH).get();
 			final Collection<Term> matchingTerms = Collections2.filter(loaded.getTerms(), predicate);
 			log.debug("Loaded {} {}:{} terms from resource {}", matchingTerms.size(), kindNsPrefix, kindName, resource);
-			catalog.getTerms().addAll(matchingTerms);
+			catalog.getTerms().addAll(EcoreUtil.copyAll(matchingTerms));
 		}
 		for (final Entry<String, File> entry : xmiFiles.entrySet()) {
 			final File file = entry.getValue();
@@ -117,7 +120,7 @@ public class XmiTermRepository
 			final Collection<Term> matchingTerms = Collections2.filter(loaded.getTerms(), predicate);
 			log.debug("Loaded {} {}:{} terms for {} from file {}", 
 					matchingTerms.size(), kindNsPrefix, kindName, nsPrefix, file);
-			catalog.getTerms().addAll(matchingTerms);
+			catalog.getTerms().addAll(EcoreUtil.copyAll(matchingTerms));
 		}
 		this.catalog = catalog;
 		log.info("Loaded {} {}:{} terms from {} resources and {} files: {} {}", 
@@ -158,7 +161,51 @@ public class XmiTermRepository
 			addedTerms.add(added);
 			changedNsPrefixes.add(entity.getNsPrefix());
 		}
-		// update catalogs
+		updateCatalogFiles(changedNsPrefixes);
+		reload();
+		log.info("Added {} terms: {}", entities.size(), Iterables.limit(entities, 10));
+		return addedTerms;
+	}
+
+	@Override
+	public <S extends Term> Collection<S> modify(Map<String, S> entities) {
+		log.debug("Modifying {} terms: {}", entities.size(), Iterables.limit(entities.keySet(), 10));
+		// check existence
+		final Set<String> existingUNames = exists(entities.keySet());
+		if (existingUNames.size() != entities.keySet().size()) {
+			final SetView<String> missingUNames = Sets.difference(entities.keySet(), existingUNames);
+			throw new IllegalArgumentException("Term UName(s) do not exist: " + missingUNames);
+		}
+		// add
+		final Set<String> changedNsPrefixes = new HashSet<>();
+		final List<S> addedTerms = new ArrayList<>();
+		for (final Entry<String, S> entry : entities.entrySet()) {
+			final S entity = entry.getValue();
+			final DataCatalog xmiCatalog = xmiCatalogs.get(entity.getNsPrefix());
+			if (xmiCatalog == null) {
+				throw new IllegalArgumentException("NsPrefix " + entity.getNsPrefix() + " is read-only.");
+			}
+			
+			final Term toRemove = Iterables.find(xmiCatalog.getTerms(), new Predicate<Term>() {
+				@Override
+				public boolean apply(@Nullable Term input) {
+					return entry.getKey().equals(input.getQName());
+				}
+			});
+			xmiCatalog.getTerms().remove(toRemove);
+			final S modified = EcoreUtil.copy(entity);
+			
+			xmiCatalog.getTerms().add(modified);
+			addedTerms.add(modified);
+			changedNsPrefixes.add(entity.getNsPrefix());
+		}
+		updateCatalogFiles(changedNsPrefixes);
+		reload();
+		log.info("Modified {} terms: {}", entities.size(), Iterables.limit(entities.keySet(), 10));
+		return addedTerms;
+	}
+
+	private void updateCatalogFiles(final Set<String> changedNsPrefixes) {
 		final ResourceSet rset = new ResourceSetImpl();
 		rset.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		rset.getPackageRegistry().put(DataPackage.eNS_URI, DataPackage.eINSTANCE);		
@@ -177,15 +224,6 @@ public class XmiTermRepository
 				throw new DataException(e, "Cannot save %s XMI file %s", nsPrefix, file);
 			}
 		}
-		// done
-		reload();
-		log.info("Added {} terms: {}", entities.size(), Iterables.limit(entities, 10));
-		return addedTerms;
-	}
-
-	@Override
-	public <S extends Term> Collection<S> modify(Map<String, S> entities) {
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -205,7 +243,7 @@ public class XmiTermRepository
 
 	@Override
 	public List<Term> findAll(final Collection<String> ids) {
-		return ImmutableList.copyOf(Collections2.filter(
+		final Collection<Term> filtered = Collections2.filter(
 				catalog.getTerms(), new Predicate<Term>() {
 			@Override
 			public boolean apply(@Nullable Term input) {
@@ -215,7 +253,8 @@ public class XmiTermRepository
 					return false;
 				}
 			}
-		}));
+		});
+		return ImmutableList.copyOf(Collections2.transform(filtered, new EcoreCopyFunction<Term>()));
 	}
 
 	@Override
@@ -254,13 +293,15 @@ public class XmiTermRepository
 	public Page<String> findAllIds(Pageable pageable) {
 		final Iterable<Term> limited = doFindAll(pageable);
 		final Iterable<String> limitedUNames = Iterables.transform(limited, new QNameFunction());
-		return new PageImpl<>(ImmutableList.copyOf(limitedUNames), pageable, catalog.getTerms().size());
+		return new PageImpl<>(ImmutableList.copyOf(limitedUNames),
+				pageable, catalog.getTerms().size());
 	}
 
 	@Override
 	public Page<Term> findAll(Pageable pageable) {
 		final Iterable<Term> limited = doFindAll(pageable);
-		return new PageImpl<>(ImmutableList.copyOf(limited), pageable, catalog.getTerms().size());
+		return new PageImpl<>(ImmutableList.copyOf(Iterables.transform(limited, new EcoreCopyFunction<Term>())),
+				pageable, catalog.getTerms().size());
 	}
 
 }
