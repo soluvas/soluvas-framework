@@ -1,16 +1,28 @@
 package org.soluvas.data.impl;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.annotation.Nullable;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.QNameFunction;
@@ -18,6 +30,7 @@ import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.XmiObjectLoader;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.data.DataCatalog;
+import org.soluvas.data.DataException;
 import org.soluvas.data.DataFactory;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.KindPredicate;
@@ -32,9 +45,11 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Ordering;
@@ -61,31 +76,50 @@ public class XmiTermRepository
 	/**
 	 * {@link Term}s in working memory.
 	 */
-	private final DataCatalog catalog;
+	private DataCatalog catalog;
 	/**
 	 * Changeable XMI files, key is term's nsPrefix which is the same as {@link TenantRef#getTenantId()} (e.g. tuneeca). 
 	 */
 	private final Map<String, File> xmiFiles;
+	/**
+	 * Changeable DataCatalog, key is term's nsPrefix which is the same as {@link TenantRef#getTenantId()} (e.g. tuneeca). 
+	 */
+	private final Map<String, DataCatalog> xmiCatalogs = new HashMap<>();
+	private final String kindNsPrefix;
+	private final String kindName;
+	private final List<URL> xmiResources;
 	
 	public XmiTermRepository(String kindNsPrefix, String kindName, List<URL> xmiResources, 
 			Map<String, File> xmiFiles) {
 		super();
 		log = LoggerFactory.getLogger(XmiTermRepository.class.getName() + "/" + kindNsPrefix + ":" + kindName);
+		this.kindNsPrefix = kindNsPrefix;
+		this.kindName = kindName;
+		this.xmiResources = xmiResources;
 		this.xmiFiles = xmiFiles;
+		reload();
+	}
+	
+	protected synchronized void reload() {
+		final DataCatalog catalog = DataFactory.eINSTANCE.createDataCatalog();
 		final KindPredicate predicate = new KindPredicate(kindNsPrefix, kindName);
-		catalog = DataFactory.eINSTANCE.createDataCatalog();
 		for (final URL resource : xmiResources) {
 			final DataCatalog loaded = (DataCatalog) new XmiObjectLoader<>(DataPackage.eINSTANCE, resource, ResourceType.CLASSPATH).get();
 			final Collection<Term> matchingTerms = Collections2.filter(loaded.getTerms(), predicate);
 			log.debug("Loaded {} {}:{} terms from resource {}", matchingTerms.size(), kindNsPrefix, kindName, resource);
 			catalog.getTerms().addAll(matchingTerms);
 		}
-		for (final File file : xmiFiles.values()) {
+		for (final Entry<String, File> entry : xmiFiles.entrySet()) {
+			final File file = entry.getValue();
+			final String nsPrefix = entry.getKey();
 			final DataCatalog loaded = (DataCatalog) new XmiObjectLoader<>(DataPackage.eINSTANCE, file.getPath()).get();
+			xmiCatalogs.put(nsPrefix, loaded);
 			final Collection<Term> matchingTerms = Collections2.filter(loaded.getTerms(), predicate);
-			log.debug("Loaded {} {}:{} terms from file {}", matchingTerms.size(), kindNsPrefix, kindName, file);
+			log.debug("Loaded {} {}:{} terms for {} from file {}", 
+					matchingTerms.size(), kindNsPrefix, kindName, nsPrefix, file);
 			catalog.getTerms().addAll(matchingTerms);
 		}
+		this.catalog = catalog;
 		log.info("Loaded {} {}:{} terms from {} resources and {} files: {} {}", 
 				catalog.getTerms().size(), kindNsPrefix, kindName, xmiResources.size(), xmiFiles.size(),
 				xmiResources, xmiFiles);
@@ -103,7 +137,50 @@ public class XmiTermRepository
 
 	@Override
 	public <S extends Term> Collection<S> add(Collection<S> entities) {
-		throw new UnsupportedOperationException();
+		log.debug("Adding {} terms: {}", entities.size(), Iterables.limit(entities, 10));
+		// check duplicate UName(s)
+		final Collection<String> uNamesToAdd = Collections2.transform(entities, new QNameFunction());
+		final Set<String> existingUNames = exists(uNamesToAdd);
+		if (!existingUNames.isEmpty()) {
+			throw new IllegalArgumentException("Duplicate Term UName(s): " + existingUNames);
+		}
+		// add
+		final Set<String> changedNsPrefixes = new HashSet<>();
+		final List<S> addedTerms = new ArrayList<>();
+		for (final S entity : entities) {
+			final DataCatalog xmiCatalog = xmiCatalogs.get(entity.getNsPrefix());
+			if (xmiCatalog == null) {
+				throw new IllegalArgumentException("NsPrefix " + entity.getNsPrefix() + " is read-only.");
+			}
+			
+			final S added = EcoreUtil.copy(entity);
+			xmiCatalog.getTerms().add(added);
+			addedTerms.add(added);
+			changedNsPrefixes.add(entity.getNsPrefix());
+		}
+		// update catalogs
+		final ResourceSet rset = new ResourceSetImpl();
+		rset.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+		rset.getPackageRegistry().put(DataPackage.eNS_URI, DataPackage.eINSTANCE);		
+		for (final String nsPrefix : changedNsPrefixes) {
+			final DataCatalog xmiCatalog = xmiCatalogs.get(nsPrefix);
+			final File file = Preconditions.checkNotNull(xmiFiles.get(nsPrefix),
+					"Cannot find %s in xmiFiles", nsPrefix);
+			final Resource res = rset.createResource(URI.createFileURI(file.getPath()));
+			res.getContents().add(EcoreUtil.copy(xmiCatalog));
+			try {
+				res.save(ImmutableMap.of(XMIResource.OPTION_LINE_WIDTH, 80,
+						XMIResource.OPTION_DECLARE_XML, true,
+						XMIResource.OPTION_ENCODING, "UTF-8"));
+				res.unload();
+			} catch (IOException e) {
+				throw new DataException(e, "Cannot save %s XMI file %s", nsPrefix, file);
+			}
+		}
+		// done
+		reload();
+		log.info("Added {} terms: {}", entities.size(), Iterables.limit(entities, 10));
+		return addedTerms;
 	}
 
 	@Override
