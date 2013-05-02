@@ -1,4 +1,4 @@
-package org.soluvas.data;
+package org.soluvas.data.impl;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -17,6 +17,12 @@ import org.soluvas.commons.QNameFunction;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.XmiObjectLoader;
 import org.soluvas.commons.tenant.TenantRef;
+import org.soluvas.data.DataCatalog;
+import org.soluvas.data.DataFactory;
+import org.soluvas.data.DataPackage;
+import org.soluvas.data.KindPredicate;
+import org.soluvas.data.Term;
+import org.soluvas.data.TermRepository;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
