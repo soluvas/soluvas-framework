@@ -10,10 +10,12 @@ import java.util.Set;
 import javax.annotation.Nullable;
 
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.PullResult;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.RepositoryBuilder;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.transport.PushResult;
 import org.joda.time.DateTime;
 import org.soluvas.data.DataException;
 
@@ -70,17 +72,17 @@ public class GitXmiTermRepository extends XmiTermRepository {
 				final RevCommit revCommit = git.commit().setAll(true).setMessage(message + "\nChanged catalog nsPrefixes: " + nsPrefixes + " at " + new DateTime()).call();
 				log.info("Committed '{}' as {} in {}", message, revCommit, gitRepo);
 				
-//				// pull
-//				log.debug("Pulling {} due to '{}'", gitRepo, message);
-//				final PullResult pullResult = git.pull().call();
-//				// FetchResult doesn't have proper toString()
-//				final String fetchResult = pullResult.getFetchResult() != null ? pullResult.getFetchResult().getTrackingRefUpdates() + " from " + pullResult.getFetchResult().getURI() : null;
-//				log.info("Pulled {} from {}. Fetch: {}. Merge: {}.", gitRepo, pullResult.getFetchedFrom(), fetchResult,
-//						pullResult.getMergeResult());
-//				// push: MUST set default remote AND branch
-//				log.debug("Pushing {} due to '{}'", gitRepo, message);
-//				final Iterable<PushResult> pushResults = git.push().call();
-//				log.info("Pushed {}: {}", gitRepo, pushResults);
+				// pull
+				log.debug("Pulling {} due to '{}'", gitRepo, message);
+				final PullResult pullResult = git.pull().call();
+				// FetchResult doesn't have proper toString()
+				final String fetchResult = pullResult.getFetchResult() != null ? pullResult.getFetchResult().getTrackingRefUpdates() + " from " + pullResult.getFetchResult().getURI() : null;
+				log.info("Pulled {} from {}. Fetch: {}. Merge: {}.", gitRepo, pullResult.getFetchedFrom(), fetchResult,
+						pullResult.getMergeResult());
+				// push: MUST set default remote AND branch
+				log.debug("Pushing {} due to '{}'", gitRepo, message);
+				final Iterable<PushResult> pushResults = git.push().call();
+				log.info("Pushed {}: {}", gitRepo, pushResults);
 			}
 		} catch (GitAPIException e) {
 			throw new DataException(e, "Cannot commit '%s' to Git repository: %s", message, e);
