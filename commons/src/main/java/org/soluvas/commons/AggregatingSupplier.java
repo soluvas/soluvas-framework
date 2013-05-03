@@ -2,6 +2,7 @@ package org.soluvas.commons;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
@@ -21,6 +22,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
@@ -101,7 +103,6 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 	 */
 	private final List<EReference> containments;
 
-	@SuppressWarnings("unchecked")
 	public AggregatingSupplier(EFactory eFactory, EClass eClass, List<Supplier<T>> suppliers) {
 		super();
 		this.eClass = eClass;
@@ -122,7 +123,6 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 	 * @see org.soluvas.commons.DelegatingSupplier#addSupplier(com.google.common.base.Supplier)
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public synchronized void addSupplier(Supplier<T> supplier) {
 		log.debug("Adding supplier {} for {}", supplier, eClass.getName());
 		long count = 0;
@@ -200,6 +200,19 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 	@Override @PreDestroy
 	public void destroy() {
 		removeSuppliers(ImmutableList.copyOf(map.keys()));
+	}
+	
+	/**
+	 * Remove all {@link Supplier}s then re-add them (effectively reloading).
+	 * Note that {@link #get()} never changes its returned {@link EObject},
+	 * the aggregated {@link EObject} itself is changed to reflect this change. 
+	 */
+	public void reload() {
+		final Set<Supplier<T>> suppliers = ImmutableSet.copyOf(map.keySet());
+		removeSuppliers(ImmutableList.copyOf(map.keys()));
+		for (final Supplier<T> supplier : suppliers) {
+			addSupplier(supplier);
+		}
 	}
 
 }

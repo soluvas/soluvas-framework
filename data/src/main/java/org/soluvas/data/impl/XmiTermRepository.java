@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.EcoreCopyFunction;
 import org.soluvas.commons.QNameFunction;
 import org.soluvas.commons.ResourceType;
-import org.soluvas.commons.XmiObjectLoader;
+import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataException;
@@ -38,6 +38,7 @@ import org.soluvas.data.DataFactory;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.KindPredicate;
 import org.soluvas.data.Term;
+import org.soluvas.data.TermChanged;
 import org.soluvas.data.TermRepository;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
@@ -58,6 +59,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
+import com.google.common.eventbus.EventBus;
 
 /**
  * {@link PagingAndSortingRepository} that operates on {@link Term}s (identified by UName)
@@ -92,15 +94,17 @@ public class XmiTermRepository
 	private final String kindNsPrefix;
 	private final String kindName;
 	private final List<URL> xmiResources;
+	private final EventBus eventBus;
 	
 	public XmiTermRepository(String kindNsPrefix, String kindName, List<URL> xmiResources, 
-			Map<String, File> xmiFiles) {
+			Map<String, File> xmiFiles, EventBus eventBus) {
 		super();
 		log = LoggerFactory.getLogger(getClass().getName() + "/" + kindNsPrefix + ":" + kindName);
 		this.kindNsPrefix = kindNsPrefix;
 		this.kindName = kindName;
 		this.xmiResources = xmiResources;
 		this.xmiFiles = xmiFiles;
+		this.eventBus = eventBus;
 		reload();
 	}
 	
@@ -108,7 +112,7 @@ public class XmiTermRepository
 		final DataCatalog catalog = DataFactory.eINSTANCE.createDataCatalog();
 		final KindPredicate predicate = new KindPredicate(kindNsPrefix, kindName);
 		for (final URL resource : xmiResources) {
-			final DataCatalog loaded = (DataCatalog) new XmiObjectLoader<>(DataPackage.eINSTANCE, resource, ResourceType.CLASSPATH).get();
+			final DataCatalog loaded = (DataCatalog) new StaticXmiLoader<>(DataPackage.eINSTANCE, resource, ResourceType.CLASSPATH).get();
 			final Collection<Term> matchingTerms = Collections2.filter(loaded.getTerms(), predicate);
 			log.debug("Loaded {} {}:{} terms from resource {}", matchingTerms.size(), kindNsPrefix, kindName, resource);
 			catalog.getTerms().addAll(EcoreUtil.copyAll(matchingTerms));
@@ -116,7 +120,7 @@ public class XmiTermRepository
 		for (final Entry<String, File> entry : xmiFiles.entrySet()) {
 			final File file = entry.getValue();
 			final String nsPrefix = entry.getKey();
-			final DataCatalog loaded = (DataCatalog) new XmiObjectLoader<>(DataPackage.eINSTANCE, file.getPath()).get();
+			final DataCatalog loaded = (DataCatalog) new StaticXmiLoader<>(DataPackage.eINSTANCE, file.getPath()).get();
 			xmiCatalogs.put(nsPrefix, loaded);
 			final Collection<Term> matchingTerms = Collections2.filter(loaded.getTerms(), predicate);
 			log.debug("Loaded {} {}:{} terms for {} from file {}", 
@@ -349,7 +353,7 @@ public class XmiTermRepository
 	 * @param message TODO
 	 */
 	protected void catalogFilesChanged(final Set<String> nsPrefixes, String message) {
-		
+		eventBus.post(new TermChanged(null, kindNsPrefix, kindName));
 	}
 
 }

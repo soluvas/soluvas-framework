@@ -10,11 +10,11 @@ import org.osgi.framework.Bundle;
 
 public interface XmiObjectLoaderFactory {
 
-	public abstract <T extends EObject> XmiObjectLoader<T> create(
+	public abstract <T extends EObject> StaticXmiLoader<T> create(
 			@Nonnull EPackage ePackage, @Nonnull Class<?> loaderClass,
 			@Nonnull String resourcePath);
 
-	public abstract <T extends EObject> XmiObjectLoader<T> create(
+	public abstract <T extends EObject> StaticXmiLoader<T> create(
 			@Nonnull EPackage ePackage, @Nonnull String fileName);
 
 	/**
@@ -23,7 +23,7 @@ public interface XmiObjectLoaderFactory {
 	 * @param baseDir
 	 * @param fileName
 	 */
-	public abstract <T extends EObject> XmiObjectLoader<T> create(
+	public abstract <T extends EObject> StaticXmiLoader<T> create(
 			@Nonnull EPackage ePackage, @Nonnull Bundle bundle,
 			@Nonnull String fileName);
 
@@ -33,11 +33,11 @@ public interface XmiObjectLoaderFactory {
 	 * @param baseDir
 	 * @param fileName
 	 */
-	public abstract <T extends EObject> XmiObjectLoader<T> create(
+	public abstract <T extends EObject> StaticXmiLoader<T> create(
 			@Nonnull EPackage ePackage, @Nonnull String baseDir,
 			@Nonnull String fileName);
 
-	public abstract <T extends EObject> XmiObjectLoader<T> create(
+	public abstract <T extends EObject> StaticXmiLoader<T> create(
 			@Nonnull EPackage ePackage, @Nonnull URL resourceUrl,
 			@Nonnull ResourceType resourceType);
 

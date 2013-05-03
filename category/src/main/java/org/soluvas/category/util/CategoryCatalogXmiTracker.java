@@ -26,7 +26,7 @@ import org.soluvas.category.CategoryPackage;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.SupplierXmiTracker;
-import org.soluvas.commons.XmiObjectLoader;
+import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.impl.XmiTrackerUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -160,10 +160,10 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 				log.debug("Getting CategoryCatalog XMI {} from {}", suppliedClassName, url);
 				final CategoryCatalog categoryCatalog;
 				if (bundle != null) {
-					categoryCatalog = new XmiObjectLoader<CategoryCatalog>(xmiEPackage, url,
+					categoryCatalog = new StaticXmiLoader<CategoryCatalog>(xmiEPackage, url,
 							bundle).get();
 				} else {
-					categoryCatalog = new XmiObjectLoader<CategoryCatalog>(xmiEPackage, url,
+					categoryCatalog = new StaticXmiLoader<CategoryCatalog>(xmiEPackage, url,
 							ResourceType.CLASSPATH).get();
 				}
 				

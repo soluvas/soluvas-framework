@@ -107,7 +107,7 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 			}
 			for (final URL url : entries) {
 				log.debug("Registering Supplier for {} from {}", suppliedClassName, url);
-				final XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(ePackage, url,
+				final StaticXmiLoader<EObject> loader = new StaticXmiLoader<EObject>(ePackage, url,
 						bundle);
 				final Dictionary<String, String> props = new Hashtable<String, String>();
 				props.put("suppliedClass", suppliedClassName);

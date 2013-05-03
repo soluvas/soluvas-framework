@@ -105,7 +105,7 @@ public class SupplierXmiTracker<T extends EObject> implements BundleTrackerCusto
 			}
 			for (final URL url : entries) {
 				log.debug("Registering Supplier for {} from {}", suppliedClassName, url);
-				final XmiObjectLoader<T> loader = new XmiObjectLoader<T>(ePackage, url,
+				final StaticXmiLoader<T> loader = new StaticXmiLoader<T>(ePackage, url,
 						bundle);
 				delegate.addSupplier(loader);
 				suppliersBuilder.add(loader);

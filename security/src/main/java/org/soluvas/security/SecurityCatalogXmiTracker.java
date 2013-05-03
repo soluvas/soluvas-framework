@@ -16,7 +16,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.BundleTrackerCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.XmiObjectLoader;
+import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.XmiTracker;
 
 import com.google.common.base.Supplier;
@@ -76,7 +76,7 @@ public class SecurityCatalogXmiTracker implements BundleTrackerCustomizer<List<S
 		while (entries.hasMoreElements()) {
 			final URL url = entries.nextElement();
 			log.debug("Loading SecurityCatalog from {}", url);
-			final XmiObjectLoader<EObject> loader = new XmiObjectLoader<EObject>(SecurityPackage.eINSTANCE, url,
+			final StaticXmiLoader<EObject> loader = new StaticXmiLoader<EObject>(SecurityPackage.eINSTANCE, url,
 					bundle);
 			final Dictionary<String, String> props = new Hashtable<String, String>();
 			props.put("suppliedClass", SecurityCatalog.class.getName());

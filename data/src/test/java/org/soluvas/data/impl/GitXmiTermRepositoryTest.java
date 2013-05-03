@@ -1,6 +1,7 @@
 package org.soluvas.data.impl;
 
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -17,6 +18,7 @@ import org.soluvas.data.Term;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.eventbus.EventBus;
 
 /**
  * @author adri
@@ -33,9 +35,13 @@ public class GitXmiTermRepositoryTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		// easy way:
+//		final File xmiFile = new File(System.getProperty("user.home"), "git/bedi-model/berbatik_common/base_Color-berbatik.DataCatalog.xmi");
+		// hard way:
+		final File xmiFile = new File(System.getProperty("user.home"), "berbatik_dev/common/base_Color-berbatik.DataCatalog.xmi");
 		repo = new GitXmiTermRepository("base", "Color", 
 				ImmutableList.of(GitXmiTermRepositoryTest.class.getResource("/org/soluvas/data/base_Color-base.DataCatalog.xmi")),
-				ImmutableMap.of("berbatik", new File(System.getProperty("user.home"), "git/bedi-model/berbatik_common/base_Color-berbatik.DataCatalog.xmi")));
+				ImmutableMap.of("berbatik", xmiFile), new EventBus());
 	}
 
 	/**
@@ -55,6 +61,7 @@ public class GitXmiTermRepositoryTest {
 
 	@Test
 	public void addTerm() {
+		final long origRepoCount = repo.count();
 		final Term term = new TermImpl();
 		term.setNsPrefix("berbatik");
 		term.setKindNsPrefix("base");
@@ -65,18 +72,18 @@ public class GitXmiTermRepositoryTest {
 		log.info("Adding {}", term);
 		final Term added = repo.add(term);
 		assertNotNull(added);
-		assertEquals(148L, repo.count());
+		assertEquals(origRepoCount + 1, repo.count());
 	}
 
 	@Test
 	public void merahcintaExists() {
-		assertEquals(148L, repo.count());
+		assertThat(repo.count(), greaterThanOrEqualTo(148L));
 		assertTrue(repo.exists("berbatik_merahcinta"));
 	}
 	
 	@Test
 	public void modifyTerm() {
-		assertEquals(148L, repo.count());
+		assertThat(repo.count(), greaterThanOrEqualTo(148L));
 		final String origUName = "berbatik_merahcinta";
 		final Term term = repo.findOne(origUName);
 		term.setName("birucinta");
@@ -85,15 +92,16 @@ public class GitXmiTermRepositoryTest {
 		log.info("Modifying {} to {}", origUName, term);
 		final Term modified = repo.modify(origUName, term);
 		assertNotNull(modified);
-		assertEquals(148L, repo.count());
+		assertThat(repo.count(), greaterThanOrEqualTo(148L));
 	}
 
 	@Test
 	public void deleteTerm() {
-		assertEquals(148L, repo.count());
+		final long origRepoCount = repo.count();
+		assertThat(origRepoCount, greaterThanOrEqualTo(148L));
 		boolean deleted = repo.delete("berbatik_birucinta");
 		assertTrue(deleted);
-		assertEquals(147L, repo.count());
+		assertEquals(origRepoCount - 1, origRepoCount);
 	}
 
 }

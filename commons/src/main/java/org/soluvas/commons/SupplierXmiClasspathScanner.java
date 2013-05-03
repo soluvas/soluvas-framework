@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
@@ -30,10 +29,13 @@ import com.google.common.collect.Lists;
  * Tracks files named <tt>(bundle)/*.{suppliedClassSimpleName}.xmi</tt> and adds/removes
  * them from {@link DelegatingSupplier}.
  * 
- * This is a shortcut that's in effect equivalent to using an {@link XmiTracker} 
+ * <p>This is a shortcut that's in effect equivalent to using an {@link XmiTracker} 
  * combined with {@link SupplierTracker}.
  * 
- * Usage:
+ * <p>Uses {@link OnDemandXmiLoader} instead of {@link StaticXmiLoader} so that
+ * {@link AggregatingSupplier#reload()} works as intended.
+ * 
+ * <p>Usage:
  * 
  * <pre>{@code
  * 	<bean id="bannerPackage" class="org.soluvas.web.banner.impl.BannerPackageImpl"
@@ -75,7 +77,7 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 	private final DelegatingSupplier<T> delegate;
 	private final String packageToScan;
 	private final ClassLoader classLoader;
-	private List<Supplier<T>> suppliers;
+	private final List<Supplier<T>> suppliers;
 	
 	/**
 	 * Scan a specific class.
@@ -84,8 +86,8 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 	 * @param tenantId
 	 * @param tenantEnv
 	 */
-	public SupplierXmiClasspathScanner(final @Nonnull EPackage ePackage, final @Nonnull Class<T> suppliedClass,
-			@Nonnull final DelegatingSupplier<T> delegate, @Nonnull final Class<?> packageToScan) {
+	public SupplierXmiClasspathScanner(final EPackage ePackage, final Class<T> suppliedClass,
+			final DelegatingSupplier<T> delegate, final Class<?> packageToScan) {
 		super();
 		this.ePackage = ePackage;
 		this.suppliedClassName = suppliedClass.getName();
@@ -105,9 +107,9 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 	 * @param tenantEnv
 	 * @todo Note that this is slow, but used for now to support lazy beans instantiation. Static or hybrid is preferable.
 	 */
-	public SupplierXmiClasspathScanner(final @Nonnull EPackage ePackage, final @Nonnull Class<T> suppliedClass,
-			@Nonnull final DelegatingSupplier<T> delegate, @Nonnull final ClassLoader classLoader,
-			@Nonnull final String dataFolder) {
+	public SupplierXmiClasspathScanner(final EPackage ePackage, final Class<T> suppliedClass,
+			final DelegatingSupplier<T> delegate, final ClassLoader classLoader,
+			final String dataFolder) {
 		super();
 		this.ePackage = ePackage;
 		this.suppliedClassName = suppliedClass.getName();
@@ -125,7 +127,7 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 	}
 
 	@Nullable
-	public List<Supplier<T>> scan(@Nonnull ClassLoader classLoader, String dataFolder) {
+	public List<Supplier<T>> scan(ClassLoader classLoader, String dataFolder) {
 		final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
 		// Due to JDK limitation, scanning of root won't work in webapp classpath,
 		// at least the root folder must be specified before wildcard
@@ -153,12 +155,12 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 					}
 				}
 			}));
-			final Map<String, List<Supplier<T>>> managedCategories = new HashMap<>();
+			final Map<String, List<Supplier<T>>> managedSuppliers = new HashMap<>();
 			for (URL xmiUrl : xmiUrls) {
 				final List<Supplier<T>> objs = extractSuppliers(ImmutableList.of(xmiUrl));
-				managedCategories.put(xmiUrl.toString(), objs);
+				managedSuppliers.put(xmiUrl.toString(), objs);
 			}
-			final List<Supplier<T>> scannedSuppliers = ImmutableList.copyOf(Iterables.concat(managedCategories.values()));
+			final List<Supplier<T>> scannedSuppliers = ImmutableList.copyOf(Iterables.concat(managedSuppliers.values()));
 			return scannedSuppliers;
 		} catch (IOException e) {
 			throw new CommonsException(e, "Cannot scan %s for %s",
@@ -167,7 +169,7 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 	}
 
 	@Nullable
-	public List<Supplier<T>> addingBundle(@Nonnull ClassLoader classLoader, @Nonnull String pkg) {
+	public List<Supplier<T>> addingBundle(ClassLoader classLoader, String pkg) {
 		final PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
 		final Resource[] resources;
 		try {
@@ -205,7 +207,7 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 		try {
 			for (final URL resource : xmiUrls) {
 				log.debug("Registering Supplier for {} from {}", suppliedClassName, resource);
-				final XmiObjectLoader<T> loader = new XmiObjectLoader<T>(ePackage, resource,
+				final Supplier<T> loader = new OnDemandXmiLoader<T>(ePackage, resource,
 						ResourceType.CLASSPATH);
 				delegate.addSupplier(loader);
 				suppliersBuilder.add(loader);
@@ -233,7 +235,7 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 		}
 	}
 
-	public void removedBundle(@Nonnull ClassLoader classLoader, @Nonnull String pkg,
+	public void removedBundle(ClassLoader classLoader, String pkg,
 			@Nullable List<Supplier<T>> suppliers) {
 		if (suppliers == null)
 			return;

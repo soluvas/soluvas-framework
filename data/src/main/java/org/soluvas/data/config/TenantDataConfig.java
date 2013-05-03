@@ -18,8 +18,8 @@ import org.soluvas.data.impl.MixinManagerImpl;
 import org.soluvas.data.impl.TermManagerImpl;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 
 import com.google.common.base.Supplier;
@@ -31,7 +31,8 @@ import com.google.common.collect.ImmutableList;
  * @author rudi
  *
  */
-@Configuration @Lazy
+@Configuration @Scope("prototype")
+@ComponentScan("org.soluvas.data.shell")
 public class TenantDataConfig {
 	
 //	@Inject @DataFolder

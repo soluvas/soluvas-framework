@@ -29,7 +29,7 @@ import org.osgi.util.tracker.BundleTrackerCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.ResourceType;
-import org.soluvas.commons.XmiObjectLoader;
+import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailException;
 import org.soluvas.email.EmailPackage;
@@ -162,11 +162,11 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 			
 			// Load EmailCatalog XMI files so we can get the generatedPackageName
 			log.debug("Getting EmailCatalog XMI {} from {} in {}", suppliedClassName, xmiUrl, xmiUrls );
-			final XmiObjectLoader<EmailCatalog> loader;
+			final StaticXmiLoader<EmailCatalog> loader;
 			if (bundle != null) {
-				loader = new XmiObjectLoader<EmailCatalog>(xmiEPackage, xmiUrl, bundle);
+				loader = new StaticXmiLoader<EmailCatalog>(xmiEPackage, xmiUrl, bundle);
 			} else {
-				loader = new XmiObjectLoader<EmailCatalog>(xmiEPackage, xmiUrl, ResourceType.CLASSPATH);
+				loader = new StaticXmiLoader<EmailCatalog>(xmiEPackage, xmiUrl, ResourceType.CLASSPATH);
 			}
 			final EmailCatalog emailCatalog = loader.get();
 			catalogs.add(emailCatalog);
@@ -183,12 +183,12 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 			public Map<String, EClass> apply(@Nullable EmailCatalog catalog) {
 				final URL ecoreUrl = catalog.getEcoreUrl();
 				log.debug("Getting {} from {} in {}", suppliedClassName, ecoreUrl, xmiUrls);
-				XmiObjectLoader<EPackage> loader;
+				StaticXmiLoader<EPackage> loader;
 				if (bundle != null) {
-					loader = new XmiObjectLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl,
+					loader = new StaticXmiLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl,
 							bundle);
 				} else {
-					loader = new XmiObjectLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl,
+					loader = new StaticXmiLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl,
 							ResourceType.CLASSPATH);
 				}
 				final EPackage ecorePackage = loader.get();

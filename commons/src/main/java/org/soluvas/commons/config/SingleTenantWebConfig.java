@@ -13,7 +13,7 @@ import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.DataFolder;
 import org.soluvas.commons.WebAddress;
-import org.soluvas.commons.XmiObjectLoader;
+import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.commons.tenant.TenantRefImpl;
 import org.springframework.context.annotation.Bean;
@@ -56,13 +56,13 @@ public class SingleTenantWebConfig {
 	
 	@Bean
 	public WebAddress webAddress() {
-		return new XmiObjectLoader<WebAddress>(CommonsPackage.eINSTANCE,
+		return new StaticXmiLoader<WebAddress>(CommonsPackage.eINSTANCE,
 				new File(dataFolder(), "model/custom.WebAddress.xmi").toString()).get();
 	}
 
 	@Bean
 	public AppManifest appManifest() {
-		return new XmiObjectLoader<AppManifest>(CommonsPackage.eINSTANCE,
+		return new StaticXmiLoader<AppManifest>(CommonsPackage.eINSTANCE,
 				new File(dataFolder(), "model/" + tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv() + ".AppManifest.xmi").toString()).get();
 	}
 	

@@ -8,11 +8,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.ResourceType;
-import org.soluvas.commons.XmiObjectLoader;
+import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.XmiObjectLoaderFactory;
 
 /**
- * Creates {@link XmiObjectLoader}. This is not necessary, but simply attempt to workaround
+ * Creates {@link StaticXmiLoader}. This is not necessary, but simply attempt to workaround
  * for Karaf/Blueprint bug. which didn't work anyway.
  * @author ceefour
  * @deprecated Delete this class after not referenced.
@@ -24,41 +24,41 @@ public class XmiObjectLoaderFactoryImpl implements XmiObjectLoaderFactory {
 	 * @see org.soluvas.commons.XmiObjectLoaderFactory#create(org.eclipse.emf.ecore.EPackage, java.lang.Class, java.lang.String)
 	 */
 	@Override
-	public <T extends EObject> XmiObjectLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final Class<?> loaderClass, @Nonnull final String resourcePath) {
-		return new XmiObjectLoader<T>(ePackage, loaderClass, resourcePath);
+	public <T extends EObject> StaticXmiLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final Class<?> loaderClass, @Nonnull final String resourcePath) {
+		return new StaticXmiLoader<T>(ePackage, loaderClass, resourcePath);
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.soluvas.commons.XmiObjectLoaderFactory#create(org.eclipse.emf.ecore.EPackage, java.lang.String)
 	 */
 	@Override
-	public <T extends EObject> XmiObjectLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final String fileName) {
-		return new XmiObjectLoader<T>(ePackage, fileName);
+	public <T extends EObject> StaticXmiLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final String fileName) {
+		return new StaticXmiLoader<T>(ePackage, fileName);
 	}
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.commons.XmiObjectLoaderFactory#create(org.eclipse.emf.ecore.EPackage, org.osgi.framework.Bundle, java.lang.String)
 	 */
 	@Override
-	public <T extends EObject> XmiObjectLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final Bundle bundle, @Nonnull final String fileName) {
-		return new XmiObjectLoader<T>(ePackage, bundle, fileName);
+	public <T extends EObject> StaticXmiLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final Bundle bundle, @Nonnull final String fileName) {
+		return new StaticXmiLoader<T>(ePackage, bundle, fileName);
 	}
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.commons.XmiObjectLoaderFactory#create(org.eclipse.emf.ecore.EPackage, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public <T extends EObject> XmiObjectLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final String baseDir, @Nonnull final String fileName) {
-		return new XmiObjectLoader<T>(ePackage, baseDir, fileName);
+	public <T extends EObject> StaticXmiLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final String baseDir, @Nonnull final String fileName) {
+		return new StaticXmiLoader<T>(ePackage, baseDir, fileName);
 	}
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.commons.XmiObjectLoaderFactory#create(org.eclipse.emf.ecore.EPackage, java.net.URL, org.soluvas.commons.ResourceType)
 	 */
 	@Override
-	public <T extends EObject> XmiObjectLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final URL resourceUrl,
+	public <T extends EObject> StaticXmiLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final URL resourceUrl,
 			@Nonnull final ResourceType resourceType) {
-		return new XmiObjectLoader<T>(ePackage, resourceUrl, resourceType);
+		return new StaticXmiLoader<T>(ePackage, resourceUrl, resourceType);
 	}
 
 }

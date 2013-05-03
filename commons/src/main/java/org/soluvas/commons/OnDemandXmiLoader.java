@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
@@ -29,27 +28,30 @@ import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableMap;
 
 /**
- * Loads a predefined EMF object from an XMI file.
+ * Loads a predefined EMF object from an XMI file on every {@link #get()} call.
  * 
  * Note: the object is supplied as-is from the {@link XMIResource}, i.e. not
  * cloned.
  * 
  * @author rudi
  */
-public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
+public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 	
-	private static Logger log = LoggerFactory
-			.getLogger(XmiObjectLoader.class);
-	private final T obj;
-	private final String ePackageName;
-	private final String ePackageNsUri;
-	private final URI resourceUri;
+	protected final Logger log = LoggerFactory.getLogger(getClass());
+	protected final String ePackageName;
+	protected final String ePackageNsUri;
+	protected final URI resourceUri;
+	protected final ResourceType resourceType;
+	protected final String resourceName;
+	protected final Bundle bundle;
+	protected final EPackage ePackage;
 	
-	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final Class<?> loaderClass, @Nonnull final String resourcePath) {
+	public OnDemandXmiLoader(final EPackage ePackage, final Class<?> loaderClass, final String resourcePath) {
 		super();
 		Preconditions.checkNotNull(ePackage, "ePackage cannot be null");
 		Preconditions.checkNotNull(loaderClass, "loaderClass cannot be null");
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(resourcePath), "resourcePath cannot be null");
+		this.ePackage = ePackage;
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		log.info("Loading XMI: {} from {}", resourcePath, loaderClass.getName());
@@ -57,24 +59,29 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s using class %s",
 				resourcePath, loaderClass.getName());
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		final Bundle bundle = FrameworkUtil.getBundle(loaderClass);
+		this.bundle = FrameworkUtil.getBundle(loaderClass);
 //		final Bundle bundle = Preconditions.checkNotNull(FrameworkUtil.getBundle(loaderClass),
 //				"Cannot get bundle for %s", loaderClass);
 		if (bundle != null) {
-			this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourcePath, bundle);
+			this.resourceType = ResourceType.BUNDLE;
+			this.resourceName = resourcePath;
 		} else {
-			this.obj = load(ePackage, ResourceType.CLASSPATH, resourceUri, resourcePath, null);
+			this.resourceType = ResourceType.CLASSPATH;
+			this.resourceName = resourcePath;
 		}
 	}
 
-	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final String fileName) {
+	public OnDemandXmiLoader(final EPackage ePackage, final String fileName) {
 		super();
 		Preconditions.checkNotNull(ePackage, "ePackage cannot be null");
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(fileName), "fileName cannot be null");
+		this.ePackage = ePackage;
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		this.resourceUri = URI.createFileURI(fileName);
-		this.obj = load(ePackage, ResourceType.FILE, resourceUri, fileName, null);
+		this.resourceType = ResourceType.FILE;
+		this.resourceName = fileName;
+		this.bundle = null;
 	}
 
 	/**
@@ -83,18 +90,21 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	 * @param baseDir
 	 * @param fileName
 	 */
-	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final Bundle bundle, @Nonnull final String fileName) {
+	public OnDemandXmiLoader(final EPackage ePackage, final Bundle bundle, final String fileName) {
 		super();
 		Preconditions.checkNotNull(ePackage, "ePackage cannot be null");
 		Preconditions.checkNotNull(bundle, "bundle cannot be null");
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(fileName), "fileName cannot be null");
+		this.ePackage = ePackage;
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		final URL resourceUrl = bundle.getResource(fileName);
 		Preconditions.checkNotNull(resourceUrl, "Cannot find resource %s in bundle %s [%s]",
 				fileName, bundle.getSymbolicName(), bundle.getBundleId());
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, fileName, bundle);
+		this.resourceType = ResourceType.BUNDLE;
+		this.resourceName = fileName;
+		this.bundle = null;
 	}
 
 	/**
@@ -103,15 +113,18 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	 * @param baseDir
 	 * @param fileName
 	 */
-	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final String baseDir, @Nonnull final String fileName) {
+	public OnDemandXmiLoader(final EPackage ePackage, final String baseDir, final String fileName) {
 		super();
 		Preconditions.checkNotNull(ePackage, "ePackage cannot be null");
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(baseDir), "baseDir cannot be null");
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(fileName), "fileName cannot be null");
+		this.ePackage = ePackage;
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		this.resourceUri = URI.createFileURI(baseDir + "/" + fileName);
-		this.obj = load(ePackage, ResourceType.FILE, resourceUri, fileName, null);
+		this.resourceType = ResourceType.FILE;
+		this.resourceName = fileName;
+		this.bundle = null;
 	}
 
 	/**
@@ -120,35 +133,40 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 	 * @param resourceUrl
 	 * @param resourceType
 	 */
-	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final URL resourceUrl,
-			@Nonnull final ResourceType resourceType) {
+	public OnDemandXmiLoader(final EPackage ePackage, final URL resourceUrl,
+			final ResourceType resourceType) {
 		super();
 		Preconditions.checkNotNull(ePackage, "ePackage cannot be null");
 		Preconditions.checkNotNull(resourceUrl, "resourceUrl cannot be null");
 		Preconditions.checkNotNull(resourceType, "resourceType cannot be null");
+		this.ePackage = ePackage;
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
-		this.obj = load(ePackage, resourceType, resourceUri, resourceUri.toString(), null);
+		this.resourceType = resourceType;
+		this.resourceName = resourceUrl.getFile();
+		this.bundle = null;
 	}
 	
-	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final URL resourceUrl,
-			@Nonnull final Bundle bundle) {
+	public OnDemandXmiLoader(final EPackage ePackage, final URL resourceUrl,
+			final Bundle bundle) {
 		super();
 		Preconditions.checkNotNull(ePackage, "ePackage cannot be null");
 		Preconditions.checkNotNull(resourceUrl, "resourceUrl cannot be null");
 		Preconditions.checkNotNull(bundle, "bundle cannot be null");
+		this.ePackage = ePackage;
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
 		this.resourceUri = URI.createURI(resourceUrl.toExternalForm());
 		final Matcher matcher = Pattern.compile("([^.]+).*").matcher(resourceUri.lastSegment());
-		final String resourceName = matcher.matches() ? matcher.group(1) : resourceUri.lastSegment();
-		this.obj = load(ePackage, ResourceType.BUNDLE, resourceUri, resourceName, bundle);
+		this.resourceName = matcher.matches() ? matcher.group(1) : resourceUri.lastSegment();
+		this.resourceType = ResourceType.BUNDLE;
+		this.bundle = bundle;
 	}
 	
 //	@Deprecated
-//	public XmiObjectLoader(@Nonnull final EPackage ePackage, @Nonnull final URL resourceUrl,
-//			@Nonnull final String resourceName, @Nonnull final Bundle bundle) {
+//	public XmiObjectLoader(final EPackage ePackage, final URL resourceUrl,
+//			final String resourceName, final Bundle bundle) {
 //		super();
 //		Preconditions.checkNotNull(ePackage, "ePackage cannot be null");
 //		Preconditions.checkNotNull(resourceUrl, "resourceUrl cannot be null");
@@ -165,20 +183,12 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		log.info("Destroying XMI Loader for {} from {} [{}]", resourceUri, ePackageName, ePackageNsUri);
 	}
 
-	@Override
-	@Nullable
+	@Override @Nullable
 	public T get() {
-		if (obj == null) {
-			log.warn("Returning null, probably XMI Loader has been destroyed for {} from {} [{}]",
-					resourceUri, ePackageName, ePackageNsUri);
-		}
-		return obj;
+		return load();
 	}
 
-	@SuppressWarnings("unchecked")
-	protected T load(@Nonnull final EPackage ePackage, @Nonnull final ResourceType resourceType,
-			@Nonnull final URI resourceUri, @Nonnull final String resourceName,
-			@Nullable final Bundle bundle) {
+	protected T load() {
 		if (bundle != null) {
 			log.debug("Loading XMI from URI: {} using bundle {}", resourceUri, bundle);
 		} else {
@@ -252,8 +262,8 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		return obj;
 	}
 
-	protected long augmentResourceInfo(@Nonnull final ResourceType resourceType, @Nonnull final URI resourceUri,
-			@Nonnull final String resourceName, @Nonnull final EObject content) {
+	protected long augmentResourceInfo(final ResourceType resourceType, final URI resourceUri,
+			final String resourceName, final EObject content) {
 		if (content instanceof ResourceAware) {
 			final ResourceAware resourceContent = (ResourceAware) content;
 			resourceContent.setResourceType(resourceType);
@@ -265,7 +275,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		}
 	}
 
-	protected long augmentBundleInfo(@Nonnull final Bundle bundle, @Nonnull final EObject content) {
+	protected long augmentBundleInfo(final Bundle bundle, final EObject content) {
 		if (content instanceof BundleAware) {
 			final BundleAware bundleContent = (BundleAware) content;
 			bundleContent.setBundle(bundle);
@@ -275,7 +285,7 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		}
 	}
 
-	protected long expand(@Nonnull final Map<String, Object> scope, @Nonnull final EObject content) {
+	protected long expand(final Map<String, Object> scope, final EObject content) {
 		if (content instanceof Expandable) {
 			((Expandable) content).expand(scope);
 			return 1;
@@ -284,14 +294,21 @@ public class XmiObjectLoader<T extends EObject> implements Supplier<T> {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "XmiObjectLoader ["
-				+ (ePackageName != null ? "ePackageName=" + ePackageName : "")
-				+ "]";
+		return getClass().getSimpleName() + " ["
+				+ (ePackageName != null ? "ePackageName=" + ePackageName + ", "
+						: "")
+				+ (ePackageNsUri != null ? "ePackageNsUri=" + ePackageNsUri
+						+ ", " : "")
+				+ (resourceUri != null ? "resourceUri=" + resourceUri + ", "
+						: "")
+				+ (resourceType != null ? "resourceType=" + resourceType + ", "
+						: "")
+				+ (resourceName != null ? "resourceName=" + resourceName + ", "
+						: "")
+				+ (bundle != null ? "bundle=" + bundle + ", " : "")
+				+ (ePackage != null ? "ePackage=" + ePackage : "") + "]";
 	}
 
 }

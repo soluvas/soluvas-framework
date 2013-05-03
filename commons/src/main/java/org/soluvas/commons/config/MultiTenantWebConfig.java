@@ -15,7 +15,7 @@ import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.DataFolder;
 import org.soluvas.commons.WebAddress;
-import org.soluvas.commons.XmiObjectLoader;
+import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.commons.tenant.TenantRefImpl;
 import org.springframework.context.annotation.Bean;
@@ -83,7 +83,7 @@ public class MultiTenantWebConfig {
 		return appManifestCache.get(tenantKey, new Callable<AppManifest>() {
 			@Override
 			public AppManifest call() throws Exception {
-				return new XmiObjectLoader<AppManifest>(CommonsPackage.eINSTANCE,
+				return new StaticXmiLoader<AppManifest>(CommonsPackage.eINSTANCE,
 						new File(dataFolder(), "model/" + tenantKey + ".AppManifest.xmi").toString()).get();
 			}
 		});
@@ -95,7 +95,7 @@ public class MultiTenantWebConfig {
 		return webAddressCache.get(tenantKey, new Callable<WebAddress>() {
 			@Override
 			public WebAddress call() throws Exception {
-				return new XmiObjectLoader<WebAddress>(CommonsPackage.eINSTANCE,
+				return new StaticXmiLoader<WebAddress>(CommonsPackage.eINSTANCE,
 						new File(dataFolder(), "model/custom.WebAddress.xmi").toString()).get();
 			}
 		});

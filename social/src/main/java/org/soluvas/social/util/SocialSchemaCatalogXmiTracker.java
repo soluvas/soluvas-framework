@@ -33,7 +33,7 @@ import org.soluvas.commons.EClassLinked;
 import org.soluvas.commons.JavaClassLinked;
 import org.soluvas.commons.NotNullPredicate;
 import org.soluvas.commons.ResourceType;
-import org.soluvas.commons.XmiObjectLoader;
+import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.social.SocialException;
 import org.soluvas.social.schema.SchemaFactory;
 import org.soluvas.social.schema.SchemaPackage;
@@ -171,11 +171,11 @@ public class SocialSchemaCatalogXmiTracker implements BundleTrackerCustomizer<Li
 			}
 			
 			log.debug("Getting SocialSchemaCatalog XMI {} from {}", suppliedClassName, xmiUrl);
-			final XmiObjectLoader<SocialSchemaCatalog> loader;
+			final StaticXmiLoader<SocialSchemaCatalog> loader;
 			if (bundle != null) {
-				loader = new XmiObjectLoader<SocialSchemaCatalog>(xmiEPackage, xmiUrl, bundle);
+				loader = new StaticXmiLoader<SocialSchemaCatalog>(xmiEPackage, xmiUrl, bundle);
 			} else {
-				loader = new XmiObjectLoader<SocialSchemaCatalog>(xmiEPackage, xmiUrl, ResourceType.CLASSPATH);
+				loader = new StaticXmiLoader<SocialSchemaCatalog>(xmiEPackage, xmiUrl, ResourceType.CLASSPATH);
 			}
 			final SocialSchemaCatalog socialSchemaCatalog = loader.get();
 			catalogs.add(socialSchemaCatalog);
@@ -191,11 +191,11 @@ public class SocialSchemaCatalogXmiTracker implements BundleTrackerCustomizer<Li
 			public Map<String, EClass> apply(@Nullable SocialSchemaCatalog catalog) {
 				final URL ecoreUrl = catalog.getEcoreUrl();
 				log.debug("Getting {} from {}", suppliedClassName, ecoreUrl);
-				final XmiObjectLoader<EPackage> loader;
+				final StaticXmiLoader<EPackage> loader;
 				if (bundle != null) {
-					loader = new XmiObjectLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl, bundle);
+					loader = new StaticXmiLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl, bundle);
 				} else {
-					loader = new XmiObjectLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl, ResourceType.CLASSPATH);
+					loader = new StaticXmiLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl, ResourceType.CLASSPATH);
 				}
 				final EPackage ecorePackage = loader.get();
 				log.debug("Loaded {} EPackage {} ({}={}) from {}", suppliedClassName, 

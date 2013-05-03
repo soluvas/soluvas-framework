@@ -113,7 +113,7 @@ public class ServiceXmiTracker<T extends EObject> implements BundleTrackerCustom
 			}
 			for (final URL url : entries) {
 				log.debug("Registering Supplier for {} from {}", suppliedClassName, url);
-				final XmiObjectLoader<T> loader = new XmiObjectLoader<T>(ePackage, url,
+				final StaticXmiLoader<T> loader = new StaticXmiLoader<T>(ePackage, url,
 						bundle);
 				final T root = loader.get();
 				final Dictionary<String, Object> props = new Hashtable<String, Object>();

@@ -17,6 +17,7 @@ import org.soluvas.data.Term;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.eventbus.EventBus;
 
 /**
  * @author adri
@@ -35,7 +36,8 @@ public class XmiTermRepositoryTest {
 	public void setUp() throws Exception {
 		repo = new XmiTermRepository("base", "Color", 
 				ImmutableList.of(XmiTermRepositoryTest.class.getResource("/org/soluvas/data/base_Color-base.DataCatalog.xmi")),
-				ImmutableMap.of("berbatik", new File(System.getProperty("user.home"), "git/bedi-model/berbatik_common/base_Color-berbatik.DataCatalog.xmi")));
+				ImmutableMap.of("berbatik", new File(System.getProperty("user.home"), "git/bedi-model/berbatik_common/base_Color-berbatik.DataCatalog.xmi")),
+				new EventBus());
 	}
 
 	/**

@@ -9,14 +9,14 @@ import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.Term;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
  * Display all {@link Term}s.
  * @author rully
  */
-@Service @Lazy
+@Service @Scope("prototype")
 @Command(scope="term", name="ls", description="Display all Terms.")
 public class TermLsCommand extends ExtCommandSupport {
 	
