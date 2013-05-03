@@ -404,7 +404,8 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 			// escape searchText using https://issues.apache.org/jira/browse/DIRSHARED-143
 	//		final String filter = String.format("(&(objectClass=%s)(|(cn=*%s*)(gn=*%s*)(sn=*%s*)(uid=*%s*)(mail=*%s*)))",
 	//				primaryObjectClass, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText);
-			filter = String.format("(&(objectClass=*)(|(cn=*%s*)(gn=*%s*)(sn=*%s*)(uid=*%s*)(mail=*%s*)))",
+			// TODO: change index config so that uid is also sub,subinitial,subany
+			filter = String.format("(&(objectClass=*)(|(uid=%s)(cn=*%s*)(gn=*%s*)(sn=*%s*)(mail=*%s*)))",
 					encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText);
 		} else {
 			filter = "(objectClass=*)";
