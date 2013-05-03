@@ -10,6 +10,17 @@ import com.google.common.base.Optional;
 /**
  * Provides a {@link ProgressMonitor} via {@link ThreadLocal}.
  * use try-with-resources syntax.
+ * 
+ * <pre>{@literal
+ * try (ThreadLocalProgress progress = new ThreadLocalProgress(monitor)) {
+ * 	perpInvMgr.replay();
+ * } catch (Exception e) {
+ * 	eventBus.post(e);
+ * 	log.error("Error replaying quantities: " + e, e);
+ * 	throw e;
+ * }
+ * }</pre>
+ * 
  * @author adri
  */
 public class ThreadLocalProgress implements AutoCloseable {
