@@ -59,7 +59,6 @@ import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
 
-
 /**
  * {@link PagingAndSortingRepository} that operates on {@link Term}s (identified by UName)
  * inside one or more:
