@@ -77,7 +77,7 @@ import com.google.common.collect.Sets.SetView;
 public class XmiTermRepository 
 		extends PagingAndSortingRepositoryBase<Term, String>
 		implements TermRepository {
-	private final Logger log;
+	protected final Logger log;
 	/**
 	 * {@link Term}s in working memory.
 	 */
@@ -97,7 +97,7 @@ public class XmiTermRepository
 	public XmiTermRepository(String kindNsPrefix, String kindName, List<URL> xmiResources, 
 			Map<String, File> xmiFiles) {
 		super();
-		log = LoggerFactory.getLogger(XmiTermRepository.class.getName() + "/" + kindNsPrefix + ":" + kindName);
+		log = LoggerFactory.getLogger(getClass().getName() + "/" + kindNsPrefix + ":" + kindName);
 		this.kindNsPrefix = kindNsPrefix;
 		this.kindName = kindName;
 		this.xmiResources = xmiResources;
@@ -165,6 +165,7 @@ public class XmiTermRepository
 		}
 		updateCatalogFiles(changedNsPrefixes);
 		reload();
+		catalogFilesChanged(changedNsPrefixes, String.format("Added %d terms: %s", entities.size(), uNamesToAdd));
 		log.info("Added {} terms: {}", entities.size(), Iterables.limit(entities, 10));
 		return addedTerms;
 	}
@@ -203,6 +204,7 @@ public class XmiTermRepository
 		}
 		updateCatalogFiles(changedNsPrefixes);
 		reload();
+		catalogFilesChanged(changedNsPrefixes, String.format("Modified %d terms: %s", entities.size(), entities.keySet()));
 		log.info("Modified {} terms: {}", entities.size(), Iterables.limit(entities.keySet(), 10));
 		return addedTerms;
 	}
@@ -294,6 +296,7 @@ public class XmiTermRepository
 		}
 		updateCatalogFiles(changedNsPrefixes);
 		reload();
+		catalogFilesChanged(changedNsPrefixes, String.format("Deleted %d terms: %s", ids.size(), ids));
 		log.info("Deleted {} terms: {}", ids, Iterables.limit(ids, 10));
 		return deletedTerms.size();
 	}
@@ -338,6 +341,16 @@ public class XmiTermRepository
 		final Iterable<Term> limited = doFindAll(pageable);
 		return new PageImpl<>(ImmutableList.copyOf(Iterables.transform(limited, new EcoreCopyFunction<Term>())),
 				pageable, catalog.getTerms().size());
+	}
+	
+	/**
+	 * Override in subclass to perform custom action after XMI files are
+	 * modified, e.g. commit then pull-push.
+	 * @param nsPrefixes
+	 * @param message TODO
+	 */
+	protected void catalogFilesChanged(final Set<String> nsPrefixes, String message) {
+		
 	}
 
 }
