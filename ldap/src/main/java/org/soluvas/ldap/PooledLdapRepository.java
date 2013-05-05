@@ -20,6 +20,7 @@ import org.apache.directory.api.ldap.model.message.SearchRequestImpl;
 import org.apache.directory.api.ldap.model.message.SearchScope;
 import org.apache.directory.api.ldap.model.name.Dn;
 import org.apache.directory.ldap.client.api.LdapConnection;
+import org.apache.directory.ldap.client.api.LdapConnectionPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.repository.CrudRepositoryBase;
@@ -57,6 +58,11 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	private final String baseDn;
 	private final Class<? extends T> entityClass;
 
+	/**
+	 * @param entityClass
+	 * @param pool Make sure to call {@link LdapConnectionPool#setTestOnBorrow(boolean)} true.
+	 * @param baseDn
+	 */
 	public PooledLdapRepository(final Class<? extends T> entityClass, final ObjectPool<LdapConnection> pool, final String baseDn) {
 		super();
 		this.entityClass = entityClass;
