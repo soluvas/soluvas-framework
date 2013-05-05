@@ -13,7 +13,7 @@
 	<description>LDAP Utilities and POJO Object Mapper for LDAP entries.</description>
 	
 	<properties>
-		<apache-ldap-api.version>1.0.0-M15</apache-ldap-api.version>
+		<apache-ldap-api.version>1.0.0-M17</apache-ldap-api.version>
 		<apacheds.version>2.0.0-M10</apacheds.version>
 	</properties>
 	
