@@ -82,12 +82,12 @@ public class LdapUtils {
 			
 			@Override public void checkServerTrusted(X509Certificate[] chain, String authType)
 					throws CertificateException {
-				log.warn("Trusting {} SERVER certificate {}", authType, chain);
+				log.info("Trusting {} SERVER certificate {}", authType, chain);
 			}
 			
 			@Override public void checkClientTrusted(X509Certificate[] chain, String authType)
 					throws CertificateException {
-				log.warn("Trusting {} CLIENT certificate {}", authType, chain);
+				log.info("Trusting {} CLIENT certificate {}", authType, chain);
 			}
 		};
 		ldapConfig.setTrustManagers(alwaysTrustManager);
