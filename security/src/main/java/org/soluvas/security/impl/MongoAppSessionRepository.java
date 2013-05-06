@@ -3,7 +3,6 @@ package org.soluvas.security.impl;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
@@ -17,8 +16,6 @@ import org.soluvas.security.AppSession;
 import org.soluvas.security.AppSessionRepository;
 import org.soluvas.security.AppSessionStatus;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Service;
 
 import com.google.code.morphia.Morphia;
 import com.google.common.base.Function;
@@ -38,8 +35,9 @@ import com.mongodb.MongoURI;
  * See https://sites.google.com/a/bippo.co.id/dev/berbatik/oauth
  * 
  * @author rudi
+ * @deprecated Probably causes memory leak.
  */
-@Service("appSessionRepo") @Lazy
+@Deprecated
 public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, String>
 	implements AppSessionRepository {
 	

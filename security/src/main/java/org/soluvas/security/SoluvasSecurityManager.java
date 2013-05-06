@@ -24,7 +24,9 @@ import org.soluvas.security.impl.SoluvasSessionFactory;
  * @todo Should this extend DefaultSecurityManager of DefaultWebSecurityManager?
  * 		Because DefaultWebSecurityManager expects an implementation of
  * 		WebSessionManager, it's not compatible with DefaultSessionManager.
+ * @deprecated Use {@link DefaultWebSecurityManager} instead.
  */
+@Deprecated
 public class SoluvasSecurityManager extends DefaultWebSecurityManager {
 
 	private static final Logger log = LoggerFactory
