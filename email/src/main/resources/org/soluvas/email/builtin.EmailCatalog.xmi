@@ -9,7 +9,7 @@
     generatedPackageName="org.soluvas.email.builtin">
   <pageTypes
       name="feedbackToAdminManager"
-      subjectTemplate="Feedback from {{{contact.name}}}: {{{contact.subject}}}"/>
+      subjectTemplate="[{{{appManifest.title}}}] Feedback from {{{contact.name}}}: {{{contact.subject}}}"/>
   <senderTypes
       name="general"
       from="{{{appManifest.title}}}"

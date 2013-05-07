@@ -2,6 +2,7 @@ package org.soluvas.email.util;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -10,8 +11,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
+import org.soluvas.commons.PersonInfo;
+import org.soluvas.data.EntityLookup;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailException;
+import org.soluvas.email.EmailFactory;
 import org.soluvas.email.Layout;
 import org.soluvas.email.LayoutType;
 import org.soluvas.email.Page;
@@ -19,13 +23,18 @@ import org.soluvas.email.PageType;
 import org.soluvas.email.Recipient;
 import org.soluvas.email.Sender;
 import org.soluvas.email.SenderType;
+import org.soluvas.email.SocialPersonToRecipients;
 import org.soluvas.email.impl.EmailManagerImpl;
+import org.soluvas.ldap.SocialPerson;
 
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
+import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author ceefour
@@ -39,7 +48,7 @@ public class EmailUtils {
 	 * @return
 	 * @deprecated Only used by OSGi code. Nobody uses this anyway. See {@link EmailManagerImpl#getDefaultLayout()}.
 	 */
-	@SuppressWarnings("unchecked") @Deprecated
+	@Deprecated
 	public static <T extends Layout> T createLayout(@Nonnull final Class<T> targetClass) {
 		final BundleContext bundleContext = FrameworkUtil.getBundle(EmailUtils.class).getBundleContext();
 		final ServiceReference<EmailCatalog> emailCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(EmailCatalog.class),
@@ -78,7 +87,7 @@ public class EmailUtils {
 	 * @return
 	 * @deprecated Only used by OSGi code.
 	 */
-	@SuppressWarnings("unchecked") @Deprecated
+	@Deprecated
 	public static <T extends Page> T createPage(@Nonnull final Class<T> targetClass, @Nonnull final Layout layout) {
 		final BundleContext bundleContext = FrameworkUtil.getBundle(EmailUtils.class).getBundleContext();
 		final ServiceReference<EmailCatalog> emailCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(EmailCatalog.class),
@@ -190,6 +199,38 @@ public class EmailUtils {
 				return StringUtils.equalsIgnoreCase(input.getEmail(), needle);
 			}
 		});
+	}
+	
+	/**
+	 * Get email recipients for {@link PersonInfo} based on:
+	 * 
+	 * 1. {@link PersonInfo#getEmail()}
+	 * 2. If {@link PersonInfo#getId()} is not empty and {@code personLookup} is provided,
+	 * {@link SocialPerson#getPrimaryEmail()} and {@link SocialPerson#getEmails()},
+	 * using {@link SocialPersonToRecipients}.
+	 * 
+	 * Will not duplicate recipients with same email address.
+	 * 
+	 * @param personLookup
+	 * @return
+	 */
+	public static Set<Recipient> getRecipients(@Nullable PersonInfo personInfo, @Nullable EntityLookup<SocialPerson, String> personLookup) {
+		final Set<Recipient> recipients = Sets.newHashSet();
+		
+		if (personInfo != null) {
+			if (!Strings.isNullOrEmpty(personInfo.getEmail())) {
+				final String name = Optional.fromNullable(personInfo.getName()).or(personInfo.getEmail());
+				recipients.add(EmailFactory.eINSTANCE.createRecipient(
+						name, personInfo.getEmail(), "customer"));
+			}
+			//find person by customerId
+			if (!Strings.isNullOrEmpty(personInfo.getId()) && personLookup != null) {
+				final SocialPerson socialPerson = personLookup.findOne(personInfo.getId());
+				recipients.addAll(new SocialPersonToRecipients("registered customer").apply(socialPerson));
+			}
+		}
+		
+		return recipients;
 	}
 	
 }
