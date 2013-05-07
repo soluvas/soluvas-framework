@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.api.ldap.model.cursor.EntryCursor;
+import org.apache.directory.api.ldap.model.cursor.SearchCursor;
 import org.apache.directory.api.ldap.model.entry.Entry;
 import org.apache.directory.api.ldap.model.exception.LdapException;
 import org.apache.directory.api.ldap.model.exception.LdapInvalidAttributeValueException;
@@ -23,6 +24,9 @@ import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.CrudRepositoryBase;
 
 import com.google.common.base.Function;
@@ -554,6 +558,50 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 			});
 			log.debug("LDAP count {} filter {} returned {} entries", baseDn, filter, entries);
 			return entries;
+		} catch (Exception e) {
+			throw new LdapRepositoryException(e, "Error searching LDAP in %s filter %s", baseDn, filter);
+		}
+	}
+	
+	@Override
+	public Page<T> findAll(final Pageable pageable) {
+		final String primaryObjectClass = mapper.getMapping(entityClass).getPrimaryObjectClass();
+//		String filter = "(&";
+//		for (String objectClass : objectClasses) {
+//			filter += "(objectClass=" + objectClass + ")";
+//		}
+//		filter += ")";
+		// Only search based on first objectClass, this is the typical use case
+//		final String filter = "(objectClass=" + primaryObjectClass + ")";
+		final String filter = "(objectClass=*)";
+		log.debug("Searching LDAP {} filter: {}", baseDn, filter); 
+		try {
+			final List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
+				@Override @Nullable
+				public List<Entry> apply(@Nullable LdapConnection conn) {
+					try {
+						SearchRequestImpl search = new SearchRequestImpl();
+						search.setBase(new Dn(baseDn));
+						search.setFilter(filter);
+						search.setScope(SearchScope.ONELEVEL);
+						ServerSideSort skl = new ServerSideSort(pageable.getSort().iterator().next().getProperty());
+						search.addControl(skl);
+						SearchCursor searchCursor = conn.search(search);
+						return LdapUtils.asList( searchCursor );
+					} catch (LdapException e) {
+						Throwables.propagate(e);
+						return null;
+					}
+				}
+			});
+			log.info("LDAP search {} filter {} returned {} entries", new Object[] { baseDn, filter, entries.size() });
+			final List<T> entities = ImmutableList.copyOf(Lists.transform(entries, new Function<Entry, T>() {
+				@Override
+				public T apply(Entry input) {
+					return mapper.fromEntry(input, entityClass);
+				}
+			}));
+			return new PageImpl(entities);
 		} catch (Exception e) {
 			throw new LdapRepositoryException(e, "Error searching LDAP in %s filter %s", baseDn, filter);
 		}

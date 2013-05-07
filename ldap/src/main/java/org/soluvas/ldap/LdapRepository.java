@@ -8,6 +8,8 @@ import org.apache.directory.api.ldap.model.entry.Entry;
 import org.apache.directory.api.ldap.model.exception.LdapException;
 import org.apache.directory.api.ldap.model.name.Dn;
 import org.soluvas.data.EntityLookup;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.BasicRepository;
 import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.data.repository.Repository;
@@ -143,5 +145,7 @@ public interface LdapRepository<T> extends EntityLookup<T, String>, Repository<T
 	boolean existsByAttribute(String attribute, String value);
 
 	List<String> findIdsByAttribute(String attribute, String value);
+
+	Page<T> findAll(Pageable pageable);
 
 }

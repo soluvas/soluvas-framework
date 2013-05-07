@@ -22,6 +22,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Gender;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageRequest;
+import org.soluvas.data.domain.Sort.Direction;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableSet;
@@ -203,4 +206,12 @@ public class PooledLdapRepositoryTest {
 		assertTrue(modified.getPasswordResetExpiryTime().isAfterNow());
 	}
 	
+	@Test
+	public void findAllSortedBySn() {
+		final Page<SocialPerson> page = personRepo.findAll(new PageRequest(0, 10, Direction.ASC, "sn"));
+		log.info("Result {} entries", page.getNumberOfElements());
+		for (SocialPerson person : page.getContent()) {
+			log.info("{} - {}", person.getId(), person.getLastName());
+		}
+	}
 }
