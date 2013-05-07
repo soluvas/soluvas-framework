@@ -19,9 +19,13 @@ import org.apache.directory.api.ldap.model.message.ResultCodeEnum;
 import org.apache.directory.api.ldap.model.message.SearchRequest;
 import org.apache.directory.api.ldap.model.message.SearchRequestImpl;
 import org.apache.directory.api.ldap.model.message.SearchScope;
+import org.apache.directory.api.ldap.model.message.controls.OpaqueControl;
 import org.apache.directory.api.ldap.model.name.Dn;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionPool;
+import org.bouncycastle.asn1.ASN1EncodableVector;
+import org.bouncycastle.asn1.BERConstructedOctetString;
+import org.bouncycastle.asn1.BERSequence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.domain.Page;
@@ -584,11 +588,20 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 						search.setBase(new Dn(baseDn));
 						search.setFilter(filter);
 						search.setScope(SearchScope.ONELEVEL);
-						ServerSideSort skl = new ServerSideSort(pageable.getSort().iterator().next().getProperty());
+						String sortProperty = pageable.getSort().iterator().next().getProperty();
+//						ServerSideSort skl = new ServerSideSort(sortProperty);
+						ASN1EncodableVector innerVector = new ASN1EncodableVector();
+						innerVector.add(new BERConstructedOctetString(sortProperty.getBytes()));
+						BERSequence innerSeq = new BERSequence(innerVector);
+						ASN1EncodableVector outerVector = new ASN1EncodableVector();
+						outerVector.add(innerSeq);
+						BERSequence outerSeq = new BERSequence(outerVector);
+						OpaqueControl skl = new OpaqueControl(ServerSideSort.OID);
+						skl.setEncodedValue(outerSeq.getEncoded());
 						search.addControl(skl);
 						SearchCursor searchCursor = conn.search(search);
 						return LdapUtils.asList( searchCursor );
-					} catch (LdapException e) {
+					} catch (Exception e) {
 						Throwables.propagate(e);
 						return null;
 					}
