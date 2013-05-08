@@ -61,8 +61,8 @@ public class DirectoryEngine {
     private Partition addPartition( String partitionId, String partitionDn ) throws Exception
     {
         final File partitionDir = new File( getPartitionsDir(), partitionId );
-        log.info("Data partition {} DN: {} Location: {}", new Object[] {
-        		partitionId, partitionDn, partitionDir});
+        log.info("Data partition {} DN: {} Location: {}", 
+        		partitionId, partitionDn, partitionDir);
         // Create a new partition named 'foo'.
         JdbmPartition partition = new JdbmPartition(service.getSchemaManager());
         partition.setId( partitionId );
@@ -83,8 +83,8 @@ public class DirectoryEngine {
     private Partition addSystemPartition( String partitionId, String partitionDn ) throws Exception
     {
         final File partitionDir = new File( getPartitionsDir(), partitionId );
-        log.info("System partition {} DN: {} Location: {}", new Object[] {
-        		partitionId, partitionDn, partitionDir});
+        log.info("System partition {} DN: {} Location: {}", 
+        		partitionId, partitionDn, partitionDir);
         // Create a new partition named 'foo'.
         JdbmPartition partition = new JdbmPartition(service.getSchemaManager());
         partition.setId( partitionId );

@@ -101,8 +101,8 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 			if (supplied == null) {
 				final Class serviceClass = field.getType();
 				
-				log.trace("Field {}#{} looking up {} for tenantId={} tenantEnv={} namespace={} filter: {}", new Object[] {
-						componentId, field.getName(), serviceClass.getName(), tenantId, tenantEnv, namespace, additionalFilter });
+				log.trace("Field {}#{} looking up {} for tenantId={} tenantEnv={} namespace={} filter: {}",
+						componentId, field.getName(), serviceClass.getName(), tenantId, tenantEnv, namespace, additionalFilter );
 				// HACK: disable tenantId/tenantEnv filtering due to tenantId services prematurely removed
 //				final String filter = "(&" + String.format("(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))",
 //						tenantId, tenantEnv)
@@ -137,8 +137,8 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 				}
 			} else {
 				final Class<?> suppliedClass = field.getType();
-				log.trace("Field {}#{} needs Supplier<{}> for tenantId={} tenantEnv={} namespace={} filter: {}", new Object[] {
-						componentId, field.getName(), suppliedClass.getName(), tenantId, tenantEnv, namespace, additionalFilter });
+				log.trace("Field {}#{} needs Supplier<{}> for tenantId={} tenantEnv={} namespace={} filter: {}",
+						componentId, field.getName(), suppliedClass.getName(), tenantId, tenantEnv, namespace, additionalFilter );
 				final String suppliedClassFilter = supplied != null ? "(suppliedClass=" + field.getType().getName() + ")(layer=application)" : "";
 //				final String filter = "(&" + String.format("(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))",
 //						tenantId, tenantEnv)

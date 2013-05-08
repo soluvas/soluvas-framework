@@ -148,8 +148,8 @@ public class LocaleContext {
 			}
 		} else if (locale.equals(new Locale("in"))) {
 			 //if Locale is "in" without and language code is not "ID", show warning
-			log.warn("Using incomplete locale {} in {} to format {}, please use in_ID!", new Object[] {
-					locale, tz, instant });
+			log.warn("Using incomplete locale {} in {} to format {}, please use in_ID!", 
+					locale, tz, instant );
 		}
 		return DateTimeFormat.fullDate().withLocale(locale).withZone(tz).print(instant) +
 				" " + DateTimeFormat.shortTime().withLocale(locale).withZone(tz).print(instant) + suffix;

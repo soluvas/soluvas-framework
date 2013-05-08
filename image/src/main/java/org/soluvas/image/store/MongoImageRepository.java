@@ -279,8 +279,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	public Image create(String fileName, InputStream content, final String contentType, final long length, String name) throws IOException {
 		final File originalFile = File.createTempFile(getNamespace() + "_", "_" + fileName);
 		try {
-			log.info("Saving original image ({} {} bytes) to temporary file {}", new Object[] { 
-					contentType, length, originalFile });
+			log.info("Saving original image ({} {} bytes) to temporary file {}",  
+					contentType, length, originalFile );
 			FileUtils.copyInputStreamToFile(content, originalFile);
 			
 			final ListenableFuture<Image> addedImageFuture = doCreate(null, originalFile, contentType, originalFile.length(), name, fileName, true);
@@ -689,8 +689,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 //				return Futures.future(new Callable<StatusLine>() {
 //					@Override
 //					public StatusLine call() throws Exception {
-//						log.info("Deleting {} image {} - {}: {}", new Object[] { 
-//								namespace, id, styled.getStyleName(), styled.getUri() });
+//						log.info("Deleting {} image {} - {}: {}",  
+//								namespace, id, styled.getStyleName(), styled.getUri() );
 //						HttpDelete deleteThumb = new HttpDelete(styled.getUri());
 //						try {
 //							HttpResponse response = client.execute(davHost, deleteThumb, createHttpContext());
@@ -722,9 +722,9 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		
 			try {
 		//		Iterable<StatusLine> statuses = Await.result(styledsFuture, Duration.create(60, TimeUnit.SECONDS));
-		//		log.info("Delete styled {} image {} status codes: {}", new Object[] { namespace, id, statuses });
+		//		log.info("Delete styled {} image {} status codes: {}", namespace, id, statuses );
 		//		StatusLine status = Await.result(originalFuture, Duration.create(60, TimeUnit.SECONDS));
-		//		log.info("Delete original {} image {} status code: {}", new Object[] { namespace, id, status });
+		//		log.info("Delete original {} image {} status code: {}", namespace, id, status );
 			} catch (Exception e) {
 				log.error("Error deleting " + namespace + " image " + id + " from WebDAV", e);
 			}
@@ -734,8 +734,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 //				@Override
 //				public StatusLine call() throws Exception {
 //					URI originalUri = image.getUri();
-//					log.info("Deleting {} image {} - original: {}", new Object[] { 
-//							namespace, id, originalUri });
+//					log.info("Deleting {} image {} - original: {}", 
+//							namespace, id, originalUri );
 //					HttpDelete deleteOriginal = new HttpDelete(originalUri);
 //					try {
 //						HttpResponse response = client.execute(davHost, deleteOriginal, createHttpContext());
@@ -790,8 +790,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 					return input.getId();
 				}
 			});
-			log.debug("Got {} {} images with IDs {}", new Object[] {
-					images.size(), namespace, ids });
+			log.debug("Got {} {} images with IDs {}", 
+					images.size(), namespace, ids );
 			return images;
 		} finally {
 			dbCursor.close();

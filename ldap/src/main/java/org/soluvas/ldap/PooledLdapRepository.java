@@ -258,11 +258,11 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 				}
 			});
 			if (entry != null) {
-				log.info("LDAP search {} filter {} returned {}", new Object[] { baseDn, filter, entry.getDn() });
+				log.info("LDAP search {} filter {} returned {}", baseDn, filter, entry.getDn() );
 				final T entity = mapper.fromEntry(entry, entityClass);
 				return entity;
 			} else {
-				log.info("LDAP search {} filter {} returned nothing", new Object[] { baseDn, filter });
+				log.info("LDAP search {} filter {} returned nothing", baseDn, filter);
 				return null;
 			}
 		} catch (Exception e) {
@@ -346,7 +346,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 					}
 				}
 			});
-			log.info("LDAP search {} filter {} returned {} entries", new Object[] { baseDn, filter, entries.size() });
+			log.info("LDAP search {} filter {} returned {} entries", baseDn, filter, entries.size() );
 			final List<T> entities = ImmutableList.copyOf(Lists.transform(entries, new Function<Entry, T>() {
 				@Override
 				public T apply(Entry input) {
@@ -607,7 +607,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 					}
 				}
 			});
-			log.info("LDAP search {} filter {} returned {} entries", new Object[] { baseDn, filter, entries.size() });
+			log.info("LDAP search {} filter {} returned {} entries", baseDn, filter, entries.size());
 			final List<T> entities = ImmutableList.copyOf(Lists.transform(entries, new Function<Entry, T>() {
 				@Override
 				public T apply(Entry input) {
