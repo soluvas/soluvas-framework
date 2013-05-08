@@ -6,7 +6,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 
+import org.apache.commons.io.HexDump;
 import org.apache.commons.pool.ObjectPool;
+import org.apache.directory.api.ldap.codec.protocol.mina.LdapProtocolEncoder;
 import org.apache.directory.api.ldap.model.cursor.EntryCursor;
 import org.apache.directory.api.ldap.model.cursor.SearchCursor;
 import org.apache.directory.api.ldap.model.entry.Entry;
@@ -16,16 +18,16 @@ import org.apache.directory.api.ldap.model.filter.FilterEncoder;
 import org.apache.directory.api.ldap.model.message.ModifyRequest;
 import org.apache.directory.api.ldap.model.message.ModifyResponse;
 import org.apache.directory.api.ldap.model.message.ResultCodeEnum;
+import org.apache.directory.api.ldap.model.message.ResultResponse;
 import org.apache.directory.api.ldap.model.message.SearchRequest;
 import org.apache.directory.api.ldap.model.message.SearchRequestImpl;
 import org.apache.directory.api.ldap.model.message.SearchScope;
-import org.apache.directory.api.ldap.model.message.controls.OpaqueControl;
 import org.apache.directory.api.ldap.model.name.Dn;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionPool;
-import org.bouncycastle.asn1.ASN1EncodableVector;
-import org.bouncycastle.asn1.BERConstructedOctetString;
-import org.bouncycastle.asn1.BERSequence;
+import org.apache.mina.core.buffer.IoBuffer;
+import org.apache.mina.filter.codec.ProtocolCodecSession;
+import org.apache.mina.filter.codec.ProtocolEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.domain.Page;
@@ -577,7 +579,8 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 //		filter += ")";
 		// Only search based on first objectClass, this is the typical use case
 //		final String filter = "(objectClass=" + primaryObjectClass + ")";
-		final String filter = "(objectClass=*)";
+//		final String filter = "(objectClass=*)";
+		final String filter = "(sn=*)";
 		log.debug("Searching LDAP {} filter: {}", baseDn, filter); 
 		try {
 			final List<Entry> entries = withConnection(new Function<LdapConnection, List<Entry>>() {
@@ -585,22 +588,48 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 				public List<Entry> apply(@Nullable LdapConnection conn) {
 					try {
 						SearchRequestImpl search = new SearchRequestImpl();
-						search.setBase(new Dn(baseDn));
+//						search.setBase(new Dn(baseDn));
+						search.setBase(new Dn("dc=dev,dc=tuneeca,dc=com"));
 						search.setFilter(filter);
 						search.setScope(SearchScope.ONELEVEL);
 						String sortProperty = pageable.getSort().iterator().next().getProperty();
-//						ServerSideSort skl = new ServerSideSort(sortProperty);
-						ASN1EncodableVector innerVector = new ASN1EncodableVector();
-						innerVector.add(new BERConstructedOctetString(sortProperty.getBytes()));
-						BERSequence innerSeq = new BERSequence(innerVector);
-						ASN1EncodableVector outerVector = new ASN1EncodableVector();
-						outerVector.add(innerSeq);
-						BERSequence outerSeq = new BERSequence(outerVector);
-						OpaqueControl skl = new OpaqueControl(ServerSideSort.OID);
-						skl.setEncodedValue(outerSeq.getEncoded());
+						ServerSideSortImpl skl = new ServerSideSortImpl(sortProperty);
+//						ASN1EncodableVector innerVector = new ASN1EncodableVector();
+//						innerVector.add(new BERConstructedOctetString(sortProperty.getBytes(Charsets.UTF_8)));
+//						BERSequence innerSeq = new BERSequence(innerVector);
+//						ASN1EncodableVector outerVector = new ASN1EncodableVector();
+//						outerVector.add(innerSeq);
+//						BERSequence outerSeq = new BERSequence(outerVector);
+//						OpaqueControl skl = new OpaqueControl(ServerSideSort.OID);
+//						final byte[] outerBer = innerSeq.getEncoded("BER");
+//						HexDump.dump(outerBer, 0, System.out, 0);
+//						log.info("SSS control: {} | '{}'", outerBer, new String(outerBer));
+//						skl.setEncodedValue(outerBer);
+//						skl.setEncodedValue(new byte[] { 0x04, 0x08, 0x30, 0x06, 0x30, 0x04, 0x04, 0x02, 0x73, 0x6e });
+//						log.info("SKL has encoded value: {}", skl.hasEncodedValue());
 						search.addControl(skl);
+
+						// debug stuff
+						ProtocolCodecSession session = new ProtocolCodecSession();
+						ProtocolEncoder encoder = new LdapProtocolEncoder();
+						encoder.encode(session, search, session.getEncoderOutput());
+						IoBuffer buffer = (IoBuffer) session.getEncoderOutputQueue().poll();
+						HexDump.dump(buffer.array(), 0, System.out, 0);
+						// debug stuff
+						
 						SearchCursor searchCursor = conn.search(search);
-						return LdapUtils.asList( searchCursor );
+						try {
+							searchCursor.next();
+							ResultResponse done = searchCursor.getSearchResultDone(); 
+							if (done != null && done.getLdapResult() != null &&
+									done.getLdapResult().getResultCode() != ResultCodeEnum.SUCCESS) {
+								throw new LdapException(String.format("Cannot search %s using %s: %s %s",
+										baseDn, filter, done.getLdapResult().getResultCode(), done.getLdapResult().getDiagnosticMessage()));
+							}
+							return LdapUtils.asList( searchCursor );
+						} finally {
+							searchCursor.close();
+						}
 					} catch (Exception e) {
 						Throwables.propagate(e);
 						return null;
@@ -614,7 +643,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 					return mapper.fromEntry(input, entityClass);
 				}
 			}));
-			return new PageImpl(entities);
+			return new PageImpl<T>(entities);
 		} catch (Exception e) {
 			throw new LdapRepositoryException(e, "Error searching LDAP in %s filter %s", baseDn, filter);
 		}
