@@ -88,7 +88,6 @@
 			<groupId>org.apache.directory.api</groupId>
 			<artifactId>api-ldap-codec-standalone</artifactId>
 			<version>${apache-ldap-api.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.directory.api</groupId>
