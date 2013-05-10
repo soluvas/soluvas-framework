@@ -13,13 +13,15 @@ import org.apache.directory.api.ldap.model.exception.LdapException;
 import org.apache.directory.api.ldap.model.message.SearchScope;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.felix.gogo.commands.Command;
+import org.soluvas.commons.PersonRelated;
 import org.soluvas.commons.ProgressStatus;
-import org.soluvas.commons.inject.Filter;
-import org.soluvas.commons.inject.Namespace;
-import org.soluvas.commons.shell.TenantCommandSupport;
+import org.soluvas.commons.shell.ExtCommandSupport;
+import org.soluvas.ldap.Ldap;
 import org.soluvas.ldap.LdapRepository;
 import org.soluvas.ldap.LdapUtils;
 import org.soluvas.ldap.SocialPerson;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
 import com.google.common.base.Strings;
@@ -29,14 +31,21 @@ import com.google.common.base.Strings;
  *
  * @author ceefour
  */
+@Service @Scope("prototype")
 @Command(scope="person", name="fixaddress", description="Fix invalid primaryShippingAddress and primaryBillingAddress on person entries.")
-public class PersonFixAddressCommand extends TenantCommandSupport {
+public class PersonFixAddressCommand extends ExtCommandSupport {
 
-	@Inject @Namespace("person") @Filter("(repositoryMode=raw)")
-	private LdapRepository<SocialPerson> personLdapRepo;
+	private final LdapRepository<SocialPerson> personLdapRepo;
+	private final ObjectPool<LdapConnection> ldapPool;
 	
-	@Inject @Namespace("ldap")
-	private ObjectPool<LdapConnection> ldapPool;
+	@Inject
+	public PersonFixAddressCommand(
+			@PersonRelated LdapRepository<SocialPerson> personLdapRepo,
+			@Ldap ObjectPool<LdapConnection> ldapPool) {
+		super();
+		this.personLdapRepo = personLdapRepo;
+		this.ldapPool = ldapPool;
+	}
 
 	/* (non-Javadoc)
 	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
