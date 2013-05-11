@@ -17,6 +17,7 @@ import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
@@ -76,7 +77,15 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 	
 	@Override
 	public final <S extends T> S add(S entity) {
-		return add(ImmutableList.of(entity)).iterator().next();
+		final Collection<S> addResults = add(ImmutableList.of(entity));
+		Preconditions.checkNotNull(addResults, 
+				getClass().getName() + ".add(Collection) succeeds but returned invalid null list");
+		Preconditions.checkState(!addResults.isEmpty(), 
+				getClass().getName() + ".add(Collection) succeeds but returned invalid empty list");
+		final S result = addResults.iterator().next();
+		Preconditions.checkNotNull(result, 
+				getClass().getName() + ".add(Collection) succeeds but returned invalid element: null");
+		return result;
 	}
 	
 	@Override
