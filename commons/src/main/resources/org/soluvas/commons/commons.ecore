@@ -76,10 +76,27 @@
         <details key="documentation" value="The first word of the CLOSING (E), which is placed several lines below the body, lines up with the first word in the heading and is the only word capitalized. A comma follows the closing.&#xA;&#xA;Possible closings include:&#xA;&#xA;Personal:&#xA;Your friend, Missing you, Sincerely,&#xA;Confused, Affectionately,Cordially,&#xA;&#xA;Business:&#xA;Sincerely yours, Yours truly,Respectfully yours,"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultTimeZone" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultTimeZoneId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         defaultValueLiteral="UTC">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Default time zone for the application. For example this is used by perpetual inventory to store dates with a fixed reference timezone.&#xA;It's a String, not a DateTimeZone object, to make it easier to edit the *.AppManifest.xmi file using generic EMF editor."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultTimeZone" eType="#//DateTimeZone"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Reads directly from {@link #getDefaultTimeZoneId()}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultCurrencyCode" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This is a String and not a CurrencyUnit object to aid visual editing using EMF Reflective Editor."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultCurrency" eType="#//CurrencyUnit"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Reads directly from {@link #getDefaultCurrencyCode()}."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

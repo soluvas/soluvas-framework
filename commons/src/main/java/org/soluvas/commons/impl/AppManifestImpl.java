@@ -2,15 +2,17 @@
  */
 package org.soluvas.commons.impl;
 
+import javax.annotation.Nullable;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTimeZone;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.BundleAware;
-import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
@@ -37,7 +39,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getOrganizationAddress <em>Organization Address</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterSalutation <em>Letter Salutation</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterClosing <em>Letter Closing</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultTimeZoneId <em>Default Time Zone Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultTimeZone <em>Default Time Zone</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCurrencyCode <em>Default Currency Code</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCurrency <em>Default Currency</em>}</li>
  * </ul>
  * </p>
  *
@@ -310,6 +315,26 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	protected String letterClosing = LETTER_CLOSING_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getDefaultTimeZoneId() <em>Default Time Zone Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultTimeZoneId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DEFAULT_TIME_ZONE_ID_EDEFAULT = "UTC";
+
+	/**
+	 * The cached value of the '{@link #getDefaultTimeZoneId() <em>Default Time Zone Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultTimeZoneId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String defaultTimeZoneId = DEFAULT_TIME_ZONE_ID_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getDefaultTimeZone() <em>Default Time Zone</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -317,17 +342,37 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DEFAULT_TIME_ZONE_EDEFAULT = "UTC";
+	protected static final DateTimeZone DEFAULT_TIME_ZONE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getDefaultTimeZone() <em>Default Time Zone</em>}' attribute.
+	 * The default value of the '{@link #getDefaultCurrencyCode() <em>Default Currency Code</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDefaultTimeZone()
+	 * @see #getDefaultCurrencyCode()
 	 * @generated
 	 * @ordered
 	 */
-	protected String defaultTimeZone = DEFAULT_TIME_ZONE_EDEFAULT;
+	protected static final String DEFAULT_CURRENCY_CODE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDefaultCurrencyCode() <em>Default Currency Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultCurrencyCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected String defaultCurrencyCode = DEFAULT_CURRENCY_CODE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDefaultCurrency() <em>Default Currency</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultCurrency()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final CurrencyUnit DEFAULT_CURRENCY_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -541,6 +586,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getGeneralEmail() {
 		return generalEmail;
 	}
@@ -550,6 +596,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGeneralEmail(String newGeneralEmail) {
 		String oldGeneralEmail = generalEmail;
 		generalEmail = newGeneralEmail;
@@ -562,6 +609,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getOrganizationName() {
 		return organizationName;
 	}
@@ -571,6 +619,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOrganizationName(String newOrganizationName) {
 		String oldOrganizationName = organizationName;
 		organizationName = newOrganizationName;
@@ -583,6 +632,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getOrganizationAddress() {
 		return organizationAddress;
 	}
@@ -592,6 +642,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOrganizationAddress(String newOrganizationAddress) {
 		String oldOrganizationAddress = organizationAddress;
 		organizationAddress = newOrganizationAddress;
@@ -604,6 +655,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLetterSalutation() {
 		return letterSalutation;
 	}
@@ -613,6 +665,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLetterSalutation(String newLetterSalutation) {
 		String oldLetterSalutation = letterSalutation;
 		letterSalutation = newLetterSalutation;
@@ -625,6 +678,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLetterClosing() {
 		return letterClosing;
 	}
@@ -634,6 +688,7 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLetterClosing(String newLetterClosing) {
 		String oldLetterClosing = letterClosing;
 		letterClosing = newLetterClosing;
@@ -646,8 +701,9 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getDefaultTimeZone() {
-		return defaultTimeZone;
+	@Override
+	public String getDefaultTimeZoneId() {
+		return defaultTimeZoneId;
 	}
 
 	/**
@@ -655,11 +711,53 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDefaultTimeZone(String newDefaultTimeZone) {
-		String oldDefaultTimeZone = defaultTimeZone;
-		defaultTimeZone = newDefaultTimeZone;
+	@Override
+	public void setDefaultTimeZoneId(String newDefaultTimeZoneId) {
+		String oldDefaultTimeZoneId = defaultTimeZoneId;
+		defaultTimeZoneId = newDefaultTimeZoneId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE, oldDefaultTimeZone, defaultTimeZone));
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE_ID, oldDefaultTimeZoneId, defaultTimeZoneId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override @Nullable
+	public DateTimeZone getDefaultTimeZone() {
+		return getDefaultTimeZoneId() != null ? DateTimeZone.forID(getDefaultTimeZoneId()) : null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getDefaultCurrencyCode() {
+		return defaultCurrencyCode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDefaultCurrencyCode(String newDefaultCurrencyCode) {
+		String oldDefaultCurrencyCode = defaultCurrencyCode;
+		defaultCurrencyCode = newDefaultCurrencyCode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DEFAULT_CURRENCY_CODE, oldDefaultCurrencyCode, defaultCurrencyCode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override @Nullable
+	public CurrencyUnit getDefaultCurrency() {
+		return getDefaultCurrencyCode() != null ? CurrencyUnit.of(getDefaultCurrencyCode()) : null;
 	}
 
 	/**
@@ -696,8 +794,14 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return getLetterSalutation();
 			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
 				return getLetterClosing();
+			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE_ID:
+				return getDefaultTimeZoneId();
 			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE:
 				return getDefaultTimeZone();
+			case CommonsPackage.APP_MANIFEST__DEFAULT_CURRENCY_CODE:
+				return getDefaultCurrencyCode();
+			case CommonsPackage.APP_MANIFEST__DEFAULT_CURRENCY:
+				return getDefaultCurrency();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -749,8 +853,11 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
 				setLetterClosing((String)newValue);
 				return;
-			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE:
-				setDefaultTimeZone((String)newValue);
+			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE_ID:
+				setDefaultTimeZoneId((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_CURRENCY_CODE:
+				setDefaultCurrencyCode((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -803,8 +910,11 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
 				setLetterClosing(LETTER_CLOSING_EDEFAULT);
 				return;
-			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE:
-				setDefaultTimeZone(DEFAULT_TIME_ZONE_EDEFAULT);
+			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE_ID:
+				setDefaultTimeZoneId(DEFAULT_TIME_ZONE_ID_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_CURRENCY_CODE:
+				setDefaultCurrencyCode(DEFAULT_CURRENCY_CODE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -844,8 +954,14 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return LETTER_SALUTATION_EDEFAULT == null ? letterSalutation != null : !LETTER_SALUTATION_EDEFAULT.equals(letterSalutation);
 			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
 				return LETTER_CLOSING_EDEFAULT == null ? letterClosing != null : !LETTER_CLOSING_EDEFAULT.equals(letterClosing);
+			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE_ID:
+				return DEFAULT_TIME_ZONE_ID_EDEFAULT == null ? defaultTimeZoneId != null : !DEFAULT_TIME_ZONE_ID_EDEFAULT.equals(defaultTimeZoneId);
 			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE:
-				return DEFAULT_TIME_ZONE_EDEFAULT == null ? defaultTimeZone != null : !DEFAULT_TIME_ZONE_EDEFAULT.equals(defaultTimeZone);
+				return DEFAULT_TIME_ZONE_EDEFAULT == null ? getDefaultTimeZone() != null : !DEFAULT_TIME_ZONE_EDEFAULT.equals(getDefaultTimeZone());
+			case CommonsPackage.APP_MANIFEST__DEFAULT_CURRENCY_CODE:
+				return DEFAULT_CURRENCY_CODE_EDEFAULT == null ? defaultCurrencyCode != null : !DEFAULT_CURRENCY_CODE_EDEFAULT.equals(defaultCurrencyCode);
+			case CommonsPackage.APP_MANIFEST__DEFAULT_CURRENCY:
+				return DEFAULT_CURRENCY_EDEFAULT == null ? getDefaultCurrency() != null : !DEFAULT_CURRENCY_EDEFAULT.equals(getDefaultCurrency());
 		}
 		return super.eIsSet(featureID);
 	}
@@ -934,8 +1050,10 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 		result.append(letterSalutation);
 		result.append(", letterClosing: ");
 		result.append(letterClosing);
-		result.append(", defaultTimeZone: ");
-		result.append(defaultTimeZone);
+		result.append(", defaultTimeZoneId: ");
+		result.append(defaultTimeZoneId);
+		result.append(", defaultCurrencyCode: ");
+		result.append(defaultCurrencyCode);
 		result.append(')');
 		return result.toString();
 	}

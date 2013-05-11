@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons;
 
+import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTimeZone;
 
 
@@ -25,7 +26,10 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationAddress <em>Organization Address</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getLetterSalutation <em>Letter Salutation</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getLetterClosing <em>Letter Closing</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultTimeZone <em>Default Time Zone</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCurrencyCode <em>Default Currency Code</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCurrency <em>Default Currency</em>}</li>
  * </ul>
  * </p>
  *
@@ -269,7 +273,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 	void setLetterClosing(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Default Time Zone</b></em>' attribute.
+	 * Returns the value of the '<em><b>Default Time Zone Id</b></em>' attribute.
 	 * The default value is <code>"UTC"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -277,22 +281,83 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 	 * Default time zone for the application. For example this is used by perpetual inventory to store dates with a fixed reference timezone.
 	 * It's a String, not a DateTimeZone object, to make it easier to edit the *.AppManifest.xmi file using generic EMF editor.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Default Time Zone</em>' attribute.
-	 * @see #setDefaultTimeZone(String)
-	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultTimeZone()
+	 * @return the value of the '<em>Default Time Zone Id</em>' attribute.
+	 * @see #setDefaultTimeZoneId(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultTimeZoneId()
 	 * @model default="UTC"
 	 * @generated
 	 */
-	String getDefaultTimeZone();
+	String getDefaultTimeZoneId();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDefaultTimeZone <em>Default Time Zone</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default Time Zone</em>' attribute.
-	 * @see #getDefaultTimeZone()
+	 * @param value the new value of the '<em>Default Time Zone Id</em>' attribute.
+	 * @see #getDefaultTimeZoneId()
 	 * @generated
 	 */
-	void setDefaultTimeZone(String value);
+	void setDefaultTimeZoneId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Default Time Zone</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Reads directly from {@link #getDefaultTimeZoneId()}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Default Time Zone</em>' attribute.
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultTimeZone()
+	 * @model dataType="org.soluvas.commons.DateTimeZone" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	DateTimeZone getDefaultTimeZone();
+
+	/**
+	 * Returns the value of the '<em><b>Default Currency Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Default Currency Code</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This is a String and not a CurrencyUnit object to aid visual editing using EMF Reflective Editor.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Default Currency Code</em>' attribute.
+	 * @see #setDefaultCurrencyCode(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultCurrencyCode()
+	 * @model
+	 * @generated
+	 */
+	String getDefaultCurrencyCode();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDefaultCurrencyCode <em>Default Currency Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default Currency Code</em>' attribute.
+	 * @see #getDefaultCurrencyCode()
+	 * @generated
+	 */
+	void setDefaultCurrencyCode(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Default Currency</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Default Currency</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Reads directly from {@link #getDefaultCurrencyCode()}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Default Currency</em>' attribute.
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultCurrency()
+	 * @model dataType="org.soluvas.commons.CurrencyUnit" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	CurrencyUnit getDefaultCurrency();
 
 } // AppManifest

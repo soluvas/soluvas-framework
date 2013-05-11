@@ -259,13 +259,40 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__LETTER_CLOSING = POSITIONABLE_FEATURE_COUNT + 11;
 
 	/**
+	 * The feature id for the '<em><b>Default Time Zone Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__DEFAULT_TIME_ZONE_ID = POSITIONABLE_FEATURE_COUNT + 12;
+
+	/**
 	 * The feature id for the '<em><b>Default Time Zone</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_TIME_ZONE = POSITIONABLE_FEATURE_COUNT + 12;
+	int APP_MANIFEST__DEFAULT_TIME_ZONE = POSITIONABLE_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>Default Currency Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__DEFAULT_CURRENCY_CODE = POSITIONABLE_FEATURE_COUNT + 14;
+
+	/**
+	 * The feature id for the '<em><b>Default Currency</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__DEFAULT_CURRENCY = POSITIONABLE_FEATURE_COUNT + 15;
 
 	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
@@ -274,7 +301,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 13;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 16;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}' class.
@@ -2619,6 +2646,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_LetterClosing();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Time Zone Id</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultTimeZoneId()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultTimeZoneId();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultTimeZone <em>Default Time Zone</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2628,6 +2666,28 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAppManifest_DefaultTimeZone();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultCurrencyCode <em>Default Currency Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Currency Code</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultCurrencyCode()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultCurrencyCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultCurrency <em>Default Currency</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Currency</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultCurrency()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultCurrency();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonInfo <em>Person Info</em>}'.
@@ -4248,12 +4308,36 @@ public interface CommonsPackage extends EPackage {
 		EAttribute APP_MANIFEST__LETTER_CLOSING = eINSTANCE.getAppManifest_LetterClosing();
 
 		/**
+		 * The meta object literal for the '<em><b>Default Time Zone Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_TIME_ZONE_ID = eINSTANCE.getAppManifest_DefaultTimeZoneId();
+
+		/**
 		 * The meta object literal for the '<em><b>Default Time Zone</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__DEFAULT_TIME_ZONE = eINSTANCE.getAppManifest_DefaultTimeZone();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Currency Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_CURRENCY_CODE = eINSTANCE.getAppManifest_DefaultCurrencyCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Currency</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_CURRENCY = eINSTANCE.getAppManifest_DefaultCurrency();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.

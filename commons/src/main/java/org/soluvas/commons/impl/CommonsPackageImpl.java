@@ -879,8 +879,35 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultTimeZone() {
+	public EAttribute getAppManifest_DefaultTimeZoneId() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_DefaultTimeZone() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_DefaultCurrencyCode() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_DefaultCurrency() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -2309,7 +2336,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__ORGANIZATION_ADDRESS);
 		createEAttribute(appManifestEClass, APP_MANIFEST__LETTER_SALUTATION);
 		createEAttribute(appManifestEClass, APP_MANIFEST__LETTER_CLOSING);
+		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_TIME_ZONE_ID);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_TIME_ZONE);
+		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_CURRENCY_CODE);
+		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_CURRENCY);
 
 		personInfoEClass = createEClass(PERSON_INFO);
 		createEAttribute(personInfoEClass, PERSON_INFO__GENDER);
@@ -2681,7 +2711,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_OrganizationAddress(), theEcorePackage.getEString(), "organizationAddress", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_LetterSalutation(), theEcorePackage.getEString(), "letterSalutation", "Hai", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_LetterClosing(), theEcorePackage.getEString(), "letterClosing", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppManifest_DefaultTimeZone(), theEcorePackage.getEString(), "defaultTimeZone", "UTC", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_DefaultTimeZoneId(), theEcorePackage.getEString(), "defaultTimeZoneId", "UTC", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_DefaultTimeZone(), this.getDateTimeZone(), "defaultTimeZone", null, 0, 1, AppManifest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_DefaultCurrencyCode(), theEcorePackage.getEString(), "defaultCurrencyCode", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_DefaultCurrency(), this.getCurrencyUnit(), "defaultCurrency", null, 0, 1, AppManifest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(personInfoEClass, PersonInfo.class, "PersonInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPersonInfo_Gender(), this.getGender(), "gender", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3066,10 +3099,28 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "The first word of the CLOSING (E), which is placed several lines below the body, lines up with the first word in the heading and is the only word capitalized. A comma follows the closing.\n\nPossible closings include:\n\nPersonal:\nYour friend, Missing you, Sincerely,\nConfused, Affectionately,Cordially,\n\nBusiness:\nSincerely yours, Yours truly,Respectfully yours,"
 		   });		
 		addAnnotation
-		  (getAppManifest_DefaultTimeZone(), 
+		  (getAppManifest_DefaultTimeZoneId(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Default time zone for the application. For example this is used by perpetual inventory to store dates with a fixed reference timezone.\nIt\'s a String, not a DateTimeZone object, to make it easier to edit the *.AppManifest.xmi file using generic EMF editor."
+		   });		
+		addAnnotation
+		  (getAppManifest_DefaultTimeZone(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Reads directly from {@link #getDefaultTimeZoneId()}."
+		   });		
+		addAnnotation
+		  (getAppManifest_DefaultCurrencyCode(), 
+		   source, 
+		   new String[] {
+			 "documentation", "This is a String and not a CurrencyUnit object to aid visual editing using EMF Reflective Editor."
+		   });		
+		addAnnotation
+		  (getAppManifest_DefaultCurrency(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Reads directly from {@link #getDefaultCurrencyCode()}."
 		   });		
 		addAnnotation
 		  (personInfoEClass, 
