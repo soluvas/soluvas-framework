@@ -25,7 +25,6 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.ContentType;
 import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.NoConnectionReuseStrategy;
 import org.apache.http.impl.auth.BasicScheme;
@@ -325,7 +324,8 @@ and uploading again, and because of HTTP pipelining which isn't supported by ngi
 					return true;
 				} else {
 					log.error("Download {} returned: {}", imageUri, response.getStatusLine());
-					throw new ImageException(String.format("Download %s returned: %s", imageUri, response.getStatusLine()));
+//					throw new ImageException(String.format("Download %s returned: %s", imageUri, response.getStatusLine()));
+					return false;
 				}
 			} finally {
 				HttpClientUtils.closeQuietly(response);

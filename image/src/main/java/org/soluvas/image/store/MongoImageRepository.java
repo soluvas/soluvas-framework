@@ -861,6 +861,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		doReprocess(images.values(), monitor);
 	}
 	
+
 	/**
 	 * @param images
 	 */
@@ -879,6 +880,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 				log.info("Downloading {} from {} to {}", image.getId(), image.getUri(), tempFile);
 				final boolean downloaded = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE,
 						extension, tempFile);
+				log.debug("donwnload status for image {} is {}", image.getId(), downloaded);
 				if (downloaded) {
 					final ListenableFuture<Image> imageIdFuture = doCreate(image.getId(), tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
 							image.getFileName(), false);
@@ -941,6 +943,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, 2);
 		submon.beginTask("Finding all " + namespace + " images", 1);
 		final List<Image> images = findAll();
+		log.debug("discover {} item image", images.size());
 		submon.worked(1);
 		submon.done(); // TODO: shouldn't be done in proper implementation
 		doReprocess(images, monitor);
