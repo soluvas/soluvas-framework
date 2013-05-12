@@ -115,6 +115,21 @@ public class Image {
 		// v2 field
 		originUri = dbo.get("originUri") != null ? dbo.getString("originUri") : uri.toString();
 	}
+	
+	public Image(String id, String uri, String originUri, String contentType,
+			String fileName, Long size, Map<String, StyledImage> styles,
+			String name, DateTime created) {
+		super();
+		this.id = id;
+		this.uri = uri;
+		this.originUri = originUri;
+		this.contentType = contentType;
+		this.fileName = fileName;
+		this.size = size;
+		this.styles = styles;
+		this.name = name;
+		this.created = created;
+	}
 
 	public String getId() {
 		return id;

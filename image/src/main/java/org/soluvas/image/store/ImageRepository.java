@@ -31,12 +31,6 @@ public interface ImageRepository extends EntityLookup<Image, String>,
 	public static String ORIGINAL_CODE = "o";
 
 	/**
-	 * Ensure folders exists based on namespace and image styles.
-	 * @todo Implement
-	 */
-	public abstract void createFolders();
-
-	/**
 	 * Note that the shortCode 'o' (for "original") is reserved.
 	 * @param name
 	 * @param code
@@ -154,15 +148,6 @@ public interface ImageRepository extends EntityLookup<Image, String>,
 	public abstract String getNamespace();
 
 	public abstract String getMongoUri();
-
-	/**
-	 * Note: For now Akka is not used, but for backwards compatibility it is simply ignored.
-	 * @param system the Akka actor system to set
-	 */
-	//	public void setSystem(ActorSystem system) {
-	//		this.system = system;
-	//	}
-	public abstract void setSystem(Object system);
 
 	public abstract void updateUriAll(ProgressMonitor monitor);
 

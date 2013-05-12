@@ -214,10 +214,10 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.soluvas.image.store.ImageRepository#createFolders()
+	/**
+	 * Ensure folders exists based on namespace and image styles.
+	 * @todo Implement
 	 */
-	@Override
 	public void createFolders() {
 		// TODO: Implement createFolderS()
 	}
@@ -970,13 +970,13 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		return mongoUri;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.soluvas.image.store.ImageRepository#setSystem(java.lang.Object)
+	/**
+	 * Note: For now Akka is not used, but for backwards compatibility it is simply ignored.
+	 * @param system the Akka actor system to set
 	 */
 //	public void setSystem(ActorSystem system) {
 //		this.system = system;
 //	}
-	@Override
 	public void setSystem(Object system) {
 	}
 
