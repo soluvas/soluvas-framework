@@ -204,7 +204,6 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 		final T obj;
 		try {
 			rset.getPackageRegistry().put(ePackage.getNsURI(), ePackage);
-			
 			final Resource resource = rset.getResource(resourceUri, true);
 			obj = (T)resource.getContents().get(0);
 			log.info("Loaded {} from {}", obj, resourceUri);
