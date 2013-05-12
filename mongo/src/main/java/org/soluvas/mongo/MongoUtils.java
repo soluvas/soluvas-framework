@@ -1,9 +1,12 @@
 package org.soluvas.mongo;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.domain.Sort.Order;
@@ -12,6 +15,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
@@ -20,6 +24,8 @@ import com.mongodb.DBObject;
  *
  */
 public class MongoUtils {
+	
+	private static final Logger log = LoggerFactory.getLogger(MongoUtils.class);
 
 	/**
 	 * Wrap MongoDB {@link DBCursor} results in immutable {@link List},
@@ -62,6 +68,35 @@ public class MongoUtils {
 			sortObj.put(defaultSortField, defaultSortOrder);
 		}
 		return sortObj;
+	}
+	
+	/**
+	 * Ensure unique index on MongoDB collection, with logging.
+	 * <p>Usage:
+	 * <pre>{@literal
+	 * MongoUtils.ensureUnique(coll, "slug");
+	 * }</pre>
+	 */
+	public static void ensureUnique(DBCollection coll, String field) {
+		log.debug("Ensuring collection {} has unique index {}", 
+				coll.getName(), field);
+		coll.ensureIndex(new BasicDBObject(field, 1), field + "_1", true);
+	}
+	
+	/**
+	 * Ensure indexes on MongoDB collection, with logging.
+	 * <p>Usage:
+	 * <pre>{@literal
+	 * MongoUtils.ensureIndexes(coll, ImmutableMap.of("creationTime", -1, "modificationTime", -1);
+	 * }</pre>
+	 */
+	public static void ensureIndexes(DBCollection coll, 
+			final Map<String, Integer> fields) {
+		log.debug("Ensuring collection {} has {} indexes: {}", 
+				coll.getName(), fields.size(), fields);
+		for (final Map.Entry<String, Integer> entry : fields.entrySet()) {
+			coll.ensureIndex(new BasicDBObject(entry.getKey(), entry.getValue()));
+		}
 	}
 	
 }

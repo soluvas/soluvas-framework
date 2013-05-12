@@ -1,8 +1,11 @@
 package org.soluvas.commons;
 
+import java.util.Collection;
+
 import javax.annotation.Nullable;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 
 /**
@@ -12,16 +15,29 @@ import com.google.common.collect.Iterables;
  */
 public class IdPredicate<T extends Identifiable> implements Predicate<T> {
 	
-	private final String wantedId;
+	private final Collection<String> wantedIds;
 	
+	/**
+	 * Simple version which finds a single ID.
+	 * @param wantedId
+	 */
 	public IdPredicate(String wantedId) {
 		super();
-		this.wantedId = wantedId;
+		this.wantedIds = ImmutableSet.of(wantedId);
+	}
+
+	/**
+	 * Enhanced version which finds several IDs.
+	 * @param wantedIds
+	 */
+	public IdPredicate(Collection<String> wantedIds) {
+		super();
+		this.wantedIds = wantedIds;
 	}
 
 	@Override
 	public boolean apply(@Nullable T input) {
-		return input != null && wantedId.equals(input.getId());
+		return input != null && wantedIds.contains(input.getId());
 	}
 
 }
