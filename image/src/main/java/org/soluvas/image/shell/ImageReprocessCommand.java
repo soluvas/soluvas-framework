@@ -10,8 +10,6 @@ import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.ProgressMonitor;
-import org.soluvas.commons.impl.ShellProgressMonitorImpl;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.image.store.ImageRepository;
 import org.springframework.context.annotation.Scope;
@@ -62,8 +60,6 @@ public class ImageReprocessCommand extends ExtCommandSupport {
 				return namespace.equals(input.getNamespace());
 			}
 		});
-		
-		final ProgressMonitor monitor = new ShellProgressMonitorImpl();
 		
 		if (all) {
 			imageRepo.reprocessAll(monitor);

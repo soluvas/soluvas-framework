@@ -296,6 +296,9 @@
       </eParameters>
       <eParameters name="style" eType="#//ImageStyle"/>
     </eOperations>
+    <eOperations name="getRepository" lowerBound="1" eType="#//ImageRepository">
+      <eParameters name="imageType" lowerBound="1" eType="#//ImageType"/>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ImageTransformType">
     <eLiterals name="resize_to_fit">

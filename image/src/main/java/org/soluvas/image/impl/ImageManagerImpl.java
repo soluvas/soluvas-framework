@@ -601,6 +601,17 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		return b.build();
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public ImageRepository getRepository(ImageType imageType) {
+		return Preconditions.checkNotNull(imageRepos.get(imageType),
+				"%s image repository not available. %s available repositories: %s",
+				imageType, imageRepos.size(), imageRepos.keySet());
+	}
+
 	public String getPersonPhotoUri(@Nullable Gender gender) {
 		if (gender == null) {
 			return webAddress.getImagesUri() + "org.soluvas.commons/nophoto_person.png";

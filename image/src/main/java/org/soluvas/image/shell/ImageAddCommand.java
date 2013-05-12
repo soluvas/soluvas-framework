@@ -2,24 +2,28 @@
 
 import java.io.File;
 import java.net.URL;
+import java.util.List;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.tenant.ServiceLookup;
+import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 import org.soluvas.image.util.ImageUtils;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
-import com.google.common.base.Function;
 import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * Shell command to search {@link org.soluvas.image.store.Image} entities.
@@ -28,12 +32,12 @@ import com.google.common.base.Optional;
  *
  * @author ceefour
  */
+@Service @Scope("prototype")
 @Command(scope="image", name="add", description="Add a new Image entity.")
-public class ImageAddCommand extends OsgiCommandSupport {
+public class ImageAddCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(ImageAddCommand.class);
 
-	private final ServiceLookup svcLookup;
 	@Option(name="-n", aliases={"--ns", "--namespace"},
 		description="Namespace, e.g. person, shop, product. Default is 'person'.")
 	private String namespace;
@@ -48,10 +52,12 @@ public class ImageAddCommand extends OsgiCommandSupport {
 		description="Short descriptive name. Default: (base filename).")
 	private String name;
 
+	private final List<ImageRepository> imageRepos;
 
-	public ImageAddCommand(ServiceLookup svcLookup) {
+	@Inject
+	public ImageAddCommand(List<ImageRepository> imageRepos) {
 		super();
-		this.svcLookup = svcLookup;
+		this.imageRepos = imageRepos;
 	}
 
 	/* (non-Javadoc)
@@ -59,6 +65,13 @@ public class ImageAddCommand extends OsgiCommandSupport {
 	 */
 	@Override
 	protected Object doExecute() throws Exception {
+		final ImageRepository imageRepo = Iterables.find(imageRepos, new Predicate<ImageRepository>() {
+			@Override
+			public boolean apply(@Nullable ImageRepository input) {
+				return namespace.equals(input.getNamespace());
+			}
+		});
+		
 		final Image newImage = new Image();
 		final File tmpFile = File.createTempFile("imageadd_", "." + ImageUtils.getExtensionOrJpg(originalFile));
 		try {
@@ -80,13 +93,9 @@ public class ImageAddCommand extends OsgiCommandSupport {
 			}
 
 			final String realNamespace = Optional.fromNullable(namespace).or("person");
-			return svcLookup.withService(ImageRepository.class, session, realNamespace,
-				new Function<ImageRepository, Object>() {
-					@Override @Nullable public Object apply(@Nullable ImageRepository imageStore) {
-						String addedImageId = imageStore.add(newImage).getId();
-						return addedImageId;
-					}
-				});
+
+			final String addedImageId = imageRepo.add(newImage).getId();
+			return addedImageId;
 		} finally {
 			tmpFile.delete();
 		}

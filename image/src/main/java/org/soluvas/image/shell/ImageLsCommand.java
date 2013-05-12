@@ -7,44 +7,56 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
-import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.shell.TenantCommandSupport;
-import org.soluvas.commons.tenant.TenantUtils;
+import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 import org.soluvas.image.store.StyledImage;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
 
 /**
  * Shell command to list entities of {@link Image}.
  *
  * @author ceefour
  */
+@Service @Scope("prototype")
 @Command(scope="image", name="ls", description="List Image entities from repository.")
-public class ImageLsCommand extends TenantCommandSupport {
+public class ImageLsCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(ImageLsCommand.class);
 
+	private final List<ImageRepository> imageRepos;
+
 	@Option(name="-n", aliases={"--ns", "--namespace"},
-		description="Namespace, e.g. person, shop, product.")
+			description="Namespace, e.g. person, shop, product.")
 	private transient String namespace = "person";
 
-	/* (non-Javadoc)
-	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
-	 */
+	@Inject
+	public ImageLsCommand(List<ImageRepository> imageRepos) {
+		super();
+		this.imageRepos = imageRepos;
+	}
+	
 	@Override
 	protected Object doExecute() throws Exception {
-		final ServiceReference<ImageRepository> imageRepoRef = TenantUtils.getService(
-				bundleContext, tenant, ImageRepository.class, namespace, null);
-		final ImageRepository imageRepo = getService(ImageRepository.class, imageRepoRef);
+		final ImageRepository imageRepo = Iterables.find(imageRepos, new Predicate<ImageRepository>() {
+			@Override
+			public boolean apply(@Nullable ImageRepository input) {
+				return namespace.equals(input.getNamespace());
+			}
+		});
 		
 		System.out.println(ansi().render("@|negative_on %3s|%-48s|%-6s|%-10s|%-20s|%-20s|@",
 				"№", "ID", "Size", "Type", "File Name", "Styles" ));

@@ -16,7 +16,7 @@ import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.image.ImageException;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Predicate;
@@ -28,7 +28,7 @@ import com.google.common.collect.Iterables;
  *
  * @author atang
  */
-@Service @Lazy
+@Service @Scope("prototype")
 @Command(scope="image", name="updateuri", description="Update an existing image URI.")
 public class ImageUpdateUriCommand extends ExtCommandSupport {
 
@@ -58,8 +58,6 @@ public class ImageUpdateUriCommand extends ExtCommandSupport {
 	 */
 	@Override
 	protected Object doExecute() throws Exception {
-//		final ServiceReference<ImageRepository> imageRepoRef = 
-//				bundleContext.getServiceReferences(ImageRepository.class, "(namespace=" + namespace + ")").iterator().next();
 		final ImageRepository imageRepo = Iterables.find(imageRepos, new Predicate<ImageRepository>() {
 			@Override
 			public boolean apply(@Nullable ImageRepository input) {

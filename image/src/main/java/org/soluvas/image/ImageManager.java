@@ -148,6 +148,14 @@ public interface ImageManager extends SerializableEObject {
 	 */
 	Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, List<SocialPerson> people, ImageStyle style);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="org.soluvas.image.ImageRepository" required="true" imageTypeDataType="org.soluvas.image.ImageType" imageTypeRequired="true"
+	 * @generated
+	 */
+	ImageRepository getRepository(ImageType imageType);
+
 	String getThumbnailPhotoUri(SocialPerson person);
 
 } // ImageManager
