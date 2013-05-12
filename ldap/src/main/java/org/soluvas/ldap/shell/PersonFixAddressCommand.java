@@ -47,9 +47,6 @@ public class PersonFixAddressCommand extends ExtCommandSupport {
 		this.ldapPool = ldapPool;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
-	 */
 	@Override
 	protected Object doExecute() throws Exception {
 		final List<SocialPerson> people = personLdapRepo.findAll();
