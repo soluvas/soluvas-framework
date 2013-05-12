@@ -101,7 +101,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 */
 	protected ImageRepository getImageRepositoryChecked(ImageType namespace) {
 		return Preconditions.checkNotNull(imageRepos.get(namespace),
-				"Cannot get %s image repository", namespace);
+				"Cannot get '%s' image repository", namespace);
 	}
 
 	/**
