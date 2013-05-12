@@ -33,6 +33,7 @@ import org.soluvas.commons.impl.ProgressMonitorImpl;
 import org.soluvas.commons.impl.ProgressMonitorWrapperImpl;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 import org.soluvas.image.DavConnector;
@@ -868,7 +869,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	protected void doReprocess(Collection<Image> images, ProgressMonitor monitor) {
 		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, images.size());
 		log.info("Reprocessing {} images", images.size());
-		submon.beginTask("Reprocessing " + images.size() + " images", images.size());
+		submon.subTask("Reprocessing " + images.size() + " images");
 		ProgressStatus finalStatus = ProgressStatus.OK;
 		final List<ListenableFuture<Image>> addedImageFutures = new ArrayList<>();
 		for (final Image image : images) {
@@ -932,7 +933,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 			log.error("Cannot reprocess {} images", images.size());
 		}
 		
-		submon.done(finalStatus); // TODO: shouldn't be done in proper implementation
+//		submon.done(finalStatus); // TODO: shouldn't be done in proper implementation
 	}
 
 	/* (non-Javadoc)
@@ -940,13 +941,17 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	 */
 	@Override
 	public void reprocessAll(ProgressMonitor monitor) {
-		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, 2);
-		submon.beginTask("Finding all " + namespace + " images", 1);
-		final List<Image> images = findAll();
-		log.debug("discover {} item image", images.size());
-		submon.worked(1);
-		submon.done(); // TODO: shouldn't be done in proper implementation
-		doReprocess(images, monitor);
+		final long imageCount = count();
+		log.debug("discover {} images", imageCount);
+		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, (int) imageCount);
+		submon.beginTask("Processing " + imageCount + " " + namespace + " images", imageCount);
+		final long totalPages = (imageCount + 99) / 100;
+		int i = 0;
+		for (int page = 0; page < totalPages; page++) {
+			final Page<Image> images = findAll(new PageRequest(page, 100L));
+			doReprocess(images.getContent(), monitor);
+		}
+		submon.done();
 	}
 
 	/* (non-Javadoc)
@@ -977,18 +982,23 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 
 	@Override
 	public void updateUriAll(ProgressMonitor monitor) {
-		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, 2);
-		submon.beginTask("Finding all " + namespace + " images", 1);
-		final List<Image> images = findAll();
-		submon.worked(1);
-		submon.done(); // TODO: shouldn't be done in proper implementation
-		doUpdateUri(images, submon);
+		final long imageCount = count();
+		log.debug("discover {} images", imageCount);
+		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, (int) imageCount);
+		submon.beginTask("Updating " + imageCount + " " + namespace + " image URIs", imageCount);
+		final long totalPages = (imageCount + 99) / 100;
+		int i = 0;
+		for (int page = 0; page < totalPages; page++) {
+			final Page<Image> images = findAll(new PageRequest(page, 100L));
+			doUpdateUri(images.getContent(), submon);
+		}
+		submon.done();
 	}
 
 	protected void doUpdateUri(final Collection<Image> images, ProgressMonitor monitor) {
 		log.info("Updating {} {} image URIs", images.size(), namespace);
-		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, 2);
-		submon.beginTask("Updating URIs for " + images.size() + " images", images.size());
+//		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, 2);
+		monitor.subTask("Updating URIs for " + images.size() + " images");
 		for (Image image : images) {
 			final String newUri = getImageUri(image.getId(), ORIGINAL_NAME);
 			final BasicDBObject dbo = new BasicDBObject();
@@ -1004,9 +1014,9 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 				log.debug("Updating {} image id {} to {} with style {}", namespace, image.getId(), newStyleUri, styleName);
 				mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", updatedStyleUri));
 			}
-			submon.worked(1);
+			monitor.worked(1);
 		}
-		submon.done(); // TODO: shouldn't be done in proper implementation
+//		submon.done(); // TODO: shouldn't be done in proper implementation
 	}
 
 	@Override

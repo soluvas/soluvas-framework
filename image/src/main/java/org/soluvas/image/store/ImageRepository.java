@@ -126,8 +126,9 @@ public interface ImageRepository extends EntityLookup<Image, String>,
 	/**
 	 * List all {@link Image}s, ordered by Image ID.
 	 * @return
+	 * @deprecated Only returns 10 records.
 	 */
-	@Override
+	@Override @Deprecated
 	public abstract List<Image> findAll();
 	
 	/**

@@ -14,6 +14,8 @@ import org.apache.felix.gogo.commands.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageRequest;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 import org.soluvas.image.store.StyledImage;
@@ -60,23 +62,27 @@ public class ImageLsCommand extends ExtCommandSupport {
 		
 		System.out.println(ansi().render("@|negative_on %3s|%-48s|%-6s|%-10s|%-20s|%-20s|@",
 				"№", "ID", "Size", "Type", "File Name", "Styles" ));
-		final List<Image> images = imageRepo.findAll();
+		final long imageCount = imageRepo.count();
+		final long totalPages = (imageCount + 99) / 100;
 		int i = 0;
-		for (final Image it : images) {
-			final Collection<String> styles = Collections2.transform(it.getStyles().values(), new Function<StyledImage, String>() {
-				@Override @Nullable
-				public String apply(@Nullable StyledImage input) {
-					return input.getCode() + ":" + input.getWidth() + "×" + input.getHeight();
-				}
-			});
-			// TODO: use locale settings to format date, currency, amount, "and", many
-			// TODO: format products
-			System.out.println(ansi().render("@|bold,black %3d||@%-48s@|bold,black ||@%5sk@|bold,black ||@%-10s@|bold,black ||@%-20s@|bold,black ||@%s",
-				++i, it.getId(), NumberFormat.getIntegerInstance().format(it.getSize() / 1024),
-				it.getContentType(), it.getFileName(), Joiner.on(' ').join(styles)) );
+		for (int page = 0; page < totalPages; page++) {
+			final Page<Image> images = imageRepo.findAll(new PageRequest(page, 100L));
+			for (final Image it : images.getContent()) {
+				final Collection<String> styles = Collections2.transform(it.getStyles().values(), new Function<StyledImage, String>() {
+					@Override @Nullable
+					public String apply(@Nullable StyledImage input) {
+						return input.getCode() + ":" + input.getWidth() + "×" + input.getHeight();
+					}
+				});
+				// TODO: use locale settings to format date, currency, amount, "and", many
+				// TODO: format products
+				System.out.println(ansi().render("@|bold,black %3d||@%-48s@|bold,black ||@%5sk@|bold,black ||@%-10s@|bold,black ||@%-20s@|bold,black ||@%s",
+						++i, it.getId(), NumberFormat.getIntegerInstance().format(it.getSize() / 1024),
+						it.getContentType(), it.getFileName(), Joiner.on(' ').join(styles)) );
+			}
+			System.out.println(ansi().render("@|bold %d|@ Image entities in '@|bold %s|@' (%s on %s)",
+					images.getNumberOfElements(), namespace, imageRepo.getClass().getName(), imageRepo.getConnector().getClass().getName()));
 		}
-		System.out.println(ansi().render("@|bold %d|@ Image entities in '@|bold %s|@' (%s on %s)",
-			images.size(), namespace, imageRepo.getClass().getName(), imageRepo.getConnector().getClass().getName()));
 		return null;
 	}
 
