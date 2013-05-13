@@ -21,7 +21,7 @@ import org.soluvas.data.domain.Sort.Direction;
 
 /**
  * A custom implementation of {@link Pageable} that uses offset (aka first record index) instead of
- * page number.
+ * page number. Useful for usage in Wicket SortableDataProvider.
  * @author atang 
  */
 public class PageOffsetRequest implements Pageable, Serializable {
