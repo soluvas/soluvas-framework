@@ -487,7 +487,7 @@ public class LdapMapper<T> {
 		} else if (fieldType.isEnum()) {
 			return ((Enum<?>) value).name().toLowerCase();
 		} else if (DateTime.class.isAssignableFrom(fieldType)) {
-			return new GeneralizedTime(((DateTime)value).toDate()).toGeneralizedTime();
+			return LdapUtils.toGeneralizedTime((DateTime) value);
 		} else if (value instanceof Boolean) {
 			return value.toString().toUpperCase();
 		} else {
