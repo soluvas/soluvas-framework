@@ -18,9 +18,9 @@ import com.google.common.collect.ImmutableSet;
  * a real {@link LdapConnection}.
  * @author ceefour
  */
-public class LdapUtilsTest {
+public class LdapUtilsConnectionTest {
 
-	private static final Logger log = LoggerFactory.getLogger(LdapUtilsTest.class);
+	private static final Logger log = LoggerFactory.getLogger(LdapUtilsConnectionTest.class);
 	
 	private transient LdapMapper mapper;
 	private transient LdapConnection conn;

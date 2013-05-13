@@ -20,9 +20,11 @@ import org.apache.directory.api.ldap.model.message.Response;
 import org.apache.directory.api.ldap.model.message.SearchResultEntry;
 import org.apache.directory.api.ldap.model.message.SearchScope;
 import org.apache.directory.api.ldap.model.url.LdapUrl;
+import org.apache.directory.api.util.GeneralizedTime;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 import org.apache.directory.ldap.client.api.PoolableLdapConnectionFactory;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -259,6 +261,24 @@ public class LdapUtils {
 		final String trimmed = input.replaceAll("[^0-9\\+\\,\\-\\(\\) ]+", "").trim();
 		final boolean containsNumber = input.matches(".*[0-9].*");
 		return containsNumber ? Optional.of(trimmed) : Optional.<String>absent();
-	}	
+	}
+	
+	/**
+	 * Returns LDAP generalized time. Note that LDAP generalized cannot
+	 * handle dates former than year 1753, so it will throw {@link IllegalArgumentException} in that case.
+	 * @param dateTime
+	 * @return
+	 * @throws IllegalArgumentException If invalid date or if year is before 1753.
+	 */
+	@Nullable
+	public static String toGeneralizedTime(@Nullable DateTime dateTime) throws IllegalArgumentException {
+		if (dateTime == null) {
+			return null;
+		}
+		if (dateTime.getYear() < 1000) {
+			throw new IllegalArgumentException("Cannot handle year " + dateTime.getYear() + " from " + dateTime + ". Minimum supported year is 1753.");
+		}
+		return new GeneralizedTime(dateTime.toGregorianCalendar()).toGeneralizedTime();
+	}
 
 }
