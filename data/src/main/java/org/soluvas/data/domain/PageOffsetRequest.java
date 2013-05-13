@@ -20,63 +20,61 @@ import java.io.Serializable;
 import org.soluvas.data.domain.Sort.Direction;
 
 /**
- * Basic Java Bean implementation of {@link Pageable}.
- * 
- * Adapted from Spring Data Commons 1.4.
- * 
- * @author Oliver Gierke
+ * A custom implementation of {@link Pageable} that uses offset (aka first record index) instead of
+ * page number.
+ * @author atang 
  */
-public class PageRequest implements Pageable, Serializable {
+public class PageOffsetRequest implements Pageable, Serializable {
 
-	private static final long serialVersionUID = 8280485938848398236L;
-
-	private final long page;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private final long pageOffset;
 	private final long size;
 	private final Sort sort;
 
 	/**
-	 * Creates a new {@link PageRequest}. Pages are zero indexed, thus providing 0 for {@code page} will return the first
+	 * Creates a new {@link PageOffsetRequest}. Pages are zero indexed, thus providing 0 for {@code page} will return the first
 	 * page.
 	 * 
 	 * @param size
 	 * @param page
 	 */
-	public PageRequest(long page, long size) {
-
-		this(page, size, null);
+	public PageOffsetRequest(long pageOffset, long size) {
+		this(pageOffset, size, null);
 	}
 
 	/**
-	 * Creates a new {@link PageRequest} with sort parameters applied.
+	 * Creates a new {@link PageOffsetRequest} with sort parameters applied.
 	 * 
 	 * @param page
 	 * @param size
 	 * @param direction
 	 * @param properties
 	 */
-	public PageRequest(long page, long size, Direction direction, String... properties) {
-
-		this(page, size, new Sort(direction, properties));
+	public PageOffsetRequest(long pageOffset, long size, Direction direction, String... properties) {
+		this(pageOffset, size, new Sort(direction, properties));
 	}
 
 	/**
-	 * Creates a new {@link PageRequest} with sort parameters applied.
+	 * Creates a new {@link PageOffsetRequest} with sort parameters applied.
 	 * 
 	 * @param page
 	 * @param size
 	 * @param sort
 	 */
-	public PageRequest(long page, long size, Sort sort) {
-
-		if (0 > page) {
-			throw new IllegalArgumentException("Page index must not be less than zero!");
+	public PageOffsetRequest(long pageOffset, long size, Sort sort) {
+		if (0 > pageOffset) {
+			throw new IllegalArgumentException("Page offset must not be less than zero!");
 		}
 
 		if (0 >= size) {
 			throw new IllegalArgumentException("Page size must not be less than or equal to zero!");
 		}
 
-		this.page = page;
+		this.pageOffset = pageOffset;
 		this.size = size;
 		this.sort = sort;
 	}
@@ -98,7 +96,7 @@ public class PageRequest implements Pageable, Serializable {
 	 */
 	@Override
 	public long getPageNumber() {
-		return page;
+		return pageOffset / getPageSize();
 	}
 
 	/*
@@ -108,7 +106,7 @@ public class PageRequest implements Pageable, Serializable {
 	 */
 	@Override
 	public long getOffset() {
-		return page * size;
+		return pageOffset;
 	}
 
 	/*
@@ -118,7 +116,6 @@ public class PageRequest implements Pageable, Serializable {
 	 */
 	@Override
 	public Sort getSort() {
-
 		return sort;
 	}
 
@@ -129,18 +126,17 @@ public class PageRequest implements Pageable, Serializable {
 	 */
 	@Override
 	public boolean equals(final Object obj) {
-
 		if (this == obj) {
 			return true;
 		}
 
-		if (!(obj instanceof PageRequest)) {
+		if (!(obj instanceof PageOffsetRequest)) {
 			return false;
 		}
 
-		PageRequest that = (PageRequest) obj;
+		PageOffsetRequest that = (PageOffsetRequest) obj;
 
-		boolean pageEqual = this.page == that.page;
+		boolean pageEqual = this.pageOffset == that.pageOffset;
 		boolean sizeEqual = this.size == that.size;
 
 		boolean sortEqual = this.sort == null ? that.sort == null : this.sort.equals(that.sort);
@@ -150,10 +146,9 @@ public class PageRequest implements Pageable, Serializable {
 
 	@Override
 	public int hashCode() {
-
 		int result = 17;
 
-		result = (int) (31 * result + page);
+		result = (int) (31 * result + pageOffset);
 		result = (int) (31 * result + size);
 		result = 31 * result + (null == sort ? 0 : sort.hashCode());
 
