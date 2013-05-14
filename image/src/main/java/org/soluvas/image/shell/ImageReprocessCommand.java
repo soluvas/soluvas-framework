@@ -2,7 +2,6 @@ package org.soluvas.image.shell;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Argument;
@@ -56,7 +55,7 @@ public class ImageReprocessCommand extends ExtCommandSupport {
 	protected Object doExecute() throws Exception {
 		final ImageRepository imageRepo = Iterables.find(imageRepos, new Predicate<ImageRepository>() {
 			@Override
-			public boolean apply(@Nullable ImageRepository input) {
+			public boolean apply(ImageRepository input) {
 				return namespace.equals(input.getNamespace());
 			}
 		});
