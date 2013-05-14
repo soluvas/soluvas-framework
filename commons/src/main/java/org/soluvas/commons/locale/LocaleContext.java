@@ -46,6 +46,17 @@ public class LocaleContext {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(LocaleContext.class);
+	private final Locale locale;
+	
+	public LocaleContext() {
+		super();
+		// TODO: get from LDAP
+		this.locale = new Locale("in", "ID"); // the ID is required, otherwise you'll get 2012 Agustus 16!
+	}
+	
+	public LocaleContext(Locale locale) {
+		this.locale = locale;
+	}
 	
 	/**
 	 * Get the preferred {@link Locale} for the specified user.
@@ -55,8 +66,7 @@ public class LocaleContext {
 	 */
 	@Nonnull
 	public Locale getLocale() {
-		// TODO: get from LDAP
-		return new Locale("in", "ID"); // the ID is required, otherwise you'll get 2012 Agustus 16!
+		return locale;
 	}
 
 	/**
@@ -185,6 +195,17 @@ public class LocaleContext {
 	}
 
 	@Nullable
+	public String formatMoneyHtml(BigDecimal amount, CurrencyUnit currency) {
+		if (amount == null || currency == null)
+			return null;
+//		NumberFormat format = NumberFormat.getCurrencyInstance(getLocale());
+//		format.setCurrency(currency);
+//		format.setMaximumFractionDigits(0);
+//		return format.format(amount);
+		return formatMoneyHtml(BigMoney.of(currency, amount));
+	}
+
+	@Nullable
 	public String formatMoney(BigDecimal amount, String currency) {
 		if (amount == null || currency == null)
 			return null;
@@ -192,11 +213,28 @@ public class LocaleContext {
 	}
 
 	@Nullable
+	public String formatMoneyHtml(BigDecimal amount, String currency) {
+		if (amount == null || currency == null)
+			return null;
+		return formatMoneyHtml(amount, CurrencyUnit.of(currency));
+	}
+
+	@Nullable
 	public String formatMoney(BigMoneyProvider total) {
 		if (total == null)
 			return null;
-		MoneyFormatter formatter = new MoneyFormatterBuilder().appendCurrencySymbolLocalized().appendLiteral(" ").appendAmountLocalized()
+		MoneyFormatter formatter = new MoneyFormatterBuilder().appendCurrencySymbolLocalized().appendLiteral("").appendAmountLocalized()
 				.toFormatter(getLocale());
+		return formatter.print(total);
+	}
+
+	@Nullable
+	public String formatMoneyHtml(BigMoneyProvider total) {
+		if (total == null)
+			return null;
+		MoneyFormatter formatter = new MoneyFormatterBuilder()
+			.appendLiteral("<small class=\"muted\">").appendCurrencySymbolLocalized().appendLiteral("</small>").appendAmountLocalized()
+			.toFormatter(getLocale());
 		return formatter.print(total);
 	}
 

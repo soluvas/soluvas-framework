@@ -263,7 +263,7 @@
       </eGenericType>
       <eParameters name="namespace" lowerBound="1" eType="#//ImageType"/>
       <eParameters name="imageables" lowerBound="1">
-        <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//List">
+        <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Collection">
           <eTypeArguments>
             <eUpperBound eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Imageable"/>
           </eTypeArguments>
@@ -290,8 +290,24 @@
       </eGenericType>
       <eParameters name="namespace" lowerBound="1" eType="#//ImageType"/>
       <eParameters name="people" lowerBound="1">
-        <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//List">
+        <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Collection">
           <eTypeArguments eClassifier="#//SocialPerson"/>
+        </eGenericType>
+      </eParameters>
+      <eParameters name="style" eType="#//ImageStyle"/>
+    </eOperations>
+    <eOperations name="getSafePersonInfoPhotos" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Gets DisplayImages for SocialPersons &amp; styleName in a specified repository.&#xA;If image is not available, use the gender to select the representation.&#xA;Returns Map&lt;personId, DisplayImage>"/>
+      </eAnnotations>
+      <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Map">
+        <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+        <eTypeArguments eClassifier="#//DisplayImage"/>
+      </eGenericType>
+      <eParameters name="namespace" lowerBound="1" eType="#//ImageType"/>
+      <eParameters name="people" lowerBound="1">
+        <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Collection">
+          <eTypeArguments eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//PersonInfo"/>
         </eGenericType>
       </eParameters>
       <eParameters name="style" eType="#//ImageStyle"/>

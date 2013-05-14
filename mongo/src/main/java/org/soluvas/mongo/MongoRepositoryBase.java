@@ -44,7 +44,7 @@ import com.mongodb.WriteResult;
 @ParametersAreNonnullByDefault
 public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortingRepositoryBase<T, String>
 	implements MongoRepository<T> {
-
+	
 	public class DBObjectToEntity implements Function<DBObject, T> {
 		@Override
 		public T apply(DBObject input) {
@@ -83,6 +83,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	private MongoClient mongoClient;
 	protected final String collName;
 	private final Class<T> entityClass;
+	protected final String mongoUri;
 	
 	/**
 	 * 
@@ -90,6 +91,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	public MongoRepositoryBase(Class<T> entityClass, String mongoUri, String collName, String[] indexedFields) {
 		super();
 		this.entityClass = entityClass;
+		this.mongoUri = mongoUri;
 		this.collName = collName;
 		// WARNING: mongoUri may contain password!
 		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);

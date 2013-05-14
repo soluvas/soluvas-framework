@@ -2,9 +2,12 @@ package org.soluvas.image.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
@@ -25,6 +28,7 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NotNullPredicate;
+import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.ProgressStatus;
 import org.soluvas.commons.WebAddress;
@@ -52,10 +56,11 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
@@ -523,9 +528,9 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public Map<String, DisplayImage> getSafeImages(ImageType namespace, List<? extends Imageable> imageables, ImageStyle style) {
+	public Map<String, DisplayImage> getSafeImages(ImageType namespace, Collection<? extends Imageable> imageables, ImageStyle style) {
 		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
-		final List<String> imageIds = ImmutableList.copyOf(Iterables.filter(Lists.transform(imageables, 
+		final List<String> imageIds = ImmutableList.copyOf(Iterables.filter(Collections2.transform(imageables, 
 				new Function<Imageable, String>() {
 			@Override @Nullable
 			public String apply(@Nullable Imageable input) {
@@ -572,12 +577,12 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, List<SocialPerson> people, ImageStyle style) {
+	public Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, Collection<SocialPerson> people, ImageStyle style) {
 		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
-		final List<String> imageIds = ImmutableList.copyOf(Iterables.filter(Lists.transform(people, new Function<SocialPerson, String>() {
+		final Set<String> imageIds = ImmutableSet.copyOf(Iterables.filter(Collections2.transform(people, new Function<SocialPerson, String>() {
 			@Override @Nullable
 			public String apply(@Nullable SocialPerson input) {
-				return input.getPhotoId();
+				return input != null ? input.getPhotoId() : null;
 			}
 		}), new NotNullPredicate()));
 		final List<Image> images = imageRepo.findAll(imageIds);
@@ -588,17 +593,59 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			}
 		});
 		
-		final ImmutableMap.Builder<String, DisplayImage> b = ImmutableMap.builder();
+		final Map<String, DisplayImage> displayPhotos = new HashMap<>();
 		for (SocialPerson person : people) {
+			if (person == null || displayPhotos.containsKey(person.getId())) {
+				continue;
+			}
+			
 			final Image image = person.getPhotoId() != null ? imageMap.get(person.getPhotoId()) : null;
 			final Gender gender = person.getGender();
 			
 			final DisplayImage displayImage = grabDisplayPhoto(namespace, imageRepo.getStyles(),
 					person.getPhotoId(), style, image, gender);
 			
-			b.put(person.getId(), displayImage);
+			displayPhotos.put(person.getId(), displayImage);
 		}
-		return b.build();
+		return displayPhotos;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public Map<String, DisplayImage> getSafePersonInfoPhotos(ImageType namespace, Collection<PersonInfo> people, ImageStyle style) {
+		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
+		final Set<String> imageIds = ImmutableSet.copyOf(Iterables.filter(Collections2.transform(people, new Function<PersonInfo, String>() {
+			@Override @Nullable
+			public String apply(@Nullable PersonInfo input) {
+				return input != null ? input.getPhotoId() : null;
+			}
+		}), new NotNullPredicate()));
+		final List<Image> images = imageRepo.findAll(imageIds);
+		final Map<String, Image> imageMap = Maps.uniqueIndex(images, new Function<Image, String>() {
+			@Override @Nullable
+			public String apply(@Nullable Image input) {
+				return input.getId();
+			}
+		});
+		
+		final Map<String, DisplayImage> displayPhotos = new HashMap<>();
+		for (PersonInfo person : people) {
+			if (person == null || displayPhotos.containsKey(person.getId())) {
+				continue;
+			}
+			
+			final Image image = person.getPhotoId() != null ? imageMap.get(person.getPhotoId()) : null;
+			final Gender gender = person.getGender();
+			
+			final DisplayImage displayImage = grabDisplayPhoto(namespace, imageRepo.getStyles(),
+					person.getPhotoId(), style, image, gender);
+			
+			displayPhotos.put(person.getId(), displayImage);
+		}
+		return displayPhotos;
 	}
 
 	/**
