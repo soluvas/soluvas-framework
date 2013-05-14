@@ -421,8 +421,8 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	//		final String filter = String.format("(&(objectClass=%s)(|(cn=*%s*)(gn=*%s*)(sn=*%s*)(uid=*%s*)(mail=*%s*)))",
 	//				primaryObjectClass, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText);
 			// TODO: change index config so that uid is also sub,subinitial,subany
-			filter = String.format("(&(objectClass=*)(|(uid=%s)(cn=*%s*)(gn=*%s*)(sn=*%s*)(mail=*%s*)))",
-					encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText);
+			filter = String.format("(&(objectClass=*)(|(uid=%s)(cn=*%s*)(gn=*%s*)(sn=*%s*)(mail=*%s*)(o=*%s*)))",
+					encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText, encodedSearchText);
 		} else {
 			filter = "(objectClass=*)";
 		}
