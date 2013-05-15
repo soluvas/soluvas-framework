@@ -45,8 +45,8 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	private final String defaultTenantEnv;
 	private final String defaultClientId;
 	
-	public MultitenantServiceLookup(@Nonnull final BundleContext bundleContext,
-			@Nonnull final String defaultClientId, @Nonnull final String defaultTenantEnv) {
+	public MultitenantServiceLookup(final BundleContext bundleContext,
+			final String defaultClientId, final String defaultTenantEnv) {
 		super();
 		this.bundleContext = bundleContext;
 		this.defaultClientId = defaultClientId;
@@ -55,7 +55,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 
 	@Deprecated
 	@Override
-	public <T, S extends T> void withService(@Nonnull Class<T> clazz, @Nonnull CommandSession commandSession, @Nonnull final FutureCallback<S> callback) {
+	public <T, S extends T> void withService(Class<T> clazz, CommandSession commandSession, final FutureCallback<S> callback) {
 		withService(clazz, commandSession, new Function<S, Void>() {
 			@Override
 			public Void apply(S input) {
@@ -72,24 +72,24 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	}
 
 	@Override
-	public <T, R> R withService(Class<T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv, 
-			@Nonnull String tenantId, @Nonnull String namespace, Function<? extends T, R> callback) {
+	public <T, R> R withService(Class<T> clazz, String clientId, String tenantEnv, 
+			String tenantId, String namespace, Function<? extends T, R> callback) {
 		final String filter = String.format("(&(|(clientId=%s)(clientId=\\*))(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*))(namespace=%s))",
 				clientId, tenantId, tenantEnv, namespace);
 		return withService(clazz, filter, callback);
 	}
 
 	@Override
-	public <T, R> R withService(Class<T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv, 
-			@Nonnull String tenantId, @Nonnull Function<? extends T, R> callback) {
+	public <T, R> R withService(Class<T> clazz, String clientId, String tenantEnv, 
+			String tenantId, Function<? extends T, R> callback) {
 		final String filter = String.format("(&(|(clientId=%s)(clientId=\\*))(|(tenantId=%s)(tenantId=\\*))(|(tenantEnv=%s)(tenantEnv=\\*)))",
 				clientId, tenantId, tenantEnv);
 		return withService(clazz, filter, callback);
 	}
 
 	@Override
-	public <T, R> R withService(@Nonnull Class<T> clazz,
-			@Nonnull CommandSession commandSession, @Nullable String namespace,
+	public <T, R> R withService(Class<T> clazz,
+			CommandSession commandSession, @Nullable String namespace,
 			@Nullable String filter, Function<? extends T, R> callback) {
 		TenantRef tenant = getTenant(commandSession);
 		final String realFilter = String.format(
@@ -120,7 +120,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	 * @return
 	 */
 	@Override
-	public TenantRef getTenant(@Nonnull final CommandSession session) {
+	public TenantRef getTenant(final CommandSession session) {
 		Preconditions.checkNotNull(session, "CommandSession must not be null");
 		final String clientId = Optional.fromNullable(
 				(String) session.get("clientId")).or(defaultClientId);
@@ -141,8 +141,8 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	 * @return
 	 */
 	@Override
-	public <T> ServiceReference<T> getService(@Nonnull Class<T> iface,
-			@Nonnull CommandSession session, @Nullable String namespace,
+	public <T> ServiceReference<T> getService(Class<T> iface,
+			CommandSession session, @Nullable String namespace,
 			@Nullable String filter) {
 		TenantRef tenant = getTenant(session);
 
@@ -179,7 +179,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	 * @return
 	 */
 	@Override
-	public <T> T getSupplied(@Nonnull Class<T> clazz, CommandSession session) {
+	public <T> T getSupplied(Class<T> clazz, CommandSession session) {
 		final TenantRef tenant = getTenant(session);
 		final BundleContext bundleContext = FrameworkUtil.getBundle(
 				MultitenantServiceLookup.class).getBundleContext();
@@ -187,7 +187,7 @@ public class MultitenantServiceLookup implements ServiceLookup {
 	}
 	
 	@Override
-	public <T> Set<String> getNamespaces(@Nonnull final Class<T> iface, @Nonnull final TenantRef tenant, @Nullable final String filter) {
+	public <T> Set<String> getNamespaces(final Class<T> iface, final TenantRef tenant, @Nullable final String filter) {
 		final String ifaceName = iface.getName();
 		final String additionalFilter = Optional.fromNullable(filter).or("");
 		log.trace(

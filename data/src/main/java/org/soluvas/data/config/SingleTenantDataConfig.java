@@ -44,9 +44,9 @@ public class SingleTenantDataConfig {
 	
 	@Bean
 	public AggregatingSupplier<DataCatalog> dataCatalogSupplier() {
-		final AggregatingSupplier<DataCatalog> aggregator = new AggregatingSupplier<DataCatalog>(DataFactory.eINSTANCE,
+		final AggregatingSupplier<DataCatalog> aggregator = new AggregatingSupplier<>(DataFactory.eINSTANCE,
 				DataPackage.Literals.DATA_CATALOG, ImmutableList.<Supplier<DataCatalog>>of());
-		final SupplierXmiClasspathScanner<DataCatalog> scanner = new SupplierXmiClasspathScanner<DataCatalog>(DataPackage.eINSTANCE, DataCatalog.class,
+		final SupplierXmiClasspathScanner<DataCatalog> scanner = new SupplierXmiClasspathScanner<>(DataPackage.eINSTANCE, DataCatalog.class,
 				aggregator, SingleTenantDataConfig.class.getClassLoader(), dataFolder);
 		return aggregator;
 	}

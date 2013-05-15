@@ -47,7 +47,7 @@ public class EmfUtils {
 	 * @param eFactoryClass
 	 * @return
 	 */
-	public static synchronized EFactory getEFactory(@Nonnull Class<? extends EFactory> eFactoryClass) {
+	public static synchronized EFactory getEFactory(Class<? extends EFactory> eFactoryClass) {
 		try {
 			Field eInstanceField = eFactoryClass.getDeclaredField("eINSTANCE");
 			EFactory eFactory = (EFactory) eInstanceField.get(eFactoryClass);
@@ -59,7 +59,7 @@ public class EmfUtils {
 		}
 	}
 
-	public static EClass getEClass(@Nonnull Class<? extends EPackage> ePackageClass, @Nonnull String eClassName) {
+	public static EClass getEClass(Class<? extends EPackage> ePackageClass, String eClassName) {
 		final EPackage ePackage = getEPackage(ePackageClass);
 //		EFactory eFactory = getEFactory(eFactoryClass);
 //		final EPackage ePackage = eFactory.getEPackage();

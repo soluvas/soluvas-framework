@@ -53,16 +53,16 @@ public interface ServiceLookup {
 
 	public abstract <T, R> R withService(Class<T> clazz, CommandSession commandSession, Function<? extends T, R> callback);
 
-	public abstract <T, R> R withService(Class<T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv,
-			@Nonnull String tenantId, @Nonnull Function<? extends T, R> callback);
+	public abstract <T, R> R withService(Class<T> clazz, String clientId, String tenantEnv,
+			String tenantId, Function<? extends T, R> callback);
 
-	public abstract <T, R> R withService(Class<T> clazz, @Nonnull String clientId, @Nonnull String tenantEnv,
-			@Nonnull String tenantId, @Nonnull String namespace, Function<? extends T, R> callback);
+	public abstract <T, R> R withService(Class<T> clazz, String clientId, String tenantEnv,
+			String tenantId, String namespace, Function<? extends T, R> callback);
 
 	public abstract <T, R, S extends T> R withService(Class<T> clazz, String filter, Function<S,R> callback);
 
 	@Deprecated
-	public <T, S extends T> void withService(@Nonnull Class<T> clazz, @Nonnull CommandSession commandSession, @Nonnull final FutureCallback<S> callback);
+	public <T, S extends T> void withService(Class<T> clazz, CommandSession commandSession, final FutureCallback<S> callback);
 
 	/**
 	 * Returns a tenant-scoped supplied object from {@link Supplier} service,
@@ -71,15 +71,15 @@ public interface ServiceLookup {
 	 * @param clazz
 	 * @return
 	 */
-	public <T> T getSupplied(@Nonnull Class<T> clazz,
+	public <T> T getSupplied(Class<T> clazz,
 			CommandSession commandSession);
 
-	public abstract <T> ServiceReference<T> getService(@Nonnull Class<T> iface,
-			@Nonnull CommandSession session, @Nullable String namespace,
+	public abstract <T> ServiceReference<T> getService(Class<T> iface,
+			CommandSession session, @Nullable String namespace,
 			@Nullable String filter);
 
-	public abstract TenantRef getTenant(@Nonnull CommandSession session);
+	public abstract TenantRef getTenant(CommandSession session);
 
-	public abstract <T> Set<String> getNamespaces(@Nonnull Class<T> iface, @Nonnull TenantRef tenant, @Nullable String filter);
+	public abstract <T> Set<String> getNamespaces(Class<T> iface, TenantRef tenant, @Nullable String filter);
 
 }

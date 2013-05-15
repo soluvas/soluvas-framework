@@ -44,7 +44,7 @@ public interface JavaClassLinked<T> extends SerializableEObject {
 		 * @param bundle If not provided, will use its own {@link ClassLoader}.
 		 */
 		@SuppressWarnings("unchecked")
-		public static <T> void resolveJavaClass(@Nonnull final JavaClassLinked<T> obj, @Nullable final Bundle bundle) {
+		public static <T> void resolveJavaClass(final JavaClassLinked<T> obj, @Nullable final Bundle bundle) {
 			Preconditions.checkArgument(!Strings.isNullOrEmpty(obj.getJavaClassName()),
 					"Cannot resolve empty Java class (bundle: %s)", bundle);
 			if (bundle != null) {

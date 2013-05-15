@@ -67,14 +67,14 @@ public class EPackageRegistration {
 	private final List<ServiceRegistration<?>> pkgRegs = new ArrayList<ServiceRegistration<?>>();
 	private final List<ServiceRegistration<?>> factoryRegs = new ArrayList<ServiceRegistration<?>>();
 	
-	public EPackageRegistration(@Nonnull BundleContext bundleContext, @Nonnull Class<EPackage> pkg) {
+	public EPackageRegistration(BundleContext bundleContext, Class<EPackage> pkg) {
 		super();
 		this.bundleContext = bundleContext;
 		this.packages = ImmutableList.of(pkg);
 	}
 
 	@SuppressWarnings("unchecked")
-	public EPackageRegistration(@Nonnull final BundleContext bundleContext, @Nonnull Iterable<?> packageClasses) {
+	public EPackageRegistration(final BundleContext bundleContext, Iterable<?> packageClasses) {
 		super();
 		this.bundleContext = bundleContext;
 		this.packages = ImmutableList.copyOf(Iterables.transform(packageClasses, new Function<Object, Class<EPackage>>() {

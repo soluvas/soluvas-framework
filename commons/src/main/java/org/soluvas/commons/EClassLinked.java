@@ -45,7 +45,7 @@ public interface EClassLinked extends SerializableEObject {
 		 * @param obj
 		 * @param eClassMap
 		 */
-		public static void resolveEClass(@Nonnull final EClassLinked obj, @Nonnull final Map<String, EClass> eClassMap) {
+		public static void resolveEClass(final EClassLinked obj, final Map<String, EClass> eClassMap) {
 			Preconditions.checkState(!Strings.isNullOrEmpty(obj.getEPackageName()) ||
 					!Strings.isNullOrEmpty(obj.getEPackageNsPrefix()),
 					"At least one of ePackageName or ePackageNsPrefix must be specified");

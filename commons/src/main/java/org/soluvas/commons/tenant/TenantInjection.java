@@ -48,8 +48,8 @@ public class TenantInjection implements Serializable {
 	 * @param tenantId
 	 * @param tenantEnv
 	 */
-	public TenantInjection(@Nonnull final BundleContext bundleContext,
-			@Nonnull final String tenantId, @Nonnull final String tenantEnv) {
+	public TenantInjection(final BundleContext bundleContext,
+			final String tenantId, final String tenantEnv) {
 		super();
 		this.bundleContext = bundleContext;
 		this.tenantId = tenantId;
@@ -62,7 +62,7 @@ public class TenantInjection implements Serializable {
 	 * @param phase 
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void inject(@Nonnull final Object component, @Nonnull final String componentId, @Nonnull final String phase) {
+	public void inject(final Object component, final String componentId, final String phase) {
 		final List<Field> nonSuppliedFields = ReflectionUtils.getNonSuppliedFields(component.getClass());
 		for (final Field field : nonSuppliedFields) {
 			try {
@@ -122,7 +122,7 @@ public class TenantInjection implements Serializable {
 	 * @param component
 	 * @param phase 
 	 */
-	public void uninject(@Nonnull final Object component, @Nonnull final String componentId, @Nonnull final String phase) {
+	public void uninject(final Object component, final String componentId, final String phase) {
 		if (!serviceRefs.isEmpty()) {
 			log.trace("Uninjecting {} services from {} due to {}", serviceRefs.size(), componentId, phase);
 			final Iterator<Entry<Field, ServiceReference<?>>> serviceRefIterator = serviceRefs.entrySet().iterator();

@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -24,7 +23,7 @@ import com.google.common.collect.ImmutableList;
 
 /**
  * Tracks files named <tt>(bundle)/*.{suppliedClassSimpleName}.xmi</tt> and adds/removes
- * them from {@link DelegatingSupplier}.
+ * them from {@link DelegatingSupplier} (<strong>OSGi only</strong>).
  * 
  * This is a shortcut that's in effect equivalent to using an {@link XmiTracker} 
  * combined with {@link SupplierTracker}.
@@ -71,7 +70,7 @@ public class SupplierXmiFileScanner<T extends EObject> {
 	private final DelegatingSupplier<T> delegate;
 	private final String packageToScan;
 	private List<Supplier<T>> suppliers;
-	private FileSystemResourceLoader resourceLoader;
+	private final FileSystemResourceLoader resourceLoader;
 	
 	/**
 	 * Do not use this constructor in Blueprint XML due to classloading problems, use {@link #XmiTracker(Class, Class, String, String)}.
@@ -80,8 +79,8 @@ public class SupplierXmiFileScanner<T extends EObject> {
 	 * @param tenantId
 	 * @param tenantEnv
 	 */
-	public SupplierXmiFileScanner(final @Nonnull EPackage ePackage, final @Nonnull Class<T> suppliedClass,
-			@Nonnull final DelegatingSupplier<T> delegate, @Nonnull final File folderToScan) {
+	public SupplierXmiFileScanner(final EPackage ePackage, final Class<T> suppliedClass,
+			final DelegatingSupplier<T> delegate, final File folderToScan) {
 		super();
 		this.ePackage = ePackage;
 		this.suppliedClassName = suppliedClass.getName();
@@ -109,7 +108,7 @@ public class SupplierXmiFileScanner<T extends EObject> {
 	}
 
 	@Nullable
-	public List<Supplier<T>> addingBundle(@Nonnull ResourceLoader resourceLoader, @Nonnull String pkg) {
+	public List<Supplier<T>> addingBundle(ResourceLoader resourceLoader, String pkg) {
 		final ImmutableList.Builder<Supplier<T>> suppliersBuilder = ImmutableList.builder();
 		final PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(resourceLoader);
 		final Resource[] resources;
@@ -160,7 +159,7 @@ public class SupplierXmiFileScanner<T extends EObject> {
 		}
 	}
 
-	public void removedBundle(@Nonnull ResourceLoader resourceLoader, @Nonnull String pkg,
+	public void removedBundle(ResourceLoader resourceLoader, String pkg,
 			@Nullable List<Supplier<T>> suppliers) {
 		if (suppliers == null)
 			return;

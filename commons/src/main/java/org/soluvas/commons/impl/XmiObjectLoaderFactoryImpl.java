@@ -24,7 +24,7 @@ public class XmiObjectLoaderFactoryImpl implements XmiObjectLoaderFactory {
 	 * @see org.soluvas.commons.XmiObjectLoaderFactory#create(org.eclipse.emf.ecore.EPackage, java.lang.Class, java.lang.String)
 	 */
 	@Override
-	public <T extends EObject> StaticXmiLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final Class<?> loaderClass, @Nonnull final String resourcePath) {
+	public <T extends EObject> StaticXmiLoader<T> create(final EPackage ePackage, final Class<?> loaderClass, final String resourcePath) {
 		return new StaticXmiLoader<T>(ePackage, loaderClass, resourcePath);
 	}
 	
@@ -32,7 +32,7 @@ public class XmiObjectLoaderFactoryImpl implements XmiObjectLoaderFactory {
 	 * @see org.soluvas.commons.XmiObjectLoaderFactory#create(org.eclipse.emf.ecore.EPackage, java.lang.String)
 	 */
 	@Override
-	public <T extends EObject> StaticXmiLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final String fileName) {
+	public <T extends EObject> StaticXmiLoader<T> create(final EPackage ePackage, final String fileName) {
 		return new StaticXmiLoader<T>(ePackage, fileName);
 	}
 
@@ -40,7 +40,7 @@ public class XmiObjectLoaderFactoryImpl implements XmiObjectLoaderFactory {
 	 * @see org.soluvas.commons.XmiObjectLoaderFactory#create(org.eclipse.emf.ecore.EPackage, org.osgi.framework.Bundle, java.lang.String)
 	 */
 	@Override
-	public <T extends EObject> StaticXmiLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final Bundle bundle, @Nonnull final String fileName) {
+	public <T extends EObject> StaticXmiLoader<T> create(final EPackage ePackage, final Bundle bundle, final String fileName) {
 		return new StaticXmiLoader<T>(ePackage, bundle, fileName);
 	}
 
@@ -48,7 +48,7 @@ public class XmiObjectLoaderFactoryImpl implements XmiObjectLoaderFactory {
 	 * @see org.soluvas.commons.XmiObjectLoaderFactory#create(org.eclipse.emf.ecore.EPackage, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public <T extends EObject> StaticXmiLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final String baseDir, @Nonnull final String fileName) {
+	public <T extends EObject> StaticXmiLoader<T> create(final EPackage ePackage, final String baseDir, final String fileName) {
 		return new StaticXmiLoader<T>(ePackage, baseDir, fileName);
 	}
 
@@ -56,8 +56,8 @@ public class XmiObjectLoaderFactoryImpl implements XmiObjectLoaderFactory {
 	 * @see org.soluvas.commons.XmiObjectLoaderFactory#create(org.eclipse.emf.ecore.EPackage, java.net.URL, org.soluvas.commons.ResourceType)
 	 */
 	@Override
-	public <T extends EObject> StaticXmiLoader<T> create(@Nonnull final EPackage ePackage, @Nonnull final URL resourceUrl,
-			@Nonnull final ResourceType resourceType) {
+	public <T extends EObject> StaticXmiLoader<T> create(final EPackage ePackage, final URL resourceUrl,
+			final ResourceType resourceType) {
 		return new StaticXmiLoader<T>(ePackage, resourceUrl, resourceType);
 	}
 

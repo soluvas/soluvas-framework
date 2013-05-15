@@ -11,11 +11,11 @@ import org.osgi.framework.Bundle;
 public interface XmiObjectLoaderFactory {
 
 	public abstract <T extends EObject> StaticXmiLoader<T> create(
-			@Nonnull EPackage ePackage, @Nonnull Class<?> loaderClass,
-			@Nonnull String resourcePath);
+			EPackage ePackage, Class<?> loaderClass,
+			String resourcePath);
 
 	public abstract <T extends EObject> StaticXmiLoader<T> create(
-			@Nonnull EPackage ePackage, @Nonnull String fileName);
+			EPackage ePackage, String fileName);
 
 	/**
 	 * Loads from a file inside a {@link Bundle}.
@@ -24,8 +24,8 @@ public interface XmiObjectLoaderFactory {
 	 * @param fileName
 	 */
 	public abstract <T extends EObject> StaticXmiLoader<T> create(
-			@Nonnull EPackage ePackage, @Nonnull Bundle bundle,
-			@Nonnull String fileName);
+			EPackage ePackage, Bundle bundle,
+			String fileName);
 
 	/**
 	 * Loads from a file inside a baseDir, this makes it much easier to configure in Blueprint XML, because Blueprint property configurer does not support expressions.
@@ -34,11 +34,11 @@ public interface XmiObjectLoaderFactory {
 	 * @param fileName
 	 */
 	public abstract <T extends EObject> StaticXmiLoader<T> create(
-			@Nonnull EPackage ePackage, @Nonnull String baseDir,
-			@Nonnull String fileName);
+			EPackage ePackage, String baseDir,
+			String fileName);
 
 	public abstract <T extends EObject> StaticXmiLoader<T> create(
-			@Nonnull EPackage ePackage, @Nonnull URL resourceUrl,
-			@Nonnull ResourceType resourceType);
+			EPackage ePackage, URL resourceUrl,
+			ResourceType resourceType);
 
 }

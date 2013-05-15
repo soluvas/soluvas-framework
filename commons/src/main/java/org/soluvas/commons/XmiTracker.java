@@ -62,8 +62,8 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 	 * @param tenantId
 	 * @param tenantEnv
 	 */
-	public XmiTracker(final @Nonnull EPackage ePackage, final @Nonnull Class<?> suppliedClass,
-			@Nonnull String tenantId, @Nonnull String tenantEnv) {
+	public XmiTracker(final EPackage ePackage, final Class<?> suppliedClass,
+			String tenantId, String tenantEnv) {
 		super();
 		this.ePackage = ePackage;
 		this.suppliedClassName = suppliedClass.getName();
@@ -72,8 +72,8 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 		this.tenantEnv = tenantEnv;
 	}
 
-	public XmiTracker(final @Nonnull Class<EPackage> ePackageClass, final @Nonnull Class<?> suppliedClass,
-			@Nonnull String tenantId, @Nonnull String tenantEnv) {
+	public XmiTracker(final Class<EPackage> ePackageClass, final Class<?> suppliedClass,
+			String tenantId, String tenantEnv) {
 		super();
 		this.ePackage = EmfUtils.getEPackage(ePackageClass);
 		this.suppliedClassName = suppliedClass.getName();
@@ -82,8 +82,8 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 		this.tenantEnv = tenantEnv;
 	}
 
-//	public XmiTracker(final @Nonnull EPackage ePackage, final @Nonnull String suppliedClassName,
-//			@Nonnull String tenantId, @Nonnull String tenantEnv) {
+//	public XmiTracker(final EPackage ePackage, final String suppliedClassName,
+//			String tenantId, String tenantEnv) {
 //		super();
 //		this.ePackage = ePackage;
 //		this.suppliedClassName = suppliedClassName;
@@ -97,8 +97,8 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 
 	@Override
 	@Nullable
-	public List<ServiceRegistration<Supplier>> addingBundle(@Nonnull Bundle bundle,
-			@Nonnull BundleEvent event) {
+	public List<ServiceRegistration<Supplier>> addingBundle(Bundle bundle,
+			BundleEvent event) {
 		final Builder<ServiceRegistration<Supplier>> svcRegs = ImmutableList.builder();
 		try {
 			final List<URL> entries = XmiTrackerUtils.scan(bundle, suppliedClassSimpleName);
@@ -142,12 +142,12 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 	}
 
 	@Override
-	public void modifiedBundle(@Nonnull Bundle bundle, @Nonnull BundleEvent event,
+	public void modifiedBundle(Bundle bundle, BundleEvent event,
 			@Nullable List<ServiceRegistration<Supplier>> object) {
 	}
 
 	@Override
-	public void removedBundle(@Nonnull Bundle bundle, @Nonnull BundleEvent event,
+	public void removedBundle(Bundle bundle, BundleEvent event,
 			@Nullable List<ServiceRegistration<Supplier>> svcRegs) {
 		if (svcRegs == null)
 			return;

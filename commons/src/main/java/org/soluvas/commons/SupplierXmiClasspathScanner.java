@@ -27,7 +27,8 @@ import com.google.common.collect.Lists;
 
 /**
  * Tracks files named <tt>(bundle)/*.{suppliedClassSimpleName}.xmi</tt> and adds/removes
- * them from {@link DelegatingSupplier}.
+ * them from {@link DelegatingSupplier} (non-dynamic, scan is only performed once,
+ * however the XMI files themselves can change and reloaded).
  * 
  * <p>This is a shortcut that's in effect equivalent to using an {@link XmiTracker} 
  * combined with {@link SupplierTracker}.
@@ -37,34 +38,15 @@ import com.google.common.collect.Lists;
  * 
  * <p>Usage:
  * 
- * <pre>{@code
- * 	<bean id="bannerPackage" class="org.soluvas.web.banner.impl.BannerPackageImpl"
- * 		factory-method="getInstance" />
- * 	<bean id="bannerCatalogSupplier" class="org.soluvas.commons.OverridingSupplier"
- * 		destroy-method="destroy">
- * 		<argument ref="bannerPackage"/>
- * 		<argument value="BannerCatalog"/>
- * 		<argument><list /></argument>
- * 	</bean>
- * 	<service ref="bannerCatalogSupplier" auto-export="interfaces">
- * 		<service-properties>
- * 			<entry key="clientId" value="${clientId}" />
- * 			<entry key="tenantId" value="${tenantId}" />
- * 			<entry key="tenantEnv" value="${tenantEnv}" />
- * 			<entry key="suppliedClass" value="org.soluvas.web.banner.BannerCatalog" />
- * 			<entry key="layer" value="application" />
- * 		</service-properties>
- * 	</service>
- * 	<bean id="bannerCatalogXmiTracker" class="org.soluvas.commons.SupplierXmiTracker">
- * 		<argument value="org.soluvas.web.banner.BannerPackage" />
- * 		<argument value="org.soluvas.web.banner.BannerCatalog" />
- * 		<argument ref="bannerCatalogSupplier" />
- * 	</bean>
- * 	<bean class="org.osgi.util.tracker.BundleTracker" init-method="open" destroy-method="close">
- * 		<argument ref="blueprintBundleContext" />
- * 		<argument value="32" />
- * 		<argument ref="bannerCatalogXmiTracker" />
- * 	</bean>
+ * <pre>{@literal
+ * @Bean
+ * public AggregatingSupplier<DataCatalog> dataCatalogSupplier() {
+ * 	final AggregatingSupplier<DataCatalog> aggregator = new AggregatingSupplier<>(DataFactory.eINSTANCE,
+ * 			DataPackage.Literals.DATA_CATALOG, ImmutableList.<Supplier<DataCatalog>>of());
+ * 	final SupplierXmiClasspathScanner<DataCatalog> scanner = new SupplierXmiClasspathScanner<>(DataPackage.eINSTANCE, DataCatalog.class,
+ * 			aggregator, SingleTenantDataConfig.class.getClassLoader(), dataFolder);
+ * 	return aggregator;
+ * }
  * }</pre>
  * 
  * @author ceefour

@@ -37,8 +37,8 @@ public class TenantServiceProxy implements InvocationHandler {
 	 * @param clazz
 	 * @param filter
 	 */
-	public TenantServiceProxy(@Nonnull final BundleContext bundleContext, @Nonnull final String name,
-			@Nonnull final Class<?> clazz, String filter) {
+	public TenantServiceProxy(final BundleContext bundleContext, final String name,
+			final Class<?> clazz, String filter) {
 		super();
 		this.bundleContext = bundleContext;
 		this.name = name;
@@ -52,8 +52,8 @@ public class TenantServiceProxy implements InvocationHandler {
 	 * @param clazz
 	 * @param filter
 	 */
-	public TenantServiceProxy(@Nonnull final BundleContext bundleContext, @Nonnull final String name,
-			@Nonnull final Class<?> clazz, @Nonnull final Supplier<String> filterSupplier) {
+	public TenantServiceProxy(final BundleContext bundleContext, final String name,
+			final Class<?> clazz, final Supplier<String> filterSupplier) {
 		super();
 		this.bundleContext = bundleContext;
 		this.name = name;

@@ -64,9 +64,9 @@ public class TenantUtils {
 	 */
 	@SuppressWarnings("unchecked")
 	@Nonnull
-	public static <T, S extends T> ServiceReference<S> getService(@Nonnull BundleContext bundleContext,
-			@Nonnull TenantRef tenant,
-			@Nonnull Class<T> iface,
+	public static <T, S extends T> ServiceReference<S> getService(BundleContext bundleContext,
+			TenantRef tenant,
+			Class<T> iface,
 			@Nullable String namespace,
 			@Nullable String filter) {
 		Preconditions.checkNotNull(bundleContext, "null bundleContext given to getService tenant=%s iface=%s namespace=%s filter=%s",
@@ -103,7 +103,7 @@ public class TenantUtils {
 	 * @return
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static <T> T getSupplied(BundleContext bundleContext, TenantRef tenant, @Nonnull Class<T> clazz) {
+	public static <T> T getSupplied(BundleContext bundleContext, TenantRef tenant, Class<T> clazz) {
 		final ServiceReference<Supplier> supplierRef = getService(bundleContext, tenant, Supplier.class,
 				null, "(suppliedClass=" + clazz.getName() + ")(layer=application)");
 		final Supplier<T> supplier = bundleContext.getService(supplierRef);
@@ -119,7 +119,7 @@ public class TenantUtils {
 	 * 
 	 * @return
 	 */
-	public static TenantRef getTenant(@Nonnull final CommandSession session) {
+	public static TenantRef getTenant(final CommandSession session) {
 		final BundleContext bundleContext = Preconditions.checkNotNull(
 				FrameworkUtil.getBundle(TenantUtils.class).getBundleContext(),
 				"Cannot get bundleContext for %s", TenantUtils.class.getName());

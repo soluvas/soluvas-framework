@@ -77,14 +77,14 @@ public class ServiceXmiTracker<T extends EObject> implements BundleTrackerCustom
 	 * @param tenantId
 	 * @param tenantEnv
 	 */
-	public ServiceXmiTracker(final @Nonnull EPackage ePackage, final @Nonnull Class<T> suppliedClass) {
+	public ServiceXmiTracker(final EPackage ePackage, final Class<T> suppliedClass) {
 		super();
 		this.ePackage = ePackage;
 		this.suppliedClassName = suppliedClass.getName();
 		this.suppliedClassSimpleName = suppliedClass.getSimpleName();
 	}
 
-	public ServiceXmiTracker(final @Nonnull Class<EPackage> ePackageClass, final @Nonnull Class<T> suppliedClass) {
+	public ServiceXmiTracker(final Class<EPackage> ePackageClass, final Class<T> suppliedClass) {
 		super();
 		this.ePackage = EmfUtils.getEPackage(ePackageClass);
 		this.suppliedClassName = suppliedClass.getName();
@@ -103,8 +103,8 @@ public class ServiceXmiTracker<T extends EObject> implements BundleTrackerCustom
 	
 	@SuppressWarnings("unchecked")
 	@Override @Nullable
-	public List<ServiceRegistration<T>> addingBundle(@Nonnull Bundle bundle,
-			@Nonnull BundleEvent event) {
+	public List<ServiceRegistration<T>> addingBundle(Bundle bundle,
+			BundleEvent event) {
 		final ImmutableList.Builder<ServiceRegistration<T>> svcRegsBuilder = ImmutableList.builder();
 		try {
 			final List<URL> entries = XmiTrackerUtils.scan(bundle, suppliedClassSimpleName);
@@ -158,12 +158,12 @@ public class ServiceXmiTracker<T extends EObject> implements BundleTrackerCustom
 	}
 
 	@Override
-	public void modifiedBundle(@Nonnull Bundle bundle, @Nonnull BundleEvent event,
+	public void modifiedBundle(Bundle bundle, BundleEvent event,
 			@Nullable List<ServiceRegistration<T>> object) {
 	}
 
 	@Override
-	public void removedBundle(@Nonnull Bundle bundle, @Nonnull BundleEvent event,
+	public void removedBundle(Bundle bundle, BundleEvent event,
 			@Nullable List<ServiceRegistration<T>> svcRegs) {
 		if (svcRegs == null)
 			return;

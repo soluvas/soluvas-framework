@@ -67,7 +67,7 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 	 * @return Injected {@link Field}s and associated {@link ServiceReference}s.
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected Map<Field, ServiceReference<?>> inject(@Nonnull final CommandSession session) {
+	protected Map<Field, ServiceReference<?>> inject(final CommandSession session) {
 		final TenantRef tenant = TenantUtils.getTenant(session);
 		final String tenantId = tenant.getTenantId();
 		final String tenantEnv = tenant.getTenantEnv();
@@ -177,7 +177,7 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 	 * Uninjects injected fields.
 	 * @param component
 	 */
-	protected void uninject(@Nonnull final Map<Field, ServiceReference<?>> serviceRefs) {
+	protected void uninject(final Map<Field, ServiceReference<?>> serviceRefs) {
 		final Iterator<Entry<Field, ServiceReference<?>>> serviceRefIterator = serviceRefs.entrySet().iterator();
 		while (serviceRefIterator.hasNext()) {
 			final Entry<Field, ServiceReference<?>> entry = serviceRefIterator.next();

@@ -25,7 +25,7 @@ public class EnhancedSupplier<T> implements Supplier<T> {
 	private Supplier<T> delegate;
 	private List<Enhancer<T>> enhancers;
 	
-	public EnhancedSupplier(@Nonnull Supplier<T> delegate, @Nullable List<Enhancer<T>> enhancers) {
+	public EnhancedSupplier(Supplier<T> delegate, @Nullable List<Enhancer<T>> enhancers) {
 		super();
 		this.delegate = delegate;
 		this.enhancers = Optional.fromNullable(enhancers).or(ImmutableList.<Enhancer<T>>of());

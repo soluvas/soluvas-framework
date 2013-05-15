@@ -20,7 +20,7 @@ public class SlugUtils {
 	 * @param suffix
 	 * @return
 	 */
-	public static String generateScreenName(@Nonnull String name, @Nonnegative int suffix) {
+	public static String generateScreenName(String name, @Nonnegative int suffix) {
 		Preconditions.checkNotNull(name, "name must not be null");
 		Preconditions.checkArgument(suffix >= 0, "suffix must be non-negative");
 		String base = name.replaceAll("[^A-Za-z0-9]", " ").trim().toLowerCase().replaceAll(" ", ".")
@@ -95,7 +95,7 @@ public class SlugUtils {
 	 * @param validator
 	 * @return
 	 */
-	public static String generateValidId(@Nonnull String name, @Nonnull Predicate<String> validator) {
+	public static String generateValidId(String name, Predicate<String> validator) {
 		Preconditions.checkNotNull(validator, "validator must not be null");
 		String id = generateId(name, 0);
 		if (validator.apply(id))
@@ -117,7 +117,7 @@ public class SlugUtils {
 	 * @deprecated Use {@link #generateValidSegment(String, Predicate)}.
 	 */
 	@Deprecated
-	public static String generateValidSlug(@Nonnull String name, @Nonnull Predicate<String> validator) {
+	public static String generateValidSlug(String name, Predicate<String> validator) {
 		return generateValidSegment(name, validator);
 	}
 	
@@ -127,7 +127,7 @@ public class SlugUtils {
 	 * @param validator
 	 * @return
 	 */
-	public static String generateValidSegment(@Nonnull String name, @Nonnull Predicate<String> validator) {
+	public static String generateValidSegment(String name, Predicate<String> validator) {
 		Preconditions.checkNotNull(validator, "validator must not be null");
 		String segment = generateSegment(name, 0);
 		if (validator.apply(segment))
@@ -148,7 +148,7 @@ public class SlugUtils {
 	 * @param validator
 	 * @return
 	 */
-	public static String generateValidScreenName(@Nonnull String name, @Nonnull Predicate<String> validator) {
+	public static String generateValidScreenName(String name, Predicate<String> validator) {
 		Preconditions.checkNotNull(validator, "validator must not be null");
 		String id = generateScreenName(name, 0);
 		if (validator.apply(id))
@@ -174,7 +174,7 @@ public class SlugUtils {
 	 * @param slug
 	 * @return
 	 */
-	public static String canonicalize(@Nonnull String slug) {
+	public static String canonicalize(String slug) {
 		Preconditions.checkNotNull(slug, "slug must not be null");
 		return slug.toLowerCase().replaceAll("[^a-z0-9_]", "");
 	}

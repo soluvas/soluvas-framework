@@ -29,7 +29,7 @@ public class XmiTrackerUtils {
 	 * @param suppliedClassSimpleName
 	 * @return
 	 */
-	public static List<URL> scan(@Nonnull final Bundle bundle, @Nonnull final String suppliedClassSimpleName) {
+	public static List<URL> scan(final Bundle bundle, final String suppliedClassSimpleName) {
 		final Builder<URL> scannedsBuilder = ImmutableList.builder();
 		
 		final String filePattern = "*." + suppliedClassSimpleName + ".xmi";

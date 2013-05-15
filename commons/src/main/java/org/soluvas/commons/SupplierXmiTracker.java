@@ -74,8 +74,8 @@ public class SupplierXmiTracker<T extends EObject> implements BundleTrackerCusto
 	 * @param tenantId
 	 * @param tenantEnv
 	 */
-	public SupplierXmiTracker(final @Nonnull EPackage ePackage, final @Nonnull Class<T> suppliedClass,
-			@Nonnull final DelegatingSupplier<T> delegate) {
+	public SupplierXmiTracker(final EPackage ePackage, final Class<T> suppliedClass,
+			final DelegatingSupplier<T> delegate) {
 		super();
 		this.ePackage = ePackage;
 		this.suppliedClassName = suppliedClass.getName();
@@ -84,8 +84,8 @@ public class SupplierXmiTracker<T extends EObject> implements BundleTrackerCusto
 		log = LoggerFactory.getLogger(SupplierXmiTracker.class.getName() + "." + suppliedClassSimpleName);
 	}
 
-	public SupplierXmiTracker(final @Nonnull Class<EPackage> ePackageClass, final @Nonnull Class<T> suppliedClass,
-			@Nonnull final DelegatingSupplier<T> delegate) {
+	public SupplierXmiTracker(final Class<EPackage> ePackageClass, final Class<T> suppliedClass,
+			final DelegatingSupplier<T> delegate) {
 		super();
 		this.ePackage = EmfUtils.getEPackage(ePackageClass);
 		this.suppliedClassName = suppliedClass.getName();
@@ -95,8 +95,8 @@ public class SupplierXmiTracker<T extends EObject> implements BundleTrackerCusto
 	}
 	
 	@Override @Nullable
-	public List<Supplier<T>> addingBundle(@Nonnull Bundle bundle,
-			@Nonnull BundleEvent event) {
+	public List<Supplier<T>> addingBundle(Bundle bundle,
+			BundleEvent event) {
 		final ImmutableList.Builder<Supplier<T>> suppliersBuilder = ImmutableList.builder();
 		try {
 			final List<URL> entries = XmiTrackerUtils.scan(bundle, suppliedClassSimpleName);
@@ -134,12 +134,12 @@ public class SupplierXmiTracker<T extends EObject> implements BundleTrackerCusto
 	}
 
 	@Override
-	public void modifiedBundle(@Nonnull Bundle bundle, @Nonnull BundleEvent event,
+	public void modifiedBundle(Bundle bundle, BundleEvent event,
 			@Nullable List<Supplier<T>> object) {
 	}
 
 	@Override
-	public void removedBundle(@Nonnull Bundle bundle, @Nonnull BundleEvent event,
+	public void removedBundle(Bundle bundle, BundleEvent event,
 			@Nullable List<Supplier<T>> suppliers) {
 		if (suppliers == null)
 			return;

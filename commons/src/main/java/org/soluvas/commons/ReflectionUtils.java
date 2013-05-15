@@ -33,7 +33,7 @@ public class ReflectionUtils {
 	 * @param clazz
 	 * @return
 	 */
-	public static List<Field> getAllFields(@Nonnull Class<?> clazz) {
+	public static List<Field> getAllFields(Class<?> clazz) {
 		Preconditions.checkNotNull(clazz, "clazz must not be null");
 		
 		final ImmutableList.Builder<Field> fieldsBuilder = ImmutableList.builder();
@@ -60,7 +60,7 @@ public class ReflectionUtils {
 	 * @param clazz
 	 * @return
 	 */
-	public static List<Field> getInjectFields(@Nonnull Class<?> clazz) {
+	public static List<Field> getInjectFields(Class<?> clazz) {
 		final List<Field> allFields = getAllFields(clazz);
 		final Collection<Field> fields = Collections2.filter(allFields,
 				new Predicate<Field>() {
@@ -82,7 +82,7 @@ public class ReflectionUtils {
 	 * @param clazz
 	 * @return
 	 */
-	public static List<Field> getNonSuppliedFields(@Nonnull Class<?> clazz) {
+	public static List<Field> getNonSuppliedFields(Class<?> clazz) {
 		final List<Field> injectFields = getInjectFields(clazz);
 		final Collection<Field> fields = Collections2.filter(injectFields,
 				new Predicate<Field>() {
@@ -104,7 +104,7 @@ public class ReflectionUtils {
 	 * @param clazz
 	 * @return
 	 */
-	public static List<Field> getSuppliedFields(@Nonnull Class<?> clazz) {
+	public static List<Field> getSuppliedFields(Class<?> clazz) {
 		final List<Field> injectFields = getInjectFields(clazz);
 		final Collection<Field> fields = Collections2.filter(injectFields,
 				new Predicate<Field>() {

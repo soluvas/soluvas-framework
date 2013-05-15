@@ -27,7 +27,7 @@ public abstract class SimpleServiceLookup<T> implements ServiceLookup {
 	}
 
 	@Override
-	public TenantRef getTenant(@Nonnull CommandSession session) {
+	public TenantRef getTenant(CommandSession session) {
 		return null;
 	}
 
