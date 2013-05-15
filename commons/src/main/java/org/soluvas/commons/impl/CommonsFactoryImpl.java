@@ -27,6 +27,7 @@ import org.joda.money.BigMoneyProvider;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
 import org.soluvas.commons.*;
 import org.soluvas.commons.Added;
 import org.soluvas.commons.AddedMany;
@@ -114,6 +115,11 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 			case CommonsPackage.TRANSLATION_MESSAGE_ENTRY: return (EObject)createTranslationMessageEntry();
 			case CommonsPackage.TRANSLATION_MANAGER: return (EObject)createTranslationManager();
 			case CommonsPackage.TRANSLATION_ENTRY: return (EObject)createTranslationEntry();
+			case CommonsPackage.PERSON: return (EObject)createPerson();
+			case CommonsPackage.PHONE_NUMBER: return (EObject)createPhoneNumber();
+			case CommonsPackage.EMAIL: return (EObject)createEmail();
+			case CommonsPackage.POSTAL_ADDRESS: return (EObject)createPostalAddress();
+			case CommonsPackage.PERSON_CATALOG: return (EObject)createPersonCatalog();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -147,6 +153,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createTranslationStateFromString(eDataType, initialValue);
 			case CommonsPackage.EXPANSION_STATE:
 				return createExpansionStateFromString(eDataType, initialValue);
+			case CommonsPackage.SIGNUP_SOURCE_TYPE:
+				return createSignupSourceTypeFromString(eDataType, initialValue);
 			case CommonsPackage.DATE_TIME:
 				return createDateTimeFromString(eDataType, initialValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -183,6 +191,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createLocaleFromString(eDataType, initialValue);
 			case CommonsPackage.FILE:
 				return createFileFromString(eDataType, initialValue);
+			case CommonsPackage.LOCAL_DATE:
+				return createLocalDateFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -216,6 +226,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertTranslationStateToString(eDataType, instanceValue);
 			case CommonsPackage.EXPANSION_STATE:
 				return convertExpansionStateToString(eDataType, instanceValue);
+			case CommonsPackage.SIGNUP_SOURCE_TYPE:
+				return convertSignupSourceTypeToString(eDataType, instanceValue);
 			case CommonsPackage.DATE_TIME:
 				return convertDateTimeToString(eDataType, instanceValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -252,6 +264,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertLocaleToString(eDataType, instanceValue);
 			case CommonsPackage.FILE:
 				return convertFileToString(eDataType, instanceValue);
+			case CommonsPackage.LOCAL_DATE:
+				return convertLocalDateToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -461,6 +475,56 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Person createPerson() {
+		PersonImpl person = new PersonImpl();
+		return person;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PhoneNumber createPhoneNumber() {
+		PhoneNumberImpl phoneNumber = new PhoneNumberImpl();
+		return phoneNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Email createEmail() {
+		EmailImpl email = new EmailImpl();
+		return email;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PostalAddress createPostalAddress() {
+		PostalAddressImpl postalAddress = new PostalAddressImpl();
+		return postalAddress;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PersonCatalog createPersonCatalog() {
+		PersonCatalogImpl personCatalog = new PersonCatalogImpl();
+		return personCatalog;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ResourceType createResourceTypeFromString(EDataType eDataType, String initialValue) {
 		ResourceType result = ResourceType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -653,6 +717,26 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertExpansionStateToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SignupSourceType createSignupSourceTypeFromString(EDataType eDataType, String initialValue) {
+		SignupSourceType result = SignupSourceType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSignupSourceTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
@@ -988,6 +1072,24 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertFileToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LocalDate createLocalDateFromString(EDataType eDataType, String initialValue) {
+		return (LocalDate)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertLocalDateToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

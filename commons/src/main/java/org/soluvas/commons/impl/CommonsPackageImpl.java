@@ -29,6 +29,7 @@ import org.joda.money.BigMoneyProvider;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Added;
@@ -49,6 +50,7 @@ import org.soluvas.commons.EClassLinked;
 import org.soluvas.commons.EClassStatus;
 import org.soluvas.commons.EFactoryLinked;
 import org.soluvas.commons.EObjectLinked;
+import org.soluvas.commons.Email;
 import org.soluvas.commons.EventBusProgressMonitor;
 import org.soluvas.commons.Expandable;
 import org.soluvas.commons.ExpansionState;
@@ -65,9 +67,14 @@ import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ObjectNotification;
 import org.soluvas.commons.ObjectsNotification;
 import org.soluvas.commons.Parentable;
+import org.soluvas.commons.Person;
+import org.soluvas.commons.PersonCatalog;
 import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.PersonLike;
+import org.soluvas.commons.PhoneNumber;
 import org.soluvas.commons.PhotoIdContainer;
 import org.soluvas.commons.Positionable;
+import org.soluvas.commons.PostalAddress;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.ProgressMonitorWrapper;
 import org.soluvas.commons.ProgressStatus;
@@ -78,6 +85,7 @@ import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.ShellProgressMonitor;
+import org.soluvas.commons.SignupSourceType;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.commons.StyleConfiguration;
 import org.soluvas.commons.Timestamped;
@@ -427,6 +435,48 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass personLikeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass personEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass phoneNumberEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass emailEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass postalAddressEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass personCatalogEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum resourceTypeEEnum = null;
 
 	/**
@@ -491,6 +541,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EEnum expansionStateEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum signupSourceTypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -659,6 +716,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EDataType eventBusEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType localDateEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1955,6 +2019,798 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPersonLike() {
+		return personLikeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPerson() {
+		return personEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_SchemaVersion() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_FirstName() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_LastName() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_Password() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPerson_PhoneNumbers() {
+		return (EReference)personEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPerson_Emails() {
+		return (EReference)personEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPerson_MobileNumbers() {
+		return (EReference)personEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPerson_Addresses() {
+		return (EReference)personEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_AccountStatus() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_BirthYear() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_BirthMonth() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_BirthDay() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_BirthDate() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_Gender() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_Language() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_CurrencyCode() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_Currency() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(16);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_FacebookId() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(17);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_FacebookUsername() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(18);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_FacebookAccessToken() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(19);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_TwitterId() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(20);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_TwitterScreenName() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(21);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_TwitterAccessToken() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(22);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_TwitterAccessTokenSecret() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(23);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_GooglePlusId() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(24);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_GoogleUsername() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(25);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_VirtualMail() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(26);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_Nickname() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(27);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_CustomerRole() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(28);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_MemberRole() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(29);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_ManagerRole() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(30);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_TimeZoneId() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(31);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_TimeZone() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(32);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_ReferrerId() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(33);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_ReferrerType() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(34);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_SignupSource() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(35);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_SignupSourceType() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(36);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_IpAddress() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(37);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_LastIpAddress() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(38);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_LastLoginTime() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(39);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_ValidationTime() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(40);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_ActivationTime() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(41);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_VerificationTime() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(42);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_NewsletterSubscriptionEnabled() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(43);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_NewsletterSubscriptionTime() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(44);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_SocialSharingEnabled() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(45);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_PublicationStatus() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(46);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_ArchivalStatus() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(47);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_Folder() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(48);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_Religion() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(49);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_PasswordResetCode() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(50);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_PasswordResetExpiryTime() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(51);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPhoneNumber() {
+		return phoneNumberEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPhoneNumber_PhoneNumber() {
+		return (EAttribute)phoneNumberEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPhoneNumber_Primary() {
+		return (EAttribute)phoneNumberEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPhoneNumber_ValidationTime() {
+		return (EAttribute)phoneNumberEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEmail() {
+		return emailEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmail_Email() {
+		return (EAttribute)emailEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmail_Primary() {
+		return (EAttribute)emailEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmail_ValidationTime() {
+		return (EAttribute)emailEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPostalAddress() {
+		return postalAddressEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_SchemaVersion() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_Organization() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_Street() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_City() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_PostalCode() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_Province() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_Country() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_CountryCode() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_PrimaryMobile() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_Mobiles() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_PrimaryPhone() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_Phones() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_PrimaryHomePhone() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_HomePhones() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_PrimaryWorkPhone() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_WorkPhones() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_PrimaryEmail() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(16);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_Emails() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(17);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_Description() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(18);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_Primary() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(19);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_PrimaryBilling() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(20);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_PrimaryShipping() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(21);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_ValidationTime() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(22);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPersonCatalog() {
+		return personCatalogEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPersonCatalog_People() {
+		return (EReference)personCatalogEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -2048,6 +2904,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	@Override
 	public EEnum getExpansionState() {
 		return expansionStateEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getSignupSourceType() {
+		return signupSourceTypeEEnum;
 	}
 
 	/**
@@ -2295,6 +3160,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getLocalDate() {
+		return localDateEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
@@ -2488,6 +3362,100 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		expandableEClass = createEClass(EXPANDABLE);
 		createEAttribute(expandableEClass, EXPANDABLE__EXPANSION_STATE);
 
+		personLikeEClass = createEClass(PERSON_LIKE);
+
+		personEClass = createEClass(PERSON);
+		createEAttribute(personEClass, PERSON__SCHEMA_VERSION);
+		createEAttribute(personEClass, PERSON__FIRST_NAME);
+		createEAttribute(personEClass, PERSON__LAST_NAME);
+		createEAttribute(personEClass, PERSON__PASSWORD);
+		createEReference(personEClass, PERSON__PHONE_NUMBERS);
+		createEReference(personEClass, PERSON__EMAILS);
+		createEReference(personEClass, PERSON__MOBILE_NUMBERS);
+		createEReference(personEClass, PERSON__ADDRESSES);
+		createEAttribute(personEClass, PERSON__ACCOUNT_STATUS);
+		createEAttribute(personEClass, PERSON__BIRTH_YEAR);
+		createEAttribute(personEClass, PERSON__BIRTH_MONTH);
+		createEAttribute(personEClass, PERSON__BIRTH_DAY);
+		createEAttribute(personEClass, PERSON__BIRTH_DATE);
+		createEAttribute(personEClass, PERSON__GENDER);
+		createEAttribute(personEClass, PERSON__LANGUAGE);
+		createEAttribute(personEClass, PERSON__CURRENCY_CODE);
+		createEAttribute(personEClass, PERSON__CURRENCY);
+		createEAttribute(personEClass, PERSON__FACEBOOK_ID);
+		createEAttribute(personEClass, PERSON__FACEBOOK_USERNAME);
+		createEAttribute(personEClass, PERSON__FACEBOOK_ACCESS_TOKEN);
+		createEAttribute(personEClass, PERSON__TWITTER_ID);
+		createEAttribute(personEClass, PERSON__TWITTER_SCREEN_NAME);
+		createEAttribute(personEClass, PERSON__TWITTER_ACCESS_TOKEN);
+		createEAttribute(personEClass, PERSON__TWITTER_ACCESS_TOKEN_SECRET);
+		createEAttribute(personEClass, PERSON__GOOGLE_PLUS_ID);
+		createEAttribute(personEClass, PERSON__GOOGLE_USERNAME);
+		createEAttribute(personEClass, PERSON__VIRTUAL_MAIL);
+		createEAttribute(personEClass, PERSON__NICKNAME);
+		createEAttribute(personEClass, PERSON__CUSTOMER_ROLE);
+		createEAttribute(personEClass, PERSON__MEMBER_ROLE);
+		createEAttribute(personEClass, PERSON__MANAGER_ROLE);
+		createEAttribute(personEClass, PERSON__TIME_ZONE_ID);
+		createEAttribute(personEClass, PERSON__TIME_ZONE);
+		createEAttribute(personEClass, PERSON__REFERRER_ID);
+		createEAttribute(personEClass, PERSON__REFERRER_TYPE);
+		createEAttribute(personEClass, PERSON__SIGNUP_SOURCE);
+		createEAttribute(personEClass, PERSON__SIGNUP_SOURCE_TYPE);
+		createEAttribute(personEClass, PERSON__IP_ADDRESS);
+		createEAttribute(personEClass, PERSON__LAST_IP_ADDRESS);
+		createEAttribute(personEClass, PERSON__LAST_LOGIN_TIME);
+		createEAttribute(personEClass, PERSON__VALIDATION_TIME);
+		createEAttribute(personEClass, PERSON__ACTIVATION_TIME);
+		createEAttribute(personEClass, PERSON__VERIFICATION_TIME);
+		createEAttribute(personEClass, PERSON__NEWSLETTER_SUBSCRIPTION_ENABLED);
+		createEAttribute(personEClass, PERSON__NEWSLETTER_SUBSCRIPTION_TIME);
+		createEAttribute(personEClass, PERSON__SOCIAL_SHARING_ENABLED);
+		createEAttribute(personEClass, PERSON__PUBLICATION_STATUS);
+		createEAttribute(personEClass, PERSON__ARCHIVAL_STATUS);
+		createEAttribute(personEClass, PERSON__FOLDER);
+		createEAttribute(personEClass, PERSON__RELIGION);
+		createEAttribute(personEClass, PERSON__PASSWORD_RESET_CODE);
+		createEAttribute(personEClass, PERSON__PASSWORD_RESET_EXPIRY_TIME);
+
+		phoneNumberEClass = createEClass(PHONE_NUMBER);
+		createEAttribute(phoneNumberEClass, PHONE_NUMBER__PHONE_NUMBER);
+		createEAttribute(phoneNumberEClass, PHONE_NUMBER__PRIMARY);
+		createEAttribute(phoneNumberEClass, PHONE_NUMBER__VALIDATION_TIME);
+
+		emailEClass = createEClass(EMAIL);
+		createEAttribute(emailEClass, EMAIL__EMAIL);
+		createEAttribute(emailEClass, EMAIL__PRIMARY);
+		createEAttribute(emailEClass, EMAIL__VALIDATION_TIME);
+
+		postalAddressEClass = createEClass(POSTAL_ADDRESS);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__SCHEMA_VERSION);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__ORGANIZATION);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__STREET);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__CITY);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__POSTAL_CODE);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__PROVINCE);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__COUNTRY);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__COUNTRY_CODE);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__PRIMARY_MOBILE);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__MOBILES);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__PRIMARY_PHONE);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__PHONES);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__PRIMARY_HOME_PHONE);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__HOME_PHONES);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__PRIMARY_WORK_PHONE);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__WORK_PHONES);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__PRIMARY_EMAIL);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__EMAILS);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__DESCRIPTION);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__PRIMARY);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__PRIMARY_BILLING);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__PRIMARY_SHIPPING);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__VALIDATION_TIME);
+
+		personCatalogEClass = createEClass(PERSON_CATALOG);
+		createEReference(personCatalogEClass, PERSON_CATALOG__PEOPLE);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -2499,6 +3467,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		archivalStatusEEnum = createEEnum(ARCHIVAL_STATUS);
 		translationStateEEnum = createEEnum(TRANSLATION_STATE);
 		expansionStateEEnum = createEEnum(EXPANSION_STATE);
+		signupSourceTypeEEnum = createEEnum(SIGNUP_SOURCE_TYPE);
 
 		// Create data types
 		dateTimeEDataType = createEDataType(DATE_TIME);
@@ -2525,6 +3494,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		classLoaderEDataType = createEDataType(CLASS_LOADER);
 		urlEDataType = createEDataType(URL);
 		eventBusEDataType = createEDataType(EVENT_BUS);
+		localDateEDataType = createEDataType(LOCAL_DATE);
 	}
 
 	/**
@@ -2624,6 +3594,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		personInfoEClass.getESuperTypes().add(this.getPhotoIdContainer());
 		personInfoEClass.getESuperTypes().add(this.getSluggable());
 		personInfoEClass.getESuperTypes().add(this.getNameContainer());
+		personInfoEClass.getESuperTypes().add(this.getPersonLike());
 		photoIdContainerEClass.getESuperTypes().add(this.getImageable());
 		nameContainerEClass.getESuperTypes().add(this.getNameable());
 		webAddressEClass.getESuperTypes().add(this.getPositionable());
@@ -2692,6 +3663,29 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		shellProgressMonitorEClass.getESuperTypes().add(this.getProgressMonitor());
 		eventBusProgressMonitorEClass.getESuperTypes().add(this.getProgressMonitor());
 		progressMonitorWrapperEClass.getESuperTypes().add(this.getProgressMonitor());
+		g1 = createEGenericType(this.getNameContainer());
+		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getPhotoIdContainer());
+		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getIdentifiable());
+		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getPersonLike());
+		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getInformer());
+		g2 = createEGenericType(this.getPersonInfo());
+		g1.getETypeArguments().add(g2);
+		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTimestamped());
+		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getSchemaVersionable());
+		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getDescribable());
+		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getSluggable());
+		personEClass.getEGenericSuperTypes().add(g1);
+		postalAddressEClass.getESuperTypes().add(this.getNameContainer());
+		postalAddressEClass.getESuperTypes().add(this.getIdentifiable());
+		postalAddressEClass.getESuperTypes().add(this.getSchemaVersionable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2933,6 +3927,112 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "scope", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		initEClass(personLikeEClass, PersonLike.class, "PersonLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(personLikeEClass, theEcorePackage.getEString(), "getId", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(personLikeEClass, theEcorePackage.getEString(), "getName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(personLikeEClass, theEcorePackage.getEString(), "getSlug", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(personLikeEClass, theEcorePackage.getEString(), "getEmail", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(personLikeEClass, theEcorePackage.getEString(), "getPhotoId", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(personLikeEClass, this.getGender(), "getGender", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(personEClass, Person.class, "Person", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPerson_SchemaVersion(), theEcorePackage.getELong(), "schemaVersion", "2", 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_FirstName(), theEcorePackage.getEString(), "firstName", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_LastName(), theEcorePackage.getEString(), "lastName", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_Password(), theEcorePackage.getEString(), "password", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPerson_PhoneNumbers(), this.getPhoneNumber(), null, "phoneNumbers", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPerson_Emails(), this.getEmail(), null, "emails", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPerson_MobileNumbers(), this.getPhoneNumber(), null, "mobileNumbers", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPerson_Addresses(), this.getPostalAddress(), null, "addresses", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_AccountStatus(), this.getAccountStatus(), "accountStatus", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_BirthYear(), theEcorePackage.getEIntegerObject(), "birthYear", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_BirthMonth(), theEcorePackage.getEIntegerObject(), "birthMonth", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_BirthDay(), theEcorePackage.getEIntegerObject(), "birthDay", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_BirthDate(), this.getLocalDate(), "birthDate", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_Gender(), this.getGender(), "gender", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_Language(), theEcorePackage.getEString(), "language", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_CurrencyCode(), theEcorePackage.getEString(), "currencyCode", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_Currency(), this.getCurrencyUnit(), "currency", null, 0, 1, Person.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_FacebookId(), theEcorePackage.getELongObject(), "facebookId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_FacebookUsername(), theEcorePackage.getEString(), "facebookUsername", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_FacebookAccessToken(), theEcorePackage.getEString(), "facebookAccessToken", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_TwitterId(), theEcorePackage.getELongObject(), "twitterId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_TwitterScreenName(), theEcorePackage.getEString(), "twitterScreenName", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_TwitterAccessToken(), theEcorePackage.getEString(), "twitterAccessToken", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_TwitterAccessTokenSecret(), theEcorePackage.getEString(), "twitterAccessTokenSecret", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_GooglePlusId(), theEcorePackage.getEString(), "googlePlusId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_GoogleUsername(), theEcorePackage.getEString(), "googleUsername", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_VirtualMail(), theEcorePackage.getEString(), "virtualMail", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_Nickname(), theEcorePackage.getEString(), "nickname", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_CustomerRole(), theEcorePackage.getEString(), "customerRole", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_MemberRole(), theEcorePackage.getEString(), "memberRole", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_ManagerRole(), theEcorePackage.getEString(), "managerRole", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_TimeZoneId(), theEcorePackage.getEString(), "timeZoneId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_TimeZone(), this.getDateTimeZone(), "timeZone", null, 0, 1, Person.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_ReferrerId(), theEcorePackage.getEString(), "referrerId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_ReferrerType(), theEcorePackage.getEString(), "referrerType", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_SignupSource(), theEcorePackage.getEString(), "signupSource", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_SignupSourceType(), this.getSignupSourceType(), "signupSourceType", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_IpAddress(), theEcorePackage.getEString(), "ipAddress", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_LastIpAddress(), theEcorePackage.getEString(), "lastIpAddress", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_LastLoginTime(), this.getDateTime(), "lastLoginTime", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_ValidationTime(), this.getDateTime(), "validationTime", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_ActivationTime(), this.getDateTime(), "activationTime", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_VerificationTime(), this.getDateTime(), "verificationTime", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_NewsletterSubscriptionEnabled(), theEcorePackage.getEBooleanObject(), "newsletterSubscriptionEnabled", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_NewsletterSubscriptionTime(), this.getDateTime(), "newsletterSubscriptionTime", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_SocialSharingEnabled(), theEcorePackage.getEBooleanObject(), "socialSharingEnabled", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_PublicationStatus(), this.getPublicationStatus(), "publicationStatus", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_ArchivalStatus(), this.getArchivalStatus(), "archivalStatus", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_Folder(), theEcorePackage.getEString(), "folder", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_Religion(), theEcorePackage.getEString(), "religion", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_PasswordResetCode(), theEcorePackage.getEString(), "passwordResetCode", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_PasswordResetExpiryTime(), this.getDateTime(), "passwordResetExpiryTime", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(phoneNumberEClass, PhoneNumber.class, "PhoneNumber", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPhoneNumber_PhoneNumber(), theEcorePackage.getEString(), "phoneNumber", null, 1, 1, PhoneNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPhoneNumber_Primary(), theEcorePackage.getEBoolean(), "primary", "false", 0, 1, PhoneNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPhoneNumber_ValidationTime(), this.getDateTime(), "validationTime", null, 0, 1, PhoneNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(emailEClass, Email.class, "Email", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEmail_Email(), theEcorePackage.getEString(), "email", null, 1, 1, Email.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmail_Primary(), theEcorePackage.getEBoolean(), "primary", "false", 0, 1, Email.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmail_ValidationTime(), this.getDateTime(), "validationTime", null, 0, 1, Email.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(postalAddressEClass, PostalAddress.class, "PostalAddress", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPostalAddress_SchemaVersion(), theEcorePackage.getELong(), "schemaVersion", "3", 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_Organization(), ecorePackage.getEString(), "organization", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_Street(), ecorePackage.getEString(), "street", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_City(), ecorePackage.getEString(), "city", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_PostalCode(), ecorePackage.getEString(), "postalCode", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_Province(), ecorePackage.getEString(), "province", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_Country(), ecorePackage.getEString(), "country", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_CountryCode(), ecorePackage.getEString(), "countryCode", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_PrimaryMobile(), ecorePackage.getEString(), "primaryMobile", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_Mobiles(), ecorePackage.getEString(), "mobiles", null, 0, -1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_PrimaryPhone(), ecorePackage.getEString(), "primaryPhone", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_Phones(), ecorePackage.getEString(), "phones", null, 0, -1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_PrimaryHomePhone(), ecorePackage.getEString(), "primaryHomePhone", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_HomePhones(), ecorePackage.getEString(), "homePhones", null, 0, -1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getPostalAddress_PrimaryWorkPhone(), ecorePackage.getEString(), "primaryWorkPhone", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_WorkPhones(), ecorePackage.getEString(), "workPhones", null, 0, -1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_PrimaryEmail(), ecorePackage.getEString(), "primaryEmail", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_Emails(), ecorePackage.getEString(), "emails", null, 0, -1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getPostalAddress_Description(), ecorePackage.getEString(), "description", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_Primary(), theEcorePackage.getEBoolean(), "primary", "false", 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_PrimaryBilling(), theEcorePackage.getEBoolean(), "primaryBilling", "false", 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_PrimaryShipping(), theEcorePackage.getEBoolean(), "primaryShipping", "false", 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_ValidationTime(), this.getDateTime(), "validationTime", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(personCatalogEClass, PersonCatalog.class, "PersonCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPersonCatalog_People(), this.getPerson(), null, "people", null, 0, -1, PersonCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.BUNDLE);
@@ -2984,6 +4084,14 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addEEnumLiteral(expansionStateEEnum, ExpansionState.UNEXPANDED);
 		addEEnumLiteral(expansionStateEEnum, ExpansionState.EXPANDED);
 
+		initEEnum(signupSourceTypeEEnum, SignupSourceType.class, "SignupSourceType");
+		addEEnumLiteral(signupSourceTypeEEnum, SignupSourceType.OTHER);
+		addEEnumLiteral(signupSourceTypeEEnum, SignupSourceType.GOOGLE_SEARCH);
+		addEEnumLiteral(signupSourceTypeEEnum, SignupSourceType.GOOGLE_ADS);
+		addEEnumLiteral(signupSourceTypeEEnum, SignupSourceType.FACEBOOK_ADS);
+		addEEnumLiteral(signupSourceTypeEEnum, SignupSourceType.FACEBOOK_FRIEND);
+		addEEnumLiteral(signupSourceTypeEEnum, SignupSourceType.ALIA_MAGAZINE);
+
 		// Initialize data types
 		initEDataType(dateTimeEDataType, DateTime.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(currencyUnitEDataType, CurrencyUnit.class, "CurrencyUnit", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -3009,6 +4117,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(classLoaderEDataType, ClassLoader.class, "ClassLoader", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(urlEDataType, java.net.URL.class, "URL", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(eventBusEDataType, EventBus.class, "EventBus", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(localDateEDataType, LocalDate.class, "LocalDate", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -3709,6 +4818,336 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Attribute values are expanded, for example baseUri=\"http://www.cintalama5.{+fqdn}/\" becomes \"http://www.cintalama5.rudi.dev/\""
+		   });		
+		addAnnotation
+		  (personLikeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Contains basic attributes of a Person."
+		   });		
+		addAnnotation
+		  (personEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Database-agnostic future replacement for org.soluvas.ldap.SocialPerson & BippoPerson.\n\nA basic LDAP <tt>objectClass=person</tt> with proper mappings that can be subclassed."
+		   });		
+		addAnnotation
+		  (getPerson_Password(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The password, may be encoded e.g. <code>{SSHA}BacKnhFVjpSunHYgivCVPAzcavAZZe9QFtd51A==<code>"
+		   });		
+		addAnnotation
+		  (getPerson_AccountStatus(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Status of Account, can be used for shop, person, or mall.\n\naccountStatus itu delete (move to Trash)/undelete, untuk normal repository :\n\n<ol>\n\t<li>draft: Member belum aktif.</li>\n\t<li>validated: Email sudah divalidasi tapi belum aktif (bila membership dimoderasi).</li>\n\t<li>active: Akun aktif dan dapat digunakan.</li>\n\t<li>verified: Akun aktif dan dapat digunakan, dan sudah diverifikasi bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator).</li>\n\t<li>inactive: Member dinonaktifkan / suspended.</li>\n\t<li>void: Member dihapus.@return the accountStatus</li>\n</ol>\n"
+		   });		
+		addAnnotation
+		  (getPerson_BirthDate(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Only available if birthYear, birthMonth, and birthDay is a valid date."
+		   });		
+		addAnnotation
+		  (getPerson_Language(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Preferred language as language identifier,\nas defined by IETF RFC 4646 (http://www.ietf.org/rfc/rfc4646.txt) or successor,\nor ISO 639-1 Language Codes. \n"
+		   });		
+		addAnnotation
+		  (getPerson_CurrencyCode(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Preferred currency as ISO 4217. The purpose of ISO 4217:2008 is to establish internationally recognised codes for the representation of currencies.\n\n"
+		   });		
+		addAnnotation
+		  (getPerson_Currency(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Preferred currency as ISO 4217. The purpose of ISO 4217:2008 is to establish internationally recognised codes for the representation of currencies.\n"
+		   });		
+		addAnnotation
+		  (getPerson_CustomerRole(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Name of Customer Role or Group, for example in Tuneeca there are 5: ag-sp, agen, biasa, drops, membr\n"
+		   });		
+		addAnnotation
+		  (getPerson_MemberRole(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Name of Member Role or Group for example : newbie, aktivis , donatur\n\n"
+		   });		
+		addAnnotation
+		  (getPerson_ManagerRole(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Name of Manager Role or Group for example : regular, moderator , administrator, sysadmin. (administrativeRole attribute OID 2.5.18.5 is already used by LDAP standard)\n\n"
+		   });		
+		addAnnotation
+		  (getPerson_TimeZoneId(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The attribute is named \'timezone\' and is a plain string, e.g. \'Asia/Jakarta\' or \'UTC\'. If not set, will default to whatever the application configuration is set to (or its heuristics). References: * https://wikis.oracle.com/display/CommSuite/LDAP+General+Information+and+Time+Zones#LDAPGeneralInformationandTimeZones-ANOFE * http://docs.oracle.com/cd/E19683-01/816-4856/nisplus2ldap-59/index.html * http://tracker.moodle.org/browse/MDL-17330\n"
+		   });		
+		addAnnotation
+		  (getPerson_TimeZone(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The attribute is named \'timezone\' and is a plain string, e.g. \'Asia/Jakarta\' or \'UTC\'. If not set, will default to whatever the application configuration is set to (or its heuristics). References: * https://wikis.oracle.com/display/CommSuite/LDAP+General+Information+and+Time+Zones#LDAPGeneralInformationandTimeZones-ANOFE * http://docs.oracle.com/cd/E19683-01/816-4856/nisplus2ldap-59/index.html * http://tracker.moodle.org/browse/MDL-17330\n"
+		   });		
+		addAnnotation
+		  (getPerson_ReferrerId(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Person ID who refers this person"
+		   });		
+		addAnnotation
+		  (getPerson_ReferrerType(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Type of referrer for example : person_id , email, facebook_id\n\n"
+		   });		
+		addAnnotation
+		  (getPerson_SignupSource(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Signup source name, e.g. \"Rudi Wijaya\" for {@link SignupSourceType#FACEBOOK_FRIEND}."
+		   });		
+		addAnnotation
+		  (getPerson_SignupSourceType(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Signup source type, e.g. {@link SignupSourceType#FACEBOOK_FRIEND}."
+		   });		
+		addAnnotation
+		  (getPerson_IpAddress(), 
+		   source, 
+		   new String[] {
+			 "documentation", "IP address pertama kali login"
+		   });		
+		addAnnotation
+		  (getPerson_LastIpAddress(), 
+		   source, 
+		   new String[] {
+			 "documentation", "IP address terakhir kali login"
+		   });		
+		addAnnotation
+		  (getPerson_LastLoginTime(), 
+		   source, 
+		   new String[] {
+			 "documentation", "kapan terakhir kali login"
+		   });		
+		addAnnotation
+		  (getPerson_ValidationTime(), 
+		   source, 
+		   new String[] {
+			 "documentation", "kapan dia validate email"
+		   });		
+		addAnnotation
+		  (getPerson_ActivationTime(), 
+		   source, 
+		   new String[] {
+			 "documentation", "kapan akun dia aktif (bila dimoderasi)"
+		   });		
+		addAnnotation
+		  (getPerson_VerificationTime(), 
+		   source, 
+		   new String[] {
+			 "documentation", "kapan dia menjadi verified member"
+		   });		
+		addAnnotation
+		  (getPerson_NewsletterSubscriptionEnabled(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Apakah dia ingin menerima newsletter."
+		   });		
+		addAnnotation
+		  (getPerson_NewsletterSubscriptionTime(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Kapan dia terdaftar di newsletter"
+		   });		
+		addAnnotation
+		  (getPerson_SocialSharingEnabled(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Apakah dia ingin mensharing aktivitasnya di social network seperti Twitter, Facebook, Path, Google+, dll. (secara umum, konfigurasi spesifik di tempat lain)"
+		   });		
+		addAnnotation
+		  (getPerson_PublicationStatus(), 
+		   source, 
+		   new String[] {
+			 "documentation", "atribut untuk draft/published, editing. Semanticnya Drafts (Edit kayanya beda lagi, bikin ticket baru aja dech untuk Edit).\n\n<ol>\n\t<li>draft</li>\n\t<li>published</li>\n\t<li>unpublished</li>\n</ol>"
+		   });		
+		addAnnotation
+		  (getPerson_ArchivalStatus(), 
+		   source, 
+		   new String[] {
+			 "documentation", "atribut untuk new/fresh/inbox. Kalau fresh maka masuk Inbox / New Products / bolded, tidak fresh maka masuk All Mail / All Products. Semanticnya Archive. Tidak termasuk read/unread ya. fresh archived\n\n"
+		   });		
+		addAnnotation
+		  (getPerson_Folder(), 
+		   source, 
+		   new String[] {
+			 "documentation", "atribut untuk labeling. Masukkan nsPrefix_{folderName}. (folder name di sini underscore lowercase)"
+		   });		
+		addAnnotation
+		  (getPerson_PasswordResetCode(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Code that can be used to perform password reset for a limited time."
+		   });		
+		addAnnotation
+		  (getPerson_PasswordResetExpiryTime(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The time when the passwordResetCode becomes no longer usable."
+		   });		
+		addAnnotation
+		  (getPhoneNumber_Primary(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Designates this PhoneNumber as the primary PhoneNumber of the containing list."
+		   });		
+		addAnnotation
+		  (getPhoneNumber_ValidationTime(), 
+		   source, 
+		   new String[] {
+			 "documentation", "When this phone number was validated by the user."
+		   });		
+		addAnnotation
+		  (getEmail_Primary(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Designates this Email as the primary Email of the containing list."
+		   });		
+		addAnnotation
+		  (getEmail_ValidationTime(), 
+		   source, 
+		   new String[] {
+			 "documentation", "When this email was validated by the user."
+		   });		
+		addAnnotation
+		  (postalAddressEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "See http://www.upu.int/en/activities/addressing/standards.html - UPU S42.\n\nID is RFC1274: unique identifer.\nLDAP: uniqueIdentifier\n\n\'name\' attribute is Person name who will receive.\nRFC2256: common name(s) for which the entity is known by.\ncn, commonName.\n\nCan be used as:\n\n1. Billing Address in SalesQuote/SalesOrder\n2. Shipping Address in SalesQuote/SalesOrder\n3. Origin Address in SalesQuote/SalesOrder\n4. Person (Customer) Address\n5. Shop Address\n6. Mall Address\n"
+		   });		
+		addAnnotation
+		  (getPostalAddress_Organization(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Organization or company name who will send or receive.\nCan be empty.\nRFC2256: organization this object belongs to\nLDAP: o, organizationName"
+		   });		
+		addAnnotation
+		  (getPostalAddress_Country(), 
+		   source, 
+		   new String[] {
+			 "documentation", "RFC1274: friendly country name.\n\nLDAP: co, friendlyCountryName"
+		   });		
+		addAnnotation
+		  (getPostalAddress_CountryCode(), 
+		   source, 
+		   new String[] {
+			 "documentation", "ISO 3166-1 alpha-2.\n\nLDAP: c, countryName"
+		   });		
+		addAnnotation
+		  (getPostalAddress_Mobiles(), 
+		   source, 
+		   new String[] {
+			 "documentation", "RFC1274: mobile telephone number\nLDAP: mobile, mobileTelephoneNumber"
+		   });		
+		addAnnotation
+		  (getPostalAddress_PrimaryPhone(), 
+		   source, 
+		   new String[] {
+			 "documentation", "RFC2256: Telephone Number\nLDAP: telephoneNumber\n\nFor offices, usually work phone. For people, usually home phone."
+		   });		
+		addAnnotation
+		  (getPostalAddress_HomePhones(), 
+		   source, 
+		   new String[] {
+			 "documentation", "RFC1274: home telephone number.\nLDAP: homePhone, homeTelephoneNumber."
+		   });		
+		addAnnotation
+		  (getPostalAddress_WorkPhones(), 
+		   source, 
+		   new String[] {
+			 "documentation", "RFC2256: Telephone Number.\nLDAP: (not yet mapped)"
+		   });		
+		addAnnotation
+		  (getPostalAddress_Emails(), 
+		   source, 
+		   new String[] {
+			 "documentation", "LDAP: mail."
+		   });		
+		addAnnotation
+		  (getPostalAddress_Description(), 
+		   source, 
+		   new String[] {
+			 "documentation", "What this address represents, usually \"Home\", \"Work\", etc."
+		   });		
+		addAnnotation
+		  (getPostalAddress_Primary(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Designates this Address as the primary Address of the containing list."
+		   });		
+		addAnnotation
+		  (getPostalAddress_PrimaryBilling(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Designates this Address as the primary billing Address of the containing list."
+		   });		
+		addAnnotation
+		  (getPostalAddress_PrimaryShipping(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Designates this Address as the primary billing Address of the containing list."
+		   });		
+		addAnnotation
+		  (getPostalAddress_ValidationTime(), 
+		   source, 
+		   new String[] {
+			 "documentation", "When this postal address was validated by the user."
+		   });		
+		addAnnotation
+		  (signupSourceTypeEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Other."
+		   });		
+		addAnnotation
+		  (signupSourceTypeEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Google Search Engine."
+		   });		
+		addAnnotation
+		  (signupSourceTypeEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Google AdSense / AdWords ads."
+		   });		
+		addAnnotation
+		  (signupSourceTypeEEnum.getELiterals().get(3), 
+		   source, 
+		   new String[] {
+			 "documentation", "Facebook Ads."
+		   });		
+		addAnnotation
+		  (signupSourceTypeEEnum.getELiterals().get(4), 
+		   source, 
+		   new String[] {
+			 "documentation", "Facebook friend."
+		   });		
+		addAnnotation
+		  (signupSourceTypeEEnum.getELiterals().get(5), 
+		   source, 
+		   new String[] {
+			 "documentation", "Alia magazine."
 		   });
 	}
 	

@@ -2129,6 +2129,939 @@ public interface CommonsPackage extends EPackage {
 	int EXPANDABLE_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.PersonLike <em>Person Like</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.PersonLike
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPersonLike()
+	 * @generated
+	 */
+	int PERSON_LIKE = 46;
+
+	/**
+	 * The number of structural features of the '<em>Person Like</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_LIKE_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.PersonImpl <em>Person</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.PersonImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPerson()
+	 * @generated
+	 */
+	int PERSON = 47;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__NAME = NAME_CONTAINER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Photo Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__PHOTO_ID = NAME_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__ID = NAME_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Creation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__CREATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Modification Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__MODIFICATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__DESCRIPTION = NAME_CONTAINER_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Slug</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__SLUG = NAME_CONTAINER_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Schema Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__SCHEMA_VERSION = NAME_CONTAINER_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>First Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__FIRST_NAME = NAME_CONTAINER_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Last Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__LAST_NAME = NAME_CONTAINER_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Password</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__PASSWORD = NAME_CONTAINER_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Phone Numbers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__PHONE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Emails</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__EMAILS = NAME_CONTAINER_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Mobile Numbers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__MOBILE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Addresses</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__ADDRESSES = NAME_CONTAINER_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>Account Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__ACCOUNT_STATUS = NAME_CONTAINER_FEATURE_COUNT + 14;
+
+	/**
+	 * The feature id for the '<em><b>Birth Year</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__BIRTH_YEAR = NAME_CONTAINER_FEATURE_COUNT + 15;
+
+	/**
+	 * The feature id for the '<em><b>Birth Month</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__BIRTH_MONTH = NAME_CONTAINER_FEATURE_COUNT + 16;
+
+	/**
+	 * The feature id for the '<em><b>Birth Day</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__BIRTH_DAY = NAME_CONTAINER_FEATURE_COUNT + 17;
+
+	/**
+	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__BIRTH_DATE = NAME_CONTAINER_FEATURE_COUNT + 18;
+
+	/**
+	 * The feature id for the '<em><b>Gender</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__GENDER = NAME_CONTAINER_FEATURE_COUNT + 19;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__LANGUAGE = NAME_CONTAINER_FEATURE_COUNT + 20;
+
+	/**
+	 * The feature id for the '<em><b>Currency Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__CURRENCY_CODE = NAME_CONTAINER_FEATURE_COUNT + 21;
+
+	/**
+	 * The feature id for the '<em><b>Currency</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__CURRENCY = NAME_CONTAINER_FEATURE_COUNT + 22;
+
+	/**
+	 * The feature id for the '<em><b>Facebook Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__FACEBOOK_ID = NAME_CONTAINER_FEATURE_COUNT + 23;
+
+	/**
+	 * The feature id for the '<em><b>Facebook Username</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__FACEBOOK_USERNAME = NAME_CONTAINER_FEATURE_COUNT + 24;
+
+	/**
+	 * The feature id for the '<em><b>Facebook Access Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__FACEBOOK_ACCESS_TOKEN = NAME_CONTAINER_FEATURE_COUNT + 25;
+
+	/**
+	 * The feature id for the '<em><b>Twitter Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__TWITTER_ID = NAME_CONTAINER_FEATURE_COUNT + 26;
+
+	/**
+	 * The feature id for the '<em><b>Twitter Screen Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__TWITTER_SCREEN_NAME = NAME_CONTAINER_FEATURE_COUNT + 27;
+
+	/**
+	 * The feature id for the '<em><b>Twitter Access Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__TWITTER_ACCESS_TOKEN = NAME_CONTAINER_FEATURE_COUNT + 28;
+
+	/**
+	 * The feature id for the '<em><b>Twitter Access Token Secret</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__TWITTER_ACCESS_TOKEN_SECRET = NAME_CONTAINER_FEATURE_COUNT + 29;
+
+	/**
+	 * The feature id for the '<em><b>Google Plus Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__GOOGLE_PLUS_ID = NAME_CONTAINER_FEATURE_COUNT + 30;
+
+	/**
+	 * The feature id for the '<em><b>Google Username</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__GOOGLE_USERNAME = NAME_CONTAINER_FEATURE_COUNT + 31;
+
+	/**
+	 * The feature id for the '<em><b>Virtual Mail</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__VIRTUAL_MAIL = NAME_CONTAINER_FEATURE_COUNT + 32;
+
+	/**
+	 * The feature id for the '<em><b>Nickname</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__NICKNAME = NAME_CONTAINER_FEATURE_COUNT + 33;
+
+	/**
+	 * The feature id for the '<em><b>Customer Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__CUSTOMER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 34;
+
+	/**
+	 * The feature id for the '<em><b>Member Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__MEMBER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 35;
+
+	/**
+	 * The feature id for the '<em><b>Manager Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__MANAGER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 36;
+
+	/**
+	 * The feature id for the '<em><b>Time Zone Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__TIME_ZONE_ID = NAME_CONTAINER_FEATURE_COUNT + 37;
+
+	/**
+	 * The feature id for the '<em><b>Time Zone</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__TIME_ZONE = NAME_CONTAINER_FEATURE_COUNT + 38;
+
+	/**
+	 * The feature id for the '<em><b>Referrer Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__REFERRER_ID = NAME_CONTAINER_FEATURE_COUNT + 39;
+
+	/**
+	 * The feature id for the '<em><b>Referrer Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__REFERRER_TYPE = NAME_CONTAINER_FEATURE_COUNT + 40;
+
+	/**
+	 * The feature id for the '<em><b>Signup Source</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__SIGNUP_SOURCE = NAME_CONTAINER_FEATURE_COUNT + 41;
+
+	/**
+	 * The feature id for the '<em><b>Signup Source Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__SIGNUP_SOURCE_TYPE = NAME_CONTAINER_FEATURE_COUNT + 42;
+
+	/**
+	 * The feature id for the '<em><b>Ip Address</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__IP_ADDRESS = NAME_CONTAINER_FEATURE_COUNT + 43;
+
+	/**
+	 * The feature id for the '<em><b>Last Ip Address</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__LAST_IP_ADDRESS = NAME_CONTAINER_FEATURE_COUNT + 44;
+
+	/**
+	 * The feature id for the '<em><b>Last Login Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__LAST_LOGIN_TIME = NAME_CONTAINER_FEATURE_COUNT + 45;
+
+	/**
+	 * The feature id for the '<em><b>Validation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__VALIDATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 46;
+
+	/**
+	 * The feature id for the '<em><b>Activation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__ACTIVATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 47;
+
+	/**
+	 * The feature id for the '<em><b>Verification Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__VERIFICATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 48;
+
+	/**
+	 * The feature id for the '<em><b>Newsletter Subscription Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__NEWSLETTER_SUBSCRIPTION_ENABLED = NAME_CONTAINER_FEATURE_COUNT + 49;
+
+	/**
+	 * The feature id for the '<em><b>Newsletter Subscription Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__NEWSLETTER_SUBSCRIPTION_TIME = NAME_CONTAINER_FEATURE_COUNT + 50;
+
+	/**
+	 * The feature id for the '<em><b>Social Sharing Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__SOCIAL_SHARING_ENABLED = NAME_CONTAINER_FEATURE_COUNT + 51;
+
+	/**
+	 * The feature id for the '<em><b>Publication Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__PUBLICATION_STATUS = NAME_CONTAINER_FEATURE_COUNT + 52;
+
+	/**
+	 * The feature id for the '<em><b>Archival Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__ARCHIVAL_STATUS = NAME_CONTAINER_FEATURE_COUNT + 53;
+
+	/**
+	 * The feature id for the '<em><b>Folder</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__FOLDER = NAME_CONTAINER_FEATURE_COUNT + 54;
+
+	/**
+	 * The feature id for the '<em><b>Religion</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__RELIGION = NAME_CONTAINER_FEATURE_COUNT + 55;
+
+	/**
+	 * The feature id for the '<em><b>Password Reset Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__PASSWORD_RESET_CODE = NAME_CONTAINER_FEATURE_COUNT + 56;
+
+	/**
+	 * The feature id for the '<em><b>Password Reset Expiry Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__PASSWORD_RESET_EXPIRY_TIME = NAME_CONTAINER_FEATURE_COUNT + 57;
+
+	/**
+	 * The number of structural features of the '<em>Person</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 58;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.PhoneNumberImpl <em>Phone Number</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.PhoneNumberImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPhoneNumber()
+	 * @generated
+	 */
+	int PHONE_NUMBER = 48;
+
+	/**
+	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER__PHONE_NUMBER = 0;
+
+	/**
+	 * The feature id for the '<em><b>Primary</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER__PRIMARY = 1;
+
+	/**
+	 * The feature id for the '<em><b>Validation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER__VALIDATION_TIME = 2;
+
+	/**
+	 * The number of structural features of the '<em>Phone Number</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.EmailImpl <em>Email</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.EmailImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEmail()
+	 * @generated
+	 */
+	int EMAIL = 49;
+
+	/**
+	 * The feature id for the '<em><b>Email</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL__EMAIL = 0;
+
+	/**
+	 * The feature id for the '<em><b>Primary</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL__PRIMARY = 1;
+
+	/**
+	 * The feature id for the '<em><b>Validation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL__VALIDATION_TIME = 2;
+
+	/**
+	 * The number of structural features of the '<em>Email</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.PostalAddressImpl <em>Postal Address</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.PostalAddressImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPostalAddress()
+	 * @generated
+	 */
+	int POSTAL_ADDRESS = 50;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__NAME = NAME_CONTAINER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__ID = NAME_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Schema Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__SCHEMA_VERSION = NAME_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Organization</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__ORGANIZATION = NAME_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Street</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__STREET = NAME_CONTAINER_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>City</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__CITY = NAME_CONTAINER_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Postal Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__POSTAL_CODE = NAME_CONTAINER_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Province</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__PROVINCE = NAME_CONTAINER_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Country</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__COUNTRY = NAME_CONTAINER_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Country Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__COUNTRY_CODE = NAME_CONTAINER_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Primary Mobile</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__PRIMARY_MOBILE = NAME_CONTAINER_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Mobiles</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__MOBILES = NAME_CONTAINER_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Primary Phone</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__PRIMARY_PHONE = NAME_CONTAINER_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Phones</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__PHONES = NAME_CONTAINER_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Primary Home Phone</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__PRIMARY_HOME_PHONE = NAME_CONTAINER_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>Home Phones</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__HOME_PHONES = NAME_CONTAINER_FEATURE_COUNT + 14;
+
+	/**
+	 * The feature id for the '<em><b>Primary Work Phone</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__PRIMARY_WORK_PHONE = NAME_CONTAINER_FEATURE_COUNT + 15;
+
+	/**
+	 * The feature id for the '<em><b>Work Phones</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__WORK_PHONES = NAME_CONTAINER_FEATURE_COUNT + 16;
+
+	/**
+	 * The feature id for the '<em><b>Primary Email</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__PRIMARY_EMAIL = NAME_CONTAINER_FEATURE_COUNT + 17;
+
+	/**
+	 * The feature id for the '<em><b>Emails</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__EMAILS = NAME_CONTAINER_FEATURE_COUNT + 18;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__DESCRIPTION = NAME_CONTAINER_FEATURE_COUNT + 19;
+
+	/**
+	 * The feature id for the '<em><b>Primary</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__PRIMARY = NAME_CONTAINER_FEATURE_COUNT + 20;
+
+	/**
+	 * The feature id for the '<em><b>Primary Billing</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__PRIMARY_BILLING = NAME_CONTAINER_FEATURE_COUNT + 21;
+
+	/**
+	 * The feature id for the '<em><b>Primary Shipping</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__PRIMARY_SHIPPING = NAME_CONTAINER_FEATURE_COUNT + 22;
+
+	/**
+	 * The feature id for the '<em><b>Validation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__VALIDATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 23;
+
+	/**
+	 * The number of structural features of the '<em>Postal Address</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 24;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.PersonCatalogImpl <em>Person Catalog</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.PersonCatalogImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPersonCatalog()
+	 * @generated
+	 */
+	int PERSON_CATALOG = 51;
+
+	/**
+	 * The feature id for the '<em><b>People</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_CATALOG__PEOPLE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Person Catalog</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_CATALOG_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2136,7 +3069,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 46;
+	int RESOURCE_TYPE = 52;
 
 
 	/**
@@ -2147,7 +3080,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 47;
+	int GENDER = 53;
 
 
 	/**
@@ -2158,7 +3091,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 48;
+	int ECLASS_STATUS = 54;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -2168,7 +3101,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 49;
+	int JAVA_CLASS_STATUS = 55;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ProgressStatus <em>Progress Status</em>}' enum.
@@ -2178,7 +3111,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getProgressStatus()
 	 * @generated
 	 */
-	int PROGRESS_STATUS = 50;
+	int PROGRESS_STATUS = 56;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.AccountStatus <em>Account Status</em>}' enum.
@@ -2188,7 +3121,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAccountStatus()
 	 * @generated
 	 */
-	int ACCOUNT_STATUS = 51;
+	int ACCOUNT_STATUS = 57;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.PublicationStatus <em>Publication Status</em>}' enum.
@@ -2198,7 +3131,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPublicationStatus()
 	 * @generated
 	 */
-	int PUBLICATION_STATUS = 52;
+	int PUBLICATION_STATUS = 58;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ArchivalStatus <em>Archival Status</em>}' enum.
@@ -2208,7 +3141,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getArchivalStatus()
 	 * @generated
 	 */
-	int ARCHIVAL_STATUS = 53;
+	int ARCHIVAL_STATUS = 59;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.TranslationState <em>Translation State</em>}' enum.
@@ -2218,7 +3151,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationState()
 	 * @generated
 	 */
-	int TRANSLATION_STATE = 54;
+	int TRANSLATION_STATE = 60;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ExpansionState <em>Expansion State</em>}' enum.
@@ -2228,7 +3161,17 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getExpansionState()
 	 * @generated
 	 */
-	int EXPANSION_STATE = 55;
+	int EXPANSION_STATE = 61;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.SignupSourceType <em>Signup Source Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.SignupSourceType
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSignupSourceType()
+	 * @generated
+	 */
+	int SIGNUP_SOURCE_TYPE = 62;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -2238,7 +3181,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 56;
+	int DATE_TIME = 63;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -2248,7 +3191,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 57;
+	int CURRENCY_UNIT = 64;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -2258,7 +3201,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 59;
+	int UNIT = 66;
 
 
 	/**
@@ -2269,7 +3212,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 60;
+	int LIST = 67;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -2279,7 +3222,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 61;
+	int MAP = 68;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -2289,7 +3232,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 62;
+	int SET = 69;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -2299,7 +3242,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 63;
+	int COLLECTION = 70;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -2309,7 +3252,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 64;
+	int MULTIMAP = 71;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -2319,7 +3262,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 65;
+	int NAVIGABLE_MAP = 72;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -2329,7 +3272,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 66;
+	int QUEUE = 73;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -2339,7 +3282,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 67;
+	int MULTISET = 74;
 
 
 	/**
@@ -2350,7 +3293,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 68;
+	int SERIALIZABLE = 75;
 
 
 	/**
@@ -2361,7 +3304,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 69;
+	int BUNDLE = 76;
 
 
 	/**
@@ -2372,7 +3315,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
 	 * @generated
 	 */
-	int BIG_MONEY_PROVIDER = 70;
+	int BIG_MONEY_PROVIDER = 77;
 
 	/**
 	 * The meta object id for the '<em>Quantity</em>' data type.
@@ -2382,7 +3325,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQuantity()
 	 * @generated
 	 */
-	int QUANTITY = 58;
+	int QUANTITY = 65;
 
 	/**
 	 * The meta object id for the '<em>Measurable</em>' data type.
@@ -2392,7 +3335,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMeasurable()
 	 * @generated
 	 */
-	int MEASURABLE = 71;
+	int MEASURABLE = 78;
 
 
 	/**
@@ -2403,7 +3346,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTimeZone()
 	 * @generated
 	 */
-	int DATE_TIME_ZONE = 72;
+	int DATE_TIME_ZONE = 79;
 
 
 	/**
@@ -2414,7 +3357,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 73;
+	int LOCALE = 80;
 
 
 	/**
@@ -2425,7 +3368,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFile()
 	 * @generated
 	 */
-	int FILE = 74;
+	int FILE = 81;
 
 
 	/**
@@ -2436,7 +3379,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListenableFuture()
 	 * @generated
 	 */
-	int LISTENABLE_FUTURE = 75;
+	int LISTENABLE_FUTURE = 82;
 
 
 	/**
@@ -2447,7 +3390,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListeningExecutorService()
 	 * @generated
 	 */
-	int LISTENING_EXECUTOR_SERVICE = 76;
+	int LISTENING_EXECUTOR_SERVICE = 83;
 
 
 	/**
@@ -2458,7 +3401,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getClassLoader()
 	 * @generated
 	 */
-	int CLASS_LOADER = 77;
+	int CLASS_LOADER = 84;
 
 
 	/**
@@ -2469,7 +3412,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getURL()
 	 * @generated
 	 */
-	int URL = 78;
+	int URL = 85;
 
 
 	/**
@@ -2480,7 +3423,18 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEventBus()
 	 * @generated
 	 */
-	int EVENT_BUS = 79;
+	int EVENT_BUS = 86;
+
+
+	/**
+	 * The meta object id for the '<em>Local Date</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.joda.time.LocalDate
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocalDate()
+	 * @generated
+	 */
+	int LOCAL_DATE = 87;
 
 
 	/**
@@ -3796,6 +4750,968 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getExpandable_ExpansionState();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.PersonLike <em>Person Like</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Person Like</em>'.
+	 * @see org.soluvas.commons.PersonLike
+	 * @generated
+	 */
+	EClass getPersonLike();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Person <em>Person</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Person</em>'.
+	 * @see org.soluvas.commons.Person
+	 * @generated
+	 */
+	EClass getPerson();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getSchemaVersion <em>Schema Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Schema Version</em>'.
+	 * @see org.soluvas.commons.Person#getSchemaVersion()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_SchemaVersion();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getFirstName <em>First Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>First Name</em>'.
+	 * @see org.soluvas.commons.Person#getFirstName()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_FirstName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getLastName <em>Last Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Name</em>'.
+	 * @see org.soluvas.commons.Person#getLastName()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_LastName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getPassword <em>Password</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Password</em>'.
+	 * @see org.soluvas.commons.Person#getPassword()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_Password();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.soluvas.commons.Person#getPhoneNumbers <em>Phone Numbers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Phone Numbers</em>'.
+	 * @see org.soluvas.commons.Person#getPhoneNumbers()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EReference getPerson_PhoneNumbers();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.soluvas.commons.Person#getEmails <em>Emails</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Emails</em>'.
+	 * @see org.soluvas.commons.Person#getEmails()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EReference getPerson_Emails();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.soluvas.commons.Person#getMobileNumbers <em>Mobile Numbers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Mobile Numbers</em>'.
+	 * @see org.soluvas.commons.Person#getMobileNumbers()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EReference getPerson_MobileNumbers();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.soluvas.commons.Person#getAddresses <em>Addresses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Addresses</em>'.
+	 * @see org.soluvas.commons.Person#getAddresses()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EReference getPerson_Addresses();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getAccountStatus <em>Account Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Account Status</em>'.
+	 * @see org.soluvas.commons.Person#getAccountStatus()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_AccountStatus();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getBirthYear <em>Birth Year</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Birth Year</em>'.
+	 * @see org.soluvas.commons.Person#getBirthYear()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_BirthYear();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getBirthMonth <em>Birth Month</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Birth Month</em>'.
+	 * @see org.soluvas.commons.Person#getBirthMonth()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_BirthMonth();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getBirthDay <em>Birth Day</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Birth Day</em>'.
+	 * @see org.soluvas.commons.Person#getBirthDay()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_BirthDay();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getBirthDate <em>Birth Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Birth Date</em>'.
+	 * @see org.soluvas.commons.Person#getBirthDate()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_BirthDate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getGender <em>Gender</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Gender</em>'.
+	 * @see org.soluvas.commons.Person#getGender()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_Gender();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getLanguage <em>Language</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Language</em>'.
+	 * @see org.soluvas.commons.Person#getLanguage()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_Language();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getCurrencyCode <em>Currency Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Currency Code</em>'.
+	 * @see org.soluvas.commons.Person#getCurrencyCode()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_CurrencyCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getCurrency <em>Currency</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Currency</em>'.
+	 * @see org.soluvas.commons.Person#getCurrency()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_Currency();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getFacebookId <em>Facebook Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Id</em>'.
+	 * @see org.soluvas.commons.Person#getFacebookId()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_FacebookId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getFacebookUsername <em>Facebook Username</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Username</em>'.
+	 * @see org.soluvas.commons.Person#getFacebookUsername()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_FacebookUsername();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getFacebookAccessToken <em>Facebook Access Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Access Token</em>'.
+	 * @see org.soluvas.commons.Person#getFacebookAccessToken()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_FacebookAccessToken();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getTwitterId <em>Twitter Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Twitter Id</em>'.
+	 * @see org.soluvas.commons.Person#getTwitterId()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_TwitterId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getTwitterScreenName <em>Twitter Screen Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Twitter Screen Name</em>'.
+	 * @see org.soluvas.commons.Person#getTwitterScreenName()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_TwitterScreenName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getTwitterAccessToken <em>Twitter Access Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Twitter Access Token</em>'.
+	 * @see org.soluvas.commons.Person#getTwitterAccessToken()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_TwitterAccessToken();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getTwitterAccessTokenSecret <em>Twitter Access Token Secret</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Twitter Access Token Secret</em>'.
+	 * @see org.soluvas.commons.Person#getTwitterAccessTokenSecret()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_TwitterAccessTokenSecret();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getGooglePlusId <em>Google Plus Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Google Plus Id</em>'.
+	 * @see org.soluvas.commons.Person#getGooglePlusId()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_GooglePlusId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getGoogleUsername <em>Google Username</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Google Username</em>'.
+	 * @see org.soluvas.commons.Person#getGoogleUsername()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_GoogleUsername();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getVirtualMail <em>Virtual Mail</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Virtual Mail</em>'.
+	 * @see org.soluvas.commons.Person#getVirtualMail()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_VirtualMail();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getNickname <em>Nickname</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Nickname</em>'.
+	 * @see org.soluvas.commons.Person#getNickname()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_Nickname();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getCustomerRole <em>Customer Role</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Customer Role</em>'.
+	 * @see org.soluvas.commons.Person#getCustomerRole()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_CustomerRole();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getMemberRole <em>Member Role</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Member Role</em>'.
+	 * @see org.soluvas.commons.Person#getMemberRole()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_MemberRole();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getManagerRole <em>Manager Role</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Manager Role</em>'.
+	 * @see org.soluvas.commons.Person#getManagerRole()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_ManagerRole();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getTimeZoneId <em>Time Zone Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Time Zone Id</em>'.
+	 * @see org.soluvas.commons.Person#getTimeZoneId()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_TimeZoneId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getTimeZone <em>Time Zone</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Time Zone</em>'.
+	 * @see org.soluvas.commons.Person#getTimeZone()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_TimeZone();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getReferrerId <em>Referrer Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Referrer Id</em>'.
+	 * @see org.soluvas.commons.Person#getReferrerId()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_ReferrerId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getReferrerType <em>Referrer Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Referrer Type</em>'.
+	 * @see org.soluvas.commons.Person#getReferrerType()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_ReferrerType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getSignupSource <em>Signup Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Signup Source</em>'.
+	 * @see org.soluvas.commons.Person#getSignupSource()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_SignupSource();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getSignupSourceType <em>Signup Source Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Signup Source Type</em>'.
+	 * @see org.soluvas.commons.Person#getSignupSourceType()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_SignupSourceType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getIpAddress <em>Ip Address</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ip Address</em>'.
+	 * @see org.soluvas.commons.Person#getIpAddress()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_IpAddress();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getLastIpAddress <em>Last Ip Address</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Ip Address</em>'.
+	 * @see org.soluvas.commons.Person#getLastIpAddress()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_LastIpAddress();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getLastLoginTime <em>Last Login Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Login Time</em>'.
+	 * @see org.soluvas.commons.Person#getLastLoginTime()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_LastLoginTime();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getValidationTime <em>Validation Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Validation Time</em>'.
+	 * @see org.soluvas.commons.Person#getValidationTime()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_ValidationTime();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getActivationTime <em>Activation Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Activation Time</em>'.
+	 * @see org.soluvas.commons.Person#getActivationTime()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_ActivationTime();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getVerificationTime <em>Verification Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Verification Time</em>'.
+	 * @see org.soluvas.commons.Person#getVerificationTime()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_VerificationTime();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getNewsletterSubscriptionEnabled <em>Newsletter Subscription Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Newsletter Subscription Enabled</em>'.
+	 * @see org.soluvas.commons.Person#getNewsletterSubscriptionEnabled()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_NewsletterSubscriptionEnabled();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getNewsletterSubscriptionTime <em>Newsletter Subscription Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Newsletter Subscription Time</em>'.
+	 * @see org.soluvas.commons.Person#getNewsletterSubscriptionTime()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_NewsletterSubscriptionTime();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getSocialSharingEnabled <em>Social Sharing Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Social Sharing Enabled</em>'.
+	 * @see org.soluvas.commons.Person#getSocialSharingEnabled()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_SocialSharingEnabled();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getPublicationStatus <em>Publication Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Publication Status</em>'.
+	 * @see org.soluvas.commons.Person#getPublicationStatus()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_PublicationStatus();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getArchivalStatus <em>Archival Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Archival Status</em>'.
+	 * @see org.soluvas.commons.Person#getArchivalStatus()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_ArchivalStatus();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getFolder <em>Folder</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Folder</em>'.
+	 * @see org.soluvas.commons.Person#getFolder()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_Folder();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getReligion <em>Religion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Religion</em>'.
+	 * @see org.soluvas.commons.Person#getReligion()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_Religion();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getPasswordResetCode <em>Password Reset Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Password Reset Code</em>'.
+	 * @see org.soluvas.commons.Person#getPasswordResetCode()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_PasswordResetCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getPasswordResetExpiryTime <em>Password Reset Expiry Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Password Reset Expiry Time</em>'.
+	 * @see org.soluvas.commons.Person#getPasswordResetExpiryTime()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_PasswordResetExpiryTime();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.PhoneNumber <em>Phone Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Phone Number</em>'.
+	 * @see org.soluvas.commons.PhoneNumber
+	 * @generated
+	 */
+	EClass getPhoneNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PhoneNumber#getPhoneNumber <em>Phone Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Phone Number</em>'.
+	 * @see org.soluvas.commons.PhoneNumber#getPhoneNumber()
+	 * @see #getPhoneNumber()
+	 * @generated
+	 */
+	EAttribute getPhoneNumber_PhoneNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PhoneNumber#isPrimary <em>Primary</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary</em>'.
+	 * @see org.soluvas.commons.PhoneNumber#isPrimary()
+	 * @see #getPhoneNumber()
+	 * @generated
+	 */
+	EAttribute getPhoneNumber_Primary();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PhoneNumber#getValidationTime <em>Validation Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Validation Time</em>'.
+	 * @see org.soluvas.commons.PhoneNumber#getValidationTime()
+	 * @see #getPhoneNumber()
+	 * @generated
+	 */
+	EAttribute getPhoneNumber_ValidationTime();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Email <em>Email</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Email</em>'.
+	 * @see org.soluvas.commons.Email
+	 * @generated
+	 */
+	EClass getEmail();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Email#getEmail <em>Email</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Email</em>'.
+	 * @see org.soluvas.commons.Email#getEmail()
+	 * @see #getEmail()
+	 * @generated
+	 */
+	EAttribute getEmail_Email();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Email#isPrimary <em>Primary</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary</em>'.
+	 * @see org.soluvas.commons.Email#isPrimary()
+	 * @see #getEmail()
+	 * @generated
+	 */
+	EAttribute getEmail_Primary();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Email#getValidationTime <em>Validation Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Validation Time</em>'.
+	 * @see org.soluvas.commons.Email#getValidationTime()
+	 * @see #getEmail()
+	 * @generated
+	 */
+	EAttribute getEmail_ValidationTime();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.PostalAddress <em>Postal Address</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Postal Address</em>'.
+	 * @see org.soluvas.commons.PostalAddress
+	 * @generated
+	 */
+	EClass getPostalAddress();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getSchemaVersion <em>Schema Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Schema Version</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getSchemaVersion()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_SchemaVersion();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getOrganization <em>Organization</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Organization</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getOrganization()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_Organization();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getStreet <em>Street</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Street</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getStreet()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_Street();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getCity <em>City</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>City</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getCity()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_City();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getPostalCode <em>Postal Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Postal Code</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getPostalCode()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_PostalCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getProvince <em>Province</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Province</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getProvince()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_Province();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getCountry <em>Country</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Country</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getCountry()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_Country();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getCountryCode <em>Country Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Country Code</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getCountryCode()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_CountryCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getPrimaryMobile <em>Primary Mobile</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary Mobile</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getPrimaryMobile()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_PrimaryMobile();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.commons.PostalAddress#getMobiles <em>Mobiles</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Mobiles</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getMobiles()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_Mobiles();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getPrimaryPhone <em>Primary Phone</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary Phone</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getPrimaryPhone()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_PrimaryPhone();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.commons.PostalAddress#getPhones <em>Phones</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Phones</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getPhones()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_Phones();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getPrimaryHomePhone <em>Primary Home Phone</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary Home Phone</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getPrimaryHomePhone()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_PrimaryHomePhone();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.commons.PostalAddress#getHomePhones <em>Home Phones</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Home Phones</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getHomePhones()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_HomePhones();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getPrimaryWorkPhone <em>Primary Work Phone</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary Work Phone</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getPrimaryWorkPhone()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_PrimaryWorkPhone();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.commons.PostalAddress#getWorkPhones <em>Work Phones</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Work Phones</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getWorkPhones()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_WorkPhones();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getPrimaryEmail <em>Primary Email</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary Email</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getPrimaryEmail()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_PrimaryEmail();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.commons.PostalAddress#getEmails <em>Emails</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Emails</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getEmails()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_Emails();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getDescription()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#isPrimary <em>Primary</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary</em>'.
+	 * @see org.soluvas.commons.PostalAddress#isPrimary()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_Primary();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#isPrimaryBilling <em>Primary Billing</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary Billing</em>'.
+	 * @see org.soluvas.commons.PostalAddress#isPrimaryBilling()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_PrimaryBilling();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#isPrimaryShipping <em>Primary Shipping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary Shipping</em>'.
+	 * @see org.soluvas.commons.PostalAddress#isPrimaryShipping()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_PrimaryShipping();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getValidationTime <em>Validation Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Validation Time</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getValidationTime()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_ValidationTime();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.PersonCatalog <em>Person Catalog</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Person Catalog</em>'.
+	 * @see org.soluvas.commons.PersonCatalog
+	 * @generated
+	 */
+	EClass getPersonCatalog();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.soluvas.commons.PersonCatalog#getPeople <em>People</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>People</em>'.
+	 * @see org.soluvas.commons.PersonCatalog#getPeople()
+	 * @see #getPersonCatalog()
+	 * @generated
+	 */
+	EReference getPersonCatalog_People();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3894,6 +5810,16 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getExpansionState();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.commons.SignupSourceType <em>Signup Source Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Signup Source Type</em>'.
+	 * @see org.soluvas.commons.SignupSourceType
+	 * @generated
+	 */
+	EEnum getSignupSourceType();
 
 	/**
 	 * Returns the meta object for data type '{@link org.joda.time.DateTime <em>Date Time</em>}'.
@@ -4158,6 +6084,17 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getEventBus();
+
+	/**
+	 * Returns the meta object for data type '{@link org.joda.time.LocalDate <em>Local Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Local Date</em>'.
+	 * @see org.joda.time.LocalDate
+	 * @model instanceClass="org.joda.time.LocalDate"
+	 * @generated
+	 */
+	EDataType getLocalDate();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -5258,6 +7195,722 @@ public interface CommonsPackage extends EPackage {
 		EAttribute EXPANDABLE__EXPANSION_STATE = eINSTANCE.getExpandable_ExpansionState();
 
 		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.PersonLike <em>Person Like</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.PersonLike
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPersonLike()
+		 * @generated
+		 */
+		EClass PERSON_LIKE = eINSTANCE.getPersonLike();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonImpl <em>Person</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.PersonImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPerson()
+		 * @generated
+		 */
+		EClass PERSON = eINSTANCE.getPerson();
+
+		/**
+		 * The meta object literal for the '<em><b>Schema Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__SCHEMA_VERSION = eINSTANCE.getPerson_SchemaVersion();
+
+		/**
+		 * The meta object literal for the '<em><b>First Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__FIRST_NAME = eINSTANCE.getPerson_FirstName();
+
+		/**
+		 * The meta object literal for the '<em><b>Last Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__LAST_NAME = eINSTANCE.getPerson_LastName();
+
+		/**
+		 * The meta object literal for the '<em><b>Password</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__PASSWORD = eINSTANCE.getPerson_Password();
+
+		/**
+		 * The meta object literal for the '<em><b>Phone Numbers</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PERSON__PHONE_NUMBERS = eINSTANCE.getPerson_PhoneNumbers();
+
+		/**
+		 * The meta object literal for the '<em><b>Emails</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PERSON__EMAILS = eINSTANCE.getPerson_Emails();
+
+		/**
+		 * The meta object literal for the '<em><b>Mobile Numbers</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PERSON__MOBILE_NUMBERS = eINSTANCE.getPerson_MobileNumbers();
+
+		/**
+		 * The meta object literal for the '<em><b>Addresses</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PERSON__ADDRESSES = eINSTANCE.getPerson_Addresses();
+
+		/**
+		 * The meta object literal for the '<em><b>Account Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__ACCOUNT_STATUS = eINSTANCE.getPerson_AccountStatus();
+
+		/**
+		 * The meta object literal for the '<em><b>Birth Year</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__BIRTH_YEAR = eINSTANCE.getPerson_BirthYear();
+
+		/**
+		 * The meta object literal for the '<em><b>Birth Month</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__BIRTH_MONTH = eINSTANCE.getPerson_BirthMonth();
+
+		/**
+		 * The meta object literal for the '<em><b>Birth Day</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__BIRTH_DAY = eINSTANCE.getPerson_BirthDay();
+
+		/**
+		 * The meta object literal for the '<em><b>Birth Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__BIRTH_DATE = eINSTANCE.getPerson_BirthDate();
+
+		/**
+		 * The meta object literal for the '<em><b>Gender</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__GENDER = eINSTANCE.getPerson_Gender();
+
+		/**
+		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__LANGUAGE = eINSTANCE.getPerson_Language();
+
+		/**
+		 * The meta object literal for the '<em><b>Currency Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__CURRENCY_CODE = eINSTANCE.getPerson_CurrencyCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Currency</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__CURRENCY = eINSTANCE.getPerson_Currency();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__FACEBOOK_ID = eINSTANCE.getPerson_FacebookId();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Username</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__FACEBOOK_USERNAME = eINSTANCE.getPerson_FacebookUsername();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Access Token</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__FACEBOOK_ACCESS_TOKEN = eINSTANCE.getPerson_FacebookAccessToken();
+
+		/**
+		 * The meta object literal for the '<em><b>Twitter Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__TWITTER_ID = eINSTANCE.getPerson_TwitterId();
+
+		/**
+		 * The meta object literal for the '<em><b>Twitter Screen Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__TWITTER_SCREEN_NAME = eINSTANCE.getPerson_TwitterScreenName();
+
+		/**
+		 * The meta object literal for the '<em><b>Twitter Access Token</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__TWITTER_ACCESS_TOKEN = eINSTANCE.getPerson_TwitterAccessToken();
+
+		/**
+		 * The meta object literal for the '<em><b>Twitter Access Token Secret</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__TWITTER_ACCESS_TOKEN_SECRET = eINSTANCE.getPerson_TwitterAccessTokenSecret();
+
+		/**
+		 * The meta object literal for the '<em><b>Google Plus Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__GOOGLE_PLUS_ID = eINSTANCE.getPerson_GooglePlusId();
+
+		/**
+		 * The meta object literal for the '<em><b>Google Username</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__GOOGLE_USERNAME = eINSTANCE.getPerson_GoogleUsername();
+
+		/**
+		 * The meta object literal for the '<em><b>Virtual Mail</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__VIRTUAL_MAIL = eINSTANCE.getPerson_VirtualMail();
+
+		/**
+		 * The meta object literal for the '<em><b>Nickname</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__NICKNAME = eINSTANCE.getPerson_Nickname();
+
+		/**
+		 * The meta object literal for the '<em><b>Customer Role</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__CUSTOMER_ROLE = eINSTANCE.getPerson_CustomerRole();
+
+		/**
+		 * The meta object literal for the '<em><b>Member Role</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__MEMBER_ROLE = eINSTANCE.getPerson_MemberRole();
+
+		/**
+		 * The meta object literal for the '<em><b>Manager Role</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__MANAGER_ROLE = eINSTANCE.getPerson_ManagerRole();
+
+		/**
+		 * The meta object literal for the '<em><b>Time Zone Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__TIME_ZONE_ID = eINSTANCE.getPerson_TimeZoneId();
+
+		/**
+		 * The meta object literal for the '<em><b>Time Zone</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__TIME_ZONE = eINSTANCE.getPerson_TimeZone();
+
+		/**
+		 * The meta object literal for the '<em><b>Referrer Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__REFERRER_ID = eINSTANCE.getPerson_ReferrerId();
+
+		/**
+		 * The meta object literal for the '<em><b>Referrer Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__REFERRER_TYPE = eINSTANCE.getPerson_ReferrerType();
+
+		/**
+		 * The meta object literal for the '<em><b>Signup Source</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__SIGNUP_SOURCE = eINSTANCE.getPerson_SignupSource();
+
+		/**
+		 * The meta object literal for the '<em><b>Signup Source Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__SIGNUP_SOURCE_TYPE = eINSTANCE.getPerson_SignupSourceType();
+
+		/**
+		 * The meta object literal for the '<em><b>Ip Address</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__IP_ADDRESS = eINSTANCE.getPerson_IpAddress();
+
+		/**
+		 * The meta object literal for the '<em><b>Last Ip Address</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__LAST_IP_ADDRESS = eINSTANCE.getPerson_LastIpAddress();
+
+		/**
+		 * The meta object literal for the '<em><b>Last Login Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__LAST_LOGIN_TIME = eINSTANCE.getPerson_LastLoginTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Validation Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__VALIDATION_TIME = eINSTANCE.getPerson_ValidationTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Activation Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__ACTIVATION_TIME = eINSTANCE.getPerson_ActivationTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Verification Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__VERIFICATION_TIME = eINSTANCE.getPerson_VerificationTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Newsletter Subscription Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__NEWSLETTER_SUBSCRIPTION_ENABLED = eINSTANCE.getPerson_NewsletterSubscriptionEnabled();
+
+		/**
+		 * The meta object literal for the '<em><b>Newsletter Subscription Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__NEWSLETTER_SUBSCRIPTION_TIME = eINSTANCE.getPerson_NewsletterSubscriptionTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Social Sharing Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__SOCIAL_SHARING_ENABLED = eINSTANCE.getPerson_SocialSharingEnabled();
+
+		/**
+		 * The meta object literal for the '<em><b>Publication Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__PUBLICATION_STATUS = eINSTANCE.getPerson_PublicationStatus();
+
+		/**
+		 * The meta object literal for the '<em><b>Archival Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__ARCHIVAL_STATUS = eINSTANCE.getPerson_ArchivalStatus();
+
+		/**
+		 * The meta object literal for the '<em><b>Folder</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__FOLDER = eINSTANCE.getPerson_Folder();
+
+		/**
+		 * The meta object literal for the '<em><b>Religion</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__RELIGION = eINSTANCE.getPerson_Religion();
+
+		/**
+		 * The meta object literal for the '<em><b>Password Reset Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__PASSWORD_RESET_CODE = eINSTANCE.getPerson_PasswordResetCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Password Reset Expiry Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__PASSWORD_RESET_EXPIRY_TIME = eINSTANCE.getPerson_PasswordResetExpiryTime();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.PhoneNumberImpl <em>Phone Number</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.PhoneNumberImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPhoneNumber()
+		 * @generated
+		 */
+		EClass PHONE_NUMBER = eINSTANCE.getPhoneNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Phone Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PHONE_NUMBER__PHONE_NUMBER = eINSTANCE.getPhoneNumber_PhoneNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PHONE_NUMBER__PRIMARY = eINSTANCE.getPhoneNumber_Primary();
+
+		/**
+		 * The meta object literal for the '<em><b>Validation Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PHONE_NUMBER__VALIDATION_TIME = eINSTANCE.getPhoneNumber_ValidationTime();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.EmailImpl <em>Email</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.EmailImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEmail()
+		 * @generated
+		 */
+		EClass EMAIL = eINSTANCE.getEmail();
+
+		/**
+		 * The meta object literal for the '<em><b>Email</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMAIL__EMAIL = eINSTANCE.getEmail_Email();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMAIL__PRIMARY = eINSTANCE.getEmail_Primary();
+
+		/**
+		 * The meta object literal for the '<em><b>Validation Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMAIL__VALIDATION_TIME = eINSTANCE.getEmail_ValidationTime();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.PostalAddressImpl <em>Postal Address</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.PostalAddressImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPostalAddress()
+		 * @generated
+		 */
+		EClass POSTAL_ADDRESS = eINSTANCE.getPostalAddress();
+
+		/**
+		 * The meta object literal for the '<em><b>Schema Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__SCHEMA_VERSION = eINSTANCE.getPostalAddress_SchemaVersion();
+
+		/**
+		 * The meta object literal for the '<em><b>Organization</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__ORGANIZATION = eINSTANCE.getPostalAddress_Organization();
+
+		/**
+		 * The meta object literal for the '<em><b>Street</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__STREET = eINSTANCE.getPostalAddress_Street();
+
+		/**
+		 * The meta object literal for the '<em><b>City</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__CITY = eINSTANCE.getPostalAddress_City();
+
+		/**
+		 * The meta object literal for the '<em><b>Postal Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__POSTAL_CODE = eINSTANCE.getPostalAddress_PostalCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Province</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__PROVINCE = eINSTANCE.getPostalAddress_Province();
+
+		/**
+		 * The meta object literal for the '<em><b>Country</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__COUNTRY = eINSTANCE.getPostalAddress_Country();
+
+		/**
+		 * The meta object literal for the '<em><b>Country Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__COUNTRY_CODE = eINSTANCE.getPostalAddress_CountryCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary Mobile</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__PRIMARY_MOBILE = eINSTANCE.getPostalAddress_PrimaryMobile();
+
+		/**
+		 * The meta object literal for the '<em><b>Mobiles</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__MOBILES = eINSTANCE.getPostalAddress_Mobiles();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary Phone</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__PRIMARY_PHONE = eINSTANCE.getPostalAddress_PrimaryPhone();
+
+		/**
+		 * The meta object literal for the '<em><b>Phones</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__PHONES = eINSTANCE.getPostalAddress_Phones();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary Home Phone</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__PRIMARY_HOME_PHONE = eINSTANCE.getPostalAddress_PrimaryHomePhone();
+
+		/**
+		 * The meta object literal for the '<em><b>Home Phones</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__HOME_PHONES = eINSTANCE.getPostalAddress_HomePhones();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary Work Phone</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__PRIMARY_WORK_PHONE = eINSTANCE.getPostalAddress_PrimaryWorkPhone();
+
+		/**
+		 * The meta object literal for the '<em><b>Work Phones</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__WORK_PHONES = eINSTANCE.getPostalAddress_WorkPhones();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary Email</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__PRIMARY_EMAIL = eINSTANCE.getPostalAddress_PrimaryEmail();
+
+		/**
+		 * The meta object literal for the '<em><b>Emails</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__EMAILS = eINSTANCE.getPostalAddress_Emails();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__DESCRIPTION = eINSTANCE.getPostalAddress_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__PRIMARY = eINSTANCE.getPostalAddress_Primary();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary Billing</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__PRIMARY_BILLING = eINSTANCE.getPostalAddress_PrimaryBilling();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary Shipping</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__PRIMARY_SHIPPING = eINSTANCE.getPostalAddress_PrimaryShipping();
+
+		/**
+		 * The meta object literal for the '<em><b>Validation Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__VALIDATION_TIME = eINSTANCE.getPostalAddress_ValidationTime();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonCatalogImpl <em>Person Catalog</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.PersonCatalogImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPersonCatalog()
+		 * @generated
+		 */
+		EClass PERSON_CATALOG = eINSTANCE.getPersonCatalog();
+
+		/**
+		 * The meta object literal for the '<em><b>People</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PERSON_CATALOG__PEOPLE = eINSTANCE.getPersonCatalog_People();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5356,6 +8009,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum EXPANSION_STATE = eINSTANCE.getExpansionState();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.SignupSourceType <em>Signup Source Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.SignupSourceType
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSignupSourceType()
+		 * @generated
+		 */
+		EEnum SIGNUP_SOURCE_TYPE = eINSTANCE.getSignupSourceType();
 
 		/**
 		 * The meta object literal for the '<em>Date Time</em>' data type.
@@ -5596,6 +8259,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType EVENT_BUS = eINSTANCE.getEventBus();
+
+		/**
+		 * The meta object literal for the '<em>Local Date</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.joda.time.LocalDate
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocalDate()
+		 * @generated
+		 */
+		EDataType LOCAL_DATE = eINSTANCE.getLocalDate();
 
 	}
 

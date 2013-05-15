@@ -166,6 +166,51 @@ public interface CommonsFactory extends EFactory {
 	 */
 	TranslationManager createTranslationManager();
 
+	/**
+	 * Returns a new object of class '<em>Person</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Person</em>'.
+	 * @generated
+	 */
+	Person createPerson();
+
+	/**
+	 * Returns a new object of class '<em>Phone Number</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Phone Number</em>'.
+	 * @generated
+	 */
+	PhoneNumber createPhoneNumber();
+
+	/**
+	 * Returns a new object of class '<em>Email</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Email</em>'.
+	 * @generated
+	 */
+	Email createEmail();
+
+	/**
+	 * Returns a new object of class '<em>Postal Address</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Postal Address</em>'.
+	 * @generated
+	 */
+	PostalAddress createPostalAddress();
+
+	/**
+	 * Returns a new object of class '<em>Person Catalog</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Person Catalog</em>'.
+	 * @generated
+	 */
+	PersonCatalog createPersonCatalog();
+
 	PersonInfo createPersonInfo(String id, String slug, String name, String photoId, Gender gender);
 
 	/**

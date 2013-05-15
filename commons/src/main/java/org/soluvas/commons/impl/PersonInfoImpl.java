@@ -12,6 +12,7 @@ import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.PhotoIdContainer;
 import org.soluvas.commons.Sluggable;
 
@@ -479,6 +480,11 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 				default: return -1;
 			}
 		}
+		if (baseClass == PersonLike.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -514,6 +520,11 @@ public class PersonInfoImpl extends EObjectImpl implements PersonInfo {
 		if (baseClass == NameContainer.class) {
 			switch (baseFeatureID) {
 				case CommonsPackage.NAME_CONTAINER__NAME: return CommonsPackage.PERSON_INFO__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == PersonLike.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

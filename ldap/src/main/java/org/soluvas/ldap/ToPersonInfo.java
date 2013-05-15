@@ -3,7 +3,6 @@ package org.soluvas.ldap;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.CommonsFactory;
-import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo;
 
 import com.google.common.base.Function;
@@ -23,15 +22,11 @@ public class ToPersonInfo implements Function<SocialPerson, PersonInfo> {
 		personInfo.setSlug(input.getSlug());
 		personInfo.setName(input.getName());
 		personInfo.setPhotoId(input.getPhotoId());
-		if (input.getGender() != null) {
-			switch (input.getGender()) {
-			case MALE:
-				personInfo.setGender(Gender.MALE);
-				break;
-			case FEMALE:
-				personInfo.setGender(Gender.FEMALE);
-				break;
-			}
+		personInfo.setGender(input.getGender());
+		if (input.getPrimaryEmail() != null) {
+			personInfo.setEmail(input.getPrimaryEmail());
+		} else if (input.getEmails() != null && !input.getEmails().isEmpty()) {
+			personInfo.setEmail(input.getEmails().iterator().next());
 		}
 		return personInfo;
 	}

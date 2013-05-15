@@ -95,6 +95,7 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = casePhotoIdContainer(personInfo);
 				if (result == null) result = caseSluggable(personInfo);
 				if (result == null) result = caseNameContainer(personInfo);
+				if (result == null) result = casePersonLike(personInfo);
 				if (result == null) result = caseImageable(personInfo);
 				if (result == null) result = caseNameable(personInfo);
 				if (result == null) result = defaultCase(theEObject);
@@ -397,6 +398,57 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 			case CommonsPackage.EXPANDABLE: {
 				Expandable expandable = (Expandable)theEObject;
 				T1 result = caseExpandable(expandable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.PERSON_LIKE: {
+				PersonLike personLike = (PersonLike)theEObject;
+				T1 result = casePersonLike(personLike);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.PERSON: {
+				Person person = (Person)theEObject;
+				T1 result = casePerson(person);
+				if (result == null) result = caseNameContainer(person);
+				if (result == null) result = casePhotoIdContainer(person);
+				if (result == null) result = caseIdentifiable(person);
+				if (result == null) result = casePersonLike(person);
+				if (result == null) result = caseInformer(person);
+				if (result == null) result = caseTimestamped(person);
+				if (result == null) result = caseSchemaVersionable(person);
+				if (result == null) result = caseDescribable(person);
+				if (result == null) result = caseSluggable(person);
+				if (result == null) result = caseNameable(person);
+				if (result == null) result = caseImageable(person);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.PHONE_NUMBER: {
+				PhoneNumber phoneNumber = (PhoneNumber)theEObject;
+				T1 result = casePhoneNumber(phoneNumber);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.EMAIL: {
+				Email email = (Email)theEObject;
+				T1 result = caseEmail(email);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.POSTAL_ADDRESS: {
+				PostalAddress postalAddress = (PostalAddress)theEObject;
+				T1 result = casePostalAddress(postalAddress);
+				if (result == null) result = caseNameContainer(postalAddress);
+				if (result == null) result = caseIdentifiable(postalAddress);
+				if (result == null) result = caseSchemaVersionable(postalAddress);
+				if (result == null) result = caseNameable(postalAddress);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.PERSON_CATALOG: {
+				PersonCatalog personCatalog = (PersonCatalog)theEObject;
+				T1 result = casePersonCatalog(personCatalog);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1091,6 +1143,96 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseExpandable(Expandable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Person Like</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Person Like</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 casePersonLike(PersonLike object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Person</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Person</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 casePerson(Person object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Phone Number</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Phone Number</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 casePhoneNumber(PhoneNumber object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Email</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Email</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseEmail(Email object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Postal Address</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Postal Address</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 casePostalAddress(PostalAddress object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Person Catalog</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Person Catalog</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 casePersonCatalog(PersonCatalog object) {
 		return null;
 	}
 
