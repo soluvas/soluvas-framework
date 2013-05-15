@@ -32,12 +32,11 @@ public class ImageImportCommand extends ExtCommandSupport {
 
 //	private static final Logger log = LoggerFactory.getLogger(ImageImportCommand.class);
 	
-	@Inject
-	private ImageManager imageMgr;
+	private final ImageManager imageMgr;
 
-	@Option(name="-n", aliases={"--ns", "--namespace"},
-		description="Namespace, e.g. person, shop, product.")
-	private transient String namespace = "person";
+	@Option(name="-n", aliases={"--ns", "--namespace"}, required=true,
+		description="Namespace, e.g. person, shop, product. (must specify explicitly since this command is destructive)")
+	private String namespace;
 	@Option(name="-d", aliases="--duplicate",
 			description="Duplicate ID handling: SKIP, OVERWRITE, ADD, ERROR.")
 	private transient DuplicateIdHandling duplicateIdHandling = DuplicateIdHandling.SKIP;
@@ -49,9 +48,10 @@ public class ImageImportCommand extends ExtCommandSupport {
 	private final List<ImageRepository> imageRepos;
 
 	@Inject
-	public ImageImportCommand(List<ImageRepository> imageRepos) {
+	public ImageImportCommand(List<ImageRepository> imageRepos, ImageManager imageMgr) {
 		super();
 		this.imageRepos = imageRepos;
+		this.imageMgr = imageMgr;
 	}
 	
 	@Override

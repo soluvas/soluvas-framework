@@ -32,9 +32,9 @@ public class ImageRmCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(ImageRmCommand.class);
 
-	@Option(name="-n", aliases={"--ns", "--namespace"},
-			description="Namespace, e.g. person, shop, product.")
-	private transient String namespace = "person";
+	@Option(name="-n", aliases={"--ns", "--namespace"}, required=true,
+			description="Namespace, e.g. person, shop, product. (must specify explicitly since this command is destructive)")
+	private String namespace;
 
 	@Option(name="-a", aliases="--all", description="Delete all images.")
 	private transient boolean all = false;
