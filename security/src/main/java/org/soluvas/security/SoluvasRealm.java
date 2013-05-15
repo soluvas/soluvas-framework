@@ -75,7 +75,7 @@ public class SoluvasRealm extends AuthorizingRealm {
 		// TODO: permissions should be set somewhere else,
 		// using EMF models
 
-		log.debug("Processing security catalog for {} with {} roles, {} domains, {} actions, and {} permissions",
+		log.trace("Processing security catalog for {} with {} roles, {} domains, {} actions, and {} permissions",
 				userName, securityCatalog.getRoles().size(), securityCatalog
 						.getDomains().size(), securityCatalog.getActions()
 						.size(), securityCatalog.getPermissions().size());
@@ -83,13 +83,13 @@ public class SoluvasRealm extends AuthorizingRealm {
 		for (final Role role : securityCatalog.getRoles()) {
 			switch (role.getAssignMode()) {
 			case GUEST:
-				log.debug("Assigning role {} to {} because assign mode {}",
+				log.trace("Assigning role {} to {} because assign mode {}",
 						role.getName(), userName, role.getAssignMode());
 				info.addRole(role.getName());
 				break;
 			case AUTHENTICATED:
 				if (!principalCollection.isEmpty()) {
-					log.debug(
+					log.trace(
 							"Assigning role {} to {} because assign mode {} and principals={}",
 							role.getName(), userName, role.getAssignMode(),
 							principalCollection);
@@ -105,7 +105,7 @@ public class SoluvasRealm extends AuthorizingRealm {
 			final Set<String> intersectingRoles = Sets.intersection(info.getRoles(),
 					ImmutableSet.copyOf(perm.getRoles()));
 			if (!intersectingRoles.isEmpty()) {
-				log.debug("Assigning permission {} to {} due to role(s) {}",
+				log.trace("Assigning permission {} to {} due to role(s) {}",
 						perm.toStringPermission(), userName, intersectingRoles);
 				info.addStringPermission(perm.toStringPermission());
 			}

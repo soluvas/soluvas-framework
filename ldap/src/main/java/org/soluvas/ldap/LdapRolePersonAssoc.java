@@ -277,21 +277,20 @@ public class LdapRolePersonAssoc extends AssocRepositoryBase<String, String> {
 					final Dn groupsDn = new Dn(groupsRdn, domainBase);
 					final String memberFilter = "(uniqueMember="
 							+ userDn.getName() + ")";
-					log.debug("Searching for {} in {}", memberFilter,
+					log.trace("Searching for {} in {}", memberFilter,
 							groupsDn.getName());
-					Set<String> roles = LdapUtils.transformSet(ldap
+					final Set<String> roles = LdapUtils.transformSet(ldap
 							.search(groupsDn, memberFilter,
 									SearchScope.ONELEVEL),
 							new Function<Entry, String>() {
-								@Override
-								@Nullable
+								@Override @Nullable
 								public String apply(
 										@Nullable Entry input) {
 									return input.getDn().getRdn()
 											.getValue().getString();
 								}
 							});
-					log.debug("User {} has {} roles: {}", personId,
+					log.trace("User {} has {} roles: {}", personId,
 							roles.size(), roles);
 					return roles;
 				} catch (Exception e) {
