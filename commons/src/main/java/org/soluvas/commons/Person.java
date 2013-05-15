@@ -85,7 +85,7 @@ import com.google.common.base.Function;
  * @model
  * @generated
  */
-public interface Person extends NameContainer, PhotoIdContainer, Identifiable, PersonLike, Informer<PersonInfo>, Timestamped, SchemaVersionable, Describable, Sluggable {
+public interface Person extends NameContainer, PhotoIdContainer, Identifiable, PersonLike, Informer<PersonInfo>, Timestamped, SchemaVersionable, Describable, Sluggable, CanonicalSluggable {
 	
 	public static class ToPersonInfo implements Function<Person, PersonInfo> {
 		@Override @Nullable

@@ -419,6 +419,7 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseSchemaVersionable(person);
 				if (result == null) result = caseDescribable(person);
 				if (result == null) result = caseSluggable(person);
+				if (result == null) result = caseCanonicalSluggable(person);
 				if (result == null) result = caseNameable(person);
 				if (result == null) result = caseImageable(person);
 				if (result == null) result = defaultCase(theEObject);
@@ -449,6 +450,12 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 			case CommonsPackage.PERSON_CATALOG: {
 				PersonCatalog personCatalog = (PersonCatalog)theEObject;
 				T1 result = casePersonCatalog(personCatalog);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.CANONICAL_SLUGGABLE: {
+				CanonicalSluggable canonicalSluggable = (CanonicalSluggable)theEObject;
+				T1 result = caseCanonicalSluggable(canonicalSluggable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1233,6 +1240,21 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 casePersonCatalog(PersonCatalog object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Canonical Sluggable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Canonical Sluggable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseCanonicalSluggable(CanonicalSluggable object) {
 		return null;
 	}
 

@@ -21,6 +21,7 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.ArchivalStatus;
+import org.soluvas.commons.CanonicalSluggable;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Email;
@@ -58,6 +59,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getModificationTime <em>Modification Time</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getSlug <em>Slug</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getCanonicalSlug <em>Canonical Slug</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFirstName <em>First Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getLastName <em>Last Name</em>}</li>
@@ -255,6 +257,26 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected String slug = SLUG_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getCanonicalSlug() <em>Canonical Slug</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCanonicalSlug()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CANONICAL_SLUG_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCanonicalSlug() <em>Canonical Slug</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCanonicalSlug()
+	 * @generated
+	 * @ordered
+	 */
+	protected String canonicalSlug = CANONICAL_SLUG_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
@@ -2561,6 +2583,27 @@ public class PersonImpl extends EObjectImpl implements Person {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getCanonicalSlug() {
+		return canonicalSlug;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCanonicalSlug(String newCanonicalSlug) {
+		String oldCanonicalSlug = canonicalSlug;
+		canonicalSlug = newCanonicalSlug;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON__CANONICAL_SLUG, oldCanonicalSlug, canonicalSlug));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public String getEmail() {
@@ -2630,6 +2673,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return getDescription();
 			case CommonsPackage.PERSON__SLUG:
 				return getSlug();
+			case CommonsPackage.PERSON__CANONICAL_SLUG:
+				return getCanonicalSlug();
 			case CommonsPackage.PERSON__SCHEMA_VERSION:
 				return getSchemaVersion();
 			case CommonsPackage.PERSON__FIRST_NAME:
@@ -2767,6 +2812,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return;
 			case CommonsPackage.PERSON__SLUG:
 				setSlug((String)newValue);
+				return;
+			case CommonsPackage.PERSON__CANONICAL_SLUG:
+				setCanonicalSlug((String)newValue);
 				return;
 			case CommonsPackage.PERSON__FIRST_NAME:
 				setFirstName((String)newValue);
@@ -2958,6 +3006,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case CommonsPackage.PERSON__SLUG:
 				setSlug(SLUG_EDEFAULT);
 				return;
+			case CommonsPackage.PERSON__CANONICAL_SLUG:
+				setCanonicalSlug(CANONICAL_SLUG_EDEFAULT);
+				return;
 			case CommonsPackage.PERSON__FIRST_NAME:
 				setFirstName(FIRST_NAME_EDEFAULT);
 				return;
@@ -3137,6 +3188,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CommonsPackage.PERSON__SLUG:
 				return SLUG_EDEFAULT == null ? slug != null : !SLUG_EDEFAULT.equals(slug);
+			case CommonsPackage.PERSON__CANONICAL_SLUG:
+				return CANONICAL_SLUG_EDEFAULT == null ? canonicalSlug != null : !CANONICAL_SLUG_EDEFAULT.equals(canonicalSlug);
 			case CommonsPackage.PERSON__SCHEMA_VERSION:
 				return schemaVersion != SCHEMA_VERSION_EDEFAULT;
 			case CommonsPackage.PERSON__FIRST_NAME:
@@ -3303,6 +3356,12 @@ public class PersonImpl extends EObjectImpl implements Person {
 				default: return -1;
 			}
 		}
+		if (baseClass == CanonicalSluggable.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.PERSON__CANONICAL_SLUG: return CommonsPackage.CANONICAL_SLUGGABLE__CANONICAL_SLUG;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -3364,6 +3423,12 @@ public class PersonImpl extends EObjectImpl implements Person {
 				default: return -1;
 			}
 		}
+		if (baseClass == CanonicalSluggable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.CANONICAL_SLUGGABLE__CANONICAL_SLUG: return CommonsPackage.PERSON__CANONICAL_SLUG;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -3391,6 +3456,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 		result.append(description);
 		result.append(", slug: ");
 		result.append(slug);
+		result.append(", canonicalSlug: ");
+		result.append(canonicalSlug);
 		result.append(", schemaVersion: ");
 		result.append(schemaVersion);
 		result.append(", firstName: ");

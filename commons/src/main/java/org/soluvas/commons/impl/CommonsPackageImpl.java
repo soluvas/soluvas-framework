@@ -40,6 +40,7 @@ import org.soluvas.commons.AttributeNotification;
 import org.soluvas.commons.AttributeSet;
 import org.soluvas.commons.AttributeUnset;
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.CanonicalSluggable;
 import org.soluvas.commons.CategoryInfo;
 import org.soluvas.commons.CategoryLike;
 import org.soluvas.commons.Colorable;
@@ -471,6 +472,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass personCatalogEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass canonicalSluggableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2811,6 +2819,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCanonicalSluggable() {
+		return canonicalSluggableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCanonicalSluggable_CanonicalSlug() {
+		return (EAttribute)canonicalSluggableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -3456,6 +3482,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		personCatalogEClass = createEClass(PERSON_CATALOG);
 		createEReference(personCatalogEClass, PERSON_CATALOG__PEOPLE);
 
+		canonicalSluggableEClass = createEClass(CANONICAL_SLUGGABLE);
+		createEAttribute(canonicalSluggableEClass, CANONICAL_SLUGGABLE__CANONICAL_SLUG);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -3682,6 +3711,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		g1 = createEGenericType(this.getDescribable());
 		personEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getSluggable());
+		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getCanonicalSluggable());
 		personEClass.getEGenericSuperTypes().add(g1);
 		postalAddressEClass.getESuperTypes().add(this.getNameContainer());
 		postalAddressEClass.getESuperTypes().add(this.getIdentifiable());
@@ -4032,6 +4063,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(personCatalogEClass, PersonCatalog.class, "PersonCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPersonCatalog_People(), this.getPerson(), null, "people", null, 0, -1, PersonCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(canonicalSluggableEClass, CanonicalSluggable.class, "CanonicalSluggable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCanonicalSluggable_CanonicalSlug(), theEcorePackage.getEString(), "canonicalSlug", null, 0, 1, CanonicalSluggable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -5148,6 +5182,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Alia magazine."
+		   });		
+		addAnnotation
+		  (canonicalSluggableEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "TODO: Consider merging this with {@link Sluggable}?"
+		   });		
+		addAnnotation
+		  (getCanonicalSluggable_CanonicalSlug(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Canonical slug is lowercase, and removes every character not in a-z, 0-9, and underscore.\n\n<p>It is useful for e.g. making both http://www.satukancinta.com/arum.puspita and http://www.satukancinta.com/arumpuspita or even http://www.satukancinta.com/member/arum.pus.pi.ta usable.\n\n<p>From the technical point-of-view (easy matching/lookup), the canonical slug/identifier for arum.puspita is arumpuspita, the canonicalSlug should be indexed in database for fast matching. From the user or SEO point-of-view however, the \"canonical\" one is arum.puspita, but it is not what is meant here.\n\n<p>Use {@link SlugUtils#canonicalize()} to generate canonical slug from user-provided slug."
 		   });
 	}
 	

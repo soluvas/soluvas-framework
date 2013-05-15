@@ -277,6 +277,10 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createPersonCatalogAdapter();
 			}
 			@Override
+			public Adapter caseCanonicalSluggable(CanonicalSluggable object) {
+				return createCanonicalSluggableAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -1021,6 +1025,20 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPersonCatalogAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.CanonicalSluggable <em>Canonical Sluggable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.CanonicalSluggable
+	 * @generated
+	 */
+	public Adapter createCanonicalSluggableAdapter() {
 		return null;
 	}
 

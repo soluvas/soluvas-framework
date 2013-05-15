@@ -1082,6 +1082,7 @@
     <eGenericSuperTypes eClassifier="#//SchemaVersionable"/>
     <eGenericSuperTypes eClassifier="#//Describable"/>
     <eGenericSuperTypes eClassifier="#//Sluggable"/>
+    <eGenericSuperTypes eClassifier="#//CanonicalSluggable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PhoneNumber">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="phoneNumber" lowerBound="1"
@@ -1237,5 +1238,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="PersonCatalog">
     <eStructuralFeatures xsi:type="ecore:EReference" name="people" upperBound="-1"
         eType="#//Person" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CanonicalSluggable" abstract="true"
+      interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="TODO: Consider merging this with {@link Sluggable}?"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canonicalSlug" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Canonical slug is lowercase, and removes every character not in a-z, 0-9, and underscore.&#xA;&#xA;&lt;p>It is useful for e.g. making both http://www.satukancinta.com/arum.puspita and http://www.satukancinta.com/arumpuspita or even http://www.satukancinta.com/member/arum.pus.pi.ta usable.&#xA;&#xA;&lt;p>From the technical point-of-view (easy matching/lookup), the canonical slug/identifier for arum.puspita is arumpuspita, the canonicalSlug should be indexed in database for fast matching. From the user or SEO point-of-view however, the &quot;canonical&quot; one is arum.puspita, but it is not what is meant here.&#xA;&#xA;&lt;p>Use {@link SlugUtils#canonicalize()} to generate canonical slug from user-provided slug."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
 </ecore:EPackage>

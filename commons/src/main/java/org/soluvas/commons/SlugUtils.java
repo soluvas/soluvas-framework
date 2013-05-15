@@ -1,7 +1,7 @@
 package org.soluvas.commons;
 
 import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
@@ -166,17 +166,18 @@ public class SlugUtils {
 	/**
 	 * Makes it lowercase, and removes every character not in a-z, 0-9, and underscore.
 	 * 
-	 * It is useful for e.g. making both http://www.satukancinta.com/member/arum.puspita and http://www.satukancinta.com/member/arumpuspita
-	 * or even http://www.satukancinta.com/member/arum.pus.pi.ta usable.
-	 * From the technical point-of-view (easy matching/lookup), the canonical slug/identifier for <tt>arum.puspita</tt> is <tt>arumpuspita</tt>.
+	 * <p>It is useful for e.g. making both {@code http://www.satukancinta.com/arum.puspita} and {@code http://www.satukancinta.com/arumpuspita}
+	 * or even {@code http://www.satukancinta.com/member/arum.pus.pi.ta} usable.
+	 * <p>From the technical point-of-view (easy matching/lookup), the canonical slug/identifier for <tt>arum.puspita</tt> is <tt>arumpuspita</tt>,
+	 * the canonicalSlug should be indexed in database for fast matching.
 	 * From the user or SEO point-of-view however, the "canonical" one is <tt>arum.puspita</tt>, but it is not what is meant here.
 	 * 
 	 * @param slug
-	 * @return
+	 * @return Canonicalized slug, or {@code null} if input is null.
 	 */
-	public static String canonicalize(String slug) {
-		Preconditions.checkNotNull(slug, "slug must not be null");
-		return slug.toLowerCase().replaceAll("[^a-z0-9_]", "");
+	@Nullable
+	public static String canonicalize(@Nullable String slug) {
+		return slug != null ? slug.toLowerCase().replaceAll("[^a-z0-9_]", "") : null;
 	}
 
 }

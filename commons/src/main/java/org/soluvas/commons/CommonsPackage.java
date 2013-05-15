@@ -2221,13 +2221,22 @@ public interface CommonsPackage extends EPackage {
 	int PERSON__SLUG = NAME_CONTAINER_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Canonical Slug</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__CANONICAL_SLUG = NAME_CONTAINER_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Schema Version</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__SCHEMA_VERSION = NAME_CONTAINER_FEATURE_COUNT + 6;
+	int PERSON__SCHEMA_VERSION = NAME_CONTAINER_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>First Name</b></em>' attribute.
@@ -2236,7 +2245,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__FIRST_NAME = NAME_CONTAINER_FEATURE_COUNT + 7;
+	int PERSON__FIRST_NAME = NAME_CONTAINER_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Last Name</b></em>' attribute.
@@ -2245,7 +2254,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__LAST_NAME = NAME_CONTAINER_FEATURE_COUNT + 8;
+	int PERSON__LAST_NAME = NAME_CONTAINER_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Password</b></em>' attribute.
@@ -2254,7 +2263,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__PASSWORD = NAME_CONTAINER_FEATURE_COUNT + 9;
+	int PERSON__PASSWORD = NAME_CONTAINER_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Phone Numbers</b></em>' containment reference list.
@@ -2263,7 +2272,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__PHONE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 10;
+	int PERSON__PHONE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Emails</b></em>' containment reference list.
@@ -2272,7 +2281,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__EMAILS = NAME_CONTAINER_FEATURE_COUNT + 11;
+	int PERSON__EMAILS = NAME_CONTAINER_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Mobile Numbers</b></em>' containment reference list.
@@ -2281,7 +2290,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__MOBILE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 12;
+	int PERSON__MOBILE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Addresses</b></em>' containment reference list.
@@ -2290,7 +2299,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__ADDRESSES = NAME_CONTAINER_FEATURE_COUNT + 13;
+	int PERSON__ADDRESSES = NAME_CONTAINER_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Account Status</b></em>' attribute.
@@ -2299,7 +2308,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__ACCOUNT_STATUS = NAME_CONTAINER_FEATURE_COUNT + 14;
+	int PERSON__ACCOUNT_STATUS = NAME_CONTAINER_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Birth Year</b></em>' attribute.
@@ -2308,7 +2317,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__BIRTH_YEAR = NAME_CONTAINER_FEATURE_COUNT + 15;
+	int PERSON__BIRTH_YEAR = NAME_CONTAINER_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Birth Month</b></em>' attribute.
@@ -2317,7 +2326,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__BIRTH_MONTH = NAME_CONTAINER_FEATURE_COUNT + 16;
+	int PERSON__BIRTH_MONTH = NAME_CONTAINER_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Birth Day</b></em>' attribute.
@@ -2326,7 +2335,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__BIRTH_DAY = NAME_CONTAINER_FEATURE_COUNT + 17;
+	int PERSON__BIRTH_DAY = NAME_CONTAINER_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
@@ -2335,7 +2344,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__BIRTH_DATE = NAME_CONTAINER_FEATURE_COUNT + 18;
+	int PERSON__BIRTH_DATE = NAME_CONTAINER_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Gender</b></em>' attribute.
@@ -2344,7 +2353,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__GENDER = NAME_CONTAINER_FEATURE_COUNT + 19;
+	int PERSON__GENDER = NAME_CONTAINER_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -2353,7 +2362,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__LANGUAGE = NAME_CONTAINER_FEATURE_COUNT + 20;
+	int PERSON__LANGUAGE = NAME_CONTAINER_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Currency Code</b></em>' attribute.
@@ -2362,7 +2371,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__CURRENCY_CODE = NAME_CONTAINER_FEATURE_COUNT + 21;
+	int PERSON__CURRENCY_CODE = NAME_CONTAINER_FEATURE_COUNT + 22;
 
 	/**
 	 * The feature id for the '<em><b>Currency</b></em>' attribute.
@@ -2371,7 +2380,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__CURRENCY = NAME_CONTAINER_FEATURE_COUNT + 22;
+	int PERSON__CURRENCY = NAME_CONTAINER_FEATURE_COUNT + 23;
 
 	/**
 	 * The feature id for the '<em><b>Facebook Id</b></em>' attribute.
@@ -2380,7 +2389,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__FACEBOOK_ID = NAME_CONTAINER_FEATURE_COUNT + 23;
+	int PERSON__FACEBOOK_ID = NAME_CONTAINER_FEATURE_COUNT + 24;
 
 	/**
 	 * The feature id for the '<em><b>Facebook Username</b></em>' attribute.
@@ -2389,7 +2398,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__FACEBOOK_USERNAME = NAME_CONTAINER_FEATURE_COUNT + 24;
+	int PERSON__FACEBOOK_USERNAME = NAME_CONTAINER_FEATURE_COUNT + 25;
 
 	/**
 	 * The feature id for the '<em><b>Facebook Access Token</b></em>' attribute.
@@ -2398,7 +2407,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__FACEBOOK_ACCESS_TOKEN = NAME_CONTAINER_FEATURE_COUNT + 25;
+	int PERSON__FACEBOOK_ACCESS_TOKEN = NAME_CONTAINER_FEATURE_COUNT + 26;
 
 	/**
 	 * The feature id for the '<em><b>Twitter Id</b></em>' attribute.
@@ -2407,7 +2416,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__TWITTER_ID = NAME_CONTAINER_FEATURE_COUNT + 26;
+	int PERSON__TWITTER_ID = NAME_CONTAINER_FEATURE_COUNT + 27;
 
 	/**
 	 * The feature id for the '<em><b>Twitter Screen Name</b></em>' attribute.
@@ -2416,7 +2425,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__TWITTER_SCREEN_NAME = NAME_CONTAINER_FEATURE_COUNT + 27;
+	int PERSON__TWITTER_SCREEN_NAME = NAME_CONTAINER_FEATURE_COUNT + 28;
 
 	/**
 	 * The feature id for the '<em><b>Twitter Access Token</b></em>' attribute.
@@ -2425,7 +2434,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__TWITTER_ACCESS_TOKEN = NAME_CONTAINER_FEATURE_COUNT + 28;
+	int PERSON__TWITTER_ACCESS_TOKEN = NAME_CONTAINER_FEATURE_COUNT + 29;
 
 	/**
 	 * The feature id for the '<em><b>Twitter Access Token Secret</b></em>' attribute.
@@ -2434,7 +2443,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__TWITTER_ACCESS_TOKEN_SECRET = NAME_CONTAINER_FEATURE_COUNT + 29;
+	int PERSON__TWITTER_ACCESS_TOKEN_SECRET = NAME_CONTAINER_FEATURE_COUNT + 30;
 
 	/**
 	 * The feature id for the '<em><b>Google Plus Id</b></em>' attribute.
@@ -2443,7 +2452,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__GOOGLE_PLUS_ID = NAME_CONTAINER_FEATURE_COUNT + 30;
+	int PERSON__GOOGLE_PLUS_ID = NAME_CONTAINER_FEATURE_COUNT + 31;
 
 	/**
 	 * The feature id for the '<em><b>Google Username</b></em>' attribute.
@@ -2452,7 +2461,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__GOOGLE_USERNAME = NAME_CONTAINER_FEATURE_COUNT + 31;
+	int PERSON__GOOGLE_USERNAME = NAME_CONTAINER_FEATURE_COUNT + 32;
 
 	/**
 	 * The feature id for the '<em><b>Virtual Mail</b></em>' attribute.
@@ -2461,7 +2470,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__VIRTUAL_MAIL = NAME_CONTAINER_FEATURE_COUNT + 32;
+	int PERSON__VIRTUAL_MAIL = NAME_CONTAINER_FEATURE_COUNT + 33;
 
 	/**
 	 * The feature id for the '<em><b>Nickname</b></em>' attribute.
@@ -2470,7 +2479,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__NICKNAME = NAME_CONTAINER_FEATURE_COUNT + 33;
+	int PERSON__NICKNAME = NAME_CONTAINER_FEATURE_COUNT + 34;
 
 	/**
 	 * The feature id for the '<em><b>Customer Role</b></em>' attribute.
@@ -2479,7 +2488,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__CUSTOMER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 34;
+	int PERSON__CUSTOMER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 35;
 
 	/**
 	 * The feature id for the '<em><b>Member Role</b></em>' attribute.
@@ -2488,7 +2497,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__MEMBER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 35;
+	int PERSON__MEMBER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 36;
 
 	/**
 	 * The feature id for the '<em><b>Manager Role</b></em>' attribute.
@@ -2497,7 +2506,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__MANAGER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 36;
+	int PERSON__MANAGER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 37;
 
 	/**
 	 * The feature id for the '<em><b>Time Zone Id</b></em>' attribute.
@@ -2506,7 +2515,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__TIME_ZONE_ID = NAME_CONTAINER_FEATURE_COUNT + 37;
+	int PERSON__TIME_ZONE_ID = NAME_CONTAINER_FEATURE_COUNT + 38;
 
 	/**
 	 * The feature id for the '<em><b>Time Zone</b></em>' attribute.
@@ -2515,7 +2524,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__TIME_ZONE = NAME_CONTAINER_FEATURE_COUNT + 38;
+	int PERSON__TIME_ZONE = NAME_CONTAINER_FEATURE_COUNT + 39;
 
 	/**
 	 * The feature id for the '<em><b>Referrer Id</b></em>' attribute.
@@ -2524,7 +2533,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__REFERRER_ID = NAME_CONTAINER_FEATURE_COUNT + 39;
+	int PERSON__REFERRER_ID = NAME_CONTAINER_FEATURE_COUNT + 40;
 
 	/**
 	 * The feature id for the '<em><b>Referrer Type</b></em>' attribute.
@@ -2533,7 +2542,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__REFERRER_TYPE = NAME_CONTAINER_FEATURE_COUNT + 40;
+	int PERSON__REFERRER_TYPE = NAME_CONTAINER_FEATURE_COUNT + 41;
 
 	/**
 	 * The feature id for the '<em><b>Signup Source</b></em>' attribute.
@@ -2542,7 +2551,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__SIGNUP_SOURCE = NAME_CONTAINER_FEATURE_COUNT + 41;
+	int PERSON__SIGNUP_SOURCE = NAME_CONTAINER_FEATURE_COUNT + 42;
 
 	/**
 	 * The feature id for the '<em><b>Signup Source Type</b></em>' attribute.
@@ -2551,7 +2560,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__SIGNUP_SOURCE_TYPE = NAME_CONTAINER_FEATURE_COUNT + 42;
+	int PERSON__SIGNUP_SOURCE_TYPE = NAME_CONTAINER_FEATURE_COUNT + 43;
 
 	/**
 	 * The feature id for the '<em><b>Ip Address</b></em>' attribute.
@@ -2560,7 +2569,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__IP_ADDRESS = NAME_CONTAINER_FEATURE_COUNT + 43;
+	int PERSON__IP_ADDRESS = NAME_CONTAINER_FEATURE_COUNT + 44;
 
 	/**
 	 * The feature id for the '<em><b>Last Ip Address</b></em>' attribute.
@@ -2569,7 +2578,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__LAST_IP_ADDRESS = NAME_CONTAINER_FEATURE_COUNT + 44;
+	int PERSON__LAST_IP_ADDRESS = NAME_CONTAINER_FEATURE_COUNT + 45;
 
 	/**
 	 * The feature id for the '<em><b>Last Login Time</b></em>' attribute.
@@ -2578,7 +2587,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__LAST_LOGIN_TIME = NAME_CONTAINER_FEATURE_COUNT + 45;
+	int PERSON__LAST_LOGIN_TIME = NAME_CONTAINER_FEATURE_COUNT + 46;
 
 	/**
 	 * The feature id for the '<em><b>Validation Time</b></em>' attribute.
@@ -2587,7 +2596,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__VALIDATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 46;
+	int PERSON__VALIDATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 47;
 
 	/**
 	 * The feature id for the '<em><b>Activation Time</b></em>' attribute.
@@ -2596,7 +2605,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__ACTIVATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 47;
+	int PERSON__ACTIVATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 48;
 
 	/**
 	 * The feature id for the '<em><b>Verification Time</b></em>' attribute.
@@ -2605,7 +2614,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__VERIFICATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 48;
+	int PERSON__VERIFICATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 49;
 
 	/**
 	 * The feature id for the '<em><b>Newsletter Subscription Enabled</b></em>' attribute.
@@ -2614,7 +2623,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__NEWSLETTER_SUBSCRIPTION_ENABLED = NAME_CONTAINER_FEATURE_COUNT + 49;
+	int PERSON__NEWSLETTER_SUBSCRIPTION_ENABLED = NAME_CONTAINER_FEATURE_COUNT + 50;
 
 	/**
 	 * The feature id for the '<em><b>Newsletter Subscription Time</b></em>' attribute.
@@ -2623,7 +2632,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__NEWSLETTER_SUBSCRIPTION_TIME = NAME_CONTAINER_FEATURE_COUNT + 50;
+	int PERSON__NEWSLETTER_SUBSCRIPTION_TIME = NAME_CONTAINER_FEATURE_COUNT + 51;
 
 	/**
 	 * The feature id for the '<em><b>Social Sharing Enabled</b></em>' attribute.
@@ -2632,7 +2641,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__SOCIAL_SHARING_ENABLED = NAME_CONTAINER_FEATURE_COUNT + 51;
+	int PERSON__SOCIAL_SHARING_ENABLED = NAME_CONTAINER_FEATURE_COUNT + 52;
 
 	/**
 	 * The feature id for the '<em><b>Publication Status</b></em>' attribute.
@@ -2641,7 +2650,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__PUBLICATION_STATUS = NAME_CONTAINER_FEATURE_COUNT + 52;
+	int PERSON__PUBLICATION_STATUS = NAME_CONTAINER_FEATURE_COUNT + 53;
 
 	/**
 	 * The feature id for the '<em><b>Archival Status</b></em>' attribute.
@@ -2650,7 +2659,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__ARCHIVAL_STATUS = NAME_CONTAINER_FEATURE_COUNT + 53;
+	int PERSON__ARCHIVAL_STATUS = NAME_CONTAINER_FEATURE_COUNT + 54;
 
 	/**
 	 * The feature id for the '<em><b>Folder</b></em>' attribute.
@@ -2659,7 +2668,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__FOLDER = NAME_CONTAINER_FEATURE_COUNT + 54;
+	int PERSON__FOLDER = NAME_CONTAINER_FEATURE_COUNT + 55;
 
 	/**
 	 * The feature id for the '<em><b>Religion</b></em>' attribute.
@@ -2668,7 +2677,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__RELIGION = NAME_CONTAINER_FEATURE_COUNT + 55;
+	int PERSON__RELIGION = NAME_CONTAINER_FEATURE_COUNT + 56;
 
 	/**
 	 * The feature id for the '<em><b>Password Reset Code</b></em>' attribute.
@@ -2677,7 +2686,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__PASSWORD_RESET_CODE = NAME_CONTAINER_FEATURE_COUNT + 56;
+	int PERSON__PASSWORD_RESET_CODE = NAME_CONTAINER_FEATURE_COUNT + 57;
 
 	/**
 	 * The feature id for the '<em><b>Password Reset Expiry Time</b></em>' attribute.
@@ -2686,7 +2695,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__PASSWORD_RESET_EXPIRY_TIME = NAME_CONTAINER_FEATURE_COUNT + 57;
+	int PERSON__PASSWORD_RESET_EXPIRY_TIME = NAME_CONTAINER_FEATURE_COUNT + 58;
 
 	/**
 	 * The number of structural features of the '<em>Person</em>' class.
@@ -2695,7 +2704,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 58;
+	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 59;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PhoneNumberImpl <em>Phone Number</em>}' class.
@@ -3062,6 +3071,34 @@ public interface CommonsPackage extends EPackage {
 	int PERSON_CATALOG_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.CanonicalSluggable <em>Canonical Sluggable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.CanonicalSluggable
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCanonicalSluggable()
+	 * @generated
+	 */
+	int CANONICAL_SLUGGABLE = 52;
+
+	/**
+	 * The feature id for the '<em><b>Canonical Slug</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CANONICAL_SLUGGABLE__CANONICAL_SLUG = 0;
+
+	/**
+	 * The number of structural features of the '<em>Canonical Sluggable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CANONICAL_SLUGGABLE_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3069,7 +3106,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 52;
+	int RESOURCE_TYPE = 53;
 
 
 	/**
@@ -3080,7 +3117,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 53;
+	int GENDER = 54;
 
 
 	/**
@@ -3091,7 +3128,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 54;
+	int ECLASS_STATUS = 55;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -3101,7 +3138,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 55;
+	int JAVA_CLASS_STATUS = 56;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ProgressStatus <em>Progress Status</em>}' enum.
@@ -3111,7 +3148,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getProgressStatus()
 	 * @generated
 	 */
-	int PROGRESS_STATUS = 56;
+	int PROGRESS_STATUS = 57;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.AccountStatus <em>Account Status</em>}' enum.
@@ -3121,7 +3158,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAccountStatus()
 	 * @generated
 	 */
-	int ACCOUNT_STATUS = 57;
+	int ACCOUNT_STATUS = 58;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.PublicationStatus <em>Publication Status</em>}' enum.
@@ -3131,7 +3168,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPublicationStatus()
 	 * @generated
 	 */
-	int PUBLICATION_STATUS = 58;
+	int PUBLICATION_STATUS = 59;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ArchivalStatus <em>Archival Status</em>}' enum.
@@ -3141,7 +3178,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getArchivalStatus()
 	 * @generated
 	 */
-	int ARCHIVAL_STATUS = 59;
+	int ARCHIVAL_STATUS = 60;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.TranslationState <em>Translation State</em>}' enum.
@@ -3151,7 +3188,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationState()
 	 * @generated
 	 */
-	int TRANSLATION_STATE = 60;
+	int TRANSLATION_STATE = 61;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ExpansionState <em>Expansion State</em>}' enum.
@@ -3161,7 +3198,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getExpansionState()
 	 * @generated
 	 */
-	int EXPANSION_STATE = 61;
+	int EXPANSION_STATE = 62;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.SignupSourceType <em>Signup Source Type</em>}' enum.
@@ -3171,7 +3208,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSignupSourceType()
 	 * @generated
 	 */
-	int SIGNUP_SOURCE_TYPE = 62;
+	int SIGNUP_SOURCE_TYPE = 63;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -3181,7 +3218,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 63;
+	int DATE_TIME = 64;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -3191,7 +3228,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 64;
+	int CURRENCY_UNIT = 65;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -3201,7 +3238,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 66;
+	int UNIT = 67;
 
 
 	/**
@@ -3212,7 +3249,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 67;
+	int LIST = 68;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -3222,7 +3259,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 68;
+	int MAP = 69;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -3232,7 +3269,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 69;
+	int SET = 70;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -3242,7 +3279,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 70;
+	int COLLECTION = 71;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -3252,7 +3289,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 71;
+	int MULTIMAP = 72;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -3262,7 +3299,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 72;
+	int NAVIGABLE_MAP = 73;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -3272,7 +3309,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 73;
+	int QUEUE = 74;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -3282,7 +3319,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 74;
+	int MULTISET = 75;
 
 
 	/**
@@ -3293,7 +3330,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 75;
+	int SERIALIZABLE = 76;
 
 
 	/**
@@ -3304,7 +3341,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 76;
+	int BUNDLE = 77;
 
 
 	/**
@@ -3315,7 +3352,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
 	 * @generated
 	 */
-	int BIG_MONEY_PROVIDER = 77;
+	int BIG_MONEY_PROVIDER = 78;
 
 	/**
 	 * The meta object id for the '<em>Quantity</em>' data type.
@@ -3325,7 +3362,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQuantity()
 	 * @generated
 	 */
-	int QUANTITY = 65;
+	int QUANTITY = 66;
 
 	/**
 	 * The meta object id for the '<em>Measurable</em>' data type.
@@ -3335,7 +3372,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMeasurable()
 	 * @generated
 	 */
-	int MEASURABLE = 78;
+	int MEASURABLE = 79;
 
 
 	/**
@@ -3346,7 +3383,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTimeZone()
 	 * @generated
 	 */
-	int DATE_TIME_ZONE = 79;
+	int DATE_TIME_ZONE = 80;
 
 
 	/**
@@ -3357,7 +3394,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 80;
+	int LOCALE = 81;
 
 
 	/**
@@ -3368,7 +3405,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFile()
 	 * @generated
 	 */
-	int FILE = 81;
+	int FILE = 82;
 
 
 	/**
@@ -3379,7 +3416,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListenableFuture()
 	 * @generated
 	 */
-	int LISTENABLE_FUTURE = 82;
+	int LISTENABLE_FUTURE = 83;
 
 
 	/**
@@ -3390,7 +3427,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListeningExecutorService()
 	 * @generated
 	 */
-	int LISTENING_EXECUTOR_SERVICE = 83;
+	int LISTENING_EXECUTOR_SERVICE = 84;
 
 
 	/**
@@ -3401,7 +3438,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getClassLoader()
 	 * @generated
 	 */
-	int CLASS_LOADER = 84;
+	int CLASS_LOADER = 85;
 
 
 	/**
@@ -3412,7 +3449,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getURL()
 	 * @generated
 	 */
-	int URL = 85;
+	int URL = 86;
 
 
 	/**
@@ -3423,7 +3460,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEventBus()
 	 * @generated
 	 */
-	int EVENT_BUS = 86;
+	int EVENT_BUS = 87;
 
 
 	/**
@@ -3434,7 +3471,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocalDate()
 	 * @generated
 	 */
-	int LOCAL_DATE = 87;
+	int LOCAL_DATE = 88;
 
 
 	/**
@@ -5712,6 +5749,27 @@ public interface CommonsPackage extends EPackage {
 	EReference getPersonCatalog_People();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.CanonicalSluggable <em>Canonical Sluggable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Canonical Sluggable</em>'.
+	 * @see org.soluvas.commons.CanonicalSluggable
+	 * @generated
+	 */
+	EClass getCanonicalSluggable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CanonicalSluggable#getCanonicalSlug <em>Canonical Slug</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Canonical Slug</em>'.
+	 * @see org.soluvas.commons.CanonicalSluggable#getCanonicalSlug()
+	 * @see #getCanonicalSluggable()
+	 * @generated
+	 */
+	EAttribute getCanonicalSluggable_CanonicalSlug();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7909,6 +7967,24 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PERSON_CATALOG__PEOPLE = eINSTANCE.getPersonCatalog_People();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.CanonicalSluggable <em>Canonical Sluggable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.CanonicalSluggable
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCanonicalSluggable()
+		 * @generated
+		 */
+		EClass CANONICAL_SLUGGABLE = eINSTANCE.getCanonicalSluggable();
+
+		/**
+		 * The meta object literal for the '<em><b>Canonical Slug</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CANONICAL_SLUGGABLE__CANONICAL_SLUG = eINSTANCE.getCanonicalSluggable_CanonicalSlug();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

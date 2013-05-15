@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
+import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
@@ -39,12 +40,14 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.WriteResult;
 
 /**
- * {@link PagingAndSortingRepository} implemented using MongoDB, without {@link SchemaVersionable} support.
+ * {@link PagingAndSortingRepository} implemented using MongoDB, with {@link SchemaVersionable} support.
  * @author ceefour
  */
-public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortingRepositoryBase<T, String>
+public class SchemaMongoRepositoryBase<T extends Identifiable> extends PagingAndSortingRepositoryBase<T, String>
 	implements MongoRepository<T> {
 	
+	public static final String SCHEMA_VERSION_FIELD = "schemaVersion";
+
 	public class DBObjectToEntity implements Function<DBObject, T> {
 		@Override
 		public T apply(DBObject input) {
@@ -80,22 +83,29 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * TODO: Should use user's time zone (i.e. audit system).  
 	 */
 	protected static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Jakarta");
-	private MongoClient mongoClient;
+	protected MongoClient mongoClient;
 	protected final String collName;
-	private final Class<T> entityClass;
+	protected final Class<T> entityClass;
 	protected final String mongoUri;
+	protected long currentSchemaVersion;
 	
 	/**
-	 * 
+	 * @param entityClass
+	 * @param currentSchemaVersion e.g. {@link PersonImpl#SCHEMA_VERSION_EDEFAULT}.
+	 * @param mongoUri
+	 * @param collName
+	 * @param indexedFields
 	 */
-	public MongoRepositoryBase(Class<T> entityClass, String mongoUri, String collName, String[] indexedFields) {
+	public SchemaMongoRepositoryBase(Class<T> entityClass, long currentSchemaVersion, 
+			String mongoUri, String collName, String[] indexedFields) {
 		super();
 		this.entityClass = entityClass;
+		this.currentSchemaVersion = currentSchemaVersion;
 		this.mongoUri = mongoUri;
 		this.collName = collName;
 		// WARNING: mongoUri may contain password!
 		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
-		this.log = LoggerFactory.getLogger(getClass() + "/" + realMongoUri.getDatabase() + "/" + collName);
+		this.log = LoggerFactory.getLogger(getClass() + "/" + realMongoUri.getDatabase() + "/" + collName + "/" + currentSchemaVersion);
 		log.info("Connecting to MongoDB database {}/{} as {} for {}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), collName);
 		try {
@@ -128,6 +138,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	@Override
 	public final Page<T> findAll(Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
+		query.put(SCHEMA_VERSION_FIELD, currentSchemaVersion);
 		final long total = coll.count(query);
 		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
 		final DBCursor cursor = coll.find(query)
@@ -144,7 +155,9 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 */
 	@Override
 	public final long count() {
-		return coll.count();
+		final BasicDBObject query = new BasicDBObject();
+		query.put(SCHEMA_VERSION_FIELD, currentSchemaVersion);
+		return coll.count(query);
 	}
 	
 	/* (non-Javadoc)
@@ -252,6 +265,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	@Override
 	public final Page<String> findAllIds(Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
+		query.put(SCHEMA_VERSION_FIELD, currentSchemaVersion);
 		final long total = coll.count(query);
 		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "_id", 1);
 		final DBCursor cursor = coll.find(query)
@@ -276,7 +290,11 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	}
 	
 	@Override
-	public Page<T> findAllByQuery(DBObject query, Pageable pageable) {
+	public Page<T> findAllByQuery(DBObject upQuery, Pageable pageable) {
+		final BasicDBObject query = new BasicDBObject();
+		query.putAll(upQuery);
+		query.put(SCHEMA_VERSION_FIELD, currentSchemaVersion);
+		
 		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
 		log.debug("findAllByQuery {} {} sort {} skip {} limit {}",
 				collName, query, sortQuery, pageable.getOffset(), pageable.getPageSize());
@@ -291,16 +309,22 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				collName, query, entities.size(), total, sortQuery, pageable.getOffset(), pageable.getPageSize());
 		return new PageImpl<>(entities, pageable, total);		
 	}
+	
+	protected DBObject findDBObjectByQuery(DBObject upQuery, DBObject fields) {
+		final BasicDBObject query = new BasicDBObject();
+		query.putAll(upQuery);
+		query.put(SCHEMA_VERSION_FIELD, currentSchemaVersion);
+		
+		log.trace("findOneByQuery {} {}", collName, query, fields);
+		final DBObject dbo = coll.findOne(query, fields);
+		log.debug("findAllByQuery {} {} {} returned {}",
+				collName, query, fields, dbo.get("_id"));
+		return dbo;
+	}
 
 	@Override
 	public T findOneByQuery(DBObject upQuery) {
-		final BasicDBObject query = new BasicDBObject();
-		query.putAll(upQuery);
-		
-		log.trace("findOneByQuery {}", collName, query);
-		final DBObject dbo = coll.findOne(query);
-		log.debug("findAllByQuery {} {} returned {}",
-				collName, query, dbo.get("_id"));
+		final DBObject dbo = findDBObjectByQuery(upQuery, null);
 		final T entity = new DBObjectToEntity().apply(dbo);
 		return entity;		
 	}

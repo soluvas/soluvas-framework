@@ -3,7 +3,6 @@ package org.soluvas.data;
 import java.io.Serializable;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.soluvas.data.push.CachingEntityLookup;
 import org.soluvas.data.push.RepositoryEntityLookup;
@@ -14,7 +13,6 @@ import org.soluvas.data.push.RepositoryEntityLookup;
  * @see RepositoryEntityLookup
  * @author ceefour
  */
-@ParametersAreNonnullByDefault
 public interface EntityLookup<T, ID extends Serializable> {
 
 	/**
