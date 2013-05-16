@@ -3717,6 +3717,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		postalAddressEClass.getESuperTypes().add(this.getNameContainer());
 		postalAddressEClass.getESuperTypes().add(this.getIdentifiable());
 		postalAddressEClass.getESuperTypes().add(this.getSchemaVersionable());
+		canonicalSluggableEClass.getESuperTypes().add(this.getSluggable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

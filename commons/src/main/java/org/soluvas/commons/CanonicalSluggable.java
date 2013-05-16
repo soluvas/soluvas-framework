@@ -21,10 +21,9 @@ package org.soluvas.commons;
  *
  * @see org.soluvas.commons.CommonsPackage#getCanonicalSluggable()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface CanonicalSluggable extends SerializableEObject {
+public interface CanonicalSluggable extends Sluggable {
 	/**
 	 * Returns the value of the '<em><b>Canonical Slug</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -3081,13 +3081,22 @@ public interface CommonsPackage extends EPackage {
 	int CANONICAL_SLUGGABLE = 52;
 
 	/**
+	 * The feature id for the '<em><b>Slug</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CANONICAL_SLUGGABLE__SLUG = SLUGGABLE__SLUG;
+
+	/**
 	 * The feature id for the '<em><b>Canonical Slug</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CANONICAL_SLUGGABLE__CANONICAL_SLUG = 0;
+	int CANONICAL_SLUGGABLE__CANONICAL_SLUG = SLUGGABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Canonical Sluggable</em>' class.
@@ -3096,7 +3105,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CANONICAL_SLUGGABLE_FEATURE_COUNT = 1;
+	int CANONICAL_SLUGGABLE_FEATURE_COUNT = SLUGGABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

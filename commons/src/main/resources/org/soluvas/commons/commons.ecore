@@ -1240,7 +1240,7 @@
         eType="#//Person" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CanonicalSluggable" abstract="true"
-      interface="true">
+      interface="true" eSuperTypes="#//Sluggable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="TODO: Consider merging this with {@link Sluggable}?"/>
     </eAnnotations>
