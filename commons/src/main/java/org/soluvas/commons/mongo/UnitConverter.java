@@ -1,8 +1,6 @@
-package org.soluvas.mongo;
+package org.soluvas.commons.mongo;
 
-import java.util.Date;
-
-import org.joda.time.DateTime;
+import javax.measure.unit.Unit;
 
 import com.google.code.morphia.converters.SimpleValueConverter;
 import com.google.code.morphia.converters.TypeConverter;
@@ -11,16 +9,13 @@ import com.google.code.morphia.mapping.MappingException;
 import com.mongodb.DBObject;
 
 /**
- * Converts {@link DateTime} to/from {@link DBObject}.
- * 
- * <p>the target representation uses {@link Date}.
- * 
- * @author ceefour
+ * Converts {@link Unit} to/from {@link DBObject}.
+ * @author atang
  */
-public class DateTimeConverter extends TypeConverter implements SimpleValueConverter {
+public class UnitConverter extends TypeConverter implements SimpleValueConverter {
 
-	public DateTimeConverter() {
-		super(DateTime.class);
+	public UnitConverter() {
+		super(Unit.class);
 	}
 	
 	/* (non-Javadoc)
@@ -33,12 +28,12 @@ public class DateTimeConverter extends TypeConverter implements SimpleValueConve
 		if (fromDBObject == null)
 			return null;
 		else
-			return new DateTime(fromDBObject);
+			return Unit.valueOf((String) fromDBObject);
 	}
 
 	@Override
 	public Object encode(Object value, MappedField optionalExtraInfo) {
-		return value != null ? ((DateTime)value).toDate() : null;
+		return value != null ? value.toString() : null;
 	}
 
 }

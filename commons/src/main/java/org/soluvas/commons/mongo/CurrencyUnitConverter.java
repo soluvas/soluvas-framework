@@ -1,6 +1,6 @@
-package org.soluvas.mongo;
+package org.soluvas.commons.mongo;
 
-import javax.measure.unit.Unit;
+import org.joda.money.CurrencyUnit;
 
 import com.google.code.morphia.converters.SimpleValueConverter;
 import com.google.code.morphia.converters.TypeConverter;
@@ -9,13 +9,13 @@ import com.google.code.morphia.mapping.MappingException;
 import com.mongodb.DBObject;
 
 /**
- * Converts {@link Unit} to/from {@link DBObject}.
+ * Converts {@link CurrencyUnit} to/from {@link DBObject}.
  * @author atang
  */
-public class UnitConverter extends TypeConverter implements SimpleValueConverter {
+public class CurrencyUnitConverter extends TypeConverter implements SimpleValueConverter {
 
-	public UnitConverter() {
-		super(Unit.class);
+	public CurrencyUnitConverter() {
+		super(CurrencyUnit.class);
 	}
 	
 	/* (non-Javadoc)
@@ -28,7 +28,7 @@ public class UnitConverter extends TypeConverter implements SimpleValueConverter
 		if (fromDBObject == null)
 			return null;
 		else
-			return Unit.valueOf((String) fromDBObject);
+			return CurrencyUnit.of((String) fromDBObject);
 	}
 
 	@Override

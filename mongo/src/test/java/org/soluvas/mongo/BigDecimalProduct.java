@@ -3,6 +3,8 @@ package org.soluvas.mongo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import org.soluvas.commons.mongo.BigDecimalConverter;
+
 import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;

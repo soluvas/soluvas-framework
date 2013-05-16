@@ -1,6 +1,8 @@
-package org.soluvas.mongo;
+package org.soluvas.commons.mongo;
 
-import org.joda.money.CurrencyUnit;
+import java.util.Date;
+
+import org.joda.time.DateTime;
 
 import com.google.code.morphia.converters.SimpleValueConverter;
 import com.google.code.morphia.converters.TypeConverter;
@@ -9,13 +11,16 @@ import com.google.code.morphia.mapping.MappingException;
 import com.mongodb.DBObject;
 
 /**
- * Converts {@link CurrencyUnit} to/from {@link DBObject}.
- * @author atang
+ * Converts {@link DateTime} to/from {@link DBObject}.
+ * 
+ * <p>the target representation uses {@link Date}.
+ * 
+ * @author ceefour
  */
-public class CurrencyUnitConverter extends TypeConverter implements SimpleValueConverter {
+public class DateTimeConverter extends TypeConverter implements SimpleValueConverter {
 
-	public CurrencyUnitConverter() {
-		super(CurrencyUnit.class);
+	public DateTimeConverter() {
+		super(DateTime.class);
 	}
 	
 	/* (non-Javadoc)
@@ -28,12 +33,12 @@ public class CurrencyUnitConverter extends TypeConverter implements SimpleValueC
 		if (fromDBObject == null)
 			return null;
 		else
-			return CurrencyUnit.of((String) fromDBObject);
+			return new DateTime(fromDBObject);
 	}
 
 	@Override
 	public Object encode(Object value, MappedField optionalExtraInfo) {
-		return value != null ? value.toString() : null;
+		return value != null ? ((DateTime)value).toDate() : null;
 	}
 
 }

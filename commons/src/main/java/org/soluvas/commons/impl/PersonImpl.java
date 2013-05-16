@@ -1,5 +1,3 @@
-/**
- */
 package org.soluvas.commons.impl;
 
 import java.util.Collection;
@@ -40,7 +38,14 @@ import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.SignupSourceType;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.commons.Timestamped;
+import org.soluvas.commons.mongo.BigDecimalConverter;
+import org.soluvas.commons.mongo.CurrencyUnitConverter;
+import org.soluvas.commons.mongo.DateTimeConverter;
+import org.soluvas.commons.mongo.UnitConverter;
 
+import com.google.code.morphia.annotations.Converters;
+import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Id;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -117,6 +122,9 @@ import com.google.common.collect.Iterables;
  *
  * @generated
  */
+@Entity
+@Converters({BigDecimalConverter.class, DateTimeConverter.class,
+	CurrencyUnitConverter.class, UnitConverter.class})
 public class PersonImpl extends EObjectImpl implements Person {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -176,6 +184,7 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @generated
 	 * @ordered
 	 */
+	@Id
 	protected String id = ID_EDEFAULT;
 
 	/**
@@ -287,6 +296,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected static final long SCHEMA_VERSION_EDEFAULT = 2L;
+	
+	public static final long CURRENT_SCHEMA_VERSION = SCHEMA_VERSION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
@@ -2585,6 +2596,7 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getCanonicalSlug() {
 		return canonicalSlug;
 	}
@@ -2594,6 +2606,7 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCanonicalSlug(String newCanonicalSlug) {
 		String oldCanonicalSlug = canonicalSlug;
 		canonicalSlug = newCanonicalSlug;

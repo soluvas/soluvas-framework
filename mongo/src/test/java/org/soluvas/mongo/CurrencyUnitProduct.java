@@ -3,6 +3,7 @@ package org.soluvas.mongo;
 import java.io.Serializable;
 
 import org.joda.money.CurrencyUnit;
+import org.soluvas.commons.mongo.CurrencyUnitConverter;
 
 import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Entity;

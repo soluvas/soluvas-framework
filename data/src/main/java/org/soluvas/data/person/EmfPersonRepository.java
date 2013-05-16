@@ -175,13 +175,14 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public boolean existsBySlug(final String slug) {
-		return Iterables.any(catalog.getPeople(), new Predicate<Person>() {
+	public String existsBySlug(final String slug) {
+		final Optional<Person> found = Iterables.tryFind(catalog.getPeople(), new Predicate<Person>() {
 			@Override
 			public boolean apply(@Nullable Person input) {
 				return slug != null && slug.equals(input.getSlug());
 			}
 		});
+		return found.isPresent() ? found.get().getSlug() : null;
 	}
 
 }

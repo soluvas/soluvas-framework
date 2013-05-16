@@ -1,6 +1,7 @@
 package org.soluvas.data.person;
 
 import org.soluvas.commons.Person;
+import org.soluvas.data.SlugLookup;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 
 /**
@@ -8,10 +9,6 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
  * @author ceefour
  */
 public interface PersonRepository extends
-		PagingAndSortingRepository<Person, String> {
-
-	boolean existsBySlug(String slug);
-
-	Person findOneBySlug(String slug);
+		PagingAndSortingRepository<Person, String>, SlugLookup<Person> {
 
 }
