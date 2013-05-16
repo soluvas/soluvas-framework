@@ -14,9 +14,11 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.Email;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
+import org.soluvas.commons.impl.EmailImpl;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.commons.util.Profiled;
 import org.soluvas.data.domain.Page;
@@ -26,6 +28,7 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
 import com.google.code.morphia.Morphia;
+import com.google.code.morphia.mapping.DefaultCreator;
 import com.google.common.base.Function;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Collections2;
@@ -66,7 +69,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			if (input == null)
 				return null;
 			try {
-				return morphia.fromDBObject(entityClass, input);
+				return morphia.fromDBObject(implClass, input);
 			} catch (Exception e) {
 				throw new MongoRepositoryException(e,
 						"Cannot deserialize MongoDB object to %s: %s",
@@ -99,20 +102,22 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	private MongoClient mongoClient;
 	protected final String collName;
 	private final Class<T> entityClass;
+	private final Class<? extends T> implClass;
 	protected long currentSchemaVersion;
 	protected final String mongoUri;
 
 	/**
-	 * @param entityClass
-	 * @param currentSchemaVersion e.g. {@link PersonImpl#SCHEMA_VERSION_EDEFAULT}.
+	 * @param intfClass
+	 * @param currentSchemaVersion e.g. {@link PersonImpl#CURRENT_SCHEMA_VERSION}.
 	 * @param mongoUri
 	 * @param collName
 	 * @param indexedFields
 	 */
-	public MongoRepositoryBase(Class<T> entityClass, long currentSchemaVersion, 
+	public MongoRepositoryBase(Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
 			String mongoUri, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields) {
 		super();
-		this.entityClass = entityClass;
+		this.entityClass = intfClass;
+		this.implClass = implClass;
 		this.currentSchemaVersion = currentSchemaVersion;
 		this.mongoUri = mongoUri;
 		this.collName = collName;
@@ -129,6 +134,16 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 						realMongoUri.getPassword());
 			coll = db.getCollection(collName);
 			morphia = new Morphia();
+			morphia.map(implClass);
+			morphia.getMapper().getOptions().objectFactory = new DefaultCreator() {
+				@Override
+				public Object createInstance(Class clazz, DBObject dbObj) {
+					if (clazz == Email.class) {
+						return new EmailImpl();
+					}
+					return super.createInstance(clazz, dbObj);
+				}
+			};
 		} catch (Exception e) {
 			throw new MongoRepositoryException(e, "Cannot connect to MongoDB %s/%s as %s for %s repository",
 					realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(),
@@ -145,6 +160,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	public MongoRepositoryBase(Class<T> entityClass, String mongoUri, String collName, String[] indexedFields) {
 		super();
 		this.entityClass = entityClass;
+		this.implClass = entityClass;
 		this.currentSchemaVersion = 1L;
 		this.mongoUri = mongoUri;
 		this.collName = collName;

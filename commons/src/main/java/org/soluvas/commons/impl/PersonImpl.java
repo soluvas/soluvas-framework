@@ -122,7 +122,7 @@ import com.google.common.collect.Iterables;
  *
  * @generated
  */
-@Entity
+@Entity(noClassnameStored=true)
 @Converters({BigDecimalConverter.class, DateTimeConverter.class,
 	CurrencyUnitConverter.class, UnitConverter.class})
 public class PersonImpl extends EObjectImpl implements Person {
