@@ -133,8 +133,10 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 					collName);
 		}
 		beforeEnsureIndexes();
-		MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {}));
-		MongoUtils.ensureIndexes(coll, indexedFields);
+		final List<String> ensuredIndexes = new ArrayList<>();
+		ensuredIndexes.addAll( MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {})) );
+		ensuredIndexes.addAll( MongoUtils.ensureIndexes(coll, indexedFields) );
+		MongoUtils.retainIndexes(coll, ensuredIndexes.toArray(new String[] {}));
 	}
 
 	@Deprecated

@@ -1,7 +1,10 @@
 package org.soluvas.mongo;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -15,7 +18,10 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -79,10 +85,12 @@ public class MongoUtils {
 	 * <pre>{@literal
 	 * MongoUtils.ensureUnique(coll, "canonicalSlug");
 	 * }</pre>
+	 * @return Ensured index names (including existing ones).
 	 */
-	public static void ensureUnique(DBCollection coll, String... fields) {
+	public static List<String> ensureUnique(DBCollection coll, String... fields) {
 		log.debug("Ensuring collection {} has {} unique indexes: {}", 
 				coll.getName(), fields.length, fields);
+		final List<String> ensuredNames = new ArrayList<>();
 		if (fields.length > 0) {
 			final List<DBObject> indexes = coll.getIndexInfo();
 			for (String field : fields) {
@@ -99,8 +107,10 @@ public class MongoUtils {
 					log.info("Dropped non-unique index {} from {}", name, coll.getName());
 				}
 				coll.ensureIndex(new BasicDBObject(field, 1), new BasicDBObject("unique", true));
+				ensuredNames.add(name);
 			}
 		}
+		return ensuredNames;
 	}
 	
 	/**
@@ -109,13 +119,85 @@ public class MongoUtils {
 	 * <pre>{@literal
 	 * MongoUtils.ensureIndexes(coll, ImmutableMap.of("creationTime", -1, "modificationTime", -1);
 	 * }</pre>
+	 * @return 
+	 * @return Ensured index names (including existing ones).
 	 */
-	public static void ensureIndexes(DBCollection coll, 
+	public static List<String> ensureIndexes(DBCollection coll, 
 			final Map<String, Integer> fields) {
+		final List<String> ensuredNames = new ArrayList<>();
 		log.debug("Ensuring collection {} has {} indexes: {}", 
 				coll.getName(), fields.size(), fields);
 		for (final Map.Entry<String, Integer> entry : fields.entrySet()) {
 			coll.ensureIndex(new BasicDBObject(entry.getKey(), entry.getValue()));
+			ensuredNames.add(entry.getKey() + "_" + entry.getValue());
+		}
+		return ensuredNames;
+	}
+	
+	/**
+	 * Drop the specified indexes if not already existing in collection.
+	 * <p>Usage:
+	 * <pre>MongoUtils.dropIndexesIfNotExist(coll, "formalId_-1", "status_1", "className_1");</pre>
+	 * @param coll
+	 * @param indexNames
+	 */
+	public static void dropIndexesIfNotExist(DBCollection coll,
+			final String... indexNames) {
+		log.debug("Dropping {} indexes from collection {} if not exists: {}", 
+				indexNames.length, coll.getName(), indexNames);
+		final List<DBObject> indexes = coll.getIndexInfo();
+		for (final String indexName : indexNames) {
+			final Optional<DBObject> existing = Iterables.tryFind(indexes, new Predicate<DBObject>() {
+				@Override
+				public boolean apply(@Nullable DBObject input) {
+					return indexName.equals(input.get("name"));
+				}
+			});
+			if (existing.isPresent()) {
+				log.debug("Dropping index {} from {}", indexName, coll.getName());
+				coll.dropIndex(indexName);
+				log.info("Dropped index {} from {}", indexName, coll.getName());
+			}
+		}
+	}
+	
+	/**
+	 * Drop all indexes except the specified ones.
+	 * 
+	 * <p>Usage:
+	 * 
+	 * <pre>{@literal
+	 * final List<String> ensuredIndexes = new ArrayList<>();
+	 * ensuredIndexes.addAll( MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {})) );
+	 * ensuredIndexes.addAll( MongoUtils.ensureIndexes(coll, indexedFields) );
+	 * MongoUtils.retainIndexes(coll, ensuredIndexes.toArray(new String[] {}));
+	 * }</pre>
+	 * 
+	 * @param coll
+	 * @param retaineds
+	 */
+	public static void retainIndexes(DBCollection coll,
+			final String... retaineds) {
+		log.debug("Dropping indexes from collection {} except {}: {}", 
+				coll.getName(), retaineds.length, retaineds);
+		final List<DBObject> indexes = coll.getIndexInfo();
+		final List<String> existingNames = Lists.transform(indexes, new Function<DBObject, String>() {
+			@Override @Nullable
+			public String apply(@Nullable DBObject input) {
+				return (String) input.get("name");
+			}
+		});
+		final Set<String> existingNameSet = new HashSet<>(existingNames);
+		existingNameSet.remove("_id_"); // the _id_ index can't be deleted anyway
+		final Set<String> indexesToDelete = ImmutableSet.copyOf(Sets.difference(existingNameSet, ImmutableSet.copyOf(retaineds)));
+		if (!indexesToDelete.isEmpty()) {
+			log.debug("Dropping {} indexes from collection {}: {}", 
+					indexesToDelete.size(), coll.getName(), indexesToDelete);
+			for (final String indexToDelete : indexesToDelete) {
+				coll.dropIndex(indexToDelete);
+			}
+			log.info("Dropped {} indexes from collection {}: {}", 
+					indexesToDelete.size(), coll.getName(), indexesToDelete);
 		}
 	}
 	
