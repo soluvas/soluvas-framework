@@ -4,7 +4,7 @@
 	xmlns:security="http://www.soluvas.org/schema/security/1.0"
 	xsi:schemaLocation="http://www.soluvas.org/schema/security/1.0 security.ecore">
 	<roles name="admin"
-		description="General administrators (not sysadmins) of the (web) application." />
+		description="Super Administrator" />
 	<roles name="sysadmin" description="Perform technical administration." />
 	<roles name="guest" description="Everybody, including not logged in users"
 		assignMode="guest" />
