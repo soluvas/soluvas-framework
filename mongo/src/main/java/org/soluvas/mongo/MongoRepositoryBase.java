@@ -138,6 +138,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			morphia.getMapper().getOptions().objectFactory = new DefaultCreator() {
 				@Override
 				public Object createInstance(Class clazz, DBObject dbObj) {
+					// TODO: Do not hardcode
 					if (clazz == Email.class) {
 						return new EmailImpl();
 					}
