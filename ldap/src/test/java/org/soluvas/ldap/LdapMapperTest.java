@@ -319,6 +319,40 @@ public class LdapMapperTest {
 		assertEquals((Long)123L, person.getEmployeeNumber());
 	}
 	
+	@Test public void mapsBigDecimalToEntry() throws LdapInvalidAttributeValueException {
+		final LdapMapper<PersonWithBigDecimal> mapper = new LdapMapper<>();
+		
+		final PersonWithBigDecimal hendy = new PersonWithBigDecimal("hendy", "hendy.irawan", "Hendy", "Irawan", "male");
+		hendy.setDebitBalance(new BigDecimal("123.4567"));
+		log.info("Input Person: {}", hendy);
+		
+		final Entry entry = mapper.toEntry(hendy, "ou=users,dc=aksimata,dc=com");
+		log.info("Output Entry: {}", entry);
+		
+		assertEquals("123.4567", entry.get("debitBalance").getString());
+	}
+	
+	@Test public void mapsAttributeToBigDecimal() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
+		final LdapMapper<PersonWithBigDecimal> mapper = new LdapMapper<>();
+		
+		final Entry entry = new DefaultEntry("uid=hendy,ou=users,dc=aksimata,dc=com");
+		entry.put("objectClass", "organizationalPerson", "extensibleObject", "socialPerson", "facebookObject", "twitterObject");
+		entry.put("uid", "hendy");
+		entry.put("uniqueIdentifier", "hendy.irawan");
+		entry.put("gn", "Hendy");
+		entry.put("sn", "Irawan");
+		entry.put("cn", "Hendy Irawan");
+		entry.put("mail", "hendy@soluvas.com", "ceefour666@gmail.com", "hendy@bippo.co.id");
+		entry.put("debitBalance", "123.4567");
+		
+		log.info("Input Entry: {}", entry);
+		
+		final PersonWithBigDecimal person = mapper.fromEntry(entry, PersonWithBigDecimal.class);
+		log.info("Output Person: {}", person);
+		
+		assertEquals(new BigDecimal("123.4567"), person.getDebitBalance());
+	}
+	
 	@Test public void mapsAttributeAlias() throws LdapInvalidAttributeValueException, LdapInvalidDnException {
 		final LdapMapper<SocialPerson> mapper = new LdapMapper<>();
 		
@@ -841,15 +875,16 @@ public class LdapMapperTest {
 	}
 	
 	@Test
-	public void canMapSaldo() throws LdapException {
+	public void cantMapSaldo() throws LdapException {
 		final LdapMapper<SocialPerson> ldapMapper = new LdapMapper<>();
 		
 		final SocialPerson person = new SocialPerson("hendy", "hendy", "Hendy", "Irawan");
-		person.setSaldo(new BigDecimal(5000000));
+		person.setDebitBalance(new BigDecimal(5000000));
+		person.setDebitCurrency(CurrencyUnit.ofCountry("ID"));
 		log.info("Input Person: {}", person);
 		
 		final Entry personEntry = ldapMapper.toEntry(person, "ou=users");
-		assertEquals(new BigDecimal(5000000), new BigDecimal(personEntry.get("saldo").getString()));
+		assertEquals(new BigDecimal(5000000), new BigDecimal(personEntry.get("debitBalance").getString()));
 	}
 	
 }

@@ -402,14 +402,21 @@ public class LdapMapper<T> {
 							}
 						} else {
 							// Set property value from single attribute value
+							final Object converted;
 							try {
 								Object value = attr.get().getValue();
-								Object converted = convertToPropertyValue(field.getType(), value);
+								converted = convertToPropertyValue(field.getType(), value);
 								log.trace("Map {} to {}#{} as {}: {}", 
 										attrName, clazz.getName(), fieldName, field.getType().getName(), converted );
-								BeanUtils.setProperty(bean, fieldName, converted);
 							} catch (Exception e) {
 								throw new LdapMappingException("Cannot map " + attrName + ": " + attr.get() + " as " +
+										clazz.getName() + "#" + fieldName + " (" + field.getType().getName() + ") from " + entry.getDn(), e);
+							}
+							try {
+								BeanUtils.setProperty(bean, fieldName, converted);
+							} catch (Exception e) {
+								final String convertedStr = converted != null ? "'" + converted + "' (" + converted.getClass().getName() + ")" : "null";
+								throw new LdapMappingException("Cannot set " + attrName + ": " + attr.get() + " = " + convertedStr + " as " +
 										clazz.getName() + "#" + fieldName + " (" + field.getType().getName() + ") from " + entry.getDn(), e);
 							}
 						}

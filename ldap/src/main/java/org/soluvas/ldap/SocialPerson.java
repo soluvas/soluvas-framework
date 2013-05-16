@@ -1,7 +1,6 @@
 package org.soluvas.ldap;
 
 import java.math.BigDecimal;
-import java.util.Currency;
 import java.util.Set;
 
 import org.joda.money.CurrencyUnit;
@@ -120,7 +119,7 @@ public class SocialPerson extends Person {
 	@LdapAttribute("debitBalance")
 	private BigDecimal debitBalance;
 	@LdapAttribute("debitCurrency")
-	private Currency debitCurrency;
+	private CurrencyUnit debitCurrency;
 	
 	public SocialPerson() {
 		super();
@@ -898,11 +897,11 @@ public class SocialPerson extends Person {
 		this.debitBalance = debitBalance;
 	}
 
-	public Currency getDebitCurrency() {
+	public CurrencyUnit getDebitCurrency() {
 		return debitCurrency;
 	}
 
-	public void setDebitCurrency(Currency debitCurrency) {
+	public void setDebitCurrency(CurrencyUnit debitCurrency) {
 		this.debitCurrency = debitCurrency;
 	}
 	
