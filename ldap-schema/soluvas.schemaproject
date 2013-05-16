@@ -7380,6 +7380,28 @@
           <equality>generalizedTimeMatch</equality>
           <ordering>generalizedTimeOrderingMatch</ordering>
         </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.49" obsolete="false" singlevalue="true" collective="false" nousermodification="false">
+          <aliases>
+            <alias>debitBalance</alias>
+          </aliases>
+          <description>Debit Account Balance as saldo for Deposit Customer</description>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseIgnoreMatch</equality>
+          <ordering>caseIgnoreOrderingMatch</ordering>
+          <substring>caseIgnoreSubstringsMatch</substring>
+        </attributetype>
+        <attributetype oid="2.25.31030703689307962575270284666844839901.50" obsolete="false" singlevalue="true" collective="false" nousermodification="false">
+          <aliases>
+            <alias>debitCurrency</alias>
+          </aliases>
+          <description>Currency Unit for Debit Account Balance</description>
+          <usage>USER_APPLICATIONS</usage>
+          <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+          <equality>caseIgnoreMatch</equality>
+          <ordering>caseIgnoreOrderingMatch</ordering>
+          <substring>caseIgnoreSubstringsMatch</substring>
+        </attributetype>
       </attributetypes>
       <objectclasses>
         <objectclass oid="2.25.31030703689307962575270284666844839901.2" obsolete="false">
@@ -7432,6 +7454,8 @@
             <attributetype>signupSourceType</attributetype>
             <attributetype>passwordResetCode</attributetype>
             <attributetype>passwordResetExpiryTime</attributetype>
+            <attributetype>debitBalance</attributetype>
+            <attributetype>debitCurrency</attributetype>
           </optional>
         </objectclass>
         <objectclass oid="2.25.31030703689307962575270284666844839901.4" obsolete="false">
@@ -7482,6 +7506,8 @@
             <attributetype>currency</attributetype>
             <attributetype>signupSource</attributetype>
             <attributetype>signupSourceType</attributetype>
+            <attributetype>debitBalance</attributetype>
+            <attributetype>debitCurrency</attributetype>
           </optional>
         </objectclass>
         <objectclass oid="2.25.31030703689307962575270284666844839901.9" obsolete="false">

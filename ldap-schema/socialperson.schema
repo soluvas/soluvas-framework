@@ -411,18 +411,38 @@ attributetype ( 2.25.31030703689307962575270284666844839901.48
 	SINGLE-VALUE 
  )
 
+attributetype ( 2.25.31030703689307962575270284666844839901.49 
+	NAME 'debitBalance' 
+	DESC 'Debit Account Balance as saldo for Deposit Customer' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+	SINGLE-VALUE 
+ )
+
+attributetype ( 2.25.31030703689307962575270284666844839901.50 
+	NAME 'debitCurrency' 
+	DESC 'Currency Unit for Debit Account Balance' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+	SINGLE-VALUE 
+ )
+
 objectclass ( 2.25.31030703689307962575270284666844839901.2 
 	NAME 'socialPerson' 
 	DESC 'Person in the Web 2.0 age.' 
 	AUXILIARY 
-	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier $ bannerImageId $ googleAccessToken $ yahooAccessToken $ customerRole $ memberRole $ managerRole $ timezone $ referrer $ referrerType $ ipAddress $ lastIpAddress $ creationTime $ modificationTime $ lastLoginTime $ validationTime $ activationTime $ verificationTime $ accountStatus $ newsletterSubscriptionTime $ newsletterSubscriptionEnabled $ socialSharingEnabled $ validMail $ publicationStatus $ archivalStatus $ folder $ religion $ lang $ currency $ signupSource $ signupSourceType $ passwordResetCode $ passwordResetExpiryTime ) 
+	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier $ bannerImageId $ googleAccessToken $ yahooAccessToken $ customerRole $ memberRole $ managerRole $ timezone $ referrer $ referrerType $ ipAddress $ lastIpAddress $ creationTime $ modificationTime $ lastLoginTime $ validationTime $ activationTime $ verificationTime $ accountStatus $ newsletterSubscriptionTime $ newsletterSubscriptionEnabled $ socialSharingEnabled $ validMail $ publicationStatus $ archivalStatus $ folder $ religion $ lang $ currency $ signupSource $ signupSourceType $ passwordResetCode $ passwordResetExpiryTime $ debitBalance $ debitCurrency ) 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.4 
 	NAME 'socialObject' 
 	DESC 'Any object that wants to have social attributes.' 
 	AUXILIARY 
-	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier $ bannerImageId $ googleAccessToken $ yahooAccessToken $ customerRole $ memberRole $ managerRole $ timezone $ referrer $ referrerType $ ipAddress $ lastIpAddress $ creationTime $ modificationTime $ lastLoginTime $ validationTime $ activationTime $ verificationTime $ accountStatus $ newsletterSubscriptionTime $ newsletterSubscriptionEnabled $ socialSharingEnabled $ validMail $ publicationStatus $ archivalStatus $ folder $ religion $ lang $ currency $ signupSource $ signupSourceType ) 
+	MAY ( photoId $ virtualMail $ primaryBillingAddress $ primaryMail $ primaryPayment $ primaryShippingAddress $ birthDate $ gender $ websiteUri $ nickname $ canonicalIdentifier $ bannerImageId $ googleAccessToken $ yahooAccessToken $ customerRole $ memberRole $ managerRole $ timezone $ referrer $ referrerType $ ipAddress $ lastIpAddress $ creationTime $ modificationTime $ lastLoginTime $ validationTime $ activationTime $ verificationTime $ accountStatus $ newsletterSubscriptionTime $ newsletterSubscriptionEnabled $ socialSharingEnabled $ validMail $ publicationStatus $ archivalStatus $ folder $ religion $ lang $ currency $ signupSource $ signupSourceType $ debitBalance $ debitCurrency ) 
  )
 
 objectclass ( 2.25.31030703689307962575270284666844839901.9 

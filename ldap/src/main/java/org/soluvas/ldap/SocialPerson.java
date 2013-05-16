@@ -1,6 +1,7 @@
 package org.soluvas.ldap;
 
 import java.math.BigDecimal;
+import java.util.Currency;
 import java.util.Set;
 
 import org.joda.money.CurrencyUnit;
@@ -116,8 +117,10 @@ public class SocialPerson extends Person {
 	private String passwordResetCode;
 	@LdapAttribute("passwordResetExpiryTime")
 	private DateTime passwordResetExpiryTime;
-	@LdapAttribute("saldo")
-	private BigDecimal saldo;
+	@LdapAttribute("debitBalance")
+	private BigDecimal debitBalance;
+	@LdapAttribute("debitCurrency")
+	private Currency debitCurrency;
 	
 	public SocialPerson() {
 		super();
@@ -887,12 +890,20 @@ public class SocialPerson extends Person {
 		this.passwordResetExpiryTime = passwordResetExpiryTime;
 	}
 
-	public BigDecimal getSaldo() {
-		return saldo;
+	public BigDecimal getDebitBalance() {
+		return debitBalance;
 	}
 
-	public void setSaldo(BigDecimal saldo) {
-		this.saldo = saldo;
+	public void setDebitBalance(BigDecimal debitBalance) {
+		this.debitBalance = debitBalance;
+	}
+
+	public Currency getDebitCurrency() {
+		return debitCurrency;
+	}
+
+	public void setDebitCurrency(Currency debitCurrency) {
+		this.debitCurrency = debitCurrency;
 	}
 	
 }
