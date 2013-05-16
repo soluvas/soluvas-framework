@@ -12,6 +12,8 @@ import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.domain.Sort.Order;
 
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.mongodb.BasicDBObject;
@@ -72,6 +74,7 @@ public class MongoUtils {
 	
 	/**
 	 * Ensure unique index(es) on MongoDB collection, with logging.
+	 * If an index already exist but not unique, it will drop and recreate the index with <code>{unique: true}</code>.
 	 * <p>Usage:
 	 * <pre>{@literal
 	 * MongoUtils.ensureUnique(coll, "canonicalSlug");
@@ -80,8 +83,23 @@ public class MongoUtils {
 	public static void ensureUnique(DBCollection coll, String... fields) {
 		log.debug("Ensuring collection {} has {} unique indexes: {}", 
 				coll.getName(), fields.length, fields);
-		for (String field : fields) {
-			coll.ensureIndex(new BasicDBObject(field, 1), new BasicDBObject("unique", true));
+		if (fields.length > 0) {
+			final List<DBObject> indexes = coll.getIndexInfo();
+			for (String field : fields) {
+				final String name = field + "_1";
+				final Optional<DBObject> existing = Iterables.tryFind(indexes, new Predicate<DBObject>() {
+					@Override
+					public boolean apply(@Nullable DBObject input) {
+						return name.equals(input.get("name"));
+					}
+				});
+				if (existing.isPresent() && !existing.get().containsField("unique")) {
+					log.trace("Dropping non-unique index {} from {}", name, coll.getName());
+					coll.dropIndex(name);
+					log.info("Dropped non-unique index {} from {}", name, coll.getName());
+				}
+				coll.ensureIndex(new BasicDBObject(field, 1), new BasicDBObject("unique", true));
+			}
 		}
 	}
 	
