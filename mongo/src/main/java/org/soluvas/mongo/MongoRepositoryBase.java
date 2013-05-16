@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
+import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
@@ -39,7 +40,19 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.WriteResult;
 
 /**
- * {@link PagingAndSortingRepository} implemented using MongoDB, without {@link SchemaVersionable} support.
+ * {@link PagingAndSortingRepository} implemented using MongoDB, with {@link SchemaVersionable} support.
+ * <p>{@link SchemaVersionable#getSchemaVersion()} is <b>not</b> used for filtering documents,
+ * because this will complicate structure of indexes and ad-hoc queries. The recommended approach
+ * for schema migration with UUID as IDs, and no formalId/slug, is:
+ * <ol>
+ * 	<li>Rename the current collection to "old" collection.</li>
+ * 	<li>Create the 'new' collection, so it's usable immediately, albeit empty.</li> 
+ * 	<li>Move all current documents from 'old' collection to 'new' collection.</li> 
+ * 	<li>Migrate old documents from 'old' collection to 'new' collection.</li> 
+ * 	<li>Delete 'old' collection</li>
+ * </ol>
+ * <p>For entities with formalId/slug/non-UUID IDs, use in-place migration. However
+ * the application should handle occasional errors due to schema mismatch. 
  * @author ceefour
  */
 public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortingRepositoryBase<T, String>
@@ -60,13 +73,14 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		}
 	}
 
-	private class EntityToDBObject implements Function<T, DBObject> {
+	public class EntityToDBObject implements Function<T, DBObject> {
 		@Override @Nullable
 		public DBObject apply(@Nullable T entity) {
 			return morphia.toDBObject(entity);
 		}
 	}
 
+	public static final String SCHEMA_VERSION_FIELD = "schemaVersion";
 	protected final Logger log;
 	protected DBCollection coll;
 	private Morphia morphia;
@@ -83,19 +97,26 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	private MongoClient mongoClient;
 	protected final String collName;
 	private final Class<T> entityClass;
+	protected long currentSchemaVersion;
 	protected final String mongoUri;
-	
+
 	/**
-	 * 
+	 * @param entityClass
+	 * @param currentSchemaVersion e.g. {@link PersonImpl#SCHEMA_VERSION_EDEFAULT}.
+	 * @param mongoUri
+	 * @param collName
+	 * @param indexedFields
 	 */
-	public MongoRepositoryBase(Class<T> entityClass, String mongoUri, String collName, String[] indexedFields) {
+	public MongoRepositoryBase(Class<T> entityClass, long currentSchemaVersion, 
+			String mongoUri, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields) {
 		super();
 		this.entityClass = entityClass;
+		this.currentSchemaVersion = currentSchemaVersion;
 		this.mongoUri = mongoUri;
 		this.collName = collName;
 		// WARNING: mongoUri may contain password!
 		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
-		this.log = LoggerFactory.getLogger(getClass() + "/" + realMongoUri.getDatabase() + "/" + collName);
+		this.log = LoggerFactory.getLogger(getClass().getName() + "/" + realMongoUri.getDatabase() + "/" + collName + "/" + currentSchemaVersion);
 		log.info("Connecting to MongoDB database {}/{} as {} for {}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), collName);
 		try {
@@ -105,18 +126,55 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				db.authenticate(realMongoUri.getUsername(),
 						realMongoUri.getPassword());
 			coll = db.getCollection(collName);
-			log.debug("Ensuring {} indexes on {}: {}", indexedFields.length, collName, indexedFields);
-			for (String field : indexedFields) {
-				coll.ensureIndex(new BasicDBObject(field, 1));
-			}
-
 			morphia = new Morphia();
 		} catch (Exception e) {
-			throw new MongoRepositoryException(e, "Cannot connect to MongoDB {}/{} as {} for {} repository",
+			throw new MongoRepositoryException(e, "Cannot connect to MongoDB %s/%s as %s for %s repository",
 					realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(),
 					collName);
 		}
-		
+		beforeEnsureIndexes();
+		MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {}));
+		MongoUtils.ensureIndexes(coll, indexedFields);
+	}
+
+	@Deprecated
+	public MongoRepositoryBase(Class<T> entityClass, String mongoUri, String collName, String[] indexedFields) {
+		super();
+		this.entityClass = entityClass;
+		this.currentSchemaVersion = 1L;
+		this.mongoUri = mongoUri;
+		this.collName = collName;
+		// WARNING: mongoUri may contain password!
+		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
+		this.log = LoggerFactory.getLogger(getClass().getName() + "/" + realMongoUri.getDatabase() + "/" + collName);
+		log.info("Connecting to MongoDB database {}/{} as {} for {}",
+				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), collName);
+		try {
+			mongoClient = new MongoClient(realMongoUri);
+			final DB db = mongoClient.getDB(realMongoUri.getDatabase());
+			if (realMongoUri.getUsername() != null)
+				db.authenticate(realMongoUri.getUsername(),
+						realMongoUri.getPassword());
+			coll = db.getCollection(collName);
+			morphia = new Morphia();
+		} catch (Exception e) {
+			throw new MongoRepositoryException(e, "Cannot connect to MongoDB %s/%s as %s for %s repository",
+					realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(),
+					collName);
+		}
+		beforeEnsureIndexes();
+		log.debug("Ensuring {} indexes on {}: {}", indexedFields.length, collName, indexedFields);
+		for (String field : indexedFields) {
+			coll.ensureIndex(new BasicDBObject(field, 1));
+		}
+	}
+	
+	/**
+	 * Called by constructor after connection and authentication but 
+	 * before calling {@link MongoUtils#ensureUnique(DBCollection, String...)} and {@link MongoUtils#ensureIndexes(DBCollection, Map)}.
+	 * Useful if you want to migrate data or reslug.
+	 */
+	protected void beforeEnsureIndexes() {
 	}
 
 	@PreDestroy
@@ -292,15 +350,17 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		return new PageImpl<>(entities, pageable, total);		
 	}
 
+	protected DBObject findDBObjectByQuery(DBObject query, DBObject fields) {
+		log.trace("findOneByQuery {} {}", collName, query, fields);
+		final DBObject dbo = coll.findOne(query, fields);
+		log.debug("findAllByQuery {} {} {} returned {}",
+				collName, query, fields, dbo.get("_id"));
+		return dbo;
+	}
+
 	@Override
 	public T findOneByQuery(DBObject upQuery) {
-		final BasicDBObject query = new BasicDBObject();
-		query.putAll(upQuery);
-		
-		log.trace("findOneByQuery {}", collName, query);
-		final DBObject dbo = coll.findOne(query);
-		log.debug("findAllByQuery {} {} returned {}",
-				collName, query, dbo.get("_id"));
+		final DBObject dbo = findDBObjectByQuery(upQuery, null);
 		final T entity = new DBObjectToEntity().apply(dbo);
 		return entity;		
 	}

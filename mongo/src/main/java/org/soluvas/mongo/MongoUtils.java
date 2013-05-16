@@ -71,16 +71,18 @@ public class MongoUtils {
 	}
 	
 	/**
-	 * Ensure unique index on MongoDB collection, with logging.
+	 * Ensure unique index(es) on MongoDB collection, with logging.
 	 * <p>Usage:
 	 * <pre>{@literal
-	 * MongoUtils.ensureUnique(coll, "slug");
+	 * MongoUtils.ensureUnique(coll, "canonicalSlug");
 	 * }</pre>
 	 */
-	public static void ensureUnique(DBCollection coll, String field) {
-		log.debug("Ensuring collection {} has unique index {}", 
-				coll.getName(), field);
-		coll.ensureIndex(new BasicDBObject(field, 1), field + "_1", true);
+	public static void ensureUnique(DBCollection coll, String... fields) {
+		log.debug("Ensuring collection {} has {} unique indexes: {}", 
+				coll.getName(), fields.length, fields);
+		for (String field : fields) {
+			coll.ensureIndex(new BasicDBObject(field, 1), new BasicDBObject("unique", true));
+		}
 	}
 	
 	/**
