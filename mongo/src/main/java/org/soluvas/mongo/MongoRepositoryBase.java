@@ -18,6 +18,7 @@ import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.impl.PersonImpl;
+import org.soluvas.commons.util.Profiled;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
@@ -26,6 +27,7 @@ import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
 import com.google.code.morphia.Morphia;
 import com.google.common.base.Function;
+import com.google.common.base.Throwables;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -220,14 +222,23 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		beforeSave(entities);
 		final List<String> ids = ImmutableList.copyOf(Collections2.transform(entities, new IdFunction()));
 		log.debug("Adding {} {} documents: {}", entities.size(), collName, ids);
-		final List<DBObject> dbObjs = ImmutableList.copyOf(Collections2.transform(entities, new EntityToDBObject()));
-		final WriteResult writeResult = coll.insert(dbObjs);
-		if (writeResult.getLastError() != null && writeResult.getLastError().getException() != null) {
-			throw new MongoRepositoryException(writeResult.getLastError().getException(),
-					"Cannot add %d %s documents: %s", entities.size(), collName, ids);
+		try (Profiled p = new Profiled(log, "Added " + entities.size() + " " + collName + " documents: " + ids)) {
+			final List<DBObject> dbObjs = ImmutableList.copyOf(Collections2
+					.transform(entities, new EntityToDBObject()));
+			final WriteResult writeResult = coll.insert(dbObjs);
+			if (writeResult.getLastError() != null
+					&& writeResult.getLastError().getException() != null) {
+				throw new MongoRepositoryException(writeResult.getLastError()
+						.getException(), "Cannot add %d %s documents: %s",
+						entities.size(), collName, ids);
+			}
+			log.info("Added {} {} documents: {}", entities.size(), collName,
+					ids);
+			return ImmutableList.copyOf(entities);
+		} catch (Exception e) {
+			Throwables.propagate(e);
+			return null;
 		}
-		log.info("Added {} {} documents: {}", entities.size(), collName, ids);
-		return ImmutableList.copyOf(entities);
 	}
 	
 	/**

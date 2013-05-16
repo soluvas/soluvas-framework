@@ -801,7 +801,11 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 */
 	public Unit<?> createUnitFromString(EDataType eDataType, String initialValue) {
-		return initialValue != null ? (Unit<?>)Unit.valueOf(initialValue) : null;
+		if (initialValue != null) {
+			return "".equals(initialValue) ? Unit.ONE : (Unit<?>)Unit.valueOf(initialValue); 
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -1102,7 +1106,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 */
 	public LocalDate createLocalDateFromString(EDataType eDataType, String initialValue) {
-		return new LocalDate(initialValue);
+		return initialValue != null ? new LocalDate(initialValue) : null;
 	}
 
 	/**

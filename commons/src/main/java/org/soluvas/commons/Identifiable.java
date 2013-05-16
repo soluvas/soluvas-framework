@@ -40,7 +40,7 @@ public interface Identifiable extends SerializableEObject {
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
 	 * @see org.soluvas.commons.CommonsPackage#getIdentifiable_Id()
-	 * @model id="true"
+	 * @model
 	 * @generated
 	 */
 	String getId();
