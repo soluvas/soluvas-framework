@@ -164,7 +164,7 @@ public class SlugUtils {
 	}
 	
 	/**
-	 * Makes it lowercase, and removes every character not in a-z, 0-9, and underscore.
+	 * Makes it lowercase, and removes every character not in a-z and 0-9. Underscore is also removed.
 	 * 
 	 * <p>It is useful for e.g. making both {@code http://www.satukancinta.com/arum.puspita} and {@code http://www.satukancinta.com/arumpuspita}
 	 * or even {@code http://www.satukancinta.com/member/arum.pus.pi.ta} usable.
@@ -177,7 +177,7 @@ public class SlugUtils {
 	 */
 	@Nullable
 	public static String canonicalize(@Nullable String slug) {
-		return slug != null ? slug.toLowerCase().replaceAll("[^a-z0-9_]", "") : null;
+		return slug != null ? slug.toLowerCase().replaceAll("[^a-z0-9]", "") : null;
 	}
 
 }
