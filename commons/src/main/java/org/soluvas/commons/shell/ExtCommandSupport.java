@@ -1,9 +1,11 @@
 package org.soluvas.commons.shell;
 
+import org.apache.felix.service.command.CommandSession;
 import org.apache.karaf.shell.console.AbstractAction;
 import org.soluvas.commons.ShellProgressMonitor;
 import org.soluvas.commons.impl.ShellProgressMonitorImpl;
 import org.soluvas.commons.locale.LocaleContext;
+import org.soluvas.commons.util.ThreadLocalProgress;
 
 /**
  * @author agus
@@ -21,5 +23,12 @@ public abstract class ExtCommandSupport extends AbstractAction {
 	 */
 	protected LocaleContext localeContext = new LocaleContext();
 	protected ShellProgressMonitor monitor = new ShellProgressMonitorImpl();
+	
+	@Override
+	public Object execute(CommandSession session) throws Exception {
+		try (ThreadLocalProgress progress = new ThreadLocalProgress(monitor)) {
+			return super.execute(session);
+		}
+	}
 	
 }
