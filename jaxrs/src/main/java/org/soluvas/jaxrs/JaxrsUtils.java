@@ -21,8 +21,8 @@ import org.soluvas.commons.tenant.TenantRefImpl;
 @Deprecated
 public class JaxrsUtils {
 	
-	private static transient Logger log = LoggerFactory.getLogger(JaxrsUtils.class);
-	private static transient BundleContext bundleContext = FrameworkUtil.getBundle(JaxrsUtils.class).getBundleContext();
+	private static final Logger log = LoggerFactory.getLogger(JaxrsUtils.class);
+	private static final BundleContext bundleContext = FrameworkUtil.getBundle(JaxrsUtils.class).getBundleContext();
 	
 	/**
 	 * Use {@code @Context UriInfo uriInfo} in JAX-RS.

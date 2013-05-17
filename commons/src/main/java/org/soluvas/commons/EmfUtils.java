@@ -2,8 +2,6 @@ package org.soluvas.commons;
 
 import java.lang.reflect.Field;
 
-import javax.annotation.Nonnull;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
@@ -23,7 +21,7 @@ import com.google.common.base.Throwables;
  */
 public class EmfUtils {
 
-	private static transient Logger log = LoggerFactory.getLogger(EmfUtils.class);
+	private static final Logger log = LoggerFactory.getLogger(EmfUtils.class);
 	
 	/**
 	 * Synchronized so that access to global {@link EPackage} Registry is safe.

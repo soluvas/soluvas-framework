@@ -15,7 +15,7 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
 
 public class JsonUtils {
-	private static transient Logger log = LoggerFactory.getLogger(JsonUtils.class);
+	private static final Logger log = LoggerFactory.getLogger(JsonUtils.class);
 
 	private static ObjectWriter writer;
 	public static final ObjectMapper mapper;
