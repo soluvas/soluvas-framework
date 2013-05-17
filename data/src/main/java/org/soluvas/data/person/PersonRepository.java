@@ -33,4 +33,14 @@ public interface PersonRepository extends
 	@Nullable
 	public Person findOneByEmail(@Nullable String email);
 
+	/**
+	 * Find a {@link Person} by Twitter ID or screen name (at least one must be specified).
+	 * @param twitterId
+	 * @param twitterUsername
+	 * @return Person, or {@code null} if not found or if both twitterId and twitterScreenName
+	 * 		were {@code null}.
+	 */
+	@Nullable
+	public Person findOneByTwitter(@Nullable Long twitterId, @Nullable String twitterScreenName);
+
 }

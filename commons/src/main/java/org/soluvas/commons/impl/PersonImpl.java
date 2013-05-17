@@ -2664,7 +2664,7 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 */
 	@Override
 	public String getEmail() {
-		Optional<Email> primaryEmail = Iterables.tryFind(emails, new Predicate<Email>() {
+		final Optional<Email> primaryEmail = Iterables.tryFind(getEmails(), new Predicate<Email>() {
 			@Override
 			public boolean apply(@Nullable Email input) {
 				return input.isPrimary();
@@ -2672,8 +2672,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 		});
 		if (primaryEmail.isPresent()) {
 			return primaryEmail.get().getEmail();
-		} else if (!emails.isEmpty()) {
-			return emails.get(0).getEmail();
+		} else if (!getEmails().isEmpty()) {
+			return getEmails().get(0).getEmail();
 		} else {
 			return null;
 		}

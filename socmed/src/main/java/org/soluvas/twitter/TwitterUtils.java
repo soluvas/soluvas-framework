@@ -14,7 +14,7 @@ import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 import org.soluvas.ldap.SocialPerson;
 
-import com.google.common.base.Strings;
+import com.google.common.base.Preconditions;
 
 /**
  * Inspired by org.soluvas.fbcli.FriendListDownloader.
@@ -22,7 +22,7 @@ import com.google.common.base.Strings;
  */
 public class TwitterUtils {
 	
-	private transient static Logger log = LoggerFactory.getLogger(TwitterUtils.class);
+	private static final Logger log = LoggerFactory.getLogger(TwitterUtils.class);
 	
 	/**
 	 * Fetches twitter user photo from twitter, uploads it to ImageRepository, but not modify any {@link SocialPerson}.
@@ -32,10 +32,15 @@ public class TwitterUtils {
 	 */
 	public static String refreshPhotoFromTwitter(final String twitterScreenName, final String personName,
 			ImageRepository imageRepo) {
-		if (Strings.isNullOrEmpty(twitterScreenName)) {
-			log.warn("Twitter Screen Name is {}", twitterScreenName);
-		}
+		Preconditions.checkNotNull(twitterScreenName, "Twitter screen name must be specified");
 		final String photoUrl = "https://api.twitter.com/1/users/profile_image?screen_name=" + twitterScreenName + "&size=bigger";
+		return refreshPhotoFromTwitter(photoUrl, twitterScreenName, personName, imageRepo);
+	}
+
+	public static String refreshPhotoFromTwitter(
+			String photoUrl, final String twitterScreenName, 
+			final String personName, ImageRepository imageRepo) {
+		Preconditions.checkNotNull(twitterScreenName, "Twitter screen name must be specified");
 		final HttpClient httpClient = new DefaultHttpClient();
 		try {
 			final HttpGet httpGet = new HttpGet(photoUrl);
@@ -45,7 +50,8 @@ public class TwitterUtils {
 			try {
 				FileUtils.copyInputStreamToFile(response.getEntity().getContent(), tmpFile);
 				log.debug("Photo Status Line {}",  response.getStatusLine());
-				final Image newImage = new Image(tmpFile, ".jpg", personName + " twitter " + twitterScreenName);
+				final Image newImage = new Image(tmpFile, response.getEntity().getContentType().getValue(),
+						personName + " twitter " + twitterScreenName);
 				final String imageId = imageRepo.add(newImage).getId();
 				log.debug("tmp file path from twitter user {} is {}", tmpFile);
 				return imageId;

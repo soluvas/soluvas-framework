@@ -77,5 +77,24 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		final BasicDBObject query = new BasicDBObject("emails.email", email.toLowerCase().trim());
 		return findOneByQuery(query);
 	}
+
+	@Override @Nullable
+	public Person findOneByTwitter(@Nullable Long twitterId,
+			@Nullable String twitterScreenName) {
+		if (twitterId == null && twitterScreenName == null) {
+			return null;
+		}
+		final List<DBObject> orCriteria = new ArrayList<>();
+		if (twitterId != null) {
+			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.PERSON__TWITTER_ID.getName(), 
+					twitterId));
+		}
+		if (twitterScreenName != null) {
+			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.PERSON__TWITTER_SCREEN_NAME.getName(), 
+					twitterScreenName));
+		}
+		final BasicDBObject query = new BasicDBObject("$or", orCriteria);
+		return findOneByQuery(query);
+	}
 	
 }
