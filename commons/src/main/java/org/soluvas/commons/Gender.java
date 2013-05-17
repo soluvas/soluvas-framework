@@ -19,6 +19,14 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum Gender implements Enumerator {
 	/**
+	 * The '<em><b>Unknown</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #UNKNOWN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	UNKNOWN(0, "unknown", "unknown"), /**
 	 * The '<em><b>Male</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -26,7 +34,7 @@ public enum Gender implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	MALE(0, "male", "male"),
+	MALE(1, "male", "male"),
 
 	/**
 	 * The '<em><b>Female</b></em>' literal object.
@@ -36,7 +44,25 @@ public enum Gender implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	FEMALE(1, "female", "female");
+	FEMALE(2, "female", "female");
+
+	/**
+	 * The '<em><b>Unknown</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Unknown</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Unknown gender (null value needs to be modeled explicitly in EMF Enum).
+	 * <!-- end-model-doc -->
+	 * @see #UNKNOWN
+	 * @model name="unknown"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UNKNOWN_VALUE = 0;
 
 	/**
 	 * The '<em><b>Male</b></em>' literal value.
@@ -46,12 +72,15 @@ public enum Gender implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Male person.
+	 * <!-- end-model-doc -->
 	 * @see #MALE
 	 * @model name="male"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MALE_VALUE = 0;
+	public static final int MALE_VALUE = 1;
 
 	/**
 	 * The '<em><b>Female</b></em>' literal value.
@@ -61,12 +90,15 @@ public enum Gender implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Female person.
+	 * <!-- end-model-doc -->
 	 * @see #FEMALE
 	 * @model name="female"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FEMALE_VALUE = 1;
+	public static final int FEMALE_VALUE = 2;
 
 	/**
 	 * An array of all the '<em><b>Gender</b></em>' enumerators.
@@ -76,6 +108,7 @@ public enum Gender implements Enumerator {
 	 */
 	private static final Gender[] VALUES_ARRAY =
 		new Gender[] {
+			UNKNOWN,
 			MALE,
 			FEMALE,
 		};
@@ -128,6 +161,7 @@ public enum Gender implements Enumerator {
 	 */
 	public static Gender get(int value) {
 		switch (value) {
+			case UNKNOWN_VALUE: return UNKNOWN;
 			case MALE_VALUE: return MALE;
 			case FEMALE_VALUE: return FEMALE;
 		}

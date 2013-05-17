@@ -4076,6 +4076,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.CLASSPATH);
 
 		initEEnum(genderEEnum, Gender.class, "Gender");
+		addEEnumLiteral(genderEEnum, Gender.UNKNOWN);
 		addEEnumLiteral(genderEEnum, Gender.MALE);
 		addEEnumLiteral(genderEEnum, Gender.FEMALE);
 
@@ -4271,6 +4272,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Person partial value object that is stored in Graph database (usually Neo4j) or embedded in a MongoDB document.\n\nThe ID is Directory entry uid attribute.\n"
+		   });		
+		addAnnotation
+		  (genderEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Unknown gender (null value needs to be modeled explicitly in EMF Enum)."
+		   });		
+		addAnnotation
+		  (genderEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Male person."
+		   });		
+		addAnnotation
+		  (genderEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Female person."
 		   });		
 		addAnnotation
 		  (timestampedEClass, 

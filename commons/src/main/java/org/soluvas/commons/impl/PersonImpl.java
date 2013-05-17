@@ -517,7 +517,7 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Gender GENDER_EDEFAULT = Gender.MALE;
+	protected static final Gender GENDER_EDEFAULT = Gender.UNKNOWN;
 
 	/**
 	 * The cached value of the '{@link #getGender() <em>Gender</em>}' attribute.

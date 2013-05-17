@@ -108,8 +108,21 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Gender">
-    <eLiterals name="male"/>
-    <eLiterals name="female" value="1"/>
+    <eLiterals name="unknown" literal="unknown">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Unknown gender (null value needs to be modeled explicitly in EMF Enum)."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="male" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Male person."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="female" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Female person."/>
+      </eAnnotations>
+    </eLiterals>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="DateTime" instanceClassName="org.joda.time.DateTime"/>
   <eClassifiers xsi:type="ecore:EDataType" name="CurrencyUnit" instanceClassName="org.joda.money.CurrencyUnit"/>
