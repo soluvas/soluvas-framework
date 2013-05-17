@@ -563,7 +563,6 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 */
 	@Override
 	public DisplayImage getSafePersonPhoto(ImageType namespace, String imageId, ImageStyle style, Gender gender) {
-		log.info("gender is {}", gender);
 		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
 		final Image image = imageRepo.findOne(imageId);
 		
