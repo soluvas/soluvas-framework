@@ -1,18 +1,28 @@
-/**
- */
 package org.soluvas.security.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.joda.time.DateTime;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Describable;
+import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.SchemaVersionable;
+import org.soluvas.commons.Timestamped;
+import org.soluvas.commons.mongo.BigDecimalConverter;
+import org.soluvas.commons.mongo.CurrencyUnitConverter;
+import org.soluvas.commons.mongo.DateTimeConverter;
+import org.soluvas.commons.mongo.UnitConverter;
 import org.soluvas.security.AssignMode;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityPackage;
+
+import com.google.code.morphia.annotations.Converters;
+import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Id;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,14 +35,22 @@ import org.soluvas.security.SecurityPackage;
  *   <li>{@link org.soluvas.security.impl.RoleImpl#getResourceUri <em>Resource Uri</em>}</li>
  *   <li>{@link org.soluvas.security.impl.RoleImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.security.impl.RoleImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.RoleImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.RoleImpl#getCreationTime <em>Creation Time</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.RoleImpl#getModificationTime <em>Modification Time</em>}</li>
  *   <li>{@link org.soluvas.security.impl.RoleImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.security.impl.RoleImpl#getAssignMode <em>Assign Mode</em>}</li>
+ *   <li>{@link org.soluvas.security.impl.RoleImpl#getSchemaVersion <em>Schema Version</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
+@Entity(noClassnameStored=true)
+@Converters({BigDecimalConverter.class, DateTimeConverter.class,
+	CurrencyUnitConverter.class, UnitConverter.class})
 public class RoleImpl extends EObjectImpl implements Role {
+
 	/**
 	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -114,6 +132,61 @@ public class RoleImpl extends EObjectImpl implements Role {
 	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * Never used. Use {@link #name} instead.
+	 */
+	private final String id = null;
+
+	/**
+	 * The default value of the '{@link #getCreationTime() <em>Creation Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCreationTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final DateTime CREATION_TIME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCreationTime() <em>Creation Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCreationTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected DateTime creationTime = CREATION_TIME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getModificationTime() <em>Modification Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModificationTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final DateTime MODIFICATION_TIME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getModificationTime() <em>Modification Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModificationTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected DateTime modificationTime = MODIFICATION_TIME_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -131,6 +204,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 * @generated
 	 * @ordered
 	 */
+	@Id
 	protected String name = NAME_EDEFAULT;
 
 	/**
@@ -152,6 +226,29 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 * @ordered
 	 */
 	protected AssignMode assignMode = ASSIGN_MODE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSchemaVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long SCHEMA_VERSION_EDEFAULT = 1L;
+	
+	private static final long serialVersionUID = SCHEMA_VERSION_EDEFAULT;
+	public static final long CURRENT_SCHEMA_VERSION = SCHEMA_VERSION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSchemaVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected long schemaVersion = SCHEMA_VERSION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -200,6 +297,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceName() {
 		return resourceName;
 	}
@@ -209,6 +307,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceName(String newResourceName) {
 		String oldResourceName = resourceName;
 		resourceName = newResourceName;
@@ -288,6 +387,66 @@ public class RoleImpl extends EObjectImpl implements Role {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public String getId() {
+		return getName();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public void setId(String newId) {
+		setName(newId);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DateTime getCreationTime() {
+		return creationTime;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCreationTime(DateTime newCreationTime) {
+		DateTime oldCreationTime = creationTime;
+		creationTime = newCreationTime;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.ROLE__CREATION_TIME, oldCreationTime, creationTime));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DateTime getModificationTime() {
+		return modificationTime;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setModificationTime(DateTime newModificationTime) {
+		DateTime oldModificationTime = modificationTime;
+		modificationTime = newModificationTime;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.ROLE__MODIFICATION_TIME, oldModificationTime, modificationTime));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -314,6 +473,16 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 * @generated
 	 */
 	@Override
+	public long getSchemaVersion() {
+		return schemaVersion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SecurityPackage.ROLE__RESOURCE_TYPE:
@@ -324,10 +493,18 @@ public class RoleImpl extends EObjectImpl implements Role {
 				return getResourceName();
 			case SecurityPackage.ROLE__DESCRIPTION:
 				return getDescription();
+			case SecurityPackage.ROLE__ID:
+				return getId();
+			case SecurityPackage.ROLE__CREATION_TIME:
+				return getCreationTime();
+			case SecurityPackage.ROLE__MODIFICATION_TIME:
+				return getModificationTime();
 			case SecurityPackage.ROLE__NAME:
 				return getName();
 			case SecurityPackage.ROLE__ASSIGN_MODE:
 				return getAssignMode();
+			case SecurityPackage.ROLE__SCHEMA_VERSION:
+				return getSchemaVersion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -351,6 +528,15 @@ public class RoleImpl extends EObjectImpl implements Role {
 				return;
 			case SecurityPackage.ROLE__DESCRIPTION:
 				setDescription((String)newValue);
+				return;
+			case SecurityPackage.ROLE__ID:
+				setId((String)newValue);
+				return;
+			case SecurityPackage.ROLE__CREATION_TIME:
+				setCreationTime((DateTime)newValue);
+				return;
+			case SecurityPackage.ROLE__MODIFICATION_TIME:
+				setModificationTime((DateTime)newValue);
 				return;
 			case SecurityPackage.ROLE__NAME:
 				setName((String)newValue);
@@ -382,6 +568,15 @@ public class RoleImpl extends EObjectImpl implements Role {
 			case SecurityPackage.ROLE__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
+			case SecurityPackage.ROLE__ID:
+				setId(ID_EDEFAULT);
+				return;
+			case SecurityPackage.ROLE__CREATION_TIME:
+				setCreationTime(CREATION_TIME_EDEFAULT);
+				return;
+			case SecurityPackage.ROLE__MODIFICATION_TIME:
+				setModificationTime(MODIFICATION_TIME_EDEFAULT);
+				return;
 			case SecurityPackage.ROLE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -408,10 +603,18 @@ public class RoleImpl extends EObjectImpl implements Role {
 				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
 			case SecurityPackage.ROLE__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case SecurityPackage.ROLE__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case SecurityPackage.ROLE__CREATION_TIME:
+				return CREATION_TIME_EDEFAULT == null ? creationTime != null : !CREATION_TIME_EDEFAULT.equals(creationTime);
+			case SecurityPackage.ROLE__MODIFICATION_TIME:
+				return MODIFICATION_TIME_EDEFAULT == null ? modificationTime != null : !MODIFICATION_TIME_EDEFAULT.equals(modificationTime);
 			case SecurityPackage.ROLE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SecurityPackage.ROLE__ASSIGN_MODE:
 				return assignMode != ASSIGN_MODE_EDEFAULT;
+			case SecurityPackage.ROLE__SCHEMA_VERSION:
+				return schemaVersion != SCHEMA_VERSION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -431,6 +634,24 @@ public class RoleImpl extends EObjectImpl implements Role {
 		if (baseClass == Describable.class) {
 			switch (derivedFeatureID) {
 				case SecurityPackage.ROLE__DESCRIPTION: return CommonsPackage.DESCRIBABLE__DESCRIPTION;
+				default: return -1;
+			}
+		}
+		if (baseClass == SchemaVersionable.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Identifiable.class) {
+			switch (derivedFeatureID) {
+				case SecurityPackage.ROLE__ID: return CommonsPackage.IDENTIFIABLE__ID;
+				default: return -1;
+			}
+		}
+		if (baseClass == Timestamped.class) {
+			switch (derivedFeatureID) {
+				case SecurityPackage.ROLE__CREATION_TIME: return CommonsPackage.TIMESTAMPED__CREATION_TIME;
+				case SecurityPackage.ROLE__MODIFICATION_TIME: return CommonsPackage.TIMESTAMPED__MODIFICATION_TIME;
 				default: return -1;
 			}
 		}
@@ -455,6 +676,24 @@ public class RoleImpl extends EObjectImpl implements Role {
 				default: return -1;
 			}
 		}
+		if (baseClass == SchemaVersionable.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Identifiable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.IDENTIFIABLE__ID: return SecurityPackage.ROLE__ID;
+				default: return -1;
+			}
+		}
+		if (baseClass == Timestamped.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.TIMESTAMPED__CREATION_TIME: return SecurityPackage.ROLE__CREATION_TIME;
+				case CommonsPackage.TIMESTAMPED__MODIFICATION_TIME: return SecurityPackage.ROLE__MODIFICATION_TIME;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -476,10 +715,18 @@ public class RoleImpl extends EObjectImpl implements Role {
 		result.append(resourceName);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", id: ");
+		result.append(id);
+		result.append(", creationTime: ");
+		result.append(creationTime);
+		result.append(", modificationTime: ");
+		result.append(modificationTime);
 		result.append(", name: ");
 		result.append(name);
 		result.append(", assignMode: ");
 		result.append(assignMode);
+		result.append(", schemaVersion: ");
+		result.append(schemaVersion);
 		result.append(')');
 		return result.toString();
 	}

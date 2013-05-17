@@ -84,6 +84,9 @@ public class SecuritySwitch<T> extends Switch<T> {
 				if (result == null) result = caseResourceAware(role);
 				if (result == null) result = caseNameable(role);
 				if (result == null) result = caseDescribable(role);
+				if (result == null) result = caseSchemaVersionable(role);
+				if (result == null) result = caseIdentifiable(role);
+				if (result == null) result = caseTimestamped(role);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

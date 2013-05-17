@@ -276,6 +276,15 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getRole_SchemaVersion() {
+		return (EAttribute)roleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getDomainRole() {
 		return domainRoleEClass;
@@ -863,6 +872,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		roleEClass = createEClass(ROLE);
 		createEAttribute(roleEClass, ROLE__NAME);
 		createEAttribute(roleEClass, ROLE__ASSIGN_MODE);
+		createEAttribute(roleEClass, ROLE__SCHEMA_VERSION);
 
 		domainRoleEClass = createEClass(DOMAIN_ROLE);
 		createEAttribute(domainRoleEClass, DOMAIN_ROLE__NAME);
@@ -973,6 +983,9 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		roleEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 		roleEClass.getESuperTypes().add(theCommonsPackage.getNameable());
 		roleEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
+		roleEClass.getESuperTypes().add(theCommonsPackage.getSchemaVersionable());
+		roleEClass.getESuperTypes().add(theCommonsPackage.getIdentifiable());
+		roleEClass.getESuperTypes().add(theCommonsPackage.getTimestamped());
 		domainRoleEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 		domainRoleEClass.getESuperTypes().add(theCommonsPackage.getNameable());
 		domainRoleEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
@@ -991,6 +1004,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRole_Name(), ecorePackage.getEString(), "name", null, 1, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRole_AssignMode(), this.getAssignMode(), "assignMode", "manual", 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRole_SchemaVersion(), theEcorePackage.getELong(), "schemaVersion", "1", 1, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainRoleEClass, DomainRole.class, "DomainRole", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomainRole_Name(), ecorePackage.getEString(), "name", null, 1, 1, DomainRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

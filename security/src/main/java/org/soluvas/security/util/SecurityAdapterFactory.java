@@ -131,16 +131,16 @@ public class SecurityAdapterFactory extends AdapterFactoryImpl {
 				return createDescribableAdapter();
 			}
 			@Override
+			public Adapter caseSchemaVersionable(SchemaVersionable object) {
+				return createSchemaVersionableAdapter();
+			}
+			@Override
 			public Adapter caseIdentifiable(Identifiable object) {
 				return createIdentifiableAdapter();
 			}
 			@Override
 			public Adapter caseTimestamped(Timestamped object) {
 				return createTimestampedAdapter();
-			}
-			@Override
-			public Adapter caseSchemaVersionable(SchemaVersionable object) {
-				return createSchemaVersionableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {

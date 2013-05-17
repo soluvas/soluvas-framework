@@ -105,13 +105,40 @@ public interface SecurityPackage extends EPackage {
 	int ROLE__DESCRIPTION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__ID = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Creation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__CREATION_TIME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Modification Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__MODIFICATION_TIME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 1;
+	int ROLE__NAME = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Assign Mode</b></em>' attribute.
@@ -120,7 +147,16 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE__ASSIGN_MODE = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 2;
+	int ROLE__ASSIGN_MODE = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Schema Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__SCHEMA_VERSION = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Role</em>' class.
@@ -129,7 +165,7 @@ public interface SecurityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 3;
+	int ROLE_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.security.impl.DomainRoleImpl <em>Domain Role</em>}' class.
@@ -938,6 +974,17 @@ public interface SecurityPackage extends EPackage {
 	EAttribute getRole_AssignMode();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.security.Role#getSchemaVersion <em>Schema Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Schema Version</em>'.
+	 * @see org.soluvas.security.Role#getSchemaVersion()
+	 * @see #getRole()
+	 * @generated
+	 */
+	EAttribute getRole_SchemaVersion();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.security.DomainRole <em>Domain Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1591,6 +1638,14 @@ public interface SecurityPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ROLE__ASSIGN_MODE = eINSTANCE.getRole_AssignMode();
+
+		/**
+		 * The meta object literal for the '<em><b>Schema Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ROLE__SCHEMA_VERSION = eINSTANCE.getRole_SchemaVersion();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.security.impl.DomainRoleImpl <em>Domain Role</em>}' class.

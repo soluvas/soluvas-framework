@@ -3,8 +3,11 @@
 package org.soluvas.security;
 
 import org.soluvas.commons.Describable;
+import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.ResourceAware;
+import org.soluvas.commons.SchemaVersionable;
+import org.soluvas.commons.Timestamped;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,6 +23,7 @@ import org.soluvas.commons.ResourceAware;
  * <ul>
  *   <li>{@link org.soluvas.security.Role#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.security.Role#getAssignMode <em>Assign Mode</em>}</li>
+ *   <li>{@link org.soluvas.security.Role#getSchemaVersion <em>Schema Version</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,7 +31,7 @@ import org.soluvas.commons.ResourceAware;
  * @model
  * @generated
  */
-public interface Role extends ResourceAware, Nameable, Describable {
+public interface Role extends ResourceAware, Nameable, Describable, SchemaVersionable, Identifiable, Timestamped {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -84,5 +88,21 @@ public interface Role extends ResourceAware, Nameable, Describable {
 	 * @generated
 	 */
 	void setAssignMode(AssignMode value);
+
+	/**
+	 * Returns the value of the '<em><b>Schema Version</b></em>' attribute.
+	 * The default value is <code>"1"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Schema Version</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Schema Version</em>' attribute.
+	 * @see org.soluvas.security.SecurityPackage#getRole_SchemaVersion()
+	 * @model default="1" required="true" changeable="false"
+	 * @generated
+	 */
+	long getSchemaVersion();
 
 } // Role
