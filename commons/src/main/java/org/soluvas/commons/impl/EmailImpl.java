@@ -3,12 +3,9 @@
 package org.soluvas.commons.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.joda.time.DateTime;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Email;
@@ -97,6 +94,12 @@ public class EmailImpl extends EObjectImpl implements Email {
 	public EmailImpl() {
 		super();
 	}
+	
+	public EmailImpl(String email, boolean primary) {
+		super();
+		this.email = email;
+		this.primary = primary;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,6 +116,7 @@ public class EmailImpl extends EObjectImpl implements Email {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getEmail() {
 		return email;
 	}
@@ -122,6 +126,7 @@ public class EmailImpl extends EObjectImpl implements Email {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEmail(String newEmail) {
 		String oldEmail = email;
 		email = newEmail;
@@ -134,6 +139,7 @@ public class EmailImpl extends EObjectImpl implements Email {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isPrimary() {
 		return primary;
 	}
@@ -143,6 +149,7 @@ public class EmailImpl extends EObjectImpl implements Email {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimary(boolean newPrimary) {
 		boolean oldPrimary = primary;
 		primary = newPrimary;
@@ -155,6 +162,7 @@ public class EmailImpl extends EObjectImpl implements Email {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getValidationTime() {
 		return validationTime;
 	}
@@ -164,6 +172,7 @@ public class EmailImpl extends EObjectImpl implements Email {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValidationTime(DateTime newValidationTime) {
 		DateTime oldValidationTime = validationTime;
 		validationTime = newValidationTime;

@@ -13,6 +13,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.realm.ldap.AbstractLdapRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.codehaus.jackson.JsonNode;
 import org.ektorp.CouchDbConnector;
 import org.ektorp.ViewQuery;
 import org.ektorp.ViewResult;
@@ -141,22 +142,24 @@ public class SoluvasCouchDbRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken token) throws AuthenticationException {
 		if (token instanceof UsernamePasswordToken) {
-			// Principal can be either person ID or email
-			final String tokenPrincipal = ((UsernamePasswordToken) token).getUsername();
+			// Key can be either person ID or email
+			final String tokenKey = ((UsernamePasswordToken) token).getUsername();
 			final ViewQuery query = new ViewQuery()
 				.designDocId("_design/Person")
 		        .viewName("password")
-		        .key(tokenPrincipal);
+		        .key(tokenKey);
+			
 			final ViewResult matched = conn.queryView(query);
-			log.debug("Matched for {} : {}", tokenPrincipal, matched.getSize());
+			log.debug("Matched for {} : {}", tokenKey, matched.getSize());
 			if (!matched.isEmpty()) {
 				final Row firstRow = matched.iterator().next();
-				final String userPrincipal = firstRow.getKey();
-				final String userPassword = firstRow.getValue();
-				return new SimpleAuthenticationInfo(userPrincipal, userPassword, null, getName());
+				final JsonNode node = firstRow.getValueAsNode();
+				final String personId = node.get("uid").asText();
+				final String userPassword = node.get("password").asText();
+				return new SimpleAuthenticationInfo(personId, userPassword, null, getName());
 			} else {
 				return new SimpleAuthenticationInfo();
-			}
+			}			
 		} else if (token instanceof AutologinToken) {
 			log.debug("AuthenticationInfo for {} is using AutologinToken", token.getPrincipal());
 			final String personId = (String) token.getPrincipal();
@@ -166,5 +169,5 @@ public class SoluvasCouchDbRealm extends AuthorizingRealm {
 					+ token.getClass() + " using " + token.getPrincipal());
 		}
 	}
-
 }
+

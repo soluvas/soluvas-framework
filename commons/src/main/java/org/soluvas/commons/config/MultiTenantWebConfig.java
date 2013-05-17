@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.DataFolder;
-import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.StaticXmiLoader;
+import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.commons.tenant.TenantRefImpl;
 import org.springframework.context.annotation.Bean;
@@ -57,9 +57,14 @@ public class MultiTenantWebConfig {
 //		return beanFactory.getBean(HttpServletRequest.class); // doesn't work
 	}
 	
-	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
-	public TenantRef tenantRef() {
-		String pathInfo = getRequest().getPathInfo();
+	/**
+	 * If you can't use Spring dependency injection, use this to get the {@link TenantRef}
+	 * from a {@link HttpServletRequest}. 
+	 * @param httpRequest
+	 * @return
+	 */
+	public static TenantRef getTenantRef(HttpServletRequest httpRequest) {
+		final String pathInfo = httpRequest.getPathInfo();
 //		final String contextPath = Preconditions.checkNotNull(servletContext, "Cannot inject ServletContext")
 //				.getContextPath();
 		final Matcher tenantMatcher = Pattern.compile("\\/t/([^/]+)/([^/]+).*").matcher(pathInfo);
@@ -70,6 +75,11 @@ public class MultiTenantWebConfig {
 		log.debug("Multi-tenant Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
 				pathInfo, tenant.getClientId(), tenant.getTenantId(), tenant.getTenantEnv() );
 		return tenant;
+	}
+	
+	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+	public TenantRef tenantRef() {
+		return getTenantRef(getRequest());
 	}
 	
 	@Bean @DataFolder @Scope(value="request")
