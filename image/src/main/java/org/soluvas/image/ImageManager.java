@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.SerializableEObject;
 import org.soluvas.image.store.ImageRepository;
@@ -140,14 +141,12 @@ public interface ImageManager extends SerializableEObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets DisplayImages for SocialPersons & styleName in a specified repository.
-	 * If image is not available, use the gender to select the representation.
-	 * Returns Map<personId, DisplayImage>
+	 * Gets the DisplayImage for an imageId & styleName in a specified repository. If image is not available, use the gender to select the representation.
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" peopleDataType="org.soluvas.commons.Collection<org.soluvas.image.SocialPerson>" peopleRequired="true" styleDataType="org.soluvas.image.ImageStyle"
+	 * @model required="true" namespaceDataType="org.soluvas.image.ImageType" styleDataType="org.soluvas.image.ImageStyle"
 	 * @generated
 	 */
-	Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, Collection<SocialPerson> people, ImageStyle style);
+	DisplayImage getSafePersonPhoto(ImageType namespace, PersonLike person, ImageStyle style);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -157,10 +156,23 @@ public interface ImageManager extends SerializableEObject {
 	 * If image is not available, use the gender to select the representation.
 	 * Returns Map<personId, DisplayImage>
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" peopleDataType="org.soluvas.commons.Collection<org.soluvas.commons.PersonInfo>" peopleRequired="true" styleDataType="org.soluvas.image.ImageStyle"
+	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" peopleDataType="org.soluvas.commons.Collection<? extends org.soluvas.commons.PersonLike>" peopleRequired="true" styleDataType="org.soluvas.image.ImageStyle"
 	 * @generated
 	 */
-	Map<String, DisplayImage> getSafePersonInfoPhotos(ImageType namespace, Collection<PersonInfo> people, ImageStyle style);
+	Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, Collection<? extends PersonLike> people, ImageStyle style);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets DisplayImages for SocialPersons & styleName in a specified repository.
+	 * If image is not available, use the gender to select the representation.
+	 * Returns Map<personId, DisplayImage>
+	 * <!-- end-model-doc -->
+	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" peopleDataType="org.soluvas.commons.Collection<org.soluvas.image.SocialPerson>" peopleRequired="true" styleDataType="org.soluvas.image.ImageStyle"
+	 * @generated
+	 */
+	Map<String, DisplayImage> getSafeSocialPersonPhotos(ImageType namespace, Collection<SocialPerson> people, ImageStyle style);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -28,7 +28,7 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NotNullPredicate;
-import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.ProgressStatus;
 import org.soluvas.commons.WebAddress;
@@ -578,11 +578,22 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, Collection<SocialPerson> people, ImageStyle style) {
+	public DisplayImage getSafePersonPhoto(ImageType namespace, PersonLike person, ImageStyle style) {
+		return getSafePersonPhoto(namespace, person != null ? person.getPhotoId() : null, style,
+				person != null ? person.getGender() : null);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, Collection<? extends PersonLike> people, ImageStyle style) {
 		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
-		final Set<String> imageIds = ImmutableSet.copyOf(Iterables.filter(Collections2.transform(people, new Function<SocialPerson, String>() {
+		final Set<String> imageIds = ImmutableSet.copyOf(Iterables.filter(
+				Collections2.transform(people, new Function<PersonLike, String>() {
 			@Override @Nullable
-			public String apply(@Nullable SocialPerson input) {
+			public String apply(@Nullable PersonLike input) {
 				return input != null ? input.getPhotoId() : null;
 			}
 		}), new NotNullPredicate()));
@@ -595,7 +606,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		});
 		
 		final Map<String, DisplayImage> displayPhotos = new HashMap<>();
-		for (SocialPerson person : people) {
+		for (PersonLike person : people) {
 			if (person == null || displayPhotos.containsKey(person.getId())) {
 				continue;
 			}
@@ -616,11 +627,12 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public Map<String, DisplayImage> getSafePersonInfoPhotos(ImageType namespace, Collection<PersonInfo> people, ImageStyle style) {
+	public Map<String, DisplayImage> getSafeSocialPersonPhotos(ImageType namespace, Collection<SocialPerson> people, ImageStyle style) {
 		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
-		final Set<String> imageIds = ImmutableSet.copyOf(Iterables.filter(Collections2.transform(people, new Function<PersonInfo, String>() {
+		final Set<String> imageIds = ImmutableSet.copyOf(Iterables.filter(
+				Collections2.transform(people, new Function<SocialPerson, String>() {
 			@Override @Nullable
-			public String apply(@Nullable PersonInfo input) {
+			public String apply(@Nullable SocialPerson input) {
 				return input != null ? input.getPhotoId() : null;
 			}
 		}), new NotNullPredicate()));
@@ -633,7 +645,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		});
 		
 		final Map<String, DisplayImage> displayPhotos = new HashMap<>();
-		for (PersonInfo person : people) {
+		for (SocialPerson person : people) {
 			if (person == null || displayPhotos.containsKey(person.getId())) {
 				continue;
 			}

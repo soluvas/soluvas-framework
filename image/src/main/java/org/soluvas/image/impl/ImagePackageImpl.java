@@ -1593,11 +1593,18 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEParameter(op, this.getImageStyle(), "style", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theCommonsPackage.getGender(), "gender", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(imageManagerEClass, this.getDisplayImage(), "getSafePersonPhoto", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageType(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theCommonsPackage.getPersonLike(), "person", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageStyle(), "style", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		op = addEOperation(imageManagerEClass, null, "getSafePersonPhotos", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageType(), "namespace", 1, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(theCommonsPackage.getCollection());
-		g2 = createEGenericType(this.getSocialPerson());
+		g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
+		g3 = createEGenericType(theCommonsPackage.getPersonLike());
+		g2.setEUpperBound(g3);
 		addEParameter(op, g1, "people", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageStyle(), "style", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(theCommonsPackage.getMap());
@@ -1607,10 +1614,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		op = addEOperation(imageManagerEClass, null, "getSafePersonInfoPhotos", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(imageManagerEClass, null, "getSafeSocialPersonPhotos", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageType(), "namespace", 1, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(theCommonsPackage.getCollection());
-		g2 = createEGenericType(theCommonsPackage.getPersonInfo());
+		g2 = createEGenericType(this.getSocialPerson());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "people", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageStyle(), "style", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1929,10 +1936,16 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		  (imageManagerEClass.getEOperations().get(10), 
 		   source, 
 		   new String[] {
-			 "documentation", "Gets DisplayImages for SocialPersons & styleName in a specified repository.\nIf image is not available, use the gender to select the representation.\nReturns Map<personId, DisplayImage>"
+			 "documentation", "Gets the DisplayImage for an imageId & styleName in a specified repository. If image is not available, use the gender to select the representation."
 		   });		
 		addAnnotation
 		  (imageManagerEClass.getEOperations().get(11), 
+		   source, 
+		   new String[] {
+			 "documentation", "Gets DisplayImages for SocialPersons & styleName in a specified repository.\nIf image is not available, use the gender to select the representation.\nReturns Map<personId, DisplayImage>"
+		   });		
+		addAnnotation
+		  (imageManagerEClass.getEOperations().get(12), 
 		   source, 
 		   new String[] {
 			 "documentation", "Gets DisplayImages for SocialPersons & styleName in a specified repository.\nIf image is not available, use the gender to select the representation.\nReturns Map<personId, DisplayImage>"
