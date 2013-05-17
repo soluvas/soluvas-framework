@@ -185,16 +185,20 @@ public class EmfPersonRepository extends
 		return found.isPresent() ? found.get().getSlug() : null;
 	}
 
-	@Override
-	@Nullable
+	@Override @Nullable
 	public Person findOneByFacebook(@Nullable Long facebookId,
 			@Nullable String facebookUsername) {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	@Nullable
+	@Override @Nullable
 	public Person findOneByEmail(@Nullable String email) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override @Nullable
+	public Person findOneByTwitter(@Nullable Long twitterId,
+			@Nullable String twitterScreenName) {
 		throw new UnsupportedOperationException();
 	}
 
