@@ -38,7 +38,7 @@ import com.google.common.collect.Sets;
  */
 public class SoluvasRealm extends AuthorizingRealm {
 
-	transient Logger log = LoggerFactory.getLogger(SoluvasRealm.class);
+	private static final Logger log = LoggerFactory.getLogger(SoluvasRealm.class);
 
 	private final SecurityCatalog securityCatalog;
 	private final SecurityRepository securityRepo;

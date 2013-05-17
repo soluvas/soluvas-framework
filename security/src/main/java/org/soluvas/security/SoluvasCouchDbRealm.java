@@ -37,7 +37,7 @@ import com.google.common.collect.Sets;
  */
 public class SoluvasCouchDbRealm extends AuthorizingRealm {
 
-	transient Logger log = LoggerFactory.getLogger(SoluvasCouchDbRealm.class);
+	private static final Logger log = LoggerFactory.getLogger(SoluvasCouchDbRealm.class);
 
 	private final Supplier<SecurityCatalog> securityCatalogSupplier;
 	private final SecurityRepository securityRepo;

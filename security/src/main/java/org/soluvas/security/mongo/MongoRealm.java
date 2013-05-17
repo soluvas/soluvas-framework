@@ -1,6 +1,5 @@
 package org.soluvas.security.mongo;
 
-import java.net.MalformedURLException;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -25,7 +24,6 @@ import org.soluvas.security.Role;
 import org.soluvas.security.SecurityCatalog;
 import org.soluvas.security.SecurityRepository;
 
-import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.mongodb.BasicDBObject;
@@ -44,16 +42,16 @@ public class MongoRealm extends AuthorizingRealm {
 
 	private static final Logger log = LoggerFactory.getLogger(MongoRealm.class);
 
-	private final Supplier<SecurityCatalog> securityCatalogSupplier;
+	private final SecurityCatalog securityCatalog;
 	private final SecurityRepository securityRepo;
 	private final String personCollName = "person";
 	private final DBCollection personColl;
 	private MongoClient mongoClient;
 	
-	public MongoRealm(Supplier<SecurityCatalog> securityCatalogSupplier,
-			final String mongoUri) throws MalformedURLException {
+	public MongoRealm(SecurityCatalog securityCatalog,
+			final String mongoUri) {
 		super();
-		this.securityCatalogSupplier = securityCatalogSupplier;
+		this.securityCatalog = securityCatalog;
 		this.securityRepo = new MongoSecurityRepository();
 		// WARNING: mongoUri may contain password!
 		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
@@ -88,9 +86,7 @@ public class MongoRealm extends AuthorizingRealm {
 		// TODO: permissions should be set somewhere else,
 		// using EMF models
 
-		final SecurityCatalog securityCatalog = securityCatalogSupplier.get();
-		log.debug(
-				"Processing security catalog for {} with {} roles, {} domains, {} actions, and {} permissions",
+		log.trace("Processing security catalog for {} with {} roles, {} domains, {} actions, and {} permissions",
 				userName, securityCatalog.getRoles().size(), securityCatalog
 						.getDomains().size(), securityCatalog.getActions()
 						.size(), securityCatalog.getPermissions().size());
@@ -98,13 +94,13 @@ public class MongoRealm extends AuthorizingRealm {
 		for (final Role role : securityCatalog.getRoles()) {
 			switch (role.getAssignMode()) {
 			case GUEST:
-				log.debug("Assigning role {} to {} because assign mode {}",
+				log.trace("Assigning role {} to {} because assign mode {}",
 						role.getName(), userName, role.getAssignMode());
 				info.addRole(role.getName());
 				break;
 			case AUTHENTICATED:
 				if (!principalCollection.isEmpty()) {
-					log.debug(
+					log.trace(
 							"Assigning role {} to {} because assign mode {} and principals={}",
 							role.getName(), userName, role.getAssignMode(),
 							principalCollection);
@@ -120,7 +116,7 @@ public class MongoRealm extends AuthorizingRealm {
 			final Set<String> intersectingRoles = Sets.intersection(info.getRoles(),
 					ImmutableSet.copyOf(perm.getRoles()));
 			if (!intersectingRoles.isEmpty()) {
-				log.debug("Assigning permission {} to {} due to role(s) {}",
+				log.trace("Assigning permission {} to {} due to role(s) {}",
 						perm.toStringPermission(), userName, intersectingRoles);
 				info.addStringPermission(perm.toStringPermission());
 			}
