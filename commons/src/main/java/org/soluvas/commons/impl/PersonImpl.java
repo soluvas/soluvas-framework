@@ -27,6 +27,7 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.Informer;
+import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.PersonLike;
@@ -2557,6 +2558,49 @@ public class PersonImpl extends EObjectImpl implements Person {
 		passwordResetExpiryTime = newPasswordResetExpiryTime;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON__PASSWORD_RESET_EXPIRY_TIME, oldPasswordResetExpiryTime, passwordResetExpiryTime));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public boolean hasEmail(String email) {
+		if (email == null) {
+			return false;
+		}
+		final String toFind = NameUtils.normalizeEmail(email);
+		return Iterables.any(getEmails(), new Predicate<Email>() {
+			@Override
+			public boolean apply(@Nullable Email input) {
+				return toFind.equals(input.getEmail());
+			}
+		});
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public Email putEmail(String email) {
+		if (email == null) {
+			return null;
+		}
+		final String normalized = NameUtils.normalizeEmail(email);
+		final Optional<Email> found = Iterables.tryFind(getEmails(), new Predicate<Email>() {
+			@Override
+			public boolean apply(@Nullable Email input) {
+				return normalized.equals(input.getEmail());
+			}
+		});
+		if (found.isPresent()) {
+			return found.get();
+		} else {
+			final Email newEmail = new EmailImpl(normalized, getEmails().isEmpty());
+			getEmails().add(newEmail);
+			return newEmail;
+		}
 	}
 
 	/**

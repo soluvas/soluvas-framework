@@ -1,7 +1,11 @@
 package com.aksimata.person;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
+import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.PersonImpl;
@@ -44,6 +48,34 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		final DBObject dbo = findDBObjectByQuery(new BasicDBObject("canonicalSlug", SlugUtils.canonicalize(upSlug)),
 				new BasicDBObject("slug", 1));
 		return (String) (dbo != null ? dbo.get("slug") : null);
+	}
+
+	@Override
+	public Person findOneByFacebook(@Nullable Long facebookId,
+			@Nullable String facebookUsername) {
+		if (facebookId == null && facebookUsername == null) {
+			return null;
+		}
+		final List<DBObject> orCriteria = new ArrayList<>();
+		if (facebookId != null) {
+			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.PERSON__FACEBOOK_ID.getName(), 
+					facebookId));
+		}
+		if (facebookUsername != null) {
+			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.PERSON__FACEBOOK_USERNAME.getName(), 
+					facebookUsername));
+		}
+		final BasicDBObject query = new BasicDBObject("$or", orCriteria);
+		return findOneByQuery(query);
+	}
+
+	@Override @Nullable
+	public Person findOneByEmail(@Nullable String email) {
+		if (email == null) {
+			return null;
+		}
+		final BasicDBObject query = new BasicDBObject("emails.email", email.toLowerCase().trim());
+		return findOneByQuery(query);
 	}
 	
 }

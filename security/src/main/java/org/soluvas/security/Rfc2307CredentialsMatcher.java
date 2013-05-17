@@ -35,6 +35,10 @@ public class Rfc2307CredentialsMatcher implements CredentialsMatcher {
 	@Override
 	public boolean doCredentialsMatch(AuthenticationToken token,
 			AuthenticationInfo info) {
+		if (token instanceof AutologinToken) {
+			log.debug("Auto-logging in {}", token.getPrincipal());
+			return true;
+		}
 		if (token.getCredentials() == null) {
 			log.warn("Rejecting null token credentials for {}", token.getPrincipal());
 			return false;

@@ -5,7 +5,6 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.fusesource.jansi.Ansi;
@@ -273,7 +272,6 @@ public class NameUtils {
 	 * @param name
 	 * @return
 	 */
-	@Nonnull
 	public static PersonName splitName(String name) {
 		if (Strings.isNullOrEmpty(name))
 			name = "-";
@@ -283,5 +281,15 @@ public class NameUtils {
 		} else {
 			return new PersonName(name, name);
 		}
+	}
+	
+	/**
+	 * Lowercases then trims the input.
+	 * @param email
+	 * @return
+	 */
+	@Nullable
+	public static String normalizeEmail(@Nullable String email) {
+		return email != null ? email.toLowerCase().trim() : null;
 	}
 }

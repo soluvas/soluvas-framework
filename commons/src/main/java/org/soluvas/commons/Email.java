@@ -33,6 +33,9 @@ public interface Email extends SerializableEObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Must be normalized: lowercased, trimmed, and must not be null.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Email</em>' attribute.
 	 * @see #setEmail(String)
 	 * @see org.soluvas.commons.CommonsPackage#getEmail_Email()

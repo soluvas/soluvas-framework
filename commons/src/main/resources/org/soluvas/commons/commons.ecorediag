@@ -2193,6 +2193,14 @@
         <styles xmi:type="notation:FilteringStyle" xmi:id="_6hZeY70_EeKdkJ5ZT1V2xQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_6hZeZL0_EeKdkJ5ZT1V2xQ" type="5002">
+        <children xmi:type="notation:Node" xmi:id="_Y-Hjwb7mEeKldYdvJzcWYA" type="2002">
+          <element xmi:type="ecore:EOperation" href="commons.ecore#//Person/hasEmail"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_Y-Hjwr7mEeKldYdvJzcWYA"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_Zw_yML7mEeKldYdvJzcWYA" type="2002">
+          <element xmi:type="ecore:EOperation" href="commons.ecore#//Person/putEmail"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_Zw_yMb7mEeKldYdvJzcWYA"/>
+        </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_6hZeZb0_EeKdkJ5ZT1V2xQ"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_6hZeZr0_EeKdkJ5ZT1V2xQ"/>
         <styles xmi:type="notation:FilteringStyle" xmi:id="_6hZeZ70_EeKdkJ5ZT1V2xQ"/>

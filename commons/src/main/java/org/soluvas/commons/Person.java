@@ -1428,4 +1428,26 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 */
 	void setPasswordResetExpiryTime(DateTime value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Checks if the email is already in its list.
+	 * <!-- end-model-doc -->
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean hasEmail(String email);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Puts the (normalized) email, and sets it as primary if the only one. Has no effect if already exists. Returns the added Email contained object.
+	 * <!-- end-model-doc -->
+	 * @model required="true"
+	 * @generated
+	 */
+	Email putEmail(String email);
+
 } // Person

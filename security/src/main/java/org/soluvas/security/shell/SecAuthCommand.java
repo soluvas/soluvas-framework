@@ -8,6 +8,7 @@ import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
 import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -15,6 +16,7 @@ import org.apache.shiro.realm.Realm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.soluvas.security.AutologinToken;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +53,13 @@ public class SecAuthCommand extends ExtCommandSupport {
 		System.out.println(ansi().render("Using realm @|bold %s|@ (%s) to authenticate @|bold %s|@", 
 				realm.getName(), realm.getClass().getName(), principal));
 		final DefaultSecurityManager securityMgr = new DefaultSecurityManager(realm);
-		final AuthenticationInfo authInfo = securityMgr.authenticate(new UsernamePasswordToken(principal, password));
+		final AuthenticationToken token;
+		if (autologin) {
+			token = new AutologinToken(principal);
+		} else {
+			token = new UsernamePasswordToken(principal, password);
+		}
+		final AuthenticationInfo authInfo = securityMgr.authenticate(token);
 		return authInfo;
 	}
 

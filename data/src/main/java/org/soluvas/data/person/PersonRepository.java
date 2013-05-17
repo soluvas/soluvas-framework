@@ -1,5 +1,8 @@
 package org.soluvas.data.person;
 
+import javax.annotation.Nullable;
+
+import org.soluvas.commons.Email;
 import org.soluvas.commons.Person;
 import org.soluvas.data.SlugLookup;
 import org.soluvas.data.repository.PagingAndSortingRepository;
@@ -10,5 +13,24 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
  */
 public interface PersonRepository extends
 		PagingAndSortingRepository<Person, String>, SlugLookup<Person> {
+
+	/**
+	 * Find a {@link Person} by Facebook ID or Username (at least one must be specified).
+	 * @param facebookId
+	 * @param facebookUsername
+	 * @return Person, or {@code null} if not found or if both facebookId and facebookUsername
+	 * 		were {@code null}.
+	 */
+	@Nullable
+	public Person findOneByFacebook(@Nullable Long facebookId, @Nullable String facebookUsername);
+
+	/**
+	 * Find a {@link Person} by any {@link Email}. All email status are included,
+	 * regardless of validation status.
+	 * <p>Note to implementor: input email must be normalized (lowercased + trimmed)
+	 * before querying database.
+	 */
+	@Nullable
+	public Person findOneByEmail(@Nullable String email);
 
 }

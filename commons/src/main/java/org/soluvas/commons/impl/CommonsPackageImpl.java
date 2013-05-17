@@ -4027,6 +4027,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPerson_PasswordResetCode(), theEcorePackage.getEString(), "passwordResetCode", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_PasswordResetExpiryTime(), this.getDateTime(), "passwordResetExpiryTime", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		op = addEOperation(personEClass, theEcorePackage.getEBoolean(), "hasEmail", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "email", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(personEClass, this.getEmail(), "putEmail", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "email", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(phoneNumberEClass, PhoneNumber.class, "PhoneNumber", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPhoneNumber_PhoneNumber(), theEcorePackage.getEString(), "phoneNumber", null, 1, 1, PhoneNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPhoneNumber_Primary(), theEcorePackage.getEBoolean(), "primary", "false", 0, 1, PhoneNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4886,6 +4892,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Database-agnostic future replacement for org.soluvas.ldap.SocialPerson & BippoPerson.\n\nA basic LDAP <tt>objectClass=person</tt> with proper mappings that can be subclassed."
 		   });		
 		addAnnotation
+		  (personEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Checks if the email is already in its list."
+		   });		
+		addAnnotation
+		  (personEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Puts the (normalized) email, and sets it as primary if the only one. Has no effect if already exists. Returns the added Email contained object."
+		   });		
+		addAnnotation
 		  (getPerson_Password(), 
 		   source, 
 		   new String[] {
@@ -5070,6 +5088,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "When this phone number was validated by the user."
+		   });		
+		addAnnotation
+		  (getEmail_Email(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Must be normalized: lowercased, trimmed, and must not be null."
 		   });		
 		addAnnotation
 		  (getEmail_Primary(), 
