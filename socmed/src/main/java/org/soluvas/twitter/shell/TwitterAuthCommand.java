@@ -6,7 +6,7 @@ import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
 import org.soluvas.commons.shell.ExtCommandSupport;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import twitter4j.Twitter;
@@ -19,7 +19,7 @@ import twitter4j.auth.RequestToken;
  * and returns {@link AccessToken}. 
  * @author rudi
  */
-@Service @Lazy
+@Service @Scope("prototype")
 @Command(scope="twitter", name="auth", description="Authenticate OAuth verifier code given by Twitter and returns access token.")
 public class TwitterAuthCommand extends ExtCommandSupport {
 	

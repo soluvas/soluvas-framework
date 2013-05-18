@@ -5,7 +5,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
 import org.soluvas.commons.shell.ExtCommandSupport;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import twitter4j.Twitter;
@@ -16,7 +16,7 @@ import twitter4j.auth.RequestToken;
  * Returns URI to be used for OAuth login.
  * @author rudi
  */
-@Service @Lazy
+@Service @Scope("prototype")
 @Command(scope="twitter", name="login", description="Get request token and authentication URI.")
 public class TwitterLoginCommand extends ExtCommandSupport {
 	

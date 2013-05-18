@@ -46,10 +46,6 @@ import com.google.common.base.Function;
  *   <li>{@link org.soluvas.commons.Person#getFacebookId <em>Facebook Id</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getFacebookUsername <em>Facebook Username</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getFacebookAccessToken <em>Facebook Access Token</em>}</li>
- *   <li>{@link org.soluvas.commons.Person#getTwitterId <em>Twitter Id</em>}</li>
- *   <li>{@link org.soluvas.commons.Person#getTwitterScreenName <em>Twitter Screen Name</em>}</li>
- *   <li>{@link org.soluvas.commons.Person#getTwitterAccessToken <em>Twitter Access Token</em>}</li>
- *   <li>{@link org.soluvas.commons.Person#getTwitterAccessTokenSecret <em>Twitter Access Token Secret</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getGooglePlusId <em>Google Plus Id</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getGoogleUsername <em>Google Username</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getVirtualMail <em>Virtual Mail</em>}</li>
@@ -85,7 +81,7 @@ import com.google.common.base.Function;
  * @model
  * @generated
  */
-public interface Person extends NameContainer, PhotoIdContainer, Identifiable, PersonLike, Informer<PersonInfo>, Timestamped, SchemaVersionable, Describable, Sluggable, CanonicalSluggable {
+public interface Person extends NameContainer, PhotoIdContainer, Identifiable, PersonLike, Informer<PersonInfo>, Timestamped, SchemaVersionable, Describable, Sluggable, CanonicalSluggable, TwitterAccessible, TwitterIdentity {
 	
 	public static class ToPersonInfo implements Function<Person, PersonInfo> {
 		@Override @Nullable
@@ -592,110 +588,6 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	void setFacebookAccessToken(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Twitter Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Twitter Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Twitter Id</em>' attribute.
-	 * @see #setTwitterId(Long)
-	 * @see org.soluvas.commons.CommonsPackage#getPerson_TwitterId()
-	 * @model
-	 * @generated
-	 */
-	Long getTwitterId();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.commons.Person#getTwitterId <em>Twitter Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Twitter Id</em>' attribute.
-	 * @see #getTwitterId()
-	 * @generated
-	 */
-	void setTwitterId(Long value);
-
-	/**
-	 * Returns the value of the '<em><b>Twitter Screen Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Twitter Screen Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Twitter Screen Name</em>' attribute.
-	 * @see #setTwitterScreenName(String)
-	 * @see org.soluvas.commons.CommonsPackage#getPerson_TwitterScreenName()
-	 * @model
-	 * @generated
-	 */
-	String getTwitterScreenName();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.commons.Person#getTwitterScreenName <em>Twitter Screen Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Twitter Screen Name</em>' attribute.
-	 * @see #getTwitterScreenName()
-	 * @generated
-	 */
-	void setTwitterScreenName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Twitter Access Token</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Twitter Access Token</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Twitter Access Token</em>' attribute.
-	 * @see #setTwitterAccessToken(String)
-	 * @see org.soluvas.commons.CommonsPackage#getPerson_TwitterAccessToken()
-	 * @model
-	 * @generated
-	 */
-	String getTwitterAccessToken();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.commons.Person#getTwitterAccessToken <em>Twitter Access Token</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Twitter Access Token</em>' attribute.
-	 * @see #getTwitterAccessToken()
-	 * @generated
-	 */
-	void setTwitterAccessToken(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Twitter Access Token Secret</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Twitter Access Token Secret</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Twitter Access Token Secret</em>' attribute.
-	 * @see #setTwitterAccessTokenSecret(String)
-	 * @see org.soluvas.commons.CommonsPackage#getPerson_TwitterAccessTokenSecret()
-	 * @model
-	 * @generated
-	 */
-	String getTwitterAccessTokenSecret();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.commons.Person#getTwitterAccessTokenSecret <em>Twitter Access Token Secret</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Twitter Access Token Secret</em>' attribute.
-	 * @see #getTwitterAccessTokenSecret()
-	 * @generated
-	 */
-	void setTwitterAccessTokenSecret(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Google Plus Id</b></em>' attribute.

@@ -281,6 +281,14 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createCanonicalSluggableAdapter();
 			}
 			@Override
+			public Adapter caseTwitterAccessible(TwitterAccessible object) {
+				return createTwitterAccessibleAdapter();
+			}
+			@Override
+			public Adapter caseTwitterIdentity(TwitterIdentity object) {
+				return createTwitterIdentityAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -1039,6 +1047,34 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCanonicalSluggableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.TwitterAccessible <em>Twitter Accessible</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.TwitterAccessible
+	 * @generated
+	 */
+	public Adapter createTwitterAccessibleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.TwitterIdentity <em>Twitter Identity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.TwitterIdentity
+	 * @generated
+	 */
+	public Adapter createTwitterIdentityAdapter() {
 		return null;
 	}
 

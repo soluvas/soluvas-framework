@@ -966,11 +966,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELongObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookUsername" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookAccessToken" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twitterId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELongObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twitterScreenName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twitterAccessToken" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twitterAccessTokenSecret"
-        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="googlePlusId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="googleUsername" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="virtualMail" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
@@ -1107,6 +1102,8 @@
     <eGenericSuperTypes eClassifier="#//Describable"/>
     <eGenericSuperTypes eClassifier="#//Sluggable"/>
     <eGenericSuperTypes eClassifier="#//CanonicalSluggable"/>
+    <eGenericSuperTypes eClassifier="#//TwitterAccessible"/>
+    <eGenericSuperTypes eClassifier="#//TwitterIdentity"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PhoneNumber">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="phoneNumber" lowerBound="1"
@@ -1277,5 +1274,20 @@
         <details key="documentation" value="Canonical slug is lowercase, and removes every character not in a-z, 0-9, and underscore.&#xA;&#xA;&lt;p>It is useful for e.g. making both http://www.satukancinta.com/arum.puspita and http://www.satukancinta.com/arumpuspita or even http://www.satukancinta.com/member/arum.pus.pi.ta usable.&#xA;&#xA;&lt;p>From the technical point-of-view (easy matching/lookup), the canonical slug/identifier for arum.puspita is arumpuspita, the canonicalSlug should be indexed in database for fast matching. From the user or SEO point-of-view however, the &quot;canonical&quot; one is arum.puspita, but it is not what is meant here.&#xA;&#xA;&lt;p>Use {@link SlugUtils#canonicalize()} to generate canonical slug from user-provided slug."/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TwitterAccessible" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Supports Twitter Access Token and Access Token Secret, and therefore able to tweet, mention, or retweet."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twitterAccessToken" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twitterAccessTokenSecret"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TwitterIdentity" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Contains Twitter identity, which can be Twitter ID, screen name, or both."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twitterId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELongObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="twitterScreenName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -39,6 +39,8 @@ import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.SignupSourceType;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.commons.Timestamped;
+import org.soluvas.commons.TwitterAccessible;
+import org.soluvas.commons.TwitterIdentity;
 import org.soluvas.commons.mongo.BigDecimalConverter;
 import org.soluvas.commons.mongo.CurrencyUnitConverter;
 import org.soluvas.commons.mongo.DateTimeConverter;
@@ -66,6 +68,10 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getSlug <em>Slug</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getCanonicalSlug <em>Canonical Slug</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getTwitterAccessToken <em>Twitter Access Token</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getTwitterAccessTokenSecret <em>Twitter Access Token Secret</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getTwitterId <em>Twitter Id</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getTwitterScreenName <em>Twitter Screen Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFirstName <em>First Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getLastName <em>Last Name</em>}</li>
@@ -86,10 +92,6 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFacebookId <em>Facebook Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFacebookUsername <em>Facebook Username</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFacebookAccessToken <em>Facebook Access Token</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.PersonImpl#getTwitterId <em>Twitter Id</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.PersonImpl#getTwitterScreenName <em>Twitter Screen Name</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.PersonImpl#getTwitterAccessToken <em>Twitter Access Token</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.PersonImpl#getTwitterAccessTokenSecret <em>Twitter Access Token Secret</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getGooglePlusId <em>Google Plus Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getGoogleUsername <em>Google Username</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getVirtualMail <em>Virtual Mail</em>}</li>
@@ -289,6 +291,86 @@ public class PersonImpl extends EObjectImpl implements Person {
 	protected String canonicalSlug = CANONICAL_SLUG_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getTwitterAccessToken() <em>Twitter Access Token</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTwitterAccessToken()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TWITTER_ACCESS_TOKEN_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTwitterAccessToken() <em>Twitter Access Token</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTwitterAccessToken()
+	 * @generated
+	 * @ordered
+	 */
+	protected String twitterAccessToken = TWITTER_ACCESS_TOKEN_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTwitterAccessTokenSecret() <em>Twitter Access Token Secret</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTwitterAccessTokenSecret()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TWITTER_ACCESS_TOKEN_SECRET_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTwitterAccessTokenSecret() <em>Twitter Access Token Secret</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTwitterAccessTokenSecret()
+	 * @generated
+	 * @ordered
+	 */
+	protected String twitterAccessTokenSecret = TWITTER_ACCESS_TOKEN_SECRET_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTwitterId() <em>Twitter Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTwitterId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long TWITTER_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTwitterId() <em>Twitter Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTwitterId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long twitterId = TWITTER_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTwitterScreenName() <em>Twitter Screen Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTwitterScreenName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TWITTER_SCREEN_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTwitterScreenName() <em>Twitter Screen Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTwitterScreenName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String twitterScreenName = TWITTER_SCREEN_NAME_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -297,7 +379,7 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected static final long SCHEMA_VERSION_EDEFAULT = 2L;
-	
+
 	public static final long CURRENT_SCHEMA_VERSION = SCHEMA_VERSION_EDEFAULT;
 
 	/**
@@ -639,86 +721,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected String facebookAccessToken = FACEBOOK_ACCESS_TOKEN_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getTwitterId() <em>Twitter Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTwitterId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Long TWITTER_ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTwitterId() <em>Twitter Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTwitterId()
-	 * @generated
-	 * @ordered
-	 */
-	protected Long twitterId = TWITTER_ID_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getTwitterScreenName() <em>Twitter Screen Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTwitterScreenName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String TWITTER_SCREEN_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTwitterScreenName() <em>Twitter Screen Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTwitterScreenName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String twitterScreenName = TWITTER_SCREEN_NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getTwitterAccessToken() <em>Twitter Access Token</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTwitterAccessToken()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String TWITTER_ACCESS_TOKEN_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTwitterAccessToken() <em>Twitter Access Token</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTwitterAccessToken()
-	 * @generated
-	 * @ordered
-	 */
-	protected String twitterAccessToken = TWITTER_ACCESS_TOKEN_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getTwitterAccessTokenSecret() <em>Twitter Access Token Secret</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTwitterAccessTokenSecret()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String TWITTER_ACCESS_TOKEN_SECRET_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTwitterAccessTokenSecret() <em>Twitter Access Token Secret</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTwitterAccessTokenSecret()
-	 * @generated
-	 * @ordered
-	 */
-	protected String twitterAccessTokenSecret = TWITTER_ACCESS_TOKEN_SECRET_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getGooglePlusId() <em>Google Plus Id</em>}' attribute.
@@ -2732,6 +2734,14 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return getSlug();
 			case CommonsPackage.PERSON__CANONICAL_SLUG:
 				return getCanonicalSlug();
+			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN:
+				return getTwitterAccessToken();
+			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN_SECRET:
+				return getTwitterAccessTokenSecret();
+			case CommonsPackage.PERSON__TWITTER_ID:
+				return getTwitterId();
+			case CommonsPackage.PERSON__TWITTER_SCREEN_NAME:
+				return getTwitterScreenName();
 			case CommonsPackage.PERSON__SCHEMA_VERSION:
 				return getSchemaVersion();
 			case CommonsPackage.PERSON__FIRST_NAME:
@@ -2772,14 +2782,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return getFacebookUsername();
 			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
 				return getFacebookAccessToken();
-			case CommonsPackage.PERSON__TWITTER_ID:
-				return getTwitterId();
-			case CommonsPackage.PERSON__TWITTER_SCREEN_NAME:
-				return getTwitterScreenName();
-			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN:
-				return getTwitterAccessToken();
-			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN_SECRET:
-				return getTwitterAccessTokenSecret();
 			case CommonsPackage.PERSON__GOOGLE_PLUS_ID:
 				return getGooglePlusId();
 			case CommonsPackage.PERSON__GOOGLE_USERNAME:
@@ -2873,6 +2875,18 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case CommonsPackage.PERSON__CANONICAL_SLUG:
 				setCanonicalSlug((String)newValue);
 				return;
+			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN:
+				setTwitterAccessToken((String)newValue);
+				return;
+			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN_SECRET:
+				setTwitterAccessTokenSecret((String)newValue);
+				return;
+			case CommonsPackage.PERSON__TWITTER_ID:
+				setTwitterId((Long)newValue);
+				return;
+			case CommonsPackage.PERSON__TWITTER_SCREEN_NAME:
+				setTwitterScreenName((String)newValue);
+				return;
 			case CommonsPackage.PERSON__FIRST_NAME:
 				setFirstName((String)newValue);
 				return;
@@ -2933,18 +2947,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return;
 			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
 				setFacebookAccessToken((String)newValue);
-				return;
-			case CommonsPackage.PERSON__TWITTER_ID:
-				setTwitterId((Long)newValue);
-				return;
-			case CommonsPackage.PERSON__TWITTER_SCREEN_NAME:
-				setTwitterScreenName((String)newValue);
-				return;
-			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN:
-				setTwitterAccessToken((String)newValue);
-				return;
-			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN_SECRET:
-				setTwitterAccessTokenSecret((String)newValue);
 				return;
 			case CommonsPackage.PERSON__GOOGLE_PLUS_ID:
 				setGooglePlusId((String)newValue);
@@ -3066,6 +3068,18 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case CommonsPackage.PERSON__CANONICAL_SLUG:
 				setCanonicalSlug(CANONICAL_SLUG_EDEFAULT);
 				return;
+			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN:
+				setTwitterAccessToken(TWITTER_ACCESS_TOKEN_EDEFAULT);
+				return;
+			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN_SECRET:
+				setTwitterAccessTokenSecret(TWITTER_ACCESS_TOKEN_SECRET_EDEFAULT);
+				return;
+			case CommonsPackage.PERSON__TWITTER_ID:
+				setTwitterId(TWITTER_ID_EDEFAULT);
+				return;
+			case CommonsPackage.PERSON__TWITTER_SCREEN_NAME:
+				setTwitterScreenName(TWITTER_SCREEN_NAME_EDEFAULT);
+				return;
 			case CommonsPackage.PERSON__FIRST_NAME:
 				setFirstName(FIRST_NAME_EDEFAULT);
 				return;
@@ -3122,18 +3136,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return;
 			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
 				setFacebookAccessToken(FACEBOOK_ACCESS_TOKEN_EDEFAULT);
-				return;
-			case CommonsPackage.PERSON__TWITTER_ID:
-				setTwitterId(TWITTER_ID_EDEFAULT);
-				return;
-			case CommonsPackage.PERSON__TWITTER_SCREEN_NAME:
-				setTwitterScreenName(TWITTER_SCREEN_NAME_EDEFAULT);
-				return;
-			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN:
-				setTwitterAccessToken(TWITTER_ACCESS_TOKEN_EDEFAULT);
-				return;
-			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN_SECRET:
-				setTwitterAccessTokenSecret(TWITTER_ACCESS_TOKEN_SECRET_EDEFAULT);
 				return;
 			case CommonsPackage.PERSON__GOOGLE_PLUS_ID:
 				setGooglePlusId(GOOGLE_PLUS_ID_EDEFAULT);
@@ -3247,6 +3249,14 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return SLUG_EDEFAULT == null ? slug != null : !SLUG_EDEFAULT.equals(slug);
 			case CommonsPackage.PERSON__CANONICAL_SLUG:
 				return CANONICAL_SLUG_EDEFAULT == null ? canonicalSlug != null : !CANONICAL_SLUG_EDEFAULT.equals(canonicalSlug);
+			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN:
+				return TWITTER_ACCESS_TOKEN_EDEFAULT == null ? twitterAccessToken != null : !TWITTER_ACCESS_TOKEN_EDEFAULT.equals(twitterAccessToken);
+			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN_SECRET:
+				return TWITTER_ACCESS_TOKEN_SECRET_EDEFAULT == null ? twitterAccessTokenSecret != null : !TWITTER_ACCESS_TOKEN_SECRET_EDEFAULT.equals(twitterAccessTokenSecret);
+			case CommonsPackage.PERSON__TWITTER_ID:
+				return TWITTER_ID_EDEFAULT == null ? twitterId != null : !TWITTER_ID_EDEFAULT.equals(twitterId);
+			case CommonsPackage.PERSON__TWITTER_SCREEN_NAME:
+				return TWITTER_SCREEN_NAME_EDEFAULT == null ? twitterScreenName != null : !TWITTER_SCREEN_NAME_EDEFAULT.equals(twitterScreenName);
 			case CommonsPackage.PERSON__SCHEMA_VERSION:
 				return schemaVersion != SCHEMA_VERSION_EDEFAULT;
 			case CommonsPackage.PERSON__FIRST_NAME:
@@ -3287,14 +3297,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return FACEBOOK_USERNAME_EDEFAULT == null ? facebookUsername != null : !FACEBOOK_USERNAME_EDEFAULT.equals(facebookUsername);
 			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
 				return FACEBOOK_ACCESS_TOKEN_EDEFAULT == null ? facebookAccessToken != null : !FACEBOOK_ACCESS_TOKEN_EDEFAULT.equals(facebookAccessToken);
-			case CommonsPackage.PERSON__TWITTER_ID:
-				return TWITTER_ID_EDEFAULT == null ? twitterId != null : !TWITTER_ID_EDEFAULT.equals(twitterId);
-			case CommonsPackage.PERSON__TWITTER_SCREEN_NAME:
-				return TWITTER_SCREEN_NAME_EDEFAULT == null ? twitterScreenName != null : !TWITTER_SCREEN_NAME_EDEFAULT.equals(twitterScreenName);
-			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN:
-				return TWITTER_ACCESS_TOKEN_EDEFAULT == null ? twitterAccessToken != null : !TWITTER_ACCESS_TOKEN_EDEFAULT.equals(twitterAccessToken);
-			case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN_SECRET:
-				return TWITTER_ACCESS_TOKEN_SECRET_EDEFAULT == null ? twitterAccessTokenSecret != null : !TWITTER_ACCESS_TOKEN_SECRET_EDEFAULT.equals(twitterAccessTokenSecret);
 			case CommonsPackage.PERSON__GOOGLE_PLUS_ID:
 				return GOOGLE_PLUS_ID_EDEFAULT == null ? googlePlusId != null : !GOOGLE_PLUS_ID_EDEFAULT.equals(googlePlusId);
 			case CommonsPackage.PERSON__GOOGLE_USERNAME:
@@ -3419,6 +3421,20 @@ public class PersonImpl extends EObjectImpl implements Person {
 				default: return -1;
 			}
 		}
+		if (baseClass == TwitterAccessible.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN: return CommonsPackage.TWITTER_ACCESSIBLE__TWITTER_ACCESS_TOKEN;
+				case CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN_SECRET: return CommonsPackage.TWITTER_ACCESSIBLE__TWITTER_ACCESS_TOKEN_SECRET;
+				default: return -1;
+			}
+		}
+		if (baseClass == TwitterIdentity.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.PERSON__TWITTER_ID: return CommonsPackage.TWITTER_IDENTITY__TWITTER_ID;
+				case CommonsPackage.PERSON__TWITTER_SCREEN_NAME: return CommonsPackage.TWITTER_IDENTITY__TWITTER_SCREEN_NAME;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -3486,6 +3502,20 @@ public class PersonImpl extends EObjectImpl implements Person {
 				default: return -1;
 			}
 		}
+		if (baseClass == TwitterAccessible.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.TWITTER_ACCESSIBLE__TWITTER_ACCESS_TOKEN: return CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN;
+				case CommonsPackage.TWITTER_ACCESSIBLE__TWITTER_ACCESS_TOKEN_SECRET: return CommonsPackage.PERSON__TWITTER_ACCESS_TOKEN_SECRET;
+				default: return -1;
+			}
+		}
+		if (baseClass == TwitterIdentity.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.TWITTER_IDENTITY__TWITTER_ID: return CommonsPackage.PERSON__TWITTER_ID;
+				case CommonsPackage.TWITTER_IDENTITY__TWITTER_SCREEN_NAME: return CommonsPackage.PERSON__TWITTER_SCREEN_NAME;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -3515,6 +3545,14 @@ public class PersonImpl extends EObjectImpl implements Person {
 		result.append(slug);
 		result.append(", canonicalSlug: ");
 		result.append(canonicalSlug);
+		result.append(", twitterAccessToken: ");
+		result.append(twitterAccessToken);
+		result.append(", twitterAccessTokenSecret: ");
+		result.append(twitterAccessTokenSecret);
+		result.append(", twitterId: ");
+		result.append(twitterId);
+		result.append(", twitterScreenName: ");
+		result.append(twitterScreenName);
 		result.append(", schemaVersion: ");
 		result.append(schemaVersion);
 		result.append(", firstName: ");
@@ -3545,14 +3583,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 		result.append(facebookUsername);
 		result.append(", facebookAccessToken: ");
 		result.append(facebookAccessToken);
-		result.append(", twitterId: ");
-		result.append(twitterId);
-		result.append(", twitterScreenName: ");
-		result.append(twitterScreenName);
-		result.append(", twitterAccessToken: ");
-		result.append(twitterAccessToken);
-		result.append(", twitterAccessTokenSecret: ");
-		result.append(twitterAccessTokenSecret);
 		result.append(", googlePlusId: ");
 		result.append(googlePlusId);
 		result.append(", googleUsername: ");

@@ -94,6 +94,8 @@ import org.soluvas.commons.Translatable;
 import org.soluvas.commons.Translation;
 import org.soluvas.commons.TranslationManager;
 import org.soluvas.commons.TranslationState;
+import org.soluvas.commons.TwitterAccessible;
+import org.soluvas.commons.TwitterIdentity;
 import org.soluvas.commons.WebAddress;
 
 import com.google.common.collect.Multimap;
@@ -479,6 +481,20 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass canonicalSluggableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass twitterAccessibleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass twitterIdentityEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2225,7 +2241,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_TwitterId() {
+	public EAttribute getPerson_GooglePlusId() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(20);
 	}
 
@@ -2234,7 +2250,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_TwitterScreenName() {
+	public EAttribute getPerson_GoogleUsername() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(21);
 	}
 
@@ -2243,7 +2259,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_TwitterAccessToken() {
+	public EAttribute getPerson_VirtualMail() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(22);
 	}
 
@@ -2252,7 +2268,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_TwitterAccessTokenSecret() {
+	public EAttribute getPerson_Nickname() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(23);
 	}
 
@@ -2261,7 +2277,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_GooglePlusId() {
+	public EAttribute getPerson_CustomerRole() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(24);
 	}
 
@@ -2270,7 +2286,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_GoogleUsername() {
+	public EAttribute getPerson_MemberRole() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(25);
 	}
 
@@ -2279,7 +2295,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_VirtualMail() {
+	public EAttribute getPerson_ManagerRole() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(26);
 	}
 
@@ -2288,7 +2304,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_Nickname() {
+	public EAttribute getPerson_TimeZoneId() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(27);
 	}
 
@@ -2297,7 +2313,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_CustomerRole() {
+	public EAttribute getPerson_TimeZone() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(28);
 	}
 
@@ -2306,7 +2322,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_MemberRole() {
+	public EAttribute getPerson_ReferrerId() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(29);
 	}
 
@@ -2315,7 +2331,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_ManagerRole() {
+	public EAttribute getPerson_ReferrerType() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(30);
 	}
 
@@ -2324,7 +2340,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_TimeZoneId() {
+	public EAttribute getPerson_SignupSource() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(31);
 	}
 
@@ -2333,7 +2349,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_TimeZone() {
+	public EAttribute getPerson_SignupSourceType() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(32);
 	}
 
@@ -2342,7 +2358,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_ReferrerId() {
+	public EAttribute getPerson_IpAddress() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(33);
 	}
 
@@ -2351,7 +2367,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_ReferrerType() {
+	public EAttribute getPerson_LastIpAddress() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(34);
 	}
 
@@ -2360,7 +2376,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_SignupSource() {
+	public EAttribute getPerson_LastLoginTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(35);
 	}
 
@@ -2369,7 +2385,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_SignupSourceType() {
+	public EAttribute getPerson_ValidationTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(36);
 	}
 
@@ -2378,7 +2394,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_IpAddress() {
+	public EAttribute getPerson_ActivationTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(37);
 	}
 
@@ -2387,7 +2403,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_LastIpAddress() {
+	public EAttribute getPerson_VerificationTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(38);
 	}
 
@@ -2396,7 +2412,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_LastLoginTime() {
+	public EAttribute getPerson_NewsletterSubscriptionEnabled() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(39);
 	}
 
@@ -2405,7 +2421,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_ValidationTime() {
+	public EAttribute getPerson_NewsletterSubscriptionTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(40);
 	}
 
@@ -2414,7 +2430,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_ActivationTime() {
+	public EAttribute getPerson_SocialSharingEnabled() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(41);
 	}
 
@@ -2423,7 +2439,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_VerificationTime() {
+	public EAttribute getPerson_PublicationStatus() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(42);
 	}
 
@@ -2432,7 +2448,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_NewsletterSubscriptionEnabled() {
+	public EAttribute getPerson_ArchivalStatus() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(43);
 	}
 
@@ -2441,7 +2457,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_NewsletterSubscriptionTime() {
+	public EAttribute getPerson_Folder() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(44);
 	}
 
@@ -2450,7 +2466,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_SocialSharingEnabled() {
+	public EAttribute getPerson_Religion() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(45);
 	}
 
@@ -2459,7 +2475,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_PublicationStatus() {
+	public EAttribute getPerson_PasswordResetCode() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(46);
 	}
 
@@ -2468,44 +2484,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_ArchivalStatus() {
-		return (EAttribute)personEClass.getEStructuralFeatures().get(47);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPerson_Folder() {
-		return (EAttribute)personEClass.getEStructuralFeatures().get(48);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPerson_Religion() {
-		return (EAttribute)personEClass.getEStructuralFeatures().get(49);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPerson_PasswordResetCode() {
-		return (EAttribute)personEClass.getEStructuralFeatures().get(50);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getPerson_PasswordResetExpiryTime() {
-		return (EAttribute)personEClass.getEStructuralFeatures().get(51);
+		return (EAttribute)personEClass.getEStructuralFeatures().get(47);
 	}
 
 	/**
@@ -2830,6 +2810,60 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	public EAttribute getCanonicalSluggable_CanonicalSlug() {
 		return (EAttribute)canonicalSluggableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTwitterAccessible() {
+		return twitterAccessibleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTwitterAccessible_TwitterAccessToken() {
+		return (EAttribute)twitterAccessibleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTwitterAccessible_TwitterAccessTokenSecret() {
+		return (EAttribute)twitterAccessibleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTwitterIdentity() {
+		return twitterIdentityEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTwitterIdentity_TwitterId() {
+		return (EAttribute)twitterIdentityEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTwitterIdentity_TwitterScreenName() {
+		return (EAttribute)twitterIdentityEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -3411,10 +3445,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(personEClass, PERSON__FACEBOOK_ID);
 		createEAttribute(personEClass, PERSON__FACEBOOK_USERNAME);
 		createEAttribute(personEClass, PERSON__FACEBOOK_ACCESS_TOKEN);
-		createEAttribute(personEClass, PERSON__TWITTER_ID);
-		createEAttribute(personEClass, PERSON__TWITTER_SCREEN_NAME);
-		createEAttribute(personEClass, PERSON__TWITTER_ACCESS_TOKEN);
-		createEAttribute(personEClass, PERSON__TWITTER_ACCESS_TOKEN_SECRET);
 		createEAttribute(personEClass, PERSON__GOOGLE_PLUS_ID);
 		createEAttribute(personEClass, PERSON__GOOGLE_USERNAME);
 		createEAttribute(personEClass, PERSON__VIRTUAL_MAIL);
@@ -3484,6 +3514,14 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		canonicalSluggableEClass = createEClass(CANONICAL_SLUGGABLE);
 		createEAttribute(canonicalSluggableEClass, CANONICAL_SLUGGABLE__CANONICAL_SLUG);
+
+		twitterAccessibleEClass = createEClass(TWITTER_ACCESSIBLE);
+		createEAttribute(twitterAccessibleEClass, TWITTER_ACCESSIBLE__TWITTER_ACCESS_TOKEN);
+		createEAttribute(twitterAccessibleEClass, TWITTER_ACCESSIBLE__TWITTER_ACCESS_TOKEN_SECRET);
+
+		twitterIdentityEClass = createEClass(TWITTER_IDENTITY);
+		createEAttribute(twitterIdentityEClass, TWITTER_IDENTITY__TWITTER_ID);
+		createEAttribute(twitterIdentityEClass, TWITTER_IDENTITY__TWITTER_SCREEN_NAME);
 
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
@@ -3713,6 +3751,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		g1 = createEGenericType(this.getSluggable());
 		personEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getCanonicalSluggable());
+		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTwitterAccessible());
+		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTwitterIdentity());
 		personEClass.getEGenericSuperTypes().add(g1);
 		postalAddressEClass.getESuperTypes().add(this.getNameContainer());
 		postalAddressEClass.getESuperTypes().add(this.getIdentifiable());
@@ -3994,10 +4036,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPerson_FacebookId(), theEcorePackage.getELongObject(), "facebookId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_FacebookUsername(), theEcorePackage.getEString(), "facebookUsername", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_FacebookAccessToken(), theEcorePackage.getEString(), "facebookAccessToken", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_TwitterId(), theEcorePackage.getELongObject(), "twitterId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_TwitterScreenName(), theEcorePackage.getEString(), "twitterScreenName", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_TwitterAccessToken(), theEcorePackage.getEString(), "twitterAccessToken", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_TwitterAccessTokenSecret(), theEcorePackage.getEString(), "twitterAccessTokenSecret", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_GooglePlusId(), theEcorePackage.getEString(), "googlePlusId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_GoogleUsername(), theEcorePackage.getEString(), "googleUsername", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_VirtualMail(), theEcorePackage.getEString(), "virtualMail", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4073,6 +4111,14 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(canonicalSluggableEClass, CanonicalSluggable.class, "CanonicalSluggable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCanonicalSluggable_CanonicalSlug(), theEcorePackage.getEString(), "canonicalSlug", null, 0, 1, CanonicalSluggable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(twitterAccessibleEClass, TwitterAccessible.class, "TwitterAccessible", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTwitterAccessible_TwitterAccessToken(), theEcorePackage.getEString(), "twitterAccessToken", null, 0, 1, TwitterAccessible.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTwitterAccessible_TwitterAccessTokenSecret(), theEcorePackage.getEString(), "twitterAccessTokenSecret", null, 0, 1, TwitterAccessible.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(twitterIdentityEClass, TwitterIdentity.class, "TwitterIdentity", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTwitterIdentity_TwitterId(), theEcorePackage.getELongObject(), "twitterId", null, 0, 1, TwitterIdentity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTwitterIdentity_TwitterScreenName(), theEcorePackage.getEString(), "twitterScreenName", null, 0, 1, TwitterIdentity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -5238,6 +5284,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Canonical slug is lowercase, and removes every character not in a-z, 0-9, and underscore.\n\n<p>It is useful for e.g. making both http://www.satukancinta.com/arum.puspita and http://www.satukancinta.com/arumpuspita or even http://www.satukancinta.com/member/arum.pus.pi.ta usable.\n\n<p>From the technical point-of-view (easy matching/lookup), the canonical slug/identifier for arum.puspita is arumpuspita, the canonicalSlug should be indexed in database for fast matching. From the user or SEO point-of-view however, the \"canonical\" one is arum.puspita, but it is not what is meant here.\n\n<p>Use {@link SlugUtils#canonicalize()} to generate canonical slug from user-provided slug."
+		   });		
+		addAnnotation
+		  (twitterAccessibleEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Supports Twitter Access Token and Access Token Secret, and therefore able to tweet, mention, or retweet."
+		   });		
+		addAnnotation
+		  (twitterIdentityEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Contains Twitter identity, which can be Twitter ID, screen name, or both."
 		   });
 	}
 	

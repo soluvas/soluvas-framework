@@ -419,6 +419,8 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseSchemaVersionable(person);
 				if (result == null) result = caseDescribable(person);
 				if (result == null) result = caseCanonicalSluggable(person);
+				if (result == null) result = caseTwitterAccessible(person);
+				if (result == null) result = caseTwitterIdentity(person);
 				if (result == null) result = caseNameable(person);
 				if (result == null) result = caseImageable(person);
 				if (result == null) result = caseSluggable(person);
@@ -457,6 +459,18 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				CanonicalSluggable canonicalSluggable = (CanonicalSluggable)theEObject;
 				T1 result = caseCanonicalSluggable(canonicalSluggable);
 				if (result == null) result = caseSluggable(canonicalSluggable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.TWITTER_ACCESSIBLE: {
+				TwitterAccessible twitterAccessible = (TwitterAccessible)theEObject;
+				T1 result = caseTwitterAccessible(twitterAccessible);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.TWITTER_IDENTITY: {
+				TwitterIdentity twitterIdentity = (TwitterIdentity)theEObject;
+				T1 result = caseTwitterIdentity(twitterIdentity);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1256,6 +1270,36 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseCanonicalSluggable(CanonicalSluggable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Twitter Accessible</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Twitter Accessible</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseTwitterAccessible(TwitterAccessible object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Twitter Identity</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Twitter Identity</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseTwitterIdentity(TwitterIdentity object) {
 		return null;
 	}
 
