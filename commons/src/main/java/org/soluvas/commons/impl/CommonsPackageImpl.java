@@ -55,6 +55,8 @@ import org.soluvas.commons.Email;
 import org.soluvas.commons.EventBusProgressMonitor;
 import org.soluvas.commons.Expandable;
 import org.soluvas.commons.ExpansionState;
+import org.soluvas.commons.FacebookAccessible;
+import org.soluvas.commons.FacebookIdentity;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
@@ -495,6 +497,20 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass twitterIdentityEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass facebookIdentityEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass facebookAccessibleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2214,7 +2230,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_FacebookId() {
+	public EAttribute getPerson_GooglePlusId() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(17);
 	}
 
@@ -2223,7 +2239,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_FacebookUsername() {
+	public EAttribute getPerson_GoogleUsername() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(18);
 	}
 
@@ -2232,7 +2248,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_FacebookAccessToken() {
+	public EAttribute getPerson_VirtualMail() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(19);
 	}
 
@@ -2241,7 +2257,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_GooglePlusId() {
+	public EAttribute getPerson_Nickname() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(20);
 	}
 
@@ -2250,7 +2266,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_GoogleUsername() {
+	public EAttribute getPerson_CustomerRole() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(21);
 	}
 
@@ -2259,7 +2275,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_VirtualMail() {
+	public EAttribute getPerson_MemberRole() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(22);
 	}
 
@@ -2268,7 +2284,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_Nickname() {
+	public EAttribute getPerson_ManagerRole() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(23);
 	}
 
@@ -2277,7 +2293,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_CustomerRole() {
+	public EAttribute getPerson_TimeZoneId() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(24);
 	}
 
@@ -2286,7 +2302,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_MemberRole() {
+	public EAttribute getPerson_TimeZone() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(25);
 	}
 
@@ -2295,7 +2311,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_ManagerRole() {
+	public EAttribute getPerson_ReferrerId() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(26);
 	}
 
@@ -2304,7 +2320,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_TimeZoneId() {
+	public EAttribute getPerson_ReferrerType() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(27);
 	}
 
@@ -2313,7 +2329,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_TimeZone() {
+	public EAttribute getPerson_SignupSource() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(28);
 	}
 
@@ -2322,7 +2338,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_ReferrerId() {
+	public EAttribute getPerson_SignupSourceType() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(29);
 	}
 
@@ -2331,7 +2347,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_ReferrerType() {
+	public EAttribute getPerson_IpAddress() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(30);
 	}
 
@@ -2340,7 +2356,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_SignupSource() {
+	public EAttribute getPerson_LastIpAddress() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(31);
 	}
 
@@ -2349,7 +2365,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_SignupSourceType() {
+	public EAttribute getPerson_LastLoginTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(32);
 	}
 
@@ -2358,7 +2374,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_IpAddress() {
+	public EAttribute getPerson_ValidationTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(33);
 	}
 
@@ -2367,7 +2383,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_LastIpAddress() {
+	public EAttribute getPerson_ActivationTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(34);
 	}
 
@@ -2376,7 +2392,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_LastLoginTime() {
+	public EAttribute getPerson_VerificationTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(35);
 	}
 
@@ -2385,7 +2401,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_ValidationTime() {
+	public EAttribute getPerson_NewsletterSubscriptionEnabled() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(36);
 	}
 
@@ -2394,7 +2410,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_ActivationTime() {
+	public EAttribute getPerson_NewsletterSubscriptionTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(37);
 	}
 
@@ -2403,7 +2419,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_VerificationTime() {
+	public EAttribute getPerson_SocialSharingEnabled() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(38);
 	}
 
@@ -2412,7 +2428,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_NewsletterSubscriptionEnabled() {
+	public EAttribute getPerson_PublicationStatus() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(39);
 	}
 
@@ -2421,7 +2437,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_NewsletterSubscriptionTime() {
+	public EAttribute getPerson_ArchivalStatus() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(40);
 	}
 
@@ -2430,7 +2446,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_SocialSharingEnabled() {
+	public EAttribute getPerson_Folder() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(41);
 	}
 
@@ -2439,7 +2455,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_PublicationStatus() {
+	public EAttribute getPerson_Religion() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(42);
 	}
 
@@ -2448,7 +2464,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_ArchivalStatus() {
+	public EAttribute getPerson_PasswordResetCode() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(43);
 	}
 
@@ -2457,35 +2473,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPerson_Folder() {
-		return (EAttribute)personEClass.getEStructuralFeatures().get(44);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPerson_Religion() {
-		return (EAttribute)personEClass.getEStructuralFeatures().get(45);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPerson_PasswordResetCode() {
-		return (EAttribute)personEClass.getEStructuralFeatures().get(46);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getPerson_PasswordResetExpiryTime() {
-		return (EAttribute)personEClass.getEStructuralFeatures().get(47);
+		return (EAttribute)personEClass.getEStructuralFeatures().get(44);
 	}
 
 	/**
@@ -2864,6 +2853,51 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	public EAttribute getTwitterIdentity_TwitterScreenName() {
 		return (EAttribute)twitterIdentityEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFacebookIdentity() {
+		return facebookIdentityEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFacebookIdentity_FacebookId() {
+		return (EAttribute)facebookIdentityEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFacebookIdentity_FacebookUsername() {
+		return (EAttribute)facebookIdentityEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFacebookAccessible() {
+		return facebookAccessibleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFacebookAccessible_FacebookAccessToken() {
+		return (EAttribute)facebookAccessibleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3442,9 +3476,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(personEClass, PERSON__LANGUAGE);
 		createEAttribute(personEClass, PERSON__CURRENCY_CODE);
 		createEAttribute(personEClass, PERSON__CURRENCY);
-		createEAttribute(personEClass, PERSON__FACEBOOK_ID);
-		createEAttribute(personEClass, PERSON__FACEBOOK_USERNAME);
-		createEAttribute(personEClass, PERSON__FACEBOOK_ACCESS_TOKEN);
 		createEAttribute(personEClass, PERSON__GOOGLE_PLUS_ID);
 		createEAttribute(personEClass, PERSON__GOOGLE_USERNAME);
 		createEAttribute(personEClass, PERSON__VIRTUAL_MAIL);
@@ -3522,6 +3553,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		twitterIdentityEClass = createEClass(TWITTER_IDENTITY);
 		createEAttribute(twitterIdentityEClass, TWITTER_IDENTITY__TWITTER_ID);
 		createEAttribute(twitterIdentityEClass, TWITTER_IDENTITY__TWITTER_SCREEN_NAME);
+
+		facebookIdentityEClass = createEClass(FACEBOOK_IDENTITY);
+		createEAttribute(facebookIdentityEClass, FACEBOOK_IDENTITY__FACEBOOK_ID);
+		createEAttribute(facebookIdentityEClass, FACEBOOK_IDENTITY__FACEBOOK_USERNAME);
+
+		facebookAccessibleEClass = createEClass(FACEBOOK_ACCESSIBLE);
+		createEAttribute(facebookAccessibleEClass, FACEBOOK_ACCESSIBLE__FACEBOOK_ACCESS_TOKEN);
 
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
@@ -3755,6 +3793,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		g1 = createEGenericType(this.getTwitterAccessible());
 		personEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getTwitterIdentity());
+		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getFacebookIdentity());
+		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getFacebookAccessible());
 		personEClass.getEGenericSuperTypes().add(g1);
 		postalAddressEClass.getESuperTypes().add(this.getNameContainer());
 		postalAddressEClass.getESuperTypes().add(this.getIdentifiable());
@@ -4033,9 +4075,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPerson_Language(), theEcorePackage.getEString(), "language", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_CurrencyCode(), theEcorePackage.getEString(), "currencyCode", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_Currency(), this.getCurrencyUnit(), "currency", null, 0, 1, Person.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_FacebookId(), theEcorePackage.getELongObject(), "facebookId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_FacebookUsername(), theEcorePackage.getEString(), "facebookUsername", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_FacebookAccessToken(), theEcorePackage.getEString(), "facebookAccessToken", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_GooglePlusId(), theEcorePackage.getEString(), "googlePlusId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_GoogleUsername(), theEcorePackage.getEString(), "googleUsername", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_VirtualMail(), theEcorePackage.getEString(), "virtualMail", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4119,6 +4158,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEClass(twitterIdentityEClass, TwitterIdentity.class, "TwitterIdentity", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTwitterIdentity_TwitterId(), theEcorePackage.getELongObject(), "twitterId", null, 0, 1, TwitterIdentity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTwitterIdentity_TwitterScreenName(), theEcorePackage.getEString(), "twitterScreenName", null, 0, 1, TwitterIdentity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(facebookIdentityEClass, FacebookIdentity.class, "FacebookIdentity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFacebookIdentity_FacebookId(), theEcorePackage.getELongObject(), "facebookId", null, 0, 1, FacebookIdentity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFacebookIdentity_FacebookUsername(), theEcorePackage.getEString(), "facebookUsername", null, 0, 1, FacebookIdentity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(facebookAccessibleEClass, FacebookAccessible.class, "FacebookAccessible", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFacebookAccessible_FacebookAccessToken(), theEcorePackage.getEString(), "facebookAccessToken", null, 0, 1, FacebookAccessible.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -5296,6 +5342,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Contains Twitter identity, which can be Twitter ID, screen name, or both."
+		   });		
+		addAnnotation
+		  (facebookIdentityEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Contains Facebook identity, which can be Facebook ID, username, or both."
+		   });		
+		addAnnotation
+		  (facebookAccessibleEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Contains Facebook access token (which can expire anytime)."
 		   });
 	}
 	

@@ -23,6 +23,8 @@ import org.soluvas.commons.CanonicalSluggable;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Email;
+import org.soluvas.commons.FacebookAccessible;
+import org.soluvas.commons.FacebookIdentity;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
@@ -72,6 +74,9 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getTwitterAccessTokenSecret <em>Twitter Access Token Secret</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getTwitterId <em>Twitter Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getTwitterScreenName <em>Twitter Screen Name</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFacebookId <em>Facebook Id</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFacebookUsername <em>Facebook Username</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFacebookAccessToken <em>Facebook Access Token</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFirstName <em>First Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getLastName <em>Last Name</em>}</li>
@@ -89,9 +94,6 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getLanguage <em>Language</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getCurrencyCode <em>Currency Code</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getCurrency <em>Currency</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFacebookId <em>Facebook Id</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFacebookUsername <em>Facebook Username</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFacebookAccessToken <em>Facebook Access Token</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getGooglePlusId <em>Google Plus Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getGoogleUsername <em>Google Username</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getVirtualMail <em>Virtual Mail</em>}</li>
@@ -371,6 +373,66 @@ public class PersonImpl extends EObjectImpl implements Person {
 	protected String twitterScreenName = TWITTER_SCREEN_NAME_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getFacebookId() <em>Facebook Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFacebookId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long FACEBOOK_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFacebookId() <em>Facebook Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFacebookId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long facebookId = FACEBOOK_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getFacebookUsername() <em>Facebook Username</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFacebookUsername()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String FACEBOOK_USERNAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFacebookUsername() <em>Facebook Username</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFacebookUsername()
+	 * @generated
+	 * @ordered
+	 */
+	protected String facebookUsername = FACEBOOK_USERNAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getFacebookAccessToken() <em>Facebook Access Token</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFacebookAccessToken()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String FACEBOOK_ACCESS_TOKEN_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFacebookAccessToken() <em>Facebook Access Token</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFacebookAccessToken()
+	 * @generated
+	 * @ordered
+	 */
+	protected String facebookAccessToken = FACEBOOK_ACCESS_TOKEN_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -379,8 +441,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected static final long SCHEMA_VERSION_EDEFAULT = 2L;
-
-	public static final long CURRENT_SCHEMA_VERSION = SCHEMA_VERSION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
@@ -391,6 +451,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected long schemaVersion = SCHEMA_VERSION_EDEFAULT;
+
+	public static final long CURRENT_SCHEMA_VERSION = SCHEMA_VERSION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getFirstName() <em>First Name</em>}' attribute.
@@ -661,66 +723,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected static final CurrencyUnit CURRENCY_EDEFAULT = null;
-
-	/**
-	 * The default value of the '{@link #getFacebookId() <em>Facebook Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFacebookId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Long FACEBOOK_ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getFacebookId() <em>Facebook Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFacebookId()
-	 * @generated
-	 * @ordered
-	 */
-	protected Long facebookId = FACEBOOK_ID_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getFacebookUsername() <em>Facebook Username</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFacebookUsername()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String FACEBOOK_USERNAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getFacebookUsername() <em>Facebook Username</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFacebookUsername()
-	 * @generated
-	 * @ordered
-	 */
-	protected String facebookUsername = FACEBOOK_USERNAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getFacebookAccessToken() <em>Facebook Access Token</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFacebookAccessToken()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String FACEBOOK_ACCESS_TOKEN_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getFacebookAccessToken() <em>Facebook Access Token</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFacebookAccessToken()
-	 * @generated
-	 * @ordered
-	 */
-	protected String facebookAccessToken = FACEBOOK_ACCESS_TOKEN_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getGooglePlusId() <em>Google Plus Id</em>}' attribute.
@@ -2742,6 +2744,12 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return getTwitterId();
 			case CommonsPackage.PERSON__TWITTER_SCREEN_NAME:
 				return getTwitterScreenName();
+			case CommonsPackage.PERSON__FACEBOOK_ID:
+				return getFacebookId();
+			case CommonsPackage.PERSON__FACEBOOK_USERNAME:
+				return getFacebookUsername();
+			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
+				return getFacebookAccessToken();
 			case CommonsPackage.PERSON__SCHEMA_VERSION:
 				return getSchemaVersion();
 			case CommonsPackage.PERSON__FIRST_NAME:
@@ -2776,12 +2784,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return getCurrencyCode();
 			case CommonsPackage.PERSON__CURRENCY:
 				return getCurrency();
-			case CommonsPackage.PERSON__FACEBOOK_ID:
-				return getFacebookId();
-			case CommonsPackage.PERSON__FACEBOOK_USERNAME:
-				return getFacebookUsername();
-			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
-				return getFacebookAccessToken();
 			case CommonsPackage.PERSON__GOOGLE_PLUS_ID:
 				return getGooglePlusId();
 			case CommonsPackage.PERSON__GOOGLE_USERNAME:
@@ -2887,6 +2889,15 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case CommonsPackage.PERSON__TWITTER_SCREEN_NAME:
 				setTwitterScreenName((String)newValue);
 				return;
+			case CommonsPackage.PERSON__FACEBOOK_ID:
+				setFacebookId((Long)newValue);
+				return;
+			case CommonsPackage.PERSON__FACEBOOK_USERNAME:
+				setFacebookUsername((String)newValue);
+				return;
+			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
+				setFacebookAccessToken((String)newValue);
+				return;
 			case CommonsPackage.PERSON__FIRST_NAME:
 				setFirstName((String)newValue);
 				return;
@@ -2938,15 +2949,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return;
 			case CommonsPackage.PERSON__CURRENCY:
 				setCurrency((CurrencyUnit)newValue);
-				return;
-			case CommonsPackage.PERSON__FACEBOOK_ID:
-				setFacebookId((Long)newValue);
-				return;
-			case CommonsPackage.PERSON__FACEBOOK_USERNAME:
-				setFacebookUsername((String)newValue);
-				return;
-			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
-				setFacebookAccessToken((String)newValue);
 				return;
 			case CommonsPackage.PERSON__GOOGLE_PLUS_ID:
 				setGooglePlusId((String)newValue);
@@ -3080,6 +3082,15 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case CommonsPackage.PERSON__TWITTER_SCREEN_NAME:
 				setTwitterScreenName(TWITTER_SCREEN_NAME_EDEFAULT);
 				return;
+			case CommonsPackage.PERSON__FACEBOOK_ID:
+				setFacebookId(FACEBOOK_ID_EDEFAULT);
+				return;
+			case CommonsPackage.PERSON__FACEBOOK_USERNAME:
+				setFacebookUsername(FACEBOOK_USERNAME_EDEFAULT);
+				return;
+			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
+				setFacebookAccessToken(FACEBOOK_ACCESS_TOKEN_EDEFAULT);
+				return;
 			case CommonsPackage.PERSON__FIRST_NAME:
 				setFirstName(FIRST_NAME_EDEFAULT);
 				return;
@@ -3127,15 +3138,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return;
 			case CommonsPackage.PERSON__CURRENCY:
 				setCurrency(CURRENCY_EDEFAULT);
-				return;
-			case CommonsPackage.PERSON__FACEBOOK_ID:
-				setFacebookId(FACEBOOK_ID_EDEFAULT);
-				return;
-			case CommonsPackage.PERSON__FACEBOOK_USERNAME:
-				setFacebookUsername(FACEBOOK_USERNAME_EDEFAULT);
-				return;
-			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
-				setFacebookAccessToken(FACEBOOK_ACCESS_TOKEN_EDEFAULT);
 				return;
 			case CommonsPackage.PERSON__GOOGLE_PLUS_ID:
 				setGooglePlusId(GOOGLE_PLUS_ID_EDEFAULT);
@@ -3257,6 +3259,12 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return TWITTER_ID_EDEFAULT == null ? twitterId != null : !TWITTER_ID_EDEFAULT.equals(twitterId);
 			case CommonsPackage.PERSON__TWITTER_SCREEN_NAME:
 				return TWITTER_SCREEN_NAME_EDEFAULT == null ? twitterScreenName != null : !TWITTER_SCREEN_NAME_EDEFAULT.equals(twitterScreenName);
+			case CommonsPackage.PERSON__FACEBOOK_ID:
+				return FACEBOOK_ID_EDEFAULT == null ? facebookId != null : !FACEBOOK_ID_EDEFAULT.equals(facebookId);
+			case CommonsPackage.PERSON__FACEBOOK_USERNAME:
+				return FACEBOOK_USERNAME_EDEFAULT == null ? facebookUsername != null : !FACEBOOK_USERNAME_EDEFAULT.equals(facebookUsername);
+			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
+				return FACEBOOK_ACCESS_TOKEN_EDEFAULT == null ? facebookAccessToken != null : !FACEBOOK_ACCESS_TOKEN_EDEFAULT.equals(facebookAccessToken);
 			case CommonsPackage.PERSON__SCHEMA_VERSION:
 				return schemaVersion != SCHEMA_VERSION_EDEFAULT;
 			case CommonsPackage.PERSON__FIRST_NAME:
@@ -3291,12 +3299,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return CURRENCY_CODE_EDEFAULT == null ? currencyCode != null : !CURRENCY_CODE_EDEFAULT.equals(currencyCode);
 			case CommonsPackage.PERSON__CURRENCY:
 				return CURRENCY_EDEFAULT == null ? getCurrency() != null : !CURRENCY_EDEFAULT.equals(getCurrency());
-			case CommonsPackage.PERSON__FACEBOOK_ID:
-				return FACEBOOK_ID_EDEFAULT == null ? facebookId != null : !FACEBOOK_ID_EDEFAULT.equals(facebookId);
-			case CommonsPackage.PERSON__FACEBOOK_USERNAME:
-				return FACEBOOK_USERNAME_EDEFAULT == null ? facebookUsername != null : !FACEBOOK_USERNAME_EDEFAULT.equals(facebookUsername);
-			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
-				return FACEBOOK_ACCESS_TOKEN_EDEFAULT == null ? facebookAccessToken != null : !FACEBOOK_ACCESS_TOKEN_EDEFAULT.equals(facebookAccessToken);
 			case CommonsPackage.PERSON__GOOGLE_PLUS_ID:
 				return GOOGLE_PLUS_ID_EDEFAULT == null ? googlePlusId != null : !GOOGLE_PLUS_ID_EDEFAULT.equals(googlePlusId);
 			case CommonsPackage.PERSON__GOOGLE_USERNAME:
@@ -3435,6 +3437,19 @@ public class PersonImpl extends EObjectImpl implements Person {
 				default: return -1;
 			}
 		}
+		if (baseClass == FacebookIdentity.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.PERSON__FACEBOOK_ID: return CommonsPackage.FACEBOOK_IDENTITY__FACEBOOK_ID;
+				case CommonsPackage.PERSON__FACEBOOK_USERNAME: return CommonsPackage.FACEBOOK_IDENTITY__FACEBOOK_USERNAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == FacebookAccessible.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN: return CommonsPackage.FACEBOOK_ACCESSIBLE__FACEBOOK_ACCESS_TOKEN;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -3516,6 +3531,19 @@ public class PersonImpl extends EObjectImpl implements Person {
 				default: return -1;
 			}
 		}
+		if (baseClass == FacebookIdentity.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.FACEBOOK_IDENTITY__FACEBOOK_ID: return CommonsPackage.PERSON__FACEBOOK_ID;
+				case CommonsPackage.FACEBOOK_IDENTITY__FACEBOOK_USERNAME: return CommonsPackage.PERSON__FACEBOOK_USERNAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == FacebookAccessible.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.FACEBOOK_ACCESSIBLE__FACEBOOK_ACCESS_TOKEN: return CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -3553,6 +3581,12 @@ public class PersonImpl extends EObjectImpl implements Person {
 		result.append(twitterId);
 		result.append(", twitterScreenName: ");
 		result.append(twitterScreenName);
+		result.append(", facebookId: ");
+		result.append(facebookId);
+		result.append(", facebookUsername: ");
+		result.append(facebookUsername);
+		result.append(", facebookAccessToken: ");
+		result.append(facebookAccessToken);
 		result.append(", schemaVersion: ");
 		result.append(schemaVersion);
 		result.append(", firstName: ");
@@ -3577,12 +3611,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 		result.append(language);
 		result.append(", currencyCode: ");
 		result.append(currencyCode);
-		result.append(", facebookId: ");
-		result.append(facebookId);
-		result.append(", facebookUsername: ");
-		result.append(facebookUsername);
-		result.append(", facebookAccessToken: ");
-		result.append(facebookAccessToken);
 		result.append(", googlePlusId: ");
 		result.append(googlePlusId);
 		result.append(", googleUsername: ");

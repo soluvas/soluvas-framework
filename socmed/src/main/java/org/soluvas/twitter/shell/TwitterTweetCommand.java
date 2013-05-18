@@ -41,15 +41,15 @@ import com.google.common.base.Preconditions;
 @Command(scope="twitter", name="tweet", description="Tweets or replies, with optional support for GeoLocation and media.")
 public class TwitterTweetCommand extends ExtCommandSupport {
 	
-	@Option(name="-c", description="Specify custom Twitter OAuth Consumer key, if not using TwitterManager configuration.")
+	@Option(name="--consumerkey", description="Specify custom Twitter OAuth Consumer key, if not using TwitterManager configuration.")
 	private String consumerKey;
-	@Option(name="-s", description="Twitter other OAuth Consumer secret, if not using TwitterManager configuration.")
+	@Option(name="--consumersecret", description="Specify custom Twitter OAuth Consumer secret, if not using TwitterManager configuration.")
 	private String consumerSecret;
 	@Option(name="-i", description="Find the specified TwitterAccessible ID using @TwitterRelated EntityLookup to get the access token pair. Must be specified if not using -a and -t.")
 	private String id;
-	@Option(name="-a", description="OAuth Access Token for the tweeting Twitter user, must be specified if not using -i.")
+	@Option(name="-t", description="OAuth Access Token for the tweeting Twitter user, must be specified if not using -i.")
 	private String accessToken;
-	@Option(name="-t", description="OAuth Access Token Secret for the tweeting Twitter user, must be specified if not using -i.")
+	@Option(name="-s", description="OAuth Access Token Secret for the tweeting Twitter user, must be specified if not using -i.")
 	private String accessTokenSecret;
 	@Option(name="-r", description="In reply to Status ID. Note: @ mention is NOT prepended, please use mention in status message.")
 	private Long reply;

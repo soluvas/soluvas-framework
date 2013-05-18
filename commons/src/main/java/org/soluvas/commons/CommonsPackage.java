@@ -2266,166 +2266,13 @@ public interface CommonsPackage extends EPackage {
 	int PERSON__TWITTER_SCREEN_NAME = NAME_CONTAINER_FEATURE_COUNT + 10;
 
 	/**
-	 * The feature id for the '<em><b>Schema Version</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__SCHEMA_VERSION = NAME_CONTAINER_FEATURE_COUNT + 11;
-
-	/**
-	 * The feature id for the '<em><b>First Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__FIRST_NAME = NAME_CONTAINER_FEATURE_COUNT + 12;
-
-	/**
-	 * The feature id for the '<em><b>Last Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__LAST_NAME = NAME_CONTAINER_FEATURE_COUNT + 13;
-
-	/**
-	 * The feature id for the '<em><b>Password</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__PASSWORD = NAME_CONTAINER_FEATURE_COUNT + 14;
-
-	/**
-	 * The feature id for the '<em><b>Phone Numbers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__PHONE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 15;
-
-	/**
-	 * The feature id for the '<em><b>Emails</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__EMAILS = NAME_CONTAINER_FEATURE_COUNT + 16;
-
-	/**
-	 * The feature id for the '<em><b>Mobile Numbers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__MOBILE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 17;
-
-	/**
-	 * The feature id for the '<em><b>Addresses</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__ADDRESSES = NAME_CONTAINER_FEATURE_COUNT + 18;
-
-	/**
-	 * The feature id for the '<em><b>Account Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__ACCOUNT_STATUS = NAME_CONTAINER_FEATURE_COUNT + 19;
-
-	/**
-	 * The feature id for the '<em><b>Birth Year</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__BIRTH_YEAR = NAME_CONTAINER_FEATURE_COUNT + 20;
-
-	/**
-	 * The feature id for the '<em><b>Birth Month</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__BIRTH_MONTH = NAME_CONTAINER_FEATURE_COUNT + 21;
-
-	/**
-	 * The feature id for the '<em><b>Birth Day</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__BIRTH_DAY = NAME_CONTAINER_FEATURE_COUNT + 22;
-
-	/**
-	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__BIRTH_DATE = NAME_CONTAINER_FEATURE_COUNT + 23;
-
-	/**
-	 * The feature id for the '<em><b>Gender</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__GENDER = NAME_CONTAINER_FEATURE_COUNT + 24;
-
-	/**
-	 * The feature id for the '<em><b>Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__LANGUAGE = NAME_CONTAINER_FEATURE_COUNT + 25;
-
-	/**
-	 * The feature id for the '<em><b>Currency Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__CURRENCY_CODE = NAME_CONTAINER_FEATURE_COUNT + 26;
-
-	/**
-	 * The feature id for the '<em><b>Currency</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__CURRENCY = NAME_CONTAINER_FEATURE_COUNT + 27;
-
-	/**
 	 * The feature id for the '<em><b>Facebook Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__FACEBOOK_ID = NAME_CONTAINER_FEATURE_COUNT + 28;
+	int PERSON__FACEBOOK_ID = NAME_CONTAINER_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Facebook Username</b></em>' attribute.
@@ -2434,7 +2281,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__FACEBOOK_USERNAME = NAME_CONTAINER_FEATURE_COUNT + 29;
+	int PERSON__FACEBOOK_USERNAME = NAME_CONTAINER_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Facebook Access Token</b></em>' attribute.
@@ -2443,7 +2290,160 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__FACEBOOK_ACCESS_TOKEN = NAME_CONTAINER_FEATURE_COUNT + 30;
+	int PERSON__FACEBOOK_ACCESS_TOKEN = NAME_CONTAINER_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>Schema Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__SCHEMA_VERSION = NAME_CONTAINER_FEATURE_COUNT + 14;
+
+	/**
+	 * The feature id for the '<em><b>First Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__FIRST_NAME = NAME_CONTAINER_FEATURE_COUNT + 15;
+
+	/**
+	 * The feature id for the '<em><b>Last Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__LAST_NAME = NAME_CONTAINER_FEATURE_COUNT + 16;
+
+	/**
+	 * The feature id for the '<em><b>Password</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__PASSWORD = NAME_CONTAINER_FEATURE_COUNT + 17;
+
+	/**
+	 * The feature id for the '<em><b>Phone Numbers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__PHONE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 18;
+
+	/**
+	 * The feature id for the '<em><b>Emails</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__EMAILS = NAME_CONTAINER_FEATURE_COUNT + 19;
+
+	/**
+	 * The feature id for the '<em><b>Mobile Numbers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__MOBILE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 20;
+
+	/**
+	 * The feature id for the '<em><b>Addresses</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__ADDRESSES = NAME_CONTAINER_FEATURE_COUNT + 21;
+
+	/**
+	 * The feature id for the '<em><b>Account Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__ACCOUNT_STATUS = NAME_CONTAINER_FEATURE_COUNT + 22;
+
+	/**
+	 * The feature id for the '<em><b>Birth Year</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__BIRTH_YEAR = NAME_CONTAINER_FEATURE_COUNT + 23;
+
+	/**
+	 * The feature id for the '<em><b>Birth Month</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__BIRTH_MONTH = NAME_CONTAINER_FEATURE_COUNT + 24;
+
+	/**
+	 * The feature id for the '<em><b>Birth Day</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__BIRTH_DAY = NAME_CONTAINER_FEATURE_COUNT + 25;
+
+	/**
+	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__BIRTH_DATE = NAME_CONTAINER_FEATURE_COUNT + 26;
+
+	/**
+	 * The feature id for the '<em><b>Gender</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__GENDER = NAME_CONTAINER_FEATURE_COUNT + 27;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__LANGUAGE = NAME_CONTAINER_FEATURE_COUNT + 28;
+
+	/**
+	 * The feature id for the '<em><b>Currency Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__CURRENCY_CODE = NAME_CONTAINER_FEATURE_COUNT + 29;
+
+	/**
+	 * The feature id for the '<em><b>Currency</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__CURRENCY = NAME_CONTAINER_FEATURE_COUNT + 30;
 
 	/**
 	 * The feature id for the '<em><b>Google Plus Id</b></em>' attribute.
@@ -3182,6 +3182,71 @@ public interface CommonsPackage extends EPackage {
 	int TWITTER_IDENTITY_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.FacebookIdentityImpl <em>Facebook Identity</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.FacebookIdentityImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFacebookIdentity()
+	 * @generated
+	 */
+	int FACEBOOK_IDENTITY = 55;
+
+	/**
+	 * The feature id for the '<em><b>Facebook Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACEBOOK_IDENTITY__FACEBOOK_ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Facebook Username</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACEBOOK_IDENTITY__FACEBOOK_USERNAME = 1;
+
+	/**
+	 * The number of structural features of the '<em>Facebook Identity</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACEBOOK_IDENTITY_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.FacebookAccessibleImpl <em>Facebook Accessible</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.FacebookAccessibleImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFacebookAccessible()
+	 * @generated
+	 */
+	int FACEBOOK_ACCESSIBLE = 56;
+
+	/**
+	 * The feature id for the '<em><b>Facebook Access Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACEBOOK_ACCESSIBLE__FACEBOOK_ACCESS_TOKEN = 0;
+
+	/**
+	 * The number of structural features of the '<em>Facebook Accessible</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACEBOOK_ACCESSIBLE_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3189,7 +3254,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 55;
+	int RESOURCE_TYPE = 57;
 
 
 	/**
@@ -3200,7 +3265,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 56;
+	int GENDER = 58;
 
 
 	/**
@@ -3211,7 +3276,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 57;
+	int ECLASS_STATUS = 59;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -3221,7 +3286,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 58;
+	int JAVA_CLASS_STATUS = 60;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ProgressStatus <em>Progress Status</em>}' enum.
@@ -3231,7 +3296,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getProgressStatus()
 	 * @generated
 	 */
-	int PROGRESS_STATUS = 59;
+	int PROGRESS_STATUS = 61;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.AccountStatus <em>Account Status</em>}' enum.
@@ -3241,7 +3306,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAccountStatus()
 	 * @generated
 	 */
-	int ACCOUNT_STATUS = 60;
+	int ACCOUNT_STATUS = 62;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.PublicationStatus <em>Publication Status</em>}' enum.
@@ -3251,7 +3316,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPublicationStatus()
 	 * @generated
 	 */
-	int PUBLICATION_STATUS = 61;
+	int PUBLICATION_STATUS = 63;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ArchivalStatus <em>Archival Status</em>}' enum.
@@ -3261,7 +3326,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getArchivalStatus()
 	 * @generated
 	 */
-	int ARCHIVAL_STATUS = 62;
+	int ARCHIVAL_STATUS = 64;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.TranslationState <em>Translation State</em>}' enum.
@@ -3271,7 +3336,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationState()
 	 * @generated
 	 */
-	int TRANSLATION_STATE = 63;
+	int TRANSLATION_STATE = 65;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ExpansionState <em>Expansion State</em>}' enum.
@@ -3281,7 +3346,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getExpansionState()
 	 * @generated
 	 */
-	int EXPANSION_STATE = 64;
+	int EXPANSION_STATE = 66;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.SignupSourceType <em>Signup Source Type</em>}' enum.
@@ -3291,7 +3356,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSignupSourceType()
 	 * @generated
 	 */
-	int SIGNUP_SOURCE_TYPE = 65;
+	int SIGNUP_SOURCE_TYPE = 67;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -3301,7 +3366,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 66;
+	int DATE_TIME = 68;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -3311,7 +3376,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 67;
+	int CURRENCY_UNIT = 69;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -3321,7 +3386,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 69;
+	int UNIT = 71;
 
 
 	/**
@@ -3332,7 +3397,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 70;
+	int LIST = 72;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -3342,7 +3407,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 71;
+	int MAP = 73;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -3352,7 +3417,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 72;
+	int SET = 74;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -3362,7 +3427,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 73;
+	int COLLECTION = 75;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -3372,7 +3437,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 74;
+	int MULTIMAP = 76;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -3382,7 +3447,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 75;
+	int NAVIGABLE_MAP = 77;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -3392,7 +3457,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 76;
+	int QUEUE = 78;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -3402,7 +3467,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 77;
+	int MULTISET = 79;
 
 
 	/**
@@ -3413,7 +3478,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 78;
+	int SERIALIZABLE = 80;
 
 
 	/**
@@ -3424,7 +3489,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 79;
+	int BUNDLE = 81;
 
 
 	/**
@@ -3435,7 +3500,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
 	 * @generated
 	 */
-	int BIG_MONEY_PROVIDER = 80;
+	int BIG_MONEY_PROVIDER = 82;
 
 	/**
 	 * The meta object id for the '<em>Quantity</em>' data type.
@@ -3445,7 +3510,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQuantity()
 	 * @generated
 	 */
-	int QUANTITY = 68;
+	int QUANTITY = 70;
 
 	/**
 	 * The meta object id for the '<em>Measurable</em>' data type.
@@ -3455,7 +3520,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMeasurable()
 	 * @generated
 	 */
-	int MEASURABLE = 81;
+	int MEASURABLE = 83;
 
 
 	/**
@@ -3466,7 +3531,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTimeZone()
 	 * @generated
 	 */
-	int DATE_TIME_ZONE = 82;
+	int DATE_TIME_ZONE = 84;
 
 
 	/**
@@ -3477,7 +3542,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 83;
+	int LOCALE = 85;
 
 
 	/**
@@ -3488,7 +3553,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFile()
 	 * @generated
 	 */
-	int FILE = 84;
+	int FILE = 86;
 
 
 	/**
@@ -3499,7 +3564,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListenableFuture()
 	 * @generated
 	 */
-	int LISTENABLE_FUTURE = 85;
+	int LISTENABLE_FUTURE = 87;
 
 
 	/**
@@ -3510,7 +3575,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListeningExecutorService()
 	 * @generated
 	 */
-	int LISTENING_EXECUTOR_SERVICE = 86;
+	int LISTENING_EXECUTOR_SERVICE = 88;
 
 
 	/**
@@ -3521,7 +3586,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getClassLoader()
 	 * @generated
 	 */
-	int CLASS_LOADER = 87;
+	int CLASS_LOADER = 89;
 
 
 	/**
@@ -3532,7 +3597,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getURL()
 	 * @generated
 	 */
-	int URL = 88;
+	int URL = 90;
 
 
 	/**
@@ -3543,7 +3608,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEventBus()
 	 * @generated
 	 */
-	int EVENT_BUS = 89;
+	int EVENT_BUS = 91;
 
 
 	/**
@@ -3554,7 +3619,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocalDate()
 	 * @generated
 	 */
-	int LOCAL_DATE = 90;
+	int LOCAL_DATE = 92;
 
 
 	/**
@@ -5077,39 +5142,6 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getPerson_Currency();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getFacebookId <em>Facebook Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Facebook Id</em>'.
-	 * @see org.soluvas.commons.Person#getFacebookId()
-	 * @see #getPerson()
-	 * @generated
-	 */
-	EAttribute getPerson_FacebookId();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getFacebookUsername <em>Facebook Username</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Facebook Username</em>'.
-	 * @see org.soluvas.commons.Person#getFacebookUsername()
-	 * @see #getPerson()
-	 * @generated
-	 */
-	EAttribute getPerson_FacebookUsername();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getFacebookAccessToken <em>Facebook Access Token</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Facebook Access Token</em>'.
-	 * @see org.soluvas.commons.Person#getFacebookAccessToken()
-	 * @see #getPerson()
-	 * @generated
-	 */
-	EAttribute getPerson_FacebookAccessToken();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getGooglePlusId <em>Google Plus Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5871,6 +5903,59 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTwitterIdentity_TwitterScreenName();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.FacebookIdentity <em>Facebook Identity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Facebook Identity</em>'.
+	 * @see org.soluvas.commons.FacebookIdentity
+	 * @generated
+	 */
+	EClass getFacebookIdentity();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.FacebookIdentity#getFacebookId <em>Facebook Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Id</em>'.
+	 * @see org.soluvas.commons.FacebookIdentity#getFacebookId()
+	 * @see #getFacebookIdentity()
+	 * @generated
+	 */
+	EAttribute getFacebookIdentity_FacebookId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.FacebookIdentity#getFacebookUsername <em>Facebook Username</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Username</em>'.
+	 * @see org.soluvas.commons.FacebookIdentity#getFacebookUsername()
+	 * @see #getFacebookIdentity()
+	 * @generated
+	 */
+	EAttribute getFacebookIdentity_FacebookUsername();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.FacebookAccessible <em>Facebook Accessible</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Facebook Accessible</em>'.
+	 * @see org.soluvas.commons.FacebookAccessible
+	 * @generated
+	 */
+	EClass getFacebookAccessible();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.FacebookAccessible#getFacebookAccessToken <em>Facebook Access Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Access Token</em>'.
+	 * @see org.soluvas.commons.FacebookAccessible#getFacebookAccessToken()
+	 * @see #getFacebookAccessible()
+	 * @generated
+	 */
+	EAttribute getFacebookAccessible_FacebookAccessToken();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -7512,30 +7597,6 @@ public interface CommonsPackage extends EPackage {
 		EAttribute PERSON__CURRENCY = eINSTANCE.getPerson_Currency();
 
 		/**
-		 * The meta object literal for the '<em><b>Facebook Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERSON__FACEBOOK_ID = eINSTANCE.getPerson_FacebookId();
-
-		/**
-		 * The meta object literal for the '<em><b>Facebook Username</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERSON__FACEBOOK_USERNAME = eINSTANCE.getPerson_FacebookUsername();
-
-		/**
-		 * The meta object literal for the '<em><b>Facebook Access Token</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERSON__FACEBOOK_ACCESS_TOKEN = eINSTANCE.getPerson_FacebookAccessToken();
-
-		/**
 		 * The meta object literal for the '<em><b>Google Plus Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8108,6 +8169,50 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TWITTER_IDENTITY__TWITTER_SCREEN_NAME = eINSTANCE.getTwitterIdentity_TwitterScreenName();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.FacebookIdentityImpl <em>Facebook Identity</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.FacebookIdentityImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFacebookIdentity()
+		 * @generated
+		 */
+		EClass FACEBOOK_IDENTITY = eINSTANCE.getFacebookIdentity();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACEBOOK_IDENTITY__FACEBOOK_ID = eINSTANCE.getFacebookIdentity_FacebookId();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Username</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACEBOOK_IDENTITY__FACEBOOK_USERNAME = eINSTANCE.getFacebookIdentity_FacebookUsername();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.FacebookAccessibleImpl <em>Facebook Accessible</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.FacebookAccessibleImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFacebookAccessible()
+		 * @generated
+		 */
+		EClass FACEBOOK_ACCESSIBLE = eINSTANCE.getFacebookAccessible();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Access Token</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACEBOOK_ACCESSIBLE__FACEBOOK_ACCESS_TOKEN = eINSTANCE.getFacebookAccessible_FacebookAccessToken();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

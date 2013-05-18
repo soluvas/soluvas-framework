@@ -43,9 +43,6 @@ import com.google.common.base.Function;
  *   <li>{@link org.soluvas.commons.Person#getLanguage <em>Language</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getCurrencyCode <em>Currency Code</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getCurrency <em>Currency</em>}</li>
- *   <li>{@link org.soluvas.commons.Person#getFacebookId <em>Facebook Id</em>}</li>
- *   <li>{@link org.soluvas.commons.Person#getFacebookUsername <em>Facebook Username</em>}</li>
- *   <li>{@link org.soluvas.commons.Person#getFacebookAccessToken <em>Facebook Access Token</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getGooglePlusId <em>Google Plus Id</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getGoogleUsername <em>Google Username</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getVirtualMail <em>Virtual Mail</em>}</li>
@@ -81,7 +78,7 @@ import com.google.common.base.Function;
  * @model
  * @generated
  */
-public interface Person extends NameContainer, PhotoIdContainer, Identifiable, PersonLike, Informer<PersonInfo>, Timestamped, SchemaVersionable, Describable, Sluggable, CanonicalSluggable, TwitterAccessible, TwitterIdentity {
+public interface Person extends NameContainer, PhotoIdContainer, Identifiable, PersonLike, Informer<PersonInfo>, Timestamped, SchemaVersionable, Describable, Sluggable, CanonicalSluggable, TwitterAccessible, TwitterIdentity, FacebookIdentity, FacebookAccessible {
 	
 	public static class ToPersonInfo implements Function<Person, PersonInfo> {
 		@Override @Nullable
@@ -510,84 +507,6 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	void setCurrency(CurrencyUnit value);
-
-	/**
-	 * Returns the value of the '<em><b>Facebook Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Facebook Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Facebook Id</em>' attribute.
-	 * @see #setFacebookId(Long)
-	 * @see org.soluvas.commons.CommonsPackage#getPerson_FacebookId()
-	 * @model
-	 * @generated
-	 */
-	Long getFacebookId();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.commons.Person#getFacebookId <em>Facebook Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Facebook Id</em>' attribute.
-	 * @see #getFacebookId()
-	 * @generated
-	 */
-	void setFacebookId(Long value);
-
-	/**
-	 * Returns the value of the '<em><b>Facebook Username</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Facebook Username</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Facebook Username</em>' attribute.
-	 * @see #setFacebookUsername(String)
-	 * @see org.soluvas.commons.CommonsPackage#getPerson_FacebookUsername()
-	 * @model
-	 * @generated
-	 */
-	String getFacebookUsername();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.commons.Person#getFacebookUsername <em>Facebook Username</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Facebook Username</em>' attribute.
-	 * @see #getFacebookUsername()
-	 * @generated
-	 */
-	void setFacebookUsername(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Facebook Access Token</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Facebook Access Token</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Facebook Access Token</em>' attribute.
-	 * @see #setFacebookAccessToken(String)
-	 * @see org.soluvas.commons.CommonsPackage#getPerson_FacebookAccessToken()
-	 * @model
-	 * @generated
-	 */
-	String getFacebookAccessToken();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.commons.Person#getFacebookAccessToken <em>Facebook Access Token</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Facebook Access Token</em>' attribute.
-	 * @see #getFacebookAccessToken()
-	 * @generated
-	 */
-	void setFacebookAccessToken(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Google Plus Id</b></em>' attribute.

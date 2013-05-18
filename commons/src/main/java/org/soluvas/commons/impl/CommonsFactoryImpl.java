@@ -134,6 +134,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 			case CommonsPackage.EMAIL: return (EObject)createEmail();
 			case CommonsPackage.POSTAL_ADDRESS: return (EObject)createPostalAddress();
 			case CommonsPackage.PERSON_CATALOG: return (EObject)createPersonCatalog();
+			case CommonsPackage.FACEBOOK_IDENTITY: return (EObject)createFacebookIdentity();
+			case CommonsPackage.FACEBOOK_ACCESSIBLE: return (EObject)createFacebookAccessible();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -540,6 +542,26 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	public PersonCatalog createPersonCatalog() {
 		PersonCatalogImpl personCatalog = new PersonCatalogImpl();
 		return personCatalog;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FacebookIdentity createFacebookIdentity() {
+		FacebookIdentityImpl facebookIdentity = new FacebookIdentityImpl();
+		return facebookIdentity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FacebookAccessible createFacebookAccessible() {
+		FacebookAccessibleImpl facebookAccessible = new FacebookAccessibleImpl();
+		return facebookAccessible;
 	}
 
 	/**

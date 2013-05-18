@@ -421,6 +421,8 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseCanonicalSluggable(person);
 				if (result == null) result = caseTwitterAccessible(person);
 				if (result == null) result = caseTwitterIdentity(person);
+				if (result == null) result = caseFacebookIdentity(person);
+				if (result == null) result = caseFacebookAccessible(person);
 				if (result == null) result = caseNameable(person);
 				if (result == null) result = caseImageable(person);
 				if (result == null) result = caseSluggable(person);
@@ -471,6 +473,18 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 			case CommonsPackage.TWITTER_IDENTITY: {
 				TwitterIdentity twitterIdentity = (TwitterIdentity)theEObject;
 				T1 result = caseTwitterIdentity(twitterIdentity);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.FACEBOOK_IDENTITY: {
+				FacebookIdentity facebookIdentity = (FacebookIdentity)theEObject;
+				T1 result = caseFacebookIdentity(facebookIdentity);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonsPackage.FACEBOOK_ACCESSIBLE: {
+				FacebookAccessible facebookAccessible = (FacebookAccessible)theEObject;
+				T1 result = caseFacebookAccessible(facebookAccessible);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1300,6 +1314,36 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseTwitterIdentity(TwitterIdentity object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Facebook Identity</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Facebook Identity</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseFacebookIdentity(FacebookIdentity object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Facebook Accessible</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Facebook Accessible</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseFacebookAccessible(FacebookAccessible object) {
 		return null;
 	}
 

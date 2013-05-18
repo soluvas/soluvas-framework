@@ -963,9 +963,6 @@
         <details key="documentation" value="Preferred currency as ISO 4217. The purpose of ISO 4217:2008 is to establish internationally recognised codes for the representation of currencies.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELongObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookUsername" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookAccessToken" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="googlePlusId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="googleUsername" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="virtualMail" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
@@ -1104,6 +1101,8 @@
     <eGenericSuperTypes eClassifier="#//CanonicalSluggable"/>
     <eGenericSuperTypes eClassifier="#//TwitterAccessible"/>
     <eGenericSuperTypes eClassifier="#//TwitterIdentity"/>
+    <eGenericSuperTypes eClassifier="#//FacebookIdentity"/>
+    <eGenericSuperTypes eClassifier="#//FacebookAccessible"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PhoneNumber">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="phoneNumber" lowerBound="1"
@@ -1289,5 +1288,18 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="twitterId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELongObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="twitterScreenName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FacebookIdentity">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Contains Facebook identity, which can be Facebook ID, username, or both."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELongObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookUsername" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FacebookAccessible">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Contains Facebook access token (which can expire anytime)."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookAccessToken" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

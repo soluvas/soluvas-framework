@@ -211,6 +211,24 @@ public interface CommonsFactory extends EFactory {
 	 */
 	PersonCatalog createPersonCatalog();
 
+	/**
+	 * Returns a new object of class '<em>Facebook Identity</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Facebook Identity</em>'.
+	 * @generated
+	 */
+	FacebookIdentity createFacebookIdentity();
+
+	/**
+	 * Returns a new object of class '<em>Facebook Accessible</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Facebook Accessible</em>'.
+	 * @generated
+	 */
+	FacebookAccessible createFacebookAccessible();
+
 	PersonInfo createPersonInfo(String id, String slug, String name, String photoId, Gender gender);
 
 	/**

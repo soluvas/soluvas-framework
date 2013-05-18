@@ -58,11 +58,11 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		}
 		final List<DBObject> orCriteria = new ArrayList<>();
 		if (facebookId != null) {
-			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.PERSON__FACEBOOK_ID.getName(), 
+			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.FACEBOOK_IDENTITY__FACEBOOK_ID.getName(), 
 					facebookId));
 		}
 		if (facebookUsername != null) {
-			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.PERSON__FACEBOOK_USERNAME.getName(), 
+			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.FACEBOOK_IDENTITY__FACEBOOK_USERNAME.getName(), 
 					facebookUsername));
 		}
 		final BasicDBObject query = new BasicDBObject("$or", orCriteria);

@@ -289,6 +289,14 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createTwitterIdentityAdapter();
 			}
 			@Override
+			public Adapter caseFacebookIdentity(FacebookIdentity object) {
+				return createFacebookIdentityAdapter();
+			}
+			@Override
+			public Adapter caseFacebookAccessible(FacebookAccessible object) {
+				return createFacebookAccessibleAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -1075,6 +1083,34 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTwitterIdentityAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.FacebookIdentity <em>Facebook Identity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.FacebookIdentity
+	 * @generated
+	 */
+	public Adapter createFacebookIdentityAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.FacebookAccessible <em>Facebook Accessible</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.FacebookAccessible
+	 * @generated
+	 */
+	public Adapter createFacebookAccessibleAdapter() {
 		return null;
 	}
 
