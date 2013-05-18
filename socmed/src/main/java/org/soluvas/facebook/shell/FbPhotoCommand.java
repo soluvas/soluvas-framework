@@ -57,7 +57,35 @@ public class FbPhotoCommand extends ExtCommandSupport {
 	
 	@Argument(index=0, name="photo_uri", description="File or URI to the photo to upload. Files are always uploaded using binary attachment.")
 	private String photoUri;
-	@Argument(index=1, name="name", description="The user provided caption given to this photo - do not include advertising in this field")
+	/**
+	 * Tagging looks like this:
+	 * 
+	 * <pre>{@literal
+	 *    "name": "waw keren ya AksiMata Hendy Irawan :)",
+	 *    "name_tags": {
+	 *       "13": [
+	 *          {
+	 *             "id": "409555939071423",
+	 *             "name": "AksiMata",
+	 *             "type": "page",
+	 *             "offset": 13,
+	 *             "length": 8
+	 *          }
+	 *       ],
+	 *       "22": [
+	 *          {
+	 *             "id": "596326671",
+	 *             "name": "Hendy Irawan",
+	 *             "type": "user",
+	 *             "offset": 22,
+	 *             "length": 12
+	 *          }
+	 *       ]
+	 *    },
+	 * }</pre>
+	 * 
+	 */
+	@Argument(index=1, name="name", description="The user provided caption given to this photo - do not include advertising in this field. '@[596326671:Hendy Irawan]' tags don't work :(")
 	private String photoName;
 
 	private final FacebookManager facebookMgr;
