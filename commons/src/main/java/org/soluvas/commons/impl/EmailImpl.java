@@ -124,12 +124,11 @@ public class EmailImpl extends EObjectImpl implements Email {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public void setEmail(String newEmail) {
 		String oldEmail = email;
-		email = newEmail;
+		email = newEmail != null ? newEmail.toLowerCase().trim() : null;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.EMAIL__EMAIL, oldEmail, email));
 	}
