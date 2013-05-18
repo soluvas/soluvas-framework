@@ -136,7 +136,7 @@ public class TwitterTweetCommand extends ExtCommandSupport {
 			System.out.println(ansi().render("Access token: @|yellow %s|@", realToken));
 			System.out.println(ansi().render("Tweeting: @|bold %s|@ ...",message));
 			final Status postedStatus = twitter.updateStatus(statusUpdate);
-			log.info("Tweeted: {}", postedStatus);
+			log.info("Tweeted {}", postedStatus);
 			System.out.println(ansi().render("@|bold %s|@ @@|bold %s|@ %s", 
 					postedStatus.getId(), postedStatus.getUser().getScreenName(), postedStatus.getCreatedAt()));
 			return postedStatus.getId();

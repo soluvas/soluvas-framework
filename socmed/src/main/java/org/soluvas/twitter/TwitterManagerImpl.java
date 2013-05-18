@@ -19,14 +19,23 @@ public class TwitterManagerImpl implements TwitterManager  {
 
 	private final String consumerKey;
 	private final String consumerSecret;
+	private final String appScreenName;
+	private final String appAccessToken;
+	private final String appAccessTokenSecret;
 	
 	@Inject
 	public TwitterManagerImpl(
 			@Value("#{soluvasProps.authTwitterConsumerKey}") String consumerKey,
-			@Value("#{soluvasProps.authTwitterConsumerSecret}") String consumerSecret) {
+			@Value("#{soluvasProps.authTwitterConsumerSecret}") String consumerSecret,
+			@Value("#{soluvasProps.twitterAppScreenName}") String appScreenName,
+			@Value("#{soluvasProps.twitterAppAccessToken}") String appAccessToken,
+			@Value("#{soluvasProps.twitterAppAccessTokenSecret}") String appAccessTokenSecret) {
 		super();
 		this.consumerKey = consumerKey;
 		this.consumerSecret = consumerSecret;
+		this.appScreenName = appScreenName;
+		this.appAccessToken = appAccessToken;
+		this.appAccessTokenSecret = appAccessTokenSecret;
 	}
 	
 	@Override
@@ -44,25 +53,29 @@ public class TwitterManagerImpl implements TwitterManager  {
 		return twitter;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.soluvas.web.login.FacebookManager#getAppId()
-	 */
 	@Override
 	public String getConsumerKey() {
 		return consumerKey;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.soluvas.web.login.FacebookManager#getAppSecret()
-	 */
 	@Override
 	public String getConsumerSecret() {
 		return consumerSecret;
 	}
-	
-//	String appId = "260800077384280";
-//	String redirectUri = "http://www.berbatik5.haidar.dev/fb_recipient/";
-//	UUID state = UUID.randomUUID();
-//	String facebookRedirectUri = "https://www.facebook.com/dialog/oauth";
 
+	@Override
+	public String getAppScreenName() {
+		return appScreenName;
+	}
+
+	@Override
+	public String getAppAccessToken() {
+		return appAccessToken;
+	}
+
+	@Override
+	public String getAppAccessTokenSecret() {
+		return appAccessTokenSecret;
+	}
+	
 }
