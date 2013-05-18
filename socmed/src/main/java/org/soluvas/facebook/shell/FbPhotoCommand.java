@@ -55,7 +55,7 @@ public class FbPhotoCommand extends ExtCommandSupport {
 	@Option(name="-b", description="Use binary attachment to upload URIs (URI will need to be downloaded first). Note this will have no effect on file URIs.")
 	private transient boolean binary = false;
 	
-	@Argument(index=0, name="photo_uri", description="File or URI to the photo to upload. Files are always uploaded using binary attachment.")
+	@Argument(index=0, name="photo_uri", required=true, description="File or URI to the photo to upload. Files are always uploaded using binary attachment.")
 	private String photoUri;
 	/**
 	 * Tagging looks like this:
@@ -119,46 +119,52 @@ public class FbPhotoCommand extends ExtCommandSupport {
 
 		String binaryName;
 		File tmpFile = null;
-		BinaryAttachment binaryAttachment = null;
-		if (photoUri.startsWith("/")) {
-			binaryName = new File(photoUri).getName();
-			binaryAttachment = BinaryAttachment.with(photoUri, FileUtils.openInputStream(new File(photoUri)));
-		} else if (photoUri.startsWith("file:")) {
-			binaryName = new File(URI.create(photoUri)).getName();
-			binaryAttachment = BinaryAttachment.with(photoUri, FileUtils.openInputStream(new File(URI.create(photoUri))));
-		} else if (binary) {
-			tmpFile = File.createTempFile(SlugUtils.generateId(photoUri), ".tmp");
-			log.debug("Downloading {} to {}", photoUri, tmpFile);
-			System.out.print(ansi().render("Downloading @|bold %s|@ to @|bold %s|@ ...", photoUri, tmpFile));
-			FileUtils.copyURLToFile(new URL(photoUri), tmpFile);
-			System.out.println(ansi().render(" @|bg_green,bold,white  OK |@"));
-			binaryName = tmpFile.getName();
-			binaryAttachment = BinaryAttachment.with(binaryName, FileUtils.openInputStream(tmpFile));
-		} else {
-			binaryName = null;
-			params.add(Parameter.with("url", photoUri));			
+		try {
+			BinaryAttachment binaryAttachment = null;
+			if (photoUri.startsWith("/")) {
+				binaryName = new File(photoUri).getName();
+				binaryAttachment = BinaryAttachment.with(photoUri, FileUtils.openInputStream(new File(photoUri)));
+			} else if (photoUri.startsWith("file:")) {
+				binaryName = new File(URI.create(photoUri)).getName();
+				binaryAttachment = BinaryAttachment.with(photoUri, FileUtils.openInputStream(new File(URI.create(photoUri))));
+			} else if (binary) {
+				tmpFile = File.createTempFile(SlugUtils.generateId(photoUri), ".tmp");
+				log.debug("Downloading {} to {}", photoUri, tmpFile);
+				System.out.print(ansi().render("Downloading @|bold %s|@ to @|bold %s|@ ...", photoUri, tmpFile));
+				FileUtils.copyURLToFile(new URL(photoUri), tmpFile);
+				System.out.println(ansi().render(" @|bg_green,bold,white  OK |@"));
+				binaryName = tmpFile.getName();
+				binaryAttachment = BinaryAttachment.with(binaryName, FileUtils.openInputStream(tmpFile));
+			} else {
+				binaryName = null;
+				params.add(Parameter.with("url", photoUri));			
+			}
+	
+			final DefaultFacebookClient facebook = new DefaultFacebookClient(realToken);
+			final String connection = albumId + "/photos";
+			final String abbrToken = StringUtils.abbreviateMiddle(realToken, "…", 15);
+			log.debug("Posting photo {} name '{}' binary '{}' to Facebook {} using {}", 
+					photoUri, photoName, binaryName, connection, abbrToken);
+			System.out.print(ansi().render("Posting photo @|bold %s|@ name @|bold %s|@ binary @|bold %s|@ to @|bold %s|@ using @|yellow %s|@ ...", 
+					photoUri, photoName, binaryName, connection, abbrToken));
+	
+			final Photo postedPhoto;
+			if (binaryAttachment != null) {
+				postedPhoto = facebook.publish(connection, Photo.class,
+						binaryAttachment, params.toArray(new Parameter[] {}));
+			} else {
+				postedPhoto = facebook.publish(connection, Photo.class,
+						params.toArray(new Parameter[] {}));
+			}
+			log.info("Posted {} from photo {} name '{}' binary '{}' to Facebook {} using {}: {}", 
+					postedPhoto.getId(), photoUri, photoName, binaryName, connection, abbrToken, postedPhoto);
+			System.out.println(ansi().render(" @|bold %s|@", connection, postedPhoto.getId()));
+			return postedPhoto.getId();
+		} finally {
+			if (tmpFile != null) {
+				tmpFile.delete();
+			}
 		}
-
-		final DefaultFacebookClient facebook = new DefaultFacebookClient(realToken);
-		final String connection = albumId + "/photos";
-		final String abbrToken = StringUtils.abbreviateMiddle(realToken, "…", 15);
-		log.debug("Posting photo {} name '{}' binary '{}' to Facebook {} using {} ...", 
-				photoUri, photoName, binaryName, connection, abbrToken);
-		System.out.print(ansi().render("Posting photo @|bold %s|@ name @|bold %s|@ binary @|bold %s|@ to @|bold %s|@ using @|yellow %s|@", 
-				photoUri, photoName, binaryName, connection, abbrToken));
-
-		final Photo postedPhoto;
-		if (binaryAttachment != null) {
-			postedPhoto = facebook.publish(connection, Photo.class,
-					binaryAttachment, params.toArray(new Parameter[] {}));
-		} else {
-			postedPhoto = facebook.publish(connection, Photo.class,
-					params.toArray(new Parameter[] {}));
-		}
-		log.info("Posted {} from photo {} name '{}' binary '{}' to Facebook {} using {}: {}", 
-				postedPhoto.getId(), photoUri, photoName, binaryName, connection, abbrToken, postedPhoto);
-		System.out.println(ansi().render(" @|bold %s|@", connection, postedPhoto.getId()));
-		return postedPhoto.getId();
 	}
 
 }

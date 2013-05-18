@@ -42,12 +42,12 @@ public class FbPhotoTagCommand extends ExtCommandSupport {
 	private transient boolean isTagText = false;
 	@Option(name="-x", description="x coordinate of tag, as a percentage offset from the left edge of the picture.")
 	private Double x;
-	@Option(name="-y", description="y coordinate of tag, as a percentage offset from the top edge of the picture	.")
+	@Option(name="-y", description="y coordinate of tag, as a percentage offset from the top edge of the picture.")
 	private Double y;
 	
-	@Argument(index=0, name="photoId", description="Photo ID to be tagged.")
+	@Argument(index=0, name="photoId", required=true, description="Photo ID to be tagged.")
 	private String photoId;
-	@Argument(index=1, name="userId", description="User ID or tag text to be tagged in the photo.")
+	@Argument(index=1, name="userId", required=true, description="User ID or tag text to be tagged in the photo.")
 	private String userId;
 
 	private final FacebookManager facebookMgr;
@@ -90,18 +90,18 @@ public class FbPhotoTagCommand extends ExtCommandSupport {
 		final DefaultFacebookClient facebook = new DefaultFacebookClient(realToken);
 		final String connection = photoId + "/tags";
 		final String abbrToken = StringUtils.abbreviateMiddle(realToken, "…", 15);
-		log.debug("Tagging photo {} user {} to Facebook {} using {} ...", 
-				photoId, userId, connection, abbrToken);
-		System.out.print(ansi().render("Tagging photo @|bold %s|@ user @|bold %s|@ to @|bold %s|@ using @|yellow %s|@", 
+		log.debug("Tagging photo {} user {} to Facebook {} {} using {}", 
+				photoId, userId, connection, params, abbrToken);
+		System.out.print(ansi().render("Tagging photo @|bold %s|@ user @|bold %s|@ to @|bold %s|@ using @|yellow %s|@ ...", 
 				photoId, userId, connection, abbrToken));
 
-		final Tag postedTag;
-		postedTag = facebook.publish(connection, Tag.class,
+		final boolean postedTag = facebook.publish(connection, Boolean.class,
 				params.toArray(new Parameter[] {}));
-		log.info("Posted tag {} from photo {} to user {} to Facebook {} using {}: {}", 
-				postedTag.getId(), photoId, userId, connection, abbrToken, postedTag);
-		System.out.println(ansi().render(" @|bold %s|@", connection, postedTag.getId()));
-		return postedTag.getId();
+		log.info("Posted tag from photo {} to user {} to Facebook {} using {}: {}", 
+				photoId, userId, connection, abbrToken, postedTag);
+		System.out.println(ansi().render(" @|bold %s|@", connection, postedTag));
+		return postedTag;
+		
 	}
 
 }

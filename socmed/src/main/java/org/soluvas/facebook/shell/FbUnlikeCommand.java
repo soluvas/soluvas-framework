@@ -37,7 +37,7 @@ public class FbUnlikeCommand extends ExtCommandSupport {
 	@Option(name="-t", description="OAuth Access Token for the posting Facebook user, must be specified if not using -i.")
 	private String accessToken;
 	
-	@Argument(index=0, name="objectId", description="Object ID to unlike")
+	@Argument(index=0, name="objectId", required=true, description="Object ID to unlike")
 	private String objectId;
 
 	private final FacebookManager facebookMgr;

@@ -22,15 +22,15 @@ import org.springframework.stereotype.Service;
 import com.google.common.base.Preconditions;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.Parameter;
-import com.restfb.types.Post.Likes;
+import com.restfb.types.Link;
 
 /**
- * {@link Likes} an object on Facebook.
+ * Posts a {@link Link} object on Facebook.
  * @author ceefour
  */
 @Service @Scope("prototype")
-@Command(scope="fb", name="like", description="Likes an object on Facebook.")
-public class FbLikeCommand extends ExtCommandSupport {
+@Command(scope="fb", name="link", description="Shares a Link on Facebook.")
+public class FbLinkCommand extends ExtCommandSupport {
 	
 //	@Option(name="--appid", description="Specify custom Facebook OAuth App ID, if not using FacebookManager configuration.")
 //	private String appId;
@@ -42,15 +42,17 @@ public class FbLikeCommand extends ExtCommandSupport {
 	private String accessToken;
 	@Option(name="-x", description="Indicates it to be an explicit action and lets it appear on the left-hand side of that person's timeline.")
 	private transient boolean explicitlyShared = false;
+	@Option(name="-p", description="Person or Page to post this link")
+	private transient String profileId = "me";
 	
-	@Argument(index=0, name="objectId", required=true, description="Object ID to like")
-	private String objectId;
+	@Argument(index=0, name="link", required=true, description="The URL to share. To share a Photo, use this URI: http://www.facebook.com/photo.php?fbid={photoId}")
+	private String linkUri;
 
 	private final FacebookManager facebookMgr;
 	private final EntityLookup<FacebookAccessible, String> lookup;
 	
 	@Inject
-	public FbLikeCommand(FacebookManager facebookMgr, @FacebookRelated EntityLookup<FacebookAccessible, String> lookup) {
+	public FbLinkCommand(FacebookManager facebookMgr, @FacebookRelated EntityLookup<FacebookAccessible, String> lookup) {
 		super();
 		this.facebookMgr = facebookMgr;
 		this.lookup = lookup;
@@ -71,19 +73,22 @@ public class FbLikeCommand extends ExtCommandSupport {
 		}
 		
 		final DefaultFacebookClient facebook = new DefaultFacebookClient(realToken);
-		final String connection = objectId + "/likes";
+		final String connection = profileId + "/links";
 		final String abbrToken = StringUtils.abbreviateMiddle(realToken, "…", 15);
-		log.debug("Posting like to Facebook {} using {}", connection, abbrToken);
-		System.out.print(ansi().render("Liking @|bold %s|@ using @|yellow %s|@", connection, abbrToken));
 		final List<Parameter> params = new ArrayList<>();
+		params.add(Parameter.with("link", linkUri));
 		if (explicitlyShared) {
 			params.add(Parameter.with("fb:explicitly_shared", true));
 		}
-		final boolean postedLike = facebook.publish(connection, Boolean.class,
+		log.debug("Posting link {] to Facebook {} {} using {}", linkUri, connection, params, abbrToken);
+		System.out.print(ansi().render("Post link @|bold %s|@ to Facebook @|bold %s|@ @|cyan %s|@ using @|yellow %s|@", 
+				linkUri, connection, params, abbrToken));
+		final Link postedLink = facebook.publish(connection, Link.class,
 				params.toArray(new Parameter[] {}));
-		System.out.println(ansi().render(" @|bold %s|@", postedLike));		
-		log.info("Posted like {} to Facebook {}", postedLike, connection);
-		return postedLike;
+		System.out.println(ansi().render(" @|bold %s|@", postedLink.getId()));		
+		log.info("Posted link {} to Facebook {}: {}", 
+				postedLink.getId(), connection, postedLink);
+		return postedLink.getId();
 	}
 
 }

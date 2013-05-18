@@ -39,7 +39,7 @@ public class FbPageCommand extends ExtCommandSupport {
 	@Option(name="-t", description="OAuth Access Token for the Facebook user that manages the page, must be specified if not using -i.")
 	private String accessToken;
 	
-	@Argument(index=0, name="page_id", description="Page ID or username")
+	@Argument(index=0, name="page_id", required=true, description="Page ID or username")
 	private String pageId;
 
 	private final FacebookManager facebookMgr;
