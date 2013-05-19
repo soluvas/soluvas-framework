@@ -3,6 +3,8 @@ package org.soluvas.commons;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 
@@ -13,6 +15,7 @@ import com.google.common.base.Predicate;
 public class SlugUtils {
 	
 	public static final int MIN_LENGTH = 3;
+	public static final int MAX_LENGTH = 63;
 	
 	/**
 	 * Generates person slugs (using underscores).
@@ -27,7 +30,9 @@ public class SlugUtils {
 				.replaceAll("\\.+", ".");
 		while (base.length() < MIN_LENGTH)
 			base += "a";
-		return (suffix == 0) ? base : base + String.valueOf(suffix);
+		final String suffixStr = String.valueOf(suffix);
+		return (suffix == 0) ? StringUtils.left(base, MAX_LENGTH) :
+			StringUtils.left(base, MAX_LENGTH - suffixStr.length()) + suffixStr;
 	}
 	
 	/**
@@ -52,7 +57,9 @@ public class SlugUtils {
 				.replaceAll("\\_+", "_");
 		while (base.length() < MIN_LENGTH)
 			base += "a";
-		return (suffix == 0) ? base : base + String.valueOf(suffix);
+		final String suffixStr = String.valueOf(suffix);
+		return (suffix == 0) ? StringUtils.left(base, MAX_LENGTH) :
+			StringUtils.left(base, MAX_LENGTH - suffixStr.length()) + suffixStr;
 	}
 	
 	/**
@@ -77,7 +84,9 @@ public class SlugUtils {
 				.replaceAll("\\-+", "-");
 		while (base.length() < MIN_LENGTH)
 			base += "a";
-		return (suffix == 0) ? base : base + String.valueOf(suffix);
+		final String suffixStr = String.valueOf(suffix);
+		return (suffix == 0) ? StringUtils.left(base, MAX_LENGTH) :
+			StringUtils.left(base, MAX_LENGTH - suffixStr.length()) + suffixStr;
 	}
 	
 	/**
