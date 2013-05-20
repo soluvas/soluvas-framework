@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -524,18 +525,31 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		final String imageId = Optional.fromNullable(existingImageId).or( seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2 );
 		String tmpExtension = StringUtils.lowerCase(FilenameUtils.getExtension(originalName));
 		final String extension;
-		if (Strings.isNullOrEmpty(tmpExtension)) {
+		if (tmpExtension == null) {
 			extension = ImageUtils.supportedContentTypes.get(upContentType);
 			if (Strings.isNullOrEmpty(extension)) {
-				throw new ImageException(String.format("Cannot get extension from originalName=%s for existingImageId=%s originalFile=%s, with unsupported content type %s, supported content types are: %s",
+				throw new ImageException(String.format("Cannot get extension from originalName='%s' for existingImageId='%s' originalFile='%s', " +
+						"with unsupported content type '%s', supported content types are: %s",
 						originalName, existingImageId, originalFile, upContentType, ImageUtils.supportedContentTypes.keySet()));
 			}
 		} else {
 			extension = tmpExtension;
 		}
-		// if necessary, guess content type from extension
-		final String contentType = Optional.fromNullable(upContentType)
-				.or(ImageUtils.getExtensionFromMime(extension));
+		final String contentType;
+		// content type must be valid "image/*" types
+		if (upContentType != null && upContentType.startsWith("image/")) {
+			contentType = upContentType;
+		} else {
+			// if necessary, guess content type via JDK7 Probe (extension is not reliable)
+			try {
+				contentType = Files.probeContentType(originalFile.toPath());
+			} catch (IOException e) {
+				throw new ImageException(String.format("Cannot guess content type from originalName='%s' for existingImageId='%s' originalFile='%s', " +
+						"with unsupported provided content type '%s', supported content types are: %s",
+						originalName, existingImageId, originalFile, upContentType, ImageUtils.supportedContentTypes.keySet()),
+						e);
+			}
+		}
 		
 		log.debug("Adding image from {} ({} {} bytes) as {}, originalName={} extension={}",
 				originalFile.getName(), contentType, length, imageId,
