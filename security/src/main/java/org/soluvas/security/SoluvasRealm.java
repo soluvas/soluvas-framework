@@ -143,8 +143,8 @@ public class SoluvasRealm extends AuthorizingRealm {
 					final List<Entry> users = LdapUtils.asList(conn.search(
 							usersDn, ldapFilter, SearchScope.ONELEVEL, "uid"));
 					if (users.size() != 1) {
-						log.info("Found {} users matching email {}, expected 1", users.size(), tokenUsername);
-						throw new AuthenticationException("No user matching email " + tokenUsername);
+						log.warn("Found {} users matching email {}, expected 1", users.size(), tokenUsername);
+						throw new AuthenticationException("Found " + users.size() + " matching email " + tokenUsername + ", expected 1");
 					}
 					final Entry userEntry = Iterables.getOnlyElement(users);
 					personId = userEntry.get("uid").getString();
