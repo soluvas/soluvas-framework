@@ -88,7 +88,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	public static final String SCHEMA_VERSION_FIELD = "schemaVersion";
 	protected final Logger log;
 	protected DBCollection coll;
-	private Morphia morphia;
+	protected Morphia morphia;
 	/**
 	 * Slow query threshold in milliseconds.
 	 */
