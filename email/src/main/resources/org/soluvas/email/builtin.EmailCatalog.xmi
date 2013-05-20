@@ -10,6 +10,9 @@
   <pageTypes
       name="feedbackToAdminManager"
       subjectTemplate="[{{{appManifest.title}}}] Feedback from {{{contact.name}}}: {{{contact.subject}}}"/>
+  <layoutTypes
+      name="soluvas"
+      subjectTemplate="{{{pageSubject}}}"/>
   <senderTypes
       name="general"
       from="{{{appManifest.title}}}"

@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html style="margin:0; padding:0;">
+<head>
+    <title>{{subject}}</title>
+    <meta name="robots" content="noindex,nofollow"></meta>
+    <link rel="shortcut icon" href="{{webAddress.baseUri}}favicon.ico" />
+    <style type="text/css" media="screen">
+        @media only screen and (max-device-width: 480px) {
+            *[id=middle_column_table] {
+                width: 320px !important;
+                padding: 10px !important;
+            }
+
+            *[class=middle_column_table_spacer] {
+                height: 0px !important
+            }
+
+            *[class=middle_column_table_spacer_inner] {
+                height: 0px !important;
+                min-height: 0px !important;
+                max-height: 0px !important;
+            }
+
+            *[id=middle_column_content_cell] {
+                padding: 20px !important;
+            }
+
+            *[class=address_line] {
+                display: block;
+            }
+
+            *[id=middle_column_footer_address_cell] {
+                font-size: 11px !important;
+            }
+        }
+
+        a[href^=x-apple-data-detectors] {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .table {
+        	border-collapse: collapse;
+        	border-spacing: 0;
+        	min-width: 90%;
+        }
+        .table th, .table td {
+        	border: 1px solid #aaa;
+        	padding: 3px 5px;
+        }
+    </style>
+</head>
+<body style="margin:0; padding:0; background:#F5F5F5;">
+
+    <!-- #body_table -->
+    <table id="body_table" border="0" cellspacing="0" cellpadding="0" width="100%" style="background-color:#F5F5F5;">
+        <tr>
+            <td>
+
+                <!-- #middle_column_table -->
+                <table id="middle_column_table" border="0" cellspacing="0" cellpadding="0" align="center" style="width:640px; padding-left:20px; padding-right:20px;">
+                    <tr><td class="middle_column_table_spacer" style="height:20px;"><div class="middle_column_table_spacer_inner" style="height:20px; min-height:20px; max-height:20px; vertical-align:top; overflow:hidden"></div></td></tr>
+
+                    <tr>
+                        <td>
+
+                            <!-- #middle_column_inner_table -->
+                            <table id="middle_column_inner_table" border="0" cellspacing="0" cellpadding="0" width="100%">
+
+                                <tr>
+                                    <td>
+
+                                        <!-- #middle_column_content_table -->
+                                        <table id="middle_column_content_table" border="0" cellspacing="0" cellpadding="40" width="100%"
+                                        style="background:#ffffff; -webkit-border-radius:8px; -moz-border-radius:8px; border-radius:8px;">
+                                            <tr>
+                                                <td id="middle_column_content_cell" style="background-color:#ffffff;
+                                                -webkit-border-radius:6px; -moz-border-radius:6px; border-radius:6px;
+                                                -webkit-box-shadow:0 1px 3px rgba(0,0,0, 0.2);
+                                                -moz-box-shadow:0 1px 3px rgba(0,0,0, 0.2);
+                                                box-shadow:0 1px 3px rgba(0,0,0, 0.2);">
+
+                                                    <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+                                                    font-size:14px; line-height:22px; color:#424242;">
+                                                        <!-- content_for_layout -->
+
+		  <p>{{appManifest.letterSalutation}} <strong>{{recipient.name}}</strong>,</p>
+		  
+		  <div class="page-content">
+		  	{{{pageHtml}}}
+		  </div>
+
+		<p>{{appManifest.letterClosing}}<br>
+		<a href="{{webAddress.baseUri}}">{{appManifest.title}}</a></p>
+
+		<p style="margin-top: 20px; color: gray">
+			<small>Anda menerima email ini dari {{appManifest.title}} sebagai <strong>{{recipient.roleName}}</strong>.</small>
+		</p>
+
+                                                        <!-- content_for_layout -->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!-- #middle_column_content_table -->
+
+                                    </td>
+                                </tr>
+
+                                    <tr><td height="20"></td></tr>
+
+                                    <tr>
+                                        <td>
+
+                                            <!--  #middle_column_footer_table -->
+                                            <table id="middle_column_footer_table" border="0" cellspacing="0" cellpadding="0" width="100%">
+                                                <tr>
+                                                    <td id="middle_column_footer_logo_cell" valign="top" width="127">
+                                                        <a href="{{webAddress.baseUri}}" title="{{appManifest.title}}"><img src="{{webAddress.imagesUri}}/tenant_common/logo_email.png" width="127" border="0" alt="{{appManifest.title}}"/></a>
+                                                    </td>
+                                                    <td id="middle_column_footer_address_cell" valign="top" align="right"
+	                                                    style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+		                                                    font-size:11px; line-height:15px; color:#9d9d9d;
+		                                                    -webkit-text-size-adjust:none; -ms-text-size-adjust:none;">
+		                                                <p class="address_line">Komunikasi dengan email bisa menghubungi kami di <a href="mailto:{{appManifest.generalEmail}}">{{appManifest.generalEmail}}</a></p>
+                                                        <p class="address_line">{{appManifest.title}} is managed by {{appManifest.organizationName}}<br/>{{appManifest.organizationAddress}}</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <!--  #middle_column_footer_table -->
+
+                                        </td>
+                                    </tr>
+                                                            </table>
+                            <!-- #middle_column_content_table -->
+
+                        </td>
+                    </tr>
+
+                    <tr><td class="middle_column_table_spacer" style="height:20px;"><div class="middle_column_table_spacer_inner" style="height:20px; min-height:20px; max-height:20px; vertical-align:top; overflow:hidden"></div></td></tr>
+                </table>
+                <!-- #middle_column_table -->
+
+            </td>
+        </tr>
+    </table>
+    <!-- #body_table -->
+
+</body>
+</html>

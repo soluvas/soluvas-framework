@@ -6,9 +6,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.soluvas.email.DefaultScope;
+import org.soluvas.email.Layout;
 import org.soluvas.email.Page;
 import org.soluvas.email.Template;
 import org.soluvas.email.TemplateLike;
+import org.soluvas.email.builtin.*;
 import org.soluvas.email.builtin.BuiltinPackage;
 import org.soluvas.email.builtin.Contact;
 import org.soluvas.email.builtin.FeedbackToAdmin;
@@ -94,6 +96,16 @@ public class BuiltinSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BuiltinPackage.SOLUVAS: {
+				Soluvas soluvas = (Soluvas)theEObject;
+				T result = caseSoluvas(soluvas);
+				if (result == null) result = caseLayout(soluvas);
+				if (result == null) result = caseTemplate(soluvas);
+				if (result == null) result = caseTemplateLike(soluvas);
+				if (result == null) result = caseDefaultScope(soluvas);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -140,6 +152,21 @@ public class BuiltinSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseFeedbackToAdminManager(FeedbackToAdminManager object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Soluvas</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Soluvas</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSoluvas(Soluvas object) {
 		return null;
 	}
 
@@ -200,6 +227,21 @@ public class BuiltinSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePage(Page object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Layout</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Layout</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLayout(Layout object) {
 		return null;
 	}
 
