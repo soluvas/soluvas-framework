@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.soluvas.commons.CommonsPackage;
-import org.soluvas.data.AttributeSemantic;
 import org.soluvas.data.Attribute;
+import org.soluvas.data.AttributeSemantic;
 import org.soluvas.data.CurrencyValue;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataFactory;
@@ -29,12 +29,10 @@ import org.soluvas.data.Kind;
 import org.soluvas.data.ListVocab;
 import org.soluvas.data.MeasureValue;
 import org.soluvas.data.Mixin;
-import org.soluvas.data.MixinManager;
 import org.soluvas.data.RangeValue;
 import org.soluvas.data.StringValue;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermContainer;
-import org.soluvas.data.TermManager;
 import org.soluvas.data.TermValue;
 import org.soluvas.data.TreeVocab;
 import org.soluvas.data.Value;
@@ -280,6 +278,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAttribute() {
 		return attributeEClass;
 	}
@@ -289,6 +288,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_DisplayName() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
 	}
@@ -298,6 +298,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_MinValues() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(1);
 	}
@@ -307,6 +308,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_MaxValues() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(2);
 	}
@@ -316,6 +318,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_DataTypeName() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(3);
 	}
@@ -325,6 +328,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_KindNsPrefix() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(4);
 	}
@@ -334,6 +338,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_KindName() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(5);
 	}
@@ -343,6 +348,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_InputMethod() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(6);
 	}
@@ -352,6 +358,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_InputUnitName() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(7);
 	}
@@ -361,6 +368,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_VisibleInSimple() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(8);
 	}
@@ -370,6 +378,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_SearchableInQuick() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(9);
 	}
@@ -379,6 +388,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_ImageId() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(10);
 	}
@@ -388,6 +398,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_FieldWidth() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(11);
 	}
@@ -397,6 +408,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_Principal() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(12);
 	}
@@ -516,6 +528,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMixin_Attributes() {
 		return (EReference)mixinEClass.getEStructuralFeatures().get(0);
 	}
@@ -525,6 +538,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getMixin_DisplayName() {
 		return (EAttribute)mixinEClass.getEStructuralFeatures().get(1);
 	}
@@ -654,6 +668,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTerm_KindNsPrefix() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(3);
 	}
@@ -663,6 +678,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTerm_KindName() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(4);
 	}
@@ -762,6 +778,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDataCatalog_Kinds() {
 		return (EReference)dataCatalogEClass.getEStructuralFeatures().get(3);
 	}
@@ -771,6 +788,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getKind() {
 		return kindEClass;
 	}
@@ -780,6 +798,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getKind_ImageId() {
 		return (EAttribute)kindEClass.getEStructuralFeatures().get(0);
 	}
@@ -799,6 +818,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getInputMethod() {
 		return inputMethodEEnum;
 	}
