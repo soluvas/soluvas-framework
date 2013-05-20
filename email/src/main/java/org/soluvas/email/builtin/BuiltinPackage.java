@@ -267,6 +267,115 @@ public interface BuiltinPackage extends EPackage {
 	int FEEDBACK_TO_ADMIN_MANAGER_FEATURE_COUNT = EmailPackage.PAGE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.email.builtin.impl.SoluvasImpl <em>Soluvas</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.email.builtin.impl.SoluvasImpl
+	 * @see org.soluvas.email.builtin.impl.BuiltinPackageImpl#getSoluvas()
+	 * @generated
+	 */
+	int SOLUVAS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOLUVAS__SUBJECT_TEMPLATE = EmailPackage.LAYOUT__SUBJECT_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Plain Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOLUVAS__PLAIN_TEMPLATE = EmailPackage.LAYOUT__PLAIN_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Html Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOLUVAS__HTML_TEMPLATE = EmailPackage.LAYOUT__HTML_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Web Address</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOLUVAS__WEB_ADDRESS = EmailPackage.LAYOUT__WEB_ADDRESS;
+
+	/**
+	 * The feature id for the '<em><b>App Manifest</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOLUVAS__APP_MANIFEST = EmailPackage.LAYOUT__APP_MANIFEST;
+
+	/**
+	 * The feature id for the '<em><b>Recipients</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOLUVAS__RECIPIENTS = EmailPackage.LAYOUT__RECIPIENTS;
+
+	/**
+	 * The feature id for the '<em><b>Page Subject</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOLUVAS__PAGE_SUBJECT = EmailPackage.LAYOUT__PAGE_SUBJECT;
+
+	/**
+	 * The feature id for the '<em><b>Page Plain</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOLUVAS__PAGE_PLAIN = EmailPackage.LAYOUT__PAGE_PLAIN;
+
+	/**
+	 * The feature id for the '<em><b>Page Html</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOLUVAS__PAGE_HTML = EmailPackage.LAYOUT__PAGE_HTML;
+
+	/**
+	 * The feature id for the '<em><b>Layout Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOLUVAS__LAYOUT_TYPE = EmailPackage.LAYOUT__LAYOUT_TYPE;
+
+	/**
+	 * The number of structural features of the '<em>Soluvas</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOLUVAS_FEATURE_COUNT = EmailPackage.LAYOUT_FEATURE_COUNT + 0;
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.builtin.Contact <em>Contact</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -363,6 +472,16 @@ public interface BuiltinPackage extends EPackage {
 	EClass getFeedbackToAdminManager();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.email.builtin.Soluvas <em>Soluvas</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Soluvas</em>'.
+	 * @see org.soluvas.email.builtin.Soluvas
+	 * @generated
+	 */
+	EClass getSoluvas();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -453,6 +572,15 @@ public interface BuiltinPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FEEDBACK_TO_ADMIN_MANAGER = eINSTANCE.getFeedbackToAdminManager();
+		/**
+		 * The meta object literal for the '{@link org.soluvas.email.builtin.impl.SoluvasImpl <em>Soluvas</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.email.builtin.impl.SoluvasImpl
+		 * @see org.soluvas.email.builtin.impl.BuiltinPackageImpl#getSoluvas()
+		 * @generated
+		 */
+		EClass SOLUVAS = eINSTANCE.getSoluvas();
 
 	}
 

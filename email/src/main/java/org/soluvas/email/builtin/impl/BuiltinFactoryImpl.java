@@ -58,6 +58,7 @@ public class BuiltinFactoryImpl extends EFactoryImpl implements BuiltinFactory {
 		switch (eClass.getClassifierID()) {
 			case BuiltinPackage.CONTACT: return (EObject)createContact();
 			case BuiltinPackage.FEEDBACK_TO_ADMIN_MANAGER: return (EObject)createFeedbackToAdminManager();
+			case BuiltinPackage.SOLUVAS: return (EObject)createSoluvas();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -81,6 +82,16 @@ public class BuiltinFactoryImpl extends EFactoryImpl implements BuiltinFactory {
 	public FeedbackToAdminManager createFeedbackToAdminManager() {
 		FeedbackToAdminManagerImpl feedbackToAdminManager = new FeedbackToAdminManagerImpl();
 		return feedbackToAdminManager;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Soluvas createSoluvas() {
+		SoluvasImpl soluvas = new SoluvasImpl();
+		return soluvas;
 	}
 
 	/**

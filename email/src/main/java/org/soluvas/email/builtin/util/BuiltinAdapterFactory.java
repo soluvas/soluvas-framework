@@ -7,9 +7,11 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.soluvas.email.DefaultScope;
+import org.soluvas.email.Layout;
 import org.soluvas.email.Page;
 import org.soluvas.email.Template;
 import org.soluvas.email.TemplateLike;
+import org.soluvas.email.builtin.*;
 import org.soluvas.email.builtin.BuiltinPackage;
 import org.soluvas.email.builtin.Contact;
 import org.soluvas.email.builtin.FeedbackToAdmin;
@@ -84,6 +86,10 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 				return createFeedbackToAdminManagerAdapter();
 			}
 			@Override
+			public Adapter caseSoluvas(Soluvas object) {
+				return createSoluvasAdapter();
+			}
+			@Override
 			public Adapter caseTemplateLike(TemplateLike object) {
 				return createTemplateLikeAdapter();
 			}
@@ -98,6 +104,10 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePage(Page object) {
 				return createPageAdapter();
+			}
+			@Override
+			public Adapter caseLayout(Layout object) {
+				return createLayoutAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -162,6 +172,20 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.builtin.Soluvas <em>Soluvas</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.email.builtin.Soluvas
+	 * @generated
+	 */
+	public Adapter createSoluvasAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.soluvas.email.TemplateLike <em>Template Like</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -214,6 +238,20 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.Layout <em>Layout</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.email.Layout
+	 * @generated
+	 */
+	public Adapter createLayoutAdapter() {
 		return null;
 	}
 

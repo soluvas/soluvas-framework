@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
+import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.email.EmailCatalog;
@@ -20,6 +21,7 @@ import org.soluvas.email.Layout;
 import org.soluvas.email.LayoutType;
 import org.soluvas.email.Page;
 import org.soluvas.email.PageType;
+import org.soluvas.email.PersonToRecipients;
 import org.soluvas.email.Recipient;
 import org.soluvas.email.Sender;
 import org.soluvas.email.SenderType;
@@ -233,4 +235,36 @@ public class EmailUtils {
 		return recipients;
 	}
 	
+	
+	/**
+	 * Get email recipients for {@link PersonInfo} based on:
+	 * 
+	 * 1. {@link PersonInfo#getEmail()}
+	 * 2. If {@link PersonInfo#getId()} is not empty and {@code personLookup} is provided,
+	 * {@link Person#getEmail()s},
+	 * using {@link PersonToRecipients}.
+	 * 
+	 * Will not duplicate recipients with same email address.
+	 * 
+	 * @param personLookup
+	 * @return
+	 */
+	public static Set<Recipient> getRecipientsNew(@Nullable PersonInfo personInfo, @Nullable EntityLookup<Person, String> personLookup) {
+		final Set<Recipient> recipients = Sets.newHashSet();
+		
+		if (personInfo != null) {
+			if (!Strings.isNullOrEmpty(personInfo.getEmail())) {
+				final String name = Optional.fromNullable(personInfo.getName()).or(personInfo.getEmail());
+				recipients.add(EmailFactory.eINSTANCE.createRecipient(
+						name, personInfo.getEmail(), "customer"));
+			}
+			//find person by customerId
+			if (!Strings.isNullOrEmpty(personInfo.getId()) && personLookup != null) {
+				final Person person = personLookup.findOne(personInfo.getId());
+				recipients.addAll(new PersonToRecipients("registered customer").apply(person));
+			}
+		}
+		
+		return recipients;
+	}
 }

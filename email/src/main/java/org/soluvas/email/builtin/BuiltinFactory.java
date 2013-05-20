@@ -40,6 +40,15 @@ public interface BuiltinFactory extends EFactory {
 	FeedbackToAdminManager createFeedbackToAdminManager();
 
 	/**
+	 * Returns a new object of class '<em>Soluvas</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Soluvas</em>'.
+	 * @generated
+	 */
+	Soluvas createSoluvas();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -14,6 +14,7 @@ import org.soluvas.email.builtin.BuiltinPackage;
 import org.soluvas.email.builtin.Contact;
 import org.soluvas.email.builtin.FeedbackToAdmin;
 import org.soluvas.email.builtin.FeedbackToAdminManager;
+import org.soluvas.email.builtin.Soluvas;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,6 +43,13 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 	 * @generated
 	 */
 	private EClass feedbackToAdminManagerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass soluvasEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -202,6 +210,15 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSoluvas() {
+		return soluvasEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public BuiltinFactory getBuiltinFactory() {
 		return (BuiltinFactory)getEFactoryInstance();
@@ -237,6 +254,8 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 		createEReference(feedbackToAdminEClass, FEEDBACK_TO_ADMIN__CONTACT);
 
 		feedbackToAdminManagerEClass = createEClass(FEEDBACK_TO_ADMIN_MANAGER);
+
+		soluvasEClass = createEClass(SOLUVAS);
 	}
 
 	/**
@@ -273,6 +292,7 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 		// Add supertypes to classes
 		feedbackToAdminManagerEClass.getESuperTypes().add(theEmailPackage.getPage());
 		feedbackToAdminManagerEClass.getESuperTypes().add(this.getFeedbackToAdmin());
+		soluvasEClass.getESuperTypes().add(theEmailPackage.getLayout());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(contactEClass, Contact.class, "Contact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -286,6 +306,8 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 		initEReference(getFeedbackToAdmin_Contact(), this.getContact(), null, "contact", null, 1, 1, FeedbackToAdmin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(feedbackToAdminManagerEClass, FeedbackToAdminManager.class, "FeedbackToAdminManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(soluvasEClass, Soluvas.class, "Soluvas", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

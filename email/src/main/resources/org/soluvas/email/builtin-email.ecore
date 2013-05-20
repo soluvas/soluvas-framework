@@ -17,4 +17,5 @@
         eType="#//Contact"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeedbackToAdminManager" eSuperTypes="email.ecore#//Page #//FeedbackToAdmin"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Soluvas" eSuperTypes="email.ecore#//Layout"/>
 </ecore:EPackage>
