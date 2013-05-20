@@ -8,8 +8,6 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.inject.Inject;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -20,6 +18,7 @@ import org.soluvas.commons.annotation.TwitterRelated;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.twitter.TwitterManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -65,15 +64,9 @@ public class TwitterTweetCommand extends ExtCommandSupport {
 	@Argument(index=0, name="message", required=true, description="Message to tweet.")
 	private String message;
 	
-	private final TwitterManager twitterMgr;
-	private final EntityLookup<TwitterAccessible, String> lookup;
-
-	@Inject
-	public TwitterTweetCommand(TwitterManager twitterMgr, @TwitterRelated EntityLookup<TwitterAccessible, String> lookup) {
-		super();
-		this.twitterMgr = twitterMgr;
-		this.lookup = lookup;
-	}
+	private TwitterManager twitterMgr;
+	@Autowired(required=false) @TwitterRelated
+	private EntityLookup<TwitterAccessible, String> lookup;
 
 	@Override
 	protected Object doExecute() throws Exception {

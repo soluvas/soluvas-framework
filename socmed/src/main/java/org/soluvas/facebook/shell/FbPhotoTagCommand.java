@@ -16,6 +16,7 @@ import org.soluvas.commons.annotation.FacebookRelated;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.facebook.FacebookManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -50,16 +51,11 @@ public class FbPhotoTagCommand extends ExtCommandSupport {
 	@Argument(index=1, name="userId", required=true, description="User ID or tag text to be tagged in the photo.")
 	private String userId;
 
-	private final FacebookManager facebookMgr;
-	private final EntityLookup<FacebookAccessible, String> lookup;
-	
 	@Inject
-	public FbPhotoTagCommand(FacebookManager facebookMgr, @FacebookRelated EntityLookup<FacebookAccessible, String> lookup) {
-		super();
-		this.facebookMgr = facebookMgr;
-		this.lookup = lookup;
-	}
-
+	private FacebookManager facebookMgr;
+	@Autowired(required=false) @FacebookRelated
+	private EntityLookup<FacebookAccessible, String> lookup;
+	
 	@Override
 	protected Object doExecute() throws Exception {
 		Preconditions.checkArgument(id != null || accessToken != null,
