@@ -2,8 +2,6 @@ package org.soluvas.twitter.shell;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
@@ -12,6 +10,7 @@ import org.soluvas.commons.annotation.TwitterRelated;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.twitter.TwitterManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -45,15 +44,9 @@ public class TwitterRtCommand extends ExtCommandSupport {
 	@Argument(index=0, name="status ID", required=true, description="Status to retweet.")
 	private long statusId;
 	
-	private final TwitterManager twitterMgr;
-	private final EntityLookup<TwitterAccessible, String> lookup;
-
-	@Inject
-	public TwitterRtCommand(TwitterManager twitterMgr, @TwitterRelated EntityLookup<TwitterAccessible, String> lookup) {
-		super();
-		this.twitterMgr = twitterMgr;
-		this.lookup = lookup;
-	}
+	private TwitterManager twitterMgr;
+	@Autowired(required=false) @TwitterRelated
+	private EntityLookup<TwitterAccessible, String> lookup;
 
 	@Override
 	protected Object doExecute() throws Exception {
