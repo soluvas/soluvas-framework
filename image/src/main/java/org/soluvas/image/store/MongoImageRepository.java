@@ -165,7 +165,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		setStyles(imageStyles);
 		
 		final MongoURI mongoUriDetail = new MongoURI(mongoUri);
-		log = LoggerFactory.getLogger(MongoImageRepository.class.getName() + "/" + mongoUriDetail.getDatabase());
+		String collName = namespace + "Image";
+		log = LoggerFactory.getLogger(MongoImageRepository.class.getName() + "/" + mongoUriDetail.getDatabase() + "/" + collName);
 		log.info("Starting MongoImageRepository {} with {} styles", namespace, styles.size());
 		
 		// Sanity checks
@@ -179,7 +180,6 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 			DB db = mongoUriDetail.connectDB();
 			if (mongoUriDetail.getUsername() != null)
 				db.authenticate(mongoUriDetail.getUsername(), mongoUriDetail.getPassword());
-			String collName = namespace + "Image";
 			log.info("Authenticated to MongoDB. Collection name is {}", collName);
 			mongoColl = db.getCollection(collName);
 			mongoColl.ensureIndex(new BasicDBObject("created", -1));
