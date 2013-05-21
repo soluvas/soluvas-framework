@@ -247,21 +247,23 @@ public class EmailUtils {
 	 * Will not duplicate recipients with same email address.
 	 * 
 	 * @param personLookup
+	 * @param roleName e.g. "registered customer"
 	 * @return
 	 */
-	public static Set<Recipient> getRecipientsNew(@Nullable PersonInfo personInfo, @Nullable EntityLookup<Person, String> personLookup) {
+	public static Set<Recipient> getRecipientsNew(@Nullable PersonInfo personInfo, @Nullable EntityLookup<Person, String> personLookup,
+			String roleName) {
 		final Set<Recipient> recipients = Sets.newHashSet();
 		
 		if (personInfo != null) {
 			if (!Strings.isNullOrEmpty(personInfo.getEmail())) {
 				final String name = Optional.fromNullable(personInfo.getName()).or(personInfo.getEmail());
 				recipients.add(EmailFactory.eINSTANCE.createRecipient(
-						name, personInfo.getEmail(), "customer"));
+						name, personInfo.getEmail(), roleName));
 			}
 			//find person by customerId
 			if (!Strings.isNullOrEmpty(personInfo.getId()) && personLookup != null) {
 				final Person person = personLookup.findOne(personInfo.getId());
-				recipients.addAll(new PersonToRecipients("registered customer").apply(person));
+				recipients.addAll(new PersonToRecipients(roleName).apply(person));
 			}
 		}
 		
