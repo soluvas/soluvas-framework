@@ -2,7 +2,6 @@ package org.soluvas.email.impl;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +20,7 @@ import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailException;
 import org.soluvas.email.EmailManager;
 import org.soluvas.email.EmailPackage;
+import org.soluvas.email.EmailSecurity;
 import org.soluvas.email.Layout;
 import org.soluvas.email.LayoutType;
 import org.soluvas.email.Page;
@@ -41,6 +41,14 @@ import com.google.common.collect.Lists;
  * An implementation of the model object '<em><b>Manager</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.soluvas.email.impl.EmailManagerImpl#getSmtpUser <em>Smtp User</em>}</li>
+ *   <li>{@link org.soluvas.email.impl.EmailManagerImpl#getSmtpPassword <em>Smtp Password</em>}</li>
+ *   <li>{@link org.soluvas.email.impl.EmailManagerImpl#getSmtpHost <em>Smtp Host</em>}</li>
+ *   <li>{@link org.soluvas.email.impl.EmailManagerImpl#getSmtpPort <em>Smtp Port</em>}</li>
+ *   <li>{@link org.soluvas.email.impl.EmailManagerImpl#getSmtpSecurity <em>Smtp Security</em>}</li>
+ * </ul>
  * </p>
  *
  * @generated
@@ -48,6 +56,106 @@ import com.google.common.collect.Lists;
 @SuppressWarnings("serial")
 public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	
+	/**
+	 * The default value of the '{@link #getSmtpUser() <em>Smtp User</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSmtpUser()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SMTP_USER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSmtpUser() <em>Smtp User</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSmtpUser()
+	 * @generated
+	 * @ordered
+	 */
+	protected String smtpUser = SMTP_USER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSmtpPassword() <em>Smtp Password</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSmtpPassword()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SMTP_PASSWORD_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSmtpPassword() <em>Smtp Password</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSmtpPassword()
+	 * @generated
+	 * @ordered
+	 */
+	protected String smtpPassword = SMTP_PASSWORD_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSmtpHost() <em>Smtp Host</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSmtpHost()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SMTP_HOST_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSmtpHost() <em>Smtp Host</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSmtpHost()
+	 * @generated
+	 * @ordered
+	 */
+	protected String smtpHost = SMTP_HOST_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSmtpPort() <em>Smtp Port</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSmtpPort()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer SMTP_PORT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSmtpPort() <em>Smtp Port</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSmtpPort()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer smtpPort = SMTP_PORT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSmtpSecurity() <em>Smtp Security</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSmtpSecurity()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final EmailSecurity SMTP_SECURITY_EDEFAULT = EmailSecurity.NONE;
+
+	/**
+	 * The cached value of the '{@link #getSmtpSecurity() <em>Smtp Security</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSmtpSecurity()
+	 * @generated
+	 * @ordered
+	 */
+	protected EmailSecurity smtpSecurity = SMTP_SECURITY_EDEFAULT;
+
 	private static final Logger log = LoggerFactory.getLogger(EmailManagerImpl.class);
 
 	private final EmailCatalog emailCatalog;
@@ -78,18 +186,19 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	 */
 	public EmailManagerImpl(EmailCatalog emailCatalog,
 			String defaultLayoutNsPrefix, String defaultLayoutName,
-			String smtpHost, int smtpPort, String smtpUser,
-			String smtpPassword, AppManifest appManifest, WebAddress webAddress) {
+			String smtpHost, Integer smtpPort, String smtpUser,
+			String smtpPassword, EmailSecurity smtpSecurity,
+			AppManifest appManifest, WebAddress webAddress) {
 		super();
 		this.emailCatalog = emailCatalog;
 		this.defaultLayoutNsPrefix = defaultLayoutNsPrefix;
 		this.defaultLayoutName = defaultLayoutName;
-		final Properties props = new Properties();
-		props.setProperty(Email.MAIL_HOST, smtpHost);
-		props.setProperty(Email.MAIL_PORT, Integer.toString(smtpPort));
-		props.setProperty(Email.MAIL_SMTP_USER, smtpUser);
-		props.setProperty(Email.MAIL_SMTP_PASSWORD, smtpPassword);
-		mailSession = Session.getInstance(props);
+		this.smtpHost = smtpHost;
+		this.smtpPort = smtpPort;
+		this.smtpUser = smtpUser;
+		this.smtpPassword = smtpPassword;
+		this.smtpSecurity = smtpSecurity;
+		mailSession = EmailUtils.createSmtpSession(smtpHost, smtpPort, smtpUser, smtpPassword, smtpSecurity);
 		this.appManifest = appManifest;
 		this.webAddress = webAddress;
 	}
@@ -104,6 +213,56 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 		return EmailPackage.Literals.EMAIL_MANAGER;
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getSmtpUser() {
+		return smtpUser;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getSmtpPassword() {
+		return smtpPassword;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getSmtpHost() {
+		return smtpHost;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Integer getSmtpPort() {
+		return smtpPort;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EmailSecurity getSmtpSecurity() {
+		return smtpSecurity;
+	}
+
 	protected void injectDefaultScope(DefaultScope scope) {
 		scope.setAppManifest(appManifest);
 		scope.setWebAddress(webAddress);
@@ -150,18 +309,26 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 	 */
 	@Override
 	public List<String> sendAll(Page page) {
+		return doSendAll(page, Optional.<Session>absent());
+	}
+
+	protected List<String> doSendAll(Page page, final Optional<Session> customMailSession) {
 		final List<Email> emails = page.composeAll();
 		
+		final Session realMailSession = customMailSession.or(this.mailSession);
 		log.info("Sending {} {} emails using {}@{}:{} to {}",
 				emails.size(), page.getPageType().getName(),
-				mailSession.getProperty(Email.MAIL_SMTP_USER),
-				mailSession.getProperty(Email.MAIL_HOST), mailSession.getProperty(Email.MAIL_PORT),
+				realMailSession.getProperty(Email.MAIL_SMTP_USER),
+				realMailSession.getProperty(Email.MAIL_HOST), realMailSession.getProperty(Email.MAIL_PORT),
 				page.getRecipients());
 		final List<String> results = ImmutableList.copyOf(Lists.transform(emails, new Function<Email, String>() {
 			@Override @Nullable
 			public String apply(@Nullable Email email) {
 				String result;
 				try {
+					if (customMailSession.isPresent()) {
+						email.setMailSession(customMailSession.get());
+					}
 					Preconditions.checkNotNull(email.getMailSession(),
 							"Invalid mailSession for %s", email);
 					result = email.send();
@@ -178,6 +345,83 @@ public class EmailManagerImpl extends EObjectImpl implements EmailManager {
 			}
 		}));
 		return results;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public List<String> sendAll(Page page, Session mailSession) {
+		return doSendAll(page, Optional.of(mailSession));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case EmailPackage.EMAIL_MANAGER__SMTP_USER:
+				return getSmtpUser();
+			case EmailPackage.EMAIL_MANAGER__SMTP_PASSWORD:
+				return getSmtpPassword();
+			case EmailPackage.EMAIL_MANAGER__SMTP_HOST:
+				return getSmtpHost();
+			case EmailPackage.EMAIL_MANAGER__SMTP_PORT:
+				return getSmtpPort();
+			case EmailPackage.EMAIL_MANAGER__SMTP_SECURITY:
+				return getSmtpSecurity();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case EmailPackage.EMAIL_MANAGER__SMTP_USER:
+				return SMTP_USER_EDEFAULT == null ? smtpUser != null : !SMTP_USER_EDEFAULT.equals(smtpUser);
+			case EmailPackage.EMAIL_MANAGER__SMTP_PASSWORD:
+				return SMTP_PASSWORD_EDEFAULT == null ? smtpPassword != null : !SMTP_PASSWORD_EDEFAULT.equals(smtpPassword);
+			case EmailPackage.EMAIL_MANAGER__SMTP_HOST:
+				return SMTP_HOST_EDEFAULT == null ? smtpHost != null : !SMTP_HOST_EDEFAULT.equals(smtpHost);
+			case EmailPackage.EMAIL_MANAGER__SMTP_PORT:
+				return SMTP_PORT_EDEFAULT == null ? smtpPort != null : !SMTP_PORT_EDEFAULT.equals(smtpPort);
+			case EmailPackage.EMAIL_MANAGER__SMTP_SECURITY:
+				return smtpSecurity != SMTP_SECURITY_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (smtpUser: ");
+		result.append(smtpUser);
+		result.append(", smtpPassword: ");
+		result.append(smtpPassword);
+		result.append(", smtpHost: ");
+		result.append(smtpHost);
+		result.append(", smtpPort: ");
+		result.append(smtpPort);
+		result.append(", smtpSecurity: ");
+		result.append(smtpSecurity);
+		result.append(')');
+		return result.toString();
 	}
 
 	protected Layout getDefaultLayout() {

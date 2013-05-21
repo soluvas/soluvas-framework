@@ -2,21 +2,28 @@ package org.soluvas.email.util;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.mail.Session;
+import javax.net.ssl.SSLSocketFactory;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.mail.Email;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailException;
 import org.soluvas.email.EmailFactory;
+import org.soluvas.email.EmailSecurity;
 import org.soluvas.email.Layout;
 import org.soluvas.email.LayoutType;
 import org.soluvas.email.Page;
@@ -42,6 +49,7 @@ import com.google.common.collect.Sets;
  * @author ceefour
  */
 public class EmailUtils {
+	private static final Logger log = LoggerFactory.getLogger(EmailUtils.class);
 
 	/**
 	 * Helper method to create a {@link Layout}.
@@ -269,4 +277,41 @@ public class EmailUtils {
 		
 		return recipients;
 	}
+	
+	/**
+	 * Create a javax.mail {@link Session} specifically used for sending email messages.
+	 * @param smtpHost SMTP server host.
+	 * @param smtpPort SMTP server port.
+	 * @param smtpUser SMTP user for authentication. {@code mail.smtp.auth} will be set to true
+	 * @param smtpPassword SMTP password for authentication. {@code smtpUser} is required to use this.
+	 * @return
+	 */
+	public static Session createSmtpSession(@Nullable String smtpHost, @Nullable Integer smtpPort, @Nullable String smtpUser,
+			@Nullable String smtpPassword, @Nullable EmailSecurity protocol) {
+		final Properties props = new Properties();
+		if (smtpHost != null) {
+			props.setProperty(Email.MAIL_HOST, smtpHost);
+		}
+		if (smtpPort != null) {
+			props.setProperty(Email.MAIL_PORT, Integer.toString(smtpPort));
+		}
+		props.setProperty(Email.MAIL_SMTP_AUTH, Boolean.toString(!Strings.isNullOrEmpty(smtpUser)));
+		if (smtpUser != null) {
+			props.setProperty(Email.MAIL_SMTP_USER, smtpUser);
+		}
+		if (protocol != null) {
+			if (protocol == EmailSecurity.STARTTLS) {
+				props.setProperty("mail.smtp.starttls.enable", "true");
+			} else if (protocol == EmailSecurity.SSL) {
+				props.setProperty("mail.smtp.socketFactory.class", SSLSocketFactory.class.getName());
+			}
+		}
+		log.debug("Creating javax.mail Session with {} ({} ommitted)", props, Email.MAIL_SMTP_PASSWORD);
+		if (smtpPassword != null) {
+			props.setProperty(Email.MAIL_SMTP_PASSWORD, smtpPassword);
+		}
+		final Session session = Session.getInstance(props);
+		return session;
+	}
+	
 }

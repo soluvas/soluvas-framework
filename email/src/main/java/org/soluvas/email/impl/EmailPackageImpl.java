@@ -22,6 +22,7 @@ import org.soluvas.email.EmailFactory;
 import org.soluvas.email.EmailFormat;
 import org.soluvas.email.EmailManager;
 import org.soluvas.email.EmailPackage;
+import org.soluvas.email.EmailSecurity;
 import org.soluvas.email.TemplateType;
 import org.soluvas.email.Layout;
 import org.soluvas.email.LayoutType;
@@ -153,6 +154,13 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * @generated
 	 */
 	private EEnum webSecurityEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum emailSecurityEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -592,6 +600,51 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getEmailManager_SmtpUser() {
+		return (EAttribute)emailManagerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmailManager_SmtpPassword() {
+		return (EAttribute)emailManagerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmailManager_SmtpHost() {
+		return (EAttribute)emailManagerEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmailManager_SmtpPort() {
+		return (EAttribute)emailManagerEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmailManager_SmtpSecurity() {
+		return (EAttribute)emailManagerEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSender() {
 		return senderEClass;
 	}
@@ -701,6 +754,15 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getEmailSecurity() {
+		return emailSecurityEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EDataType getEmail() {
 		return emailEDataType;
@@ -790,6 +852,11 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		createEAttribute(templateLikeEClass, TEMPLATE_LIKE__HTML_TEMPLATE);
 
 		emailManagerEClass = createEClass(EMAIL_MANAGER);
+		createEAttribute(emailManagerEClass, EMAIL_MANAGER__SMTP_USER);
+		createEAttribute(emailManagerEClass, EMAIL_MANAGER__SMTP_PASSWORD);
+		createEAttribute(emailManagerEClass, EMAIL_MANAGER__SMTP_HOST);
+		createEAttribute(emailManagerEClass, EMAIL_MANAGER__SMTP_PORT);
+		createEAttribute(emailManagerEClass, EMAIL_MANAGER__SMTP_SECURITY);
 
 		senderEClass = createEClass(SENDER);
 		createEReference(senderEClass, SENDER__SENDER_TYPE);
@@ -808,6 +875,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		// Create enums
 		emailFormatEEnum = createEEnum(EMAIL_FORMAT);
 		webSecurityEEnum = createEEnum(WEB_SECURITY);
+		emailSecurityEEnum = createEEnum(EMAIL_SECURITY);
 
 		// Create data types
 		emailEDataType = createEDataType(EMAIL);
@@ -961,6 +1029,11 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		initEAttribute(getTemplateLike_HtmlTemplate(), theEcorePackage.getEString(), "htmlTemplate", null, 0, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(emailManagerEClass, EmailManager.class, "EmailManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEmailManager_SmtpUser(), theEcorePackage.getEString(), "smtpUser", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmailManager_SmtpPassword(), theEcorePackage.getEString(), "smtpPassword", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmailManager_SmtpHost(), theEcorePackage.getEString(), "smtpHost", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmailManager_SmtpPort(), theEcorePackage.getEIntegerObject(), "smtpPort", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmailManager_SmtpSecurity(), this.getEmailSecurity(), "smtpSecurity", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(emailManagerEClass, null, "createPage", 0, 1, IS_UNIQUE, IS_ORDERED);
 		ETypeParameter t1 = addETypeParameter(op, "T");
@@ -978,6 +1051,14 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 
 		op = addEOperation(emailManagerEClass, null, "sendAll", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getPage(), "page", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theCommonsPackage.getList());
+		g2 = createEGenericType(theEcorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = addEOperation(emailManagerEClass, null, "sendAll", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getPage(), "page", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getMailSession(), "mailSession", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(theCommonsPackage.getList());
 		g2 = createEGenericType(theEcorePackage.getEString());
 		g1.getETypeArguments().add(g2);
@@ -1012,6 +1093,11 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		addEEnumLiteral(webSecurityEEnum, WebSecurity.ALWAYS_SECURE);
 		addEEnumLiteral(webSecurityEEnum, WebSecurity.ALWAYS_UNSECURE);
 
+		initEEnum(emailSecurityEEnum, EmailSecurity.class, "EmailSecurity");
+		addEEnumLiteral(emailSecurityEEnum, EmailSecurity.NONE);
+		addEEnumLiteral(emailSecurityEEnum, EmailSecurity.STARTTLS);
+		addEEnumLiteral(emailSecurityEEnum, EmailSecurity.SSL);
+
 		// Initialize data types
 		initEDataType(emailEDataType, Email.class, "Email", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(mailSessionEDataType, Session.class, "MailSession", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1022,6 +1108,8 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		// Create annotations
 		// http://www.eclipse.org/emf/2002/GenModel
 		createGenModelAnnotations();
+		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
+		createExtendedMetaDataAnnotations();
 	}
 
 	/**
@@ -1177,6 +1265,12 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 			 "documentation", "Compose the page to all recipients, then sends all of them. Returns the list of Email IDs returned by mailer."
 		   });		
 		addAnnotation
+		  (emailManagerEClass.getEOperations().get(3), 
+		   source, 
+		   new String[] {
+			 "documentation", "Compose the page to all recipients, then sends all of them with custom MailSession. Returns the list of Email IDs returned by mailer."
+		   });						
+		addAnnotation
 		  (senderEClass, 
 		   source, 
 		   new String[] {
@@ -1199,7 +1293,59 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Email address of the sender. This can be:\n\n<ol>\n<li>a fully static text, e.g. \"support@berbatik.com\", very seldom used</li>\n<li>a variable, e.g. \"{{{generalEmail}}}\", most common</li>\n<li>a partial variable, e.g. \"support@{{{appManifest.domain}}}\", sometimes used</li>\n<li>multiple variables for randomly generated drop boxes, e.g. \"{{{dropbox.code}}}@{{{postEmailDomain}}}\" or \"{{{dropbox.code}}}@post.{{{appManifest.domain}}}\", which expands to \"yummy234food@post.berbatik.com\"</li>\n<li>a tracking address, e.g. \"notification+mwkuhkji@facebookmail.com\". Template is: \"notification+{{{tracker.code}}}@notification.{{{appManifest.domain}}}\" or \"notification+{{{tracker.code}}}@{{{notificationEmailDomain}}}\"</li>\n\n<p>WARNING: A suffix like \"+something\" is not recommended for non-tracking emails, some mail servers like NameCheap email forwarding does not support it, and many email forms do not accept \"+\"."
+		   });		
+		addAnnotation
+		  (emailSecurityEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Do not attempt to specify protocol. Amazon SES supports the default protocol at port 587."
+		   });		
+		addAnnotation
+		  (emailSecurityEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Set {@code mail.smtp.starttls.enable} to {@code true}, this is the recommended option. (Amazon SES supports this at port 587)"
+		   });		
+		addAnnotation
+		  (emailSecurityEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Set {@code mail.smtp.socketFactory.class} to {@link javax.net.ssl.SSLSocketFactory}. (Amazon SES only supports this at port 465)"
 		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http:///org/eclipse/emf/ecore/util/ExtendedMetaData</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createExtendedMetaDataAnnotations() {
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																											
+		addAnnotation
+		  (getEmailManager_SmtpUser(), 
+		   source, 
+		   new String[] {
+			 "name", "smtpSecurity"
+		   });		
+		addAnnotation
+		  (getEmailManager_SmtpPassword(), 
+		   source, 
+		   new String[] {
+			 "name", "smtpSecurity"
+		   });		
+		addAnnotation
+		  (getEmailManager_SmtpHost(), 
+		   source, 
+		   new String[] {
+			 "name", "smtpSecurity"
+		   });		
+		addAnnotation
+		  (getEmailManager_SmtpPort(), 
+		   source, 
+		   new String[] {
+			 "name", "smtpSecurity"
+		   });							
 	}
 
 } //EmailPackageImpl

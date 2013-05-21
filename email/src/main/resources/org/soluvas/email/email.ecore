@@ -224,6 +224,42 @@
       </eGenericType>
       <eParameters name="page" eType="#//Page"/>
     </eOperations>
+    <eOperations name="sendAll">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Compose the page to all recipients, then sends all of them with custom MailSession. Returns the list of Email IDs returned by mailer."/>
+      </eAnnotations>
+      <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//List">
+        <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      </eGenericType>
+      <eParameters name="page" eType="#//Page"/>
+      <eParameters name="mailSession" eType="#//MailSession"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="smtpUser" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="smtpSecurity"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="smtpPassword" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="smtpSecurity"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="smtpHost" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        changeable="false">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="smtpSecurity"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="smtpPort" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EIntegerObject"
+        changeable="false">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="smtpSecurity"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="smtpSecurity" eType="#//EmailSecurity"
+        changeable="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Sender" eSuperTypes="#//SenderLike #//DefaultScope">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -259,4 +295,21 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="MailSession" instanceClassName="javax.mail.Session"
       serializable="false"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="EmailSecurity">
+    <eLiterals name="none">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Do not attempt to specify protocol. Amazon SES supports the default protocol at port 587."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="starttls" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Set {@code mail.smtp.starttls.enable} to {@code true}, this is the recommended option. (Amazon SES supports this at port 587)"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="ssl" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Set {@code mail.smtp.socketFactory.class} to {@link javax.net.ssl.SSLSocketFactory}. (Amazon SES only supports this at port 465)"/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
 </ecore:EPackage>

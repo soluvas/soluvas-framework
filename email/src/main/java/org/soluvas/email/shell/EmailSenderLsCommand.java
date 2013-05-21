@@ -17,7 +17,7 @@ import org.soluvas.commons.NameUtils;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.SenderType;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
@@ -30,7 +30,7 @@ import com.google.common.collect.ImmutableSet;
  * List registered {@link SenderType}s.
  * @author ceefour
  */
-@Service @Lazy
+@Service @Scope("prototype")
 @Command(scope="email", name="senderls", description="List registered SenderTypes.")
 public class EmailSenderLsCommand extends OsgiCommandSupport {
 	
@@ -42,9 +42,6 @@ public class EmailSenderLsCommand extends OsgiCommandSupport {
 		this.emailCatalog = emailCatalog;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.apache.karaf.shell.console.AbstractSender#doExecute()
-	 */
 	@Override
 	protected Object doExecute() throws Exception {
 //		final ServiceReference<EmailCatalog> emailCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(EmailCatalog.class),

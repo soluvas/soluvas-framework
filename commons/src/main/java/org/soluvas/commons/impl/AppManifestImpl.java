@@ -43,6 +43,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultTimeZone <em>Default Time Zone</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCurrencyCode <em>Default Currency Code</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCurrency <em>Default Currency</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}</li>
  * </ul>
  * </p>
  *
@@ -373,6 +374,26 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * @ordered
 	 */
 	protected static final CurrencyUnit DEFAULT_CURRENCY_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getEmailLogoUriTemplate() <em>Email Logo Uri Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEmailLogoUriTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EMAIL_LOGO_URI_TEMPLATE_EDEFAULT = "{+imagesUri}tenant_common/logo_email.png";
+
+	/**
+	 * The cached value of the '{@link #getEmailLogoUriTemplate() <em>Email Logo Uri Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEmailLogoUriTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected String emailLogoUriTemplate = EMAIL_LOGO_URI_TEMPLATE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -765,6 +786,27 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getEmailLogoUriTemplate() {
+		return emailLogoUriTemplate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEmailLogoUriTemplate(String newEmailLogoUriTemplate) {
+		String oldEmailLogoUriTemplate = emailLogoUriTemplate;
+		emailLogoUriTemplate = newEmailLogoUriTemplate;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE, oldEmailLogoUriTemplate, emailLogoUriTemplate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -802,6 +844,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return getDefaultCurrencyCode();
 			case CommonsPackage.APP_MANIFEST__DEFAULT_CURRENCY:
 				return getDefaultCurrency();
+			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
+				return getEmailLogoUriTemplate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -858,6 +902,9 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return;
 			case CommonsPackage.APP_MANIFEST__DEFAULT_CURRENCY_CODE:
 				setDefaultCurrencyCode((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
+				setEmailLogoUriTemplate((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -916,6 +963,9 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 			case CommonsPackage.APP_MANIFEST__DEFAULT_CURRENCY_CODE:
 				setDefaultCurrencyCode(DEFAULT_CURRENCY_CODE_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
+				setEmailLogoUriTemplate(EMAIL_LOGO_URI_TEMPLATE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -962,6 +1012,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 				return DEFAULT_CURRENCY_CODE_EDEFAULT == null ? defaultCurrencyCode != null : !DEFAULT_CURRENCY_CODE_EDEFAULT.equals(defaultCurrencyCode);
 			case CommonsPackage.APP_MANIFEST__DEFAULT_CURRENCY:
 				return DEFAULT_CURRENCY_EDEFAULT == null ? getDefaultCurrency() != null : !DEFAULT_CURRENCY_EDEFAULT.equals(getDefaultCurrency());
+			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
+				return EMAIL_LOGO_URI_TEMPLATE_EDEFAULT == null ? emailLogoUriTemplate != null : !EMAIL_LOGO_URI_TEMPLATE_EDEFAULT.equals(emailLogoUriTemplate);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1054,6 +1106,8 @@ public class AppManifestImpl extends EObjectImpl implements AppManifest {
 		result.append(defaultTimeZoneId);
 		result.append(", defaultCurrencyCode: ");
 		result.append(defaultCurrencyCode);
+		result.append(", emailLogoUriTemplate: ");
+		result.append(emailLogoUriTemplate);
 		result.append(')');
 		return result.toString();
 	}

@@ -122,6 +122,30 @@
     <element xmi:type="ecore:EClass" href="email.ecore#//Layout"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Say0wMEXEeKHYJtCWk8yPQ" x="276" y="24"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_VDimUcHgEeKMs5_8DugKQA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_VDkbgMHgEeKMs5_8DugKQA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_VDlCkMHgEeKMs5_8DugKQA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_Zo19gMHgEeKMs5_8DugKQA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="builtin-email.ecore#//Tester/title"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Zo19gcHgEeKMs5_8DugKQA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ho6LYMHgEeKMs5_8DugKQA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="builtin-email.ecore#//Tester/message"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ho6LYcHgEeKMs5_8DugKQA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_VDlCkcHgEeKMs5_8DugKQA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VDlCksHgEeKMs5_8DugKQA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VDlCk8HgEeKMs5_8DugKQA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_VDlpoMHgEeKMs5_8DugKQA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_VDlpocHgEeKMs5_8DugKQA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VDlposHgEeKMs5_8DugKQA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VDlpo8HgEeKMs5_8DugKQA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_VDimUsHgEeKMs5_8DugKQA" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="builtin-email.ecore#//Tester"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VDimU8HgEeKMs5_8DugKQA" x="479" y="329"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_ucHuoUWeEeK1qbOICpWDVg"/>
   <element xmi:type="ecore:EPackage" href="builtin-email.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_UlCLUJ3DEeKmEPXvEfv99Q" type="3002" source="_inJMQZ2kEeKcvr-UznVaHA" target="_PQMBoEWfEeK1qbOICpWDVg">
@@ -175,5 +199,11 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_TKNfg8EXEeKHYJtCWk8yPQ" points="[0, 0, 53, 71]$[0, -30, 53, 41]$[-53, -30, 0, 41]$[-53, -71, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_T0RwMMEXEeKHYJtCWk8yPQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TKP7wMEXEeKHYJtCWk8yPQ" id="(0.6627218934911243,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_Vt7nIMHgEeKMs5_8DugKQA" type="3003" source="_VDimUcHgEeKMs5_8DugKQA" target="_mAZAAJ2kEeKcvr-UznVaHA">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_Vt7nIcHgEeKMs5_8DugKQA" routing="Rectilinear" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_Vt7nIsHgEeKMs5_8DugKQA" fontName="DejaVu Sans"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Vt7nI8HgEeKMs5_8DugKQA" points="[-44, -20, 207, 96]$[-245, -87, 6, 29]"/>
   </edges>
 </notation:Diagram>

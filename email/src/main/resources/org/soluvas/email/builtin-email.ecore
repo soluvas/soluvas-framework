@@ -18,4 +18,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeedbackToAdminManager" eSuperTypes="email.ecore#//Page #//FeedbackToAdmin"/>
   <eClassifiers xsi:type="ecore:EClass" name="Soluvas" eSuperTypes="email.ecore#//Layout"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Tester" eSuperTypes="email.ecore#//Page">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

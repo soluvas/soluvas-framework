@@ -49,6 +49,15 @@ public interface BuiltinFactory extends EFactory {
 	Soluvas createSoluvas();
 
 	/**
+	 * Returns a new object of class '<em>Tester</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tester</em>'.
+	 * @generated
+	 */
+	Tester createTester();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

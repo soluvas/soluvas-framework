@@ -376,6 +376,133 @@ public interface BuiltinPackage extends EPackage {
 	int SOLUVAS_FEATURE_COUNT = EmailPackage.LAYOUT_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.email.builtin.impl.TesterImpl <em>Tester</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.email.builtin.impl.TesterImpl
+	 * @see org.soluvas.email.builtin.impl.BuiltinPackageImpl#getTester()
+	 * @generated
+	 */
+	int TESTER = 4;
+
+	/**
+	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTER__SUBJECT_TEMPLATE = EmailPackage.PAGE__SUBJECT_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Plain Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTER__PLAIN_TEMPLATE = EmailPackage.PAGE__PLAIN_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Html Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTER__HTML_TEMPLATE = EmailPackage.PAGE__HTML_TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Web Address</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTER__WEB_ADDRESS = EmailPackage.PAGE__WEB_ADDRESS;
+
+	/**
+	 * The feature id for the '<em><b>App Manifest</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTER__APP_MANIFEST = EmailPackage.PAGE__APP_MANIFEST;
+
+	/**
+	 * The feature id for the '<em><b>Recipients</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTER__RECIPIENTS = EmailPackage.PAGE__RECIPIENTS;
+
+	/**
+	 * The feature id for the '<em><b>Layout</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTER__LAYOUT = EmailPackage.PAGE__LAYOUT;
+
+	/**
+	 * The feature id for the '<em><b>Page Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTER__PAGE_TYPE = EmailPackage.PAGE__PAGE_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sender</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTER__SENDER = EmailPackage.PAGE__SENDER;
+
+	/**
+	 * The feature id for the '<em><b>Mail Session</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTER__MAIL_SESSION = EmailPackage.PAGE__MAIL_SESSION;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTER__TITLE = EmailPackage.PAGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Message</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTER__MESSAGE = EmailPackage.PAGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Tester</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTER_FEATURE_COUNT = EmailPackage.PAGE_FEATURE_COUNT + 2;
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.builtin.Contact <em>Contact</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -482,6 +609,38 @@ public interface BuiltinPackage extends EPackage {
 	EClass getSoluvas();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.email.builtin.Tester <em>Tester</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tester</em>'.
+	 * @see org.soluvas.email.builtin.Tester
+	 * @generated
+	 */
+	EClass getTester();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.builtin.Tester#getTitle <em>Title</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Title</em>'.
+	 * @see org.soluvas.email.builtin.Tester#getTitle()
+	 * @see #getTester()
+	 * @generated
+	 */
+	EAttribute getTester_Title();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.builtin.Tester#getMessage <em>Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Message</em>'.
+	 * @see org.soluvas.email.builtin.Tester#getMessage()
+	 * @see #getTester()
+	 * @generated
+	 */
+	EAttribute getTester_Message();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -581,6 +740,29 @@ public interface BuiltinPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SOLUVAS = eINSTANCE.getSoluvas();
+		/**
+		 * The meta object literal for the '{@link org.soluvas.email.builtin.impl.TesterImpl <em>Tester</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.email.builtin.impl.TesterImpl
+		 * @see org.soluvas.email.builtin.impl.BuiltinPackageImpl#getTester()
+		 * @generated
+		 */
+		EClass TESTER = eINSTANCE.getTester();
+		/**
+		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTER__TITLE = eINSTANCE.getTester_Title();
+		/**
+		 * The meta object literal for the '<em><b>Message</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTER__MESSAGE = eINSTANCE.getTester_Message();
 
 	}
 

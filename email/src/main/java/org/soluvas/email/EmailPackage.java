@@ -1132,13 +1132,58 @@ public interface EmailPackage extends EPackage {
 	int EMAIL_MANAGER = 9;
 
 	/**
+	 * The feature id for the '<em><b>Smtp User</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_MANAGER__SMTP_USER = 0;
+
+	/**
+	 * The feature id for the '<em><b>Smtp Password</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_MANAGER__SMTP_PASSWORD = 1;
+
+	/**
+	 * The feature id for the '<em><b>Smtp Host</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_MANAGER__SMTP_HOST = 2;
+
+	/**
+	 * The feature id for the '<em><b>Smtp Port</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_MANAGER__SMTP_PORT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Smtp Security</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_MANAGER__SMTP_SECURITY = 4;
+
+	/**
 	 * The number of structural features of the '<em>Manager</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_MANAGER_FEATURE_COUNT = 0;
+	int EMAIL_MANAGER_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.SenderLike <em>Sender Like</em>}' class.
@@ -1390,6 +1435,16 @@ public interface EmailPackage extends EPackage {
 	int WEB_SECURITY = 15;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.email.EmailSecurity <em>Security</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.email.EmailSecurity
+	 * @see org.soluvas.email.impl.EmailPackageImpl#getEmailSecurity()
+	 * @generated
+	 */
+	int EMAIL_SECURITY = 16;
+
+	/**
 	 * The meta object id for the '<em>Email</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1397,7 +1452,7 @@ public interface EmailPackage extends EPackage {
 	 * @see org.soluvas.email.impl.EmailPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 16;
+	int EMAIL = 17;
 
 	/**
 	 * The meta object id for the '<em>Mail Session</em>' data type.
@@ -1407,7 +1462,7 @@ public interface EmailPackage extends EPackage {
 	 * @see org.soluvas.email.impl.EmailPackageImpl#getMailSession()
 	 * @generated
 	 */
-	int MAIL_SESSION = 17;
+	int MAIL_SESSION = 18;
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.EmailCatalog <em>Catalog</em>}'.
@@ -1807,6 +1862,61 @@ public interface EmailPackage extends EPackage {
 	EClass getEmailManager();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.EmailManager#getSmtpUser <em>Smtp User</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Smtp User</em>'.
+	 * @see org.soluvas.email.EmailManager#getSmtpUser()
+	 * @see #getEmailManager()
+	 * @generated
+	 */
+	EAttribute getEmailManager_SmtpUser();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.EmailManager#getSmtpPassword <em>Smtp Password</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Smtp Password</em>'.
+	 * @see org.soluvas.email.EmailManager#getSmtpPassword()
+	 * @see #getEmailManager()
+	 * @generated
+	 */
+	EAttribute getEmailManager_SmtpPassword();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.EmailManager#getSmtpHost <em>Smtp Host</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Smtp Host</em>'.
+	 * @see org.soluvas.email.EmailManager#getSmtpHost()
+	 * @see #getEmailManager()
+	 * @generated
+	 */
+	EAttribute getEmailManager_SmtpHost();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.EmailManager#getSmtpPort <em>Smtp Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Smtp Port</em>'.
+	 * @see org.soluvas.email.EmailManager#getSmtpPort()
+	 * @see #getEmailManager()
+	 * @generated
+	 */
+	EAttribute getEmailManager_SmtpPort();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.email.EmailManager#getSmtpSecurity <em>Smtp Security</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Smtp Security</em>'.
+	 * @see org.soluvas.email.EmailManager#getSmtpSecurity()
+	 * @see #getEmailManager()
+	 * @generated
+	 */
+	EAttribute getEmailManager_SmtpSecurity();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.Sender <em>Sender</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1931,6 +2041,16 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getWebSecurity();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.email.EmailSecurity <em>Security</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Security</em>'.
+	 * @see org.soluvas.email.EmailSecurity
+	 * @generated
+	 */
+	EEnum getEmailSecurity();
 
 	/**
 	 * Returns the meta object for data type '{@link org.apache.commons.mail.Email <em>Email</em>}'.
@@ -2293,6 +2413,46 @@ public interface EmailPackage extends EPackage {
 		EClass EMAIL_MANAGER = eINSTANCE.getEmailManager();
 
 		/**
+		 * The meta object literal for the '<em><b>Smtp User</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMAIL_MANAGER__SMTP_USER = eINSTANCE.getEmailManager_SmtpUser();
+
+		/**
+		 * The meta object literal for the '<em><b>Smtp Password</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMAIL_MANAGER__SMTP_PASSWORD = eINSTANCE.getEmailManager_SmtpPassword();
+
+		/**
+		 * The meta object literal for the '<em><b>Smtp Host</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMAIL_MANAGER__SMTP_HOST = eINSTANCE.getEmailManager_SmtpHost();
+
+		/**
+		 * The meta object literal for the '<em><b>Smtp Port</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMAIL_MANAGER__SMTP_PORT = eINSTANCE.getEmailManager_SmtpPort();
+
+		/**
+		 * The meta object literal for the '<em><b>Smtp Security</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMAIL_MANAGER__SMTP_SECURITY = eINSTANCE.getEmailManager_SmtpSecurity();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.email.impl.SenderImpl <em>Sender</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2399,6 +2559,16 @@ public interface EmailPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum WEB_SECURITY = eINSTANCE.getWebSecurity();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.email.EmailSecurity <em>Security</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.email.EmailSecurity
+		 * @see org.soluvas.email.impl.EmailPackageImpl#getEmailSecurity()
+		 * @generated
+		 */
+		EEnum EMAIL_SECURITY = eINSTANCE.getEmailSecurity();
 
 		/**
 		 * The meta object literal for the '<em>Email</em>' data type.

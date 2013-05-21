@@ -59,6 +59,7 @@ public class BuiltinFactoryImpl extends EFactoryImpl implements BuiltinFactory {
 			case BuiltinPackage.CONTACT: return (EObject)createContact();
 			case BuiltinPackage.FEEDBACK_TO_ADMIN_MANAGER: return (EObject)createFeedbackToAdminManager();
 			case BuiltinPackage.SOLUVAS: return (EObject)createSoluvas();
+			case BuiltinPackage.TESTER: return (EObject)createTester();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -92,6 +93,16 @@ public class BuiltinFactoryImpl extends EFactoryImpl implements BuiltinFactory {
 	public Soluvas createSoluvas() {
 		SoluvasImpl soluvas = new SoluvasImpl();
 		return soluvas;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Tester createTester() {
+		TesterImpl tester = new TesterImpl();
+		return tester;
 	}
 
 	/**
