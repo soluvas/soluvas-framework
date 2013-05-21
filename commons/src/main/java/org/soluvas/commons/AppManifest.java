@@ -30,6 +30,7 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultTimeZone <em>Default Time Zone</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCurrencyCode <em>Default Currency Code</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCurrency <em>Default Currency</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}</li>
  * </ul>
  * </p>
  *
@@ -359,5 +360,39 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 	 * @generated
 	 */
 	CurrencyUnit getDefaultCurrency();
+
+	/**
+	 * Returns the value of the '<em><b>Email Logo Uri Template</b></em>' attribute.
+	 * The default value is <code>"{+imagesUri}tenant_common/logo_email.png"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * URI to tenant logo usable when sending email notifications, by default the tenant logo URI template is: {+imagesUri}tenant_common/logo_email.png
+	 * 
+	 * <p>Width of 127 pixels is recommended with landscape ratio.
+	 * 
+	 * <p>Supported parameter is "imagesUri", which is from {link WebAddress#getImagesUri()}.
+	 * 
+	 * <p>You can have app-wide logo without any tenant_common folder by using URI template such as: {+imagesUri}/com.aksimata.app/aksimata_email_192x92.png
+	 * 
+	 * <p>To get the actual URI, call {@link AppUtils#getEmailLogoUri(AppManifest, WebAddress)}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Email Logo Uri Template</em>' attribute.
+	 * @see #setEmailLogoUriTemplate(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_EmailLogoUriTemplate()
+	 * @model default="{+imagesUri}tenant_common/logo_email.png"
+	 * @generated
+	 */
+	String getEmailLogoUriTemplate();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Email Logo Uri Template</em>' attribute.
+	 * @see #getEmailLogoUriTemplate()
+	 * @generated
+	 */
+	void setEmailLogoUriTemplate(String value);
 
 } // AppManifest

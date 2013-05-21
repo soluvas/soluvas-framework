@@ -1,5 +1,3 @@
-/**
- */
 package org.soluvas.email.impl;
 
 import java.io.StringReader;
@@ -20,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.locale.FormatCurrency;
+import org.soluvas.commons.util.AppUtils;
 import org.soluvas.email.DefaultScope;
 import org.soluvas.email.EmailException;
 import org.soluvas.email.EmailPackage;
@@ -343,7 +342,8 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 			final Mustache mustache = mf.compile(new StringReader(template), "subject");
 			final StringWriter stringWriter = new StringWriter();
 			final Map<String, Object> extras = ImmutableMap.of("recipient", recipient,
-					"formatCurrency", new FormatCurrency());
+					"formatCurrency", new FormatCurrency(),
+					"emailLogoUri", AppUtils.getEmailLogoUri(appManifest, webAddress));
 			mustache.execute(stringWriter, new Object[] { extras, this });
 			return stringWriter.toString();
 		} catch (Exception e) {
