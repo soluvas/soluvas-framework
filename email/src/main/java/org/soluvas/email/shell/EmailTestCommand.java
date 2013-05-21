@@ -52,7 +52,7 @@ public class EmailTestCommand extends ExtCommandSupport {
 	private String smtpPassword;
 	@Option(name="--sec", description="NONE|STARTTLS|SSL. STARTTLS sets 'mail.smtp.starttls.enable' to true. (Amazon SES supports this at port 587) " +
 			"SSL sets 'mail.smtp.socketFactory.class' to 'javax.net.ssl.SSLSocketFactory'. (Amazon SES only supports this at port 465)")
-	private transient EmailSecurity smtpSecurity = EmailSecurity.STARTTLS;
+	private EmailSecurity smtpSecurity;
 	@Option(name="--from", description="Set a different sender email.")
 	private String from;
 	@Option(name="--fromname", description="Set a different sender name.")
@@ -95,7 +95,7 @@ public class EmailTestCommand extends ExtCommandSupport {
 		}
 		
 		final List<String> sent;
-		if (smtpHost != null || smtpPort != null || smtpUser != null || smtpPassword != null) {
+		if (smtpHost != null || smtpPort != null || smtpUser != null || smtpPassword != null || smtpSecurity != null) {
 			final Session customMailSession = EmailUtils.createSmtpSession(smtpHost, smtpPort, 
 					smtpUser, smtpPassword, smtpSecurity);
 			sent = emailMgr.sendAll(tester, customMailSession);
