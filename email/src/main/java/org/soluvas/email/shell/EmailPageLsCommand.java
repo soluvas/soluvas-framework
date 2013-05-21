@@ -18,7 +18,7 @@ import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.PageType;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
@@ -31,7 +31,7 @@ import com.google.common.collect.ImmutableSet;
  * List registered {@link PageType}s.
  * @author ceefour
  */
-@Service @Lazy
+@Service @Scope("prototype")
 @Command(scope="email", name="pagels", description="List registered PageTypes.")
 public class EmailPageLsCommand extends ExtCommandSupport {
 	
@@ -43,9 +43,6 @@ public class EmailPageLsCommand extends ExtCommandSupport {
 		this.emailCatalog = emailCatalog;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.apache.karaf.shell.console.AbstractPage#doExecute()
-	 */
 	@Override
 	protected Object doExecute() throws Exception {
 //		final ServiceReference<EmailCatalog> emailCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(EmailCatalog.class),

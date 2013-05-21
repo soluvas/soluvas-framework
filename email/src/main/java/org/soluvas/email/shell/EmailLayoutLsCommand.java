@@ -17,7 +17,7 @@ import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.LayoutType;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
@@ -30,7 +30,7 @@ import com.google.common.collect.ImmutableSet;
  * List registered {@link LayoutType}s.
  * @author ceefour
  */
-@Service @Lazy
+@Service @Scope("prototype")
 @Command(scope="email", name="layoutls", description="List registered LayoutTypes.")
 public class EmailLayoutLsCommand extends ExtCommandSupport {
 	
@@ -42,9 +42,6 @@ public class EmailLayoutLsCommand extends ExtCommandSupport {
 		this.emailCatalog = emailCatalog;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.apache.karaf.shell.console.AbstractLayout#doExecute()
-	 */
 	@Override
 	protected Object doExecute() throws Exception {
 //		final ServiceReference<EmailCatalog> emailCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(EmailCatalog.class),

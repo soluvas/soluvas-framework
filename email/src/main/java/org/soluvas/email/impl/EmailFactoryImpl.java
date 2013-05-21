@@ -92,6 +92,8 @@ public class EmailFactoryImpl extends EFactoryImpl implements EmailFactory {
 				return createEmailFormatFromString(eDataType, initialValue);
 			case EmailPackage.WEB_SECURITY:
 				return createWebSecurityFromString(eDataType, initialValue);
+			case EmailPackage.EMAIL_SECURITY:
+				return createEmailSecurityFromString(eDataType, initialValue);
 			case EmailPackage.EMAIL:
 				return createEmailFromString(eDataType, initialValue);
 			default:
@@ -111,6 +113,8 @@ public class EmailFactoryImpl extends EFactoryImpl implements EmailFactory {
 				return convertEmailFormatToString(eDataType, instanceValue);
 			case EmailPackage.WEB_SECURITY:
 				return convertWebSecurityToString(eDataType, instanceValue);
+			case EmailPackage.EMAIL_SECURITY:
+				return convertEmailSecurityToString(eDataType, instanceValue);
 			case EmailPackage.EMAIL:
 				return convertEmailToString(eDataType, instanceValue);
 			default:
@@ -244,6 +248,26 @@ public class EmailFactoryImpl extends EFactoryImpl implements EmailFactory {
 	 * @generated
 	 */
 	public String convertWebSecurityToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EmailSecurity createEmailSecurityFromString(EDataType eDataType, String initialValue) {
+		EmailSecurity result = EmailSecurity.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertEmailSecurityToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

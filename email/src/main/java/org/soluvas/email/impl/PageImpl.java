@@ -339,6 +339,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 			email.addTo(recipient.getEmail(), recipient.getName());
 			
 			for (final Entry<String, byte[]> attachment : attachments.entrySet()) {
+				// FIXME: don't hardcode to application/octet-stream!
 				email.attach(new ByteArrayDataSource(attachment.getValue(), "application/octet-stream"),
 						attachment.getKey(), attachment.getKey());
 			}

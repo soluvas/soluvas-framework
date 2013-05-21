@@ -473,6 +473,26 @@
   <children xmi:type="notation:Node" xmi:id="_8a8psUWNEeK1qbOICpWDVg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_8a-e4EWNEeK1qbOICpWDVg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_8a-e4UWNEeK1qbOICpWDVg" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_Q7zB8MHtEeKMs5_8DugKQA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="email.ecore#//EmailManager/smtpHost"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Q7zB8cHtEeKMs5_8DugKQA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_RWRXcMHtEeKMs5_8DugKQA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="email.ecore#//EmailManager/smtpPort"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_RWRXccHtEeKMs5_8DugKQA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_PwP00MHtEeKMs5_8DugKQA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="email.ecore#//EmailManager/smtpUser"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_PwP00cHtEeKMs5_8DugKQA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_QeMf8MHtEeKMs5_8DugKQA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="email.ecore#//EmailManager/smtpPassword"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_QeMf8cHtEeKMs5_8DugKQA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_R1UD4MHtEeKMs5_8DugKQA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="email.ecore#//EmailManager/smtpSecurity"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_R1UD4cHtEeKMs5_8DugKQA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_8a-e4kWNEeK1qbOICpWDVg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_8a-e40WNEeK1qbOICpWDVg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_8a-e5EWNEeK1qbOICpWDVg"/>
@@ -626,6 +646,29 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Rv46YZwnEeKPj79bmW9zHg" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFactory"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Rv46YpwnEeKPj79bmW9zHg" x="2232" y="24"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_TazQcMHsEeKMs5_8DugKQA" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_Ta0ekMHsEeKMs5_8DugKQA" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_Ta0ekcHsEeKMs5_8DugKQA" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_UIUdwMHsEeKMs5_8DugKQA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="email.ecore#//EmailSecurity/none"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_UIUdwcHsEeKMs5_8DugKQA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_f19JkMHsEeKMs5_8DugKQA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="email.ecore#//EmailSecurity/starttls"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_f19JkcHsEeKMs5_8DugKQA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ggTHEMHsEeKMs5_8DugKQA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="email.ecore#//EmailSecurity/ssl"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ggTHEcHsEeKMs5_8DugKQA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_Ta1FoMHsEeKMs5_8DugKQA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Ta1FocHsEeKMs5_8DugKQA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Ta1FosHsEeKMs5_8DugKQA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_TazQccHsEeKMs5_8DugKQA" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="email.ecore#//EmailSecurity"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TazQcsHsEeKMs5_8DugKQA" x="100" y="87"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Dlbd0kSmEeKo8LL0vNXkRQ"/>
   <element xmi:type="ecore:EPackage" href="email.ecore#/"/>

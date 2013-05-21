@@ -106,6 +106,16 @@ public class BuiltinSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BuiltinPackage.TESTER: {
+				Tester tester = (Tester)theEObject;
+				T result = caseTester(tester);
+				if (result == null) result = casePage(tester);
+				if (result == null) result = caseTemplate(tester);
+				if (result == null) result = caseTemplateLike(tester);
+				if (result == null) result = caseDefaultScope(tester);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -167,6 +177,21 @@ public class BuiltinSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSoluvas(Soluvas object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tester</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tester</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTester(Tester object) {
 		return null;
 	}
 

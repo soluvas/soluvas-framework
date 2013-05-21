@@ -90,6 +90,10 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 				return createSoluvasAdapter();
 			}
 			@Override
+			public Adapter caseTester(Tester object) {
+				return createTesterAdapter();
+			}
+			@Override
 			public Adapter caseTemplateLike(TemplateLike object) {
 				return createTemplateLikeAdapter();
 			}
@@ -182,6 +186,20 @@ public class BuiltinAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSoluvasAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.email.builtin.Tester <em>Tester</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.email.builtin.Tester
+	 * @generated
+	 */
+	public Adapter createTesterAdapter() {
 		return null;
 	}
 

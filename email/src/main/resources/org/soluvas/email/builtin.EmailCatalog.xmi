@@ -10,6 +10,9 @@
   <pageTypes
       name="feedbackToAdminManager"
       subjectTemplate="[{{{appManifest.title}}}] Feedback from {{{contact.name}}}: {{{contact.subject}}}"/>
+  <pageTypes
+      name="tester"
+      subjectTemplate="[{{{appManifest.title}}}] {{{title}}}"/>
   <layoutTypes
       name="soluvas"
       subjectTemplate="{{{pageSubject}}}"/>

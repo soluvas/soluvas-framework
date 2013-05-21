@@ -15,6 +15,7 @@ import org.soluvas.email.builtin.Contact;
 import org.soluvas.email.builtin.FeedbackToAdmin;
 import org.soluvas.email.builtin.FeedbackToAdminManager;
 import org.soluvas.email.builtin.Soluvas;
+import org.soluvas.email.builtin.Tester;
 
 /**
  * <!-- begin-user-doc -->
@@ -50,6 +51,13 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 	 * @generated
 	 */
 	private EClass soluvasEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass testerEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -219,6 +227,33 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTester() {
+		return testerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTester_Title() {
+		return (EAttribute)testerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTester_Message() {
+		return (EAttribute)testerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public BuiltinFactory getBuiltinFactory() {
 		return (BuiltinFactory)getEFactoryInstance();
@@ -256,6 +291,10 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 		feedbackToAdminManagerEClass = createEClass(FEEDBACK_TO_ADMIN_MANAGER);
 
 		soluvasEClass = createEClass(SOLUVAS);
+
+		testerEClass = createEClass(TESTER);
+		createEAttribute(testerEClass, TESTER__TITLE);
+		createEAttribute(testerEClass, TESTER__MESSAGE);
 	}
 
 	/**
@@ -293,6 +332,7 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 		feedbackToAdminManagerEClass.getESuperTypes().add(theEmailPackage.getPage());
 		feedbackToAdminManagerEClass.getESuperTypes().add(this.getFeedbackToAdmin());
 		soluvasEClass.getESuperTypes().add(theEmailPackage.getLayout());
+		testerEClass.getESuperTypes().add(theEmailPackage.getPage());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(contactEClass, Contact.class, "Contact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -308,6 +348,10 @@ public class BuiltinPackageImpl extends EPackageImpl implements BuiltinPackage {
 		initEClass(feedbackToAdminManagerEClass, FeedbackToAdminManager.class, "FeedbackToAdminManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(soluvasEClass, Soluvas.class, "Soluvas", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(testerEClass, Tester.class, "Tester", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTester_Title(), theEcorePackage.getEString(), "title", null, 1, 1, Tester.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTester_Message(), theEcorePackage.getEString(), "message", null, 1, 1, Tester.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
