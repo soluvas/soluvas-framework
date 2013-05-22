@@ -2491,6 +2491,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPerson_ClientAccessToken() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(45);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPhoneNumber() {
 		return phoneNumberEClass;
 	}
@@ -3514,6 +3523,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(personEClass, PERSON__RELIGION);
 		createEAttribute(personEClass, PERSON__PASSWORD_RESET_CODE);
 		createEAttribute(personEClass, PERSON__PASSWORD_RESET_EXPIRY_TIME);
+		createEAttribute(personEClass, PERSON__CLIENT_ACCESS_TOKEN);
 
 		phoneNumberEClass = createEClass(PHONE_NUMBER);
 		createEAttribute(phoneNumberEClass, PHONE_NUMBER__PHONE_NUMBER);
@@ -4114,6 +4124,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPerson_Religion(), theEcorePackage.getEString(), "religion", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_PasswordResetCode(), theEcorePackage.getEString(), "passwordResetCode", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_PasswordResetExpiryTime(), this.getDateTime(), "passwordResetExpiryTime", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_ClientAccessToken(), theEcorePackage.getEString(), "clientAccessToken", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(personEClass, theEcorePackage.getEBoolean(), "hasEmail", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "email", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -5185,6 +5196,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "The time when the passwordResetCode becomes no longer usable."
+		   });		
+		addAnnotation
+		  (getPerson_ClientAccessToken(), 
+		   source, 
+		   new String[] {
+			 "documentation", "OAuth 2.0 access token usable by official client applications (Android, iOS, etc.).\nThis is for simple usage, with no expiration (though regenerating the client access token is possible if the access token is compromised). For more complex usage like third party applications, use another mechanism.\n\nThe \'client_id\' and \'callback_url\' (or \'callback_domains\') should be specified elsewhere (probably on AppManifest?)\n\nSee: https://developer.foursquare.com/overview/auth.html"
 		   });		
 		addAnnotation
 		  (getPhoneNumber_Primary(), 

@@ -122,6 +122,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getReligion <em>Religion</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getPasswordResetCode <em>Password Reset Code</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getPasswordResetExpiryTime <em>Password Reset Expiry Time</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getClientAccessToken <em>Client Access Token</em>}</li>
  * </ul>
  * </p>
  *
@@ -1273,6 +1274,26 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected DateTime passwordResetExpiryTime = PASSWORD_RESET_EXPIRY_TIME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getClientAccessToken() <em>Client Access Token</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClientAccessToken()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CLIENT_ACCESS_TOKEN_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getClientAccessToken() <em>Client Access Token</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClientAccessToken()
+	 * @generated
+	 * @ordered
+	 */
+	protected String clientAccessToken = CLIENT_ACCESS_TOKEN_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2567,6 +2588,27 @@ public class PersonImpl extends EObjectImpl implements Person {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getClientAccessToken() {
+		return clientAccessToken;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setClientAccessToken(String newClientAccessToken) {
+		String oldClientAccessToken = clientAccessToken;
+		clientAccessToken = newClientAccessToken;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON__CLIENT_ACCESS_TOKEN, oldClientAccessToken, clientAccessToken));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public boolean hasEmail(String email) {
@@ -2840,6 +2882,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return getPasswordResetCode();
 			case CommonsPackage.PERSON__PASSWORD_RESET_EXPIRY_TIME:
 				return getPasswordResetExpiryTime();
+			case CommonsPackage.PERSON__CLIENT_ACCESS_TOKEN:
+				return getClientAccessToken();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -3034,6 +3078,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case CommonsPackage.PERSON__PASSWORD_RESET_EXPIRY_TIME:
 				setPasswordResetExpiryTime((DateTime)newValue);
 				return;
+			case CommonsPackage.PERSON__CLIENT_ACCESS_TOKEN:
+				setClientAccessToken((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -3223,6 +3270,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case CommonsPackage.PERSON__PASSWORD_RESET_EXPIRY_TIME:
 				setPasswordResetExpiryTime(PASSWORD_RESET_EXPIRY_TIME_EDEFAULT);
 				return;
+			case CommonsPackage.PERSON__CLIENT_ACCESS_TOKEN:
+				setClientAccessToken(CLIENT_ACCESS_TOKEN_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -3355,6 +3405,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return PASSWORD_RESET_CODE_EDEFAULT == null ? passwordResetCode != null : !PASSWORD_RESET_CODE_EDEFAULT.equals(passwordResetCode);
 			case CommonsPackage.PERSON__PASSWORD_RESET_EXPIRY_TIME:
 				return PASSWORD_RESET_EXPIRY_TIME_EDEFAULT == null ? passwordResetExpiryTime != null : !PASSWORD_RESET_EXPIRY_TIME_EDEFAULT.equals(passwordResetExpiryTime);
+			case CommonsPackage.PERSON__CLIENT_ACCESS_TOKEN:
+				return CLIENT_ACCESS_TOKEN_EDEFAULT == null ? clientAccessToken != null : !CLIENT_ACCESS_TOKEN_EDEFAULT.equals(clientAccessToken);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -3665,6 +3717,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 		result.append(passwordResetCode);
 		result.append(", passwordResetExpiryTime: ");
 		result.append(passwordResetExpiryTime);
+		result.append(", clientAccessToken: ");
+		result.append(clientAccessToken);
 		result.append(')');
 		return result.toString();
 	}

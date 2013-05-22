@@ -1093,6 +1093,11 @@
         <details key="documentation" value="The time when the passwordResetCode becomes no longer usable."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="clientAccessToken" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="OAuth 2.0 access token usable by official client applications (Android, iOS, etc.).&#xA;This is for simple usage, with no expiration (though regenerating the client access token is possible if the access token is compromised). For more complex usage like third party applications, use another mechanism.&#xA;&#xA;The 'client_id' and 'callback_url' (or 'callback_domains') should be specified elsewhere (probably on AppManifest?)&#xA;&#xA;See: https://developer.foursquare.com/overview/auth.html"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eGenericSuperTypes eClassifier="#//NameContainer"/>
     <eGenericSuperTypes eClassifier="#//PhotoIdContainer"/>
     <eGenericSuperTypes eClassifier="#//Identifiable"/>

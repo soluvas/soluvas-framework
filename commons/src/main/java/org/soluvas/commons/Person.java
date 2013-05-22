@@ -71,6 +71,7 @@ import com.google.common.base.Function;
  *   <li>{@link org.soluvas.commons.Person#getReligion <em>Religion</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getPasswordResetCode <em>Password Reset Code</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getPasswordResetExpiryTime <em>Password Reset Expiry Time</em>}</li>
+ *   <li>{@link org.soluvas.commons.Person#getClientAccessToken <em>Client Access Token</em>}</li>
  * </ul>
  * </p>
  *
@@ -1238,6 +1239,36 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	void setPasswordResetExpiryTime(DateTime value);
+
+	/**
+	 * Returns the value of the '<em><b>Client Access Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * OAuth 2.0 access token usable by official client applications (Android, iOS, etc.).
+	 * This is for simple usage, with no expiration (though regenerating the client access token is possible if the access token is compromised). For more complex usage like third party applications, use another mechanism.
+	 * 
+	 * The 'client_id' and 'callback_url' (or 'callback_domains') should be specified elsewhere (probably on AppManifest?)
+	 * 
+	 * See: https://developer.foursquare.com/overview/auth.html
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Client Access Token</em>' attribute.
+	 * @see #setClientAccessToken(String)
+	 * @see org.soluvas.commons.CommonsPackage#getPerson_ClientAccessToken()
+	 * @model
+	 * @generated
+	 */
+	String getClientAccessToken();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.Person#getClientAccessToken <em>Client Access Token</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Client Access Token</em>' attribute.
+	 * @see #getClientAccessToken()
+	 * @generated
+	 */
+	void setClientAccessToken(String value);
 
 	/**
 	 * <!-- begin-user-doc -->

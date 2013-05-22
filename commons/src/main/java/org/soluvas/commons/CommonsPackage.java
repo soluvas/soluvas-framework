@@ -2707,13 +2707,22 @@ public interface CommonsPackage extends EPackage {
 	int PERSON__PASSWORD_RESET_EXPIRY_TIME = NAME_CONTAINER_FEATURE_COUNT + 58;
 
 	/**
+	 * The feature id for the '<em><b>Client Access Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__CLIENT_ACCESS_TOKEN = NAME_CONTAINER_FEATURE_COUNT + 59;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 59;
+	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 60;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PhoneNumberImpl <em>Phone Number</em>}' class.
@@ -5470,6 +5479,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getPerson_PasswordResetExpiryTime();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getClientAccessToken <em>Client Access Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Client Access Token</em>'.
+	 * @see org.soluvas.commons.Person#getClientAccessToken()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_ClientAccessToken();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PhoneNumber <em>Phone Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7847,6 +7867,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERSON__PASSWORD_RESET_EXPIRY_TIME = eINSTANCE.getPerson_PasswordResetExpiryTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Client Access Token</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__CLIENT_ACCESS_TOKEN = eINSTANCE.getPerson_ClientAccessToken();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PhoneNumberImpl <em>Phone Number</em>}' class.

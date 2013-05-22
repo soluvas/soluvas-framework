@@ -2052,18 +2052,6 @@
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/currency"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="__p_DoL1REeKdkJ5ZT1V2xQ"/>
         </children>
-        <children xmi:type="notation:Node" xmi:id="_F6D6kL1SEeKdkJ5ZT1V2xQ" type="2001">
-          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/facebookId"/>
-          <layoutConstraint xmi:type="notation:Location" xmi:id="_F6D6kb1SEeKdkJ5ZT1V2xQ"/>
-        </children>
-        <children xmi:type="notation:Node" xmi:id="_HZz2EL1SEeKdkJ5ZT1V2xQ" type="2001">
-          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/facebookUsername"/>
-          <layoutConstraint xmi:type="notation:Location" xmi:id="_HZz2Eb1SEeKdkJ5ZT1V2xQ"/>
-        </children>
-        <children xmi:type="notation:Node" xmi:id="_Izm6kL1SEeKdkJ5ZT1V2xQ" type="2001">
-          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/facebookAccessToken"/>
-          <layoutConstraint xmi:type="notation:Location" xmi:id="_Izm6kb1SEeKdkJ5ZT1V2xQ"/>
-        </children>
         <children xmi:type="notation:Node" xmi:id="_IcqvUL1UEeKdkJ5ZT1V2xQ" type="2001">
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/googlePlusId"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_IcqvUb1UEeKdkJ5ZT1V2xQ"/>
@@ -2175,6 +2163,10 @@
         <children xmi:type="notation:Node" xmi:id="_DXlr4L1UEeKdkJ5ZT1V2xQ" type="2001">
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/passwordResetExpiryTime"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_DXlr4b1UEeKdkJ5ZT1V2xQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_a8qj4cLzEeKwsKu4fYiXrQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/clientAccessToken"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_a8qj4sLzEeKwsKu4fYiXrQ"/>
         </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_6hZeYb0_EeKdkJ5ZT1V2xQ"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_6hZeYr0_EeKdkJ5ZT1V2xQ"/>
