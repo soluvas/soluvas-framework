@@ -20,6 +20,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -139,7 +140,8 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 			}));
 			final Map<String, List<Supplier<T>>> managedSuppliers = new HashMap<>();
 			for (URL xmiUrl : xmiUrls) {
-				final List<Supplier<T>> objs = extractSuppliers(ImmutableList.of(xmiUrl));
+				final List<Supplier<T>> objs = Preconditions.checkNotNull(extractSuppliers(ImmutableList.of(xmiUrl)),
+						"extractSuppliers from %s returned null", xmiUrl);
 				managedSuppliers.put(xmiUrl.toString(), objs);
 			}
 			final List<Supplier<T>> scannedSuppliers = ImmutableList.copyOf(Iterables.concat(managedSuppliers.values()));
