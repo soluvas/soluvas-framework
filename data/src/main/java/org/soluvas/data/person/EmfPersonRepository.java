@@ -202,4 +202,10 @@ public class EmfPersonRepository extends
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	@Nullable
+	public Person findOneByClientAccessToken(@Nullable String clientAccessToken) {
+		throw new UnsupportedOperationException();
+	}
+
 }

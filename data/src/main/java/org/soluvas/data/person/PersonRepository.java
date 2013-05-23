@@ -43,4 +43,12 @@ public interface PersonRepository extends
 	@Nullable
 	public Person findOneByTwitter(@Nullable Long twitterId, @Nullable String twitterScreenName);
 
+	/**
+	 * Find a {@link Person} by Client Access Token, useful for implementing REST API provider.
+	 * @param clientAccessToken
+	 * @return Person, or {@code null} if not found.
+	 */
+	@Nullable
+	public Person findOneByClientAccessToken(@Nullable String clientAccessToken);
+
 }

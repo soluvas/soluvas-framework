@@ -15,6 +15,7 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.PumpStreamHandler;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
@@ -174,7 +175,13 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 						// limit ImageMagick to single-threaded if we use custom executor
 						final Map<String, String> environment = getExecutor() == MoreExecutors.sameThreadExecutor() ? ImmutableMap.<String, String>of()
 								: ImmutableMap.of("MAGICK_THREAD_LIMIT", "1");
-						final int executionResult = executor.execute(cmd, environment);
+						log.debug("Transforming using: {} {}", environment, cmd);
+						int executionResult;
+						try {
+							executionResult = executor.execute(cmd, environment);
+						} catch (ExecuteException e) {
+							throw new ImageException(e, "Cannot execute %s %s: %s", environment, cmd, buffer);
+						}
 						log.info("{} {} returned {}: {}", environment, cmd, executionResult, buffer);
 						
 						return styledFile;

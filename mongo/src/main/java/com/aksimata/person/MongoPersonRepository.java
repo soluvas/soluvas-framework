@@ -96,5 +96,14 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		final BasicDBObject query = new BasicDBObject("$or", orCriteria);
 		return findOneByQuery(query);
 	}
+
+	@Override @Nullable
+	public Person findOneByClientAccessToken(@Nullable String clientAccessToken) {
+		if (clientAccessToken == null) {
+			return null;
+		}
+		final BasicDBObject query = new BasicDBObject("clientAccessToken", clientAccessToken);
+		return findOneByQuery(query);
+	}
 	
 }
