@@ -1,7 +1,6 @@
 package org.soluvas.security.mongo;
 
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -15,6 +14,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.mongo.MongoRepositoryException;
 import org.soluvas.security.AutologinToken;
@@ -138,12 +138,14 @@ public class MongoRealm extends AuthorizingRealm {
 			// Principal can be either person ID, slug (username in user's perspective), or email
 			final String tokenPrincipal = ((UsernamePasswordToken) token).getUsername();
 			final String canonicalSlug = SlugUtils.canonicalize(tokenPrincipal);
-			final Pattern emailPattern = Pattern.compile(Pattern.quote(tokenPrincipal), Pattern.CASE_INSENSITIVE);
-			final DBObject found = personColl.findOne(new BasicDBObject("$or", new DBObject[] {
+			final String normalizedEmail = NameUtils.normalizeEmail(tokenPrincipal);
+			final BasicDBObject query = new BasicDBObject("$or", new DBObject[] {
 				new BasicDBObject("_id", tokenPrincipal),
 				new BasicDBObject("canonicalSlug", canonicalSlug),
-				new BasicDBObject("emails.email", emailPattern),
-			}), new BasicDBObject("password", 1));
+				new BasicDBObject("emails.email", normalizedEmail),
+			});
+			log.debug("findOne MongoDB {} using {}", personCollName, query);
+			final DBObject found = personColl.findOne(query, new BasicDBObject("password", 1));
 			log.debug("Matched for {} : {}", tokenPrincipal, found);
 			if (found != null) {
 				final String userPrincipal = (String) found.get("_id");
