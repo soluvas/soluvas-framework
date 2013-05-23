@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.ldap.LdapRepository;
 
-import com.yammer.metrics.CachedGauge;
+import com.codahale.metrics.CachedGauge;
 
 /**
  * Used as MBean to expose {@link AccountStatus#VOID} account counters.

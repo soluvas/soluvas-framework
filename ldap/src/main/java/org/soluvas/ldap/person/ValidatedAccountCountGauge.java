@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.ldap.LdapRepository;
 
-import com.yammer.metrics.CachedGauge;
+import com.codahale.metrics.CachedGauge;
 
 /**
  * Returns count of {@link AccountStatus#VALIDATED} accounts.

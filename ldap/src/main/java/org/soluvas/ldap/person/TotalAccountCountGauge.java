@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.soluvas.ldap.LdapRepository;
 
-import com.yammer.metrics.CachedGauge;
+import com.codahale.metrics.CachedGauge;
 
 /**
  * Used as MBean to expose total LDAP entity counters.

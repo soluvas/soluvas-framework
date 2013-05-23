@@ -9,9 +9,9 @@ import org.soluvas.commons.metrics.FailTolerantGaugeDecorator;
 import org.soluvas.ldap.LdapRepository;
 import org.soluvas.ldap.SocialPerson;
 
-import com.yammer.metrics.Metric;
-import com.yammer.metrics.MetricRegistry;
-import com.yammer.metrics.MetricSet;
+import com.codahale.metrics.Metric;
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.MetricSet;
 
 /**
  * Gives all the gauges for a {@link LdapRepository} that supports {@link AccountStatus},
@@ -28,7 +28,7 @@ public class RepositoryAccountGaugeSet implements MetricSet {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.yammer.metrics.MetricSet#getMetrics()
+	 * @see com.codahale.metrics.MetricSet#getMetrics()
 	 */
 	@Override
 	public Map<String, Metric> getMetrics() {

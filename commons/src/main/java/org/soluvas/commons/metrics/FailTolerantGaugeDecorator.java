@@ -2,7 +2,7 @@ package org.soluvas.commons.metrics;
 
 import org.slf4j.LoggerFactory;
 
-import com.yammer.metrics.Gauge;
+import com.codahale.metrics.Gauge;
 
 /**
  * Decorates a {@link Gauge} and simply logs WARN if
