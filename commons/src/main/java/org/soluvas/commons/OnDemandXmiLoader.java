@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -183,7 +182,7 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 		log.info("Destroying XMI Loader for {} from {} [{}]", resourceUri, ePackageName, ePackageNsUri);
 	}
 
-	@Override @Nullable
+	@Override
 	public T get() {
 		return load();
 	}
@@ -206,7 +205,7 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 			rset.getPackageRegistry().put(ePackage.getNsURI(), ePackage);
 			final Resource resource = rset.getResource(resourceUri, true);
 			obj = (T)resource.getContents().get(0);
-			log.info("Loaded {} from {}", obj, resourceUri);
+			log.info("Loaded {} object from {}", obj.getClass().getName(), resourceUri);
 		} catch (Exception e) {
 			log.error("Cannot load " + resourceUri + " using package " + ePackage, e);
 			throw new CommonsException("Cannot load " + resourceUri + " using package " + ePackage, e);
