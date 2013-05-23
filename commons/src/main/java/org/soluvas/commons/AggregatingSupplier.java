@@ -184,12 +184,15 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 	}
 
 	protected void removeSuppliers(Collection<Supplier<T>> removedSuppliers) {
-		log.debug("Removing suppliers {} for {}", removedSuppliers, eClass.getName());
+		log.debug("Removing {} {} suppliers: {}", removedSuppliers.size(), eClass.getName(),
+				Iterables.limit(removedSuppliers, 3));
 		int removedModelCount = 0;
 		for (Supplier<T> supplier : removedSuppliers) {
 			removedModelCount += doRemoveSupplier(supplier);
 		}
-		log.info("Removed {} models from suppliers {} for {}", removedModelCount, removedSuppliers, eClass.getName());
+		log.info("Removed {} {} models from {} suppliers: {}", 
+				removedModelCount, eClass.getName(), removedSuppliers.size(),
+				Iterables.limit(removedSuppliers, 3));
 	}
 
 	@Override
