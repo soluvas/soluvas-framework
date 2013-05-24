@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.NavigableMap;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Set;
 
@@ -209,6 +210,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createFileFromString(eDataType, initialValue);
 			case CommonsPackage.LOCAL_DATE:
 				return createLocalDateFromString(eDataType, initialValue);
+			case CommonsPackage.NO_SUCH_ELEMENT_EXCEPTION:
+				return createNoSuchElementExceptionFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -282,6 +285,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertFileToString(eDataType, instanceValue);
 			case CommonsPackage.LOCAL_DATE:
 				return convertLocalDateToString(eDataType, instanceValue);
+			case CommonsPackage.NO_SUCH_ELEMENT_EXCEPTION:
+				return convertNoSuchElementExceptionToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -1137,6 +1142,24 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertLocalDateToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NoSuchElementException createNoSuchElementExceptionFromString(EDataType eDataType, String initialValue) {
+		return (NoSuchElementException)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertNoSuchElementExceptionToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

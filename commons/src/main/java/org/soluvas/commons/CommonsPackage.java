@@ -3641,6 +3641,17 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>No Such Element Exception</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.NoSuchElementException
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNoSuchElementException()
+	 * @generated
+	 */
+	int NO_SUCH_ELEMENT_EXCEPTION = 93;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6383,6 +6394,17 @@ public interface CommonsPackage extends EPackage {
 	EDataType getLocalDate();
 
 	/**
+	 * Returns the meta object for data type '{@link java.util.NoSuchElementException <em>No Such Element Exception</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>No Such Element Exception</em>'.
+	 * @see java.util.NoSuchElementException
+	 * @model instanceClass="java.util.NoSuchElementException"
+	 * @generated
+	 */
+	EDataType getNoSuchElementException();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8629,6 +8651,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType LOCAL_DATE = eINSTANCE.getLocalDate();
+
+		/**
+		 * The meta object literal for the '<em>No Such Element Exception</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.NoSuchElementException
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNoSuchElementException()
+		 * @generated
+		 */
+		EDataType NO_SUCH_ELEMENT_EXCEPTION = eINSTANCE.getNoSuchElementException();
 
 	}
 

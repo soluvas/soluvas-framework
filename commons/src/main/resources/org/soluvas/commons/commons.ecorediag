@@ -1486,6 +1486,13 @@
       <element xmi:type="ecore:EClass" href="commons.ecore#//CanonicalSluggable"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NoOFMr23EeKWgpZSmj2AXQ" x="10896" y="24"/>
     </children>
+    <children xmi:type="notation:Node" xmi:id="_vfYZsMRWEeKsaYG_wYcT8A" type="1004">
+      <children xmi:type="notation:Node" xmi:id="_vfZAwMRWEeKsaYG_wYcT8A" type="4008"/>
+      <children xmi:type="notation:Node" xmi:id="_vfZAwcRWEeKsaYG_wYcT8A" type="4009"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_vfYZscRWEeKsaYG_wYcT8A" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+      <element xmi:type="ecore:EDataType" href="commons.ecore#//NoSuchElementException"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vfYZssRWEeKsaYG_wYcT8A" x="1854" y="515"/>
+    </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_Hn9XoSQDEeKL8qHxNHEWSw"/>
     <element xmi:type="ecore:EPackage" href="commons.ecore#/"/>
     <edges xmi:type="notation:Edge" xmi:id="_Rrm-sCSDEeKyUdMfH4dSfg" type="3003" source="_J57LECSDEeKyUdMfH4dSfg" target="_aOshcSSAEeKyUdMfH4dSfg">

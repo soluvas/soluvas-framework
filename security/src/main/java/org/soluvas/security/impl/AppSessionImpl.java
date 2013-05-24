@@ -25,7 +25,6 @@ import org.joda.time.DateTimeZone;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.SchemaVersionable;
-import org.soluvas.commons.SerializableEMap;
 import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.mongo.BigDecimalConverter;
 import org.soluvas.commons.mongo.CurrencyUnitConverter;
@@ -679,11 +678,11 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	@Override
 	public EMap<String, Object> getAttributes() {
 		if (attributes == null) {
-			attributes = new SerializableEMap<String,Object>(SecurityPackage.Literals.APP_SESSION_ATTRIBUTE_ENTRY, AppSessionAttributeEntryImpl.class, this, SecurityPackage.APP_SESSION__ATTRIBUTES);
+			attributes = new EcoreEMap<String,Object>(SecurityPackage.Literals.APP_SESSION_ATTRIBUTE_ENTRY, AppSessionAttributeEntryImpl.class, this, SecurityPackage.APP_SESSION__ATTRIBUTES);
 		}
 		return attributes;
 	}

@@ -1313,4 +1313,5 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookAccessToken" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="NoSuchElementException" instanceClassName="java.util.NoSuchElementException"/>
 </ecore:EPackage>

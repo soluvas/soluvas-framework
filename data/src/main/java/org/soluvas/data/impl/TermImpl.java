@@ -28,7 +28,6 @@ import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
-import org.soluvas.commons.SerializableEMap;
 import org.soluvas.commons.Translatable;
 import org.soluvas.commons.Translation;
 import org.soluvas.commons.TranslationState;
@@ -694,11 +693,11 @@ public class TermImpl extends EObjectImpl implements Term {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	@Override
 	public EMap<String, Translation> getTranslations() {
 		if (translations == null) {
-			translations = new SerializableEMap<String,Translation>(CommonsPackage.Literals.TRANSLATION_ENTRY, TranslationEntryImpl.class, this, DataPackage.TERM__TRANSLATIONS);
+			translations = new EcoreEMap<String,Translation>(CommonsPackage.Literals.TRANSLATION_ENTRY, TranslationEntryImpl.class, this, DataPackage.TERM__TRANSLATIONS);
 		}
 		return translations;
 	}

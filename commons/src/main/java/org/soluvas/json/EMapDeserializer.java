@@ -20,9 +20,14 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
 /**
- * Deserializer class that can deserialize instances of
- * specified Enum class from Strings and Integers,
- * uppercasing before deserialization.
+ * Deserializer class for {@link EMap}.
+ * <p>Usage:
+ * 
+ * <pre>{@literal
+ * 	@JsonDeserialize(using=EMapDeserializer.class)
+ * 	protected EMap<String, Discount> discounts;
+ * }</pre>
+ * 
  * @author ceefour
  */
 @SuppressWarnings("serial")
