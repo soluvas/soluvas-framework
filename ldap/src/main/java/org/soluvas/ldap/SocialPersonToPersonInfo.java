@@ -11,7 +11,7 @@ import com.google.common.base.Function;
  * Converts {@link SocialPerson} to {@link PersonInfo}.
  * @author ceefour
  */
-public class ToPersonInfo implements Function<SocialPerson, PersonInfo> {
+public class SocialPersonToPersonInfo implements Function<SocialPerson, PersonInfo> {
 
 	@Override @Nullable
 	public PersonInfo apply(@Nullable final SocialPerson input) {
