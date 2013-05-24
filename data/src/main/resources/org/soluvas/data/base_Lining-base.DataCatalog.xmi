@@ -9,25 +9,21 @@
   <terms name="leather_lining"
       nsPrefix="base"
       displayName="Leather"
-      imageId=""
       kindNsPrefix="base"
       kindName="Lining"/>
   <terms name="suede_lining"
       nsPrefix="base"
       displayName="Suede"
-      imageId=""
       kindNsPrefix="base"
       kindName="Lining"/>
   <terms name="cotton_lining"
       nsPrefix="base"
       displayName="Cotton"
-      imageId=""
       kindNsPrefix="base"
       kindName="Lining"/>
   <terms name="canvas_lining"
       nsPrefix="base"
       displayName="Canvas"
-      imageId=""
       kindNsPrefix="base"
       kindName="Lining"/>
 </data:DataCatalog>

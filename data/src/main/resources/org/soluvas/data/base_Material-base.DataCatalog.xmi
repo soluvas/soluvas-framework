@@ -10,25 +10,21 @@
   <terms name="cotton"
       nsPrefix="base"
       displayName="Katun"
-      imageId=""
       kindNsPrefix="base"
       kindName="Material"/>
   <terms name="silk"
       nsPrefix="base"
       displayName="Sutra"
-      imageId=""
       kindNsPrefix="base"
       kindName="Material"/>
   <terms name="rayon"
       nsPrefix="base"
       displayName="Rayon"
-      imageId=""
       kindNsPrefix="base"
       kindName="Material"/>
   <terms name="spandex"
       nsPrefix="base"
       displayName="Spandex"
-      imageId=""
       kindNsPrefix="base"
       kindName="Material"/>
 </data:DataCatalog>
