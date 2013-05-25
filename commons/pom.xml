@@ -29,14 +29,10 @@
 		<dependency>
 			<groupId>com.google.code.morphia</groupId>
 			<artifactId>morphia</artifactId>
-			<version>0.99.1.soluvas1</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.morphia</groupId>
 			<artifactId>morphia-logging-slf4j</artifactId>
-			<version>0.99</version>
-			<scope>compile</scope>
 		</dependency>
 
 		<dependency>

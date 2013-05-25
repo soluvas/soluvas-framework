@@ -64,7 +64,6 @@
 		<dependency>
 			<groupId>com.google.code.morphia</groupId>
 			<artifactId>morphia-logging-slf4j</artifactId>
-			<version>0.99</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
