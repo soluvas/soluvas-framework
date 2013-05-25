@@ -2,6 +2,8 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -15,10 +17,9 @@ package org.soluvas.commons;
  *
  * @see org.soluvas.commons.CommonsPackage#getNameable()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface Nameable extends SerializableEObject {
+public interface Nameable extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

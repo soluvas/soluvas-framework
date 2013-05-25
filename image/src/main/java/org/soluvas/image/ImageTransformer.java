@@ -7,7 +7,7 @@ import com.google.common.util.concurrent.ListeningExecutorService;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,10 +23,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.image.ImagePackage#getImageTransformer()
  * @model abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface ImageTransformer extends SerializableEObject {
+public interface ImageTransformer extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Executor</b></em>' attribute.

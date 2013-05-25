@@ -134,7 +134,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 */
 	@Override
 	public Layout getLayout() {
-		if (layout != null && ((EObject)layout).eIsProxy()) {
+		if (layout != null && layout.eIsProxy()) {
 			InternalEObject oldLayout = (InternalEObject)layout;
 			layout = (Layout)eResolveProxy(oldLayout);
 			if (layout != oldLayout) {
@@ -174,7 +174,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 */
 	@Override
 	public PageType getPageType() {
-		if (pageType != null && ((EObject)pageType).eIsProxy()) {
+		if (pageType != null && pageType.eIsProxy()) {
 			InternalEObject oldPageType = (InternalEObject)pageType;
 			pageType = (PageType)eResolveProxy(oldPageType);
 			if (pageType != oldPageType) {
@@ -219,7 +219,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	 */
 	@Override
 	public Sender getSender() {
-		if (sender != null && ((EObject)sender).eIsProxy()) {
+		if (sender != null && sender.eIsProxy()) {
 			InternalEObject oldSender = (InternalEObject)sender;
 			sender = (Sender)eResolveProxy(oldSender);
 			if (sender != oldSender) {

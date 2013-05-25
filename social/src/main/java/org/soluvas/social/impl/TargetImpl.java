@@ -254,7 +254,7 @@ public abstract class TargetImpl extends EObjectImpl implements Target {
 	 */
 	@Override
 	public TargetType getTargetType() {
-		if (targetType != null && ((EObject)targetType).eIsProxy()) {
+		if (targetType != null && targetType.eIsProxy()) {
 			InternalEObject oldTargetType = (InternalEObject)targetType;
 			targetType = (TargetType)eResolveProxy(oldTargetType);
 			if (targetType != oldTargetType) {

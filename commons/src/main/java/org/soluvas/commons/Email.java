@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
 import org.joda.time.DateTime;
 
 
@@ -21,10 +22,9 @@ import org.joda.time.DateTime;
  *
  * @see org.soluvas.commons.CommonsPackage#getEmail()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface Email extends SerializableEObject {
+public interface Email extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Email</b></em>' attribute.
 	 * <!-- begin-user-doc -->

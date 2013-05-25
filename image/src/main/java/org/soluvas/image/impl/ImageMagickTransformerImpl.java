@@ -300,7 +300,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 	 */
 	@Override
 	public ImageConnector getDestination() {
-		if (destination != null && ((EObject)destination).eIsProxy()) {
+		if (destination != null && destination.eIsProxy()) {
 			InternalEObject oldDestination = (InternalEObject)destination;
 			destination = (ImageConnector)eResolveProxy(oldDestination);
 			if (destination != oldDestination) {

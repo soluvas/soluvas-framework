@@ -212,7 +212,7 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 	 */
 	@Override
 	public Term getTerm() {
-		if (term != null && ((EObject)term).eIsProxy()) {
+		if (term != null && term.eIsProxy()) {
 			InternalEObject oldTerm = (InternalEObject)term;
 			term = (Term)eResolveProxy(oldTerm);
 			if (term != oldTerm) {

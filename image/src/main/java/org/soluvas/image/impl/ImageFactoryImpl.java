@@ -59,21 +59,21 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ImagePackage.DAV_CONNECTOR: return (EObject)createDavConnector();
-			case ImagePackage.S3_CONNECTOR: return (EObject)createS3Connector();
-			case ImagePackage.BLITLINE_TRANSFORMER: return (EObject)createBlitlineTransformer();
-			case ImagePackage.THUMBNAILATOR_TRANSFORMER: return (EObject)createThumbnailatorTransformer();
-			case ImagePackage.UPLOADED_IMAGE: return (EObject)createUploadedImage();
-			case ImagePackage.IMAGE_MANAGER: return (EObject)createImageManager();
-			case ImagePackage.RESIZE_TO_FIT: return (EObject)createResizeToFit();
-			case ImagePackage.RESIZE_TO_FILL: return (EObject)createResizeToFill();
-			case ImagePackage.IMAGE_VARIANT: return (EObject)createImageVariant();
-			case ImagePackage.IMAGE: return (EObject)createImage();
-			case ImagePackage.STYLED_IMAGE: return (EObject)createStyledImage();
-			case ImagePackage.IMAGE_CATALOG: return (EObject)createImageCatalog();
-			case ImagePackage.IMAGE_MAGICK_TRANSFORMER: return (EObject)createImageMagickTransformer();
-			case ImagePackage.FOLDER_CONNECTOR: return (EObject)createFolderConnector();
-			case ImagePackage.DISPLAY_IMAGE: return (EObject)createDisplayImage();
+			case ImagePackage.DAV_CONNECTOR: return createDavConnector();
+			case ImagePackage.S3_CONNECTOR: return createS3Connector();
+			case ImagePackage.BLITLINE_TRANSFORMER: return createBlitlineTransformer();
+			case ImagePackage.THUMBNAILATOR_TRANSFORMER: return createThumbnailatorTransformer();
+			case ImagePackage.UPLOADED_IMAGE: return createUploadedImage();
+			case ImagePackage.IMAGE_MANAGER: return createImageManager();
+			case ImagePackage.RESIZE_TO_FIT: return createResizeToFit();
+			case ImagePackage.RESIZE_TO_FILL: return createResizeToFill();
+			case ImagePackage.IMAGE_VARIANT: return createImageVariant();
+			case ImagePackage.IMAGE: return createImage();
+			case ImagePackage.STYLED_IMAGE: return createStyledImage();
+			case ImagePackage.IMAGE_CATALOG: return createImageCatalog();
+			case ImagePackage.IMAGE_MAGICK_TRANSFORMER: return createImageMagickTransformer();
+			case ImagePackage.FOLDER_CONNECTOR: return createFolderConnector();
+			case ImagePackage.DISPLAY_IMAGE: return createDisplayImage();
 			case ImagePackage.STYLED_IMAGE_ENTRY: return (EObject)createStyledImageEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");

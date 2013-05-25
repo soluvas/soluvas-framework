@@ -5,7 +5,7 @@ package org.soluvas.image;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import java.io.File;
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,10 +23,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.image.ImagePackage#getImageConnector()
  * @model abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface ImageConnector extends SerializableEObject {
+public interface ImageConnector extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Hi Uri Template</b></em>' attribute.

@@ -192,7 +192,7 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 	 * @generated
 	 */
 	public DomainPermission getDomainPermissions() {
-		if (domainPermissions != null && ((EObject)domainPermissions).eIsProxy()) {
+		if (domainPermissions != null && domainPermissions.eIsProxy()) {
 			InternalEObject oldDomainPermissions = (InternalEObject)domainPermissions;
 			domainPermissions = (DomainPermission)eResolveProxy(oldDomainPermissions);
 			if (domainPermissions != oldDomainPermissions) {

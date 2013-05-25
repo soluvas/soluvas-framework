@@ -4,7 +4,7 @@ package org.soluvas.email;
 
 import java.util.List;
 import javax.mail.Session;
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,10 +24,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.email.EmailPackage#getEmailManager()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface EmailManager extends SerializableEObject {
+public interface EmailManager extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Smtp User</b></em>' attribute.
 	 * <!-- begin-user-doc -->

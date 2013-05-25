@@ -4,7 +4,7 @@ package org.soluvas.data;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,10 +20,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.data.DataPackage#getTermContainer()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface TermContainer extends SerializableEObject {
+public interface TermContainer extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Terms</b></em>' reference list.
 	 * The list contents are of type {@link org.soluvas.data.Term}.

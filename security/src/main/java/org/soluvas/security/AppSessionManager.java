@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.subject.Subject;
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.ldap.Person;
 
@@ -29,10 +29,9 @@ import org.soluvas.ldap.Person;
  *
  * @see org.soluvas.security.SecurityPackage#getAppSessionManager()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface AppSessionManager extends SerializableEObject {
+public interface AppSessionManager extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Security Manager</b></em>' attribute.
 	 * <!-- begin-user-doc -->

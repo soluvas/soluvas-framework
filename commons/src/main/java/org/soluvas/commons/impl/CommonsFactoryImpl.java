@@ -112,31 +112,31 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CommonsPackage.APP_MANIFEST: return (EObject)createAppManifest();
-			case CommonsPackage.PERSON_INFO: return (EObject)createPersonInfo();
-			case CommonsPackage.WEB_ADDRESS: return (EObject)createWebAddress();
-			case CommonsPackage.ADDED: return (EObject)createAdded();
-			case CommonsPackage.ATTRIBUTE_SET: return (EObject)createAttributeSet();
-			case CommonsPackage.ATTRIBUTE_UNSET: return (EObject)createAttributeUnset();
-			case CommonsPackage.REMOVED: return (EObject)createRemoved();
-			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return (EObject)createAttributeNotification();
-			case CommonsPackage.ADDED_MANY: return (EObject)createAddedMany();
-			case CommonsPackage.REMOVED_MANY: return (EObject)createRemovedMany();
-			case CommonsPackage.CATEGORY_INFO: return (EObject)createCategoryInfo();
-			case CommonsPackage.SHELL_PROGRESS_MONITOR: return (EObject)createShellProgressMonitor();
-			case CommonsPackage.EVENT_BUS_PROGRESS_MONITOR: return (EObject)createEventBusProgressMonitor();
-			case CommonsPackage.PROGRESS_MONITOR_WRAPPER: return (EObject)createProgressMonitorWrapper();
-			case CommonsPackage.TRANSLATION: return (EObject)createTranslation();
+			case CommonsPackage.APP_MANIFEST: return createAppManifest();
+			case CommonsPackage.PERSON_INFO: return createPersonInfo();
+			case CommonsPackage.WEB_ADDRESS: return createWebAddress();
+			case CommonsPackage.ADDED: return createAdded();
+			case CommonsPackage.ATTRIBUTE_SET: return createAttributeSet();
+			case CommonsPackage.ATTRIBUTE_UNSET: return createAttributeUnset();
+			case CommonsPackage.REMOVED: return createRemoved();
+			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return createAttributeNotification();
+			case CommonsPackage.ADDED_MANY: return createAddedMany();
+			case CommonsPackage.REMOVED_MANY: return createRemovedMany();
+			case CommonsPackage.CATEGORY_INFO: return createCategoryInfo();
+			case CommonsPackage.SHELL_PROGRESS_MONITOR: return createShellProgressMonitor();
+			case CommonsPackage.EVENT_BUS_PROGRESS_MONITOR: return createEventBusProgressMonitor();
+			case CommonsPackage.PROGRESS_MONITOR_WRAPPER: return createProgressMonitorWrapper();
+			case CommonsPackage.TRANSLATION: return createTranslation();
 			case CommonsPackage.TRANSLATION_MESSAGE_ENTRY: return (EObject)createTranslationMessageEntry();
-			case CommonsPackage.TRANSLATION_MANAGER: return (EObject)createTranslationManager();
+			case CommonsPackage.TRANSLATION_MANAGER: return createTranslationManager();
 			case CommonsPackage.TRANSLATION_ENTRY: return (EObject)createTranslationEntry();
-			case CommonsPackage.PERSON: return (EObject)createPerson();
-			case CommonsPackage.PHONE_NUMBER: return (EObject)createPhoneNumber();
-			case CommonsPackage.EMAIL: return (EObject)createEmail();
-			case CommonsPackage.POSTAL_ADDRESS: return (EObject)createPostalAddress();
-			case CommonsPackage.PERSON_CATALOG: return (EObject)createPersonCatalog();
-			case CommonsPackage.FACEBOOK_IDENTITY: return (EObject)createFacebookIdentity();
-			case CommonsPackage.FACEBOOK_ACCESSIBLE: return (EObject)createFacebookAccessible();
+			case CommonsPackage.PERSON: return createPerson();
+			case CommonsPackage.PHONE_NUMBER: return createPhoneNumber();
+			case CommonsPackage.EMAIL: return createEmail();
+			case CommonsPackage.POSTAL_ADDRESS: return createPostalAddress();
+			case CommonsPackage.PERSON_CATALOG: return createPersonCatalog();
+			case CommonsPackage.FACEBOOK_IDENTITY: return createFacebookIdentity();
+			case CommonsPackage.FACEBOOK_ACCESSIBLE: return createFacebookAccessible();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

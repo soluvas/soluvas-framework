@@ -18,10 +18,9 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.commons.CommonsPackage#getPositionable()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface Positionable extends SerializableEObject {
+public interface Positionable extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Positioner</b></em>' attribute.
 	 * The default value is <code>"0"</code>.

@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
 import org.joda.time.DateTime;
 
 
@@ -21,10 +22,9 @@ import org.joda.time.DateTime;
  *
  * @see org.soluvas.commons.CommonsPackage#getPhoneNumber()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface PhoneNumber extends SerializableEObject {
+public interface PhoneNumber extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Phone Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->

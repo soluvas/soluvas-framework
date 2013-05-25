@@ -2,7 +2,7 @@
  */
 package org.soluvas.email;
 
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,10 +20,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.email.EmailPackage#getSenderLike()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface SenderLike extends SerializableEObject {
+public interface SenderLike extends EObject {
 	/**
 	 * Returns the value of the '<em><b>From</b></em>' attribute.
 	 * <!-- begin-user-doc -->

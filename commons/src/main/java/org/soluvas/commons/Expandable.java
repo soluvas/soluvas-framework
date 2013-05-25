@@ -3,6 +3,7 @@
 package org.soluvas.commons;
 
 import java.util.Map;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,10 +25,9 @@ import java.util.Map;
  *
  * @see org.soluvas.commons.CommonsPackage#getExpandable()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface Expandable extends SerializableEObject {
+public interface Expandable extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Expansion State</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.soluvas.commons.ExpansionState}.

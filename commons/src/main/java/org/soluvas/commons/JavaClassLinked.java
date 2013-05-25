@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -31,10 +32,9 @@ import com.google.common.base.Strings;
  *
  * @see org.soluvas.commons.CommonsPackage#getJavaClassLinked()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface JavaClassLinked<T> extends SerializableEObject {
+public interface JavaClassLinked<T> extends EObject {
 	
 	public static class Trait {
 

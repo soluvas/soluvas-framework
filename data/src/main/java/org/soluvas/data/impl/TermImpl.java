@@ -709,7 +709,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 */
 	@Override
 	public Vocab getVocab() {
-		if (vocab != null && ((EObject)vocab).eIsProxy()) {
+		if (vocab != null && vocab.eIsProxy()) {
 			InternalEObject oldVocab = (InternalEObject)vocab;
 			vocab = (Vocab)eResolveProxy(oldVocab);
 			if (vocab != oldVocab) {

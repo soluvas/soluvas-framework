@@ -2,7 +2,7 @@
  */
 package org.soluvas.category;
 
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -12,8 +12,7 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.category.CategoryPackage#getCategoryManager()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface CategoryManager extends SerializableEObject {
+public interface CategoryManager extends EObject {
 } // CategoryManager

@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
 import org.joda.time.DateTime;
 
 /**
@@ -23,10 +24,9 @@ import org.joda.time.DateTime;
  *
  * @see org.soluvas.commons.CommonsPackage#getTimestamped()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface Timestamped extends SerializableEObject {
+public interface Timestamped extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Creation Time</b></em>' attribute.
 	 * <!-- begin-user-doc -->

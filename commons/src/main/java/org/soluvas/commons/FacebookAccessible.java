@@ -2,6 +2,8 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -21,10 +23,9 @@ package org.soluvas.commons;
  *
  * @see org.soluvas.commons.CommonsPackage#getFacebookAccessible()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface FacebookAccessible extends SerializableEObject {
+public interface FacebookAccessible extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Facebook Access Token</b></em>' attribute.
 	 * <!-- begin-user-doc -->

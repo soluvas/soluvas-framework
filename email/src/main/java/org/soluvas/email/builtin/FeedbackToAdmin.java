@@ -2,7 +2,7 @@
  */
 package org.soluvas.email.builtin;
 
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,10 +22,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.email.builtin.BuiltinPackage#getFeedbackToAdmin()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface FeedbackToAdmin extends SerializableEObject {
+public interface FeedbackToAdmin extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Contact</b></em>' reference.

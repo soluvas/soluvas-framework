@@ -2,6 +2,8 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -22,10 +24,9 @@ package org.soluvas.commons;
  *
  * @see org.soluvas.commons.CommonsPackage#getTwitterIdentity()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface TwitterIdentity extends SerializableEObject {
+public interface TwitterIdentity extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Twitter Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->

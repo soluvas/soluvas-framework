@@ -8,7 +8,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.soluvas.commons.NsPrefixable;
-import org.soluvas.commons.SerializableEObject;
 
 /**
  * <!-- begin-user-doc -->

@@ -3,6 +3,7 @@
 package org.soluvas.commons;
 
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,10 +24,9 @@ import org.eclipse.emf.common.util.EMap;
  *
  * @see org.soluvas.commons.CommonsPackage#getTranslation()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface Translation extends SerializableEObject {
+public interface Translation extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->

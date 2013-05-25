@@ -6,6 +6,7 @@ import java.io.File;
 
 import java.util.Collection;
 import java.util.Map;
+import org.eclipse.emf.ecore.EObject;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.Gender;
@@ -13,7 +14,6 @@ import org.soluvas.commons.Imageable;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.ProgressMonitor;
-import org.soluvas.commons.SerializableEObject;
 import org.soluvas.image.store.ImageRepository;
 import org.soluvas.ldap.SocialPerson;
 
@@ -25,10 +25,9 @@ import org.soluvas.ldap.SocialPerson;
  *
  * @see org.soluvas.image.ImagePackage#getImageManager()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface ImageManager extends SerializableEObject {
+public interface ImageManager extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

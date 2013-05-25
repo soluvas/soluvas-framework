@@ -12,10 +12,9 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.commons.CommonsPackage#getEObjectLinked()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface EObjectLinked<T extends EObject> extends SerializableEObject {
+public interface EObjectLinked<T extends EObject> extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

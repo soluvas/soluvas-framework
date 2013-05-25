@@ -4,7 +4,7 @@ package org.soluvas.category;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,10 +20,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.category.CategoryPackage#getCategoryContainer()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface CategoryContainer extends SerializableEObject {
+public interface CategoryContainer extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Categories</b></em>' containment reference list.
 	 * The list contents are of type {@link org.soluvas.category.Category}.

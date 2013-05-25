@@ -56,10 +56,10 @@ public class BuiltinFactoryImpl extends EFactoryImpl implements BuiltinFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case BuiltinPackage.CONTACT: return (EObject)createContact();
-			case BuiltinPackage.FEEDBACK_TO_ADMIN_MANAGER: return (EObject)createFeedbackToAdminManager();
-			case BuiltinPackage.SOLUVAS: return (EObject)createSoluvas();
-			case BuiltinPackage.TESTER: return (EObject)createTester();
+			case BuiltinPackage.CONTACT: return createContact();
+			case BuiltinPackage.FEEDBACK_TO_ADMIN_MANAGER: return createFeedbackToAdminManager();
+			case BuiltinPackage.SOLUVAS: return createSoluvas();
+			case BuiltinPackage.TESTER: return createTester();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

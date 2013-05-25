@@ -2,8 +2,8 @@
  */
 package org.soluvas.email.builtin;
 
+import org.eclipse.emf.ecore.EObject;
 import org.apache.commons.mail.Email;
-import org.soluvas.commons.SerializableEObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,10 +23,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.email.builtin.BuiltinPackage#getContact()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface Contact extends SerializableEObject {
+public interface Contact extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

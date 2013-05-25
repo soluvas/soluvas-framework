@@ -4,7 +4,7 @@ package org.soluvas.social.schema;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,10 +20,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.social.schema.SchemaPackage#getTargetTypeAdded()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface TargetTypeAdded extends SerializableEObject {
+public interface TargetTypeAdded extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Target Types</b></em>' reference list.
 	 * The list contents are of type {@link org.soluvas.social.schema.TargetType}.

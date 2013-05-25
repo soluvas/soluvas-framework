@@ -61,10 +61,10 @@ public class SchemaFactoryImpl extends EFactoryImpl implements SchemaFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case SchemaPackage.TARGET_TYPE: return (EObject)createTargetType();
-			case SchemaPackage.SOCIAL_SCHEMA_CATALOG: return (EObject)createSocialSchemaCatalog();
-			case SchemaPackage.TARGET_TYPE_ADDED: return (EObject)createTargetTypeAdded();
-			case SchemaPackage.TARGET_TYPE_REMOVED: return (EObject)createTargetTypeRemoved();
+			case SchemaPackage.TARGET_TYPE: return createTargetType();
+			case SchemaPackage.SOCIAL_SCHEMA_CATALOG: return createSocialSchemaCatalog();
+			case SchemaPackage.TARGET_TYPE_ADDED: return createTargetTypeAdded();
+			case SchemaPackage.TARGET_TYPE_REMOVED: return createTargetTypeRemoved();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

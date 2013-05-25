@@ -67,7 +67,7 @@ public class ProgressMonitorWrapperImpl extends ProgressMonitorImpl implements P
 	 */
 	@Override
 	public ProgressMonitor getDelegate() {
-		if (delegate != null && ((EObject)delegate).eIsProxy()) {
+		if (delegate != null && delegate.eIsProxy()) {
 			InternalEObject oldDelegate = (InternalEObject)delegate;
 			delegate = (ProgressMonitor)eResolveProxy(oldDelegate);
 			if (delegate != oldDelegate) {

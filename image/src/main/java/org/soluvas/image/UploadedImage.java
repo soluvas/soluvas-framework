@@ -2,7 +2,7 @@
  */
 package org.soluvas.image;
 
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,10 +25,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.image.ImagePackage#getUploadedImage()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface UploadedImage extends SerializableEObject {
+public interface UploadedImage extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->

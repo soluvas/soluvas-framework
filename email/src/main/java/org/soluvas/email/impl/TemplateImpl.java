@@ -251,7 +251,7 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 	 */
 	@Override
 	public WebAddress getWebAddress() {
-		if (webAddress != null && ((EObject)webAddress).eIsProxy()) {
+		if (webAddress != null && webAddress.eIsProxy()) {
 			InternalEObject oldWebAddress = (InternalEObject)webAddress;
 			webAddress = (WebAddress)eResolveProxy(oldWebAddress);
 			if (webAddress != oldWebAddress) {
@@ -291,7 +291,7 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 	 */
 	@Override
 	public AppManifest getAppManifest() {
-		if (appManifest != null && ((EObject)appManifest).eIsProxy()) {
+		if (appManifest != null && appManifest.eIsProxy()) {
 			InternalEObject oldAppManifest = (InternalEObject)appManifest;
 			appManifest = (AppManifest)eResolveProxy(oldAppManifest);
 			if (appManifest != oldAppManifest) {

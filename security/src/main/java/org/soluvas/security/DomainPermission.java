@@ -4,7 +4,6 @@ package org.soluvas.security;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.soluvas.commons.SerializableEObject;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -50,10 +49,9 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.security.SecurityPackage#getDomainPermission()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface DomainPermission extends SerializableEObject {
+public interface DomainPermission extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Domain</b></em>' attribute.
 	 * <!-- begin-user-doc -->

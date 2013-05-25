@@ -2,7 +2,7 @@
  */
 package org.soluvas.email;
 
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,10 +20,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.email.EmailPackage#getTemplateLike()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface TemplateLike extends SerializableEObject {
+public interface TemplateLike extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Subject Template</b></em>' attribute.
 	 * <!-- begin-user-doc -->

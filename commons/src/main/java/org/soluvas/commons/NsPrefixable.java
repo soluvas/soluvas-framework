@@ -2,6 +2,8 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -17,10 +19,9 @@ package org.soluvas.commons;
  *
  * @see org.soluvas.commons.CommonsPackage#getNsPrefixable()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface NsPrefixable extends SerializableEObject {
+public interface NsPrefixable extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Ns Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->

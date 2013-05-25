@@ -193,7 +193,7 @@ public abstract class LayoutImpl extends TemplateImpl implements Layout {
 	 */
 	@Override
 	public LayoutType getLayoutType() {
-		if (layoutType != null && ((EObject)layoutType).eIsProxy()) {
+		if (layoutType != null && layoutType.eIsProxy()) {
 			InternalEObject oldLayoutType = (InternalEObject)layoutType;
 			layoutType = (LayoutType)eResolveProxy(oldLayoutType);
 			if (layoutType != oldLayoutType) {

@@ -2,7 +2,7 @@
  */
 package org.soluvas.image;
 
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,10 +20,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.image.ImagePackage#getImageVariant()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface ImageVariant extends SerializableEObject {
+public interface ImageVariant extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Style Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->

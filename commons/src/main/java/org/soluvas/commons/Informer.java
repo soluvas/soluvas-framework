@@ -2,6 +2,8 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -15,10 +17,9 @@ package org.soluvas.commons;
  *
  * @see org.soluvas.commons.CommonsPackage#getInformer()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface Informer<T extends Identifiable> extends SerializableEObject {
+public interface Informer<T extends Identifiable> extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

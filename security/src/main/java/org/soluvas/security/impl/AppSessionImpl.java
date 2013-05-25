@@ -478,7 +478,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 */
 	@Override
 	public PersonInfo getPerson() {
-		if (person != null && ((EObject)person).eIsProxy()) {
+		if (person != null && person.eIsProxy()) {
 			InternalEObject oldPerson = (InternalEObject)person;
 			person = (PersonInfo)eResolveProxy(oldPerson);
 			if (person != oldPerson) {

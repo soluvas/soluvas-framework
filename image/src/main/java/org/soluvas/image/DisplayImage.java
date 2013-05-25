@@ -2,9 +2,9 @@
  */
 package org.soluvas.image;
 
+import org.eclipse.emf.ecore.EObject;
 import javax.annotation.Nullable;
 
-import org.soluvas.commons.SerializableEObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,10 +28,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.image.ImagePackage#getDisplayImage()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface DisplayImage extends SerializableEObject {
+public interface DisplayImage extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Src</b></em>' attribute.
 	 * <!-- begin-user-doc -->

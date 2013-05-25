@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.soluvas.social.builtin.*;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo;

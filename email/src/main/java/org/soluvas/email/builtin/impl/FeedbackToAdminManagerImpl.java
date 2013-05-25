@@ -63,7 +63,7 @@ public class FeedbackToAdminManagerImpl extends PageImpl implements FeedbackToAd
 	 */
 	@Override
 	public Contact getContact() {
-		if (contact != null && ((EObject)contact).eIsProxy()) {
+		if (contact != null && contact.eIsProxy()) {
 			InternalEObject oldContact = (InternalEObject)contact;
 			contact = (Contact)eResolveProxy(oldContact);
 			if (contact != oldContact) {

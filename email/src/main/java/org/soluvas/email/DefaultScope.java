@@ -2,8 +2,8 @@
  */
 package org.soluvas.email;
 
+import org.eclipse.emf.ecore.EObject;
 import org.soluvas.commons.AppManifest;
-import org.soluvas.commons.SerializableEObject;
 import org.soluvas.commons.WebAddress;
 
 /**
@@ -21,10 +21,9 @@ import org.soluvas.commons.WebAddress;
  *
  * @see org.soluvas.email.EmailPackage#getDefaultScope()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface DefaultScope extends SerializableEObject {
+public interface DefaultScope extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Web Address</b></em>' reference.
 	 * <!-- begin-user-doc -->

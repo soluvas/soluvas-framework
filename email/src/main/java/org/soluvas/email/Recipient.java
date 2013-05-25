@@ -2,7 +2,7 @@
  */
 package org.soluvas.email;
 
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,10 +24,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.email.EmailPackage#getRecipient()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface Recipient extends SerializableEObject {
+public interface Recipient extends EObject {
 	
 	/**
 	 * Returns the value of the '<em><b>Email</b></em>' attribute.

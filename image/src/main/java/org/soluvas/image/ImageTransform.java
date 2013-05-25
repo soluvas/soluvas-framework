@@ -2,7 +2,7 @@
  */
 package org.soluvas.image;
 
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -12,8 +12,7 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.image.ImagePackage#getImageTransform()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface ImageTransform extends SerializableEObject {
+public interface ImageTransform extends EObject {
 } // ImageTransform

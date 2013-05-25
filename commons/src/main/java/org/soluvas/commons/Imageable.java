@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -13,10 +14,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @see org.soluvas.commons.CommonsPackage#getImageable()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface Imageable extends SerializableEObject {
+public interface Imageable extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -74,19 +74,19 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case DataPackage.ATTRIBUTE: return (EObject)createAttribute();
-			case DataPackage.STRING_VALUE: return (EObject)createStringValue();
-			case DataPackage.MEASURE_VALUE: return (EObject)createMeasureValue();
-			case DataPackage.CURRENCY_VALUE: return (EObject)createCurrencyValue();
-			case DataPackage.MIXIN: return (EObject)createMixin();
-			case DataPackage.RANGE_VALUE: return (EObject)createRangeValue();
-			case DataPackage.TERM_VALUE: return (EObject)createTermValue();
-			case DataPackage.TERM: return (EObject)createTerm();
-			case DataPackage.LIST_VOCAB: return (EObject)createListVocab();
-			case DataPackage.TREE_VOCAB: return (EObject)createTreeVocab();
-			case DataPackage.FREE_VOCAB: return (EObject)createFreeVocab();
-			case DataPackage.DATA_CATALOG: return (EObject)createDataCatalog();
-			case DataPackage.KIND: return (EObject)createKind();
+			case DataPackage.ATTRIBUTE: return createAttribute();
+			case DataPackage.STRING_VALUE: return createStringValue();
+			case DataPackage.MEASURE_VALUE: return createMeasureValue();
+			case DataPackage.CURRENCY_VALUE: return createCurrencyValue();
+			case DataPackage.MIXIN: return createMixin();
+			case DataPackage.RANGE_VALUE: return createRangeValue();
+			case DataPackage.TERM_VALUE: return createTermValue();
+			case DataPackage.TERM: return createTerm();
+			case DataPackage.LIST_VOCAB: return createListVocab();
+			case DataPackage.TREE_VOCAB: return createTreeVocab();
+			case DataPackage.FREE_VOCAB: return createFreeVocab();
+			case DataPackage.DATA_CATALOG: return createDataCatalog();
+			case DataPackage.KIND: return createKind();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

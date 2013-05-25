@@ -3,7 +3,7 @@
 package org.soluvas.image;
 
 import org.eclipse.emf.common.util.EList;
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,10 +19,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.image.ImagePackage#getImageCatalog()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface ImageCatalog extends SerializableEObject {
+public interface ImageCatalog extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Images</b></em>' containment reference list.

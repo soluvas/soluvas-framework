@@ -119,7 +119,7 @@ public class ThumbnailatorTransformerImpl extends ImageTransformerImpl implement
 	 */
 	@Override
 	public ImageConnector getDestination() {
-		if (destination != null && ((EObject)destination).eIsProxy()) {
+		if (destination != null && destination.eIsProxy()) {
 			InternalEObject oldDestination = (InternalEObject)destination;
 			destination = (ImageConnector)eResolveProxy(oldDestination);
 			if (destination != oldDestination) {

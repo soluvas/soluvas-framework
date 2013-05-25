@@ -2,7 +2,7 @@
  */
 package org.soluvas.data;
 
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -57,11 +57,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
  *
  * @see org.soluvas.data.DataPackage#getValue()
  * @model abstract="true"
- * @extends SerializableEObject
  * @generated
  */
 @JsonTypeInfo(use=Id.CLASS, property="@class")
-public interface Value<T> extends SerializableEObject {
+public interface Value<T> extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

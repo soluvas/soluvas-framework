@@ -3,6 +3,7 @@
 package org.soluvas.commons;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,10 +19,9 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see org.soluvas.commons.CommonsPackage#getPersonCatalog()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface PersonCatalog extends SerializableEObject {
+public interface PersonCatalog extends EObject {
 	/**
 	 * Returns the value of the '<em><b>People</b></em>' containment reference list.
 	 * The list contents are of type {@link org.soluvas.commons.Person}.

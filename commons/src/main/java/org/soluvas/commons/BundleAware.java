@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
 import org.osgi.framework.Bundle;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,10 +26,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  * @see org.soluvas.commons.CommonsPackage#getBundleAware()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface BundleAware extends SerializableEObject {
+public interface BundleAware extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Bundle</b></em>' attribute.
 	 * <!-- begin-user-doc -->

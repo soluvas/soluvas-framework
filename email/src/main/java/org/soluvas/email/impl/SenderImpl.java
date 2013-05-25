@@ -227,7 +227,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 */
 	@Override
 	public WebAddress getWebAddress() {
-		if (webAddress != null && ((EObject)webAddress).eIsProxy()) {
+		if (webAddress != null && webAddress.eIsProxy()) {
 			InternalEObject oldWebAddress = (InternalEObject)webAddress;
 			webAddress = (WebAddress)eResolveProxy(oldWebAddress);
 			if (webAddress != oldWebAddress) {
@@ -267,7 +267,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 */
 	@Override
 	public AppManifest getAppManifest() {
-		if (appManifest != null && ((EObject)appManifest).eIsProxy()) {
+		if (appManifest != null && appManifest.eIsProxy()) {
 			InternalEObject oldAppManifest = (InternalEObject)appManifest;
 			appManifest = (AppManifest)eResolveProxy(oldAppManifest);
 			if (appManifest != oldAppManifest) {
@@ -307,7 +307,7 @@ public class SenderImpl extends EObjectImpl implements Sender {
 	 */
 	@Override
 	public SenderType getSenderType() {
-		if (senderType != null && ((EObject)senderType).eIsProxy()) {
+		if (senderType != null && senderType.eIsProxy()) {
 			InternalEObject oldSenderType = (InternalEObject)senderType;
 			senderType = (SenderType)eResolveProxy(oldSenderType);
 			if (senderType != oldSenderType) {

@@ -60,9 +60,9 @@ public class CategoryFactoryImpl extends EFactoryImpl implements CategoryFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CategoryPackage.CATEGORY: return (EObject)createCategory();
-			case CategoryPackage.CATEGORY_CATALOG: return (EObject)createCategoryCatalog();
-			case CategoryPackage.CATEGORY_MANAGER: return (EObject)createCategoryManager();
+			case CategoryPackage.CATEGORY: return createCategory();
+			case CategoryPackage.CATEGORY_CATALOG: return createCategoryCatalog();
+			case CategoryPackage.CATEGORY_MANAGER: return createCategoryManager();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

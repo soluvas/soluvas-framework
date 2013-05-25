@@ -2,6 +2,8 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -22,10 +24,9 @@ package org.soluvas.commons;
  *
  * @see org.soluvas.commons.CommonsPackage#getFacebookIdentity()
  * @model
- * @extends SerializableEObject
  * @generated
  */
-public interface FacebookIdentity extends SerializableEObject {
+public interface FacebookIdentity extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Facebook Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->

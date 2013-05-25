@@ -2,7 +2,7 @@
  */
 package org.soluvas.image;
 
-import org.soluvas.commons.SerializableEObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,10 +19,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.image.ImagePackage#getDimensionLike()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface DimensionLike extends SerializableEObject {
+public interface DimensionLike extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Width</b></em>' attribute.
 	 * <!-- begin-user-doc -->

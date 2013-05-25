@@ -3,6 +3,7 @@
 package org.soluvas.commons;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,10 +23,9 @@ import org.eclipse.emf.ecore.EFactory;
  *
  * @see org.soluvas.commons.CommonsPackage#getEFactoryLinked()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface EFactoryLinked extends SerializableEObject {
+public interface EFactoryLinked extends EObject {
 	/**
 	 * Returns the value of the '<em><b>EFactory</b></em>' reference.
 	 * <!-- begin-user-doc -->

@@ -6,6 +6,7 @@ import org.eclipse.emf.common.util.EList;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,10 +31,9 @@ import org.eclipse.emf.common.util.EMap;
  *
  * @see org.soluvas.commons.CommonsPackage#getTranslatable()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface Translatable extends SerializableEObject {
+public interface Translatable extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Translation State</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.soluvas.commons.TranslationState}.

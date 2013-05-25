@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
@@ -43,13 +41,15 @@ public class SoluvasSessionDAO implements SessionDAO {
 	 */
 	@Override
 	public Serializable create(final Session session) {
-		log.debug("Creating Shiro Session {}", session.getId());
-		final AppSession appSession = new AppSession.FromSession().apply(session);
-		final AppSession added = appSessionRepo.add(appSession);
-		
-		saveExtraAttributes(session);
-		
-		return added;
+		throw new UnsupportedOperationException("Oops! AppSession isn't serializable! Need to steal code from EmfModel!");
+		// Oops! AppSession isn't serializable! Need to steal code from EmfModel!
+//		log.debug("Creating Shiro Session {}", session.getId());
+//		final AppSession appSession = new AppSession.FromSession().apply(session);
+//		final AppSession added = appSessionRepo.add(appSession);
+//		
+//		saveExtraAttributes(session);
+//		
+//		return added;
 	}
 
 	/**

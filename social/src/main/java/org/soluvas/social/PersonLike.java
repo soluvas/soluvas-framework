@@ -2,8 +2,8 @@
  */
 package org.soluvas.social;
 
+import org.eclipse.emf.ecore.EObject;
 import org.soluvas.commons.Gender;
-import org.soluvas.commons.SerializableEObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,10 +22,9 @@ import org.soluvas.commons.SerializableEObject;
  *
  * @see org.soluvas.social.SocialPackage#getPersonLike()
  * @model interface="true" abstract="true"
- * @extends SerializableEObject
  * @generated
  */
-public interface PersonLike extends SerializableEObject {
+public interface PersonLike extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Gender</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.soluvas.commons.Gender}.
