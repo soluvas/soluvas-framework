@@ -36,6 +36,8 @@ import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.Sluggable;
 
+import com.google.common.base.Strings;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Category</b></em>'.
@@ -70,6 +72,7 @@ import org.soluvas.commons.Sluggable;
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#isIncludeInMenu <em>Include In Menu</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getCatalogName <em>Catalog Name</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getDefaultMixin <em>Default Mixin</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getUName <em>UName</em>}</li>
  * </ul>
  * </p>
  *
@@ -404,7 +407,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final CategoryStatus STATUS_EDEFAULT = CategoryStatus.DRAFT;
+	protected static final CategoryStatus STATUS_EDEFAULT = CategoryStatus.ACTIVE;
 
 	/**
 	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
@@ -585,6 +588,16 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * @ordered
 	 */
 	protected String defaultMixin = DEFAULT_MIXIN_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getUName() <em>UName</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String UNAME_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1008,6 +1021,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNsPrefix() {
 		return nsPrefix;
 	}
@@ -1017,6 +1031,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNsPrefix(String newNsPrefix) {
 		String oldNsPrefix = nsPrefix;
 		nsPrefix = newNsPrefix;
@@ -1236,6 +1251,15 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
+	public String getUName() {
+		return Strings.nullToEmpty(getNsPrefix()) + "_" + Strings.nullToEmpty(getId());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
 	public CategoryInfo toInfo() {
 		return new ToCategoryInfo().apply(this);
 	}
@@ -1317,6 +1341,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return getCatalogName();
 			case CategoryPackage.CATEGORY__DEFAULT_MIXIN:
 				return getDefaultMixin();
+			case CategoryPackage.CATEGORY__UNAME:
+				return getUName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1571,6 +1597,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return CATALOG_NAME_EDEFAULT == null ? catalogName != null : !CATALOG_NAME_EDEFAULT.equals(catalogName);
 			case CategoryPackage.CATEGORY__DEFAULT_MIXIN:
 				return DEFAULT_MIXIN_EDEFAULT == null ? defaultMixin != null : !DEFAULT_MIXIN_EDEFAULT.equals(defaultMixin);
+			case CategoryPackage.CATEGORY__UNAME:
+				return UNAME_EDEFAULT == null ? getUName() != null : !UNAME_EDEFAULT.equals(getUName());
 		}
 		return super.eIsSet(featureID);
 	}

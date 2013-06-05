@@ -38,6 +38,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.Category#isIncludeInMenu <em>Include In Menu</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getCatalogName <em>Catalog Name</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getDefaultMixin <em>Default Mixin</em>}</li>
+ *   <li>{@link org.soluvas.category.Category#getUName <em>UName</em>}</li>
  * </ul>
  * </p>
  *
@@ -82,6 +83,7 @@ public interface Category extends Parentable<Category>, CategoryLike, ResourceAw
 	
 	/**
 	 * Returns the value of the '<em><b>Status</b></em>' attribute.
+	 * The default value is <code>"active"</code>.
 	 * The literals are from the enumeration {@link org.soluvas.category.CategoryStatus}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -93,7 +95,7 @@ public interface Category extends Parentable<Category>, CategoryLike, ResourceAw
 	 * @see org.soluvas.category.CategoryStatus
 	 * @see #setStatus(CategoryStatus)
 	 * @see org.soluvas.category.CategoryPackage#getCategory_Status()
-	 * @model
+	 * @model default="active"
 	 * @generated
 	 */
 	CategoryStatus getStatus();
@@ -344,5 +346,19 @@ public interface Category extends Parentable<Category>, CategoryLike, ResourceAw
 	 * @generated
 	 */
 	void setDefaultMixin(String value);
+
+	/**
+	 * Returns the value of the '<em><b>UName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * nsPrefix + "_" + id.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>UName</em>' attribute.
+	 * @see org.soluvas.category.CategoryPackage#getCategory_UName()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getUName();
 
 } // Category

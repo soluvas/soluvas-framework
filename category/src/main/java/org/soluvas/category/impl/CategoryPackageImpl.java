@@ -232,6 +232,15 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCategory_UName() {
+		return (EAttribute)categoryEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCategoryContainer() {
 		return categoryContainerEClass;
 	}
@@ -311,6 +320,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		createEAttribute(categoryEClass, CATEGORY__INCLUDE_IN_MENU);
 		createEAttribute(categoryEClass, CATEGORY__CATALOG_NAME);
 		createEAttribute(categoryEClass, CATEGORY__DEFAULT_MIXIN);
+		createEAttribute(categoryEClass, CATEGORY__UNAME);
 
 		categoryContainerEClass = createEClass(CATEGORY_CONTAINER);
 		createEReference(categoryContainerEClass, CATEGORY_CONTAINER__CATEGORIES);
@@ -382,7 +392,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(categoryEClass, Category.class, "Category", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCategory_Status(), this.getCategoryStatus(), "status", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_Status(), this.getCategoryStatus(), "status", "active", 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_MetaDescription(), theEcorePackage.getEString(), "metaDescription", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_MetaKeywords(), theEcorePackage.getEString(), "metaKeywords", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_MetaTitle(), theEcorePackage.getEString(), "metaTitle", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -395,6 +405,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		initEAttribute(getCategory_IncludeInMenu(), theEcorePackage.getEBoolean(), "includeInMenu", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_CatalogName(), theEcorePackage.getEString(), "catalogName", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_DefaultMixin(), theEcorePackage.getEString(), "defaultMixin", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_UName(), theEcorePackage.getEString(), "uName", null, 0, 1, Category.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(categoryContainerEClass, CategoryContainer.class, "CategoryContainer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCategoryContainer_Categories(), this.getCategory(), null, "categories", null, 0, -1, CategoryContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -412,6 +423,44 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.eclipse.org/emf/2002/GenModel
+		createGenModelAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/GenModel</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createGenModelAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		addAnnotation
+		  (getCategory_CatalogName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Name of the category catalog."
+		   });		
+		addAnnotation
+		  (getCategory_DefaultMixin(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Default mixin using the syntax \"{nsPrefix}_{name}\"."
+		   });		
+		addAnnotation
+		  (getCategory_UName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "nsPrefix + \"_\" + id."
+		   });		
+		addAnnotation
+		  (getCategoryContainer_Categories(), 
+		   source, 
+		   new String[] {
+			 "documentation", "List of categories or children."
+		   });
 	}
 
 } //CategoryPackageImpl

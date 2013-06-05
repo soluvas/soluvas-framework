@@ -32,6 +32,7 @@ import org.soluvas.category.CategoryCatalog;
 import org.soluvas.category.CategoryFactory;
 import org.soluvas.category.CategoryPackage;
 import org.soluvas.category.CategoryRepository;
+import org.soluvas.category.CategoryStatus;
 import org.soluvas.commons.EcoreCopyFunction;
 import org.soluvas.commons.QNameFunction;
 import org.soluvas.commons.ResourceType;
@@ -107,7 +108,7 @@ public class XmiCategoryRepository
 		for (final URL resource : xmiResources) {
 			final CategoryCatalog loaded = (CategoryCatalog) new StaticXmiLoader<>(CategoryPackage.eINSTANCE, resource, ResourceType.CLASSPATH).get();
 			final Collection<Category> matchingCategorys = loaded.getCategories();
-			log.debug("Loaded {} releases from resource {}", matchingCategorys.size(), resource);
+			log.debug("Loaded {} categorys from resource {}", matchingCategorys.size(), resource);
 			catalog.getCategories().addAll(EcoreUtil.copyAll(matchingCategorys));
 		}
 		for (final Entry<String, File> entry : xmiFiles.entrySet()) {
@@ -116,12 +117,12 @@ public class XmiCategoryRepository
 			final CategoryCatalog loaded = (CategoryCatalog) new StaticXmiLoader<>(CategoryPackage.eINSTANCE, file.getPath()).get();
 			xmiCatalogs.put(nsPrefix, loaded);
 			final Collection<Category> matchingCategorys = loaded.getCategories();
-			log.debug("Loaded {} releases for {} from file {}", 
+			log.debug("Loaded {} categorys for {} from file {}", 
 					matchingCategorys.size(), nsPrefix, file);
 			catalog.getCategories().addAll(EcoreUtil.copyAll(matchingCategorys));
 		}
 		this.catalog = catalog;
-		log.info("Loaded {} releases from {} resources and {} files: {} {}", 
+		log.info("Loaded {} categorys from {} resources and {} files: {} {}", 
 				catalog.getCategories().size(), xmiResources.size(), xmiFiles.size(),
 				xmiResources, xmiFiles);
 	}
@@ -299,7 +300,7 @@ public class XmiCategoryRepository
 	
 	protected Iterable<Category> doFindAll(Predicate<Category> filter, Pageable pageable) {
 		final Sort sort = Optional.fromNullable(pageable.getSort()).or(new Sort("positioner"));
-		log.debug("Find releases sorted by {}", sort.iterator().next().getProperty());
+		log.debug("Find categorys sorted by {}", sort.iterator().next().getProperty());
 		final Collection<Category> filtered;
 		if (filter != null) {
 			filtered = Collections2.filter(catalog.getCategories(), filter);
@@ -348,6 +349,19 @@ public class XmiCategoryRepository
 	@Override
 	public Page<Category> findAll(Pageable pageable) {
 		final Iterable<Category> limited = doFindAll(null, pageable);
+		return new PageImpl<>(ImmutableList.copyOf(Iterables.transform(limited, new EcoreCopyFunction<Category>())),
+				pageable, catalog.getCategories().size());
+	}
+	
+	@Override
+	public Page<Category> findAllByStatus(final Collection<CategoryStatus> statuses, Pageable pageable) {
+		final Predicate<Category> filter = new Predicate<Category>() {
+			@Override
+			public boolean apply(@Nullable Category input) {
+				return statuses.contains(input.getStatus());
+			}
+		};
+		final Iterable<Category> limited = doFindAll(filter, pageable);
 		return new PageImpl<>(ImmutableList.copyOf(Iterables.transform(limited, new EcoreCopyFunction<Category>())),
 				pageable, catalog.getCategories().size());
 	}

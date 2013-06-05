@@ -5,8 +5,11 @@ package org.soluvas.category;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.Enumerator;
+
+import com.google.common.collect.ImmutableMap;
 
 /**
  * <!-- begin-user-doc -->
@@ -141,6 +144,15 @@ public enum CategoryStatus implements Enumerator {
 	public static final List<CategoryStatus> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
+	 * Mapping to Bootstrap glyphicons.
+	 */
+	public static final Map<CategoryStatus, String> ICON_MAPPING = ImmutableMap.of(
+			DRAFT, "briefcase",
+			ACTIVE, "cog",
+			INACTIVE, "minus",
+			VOID, "trash");
+
+	/**
 	 * Returns the '<em><b>Status</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -226,6 +238,7 @@ public enum CategoryStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -235,6 +248,7 @@ public enum CategoryStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -244,6 +258,7 @@ public enum CategoryStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}

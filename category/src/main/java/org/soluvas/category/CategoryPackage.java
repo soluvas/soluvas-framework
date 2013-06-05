@@ -312,13 +312,22 @@ public interface CategoryPackage extends EPackage {
 	int CATEGORY__DEFAULT_MIXIN = CommonsPackage.PARENTABLE_FEATURE_COUNT + 25;
 
 	/**
+	 * The feature id for the '<em><b>UName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__UNAME = CommonsPackage.PARENTABLE_FEATURE_COUNT + 26;
+
+	/**
 	 * The number of structural features of the '<em>Category</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_FEATURE_COUNT = CommonsPackage.PARENTABLE_FEATURE_COUNT + 26;
+	int CATEGORY_FEATURE_COUNT = CommonsPackage.PARENTABLE_FEATURE_COUNT + 27;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.
@@ -572,6 +581,17 @@ public interface CategoryPackage extends EPackage {
 	EAttribute getCategory_DefaultMixin();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.category.Category#getUName <em>UName</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>UName</em>'.
+	 * @see org.soluvas.category.Category#getUName()
+	 * @see #getCategory()
+	 * @generated
+	 */
+	EAttribute getCategory_UName();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.category.CategoryContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -733,6 +753,14 @@ public interface CategoryPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CATEGORY__DEFAULT_MIXIN = eINSTANCE.getCategory_DefaultMixin();
+
+		/**
+		 * The meta object literal for the '<em><b>UName</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY__UNAME = eINSTANCE.getCategory_UName();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.

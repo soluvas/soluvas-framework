@@ -119,6 +119,10 @@
         <element xmi:type="ecore:EAttribute" href="category.ecore#//Category/defaultMixin"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_KSyywVTCEeKde9vOcXo7rA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_y-LZQM3BEeKxxJb6po8dsw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="category.ecore#//Category/uName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_y-LZQc3BEeKxxJb6po8dsw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ZIB5EUcWEeKj8OUspbP64A"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_ZIB5EkcWEeKj8OUspbP64A"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ZIB5E0cWEeKj8OUspbP64A"/>
