@@ -14,12 +14,6 @@
         <details key="documentation" value="Generated package name, in order to lookup the Java class. e.g. &quot;id.co.bippo.comment.email&quot;."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ecoreUrl" eType="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//URL"
-        transient="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Only used by EmailCatalogXmITracker."/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"
         transient="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

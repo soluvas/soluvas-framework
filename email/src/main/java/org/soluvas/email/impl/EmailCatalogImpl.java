@@ -39,7 +39,6 @@ import org.soluvas.email.SenderType;
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getLayoutTypes <em>Layout Types</em>}</li>
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getSenderTypes <em>Sender Types</em>}</li>
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getGeneratedPackageName <em>Generated Package Name</em>}</li>
- *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getEcoreUrl <em>Ecore Url</em>}</li>
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getEPackage <em>EPackage</em>}</li>
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getEFactory <em>EFactory</em>}</li>
  * </ul>
@@ -117,26 +116,6 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 	 * @ordered
 	 */
 	protected String generatedPackageName = GENERATED_PACKAGE_NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getEcoreUrl() <em>Ecore Url</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEcoreUrl()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final URL ECORE_URL_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getEcoreUrl() <em>Ecore Url</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEcoreUrl()
-	 * @generated
-	 * @ordered
-	 */
-	protected URL ecoreUrl = ECORE_URL_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getEPackage() <em>EPackage</em>}' reference.
@@ -260,27 +239,6 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public URL getEcoreUrl() {
-		return ecoreUrl;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEcoreUrl(URL newEcoreUrl) {
-		URL oldEcoreUrl = ecoreUrl;
-		ecoreUrl = newEcoreUrl;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EmailPackage.EMAIL_CATALOG__ECORE_URL, oldEcoreUrl, ecoreUrl));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EPackage getEPackage() {
 		if (ePackage != null && ePackage.eIsProxy()) {
 			InternalEObject oldEPackage = (InternalEObject)ePackage;
@@ -388,8 +346,6 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 				return getSenderTypes();
 			case EmailPackage.EMAIL_CATALOG__GENERATED_PACKAGE_NAME:
 				return getGeneratedPackageName();
-			case EmailPackage.EMAIL_CATALOG__ECORE_URL:
-				return getEcoreUrl();
 			case EmailPackage.EMAIL_CATALOG__EPACKAGE:
 				if (resolve) return getEPackage();
 				return basicGetEPackage();
@@ -427,9 +383,6 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 			case EmailPackage.EMAIL_CATALOG__GENERATED_PACKAGE_NAME:
 				setGeneratedPackageName((String)newValue);
 				return;
-			case EmailPackage.EMAIL_CATALOG__ECORE_URL:
-				setEcoreUrl((URL)newValue);
-				return;
 			case EmailPackage.EMAIL_CATALOG__EPACKAGE:
 				setEPackage((EPackage)newValue);
 				return;
@@ -463,9 +416,6 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 			case EmailPackage.EMAIL_CATALOG__GENERATED_PACKAGE_NAME:
 				setGeneratedPackageName(GENERATED_PACKAGE_NAME_EDEFAULT);
 				return;
-			case EmailPackage.EMAIL_CATALOG__ECORE_URL:
-				setEcoreUrl(ECORE_URL_EDEFAULT);
-				return;
 			case EmailPackage.EMAIL_CATALOG__EPACKAGE:
 				setEPackage((EPackage)null);
 				return;
@@ -494,8 +444,6 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 				return senderTypes != null && !senderTypes.isEmpty();
 			case EmailPackage.EMAIL_CATALOG__GENERATED_PACKAGE_NAME:
 				return GENERATED_PACKAGE_NAME_EDEFAULT == null ? generatedPackageName != null : !GENERATED_PACKAGE_NAME_EDEFAULT.equals(generatedPackageName);
-			case EmailPackage.EMAIL_CATALOG__ECORE_URL:
-				return ECORE_URL_EDEFAULT == null ? ecoreUrl != null : !ECORE_URL_EDEFAULT.equals(ecoreUrl);
 			case EmailPackage.EMAIL_CATALOG__EPACKAGE:
 				return ePackage != null;
 			case EmailPackage.EMAIL_CATALOG__EFACTORY:
@@ -518,8 +466,6 @@ public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
 		result.append(nsPrefix);
 		result.append(", generatedPackageName: ");
 		result.append(generatedPackageName);
-		result.append(", ecoreUrl: ");
-		result.append(ecoreUrl);
 		result.append(')');
 		return result.toString();
 	}

@@ -169,8 +169,6 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 			}
 			final EmailCatalog emailCatalog = loader.get();
 			catalogs.add(emailCatalog);
-			
-			emailCatalog.setEcoreUrl(ecoreUrl);
 		}
 		
 		log.info("Scanning {} Ecore packages from {}", catalogs.size(), xmiUrls);
@@ -283,7 +281,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 			final EFactory eFactory = emailCatalog.getEFactory();
 			
 			for (final LayoutType layoutType : emailCatalog.getLayoutTypes()) {
-				log.debug("Realizing LayoutType {} from {}", layoutType.getName(), emailCatalog.getEcoreUrl());
+				log.debug("Realizing LayoutType {} from {}", layoutType.getName(), emailCatalog.getNsPrefix());
 				layoutType.setNsPrefix(emailCatalog.getNsPrefix());
 				layoutType.setEPackageNsPrefix(emailCatalog.getNsPrefix() + "-email");
 				layoutType.setEPackageName(emailCatalog.getNsPrefix());
@@ -311,7 +309,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 			}
 			
 			for (final PageType pageType : emailCatalog.getPageTypes()) {
-				log.debug("Realizing PageType {} from {}", pageType.getName(), emailCatalog.getEcoreUrl());
+				log.debug("Realizing PageType {} from {}", pageType.getName(), emailCatalog.getNsPrefix());
 				pageType.setNsPrefix(emailCatalog.getNsPrefix());
 				pageType.setEPackageNsPrefix(emailCatalog.getNsPrefix() + "-email");
 				pageType.setEPackageName(emailCatalog.getNsPrefix());
@@ -340,14 +338,14 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 			}
 			
 			for (final SenderType senderType : emailCatalog.getSenderTypes()) {
-				log.debug("Realizing SenderType {} from {}", senderType.getName(), emailCatalog.getEcoreUrl());
+				log.debug("Realizing SenderType {} from {}", senderType.getName(), emailCatalog.getNsPrefix());
 				senderType.setNsPrefix(emailCatalog.getNsPrefix());
 			}
 			
 			log.debug("Loaded {} LayoutTypes, {} PageTypes, and {} SenderTypes from EmailSchema {} in {}",
 					emailCatalog.getLayoutTypes().size(), emailCatalog.getPageTypes().size(),
 					emailCatalog.getSenderTypes().size(),
-					emailCatalog.getEcoreUrl(), xmiUrls );
+					emailCatalog.getNsPrefix(), xmiUrls );
 		}
 		
 		// -------------- Concatenate everything ------------

@@ -21,7 +21,6 @@ import org.soluvas.commons.NsPrefixable;
  *   <li>{@link org.soluvas.email.EmailCatalog#getLayoutTypes <em>Layout Types</em>}</li>
  *   <li>{@link org.soluvas.email.EmailCatalog#getSenderTypes <em>Sender Types</em>}</li>
  *   <li>{@link org.soluvas.email.EmailCatalog#getGeneratedPackageName <em>Generated Package Name</em>}</li>
- *   <li>{@link org.soluvas.email.EmailCatalog#getEcoreUrl <em>Ecore Url</em>}</li>
  *   <li>{@link org.soluvas.email.EmailCatalog#getEPackage <em>EPackage</em>}</li>
  *   <li>{@link org.soluvas.email.EmailCatalog#getEFactory <em>EFactory</em>}</li>
  * </ul>
@@ -104,31 +103,6 @@ public interface EmailCatalog extends NsPrefixable {
 	 * @generated
 	 */
 	void setGeneratedPackageName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Ecore Url</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Only used by EmailCatalogXmITracker.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Ecore Url</em>' attribute.
-	 * @see #setEcoreUrl(URL)
-	 * @see org.soluvas.email.EmailPackage#getEmailCatalog_EcoreUrl()
-	 * @model dataType="org.soluvas.commons.URL" transient="true"
-	 * @generated
-	 */
-	URL getEcoreUrl();
-
-	/**
-	 * Sets the value of the '{@link org.soluvas.email.EmailCatalog#getEcoreUrl <em>Ecore Url</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Ecore Url</em>' attribute.
-	 * @see #getEcoreUrl()
-	 * @generated
-	 */
-	void setEcoreUrl(URL value);
 
 	/**
 	 * Returns the value of the '<em><b>EPackage</b></em>' reference.

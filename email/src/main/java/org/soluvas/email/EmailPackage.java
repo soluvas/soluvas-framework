@@ -115,22 +115,13 @@ public interface EmailPackage extends EPackage {
 	int EMAIL_CATALOG__GENERATED_PACKAGE_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Ecore Url</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_CATALOG__ECORE_URL = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 4;
-
-	/**
 	 * The feature id for the '<em><b>EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_CATALOG__EPACKAGE = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
+	int EMAIL_CATALOG__EPACKAGE = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>EFactory</b></em>' reference.
@@ -139,7 +130,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_CATALOG__EFACTORY = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 6;
+	int EMAIL_CATALOG__EFACTORY = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Catalog</em>' class.
@@ -148,7 +139,7 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMAIL_CATALOG_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 7;
+	int EMAIL_CATALOG_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.TemplateTypeImpl <em>Template Type</em>}' class.
@@ -1519,17 +1510,6 @@ public interface EmailPackage extends EPackage {
 	EAttribute getEmailCatalog_GeneratedPackageName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.email.EmailCatalog#getEcoreUrl <em>Ecore Url</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Ecore Url</em>'.
-	 * @see org.soluvas.email.EmailCatalog#getEcoreUrl()
-	 * @see #getEmailCatalog()
-	 * @generated
-	 */
-	EAttribute getEmailCatalog_EcoreUrl();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.soluvas.email.EmailCatalog#getEPackage <em>EPackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2137,14 +2117,6 @@ public interface EmailPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EMAIL_CATALOG__GENERATED_PACKAGE_NAME = eINSTANCE.getEmailCatalog_GeneratedPackageName();
-
-		/**
-		 * The meta object literal for the '<em><b>Ecore Url</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMAIL_CATALOG__ECORE_URL = eINSTANCE.getEmailCatalog_EcoreUrl();
 
 		/**
 		 * The meta object literal for the '<em><b>EPackage</b></em>' reference feature.

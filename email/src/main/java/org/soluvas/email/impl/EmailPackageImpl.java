@@ -291,17 +291,8 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmailCatalog_EcoreUrl() {
-		return (EAttribute)emailCatalogEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getEmailCatalog_EPackage() {
-		return (EReference)emailCatalogEClass.getEStructuralFeatures().get(5);
+		return (EReference)emailCatalogEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -310,7 +301,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * @generated
 	 */
 	public EReference getEmailCatalog_EFactory() {
-		return (EReference)emailCatalogEClass.getEStructuralFeatures().get(6);
+		return (EReference)emailCatalogEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -811,7 +802,6 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		createEReference(emailCatalogEClass, EMAIL_CATALOG__LAYOUT_TYPES);
 		createEReference(emailCatalogEClass, EMAIL_CATALOG__SENDER_TYPES);
 		createEAttribute(emailCatalogEClass, EMAIL_CATALOG__GENERATED_PACKAGE_NAME);
-		createEAttribute(emailCatalogEClass, EMAIL_CATALOG__ECORE_URL);
 		createEReference(emailCatalogEClass, EMAIL_CATALOG__EPACKAGE);
 		createEReference(emailCatalogEClass, EMAIL_CATALOG__EFACTORY);
 
@@ -961,7 +951,6 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		initEReference(getEmailCatalog_LayoutTypes(), this.getLayoutType(), null, "layoutTypes", null, 0, -1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEmailCatalog_SenderTypes(), this.getSenderType(), null, "senderTypes", null, 0, -1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmailCatalog_GeneratedPackageName(), theEcorePackage.getEString(), "generatedPackageName", null, 1, 1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEmailCatalog_EcoreUrl(), theCommonsPackage.getURL(), "ecoreUrl", null, 0, 1, EmailCatalog.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEmailCatalog_EPackage(), theEcorePackage.getEPackage(), null, "ePackage", null, 0, 1, EmailCatalog.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEmailCatalog_EFactory(), theEcorePackage.getEFactory(), null, "eFactory", null, 0, 1, EmailCatalog.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1125,12 +1114,6 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Generated package name, in order to lookup the Java class. e.g. \"id.co.bippo.comment.email\"."
-		   });		
-		addAnnotation
-		  (getEmailCatalog_EcoreUrl(), 
-		   source, 
-		   new String[] {
-			 "documentation", "Only used by EmailCatalogXmITracker."
 		   });		
 		addAnnotation
 		  (getEmailCatalog_EPackage(), 
@@ -1321,7 +1304,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																											
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																										
 		addAnnotation
 		  (getEmailManager_SmtpUser(), 
 		   source, 
