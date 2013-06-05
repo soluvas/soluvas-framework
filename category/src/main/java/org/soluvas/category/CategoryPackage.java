@@ -213,13 +213,22 @@ public interface CategoryPackage extends EPackage {
 	int CATEGORY__DESCRIPTION = CommonsPackage.PARENTABLE_FEATURE_COUNT + 14;
 
 	/**
+	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__NS_PREFIX = CommonsPackage.PARENTABLE_FEATURE_COUNT + 15;
+
+	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__STATUS = CommonsPackage.PARENTABLE_FEATURE_COUNT + 15;
+	int CATEGORY__STATUS = CommonsPackage.PARENTABLE_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Meta Description</b></em>' attribute.
@@ -228,7 +237,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__META_DESCRIPTION = CommonsPackage.PARENTABLE_FEATURE_COUNT + 16;
+	int CATEGORY__META_DESCRIPTION = CommonsPackage.PARENTABLE_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Meta Keywords</b></em>' attribute.
@@ -237,7 +246,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__META_KEYWORDS = CommonsPackage.PARENTABLE_FEATURE_COUNT + 17;
+	int CATEGORY__META_KEYWORDS = CommonsPackage.PARENTABLE_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Meta Title</b></em>' attribute.
@@ -246,7 +255,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__META_TITLE = CommonsPackage.PARENTABLE_FEATURE_COUNT + 18;
+	int CATEGORY__META_TITLE = CommonsPackage.PARENTABLE_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Available Sort By</b></em>' attribute.
@@ -255,7 +264,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__AVAILABLE_SORT_BY = CommonsPackage.PARENTABLE_FEATURE_COUNT + 19;
+	int CATEGORY__AVAILABLE_SORT_BY = CommonsPackage.PARENTABLE_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Default Sort By</b></em>' attribute.
@@ -264,7 +273,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__DEFAULT_SORT_BY = CommonsPackage.PARENTABLE_FEATURE_COUNT + 20;
+	int CATEGORY__DEFAULT_SORT_BY = CommonsPackage.PARENTABLE_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Anchor</b></em>' attribute.
@@ -273,7 +282,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__ANCHOR = CommonsPackage.PARENTABLE_FEATURE_COUNT + 21;
+	int CATEGORY__ANCHOR = CommonsPackage.PARENTABLE_FEATURE_COUNT + 22;
 
 	/**
 	 * The feature id for the '<em><b>Include In Menu</b></em>' attribute.
@@ -282,7 +291,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__INCLUDE_IN_MENU = CommonsPackage.PARENTABLE_FEATURE_COUNT + 22;
+	int CATEGORY__INCLUDE_IN_MENU = CommonsPackage.PARENTABLE_FEATURE_COUNT + 23;
 
 	/**
 	 * The feature id for the '<em><b>Catalog Name</b></em>' attribute.
@@ -291,7 +300,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__CATALOG_NAME = CommonsPackage.PARENTABLE_FEATURE_COUNT + 23;
+	int CATEGORY__CATALOG_NAME = CommonsPackage.PARENTABLE_FEATURE_COUNT + 24;
 
 	/**
 	 * The feature id for the '<em><b>Default Mixin</b></em>' attribute.
@@ -300,7 +309,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__DEFAULT_MIXIN = CommonsPackage.PARENTABLE_FEATURE_COUNT + 24;
+	int CATEGORY__DEFAULT_MIXIN = CommonsPackage.PARENTABLE_FEATURE_COUNT + 25;
 
 	/**
 	 * The number of structural features of the '<em>Category</em>' class.
@@ -309,7 +318,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_FEATURE_COUNT = CommonsPackage.PARENTABLE_FEATURE_COUNT + 25;
+	int CATEGORY_FEATURE_COUNT = CommonsPackage.PARENTABLE_FEATURE_COUNT + 26;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.

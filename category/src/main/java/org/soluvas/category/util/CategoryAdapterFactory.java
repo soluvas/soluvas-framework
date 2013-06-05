@@ -19,6 +19,7 @@ import org.soluvas.commons.Imageable;
 import org.soluvas.commons.Informer;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
@@ -143,6 +144,10 @@ public class CategoryAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public <T extends Identifiable> Adapter caseInformer(Informer<T> object) {
 				return createInformerAdapter();
+			}
+			@Override
+			public Adapter caseNsPrefixable(NsPrefixable object) {
+				return createNsPrefixableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -385,6 +390,20 @@ public class CategoryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInformerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.NsPrefixable <em>Ns Prefixable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.NsPrefixable
+	 * @generated
+	 */
+	public Adapter createNsPrefixableAdapter() {
 		return null;
 	}
 

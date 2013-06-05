@@ -12,6 +12,7 @@ import org.soluvas.commons.CategoryLike;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Informer;
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.ResourceAware;
 
@@ -44,7 +45,7 @@ import com.google.common.collect.Iterables;
  * @model
  * @generated
  */
-public interface Category extends Parentable<Category>, CategoryLike, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo> {
+public interface Category extends Parentable<Category>, CategoryLike, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo>, NsPrefixable {
 	
 	public class ToCategoryInfo implements Function<Category, CategoryInfo> {
 		

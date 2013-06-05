@@ -30,6 +30,7 @@ import org.soluvas.commons.Imageable;
 import org.soluvas.commons.Informer;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
@@ -58,6 +59,7 @@ import org.soluvas.commons.Sluggable;
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getBundle <em>Bundle</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getCategories <em>Categories</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getMetaDescription <em>Meta Description</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getMetaKeywords <em>Meta Keywords</em>}</li>
@@ -373,6 +375,26 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NS_PREFIX_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String nsPrefix = NS_PREFIX_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
@@ -986,6 +1008,27 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getNsPrefix() {
+		return nsPrefix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNsPrefix(String newNsPrefix) {
+		String oldNsPrefix = nsPrefix;
+		nsPrefix = newNsPrefix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CategoryPackage.CATEGORY__NS_PREFIX, oldNsPrefix, nsPrefix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getMetaDescription() {
 		return metaDescription;
@@ -1252,6 +1295,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return getCategories();
 			case CategoryPackage.CATEGORY__DESCRIPTION:
 				return getDescription();
+			case CategoryPackage.CATEGORY__NS_PREFIX:
+				return getNsPrefix();
 			case CategoryPackage.CATEGORY__STATUS:
 				return getStatus();
 			case CategoryPackage.CATEGORY__META_DESCRIPTION:
@@ -1333,6 +1378,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return;
 			case CategoryPackage.CATEGORY__DESCRIPTION:
 				setDescription((String)newValue);
+				return;
+			case CategoryPackage.CATEGORY__NS_PREFIX:
+				setNsPrefix((String)newValue);
 				return;
 			case CategoryPackage.CATEGORY__STATUS:
 				setStatus((CategoryStatus)newValue);
@@ -1424,6 +1472,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
+			case CategoryPackage.CATEGORY__NS_PREFIX:
+				setNsPrefix(NS_PREFIX_EDEFAULT);
+				return;
 			case CategoryPackage.CATEGORY__STATUS:
 				setStatus(STATUS_EDEFAULT);
 				return;
@@ -1498,6 +1549,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return categories != null && !categories.isEmpty();
 			case CategoryPackage.CATEGORY__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case CategoryPackage.CATEGORY__NS_PREFIX:
+				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
 			case CategoryPackage.CATEGORY__STATUS:
 				return status != STATUS_EDEFAULT;
 			case CategoryPackage.CATEGORY__META_DESCRIPTION:
@@ -1604,6 +1657,12 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				default: return -1;
 			}
 		}
+		if (baseClass == NsPrefixable.class) {
+			switch (derivedFeatureID) {
+				case CategoryPackage.CATEGORY__NS_PREFIX: return CommonsPackage.NS_PREFIXABLE__NS_PREFIX;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1689,6 +1748,12 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				default: return -1;
 			}
 		}
+		if (baseClass == NsPrefixable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.NS_PREFIXABLE__NS_PREFIX: return CategoryPackage.CATEGORY__NS_PREFIX;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -1730,6 +1795,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		result.append(bundle);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", nsPrefix: ");
+		result.append(nsPrefix);
 		result.append(", status: ");
 		result.append(status);
 		result.append(", metaDescription: ");
