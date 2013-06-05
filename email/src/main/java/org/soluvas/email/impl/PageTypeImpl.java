@@ -5,6 +5,8 @@ package org.soluvas.email.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Layout;
 import org.soluvas.email.Page;
@@ -26,6 +28,8 @@ import com.google.common.base.Preconditions;
  * @generated
  */
 public class PageTypeImpl extends TemplateTypeImpl<Page> implements PageType {
+	private static final Logger log = LoggerFactory
+			.getLogger(PageTypeImpl.class);
 	/**
 	 * The default value of the '{@link #getSenderTypeName() <em>Sender Type Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -95,10 +99,14 @@ public class PageTypeImpl extends TemplateTypeImpl<Page> implements PageType {
 	public Page create(Layout layout) {
 		Preconditions.checkNotNull(getEFactory(),
 				"Cannot create Page %s because eFactory is null", getName());
+		log.debug("Creating Page {} of EClass {} using {}",
+				getName(), getEClass().getName(), getEFactory()); 
 		final Page target = (Page) getEFactory().create(getEClass());
 		target.setPageType(this);
 		// set layout
 		target.setLayout(layout);
+		log.debug("Created {} from Page {} of EClass {} using {}",
+				target.getClass().getName(), getName(), getEClass().getName(), getEFactory()); 
 		return target;
 	}
 

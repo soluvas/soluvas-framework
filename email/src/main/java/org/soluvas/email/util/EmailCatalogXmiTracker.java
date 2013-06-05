@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleEvent;
 import org.osgi.util.tracker.BundleTrackerCustomizer;
@@ -181,25 +180,45 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 			@SuppressWarnings("unchecked")
 			@Override @Nullable
 			public Map<String, EClass> apply(@Nullable EmailCatalog catalog) {
-				final URL ecoreUrl = catalog.getEcoreUrl();
-				log.debug("Getting {} from {} in {}", suppliedClassName, ecoreUrl, xmiUrls);
-				StaticXmiLoader<EPackage> loader;
-				if (bundle != null) {
-					loader = new StaticXmiLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl,
-							bundle);
-				} else {
-					loader = new StaticXmiLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl,
-							ResourceType.CLASSPATH);
-				}
-				final EPackage ecorePackage = loader.get();
-				log.debug("Loaded {} EPackage {} ({}={}) from {} in {}", suppliedClassName, 
-						ecorePackage.getName(), ecorePackage.getNsPrefix(), ecorePackage.getNsURI(),
-						ecoreUrl, xmiUrls);
-				catalog.setEPackage(ecorePackage);
-				
 				// Determine generated package name. "email" is a special package suffix
 				final String genPackage = Preconditions.checkNotNull(catalog.getGeneratedPackageName(),
-						"generatedPackageName for %s cannot be null", ecoreUrl);
+						"generatedPackageName for %s cannot be null", catalog.getNsPrefix());
+				
+				// do NOT load EPackage from .ecore file, because the EClassifier index number would be different
+				// than the actual genmodel-generated .java
+				// so we use Class.forName instead to get the generated EPackage class, then get the eINSTANCE
+				// from there
+				
+				final String ePackageFullName = genPackage + (genPackage.endsWith(".builtin") ? ".BuiltinPackage" : ".EmailPackage");
+				log.debug("Getting {} from {} in {}", suppliedClassName, ePackageFullName, xmiUrls);
+				EPackage ecorePackage;
+				try {
+					final Class<EPackage> ePackageIntf = (Class<EPackage>) classLoader.loadClass(ePackageFullName);
+					final Field ePackageInstanceField = ePackageIntf.getDeclaredField("eINSTANCE");
+					ecorePackage = (EPackage) ePackageInstanceField.get(ePackageIntf);
+				} catch (ClassNotFoundException | NoSuchFieldException
+						| SecurityException | IllegalArgumentException
+						| IllegalAccessException e) {
+					throw new EmailException(String.format("Cannot load EPackage class %s for %s in %s",
+							ePackageFullName, catalog.getNsPrefix(), xmiUrls), e);
+				}
+				
+//				final URL ecoreUrl = catalog.getEcoreUrl();
+//				log.debug("Getting {} from {} in {}", suppliedClassName, ecoreUrl, xmiUrls);
+//				StaticXmiLoader<EPackage> loader;
+//				if (bundle != null) {
+//					loader = new StaticXmiLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl,
+//							bundle);
+//				} else {
+//					loader = new StaticXmiLoader<EPackage>(EcorePackage.eINSTANCE, ecoreUrl,
+//							ResourceType.CLASSPATH);
+//				}
+//				final EPackage ecorePackage = loader.get();
+				
+				log.debug("Loaded {} EPackage {} ({}={}) from {} in {}", suppliedClassName, 
+						ecorePackage.getName(), ecorePackage.getNsPrefix(), ecorePackage.getNsURI(),
+						ePackageFullName, xmiUrls);
+				catalog.setEPackage(ecorePackage);
 				
 				// Instantiate EFactory
 				final String eFactoryClassName = genPackage + "." +
@@ -211,16 +230,16 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					} else {
 						eFactoryClass = (Class<EFactory>) classLoader.loadClass(eFactoryClassName);
 					}
-					final Field eInstanceField = eFactoryClass.getField("eINSTANCE");
-					final EFactory eFactory = (EFactory) eInstanceField.get(eFactoryClass);
+					final Field eFactoryInstanceField = eFactoryClass.getField("eINSTANCE");
+					final EFactory eFactory = (EFactory) eFactoryInstanceField.get(eFactoryClass);
 					log.debug("Loaded EFactory {} for EPackage {} ({}={}) from {} in {}",
 							eFactory, ecorePackage.getName(), ecorePackage.getNsPrefix(), ecorePackage.getNsURI(),
-							ecoreUrl, xmiUrls);
+							ePackageFullName, xmiUrls);
 					catalog.setEFactory(eFactory);
 				} catch (Exception e) {
 					throw new EmailException(String.format("Cannot load EFactory class %s for EPackage %s (%s=%s) from %s in %s",
 							eFactoryClassName, ecorePackage.getName(), ecorePackage.getNsPrefix(), ecorePackage.getNsURI(),
-							ecoreUrl, xmiUrls), e);
+							ePackageFullName, xmiUrls), e);
 				}
 				
 				final ImmutableMap.Builder<String, EClass> eClassMapBuilder = ImmutableMap.builder();
@@ -232,13 +251,13 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					log.debug("Mapping EClass {}.{} as {}:{} from {} in {}",
 							ecorePackage.getName(), eClass.getName(),
 							ecorePackage.getNsPrefix(), eClass.getName(),
-							ecoreUrl, xmiUrls);
+							ePackageFullName, xmiUrls);
 					eClassMapBuilder.put(ecorePackage.getNsPrefix() + ":" + eClass.getName(), eClass);
 				}
 				
 				final Map<String, EClass> eClassMap = eClassMapBuilder.build();
 				log.debug("Loaded {} EClasses from EmailSchema ecore package {} in {}",
-						eClassMap.size(), ecoreUrl, xmiUrls );
+						eClassMap.size(), ePackageFullName, xmiUrls );
 				return eClassMap;
 			}
 		}));
