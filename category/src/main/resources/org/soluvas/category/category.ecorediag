@@ -128,6 +128,10 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ZIB5E0cWEeKj8OUspbP64A"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_ZICgIEcWEeKj8OUspbP64A" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_lsJWoc8uEeKYKOTFoDZqig" type="2002">
+        <element xmi:type="ecore:EOperation" href="category.ecore#//Category/resolve"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_lsJWos8uEeKYKOTFoDZqig"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ZICgIUcWEeKj8OUspbP64A"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_ZICgIkcWEeKj8OUspbP64A"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ZICgI0cWEeKj8OUspbP64A"/>

@@ -33,8 +33,9 @@ import org.soluvas.category.CategoryFactory;
 import org.soluvas.category.CategoryPackage;
 import org.soluvas.category.CategoryRepository;
 import org.soluvas.category.CategoryStatus;
+import org.soluvas.category.CategoryUNameFunction;
+import org.soluvas.category.util.CategoryUtils;
 import org.soluvas.commons.EcoreCopyFunction;
-import org.soluvas.commons.QNameFunction;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.tenant.TenantRef;
@@ -65,8 +66,8 @@ import com.google.common.eventbus.EventBus;
  * {@link PagingAndSortingRepository} that operates on {@link Category}s (identified by UName)
  * inside one or more:
  * <ul>
- * 	<li>{@link CategoryCatalog} XMI classpath resources. These terms are <b>not</b> editable.</li>
- * 	<li>{@link CategoryCatalog} XMI files. These terms are editable.</li>
+ * 	<li>{@link CategoryCatalog} XMI classpath resources. These categories are <b>not</b> editable.</li>
+ * 	<li>{@link CategoryCatalog} XMI files. These categories are editable.</li>
  * </ul>
  * <p>Note: When a change is made, for proper operation the system must:
  * <ol>
@@ -107,29 +108,35 @@ public class XmiCategoryRepository
 		final CategoryCatalog catalog = CategoryFactory.eINSTANCE.createCategoryCatalog();
 		for (final URL resource : xmiResources) {
 			final CategoryCatalog loaded = (CategoryCatalog) new StaticXmiLoader<>(CategoryPackage.eINSTANCE, resource, ResourceType.CLASSPATH).get();
-			final Collection<Category> matchingCategorys = loaded.getCategories();
-			log.debug("Loaded {} categorys from resource {}", matchingCategorys.size(), resource);
-			catalog.getCategories().addAll(EcoreUtil.copyAll(matchingCategorys));
+			final Collection<Category> loadedCategories = loaded.getCategories();
+			log.debug("Loaded {} root categories from resource {}", loadedCategories.size(), resource);
+			catalog.getCategories().addAll(EcoreUtil.copyAll(loadedCategories));
 		}
 		for (final Entry<String, File> entry : xmiFiles.entrySet()) {
 			final File file = entry.getValue();
 			final String nsPrefix = entry.getKey();
 			final CategoryCatalog loaded = (CategoryCatalog) new StaticXmiLoader<>(CategoryPackage.eINSTANCE, file.getPath()).get();
 			xmiCatalogs.put(nsPrefix, loaded);
-			final Collection<Category> matchingCategorys = loaded.getCategories();
-			log.debug("Loaded {} categorys for {} from file {}", 
-					matchingCategorys.size(), nsPrefix, file);
-			catalog.getCategories().addAll(EcoreUtil.copyAll(matchingCategorys));
+			final Collection<Category> loadedCategories = loaded.getCategories();
+			log.debug("Loaded {} root categories for {} from file {}", 
+					loadedCategories.size(), nsPrefix, file);
+			catalog.getCategories().addAll(EcoreUtil.copyAll(loadedCategories));
 		}
 		this.catalog = catalog;
-		log.info("Loaded {} categorys from {} resources and {} files: {} {}", 
+		log.info("Loaded {} categories from {} resources and {} files: {} {}", 
 				catalog.getCategories().size(), xmiResources.size(), xmiFiles.size(),
 				xmiResources, xmiFiles);
-	}
+		
+		final List<Category> flatCategories = CategoryUtils.flatten(catalog.getCategories());
+		for (final Category category : flatCategories) {
+			log.debug("Realizing Category {}", category.getName());
+			category.resolve();
+		}
+}
 
 	@Override
 	public long count() {
-		return catalog.getCategories().size();
+		return Iterables.size(getFlattenedCategories());
 	}
 
 	@Override @Nullable
@@ -139,16 +146,16 @@ public class XmiCategoryRepository
 
 	@Override
 	public <S extends Category> Collection<S> add(Collection<S> entities) {
-		log.debug("Adding {} terms: {}", entities.size(), Iterables.limit(entities, 10));
+		log.debug("Adding {} categories: {}", entities.size(), Iterables.limit(entities, 10));
 		// check duplicate UName(s)
-		final Collection<String> uNamesToAdd = Collections2.transform(entities, new QNameFunction());
+		final Collection<String> uNamesToAdd = Collections2.transform(entities, new CategoryUNameFunction());
 		final Set<String> existingUNames = exists(uNamesToAdd);
 		if (!existingUNames.isEmpty()) {
 			throw new IllegalArgumentException("Duplicate Category UName(s): " + existingUNames);
 		}
 		// add
 		final Set<String> changedNsPrefixes = new HashSet<>();
-		final List<S> addedCategorys = new ArrayList<>();
+		final List<S> addedCategories = new ArrayList<>();
 		for (final S entity : entities) {
 			final CategoryCatalog xmiCatalog = xmiCatalogs.get(entity.getNsPrefix());
 			if (xmiCatalog == null) {
@@ -157,19 +164,19 @@ public class XmiCategoryRepository
 			
 			final S added = EcoreUtil.copy(entity);
 			xmiCatalog.getCategories().add(added);
-			addedCategorys.add(added);
+			addedCategories.add(added);
 			changedNsPrefixes.add(entity.getNsPrefix());
 		}
 		updateCatalogFiles(changedNsPrefixes);
 		reload();
-		catalogFilesChanged(changedNsPrefixes, String.format("Added %d terms: %s", entities.size(), uNamesToAdd));
-		log.info("Added {} terms: {}", entities.size(), Iterables.limit(entities, 10));
-		return addedCategorys;
+		catalogFilesChanged(changedNsPrefixes, String.format("Added %d categories: %s", entities.size(), uNamesToAdd));
+		log.info("Added {} categories: {}", entities.size(), Iterables.limit(entities, 10));
+		return addedCategories;
 	}
 
 	@Override
 	public <S extends Category> Collection<S> modify(Map<String, S> entities) {
-		log.debug("Modifying {} terms: {}", entities.size(), Iterables.limit(entities.keySet(), 10));
+		log.debug("Modifying {} categories: {}", entities.size(), Iterables.limit(entities.keySet(), 10));
 		// check existence
 		final Set<String> existingUNames = exists(entities.keySet());
 		if (existingUNames.size() != entities.keySet().size()) {
@@ -178,7 +185,7 @@ public class XmiCategoryRepository
 		}
 		// add
 		final Set<String> changedNsPrefixes = new HashSet<>();
-		final List<S> addedCategorys = new ArrayList<>();
+		final List<S> addedCategories = new ArrayList<>();
 		for (final Entry<String, S> entry : entities.entrySet()) {
 			final S entity = entry.getValue();
 			final CategoryCatalog xmiCatalog = xmiCatalogs.get(entity.getNsPrefix());
@@ -189,21 +196,21 @@ public class XmiCategoryRepository
 			final Category toRemove = Iterables.find(xmiCatalog.getCategories(), new Predicate<Category>() {
 				@Override
 				public boolean apply(@Nullable Category input) {
-					return entry.getKey().equals(input.getNsPrefix() + "_" + input.getName());
+					return entry.getKey().equals(input.getNsPrefix() + "_" + input.getId());
 				}
 			});
 			xmiCatalog.getCategories().remove(toRemove);
 			final S modified = EcoreUtil.copy(entity);
 			
 			xmiCatalog.getCategories().add(modified);
-			addedCategorys.add(modified);
+			addedCategories.add(modified);
 			changedNsPrefixes.add(entity.getNsPrefix());
 		}
 		updateCatalogFiles(changedNsPrefixes);
 		reload();
-		catalogFilesChanged(changedNsPrefixes, String.format("Modified %d terms: %s", entities.size(), entities.keySet()));
-		log.info("Modified {} terms: {}", entities.size(), Iterables.limit(entities.keySet(), 10));
-		return addedCategorys;
+		catalogFilesChanged(changedNsPrefixes, String.format("Modified %d categories: %s", entities.size(), entities.keySet()));
+		log.info("Modified {} categories: {}", entities.size(), Iterables.limit(entities.keySet(), 10));
+		return addedCategories;
 	}
 
 	private void updateCatalogFiles(final Set<String> changedNsPrefixes) {
@@ -226,41 +233,45 @@ public class XmiCategoryRepository
 			}
 		}
 	}
+	
+	protected Iterable<Category> getFlattenedCategories() {
+		return CategoryUtils.flatten(catalog.getCategories());
+	}
 
 	@Override
 	public Set<String> exists(final Collection<String> ids) {
-		return ImmutableSet.copyOf(Collections2.transform(Collections2.filter(
-				catalog.getCategories(), new Predicate<Category>() {
+		return ImmutableSet.copyOf(Iterables.transform(Iterables.filter(
+				getFlattenedCategories(), new Predicate<Category>() {
 			@Override
 			public boolean apply(@Nullable Category input) {
-				if (input.getNsPrefix() != null && input.getName() != null) {
-					return ids.contains(input.getNsPrefix() + "_" + input.getName());
+				if (input.getNsPrefix() != null && input.getId() != null) {
+					return ids.contains(input.getNsPrefix() + "_" + input.getId());
 				} else {
 					return false;
 				}
 			}
-		}), new QNameFunction()));
+		}), new CategoryUNameFunction()));
 	}
 
 	@Override
 	public List<Category> findAll(final Collection<String> ids) {
-		final Collection<Category> filtered = Collections2.filter(
-				catalog.getCategories(), new Predicate<Category>() {
+		final Iterable<Category> filtered = Iterables.filter(
+				getFlattenedCategories(), new Predicate<Category>() {
 			@Override
 			public boolean apply(@Nullable Category input) {
-				if (input.getNsPrefix() != null && input.getName() != null) {
-					return ids.contains(input.getNsPrefix() + "_" + input.getName());
+				if (input.getNsPrefix() != null && input.getId() != null) {
+					return ids.contains(input.getNsPrefix() + "_" + input.getId());
 				} else {
 					return false;
 				}
 			}
 		});
-		return ImmutableList.copyOf(Collections2.transform(filtered, new EcoreCopyFunction<Category>()));
+		return ImmutableList.copyOf(Iterables.transform(filtered, new EcoreCopyFunction<Category>()));
 	}
 
 	@Override
 	public long deleteIds(Collection<String> ids) {
-		log.debug("Deleting {} terms: {}", ids.size(), Iterables.limit(ids, 10));
+		log.debug("Deleting {} categories: {}", ids.size(), Iterables.limit(ids, 10));
 		// check existence
 		final Set<String> existingUNames = exists(ids);
 		if (existingUNames.size() != ids.size()) {
@@ -269,7 +280,7 @@ public class XmiCategoryRepository
 		}
 		// add
 		final Set<String> changedNsPrefixes = new HashSet<>();
-		final List<String> deletedCategorys = new ArrayList<>();
+		final List<String> deletedCategories = new ArrayList<>();
 		final Pattern uNamePattern = Pattern.compile("([^_]+)\\_.+");
 		for (final String id : ids) {
 			final Matcher matcher = uNamePattern.matcher(id);
@@ -283,29 +294,29 @@ public class XmiCategoryRepository
 			final Category toRemove = Iterables.find(xmiCatalog.getCategories(), new Predicate<Category>() {
 				@Override
 				public boolean apply(@Nullable Category input) {
-					return id.equals(input.getNsPrefix() + "_" + input.getName());
+					return id.equals(input.getNsPrefix() + "_" + input.getId());
 				}
 			});
 			xmiCatalog.getCategories().remove(toRemove);
-			deletedCategorys.add(id);
+			deletedCategories.add(id);
 			
 			changedNsPrefixes.add(nsPrefix);
 		}
 		updateCatalogFiles(changedNsPrefixes);
 		reload();
-		catalogFilesChanged(changedNsPrefixes, String.format("Deleted %d terms: %s", ids.size(), ids));
-		log.info("Deleted {} terms: {}", ids, Iterables.limit(ids, 10));
-		return deletedCategorys.size();
+		catalogFilesChanged(changedNsPrefixes, String.format("Deleted %d categories: %s", ids.size(), ids));
+		log.info("Deleted {} categories: {}", ids, Iterables.limit(ids, 10));
+		return deletedCategories.size();
 	}
 	
 	protected Iterable<Category> doFindAll(Predicate<Category> filter, Pageable pageable) {
 		final Sort sort = Optional.fromNullable(pageable.getSort()).or(new Sort("positioner"));
-		log.debug("Find categorys sorted by {}", sort.iterator().next().getProperty());
-		final Collection<Category> filtered;
+		log.debug("Find categories sorted by {}", sort.iterator().next().getProperty());
+		final Iterable<Category> filtered;
 		if (filter != null) {
-			filtered = Collections2.filter(catalog.getCategories(), filter);
+			filtered = Iterables.filter(getFlattenedCategories(), filter);
 		} else {
-			filtered = catalog.getCategories();
+			filtered = getFlattenedCategories();
 		}
 		final Ordering<Category> ordering = new Ordering<Category>() {
 			@Override
@@ -340,17 +351,19 @@ public class XmiCategoryRepository
 
 	@Override
 	public Page<String> findAllIds(Pageable pageable) {
+		final int allSize = Iterables.size(getFlattenedCategories());
 		final Iterable<Category> limited = doFindAll(null, pageable);
-		final Iterable<String> limitedUNames = Iterables.transform(limited, new QNameFunction());
+		final Iterable<String> limitedUNames = Iterables.transform(limited, new CategoryUNameFunction());
 		return new PageImpl<>(ImmutableList.copyOf(limitedUNames),
-				pageable, catalog.getCategories().size());
+				pageable, allSize);
 	}
 
 	@Override
 	public Page<Category> findAll(Pageable pageable) {
+		final int allSize = Iterables.size(getFlattenedCategories());
 		final Iterable<Category> limited = doFindAll(null, pageable);
 		return new PageImpl<>(ImmutableList.copyOf(Iterables.transform(limited, new EcoreCopyFunction<Category>())),
-				pageable, catalog.getCategories().size());
+				pageable, allSize);
 	}
 	
 	@Override
@@ -362,8 +375,9 @@ public class XmiCategoryRepository
 			}
 		};
 		final Iterable<Category> limited = doFindAll(filter, pageable);
+		final int allSize = Iterables.size(getFlattenedCategories());
 		return new PageImpl<>(ImmutableList.copyOf(Iterables.transform(limited, new EcoreCopyFunction<Category>())),
-				pageable, catalog.getCategories().size());
+				pageable, allSize);
 	}
 	
 	/**

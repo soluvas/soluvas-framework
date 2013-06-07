@@ -25,8 +25,7 @@ public class CategoryUtils {
 
 	public static final class CategoryExpander implements
 			Function<Category, Iterable<Category>> {
-		@Override
-		@Nullable
+		@Override @Nullable
 		public Iterable<Category> apply(@Nullable Category input) {
 			final Iterable<Category> children = Iterables.concat(Lists
 					.transform(input.getCategories(), new CategoryExpander()));

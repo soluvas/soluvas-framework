@@ -361,4 +361,15 @@ public interface Category extends Parentable<Category>, CategoryLike, ResourceAw
 	 */
 	String getUName();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Provide default values for id, slug, slugPath, etc.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	void resolve();
+
 } // Category

@@ -1,6 +1,5 @@
 package org.soluvas.category.util;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
-import org.eclipse.emf.ecore.EObject;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleEvent;
 import org.osgi.util.tracker.BundleTrackerCustomizer;
@@ -24,16 +22,14 @@ import org.soluvas.category.CategoryCatalog;
 import org.soluvas.category.CategoryException;
 import org.soluvas.category.CategoryPackage;
 import org.soluvas.commons.ResourceType;
-import org.soluvas.commons.SlugUtils;
-import org.soluvas.commons.SupplierXmiTracker;
 import org.soluvas.commons.StaticXmiLoader;
+import org.soluvas.commons.SupplierXmiTracker;
 import org.soluvas.commons.impl.XmiTrackerUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 import com.google.common.base.Function;
-import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -56,7 +52,7 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 	/**
 	 * Used only for classpath, non-OSGi.
 	 */
-	private Map<String, List<Category>> managedCategories = new HashMap<>();
+	private final Map<String, List<Category>> managedCategories = new HashMap<>();
 	
 	/**
 	 * @param repo Access to this repo from this class is guaranteed to be synchronized,
@@ -80,24 +76,6 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 		}
 	}
 	
-	protected List<String> getNameSegments(Category category) {
-		return category.getParent() != null
-				? ImmutableList.copyOf(Iterables.concat(getNameSegments(category.getParent()), ImmutableList.of(category.getName())))
-				: ImmutableList.<String>of(category.getName());
-	}
-
-	protected List<String> getSlugSegments(Category category) {
-		return category.getParent() != null
-				? ImmutableList.copyOf(Iterables.concat(getSlugSegments(category.getParent()), ImmutableList.of(category.getSlug())))
-				: ImmutableList.<String>of(category.getSlug());
-	}
-
-	protected int getLevel(Category category) {
-		return category.getParent() != null
-				? getLevel(category.getParent()) + 1
-				: 1;
-	}
-
 	@Override
 	public List<Category> addingBundle(final Bundle bundle, BundleEvent event) {
 		// ------------------ Scan CategoryCatalogs ------------
@@ -169,23 +147,9 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 				
 				// Recursive expand as flat
 				final List<Category> flatCategories = CategoryUtils.flatten(categoryCatalog.getCategories());
-				
 				for (final Category category : flatCategories) {
 					log.debug("Realizing Category {} from {}", category.getName(), url);
-					category.setCatalogName(categoryCatalog.getName());
-					if (category.getId() == null) {
-						category.setId( (category.getParent() != null ? category.getParent().getId() + "_" : "") + SlugUtils.generateId(category.getName()) );
-					}
-					if (category.getSlug() == null) {
-						category.setSlug(SlugUtils.generateSegment(category.getName()));
-					}
-					category.setCatalogName(categoryCatalog.getName());
-					category.setSlugPath(Joiner.on('/').join(getSlugSegments(category)));
-					category.setCategoryCount((long) category.getCategories().size());
-					category.setLevel(getLevel(category));
-					for (final Category child : category.getCategories()) {
-						child.setParent(category);
-					}
+					category.resolve();
 				}
 				
 				log.debug("Loaded {} Categories ({} root) from CategorySchema {}",

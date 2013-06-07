@@ -407,6 +407,8 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		initEAttribute(getCategory_DefaultMixin(), theEcorePackage.getEString(), "defaultMixin", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_UName(), theEcorePackage.getEString(), "uName", null, 0, 1, Category.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
+		addEOperation(categoryEClass, null, "resolve", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(categoryContainerEClass, CategoryContainer.class, "CategoryContainer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCategoryContainer_Categories(), this.getCategory(), null, "categories", null, 0, -1, CategoryContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -437,6 +439,12 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 */
 	protected void createGenModelAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		addAnnotation
+		  (categoryEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Provide default values for id, slug, slugPath, etc."
+		   });		
 		addAnnotation
 		  (getCategory_CatalogName(), 
 		   source, 

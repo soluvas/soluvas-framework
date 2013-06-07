@@ -3,6 +3,11 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="category" nsURI="http://www.soluvas.org/schema/category/1.0"
     nsPrefix="category">
   <eClassifiers xsi:type="ecore:EClass" name="Category">
+    <eOperations name="resolve">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Provide default values for id, slug, slugPath, etc."/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//CategoryStatus"
         defaultValueLiteral="active"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="metaDescription" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>

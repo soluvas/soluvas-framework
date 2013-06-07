@@ -14,9 +14,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.osgi.framework.Bundle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.category.Category;
+import org.soluvas.category.CategoryCatalog;
 import org.soluvas.category.CategoryContainer;
 import org.soluvas.category.CategoryPackage;
 import org.soluvas.category.CategoryStatus;
@@ -34,9 +38,13 @@ import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.Sluggable;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 /**
  * <!-- begin-user-doc -->
@@ -79,6 +87,9 @@ import com.google.common.base.Strings;
  * @generated
  */
 public class CategoryImpl extends EObjectImpl implements Category {
+	private static final Logger log = LoggerFactory
+			.getLogger(CategoryImpl.class);
+	
 	/**
 	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -1253,6 +1264,51 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	@Override
 	public String getUName() {
 		return Strings.nullToEmpty(getNsPrefix()) + "_" + Strings.nullToEmpty(getId());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public void resolve() {
+		final EObject catalog = EcoreUtil.getRootContainer(this);
+		if (catalog instanceof CategoryCatalog) {
+			setCatalogName(((CategoryCatalog) catalog).getName());
+		} else {
+			log.warn("Expected root container to be {}, got {} for {}",
+					CategoryCatalog.class.getName(), catalog, this);
+		}
+		if (getId() == null) {
+			setId( (getParent() != null ? getParent().getId() + "_" : "") + SlugUtils.generateId(getName()) );
+		}
+		if (getSlug() == null) {
+			setSlug(SlugUtils.generateSegment(getName()));
+		}
+		setSlugPath(Joiner.on('/').join(getSlugSegments(this)));
+		setCategoryCount((long) getCategories().size());
+		setLevel(getLevel(this));
+		for (final Category child : getCategories()) {
+			child.setParent(this);
+		}
+	}
+
+	protected List<String> getNameSegments(Category category) {
+		return category.getParent() != null
+				? ImmutableList.copyOf(Iterables.concat(getNameSegments(category.getParent()), ImmutableList.of(category.getName())))
+				: ImmutableList.<String>of(category.getName());
+	}
+
+	protected List<String> getSlugSegments(Category category) {
+		return category.getParent() != null
+				? ImmutableList.copyOf(Iterables.concat(getSlugSegments(category.getParent()), ImmutableList.of(category.getSlug())))
+				: ImmutableList.<String>of(category.getSlug());
+	}
+
+	protected int getLevel(Category category) {
+		return category.getParent() != null
+				? getLevel(category.getParent()) + 1
+				: 1;
 	}
 
 	/**
