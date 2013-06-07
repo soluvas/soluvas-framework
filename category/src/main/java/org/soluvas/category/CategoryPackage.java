@@ -4,6 +4,7 @@ package org.soluvas.category;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -321,13 +322,22 @@ public interface CategoryPackage extends EPackage {
 	int CATEGORY__UNAME = CommonsPackage.PARENTABLE_FEATURE_COUNT + 26;
 
 	/**
+	 * The feature id for the '<em><b>Parent UName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__PARENT_UNAME = CommonsPackage.PARENTABLE_FEATURE_COUNT + 27;
+
+	/**
 	 * The number of structural features of the '<em>Category</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_FEATURE_COUNT = CommonsPackage.PARENTABLE_FEATURE_COUNT + 27;
+	int CATEGORY_FEATURE_COUNT = CommonsPackage.PARENTABLE_FEATURE_COUNT + 28;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.
@@ -458,6 +468,17 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 */
 	int CATEGORY_STATUS = 4;
+
+
+	/**
+	 * The meta object id for the '<em>Entity Lookup</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.data.EntityLookup
+	 * @see org.soluvas.category.impl.CategoryPackageImpl#getEntityLookup()
+	 * @generated
+	 */
+	int ENTITY_LOOKUP = 5;
 
 
 	/**
@@ -592,6 +613,17 @@ public interface CategoryPackage extends EPackage {
 	EAttribute getCategory_UName();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.category.Category#getParentUName <em>Parent UName</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Parent UName</em>'.
+	 * @see org.soluvas.category.Category#getParentUName()
+	 * @see #getCategory()
+	 * @generated
+	 */
+	EAttribute getCategory_ParentUName();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.category.CategoryContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -641,6 +673,17 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getCategoryStatus();
+
+	/**
+	 * Returns the meta object for data type '{@link org.soluvas.data.EntityLookup <em>Entity Lookup</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Entity Lookup</em>'.
+	 * @see org.soluvas.data.EntityLookup
+	 * @model instanceClass="org.soluvas.data.EntityLookup" serializeable="false" typeParameters="T ID"
+	 * @generated
+	 */
+	EDataType getEntityLookup();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -763,6 +806,14 @@ public interface CategoryPackage extends EPackage {
 		EAttribute CATEGORY__UNAME = eINSTANCE.getCategory_UName();
 
 		/**
+		 * The meta object literal for the '<em><b>Parent UName</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY__PARENT_UNAME = eINSTANCE.getCategory_ParentUName();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -809,6 +860,16 @@ public interface CategoryPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum CATEGORY_STATUS = eINSTANCE.getCategoryStatus();
+
+		/**
+		 * The meta object literal for the '<em>Entity Lookup</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.data.EntityLookup
+		 * @see org.soluvas.category.impl.CategoryPackageImpl#getEntityLookup()
+		 * @generated
+		 */
+		EDataType ENTITY_LOOKUP = eINSTANCE.getEntityLookup();
 
 	}
 

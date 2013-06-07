@@ -149,7 +149,7 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 				final List<Category> flatCategories = CategoryUtils.flatten(categoryCatalog.getCategories());
 				for (final Category category : flatCategories) {
 					log.debug("Realizing Category {} from {}", category.getName(), url);
-					category.resolve();
+					category.resolve(null);
 				}
 				
 				log.debug("Loaded {} Categories ({} root) from CategorySchema {}",

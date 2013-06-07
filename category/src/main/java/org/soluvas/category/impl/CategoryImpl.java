@@ -40,6 +40,7 @@ import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.Sluggable;
+import org.soluvas.data.EntityLookup;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
@@ -81,6 +82,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getCatalogName <em>Catalog Name</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getDefaultMixin <em>Default Mixin</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getUName <em>UName</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getParentUName <em>Parent UName</em>}</li>
  * </ul>
  * </p>
  *
@@ -611,6 +613,26 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	protected static final String UNAME_EDEFAULT = null;
 
 	/**
+	 * The default value of the '{@link #getParentUName() <em>Parent UName</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParentUName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PARENT_UNAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getParentUName() <em>Parent UName</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParentUName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String parentUName = PARENT_UNAME_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -659,12 +681,16 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public void setParent(Category newParent) {
 		Category oldParent = parent;
 		parent = newParent;
+		// note that due to contract with EmfModel#detach(), parentUName is never reset here,
+		// but it is reset in #resolve()
+		if (parent != null) {
+			setParentUName(parent.getUName());
+		}
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CategoryPackage.CATEGORY__PARENT, oldParent, parent));
 	}
@@ -1269,9 +1295,32 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	@Override
-	public void resolve() {
+	public String getParentUName() {
+		return parentUName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setParentUName(String newParentUName) {
+		String oldParentUName = parentUName;
+		parentUName = newParentUName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CategoryPackage.CATEGORY__PARENT_UNAME, oldParentUName, parentUName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public void resolve(EntityLookup<Category, String> categoryLookup) {
 		final EObject catalog = EcoreUtil.getRootContainer(this);
 		if (catalog instanceof CategoryCatalog) {
 			setCatalogName(((CategoryCatalog) catalog).getName());
@@ -1279,6 +1328,15 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			log.warn("Expected root container to be {}, got {} for {}",
 					CategoryCatalog.class.getName(), catalog, this);
 		}
+		
+		if (getParent() == null && getParentUName() != null && categoryLookup != null) {
+			// set parent if parentUName is specified
+			setParent(categoryLookup.findOne(getParentUName()));
+		} else if (getParent() != null) {
+			// otherwise, sync to parentUName
+			setParentUName(getParent() != null ? getParent().getUName() : null);
+		}
+		
 		if (getId() == null) {
 			setId( (getParent() != null ? getParent().getId() + "_" : "") + SlugUtils.generateId(getName()) );
 		}
@@ -1399,6 +1457,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return getDefaultMixin();
 			case CategoryPackage.CATEGORY__UNAME:
 				return getUName();
+			case CategoryPackage.CATEGORY__PARENT_UNAME:
+				return getParentUName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1494,6 +1554,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__DEFAULT_MIXIN:
 				setDefaultMixin((String)newValue);
 				return;
+			case CategoryPackage.CATEGORY__PARENT_UNAME:
+				setParentUName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1587,6 +1650,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__DEFAULT_MIXIN:
 				setDefaultMixin(DEFAULT_MIXIN_EDEFAULT);
 				return;
+			case CategoryPackage.CATEGORY__PARENT_UNAME:
+				setParentUName(PARENT_UNAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1655,6 +1721,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return DEFAULT_MIXIN_EDEFAULT == null ? defaultMixin != null : !DEFAULT_MIXIN_EDEFAULT.equals(defaultMixin);
 			case CategoryPackage.CATEGORY__UNAME:
 				return UNAME_EDEFAULT == null ? getUName() != null : !UNAME_EDEFAULT.equals(getUName());
+			case CategoryPackage.CATEGORY__PARENT_UNAME:
+				return PARENT_UNAME_EDEFAULT == null ? parentUName != null : !PARENT_UNAME_EDEFAULT.equals(parentUName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1901,6 +1969,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		result.append(catalogName);
 		result.append(", defaultMixin: ");
 		result.append(defaultMixin);
+		result.append(", parentUName: ");
+		result.append(parentUName);
 		result.append(')');
 		return result.toString();
 	}

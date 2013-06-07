@@ -4,8 +4,10 @@ package org.soluvas.category.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -21,6 +23,7 @@ import org.soluvas.category.CategoryPackage;
 import org.soluvas.category.CategoryStatus;
 
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.data.EntityLookup;
 
 /**
  * <!-- begin-user-doc -->
@@ -63,6 +66,13 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * @generated
 	 */
 	private EEnum categoryStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType entityLookupEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -241,6 +251,15 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCategory_ParentUName() {
+		return (EAttribute)categoryEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCategoryContainer() {
 		return categoryContainerEClass;
 	}
@@ -286,6 +305,15 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getEntityLookup() {
+		return entityLookupEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CategoryFactory getCategoryFactory() {
 		return (CategoryFactory)getEFactoryInstance();
 	}
@@ -321,6 +349,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		createEAttribute(categoryEClass, CATEGORY__CATALOG_NAME);
 		createEAttribute(categoryEClass, CATEGORY__DEFAULT_MIXIN);
 		createEAttribute(categoryEClass, CATEGORY__UNAME);
+		createEAttribute(categoryEClass, CATEGORY__PARENT_UNAME);
 
 		categoryContainerEClass = createEClass(CATEGORY_CONTAINER);
 		createEReference(categoryContainerEClass, CATEGORY_CONTAINER__CATEGORIES);
@@ -331,6 +360,9 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 
 		// Create enums
 		categoryStatusEEnum = createEEnum(CATEGORY_STATUS);
+
+		// Create data types
+		entityLookupEDataType = createEDataType(ENTITY_LOOKUP);
 	}
 
 	/**
@@ -361,6 +393,8 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
+		addETypeParameter(entityLookupEDataType, "T");
+		addETypeParameter(entityLookupEDataType, "ID");
 
 		// Set bounds for type parameters
 
@@ -406,8 +440,15 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		initEAttribute(getCategory_CatalogName(), theEcorePackage.getEString(), "catalogName", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_DefaultMixin(), theEcorePackage.getEString(), "defaultMixin", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_UName(), theEcorePackage.getEString(), "uName", null, 0, 1, Category.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_ParentUName(), theEcorePackage.getEString(), "parentUName", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(categoryEClass, null, "resolve", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(categoryEClass, null, "resolve", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getEntityLookup());
+		g2 = createEGenericType(this.getCategory());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(theEcorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "categoryLookup", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(categoryContainerEClass, CategoryContainer.class, "CategoryContainer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCategoryContainer_Categories(), this.getCategory(), null, "categories", null, 0, -1, CategoryContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -422,6 +463,9 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		addEEnumLiteral(categoryStatusEEnum, CategoryStatus.ACTIVE);
 		addEEnumLiteral(categoryStatusEEnum, CategoryStatus.INACTIVE);
 		addEEnumLiteral(categoryStatusEEnum, CategoryStatus.VOID);
+
+		// Initialize data types
+		initEDataType(entityLookupEDataType, EntityLookup.class, "EntityLookup", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -443,7 +487,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		  (categoryEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "documentation", "Provide default values for id, slug, slugPath, etc."
+			 "documentation", "Provide default values for id, slug, slugPath, etc.\n\nIf categoryLookup is provided, it will lookup the parentUName and set the parent reference.\nThis is optional and unnecessary during loading from XMI, but is required during EmfModel deserialization."
 		   });		
 		addAnnotation
 		  (getCategory_CatalogName(), 
@@ -462,6 +506,12 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		   source, 
 		   new String[] {
 			 "documentation", "nsPrefix + \"_\" + id."
+		   });		
+		addAnnotation
+		  (getCategory_ParentUName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Parent Category UName (\"{nsPrefix}_{ID}\"), useful during serialization/deserialization to get a real reference to the parent (which may/may not be found)."
 		   });		
 		addAnnotation
 		  (getCategoryContainer_Categories(), 

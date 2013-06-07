@@ -5,8 +5,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="Category">
     <eOperations name="resolve">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Provide default values for id, slug, slugPath, etc."/>
+        <details key="documentation" value="Provide default values for id, slug, slugPath, etc.&#xA;&#xA;If categoryLookup is provided, it will lookup the parentUName and set the parent reference.&#xA;This is optional and unnecessary during loading from XMI, but is required during EmfModel deserialization."/>
       </eAnnotations>
+      <eParameters name="categoryLookup">
+        <eGenericType eClassifier="#//EntityLookup">
+          <eTypeArguments eClassifier="#//Category"/>
+          <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+        </eGenericType>
+      </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//CategoryStatus"
         defaultValueLiteral="active"/>
@@ -35,6 +41,11 @@
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="nsPrefix + &quot;_&quot; + id."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parentUName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Parent Category UName (&quot;{nsPrefix}_{ID}&quot;), useful during serialization/deserialization to get a real reference to the parent (which may/may not be found)."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Parentable">
@@ -66,4 +77,9 @@
     <eLiterals name="void" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CategoryManager"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EntityLookup" instanceClassName="org.soluvas.data.EntityLookup"
+      serializable="false">
+    <eTypeParameters name="T"/>
+    <eTypeParameters name="ID"/>
+  </eClassifiers>
 </ecore:EPackage>

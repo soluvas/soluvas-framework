@@ -123,6 +123,10 @@
         <element xmi:type="ecore:EAttribute" href="category.ecore#//Category/uName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_y-LZQc3BEeKxxJb6po8dsw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_Y8keIM9ZEeKYKOTFoDZqig" type="2001">
+        <element xmi:type="ecore:EAttribute" href="category.ecore#//Category/parentUName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Y8keIc9ZEeKYKOTFoDZqig"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ZIB5EUcWEeKj8OUspbP64A"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_ZIB5EkcWEeKj8OUspbP64A"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ZIB5E0cWEeKj8OUspbP64A"/>
@@ -385,6 +389,13 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_mAgp8s22EeKxxJb6po8dsw" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/resource/org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NsPrefixable"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mAgp8822EeKxxJb6po8dsw" x="1584" y="192"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_I8kv0M9aEeKYKOTFoDZqig" type="1004">
+    <children xmi:type="notation:Node" xmi:id="_I8l98M9aEeKYKOTFoDZqig" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_I8mlAM9aEeKYKOTFoDZqig" type="4009"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_I8kv0c9aEeKYKOTFoDZqig" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EDataType" href="category.ecore#//EntityLookup"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_I8kv0s9aEeKYKOTFoDZqig" x="1408" y="533"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_RBZJIUcWEeKj8OUspbP64A"/>
   <element xmi:type="ecore:EPackage" href="category.ecore#/"/>

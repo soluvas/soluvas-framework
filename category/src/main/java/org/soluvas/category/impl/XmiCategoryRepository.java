@@ -130,7 +130,7 @@ public class XmiCategoryRepository
 		final List<Category> flatCategories = CategoryUtils.flatten(catalog.getCategories());
 		for (final Category category : flatCategories) {
 			log.debug("Realizing Category {}", category.getName());
-			category.resolve();
+			category.resolve(null);
 		}
 }
 

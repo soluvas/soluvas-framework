@@ -16,6 +16,7 @@ import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.ResourceAware;
 
+import org.soluvas.data.EntityLookup;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -39,6 +40,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.Category#getCatalogName <em>Catalog Name</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getDefaultMixin <em>Default Mixin</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getUName <em>UName</em>}</li>
+ *   <li>{@link org.soluvas.category.Category#getParentUName <em>Parent UName</em>}</li>
  * </ul>
  * </p>
  *
@@ -362,14 +364,42 @@ public interface Category extends Parentable<Category>, CategoryLike, ResourceAw
 	String getUName();
 
 	/**
+	 * Returns the value of the '<em><b>Parent UName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Parent Category UName ("{nsPrefix}_{ID}"), useful during serialization/deserialization to get a real reference to the parent (which may/may not be found).
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Parent UName</em>' attribute.
+	 * @see #setParentUName(String)
+	 * @see org.soluvas.category.CategoryPackage#getCategory_ParentUName()
+	 * @model
+	 * @generated
+	 */
+	String getParentUName();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.category.Category#getParentUName <em>Parent UName</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Parent UName</em>' attribute.
+	 * @see #getParentUName()
+	 * @generated
+	 */
+	void setParentUName(String value);
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Provide default values for id, slug, slugPath, etc.
+	 * 
+	 * If categoryLookup is provided, it will lookup the parentUName and set the parent reference.
+	 * This is optional and unnecessary during loading from XMI, but is required during EmfModel deserialization.
 	 * <!-- end-model-doc -->
-	 * @model
+	 * @model categoryLookupDataType="org.soluvas.category.EntityLookup<org.soluvas.category.Category, org.eclipse.emf.ecore.EString>"
 	 * @generated
 	 */
-	void resolve();
+	void resolve(EntityLookup<Category, String> categoryLookup);
 
 } // Category
