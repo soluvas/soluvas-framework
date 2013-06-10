@@ -3792,11 +3792,11 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		g2 = createEGenericType(objectsNotificationEClass_T);
 		g1.getETypeArguments().add(g2);
 		objectsNotificationEClass.getEGenericSuperTypes().add(g1);
+		categoryLikeEClass.getESuperTypes().add(this.getIdentifiable());
+		categoryLikeEClass.getESuperTypes().add(this.getNameContainer());
 		categoryLikeEClass.getESuperTypes().add(this.getPositionable());
 		categoryLikeEClass.getESuperTypes().add(this.getSluggable());
 		categoryLikeEClass.getESuperTypes().add(this.getImageable());
-		categoryLikeEClass.getESuperTypes().add(this.getIdentifiable());
-		categoryLikeEClass.getESuperTypes().add(this.getNameContainer());
 		g1 = createEGenericType(this.getCategoryLike());
 		categoryInfoEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getParentable());

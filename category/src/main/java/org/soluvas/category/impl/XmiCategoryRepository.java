@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.category.Category;
 import org.soluvas.category.CategoryCatalog;
+import org.soluvas.category.CategoryContainer;
 import org.soluvas.category.CategoryFactory;
 import org.soluvas.category.CategoryPackage;
 import org.soluvas.category.CategoryRepository;
@@ -57,6 +59,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
@@ -193,16 +196,29 @@ public class XmiCategoryRepository
 				throw new IllegalArgumentException("NsPrefix " + entity.getNsPrefix() + " is read-only.");
 			}
 			
-			final Category toRemove = Iterables.find(xmiCatalog.getCategories(), new Predicate<Category>() {
-				@Override
-				public boolean apply(@Nullable Category input) {
-					return entry.getKey().equals(input.getNsPrefix() + "_" + input.getId());
-				}
-			});
-			xmiCatalog.getCategories().remove(toRemove);
-			final S modified = EcoreUtil.copy(entity);
+			final List<Category> catalogFlatCategories = CategoryUtils.flatten(xmiCatalog.getCategories());
+			Category toRemove;
+			try {
+				toRemove = Iterables.find(catalogFlatCategories, new Predicate<Category>() {
+					@Override
+					public boolean apply(@Nullable Category input) {
+						return entry.getKey().equals(input.getNsPrefix() + "_" + input.getId());
+					}
+				});
+			} catch (NoSuchElementException e) {
+				throw new NoSuchElementException(String.format("Cannot modify '%s' from %s containing %s (flattened) categories: %s",
+						entry.getKey(), entity.getNsPrefix(), catalogFlatCategories.size(), Lists.transform(catalogFlatCategories, new org.soluvas.commons.IdFunction())));
+			}
+			final CategoryContainer container = (CategoryContainer) toRemove.eContainer();
+			container.getCategories().remove(toRemove);
 			
-			xmiCatalog.getCategories().add(modified);
+			final S modified = EcoreUtil.copy(entity);
+			modified.setParent(null); // avoid dangling HREF
+			modified.setParentUName(null); // no need to save this
+			// nullify "transient" attributes
+			modified.setCategoryCount(null);
+			modified.setLevel(null);
+			container.getCategories().add(modified);
 			addedCategories.add(modified);
 			changedNsPrefixes.add(entity.getNsPrefix());
 		}

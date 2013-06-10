@@ -1495,31 +1495,13 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_LIKE = 32;
 
 	/**
-	 * The feature id for the '<em><b>Positioner</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_LIKE__POSITIONER = POSITIONABLE__POSITIONER;
-
-	/**
-	 * The feature id for the '<em><b>Slug</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_LIKE__SLUG = POSITIONABLE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_LIKE__ID = POSITIONABLE_FEATURE_COUNT + 1;
+	int CATEGORY_LIKE__ID = IDENTIFIABLE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1528,7 +1510,25 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_LIKE__NAME = POSITIONABLE_FEATURE_COUNT + 2;
+	int CATEGORY_LIKE__NAME = IDENTIFIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Positioner</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_LIKE__POSITIONER = IDENTIFIABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Slug</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_LIKE__SLUG = IDENTIFIABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Slug Path</b></em>' attribute.
@@ -1537,7 +1537,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_LIKE__SLUG_PATH = POSITIONABLE_FEATURE_COUNT + 3;
+	int CATEGORY_LIKE__SLUG_PATH = IDENTIFIABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Color</b></em>' attribute.
@@ -1546,7 +1546,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_LIKE__COLOR = POSITIONABLE_FEATURE_COUNT + 4;
+	int CATEGORY_LIKE__COLOR = IDENTIFIABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
@@ -1555,7 +1555,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_LIKE__IMAGE_ID = POSITIONABLE_FEATURE_COUNT + 5;
+	int CATEGORY_LIKE__IMAGE_ID = IDENTIFIABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Level</b></em>' attribute.
@@ -1564,7 +1564,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_LIKE__LEVEL = POSITIONABLE_FEATURE_COUNT + 6;
+	int CATEGORY_LIKE__LEVEL = IDENTIFIABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Category Count</b></em>' attribute.
@@ -1573,7 +1573,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_LIKE__CATEGORY_COUNT = POSITIONABLE_FEATURE_COUNT + 7;
+	int CATEGORY_LIKE__CATEGORY_COUNT = IDENTIFIABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Category Like</em>' class.
@@ -1582,7 +1582,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_LIKE_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 8;
+	int CATEGORY_LIKE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.CategoryInfoImpl <em>Category Info</em>}' class.
@@ -1593,24 +1593,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	int CATEGORY_INFO = 33;
-
-	/**
-	 * The feature id for the '<em><b>Positioner</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_INFO__POSITIONER = CATEGORY_LIKE__POSITIONER;
-
-	/**
-	 * The feature id for the '<em><b>Slug</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_INFO__SLUG = CATEGORY_LIKE__SLUG;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1629,6 +1611,24 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CATEGORY_INFO__NAME = CATEGORY_LIKE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Positioner</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__POSITIONER = CATEGORY_LIKE__POSITIONER;
+
+	/**
+	 * The feature id for the '<em><b>Slug</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__SLUG = CATEGORY_LIKE__SLUG;
 
 	/**
 	 * The feature id for the '<em><b>Slug Path</b></em>' attribute.

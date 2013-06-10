@@ -399,11 +399,13 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		EGenericType g1 = createEGenericType(theCommonsPackage.getParentable());
+		EGenericType g1 = createEGenericType(theCommonsPackage.getCategoryLike());
+		categoryEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getNsPrefixable());
+		categoryEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theCommonsPackage.getParentable());
 		EGenericType g2 = createEGenericType(this.getCategory());
 		g1.getETypeArguments().add(g2);
-		categoryEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(theCommonsPackage.getCategoryLike());
 		categoryEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(theCommonsPackage.getResourceAware());
 		categoryEClass.getEGenericSuperTypes().add(g1);
@@ -416,8 +418,6 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		g1 = createEGenericType(theCommonsPackage.getInformer());
 		g2 = createEGenericType(theCommonsPackage.getCategoryInfo());
 		g1.getETypeArguments().add(g2);
-		categoryEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(theCommonsPackage.getNsPrefixable());
 		categoryEClass.getEGenericSuperTypes().add(g1);
 		categoryCatalogEClass.getESuperTypes().add(this.getCategoryContainer());
 		categoryCatalogEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());

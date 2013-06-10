@@ -48,10 +48,11 @@
         <details key="documentation" value="Parent Category UName (&quot;{nsPrefix}_{ID}&quot;), useful during serialization/deserialization to get a real reference to the parent (which may/may not be found)."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//CategoryLike"/>
+    <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NsPrefixable"/>
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Parentable">
       <eTypeArguments eClassifier="#//Category"/>
     </eGenericSuperTypes>
-    <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//CategoryLike"/>
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//ResourceAware"/>
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//BundleAware"/>
     <eGenericSuperTypes eClassifier="#//CategoryContainer"/>
@@ -59,7 +60,6 @@
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Informer">
       <eTypeArguments eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//CategoryInfo"/>
     </eGenericSuperTypes>
-    <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NsPrefixable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CategoryContainer" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="categories" upperBound="-1"

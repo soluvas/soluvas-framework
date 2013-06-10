@@ -553,7 +553,7 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CategoryLike" abstract="true" interface="true"
-      eSuperTypes="#//Positionable #//Sluggable #//Imageable #//Identifiable #//NameContainer">
+      eSuperTypes="#//Identifiable #//NameContainer #//Positionable #//Sluggable #//Imageable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="ID is prefixed with parent IDs then concatenated by '_', it won't change when categories are reordered are moved/restructured. IDs cannot be duplicate (even draft/inactive/void categories). Slugs can be duplicates only within same parent. Names can be duplicates.&#xA;&#xA;&lt;p>Slug is used as name in JCR repositories. If not specified, should be generated based on Name.&#xA;&#xA;&lt;p>Name is used as displayName in JCR repositories."/>
     </eAnnotations>

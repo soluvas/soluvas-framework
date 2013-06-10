@@ -98,8 +98,16 @@ public class CategoryAdapterFactory extends AdapterFactoryImpl {
 				return createCategoryManagerAdapter();
 			}
 			@Override
-			public <P> Adapter caseParentable(Parentable<P> object) {
-				return createParentableAdapter();
+			public Adapter caseIdentifiable(Identifiable object) {
+				return createIdentifiableAdapter();
+			}
+			@Override
+			public Adapter caseNameable(Nameable object) {
+				return createNameableAdapter();
+			}
+			@Override
+			public Adapter caseNameContainer(NameContainer object) {
+				return createNameContainerAdapter();
 			}
 			@Override
 			public Adapter casePositionable(Positionable object) {
@@ -114,20 +122,16 @@ public class CategoryAdapterFactory extends AdapterFactoryImpl {
 				return createImageableAdapter();
 			}
 			@Override
-			public Adapter caseIdentifiable(Identifiable object) {
-				return createIdentifiableAdapter();
-			}
-			@Override
-			public Adapter caseNameable(Nameable object) {
-				return createNameableAdapter();
-			}
-			@Override
-			public Adapter caseNameContainer(NameContainer object) {
-				return createNameContainerAdapter();
-			}
-			@Override
 			public Adapter caseCategoryLike(CategoryLike object) {
 				return createCategoryLikeAdapter();
+			}
+			@Override
+			public Adapter caseNsPrefixable(NsPrefixable object) {
+				return createNsPrefixableAdapter();
+			}
+			@Override
+			public <P> Adapter caseParentable(Parentable<P> object) {
+				return createParentableAdapter();
 			}
 			@Override
 			public Adapter caseResourceAware(ResourceAware object) {
@@ -144,10 +148,6 @@ public class CategoryAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public <T extends Identifiable> Adapter caseInformer(Informer<T> object) {
 				return createInformerAdapter();
-			}
-			@Override
-			public Adapter caseNsPrefixable(NsPrefixable object) {
-				return createNsPrefixableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {

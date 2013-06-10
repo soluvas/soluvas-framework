@@ -303,11 +303,11 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 			case CommonsPackage.CATEGORY_LIKE: {
 				CategoryLike categoryLike = (CategoryLike)theEObject;
 				T1 result = caseCategoryLike(categoryLike);
+				if (result == null) result = caseIdentifiable(categoryLike);
+				if (result == null) result = caseNameContainer(categoryLike);
 				if (result == null) result = casePositionable(categoryLike);
 				if (result == null) result = caseSluggable(categoryLike);
 				if (result == null) result = caseImageable(categoryLike);
-				if (result == null) result = caseIdentifiable(categoryLike);
-				if (result == null) result = caseNameContainer(categoryLike);
 				if (result == null) result = caseNameable(categoryLike);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -317,11 +317,11 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				T1 result = caseCategoryInfo(categoryInfo);
 				if (result == null) result = caseCategoryLike(categoryInfo);
 				if (result == null) result = caseParentable(categoryInfo);
+				if (result == null) result = caseIdentifiable(categoryInfo);
+				if (result == null) result = caseNameContainer(categoryInfo);
 				if (result == null) result = casePositionable(categoryInfo);
 				if (result == null) result = caseSluggable(categoryInfo);
 				if (result == null) result = caseImageable(categoryInfo);
-				if (result == null) result = caseIdentifiable(categoryInfo);
-				if (result == null) result = caseNameContainer(categoryInfo);
 				if (result == null) result = caseNameable(categoryInfo);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

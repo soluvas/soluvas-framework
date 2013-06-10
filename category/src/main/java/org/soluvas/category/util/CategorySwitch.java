@@ -83,19 +83,19 @@ public class CategorySwitch<T1> extends Switch<T1> {
 			case CategoryPackage.CATEGORY: {
 				Category category = (Category)theEObject;
 				T1 result = caseCategory(category);
-				if (result == null) result = caseParentable(category);
 				if (result == null) result = caseCategoryLike(category);
+				if (result == null) result = caseNsPrefixable(category);
+				if (result == null) result = caseParentable(category);
 				if (result == null) result = caseResourceAware(category);
 				if (result == null) result = caseBundleAware(category);
 				if (result == null) result = caseCategoryContainer(category);
 				if (result == null) result = caseDescribable(category);
 				if (result == null) result = caseInformer(category);
-				if (result == null) result = caseNsPrefixable(category);
+				if (result == null) result = caseIdentifiable(category);
+				if (result == null) result = caseNameContainer(category);
 				if (result == null) result = casePositionable(category);
 				if (result == null) result = caseSluggable(category);
 				if (result == null) result = caseImageable(category);
-				if (result == null) result = caseIdentifiable(category);
-				if (result == null) result = caseNameContainer(category);
 				if (result == null) result = caseNameable(category);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

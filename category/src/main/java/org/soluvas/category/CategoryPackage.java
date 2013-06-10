@@ -70,40 +70,13 @@ public interface CategoryPackage extends EPackage {
 	int CATEGORY = 0;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY__PARENT = CommonsPackage.PARENTABLE__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Positioner</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY__POSITIONER = CommonsPackage.PARENTABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Slug</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY__SLUG = CommonsPackage.PARENTABLE_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__ID = CommonsPackage.PARENTABLE_FEATURE_COUNT + 2;
+	int CATEGORY__ID = CommonsPackage.CATEGORY_LIKE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -112,7 +85,25 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__NAME = CommonsPackage.PARENTABLE_FEATURE_COUNT + 3;
+	int CATEGORY__NAME = CommonsPackage.CATEGORY_LIKE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Positioner</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__POSITIONER = CommonsPackage.CATEGORY_LIKE__POSITIONER;
+
+	/**
+	 * The feature id for the '<em><b>Slug</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__SLUG = CommonsPackage.CATEGORY_LIKE__SLUG;
 
 	/**
 	 * The feature id for the '<em><b>Slug Path</b></em>' attribute.
@@ -121,7 +112,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__SLUG_PATH = CommonsPackage.PARENTABLE_FEATURE_COUNT + 4;
+	int CATEGORY__SLUG_PATH = CommonsPackage.CATEGORY_LIKE__SLUG_PATH;
 
 	/**
 	 * The feature id for the '<em><b>Color</b></em>' attribute.
@@ -130,7 +121,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__COLOR = CommonsPackage.PARENTABLE_FEATURE_COUNT + 5;
+	int CATEGORY__COLOR = CommonsPackage.CATEGORY_LIKE__COLOR;
 
 	/**
 	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
@@ -139,7 +130,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__IMAGE_ID = CommonsPackage.PARENTABLE_FEATURE_COUNT + 6;
+	int CATEGORY__IMAGE_ID = CommonsPackage.CATEGORY_LIKE__IMAGE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Level</b></em>' attribute.
@@ -148,7 +139,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__LEVEL = CommonsPackage.PARENTABLE_FEATURE_COUNT + 7;
+	int CATEGORY__LEVEL = CommonsPackage.CATEGORY_LIKE__LEVEL;
 
 	/**
 	 * The feature id for the '<em><b>Category Count</b></em>' attribute.
@@ -157,61 +148,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__CATEGORY_COUNT = CommonsPackage.PARENTABLE_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY__RESOURCE_TYPE = CommonsPackage.PARENTABLE_FEATURE_COUNT + 9;
-
-	/**
-	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY__RESOURCE_URI = CommonsPackage.PARENTABLE_FEATURE_COUNT + 10;
-
-	/**
-	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY__RESOURCE_NAME = CommonsPackage.PARENTABLE_FEATURE_COUNT + 11;
-
-	/**
-	 * The feature id for the '<em><b>Bundle</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY__BUNDLE = CommonsPackage.PARENTABLE_FEATURE_COUNT + 12;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY__CATEGORIES = CommonsPackage.PARENTABLE_FEATURE_COUNT + 13;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY__DESCRIPTION = CommonsPackage.PARENTABLE_FEATURE_COUNT + 14;
+	int CATEGORY__CATEGORY_COUNT = CommonsPackage.CATEGORY_LIKE__CATEGORY_COUNT;
 
 	/**
 	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
@@ -220,7 +157,70 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__NS_PREFIX = CommonsPackage.PARENTABLE_FEATURE_COUNT + 15;
+	int CATEGORY__NS_PREFIX = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__PARENT = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__RESOURCE_TYPE = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Resource Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__RESOURCE_URI = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__RESOURCE_NAME = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Bundle</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__BUNDLE = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Categories</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__CATEGORIES = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__DESCRIPTION = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -229,7 +229,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__STATUS = CommonsPackage.PARENTABLE_FEATURE_COUNT + 16;
+	int CATEGORY__STATUS = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Meta Description</b></em>' attribute.
@@ -238,7 +238,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__META_DESCRIPTION = CommonsPackage.PARENTABLE_FEATURE_COUNT + 17;
+	int CATEGORY__META_DESCRIPTION = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Meta Keywords</b></em>' attribute.
@@ -247,7 +247,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__META_KEYWORDS = CommonsPackage.PARENTABLE_FEATURE_COUNT + 18;
+	int CATEGORY__META_KEYWORDS = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Meta Title</b></em>' attribute.
@@ -256,7 +256,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__META_TITLE = CommonsPackage.PARENTABLE_FEATURE_COUNT + 19;
+	int CATEGORY__META_TITLE = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Available Sort By</b></em>' attribute.
@@ -265,7 +265,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__AVAILABLE_SORT_BY = CommonsPackage.PARENTABLE_FEATURE_COUNT + 20;
+	int CATEGORY__AVAILABLE_SORT_BY = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Default Sort By</b></em>' attribute.
@@ -274,7 +274,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__DEFAULT_SORT_BY = CommonsPackage.PARENTABLE_FEATURE_COUNT + 21;
+	int CATEGORY__DEFAULT_SORT_BY = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Anchor</b></em>' attribute.
@@ -283,7 +283,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__ANCHOR = CommonsPackage.PARENTABLE_FEATURE_COUNT + 22;
+	int CATEGORY__ANCHOR = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Include In Menu</b></em>' attribute.
@@ -292,7 +292,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__INCLUDE_IN_MENU = CommonsPackage.PARENTABLE_FEATURE_COUNT + 23;
+	int CATEGORY__INCLUDE_IN_MENU = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Catalog Name</b></em>' attribute.
@@ -301,7 +301,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__CATALOG_NAME = CommonsPackage.PARENTABLE_FEATURE_COUNT + 24;
+	int CATEGORY__CATALOG_NAME = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Default Mixin</b></em>' attribute.
@@ -310,7 +310,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__DEFAULT_MIXIN = CommonsPackage.PARENTABLE_FEATURE_COUNT + 25;
+	int CATEGORY__DEFAULT_MIXIN = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>UName</b></em>' attribute.
@@ -319,7 +319,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__UNAME = CommonsPackage.PARENTABLE_FEATURE_COUNT + 26;
+	int CATEGORY__UNAME = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Parent UName</b></em>' attribute.
@@ -328,7 +328,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__PARENT_UNAME = CommonsPackage.PARENTABLE_FEATURE_COUNT + 27;
+	int CATEGORY__PARENT_UNAME = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 19;
 
 	/**
 	 * The number of structural features of the '<em>Category</em>' class.
@@ -337,7 +337,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_FEATURE_COUNT = CommonsPackage.PARENTABLE_FEATURE_COUNT + 28;
+	int CATEGORY_FEATURE_COUNT = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 20;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.

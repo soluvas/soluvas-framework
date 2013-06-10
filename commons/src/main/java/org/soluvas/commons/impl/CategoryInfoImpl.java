@@ -21,6 +21,7 @@ import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.Parentable;
+import org.soluvas.commons.Positionable;
 import org.soluvas.commons.Sluggable;
 
 /**
@@ -30,10 +31,10 @@ import org.soluvas.commons.Sluggable;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getPositioner <em>Positioner</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getSlug <em>Slug</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getPositioner <em>Positioner</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getSlug <em>Slug</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getSlugPath <em>Slug Path</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getColor <em>Color</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getImageId <em>Image Id</em>}</li>
@@ -48,46 +49,6 @@ import org.soluvas.commons.Sluggable;
  */
 public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	
-	/**
-	 * The default value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPositioner()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Integer POSITIONER_EDEFAULT = new Integer(0);
-
-	/**
-	 * The cached value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPositioner()
-	 * @generated
-	 * @ordered
-	 */
-	protected Integer positioner = POSITIONER_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getSlug() <em>Slug</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSlug()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SLUG_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSlug() <em>Slug</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSlug()
-	 * @generated
-	 * @ordered
-	 */
-	protected String slug = SLUG_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -127,6 +88,46 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPositioner()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer POSITIONER_EDEFAULT = new Integer(0);
+
+	/**
+	 * The cached value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPositioner()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer positioner = POSITIONER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSlug() <em>Slug</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSlug()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SLUG_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSlug() <em>Slug</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSlug()
+	 * @generated
+	 * @ordered
+	 */
+	protected String slug = SLUG_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSlugPath() <em>Slug Path</em>}' attribute.
@@ -549,14 +550,14 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CommonsPackage.CATEGORY_INFO__POSITIONER:
-				return getPositioner();
-			case CommonsPackage.CATEGORY_INFO__SLUG:
-				return getSlug();
 			case CommonsPackage.CATEGORY_INFO__ID:
 				return getId();
 			case CommonsPackage.CATEGORY_INFO__NAME:
 				return getName();
+			case CommonsPackage.CATEGORY_INFO__POSITIONER:
+				return getPositioner();
+			case CommonsPackage.CATEGORY_INFO__SLUG:
+				return getSlug();
 			case CommonsPackage.CATEGORY_INFO__SLUG_PATH:
 				return getSlugPath();
 			case CommonsPackage.CATEGORY_INFO__COLOR:
@@ -585,17 +586,17 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CommonsPackage.CATEGORY_INFO__POSITIONER:
-				setPositioner((Integer)newValue);
-				return;
-			case CommonsPackage.CATEGORY_INFO__SLUG:
-				setSlug((String)newValue);
-				return;
 			case CommonsPackage.CATEGORY_INFO__ID:
 				setId((String)newValue);
 				return;
 			case CommonsPackage.CATEGORY_INFO__NAME:
 				setName((String)newValue);
+				return;
+			case CommonsPackage.CATEGORY_INFO__POSITIONER:
+				setPositioner((Integer)newValue);
+				return;
+			case CommonsPackage.CATEGORY_INFO__SLUG:
+				setSlug((String)newValue);
 				return;
 			case CommonsPackage.CATEGORY_INFO__SLUG_PATH:
 				setSlugPath((String)newValue);
@@ -631,17 +632,17 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CommonsPackage.CATEGORY_INFO__POSITIONER:
-				setPositioner(POSITIONER_EDEFAULT);
-				return;
-			case CommonsPackage.CATEGORY_INFO__SLUG:
-				setSlug(SLUG_EDEFAULT);
-				return;
 			case CommonsPackage.CATEGORY_INFO__ID:
 				setId(ID_EDEFAULT);
 				return;
 			case CommonsPackage.CATEGORY_INFO__NAME:
 				setName(NAME_EDEFAULT);
+				return;
+			case CommonsPackage.CATEGORY_INFO__POSITIONER:
+				setPositioner(POSITIONER_EDEFAULT);
+				return;
+			case CommonsPackage.CATEGORY_INFO__SLUG:
+				setSlug(SLUG_EDEFAULT);
 				return;
 			case CommonsPackage.CATEGORY_INFO__SLUG_PATH:
 				setSlugPath(SLUG_PATH_EDEFAULT);
@@ -676,14 +677,14 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CommonsPackage.CATEGORY_INFO__POSITIONER:
-				return POSITIONER_EDEFAULT == null ? positioner != null : !POSITIONER_EDEFAULT.equals(positioner);
-			case CommonsPackage.CATEGORY_INFO__SLUG:
-				return SLUG_EDEFAULT == null ? slug != null : !SLUG_EDEFAULT.equals(slug);
 			case CommonsPackage.CATEGORY_INFO__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case CommonsPackage.CATEGORY_INFO__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case CommonsPackage.CATEGORY_INFO__POSITIONER:
+				return POSITIONER_EDEFAULT == null ? positioner != null : !POSITIONER_EDEFAULT.equals(positioner);
+			case CommonsPackage.CATEGORY_INFO__SLUG:
+				return SLUG_EDEFAULT == null ? slug != null : !SLUG_EDEFAULT.equals(slug);
 			case CommonsPackage.CATEGORY_INFO__SLUG_PATH:
 				return SLUG_PATH_EDEFAULT == null ? slugPath != null : !SLUG_PATH_EDEFAULT.equals(slugPath);
 			case CommonsPackage.CATEGORY_INFO__COLOR:
@@ -709,23 +710,6 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Sluggable.class) {
-			switch (derivedFeatureID) {
-				case CommonsPackage.CATEGORY_INFO__SLUG: return CommonsPackage.SLUGGABLE__SLUG;
-				default: return -1;
-			}
-		}
-		if (baseClass == Imageable.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == Identifiable.class) {
-			switch (derivedFeatureID) {
-				case CommonsPackage.CATEGORY_INFO__ID: return CommonsPackage.IDENTIFIABLE__ID;
-				default: return -1;
-			}
-		}
 		if (baseClass == Nameable.class) {
 			switch (derivedFeatureID) {
 				default: return -1;
@@ -734,6 +718,23 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 		if (baseClass == NameContainer.class) {
 			switch (derivedFeatureID) {
 				case CommonsPackage.CATEGORY_INFO__NAME: return CommonsPackage.NAME_CONTAINER__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == Positionable.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.CATEGORY_INFO__POSITIONER: return CommonsPackage.POSITIONABLE__POSITIONER;
+				default: return -1;
+			}
+		}
+		if (baseClass == Sluggable.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.CATEGORY_INFO__SLUG: return CommonsPackage.SLUGGABLE__SLUG;
+				default: return -1;
+			}
+		}
+		if (baseClass == Imageable.class) {
+			switch (derivedFeatureID) {
 				default: return -1;
 			}
 		}
@@ -753,23 +754,6 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Sluggable.class) {
-			switch (baseFeatureID) {
-				case CommonsPackage.SLUGGABLE__SLUG: return CommonsPackage.CATEGORY_INFO__SLUG;
-				default: return -1;
-			}
-		}
-		if (baseClass == Imageable.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == Identifiable.class) {
-			switch (baseFeatureID) {
-				case CommonsPackage.IDENTIFIABLE__ID: return CommonsPackage.CATEGORY_INFO__ID;
-				default: return -1;
-			}
-		}
 		if (baseClass == Nameable.class) {
 			switch (baseFeatureID) {
 				default: return -1;
@@ -778,6 +762,23 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 		if (baseClass == NameContainer.class) {
 			switch (baseFeatureID) {
 				case CommonsPackage.NAME_CONTAINER__NAME: return CommonsPackage.CATEGORY_INFO__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == Positionable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.POSITIONABLE__POSITIONER: return CommonsPackage.CATEGORY_INFO__POSITIONER;
+				default: return -1;
+			}
+		}
+		if (baseClass == Sluggable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.SLUGGABLE__SLUG: return CommonsPackage.CATEGORY_INFO__SLUG;
+				default: return -1;
+			}
+		}
+		if (baseClass == Imageable.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}
@@ -800,14 +801,14 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (positioner: ");
-		result.append(positioner);
-		result.append(", slug: ");
-		result.append(slug);
-		result.append(", id: ");
+		result.append(" (id: ");
 		result.append(id);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", positioner: ");
+		result.append(positioner);
+		result.append(", slug: ");
+		result.append(slug);
 		result.append(", slugPath: ");
 		result.append(slugPath);
 		result.append(", color: ");

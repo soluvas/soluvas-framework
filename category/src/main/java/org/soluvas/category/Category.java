@@ -48,7 +48,7 @@ import com.google.common.collect.Iterables;
  * @model
  * @generated
  */
-public interface Category extends Parentable<Category>, CategoryLike, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo>, NsPrefixable {
+public interface Category extends CategoryLike, NsPrefixable, Parentable<Category>, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo> {
 	
 	public class ToCategoryInfo implements Function<Category, CategoryInfo> {
 		
