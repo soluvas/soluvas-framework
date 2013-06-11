@@ -41,10 +41,11 @@ import com.google.common.eventbus.EventBus;
 public class GitXmiTermRepository extends XmiTermRepository {
 	
 	private Map<String, Repository> gitRepos;
-
+	
 	public GitXmiTermRepository(String kindNsPrefix, String kindName,
 			List<URL> xmiResources, Map<String, File> xmiFiles, EventBus eventBus) {
 		super(kindNsPrefix, kindName, xmiResources, xmiFiles, eventBus);
+		GitUtils.disableStrictHostKeyChecking();
 		this.gitRepos = ImmutableMap.copyOf(Maps.transformValues(xmiFiles, new Function<File, Repository>() {
 			@Override @Nullable
 			public Repository apply(@Nullable File input) {

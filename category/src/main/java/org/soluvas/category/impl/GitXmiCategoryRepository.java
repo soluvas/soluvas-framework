@@ -18,6 +18,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.transport.PushResult;
 import org.joda.time.DateTime;
 import org.soluvas.data.DataException;
+import org.soluvas.data.impl.GitUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -45,6 +46,7 @@ public class GitXmiCategoryRepository extends XmiCategoryRepository {
 	public GitXmiCategoryRepository(
 			List<URL> xmiResources, Map<String, File> xmiFiles, EventBus eventBus) {
 		super(xmiResources, xmiFiles, eventBus);
+		GitUtils.disableStrictHostKeyChecking();
 		this.gitRepos = ImmutableMap.copyOf(Maps.transformValues(xmiFiles, new Function<File, Repository>() {
 			@Override @Nullable
 			public Repository apply(@Nullable File input) {
