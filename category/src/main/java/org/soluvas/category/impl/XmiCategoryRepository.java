@@ -165,8 +165,29 @@ public class XmiCategoryRepository
 				throw new IllegalArgumentException("NsPrefix " + entity.getNsPrefix() + " is read-only.");
 			}
 			
+			final CategoryContainer theParent;
+			if (entity.getParentUName() != null) {
+				final List<Category> catalogFlatCategories = CategoryUtils.flatten(xmiCatalog.getCategories());
+				try {
+					theParent = Iterables.find(catalogFlatCategories, new Predicate<Category>() {
+						@Override
+						public boolean apply(@Nullable Category input) {
+							return entity.getParentUName().equals(input.getNsPrefix() + "_" + input.getId());
+						}
+					});
+				} catch (NoSuchElementException e) {
+					throw new NoSuchElementException(String.format("Cannot add category '%s' to parent '%s' from %s containing %s (flattened) categories: %s",
+							entity.getId(), entity.getParentUName(), entity.getNsPrefix(), catalogFlatCategories.size(), 
+							Lists.transform(catalogFlatCategories, new org.soluvas.commons.IdFunction())));
+				}
+			} else {
+				theParent = xmiCatalog;
+			}
+			
 			final S added = EcoreUtil.copy(entity);
-			xmiCatalog.getCategories().add(added);
+			nullifyTransientAttributes(added);
+			
+			theParent.getCategories().add(added);
 			addedCategories.add(added);
 			changedNsPrefixes.add(entity.getNsPrefix());
 		}
@@ -213,11 +234,8 @@ public class XmiCategoryRepository
 			container.getCategories().remove(toRemove);
 			
 			final S modified = EcoreUtil.copy(entity);
-			modified.setParent(null); // avoid dangling HREF
-			modified.setParentUName(null); // no need to save this
-			// nullify "transient" attributes
-			modified.setCategoryCount(null);
-			modified.setLevel(null);
+			nullifyTransientAttributes(modified);
+			
 			container.getCategories().add(modified);
 			addedCategories.add(modified);
 			changedNsPrefixes.add(entity.getNsPrefix());
@@ -227,6 +245,16 @@ public class XmiCategoryRepository
 		catalogFilesChanged(changedNsPrefixes, String.format("Modified %d categories: %s", entities.size(), entities.keySet()));
 		log.info("Modified {} categories: {}", entities.size(), Iterables.limit(entities.keySet(), 10));
 		return addedCategories;
+	}
+
+	protected <S extends Category> void nullifyTransientAttributes(
+			final S modified) {
+		modified.setParent(null); // avoid dangling HREF
+		modified.setParentUName(null); // no need to save this
+		
+		// nullify "transient" attributes
+		modified.setCategoryCount(null);
+		modified.setLevel(null);
 	}
 
 	private void updateCatalogFiles(final Set<String> changedNsPrefixes) {
