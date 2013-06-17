@@ -101,14 +101,9 @@ public abstract class ImageTransformerImpl extends EObjectImpl implements ImageT
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
-	public ListenableFuture<List<UploadedImage>> transform(ImageConnector source, File sourceFile, String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+	public abstract ListenableFuture<List<UploadedImage>> transform(ImageConnector source, File sourceFile, String namespace, String imageId, ImageVariant sourceVariant, Map<ImageTransform, ImageVariant> transforms);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -185,8 +180,9 @@ public abstract class ImageTransformerImpl extends EObjectImpl implements ImageT
 						throw new ImageException(e, "Cannot create temporary file for downloading %s %s",
 								sourceVariant.getStyleCode(), imageId);
 					}
-					boolean downloaded = source.download(namespace, imageId, sourceVariant.getStyleCode(),
+					final boolean downloaded = source.download(namespace, imageId, sourceVariant.getStyleCode(),
 							sourceVariant.getStyleVariant(), sourceVariant.getExtension(), originalFile);
+					log.debug("Downloaded image {} {} to {}", sourceVariant.getStyleCode(), imageId, originalFile);
 					Preconditions.checkState(downloaded, "Cannot download %s %s", sourceVariant.getStyleCode(), imageId);
 					return originalFile;
 				}
