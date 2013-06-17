@@ -59,6 +59,7 @@ public class ImageMagickTransformerImplTest {
 	}
 	
 	/**
+	 * Source is ${user.home}/tmp/product/o/*.jpg
 	 * @throws java.lang.Exception
 	 */
 	@Before
@@ -107,6 +108,18 @@ public class ImageMagickTransformerImplTest {
 				EcoreUtil.copy(transform), destVariant3);
 		final List<UploadedImage> uploadeds = transformer.transform(
 				conn, null, "product", "neneng", sourceVariant, transforms).get();
+		log.info("Result: {}", uploadeds);
+	}
+
+	@Test
+	public void transformFileNameWithSpaces() throws InterruptedException, ExecutionException {
+		final ImageVariantImpl sourceVariant = new ImageVariantImpl("o", "o", "JPG");
+		final ImageVariantImpl destVariant = new ImageVariantImpl("s", "s", "jpg");
+		// constrain to width only, but free height, this is useful for dynamic grid layout, product view, and zoom view
+		final ResizeToFitImpl transform = new ResizeToFitImpl(75, null);
+		final Map<ImageTransform, ImageVariant> transforms = ImmutableMap.<ImageTransform, ImageVariant>of(transform, destVariant);
+		final List<UploadedImage> uploadeds = transformer.transform(
+				conn, null, "product", "214_T-0809008 teks", sourceVariant, transforms).get();
 		log.info("Result: {}", uploadeds);
 	}
 
