@@ -31,7 +31,7 @@ package org.soluvas.commons;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface CategoryLike extends Identifiable, NameContainer, Positionable, Sluggable, Imageable {
+public interface CategoryLike extends Identifiable, NsPrefixable, NameContainer, Positionable, Sluggable, Imageable {
 	/**
 	 * Returns the value of the '<em><b>Slug Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->

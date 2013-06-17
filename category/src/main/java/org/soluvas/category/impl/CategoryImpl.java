@@ -56,6 +56,7 @@ import com.google.common.collect.Iterables;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getPositioner <em>Positioner</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getSlug <em>Slug</em>}</li>
@@ -64,7 +65,6 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getImageId <em>Image Id</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getLevel <em>Level</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getCategoryCount <em>Category Count</em>}</li>
- *   <li>{@link org.soluvas.category.impl.CategoryImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getResourceUri <em>Resource Uri</em>}</li>
@@ -112,6 +112,26 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * @ordered
 	 */
 	protected String id = ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NS_PREFIX_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String nsPrefix = NS_PREFIX_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -272,26 +292,6 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * @ordered
 	 */
 	protected Long categoryCount = CATEGORY_COUNT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNsPrefix()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NS_PREFIX_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNsPrefix()
-	 * @generated
-	 * @ordered
-	 */
-	protected String nsPrefix = NS_PREFIX_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
@@ -1403,6 +1403,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		switch (featureID) {
 			case CategoryPackage.CATEGORY__ID:
 				return getId();
+			case CategoryPackage.CATEGORY__NS_PREFIX:
+				return getNsPrefix();
 			case CategoryPackage.CATEGORY__NAME:
 				return getName();
 			case CategoryPackage.CATEGORY__POSITIONER:
@@ -1419,8 +1421,6 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return getLevel();
 			case CategoryPackage.CATEGORY__CATEGORY_COUNT:
 				return getCategoryCount();
-			case CategoryPackage.CATEGORY__NS_PREFIX:
-				return getNsPrefix();
 			case CategoryPackage.CATEGORY__PARENT:
 				if (resolve) return getParent();
 				return basicGetParent();
@@ -1476,6 +1476,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__ID:
 				setId((String)newValue);
 				return;
+			case CategoryPackage.CATEGORY__NS_PREFIX:
+				setNsPrefix((String)newValue);
+				return;
 			case CategoryPackage.CATEGORY__NAME:
 				setName((String)newValue);
 				return;
@@ -1499,9 +1502,6 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return;
 			case CategoryPackage.CATEGORY__CATEGORY_COUNT:
 				setCategoryCount((Long)newValue);
-				return;
-			case CategoryPackage.CATEGORY__NS_PREFIX:
-				setNsPrefix((String)newValue);
 				return;
 			case CategoryPackage.CATEGORY__PARENT:
 				setParent((Category)newValue);
@@ -1573,6 +1573,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__ID:
 				setId(ID_EDEFAULT);
 				return;
+			case CategoryPackage.CATEGORY__NS_PREFIX:
+				setNsPrefix(NS_PREFIX_EDEFAULT);
+				return;
 			case CategoryPackage.CATEGORY__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -1596,9 +1599,6 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return;
 			case CategoryPackage.CATEGORY__CATEGORY_COUNT:
 				setCategoryCount(CATEGORY_COUNT_EDEFAULT);
-				return;
-			case CategoryPackage.CATEGORY__NS_PREFIX:
-				setNsPrefix(NS_PREFIX_EDEFAULT);
 				return;
 			case CategoryPackage.CATEGORY__PARENT:
 				setParent((Category)null);
@@ -1668,6 +1668,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		switch (featureID) {
 			case CategoryPackage.CATEGORY__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case CategoryPackage.CATEGORY__NS_PREFIX:
+				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
 			case CategoryPackage.CATEGORY__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case CategoryPackage.CATEGORY__POSITIONER:
@@ -1684,8 +1686,6 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return LEVEL_EDEFAULT == null ? level != null : !LEVEL_EDEFAULT.equals(level);
 			case CategoryPackage.CATEGORY__CATEGORY_COUNT:
 				return CATEGORY_COUNT_EDEFAULT == null ? categoryCount != null : !CATEGORY_COUNT_EDEFAULT.equals(categoryCount);
-			case CategoryPackage.CATEGORY__NS_PREFIX:
-				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
 			case CategoryPackage.CATEGORY__PARENT:
 				return parent != null;
 			case CategoryPackage.CATEGORY__RESOURCE_TYPE:
@@ -1735,6 +1735,12 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NsPrefixable.class) {
+			switch (derivedFeatureID) {
+				case CategoryPackage.CATEGORY__NS_PREFIX: return CommonsPackage.NS_PREFIXABLE__NS_PREFIX;
+				default: return -1;
+			}
+		}
 		if (baseClass == Nameable.class) {
 			switch (derivedFeatureID) {
 				default: return -1;
@@ -1760,12 +1766,6 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		}
 		if (baseClass == Imageable.class) {
 			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == NsPrefixable.class) {
-			switch (derivedFeatureID) {
-				case CategoryPackage.CATEGORY__NS_PREFIX: return CommonsPackage.NS_PREFIXABLE__NS_PREFIX;
 				default: return -1;
 			}
 		}
@@ -1816,6 +1816,12 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NsPrefixable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.NS_PREFIXABLE__NS_PREFIX: return CategoryPackage.CATEGORY__NS_PREFIX;
+				default: return -1;
+			}
+		}
 		if (baseClass == Nameable.class) {
 			switch (baseFeatureID) {
 				default: return -1;
@@ -1841,12 +1847,6 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		}
 		if (baseClass == Imageable.class) {
 			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == NsPrefixable.class) {
-			switch (baseFeatureID) {
-				case CommonsPackage.NS_PREFIXABLE__NS_PREFIX: return CategoryPackage.CATEGORY__NS_PREFIX;
 				default: return -1;
 			}
 		}
@@ -1902,6 +1902,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
+		result.append(", nsPrefix: ");
+		result.append(nsPrefix);
 		result.append(", name: ");
 		result.append(name);
 		result.append(", positioner: ");
@@ -1918,8 +1920,6 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		result.append(level);
 		result.append(", categoryCount: ");
 		result.append(categoryCount);
-		result.append(", nsPrefix: ");
-		result.append(nsPrefix);
 		result.append(", resourceType: ");
 		result.append(resourceType);
 		result.append(", resourceUri: ");

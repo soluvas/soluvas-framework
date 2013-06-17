@@ -15,8 +15,8 @@ import org.soluvas.commons.Informer;
 import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.ResourceAware;
-
 import org.soluvas.data.EntityLookup;
+
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -65,6 +65,7 @@ public interface Category extends CategoryLike, NsPrefixable, Parentable<Categor
 			final CategoryInfo catInfo = CommonsFactory.eINSTANCE.createCategoryInfo();
 			catInfo.setCategoryCount(cat.getCategoryCount());
 			catInfo.setColor(cat.getColor());
+			catInfo.setNsPrefix(cat.getNsPrefix());
 			catInfo.setId(cat.getId());
 			catInfo.setImageId(cat.getImageId());
 			catInfo.setLevel(cat.getLevel());

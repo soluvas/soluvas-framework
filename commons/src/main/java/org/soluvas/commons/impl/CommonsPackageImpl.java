@@ -3793,6 +3793,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		g1.getETypeArguments().add(g2);
 		objectsNotificationEClass.getEGenericSuperTypes().add(g1);
 		categoryLikeEClass.getESuperTypes().add(this.getIdentifiable());
+		categoryLikeEClass.getESuperTypes().add(this.getNsPrefixable());
 		categoryLikeEClass.getESuperTypes().add(this.getNameContainer());
 		categoryLikeEClass.getESuperTypes().add(this.getPositionable());
 		categoryLikeEClass.getESuperTypes().add(this.getSluggable());
