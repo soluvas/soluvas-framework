@@ -102,6 +102,10 @@ public class CategoryAdapterFactory extends AdapterFactoryImpl {
 				return createIdentifiableAdapter();
 			}
 			@Override
+			public Adapter caseNsPrefixable(NsPrefixable object) {
+				return createNsPrefixableAdapter();
+			}
+			@Override
 			public Adapter caseNameable(Nameable object) {
 				return createNameableAdapter();
 			}
@@ -124,10 +128,6 @@ public class CategoryAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCategoryLike(CategoryLike object) {
 				return createCategoryLikeAdapter();
-			}
-			@Override
-			public Adapter caseNsPrefixable(NsPrefixable object) {
-				return createNsPrefixableAdapter();
 			}
 			@Override
 			public <P> Adapter caseParentable(Parentable<P> object) {

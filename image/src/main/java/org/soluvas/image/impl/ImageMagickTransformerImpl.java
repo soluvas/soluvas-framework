@@ -19,7 +19,6 @@ import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.PumpStreamHandler;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.slf4j.Logger;
@@ -96,7 +95,8 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 					try {
 						final CommandLine cmd = new CommandLine("convert");
 						cmd.addArgument("-verbose");
-						cmd.addArgument(originalFile.getPath());
+						cmd.addArgument(originalFile.getPath(), false);
+						
 						if (transform instanceof ResizeToFill) {
 							final ResizeToFill fx = (ResizeToFill) transform;
 							final boolean progressive = fx.getWidth() >= 512;
@@ -167,7 +167,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 						// common arguments
 						cmd.addArgument("-quality");
 						cmd.addArgument(String.valueOf((int)(quality * 100f)));
-						cmd.addArgument(styledFile.getPath());
+						cmd.addArgument(styledFile.getPath(), false);
 						// Execute the cmd
 						final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 						final DefaultExecutor executor = new DefaultExecutor();

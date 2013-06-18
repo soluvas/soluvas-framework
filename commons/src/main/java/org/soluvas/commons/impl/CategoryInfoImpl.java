@@ -20,6 +20,7 @@ import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
+import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.Sluggable;
@@ -32,6 +33,7 @@ import org.soluvas.commons.Sluggable;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getPositioner <em>Positioner</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getSlug <em>Slug</em>}</li>
@@ -68,6 +70,26 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * @ordered
 	 */
 	protected String id = ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NS_PREFIX_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNsPrefix()
+	 * @generated
+	 * @ordered
+	 */
+	protected String nsPrefix = NS_PREFIX_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -342,6 +364,27 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getNsPrefix() {
+		return nsPrefix;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNsPrefix(String newNsPrefix) {
+		String oldNsPrefix = nsPrefix;
+		nsPrefix = newNsPrefix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CATEGORY_INFO__NS_PREFIX, oldNsPrefix, nsPrefix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getName() {
 		return name;
@@ -552,6 +595,8 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 		switch (featureID) {
 			case CommonsPackage.CATEGORY_INFO__ID:
 				return getId();
+			case CommonsPackage.CATEGORY_INFO__NS_PREFIX:
+				return getNsPrefix();
 			case CommonsPackage.CATEGORY_INFO__NAME:
 				return getName();
 			case CommonsPackage.CATEGORY_INFO__POSITIONER:
@@ -588,6 +633,9 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 		switch (featureID) {
 			case CommonsPackage.CATEGORY_INFO__ID:
 				setId((String)newValue);
+				return;
+			case CommonsPackage.CATEGORY_INFO__NS_PREFIX:
+				setNsPrefix((String)newValue);
 				return;
 			case CommonsPackage.CATEGORY_INFO__NAME:
 				setName((String)newValue);
@@ -635,6 +683,9 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 			case CommonsPackage.CATEGORY_INFO__ID:
 				setId(ID_EDEFAULT);
 				return;
+			case CommonsPackage.CATEGORY_INFO__NS_PREFIX:
+				setNsPrefix(NS_PREFIX_EDEFAULT);
+				return;
 			case CommonsPackage.CATEGORY_INFO__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -679,6 +730,8 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 		switch (featureID) {
 			case CommonsPackage.CATEGORY_INFO__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case CommonsPackage.CATEGORY_INFO__NS_PREFIX:
+				return NS_PREFIX_EDEFAULT == null ? nsPrefix != null : !NS_PREFIX_EDEFAULT.equals(nsPrefix);
 			case CommonsPackage.CATEGORY_INFO__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case CommonsPackage.CATEGORY_INFO__POSITIONER:
@@ -710,6 +763,12 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NsPrefixable.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.CATEGORY_INFO__NS_PREFIX: return CommonsPackage.NS_PREFIXABLE__NS_PREFIX;
+				default: return -1;
+			}
+		}
 		if (baseClass == Nameable.class) {
 			switch (derivedFeatureID) {
 				default: return -1;
@@ -754,6 +813,12 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NsPrefixable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.NS_PREFIXABLE__NS_PREFIX: return CommonsPackage.CATEGORY_INFO__NS_PREFIX;
+				default: return -1;
+			}
+		}
 		if (baseClass == Nameable.class) {
 			switch (baseFeatureID) {
 				default: return -1;
@@ -803,6 +868,8 @@ public class CategoryInfoImpl extends EObjectImpl implements CategoryInfo {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
+		result.append(", nsPrefix: ");
+		result.append(nsPrefix);
 		result.append(", name: ");
 		result.append(name);
 		result.append(", positioner: ");
