@@ -307,6 +307,10 @@
         <element xmi:type="ecore:EAttribute" href="data.ecore#//Term/kindName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_HU-ocYFREeK7_socdZe_qQ"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_EH-V4dgBEeKdbtDX5wlT0w" type="2001">
+        <element xmi:type="ecore:EAttribute" href="data.ecore#//Term/bordered"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EH-V4tgBEeKdbtDX5wlT0w"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ZlIW8kjmEeKiGv-Fpyd8oQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_ZlIW80jmEeKiGv-Fpyd8oQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ZlIW9EjmEeKiGv-Fpyd8oQ"/>

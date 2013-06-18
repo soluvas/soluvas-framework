@@ -24,6 +24,7 @@ import org.soluvas.commons.Translatable;
  *   <li>{@link org.soluvas.data.Term#getImageId <em>Image Id</em>}</li>
  *   <li>{@link org.soluvas.data.Term#getKindNsPrefix <em>Kind Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.Term#getKindName <em>Kind Name</em>}</li>
+ *   <li>{@link org.soluvas.data.Term#isBordered <em>Bordered</em>}</li>
  * </ul>
  * </p>
  *
@@ -164,6 +165,32 @@ public interface Term extends TermContainer, BundleAware, NameContainer, Resourc
 	 * @generated
 	 */
 	void setKindName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Bordered</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Bordered</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Bordered</em>' attribute.
+	 * @see #setBordered(boolean)
+	 * @see org.soluvas.data.DataPackage#getTerm_Bordered()
+	 * @model
+	 * @generated
+	 */
+	boolean isBordered();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Term#isBordered <em>Bordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bordered</em>' attribute.
+	 * @see #isBordered()
+	 * @generated
+	 */
+	void setBordered(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

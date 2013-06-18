@@ -245,6 +245,7 @@
         <details key="documentation" value="The name of the {@link Kind} of this term. For example, for kind &quot;base_Color&quot;, name is &quot;Color&quot;.&#xA;&#xA;Term is optionally linked to {@link Kind}, not to {@link Attribute}."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bordered" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ListVocab" eSuperTypes="#//Vocab">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">

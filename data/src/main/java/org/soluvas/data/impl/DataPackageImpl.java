@@ -688,6 +688,15 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTerm_Bordered() {
+		return (EAttribute)termEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getListVocab() {
 		return listVocabEClass;
@@ -952,6 +961,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		createEAttribute(termEClass, TERM__IMAGE_ID);
 		createEAttribute(termEClass, TERM__KIND_NS_PREFIX);
 		createEAttribute(termEClass, TERM__KIND_NAME);
+		createEAttribute(termEClass, TERM__BORDERED);
 
 		listVocabEClass = createEClass(LIST_VOCAB);
 
@@ -1178,6 +1188,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEAttribute(getTerm_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTerm_KindNsPrefix(), theEcorePackage.getEString(), "kindNsPrefix", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTerm_KindName(), theEcorePackage.getEString(), "kindName", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTerm_Bordered(), ecorePackage.getEBoolean(), "bordered", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(termEClass, theEcorePackage.getEString(), "getQName", 0, 1, IS_UNIQUE, IS_ORDERED);
 

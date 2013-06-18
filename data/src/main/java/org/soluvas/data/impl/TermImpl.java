@@ -65,6 +65,7 @@ import com.google.common.base.Strings;
  *   <li>{@link org.soluvas.data.impl.TermImpl#getImageId <em>Image Id</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getKindNsPrefix <em>Kind Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getKindName <em>Kind Name</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#isBordered <em>Bordered</em>}</li>
  * </ul>
  * </p>
  *
@@ -404,6 +405,26 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @ordered
 	 */
 	protected String kindName = KIND_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isBordered() <em>Bordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isBordered()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean BORDERED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isBordered() <em>Bordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isBordered()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean bordered = BORDERED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -837,6 +858,27 @@ public class TermImpl extends EObjectImpl implements Term {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isBordered() {
+		return bordered;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBordered(boolean newBordered) {
+		boolean oldBordered = bordered;
+		bordered = newBordered;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__BORDERED, oldBordered, bordered));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public String getQName() {
@@ -913,6 +955,8 @@ public class TermImpl extends EObjectImpl implements Term {
 				return getKindNsPrefix();
 			case DataPackage.TERM__KIND_NAME:
 				return getKindName();
+			case DataPackage.TERM__BORDERED:
+				return isBordered();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -981,6 +1025,9 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__KIND_NAME:
 				setKindName((String)newValue);
 				return;
+			case DataPackage.TERM__BORDERED:
+				setBordered((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1047,6 +1094,9 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__KIND_NAME:
 				setKindName(KIND_NAME_EDEFAULT);
 				return;
+			case DataPackage.TERM__BORDERED:
+				setBordered(BORDERED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1095,6 +1145,8 @@ public class TermImpl extends EObjectImpl implements Term {
 				return KIND_NS_PREFIX_EDEFAULT == null ? kindNsPrefix != null : !KIND_NS_PREFIX_EDEFAULT.equals(kindNsPrefix);
 			case DataPackage.TERM__KIND_NAME:
 				return KIND_NAME_EDEFAULT == null ? kindName != null : !KIND_NAME_EDEFAULT.equals(kindName);
+			case DataPackage.TERM__BORDERED:
+				return bordered != BORDERED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1273,6 +1325,8 @@ public class TermImpl extends EObjectImpl implements Term {
 		result.append(kindNsPrefix);
 		result.append(", kindName: ");
 		result.append(kindName);
+		result.append(", bordered: ");
+		result.append(bordered);
 		result.append(')');
 		return result.toString();
 	}
