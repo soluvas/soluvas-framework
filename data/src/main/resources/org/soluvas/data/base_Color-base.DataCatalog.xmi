@@ -46,7 +46,7 @@
   <terms name="dimgrey" nsPrefix="base" color="dimgrey" displayName="Dim Grey" kindNsPrefix="base" kindName="Color"/>
   <terms name="dodgerblue" nsPrefix="base" color="dodgerblue" displayName="Dodger Blue" kindNsPrefix="base" kindName="Color"/>
   <terms name="firebrick" nsPrefix="base" color="firebrick" displayName="Fire Brick" kindNsPrefix="base" kindName="Color"/>
-  <terms name="floralwhite" nsPrefix="base" color="floralwhite" displayName="Floral White" kindNsPrefix="base" kindName="Color" borderd="true"/>
+  <terms name="floralwhite" nsPrefix="base" color="floralwhite" displayName="Floral White" kindNsPrefix="base" kindName="Color" bordered="true"/>
   <terms name="forestgreen" nsPrefix="base" color="forestgreen" displayName="Forest Green" kindNsPrefix="base" kindName="Color"/>
   <terms name="fuchsia" nsPrefix="base" color="fuchsia" displayName="Fuchsia" kindNsPrefix="base" kindName="Color"/>
   <terms name="gainsboro" nsPrefix="base" color="gainsboro" displayName="Gainsboro" kindNsPrefix="base" kindName="Color"/>
