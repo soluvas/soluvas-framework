@@ -29,7 +29,7 @@ package org.soluvas.image;
  * @model
  * @generated
  */
-public interface ResizeToFill extends ImageTransform, DimensionLike {
+public interface ResizeToFill extends ImageTransform, DimensionLike, WatermarkLike {
 
 	/**
 	 * Returns the value of the '<em><b>Gravity</b></em>' attribute.

@@ -33,6 +33,7 @@ import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.ProgressStatus;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.impl.ProgressMonitorImpl;
+import org.soluvas.image.DimensionLike;
 import org.soluvas.image.DisplayImage;
 import org.soluvas.image.DuplicateIdHandling;
 import org.soluvas.image.FileExport;
@@ -42,6 +43,7 @@ import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImageManager;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageStyle;
+import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageType;
 import org.soluvas.image.ImageTypes;
 import org.soluvas.image.store.Image;
@@ -451,13 +453,16 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			}
 		});
 		if (styleDef.isPresent()) {
-			final Integer width = styleDef.get().getMaxWidth();
-			if (displayImage.getWidth() == null && width != null) {
-				displayImage.setWidth(width);
-			}
-			final Integer height = styleDef.get().getMaxHeight();
-			if (displayImage.getHeight() == null && height != null) {
-				displayImage.setHeight(height);
+			final ImageTransform fx = styleDef.get().getTransform();
+			if (fx instanceof DimensionLike) {
+				final Integer maxWidth = ((DimensionLike) fx).getWidth();
+				if (displayImage.getWidth() == null && maxWidth != null) {
+					displayImage.setWidth(maxWidth);
+				}
+				final Integer maxHeight = ((DimensionLike) fx).getHeight();
+				if (displayImage.getHeight() == null && maxHeight != null) {
+					displayImage.setHeight(maxHeight);
+				}
 			}
 		}
 		
@@ -496,13 +501,16 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			}
 		});
 		if (styleDef.isPresent()) {
-			final Integer width = styleDef.get().getMaxWidth();
-			if (displayImage.getWidth() == null && width != null) {
-				displayImage.setWidth(width);
-			}
-			final Integer height = styleDef.get().getMaxHeight();
-			if (displayImage.getHeight() == null && height != null) {
-				displayImage.setHeight(height);
+			final ImageTransform fx = styleDef.get().getTransform();
+			if (fx instanceof DimensionLike) {
+				final Integer maxWidth = ((DimensionLike) fx).getWidth();
+				if (displayImage.getWidth() == null && maxWidth != null) {
+					displayImage.setWidth(maxWidth);
+				}
+				final Integer maxHeight = ((DimensionLike) fx).getHeight();
+				if (displayImage.getHeight() == null && maxHeight != null) {
+					displayImage.setHeight(maxHeight);
+				}
 			}
 		}
 		

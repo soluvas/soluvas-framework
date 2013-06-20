@@ -45,8 +45,6 @@ import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageTransformer;
 import org.soluvas.image.ImageVariant;
 import org.soluvas.image.UploadedImage;
-import org.soluvas.image.impl.ResizeToFillImpl;
-import org.soluvas.image.impl.ResizeToFitImpl;
 import org.soluvas.image.util.ImageUtils;
 import org.soluvas.mongo.MongoUtils;
 
@@ -141,7 +139,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	private final String namespace;
 	private final String mongoUri;
 	private DBCollection mongoColl;
-	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<String, ImageStyle>();
+	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<>();
 	
 	private DavConnector innerConnector;
 	private final ImageConnector connector;
@@ -590,14 +588,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		sourceVariant.setExtension(original.extension);
 		final ImmutableMap.Builder<ImageTransform, ImageVariant> transformsBuilder = ImmutableMap.builder();
 		for (final ImageStyle style : styles.values()) {
-			final ImageTransform fx;
-			if (style.getMaxWidth() != null && style.getMaxHeight() != null) {
-				// create ResizeToFill if both maxWidth and maxHeight is filled
-				fx = new ResizeToFillImpl(style.getMaxWidth(), style.getMaxHeight(), style.getGravity());
-			} else {
-				// otherwise assume ResizeToFit
-				fx = new ResizeToFitImpl(style.getMaxWidth(), style.getMaxHeight());
-			}
+			final ImageTransform fx = style.getTransform();
 			final ImageVariant dest = ImageFactory.eINSTANCE.createImageVariant();
 			dest.setStyleCode(style.getCode());
 			// TODO: support variant

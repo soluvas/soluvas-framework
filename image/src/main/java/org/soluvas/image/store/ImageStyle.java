@@ -1,6 +1,9 @@
 package org.soluvas.image.store;
 
+import org.soluvas.image.ImageTransform;
 import org.soluvas.image.TransformGravity;
+import org.soluvas.image.impl.ResizeToFillImpl;
+import org.soluvas.image.impl.ResizeToFitImpl;
 
 /**
  * Description on how to process an image to a different style like thumbnail.
@@ -12,18 +15,20 @@ public class ImageStyle {
 
 	private final String name;
 	private final String code;
-	private final Integer maxWidth;
-	private final Integer maxHeight;
-	private final float quality = 0.85f;
-	private final TransformGravity gravity;
+	private ImageTransform transform;
 
 	public ImageStyle(String name, String code, Integer maxWidth, Integer maxHeight) {
 		super();
 		this.name = name;
 		this.code = code;
-		this.maxWidth = maxWidth;
-		this.maxHeight = maxHeight;
-		this.gravity = TransformGravity.CENTER;
+		
+		if (maxWidth != null && maxHeight != null) {
+			// create ResizeToFill if both maxWidth and maxHeight is filled
+			transform = new ResizeToFillImpl(maxWidth, maxHeight, TransformGravity.CENTER);
+		} else {
+			// otherwise assume ResizeToFit
+			transform = new ResizeToFitImpl(maxWidth, maxHeight);
+		}
 	}
 	
 	/**
@@ -38,9 +43,21 @@ public class ImageStyle {
 		super();
 		this.name = name;
 		this.code = code;
-		this.maxWidth = maxWidth;
-		this.maxHeight = maxHeight;
-		this.gravity = gravity;
+		
+		if (maxWidth != null && maxHeight != null) {
+			// create ResizeToFill if both maxWidth and maxHeight is filled
+			transform = new ResizeToFillImpl(maxWidth, maxHeight, gravity);
+		} else {
+			// otherwise assume ResizeToFit
+			transform = new ResizeToFitImpl(maxWidth, maxHeight);
+		}
+	}
+
+	public ImageStyle(String name, String code, ImageTransform transform) {
+		super();
+		this.name = name;
+		this.code = code;
+		this.transform = transform;
 	}
 
 	/**
@@ -62,42 +79,14 @@ public class ImageStyle {
 		return name;
 	}
 
-	/**
-	 * Maximum width of this style.
-	 * 
-	 * @return
-	 */
-	public Integer getMaxWidth() {
-		return maxWidth;
-	}
-
-	/**
-	 * Maximum height of this style.
-	 * 
-	 * @return
-	 */
-	public Integer getMaxHeight() {
-		return maxHeight;
-	}
-
-	public float getQuality() {
-		return quality;
-	}
-
-	public TransformGravity getGravity() {
-		return gravity;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "ImageStyle [" + (name != null ? "name=" + name + ", " : "")
-				+ (code != null ? "code=" + code + ", " : "") + "maxWidth="
-				+ maxWidth + ", maxHeight=" + maxHeight + ", quality="
-				+ quality + ", "
-				+ (gravity != null ? "gravity=" + gravity : "") + "]";
+				+ (code != null ? "code=" + code + ", " : "") + "]";
+	}
+
+	public ImageTransform getTransform() {
+		return transform;
 	}
 
 }

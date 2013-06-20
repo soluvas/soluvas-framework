@@ -2,7 +2,6 @@ package org.soluvas.image.util;
 
 import java.awt.Dimension;
 import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 
 import javax.imageio.ImageIO;
@@ -18,6 +17,7 @@ import org.soluvas.image.impl.DavConnectorImpl;
 import org.soluvas.image.impl.S3ConnectorImpl;
 
 import com.amazonaws.Protocol;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -63,8 +63,8 @@ public class ImageUtils {
 	
 	public static Dimension getDimension(File file) {
 		try {
-			final ImageInputStream in = ImageIO.createImageInputStream(file);
-			try {
+			Preconditions.checkState(file.exists(), "Image file '%s' does not exist", file);
+			try (final ImageInputStream in = ImageIO.createImageInputStream(file)) {
 				final ImageReader reader = Iterators.get(ImageIO.getImageReaders(in), 0);
 				try {
 					reader.setInput(in);
@@ -72,10 +72,8 @@ public class ImageUtils {
 				} finally {
 					reader.dispose();
 				}
-			} finally {
-				in.close();
-			}		
-		} catch (IOException e) {
+			}
+		} catch (Exception e) {
 			throw new ImageException("Cannot get image dimension for " + file, e);
 		}
 	}

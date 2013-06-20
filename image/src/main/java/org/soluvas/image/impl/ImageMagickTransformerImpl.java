@@ -34,6 +34,7 @@ import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.ResizeToFit;
 import org.soluvas.image.TransformGravity;
 import org.soluvas.image.UploadedImage;
+import org.soluvas.image.WatermarkLike;
 import org.soluvas.image.util.ImageUtils;
 
 import com.google.common.base.Function;
@@ -93,6 +94,9 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 					}
 					
 					try {
+						/*To Resize + Watermarking:
+						 * rudi@rudi ~/tmp/test_image $ convert image2.jpg -verbose -gravity center -resize 800x700^ -extent 800x700 -quality 0.85f*100f miff:- | composite -watermark 15% -gravity center watermark.png - new.jpg*/
+
 						final CommandLine cmd = new CommandLine("convert");
 						cmd.addArgument("-verbose");
 						cmd.addArgument(originalFile.getPath(), false);
@@ -167,27 +171,83 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 						// common arguments
 						cmd.addArgument("-quality");
 						cmd.addArgument(String.valueOf((int)(quality * 100f)));
-						cmd.addArgument(styledFile.getPath(), false);
-						// Execute the cmd
-						final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-						final DefaultExecutor executor = new DefaultExecutor();
-						executor.setStreamHandler(new PumpStreamHandler(buffer));
-						// limit ImageMagick to single-threaded if we use custom executor
-						final Map<String, String> environment = getExecutor() == MoreExecutors.sameThreadExecutor() ? ImmutableMap.<String, String>of()
-								: ImmutableMap.of("MAGICK_THREAD_LIMIT", "1");
-						log.debug("Transforming using: {} {}", environment, cmd);
-						int executionResult;
-						try {
-							executionResult = executor.execute(cmd, environment);
-						} catch (ExecuteException e) {
-							throw new ImageException(e, "Cannot execute %s %s: %s", environment, cmd, buffer);
+
+						//Watermarking enabled?
+						File resizedFile = styledFile;
+						File watermarkFile = null;
+						if (transform instanceof WatermarkLike) {
+							watermarkFile = ((WatermarkLike) transform).getWatermarkFile();
+							if (watermarkFile != null) {
+								resizedFile = File.createTempFile("watermark_", ".miff");
+							}
 						}
-						log.info("{} {} returned {}: {}", environment, cmd, executionResult, buffer);
+						cmd.addArgument(resizedFile.getPath(), false);
 						
-						return styledFile;
+						try {
+							// Execute the cmd
+							final DefaultExecutor executor = new DefaultExecutor();
+							// limit ImageMagick to single-threaded if we use custom executor
+							final Map<String, String> environment = getExecutor() == MoreExecutors.sameThreadExecutor() ? ImmutableMap.<String, String>of()
+									: ImmutableMap.of("MAGICK_THREAD_LIMIT", "1");
+							executeCmd(cmd, executor, environment);
+							
+							// Watermarking
+							if (watermarkFile != null) {
+								final CommandLine watermarkCmd = new CommandLine("composite");
+								watermarkCmd.addArgument("-watermark");
+								watermarkCmd.addArgument("15%");
+								watermarkCmd.addArgument("-gravity");
+								watermarkCmd.addArgument("center");
+								watermarkCmd.addArgument(watermarkFile.getPath(), false); // watermark.png
+								watermarkCmd.addArgument(resizedFile.getPath(), false); // miff
+								watermarkCmd.addArgument(styledFile.getPath(), false); // result
+								
+								// Execute the cmd
+//								final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+//								executor.setStreamHandler(new PumpStreamHandler(buffer));
+//								log.debug("Watermarking using: {} {}", environment, watermarkCmd);
+//								int executionResult;
+//								try {
+//									executionResult = executor.execute(watermarkCmd, environment);
+//								} catch (ExecuteException e) {
+//									throw new ImageException(e, "Cannot execute %s %s: %s", environment, watermarkCmd, buffer);
+//								}
+//								log.info("{} {} returned {}: {}", environment, watermarkCmd, executionResult, buffer);
+								executeCmd(watermarkCmd, executor, environment);
+							}
+							
+							return styledFile;
+						} finally {
+							// delete temporary resizedFile if watermark is enabled
+							if (watermarkFile != null) {
+								resizedFile.delete();
+							}
+						}
 					} catch (final Exception e) {
 						throw new ImageException("Error resizing " + imageId + " to " + dest.getStyleCode() + ", destination: " + styledFile, e);
 					}
+				}
+
+				/**
+				 * @param cmd
+				 * @param executor
+				 * @param environment
+				 * @throws IOException
+				 */
+				protected void executeCmd(final CommandLine cmd,
+						final DefaultExecutor executor,
+						final Map<String, String> environment)
+						throws IOException {
+					final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+					executor.setStreamHandler(new PumpStreamHandler(buffer));
+					log.debug("Transforming using: {} {}", environment, cmd);
+					int executionResult;
+					try {
+						executionResult = executor.execute(cmd, environment);
+					} catch (ExecuteException e) {
+						throw new ImageException(e, "Cannot execute %s %s: %s", environment, cmd, buffer);
+					}
+					log.info("{} {} returned {}: {}", environment, cmd, executionResult, buffer);
 				}
 			});
 			

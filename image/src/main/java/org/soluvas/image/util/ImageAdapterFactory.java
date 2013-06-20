@@ -154,6 +154,10 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 				return createStyledImageEntryAdapter();
 			}
 			@Override
+			public Adapter caseWatermarkLike(WatermarkLike object) {
+				return createWatermarkLikeAdapter();
+			}
+			@Override
 			public Adapter caseIdentifiable(Identifiable object) {
 				return createIdentifiableAdapter();
 			}
@@ -470,6 +474,20 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStyledImageEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.WatermarkLike <em>Watermark Like</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.WatermarkLike
+	 * @generated
+	 */
+	public Adapter createWatermarkLikeAdapter() {
 		return null;
 	}
 

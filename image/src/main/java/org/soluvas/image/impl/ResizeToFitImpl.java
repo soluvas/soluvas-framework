@@ -2,6 +2,7 @@
  */
 package org.soluvas.image.impl;
 
+import java.io.File;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -9,6 +10,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.soluvas.image.DimensionLike;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ResizeToFit;
+import org.soluvas.image.WatermarkLike;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,6 +21,7 @@ import org.soluvas.image.ResizeToFit;
  * <ul>
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getHeight <em>Height</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getWatermarkFile <em>Watermark File</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getOnlyShrinkLarger <em>Only Shrink Larger</em>}</li>
  * </ul>
  * </p>
@@ -65,6 +68,26 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * @ordered
 	 */
 	protected Integer height = HEIGHT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getWatermarkFile() <em>Watermark File</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWatermarkFile()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final File WATERMARK_FILE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getWatermarkFile() <em>Watermark File</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWatermarkFile()
+	 * @generated
+	 * @ordered
+	 */
+	protected File watermarkFile = WATERMARK_FILE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getOnlyShrinkLarger() <em>Only Shrink Larger</em>}' attribute.
@@ -163,6 +186,27 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public File getWatermarkFile() {
+		return watermarkFile;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWatermarkFile(File newWatermarkFile) {
+		File oldWatermarkFile = watermarkFile;
+		watermarkFile = newWatermarkFile;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImagePackage.RESIZE_TO_FIT__WATERMARK_FILE, oldWatermarkFile, watermarkFile));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Boolean getOnlyShrinkLarger() {
 		return onlyShrinkLarger;
@@ -193,6 +237,8 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				return getWidth();
 			case ImagePackage.RESIZE_TO_FIT__HEIGHT:
 				return getHeight();
+			case ImagePackage.RESIZE_TO_FIT__WATERMARK_FILE:
+				return getWatermarkFile();
 			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
 				return getOnlyShrinkLarger();
 		}
@@ -212,6 +258,9 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				return;
 			case ImagePackage.RESIZE_TO_FIT__HEIGHT:
 				setHeight((Integer)newValue);
+				return;
+			case ImagePackage.RESIZE_TO_FIT__WATERMARK_FILE:
+				setWatermarkFile((File)newValue);
 				return;
 			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
 				setOnlyShrinkLarger((Boolean)newValue);
@@ -234,6 +283,9 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 			case ImagePackage.RESIZE_TO_FIT__HEIGHT:
 				setHeight(HEIGHT_EDEFAULT);
 				return;
+			case ImagePackage.RESIZE_TO_FIT__WATERMARK_FILE:
+				setWatermarkFile(WATERMARK_FILE_EDEFAULT);
+				return;
 			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
 				setOnlyShrinkLarger(ONLY_SHRINK_LARGER_EDEFAULT);
 				return;
@@ -253,6 +305,8 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				return WIDTH_EDEFAULT == null ? width != null : !WIDTH_EDEFAULT.equals(width);
 			case ImagePackage.RESIZE_TO_FIT__HEIGHT:
 				return HEIGHT_EDEFAULT == null ? height != null : !HEIGHT_EDEFAULT.equals(height);
+			case ImagePackage.RESIZE_TO_FIT__WATERMARK_FILE:
+				return WATERMARK_FILE_EDEFAULT == null ? watermarkFile != null : !WATERMARK_FILE_EDEFAULT.equals(watermarkFile);
 			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
 				return ONLY_SHRINK_LARGER_EDEFAULT == null ? onlyShrinkLarger != null : !ONLY_SHRINK_LARGER_EDEFAULT.equals(onlyShrinkLarger);
 		}
@@ -273,6 +327,12 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				default: return -1;
 			}
 		}
+		if (baseClass == WatermarkLike.class) {
+			switch (derivedFeatureID) {
+				case ImagePackage.RESIZE_TO_FIT__WATERMARK_FILE: return ImagePackage.WATERMARK_LIKE__WATERMARK_FILE;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -287,6 +347,12 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 			switch (baseFeatureID) {
 				case ImagePackage.DIMENSION_LIKE__WIDTH: return ImagePackage.RESIZE_TO_FIT__WIDTH;
 				case ImagePackage.DIMENSION_LIKE__HEIGHT: return ImagePackage.RESIZE_TO_FIT__HEIGHT;
+				default: return -1;
+			}
+		}
+		if (baseClass == WatermarkLike.class) {
+			switch (baseFeatureID) {
+				case ImagePackage.WATERMARK_LIKE__WATERMARK_FILE: return ImagePackage.RESIZE_TO_FIT__WATERMARK_FILE;
 				default: return -1;
 			}
 		}
@@ -307,6 +373,8 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 		result.append(width);
 		result.append(", height: ");
 		result.append(height);
+		result.append(", watermarkFile: ");
+		result.append(watermarkFile);
 		result.append(", onlyShrinkLarger: ");
 		result.append(onlyShrinkLarger);
 		result.append(')');

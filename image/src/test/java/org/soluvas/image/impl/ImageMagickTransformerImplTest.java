@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.soluvas.image.impl;
 
 import java.io.File;
@@ -120,6 +117,30 @@ public class ImageMagickTransformerImplTest {
 		final Map<ImageTransform, ImageVariant> transforms = ImmutableMap.<ImageTransform, ImageVariant>of(transform, destVariant);
 		final List<UploadedImage> uploadeds = transformer.transform(
 				conn, null, "product", "214_T-0809008 teks", sourceVariant, transforms).get();
+		log.info("Result: {}", uploadeds);
+	}
+
+	@Test
+	public void transformWithWatermark75px() throws InterruptedException, ExecutionException {
+		final ImageVariantImpl sourceVariant = new ImageVariantImpl("o", "o", "jpg");
+		final ImageVariantImpl destVariant = new ImageVariantImpl("s", "s", "jpg");
+		final ResizeToFitImpl transform = new ResizeToFitImpl(75, null);
+		transform.setWatermarkFile(new File(System.getProperty("user.home"), "git/bedi-model/berbatik_common/watermark.png"));
+		final Map<ImageTransform, ImageVariant> transforms = ImmutableMap.<ImageTransform, ImageVariant>of(transform, destVariant);
+		final List<UploadedImage> uploadeds = transformer.transform(
+				conn, null, "product", "image2", sourceVariant, transforms).get();
+		log.info("Result: {}", uploadeds);
+	}
+
+	@Test
+	public void transformWithWatermark800px() throws InterruptedException, ExecutionException {
+		final ImageVariantImpl sourceVariant = new ImageVariantImpl("o", "o", "jpg");
+		final ImageVariantImpl destVariant = new ImageVariantImpl("n", "n", "jpg");
+		final ResizeToFitImpl transform = new ResizeToFitImpl(800, null);
+		transform.setWatermarkFile(new File(System.getProperty("user.home"), "git/bedi-model/berbatik_common/watermark.png"));
+		final Map<ImageTransform, ImageVariant> transforms = ImmutableMap.<ImageTransform, ImageVariant>of(transform, destVariant);
+		final List<UploadedImage> uploadeds = transformer.transform(
+				conn, null, "product", "image2", sourceVariant, transforms).get();
 		log.info("Result: {}", uploadeds);
 	}
 

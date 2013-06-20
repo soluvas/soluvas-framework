@@ -135,6 +135,7 @@ public class ImageSwitch<T> extends Switch<T> {
 				T result = caseResizeToFit(resizeToFit);
 				if (result == null) result = caseImageTransform(resizeToFit);
 				if (result == null) result = caseDimensionLike(resizeToFit);
+				if (result == null) result = caseWatermarkLike(resizeToFit);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -143,6 +144,7 @@ public class ImageSwitch<T> extends Switch<T> {
 				T result = caseResizeToFill(resizeToFill);
 				if (result == null) result = caseImageTransform(resizeToFill);
 				if (result == null) result = caseDimensionLike(resizeToFill);
+				if (result == null) result = caseWatermarkLike(resizeToFill);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -210,6 +212,12 @@ public class ImageSwitch<T> extends Switch<T> {
 			case ImagePackage.STYLED_IMAGE_ENTRY: {
 				@SuppressWarnings("unchecked") Map.Entry<String, StyledImage> styledImageEntry = (Map.Entry<String, StyledImage>)theEObject;
 				T result = caseStyledImageEntry(styledImageEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.WATERMARK_LIKE: {
+				WatermarkLike watermarkLike = (WatermarkLike)theEObject;
+				T result = caseWatermarkLike(watermarkLike);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -514,6 +522,21 @@ public class ImageSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStyledImageEntry(Map.Entry<String, StyledImage> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Watermark Like</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Watermark Like</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWatermarkLike(WatermarkLike object) {
 		return null;
 	}
 

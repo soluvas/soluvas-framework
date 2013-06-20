@@ -43,6 +43,7 @@ import org.soluvas.image.StyledImage;
 import org.soluvas.image.ThumbnailatorTransformer;
 import org.soluvas.image.TransformGravity;
 import org.soluvas.image.UploadedImage;
+import org.soluvas.image.WatermarkLike;
 import org.soluvas.image.store.ImageRepository;
 import org.soluvas.ldap.SocialPerson;
 
@@ -187,6 +188,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	private EClass styledImageEntryEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass watermarkLikeEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1140,6 +1147,24 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getWatermarkLike() {
+		return watermarkLikeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWatermarkLike_WatermarkFile() {
+		return (EAttribute)watermarkLikeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getImageTransformType() {
 		return imageTransformTypeEEnum;
@@ -1360,6 +1385,9 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		createEAttribute(styledImageEntryEClass, STYLED_IMAGE_ENTRY__KEY);
 		createEReference(styledImageEntryEClass, STYLED_IMAGE_ENTRY__VALUE);
 
+		watermarkLikeEClass = createEClass(WATERMARK_LIKE);
+		createEAttribute(watermarkLikeEClass, WATERMARK_LIKE__WATERMARK_FILE);
+
 		// Create enums
 		imageTransformTypeEEnum = createEEnum(IMAGE_TRANSFORM_TYPE);
 		fileExportEEnum = createEEnum(FILE_EXPORT);
@@ -1413,8 +1441,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		thumbnailatorTransformerEClass.getESuperTypes().add(this.getImageTransformer());
 		resizeToFitEClass.getESuperTypes().add(this.getImageTransform());
 		resizeToFitEClass.getESuperTypes().add(this.getDimensionLike());
+		resizeToFitEClass.getESuperTypes().add(this.getWatermarkLike());
 		resizeToFillEClass.getESuperTypes().add(this.getImageTransform());
 		resizeToFillEClass.getESuperTypes().add(this.getDimensionLike());
+		resizeToFillEClass.getESuperTypes().add(this.getWatermarkLike());
 		imageEClass.getESuperTypes().add(theCommonsPackage.getIdentifiable());
 		imageEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
 		imageEClass.getESuperTypes().add(theCommonsPackage.getSchemaVersionable());
@@ -1692,6 +1722,9 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEClass(styledImageEntryEClass, Map.Entry.class, "StyledImageEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStyledImageEntry_Key(), theEcorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStyledImageEntry_Value(), this.getStyledImage(), null, "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(watermarkLikeEClass, WatermarkLike.class, "WatermarkLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getWatermarkLike_WatermarkFile(), theCommonsPackage.getFile(), "watermarkFile", null, 0, 1, WatermarkLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(imageTransformTypeEEnum, ImageTransformType.class, "ImageTransformType");
@@ -2111,6 +2144,18 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Holds commonly used image styles."
+		   });		
+		addAnnotation
+		  (watermarkLikeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Watermark information if the transform supports watermark operation."
+		   });		
+		addAnnotation
+		  (getWatermarkLike_WatermarkFile(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Watermark file to be used. If null, no watermark will be overlaid."
 		   });
 	}
 

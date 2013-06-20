@@ -576,13 +576,22 @@ public interface ImagePackage extends EPackage {
 	int RESIZE_TO_FIT__HEIGHT = IMAGE_TRANSFORM_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Watermark File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FIT__WATERMARK_FILE = IMAGE_TRANSFORM_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Only Shrink Larger</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FIT__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 2;
+	int RESIZE_TO_FIT__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Resize To Fit</em>' class.
@@ -591,7 +600,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FIT_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 3;
+	int RESIZE_TO_FIT_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.ResizeToFillImpl <em>Resize To Fill</em>}' class.
@@ -622,13 +631,22 @@ public interface ImagePackage extends EPackage {
 	int RESIZE_TO_FILL__HEIGHT = IMAGE_TRANSFORM_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Watermark File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FILL__WATERMARK_FILE = IMAGE_TRANSFORM_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Gravity</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FILL__GRAVITY = IMAGE_TRANSFORM_FEATURE_COUNT + 2;
+	int RESIZE_TO_FILL__GRAVITY = IMAGE_TRANSFORM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Only Shrink Larger</b></em>' attribute.
@@ -637,7 +655,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FILL__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 3;
+	int RESIZE_TO_FILL__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Resize To Fill</em>' class.
@@ -646,7 +664,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FILL_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 4;
+	int RESIZE_TO_FILL_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.DimensionLike <em>Dimension Like</em>}' class.
@@ -1270,6 +1288,34 @@ public interface ImagePackage extends EPackage {
 	int STYLED_IMAGE_ENTRY_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.image.WatermarkLike <em>Watermark Like</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.WatermarkLike
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getWatermarkLike()
+	 * @generated
+	 */
+	int WATERMARK_LIKE = 20;
+
+	/**
+	 * The feature id for the '<em><b>Watermark File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WATERMARK_LIKE__WATERMARK_FILE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Watermark Like</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WATERMARK_LIKE_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1277,7 +1323,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformType()
 	 * @generated
 	 */
-	int IMAGE_TRANSFORM_TYPE = 20;
+	int IMAGE_TRANSFORM_TYPE = 21;
 
 
 	/**
@@ -1288,7 +1334,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getFileExport()
 	 * @generated
 	 */
-	int FILE_EXPORT = 21;
+	int FILE_EXPORT = 22;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.DuplicateIdHandling <em>Duplicate Id Handling</em>}' enum.
@@ -1298,7 +1344,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getDuplicateIdHandling()
 	 * @generated
 	 */
-	int DUPLICATE_ID_HANDLING = 22;
+	int DUPLICATE_ID_HANDLING = 23;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.TransformGravity <em>Transform Gravity</em>}' enum.
@@ -1308,7 +1354,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getTransformGravity()
 	 * @generated
 	 */
-	int TRANSFORM_GRAVITY = 23;
+	int TRANSFORM_GRAVITY = 24;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTypes <em>Types</em>}' enum.
@@ -1318,7 +1364,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTypes()
 	 * @generated
 	 */
-	int IMAGE_TYPES = 24;
+	int IMAGE_TYPES = 25;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageStyles <em>Styles</em>}' enum.
@@ -1328,7 +1374,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyles()
 	 * @generated
 	 */
-	int IMAGE_STYLES = 25;
+	int IMAGE_STYLES = 26;
 
 	/**
 	 * The meta object id for the '<em>Repository</em>' data type.
@@ -1338,7 +1384,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageRepository()
 	 * @generated
 	 */
-	int IMAGE_REPOSITORY = 26;
+	int IMAGE_REPOSITORY = 27;
 
 
 	/**
@@ -1349,7 +1395,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageType()
 	 * @generated
 	 */
-	int IMAGE_TYPE = 27;
+	int IMAGE_TYPE = 28;
 
 	/**
 	 * The meta object id for the '<em>Style</em>' data type.
@@ -1359,7 +1405,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyle()
 	 * @generated
 	 */
-	int IMAGE_STYLE = 28;
+	int IMAGE_STYLE = 29;
 
 
 	/**
@@ -1370,7 +1416,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getSocialPerson()
 	 * @generated
 	 */
-	int SOCIAL_PERSON = 29;
+	int SOCIAL_PERSON = 30;
 
 
 	/**
@@ -2291,6 +2337,27 @@ public interface ImagePackage extends EPackage {
 	EReference getStyledImageEntry_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.WatermarkLike <em>Watermark Like</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Watermark Like</em>'.
+	 * @see org.soluvas.image.WatermarkLike
+	 * @generated
+	 */
+	EClass getWatermarkLike();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.WatermarkLike#getWatermarkFile <em>Watermark File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Watermark File</em>'.
+	 * @see org.soluvas.image.WatermarkLike#getWatermarkFile()
+	 * @see #getWatermarkLike()
+	 * @generated
+	 */
+	EAttribute getWatermarkLike_WatermarkFile();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3135,6 +3202,24 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EReference STYLED_IMAGE_ENTRY__VALUE = eINSTANCE.getStyledImageEntry_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.WatermarkLike <em>Watermark Like</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.WatermarkLike
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getWatermarkLike()
+		 * @generated
+		 */
+		EClass WATERMARK_LIKE = eINSTANCE.getWatermarkLike();
+
+		/**
+		 * The meta object literal for the '<em><b>Watermark File</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WATERMARK_LIKE__WATERMARK_FILE = eINSTANCE.getWatermarkLike_WatermarkFile();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
