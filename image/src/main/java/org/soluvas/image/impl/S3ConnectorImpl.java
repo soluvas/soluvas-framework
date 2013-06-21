@@ -32,6 +32,7 @@ import com.amazonaws.services.s3.transfer.Download;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 import com.damnhandy.uri.template.UriTemplate;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -288,6 +289,12 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 	public ListenableFuture<UploadedImage> upload(final String namespace, final String imageId,
 			final String styleCode, final String styleVariant, final String extension, final File file,
 			final String contentType) {
+		// sanity check
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(contentType), "Cannot upload image without content type, namespace=%s imageId=%s styleCode=%s styleVariant=%s extension=%s file=%s",
+				namespace, imageId, styleCode, styleVariant, extension, file);
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(extension), "Cannot upload image without extension, namespace=%s imageId=%s styleCode=%s styleVariant=%s file=%s contentType=%s",
+				namespace, imageId, styleCode, styleVariant, file, contentType);
+		
 		final SettableFuture<UploadedImage> future = SettableFuture.create();
 		final boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
 		final String key = String.format("%s_%s/%s/%s/%s_%s.%s",

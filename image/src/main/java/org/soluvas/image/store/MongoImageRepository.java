@@ -521,18 +521,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		final String seoName1 = SlugUtils.generateId(name, 0);
 		final String seoName2 = SlugUtils.generateId(FilenameUtils.getBaseName(originalName), 0);
 		final String imageId = Optional.fromNullable(existingImageId).or( seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2 );
-		String tmpExtension = StringUtils.lowerCase(FilenameUtils.getExtension(originalName));
-		final String extension;
-		if (tmpExtension == null) {
-			extension = ImageUtils.supportedContentTypes.get(upContentType);
-			if (Strings.isNullOrEmpty(extension)) {
-				throw new ImageException(String.format("Cannot get extension from originalName='%s' for existingImageId='%s' originalFile='%s', " +
-						"with unsupported content type '%s', supported content types are: %s",
-						originalName, existingImageId, originalFile, upContentType, ImageUtils.supportedContentTypes.keySet()));
-			}
-		} else {
-			extension = tmpExtension;
-		}
+		
+		// guess content type if necessary
 		final String contentType;
 		// content type must be valid "image/*" types
 		if (upContentType != null && upContentType.startsWith("image/")) {
@@ -548,7 +538,25 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 						e);
 			}
 		}
+		// guess extension if necessary
+		String upExtension = StringUtils.lowerCase(FilenameUtils.getExtension(originalName));
+		final String extension;
+		if (Strings.isNullOrEmpty(upExtension)) {
+			extension = ImageUtils.supportedContentTypes.get(contentType);
+			if (Strings.isNullOrEmpty(extension)) {
+				throw new ImageException(String.format("Cannot get extension from originalName='%s' for existingImageId='%s' originalFile='%s', " +
+						"with unsupported content type '%s', supported content types are: %s",
+						originalName, existingImageId, originalFile, contentType, ImageUtils.supportedContentTypes.keySet()));
+			}
+		} else {
+			extension = upExtension;
+		}
 		
+		// last sanity check, whatever you do up there, we NEED contentType AND extension
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(contentType), "Failed to get content type for %s (%s bytes) as %s",
+				originalFile, length, imageId);
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(extension), "Failed to get extension for %s (%s bytes) as %s",
+				originalFile, length, imageId);
 		log.debug("Adding image from {} ({} {} bytes) as {}, originalName={} extension={}",
 				originalFile.getName(), contentType, length, imageId,
 				originalName, extension);
