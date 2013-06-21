@@ -434,8 +434,11 @@ public class ImageImpl extends EObjectImpl implements Image {
 		id = dbo.getString("_id");
 		name = dbo.getString("name");
 		extension = dbo.getString("extension", "jpg");
-//		uri = imageStore.getImageUri(id, MongoImageRepository.ORIGINAL_NAME, extension);
 		uri = dbo.getString("uri");
+		if (uri == null) {
+			// Legacy schema support
+			uri = imageStore.getPublicUri(id, MongoImageRepository.ORIGINAL_NAME, extension);
+		}
 		contentType = dbo.getString("contentType");
 		fileName = dbo.getString("fileName");
 		size = dbo.get("size") != null ? dbo.getLong("size") : null;
