@@ -87,10 +87,13 @@ public class Image {
 		super();
 		id = dbo.getString("_id");
 		name = dbo.getString("name");
-//		uri = imageStore.getImageUri(id, MongoImageRepository.ORIGINAL_NAME);
 		uri = dbo.getString("uri");
+		extension = dbo.getString("extension", "jpg");
+		if (uri == null) {
+			// Legacy schema support
+			uri = imageStore.getPublicUri(id, MongoImageRepository.ORIGINAL_NAME, extension);
+		}
 		contentType = dbo.getString("contentType");
-		extension = dbo.getString("extension");
 		fileName = dbo.getString("fileName");
 		size = dbo.get("size") != null ? dbo.getLong("size") : null;
 //		width = dbo.getInt("width");

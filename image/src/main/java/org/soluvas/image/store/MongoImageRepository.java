@@ -1110,16 +1110,24 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 			log.debug("Fixing {} image {} ({}) extension to {}, oldOrigin={}, newPublic={}, newOrigin={}", 
 					namespace, image.getId(), image.getContentType(), image.getExtension(), oldOriginUri, newPublicUri, newOriginUri);
 			
-			// 1. Download old URI
 			try {
 				File tmpFile = File.createTempFile(image.getId(), ".tmp");
 				try {
-					Preconditions.checkState(connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, "", tmpFile),
-						"Cannot download for fixing extension: %s image %s (%s) to %s, oldOrigin=%s, newPublic=%s, newOrigin=%s", 
-						namespace, image.getId(), image.getContentType(), image.getExtension(), oldOriginUri, newPublicUri, newOriginUri);
-					
-					// 2. Re-upload with new URI
-					final ListenableFuture<UploadedImage> uploadFuture = connector.upload(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, image.getExtension(), tmpFile, image.getContentType());
+					// 1. Download old URI
+					final boolean downloadedFromOld = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, "", tmpFile);
+					if (downloadedFromOld) {
+						// 2. Re-upload with new URI
+						final ListenableFuture<UploadedImage> uploadFuture = connector.upload(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, image.getExtension(), tmpFile, image.getContentType());
+						final UploadedImage uploaded = Preconditions.checkNotNull(uploadFuture.get(),
+								"Cannot upload for fixing extension: %s image %s (%s) to %s, oldOrigin=%s, newPublic=%s, newOrigin=%s", 
+								namespace, image.getId(), image.getContentType(), image.getExtension(), oldOriginUri, newPublicUri, newOriginUri);
+					} else {
+						// is the image available at the new URI
+						final boolean downloadedFromNew = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, image.getExtension(), tmpFile);
+						Preconditions.checkState(downloadedFromNew,
+								"Cannot download (both old and new) for fixing extension: %s image %s (%s) to %s, oldOrigin=%s, newPublic=%s, newOrigin=%s", 
+								namespace, image.getId(), image.getContentType(), image.getExtension(), oldOriginUri, newPublicUri, newOriginUri);
+					}
 					
 					// 3. Update MongoDB with new URI
 					final BasicDBObject newDbo = new BasicDBObject();
@@ -1129,10 +1137,9 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 					mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", newDbo));
 					
 					// 4. Delete old URI *only* if 1, 2, 3 successful
-					final UploadedImage uploaded = Preconditions.checkNotNull(uploadFuture.get(),
-							"Cannot upload for fixing extension: %s image %s (%s) to %s, oldOrigin=%s, newPublic=%s, newOrigin=%s", 
-							namespace, image.getId(), image.getContentType(), image.getExtension(), oldOriginUri, newPublicUri, newOriginUri);
-					connector.delete(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, "");
+					if (downloadedFromOld) {
+						connector.delete(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, "");
+					}
 				} finally {
 					tmpFile.delete();
 				}
