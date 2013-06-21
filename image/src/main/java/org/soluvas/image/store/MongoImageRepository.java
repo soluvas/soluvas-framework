@@ -1114,19 +1114,23 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 				File tmpFile = File.createTempFile(image.getId(), ".tmp");
 				try {
 					// 1. Download old URI
-					final boolean downloadedFromOld = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, "", tmpFile);
-					if (downloadedFromOld) {
+					boolean downloadedFromOld = false;
+					try {
+						downloadedFromOld = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, "", tmpFile);
 						// 2. Re-upload with new URI
 						final ListenableFuture<UploadedImage> uploadFuture = connector.upload(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, image.getExtension(), tmpFile, image.getContentType());
 						final UploadedImage uploaded = Preconditions.checkNotNull(uploadFuture.get(),
 								"Cannot upload for fixing extension: %s image %s (%s) to %s, oldOrigin=%s, newPublic=%s, newOrigin=%s", 
 								namespace, image.getId(), image.getContentType(), image.getExtension(), oldOriginUri, newPublicUri, newOriginUri);
-					} else {
+					} catch (Exception e) {
 						// is the image available at the new URI
-						final boolean downloadedFromNew = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, image.getExtension(), tmpFile);
-						Preconditions.checkState(downloadedFromNew,
-								"Cannot download (both old and new) for fixing extension: %s image %s (%s) to %s, oldOrigin=%s, newPublic=%s, newOrigin=%s", 
-								namespace, image.getId(), image.getContentType(), image.getExtension(), oldOriginUri, newPublicUri, newOriginUri);
+						try {
+							connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, image.getExtension(), tmpFile);
+						} catch (Exception e2) {
+							throw new ImageException(e2,
+									"Cannot download (both old and new) for fixing extension: %s image %s (%s) to %s, oldOrigin=%s, newPublic=%s, newOrigin=%s", 
+									namespace, image.getId(), image.getContentType(), image.getExtension(), oldOriginUri, newPublicUri, newOriginUri);
+						}
 					}
 					
 					// 3. Update MongoDB with new URI
