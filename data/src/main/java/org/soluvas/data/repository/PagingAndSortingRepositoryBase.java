@@ -35,7 +35,7 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 	public final class IdFunction implements Function<T, ID> {
 		@Override @Nullable
 		public ID apply(@Nullable T input) {
-			return getId(input);
+			return input != null ? getId(input) : null;
 		}
 	}
 
