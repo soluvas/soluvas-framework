@@ -32,11 +32,15 @@ import org.soluvas.commons.ProgressStatus;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.ProgressMonitorImpl;
 import org.soluvas.commons.impl.ProgressMonitorWrapperImpl;
+import org.soluvas.commons.util.ThreadLocalProgress;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
+import org.soluvas.data.util.BatchFinder;
+import org.soluvas.data.util.BatchProcessor;
+import org.soluvas.data.util.RepositoryUtils;
 import org.soluvas.image.DavConnector;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImageException;
@@ -254,13 +258,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.soluvas.image.store.ImageRepository#getImagePublicUri(java.lang.String, java.lang.String)
-	 */
 	@Override
-	public String getImageUri(String id, String styleName) {
-		// TODO: don't hardcode extension
-		String extension = "jpg";
+	public String getPublicUri(String id, String styleName, String extension) {
 		String styleCode;
 		if (ORIGINAL_NAME.equals(styleName)) {
 			styleCode = ORIGINAL_CODE;
@@ -269,6 +268,18 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		}
 		String styleVariant = styleCode;
 		return connector.getUri(namespace, id, styleCode, styleVariant, extension);
+	}
+	
+	@Override
+	public String getOriginUri(String id, String styleName, String extension) {
+		String styleCode;
+		if (ORIGINAL_NAME.equals(styleName)) {
+			styleCode = ORIGINAL_CODE;
+		} else {
+			styleCode = styles.get(styleName).getCode();
+		}
+		String styleVariant = styleCode;
+		return connector.getOriginUri(namespace, id, styleCode, styleVariant, extension);
 	}
 	
 	/**
@@ -542,12 +553,10 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		String upExtension = StringUtils.lowerCase(FilenameUtils.getExtension(originalName));
 		final String extension;
 		if (Strings.isNullOrEmpty(upExtension)) {
-			extension = ImageUtils.supportedContentTypes.get(contentType);
-			if (Strings.isNullOrEmpty(extension)) {
-				throw new ImageException(String.format("Cannot get extension from originalName='%s' for existingImageId='%s' originalFile='%s', " +
+			extension = Preconditions.checkNotNull(ImageUtils.getExtensionFromMime(contentType),
+				"Cannot get extension from originalName='%s' for existingImageId='%s' originalFile='%s', " +
 						"with unsupported content type '%s', supported content types are: %s",
-						originalName, existingImageId, originalFile, contentType, ImageUtils.supportedContentTypes.keySet()));
-			}
+						originalName, existingImageId, originalFile, contentType, ImageUtils.supportedContentTypes.keySet());
 		} else {
 			extension = upExtension;
 		}
@@ -643,7 +652,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 							return transformed.getStyleCode().equals(input.getCode());
 						}
 					});
-					final Map<String, Object> bson = new HashMap<String, Object>();
+					final Map<String, Object> bson = new HashMap<>();
 					bson.put("className", StyledImage.class.getName());
 					bson.put("name", style.getName());
 					bson.put("code", transformed.getStyleCode());
@@ -812,6 +821,19 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		}
 	}
 	
+	public Page<Image> findAllWithoutExtension(Pageable pageable) {
+		final BasicDBObject sortDbo = MongoUtils.getSort(pageable.getSort(), "creationTime", 1);
+		final BasicDBObject query = new BasicDBObject("extension", "");
+		final DBCursor cursor = mongoColl.find(query).sort(sortDbo)
+				.skip((int) pageable.getOffset()).limit((int) pageable.getPageSize());
+		try {
+			final List<Image> images = ImmutableList.copyOf( Iterables.transform(cursor, new DBObjectToImage()) );
+			return new PageImpl<>(images, pageable, mongoColl.count());
+		} finally {
+			cursor.close();
+		}
+	}
+
 	@Override
 	public Page<Image> findAll(Pageable pageable) {
 		final BasicDBObject sortDbo = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
@@ -1013,19 +1035,28 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 //		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, 2);
 		monitor.subTask("Updating URIs for " + images.size() + " images");
 		for (Image image : images) {
-			final String newUri = getImageUri(image.getId(), ORIGINAL_NAME);
+			final String newPublicUri = getPublicUri(image.getId(), ORIGINAL_NAME,
+					Optional.fromNullable(image.getExtension()).or("jpg"));
+			final String newOriginUri = getOriginUri(image.getId(), ORIGINAL_NAME,
+					Optional.fromNullable(image.getExtension()).or("jpg"));
 			final BasicDBObject dbo = new BasicDBObject();
-			dbo.put("uri", newUri.toString());
-			log.debug("Updating {} image {} to {}", namespace, image.getId(), newUri);
+			dbo.put("uri", newPublicUri.toString());
+			dbo.put("originUri", newOriginUri.toString());
+			log.debug("Updating {} image {} to public={} origin={}", namespace, image.getId(), newPublicUri, newOriginUri);
 			mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", dbo));
 			
 			final Map<String, StyledImage> imageStyles = image.getStyles();
 			for (Entry<String, StyledImage> styleImage : imageStyles.entrySet()) {
 				final String styleName = styleImage.getKey();
-				final String newStyleUri = getImageUri(image.getId(), styleName);
-				final BasicDBObject updatedStyleUri = new BasicDBObject("styles."+ styleName +".uri", newStyleUri.toString());
-				log.debug("Updating {} image id {} to {} with style {}", namespace, image.getId(), newStyleUri, styleName);
-				mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", updatedStyleUri));
+				// TODO: don't hardcode extension
+				final String newStylePublicUri = getPublicUri(image.getId(), styleName, "jpg");
+				final String newStyleOriginUri = getOriginUri(image.getId(), styleName, "jpg");
+				final BasicDBObject updatedStyleObj = new BasicDBObject();
+				updatedStyleObj.put("styles."+ styleName +".uri", newStylePublicUri.toString());
+				updatedStyleObj.put("styles."+ styleName +".originUri", newStyleOriginUri.toString());
+				log.debug("Updating {} image id {} with style {} to public={} origin={}", namespace, image.getId(), styleName,
+						newStylePublicUri, newStyleOriginUri);
+				mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", updatedStyleObj));
 			}
 			monitor.worked(1);
 		}
@@ -1043,6 +1074,97 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 			}
 		});
 		doUpdateUri(images, monitor);
+	}
+
+	@Override
+	public void fixExtensionAll() {
+		final ProgressMonitor monitor = ThreadLocalProgress.get();
+		RepositoryUtils.runBatch("Fixing image extensions",
+				new BatchFinder<Image>() {
+					@Override
+					public Page<Image> find(Pageable pageable) throws Exception {
+						return findAllWithoutExtension(pageable);
+					}
+				},
+				new BatchProcessor<Image>() {
+					@Override
+					public void process(Image input, long elementIndex,
+							long elementOffset, long numberOfElements,
+							long totalElements, long pageNumber,
+							long totalPages, ProgressMonitor monitor)
+							throws Exception {
+						doFixExtension(input);
+					}
+				});
+	}
+
+	protected void doFixExtension(Image image) {
+		Preconditions.checkNotNull(image.getContentType(), "Cannot fix extension for %s because contentType is unknown",
+				image.getId());
+		if (Strings.isNullOrEmpty(image.getExtension())) {
+			image.setExtension(Preconditions.checkNotNull(ImageUtils.getExtensionFromMime(image.getContentType()),
+					"Unsupported content type for %s: %s", image.getId(), image.getContentType()));
+			final String oldOriginUri = getOriginUri(image.getId(), ORIGINAL_NAME, "");
+			final String newPublicUri = getPublicUri(image.getId(), ORIGINAL_NAME, image.getExtension());
+			final String newOriginUri = getOriginUri(image.getId(), ORIGINAL_NAME, image.getExtension());
+			log.debug("Fixing {} image {} ({}) extension to {}, oldOrigin={}, newPublic={}, newOrigin={}", 
+					namespace, image.getId(), image.getContentType(), image.getExtension(), oldOriginUri, newPublicUri, newOriginUri);
+			
+			// 1. Download old URI
+			try {
+				File tmpFile = File.createTempFile(image.getId(), ".tmp");
+				try {
+					Preconditions.checkState(connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, "", tmpFile),
+						"Cannot download for fixing extension: %s image %s (%s) to %s, oldOrigin=%s, newPublic=%s, newOrigin=%s", 
+						namespace, image.getId(), image.getContentType(), image.getExtension(), oldOriginUri, newPublicUri, newOriginUri);
+					
+					// 2. Re-upload with new URI
+					final ListenableFuture<UploadedImage> uploadFuture = connector.upload(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, image.getExtension(), tmpFile, image.getContentType());
+					
+					// 3. Update MongoDB with new URI
+					final BasicDBObject newDbo = new BasicDBObject();
+					newDbo.put("extension", image.getExtension());
+					newDbo.put("uri", newPublicUri.toString());
+					newDbo.put("originUri", newOriginUri.toString());
+					mongoColl.update(new BasicDBObject("_id", image.getId()), new BasicDBObject("$set", newDbo));
+					
+					// 4. Delete old URI *only* if 1, 2, 3 successful
+					final UploadedImage uploaded = Preconditions.checkNotNull(uploadFuture.get(),
+							"Cannot upload for fixing extension: %s image %s (%s) to %s, oldOrigin=%s, newPublic=%s, newOrigin=%s", 
+							namespace, image.getId(), image.getContentType(), image.getExtension(), oldOriginUri, newPublicUri, newOriginUri);
+					connector.delete(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE, "");
+				} finally {
+					tmpFile.delete();
+				}
+			} catch (Exception e) {
+				throw new ImageException(e, "Cannot fix %s image %s (%s) extension to %s, oldUri=%s, newUri=%s - %s", 
+						namespace, image.getId(), image.getContentType(), image.getExtension(), oldOriginUri, newPublicUri, e);
+			}
+		} else {
+			log.info("Skipping already fixed extension for %s, contentType=%s, extension=%s",
+					image.getId(), image.getContentType(), image.getExtension());
+		}
+	}
+
+	@Override
+	public void fixExtension(Collection<String> imageIds) {
+		final ProgressMonitor monitor = ThreadLocalProgress.get();
+		final Collection<Image> images = Collections2.transform(imageIds, new Function<String, Image>() {
+			@Override @Nullable
+			public Image apply(@Nullable String imageId) {
+				final Image image = findOne(imageId);
+				Preconditions.checkNotNull(image, "Cannot find %s image with imageId %s", namespace, imageId);
+				return image;
+			}
+		});
+		log.info("Fixing {} {} image extensions", images.size(), namespace);
+//		final ProgressMonitor submon = ProgressMonitorImpl.convert(monitor, 2);
+		monitor.subTask("Fixing extensions for " + images.size() + " images");
+		for (Image image : images) {
+			doFixExtension(image);
+			monitor.worked(1);
+		}
+//		submon.done(); // TODO: shouldn't be done in proper implementation
 	}
 
 	@Override

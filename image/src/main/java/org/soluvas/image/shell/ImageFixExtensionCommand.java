@@ -1,4 +1,4 @@
- package org.soluvas.image.shell; 
+package org.soluvas.image.shell; 
 
 import java.util.List;
 
@@ -10,11 +10,8 @@ import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.ProgressMonitor;
-import org.soluvas.commons.impl.ShellProgressMonitorImpl;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.image.ImageException;
-import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -25,21 +22,21 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 /**
- * Shell command to update an existing {@link Image} URI.
+ * Fix image extension.
  *
  * @author atang
  */
 @Service @Scope("prototype")
-@Command(scope="image", name="updateuri", description="Update an existing image URI.")
-public class ImageUpdateUriCommand extends ExtCommandSupport {
+@Command(scope="image", name="fixextension", description="Fix image extension.")
+public class ImageFixExtensionCommand extends ExtCommandSupport {
 
-	private static final Logger log = LoggerFactory.getLogger(ImageUpdateUriCommand.class);
+	private static final Logger log = LoggerFactory.getLogger(ImageFixExtensionCommand.class);
 
 	@Option(name="-n", aliases={"--ns", "--namespace"},
 		description="Namespace, e.g. person, shop, product.")
 	private transient String namespace = "person";
 	@Option(name="-a", aliases="--all", required=false,
-			description="Set all imageUri.")
+			description="Fix all images (without extension).")
 	private transient boolean all = false;
 
 	@Argument(index=0, name="imageId ...", multiValued=true, required=false,
@@ -49,7 +46,7 @@ public class ImageUpdateUriCommand extends ExtCommandSupport {
 	private final List<ImageRepository> imageRepos;
 	
 	@Inject
-	public ImageUpdateUriCommand(List<ImageRepository> imageRepos) {
+	public ImageFixExtensionCommand(List<ImageRepository> imageRepos) {
 		super();
 		this.imageRepos = imageRepos;
 	}
@@ -63,16 +60,14 @@ public class ImageUpdateUriCommand extends ExtCommandSupport {
 			}
 		});
 		
-		final ProgressMonitor monitor = new ShellProgressMonitorImpl();
-		
 		if (all) {
 			if (imageIds != null )
-				throw new ImageException("ImageId cannot be attached");
+				throw new ImageException("Don't provide imageId(s) if --all is specified");
 			
-			imageRepo.updateUriAll(monitor);
+			imageRepo.fixExtensionAll();
 		} else {
 			Preconditions.checkNotNull(imageIds, "imageId(s) must be specified");
-			imageRepo.updateUri(ImmutableList.copyOf(imageIds), monitor);
+			imageRepo.fixExtension(ImmutableList.copyOf(imageIds));
 		}  
 		return null;
 	}

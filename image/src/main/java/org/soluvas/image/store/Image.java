@@ -36,6 +36,7 @@ public class Image {
 	private String uri;
 	private String originUri;
 	private String contentType;
+	private String extension;
 	private String fileName;
 	private Long size;
 	// TODO: Support original width and height
@@ -86,8 +87,10 @@ public class Image {
 		super();
 		id = dbo.getString("_id");
 		name = dbo.getString("name");
-		uri = imageStore.getImageUri(id, MongoImageRepository.ORIGINAL_NAME);
+//		uri = imageStore.getImageUri(id, MongoImageRepository.ORIGINAL_NAME);
+		uri = dbo.getString("uri");
 		contentType = dbo.getString("contentType");
+		extension = dbo.getString("extension");
 		fileName = dbo.getString("fileName");
 		size = dbo.get("size") != null ? dbo.getLong("size") : null;
 //		width = dbo.getInt("width");
@@ -225,6 +228,14 @@ public class Image {
 	 */
 	public void setCreated(DateTime created) {
 		this.created = created;
+	}
+	
+	public String getExtension() {
+		return extension;
+	}
+
+	public void setExtension(String extension) {
+		this.extension = extension;
 	}
 
 	@Override

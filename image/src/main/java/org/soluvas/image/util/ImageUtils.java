@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.io.File;
 import java.util.concurrent.ExecutorService;
 
+import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
@@ -57,8 +58,14 @@ public class ImageUtils {
 		return !Strings.isNullOrEmpty(fileExtension) ? fileExtension : "jpg";
 	}
 	
+	/**
+	 * Given a supported MIME type, return the extension.
+	 * @param mimeType Extension (e.g. {@code jpg}) or {@code null} if not supported.
+	 * @return
+	 */
+	@Nullable
 	public static String getExtensionFromMime(String mimeType) {
-		return supportedContentTypes.inverse().get(mimeType);
+		return supportedContentTypes.get(mimeType);
 	}
 	
 	public static Dimension getDimension(File file) {

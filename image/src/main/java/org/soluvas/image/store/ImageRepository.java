@@ -57,7 +57,7 @@ public interface ImageRepository extends EntityLookup<Image, String>,
 	 * Scheme: ${publicUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
 	 * @return
 	 */
-	public abstract String getImageUri(String id, String styleName);
+	public abstract String getPublicUri(String id, String styleName, String extension);
 
 	/**
 	 * Add an {@link Image} from an {@link InputStream}. This method makes use of a temporary file.
@@ -161,5 +161,11 @@ public interface ImageRepository extends EntityLookup<Image, String>,
 	public abstract boolean exists(String id);
 
 	<S extends Image> List<S> add(Collection<S> newImages, ProgressMonitor monitor);
+
+	void fixExtensionAll();
+
+	void fixExtension(Collection<String> imageIds);
+
+	String getOriginUri(String id, String styleName, String extension);
 
 }

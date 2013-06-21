@@ -10,10 +10,11 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.PagingAndSortingRepository;
+import org.soluvas.data.repository.Repository;
 
 /**
+ * Batch {@link Repository} operation support.
  * @author haidar
- *
  */
 public class RepositoryUtils {
 
@@ -23,7 +24,7 @@ public class RepositoryUtils {
 	/**
 	 * Perform a {@link PagingAndSortingRepository}-related batch processing job using {@link Pageable},
 	 * with {@link ProgressMonitor} support.
-	 * @param jobTitle Job name, will be used by {@link ProgressMonitor}.
+	 * @param jobTitle Job name, will be used by {@link ProgressMonitor}. It will get the monitor using {@link ThreadLocalProgress#get()}.
 	 * @param finder Used to fetch a {@link Pageable} of data, usually an anonymous class.
 	 * @param processor Process each data {@link Page}, usually an anonymous class.
 	 */
