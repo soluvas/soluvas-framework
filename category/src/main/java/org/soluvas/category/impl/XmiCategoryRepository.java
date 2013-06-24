@@ -82,6 +82,7 @@ import com.google.common.eventbus.EventBus;
 public class XmiCategoryRepository 
 		extends PagingAndSortingRepositoryBase<Category, String>
 		implements CategoryRepository {
+	
 	protected static final Logger log = LoggerFactory.getLogger(XmiCategoryRepository.class);
 	/**
 	 * {@link Category}s in working memory.
@@ -432,6 +433,20 @@ public class XmiCategoryRepository
 	 */
 	protected void catalogFilesChanged(final Set<String> nsPrefixes, String message) {
 //		eventBus.post(new CategoryChanged(null));
+	}
+
+	@Override @Nullable
+	public Category findOneBySlugPath(final String slugPath,
+			final Collection<CategoryStatus> statuses) {
+		final Predicate<Category> filter = new Predicate<Category>() {
+			@Override
+			public boolean apply(@Nullable Category input) {
+				return statuses.contains(input.getStatus()) && slugPath.equals(input.getSlugPath());
+			}
+		};
+		final Category found = Iterables.find(getFlattenedCategories(), filter, null);
+		log.debug("findOneBySlugPath {} {} = {}", slugPath, statuses, found != null ? found.getId() : null);
+		return found;
 	}
 
 }
