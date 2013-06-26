@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <data:DataCatalog xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:data="http://www.soluvas.org/schema/data/1.0" xsi:schemaLocation="http://www.soluvas.org/schema/data/1.0 data.ecore" name="base_Color-base">
   <terms name="aliceblue" nsPrefix="base" color="aliceblue" displayName="Alice Blue" kindNsPrefix="base" kindName="Color"/>
-  <terms name="antiquewhite" nsPrefix="base" color="antiquewhite" displayName="Antique White" kindNsPrefix="base" kindName="Color"/>
+  <terms name="antiquewhite" nsPrefix="base" color="antiquewhite" displayName="Antique White" kindNsPrefix="base" kindName="Color" bordered="true"/>
   <terms name="aqua" nsPrefix="base" color="aqua" displayName="Aqua" kindNsPrefix="base" kindName="Color"/>
   <terms name="aquamarine" nsPrefix="base" color="aquamarine" displayName="Aquamarine" kindNsPrefix="base" kindName="Color"/>
   <terms name="azure" nsPrefix="base" color="azure" displayName="Azure" kindNsPrefix="base" kindName="Color"/>
@@ -50,7 +50,7 @@
   <terms name="forestgreen" nsPrefix="base" color="forestgreen" displayName="Forest Green" kindNsPrefix="base" kindName="Color"/>
   <terms name="fuchsia" nsPrefix="base" color="fuchsia" displayName="Fuchsia" kindNsPrefix="base" kindName="Color"/>
   <terms name="gainsboro" nsPrefix="base" color="gainsboro" displayName="Gainsboro" kindNsPrefix="base" kindName="Color"/>
-  <terms name="ghostwhite" nsPrefix="base" color="ghostwhite" displayName="Ghost White" kindNsPrefix="base" kindName="Color"/>
+  <terms name="ghostwhite" nsPrefix="base" color="ghostwhite" displayName="Ghost White" kindNsPrefix="base" kindName="Color" bordered="true"/>
   <terms name="gold" nsPrefix="base" color="gold" displayName="Gold" kindNsPrefix="base" kindName="Color"/>
   <terms name="goldenrod" nsPrefix="base" color="goldenrod" displayName="Golden Rod" kindNsPrefix="base" kindName="Color"/>
   <terms name="gray" nsPrefix="base" color="gray" displayName="Gray" kindNsPrefix="base" kindName="Color"/>
@@ -100,7 +100,7 @@
   <terms name="mintcream" nsPrefix="base" color="mintcream" displayName="Mint Cream" kindNsPrefix="base" kindName="Color"/>
   <terms name="mistyrose" nsPrefix="base" color="mistyrose" displayName="Misty Rose" kindNsPrefix="base" kindName="Color"/>
   <terms name="moccasin" nsPrefix="base" color="moccasin" displayName="Moccasin" kindNsPrefix="base" kindName="Color"/>
-  <terms name="navajowhite" nsPrefix="base" color="navajowhite" displayName="Navajo White" kindNsPrefix="base" kindName="Color"/>
+  <terms name="navajowhite" nsPrefix="base" color="navajowhite" displayName="Navajo White" kindNsPrefix="base" kindName="Color" bordered="true"/>
   <terms name="navy" nsPrefix="base" color="navy" displayName="Navy" kindNsPrefix="base" kindName="Color"/>
   <terms name="oldlace" nsPrefix="base" color="oldlace" displayName="Old Lace" kindNsPrefix="base" kindName="Color"/>
   <terms name="olive" nsPrefix="base" color="olive" displayName="Olive" kindNsPrefix="base" kindName="Color"/>
@@ -143,8 +143,8 @@
   <terms name="turquoise" nsPrefix="base" color="turquoise" displayName="Turquoise" kindNsPrefix="base" kindName="Color"/>
   <terms name="violet" nsPrefix="base" color="violet" displayName="Violet" kindNsPrefix="base" kindName="Color"/>
   <terms name="wheat" nsPrefix="base" color="wheat" displayName="Wheat" kindNsPrefix="base" kindName="Color"/>
-  <terms name="white" nsPrefix="base" color="white" displayName="White" kindNsPrefix="base" kindName="Color"/>
-  <terms name="whitesmoke" nsPrefix="base" color="whitesmoke" displayName="White Smoke" kindNsPrefix="base" kindName="Color"/>
+  <terms name="white" nsPrefix="base" color="white" displayName="White" kindNsPrefix="base" kindName="Color" bordered="true"/>
+  <terms name="whitesmoke" nsPrefix="base" color="whitesmoke" displayName="White Smoke" kindNsPrefix="base" kindName="Color" bordered="true"/>
   <terms name="yellow" nsPrefix="base" color="yellow" displayName="Yellow" kindNsPrefix="base" kindName="Color"/>
   <terms name="yellowgreen" nsPrefix="base" color="yellowgreen" displayName="Yellow Green" kindNsPrefix="base" kindName="Color"/>
 </data:DataCatalog>
