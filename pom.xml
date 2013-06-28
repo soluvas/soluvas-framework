@@ -27,6 +27,7 @@
 		<!-- Others -->
 		<module>socmed</module>
 		<module>newsletter</module>
+		<module>story</module>
 	</modules>
 
 	<scm>
@@ -134,6 +135,11 @@
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>org.soluvas.social</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.soluvas</groupId>
+				<artifactId>org.soluvas.story</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
