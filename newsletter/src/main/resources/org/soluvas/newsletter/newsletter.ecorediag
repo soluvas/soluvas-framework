@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_M_6AAHmzEeKxeO_f6w_1jg" type="EcoreTools" name="newsletter.ecorediag" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_NANiAHmzEeKxeO_f6w_1jg" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_NAOwIHmzEeKxeO_f6w_1jg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_NAPXMHmzEeKxeO_f6w_1jg" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_NAP-QHmzEeKxeO_f6w_1jg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="newsletter.ecore#//MailjetManager/apiKey"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_NAP-QXmzEeKxeO_f6w_1jg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_NAP-QnmzEeKxeO_f6w_1jg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="newsletter.ecore#//MailjetManager/secretKey"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_NAP-Q3mzEeKxeO_f6w_1jg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_bt56sHpREeKg5IAifmyCQQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="newsletter.ecore#//MailjetManager/listId"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bt56sXpREeKg5IAifmyCQQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_NAPXMXmzEeKxeO_f6w_1jg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_NAPXMnmzEeKxeO_f6w_1jg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_NAPXM3mzEeKxeO_f6w_1jg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_NAPXNHmzEeKxeO_f6w_1jg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_NAPXNXmzEeKxeO_f6w_1jg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_NAPXNnmzEeKxeO_f6w_1jg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_NAPXN3mzEeKxeO_f6w_1jg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_NANiAXmzEeKxeO_f6w_1jg" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="newsletter.ecore#//MailjetManager"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NANiAnmzEeKxeO_f6w_1jg" x="180" y="108"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_M_6AAXmzEeKxeO_f6w_1jg"/>
+  <element xmi:type="ecore:EPackage" href="newsletter.ecore#/"/>
+</notation:Diagram>

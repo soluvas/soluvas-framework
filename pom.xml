@@ -26,6 +26,7 @@
 		<module>image</module>
 		<!-- Others -->
 		<module>socmed</module>
+		<module>newsletter</module>
 	</modules>
 
 	<scm>
@@ -118,6 +119,11 @@
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>org.soluvas.socmed</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.soluvas</groupId>
+				<artifactId>org.soluvas.newsletter</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
