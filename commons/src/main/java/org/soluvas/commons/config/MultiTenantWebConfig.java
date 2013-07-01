@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -16,12 +17,14 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.DataFolder;
 import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.WebAddress;
+import org.soluvas.commons.tenant.TenantMode;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.commons.tenant.TenantRefImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.core.env.Environment;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -45,6 +48,9 @@ public class MultiTenantWebConfig {
 	private static final Cache<String, AppManifest> appManifestCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build();
 	private static final Cache<String, WebAddress> webAddressCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build();
 	
+	@Inject
+	private Environment env;
+	
 //	@Inject
 //	private BeanFactory beanFactory;
 	
@@ -63,23 +69,39 @@ public class MultiTenantWebConfig {
 	 * @param httpRequest
 	 * @return
 	 */
-	public static TenantRef getTenantRef(HttpServletRequest httpRequest) {
-		final String pathInfo = httpRequest.getPathInfo();
+	public static TenantRef getTenantRef(TenantMode tenantMode, HttpServletRequest httpRequest, String tenantEnv) {
+		switch (tenantMode) {
+		case MULTI_PATH:
+			final String pathInfo = httpRequest.getPathInfo();
 //		final String contextPath = Preconditions.checkNotNull(servletContext, "Cannot inject ServletContext")
 //				.getContextPath();
-		final Matcher tenantMatcher = Pattern.compile("\\/t/([^/]+)/([^/]+).*").matcher(pathInfo);
-		Preconditions.checkState(tenantMatcher.matches(),
-				"Path info %s must match pattern: /t/{tenantId}/{tenantEnv}",
-				pathInfo);
-		final TenantRef tenant = new TenantRefImpl(tenantMatcher.group(1), tenantMatcher.group(1), tenantMatcher.group(2));
-		log.debug("Multi-tenant Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
-				pathInfo, tenant.getClientId(), tenant.getTenantId(), tenant.getTenantEnv() );
-		return tenant;
+			final Matcher tenantMatcher = Pattern.compile("\\/t/([^/]+)/([^/]+).*").matcher(pathInfo);
+			Preconditions.checkState(tenantMatcher.matches(),
+					"Path info '%s' must match pattern: /t/{tenantId}/{tenantEnv}",
+					pathInfo);
+			final TenantRef pathTenant = new TenantRefImpl(tenantMatcher.group(1), tenantMatcher.group(1), tenantMatcher.group(2));
+			log.debug("MULTI_PATH Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
+					pathInfo, pathTenant.getClientId(), pathTenant.getTenantId(), pathTenant.getTenantEnv() );
+			return pathTenant;
+		case MULTI_HOST:
+			final String serverName = httpRequest.getServerName();
+			final Matcher hostMatcher = Pattern.compile("([^.]+).*").matcher(serverName);
+			Preconditions.checkState(hostMatcher.matches(),
+					"Server name '%s' must match pattern: ([^.]+).*", serverName);
+			final String tenantId = hostMatcher.group(1).toLowerCase();
+			final TenantRef hostTenant = new TenantRefImpl(tenantId, tenantId, tenantEnv);
+			log.debug("MULTI_HOST Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
+					serverName, hostTenant.getClientId(), hostTenant.getTenantId(), hostTenant.getTenantEnv() );
+			return hostTenant;
+		default:
+			throw new IllegalArgumentException("Unsupported tenantMode: " + tenantMode);
+		}
 	}
 	
 	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	public TenantRef tenantRef() {
-		return getTenantRef(getRequest());
+		return getTenantRef(env.getRequiredProperty("tenantMode", TenantMode.class),
+				getRequest(), env.getRequiredProperty("tenantEnv"));
 	}
 	
 	@Bean @DataFolder @Scope(value="request")
