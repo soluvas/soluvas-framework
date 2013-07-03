@@ -29,6 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Gender;
 
 import com.google.common.collect.ImmutableList;
@@ -885,6 +886,20 @@ public class LdapMapperTest {
 		
 		final Entry personEntry = ldapMapper.toEntry(person, "ou=users");
 		assertEquals(new BigDecimal(5000000), new BigDecimal(personEntry.get("debitBalance").getString()));
+	}
+	
+	@Test
+	public void canMapAccountStatus() throws LdapException {
+		//FIXME: not fixed for Enum..
+		final LdapMapper<Object> mapper = new LdapMapper<>();
+		final SocialPerson person = new SocialPerson("hendy", "hendy", "Hendy", "Irawan");
+		person.setAccountStatus(AccountStatus.ACTIVE);
+		
+		final Entry entry = mapper.toEntry(person, "ou=users");
+		assertEquals(AccountStatus.ACTIVE.name(), entry.get("accountStatus").getString());
+		
+		final SocialPerson object = (SocialPerson) mapper.fromEntry(entry, SocialPerson.class);
+		assertEquals(AccountStatus.ACTIVE.name().toLowerCase(), object.getAccountStatus());
 	}
 	
 }
