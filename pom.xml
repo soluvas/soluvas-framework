@@ -226,6 +226,23 @@
 			</dependency>
 
 			<dependency>
+				<groupId>org.ektorp</groupId>
+				<artifactId>org.ektorp</artifactId>
+				<version>1.4.0</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>commons-logging</artifactId>
+						<groupId>commons-logging</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+		<dependency>
+			<groupId>org.ektorp</groupId>
+			<artifactId>org.ektorp.spring</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+
+			<dependency>
 			    <groupId>com.restfb</groupId>
 			    <artifactId>restfb</artifactId>
 			    <version>1.6.12</version>
