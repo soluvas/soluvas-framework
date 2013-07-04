@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.DataFolder;
+import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.tenant.TenantMode;
@@ -127,8 +128,13 @@ public class MultiTenantWebConfig {
 		return webAddressCache.get(tenantKey, new Callable<WebAddress>() {
 			@Override
 			public WebAddress call() throws Exception {
-				return new StaticXmiLoader<WebAddress>(CommonsPackage.eINSTANCE,
-						new File(dataFolder(), "model/custom.WebAddress.xmi").toString()).get();
+//				return new StaticXmiLoader<WebAddress>(CommonsPackage.eINSTANCE,
+//						new File(dataFolder(), "model/custom.WebAddress.xmi").toString()).get();
+				final OnDemandXmiLoader<WebAddress> loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE,
+						MultiTenantWebConfig.class, "/META-INF/tenant.WebAddress.xmi");
+				loader.getScope().put("tenantId", tenantRef().getTenantId());
+				loader.getScope().put("tenantEnv", tenantRef().getTenantEnv());
+				return loader.get();
 			}
 		});
 	}

@@ -1,6 +1,7 @@
 package org.soluvas.commons;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,7 +25,6 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
-import com.google.common.collect.ImmutableMap;
 
 /**
  * Loads a predefined EMF object from an XMI file on every {@link #get()} call.
@@ -44,6 +44,7 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 	protected final String resourceName;
 	protected final Bundle bundle;
 	protected final EPackage ePackage;
+	protected Map<String, Object> scope = new HashMap<>();
 	
 	public OnDemandXmiLoader(final EPackage ePackage, final Class<?> loaderClass, final String resourcePath) {
 		super();
@@ -245,13 +246,12 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 		}
 		
 		// Expand with scope
-		final Map<String, Object> scope = ImmutableMap.of(); // TODO: support scope or supplier of scope
-		expand(scope, obj);
+		expand(obj);
 		final TreeIterator<EObject> allContents = obj.eAllContents();
 		long augmented = 0;
 		while (allContents.hasNext()) {
 			final EObject content = allContents.next();
-			augmented += expand(scope, content);
+			augmented += expand(content);
 		}
 		if (augmented > 0)
 			log.debug("Expanded {} EObjects with Scope {}",
@@ -283,13 +283,22 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 		}
 	}
 
-	protected long expand(final Map<String, Object> scope, final EObject content) {
+	protected long expand(final EObject content) {
 		if (content instanceof Expandable) {
 			((Expandable) content).expand(scope);
 			return 1;
 		} else {
 			return 0;
 		}
+	}
+	
+	/**
+	 * Mutable scope, to be used by {@link Expandable#expand(Map)}.
+	 * Need to be called before {@link #get()}.
+	 * @return
+	 */
+	public Map<String, Object> getScope() {
+		return scope;
 	}
 
 	@Override

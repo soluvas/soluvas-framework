@@ -4,6 +4,7 @@ package org.soluvas.commons.impl;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -20,6 +21,7 @@ import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.WebAddress;
 
+import com.damnhandy.uri.template.UriTemplate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Strings;
 
@@ -756,24 +758,29 @@ public class WebAddressImpl extends EObjectImpl implements WebAddress {
 	}
 
 	/**
-	 * scope is not used. The only supported expansion variables are: fqdn.
+	 * Supported built-in expansion variables are: fqdn.
+	 * scope may provide additionally: tenantId, tenantEnv.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public void expand(Map scope) {
+	public void expand(Map<String, Object> upScope) {
 		if (expansionState == ExpansionState.EXPANDED) {
 			return;
 		}
+		
+		final HashMap<String, Object> scope = new HashMap<>(upScope);
 		final String fqdn = getFqdn();
-		setBaseUri(Strings.nullToEmpty(getBaseUri()).replace("{+fqdn}", fqdn));
-		setImagesUri(Strings.nullToEmpty(getImagesUri()).replace("{+fqdn}", fqdn));
-		setJsUri(Strings.nullToEmpty(getJsUri()).replace("{+fqdn}", fqdn));
-		setSkinUri(Strings.nullToEmpty(getSkinUri()).replace("{+fqdn}", fqdn));
-		setSecureBaseUri(Strings.nullToEmpty(getSecureBaseUri()).replace("{+fqdn}", fqdn));
-		setSecureImagesUri(Strings.nullToEmpty(getSecureImagesUri()).replace("{+fqdn}", fqdn));
-		setSecureJsUri(Strings.nullToEmpty(getSecureJsUri()).replace("{+fqdn}", fqdn));
-		setSecureSkinUri(Strings.nullToEmpty(getSecureSkinUri()).replace("{+fqdn}", fqdn));
+		scope.put("fqdn", fqdn);
+		
+		setBaseUri(UriTemplate.expand(Strings.nullToEmpty(getBaseUri()), scope));
+		setImagesUri(UriTemplate.expand(Strings.nullToEmpty(getImagesUri()), scope));
+		setJsUri(UriTemplate.expand(Strings.nullToEmpty(getJsUri()), scope));
+		setSkinUri(UriTemplate.expand(Strings.nullToEmpty(getSkinUri()), scope));
+		setSecureBaseUri(UriTemplate.expand(Strings.nullToEmpty(getSecureBaseUri()), scope));
+		setSecureImagesUri(UriTemplate.expand(Strings.nullToEmpty(getSecureImagesUri()), scope));
+		setSecureJsUri(UriTemplate.expand(Strings.nullToEmpty(getSecureJsUri()), scope));
+		setSecureSkinUri(UriTemplate.expand(Strings.nullToEmpty(getSecureSkinUri()), scope));
 		expansionState = ExpansionState.EXPANDED;
 	}
 

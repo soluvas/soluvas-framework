@@ -1,19 +1,22 @@
 package org.soluvas.commons;
 
 import java.net.URL;
-
-import javax.annotation.Nullable;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.osgi.framework.Bundle;
 
+import com.google.common.collect.ImmutableMap;
+
 /**
  * Loads a predefined EMF object from an XMI file once and keeps it in memory.
  * 
- * Note: the object is supplied as-is from the {@link XMIResource}, i.e. not
+ * <p>Note: the object is supplied as-is from the {@link XMIResource}, i.e. not
  * cloned.
+ * 
+ * <p>Warning: {@link Expandable} scope is not supported. 
  * 
  * @author rudi
  */
@@ -53,13 +56,22 @@ public class StaticXmiLoader<T extends EObject> extends OnDemandXmiLoader<T> {
 		this.obj = load();
 	}
 
-	@Override @Nullable
+	@Override
 	public T get() {
 		if (obj == null) {
 			log.warn("Returning null, probably XMI Loader has been destroyed for {} from {} [{}]",
 					resourceUri, ePackageName, ePackageNsUri);
 		}
 		return obj;
+	}
+	
+	/**
+	 * {@link Expandable} scope is not supported.
+	 * @see org.soluvas.commons.OnDemandXmiLoader#getScope()
+	 */
+	@Override
+	public Map<String, Object> getScope() {
+		return ImmutableMap.of();
 	}
 
 }
