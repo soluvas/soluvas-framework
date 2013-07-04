@@ -13,7 +13,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.realm.ldap.AbstractLdapRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.codehaus.jackson.JsonNode;
 import org.ektorp.CouchDbConnector;
 import org.ektorp.ViewQuery;
 import org.ektorp.ViewResult;
@@ -25,6 +24,7 @@ import org.ektorp.impl.StdCouchDbInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
