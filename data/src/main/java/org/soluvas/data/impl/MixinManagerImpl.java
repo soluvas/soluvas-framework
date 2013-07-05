@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
@@ -93,6 +94,10 @@ public class MixinManagerImpl implements MixinManager {
 	 */
 	@Override
 	public Mixin findMixin(String qName) {
+		if (Strings.isNullOrEmpty(qName)) {
+			log.warn("Trying to find Mixin by qName, but the qName is {}", qName);
+			return null;
+		}
 		final String patternStr = "([^_]+)_(.+)";
 		final Matcher nsPrefixMatcher = Pattern.compile(patternStr).matcher(qName);
 		Preconditions.checkState(nsPrefixMatcher.matches(),
