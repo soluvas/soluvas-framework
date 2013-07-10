@@ -4,10 +4,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 
 /**
  * Describes LDAP attributes mapping to class fields. 
@@ -29,11 +28,7 @@ public class LdapMapping {
 	public LdapMapping(final Collection<String> objectClasses, final LdapAttributeMapping rdn,
 			final List<LdapAttributeMapping> attributes) {
 		super();
-		Preconditions.checkNotNull(objectClasses, "objectClass-es must not be null");
-		Preconditions.checkArgument(!objectClasses.isEmpty(), "objectClass-es must not be empty");
-		Preconditions.checkNotNull(rdn, "RDN attribute must not be null");
-		Preconditions.checkNotNull(attributes, "attribute mappings must not be null");
-		this.primaryObjectClass = objectClasses.iterator().next();
+		this.primaryObjectClass = Iterables.getFirst(objectClasses, null);
 		this.objectClasses = ImmutableSet.copyOf(objectClasses);
 		this.rdn = rdn;
 		this.attributes = attributes;
@@ -66,6 +61,18 @@ public class LdapMapping {
 	 */
 	public List<LdapAttributeMapping> getAttributes() {
 		return attributes;
+	}
+	
+	public boolean isValid() {
+		try {
+			Preconditions.checkNotNull(objectClasses, "objectClass-es must not be null");
+			Preconditions.checkArgument(!objectClasses.isEmpty(), "objectClass-es must not be empty");
+			Preconditions.checkNotNull(rdn, "RDN attribute must not be null");
+			Preconditions.checkNotNull(attributes, "attribute mappings must not be null");
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	/* (non-Javadoc)

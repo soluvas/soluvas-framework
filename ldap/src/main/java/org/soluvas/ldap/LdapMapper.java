@@ -5,7 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -67,46 +66,47 @@ public class LdapMapper<T> {
 			final List<Field> fields = ReflectionUtils.getAllFields(clazz);
 			
 			final LdapEntry entryAnn = clazz.getAnnotation(LdapEntry.class);
-			if (entryAnn == null) {
-				throw new LdapMappingException(clazz.getName() + " must be annotated with @LdapEntry");
-			}
-			final String[] objectClasses = entryAnn.objectClasses();
-			log.debug("{} maps to {} objectClasses: {}", clazz.getName(), objectClasses.length, objectClasses);
-			
-			log.debug("Mapping {} from {} fields: {}", clazz.getName(), fields.size(), fields);
-			final ImmutableList.Builder<LdapAttributeMapping> attrMappingBuilder = ImmutableList.builder();
-			LdapAttributeMapping rdnMapping = null; 
-			for (final Field field : fields) {
-				final LdapAttribute ldapAttribute = field.getAnnotation(LdapAttribute.class);
-				if (ldapAttribute == null)
-					continue;
-				final String attrName = ldapAttribute.value()[0];
-				final LdapRdn ldapRdn = field.getAnnotation(LdapRdn.class);
-				final String fieldName = field.getName();
-				try {
-					if (ldapRdn != null) {
-						if (rdnMapping != null) {
-							throw new LdapMappingException(clazz.getName() + " has multiple @LdapRdn");
-						}
-						rdnMapping = new LdapAttributeMapping(field, attrName, false);
-						attrMappingBuilder.add(rdnMapping);
-					} else {
-						if (Set.class.isAssignableFrom(field.getType())) {
-							final LdapAttributeMapping attrMapping = new LdapAttributeMapping(field, attrName, true);
-							attrMappingBuilder.add(attrMapping);
+			if (entryAnn != null) {
+				final String[] objectClasses = entryAnn.objectClasses();
+				log.debug("Class {} maps to {} LDAP objectClasses: {}", clazz.getName(), objectClasses.length, objectClasses);
+				log.debug("Mapping {} from {} fields: {}", clazz.getName(), fields.size(), fields);
+				final ImmutableList.Builder<LdapAttributeMapping> attrMappingBuilder = ImmutableList.builder();
+				LdapAttributeMapping rdnMapping = null; 
+				for (final Field field : fields) {
+					final LdapAttribute ldapAttribute = field.getAnnotation(LdapAttribute.class);
+					if (ldapAttribute == null)
+						continue;
+					final String attrName = ldapAttribute.value()[0];
+					final LdapRdn ldapRdn = field.getAnnotation(LdapRdn.class);
+					final String fieldName = field.getName();
+					try {
+						if (ldapRdn != null) {
+							if (rdnMapping != null) {
+								throw new LdapMappingException(clazz.getName() + " has multiple @LdapRdn");
+							}
+							rdnMapping = new LdapAttributeMapping(field, attrName, false);
+							attrMappingBuilder.add(rdnMapping);
 						} else {
-							final LdapAttributeMapping attrMapping = new LdapAttributeMapping(field, attrName, false);
-							attrMappingBuilder.add(attrMapping);
+							if (Set.class.isAssignableFrom(field.getType())) {
+								final LdapAttributeMapping attrMapping = new LdapAttributeMapping(field, attrName, true);
+								attrMappingBuilder.add(attrMapping);
+							} else {
+								final LdapAttributeMapping attrMapping = new LdapAttributeMapping(field, attrName, false);
+								attrMappingBuilder.add(attrMapping);
+							}
 						}
+					} catch (Exception e) {
+						throw new LdapMappingException(e, "Error mapping %s property %s to attribute %s",
+								clazz.getName(), fieldName, attrName);
 					}
-				} catch (Exception e) {
-					throw new LdapMappingException(e, "Error mapping %s property %s to attribute %s",
-							clazz.getName(), fieldName, attrName);
 				}
+				Preconditions.checkNotNull(rdnMapping, "%s has %s fields, one must have @LdapRdn annotation", clazz.getName(), fields.size());
+				final LdapMapping mapping = new LdapMapping( ImmutableSet.copyOf(objectClasses), rdnMapping, attrMappingBuilder.build() );
+				return mapping;
+			} else {
+				log.info("Class " + clazz.getName() + " (probably a generic superclass) is not annotated with @LdapEntry, not mapping LDAP");
+				return new LdapMapping( ImmutableSet.<String>of(), null, ImmutableList.<LdapAttributeMapping>of() );
 			}
-			Preconditions.checkNotNull(rdnMapping, "%s has %s fields, one must have @LdapRdn annotation", clazz.getName(), fields.size());
-			final LdapMapping mapping = new LdapMapping( ImmutableSet.copyOf(objectClasses), rdnMapping, attrMappingBuilder.build() );
-			return mapping;
 		}
 	});
 	
@@ -114,10 +114,15 @@ public class LdapMapper<T> {
 		super();
 	}
 
+	/**
+	 * @param clazz
+	 * @return the LDAP mapping. If the clazz is not annotated with {@link LdapEntry} then
+	 * 	{@link LdapMapping#isValid()} will return {@code false}.
+	 */
 	public LdapMapping getMapping(final Class<?> clazz) {
 		try {
 			return mappings.get(clazz);
-		} catch (ExecutionException e) {
+		} catch (Exception e) {
 			throw new LdapMappingException(e, "Cannot get LDAP mapping for %s", clazz.getName());
 		}
 	}
@@ -201,54 +206,58 @@ public class LdapMapper<T> {
 			LdapInvalidDnException {
 		final String dn = getDn(obj, baseDn);
 		final LdapMapping mapping = getMapping(clazz);
-		log.trace("Mapping {} to LDAP entry {} from {} mapped fields: {}", clazz.getName(), dn,
-				mapping.getAttributes().size(), mapping.getAttributes());
-		
-		// Set DN
-		entry.setDn(dn);
-		
-		// Attributes
-		for (final LdapAttributeMapping attr : mapping.getAttributes()) {
-			try {
-				if (attr.isMulti()) {
-					// Set value as multi attribute
-					final Set<?> objValues = (Set<?>) PropertyUtils.getProperty(obj, attr.getField().getName());
-					if (objValues != null) {
-						if (!objValues.isEmpty()) {
-							final Set<String> attrValues = ImmutableSet.copyOf( Iterables.transform(objValues, new Function<Object, String>() {
-								@Override
-								public String apply(Object input) {
-									return convertFromPropertyValue(attr.getField().getType(), input);
-								}
-							}) );
-							log.trace("Map {}#{} as multi {}: {}",
-									clazz.getName(), attr.getField().getName(), attr.getName(), attrValues );
-							entry.put(attr.getName(), attrValues.toArray(new String[] { }));
+		if (mapping.isValid()) {
+			log.trace("Mapping {} to LDAP entry {} from {} mapped fields: {}", clazz.getName(), dn,
+					mapping.getAttributes().size(), mapping.getAttributes());
+			
+			// Set DN
+			entry.setDn(dn);
+			
+			// Attributes
+			for (final LdapAttributeMapping attr : mapping.getAttributes()) {
+				try {
+					if (attr.isMulti()) {
+						// Set value as multi attribute
+						final Set<?> objValues = (Set<?>) PropertyUtils.getProperty(obj, attr.getField().getName());
+						if (objValues != null) {
+							if (!objValues.isEmpty()) {
+								final Set<String> attrValues = ImmutableSet.copyOf( Iterables.transform(objValues, new Function<Object, String>() {
+									@Override
+									public String apply(Object input) {
+										return convertFromPropertyValue(attr.getField().getType(), input);
+									}
+								}) );
+								log.trace("Map {}#{} as multi {}: {}",
+										clazz.getName(), attr.getField().getName(), attr.getName(), attrValues );
+								entry.put(attr.getName(), attrValues.toArray(new String[] { }));
+							} else {
+								log.trace("Not mapping {}#{} as multi {} because it is empty",
+										clazz.getName(), attr.getField().getName(), attr.getName() );
+							}
 						} else {
-							log.trace("Not mapping {}#{} as multi {} because it is empty",
-									clazz.getName(), attr.getField().getName(), attr.getName() );
+							log.trace("Not mapping null {}#{} as multi {}",
+									clazz.getName(), attr.getField(), attr.getName() );
 						}
 					} else {
-						log.trace("Not mapping null {}#{} as multi {}",
-								clazz.getName(), attr.getField(), attr.getName() );
+						// Set value as single attribute
+						final Object objValue = PropertyUtils.getProperty(obj, attr.getField().getName());
+						if (objValue != null) {
+							final String attrValue = convertFromPropertyValue(attr.getField().getType(), objValue);
+							log.trace("Map {}#{} as {}: {}",
+									clazz.getName(), attr.getField().getName(), attr.getName(), attrValue );
+							entry.put(attr.getName(), attrValue);
+						} else {
+							log.trace("Not mapping null {}#{} as {}", 
+									clazz.getName(), attr.getField().getName(), attr.getName() );
+						}
 					}
-				} else {
-					// Set value as single attribute
-					final Object objValue = PropertyUtils.getProperty(obj, attr.getField().getName());
-					if (objValue != null) {
-						final String attrValue = convertFromPropertyValue(attr.getField().getType(), objValue);
-						log.trace("Map {}#{} as {}: {}",
-								clazz.getName(), attr.getField().getName(), attr.getName(), attrValue );
-						entry.put(attr.getName(), attrValue);
-					} else {
-						log.trace("Not mapping null {}#{} as {}", 
-								clazz.getName(), attr.getField().getName(), attr.getName() );
-					}
+				} catch (Exception e) {
+					throw new LdapMappingException(e, "Error mapping property %s to attribute %s", 
+							attr.getField(), attr.getName());
 				}
-			} catch (Exception e) {
-				throw new LdapMappingException(e, "Error mapping property %s to attribute %s", 
-						attr.getField(), attr.getName());
 			}
+		} else {
+			log.trace("Not mapping {} (probably superclass) to LDAP entry {} from {} mapped fields: {}", clazz.getName(), dn);
 		}
 	}
 	
