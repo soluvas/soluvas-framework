@@ -366,7 +366,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	@Override
 	public long countByQuery(DBObject query) {
 		final long total = coll.count(query);
-		log.debug("count {} {} returned {}", total);
+		log.debug("Got count {} by query {}", total, query);
 		return total;
 	}
 	
