@@ -21,6 +21,7 @@ import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.impl.EmailImpl;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.commons.util.Profiled;
+import org.soluvas.data.DataException;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
@@ -237,7 +238,13 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	@Override
 	public <S extends T> Collection<S> add(Collection<S> entities) {
 		beforeSave(entities);
-		final List<String> ids = ImmutableList.copyOf(Collections2.transform(entities, new IdFunction()));
+		final Collection<String> transformedAsIds = Collections2.transform(entities, new IdFunction());
+		final List<String> ids;
+		try {
+			ids = ImmutableList.copyOf(transformedAsIds);
+		} catch (Exception e1) {
+			throw new DataException(e1, "Make sure all of the entities have valid 'id': %s", transformedAsIds);
+		}
 		log.debug("Adding {} {} documents: {}", entities.size(), collName, ids);
 		try (Profiled p = new Profiled(log, "Added " + entities.size() + " " + collName + " documents: " + ids)) {
 			final List<DBObject> dbObjs = ImmutableList.copyOf(Collections2
