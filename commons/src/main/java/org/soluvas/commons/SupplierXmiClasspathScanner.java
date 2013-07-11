@@ -83,7 +83,11 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 	}
 	
 	/**
-	 * Scan the entire org, com, and id classpath, and the common folder.
+	 * Scan, in this order:
+	 * <ol>
+	 * 	<li>the entire org, com, and id classpath</li>
+	 * 	<li>the {@code common} folder.</li>
+	 * </ol>
 	 * @param ePackage
 	 * @param suppliedClass
 	 * @param tenantId

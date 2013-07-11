@@ -29,6 +29,8 @@ import org.soluvas.data.Kind;
 import org.soluvas.data.ListVocab;
 import org.soluvas.data.MeasureValue;
 import org.soluvas.data.Mixin;
+import org.soluvas.data.MixinCatalog;
+import org.soluvas.data.MixinManager;
 import org.soluvas.data.RangeValue;
 import org.soluvas.data.StringValue;
 import org.soluvas.data.Term;
@@ -159,6 +161,20 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	private EClass kindEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mixinCatalogEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mixinManagerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -298,8 +314,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getAttribute_MinValues() {
+	public EAttribute getAttribute_Enabled() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -309,7 +324,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAttribute_MaxValues() {
+	public EAttribute getAttribute_MinValues() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -319,7 +334,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAttribute_DataTypeName() {
+	public EAttribute getAttribute_MaxValues() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -329,7 +344,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAttribute_KindNsPrefix() {
+	public EAttribute getAttribute_DataTypeName() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -339,7 +354,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAttribute_KindName() {
+	public EAttribute getAttribute_KindNsPrefix() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -349,7 +364,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAttribute_InputMethod() {
+	public EAttribute getAttribute_KindName() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -359,7 +374,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAttribute_InputUnitName() {
+	public EAttribute getAttribute_InputMethod() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -369,7 +384,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAttribute_VisibleInSimple() {
+	public EAttribute getAttribute_InputUnitName() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -379,7 +394,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAttribute_SearchableInQuick() {
+	public EAttribute getAttribute_VisibleInSimple() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -389,7 +404,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAttribute_ImageId() {
+	public EAttribute getAttribute_SearchableInQuick() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -399,7 +414,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAttribute_FieldWidth() {
+	public EAttribute getAttribute_ImageId() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -409,8 +424,18 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAttribute_Principal() {
+	public EAttribute getAttribute_FieldWidth() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getAttribute_Principal() {
+		return (EAttribute)attributeEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -768,7 +793,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDataCatalog_Mixins() {
+	public EReference getDataCatalog_Terms() {
 		return (EReference)dataCatalogEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -778,18 +803,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDataCatalog_Terms() {
-		return (EReference)dataCatalogEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getDataCatalog_Kinds() {
-		return (EReference)dataCatalogEClass.getEStructuralFeatures().get(3);
+		return (EReference)dataCatalogEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -810,6 +825,51 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	@Override
 	public EAttribute getKind_ImageId() {
 		return (EAttribute)kindEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMixinCatalog() {
+		return mixinCatalogEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMixinCatalog_Mixins() {
+		return (EReference)mixinCatalogEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMixinManager() {
+		return mixinManagerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMixinManager_MixinCatalog() {
+		return (EReference)mixinManagerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMixinManager_Mixins() {
+		return (EAttribute)mixinManagerEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -913,6 +973,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		// Create classes and their features
 		attributeEClass = createEClass(ATTRIBUTE);
 		createEAttribute(attributeEClass, ATTRIBUTE__DISPLAY_NAME);
+		createEAttribute(attributeEClass, ATTRIBUTE__ENABLED);
 		createEAttribute(attributeEClass, ATTRIBUTE__MIN_VALUES);
 		createEAttribute(attributeEClass, ATTRIBUTE__MAX_VALUES);
 		createEAttribute(attributeEClass, ATTRIBUTE__DATA_TYPE_NAME);
@@ -974,12 +1035,18 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		dataCatalogEClass = createEClass(DATA_CATALOG);
 		createEReference(dataCatalogEClass, DATA_CATALOG__VOCABS);
-		createEReference(dataCatalogEClass, DATA_CATALOG__MIXINS);
 		createEReference(dataCatalogEClass, DATA_CATALOG__TERMS);
 		createEReference(dataCatalogEClass, DATA_CATALOG__KINDS);
 
 		kindEClass = createEClass(KIND);
 		createEAttribute(kindEClass, KIND__IMAGE_ID);
+
+		mixinCatalogEClass = createEClass(MIXIN_CATALOG);
+		createEReference(mixinCatalogEClass, MIXIN_CATALOG__MIXINS);
+
+		mixinManagerEClass = createEClass(MIXIN_MANAGER);
+		createEReference(mixinManagerEClass, MIXIN_MANAGER__MIXIN_CATALOG);
+		createEAttribute(mixinManagerEClass, MIXIN_MANAGER__MIXINS);
 
 		// Create enums
 		attributeSemanticEEnum = createEEnum(ATTRIBUTE_SEMANTIC);
@@ -1106,10 +1173,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		kindEClass.getESuperTypes().add(theCommonsPackage.getResourceAware());
 		kindEClass.getESuperTypes().add(theCommonsPackage.getImageable());
 		kindEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
+		mixinCatalogEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAttribute_DisplayName(), ecorePackage.getEString(), "displayName", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_Enabled(), theEcorePackage.getEBoolean(), "enabled", "true", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_MinValues(), theEcorePackage.getELong(), "minValues", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_MaxValues(), theEcorePackage.getELong(), "maxValues", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_DataTypeName(), ecorePackage.getEString(), "dataTypeName", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1205,12 +1274,24 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		initEClass(dataCatalogEClass, DataCatalog.class, "DataCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDataCatalog_Vocabs(), this.getVocab(), null, "vocabs", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDataCatalog_Mixins(), this.getMixin(), null, "mixins", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataCatalog_Terms(), this.getTerm(), null, "terms", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataCatalog_Kinds(), this.getKind(), null, "kinds", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kindEClass, Kind.class, "Kind", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getKind_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, Kind.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mixinCatalogEClass, MixinCatalog.class, "MixinCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMixinCatalog_Mixins(), this.getMixin(), null, "mixins", null, 0, -1, MixinCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mixinManagerEClass, MixinManager.class, "MixinManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMixinManager_MixinCatalog(), this.getMixinCatalog(), null, "mixinCatalog", null, 1, 1, MixinManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(theEcorePackage.getEEList());
+		g2 = createEGenericType(this.getMixin());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getMixinManager_Mixins(), g1, "mixins", null, 1, 1, MixinManager.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(mixinManagerEClass, this.getMixin(), "findMixin", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "uName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(attributeSemanticEEnum, AttributeSemantic.class, "AttributeSemantic");
@@ -1287,6 +1368,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Human friendly name."
+		   });		
+		addAnnotation
+		  (getAttribute_Enabled(), 
+		   source, 
+		   new String[] {
+			 "documentation", "If {@code false}, this attribute will not be editable in the Product Editor backend."
 		   });		
 		addAnnotation
 		  (getAttribute_MinValues(), 
@@ -1433,6 +1520,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 			 "documentation", "List of terms in a Vocabulary or if the Term is nested (tree vocabulary)."
 		   });			
 		addAnnotation
+		  (dataCatalogEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Contains collections of data objects: kinds, terms."
+		   });		
+		addAnnotation
 		  (kindEClass, 
 		   source, 
 		   new String[] {
@@ -1443,6 +1536,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Attribute can hint the inputMethod (string, measure, range, currency, term)  and inputUnit. But user can always override this.\n\nFor currency, the default currency depends on user setting, which if absent, defaults to Shop/Mall setting."
+		   });		
+		addAnnotation
+		  (mixinCatalogEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Contains a collection of mixins."
 		   });
 	}
 
@@ -1453,7 +1552,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																										
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																											
 		addAnnotation
 		  (vocabEClass, 
 		   source, 
@@ -1483,7 +1582,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "name", "DataCatalog"
-		   });		
+		   });				
 	}
 	
 	public static DataPackage getInstance() {

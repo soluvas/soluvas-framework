@@ -13,11 +13,14 @@ import org.soluvas.commons.ResourceAware;
  * A representation of the model object '<em><b>Catalog</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Contains collections of data objects: kinds, terms.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.data.DataCatalog#getVocabs <em>Vocabs</em>}</li>
- *   <li>{@link org.soluvas.data.DataCatalog#getMixins <em>Mixins</em>}</li>
  *   <li>{@link org.soluvas.data.DataCatalog#getTerms <em>Terms</em>}</li>
  *   <li>{@link org.soluvas.data.DataCatalog#getKinds <em>Kinds</em>}</li>
  * </ul>
@@ -43,22 +46,6 @@ public interface DataCatalog extends BundleAware, ResourceAware, NameContainer {
 	 * @generated
 	 */
 	EList<Vocab> getVocabs();
-
-	/**
-	 * Returns the value of the '<em><b>Mixins</b></em>' containment reference list.
-	 * The list contents are of type {@link org.soluvas.data.Mixin}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Mixins</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mixins</em>' containment reference list.
-	 * @see org.soluvas.data.DataPackage#getDataCatalog_Mixins()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Mixin> getMixins();
 
 	/**
 	 * Returns the value of the '<em><b>Terms</b></em>' containment reference list.

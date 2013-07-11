@@ -1,5 +1,3 @@
-/**
- */
 package org.soluvas.data.impl;
 
 import java.util.List;
@@ -10,11 +8,18 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.QNameFunction;
-import org.soluvas.data.DataCatalog;
+import org.soluvas.data.DataPackage;
 import org.soluvas.data.Mixin;
+import org.soluvas.data.MixinCatalog;
 import org.soluvas.data.MixinManager;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -33,28 +38,29 @@ import com.google.common.collect.Iterables;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.soluvas.data.impl.MixinManagerImpl#getDataCatalog <em>Data Catalog</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.MixinManagerImpl#getMixinCatalog <em>Mixin Catalog</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.MixinManagerImpl#getMixins <em>Mixins</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 @Service @Lazy
-public class MixinManagerImpl implements MixinManager {
-	
-	private static final Logger log = LoggerFactory
-			.getLogger(MixinManagerImpl.class);
+public class MixinManagerImpl extends EObjectImpl implements MixinManager {
 	
 	/**
-	 * The cached value of the '{@link #getDataCatalog() <em>Data Catalog</em>}' reference.
+	 * The cached value of the '{@link #getMixinCatalog() <em>Mixin Catalog</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDataCatalog()
+	 * @see #getMixinCatalog()
 	 * @generated
 	 * @ordered
 	 */
-	protected DataCatalog dataCatalog;
+	protected MixinCatalog mixinCatalog;
 
+	private static final Logger log = LoggerFactory
+			.getLogger(MixinManagerImpl.class);
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -63,10 +69,14 @@ public class MixinManagerImpl implements MixinManager {
 		throw new UnsupportedOperationException();
 	}
 	
-	@Inject
-	public MixinManagerImpl(DataCatalog dataCatalog) {
-		super();
-		this.dataCatalog = dataCatalog;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return DataPackage.Literals.MIXIN_MANAGER;
 	}
 
 	/**
@@ -75,8 +85,16 @@ public class MixinManagerImpl implements MixinManager {
 	 * @generated
 	 */
 	@Override
-	public DataCatalog getDataCatalog() {
-		return dataCatalog;
+	public MixinCatalog getMixinCatalog() {
+		if (mixinCatalog != null && mixinCatalog.eIsProxy()) {
+			InternalEObject oldMixinCatalog = (InternalEObject)mixinCatalog;
+			mixinCatalog = (MixinCatalog)eResolveProxy(oldMixinCatalog);
+			if (mixinCatalog != oldMixinCatalog) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DataPackage.MIXIN_MANAGER__MIXIN_CATALOG, oldMixinCatalog, mixinCatalog));
+			}
+		}
+		return mixinCatalog;
 	}
 
 	/**
@@ -84,8 +102,23 @@ public class MixinManagerImpl implements MixinManager {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataCatalog basicGetDataCatalog() {
-		return dataCatalog;
+	public MixinCatalog basicGetMixinCatalog() {
+		return mixinCatalog;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public EList getMixins() {
+		return mixinCatalog.getMixins();
+	}
+
+	@Inject
+	public MixinManagerImpl(MixinCatalog mixinCatalog) {
+		super();
+		this.mixinCatalog = mixinCatalog;
 	}
 
 	/**
@@ -107,18 +140,51 @@ public class MixinManagerImpl implements MixinManager {
 		final String mixinName = nsPrefixMatcher.group(2);
 		
 		try {
-			return Iterables.find(dataCatalog.getMixins(), new Predicate<Mixin>() {
+			return Iterables.find(mixinCatalog.getMixins(), new Predicate<Mixin>() {
 				@Override
 				public boolean apply(@Nullable Mixin input) {
 					return Objects.equal(nsPrefix, input.getNsPrefix()) && Objects.equal(mixinName, input.getName());
 				}
 			});
 		} catch (NoSuchElementException e) {
-			final List<String> mixinNames = ImmutableList.copyOf(Iterables.transform(dataCatalog.getMixins(), new QNameFunction()));
+			final List<String> mixinNames = ImmutableList.copyOf(Iterables.transform(mixinCatalog.getMixins(), new QNameFunction()));
 			log.warn(String.format("Cannot find mixin %s_%s. %d available mixins are: %s",
 					nsPrefix, mixinName, mixinNames.size(), mixinNames));
 			return null;
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case DataPackage.MIXIN_MANAGER__MIXIN_CATALOG:
+				if (resolve) return getMixinCatalog();
+				return basicGetMixinCatalog();
+			case DataPackage.MIXIN_MANAGER__MIXINS:
+				return getMixins();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case DataPackage.MIXIN_MANAGER__MIXIN_CATALOG:
+				return mixinCatalog != null;
+			case DataPackage.MIXIN_MANAGER__MIXINS:
+				return getMixins() != null;
+		}
+		return super.eIsSet(featureID);
 	}
 
 } //MixinManagerImpl

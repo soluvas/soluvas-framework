@@ -157,6 +157,14 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 				return createKindAdapter();
 			}
 			@Override
+			public Adapter caseMixinCatalog(MixinCatalog object) {
+				return createMixinCatalogAdapter();
+			}
+			@Override
+			public Adapter caseMixinManager(MixinManager object) {
+				return createMixinManagerAdapter();
+			}
+			@Override
 			public Adapter caseNsPrefixable(NsPrefixable object) {
 				return createNsPrefixableAdapter();
 			}
@@ -445,6 +453,34 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createKindAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.data.MixinCatalog <em>Mixin Catalog</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.data.MixinCatalog
+	 * @generated
+	 */
+	public Adapter createMixinCatalogAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.data.MixinManager <em>Mixin Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.data.MixinManager
+	 * @generated
+	 */
+	public Adapter createMixinManagerAdapter() {
 		return null;
 	}
 

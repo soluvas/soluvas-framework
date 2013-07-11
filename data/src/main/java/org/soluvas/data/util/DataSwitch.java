@@ -251,6 +251,20 @@ public class DataSwitch<T1> extends Switch<T1> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DataPackage.MIXIN_CATALOG: {
+				MixinCatalog mixinCatalog = (MixinCatalog)theEObject;
+				T1 result = caseMixinCatalog(mixinCatalog);
+				if (result == null) result = caseNameContainer(mixinCatalog);
+				if (result == null) result = caseNameable(mixinCatalog);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DataPackage.MIXIN_MANAGER: {
+				MixinManager mixinManager = (MixinManager)theEObject;
+				T1 result = caseMixinManager(mixinManager);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -492,6 +506,36 @@ public class DataSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseKind(Kind object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mixin Catalog</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mixin Catalog</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseMixinCatalog(MixinCatalog object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mixin Manager</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mixin Manager</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseMixinManager(MixinManager object) {
 		return null;
 	}
 

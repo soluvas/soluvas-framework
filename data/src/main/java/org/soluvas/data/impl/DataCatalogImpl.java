@@ -47,7 +47,6 @@ import org.soluvas.data.Vocab;
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getVocabs <em>Vocabs</em>}</li>
- *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getMixins <em>Mixins</em>}</li>
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getTerms <em>Terms</em>}</li>
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getKinds <em>Kinds</em>}</li>
  * </ul>
@@ -165,16 +164,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * @ordered
 	 */
 	protected EList<Vocab> vocabs;
-
-	/**
-	 * The cached value of the '{@link #getMixins() <em>Mixins</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMixins()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Mixin> mixins;
 
 	/**
 	 * The cached value of the '{@link #getTerms() <em>Terms</em>}' containment reference list.
@@ -337,18 +326,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Mixin> getMixins() {
-		if (mixins == null) {
-			mixins = new EObjectContainmentEList<Mixin>(Mixin.class, this, DataPackage.DATA_CATALOG__MIXINS);
-		}
-		return mixins;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Term> getTerms() {
 		if (terms == null) {
 			terms = new EObjectContainmentEList<Term>(Term.class, this, DataPackage.DATA_CATALOG__TERMS);
@@ -378,8 +355,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 		switch (featureID) {
 			case DataPackage.DATA_CATALOG__VOCABS:
 				return ((InternalEList<?>)getVocabs()).basicRemove(otherEnd, msgs);
-			case DataPackage.DATA_CATALOG__MIXINS:
-				return ((InternalEList<?>)getMixins()).basicRemove(otherEnd, msgs);
 			case DataPackage.DATA_CATALOG__TERMS:
 				return ((InternalEList<?>)getTerms()).basicRemove(otherEnd, msgs);
 			case DataPackage.DATA_CATALOG__KINDS:
@@ -408,8 +383,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 				return getName();
 			case DataPackage.DATA_CATALOG__VOCABS:
 				return getVocabs();
-			case DataPackage.DATA_CATALOG__MIXINS:
-				return getMixins();
 			case DataPackage.DATA_CATALOG__TERMS:
 				return getTerms();
 			case DataPackage.DATA_CATALOG__KINDS:
@@ -445,10 +418,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 			case DataPackage.DATA_CATALOG__VOCABS:
 				getVocabs().clear();
 				getVocabs().addAll((Collection<? extends Vocab>)newValue);
-				return;
-			case DataPackage.DATA_CATALOG__MIXINS:
-				getMixins().clear();
-				getMixins().addAll((Collection<? extends Mixin>)newValue);
 				return;
 			case DataPackage.DATA_CATALOG__TERMS:
 				getTerms().clear();
@@ -488,9 +457,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 			case DataPackage.DATA_CATALOG__VOCABS:
 				getVocabs().clear();
 				return;
-			case DataPackage.DATA_CATALOG__MIXINS:
-				getMixins().clear();
-				return;
 			case DataPackage.DATA_CATALOG__TERMS:
 				getTerms().clear();
 				return;
@@ -521,8 +487,6 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case DataPackage.DATA_CATALOG__VOCABS:
 				return vocabs != null && !vocabs.isEmpty();
-			case DataPackage.DATA_CATALOG__MIXINS:
-				return mixins != null && !mixins.isEmpty();
 			case DataPackage.DATA_CATALOG__TERMS:
 				return terms != null && !terms.isEmpty();
 			case DataPackage.DATA_CATALOG__KINDS:

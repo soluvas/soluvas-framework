@@ -50,6 +50,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.data.Attribute#getDisplayName <em>Display Name</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#isEnabled <em>Enabled</em>}</li>
  *   <li>{@link org.soluvas.data.Attribute#getMinValues <em>Min Values</em>}</li>
  *   <li>{@link org.soluvas.data.Attribute#getMaxValues <em>Max Values</em>}</li>
  *   <li>{@link org.soluvas.data.Attribute#getDataTypeName <em>Data Type Name</em>}</li>
@@ -95,6 +96,32 @@ public interface Attribute extends NsPrefixable, NameContainer, Imageable, Descr
 	 * @generated
 	 */
 	void setDisplayName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Enabled</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * If {@code false}, this attribute will not be editable in the Product Editor backend.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Enabled</em>' attribute.
+	 * @see #setEnabled(boolean)
+	 * @see org.soluvas.data.DataPackage#getAttribute_Enabled()
+	 * @model default="true"
+	 * @generated
+	 */
+	boolean isEnabled();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#isEnabled <em>Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Enabled</em>' attribute.
+	 * @see #isEnabled()
+	 * @generated
+	 */
+	void setEnabled(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Min Values</b></em>' attribute.

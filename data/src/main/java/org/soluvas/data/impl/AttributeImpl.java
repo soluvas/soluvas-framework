@@ -33,6 +33,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getPositioner <em>Positioner</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getDisplayName <em>Display Name</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.AttributeImpl#isEnabled <em>Enabled</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getMinValues <em>Min Values</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getMaxValues <em>Max Values</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getDataTypeName <em>Data Type Name</em>}</li>
@@ -150,6 +151,26 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * @ordered
 	 */
 	protected String displayName = DISPLAY_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isEnabled() <em>Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ENABLED_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isEnabled() <em>Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean enabled = ENABLED_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getMinValues() <em>Min Values</em>}' attribute.
@@ -526,6 +547,27 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEnabled(boolean newEnabled) {
+		boolean oldEnabled = enabled;
+		enabled = newEnabled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__ENABLED, oldEnabled, enabled));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public long getMinValues() {
 		return minValues;
@@ -856,6 +898,8 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return getPositioner();
 			case DataPackage.ATTRIBUTE__DISPLAY_NAME:
 				return getDisplayName();
+			case DataPackage.ATTRIBUTE__ENABLED:
+				return isEnabled();
 			case DataPackage.ATTRIBUTE__MIN_VALUES:
 				return getMinValues();
 			case DataPackage.ATTRIBUTE__MAX_VALUES:
@@ -906,6 +950,9 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return;
 			case DataPackage.ATTRIBUTE__DISPLAY_NAME:
 				setDisplayName((String)newValue);
+				return;
+			case DataPackage.ATTRIBUTE__ENABLED:
+				setEnabled((Boolean)newValue);
 				return;
 			case DataPackage.ATTRIBUTE__MIN_VALUES:
 				setMinValues((Long)newValue);
@@ -970,6 +1017,9 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 			case DataPackage.ATTRIBUTE__DISPLAY_NAME:
 				setDisplayName(DISPLAY_NAME_EDEFAULT);
 				return;
+			case DataPackage.ATTRIBUTE__ENABLED:
+				setEnabled(ENABLED_EDEFAULT);
+				return;
 			case DataPackage.ATTRIBUTE__MIN_VALUES:
 				setMinValues(MIN_VALUES_EDEFAULT);
 				return;
@@ -1028,6 +1078,8 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return POSITIONER_EDEFAULT == null ? positioner != null : !POSITIONER_EDEFAULT.equals(positioner);
 			case DataPackage.ATTRIBUTE__DISPLAY_NAME:
 				return DISPLAY_NAME_EDEFAULT == null ? displayName != null : !DISPLAY_NAME_EDEFAULT.equals(displayName);
+			case DataPackage.ATTRIBUTE__ENABLED:
+				return enabled != ENABLED_EDEFAULT;
 			case DataPackage.ATTRIBUTE__MIN_VALUES:
 				return minValues != MIN_VALUES_EDEFAULT;
 			case DataPackage.ATTRIBUTE__MAX_VALUES:
@@ -1152,6 +1204,8 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 		result.append(positioner);
 		result.append(", displayName: ");
 		result.append(displayName);
+		result.append(", enabled: ");
+		result.append(enabled);
 		result.append(", minValues: ");
 		result.append(minValues);
 		result.append(", maxValues: ");

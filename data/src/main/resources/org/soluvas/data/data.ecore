@@ -50,6 +50,12 @@
         <details key="documentation" value="Human friendly name."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enabled" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"
+        defaultValueLiteral="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If {@code false}, this attribute will not be editable in the Product Editor backend."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="minValues" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="0 means optional, 1 means required, and so on."/>
@@ -274,10 +280,11 @@
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
       <details key="name" value="DataCatalog"/>
     </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Contains collections of data objects: kinds, terms."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vocabs" upperBound="-1"
         eType="#//Vocab" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mixins" upperBound="-1"
-        eType="#//Mixin" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="terms" upperBound="-1"
         eType="#//Term" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="kinds" upperBound="-1"
@@ -298,5 +305,25 @@
     <eLiterals name="range" value="2"/>
     <eLiterals name="currency" value="3"/>
     <eLiterals name="term" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MixinCatalog" eSuperTypes="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Contains a collection of mixins."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mixins" upperBound="-1"
+        eType="#//Mixin" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MixinManager">
+    <eOperations name="findMixin" eType="#//Mixin">
+      <eParameters name="uName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mixinCatalog" lowerBound="1"
+        eType="#//MixinCatalog" changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mixins" lowerBound="1"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EEList">
+        <eTypeArguments eClassifier="#//Mixin"/>
+      </eGenericType>
+    </eStructuralFeatures>
   </eClassifiers>
 </ecore:EPackage>

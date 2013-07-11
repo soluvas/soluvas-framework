@@ -1,5 +1,7 @@
 package org.soluvas.data.config;
 
+import java.io.File;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
@@ -8,10 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AggregatingSupplier;
 import org.soluvas.commons.DataFolder;
+import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.SupplierXmiClasspathScanner;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataFactory;
 import org.soluvas.data.DataPackage;
+import org.soluvas.data.MixinCatalog;
 import org.soluvas.data.MixinManager;
 import org.soluvas.data.TermChanged;
 import org.soluvas.data.TermManager;
@@ -63,13 +67,31 @@ public class SingleTenantDataConfig {
 	}
 
 	@Bean
-	public MixinManager mixinMgr() {
-		return new MixinManagerImpl(dataCatalog());
+	public TermManager termMgr() {
+		return new TermManagerImpl(dataCatalog());
 	}
 	
 	@Bean
-	public TermManager termMgr() {
-		return new TermManagerImpl(dataCatalog());
+	public MixinCatalog mixinCatalog() {
+		final File tenantMixinCatalogFile = new File(dataFolder, "common/base.MixinCatalog.xmi");
+		final Supplier<MixinCatalog> supplier;
+		if (tenantMixinCatalogFile.exists()) {
+			// If tenant-specific MixinCatalog exists, use it
+			log.info("Using tenant-specific MixinCatalog from {}", tenantMixinCatalogFile);
+			supplier = new OnDemandXmiLoader<>(DataPackage.eINSTANCE, tenantMixinCatalogFile.getPath());
+		} else {
+			// otherwise, use default MixinCatalog
+			// TODO: don't hardcode default mixin classpath name
+			log.info("Using default MixinCatalog from {}", tenantMixinCatalogFile);
+			supplier = new OnDemandXmiLoader<>(DataPackage.eINSTANCE, SingleTenantDataConfig.class, 
+					"/id/co/bippo/common/base.MixinCatalog.xmi");
+		}
+		return supplier.get();
+	}
+
+	@Bean
+	public MixinManager mixinMgr() {
+		return new MixinManagerImpl(mixinCatalog());
 	}
 	
 	@PostConstruct

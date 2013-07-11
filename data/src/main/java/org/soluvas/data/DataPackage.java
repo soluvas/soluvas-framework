@@ -114,13 +114,22 @@ public interface DataPackage extends EPackage {
 	int ATTRIBUTE__DISPLAY_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__ENABLED = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Min Values</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__MIN_VALUES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 4;
+	int ATTRIBUTE__MIN_VALUES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Max Values</b></em>' attribute.
@@ -129,7 +138,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__MAX_VALUES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 5;
+	int ATTRIBUTE__MAX_VALUES = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Data Type Name</b></em>' attribute.
@@ -138,7 +147,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__DATA_TYPE_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 6;
+	int ATTRIBUTE__DATA_TYPE_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Kind Ns Prefix</b></em>' attribute.
@@ -147,7 +156,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__KIND_NS_PREFIX = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 7;
+	int ATTRIBUTE__KIND_NS_PREFIX = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Kind Name</b></em>' attribute.
@@ -156,7 +165,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__KIND_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 8;
+	int ATTRIBUTE__KIND_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Input Method</b></em>' attribute.
@@ -165,7 +174,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__INPUT_METHOD = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 9;
+	int ATTRIBUTE__INPUT_METHOD = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Input Unit Name</b></em>' attribute.
@@ -174,7 +183,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__INPUT_UNIT_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 10;
+	int ATTRIBUTE__INPUT_UNIT_NAME = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Visible In Simple</b></em>' attribute.
@@ -183,7 +192,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__VISIBLE_IN_SIMPLE = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 11;
+	int ATTRIBUTE__VISIBLE_IN_SIMPLE = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Searchable In Quick</b></em>' attribute.
@@ -192,7 +201,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__SEARCHABLE_IN_QUICK = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 12;
+	int ATTRIBUTE__SEARCHABLE_IN_QUICK = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
@@ -201,7 +210,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__IMAGE_ID = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 13;
+	int ATTRIBUTE__IMAGE_ID = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Field Width</b></em>' attribute.
@@ -210,7 +219,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__FIELD_WIDTH = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 14;
+	int ATTRIBUTE__FIELD_WIDTH = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Principal</b></em>' attribute.
@@ -219,7 +228,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__PRINCIPAL = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 15;
+	int ATTRIBUTE__PRINCIPAL = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 16;
 
 	/**
 	 * The number of structural features of the '<em>Attribute</em>' class.
@@ -228,7 +237,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 16;
+	int ATTRIBUTE_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 17;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.ValueImpl <em>Value</em>}' class.
@@ -1262,22 +1271,13 @@ public interface DataPackage extends EPackage {
 	int DATA_CATALOG__VOCABS = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Mixins</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_CATALOG__MIXINS = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 5;
-
-	/**
 	 * The feature id for the '<em><b>Terms</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_CATALOG__TERMS = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 6;
+	int DATA_CATALOG__TERMS = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Kinds</b></em>' containment reference list.
@@ -1286,7 +1286,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_CATALOG__KINDS = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 7;
+	int DATA_CATALOG__KINDS = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Catalog</em>' class.
@@ -1295,7 +1295,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_CATALOG_FEATURE_COUNT = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 8;
+	int DATA_CATALOG_FEATURE_COUNT = CommonsPackage.BUNDLE_AWARE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.KindImpl <em>Kind</em>}' class.
@@ -1389,6 +1389,80 @@ public interface DataPackage extends EPackage {
 	int KIND_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 7;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.data.impl.MixinCatalogImpl <em>Mixin Catalog</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.data.impl.MixinCatalogImpl
+	 * @see org.soluvas.data.impl.DataPackageImpl#getMixinCatalog()
+	 * @generated
+	 */
+	int MIXIN_CATALOG = 16;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIXIN_CATALOG__NAME = CommonsPackage.NAME_CONTAINER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Mixins</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIXIN_CATALOG__MIXINS = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Mixin Catalog</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIXIN_CATALOG_FEATURE_COUNT = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.data.impl.MixinManagerImpl <em>Mixin Manager</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.data.impl.MixinManagerImpl
+	 * @see org.soluvas.data.impl.DataPackageImpl#getMixinManager()
+	 * @generated
+	 */
+	int MIXIN_MANAGER = 17;
+
+	/**
+	 * The feature id for the '<em><b>Mixin Catalog</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIXIN_MANAGER__MIXIN_CATALOG = 0;
+
+	/**
+	 * The feature id for the '<em><b>Mixins</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIXIN_MANAGER__MIXINS = 1;
+
+	/**
+	 * The number of structural features of the '<em>Mixin Manager</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIXIN_MANAGER_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1396,7 +1470,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getAttributeSemantic()
 	 * @generated
 	 */
-	int ATTRIBUTE_SEMANTIC = 16;
+	int ATTRIBUTE_SEMANTIC = 18;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.InputMethod <em>Input Method</em>}' enum.
@@ -1406,7 +1480,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getInputMethod()
 	 * @generated
 	 */
-	int INPUT_METHOD = 17;
+	int INPUT_METHOD = 19;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository</em>' data type.
@@ -1416,7 +1490,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepository()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY = 18;
+	int CRUD_REPOSITORY = 20;
 
 	/**
 	 * The meta object id for the '<em>Paging And Sorting Repository</em>' data type.
@@ -1426,7 +1500,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPagingAndSortingRepository()
 	 * @generated
 	 */
-	int PAGING_AND_SORTING_REPOSITORY = 19;
+	int PAGING_AND_SORTING_REPOSITORY = 21;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository Base</em>' data type.
@@ -1436,7 +1510,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepositoryBase()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY_BASE = 20;
+	int CRUD_REPOSITORY_BASE = 22;
 
 
 	/**
@@ -1447,7 +1521,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getMeasure()
 	 * @generated
 	 */
-	int MEASURE = 21;
+	int MEASURE = 23;
 
 	/**
 	 * The meta object id for the '<em>Decimal Measure</em>' data type.
@@ -1457,7 +1531,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getDecimalMeasure()
 	 * @generated
 	 */
-	int DECIMAL_MEASURE = 22;
+	int DECIMAL_MEASURE = 24;
 
 
 	/**
@@ -1480,6 +1554,17 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAttribute_DisplayName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#isEnabled <em>Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Enabled</em>'.
+	 * @see org.soluvas.data.Attribute#isEnabled()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_Enabled();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#getMinValues <em>Min Values</em>}'.
@@ -1985,17 +2070,6 @@ public interface DataPackage extends EPackage {
 	EReference getDataCatalog_Vocabs();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.soluvas.data.DataCatalog#getMixins <em>Mixins</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Mixins</em>'.
-	 * @see org.soluvas.data.DataCatalog#getMixins()
-	 * @see #getDataCatalog()
-	 * @generated
-	 */
-	EReference getDataCatalog_Mixins();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.soluvas.data.DataCatalog#getTerms <em>Terms</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2037,6 +2111,59 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getKind_ImageId();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.data.MixinCatalog <em>Mixin Catalog</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mixin Catalog</em>'.
+	 * @see org.soluvas.data.MixinCatalog
+	 * @generated
+	 */
+	EClass getMixinCatalog();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.soluvas.data.MixinCatalog#getMixins <em>Mixins</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Mixins</em>'.
+	 * @see org.soluvas.data.MixinCatalog#getMixins()
+	 * @see #getMixinCatalog()
+	 * @generated
+	 */
+	EReference getMixinCatalog_Mixins();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.data.MixinManager <em>Mixin Manager</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mixin Manager</em>'.
+	 * @see org.soluvas.data.MixinManager
+	 * @generated
+	 */
+	EClass getMixinManager();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.soluvas.data.MixinManager#getMixinCatalog <em>Mixin Catalog</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Mixin Catalog</em>'.
+	 * @see org.soluvas.data.MixinManager#getMixinCatalog()
+	 * @see #getMixinManager()
+	 * @generated
+	 */
+	EReference getMixinManager_MixinCatalog();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.MixinManager#getMixins <em>Mixins</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Mixins</em>'.
+	 * @see org.soluvas.data.MixinManager#getMixins()
+	 * @see #getMixinManager()
+	 * @generated
+	 */
+	EAttribute getMixinManager_Mixins();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}'.
@@ -2152,6 +2279,14 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ATTRIBUTE__DISPLAY_NAME = eINSTANCE.getAttribute_DisplayName();
+
+		/**
+		 * The meta object literal for the '<em><b>Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__ENABLED = eINSTANCE.getAttribute_Enabled();
 
 		/**
 		 * The meta object literal for the '<em><b>Min Values</b></em>' attribute feature.
@@ -2558,14 +2693,6 @@ public interface DataPackage extends EPackage {
 		EReference DATA_CATALOG__VOCABS = eINSTANCE.getDataCatalog_Vocabs();
 
 		/**
-		 * The meta object literal for the '<em><b>Mixins</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATA_CATALOG__MIXINS = eINSTANCE.getDataCatalog_Mixins();
-
-		/**
 		 * The meta object literal for the '<em><b>Terms</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2598,6 +2725,50 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute KIND__IMAGE_ID = eINSTANCE.getKind_ImageId();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.data.impl.MixinCatalogImpl <em>Mixin Catalog</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.data.impl.MixinCatalogImpl
+		 * @see org.soluvas.data.impl.DataPackageImpl#getMixinCatalog()
+		 * @generated
+		 */
+		EClass MIXIN_CATALOG = eINSTANCE.getMixinCatalog();
+
+		/**
+		 * The meta object literal for the '<em><b>Mixins</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MIXIN_CATALOG__MIXINS = eINSTANCE.getMixinCatalog_Mixins();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.data.impl.MixinManagerImpl <em>Mixin Manager</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.data.impl.MixinManagerImpl
+		 * @see org.soluvas.data.impl.DataPackageImpl#getMixinManager()
+		 * @generated
+		 */
+		EClass MIXIN_MANAGER = eINSTANCE.getMixinManager();
+
+		/**
+		 * The meta object literal for the '<em><b>Mixin Catalog</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MIXIN_MANAGER__MIXIN_CATALOG = eINSTANCE.getMixinManager_MixinCatalog();
+
+		/**
+		 * The meta object literal for the '<em><b>Mixins</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MIXIN_MANAGER__MIXINS = eINSTANCE.getMixinManager_Mixins();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}' enum.

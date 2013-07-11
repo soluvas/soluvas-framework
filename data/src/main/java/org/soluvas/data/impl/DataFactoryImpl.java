@@ -87,6 +87,8 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 			case DataPackage.FREE_VOCAB: return createFreeVocab();
 			case DataPackage.DATA_CATALOG: return createDataCatalog();
 			case DataPackage.KIND: return createKind();
+			case DataPackage.MIXIN_CATALOG: return createMixinCatalog();
+			case DataPackage.MIXIN_MANAGER: return createMixinManager();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -302,6 +304,26 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	public Kind createKind() {
 		KindImpl kind = new KindImpl();
 		return kind;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MixinCatalog createMixinCatalog() {
+		MixinCatalogImpl mixinCatalog = new MixinCatalogImpl();
+		return mixinCatalog;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MixinManager createMixinManager() {
+		MixinManagerImpl mixinManager = new MixinManagerImpl();
+		return mixinManager;
 	}
 
 	/**

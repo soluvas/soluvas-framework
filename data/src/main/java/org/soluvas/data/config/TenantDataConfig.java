@@ -1,17 +1,22 @@
 package org.soluvas.data.config;
 
+import java.io.File;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AggregatingSupplier;
 import org.soluvas.commons.DelegatingSupplier;
+import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.SupplierXmiClasspathScanner;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataFactory;
 import org.soluvas.data.DataPackage;
+import org.soluvas.data.MixinCatalog;
 import org.soluvas.data.MixinManager;
 import org.soluvas.data.TermManager;
 import org.soluvas.data.impl.MixinManagerImpl;
@@ -35,6 +40,8 @@ import com.google.common.collect.ImmutableList;
 @ComponentScan("org.soluvas.data.shell")
 public class TenantDataConfig {
 	
+	private static final Logger log = LoggerFactory
+			.getLogger(TenantDataConfig.class);
 //	@Inject @DataFolder
 //	private String dataFolder;
 	@Inject
@@ -72,9 +79,27 @@ public class TenantDataConfig {
 		return dataCatalogSupplier().get();
 	}
 
+	@Bean
+	public MixinCatalog mixinCatalog() {
+		final File tenantMixinCatalogFile = new File(getDataFolder(), "common/base.MixinCatalog.xmi");
+		final Supplier<MixinCatalog> supplier;
+		if (tenantMixinCatalogFile.exists()) {
+			// If tenant-specific MixinCatalog exists, use it
+			log.info("Using tenant-specific MixinCatalog from {}", tenantMixinCatalogFile);
+			supplier = new OnDemandXmiLoader<>(DataPackage.eINSTANCE, tenantMixinCatalogFile.getPath());
+		} else {
+			// otherwise, use default MixinCatalog
+			// TODO: don't hardcode default mixin classpath name
+			log.info("Using default MixinCatalog from {}", tenantMixinCatalogFile);
+			supplier = new OnDemandXmiLoader<>(DataPackage.eINSTANCE, SingleTenantDataConfig.class, 
+					"/id/co/bippo/common/base.MixinCatalog.xmi");
+		}
+		return supplier.get();
+	}
+
 	@Bean @Scope("request")
 	public MixinManager mixinMgr() throws ExecutionException {
-		return new MixinManagerImpl(dataCatalog());
+		return new MixinManagerImpl(mixinCatalog());
 	}
 	
 	@Bean @Scope("request")
