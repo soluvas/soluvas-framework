@@ -79,7 +79,7 @@ public class TenantDataConfig {
 		return dataCatalogSupplier().get();
 	}
 
-	@Bean
+	@Bean @Scope("request")
 	public MixinCatalog mixinCatalog() {
 		final File tenantMixinCatalogFile = new File(getDataFolder(), "common/base.MixinCatalog.xmi");
 		final Supplier<MixinCatalog> supplier;
