@@ -22,6 +22,9 @@ public class CustomerRoles {
 	
 	public static final String MEMBER = "member";
 	
+	/**
+	 * Agen Spesial / Besar. 
+	 */
 	public static final String SPECIAL_AGENT = "ag-sp";
 	
 	public static final List<String> ALL = ImmutableList.copyOf(new String[] { 
@@ -36,6 +39,6 @@ public class CustomerRoles {
 		DISPLAY_NAMES.put(DEPOSIT, "Deposit");
 		DISPLAY_NAMES.put(DROP_SHIP, "Drop Ship");
 		DISPLAY_NAMES.put(MEMBER, "Member");
-		DISPLAY_NAMES.put(SPECIAL_AGENT, "Agen Spesial");
+		DISPLAY_NAMES.put(SPECIAL_AGENT, "Agen Spesial"); // Agen Besar
 	}
 }
