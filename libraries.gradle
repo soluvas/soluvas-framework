@@ -12,7 +12,7 @@ ext {
 	junitVersion = '4.11'
 	neo4jVersion = '1.8.2'
 	directoryApiVersion = '1.0.0-M15'
-	springVersion = '3.2.2.RELEASE'
+	springVersion = '3.2.3.RELEASE'
 
 	libraries = [
 		findbugs: 'com.google.code.findbugs:jsr305:2.0.1',
