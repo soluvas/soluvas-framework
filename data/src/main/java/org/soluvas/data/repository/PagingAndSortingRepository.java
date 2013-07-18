@@ -16,6 +16,8 @@
 package org.soluvas.data.repository;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 
@@ -41,5 +43,15 @@ import org.soluvas.data.domain.Sort;
  */
 //@NoRepositoryBean
 public interface PagingAndSortingRepository<T, ID extends Serializable> extends CrudRepository<T, ID>, PageableAndSortable<T> {
+	
+	/**
+	 * Returns all instances of the type with the given IDs, sorted by a particular field(s).
+	 * Not found instances are skipped, but should be logged.
+	 * 
+	 * @param ids
+	 * @param sort Sort order(s).
+	 * @return
+	 */
+	List<T> findAll(Collection<ID> ids, Sort sort);
 
 }

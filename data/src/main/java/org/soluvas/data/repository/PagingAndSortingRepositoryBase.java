@@ -15,6 +15,7 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
+import org.soluvas.data.domain.Sort.Order;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -144,7 +145,12 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 	}
 
 	@Override
-	public abstract List<T> findAll(Collection<ID> ids);
+	public abstract List<T> findAll(Collection<ID> ids, Sort sort);
+	
+	@Override
+	public final List<T> findAll(Collection<ID> ids) {
+		return findAll(ids, new Sort(ImmutableList.<Order>of()));
+	}
 	
 	@Override @Nullable
 	public final <S extends T> S findOne(@Nullable ID id) {

@@ -18,6 +18,7 @@ import org.soluvas.commons.PersonCatalog;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Order;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
@@ -75,7 +76,8 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public List<Person> findAll(Collection<String> ids) {
+	public List<Person> findAll(Collection<String> ids, Sort sort) {
+		// TODO: support sort
 		final Iterable<Person> filtered = Iterables.filter(catalog.getPeople(), new IdPredicate(ids));
 		final List<Person> copied = ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(filtered)));
 		return copied;

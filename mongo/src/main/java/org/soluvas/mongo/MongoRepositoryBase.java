@@ -24,6 +24,7 @@ import org.soluvas.commons.util.Profiled;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
@@ -316,9 +317,11 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	}
 
 	@Override
-	public final List<T> findAll(Collection<String> ids) {
-		log.trace("finding {} {}: {}", ids.size(), collName, ids);
-		final List<T> entities = MongoUtils.transform(coll.find(new BasicDBObject("_id", new BasicDBObject("$in", ids))),
+	public final List<T> findAll(Collection<String> ids, Sort sort) {
+		final BasicDBObject sortQuery = MongoUtils.getSort(sort, "_id", 1);
+		log.trace("finding {} {} sort by {}: {}", ids.size(), collName, sort, Iterables.limit(ids, 10));
+		final List<T> entities = MongoUtils.transform(
+				coll.find(new BasicDBObject("_id", new BasicDBObject("$in", ids))).sort(sortQuery),
 				new DBObjectToEntity());
 		log.debug("find {} {} ({}) returned {} documents", 
 				ids.size(), collName, ids, entities.size());  

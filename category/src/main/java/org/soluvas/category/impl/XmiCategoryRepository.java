@@ -299,7 +299,8 @@ public class XmiCategoryRepository
 	}
 
 	@Override
-	public List<Category> findAll(final Collection<String> ids) {
+	public List<Category> findAll(final Collection<String> ids, Sort sort) {
+		// TODO: support sort
 		final Iterable<Category> filtered = Iterables.filter(
 				getFlattenedCategories(), new Predicate<Category>() {
 			@Override
