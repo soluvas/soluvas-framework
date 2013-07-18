@@ -115,7 +115,7 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	}
 
 	@Override
-	public List<T> findAll(Collection<ID> ids, Sort sort) {
+	public List<T> findAll(Collection<ID> ids, @Nullable Sort sort) {
 		List<T> found = ImmutableList.copyOf(Iterables.filter(Iterables.transform(ids, new Function<ID, T>() {
 			@Override
 			@Nullable
@@ -131,7 +131,7 @@ public abstract class CrudRepositoryBase<T, ID extends Serializable> implements 
 	
 	@Override
 	public final List<T> findAll(Collection<ID> ids) {
-		return findAll(ids, new Sort(ImmutableList.<Order>of()));
+		return findAll(ids, null);
 	}
 
 	@Override

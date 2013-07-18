@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
@@ -49,9 +50,9 @@ public interface PagingAndSortingRepository<T, ID extends Serializable> extends 
 	 * Not found instances are skipped, but should be logged.
 	 * 
 	 * @param ids
-	 * @param sort Sort order(s).
+	 * @param sort Sort order(s), specify {@code null} if no sorting required.
 	 * @return
 	 */
-	List<T> findAll(Collection<ID> ids, Sort sort);
+	List<T> findAll(Collection<ID> ids, @Nullable Sort sort);
 
 }
