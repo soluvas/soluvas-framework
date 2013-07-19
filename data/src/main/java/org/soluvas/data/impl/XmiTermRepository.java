@@ -249,7 +249,8 @@ public class XmiTermRepository
 	}
 
 	@Override
-	public List<Term> findAll(final Collection<String> ids) {
+	public List<Term> findAll(final Collection<String> ids, Sort sort) {
+		// TODO: support sort
 		final Collection<Term> filtered = Collections2.filter(
 				catalog.getTerms(), new Predicate<Term>() {
 			@Override

@@ -144,7 +144,12 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 	}
 
 	@Override
-	public abstract List<T> findAll(Collection<ID> ids);
+	public abstract List<T> findAll(Collection<ID> ids, @Nullable Sort sort);
+	
+	@Override
+	public final List<T> findAll(Collection<ID> ids) {
+		return findAll(ids, null);
+	}
 	
 	@Override @Nullable
 	public final <S extends T> S findOne(@Nullable ID id) {

@@ -37,6 +37,7 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 import org.soluvas.data.util.BatchFinder;
 import org.soluvas.data.util.BatchProcessor;
@@ -794,7 +795,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	}
 	
 	@Override
-	public List<Image> findAll(Collection<String> ids) {
+	public List<Image> findAll(Collection<String> ids, Sort sort) {
+		// TODO: support sort
 		return ImmutableList.copyOf(findAllByIds(ids).values());
 	}
 	
