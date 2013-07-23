@@ -8,18 +8,17 @@ import javax.inject.Inject;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.soluvas.category.Category;
 import org.soluvas.category.CategoryCatalog;
 import org.soluvas.category.util.CategoryUtils;
 import org.soluvas.commons.shell.ExtCommandSupport;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 /**
@@ -36,7 +35,7 @@ public class CatCatCommand extends ExtCommandSupport {
 	@Argument(name="id", required=true, description="Category ID.")
 	private String categoryId;
 	
-	private CategoryCatalog categoryCatalog;
+	private final CategoryCatalog categoryCatalog;
 	
 	@Inject
 	public CatCatCommand(CategoryCatalog categoryCatalog) {
@@ -46,8 +45,7 @@ public class CatCatCommand extends ExtCommandSupport {
 
 	@Override
 	protected Object doExecute() throws Exception {
-		final EList<Category> categoriesEList = categoryCatalog.getCategories();
-		final List<Category> categoryList = CategoryUtils.flatten(categoriesEList);
+		final List<Category> categoryList = CategoryUtils.flatten(ImmutableList.copyOf(EcoreUtil.copyAll(categoryCatalog.getCategories())));
 		final Category cat = Iterables.find(categoryList, new Predicate<Category>() {
 			@Override
 			public boolean apply(@Nullable Category input) {
