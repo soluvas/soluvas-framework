@@ -72,6 +72,7 @@ import com.google.common.base.Function;
  *   <li>{@link org.soluvas.commons.Person#getPasswordResetCode <em>Password Reset Code</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getPasswordResetExpiryTime <em>Password Reset Expiry Time</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getClientAccessToken <em>Client Access Token</em>}</li>
+ *   <li>{@link org.soluvas.commons.Person#getSecurityRoleIds <em>Security Role Ids</em>}</li>
  * </ul>
  * </p>
  *
@@ -1269,6 +1270,22 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	void setClientAccessToken(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Security Role Ids</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Security Role Ids</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Security Role Ids</em>' attribute list.
+	 * @see org.soluvas.commons.CommonsPackage#getPerson_SecurityRoleIds()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getSecurityRoleIds();
 
 	/**
 	 * <!-- begin-user-doc -->

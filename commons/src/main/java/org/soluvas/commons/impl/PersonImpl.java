@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.joda.money.CurrencyUnit;
@@ -123,6 +124,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getPasswordResetCode <em>Password Reset Code</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getPasswordResetExpiryTime <em>Password Reset Expiry Time</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getClientAccessToken <em>Client Access Token</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getSecurityRoleIds <em>Security Role Ids</em>}</li>
  * </ul>
  * </p>
  *
@@ -1294,6 +1296,16 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected String clientAccessToken = CLIENT_ACCESS_TOKEN_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSecurityRoleIds() <em>Security Role Ids</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSecurityRoleIds()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> securityRoleIds;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2609,6 +2621,18 @@ public class PersonImpl extends EObjectImpl implements Person {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getSecurityRoleIds() {
+		if (securityRoleIds == null) {
+			securityRoleIds = new EDataTypeUniqueEList<String>(String.class, this, CommonsPackage.PERSON__SECURITY_ROLE_IDS);
+		}
+		return securityRoleIds;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public boolean hasEmail(String email) {
@@ -2884,6 +2908,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return getPasswordResetExpiryTime();
 			case CommonsPackage.PERSON__CLIENT_ACCESS_TOKEN:
 				return getClientAccessToken();
+			case CommonsPackage.PERSON__SECURITY_ROLE_IDS:
+				return getSecurityRoleIds();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -3081,6 +3107,10 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case CommonsPackage.PERSON__CLIENT_ACCESS_TOKEN:
 				setClientAccessToken((String)newValue);
 				return;
+			case CommonsPackage.PERSON__SECURITY_ROLE_IDS:
+				getSecurityRoleIds().clear();
+				getSecurityRoleIds().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -3273,6 +3303,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case CommonsPackage.PERSON__CLIENT_ACCESS_TOKEN:
 				setClientAccessToken(CLIENT_ACCESS_TOKEN_EDEFAULT);
 				return;
+			case CommonsPackage.PERSON__SECURITY_ROLE_IDS:
+				getSecurityRoleIds().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -3407,6 +3440,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return PASSWORD_RESET_EXPIRY_TIME_EDEFAULT == null ? passwordResetExpiryTime != null : !PASSWORD_RESET_EXPIRY_TIME_EDEFAULT.equals(passwordResetExpiryTime);
 			case CommonsPackage.PERSON__CLIENT_ACCESS_TOKEN:
 				return CLIENT_ACCESS_TOKEN_EDEFAULT == null ? clientAccessToken != null : !CLIENT_ACCESS_TOKEN_EDEFAULT.equals(clientAccessToken);
+			case CommonsPackage.PERSON__SECURITY_ROLE_IDS:
+				return securityRoleIds != null && !securityRoleIds.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -3719,6 +3754,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 		result.append(passwordResetExpiryTime);
 		result.append(", clientAccessToken: ");
 		result.append(clientAccessToken);
+		result.append(", securityRoleIds: ");
+		result.append(securityRoleIds);
 		result.append(')');
 		return result.toString();
 	}

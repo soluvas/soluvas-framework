@@ -37,4 +37,15 @@ public class AttributeSetImpl<T extends EObject, V> extends AttributeNotificatio
 		return CommonsPackage.Literals.ATTRIBUTE_SET;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * This is specialized for the more specific type known in this context.
+	 * @generated
+	 */
+	@Override
+	public void setObject(T newObject) {
+		super.setObject(newObject);
+	}
+
 } //AttributeSetImpl

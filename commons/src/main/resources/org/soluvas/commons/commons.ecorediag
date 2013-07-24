@@ -1349,6 +1349,178 @@
     <children xmi:type="notation:Node" xmi:id="_UBd0wb0_EeKdkJ5ZT1V2xQ" type="1001">
       <children xmi:type="notation:Node" xmi:id="_UBjUUL0_EeKdkJ5ZT1V2xQ" type="4001"/>
       <children xmi:type="notation:Node" xmi:id="_UBkicL0_EeKdkJ5ZT1V2xQ" type="5001">
+        <children xmi:type="notation:Node" xmi:id="_b57nUPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/schemaVersion"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b57nUfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b581cPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/firstName"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b581cfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b59cgPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/lastName"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b59cgfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b5-DkPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/password"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b5-DkfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b5-DkvQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/accountStatus"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b5-qoPQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b5-qofQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/birthYear"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b5-qovQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b5_RsPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/birthMonth"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b5_RsfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b5_4wPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/birthDay"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b5_4wfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6Af0PQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/birthDate"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6Af0fQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6BG4PQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/gender"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6BG4fQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6BG4vQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/language"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6BG4_QdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6C8EPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/currencyCode"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6C8EfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6DjIPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/currency"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6DjIfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6EKMPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/googlePlusId"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6EKMfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6ExQPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/googleUsername"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6ExQfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6F_YPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/virtualMail"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6F_YfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6GmcPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/nickname"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6GmcfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6HNgPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/customerRole"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6HNgfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6HNgvQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/memberRole"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6H0kPQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6H0kfQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/managerRole"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6H0kvQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6IboPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/timeZoneId"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6IbofQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6JCsPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/timeZone"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6JCsfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6JpwPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/referrerId"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6JpwfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6JpwvQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/referrerType"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6KQ0PQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6KQ0fQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/signupSource"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6KQ0vQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6K34PQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/signupSourceType"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6K34fQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6Le8PQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/ipAddress"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6Le8fQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6MGAPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/lastIpAddress"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6MGAfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6MGAvQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/lastLoginTime"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6MGA_QdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6MtEPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/validationTime"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6MtEfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6NUIPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/activationTime"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6NUIfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6N7MPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/verificationTime"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6N7MfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6OiQPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/newsletterSubscriptionEnabled"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6OiQfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6PJUPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/newsletterSubscriptionTime"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6PJUfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6PJUvQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/socialSharingEnabled"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6PJU_QdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6PwYPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/publicationStatus"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6PwYfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6QXcPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/archivalStatus"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6QXcfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6Q-gPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/folder"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6Q-gfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6RlkPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/religion"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6RlkfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6SMoPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/passwordResetCode"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6SMofQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6SMovQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/passwordResetExpiryTime"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6SMo_QdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_b6SzsPQdEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/clientAccessToken"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_b6SzsfQdEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_Ew0hQPQeEeKFk82W9X7zjQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/securityRoleIds"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_Ew0hQfQeEeKFk82W9X7zjQ"/>
+        </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_UBkicb0_EeKdkJ5ZT1V2xQ"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_UBkicr0_EeKdkJ5ZT1V2xQ"/>
         <styles xmi:type="notation:FilteringStyle" xmi:id="_UBkic70_EeKdkJ5ZT1V2xQ"/>

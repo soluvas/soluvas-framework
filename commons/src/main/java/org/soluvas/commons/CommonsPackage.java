@@ -2734,13 +2734,22 @@ public interface CommonsPackage extends EPackage {
 	int PERSON__CLIENT_ACCESS_TOKEN = NAME_CONTAINER_FEATURE_COUNT + 59;
 
 	/**
+	 * The feature id for the '<em><b>Security Role Ids</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__SECURITY_ROLE_IDS = NAME_CONTAINER_FEATURE_COUNT + 60;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 60;
+	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 61;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PhoneNumberImpl <em>Phone Number</em>}' class.
@@ -5519,6 +5528,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getPerson_ClientAccessToken();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.commons.Person#getSecurityRoleIds <em>Security Role Ids</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Security Role Ids</em>'.
+	 * @see org.soluvas.commons.Person#getSecurityRoleIds()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_SecurityRoleIds();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PhoneNumber <em>Phone Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7915,6 +7935,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERSON__CLIENT_ACCESS_TOKEN = eINSTANCE.getPerson_ClientAccessToken();
+
+		/**
+		 * The meta object literal for the '<em><b>Security Role Ids</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__SECURITY_ROLE_IDS = eINSTANCE.getPerson_SecurityRoleIds();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PhoneNumberImpl <em>Phone Number</em>}' class.
