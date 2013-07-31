@@ -3,6 +3,7 @@
  */
 package org.soluvas.ldap.event;
 
+import org.soluvas.commons.Person;
 import org.soluvas.ldap.SocialPerson;
 import org.soluvas.push.TrackableEvent;
 
@@ -13,19 +14,40 @@ import org.soluvas.push.TrackableEvent;
 @SuppressWarnings("serial")
 public class PersonRegisteredEvent extends TrackableEvent {
 	
-	private final SocialPerson person;
+	@Deprecated
+	private final SocialPerson socPerson;
+	private final Person person;
 
 	/**
 	 * @param person
 	 */
-	public PersonRegisteredEvent(SocialPerson person,
-			String trackingId) {
+	@Deprecated
+	public PersonRegisteredEvent(SocialPerson socPerson, String trackingId) {
 		super(trackingId);
+		this.socPerson = socPerson;
+		this.person = null;
+	}
+	
+	public PersonRegisteredEvent(Person person, String trackingId) {
+		super(trackingId);
+		this.socPerson = null;
 		this.person = person;
 	}
 
-	public SocialPerson getPerson() {
+	@Deprecated
+	public SocialPerson getSocPerson() {
+		return socPerson;
+	}
+
+	public Person getPerson() {
 		return person;
+	}
+
+	@Override
+	public String toString() {
+		return "PersonRegisteredEvent ["
+				+ (socPerson != null ? "socPerson=" + socPerson + ", " : "")
+				+ (person != null ? "person=" + person : "") + "]";
 	}
 
 }

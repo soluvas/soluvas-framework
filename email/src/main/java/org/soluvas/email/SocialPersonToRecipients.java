@@ -24,6 +24,7 @@ public class SocialPersonToRecipients implements
 	/**
 	 * @param roleName
 	 */
+	@Deprecated
 	public SocialPersonToRecipients(String roleName) {
 		super();
 		this.roleName = roleName;
