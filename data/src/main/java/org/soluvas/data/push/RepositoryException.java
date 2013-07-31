@@ -23,4 +23,8 @@ public class RepositoryException extends RuntimeException {
 		super(cause);
 	}
 
+	public RepositoryException(Throwable cause, String format, Object... args) {
+		super(String.format(format, args), cause);
+	}
+
 }
