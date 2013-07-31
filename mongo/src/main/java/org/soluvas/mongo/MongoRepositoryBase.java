@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
@@ -26,13 +27,13 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
+import org.soluvas.data.push.RepositoryException;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
 import com.google.code.morphia.Morphia;
 import com.google.code.morphia.mapping.DefaultCreator;
 import com.google.common.base.Function;
-import com.google.common.base.Throwables;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -247,9 +248,11 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			throw new DataException(e1, "Make sure all of the entities have valid 'id': %s", transformedAsIds);
 		}
 		log.debug("Adding {} {} documents: {}", entities.size(), collName, ids);
+		String dbObjsStr = "";
 		try (Profiled p = new Profiled(log, "Added " + entities.size() + " " + collName + " documents: " + ids)) {
 			final List<DBObject> dbObjs = ImmutableList.copyOf(Collections2
 					.transform(entities, new EntityToDBObject()));
+			dbObjsStr = dbObjs.toString();
 			final WriteResult writeResult = coll.insert(dbObjs);
 			if (writeResult.getLastError() != null
 					&& writeResult.getLastError().getException() != null) {
@@ -261,8 +264,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 					ids);
 			return ImmutableList.copyOf(entities);
 		} catch (Exception e) {
-			Throwables.propagate(e);
-			return null;
+			throw new RepositoryException(e, "Error adding %s %s documents (%s): %s", entities.size(), collName, ids, 
+					StringUtils.abbreviateMiddle(dbObjsStr, "…", 1000));
 		}
 	}
 	
