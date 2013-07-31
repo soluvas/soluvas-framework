@@ -15,7 +15,6 @@ import org.soluvas.commons.Person;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.person.PersonRepository;
 
-import com.aksimata.person.MongoPersonRepository;
 import com.google.code.morphia.logging.MorphiaLoggerFactory;
 import com.google.code.morphia.logging.slf4j.SLF4JLogrImplFactory;
 import com.google.common.collect.ImmutableList;

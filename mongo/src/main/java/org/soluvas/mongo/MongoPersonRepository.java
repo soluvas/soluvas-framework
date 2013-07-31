@@ -1,4 +1,4 @@
-package com.aksimata.person;
+package org.soluvas.mongo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,6 @@ import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.person.PersonRepository;
-import org.soluvas.mongo.MongoRepositoryBase;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
