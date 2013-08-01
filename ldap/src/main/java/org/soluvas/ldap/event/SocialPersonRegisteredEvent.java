@@ -11,8 +11,10 @@ import org.soluvas.push.TrackableEvent;
 @SuppressWarnings("serial")
 public class SocialPersonRegisteredEvent extends TrackableEvent {
 	
+	@Deprecated
 	private final SocialPerson person;
 
+	@Deprecated
 	public SocialPersonRegisteredEvent(SocialPerson person, String trackingId) {
 		super(trackingId);
 		this.person = person;

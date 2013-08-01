@@ -20,6 +20,7 @@ import com.google.common.collect.ImmutableSet.Builder;
  */
 @SuppressWarnings("serial")
 @LdapEntry(objectClasses={"inetOrgPerson", "uidObject", "extensibleObject", "socialPerson", "facebookObject", "twitterObject"})
+@Deprecated
 public class SocialPerson extends Person {
 	
 	@LdapAttribute("primaryMail")
