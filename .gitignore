@@ -19,3 +19,7 @@ build
 /json
 /image-store
 /parent
+/hs_err_pid26481.log
+/newsletter
+/story
+/libraries.gradle
