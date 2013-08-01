@@ -6,7 +6,7 @@ package org.soluvas.newsletter.handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.ldap.SocialPerson;
-import org.soluvas.ldap.event.PersonRegisteredEvent;
+import org.soluvas.ldap.event.SocialPersonRegisteredEvent;
 import org.soluvas.newsletter.Mailjet;
 import org.soluvas.newsletter.MailjetManager;
 
@@ -33,7 +33,7 @@ public class PersonRegisteredHandler {
 	}
 
 	@Subscribe
-	public void registerMailJet(PersonRegisteredEvent ev) {
+	public void registerMailJet(SocialPersonRegisteredEvent ev) {
 		final SocialPerson insertedPerson = ev.getPerson();
 		try {
 			log.info("Trying to register mail jet for {} [{}]",

@@ -1,7 +1,6 @@
-package org.soluvas.ldap.event;
+package org.soluvas.mongo.event;
 
 import org.soluvas.commons.Person;
-import org.soluvas.ldap.SocialPerson;
 import org.soluvas.push.TrackableEvent;
 
 /**
@@ -10,30 +9,13 @@ import org.soluvas.push.TrackableEvent;
  *
  */
 @SuppressWarnings("serial")
-@Deprecated
 public class PersonRegisteredEvent extends TrackableEvent {
 	
-	private final SocialPerson socPerson;
 	private final Person person;
-
-	/**
-	 * @param socPerson
-	 */
-	@Deprecated
-	public PersonRegisteredEvent(SocialPerson socPerson, String trackingId) {
-		super(trackingId);
-		this.socPerson = socPerson;
-		this.person = null;
-	}
 
 	public PersonRegisteredEvent(Person person, String trackingId) {
 		super(trackingId);
-		this.socPerson = null;
 		this.person = person;
-	}
-
-	public SocialPerson getSocPerson() {
-		return socPerson;
 	}
 
 	public Person getPerson() {
@@ -43,8 +25,7 @@ public class PersonRegisteredEvent extends TrackableEvent {
 	@Override
 	public String toString() {
 		return "PersonRegisteredEvent ["
-				+ (socPerson != null ? "socPerson=" + socPerson + ", " : "")
 				+ (person != null ? "person=" + person : "") + "]";
 	}
-
+	
 }
