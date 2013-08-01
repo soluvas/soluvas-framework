@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.soluvas.ldap.event;
 
 import org.soluvas.ldap.SocialPerson;
@@ -11,14 +8,14 @@ import org.soluvas.push.TrackableEvent;
  *
  */
 @SuppressWarnings("serial")
-public class PersonRegisteredEvent extends TrackableEvent {
+public class SocialPersonRegisteredEvent extends TrackableEvent {
 	
 	private final SocialPerson socPerson;
 
 	/**
 	 * @param socPerson
 	 */
-	public PersonRegisteredEvent(SocialPerson socPerson,
+	public SocialPersonRegisteredEvent(SocialPerson socPerson,
 			String trackingId) {
 		super(trackingId);
 		this.socPerson = socPerson;
