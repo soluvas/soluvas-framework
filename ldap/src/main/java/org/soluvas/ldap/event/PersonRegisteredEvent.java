@@ -13,19 +13,19 @@ import org.soluvas.push.TrackableEvent;
 @SuppressWarnings("serial")
 public class PersonRegisteredEvent extends TrackableEvent {
 	
-	private final SocialPerson person;
+	private final SocialPerson socPerson;
 
 	/**
-	 * @param person
+	 * @param socPerson
 	 */
-	public PersonRegisteredEvent(SocialPerson person,
+	public PersonRegisteredEvent(SocialPerson socPerson,
 			String trackingId) {
 		super(trackingId);
-		this.person = person;
+		this.socPerson = socPerson;
 	}
 
-	public SocialPerson getPerson() {
-		return person;
+	public SocialPerson getSocPerson() {
+		return socPerson;
 	}
 
 }
