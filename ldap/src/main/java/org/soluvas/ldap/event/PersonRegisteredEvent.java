@@ -13,10 +13,12 @@ import org.soluvas.push.TrackableEvent;
 @Deprecated
 public class PersonRegisteredEvent extends TrackableEvent {
 	
-	@Deprecated
 	private final SocialPerson socPerson;
 	private final Person person;
 
+	/**
+	 * @param socPerson
+	 */
 	@Deprecated
 	public PersonRegisteredEvent(SocialPerson socPerson, String trackingId) {
 		super(trackingId);
