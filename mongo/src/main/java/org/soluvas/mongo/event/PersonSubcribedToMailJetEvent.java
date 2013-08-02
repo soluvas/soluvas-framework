@@ -9,11 +9,11 @@ import org.soluvas.push.TrackableEvent;
  *
  */
 @SuppressWarnings("serial")
-public class PersonRegisteredEvent extends TrackableEvent {
+public class PersonSubcribedToMailJetEvent extends TrackableEvent {
 	
 	private final Person person;
 
-	public PersonRegisteredEvent(Person person, String trackingId) {
+	public PersonSubcribedToMailJetEvent(Person person, String trackingId) {
 		super(trackingId);
 		this.person = person;
 	}

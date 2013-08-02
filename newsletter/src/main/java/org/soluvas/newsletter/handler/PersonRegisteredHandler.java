@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.soluvas.newsletter.handler;
 
 import org.slf4j.Logger;
@@ -10,12 +7,11 @@ import org.soluvas.ldap.event.SocialPersonRegisteredEvent;
 import org.soluvas.newsletter.Mailjet;
 import org.soluvas.newsletter.MailjetManager;
 
-import com.google.common.eventbus.Subscribe;
-
 /**
  * @author atang
  *
  */
+@Deprecated
 public class PersonRegisteredHandler {
 	
 	private static final Logger log = LoggerFactory
@@ -32,7 +28,8 @@ public class PersonRegisteredHandler {
 		this.mailJetMgr = mailJetMgr;
 	}
 
-	@Subscribe
+//	@Subscribe
+	@Deprecated
 	public void registerMailJet(SocialPersonRegisteredEvent ev) {
 		final SocialPerson insertedPerson = ev.getPerson();
 		try {
@@ -44,4 +41,5 @@ public class PersonRegisteredHandler {
 			log.error("Can not register mailJet for " + insertedPerson.getId(), e);
 		}
 	}
+	
 }
