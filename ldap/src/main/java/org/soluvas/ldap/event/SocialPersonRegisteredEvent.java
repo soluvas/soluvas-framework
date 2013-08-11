@@ -9,6 +9,7 @@ import org.soluvas.push.TrackableEvent;
  *
  */
 @SuppressWarnings("serial")
+@Deprecated
 public class SocialPersonRegisteredEvent extends TrackableEvent {
 	
 	@Deprecated
