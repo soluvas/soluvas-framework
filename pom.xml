@@ -50,14 +50,14 @@
 		<developer>
 			<id>rudi</id>
 			<name>Rudi Wijaya</name>
-			<email>rudi@berbatik.com</email>
+			<email>rudi@bippo.co.id</email>
 			<organization>Bippo</organization>
 			<organizationUrl>http://www.bippo.co.id/</organizationUrl>
 		</developer>
 		<developer>
 			<id>atang</id>
 			<name>Atang Sutisna</name>
-			<email>atang@berbatik.com</email>
+			<email>atang@bippo.co.id</email>
 			<organization>Bippo</organization>
 			<organizationUrl>http://www.bippo.co.id/</organizationUrl>
 		</developer>
@@ -70,7 +70,7 @@
 
 	<properties>
 		<karaf.version>2.3.1</karaf.version>
-		<spring.version>3.2.3.RELEASE</spring.version>
+		<spring.version>3.2.4.RELEASE</spring.version>
 
 		<shiro.version>1.2.2</shiro.version>
 		<akka.version>2.0.2</akka.version>
