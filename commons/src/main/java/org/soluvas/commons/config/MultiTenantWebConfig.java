@@ -1,6 +1,7 @@
 package org.soluvas.commons.config;
 
 import java.io.File;
+import java.net.URL;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +17,7 @@ import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.DataFolder;
 import org.soluvas.commons.OnDemandXmiLoader;
+import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.tenant.TenantMode;
@@ -112,12 +114,18 @@ public class MultiTenantWebConfig {
 	
 	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	public AppManifest appManifest() throws ExecutionException {
-		final String tenantKey = tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv();
+		final String tenantId = tenantRef().getTenantId();
+		final String tenantKey = tenantId + "_" + tenantRef().getTenantEnv();
 		return appManifestCache.get(tenantKey, new Callable<AppManifest>() {
 			@Override
 			public AppManifest call() throws Exception {
-				return new StaticXmiLoader<AppManifest>(CommonsPackage.eINSTANCE,
+				URL classpathManifest = MultiTenantWebConfig.class.getResource("/META-INF/" + tenantId + ".AppManifest.xmi");
+				if (classpathManifest != null) {
+					return new StaticXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, classpathManifest, ResourceType.CLASSPATH).get();
+				} else {
+					return new StaticXmiLoader<AppManifest>(CommonsPackage.eINSTANCE,
 						new File(dataFolder(), "model/" + tenantKey + ".AppManifest.xmi").toString()).get();
+				}
 			}
 		});
 	}
