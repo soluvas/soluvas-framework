@@ -2,6 +2,7 @@ package org.soluvas.mongo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
 
@@ -9,6 +10,11 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.PersonImpl;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageRequest;
+import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Sort;
+import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.person.PersonRepository;
 
 import com.google.common.collect.ImmutableList;
@@ -104,5 +110,43 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		final BasicDBObject query = new BasicDBObject("clientAccessToken", clientAccessToken);
 		return findOneByQuery(query);
 	}
+
+	@SuppressWarnings("null")
+	@Override
+	public Page<Person> findBySearchText(@Nullable String searchText, Pageable pageable) {
+		final BasicDBObject query = getQueryBySearchText(searchText);
+		
+		final Sort mySort;
+		if (pageable.getSort() != null) {
+			mySort = pageable.getSort().and(new Sort(Direction.DESC, "modificationTime"));
+		} else {
+			mySort = new Sort(Direction.DESC, "modificationTime");
+		}
+		
+		final PageRequest myPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), mySort);
+		
+		return findAllByQuery(query, myPageable);
+	}
 	
+	private BasicDBObject getQueryBySearchText(String searchText) {
+		final Pattern regex = Pattern.compile(Pattern.quote(searchText), Pattern.CASE_INSENSITIVE);
+		final BasicDBObject nameQuery = new BasicDBObject("name", regex);
+		final BasicDBObject idQuery = new BasicDBObject("id", regex);
+		final BasicDBObject emailQuery = new BasicDBObject("email", regex);
+		final BasicDBObject emailsQuery = new BasicDBObject("emails", new BasicDBObject("$elemMatch", emailQuery));
+		final BasicDBObject phoneNumberQuery = new BasicDBObject("phoneNumber", regex);
+		final BasicDBObject mobileNumbersQuery = new BasicDBObject("mobileNumbers", new BasicDBObject("$elemMatch", phoneNumberQuery));
+		final BasicDBObject query = new BasicDBObject("$or", ImmutableList.of(nameQuery, idQuery , emailsQuery, mobileNumbersQuery));
+		log.debug("Query is {}", query);
+		return query;
+	}
+
+	@Override
+	public long countBySearchText(String searchText) {
+		final BasicDBObject query = getQueryBySearchText(searchText);
+		final long count = countByQuery(query);
+		log.debug("Got {} people by query: {}", count, query);
+		return count;
+	}
+
 }

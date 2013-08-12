@@ -210,4 +210,16 @@ public class EmfPersonRepository extends
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public Page<Person> findBySearchText(
+			@Nullable String idNameEmailMobile, Pageable pageable) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public long countBySearchText(String searchText) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

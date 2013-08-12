@@ -5,6 +5,8 @@ import javax.annotation.Nullable;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.Person;
 import org.soluvas.data.SlugLookup;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 
 /**
@@ -50,5 +52,9 @@ public interface PersonRepository extends
 	 */
 	@Nullable
 	public Person findOneByClientAccessToken(@Nullable String clientAccessToken);
+	
+	public Page<Person> findBySearchText(String searchText, Pageable pageable);
+	
+	public long countBySearchText(String searchText);
 
 }
