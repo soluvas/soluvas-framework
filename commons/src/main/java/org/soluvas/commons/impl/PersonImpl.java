@@ -1581,6 +1581,23 @@ public class PersonImpl extends EObjectImpl implements Person {
 		}
 		return mobileNumbers;
 	}
+	
+	@Override
+	public String getMobileNumber() {
+		final Optional<PhoneNumber> primaryMobile = Iterables.tryFind(getMobileNumbers(), new Predicate<PhoneNumber>() {
+			@Override
+			public boolean apply(@Nullable PhoneNumber input) {
+				return input.isPrimary();
+			}
+		});
+		if (primaryMobile.isPresent()) {
+			return primaryMobile.get().getPhoneNumber();
+		} else if (!getMobileNumbers().isEmpty()) {
+			return getMobileNumbers().get(0).getPhoneNumber();
+		} else {
+			return null;
+		}
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2602,6 +2619,7 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getClientAccessToken() {
 		return clientAccessToken;
 	}
@@ -2611,6 +2629,7 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setClientAccessToken(String newClientAccessToken) {
 		String oldClientAccessToken = clientAccessToken;
 		clientAccessToken = newClientAccessToken;
@@ -2623,6 +2642,7 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getSecurityRoleIds() {
 		if (securityRoleIds == null) {
 			securityRoleIds = new EDataTypeUniqueEList<String>(String.class, this, CommonsPackage.PERSON__SECURITY_ROLE_IDS);

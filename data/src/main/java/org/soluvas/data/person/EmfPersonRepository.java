@@ -222,4 +222,11 @@ public class EmfPersonRepository extends
 		return 0;
 	}
 
+	@Override
+	@Nullable
+	public Person findOneByMobileNumber(@Nullable String mobileNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

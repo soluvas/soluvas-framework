@@ -239,6 +239,8 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	EList<PhoneNumber> getMobileNumbers();
+	
+	String getMobileNumber();
 
 	/**
 	 * Returns the value of the '<em><b>Addresses</b></em>' containment reference list.

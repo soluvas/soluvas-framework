@@ -82,6 +82,15 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		final BasicDBObject query = new BasicDBObject("emails.email", email.toLowerCase().trim());
 		return findOneByQuery(query);
 	}
+	
+	@Override @Nullable
+	public Person findOneByMobileNumber(@Nullable String mobileNumber) {
+		if (mobileNumber == null) {
+			return null;
+		}
+		final BasicDBObject query = new BasicDBObject("mobileNumbers.phoneNumber", mobileNumber);
+		return findOneByQuery(query);
+	}
 
 	@Override @Nullable
 	public Person findOneByTwitter(@Nullable Long twitterId,
