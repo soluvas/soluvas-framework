@@ -2517,6 +2517,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPerson_DebitBalance() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(47);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPerson_DebitCurrency() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(48);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPhoneNumber() {
 		return phoneNumberEClass;
 	}
@@ -3551,6 +3569,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(personEClass, PERSON__PASSWORD_RESET_EXPIRY_TIME);
 		createEAttribute(personEClass, PERSON__CLIENT_ACCESS_TOKEN);
 		createEAttribute(personEClass, PERSON__SECURITY_ROLE_IDS);
+		createEAttribute(personEClass, PERSON__DEBIT_BALANCE);
+		createEAttribute(personEClass, PERSON__DEBIT_CURRENCY);
 
 		phoneNumberEClass = createEClass(PHONE_NUMBER);
 		createEAttribute(phoneNumberEClass, PHONE_NUMBER__PHONE_NUMBER);
@@ -4155,6 +4175,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPerson_PasswordResetExpiryTime(), this.getDateTime(), "passwordResetExpiryTime", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_ClientAccessToken(), theEcorePackage.getEString(), "clientAccessToken", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_SecurityRoleIds(), theEcorePackage.getEString(), "securityRoleIds", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_DebitBalance(), theEcorePackage.getEBigDecimal(), "debitBalance", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_DebitCurrency(), this.getCurrencyUnit(), "debitCurrency", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(personEClass, theEcorePackage.getEBoolean(), "hasEmail", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "email", 0, 1, IS_UNIQUE, IS_ORDERED);

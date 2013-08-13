@@ -55,6 +55,7 @@ import com.google.code.morphia.annotations.Id;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import java.math.BigDecimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -125,6 +126,8 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getPasswordResetExpiryTime <em>Password Reset Expiry Time</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getClientAccessToken <em>Client Access Token</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getSecurityRoleIds <em>Security Role Ids</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getDebitBalance <em>Debit Balance</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getDebitCurrency <em>Debit Currency</em>}</li>
  * </ul>
  * </p>
  *
@@ -1306,6 +1309,46 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected EList<String> securityRoleIds;
+
+	/**
+	 * The default value of the '{@link #getDebitBalance() <em>Debit Balance</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDebitBalance()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final BigDecimal DEBIT_BALANCE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDebitBalance() <em>Debit Balance</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDebitBalance()
+	 * @generated
+	 * @ordered
+	 */
+	protected BigDecimal debitBalance = DEBIT_BALANCE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDebitCurrency() <em>Debit Currency</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDebitCurrency()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final CurrencyUnit DEBIT_CURRENCY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDebitCurrency() <em>Debit Currency</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDebitCurrency()
+	 * @generated
+	 * @ordered
+	 */
+	protected CurrencyUnit debitCurrency = DEBIT_CURRENCY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2653,6 +2696,48 @@ public class PersonImpl extends EObjectImpl implements Person {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BigDecimal getDebitBalance() {
+		return debitBalance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDebitBalance(BigDecimal newDebitBalance) {
+		BigDecimal oldDebitBalance = debitBalance;
+		debitBalance = newDebitBalance;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON__DEBIT_BALANCE, oldDebitBalance, debitBalance));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CurrencyUnit getDebitCurrency() {
+		return debitCurrency;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDebitCurrency(CurrencyUnit newDebitCurrency) {
+		CurrencyUnit oldDebitCurrency = debitCurrency;
+		debitCurrency = newDebitCurrency;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON__DEBIT_CURRENCY, oldDebitCurrency, debitCurrency));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public boolean hasEmail(String email) {
@@ -2930,6 +3015,10 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return getClientAccessToken();
 			case CommonsPackage.PERSON__SECURITY_ROLE_IDS:
 				return getSecurityRoleIds();
+			case CommonsPackage.PERSON__DEBIT_BALANCE:
+				return getDebitBalance();
+			case CommonsPackage.PERSON__DEBIT_CURRENCY:
+				return getDebitCurrency();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -3131,6 +3220,12 @@ public class PersonImpl extends EObjectImpl implements Person {
 				getSecurityRoleIds().clear();
 				getSecurityRoleIds().addAll((Collection<? extends String>)newValue);
 				return;
+			case CommonsPackage.PERSON__DEBIT_BALANCE:
+				setDebitBalance((BigDecimal)newValue);
+				return;
+			case CommonsPackage.PERSON__DEBIT_CURRENCY:
+				setDebitCurrency((CurrencyUnit)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -3326,6 +3421,12 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case CommonsPackage.PERSON__SECURITY_ROLE_IDS:
 				getSecurityRoleIds().clear();
 				return;
+			case CommonsPackage.PERSON__DEBIT_BALANCE:
+				setDebitBalance(DEBIT_BALANCE_EDEFAULT);
+				return;
+			case CommonsPackage.PERSON__DEBIT_CURRENCY:
+				setDebitCurrency(DEBIT_CURRENCY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -3462,6 +3563,10 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return CLIENT_ACCESS_TOKEN_EDEFAULT == null ? clientAccessToken != null : !CLIENT_ACCESS_TOKEN_EDEFAULT.equals(clientAccessToken);
 			case CommonsPackage.PERSON__SECURITY_ROLE_IDS:
 				return securityRoleIds != null && !securityRoleIds.isEmpty();
+			case CommonsPackage.PERSON__DEBIT_BALANCE:
+				return DEBIT_BALANCE_EDEFAULT == null ? debitBalance != null : !DEBIT_BALANCE_EDEFAULT.equals(debitBalance);
+			case CommonsPackage.PERSON__DEBIT_CURRENCY:
+				return DEBIT_CURRENCY_EDEFAULT == null ? debitCurrency != null : !DEBIT_CURRENCY_EDEFAULT.equals(debitCurrency);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -3776,6 +3881,10 @@ public class PersonImpl extends EObjectImpl implements Person {
 		result.append(clientAccessToken);
 		result.append(", securityRoleIds: ");
 		result.append(securityRoleIds);
+		result.append(", debitBalance: ");
+		result.append(debitBalance);
+		result.append(", debitCurrency: ");
+		result.append(debitCurrency);
 		result.append(')');
 		return result.toString();
 	}

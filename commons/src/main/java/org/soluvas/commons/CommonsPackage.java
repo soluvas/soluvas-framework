@@ -2743,13 +2743,31 @@ public interface CommonsPackage extends EPackage {
 	int PERSON__SECURITY_ROLE_IDS = NAME_CONTAINER_FEATURE_COUNT + 60;
 
 	/**
+	 * The feature id for the '<em><b>Debit Balance</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__DEBIT_BALANCE = NAME_CONTAINER_FEATURE_COUNT + 61;
+
+	/**
+	 * The feature id for the '<em><b>Debit Currency</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__DEBIT_CURRENCY = NAME_CONTAINER_FEATURE_COUNT + 62;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 61;
+	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 63;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PhoneNumberImpl <em>Phone Number</em>}' class.
@@ -5539,6 +5557,28 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getPerson_SecurityRoleIds();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getDebitBalance <em>Debit Balance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Debit Balance</em>'.
+	 * @see org.soluvas.commons.Person#getDebitBalance()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_DebitBalance();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getDebitCurrency <em>Debit Currency</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Debit Currency</em>'.
+	 * @see org.soluvas.commons.Person#getDebitCurrency()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_DebitCurrency();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PhoneNumber <em>Phone Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7943,6 +7983,22 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERSON__SECURITY_ROLE_IDS = eINSTANCE.getPerson_SecurityRoleIds();
+
+		/**
+		 * The meta object literal for the '<em><b>Debit Balance</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__DEBIT_BALANCE = eINSTANCE.getPerson_DebitBalance();
+
+		/**
+		 * The meta object literal for the '<em><b>Debit Currency</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__DEBIT_CURRENCY = eINSTANCE.getPerson_DebitCurrency();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PhoneNumberImpl <em>Phone Number</em>}' class.

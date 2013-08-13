@@ -11,6 +11,7 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 
 import com.google.common.base.Function;
+import java.math.BigDecimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -73,6 +74,8 @@ import com.google.common.base.Function;
  *   <li>{@link org.soluvas.commons.Person#getPasswordResetExpiryTime <em>Password Reset Expiry Time</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getClientAccessToken <em>Client Access Token</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getSecurityRoleIds <em>Security Role Ids</em>}</li>
+ *   <li>{@link org.soluvas.commons.Person#getDebitBalance <em>Debit Balance</em>}</li>
+ *   <li>{@link org.soluvas.commons.Person#getDebitCurrency <em>Debit Currency</em>}</li>
  * </ul>
  * </p>
  *
@@ -1288,6 +1291,58 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	EList<String> getSecurityRoleIds();
+
+	/**
+	 * Returns the value of the '<em><b>Debit Balance</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Debit Balance</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Debit Balance</em>' attribute.
+	 * @see #setDebitBalance(BigDecimal)
+	 * @see org.soluvas.commons.CommonsPackage#getPerson_DebitBalance()
+	 * @model
+	 * @generated
+	 */
+	BigDecimal getDebitBalance();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.Person#getDebitBalance <em>Debit Balance</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Debit Balance</em>' attribute.
+	 * @see #getDebitBalance()
+	 * @generated
+	 */
+	void setDebitBalance(BigDecimal value);
+
+	/**
+	 * Returns the value of the '<em><b>Debit Currency</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Debit Currency</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Debit Currency</em>' attribute.
+	 * @see #setDebitCurrency(CurrencyUnit)
+	 * @see org.soluvas.commons.CommonsPackage#getPerson_DebitCurrency()
+	 * @model dataType="org.soluvas.commons.CurrencyUnit"
+	 * @generated
+	 */
+	CurrencyUnit getDebitCurrency();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.Person#getDebitCurrency <em>Debit Currency</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Debit Currency</em>' attribute.
+	 * @see #getDebitCurrency()
+	 * @generated
+	 */
+	void setDebitCurrency(CurrencyUnit value);
 
 	/**
 	 * <!-- begin-user-doc -->

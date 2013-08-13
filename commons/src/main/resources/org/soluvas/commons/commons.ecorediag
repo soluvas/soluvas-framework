@@ -1353,6 +1353,10 @@
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/schemaVersion"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_b57nUfQdEeKFk82W9X7zjQ"/>
         </children>
+        <children xmi:type="notation:Node" xmi:id="_VtHp0AQCEeOJOaKy0rXu_w" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/debitBalance"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_VtHp0QQCEeOJOaKy0rXu_w"/>
+        </children>
         <children xmi:type="notation:Node" xmi:id="_b581cPQdEeKFk82W9X7zjQ" type="2001">
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/firstName"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_b581cfQdEeKFk82W9X7zjQ"/>
@@ -1520,6 +1524,10 @@
         <children xmi:type="notation:Node" xmi:id="_Ew0hQPQeEeKFk82W9X7zjQ" type="2001">
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/securityRoleIds"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_Ew0hQfQeEeKFk82W9X7zjQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_waqDcAQCEeOJOaKy0rXu_w" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/debitCurrency"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_waqDcQQCEeOJOaKy0rXu_w"/>
         </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_UBkicb0_EeKdkJ5ZT1V2xQ"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_UBkicr0_EeKdkJ5ZT1V2xQ"/>
