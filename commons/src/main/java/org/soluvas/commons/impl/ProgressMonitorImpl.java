@@ -2,10 +2,12 @@
  */
 package org.soluvas.commons.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsPackage;
@@ -27,7 +29,7 @@ import org.soluvas.commons.ProgressStatus;
  * @generated
  */
 @SuppressWarnings("serial")
-public abstract class ProgressMonitorImpl extends EObjectImpl implements ProgressMonitor {
+public abstract class ProgressMonitorImpl extends MinimalEObjectImpl.Container implements ProgressMonitor {
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(ProgressMonitorImpl.class);
@@ -276,6 +278,39 @@ public abstract class ProgressMonitorImpl extends EObjectImpl implements Progres
 				return TASK_NAME_EDEFAULT == null ? taskName != null : !TASK_NAME_EDEFAULT.equals(taskName);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case CommonsPackage.PROGRESS_MONITOR___BEGIN_TASK__STRING_LONG:
+				beginTask((String)arguments.get(0), (Long)arguments.get(1));
+				return null;
+			case CommonsPackage.PROGRESS_MONITOR___DONE:
+				done();
+				return null;
+			case CommonsPackage.PROGRESS_MONITOR___INTERNAL_WORKED__DOUBLE:
+				internalWorked((Double)arguments.get(0));
+				return null;
+			case CommonsPackage.PROGRESS_MONITOR___SUB_TASK__STRING:
+				subTask((String)arguments.get(0));
+				return null;
+			case CommonsPackage.PROGRESS_MONITOR___WORKED__LONG:
+				worked((Long)arguments.get(0));
+				return null;
+			case CommonsPackage.PROGRESS_MONITOR___DONE__PROGRESSSTATUS:
+				done((ProgressStatus)arguments.get(0));
+				return null;
+			case CommonsPackage.PROGRESS_MONITOR___WORKED__LONG_PROGRESSSTATUS:
+				worked((Long)arguments.get(0), (ProgressStatus)arguments.get(1));
+				return null;
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

@@ -2,10 +2,12 @@
  */
 package org.soluvas.commons.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.PhotoIdContainer;
 
@@ -22,7 +24,7 @@ import org.soluvas.commons.PhotoIdContainer;
  *
  * @generated
  */
-public abstract class PhotoIdContainerImpl extends EObjectImpl implements PhotoIdContainer {
+public abstract class PhotoIdContainerImpl extends MinimalEObjectImpl.Container implements PhotoIdContainer {
 	/**
 	 * The default value of the '{@link #getPhotoId() <em>Photo Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -150,6 +152,20 @@ public abstract class PhotoIdContainerImpl extends EObjectImpl implements PhotoI
 				return PHOTO_ID_EDEFAULT == null ? photoId != null : !PHOTO_ID_EDEFAULT.equals(photoId);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case CommonsPackage.PHOTO_ID_CONTAINER___GET_IMAGE_ID:
+				return getImageId();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

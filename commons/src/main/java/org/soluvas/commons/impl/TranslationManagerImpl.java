@@ -2,10 +2,10 @@
  */
 package org.soluvas.commons.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Translatable;
 import org.soluvas.commons.TranslationManager;
@@ -19,7 +19,7 @@ import org.soluvas.commons.TranslationManager;
  *
  * @generated
  */
-public class TranslationManagerImpl extends EObjectImpl implements TranslationManager {
+public class TranslationManagerImpl extends MinimalEObjectImpl.Container implements TranslationManager {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -48,6 +48,21 @@ public class TranslationManagerImpl extends EObjectImpl implements TranslationMa
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case CommonsPackage.TRANSLATION_MANAGER___TRANSLATE__TRANSLATABLE_STRING:
+				translate((Translatable)arguments.get(0), (String)arguments.get(1));
+				return null;
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //TranslationManagerImpl

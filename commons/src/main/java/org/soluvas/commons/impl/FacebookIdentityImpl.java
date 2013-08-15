@@ -3,12 +3,9 @@
 package org.soluvas.commons.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.FacebookIdentity;
 
@@ -26,7 +23,7 @@ import org.soluvas.commons.FacebookIdentity;
  *
  * @generated
  */
-public class FacebookIdentityImpl extends EObjectImpl implements FacebookIdentity {
+public class FacebookIdentityImpl extends MinimalEObjectImpl.Container implements FacebookIdentity {
 	/**
 	 * The default value of the '{@link #getFacebookId() <em>Facebook Id</em>}' attribute.
 	 * <!-- begin-user-doc -->

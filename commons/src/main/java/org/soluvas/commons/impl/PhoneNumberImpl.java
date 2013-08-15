@@ -3,12 +3,9 @@
 package org.soluvas.commons.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.joda.time.DateTime;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.PhoneNumber;
@@ -28,7 +25,7 @@ import org.soluvas.commons.PhoneNumber;
  *
  * @generated
  */
-public class PhoneNumberImpl extends EObjectImpl implements PhoneNumber {
+public class PhoneNumberImpl extends MinimalEObjectImpl.Container implements PhoneNumber {
 	/**
 	 * The default value of the '{@link #getPhoneNumber() <em>Phone Number</em>}' attribute.
 	 * <!-- begin-user-doc -->

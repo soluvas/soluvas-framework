@@ -3,18 +3,12 @@
 package org.soluvas.commons.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-
 import org.joda.time.DateTime;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Identifiable;
@@ -58,7 +52,7 @@ import org.soluvas.commons.SchemaVersionable;
  *
  * @generated
  */
-public class PostalAddressImpl extends EObjectImpl implements PostalAddress {
+public class PostalAddressImpl extends MinimalEObjectImpl.Container implements PostalAddress {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

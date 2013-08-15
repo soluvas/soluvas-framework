@@ -2,15 +2,14 @@
  */
 package org.soluvas.commons.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
-
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.ModelNotification;
 
@@ -27,7 +26,7 @@ import org.soluvas.commons.ModelNotification;
  *
  * @generated
  */
-public abstract class ModelNotificationImpl<T extends EObject> extends EObjectImpl implements ModelNotification<T> {
+public abstract class ModelNotificationImpl<T extends EObject> extends MinimalEObjectImpl.Container implements ModelNotification<T> {
 	/**
 	 * The cached value of the '{@link #getContainer() <em>Container</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -163,6 +162,20 @@ public abstract class ModelNotificationImpl<T extends EObject> extends EObjectIm
 				return container != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case CommonsPackage.MODEL_NOTIFICATION___GET_OBJECT:
+				return getObject();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //ModelNotificationImpl

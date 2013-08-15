@@ -2,21 +2,15 @@
  */
 package org.soluvas.commons.impl;
 
-import java.util.Map;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EMap;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Translation;
 
@@ -34,7 +28,7 @@ import org.soluvas.commons.Translation;
  *
  * @generated
  */
-public class TranslationEntryImpl extends EObjectImpl implements BasicEMap.Entry<String,Translation> {
+public class TranslationEntryImpl extends MinimalEObjectImpl.Container implements BasicEMap.Entry<String,Translation> {
 	/**
 	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->

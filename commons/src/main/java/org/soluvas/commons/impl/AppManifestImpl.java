@@ -3,11 +3,10 @@
 package org.soluvas.commons.impl;
 
 import javax.annotation.Nullable;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTimeZone;
 import org.osgi.framework.Bundle;
@@ -16,7 +15,6 @@ import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -49,7 +47,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  * @generated
  */
-public class AppManifestImpl extends EObjectImpl implements AppManifest {
+public class AppManifestImpl extends MinimalEObjectImpl.Container implements AppManifest {
 	/**
 	 * 
 	 */

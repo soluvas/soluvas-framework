@@ -3,12 +3,9 @@
 package org.soluvas.commons.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.FacebookAccessible;
 
@@ -25,7 +22,7 @@ import org.soluvas.commons.FacebookAccessible;
  *
  * @generated
  */
-public class FacebookAccessibleImpl extends EObjectImpl implements FacebookAccessible {
+public class FacebookAccessibleImpl extends MinimalEObjectImpl.Container implements FacebookAccessible {
 	/**
 	 * The default value of the '{@link #getFacebookAccessToken() <em>Facebook Access Token</em>}' attribute.
 	 * <!-- begin-user-doc -->

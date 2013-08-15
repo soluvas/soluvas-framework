@@ -3,11 +3,8 @@
 package org.soluvas.commons;
 
 import org.eclipse.emf.ecore.EObject;
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import org.osgi.framework.Bundle;
-
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 

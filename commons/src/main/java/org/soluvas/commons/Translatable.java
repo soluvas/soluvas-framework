@@ -2,9 +2,6 @@
  */
 package org.soluvas.commons;
 
-import org.eclipse.emf.common.util.EList;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 

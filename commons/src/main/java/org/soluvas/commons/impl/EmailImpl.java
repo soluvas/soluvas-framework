@@ -5,7 +5,7 @@ package org.soluvas.commons.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.joda.time.DateTime;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Email;
@@ -25,7 +25,7 @@ import org.soluvas.commons.Email;
  *
  * @generated
  */
-public class EmailImpl extends EObjectImpl implements Email {
+public class EmailImpl extends MinimalEObjectImpl.Container implements Email {
 	/**
 	 * The default value of the '{@link #getEmail() <em>Email</em>}' attribute.
 	 * <!-- begin-user-doc -->

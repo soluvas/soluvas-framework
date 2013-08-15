@@ -3,19 +3,13 @@
 package org.soluvas.commons.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonCatalog;
@@ -33,7 +27,7 @@ import org.soluvas.commons.PersonCatalog;
  *
  * @generated
  */
-public class PersonCatalogImpl extends EObjectImpl implements PersonCatalog {
+public class PersonCatalogImpl extends MinimalEObjectImpl.Container implements PersonCatalog {
 	/**
 	 * The cached value of the '{@link #getPeople() <em>People</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

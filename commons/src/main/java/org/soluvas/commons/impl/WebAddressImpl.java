@@ -6,11 +6,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsException;
@@ -20,10 +20,10 @@ import org.soluvas.commons.ExpansionState;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.WebAddress;
-
 import com.damnhandy.uri.template.UriTemplate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Strings;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * <!-- begin-user-doc -->
@@ -53,7 +53,7 @@ import com.google.common.base.Strings;
  *
  * @generated
  */
-public class WebAddressImpl extends EObjectImpl implements WebAddress {
+public class WebAddressImpl extends MinimalEObjectImpl.Container implements WebAddress {
 	/**
 	 * 
 	 */
@@ -1056,6 +1056,48 @@ public class WebAddressImpl extends EObjectImpl implements WebAddress {
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == BundleAware.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == ResourceAware.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Expandable.class) {
+			switch (baseOperationID) {
+				case CommonsPackage.EXPANDABLE___EXPAND__MAP: return CommonsPackage.WEB_ADDRESS___EXPAND__MAP;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case CommonsPackage.WEB_ADDRESS___EXPAND__MAP:
+				expand((Map<String, Object>)arguments.get(0));
+				return null;
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

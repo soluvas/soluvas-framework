@@ -1,16 +1,14 @@
 package org.soluvas.commons.impl;
 
 import java.util.Collection;
-
 import javax.annotation.Nullable;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -48,13 +46,13 @@ import org.soluvas.commons.mongo.BigDecimalConverter;
 import org.soluvas.commons.mongo.CurrencyUnitConverter;
 import org.soluvas.commons.mongo.DateTimeConverter;
 import org.soluvas.commons.mongo.UnitConverter;
-
 import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 
 /**
@@ -136,7 +134,7 @@ import java.math.BigDecimal;
 @Entity(noClassnameStored=true)
 @Converters({BigDecimalConverter.class, DateTimeConverter.class,
 	CurrencyUnitConverter.class, UnitConverter.class})
-public class PersonImpl extends EObjectImpl implements Person {
+public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -3757,6 +3755,117 @@ public class PersonImpl extends EObjectImpl implements Person {
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == Imageable.class) {
+			switch (baseOperationID) {
+				case CommonsPackage.IMAGEABLE___GET_IMAGE_ID: return CommonsPackage.PERSON___GET_IMAGE_ID;
+				default: return -1;
+			}
+		}
+		if (baseClass == PhotoIdContainer.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Identifiable.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == PersonLike.class) {
+			switch (baseOperationID) {
+				case CommonsPackage.PERSON_LIKE___GET_ID: return CommonsPackage.PERSON___GET_ID;
+				case CommonsPackage.PERSON_LIKE___GET_NAME: return CommonsPackage.PERSON___GET_NAME;
+				case CommonsPackage.PERSON_LIKE___GET_SLUG: return CommonsPackage.PERSON___GET_SLUG;
+				case CommonsPackage.PERSON_LIKE___GET_EMAIL: return CommonsPackage.PERSON___GET_EMAIL;
+				case CommonsPackage.PERSON_LIKE___GET_PHOTO_ID: return CommonsPackage.PERSON___GET_PHOTO_ID;
+				case CommonsPackage.PERSON_LIKE___GET_GENDER: return CommonsPackage.PERSON___GET_GENDER;
+				default: return -1;
+			}
+		}
+		if (baseClass == Informer.class) {
+			switch (baseOperationID) {
+				case CommonsPackage.INFORMER___TO_INFO: return CommonsPackage.PERSON___TO_INFO;
+				default: return -1;
+			}
+		}
+		if (baseClass == Timestamped.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == SchemaVersionable.class) {
+			switch (baseOperationID) {
+				case CommonsPackage.SCHEMA_VERSIONABLE___GET_SCHEMA_VERSION: return CommonsPackage.PERSON___GET_SCHEMA_VERSION;
+				default: return -1;
+			}
+		}
+		if (baseClass == Describable.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Sluggable.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == CanonicalSluggable.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == TwitterAccessible.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == TwitterIdentity.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == FacebookIdentity.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == FacebookAccessible.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case CommonsPackage.PERSON___HAS_EMAIL__STRING:
+				return hasEmail((String)arguments.get(0));
+			case CommonsPackage.PERSON___PUT_EMAIL__STRING:
+				return putEmail((String)arguments.get(0));
+			case CommonsPackage.PERSON___TO_INFO:
+				return toInfo();
+			case CommonsPackage.PERSON___GET_EMAIL:
+				return getEmail();
+			case CommonsPackage.PERSON___GET_IMAGE_ID:
+				return getImageId();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

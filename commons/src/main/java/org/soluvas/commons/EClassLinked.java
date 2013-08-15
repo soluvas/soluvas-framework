@@ -3,11 +3,7 @@
 package org.soluvas.commons;
 
 import java.util.Map;
-
-import javax.annotation.Nonnull;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.EObject;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
