@@ -34,7 +34,9 @@ public enum TenantMode {
 	 * The {@code tenantId} and {@code tenantEnv} is specified from {@code /t/${tenantId}/${tenantEnv}/}
 	 * path prefix after the context path.
 	 * This configuration requires a reverse proxy (e.g. nginx) to operate properly.
+	 * @deprecated Because cannot be used directly with wicketstuff @MountPath, requires reverse proxy.
 	 */
+	@Deprecated
 	MULTI_PATH,
 	/**
 	 * Application is multi-tenant based on {@code Host} header.
