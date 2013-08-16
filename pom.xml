@@ -18,6 +18,7 @@
 		<module>ldap</module>
 		<module>security</module>
 		<module>mongo</module>
+		<module>couchdb</module>
 		<module>email</module>
 		<module>taxonomy</module>
 		<module>category</module>
@@ -115,6 +116,11 @@
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>org.soluvas.mongo</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.soluvas</groupId>
+				<artifactId>org.soluvas.couchdb</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
