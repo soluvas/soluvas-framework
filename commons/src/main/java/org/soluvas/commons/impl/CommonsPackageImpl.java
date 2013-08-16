@@ -87,6 +87,7 @@ import org.soluvas.commons.Removed;
 import org.soluvas.commons.RemovedMany;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.Revisionable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.ShellProgressMonitor;
 import org.soluvas.commons.SignupSourceType;
@@ -512,6 +513,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass facebookAccessibleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass revisionableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3183,6 +3191,33 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getRevisionable() {
+		return revisionableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRevisionable_Guid() {
+		return (EAttribute)revisionableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRevisionable_Revision() {
+		return (EAttribute)revisionableEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -3878,6 +3913,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		facebookAccessibleEClass = createEClass(FACEBOOK_ACCESSIBLE);
 		createEAttribute(facebookAccessibleEClass, FACEBOOK_ACCESSIBLE__FACEBOOK_ACCESS_TOKEN);
 
+		revisionableEClass = createEClass(REVISIONABLE);
+		createEAttribute(revisionableEClass, REVISIONABLE__GUID);
+		createEAttribute(revisionableEClass, REVISIONABLE__REVISION);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -4489,6 +4528,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(facebookAccessibleEClass, FacebookAccessible.class, "FacebookAccessible", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFacebookAccessible_FacebookAccessToken(), theEcorePackage.getEString(), "facebookAccessToken", null, 0, 1, FacebookAccessible.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(revisionableEClass, Revisionable.class, "Revisionable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRevisionable_Guid(), theEcorePackage.getEString(), "guid", null, 0, 1, Revisionable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRevisionable_Revision(), theEcorePackage.getEString(), "revision", null, 0, 1, Revisionable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -5691,6 +5734,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Contains Facebook access token (which can expire anytime)."
+		   });		
+		addAnnotation
+		  (revisionableEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Contains a globally unique identifier (GUID) and revision."
+		   });		
+		addAnnotation
+		  (getRevisionable_Guid(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Globally unique identifier (GUID). Usually it\'s the same as OID (object identifier), for better space usage. However there are times where it is app-generated\n(i.e. by a PouchDB app).\n\nFor CouchDB this maps to \"_id\" field."
+		   });		
+		addAnnotation
+		  (getRevisionable_Revision(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The CouchDB document revision (\"_rev\")."
 		   });
 	}
 	
