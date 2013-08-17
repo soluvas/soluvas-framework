@@ -1,5 +1,7 @@
 package org.soluvas.json;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.json.jscience.JscienceModule;
@@ -18,20 +20,22 @@ public class JsonUtils {
 	private static final Logger log = LoggerFactory.getLogger(JsonUtils.class);
 
 	private static ObjectWriter writer;
+
 	public static final ObjectMapper mapper;
+
 	@SuppressWarnings("unchecked")
-	private static final Supplier<Module>[] modules = new Supplier[] {
+	public static final List<Supplier<Module>> modules = (List) ImmutableList.copyOf(new Supplier[] {
 		Suppliers.ofInstance(new JodaModule()),
 		Suppliers.ofInstance(new GuavaModule()),
 		Suppliers.ofInstance(new LowerEnumModule()),
 		Suppliers.ofInstance(new JodaMoneyModule()),
 		Suppliers.ofInstance(new EmfModule()),
 		Suppliers.ofInstance(new JscienceModule())
-	};
+	});
 
 	static {
 		final JacksonMapperFactory jacksonMapperFactory = new JacksonMapperFactoryImpl(
-				ImmutableList.copyOf(modules));
+				modules);
 		mapper = jacksonMapperFactory.get();
 //		mapper.enableDefaultTypingAsProperty(DefaultTyping.OBJECT_AND_NON_CONCRETE, "@class");
 //		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);

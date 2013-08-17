@@ -12,7 +12,6 @@ import javax.annotation.PreDestroy;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ektorp.DocumentOperationResult;
 import org.ektorp.PageRequest;
 import org.ektorp.ViewQuery;
 import org.ektorp.http.HttpClient;
@@ -45,7 +44,6 @@ import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -112,7 +110,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	private HttpClient httpClient;
 	private final String dbName;
 	private StdCouchDbConnector dbConn;
-
+	
 	/**
 	 * @param intfClass
 	 * @param currentSchemaVersion e.g. {@link PersonImpl#CURRENT_SCHEMA_VERSION}.
@@ -140,8 +138,8 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 				realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
 		try {
 			httpClient = new StdHttpClient.Builder().url(couchDbUri).build();
-			StdCouchDbInstance dbInstance = new StdCouchDbInstance(httpClient);
-			dbConn = new StdCouchDbConnector(dbName, dbInstance);
+			StdCouchDbInstance dbInstance = new StdCouchDbInstance(httpClient, SoluvasObjectMapperFactory.INSTANCE);
+			dbConn = new StdCouchDbConnector(dbName, dbInstance, SoluvasObjectMapperFactory.INSTANCE);
 			dbConn.createDatabaseIfNotExists();
 		} catch (Exception e) {
 			throw new CouchDbRepositoryException(e, "Cannot connect to CouchDB %s:%s%s database %s as %s for %s repository",
@@ -262,23 +260,28 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 		log.debug("Adding {} {} documents: {}", entities.size(), collName, ids);
 		String dbObjsStr = "";
 		try (Profiled p = new Profiled(log, "Added " + entities.size() + " " + collName + " documents: " + ids)) {
-			final List<S> results = new ArrayList<>(); 
-			final List<DocumentOperationResult> opResults = dbConn.executeBulk(entities);
-			for (final DocumentOperationResult opResult : opResults) {
-				if (!opResult.isErroneous()) {
-					S entity = Iterables.find(entities, new Predicate<T>() {
-						@Override
-						public boolean apply(@Nullable T input) {
-							return opResult.getId().equals( ((Revisionable) input).getGuid() );
-						}
-					});
-					S addedEntity = EcoreUtil.copy(entity);
-					((Revisionable) addedEntity).setRevision(opResult.getRevision());
-					results.add(addedEntity);
-				} else {
-					log.error("Error adding {} document {}: {} - {}", collName, opResult.getId(), opResult.getError(), opResult.getReason());
-				}
+			final List<S> results = new ArrayList<>();
+			for (final S entity : entities) {
+				final S addedEntity = EcoreUtil.copy(entity);
+				dbConn.create(addedEntity);
+				results.add(addedEntity);
 			}
+//			final List<DocumentOperationResult> opResults = dbConn.executeBulk(entities);
+//			for (final DocumentOperationResult opResult : opResults) {
+//				if (!opResult.isErroneous()) {
+//					S entity = Iterables.find(entities, new Predicate<T>() {
+//						@Override
+//						public boolean apply(@Nullable T input) {
+//							return opResult.getId().equals( ((Revisionable) input).getGuid() );
+//						}
+//					});
+//					S addedEntity = EcoreUtil.copy(entity);
+//					((Revisionable) addedEntity).setRevision(opResult.getRevision());
+//					results.add(addedEntity);
+//				} else {
+//					log.error("Error adding {} document {}: {} - {}", collName, opResult.getId(), opResult.getError(), opResult.getReason());
+//				}
+//			}
 			return results;
 //			final List<DBObject> dbObjs = ImmutableList.copyOf(Collections2
 //					.transform(entities, new EntityToDBObject()));
