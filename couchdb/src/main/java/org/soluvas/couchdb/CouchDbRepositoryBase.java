@@ -19,6 +19,8 @@ import org.ektorp.http.HttpClient;
 import org.ektorp.http.StdHttpClient;
 import org.ektorp.impl.StdCouchDbConnector;
 import org.ektorp.impl.StdCouchDbInstance;
+import org.ektorp.support.DesignDocument;
+import org.ektorp.support.DesignDocument.View;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
@@ -146,6 +148,17 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 					realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
 		}
 		beforeEnsureIndexes();
+		
+		DesignDocument design = dbConn.get(DesignDocument.class, getDesignDocId());
+		if (design == null) {
+			design = new DesignDocument(getDesignDocId());
+		}
+		// 'all' view: {"map": "function(doc) { if (doc.type == 'Sofa' ) emit( null, doc._id ) } "}
+		// 'count' view
+		design.addView("all", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( null, doc._id ); }"));
+		design.addView("count", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( null, doc._id ); }", "_count"));
+		design.addView("by_modificationTime", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+		dbConn.update(design);
 //		final List<String> ensuredIndexes = new ArrayList<>();
 //		ensuredIndexes.addAll( MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {})) );
 //		ensuredIndexes.addAll( MongoUtils.ensureIndexes(coll, indexedFields) );
@@ -176,8 +189,8 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	@Override
 	public final Page<T> findAll(Pageable pageable) {
 		final Sort sort = Optional.fromNullable(pageable.getSort()).or(new Sort("modificationTime"));
-		ViewQuery query = new ViewQuery().designDocId("_design/" + StringUtils.capitalize(collName))
-			.viewName("by_" + sort.iterator().next().getProperty()) // FIXME: do not hardcode sorting
+		ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
+			.viewName("by_" + sort.iterator().next().getProperty())
 			.descending(sort.iterator().next().getDirection() == Direction.DESC)
 			.includeDocs(true);
 		final PageRequest pageRequest = new PageRequest.Builder().page((int) pageable.getPageNumber()).pageSize((int) pageable.getPageSize()).build();
@@ -201,10 +214,18 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	 */
 	@Override
 	public final long count() {
-		final ViewQuery query = new ViewQuery().designDocId("_design/" + StringUtils.capitalize(collName))
+		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
 				.viewName("count");
 		final List<Long> view = dbConn.queryView(query, Long.class);
 		return Iterables.getFirst(view, 0L);
+	}
+
+	/**
+	 * Design document GUID, e.g. "_design/Checklist".
+	 * @return
+	 */
+	protected String getDesignDocId() {
+		return "_design/" + StringUtils.capitalize(collName);
 	}
 	
 	/* (non-Javadoc)

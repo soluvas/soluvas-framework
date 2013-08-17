@@ -25,6 +25,7 @@ import org.soluvas.data.domain.Sort.Direction;
  * Adapted from Spring Data Commons 1.4.
  * 
  * @author Oliver Gierke
+ * @see PageOffsetRequest
  */
 public class PageRequest implements Pageable, Serializable {
 
