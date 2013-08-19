@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.annotation.Nullable;
@@ -328,22 +329,22 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 
 	@Override
 	public <S extends T> Collection<S> modify(Map<String, S> entities) {
-		throw new UnsupportedOperationException();
-//		log.debug("Modifying {} {} documents: {}", entities.size(), collName, entities.keySet());
-//		final List<S> modifieds = new ArrayList<>();
-//		for (final Entry<String, S> entry : entities.entrySet()) {
-//			final S entity = entry.getValue();
-//			beforeSave(entity);
-//			final DBObject dbo = new EntityToDBObject().apply(entity);
-//			final WriteResult writeResult = coll.update(new BasicDBObject("_id", entry.getKey()), dbo);
-//			if (writeResult.getLastError() != null && writeResult.getLastError().getException() != null) {
-//				throw new CouchDbRepositoryException(writeResult.getLastError().getException(),
-//						"Cannot modify %d %s documents: %s", entities.size(), collName, entities.keySet());
-//			}
-//			modifieds.add(entity);
-//		}
-//		log.info("Modified {} {} documents: {}", entities.size(), collName, entities.keySet());
-//		return modifieds;
+		log.debug("Modifying {} {} documents: {}", entities.size(), collName, entities.keySet());
+		final List<S> modifieds = new ArrayList<>();
+		for (final Entry<String, S> entry : entities.entrySet()) {
+			final S entity = entry.getValue();
+			beforeSave(entity);
+			try {
+				dbConn.update(entity);
+			} catch (Exception e) {
+				throw new CouchDbRepositoryException(e,
+						"Cannot modify ID %s out of %d %s documents: %s", 
+						entity.getId(), entities.size(), collName, entities.keySet());
+			}
+			modifieds.add(entity);
+		}
+		log.info("Modified {} {} documents: {}", entities.size(), collName, entities.keySet());
+		return modifieds;
 	}
 
 	@Override
