@@ -47,6 +47,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.mongodb.DBCollection;
 
 /**
@@ -103,13 +104,13 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	 */
 	protected static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Jakarta");
 	protected final String collName;
-	private final Class<T> entityClass;
-	private final Class<? extends T> implClass;
+	protected final Class<T> entityClass;
+	protected final Class<? extends T> implClass;
 	protected long currentSchemaVersion;
 	protected final String couchDbUri;
 	private HttpClient httpClient;
-	private final String dbName;
-	private StdCouchDbConnector dbConn;
+	protected final String dbName;
+	protected StdCouchDbConnector dbConn;
 	
 	/**
 	 * @param intfClass
@@ -155,6 +156,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 		// 'count' view
 		design.addView("all", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( null, doc._id ); }"));
 		design.addView("count", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( null, doc._id ); }", "_count"));
+		design.addView("id", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( doc.id, null ); }"));
 		design.addView("by_modificationTime", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
 		dbConn.update(design);
 //		final List<String> ensuredIndexes = new ArrayList<>();
@@ -363,15 +365,16 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 
 	@Override
 	public final List<T> findAll(Collection<String> ids, Sort sort) {
-		throw new UnsupportedOperationException();
-//		final BasicDBObject sortQuery = MongoUtils.getSort(sort, "_id", 1);
-//		log.trace("finding {} {} sort by {}: {}", ids.size(), collName, sort, Iterables.limit(ids, 10));
-//		final List<T> entities = MongoUtils.transform(
-//				coll.find(new BasicDBObject("_id", new BasicDBObject("$in", ids))).sort(sortQuery),
-//				new DBObjectToEntity());
-//		log.debug("find {} {} ({}) returned {} documents", 
-//				ids.size(), collName, ids, entities.size());  
-//		return entities;
+		// FIXME: support sorting
+		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
+				.viewName("id").keys(ids).includeDocs(true);
+		log.debug("Querying {} view {} for {} keys: {}", 
+				getDesignDocId(), "id", ids.size(), Iterables.limit(ids, 10));
+		final List<T> fetcheds = (List) dbConn.queryView(query, implClass);
+		log.debug("Queried {} view {} for {} keys returned {} entities: {}", 
+				getDesignDocId(), "id", ids.size(), fetcheds.size(), 
+				Iterables.limit(Lists.transform(fetcheds, new org.soluvas.commons.IdFunction()), 10));
+		return fetcheds;
 	}
 
 	@Override
