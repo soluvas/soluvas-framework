@@ -158,6 +158,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 		design.addView("all", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( null, doc._id ); }"));
 		design.addView("count", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( null, doc._id ); }", "_count"));
 		design.addView("id", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( doc.id, null ); }"));
+		design.addView("filter_status", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }"));
 		design.addView("by_modificationTime", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
 		dbConn.update(design);
 //		final List<String> ensuredIndexes = new ArrayList<>();
