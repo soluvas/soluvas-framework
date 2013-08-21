@@ -212,17 +212,17 @@
 			<dependency>
 				<groupId>org.neo4j</groupId>
 				<artifactId>neo4j-cypher</artifactId>
-				<version>1.8.2</version>
+				<version>1.9.2</version>
 			</dependency>
 			<dependency>
 				<groupId>org.neo4j</groupId>
 				<artifactId>neo4j-kernel</artifactId>
-				<version>1.8.2</version>
+				<version>1.9.2</version>
 			</dependency>
 			<dependency>
 				<groupId>org.neo4j</groupId>
 				<artifactId>neo4j-rest-graphdb</artifactId>
-				<version>1.8.1</version>
+				<version>1.9</version>
 				<exclusions>
 					<exclusion>
 						<artifactId>commons-logging</artifactId>
@@ -417,6 +417,18 @@
 			    <groupId>com.codahale.metrics</groupId>
 			    <artifactId>metrics-core</artifactId>
 			    <version>${metrics.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.amazonaws</groupId>
+				<artifactId>aws-java-sdk</artifactId>
+				<version>1.5.4</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<dependency>
@@ -767,6 +779,13 @@
 		<repository>
 			<id>morphia</id>
 			<url>http://morphia.googlecode.com/svn/mavenrepo</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>neo4j.releases</id>
+			<url>http://m2.neo4j.org/content/repositories/releases/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
