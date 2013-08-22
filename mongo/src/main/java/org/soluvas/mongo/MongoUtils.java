@@ -54,7 +54,7 @@ public class MongoUtils {
 	 * @return
 	 * @throws UnknownHostException
 	 */
-	protected static MongoClient getClient(MongoClientURI realMongoUri) throws UnknownHostException {
+	protected static synchronized MongoClient getClient(MongoClientURI realMongoUri) throws UnknownHostException {
 		final String mongoUriStr = realMongoUri.getURI();
 		if (mongoClients.containsKey(mongoUriStr)) {
 			final MongoClient client = mongoClients.get(mongoUriStr);
