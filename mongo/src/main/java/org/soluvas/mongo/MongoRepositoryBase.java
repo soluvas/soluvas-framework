@@ -43,7 +43,6 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.WriteResult;
 
@@ -102,7 +101,6 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * TODO: Should use user's time zone (i.e. audit system).  
 	 */
 	protected static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Jakarta");
-	private MongoClient mongoClient;
 	protected final String collName;
 	private final Class<T> entityClass;
 	private final Class<? extends T> implClass;
@@ -130,8 +128,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		log.info("Connecting to MongoDB database {}/{} as {} for {}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), collName);
 		try {
-			mongoClient = MongoUtils.getMongoClient(realMongoUri);
-			final DB db = mongoClient.getDB(realMongoUri.getDatabase());
+			final DB db = MongoUtils.getDb(realMongoUri);
 			if (realMongoUri.getUsername() != null)
 				db.authenticate(realMongoUri.getUsername(),
 						realMongoUri.getPassword());
@@ -174,8 +171,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		log.info("Connecting to MongoDB database {}/{} as {} for {}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), collName);
 		try {
-			mongoClient = new MongoClient(realMongoUri);
-			final DB db = mongoClient.getDB(realMongoUri.getDatabase());
+			final DB db = MongoUtils.getDb(realMongoUri);
 			if (realMongoUri.getUsername() != null)
 				db.authenticate(realMongoUri.getUsername(),
 						realMongoUri.getPassword());
@@ -204,7 +200,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	@PreDestroy
 	public final void destroy() {
 		log.info("Shutting down {} MongoDB repository", collName);
-		mongoClient.close();
+		// DO NOT CALL THIS: mongoClient.close();
 	}
 
 	@Override

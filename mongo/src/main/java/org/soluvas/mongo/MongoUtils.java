@@ -18,6 +18,7 @@ import org.soluvas.data.domain.Sort.Order;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -25,6 +26,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
@@ -45,7 +47,14 @@ public class MongoUtils {
 	 */
 	private static final Map<String, MongoClient> mongoClients = new HashMap<>();
 
-	public static MongoClient getMongoClient(MongoClientURI realMongoUri) throws UnknownHostException {
+	/**
+	 * Use {@link #getMongoDb(MongoClientURI, String)} instead.
+	 * To prevent accidental call to {@link MongoClient#close()}, this method is marked {@code protected}.
+	 * @param realMongoUri
+	 * @return
+	 * @throws UnknownHostException
+	 */
+	protected static MongoClient getClient(MongoClientURI realMongoUri) throws UnknownHostException {
 		final String mongoUriStr = realMongoUri.getURI();
 		if (mongoClients.containsKey(mongoUriStr)) {
 			final MongoClient client = mongoClients.get(mongoUriStr);
@@ -61,8 +70,28 @@ public class MongoUtils {
 		}
 	}
 	
-	public static synchronized MongoClient getMongoClient(String mongoUri) throws UnknownHostException {
-		return getMongoClient(new MongoClientURI(mongoUri));
+	/**
+	 * Use {@link #getMongoDb(MongoClientURI, String)} instead.
+	 * To prevent accidental call to {@link MongoClient#close()}, this method is marked {@code protected}.
+	 * @param mongoUri
+	 * @return
+	 * @throws UnknownHostException
+	 */
+	protected static synchronized MongoClient getClient(String mongoUri) throws UnknownHostException {
+		return getClient(new MongoClientURI(mongoUri));
+	}
+	
+	/**
+	 * Gets a {@link DB} with dbname corresponding to {@link MongoClientURI#getDatabase()},
+	 * reusing a single {@link MongoClient}.
+	 * @param realMongoUri
+	 * @return
+	 * @throws UnknownHostException
+	 */
+	public static DB getDb(MongoClientURI realMongoUri) throws UnknownHostException {
+		final MongoClient client = getClient(realMongoUri);
+		final String dbname = Preconditions.checkNotNull(realMongoUri.getDatabase(), "MongoURI must contain dbname part");
+		return client.getDB(dbname);
 	}
 	
 	/**

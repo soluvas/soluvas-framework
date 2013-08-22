@@ -76,7 +76,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoURI;
+import com.mongodb.MongoClientURI;
 
 /**
  * @author ceefour
@@ -167,7 +167,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		this.transformer = transformer;
 		setStyles(imageStyles);
 		
-		final MongoURI mongoUriDetail = new MongoURI(mongoUri);
+		final MongoClientURI mongoUriDetail = new MongoClientURI(mongoUri);
 		String collName = namespace + "Image";
 		log = LoggerFactory.getLogger(MongoImageRepository.class.getName() + "/" + mongoUriDetail.getDatabase() + "/" + collName);
 		log.info("Starting MongoImageRepository {} with {} styles", namespace, styles.size());
@@ -180,7 +180,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		mongoDatabase = mongoUriDetail.getDatabase();
 		try {
 			log.info("Connecting to MongoDB {} database {}", mongoHosts, mongoDatabase);
-			DB db = mongoUriDetail.connectDB();
+			DB db = MongoUtils.getDb(mongoUriDetail);
 			if (mongoUriDetail.getUsername() != null)
 				db.authenticate(mongoUriDetail.getUsername(), mongoUriDetail.getPassword());
 			log.info("Authenticated to MongoDB. Collection name is {}", collName);
