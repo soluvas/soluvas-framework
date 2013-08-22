@@ -1,6 +1,8 @@
 package org.soluvas.mongo;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,8 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 
 /**
  * @author ceefour
@@ -34,7 +38,33 @@ import com.mongodb.DBObject;
 public class MongoUtils {
 	
 	private static final Logger log = LoggerFactory.getLogger(MongoUtils.class);
+	/**
+	 * Singleton {@link MongoClient} instances so we can effectively limit to 11 connections per webapp
+	 * (regardless of number of {@link MongoRepositoryBase} repositories).
+	 * <p>Note: This does cause a "memory leak" but in practice it should not matter. 
+	 */
+	private static final Map<String, MongoClient> mongoClients = new HashMap<>();
 
+	public static MongoClient getMongoClient(MongoClientURI realMongoUri) throws UnknownHostException {
+		final String mongoUriStr = realMongoUri.getURI();
+		if (mongoClients.containsKey(mongoUriStr)) {
+			final MongoClient client = mongoClients.get(mongoUriStr);
+			log.debug("Returning existing MongoClient {} for {}/{} as {}", 
+					client, realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername());
+			return client;
+		} else {
+			final MongoClient client = new MongoClient(realMongoUri);
+			log.info("Instatiating new MongoClient {} for {}/{} as {}", 
+					client, realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername());
+			mongoClients.put(mongoUriStr, client);
+			return client;
+		}
+	}
+	
+	public static synchronized MongoClient getMongoClient(String mongoUri) throws UnknownHostException {
+		return getMongoClient(new MongoClientURI(mongoUri));
+	}
+	
 	/**
 	 * Wrap MongoDB {@link DBCursor} results in immutable {@link List},
 	 * and closes the cursor.
@@ -200,5 +230,5 @@ public class MongoUtils {
 					indexesToDelete.size(), coll.getName(), indexesToDelete);
 		}
 	}
-	
+
 }

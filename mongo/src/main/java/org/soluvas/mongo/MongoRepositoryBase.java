@@ -128,7 +128,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		log.info("Connecting to MongoDB database {}/{} as {} for {}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), collName);
 		try {
-			mongoClient = new MongoClient(realMongoUri);
+			mongoClient = MongoUtils.getMongoClient(realMongoUri);
 			final DB db = mongoClient.getDB(realMongoUri.getDatabase());
 			if (realMongoUri.getUsername() != null)
 				db.authenticate(realMongoUri.getUsername(),
