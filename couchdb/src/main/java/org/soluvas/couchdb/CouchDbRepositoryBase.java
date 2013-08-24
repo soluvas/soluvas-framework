@@ -13,6 +13,7 @@ import javax.annotation.PreDestroy;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ektorp.DocumentNotFoundException;
 import org.ektorp.PageRequest;
 import org.ektorp.ViewQuery;
 import org.ektorp.http.HttpClient;
@@ -133,7 +134,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 		this.collName = collName;
 		
 		// WARNING: couchDbUri may contain password!
-		URI realCouchDbUri = URI.create(couchDbUri);
+		final URI realCouchDbUri = URI.create(couchDbUri);
 		this.log = LoggerFactory.getLogger(getClass().getName() + "/" + dbName + "/" + collName + "/" + currentSchemaVersion);
 		final String username = realCouchDbUri.getUserInfo() != null ? realCouchDbUri.getUserInfo().split(":")[0] : null;
 		log.info("Connecting to CouchDB {}:{}{} database {} as {} for {}",
@@ -149,9 +150,13 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 		}
 		beforeEnsureIndexes();
 		
-		DesignDocument design = dbConn.get(DesignDocument.class, getDesignDocId());
-		if (design == null) {
+		DesignDocument design;
+		try {
+			design = dbConn.get(DesignDocument.class, getDesignDocId());
+		} catch (DocumentNotFoundException e) {
 			design = new DesignDocument(getDesignDocId());
+			log.info("Creating new design document {}", design.getId());
+			dbConn.create(design);
 		}
 		// 'all' view: {"map": "function(doc) { if (doc.type == 'Sofa' ) emit( null, doc._id ) } "}
 		// 'count' view
@@ -160,6 +165,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 		design.addView("id", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( doc.id, null ); }"));
 		design.addView("filter_status", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }"));
 		design.addView("by_modificationTime", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+		log.info("Updating design document {} with {} views: {}", design.getId(), design.getViews().size(), design.getViews().keySet());
 		dbConn.update(design);
 //		final List<String> ensuredIndexes = new ArrayList<>();
 //		ensuredIndexes.addAll( MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {})) );
