@@ -1,9 +1,7 @@
- package org.soluvas.security.shell; 
+package org.soluvas.security.shell; 
 
 import java.util.List;
 import java.util.Set;
-
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -31,17 +29,10 @@ public class SecRoleMemberLsCommand extends ExtCommandSupport {
 	@Argument(name="role", required=true, description="Role name.")
 	private String role;
 
-	private final SecurityRepository securityRepo;
-
-	@Inject
-	public SecRoleMemberLsCommand(SecurityRepository securityRepo) {
-		super();
-		this.securityRepo = securityRepo;
-	}
-
 	@Override
 	protected Object doExecute() throws Exception {
-		Set<String> roleMembers = securityRepo.getRoleMembers(role);
+		final SecurityRepository securityRepo = getBean(SecurityRepository.class);
+		final Set<String> roleMembers = securityRepo.getRoleMembers(role);
 		System.out.format("%3s | %-40s\n", "#", "Name");
 		List<String> sortedRoleMembers = Ordering.natural().immutableSortedCopy(roleMembers);
 		int i = 0;

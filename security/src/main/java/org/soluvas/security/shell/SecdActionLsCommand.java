@@ -1,8 +1,6 @@
- package org.soluvas.security.shell; 
+package org.soluvas.security.shell; 
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
@@ -27,19 +25,9 @@ public class SecdActionLsCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(SecdActionLsCommand.class);
 
-	private final SecurityCatalog securityCatalog;
-	
-	@Inject
-	public SecdActionLsCommand(final SecurityCatalog securityCatalog) {
-		super();
-		this.securityCatalog = securityCatalog;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
-	 */
 	@Override
 	protected Object doExecute() throws Exception {
+		final SecurityCatalog securityCatalog = getBean(SecurityCatalog.class);
 		System.out.format("%3s | %-20s | %1s | %-20s | %-40s | %s\n", "#",
 				"Name", "G", "Domains", "Source", "Description");
 		final List<Action> sortedActions = new EObjectNameOrdering()

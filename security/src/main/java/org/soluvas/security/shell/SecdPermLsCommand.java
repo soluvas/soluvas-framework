@@ -1,8 +1,6 @@
- package org.soluvas.security.shell; 
+package org.soluvas.security.shell; 
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
@@ -26,19 +24,9 @@ public class SecdPermLsCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(SecdPermLsCommand.class);
 
-	private final SecurityCatalog securityCatalog;
-	
-	@Inject
-	public SecdPermLsCommand(SecurityCatalog securityCatalog) {
-		super();
-		this.securityCatalog = securityCatalog;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
-	 */
 	@Override
 	protected Object doExecute() throws Exception {
+		final SecurityCatalog securityCatalog = getBean(SecurityCatalog.class);
 		System.out.format("%3s | %-15s | %-15s | %-15s | %-20s | %s\n", "#",
 				"Domain", "Action", "Instance", "Role", "Source");
 		final List<Permission> permissions = securityCatalog.getPermissions();

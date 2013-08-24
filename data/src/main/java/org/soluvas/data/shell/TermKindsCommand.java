@@ -6,11 +6,12 @@ import java.util.Collection;
 import java.util.Map.Entry;
 
 import org.apache.felix.gogo.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
-import org.osgi.framework.ServiceReference;
 import org.soluvas.commons.NameFunction;
+import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermManager;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Collections2;
@@ -18,18 +19,15 @@ import com.google.common.collect.Multimap;
 
 /**
  * Display number of {@link Term}s for all recognized {@link Kind}s.
- * @author rully
+ * @author ceefour
  */
+@Service @Scope("prototype")
 @Command(scope="term", name="kinds", description="Display Terms grouped by recognized Kinds.")
-public class TermKindsCommand extends OsgiCommandSupport {
+public class TermKindsCommand extends ExtCommandSupport {
 
-	/* (non-Javadoc)
-	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
-	 */
 	@Override
 	protected Object doExecute() throws Exception {
-		final ServiceReference<TermManager> dataCatalogRef = bundleContext.getServiceReference(TermManager.class);
-		final TermManager termMgr = getService(TermManager.class, dataCatalogRef);
+		final TermManager termMgr = getBean(TermManager.class);
 		System.out.println(ansi().render("@|negative_on %3s|%-20s|%3s|%-40s|@",
 				"№", "Kind", "∑", "Terms"));
 		final Multimap<String, Term> terms = termMgr.getTermsByAttributeTypes();

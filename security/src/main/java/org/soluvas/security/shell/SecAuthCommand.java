@@ -1,8 +1,6 @@
- package org.soluvas.security.shell; 
+package org.soluvas.security.shell; 
 
 import static org.fusesource.jansi.Ansi.ansi;
-
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -40,16 +38,10 @@ public class SecAuthCommand extends ExtCommandSupport {
 	@Argument(index=1, name="password", required=false, 
 			description="Password.")
 	private String password;
-	private final Realm realm;
-	
-	@Inject
-	public SecAuthCommand(Realm realm) {
-		super();
-		this.realm = realm;
-	}
 
 	@Override
 	protected AuthenticationInfo doExecute() throws Exception {
+		final Realm realm = getBean(Realm.class);
 		System.out.println(ansi().render("Using realm @|bold %s|@ (%s) to authenticate @|bold %s|@", 
 				realm.getName(), realm.getClass().getName(), principal));
 		final DefaultSecurityManager securityMgr = new DefaultSecurityManager(realm);

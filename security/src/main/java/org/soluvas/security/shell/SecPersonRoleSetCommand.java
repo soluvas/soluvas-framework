@@ -1,8 +1,6 @@
- package org.soluvas.security.shell; 
+package org.soluvas.security.shell; 
 
 import java.util.Set;
-
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -34,16 +32,9 @@ public class SecPersonRoleSetCommand extends ExtCommandSupport {
 			description="Role name(s). If none specified, will remove all roles from the person.")
 	private String[] roles;
 
-	private final SecurityRepository securityRepo;
-
-	@Inject
-	public SecPersonRoleSetCommand(SecurityRepository securityRepo) {
-		super();
-		this.securityRepo = securityRepo;
-	}
-
 	@Override
 	protected Object doExecute() throws Exception {
+		final SecurityRepository securityRepo = getBean(SecurityRepository.class);
 		final Set<String> roleSet = roles != null ? ImmutableSet.copyOf(roles) : ImmutableSet.<String>of();
 		System.out.format("Setting security roles of %s to %s...",
 				personId, Joiner.on(", ").join(roleSet));

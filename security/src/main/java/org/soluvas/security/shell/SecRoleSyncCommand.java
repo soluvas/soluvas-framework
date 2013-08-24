@@ -3,7 +3,6 @@
 import java.util.List;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Command;
 import org.eclipse.emf.common.util.EList;
@@ -31,19 +30,11 @@ import com.google.common.collect.Iterables;
 public class SecRoleSyncCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(SecRoleSyncCommand.class);
-	private final SecurityCatalog securityCatalog;
-	private final SecurityRepository securityRepo;
-
-	@Inject
-	public SecRoleSyncCommand(SecurityCatalog securityCatalog,
-			SecurityRepository securityRepo) {
-		super();
-		this.securityCatalog = securityCatalog;
-		this.securityRepo = securityRepo;
-	}
 
 	@Override
 	protected Object doExecute() throws Exception {
+		final SecurityRepository securityRepo = getBean(SecurityRepository.class);
+		final SecurityCatalog securityCatalog = getBean(SecurityCatalog.class);
 		final EList<Role> catalogRoles = securityCatalog.getRoles();
 		final List<Role> manualRoles = ImmutableList.copyOf(Iterables.filter(catalogRoles, new Predicate<Role>() {
 			@Override

@@ -1,7 +1,5 @@
 package org.soluvas.facebook.shell;
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
@@ -30,18 +28,11 @@ public class FbLoginCommand extends ExtCommandSupport {
 	@Argument(name="appId", required=false, description="Specify custom Facebook OAuth App ID, if not using FacebookManager configuration.")
 	private String appId;
 	
-	private final FacebookManager facebookMgr;
-	private final WebAddress webAddress;
-	
-	@Inject
-	public FbLoginCommand(FacebookManager facebookMgr, WebAddress webAddress) {
-		super();
-		this.facebookMgr = facebookMgr;
-		this.webAddress = webAddress;
-	}
-
 	@Override
 	protected Object doExecute() throws Exception {
+		final FacebookManager facebookMgr = getBean(FacebookManager.class);
+		final WebAddress webAddress = getBean(WebAddress.class);
+
 		if (redirectUri == null) {
 			redirectUri = webAddress.getBaseUri() + "fb_recipient/";
 		}

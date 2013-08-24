@@ -2,8 +2,6 @@ package org.soluvas.facebook.shell;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-import javax.inject.Inject;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -13,7 +11,6 @@ import org.soluvas.commons.annotation.FacebookRelated;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.facebook.FacebookManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -43,13 +40,11 @@ public class FbPageCommand extends ExtCommandSupport {
 	@Argument(index=0, name="page_id", required=true, description="Page ID or username")
 	private String pageId;
 
-	@Inject
-	private FacebookManager facebookMgr;
-	@Autowired(required=false) @FacebookRelated
-	private EntityLookup<FacebookAccessible, String> lookup;
-	
 	@Override
 	protected Object doExecute() throws Exception {
+		final FacebookManager facebookMgr = getBean(FacebookManager.class);
+		final EntityLookup<FacebookAccessible, String> lookup = getBean(EntityLookup.class, FacebookRelated.class);
+
 		Preconditions.checkArgument(id != null || accessToken != null,
 				"Either id or access token must be specified.");
 		

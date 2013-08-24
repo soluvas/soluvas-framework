@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.soluvas.data.shell;
 
 import javax.annotation.Nullable;

@@ -1,8 +1,6 @@
- package org.soluvas.security.shell; 
+package org.soluvas.security.shell; 
 
 import java.util.Set;
-
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -38,19 +36,9 @@ public class SecRoleAddCommand extends ExtCommandSupport {
 	@Argument(index=1, name="personId ...", required=false, description="Role members as Person ID(s).", multiValued=true)
 	private String[] personIds;
 
-	private final SecurityRepository securityRepo;
-
-	@Inject
-	public SecRoleAddCommand(SecurityRepository securityRepo) {
-		super();
-		this.securityRepo = securityRepo;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
-	 */
 	@Override
 	protected Object doExecute() throws Exception {
+		final SecurityRepository securityRepo = getBean(SecurityRepository.class);
 		final Set<String> personIdSet = ImmutableSet.copyOf(Optional.fromNullable(personIds).or(new String[] {}));
 		System.out.format("Add role %s with members: %s and description '%s'...",
 				role,

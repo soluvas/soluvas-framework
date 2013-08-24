@@ -1,7 +1,5 @@
  package org.soluvas.security.shell; 
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
@@ -31,16 +29,9 @@ public class SecRoleMemberSetCommand extends ExtCommandSupport {
 	@Argument(index=1, name="personId ...", required=false, description="Person ID(s)", multiValued=true)
 	private String[] personIds;
 
-	private final SecurityRepository securityRepo;
-
-	@Inject
-	public SecRoleMemberSetCommand(SecurityRepository securityRepo) {
-		super();
-		this.securityRepo = securityRepo;
-	}
-
 	@Override
 	protected Object doExecute() throws Exception {
+		final SecurityRepository securityRepo = getBean(SecurityRepository.class);
 		System.out.format("Setting members of role %s to %s...",
 				role, Joiner.on(", ").join(personIds));
 		securityRepo.replaceRoleMembers(role, ImmutableSet.copyOf(personIds));

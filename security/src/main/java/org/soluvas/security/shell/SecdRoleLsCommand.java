@@ -1,8 +1,6 @@
- package org.soluvas.security.shell; 
+package org.soluvas.security.shell; 
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
@@ -13,7 +11,6 @@ import org.soluvas.security.Role;
 import org.soluvas.security.SecurityCatalog;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-
 
 /**
  * Shell command to list available {@link Role}s.
@@ -26,16 +23,9 @@ public class SecdRoleLsCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(SecdRoleLsCommand.class);
 	
-	private final SecurityCatalog securityCatalog;
-	
-	@Inject
-	public SecdRoleLsCommand(SecurityCatalog securityCatalog) {
-		super();
-		this.securityCatalog = securityCatalog;
-	}
-
 	@Override
 	protected Object doExecute() throws Exception {
+		final SecurityCatalog securityCatalog = getBean(SecurityCatalog.class);
 		System.out.format("%3s | %-15s | %-40s | %s\n", "#", "Name",
 				"Source", "Description");
 		final List<Role> sortedRoles = new EObjectNameOrdering()

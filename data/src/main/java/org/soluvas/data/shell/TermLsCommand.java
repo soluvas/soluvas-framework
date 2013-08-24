@@ -2,8 +2,6 @@ package org.soluvas.data.shell;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Command;
 import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.shell.ExtCommandSupport;
@@ -14,25 +12,18 @@ import org.springframework.stereotype.Service;
 
 /**
  * Display all {@link Term}s.
- * @author rully
+ * @author ceefour
  */
 @Service @Scope("prototype")
 @Command(scope="term", name="ls", description="Display all Terms.")
 public class TermLsCommand extends ExtCommandSupport {
 	
-	private final DataCatalog dataCatalog;
-
-	@Inject
-	public TermLsCommand(DataCatalog dataCatalog) {
-		super();
-		this.dataCatalog = dataCatalog;
-	}
-
 	/* (non-Javadoc)
 	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
 	 */
 	@Override
 	protected Object doExecute() throws Exception {
+		final DataCatalog dataCatalog = getBean(DataCatalog.class);
 		System.out.println(ansi().render("@|negative_on %3s|%-10s|%-15s|%-20s|%-10s|%-10s|%-20s|@",
 				"№", "NsPrefix", "Name", "Display Name", "Kind NsP", "Kind Name", "Bundle"));
 		int i = 0;

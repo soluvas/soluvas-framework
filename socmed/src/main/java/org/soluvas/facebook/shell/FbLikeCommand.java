@@ -5,8 +5,6 @@ import static org.fusesource.jansi.Ansi.ansi;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -16,7 +14,6 @@ import org.soluvas.commons.annotation.FacebookRelated;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.facebook.FacebookManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -47,13 +44,11 @@ public class FbLikeCommand extends ExtCommandSupport {
 	@Argument(index=0, name="objectId", required=true, description="Object ID to like")
 	private String objectId;
 
-	@Inject
-	private FacebookManager facebookMgr;
-	@Autowired(required=false) @FacebookRelated
-	private EntityLookup<FacebookAccessible, String> lookup;
-	
 	@Override
 	protected Object doExecute() throws Exception {
+		final FacebookManager facebookMgr = getBean(FacebookManager.class);
+		final EntityLookup<FacebookAccessible, String> lookup = getBean(EntityLookup.class, FacebookRelated.class);
+
 		Preconditions.checkArgument(id != null || accessToken != null,
 				"Either id or access token must be specified.");
 		

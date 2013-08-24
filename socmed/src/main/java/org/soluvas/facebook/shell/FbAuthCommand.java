@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
@@ -43,26 +41,19 @@ public class FbAuthCommand extends ExtCommandSupport {
 	@Argument(name="code", required=true, description="Verification code after login.")
 	private String code;
 
-	private final FacebookManager facebookMgr;
-	private final WebAddress webAddress;
-	
-	@Inject
-	public FbAuthCommand(FacebookManager facebookMgr, WebAddress webAddress) {
-		super();
-		this.facebookMgr = facebookMgr;
-		this.webAddress = webAddress;
-	}
-
 	@Override
 	protected Object doExecute() throws Exception {
+		final FacebookManager facebookMgr = getBean(FacebookManager.class);
+		final WebAddress webAddress = getBean(WebAddress.class);
+
 		if (redirectUri == null) {
 			redirectUri = webAddress.getBaseUri() + "fb_recipient/";
 		}
-		final String accessToken = fetchAccessToken(appId, appSecret, redirectUri, code);
+		final String accessToken = fetchAccessToken(facebookMgr, appId, appSecret, redirectUri, code);
 		return accessToken;
 	}
 
-	public String fetchAccessToken(String appId, String appSecret, String redirectUri, String code) {
+	public String fetchAccessToken(FacebookManager facebookMgr, String appId, String appSecret, String redirectUri, String code) {
 		final String realAppId = Optional.fromNullable(appId).or(facebookMgr.getAppId());
 		final String realAppSecret = Optional.fromNullable(appSecret).or(facebookMgr.getAppSecret());
 		final String accessTokenUriStr;

@@ -4,8 +4,6 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Command;
 import org.soluvas.commons.NameFunction;
 import org.soluvas.commons.NameUtils;
@@ -26,16 +24,9 @@ import com.google.common.collect.Lists;
 @Command(scope="mixin", name="ls", description="Displays all Mixins.")
 public class MixinLsCommand extends ExtCommandSupport {
 
-	private final MixinManager mixinMgr;
-	
-	@Inject
-	public MixinLsCommand(MixinManager mixinMgr) {
-		super();
-		this.mixinMgr = mixinMgr;
-	}
-
 	@Override
 	protected Object doExecute() throws Exception {
+		final MixinManager mixinMgr = getBean(MixinManager.class);
 		System.out.println(ansi().render("@|negative_on %3s|%-10s|%-15s|%3s|%-30s|%-20s|@",
 				"№", "NsPrefix", "Name", "Σ", "Attributes", "Bundle"));
 		int i = 0;

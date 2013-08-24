@@ -3,8 +3,6 @@ package org.soluvas.security.shell;
 import java.util.List;
 import java.util.Set;
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
@@ -28,19 +26,12 @@ public class SecPersonRoleLsCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(SecPersonRoleLsCommand.class);
 
-	private final SecurityRepository securityRepo;
-	
 	@Argument(name="personId", required=true, description="Person ID.")
 	private String personId;
 	
-	@Inject
-	public SecPersonRoleLsCommand(SecurityRepository securityRepo) {
-		super();
-		this.securityRepo = securityRepo;
-	}
-
 	@Override
 	protected Object doExecute() throws Exception {
+		final SecurityRepository securityRepo = getBean(SecurityRepository.class);
 		final Set<String> personRoles = securityRepo.getPersonRoles(personId);
 		System.out.format("%3s | %-40s\n", "#", "Role");
 		final List<String> sortedRoles = Ordering.natural().immutableSortedCopy(personRoles);

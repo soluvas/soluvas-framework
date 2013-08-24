@@ -1,8 +1,6 @@
- package org.soluvas.security.shell; 
+package org.soluvas.security.shell; 
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
@@ -25,16 +23,10 @@ import org.springframework.stereotype.Service;
 public class SecRoleLsCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(SecRoleLsCommand.class);
-	private final SecurityRepository securityRepo;
-
-	@Inject
-	public SecRoleLsCommand(SecurityRepository securityRepo) {
-		super();
-		this.securityRepo = securityRepo;
-	}
 
 	@Override
 	protected Object doExecute() throws Exception {
+		final SecurityRepository securityRepo = getBean(SecurityRepository.class);
 		System.out.format("%3s | %-15s | %s\n", "#", "Name", "Description");
 		Iterable<Role> repoRoles = securityRepo.getRoleRepository().findAll();
 		List<Role> sortedRoles = new EObjectNameOrdering().immutableSortedCopy(repoRoles);

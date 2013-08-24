@@ -1,7 +1,5 @@
  package org.soluvas.security.shell; 
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
@@ -31,16 +29,9 @@ public class SecRoleRmCommand extends ExtCommandSupport {
 			description="Role name(s) to delete.")
 	private String roles[];
 
-	private final SecurityRepository securityRepo;
-
-	@Inject
-	public SecRoleRmCommand(SecurityRepository securityRepo) {
-		super();
-		this.securityRepo = securityRepo;
-	}
-
 	@Override
 	protected Object doExecute() throws Exception {
+		final SecurityRepository securityRepo = getBean(SecurityRepository.class);
 		System.out.format("Delete role(s): %s...", Joiner.on(", ").join(roles));
 		securityRepo.getRoleRepository().deleteIds(ImmutableList.copyOf(roles));
 		System.out.format(" OK\n");
