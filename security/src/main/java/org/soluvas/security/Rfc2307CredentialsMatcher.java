@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.HostAuthenticationToken;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import scala.actors.threadpool.Arrays;
  * Algorithms supported are:
  * <ol>
  * 	<li>SSHA (salted SHA1)</li>
+ * 	<li>PLAIN. <b>strongly discouraged</b></li>
  * </ol>
  * This does not connect to LDAP. Instead it uses LDAP-encoded userPassword
  * to provide flexible salt and hashing algorithm. 
@@ -47,6 +49,8 @@ public class Rfc2307CredentialsMatcher implements CredentialsMatcher {
 			log.warn("Rejecting null stored credentials for {}", info.getPrincipals());
 			return false;
 		}
+		final String host = token instanceof HostAuthenticationToken ? ((HostAuthenticationToken) token).getHost() : null;
+		
 		final String passwordToken = String.valueOf((char[]) token.getCredentials());
 		final String userPassword = info.getCredentials().toString();
 		final Matcher matcher = passwordPattern.matcher(userPassword);
@@ -64,7 +68,15 @@ public class Rfc2307CredentialsMatcher implements CredentialsMatcher {
 				final byte[] digest = Arrays.copyOf(encoded, 20);
 				final byte[] salt = Arrays.copyOfRange(encoded, 20, encoded.length);
 				byte[] digestToken = HashedPasswordUtils.calculateSsha(passwordToken, salt);
-				return Arrays.equals(digestToken, digest);
+				boolean sshaMatches = Arrays.equals(digestToken, digest);
+				log.debug("Matching credentials for {} host {} using SSHA: {}",
+						token.getPrincipal(), host, sshaMatches);
+				return sshaMatches;
+			case "PLAIN":
+				boolean plainMatches = encodedBase64.equals(passwordToken);
+				log.debug("Matching credentials for {} host {} using PLAIN: {}",
+						token.getPrincipal(), host, plainMatches);
+				return plainMatches;
 			default:
 				log.error("Unknown password algorithm {} for {}", algorithm, info.getPrincipals());
 				return false;

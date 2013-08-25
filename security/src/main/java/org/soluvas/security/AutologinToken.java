@@ -1,6 +1,7 @@
 package org.soluvas.security;
 
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.HostAuthenticationToken;
 
 /**
  * {@link AuthenticationToken} that is always trusted. For example, when logging in
@@ -14,13 +15,21 @@ import org.apache.shiro.authc.AuthenticationToken;
  * @author haidar
  */
 @SuppressWarnings("serial")
-public class AutologinToken implements AuthenticationToken {
+public class AutologinToken implements HostAuthenticationToken {
 	
 	private final Object principal;
+	private final String host;
 	
 	public AutologinToken(Object principal) {
 		super();
 		this.principal = principal;
+		this.host = null;
+	}
+
+	public AutologinToken(Object principal, String host) {
+		super();
+		this.principal = principal;
+		this.host = host;
 	}
 
 	/* (non-Javadoc)
@@ -37,6 +46,11 @@ public class AutologinToken implements AuthenticationToken {
 	@Override
 	public Object getCredentials() {
 		return null;
+	}
+
+	@Override
+	public String getHost() {
+		return host;
 	}
 
 }
