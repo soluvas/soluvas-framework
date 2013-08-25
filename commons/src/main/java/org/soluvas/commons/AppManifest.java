@@ -12,6 +12,8 @@ import org.joda.time.DateTimeZone;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
+ * AppManifest is actually a misnomer, it should've been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.
+ * 
  * Attributes are optional because can use OverlayingSupplier.
  * <!-- end-model-doc -->
  *

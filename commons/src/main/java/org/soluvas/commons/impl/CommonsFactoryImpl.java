@@ -172,6 +172,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createExpansionStateFromString(eDataType, initialValue);
 			case CommonsPackage.SIGNUP_SOURCE_TYPE:
 				return createSignupSourceTypeFromString(eDataType, initialValue);
+			case CommonsPackage.TENANT_SOURCE:
+				return createTenantSourceFromString(eDataType, initialValue);
 			case CommonsPackage.DATE_TIME:
 				return createDateTimeFromString(eDataType, initialValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -247,6 +249,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertExpansionStateToString(eDataType, instanceValue);
 			case CommonsPackage.SIGNUP_SOURCE_TYPE:
 				return convertSignupSourceTypeToString(eDataType, instanceValue);
+			case CommonsPackage.TENANT_SOURCE:
+				return convertTenantSourceToString(eDataType, instanceValue);
 			case CommonsPackage.DATE_TIME:
 				return convertDateTimeToString(eDataType, instanceValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -786,6 +790,26 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertSignupSourceTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TenantSource createTenantSourceFromString(EDataType eDataType, String initialValue) {
+		TenantSource result = TenantSource.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertTenantSourceToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

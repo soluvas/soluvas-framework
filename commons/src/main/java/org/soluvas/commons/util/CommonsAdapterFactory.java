@@ -301,6 +301,10 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createRevisionableAdapter();
 			}
 			@Override
+			public Adapter caseSysConfig(SysConfig object) {
+				return createSysConfigAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -1129,6 +1133,20 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRevisionableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.SysConfig <em>Sys Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.SysConfig
+	 * @generated
+	 */
+	public Adapter createSysConfigAdapter() {
 		return null;
 	}
 

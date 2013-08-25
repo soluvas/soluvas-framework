@@ -93,6 +93,8 @@ import org.soluvas.commons.ShellProgressMonitor;
 import org.soluvas.commons.SignupSourceType;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.commons.StyleConfiguration;
+import org.soluvas.commons.SysConfig;
+import org.soluvas.commons.TenantSource;
 import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.Translatable;
 import org.soluvas.commons.Translation;
@@ -526,6 +528,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass sysConfigEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum resourceTypeEEnum = null;
 
 	/**
@@ -597,6 +606,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EEnum signupSourceTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum tenantSourceEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3218,6 +3234,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSysConfig() {
+		return sysConfigEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSysConfig_TenantId() {
+		return (EAttribute)sysConfigEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -3320,6 +3354,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	public EEnum getSignupSourceType() {
 		return signupSourceTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getTenantSource() {
+		return tenantSourceEEnum;
 	}
 
 	/**
@@ -3917,6 +3960,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(revisionableEClass, REVISIONABLE__GUID);
 		createEAttribute(revisionableEClass, REVISIONABLE__REVISION);
 
+		sysConfigEClass = createEClass(SYS_CONFIG);
+		createEAttribute(sysConfigEClass, SYS_CONFIG__TENANT_ID);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -3929,6 +3975,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		translationStateEEnum = createEEnum(TRANSLATION_STATE);
 		expansionStateEEnum = createEEnum(EXPANSION_STATE);
 		signupSourceTypeEEnum = createEEnum(SIGNUP_SOURCE_TYPE);
+		tenantSourceEEnum = createEEnum(TENANT_SOURCE);
 
 		// Create data types
 		dateTimeEDataType = createEDataType(DATE_TIME);
@@ -4160,6 +4207,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		postalAddressEClass.getESuperTypes().add(this.getIdentifiable());
 		postalAddressEClass.getESuperTypes().add(this.getSchemaVersionable());
 		canonicalSluggableEClass.getESuperTypes().add(this.getSluggable());
+		sysConfigEClass.getESuperTypes().add(this.getTimestamped());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4533,6 +4581,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getRevisionable_Guid(), theEcorePackage.getEString(), "guid", null, 0, 1, Revisionable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRevisionable_Revision(), theEcorePackage.getEString(), "revision", null, 0, 1, Revisionable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(sysConfigEClass, SysConfig.class, "SysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSysConfig_TenantId(), theEcorePackage.getEString(), "tenantId", null, 0, 1, SysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.BUNDLE);
@@ -4592,6 +4643,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addEEnumLiteral(signupSourceTypeEEnum, SignupSourceType.FACEBOOK_ADS);
 		addEEnumLiteral(signupSourceTypeEEnum, SignupSourceType.FACEBOOK_FRIEND);
 		addEEnumLiteral(signupSourceTypeEEnum, SignupSourceType.ALIA_MAGAZINE);
+
+		initEEnum(tenantSourceEEnum, TenantSource.class, "TenantSource");
+		addEEnumLiteral(tenantSourceEEnum, TenantSource.CONFIG);
+		addEEnumLiteral(tenantSourceEEnum, TenantSource.REPOSITORY);
 
 		// Initialize data types
 		initEDataType(dateTimeEDataType, DateTime.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -4671,7 +4726,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (appManifestEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Attributes are optional because can use OverlayingSupplier."
+			 "documentation", "AppManifest is actually a misnomer, it should\'ve been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.\n\nAttributes are optional because can use OverlayingSupplier."
 		   });		
 		addAnnotation
 		  (getAppManifest_Domain(), 
@@ -5752,6 +5807,30 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "The CouchDB document revision (\"_rev\")."
+		   });		
+		addAnnotation
+		  (tenantSourceEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Loads tenants from config folder, which is either META-INF or a $HOME-relative config folder.\nThis is practical for development or for production of single or few static tenants."
+		   });		
+		addAnnotation
+		  (tenantSourceEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Loads tenants from repository, which is preferred for production environment with dynamic tenants."
+		   });		
+		addAnnotation
+		  (sysConfigEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Base EMF Interface of system configuration for a tenant."
+		   });		
+		addAnnotation
+		  (getSysConfig_TenantId(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Tenant ID (without tenantEnv) which this sysconfig applies to."
 		   });
 	}
 	
