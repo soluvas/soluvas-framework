@@ -1617,6 +1617,20 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
+		op = addEOperation(imageManagerEClass, null, "getSafeImagesById", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageType(), "namespace", 1, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theCommonsPackage.getCollection());
+		g2 = createEGenericType(theEcorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "imageIds", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImageStyle(), "style", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theCommonsPackage.getMap());
+		g2 = createEGenericType(theEcorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(this.getDisplayImage());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
 		op = addEOperation(imageManagerEClass, this.getDisplayImage(), "getSafePersonPhoto", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageType(), "namespace", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "photoId", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1963,7 +1977,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		  (imageManagerEClass.getEOperations().get(9), 
 		   source, 
 		   new String[] {
-			 "documentation", "Gets the DisplayImage for an imageId & styleName in a specified repository. If image is not available, use the gender to select the representation."
+			 "documentation", "Gets DisplayImages for image IDs & styleName in a specified repository.\nIf image is not available, use the default object noimage.\nReturns Map<imageId, DisplayImage>."
 		   });		
 		addAnnotation
 		  (imageManagerEClass.getEOperations().get(10), 
@@ -1975,10 +1989,16 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		  (imageManagerEClass.getEOperations().get(11), 
 		   source, 
 		   new String[] {
-			 "documentation", "Gets DisplayImages for SocialPersons & styleName in a specified repository.\nIf image is not available, use the gender to select the representation.\nReturns Map<personId, DisplayImage>"
+			 "documentation", "Gets the DisplayImage for an imageId & styleName in a specified repository. If image is not available, use the gender to select the representation."
 		   });		
 		addAnnotation
 		  (imageManagerEClass.getEOperations().get(12), 
+		   source, 
+		   new String[] {
+			 "documentation", "Gets DisplayImages for SocialPersons & styleName in a specified repository.\nIf image is not available, use the gender to select the representation.\nReturns Map<personId, DisplayImage>"
+		   });		
+		addAnnotation
+		  (imageManagerEClass.getEOperations().get(13), 
 		   source, 
 		   new String[] {
 			 "documentation", "Gets DisplayImages for SocialPersons & styleName in a specified repository.\nIf image is not available, use the gender to select the representation.\nReturns Map<personId, DisplayImage>"

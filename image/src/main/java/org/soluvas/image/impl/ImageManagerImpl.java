@@ -570,6 +570,31 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
+	public Map<String, DisplayImage> getSafeImagesById(ImageType namespace, Collection<String> imageIds, ImageStyle style) {
+		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
+		final List<Image> images = imageRepo.findAll(imageIds);
+		final Map<String, Image> imageMap = Maps.uniqueIndex(images, new Function<Image, String>() {
+			@Override @Nullable
+			public String apply(@Nullable Image input) {
+				return input.getId();
+			}
+		});
+		
+		final ImmutableMap.Builder<String, DisplayImage> b = ImmutableMap.builder();
+		for (final String imageId : imageIds) {
+			final Image image = imageMap.get(imageId);
+			final DisplayImage displayImage = grabDisplayImage(namespace, imageRepo.getStyles(),
+					imageId, style, image);
+			b.put(imageId, displayImage);
+		}
+		return b.build();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
 	public DisplayImage getSafePersonPhoto(ImageType namespace, String imageId, ImageStyle style, Gender gender) {
 		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
 		final Image image = imageRepo.findOne(imageId);

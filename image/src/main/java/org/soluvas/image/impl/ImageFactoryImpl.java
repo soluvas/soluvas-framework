@@ -30,7 +30,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 */
 	public static ImageFactory init() {
 		try {
-			ImageFactory theImageFactory = (ImageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.soluvas.org/schema/image/1.0"); 
+			ImageFactory theImageFactory = (ImageFactory)EPackage.Registry.INSTANCE.getEFactory(ImagePackage.eNS_URI);
 			if (theImageFactory != null) {
 				return theImageFactory;
 			}
