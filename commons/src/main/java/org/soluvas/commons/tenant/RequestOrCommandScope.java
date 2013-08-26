@@ -19,7 +19,11 @@ public class RequestOrCommandScope implements Scope {
 	 * Return the RequestAttributes currently bound to the thread.
 	 * Will call {@link RequestContextHolder#currentRequestAttributes()}
 	 * first, if fails then uses the {@link ExtCommandSupport} {@link CommandRequestAttributes}.
+	 * 
 	 * <p>Exposes the previously bound RequestAttributes instance, if any.
+	 * 
+	 * <p>Activation: use with {@code org.soluvas.web.site.AppInitializer}.
+	 * 
 	 * @return the RequestAttributes currently bound to the thread
 	 * @throws IllegalStateException if no RequestAttributes object
 	 * is bound to the current thread

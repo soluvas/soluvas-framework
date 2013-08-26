@@ -2,15 +2,18 @@ package org.soluvas.commons.config;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.felix.service.command.CommandSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
@@ -20,6 +23,8 @@ import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.WebAddress;
+import org.soluvas.commons.tenant.CommandRequestAttributes;
+import org.soluvas.commons.tenant.RequestOrCommandScope;
 import org.soluvas.commons.tenant.TenantMode;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.commons.tenant.TenantRefImpl;
@@ -28,9 +33,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -53,6 +60,8 @@ public class MultiTenantWebConfig {
 	
 	@Inject
 	private Environment env;
+	@Resource(name="tenantMap")
+	private Map<String, AppManifest> tenantMap;
 	
 //	@Inject
 //	private BeanFactory beanFactory;
@@ -103,8 +112,19 @@ public class MultiTenantWebConfig {
 	
 	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	public TenantRef tenantRef() {
-		return getTenantRef(env.getRequiredProperty("tenantMode", TenantMode.class),
-				getRequest(), env.getRequiredProperty("tenantEnv"));
+		RequestAttributes requestAttrs = RequestOrCommandScope.currentRequestAttributes();
+		if (requestAttrs instanceof ServletRequestAttributes) {
+			return getTenantRef(env.getRequiredProperty("tenantMode", TenantMode.class),
+					getRequest(), env.getRequiredProperty("tenantEnv"));
+		} else if (requestAttrs instanceof CommandRequestAttributes) {
+			final CommandSession session = ((CommandRequestAttributes) requestAttrs).getSession();
+			final String clientId = Optional.fromNullable((String) session.get("clientId")).or(tenantMap.keySet().iterator().next());
+			final String tenantId = Optional.fromNullable((String) session.get("tenantId")).or(tenantMap.keySet().iterator().next());
+			final String tenantEnv = env.getRequiredProperty("tenantEnv");
+			return new TenantRefImpl(clientId, tenantId, tenantEnv);
+		} else {
+			throw new IllegalStateException("Unknown request attributes: " + requestAttrs);
+		}
 	}
 	
 	@Bean @DataFolder @Scope(value="request")
@@ -112,7 +132,7 @@ public class MultiTenantWebConfig {
 		return System.getProperty("user.home") + "/" + tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv();
 	}
 	
-	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+	@Bean @Scope(value="request"/*, proxyMode=ScopedProxyMode.INTERFACES*/)
 	public AppManifest appManifest() throws ExecutionException {
 		final String tenantId = tenantRef().getTenantId();
 		final String tenantKey = tenantId + "_" + tenantRef().getTenantEnv();

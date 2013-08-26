@@ -29,6 +29,10 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 		this.session = session;
 	}
 
+	public CommandSession getSession() {
+		return session;
+	}
+	
 	/**
 	 * Return the RequestAttributes currently bound to the thread.
 	 * <p>Exposes the previously bound RequestAttributes instance, if any.
