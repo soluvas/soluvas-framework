@@ -12,11 +12,15 @@ import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.conn.ClientConnectionManager;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ektorp.DocumentNotFoundException;
 import org.ektorp.PageRequest;
 import org.ektorp.ViewQuery;
+import org.ektorp.http.HttpClient;
+import org.ektorp.http.StdHttpClient;
 import org.ektorp.impl.StdCouchDbConnector;
+import org.ektorp.impl.StdCouchDbInstance;
 import org.ektorp.support.DesignDocument;
 import org.ektorp.support.DesignDocument.View;
 import org.joda.time.DateTime;
@@ -119,7 +123,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	 * @param collName
 	 * @param indexedFields
 	 */
-	public CouchDbRepositoryBase(Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
+	public CouchDbRepositoryBase(ClientConnectionManager connMgr, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
 			String couchDbUri, String dbName, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields) {
 		super();
 		this.entityClass = intfClass;
@@ -133,10 +137,12 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 		final URI realCouchDbUri = URI.create(couchDbUri);
 		this.log = LoggerFactory.getLogger(getClass().getName() + "/" + dbName + "/" + collName + "/" + currentSchemaVersion);
 		final String username = realCouchDbUri.getUserInfo() != null ? realCouchDbUri.getUserInfo().split(":")[0] : null;
-		log.info("Connecting to CouchDB {}:{}{} database {} as {} for {}",
+		log.info("Creating CouchDB connector {}:{}{} database {} as {} for {}",
 				realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
 		try {
-			dbConn = CouchDbUtils.getDb(couchDbUri, dbName);
+			final HttpClient client = new StdHttpClient.Builder().connectionManager(connMgr).url(couchDbUri).build();
+			final StdCouchDbInstance dbInstance = new StdCouchDbInstance(client, SoluvasObjectMapperFactory.INSTANCE);
+			dbConn = new StdCouchDbConnector(dbName, dbInstance, SoluvasObjectMapperFactory.INSTANCE);
 		} catch (Exception e) {
 			throw new CouchDbRepositoryException(e, "Cannot connect to CouchDB %s:%s%s database %s as %s for %s repository",
 					realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
@@ -176,7 +182,6 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 
 	@PreDestroy
 	public final void destroy() {
-		CouchDbUtils.ungetDb(couchDbUri, dbName);
 	}
 
 	/**
