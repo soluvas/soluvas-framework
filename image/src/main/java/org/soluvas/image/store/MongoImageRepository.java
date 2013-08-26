@@ -815,7 +815,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 					return input.getId();
 				}
 			});
-			log.debug("Got {} {} images with IDs {}", 
+			log.trace("Got {} {} images with IDs {}", 
 					images.size(), namespace, ids );
 			return images;
 		} finally {
