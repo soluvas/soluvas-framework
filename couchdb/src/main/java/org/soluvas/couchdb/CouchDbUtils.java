@@ -75,6 +75,7 @@ public class CouchDbUtils {
 			log.info("Instantiating new StdCouchDbConnector {} for {}:{}{} database {} as {}", 
 					dbConn, parsedUri.getHost(), parsedUri.getPort(), parsedUri.getPath(), dbName, username);
 			dbConn.createDatabaseIfNotExists();
+			connectors.put(connKey, dbConn);
 			return dbConn;
 		}
 	}
@@ -88,6 +89,7 @@ public class CouchDbUtils {
 		if (httpClientUris.remove(uri)) {
 			if (!httpClientUris.contains(uri)) {
 				// Remove all connectors for this URI
+				int allConnectorCount = connectors.size();
 				int removedConnectorCount = 0;
 				final Iterator<Entry<String, StdCouchDbConnector>> iterator = connectors.entrySet().iterator();
 				while (iterator.hasNext()) {
@@ -99,7 +101,8 @@ public class CouchDbUtils {
 				}
 				// Shutdown HttpClient
 				final HttpClient client = httpClients.remove(uri);
-				log.info("Shutting down HttpClient {} ({} CouchDB Connectors removed)", client, removedConnectorCount);
+				log.info("Shutting down HttpClient {} ({} of {} CouchDB Connectors removed)", 
+						client, removedConnectorCount, allConnectorCount);
 				client.shutdown();
 			}
 		}
