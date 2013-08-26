@@ -58,12 +58,12 @@ public class MongoUtils {
 		final String mongoUriStr = realMongoUri.getURI();
 		if (mongoClients.containsKey(mongoUriStr)) {
 			final MongoClient client = mongoClients.get(mongoUriStr);
-			log.debug("Returning existing MongoClient {} for {}/{} as {}", 
+			log.debug("Reusing existing MongoClient {} for {}/{} as {}", 
 					client, realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername());
 			return client;
 		} else {
 			final MongoClient client = new MongoClient(realMongoUri);
-			log.info("Instatiating new MongoClient {} for {}/{} as {}", 
+			log.info("Instantiating new MongoClient {} for {}/{} as {}", 
 					client, realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername());
 			mongoClients.put(mongoUriStr, client);
 			return client;

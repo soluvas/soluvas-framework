@@ -16,10 +16,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ektorp.DocumentNotFoundException;
 import org.ektorp.PageRequest;
 import org.ektorp.ViewQuery;
-import org.ektorp.http.HttpClient;
-import org.ektorp.http.StdHttpClient;
 import org.ektorp.impl.StdCouchDbConnector;
-import org.ektorp.impl.StdCouchDbInstance;
 import org.ektorp.support.DesignDocument;
 import org.ektorp.support.DesignDocument.View;
 import org.joda.time.DateTime;
@@ -110,7 +107,6 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	protected final Class<? extends T> implClass;
 	protected long currentSchemaVersion;
 	protected final String couchDbUri;
-	private HttpClient httpClient;
 	protected final String dbName;
 	protected StdCouchDbConnector dbConn;
 	
@@ -140,10 +136,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 		log.info("Connecting to CouchDB {}:{}{} database {} as {} for {}",
 				realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
 		try {
-			httpClient = new StdHttpClient.Builder().url(couchDbUri).build();
-			StdCouchDbInstance dbInstance = new StdCouchDbInstance(httpClient, SoluvasObjectMapperFactory.INSTANCE);
-			dbConn = new StdCouchDbConnector(dbName, dbInstance, SoluvasObjectMapperFactory.INSTANCE);
-			dbConn.createDatabaseIfNotExists();
+			dbConn = CouchDbUtils.getDb(couchDbUri, dbName);
 		} catch (Exception e) {
 			throw new CouchDbRepositoryException(e, "Cannot connect to CouchDB %s:%s%s database %s as %s for %s repository",
 					realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
@@ -183,8 +176,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 
 	@PreDestroy
 	public final void destroy() {
-		log.info("Shutting down CouchDB {} database {} repository", dbName, collName);
-		httpClient.shutdown();
+		CouchDbUtils.ungetDb(couchDbUri, dbName);
 	}
 
 	/**
