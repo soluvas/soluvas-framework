@@ -1,5 +1,6 @@
 package org.soluvas.commons.tenant;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -97,7 +98,9 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 			return requestVars.keySet().toArray(new String[] {});
 		case SCOPE_SESSION:
 		case SCOPE_GLOBAL_SESSION:
-			return new String[] {}; // TODO: support this somehow, see https://issues.apache.org/jira/browse/FELIX-4206
+			// see https://issues.apache.org/jira/browse/FELIX-4206
+			final Collection<String> keySet = (Collection<String>) session.get(null);
+			return keySet.toArray(new String[] {});
 		default:
 			throw new IllegalArgumentException("Unknown scope: " + scope);
 		}
