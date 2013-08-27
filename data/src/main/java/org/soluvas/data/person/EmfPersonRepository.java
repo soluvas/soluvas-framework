@@ -229,4 +229,10 @@ public class EmfPersonRepository extends
 		return null;
 	}
 
+	@Override
+	public Person findOneActive(String personId) {
+		// FIXME: implement status=ACTIVE filter
+		return findOne(personId);
+	}
+
 }

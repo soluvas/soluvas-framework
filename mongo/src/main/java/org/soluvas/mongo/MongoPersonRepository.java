@@ -158,4 +158,10 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		return count;
 	}
 
+	@Override
+	public Person findOneActive(String personId) {
+		// FIXME: implement status=ACTIVE filter
+		return findOne(personId);
+	}
+
 }

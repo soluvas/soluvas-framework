@@ -36,6 +36,7 @@ import org.soluvas.commons.PhoneNumber;
 import org.soluvas.commons.PhotoIdContainer;
 import org.soluvas.commons.PostalAddress;
 import org.soluvas.commons.PublicationStatus;
+import org.soluvas.commons.Revisionable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.SignupSourceType;
 import org.soluvas.commons.Sluggable;
@@ -77,6 +78,8 @@ import java.math.BigDecimal;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFacebookId <em>Facebook Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFacebookUsername <em>Facebook Username</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFacebookAccessToken <em>Facebook Access Token</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getGuid <em>Guid</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getRevision <em>Revision</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getFirstName <em>First Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getLastName <em>Last Name</em>}</li>
@@ -435,6 +438,46 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @ordered
 	 */
 	protected String facebookAccessToken = FACEBOOK_ACCESS_TOKEN_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getGuid() <em>Guid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGuid()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String GUID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGuid() <em>Guid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGuid()
+	 * @generated
+	 * @ordered
+	 */
+	protected String guid = GUID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getRevision() <em>Revision</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRevision()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String REVISION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getRevision() <em>Revision</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRevision()
+	 * @generated
+	 * @ordered
+	 */
+	protected String revision = REVISION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
@@ -1929,6 +1972,48 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getGuid() {
+		return guid;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGuid(String newGuid) {
+		String oldGuid = guid;
+		guid = newGuid;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON__GUID, oldGuid, guid));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getRevision() {
+		return revision;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRevision(String newRevision) {
+		String oldRevision = revision;
+		revision = newRevision;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON__REVISION, oldRevision, revision));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Long getTwitterId() {
 		return twitterId;
@@ -2919,6 +3004,10 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				return getFacebookUsername();
 			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
 				return getFacebookAccessToken();
+			case CommonsPackage.PERSON__GUID:
+				return getGuid();
+			case CommonsPackage.PERSON__REVISION:
+				return getRevision();
 			case CommonsPackage.PERSON__SCHEMA_VERSION:
 				return getSchemaVersion();
 			case CommonsPackage.PERSON__FIRST_NAME:
@@ -3074,6 +3163,12 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				return;
 			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
 				setFacebookAccessToken((String)newValue);
+				return;
+			case CommonsPackage.PERSON__GUID:
+				setGuid((String)newValue);
+				return;
+			case CommonsPackage.PERSON__REVISION:
+				setRevision((String)newValue);
 				return;
 			case CommonsPackage.PERSON__FIRST_NAME:
 				setFirstName((String)newValue);
@@ -3281,6 +3376,12 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
 				setFacebookAccessToken(FACEBOOK_ACCESS_TOKEN_EDEFAULT);
 				return;
+			case CommonsPackage.PERSON__GUID:
+				setGuid(GUID_EDEFAULT);
+				return;
+			case CommonsPackage.PERSON__REVISION:
+				setRevision(REVISION_EDEFAULT);
+				return;
 			case CommonsPackage.PERSON__FIRST_NAME:
 				setFirstName(FIRST_NAME_EDEFAULT);
 				return;
@@ -3467,6 +3568,10 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				return FACEBOOK_USERNAME_EDEFAULT == null ? facebookUsername != null : !FACEBOOK_USERNAME_EDEFAULT.equals(facebookUsername);
 			case CommonsPackage.PERSON__FACEBOOK_ACCESS_TOKEN:
 				return FACEBOOK_ACCESS_TOKEN_EDEFAULT == null ? facebookAccessToken != null : !FACEBOOK_ACCESS_TOKEN_EDEFAULT.equals(facebookAccessToken);
+			case CommonsPackage.PERSON__GUID:
+				return GUID_EDEFAULT == null ? guid != null : !GUID_EDEFAULT.equals(guid);
+			case CommonsPackage.PERSON__REVISION:
+				return REVISION_EDEFAULT == null ? revision != null : !REVISION_EDEFAULT.equals(revision);
 			case CommonsPackage.PERSON__SCHEMA_VERSION:
 				return schemaVersion != SCHEMA_VERSION_EDEFAULT;
 			case CommonsPackage.PERSON__FIRST_NAME:
@@ -3660,6 +3765,13 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				default: return -1;
 			}
 		}
+		if (baseClass == Revisionable.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.PERSON__GUID: return CommonsPackage.REVISIONABLE__GUID;
+				case CommonsPackage.PERSON__REVISION: return CommonsPackage.REVISIONABLE__REVISION;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -3754,6 +3866,13 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				default: return -1;
 			}
 		}
+		if (baseClass == Revisionable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.REVISIONABLE__GUID: return CommonsPackage.PERSON__GUID;
+				case CommonsPackage.REVISIONABLE__REVISION: return CommonsPackage.PERSON__REVISION;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -3843,6 +3962,11 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				default: return -1;
 			}
 		}
+		if (baseClass == Revisionable.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
 		return super.eDerivedOperationID(baseOperationID, baseClass);
 	}
 
@@ -3908,6 +4032,10 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		result.append(facebookUsername);
 		result.append(", facebookAccessToken: ");
 		result.append(facebookAccessToken);
+		result.append(", guid: ");
+		result.append(guid);
+		result.append(", revision: ");
+		result.append(revision);
 		result.append(", schemaVersion: ");
 		result.append(schemaVersion);
 		result.append(", firstName: ");

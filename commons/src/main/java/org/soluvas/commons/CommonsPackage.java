@@ -3356,13 +3356,31 @@ public interface CommonsPackage extends EPackage {
 	int PERSON__FACEBOOK_ACCESS_TOKEN = NAME_CONTAINER_FEATURE_COUNT + 13;
 
 	/**
+	 * The feature id for the '<em><b>Guid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__GUID = NAME_CONTAINER_FEATURE_COUNT + 14;
+
+	/**
+	 * The feature id for the '<em><b>Revision</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__REVISION = NAME_CONTAINER_FEATURE_COUNT + 15;
+
+	/**
 	 * The feature id for the '<em><b>Schema Version</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__SCHEMA_VERSION = NAME_CONTAINER_FEATURE_COUNT + 14;
+	int PERSON__SCHEMA_VERSION = NAME_CONTAINER_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>First Name</b></em>' attribute.
@@ -3371,7 +3389,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__FIRST_NAME = NAME_CONTAINER_FEATURE_COUNT + 15;
+	int PERSON__FIRST_NAME = NAME_CONTAINER_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Last Name</b></em>' attribute.
@@ -3380,7 +3398,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__LAST_NAME = NAME_CONTAINER_FEATURE_COUNT + 16;
+	int PERSON__LAST_NAME = NAME_CONTAINER_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Password</b></em>' attribute.
@@ -3389,7 +3407,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__PASSWORD = NAME_CONTAINER_FEATURE_COUNT + 17;
+	int PERSON__PASSWORD = NAME_CONTAINER_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Phone Numbers</b></em>' containment reference list.
@@ -3398,7 +3416,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__PHONE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 18;
+	int PERSON__PHONE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Emails</b></em>' containment reference list.
@@ -3407,7 +3425,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__EMAILS = NAME_CONTAINER_FEATURE_COUNT + 19;
+	int PERSON__EMAILS = NAME_CONTAINER_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Mobile Numbers</b></em>' containment reference list.
@@ -3416,7 +3434,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__MOBILE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 20;
+	int PERSON__MOBILE_NUMBERS = NAME_CONTAINER_FEATURE_COUNT + 22;
 
 	/**
 	 * The feature id for the '<em><b>Addresses</b></em>' containment reference list.
@@ -3425,7 +3443,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__ADDRESSES = NAME_CONTAINER_FEATURE_COUNT + 21;
+	int PERSON__ADDRESSES = NAME_CONTAINER_FEATURE_COUNT + 23;
 
 	/**
 	 * The feature id for the '<em><b>Account Status</b></em>' attribute.
@@ -3434,7 +3452,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__ACCOUNT_STATUS = NAME_CONTAINER_FEATURE_COUNT + 22;
+	int PERSON__ACCOUNT_STATUS = NAME_CONTAINER_FEATURE_COUNT + 24;
 
 	/**
 	 * The feature id for the '<em><b>Birth Year</b></em>' attribute.
@@ -3443,7 +3461,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__BIRTH_YEAR = NAME_CONTAINER_FEATURE_COUNT + 23;
+	int PERSON__BIRTH_YEAR = NAME_CONTAINER_FEATURE_COUNT + 25;
 
 	/**
 	 * The feature id for the '<em><b>Birth Month</b></em>' attribute.
@@ -3452,7 +3470,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__BIRTH_MONTH = NAME_CONTAINER_FEATURE_COUNT + 24;
+	int PERSON__BIRTH_MONTH = NAME_CONTAINER_FEATURE_COUNT + 26;
 
 	/**
 	 * The feature id for the '<em><b>Birth Day</b></em>' attribute.
@@ -3461,7 +3479,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__BIRTH_DAY = NAME_CONTAINER_FEATURE_COUNT + 25;
+	int PERSON__BIRTH_DAY = NAME_CONTAINER_FEATURE_COUNT + 27;
 
 	/**
 	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
@@ -3470,7 +3488,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__BIRTH_DATE = NAME_CONTAINER_FEATURE_COUNT + 26;
+	int PERSON__BIRTH_DATE = NAME_CONTAINER_FEATURE_COUNT + 28;
 
 	/**
 	 * The feature id for the '<em><b>Gender</b></em>' attribute.
@@ -3479,7 +3497,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__GENDER = NAME_CONTAINER_FEATURE_COUNT + 27;
+	int PERSON__GENDER = NAME_CONTAINER_FEATURE_COUNT + 29;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -3488,7 +3506,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__LANGUAGE = NAME_CONTAINER_FEATURE_COUNT + 28;
+	int PERSON__LANGUAGE = NAME_CONTAINER_FEATURE_COUNT + 30;
 
 	/**
 	 * The feature id for the '<em><b>Currency Code</b></em>' attribute.
@@ -3497,7 +3515,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__CURRENCY_CODE = NAME_CONTAINER_FEATURE_COUNT + 29;
+	int PERSON__CURRENCY_CODE = NAME_CONTAINER_FEATURE_COUNT + 31;
 
 	/**
 	 * The feature id for the '<em><b>Currency</b></em>' attribute.
@@ -3506,7 +3524,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__CURRENCY = NAME_CONTAINER_FEATURE_COUNT + 30;
+	int PERSON__CURRENCY = NAME_CONTAINER_FEATURE_COUNT + 32;
 
 	/**
 	 * The feature id for the '<em><b>Google Plus Id</b></em>' attribute.
@@ -3515,7 +3533,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__GOOGLE_PLUS_ID = NAME_CONTAINER_FEATURE_COUNT + 31;
+	int PERSON__GOOGLE_PLUS_ID = NAME_CONTAINER_FEATURE_COUNT + 33;
 
 	/**
 	 * The feature id for the '<em><b>Google Username</b></em>' attribute.
@@ -3524,7 +3542,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__GOOGLE_USERNAME = NAME_CONTAINER_FEATURE_COUNT + 32;
+	int PERSON__GOOGLE_USERNAME = NAME_CONTAINER_FEATURE_COUNT + 34;
 
 	/**
 	 * The feature id for the '<em><b>Virtual Mail</b></em>' attribute.
@@ -3533,7 +3551,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__VIRTUAL_MAIL = NAME_CONTAINER_FEATURE_COUNT + 33;
+	int PERSON__VIRTUAL_MAIL = NAME_CONTAINER_FEATURE_COUNT + 35;
 
 	/**
 	 * The feature id for the '<em><b>Nickname</b></em>' attribute.
@@ -3542,7 +3560,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__NICKNAME = NAME_CONTAINER_FEATURE_COUNT + 34;
+	int PERSON__NICKNAME = NAME_CONTAINER_FEATURE_COUNT + 36;
 
 	/**
 	 * The feature id for the '<em><b>Customer Role</b></em>' attribute.
@@ -3551,7 +3569,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__CUSTOMER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 35;
+	int PERSON__CUSTOMER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 37;
 
 	/**
 	 * The feature id for the '<em><b>Member Role</b></em>' attribute.
@@ -3560,7 +3578,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__MEMBER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 36;
+	int PERSON__MEMBER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 38;
 
 	/**
 	 * The feature id for the '<em><b>Manager Role</b></em>' attribute.
@@ -3569,7 +3587,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__MANAGER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 37;
+	int PERSON__MANAGER_ROLE = NAME_CONTAINER_FEATURE_COUNT + 39;
 
 	/**
 	 * The feature id for the '<em><b>Time Zone Id</b></em>' attribute.
@@ -3578,7 +3596,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__TIME_ZONE_ID = NAME_CONTAINER_FEATURE_COUNT + 38;
+	int PERSON__TIME_ZONE_ID = NAME_CONTAINER_FEATURE_COUNT + 40;
 
 	/**
 	 * The feature id for the '<em><b>Time Zone</b></em>' attribute.
@@ -3587,7 +3605,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__TIME_ZONE = NAME_CONTAINER_FEATURE_COUNT + 39;
+	int PERSON__TIME_ZONE = NAME_CONTAINER_FEATURE_COUNT + 41;
 
 	/**
 	 * The feature id for the '<em><b>Referrer Id</b></em>' attribute.
@@ -3596,7 +3614,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__REFERRER_ID = NAME_CONTAINER_FEATURE_COUNT + 40;
+	int PERSON__REFERRER_ID = NAME_CONTAINER_FEATURE_COUNT + 42;
 
 	/**
 	 * The feature id for the '<em><b>Referrer Type</b></em>' attribute.
@@ -3605,7 +3623,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__REFERRER_TYPE = NAME_CONTAINER_FEATURE_COUNT + 41;
+	int PERSON__REFERRER_TYPE = NAME_CONTAINER_FEATURE_COUNT + 43;
 
 	/**
 	 * The feature id for the '<em><b>Signup Source</b></em>' attribute.
@@ -3614,7 +3632,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__SIGNUP_SOURCE = NAME_CONTAINER_FEATURE_COUNT + 42;
+	int PERSON__SIGNUP_SOURCE = NAME_CONTAINER_FEATURE_COUNT + 44;
 
 	/**
 	 * The feature id for the '<em><b>Signup Source Type</b></em>' attribute.
@@ -3623,7 +3641,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__SIGNUP_SOURCE_TYPE = NAME_CONTAINER_FEATURE_COUNT + 43;
+	int PERSON__SIGNUP_SOURCE_TYPE = NAME_CONTAINER_FEATURE_COUNT + 45;
 
 	/**
 	 * The feature id for the '<em><b>Ip Address</b></em>' attribute.
@@ -3632,7 +3650,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__IP_ADDRESS = NAME_CONTAINER_FEATURE_COUNT + 44;
+	int PERSON__IP_ADDRESS = NAME_CONTAINER_FEATURE_COUNT + 46;
 
 	/**
 	 * The feature id for the '<em><b>Last Ip Address</b></em>' attribute.
@@ -3641,7 +3659,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__LAST_IP_ADDRESS = NAME_CONTAINER_FEATURE_COUNT + 45;
+	int PERSON__LAST_IP_ADDRESS = NAME_CONTAINER_FEATURE_COUNT + 47;
 
 	/**
 	 * The feature id for the '<em><b>Last Login Time</b></em>' attribute.
@@ -3650,7 +3668,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__LAST_LOGIN_TIME = NAME_CONTAINER_FEATURE_COUNT + 46;
+	int PERSON__LAST_LOGIN_TIME = NAME_CONTAINER_FEATURE_COUNT + 48;
 
 	/**
 	 * The feature id for the '<em><b>Validation Time</b></em>' attribute.
@@ -3659,7 +3677,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__VALIDATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 47;
+	int PERSON__VALIDATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 49;
 
 	/**
 	 * The feature id for the '<em><b>Activation Time</b></em>' attribute.
@@ -3668,7 +3686,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__ACTIVATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 48;
+	int PERSON__ACTIVATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 50;
 
 	/**
 	 * The feature id for the '<em><b>Verification Time</b></em>' attribute.
@@ -3677,7 +3695,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__VERIFICATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 49;
+	int PERSON__VERIFICATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 51;
 
 	/**
 	 * The feature id for the '<em><b>Newsletter Subscription Enabled</b></em>' attribute.
@@ -3686,7 +3704,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__NEWSLETTER_SUBSCRIPTION_ENABLED = NAME_CONTAINER_FEATURE_COUNT + 50;
+	int PERSON__NEWSLETTER_SUBSCRIPTION_ENABLED = NAME_CONTAINER_FEATURE_COUNT + 52;
 
 	/**
 	 * The feature id for the '<em><b>Newsletter Subscription Time</b></em>' attribute.
@@ -3695,7 +3713,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__NEWSLETTER_SUBSCRIPTION_TIME = NAME_CONTAINER_FEATURE_COUNT + 51;
+	int PERSON__NEWSLETTER_SUBSCRIPTION_TIME = NAME_CONTAINER_FEATURE_COUNT + 53;
 
 	/**
 	 * The feature id for the '<em><b>Social Sharing Enabled</b></em>' attribute.
@@ -3704,7 +3722,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__SOCIAL_SHARING_ENABLED = NAME_CONTAINER_FEATURE_COUNT + 52;
+	int PERSON__SOCIAL_SHARING_ENABLED = NAME_CONTAINER_FEATURE_COUNT + 54;
 
 	/**
 	 * The feature id for the '<em><b>Publication Status</b></em>' attribute.
@@ -3713,7 +3731,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__PUBLICATION_STATUS = NAME_CONTAINER_FEATURE_COUNT + 53;
+	int PERSON__PUBLICATION_STATUS = NAME_CONTAINER_FEATURE_COUNT + 55;
 
 	/**
 	 * The feature id for the '<em><b>Archival Status</b></em>' attribute.
@@ -3722,7 +3740,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__ARCHIVAL_STATUS = NAME_CONTAINER_FEATURE_COUNT + 54;
+	int PERSON__ARCHIVAL_STATUS = NAME_CONTAINER_FEATURE_COUNT + 56;
 
 	/**
 	 * The feature id for the '<em><b>Folder</b></em>' attribute.
@@ -3731,7 +3749,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__FOLDER = NAME_CONTAINER_FEATURE_COUNT + 55;
+	int PERSON__FOLDER = NAME_CONTAINER_FEATURE_COUNT + 57;
 
 	/**
 	 * The feature id for the '<em><b>Religion</b></em>' attribute.
@@ -3740,7 +3758,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__RELIGION = NAME_CONTAINER_FEATURE_COUNT + 56;
+	int PERSON__RELIGION = NAME_CONTAINER_FEATURE_COUNT + 58;
 
 	/**
 	 * The feature id for the '<em><b>Password Reset Code</b></em>' attribute.
@@ -3749,7 +3767,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__PASSWORD_RESET_CODE = NAME_CONTAINER_FEATURE_COUNT + 57;
+	int PERSON__PASSWORD_RESET_CODE = NAME_CONTAINER_FEATURE_COUNT + 59;
 
 	/**
 	 * The feature id for the '<em><b>Password Reset Expiry Time</b></em>' attribute.
@@ -3758,7 +3776,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__PASSWORD_RESET_EXPIRY_TIME = NAME_CONTAINER_FEATURE_COUNT + 58;
+	int PERSON__PASSWORD_RESET_EXPIRY_TIME = NAME_CONTAINER_FEATURE_COUNT + 60;
 
 	/**
 	 * The feature id for the '<em><b>Client Access Token</b></em>' attribute.
@@ -3767,7 +3785,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__CLIENT_ACCESS_TOKEN = NAME_CONTAINER_FEATURE_COUNT + 59;
+	int PERSON__CLIENT_ACCESS_TOKEN = NAME_CONTAINER_FEATURE_COUNT + 61;
 
 	/**
 	 * The feature id for the '<em><b>Security Role Ids</b></em>' attribute list.
@@ -3776,7 +3794,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__SECURITY_ROLE_IDS = NAME_CONTAINER_FEATURE_COUNT + 60;
+	int PERSON__SECURITY_ROLE_IDS = NAME_CONTAINER_FEATURE_COUNT + 62;
 
 	/**
 	 * The feature id for the '<em><b>Debit Balance</b></em>' attribute.
@@ -3785,7 +3803,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__DEBIT_BALANCE = NAME_CONTAINER_FEATURE_COUNT + 61;
+	int PERSON__DEBIT_BALANCE = NAME_CONTAINER_FEATURE_COUNT + 63;
 
 	/**
 	 * The feature id for the '<em><b>Debit Currency</b></em>' attribute.
@@ -3794,7 +3812,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__DEBIT_CURRENCY = NAME_CONTAINER_FEATURE_COUNT + 62;
+	int PERSON__DEBIT_CURRENCY = NAME_CONTAINER_FEATURE_COUNT + 64;
 
 	/**
 	 * The number of structural features of the '<em>Person</em>' class.
@@ -3803,7 +3821,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 63;
+	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 65;
 
 	/**
 	 * The operation id for the '<em>Get Image Id</em>' operation.

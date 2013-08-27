@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.annotation.PreDestroy;
 
+import org.apache.http.conn.ClientConnectionManager;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -31,6 +32,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Supplier;
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
@@ -56,6 +58,7 @@ public class SoluvasCouchDbRealm extends AuthorizingRealm {
 	 * @param securityCatalogSupplier Why not generics? See https://issues.apache.org/jira/browse/ARIES-960
 	 * @param securityRepo
 	 */
+	@Deprecated
 	public SoluvasCouchDbRealm(Supplier securityCatalogSupplier,
 			final CouchDbConnector conn) {
 		super();
@@ -68,6 +71,7 @@ public class SoluvasCouchDbRealm extends AuthorizingRealm {
 		setAuthenticationTokenClass(AuthenticationToken.class);
 	}
 	
+	@Deprecated
 	public SoluvasCouchDbRealm(Supplier securityCatalogSupplier,
 			final String url, final String user, final String password, final String db) throws MalformedURLException {
 		super();
@@ -87,6 +91,7 @@ public class SoluvasCouchDbRealm extends AuthorizingRealm {
 		setAuthenticationTokenClass(AuthenticationToken.class);
 	}
 	
+	@Deprecated
 	public SoluvasCouchDbRealm(String name, Supplier<SecurityCatalog> securityCatalogSupplier,
 			final String uri, final String db) throws MalformedURLException {
 		super();
@@ -94,6 +99,25 @@ public class SoluvasCouchDbRealm extends AuthorizingRealm {
 		this.securityRepo = new CouchDbSecurityRepository();
 		httpClient = new StdHttpClient.Builder()
 			.url(uri)
+			.build();
+		final StdCouchDbInstance stdCouchDbInstance = new StdCouchDbInstance(httpClient);
+		final StdCouchDbConnector cDbCon = new StdCouchDbConnector(db, stdCouchDbInstance);
+		cDbCon.createDatabaseIfNotExists();
+		this.conn = cDbCon;
+		setName(name);
+		setCredentialsMatcher(new Rfc2307CredentialsMatcher());
+		setAuthenticationTokenClass(HostAuthenticationToken.class);
+	}
+	
+	public SoluvasCouchDbRealm(ClientConnectionManager connMgr, String name, Supplier<SecurityCatalog> securityCatalogSupplier,
+			final String uri, final String db) throws MalformedURLException {
+		super();
+		this.securityCatalogSupplier = securityCatalogSupplier;
+		this.securityRepo = new CouchDbSecurityRepository();
+		this.httpClient = null;
+		final HttpClient httpClient = new StdHttpClient.Builder()
+			.url(uri)
+			.connectionManager(connMgr)
 			.build();
 		final StdCouchDbInstance stdCouchDbInstance = new StdCouchDbInstance(httpClient);
 		final StdCouchDbConnector cDbCon = new StdCouchDbConnector(db, stdCouchDbInstance);
@@ -174,39 +198,46 @@ public class SoluvasCouchDbRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken token) throws AuthenticationException {
-		final String host = token instanceof HostAuthenticationToken ? ((HostAuthenticationToken) token).getHost() : null;
-		if (!getName().equals(host)) {
-			throw new UnknownAccountException("Host mismatch, expected '" + getName() + "', token requests '" + host + "'");
-		}
-		
-		if (token instanceof UsernamePasswordToken) {
-			// Key can be either person ID or email
-			final String tokenKey = ((UsernamePasswordToken) token).getUsername();
-			final ViewQuery query = new ViewQuery()
-				.designDocId("_design/Person")
-		        .viewName("password")
-		        .key(tokenKey);
+		try {
+			final String host = token instanceof HostAuthenticationToken ? ((HostAuthenticationToken) token).getHost() : null;
+			if (!getName().equals(host)) {
+				throw new UnknownAccountException("Host mismatch, expected '" + getName() + "', token requests '" + host + "'");
+			}
 			
-			final ViewResult matched = conn.queryView(query);
-			if (!matched.isEmpty()) {
-				final Row firstRow = matched.iterator().next();
-				final JsonNode node = firstRow.getValueAsNode();
-				final String personId = node.get("uid").asText();
-				final String userPassword = node.get("password").asText();
-				log.info("Matched {} user(s) for principal {} realm {}, personId={}", 
-						matched.getSize(), tokenKey, getName(), personId);
-				return new SimpleAuthenticationInfo(personId, userPassword, null, getName());
+			if (token instanceof UsernamePasswordToken) {
+				// Key can be either person ID or email
+				final String tokenKey = ((UsernamePasswordToken) token).getUsername();
+				final ViewQuery query = new ViewQuery()
+					.designDocId("_design/Person")
+			        .viewName("password")
+			        .key(tokenKey);
+				
+				final ViewResult matched = conn.queryView(query);
+				if (!matched.isEmpty()) {
+					final Row firstRow = matched.iterator().next();
+					final JsonNode node = firstRow.getValueAsNode();
+					final String personId = node.get("uid").asText();
+					final String userPassword = node.get("password").asText();
+					log.info("Matched {} user(s) for principal {} realm {}, personId={}", 
+							matched.getSize(), tokenKey, getName(), personId);
+					return new SimpleAuthenticationInfo(personId, userPassword, null, getName());
+				} else {
+					log.debug("No matching user for principal {} realm {}", tokenKey, getName());
+					return new SimpleAuthenticationInfo();
+				}			
+			} else if (token instanceof AutologinToken) {
+				log.debug("AuthenticationInfo for {} is using AutologinToken", token.getPrincipal());
+				final String personId = (String) token.getPrincipal();
+				return new SimpleAuthenticationInfo(personId, null, getName());
 			} else {
-				log.debug("No matching user for principal {} realm {}", tokenKey, getName());
-				return new SimpleAuthenticationInfo();
-			}			
-		} else if (token instanceof AutologinToken) {
-			log.debug("AuthenticationInfo for {} is using AutologinToken", token.getPrincipal());
-			final String personId = (String) token.getPrincipal();
-			return new SimpleAuthenticationInfo(personId, null, getName());
-		} else {
-			throw new UnsupportedTokenException("Unsupported AuthenticationToken: "
-					+ token.getClass() + " using " + token.getPrincipal());
+				throw new UnsupportedTokenException("Unsupported AuthenticationToken: "
+						+ token.getClass() + " using " + token.getPrincipal());
+			}
+		} catch (RuntimeException e) {
+			// Un-swallow non-AuthenticationException exceptions
+			Throwables.propagateIfInstanceOf(e, AuthenticationException.class);
+			log.error("Error authenticating against CouchDB realm '" + getName() + "': " + e, e);
+			throw e;
 		}
 	}
 }

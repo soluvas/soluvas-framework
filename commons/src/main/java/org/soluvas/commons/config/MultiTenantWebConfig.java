@@ -70,7 +70,7 @@ public class MultiTenantWebConfig {
 	 * @todo Replace with annotation https://jira.springsource.org/browse/SPR-5192 when it's supported.
 	 * @return
 	 */
-	public HttpServletRequest getRequest() {
+	protected HttpServletRequest getRequest() {
 		return ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 //		return beanFactory.getBean(HttpServletRequest.class); // doesn't work
 	}
@@ -132,7 +132,12 @@ public class MultiTenantWebConfig {
 		return System.getProperty("user.home") + "/" + tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv();
 	}
 	
-	@Bean @Scope(value="request"/*, proxyMode=ScopedProxyMode.INTERFACES*/)
+	/**
+	 * proxyMode is required! See http://forum.springsource.org/showthread.php?141230-Beans-initialized-twice-by-WebApplicationContext&p=454428#post454428
+	 * @return
+	 * @throws ExecutionException
+	 */
+	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	public AppManifest appManifest() throws ExecutionException {
 		final String tenantId = tenantRef().getTenantId();
 		final String tenantKey = tenantId + "_" + tenantRef().getTenantEnv();

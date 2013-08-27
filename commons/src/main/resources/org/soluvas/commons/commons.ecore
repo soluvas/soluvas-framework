@@ -1118,6 +1118,7 @@
     <eGenericSuperTypes eClassifier="#//TwitterIdentity"/>
     <eGenericSuperTypes eClassifier="#//FacebookIdentity"/>
     <eGenericSuperTypes eClassifier="#//FacebookAccessible"/>
+    <eGenericSuperTypes eClassifier="#//Revisionable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PhoneNumber">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="phoneNumber" lowerBound="1"

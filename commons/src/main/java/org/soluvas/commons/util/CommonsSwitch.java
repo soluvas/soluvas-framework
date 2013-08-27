@@ -425,6 +425,7 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseTwitterIdentity(person);
 				if (result == null) result = caseFacebookIdentity(person);
 				if (result == null) result = caseFacebookAccessible(person);
+				if (result == null) result = caseRevisionable(person);
 				if (result == null) result = caseNameable(person);
 				if (result == null) result = caseImageable(person);
 				if (result == null) result = caseSluggable(person);

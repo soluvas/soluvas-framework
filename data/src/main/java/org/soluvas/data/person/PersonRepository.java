@@ -60,4 +60,6 @@ public interface PersonRepository extends
 	
 	public long countBySearchText(String searchText);
 
+	public Person findOneActive(String personId);
+
 }

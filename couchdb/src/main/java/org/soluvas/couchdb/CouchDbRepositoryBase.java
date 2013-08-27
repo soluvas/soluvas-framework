@@ -14,6 +14,7 @@ import javax.annotation.PreDestroy;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.ClientConnectionManager;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ektorp.CouchDbConnector;
 import org.ektorp.DocumentNotFoundException;
 import org.ektorp.PageRequest;
 import org.ektorp.ViewQuery;
@@ -51,7 +52,6 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.mongodb.DBCollection;
 
 /**
  * {@link PagingAndSortingRepository} implemented using CouchDB, with {@link SchemaVersionable} support.
@@ -147,7 +147,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 			throw new CouchDbRepositoryException(e, "Cannot connect to CouchDB %s:%s%s database %s as %s for %s repository",
 					realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
 		}
-		beforeEnsureIndexes();
+		beforeUpdateDesignDocument();
 		
 		DesignDocument design;
 		try {
@@ -157,13 +157,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 			log.info("Creating new design document {}", design.getId());
 			dbConn.create(design);
 		}
-		// 'all' view: {"map": "function(doc) { if (doc.type == 'Sofa' ) emit( null, doc._id ) } "}
-		// 'count' view
-		design.addView("all", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( null, doc._id ); }"));
-		design.addView("count", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( null, doc._id ); }", "_count"));
-		design.addView("id", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( doc.id, null ); }"));
-		design.addView("filter_status", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }"));
-		design.addView("by_modificationTime", new View("function(doc) { if (doc.type == '" + intfClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+		updateDesignDocument(design);
 		log.info("Updating design document {} with {} views: {}", design.getId(), design.getViews().size(), design.getViews().keySet());
 		dbConn.update(design);
 //		final List<String> ensuredIndexes = new ArrayList<>();
@@ -174,10 +168,33 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 
 	/**
 	 * Called by constructor after connection and authentication but 
-	 * before calling {@link MongoUtils#ensureUnique(DBCollection, String...)} and {@link MongoUtils#ensureIndexes(DBCollection, Map)}.
+	 * before calling {@link #updateDesignDocument(DesignDocument)}.
 	 * Useful if you want to migrate data or reslug.
 	 */
-	protected void beforeEnsureIndexes() {
+	protected void beforeUpdateDesignDocument() {
+	}
+	
+	/**
+	 * Called by constructor after connection and authentication, and {@link #beforeUpdateDesignDocument()}.
+	 * The modified {@link DesignDocument} will be {@link CouchDbConnector#update(Object)}ed to the database.
+	 * Out-of-the-box, {@link CouchDbRepositoryBase} provides 5 views:
+	 * <ol>
+	 * 	<li><b>all</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( null, doc._id ); }</code></li>
+	 * 	<li><b>count</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( null, doc._id ); }</code></li>
+	 * 	<li><b>id</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.id, null ); }</code></li>
+	 * 	<li><b>filter_status</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }</code></li>
+	 * 	<li><b>by_modificationTime</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }</code></li>
+	 * </ol>
+	 * @param design
+	 */
+	protected void updateDesignDocument(DesignDocument design) {
+		// 'all' view: {"map": "function(doc) { if (doc.type == 'Sofa' ) emit( null, doc._id ) } "}
+		// 'count' view
+		design.addView("all", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( null, doc._id ); }"));
+		design.addView("count", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( null, doc._id ); }", "_count"));
+		design.addView("id", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.id, null ); }"));
+		design.addView("filter_status", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }"));
+		design.addView("by_modificationTime", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
 	}
 
 	@PreDestroy

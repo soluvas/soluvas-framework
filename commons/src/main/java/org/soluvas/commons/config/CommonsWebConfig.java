@@ -112,7 +112,7 @@ public class CommonsWebConfig {
 		log.info("Creating Pooling HTTP ClientConnectionManager with {} max connections, trust all SSL certs: {}",
 				maxConnections, trustAll);
 
-		final SchemeRegistry schemeRegistry = new SchemeRegistry(); // TODO: accept self-signed TLS here
+		final SchemeRegistry schemeRegistry = new SchemeRegistry();
 		schemeRegistry.register(new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
 		final SSLSocketFactory sslSocketFactory;
 		if (trustAll) {

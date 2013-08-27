@@ -4203,6 +4203,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		personEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getFacebookAccessible());
 		personEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getRevisionable());
+		personEClass.getEGenericSuperTypes().add(g1);
 		postalAddressEClass.getESuperTypes().add(this.getNameContainer());
 		postalAddressEClass.getESuperTypes().add(this.getIdentifiable());
 		postalAddressEClass.getESuperTypes().add(this.getSchemaVersionable());
