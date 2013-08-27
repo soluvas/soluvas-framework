@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
  * @author ceefour
  */
 @Service @Scope("prototype")
-@Command(scope="bippoperson", name="ls", description="List BippoPerson entities.")
+@Command(scope="person", name="ls", description="List BippoPerson entities.")
 public class PersonLsCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(PersonLsCommand.class);

@@ -160,7 +160,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 
 	@Override
 	public Person findOneActive(String personId) {
-		// FIXME: implement status=ACTIVE filter
+		// FIXME: implement status=ACTIVE|VALIDATED|VERIFIED filter
 		return findOne(personId);
 	}
 

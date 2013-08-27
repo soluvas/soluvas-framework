@@ -3,7 +3,9 @@ package org.soluvas.couchdb;
 import javax.annotation.Nullable;
 
 import org.apache.http.conn.ClientConnectionManager;
+import org.joda.time.DateTime;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
@@ -22,6 +24,13 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 	public CouchDbPersonRepository(ClientConnectionManager connMgr, String couchDbUri, String dbName) {
 		super(connMgr, Person.class, PersonImpl.class, 1L, couchDbUri, dbName, "person",
 				ImmutableList.<String>of(), ImmutableMap.<String, Integer>of());
+	}
+	
+	@Override
+	protected void beforeSave(Person entity) {
+		super.beforeSave(entity);
+		entity.setModificationTime(new DateTime());
+		entity.setCanonicalSlug(SlugUtils.canonicalize(entity.getSlug()));
 	}
 
 	/* (non-Javadoc)
@@ -60,7 +69,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 	@Override
 	@Nullable
 	public Person findOneByEmail(@Nullable String email) {
-		// TODO Auto-generated method stub
+		// FIXME: required by PersonAddCommand... and please add accountStatus filter 
 		throw new UnsupportedOperationException();
 	}
 
@@ -115,7 +124,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 
 	@Override
 	public Person findOneActive(String personId) {
-		// FIXME: implement status=ACTIVE filter
+		// FIXME: implement status=ACTIVE|VALIDATED|VERIFIED filter
 		return findOne(personId);
 	}
 

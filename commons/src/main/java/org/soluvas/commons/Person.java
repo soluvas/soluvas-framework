@@ -76,6 +76,7 @@ import java.math.BigDecimal;
  *   <li>{@link org.soluvas.commons.Person#getSecurityRoleIds <em>Security Role Ids</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getDebitBalance <em>Debit Balance</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getDebitCurrency <em>Debit Currency</em>}</li>
+ *   <li>{@link org.soluvas.commons.Person#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -1343,6 +1344,22 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	void setDebitCurrency(CurrencyUnit value);
+
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * The default value is <code>"Person"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' attribute.
+	 * @see org.soluvas.commons.CommonsPackage#getPerson_Type()
+	 * @model default="Person" changeable="false"
+	 * @generated
+	 */
+	String getType();
 
 	/**
 	 * <!-- begin-user-doc -->

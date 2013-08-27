@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.ClientConnectionManager;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ektorp.CouchDbConnector;
+import org.ektorp.DbAccessException;
 import org.ektorp.DocumentNotFoundException;
 import org.ektorp.PageRequest;
 import org.ektorp.ViewQuery;
@@ -72,6 +73,7 @@ import com.google.common.collect.Lists;
 public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSortingRepositoryBase<T, String>
 	implements CouchDbRepository<T> {
 	
+public static final String VIEW_UID = "uid";
 //	public class DBObjectToEntity implements Function<DBObject, T> {
 //		@Override
 //		public T apply(DBObject input) {
@@ -181,7 +183,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	 * <ol>
 	 * 	<li><b>all</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( null, doc._id ); }</code></li>
 	 * 	<li><b>count</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( null, doc._id ); }</code></li>
-	 * 	<li><b>id</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.id, null ); }</code></li>
+	 * 	<li><b>uid</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }</code></li>
 	 * 	<li><b>filter_status</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }</code></li>
 	 * 	<li><b>by_modificationTime</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }</code></li>
 	 * </ol>
@@ -192,7 +194,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 		// 'count' view
 		design.addView("all", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( null, doc._id ); }"));
 		design.addView("count", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( null, doc._id ); }", "_count"));
-		design.addView("id", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.id, null ); }"));
+		design.addView(VIEW_UID, new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
 		design.addView("filter_status", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }"));
 		design.addView("by_modificationTime", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
 	}
@@ -216,7 +218,17 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 			.descending(sort.iterator().next().getDirection() == Direction.DESC)
 			.includeDocs(true);
 		final PageRequest pageRequest = new PageRequest.Builder().page((int) pageable.getPageNumber()).pageSize((int) pageable.getPageSize()).build();
-		final org.ektorp.Page<? extends T> page = dbConn.queryForPage(query, pageRequest, implClass);
+		org.ektorp.Page<? extends T> page;
+		try {
+			page = dbConn.queryForPage(query, pageRequest, implClass);
+		} catch (DbAccessException e) {
+			if (e.getMessage().contains("update_seq")) {
+				log.debug("Returning empty page for DbAccessException " + e, e);
+				return new PageImpl<T>(ImmutableList.<T>of(), pageable, 0l);
+			} else {
+				throw e;
+			}
+		}
 		return new PageImpl<T>((List) page.getRows(), pageable, page.getTotalSize());
 		
 //		final BasicDBObject query = new BasicDBObject();
@@ -282,7 +294,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 			"Make sure all of the entities have valid guid: %s", guids);
 		
 		log.debug("Adding {} {} documents: {}", entities.size(), collName, ids);
-		String dbObjsStr = "";
+//		String dbObjsStr = "";
 		try (Profiled p = new Profiled(log, "Added " + entities.size() + " " + collName + " documents: " + ids)) {
 			final List<S> results = new ArrayList<>();
 			for (final S entity : entities) {
@@ -321,8 +333,8 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 //					ids);
 //			return ImmutableList.copyOf(entities);
 		} catch (Exception e) {
-			throw new RepositoryException(e, "Error adding %s %s documents (%s): %s", entities.size(), collName, ids, 
-					StringUtils.abbreviateMiddle(dbObjsStr, "…", 1000));
+			throw new RepositoryException(e, "Error adding %s %s documents (%s): %s", 
+					entities.size(), collName, ids, e);
 		}
 	}
 	
@@ -389,12 +401,23 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	public final List<T> findAll(Collection<String> ids, Sort sort) {
 		// FIXME: support sorting
 		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-				.viewName("id").keys(ids).includeDocs(true);
+				.viewName(VIEW_UID).keys(ids).includeDocs(true);
 		log.debug("Querying {} view {} for {} keys: {}", 
-				getDesignDocId(), "id", ids.size(), Iterables.limit(ids, 10));
-		final List<T> fetcheds = (List) dbConn.queryView(query, implClass);
+				getDesignDocId(), VIEW_UID, ids.size(), Iterables.limit(ids, 10));
+		List<T> fetcheds;
+		try {
+			fetcheds = (List) dbConn.queryView(query, implClass);
+		} catch (DbAccessException e) {
+			if (e.getMessage().contains("update_seq")) {
+				log.debug("Returning empty list for DbAccessException " + e, e);
+				fetcheds = ImmutableList.<T>of();
+			} else {
+				throw e;
+			}
+		}
+
 		log.debug("Queried {} view {} for {} keys returned {} entities: {}", 
-				getDesignDocId(), "id", ids.size(), fetcheds.size(), 
+				getDesignDocId(), VIEW_UID, ids.size(), fetcheds.size(), 
 				Iterables.limit(Lists.transform(fetcheds, new org.soluvas.commons.IdFunction()), 10));
 		return fetcheds;
 	}

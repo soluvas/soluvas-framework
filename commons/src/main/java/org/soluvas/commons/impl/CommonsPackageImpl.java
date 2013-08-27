@@ -2766,6 +2766,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPerson_Type() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(49);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getPerson__HasEmail__String() {
 		return personEClass.getEOperations().get(0);
 	}
@@ -3897,6 +3906,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(personEClass, PERSON__SECURITY_ROLE_IDS);
 		createEAttribute(personEClass, PERSON__DEBIT_BALANCE);
 		createEAttribute(personEClass, PERSON__DEBIT_CURRENCY);
+		createEAttribute(personEClass, PERSON__TYPE);
 		createEOperation(personEClass, PERSON___HAS_EMAIL__STRING);
 		createEOperation(personEClass, PERSON___PUT_EMAIL__STRING);
 
@@ -4516,6 +4526,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPerson_SecurityRoleIds(), theEcorePackage.getEString(), "securityRoleIds", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_DebitBalance(), theEcorePackage.getEBigDecimal(), "debitBalance", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_DebitCurrency(), this.getCurrencyUnit(), "debitCurrency", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_Type(), theEcorePackage.getEString(), "type", "Person", 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getPerson__HasEmail__String(), theEcorePackage.getEBoolean(), "hasEmail", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "email", 0, 1, IS_UNIQUE, IS_ORDERED);

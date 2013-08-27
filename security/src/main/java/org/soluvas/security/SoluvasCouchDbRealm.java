@@ -241,4 +241,3 @@ public class SoluvasCouchDbRealm extends AuthorizingRealm {
 		}
 	}
 }
-

@@ -1,9 +1,14 @@
 package org.soluvas.commons.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.util.Collection;
+
 import javax.annotation.Nullable;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -47,14 +52,18 @@ import org.soluvas.commons.mongo.BigDecimalConverter;
 import org.soluvas.commons.mongo.CurrencyUnitConverter;
 import org.soluvas.commons.mongo.DateTimeConverter;
 import org.soluvas.commons.mongo.UnitConverter;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -129,6 +138,7 @@ import java.math.BigDecimal;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getSecurityRoleIds <em>Security Role Ids</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getDebitBalance <em>Debit Balance</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getDebitCurrency <em>Debit Currency</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -137,6 +147,7 @@ import java.math.BigDecimal;
 @Entity(noClassnameStored=true)
 @Converters({BigDecimalConverter.class, DateTimeConverter.class,
 	CurrencyUnitConverter.class, UnitConverter.class})
+@JsonIgnoreProperties({"email", "mobileNumber", "imageId"})
 public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -196,7 +207,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @generated
 	 * @ordered
 	 */
-	@Id
+	@Id @JsonProperty("uid")
 	protected String id = ID_EDEFAULT;
 
 	/**
@@ -457,6 +468,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonProperty("_id")
 	protected String guid = GUID_EDEFAULT;
 
 	/**
@@ -477,6 +489,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonProperty("_rev") @JsonInclude(Include.NON_NULL)
 	protected String revision = REVISION_EDEFAULT;
 
 	/**
@@ -569,6 +582,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	protected EList<PhoneNumber> phoneNumbers;
 
 	/**
@@ -579,6 +593,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	protected EList<Email> emails;
 
 	/**
@@ -589,6 +604,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	protected EList<PhoneNumber> mobileNumbers;
 
 	/**
@@ -599,6 +615,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	protected EList<PostalAddress> addresses;
 
 	/**
@@ -1349,6 +1366,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	protected EList<String> securityRoleIds;
 
 	/**
@@ -1390,6 +1408,26 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @ordered
 	 */
 	protected CurrencyUnit debitCurrency = DEBIT_CURRENCY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TYPE_EDEFAULT = "Person";
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String type = TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1667,6 +1705,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	}
 	
 	@Override
+	@JsonProperty
 	public String getMobileNumber() {
 		final Optional<PhoneNumber> primaryMobile = Iterables.tryFind(getMobileNumbers(), new Predicate<PhoneNumber>() {
 			@Override
@@ -1972,6 +2011,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getGuid() {
 		return guid;
 	}
@@ -1981,6 +2021,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGuid(String newGuid) {
 		String oldGuid = guid;
 		guid = newGuid;
@@ -1993,6 +2034,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getRevision() {
 		return revision;
 	}
@@ -2002,6 +2044,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRevision(String newRevision) {
 		String oldRevision = revision;
 		revision = newRevision;
@@ -2781,6 +2824,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BigDecimal getDebitBalance() {
 		return debitBalance;
 	}
@@ -2790,6 +2834,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDebitBalance(BigDecimal newDebitBalance) {
 		BigDecimal oldDebitBalance = debitBalance;
 		debitBalance = newDebitBalance;
@@ -2802,6 +2847,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CurrencyUnit getDebitCurrency() {
 		return debitCurrency;
 	}
@@ -2811,11 +2857,22 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDebitCurrency(CurrencyUnit newDebitCurrency) {
 		CurrencyUnit oldDebitCurrency = debitCurrency;
 		debitCurrency = newDebitCurrency;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON__DEBIT_CURRENCY, oldDebitCurrency, debitCurrency));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getType() {
+		return type;
 	}
 
 	/**
@@ -2921,6 +2978,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
+	@JsonProperty
 	public String getEmail() {
 		final Optional<Email> primaryEmail = Iterables.tryFind(getEmails(), new Predicate<Email>() {
 			@Override
@@ -2936,7 +2994,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 			return null;
 		}
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3106,6 +3164,8 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				return getDebitBalance();
 			case CommonsPackage.PERSON__DEBIT_CURRENCY:
 				return getDebitCurrency();
+			case CommonsPackage.PERSON__TYPE:
+				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -3670,6 +3730,8 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				return DEBIT_BALANCE_EDEFAULT == null ? debitBalance != null : !DEBIT_BALANCE_EDEFAULT.equals(debitBalance);
 			case CommonsPackage.PERSON__DEBIT_CURRENCY:
 				return DEBIT_CURRENCY_EDEFAULT == null ? debitCurrency != null : !DEBIT_CURRENCY_EDEFAULT.equals(debitCurrency);
+			case CommonsPackage.PERSON__TYPE:
+				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -4122,6 +4184,8 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		result.append(debitBalance);
 		result.append(", debitCurrency: ");
 		result.append(debitCurrency);
+		result.append(", type: ");
+		result.append(type);
 		result.append(')');
 		return result.toString();
 	}

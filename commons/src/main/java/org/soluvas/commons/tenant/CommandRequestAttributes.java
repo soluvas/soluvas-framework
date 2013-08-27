@@ -16,7 +16,6 @@ import org.springframework.web.context.request.RequestContextHolder;
  */
 public class CommandRequestAttributes extends AbstractRequestAttributes {
 
-//	private static final ThreadLocal<CommandRequestAttributes> commandRequestAttributes = new NamedThreadLocal<>("Command RequestAttributes");
 	/**
 	 * Stores the {@link RequestAttributes#SCOPE_REQUEST} attributes.
 	 * Unlike in {@link CommandSession}, they will be destroyed after command execution completes. 
@@ -111,8 +110,7 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 			int scope) {
 		if (scope == SCOPE_REQUEST) {
 			registerRequestDestructionCallback(name, callback);
-		}
-		else {
+		} else {
 			registerSessionDestructionCallback(name, callback);
 		}
 	}
@@ -129,7 +127,6 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 //		session.setAttribute(DESTRUCTION_CALLBACK_NAME_PREFIX + name,
 //				new DestructionCallbackBindingListener(callback));
 	}
-
 	
 	@Override
 	public Object resolveReference(String key) {
