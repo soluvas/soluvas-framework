@@ -130,6 +130,19 @@ public interface ImageManager extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
+	 * Gets DisplayImages for image IDs & styleName in a specified repository.
+	 * If image is not available, use the default object noimage.
+	 * Returns Map<imageId, DisplayImage>.
+	 * <!-- end-model-doc -->
+	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" imageIdsDataType="org.soluvas.commons.Collection<org.eclipse.emf.ecore.EString>" imageIdsRequired="true" styleDataType="org.soluvas.image.ImageStyle"
+	 * @generated
+	 */
+	Map<String, DisplayImage> getSafeImagesById(ImageType namespace, Collection<String> imageIds, ImageStyle style);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
 	 * Gets the DisplayImage for an imageId & styleName in a specified repository. If image is not available, use the gender to select the representation.
 	 * <!-- end-model-doc -->
 	 * @model required="true" namespaceDataType="org.soluvas.image.ImageType" styleDataType="org.soluvas.image.ImageStyle"
