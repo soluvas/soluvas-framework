@@ -734,6 +734,49 @@
     <element xmi:type="ecore:EEnum" href="data.ecore#//LookupKey"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ER0ugg-xEeOm0J2dmty6dw" x="244" y="492"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_ER0ugA-xEeOm0J2dmty6dw" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_EVrTwA-xEeOm0J2dmty6dw" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_EVrTwQ-xEeOm0J2dmty6dw" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_EVuXEA-xEeOm0J2dmty6dw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="data.ecore#//LookupKey/id"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EVuXEQ-xEeOm0J2dmty6dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_EVu-IA-xEeOm0J2dmty6dw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="data.ecore#//LookupKey/slug"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EVu-IQ-xEeOm0J2dmty6dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_EVvlMA-xEeOm0J2dmty6dw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="data.ecore#//LookupKey/guid"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EVvlMQ-xEeOm0J2dmty6dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_FVxe0A-xEeOm0J2dmty6dw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="data.ecore#//LookupKey/email"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_FVyF4A-xEeOm0J2dmty6dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Jtg7IA-xEeOm0J2dmty6dw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="data.ecore#//LookupKey/facebook_id"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Jtg7IQ-xEeOm0J2dmty6dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_P3WAIA-xEeOm0J2dmty6dw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="data.ecore#//LookupKey/facebook_username"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_P3WAIQ-xEeOm0J2dmty6dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_QVetoA-xEeOm0J2dmty6dw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="data.ecore#//LookupKey/twitter_id"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_QVetoQ-xEeOm0J2dmty6dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_QzPAoA-xEeOm0J2dmty6dw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="data.ecore#//LookupKey/twitter_screenname"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_QzPAoQ-xEeOm0J2dmty6dw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_EVrTwg-xEeOm0J2dmty6dw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_EVrTww-xEeOm0J2dmty6dw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_EVrTxA-xEeOm0J2dmty6dw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_ER0ugQ-xEeOm0J2dmty6dw" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="data.ecore#//LookupKey"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ER0ugg-xEeOm0J2dmty6dw" x="244" y="492"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_JrOjkT9lEeKmcKAIWq8dyw"/>
   <element xmi:type="ecore:EPackage" href="data.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_IxtI8EjZEeKiGv-Fpyd8oQ" type="3002" source="_IwmVtEjZEeKiGv-Fpyd8oQ" target="_IwqnIEjZEeKiGv-Fpyd8oQ">
