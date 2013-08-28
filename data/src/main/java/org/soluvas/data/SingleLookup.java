@@ -13,7 +13,7 @@ import org.soluvas.data.push.RepositoryEntityLookup;
  * @see RepositoryEntityLookup
  * @author ceefour
  */
-public interface SingleLookup<T, K extends Serializable> {
+public interface SingleLookup<T> {
 
 	/**
 	 * Retrives an entity by its {@link LookupKey} key.
@@ -26,6 +26,6 @@ public interface SingleLookup<T, K extends Serializable> {
 	 * @throws UnsupportedOperationException if lookupKey or statusMask is not supported due to implementation limitation
 	 * 
 	 */
-	public <S extends T> S lookupOne(StatusMask statusMask, LookupKey lookupKey, @Nullable K key) throws EntityLookupException;
+	public <S extends T, K extends Serializable> S lookupOne(StatusMask statusMask, LookupKey lookupKey, @Nullable K key) throws EntityLookupException;
 	
 }

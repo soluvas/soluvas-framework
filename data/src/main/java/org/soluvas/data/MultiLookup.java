@@ -16,7 +16,7 @@ import scala.util.Try;
  * @see RepositoryEntityLookup
  * @author ceefour
  */
-public interface MultiLookup<T, K extends Serializable> {
+public interface MultiLookup<T> {
 
 	/**
 	 * Retrives an entity by its {@link LookupKey} key.
@@ -31,6 +31,6 @@ public interface MultiLookup<T, K extends Serializable> {
 	 * @throws IllegalArgumentException if {@code keys} is {@code null}
 	 * @throws UnsupportedOperationException if {@code lookupKey} or {@code statusMask} is not supported due to implementation limitation
 	 */
-	public <S extends T> Map<K, Try<S>> lookupAll(StatusMask statusMask, LookupKey lookupKey, Collection<K> keys);
+	public <S extends T, K extends Serializable> Map<K, Try<S>> lookupAll(StatusMask statusMask, LookupKey lookupKey, Collection<K> keys);
 	
 }
