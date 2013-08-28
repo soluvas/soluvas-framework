@@ -13,7 +13,7 @@ import org.soluvas.data.push.RepositoryEntityLookup;
  * @see RepositoryEntityLookup
  * @author ceefour
  */
-public interface SingleLookup<T> {
+public interface SingleLookup<T> extends GenericLookup<T> {
 
 	/**
 	 * Retrives an entity by its {@link LookupKey} key.
