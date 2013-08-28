@@ -348,5 +348,30 @@
         <details key="documentation" value="Lookup via GUID, rarely used but usable in CouchDB."/>
       </eAnnotations>
     </eLiterals>
+    <eLiterals name="email" value="3">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Lookup based on email. Note that an entity may contain multiple emails."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="facebook_id" value="4">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Lookup based on Facebook ID (long). Note that an entity may contain multiple Facebook IDs."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="facebook_username" value="5">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Lookup based on Facebook username. Note that an entity may contain multiple Facebook usernames."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="twitter_id" value="6">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Lookup based on Twitter ID (long). Note that an entity may contain multiple Twitter IDs."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="twitter_screenname" value="7">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Lookup based on Twitter username. Note that an entity may contain multiple Twitter usernames."/>
+      </eAnnotations>
+    </eLiterals>
   </eClassifiers>
 </ecore:EPackage>

@@ -1274,6 +1274,11 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.ID);
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.SLUG);
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.GUID);
+		addEEnumLiteral(lookupKeyEEnum, LookupKey.EMAIL);
+		addEEnumLiteral(lookupKeyEEnum, LookupKey.FACEBOOK_ID);
+		addEEnumLiteral(lookupKeyEEnum, LookupKey.FACEBOOK_USERNAME);
+		addEEnumLiteral(lookupKeyEEnum, LookupKey.TWITTER_ID);
+		addEEnumLiteral(lookupKeyEEnum, LookupKey.TWITTER_SCREENNAME);
 
 		// Initialize data types
 		initEDataType(crudRepositoryEDataType, CrudRepository.class, "CrudRepository", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1551,6 +1556,36 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Lookup via GUID, rarely used but usable in CouchDB."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum.getELiterals().get(3), 
+		   source, 
+		   new String[] {
+			 "documentation", "Lookup based on email. Note that an entity may contain multiple emails."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum.getELiterals().get(4), 
+		   source, 
+		   new String[] {
+			 "documentation", "Lookup based on Facebook ID (long). Note that an entity may contain multiple Facebook IDs."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum.getELiterals().get(5), 
+		   source, 
+		   new String[] {
+			 "documentation", "Lookup based on Facebook username. Note that an entity may contain multiple Facebook usernames."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum.getELiterals().get(6), 
+		   source, 
+		   new String[] {
+			 "documentation", "Lookup based on Twitter ID (long). Note that an entity may contain multiple Twitter IDs."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum.getELiterals().get(7), 
+		   source, 
+		   new String[] {
+			 "documentation", "Lookup based on Twitter username. Note that an entity may contain multiple Twitter usernames."
 		   });
 	}
 
@@ -1591,7 +1626,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "name", "DataCatalog"
-		   });												
+		   });																	
 	}
 	
 	public static DataPackage getInstance() {
