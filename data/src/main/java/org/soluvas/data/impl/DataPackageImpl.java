@@ -1734,7 +1734,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "name", "DataCatalog"
-		   });																			
+		   });																	
 	}
 	
 	public static DataPackage getInstance() {
