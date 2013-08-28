@@ -27,6 +27,7 @@ import org.soluvas.data.FreeVocab;
 import org.soluvas.data.InputMethod;
 import org.soluvas.data.Kind;
 import org.soluvas.data.ListVocab;
+import org.soluvas.data.LookupKey;
 import org.soluvas.data.MeasureValue;
 import org.soluvas.data.Mixin;
 import org.soluvas.data.RangeValue;
@@ -181,6 +182,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	private EEnum statusMaskEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum lookupKeyEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -854,6 +862,15 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getLookupKey() {
+		return lookupKeyEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EDataType getCrudRepository() {
 		return crudRepositoryEDataType;
@@ -1002,6 +1019,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		attributeSemanticEEnum = createEEnum(ATTRIBUTE_SEMANTIC);
 		inputMethodEEnum = createEEnum(INPUT_METHOD);
 		statusMaskEEnum = createEEnum(STATUS_MASK);
+		lookupKeyEEnum = createEEnum(LOOKUP_KEY);
 
 		// Create data types
 		crudRepositoryEDataType = createEDataType(CRUD_REPOSITORY);
@@ -1251,6 +1269,11 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		addEEnumLiteral(statusMaskEEnum, StatusMask.INCLUDE_INACTIVE);
 		addEEnumLiteral(statusMaskEEnum, StatusMask.DRAFT_ONLY);
 		addEEnumLiteral(statusMaskEEnum, StatusMask.VOID_ONLY);
+
+		initEEnum(lookupKeyEEnum, LookupKey.class, "LookupKey");
+		addEEnumLiteral(lookupKeyEEnum, LookupKey.ID);
+		addEEnumLiteral(lookupKeyEEnum, LookupKey.SLUG);
+		addEEnumLiteral(lookupKeyEEnum, LookupKey.GUID);
 
 		// Initialize data types
 		initEDataType(crudRepositoryEDataType, CrudRepository.class, "CrudRepository", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1504,6 +1527,30 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Return VOID only. Usually used for backend, Trash folder."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum, 
+		   source, 
+		   new String[] {
+			 "documentation", "Used by EntityNotFoundException to know what attribute was used to lookup."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Lookup via entity-scoped unique ID, which is common for backend pages and shell."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Lookup via slug, which is the most common for frontend pages."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Lookup via GUID, rarely used but usable in CouchDB."
 		   });
 	}
 
@@ -1544,7 +1591,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "name", "DataCatalog"
-		   });								
+		   });												
 	}
 	
 	public static DataPackage getInstance() {
