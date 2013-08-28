@@ -1,5 +1,6 @@
 package org.soluvas.mongo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -10,6 +11,9 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.PersonImpl;
+import org.soluvas.data.EntityLookupException;
+import org.soluvas.data.LookupKey;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
@@ -162,6 +166,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	public Person findOneActive(String personId) {
 		// FIXME: implement status=ACTIVE|VALIDATED|VERIFIED filter
 		return findOne(personId);
+	}
+
+	@Override
+	public <S extends Person, K extends Serializable> S lookupOne(
+			StatusMask statusMask, LookupKey lookupKey, K key)
+			throws EntityLookupException {
+		throw new UnsupportedOperationException();
 	}
 
 }

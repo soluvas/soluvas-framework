@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import org.soluvas.commons.Email;
 import org.soluvas.commons.Person;
+import org.soluvas.data.SingleLookup;
 import org.soluvas.data.SlugLookup;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
@@ -14,7 +15,8 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
  * @author ceefour
  */
 public interface PersonRepository extends
-		PagingAndSortingRepository<Person, String>, SlugLookup<Person> {
+		PagingAndSortingRepository<Person, String>, SlugLookup<Person>,
+		SingleLookup<Person> {
 
 	/**
 	 * Find a {@link Person} by Facebook ID or Username (at least one must be specified).

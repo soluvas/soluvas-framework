@@ -1,5 +1,6 @@
 package org.soluvas.data.person;
 
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
@@ -15,6 +16,9 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.IdPredicate;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonCatalog;
+import org.soluvas.data.EntityLookupException;
+import org.soluvas.data.LookupKey;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
@@ -233,6 +237,13 @@ public class EmfPersonRepository extends
 	public Person findOneActive(String personId) {
 		// FIXME: implement status=ACTIVE|VALIDATED|VERIFIED filter
 		return findOne(personId);
+	}
+
+	@Override
+	public <S extends Person, K extends Serializable> S lookupOne(
+			StatusMask statusMask, LookupKey lookupKey, K key)
+			throws EntityLookupException {
+		throw new UnsupportedOperationException();
 	}
 
 }
