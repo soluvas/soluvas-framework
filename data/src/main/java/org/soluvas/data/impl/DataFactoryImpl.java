@@ -45,7 +45,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 */
 	public static DataFactory init() {
 		try {
-			DataFactory theDataFactory = (DataFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.soluvas.org/schema/data/1.0"); 
+			DataFactory theDataFactory = (DataFactory)EPackage.Registry.INSTANCE.getEFactory(DataPackage.eNS_URI);
 			if (theDataFactory != null) {
 				return theDataFactory;
 			}
@@ -106,6 +106,10 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 				return createAttributeSemanticFromString(eDataType, initialValue);
 			case DataPackage.INPUT_METHOD:
 				return createInputMethodFromString(eDataType, initialValue);
+			case DataPackage.STATUS_MASK:
+				return createStatusMaskFromString(eDataType, initialValue);
+			case DataPackage.LOOKUP_KEY:
+				return createLookupKeyFromString(eDataType, initialValue);
 			case DataPackage.CRUD_REPOSITORY:
 				return createCrudRepositoryFromString(eDataType, initialValue);
 			case DataPackage.PAGING_AND_SORTING_REPOSITORY:
@@ -133,6 +137,10 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 				return convertAttributeSemanticToString(eDataType, instanceValue);
 			case DataPackage.INPUT_METHOD:
 				return convertInputMethodToString(eDataType, instanceValue);
+			case DataPackage.STATUS_MASK:
+				return convertStatusMaskToString(eDataType, instanceValue);
+			case DataPackage.LOOKUP_KEY:
+				return convertLookupKeyToString(eDataType, instanceValue);
 			case DataPackage.CRUD_REPOSITORY:
 				return convertCrudRepositoryToString(eDataType, instanceValue);
 			case DataPackage.PAGING_AND_SORTING_REPOSITORY:
@@ -363,6 +371,46 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * @generated
 	 */
 	public String convertInputMethodToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StatusMask createStatusMaskFromString(EDataType eDataType, String initialValue) {
+		StatusMask result = StatusMask.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertStatusMaskToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LookupKey createLookupKeyFromString(EDataType eDataType, String initialValue) {
+		LookupKey result = LookupKey.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertLookupKeyToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

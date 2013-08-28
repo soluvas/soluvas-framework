@@ -27,11 +27,13 @@ import org.soluvas.data.FreeVocab;
 import org.soluvas.data.InputMethod;
 import org.soluvas.data.Kind;
 import org.soluvas.data.ListVocab;
+import org.soluvas.data.LookupKey;
 import org.soluvas.data.MeasureValue;
 import org.soluvas.data.Mixin;
 import org.soluvas.data.MixinCatalog;
 import org.soluvas.data.MixinManager;
 import org.soluvas.data.RangeValue;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.StringValue;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermContainer;
@@ -195,6 +197,20 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EEnum statusMaskEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum lookupKeyEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType crudRepositoryEDataType = null;
 
 	/**
@@ -314,6 +330,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_Enabled() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(1);
 	}
@@ -713,6 +730,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTerm_Bordered() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(5);
 	}
@@ -832,6 +850,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMixinCatalog() {
 		return mixinCatalogEClass;
 	}
@@ -841,6 +860,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMixinCatalog_Mixins() {
 		return (EReference)mixinCatalogEClass.getEStructuralFeatures().get(0);
 	}
@@ -850,6 +870,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMixinManager() {
 		return mixinManagerEClass;
 	}
@@ -859,6 +880,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMixinManager_MixinCatalog() {
 		return (EReference)mixinManagerEClass.getEStructuralFeatures().get(0);
 	}
@@ -868,6 +890,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getMixinManager_Mixins() {
 		return (EAttribute)mixinManagerEClass.getEStructuralFeatures().get(1);
 	}
@@ -890,6 +913,26 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	@Override
 	public EEnum getInputMethod() {
 		return inputMethodEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EEnum getStatusMask() {
+		return statusMaskEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EEnum getLookupKey() {
+		return lookupKeyEEnum;
 	}
 
 	/**
@@ -1051,6 +1094,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		// Create enums
 		attributeSemanticEEnum = createEEnum(ATTRIBUTE_SEMANTIC);
 		inputMethodEEnum = createEEnum(INPUT_METHOD);
+		statusMaskEEnum = createEEnum(STATUS_MASK);
+		lookupKeyEEnum = createEEnum(LOOKUP_KEY);
 
 		// Create data types
 		crudRepositoryEDataType = createEDataType(CRUD_REPOSITORY);
@@ -1308,6 +1353,18 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		addEEnumLiteral(inputMethodEEnum, InputMethod.CURRENCY);
 		addEEnumLiteral(inputMethodEEnum, InputMethod.TERM);
 
+		initEEnum(statusMaskEEnum, StatusMask.class, "StatusMask");
+		addEEnumLiteral(statusMaskEEnum, StatusMask.RAW);
+		addEEnumLiteral(statusMaskEEnum, StatusMask.ACTIVE_ONLY);
+		addEEnumLiteral(statusMaskEEnum, StatusMask.INCLUDE_INACTIVE);
+		addEEnumLiteral(statusMaskEEnum, StatusMask.DRAFT_ONLY);
+		addEEnumLiteral(statusMaskEEnum, StatusMask.VOID_ONLY);
+
+		initEEnum(lookupKeyEEnum, LookupKey.class, "LookupKey");
+		addEEnumLiteral(lookupKeyEEnum, LookupKey.ID);
+		addEEnumLiteral(lookupKeyEEnum, LookupKey.SLUG);
+		addEEnumLiteral(lookupKeyEEnum, LookupKey.GUID);
+
 		// Initialize data types
 		initEDataType(crudRepositoryEDataType, CrudRepository.class, "CrudRepository", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(pagingAndSortingRepositoryEDataType, PagingAndSortingRepository.class, "PagingAndSortingRepository", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1542,6 +1599,66 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Contains a collection of mixins."
+		   });		
+		addAnnotation
+		  (statusMaskEEnum, 
+		   source, 
+		   new String[] {
+			 "documentation", "Status filter mask, to be used in findAll(), findOne(), count(), etc.\nSome implementations, like CouchDB (Map views), is more practically implemented using predefined mask values instead of Set[Enum].\nMask is also about semantics, loosely related to actual entity-specific status values."
+		   });		
+		addAnnotation
+		  (statusMaskEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return everything, including but not limited to, INACTIVE, DRAFT and VOID. Usually used for sysadmin only."
+		   });		
+		addAnnotation
+		  (statusMaskEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return only ACTIVE | VALIDATED | VERIFIED entities. Usually used for frontend."
+		   });		
+		addAnnotation
+		  (statusMaskEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return ACTIVE | VALIDATED | VERIFIED plus INACTIVE. Usually used for backend, normal listing."
+		   });		
+		addAnnotation
+		  (statusMaskEEnum.getELiterals().get(3), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return DRAFT only. Usually used for backend, Drafts folder."
+		   });		
+		addAnnotation
+		  (statusMaskEEnum.getELiterals().get(4), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return VOID only. Usually used for backend, Trash folder."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum, 
+		   source, 
+		   new String[] {
+			 "documentation", "Used by EntityNotFoundException to know what attribute was used to lookup."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Lookup via entity-scoped unique ID, which is common for backend pages and shell."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Lookup via slug, which is the most common for frontend pages."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Lookup via GUID, rarely used but usable in CouchDB."
 		   });
 	}
 
@@ -1582,7 +1699,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "name", "DataCatalog"
-		   });				
+		   });														
 	}
 	
 	public static DataPackage getInstance() {

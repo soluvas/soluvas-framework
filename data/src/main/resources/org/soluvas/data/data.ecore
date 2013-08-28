@@ -326,4 +326,54 @@
       </eGenericType>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StatusMask">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Status filter mask, to be used in findAll(), findOne(), count(), etc.&#xA;Some implementations, like CouchDB (Map views), is more practically implemented using predefined mask values instead of Set[Enum].&#xA;Mask is also about semantics, loosely related to actual entity-specific status values."/>
+    </eAnnotations>
+    <eLiterals name="raw">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return everything, including but not limited to, INACTIVE, DRAFT and VOID. Usually used for sysadmin only."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="active_only" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return only ACTIVE | VALIDATED | VERIFIED entities. Usually used for frontend."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="include_inactive" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return ACTIVE | VALIDATED | VERIFIED plus INACTIVE. Usually used for backend, normal listing."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="draft_only" value="3">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return DRAFT only. Usually used for backend, Drafts folder."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="void_only" value="4">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return VOID only. Usually used for backend, Trash folder."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LookupKey">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Used by EntityNotFoundException to know what attribute was used to lookup."/>
+    </eAnnotations>
+    <eLiterals name="id">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Lookup via entity-scoped unique ID, which is common for backend pages and shell."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="slug" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Lookup via slug, which is the most common for frontend pages."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="guid" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Lookup via GUID, rarely used but usable in CouchDB."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
 </ecore:EPackage>
