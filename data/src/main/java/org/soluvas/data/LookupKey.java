@@ -49,7 +49,47 @@ public enum LookupKey implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	GUID(2, "guid", "guid");
+	GUID(2, "guid", "guid"), /**
+	 * The '<em><b>Email</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #EMAIL_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	EMAIL(3, "email", "email"), /**
+	 * The '<em><b>Facebook id</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FACEBOOK_ID_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	FACEBOOK_ID(4, "facebook_id", "facebook_id"), /**
+	 * The '<em><b>Facebook username</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FACEBOOK_USERNAME_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	FACEBOOK_USERNAME(5, "facebook_username", "facebook_username"), /**
+	 * The '<em><b>Twitter id</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TWITTER_ID_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	TWITTER_ID(6, "twitter_id", "twitter_id"), /**
+	 * The '<em><b>Twitter screenname</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TWITTER_SCREENNAME_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	TWITTER_SCREENNAME(7, "twitter_screenname", "twitter_screenname");
 
 	/**
 	 * The '<em><b>Id</b></em>' literal value.
@@ -94,6 +134,76 @@ public enum LookupKey implements Enumerator {
 	public static final int GUID_VALUE = 2;
 
 	/**
+	 * The '<em><b>Email</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Lookup based on email. Note that an entity may contain multiple emails.
+	 * <!-- end-model-doc -->
+	 * @see #EMAIL
+	 * @model name="email"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EMAIL_VALUE = 3;
+
+	/**
+	 * The '<em><b>Facebook id</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Lookup based on Facebook ID (long). Note that an entity may contain multiple Facebook IDs.
+	 * <!-- end-model-doc -->
+	 * @see #FACEBOOK_ID
+	 * @model name="facebook_id"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FACEBOOK_ID_VALUE = 4;
+
+	/**
+	 * The '<em><b>Facebook username</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Lookup based on Facebook username. Note that an entity may contain multiple Facebook usernames.
+	 * <!-- end-model-doc -->
+	 * @see #FACEBOOK_USERNAME
+	 * @model name="facebook_username"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FACEBOOK_USERNAME_VALUE = 5;
+
+	/**
+	 * The '<em><b>Twitter id</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Lookup based on Twitter ID (long). Note that an entity may contain multiple Twitter IDs.
+	 * <!-- end-model-doc -->
+	 * @see #TWITTER_ID
+	 * @model name="twitter_id"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TWITTER_ID_VALUE = 6;
+
+	/**
+	 * The '<em><b>Twitter screenname</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Lookup based on Twitter username. Note that an entity may contain multiple Twitter usernames.
+	 * <!-- end-model-doc -->
+	 * @see #TWITTER_SCREENNAME
+	 * @model name="twitter_screenname"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TWITTER_SCREENNAME_VALUE = 7;
+
+	/**
 	 * An array of all the '<em><b>Lookup Key</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -104,6 +214,11 @@ public enum LookupKey implements Enumerator {
 			ID,
 			SLUG,
 			GUID,
+			EMAIL,
+			FACEBOOK_ID,
+			FACEBOOK_USERNAME,
+			TWITTER_ID,
+			TWITTER_SCREENNAME,
 		};
 
 	/**
@@ -157,6 +272,11 @@ public enum LookupKey implements Enumerator {
 			case ID_VALUE: return ID;
 			case SLUG_VALUE: return SLUG;
 			case GUID_VALUE: return GUID;
+			case EMAIL_VALUE: return EMAIL;
+			case FACEBOOK_ID_VALUE: return FACEBOOK_ID;
+			case FACEBOOK_USERNAME_VALUE: return FACEBOOK_USERNAME;
+			case TWITTER_ID_VALUE: return TWITTER_ID;
+			case TWITTER_SCREENNAME_VALUE: return TWITTER_SCREENNAME;
 		}
 		return null;
 	}
