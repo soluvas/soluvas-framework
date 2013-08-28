@@ -16,7 +16,7 @@ import scala.util.Try;
  * @see RepositoryEntityLookup
  * @author ceefour
  */
-public interface MultiLookup<T> {
+public interface MultiLookup<T> extends GenericLookup<T> {
 
 	/**
 	 * Retrives an entity by its {@link LookupKey} key.
