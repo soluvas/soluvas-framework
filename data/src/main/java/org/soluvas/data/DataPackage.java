@@ -1409,6 +1409,16 @@ public interface DataPackage extends EPackage {
 	int INPUT_METHOD = 17;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.data.StatusMask <em>Status Mask</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.data.StatusMask
+	 * @see org.soluvas.data.impl.DataPackageImpl#getStatusMask()
+	 * @generated
+	 */
+	int STATUS_MASK = 18;
+
+	/**
 	 * The meta object id for the '<em>Crud Repository</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1416,7 +1426,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepository()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY = 18;
+	int CRUD_REPOSITORY = 19;
 
 	/**
 	 * The meta object id for the '<em>Paging And Sorting Repository</em>' data type.
@@ -1426,7 +1436,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPagingAndSortingRepository()
 	 * @generated
 	 */
-	int PAGING_AND_SORTING_REPOSITORY = 19;
+	int PAGING_AND_SORTING_REPOSITORY = 20;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository Base</em>' data type.
@@ -1436,7 +1446,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepositoryBase()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY_BASE = 20;
+	int CRUD_REPOSITORY_BASE = 21;
 
 
 	/**
@@ -1447,7 +1457,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getMeasure()
 	 * @generated
 	 */
-	int MEASURE = 21;
+	int MEASURE = 22;
 
 	/**
 	 * The meta object id for the '<em>Decimal Measure</em>' data type.
@@ -1457,7 +1467,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getDecimalMeasure()
 	 * @generated
 	 */
-	int DECIMAL_MEASURE = 22;
+	int DECIMAL_MEASURE = 23;
 
 
 	/**
@@ -2059,6 +2069,16 @@ public interface DataPackage extends EPackage {
 	EEnum getInputMethod();
 
 	/**
+	 * Returns the meta object for enum '{@link org.soluvas.data.StatusMask <em>Status Mask</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Status Mask</em>'.
+	 * @see org.soluvas.data.StatusMask
+	 * @generated
+	 */
+	EEnum getStatusMask();
+
+	/**
 	 * Returns the meta object for data type '{@link org.soluvas.data.repository.CrudRepository <em>Crud Repository</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2618,6 +2638,16 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum INPUT_METHOD = eINSTANCE.getInputMethod();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.data.StatusMask <em>Status Mask</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.data.StatusMask
+		 * @see org.soluvas.data.impl.DataPackageImpl#getStatusMask()
+		 * @generated
+		 */
+		EEnum STATUS_MASK = eINSTANCE.getStatusMask();
 
 		/**
 		 * The meta object literal for the '<em>Crud Repository</em>' data type.

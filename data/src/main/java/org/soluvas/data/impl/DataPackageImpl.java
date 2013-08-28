@@ -30,6 +30,7 @@ import org.soluvas.data.ListVocab;
 import org.soluvas.data.MeasureValue;
 import org.soluvas.data.Mixin;
 import org.soluvas.data.RangeValue;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.StringValue;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermContainer;
@@ -173,6 +174,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	private EEnum inputMethodEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum statusMaskEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -837,6 +845,15 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getStatusMask() {
+		return statusMaskEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EDataType getCrudRepository() {
 		return crudRepositoryEDataType;
@@ -984,6 +1001,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		// Create enums
 		attributeSemanticEEnum = createEEnum(ATTRIBUTE_SEMANTIC);
 		inputMethodEEnum = createEEnum(INPUT_METHOD);
+		statusMaskEEnum = createEEnum(STATUS_MASK);
 
 		// Create data types
 		crudRepositoryEDataType = createEDataType(CRUD_REPOSITORY);
@@ -1227,6 +1245,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		addEEnumLiteral(inputMethodEEnum, InputMethod.CURRENCY);
 		addEEnumLiteral(inputMethodEEnum, InputMethod.TERM);
 
+		initEEnum(statusMaskEEnum, StatusMask.class, "StatusMask");
+		addEEnumLiteral(statusMaskEEnum, StatusMask.RAW);
+		addEEnumLiteral(statusMaskEEnum, StatusMask.ACTIVE_ONLY);
+		addEEnumLiteral(statusMaskEEnum, StatusMask.INCLUDE_INACTIVE);
+		addEEnumLiteral(statusMaskEEnum, StatusMask.DRAFT_ONLY);
+		addEEnumLiteral(statusMaskEEnum, StatusMask.VOID_ONLY);
+
 		// Initialize data types
 		initEDataType(crudRepositoryEDataType, CrudRepository.class, "CrudRepository", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(pagingAndSortingRepositoryEDataType, PagingAndSortingRepository.class, "PagingAndSortingRepository", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1443,6 +1468,42 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Attribute can hint the inputMethod (string, measure, range, currency, term)  and inputUnit. But user can always override this.\n\nFor currency, the default currency depends on user setting, which if absent, defaults to Shop/Mall setting."
+		   });		
+		addAnnotation
+		  (statusMaskEEnum, 
+		   source, 
+		   new String[] {
+			 "documentation", "Status filter mask, to be used in findAll(), findOne(), count(), etc.\nSome implementations, like CouchDB (Map views), is more practically implemented using predefined mask values instead of Set[Enum].\nMask is also about semantics, loosely related to actual entity-specific status values."
+		   });		
+		addAnnotation
+		  (statusMaskEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return everything, including but not limited to, INACTIVE, DRAFT and VOID. Usually used for sysadmin only."
+		   });		
+		addAnnotation
+		  (statusMaskEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return only ACTIVE | VALIDATED | VERIFIED entities. Usually used for frontend."
+		   });		
+		addAnnotation
+		  (statusMaskEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return ACTIVE | VALIDATED | VERIFIED plus INACTIVE. Usually used for backend, normal listing."
+		   });		
+		addAnnotation
+		  (statusMaskEEnum.getELiterals().get(3), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return DRAFT only. Usually used for backend, Drafts folder."
+		   });		
+		addAnnotation
+		  (statusMaskEEnum.getELiterals().get(4), 
+		   source, 
+		   new String[] {
+			 "documentation", "Return VOID only. Usually used for backend, Trash folder."
 		   });
 	}
 
@@ -1483,7 +1544,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "name", "DataCatalog"
-		   });		
+		   });								
 	}
 	
 	public static DataPackage getInstance() {
