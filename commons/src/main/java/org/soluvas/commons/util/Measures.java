@@ -48,7 +48,7 @@ public class Measures {
 		String str = format.format(number.doubleValue());
 		if (unit != null) {
 			if (unit == Unit.ONE) {
-				str += number.compareTo(BigDecimal.ONE) == 0 ? " <small class=\"muted\">pc</span>" : " <small class=\"muted\">pcs</small>";
+				str += number.compareTo(BigDecimal.ONE) == 0 ? " <small class=\"muted\">pc</small>" : " <small class=\"muted\">pcs</small>";
 			} else {
 				str += " <small class=\"muted\">" + unit + "</small>";
 			}
