@@ -24,6 +24,12 @@ public class RepositoryUtils {
 	/**
 	 * Perform a {@link PagingAndSortingRepository}-related batch processing job using {@link Pageable},
 	 * with {@link ProgressMonitor} support.
+	 * 
+	 * <p><b>WARNING</b>: Do <b>NOT</b> modify the entity returned by {@code finder} inside the {@code processor}
+	 * that will make the query used by {@code finder} return different results.
+	 * If you want to modify the entity, use an wider query in {@code finder} that does not depend
+	 * on the outcome of {@code processor}.
+	 * 
 	 * @param jobTitle Job name, will be used by {@link ProgressMonitor}. It will get the monitor using {@link ThreadLocalProgress#get()}.
 	 * @param finder Used to fetch a {@link Pageable} of data, usually an anonymous class.
 	 * @param processor Process each data {@link Page}, usually an anonymous class.
