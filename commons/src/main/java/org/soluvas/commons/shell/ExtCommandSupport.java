@@ -28,6 +28,10 @@ public abstract class ExtCommandSupport extends AbstractAction {
 	public Object execute(CommandSession session) throws Exception {
 		try (ThreadLocalProgress progress = new ThreadLocalProgress(monitor)) {
 			return super.execute(session);
+		} finally {
+			// Subclasses usually forget to do this, so we'll do this for them :)
+			System.out.flush();
+			System.err.flush();
 		}
 	}
 	
