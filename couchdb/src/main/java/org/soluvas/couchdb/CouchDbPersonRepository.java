@@ -51,11 +51,18 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 	@Override
 	protected void updateDesignDocument(DesignDocument design) {
 		super.updateDesignDocument(design);
+		design.addView("password", new View(
+				"function(doc) { if (doc.type == 'Person' && doc.accountStatus.match(/^(active|validated|verified)$/) != null) { "
+				+ "emit(doc.uid, {uid: doc.uid, password: doc.password} ); "
+				+ "doc.emails.forEach(function(e) { "
+				+ "emit(e.email, {uid: doc.uid, password: doc.password}); "
+				+ "}); "
+				+ "} }"));
 		design.addView("statusMask_uid", new View(
-		       "function(doc) { if (doc.type == 'Person' ) { emit(['raw', doc.uid], null); if (doc.accountStatus.match(/^(active|validated|verified)$/) != null) emit(['active_only', doc.uid], null); if (doc.accountStatus.match(/^(active|validated|verified|inactive)$/) != null) emit(['include_inactive', doc.uid], null); if (doc.accountStatus == 'draft') emit(['draft_only', doc.uid], null); if (doc.accountStatus.match(/^(void)$/) != null) emit(['void_only', doc.uid], null); } }"));
+				"function(doc) { if (doc.type == 'Person' ) { emit(['raw', doc.uid], null); if (doc.accountStatus.match(/^(active|validated|verified)$/) != null) emit(['active_only', doc.uid], null); if (doc.accountStatus.match(/^(active|validated|verified|inactive)$/) != null) emit(['include_inactive', doc.uid], null); if (doc.accountStatus == 'draft') emit(['draft_only', doc.uid], null); if (doc.accountStatus.match(/^(void)$/) != null) emit(['void_only', doc.uid], null); } }"));
 		design.addView("statusMask_email", new View(
-		       "function(doc) { if (doc.type == 'Person' ) { "
-		       + "doc.emails.forEach(function(e){ "
+				"function(doc) { if (doc.type == 'Person' ) { "
+		       + "doc.emails.forEach(function(e) { "
 		       + "emit(['raw', e.email], null); "
 		       + "if (doc.accountStatus.match(/^(active|validated|verified)$/) != null) emit(['active_only', e.email], null); "
 		       + "if (doc.accountStatus.match(/^(active|validated|verified|inactive)$/) != null) emit(['include_inactive', e.email], null); "
