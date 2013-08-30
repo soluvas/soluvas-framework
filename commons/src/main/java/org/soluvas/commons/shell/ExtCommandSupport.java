@@ -62,6 +62,9 @@ public abstract class ExtCommandSupport extends AbstractAction {
 			reqAttrs.requestCompleted();
 			threadRequestAttributes.remove();
 //			threadCommandSession.remove();
+			// Subclasses usually forget to do this, so we'll do this for them :)
+			System.out.flush();
+			System.err.flush();
 		}
 	}
 	
