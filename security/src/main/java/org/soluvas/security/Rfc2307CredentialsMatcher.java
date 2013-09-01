@@ -1,5 +1,6 @@
 package org.soluvas.security;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,8 +12,6 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.util.HashedPasswordUtils;
-
-import scala.actors.threadpool.Arrays;
 
 /**
  * Match credentials based on <a href="http://tools.ietf.org/html/rfc2307">RFC 2307</a>.

@@ -23,6 +23,12 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.eclipse.jgit</groupId>
+			<artifactId>org.eclipse.jgit</artifactId>
+			<scope>optional</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.apache.karaf.shell</groupId>
 			<artifactId>org.apache.karaf.shell.console</artifactId>
 		</dependency>
