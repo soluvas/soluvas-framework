@@ -5062,6 +5062,17 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Deque</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.Deque
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDeque()
+	 * @generated
+	 */
+	int DEQUE = 97;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8172,6 +8183,17 @@ public interface CommonsPackage extends EPackage {
 	EDataType getNoSuchElementException();
 
 	/**
+	 * Returns the meta object for data type '{@link java.util.Deque <em>Deque</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Deque</em>'.
+	 * @see java.util.Deque
+	 * @model instanceClass="java.util.Deque" typeParameters="T"
+	 * @generated
+	 */
+	EDataType getDeque();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10714,6 +10736,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType NO_SUCH_ELEMENT_EXCEPTION = eINSTANCE.getNoSuchElementException();
+
+		/**
+		 * The meta object literal for the '<em>Deque</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.Deque
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDeque()
+		 * @generated
+		 */
+		EDataType DEQUE = eINSTANCE.getDeque();
 
 	}
 

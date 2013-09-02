@@ -3,6 +3,7 @@ package org.soluvas.commons.impl;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Deque;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -795,6 +796,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EDataType noSuchElementExceptionEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType dequeEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -3637,6 +3645,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getDeque() {
+		return dequeEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
@@ -4014,6 +4031,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		eventBusEDataType = createEDataType(EVENT_BUS);
 		localDateEDataType = createEDataType(LOCAL_DATE);
 		noSuchElementExceptionEDataType = createEDataType(NO_SUCH_ELEMENT_EXCEPTION);
+		dequeEDataType = createEDataType(DEQUE);
 	}
 
 	/**
@@ -4074,6 +4092,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addETypeParameter(multisetEDataType, "T");
 		ETypeParameter measurableEDataType_Q = addETypeParameter(measurableEDataType, "Q");
 		addETypeParameter(listenableFutureEDataType, "V");
+		addETypeParameter(dequeEDataType, "T");
 
 		// Set bounds for type parameters
 		EGenericType g1 = createEGenericType(this.getIdentifiable());
@@ -4688,6 +4707,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(eventBusEDataType, EventBus.class, "EventBus", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(localDateEDataType, LocalDate.class, "LocalDate", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(noSuchElementExceptionEDataType, NoSuchElementException.class, "NoSuchElementException", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(dequeEDataType, Deque.class, "Deque", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

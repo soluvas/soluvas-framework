@@ -1359,4 +1359,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Deque" instanceClassName="java.util.Deque">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
 </ecore:EPackage>

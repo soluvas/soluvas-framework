@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Deque;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -214,6 +215,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createLocalDateFromString(eDataType, initialValue);
 			case CommonsPackage.NO_SUCH_ELEMENT_EXCEPTION:
 				return createNoSuchElementExceptionFromString(eDataType, initialValue);
+			case CommonsPackage.DEQUE:
+				return createDequeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -291,6 +294,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertLocalDateToString(eDataType, instanceValue);
 			case CommonsPackage.NO_SUCH_ELEMENT_EXCEPTION:
 				return convertNoSuchElementExceptionToString(eDataType, instanceValue);
+			case CommonsPackage.DEQUE:
+				return convertDequeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -1185,6 +1190,24 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 */
 	public String convertNoSuchElementExceptionToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Deque<?> createDequeFromString(EDataType eDataType, String initialValue) {
+		return (Deque<?>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertDequeToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
 	}
 
 	/**
