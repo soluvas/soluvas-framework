@@ -51,17 +51,23 @@ public abstract class ExtCommandSupport extends AbstractAction {
 	
 	@Override
 	public Object execute(CommandSession session) throws Exception {
-		final CommandRequestAttributes reqAttrs = new CommandRequestAttributes(session);
-		try {
-//			threadCommandSession.set(session);
-			threadRequestAttributes.set(reqAttrs);
-			try (ThreadLocalProgress progress = new ThreadLocalProgress(monitor)) {
-				return super.execute(session);
-			}
+//<<<<<<< HEAD
+//		final CommandRequestAttributes reqAttrs = new CommandRequestAttributes(session);
+//		try {
+////			threadCommandSession.set(session);
+//			threadRequestAttributes.set(reqAttrs);
+//			try (ThreadLocalProgress progress = new ThreadLocalProgress(monitor)) {
+//				return super.execute(session);
+//			}
+//		} finally {
+//			reqAttrs.requestCompleted();
+//			threadRequestAttributes.remove();
+////			threadCommandSession.remove();
+//=======
+		try (ThreadLocalProgress progress = new ThreadLocalProgress(monitor)) {
+			return super.execute(session);
 		} finally {
-			reqAttrs.requestCompleted();
-			threadRequestAttributes.remove();
-//			threadCommandSession.remove();
+//>>>>>>> refs/remotes/origin/2.0.x
 			// Subclasses usually forget to do this, so we'll do this for them :)
 			System.out.flush();
 			System.err.flush();
