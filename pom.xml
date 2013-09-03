@@ -267,12 +267,12 @@
 			<dependency>
 				<groupId>org.neo4j</groupId>
 				<artifactId>neo4j-cypher</artifactId>
-				<version>1.9.2</version>
+				<version>1.9.3</version>
 			</dependency>
 			<dependency>
 				<groupId>org.neo4j</groupId>
 				<artifactId>neo4j-kernel</artifactId>
-				<version>1.9.2</version>
+				<version>1.9.3</version>
 			</dependency>
 			<dependency>
 				<groupId>org.neo4j</groupId>
