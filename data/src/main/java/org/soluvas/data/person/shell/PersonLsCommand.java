@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.Email;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.shell.ExtCommandSupport;
@@ -40,13 +41,25 @@ public class PersonLsCommand extends ExtCommandSupport {
 	@Override
 	protected Object doExecute() throws Exception {
 		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-15s|%-21s|%-20s|@",
-				"#", "ID", "Slug", "Name", "Email" ));
+				"#", "ID", "Slug", "Name", "Email(s)" ));
 		final Page<Person> personPage = personRepo.findAll(new PageRequest(0, 1000l));
 		int i = 0;
 		for (Person it : personPage.getContent()) {
-			final String genderStr = it.getGender() == Gender.MALE ? "@|bold,blue ♂|@" : it.getGender() == Gender.FEMALE ? "@|bold,magenta ♀|@" : " "; 
+			final String genderStr = it.getGender() == Gender.MALE ? "@|bold,blue ♂|@" : it.getGender() == Gender.FEMALE ? "@|bold,magenta ♀|@" : " ";
+			String emails = "";
+			if (!it.getEmails().isEmpty()) {
+				for (final Email email : it.getEmails()) {
+					if (emails.equals("")) {
+						emails += email.getEmail();
+					} else {
+						emails += " " + email.getEmail();
+					}
+				}
+			} else {
+				emails = it.getEmail();
+			}
 			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-15s|@@|bold,black ||@%-15s@|bold,black ||@" + genderStr + "%-20s@|bold,black ||@%-20s",
-				++i, it.getId(), it.getSlug(), it.getName(), it.getEmail()) );
+				++i, it.getId(), it.getSlug(), it.getName(), emails) );
 		}
 		System.out.println(ansi().render("@|bold %d|@ Person entities",
 			personPage.getTotalElements()));

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
+import org.joda.time.DateTime;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Email;
@@ -93,6 +94,7 @@ public class PersonAddCommand extends ExtCommandSupport {
 				final Email email = CommonsFactory.eINSTANCE.createEmail();
 				email.setEmail(emailStr);
 				email.setPrimary(true);
+				email.setValidationTime(new DateTime());
 				person.getEmails().add(email);
 			}
 		}

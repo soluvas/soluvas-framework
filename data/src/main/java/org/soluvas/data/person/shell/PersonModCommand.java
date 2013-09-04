@@ -1,10 +1,13 @@
 package org.soluvas.data.person.shell; 
 
+import java.util.Iterator;
+
 import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsFactory;
@@ -56,12 +59,27 @@ public class PersonModCommand extends ExtCommandSupport {
 		final Person person = Preconditions.checkNotNull(personRepo.findOne(id), String.format("Person by ID %s must not be null", id));
 		if (!Strings.isNullOrEmpty(emailStr)) {
 			final Person personByEmail = personRepo.findOneByEmail(emailStr, StatusMask.RAW);
-			if (personByEmail != null) {
+			if (personByEmail != null && !personByEmail.getId().equalsIgnoreCase(id)) {
 				 log.warn("Person by email {} is already exists by {}", emailStr, personByEmail.getId());
 			} else {
+				// remove last primary email AND the new email before adding a new one
+				String lastPrimaryEmail = person.getEmail();
+				final Iterator<Email> emailIter = person.getEmails().iterator();
+				while (emailIter.hasNext()) {
+					final Email email = emailIter.next();
+					if (lastPrimaryEmail != null && lastPrimaryEmail.equalsIgnoreCase(email.getEmail())) {
+						emailIter.remove();
+					}
+					// avoid duplicate by pre-removing existing new email address
+					if (emailStr.equalsIgnoreCase(email.getEmail())) {
+						emailIter.remove();
+					}
+				}
+				
 				final Email email = CommonsFactory.eINSTANCE.createEmail();
 				email.setEmail(emailStr);
 				email.setPrimary(true);
+				email.setValidationTime(new DateTime());
 				person.getEmails().add(email);
 			}
 		}
