@@ -1,4 +1,4 @@
-package org.soluvas.data.shell; 
+package org.soluvas.data.person.shell; 
 
 import static org.fusesource.jansi.Ansi.ansi;
 

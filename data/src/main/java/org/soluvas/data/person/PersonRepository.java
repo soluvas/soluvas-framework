@@ -6,6 +6,7 @@ import org.soluvas.commons.Email;
 import org.soluvas.commons.Person;
 import org.soluvas.data.SingleLookup;
 import org.soluvas.data.SlugLookup;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.PagingAndSortingRepository;
@@ -33,9 +34,10 @@ public interface PersonRepository extends
 	 * regardless of validation status.
 	 * <p>Note to implementor: input email must be normalized (lowercased + trimmed)
 	 * before querying database.
+	 * @param statusMask TODO
 	 */
 	@Nullable
-	public Person findOneByEmail(@Nullable String email);
+	public Person findOneByEmail(@Nullable String email, StatusMask statusMask);
 	
 	@Nullable
 	public Person findOneByMobileNumber(@Nullable String mobileNumber);

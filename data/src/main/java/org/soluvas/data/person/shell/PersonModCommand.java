@@ -1,0 +1,89 @@
+package org.soluvas.data.person.shell; 
+
+import javax.inject.Inject;
+
+import org.apache.felix.gogo.commands.Argument;
+import org.apache.felix.gogo.commands.Command;
+import org.apache.felix.gogo.commands.Option;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.soluvas.commons.CommonsFactory;
+import org.soluvas.commons.Email;
+import org.soluvas.commons.Gender;
+import org.soluvas.commons.Person;
+import org.soluvas.commons.SlugUtils;
+import org.soluvas.commons.shell.ExtCommandSupport;
+import org.soluvas.data.StatusMask;
+import org.soluvas.data.person.PersonRepository;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+
+/**
+ * Shell command to edit {@link Person} in a {@link PersonRepository}.
+ *
+ * @author ceefour
+ */
+@Service @Scope("prototype")
+@Command(scope="person", name="mod", description="Modify Person by ID.")
+public class PersonModCommand extends ExtCommandSupport {
+
+	private static final Logger log = LoggerFactory.getLogger(PersonModCommand.class);
+	
+	@Option(aliases="-e", description="Email", name="--email")
+	private transient String emailStr;
+	@Option(aliases="-g", description="Gender", name="--gender")
+	private transient Object gender;
+	@Option(aliases="-s", description="Slug", name="--slug")
+	private transient String slug;
+
+	@Argument(index=0, name="id", required=true, description="Person ID.")
+	private transient String id;
+	
+	private final PersonRepository personRepo;
+	
+	@Inject
+	public PersonModCommand(PersonRepository personRepo) {
+		super();
+		this.personRepo = personRepo;
+	}
+
+	@SuppressWarnings("null")
+	@Override
+	protected Object doExecute() throws Exception {
+		final Person person = Preconditions.checkNotNull(personRepo.findOne(id), String.format("Person by ID %s must not be null", id));
+		if (!Strings.isNullOrEmpty(emailStr)) {
+			final Person personByEmail = personRepo.findOneByEmail(emailStr, StatusMask.RAW);
+			if (personByEmail != null) {
+				 log.warn("Person by email {} is already exists by {}", emailStr, personByEmail.getId());
+			} else {
+				final Email email = CommonsFactory.eINSTANCE.createEmail();
+				email.setEmail(emailStr);
+				email.setPrimary(true);
+				person.getEmails().add(email);
+			}
+		}
+		
+		if (gender != null) {
+			person.setGender(Gender.valueOf(String.valueOf(gender).toUpperCase()));
+		}
+		
+		if (!Strings.isNullOrEmpty(slug)) {
+			final String existsBySlug = personRepo.existsBySlug(slug);
+			if (Strings.isNullOrEmpty(existsBySlug)) {
+				person.setSlug(slug);
+				person.setCanonicalSlug(SlugUtils.canonicalize(slug));
+			} else {
+				System.err.println(String.format("Slug %s is already exists by other.", slug));
+				return null;
+			}
+		}
+		
+		personRepo.modify(id, person);
+		
+		return null;
+	}
+
+}

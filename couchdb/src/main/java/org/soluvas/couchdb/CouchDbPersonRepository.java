@@ -107,9 +107,14 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 	 */
 	@Override
 	@Nullable
-	public Person findOneByEmail(@Nullable String email) {
-		// FIXME: required by PersonAddCommand... and please add accountStatus filter 
-		throw new UnsupportedOperationException();
+	public Person findOneByEmail(@Nullable String email, StatusMask statusMask) {
+		try {
+			final Person found = lookupOne(statusMask, LookupKey.EMAIL, email);
+			return found;
+		} catch (EntityLookupException e) {
+			log.debug("lookupOne {} {} {} returned {}", statusMask, LookupKey.EMAIL, email, e);
+			return null;
+		}
 	}
 
 	/* (non-Javadoc)

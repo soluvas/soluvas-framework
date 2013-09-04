@@ -1,4 +1,4 @@
-package org.soluvas.data.shell; 
+package org.soluvas.data.person.shell; 
 
 import static org.fusesource.jansi.Ansi.ansi;
 
@@ -18,6 +18,7 @@ import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.commons.util.HashedPasswordUtils;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.person.PersonRepository;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -82,7 +83,7 @@ public class PersonAddCommand extends ExtCommandSupport {
 		}
 		
 		if (!Strings.isNullOrEmpty(emailStr)) {
-			final Person personByEmail = personRepo.findOneByEmail(emailStr);
+			final Person personByEmail = personRepo.findOneByEmail(emailStr, StatusMask.RAW);
 			if (personByEmail != null) {
 				log.warn("Email {} is already exists by {}", emailStr, personByEmail.getId());
 				System.err.println(ansi().render("@|red Email |@@|bold %s|@@|red is already exists for person |@@|bold %s|@",
