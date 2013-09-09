@@ -400,5 +400,10 @@
         <details key="documentation" value="Lookup based on Twitter username. Note that an entity may contain multiple Twitter usernames."/>
       </eAnnotations>
     </eLiterals>
+    <eLiterals name="mobile_number" value="8">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Mobile number, in international format, without any punctuation except for &quot;+&quot; prefix, e.g. &quot;+6281212345678&quot;.&#xA;Note that for lookup purposes, depending on the default country, a lookup for &quot;081212345678&quot; will match&#xA;the stored account having &quot;+6281212345678&quot;.&#xA;The stored account MUST always contain the country code prefix."/>
+      </eAnnotations>
+    </eLiterals>
   </eClassifiers>
 </ecore:EPackage>

@@ -89,7 +89,15 @@ public enum LookupKey implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	TWITTER_SCREENNAME(7, "twitter_screenname", "twitter_screenname");
+	TWITTER_SCREENNAME(7, "twitter_screenname", "twitter_screenname"), /**
+	 * The '<em><b>Mobile number</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MOBILE_NUMBER_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	MOBILE_NUMBER(8, "mobile_number", "mobile_number");
 
 	/**
 	 * The '<em><b>Id</b></em>' literal value.
@@ -204,6 +212,23 @@ public enum LookupKey implements Enumerator {
 	public static final int TWITTER_SCREENNAME_VALUE = 7;
 
 	/**
+	 * The '<em><b>Mobile number</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Mobile number, in international format, without any punctuation except for "+" prefix, e.g. "+6281212345678".
+	 * Note that for lookup purposes, depending on the default country, a lookup for "081212345678" will match
+	 * the stored account having "+6281212345678".
+	 * The stored account MUST always contain the country code prefix.
+	 * <!-- end-model-doc -->
+	 * @see #MOBILE_NUMBER
+	 * @model name="mobile_number"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MOBILE_NUMBER_VALUE = 8;
+
+	/**
 	 * An array of all the '<em><b>Lookup Key</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -219,6 +244,7 @@ public enum LookupKey implements Enumerator {
 			FACEBOOK_USERNAME,
 			TWITTER_ID,
 			TWITTER_SCREENNAME,
+			MOBILE_NUMBER,
 		};
 
 	/**
@@ -277,6 +303,7 @@ public enum LookupKey implements Enumerator {
 			case FACEBOOK_USERNAME_VALUE: return FACEBOOK_USERNAME;
 			case TWITTER_ID_VALUE: return TWITTER_ID;
 			case TWITTER_SCREENNAME_VALUE: return TWITTER_SCREENNAME;
+			case MOBILE_NUMBER_VALUE: return MOBILE_NUMBER;
 		}
 		return null;
 	}

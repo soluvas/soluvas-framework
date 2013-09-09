@@ -1369,6 +1369,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.FACEBOOK_USERNAME);
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.TWITTER_ID);
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.TWITTER_SCREENNAME);
+		addEEnumLiteral(lookupKeyEEnum, LookupKey.MOBILE_NUMBER);
 
 		// Initialize data types
 		initEDataType(crudRepositoryEDataType, CrudRepository.class, "CrudRepository", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1694,6 +1695,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Lookup based on Twitter username. Note that an entity may contain multiple Twitter usernames."
+		   });		
+		addAnnotation
+		  (lookupKeyEEnum.getELiterals().get(8), 
+		   source, 
+		   new String[] {
+			 "documentation", "Mobile number, in international format, without any punctuation except for \"+\" prefix, e.g. \"+6281212345678\".\nNote that for lookup purposes, depending on the default country, a lookup for \"081212345678\" will match\nthe stored account having \"+6281212345678\".\nThe stored account MUST always contain the country code prefix."
 		   });
 	}
 
@@ -1734,7 +1741,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "name", "DataCatalog"
-		   });																	
+		   });																				
 	}
 	
 	public static DataPackage getInstance() {

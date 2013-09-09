@@ -29,6 +29,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.NotNullPredicate;
 import org.soluvas.commons.Revisionable;
@@ -37,6 +38,9 @@ import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.commons.util.Profiled;
 import org.soluvas.data.DataException;
+import org.soluvas.data.MultiLookup;
+import org.soluvas.data.SingleLookup;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
@@ -47,12 +51,14 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * {@link PagingAndSortingRepository} implemented using CouchDB, with {@link SchemaVersionable} support.
@@ -73,7 +79,7 @@ import com.google.common.collect.Lists;
 public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSortingRepositoryBase<T, String>
 	implements CouchDbRepository<T> {
 	
-public static final String VIEW_UID = "uid";
+	public static final String VIEW_UID = "uid";
 //	public class DBObjectToEntity implements Function<DBObject, T> {
 //		@Override
 //		public T apply(DBObject input) {
@@ -160,7 +166,8 @@ public static final String VIEW_UID = "uid";
 			dbConn.create(design);
 		}
 		updateDesignDocument(design);
-		log.info("Updating design document {} with {} views: {}", design.getId(), design.getViews().size(), design.getViews().keySet());
+		log.info("Updating design document {} with {} views: {}", 
+				design.getId(), design.getViews().size(), design.getViews().keySet());
 		dbConn.update(design);
 //		final List<String> ensuredIndexes = new ArrayList<>();
 //		ensuredIndexes.addAll( MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {})) );
@@ -179,7 +186,7 @@ public static final String VIEW_UID = "uid";
 	/**
 	 * Called by constructor after connection and authentication, and {@link #beforeUpdateDesignDocument()}.
 	 * The modified {@link DesignDocument} will be {@link CouchDbConnector#update(Object)}ed to the database.
-	 * Out-of-the-box, {@link CouchDbRepositoryBase} provides 5 views:
+	 * <p>Out-of-the-box, {@link CouchDbRepositoryBase} provides 5 views:
 	 * <ol>
 	 * 	<li><b>all</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( null, doc._id ); }</code></li>
 	 * 	<li><b>count</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( null, doc._id ); }</code></li>
@@ -187,7 +194,10 @@ public static final String VIEW_UID = "uid";
 	 * 	<li><b>filter_status</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }</code></li>
 	 * 	<li><b>by_modificationTime</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }</code></li>
 	 * </ol>
+	 * <p>See {@link #addStatusMaskDesignView(DesignDocument, String, Set, Set, Set, Set, String)} if you want to add
+	 * {@link StatusMask}-related views.
 	 * @param design
+	 * @see #addStatusMaskDesignView(DesignDocument, String, Set, Set, Set, Set, String)
 	 */
 	protected void updateDesignDocument(DesignDocument design) {
 		// 'all' view: {"map": "function(doc) { if (doc.type == 'Sofa' ) emit( null, doc._id ) } "}
@@ -197,6 +207,86 @@ public static final String VIEW_UID = "uid";
 		design.addView(VIEW_UID, new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
 		design.addView("filter_status", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }"));
 		design.addView("by_modificationTime", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+	}
+
+	/**
+	 * Convenience method to add a {@link StatusMask}-related {@link DesignDocument.View} using
+	 * a JSON property and configurable masks.
+	 * <p>The view name will be {@code statusMask_[propertyName]}. The {@code map} function
+	 * will {@code emit([statusMask, doc.targetProperty], null)}.
+	 * The view is only useful for existence checks, since for {@link MultiLookup#lookupAll(StatusMask, org.soluvas.data.LookupKey, Collection)}
+	 * and {@link SingleLookup#lookupOne(StatusMask, org.soluvas.data.LookupKey, java.io.Serializable)} you still need to
+	 * get all ({@link StatusMask#RAW}) documents anyway.
+	 * <p>Sample usage:
+	 * <pre>{@code
+	 * addStatusMaskDesignView(design, "accountStatus", 
+	 * 		ImmutableSet.of(AccountStatus.ACTIVE, AccountStatus.VALIDATED, AccountStatus.VERIFIED),
+	 * 		ImmutableSet.of(AccountStatus.INACTIVE),
+	 * 		ImmutableSet.of(AccountStatus.DRAFT),
+	 * 		ImmutableSet.of(AccountStatus.VOID),
+	 * 		"uid");
+	 * }</pre>
+	 * 
+	 * @param design As given by {@link #updateDesignDocument(DesignDocument)}.
+	 * @param statusProperty Name of the status JSON property, this is usually either {@code status} or {@code accountStatus}.
+	 * @param activeStatuses Statuses that make up the <i>active</i> state, e.g. {@link AccountStatus#ACTIVE}, {@link AccountStatus#VALIDATED}, {@link AccountStatus#VERIFIED}.
+	 * @param inactiveStatuses Statuses that make up the <i>inactive</i> state (do not include <i>active</i> statuses here), e.g. {@link AccountStatus#INACTIVE}.
+	 * @param draftStatuses Statuses that make up the <i>draft</i> state, e.g. {@link AccountStatus#DRAFT}.
+	 * @param voidStatuses Statuses that make up the <i>void</i> (deleted) state, e.g. {@link AccountStatus#VOID}.
+	 * @param targetProperty Name of the target JSON property, e.g. {@code uid}, {@code email}, {@code slug}. This is <b>not</b> the Java property name.
+	 * @return
+	 */
+	protected <E extends Enum<E>> DesignDocument.View addStatusMaskDesignView(DesignDocument design,
+			String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses,
+			String targetProperty) {
+		final String activeOnlyRegex = Joiner.on('|').join(Collections2.transform(activeStatuses, 
+				new Function<E, String>() {
+			@Override @Nullable
+			public String apply(@Nullable E input) {
+				return input.name().toLowerCase();
+			}
+		}));
+		final String includeInactiveRegex = Joiner.on('|').join(
+				Collections2.transform(Sets.union(activeStatuses, inactiveStatuses), new Function<E, String>() {
+			@Override @Nullable
+			public String apply(@Nullable E input) {
+				return input.name().toLowerCase();
+			}
+		}));
+		final String draftOnlyRegex = Joiner.on('|').join(
+				Collections2.transform(draftStatuses, new Function<E, String>() {
+			@Override @Nullable
+			public String apply(@Nullable E input) {
+				return input.name().toLowerCase();
+			}
+		}));
+		final String voidOnlyRegex = Joiner.on('|').join(
+				Collections2.transform(voidStatuses, new Function<E, String>() {
+			@Override @Nullable
+			public String apply(@Nullable E input) {
+				return input.name().toLowerCase();
+			}
+		}));
+		final String map =
+			  "function(doc) {\n"
+			+ "  if (doc.type == '" + entityClass.getSimpleName() + "' ) {\n"
+			+ "    emit(['" + StatusMask.RAW.getLiteral() + "', doc." + targetProperty + "], null);\n"
+			+ "    if (doc." + statusProperty + ".match(/^(" + activeOnlyRegex + ")$/) != null)\n"
+			+ "      emit(['" + StatusMask.ACTIVE_ONLY.getLiteral() + "', doc." + targetProperty + "], null);\n"
+			+ "    if (doc." + statusProperty + ".match(/^(" + includeInactiveRegex + ")$/) != null)\n"
+			+ "      emit(['" + StatusMask.INCLUDE_INACTIVE.getLiteral() + "', doc." + targetProperty + "], null);\n"
+			+ "    if (doc." + statusProperty + ".match(/^(" + draftOnlyRegex + ")$/) != null)\n"
+			+ "      emit(['" + StatusMask.DRAFT_ONLY.getLiteral() + "', doc." + targetProperty + "], null);\n"
+			+ "    if (doc." + statusProperty + ".match(/^(" + voidOnlyRegex + ")$/) != null)\n"
+			+ "      emit(['" + StatusMask.VOID_ONLY.getLiteral() + "', doc." + targetProperty + "], null);\n"
+			+ "  }\n"
+			+ "}";
+		final String viewName = "statusMask_" + targetProperty;
+		log.debug("Dynamic view '{}' for actives={} inactives={} drafts={} voids={}: {}", 
+				viewName, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, map);
+		final View view = new View(map);
+		design.addView(viewName, view);
+		return view;
 	}
 
 	@PreDestroy

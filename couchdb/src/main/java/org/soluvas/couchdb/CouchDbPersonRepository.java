@@ -58,10 +58,14 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 				+ "emit(e.email, {uid: doc.uid, password: doc.password}); "
 				+ "}); "
 				+ "} }"));
-		design.addView("statusMask_uid", new View(
-				"function(doc) { if (doc.type == 'Person' ) { emit(['raw', doc.uid], null); if (doc.accountStatus.match(/^(active|validated|verified)$/) != null) emit(['active_only', doc.uid], null); if (doc.accountStatus.match(/^(active|validated|verified|inactive)$/) != null) emit(['include_inactive', doc.uid], null); if (doc.accountStatus == 'draft') emit(['draft_only', doc.uid], null); if (doc.accountStatus.match(/^(void)$/) != null) emit(['void_only', doc.uid], null); } }"));
+		addStatusMaskDesignView(design, "accountStatus", 
+				ImmutableSet.of(AccountStatus.ACTIVE, AccountStatus.VALIDATED, AccountStatus.VERIFIED),
+				ImmutableSet.of(AccountStatus.INACTIVE),
+				ImmutableSet.of(AccountStatus.DRAFT),
+				ImmutableSet.of(AccountStatus.VOID),
+				"uid");
 		design.addView("statusMask_email", new View(
-				"function(doc) { if (doc.type == 'Person' ) { "
+				 "function(doc) { if (doc.type == 'Person' ) { "
 		       + "doc.emails.forEach(function(e) { "
 		       + "emit(['raw', e.email], null); "
 		       + "if (doc.accountStatus.match(/^(active|validated|verified)$/) != null) emit(['active_only', e.email], null); "
@@ -71,7 +75,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 		       + "}); "
 		       + "} }"));
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.SlugLookup#findOneBySlug(java.lang.String)
 	 */
