@@ -1,7 +1,9 @@
 package org.soluvas.couchdb;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
@@ -21,6 +23,8 @@ import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.person.PersonRepository;
+
+import scala.util.Try;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
@@ -241,6 +245,27 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 		default:
 			throw new UnsupportedOperationException("Unsupported lookupKey: " + lookupKey);
 		}
+	}
+
+	@Override
+	public <S extends Person, K extends Serializable> Map<K, Try<S>> lookupAll(
+			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <K extends Serializable> Map<K, Try<K>> checkExists(
+			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <K extends Serializable> K checkExists(StatusMask statusMask,
+			LookupKey lookupKey, K key) throws EntityLookupException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

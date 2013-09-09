@@ -38,8 +38,6 @@ import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.commons.util.Profiled;
 import org.soluvas.data.DataException;
-import org.soluvas.data.MultiLookup;
-import org.soluvas.data.SingleLookup;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
@@ -194,10 +192,10 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	 * 	<li><b>filter_status</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }</code></li>
 	 * 	<li><b>by_modificationTime</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }</code></li>
 	 * </ol>
-	 * <p>See {@link #addStatusMaskDesignView(DesignDocument, String, Set, Set, Set, Set, String)} if you want to add
+	 * <p>See {@link #addStatusMaskDesignView(DesignDocument, String, Set, Set, Set, Set, String, String)} if you want to add
 	 * {@link StatusMask}-related views.
 	 * @param design
-	 * @see #addStatusMaskDesignView(DesignDocument, String, Set, Set, Set, Set, String)
+	 * @see #addStatusMaskDesignView(DesignDocument, String, Set, Set, Set, Set, String, String)
 	 */
 	protected void updateDesignDocument(DesignDocument design) {
 		// 'all' view: {"map": "function(doc) { if (doc.type == 'Sofa' ) emit( null, doc._id ) } "}
@@ -212,19 +210,40 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	/**
 	 * Convenience method to add a {@link StatusMask}-related {@link DesignDocument.View} using
 	 * a JSON property and configurable masks.
+	 * 
 	 * <p>The view name will be {@code statusMask_[propertyName]}. The {@code map} function
-	 * will {@code emit([statusMask, doc.targetProperty], null)}.
-	 * The view is only useful for existence checks, since for {@link MultiLookup#lookupAll(StatusMask, org.soluvas.data.LookupKey, Collection)}
+	 * will, if {@code valueProperty} is given:
+	 * <pre>{@literal
+	 * emit([statusMask, doc.targetProperty], valueProperty);
+	 * </pre>
+	 * or if {@code valueProperty} is {@code null}:
+	 * <pre>{@literal
+	 * emit([statusMask, doc.targetProperty], null);
+	 * </pre>
+	 * 
+	 * <p>The view is only useful for existence checks, since for {@link MultiLookup#lookupAll(StatusMask, org.soluvas.data.LookupKey, Collection)}
 	 * and {@link SingleLookup#lookupOne(StatusMask, org.soluvas.data.LookupKey, java.io.Serializable)} you still need to
 	 * get all ({@link StatusMask#RAW}) documents anyway.
+	 * 
 	 * <p>Sample usage:
-	 * <pre>{@code
+	 * 
+	 * <pre>{@literal
 	 * addStatusMaskDesignView(design, "accountStatus", 
 	 * 		ImmutableSet.of(AccountStatus.ACTIVE, AccountStatus.VALIDATED, AccountStatus.VERIFIED),
 	 * 		ImmutableSet.of(AccountStatus.INACTIVE),
 	 * 		ImmutableSet.of(AccountStatus.DRAFT),
 	 * 		ImmutableSet.of(AccountStatus.VOID),
 	 * 		"uid");
+	 * }</pre>
+	 * 
+	 * <p>With {@code valueProperty}:
+	 * <pre>{@literal
+	 * addStatusMaskDesignView(design, "status", 
+	 * 		ImmutableSet.of(ChecklistStatus.BOOKED),
+	 * 		ImmutableSet.<ChecklistStatus>of(),
+	 * 		ImmutableSet.of(ChecklistStatus.DRAFT),
+	 * 		ImmutableSet.of(ChecklistStatus.VOID),
+	 * 		"canonicalSlug", "slug");
 	 * }</pre>
 	 * 
 	 * @param design As given by {@link #updateDesignDocument(DesignDocument)}.
@@ -234,11 +253,12 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	 * @param draftStatuses Statuses that make up the <i>draft</i> state, e.g. {@link AccountStatus#DRAFT}.
 	 * @param voidStatuses Statuses that make up the <i>void</i> (deleted) state, e.g. {@link AccountStatus#VOID}.
 	 * @param targetProperty Name of the target JSON property, e.g. {@code uid}, {@code email}, {@code slug}. This is <b>not</b> the Java property name.
+	 * @param valueProperty Value to be emitted. If {@code null} then will emit {@code null}.
 	 * @return
 	 */
 	protected <E extends Enum<E>> DesignDocument.View addStatusMaskDesignView(DesignDocument design,
 			String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses,
-			String targetProperty) {
+			String targetProperty, @Nullable String valueProperty) {
 		final String activeOnlyRegex = Joiner.on('|').join(Collections2.transform(activeStatuses, 
 				new Function<E, String>() {
 			@Override @Nullable
@@ -267,18 +287,19 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 				return input.name().toLowerCase();
 			}
 		}));
+		final String jsValueProperty = valueProperty != null ? "doc." + valueProperty : "null";
 		final String map =
 			  "function(doc) {\n"
 			+ "  if (doc.type == '" + entityClass.getSimpleName() + "' ) {\n"
-			+ "    emit(['" + StatusMask.RAW.getLiteral() + "', doc." + targetProperty + "], null);\n"
+			+ "    emit(['" + StatusMask.RAW.getLiteral() + "', doc." + targetProperty + "], " + jsValueProperty + ");\n"
 			+ "    if (doc." + statusProperty + ".match(/^(" + activeOnlyRegex + ")$/) != null)\n"
-			+ "      emit(['" + StatusMask.ACTIVE_ONLY.getLiteral() + "', doc." + targetProperty + "], null);\n"
+			+ "      emit(['" + StatusMask.ACTIVE_ONLY.getLiteral() + "', doc." + targetProperty + "], " + jsValueProperty + ");\n"
 			+ "    if (doc." + statusProperty + ".match(/^(" + includeInactiveRegex + ")$/) != null)\n"
-			+ "      emit(['" + StatusMask.INCLUDE_INACTIVE.getLiteral() + "', doc." + targetProperty + "], null);\n"
+			+ "      emit(['" + StatusMask.INCLUDE_INACTIVE.getLiteral() + "', doc." + targetProperty + "], " + jsValueProperty + ");\n"
 			+ "    if (doc." + statusProperty + ".match(/^(" + draftOnlyRegex + ")$/) != null)\n"
-			+ "      emit(['" + StatusMask.DRAFT_ONLY.getLiteral() + "', doc." + targetProperty + "], null);\n"
+			+ "      emit(['" + StatusMask.DRAFT_ONLY.getLiteral() + "', doc." + targetProperty + "], " + jsValueProperty + ");\n"
 			+ "    if (doc." + statusProperty + ".match(/^(" + voidOnlyRegex + ")$/) != null)\n"
-			+ "      emit(['" + StatusMask.VOID_ONLY.getLiteral() + "', doc." + targetProperty + "], null);\n"
+			+ "      emit(['" + StatusMask.VOID_ONLY.getLiteral() + "', doc." + targetProperty + "], " + jsValueProperty + ");\n"
 			+ "  }\n"
 			+ "}";
 		final String viewName = "statusMask_" + targetProperty;
@@ -287,6 +308,23 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 		final View view = new View(map);
 		design.addView(viewName, view);
 		return view;
+	}
+	
+	/**
+	 * @param design
+	 * @param statusProperty
+	 * @param activeStatuses
+	 * @param inactiveStatuses
+	 * @param draftStatuses
+	 * @param voidStatuses
+	 * @param targetProperty
+	 * @return
+	 * @see #addStatusMaskDesignView(DesignDocument, String, Set, Set, Set, Set, String, String)
+	 */
+	protected <E extends Enum<E>> DesignDocument.View addStatusMaskDesignView(DesignDocument design,
+			String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses,
+			String targetProperty) {
+		return addStatusMaskDesignView(design, statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, targetProperty, null);
 	}
 
 	@PreDestroy

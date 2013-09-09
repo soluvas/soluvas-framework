@@ -26,6 +26,8 @@ import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Order;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
+import scala.util.Try;
+
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
@@ -194,43 +196,41 @@ public class EmfPersonRepository extends
 	@Override @Nullable
 	public Person findOneByFacebook(@Nullable Long facebookId,
 			@Nullable String facebookUsername) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override @Nullable
 	public Person findOneByEmail(@Nullable String email, StatusMask statusMask) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override @Nullable
 	public Person findOneByTwitter(@Nullable Long twitterId,
 			@Nullable String twitterScreenName) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
 	@Nullable
 	public Person findOneByClientAccessToken(@Nullable String clientAccessToken) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
 	public Page<Person> findBySearchText(
 			@Nullable String idNameEmailMobile, Pageable pageable) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
 	public long countBySearchText(String searchText) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
 	@Nullable
 	public Person findOneByMobileNumber(@Nullable String mobileNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
@@ -243,7 +243,25 @@ public class EmfPersonRepository extends
 	public <S extends Person, K extends Serializable> S lookupOne(
 			StatusMask statusMask, LookupKey lookupKey, K key)
 			throws EntityLookupException {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public <S extends Person, K extends Serializable> Map<K, Try<S>> lookupAll(
+			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public <K extends Serializable> Map<K, Try<K>> checkExists(
+			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public <K extends Serializable> K checkExists(StatusMask statusMask,
+			LookupKey lookupKey, K key) throws EntityLookupException {
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 }

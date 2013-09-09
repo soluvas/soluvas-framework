@@ -2,7 +2,9 @@ package org.soluvas.mongo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
@@ -20,6 +22,8 @@ import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.person.PersonRepository;
+
+import scala.util.Try;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -172,7 +176,25 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	public <S extends Person, K extends Serializable> S lookupOne(
 			StatusMask statusMask, LookupKey lookupKey, K key)
 			throws EntityLookupException {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public <S extends Person, K extends Serializable> Map<K, Try<S>> lookupAll(
+			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public <K extends Serializable> Map<K, Try<K>> checkExists(
+			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public <K extends Serializable> K checkExists(StatusMask statusMask,
+			LookupKey lookupKey, K key) throws EntityLookupException {
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 }
