@@ -48,12 +48,12 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 	
 	@Override @Nullable
-	public Person findOneBySlug(String upSlug) {
+	public Person findOneBySlug(StatusMask statusMask, String upSlug) {
 		return findOneByQuery(new BasicDBObject("canonicalSlug", SlugUtils.canonicalize(upSlug)));
 	}
 
 	@Override
-	public String existsBySlug(String upSlug) {
+	public String existsBySlug(StatusMask statusMask, String upSlug) {
 		final DBObject dbo = findDBObjectByQuery(new BasicDBObject("canonicalSlug", SlugUtils.canonicalize(upSlug)),
 				new BasicDBObject("slug", 1));
 		return (String) (dbo != null ? dbo.get("slug") : null);

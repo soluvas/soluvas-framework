@@ -160,7 +160,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Person findOneBySlug(final String slug) {
+	public Person findOneBySlug(StatusMask statusMask, final String slug) {
 		final Optional<Person> found = Iterables.tryFind(catalog.getPeople(), new Predicate<Person>() {
 			@Override
 			public boolean apply(@Nullable Person input) {
@@ -181,7 +181,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public String existsBySlug(final String slug) {
+	public String existsBySlug(StatusMask statusMask, final String slug) {
 		final Optional<Person> found = Iterables.tryFind(catalog.getPeople(), new Predicate<Person>() {
 			@Override
 			public boolean apply(@Nullable Person input) {

@@ -77,7 +77,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 	 */
 	@Override
 	@Nullable
-	public Person findOneBySlug(String upSlug) {
+	public Person findOneBySlug(StatusMask statusMask, String upSlug) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
@@ -86,7 +86,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 	 * @see org.soluvas.data.SlugLookup#existsBySlug(java.lang.String)
 	 */
 	@Override
-	public String existsBySlug(String upSlug) {
+	public String existsBySlug(StatusMask statusMask, String upSlug) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}

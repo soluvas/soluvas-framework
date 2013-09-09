@@ -89,7 +89,7 @@ public class PersonModCommand extends ExtCommandSupport {
 		}
 		
 		if (!Strings.isNullOrEmpty(slug)) {
-			final String existsBySlug = personRepo.existsBySlug(slug);
+			final String existsBySlug = personRepo.existsBySlug(StatusMask.RAW, slug);
 			if (Strings.isNullOrEmpty(existsBySlug)) {
 				person.setSlug(slug);
 				person.setCanonicalSlug(SlugUtils.canonicalize(slug));
