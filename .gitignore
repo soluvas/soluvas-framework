@@ -19,4 +19,9 @@ build
 /json
 /image-store
 /parent
+<<<<<<< HEAD
+=======
+/newsletter
+/story
+>>>>>>> refs/remotes/origin/2.0.x
 /libraries.gradle
