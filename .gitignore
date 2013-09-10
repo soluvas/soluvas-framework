@@ -19,3 +19,4 @@ build
 /json
 /image-store
 /parent
+/libraries.gradle
