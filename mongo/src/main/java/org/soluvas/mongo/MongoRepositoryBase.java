@@ -31,7 +31,6 @@ import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 import com.google.code.morphia.Morphia;
 import com.google.code.morphia.mapping.DefaultCreator;
 import com.google.common.base.Function;
-import com.google.common.base.Throwables;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -42,6 +41,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClientURI;
+import com.mongodb.MongoException;
 import com.mongodb.WriteResult;
 
 /**
@@ -231,6 +231,11 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		return entity.getId();
 	}
 
+	/**
+	 * @see org.soluvas.data.repository.PagingAndSortingRepositoryBase#add(java.util.Collection)
+	 * @throws MongoException
+	 * @throws MongoException.DuplicateKey
+	 */
 	@Override
 	public <S extends T> Collection<S> add(Collection<S> entities) {
 		beforeSave(entities);
@@ -249,9 +254,6 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			log.info("Added {} {} documents: {}", entities.size(), collName,
 					ids);
 			return ImmutableList.copyOf(entities);
-		} catch (Exception e) {
-			Throwables.propagate(e);
-			return null;
 		}
 	}
 	
