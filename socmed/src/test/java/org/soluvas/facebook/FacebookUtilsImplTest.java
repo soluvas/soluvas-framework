@@ -10,8 +10,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.apache.http.client.utils.HttpClientUtils;
-import org.apache.http.impl.client.DecompressingHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -36,7 +36,7 @@ public class FacebookUtilsImplTest {
 			.getLogger(FacebookUtilsImplTest.class);
 //	private ActorSystem actorSystem;
 	private ExecutorService executor;
-	private DecompressingHttpClient httpClient;
+	private CloseableHttpClient httpClient;
 	private FriendListDownloader friendListDownloader;
 	private UserListParser userListParser;
 	private FacebookUtils facebookUtils;
@@ -49,7 +49,7 @@ public class FacebookUtilsImplTest {
 	public void setUp() throws Exception {
 		executor = Executors.newFixedThreadPool(8, new ThreadFactoryBuilder().setNameFormat("FacebookUtilsTest-%d").build() );
 //		actorSystem = ActorSystem.create("FacebookUtilsTest");
-		httpClient = new DecompressingHttpClient(new DefaultHttpClient());
+		httpClient = HttpClients.createDefault();
 		friendListDownloader = new FriendListDownloader(httpClient, executor);
 		userListParser = new UserListParser(executor);
 		facebookUtils = new FacebookUtilsImpl(friendListDownloader, userListParser);

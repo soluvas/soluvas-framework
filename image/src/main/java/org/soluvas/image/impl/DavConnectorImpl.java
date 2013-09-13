@@ -13,12 +13,12 @@ import javax.annotation.PreDestroy;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.AuthCache;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPut;
@@ -29,8 +29,10 @@ import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.NoConnectionReuseStrategy;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicAuthCache;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.PoolingClientConnectionManager;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.eclipse.emf.ecore.EClass;
@@ -64,7 +66,7 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	private static final Logger log = LoggerFactory
 			.getLogger(DavConnectorImpl.class);
 	
-	private final DefaultHttpClient client;
+	private final CloseableHttpClient client;
 	private String davUri;
 	private String safeDavUri;
 	private HttpHost davHost;
@@ -87,12 +89,12 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 		this.davUri = davUri;
 		this.publicUri = publicUri;
 		
-		client = new DefaultHttpClient(new PoolingClientConnectionManager());
 		// workaround for nginx dav bug, see #uploadFileDav() method
 		// see http://trac.nginx.org/nginx/ticket/284#comment:5
 		// Note: please use puppet-nginx which gives you at least nginx 1.2.7 on both precise & quantal
 		// Bug still happens on nginx 1.2.7 though, in a more detailed way
-		client.setReuseStrategy(new NoConnectionReuseStrategy());
+		HttpClientBuilder builder = HttpClients.custom()
+				.setConnectionReuseStrategy(new NoConnectionReuseStrategy());
 		
 		// Sanity checks
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(davUri), "DAV URI cannot be empty");
@@ -109,7 +111,9 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 				password = splitted[1];
 			}
 			UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
-			client.getCredentialsProvider().setCredentials(AuthScope.ANY, credentials);
+			final BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+			credentialsProvider.setCredentials(AuthScope.ANY, credentials);
+			builder.setDefaultCredentialsProvider(credentialsProvider);
 		}
 		davHost = new HttpHost(davUriDetail.getHost(), davUriDetail.getPort() != -1 ? davUriDetail.getPort() : 80, davUriDetail.getScheme());
 		try {
@@ -117,10 +121,9 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 		} catch (URISyntaxException e1) {
 			Throwables.propagate(e1);
 		}
+		client = builder.build();
 	}
 	
-	
-
 	/**
 	 * Create {@link HttpContext} with {@link AuthCache} pre-populated,
 	 * since HttpClient does not allow HttpContext to be shared among threads.
@@ -166,15 +169,12 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 		final String uri = getImageDavUri(namespace, imageId, styleCode, styleVariant, extension);
 		final HttpDelete deleteOriginal = new HttpDelete(uri);
 		try {
-			final HttpResponse response = client.execute(davHost, deleteOriginal, createHttpContext());
-			try {
+			try (final CloseableHttpResponse response = client.execute(davHost, deleteOriginal, createHttpContext())) {
 				final StatusLine statusLine = response.getStatusLine();
 				if (statusLine.getStatusCode() >= 200 && statusLine.getStatusCode() < 300)
 					log.info("Delete {} returned: {}", uri, statusLine);
 				else
 					log.error("Delete {} returned: {}", uri, statusLine);
-			} finally {
-				HttpClientUtils.closeQuietly(response);
 			}
 		} catch (Exception e) {
 			log.error("Cannot delete " + namespace + " " + imageId + " style=" + styleCode + " URI: " + uri, e);
@@ -187,7 +187,7 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	 */
 	@Override @PreDestroy
 	public void destroy() {
-		client.getConnectionManager().shutdown();
+		HttpClientUtils.closeQuietly(client);
 	}
 
 	/**
@@ -279,14 +279,11 @@ and uploading again, and because of HTTP pipelining which isn't supported by ngi
 		final InputStreamEntity entity = new InputStreamEntity(new FileInputStream(source), source.length());
 		entity.setContentType(contentType);
 		httpPut.setEntity(entity);
-		final HttpResponse response = client.execute(davHost, httpPut, createHttpContext());
-		try {
+		try (final CloseableHttpResponse response = client.execute(davHost, httpPut, createHttpContext())) {
 			if (response.getStatusLine().getStatusCode() >= 200 && response.getStatusLine().getStatusCode() < 300)
 				log.info("Upload {} returned: {}", uri, response.getStatusLine());
 			else
 				log.error("Upload {} returned: {}", uri, response.getStatusLine());
-		} finally {
-			HttpClientUtils.closeQuietly(response);
 		}
 	}
 	
@@ -311,8 +308,7 @@ and uploading again, and because of HTTP pipelining which isn't supported by ngi
 		log.info("Downloading {} from {}", imageId, imageUri);
 		final HttpGet httpGet = new HttpGet(imageUri);
 		try {
-			final HttpResponse response = client.execute(davHost, httpGet, createHttpContext());
-			try {
+			try (final CloseableHttpResponse response = client.execute(davHost, httpGet, createHttpContext())) {
 				if (response.getStatusLine().getStatusCode() >= 200 && response.getStatusLine().getStatusCode() < 300) {
 					log.trace("Download {} successful: {}", imageUri, response.getStatusLine());
 					final long contentLength = response.getEntity().getContentLength();
@@ -327,8 +323,6 @@ and uploading again, and because of HTTP pipelining which isn't supported by ngi
 //					throw new ImageException(String.format("Download %s returned: %s", imageUri, response.getStatusLine()));
 					return false;
 				}
-			} finally {
-				HttpClientUtils.closeQuietly(response);
 			}
 		} catch (Exception e) {
 			throw new ImageException(e, "Cannot download %s from %s", imageId, imageUri);

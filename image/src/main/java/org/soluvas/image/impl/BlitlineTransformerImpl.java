@@ -12,13 +12,12 @@ import java.util.concurrent.Callable;
 import javax.annotation.Nullable;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.HttpClientUtils;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.PoolingClientConnectionManager;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.eclipse.emf.ecore.EClass;
 import org.slf4j.Logger;
@@ -94,7 +93,7 @@ public class BlitlineTransformerImpl extends ImageTransformerImpl implements Bli
 
 	private static final Logger log = LoggerFactory
 			.getLogger(BlitlineTransformerImpl.class);
-	private final DefaultHttpClient client = new DefaultHttpClient(new PoolingClientConnectionManager());
+	private final CloseableHttpClient client = HttpClients.createDefault();
 	
 	/**
 	 * The default value of the '{@link #getApplicationId() <em>Application Id</em>}' attribute.
@@ -435,8 +434,7 @@ public class BlitlineTransformerImpl extends ImageTransformerImpl implements Bli
 				try {
 					final HttpPost postReq = new HttpPost("http://api.blitline.com/job");
 					postReq.setEntity(new UrlEncodedFormEntity(ImmutableList.of(new BasicNameValuePair("json", jobJson))));
-					final HttpResponse response = client.execute(postReq);
-					try {
+					try (final CloseableHttpResponse response = client.execute(postReq)) {
 						final StatusLine responseStatus = response.getStatusLine();
 						final String responseBody;
 						if (response.getEntity() != null)
@@ -447,8 +445,6 @@ public class BlitlineTransformerImpl extends ImageTransformerImpl implements Bli
 							log.info("Job returned {}: {}", responseStatus, responseBody);
 						} else
 							log.error("Job returned {}: {}", responseStatus, responseBody);
-					} finally {
-						HttpClientUtils.closeQuietly(response);
 					}
 				} catch (Exception e) {
 					log.error("Error transforming " + sourceVariant + " with " + jobFuncs.size() + " functions: " + jobJson, e);

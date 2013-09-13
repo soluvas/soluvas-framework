@@ -3,11 +3,10 @@ package org.soluvas.twitter;
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.HttpClientUtils;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.image.store.Image;
@@ -41,28 +40,25 @@ public class TwitterUtils {
 			String photoUrl, final String twitterScreenName, 
 			final String personName, ImageRepository imageRepo) {
 		Preconditions.checkNotNull(twitterScreenName, "Twitter screen name must be specified");
-		final HttpClient httpClient = new DefaultHttpClient();
-		try {
+		try (final CloseableHttpClient httpClient = HttpClients.createDefault()) {
 			final HttpGet httpGet = new HttpGet(photoUrl);
 			log.debug("Photo URL for twitter user {} ({}) is {}", twitterScreenName, personName, photoUrl);
-			final HttpResponse response = httpClient.execute(httpGet);
-			final File tmpFile = File.createTempFile("twitter_", ".jpg");
-			try {
-				FileUtils.copyInputStreamToFile(response.getEntity().getContent(), tmpFile);
-				log.debug("Photo Status Line {}",  response.getStatusLine());
-				final Image newImage = new Image(tmpFile, response.getEntity().getContentType().getValue(),
-						personName + " twitter " + twitterScreenName);
-				final String imageId = imageRepo.add(newImage).getId();
-				log.debug("tmp file path from twitter user {} is {}", tmpFile);
-				return imageId;
-			} finally {
-				tmpFile.delete();
-				HttpClientUtils.closeQuietly(response);
+			try (final CloseableHttpResponse response = httpClient.execute(httpGet)) {
+				final File tmpFile = File.createTempFile("twitter_", ".jpg");
+				try {
+					FileUtils.copyInputStreamToFile(response.getEntity().getContent(), tmpFile);
+					log.debug("Photo Status Line {}",  response.getStatusLine());
+					final Image newImage = new Image(tmpFile, response.getEntity().getContentType().getValue(),
+							personName + " twitter " + twitterScreenName);
+					final String imageId = imageRepo.add(newImage).getId();
+					log.debug("tmp file path from twitter user {} is {}", tmpFile);
+					return imageId;
+				} finally {
+					tmpFile.delete();
+				}
 			}
 		} catch (final Exception e) {
 			throw new RuntimeException("Cannot refresh Twitter user " + twitterScreenName + " (" + personName +") from Twitter URI " + photoUrl, e);
-		} finally {
-			HttpClientUtils.closeQuietly(httpClient);
 		}
 	}
 	

@@ -4,24 +4,29 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.apache.http.client.utils.HttpClientUtils;
-import org.apache.http.impl.client.DecompressingHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Configuration;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
+/**
+ * @author ceefour
+ * @deprecated Should be replaced by Spring {@link Configuration} beans instead.
+ */
+@Deprecated
 public class ContextHelper {
 
 	private static final Logger log = LoggerFactory.getLogger(ContextHelper.class);
 	private ExecutorService executor;
-	private DecompressingHttpClient httpClient;
+	private final CloseableHttpClient httpClient = HttpClients.createDefault();
 	
 	public ContextHelper() {
 		super();
 		log.info("Creating default executor FacebookUtils with 8 threads");
 		executor = Executors.newFixedThreadPool(8, new ThreadFactoryBuilder().setNameFormat("FacebookUtils-%d").build() );
-		httpClient = new DecompressingHttpClient(new DefaultHttpClient());
 	}
 	
 	public void destroy() {
@@ -45,7 +50,7 @@ public class ContextHelper {
 	/**
 	 * @return the httpClient
 	 */
-	public DecompressingHttpClient getHttpClient() {
+	public CloseableHttpClient getHttpClient() {
 		return httpClient;
 	}
 

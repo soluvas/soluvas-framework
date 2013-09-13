@@ -8,13 +8,13 @@ import java.util.Scanner;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.facebook.FacebookException;
@@ -69,10 +69,8 @@ public class FbAuthCommand extends ExtCommandSupport {
 				realAppId + " and redirectUri " + redirectUri, ex);
 		}
 		final HttpGet accessTokenUriRequest = new HttpGet(accessTokenUriStr);
-		final DefaultHttpClient client = new DefaultHttpClient();
-		try {
-			final HttpResponse responseAccessTokenReq = client.execute(accessTokenUriRequest);
-			try {
+		try (final CloseableHttpClient client = HttpClients.createDefault()) {
+			try (final CloseableHttpResponse responseAccessTokenReq = client.execute(accessTokenUriRequest)) {
 				if (responseAccessTokenReq.getStatusLine().getStatusCode() != 200)
 					throw new IOException(String.format(
 							"GET %s throws HTTP Error %d: %s", accessTokenUriRequest, responseAccessTokenReq
@@ -87,14 +85,10 @@ public class FbAuthCommand extends ExtCommandSupport {
 			} catch (Exception e) {
 				throw new FacebookException("Cannot get access token for appId " + realAppId + 
 						" and redirectUri " + redirectUri + ": " + e, e);
-			} finally {
-				HttpClientUtils.closeQuietly(responseAccessTokenReq);
 			}
 		} catch (IllegalStateException | IOException e) {
 			throw new FacebookException("Cannot get access token for appId " + realAppId + 
 					" and redirectUri " + redirectUri + ": " + e, e);
-		} finally {
-			HttpClientUtils.closeQuietly(client);
 		}
 	}
 	

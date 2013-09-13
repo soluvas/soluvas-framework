@@ -9,12 +9,11 @@ import java.util.concurrent.Future;
 import javax.inject.Inject;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.image.store.Image;
@@ -118,28 +117,25 @@ public class FacebookUtilsImpl implements FacebookUtils {
 			ImageRepository imageRepo) {
 		// Get Image
 		final String photoUrl = "http://graph.facebook.com/"+ facebookId + "/picture?type=large";
-		final HttpClient httpClient = new DefaultHttpClient();
-		try {
+		try (final CloseableHttpClient httpClient = HttpClients.createDefault()) {
 			final HttpGet httpGet = new HttpGet(photoUrl);
 			log.debug("Photo URL for Facebook user {} ({}) is {}", facebookId, personName, photoUrl);
-			final HttpResponse response = httpClient.execute(httpGet);
-			final File tmpFile = File.createTempFile("fb_", ".tmp");
-			try {
-				FileUtils.copyInputStreamToFile(response.getEntity().getContent(), tmpFile);
-				log.debug("Photo Status Line {}",  response.getStatusLine());
-				final Image newImage = new Image(tmpFile, response.getEntity().getContentType().getValue(),
-						personName + " Facebook " + facebookId);
-				final String imageId = imageRepo.add(newImage).getId();
-				log.debug("tmp file path from Facebook user {} is {}", tmpFile);
-				return imageId;
-			} finally {
-				tmpFile.delete();
-				HttpClientUtils.closeQuietly(response);
+			try (final CloseableHttpResponse response = httpClient.execute(httpGet)) {
+				final File tmpFile = File.createTempFile("fb_", ".tmp");
+				try {
+					FileUtils.copyInputStreamToFile(response.getEntity().getContent(), tmpFile);
+					log.debug("Photo Status Line {}",  response.getStatusLine());
+					final Image newImage = new Image(tmpFile, response.getEntity().getContentType().getValue(),
+							personName + " Facebook " + facebookId);
+					final String imageId = imageRepo.add(newImage).getId();
+					log.debug("tmp file path from Facebook user {} is {}", tmpFile);
+					return imageId;
+				} finally {
+					tmpFile.delete();
+				}
 			}
 		} catch (final Exception e) {
 			throw new RuntimeException("Cannot refresh Facebook user " + facebookId + " (" + personName +") from Facebook URI " + photoUrl, e);
-		} finally {
-			HttpClientUtils.closeQuietly(httpClient);
 		}
 	}
 	
