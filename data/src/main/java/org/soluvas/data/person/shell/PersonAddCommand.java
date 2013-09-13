@@ -85,8 +85,8 @@ public class PersonAddCommand extends ExtCommandSupport {
 		if (!Strings.isNullOrEmpty(emailStr)) {
 			final Person personByEmail = personRepo.findOneByEmail(emailStr, StatusMask.RAW);
 			if (personByEmail != null) {
-				log.warn("Email {} is already exists by {}", emailStr, personByEmail.getId());
-				System.err.println(ansi().render("@|red Email |@@|bold %s|@@|red is already exists for person |@@|bold %s|@",
+				log.info("Email {} already exists for person {}", emailStr, personByEmail.getId());
+				System.err.println(ansi().render("@|red Email|@ @|bold %s|@ @|red already exists for person|@ @|bold %s|@",
 						emailStr, personByEmail.getId()));
 				return null;
 			} else {
