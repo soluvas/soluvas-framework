@@ -20,6 +20,7 @@
 		<dependency>
 			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.ldap</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.soluvas</groupId>
@@ -33,6 +34,14 @@
 		<dependency>
 			<groupId>org.ektorp</groupId>
 			<artifactId>org.ektorp</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.directory.api</groupId>
+			<artifactId>api-ldap-client-api</artifactId>
+			<version>1.0.0-M17</version>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
