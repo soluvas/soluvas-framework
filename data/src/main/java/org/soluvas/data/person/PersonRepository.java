@@ -37,7 +37,7 @@ public interface PersonRepository extends
 	 * @param statusMask TODO
 	 */
 	@Nullable
-	public Person findOneByEmail(@Nullable String email, StatusMask statusMask);
+	public Person findOneByEmail(StatusMask statusMask, @Nullable String email);
 	
 	@Nullable
 	public Person findOneByMobileNumber(@Nullable String mobileNumber);

@@ -58,7 +58,7 @@ public class PersonModCommand extends ExtCommandSupport {
 	protected Object doExecute() throws Exception {
 		final Person person = Preconditions.checkNotNull(personRepo.findOne(id), String.format("Person by ID %s must not be null", id));
 		if (!Strings.isNullOrEmpty(emailStr)) {
-			final Person personByEmail = personRepo.findOneByEmail(emailStr, StatusMask.RAW);
+			final Person personByEmail = personRepo.findOneByEmail(StatusMask.RAW, emailStr);
 			if (personByEmail != null && !personByEmail.getId().equalsIgnoreCase(id)) {
 				 log.warn("Person by email {} is already exists by {}", emailStr, personByEmail.getId());
 			} else {

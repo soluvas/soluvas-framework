@@ -133,7 +133,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 	 */
 	@Override
 	@Nullable
-	public Person findOneByEmail(@Nullable String email, StatusMask statusMask) {
+	public Person findOneByEmail(StatusMask statusMask, @Nullable String email) {
 		try {
 			final Person found = lookupOne(statusMask, LookupKey.EMAIL, email);
 			return found;

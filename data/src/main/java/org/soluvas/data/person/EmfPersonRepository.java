@@ -200,7 +200,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override @Nullable
-	public Person findOneByEmail(@Nullable String email, StatusMask statusMask) {
+	public Person findOneByEmail(StatusMask statusMask, @Nullable String email) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 

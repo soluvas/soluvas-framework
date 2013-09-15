@@ -2,6 +2,7 @@ package org.soluvas.data;
 
 import javax.annotation.Nullable;
 
+import org.soluvas.commons.ResourceNotFoundException;
 import org.soluvas.data.repository.CrudRepository;
 
 import com.google.common.base.Optional;
@@ -24,6 +25,7 @@ import com.google.common.base.Optional;
  * <p>This exception should simply be rethrown and caught by the global application exception handler.
  * 
  * @author ceefour
+ * @todo Merge with {@link ResourceNotFoundException}
  */
 public class EntityLookupException extends Exception {
 

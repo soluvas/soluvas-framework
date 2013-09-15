@@ -83,7 +83,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override @Nullable
-	public Person findOneByEmail(@Nullable String email, StatusMask statusMask) {
+	public Person findOneByEmail(StatusMask statusMask, @Nullable String email) {
 		if (email == null) {
 			return null;
 		}

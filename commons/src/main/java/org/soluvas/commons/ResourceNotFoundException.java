@@ -7,7 +7,8 @@ import javax.annotation.Nullable;
  * or other entity is not found during lookup and should be handled by the UI request controller.
  * For example, in Wicket web app, throw this so it can be handled by exception handler
  * which will show either the 404 page or search page.
- * @author adri
+ * @author ceefour
+ * @todo Merge with {@link org.soluvas.data.EntityLookupException}
  */
 public class ResourceNotFoundException extends RuntimeException {
 
