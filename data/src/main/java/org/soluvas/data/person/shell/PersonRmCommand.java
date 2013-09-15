@@ -11,12 +11,15 @@ import org.soluvas.commons.Person;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.data.TrashResult;
 import org.soluvas.data.person.PersonRepository;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 /**
  * Trash {@link Person}, or can also delete permanently.
  *
  * @author ceefour
  */
+@Service @Scope("prototype")
 @Command(scope="person", name="rm", description="Trash Person by ID.")
 public class PersonRmCommand extends ExtCommandSupport {
 
@@ -34,7 +37,8 @@ public class PersonRmCommand extends ExtCommandSupport {
 		final PersonRepository personRepo = getBean(PersonRepository.class);
 		long i = 0;
 		for (final String id : ids) {
-			System.out.print(ansi().render("Deleting @|bold %-40s|@...", id));
+			System.out.print(ansi().render("%s @|bold %-40s|@...", 
+					permanent ? "Deleting PERMANENTLY" : "Trashing", id));
 			try {
 				if (permanent) {
 					final boolean deleted = personRepo.delete(id);
@@ -61,7 +65,8 @@ public class PersonRmCommand extends ExtCommandSupport {
 				}
 			} catch (Exception e) {
 				System.out.println(ansi().render(" @|bold,bg_red,yellow  ERROR |@", id));
-				System.err.println(e.getMessage());
+				System.err.println(e);
+				log.error("Cannot trash/delete " + id, e);
 			}
 		}
 		return i;

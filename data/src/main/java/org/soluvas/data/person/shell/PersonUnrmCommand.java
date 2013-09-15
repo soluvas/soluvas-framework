@@ -10,12 +10,15 @@ import org.soluvas.commons.Person;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.data.UntrashResult;
 import org.soluvas.data.person.PersonRepository;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 /**
  * Untrash a {@link Person}.
  *
  * @author ceefour
  */
+@Service @Scope("prototype")
 @Command(scope="person", name="unrm", description="Untrash Person by ID.")
 public class PersonUnrmCommand extends ExtCommandSupport {
 
@@ -47,7 +50,8 @@ public class PersonUnrmCommand extends ExtCommandSupport {
 				}
 			} catch (Exception e) {
 				System.out.println(ansi().render(" @|bold,bg_red,yellow  ERROR |@", id));
-				System.err.println(e.getMessage());
+				System.err.println(e);
+				log.error("Cannot untrash " + id, e);
 			}
 		}
 		return i;

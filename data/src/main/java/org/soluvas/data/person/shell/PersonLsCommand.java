@@ -2,8 +2,6 @@ package org.soluvas.data.person.shell;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
 import org.slf4j.Logger;
@@ -12,6 +10,7 @@ import org.soluvas.commons.Email;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Sort.Direction;
@@ -38,17 +37,17 @@ public class PersonLsCommand extends ExtCommandSupport {
 	private transient String sortProperty = "modificationTime";
 	@Option(name="--sortdir", description="Sort direction.")
 	private transient Direction sortDir = Direction.DESC;
+	@Option(name="-a", aliases="--all", description="Shortcut to --status=RAW.")
+	private Boolean all;
+	@Option(name="--status", description="Status mask: RAW|ACTIVE_ONLY|INCLUDE_INACTIVE|DRAFT_ONLY|VOID_ONLY.")
+	private transient StatusMask statusMask = StatusMask.ACTIVE_ONLY;
 	
-	private final PersonRepository personRepo;
-	
-	@Inject
-	public PersonLsCommand(PersonRepository personRepo) {
-		super();
-		this.personRepo = personRepo;
-	}
-
 	@Override
 	protected Object doExecute() throws Exception {
+		if (all != null && all) {
+			statusMask = StatusMask.RAW;
+		}
+		final PersonRepository personRepo = getBean(PersonRepository.class);
 		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-15s|%-21s|%-20s|@",
 				"№", "ID", "Slug", "Name", "Email(s)" ));
 		final Page<Person> personPage = personRepo.findAll(new PageRequest(pageNumber, pageSize, sortDir, sortProperty));

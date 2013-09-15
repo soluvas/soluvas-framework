@@ -47,12 +47,17 @@ import com.google.common.collect.Sets.SetView;
  * CouchDB implementation of {@link PersonRepository}.
  * @author ceefour
  */
-public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
+public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, AccountStatus>
 		implements PersonRepository {
 	
 	public CouchDbPersonRepository(ClientConnectionManager connMgr, String couchDbUri, String dbName) {
 		super(connMgr, Person.class, PersonImpl.class, 1L, couchDbUri, dbName, "person",
-				ImmutableList.<String>of(), ImmutableMap.<String, Integer>of());
+				ImmutableList.<String>of(), ImmutableMap.<String, Integer>of(),
+				"accountStatus", 
+				ImmutableSet.of(AccountStatus.ACTIVE, AccountStatus.VALIDATED, AccountStatus.VERIFIED),
+				ImmutableSet.of(AccountStatus.INACTIVE),
+				ImmutableSet.of(AccountStatus.DRAFT),
+				ImmutableSet.of(AccountStatus.VOID) );
 	}
 	
 	@Override
@@ -72,12 +77,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 				+ "emit(e.email, {uid: doc.uid, password: doc.password}); "
 				+ "}); "
 				+ "} }"));
-		addStatusMaskDesignView(design, "accountStatus", 
-				ImmutableSet.of(AccountStatus.ACTIVE, AccountStatus.VALIDATED, AccountStatus.VERIFIED),
-				ImmutableSet.of(AccountStatus.INACTIVE),
-				ImmutableSet.of(AccountStatus.DRAFT),
-				ImmutableSet.of(AccountStatus.VOID),
-				"uid");
+		addStatusMaskDesignView(design, "uid");
 		design.addView("statusMask_email", new View(
 				 "function(doc) { if (doc.type == 'Person' ) { "
 		       + "doc.emails.forEach(function(e) { "
@@ -88,12 +88,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 		       + "if (doc.accountStatus.match(/^(void)$/) != null) emit(['void_only', e.email], null); "
 		       + "}); "
 		       + "} }"));
-		addStatusMaskDesignView(design, "accountStatus", 
-				ImmutableSet.of(AccountStatus.ACTIVE, AccountStatus.VALIDATED, AccountStatus.VERIFIED),
-				ImmutableSet.of(AccountStatus.INACTIVE),
-				ImmutableSet.of(AccountStatus.DRAFT),
-				ImmutableSet.of(AccountStatus.VOID),
-				"canonicalSlug", "slug");
+		addStatusMaskDesignView(design, "canonicalSlug", "slug");
 	}
 	
 	/* (non-Javadoc)

@@ -3,6 +3,7 @@ package org.soluvas.couchdb;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -19,6 +20,7 @@ import org.ektorp.DbAccessException;
 import org.ektorp.DocumentNotFoundException;
 import org.ektorp.PageRequest;
 import org.ektorp.ViewQuery;
+import org.ektorp.ViewResult.Row;
 import org.ektorp.http.HttpClient;
 import org.ektorp.http.StdHttpClient;
 import org.ektorp.impl.StdCouchDbConnector;
@@ -44,7 +46,6 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
-import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.push.RepositoryException;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.StatusAwareRepositoryBase;
@@ -75,7 +76,7 @@ import com.google.common.collect.Sets;
  * the application should handle occasional errors due to schema mismatch. 
  * @author ceefour
  */
-public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRepositoryBase<T, String>
+public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> extends StatusAwareRepositoryBase<T, String>
 	implements CouchDbRepository<T> {
 	
 	public static final String VIEW_UID = "uid";
@@ -120,6 +121,12 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRe
 	protected final String couchDbUri;
 	protected final String dbName;
 	protected StdCouchDbConnector dbConn;
+
+	protected String statusProperty;
+	protected Set<E> activeStatuses;
+	protected Set<E> inactiveStatuses;
+	protected Set<E> draftStatuses;
+	protected Set<E> voidStatuses;
 	
 	/**
 	 * @param intfClass
@@ -131,7 +138,8 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRe
 	 * @param indexedFields
 	 */
 	public CouchDbRepositoryBase(ClientConnectionManager connMgr, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
-			String couchDbUri, String dbName, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields) {
+			String couchDbUri, String dbName, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields,
+			String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
 		super();
 		this.entityClass = intfClass;
 		this.implClass = implClass;
@@ -139,6 +147,12 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRe
 		this.couchDbUri = couchDbUri;
 		this.dbName = dbName;
 		this.collName = collName;
+		
+		this.statusProperty = statusProperty;
+		this.activeStatuses = activeStatuses;
+		this.inactiveStatuses = inactiveStatuses;
+		this.draftStatuses = draftStatuses;
+		this.voidStatuses = voidStatuses;
 		
 		// WARNING: couchDbUri may contain password!
 		final URI realCouchDbUri = URI.create(couchDbUri);
@@ -192,6 +206,11 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRe
 	 * 	<li><b>uid</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }</code></li>
 	 * 	<li><b>filter_status</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }</code></li>
 	 * 	<li><b>by_modificationTime</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }</code></li>
+	 * 	<li><b>statusMask_raw_by_modificationTime</b>
+	 * 	<li><b>statusMask_active_only_by_modificationTime</b>
+	 * 	<li><b>statusMask_include_inactive_by_modificationTime</b>
+	 * 	<li><b>statusMask_draft_only_by_modificationTime</b>
+	 * 	<li><b>statusMask_void_only_by_modificationTime</b>
 	 * </ol>
 	 * <p>See {@link #addStatusMaskDesignView(DesignDocument, String, Set, Set, Set, Set, String, String)} if you want to add
 	 * {@link StatusMask}-related views.
@@ -206,6 +225,69 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRe
 		design.addView(VIEW_UID, new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
 		design.addView("filter_status", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }"));
 		design.addView("by_modificationTime", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+		
+//		addStatusMaskDesignView(design, "modificationTime", null);
+		design.addView("statusMask_raw_by_modificationTime", 
+				new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+		final String activeOnlyRegex = Joiner.on('|').join(Collections2.transform(activeStatuses, 
+				new Function<E, String>() {
+			@Override @Nullable
+			public String apply(@Nullable E input) {
+				return input.name().toLowerCase();
+			}
+		}));
+		final String includeInactiveRegex = Joiner.on('|').join(
+				Collections2.transform(Sets.union(activeStatuses, inactiveStatuses), new Function<E, String>() {
+			@Override @Nullable
+			public String apply(@Nullable E input) {
+				return input.name().toLowerCase();
+			}
+		}));
+		final String draftOnlyRegex = Joiner.on('|').join(
+				Collections2.transform(draftStatuses, new Function<E, String>() {
+			@Override @Nullable
+			public String apply(@Nullable E input) {
+				return input.name().toLowerCase();
+			}
+		}));
+		final String voidOnlyRegex = Joiner.on('|').join(
+				Collections2.transform(voidStatuses, new Function<E, String>() {
+			@Override @Nullable
+			public String apply(@Nullable E input) {
+				return input.name().toLowerCase();
+			}
+		}));
+		design.addView("statusMask_active_only_by_modificationTime", new View(
+				  "function(doc) {"
+				+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + activeOnlyRegex + ")$/) != null )"
+				+ "    emit( [doc.modificationTime, doc._id], null );"
+				+ "}"));
+		design.addView("statusMask_include_inactive_by_modificationTime", new View(
+				  "function(doc) {"
+				+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + includeInactiveRegex + ")$/) != null )"
+				+ "    emit( [doc.modificationTime, doc._id], null );"
+				+ "}"));
+		design.addView("statusMask_draft_only_by_modificationTime", new View(
+				  "function(doc) {"
+				+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + draftOnlyRegex + ")$/) != null )"
+				+ "    emit( [doc.modificationTime, doc._id], null );"
+				+ "}"));
+		design.addView("statusMask_void_only_by_modificationTime", new View(
+				  "function(doc) {"
+				+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + voidOnlyRegex + ")$/) != null )"
+				+ "    emit( [doc.modificationTime, doc._id], null );"
+				+ "}"));
+	}
+
+	protected DesignDocument.View addStatusMaskDesignView(DesignDocument design,
+			String targetProperty, @Nullable String valueProperty) {
+		return addStatusMaskDesignView(design, entityClass.getSimpleName(),
+				statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, targetProperty, valueProperty);
+	}
+
+	protected DesignDocument.View addStatusMaskDesignView(DesignDocument design, String targetProperty) {
+		return addStatusMaskDesignView(design, entityClass.getSimpleName(),
+				statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, targetProperty);
 	}
 
 	/**
@@ -227,7 +309,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRe
 	 * and {@link GenericLookup#lookupOne(StatusMask, org.soluvas.data.LookupKey, java.io.Serializable)} you still need to
 	 * get all ({@link StatusMask#RAW}) documents anyway.
 	 * 
-	 * <p>Sample usage:
+	 * <p>Simple usage:
 	 * 
 	 * <pre>{@literal
 	 * addStatusMaskDesignView(design, "accountStatus", 
@@ -255,10 +337,11 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRe
 	 * @param draftStatuses Statuses that make up the <i>draft</i> state, e.g. {@link AccountStatus#DRAFT}.
 	 * @param voidStatuses Statuses that make up the <i>void</i> (deleted) state, e.g. {@link AccountStatus#VOID}.
 	 * @param targetProperty Name of the target JSON property, e.g. {@code uid}, {@code email}, {@code slug}. This is <b>not</b> the Java property name.
-	 * @param valueProperty Value to be emitted. If {@code null} then will emit {@code null}.
+	 * @param valueProperty Value to be emitted, can be same as {@code targetProperty}. If {@code null} then will emit {@code null}, probably when you're sure you'll never use it.
 	 * @return
 	 */
-	protected <E extends Enum<E>> DesignDocument.View addStatusMaskDesignView(DesignDocument design,
+	public static <E extends Enum<E>> DesignDocument.View addStatusMaskDesignView(DesignDocument design,
+			String entitySimpleName,
 			String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses,
 			String targetProperty, @Nullable String valueProperty) {
 		final String activeOnlyRegex = Joiner.on('|').join(Collections2.transform(activeStatuses, 
@@ -289,10 +372,10 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRe
 				return input.name().toLowerCase();
 			}
 		}));
-		final String jsValueProperty = valueProperty != null ? "doc." + valueProperty : "null";
+		final String jsValueProperty = valueProperty != null ? "doc." + valueProperty : "doc." + targetProperty;
 		final String map =
 			  "function(doc) {\n"
-			+ "  if (doc.type == '" + entityClass.getSimpleName() + "' ) {\n"
+			+ "  if (doc.type == '" + entitySimpleName + "' ) {\n"
 			+ "    emit(['" + StatusMask.RAW.getLiteral() + "', doc." + targetProperty + "], " + jsValueProperty + ");\n"
 			+ "    if (doc." + statusProperty + ".match(/^(" + activeOnlyRegex + ")$/) != null)\n"
 			+ "      emit(['" + StatusMask.ACTIVE_ONLY.getLiteral() + "', doc." + targetProperty + "], " + jsValueProperty + ");\n"
@@ -305,7 +388,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRe
 			+ "  }\n"
 			+ "}";
 		final String viewName = "statusMask_" + targetProperty;
-		log.debug("Dynamic view '{}' for actives={} inactives={} drafts={} voids={}: {}", 
+		LoggerFactory.getLogger(CouchDbRepositoryBase.class).debug("Dynamic view '{}' for actives={} inactives={} drafts={} voids={}: {}", 
 				viewName, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, map);
 		final View view = new View(map);
 		design.addView(viewName, view);
@@ -313,6 +396,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRe
 	}
 	
 	/**
+	 * Convenience shortcut when {@code valueProperty} will be set the same as {@code targetProperty}.
 	 * @param design
 	 * @param statusProperty
 	 * @param activeStatuses
@@ -323,10 +407,12 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRe
 	 * @return
 	 * @see #addStatusMaskDesignView(DesignDocument, String, Set, Set, Set, Set, String, String)
 	 */
-	protected <E extends Enum<E>> DesignDocument.View addStatusMaskDesignView(DesignDocument design,
+	public static <E extends Enum<E>> DesignDocument.View addStatusMaskDesignView(DesignDocument design,
+			String entitySimpleName,
 			String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses,
 			String targetProperty) {
-		return addStatusMaskDesignView(design, statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, targetProperty, null);
+		return addStatusMaskDesignView(design, entitySimpleName,
+				statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, targetProperty, targetProperty);
 	}
 
 	@PreDestroy
@@ -342,11 +428,10 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRe
 	 */
 	@Override
 	public final Page<T> findAll(StatusMask statusMask, Pageable pageable) {
-		// TODO: support statusMask
 		final Sort sort = Optional.fromNullable(pageable.getSort()).or(new Sort("modificationTime"));
-		ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-			.viewName("by_" + sort.iterator().next().getProperty())
-			.descending(sort.iterator().next().getDirection() == Direction.DESC)
+		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
+			.viewName("statusMask_" + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
+			.descending(!sort.iterator().next().isAscending())
 			.includeDocs(true);
 		final PageRequest pageRequest = new PageRequest.Builder().page((int) pageable.getPageNumber()).pageSize((int) pageable.getPageSize()).build();
 		org.ektorp.Page<? extends T> page;
@@ -555,15 +640,35 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRe
 
 	@Override
 	public final long deleteIds(Collection<String> ids) {
-		throw new UnsupportedOperationException();
-//		log.debug("Deleting {} {}: {}", ids.size(), collName, ids);
-//		final WriteResult result = coll.remove(new BasicDBObject("_id", new BasicDBObject("$in", ids)));
-//		if (result.getLastError().getException() != null) {
-//			throw new CouchDbRepositoryException(result.getLastError().getException(),
-//					"Cannot delete %s %s", collName, ids);
-//		}
-//		log.info("Deleted {} out of {} {} ({})", result.getN(), ids.size(), collName, ids);
-//		return result.getN();
+		log.debug("Deleting {} {}: {}", ids.size(), collName, ids);
+		final Set<String> deletedRevs = new HashSet<String>();
+		for (final String id : ids) {
+			try {
+				final ViewQuery query = new ViewQuery().designDocId(getDesignDocId()).viewName(VIEW_UID).key(id);
+				final Row row = Iterables.getFirst(dbConn.queryView(query).getRows(), null);
+				if (row != null) {
+					final String guid = row.getId();
+					final String currentRevision = dbConn.getCurrentRevision(guid);
+					if (currentRevision != null) {
+						log.trace("Deleting {} '{}': GUID={} revision={}", collName, id, guid, currentRevision);
+						final String revision = dbConn.delete(guid, currentRevision);
+						if (revision != null) {
+							deletedRevs.add(revision);
+						}
+					} else {
+						log.trace("No current revision for {} '{}' (GUID: {})", collName, id, guid);
+					}
+				} else {
+					log.trace("Cannot find {} '{}'", collName, id);
+				}
+			} catch (Exception e) {
+				throw new CouchDbRepositoryException(e,
+						"Cannot delete %s %s", collName, id);
+			}
+		}
+		log.info("Deleted {} out of {} {}, revisions: {}", 
+				deletedRevs.size(), ids.size(), collName, deletedRevs);
+		return deletedRevs.size();
 	}
 
 	@Override
