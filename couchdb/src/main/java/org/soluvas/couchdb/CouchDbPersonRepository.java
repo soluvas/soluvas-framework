@@ -22,6 +22,8 @@ import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
+import org.soluvas.data.TrashResult;
+import org.soluvas.data.UntrashResult;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.person.PersonRepository;
@@ -357,17 +359,57 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person>
 	}
 
 	@Override
-	public <K extends Serializable> Map<K, Try<K>> checkExists(
+	public <K extends Serializable> Map<K, Try<K>> checkExistsAll(
 			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported lookupKey: " + lookupKey);
 	}
 
 	@Override
 	public <K extends Serializable> K checkExists(StatusMask statusMask,
 			LookupKey lookupKey, K key) throws EntityLookupException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported lookupKey: " + lookupKey);
+	}
+
+	@Override
+	public TrashResult trash(Person entity) {
+		return trashAll(ImmutableSet.of(entity)).get(entity.getId()).get();
+	}
+
+	@Override
+	public TrashResult trashById(String id) {
+		return trashAllByIds(ImmutableSet.of(id)).get(id).get();
+	}
+
+	@Override
+	public Map<String, Try<TrashResult>> trashAll(Collection<Person> entities) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public Map<String, Try<TrashResult>> trashAllByIds(Collection<String> ids) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public UntrashResult untrash(Person entity) {
+		return untrashAll(ImmutableSet.of(entity)).get(entity.getId()).get();
+	}
+
+	@Override
+	public UntrashResult untrashById(String id) {
+		return untrashAllByIds(ImmutableSet.of(id)).get(id).get();
+	}
+
+	@Override
+	public Map<String, Try<UntrashResult>> untrashAll(
+			Collection<Person> entities) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public Map<String, Try<UntrashResult>> untrashAllByIds(
+			Collection<String> ids) {
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 }

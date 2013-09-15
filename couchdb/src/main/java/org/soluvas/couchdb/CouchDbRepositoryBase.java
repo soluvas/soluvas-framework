@@ -38,6 +38,7 @@ import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.commons.util.Profiled;
 import org.soluvas.data.DataException;
+import org.soluvas.data.GenericLookup;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
@@ -46,7 +47,7 @@ import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.push.RepositoryException;
 import org.soluvas.data.repository.PagingAndSortingRepository;
-import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
+import org.soluvas.data.repository.StatusAwareRepositoryBase;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -74,7 +75,7 @@ import com.google.common.collect.Sets;
  * the application should handle occasional errors due to schema mismatch. 
  * @author ceefour
  */
-public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSortingRepositoryBase<T, String>
+public class CouchDbRepositoryBase<T extends Identifiable> extends StatusAwareRepositoryBase<T, String>
 	implements CouchDbRepository<T> {
 	
 	public static final String VIEW_UID = "uid";
@@ -221,8 +222,9 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	 * emit([statusMask, doc.targetProperty], null);
 	 * </pre>
 	 * 
-	 * <p>The view is only useful for existence checks, since for {@link MultiLookup#lookupAll(StatusMask, org.soluvas.data.LookupKey, Collection)}
-	 * and {@link SingleLookup#lookupOne(StatusMask, org.soluvas.data.LookupKey, java.io.Serializable)} you still need to
+	 * <p>The view is only useful for {@link #findAll(StatusMask, Pageable)}, since for
+	 * {@link GenericLookup#lookupAll(StatusMask, org.soluvas.data.LookupKey, Collection)}
+	 * and {@link GenericLookup#lookupOne(StatusMask, org.soluvas.data.LookupKey, java.io.Serializable)} you still need to
 	 * get all ({@link StatusMask#RAW}) documents anyway.
 	 * 
 	 * <p>Sample usage:
@@ -330,7 +332,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	@PreDestroy
 	public final void destroy() {
 	}
-
+	
 	/**
 	 * Note: include_docs will cause a single document lookup per returned view result row. 
 	 * This adds significant strain on the storage system if you are under high load or return a lot of rows per request. 
@@ -339,7 +341,8 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 	 * @see org.soluvas.data.repository.PagingAndSortingRepositoryBase#findAll(org.soluvas.data.domain.Pageable)
 	 */
 	@Override
-	public final Page<T> findAll(Pageable pageable) {
+	public final Page<T> findAll(StatusMask statusMask, Pageable pageable) {
+		// TODO: support statusMask
 		final Sort sort = Optional.fromNullable(pageable.getSort()).or(new Sort("modificationTime"));
 		ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
 			.viewName("by_" + sort.iterator().next().getProperty())
@@ -404,7 +407,7 @@ public class CouchDbRepositoryBase<T extends Identifiable> extends PagingAndSort
 			return input != null ? input.getGuid() : null;
 		}
 	}
-
+	
 	@Override
 	public <S extends T> Collection<S> add(Collection<S> entities) {
 		beforeSave(entities);

@@ -19,6 +19,8 @@ import org.soluvas.commons.PersonCatalog;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
+import org.soluvas.data.TrashResult;
+import org.soluvas.data.UntrashResult;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
@@ -253,7 +255,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public <K extends Serializable> Map<K, Try<K>> checkExists(
+	public <K extends Serializable> Map<K, Try<K>> checkExistsAll(
 			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
@@ -261,6 +263,48 @@ public class EmfPersonRepository extends
 	@Override
 	public <K extends Serializable> K checkExists(StatusMask statusMask,
 			LookupKey lookupKey, K key) throws EntityLookupException {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public TrashResult trash(Person entity) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public TrashResult trashById(String id) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public Map<String, Try<TrashResult>> trashAll(Collection<Person> entities) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public Map<String, Try<TrashResult>> trashAllByIds(Collection<String> ids) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public UntrashResult untrash(Person entity) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public UntrashResult untrashById(String id) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public Map<String, Try<UntrashResult>> untrashAll(
+			Collection<Person> entities) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public Map<String, Try<UntrashResult>> untrashAllByIds(
+			Collection<String> ids) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 

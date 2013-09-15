@@ -10,6 +10,7 @@ import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.PagingAndSortingRepository;
+import org.soluvas.data.repository.Trashable;
 
 /**
  * {@link Person} repository that supports paging and sorting.
@@ -17,7 +18,8 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
  */
 public interface PersonRepository extends
 		PagingAndSortingRepository<Person, String>, SlugLookup<Person>,
-		GenericLookup<Person> {
+		GenericLookup<Person>,
+		Trashable<Person, String> {
 
 	/**
 	 * Find a {@link Person} by Facebook ID or Username (at least one must be specified).

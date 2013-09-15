@@ -76,7 +76,10 @@ public class EntityLookupException extends Exception {
 	}
 
 	/**
+	 * The provided key that was searched.
 	 * If {@code null} means the caller actually looks up empty key (which should always fail with {@link Optional#absent()}).
+	 * In case of {@link LookupKey#SLUG}, due to use of {@code canonicalSlug}, the searched key may be
+	 * different than the actual key. However the actual key is not informed in this exception.
 	 * @return the key
 	 */
 	@Nullable

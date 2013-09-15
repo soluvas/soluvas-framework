@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.NotNullPredicate;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
@@ -27,7 +28,8 @@ import com.google.common.collect.Maps;
 
 /**
  * {@link CrudRepository} base implementation that needs only the core
- * methods to override.
+ * methods to override. For new implementations please use {@link StatusAwareRepositoryBase} instead,
+ * even if you don't store status in your entity, API consumers still expect {@link StatusMask} support.
  * @author ceefour
  */
 public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable> implements PagingAndSortingRepository<T, ID> {

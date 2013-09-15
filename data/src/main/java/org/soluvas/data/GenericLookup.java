@@ -57,7 +57,7 @@ public interface GenericLookup<T> {
 	 * @throws IllegalArgumentException if {@code keys} is {@code null}
 	 * @throws UnsupportedOperationException if {@code lookupKey} or {@code statusMask} is not supported due to implementation limitation
 	 */
-	public <K extends Serializable> Map<K, Try<K>> checkExists(StatusMask statusMask, LookupKey lookupKey, Collection<K> keys);
+	public <K extends Serializable> Map<K, Try<K>> checkExistsAll(StatusMask statusMask, LookupKey lookupKey, Collection<K> keys);
 
 	/**
 	 * Retrieves an entity by its {@link LookupKey} key.

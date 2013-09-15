@@ -14,10 +14,12 @@ import org.soluvas.data.repository.Repository;
  * @todo Note: Planned to be deprecated in favor of unified {@link Repository} semantic interfaces.
  * (i.e. delete() by default means trash, and we have deletePermanently(), archive(), move(), etc.)
  * @author agus
+ * @deprecated Use {@link StatusMask}.
  */
 @Qualifier
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
+@Deprecated
 public @interface NormalRepository {
 
 }
