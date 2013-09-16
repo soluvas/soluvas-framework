@@ -1,5 +1,6 @@
 package org.soluvas.mongo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,7 +11,6 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
-import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
@@ -27,7 +27,6 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
-import org.soluvas.data.push.RepositoryException;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
@@ -265,9 +264,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			log.info("Added {} {} documents: {}", entities.size(), collName,
 					ids);
 			return ImmutableList.copyOf(entities);
-		} catch (Exception e) {
-			throw new RepositoryException(e, "Error adding %s %s documents (%s): %s", entities.size(), collName, ids, 
-					StringUtils.abbreviateMiddle(dbObjsStr, "…", 1000));
+		} catch (IOException e) {
+			throw new MongoRepositoryException(e, "Cannot add %s %s documents: %s", entities.size(), collName, ids);
 		}
 	}
 	

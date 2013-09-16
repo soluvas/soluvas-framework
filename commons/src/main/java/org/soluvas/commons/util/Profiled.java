@@ -1,6 +1,7 @@
 package org.soluvas.commons.util;
 
 import java.io.Closeable;
+import java.io.IOException;
 
 import org.slf4j.Logger;
 
@@ -22,7 +23,7 @@ public class Profiled implements Closeable {
 	}
 	
 	@Override
-	public void close() {
+	public void close() throws IOException {
 		final long elapsed = System.currentTimeMillis() - startTime;
 		log.debug("{}ms « {}", elapsed, title);
 	}
