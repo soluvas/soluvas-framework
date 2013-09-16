@@ -1,5 +1,6 @@
 package org.soluvas.mongo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -254,6 +255,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			log.info("Added {} {} documents: {}", entities.size(), collName,
 					ids);
 			return ImmutableList.copyOf(entities);
+		} catch (IOException e) {
+			throw new MongoRepositoryException(e, "Cannot add %s %s documents: %s", entities.size(), collName, ids);
 		}
 	}
 	
