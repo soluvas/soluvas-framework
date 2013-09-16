@@ -3,16 +3,38 @@
 package org.soluvas.image.impl;
 
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.soluvas.image.*;
+import org.soluvas.image.BlitlineTransformer;
+import org.soluvas.image.DavConnector;
+import org.soluvas.image.DisplayImage;
+import org.soluvas.image.DuplicateIdHandling;
+import org.soluvas.image.FileExport;
+import org.soluvas.image.FolderConnector;
+import org.soluvas.image.Image;
+import org.soluvas.image.ImageCatalog;
+import org.soluvas.image.ImageFactory;
+import org.soluvas.image.ImageMagickTransformer;
+import org.soluvas.image.ImageManager;
+import org.soluvas.image.ImagePackage;
+import org.soluvas.image.ImageStyle;
+import org.soluvas.image.ImageStyles;
+import org.soluvas.image.ImageTransformType;
+import org.soluvas.image.ImageType;
+import org.soluvas.image.ImageTypes;
+import org.soluvas.image.ImageVariant;
+import org.soluvas.image.ResizeToFill;
+import org.soluvas.image.ResizeToFit;
+import org.soluvas.image.S3Connector;
+import org.soluvas.image.StyledImage;
+import org.soluvas.image.ThumbnailatorTransformer;
+import org.soluvas.image.TransformGravity;
+import org.soluvas.image.UploadedImage;
 import org.soluvas.ldap.SocialPerson;
 
 /**
@@ -147,6 +169,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public S3Connector createS3Connector() {
 		S3ConnectorImpl s3Connector = new S3ConnectorImpl();
 		return s3Connector;
@@ -157,6 +180,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BlitlineTransformer createBlitlineTransformer() {
 		BlitlineTransformerImpl blitlineTransformer = new BlitlineTransformerImpl();
 		return blitlineTransformer;
@@ -167,6 +191,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DavConnector createDavConnector() {
 		DavConnectorImpl davConnector = new DavConnectorImpl();
 		return davConnector;
@@ -177,6 +202,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ThumbnailatorTransformer createThumbnailatorTransformer() {
 		ThumbnailatorTransformerImpl thumbnailatorTransformer = new ThumbnailatorTransformerImpl();
 		return thumbnailatorTransformer;
@@ -187,6 +213,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public UploadedImage createUploadedImage() {
 		UploadedImageImpl uploadedImage = new UploadedImageImpl();
 		return uploadedImage;
@@ -197,6 +224,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImageManager createImageManager() {
 		ImageManagerImpl imageManager = new ImageManagerImpl();
 		return imageManager;
@@ -207,6 +235,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResizeToFit createResizeToFit() {
 		ResizeToFitImpl resizeToFit = new ResizeToFitImpl();
 		return resizeToFit;
@@ -217,6 +246,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResizeToFill createResizeToFill() {
 		ResizeToFillImpl resizeToFill = new ResizeToFillImpl();
 		return resizeToFill;
@@ -227,6 +257,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImageVariant createImageVariant() {
 		ImageVariantImpl imageVariant = new ImageVariantImpl();
 		return imageVariant;
@@ -237,6 +268,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Image createImage() {
 		ImageImpl image = new ImageImpl();
 		return image;
@@ -247,6 +279,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StyledImage createStyledImage() {
 		StyledImageImpl styledImage = new StyledImageImpl();
 		return styledImage;
@@ -257,6 +290,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImageCatalog createImageCatalog() {
 		ImageCatalogImpl imageCatalog = new ImageCatalogImpl();
 		return imageCatalog;
@@ -267,6 +301,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImageMagickTransformer createImageMagickTransformer() {
 		ImageMagickTransformerImpl imageMagickTransformer = new ImageMagickTransformerImpl();
 		return imageMagickTransformer;
@@ -277,6 +312,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FolderConnector createFolderConnector() {
 		FolderConnectorImpl folderConnector = new FolderConnectorImpl();
 		return folderConnector;
@@ -287,6 +323,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DisplayImage createDisplayImage() {
 		DisplayImageImpl displayImage = new DisplayImageImpl();
 		return displayImage;
@@ -481,6 +518,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImagePackage getImagePackage() {
 		return (ImagePackage)getEPackage();
 	}
