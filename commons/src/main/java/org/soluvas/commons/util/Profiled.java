@@ -1,12 +1,14 @@
 package org.soluvas.commons.util;
 
+import java.io.Closeable;
+
 import org.slf4j.Logger;
 
 /**
  * Logs DEBUG the execution time between the creation and the {@link #close()} method was called.
  * @author haidar
  */
-public class Profiled implements AutoCloseable {
+public class Profiled implements Closeable {
 
 	private final long startTime;
 	private final Logger log;
@@ -20,7 +22,7 @@ public class Profiled implements AutoCloseable {
 	}
 	
 	@Override
-	public void close() throws Exception {
+	public void close() {
 		final long elapsed = System.currentTimeMillis() - startTime;
 		log.debug("{}ms « {}", elapsed, title);
 	}

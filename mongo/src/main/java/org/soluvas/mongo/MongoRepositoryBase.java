@@ -44,6 +44,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClientURI;
+import com.mongodb.MongoException;
 import com.mongodb.WriteResult;
 
 /**
@@ -233,6 +234,11 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		return entity.getId();
 	}
 
+	/**
+	 * @see org.soluvas.data.repository.PagingAndSortingRepositoryBase#add(java.util.Collection)
+	 * @throws MongoException
+	 * @throws MongoException.DuplicateKey
+	 */
 	@Override
 	public <S extends T> Collection<S> add(Collection<S> entities) {
 		beforeSave(entities);
