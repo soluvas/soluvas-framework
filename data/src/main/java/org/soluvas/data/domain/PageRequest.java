@@ -160,4 +160,10 @@ public class PageRequest implements Pageable, Serializable {
 
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return "PageRequest [page=" + page + ", size=" + size + ", "
+				+ (sort != null ? "sort=" + sort : "") + "]";
+	}
 }

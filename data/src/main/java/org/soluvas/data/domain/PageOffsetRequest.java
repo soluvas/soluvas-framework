@@ -154,4 +154,11 @@ public class PageOffsetRequest implements Pageable, Serializable {
 
 		return result;
 	}
+	
+	@Override
+	public String toString() {
+		return "PageOffsetRequest [pageOffset=" + pageOffset + ", size=" + size
+				+ ", " + (sort != null ? "sort=" + sort : "") + "]";
+	}
+
 }
