@@ -15,7 +15,8 @@
  */
 package org.soluvas.data.domain;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 
 /**
  * Abstract interface for pagination information.
@@ -55,5 +56,14 @@ public interface Pageable {
 	 * 
 	 * @return
 	 */
-	@Nonnull Sort getSort();
+	@Nullable
+	Sort getSort();
+	
+	/**
+	 * Creates a new {@link Pageable} with the same type, appending a {@link Sort} criteria.
+	 * @param tailSort
+	 * @return
+	 */
+	Pageable andSort(Sort tailSort);
+	
 }

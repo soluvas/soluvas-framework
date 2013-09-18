@@ -118,6 +118,12 @@ public class PageOffsetRequest implements Pageable, Serializable {
 	public Sort getSort() {
 		return sort;
 	}
+	
+	@Override
+	public Pageable andSort(Sort tailSort) {
+		final Sort newSort = sort != null ? sort.and(tailSort) : tailSort;
+		return new PageOffsetRequest(pageOffset, size, newSort);
+	}
 
 	/*
 	 * (non-Javadoc)

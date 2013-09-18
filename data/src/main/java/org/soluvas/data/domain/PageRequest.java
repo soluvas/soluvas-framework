@@ -118,8 +118,13 @@ public class PageRequest implements Pageable, Serializable {
 	 */
 	@Override
 	public Sort getSort() {
-
 		return sort;
+	}
+
+	@Override
+	public Pageable andSort(Sort tailSort) {
+		final Sort newSort = sort != null ? sort.and(tailSort) : tailSort;
+		return new PageRequest(page, size, newSort);
 	}
 
 	/*
