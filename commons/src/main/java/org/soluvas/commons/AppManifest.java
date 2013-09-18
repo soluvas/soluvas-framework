@@ -21,6 +21,7 @@ import org.joda.time.DateTimeZone;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.commons.AppManifest#getTitle <em>Title</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getSummary <em>Summary</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDomain <em>Domain</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getGeneralEmail <em>General Email</em>}</li>
@@ -68,6 +69,31 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 	void setTitle(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Summary</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Short description to be used in page title, usually 3-10 words.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Summary</em>' attribute.
+	 * @see #setSummary(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_Summary()
+	 * @model
+	 * @generated
+	 */
+	String getSummary();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getSummary <em>Summary</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Summary</em>' attribute.
+	 * @see #getSummary()
+	 * @generated
+	 */
+	void setSummary(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -75,6 +101,9 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Longer description to be used in meta description, recommended to be less than 160 characters.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Description</em>' attribute.
 	 * @see #setDescription(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_Description()

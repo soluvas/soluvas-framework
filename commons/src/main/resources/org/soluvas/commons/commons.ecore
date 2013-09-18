@@ -44,7 +44,16 @@
       <details key="documentation" value="AppManifest is actually a misnomer, it should've been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.&#xA;&#xA;Attributes are optional because can use OverlayingSupplier."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="summary" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Short description to be used in page title, usually 3-10 words."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Longer description to be used in meta description, recommended to be less than 160 characters."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="domain" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Primary domain name of the application, e.g. &quot;berbatik.com&quot;. Used by Email system.&#xA;&#xA;&lt;p>For development, use e.g. &quot;berbatik.annafi.dev&quot;.&#xA;&#xA;&lt;p>TODO: title &amp; domain should probably be moved somewhere else, since it's tenant &amp; environment specific.&#xA;&#xA;&lt;p>Production: title=Berbatik, domain=berbatik.com&#xA;&#xA;&lt;p>Staging: title=Berbatik stg, domain=stg.berbatik.com&#xA;&#xA;&lt;p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev&#xA;&#xA;&lt;p>Description usually stays the same, but can be different too."/>

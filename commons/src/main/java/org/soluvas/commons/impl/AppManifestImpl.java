@@ -30,6 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getBundle <em>Bundle</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getTitle <em>Title</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getSummary <em>Summary</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDomain <em>Domain</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getGeneralEmail <em>General Email</em>}</li>
@@ -172,6 +173,26 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @ordered
 	 */
 	protected String title = TITLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSummary() <em>Summary</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSummary()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SUMMARY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSummary() <em>Summary</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSummary()
+	 * @generated
+	 * @ordered
+	 */
+	protected String summary = SUMMARY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -559,6 +580,27 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getSummary() {
+		return summary;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSummary(String newSummary) {
+		String oldSummary = summary;
+		summary = newSummary;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__SUMMARY, oldSummary, summary));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getDescription() {
 		return description;
@@ -820,6 +862,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getBundle();
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				return getTitle();
+			case CommonsPackage.APP_MANIFEST__SUMMARY:
+				return getSummary();
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				return getDescription();
 			case CommonsPackage.APP_MANIFEST__DOMAIN:
@@ -873,6 +917,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return;
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				setTitle((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__SUMMARY:
+				setSummary((String)newValue);
 				return;
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				setDescription((String)newValue);
@@ -934,6 +981,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				setTitle(TITLE_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__SUMMARY:
+				setSummary(SUMMARY_EDEFAULT);
+				return;
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
@@ -988,6 +1038,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return BUNDLE_EDEFAULT == null ? bundle != null : !BUNDLE_EDEFAULT.equals(bundle);
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
+			case CommonsPackage.APP_MANIFEST__SUMMARY:
+				return SUMMARY_EDEFAULT == null ? summary != null : !SUMMARY_EDEFAULT.equals(summary);
 			case CommonsPackage.APP_MANIFEST__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CommonsPackage.APP_MANIFEST__DOMAIN:
@@ -1086,6 +1138,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(bundle);
 		result.append(", title: ");
 		result.append(title);
+		result.append(", summary: ");
+		result.append(summary);
 		result.append(", description: ");
 		result.append(description);
 		result.append(", domain: ");
