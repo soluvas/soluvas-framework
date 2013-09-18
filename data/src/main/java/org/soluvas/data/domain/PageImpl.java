@@ -21,6 +21,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Basic {@code Page} implementation.
  * 
@@ -29,6 +32,7 @@ import java.util.List;
  */
 public class PageImpl<T> implements Page<T>, Serializable {
 
+	private static final Logger log = LoggerFactory.getLogger(PageImpl.class);
 	private static final long serialVersionUID = 867755909294344406L;
 
 	private final List<T> content = new ArrayList<T>();
@@ -43,7 +47,6 @@ public class PageImpl<T> implements Page<T>, Serializable {
 	 * @param total the total amount of items available
 	 */
 	public PageImpl(List<T> content, Pageable pageable, long total) {
-
 		if (null == content) {
 			throw new IllegalArgumentException("Content must not be null!");
 		}
@@ -51,6 +54,11 @@ public class PageImpl<T> implements Page<T>, Serializable {
 		this.content.addAll(content);
 		this.total = total;
 		this.pageable = pageable;
+		
+		if (!content.isEmpty() && pageable != null && pageable.isCapped() && total > pageable.getPageSize()) {
+			log.warn("Page is hard capped at {}, returning only a subset of {} {}s ({} pages)",
+					pageable.getPageSize(), total, content.iterator().next().getClass().getSimpleName(), getTotalPages() );
+		}
 	}
 
 	/**
@@ -60,25 +68,24 @@ public class PageImpl<T> implements Page<T>, Serializable {
 	 * @param content
 	 */
 	public PageImpl(List<T> content) {
-
 		this(content, null, (null == content) ? 0 : content.size());
 	}
 
 	/*
-			 * (non-Javadoc)
-			 *
-			 * @see org.springframework.data.domain.Page#getNumber()
-			 */
+	 * (non-Javadoc)
+	 *
+	 * @see org.springframework.data.domain.Page#getNumber()
+	 */
 	@Override
 	public long getNumber() {
 		return pageable == null ? 0 : pageable.getPageNumber();
 	}
 
 	/*
-			 * (non-Javadoc)
-			 *
-			 * @see org.springframework.data.domain.Page#getSize()
-			 */
+	 * (non-Javadoc)
+	 *
+	 * @see org.springframework.data.domain.Page#getSize()
+	 */
 	@Override
 	public long getSize() {
 		return pageable == null ? 0 : pageable.getPageSize();

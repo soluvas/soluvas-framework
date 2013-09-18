@@ -167,4 +167,9 @@ public class PageOffsetRequest implements Pageable, Serializable {
 				+ ", " + (sort != null ? "sort=" + sort : "") + "]";
 	}
 
+	@Override
+	public boolean isCapped() {
+		return false;
+	}
+
 }

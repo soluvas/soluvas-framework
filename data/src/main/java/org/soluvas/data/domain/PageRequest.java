@@ -170,4 +170,9 @@ public class PageRequest implements Pageable, Serializable {
 		return "PageRequest [page=" + page + ", size=" + size + ", "
 				+ (sort != null ? "sort=" + sort : "") + "]";
 	}
+
+	@Override
+	public boolean isCapped() {
+		return false;
+	}
 }

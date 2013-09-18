@@ -40,4 +40,15 @@ public class CappedRequest extends PageRequest {
 		super(0, size, sort);
 	}
 
+	@Override
+	public String toString() {
+		return "CappedRequest [size=" + getPageSize() + ", "
+				+ (getSort() != null ? "sort=" + getSort() : "") + "]";
+	}
+	
+	@Override
+	public boolean isCapped() {
+		return true;
+	}
+
 }

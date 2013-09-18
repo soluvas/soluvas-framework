@@ -66,4 +66,11 @@ public interface Pageable {
 	 */
 	Pageable andSort(Sort tailSort);
 	
+	/**
+	 * If {@code true}, then this {@link Pageable} is hard-capped to {@link #getPageSize()},
+	 * and a warning should be logged when {@link Page#getTotalElements()} exceeds that limit.
+	 * @return
+	 */
+	boolean isCapped();
+	
 }
