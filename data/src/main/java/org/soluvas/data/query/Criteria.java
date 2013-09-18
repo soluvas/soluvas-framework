@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
+import com.mongodb.DBObject;
 
 /**
  * 
@@ -11,10 +12,12 @@ import com.google.common.collect.ImmutableList;
  * Spring Data JPA Specification (who use it?), JPA Criteria (bad), JDO Typesafe (inspired by Querydsl), SDO.
  * I think Querydsl is best. As jOOQ is too SQL-specific. 
  * @author rudi
+ * @deprecated Not worth it. Either use database-specific object like {@link DBObject} or use Querydsl/jOOQ.
  */
-@SuppressWarnings("serial")
+@Deprecated
 public class Criteria implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private List<Criterion<?>> criterions = ImmutableList.of();
 
 	public Criteria() {
