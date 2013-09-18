@@ -83,7 +83,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 */
 	public static CommonsFactory init() {
 		try {
-			CommonsFactory theCommonsFactory = (CommonsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.soluvas.org/schema/commons/1.0"); 
+			CommonsFactory theCommonsFactory = (CommonsFactory)EPackage.Registry.INSTANCE.getEFactory(CommonsPackage.eNS_URI);
 			if (theCommonsFactory != null) {
 				return theCommonsFactory;
 			}

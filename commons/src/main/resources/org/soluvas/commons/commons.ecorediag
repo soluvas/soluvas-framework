@@ -67,6 +67,10 @@
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/title"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_OaRJwSSDEeKyUdMfH4dSfg"/>
         </children>
+        <children xmi:type="notation:Node" xmi:id="_cVonsCAWEeODo9LQg_N_Gg" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/summary"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_cVonsSAWEeODo9LQg_N_Gg"/>
+        </children>
         <children xmi:type="notation:Node" xmi:id="_PLAqMCSDEeKyUdMfH4dSfg" type="2001">
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/description"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_PLBRQCSDEeKyUdMfH4dSfg"/>

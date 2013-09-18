@@ -921,8 +921,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getAppManifest_Description() {
+	public EAttribute getAppManifest_Summary() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -932,7 +931,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAppManifest_Domain() {
+	public EAttribute getAppManifest_Description() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -942,7 +941,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAppManifest_GeneralEmail() {
+	public EAttribute getAppManifest_Domain() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -952,7 +951,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAppManifest_OrganizationName() {
+	public EAttribute getAppManifest_GeneralEmail() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -962,7 +961,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAppManifest_OrganizationAddress() {
+	public EAttribute getAppManifest_OrganizationName() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -972,7 +971,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAppManifest_LetterSalutation() {
+	public EAttribute getAppManifest_OrganizationAddress() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -982,7 +981,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAppManifest_LetterClosing() {
+	public EAttribute getAppManifest_LetterSalutation() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -991,7 +990,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultTimeZoneId() {
+	@Override
+	public EAttribute getAppManifest_LetterClosing() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -1000,7 +1000,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultTimeZone() {
+	public EAttribute getAppManifest_DefaultTimeZoneId() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -1009,7 +1009,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultCurrencyCode() {
+	public EAttribute getAppManifest_DefaultTimeZone() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -1018,7 +1018,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultCurrency() {
+	public EAttribute getAppManifest_DefaultCurrencyCode() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -1027,8 +1027,17 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_EmailLogoUriTemplate() {
+	public EAttribute getAppManifest_DefaultCurrency() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_EmailLogoUriTemplate() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -3332,6 +3341,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		appManifestEClass = createEClass(APP_MANIFEST);
 		createEAttribute(appManifestEClass, APP_MANIFEST__TITLE);
+		createEAttribute(appManifestEClass, APP_MANIFEST__SUMMARY);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DESCRIPTION);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DOMAIN);
 		createEAttribute(appManifestEClass, APP_MANIFEST__GENERAL_EMAIL);
@@ -3853,6 +3863,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(appManifestEClass, AppManifest.class, "AppManifest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAppManifest_Title(), ecorePackage.getEString(), "title", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_Summary(), theEcorePackage.getEString(), "summary", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_Description(), ecorePackage.getEString(), "description", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_Domain(), theEcorePackage.getEString(), "domain", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_GeneralEmail(), theEcorePackage.getEString(), "generalEmail", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4346,6 +4357,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Attributes are optional because can use OverlayingSupplier."
+		   });		
+		addAnnotation
+		  (getAppManifest_Summary(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Short description to be used in page title, usually 3-10 words."
+		   });		
+		addAnnotation
+		  (getAppManifest_Description(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Longer description to be used in meta description, recommended to be less than 160 characters."
 		   });		
 		addAnnotation
 		  (getAppManifest_Domain(), 

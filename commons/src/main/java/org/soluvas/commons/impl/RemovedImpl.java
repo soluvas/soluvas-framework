@@ -37,4 +37,15 @@ public class RemovedImpl<T extends EObject> extends ObjectNotificationImpl<T> im
 		return CommonsPackage.Literals.REMOVED;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * This is specialized for the more specific type known in this context.
+	 * @generated
+	 */
+	@Override
+	public void setObject(T newObject) {
+		super.setObject(newObject);
+	}
+
 } //RemovedImpl
