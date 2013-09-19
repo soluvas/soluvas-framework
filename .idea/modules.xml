@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/category/org.soluvas.category.iml" filepath="$PROJECT_DIR$/category/org.soluvas.category.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commons/org.soluvas.commons.iml" filepath="$PROJECT_DIR$/commons/org.soluvas.commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/data/org.soluvas.data.iml" filepath="$PROJECT_DIR$/data/org.soluvas.data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/email/org.soluvas.email.iml" filepath="$PROJECT_DIR$/email/org.soluvas.email.iml" />
+      <module fileurl="file://$PROJECT_DIR$/folder/org.soluvas.folder.iml" filepath="$PROJECT_DIR$/folder/org.soluvas.folder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/image/org.soluvas.image.iml" filepath="$PROJECT_DIR$/image/org.soluvas.image.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jaxrs/org.soluvas.jaxrs.iml" filepath="$PROJECT_DIR$/jaxrs/org.soluvas.jaxrs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ldap/org.soluvas.ldap.iml" filepath="$PROJECT_DIR$/ldap/org.soluvas.ldap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mongo/org.soluvas.mongo.iml" filepath="$PROJECT_DIR$/mongo/org.soluvas.mongo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/org.soluvas.parent.iml" filepath="$PROJECT_DIR$/org.soluvas.parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/security/org.soluvas.security.iml" filepath="$PROJECT_DIR$/security/org.soluvas.security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/social/org.soluvas.social.iml" filepath="$PROJECT_DIR$/social/org.soluvas.social.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socmed/org.soluvas.socmed.iml" filepath="$PROJECT_DIR$/socmed/org.soluvas.socmed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/taxonomy/org.soluvas.taxonomy.iml" filepath="$PROJECT_DIR$/taxonomy/org.soluvas.taxonomy.iml" />
+    </modules>
+  </component>
+</project>
+
