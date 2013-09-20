@@ -436,12 +436,15 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 				displayImage.setTitle(image.getName());
 			} else {
 				displayImage.setSrc(getNoImageUri());
-				log.warn("Cannot get {} style for {} image {}", 
+				log.warn("grabDisplayImage: Cannot get {} style for '{}' imageId={}", 
 						styleKey, namespace, imageId);
 			}
 		} else {
+			if (imageId != null) {
+				log.warn("grabDisplayImage: Cannot get '{}' image, invalid imageId={}", 
+						namespace, imageId);
+			}
 			displayImage.setSrc(getNoImageUri());
-			log.warn("Cannot get {} image {}", namespace, imageId);
 		}
 
 		final Optional<org.soluvas.image.store.ImageStyle> styleDef = Iterables.tryFind(
@@ -484,12 +487,15 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 				displayImage.setTitle(image.getName());
 			} else {
 				displayImage.setSrc(getPersonPhotoUri(gender));
-				log.warn("Cannot get {} style for {} image {}", 
+				log.warn("grabDisplayPhoto: Cannot get {} style for '{}' image imageId={}", 
 						styleKey, namespace, imageId);
 			}
 		} else {
+			if (imageId != null) {
+				log.warn("grabDisplayPhoto: Cannot get '{}' image, invalid imageId={}",
+						namespace, imageId);
+			}
 			displayImage.setSrc(getPersonPhotoUri(gender));
-			log.warn("Cannot get {} image {}", namespace, imageId);
 		}
 
 		final Optional<org.soluvas.image.store.ImageStyle> styleDef = Iterables.tryFind(
