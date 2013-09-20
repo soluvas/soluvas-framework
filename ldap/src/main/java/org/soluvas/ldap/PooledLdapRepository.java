@@ -39,6 +39,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -52,6 +53,13 @@ import com.google.common.collect.Ordering;
  */
 public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	implements LdapRepository<T> {
+
+	protected static final class EntryDnFunction implements Function<Entry, Dn> {
+		@Override @Nullable
+		public Dn apply(@Nullable Entry input) {
+			return input != null ? input.getDn() : null;
+		}
+	}
 
 	private final class EntryToEntity implements Function<Entry, T> {
 		@Override
@@ -260,11 +268,11 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 				}
 			});
 			if (entry != null) {
-				log.info("LDAP search {} filter {} returned {}", baseDn, filter, entry.getDn() );
+				log.debug("LDAP search {} filter {} returned {}", baseDn, filter, entry.getDn() );
 				final T entity = mapper.fromEntry(entry, entityClass);
 				return entity;
 			} else {
-				log.info("LDAP search {} filter {} returned nothing", baseDn, filter);
+				log.debug("LDAP search {} filter {} returned nothing", baseDn, filter);
 				return null;
 			}
 		} catch (Exception e) {
@@ -311,7 +319,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 					}
 				}
 			});
-			log.info("LDAP search {} filter {} returned {} entries: {}", 
+			log.debug("LDAP search {} filter {} returned {} entries: {}", 
 					baseDn, filter, ids.size(), Iterables.limit(ids, 10));
 			return ids;
 		} catch (Exception e) {
@@ -348,7 +356,9 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 					}
 				}
 			});
-			log.info("LDAP search {} filter {} returned {} entries", baseDn, filter, entries.size() );
+			final List<Dn> limitedEntryDns = FluentIterable.from(entries).transform(new EntryDnFunction()).limit(10).toList();
+			log.debug("LDAP search {} filter {} returned {} entries: {}", 
+					baseDn, filter, entries.size(), limitedEntryDns );
 			final List<T> entities = ImmutableList.copyOf(Lists.transform(entries, new Function<Entry, T>() {
 				@Override
 				public T apply(Entry input) {
@@ -457,8 +467,9 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 				}
 			}; 
 			final List<Entry> sortedEntries = cnOrdering.immutableSortedCopy(entries);
-			log.info("LDAP search {} filter {} returned {} entries: {}", 
-					baseDn, filter, entries.size(), Iterables.limit(entries, 10));
+			final List<Dn> limitedEntryDns = FluentIterable.from(sortedEntries).transform(new EntryDnFunction()).limit(10).toList();
+			log.debug("LDAP search {} filter {} returned {} entries: {}", 
+					baseDn, filter, entries.size(), limitedEntryDns);
 			final List<T> entities = Lists.transform(sortedEntries, new EntryToEntity());
 			return entities;
 		} catch (Exception e) {
@@ -492,7 +503,9 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 					}
 				}
 			});
-			log.info("LDAP search {} filter {} returned {} entries", baseDn, filter, entries.size());
+			final List<Dn> limitedEntryDns = FluentIterable.from(entries).transform(new EntryDnFunction()).limit(10).toList();
+			log.debug("LDAP search {} filter {} returned {} entries: {}", 
+					baseDn, filter, entries.size(), limitedEntryDns);
 			final List<T> entities = Lists.transform(entries, new EntryToEntity());
 			return entities;
 		} catch (Exception e) {
@@ -636,7 +649,9 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 					}
 				}
 			});
-			log.info("LDAP search {} filter {} returned {} entries", baseDn, filter, entries.size());
+			final List<Dn> limitedEntryDns = FluentIterable.from(entries).transform(new EntryDnFunction()).limit(10).toList();
+			log.debug("LDAP search {} filter {} returned {} entries: {}", 
+					baseDn, filter, entries.size(), limitedEntryDns);
 			final List<T> entities = ImmutableList.copyOf(Lists.transform(entries, new Function<Entry, T>() {
 				@Override
 				public T apply(Entry input) {
