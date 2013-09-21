@@ -236,7 +236,7 @@ public class EmailUtils {
 			//find person by customerId
 			if (!Strings.isNullOrEmpty(personInfo.getId()) && personLookup != null) {
 				final SocialPerson socialPerson = personLookup.findOne(personInfo.getId());
-				recipients.addAll(new SocialPersonToRecipients("registered customer").apply(socialPerson));
+				recipients.addAll(new SocialPersonToRecipients("registered customer", false).apply(socialPerson));
 			}
 		}
 		
@@ -271,7 +271,7 @@ public class EmailUtils {
 			//find person by customerId
 			if (!Strings.isNullOrEmpty(personInfo.getId()) && personLookup != null) {
 				final Person person = personLookup.findOne(personInfo.getId());
-				recipients.addAll(new PersonToRecipients(roleName).apply(person));
+				recipients.addAll(new PersonToRecipients(roleName, false).apply(person));
 			}
 		}
 		

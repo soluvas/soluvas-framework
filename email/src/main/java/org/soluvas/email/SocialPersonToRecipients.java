@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import org.soluvas.commons.Person;
 import org.soluvas.ldap.SocialPerson;
 
 import com.google.common.base.Function;
@@ -12,7 +13,8 @@ import com.google.common.collect.Sets;
 
 /**
  * Get the {@link SocialPerson#getPrimaryEmail()}, {@link SocialPerson#getEmails()},
- * and {@link SocialPerson#getVirtualMail()}, and combines them into List of {@link Recipient}s.
+ * (and {@link Person#getVirtualMail()} if enabled)
+ * and combines them into List of {@link Recipient}s.
  * No duplicate emails.
  * @author ceefour
  */
@@ -20,13 +22,16 @@ public class SocialPersonToRecipients implements
 		Function<SocialPerson, Set<Recipient>> {
 	
 	private final String roleName;
+	private final boolean includeVirtualMail;
 	
 	/**
 	 * @param roleName
+	 * @param includeVirtualMail TODO
 	 */
-	public SocialPersonToRecipients(String roleName) {
+	public SocialPersonToRecipients(String roleName, boolean includeVirtualMail) {
 		super();
 		this.roleName = roleName;
+		this.includeVirtualMail = includeVirtualMail;
 	}
 
 	@Override @Nullable
@@ -43,7 +48,7 @@ public class SocialPersonToRecipients implements
 							socialPerson.getName(), email, roleName));
 				}
 			}
-			if (!Strings.isNullOrEmpty(socialPerson.getVirtualMail())) {
+			if (includeVirtualMail && !Strings.isNullOrEmpty(socialPerson.getVirtualMail())) {
 				recipients.add(EmailFactory.eINSTANCE.createRecipient(
 						socialPerson.getName(), socialPerson.getVirtualMail(), roleName));
 			}

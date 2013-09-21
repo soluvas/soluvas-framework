@@ -12,7 +12,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
 
 /**
- * Get the {@link Person#getEmails()} and {@link Person#getVirtualMail()}, 
+ * Get the {@link Person#getEmails()} (and {@link Person#getVirtualMail()} if enabled), 
  * and combines them into List of {@link Recipient}s.
  * No duplicate emails.
  * @author ceefour
@@ -21,13 +21,16 @@ public class PersonToRecipients implements
 		Function<Person, Set<Recipient>> {
 	
 	private final String roleName;
+	private final boolean includeVirtualMail;
 	
 	/**
 	 * @param roleName
+	 * @param includeVirtualMail TODO
 	 */
-	public PersonToRecipients(String roleName) {
+	public PersonToRecipients(String roleName, boolean includeVirtualMail) {
 		super();
 		this.roleName = roleName;
+		this.includeVirtualMail = includeVirtualMail;
 	}
 
 	@Override @Nullable
@@ -40,7 +43,7 @@ public class PersonToRecipients implements
 							person.getName(), email.getEmail(), roleName));
 				}
 			}
-			if (!Strings.isNullOrEmpty(person.getVirtualMail())) {
+			if (includeVirtualMail && !Strings.isNullOrEmpty(person.getVirtualMail())) {
 				recipients.add(EmailFactory.eINSTANCE.createRecipient(
 						person.getName(), person.getVirtualMail(), roleName));
 			}
