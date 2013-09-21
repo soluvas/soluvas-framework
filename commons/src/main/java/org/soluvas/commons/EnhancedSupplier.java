@@ -2,7 +2,6 @@ package org.soluvas.commons;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.slf4j.Logger;
@@ -22,20 +21,17 @@ public class EnhancedSupplier<T> implements Supplier<T> {
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(EnhancedSupplier.class);
-	private Supplier<T> delegate;
-	private List<Enhancer<T>> enhancers;
+	private final Supplier<T> delegate;
+	private final List<Enhancer<T>> enhancers;
 	
 	public EnhancedSupplier(Supplier<T> delegate, @Nullable List<Enhancer<T>> enhancers) {
 		super();
 		this.delegate = delegate;
 		this.enhancers = Optional.fromNullable(enhancers).or(ImmutableList.<Enhancer<T>>of());
-		log.info("EnhancedSupplier<{}> created with inner: {} and {} enhancers: {}", getClass().getGenericSuperclass(),
-				delegate, enhancers.size(), enhancers);
+		log.trace("EnhancedSupplier created with inner: {} and {} enhancers: {}",
+				delegate, this.enhancers.size(), enhancers);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.common.base.Supplier#get()
-	 */
 	@Override
 	public T get() {
 		final T obj = delegate.get();
