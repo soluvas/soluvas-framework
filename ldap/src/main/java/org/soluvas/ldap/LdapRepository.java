@@ -139,8 +139,12 @@ public interface LdapRepository<T> extends EntityLookup<T, String>, Repository<T
 	 */
 	String toDn(String id);
 
+	/**
+	 * @return whether exists. Always {@code false} if {@code id} is {@code null} or empty.
+	 * @see org.soluvas.data.repository.CrudRepository#exists(java.io.Serializable)
+	 */
 	@Override
-	boolean exists(String id);
+	boolean exists(@Nullable String id);
 
 	boolean existsByAttribute(String attribute, String value);
 
