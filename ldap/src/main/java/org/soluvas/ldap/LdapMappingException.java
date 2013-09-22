@@ -4,8 +4,9 @@ package org.soluvas.ldap;
  * Thrown when mapping failed.
  * @author ceefour
  */
-@SuppressWarnings("serial")
 public class LdapMappingException extends RuntimeException {
+
+	private static final long serialVersionUID = 1L;
 
 	public LdapMappingException() {
 		super();

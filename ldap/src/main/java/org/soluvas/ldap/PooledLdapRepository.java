@@ -400,7 +400,11 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 	}
 
 	@Override
-	public boolean exists(String id) {
+	public boolean exists(@Nullable String id) {
+		if (Strings.isNullOrEmpty(id)) {
+			// always false
+			return false;
+		}
 		final String dn = toDn(id);
 		return withConnection(new Function<LdapConnection, Boolean>() {
 			@Override @Nullable
