@@ -324,8 +324,13 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		final List<T> entities = MongoUtils.transform(
 				coll.find(new BasicDBObject("_id", new BasicDBObject("$in", ids))).sort(sortQuery),
 				new DBObjectToEntity());
-		log.debug("find {} {} ({}) returned {} documents", 
-				ids.size(), collName, ids, entities.size());  
+		if (ids.size() > 1 || ids.size() != entities.size()) {
+			log.debug("find {} {} by _id ({}) returned {} documents", 
+					ids.size(), collName, Iterables.limit(ids, 10), entities.size());  
+		} else {
+			log.trace("find {} by _id '{}' returned {} documents", 
+					collName, Iterables.getFirst(ids, null), entities.size());
+		}
 		return entities;
 	}
 
