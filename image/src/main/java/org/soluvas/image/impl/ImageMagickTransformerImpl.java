@@ -59,7 +59,6 @@ import com.google.common.util.concurrent.MoreExecutors;
  *
  * @generated
  */
-@SuppressWarnings("serial")
 public class ImageMagickTransformerImpl extends ImageTransformerImpl implements ImageMagickTransformer {
 	
 	public final class TransformFunc implements AsyncFunction<Entry<ImageTransform, ImageVariant>, UploadedImage> {
@@ -168,9 +167,12 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 							throw new ImageException("Unsupported transform: " + transform);
 						}
 						
-						// common arguments
+						// output arguments
 						cmd.addArgument("-quality");
 						cmd.addArgument(String.valueOf((int)(quality * 100f)));
+						// Progressive JPEG: http://calendar.perfplanet.com/2012/progressive-jpegs-a-new-best-practice/
+						cmd.addArgument("-interlace");
+						cmd.addArgument("line");
 
 						//Watermarking enabled?
 						File resizedFile = styledFile;
@@ -200,6 +202,14 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 								watermarkCmd.addArgument("center");
 								watermarkCmd.addArgument(watermarkFile.getPath(), false); // watermark.png
 								watermarkCmd.addArgument(resizedFile.getPath(), false); // miff
+								
+								// output arguments
+								watermarkCmd.addArgument("-quality");
+								watermarkCmd.addArgument(String.valueOf((int)(quality * 100f)));
+								// Progressive JPEG: http://calendar.perfplanet.com/2012/progressive-jpegs-a-new-best-practice/
+								watermarkCmd.addArgument("-interlace");
+								watermarkCmd.addArgument("line");
+								
 								watermarkCmd.addArgument(styledFile.getPath(), false); // result
 								
 								// Execute the cmd
