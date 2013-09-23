@@ -1,5 +1,7 @@
 package org.soluvas.image.shell; 
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -60,6 +62,7 @@ public class ImageReprocessCommand extends ExtCommandSupport {
 			}
 		});
 		
+		System.err.println(ansi().render("Reprocessing @|bold %s|@ images using @|bold %s|@", namespace, imageRepo));
 		if (all) {
 			imageRepo.reprocessAll(monitor);
 		} else {
