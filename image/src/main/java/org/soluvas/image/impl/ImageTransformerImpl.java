@@ -63,19 +63,21 @@ public abstract class ImageTransformerImpl extends EObjectImpl implements ImageT
 	 * @ordered
 	 */
 	protected ListeningExecutorService executor = EXECUTOR_EDEFAULT;
+	
+	protected boolean sameThreadExecutor = true;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public ImageTransformerImpl() {
+	protected ImageTransformerImpl() {
 		super();
 	}
 	
 	public ImageTransformerImpl(ExecutorService executor) {
 		super();
 		this.executor = MoreExecutors.listeningDecorator(executor);
+		this.sameThreadExecutor = false;
 	}
 
 	/**

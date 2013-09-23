@@ -189,7 +189,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 							// Execute the cmd
 							final DefaultExecutor executor = new DefaultExecutor();
 							// limit ImageMagick to single-threaded if we use custom executor
-							final Map<String, String> environment = getExecutor() == MoreExecutors.sameThreadExecutor() ? ImmutableMap.<String, String>of()
+							final Map<String, String> environment = sameThreadExecutor ? ImmutableMap.<String, String>of()
 									: ImmutableMap.of("MAGICK_THREAD_LIMIT", "1");
 							executeCmd(cmd, executor, environment);
 							
@@ -348,6 +348,14 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 		this.destination = destination;
 	}
 	
+	/**
+	 * Warning: Running multiple instances of ImageMagick is more memory & IO intensive,
+	 * it's better to use {@link #ImageMagickTransformerImpl(ImageConnector)}
+	 * which uses {@link MoreExecutors#sameThreadExecutor()} (single-threaded)
+	 * but does not limit ImageMagick's parallel processing.
+	 * @param executor
+	 * @param destination
+	 */
 	public ImageMagickTransformerImpl(ExecutorService executor, ImageConnector destination) {
 		super(executor);
 		this.destination = destination;
