@@ -343,15 +343,20 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * Uses default {@link MoreExecutors#sameThreadExecutor()}
+	 * which is better for ImageMagick's built-in parallel processing.
+	 * @param destination
+	 */
 	public ImageMagickTransformerImpl(ImageConnector destination) {
 		super();
 		this.destination = destination;
 	}
 	
 	/**
-	 * Warning: Running multiple instances of ImageMagick is more memory & IO intensive,
+	 * <b>Warning</b>: Running multiple instances of ImageMagick is more memory & IO intensive,
 	 * it's better to use {@link #ImageMagickTransformerImpl(ImageConnector)}
-	 * which uses {@link MoreExecutors#sameThreadExecutor()} (single-threaded)
+	 * which uses the default {@link MoreExecutors#sameThreadExecutor()} (single-threaded)
 	 * but does not limit ImageMagick's parallel processing.
 	 * @param executor
 	 * @param destination
