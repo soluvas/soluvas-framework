@@ -38,6 +38,7 @@ import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
+import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 import org.soluvas.data.util.BatchFinder;
 import org.soluvas.data.util.BatchProcessor;
@@ -985,7 +986,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		final long totalPages = (imageCount + 99) / 100;
 		int i = 0;
 		for (int page = 0; page < totalPages; page++) {
-			final Page<Image> images = findAll(new PageRequest(page, 100L));
+			// ensure ordering is consistent
+			final Page<Image> images = findAll(new PageRequest(page, 100L, Direction.ASC, "_id"));
 			doReprocess(images.getContent(), monitor);
 		}
 		submon.done();
