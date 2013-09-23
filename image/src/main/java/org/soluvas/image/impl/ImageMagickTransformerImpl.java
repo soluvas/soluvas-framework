@@ -293,7 +293,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 
 						final String styledOriginUri = styledUpload.getOriginUri();
 						final String styledCdnUri = styledUpload.getUri();
-						log.info("Uploaded {} {} as {}/{} from {} ({} bytes)", dest.getStyleCode(), imageId, styledOriginUri, styledCdnUri,
+						log.debug("Uploaded {} {} as {}/{} from {} ({} bytes)", dest.getStyleCode(), imageId, styledOriginUri, styledCdnUri,
 								styledFile, styledFile.length());
 	//											final StyledImage styled = new StyledImage(
 	//													style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
