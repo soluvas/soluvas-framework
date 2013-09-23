@@ -588,7 +588,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 				}
 			});
 		} else {
-			log.info("Not uploading original {} using {} because requested by caller (probably for reprocess)",
+			log.debug("Not uploading original {} using {} because requested by caller (probably for reprocess)",
 					imageId, connector.getClass().getName());
 			original = Futures.immediateFuture(new OriginalUpload(
 					originalFile, imageId,
@@ -919,7 +919,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 				log.info("Downloading {} from {} to {}", image.getId(), image.getUri(), tempFile);
 				final boolean downloaded = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE,
 						extension, tempFile);
-				log.debug("donwnload status for image {} is {}", image.getId(), downloaded);
+				log.debug("Download status for image {} is {}", image.getId(), downloaded);
 				if (downloaded) {
 					final ListenableFuture<Image> imageIdFuture = doCreate(image.getId(), tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
 							image.getFileName(), false);
