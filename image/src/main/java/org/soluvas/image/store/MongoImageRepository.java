@@ -38,6 +38,7 @@ import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
+import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 import org.soluvas.data.util.BatchFinder;
 import org.soluvas.data.util.BatchProcessor;
@@ -587,7 +588,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 				}
 			});
 		} else {
-			log.info("Not uploading original {} using {} because requested by caller (probably for reprocess)",
+			log.debug("Not uploading original {} using {} because requested by caller (probably for reprocess)",
 					imageId, connector.getClass().getName());
 			original = Futures.immediateFuture(new OriginalUpload(
 					originalFile, imageId,
@@ -918,7 +919,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 				log.info("Downloading {} from {} to {}", image.getId(), image.getUri(), tempFile);
 				final boolean downloaded = connector.download(namespace, image.getId(), ORIGINAL_CODE, ORIGINAL_CODE,
 						extension, tempFile);
-				log.debug("donwnload status for image {} is {}", image.getId(), downloaded);
+				log.debug("Download status for image {} is {}", image.getId(), downloaded);
 				if (downloaded) {
 					final ListenableFuture<Image> imageIdFuture = doCreate(image.getId(), tempFile, image.getContentType(), tempFile.length(), image.getFileName(),
 							image.getFileName(), false);
@@ -985,7 +986,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		final long totalPages = (imageCount + 99) / 100;
 		int i = 0;
 		for (int page = 0; page < totalPages; page++) {
-			final Page<Image> images = findAll(new PageRequest(page, 100L));
+			// ensure ordering is consistent
+			final Page<Image> images = findAll(new PageRequest(page, 100L, Direction.ASC, "_id"));
 			doReprocess(images.getContent(), monitor);
 		}
 		submon.done();

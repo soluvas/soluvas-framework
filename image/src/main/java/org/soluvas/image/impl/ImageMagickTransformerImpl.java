@@ -59,7 +59,6 @@ import com.google.common.util.concurrent.MoreExecutors;
  *
  * @generated
  */
-@SuppressWarnings("serial")
 public class ImageMagickTransformerImpl extends ImageTransformerImpl implements ImageMagickTransformer {
 	
 	public final class TransformFunc implements AsyncFunction<Entry<ImageTransform, ImageVariant>, UploadedImage> {
@@ -168,9 +167,12 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 							throw new ImageException("Unsupported transform: " + transform);
 						}
 						
-						// common arguments
+						// output arguments
 						cmd.addArgument("-quality");
 						cmd.addArgument(String.valueOf((int)(quality * 100f)));
+						// Progressive JPEG: http://calendar.perfplanet.com/2012/progressive-jpegs-a-new-best-practice/
+						cmd.addArgument("-interlace");
+						cmd.addArgument("line");
 
 						//Watermarking enabled?
 						File resizedFile = styledFile;
@@ -187,7 +189,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 							// Execute the cmd
 							final DefaultExecutor executor = new DefaultExecutor();
 							// limit ImageMagick to single-threaded if we use custom executor
-							final Map<String, String> environment = getExecutor() == MoreExecutors.sameThreadExecutor() ? ImmutableMap.<String, String>of()
+							final Map<String, String> environment = sameThreadExecutor ? ImmutableMap.<String, String>of()
 									: ImmutableMap.of("MAGICK_THREAD_LIMIT", "1");
 							executeCmd(cmd, executor, environment);
 							
@@ -200,6 +202,14 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 								watermarkCmd.addArgument("center");
 								watermarkCmd.addArgument(watermarkFile.getPath(), false); // watermark.png
 								watermarkCmd.addArgument(resizedFile.getPath(), false); // miff
+								
+								// output arguments
+								watermarkCmd.addArgument("-quality");
+								watermarkCmd.addArgument(String.valueOf((int)(quality * 100f)));
+								// Progressive JPEG: http://calendar.perfplanet.com/2012/progressive-jpegs-a-new-best-practice/
+								watermarkCmd.addArgument("-interlace");
+								watermarkCmd.addArgument("line");
+								
 								watermarkCmd.addArgument(styledFile.getPath(), false); // result
 								
 								// Execute the cmd
@@ -283,7 +293,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 
 						final String styledOriginUri = styledUpload.getOriginUri();
 						final String styledCdnUri = styledUpload.getUri();
-						log.info("Uploaded {} {} as {}/{} from {} ({} bytes)", dest.getStyleCode(), imageId, styledOriginUri, styledCdnUri,
+						log.debug("Uploaded {} {} as {}/{} from {} ({} bytes)", dest.getStyleCode(), imageId, styledOriginUri, styledCdnUri,
 								styledFile, styledFile.length());
 	//											final StyledImage styled = new StyledImage(
 	//													style.getName(), style.getCode(), URI.create(styledPublicUri), styledContentType,
@@ -333,11 +343,24 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * Uses default {@link MoreExecutors#sameThreadExecutor()}
+	 * which is better for ImageMagick's built-in parallel processing.
+	 * @param destination
+	 */
 	public ImageMagickTransformerImpl(ImageConnector destination) {
 		super();
 		this.destination = destination;
 	}
 	
+	/**
+	 * <b>Warning</b>: Running multiple instances of ImageMagick is more memory & IO intensive,
+	 * it's better to use {@link #ImageMagickTransformerImpl(ImageConnector)}
+	 * which uses the default {@link MoreExecutors#sameThreadExecutor()} (single-threaded)
+	 * but does not limit ImageMagick's parallel processing.
+	 * @param executor
+	 * @param destination
+	 */
 	public ImageMagickTransformerImpl(ExecutorService executor, ImageConnector destination) {
 		super(executor);
 		this.destination = destination;

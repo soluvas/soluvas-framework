@@ -63,19 +63,34 @@ public abstract class ImageTransformerImpl extends EObjectImpl implements ImageT
 	 * @ordered
 	 */
 	protected ListeningExecutorService executor = EXECUTOR_EDEFAULT;
+	
+	/**
+	 * <b>Warning:</b> Running multiple instances of ImageMagick is more memory & IO intensive,
+	 * it's better to use {@link #ImageMagickTransformerImpl(ImageConnector)}
+	 * which uses the default {@link MoreExecutors#sameThreadExecutor()} (single-threaded)
+	 * but does not limit ImageMagick's parallel processing.
+	 */
+	protected boolean sameThreadExecutor = true;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public ImageTransformerImpl() {
+	protected ImageTransformerImpl() {
 		super();
 	}
 	
+	/**
+	 * <b>Warning:</b> Running multiple instances of ImageMagick is more memory & IO intensive,
+	 * it's better to use {@link #ImageMagickTransformerImpl(ImageConnector)}
+	 * which uses the default {@link MoreExecutors#sameThreadExecutor()} (single-threaded)
+	 * but does not limit ImageMagick's parallel processing.
+	 * @param executor
+	 */
 	public ImageTransformerImpl(ExecutorService executor) {
 		super();
 		this.executor = MoreExecutors.listeningDecorator(executor);
+		this.sameThreadExecutor = false;
 	}
 
 	/**
