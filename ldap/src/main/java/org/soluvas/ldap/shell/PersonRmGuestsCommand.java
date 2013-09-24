@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
- * Fix invalid primaryShippingAddress and primaryBillingAddress on {@link SocialPerson} entries.
+ * Delete all guest {@link SocialPerson} users.
  *
  * @author ceefour
  */
