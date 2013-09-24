@@ -375,7 +375,7 @@ public class LdapMapper<T> {
 				try {
 					// Set value from the RDN
 					String rdnValue = entry.getDn().getRdn().getValue().getString();
-					log.debug("Map DN {} to {} RDN property {}={}", 
+					log.trace("Map DN {} to {} RDN property {}={}", 
 							entry.getDn(), clazz.getName(), fieldName, rdnValue );
 					BeanUtils.setProperty(bean, fieldName, rdnValue);
 				} catch (Exception e) {
