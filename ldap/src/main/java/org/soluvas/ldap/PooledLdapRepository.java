@@ -667,5 +667,45 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 			throw new LdapRepositoryException(e, "Error searching LDAP in %s filter %s", baseDn, filter);
 		}
 	}
+
+	@Override
+	public List<String> findIdsByFilter(String filter) {
+		final LdapMapping mapping = mapper.getMapping(entityClass);
+//		final String primaryObjectClass = mapping.getPrimaryObjectClass();
+//		final String realFilter = String.format("(&(objectClass=%s)%s)",
+//				primaryObjectClass, filter);
+		final String realFilter = String.format("(&(objectClass=*)%s)",
+				filter);
+		log.debug("Searching LDAP {} filter: {}", baseDn, realFilter); 
+		try {
+			final List<String> ids = withConnection(new Function<LdapConnection, List<String>>() {
+				@Override @Nullable
+				public List<String> apply(@Nullable LdapConnection conn) {
+					try {
+						final EntryCursor cursor = conn.search(baseDn, realFilter, SearchScope.ONELEVEL, mapping.getRdn().getName());
+						try {
+							final List<String> ids = LdapUtils.transform(cursor, new Function<Entry, String>() {
+								@Override @Nullable
+								public String apply(@Nullable Entry input) {
+									return input.getDn().getRdn().getValue().getString();
+								}
+							});
+							return ids;
+						} finally {
+							cursor.close();
+						}
+					} catch (LdapException e) {
+						Throwables.propagate(e);
+						return null;
+					}
+				}
+			});
+			log.debug("LDAP search {} filter {} returned {} entries: {}", 
+					baseDn, filter, ids.size(), Iterables.limit(ids, 10));
+			return ids;
+		} catch (Exception e) {
+			throw new LdapRepositoryException(e, "Error searching LDAP in %s filter %s", baseDn, filter);
+		}
+	}
 	
 }
