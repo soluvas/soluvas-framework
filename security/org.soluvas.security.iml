@@ -84,10 +84,6 @@
     <orderEntry type="library" name="Maven: com.googlecode.concurrentlinkedhashmap:concurrentlinkedhashmap-lru:1.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.picketlink.idm:picketlink-idm-api:1.5.0.Alpha02" level="project" />
     <orderEntry type="library" name="Maven: org.picketlink.idm:picketlink-idm-common:1.5.0.Alpha02" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.jena:jena-arq:2.10.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.jena:jena-core:2.10.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.jena:jena-iri:0.9.6" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.directory.api:api-ldap-client-api:1.0.0-M17" level="project" />
     <orderEntry type="library" name="Maven: org.apache.directory.api:api-ldap-schema-data:1.0.0-M17" level="project" />
     <orderEntry type="library" name="Maven: org.apache.directory.api:api-i18n:1.0.0-M17" level="project" />
