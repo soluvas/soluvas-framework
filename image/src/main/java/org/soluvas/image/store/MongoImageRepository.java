@@ -1083,7 +1083,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	@Override
 	public void fixExtensionAll() {
 		final ProgressMonitor monitor = ThreadLocalProgress.get();
-		RepositoryUtils.runBatch("Fixing image extensions",
+		RepositoryUtils.runBatch("Fixing image extensions", new Sort("_id"),
 				new BatchFinder<Image>() {
 					@Override
 					public Page<Image> find(Pageable pageable) throws Exception {

@@ -1,5 +1,7 @@
 package org.soluvas.data.util;
 
+import javax.annotation.Nullable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.ProgressMonitor;
@@ -9,6 +11,7 @@ import org.soluvas.data.DataException;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.Repository;
 
@@ -20,9 +23,11 @@ public class RepositoryUtils {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(RepositoryUtils.class);
+
+	public static final long ITEMS_PER_PAGE = 100;
 	
 	/**
-	 * Perform a {@link PagingAndSortingRepository}-related batch processing job using {@link Pageable},
+	 * Perform a {@link PagingAndSortingRepository}-related batch processing job ({@value #ITEMS_PER_PAGE} at a time) using {@link Pageable},
 	 * with {@link ProgressMonitor} support.
 	 * 
 	 * <p><b>WARNING</b>: Do <b>NOT</b> modify the entity returned by {@code finder} inside the {@code processor}
@@ -34,12 +39,11 @@ public class RepositoryUtils {
 	 * @param finder Used to fetch a {@link Pageable} of data, usually an anonymous class.
 	 * @param processor Process each data {@link Page}, usually an anonymous class.
 	 */
-	public static <T> void runBatch(String jobTitle, BatchFinder<T> finder, BatchProcessor<T> processor) {
-		final long itemsPerPage = 100;
+	public static <T> void runBatch(String jobTitle, @Nullable Sort sort, BatchFinder<T> finder, BatchProcessor<T> processor) {
 		final ProgressMonitor monitor = ThreadLocalProgress.get();
 		log.info("Starting batch job: {}", jobTitle);
 		// get first page
-		final Pageable firstPageable = new PageRequest(0, itemsPerPage);
+		final Pageable firstPageable = sort != null ? new PageRequest(0, ITEMS_PER_PAGE, sort) : new PageRequest(0, ITEMS_PER_PAGE);
 		Page<T> page;
 		try {
 			page = finder.find(firstPageable);
@@ -69,7 +73,7 @@ public class RepositoryUtils {
 //				processor.process(page.getContent(), page.getNumber(), page.getTotalPages(), page.getTotalElements(), monitor);
 			// fetch next page
 			if (page.hasNextPage()) {
-				final Pageable nextPageable = new PageRequest(page.getNumber() + 1, itemsPerPage);
+				final Pageable nextPageable = sort != null ? new PageRequest(page.getNumber() + 1, ITEMS_PER_PAGE, sort) : new PageRequest(page.getNumber() + 1, ITEMS_PER_PAGE);
 				try {
 					page = finder.find(nextPageable);
 					currentPageable = nextPageable;

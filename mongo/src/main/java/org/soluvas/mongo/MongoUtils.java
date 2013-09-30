@@ -129,12 +129,18 @@ public class MongoUtils {
 		return sortObj;
 	}
 	
+	/**
+	 * @param sort
+	 * @param defaultSortField Default sort field, used only if {@code sort} is {@code null}.
+	 * @param defaultSortOrder Default sort order, used only if {@code sort} is {@code null}.
+	 * @return
+	 */
 	public static BasicDBObject getSort(@Nullable Sort sort, String defaultSortField, int defaultSortOrder) {
-		final BasicDBObject sortObj = getSort(sort);
-		if (!sortObj.containsField(defaultSortField)) {
-			sortObj.put(defaultSortField, defaultSortOrder);
+		if (sort != null) {
+			return getSort(sort);
+		} else {
+			return new BasicDBObject(defaultSortField, defaultSortOrder);
 		}
-		return sortObj;
 	}
 	
 	/**
