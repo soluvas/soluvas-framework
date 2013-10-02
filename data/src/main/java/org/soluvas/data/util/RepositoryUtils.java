@@ -89,4 +89,65 @@ public class RepositoryUtils {
 		monitor.done();
 	}
 	
+	/**
+	 * Perform a {@link PagingAndSortingRepository}-related <b>subtractive</b> batch processing job ({@value #ITEMS_PER_PAGE} at a time) using {@link Pageable},
+	 * with {@link ProgressMonitor} support. Subtractive means that the {@code processor} must modify the found entities in a way
+	 * that {@code finder} will not return them again.
+	 * 
+	 * <p><b>WARNING</b>: You <b>must</b> modify the entity returned by {@code finder} inside the {@code processor}
+	 * so the query used by {@code finder} will <b>not</b> return the entity again.
+	 * 
+	 * @param jobTitle Job name, will be used by {@link ProgressMonitor}. It will get the monitor using {@link ThreadLocalProgress#get()}.
+	 * @param finder Used to fetch a {@link Pageable} of data, usually an anonymous class.
+	 * @param processor Process each data {@link Page}, usually an anonymous class.
+	 */
+	public static <T> void runSubtractiveBatch(String jobTitle, @Nullable Sort sort, BatchFinder<T> finder, BatchProcessor<T> processor) {
+		final ProgressMonitor monitor = ThreadLocalProgress.get();
+		log.info("Starting batch job: {}", jobTitle);
+		// get first page
+		final Pageable firstPageable = sort != null ? new PageRequest(0, ITEMS_PER_PAGE, sort) : new PageRequest(0, ITEMS_PER_PAGE);
+		Page<T> page;
+		try {
+			page = finder.find(firstPageable);
+		} catch (Exception e1) {
+			throw new DataException(e1, "Cannot fetch first page of batch job '%s': %s", jobTitle, e1);
+		}
+		
+		monitor.beginTask(String.format("%d entries %d pages %s", page.getTotalElements(), page.getTotalPages(), jobTitle), page.getTotalElements());
+		long iteration = 0;
+		while (page.hasContent()) {
+			monitor.subTask(String.format("%3d/%3d #%5d Σ%3d %s", iteration, page.getTotalPages(), firstPageable.getOffset(), page.getNumberOfElements(), jobTitle));
+			long elementIndex = 0;
+			long elementOffset = firstPageable.getOffset();
+			for (T el : page.getContent()) {
+				try {
+					processor.process(el, elementIndex, elementOffset, page.getNumberOfElements(), page.getTotalElements(), iteration, page.getTotalPages(), monitor);
+					monitor.worked(1);
+					elementIndex++;
+					elementOffset++;
+				} catch (Exception e) {
+					monitor.done(ProgressStatus.ERROR);
+					throw new DataException(e, "Cannot process %s %d/%d (offset %d) in iteration %d out of %d (offset %d out of %d) in batch job '%s': %s",
+							el.getClass().getSimpleName(), elementIndex, page.getNumberOfElements(), elementOffset,
+							iteration, page.getTotalPages(), firstPageable.getOffset(), page.getTotalElements(), jobTitle, e);
+				}
+			}
+//				processor.process(page.getContent(), page.getNumber(), page.getTotalPages(), page.getTotalElements(), monitor);
+			// fetch next page
+			if (page.hasNextPage()) {
+				iteration++;
+				try {
+					page = finder.find(firstPageable);
+				} catch (Exception e) {
+					throw new DataException(e, "Cannot fetch iteration %d out of %d (offset %d out of %d) in batch job '%s': %s",
+							iteration, page.getTotalPages(), firstPageable.getOffset(), page.getTotalElements(), jobTitle, e);
+				}
+			} else {
+				// last page
+				break;
+			}
+		}
+		monitor.done();
+	}
+	
 }
