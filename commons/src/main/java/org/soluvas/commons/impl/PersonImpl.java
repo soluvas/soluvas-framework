@@ -1734,6 +1734,33 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		}
 		return addresses;
 	}
+	
+	@Override
+	public PostalAddress getPrimarShippingAddress() {
+		final Optional<PostalAddress> primaryShippingAddress = Iterables.tryFind(addresses, new Predicate<PostalAddress>() {
+			@Override
+			public boolean apply(@Nullable PostalAddress input) {
+				return input.isPrimaryShipping();
+			}
+		});
+		if (primaryShippingAddress.isPresent()) {
+			return primaryShippingAddress.get();
+		} else if (addresses != null && !addresses.isEmpty()) {
+			final Optional<PostalAddress> primaryAddress = Iterables.tryFind(addresses, new Predicate<PostalAddress>() {
+				@Override
+				public boolean apply(@Nullable PostalAddress input) {
+					return input.isPrimary();
+				}
+			});
+			if (primaryAddress.isPresent()) {
+				return primaryAddress.get();
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

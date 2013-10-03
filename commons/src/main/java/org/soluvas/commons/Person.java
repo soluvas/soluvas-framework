@@ -2,6 +2,8 @@
  */
 package org.soluvas.commons;
 
+import java.math.BigDecimal;
+
 import javax.annotation.Nullable;
 
 import org.eclipse.emf.common.util.EList;
@@ -11,7 +13,6 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 
 import com.google.common.base.Function;
-import java.math.BigDecimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -261,6 +262,8 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	EList<PostalAddress> getAddresses();
+	
+	PostalAddress getPrimarShippingAddress();
 
 	/**
 	 * Returns the value of the '<em><b>Account Status</b></em>' attribute.
