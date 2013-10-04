@@ -21,7 +21,7 @@ public class SocialPersonRegisteredEvent extends TrackableEvent {
 		this.socPerson = socPerson;
 	}
 
-	public SocialPerson getSocPerson() {
+	public SocialPerson getPerson() {
 		return socPerson;
 	}
 
