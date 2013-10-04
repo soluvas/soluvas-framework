@@ -150,7 +150,7 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 					final String newDn = mapper.getDn(entity, baseDn);
 					if (!oldDn.equals(newDn)) {
 						final String newRdn = new Dn(newDn).getRdn().toString();
-						log.info("Renaming LDAP Entity {} to {}", oldDn, newRdn);
+						log.info("Renaming LDAP Entity {} to {} (RDN only)", oldDn, newRdn);
 						conn.rename(oldDn, newRdn);
 					}
 					

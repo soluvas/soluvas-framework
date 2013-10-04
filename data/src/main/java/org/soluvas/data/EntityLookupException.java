@@ -34,6 +34,7 @@ public class EntityLookupException extends Exception {
 	private final LookupKey lookupKey;
 	@Nullable
 	private final Object key;
+	@Nullable
 	private final GenericLookup<?> lookup;
 	private final Optional<Enum<?>> status;
 
@@ -45,8 +46,10 @@ public class EntityLookupException extends Exception {
 	 * @param status If not present, means the query actually did not return any row.
 	 * 		If present, means the query actually returned a row but filtered due to {@link StatusMask}.
 	 */
-	public <T, K, S extends Enum<?>> EntityLookupException(Class<T> clazz, StatusMask statusMask, LookupKey lookupKey, @Nullable K key, GenericLookup<T> lookup, Optional<S> status) {
-		super("Cannot lookup " + statusMask + " " + clazz.getName() + " " + lookupKey + "=" + key + " using " + lookup.getClass().getName() + ", returned " + status);
+	public <T, K, S extends Enum<?>> EntityLookupException(Class<T> clazz, StatusMask statusMask, LookupKey lookupKey, @Nullable K key, 
+			@Nullable GenericLookup<T> lookup, Optional<S> status) {
+		super("Cannot lookup " + statusMask + " " + clazz.getName() + " " + lookupKey + "=" + key +
+				" using " + (lookup != null ? lookup.getClass().getName() : "N/A") + ", returned " + status);
 		this.clazz = clazz;
 		this.statusMask = statusMask;
 		this.lookupKey = lookupKey;
@@ -85,6 +88,7 @@ public class EntityLookupException extends Exception {
 	/**
 	 * @return the lookup
 	 */
+	@Nullable
 	public GenericLookup<?> getLookup() {
 		return lookup;
 	}

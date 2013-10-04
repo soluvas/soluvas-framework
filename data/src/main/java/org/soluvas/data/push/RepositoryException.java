@@ -4,8 +4,9 @@ package org.soluvas.data.push;
  * Unchecked exception thrown by {@link SyncRepository} implementations.
  * @author ceefour
  */
-@SuppressWarnings("serial")
 public class RepositoryException extends RuntimeException {
+
+	private static final long serialVersionUID = 1L;
 
 	public RepositoryException() {
 		super();
@@ -21,6 +22,10 @@ public class RepositoryException extends RuntimeException {
 
 	public RepositoryException(Throwable cause) {
 		super(cause);
+	}
+
+	public RepositoryException(Throwable cause, String format, Object... args) {
+		super(String.format(format, args), cause);
 	}
 
 }
