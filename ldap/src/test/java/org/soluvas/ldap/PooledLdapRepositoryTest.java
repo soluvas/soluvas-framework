@@ -214,4 +214,23 @@ public class PooledLdapRepositoryTest {
 			log.info("{} - {}", person.getId(), person.getLastName());
 		}
 	}
+	
+	
+	@Test
+	public void findOneByAttribute() {
+		final SocialPerson socialPerson = personRepo.findOneByAttribute("mail", "atang.sutisna.87@gmail.com");
+		assertNotNull(socialPerson);
+		log.debug("We found 1 socialPerson : {}", socialPerson);
+	}
+	
+	@Test
+	public void updatePerson() {
+		final SocialPerson socialPerson = personRepo.findOne("atang");
+		socialPerson.setPassword("bippo");
+		socialPerson.setPasswordResetCode(null);
+		socialPerson.setPasswordResetExpiryTime(null);
+		final SocialPerson updatedSocialPerson = personRepo.modify(socialPerson);
+		assertNotNull(updatedSocialPerson);
+		
+	}
 }

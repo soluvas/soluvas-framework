@@ -102,8 +102,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 */
 	protected static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Jakarta");
 	protected final String collName;
-	private final Class<T> entityClass;
-	private final Class<? extends T> implClass;
+	protected final Class<T> entityClass;
+	protected final Class<? extends T> implClass;
 	protected long currentSchemaVersion;
 	protected final String mongoUri;
 
