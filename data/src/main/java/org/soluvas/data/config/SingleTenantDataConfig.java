@@ -48,6 +48,8 @@ public class SingleTenantDataConfig {
 	
 	@Bean
 	public AggregatingSupplier<DataCatalog> dataCatalogSupplier() {
+		// Note: If you get an error here, please delete "base-mixin.DataCatalog.xmi", for 5.2
+		// it has been replaced with "base.MixinCatalog.xmi" and loaded by mixinCatalog()
 		final AggregatingSupplier<DataCatalog> aggregator = new AggregatingSupplier<>(DataFactory.eINSTANCE,
 				DataPackage.Literals.DATA_CATALOG, ImmutableList.<Supplier<DataCatalog>>of());
 		final SupplierXmiClasspathScanner<DataCatalog> scanner = new SupplierXmiClasspathScanner<>(DataPackage.eINSTANCE, DataCatalog.class,
