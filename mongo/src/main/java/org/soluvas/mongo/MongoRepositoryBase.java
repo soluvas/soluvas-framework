@@ -208,13 +208,20 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		final BasicDBObject query = new BasicDBObject();
 		final long total = coll.count(query);
 		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
-		final DBCursor cursor = coll.find(query)
-				.sort(sortQuery)
-				.skip((int) pageable.getOffset())
-				.limit((int) pageable.getPageSize());
-		final List<T> physicalInventories = MongoUtils
-				.transform(cursor, new DBObjectToEntity());
-		return new PageImpl<>(physicalInventories, pageable, total);
+		try {
+			log.debug("Find {} sort={} skip={} limit={} on {}",
+					query, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
+			final DBCursor cursor = coll.find(query)
+					.sort(sortQuery)
+					.skip((int) pageable.getOffset())
+					.limit((int) pageable.getPageSize());
+			final List<T> entities = MongoUtils
+					.transform(cursor, new DBObjectToEntity());
+			return new PageImpl<>(entities, pageable, total);
+		} catch (Exception e) {
+			throw new MongoRepositoryException(e, "Cannot find %s sort=%s skip=%s limit=%s on %s",
+					query, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
+		}
 	}
 
 	/* (non-Javadoc)
