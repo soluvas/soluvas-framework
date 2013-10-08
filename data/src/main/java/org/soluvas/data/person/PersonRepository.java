@@ -62,10 +62,14 @@ public interface PersonRepository extends
 	@Nullable
 	public Person findOneByClientAccessToken(@Nullable String clientAccessToken);
 	
-	public Page<Person> findBySearchText(String searchText, Pageable pageable);
+	public Page<Person> findBySearchText(StatusMask statusMask, String searchText, Pageable pageable);
 	
-	public long countBySearchText(String searchText);
+	public long countBySearchText(StatusMask statusMask, String searchText);
 
 	public Person findOneActive(String personId);
+	
+	Page<Person> findAll(StatusMask statusMask, Pageable pageable);
+	
+	long count(StatusMask statusMask);
 
 }

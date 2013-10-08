@@ -220,12 +220,12 @@ public class EmfPersonRepository extends
 
 	@Override
 	public Page<Person> findBySearchText(
-			@Nullable String idNameEmailMobile, Pageable pageable) {
+			StatusMask statusMask, @Nullable String idNameEmailMobile, Pageable pageable) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
-	public long countBySearchText(String searchText) {
+	public long countBySearchText(StatusMask statusMask, String searchText) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -306,6 +306,18 @@ public class EmfPersonRepository extends
 	public Map<String, Try<UntrashResult>> untrashAllByIds(
 			Collection<String> ids) {
 		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public Page<Person> findAll(StatusMask statusMask, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long count(StatusMask statusMask) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

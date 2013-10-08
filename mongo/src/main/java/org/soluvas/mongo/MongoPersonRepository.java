@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
 
+import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
@@ -27,8 +28,10 @@ import org.soluvas.data.person.PersonRepository;
 
 import scala.util.Try;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
@@ -132,8 +135,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 
 	@SuppressWarnings("null")
 	@Override
-	public Page<Person> findBySearchText(@Nullable String searchText, Pageable pageable) {
+	public Page<Person> findBySearchText(StatusMask statusMask, @Nullable String searchText, Pageable pageable) {
 		final BasicDBObject query = getQueryBySearchText(searchText);
+		augmentQueryForStatusMask(query, statusMask);
 		
 		final Sort mySort;
 		if (pageable.getSort() != null) {
@@ -161,11 +165,51 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public long countBySearchText(String searchText) {
+	public long countBySearchText(StatusMask statusMask, String searchText) {
 		final BasicDBObject query = getQueryBySearchText(searchText);
+		augmentQueryForStatusMask(query, statusMask);
+		
 		final long count = countByQuery(query);
 		log.debug("Got {} people by query: {}", count, query);
 		return count;
+	}
+	
+	@Override
+	public Page<Person> findAll(StatusMask statusMask, Pageable pageable) {
+		final BasicDBObject query = new BasicDBObject();
+		augmentQueryForStatusMask(query, statusMask);
+		final Page<Person> page = findAllByQuery(query, pageable);
+		return page;
+	}
+
+	@Override
+	public long count(StatusMask statusMask) {
+		final BasicDBObject query = new BasicDBObject();
+		augmentQueryForStatusMask(query, statusMask);
+		final long count = countByQuery(query);
+		log.debug("Got {} record(s) by query: {}", count, query);
+		return count;
+	}
+	
+	protected void augmentQueryForStatusMask(BasicDBObject query, StatusMask statusMask) {
+		Preconditions.checkArgument(!query.containsField("accountStatus"),
+				"Query to be augmented using StatusMask must not already have a 'status' criteria.");
+		switch (statusMask) {
+		case RAW:
+			break;
+		case ACTIVE_ONLY:
+			query.put("accountStatus", AccountStatus.ACTIVE.name());
+			break;
+		case INCLUDE_INACTIVE:
+			query.put("accountStatus", new BasicDBObject("$in", 
+					ImmutableSet.of(AccountStatus.ACTIVE.name(), AccountStatus.INACTIVE.name())));
+			break;
+		case VOID_ONLY:
+			query.put("accountStatus", AccountStatus.VOID.name());
+			break;
+		default:
+			throw new IllegalArgumentException("Unrecognized StatusMask: " + statusMask);	
+		}
 	}
 
 	@Override
