@@ -171,24 +171,6 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		throw new UnsupportedOperationException();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.person.PersonRepository#findBySearchText(java.lang.String, org.soluvas.data.domain.Pageable)
-	 */
-	@Override
-	public Page<Person> findBySearchText(String searchText, Pageable pageable) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	/* (non-Javadoc)
-	 * @see org.soluvas.data.person.PersonRepository#countBySearchText(java.lang.String)
-	 */
-	@Override
-	public long countBySearchText(String searchText) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
 	@Override
 	public Person findOneActive(String personId) {
 		// FIXME: implement status=ACTIVE|VALIDATED|VERIFIED filter
@@ -404,6 +386,22 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	@Override
 	public Map<String, Try<UntrashResult>> untrashAllByIds(
 			Collection<String> ids) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public Page<Person> findBySearchText(StatusMask statusMask,
+			String searchText, Pageable pageable) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public long countBySearchText(StatusMask statusMask, String searchText) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public long count(StatusMask statusMask) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
