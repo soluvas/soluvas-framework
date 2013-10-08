@@ -433,6 +433,7 @@ public class XmiCategoryRepository
 	 * @param message TODO
 	 */
 	protected void catalogFilesChanged(final Set<String> nsPrefixes, String message) {
+		// not sending event, so please use CategoryRepository (not CategoryCatalog) to get list of categories 
 //		eventBus.post(new CategoryChanged(null));
 	}
 
