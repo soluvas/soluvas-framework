@@ -48,6 +48,7 @@ import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
 import org.soluvas.data.push.RepositoryException;
 import org.soluvas.data.repository.PagingAndSortingRepository;
+import org.soluvas.data.repository.StatusAwareRepository;
 import org.soluvas.data.repository.StatusAwareRepositoryBase;
 
 import com.google.common.base.Function;
@@ -56,6 +57,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -122,6 +124,10 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	protected final String dbName;
 	protected StdCouchDbConnector dbConn;
 
+	/**
+	 * If {@code null}, {@link StatusMask} is always ignored.
+	 */
+	@Nullable
 	protected String statusProperty;
 	protected Set<E> activeStatuses;
 	protected Set<E> inactiveStatuses;
@@ -139,7 +145,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	 */
 	public CouchDbRepositoryBase(ClientConnectionManager connMgr, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
 			String couchDbUri, String dbName, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields,
-			String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
+			@Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
 		super();
 		this.entityClass = intfClass;
 		this.implClass = implClass;
@@ -186,6 +192,24 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 //		ensuredIndexes.addAll( MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {})) );
 //		ensuredIndexes.addAll( MongoUtils.ensureIndexes(coll, indexedFields) );
 //		MongoUtils.retainIndexes(coll, ensuredIndexes.toArray(new String[] {}));
+	}
+
+	/**
+	 * Without status.
+	 * @param connMgr
+	 * @param intfClass
+	 * @param implClass
+	 * @param currentSchemaVersion
+	 * @param couchDbUri
+	 * @param dbName
+	 * @param collName
+	 * @param uniqueFields
+	 * @param indexedFields
+	 */
+	public CouchDbRepositoryBase(ClientConnectionManager connMgr, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
+			String couchDbUri, String dbName, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields) {
+		this(connMgr, intfClass, implClass, currentSchemaVersion, couchDbUri, dbName, collName, uniqueFields, indexedFields, 
+				null, ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of());
 	}
 
 	/**
@@ -596,21 +620,35 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		return modifieds;
 	}
 
+	
+	/**
+	 * Uses {@code all} view.
+	 * @todo Use {@link StatusAwareRepository}'s exists with StatusMask
+	 */
 	@Override
 	public final Set<String> exists(Collection<String> ids) {
-		throw new UnsupportedOperationException();
-//		log.debug("Checking existence of {} {}: {}", ids.size(), collName, ids);
-//		try (final DBCursor cursor = coll.find(new BasicDBObject("_id", new BasicDBObject("$in", ids)), new BasicDBObject())) {
-//			final Set<String> existed = ImmutableSet.copyOf(Iterables.transform(cursor, new Function<DBObject, String>() {
-//				@Override @Nullable
-//				public String apply(@Nullable DBObject input) {
-//					return (String) input.get("_id");
-//				}
-//			}));
-//			log.info("Found {} out of {} existing {}: {}, checked: {}",
-//					existed.size(), ids.size(), collName, existed, ids);
-//			return existed;
-//		} 
+		log.debug("Checking existence of {} {}: {}", ids.size(), collName, ids);
+		
+		final String viewName = "uid";
+		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
+				.viewName(viewName).keys(ids);
+		log.debug("Querying {} view {} for {} keys: {}", 
+				getDesignDocId(), viewName, ids.size(), Iterables.limit(ids, 10));
+		final List<Row> fetcheds = dbConn.queryView(query).getRows();
+
+		log.debug("Queried {} view {} for {} keys ({}) returned {} entities: {}", 
+				getDesignDocId(), viewName, ids.size(), Iterables.limit(ids, 10), fetcheds.size(), 
+				Iterables.limit(fetcheds, 10));
+		
+		final ImmutableSet.Builder<String> resultSet = ImmutableSet.builder();
+		for (final Row row : fetcheds) {
+			resultSet.add(row.getKey());
+		}
+		final Set<String> existed = resultSet.build();
+		
+		log.debug("Found {} out of {} {}: {}",
+				existed.size(), ids.size(), collName, Iterables.limit(existed, 10));
+		return existed;
 	}
 
 	@Override
