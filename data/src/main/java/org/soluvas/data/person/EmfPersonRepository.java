@@ -231,7 +231,7 @@ public class EmfPersonRepository extends
 
 	@Override
 	@Nullable
-	public Person findOneByMobileNumber(@Nullable String mobileNumber) {
+	public Person findOneByPhoneNumber(@Nullable String mobileNumber) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 

@@ -1677,6 +1677,23 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		}
 		return phoneNumbers;
 	}
+	
+	@Override
+	public String getPhoneNumber() {
+		final Optional<PhoneNumber> primaryPhone = Iterables.tryFind(getPhoneNumbers(), new Predicate<PhoneNumber>() {
+			@Override
+			public boolean apply(@Nullable PhoneNumber input) {
+				return input.isPrimary();
+			}
+		});
+		if (primaryPhone.isPresent()) {
+			return primaryPhone.get().getPhoneNumber();
+		} else if (!getPhoneNumbers().isEmpty()) {
+			return getPhoneNumbers().get(0).getPhoneNumber();
+		} else {
+			return null;
+		}
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

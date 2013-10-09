@@ -97,11 +97,14 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 	
 	@Override @Nullable
-	public Person findOneByMobileNumber(@Nullable String mobileNumber) {
-		if (mobileNumber == null) {
+	public Person findOneByPhoneNumber(@Nullable String phoneNumber) {
+		if (phoneNumber == null) {
 			return null;
 		}
-		final BasicDBObject query = new BasicDBObject("mobileNumbers.phoneNumber", mobileNumber);
+		final BasicDBObject query = new BasicDBObject();
+		final BasicDBObject qMobileNumber = new BasicDBObject("mobileNumbers", new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
+		final BasicDBObject qPhoneNumber = new BasicDBObject("phoneNumbers", new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
+		query.put("$or", new BasicDBObject[] {qMobileNumber, qPhoneNumber});
 		return findOneByQuery(query);
 	}
 
