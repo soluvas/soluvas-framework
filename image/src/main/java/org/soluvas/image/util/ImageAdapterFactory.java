@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
+import org.soluvas.commons.Revisionable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
 import org.soluvas.image.*;
@@ -158,6 +159,10 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 				return createWatermarkLikeAdapter();
 			}
 			@Override
+			public Adapter caseMedia(Media object) {
+				return createMediaAdapter();
+			}
+			@Override
 			public Adapter caseIdentifiable(Identifiable object) {
 				return createIdentifiableAdapter();
 			}
@@ -176,6 +181,10 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTimestamped(Timestamped object) {
 				return createTimestampedAdapter();
+			}
+			@Override
+			public Adapter caseRevisionable(Revisionable object) {
+				return createRevisionableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -492,6 +501,20 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.Media <em>Media</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.Media
+	 * @generated
+	 */
+	public Adapter createMediaAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -558,6 +581,20 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTimestampedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Revisionable <em>Revisionable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Revisionable
+	 * @generated
+	 */
+	public Adapter createRevisionableAdapter() {
 		return null;
 	}
 

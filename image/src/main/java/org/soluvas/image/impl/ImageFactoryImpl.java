@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.soluvas.image.*;
 import org.soluvas.image.BlitlineTransformer;
 import org.soluvas.image.DavConnector;
 import org.soluvas.image.DisplayImage;
@@ -97,6 +98,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 			case ImagePackage.FOLDER_CONNECTOR: return createFolderConnector();
 			case ImagePackage.DISPLAY_IMAGE: return createDisplayImage();
 			case ImagePackage.STYLED_IMAGE_ENTRY: return (EObject)createStyledImageEntry();
+			case ImagePackage.MEDIA: return createMedia();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -122,6 +124,8 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 				return createImageTypesFromString(eDataType, initialValue);
 			case ImagePackage.IMAGE_STYLES:
 				return createImageStylesFromString(eDataType, initialValue);
+			case ImagePackage.MEDIA_STATUS:
+				return createMediaStatusFromString(eDataType, initialValue);
 			case ImagePackage.IMAGE_TYPE:
 				return createImageTypeFromString(eDataType, initialValue);
 			case ImagePackage.IMAGE_STYLE:
@@ -153,6 +157,8 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 				return convertImageTypesToString(eDataType, instanceValue);
 			case ImagePackage.IMAGE_STYLES:
 				return convertImageStylesToString(eDataType, instanceValue);
+			case ImagePackage.MEDIA_STATUS:
+				return convertMediaStatusToString(eDataType, instanceValue);
 			case ImagePackage.IMAGE_TYPE:
 				return convertImageTypeToString(eDataType, instanceValue);
 			case ImagePackage.IMAGE_STYLE:
@@ -344,6 +350,16 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Media createMedia() {
+		MediaImpl media = new MediaImpl();
+		return media;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ImageTransformType createImageTransformTypeFromString(EDataType eDataType, String initialValue) {
 		ImageTransformType result = ImageTransformType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -456,6 +472,26 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * @generated
 	 */
 	public String convertImageStylesToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MediaStatus createMediaStatusFromString(EDataType eDataType, String initialValue) {
+		MediaStatus result = MediaStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertMediaStatusToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

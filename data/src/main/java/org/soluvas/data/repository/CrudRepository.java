@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.soluvas.data.EntityLookup;
 
@@ -48,7 +47,6 @@ import org.soluvas.data.EntityLookup;
  * @author Hendy Irawan
  */
 //@NoRepositoryBean
-@ParametersAreNonnullByDefault
 public interface CrudRepository<T, ID extends Serializable> extends Repository<T, ID>, BasicRepository, EntityLookup<T, ID> {
 
 	/**

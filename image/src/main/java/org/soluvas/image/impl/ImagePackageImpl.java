@@ -36,6 +36,8 @@ import org.soluvas.image.ImageTransformer;
 import org.soluvas.image.ImageType;
 import org.soluvas.image.ImageTypes;
 import org.soluvas.image.ImageVariant;
+import org.soluvas.image.Media;
+import org.soluvas.image.MediaStatus;
 import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.ResizeToFit;
 import org.soluvas.image.S3Connector;
@@ -199,6 +201,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass mediaEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum imageTransformTypeEEnum = null;
 
 	/**
@@ -231,6 +239,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	private EEnum imageStylesEEnum = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum mediaStatusEEnum = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1165,6 +1179,33 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMedia() {
+		return mediaEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMedia_Type() {
+		return (EAttribute)mediaEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMedia_Status() {
+		return (EAttribute)mediaEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getImageTransformType() {
 		return imageTransformTypeEEnum;
@@ -1213,6 +1254,15 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 */
 	public EEnum getImageStyles() {
 		return imageStylesEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getMediaStatus() {
+		return mediaStatusEEnum;
 	}
 
 	/**
@@ -1388,6 +1438,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		watermarkLikeEClass = createEClass(WATERMARK_LIKE);
 		createEAttribute(watermarkLikeEClass, WATERMARK_LIKE__WATERMARK_FILE);
 
+		mediaEClass = createEClass(MEDIA);
+		createEAttribute(mediaEClass, MEDIA__TYPE);
+		createEAttribute(mediaEClass, MEDIA__STATUS);
+
 		// Create enums
 		imageTransformTypeEEnum = createEEnum(IMAGE_TRANSFORM_TYPE);
 		fileExportEEnum = createEEnum(FILE_EXPORT);
@@ -1395,6 +1449,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		transformGravityEEnum = createEEnum(TRANSFORM_GRAVITY);
 		imageTypesEEnum = createEEnum(IMAGE_TYPES);
 		imageStylesEEnum = createEEnum(IMAGE_STYLES);
+		mediaStatusEEnum = createEEnum(MEDIA_STATUS);
 
 		// Create data types
 		imageRepositoryEDataType = createEDataType(IMAGE_REPOSITORY);
@@ -1456,6 +1511,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		styledImageEClass.getESuperTypes().add(theCommonsPackage.getTimestamped());
 		imageMagickTransformerEClass.getESuperTypes().add(this.getImageTransformer());
 		folderConnectorEClass.getESuperTypes().add(this.getImageConnector());
+		mediaEClass.getESuperTypes().add(theCommonsPackage.getIdentifiable());
+		mediaEClass.getESuperTypes().add(theCommonsPackage.getRevisionable());
+		mediaEClass.getESuperTypes().add(theCommonsPackage.getTimestamped());
+		mediaEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(imageConnectorEClass, ImageConnector.class, "ImageConnector", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1740,6 +1799,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEClass(watermarkLikeEClass, WatermarkLike.class, "WatermarkLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getWatermarkLike_WatermarkFile(), theCommonsPackage.getFile(), "watermarkFile", null, 0, 1, WatermarkLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(mediaEClass, Media.class, "Media", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMedia_Type(), theEcorePackage.getEString(), "type", "Media", 1, 1, Media.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMedia_Status(), this.getMediaStatus(), "status", null, 1, 1, Media.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(imageTransformTypeEEnum, ImageTransformType.class, "ImageTransformType");
 		addEEnumLiteral(imageTransformTypeEEnum, ImageTransformType.RESIZE_TO_FIT);
@@ -1782,6 +1845,11 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEEnumLiteral(imageStylesEEnum, ImageStyles.SMALL);
 		addEEnumLiteral(imageStylesEEnum, ImageStyles.NORMAL);
 		addEEnumLiteral(imageStylesEEnum, ImageStyles.LARGE);
+
+		initEEnum(mediaStatusEEnum, MediaStatus.class, "MediaStatus");
+		addEEnumLiteral(mediaStatusEEnum, MediaStatus.DRAFT);
+		addEEnumLiteral(mediaStatusEEnum, MediaStatus.BOOKED);
+		addEEnumLiteral(mediaStatusEEnum, MediaStatus.VOID);
 
 		// Initialize data types
 		initEDataType(imageRepositoryEDataType, ImageRepository.class, "ImageRepository", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -2176,6 +2244,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Watermark file to be used. If null, no watermark will be overlaid."
+		   });		
+		addAnnotation
+		  (mediaEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Media document containing embedded file as a single (and only) attachment, compatible with CouchDB repository."
 		   });
 	}
 

@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
+import org.soluvas.commons.Revisionable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
 import org.soluvas.image.*;
@@ -218,6 +219,17 @@ public class ImageSwitch<T> extends Switch<T> {
 			case ImagePackage.WATERMARK_LIKE: {
 				WatermarkLike watermarkLike = (WatermarkLike)theEObject;
 				T result = caseWatermarkLike(watermarkLike);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.MEDIA: {
+				Media media = (Media)theEObject;
+				T result = caseMedia(media);
+				if (result == null) result = caseIdentifiable(media);
+				if (result == null) result = caseRevisionable(media);
+				if (result == null) result = caseTimestamped(media);
+				if (result == null) result = caseNameContainer(media);
+				if (result == null) result = caseNameable(media);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -541,6 +553,21 @@ public class ImageSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Media</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Media</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMedia(Media object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Identifiable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -612,6 +639,21 @@ public class ImageSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTimestamped(Timestamped object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Revisionable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Revisionable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRevisionable(Revisionable object) {
 		return null;
 	}
 

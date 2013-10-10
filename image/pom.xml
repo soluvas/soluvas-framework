@@ -33,6 +33,15 @@
 			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.ldap</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.soluvas</groupId>
+			<artifactId>org.soluvas.couchdb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.ektorp</groupId>
+			<artifactId>org.ektorp.spring</artifactId>
+			<optional>true</optional>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>

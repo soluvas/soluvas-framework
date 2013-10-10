@@ -1316,6 +1316,97 @@ public interface ImagePackage extends EPackage {
 	int WATERMARK_LIKE_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.MediaImpl <em>Media</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.MediaImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getMedia()
+	 * @generated
+	 */
+	int MEDIA = 21;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA__ID = CommonsPackage.IDENTIFIABLE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Guid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA__GUID = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Revision</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA__REVISION = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Creation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA__CREATION_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Modification Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA__MODIFICATION_TIME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA__NAME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA__TYPE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA__STATUS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of structural features of the '<em>Media</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_FEATURE_COUNT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 7;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1323,7 +1414,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformType()
 	 * @generated
 	 */
-	int IMAGE_TRANSFORM_TYPE = 21;
+	int IMAGE_TRANSFORM_TYPE = 22;
 
 
 	/**
@@ -1334,7 +1425,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getFileExport()
 	 * @generated
 	 */
-	int FILE_EXPORT = 22;
+	int FILE_EXPORT = 23;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.DuplicateIdHandling <em>Duplicate Id Handling</em>}' enum.
@@ -1344,7 +1435,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getDuplicateIdHandling()
 	 * @generated
 	 */
-	int DUPLICATE_ID_HANDLING = 23;
+	int DUPLICATE_ID_HANDLING = 24;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.TransformGravity <em>Transform Gravity</em>}' enum.
@@ -1354,7 +1445,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getTransformGravity()
 	 * @generated
 	 */
-	int TRANSFORM_GRAVITY = 24;
+	int TRANSFORM_GRAVITY = 25;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTypes <em>Types</em>}' enum.
@@ -1364,7 +1455,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTypes()
 	 * @generated
 	 */
-	int IMAGE_TYPES = 25;
+	int IMAGE_TYPES = 26;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageStyles <em>Styles</em>}' enum.
@@ -1374,7 +1465,17 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyles()
 	 * @generated
 	 */
-	int IMAGE_STYLES = 26;
+	int IMAGE_STYLES = 27;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.MediaStatus <em>Media Status</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.MediaStatus
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getMediaStatus()
+	 * @generated
+	 */
+	int MEDIA_STATUS = 28;
 
 	/**
 	 * The meta object id for the '<em>Repository</em>' data type.
@@ -1384,7 +1485,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageRepository()
 	 * @generated
 	 */
-	int IMAGE_REPOSITORY = 27;
+	int IMAGE_REPOSITORY = 29;
 
 
 	/**
@@ -1395,7 +1496,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageType()
 	 * @generated
 	 */
-	int IMAGE_TYPE = 28;
+	int IMAGE_TYPE = 30;
 
 	/**
 	 * The meta object id for the '<em>Style</em>' data type.
@@ -1405,7 +1506,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyle()
 	 * @generated
 	 */
-	int IMAGE_STYLE = 29;
+	int IMAGE_STYLE = 31;
 
 
 	/**
@@ -1416,7 +1517,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getSocialPerson()
 	 * @generated
 	 */
-	int SOCIAL_PERSON = 30;
+	int SOCIAL_PERSON = 32;
 
 
 	/**
@@ -2358,6 +2459,38 @@ public interface ImagePackage extends EPackage {
 	EAttribute getWatermarkLike_WatermarkFile();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.Media <em>Media</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Media</em>'.
+	 * @see org.soluvas.image.Media
+	 * @generated
+	 */
+	EClass getMedia();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.Media#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see org.soluvas.image.Media#getType()
+	 * @see #getMedia()
+	 * @generated
+	 */
+	EAttribute getMedia_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.Media#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see org.soluvas.image.Media#getStatus()
+	 * @see #getMedia()
+	 * @generated
+	 */
+	EAttribute getMedia_Status();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2416,6 +2549,16 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getImageStyles();
+
+	/**
+	 * Returns the meta object for enum '{@link org.soluvas.image.MediaStatus <em>Media Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Media Status</em>'.
+	 * @see org.soluvas.image.MediaStatus
+	 * @generated
+	 */
+	EEnum getMediaStatus();
 
 	/**
 	 * Returns the meta object for data type '{@link org.soluvas.image.store.ImageRepository <em>Repository</em>}'.
@@ -3222,6 +3365,32 @@ public interface ImagePackage extends EPackage {
 		EAttribute WATERMARK_LIKE__WATERMARK_FILE = eINSTANCE.getWatermarkLike_WatermarkFile();
 
 		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.MediaImpl <em>Media</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.MediaImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getMedia()
+		 * @generated
+		 */
+		EClass MEDIA = eINSTANCE.getMedia();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDIA__TYPE = eINSTANCE.getMedia_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDIA__STATUS = eINSTANCE.getMedia_Status();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3280,6 +3449,16 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum IMAGE_STYLES = eINSTANCE.getImageStyles();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.MediaStatus <em>Media Status</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.MediaStatus
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getMediaStatus()
+		 * @generated
+		 */
+		EEnum MEDIA_STATUS = eINSTANCE.getMediaStatus();
 
 		/**
 		 * The meta object literal for the '<em>Repository</em>' data type.
