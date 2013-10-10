@@ -28,6 +28,6 @@ public interface SlugLookup<T> {
 	 * @return The actual slug in the repository, or {@code null} if does not exist.
 	 */
 	@Nullable
-	public String existsBySlug(StatusMask statusMask, String upSlug);
+	public Existence<String> existsBySlug(StatusMask statusMask, String upSlug);
 
 }

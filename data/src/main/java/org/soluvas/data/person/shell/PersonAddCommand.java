@@ -70,7 +70,7 @@ public class PersonAddCommand extends ExtCommandSupport {
 		person.setSlug(SlugUtils.generateValidScreenName(name, new Predicate<String>() {
 			@Override
 			public boolean apply(@Nullable String input) {
-				return personRepo.existsBySlug(StatusMask.RAW, input) == null;
+				return !personRepo.existsBySlug(StatusMask.RAW, input).isPresent();
 			}
 		}));
 		final Matcher nameMatcher = Pattern.compile("(.+) (.+)").matcher(name);

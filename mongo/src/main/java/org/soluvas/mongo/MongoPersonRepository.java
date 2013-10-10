@@ -15,6 +15,7 @@ import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.EntityLookupException;
+import org.soluvas.data.Existence;
 import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.TrashResult;
@@ -62,10 +63,14 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public String existsBySlug(StatusMask statusMask, String upSlug) {
+	public Existence<String> existsBySlug(StatusMask statusMask, String upSlug) {
 		final DBObject dbo = findDBObjectByQuery(new BasicDBObject("canonicalSlug", SlugUtils.canonicalize(upSlug)),
 				new BasicDBObject("slug", 1));
-		return (String) (dbo != null ? dbo.get("slug") : null);
+		if (dbo != null) {
+			return Existence.of((String) dbo.get("slug"), (String) dbo.get("_id"));
+		} else {
+			return Existence.<String>absent();
+		}
 	}
 
 	@Override
@@ -235,14 +240,14 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public <K extends Serializable> Map<K, Try<K>> checkExistsAll(
+	public <K extends Serializable> Map<K, Existence<K>> checkExistsAll(
 			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
-	public <K extends Serializable> K checkExists(StatusMask statusMask,
-			LookupKey lookupKey, K key) throws EntityLookupException {
+	public <K extends Serializable> Existence<K> checkExists(StatusMask statusMask,
+			LookupKey lookupKey, K key) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 

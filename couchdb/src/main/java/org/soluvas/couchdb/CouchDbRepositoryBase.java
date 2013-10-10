@@ -3,6 +3,7 @@ package org.soluvas.couchdb;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,7 @@ import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.commons.util.Profiled;
 import org.soluvas.data.DataException;
+import org.soluvas.data.Existence;
 import org.soluvas.data.GenericLookup;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
@@ -61,6 +63,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Sets.SetView;
 
 /**
  * {@link PagingAndSortingRepository} implemented using CouchDB, with {@link SchemaVersionable} support.
@@ -82,6 +85,12 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	implements CouchDbRepository<T> {
 	
 	public static final String VIEW_UID = "uid";
+	/**
+	 * Views: uid_raw, uid_active_only, uid_include_inactive, uid_draft_only, uid_void_only.
+	 * Key: uid.
+	 * Value: null. 
+	 */
+	public static final String VIEW_UID_PREFIX = "uid_";
 //	public class DBObjectToEntity implements Function<DBObject, T> {
 //		@Override
 //		public T apply(DBObject input) {
@@ -769,5 +778,47 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 //		final T entity = new DBObjectToEntity().apply(dbo);
 //		return entity;		
 //	}
+
+	public Existence<String> existsById(StatusMask statusMask, String id) {
+		return existsAllById(statusMask, ImmutableSet.of(id)).get(id);
+	}
+
+	public Map<String, Existence<String>> existsAllById(StatusMask statusMask, Collection<String> ids) {
+		// filter by statusMask in Java, so we can give proper reason
+//		final List<ComplexKey> viewKeys = ImmutableList.copyOf(Collections2.transform(ids, 
+//				new Function<String, ComplexKey>() {
+//			@Override @Nullable
+//			public ComplexKey apply(@Nullable String input) {
+//				return ComplexKey.of(StatusMask.RAW.getLiteral(), input);
+//			}
+//		}));
+//		final Object[] viewKey = new Object[] { StatusMask.RAW.getLiteral(), key };
+		final Collection<String> viewKeys = ids;
+		final String viewName = VIEW_UID_PREFIX + statusMask.getLiteral();
+		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
+				.viewName(viewName).keys(viewKeys);
+		log.debug("Querying {} view {} for {} keys: {}", 
+				getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10));
+		List<Row> fetcheds = dbConn.queryView(query).getRows();
+
+		log.debug("Queried {} view {} for {} keys ({}) returned {} entities: {}", 
+				getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10), fetcheds.size(), 
+				Iterables.limit(fetcheds, 10));
+		
+		final Map<String, Existence<String>> resultMap = new HashMap<>();
+		for (final Row row : fetcheds) {
+			final String expectedKey = row.getKey();
+			final String actualKey = expectedKey; // just for uid, this is guaranteed to be the same. (String) row.getValue();
+			resultMap.put(expectedKey, Existence.of(actualKey, actualKey));
+		}
+		
+		// those actually not found
+		final SetView<String> unfoundKeys = Sets.difference(ImmutableSet.copyOf(ids), resultMap.keySet());
+		for (final String unfoundKey : unfoundKeys) {
+			resultMap.put(unfoundKey, Existence.<String>absent());
+		}
+		
+		return resultMap;
+	}
 
 }

@@ -17,6 +17,7 @@ import org.soluvas.commons.IdPredicate;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonCatalog;
 import org.soluvas.data.EntityLookupException;
+import org.soluvas.data.Existence;
 import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.TrashResult;
@@ -185,14 +186,14 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public String existsBySlug(StatusMask statusMask, final String slug) {
+	public Existence<String> existsBySlug(StatusMask statusMask, final String slug) {
 		final Optional<Person> found = Iterables.tryFind(catalog.getPeople(), new Predicate<Person>() {
 			@Override
 			public boolean apply(@Nullable Person input) {
 				return slug != null && slug.equals(input.getSlug());
 			}
 		});
-		return found.isPresent() ? found.get().getSlug() : null;
+		return found.isPresent() ? Existence.of(found.get().getSlug(), found.get().getId()) : Existence.<String>absent();
 	}
 
 	@Override @Nullable
@@ -255,14 +256,14 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public <K extends Serializable> Map<K, Try<K>> checkExistsAll(
+	public <K extends Serializable> Map<K, Existence<K>> checkExistsAll(
 			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
-	public <K extends Serializable> K checkExists(StatusMask statusMask,
-			LookupKey lookupKey, K key) throws EntityLookupException {
+	public <K extends Serializable> Existence<K> checkExists(StatusMask statusMask,
+			LookupKey lookupKey, K key) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 

@@ -16,6 +16,7 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.person.PersonRepository;
 import org.springframework.context.annotation.Scope;
@@ -89,12 +90,13 @@ public class PersonModCommand extends ExtCommandSupport {
 		}
 		
 		if (!Strings.isNullOrEmpty(slug)) {
-			final String existsBySlug = personRepo.existsBySlug(StatusMask.RAW, slug);
-			if (Strings.isNullOrEmpty(existsBySlug)) {
+			final Existence<String> existsBySlug = personRepo.existsBySlug(StatusMask.RAW, slug);
+			if (!existsBySlug.isPresent()) {
 				person.setSlug(slug);
 				person.setCanonicalSlug(SlugUtils.canonicalize(slug));
 			} else {
-				System.err.println(String.format("Slug %s is already exists by other.", slug));
+				System.err.println(String.format("Slug '%s' already used person '%s'", 
+						existsBySlug.get(), existsBySlug.getId()));
 				return null;
 			}
 		}

@@ -20,6 +20,7 @@ import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.EntityLookupException;
+import org.soluvas.data.Existence;
 import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.TrashResult;
@@ -105,12 +106,13 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	 * @see org.soluvas.data.SlugLookup#existsBySlug(java.lang.String)
 	 */
 	@Override
-	public String existsBySlug(StatusMask statusMask, String upSlug) {
+	public Existence<String> existsBySlug(StatusMask statusMask, String upSlug) {
 		try {
-			return lookupOne(statusMask, LookupKey.SLUG, upSlug).getSlug();
+			final Person found = lookupOne(statusMask, LookupKey.SLUG, upSlug);
+			return Existence.of(found.getSlug(), found.getId());
 		} catch (EntityLookupException e) {
 			log.trace("existsBySlug {} '{}' returned {}", statusMask, upSlug, e);
-			return null;
+			return Existence.<String>absent();
 		}
 	}
 
@@ -326,14 +328,14 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public <K extends Serializable> Map<K, Try<K>> checkExistsAll(
+	public <K extends Serializable> Map<K, Existence<K>> checkExistsAll(
 			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
 		throw new UnsupportedOperationException("Unsupported lookupKey: " + lookupKey);
 	}
 
 	@Override
-	public <K extends Serializable> K checkExists(StatusMask statusMask,
-			LookupKey lookupKey, K key) throws EntityLookupException {
+	public <K extends Serializable> Existence<K> checkExists(StatusMask statusMask,
+			LookupKey lookupKey, K key) {
 		throw new UnsupportedOperationException("Unsupported lookupKey: " + lookupKey);
 	}
 
