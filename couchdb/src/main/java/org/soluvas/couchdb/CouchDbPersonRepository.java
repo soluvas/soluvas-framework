@@ -141,16 +141,6 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	/* (non-Javadoc)
-	 * @see org.soluvas.data.person.PersonRepository#findOneByMobileNumber(java.lang.String)
-	 */
-	@Override
-	@Nullable
-	public Person findOneByMobileNumber(@Nullable String mobileNumber) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	/* (non-Javadoc)
 	 * @see org.soluvas.data.person.PersonRepository#findOneByTwitter(java.lang.Long, java.lang.String)
 	 */
 	@Override
@@ -402,6 +392,12 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 
 	@Override
 	public long count(StatusMask statusMask) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	@Nullable
+	public Person findOneByPhoneNumber(@Nullable String mobileNumber) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
