@@ -30,7 +30,7 @@ public class MediaCatCommand extends ExtCommandSupport {
 	private transient boolean bySlug = false;
 	@Option(name="-g", aliases="--guid", description="Find Media by GUID (not by ID).")
 	private transient boolean byGuid = false;
-	@Option(name="-m", aliases="--mask", description="")
+	@Option(name="-m", aliases="--mask", description="Status mask")
 	private transient StatusMask statusMask = StatusMask.RAW;
 	
 	@Argument(index=0, name="id", required=true, description="Media ID/slug.")
