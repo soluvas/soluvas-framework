@@ -99,6 +99,8 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 			case ImagePackage.DISPLAY_IMAGE: return createDisplayImage();
 			case ImagePackage.STYLED_IMAGE_ENTRY: return (EObject)createStyledImageEntry();
 			case ImagePackage.MEDIA: return createMedia();
+			case ImagePackage.MEDIA_ATTACHMENT: return createMediaAttachment();
+			case ImagePackage.MEDIA_ATTACHMENT_ENTRY: return (EObject)createMediaAttachmentEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -353,6 +355,26 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	public Media createMedia() {
 		MediaImpl media = new MediaImpl();
 		return media;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MediaAttachment createMediaAttachment() {
+		MediaAttachmentImpl mediaAttachment = new MediaAttachmentImpl();
+		return mediaAttachment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<String, MediaAttachment> createMediaAttachmentEntry() {
+		MediaAttachmentEntryImpl mediaAttachmentEntry = new MediaAttachmentEntryImpl();
+		return mediaAttachmentEntry;
 	}
 
 	/**

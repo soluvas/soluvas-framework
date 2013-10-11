@@ -1398,13 +1398,123 @@ public interface ImagePackage extends EPackage {
 	int MEDIA__STATUS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Attachments</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA__ATTACHMENTS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Media</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEDIA_FEATURE_COUNT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 7;
+	int MEDIA_FEATURE_COUNT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 8;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.MediaAttachmentImpl <em>Media Attachment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.MediaAttachmentImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getMediaAttachment()
+	 * @generated
+	 */
+	int MEDIA_ATTACHMENT = 22;
+
+	/**
+	 * The feature id for the '<em><b>Content Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_ATTACHMENT__CONTENT_TYPE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Rev Pos</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_ATTACHMENT__REV_POS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Digest</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_ATTACHMENT__DIGEST = 2;
+
+	/**
+	 * The feature id for the '<em><b>Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_ATTACHMENT__LENGTH = 3;
+
+	/**
+	 * The feature id for the '<em><b>Stub</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_ATTACHMENT__STUB = 4;
+
+	/**
+	 * The number of structural features of the '<em>Media Attachment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_ATTACHMENT_FEATURE_COUNT = 5;
+
+	/**
+	 * The meta object id for the '{@link org.soluvas.image.impl.MediaAttachmentEntryImpl <em>Media Attachment Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.impl.MediaAttachmentEntryImpl
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getMediaAttachmentEntry()
+	 * @generated
+	 */
+	int MEDIA_ATTACHMENT_ENTRY = 23;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_ATTACHMENT_ENTRY__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_ATTACHMENT_ENTRY__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Media Attachment Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_ATTACHMENT_ENTRY_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
@@ -1414,7 +1524,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformType()
 	 * @generated
 	 */
-	int IMAGE_TRANSFORM_TYPE = 22;
+	int IMAGE_TRANSFORM_TYPE = 24;
 
 
 	/**
@@ -1425,7 +1535,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getFileExport()
 	 * @generated
 	 */
-	int FILE_EXPORT = 23;
+	int FILE_EXPORT = 25;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.DuplicateIdHandling <em>Duplicate Id Handling</em>}' enum.
@@ -1435,7 +1545,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getDuplicateIdHandling()
 	 * @generated
 	 */
-	int DUPLICATE_ID_HANDLING = 24;
+	int DUPLICATE_ID_HANDLING = 26;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.TransformGravity <em>Transform Gravity</em>}' enum.
@@ -1445,7 +1555,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getTransformGravity()
 	 * @generated
 	 */
-	int TRANSFORM_GRAVITY = 25;
+	int TRANSFORM_GRAVITY = 27;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTypes <em>Types</em>}' enum.
@@ -1455,7 +1565,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTypes()
 	 * @generated
 	 */
-	int IMAGE_TYPES = 26;
+	int IMAGE_TYPES = 28;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageStyles <em>Styles</em>}' enum.
@@ -1465,7 +1575,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyles()
 	 * @generated
 	 */
-	int IMAGE_STYLES = 27;
+	int IMAGE_STYLES = 29;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.MediaStatus <em>Media Status</em>}' enum.
@@ -1475,7 +1585,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getMediaStatus()
 	 * @generated
 	 */
-	int MEDIA_STATUS = 28;
+	int MEDIA_STATUS = 30;
 
 	/**
 	 * The meta object id for the '<em>Repository</em>' data type.
@@ -1485,7 +1595,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageRepository()
 	 * @generated
 	 */
-	int IMAGE_REPOSITORY = 29;
+	int IMAGE_REPOSITORY = 31;
 
 
 	/**
@@ -1496,7 +1606,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageType()
 	 * @generated
 	 */
-	int IMAGE_TYPE = 30;
+	int IMAGE_TYPE = 32;
 
 	/**
 	 * The meta object id for the '<em>Style</em>' data type.
@@ -1506,7 +1616,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyle()
 	 * @generated
 	 */
-	int IMAGE_STYLE = 31;
+	int IMAGE_STYLE = 33;
 
 
 	/**
@@ -1517,7 +1627,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getSocialPerson()
 	 * @generated
 	 */
-	int SOCIAL_PERSON = 32;
+	int SOCIAL_PERSON = 34;
 
 
 	/**
@@ -2491,6 +2601,116 @@ public interface ImagePackage extends EPackage {
 	EAttribute getMedia_Status();
 
 	/**
+	 * Returns the meta object for the map '{@link org.soluvas.image.Media#getAttachments <em>Attachments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Attachments</em>'.
+	 * @see org.soluvas.image.Media#getAttachments()
+	 * @see #getMedia()
+	 * @generated
+	 */
+	EReference getMedia_Attachments();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.MediaAttachment <em>Media Attachment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Media Attachment</em>'.
+	 * @see org.soluvas.image.MediaAttachment
+	 * @generated
+	 */
+	EClass getMediaAttachment();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.MediaAttachment#getContentType <em>Content Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Content Type</em>'.
+	 * @see org.soluvas.image.MediaAttachment#getContentType()
+	 * @see #getMediaAttachment()
+	 * @generated
+	 */
+	EAttribute getMediaAttachment_ContentType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.MediaAttachment#getRevPos <em>Rev Pos</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Rev Pos</em>'.
+	 * @see org.soluvas.image.MediaAttachment#getRevPos()
+	 * @see #getMediaAttachment()
+	 * @generated
+	 */
+	EAttribute getMediaAttachment_RevPos();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.MediaAttachment#getDigest <em>Digest</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Digest</em>'.
+	 * @see org.soluvas.image.MediaAttachment#getDigest()
+	 * @see #getMediaAttachment()
+	 * @generated
+	 */
+	EAttribute getMediaAttachment_Digest();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.MediaAttachment#getLength <em>Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Length</em>'.
+	 * @see org.soluvas.image.MediaAttachment#getLength()
+	 * @see #getMediaAttachment()
+	 * @generated
+	 */
+	EAttribute getMediaAttachment_Length();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.MediaAttachment#isStub <em>Stub</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Stub</em>'.
+	 * @see org.soluvas.image.MediaAttachment#isStub()
+	 * @see #getMediaAttachment()
+	 * @generated
+	 */
+	EAttribute getMediaAttachment_Stub();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Media Attachment Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Media Attachment Entry</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString" keyRequired="true"
+	 *        valueType="org.soluvas.image.MediaAttachment" valueContainment="true" valueRequired="true"
+	 * @generated
+	 */
+	EClass getMediaAttachmentEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getMediaAttachmentEntry()
+	 * @generated
+	 */
+	EAttribute getMediaAttachmentEntry_Key();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getMediaAttachmentEntry()
+	 * @generated
+	 */
+	EReference getMediaAttachmentEntry_Value();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3389,6 +3609,90 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MEDIA__STATUS = eINSTANCE.getMedia_Status();
+
+		/**
+		 * The meta object literal for the '<em><b>Attachments</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MEDIA__ATTACHMENTS = eINSTANCE.getMedia_Attachments();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.MediaAttachmentImpl <em>Media Attachment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.MediaAttachmentImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getMediaAttachment()
+		 * @generated
+		 */
+		EClass MEDIA_ATTACHMENT = eINSTANCE.getMediaAttachment();
+
+		/**
+		 * The meta object literal for the '<em><b>Content Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDIA_ATTACHMENT__CONTENT_TYPE = eINSTANCE.getMediaAttachment_ContentType();
+
+		/**
+		 * The meta object literal for the '<em><b>Rev Pos</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDIA_ATTACHMENT__REV_POS = eINSTANCE.getMediaAttachment_RevPos();
+
+		/**
+		 * The meta object literal for the '<em><b>Digest</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDIA_ATTACHMENT__DIGEST = eINSTANCE.getMediaAttachment_Digest();
+
+		/**
+		 * The meta object literal for the '<em><b>Length</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDIA_ATTACHMENT__LENGTH = eINSTANCE.getMediaAttachment_Length();
+
+		/**
+		 * The meta object literal for the '<em><b>Stub</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDIA_ATTACHMENT__STUB = eINSTANCE.getMediaAttachment_Stub();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.impl.MediaAttachmentEntryImpl <em>Media Attachment Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.impl.MediaAttachmentEntryImpl
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getMediaAttachmentEntry()
+		 * @generated
+		 */
+		EClass MEDIA_ATTACHMENT_ENTRY = eINSTANCE.getMediaAttachmentEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDIA_ATTACHMENT_ENTRY__KEY = eINSTANCE.getMediaAttachmentEntry_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MEDIA_ATTACHMENT_ENTRY__VALUE = eINSTANCE.getMediaAttachmentEntry_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.

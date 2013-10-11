@@ -259,57 +259,107 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		design.addView("filter_status", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }"));
 		design.addView("by_modificationTime", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
 		
+		if (statusProperty != null) {
+			final String activeOnlyRegex = Joiner.on('|').join(Collections2.transform(activeStatuses, 
+					new Function<E, String>() {
+				@Override @Nullable
+				public String apply(@Nullable E input) {
+					return input.name().toLowerCase();
+				}
+			}));
+			final String includeInactiveRegex = Joiner.on('|').join(
+					Collections2.transform(Sets.union(activeStatuses, inactiveStatuses), new Function<E, String>() {
+				@Override @Nullable
+				public String apply(@Nullable E input) {
+					return input.name().toLowerCase();
+				}
+			}));
+			final String draftOnlyRegex = Joiner.on('|').join(
+					Collections2.transform(draftStatuses, new Function<E, String>() {
+				@Override @Nullable
+				public String apply(@Nullable E input) {
+					return input.name().toLowerCase();
+				}
+			}));
+			final String voidOnlyRegex = Joiner.on('|').join(
+					Collections2.transform(voidStatuses, new Function<E, String>() {
+				@Override @Nullable
+				public String apply(@Nullable E input) {
+					return input.name().toLowerCase();
+				}
+			}));
+
+			design.addView(VIEW_UID_PREFIX + StatusMask.RAW.getLiteral(), 
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
+			design.addView(VIEW_UID_PREFIX + StatusMask.ACTIVE_ONLY.getLiteral(), new View(
+					  "function(doc) {"
+					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + activeOnlyRegex + ")$/) != null )"
+					+ "    emit( doc.uid, null );"
+					+ "}"));
+			design.addView(VIEW_UID_PREFIX + StatusMask.INCLUDE_INACTIVE.getLiteral(), new View(
+					  "function(doc) {"
+					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + includeInactiveRegex + ")$/) != null )"
+					+ "    emit( doc.uid, null );"
+					+ "}"));
+			design.addView(VIEW_UID_PREFIX + StatusMask.DRAFT_ONLY.getLiteral(), new View(
+					  "function(doc) {"
+					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + draftOnlyRegex + ")$/) != null )"
+					+ "    emit( doc.uid, null );"
+					+ "}"));
+			design.addView(VIEW_UID_PREFIX + StatusMask.VOID_ONLY.getLiteral(), new View(
+					  "function(doc) {"
+					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + voidOnlyRegex + ")$/) != null )"
+					+ "    emit( doc.uid, null );"
+					+ "}"));
+
+			design.addView("statusMask_raw_by_modificationTime", 
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+			design.addView("statusMask_active_only_by_modificationTime", new View(
+					  "function(doc) {"
+					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + activeOnlyRegex + ")$/) != null )"
+					+ "    emit( [doc.modificationTime, doc._id], null );"
+					+ "}"));
+			design.addView("statusMask_include_inactive_by_modificationTime", new View(
+					  "function(doc) {"
+					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + includeInactiveRegex + ")$/) != null )"
+					+ "    emit( [doc.modificationTime, doc._id], null );"
+					+ "}"));
+			design.addView("statusMask_draft_only_by_modificationTime", new View(
+					  "function(doc) {"
+					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + draftOnlyRegex + ")$/) != null )"
+					+ "    emit( [doc.modificationTime, doc._id], null );"
+					+ "}"));
+			design.addView("statusMask_void_only_by_modificationTime", new View(
+					  "function(doc) {"
+					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + voidOnlyRegex + ")$/) != null )"
+					+ "    emit( [doc.modificationTime, doc._id], null );"
+					+ "}"));
+		} else {
+			// no status, means everything is identical to 'raw'
+			design.addView(VIEW_UID_PREFIX + StatusMask.RAW.getLiteral(), 
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
+			design.addView(VIEW_UID_PREFIX + StatusMask.ACTIVE_ONLY.getLiteral(), 
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
+			design.addView(VIEW_UID_PREFIX + StatusMask.INCLUDE_INACTIVE.getLiteral(), 
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
+			design.addView(VIEW_UID_PREFIX + StatusMask.DRAFT_ONLY.getLiteral(), 
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
+			design.addView(VIEW_UID_PREFIX + StatusMask.VOID_ONLY.getLiteral(), 
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
+
+			design.addView("statusMask_" + StatusMask.RAW.getLiteral() + "_by_modificationTime", 
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+			design.addView("statusMask_" + StatusMask.ACTIVE_ONLY.getLiteral() + "_by_modificationTime", 
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+			design.addView("statusMask_" + StatusMask.INCLUDE_INACTIVE.getLiteral() + "_by_modificationTime", 
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+			design.addView("statusMask_" + StatusMask.DRAFT_ONLY.getLiteral() + "_by_modificationTime", 
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+			design.addView("statusMask_" + StatusMask.VOID_ONLY.getLiteral() + "_by_modificationTime", 
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+		}
+		
 //		addStatusMaskDesignView(design, "modificationTime", null);
-		design.addView("statusMask_raw_by_modificationTime", 
-				new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
-		final String activeOnlyRegex = Joiner.on('|').join(Collections2.transform(activeStatuses, 
-				new Function<E, String>() {
-			@Override @Nullable
-			public String apply(@Nullable E input) {
-				return input.name().toLowerCase();
-			}
-		}));
-		final String includeInactiveRegex = Joiner.on('|').join(
-				Collections2.transform(Sets.union(activeStatuses, inactiveStatuses), new Function<E, String>() {
-			@Override @Nullable
-			public String apply(@Nullable E input) {
-				return input.name().toLowerCase();
-			}
-		}));
-		final String draftOnlyRegex = Joiner.on('|').join(
-				Collections2.transform(draftStatuses, new Function<E, String>() {
-			@Override @Nullable
-			public String apply(@Nullable E input) {
-				return input.name().toLowerCase();
-			}
-		}));
-		final String voidOnlyRegex = Joiner.on('|').join(
-				Collections2.transform(voidStatuses, new Function<E, String>() {
-			@Override @Nullable
-			public String apply(@Nullable E input) {
-				return input.name().toLowerCase();
-			}
-		}));
-		design.addView("statusMask_active_only_by_modificationTime", new View(
-				  "function(doc) {"
-				+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + activeOnlyRegex + ")$/) != null )"
-				+ "    emit( [doc.modificationTime, doc._id], null );"
-				+ "}"));
-		design.addView("statusMask_include_inactive_by_modificationTime", new View(
-				  "function(doc) {"
-				+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + includeInactiveRegex + ")$/) != null )"
-				+ "    emit( [doc.modificationTime, doc._id], null );"
-				+ "}"));
-		design.addView("statusMask_draft_only_by_modificationTime", new View(
-				  "function(doc) {"
-				+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + draftOnlyRegex + ")$/) != null )"
-				+ "    emit( [doc.modificationTime, doc._id], null );"
-				+ "}"));
-		design.addView("statusMask_void_only_by_modificationTime", new View(
-				  "function(doc) {"
-				+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + voidOnlyRegex + ")$/) != null )"
-				+ "    emit( [doc.modificationTime, doc._id], null );"
-				+ "}"));
 	}
 
 	protected DesignDocument.View addStatusMaskDesignView(DesignDocument design,

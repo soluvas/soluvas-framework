@@ -163,6 +163,14 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 				return createMediaAdapter();
 			}
 			@Override
+			public Adapter caseMediaAttachment(MediaAttachment object) {
+				return createMediaAttachmentAdapter();
+			}
+			@Override
+			public Adapter caseMediaAttachmentEntry(Map.Entry<String, MediaAttachment> object) {
+				return createMediaAttachmentEntryAdapter();
+			}
+			@Override
 			public Adapter caseIdentifiable(Identifiable object) {
 				return createIdentifiableAdapter();
 			}
@@ -511,6 +519,34 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMediaAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.MediaAttachment <em>Media Attachment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.MediaAttachment
+	 * @generated
+	 */
+	public Adapter createMediaAttachmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Media Attachment Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createMediaAttachmentEntryAdapter() {
 		return null;
 	}
 

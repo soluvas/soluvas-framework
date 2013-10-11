@@ -3,23 +3,34 @@
 package org.soluvas.image.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
-
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.eclipse.emf.ecore.util.EcoreEMap;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.joda.time.DateTime;
-
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.Revisionable;
 import org.soluvas.commons.Timestamped;
-
+import org.soluvas.commons.mongo.BigDecimalConverter;
+import org.soluvas.commons.mongo.CurrencyUnitConverter;
+import org.soluvas.commons.mongo.DateTimeConverter;
+import org.soluvas.commons.mongo.UnitConverter;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.Media;
+import org.soluvas.image.MediaAttachment;
 import org.soluvas.image.MediaStatus;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.code.morphia.annotations.Converters;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,11 +47,14 @@ import org.soluvas.image.MediaStatus;
  *   <li>{@link org.soluvas.image.impl.MediaImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.image.impl.MediaImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.soluvas.image.impl.MediaImpl#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.MediaImpl#getAttachments <em>Attachments</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
+@Converters({BigDecimalConverter.class, DateTimeConverter.class,
+	CurrencyUnitConverter.class, UnitConverter.class})
 public class MediaImpl extends EObjectImpl implements Media {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -60,6 +74,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonProperty("uid")
 	protected String id = ID_EDEFAULT;
 
 	/**
@@ -80,6 +95,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonProperty("_id")
 	protected String guid = GUID_EDEFAULT;
 
 	/**
@@ -100,6 +116,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonProperty("_rev") @JsonInclude(Include.NON_NULL)
 	protected String revision = REVISION_EDEFAULT;
 
 	/**
@@ -203,6 +220,17 @@ public class MediaImpl extends EObjectImpl implements Media {
 	protected MediaStatus status = STATUS_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getAttachments() <em>Attachments</em>}' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttachments()
+	 * @generated
+	 * @ordered
+	 */
+	@JsonProperty("_attachments")
+	protected EMap<String, MediaAttachment> attachments;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -226,6 +254,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -235,6 +264,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(String newId) {
 		String oldId = id;
 		id = newId;
@@ -247,6 +277,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getGuid() {
 		return guid;
 	}
@@ -256,6 +287,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGuid(String newGuid) {
 		String oldGuid = guid;
 		guid = newGuid;
@@ -268,6 +300,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getRevision() {
 		return revision;
 	}
@@ -277,6 +310,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRevision(String newRevision) {
 		String oldRevision = revision;
 		revision = newRevision;
@@ -289,6 +323,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getCreationTime() {
 		return creationTime;
 	}
@@ -298,6 +333,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCreationTime(DateTime newCreationTime) {
 		DateTime oldCreationTime = creationTime;
 		creationTime = newCreationTime;
@@ -310,6 +346,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getModificationTime() {
 		return modificationTime;
 	}
@@ -319,6 +356,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setModificationTime(DateTime newModificationTime) {
 		DateTime oldModificationTime = modificationTime;
 		modificationTime = newModificationTime;
@@ -331,6 +369,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -340,6 +379,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -352,6 +392,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getType() {
 		return type;
 	}
@@ -361,6 +402,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MediaStatus getStatus() {
 		return status;
 	}
@@ -370,11 +412,39 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatus(MediaStatus newStatus) {
 		MediaStatus oldStatus = status;
 		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ImagePackage.MEDIA__STATUS, oldStatus, status));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EMap<String, MediaAttachment> getAttachments() {
+		if (attachments == null) {
+			attachments = new EcoreEMap<String,MediaAttachment>(ImagePackage.Literals.MEDIA_ATTACHMENT_ENTRY, MediaAttachmentEntryImpl.class, this, ImagePackage.MEDIA__ATTACHMENTS);
+		}
+		return attachments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ImagePackage.MEDIA__ATTACHMENTS:
+				return ((InternalEList<?>)getAttachments()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -401,6 +471,9 @@ public class MediaImpl extends EObjectImpl implements Media {
 				return getType();
 			case ImagePackage.MEDIA__STATUS:
 				return getStatus();
+			case ImagePackage.MEDIA__ATTACHMENTS:
+				if (coreType) return getAttachments();
+				else return getAttachments().map();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -433,6 +506,9 @@ public class MediaImpl extends EObjectImpl implements Media {
 				return;
 			case ImagePackage.MEDIA__STATUS:
 				setStatus((MediaStatus)newValue);
+				return;
+			case ImagePackage.MEDIA__ATTACHMENTS:
+				((EStructuralFeature.Setting)getAttachments()).set(newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -467,6 +543,9 @@ public class MediaImpl extends EObjectImpl implements Media {
 			case ImagePackage.MEDIA__STATUS:
 				setStatus(STATUS_EDEFAULT);
 				return;
+			case ImagePackage.MEDIA__ATTACHMENTS:
+				getAttachments().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -495,6 +574,8 @@ public class MediaImpl extends EObjectImpl implements Media {
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case ImagePackage.MEDIA__STATUS:
 				return status != STATUS_EDEFAULT;
+			case ImagePackage.MEDIA__ATTACHMENTS:
+				return attachments != null && !attachments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

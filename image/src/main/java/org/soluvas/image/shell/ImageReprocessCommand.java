@@ -2,9 +2,7 @@ package org.soluvas.image.shell;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-import java.util.List;
-
-import javax.inject.Inject;
+import java.util.Map;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -45,17 +43,10 @@ public class ImageReprocessCommand extends ExtCommandSupport {
 			description="Image ID(s).")
 	private String[] ids;
 	
-	private final List<ImageRepository> imageRepos;
-
-	@Inject
-	public ImageReprocessCommand(List<ImageRepository> imageRepos) {
-		super();
-		this.imageRepos = imageRepos;
-	}
-	
 	@Override
 	protected Object doExecute() throws Exception {
-		final ImageRepository imageRepo = Iterables.find(imageRepos, new Predicate<ImageRepository>() {
+		final Map<String, ImageRepository> imageRepos = getBeans(ImageRepository.class);
+		final ImageRepository imageRepo = Iterables.find(imageRepos.values(), new Predicate<ImageRepository>() {
 			@Override
 			public boolean apply(ImageRepository input) {
 				return namespace.equals(input.getNamespace());

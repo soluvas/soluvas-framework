@@ -166,6 +166,15 @@ public interface ImageFactory extends EFactory {
 	Media createMedia();
 
 	/**
+	 * Returns a new object of class '<em>Media Attachment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Media Attachment</em>'.
+	 * @generated
+	 */
+	MediaAttachment createMediaAttachment();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -233,6 +233,18 @@ public class ImageSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ImagePackage.MEDIA_ATTACHMENT: {
+				MediaAttachment mediaAttachment = (MediaAttachment)theEObject;
+				T result = caseMediaAttachment(mediaAttachment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.MEDIA_ATTACHMENT_ENTRY: {
+				@SuppressWarnings("unchecked") Map.Entry<String, MediaAttachment> mediaAttachmentEntry = (Map.Entry<String, MediaAttachment>)theEObject;
+				T result = caseMediaAttachmentEntry(mediaAttachmentEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -564,6 +576,36 @@ public class ImageSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMedia(Media object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Media Attachment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Media Attachment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMediaAttachment(MediaAttachment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Media Attachment Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Media Attachment Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMediaAttachmentEntry(Map.Entry<String, MediaAttachment> object) {
 		return null;
 	}
 

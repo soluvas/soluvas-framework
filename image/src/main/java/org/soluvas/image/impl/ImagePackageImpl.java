@@ -37,6 +37,7 @@ import org.soluvas.image.ImageType;
 import org.soluvas.image.ImageTypes;
 import org.soluvas.image.ImageVariant;
 import org.soluvas.image.Media;
+import org.soluvas.image.MediaAttachment;
 import org.soluvas.image.MediaStatus;
 import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.ResizeToFit;
@@ -202,6 +203,18 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	private EClass mediaEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mediaAttachmentEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mediaAttachmentEntryEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1206,6 +1219,96 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getMedia_Attachments() {
+		return (EReference)mediaEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMediaAttachment() {
+		return mediaAttachmentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMediaAttachment_ContentType() {
+		return (EAttribute)mediaAttachmentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMediaAttachment_RevPos() {
+		return (EAttribute)mediaAttachmentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMediaAttachment_Digest() {
+		return (EAttribute)mediaAttachmentEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMediaAttachment_Length() {
+		return (EAttribute)mediaAttachmentEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMediaAttachment_Stub() {
+		return (EAttribute)mediaAttachmentEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMediaAttachmentEntry() {
+		return mediaAttachmentEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMediaAttachmentEntry_Key() {
+		return (EAttribute)mediaAttachmentEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMediaAttachmentEntry_Value() {
+		return (EReference)mediaAttachmentEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getImageTransformType() {
 		return imageTransformTypeEEnum;
@@ -1441,6 +1544,18 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		mediaEClass = createEClass(MEDIA);
 		createEAttribute(mediaEClass, MEDIA__TYPE);
 		createEAttribute(mediaEClass, MEDIA__STATUS);
+		createEReference(mediaEClass, MEDIA__ATTACHMENTS);
+
+		mediaAttachmentEClass = createEClass(MEDIA_ATTACHMENT);
+		createEAttribute(mediaAttachmentEClass, MEDIA_ATTACHMENT__CONTENT_TYPE);
+		createEAttribute(mediaAttachmentEClass, MEDIA_ATTACHMENT__REV_POS);
+		createEAttribute(mediaAttachmentEClass, MEDIA_ATTACHMENT__DIGEST);
+		createEAttribute(mediaAttachmentEClass, MEDIA_ATTACHMENT__LENGTH);
+		createEAttribute(mediaAttachmentEClass, MEDIA_ATTACHMENT__STUB);
+
+		mediaAttachmentEntryEClass = createEClass(MEDIA_ATTACHMENT_ENTRY);
+		createEAttribute(mediaAttachmentEntryEClass, MEDIA_ATTACHMENT_ENTRY__KEY);
+		createEReference(mediaAttachmentEntryEClass, MEDIA_ATTACHMENT_ENTRY__VALUE);
 
 		// Create enums
 		imageTransformTypeEEnum = createEEnum(IMAGE_TRANSFORM_TYPE);
@@ -1802,6 +1917,18 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEClass(mediaEClass, Media.class, "Media", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMedia_Type(), theEcorePackage.getEString(), "type", "Media", 1, 1, Media.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMedia_Status(), this.getMediaStatus(), "status", null, 1, 1, Media.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMedia_Attachments(), this.getMediaAttachmentEntry(), null, "attachments", null, 0, -1, Media.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mediaAttachmentEClass, MediaAttachment.class, "MediaAttachment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMediaAttachment_ContentType(), theEcorePackage.getEString(), "contentType", null, 1, 1, MediaAttachment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMediaAttachment_RevPos(), theEcorePackage.getELong(), "revPos", null, 0, 1, MediaAttachment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMediaAttachment_Digest(), theEcorePackage.getEString(), "digest", null, 0, 1, MediaAttachment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMediaAttachment_Length(), theEcorePackage.getELong(), "length", null, 0, 1, MediaAttachment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMediaAttachment_Stub(), theEcorePackage.getEBoolean(), "stub", null, 0, 1, MediaAttachment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mediaAttachmentEntryEClass, Map.Entry.class, "MediaAttachmentEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMediaAttachmentEntry_Key(), theEcorePackage.getEString(), "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMediaAttachmentEntry_Value(), this.getMediaAttachment(), null, "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(imageTransformTypeEEnum, ImageTransformType.class, "ImageTransformType");
@@ -2250,6 +2377,24 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Media document containing embedded file as a single (and only) attachment, compatible with CouchDB repository."
+		   });		
+		addAnnotation
+		  (getMediaAttachment_ContentType(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Content type."
+		   });		
+		addAnnotation
+		  (getMediaAttachment_Digest(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Digest, usually MD5 then base64 encoded, e.g. \"md5-kowj0TKpx2GdcR1zV9O11w==\""
+		   });		
+		addAnnotation
+		  (getMediaAttachment_Stub(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Usually true, meaning the attachment content is not included in this object."
 		   });
 	}
 

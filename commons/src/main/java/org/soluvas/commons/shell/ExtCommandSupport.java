@@ -143,7 +143,16 @@ public abstract class ExtCommandSupport extends AbstractAction {
 		// TODO: implement as the Javadoc says
 		return beanFactory.getBean(requiredType);
 	}
-	
+
+	/**
+	 * Return all beans of type T, without {@link Qualifier} support.
+	 * @param requiredType
+	 * @return
+	 */
+	protected <T> Map<String, T> getBeans(Class<T> requiredType) {
+		return beanFactory.getBeansOfType(requiredType);
+	}
+
 	/**
 	 * Return the tenant-scoped bean of type T, with {@link Qualifier} support.
 	 * First it looks up the bean named {@code qualifier + requiredType + "Map"} which must be a {@link Map},

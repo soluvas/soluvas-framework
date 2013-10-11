@@ -2,10 +2,9 @@
 
 import java.io.File;
 import java.net.URL;
-import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -52,20 +51,10 @@ public class ImageAddCommand extends ExtCommandSupport {
 		description="Short descriptive name. Default: (base filename).")
 	private String name;
 
-	private final List<ImageRepository> imageRepos;
-
-	@Inject
-	public ImageAddCommand(List<ImageRepository> imageRepos) {
-		super();
-		this.imageRepos = imageRepos;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
-	 */
 	@Override
 	protected Object doExecute() throws Exception {
-		final ImageRepository imageRepo = Iterables.find(imageRepos, new Predicate<ImageRepository>() {
+		final Map<String, ImageRepository> imageRepos = getBeans(ImageRepository.class);
+		final ImageRepository imageRepo = Iterables.find(imageRepos.values(), new Predicate<ImageRepository>() {
 			@Override
 			public boolean apply(@Nullable ImageRepository input) {
 				return namespace.equals(input.getNamespace());

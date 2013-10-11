@@ -2,6 +2,7 @@
  */
 package org.soluvas.image;
 
+import org.eclipse.emf.common.util.EMap;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Revisionable;
@@ -21,6 +22,7 @@ import org.soluvas.commons.Timestamped;
  * <ul>
  *   <li>{@link org.soluvas.image.Media#getType <em>Type</em>}</li>
  *   <li>{@link org.soluvas.image.Media#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.soluvas.image.Media#getAttachments <em>Attachments</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,5 +75,22 @@ public interface Media extends Identifiable, Revisionable, Timestamped, NameCont
 	 * @generated
 	 */
 	void setStatus(MediaStatus value);
+
+	/**
+	 * Returns the value of the '<em><b>Attachments</b></em>' map.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link org.soluvas.image.MediaAttachment},
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Attachments</em>' map isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Attachments</em>' map.
+	 * @see org.soluvas.image.ImagePackage#getMedia_Attachments()
+	 * @model mapType="org.soluvas.image.MediaAttachmentEntry<org.eclipse.emf.ecore.EString, org.soluvas.image.MediaAttachment>"
+	 * @generated
+	 */
+	EMap<String, MediaAttachment> getAttachments();
 
 } // Media

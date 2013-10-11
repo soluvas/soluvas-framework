@@ -4,10 +4,9 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 import java.text.NumberFormat;
 import java.util.Collection;
-import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
@@ -39,21 +38,14 @@ public class ImageLsCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(ImageLsCommand.class);
 
-	private final List<ImageRepository> imageRepos;
-
 	@Option(name="-n", aliases={"--ns", "--namespace"},
 			description="Namespace, e.g. person, shop, product.")
 	private transient String namespace = "person";
 
-	@Inject
-	public ImageLsCommand(List<ImageRepository> imageRepos) {
-		super();
-		this.imageRepos = imageRepos;
-	}
-	
 	@Override
 	protected Object doExecute() throws Exception {
-		final ImageRepository imageRepo = Iterables.find(imageRepos, new Predicate<ImageRepository>() {
+		final Map<String, ImageRepository> imageRepos = getBeans(ImageRepository.class);
+		final ImageRepository imageRepo = Iterables.find(imageRepos.values(), new Predicate<ImageRepository>() {
 			@Override
 			public boolean apply(@Nullable ImageRepository input) {
 				return namespace.equals(input.getNamespace());

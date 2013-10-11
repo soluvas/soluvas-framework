@@ -2,10 +2,9 @@ package org.soluvas.image.shell;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -42,17 +41,10 @@ public class ImageRmCommand extends ExtCommandSupport {
 			description="Image ID(s).")
 	private String[] ids;
 	
-	private final List<ImageRepository> imageRepos;
-
-	@Inject
-	public ImageRmCommand(List<ImageRepository> imageRepos) {
-		super();
-		this.imageRepos = imageRepos;
-	}
-	
 	@Override
 	protected Object doExecute() throws Exception {
-		final ImageRepository imageRepo = Iterables.find(imageRepos, new Predicate<ImageRepository>() {
+		final Map<String, ImageRepository> imageRepos = getBeans(ImageRepository.class);
+		final ImageRepository imageRepo = Iterables.find(imageRepos.values(), new Predicate<ImageRepository>() {
 			@Override
 			public boolean apply(@Nullable ImageRepository input) {
 				return namespace.equals(input.getNamespace());
