@@ -6,6 +6,8 @@ package org.soluvas.mongo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.impl.PersonImpl;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.person.PersonRepository;
 
 import com.google.code.morphia.logging.MorphiaLoggerFactory;
@@ -48,7 +51,7 @@ public class MongoPersonRepositoryTest {
 		person.setName("Atang Sutisna");
 		person.setAccountStatus(AccountStatus.ACTIVE);
 		
-		final ImmutableList<String> roles = ImmutableList.of("admin", "sysadmin");
+		final List<String> roles = ImmutableList.of("admin", "sysadmin");
 		person.getSecurityRoleIds().addAll(roles);
 		final Person personAdded = personRepo.add(person);
 		assertNotNull(personAdded);
@@ -56,5 +59,14 @@ public class MongoPersonRepositoryTest {
 		
 		log.info("1 person was added {} ", personAdded);
 	}
+	
+	@Test
+	public void canFindOneBySlug() {
+		final String slug = "yuni-arcadia";
+		final Person person = personRepo.findOneBySlug(StatusMask.ACTIVE_ONLY, slug);
+		assertNotNull(String.format("Person by slug %s must not be null", slug),  person);
+		log.info("Got person by slug {}: {}", slug, person);
+	}
+	
 
 }
