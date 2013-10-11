@@ -447,8 +447,13 @@ public class XmiCategoryRepository
 			}
 		};
 		final Category found = Iterables.find(getFlattenedCategories(), filter, null);
-		log.debug("findOneBySlugPath {} {} = {}", slugPath, statuses, found != null ? found.getId() : null);
-		return found;
+		if (found != null) {
+			log.debug("findOneBySlugPath {} {} = {}", slugPath, statuses, found.getId());
+			return EcoreUtil.copy(found);
+		} else {
+			log.debug("findOneBySlugPath {} {} is null", slugPath, statuses);
+			return found;
+		}
 	}
 
 }
