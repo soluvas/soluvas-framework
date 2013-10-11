@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
+import org.soluvas.image.Media;
 import org.soluvas.image.MediaRepository;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,8 @@ public class MediaCatCommand extends ExtCommandSupport {
 		} else if (byGuid) {
 			return mediaRepo.lookupOne(statusMask, LookupKey.GUID, id);
 		} else {
-			return mediaRepo.lookupOne(statusMask, LookupKey.ID, id);
+			final Media media = mediaRepo.lookupOne(statusMask, LookupKey.ID, id);
+			return media;
 		}
 	}
 

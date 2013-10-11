@@ -30,6 +30,7 @@ import org.soluvas.image.MediaStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.code.morphia.annotations.Converters;
 
 /**
@@ -227,7 +228,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * @generated
 	 * @ordered
 	 */
-	@JsonProperty("_attachments")
+	@JsonProperty("_attachments") @JsonDeserialize(using=MediaAttachmentEMapDeserializer.class)
 	protected EMap<String, MediaAttachment> attachments;
 
 	/**

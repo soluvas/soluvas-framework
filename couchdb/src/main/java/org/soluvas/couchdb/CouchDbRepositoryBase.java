@@ -94,6 +94,10 @@ import com.google.common.collect.Sets.SetView;
 public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> extends StatusAwareRepositoryBase<T, String>
 	implements CouchDbRepository<T>, GenericLookup<T> {
 	
+	/**
+	 * Used by {@link #addStatusMaskDesignView(DesignDocument, String, String, Set, Set, Set, Set, String, String)}.
+	 */
+	public static final String VIEW_STATUSMASK_PREFIX = "statusMask_";
 	public static final String VIEW_UID = "uid";
 	/**
 	 * Views: uid_raw, uid_active_only, uid_include_inactive, uid_draft_only, uid_void_only.
@@ -269,6 +273,8 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		design.addView("filter_status", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' && doc.status != null ) emit( doc.status, null ); }"));
 		design.addView("by_modificationTime", new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
 		
+		addStatusMaskDesignView(design, "uid");
+		
 		if (statusProperty != null) {
 			final String activeOnlyRegex = Joiner.on('|').join(Collections2.transform(activeStatuses, 
 					new Function<E, String>() {
@@ -357,30 +363,53 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 			design.addView(VIEW_UID_PREFIX + StatusMask.VOID_ONLY.getLiteral(), 
 					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
 
-			design.addView("statusMask_" + StatusMask.RAW.getLiteral() + "_by_modificationTime", 
+			design.addView(VIEW_STATUSMASK_PREFIX + StatusMask.RAW.getLiteral() + "_by_modificationTime", 
 					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
-			design.addView("statusMask_" + StatusMask.ACTIVE_ONLY.getLiteral() + "_by_modificationTime", 
+			design.addView(VIEW_STATUSMASK_PREFIX + StatusMask.ACTIVE_ONLY.getLiteral() + "_by_modificationTime", 
 					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
-			design.addView("statusMask_" + StatusMask.INCLUDE_INACTIVE.getLiteral() + "_by_modificationTime", 
+			design.addView(VIEW_STATUSMASK_PREFIX + StatusMask.INCLUDE_INACTIVE.getLiteral() + "_by_modificationTime", 
 					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
-			design.addView("statusMask_" + StatusMask.DRAFT_ONLY.getLiteral() + "_by_modificationTime", 
+			design.addView(VIEW_STATUSMASK_PREFIX + StatusMask.DRAFT_ONLY.getLiteral() + "_by_modificationTime", 
 					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
-			design.addView("statusMask_" + StatusMask.VOID_ONLY.getLiteral() + "_by_modificationTime", 
+			design.addView(VIEW_STATUSMASK_PREFIX + StatusMask.VOID_ONLY.getLiteral() + "_by_modificationTime", 
 					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
 		}
 		
 //		addStatusMaskDesignView(design, "modificationTime", null);
 	}
 
+	/**
+	 * Adds either a real {@link StatusMask} {@link View} when {@link #statusProperty} exists,
+	 * or a dummy one if {@link #statusProperty} is {@code null}.
+	 * @param design
+	 * @param targetProperty
+	 * @param valueProperty
+	 * @return
+	 */
 	protected DesignDocument.View addStatusMaskDesignView(DesignDocument design,
 			String targetProperty, @Nullable String valueProperty) {
-		return addStatusMaskDesignView(design, entityClass.getSimpleName(),
-				statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, targetProperty, valueProperty);
+		if (statusProperty != null) {
+			return addStatusMaskDesignView(design, entityClass.getSimpleName(),
+					statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, targetProperty, valueProperty);
+		} else {
+			return addDummyStatusMaskDesignView(design, entityClass.getSimpleName(), targetProperty, valueProperty);
+		}
 	}
 
+	/**
+	 * Adds either a real {@link StatusMask} {@link View} when {@link #statusProperty} exists,
+	 * or a dummy one if {@link #statusProperty} is {@code null}.
+	 * @param design
+	 * @param targetProperty
+	 * @return
+	 */
 	protected DesignDocument.View addStatusMaskDesignView(DesignDocument design, String targetProperty) {
-		return addStatusMaskDesignView(design, entityClass.getSimpleName(),
-				statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, targetProperty);
+		if (statusProperty != null) {
+			return addStatusMaskDesignView(design, entityClass.getSimpleName(),
+					statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, targetProperty);
+		} else {
+			return addDummyStatusMaskDesignView(design, entityClass.getSimpleName(), targetProperty, targetProperty);
+		}
 	}
 
 	/**
@@ -480,9 +509,38 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 			+ "      emit(['" + StatusMask.VOID_ONLY.getLiteral() + "', doc." + targetProperty + "], " + jsValueProperty + ");\n"
 			+ "  }\n"
 			+ "}";
-		final String viewName = "statusMask_" + targetProperty;
+		final String viewName = VIEW_STATUSMASK_PREFIX + targetProperty;
 		LoggerFactory.getLogger(CouchDbRepositoryBase.class).debug("Dynamic view '{}' for actives={} inactives={} drafts={} voids={}: {}", 
 				viewName, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, map);
+		final View view = new View(map);
+		design.addView(viewName, view);
+		return view;
+	}
+	
+	/**
+	 * Adds a dummy {@link StatusMask} Design {@link View}, when document does not use status property.
+	 * @param design
+	 * @param entitySimpleName
+	 * @param targetProperty
+	 * @param valueProperty
+	 * @return
+	 */
+	public static <E extends Enum<E>> DesignDocument.View addDummyStatusMaskDesignView(DesignDocument design,
+			String entitySimpleName, String targetProperty, @Nullable String valueProperty) {
+		final String jsValueProperty = valueProperty != null ? "doc." + valueProperty : "doc." + targetProperty;
+		final String map =
+			  "function(doc) {\n"
+			+ "  if (doc.type == '" + entitySimpleName + "' ) {\n"
+			+ "    emit(['" + StatusMask.RAW.getLiteral() + "', doc." + targetProperty + "], " + jsValueProperty + ");\n"
+			+ "    emit(['" + StatusMask.ACTIVE_ONLY.getLiteral() + "', doc." + targetProperty + "], " + jsValueProperty + ");\n"
+			+ "    emit(['" + StatusMask.INCLUDE_INACTIVE.getLiteral() + "', doc." + targetProperty + "], " + jsValueProperty + ");\n"
+			+ "    emit(['" + StatusMask.DRAFT_ONLY.getLiteral() + "', doc." + targetProperty + "], " + jsValueProperty + ");\n"
+			+ "    emit(['" + StatusMask.VOID_ONLY.getLiteral() + "', doc." + targetProperty + "], " + jsValueProperty + ");\n"
+			+ "  }\n"
+			+ "}";
+		final String viewName = VIEW_STATUSMASK_PREFIX + targetProperty;
+		LoggerFactory.getLogger(CouchDbRepositoryBase.class).debug("Dynamic view '{}' for dummy StatusMask: {}", 
+				viewName, map);
 		final View view = new View(map);
 		design.addView(viewName, view);
 		return view;
@@ -523,7 +581,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	public final Page<T> findAll(StatusMask statusMask, Pageable pageable) {
 		final Sort sort = Optional.fromNullable(pageable.getSort()).or(new Sort("modificationTime"));
 		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-			.viewName("statusMask_" + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
+			.viewName(VIEW_STATUSMASK_PREFIX + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
 			.descending(!sort.iterator().next().isAscending())
 			.includeDocs(true);
 		final PageRequest pageRequest = new PageRequest.Builder().page((int) pageable.getPageNumber()).pageSize((int) pageable.getPageSize()).build();

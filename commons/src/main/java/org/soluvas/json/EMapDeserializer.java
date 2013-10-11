@@ -30,9 +30,9 @@ import com.google.common.collect.Maps;
  * 
  * @author ceefour
  */
-@SuppressWarnings("serial")
 public class EMapDeserializer extends StdDeserializer<EMap<Object, Object>> {
 
+	private static final long serialVersionUID = 1L;
 	private static final Logger log = LoggerFactory
 			.getLogger(EMapDeserializer.class);
 //	private final MapDeserializer mapDeserializer;
@@ -45,8 +45,8 @@ public class EMapDeserializer extends StdDeserializer<EMap<Object, Object>> {
 	@Override
 	public EMap<Object, Object> deserialize(JsonParser jp, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {
-		final JsonDeserializer<Map> mapDeser = (JsonDeserializer) ctxt.findRootValueDeserializer(ctxt.getTypeFactory().constructType(Map.class));
-		final Map<Object, Object> map = mapDeser.deserialize(jp, ctxt);
+		final JsonDeserializer<Map<?, ?>> mapDeser = (JsonDeserializer) ctxt.findRootValueDeserializer(ctxt.getTypeFactory().constructType(Map.class));
+		final Map<?, ?> map = mapDeser.deserialize(jp, ctxt);
 		// convert List to EList
 		final Map<Object, Object> transformed = ImmutableMap.copyOf(Maps.transformValues(map, new Function<Object, Object>() {
 			@SuppressWarnings("unchecked")
