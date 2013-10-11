@@ -5,13 +5,15 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
 import org.apache.http.conn.ClientConnectionManager;
 import org.ektorp.ComplexKey;
-import org.ektorp.DbAccessException;
 import org.ektorp.ViewQuery;
+import org.ektorp.ViewResult;
+import org.ektorp.ViewResult.Row;
 import org.ektorp.support.DesignDocument;
 import org.ektorp.support.DesignDocument.View;
 import org.joda.time.DateTime;
@@ -28,14 +30,18 @@ import org.soluvas.data.UntrashResult;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.person.PersonRepository;
+import org.soluvas.data.push.RepositoryException;
+import org.soluvas.json.JsonUtils;
 
 import scala.util.Failure;
 import scala.util.Success;
 import scala.util.Try;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -169,75 +175,94 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		return findOne(personId);
 	}
 
-	@Override
-	public <S extends Person, K extends Serializable> S lookupOne(
-			StatusMask statusMask, LookupKey lookupKey, K key)
-			throws EntityLookupException {
-		switch (lookupKey) {
-		case EMAIL:
-		{
-			// filter by statusMask in Java, so we can give proper reason
-			final Object[] viewKey = new Object[] { StatusMask.RAW.getLiteral(), key };
-			final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-					.viewName("statusMask_email").key(viewKey).includeDocs(true);
-			log.debug("Querying {} view {} for key {}", 
-					getDesignDocId(), "statusMask_email", viewKey);
-			List<S> fetcheds;
+	/**
+	 * Note: All emails in the CouchDB view must be lowercased.
+	 * @param statusMask
+	 * @param emails These will be lowercased.
+	 * @return The returned keys will be normalized/lowercased emails. Hmm... should we use non-normalized keys?
+	 * 		Like slug/canonicalSlug?
+	 */
+	public <S extends Person> Map<String, Try<S>> lookupAllByEmail(
+			StatusMask statusMask, Collection<String> emails) {
+		// normalize expected emails
+		final Set<String> normalizedEmails = FluentIterable.from(emails).transform(new Function<String, String>() {
+			@Override @Nullable
+			public String apply(@Nullable String input) {
+				return input.toLowerCase();
+			}
+		}).toSet();
+		// filter by statusMask in Java, so we can give proper reason
+		final List<ComplexKey> viewKeys = ImmutableList.copyOf(Collections2.transform(normalizedEmails, 
+				new Function<String, ComplexKey>() {
+			@Override @Nullable
+			public ComplexKey apply(@Nullable String input) {
+				return ComplexKey.of(StatusMask.RAW.getLiteral(), input);
+			}
+		}));
+		final String viewName = "statusMask_email";
+		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
+				.viewName(viewName).key(viewKeys).includeDocs(true);
+		log.debug("Querying {} view {} for {} keys: {}", 
+				getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10));
+		final ViewResult fetcheds = dbConn.queryView(query);
+//		final List<S> fetcheds = (List) dbConn.queryView(query, implClass);
+
+		log.debug("Queried {} view {} for {} keys ({}) returned {} entities", 
+				getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10), fetcheds.getSize() ); 
+
+		final Map<String, Try<S>> resultMap = new HashMap<>();
+		for (final Row row : fetcheds) {
+			final String actualEmail = row.getKeyAsNode().get(1).asText();
+			S person;
 			try {
-				fetcheds = (List) dbConn.queryView(query, implClass);
-			} catch (DbAccessException e) {
-				if (e.getMessage().contains("update_seq")) {
-					log.debug("Returning empty list for DbAccessException " + e, e);
-					fetcheds = ImmutableList.of();
+				person = (S) JsonUtils.mapper.treeToValue(row.getDocAsNode(), entityClass);
+			} catch (JsonProcessingException e) {
+				throw new RepositoryException(e, "Cannot deserialize document '%s' to %s: %s",
+						row.getId(), entityClass.getName(), row.getDocAsNode());
+			}
+			switch (statusMask) {
+			case RAW:
+				resultMap.put(actualEmail, new Success<>(person));
+			case ACTIVE_ONLY:
+				if (activeStatuses.contains(person.getAccountStatus())) {
+					resultMap.put(actualEmail, new Success<>(person));
 				} else {
-					throw e;
+					resultMap.put(actualEmail, new Failure<S>(
+							new EntityLookupException(Person.class, statusMask, LookupKey.EMAIL, actualEmail, this, Optional.fromNullable(person.getAccountStatus()))));
 				}
-			}
-
-			log.debug("Queried {} view {} for key {} returned {} entities: {}", 
-					getDesignDocId(), "statusMask_email", viewKey, fetcheds.size(), 
-					Iterables.limit(Lists.transform(fetcheds, new org.soluvas.commons.IdFunction()), 10));
-			if (fetcheds.isEmpty()) {
-				throw new EntityLookupException(Person.class, statusMask, lookupKey, key, this, Optional.<AccountStatus>absent());
-			} else {
-				final S fetched = fetcheds.iterator().next();
-				switch (statusMask) {
-				case RAW:
-					return fetched;
-				case ACTIVE_ONLY:
-					if (ImmutableSet.of(AccountStatus.ACTIVE, AccountStatus.VALIDATED, AccountStatus.VERIFIED).contains(fetched.getAccountStatus())) {
-						return fetched;
-					} else {
-						throw new EntityLookupException(Person.class, statusMask, lookupKey, key, this, Optional.fromNullable(fetched.getAccountStatus()));
-					}
-				case INCLUDE_INACTIVE:
-					if (ImmutableSet.of(AccountStatus.ACTIVE, AccountStatus.VALIDATED, AccountStatus.VERIFIED, AccountStatus.INACTIVE).contains(fetched.getAccountStatus())) {
-						return fetched;
-					} else {
-						throw new EntityLookupException(Person.class, statusMask, lookupKey, key, this, Optional.fromNullable(fetched.getAccountStatus()));
-					}
-				case DRAFT_ONLY:
-					if (ImmutableSet.of(AccountStatus.DRAFT).contains(fetched.getAccountStatus())) {
-						return fetched;
-					} else {
-						throw new EntityLookupException(Person.class, statusMask, lookupKey, key, this, Optional.fromNullable(fetched.getAccountStatus()));
-					}
-				case VOID_ONLY:
-					if (ImmutableSet.of(AccountStatus.VOID).contains(fetched.getAccountStatus())) {
-						return fetched;
-					} else {
-						throw new EntityLookupException(Person.class, statusMask, lookupKey, key, this, Optional.fromNullable(fetched.getAccountStatus()));
-					}
+			case INCLUDE_INACTIVE:
+				if (Sets.union(activeStatuses, inactiveStatuses).contains(person.getAccountStatus())) {
+					resultMap.put(actualEmail, new Success<>(person));
+				} else {
+					resultMap.put(actualEmail, new Failure<S>(
+							new EntityLookupException(Person.class, statusMask, LookupKey.EMAIL, actualEmail, this, Optional.fromNullable(person.getAccountStatus()))));
+				}
+			case DRAFT_ONLY:
+				if (ImmutableSet.of(AccountStatus.DRAFT).contains(person.getAccountStatus())) {
+					resultMap.put(actualEmail, new Success<>(person));
+				} else {
+					resultMap.put(actualEmail, new Failure<S>(
+							new EntityLookupException(Person.class, statusMask, LookupKey.EMAIL, actualEmail, this, Optional.fromNullable(person.getAccountStatus()))));
+				}
+			case VOID_ONLY:
+				if (ImmutableSet.of(AccountStatus.VOID).contains(person.getAccountStatus())) {
+					resultMap.put(actualEmail, new Success<>(person));
+				} else {
+					resultMap.put(actualEmail, new Failure<S>(
+							new EntityLookupException(Person.class, statusMask, LookupKey.EMAIL, actualEmail, this, Optional.fromNullable(person.getAccountStatus()))));
 				}
 			}
 		}
-		case SLUG:
-			return this.<S, K>lookupAll(statusMask, lookupKey, ImmutableSet.of(key)).get(key).get();
-		default:
-			throw new UnsupportedOperationException("Unsupported lookupKey: " + lookupKey);
+		
+		// those actually not found
+		final SetView<String> unfoundKeys = Sets.difference(ImmutableSet.copyOf(normalizedEmails), resultMap.keySet());
+		for (final String unfoundKey : unfoundKeys) {
+			resultMap.put(unfoundKey, new Failure<S>(new EntityLookupException(Person.class, statusMask, LookupKey.EMAIL, unfoundKey, this, Optional.<AccountStatus>absent())));
 		}
+		
+		return resultMap;
 	}
-
+	
 	@Override
 	public <S extends Person, K extends Serializable> Map<K, Try<S>> lookupAll(
 			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
@@ -257,17 +282,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 					.viewName(viewName).keys(viewKeys).includeDocs(true);
 			log.debug("Querying {} view {} for {} keys: {}", 
 					getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10));
-			List<S> fetcheds;
-			try {
-				fetcheds = (List) dbConn.queryView(query, implClass);
-			} catch (DbAccessException e) {
-				if (e.getMessage().contains("update_seq")) {
-					log.debug("Returning empty list for DbAccessException " + e, e);
-					fetcheds = ImmutableList.of();
-				} else {
-					throw e;
-				}
-			}
+			final List<S> fetcheds = (List) dbConn.queryView(query, implClass);
 
 			log.debug("Queried {} view {} for {} keys ({}) returned {} entities: {}", 
 					getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10), fetcheds.size(), 
@@ -280,7 +295,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 					resultMap.put((K) row.getSlug(), new Success<>(row));
 					break;
 				case ACTIVE_ONLY:
-					if (ImmutableSet.of(AccountStatus.ACTIVE, AccountStatus.VALIDATED, AccountStatus.VERIFIED).contains(row.getAccountStatus())) {
+					if (activeStatuses.contains(row.getAccountStatus())) {
 						resultMap.put((K) row.getSlug(), new Success<>(row));
 					} else if (!resultMap.containsKey(row.getSlug())) {
 						resultMap.put((K) row.getSlug(), new Failure<S>(
@@ -288,7 +303,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 					}
 					break;
 				case INCLUDE_INACTIVE:
-					if (ImmutableSet.of(AccountStatus.ACTIVE, AccountStatus.VALIDATED, AccountStatus.VERIFIED, AccountStatus.INACTIVE).contains(row.getAccountStatus())) {
+					if (Sets.union(activeStatuses, inactiveStatuses).contains(row.getAccountStatus())) {
 						resultMap.put((K) row.getSlug(), new Success<>(row));
 					} else if (!resultMap.containsKey(row.getSlug())) {
 						resultMap.put((K) row.getSlug(), new Failure<S>(
@@ -296,7 +311,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 					}
 					break;
 				case DRAFT_ONLY:
-					if (ImmutableSet.of(AccountStatus.DRAFT).contains(row.getAccountStatus())) {
+					if (draftStatuses.contains(row.getAccountStatus())) {
 						resultMap.put((K) row.getSlug(), new Success<>(row));
 					} else if (!resultMap.containsKey(row.getSlug())) {
 						resultMap.put((K) row.getSlug(), new Failure<S>(
@@ -304,7 +319,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 					}
 					break;
 				case VOID_ONLY:
-					if (ImmutableSet.of(AccountStatus.VOID).contains(row.getAccountStatus())) {
+					if (voidStatuses.contains(row.getAccountStatus())) {
 						resultMap.put((K) row.getSlug(), new Success<>(row));
 					} else if (!resultMap.containsKey(row.getSlug())) {
 						resultMap.put((K) row.getSlug(), new Failure<S>(
@@ -322,21 +337,11 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 			
 			return resultMap;
 		}
+		case EMAIL:
+			return (Map) lookupAllByEmail(statusMask, (Collection<String>) keys);
 		default:
 			throw new UnsupportedOperationException("Unsupported lookupKey: " + lookupKey);
 		}
-	}
-
-	@Override
-	public <K extends Serializable> Map<K, Existence<K>> checkExistsAll(
-			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
-		throw new UnsupportedOperationException("Unsupported lookupKey: " + lookupKey);
-	}
-
-	@Override
-	public <K extends Serializable> Existence<K> checkExists(StatusMask statusMask,
-			LookupKey lookupKey, K key) {
-		throw new UnsupportedOperationException("Unsupported lookupKey: " + lookupKey);
 	}
 
 	@Override

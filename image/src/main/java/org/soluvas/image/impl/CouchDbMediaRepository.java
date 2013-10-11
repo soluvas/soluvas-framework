@@ -2,7 +2,6 @@ package org.soluvas.image.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.nio.file.Files;
 import java.util.Collection;
 import java.util.Map;
@@ -11,9 +10,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.http.conn.ClientConnectionManager;
 import org.ektorp.AttachmentInputStream;
 import org.soluvas.couchdb.CouchDbRepositoryBase;
-import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
-import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.TrashResult;
 import org.soluvas.data.UntrashResult;
@@ -87,31 +84,6 @@ public class CouchDbMediaRepository extends CouchDbRepositoryBase<Media, MediaSt
 			throw new RepositoryException(e, "Cannot probe content type from '%s' for media '%s'", 
 					file, media.getId());
 		}
-	}
-
-	@Override
-	public <S extends Media, K extends Serializable> S lookupOne(
-			StatusMask statusMask, LookupKey lookupKey, K key)
-			throws EntityLookupException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public <S extends Media, K extends Serializable> Map<K, Try<S>> lookupAll(
-			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public <K extends Serializable> Map<K, Existence<K>> checkExistsAll(
-			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public <K extends Serializable> Existence<K> checkExists(StatusMask statusMask,
-			LookupKey lookupKey, K key) {
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
