@@ -1,5 +1,7 @@
 package org.soluvas.couchdb;
 
+import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,9 +15,11 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.ClientConnectionManager;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ektorp.ComplexKey;
 import org.ektorp.CouchDbConnector;
 import org.ektorp.DbAccessException;
 import org.ektorp.DocumentNotFoundException;
@@ -41,8 +45,10 @@ import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.commons.util.Profiled;
 import org.soluvas.data.DataException;
+import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.GenericLookup;
+import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
@@ -52,6 +58,10 @@ import org.soluvas.data.push.RepositoryException;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.StatusAwareRepository;
 import org.soluvas.data.repository.StatusAwareRepositoryBase;
+
+import scala.util.Failure;
+import scala.util.Success;
+import scala.util.Try;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -82,7 +92,7 @@ import com.google.common.collect.Sets.SetView;
  * @author ceefour
  */
 public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> extends StatusAwareRepositoryBase<T, String>
-	implements CouchDbRepository<T> {
+	implements CouchDbRepository<T>, GenericLookup<T> {
 	
 	public static final String VIEW_UID = "uid";
 	/**
@@ -869,6 +879,132 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		}
 		
 		return resultMap;
+	}
+
+	public <S extends T> Map<String, Try<S>> lookupAllByIds(
+			StatusMask statusMask, Collection<String> ids) {
+		// filter by statusMask in Java, so we can give proper reason
+		final List<ComplexKey> viewKeys = ImmutableList.copyOf(Collections2.transform(ids, 
+				new Function<String, ComplexKey>() {
+			@Override @Nullable
+			public ComplexKey apply(@Nullable String input) {
+				return ComplexKey.of(StatusMask.RAW.getLiteral(), input);
+			}
+		}));
+//		final Object[] viewKey = new Object[] { StatusMask.RAW.getLiteral(), key };
+		final String viewName = "statusMask_uid";
+		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
+				.viewName(viewName).keys(viewKeys).includeDocs(true);
+		log.debug("Querying {} view {} for {} keys: {}", 
+				getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10));
+		final List<S> fetcheds = (List) dbConn.queryView(query, implClass);
+
+		log.debug("Queried {} view {} for {} keys ({}) returned {} entities: {}", 
+				getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10), fetcheds.size(), 
+				Iterables.limit(Lists.transform(fetcheds, new org.soluvas.commons.IdFunction()), 10));
+		
+		final Map<String, Try<S>> resultMap = new HashMap<>();
+		for (final S row : fetcheds) {
+			if (statusProperty != null) {
+				// TODO: make it typesafe
+				E actualStatus = null;
+				try {
+					actualStatus = (E) PropertyUtils.getProperty(row, "status");
+				} catch (IllegalAccessException | InvocationTargetException
+						| NoSuchMethodException e) {
+					log.warn("Cannot get status of " + entityClass.getSimpleName() + " '" + row.getId() + "'", e);
+				}
+				switch (statusMask) {
+				case RAW:
+					resultMap.put(row.getId(), new Success<>(row));
+					break;
+				case ACTIVE_ONLY:
+					if (actualStatus != null && activeStatuses.contains(actualStatus)) {
+						resultMap.put(row.getId(), new Success<>(row));
+					} else if (!resultMap.containsKey(row.getId())) {
+						resultMap.put(row.getId(), new Failure<S>(
+								new EntityLookupException(entityClass, statusMask, LookupKey.ID, row.getId(), this, Optional.fromNullable(actualStatus))));
+					}
+					break;
+				case INCLUDE_INACTIVE:
+					if (actualStatus != null && Sets.union(activeStatuses, inactiveStatuses).contains(actualStatus)) {
+						resultMap.put(row.getId(), new Success<>(row));
+					} else if (!resultMap.containsKey(row.getId())) {
+						resultMap.put(row.getId(), new Failure<S>(
+								new EntityLookupException(entityClass, statusMask, LookupKey.ID, row.getId(), this, Optional.fromNullable(actualStatus))));
+					}
+					break;
+				case DRAFT_ONLY:
+					if (actualStatus != null && draftStatuses.contains(actualStatus)) {
+						resultMap.put(row.getId(), new Success<>(row));
+					} else if (!resultMap.containsKey(row.getId())) {
+						resultMap.put(row.getId(), new Failure<S>(
+								new EntityLookupException(entityClass, statusMask, LookupKey.ID, row.getId(), this, Optional.fromNullable(actualStatus))));
+					}
+					break;
+				case VOID_ONLY:
+					if (actualStatus != null && voidStatuses.contains(actualStatus)) {
+						resultMap.put(row.getId(), new Success<>(row));
+					} else if (!resultMap.containsKey(row.getId())) {
+						resultMap.put(row.getId(), new Failure<S>(
+								new EntityLookupException(entityClass, statusMask, LookupKey.ID, row.getId(), this, Optional.fromNullable(actualStatus))));
+					}
+					break;
+				}
+			} else {
+				resultMap.put(row.getId(), new Success<>(row));
+			}
+		}
+		
+		// those actually not found
+		final SetView<String> unfoundKeys = Sets.difference(ImmutableSet.copyOf(ids), resultMap.keySet());
+		for (final String unfoundKey : unfoundKeys) {
+			resultMap.put(unfoundKey, new Failure<S>(new EntityLookupException(entityClass, statusMask, LookupKey.ID, unfoundKey, this, Optional.<E>absent())));
+		}
+		
+		return resultMap;
+	}
+	
+	public <S extends T> S lookupOneById(StatusMask statusMask, String id)
+			throws EntityLookupException {
+		return (S) lookupAllByIds(statusMask, ImmutableSet.of(id)).get(id).get();
+	}
+
+	@Override
+	public final <S extends T, K extends Serializable> S lookupOne(
+			StatusMask statusMask, LookupKey lookupKey, K key)
+			throws EntityLookupException {
+		return (S) lookupAll(statusMask, lookupKey, ImmutableSet.of(key)).get(key).get();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <S extends T, K extends Serializable> Map<K, Try<S>> lookupAll(
+			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
+		switch (lookupKey) {
+		case ID:
+			return (Map) lookupAllByIds(statusMask, (Collection<String>) keys);
+		default:
+			throw new UnsupportedOperationException("to be implemented");
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K extends Serializable> Map<K, Existence<K>> checkExistsAll(
+			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
+		switch (lookupKey) {
+		case ID:
+			return (Map) existsAllById(statusMask, (Collection<String>) keys);
+		default:
+			throw new UnsupportedOperationException("to be implemented");
+		}
+	}
+
+	@Override
+	public final <K extends Serializable> Existence<K> checkExists(
+			StatusMask statusMask, LookupKey lookupKey, K key) {
+		return checkExistsAll(statusMask, lookupKey, ImmutableSet.of(key)).get(key);
 	}
 
 }
