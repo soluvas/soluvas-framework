@@ -3,19 +3,21 @@ package org.soluvas.security;
 import java.util.Collection;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
+import org.soluvas.commons.Person;
 import org.soluvas.data.repository.CrudRepository;
-import org.soluvas.ldap.Person;
 
 /**
  * This is different that security dictionary.
  * Role definition modifications in the dictionary are not automatically applied to the repository.
- * Repository is the database, dictionary defines what should/shouldn't exist based on the active bundles. 
+ * Repository is the database, dictionary defines what should/shouldn't exist based on the active bundles.
+ * 
+ *  The Roles are defined on {@link Person}'s attributes (SecurityRoleIds)
  * @author ceefour
  */
+@Deprecated
 public interface SecurityRepository {
 
 	/**
