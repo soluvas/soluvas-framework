@@ -1630,6 +1630,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		mediaEClass.getESuperTypes().add(theCommonsPackage.getRevisionable());
 		mediaEClass.getESuperTypes().add(theCommonsPackage.getTimestamped());
 		mediaEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
+		mediaEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(imageConnectorEClass, ImageConnector.class, "ImageConnector", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

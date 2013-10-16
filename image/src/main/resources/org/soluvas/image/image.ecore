@@ -570,7 +570,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Media" eSuperTypes="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Identifiable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Revisionable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Timestamped ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer">
+  <eClassifiers xsi:type="ecore:EClass" name="Media" eSuperTypes="../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Identifiable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Revisionable ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Timestamped ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//NameContainer ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Describable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Media document containing embedded file as a single (and only) attachment, compatible with CouchDB repository."/>
     </eAnnotations>

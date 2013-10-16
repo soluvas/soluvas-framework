@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.joda.time.DateTime;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Describable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.Revisionable;
@@ -46,6 +47,7 @@ import com.google.code.morphia.annotations.Converters;
  *   <li>{@link org.soluvas.image.impl.MediaImpl#getCreationTime <em>Creation Time</em>}</li>
  *   <li>{@link org.soluvas.image.impl.MediaImpl#getModificationTime <em>Modification Time</em>}</li>
  *   <li>{@link org.soluvas.image.impl.MediaImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.MediaImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.image.impl.MediaImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.soluvas.image.impl.MediaImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.soluvas.image.impl.MediaImpl#getAttachments <em>Attachments</em>}</li>
@@ -179,6 +181,26 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -393,6 +415,27 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImagePackage.MEDIA__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getType() {
 		return type;
@@ -468,6 +511,8 @@ public class MediaImpl extends EObjectImpl implements Media {
 				return getModificationTime();
 			case ImagePackage.MEDIA__NAME:
 				return getName();
+			case ImagePackage.MEDIA__DESCRIPTION:
+				return getDescription();
 			case ImagePackage.MEDIA__TYPE:
 				return getType();
 			case ImagePackage.MEDIA__STATUS:
@@ -505,6 +550,9 @@ public class MediaImpl extends EObjectImpl implements Media {
 			case ImagePackage.MEDIA__NAME:
 				setName((String)newValue);
 				return;
+			case ImagePackage.MEDIA__DESCRIPTION:
+				setDescription((String)newValue);
+				return;
 			case ImagePackage.MEDIA__STATUS:
 				setStatus((MediaStatus)newValue);
 				return;
@@ -541,6 +589,9 @@ public class MediaImpl extends EObjectImpl implements Media {
 			case ImagePackage.MEDIA__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case ImagePackage.MEDIA__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
 			case ImagePackage.MEDIA__STATUS:
 				setStatus(STATUS_EDEFAULT);
 				return;
@@ -571,6 +622,8 @@ public class MediaImpl extends EObjectImpl implements Media {
 				return MODIFICATION_TIME_EDEFAULT == null ? modificationTime != null : !MODIFICATION_TIME_EDEFAULT.equals(modificationTime);
 			case ImagePackage.MEDIA__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ImagePackage.MEDIA__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case ImagePackage.MEDIA__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case ImagePackage.MEDIA__STATUS:
@@ -613,6 +666,12 @@ public class MediaImpl extends EObjectImpl implements Media {
 				default: return -1;
 			}
 		}
+		if (baseClass == Describable.class) {
+			switch (derivedFeatureID) {
+				case ImagePackage.MEDIA__DESCRIPTION: return CommonsPackage.DESCRIBABLE__DESCRIPTION;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -648,6 +707,12 @@ public class MediaImpl extends EObjectImpl implements Media {
 				default: return -1;
 			}
 		}
+		if (baseClass == Describable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.DESCRIBABLE__DESCRIPTION: return ImagePackage.MEDIA__DESCRIPTION;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -673,6 +738,8 @@ public class MediaImpl extends EObjectImpl implements Media {
 		result.append(modificationTime);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", description: ");
+		result.append(description);
 		result.append(", type: ");
 		result.append(type);
 		result.append(", status: ");

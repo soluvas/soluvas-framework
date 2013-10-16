@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.soluvas.commons.Describable;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
@@ -229,6 +230,7 @@ public class ImageSwitch<T> extends Switch<T> {
 				if (result == null) result = caseRevisionable(media);
 				if (result == null) result = caseTimestamped(media);
 				if (result == null) result = caseNameContainer(media);
+				if (result == null) result = caseDescribable(media);
 				if (result == null) result = caseNameable(media);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -696,6 +698,21 @@ public class ImageSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRevisionable(Revisionable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Describable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Describable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDescribable(Describable object) {
 		return null;
 	}
 

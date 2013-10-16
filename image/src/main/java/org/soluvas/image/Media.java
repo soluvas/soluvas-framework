@@ -3,6 +3,7 @@
 package org.soluvas.image;
 
 import org.eclipse.emf.common.util.EMap;
+import org.soluvas.commons.Describable;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Revisionable;
@@ -30,7 +31,7 @@ import org.soluvas.commons.Timestamped;
  * @model
  * @generated
  */
-public interface Media extends Identifiable, Revisionable, Timestamped, NameContainer {
+public interface Media extends Identifiable, Revisionable, Timestamped, NameContainer, Describable {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
 	 * The default value is <code>"Media"</code>.

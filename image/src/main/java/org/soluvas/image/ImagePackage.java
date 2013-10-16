@@ -1380,13 +1380,22 @@ public interface ImagePackage extends EPackage {
 	int MEDIA__NAME = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA__DESCRIPTION = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 5;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEDIA__TYPE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 5;
+	int MEDIA__TYPE = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1395,7 +1404,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEDIA__STATUS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 6;
+	int MEDIA__STATUS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Attachments</b></em>' map.
@@ -1404,7 +1413,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEDIA__ATTACHMENTS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 7;
+	int MEDIA__ATTACHMENTS = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Media</em>' class.
@@ -1413,7 +1422,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEDIA_FEATURE_COUNT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 8;
+	int MEDIA_FEATURE_COUNT = CommonsPackage.IDENTIFIABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.MediaAttachmentImpl <em>Media Attachment</em>}' class.
