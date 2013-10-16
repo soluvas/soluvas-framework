@@ -3,12 +3,11 @@ package org.soluvas.security;
 import java.util.Collection;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
+import org.soluvas.commons.Person;
 import org.soluvas.data.repository.CrudRepository;
-import org.soluvas.ldap.Person;
 
 /**
  * This is different that security dictionary.
@@ -16,6 +15,7 @@ import org.soluvas.ldap.Person;
  * Repository is the database, dictionary defines what should/shouldn't exist based on the active bundles. 
  * @author ceefour
  */
+@Deprecated
 public interface SecurityRepository {
 
 	/**
