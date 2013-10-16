@@ -12,7 +12,9 @@ import org.soluvas.data.repository.CrudRepository;
 /**
  * This is different that security dictionary.
  * Role definition modifications in the dictionary are not automatically applied to the repository.
- * Repository is the database, dictionary defines what should/shouldn't exist based on the active bundles. 
+ * Repository is the database, dictionary defines what should/shouldn't exist based on the active bundles.
+ * 
+ *  The Roles are defined on {@link Person}'s attributes (SecurityRoleIds)
  * @author ceefour
  */
 @Deprecated
