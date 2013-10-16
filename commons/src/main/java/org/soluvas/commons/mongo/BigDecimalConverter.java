@@ -2,6 +2,8 @@ package org.soluvas.commons.mongo;
 
 import java.math.BigDecimal;
 
+import javax.annotation.Nullable;
+
 import com.google.code.morphia.converters.SimpleValueConverter;
 import com.google.code.morphia.converters.TypeConverter;
 import com.google.code.morphia.mapping.MappedField;
@@ -26,9 +28,9 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 	/* (non-Javadoc)
 	 * @see com.google.code.morphia.converters.TypeConverter#decode(java.lang.Class, java.lang.Object, com.google.code.morphia.mapping.MappedField)
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings("null")
 	@Override
-	public Object decode(Class targetClass, Object fromDBObject,
+	public BigDecimal decode(Class targetClass, Object fromDBObject,
 			MappedField optionalExtraInfo) throws MappingException {
 		// long x 10000 is no longer used, we now use double.
 		// 12345 => 1.2345
@@ -53,7 +55,7 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 	}
 
 	@Override
-	public Object encode(Object value, MappedField optionalExtraInfo) {
+	public @Nullable Double encode(Object value, MappedField optionalExtraInfo) {
 //		return value != null ? ((BigDecimal) value).multiply(MULTIPLICAND).longValue() : null;
 		return value != null ? ((BigDecimal) value).doubleValue() : null;
 	}

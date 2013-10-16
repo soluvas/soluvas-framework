@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.annotation.Nullable;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 import com.google.code.morphia.converters.SimpleValueConverter;
 import com.google.code.morphia.converters.TypeConverter;
@@ -13,16 +13,16 @@ import com.google.code.morphia.mapping.MappingException;
 import com.mongodb.DBObject;
 
 /**
- * Converts {@link DateTime} to/from {@link DBObject}.
+ * Converts {@link LocalDate} to/from {@link DBObject}.
  * 
  * <p>the target representation uses {@link Date}.
  * 
  * @author ceefour
  */
-public class DateTimeConverter extends TypeConverter implements SimpleValueConverter {
+public class LocalDateConverter extends TypeConverter implements SimpleValueConverter {
 
-	public DateTimeConverter() {
-		super(DateTime.class);
+	public LocalDateConverter() {
+		super(LocalDate.class);
 	}
 	
 	/* (non-Javadoc)
@@ -30,17 +30,17 @@ public class DateTimeConverter extends TypeConverter implements SimpleValueConve
 	 */
 	@SuppressWarnings("null")
 	@Override
-	public DateTime decode(Class targetClass, Object fromDBObject,
+	public LocalDate decode(@Nullable Class targetClass, @Nullable Object fromDBObject,
 			MappedField optionalExtraInfo) throws MappingException {
 		if (fromDBObject == null)
 			return null;
 		else
-			return new DateTime(fromDBObject);
+			return new LocalDate(fromDBObject);
 	}
 
 	@Override
-	public @Nullable Date encode(Object value, MappedField optionalExtraInfo) {
-		return value != null ? ((DateTime)value).toDate() : null;
+	public @Nullable String encode(Object value, MappedField optionalExtraInfo) {
+		return value != null ? ((LocalDate)value).toString() : null;
 	}
 
 }

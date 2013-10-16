@@ -51,6 +51,7 @@ import org.soluvas.commons.TwitterIdentity;
 import org.soluvas.commons.mongo.BigDecimalConverter;
 import org.soluvas.commons.mongo.CurrencyUnitConverter;
 import org.soluvas.commons.mongo.DateTimeConverter;
+import org.soluvas.commons.mongo.LocalDateConverter;
 import org.soluvas.commons.mongo.UnitConverter;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -146,7 +147,7 @@ import com.google.common.collect.Iterables;
  */
 @Entity(noClassnameStored=true)
 @Converters({BigDecimalConverter.class, DateTimeConverter.class,
-	CurrencyUnitConverter.class, UnitConverter.class})
+	CurrencyUnitConverter.class, UnitConverter.class, LocalDateConverter.class})
 @JsonIgnoreProperties({"email", "mobileNumber", "imageId"})
 public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	/**

@@ -1,5 +1,7 @@
 package org.soluvas.commons.mongo;
 
+import javax.annotation.Nullable;
+
 import org.joda.money.CurrencyUnit;
 
 import com.google.code.morphia.converters.SimpleValueConverter;
@@ -21,9 +23,9 @@ public class CurrencyUnitConverter extends TypeConverter implements SimpleValueC
 	/* (non-Javadoc)
 	 * @see com.google.code.morphia.converters.TypeConverter#decode(java.lang.Class, java.lang.Object, com.google.code.morphia.mapping.MappedField)
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings("null")
 	@Override
-	public Object decode(Class targetClass, Object fromDBObject,
+	public CurrencyUnit decode(Class targetClass, Object fromDBObject,
 			MappedField optionalExtraInfo) throws MappingException {
 		if (fromDBObject == null)
 			return null;
@@ -32,7 +34,7 @@ public class CurrencyUnitConverter extends TypeConverter implements SimpleValueC
 	}
 
 	@Override
-	public Object encode(Object value, MappedField optionalExtraInfo) {
+	public @Nullable String encode(Object value, MappedField optionalExtraInfo) {
 		return value != null ? value.toString() : null;
 	}
 

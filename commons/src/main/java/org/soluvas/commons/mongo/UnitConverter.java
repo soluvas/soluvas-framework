@@ -1,5 +1,6 @@
 package org.soluvas.commons.mongo;
 
+import javax.annotation.Nullable;
 import javax.measure.unit.Unit;
 
 import com.google.code.morphia.converters.SimpleValueConverter;
@@ -21,9 +22,9 @@ public class UnitConverter extends TypeConverter implements SimpleValueConverter
 	/* (non-Javadoc)
 	 * @see com.google.code.morphia.converters.TypeConverter#decode(java.lang.Class, java.lang.Object, com.google.code.morphia.mapping.MappedField)
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings("null")
 	@Override
-	public Object decode(Class targetClass, Object fromDBObject,
+	public Unit<?> decode(Class targetClass, Object fromDBObject,
 			MappedField optionalExtraInfo) throws MappingException {
 		if (fromDBObject == null)
 			return null;
@@ -32,7 +33,7 @@ public class UnitConverter extends TypeConverter implements SimpleValueConverter
 	}
 
 	@Override
-	public Object encode(Object value, MappedField optionalExtraInfo) {
+	public @Nullable String encode(Object value, MappedField optionalExtraInfo) {
 		return value != null ? value.toString() : null;
 	}
 
