@@ -154,13 +154,6 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDataType personEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EDataType securityManagerEDataType = null;
 
 	/**
@@ -806,16 +799,6 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * @generated
 	 */
 	@Override
-	public EDataType getPerson() {
-		return personEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EDataType getSecurityManager() {
 		return securityManagerEDataType;
 	}
@@ -938,7 +921,6 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		sessionEDataType = createEDataType(SESSION);
 		httpServletRequestEDataType = createEDataType(HTTP_SERVLET_REQUEST);
 		httpServletResponseEDataType = createEDataType(HTTP_SERVLET_RESPONSE);
-		personEDataType = createEDataType(PERSON);
 		securityManagerEDataType = createEDataType(SECURITY_MANAGER);
 		entityLookupEDataType = createEDataType(ENTITY_LOOKUP);
 		subjectEDataType = createEDataType(SUBJECT);
@@ -1070,7 +1052,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		g1 = createEGenericType(this.getEntityLookup());
 		g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
-		EGenericType g3 = createEGenericType(this.getPerson());
+		EGenericType g3 = createEGenericType(theCommonsPackage.getPerson());
 		g2.setEUpperBound(g3);
 		g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
@@ -1078,7 +1060,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 
 		EOperation op = addEOperation(appSessionManagerEClass, null, "requirePerson", 0, 1, IS_UNIQUE, IS_ORDERED);
 		ETypeParameter t1 = addETypeParameter(op, "T");
-		g1 = createEGenericType(this.getPerson());
+		g1 = createEGenericType(theCommonsPackage.getPerson());
 		t1.getEBounds().add(g1);
 		addEParameter(op, this.getHttpServletRequest(), "httpRequest", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getHttpServletResponse(), "httpResponse", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1087,7 +1069,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 
 		op = addEOperation(appSessionManagerEClass, null, "requirePerson", 0, 1, IS_UNIQUE, IS_ORDERED);
 		t1 = addETypeParameter(op, "T");
-		g1 = createEGenericType(this.getPerson());
+		g1 = createEGenericType(theCommonsPackage.getPerson());
 		t1.getEBounds().add(g1);
 		addEParameter(op, this.getSubject(), "subject", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(t1);
@@ -1107,7 +1089,6 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEDataType(sessionEDataType, Session.class, "Session", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(httpServletRequestEDataType, HttpServletRequest.class, "HttpServletRequest", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(httpServletResponseEDataType, HttpServletResponse.class, "HttpServletResponse", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(personEDataType, Person.class, "Person", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(securityManagerEDataType, org.apache.shiro.mgt.SecurityManager.class, "SecurityManager", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(entityLookupEDataType, EntityLookup.class, "EntityLookup", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(subjectEDataType, Subject.class, "Subject", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

@@ -45,7 +45,7 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 	 */
 	public static SecurityFactory init() {
 		try {
-			SecurityFactory theSecurityFactory = (SecurityFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.soluvas.org/schema/security/1.0"); 
+			SecurityFactory theSecurityFactory = (SecurityFactory)EPackage.Registry.INSTANCE.getEFactory(SecurityPackage.eNS_URI);
 			if (theSecurityFactory != null) {
 				return theSecurityFactory;
 			}
@@ -107,8 +107,6 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 				return createHttpServletRequestFromString(eDataType, initialValue);
 			case SecurityPackage.HTTP_SERVLET_RESPONSE:
 				return createHttpServletResponseFromString(eDataType, initialValue);
-			case SecurityPackage.PERSON:
-				return createPersonFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -132,8 +130,6 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 				return convertHttpServletRequestToString(eDataType, instanceValue);
 			case SecurityPackage.HTTP_SERVLET_RESPONSE:
 				return convertHttpServletResponseToString(eDataType, instanceValue);
-			case SecurityPackage.PERSON:
-				return convertPersonToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -339,24 +335,6 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 	 * @generated
 	 */
 	public String convertHttpServletResponseToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Person createPersonFromString(EDataType eDataType, String initialValue) {
-		return (Person)super.createFromString(eDataType, initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertPersonToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

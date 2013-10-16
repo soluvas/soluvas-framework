@@ -2,7 +2,6 @@
  */
 package org.soluvas.security.impl;
 
-import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,9 +15,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonRelated;
 import org.soluvas.data.EntityLookup;
-import org.soluvas.ldap.Person;
 import org.soluvas.security.AppSessionManager;
 import org.soluvas.security.NotLoggedInException;
 import org.soluvas.security.SecurityPackage;
@@ -41,7 +40,6 @@ import com.google.common.base.Preconditions;
  *
  * @generated
  */
-@SuppressWarnings("serial")
 @Service("appSessionMgr") @Lazy
 public class AppSessionManagerImpl extends EObjectImpl implements AppSessionManager {
 	
@@ -75,7 +73,7 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 * @generated
 	 * @ordered
 	 */
-	protected EntityLookup<? extends Person, String> personLookup;
+	protected EntityLookup<? extends org.soluvas.commons.Person, String> personLookup;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,7 +121,7 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 * @generated
 	 */
 	@Override
-	public EntityLookup<? extends Person, String> getPersonLookup() {
+	public EntityLookup<? extends org.soluvas.commons.Person, String> getPersonLookup() {
 		return personLookup;
 	}
 

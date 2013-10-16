@@ -898,17 +898,6 @@ public interface SecurityPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '<em>Person</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.soluvas.ldap.Person
-	 * @see org.soluvas.security.impl.SecurityPackageImpl#getPerson()
-	 * @generated
-	 */
-	int PERSON = 15;
-
-
-	/**
 	 * The meta object id for the '<em>Manager</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -916,7 +905,7 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getSecurityManager()
 	 * @generated
 	 */
-	int SECURITY_MANAGER = 16;
+	int SECURITY_MANAGER = 15;
 
 
 	/**
@@ -927,7 +916,7 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getEntityLookup()
 	 * @generated
 	 */
-	int ENTITY_LOOKUP = 17;
+	int ENTITY_LOOKUP = 16;
 
 
 	/**
@@ -938,7 +927,7 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getSubject()
 	 * @generated
 	 */
-	int SUBJECT = 18;
+	int SUBJECT = 17;
 
 
 	/**
@@ -1548,17 +1537,6 @@ public interface SecurityPackage extends EPackage {
 	EDataType getHttpServletResponse();
 
 	/**
-	 * Returns the meta object for data type '{@link org.soluvas.ldap.Person <em>Person</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Person</em>'.
-	 * @see org.soluvas.ldap.Person
-	 * @model instanceClass="org.soluvas.ldap.Person"
-	 * @generated
-	 */
-	EDataType getPerson();
-
-	/**
 	 * Returns the meta object for data type '{@link org.apache.shiro.mgt.SecurityManager <em>Manager</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2090,16 +2068,6 @@ public interface SecurityPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType HTTP_SERVLET_RESPONSE = eINSTANCE.getHttpServletResponse();
-
-		/**
-		 * The meta object literal for the '<em>Person</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.soluvas.ldap.Person
-		 * @see org.soluvas.security.impl.SecurityPackageImpl#getPerson()
-		 * @generated
-		 */
-		EDataType PERSON = eINSTANCE.getPerson();
 
 		/**
 		 * The meta object literal for the '<em>Manager</em>' data type.

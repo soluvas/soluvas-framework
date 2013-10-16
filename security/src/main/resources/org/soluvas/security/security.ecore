@@ -227,7 +227,7 @@
       </eAnnotations>
       <eGenericType eTypeParameter="#//AppSessionManager/requirePerson/T"/>
       <eTypeParameters name="T">
-        <eBounds eClassifier="#//Person"/>
+        <eBounds eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Person"/>
       </eTypeParameters>
       <eParameters name="httpRequest" eType="#//HttpServletRequest"/>
       <eParameters name="httpResponse" eType="#//HttpServletResponse"/>
@@ -235,7 +235,7 @@
     <eOperations name="requirePerson">
       <eGenericType eTypeParameter="#//AppSessionManager/requirePerson.1/T"/>
       <eTypeParameters name="T">
-        <eBounds eClassifier="#//Person"/>
+        <eBounds eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Person"/>
       </eTypeParameters>
       <eParameters name="subject" eType="#//Subject"/>
     </eOperations>
@@ -245,7 +245,7 @@
         transient="true">
       <eGenericType eClassifier="#//EntityLookup">
         <eTypeArguments>
-          <eUpperBound eClassifier="#//Person"/>
+          <eUpperBound eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Person"/>
         </eTypeArguments>
         <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eGenericType>
@@ -253,7 +253,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="HttpServletRequest" instanceClassName="javax.servlet.http.HttpServletRequest"/>
   <eClassifiers xsi:type="ecore:EDataType" name="HttpServletResponse" instanceClassName="javax.servlet.http.HttpServletResponse"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Person" instanceClassName="org.soluvas.ldap.Person"/>
   <eClassifiers xsi:type="ecore:EDataType" name="SecurityManager" instanceClassName="org.apache.shiro.mgt.SecurityManager"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="EntityLookup" instanceClassName="org.soluvas.data.EntityLookup"

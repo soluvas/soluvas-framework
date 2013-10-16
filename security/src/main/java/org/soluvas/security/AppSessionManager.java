@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.shiro.subject.Subject;
 import org.eclipse.emf.ecore.EObject;
 import org.soluvas.data.EntityLookup;
-import org.soluvas.ldap.Person;
 
 /**
  * <!-- begin-user-doc -->
@@ -57,10 +56,10 @@ public interface AppSessionManager extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Person Lookup</em>' attribute.
 	 * @see org.soluvas.security.SecurityPackage#getAppSessionManager_PersonLookup()
-	 * @model dataType="org.soluvas.security.EntityLookup<? extends org.soluvas.security.Person, org.eclipse.emf.ecore.EString>" transient="true" changeable="false"
+	 * @model dataType="org.soluvas.security.EntityLookup<? extends org.soluvas.commons.Person, org.eclipse.emf.ecore.EString>" transient="true" changeable="false"
 	 * @generated
 	 */
-	EntityLookup<? extends Person, String> getPersonLookup();
+	EntityLookup<? extends org.soluvas.commons.Person, String> getPersonLookup();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,17 +69,17 @@ public interface AppSessionManager extends EObject {
 	 * The IP Address and User Agent is required for security purposes.
 	 * Convenience method for {@link #requirePerson(RequestIdentity)}.
 	 * <!-- end-model-doc -->
-	 * @model httpRequestDataType="org.soluvas.security.HttpServletRequest" httpResponseDataType="org.soluvas.security.HttpServletResponse" TBounds="org.soluvas.security.Person"
+	 * @model httpRequestDataType="org.soluvas.security.HttpServletRequest" httpResponseDataType="org.soluvas.security.HttpServletResponse"
 	 * @generated
 	 */
-	<T extends Person> T requirePerson(HttpServletRequest httpRequest, HttpServletResponse httpResponse);
+	<T extends org.soluvas.commons.Person> T requirePerson(HttpServletRequest httpRequest, HttpServletResponse httpResponse);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model subjectDataType="org.soluvas.security.Subject" TBounds="org.soluvas.security.Person"
+	 * @model subjectDataType="org.soluvas.security.Subject"
 	 * @generated
 	 */
-	<T extends Person> T requirePerson(Subject subject);
+	<T extends org.soluvas.commons.Person> T requirePerson(Subject subject);
 
 } // AppSessionManager

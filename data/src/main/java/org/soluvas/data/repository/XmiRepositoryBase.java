@@ -10,9 +10,9 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.EcoreCopyFunction;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
@@ -91,7 +91,8 @@ public abstract class XmiRepositoryBase<T extends Identifiable> extends PagingAn
 				}
 			}
 		});
-		return ImmutableList.copyOf(Collections2.transform(filtered, new EcoreCopyFunction<T>()));
+		return ImmutableList.copyOf(EcoreUtil.copyAll(filtered));
+//		return ImmutableList.copyOf(Collections2.transform(filtered, new EcoreCopyFunction<T>()));
 	}
 
 	@Override
@@ -153,7 +154,7 @@ public abstract class XmiRepositoryBase<T extends Identifiable> extends PagingAn
 	public Page<T> findAll(Pageable pageable) {
 		final int allSize = Iterables.size(getRoot());
 		final Iterable<T> limited = doFindAll(null, pageable);
-		return new PageImpl<>(ImmutableList.copyOf(Iterables.transform(limited, new EcoreCopyFunction<T>())),
+		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited))),
 				pageable, allSize);
 	}
 
