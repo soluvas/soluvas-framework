@@ -37,7 +37,6 @@ import org.soluvas.category.CategoryRepository;
 import org.soluvas.category.CategoryStatus;
 import org.soluvas.category.CategoryUNameFunction;
 import org.soluvas.category.util.CategoryUtils;
-import org.soluvas.commons.EcoreCopyFunction;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.tenant.TenantRef;
@@ -312,7 +311,8 @@ public class XmiCategoryRepository
 				}
 			}
 		});
-		return ImmutableList.copyOf(Iterables.transform(filtered, new EcoreCopyFunction<Category>()));
+		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
+		return ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(filtered)));
 	}
 
 	@Override
@@ -408,7 +408,8 @@ public class XmiCategoryRepository
 	public Page<Category> findAll(Pageable pageable) {
 		final int allSize = Iterables.size(getFlattenedCategories());
 		final Iterable<Category> limited = doFindAll(null, pageable);
-		return new PageImpl<>(ImmutableList.copyOf(Iterables.transform(limited, new EcoreCopyFunction<Category>())),
+		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
+		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited))),
 				pageable, allSize);
 	}
 	
@@ -422,7 +423,8 @@ public class XmiCategoryRepository
 		};
 		final Iterable<Category> limited = doFindAll(filter, pageable);
 		final int allSize = Iterables.size(getFlattenedCategories());
-		return new PageImpl<>(ImmutableList.copyOf(Iterables.transform(limited, new EcoreCopyFunction<Category>())),
+		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
+		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited))),
 				pageable, allSize);
 	}
 	

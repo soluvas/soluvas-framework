@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.EcoreCopyFunction;
 import org.soluvas.commons.QNameFunction;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.StaticXmiLoader;
@@ -262,7 +261,7 @@ public class XmiTermRepository
 				}
 			}
 		});
-		return ImmutableList.copyOf(Collections2.transform(filtered, new EcoreCopyFunction<Term>()));
+		return ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(filtered)));
 	}
 
 	@Override
@@ -343,7 +342,8 @@ public class XmiTermRepository
 	@Override
 	public Page<Term> findAll(Pageable pageable) {
 		final Iterable<Term> limited = doFindAll(pageable);
-		return new PageImpl<>(ImmutableList.copyOf(Iterables.transform(limited, new EcoreCopyFunction<Term>())),
+		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
+		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited))),
 				pageable, catalog.getTerms().size());
 	}
 	
