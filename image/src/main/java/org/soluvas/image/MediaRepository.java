@@ -28,8 +28,12 @@ public interface MediaRepository extends
 
 	/**
 	 * Add {@link Media} from {@link File}.
+	 * {@link MediaAttachment} key is initially retrieved from {@link Media#getName()}, because
+	 * there is only one attachment per {@link Media}.
+	 * Note that Media's name can be changed anytime, but the {@link MediaAttachment} key will stay as it was
+	 * (unless the attachment is reuploaded/replaced). 
 	 * @param media
-	 * @param file
+	 * @param file Temporary file.
 	 * @param contentType
 	 * @return
 	 */
@@ -38,7 +42,7 @@ public interface MediaRepository extends
 	/**
 	 * Add {@link Media} from {@link File}, probing contentType using {@link Files#probeContentType(java.nio.file.Path)}.
 	 * @param media
-	 * @param file
+	 * @param file Temporary file.
 	 * @return
 	 */
 	Media add(Media media, File file);

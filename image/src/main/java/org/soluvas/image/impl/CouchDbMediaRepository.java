@@ -46,11 +46,13 @@ public class CouchDbMediaRepository extends CouchDbRepositoryBase<Media, MediaSt
 	}
 	
 	protected void attach(Media media, File file, String contentType) throws IOException {
+		Preconditions.checkNotNull(media.getId(), "ID for media must be not null");
+		final String name = Preconditions.checkNotNull(media.getName(), "Name for media '%s' must be not null", media.getId());
 		final String guid = Preconditions.checkNotNull(media.getGuid(), "GUID for media '%s' must be not null", media.getId());
 		final String revision = Preconditions.checkNotNull(media.getRevision(), "Revision for media '%s' must be not null", media.getId());
-		log.debug("Adding attachment '%s' (%s) to media '{}' _id={} _rev={}",
-				file, contentType, media.getId(), guid, revision);
-		try (AttachmentInputStream attachmentInputStream = new AttachmentInputStream(file.getName(), FileUtils.openInputStream(file), contentType)) {
+		log.debug("Adding attachment '%s' (%s) as '%s' to media '{}' _id={} _rev={}",
+				file, contentType, name, media.getId(), guid, revision);
+		try (AttachmentInputStream attachmentInputStream = new AttachmentInputStream(name, FileUtils.openInputStream(file), contentType)) {
 			dbConn.createAttachment(guid, revision, attachmentInputStream);
 		}
 	}
