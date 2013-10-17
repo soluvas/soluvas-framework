@@ -301,4 +301,20 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		return findAllByQuery(query, new CappedRequest(500)).getContent();
 	}
 
+	@Override
+	public List<Person> findAllSecRoleIds(StatusMask statusMask, Collection<String> secRoleIds) {
+		final BasicDBObject query = new BasicDBObject("securityRoleIds", new BasicDBObject("$in", secRoleIds));
+		augmentQueryForStatusMask(query, statusMask);
+		return findAllByQuery(query, new CappedRequest(500)).getContent();
+	}
+
+	@Override
+	public boolean hasMatchWithSecRoleIds(String personId, Collection<String> secRoleIds) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", personId);
+		query.put("securityRoleIds", new BasicDBObject("$in", secRoleIds));
+		final Person person = findOneByQuery(query);
+		return person != null;
+	}
+
 }

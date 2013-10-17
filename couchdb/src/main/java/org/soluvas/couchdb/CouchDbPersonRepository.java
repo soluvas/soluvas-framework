@@ -414,4 +414,17 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		return null;
 	}
 
+	@Override
+	public List<Person> findAllSecRoleIds(StatusMask statusMask,
+			Collection<String> secRoleIds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasMatchWithSecRoleIds(String personId, Collection<String> secRoleIds) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
