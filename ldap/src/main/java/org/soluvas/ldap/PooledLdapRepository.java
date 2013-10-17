@@ -604,13 +604,13 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 				@Override @Nullable
 				public List<Entry> apply(@Nullable LdapConnection conn) {
 					try {
-						SearchRequestImpl search = new SearchRequestImpl();
-//						search.setBase(new Dn(baseDn));
-						search.setBase(new Dn("dc=dev,dc=tuneeca,dc=com"));
+						final SearchRequestImpl search = new SearchRequestImpl();
+						search.setBase(new Dn(baseDn));
+//						search.setBase(new Dn("dc=dev,dc=tuneeca,dc=com"));
 						search.setFilter(filter);
 						search.setScope(SearchScope.ONELEVEL);
-						String sortProperty = pageable.getSort().iterator().next().getProperty();
-						ServerSideSortImpl skl = new ServerSideSortImpl(sortProperty);
+						final String sortProperty = pageable.getSort().iterator().next().getProperty();
+						final ServerSideSortImpl skl = new ServerSideSortImpl(sortProperty);
 //						ASN1EncodableVector innerVector = new ASN1EncodableVector();
 //						innerVector.add(new BERConstructedOctetString(sortProperty.getBytes(Charsets.UTF_8)));
 //						BERSequence innerSeq = new BERSequence(innerVector);
@@ -627,14 +627,14 @@ public class PooledLdapRepository<T> extends CrudRepositoryBase<T, String>
 						search.addControl(skl);
 
 						// debug stuff
-						ProtocolCodecSession session = new ProtocolCodecSession();
-						ProtocolEncoder encoder = new LdapProtocolEncoder();
+						final ProtocolCodecSession session = new ProtocolCodecSession();
+						final ProtocolEncoder encoder = new LdapProtocolEncoder();
 						encoder.encode(session, search, session.getEncoderOutput());
-						IoBuffer buffer = (IoBuffer) session.getEncoderOutputQueue().poll();
+						final IoBuffer buffer = (IoBuffer) session.getEncoderOutputQueue().poll();
 						HexDump.dump(buffer.array(), 0, System.out, 0);
 						// debug stuff
 						
-						SearchCursor searchCursor = conn.search(search);
+						final SearchCursor searchCursor = conn.search(search);
 						try {
 							searchCursor.next();
 							ResultResponse done = searchCursor.getSearchResultDone(); 
