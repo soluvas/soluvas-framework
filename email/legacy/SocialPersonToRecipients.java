@@ -12,12 +12,15 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
 
 /**
+ * Please use {@link PersonToRecipients}
+ * 
  * Get the {@link SocialPerson#getPrimaryEmail()}, {@link SocialPerson#getEmails()},
  * (and {@link Person#getVirtualMail()} if enabled)
  * and combines them into List of {@link Recipient}s.
  * No duplicate emails.
  * @author ceefour
  */
+@Deprecated
 public class SocialPersonToRecipients implements
 		Function<SocialPerson, Set<Recipient>> {
 	

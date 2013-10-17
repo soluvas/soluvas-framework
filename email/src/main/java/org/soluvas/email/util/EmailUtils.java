@@ -32,9 +32,7 @@ import org.soluvas.email.PersonToRecipients;
 import org.soluvas.email.Recipient;
 import org.soluvas.email.Sender;
 import org.soluvas.email.SenderType;
-import org.soluvas.email.SocialPersonToRecipients;
 import org.soluvas.email.impl.EmailManagerImpl;
-import org.soluvas.ldap.SocialPerson;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -216,7 +214,7 @@ public class EmailUtils {
 	 * 
 	 * 1. {@link PersonInfo#getEmail()}
 	 * 2. If {@link PersonInfo#getId()} is not empty and {@code personLookup} is provided,
-	 * {@link SocialPerson#getPrimaryEmail()} and {@link SocialPerson#getEmails()},
+	 * {@link Person#getPrimaryEmail()} and {@link Person#getEmails()},
 	 * using {@link SocialPersonToRecipients}.
 	 * 
 	 * Will not duplicate recipients with same email address.
@@ -224,7 +222,7 @@ public class EmailUtils {
 	 * @param personLookup
 	 * @return
 	 */
-	public static Set<Recipient> getRecipients(@Nullable PersonInfo personInfo, @Nullable EntityLookup<SocialPerson, String> personLookup) {
+	public static Set<Recipient> getRecipients(@Nullable PersonInfo personInfo, @Nullable EntityLookup<Person, String> personLookup) {
 		final Set<Recipient> recipients = Sets.newHashSet();
 		
 		if (personInfo != null) {
@@ -235,8 +233,8 @@ public class EmailUtils {
 			}
 			//find person by customerId
 			if (!Strings.isNullOrEmpty(personInfo.getId()) && personLookup != null) {
-				final SocialPerson socialPerson = personLookup.findOne(personInfo.getId());
-				recipients.addAll(new SocialPersonToRecipients("registered customer", false).apply(socialPerson));
+				final Person socialPerson = personLookup.findOne(personInfo.getId());
+				recipients.addAll(new PersonToRecipients("registered customer", false).apply(socialPerson));
 			}
 		}
 		
