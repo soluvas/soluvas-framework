@@ -28,6 +28,7 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NotNullPredicate;
+import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.commons.ProgressStatus;
@@ -50,7 +51,6 @@ import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 import org.soluvas.image.store.StyledImage;
 import org.soluvas.image.util.ImageUtils;
-import org.soluvas.ldap.SocialPerson;
 
 import com.google.common.base.Function;
 import com.google.common.base.Objects;
@@ -665,12 +665,12 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public Map<String, DisplayImage> getSafeSocialPersonPhotos(ImageType namespace, Collection<SocialPerson> people, ImageStyle style) {
+	public Map<String, DisplayImage> getSafeSocialPersonPhotos(ImageType namespace, Collection<Person> people, ImageStyle style) {
 		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
 		final Set<String> imageIds = ImmutableSet.copyOf(Iterables.filter(
-				Collections2.transform(people, new Function<SocialPerson, String>() {
+				Collections2.transform(people, new Function<Person, String>() {
 			@Override @Nullable
-			public String apply(@Nullable SocialPerson input) {
+			public String apply(@Nullable Person input) {
 				return input != null ? input.getPhotoId() : null;
 			}
 		}), new NotNullPredicate()));
@@ -683,7 +683,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		});
 		
 		final Map<String, DisplayImage> displayPhotos = new HashMap<>();
-		for (SocialPerson person : people) {
+		for (final Person person : people) {
 			if (person == null || displayPhotos.containsKey(person.getId())) {
 				continue;
 			}
@@ -725,7 +725,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	}
 
 	@Override
-	public String getThumbnailPhotoUri(SocialPerson person) {
+	public String getThumbnailPhotoUri(Person person) {
 		if (person != null) {					
 			final String photoId = person.getPhotoId();
 			final Image personImage = getPersonImageRepository().findOne(photoId);

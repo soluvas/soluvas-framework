@@ -132,8 +132,6 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 				return createImageTypeFromString(eDataType, initialValue);
 			case ImagePackage.IMAGE_STYLE:
 				return createImageStyleFromString(eDataType, initialValue);
-			case ImagePackage.SOCIAL_PERSON:
-				return createSocialPersonFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -165,8 +163,6 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 				return convertImageTypeToString(eDataType, instanceValue);
 			case ImagePackage.IMAGE_STYLE:
 				return convertImageStyleToString(eDataType, instanceValue);
-			case ImagePackage.SOCIAL_PERSON:
-				return convertSocialPersonToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -550,24 +546,6 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * @generated
 	 */
 	public String convertImageStyleToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SocialPerson createSocialPersonFromString(EDataType eDataType, String initialValue) {
-		return (SocialPerson)super.createFromString(eDataType, initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertSocialPersonToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

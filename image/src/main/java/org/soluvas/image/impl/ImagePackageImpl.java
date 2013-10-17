@@ -279,13 +279,6 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	private EDataType imageStyleEDataType = null;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EDataType socialPersonEDataType = null;
-
-	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -1400,15 +1393,6 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getSocialPerson() {
-		return socialPersonEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public ImageFactory getImageFactory() {
 		return (ImageFactory)getEFactoryInstance();
@@ -1570,7 +1554,6 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		imageRepositoryEDataType = createEDataType(IMAGE_REPOSITORY);
 		imageTypeEDataType = createEDataType(IMAGE_TYPE);
 		imageStyleEDataType = createEDataType(IMAGE_STYLE);
-		socialPersonEDataType = createEDataType(SOCIAL_PERSON);
 	}
 
 	/**
@@ -1836,7 +1819,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		op = addEOperation(imageManagerEClass, null, "getSafeSocialPersonPhotos", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageType(), "namespace", 1, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(theCommonsPackage.getCollection());
-		g2 = createEGenericType(this.getSocialPerson());
+		g2 = createEGenericType(theCommonsPackage.getPerson());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "people", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageStyle(), "style", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1983,7 +1966,6 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEDataType(imageRepositoryEDataType, ImageRepository.class, "ImageRepository", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(imageTypeEDataType, ImageType.class, "ImageType", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(imageStyleEDataType, ImageStyle.class, "ImageStyle", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(socialPersonEDataType, SocialPerson.class, "SocialPerson", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

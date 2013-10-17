@@ -333,7 +333,7 @@
       <eParameters name="namespace" lowerBound="1" eType="#//ImageType"/>
       <eParameters name="people" lowerBound="1">
         <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Collection">
-          <eTypeArguments eClassifier="#//SocialPerson"/>
+          <eTypeArguments eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Person"/>
         </eGenericType>
       </eParameters>
       <eParameters name="style" eType="#//ImageStyle"/>
@@ -559,7 +559,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//StyledImage"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="SocialPerson" instanceClassName="org.soluvas.ldap.SocialPerson"/>
   <eClassifiers xsi:type="ecore:EClass" name="WatermarkLike" abstract="true" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Watermark information if the transform supports watermark operation."/>
