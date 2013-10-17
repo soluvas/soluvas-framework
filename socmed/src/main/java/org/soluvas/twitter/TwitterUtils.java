@@ -9,9 +9,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.Person;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
-import org.soluvas.ldap.SocialPerson;
 
 import com.google.common.base.Preconditions;
 
@@ -24,7 +24,7 @@ public class TwitterUtils {
 	private static final Logger log = LoggerFactory.getLogger(TwitterUtils.class);
 	
 	/**
-	 * Fetches twitter user photo from twitter, uploads it to ImageRepository, but not modify any {@link SocialPerson}.
+	 * Fetches twitter user photo from twitter, uploads it to ImageRepository, but not modify any {@link Person}.
 	 * @param twitterScreenName twitter User ID.
 	 * @param personName Person name, used for the image name and for logging purposes.
 	 * @return ImageID from the ImageRepository.

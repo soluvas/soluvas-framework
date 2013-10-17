@@ -174,6 +174,8 @@ public interface CommonsFactory extends EFactory {
 	 * @generated
 	 */
 	Person createPerson();
+	
+	Person createPerson(String id, String slug, String name, String photoId, Gender gender);
 
 	/**
 	 * Returns a new object of class '<em>Phone Number</em>'.

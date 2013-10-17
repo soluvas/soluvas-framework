@@ -97,7 +97,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		if (email == null) {
 			return null;
 		}
-		final BasicDBObject query = new BasicDBObject("emails.email", email.toLowerCase().trim());
+		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
 		return findOneByQuery(query);
 	}
 	

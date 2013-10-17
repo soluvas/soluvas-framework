@@ -30,7 +30,6 @@ import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
-import org.soluvas.commons.*;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Added;
 import org.soluvas.commons.AddedMany;
@@ -46,6 +45,8 @@ import org.soluvas.commons.EClassStatus;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.EventBusProgressMonitor;
 import org.soluvas.commons.ExpansionState;
+import org.soluvas.commons.FacebookAccessible;
+import org.soluvas.commons.FacebookIdentity;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.JavaClassStatus;
 import org.soluvas.commons.Person;
@@ -61,6 +62,7 @@ import org.soluvas.commons.RemovedMany;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.ShellProgressMonitor;
 import org.soluvas.commons.SignupSourceType;
+import org.soluvas.commons.TenantSource;
 import org.soluvas.commons.Translation;
 import org.soluvas.commons.TranslationManager;
 import org.soluvas.commons.TranslationState;
@@ -563,6 +565,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FacebookIdentity createFacebookIdentity() {
 		FacebookIdentityImpl facebookIdentity = new FacebookIdentityImpl();
 		return facebookIdentity;
@@ -573,6 +576,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FacebookAccessible createFacebookAccessible() {
 		FacebookAccessibleImpl facebookAccessible = new FacebookAccessibleImpl();
 		return facebookAccessible;
@@ -1235,6 +1239,18 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	public PersonInfo createPersonInfo(String id, String slug, String name,
 			String photoId, Gender gender) {
 		final PersonInfo person = createPersonInfo();
+		person.setId(id);
+		person.setSlug(slug);
+		person.setName(name);
+		person.setPhotoId(photoId);
+		person.setGender(gender);
+		return person;
+	}
+
+	@Override
+	public Person createPerson(String id, String slug,
+			String name, String photoId, Gender gender) {
+		final Person person = createPerson();
 		person.setId(id);
 		person.setSlug(slug);
 		person.setName(name);

@@ -16,9 +16,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.Person;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
-import org.soluvas.ldap.SocialPerson;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -108,7 +108,7 @@ public class FacebookUtilsImpl implements FacebookUtils {
 	}
 	
 	/**
-	 * Fetches Facebook user photo from Facebook, uploads it to ImageRepository, but not modify any {@link SocialPerson}.
+	 * Fetches Facebook user photo from Facebook, uploads it to ImageRepository, but not modify any {@link Person}.
 	 * @param facebookId Facebook User ID.
 	 * @param personName Person name, used for the image name and for logging purposes.
 	 * @return ImageID from the ImageRepository.
