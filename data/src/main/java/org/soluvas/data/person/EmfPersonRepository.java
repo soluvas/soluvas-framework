@@ -321,4 +321,10 @@ public class EmfPersonRepository extends
 		return 0;
 	}
 
+	@Override
+	public List<Person> findAll(StatusMask statusMask, Collection<String> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

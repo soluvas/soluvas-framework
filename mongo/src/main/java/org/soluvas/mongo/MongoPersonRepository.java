@@ -20,6 +20,7 @@ import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.TrashResult;
 import org.soluvas.data.UntrashResult;
+import org.soluvas.data.domain.CappedRequest;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
@@ -291,6 +292,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	public Map<String, Try<UntrashResult>> untrashAllByIds(
 			Collection<String> ids) {
 		throw new UnsupportedOperationException("to be implemented");
+	}
+
+	@Override
+	public List<Person> findAll(StatusMask statusMask, Collection<String> ids) {
+		final BasicDBObject query = new BasicDBObject("_id", new BasicDBObject("$in", ids));
+		augmentQueryForStatusMask(query, statusMask);
+		return findAllByQuery(query, new CappedRequest(500)).getContent();
 	}
 
 }

@@ -265,7 +265,9 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 */
 	EList<PostalAddress> getAddresses();
 	
-	PostalAddress getPrimarShippingAddress();
+	PostalAddress getPrimaryAddress();
+	
+	PostalAddress getPrimaryShippingAddress();
 
 	/**
 	 * Returns the value of the '<em><b>Account Status</b></em>' attribute.

@@ -1754,17 +1754,9 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	}
 	
 	@Override
-	public PostalAddress getPrimarShippingAddress() {
-		final Optional<PostalAddress> primaryShippingAddress = Iterables.tryFind(addresses, new Predicate<PostalAddress>() {
-			@Override
-			public boolean apply(@Nullable PostalAddress input) {
-				return input.isPrimaryShipping();
-			}
-		});
-		if (primaryShippingAddress.isPresent()) {
-			return primaryShippingAddress.get();
-		} else if (addresses != null && !addresses.isEmpty()) {
-			final Optional<PostalAddress> primaryAddress = Iterables.tryFind(addresses, new Predicate<PostalAddress>() {
+	public PostalAddress getPrimaryAddress() {
+		if (getAddresses() != null && !getAddresses().isEmpty()) {
+			final Optional<PostalAddress> primaryAddress = Iterables.tryFind(getAddresses(), new Predicate<PostalAddress>() {
 				@Override
 				public boolean apply(@Nullable PostalAddress input) {
 					return input.isPrimary();
@@ -1773,7 +1765,36 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 			if (primaryAddress.isPresent()) {
 				return primaryAddress.get();
 			} else {
-				return null;
+				return getAddresses().get(0);
+			}
+		} else {
+			return null;
+		}
+	}
+	
+	@Override
+	public PostalAddress getPrimaryShippingAddress() {
+		if (getAddresses() != null && !getAddresses().isEmpty()) {
+			final Optional<PostalAddress> primaryShippingAddress = Iterables.tryFind(getAddresses(), new Predicate<PostalAddress>() {
+				@Override
+				public boolean apply(@Nullable PostalAddress input) {
+					return input.isPrimaryShipping();
+				}
+			});
+			if (primaryShippingAddress.isPresent()) {
+				return primaryShippingAddress.get();
+			}
+			
+			final Optional<PostalAddress> primaryAddress = Iterables.tryFind(getAddresses(), new Predicate<PostalAddress>() {
+				@Override
+				public boolean apply(@Nullable PostalAddress input) {
+					return input.isPrimary();
+				}
+			});
+			if (primaryAddress.isPresent()) {
+				return primaryAddress.get();
+			} else {
+				return getAddresses().get(0);
 			}
 		} else {
 			return null;

@@ -408,4 +408,10 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
+	@Override
+	public List<Person> findAll(StatusMask statusMask, Collection<String> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -1,5 +1,8 @@
 package org.soluvas.data.person;
 
+import java.util.Collection;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.Email;
@@ -69,6 +72,8 @@ public interface PersonRepository extends
 	public Person findOneActive(String personId);
 	
 	Page<Person> findAll(StatusMask statusMask, Pageable pageable);
+	
+	List<Person> findAll(StatusMask statusMask, Collection<String> ids);
 	
 	long count(StatusMask statusMask);
 
