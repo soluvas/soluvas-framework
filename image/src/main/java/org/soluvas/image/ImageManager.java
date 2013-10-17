@@ -3,19 +3,18 @@
 package org.soluvas.image;
 
 import java.io.File;
-
 import java.util.Collection;
 import java.util.Map;
-import org.eclipse.emf.ecore.EObject;
+
 import javax.annotation.Nullable;
 
+import org.eclipse.emf.ecore.EObject;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Imageable;
-import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.ProgressMonitor;
 import org.soluvas.image.store.ImageRepository;
-import org.soluvas.ldap.SocialPerson;
 
 /**
  * <!-- begin-user-doc -->
@@ -181,10 +180,10 @@ public interface ImageManager extends EObject {
 	 * If image is not available, use the gender to select the representation.
 	 * Returns Map<personId, DisplayImage>
 	 * <!-- end-model-doc -->
-	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" peopleDataType="org.soluvas.commons.Collection<org.soluvas.image.SocialPerson>" peopleRequired="true" styleDataType="org.soluvas.image.ImageStyle"
+	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" peopleDataType="org.soluvas.commons.Collection<org.soluvas.commons.Person>" peopleRequired="true" styleDataType="org.soluvas.image.ImageStyle"
 	 * @generated
 	 */
-	Map<String, DisplayImage> getSafeSocialPersonPhotos(ImageType namespace, Collection<SocialPerson> people, ImageStyle style);
+	Map<String, DisplayImage> getSafeSocialPersonPhotos(ImageType namespace, Collection<Person> people, ImageStyle style);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -194,6 +193,6 @@ public interface ImageManager extends EObject {
 	 */
 	ImageRepository getRepository(ImageType imageType);
 
-	String getThumbnailPhotoUri(SocialPerson person);
+	String getThumbnailPhotoUri(Person person);
 
 } // ImageManager
