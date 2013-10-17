@@ -4,17 +4,13 @@ package org.soluvas.image.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EMap;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.MediaAttachment;
 
@@ -231,7 +227,6 @@ public class MediaAttachmentEntryImpl extends EObjectImpl implements BasicEMap.E
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public String toString() {
@@ -240,6 +235,8 @@ public class MediaAttachmentEntryImpl extends EObjectImpl implements BasicEMap.E
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (key: ");
 		result.append(key);
+		result.append(", value: ");
+		result.append(value);
 		result.append(')');
 		return result.toString();
 	}
@@ -256,6 +253,7 @@ public class MediaAttachmentEntryImpl extends EObjectImpl implements BasicEMap.E
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getHash() {
 		if (hash == -1) {
 			Object theKey = getKey();
@@ -269,6 +267,7 @@ public class MediaAttachmentEntryImpl extends EObjectImpl implements BasicEMap.E
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHash(int hash) {
 		this.hash = hash;
 	}
@@ -278,6 +277,7 @@ public class MediaAttachmentEntryImpl extends EObjectImpl implements BasicEMap.E
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getKey() {
 		return getTypedKey();
 	}
@@ -287,6 +287,7 @@ public class MediaAttachmentEntryImpl extends EObjectImpl implements BasicEMap.E
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKey(String key) {
 		setTypedKey(key);
 	}
@@ -296,6 +297,7 @@ public class MediaAttachmentEntryImpl extends EObjectImpl implements BasicEMap.E
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MediaAttachment getValue() {
 		return getTypedValue();
 	}
@@ -305,6 +307,7 @@ public class MediaAttachmentEntryImpl extends EObjectImpl implements BasicEMap.E
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MediaAttachment setValue(MediaAttachment value) {
 		MediaAttachment oldValue = getValue();
 		setTypedValue(value);

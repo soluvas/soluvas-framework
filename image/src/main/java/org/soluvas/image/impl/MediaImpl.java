@@ -2,6 +2,8 @@
  */
 package org.soluvas.image.impl;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EMap;
@@ -31,7 +33,6 @@ import org.soluvas.image.MediaStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.code.morphia.annotations.Converters;
 
 /**
@@ -250,7 +251,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * @generated
 	 * @ordered
 	 */
-	@JsonProperty("_attachments") @JsonDeserialize(using=MediaAttachmentEMapDeserializer.class)
+	@JsonProperty("_attachments")
 	protected EMap<String, MediaAttachment> attachments;
 
 	/**
@@ -415,6 +416,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -424,6 +426,7 @@ public class MediaImpl extends EObjectImpl implements Media {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		String oldDescription = description;
 		description = newDescription;
@@ -475,6 +478,15 @@ public class MediaImpl extends EObjectImpl implements Media {
 			attachments = new EcoreEMap<String,MediaAttachment>(ImagePackage.Literals.MEDIA_ATTACHMENT_ENTRY, MediaAttachmentEntryImpl.class, this, ImagePackage.MEDIA__ATTACHMENTS);
 		}
 		return attachments;
+	}
+	
+	/**
+	 * For Jackson usage.
+	 * @param attachments
+	 */
+	protected void setAttachments(Map<String, MediaAttachment> attachments) {
+		getAttachments().clear();
+		getAttachments().putAll(attachments);
 	}
 
 	/**
