@@ -268,6 +268,8 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	PostalAddress getPrimaryAddress();
 	
 	PostalAddress getPrimaryShippingAddress();
+	
+	PostalAddress getPrimaryBillingAddress();
 
 	/**
 	 * Returns the value of the '<em><b>Account Status</b></em>' attribute.
