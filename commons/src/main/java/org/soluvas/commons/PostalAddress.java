@@ -79,6 +79,7 @@ public interface PostalAddress extends NameContainer, Identifiable, SchemaVersio
 	 * @model default="3" changeable="false"
 	 * @generated
 	 */
+	@Override
 	long getSchemaVersion();
 
 	/**
