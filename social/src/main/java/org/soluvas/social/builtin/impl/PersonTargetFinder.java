@@ -4,7 +4,6 @@ import javax.annotation.Nullable;
 
 import org.soluvas.commons.Gender;
 import org.soluvas.data.EntityLookup;
-import org.soluvas.ldap.SocialPerson;
 import org.soluvas.social.TargetFinder;
 import org.soluvas.social.builtin.Person;
 import org.soluvas.social.schema.SocialSchemaCatalog;
@@ -17,7 +16,7 @@ import com.google.common.base.Preconditions;
  */
 public class PersonTargetFinder implements TargetFinder<Person> {
 	
-	public static class ToTarget implements Function<SocialPerson, Person> {
+	public static class ToTarget implements Function<org.soluvas.commons.Person, Person> {
 		
 		private final SocialSchemaCatalog socialSchemaCatalog;
 		
@@ -27,7 +26,7 @@ public class PersonTargetFinder implements TargetFinder<Person> {
 		}
 
 		@Override @Nullable
-		public Person apply(@Nullable SocialPerson input) {
+		public Person apply(@Nullable org.soluvas.commons.Person input) {
 			final Person person = socialSchemaCatalog.createTarget(Person.class);
 			person.setId(input.getId());
 			person.setSlug(input.getSlug());
@@ -42,14 +41,14 @@ public class PersonTargetFinder implements TargetFinder<Person> {
 		}
 	}
 
-	private final EntityLookup<SocialPerson, String> lookup;
+	private final EntityLookup<org.soluvas.commons.Person, String> lookup;
 	private final SocialSchemaCatalog socialSchemaCatalog;
 
 	/**
 	 * @param lookup
 	 */
 	public PersonTargetFinder(SocialSchemaCatalog socialSchemaCatalog,
-			EntityLookup<SocialPerson, String> lookup) {
+			EntityLookup<org.soluvas.commons.Person, String> lookup) {
 		super();
 		this.lookup = lookup;
 		this.socialSchemaCatalog = socialSchemaCatalog;
@@ -57,7 +56,7 @@ public class PersonTargetFinder implements TargetFinder<Person> {
 
 	@Override
 	public Person findOne(String id) {
-		final SocialPerson socialPerson = Preconditions.checkNotNull(lookup.findOne(id),
+		final org.soluvas.commons.Person socialPerson = Preconditions.checkNotNull(lookup.findOne(id),
 				"Cannot find person %s in %s", id, lookup);
 		return new ToTarget(socialSchemaCatalog).apply(socialPerson);
 	}
