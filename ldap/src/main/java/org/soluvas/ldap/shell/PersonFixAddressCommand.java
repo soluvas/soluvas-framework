@@ -13,7 +13,7 @@ import org.apache.directory.api.ldap.model.exception.LdapException;
 import org.apache.directory.api.ldap.model.message.SearchScope;
 import org.apache.directory.ldap.client.api.LdapConnection;
 import org.apache.felix.gogo.commands.Command;
-import org.soluvas.commons.PersonRelated;
+import org.soluvas.commons.PersonLdapRelated;
 import org.soluvas.commons.ProgressStatus;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.ldap.Ldap;
@@ -40,7 +40,7 @@ public class PersonFixAddressCommand extends ExtCommandSupport {
 	
 	@Inject
 	public PersonFixAddressCommand(
-			@PersonRelated LdapRepository<SocialPerson> personLdapRepo,
+			@PersonLdapRelated LdapRepository<SocialPerson> personLdapRepo,
 			@Ldap ObjectPool<LdapConnection> ldapPool) {
 		super();
 		this.personLdapRepo = personLdapRepo;

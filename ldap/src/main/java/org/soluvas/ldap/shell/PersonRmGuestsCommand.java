@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
-import org.soluvas.commons.PersonRelated;
+import org.soluvas.commons.PersonLdapRelated;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.ldap.LdapRepository;
 import org.soluvas.ldap.SocialPerson;
@@ -31,7 +31,7 @@ public class PersonRmGuestsCommand extends ExtCommandSupport {
 	
 	@Inject
 	public PersonRmGuestsCommand(
-			@PersonRelated LdapRepository<SocialPerson> personLdapRepo) {
+			@PersonLdapRelated LdapRepository<SocialPerson> personLdapRepo) {
 		super();
 		this.personLdapRepo = personLdapRepo;
 	}
