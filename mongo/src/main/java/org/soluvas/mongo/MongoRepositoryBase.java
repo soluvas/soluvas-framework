@@ -152,7 +152,9 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		}
 		beforeEnsureIndexes();
 		final List<String> ensuredIndexes = new ArrayList<>();
-		ensuredIndexes.addAll( MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {})) );
+		if (!uniqueFields.isEmpty()) {
+			ensuredIndexes.addAll( MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {})) );
+		}
 		ensuredIndexes.addAll( MongoUtils.ensureIndexes(coll, indexedFields) );
 		MongoUtils.retainIndexes(coll, ensuredIndexes.toArray(new String[] {}));
 	}
