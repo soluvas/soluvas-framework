@@ -61,7 +61,7 @@ public class PersonAddCommand extends ExtCommandSupport {
 	}
 
 	@Override
-	protected Object doExecute() throws Exception {
+	protected Person doExecute() throws Exception {
 		final Person person = CommonsFactory.eINSTANCE.createPerson();
 		person.setId(id);
 		person.setGuid((Person.class.getSimpleName() + "_" + id).toLowerCase());
@@ -107,8 +107,8 @@ public class PersonAddCommand extends ExtCommandSupport {
 		if (fbAccessToken != null)
 			person.setFacebookAccessToken(fbAccessToken);
 
-		personRepo.add(person);
-		return person;
+		final Person added = personRepo.add(person);
+		return added;
 	}
 
 }

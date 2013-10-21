@@ -39,8 +39,8 @@ public class MediaAddCommand extends ExtCommandSupport {
 		description="Relative or absolute path to media file.")
 	private String filePath;
 	
-	@Override @Nullable
-	protected Object doExecute() throws Exception {
+	@Override
+	protected Media doExecute() throws Exception {
 		final MediaRepository mediaRepo = getBean(MediaRepository.class);
 		final File file = new File(filePath);
 		final Media media = ImageFactory.eINSTANCE.createMedia();
@@ -63,8 +63,8 @@ public class MediaAddCommand extends ExtCommandSupport {
 //		media.setSlug(slug);
 //		media.setCanonicalSlug(SlugUtils.canonicalize(slug));
 
-		mediaRepo.add(media, file);
-		return media;
+		final Media added = mediaRepo.add(media, file);
+		return added;
 	}
 
 }
