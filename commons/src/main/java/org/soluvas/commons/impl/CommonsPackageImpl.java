@@ -60,6 +60,7 @@ import org.soluvas.commons.ExpansionState;
 import org.soluvas.commons.FacebookAccessible;
 import org.soluvas.commons.FacebookIdentity;
 import org.soluvas.commons.Gender;
+import org.soluvas.commons.GenericStatus;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.Informer;
@@ -614,6 +615,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EEnum tenantSourceEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum genericStatusEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3396,6 +3404,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getGenericStatus() {
+		return genericStatusEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EDataType getDateTime() {
 		return dateTimeEDataType;
@@ -4013,6 +4030,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		expansionStateEEnum = createEEnum(EXPANSION_STATE);
 		signupSourceTypeEEnum = createEEnum(SIGNUP_SOURCE_TYPE);
 		tenantSourceEEnum = createEEnum(TENANT_SOURCE);
+		genericStatusEEnum = createEEnum(GENERIC_STATUS);
 
 		// Create data types
 		dateTimeEDataType = createEDataType(DATE_TIME);
@@ -4690,6 +4708,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEEnum(tenantSourceEEnum, TenantSource.class, "TenantSource");
 		addEEnumLiteral(tenantSourceEEnum, TenantSource.CONFIG);
 		addEEnumLiteral(tenantSourceEEnum, TenantSource.REPOSITORY);
+
+		initEEnum(genericStatusEEnum, GenericStatus.class, "GenericStatus");
+		addEEnumLiteral(genericStatusEEnum, GenericStatus.BOOKED);
+		addEEnumLiteral(genericStatusEEnum, GenericStatus.DRAFT);
+		addEEnumLiteral(genericStatusEEnum, GenericStatus.INACTIVE);
+		addEEnumLiteral(genericStatusEEnum, GenericStatus.VOID);
 
 		// Initialize data types
 		initEDataType(dateTimeEDataType, DateTime.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -5887,6 +5911,36 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Tenant ID (without tenantEnv) which this sysconfig applies to."
+		   });		
+		addAnnotation
+		  (genericStatusEEnum, 
+		   source, 
+		   new String[] {
+			 "documentation", "Generic status for general-purpose usage."
+		   });		
+		addAnnotation
+		  (genericStatusEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Entity is active and usable."
+		   });		
+		addAnnotation
+		  (genericStatusEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Entity has not yet been formally created."
+		   });		
+		addAnnotation
+		  (genericStatusEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Entity is editable but not active for operational purposes."
+		   });		
+		addAnnotation
+		  (genericStatusEEnum.getELiterals().get(3), 
+		   source, 
+		   new String[] {
+			 "documentation", "Entity is trashed or banned."
 		   });
 	}
 	

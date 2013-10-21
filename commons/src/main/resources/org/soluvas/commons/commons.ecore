@@ -1371,4 +1371,29 @@
   <eClassifiers xsi:type="ecore:EDataType" name="Deque" instanceClassName="java.util.Deque">
     <eTypeParameters name="T"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GenericStatus">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Generic status for general-purpose usage."/>
+    </eAnnotations>
+    <eLiterals name="booked">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Entity is active and usable."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="draft" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Entity has not yet been formally created."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="inactive" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Entity is editable but not active for operational purposes."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="void" value="3">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Entity is trashed or banned."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
 </ecore:EPackage>

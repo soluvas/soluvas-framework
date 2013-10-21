@@ -1719,6 +1719,33 @@
       <element xmi:type="ecore:EDataType" href="commons.ecore#//Deque"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_o1j90hO6EeOh-Oc8B_eWnQ" x="4842" y="806"/>
     </children>
+    <children xmi:type="notation:Node" xmi:id="_2OffUDoxEeOH-9mL9qC9rA" type="1005">
+      <children xmi:type="notation:Node" xmi:id="_2Oh7kDoxEeOH-9mL9qC9rA" type="4010"/>
+      <children xmi:type="notation:Node" xmi:id="_2OiioDoxEeOH-9mL9qC9rA" type="5008">
+        <children xmi:type="notation:Node" xmi:id="_6WQl8DoxEeOH-9mL9qC9rA" type="2006">
+          <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//GenericStatus/booked"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_6WQl8ToxEeOH-9mL9qC9rA"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_66NAgDoxEeOH-9mL9qC9rA" type="2006">
+          <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//GenericStatus/draft"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_66NAgToxEeOH-9mL9qC9rA"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_7PIHoDoxEeOH-9mL9qC9rA" type="2006">
+          <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//GenericStatus/inactive"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_7PIHoToxEeOH-9mL9qC9rA"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_71aEgDoxEeOH-9mL9qC9rA" type="2006">
+          <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//GenericStatus/void"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_71aEgToxEeOH-9mL9qC9rA"/>
+        </children>
+        <styles xmi:type="notation:DrawerStyle" xmi:id="_2OiioToxEeOH-9mL9qC9rA"/>
+        <styles xmi:type="notation:SortingStyle" xmi:id="_2OiiojoxEeOH-9mL9qC9rA"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_2OiiozoxEeOH-9mL9qC9rA"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_2OffUToxEeOH-9mL9qC9rA" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+      <element xmi:type="ecore:EEnum" href="commons.ecore#//GenericStatus"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2OffUjoxEeOH-9mL9qC9rA" x="2879" y="616"/>
+    </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_Hn9XoSQDEeKL8qHxNHEWSw"/>
     <element xmi:type="ecore:EPackage" href="commons.ecore#/"/>
     <edges xmi:type="notation:Edge" xmi:id="_Rrm-sCSDEeKyUdMfH4dSfg" type="3003" source="_J57LECSDEeKyUdMfH4dSfg" target="_aOshcSSAEeKyUdMfH4dSfg">

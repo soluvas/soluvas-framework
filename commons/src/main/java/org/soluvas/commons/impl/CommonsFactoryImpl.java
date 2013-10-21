@@ -30,6 +30,7 @@ import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.soluvas.commons.*;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Added;
 import org.soluvas.commons.AddedMany;
@@ -177,6 +178,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createSignupSourceTypeFromString(eDataType, initialValue);
 			case CommonsPackage.TENANT_SOURCE:
 				return createTenantSourceFromString(eDataType, initialValue);
+			case CommonsPackage.GENERIC_STATUS:
+				return createGenericStatusFromString(eDataType, initialValue);
 			case CommonsPackage.DATE_TIME:
 				return createDateTimeFromString(eDataType, initialValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -256,6 +259,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertSignupSourceTypeToString(eDataType, instanceValue);
 			case CommonsPackage.TENANT_SOURCE:
 				return convertTenantSourceToString(eDataType, instanceValue);
+			case CommonsPackage.GENERIC_STATUS:
+				return convertGenericStatusToString(eDataType, instanceValue);
 			case CommonsPackage.DATE_TIME:
 				return convertDateTimeToString(eDataType, instanceValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -819,6 +824,26 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertTenantSourceToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GenericStatus createGenericStatusFromString(EDataType eDataType, String initialValue) {
+		GenericStatus result = GenericStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertGenericStatusToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

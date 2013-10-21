@@ -4810,6 +4810,16 @@ public interface CommonsPackage extends EPackage {
 	int TENANT_SOURCE = 70;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.GenericStatus <em>Generic Status</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.GenericStatus
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGenericStatus()
+	 * @generated
+	 */
+	int GENERIC_STATUS = 71;
+
+	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4817,7 +4827,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 71;
+	int DATE_TIME = 72;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -4827,7 +4837,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 72;
+	int CURRENCY_UNIT = 73;
 
 	/**
 	 * The meta object id for the '<em>Quantity</em>' data type.
@@ -4837,7 +4847,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQuantity()
 	 * @generated
 	 */
-	int QUANTITY = 73;
+	int QUANTITY = 74;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -4847,7 +4857,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 74;
+	int UNIT = 75;
 
 	/**
 	 * The meta object id for the '<em>List</em>' data type.
@@ -4857,7 +4867,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 75;
+	int LIST = 76;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -4867,7 +4877,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 76;
+	int MAP = 77;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -4877,7 +4887,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 77;
+	int SET = 78;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -4887,7 +4897,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 78;
+	int COLLECTION = 79;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -4897,7 +4907,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 79;
+	int MULTIMAP = 80;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -4907,7 +4917,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 80;
+	int NAVIGABLE_MAP = 81;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -4917,7 +4927,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 81;
+	int QUEUE = 82;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -4927,7 +4937,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 82;
+	int MULTISET = 83;
 
 	/**
 	 * The meta object id for the '<em>Serializable</em>' data type.
@@ -4937,7 +4947,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 83;
+	int SERIALIZABLE = 84;
 
 	/**
 	 * The meta object id for the '<em>Bundle</em>' data type.
@@ -4947,7 +4957,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 84;
+	int BUNDLE = 85;
 
 	/**
 	 * The meta object id for the '<em>Big Money Provider</em>' data type.
@@ -4957,7 +4967,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
 	 * @generated
 	 */
-	int BIG_MONEY_PROVIDER = 85;
+	int BIG_MONEY_PROVIDER = 86;
 
 	/**
 	 * The meta object id for the '<em>Measurable</em>' data type.
@@ -4967,7 +4977,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMeasurable()
 	 * @generated
 	 */
-	int MEASURABLE = 86;
+	int MEASURABLE = 87;
 
 	/**
 	 * The meta object id for the '<em>Date Time Zone</em>' data type.
@@ -4977,7 +4987,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTimeZone()
 	 * @generated
 	 */
-	int DATE_TIME_ZONE = 87;
+	int DATE_TIME_ZONE = 88;
 
 	/**
 	 * The meta object id for the '<em>Locale</em>' data type.
@@ -4987,7 +4997,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 88;
+	int LOCALE = 89;
 
 	/**
 	 * The meta object id for the '<em>File</em>' data type.
@@ -4997,7 +5007,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFile()
 	 * @generated
 	 */
-	int FILE = 89;
+	int FILE = 90;
 
 	/**
 	 * The meta object id for the '<em>Listenable Future</em>' data type.
@@ -5007,7 +5017,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListenableFuture()
 	 * @generated
 	 */
-	int LISTENABLE_FUTURE = 90;
+	int LISTENABLE_FUTURE = 91;
 
 	/**
 	 * The meta object id for the '<em>Listening Executor Service</em>' data type.
@@ -5017,7 +5027,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListeningExecutorService()
 	 * @generated
 	 */
-	int LISTENING_EXECUTOR_SERVICE = 91;
+	int LISTENING_EXECUTOR_SERVICE = 92;
 
 	/**
 	 * The meta object id for the '<em>Class Loader</em>' data type.
@@ -5027,7 +5037,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getClassLoader()
 	 * @generated
 	 */
-	int CLASS_LOADER = 92;
+	int CLASS_LOADER = 93;
 
 	/**
 	 * The meta object id for the '<em>URL</em>' data type.
@@ -5037,7 +5047,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getURL()
 	 * @generated
 	 */
-	int URL = 93;
+	int URL = 94;
 
 	/**
 	 * The meta object id for the '<em>Event Bus</em>' data type.
@@ -5047,7 +5057,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEventBus()
 	 * @generated
 	 */
-	int EVENT_BUS = 94;
+	int EVENT_BUS = 95;
 
 	/**
 	 * The meta object id for the '<em>Local Date</em>' data type.
@@ -5057,7 +5067,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocalDate()
 	 * @generated
 	 */
-	int LOCAL_DATE = 95;
+	int LOCAL_DATE = 96;
 
 	/**
 	 * The meta object id for the '<em>No Such Element Exception</em>' data type.
@@ -5067,7 +5077,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNoSuchElementException()
 	 * @generated
 	 */
-	int NO_SUCH_ELEMENT_EXCEPTION = 96;
+	int NO_SUCH_ELEMENT_EXCEPTION = 97;
 
 
 	/**
@@ -5078,7 +5088,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDeque()
 	 * @generated
 	 */
-	int DEQUE = 97;
+	int DEQUE = 98;
 
 
 	/**
@@ -7917,6 +7927,16 @@ public interface CommonsPackage extends EPackage {
 	EEnum getTenantSource();
 
 	/**
+	 * Returns the meta object for enum '{@link org.soluvas.commons.GenericStatus <em>Generic Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Generic Status</em>'.
+	 * @see org.soluvas.commons.GenericStatus
+	 * @generated
+	 */
+	EEnum getGenericStatus();
+
+	/**
 	 * Returns the meta object for data type '{@link org.joda.time.DateTime <em>Date Time</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10504,6 +10524,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TENANT_SOURCE = eINSTANCE.getTenantSource();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.GenericStatus <em>Generic Status</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.GenericStatus
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGenericStatus()
+		 * @generated
+		 */
+		EEnum GENERIC_STATUS = eINSTANCE.getGenericStatus();
 
 		/**
 		 * The meta object literal for the '<em>Date Time</em>' data type.
