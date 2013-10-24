@@ -75,7 +75,9 @@ public interface PersonRepository extends
 	
 	List<Person> findAll(StatusMask statusMask, Collection<String> ids);
 	
-	List<Person> findAllSecRoleIds(StatusMask statusMask, Collection<String> secRoleIds);
+	List<Person> findAllBySecRoleIds(StatusMask statusMask, Collection<String> secRoleIds);
+	
+	List<Person> findAllCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds);
 	
 	boolean hasMatchWithSecRoleIds(String personId, Collection<String> secRoleIds);
 	

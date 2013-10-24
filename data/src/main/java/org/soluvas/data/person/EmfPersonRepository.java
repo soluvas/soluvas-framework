@@ -328,7 +328,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public List<Person> findAllSecRoleIds(StatusMask statusMask,
+	public List<Person> findAllBySecRoleIds(StatusMask statusMask,
 			Collection<String> secRoleIds) {
 		// TODO Auto-generated method stub
 		return null;
@@ -338,6 +338,13 @@ public class EmfPersonRepository extends
 	public boolean hasMatchWithSecRoleIds(String personId, Collection<String> secRoleIds) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<Person> findAllCustomerRoleIds(StatusMask statusMask,
+			Collection<String> customerRoleIds) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

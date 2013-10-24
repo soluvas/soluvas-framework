@@ -302,7 +302,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public List<Person> findAllSecRoleIds(StatusMask statusMask, Collection<String> secRoleIds) {
+	public List<Person> findAllBySecRoleIds(StatusMask statusMask, Collection<String> secRoleIds) {
 		final BasicDBObject query = new BasicDBObject("securityRoleIds", new BasicDBObject("$in", secRoleIds));
 		augmentQueryForStatusMask(query, statusMask);
 		return findAllByQuery(query, new CappedRequest(500)).getContent();
@@ -315,6 +315,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		query.put("securityRoleIds", new BasicDBObject("$in", secRoleIds));
 		final Person person = findOneByQuery(query);
 		return person != null;
+	}
+
+	@Override
+	public List<Person> findAllCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds) {
+		final BasicDBObject query = new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds));
+		augmentQueryForStatusMask(query, statusMask);
+		return findAllByQuery(query, new CappedRequest(500)).getContent();
 	}
 
 }
