@@ -281,6 +281,10 @@ public class XmiCategoryRepository
 	protected Iterable<Category> getFlattenedCategories() {
 		return CategoryUtils.flatten(catalog.getCategories());
 	}
+	
+	protected Iterable<Category> getCategories() {
+		return catalog.getCategories();
+	}
 
 	@Override
 	public Set<String> exists(final Collection<String> ids) {
@@ -355,14 +359,23 @@ public class XmiCategoryRepository
 		return deletedCategories.size();
 	}
 	
-	protected Iterable<Category> doFindAll(Predicate<Category> filter, Pageable pageable) {
+	protected Iterable<Category> doFindAll(Predicate<Category> filter, Pageable pageable, boolean isFlattened) {
 		final Sort sort = Optional.fromNullable(pageable.getSort()).or(new Sort("positioner"));
 		log.debug("Find categories sorted by {}", sort.iterator().next().getProperty());
 		final Iterable<Category> filtered;
 		if (filter != null) {
-			filtered = Iterables.filter(getFlattenedCategories(), filter);
+			if (isFlattened) {
+				filtered = Iterables.filter(getFlattenedCategories(), filter);
+			} else {
+				filtered = Iterables.filter(getCategories(), filter);
+			}
+				
 		} else {
-			filtered = getFlattenedCategories();
+			if (isFlattened) {
+				filtered = getFlattenedCategories();
+			} else {
+				filtered = getCategories();
+			}
 		}
 		final Ordering<Category> ordering = new Ordering<Category>() {
 			@Override
@@ -398,7 +411,7 @@ public class XmiCategoryRepository
 	@Override
 	public Page<String> findAllIds(Pageable pageable) {
 		final int allSize = Iterables.size(getFlattenedCategories());
-		final Iterable<Category> limited = doFindAll(null, pageable);
+		final Iterable<Category> limited = doFindAll(null, pageable, true);
 		final Iterable<String> limitedUNames = Iterables.transform(limited, new CategoryUNameFunction());
 		return new PageImpl<>(ImmutableList.copyOf(limitedUNames),
 				pageable, allSize);
@@ -407,7 +420,7 @@ public class XmiCategoryRepository
 	@Override
 	public Page<Category> findAll(Pageable pageable) {
 		final int allSize = Iterables.size(getFlattenedCategories());
-		final Iterable<Category> limited = doFindAll(null, pageable);
+		final Iterable<Category> limited = doFindAll(null, pageable, true);
 		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
 		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited))),
 				pageable, allSize);
@@ -421,7 +434,7 @@ public class XmiCategoryRepository
 				return statuses.contains(input.getStatus());
 			}
 		};
-		final Iterable<Category> limited = doFindAll(filter, pageable);
+		final Iterable<Category> limited = doFindAll(filter, pageable, true);
 		final int allSize = Iterables.size(getFlattenedCategories());
 		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
 		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited))),
@@ -456,6 +469,36 @@ public class XmiCategoryRepository
 			log.debug("findOneBySlugPath {} {} is null", slugPath, statuses);
 			return found;
 		}
+	}
+
+	@Override
+	public Page<Category> findAllOriginalByStatus(final Collection<CategoryStatus> statuses, Pageable pageable) {
+		final Predicate<Category> filter = new Predicate<Category>() {
+			@Override
+			public boolean apply(@Nullable Category input) {
+				return statuses.contains(input.getStatus());
+			}
+		};
+		final Iterable<Category> limited = doFindAll(filter, pageable, false);
+		final int allSize = Iterables.size(getCategories());
+		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
+		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited))),
+				pageable, allSize);
+	}
+
+	@Override
+	public Page<Category> findAllByLevelAndStatus(final Collection<CategoryStatus> statuses, final int level, Pageable pageable) {
+		final Predicate<Category> filter = new Predicate<Category>() {
+			@Override
+			public boolean apply(@Nullable Category input) {
+				return input.getLevel() == level && statuses.contains(input.getStatus());
+			}
+		};
+		final Iterable<Category> limited = doFindAll(filter, pageable, true);
+		final int allSize = Iterables.size(getFlattenedCategories());
+		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
+		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited))),
+				pageable, allSize);
 	}
 
 }
