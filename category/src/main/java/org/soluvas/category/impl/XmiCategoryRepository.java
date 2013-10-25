@@ -487,11 +487,11 @@ public class XmiCategoryRepository
 	}
 
 	@Override
-	public Page<Category> findAllByLevelAndStatus(final Collection<CategoryStatus> statuses, final int level, Pageable pageable) {
+	public Page<Category> findAllByLevelAndStatus(final Collection<CategoryStatus> statuses, final int level, final boolean notForHasChildren, Pageable pageable) {
 		final Predicate<Category> filter = new Predicate<Category>() {
 			@Override
 			public boolean apply(@Nullable Category input) {
-				return input.getLevel() == level && statuses.contains(input.getStatus());
+				return input.getLevel() == level && statuses.contains(input.getStatus()) && (notForHasChildren ? input.getCategories().isEmpty() : true);
 			}
 		};
 		final Iterable<Category> limited = doFindAll(filter, pageable, true);

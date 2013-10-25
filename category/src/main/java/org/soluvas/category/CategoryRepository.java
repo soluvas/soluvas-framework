@@ -22,6 +22,6 @@ public interface CategoryRepository extends
 	
 	Page<Category> findAllOriginalByStatus(Collection<CategoryStatus> statuses, Pageable pageable);
 	
-	Page<Category> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level, Pageable pageable);
+	Page<Category> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level, boolean notForHasChildren, Pageable pageable);
 
 }
