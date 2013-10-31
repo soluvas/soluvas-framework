@@ -1396,4 +1396,5 @@
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Temperature" instanceClassName="javax.measure.quantity.Temperature"/>
 </ecore:EPackage>

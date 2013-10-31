@@ -17,6 +17,7 @@ import java.util.Set;
 
 import javax.measure.Measurable;
 import javax.measure.quantity.Quantity;
+import javax.measure.quantity.Temperature;
 import javax.measure.unit.Unit;
 
 import org.eclipse.emf.ecore.EClass;
@@ -222,6 +223,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createNoSuchElementExceptionFromString(eDataType, initialValue);
 			case CommonsPackage.DEQUE:
 				return createDequeFromString(eDataType, initialValue);
+			case CommonsPackage.TEMPERATURE:
+				return createTemperatureFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -303,6 +306,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertNoSuchElementExceptionToString(eDataType, instanceValue);
 			case CommonsPackage.DEQUE:
 				return convertDequeToString(eDataType, instanceValue);
+			case CommonsPackage.TEMPERATURE:
+				return convertTemperatureToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -1237,6 +1242,24 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 */
 	public String convertDequeToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Temperature createTemperatureFromString(EDataType eDataType, String initialValue) {
+		return (Temperature)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertTemperatureToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

@@ -5092,6 +5092,17 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Temperature</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see javax.measure.quantity.Temperature
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTemperature()
+	 * @generated
+	 */
+	int TEMPERATURE = 99;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8234,6 +8245,17 @@ public interface CommonsPackage extends EPackage {
 	EDataType getDeque();
 
 	/**
+	 * Returns the meta object for data type '{@link javax.measure.quantity.Temperature <em>Temperature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Temperature</em>'.
+	 * @see javax.measure.quantity.Temperature
+	 * @model instanceClass="javax.measure.quantity.Temperature"
+	 * @generated
+	 */
+	EDataType getTemperature();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10804,6 +10826,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType DEQUE = eINSTANCE.getDeque();
+
+		/**
+		 * The meta object literal for the '<em>Temperature</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see javax.measure.quantity.Temperature
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTemperature()
+		 * @generated
+		 */
+		EDataType TEMPERATURE = eINSTANCE.getTemperature();
 
 	}
 

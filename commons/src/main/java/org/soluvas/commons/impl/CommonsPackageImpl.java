@@ -14,6 +14,7 @@ import java.util.Set;
 
 import javax.measure.Measurable;
 import javax.measure.quantity.Quantity;
+import javax.measure.quantity.Temperature;
 import javax.measure.unit.Unit;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -811,6 +812,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EDataType dequeEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType temperatureEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -3680,6 +3688,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getTemperature() {
+		return temperatureEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
@@ -4060,6 +4077,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		localDateEDataType = createEDataType(LOCAL_DATE);
 		noSuchElementExceptionEDataType = createEDataType(NO_SUCH_ELEMENT_EXCEPTION);
 		dequeEDataType = createEDataType(DEQUE);
+		temperatureEDataType = createEDataType(TEMPERATURE);
 	}
 
 	/**
@@ -4743,6 +4761,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(localDateEDataType, LocalDate.class, "LocalDate", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(noSuchElementExceptionEDataType, NoSuchElementException.class, "NoSuchElementException", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(dequeEDataType, Deque.class, "Deque", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(temperatureEDataType, Temperature.class, "Temperature", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
