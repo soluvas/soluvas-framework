@@ -55,11 +55,12 @@ public class SoluvasCouchDbRealm extends AuthorizingRealm {
 	
 	/**
 	 * 
-	 * @param securityCatalogSupplier Why not generics? See https://issues.apache.org/jira/browse/ARIES-960
+	 * @param securityCatalogSupplier Why not generics? See https://issues.apache.org/jira/browse/ARIES-960 .
+	 * 		Fortunately we no longer use Karaf.
 	 * @param securityRepo
 	 */
 	@Deprecated
-	public SoluvasCouchDbRealm(Supplier securityCatalogSupplier,
+	public SoluvasCouchDbRealm(Supplier<SecurityCatalog> securityCatalogSupplier,
 			final CouchDbConnector conn) {
 		super();
 		this.securityCatalogSupplier = securityCatalogSupplier;
@@ -72,7 +73,7 @@ public class SoluvasCouchDbRealm extends AuthorizingRealm {
 	}
 	
 	@Deprecated
-	public SoluvasCouchDbRealm(Supplier securityCatalogSupplier,
+	public SoluvasCouchDbRealm(Supplier<SecurityCatalog> securityCatalogSupplier,
 			final String url, final String user, final String password, final String db) throws MalformedURLException {
 		super();
 		this.securityCatalogSupplier = securityCatalogSupplier;
