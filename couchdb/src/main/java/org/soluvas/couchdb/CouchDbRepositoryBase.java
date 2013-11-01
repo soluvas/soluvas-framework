@@ -166,8 +166,8 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	 * @param collName
 	 * @param indexedFields
 	 */
-	public CouchDbRepositoryBase(ClientConnectionManager connMgr, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
-			String couchDbUri, String dbName, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields,
+	protected CouchDbRepositoryBase(ClientConnectionManager connMgr, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
+			String couchDbUri, String dbName, List<String> uniqueFields, Map<String, Integer> indexedFields,
 			@Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
 		super();
 		this.entityClass = intfClass;
@@ -175,7 +175,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		this.currentSchemaVersion = currentSchemaVersion;
 		this.couchDbUri = couchDbUri;
 		this.dbName = dbName;
-		this.collName = collName;
+		this.collName = StringUtils.uncapitalize(intfClass.getSimpleName());
 		
 		this.statusProperty = statusProperty;
 		this.activeStatuses = activeStatuses;
@@ -229,9 +229,9 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	 * @param uniqueFields
 	 * @param indexedFields
 	 */
-	public CouchDbRepositoryBase(ClientConnectionManager connMgr, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
-			String couchDbUri, String dbName, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields) {
-		this(connMgr, intfClass, implClass, currentSchemaVersion, couchDbUri, dbName, collName, uniqueFields, indexedFields, 
+	protected CouchDbRepositoryBase(ClientConnectionManager connMgr, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
+			String couchDbUri, String dbName, List<String> uniqueFields, Map<String, Integer> indexedFields) {
+		this(connMgr, intfClass, implClass, currentSchemaVersion, couchDbUri, dbName, uniqueFields, indexedFields, 
 				null, ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of());
 	}
 

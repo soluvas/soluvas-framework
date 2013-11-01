@@ -58,7 +58,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		implements PersonRepository {
 	
 	public CouchDbPersonRepository(ClientConnectionManager connMgr, String couchDbUri, String dbName) {
-		super(connMgr, Person.class, PersonImpl.class, 1L, couchDbUri, dbName, "person",
+		super(connMgr, Person.class, PersonImpl.class, 1L, couchDbUri, dbName,
 				ImmutableList.<String>of(), ImmutableMap.<String, Integer>of(),
 				"accountStatus", 
 				ImmutableSet.of(AccountStatus.ACTIVE, AccountStatus.VALIDATED, AccountStatus.VERIFIED),

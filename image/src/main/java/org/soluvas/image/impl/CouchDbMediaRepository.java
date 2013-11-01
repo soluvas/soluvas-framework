@@ -37,7 +37,7 @@ public class CouchDbMediaRepository extends CouchDbRepositoryBase<Media, MediaSt
 	public CouchDbMediaRepository(ClientConnectionManager connMgr,
 			String couchDbUri, String dbName) {
 		super(connMgr, Media.class, MediaImpl.class, 1L, couchDbUri, dbName,
-				"media", ImmutableList.<String>of(), ImmutableMap.<String, Integer>of(),
+				ImmutableList.<String>of(), ImmutableMap.<String, Integer>of(),
 				"status", 
 				ImmutableSet.of(MediaStatus.BOOKED),
 				ImmutableSet.<MediaStatus>of(),
