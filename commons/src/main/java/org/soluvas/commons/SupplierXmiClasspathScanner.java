@@ -145,7 +145,7 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 			final Map<String, List<Supplier<T>>> managedSuppliers = new HashMap<>();
 			for (URL xmiUrl : xmiUrls) {
 				final List<Supplier<T>> objs = Preconditions.checkNotNull(extractSuppliers(ImmutableList.of(xmiUrl)),
-						"extractSuppliers from %s returned null", xmiUrl);
+						"extractSuppliers from '%s' returned null", xmiUrl);
 				managedSuppliers.put(xmiUrl.toString(), objs);
 			}
 			final List<Supplier<T>> scannedSuppliers = ImmutableList.copyOf(Iterables.concat(managedSuppliers.values()));
