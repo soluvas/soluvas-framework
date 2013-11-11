@@ -2,10 +2,12 @@
  */
 package org.soluvas.commons.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -20,10 +22,11 @@ import org.soluvas.commons.ExpansionState;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.WebAddress;
+
 import com.damnhandy.uri.template.UriTemplate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * <!-- begin-user-doc -->
@@ -769,18 +772,51 @@ public class WebAddressImpl extends MinimalEObjectImpl.Container implements WebA
 			return;
 		}
 		
-		final HashMap<String, Object> scope = new HashMap<>(upScope);
+		final Map<String, Object> scope = new HashMap<>(upScope);
 		final String fqdn = getFqdn();
+		Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
 		scope.put("fqdn", fqdn);
 		
-		setBaseUri(UriTemplate.expand(Strings.nullToEmpty(getBaseUri()), scope));
-		setImagesUri(UriTemplate.expand(Strings.nullToEmpty(getImagesUri()), scope));
-		setJsUri(UriTemplate.expand(Strings.nullToEmpty(getJsUri()), scope));
-		setSkinUri(UriTemplate.expand(Strings.nullToEmpty(getSkinUri()), scope));
-		setSecureBaseUri(UriTemplate.expand(Strings.nullToEmpty(getSecureBaseUri()), scope));
-		setSecureImagesUri(UriTemplate.expand(Strings.nullToEmpty(getSecureImagesUri()), scope));
-		setSecureJsUri(UriTemplate.expand(Strings.nullToEmpty(getSecureJsUri()), scope));
-		setSecureSkinUri(UriTemplate.expand(Strings.nullToEmpty(getSecureSkinUri()), scope));
+		try {
+			setBaseUri(UriTemplate.expand(Strings.nullToEmpty(getBaseUri()), scope));
+		} catch (Exception e) {
+			throw new CommonsException(e, "Cannot expand baseUri '%s' using scope %s", getBaseUri(), scope);
+		}
+		try {
+			setImagesUri(UriTemplate.expand(Strings.nullToEmpty(getImagesUri()), scope));
+		} catch (Exception e) {
+			throw new CommonsException(e, "Cannot expand imagesUri '%s' using scope %s", getImagesUri(), scope);
+		}
+		try {
+			setJsUri(UriTemplate.expand(Strings.nullToEmpty(getJsUri()), scope));
+		} catch (Exception e) {
+			throw new CommonsException(e, "Cannot expand jsUri '%s' using scope %s", getJsUri(), scope);
+		}
+		try {
+			setSkinUri(UriTemplate.expand(Strings.nullToEmpty(getSkinUri()), scope));
+		} catch (Exception e) {
+			throw new CommonsException(e, "Cannot expand skinUri '%s' using scope %s", getSkinUri(), scope);
+		}
+		try {
+			setSecureBaseUri(UriTemplate.expand(Strings.nullToEmpty(getSecureBaseUri()), scope));
+		} catch (Exception e) {
+			throw new CommonsException(e, "Cannot expand secureBaseUri '%s' using scope %s", getSecureBaseUri(), scope);
+		}
+		try {
+			setSecureImagesUri(UriTemplate.expand(Strings.nullToEmpty(getSecureImagesUri()), scope));
+		} catch (Exception e) {
+			throw new CommonsException(e, "Cannot expand secureImagesUri '%s' using scope %s", getSecureImagesUri(), scope);
+		}
+		try {
+			setSecureJsUri(UriTemplate.expand(Strings.nullToEmpty(getSecureJsUri()), scope));
+		} catch (Exception e) {
+			throw new CommonsException(e, "Cannot expand secureJsUri '%s' using scope %s", getSecureJsUri(), scope);
+		}
+		try {
+			setSecureSkinUri(UriTemplate.expand(Strings.nullToEmpty(getSecureSkinUri()), scope));
+		} catch (Exception e) {
+			throw new CommonsException(e, "Cannot expand secureSkinUri '%s' using scope %s", getSecureSkinUri(), scope);
+		}
 		expansionState = ExpansionState.EXPANDED;
 	}
 
