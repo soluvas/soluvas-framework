@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -777,45 +778,61 @@ public class WebAddressImpl extends MinimalEObjectImpl.Container implements WebA
 		Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
 		scope.put("fqdn", fqdn);
 		
-		try {
-			setBaseUri(UriTemplate.expand(Strings.nullToEmpty(getBaseUri()), scope));
-		} catch (Exception e) {
-			throw new CommonsException(e, "Cannot expand baseUri '%s' using scope %s", getBaseUri(), scope);
+		if (StringUtils.contains(getBaseUri(), '{')) {
+			try {
+				setBaseUri(UriTemplate.expand(Strings.nullToEmpty(getBaseUri()), scope));
+			} catch (Exception e) {
+				throw new CommonsException(e, "Cannot expand baseUri '%s' using scope %s", getBaseUri(), scope);
+			}
 		}
-		try {
-			setImagesUri(UriTemplate.expand(Strings.nullToEmpty(getImagesUri()), scope));
-		} catch (Exception e) {
-			throw new CommonsException(e, "Cannot expand imagesUri '%s' using scope %s", getImagesUri(), scope);
+		if (StringUtils.contains(getImagesUri(), '{')) {
+			try {
+				setImagesUri(UriTemplate.expand(Strings.nullToEmpty(getImagesUri()), scope));
+			} catch (Exception e) {
+				throw new CommonsException(e, "Cannot expand imagesUri '%s' using scope %s", getImagesUri(), scope);
+			}
 		}
-		try {
-			setJsUri(UriTemplate.expand(Strings.nullToEmpty(getJsUri()), scope));
-		} catch (Exception e) {
-			throw new CommonsException(e, "Cannot expand jsUri '%s' using scope %s", getJsUri(), scope);
+		if (StringUtils.contains(getJsUri(), '{')) {
+			try {
+				setJsUri(UriTemplate.expand(Strings.nullToEmpty(getJsUri()), scope));
+			} catch (Exception e) {
+				throw new CommonsException(e, "Cannot expand jsUri '%s' using scope %s", getJsUri(), scope);
+			}
 		}
-		try {
-			setSkinUri(UriTemplate.expand(Strings.nullToEmpty(getSkinUri()), scope));
-		} catch (Exception e) {
-			throw new CommonsException(e, "Cannot expand skinUri '%s' using scope %s", getSkinUri(), scope);
+		if (StringUtils.contains(getSkinUri(), '{')) {
+			try {
+				setSkinUri(UriTemplate.expand(Strings.nullToEmpty(getSkinUri()), scope));
+			} catch (Exception e) {
+				throw new CommonsException(e, "Cannot expand skinUri '%s' using scope %s", getSkinUri(), scope);
+			}
 		}
-		try {
-			setSecureBaseUri(UriTemplate.expand(Strings.nullToEmpty(getSecureBaseUri()), scope));
-		} catch (Exception e) {
-			throw new CommonsException(e, "Cannot expand secureBaseUri '%s' using scope %s", getSecureBaseUri(), scope);
+		if (StringUtils.contains(getSecureBaseUri(), '{')) {
+			try {
+				setSecureBaseUri(UriTemplate.expand(Strings.nullToEmpty(getSecureBaseUri()), scope));
+			} catch (Exception e) {
+				throw new CommonsException(e, "Cannot expand secureBaseUri '%s' using scope %s", getSecureBaseUri(), scope);
+			}
 		}
-		try {
-			setSecureImagesUri(UriTemplate.expand(Strings.nullToEmpty(getSecureImagesUri()), scope));
-		} catch (Exception e) {
-			throw new CommonsException(e, "Cannot expand secureImagesUri '%s' using scope %s", getSecureImagesUri(), scope);
+		if (StringUtils.contains(getSecureImagesUri(), '{')) {
+			try {
+				setSecureImagesUri(UriTemplate.expand(Strings.nullToEmpty(getSecureImagesUri()), scope));
+			} catch (Exception e) {
+				throw new CommonsException(e, "Cannot expand secureImagesUri '%s' using scope %s", getSecureImagesUri(), scope);
+			}
 		}
-		try {
-			setSecureJsUri(UriTemplate.expand(Strings.nullToEmpty(getSecureJsUri()), scope));
-		} catch (Exception e) {
-			throw new CommonsException(e, "Cannot expand secureJsUri '%s' using scope %s", getSecureJsUri(), scope);
+		if (StringUtils.contains(getSecureJsUri(), '{')) {
+			try {
+				setSecureJsUri(UriTemplate.expand(Strings.nullToEmpty(getSecureJsUri()), scope));
+			} catch (Exception e) {
+				throw new CommonsException(e, "Cannot expand secureJsUri '%s' using scope %s", getSecureJsUri(), scope);
+			}
 		}
-		try {
-			setSecureSkinUri(UriTemplate.expand(Strings.nullToEmpty(getSecureSkinUri()), scope));
-		} catch (Exception e) {
-			throw new CommonsException(e, "Cannot expand secureSkinUri '%s' using scope %s", getSecureSkinUri(), scope);
+		if (StringUtils.contains(getSecureSkinUri(), '{')) {
+			try {
+				setSecureSkinUri(UriTemplate.expand(Strings.nullToEmpty(getSecureSkinUri()), scope));
+			} catch (Exception e) {
+				throw new CommonsException(e, "Cannot expand secureSkinUri '%s' using scope %s", getSecureSkinUri(), scope);
+			}
 		}
 		expansionState = ExpansionState.EXPANDED;
 	}
