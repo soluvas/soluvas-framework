@@ -41,7 +41,7 @@ public class MongoPersonRepositoryTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		personRepo = new MongoPersonRepository("mongodb://127.0.0.1:27017/tuneeca_dev");
+		personRepo = new MongoPersonRepository("mongodb://127.0.0.1:27017/tuneeca_dev", true);
 	}
 	
 	@Test

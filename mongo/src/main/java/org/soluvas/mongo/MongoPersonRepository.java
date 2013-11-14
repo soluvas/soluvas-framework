@@ -44,12 +44,13 @@ import com.mongodb.DBObject;
 public class MongoPersonRepository extends MongoRepositoryBase<Person> implements
 		PersonRepository {
 	
-	public MongoPersonRepository(String mongoUri) {
+	public MongoPersonRepository(String mongoUri, boolean migrationEnabled) {
 		super(Person.class, PersonImpl.class, PersonImpl.CURRENT_SCHEMA_VERSION, mongoUri, "person",
 				ImmutableList.of("canonicalSlug"), ImmutableMap.of(
 						"name", 1, // for sorting in list
 						"creationTime", -1,
-						"modificationTime", -1));
+						"modificationTime", -1),
+						migrationEnabled);
 	}
 
 	@Override

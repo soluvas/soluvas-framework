@@ -17,6 +17,7 @@
 		<module>jaxrs</module>
 		<module>ldap</module>
 		<module>security</module>
+		<module>jpa</module>
 		<module>mongo</module>
 		<module>couchdb</module>
 		<module>email</module>
@@ -112,6 +113,11 @@
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>org.soluvas.data</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.soluvas</groupId>
+				<artifactId>org.soluvas.jpa</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

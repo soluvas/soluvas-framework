@@ -16,6 +16,7 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -45,12 +46,12 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 			.getLogger(PagingAndSortingRepositoryBase.class);
 	private static final long DEFAULT_PAGE_SIZE = 10;
 	
-	@Override
+	@Override @Transactional(readOnly=true)
 	public final boolean isEmpty() {
 		return count() > 0;
 	}
 
-	@Override
+	@Override @Transactional
 	public final long deleteAll() {
 		final long cnt = count();
 		if (cnt > 0) {
@@ -71,13 +72,13 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 		}
 	}
 
-	@Nullable 
+	@Nullable @Transactional(readOnly=true)
 	protected abstract ID getId(T entity);
 	
-	@Override
+	@Override @Transactional
 	public abstract <S extends T> Collection<S> add(Collection<S> entities);
 	
-	@Override
+	@Override @Transactional
 	public final <S extends T> S add(S entity) {
 		final Collection<S> addResults = add(ImmutableList.of(entity));
 		Preconditions.checkNotNull(addResults, 
@@ -90,20 +91,20 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 		return result;
 	}
 	
-	@Override
+	@Override @Transactional
 	public abstract <S extends T> Collection<S> modify(final Map<ID, S> entities);
 	
-	@Override
+	@Override @Transactional
 	public final <S extends T> S modify(ID id, S entity) {
 		return modify(ImmutableMap.of(id, entity)).iterator().next();
 	}
 	
-	@Override
+	@Override @Transactional
 	public final <S extends T> S save(S entity) {
 		return save(ImmutableList.of(entity)).iterator().next();
 	}
 	
-	@Override
+	@Override @Transactional
 	public final <S extends T> Collection<S> save(Collection<S> entities) {
 		final Collection<ID> ids = Collections2.filter(
 				Collections2.transform(entities, new IdFunction()), new NotNullPredicate<>());
@@ -128,32 +129,33 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 		return ImmutableList.copyOf(Iterables.concat(modifieds, addeds));
 	}
 	
-	@Override
+	@Override @Transactional(readOnly=true)
 	public final boolean exists(ID id) {
 		return existsAny(ImmutableList.of(id));
 	}
 
+	@Transactional(readOnly=true)
 	public abstract Set<ID> exists(final Collection<ID> ids);
 
-	@Override
+	@Override @Transactional(readOnly=true)
 	public final boolean existsAll(final Collection<ID> ids) {
 		return count(ids) == ids.size();
 	}
 
-	@Override
+	@Override @Transactional(readOnly=true)
 	public final boolean existsAny(final Collection<ID> ids) {
 		return count(ids) >= 1;
 	}
 
-	@Override
+	@Override @Transactional(readOnly=true)
 	public abstract List<T> findAll(Collection<ID> ids, @Nullable Sort sort);
 	
-	@Override
+	@Override @Transactional(readOnly=true)
 	public final List<T> findAll(Collection<ID> ids) {
 		return findAll(ids, null);
 	}
 	
-	@Override @Nullable
+	@Override @Nullable @Transactional(readOnly=true)
 	public final <S extends T> S findOne(@Nullable ID id) {
 		if (id == null) {
 			return null;
@@ -162,33 +164,34 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 		}
 	}
 
-	@Override
+	@Override @Transactional(readOnly=true)
 	public final long count(Collection<ID> ids) {
 		return exists(ids).size();
 	}
 	
-	@Override
+	@Override @Transactional
 	public final boolean delete(ID id) {
 		return deleteIds(ImmutableList.of(id)) > 0;
 	}
 
-	@Override
+	@Override @Transactional
 	public final boolean delete(T entity) {
 		return delete(getId(entity));
 	}
 
-	@Override
+	@Override @Transactional
 	public final long delete(Collection<? extends T> entities) {
 		final Collection<ID> ids = Collections2.transform(entities, new IdFunction());
 		return deleteIds(ids);
 	}
 	
-	@Override
+	@Override @Transactional
 	public abstract long deleteIds(Collection<ID> ids);
 	
+	@Transactional(readOnly=true)
 	public abstract Page<ID> findAllIds(Pageable pageable);
 	
-	@Override
+	@Override @Transactional(readOnly=true)
 	public abstract Page<T> findAll(Pageable pageable);
 	
 	/**
@@ -197,7 +200,7 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 	 * @return
 	 * @deprecated Use {@link #findAll(Pageable)} instead.
 	 */
-	@Override @Deprecated
+	@Override @Deprecated @Transactional(readOnly=true)
 	public final List<T> findAll(Sort sort) {
 		return findAll(new PageRequest(0, DEFAULT_PAGE_SIZE, sort)).getContent();
 	}
@@ -207,7 +210,7 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 	 * @see org.soluvas.data.repository.CrudRepository#findAll()
 	 * @deprecated Use {@link #findAll(Pageable)} instead.
 	 */
-	@Override @Deprecated
+	@Override @Deprecated @Transactional(readOnly=true)
 	public final List<T> findAll() {
 		return findAll(new PageRequest(0, DEFAULT_PAGE_SIZE)).getContent();
 	}

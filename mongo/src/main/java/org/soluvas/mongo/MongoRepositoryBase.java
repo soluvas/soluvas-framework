@@ -106,6 +106,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	protected final Class<? extends T> implClass;
 	protected long currentSchemaVersion;
 	protected final String mongoUri;
+	protected boolean migrationEnabled = true;
 
 	/**
 	 * @param intfClass
@@ -115,13 +116,15 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * @param indexedFields
 	 */
 	public MongoRepositoryBase(Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
-			String mongoUri, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields) {
+			String mongoUri, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields,
+			boolean migrationEnabled) {
 		super();
 		this.entityClass = intfClass;
 		this.implClass = implClass;
 		this.currentSchemaVersion = currentSchemaVersion;
 		this.mongoUri = mongoUri;
 		this.collName = collName;
+		this.migrationEnabled = migrationEnabled;
 		// WARNING: mongoUri may contain password!
 		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
 		this.log = LoggerFactory.getLogger(getClass().getName() + "/" + realMongoUri.getDatabase() + "/" + collName + "/" + currentSchemaVersion);
@@ -150,7 +153,12 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 					realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(),
 					collName);
 		}
-		beforeEnsureIndexes();
+		if (migrationEnabled) {
+			log.info("Migrating collection {}...", collName);
+			beforeEnsureIndexes();
+		} else {
+			log.info("Migration disabled for collection {}", collName);
+		}
 		final List<String> ensuredIndexes = new ArrayList<>();
 		if (uniqueFields != null) {
 			ensuredIndexes.addAll( MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {})) );
@@ -189,6 +197,10 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		for (String field : indexedFields) {
 			coll.ensureIndex(new BasicDBObject(field, 1));
 		}
+	}
+	
+	public boolean isMigrationEnabled() {
+		return migrationEnabled;
 	}
 	
 	/**
