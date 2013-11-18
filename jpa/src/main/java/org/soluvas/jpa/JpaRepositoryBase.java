@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.annotation.Nullable;
@@ -11,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -130,11 +132,11 @@ public abstract class JpaRepositoryBase<T, E extends Enum<E>> extends StatusAwar
 		}
 		final long totalRowCount = em.createQuery(countCq).getSingleResult();
 		
-		final CriteriaQuery<T> cq = cb.createQuery(entityClass);
-		final Root<T> root = cq.from(entityClass);
 		
 		// SELECT * FROM entityClass WHERE ... ORDER BY ... LIMIT x, y
 		// FROM
+		final CriteriaQuery<T> cq = cb.createQuery(entityClass);
+		final Root<T> root = cq.from(entityClass);
 		cq.select(root);
 		// WHERE
 		if (expectedStatuses != null) {
@@ -163,7 +165,13 @@ public abstract class JpaRepositoryBase<T, E extends Enum<E>> extends StatusAwar
 
 	@Override @Transactional(readOnly=true)
 	public long count() {
-		throw new UnsupportedOperationException();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+		final CriteriaQuery<Long> countCq = cb.createQuery(Long.class);
+		final Root<T> countRoot = countCq.from(entityClass);
+		countCq.select(cb.count(countRoot));
+		final Long totalRowCount = em.createQuery(countCq).getSingleResult();
+		log.debug("Count All without filter any thing got {} record(s)", totalRowCount);
+		return totalRowCount;
 	}
 
 	@Override @Transactional(readOnly=true)
@@ -213,6 +221,17 @@ public abstract class JpaRepositoryBase<T, E extends Enum<E>> extends StatusAwar
 
 	@Override @Transactional
 	public <S extends T> Collection<S> modify(Map<String, S> entities) {
+		log.debug("Modifying {} {} entities", entities.size(), entityClass.getSimpleName());
+		FluentIterable.from(entities.entrySet()).transform(new Function<Entry<String, S>, S>() {
+			@Override
+			public S apply(Entry<String,S> input) {
+				final CriteriaBuilder cb = em.getCriteriaBuilder();
+				final CriteriaQuery<T> updateCq = cb.createQuery(entityClass);
+//				updateCq.
+				return null;
+			};
+		}).toList();
+		
 		throw new UnsupportedOperationException();
 	}
 
@@ -223,12 +242,38 @@ public abstract class JpaRepositoryBase<T, E extends Enum<E>> extends StatusAwar
 
 	@Override @Transactional(readOnly=true)
 	public List<T> findAll(Collection<String> ids, Sort sort) {
-		throw new UnsupportedOperationException();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+		final CriteriaQuery<T> cq = cb.createQuery(entityClass);
+		final Root<T> root = cq.from(entityClass);
+		cq.select(root).where(root.get("id").in(ids));
+		final List<javax.persistence.criteria.Order> jpaOrders = FluentIterable
+				.from(Optional.<Iterable<Sort.Order>>fromNullable(sort).or(ImmutableList.<Sort.Order>of()))
+				.transform(new Function<Order, javax.persistence.criteria.Order>() {
+			@Override
+			@Nullable
+			public javax.persistence.criteria.Order apply(@Nullable Order input) {
+				return input.getDirection() == Direction.ASC ? cb.asc(root.get(input.getProperty())) : cb.desc(root.get(input.getProperty()));
+			}
+		}).toList();
+		cq.orderBy(jpaOrders);
+		
+		final TypedQuery<T> typedQuery = em.createQuery(cq);
+		final List<T> entities = typedQuery.getResultList();
+			
+		log.debug("findAll by ID(s) {} got {} entities",
+				ids, entities.size());
+		return entities;
 	}
 
 	@Override @Transactional
 	public long deleteIds(Collection<String> ids) {
-		throw new UnsupportedOperationException();
+		log.debug("Deleting {} by IDs {}", entityClass.getSimpleName(), ids);
+		final Query query = em.createQuery("DELETE FROM " + entityClass.getSimpleName() + " e "
+				+ "WHERE e.id IN :ids");
+		query.setParameter("ids", ids);
+		final int deletedEntities = query.executeUpdate();
+		log.debug("{} has/have been deleted", deletedEntities);
+		return deletedEntities;
 	}
 
 	@Override
