@@ -17,7 +17,7 @@
 			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.data</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>

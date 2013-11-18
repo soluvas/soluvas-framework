@@ -12,7 +12,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -46,6 +45,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 
 /**
+ * http://en.wikibooks.org/wiki/Java_Persistence/Criteria
+ * 
  * {@link PagingAndSortingRepository} implemented using JPA, supporting 
  * Spring's @{@link Transactional} transaction management.
  * <p>Recommended deployment stack is: Hibernate 4.2 + Spring 3.2 + PostgreSQL 9.1. 
@@ -219,20 +220,19 @@ public abstract class JpaRepositoryBase<T, E extends Enum<E>> extends StatusAwar
 		return addeds;
 	}
 
+	@SuppressWarnings("null")
 	@Override @Transactional
 	public <S extends T> Collection<S> modify(Map<String, S> entities) {
 		log.debug("Modifying {} {} entities", entities.size(), entityClass.getSimpleName());
-		FluentIterable.from(entities.entrySet()).transform(new Function<Entry<String, S>, S>() {
+		final List<S> mergedEntities = FluentIterable.from(entities.entrySet()).transform(new Function<Entry<String, S>, S>() {
 			@Override
 			public S apply(Entry<String,S> input) {
-				final CriteriaBuilder cb = em.getCriteriaBuilder();
-				final CriteriaQuery<T> updateCq = cb.createQuery(entityClass);
-//				updateCq.
-				return null;
+				final S mergedEntity = em.merge(input.getValue());
+				return mergedEntity;
 			};
 		}).toList();
-		
-		throw new UnsupportedOperationException();
+		log.debug("{} entities have been modified", mergedEntities.size());
+		return mergedEntities;
 	}
 
 	@Override @Transactional(readOnly=true)
@@ -267,13 +267,16 @@ public abstract class JpaRepositoryBase<T, E extends Enum<E>> extends StatusAwar
 
 	@Override @Transactional
 	public long deleteIds(Collection<String> ids) {
-		log.debug("Deleting {} by IDs {}", entityClass.getSimpleName(), ids);
-		final Query query = em.createQuery("DELETE FROM " + entityClass.getSimpleName() + " e "
-				+ "WHERE e.id IN :ids");
-		query.setParameter("ids", ids);
-		final int deletedEntities = query.executeUpdate();
-		log.debug("{} has/have been deleted", deletedEntities);
-		return deletedEntities;
+		final List<T> entities = findAll(ids);
+		log.warn("{} entities will be removed..", entities.size());
+		if (entities.isEmpty()) {
+			return 0;
+		}
+		for (final T t : entities) {
+			em.remove(t);
+		}
+		log.debug("{} has/have been deleted", entities.size());
+		return entities.size();
 	}
 
 	@Override
