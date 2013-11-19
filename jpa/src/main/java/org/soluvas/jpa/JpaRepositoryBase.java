@@ -45,8 +45,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 
 /**
- * http://en.wikibooks.org/wiki/Java_Persistence/Criteria
- * 
  * {@link PagingAndSortingRepository} implemented using JPA, supporting 
  * Spring's @{@link Transactional} transaction management.
  * <p>Recommended deployment stack is: Hibernate 4.2 + Spring 3.2 + PostgreSQL 9.1. 
@@ -55,8 +53,9 @@ import com.google.common.collect.Sets;
  * @todo {@link SchemaVersionable} support, but how???
  * @author ceefour
  */
-public abstract class JpaRepositoryBase<T, E extends Enum<E>> extends StatusAwareRepositoryBase<T, String>
-	implements JpaRepository<T>, GenericLookup<T> {
+public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Serializable, E extends Enum<E>> 
+	extends StatusAwareRepositoryBase<T, ID>
+	implements JpaRepository<T, ID>, GenericLookup<T> {
 
 	protected final Logger log;
 	
@@ -202,8 +201,8 @@ public abstract class JpaRepositoryBase<T, E extends Enum<E>> extends StatusAwar
 
 	@Override
 	@Nullable @Transactional(readOnly=true)
-	protected String getId(T entity) {
-		throw new UnsupportedOperationException();
+	protected final ID getId(T entity) {
+		return entity.getId();
 	}
 
 	@Override @Transactional
@@ -222,11 +221,11 @@ public abstract class JpaRepositoryBase<T, E extends Enum<E>> extends StatusAwar
 
 	@SuppressWarnings("null")
 	@Override @Transactional
-	public <S extends T> Collection<S> modify(Map<String, S> entities) {
+	public <S extends T> Collection<S> modify(Map<ID, S> entities) {
 		log.debug("Modifying {} {} entities", entities.size(), entityClass.getSimpleName());
-		final List<S> mergedEntities = FluentIterable.from(entities.entrySet()).transform(new Function<Entry<String, S>, S>() {
+		final List<S> mergedEntities = FluentIterable.from(entities.entrySet()).transform(new Function<Entry<ID, S>, S>() {
 			@Override
-			public S apply(Entry<String,S> input) {
+			public S apply(Entry<ID, S> input) {
 				final S mergedEntity = em.merge(input.getValue());
 				return mergedEntity;
 			};
@@ -236,12 +235,12 @@ public abstract class JpaRepositoryBase<T, E extends Enum<E>> extends StatusAwar
 	}
 
 	@Override @Transactional(readOnly=true)
-	public Set<String> exists(Collection<String> ids) {
+	public Set<ID> exists(Collection<ID> ids) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override @Transactional(readOnly=true)
-	public List<T> findAll(Collection<String> ids, Sort sort) {
+	public List<T> findAll(Collection<ID> ids, Sort sort) {
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
 		final CriteriaQuery<T> cq = cb.createQuery(entityClass);
 		final Root<T> root = cq.from(entityClass);
@@ -266,7 +265,7 @@ public abstract class JpaRepositoryBase<T, E extends Enum<E>> extends StatusAwar
 	}
 
 	@Override @Transactional
-	public long deleteIds(Collection<String> ids) {
+	public long deleteIds(Collection<ID> ids) {
 		final List<T> entities = findAll(ids);
 		log.warn("{} entities will be removed..", entities.size());
 		if (entities.isEmpty()) {
@@ -280,7 +279,7 @@ public abstract class JpaRepositoryBase<T, E extends Enum<E>> extends StatusAwar
 	}
 
 	@Override
-	public Page<String> findAllIds(Pageable pageable) {
+	public Page<ID> findAllIds(Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
 	
