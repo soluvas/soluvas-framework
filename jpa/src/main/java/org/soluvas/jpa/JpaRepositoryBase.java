@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -34,7 +35,11 @@ import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.domain.Sort.Order;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.StatusAwareRepositoryBase;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import scala.util.Try;
 
@@ -61,6 +66,8 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	
 	@PersistenceContext
 	protected EntityManager em;
+	@Inject
+	protected PlatformTransactionManager txManager;
 	
 	protected Class<T> entityClass;
 
@@ -70,6 +77,15 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	protected Set<E> draftStatuses;
 	protected Set<E> voidStatuses;
 	
+	/**
+	 * At this point, {@link EntityManager} is not yet ready, so use {@link #onAfterInit(TransactionStatus)} for that.
+	 * @param entityClass
+	 * @param statusProperty
+	 * @param activeStatuses
+	 * @param inactiveStatuses
+	 * @param draftStatuses
+	 * @param voidStatuses
+	 */
 	protected JpaRepositoryBase(Class<T> entityClass,
 			@Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
 		super();
@@ -86,8 +102,23 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	}
 	
 	@PostConstruct
-	public void init() {
-		
+	public final void init() {
+		TransactionTemplate txTemplate = new TransactionTemplate(txManager);
+		txTemplate.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus status) {
+				onAfterInit(status);
+			}
+		});
+	}
+	
+	/**
+	 * This is @{@link Transactional} (by using {@link PlatformTransactionManager} and {@link TransactionTemplate})
+	 * because you may want to use {@link EntityManager#createNativeQuery(String)}
+	 * to e.g. create a sequence.
+	 * @see http://stackoverflow.com/a/18790494/1343587 
+	 */
+	protected void onAfterInit(TransactionStatus txStatus) {
 	}
 	
 	@PreDestroy
@@ -211,7 +242,8 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		final List<S> addeds = FluentIterable.from(entities).transform(new Function<S, S>() {
 			@Override @Nullable
 			public S apply(@Nullable S input) {
-				em.persist(input);
+//				em.persist(input);
+				em.merge(input);
 				return input;
 			}
 		}).toList();
