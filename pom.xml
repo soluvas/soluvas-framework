@@ -17,6 +17,7 @@
 		<module>jaxrs</module>
 		<module>ldap</module>
 		<module>security</module>
+		<module>schedule</module>
 		<module>jpa</module>
 		<module>mongo</module>
 		<module>couchdb</module>
@@ -113,6 +114,11 @@
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>org.soluvas.data</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.soluvas</groupId>
+				<artifactId>org.soluvas.schedule</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

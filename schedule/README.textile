@@ -1,0 +1,48 @@
+h1. Soluvas Schedule
+
+h2. Quartz SQL Tables
+
+SQL tables must be created manually (e.g. @quartz-2.2.1/docs/dbTables/tables_postgres.sql@) before usage (TODO: make this semi-automatic).
+
+"To use JDBCJobStore, you must first create a set of database tables for Quartz to use. You can find table-creation SQL scripts in the "docs/dbTables" directory of the Quartz distribution. If there is not already a script for your database type, just look at one of the existing ones, and modify it in any way necessary for your DB. One thing to note is that in these scripts, all the the tables start with the prefix "QRTZ_" (such as the tables "QRTZ_TRIGGERS", and "QRTZ_JOB_DETAIL"). This prefix can actually be anything you'd like, as long as you inform JDBCJobStore what the prefix is (in your Quartz properties). Using different prefixes may be useful for creating multiple sets of tables, for multiple scheduler instances, within the same database."
+
+Note you will want to tweak the drop table statements:
+
+bc. drop table qrtz_fired_triggers;
+DROP TABLE QRTZ_PAUSED_TRIGGER_GRPS;
+DROP TABLE QRTZ_SCHEDULER_STATE;
+DROP TABLE QRTZ_LOCKS;
+drop table qrtz_simple_triggers;
+drop table qrtz_cron_triggers;
+drop table qrtz_simprop_triggers;
+DROP TABLE QRTZ_BLOB_TRIGGERS;
+drop table qrtz_triggers;
+drop table qrtz_job_details;
+drop table qrtz_calendars;
+
+into (which is supported since 8.2):
+
+bc. DROP TABLE IF EXISTS qrtz_fired_triggers;
+DROP TABLE IF EXISTS qrtz_paused_trigger_grps;
+DROP TABLE IF EXISTS qrtz_scheduler_state;
+DROP TABLE IF EXISTS qrtz_locks;
+DROP TABLE IF EXISTS qrtz_simple_triggers;
+DROP TABLE IF EXISTS qrtz_cron_triggers;
+DROP TABLE IF EXISTS qrtz_simprop_triggers;
+DROP TABLE IF EXISTS qrtz_blob_triggers;
+DROP TABLE IF EXISTS qrtz_triggers;
+DROP TABLE IF EXISTS qrtz_job_details;
+DROP TABLE IF EXISTS qrtz_calendars;
+
+
+e.g.
+
+1. Create PostgreSQL schema for the tenant:
+
+bc. CREATE SCHEMA acme;
+
+2. Setup Quartz Scheduler tables in the tenant-specific schema (i.e. 'acme', 'oscorp'), the SQL script is in @~/git/soluvas-framework/schedule/src/main/resources/org/soluvas/schedule/tables_postgres.sql@
+
+Run the following command in Linux shell: (change 'acme' below to setup another tenant)
+
+bc. (echo "set schema 'acme';"; cat ~/git/soluvas-framework/schedule/src/main/resources/org/soluvas/schedule/tables_postgres.sql) | psql -Upostgres -hlocalhost quikdo_app_dev 
