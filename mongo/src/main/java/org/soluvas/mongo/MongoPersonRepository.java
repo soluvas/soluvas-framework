@@ -208,11 +208,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		case RAW:
 			break;
 		case ACTIVE_ONLY:
-			query.put("accountStatus", AccountStatus.ACTIVE.name());
+			query.put("accountStatus", new BasicDBObject("$in", 
+					ImmutableSet.of(AccountStatus.ACTIVE.name(), AccountStatus.VALIDATED.name())));
 			break;
 		case INCLUDE_INACTIVE:
 			query.put("accountStatus", new BasicDBObject("$in", 
-					ImmutableSet.of(AccountStatus.ACTIVE.name(), AccountStatus.INACTIVE.name())));
+					ImmutableSet.of(AccountStatus.ACTIVE.name(), AccountStatus.VALIDATED.name(),
+							AccountStatus.INACTIVE.name())));
 			break;
 		case VOID_ONLY:
 			query.put("accountStatus", AccountStatus.VOID.name());
