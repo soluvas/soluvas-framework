@@ -142,9 +142,14 @@ public class RoleImpl extends EObjectImpl implements Role {
 	protected static final String ID_EDEFAULT = null;
 
 	/**
-	 * Never used. Use {@link #name} instead.
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
 	 */
-	private final String id = null;
+	protected String id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getCreationTime() <em>Creation Time</em>}' attribute.
@@ -387,19 +392,10 @@ public class RoleImpl extends EObjectImpl implements Role {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	@Override
 	public String getId() {
-		return getName();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	@Override
-	public void setId(String newId) {
-		setName(newId);
+		return id;
 	}
 
 	/**
@@ -407,6 +403,20 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.ROLE__ID, oldId, id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public DateTime getCreationTime() {
 		return creationTime;
 	}
@@ -416,6 +426,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCreationTime(DateTime newCreationTime) {
 		DateTime oldCreationTime = creationTime;
 		creationTime = newCreationTime;
@@ -428,6 +439,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getModificationTime() {
 		return modificationTime;
 	}
@@ -437,6 +449,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setModificationTime(DateTime newModificationTime) {
 		DateTime oldModificationTime = modificationTime;
 		modificationTime = newModificationTime;

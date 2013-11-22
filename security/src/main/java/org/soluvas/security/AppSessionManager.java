@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.subject.Subject;
 import org.eclipse.emf.ecore.EObject;
+import org.soluvas.commons.Person;
 import org.soluvas.data.EntityLookup;
 
 /**
@@ -59,7 +60,7 @@ public interface AppSessionManager extends EObject {
 	 * @model dataType="org.soluvas.security.EntityLookup<? extends org.soluvas.commons.Person, org.eclipse.emf.ecore.EString>" transient="true" changeable="false"
 	 * @generated
 	 */
-	EntityLookup<? extends org.soluvas.commons.Person, String> getPersonLookup();
+	EntityLookup<? extends Person, String> getPersonLookup();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -72,7 +73,7 @@ public interface AppSessionManager extends EObject {
 	 * @model httpRequestDataType="org.soluvas.security.HttpServletRequest" httpResponseDataType="org.soluvas.security.HttpServletResponse"
 	 * @generated
 	 */
-	<T extends org.soluvas.commons.Person> T requirePerson(HttpServletRequest httpRequest, HttpServletResponse httpResponse);
+	<T extends Person> T requirePerson(HttpServletRequest httpRequest, HttpServletResponse httpResponse);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -80,6 +81,6 @@ public interface AppSessionManager extends EObject {
 	 * @model subjectDataType="org.soluvas.security.Subject"
 	 * @generated
 	 */
-	<T extends org.soluvas.commons.Person> T requirePerson(Subject subject);
+	<T extends Person> T requirePerson(Subject subject);
 
 } // AppSessionManager

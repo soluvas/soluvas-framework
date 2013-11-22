@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.IdPredicate;
-import org.soluvas.commons.QNameFunction;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
@@ -133,8 +132,8 @@ public class CatalogRoleRepository extends PagingAndSortingRepositoryBase<Role, 
 	@Override
 	public Page<String> findAllIds(Pageable pageable) {
 		final Iterable<Role> limited = doFindAll(null, pageable);
-		final Iterable<String> limitedUNames = Iterables.transform(limited, new QNameFunction());
-		return new PageImpl<>(ImmutableList.copyOf(limitedUNames),
+		final Iterable<String> limitedIds = Iterables.transform(limited, new IdFunction());
+		return new PageImpl<>(ImmutableList.copyOf(limitedIds),
 				pageable, count());
 	}
 
