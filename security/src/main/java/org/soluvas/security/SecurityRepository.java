@@ -14,8 +14,10 @@ import org.soluvas.data.repository.CrudRepository;
  * Role definition modifications in the dictionary are not automatically applied to the repository.
  * Repository is the database, dictionary defines what should/shouldn't exist based on the active bundles.
  * 
- *  The Roles are defined on {@link Person}'s attributes (SecurityRoleIds)
+ * The Roles are defined on {@link Person}'s attributes (SecurityRoleIds)
  * @author ceefour
+ * @deprecated This should be more like {@code SecurityManager}-ish. While the "repository" should be
+ * 		provided by individual repositories, e.g. {@link RoleRepository}, etc.
  */
 @Deprecated
 public interface SecurityRepository {
