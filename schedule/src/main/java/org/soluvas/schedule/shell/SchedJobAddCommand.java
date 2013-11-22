@@ -2,6 +2,7 @@ package org.soluvas.schedule.shell;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Argument;
@@ -35,9 +36,11 @@ public class SchedJobAddCommand extends ExtCommandSupport {
 	
 	@Argument(index=0, name="jobClass", required=true, description="Job Class name.")
 	private Class<? extends Job> jobClass;
+	@Nullable
 	@Argument(index=1, name="jobData ...", required=false, multiValued=true, description="Job Data (key=value).")
 	private String[] jobDatas;
 	
+	@Nullable
 	@Option(name="-n", description="Job name. If not filled will use jobClass's simple name (lower camel).")
 	private String name;
 	@Option(name="-g", description="Job group.")
@@ -54,12 +57,14 @@ public class SchedJobAddCommand extends ExtCommandSupport {
 		jobDetailFactory.setJobClass(jobClass);
 		jobDetailFactory.setName(Optional.fromNullable(name).or(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, jobClass.getSimpleName())));
 		jobDetailFactory.setGroup(group);
-		final JobDataMap jobDataMap = new JobDataMap();
-		for (final String jobData : jobDatas) {
-			final List<String> keyValue = Splitter.on('=').splitToList(jobData);
-			jobDataMap.put(keyValue.get(0), keyValue.get(1));
+		if (jobDatas != null) {
+			final JobDataMap jobDataMap = new JobDataMap();
+			for (final String jobData : jobDatas) {
+				final List<String> keyValue = Splitter.on('=').splitToList(jobData);
+				jobDataMap.put(keyValue.get(0), keyValue.get(1));
+			}
+			jobDetailFactory.setJobDataMap(jobDataMap);
 		}
-		jobDetailFactory.setJobDataMap(jobDataMap);
 		jobDetailFactory.setDurability(durability);
 		jobDetailFactory.setRequestsRecovery(requestsRecovery);
 		jobDetailFactory.setApplicationContext(appCtx);
