@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="ASCII"?>
-<security:SecurityCatalog xmi:version="2.0"
-	xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:security="http://www.soluvas.org/schema/security/1.0"
-	xsi:schemaLocation="http://www.soluvas.org/schema/security/1.0 ../../../../../../../org.soluvas.security/src/main/resources/org/soluvas/security/security.ecore">
-	<roles name="story_admin" description="Story administrator" />
-	<domains name="story" description="Story" />
-	<permissions>
-		<roles>story_admin</roles>
-		<domainPermission>story</domainPermission>
-		<actionPermission>*</actionPermission>
-		<instancePermission>*</instancePermission>
-	</permissions>
+<security:SecurityCatalog
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:security="http://www.soluvas.org/schema/security/1.0"
+    xsi:schemaLocation="http://www.soluvas.org/schema/security/1.0 ../../../../../../../org.soluvas.security/src/main/resources/org/soluvas/security/security.ecore">
+  <roles description="Story administrator"
+      id="story_admin"
+      name="Story Administrator"/>
+  <domains description="Story"
+      name="story"/>
+  <permissions>
+    <roles>story_admin</roles>
+    <domainPermission>story</domainPermission>
+    <actionPermission>*</actionPermission>
+    <instancePermission>*</instancePermission>
+  </permissions>
 </security:SecurityCatalog>
