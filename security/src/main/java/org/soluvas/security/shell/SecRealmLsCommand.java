@@ -27,7 +27,7 @@ public class SecRealmLsCommand extends ExtCommandSupport {
 
 	@Override
 	protected Object doExecute() throws Exception {
-		final Map<String, Realm> realmMap = beanFactory.getBean("realmMap", Map.class);
+		final Map<String, Realm> realmMap = appCtx.getBean("realmMap", Map.class);
 		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-25s|%-15s|@",
 				"№", "Tenant ID", "Class", "Name"));
 		int i = 0;

@@ -37,7 +37,7 @@ public class SecLoginCommand extends ExtCommandSupport {
 
 	@Override
 	protected Object doExecute() throws Exception {
-		final Map<String, Realm> realmMap = beanFactory.getBean("realmMap", Map.class);
+		final Map<String, Realm> realmMap = appCtx.getBean("realmMap", Map.class);
 		final DefaultSecurityManager securityMgr = new DefaultSecurityManager(realmMap.values());
 		final Subject subject = securityMgr.createSubject(new DefaultSubjectContext());
 		subject.login(new UsernamePasswordToken(username, password, host));

@@ -21,7 +21,7 @@ public class TenantLsCommand extends ExtCommandSupport {
 	
 	@Override
 	protected Object doExecute() throws Exception {
-		final Map<String, AppManifest> tenantMap = beanFactory.getBean("tenantMap", Map.class);
+		final Map<String, AppManifest> tenantMap = appCtx.getBean("tenantMap", Map.class);
 		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-20s|%-20s|%-25s|%-20s|%-3s|@",
 				"№", "ID", "Title", "Domain", "Email", "Time Zone", "$"));
 		int i = 0;

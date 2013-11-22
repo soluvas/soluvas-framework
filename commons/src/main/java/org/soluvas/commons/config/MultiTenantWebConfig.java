@@ -64,7 +64,7 @@ public class MultiTenantWebConfig {
 	private Map<String, AppManifest> tenantMap;
 	
 //	@Inject
-//	private BeanFactory beanFactory;
+//	private BeanFactory appCtx;
 	
 	/**
 	 * @todo Replace with annotation https://jira.springsource.org/browse/SPR-5192 when it's supported.
@@ -72,7 +72,7 @@ public class MultiTenantWebConfig {
 	 */
 	protected HttpServletRequest getRequest() {
 		return ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-//		return beanFactory.getBean(HttpServletRequest.class); // doesn't work
+//		return appCtx.getBean(HttpServletRequest.class); // doesn't work
 	}
 	
 	/**

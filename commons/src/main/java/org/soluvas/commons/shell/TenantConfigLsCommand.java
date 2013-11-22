@@ -24,7 +24,7 @@ public class TenantConfigLsCommand extends ExtCommandSupport {
 	
 	@Override
 	protected Object doExecute() throws Exception {
-		final Map<String, SysConfig> sysConfigMap = beanFactory.getBean("sysConfigMap", Map.class);
+		final Map<String, SysConfig> sysConfigMap = appCtx.getBean("sysConfigMap", Map.class);
 		if (sysConfigMap.isEmpty()) {
 			System.err.println("No tenant SysConfigs found");
 			return null;

@@ -23,7 +23,7 @@ public class TenantConfigCommand extends ExtCommandSupport {
 	private String tenantId;
 	@Override
 	protected Object doExecute() throws Exception {
-		final Map<String, SysConfig> sysConfigMap = beanFactory.getBean("sysConfigMap", Map.class);
+		final Map<String, SysConfig> sysConfigMap = appCtx.getBean("sysConfigMap", Map.class);
 		final SysConfig sysConfig = Preconditions.checkNotNull(sysConfigMap.get(tenantId),
 				"Cannot lookup SysConfig for tenant '%s', %s available SysConfigs are: %s",
 				tenantId, sysConfigMap.size(), sysConfigMap.keySet());

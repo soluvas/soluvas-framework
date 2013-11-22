@@ -24,6 +24,7 @@ import org.soluvas.commons.util.ThreadLocalProgress;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.core.env.Environment;
 
@@ -48,7 +49,7 @@ public abstract class ExtCommandSupport extends AbstractAction {
 	protected static final LocaleContext localeContext = new LocaleContext();
 	protected final ShellProgressMonitor monitor = new ShellProgressMonitorImpl();
 	@Inject
-	protected ListableBeanFactory beanFactory;
+	protected ApplicationContext appCtx;
 	@Inject
 	private Environment env;
 	@Resource(name="tenantMap")
@@ -143,7 +144,7 @@ public abstract class ExtCommandSupport extends AbstractAction {
 	 * @return
 	 */
 	protected <T> T getBean(Class<T> requiredType) {
-		return beanFactory.getBean(requiredType);
+		return appCtx.getBean(requiredType);
 	}
 
 	/**
@@ -170,7 +171,7 @@ public abstract class ExtCommandSupport extends AbstractAction {
 		Map<String, T> mapBean = null;
 		for (final String wantedName : mapBeanNames) {
 			try {
-				mapBean = beanFactory.getBean(wantedName, Map.class);
+				mapBean = appCtx.getBean(wantedName, Map.class);
 				break;
 			} catch (NoSuchBeanDefinitionException e) {
 				// bean not found, try next
@@ -193,7 +194,7 @@ public abstract class ExtCommandSupport extends AbstractAction {
 	 * @return
 	 */
 	protected <T> Map<String, T> getBeans(Class<T> requiredType) {
-		return beanFactory.getBeansOfType(requiredType);
+		return appCtx.getBeansOfType(requiredType);
 	}
 
 	/**
@@ -205,7 +206,7 @@ public abstract class ExtCommandSupport extends AbstractAction {
 	 */
 	protected <T> T getBean(Class<T> requiredType, Class<? extends Annotation> qualifier) {
 		// TODO: implement as the Javadoc says
-		final Map<String, Object> beans = beanFactory.getBeansWithAnnotation(qualifier);
+		final Map<String, Object> beans = appCtx.getBeansWithAnnotation(qualifier);
 		if (beans.isEmpty()) throw new NoSuchBeanDefinitionException(requiredType, "With qualifier " + qualifier.getName(), "Cannot find bean");
 		if (beans.size() > 1) throw new NoUniqueBeanDefinitionException(requiredType, beans.keySet());
 		return (T) beans.values().iterator().next();
