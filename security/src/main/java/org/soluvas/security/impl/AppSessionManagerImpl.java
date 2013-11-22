@@ -73,7 +73,7 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 * @generated
 	 * @ordered
 	 */
-	protected EntityLookup<? extends org.soluvas.commons.Person, String> personLookup;
+	protected EntityLookup<? extends Person, String> personLookup;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,7 +121,7 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 * @generated
 	 */
 	@Override
-	public EntityLookup<? extends org.soluvas.commons.Person, String> getPersonLookup() {
+	public EntityLookup<? extends Person, String> getPersonLookup() {
 		return personLookup;
 	}
 

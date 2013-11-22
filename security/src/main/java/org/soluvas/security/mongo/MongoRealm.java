@@ -52,7 +52,6 @@ public class MongoRealm extends AuthorizingRealm {
 			final String mongoUri) {
 		super();
 		this.securityCatalog = securityCatalog;
-		this.securityRepo = new MongoSecurityRepository();
 		// WARNING: mongoUri may contain password!
 		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
 		log.info("Connecting to MongoDB realm database {}/{} as {}, person collection={}",
@@ -69,6 +68,7 @@ public class MongoRealm extends AuthorizingRealm {
 					realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(),
 					personCollName);
 		}
+		this.securityRepo = new MongoSecurityRepository(personColl);
 		setName("soluvas");
 		setCredentialsMatcher(new Rfc2307CredentialsMatcher());
 		setAuthenticationTokenClass(AuthenticationToken.class);
