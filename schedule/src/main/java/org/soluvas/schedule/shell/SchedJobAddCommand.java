@@ -1,5 +1,7 @@
 package org.soluvas.schedule.shell;
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -35,7 +37,7 @@ public class SchedJobAddCommand extends ExtCommandSupport {
 	private ApplicationContext appCtx;
 	
 	@Argument(index=0, name="jobClass", required=true, description="Job Class name.")
-	private Class<? extends Job> jobClass;
+	private String jobClassName;
 	@Nullable
 	@Argument(index=1, name="jobData ...", required=false, multiValued=true, description="Job Data (key=value).")
 	private String[] jobDatas;
@@ -53,7 +55,9 @@ public class SchedJobAddCommand extends ExtCommandSupport {
 	@Override
 	protected JobDetail doExecute() throws Exception {
 		final Scheduler scheduler = getBean(Scheduler.class);
+		System.err.println(ansi().render("Using scheduler @|bold %s|@", scheduler.getSchedulerName()));
 		final JobDetailFactoryBean jobDetailFactory = new JobDetailFactoryBean();
+		final Class<? extends Job> jobClass = (Class<? extends Job>) Class.forName(jobClassName, true, SchedJobAddCommand.class.getClassLoader());
 		jobDetailFactory.setJobClass(jobClass);
 		jobDetailFactory.setName(Optional.fromNullable(name).or(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, jobClass.getSimpleName())));
 		jobDetailFactory.setGroup(group);

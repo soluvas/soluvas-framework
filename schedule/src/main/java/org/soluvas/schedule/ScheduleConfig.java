@@ -1,8 +1,8 @@
 package org.soluvas.schedule;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -55,13 +55,8 @@ public class ScheduleConfig {
 	@Inject
 	private PlatformTransactionManager txMgr;
 
-	private final Map<String, SchedulerFactoryBean> schedulerFactoryBeanMap = new HashMap<>();
+	private final Map<String, SchedulerFactoryBean> schedulerFactoryBeanMap = new LinkedHashMap<>();
 //	private final Map<String, Scheduler> schedulerMap = new HashMap<>();
-	
-	@Bean
-	public SpringBeanJobFactory jobFactory() {
-		return new SpringBeanJobFactory();
-	}
 	
 	@PostConstruct
 	public void init() throws Exception {
@@ -81,7 +76,8 @@ public class ScheduleConfig {
 //					.build();
 			
 			final SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
-			schedulerFactoryBean.setJobFactory(jobFactory());
+			// do NOT share a JobFactory object among Scheduler instances!
+			schedulerFactoryBean.setJobFactory(new SpringBeanJobFactory());
 			schedulerFactoryBean.setSchedulerName(tenantId);
 			schedulerFactoryBean.setSchedulerContextAsMap(ImmutableMap.of(
 					"tenantId", tenantId,
@@ -114,7 +110,7 @@ public class ScheduleConfig {
 			schedulerFactoryBean.setApplicationContext(appCtx);
 			schedulerFactoryBean.setApplicationContextSchedulerContextKey("applicationContext");
 			schedulerFactoryBean.afterPropertiesSet();
-			final Scheduler scheduler = schedulerFactoryBean.getObject();
+//			final Scheduler scheduler = schedulerFactoryBean.getObject();
 			schedulerFactoryBeanMap.put(tenantId, schedulerFactoryBean);
 //			schedulerMap.put(tenantId, scheduler);
 		}
