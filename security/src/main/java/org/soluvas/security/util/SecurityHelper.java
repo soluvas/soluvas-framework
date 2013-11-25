@@ -6,7 +6,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.NameFunction;
+import org.soluvas.commons.IdFunction;
 import org.soluvas.security.SecurityCatalog;
 
 import com.google.common.collect.ImmutableList;
@@ -30,9 +30,12 @@ public class SecurityHelper {
 	 * @return
 	 */
 	public static boolean hasAnyRealRole(SecurityCatalog securityCatalog, Subject subject) {
-		final ImmutableSet<String> allRoleNames = ImmutableSet.copyOf(Lists.transform(securityCatalog.getRoles(), new NameFunction()));
+//		final ImmutableSet<String> allRoleNames = ImmutableSet.copyOf(Lists.transform(securityCatalog.getRoles(), new NameFunction()));
+//		log.debug("all role names: {}", allRoleNames);
+		final ImmutableSet<String> allRoleOIds = ImmutableSet.copyOf(Lists.transform(securityCatalog.getRoles(), new IdFunction()));
+		log.debug("all role ids: {}", allRoleOIds);
 		final ImmutableSet<String> excludedRoleNames = ImmutableSet.of("guest", "authenticated");
-		final List<String> realRoleNames = ImmutableList.copyOf(Sets.difference(allRoleNames, excludedRoleNames));
+		final List<String> realRoleNames = ImmutableList.copyOf(Sets.difference(allRoleOIds, excludedRoleNames));
 		final boolean[] ownedRoles = subject.hasRoles(realRoleNames);
 		log.trace("(Real) Role Names  have {} records: {} owned: {}", realRoleNames.size(), realRoleNames, ownedRoles);
 		boolean hasAnyRealRole = ArrayUtils.contains(ownedRoles, true);
