@@ -31,6 +31,7 @@
 		<module>socmed</module>
 		<module>newsletter</module>
 		<module>story</module>
+		<module>rules</module>
 	</modules>
 
 	<scm>
@@ -179,6 +180,11 @@
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>org.soluvas.folder</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.soluvas</groupId>
+				<artifactId>org.soluvas.rules</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

@@ -314,5 +314,16 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	public Page<ID> findAllIds(Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public Existence<String> existsById(StatusMask statusMask, String id) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Map<String, Existence<String>> existsAllById(StatusMask statusMask,
+			Collection<String> ids) {
+		throw new UnsupportedOperationException();
+	}
 	
 }
