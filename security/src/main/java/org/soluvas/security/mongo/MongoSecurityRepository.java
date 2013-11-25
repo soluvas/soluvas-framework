@@ -57,7 +57,7 @@ public class MongoSecurityRepository implements SecurityRepository {
 				roleSet.add((String) roleObj);
 			}
 		}
-		log.debug("FIXME: GANTI KE TRACE| PersonID {} has roles: {}", personObj.get("_id"), roleSet);
+		log.trace("PersonID {} has roles: {}", personObj.get("_id"), roleSet);
 		return roleSet;
 	}
 
@@ -71,7 +71,7 @@ public class MongoSecurityRepository implements SecurityRepository {
 		for (final DBObject personObj : personIdCur) {
 			personIdSet.add((String) personObj.get("_id"));
 		}
-		log.debug("FIXME: GANTI KE TRACE| Role owned by {} people: {}", role, personIdSet.size(), personIdSet);
+		log.trace("Role owned by {} people: {}", role, personIdSet.size(), personIdSet);
 		return personIdSet;
 	}
 
@@ -84,11 +84,11 @@ public class MongoSecurityRepository implements SecurityRepository {
 		final BasicDBObject personObj = (BasicDBObject) personColl.findOne(new BasicDBObject("_id", personId));
 		final List<Object> secRoleIdObjList = (personObj.get("securityRoleIds") != null ? (List<Object>)  personObj.get("securityRoleIds") : null);
 		if (secRoleIdObjList != null) {
-			log.debug("FIXME: GANTI KE TRACE| PersonID has {} old roles that will be removed: {}", secRoleIdObjList.size(), secRoleIdObjList);
+			log.trace("PersonID has {} old roles that will be removed: {}", secRoleIdObjList.size(), secRoleIdObjList);
 			personObj.removeField("securityRoleIds");
 		}
 		personObj.append("securityRoleIds", roles);
-		log.debug("FIXME: GANTI KE TRACE| PersonID has {} new roles that will be removed: {}", roles, personObj.get("securityRoleIds"));
+		log.trace("PersonID has {} new roles that will be removed: {}", roles, personObj.get("securityRoleIds"));
 	}
 
 	/* (non-Javadoc)
