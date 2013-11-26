@@ -434,4 +434,32 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		return null;
 	}
 
+	@Override
+	public Page<Person> findBySearchText(
+			Collection<AccountStatus> accountStatuses, String searchText,
+			Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Person> findAll(Collection<AccountStatus> accountStatuses,
+			Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long countBySearchText(Collection<AccountStatus> accountStatus,
+			String searchText) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long countByStatuses(Collection<AccountStatus> accountStatuses) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

@@ -86,7 +86,10 @@ public enum AccountStatus implements Enumerator {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Member belum aktif.
+	 * Member belum aktif. Pertama kali user registrasi mandiri (belum validasi email), status adalah draft.
+	 * Setelah user melakukan validasi email, status berubah menjadi:
+	 * 1. Bila membership dimoderasi, menjadi 'validated' terlebih dahulu. Admin harus meng-approve member tersebut agar menjadi active.
+	 * 2. Bila membership bebas, maka status 'draft' langsung menjadi 'active' (tanpa approval admin).
 	 * <!-- end-model-doc -->
 	 * @see #DRAFT
 	 * @model name="draft"
@@ -101,6 +104,7 @@ public enum AccountStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Email sudah divalidasi tapi belum aktif (bila membership dimoderasi).
+	 * 
 	 * <!-- end-model-doc -->
 	 * @see #VALIDATED
 	 * @model name="validated"
@@ -114,7 +118,7 @@ public enum AccountStatus implements Enumerator {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Akun aktif dan dapat digunakan.
+	 * Akun aktif dan dapat digunakan. Diasumsikan email sudah valid. Bila membership dimoderasi, maka sudah ada admin yang meng-approve membership ini.
 	 * <!-- end-model-doc -->
 	 * @see #ACTIVE
 	 * @model name="active"
@@ -128,7 +132,7 @@ public enum AccountStatus implements Enumerator {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Akun aktif dan dapat digunakan, dan sudah diverifikasi bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator).
+	 * Akun aktif dan dapat digunakan, dan sudah diverifikasi secara lebih pasti bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator).
 	 * <!-- end-model-doc -->
 	 * @see #VERIFIED
 	 * @model name="verified"

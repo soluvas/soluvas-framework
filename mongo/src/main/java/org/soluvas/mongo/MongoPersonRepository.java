@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.EnumNameFunction;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.PersonImpl;
@@ -31,6 +32,7 @@ import org.soluvas.data.person.PersonRepository;
 import scala.util.Try;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -209,11 +211,11 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 			break;
 		case ACTIVE_ONLY:
 			query.put("accountStatus", new BasicDBObject("$in", 
-					ImmutableSet.of(AccountStatus.ACTIVE.name(), AccountStatus.VALIDATED.name())));
+					ImmutableSet.of(AccountStatus.ACTIVE.name(), AccountStatus.VERIFIED.name())));
 			break;
 		case INCLUDE_INACTIVE:
 			query.put("accountStatus", new BasicDBObject("$in", 
-					ImmutableSet.of(AccountStatus.ACTIVE.name(), AccountStatus.VALIDATED.name(),
+					ImmutableSet.of(AccountStatus.ACTIVE.name(), AccountStatus.VERIFIED.name(),
 							AccountStatus.INACTIVE.name())));
 			break;
 		case VOID_ONLY:
@@ -325,6 +327,63 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		final BasicDBObject query = new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds));
 		augmentQueryForStatusMask(query, statusMask);
 		return findAllByQuery(query, new CappedRequest(500)).getContent();
+	}
+
+	@Override
+	public Page<Person> findBySearchText(
+			Collection<AccountStatus> accountStatuses, String searchText,
+			Pageable pageable) {
+		final BasicDBObject query = getQueryBySearchText(searchText);
+		query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		
+		final Sort mySort;
+		if (pageable.getSort() != null) {
+			mySort = pageable.getSort().and(new Sort(Direction.DESC, "modificationTime"));
+		} else {
+			mySort = new Sort(Direction.DESC, "modificationTime");
+		}
+		
+		final PageRequest myPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), mySort);
+		
+		return findAllByQuery(query, myPageable);
+	}
+
+	@Override
+	public Page<Person> findAll(Collection<AccountStatus> accountStatuses,
+			Pageable pageable) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		
+		final Sort mySort;
+		if (pageable.getSort() != null) {
+			mySort = pageable.getSort().and(new Sort(Direction.DESC, "modificationTime"));
+		} else {
+			mySort = new Sort(Direction.DESC, "modificationTime");
+		}
+		
+		final PageRequest myPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), mySort);
+		
+		return findAllByQuery(query, myPageable);
+	}
+
+	@Override
+	public long countBySearchText(Collection<AccountStatus> accountStatuses,
+			String searchText) {
+		final BasicDBObject query = getQueryBySearchText(searchText);
+		query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		
+		final long count = countByQuery(query);
+		log.debug("Got {} people by query: {}", count, query);
+		return count;
+	}
+
+	@Override
+	public long countByStatuses(Collection<AccountStatus> accountStatuses) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		final long count = countByQuery(query);
+		log.debug("Got {} record(s) by query: {}", count, query);
+		return count;
 	}
 
 }

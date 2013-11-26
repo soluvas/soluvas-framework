@@ -13,6 +13,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.IdPredicate;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonCatalog;
@@ -345,6 +346,34 @@ public class EmfPersonRepository extends
 			Collection<String> customerRoleIds) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Page<Person> findBySearchText(
+			Collection<AccountStatus> accountStatuses, String searchText,
+			Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Person> findAll(Collection<AccountStatus> accountStatuses,
+			Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long countBySearchText(Collection<AccountStatus> accountStatus,
+			String searchText) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long countByStatuses(Collection<AccountStatus> accountStatuses) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

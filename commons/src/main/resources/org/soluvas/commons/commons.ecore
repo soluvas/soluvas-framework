@@ -709,22 +709,22 @@
     </eAnnotations>
     <eLiterals name="draft">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Member belum aktif."/>
+        <details key="documentation" value="Member belum aktif. Pertama kali user registrasi mandiri (belum validasi email), status adalah draft.&#xA;Setelah user melakukan validasi email, status berubah menjadi:&#xA;1. Bila membership dimoderasi, menjadi 'validated' terlebih dahulu. Admin harus meng-approve member tersebut agar menjadi active.&#xA;2. Bila membership bebas, maka status 'draft' langsung menjadi 'active' (tanpa approval admin)."/>
       </eAnnotations>
     </eLiterals>
     <eLiterals name="validated" value="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Email sudah divalidasi tapi belum aktif (bila membership dimoderasi)."/>
+        <details key="documentation" value="Email sudah divalidasi tapi belum aktif (bila membership dimoderasi).&#xA;"/>
       </eAnnotations>
     </eLiterals>
     <eLiterals name="active" value="2">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Akun aktif dan dapat digunakan."/>
+        <details key="documentation" value="Akun aktif dan dapat digunakan. Diasumsikan email sudah valid. Bila membership dimoderasi, maka sudah ada admin yang meng-approve membership ini."/>
       </eAnnotations>
     </eLiterals>
     <eLiterals name="verified" value="3">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Akun aktif dan dapat digunakan, dan sudah diverifikasi bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator)."/>
+        <details key="documentation" value="Akun aktif dan dapat digunakan, dan sudah diverifikasi secara lebih pasti bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator)."/>
       </eAnnotations>
     </eLiterals>
     <eLiterals name="inactive" value="4">

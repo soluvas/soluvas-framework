@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.Person;
 import org.soluvas.data.GenericLookup;
@@ -67,11 +68,17 @@ public interface PersonRepository extends
 	
 	public Page<Person> findBySearchText(StatusMask statusMask, String searchText, Pageable pageable);
 	
+	public Page<Person> findBySearchText(Collection<AccountStatus> accountStatuses, String searchText, Pageable pageable);
+	
 	public long countBySearchText(StatusMask statusMask, String searchText);
+	
+	public long countBySearchText(Collection<AccountStatus> accountStatuses, String searchText);
 
 	public Person findOneActive(String personId);
 	
 	Page<Person> findAll(StatusMask statusMask, Pageable pageable);
+	
+	Page<Person> findAll(Collection<AccountStatus> accountStatuses, Pageable pageable);
 	
 	List<Person> findAll(StatusMask statusMask, Collection<String> ids);
 	
@@ -82,6 +89,8 @@ public interface PersonRepository extends
 	boolean hasMatchWithSecRoleIds(String personId, Collection<String> secRoleIds);
 	
 	long count(StatusMask statusMask);
+	
+	long countByStatuses(Collection<AccountStatus> accountStatuses);
 
 }
 

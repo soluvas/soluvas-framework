@@ -5328,25 +5328,25 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (accountStatusEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
-			 "documentation", "Member belum aktif."
+			 "documentation", "Member belum aktif. Pertama kali user registrasi mandiri (belum validasi email), status adalah draft.\nSetelah user melakukan validasi email, status berubah menjadi:\n1. Bila membership dimoderasi, menjadi \'validated\' terlebih dahulu. Admin harus meng-approve member tersebut agar menjadi active.\n2. Bila membership bebas, maka status \'draft\' langsung menjadi \'active\' (tanpa approval admin)."
 		   });		
 		addAnnotation
 		  (accountStatusEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
-			 "documentation", "Email sudah divalidasi tapi belum aktif (bila membership dimoderasi)."
+			 "documentation", "Email sudah divalidasi tapi belum aktif (bila membership dimoderasi).\n"
 		   });		
 		addAnnotation
 		  (accountStatusEEnum.getELiterals().get(2), 
 		   source, 
 		   new String[] {
-			 "documentation", "Akun aktif dan dapat digunakan."
+			 "documentation", "Akun aktif dan dapat digunakan. Diasumsikan email sudah valid. Bila membership dimoderasi, maka sudah ada admin yang meng-approve membership ini."
 		   });		
 		addAnnotation
 		  (accountStatusEEnum.getELiterals().get(3), 
 		   source, 
 		   new String[] {
-			 "documentation", "Akun aktif dan dapat digunakan, dan sudah diverifikasi bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator)."
+			 "documentation", "Akun aktif dan dapat digunakan, dan sudah diverifikasi secara lebih pasti bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator)."
 		   });		
 		addAnnotation
 		  (accountStatusEEnum.getELiterals().get(4), 
