@@ -94,17 +94,17 @@ public class MongoRealm extends AuthorizingRealm {
 		for (final Role role : securityCatalog.getRoles()) {
 			switch (role.getAssignMode()) {
 			case GUEST:
-				log.trace("Assigning role {} to {} because assign mode {}",
-						role.getName(), userName, role.getAssignMode());
-				info.addRole(role.getName());
+				log.trace("Assigning role {}-{} to {} because assign mode {}",
+						role.getId(), role.getName(), userName, role.getAssignMode());
+				info.addRole(role.getId());
 				break;
 			case AUTHENTICATED:
 				if (!principalCollection.isEmpty()) {
 					log.trace(
-							"Assigning role {} to {} because assign mode {} and principals={}",
-							role.getName(), userName, role.getAssignMode(),
+							"Assigning role {}-{} to {} because assign mode {} and principals={}",
+							role.getId(), role.getName(), userName, role.getAssignMode(),
 							principalCollection);
-					info.addRole(role.getName());
+					info.addRole(role.getId());
 				}
 				break;
 			case MANUAL:
