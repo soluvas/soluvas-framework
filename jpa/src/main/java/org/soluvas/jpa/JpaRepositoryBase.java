@@ -17,6 +17,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.EntityType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +46,7 @@ import scala.util.Try;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
@@ -86,6 +88,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	 * @param draftStatuses
 	 * @param voidStatuses
 	 */
+	@Deprecated
 	protected JpaRepositoryBase(Class<T> entityClass,
 			@Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
 		super();
@@ -101,9 +104,48 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		log.info("Initializing {} JPA repository", entityClass.getSimpleName());
 	}
 	
+	/**
+	 * At this point, {@link EntityManager} is not yet ready, so use {@link #onAfterInit(TransactionStatus)} for that.
+	 * @param entityClass
+	 * @param statusProperty
+	 * @param activeStatuses
+	 * @param inactiveStatuses
+	 * @param draftStatuses
+	 * @param voidStatuses
+	 * @param em EntityManager is provided in constructor because there may be multiple {@link EntityManager}s, i.e.
+	 * 		one for app-scope and another for multitenant-scoped.
+	 */
+	protected JpaRepositoryBase(Class<T> entityClass,
+			@Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses,
+			EntityManager em) {
+		super();
+		this.entityClass = entityClass;
+		
+		this.statusProperty = statusProperty;
+		this.activeStatuses = activeStatuses;
+		this.inactiveStatuses = inactiveStatuses;
+		this.draftStatuses = draftStatuses;
+		this.voidStatuses = voidStatuses;
+		
+		this.em = em;
+		final Set<String> entityNames = FluentIterable.from(em.getMetamodel().getEntities()).transform(new Function<EntityType, String>() {
+			@Override @Nullable
+			public String apply(@Nullable EntityType input) {
+				return input.getBindableJavaType().getName();
+			}
+		}).toSet();
+		Preconditions.checkArgument(entityNames.contains(entityClass.getName()),
+				"EntityManager for '%s' JPA repository must include entity '%s'. Make sure you have set e.g. @PersistenceContext(unitName=\"fulan\"). %s known entities are: %s",
+				entityClass.getSimpleName(), entityClass.getName(), entityNames.size(), entityNames);
+		
+		this.log = LoggerFactory.getLogger(JpaRepositoryBase.class.getName() + "/" + entityClass.getSimpleName());
+		log.info("Initializing {} JPA repository using {} with {} entities: {}", 
+				entityClass.getSimpleName(), em, entityNames.size(), entityNames);
+	}
+	
 	@PostConstruct
 	public final void init() {
-		TransactionTemplate txTemplate = new TransactionTemplate(txManager);
+		final TransactionTemplate txTemplate = new TransactionTemplate(txManager);
 		txTemplate.execute(new TransactionCallbackWithoutResult() {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
