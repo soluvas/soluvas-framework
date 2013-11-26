@@ -140,6 +140,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getDebitBalance <em>Debit Balance</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getDebitCurrency <em>Debit Currency</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getVerifyCode <em>Verify Code</em>}</li>
  * </ul>
  * </p>
  *
@@ -1429,6 +1430,26 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @ordered
 	 */
 	protected String type = TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getVerifyCode() <em>Verify Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVerifyCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VERIFY_CODE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVerifyCode() <em>Verify Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVerifyCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected String verifyCode = VERIFY_CODE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2973,6 +2994,27 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getVerifyCode() {
+		return verifyCode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVerifyCode(String newVerifyCode) {
+		String oldVerifyCode = verifyCode;
+		verifyCode = newVerifyCode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON__VERIFY_CODE, oldVerifyCode, verifyCode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public boolean hasEmail(String email) {
@@ -3261,6 +3303,8 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				return getDebitCurrency();
 			case CommonsPackage.PERSON__TYPE:
 				return getType();
+			case CommonsPackage.PERSON__VERIFY_CODE:
+				return getVerifyCode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -3474,6 +3518,9 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 			case CommonsPackage.PERSON__DEBIT_CURRENCY:
 				setDebitCurrency((CurrencyUnit)newValue);
 				return;
+			case CommonsPackage.PERSON__VERIFY_CODE:
+				setVerifyCode((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -3681,6 +3728,9 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 			case CommonsPackage.PERSON__DEBIT_CURRENCY:
 				setDebitCurrency(DEBIT_CURRENCY_EDEFAULT);
 				return;
+			case CommonsPackage.PERSON__VERIFY_CODE:
+				setVerifyCode(VERIFY_CODE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -3827,6 +3877,8 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				return DEBIT_CURRENCY_EDEFAULT == null ? debitCurrency != null : !DEBIT_CURRENCY_EDEFAULT.equals(debitCurrency);
 			case CommonsPackage.PERSON__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case CommonsPackage.PERSON__VERIFY_CODE:
+				return VERIFY_CODE_EDEFAULT == null ? verifyCode != null : !VERIFY_CODE_EDEFAULT.equals(verifyCode);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -4281,6 +4333,8 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		result.append(debitCurrency);
 		result.append(", type: ");
 		result.append(type);
+		result.append(", verifyCode: ");
+		result.append(verifyCode);
 		result.append(')');
 		return result.toString();
 	}

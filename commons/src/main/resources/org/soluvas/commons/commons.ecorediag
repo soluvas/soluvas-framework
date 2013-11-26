@@ -1365,6 +1365,10 @@
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/firstName"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_b581cfQdEeKFk82W9X7zjQ"/>
         </children>
+        <children xmi:type="notation:Node" xmi:id="_VOGWUFZmEeOENebnHftvmQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/verifyCode"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_VOGWUVZmEeOENebnHftvmQ"/>
+        </children>
         <children xmi:type="notation:Node" xmi:id="_b59cgPQdEeKFk82W9X7zjQ" type="2001">
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//Person/lastName"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_b59cgfQdEeKFk82W9X7zjQ"/>

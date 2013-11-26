@@ -8,7 +8,6 @@ import org.soluvas.push.TrackableEvent;
  * @author atang
  *
  */
-@SuppressWarnings("serial")
 public class PersonSubcribedToMailJetEvent extends TrackableEvent {
 	
 	private final Person person;

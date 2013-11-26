@@ -2808,6 +2808,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPerson_VerifyCode() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(50);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getPerson__HasEmail__String() {
 		return personEClass.getEOperations().get(0);
 	}
@@ -3968,6 +3977,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(personEClass, PERSON__DEBIT_BALANCE);
 		createEAttribute(personEClass, PERSON__DEBIT_CURRENCY);
 		createEAttribute(personEClass, PERSON__TYPE);
+		createEAttribute(personEClass, PERSON__VERIFY_CODE);
 		createEOperation(personEClass, PERSON___HAS_EMAIL__STRING);
 		createEOperation(personEClass, PERSON___PUT_EMAIL__STRING);
 
@@ -4593,6 +4603,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPerson_DebitBalance(), theEcorePackage.getEBigDecimal(), "debitBalance", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_DebitCurrency(), this.getCurrencyUnit(), "debitCurrency", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_Type(), theEcorePackage.getEString(), "type", "Person", 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_VerifyCode(), theEcorePackage.getEString(), "verifyCode", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getPerson__HasEmail__String(), theEcorePackage.getEBoolean(), "hasEmail", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "email", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -5702,6 +5713,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "OAuth 2.0 access token usable by official client applications (Android, iOS, etc.).\nThis is for simple usage, with no expiration (though regenerating the client access token is possible if the access token is compromised). For more complex usage like third party applications, use another mechanism.\n\nThe \'client_id\' and \'callback_url\' (or \'callback_domains\') should be specified elsewhere (probably on AppManifest?)\n\nSee: https://developer.foursquare.com/overview/auth.html"
+		   });		
+		addAnnotation
+		  (getPerson_VerifyCode(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Verify Code is used to link to VerifyNewMemberPage"
 		   });		
 		addAnnotation
 		  (getPhoneNumber_Primary(), 

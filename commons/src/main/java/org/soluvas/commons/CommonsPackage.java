@@ -3833,13 +3833,22 @@ public interface CommonsPackage extends EPackage {
 	int PERSON__TYPE = NAME_CONTAINER_FEATURE_COUNT + 65;
 
 	/**
+	 * The feature id for the '<em><b>Verify Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__VERIFY_CODE = NAME_CONTAINER_FEATURE_COUNT + 66;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 66;
+	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 67;
 
 	/**
 	 * The operation id for the '<em>Get Image Id</em>' operation.
@@ -7237,6 +7246,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getPerson_Type();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getVerifyCode <em>Verify Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Verify Code</em>'.
+	 * @see org.soluvas.commons.Person#getVerifyCode()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_VerifyCode();
+
+	/**
 	 * Returns the meta object for the '{@link org.soluvas.commons.Person#hasEmail(java.lang.String) <em>Has Email</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9972,6 +9992,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERSON__TYPE = eINSTANCE.getPerson_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Verify Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__VERIFY_CODE = eINSTANCE.getPerson_VerifyCode();
 
 		/**
 		 * The meta object literal for the '<em><b>Has Email</b></em>' operation.

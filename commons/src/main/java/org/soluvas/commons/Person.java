@@ -78,6 +78,7 @@ import com.google.common.base.Function;
  *   <li>{@link org.soluvas.commons.Person#getDebitBalance <em>Debit Balance</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getDebitCurrency <em>Debit Currency</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getType <em>Type</em>}</li>
+ *   <li>{@link org.soluvas.commons.Person#getVerifyCode <em>Verify Code</em>}</li>
  * </ul>
  * </p>
  *
@@ -1369,6 +1370,31 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	String getType();
+
+	/**
+	 * Returns the value of the '<em><b>Verify Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Verify Code is used to link to VerifyNewMemberPage
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Verify Code</em>' attribute.
+	 * @see #setVerifyCode(String)
+	 * @see org.soluvas.commons.CommonsPackage#getPerson_VerifyCode()
+	 * @model
+	 * @generated
+	 */
+	String getVerifyCode();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.Person#getVerifyCode <em>Verify Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Verify Code</em>' attribute.
+	 * @see #getVerifyCode()
+	 * @generated
+	 */
+	void setVerifyCode(String value);
 
 	/**
 	 * <!-- begin-user-doc -->

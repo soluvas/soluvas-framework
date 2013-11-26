@@ -1113,6 +1113,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="debitCurrency" eType="#//CurrencyUnit"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         changeable="false" defaultValueLiteral="Person"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verifyCode" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Verify Code is used to link to VerifyNewMemberPage"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eGenericSuperTypes eClassifier="#//NameContainer"/>
     <eGenericSuperTypes eClassifier="#//PhotoIdContainer"/>
     <eGenericSuperTypes eClassifier="#//Identifiable"/>
