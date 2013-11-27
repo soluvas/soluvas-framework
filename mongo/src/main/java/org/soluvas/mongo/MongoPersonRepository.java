@@ -334,7 +334,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 			Collection<AccountStatus> accountStatuses, String searchText,
 			Pageable pageable) {
 		final BasicDBObject query = getQueryBySearchText(searchText);
-		query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		if (!accountStatuses.isEmpty()) {
+			query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		}
 		
 		final Sort mySort;
 		if (pageable.getSort() != null) {
@@ -352,7 +354,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	public Page<Person> findAll(Collection<AccountStatus> accountStatuses,
 			Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
-		query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		if (!accountStatuses.isEmpty()) {
+			query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		}
 		
 		final Sort mySort;
 		if (pageable.getSort() != null) {
@@ -370,7 +374,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	public long countBySearchText(Collection<AccountStatus> accountStatuses,
 			String searchText) {
 		final BasicDBObject query = getQueryBySearchText(searchText);
-		query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		if (!accountStatuses.isEmpty()) {
+			query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		}
 		
 		final long count = countByQuery(query);
 		log.debug("Got {} people by query: {}", count, query);
@@ -380,7 +386,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	@Override
 	public long countByStatuses(Collection<AccountStatus> accountStatuses) {
 		final BasicDBObject query = new BasicDBObject();
-		query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		if (!accountStatuses.isEmpty()) {
+			query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		}
 		final long count = countByQuery(query);
 		log.debug("Got {} record(s) by query: {}", count, query);
 		return count;
