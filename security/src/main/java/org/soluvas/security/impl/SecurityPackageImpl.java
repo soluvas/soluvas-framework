@@ -1008,6 +1008,8 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEReference(getSecurityCatalog_Permissions(), this.getPermission(), null, "permissions", null, 0, -1, SecurityCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSecurityCatalog_DomainPermissions(), this.getDomainPermission(), null, "domainPermissions", null, 0, 1, SecurityCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(securityCatalogEClass, null, "validate", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(permissionEClass, Permission.class, "Permission", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPermission_Roles(), ecorePackage.getEString(), "roles", null, 0, -1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPermission_DomainPermission(), ecorePackage.getEString(), "domainPermission", null, 1, -1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1174,6 +1176,12 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		   source, 
 		   new String[] {
 			 "documentation", "Contains objects used to define security: roles, instance roles, domains, actions."
+		   });		
+		addAnnotation
+		  (securityCatalogEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "Ensures that {@link Role} definitions have unique IDs and names."
 		   });		
 		addAnnotation
 		  (permissionEClass.getEOperations().get(0), 

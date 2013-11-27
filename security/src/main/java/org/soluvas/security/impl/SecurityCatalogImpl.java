@@ -3,22 +3,18 @@
 package org.soluvas.security.impl;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.soluvas.security.Action;
 import org.soluvas.security.Domain;
 import org.soluvas.security.DomainPermission;
@@ -26,6 +22,7 @@ import org.soluvas.security.DomainRole;
 import org.soluvas.security.Permission;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityCatalog;
+import org.soluvas.security.SecurityException;
 import org.soluvas.security.SecurityPackage;
 
 /**
@@ -131,6 +128,7 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Role> getRoles() {
 		if (roles == null) {
 			roles = new EObjectContainmentEList<Role>(Role.class, this, SecurityPackage.SECURITY_CATALOG__ROLES);
@@ -143,6 +141,7 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DomainRole> getInstanceRoles() {
 		if (instanceRoles == null) {
 			instanceRoles = new EObjectContainmentEList<DomainRole>(DomainRole.class, this, SecurityPackage.SECURITY_CATALOG__INSTANCE_ROLES);
@@ -155,6 +154,7 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Domain> getDomains() {
 		if (domains == null) {
 			domains = new EObjectContainmentEList<Domain>(Domain.class, this, SecurityPackage.SECURITY_CATALOG__DOMAINS);
@@ -167,6 +167,7 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Action> getActions() {
 		if (actions == null) {
 			actions = new EObjectContainmentEList<Action>(Action.class, this, SecurityPackage.SECURITY_CATALOG__ACTIONS);
@@ -179,6 +180,7 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Permission> getPermissions() {
 		if (permissions == null) {
 			permissions = new EObjectContainmentEList<Permission>(Permission.class, this, SecurityPackage.SECURITY_CATALOG__PERMISSIONS);
@@ -191,6 +193,7 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DomainPermission getDomainPermissions() {
 		if (domainPermissions != null && domainPermissions.eIsProxy()) {
 			InternalEObject oldDomainPermissions = (InternalEObject)domainPermissions;
@@ -217,11 +220,34 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomainPermissions(DomainPermission newDomainPermissions) {
 		DomainPermission oldDomainPermissions = domainPermissions;
 		domainPermissions = newDomainPermissions;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SecurityPackage.SECURITY_CATALOG__DOMAIN_PERMISSIONS, oldDomainPermissions, domainPermissions));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public void validate() {
+		final Set<String> roleIds = new HashSet<>();
+		final Set<String> roleNames = new HashSet<>();
+		for (final Role role : getRoles()) {
+			if (roleIds.contains(role.getId())) {
+				throw new SecurityException(String.format("Duplicate role ID: '%s' from '%s'", 
+						role.getId(), role.getResourceUri()));
+			}
+			if (roleNames.contains(role.getName())) {
+				throw new SecurityException(String.format("Duplicate role name: '%s' from '%s'", 
+						role.getName(), role.getResourceUri()));
+			}
+			roleIds.add(role.getId());
+			roleNames.add(role.getName());
+		}
 	}
 
 	/**

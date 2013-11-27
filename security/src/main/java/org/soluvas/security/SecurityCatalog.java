@@ -138,4 +138,15 @@ public interface SecurityCatalog extends EObject {
 	 */
 	void setDomainPermissions(DomainPermission value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Ensures that {@link Role} definitions have unique IDs and names.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	void validate();
+
 } // SecurityCatalog
