@@ -144,5 +144,5 @@ public class CatalogRoleRepository extends PagingAndSortingRepositoryBase<Role, 
 		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited))),
 				pageable, count());
 	}
-
+	
 }
