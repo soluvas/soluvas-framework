@@ -5,9 +5,7 @@ import javax.annotation.Nullable;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.soluvas.commons.tenant.RequestOrCommandScope;
 import org.soluvas.commons.tenant.TenantRef;
-import org.springframework.web.context.request.RequestAttributes;
-
-import com.google.common.base.Preconditions;
+import org.springframework.context.ApplicationContext;
 
 /**
  * Uses {@link RequestOrCommandScope}.
@@ -15,16 +13,27 @@ import com.google.common.base.Preconditions;
  */
 public class SoluvasTenantIdentifierResolver implements
 		CurrentTenantIdentifierResolver {
+	
+	public static ApplicationContext appCtx;
 
 	/* (non-Javadoc)
 	 * @see org.hibernate.context.spi.CurrentTenantIdentifierResolver#resolveCurrentTenantIdentifier()
 	 */
 	@Override @Nullable
 	public String resolveCurrentTenantIdentifier() {
-		final RequestAttributes attributes = RequestOrCommandScope.currentRequestAttributes();
-		final TenantRef tenantRef = Preconditions.checkNotNull((TenantRef) attributes.getAttribute("tenantRef", RequestAttributes.SCOPE_REQUEST),
-				"Cannot get 'tenantRef' SCOPE_REQUEST attribute from RequestAttributes");
-		return tenantRef.getTenantId();
+		try {
+			TenantRef tenantRef = appCtx.getBean(TenantRef.class);
+//			final RequestAttributes requestAttrs = RequestOrCommandScope.currentRequestAttributes();
+//			final TenantRef tenantRef = Preconditions.checkNotNull((TenantRef) requestAttrs.resolveReference("tenantRef"),
+//					"Cannot resolve 'tenantRef' attribute from RequestAttributes");
+//			final Set<String> attributeNames = ImmutableSet.copyOf(requestAttrs.getAttributeNames(RequestAttributes.SCOPE_REQUEST));
+//			final TenantRef tenantRef = Preconditions.checkNotNull((TenantRef) requestAttrs.getAttribute("tenantRef", RequestAttributes.SCOPE_REQUEST),
+//					"Cannot get 'tenantRef' SCOPE_REQUEST attribute from RequestAttributes, known attribute names: %s", attributeNames);
+			return tenantRef.getTenantId();
+		} catch (IllegalStateException e) {
+			// not in request or command scope
+			return null;
+		}
 	}
 
 	/* (non-Javadoc)

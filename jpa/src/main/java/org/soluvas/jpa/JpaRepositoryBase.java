@@ -117,7 +117,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	 */
 	protected JpaRepositoryBase(Class<T> entityClass,
 			@Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses,
-			EntityManager em) {
+			EntityManager em/*, PlatformTransactionManager txManager*/) {
 		super();
 		this.entityClass = entityClass;
 		
@@ -127,7 +127,8 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		this.draftStatuses = draftStatuses;
 		this.voidStatuses = voidStatuses;
 		
-		this.em = em;
+		this.em = Preconditions.checkNotNull(em, "EntityManager must be provided");
+		//this.txManager = Preconditions.checkNotNull(txManager, "PlatformTransactionManager must be provided");
 		final Set<String> entityNames = FluentIterable.from(em.getMetamodel().getEntities()).transform(new Function<EntityType, String>() {
 			@Override @Nullable
 			public String apply(@Nullable EntityType input) {
@@ -145,6 +146,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	
 	@PostConstruct
 	public final void init() {
+		Preconditions.checkNotNull(txManager, "PlatformTransactionManager txManager was not @Inject-ed properly.");
 		final TransactionTemplate txTemplate = new TransactionTemplate(txManager);
 		txTemplate.execute(new TransactionCallbackWithoutResult() {
 			@Override

@@ -1,10 +1,9 @@
 package org.soluvas.jpa;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.hibernate.service.UnknownUnwrapTypeException;
@@ -30,8 +29,8 @@ public class SoluvasMultiTenantConnectionProviderImpl implements MultiTenantConn
 			.getLogger(SoluvasMultiTenantConnectionProviderImpl.class);
 	public static final String PUBLIC_SCHEMA = "public";
 	
-	@Inject
-	private DataSource dataSource;
+//	@Inject
+	public static DataSource dataSource;
 
 	@Override
 	public boolean isUnwrappableAs(Class unwrapType) {
@@ -68,11 +67,11 @@ public class SoluvasMultiTenantConnectionProviderImpl implements MultiTenantConn
 	public Connection getConnection(String tenantIdentifier)
 			throws SQLException {
 		Preconditions.checkNotNull(dataSource, "dataSource must be provided");
+		Preconditions.checkArgument(tenantIdentifier.matches("[A-Za-z0-9_]+"),
+				"Invalid tenantIdentifier syntax, it must contain only alphanumeric and '_' characters.");
 		final Connection conn = dataSource.getConnection();
-		try {
-			final PreparedStatement st = conn.prepareStatement("SET SCHEMA ?");
-			st.setString(1, tenantIdentifier);
-			st.execute();
+		try (final Statement st = conn.createStatement()) {
+			st.executeUpdate("SET SCHEMA '" + tenantIdentifier + "'");
 		} catch (SQLException e) {
 			throw new RuntimeException(
 					"Could not alter JDBC connection to specified schema [" + tenantIdentifier + "]", e);
@@ -83,10 +82,8 @@ public class SoluvasMultiTenantConnectionProviderImpl implements MultiTenantConn
 	@Override
 	public void releaseConnection(String tenantIdentifier, Connection connection)
 			throws SQLException {
-		try {
-			final PreparedStatement st = connection.prepareStatement("SET SCHEMA ?");
-			st.setString(1, PUBLIC_SCHEMA);
-			st.execute();
+		try (final Statement st = connection.createStatement()) {
+			st.executeUpdate("SET SCHEMA '" + PUBLIC_SCHEMA + "'");
 		} catch (SQLException e) {
 			// on error, throw an exception to make sure the connection is not returned to the pool.
 			// your requirements may differ
