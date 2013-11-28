@@ -269,4 +269,39 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Subject" instanceClassName="org.apache.shiro.subject.Subject"
       serializable="false"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="PersonAction">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Permissions for Person domain."/>
+    </eAnnotations>
+    <eLiterals name="list">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="List all people."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="view" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="View a person (non-administrative attributes)."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="view_administrative" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="View a person (administrative or sensitive attributes, e.g. hashed password)."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="modify" value="3">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Modify a person (non-administrative attributes)."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="modify_administrative" value="4">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Modify a person (administrative or sensitive attributes, e.g. status, hashed password)."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="add" value="5">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Add a person."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
 </ecore:EPackage>

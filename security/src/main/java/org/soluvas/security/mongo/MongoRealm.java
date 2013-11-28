@@ -14,11 +14,14 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.mongo.MongoRepositoryException;
 import org.soluvas.security.AutologinToken;
 import org.soluvas.security.Permission;
+import org.soluvas.security.PersonAction;
+import org.soluvas.security.PersonPermission;
 import org.soluvas.security.Rfc2307CredentialsMatcher;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityCatalog;
@@ -83,14 +86,11 @@ public class MongoRealm extends AuthorizingRealm {
 		final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		info.addRoles(personRoles);
 
-		// TODO: permissions should be set somewhere else,
-		// using EMF models
-
+		// Static Permissions are set in SecurityCatalog.xmi files, using EMF models
 		log.trace("Processing security catalog for {} with {} roles, {} domains, {} actions, and {} permissions",
 				userName, securityCatalog.getRoles().size(), securityCatalog
 						.getDomains().size(), securityCatalog.getActions()
 						.size(), securityCatalog.getPermissions().size());
-
 		for (final Role role : securityCatalog.getRoles()) {
 			switch (role.getAssignMode()) {
 			case GUEST:
@@ -111,7 +111,6 @@ public class MongoRealm extends AuthorizingRealm {
 				break;
 			}
 		}
-
 		for (final Permission perm : securityCatalog.getPermissions()) {
 			final Set<String> intersectingRoles = Sets.intersection(info.getRoles(),
 					ImmutableSet.copyOf(perm.getRoles()));
@@ -122,7 +121,10 @@ public class MongoRealm extends AuthorizingRealm {
 			}
 		}
 
-		// TODO: resource-level roles
+		// dynamic/resource-level roles
+		// add PersonPermission for VIEW & MODIFY (but not VIEW_ADMINISTRATIVE, MODIFY_ADMINISTRATIVE)
+		info.addObjectPermission(
+				new PersonPermission(ImmutableSet.of(PersonAction.VIEW, PersonAction.MODIFY), principalCollection));
 
 		return info;
 	}
@@ -144,6 +146,7 @@ public class MongoRealm extends AuthorizingRealm {
 				new BasicDBObject("canonicalSlug", canonicalSlug),
 				new BasicDBObject("emails.email", normalizedEmail),
 			});
+			query.put("accountStatus", new BasicDBObject("$in", ImmutableSet.of(AccountStatus.ACTIVE.name(), AccountStatus.VERIFIED.name())));
 			log.debug("findOne MongoDB {} using {}", personCollName, query);
 			final DBObject found = personColl.findOne(query, new BasicDBObject("password", 1));
 			log.debug("Matched for {} : {}", tokenPrincipal, found);

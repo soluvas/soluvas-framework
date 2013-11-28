@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.IdFunction;
 import org.soluvas.security.SecurityCatalog;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
@@ -32,6 +33,8 @@ public class SecurityHelper {
 	public static boolean hasAnyRealRole(SecurityCatalog securityCatalog, Subject subject) {
 //		final ImmutableSet<String> allRoleNames = ImmutableSet.copyOf(Lists.transform(securityCatalog.getRoles(), new NameFunction()));
 //		log.debug("all role names: {}", allRoleNames);
+		Preconditions.checkNotNull(securityCatalog.getRoles(), "Roles must not be null.");
+		log.debug("{} Roles: {}", securityCatalog.getRoles().size(), securityCatalog.getRoles());
 		final ImmutableSet<String> allRoleOIds = ImmutableSet.copyOf(Lists.transform(securityCatalog.getRoles(), new IdFunction()));
 		log.debug("all role ids: {}", allRoleOIds);
 		final ImmutableSet<String> excludedRoleNames = ImmutableSet.of("guest", "authenticated");
