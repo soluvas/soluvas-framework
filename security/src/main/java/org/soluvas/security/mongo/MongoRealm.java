@@ -14,6 +14,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.mongo.MongoRepositoryException;
@@ -144,6 +145,7 @@ public class MongoRealm extends AuthorizingRealm {
 				new BasicDBObject("canonicalSlug", canonicalSlug),
 				new BasicDBObject("emails.email", normalizedEmail),
 			});
+			query.put("accountStatus", new BasicDBObject("$in", ImmutableSet.of(AccountStatus.ACTIVE.name(), AccountStatus.VERIFIED.name())));
 			log.debug("findOne MongoDB {} using {}", personCollName, query);
 			final DBObject found = personColl.findOne(query, new BasicDBObject("password", 1));
 			log.debug("Matched for {} : {}", tokenPrincipal, found);
