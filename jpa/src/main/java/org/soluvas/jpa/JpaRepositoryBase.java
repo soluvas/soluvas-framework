@@ -290,7 +290,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		final List<S> addeds = FluentIterable.from(entities).transform(new Function<S, S>() {
 			@Override @Nullable
 			public S apply(@Nullable S input) {
-				em.persist(input);
+				em.merge(input);
 				return input;
 			}
 		}).toList();
