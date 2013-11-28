@@ -866,6 +866,16 @@ public interface SecurityPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.security.PersonAction <em>Person Action</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.security.PersonAction
+	 * @see org.soluvas.security.impl.SecurityPackageImpl#getPersonAction()
+	 * @generated
+	 */
+	int PERSON_ACTION = 12;
+
+	/**
 	 * The meta object id for the '<em>Session</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -873,7 +883,7 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getSession()
 	 * @generated
 	 */
-	int SESSION = 12;
+	int SESSION = 13;
 
 
 	/**
@@ -884,7 +894,7 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getHttpServletRequest()
 	 * @generated
 	 */
-	int HTTP_SERVLET_REQUEST = 13;
+	int HTTP_SERVLET_REQUEST = 14;
 
 	/**
 	 * The meta object id for the '<em>Http Servlet Response</em>' data type.
@@ -894,7 +904,7 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getHttpServletResponse()
 	 * @generated
 	 */
-	int HTTP_SERVLET_RESPONSE = 14;
+	int HTTP_SERVLET_RESPONSE = 15;
 
 
 	/**
@@ -905,7 +915,7 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getSecurityManager()
 	 * @generated
 	 */
-	int SECURITY_MANAGER = 15;
+	int SECURITY_MANAGER = 16;
 
 
 	/**
@@ -916,7 +926,7 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getEntityLookup()
 	 * @generated
 	 */
-	int ENTITY_LOOKUP = 16;
+	int ENTITY_LOOKUP = 17;
 
 
 	/**
@@ -927,7 +937,7 @@ public interface SecurityPackage extends EPackage {
 	 * @see org.soluvas.security.impl.SecurityPackageImpl#getSubject()
 	 * @generated
 	 */
-	int SUBJECT = 17;
+	int SUBJECT = 18;
 
 
 	/**
@@ -1504,6 +1514,16 @@ public interface SecurityPackage extends EPackage {
 	EEnum getAppSessionStatus();
 
 	/**
+	 * Returns the meta object for enum '{@link org.soluvas.security.PersonAction <em>Person Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Person Action</em>'.
+	 * @see org.soluvas.security.PersonAction
+	 * @generated
+	 */
+	EEnum getPersonAction();
+
+	/**
 	 * Returns the meta object for data type '{@link org.apache.shiro.session.Session <em>Session</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2038,6 +2058,16 @@ public interface SecurityPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum APP_SESSION_STATUS = eINSTANCE.getAppSessionStatus();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.security.PersonAction <em>Person Action</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.security.PersonAction
+		 * @see org.soluvas.security.impl.SecurityPackageImpl#getPersonAction()
+		 * @generated
+		 */
+		EEnum PERSON_ACTION = eINSTANCE.getPersonAction();
 
 		/**
 		 * The meta object literal for the '<em>Session</em>' data type.

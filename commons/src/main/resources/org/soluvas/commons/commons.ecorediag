@@ -1757,6 +1757,41 @@
       <element xmi:type="ecore:EDataType" href="commons.ecore#//Temperature"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mx-EgkIUEeOIGdTr9y5X8w" x="2246" y="733"/>
     </children>
+    <children xmi:type="notation:Node" xmi:id="_Tzo90FgDEeOr0OWZMlVBPg" type="1005">
+      <children xmi:type="notation:Node" xmi:id="_TzqL8FgDEeOr0OWZMlVBPg" type="4010"/>
+      <children xmi:type="notation:Node" xmi:id="_TzqL8VgDEeOr0OWZMlVBPg" type="5008">
+        <children xmi:type="notation:Node" xmi:id="_V7NHQFgDEeOr0OWZMlVBPg" type="2006">
+          <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//PersonAction/list"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_V7NHQVgDEeOr0OWZMlVBPg"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_WRs7sFgDEeOr0OWZMlVBPg" type="2006">
+          <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//PersonAction/view"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_WRs7sVgDEeOr0OWZMlVBPg"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_WhLiIFgDEeOr0OWZMlVBPg" type="2006">
+          <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//PersonAction/view_administrative"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_WhLiIVgDEeOr0OWZMlVBPg"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_XIojsFgDEeOr0OWZMlVBPg" type="2006">
+          <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//PersonAction/modify"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_XIojsVgDEeOr0OWZMlVBPg"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_XragoFgDEeOr0OWZMlVBPg" type="2006">
+          <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//PersonAction/modify_administrative"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_XragoVgDEeOr0OWZMlVBPg"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_YTKdIFgDEeOr0OWZMlVBPg" type="2006">
+          <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//PersonAction/add"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_YTKdIVgDEeOr0OWZMlVBPg"/>
+        </children>
+        <styles xmi:type="notation:DrawerStyle" xmi:id="_TzqL8lgDEeOr0OWZMlVBPg"/>
+        <styles xmi:type="notation:SortingStyle" xmi:id="_TzqL81gDEeOr0OWZMlVBPg"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_TzqL9FgDEeOr0OWZMlVBPg"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_Tzo90VgDEeOr0OWZMlVBPg" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+      <element xmi:type="ecore:EEnum" href="commons.ecore#//PersonAction"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Tzo90lgDEeOr0OWZMlVBPg" x="6296" y="359"/>
+    </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_Hn9XoSQDEeKL8qHxNHEWSw"/>
     <element xmi:type="ecore:EPackage" href="commons.ecore#/"/>
     <edges xmi:type="notation:Edge" xmi:id="_Rrm-sCSDEeKyUdMfH4dSfg" type="3003" source="_J57LECSDEeKyUdMfH4dSfg" target="_aOshcSSAEeKyUdMfH4dSfg">

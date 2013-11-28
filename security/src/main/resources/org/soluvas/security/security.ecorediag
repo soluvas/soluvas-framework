@@ -495,6 +495,17 @@
     <element xmi:type="ecore:EClass" href="platform:/resource/org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//SchemaVersionable"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SVU3Ar6HEeKt6YYB8TN00A" x="4224" y="24"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_woSN4FgDEeOr0OWZMlVBPg" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_wpHUUFgDEeOr0OWZMlVBPg" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_wpH7YFgDEeOr0OWZMlVBPg" type="5008">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_wpH7YVgDEeOr0OWZMlVBPg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_wpH7YlgDEeOr0OWZMlVBPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_wpH7Y1gDEeOr0OWZMlVBPg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_woSN4VgDEeOr0OWZMlVBPg" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="security.ecore#//PersonAction"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_woSN4lgDEeOr0OWZMlVBPg" x="3836" y="454"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Tc3gEiMGEeKl8MxWFdVCpA"/>
   <element xmi:type="ecore:EPackage" href="security.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_xh3kwCMGEeKl8MxWFdVCpA" type="3002" source="_t00EMCMGEeKl8MxWFdVCpA" target="_UVslgCMGEeKl8MxWFdVCpA">

@@ -32,6 +32,7 @@ import org.soluvas.security.Domain;
 import org.soluvas.security.DomainPermission;
 import org.soluvas.security.DomainRole;
 import org.soluvas.security.Permission;
+import org.soluvas.security.PersonAction;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityCatalog;
 import org.soluvas.security.SecurityFactory;
@@ -127,6 +128,13 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * @generated
 	 */
 	private EEnum appSessionStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum personActionEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -768,6 +776,15 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getPersonAction() {
+		return personActionEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EDataType getSession() {
 		return sessionEDataType;
@@ -916,6 +933,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		// Create enums
 		assignModeEEnum = createEEnum(ASSIGN_MODE);
 		appSessionStatusEEnum = createEEnum(APP_SESSION_STATUS);
+		personActionEEnum = createEEnum(PERSON_ACTION);
 
 		// Create data types
 		sessionEDataType = createEDataType(SESSION);
@@ -1086,6 +1104,14 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEEnum(appSessionStatusEEnum, AppSessionStatus.class, "AppSessionStatus");
 		addEEnumLiteral(appSessionStatusEEnum, AppSessionStatus.ACTIVE);
 		addEEnumLiteral(appSessionStatusEEnum, AppSessionStatus.INACTIVE);
+
+		initEEnum(personActionEEnum, PersonAction.class, "PersonAction");
+		addEEnumLiteral(personActionEEnum, PersonAction.LIST);
+		addEEnumLiteral(personActionEEnum, PersonAction.VIEW);
+		addEEnumLiteral(personActionEEnum, PersonAction.VIEW_ADMINISTRATIVE);
+		addEEnumLiteral(personActionEEnum, PersonAction.MODIFY);
+		addEEnumLiteral(personActionEEnum, PersonAction.MODIFY_ADMINISTRATIVE);
+		addEEnumLiteral(personActionEEnum, PersonAction.ADD);
 
 		// Initialize data types
 		initEDataType(sessionEDataType, Session.class, "Session", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1320,6 +1346,48 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		   source, 
 		   new String[] {
 			 "documentation", " Ensure personId is set. If not, throw Exception.\nThe IP Address and User Agent is required for security purposes.\nConvenience method for {@link #requirePerson(RequestIdentity)}."
+		   });		
+		addAnnotation
+		  (personActionEEnum, 
+		   source, 
+		   new String[] {
+			 "documentation", "Permissions for Person domain."
+		   });		
+		addAnnotation
+		  (personActionEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "List all people."
+		   });		
+		addAnnotation
+		  (personActionEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "View a person (non-administrative attributes)."
+		   });		
+		addAnnotation
+		  (personActionEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "View a person (administrative or sensitive attributes, e.g. hashed password)."
+		   });		
+		addAnnotation
+		  (personActionEEnum.getELiterals().get(3), 
+		   source, 
+		   new String[] {
+			 "documentation", "Modify a person (non-administrative attributes)."
+		   });		
+		addAnnotation
+		  (personActionEEnum.getELiterals().get(4), 
+		   source, 
+		   new String[] {
+			 "documentation", "Modify a person (administrative or sensitive attributes, e.g. status, hashed password)."
+		   });		
+		addAnnotation
+		  (personActionEEnum.getELiterals().get(5), 
+		   source, 
+		   new String[] {
+			 "documentation", "Add a person."
 		   });
 	}
 	

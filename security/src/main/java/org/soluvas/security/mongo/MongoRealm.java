@@ -20,6 +20,8 @@ import org.soluvas.commons.SlugUtils;
 import org.soluvas.mongo.MongoRepositoryException;
 import org.soluvas.security.AutologinToken;
 import org.soluvas.security.Permission;
+import org.soluvas.security.PersonAction;
+import org.soluvas.security.PersonPermission;
 import org.soluvas.security.Rfc2307CredentialsMatcher;
 import org.soluvas.security.Role;
 import org.soluvas.security.SecurityCatalog;
@@ -84,14 +86,11 @@ public class MongoRealm extends AuthorizingRealm {
 		final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		info.addRoles(personRoles);
 
-		// TODO: permissions should be set somewhere else,
-		// using EMF models
-
+		// Static Permissions are set in SecurityCatalog.xmi files, using EMF models
 		log.trace("Processing security catalog for {} with {} roles, {} domains, {} actions, and {} permissions",
 				userName, securityCatalog.getRoles().size(), securityCatalog
 						.getDomains().size(), securityCatalog.getActions()
 						.size(), securityCatalog.getPermissions().size());
-
 		for (final Role role : securityCatalog.getRoles()) {
 			switch (role.getAssignMode()) {
 			case GUEST:
@@ -112,7 +111,6 @@ public class MongoRealm extends AuthorizingRealm {
 				break;
 			}
 		}
-
 		for (final Permission perm : securityCatalog.getPermissions()) {
 			final Set<String> intersectingRoles = Sets.intersection(info.getRoles(),
 					ImmutableSet.copyOf(perm.getRoles()));
@@ -123,7 +121,10 @@ public class MongoRealm extends AuthorizingRealm {
 			}
 		}
 
-		// TODO: resource-level roles
+		// dynamic/resource-level roles
+		// add PersonPermission for VIEW & MODIFY (but not VIEW_ADMINISTRATIVE, MODIFY_ADMINISTRATIVE)
+		info.addObjectPermission(
+				new PersonPermission(ImmutableSet.of(PersonAction.VIEW, PersonAction.MODIFY), principalCollection));
 
 		return info;
 	}
