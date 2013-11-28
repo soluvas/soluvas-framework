@@ -16,8 +16,8 @@ import org.soluvas.data.repository.StatusAwareRepository;
  */
 public interface JpaRepository<T extends JpaEntity<ID>, ID extends Serializable> extends StatusAwareRepository<T, ID> {
 
-	public Existence<String> existsById(StatusMask statusMask, String id);
+	public Existence<ID> existsById(StatusMask statusMask, ID id);
 
-	public Map<String, Existence<String>> existsAllById(StatusMask statusMask, Collection<String> ids);
+	public Map<ID, Existence<ID>> existsAllById(StatusMask statusMask, Collection<ID> ids);
 
 }

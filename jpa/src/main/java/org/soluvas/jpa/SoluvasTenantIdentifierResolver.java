@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.soluvas.commons.tenant.RequestOrCommandScope;
 import org.soluvas.commons.tenant.TenantRef;
+import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -30,9 +31,9 @@ public class SoluvasTenantIdentifierResolver implements
 //			final TenantRef tenantRef = Preconditions.checkNotNull((TenantRef) requestAttrs.getAttribute("tenantRef", RequestAttributes.SCOPE_REQUEST),
 //					"Cannot get 'tenantRef' SCOPE_REQUEST attribute from RequestAttributes, known attribute names: %s", attributeNames);
 			return tenantRef.getTenantId();
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException | BeanCreationException e) {
 			// not in request or command scope
-			return null;
+			return "public";
 		}
 	}
 

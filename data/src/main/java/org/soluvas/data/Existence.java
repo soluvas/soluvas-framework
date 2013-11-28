@@ -38,6 +38,11 @@ public final class Existence<T> implements Serializable {
 		return new Existence<>(false, null);
 	}
 
+	/**
+	 * @param reference
+	 * @param id Type of ID is assumed to be string.
+	 * @return
+	 */
 	public static <T> Existence<T> of(T reference, String id) {
 		return new Existence<>(true, reference, id);
 	}
@@ -55,6 +60,10 @@ public final class Existence<T> implements Serializable {
 		return reference;
 	}
 	
+	/**
+	 * Note: Type of ID is assumed to be string.
+	 * @return
+	 */
 	public String getId() {
 		Preconditions.checkState(present, "Existence value not present");
 		return id;

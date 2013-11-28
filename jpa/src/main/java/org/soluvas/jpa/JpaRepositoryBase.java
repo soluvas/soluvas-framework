@@ -49,6 +49,9 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 /**
@@ -282,23 +285,25 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 
 	@Override @Transactional
 	public <S extends T> Collection<S> add(Collection<S> entities) {
-		log.debug("Adding {} {} entities", entities.size(), entityClass.getSimpleName());
+		log.debug("Adding {} {} entities: {}", entities.size(), entityClass.getSimpleName(), 
+				FluentIterable.from(entities).transform(new IdFunction()).limit(10));
 		final List<S> addeds = FluentIterable.from(entities).transform(new Function<S, S>() {
 			@Override @Nullable
 			public S apply(@Nullable S input) {
-//				em.persist(input);
-				em.merge(input);
+				em.persist(input);
 				return input;
 			}
 		}).toList();
-		log.info("Added {} {} entities", addeds.size(), entityClass.getSimpleName());
+		log.info("Added {} {} entities: {}", addeds.size(), entityClass.getSimpleName(),
+				FluentIterable.from(addeds).transform(new IdFunction()).limit(10));
 		return addeds;
 	}
 
 	@SuppressWarnings("null")
 	@Override @Transactional
 	public <S extends T> Collection<S> modify(Map<ID, S> entities) {
-		log.debug("Modifying {} {} entities", entities.size(), entityClass.getSimpleName());
+		log.debug("Modifying {} {} entities: {}", entities.size(), entityClass.getSimpleName(),
+				Iterables.limit(entities.keySet(), 10));
 		final List<S> mergedEntities = FluentIterable.from(entities.entrySet()).transform(new Function<Entry<ID, S>, S>() {
 			@Override
 			public S apply(Entry<ID, S> input) {
@@ -306,13 +311,14 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 				return mergedEntity;
 			};
 		}).toList();
-		log.debug("{} entities have been modified", mergedEntities.size());
+		log.debug("{} {} entities have been modified", mergedEntities.size(), entityClass.getSimpleName(),
+				FluentIterable.from(mergedEntities).transform(new IdFunction()).limit(10));
 		return mergedEntities;
 	}
 
 	@Override @Transactional(readOnly=true)
 	public Set<ID> exists(Collection<ID> ids) {
-		throw new UnsupportedOperationException();
+		return existsAllById(StatusMask.RAW, ids).keySet();
 	}
 
 	@Override @Transactional(readOnly=true)
@@ -324,8 +330,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		final List<javax.persistence.criteria.Order> jpaOrders = FluentIterable
 				.from(Optional.<Iterable<Sort.Order>>fromNullable(sort).or(ImmutableList.<Sort.Order>of()))
 				.transform(new Function<Order, javax.persistence.criteria.Order>() {
-			@Override
-			@Nullable
+			@Override @Nullable
 			public javax.persistence.criteria.Order apply(@Nullable Order input) {
 				return input.getDirection() == Direction.ASC ? cb.asc(root.get(input.getProperty())) : cb.desc(root.get(input.getProperty()));
 			}
@@ -360,14 +365,29 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	}
 
 	@Override @Transactional(readOnly=true)
-	public Existence<String> existsById(StatusMask statusMask, String id) {
-		throw new UnsupportedOperationException();
+	public Existence<ID> existsById(StatusMask statusMask, ID id) {
+		return Preconditions.checkNotNull(existsAllById(statusMask, ImmutableSet.of(id)).get(id),
+				"Internal error: existsAllById %s %s does not return Existence for key '%s'",
+				entityClass.getName(), statusMask, id);
 	}
 
 	@Override @Transactional(readOnly=true)
-	public Map<String, Existence<String>> existsAllById(StatusMask statusMask,
-			Collection<String> ids) {
-		throw new UnsupportedOperationException();
+	public Map<ID, Existence<ID>> existsAllById(StatusMask statusMask,
+			Collection<ID> ids) {
+		final TypedQuery<String> query = em.createQuery("SELECT e.id FROM " + entityClass.getName() + " e WHERE e.id IN :ids", String.class);
+		query.setParameter("ids", ids);
+		final Set<String> existingIds = ImmutableSet.copyOf(query.getResultList());
+		final ImmutableMap.Builder<ID, Existence<ID>> existsb = ImmutableMap.builder();
+		for (final ID id : ids) {
+			if (existingIds.contains(id)) {
+				existsb.put(id, Existence.of(id, String.valueOf(id)));
+			} else {
+				existsb.put(id, Existence.<ID>absent());
+			}
+		}
+		final Map<ID, Existence<ID>> exists = existsb.build();
+		log.trace("Exists {} ID {}: {}", statusMask, ids, exists);
+		return exists;
 	}
 	
 }
