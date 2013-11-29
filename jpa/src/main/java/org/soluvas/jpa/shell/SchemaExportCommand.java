@@ -12,6 +12,7 @@ import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.DefaultComponentSafeNamingStrategy;
 import org.hibernate.dialect.PostgreSQL82Dialect;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.hbm2ddl.SchemaExport.Type;
@@ -55,8 +56,13 @@ public class SchemaExportCommand extends ExtCommandSupport {
 					
 					final Configuration configuration = new Configuration()
 						.addAnnotatedClass(Class.forName("com.quikdo.schema.core.jpa._1.Place"))
-						.setProperty("hibernate.dialect", PostgreSQL82Dialect.class.getName())
-						.setProperty("hibernate.show_sql", String.valueOf(showSql));
+						.setProperty(org.hibernate.cfg.Environment.DIALECT, PostgreSQL82Dialect.class.getName())
+						.setProperty(org.hibernate.cfg.Environment.SHOW_SQL, String.valueOf(showSql))
+						.setProperty(org.hibernate.cfg.Environment.FORMAT_SQL, "true")
+						// https://hibernate.atlassian.net/browse/ANN-99?focusedCommentId=22432&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-22432
+						// note: setting org.hibernate.ejb.HibernatePersistence.NAMING_STRATEGY won't work in this case
+						.setNamingStrategy(new DefaultComponentSafeNamingStrategy());
+//						.setProperty(org.hibernate.ejb.HibernatePersistence.NAMING_STRATEGY, DefaultComponentSafeNamingStrategy.class.getName());
 					final SchemaExport export = new SchemaExport(configuration, conn);
 					export.setFormat(true);
 					export.setOutputFile(outputFile.getPath());

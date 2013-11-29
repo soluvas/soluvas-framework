@@ -2,6 +2,7 @@ package org.soluvas.jpa;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -21,6 +22,7 @@ import javax.persistence.metamodel.EntityType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.GenericStatus;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.data.EntityLookupException;
@@ -42,6 +44,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import scala.util.Failure;
+import scala.util.Success;
 import scala.util.Try;
 
 import com.google.common.base.Function;
@@ -76,6 +80,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	
 	protected Class<T> entityClass;
 
+	@Nullable
 	protected String statusProperty;
 	protected Set<E> activeStatuses;
 	protected Set<E> inactiveStatuses;
@@ -256,25 +261,45 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	public <S extends T, K extends Serializable> S lookupOne(
 			StatusMask statusMask, LookupKey lookupKey, K key)
 			throws EntityLookupException {
-		throw new UnsupportedOperationException();
+		switch (lookupKey) {
+		case ID:
+			return lookupOneById(statusMask, (ID) key);
+		default:
+			throw new UnsupportedOperationException("Unsupported lookupKey: " + lookupKey);
+		}
 	}
 
 	@Override @Transactional(readOnly=true)
 	public <S extends T, K extends Serializable> Map<K, Try<S>> lookupAll(
 			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
-		throw new UnsupportedOperationException();
+		switch (lookupKey) {
+		case ID:
+			return lookupAllById(statusMask, (Collection) keys);
+		default:
+			throw new UnsupportedOperationException("Unsupported lookupKey: " + lookupKey);
+		}
 	}
 
 	@Override @Transactional(readOnly=true)
 	public <K extends Serializable> Map<K, Existence<K>> checkExistsAll(
 			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
-		throw new UnsupportedOperationException();
+		switch (lookupKey) {
+		case ID:
+			return (Map) existsAllById(statusMask, (Collection<ID>) keys);
+		default:
+			throw new UnsupportedOperationException("Unsupported lookupKey: " + lookupKey);
+		}
 	}
 
 	@Override @Transactional(readOnly=true)
 	public <K extends Serializable> Existence<K> checkExists(
 			StatusMask statusMask, LookupKey lookupKey, K key) {
-		throw new UnsupportedOperationException();
+		switch (lookupKey) {
+		case ID:
+			return (Existence<K>) existsById(statusMask, (ID) key);
+		default:
+			throw new UnsupportedOperationException("Unsupported lookupKey: " + lookupKey);
+		}
 	}
 
 	@Override
@@ -374,9 +399,9 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	@Override @Transactional(readOnly=true)
 	public Map<ID, Existence<ID>> existsAllById(StatusMask statusMask,
 			Collection<ID> ids) {
-		final TypedQuery<String> query = em.createQuery("SELECT e.id FROM " + entityClass.getName() + " e WHERE e.id IN :ids", String.class);
+		final TypedQuery<ID> query = (TypedQuery) em.createQuery("SELECT e.id FROM " + entityClass.getName() + " e WHERE e.id IN :ids", Object.class);
 		query.setParameter("ids", ids);
-		final Set<String> existingIds = ImmutableSet.copyOf(query.getResultList());
+		final Set<ID> existingIds = ImmutableSet.copyOf(query.getResultList());
 		final ImmutableMap.Builder<ID, Existence<ID>> existsb = ImmutableMap.builder();
 		for (final ID id : ids) {
 			if (existingIds.contains(id)) {
@@ -389,5 +414,90 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		log.trace("Exists {} ID {}: {}", statusMask, ids, exists);
 		return exists;
 	}
+	
+	/**
+	 * Useful to implement {@link GenericLookup#lookupOne(StatusMask, LookupKey, Serializable)}.
+	 * @param statusMask
+	 * @param key
+	 * @return
+	 * @throws EntityLookupException
+	 */
+	@Transactional(readOnly=true)
+	public <S extends T> S lookupOneById(StatusMask statusMask, @Nullable ID id) throws EntityLookupException {
+		final Try<S> lookup = Preconditions.checkNotNull(this.<S>lookupAllById(statusMask, ImmutableSet.of(id)).get(id),
+				"Internal error: lookupAllById %s %s does not return Try<S> instance for ID '%s'",
+				entityClass.getName(), statusMask, id);
+		return lookup.get();
+	}
+	
+	/**
+	 * Used to implement {@link GenericLookup#lookupAll(StatusMask, LookupKey, Collection)}.
+	 * @param statusMask
+	 * @param keys
+	 * @return
+	 */
+	@Transactional(readOnly=true)
+	public <S extends T> Map<ID, Try<S>> lookupAllById(StatusMask statusMask, Collection<ID> ids) {
+		final TypedQuery<S> query = (TypedQuery<S>) em.createQuery("SELECT e FROM " + entityClass.getName() + " e WHERE e.id IN :ids", entityClass);
+		query.setParameter("ids", ids);
+		final Set<ID> unknownIds = new HashSet<>(ids);
+		final ImmutableMap.Builder<ID, Try<S>> lookupb = ImmutableMap.builder();
+		for (final S entity : query.getResultList()) {
+			final E status = getStatus(entity);
+			switch (statusMask) {
+			case RAW:
+				lookupb.put(entity.getId(), new Success<>(entity));
+				break;
+			case ACTIVE_ONLY:
+				if (activeStatuses.contains(status)) {
+					lookupb.put(entity.getId(), new Success<>(entity));
+				} else {
+					lookupb.put(entity.getId(), new Failure<S>(new EntityLookupException(
+							entityClass, statusMask, LookupKey.ID, entity.getId(), this, Optional.of(status))));
+				}
+				break;
+			case DRAFT_ONLY:
+				if (draftStatuses.contains(status)) {
+					lookupb.put(entity.getId(), new Success<>(entity));
+				} else {
+					lookupb.put(entity.getId(), new Failure<S>(new EntityLookupException(
+							entityClass, statusMask, LookupKey.ID, entity.getId(), this, Optional.of(status))));
+				}
+				break;
+			case INCLUDE_INACTIVE:
+				if (Sets.union(activeStatuses, inactiveStatuses).contains(status)) {
+					lookupb.put(entity.getId(), new Success<>(entity));
+				} else {
+					lookupb.put(entity.getId(), new Failure<S>(new EntityLookupException(
+							entityClass, statusMask, LookupKey.ID, entity.getId(), this, Optional.of(status))));
+				}
+				break;
+			case VOID_ONLY:
+				if (voidStatuses.contains(status)) {
+					lookupb.put(entity.getId(), new Success<>(entity));
+				} else {
+					lookupb.put(entity.getId(), new Failure<S>(new EntityLookupException(
+							entityClass, statusMask, LookupKey.ID, entity.getId(), this, Optional.of(status))));
+				}
+				break;
+			}
+			unknownIds.remove(entity.getId());
+		}
+		for (final ID unknownId : unknownIds) {
+			lookupb.put(unknownId, new Failure<S>(
+					new EntityLookupException(entityClass, statusMask, LookupKey.ID, unknownId, this, Optional.<E>absent())));
+		}
+		final Map<ID, Try<S>> exists = lookupb.build();
+		log.trace("Lookup {} ID {}: {}", statusMask, ids, exists);
+		return exists;
+	}
+	
+	/**
+	 * Return the status of the entity. If the entity doesn't support status, please return
+	 * {@link GenericStatus#BOOKED}.
+	 * @param entity
+	 * @return
+	 */
+	protected abstract E getStatus(T entity);
 	
 }
