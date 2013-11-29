@@ -399,7 +399,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	@Override @Transactional(readOnly=true)
 	public Map<ID, Existence<ID>> existsAllById(StatusMask statusMask,
 			Collection<ID> ids) {
-		final TypedQuery<ID> query = (TypedQuery<ID>) em.createQuery("SELECT e.id FROM " + entityClass.getName() + " e WHERE e.id IN :ids", Object.class);
+		final TypedQuery<ID> query = (TypedQuery) em.createQuery("SELECT e.id FROM " + entityClass.getName() + " e WHERE e.id IN :ids", Object.class);
 		query.setParameter("ids", ids);
 		final Set<ID> existingIds = ImmutableSet.copyOf(query.getResultList());
 		final ImmutableMap.Builder<ID, Existence<ID>> existsb = ImmutableMap.builder();
