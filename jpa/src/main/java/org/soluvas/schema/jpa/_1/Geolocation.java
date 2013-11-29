@@ -15,26 +15,21 @@ public class Geolocation {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
 	 */
 	@Basic()
-	private Float latitude = 0.0f;
-
+	private Float latitude = null;
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
 	 */
 	@Basic()
-	private Float longitude = 0.0f;
-
+	private Float longitude = null;
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
 	 */
 	@Basic()
-	private Float elevation = 0.0f;
+	private Float elevation = null;
 
 	/**
 	 * Returns the value of '<em><b>latitude</b></em>' feature.
