@@ -1,5 +1,6 @@
 package org.soluvas.schema.jpa._1;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 
@@ -10,8 +11,12 @@ import javax.persistence.Embeddable;
  * @generated
  */
 @Embeddable()
-public class Geolocation {
+public class Geolocation implements Serializable {
 
+	/**
+	 * @generated
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

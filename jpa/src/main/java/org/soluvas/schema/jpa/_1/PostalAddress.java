@@ -1,5 +1,6 @@
 package org.soluvas.schema.jpa._1;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +33,12 @@ import org.joda.time.DateTime;
  * @generated
  */
 @Embeddable()
-public class PostalAddress {
+public class PostalAddress implements Serializable {
+
+	/**
+	 * @generated
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
