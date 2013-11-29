@@ -31,6 +31,7 @@ import com.google.common.collect.Maps;
  * {@link CrudRepository} base implementation that needs only the core
  * methods to override. For new implementations please use {@link StatusAwareRepositoryBase} instead,
  * even if you don't store status in your entity, API consumers still expect {@link StatusMask} support.
+ * <p><strong>Tip:</strong> It's better if you extend {@link StatusAwareRepositoryBase} instead.
  * @author ceefour
  */
 public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable> implements PagingAndSortingRepository<T, ID> {
