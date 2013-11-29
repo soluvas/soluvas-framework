@@ -310,6 +310,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	public List<Person> findAllBySecRoleIds(StatusMask statusMask, Collection<String> secRoleIds) {
 		final BasicDBObject query = new BasicDBObject("securityRoleIds", new BasicDBObject("$in", secRoleIds));
 		augmentQueryForStatusMask(query, statusMask);
+		log.debug("Find All by secRoleIds + status: {}", query);
 		return findAllByQuery(query, new CappedRequest(500)).getContent();
 	}
 

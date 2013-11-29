@@ -41,7 +41,7 @@ public class MongoPersonRepositoryTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		personRepo = new MongoPersonRepository("mongodb://127.0.0.1:27017/tuneeca_dev", true);
+		personRepo = new MongoPersonRepository("mongodb://127.0.0.1:27017/tuneeca_dev", false);
 	}
 	
 	@Test
@@ -66,6 +66,15 @@ public class MongoPersonRepositoryTest {
 		final Person person = personRepo.findOneBySlug(StatusMask.ACTIVE_ONLY, slug);
 		assertNotNull(String.format("Person by slug %s must not be null", slug),  person);
 		log.info("Got person by slug {}: {}", slug, person);
+	}
+	
+	@Test
+	public void findAllBySecRoleIdsAndStatus() {
+		final List<String> secRoleIds = ImmutableList.of("sales_admin", "sales_staff");
+		final List<Person> personList = personRepo.findAllBySecRoleIds(StatusMask.ACTIVE_ONLY, secRoleIds);
+		log.debug("People by secRoleIds {} and statusMask Active Only: {}", secRoleIds, personList);
+		assertEquals(3, personList.size());
+		
 	}
 	
 
