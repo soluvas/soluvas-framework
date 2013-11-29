@@ -1,5 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_jdcicFDrEeOyt7TWoSvGaQ" type="EcoreTools" name="jpa" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_3GmqAFikEeObdY6jdxCTLQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_3GofMFikEeObdY6jdxCTLQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_3GpGQFikEeObdY6jdxCTLQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_3GwbAFikEeObdY6jdxCTLQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//Geolocation/latitude"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_3GwbAVikEeObdY6jdxCTLQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_3GxCEFikEeObdY6jdxCTLQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//Geolocation/longitude"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_3GxCEVikEeObdY6jdxCTLQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_4kaEwFikEeObdY6jdxCTLQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//Geolocation/elevation"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4kaEwVikEeObdY6jdxCTLQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_3GpGQVikEeObdY6jdxCTLQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_3GpGQlikEeObdY6jdxCTLQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_3GpGQ1ikEeObdY6jdxCTLQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_3GptUFikEeObdY6jdxCTLQ" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_3GptUVikEeObdY6jdxCTLQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_3GptUlikEeObdY6jdxCTLQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_3GptU1ikEeObdY6jdxCTLQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_3GmqAVikEeObdY6jdxCTLQ" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="jpa.ecore#//Geolocation"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3GmqAlikEeObdY6jdxCTLQ" x="24" y="24"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_3nkCAFikEeObdY6jdxCTLQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_3nl3MFikEeObdY6jdxCTLQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_3nmeQFikEeObdY6jdxCTLQ" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_3nmeQVikEeObdY6jdxCTLQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_3nmeQlikEeObdY6jdxCTLQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_3nmeQ1ikEeObdY6jdxCTLQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_3nnFUFikEeObdY6jdxCTLQ" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_3nnFUVikEeObdY6jdxCTLQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_3nnFUlikEeObdY6jdxCTLQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_3nnFU1ikEeObdY6jdxCTLQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_3nkCAVikEeObdY6jdxCTLQ" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="jpa.ecore#//PostalAddress"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3nkCAlikEeObdY6jdxCTLQ" x="228" y="24"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_62L6IFikEeObdY6jdxCTLQ" type="1004">
+    <children xmi:type="notation:Node" xmi:id="_62NIQFikEeObdY6jdxCTLQ" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_62NIQVikEeObdY6jdxCTLQ" type="4009"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_62MhMFikEeObdY6jdxCTLQ" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EDataType" href="jpa.ecore#//DateTime"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_62MhMVikEeObdY6jdxCTLQ" x="504" y="24"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_jdcicVDrEeOyt7TWoSvGaQ"/>
   <element xmi:type="ecore:EPackage" href="jpa.ecore#/"/>
 </notation:Diagram>
