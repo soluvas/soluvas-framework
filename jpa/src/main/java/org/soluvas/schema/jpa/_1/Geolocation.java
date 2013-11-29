@@ -18,7 +18,7 @@ public class Geolocation {
 	 * @generated
 	 */
 	@Basic()
-	private float latitude = 0.0f;
+	private Float latitude = 0.0f;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -26,7 +26,7 @@ public class Geolocation {
 	 * @generated
 	 */
 	@Basic()
-	private float longitude = 0.0f;
+	private Float longitude = 0.0f;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -34,7 +34,7 @@ public class Geolocation {
 	 * @generated
 	 */
 	@Basic()
-	private float elevation = 0.0f;
+	private Float elevation = 0.0f;
 
 	/**
 	 * Returns the value of '<em><b>latitude</b></em>' feature.
@@ -44,7 +44,7 @@ public class Geolocation {
 	 * @return the value of '<em><b>latitude</b></em>' feature
 	 * @generated
 	 */
-	public float getLatitude() {
+	public Float getLatitude() {
 		return latitude;
 	}
 
@@ -58,7 +58,7 @@ public class Geolocation {
 	 *            latitude}' feature.
 	 * @generated
 	 */
-	public void setLatitude(float newLatitude) {
+	public void setLatitude(Float newLatitude) {
 		latitude = newLatitude;
 	}
 
@@ -70,7 +70,7 @@ public class Geolocation {
 	 * @return the value of '<em><b>longitude</b></em>' feature
 	 * @generated
 	 */
-	public float getLongitude() {
+	public Float getLongitude() {
 		return longitude;
 	}
 
@@ -84,7 +84,7 @@ public class Geolocation {
 	 *            longitude}' feature.
 	 * @generated
 	 */
-	public void setLongitude(float newLongitude) {
+	public void setLongitude(Float newLongitude) {
 		longitude = newLongitude;
 	}
 
@@ -96,7 +96,7 @@ public class Geolocation {
 	 * @return the value of '<em><b>elevation</b></em>' feature
 	 * @generated
 	 */
-	public float getElevation() {
+	public Float getElevation() {
 		return elevation;
 	}
 
@@ -110,7 +110,7 @@ public class Geolocation {
 	 *            elevation}' feature.
 	 * @generated
 	 */
-	public void setElevation(float newElevation) {
+	public void setElevation(Float newElevation) {
 		elevation = newElevation;
 	}
 
