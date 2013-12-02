@@ -399,7 +399,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	@Override @Transactional(readOnly=true)
 	public Map<ID, Existence<ID>> existsAllById(StatusMask statusMask,
 			Collection<ID> ids) {
-		final TypedQuery<ID> query = (TypedQuery) em.createQuery("SELECT e.id FROM " + entityClass.getName() + " e WHERE e.id IN :ids", Object.class);
+		final TypedQuery<ID> query = (TypedQuery) em.createQuery("SELECT e.id FROM " + entityClass.getName() + " e WHERE e.id IN :ids", Serializable.class);
 		query.setParameter("ids", ids);
 		final Set<ID> existingIds = ImmutableSet.copyOf(query.getResultList());
 		final ImmutableMap.Builder<ID, Existence<ID>> existsb = ImmutableMap.builder();
@@ -422,6 +422,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	 * @return
 	 * @throws EntityLookupException
 	 */
+	@Override
 	@Transactional(readOnly=true)
 	public <S extends T> S lookupOneById(StatusMask statusMask, @Nullable ID id) throws EntityLookupException {
 		final Try<S> lookup = Preconditions.checkNotNull(this.<S>lookupAllById(statusMask, ImmutableSet.of(id)).get(id),
@@ -436,6 +437,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	 * @param keys
 	 * @return
 	 */
+	@Override
 	@Transactional(readOnly=true)
 	public <S extends T> Map<ID, Try<S>> lookupAllById(StatusMask statusMask, Collection<ID> ids) {
 		final TypedQuery<S> query = (TypedQuery<S>) em.createQuery("SELECT e FROM " + entityClass.getName() + " e WHERE e.id IN :ids", entityClass);
