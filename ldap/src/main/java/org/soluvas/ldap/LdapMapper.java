@@ -5,7 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -23,6 +22,7 @@ import org.apache.directory.api.ldap.model.message.ModifyRequest;
 import org.apache.directory.api.ldap.model.message.ModifyRequestImpl;
 import org.apache.directory.api.ldap.model.name.Rdn;
 import org.apache.directory.api.util.GeneralizedTime;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -117,7 +117,7 @@ public class LdapMapper<T> {
 	public LdapMapping getMapping(final Class<?> clazz) {
 		try {
 			return mappings.get(clazz);
-		} catch (ExecutionException e) {
+		} catch (Exception e) {
 			throw new LdapMappingException(e, "Cannot get LDAP mapping for %s", clazz.getName());
 		}
 	}
@@ -152,7 +152,7 @@ public class LdapMapper<T> {
 			while (currentClass != null) {
 				mapFromProperties(obj, baseDn, currentClass, entry);
 				currentClass = currentClass.getSuperclass();
-				if (currentClass == Object.class)
+				if (currentClass == Object.class || currentClass == EObjectImpl.class) // stop when we find the "root" superclass
 					break;
 			}
 			
