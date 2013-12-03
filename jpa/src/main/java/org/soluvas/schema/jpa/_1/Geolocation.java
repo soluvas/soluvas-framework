@@ -1,6 +1,7 @@
 package org.soluvas.schema.jpa._1;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 
@@ -22,19 +23,19 @@ public class Geolocation implements Serializable {
 	 * 
 	 */
 	@Basic()
-	private Float latitude = null;
+	private Double latitude = null;
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 */
 	@Basic()
-	private Float longitude = null;
+	private Double longitude = null;
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 */
 	@Basic()
-	private Float elevation = null;
+	private Double elevation = null;
 
 	/**
 	 * Returns the value of '<em><b>latitude</b></em>' feature.
@@ -44,7 +45,7 @@ public class Geolocation implements Serializable {
 	 * @return the value of '<em><b>latitude</b></em>' feature
 	 * @generated
 	 */
-	public Float getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
@@ -58,7 +59,7 @@ public class Geolocation implements Serializable {
 	 *            latitude}' feature.
 	 * @generated
 	 */
-	public void setLatitude(Float newLatitude) {
+	public void setLatitude(Double newLatitude) {
 		latitude = newLatitude;
 	}
 
@@ -70,7 +71,7 @@ public class Geolocation implements Serializable {
 	 * @return the value of '<em><b>longitude</b></em>' feature
 	 * @generated
 	 */
-	public Float getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
@@ -84,7 +85,7 @@ public class Geolocation implements Serializable {
 	 *            longitude}' feature.
 	 * @generated
 	 */
-	public void setLongitude(Float newLongitude) {
+	public void setLongitude(Double newLongitude) {
 		longitude = newLongitude;
 	}
 
@@ -96,7 +97,7 @@ public class Geolocation implements Serializable {
 	 * @return the value of '<em><b>elevation</b></em>' feature
 	 * @generated
 	 */
-	public Float getElevation() {
+	public Double getElevation() {
 		return elevation;
 	}
 
@@ -110,7 +111,7 @@ public class Geolocation implements Serializable {
 	 *            elevation}' feature.
 	 * @generated
 	 */
-	public void setElevation(Float newElevation) {
+	public void setElevation(Double newElevation) {
 		elevation = newElevation;
 	}
 

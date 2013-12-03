@@ -480,13 +480,13 @@ public class JpaModelFactory implements ModelFactory {
 			final int featureID = eClass().getFeatureID(eStructuralFeature);
 			switch (featureID) {
 			case JpaModelPackage.GEOLOCATION_LATITUDE_FEATURE_ID:
-				getTarget().setLatitude((Float) value);
+				getTarget().setLatitude((Double) value);
 				return;
 			case JpaModelPackage.GEOLOCATION_LONGITUDE_FEATURE_ID:
-				getTarget().setLongitude((Float) value);
+				getTarget().setLongitude((Double) value);
 				return;
 			case JpaModelPackage.GEOLOCATION_ELEVATION_FEATURE_ID:
-				getTarget().setElevation((Float) value);
+				getTarget().setElevation((Double) value);
 				return;
 			default:
 				super.eSet(eStructuralFeature, value);
