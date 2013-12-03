@@ -22,6 +22,7 @@ import org.apache.directory.api.ldap.model.message.ModifyRequest;
 import org.apache.directory.api.ldap.model.message.ModifyRequestImpl;
 import org.apache.directory.api.ldap.model.name.Rdn;
 import org.apache.directory.api.util.GeneralizedTime;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -157,7 +158,7 @@ public class LdapMapper<T> {
 			while (currentClass != null) {
 				mapFromProperties(obj, baseDn, currentClass, entry);
 				currentClass = currentClass.getSuperclass();
-				if (currentClass == Object.class)
+				if (currentClass == Object.class || currentClass == EObjectImpl.class) // stop when we find the "root" superclass
 					break;
 			}
 			
