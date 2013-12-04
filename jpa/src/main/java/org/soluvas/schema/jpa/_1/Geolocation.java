@@ -1,7 +1,6 @@
 package org.soluvas.schema.jpa._1;
 
 import java.io.Serializable;
-
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 

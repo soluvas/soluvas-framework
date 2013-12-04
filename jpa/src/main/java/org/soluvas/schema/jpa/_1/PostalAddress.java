@@ -1,15 +1,15 @@
 package org.soluvas.schema.jpa._1;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
 import javax.persistence.Basic;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
+
 import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -122,7 +122,7 @@ public class PostalAddress implements Serializable {
 	 */
 	@ElementCollection()
 	@CollectionTable()
-	private List<String> mobiles = new ArrayList<String>();
+	private Set<String> mobiles = new HashSet<String>();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -143,7 +143,7 @@ public class PostalAddress implements Serializable {
 	 */
 	@ElementCollection()
 	@CollectionTable()
-	private List<String> phones = new ArrayList<String>();
+	private Set<String> phones = new HashSet<String>();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -180,7 +180,7 @@ public class PostalAddress implements Serializable {
 	 */
 	@ElementCollection()
 	@CollectionTable()
-	private List<String> workPhones = new ArrayList<String>();
+	private Set<String> workPhones = new HashSet<String>();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -492,7 +492,7 @@ public class PostalAddress implements Serializable {
 	 * @return the value of '<em><b>mobiles</b></em>' feature
 	 * @generated
 	 */
-	public List<String> getMobiles() {
+	public Set<String> getMobiles() {
 		return mobiles;
 	}
 
@@ -508,7 +508,7 @@ public class PostalAddress implements Serializable {
 	 *            mobiles}' feature.
 	 * @generated
 	 */
-	public void setMobiles(List<String> newMobiles) {
+	public void setMobiles(Set<String> newMobiles) {
 		mobiles = newMobiles;
 	}
 
@@ -555,7 +555,7 @@ public class PostalAddress implements Serializable {
 	 * @return the value of '<em><b>phones</b></em>' feature
 	 * @generated
 	 */
-	public List<String> getPhones() {
+	public Set<String> getPhones() {
 		return phones;
 	}
 
@@ -569,7 +569,7 @@ public class PostalAddress implements Serializable {
 	 *            ' feature.
 	 * @generated
 	 */
-	public void setPhones(List<String> newPhones) {
+	public void setPhones(Set<String> newPhones) {
 		phones = newPhones;
 	}
 
@@ -669,7 +669,7 @@ public class PostalAddress implements Serializable {
 	 * @return the value of '<em><b>workPhones</b></em>' feature
 	 * @generated
 	 */
-	public List<String> getWorkPhones() {
+	public Set<String> getWorkPhones() {
 		return workPhones;
 	}
 
@@ -685,7 +685,7 @@ public class PostalAddress implements Serializable {
 	 *            workPhones}' feature.
 	 * @generated
 	 */
-	public void setWorkPhones(List<String> newWorkPhones) {
+	public void setWorkPhones(Set<String> newWorkPhones) {
 		workPhones = newWorkPhones;
 	}
 

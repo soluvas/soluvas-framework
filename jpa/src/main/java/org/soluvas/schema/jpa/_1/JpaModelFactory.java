@@ -1,6 +1,5 @@
 package org.soluvas.schema.jpa._1;
 
-import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -323,13 +322,13 @@ public class JpaModelFactory implements ModelFactory {
 				getTarget().setPrimaryMobile((String) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_MOBILES_FEATURE_ID:
-				getTarget().setMobiles((List<String>) value);
+				getTarget().setMobiles((Set<String>) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_PRIMARYPHONE_FEATURE_ID:
 				getTarget().setPrimaryPhone((String) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_PHONES_FEATURE_ID:
-				getTarget().setPhones((List<String>) value);
+				getTarget().setPhones((Set<String>) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_PRIMARYHOMEPHONE_FEATURE_ID:
 				getTarget().setPrimaryHomePhone((String) value);
@@ -341,7 +340,7 @@ public class JpaModelFactory implements ModelFactory {
 				getTarget().setPrimaryWorkPhone((String) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_WORKPHONES_FEATURE_ID:
-				getTarget().setWorkPhones((List<String>) value);
+				getTarget().setWorkPhones((Set<String>) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_PRIMARYEMAIL_FEATURE_ID:
 				getTarget().setPrimaryEmail((String) value);

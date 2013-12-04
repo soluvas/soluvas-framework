@@ -43,7 +43,7 @@
       </annotatedEStructuralFeatures>
       <annotatedEStructuralFeatures xsi:type="annotationsmodel:AnnotatedEAttribute">
         <eAttribute href="jpa.ecore#//PostalAddress/mobiles"/>
-        <eAttributeAnnotations xsi:type="modelannotations:EAttributeModelGenAnnotation" documentation="RFC1274: mobile telephone number&#xA;LDAP: mobile, mobileTelephoneNumber" name="mobiles" getter="getMobiles" defaultValue="new java.util.ArrayList&lt;java.lang.String>()" setter="setMobiles" validJavaMemberName="mobiles" useList="true" ownerEClassAnnotation="//@annotatedEPackages.0/@annotatedEClassifiers.0/@eClassAnnotations.0"/>
+        <eAttributeAnnotations xsi:type="modelannotations:EAttributeModelGenAnnotation" documentation="RFC1274: mobile telephone number&#xA;LDAP: mobile, mobileTelephoneNumber" name="mobiles" getter="getMobiles" defaultValue="new java.util.ArrayList&lt;java.lang.String>()" setter="setMobiles" validJavaMemberName="mobiles" useList="false" ownerEClassAnnotation="//@annotatedEPackages.0/@annotatedEClassifiers.0/@eClassAnnotations.0"/>
       </annotatedEStructuralFeatures>
       <annotatedEStructuralFeatures xsi:type="annotationsmodel:AnnotatedEAttribute">
         <eAttribute href="jpa.ecore#//PostalAddress/primaryPhone"/>
@@ -51,7 +51,7 @@
       </annotatedEStructuralFeatures>
       <annotatedEStructuralFeatures xsi:type="annotationsmodel:AnnotatedEAttribute">
         <eAttribute href="jpa.ecore#//PostalAddress/phones"/>
-        <eAttributeAnnotations xsi:type="modelannotations:EAttributeModelGenAnnotation" name="phones" getter="getPhones" defaultValue="new java.util.ArrayList&lt;java.lang.String>()" setter="setPhones" validJavaMemberName="phones" useList="true" ownerEClassAnnotation="//@annotatedEPackages.0/@annotatedEClassifiers.0/@eClassAnnotations.0"/>
+        <eAttributeAnnotations xsi:type="modelannotations:EAttributeModelGenAnnotation" name="phones" getter="getPhones" defaultValue="new java.util.ArrayList&lt;java.lang.String>()" setter="setPhones" validJavaMemberName="phones" useList="false" ownerEClassAnnotation="//@annotatedEPackages.0/@annotatedEClassifiers.0/@eClassAnnotations.0"/>
       </annotatedEStructuralFeatures>
       <annotatedEStructuralFeatures xsi:type="annotationsmodel:AnnotatedEAttribute">
         <eAttribute href="jpa.ecore#//PostalAddress/primaryHomePhone"/>
@@ -67,7 +67,7 @@
       </annotatedEStructuralFeatures>
       <annotatedEStructuralFeatures xsi:type="annotationsmodel:AnnotatedEAttribute">
         <eAttribute href="jpa.ecore#//PostalAddress/workPhones"/>
-        <eAttributeAnnotations xsi:type="modelannotations:EAttributeModelGenAnnotation" documentation="RFC2256: Telephone Number.&#xA;LDAP: (not yet mapped)" name="workPhones" getter="getWorkPhones" defaultValue="new java.util.ArrayList&lt;java.lang.String>()" setter="setWorkPhones" validJavaMemberName="workPhones" useList="true" ownerEClassAnnotation="//@annotatedEPackages.0/@annotatedEClassifiers.0/@eClassAnnotations.0"/>
+        <eAttributeAnnotations xsi:type="modelannotations:EAttributeModelGenAnnotation" documentation="RFC2256: Telephone Number.&#xA;LDAP: (not yet mapped)" name="workPhones" getter="getWorkPhones" defaultValue="new java.util.ArrayList&lt;java.lang.String>()" setter="setWorkPhones" validJavaMemberName="workPhones" useList="false" ownerEClassAnnotation="//@annotatedEPackages.0/@annotatedEClassifiers.0/@eClassAnnotations.0"/>
       </annotatedEStructuralFeatures>
       <annotatedEStructuralFeatures xsi:type="annotationsmodel:AnnotatedEAttribute">
         <eAttribute href="jpa.ecore#//PostalAddress/primaryEmail"/>
