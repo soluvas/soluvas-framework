@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.ClientConnectionManager;
 import org.ektorp.ComplexKey;
 import org.ektorp.ViewQuery;
@@ -28,6 +29,7 @@ import org.soluvas.data.StatusMask;
 import org.soluvas.data.TrashResult;
 import org.soluvas.data.UntrashResult;
 import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.person.PersonRepository;
 import org.soluvas.data.push.RepositoryException;
@@ -40,6 +42,7 @@ import scala.util.Try;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
@@ -96,6 +99,17 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		       + "}); "
 		       + "} }"));
 		addStatusMaskDesignView(design, "canonicalSlug", "slug");
+		// TODO: View 'searchText' doesn't support accountStatus
+		design.addView("searchText", new View(
+				 "function(doc) { if (doc.type == 'Person' ) { "
+			   + "emit(doc.uid, null);"
+			   + "emit(doc.name, null);"
+			   + "emit(doc.slug, null);"
+			   + "emit(doc.canonicalSlug, null);"
+		       + "doc.emails.forEach(function(e) { "
+		       + "emit(e.email, null); "
+		       + "}); "
+		       + "} }"));
 	}
 	
 	/* (non-Javadoc)
@@ -386,15 +400,65 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
+	/**
+	 * @param statusMask
+	 * @param searchText
+	 * @param pageable
+	 * @return
+	 * @todo View 'searchText' doesn't support accountStatus
+	 */
 	@Override
 	public Page<Person> findBySearchText(StatusMask statusMask,
-			String searchText, Pageable pageable) {
-		throw new UnsupportedOperationException("to be implemented");
+			final String searchText, Pageable pageable) {
+		final ViewQuery viewQuery = new ViewQuery().designDocId(getDesignDocId()).viewName("searchText").includeDocs(false);
+		final ViewResult viewResult = dbConn.queryView(viewQuery);
+		final Set<String> matchingGuids = FluentIterable.from(viewResult)
+				.filter(new Predicate<Row>() {
+					@Override
+					public boolean apply(@Nullable Row input) {
+						final String key = input.getKey();
+						return StringUtils.containsIgnoreCase(key, searchText);
+					}
+				})
+				.transform(new Function<Row, String>() {
+					@Override @Nullable
+					public String apply(@Nullable Row input) {
+						return input.getId();
+					}
+				}).toSet();
+		
+		final Set<String> limitedGuids = FluentIterable.from(matchingGuids).skip((int) pageable.getOffset()).limit((int) pageable.getPageSize()).toSet();
+		log.debug("Find {} by searchText '{}' returned {} matches out of {}, paging by {} offset {} contains {} entities: {}",
+				entityClass.getSimpleName(), searchText, matchingGuids.size(), viewResult.getSize(), pageable.getPageSize(), pageable.getOffset(),
+				limitedGuids.size(), limitedGuids);
+		final ViewQuery guidsViewQuery = new ViewQuery().allDocs().keys(limitedGuids).includeDocs(true);
+		final List<Person> limiteds = (List) dbConn.queryView(guidsViewQuery, implClass);
+		
+		return new PageImpl<>(limiteds, pageable, matchingGuids.size());
 	}
 
 	@Override
-	public long countBySearchText(StatusMask statusMask, String searchText) {
-		throw new UnsupportedOperationException("to be implemented");
+	public long countBySearchText(StatusMask statusMask, final String searchText) {
+		final ViewQuery viewQuery = new ViewQuery().designDocId(getDesignDocId()).viewName("searchText").includeDocs(false);
+		final ViewResult viewResult = dbConn.queryView(viewQuery);
+		final Set<String> matchingGuids = FluentIterable.from(viewResult)
+				.filter(new Predicate<Row>() {
+					@Override
+					public boolean apply(@Nullable Row input) {
+						final String key = input.getKey();
+						return StringUtils.containsIgnoreCase(key, searchText);
+					}
+				})
+				.transform(new Function<Row, String>() {
+					@Override @Nullable
+					public String apply(@Nullable Row input) {
+						return input.getId();
+					}
+				}).toSet();
+		
+		log.debug("Count {} by searchText '{}' returned {} matches out of {}",
+				entityClass.getSimpleName(), searchText, matchingGuids.size(), viewResult.getSize());
+		return matchingGuids.size();
 	}
 
 	@Override
@@ -410,56 +474,48 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 
 	@Override
 	public List<Person> findAll(StatusMask statusMask, Collection<String> ids) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
 	public List<Person> findAllBySecRoleIds(StatusMask statusMask,
 			Collection<String> secRoleIds) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
 	public boolean hasMatchWithSecRoleIds(String personId, Collection<String> secRoleIds) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
 	public List<Person> findAllCustomerRoleIds(StatusMask statusMask,
 			Collection<String> customerRoleIds) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
 	public Page<Person> findBySearchText(
-			Collection<AccountStatus> accountStatuses, String searchText,
+			Collection<AccountStatus> accountStatuses, final String searchText,
 			Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
 	public Page<Person> findAll(Collection<AccountStatus> accountStatuses,
 			Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
 	public long countBySearchText(Collection<AccountStatus> accountStatus,
 			String searchText) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
 	public long countByStatuses(Collection<AccountStatus> accountStatuses) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("to be implemented");
 	}
 
 }

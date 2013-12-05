@@ -402,6 +402,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	 * @param design
 	 * @param targetProperty
 	 * @return
+	 * @see #addStatusMaskDesignView(DesignDocument, String, String, Set, Set, Set, Set, String, String)
 	 */
 	protected DesignDocument.View addStatusMaskDesignView(DesignDocument design, String targetProperty) {
 		if (statusProperty != null) {
