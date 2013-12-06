@@ -31,6 +31,7 @@ import org.soluvas.data.UntrashResult;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.data.person.PersonRepository;
 import org.soluvas.data.push.RepositoryException;
 import org.soluvas.json.JsonUtils;
@@ -472,9 +473,13 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
+	/**
+	 * @todo statusMask not yet supported
+	 * @see org.soluvas.data.person.PersonRepository#findAll(org.soluvas.data.StatusMask, java.util.Collection)
+	 */
 	@Override
 	public List<Person> findAll(StatusMask statusMask, Collection<String> ids) {
-		throw new UnsupportedOperationException("to be implemented");
+		return findAll(ids, new Sort("name"));
 	}
 
 	@Override
