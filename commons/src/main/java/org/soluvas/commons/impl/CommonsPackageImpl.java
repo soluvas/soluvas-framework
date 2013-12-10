@@ -11,12 +11,10 @@ import java.util.NavigableMap;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Set;
-
 import javax.measure.Measurable;
 import javax.measure.quantity.Quantity;
 import javax.measure.quantity.Temperature;
 import javax.measure.unit.Unit;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -33,6 +31,7 @@ import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Added;
@@ -106,7 +105,6 @@ import org.soluvas.commons.TranslationState;
 import org.soluvas.commons.TwitterAccessible;
 import org.soluvas.commons.TwitterIdentity;
 import org.soluvas.commons.WebAddress;
-
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 import com.google.common.eventbus.EventBus;
@@ -819,6 +817,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EDataType temperatureEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType localTimeEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -3706,6 +3711,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getLocalTime() {
+		return localTimeEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
@@ -4088,6 +4102,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		noSuchElementExceptionEDataType = createEDataType(NO_SUCH_ELEMENT_EXCEPTION);
 		dequeEDataType = createEDataType(DEQUE);
 		temperatureEDataType = createEDataType(TEMPERATURE);
+		localTimeEDataType = createEDataType(LOCAL_TIME);
 	}
 
 	/**
@@ -4773,6 +4788,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(noSuchElementExceptionEDataType, NoSuchElementException.class, "NoSuchElementException", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(dequeEDataType, Deque.class, "Deque", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(temperatureEDataType, Temperature.class, "Temperature", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(localTimeEDataType, LocalTime.class, "LocalTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

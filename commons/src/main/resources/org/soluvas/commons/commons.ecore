@@ -1402,4 +1402,5 @@
     </eLiterals>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Temperature" instanceClassName="javax.measure.quantity.Temperature"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="LocalTime" instanceClassName="org.joda.time.LocalTime"/>
 </ecore:EPackage>

@@ -5112,6 +5112,17 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Local Time</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.joda.time.LocalTime
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocalTime()
+	 * @generated
+	 */
+	int LOCAL_TIME = 100;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8276,6 +8287,17 @@ public interface CommonsPackage extends EPackage {
 	EDataType getTemperature();
 
 	/**
+	 * Returns the meta object for data type '{@link org.joda.time.LocalTime <em>Local Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Local Time</em>'.
+	 * @see org.joda.time.LocalTime
+	 * @model instanceClass="org.joda.time.LocalTime"
+	 * @generated
+	 */
+	EDataType getLocalTime();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10864,6 +10886,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType TEMPERATURE = eINSTANCE.getTemperature();
+
+		/**
+		 * The meta object literal for the '<em>Local Time</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.joda.time.LocalTime
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocalTime()
+		 * @generated
+		 */
+		EDataType LOCAL_TIME = eINSTANCE.getLocalTime();
 
 	}
 

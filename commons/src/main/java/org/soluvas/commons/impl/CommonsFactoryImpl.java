@@ -14,12 +14,10 @@ import java.util.NavigableMap;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Set;
-
 import javax.measure.Measurable;
 import javax.measure.quantity.Quantity;
 import javax.measure.quantity.Temperature;
 import javax.measure.unit.Unit;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -31,45 +29,8 @@ import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.soluvas.commons.*;
-import org.soluvas.commons.AccountStatus;
-import org.soluvas.commons.Added;
-import org.soluvas.commons.AddedMany;
-import org.soluvas.commons.AppManifest;
-import org.soluvas.commons.ArchivalStatus;
-import org.soluvas.commons.AttributeNotification;
-import org.soluvas.commons.AttributeSet;
-import org.soluvas.commons.AttributeUnset;
-import org.soluvas.commons.CategoryInfo;
-import org.soluvas.commons.CommonsFactory;
-import org.soluvas.commons.CommonsPackage;
-import org.soluvas.commons.EClassStatus;
-import org.soluvas.commons.Email;
-import org.soluvas.commons.EventBusProgressMonitor;
-import org.soluvas.commons.ExpansionState;
-import org.soluvas.commons.FacebookAccessible;
-import org.soluvas.commons.FacebookIdentity;
-import org.soluvas.commons.Gender;
-import org.soluvas.commons.JavaClassStatus;
-import org.soluvas.commons.Person;
-import org.soluvas.commons.PersonCatalog;
-import org.soluvas.commons.PersonInfo;
-import org.soluvas.commons.PhoneNumber;
-import org.soluvas.commons.PostalAddress;
-import org.soluvas.commons.ProgressMonitorWrapper;
-import org.soluvas.commons.ProgressStatus;
-import org.soluvas.commons.PublicationStatus;
-import org.soluvas.commons.Removed;
-import org.soluvas.commons.RemovedMany;
-import org.soluvas.commons.ResourceType;
-import org.soluvas.commons.ShellProgressMonitor;
-import org.soluvas.commons.SignupSourceType;
-import org.soluvas.commons.TenantSource;
-import org.soluvas.commons.Translation;
-import org.soluvas.commons.TranslationManager;
-import org.soluvas.commons.TranslationState;
-import org.soluvas.commons.WebAddress;
-
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 
@@ -225,6 +186,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createDequeFromString(eDataType, initialValue);
 			case CommonsPackage.TEMPERATURE:
 				return createTemperatureFromString(eDataType, initialValue);
+			case CommonsPackage.LOCAL_TIME:
+				return createLocalTimeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -308,6 +271,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertDequeToString(eDataType, instanceValue);
 			case CommonsPackage.TEMPERATURE:
 				return convertTemperatureToString(eDataType, instanceValue);
+			case CommonsPackage.LOCAL_TIME:
+				return convertLocalTimeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -1259,6 +1224,24 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertTemperatureToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LocalTime createLocalTimeFromString(EDataType eDataType, String initialValue) {
+		return (LocalTime)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertLocalTimeToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
