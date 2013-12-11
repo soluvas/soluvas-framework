@@ -1230,10 +1230,9 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public LocalTime createLocalTimeFromString(EDataType eDataType, String initialValue) {
-		return (LocalTime)super.createFromString(eDataType, initialValue);
+		return initialValue != null ? new LocalTime(initialValue) : null;
 	}
 
 	/**
