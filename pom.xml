@@ -32,6 +32,7 @@
 		<module>newsletter</module>
 		<module>story</module>
 		<module>rules</module>
+		<module>geo</module>
 	</modules>
 
 	<scm>
@@ -185,6 +186,11 @@
 			<dependency>
 				<groupId>org.soluvas</groupId>
 				<artifactId>org.soluvas.rules</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.soluvas</groupId>
+				<artifactId>org.soluvas.geo</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
