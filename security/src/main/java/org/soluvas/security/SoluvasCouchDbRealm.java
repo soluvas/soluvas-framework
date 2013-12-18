@@ -202,7 +202,9 @@ public class SoluvasCouchDbRealm extends AuthorizingRealm {
 		try {
 			final String host = token instanceof HostAuthenticationToken ? ((HostAuthenticationToken) token).getHost() : null;
 			if (!getName().equals(host)) {
-				throw new UnknownAccountException("Host mismatch, expected '" + getName() + "', token requests '" + host + "'");
+				throw new UnknownAccountException("Host mismatch, expected '" + getName() + "', token requests '" + host + "'."
+						+ " If you use multiple realms, one realm should match the host while others mismatch."
+						+ " If all mismatch, you have a misconfiguration.");
 			}
 			
 			if (token instanceof UsernamePasswordToken) {
