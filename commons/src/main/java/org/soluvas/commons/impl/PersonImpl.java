@@ -54,6 +54,7 @@ import org.soluvas.commons.mongo.DateTimeConverter;
 import org.soluvas.commons.mongo.LocalDateConverter;
 import org.soluvas.commons.mongo.UnitConverter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -1774,7 +1775,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		return addresses;
 	}
 	
-	@Override
+	@Override @JsonIgnore
 	public PostalAddress getPrimaryAddress() {
 		if (getAddresses() != null && !getAddresses().isEmpty()) {
 			final Optional<PostalAddress> primaryAddress = Iterables.tryFind(getAddresses(), new Predicate<PostalAddress>() {
@@ -1793,7 +1794,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		}
 	}
 	
-	@Override
+	@Override @JsonIgnore
 	public PostalAddress getPrimaryShippingAddress() {
 		if (getAddresses() != null && !getAddresses().isEmpty()) {
 			final Optional<PostalAddress> primaryShippingAddress = Iterables.tryFind(getAddresses(), new Predicate<PostalAddress>() {
@@ -1822,7 +1823,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		}
 	}
 	
-	@Override
+	@Override @JsonIgnore
 	public PostalAddress getPrimaryBillingAddress() {
 		if (getAddresses() != null && !getAddresses().isEmpty()) {
 			final Optional<PostalAddress> primaryBillingAddress = Iterables.tryFind(getAddresses(), new Predicate<PostalAddress>() {
@@ -2996,6 +2997,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getVerifyCode() {
 		return verifyCode;
 	}
@@ -3005,6 +3007,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVerifyCode(String newVerifyCode) {
 		String oldVerifyCode = verifyCode;
 		verifyCode = newVerifyCode;
