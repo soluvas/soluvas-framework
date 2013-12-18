@@ -55,7 +55,6 @@ import org.soluvas.commons.mongo.LocalDateConverter;
 import org.soluvas.commons.mongo.UnitConverter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -150,7 +149,6 @@ import com.google.common.collect.Iterables;
 @Entity(noClassnameStored=true)
 @Converters({BigDecimalConverter.class, DateTimeConverter.class,
 	CurrencyUnitConverter.class, UnitConverter.class, LocalDateConverter.class})
-@JsonIgnoreProperties({"email", "mobileNumber", "imageId"})
 public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -1718,6 +1716,12 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		}
 	}
 
+	@JsonIgnore
+	private void setPhoneNumber(String phoneNumber) {
+		// serialization only, no deserialization
+		throw new UnsupportedOperationException();
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1744,8 +1748,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		return mobileNumbers;
 	}
 	
-	@Override
-	@JsonProperty
+	@Override @JsonProperty
 	public String getMobileNumber() {
 		final Optional<PhoneNumber> primaryMobile = Iterables.tryFind(getMobileNumbers(), new Predicate<PhoneNumber>() {
 			@Override
@@ -1760,6 +1763,12 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		} else {
 			return null;
 		}
+	}
+
+	@JsonIgnore
+	private void setMobileNumber(String mobileNumber) {
+		// serialization only, no deserialization
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -3117,8 +3126,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@Override
-	@JsonProperty
+	@Override @JsonProperty
 	public String getEmail() {
 		final Optional<Email> primaryEmail = Iterables.tryFind(getEmails(), new Predicate<Email>() {
 			@Override
@@ -3135,13 +3143,25 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		}
 	}
 	
+	@JsonIgnore
+	private void setEmail(String email) {
+		// serialization only, no deserialization
+		throw new UnsupportedOperationException();
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@Override
+	@Override @JsonProperty
 	public String getImageId() {
 		return photoId;
+	}
+	
+	@JsonIgnore
+	private void setImageId(String imageId) {
+		// serialization only, no deserialization
+		throw new UnsupportedOperationException();
 	}
 
 	/**
