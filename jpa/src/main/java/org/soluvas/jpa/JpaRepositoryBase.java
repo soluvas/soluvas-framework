@@ -386,7 +386,34 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 
 	@Override @Transactional(readOnly=true)
 	public Page<ID> findAllIds(Pageable pageable) {
-		throw new UnsupportedOperationException();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+		
+		final long totalRowCount = count();
+		
+		// SELECT * FROM entityClass WHERE ... ORDER BY ... LIMIT x, y
+		// FROM
+		final CriteriaQuery<T> cq = cb.createQuery(entityClass);
+		final Root<T> root = cq.from(entityClass);
+		cq.select(root);
+		// ORDER BY
+		final List<javax.persistence.criteria.Order> jpaOrders = FluentIterable
+				.from(Optional.<Iterable<Sort.Order>>fromNullable(pageable.getSort()).or(ImmutableList.<Sort.Order>of()))
+				.transform(new Function<Order, javax.persistence.criteria.Order>() {
+			@Override
+			@Nullable
+			public javax.persistence.criteria.Order apply(@Nullable Order input) {
+				return input.getDirection() == Direction.ASC ? cb.asc(root.get(input.getProperty())) : cb.desc(root.get(input.getProperty()));
+			}
+		}).toList();
+		cq.orderBy(jpaOrders);
+		
+		final TypedQuery<T> typedQuery = em.createQuery(cq)
+			.setFirstResult((int) pageable.getOffset()).setMaxResults((int) pageable.getPageSize());
+		final List<T> pageContent = typedQuery.getResultList();
+		final ImmutableList<ID> ids = FluentIterable.from(pageContent).transform(new IdFunction()).toList();
+		
+		return new PageImpl<>(ids, pageable, totalRowCount);
+		
 	}
 
 	@Override @Transactional(readOnly=true)
