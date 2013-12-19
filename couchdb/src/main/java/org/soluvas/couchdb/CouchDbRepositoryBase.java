@@ -204,11 +204,11 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 			design = dbConn.get(DesignDocument.class, getDesignDocId());
 		} catch (DocumentNotFoundException e) {
 			design = new DesignDocument(getDesignDocId());
-			log.info("Creating new design document {}", design.getId());
+			log.info("Creating new design document '{}'", design.getId());
 			dbConn.create(design);
 		}
 		updateDesignDocument(design);
-		log.info("Updating design document {} with {} views: {}", 
+		log.info("Updating design document '{}' with {} views: {}", 
 				design.getId(), design.getViews().size(), design.getViews().keySet());
 		dbConn.update(design);
 //		final List<String> ensuredIndexes = new ArrayList<>();
