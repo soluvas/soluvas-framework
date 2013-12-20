@@ -282,6 +282,8 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	public <S extends Person, K extends Serializable> Map<K, Try<S>> lookupAll(
 			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
 		switch (lookupKey) {
+		case ID:
+			return lookupAllByIds(statusMask, (Collection) keys);
 		case SLUG: {
 			// filter by statusMask in Java, so we can give proper reason
 			final List<ComplexKey> viewKeys = ImmutableList.copyOf(Collections2.transform(keys, 
