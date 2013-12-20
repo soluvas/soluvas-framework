@@ -156,6 +156,22 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	protected Set<E> inactiveStatuses;
 	protected Set<E> draftStatuses;
 	protected Set<E> voidStatuses;
+	/**
+	 * Regex useful for design view, contains {@link #activeStatuses}.
+	 */
+	protected String activeOnlyRegex;
+	/**
+	 * Regex useful for design view, contains {@link #activeStatuses} union {@link #inactiveStatuses}.
+	 */
+	protected String includeInactiveRegex;
+	/**
+	 * Regex useful for design view, contains {@link #draftStatuses}.
+	 */
+	protected String draftOnlyRegex;
+	/**
+	 * Regex useful for design view, contains {@link #voidStatuses}.
+	 */
+	protected String voidOnlyRegex;
 	
 	/**
 	 * @param intfClass
@@ -233,6 +249,36 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 			String couchDbUri, String dbName, List<String> uniqueFields, Map<String, Integer> indexedFields) {
 		this(connMgr, intfClass, implClass, currentSchemaVersion, couchDbUri, dbName, uniqueFields, indexedFields, 
 				null, ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of());
+		
+		// Regex-es useful for design document views
+		activeOnlyRegex = Joiner.on('|').join(Collections2.transform(activeStatuses, 
+				new Function<E, String>() {
+			@Override @Nullable
+			public String apply(@Nullable E input) {
+				return input.name().toLowerCase();
+			}
+		}));
+		includeInactiveRegex = Joiner.on('|').join(
+				Collections2.transform(Sets.union(activeStatuses, inactiveStatuses), new Function<E, String>() {
+			@Override @Nullable
+			public String apply(@Nullable E input) {
+				return input.name().toLowerCase();
+			}
+		}));
+		draftOnlyRegex = Joiner.on('|').join(
+				Collections2.transform(draftStatuses, new Function<E, String>() {
+			@Override @Nullable
+			public String apply(@Nullable E input) {
+				return input.name().toLowerCase();
+			}
+		}));
+		voidOnlyRegex = Joiner.on('|').join(
+				Collections2.transform(voidStatuses, new Function<E, String>() {
+			@Override @Nullable
+			public String apply(@Nullable E input) {
+				return input.name().toLowerCase();
+			}
+		}));
 	}
 
 	/**
@@ -276,35 +322,6 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		addStatusMaskDesignView(design, "uid");
 		
 		if (statusProperty != null) {
-			final String activeOnlyRegex = Joiner.on('|').join(Collections2.transform(activeStatuses, 
-					new Function<E, String>() {
-				@Override @Nullable
-				public String apply(@Nullable E input) {
-					return input.name().toLowerCase();
-				}
-			}));
-			final String includeInactiveRegex = Joiner.on('|').join(
-					Collections2.transform(Sets.union(activeStatuses, inactiveStatuses), new Function<E, String>() {
-				@Override @Nullable
-				public String apply(@Nullable E input) {
-					return input.name().toLowerCase();
-				}
-			}));
-			final String draftOnlyRegex = Joiner.on('|').join(
-					Collections2.transform(draftStatuses, new Function<E, String>() {
-				@Override @Nullable
-				public String apply(@Nullable E input) {
-					return input.name().toLowerCase();
-				}
-			}));
-			final String voidOnlyRegex = Joiner.on('|').join(
-					Collections2.transform(voidStatuses, new Function<E, String>() {
-				@Override @Nullable
-				public String apply(@Nullable E input) {
-					return input.name().toLowerCase();
-				}
-			}));
-
 			design.addView(VIEW_UID_PREFIX + StatusMask.RAW.getLiteral(), 
 					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
 			design.addView(VIEW_UID_PREFIX + StatusMask.ACTIVE_ONLY.getLiteral(), new View(
