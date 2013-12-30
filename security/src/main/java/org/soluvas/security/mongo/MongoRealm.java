@@ -146,7 +146,9 @@ public class MongoRealm extends AuthorizingRealm {
 				new BasicDBObject("canonicalSlug", canonicalSlug),
 				new BasicDBObject("emails.email", normalizedEmail),
 			});
-			query.put("accountStatus", new BasicDBObject("$in", ImmutableSet.of(AccountStatus.ACTIVE.name(), AccountStatus.VERIFIED.name())));
+			final ImmutableSet<String> expectedStatuses = ImmutableSet.of(
+					AccountStatus.ACTIVE.name(), AccountStatus.VERIFIED.name());
+			query.put("accountStatus", new BasicDBObject("$in", expectedStatuses));
 			log.debug("findOne MongoDB {} using {}", personCollName, query);
 			final DBObject found = personColl.findOne(query, new BasicDBObject("password", 1));
 			log.debug("Matched for {} : {}", tokenPrincipal, found);
@@ -155,7 +157,9 @@ public class MongoRealm extends AuthorizingRealm {
 				final String userPassword = (String) found.get("password");
 				return new SimpleAuthenticationInfo(userPrincipal, userPassword, getName());
 			} else {
-				throw new IncorrectCredentialsException("Cannot find user '" + tokenPrincipal + "'");
+				log.info("Cannot find user '{}' in collection '{}' using: {}",
+						tokenPrincipal, personCollName, query);
+				throw new IncorrectCredentialsException("Cannot find user '" + tokenPrincipal + "' with status " + expectedStatuses);
 			}
 		} else if (token instanceof AutologinToken) {
 			log.debug("AuthenticationInfo for {} is using AutologinToken", token.getPrincipal());
