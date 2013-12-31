@@ -26,12 +26,12 @@ public class BankNames {
 	
 	public static final String DANAMON = "DANAMON";
 	
-	public static final String JABAR = "JABAR";
+	public static final String BANK_JABAR = "BANK_JABAR";
 	
-	public static final String MANDIRI = "MANDIRI";
+	public static final String BANK_MANDIRI = "BANK_MANDIRI";
 	
 	public static final List<String> ALL = ImmutableList.copyOf(new String[] { 
-			BCA, BNI, BRI, BTN, DANAMON, JABAR, MANDIRI});
+			BCA, BNI, BRI, BTN, DANAMON, BANK_JABAR, BANK_MANDIRI});
 	
 	public static final Map<String, String> DISPLAY_NAMES;
 	
@@ -42,7 +42,7 @@ public class BankNames {
 		DISPLAY_NAMES.put(BRI, "BRI");
 		DISPLAY_NAMES.put(BTN, "BTN");
 		DISPLAY_NAMES.put(DANAMON, "DANAMON");
-		DISPLAY_NAMES.put(JABAR, "JABAR");
-		DISPLAY_NAMES.put(MANDIRI, "MANDIRI");
+		DISPLAY_NAMES.put(BANK_JABAR, "BANK JABAR");
+		DISPLAY_NAMES.put(BANK_MANDIRI, "BANK MANDIRI");
 	}
 }
