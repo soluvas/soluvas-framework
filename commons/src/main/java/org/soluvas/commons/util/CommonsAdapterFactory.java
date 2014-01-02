@@ -305,6 +305,10 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createSysConfigAdapter();
 			}
 			@Override
+			public Adapter caseGeolocation(Geolocation object) {
+				return createGeolocationAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -1147,6 +1151,20 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSysConfigAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Geolocation <em>Geolocation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Geolocation
+	 * @generated
+	 */
+	public Adapter createGeolocationAdapter() {
 		return null;
 	}
 

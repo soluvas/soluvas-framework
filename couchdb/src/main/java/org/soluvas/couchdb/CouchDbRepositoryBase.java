@@ -292,7 +292,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	/**
 	 * Called by constructor after connection and authentication, and {@link #beforeUpdateDesignDocument()}.
 	 * The modified {@link DesignDocument} will be {@link CouchDbConnector#update(Object)}ed to the database.
-	 * <p>Out-of-the-box, {@link CouchDbRepositoryBase} provides 5 views:
+	 * <p>Out-of-the-box, {@link CouchDbRepositoryBase} provides several views:
 	 * <ol>
 	 * 	<li><b>all</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( null, doc._id ); }</code></li>
 	 * 	<li><b>count</b>: <code>function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( null, doc._id ); }</code></li>
@@ -1061,7 +1061,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		case ID:
 			return (Map) lookupAllByIds(statusMask, (Collection<String>) keys);
 		default:
-			throw new UnsupportedOperationException("to be implemented");
+			throw new UnsupportedOperationException("must be implemented/forwarded by subclass");
 		}
 	}
 
@@ -1073,7 +1073,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		case ID:
 			return (Map) existsAllById(statusMask, (Collection<String>) keys);
 		default:
-			throw new UnsupportedOperationException("to be implemented");
+			throw new UnsupportedOperationException("must be implemented/forwarded by subclass");
 		}
 	}
 

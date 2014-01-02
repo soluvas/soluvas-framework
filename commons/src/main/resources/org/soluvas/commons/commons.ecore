@@ -1403,4 +1403,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Temperature" instanceClassName="javax.measure.quantity.Temperature"/>
   <eClassifiers xsi:type="ecore:EDataType" name="LocalTime" instanceClassName="org.joda.time.LocalTime"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Geolocation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Why Double?&#xA;&#xA;Hibernate Search has this as best practice:&#xA;&quot;add the @Latitude and @Longitude annotations on your properties representing the coordinates; these must be of type Double&quot;&#xA;http://docs.jboss.org/hibernate/search/4.2/reference/en-US/html/spatial.html"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="latitude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="longitude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="elevation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+  </eClassifiers>
 </ecore:EPackage>

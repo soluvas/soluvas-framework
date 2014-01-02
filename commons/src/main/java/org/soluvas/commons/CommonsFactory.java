@@ -231,6 +231,15 @@ public interface CommonsFactory extends EFactory {
 	 */
 	FacebookAccessible createFacebookAccessible();
 
+	/**
+	 * Returns a new object of class '<em>Geolocation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Geolocation</em>'.
+	 * @generated
+	 */
+	Geolocation createGeolocation();
+
 	PersonInfo createPersonInfo(String id, String slug, String name, String photoId, Gender gender);
 
 	/**

@@ -43,8 +43,9 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
 /**
- * Reads the tenant information from {@link HttpServletRequest#getPathInfo()}
- * e.g. http://localhost:8080/{hotelContext}/{app}/t/{tenantId}/{tenantEnv}.
+ * Reads the tenant information from {@link HttpServletRequest#getPathInfo()}.
+ * Recommended is to use {@link TenantMode#MULTI_HOST}.
+ * For {@link TenantMode#MULTI_PATH} (deprecated): e.g. http://localhost:8080/{hotelContext}/{app}/t/{tenantId}/{tenantEnv}.
  * Which means tenant is read per request.
  * @author rudi
  */

@@ -61,6 +61,7 @@ import org.soluvas.commons.FacebookAccessible;
 import org.soluvas.commons.FacebookIdentity;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.GenericStatus;
+import org.soluvas.commons.Geolocation;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.Informer;
@@ -530,6 +531,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass sysConfigEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass geolocationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3308,6 +3316,42 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getGeolocation() {
+		return geolocationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGeolocation_Latitude() {
+		return (EAttribute)geolocationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGeolocation_Longitude() {
+		return (EAttribute)geolocationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGeolocation_Elevation() {
+		return (EAttribute)geolocationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -4058,6 +4102,11 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		sysConfigEClass = createEClass(SYS_CONFIG);
 		createEAttribute(sysConfigEClass, SYS_CONFIG__TENANT_ID);
 
+		geolocationEClass = createEClass(GEOLOCATION);
+		createEAttribute(geolocationEClass, GEOLOCATION__LATITUDE);
+		createEAttribute(geolocationEClass, GEOLOCATION__LONGITUDE);
+		createEAttribute(geolocationEClass, GEOLOCATION__ELEVATION);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -4688,6 +4737,11 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(sysConfigEClass, SysConfig.class, "SysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSysConfig_TenantId(), theEcorePackage.getEString(), "tenantId", null, 0, 1, SysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(geolocationEClass, Geolocation.class, "Geolocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getGeolocation_Latitude(), ecorePackage.getEDoubleObject(), "latitude", null, 0, 1, Geolocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGeolocation_Longitude(), ecorePackage.getEDoubleObject(), "longitude", null, 0, 1, Geolocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGeolocation_Elevation(), ecorePackage.getEDoubleObject(), "elevation", null, 0, 1, Geolocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -5993,6 +6047,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Entity is trashed or banned."
+		   });		
+		addAnnotation
+		  (geolocationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Why Double?\n\nHibernate Search has this as best practice:\n\"add the @Latitude and @Longitude annotations on your properties representing the coordinates; these must be of type Double\"\nhttp://docs.jboss.org/hibernate/search/4.2/reference/en-US/html/spatial.html"
 		   });
 	}
 	
