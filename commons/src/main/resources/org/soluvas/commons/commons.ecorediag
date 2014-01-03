@@ -1764,6 +1764,26 @@
       <element xmi:type="ecore:EDataType" href="commons.ecore#//LocalTime"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9UrEwmF2EeO3r98vQDO2YQ" x="2692" y="709"/>
     </children>
+    <children xmi:type="notation:Node" xmi:id="_TUKhgHRoEeOjHKniHLBKqw" type="1001">
+      <children xmi:type="notation:Node" xmi:id="_TULvoHRoEeOjHKniHLBKqw" type="4001"/>
+      <children xmi:type="notation:Node" xmi:id="_TULvoXRoEeOjHKniHLBKqw" type="5001">
+        <children xmi:type="notation:Node" xmi:id="_cPL7wHRoEeOjHKniHLBKqw" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//ThingInfo/imageId"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_cPL7wXRoEeOjHKniHLBKqw"/>
+        </children>
+        <styles xmi:type="notation:DrawerStyle" xmi:id="_TULvonRoEeOjHKniHLBKqw"/>
+        <styles xmi:type="notation:SortingStyle" xmi:id="_TULvo3RoEeOjHKniHLBKqw"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_TULvpHRoEeOjHKniHLBKqw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_TUMWsHRoEeOjHKniHLBKqw" type="5002">
+        <styles xmi:type="notation:DrawerStyle" xmi:id="_TUMWsXRoEeOjHKniHLBKqw"/>
+        <styles xmi:type="notation:SortingStyle" xmi:id="_TUMWsnRoEeOjHKniHLBKqw"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_TUMWs3RoEeOjHKniHLBKqw"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_TUKhgXRoEeOjHKniHLBKqw" fontColor="4210752" fontName="OxygenSans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+      <element xmi:type="ecore:EClass" href="commons.ecore#//ThingInfo"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TUKhgnRoEeOjHKniHLBKqw" x="2946" y="526"/>
+    </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_Hn9XoSQDEeKL8qHxNHEWSw"/>
     <element xmi:type="ecore:EPackage" href="commons.ecore#/"/>
     <edges xmi:type="notation:Edge" xmi:id="_Rrm-sCSDEeKyUdMfH4dSfg" type="3003" source="_J57LECSDEeKyUdMfH4dSfg" target="_aOshcSSAEeKyUdMfH4dSfg">

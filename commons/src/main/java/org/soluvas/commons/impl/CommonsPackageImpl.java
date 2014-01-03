@@ -98,6 +98,7 @@ import org.soluvas.commons.Sluggable;
 import org.soluvas.commons.StyleConfiguration;
 import org.soluvas.commons.SysConfig;
 import org.soluvas.commons.TenantSource;
+import org.soluvas.commons.ThingInfo;
 import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.Translatable;
 import org.soluvas.commons.Translation;
@@ -538,6 +539,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass geolocationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass thingInfoEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3352,6 +3360,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getThingInfo() {
+		return thingInfoEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getThingInfo_ImageId() {
+		return (EAttribute)thingInfoEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -4107,6 +4133,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(geolocationEClass, GEOLOCATION__LONGITUDE);
 		createEAttribute(geolocationEClass, GEOLOCATION__ELEVATION);
 
+		thingInfoEClass = createEClass(THING_INFO);
+		createEAttribute(thingInfoEClass, THING_INFO__IMAGE_ID);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -4359,6 +4388,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		postalAddressEClass.getESuperTypes().add(this.getSchemaVersionable());
 		canonicalSluggableEClass.getESuperTypes().add(this.getSluggable());
 		sysConfigEClass.getESuperTypes().add(this.getTimestamped());
+		thingInfoEClass.getESuperTypes().add(this.getNameContainer());
+		thingInfoEClass.getESuperTypes().add(this.getIdentifiable());
+		thingInfoEClass.getESuperTypes().add(this.getSluggable());
+		thingInfoEClass.getESuperTypes().add(this.getImageable());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4742,6 +4775,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getGeolocation_Latitude(), ecorePackage.getEDoubleObject(), "latitude", null, 0, 1, Geolocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGeolocation_Longitude(), ecorePackage.getEDoubleObject(), "longitude", null, 0, 1, Geolocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGeolocation_Elevation(), ecorePackage.getEDoubleObject(), "elevation", null, 0, 1, Geolocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(thingInfoEClass, ThingInfo.class, "ThingInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getThingInfo_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, ThingInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -6053,6 +6089,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Why Double?\n\nHibernate Search has this as best practice:\n\"add the @Latitude and @Longitude annotations on your properties representing the coordinates; these must be of type Double\"\nhttp://docs.jboss.org/hibernate/search/4.2/reference/en-US/html/spatial.html"
+		   });		
+		addAnnotation
+		  (thingInfoEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "A condensed version of a (probably app-specific) Thing."
 		   });
 	}
 	

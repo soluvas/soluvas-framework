@@ -240,6 +240,15 @@ public interface CommonsFactory extends EFactory {
 	 */
 	Geolocation createGeolocation();
 
+	/**
+	 * Returns a new object of class '<em>Thing Info</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Thing Info</em>'.
+	 * @generated
+	 */
+	ThingInfo createThingInfo();
+
 	PersonInfo createPersonInfo(String id, String slug, String name, String photoId, Gender gender);
 
 	/**
