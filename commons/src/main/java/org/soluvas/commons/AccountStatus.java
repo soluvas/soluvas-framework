@@ -4,7 +4,9 @@ package org.soluvas.commons;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.Enumerator;
 
@@ -275,12 +277,32 @@ public enum AccountStatus implements Enumerator {
 		this.name = name;
 		this.literal = literal;
 	}
+	
+	private final static String DRAFT_ICON = "briefcase";
+	private final static String VALIDATED_ICON = "wrench";
+	private final static String ACTIVE_ICON = "ok";
+	private final static String VERIFIED_ICON = "star";
+	private final static String INACTIVE_ICON = "remove";
+	private final static String VOID_ICON = "trash";
+	
+	public static final Map<AccountStatus, String> ICON_MAPPING;
+	
+	static {
+		ICON_MAPPING = new HashMap<>();
+		ICON_MAPPING.put(DRAFT, DRAFT_ICON);
+		ICON_MAPPING.put(VALIDATED, VALIDATED_ICON);
+		ICON_MAPPING.put(ACTIVE, ACTIVE_ICON);
+		ICON_MAPPING.put(VERIFIED, VERIFIED_ICON);
+		ICON_MAPPING.put(INACTIVE, INACTIVE_ICON);
+		ICON_MAPPING.put(VOID, VOID_ICON);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -290,6 +312,7 @@ public enum AccountStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -299,6 +322,7 @@ public enum AccountStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}
