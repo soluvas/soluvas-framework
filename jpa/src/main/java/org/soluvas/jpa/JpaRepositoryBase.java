@@ -20,8 +20,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.EntityType;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.GenericStatus;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SchemaVersionable;
@@ -77,6 +79,8 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	protected EntityManager em;
 	@Inject
 	protected PlatformTransactionManager txManager;
+	@Inject
+	protected AppManifest appManifest;
 	
 	protected Class<T> entityClass;
 
@@ -318,6 +322,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		final List<S> addeds = FluentIterable.from(entities).transform(new Function<S, S>() {
 			@Override @Nullable
 			public S apply(@Nullable S input) {
+				beforeSave(input);
 				em.merge(input);
 				return input;
 			}
@@ -335,6 +340,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		final List<S> mergedEntities = FluentIterable.from(entities.entrySet()).transform(new Function<Entry<ID, S>, S>() {
 			@Override
 			public S apply(Entry<ID, S> input) {
+				beforeSave(input.getValue());
 				final S mergedEntity = em.merge(input.getValue());
 				return mergedEntity;
 			};
@@ -531,5 +537,12 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	 * @return
 	 */
 	protected abstract E getStatus(T entity);
+	
+	protected void beforeSave(T entity) {
+		if (entity.getCreationTime() == null) {
+			entity.setCreationTime(new DateTime(appManifest.getDefaultTimeZone()));
+		}
+		entity.setModificationTime(new DateTime(appManifest.getDefaultTimeZone()));
+	}
 	
 }
