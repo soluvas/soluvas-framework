@@ -2,16 +2,15 @@ package org.soluvas.email.impl;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Map;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +23,6 @@ import org.soluvas.email.EmailException;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Recipient;
 import org.soluvas.email.Template;
-
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
@@ -48,7 +46,7 @@ import com.google.common.collect.ImmutableMap;
  *
  * @generated
  */
-public abstract class TemplateImpl extends EObjectImpl implements Template {
+public abstract class TemplateImpl extends MinimalEObjectImpl.Container implements Template {
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(TemplateImpl.class);
@@ -513,6 +511,24 @@ public abstract class TemplateImpl extends EObjectImpl implements Template {
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case EmailPackage.TEMPLATE___RENDER_SUBJECT__RECIPIENT:
+				return renderSubject((Recipient)arguments.get(0));
+			case EmailPackage.TEMPLATE___RENDER_TEXT__RECIPIENT:
+				return renderText((Recipient)arguments.get(0));
+			case EmailPackage.TEMPLATE___RENDER_HTML__RECIPIENT:
+				return renderHtml((Recipient)arguments.get(0));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

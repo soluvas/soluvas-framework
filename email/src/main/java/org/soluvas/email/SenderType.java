@@ -3,9 +3,6 @@
 package org.soluvas.email;
 
 import org.soluvas.commons.BundleAware;
-import org.soluvas.commons.EClassLinked;
-import org.soluvas.commons.EFactoryLinked;
-import org.soluvas.commons.JavaClassLinked;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.NsPrefixable;
 

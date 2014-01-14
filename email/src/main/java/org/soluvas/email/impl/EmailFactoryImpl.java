@@ -39,7 +39,7 @@ public class EmailFactoryImpl extends EFactoryImpl implements EmailFactory {
 	 */
 	public static EmailFactory init() {
 		try {
-			EmailFactory theEmailFactory = (EmailFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.soluvas.org/schema/email/1.0"); 
+			EmailFactory theEmailFactory = (EmailFactory)EPackage.Registry.INSTANCE.getEFactory(EmailPackage.eNS_URI);
 			if (theEmailFactory != null) {
 				return theEmailFactory;
 			}

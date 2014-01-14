@@ -2,14 +2,15 @@
  */
 package org.soluvas.email.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsPackage;
@@ -57,7 +58,7 @@ import org.soluvas.email.TemplateType;
  *
  * @generated
  */
-public abstract class TemplateTypeImpl<T extends Template> extends EObjectImpl implements TemplateType<T> {
+public abstract class TemplateTypeImpl<T extends Template> extends MinimalEObjectImpl.Container implements TemplateType<T> {
 	/**
 	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -1232,6 +1233,78 @@ public abstract class TemplateTypeImpl<T extends Template> extends EObjectImpl i
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == BundleAware.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Nameable.class) {
+			switch (baseOperationID) {
+				case CommonsPackage.NAMEABLE___GET_NAME: return EmailPackage.TEMPLATE_TYPE___GET_NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == NameContainer.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == TemplateLike.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == NsPrefixable.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == JavaClassLinked.class) {
+			switch (baseOperationID) {
+				case CommonsPackage.JAVA_CLASS_LINKED___RESOLVE_JAVA_CLASS__BUNDLE: return EmailPackage.TEMPLATE_TYPE___RESOLVE_JAVA_CLASS__BUNDLE;
+				default: return -1;
+			}
+		}
+		if (baseClass == EFactoryLinked.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == EClassLinked.class) {
+			switch (baseOperationID) {
+				case CommonsPackage.ECLASS_LINKED___RESOLVE_ECLASS__MAP: return EmailPackage.TEMPLATE_TYPE___RESOLVE_ECLASS__MAP;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case EmailPackage.TEMPLATE_TYPE___RESOLVE_ECLASS__MAP:
+				resolveEClass((Map<String, EClass>)arguments.get(0));
+				return null;
+			case EmailPackage.TEMPLATE_TYPE___RESOLVE_JAVA_CLASS__BUNDLE:
+				resolveJavaClass((Bundle)arguments.get(0));
+				return null;
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

@@ -2,9 +2,7 @@
  */
 package org.soluvas.email;
 
-import java.net.URL;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.soluvas.commons.NsPrefixable;

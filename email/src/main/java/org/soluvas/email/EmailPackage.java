@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -140,6 +141,15 @@ public interface EmailPackage extends EPackage {
 	 * @ordered
 	 */
 	int EMAIL_CATALOG_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of operations of the '<em>Catalog</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_CATALOG_OPERATION_COUNT = CommonsPackage.NS_PREFIXABLE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.TemplateTypeImpl <em>Template Type</em>}' class.
@@ -321,6 +331,42 @@ public interface EmailPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEMPLATE_TYPE_FEATURE_COUNT = CommonsPackage.RESOURCE_AWARE_FEATURE_COUNT + 15;
+
+	/**
+	 * The operation id for the '<em>Get Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE___GET_NAME = CommonsPackage.RESOURCE_AWARE_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Resolve Java Class</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE___RESOLVE_JAVA_CLASS__BUNDLE = CommonsPackage.RESOURCE_AWARE_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Resolve EClass</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE___RESOLVE_ECLASS__MAP = CommonsPackage.RESOURCE_AWARE_OPERATION_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Template Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_TYPE_OPERATION_COUNT = CommonsPackage.RESOURCE_AWARE_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.PageTypeImpl <em>Page Type</em>}' class.
@@ -511,6 +557,51 @@ public interface EmailPackage extends EPackage {
 	 * @ordered
 	 */
 	int PAGE_TYPE_FEATURE_COUNT = TEMPLATE_TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE___GET_NAME = TEMPLATE_TYPE___GET_NAME;
+
+	/**
+	 * The operation id for the '<em>Resolve Java Class</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE___RESOLVE_JAVA_CLASS__BUNDLE = TEMPLATE_TYPE___RESOLVE_JAVA_CLASS__BUNDLE;
+
+	/**
+	 * The operation id for the '<em>Resolve EClass</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE___RESOLVE_ECLASS__MAP = TEMPLATE_TYPE___RESOLVE_ECLASS__MAP;
+
+	/**
+	 * The operation id for the '<em>Create</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE___CREATE__LAYOUT = TEMPLATE_TYPE_OPERATION_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Page Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_TYPE_OPERATION_COUNT = TEMPLATE_TYPE_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.TemplateImpl <em>Template</em>}' class.
@@ -704,6 +795,51 @@ public interface EmailPackage extends EPackage {
 	int LAYOUT_TYPE_FEATURE_COUNT = TEMPLATE_TYPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE___GET_NAME = TEMPLATE_TYPE___GET_NAME;
+
+	/**
+	 * The operation id for the '<em>Resolve Java Class</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE___RESOLVE_JAVA_CLASS__BUNDLE = TEMPLATE_TYPE___RESOLVE_JAVA_CLASS__BUNDLE;
+
+	/**
+	 * The operation id for the '<em>Resolve EClass</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE___RESOLVE_ECLASS__MAP = TEMPLATE_TYPE___RESOLVE_ECLASS__MAP;
+
+	/**
+	 * The operation id for the '<em>Create</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE___CREATE = TEMPLATE_TYPE_OPERATION_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Layout Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_TYPE_OPERATION_COUNT = TEMPLATE_TYPE_OPERATION_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.RecipientImpl <em>Recipient</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -780,6 +916,15 @@ public interface EmailPackage extends EPackage {
 	int TEMPLATE_LIKE_FEATURE_COUNT = 3;
 
 	/**
+	 * The number of operations of the '<em>Template Like</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_LIKE_OPERATION_COUNT = 0;
+
+	/**
 	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -841,6 +986,42 @@ public interface EmailPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEMPLATE_FEATURE_COUNT = TEMPLATE_LIKE_FEATURE_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Render Subject</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE___RENDER_SUBJECT__RECIPIENT = TEMPLATE_LIKE_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Render Text</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE___RENDER_TEXT__RECIPIENT = TEMPLATE_LIKE_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Render Html</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE___RENDER_HTML__RECIPIENT = TEMPLATE_LIKE_OPERATION_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Template</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_OPERATION_COUNT = TEMPLATE_LIKE_OPERATION_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Email</b></em>' attribute.
@@ -913,6 +1094,15 @@ public interface EmailPackage extends EPackage {
 	 * @ordered
 	 */
 	int RECIPIENT_FEATURE_COUNT = 7;
+
+	/**
+	 * The number of operations of the '<em>Recipient</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECIPIENT_OPERATION_COUNT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
@@ -1014,6 +1204,42 @@ public interface EmailPackage extends EPackage {
 	int LAYOUT_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 4;
 
 	/**
+	 * The operation id for the '<em>Render Subject</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT___RENDER_SUBJECT__RECIPIENT = TEMPLATE___RENDER_SUBJECT__RECIPIENT;
+
+	/**
+	 * The operation id for the '<em>Render Text</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT___RENDER_TEXT__RECIPIENT = TEMPLATE___RENDER_TEXT__RECIPIENT;
+
+	/**
+	 * The operation id for the '<em>Render Html</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT___RENDER_HTML__RECIPIENT = TEMPLATE___RENDER_HTML__RECIPIENT;
+
+	/**
+	 * The number of operations of the '<em>Layout</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUT_OPERATION_COUNT = TEMPLATE_OPERATION_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Subject Template</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1113,6 +1339,69 @@ public interface EmailPackage extends EPackage {
 	int PAGE_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 4;
 
 	/**
+	 * The operation id for the '<em>Render Subject</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE___RENDER_SUBJECT__RECIPIENT = TEMPLATE___RENDER_SUBJECT__RECIPIENT;
+
+	/**
+	 * The operation id for the '<em>Render Text</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE___RENDER_TEXT__RECIPIENT = TEMPLATE___RENDER_TEXT__RECIPIENT;
+
+	/**
+	 * The operation id for the '<em>Render Html</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE___RENDER_HTML__RECIPIENT = TEMPLATE___RENDER_HTML__RECIPIENT;
+
+	/**
+	 * The operation id for the '<em>Compose</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE___COMPOSE__RECIPIENT = TEMPLATE_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Compose All</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE___COMPOSE_ALL = TEMPLATE_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Attach</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE___ATTACH__BYTE_STRING = TEMPLATE_OPERATION_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Page</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE_OPERATION_COUNT = TEMPLATE_OPERATION_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.EmailManagerImpl <em>Manager</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1177,6 +1466,51 @@ public interface EmailPackage extends EPackage {
 	int EMAIL_MANAGER_FEATURE_COUNT = 5;
 
 	/**
+	 * The operation id for the '<em>Create Page</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_MANAGER___CREATE_PAGE__CLASS = 0;
+
+	/**
+	 * The operation id for the '<em>Create Sender</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_MANAGER___CREATE_SENDER__STRING = 1;
+
+	/**
+	 * The operation id for the '<em>Send All</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_MANAGER___SEND_ALL__PAGE = 2;
+
+	/**
+	 * The operation id for the '<em>Send All</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_MANAGER___SEND_ALL__PAGE_SESSION = 3;
+
+	/**
+	 * The number of operations of the '<em>Manager</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_MANAGER_OPERATION_COUNT = 4;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.email.SenderLike <em>Sender Like</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1221,6 +1555,15 @@ public interface EmailPackage extends EPackage {
 	 * @ordered
 	 */
 	int SENDER_LIKE_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Sender Like</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENDER_LIKE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.SenderImpl <em>Sender</em>}' class.
@@ -1296,6 +1639,24 @@ public interface EmailPackage extends EPackage {
 	int SENDER_FEATURE_COUNT = SENDER_LIKE_FEATURE_COUNT + 3;
 
 	/**
+	 * The operation id for the '<em>Expand</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENDER___EXPAND = SENDER_LIKE_OPERATION_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Sender</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENDER_OPERATION_COUNT = SENDER_LIKE_OPERATION_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.email.impl.SenderTypeImpl <em>Sender Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1369,6 +1730,33 @@ public interface EmailPackage extends EPackage {
 	int SENDER_TYPE_FEATURE_COUNT = CommonsPackage.NAME_CONTAINER_FEATURE_COUNT + 5;
 
 	/**
+	 * The operation id for the '<em>Get Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENDER_TYPE___GET_NAME = CommonsPackage.NAME_CONTAINER___GET_NAME;
+
+	/**
+	 * The operation id for the '<em>Create</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENDER_TYPE___CREATE = CommonsPackage.NAME_CONTAINER_OPERATION_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Sender Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENDER_TYPE_OPERATION_COUNT = CommonsPackage.NAME_CONTAINER_OPERATION_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.email.DefaultScope <em>Default Scope</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1404,6 +1792,15 @@ public interface EmailPackage extends EPackage {
 	 * @ordered
 	 */
 	int DEFAULT_SCOPE_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Default Scope</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFAULT_SCOPE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.email.EmailFormat <em>Format</em>}' enum.
@@ -1563,6 +1960,16 @@ public interface EmailPackage extends EPackage {
 	EAttribute getPageType_SenderTypeName();
 
 	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.PageType#create(org.soluvas.email.Layout) <em>Create</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Create</em>' operation.
+	 * @see org.soluvas.email.PageType#create(org.soluvas.email.Layout)
+	 * @generated
+	 */
+	EOperation getPageType__Create__Layout();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.Template <em>Template</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1584,6 +1991,36 @@ public interface EmailPackage extends EPackage {
 	EReference getTemplate_Recipients();
 
 	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.Template#renderSubject(org.soluvas.email.Recipient) <em>Render Subject</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Render Subject</em>' operation.
+	 * @see org.soluvas.email.Template#renderSubject(org.soluvas.email.Recipient)
+	 * @generated
+	 */
+	EOperation getTemplate__RenderSubject__Recipient();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.Template#renderText(org.soluvas.email.Recipient) <em>Render Text</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Render Text</em>' operation.
+	 * @see org.soluvas.email.Template#renderText(org.soluvas.email.Recipient)
+	 * @generated
+	 */
+	EOperation getTemplate__RenderText__Recipient();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.Template#renderHtml(org.soluvas.email.Recipient) <em>Render Html</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Render Html</em>' operation.
+	 * @see org.soluvas.email.Template#renderHtml(org.soluvas.email.Recipient)
+	 * @generated
+	 */
+	EOperation getTemplate__RenderHtml__Recipient();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.LayoutType <em>Layout Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1592,6 +2029,16 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getLayoutType();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.LayoutType#create() <em>Create</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Create</em>' operation.
+	 * @see org.soluvas.email.LayoutType#create()
+	 * @generated
+	 */
+	EOperation getLayoutType__Create();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.Recipient <em>Recipient</em>}'.
@@ -1789,6 +2236,36 @@ public interface EmailPackage extends EPackage {
 	EAttribute getPage_MailSession();
 
 	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.Page#compose(org.soluvas.email.Recipient) <em>Compose</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Compose</em>' operation.
+	 * @see org.soluvas.email.Page#compose(org.soluvas.email.Recipient)
+	 * @generated
+	 */
+	EOperation getPage__Compose__Recipient();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.Page#composeAll() <em>Compose All</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Compose All</em>' operation.
+	 * @see org.soluvas.email.Page#composeAll()
+	 * @generated
+	 */
+	EOperation getPage__ComposeAll();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.Page#attach(byte[], java.lang.String) <em>Attach</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Attach</em>' operation.
+	 * @see org.soluvas.email.Page#attach(byte[], java.lang.String)
+	 * @generated
+	 */
+	EOperation getPage__Attach__byte_String();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.TemplateLike <em>Template Like</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1897,6 +2374,46 @@ public interface EmailPackage extends EPackage {
 	EAttribute getEmailManager_SmtpSecurity();
 
 	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.EmailManager#createPage(java.lang.Class) <em>Create Page</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Create Page</em>' operation.
+	 * @see org.soluvas.email.EmailManager#createPage(java.lang.Class)
+	 * @generated
+	 */
+	EOperation getEmailManager__CreatePage__Class();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.EmailManager#createSender(java.lang.String) <em>Create Sender</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Create Sender</em>' operation.
+	 * @see org.soluvas.email.EmailManager#createSender(java.lang.String)
+	 * @generated
+	 */
+	EOperation getEmailManager__CreateSender__String();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.EmailManager#sendAll(org.soluvas.email.Page) <em>Send All</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Send All</em>' operation.
+	 * @see org.soluvas.email.EmailManager#sendAll(org.soluvas.email.Page)
+	 * @generated
+	 */
+	EOperation getEmailManager__SendAll__Page();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.EmailManager#sendAll(org.soluvas.email.Page, javax.mail.Session) <em>Send All</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Send All</em>' operation.
+	 * @see org.soluvas.email.EmailManager#sendAll(org.soluvas.email.Page, javax.mail.Session)
+	 * @generated
+	 */
+	EOperation getEmailManager__SendAll__Page_Session();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.Sender <em>Sender</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1918,6 +2435,16 @@ public interface EmailPackage extends EPackage {
 	EReference getSender_SenderType();
 
 	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.Sender#expand() <em>Expand</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Expand</em>' operation.
+	 * @see org.soluvas.email.Sender#expand()
+	 * @generated
+	 */
+	EOperation getSender__Expand();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.SenderType <em>Sender Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1926,6 +2453,16 @@ public interface EmailPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getSenderType();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.email.SenderType#create() <em>Create</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Create</em>' operation.
+	 * @see org.soluvas.email.SenderType#create()
+	 * @generated
+	 */
+	EOperation getSenderType__Create();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.email.SenderLike <em>Sender Like</em>}'.
@@ -2163,6 +2700,14 @@ public interface EmailPackage extends EPackage {
 		EAttribute PAGE_TYPE__SENDER_TYPE_NAME = eINSTANCE.getPageType_SenderTypeName();
 
 		/**
+		 * The meta object literal for the '<em><b>Create</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PAGE_TYPE___CREATE__LAYOUT = eINSTANCE.getPageType__Create__Layout();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.email.impl.TemplateImpl <em>Template</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2181,6 +2726,30 @@ public interface EmailPackage extends EPackage {
 		EReference TEMPLATE__RECIPIENTS = eINSTANCE.getTemplate_Recipients();
 
 		/**
+		 * The meta object literal for the '<em><b>Render Subject</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TEMPLATE___RENDER_SUBJECT__RECIPIENT = eINSTANCE.getTemplate__RenderSubject__Recipient();
+
+		/**
+		 * The meta object literal for the '<em><b>Render Text</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TEMPLATE___RENDER_TEXT__RECIPIENT = eINSTANCE.getTemplate__RenderText__Recipient();
+
+		/**
+		 * The meta object literal for the '<em><b>Render Html</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TEMPLATE___RENDER_HTML__RECIPIENT = eINSTANCE.getTemplate__RenderHtml__Recipient();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.email.impl.LayoutTypeImpl <em>Layout Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2189,6 +2758,14 @@ public interface EmailPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LAYOUT_TYPE = eINSTANCE.getLayoutType();
+
+		/**
+		 * The meta object literal for the '<em><b>Create</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation LAYOUT_TYPE___CREATE = eINSTANCE.getLayoutType__Create();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.email.impl.RecipientImpl <em>Recipient</em>}' class.
@@ -2341,6 +2918,30 @@ public interface EmailPackage extends EPackage {
 		EAttribute PAGE__MAIL_SESSION = eINSTANCE.getPage_MailSession();
 
 		/**
+		 * The meta object literal for the '<em><b>Compose</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PAGE___COMPOSE__RECIPIENT = eINSTANCE.getPage__Compose__Recipient();
+
+		/**
+		 * The meta object literal for the '<em><b>Compose All</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PAGE___COMPOSE_ALL = eINSTANCE.getPage__ComposeAll();
+
+		/**
+		 * The meta object literal for the '<em><b>Attach</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PAGE___ATTACH__BYTE_STRING = eINSTANCE.getPage__Attach__byte_String();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.email.TemplateLike <em>Template Like</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2425,6 +3026,38 @@ public interface EmailPackage extends EPackage {
 		EAttribute EMAIL_MANAGER__SMTP_SECURITY = eINSTANCE.getEmailManager_SmtpSecurity();
 
 		/**
+		 * The meta object literal for the '<em><b>Create Page</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation EMAIL_MANAGER___CREATE_PAGE__CLASS = eINSTANCE.getEmailManager__CreatePage__Class();
+
+		/**
+		 * The meta object literal for the '<em><b>Create Sender</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation EMAIL_MANAGER___CREATE_SENDER__STRING = eINSTANCE.getEmailManager__CreateSender__String();
+
+		/**
+		 * The meta object literal for the '<em><b>Send All</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation EMAIL_MANAGER___SEND_ALL__PAGE = eINSTANCE.getEmailManager__SendAll__Page();
+
+		/**
+		 * The meta object literal for the '<em><b>Send All</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation EMAIL_MANAGER___SEND_ALL__PAGE_SESSION = eINSTANCE.getEmailManager__SendAll__Page_Session();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.email.impl.SenderImpl <em>Sender</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2443,6 +3076,14 @@ public interface EmailPackage extends EPackage {
 		EReference SENDER__SENDER_TYPE = eINSTANCE.getSender_SenderType();
 
 		/**
+		 * The meta object literal for the '<em><b>Expand</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SENDER___EXPAND = eINSTANCE.getSender__Expand();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.email.impl.SenderTypeImpl <em>Sender Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2451,6 +3092,14 @@ public interface EmailPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SENDER_TYPE = eINSTANCE.getSenderType();
+
+		/**
+		 * The meta object literal for the '<em><b>Create</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SENDER_TYPE___CREATE = eINSTANCE.getSenderType__Create();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.email.SenderLike <em>Sender Like</em>}' class.

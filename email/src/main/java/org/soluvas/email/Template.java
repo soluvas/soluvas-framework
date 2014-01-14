@@ -3,9 +3,6 @@
 package org.soluvas.email;
 
 import org.eclipse.emf.common.util.EList;
-import org.soluvas.commons.AppManifest;
-import org.soluvas.commons.EClassLinked;
-import org.soluvas.commons.WebAddress;
 
 /**
  * <!-- begin-user-doc -->

@@ -2,10 +2,12 @@
  */
 package org.soluvas.email.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsPackage;
@@ -34,7 +36,7 @@ import org.soluvas.email.SenderType;
  *
  * @generated
  */
-public class SenderTypeImpl extends EObjectImpl implements SenderType {
+public class SenderTypeImpl extends MinimalEObjectImpl.Container implements SenderType {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -490,6 +492,20 @@ public class SenderTypeImpl extends EObjectImpl implements SenderType {
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case EmailPackage.SENDER_TYPE___CREATE:
+				return create();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

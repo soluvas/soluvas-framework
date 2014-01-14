@@ -3,16 +3,14 @@
 package org.soluvas.email.impl;
 
 import java.util.HashSet;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.soluvas.email.EmailFormat;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Recipient;
 import org.soluvas.email.WebSecurity;
-
 import com.google.common.base.Objects;
 
 /**
@@ -34,7 +32,7 @@ import com.google.common.base.Objects;
  *
  * @generated
  */
-public class RecipientImpl extends EObjectImpl implements Recipient {
+public class RecipientImpl extends MinimalEObjectImpl.Container implements Recipient {
 	/**
 	 * The default value of the '{@link #getEmail() <em>Email</em>}' attribute.
 	 * <!-- begin-user-doc -->

@@ -4,20 +4,19 @@ package org.soluvas.email.impl;
 
 import java.io.StringReader;
 import java.io.StringWriter;
-
+import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.email.DefaultScope;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Sender;
 import org.soluvas.email.SenderType;
-
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
@@ -41,7 +40,7 @@ import com.google.common.base.Strings;
  *
  * @generated
  */
-public class SenderImpl extends EObjectImpl implements Sender {
+public class SenderImpl extends MinimalEObjectImpl.Container implements Sender {
 	/**
 	 * The default value of the '{@link #getFrom() <em>From</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -507,6 +506,21 @@ public class SenderImpl extends EObjectImpl implements Sender {
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case EmailPackage.SENDER___EXPAND:
+				expand();
+				return null;
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

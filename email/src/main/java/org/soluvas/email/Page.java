@@ -6,8 +6,6 @@ import java.util.List;
 import javax.mail.Session;
 import org.apache.commons.mail.Email;
 
-import org.eclipse.emf.common.util.EList;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Page</b></em>'.

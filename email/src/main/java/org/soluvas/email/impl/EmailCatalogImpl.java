@@ -2,25 +2,18 @@
  */
 package org.soluvas.email.impl;
 
-import java.net.URL;
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.LayoutType;
@@ -46,7 +39,7 @@ import org.soluvas.email.SenderType;
  *
  * @generated
  */
-public class EmailCatalogImpl extends EObjectImpl implements EmailCatalog {
+public class EmailCatalogImpl extends MinimalEObjectImpl.Container implements EmailCatalog {
 	/**
 	 * The default value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
 	 * <!-- begin-user-doc -->

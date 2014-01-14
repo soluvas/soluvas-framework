@@ -6,18 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import javax.annotation.Nullable;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
-
 import org.apache.commons.mail.ByteArrayDataSource;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.MultiPartEmail;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.slf4j.Logger;
@@ -30,12 +28,12 @@ import org.soluvas.email.Page;
 import org.soluvas.email.PageType;
 import org.soluvas.email.Recipient;
 import org.soluvas.email.Sender;
-
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * <!-- begin-user-doc -->
@@ -471,6 +469,25 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 				return MAIL_SESSION_EDEFAULT == null ? mailSession != null : !MAIL_SESSION_EDEFAULT.equals(mailSession);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case EmailPackage.PAGE___COMPOSE__RECIPIENT:
+				return compose((Recipient)arguments.get(0));
+			case EmailPackage.PAGE___COMPOSE_ALL:
+				return composeAll();
+			case EmailPackage.PAGE___ATTACH__BYTE_STRING:
+				attach((byte[])arguments.get(0), (String)arguments.get(1));
+				return null;
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
