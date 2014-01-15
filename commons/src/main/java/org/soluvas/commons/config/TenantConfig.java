@@ -14,6 +14,8 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.TenantSource;
+import org.soluvas.commons.WebAddress;
+import org.soluvas.commons.tenant.TenantMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -41,7 +43,8 @@ public class TenantConfig {
 	 * <code>${tenantSource}</code> property ({@link TenantSource}).
 	 * If ${tenantSource} is not specified, default is {@value TenantSource#CONFIG}.
 	 * 
-	 * @return todo Rename {@link AppManifest} to TenantManifest.
+	 * @return 
+	 * @todo Rename {@link AppManifest} to TenantManifest? Should we? Or just keep it as it is? i.e. make AppManifest overriding from global to tenant?
 	 * @throws IOException 
 	 */
 	@Bean
@@ -69,6 +72,35 @@ public class TenantConfig {
 		default:
 			throw new IllegalArgumentException("Unknown tenantSource: " + tenantSource);
 		}
+	}
+
+	@Bean
+	public Map<String, WebAddress> webAddressMap() throws IOException {
+		final TenantMode tenantMode = env.getRequiredProperty("tenantMode", TenantMode.class);
+		final String tenantEnv = env.getRequiredProperty("tenantEnv");
+		
+		switch (tenantMode) {
+		case MULTI_PATH:
+			throw new IllegalArgumentException("Deprecated (unsupported) tenantMode: " + tenantMode);
+		case MULTI_HOST:
+			break;
+		default:
+			throw new IllegalArgumentException("Unsupported tenantMode: " + tenantMode);
+		}
+		
+		final ImmutableMap.Builder<String, WebAddress> webAddressBuilder = ImmutableMap.builder();
+		for (final Map.Entry<String, AppManifest> tenant : tenantMap().entrySet()) {
+			final String tenantKey = tenant.getKey() + "_" + tenantEnv;
+//					return new StaticXmiLoader<WebAddress>(CommonsPackage.eINSTANCE,
+//							new File(dataFolder(), "model/custom.WebAddress.xmi").toString()).get();
+			final OnDemandXmiLoader<WebAddress> loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE,
+					MultiTenantWebConfig.class, "/META-INF/tenant.WebAddress.xmi");
+			loader.getScope().put("tenantId", tenant.getKey());
+			loader.getScope().put("tenantEnv", tenantEnv);
+			final WebAddress webAddress = loader.get();
+			webAddressBuilder.put(tenant.getKey(), webAddress);
+		}
+		return webAddressBuilder.build();
 	}
 
 }

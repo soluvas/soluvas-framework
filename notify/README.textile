@@ -14,6 +14,7 @@ Notification elements:
 5. *Predicates/Checks*. Related to *Rules*, but basically a boolean function that when evaluated,
    determines whether the notification should be sent. e.g. Send Overdue1 notification for a Checklist,
    but only if the Checklist hasn't yet been done.
-7. *Templating*. The recommended templating mechanism is Mustache. *Soluvas Email* internally uses Mustache.
-6. *MIME/Attachments support: Static & Dynamic*. For dynamic files, generates bytes, MIME type, content length, and filename + extension.
+6. *Templating*. The recommended templating mechanism is Mustache. *Soluvas Email* internally uses Mustache.
+7. *MIME/Attachments support: Static & Dynamic*. For dynamic files, generates bytes, MIME type, content length, and filename + extension.
    *Soluvas Email* also supports attachments.
+8. *Shell*. Allows triggering notifications using both ad-hoc parameters, and prepared (mocked) parameters.

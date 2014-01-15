@@ -1,11 +1,14 @@
 package org.soluvas.email.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.annotation.Nullable;
 import javax.mail.Session;
+
 import org.apache.commons.mail.Email;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -25,6 +28,7 @@ import org.soluvas.email.LayoutType;
 import org.soluvas.email.Page;
 import org.soluvas.email.Sender;
 import org.soluvas.email.util.EmailUtils;
+
 import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
@@ -33,7 +37,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * <!-- begin-user-doc -->
@@ -52,7 +55,6 @@ import java.lang.reflect.InvocationTargetException;
  *
  * @generated
  */
-@SuppressWarnings("serial")
 public class EmailManagerImpl extends MinimalEObjectImpl.Container implements EmailManager {
 	
 	/**
