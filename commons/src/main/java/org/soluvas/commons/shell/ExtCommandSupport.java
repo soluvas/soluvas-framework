@@ -1,5 +1,6 @@
 package org.soluvas.commons.shell;
 
+import java.io.Closeable;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.apache.felix.service.command.CommandSession;
 import org.apache.karaf.shell.console.AbstractAction;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.ShellProgressMonitor;
+import org.soluvas.commons.config.MultiTenantWebConfig;
 import org.soluvas.commons.impl.ShellProgressMonitorImpl;
 import org.soluvas.commons.locale.LocaleContext;
 import org.soluvas.commons.tenant.CommandRequestAttributes;
@@ -21,11 +23,9 @@ import org.soluvas.commons.tenant.RequestOrCommandScope;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.commons.tenant.TenantRefImpl;
 import org.soluvas.commons.util.ThreadLocalProgress;
-import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.NamedThreadLocal;
 import org.springframework.core.env.Environment;
 
 import com.google.common.base.CaseFormat;
@@ -38,11 +38,11 @@ import com.google.common.collect.Iterables;
  * @author ceefour
  * @see RequestOrCommandScope
  * @see CommandRequestAttributes
+ * @see MultiTenantWebConfig#tenantRef()
  */
 public abstract class ExtCommandSupport extends AbstractAction {
 
 //	protected static final ThreadLocal<CommandSession> threadCommandSession = new NamedThreadLocal<>("CommandSession");
-	protected static final ThreadLocal<CommandRequestAttributes> threadRequestAttributes = new NamedThreadLocal<>("Command RequestAttributes");
 	/**
 	 * @todo Proper locale support.
 	 */
@@ -57,10 +57,8 @@ public abstract class ExtCommandSupport extends AbstractAction {
 	
 	@Override
 	public Object execute(CommandSession session) throws Exception {
-		final CommandRequestAttributes reqAttrs = new CommandRequestAttributes(session);
-		try {
+		try (final Closeable closeable = CommandRequestAttributes.withSession(session)) {
 //			threadCommandSession.set(session);
-			threadRequestAttributes.set(reqAttrs);
 			try (ThreadLocalProgress progress = new ThreadLocalProgress(monitor)) {
 				return super.execute(session);
 			}
@@ -68,9 +66,6 @@ public abstract class ExtCommandSupport extends AbstractAction {
 			// Subclasses usually forget to do this, so we'll do this for them :)
 			System.out.flush();
 			System.err.flush();
-			// Mark "request" as completed
-			reqAttrs.requestCompleted();
-			threadRequestAttributes.remove();
 //			threadCommandSession.remove();
 		}
 	}
@@ -85,17 +80,6 @@ public abstract class ExtCommandSupport extends AbstractAction {
 //		Preconditions.checkState(session != null, "Not in CommandSession");
 //		return session;
 //	}
-	
-	/**
-	 * Gets the current thread's {@link CommandRequestAttributes}.
-	 * @return
-	 * @throws IllegalStateException
-	 */
-	public static CommandRequestAttributes currentRequestAttributes() throws IllegalStateException {
-		final CommandRequestAttributes requestAttributes = threadRequestAttributes.get();
-		Preconditions.checkState(requestAttributes != null, "Not in CommandSession");
-		return requestAttributes;
-	}
 	
 	/**
 	 * Tenant for the currently executing {@link CommandSession}.

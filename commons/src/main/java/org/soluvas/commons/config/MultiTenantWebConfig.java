@@ -114,7 +114,7 @@ public class MultiTenantWebConfig {
 	
 	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	public TenantRef tenantRef() {
-		RequestAttributes requestAttrs = RequestOrCommandScope.currentRequestAttributes();
+		final RequestAttributes requestAttrs = RequestOrCommandScope.currentRequestAttributes();
 		if (requestAttrs instanceof ServletRequestAttributes) {
 			return getTenantRef(env.getRequiredProperty("tenantMode", TenantMode.class),
 					getRequest(), env.getRequiredProperty("tenantEnv"));

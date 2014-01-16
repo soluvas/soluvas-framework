@@ -1,6 +1,7 @@
 package org.soluvas.commons.tenant;
 
 import org.apache.felix.service.command.CommandSession;
+import org.soluvas.commons.config.MultiTenantWebConfig;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.Scope;
@@ -12,6 +13,9 @@ import org.springframework.web.context.request.RequestScope;
  * Enhanced {@link RequestScope} that also works inside a {@link CommandSession},
  * i.e. by simulating a command invocation as a web request.
  * @author ceefour
+ * @see MultiTenantWebConfig#tenantRef()
+ * @see CommandRequestAttributes
+ * @see ExtCommandSupport
  */
 public class RequestOrCommandScope implements Scope {
 

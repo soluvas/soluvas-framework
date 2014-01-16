@@ -23,7 +23,7 @@ public class SoluvasTenantIdentifierResolver implements
 	@Override @Nullable
 	public String resolveCurrentTenantIdentifier() {
 		try {
-			TenantRef tenantRef = appCtx.getBean(TenantRef.class);
+			final TenantRef tenantRef = appCtx.getBean(TenantRef.class);
 //			final RequestAttributes requestAttrs = RequestOrCommandScope.currentRequestAttributes();
 //			final TenantRef tenantRef = Preconditions.checkNotNull((TenantRef) requestAttrs.resolveReference("tenantRef"),
 //					"Cannot resolve 'tenantRef' attribute from RequestAttributes");

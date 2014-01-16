@@ -1,20 +1,56 @@
 package org.soluvas.commons.tenant;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.Closeable;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.felix.gogo.runtime.CommandProcessorImpl;
+import org.apache.felix.gogo.runtime.CommandSessionImpl;
+import org.apache.felix.gogo.runtime.threadio.ThreadIOImpl;
 import org.apache.felix.service.command.CommandSession;
+import org.apache.felix.service.threadio.ThreadIO;
+import org.soluvas.commons.config.MultiTenantWebConfig;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.springframework.context.annotation.Scope;
+import org.springframework.core.NamedThreadLocal;
 import org.springframework.web.context.request.AbstractRequestAttributes;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import com.google.common.base.Preconditions;
+
 /**
+ * The {@link RequestAttributes} implementation used by {@link RequestOrCommandScope} Spring {@link Scope}.
  * @author ceefour
- *
+ * @see MultiTenantWebConfig#tenantRef()
+ * @see RequestOrCommandScope
+ * @see ExtCommandSupport
  */
 public class CommandRequestAttributes extends AbstractRequestAttributes {
+
+	protected static final ThreadLocal<CommandRequestAttributes> threadRequestAttributes = new NamedThreadLocal<>("Command RequestAttributes");
+	
+	protected static class SimpleCommandProcessor extends CommandProcessorImpl {
+
+		public SimpleCommandProcessor(ThreadIO tio) {
+			super(tio);
+		}
+		
+	}
+	
+	protected static class SimpleCommandSession extends CommandSessionImpl {
+
+		protected SimpleCommandSession(CommandProcessorImpl shell,
+				InputStream in, PrintStream out, PrintStream err) {
+			super(shell, in, out, err);
+		}
+		
+	}
 
 	/**
 	 * Stores the {@link RequestAttributes#SCOPE_REQUEST} attributes.
@@ -34,7 +70,7 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	}
 	
 	/**
-	 * Return the RequestAttributes currently bound to the thread.
+	 * Return the {@link CommandRequestAttributes} currently bound to the thread.
 	 * <p>Exposes the previously bound RequestAttributes instance, if any.
 	 * @return the RequestAttributes currently bound to the thread
 	 * @throws IllegalStateException if no RequestAttributes object
@@ -42,7 +78,47 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	 * @see RequestContextHolder#currentRequestAttributes()
 	 */
 	public static RequestAttributes currentRequestAttributes() throws IllegalStateException {
-		return ExtCommandSupport.currentRequestAttributes();
+		final CommandRequestAttributes requestAttributes = threadRequestAttributes.get();
+		Preconditions.checkState(requestAttributes != null, "Not in CommandSession");
+		return requestAttributes;
+	}
+	
+	/**
+	 * Returns a {@link Closeable} that sets the threadlocal {@link CommandRequestAttributes}
+	 * based on {@link CommandSession}, then afterwards, mark it as {@link #requestCompleted()} and removes it from the thread.
+	 * @param requestAttributes
+	 * @return 
+	 */
+	public static Closeable withSession(CommandSession session) {
+		if (threadRequestAttributes.get() != null) {
+			throw new IllegalStateException("Thread '" + Thread.currentThread() + "' already contains a CommandRequestAttributes, cannot set");
+		}
+		final CommandRequestAttributes reqAttrs = new CommandRequestAttributes(session);
+		threadRequestAttributes.set(reqAttrs);
+		return new Closeable() {
+			@Override
+			public void close() {
+				// Mark "request" as completed
+				reqAttrs.requestCompleted();
+				threadRequestAttributes.remove();
+			}
+		};
+	}
+
+	/**
+	 * Returns a {@link Closeable} that sets the threadlocal {@link CommandRequestAttributes}
+	 * based on fixed {@code tenantId}, then afterwards, mark it as {@link #requestCompleted()} and removes it from the threadlocal.
+	 * This is required when you want to use a multitenant {@code EntityManager} from a non-web/shell-request entry point
+	 * (e.g. scheduled).
+	 * @param requestAttributes
+	 * @return 
+	 */
+	public static Closeable withTenant(String tenantId) {
+		final SimpleCommandProcessor shell = new SimpleCommandProcessor(new ThreadIOImpl());
+		final SimpleCommandSession session = new SimpleCommandSession(shell, 
+				new ByteArrayInputStream(new byte[] {}), new PrintStream(new ByteArrayOutputStream()), new PrintStream(new ByteArrayOutputStream()));
+		session.put("tenantId", tenantId);
+		return withSession(session);
 	}
 
 	/* (non-Javadoc)
