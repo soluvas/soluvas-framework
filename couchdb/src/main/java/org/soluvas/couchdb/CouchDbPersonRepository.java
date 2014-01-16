@@ -471,7 +471,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 
 	@Override
 	@Nullable
-	public Person findOneByPhoneNumber(@Nullable String mobileNumber) {
+	public Person findOneByPhoneNumber(StatusMask statusMask, @Nullable String mobileNumber) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 

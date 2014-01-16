@@ -102,11 +102,12 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 			return null;
 		}
 		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+		augmentQueryForStatusMask(query, statusMask);
 		return findOneByQuery(query);
 	}
 	
 	@Override @Nullable
-	public Person findOneByPhoneNumber(@Nullable String phoneNumber) {
+	public Person findOneByPhoneNumber(StatusMask statusMask, @Nullable String phoneNumber) {
 		if (phoneNumber == null) {
 			return null;
 		}
@@ -114,6 +115,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		final BasicDBObject qMobileNumber = new BasicDBObject("mobileNumbers", new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
 		final BasicDBObject qPhoneNumber = new BasicDBObject("phoneNumbers", new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
 		query.put("$or", new BasicDBObject[] {qMobileNumber, qPhoneNumber});
+		augmentQueryForStatusMask(query, statusMask);
 		return findOneByQuery(query);
 	}
 
