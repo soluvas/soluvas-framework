@@ -15,7 +15,8 @@ import org.soluvas.image.Media;
 import org.soluvas.image.MediaRepository;
 
 /**
- * Works with {@link MediaRepository} to provide Wicket-independent secure media serving.
+ * Works with {@link MediaRepository} to provide Wicket-independent secure media serving
+ * via {@link MediaResource}.
  * It uses JAX-RS instead of Wicket because {@link Media} resources may be used in
  * email notifications, Facebook shares, or other non-webapp purposes.
  * @author ceefour
