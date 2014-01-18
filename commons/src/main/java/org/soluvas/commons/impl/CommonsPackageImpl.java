@@ -1638,6 +1638,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getWebAddress__GetApiUri() {
+		return webAddressEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getWebAddress__GetSecureApiUri() {
+		return webAddressEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getAdded() {
 		return addedEClass;
@@ -3907,6 +3925,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(webAddressEClass, WEB_ADDRESS__SECURE_IMAGES_URI);
 		createEAttribute(webAddressEClass, WEB_ADDRESS__SECURE_SKIN_URI);
 		createEAttribute(webAddressEClass, WEB_ADDRESS__SECURE_JS_URI);
+		createEOperation(webAddressEClass, WEB_ADDRESS___GET_API_URI);
+		createEOperation(webAddressEClass, WEB_ADDRESS___GET_SECURE_API_URI);
 
 		addedEClass = createEClass(ADDED);
 
@@ -4505,6 +4525,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getWebAddress_SecureImagesUri(), ecorePackage.getEString(), "secureImagesUri", null, 0, 1, WebAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getWebAddress_SecureSkinUri(), ecorePackage.getEString(), "secureSkinUri", null, 0, 1, WebAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getWebAddress_SecureJsUri(), ecorePackage.getEString(), "secureJsUri", null, 0, 1, WebAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getWebAddress__GetApiUri(), theEcorePackage.getEString(), "getApiUri", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getWebAddress__GetSecureApiUri(), theEcorePackage.getEString(), "getSecureApiUri", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(addedEClass, Added.class, "Added", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -5237,6 +5261,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Tenant-wide website URI configuration."
+		   });		
+		addAnnotation
+		  (getWebAddress__GetApiUri(), 
+		   source, 
+		   new String[] {
+			 "documentation", "API URI is useful if you want to access API resources (e.g. MediaResource) from external apps, email, etc. or where you have taken care of the cross-origin request issues.\n\nAlways returns baseUri + apiPath, removing double slash."
+		   });		
+		addAnnotation
+		  (getWebAddress__GetSecureApiUri(), 
+		   source, 
+		   new String[] {
+			 "documentation", "API URI is useful if you want to access API resources (e.g. MediaResource) from external apps, email, etc. or where you have taken care of the cross-origin request issues.\n\nAlways returns secureBaseUri + apiPath, removing double slash."
 		   });		
 		addAnnotation
 		  (getWebAddress_BaseUri(), 

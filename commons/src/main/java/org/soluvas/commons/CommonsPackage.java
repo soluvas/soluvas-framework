@@ -1321,13 +1321,31 @@ public interface CommonsPackage extends EPackage {
 	int WEB_ADDRESS___EXPAND__MAP = POSITIONABLE_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Api Uri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS___GET_API_URI = POSITIONABLE_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Secure Api Uri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEB_ADDRESS___GET_SECURE_API_URI = POSITIONABLE_OPERATION_COUNT + 2;
+
+	/**
 	 * The number of operations of the '<em>Web Address</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WEB_ADDRESS_OPERATION_COUNT = POSITIONABLE_OPERATION_COUNT + 1;
+	int WEB_ADDRESS_OPERATION_COUNT = POSITIONABLE_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.EObjectLinked <em>EObject Linked</em>}' class.
@@ -6048,6 +6066,26 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getWebAddress_SecureJsUri();
 
 	/**
+	 * Returns the meta object for the '{@link org.soluvas.commons.WebAddress#getApiUri() <em>Get Api Uri</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Api Uri</em>' operation.
+	 * @see org.soluvas.commons.WebAddress#getApiUri()
+	 * @generated
+	 */
+	EOperation getWebAddress__GetApiUri();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.commons.WebAddress#getSecureApiUri() <em>Get Secure Api Uri</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Secure Api Uri</em>' operation.
+	 * @see org.soluvas.commons.WebAddress#getSecureApiUri()
+	 * @generated
+	 */
+	EOperation getWebAddress__GetSecureApiUri();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.Added <em>Added</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9151,6 +9189,22 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute WEB_ADDRESS__SECURE_JS_URI = eINSTANCE.getWebAddress_SecureJsUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Api Uri</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation WEB_ADDRESS___GET_API_URI = eINSTANCE.getWebAddress__GetApiUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Secure Api Uri</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation WEB_ADDRESS___GET_SECURE_API_URI = eINSTANCE.getWebAddress__GetSecureApiUri();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.AddedImpl <em>Added</em>}' class.

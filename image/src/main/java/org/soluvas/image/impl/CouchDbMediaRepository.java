@@ -6,9 +6,14 @@ import java.nio.file.Files;
 import java.util.Collection;
 import java.util.Map;
 
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.conn.ClientConnectionManager;
 import org.ektorp.AttachmentInputStream;
+import org.soluvas.commons.WebAddress;
 import org.soluvas.couchdb.CouchDbRepositoryBase;
 import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
@@ -19,6 +24,7 @@ import org.soluvas.data.repository.Repository;
 import org.soluvas.image.Media;
 import org.soluvas.image.MediaRepository;
 import org.soluvas.image.MediaStatus;
+import org.soluvas.image.rs.MediaResource;
 
 import scala.util.Try;
 
@@ -33,9 +39,11 @@ import com.google.common.collect.ImmutableSet;
  */
 public class CouchDbMediaRepository extends CouchDbRepositoryBase<Media, MediaStatus>
 		implements MediaRepository {
+	
+	private final WebAddress webAddress;
 
 	public CouchDbMediaRepository(ClientConnectionManager connMgr,
-			String couchDbUri, String dbName) {
+			String couchDbUri, String dbName, WebAddress webAddress) {
 		super(connMgr, Media.class, MediaImpl.class, 1L, couchDbUri, dbName,
 				ImmutableList.<String>of(), ImmutableMap.<String, Integer>of(),
 				"status", 
@@ -43,6 +51,7 @@ public class CouchDbMediaRepository extends CouchDbRepositoryBase<Media, MediaSt
 				ImmutableSet.<MediaStatus>of(),
 				ImmutableSet.of(MediaStatus.DRAFT),
 				ImmutableSet.of(MediaStatus.VOID) );
+		this.webAddress = webAddress;
 	}
 	
 	protected void attach(Media media, File file, String contentType) throws IOException {
@@ -85,6 +94,31 @@ public class CouchDbMediaRepository extends CouchDbRepositoryBase<Media, MediaSt
 		} catch (IOException e) {
 			throw new RepositoryException(e, "Cannot probe content type from '%s' for media '%s'", 
 					file, media.getId());
+		}
+	}
+	
+	@Override
+	public String getPublicUri(Media media) {
+		return getOriginUri(media);
+	}
+	
+	@Override
+	public String getOriginUri(Media media) {
+//		return couchDbUri + dbName + "/" + media.getGuid() + "/" + media.getAttachments().keySet().iterator().next();
+		return UriBuilder.fromUri(webAddress.getApiUri())
+				.path(MediaResource.class)
+				.path(MediaResource.class, "getContent")
+				.build(media.getId()).toString();
+	}
+	
+	@Override
+	public Response getContent(Media media) throws IOException {
+		final String attachmentId = media.getAttachments().keySet().iterator().next();
+		try (final AttachmentInputStream attachment = dbConn.getAttachment(media.getGuid(), attachmentId)) {
+			final byte[] bytes = IOUtils.toByteArray(attachment);
+			return Response.ok(bytes, attachment.getContentType())
+					.header("Content-Disposition", "inline; filename=" + attachmentId)
+					.build();
 		}
 	}
 

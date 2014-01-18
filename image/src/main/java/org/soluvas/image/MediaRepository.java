@@ -1,7 +1,10 @@
 package org.soluvas.image;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
+
+import javax.ws.rs.core.Response;
 
 import org.soluvas.data.Existence;
 import org.soluvas.data.GenericLookup;
@@ -46,5 +49,36 @@ public interface MediaRepository extends
 	 * @return
 	 */
 	Media add(Media media, File file);
+
+	/**
+	 * Returns the public (as opposed to "origin" in {@link #getOriginUri(Media)}) URI of the {@link Media}, which can be behind CDN.
+	 * The {@link Media} may require authentication, and the implementation is free to determine whether
+	 * the authentication information is embedded in the URI (i.e. via limited session key), or is assumed
+	 * to be available in the browser (e.g. CouchDB attachments). 
+	 * @param media
+	 * @return
+	 */
+	String getPublicUri(Media media);
+	
+	/**
+	 * Returns the origin (as opposed to "public" in {@link #getPublicUri(Media)}) URI of the {@link Media},
+	 * which must not be behind CDN.
+	 * The {@link Media} may require authentication, and the implementation is free to determine whether
+	 * the authentication information is embedded in the URI (i.e. via limited session key), or is assumed
+	 * to be available in the browser (e.g. CouchDB attachments). 
+	 * @param media
+	 * @return
+	 */
+	String getOriginUri(Media media);
+
+	/**
+	 * Returns the {@link Media}'s binary content as a JAX-RS {@link Response}.
+	 * It uses byte array so it's safe even if not consumed.
+	 * It returns proper {@code Content-Type} and also with {@code Content-Disposition: inline} header. 
+	 * @param media
+	 * @return
+	 * @throws IOException
+	 */
+	Response getContent(Media media) throws IOException;
 	
 }

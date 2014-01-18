@@ -4,11 +4,13 @@ package org.soluvas.commons.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
+import java.net.URI;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.utils.URIUtils;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -762,6 +764,24 @@ public class WebAddressImpl extends MinimalEObjectImpl.Container implements WebA
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public String getApiUri() {
+		return URIUtils.resolve(URI.create(getBaseUri()), getApiPath()).toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public String getSecureApiUri() {
+		return URIUtils.resolve(URI.create(getSecureBaseUri()), getApiPath()).toString();
+	}
+
+	/**
 	 * Supported built-in expansion variables are: fqdn.
 	 * scope may provide additionally: tenantId, tenantEnv.
 	 * <!-- begin-user-doc -->
@@ -1146,6 +1166,10 @@ public class WebAddressImpl extends MinimalEObjectImpl.Container implements WebA
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
+			case CommonsPackage.WEB_ADDRESS___GET_API_URI:
+				return getApiUri();
+			case CommonsPackage.WEB_ADDRESS___GET_SECURE_API_URI:
+				return getSecureApiUri();
 			case CommonsPackage.WEB_ADDRESS___EXPAND__MAP:
 				expand((Map<String, Object>)arguments.get(0));
 				return null;
