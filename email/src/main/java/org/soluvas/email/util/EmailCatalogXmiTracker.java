@@ -298,7 +298,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					final URL resource = bundle != null ? bundle.getEntry(plainFileName) : classLoader.getResource(plainFileName);
 					final String plain = IOUtils.toString(resource);
 					layoutType.setPlainTemplate(plain);
-				} catch (IOException e) {
+				} catch (Exception e) {
 					throw new EmailException("Cannot read " + plainFileName + " in " + xmiUrls, e);
 				}
 				final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
@@ -306,7 +306,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					final URL resource = bundle != null ? bundle.getEntry(htmlFileName) : classLoader.getResource(htmlFileName);
 					final String html = IOUtils.toString(resource);
 					layoutType.setHtmlTemplate(html);
-				} catch (IOException e) {
+				} catch (Exception e) {
 					throw new EmailException("Cannot read " + htmlFileName + " in " + xmiUrls, e);
 				}
 			}
