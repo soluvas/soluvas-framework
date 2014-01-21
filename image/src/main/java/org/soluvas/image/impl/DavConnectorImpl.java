@@ -44,7 +44,9 @@ import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.UploadedImage;
 
+import com.damnhandy.uri.template.MalformedUriTemplateException;
 import com.damnhandy.uri.template.UriTemplate;
+import com.damnhandy.uri.template.VariableExpansionException;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
@@ -202,12 +204,17 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 	}
 
 	public String getImageOriginUri(String namespace, String id, String styleCode, String styleVariant, String extension) {
-		String uriTemplate = getOriginUriTemplate();
+		final String uriTemplate = getOriginUriTemplate();
 		// namespace, styleCode, imageId, styleVariant, ext
 		final Map<String, Object> uriVars = ImmutableMap.<String, Object>of(
 				"namespace", namespace, "styleCode", styleCode, "imageId", id, "styleVariant", styleVariant,
 				"extension", extension);
-		return UriTemplate.fromTemplate(uriTemplate).expand(uriVars);
+		try {
+			return UriTemplate.fromTemplate(uriTemplate).expand(uriVars);
+		} catch (VariableExpansionException | MalformedUriTemplateException e) {
+			throw new ImageException(e, "Cannot expand image origin URI template '%s' using %s",
+					uriTemplate, uriVars);
+		}
 	}
 	
 	/**

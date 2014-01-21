@@ -1,7 +1,6 @@
 package org.soluvas.commons;
 
 import java.net.URL;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -70,7 +69,7 @@ public class StaticXmiLoader<T extends EObject> extends OnDemandXmiLoader<T> {
 	 * @see org.soluvas.commons.OnDemandXmiLoader#getScope()
 	 */
 	@Override
-	public Map<String, Object> getScope() {
+	public ImmutableMap<String, Object> getScope() {
 		return ImmutableMap.of();
 	}
 

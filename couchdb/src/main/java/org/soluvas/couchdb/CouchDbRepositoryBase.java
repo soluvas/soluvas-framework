@@ -985,7 +985,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 				// TODO: make it typesafe
 				E actualStatus = null;
 				try {
-					actualStatus = (E) PropertyUtils.getProperty(row, "status");
+					actualStatus = (E) PropertyUtils.getProperty(row, statusProperty);
 				} catch (IllegalAccessException | InvocationTargetException
 						| NoSuchMethodException e) {
 					log.warn("Cannot get status of " + entityClass.getSimpleName() + " '" + row.getId() + "'", e);

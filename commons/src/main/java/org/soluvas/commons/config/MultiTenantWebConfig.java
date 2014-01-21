@@ -1,15 +1,10 @@
 package org.soluvas.commons.config;
 
-import java.io.File;
-import java.net.URL;
-import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,11 +12,8 @@ import org.apache.felix.service.command.CommandSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
-import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.DataFolder;
-import org.soluvas.commons.OnDemandXmiLoader;
-import org.soluvas.commons.ResourceType;
-import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.tenant.CommandRequestAttributes;
 import org.soluvas.commons.tenant.RequestOrCommandScope;
@@ -61,8 +53,10 @@ public class MultiTenantWebConfig {
 	
 	@Inject
 	private Environment env;
-	@Resource(name="tenantMap")
-	private Map<String, AppManifest> tenantMap;
+	@Inject
+	private TenantConfig tenantConfig;
+//	@Resource(name="tenantMap")
+//	private Map<String, AppManifest> tenantMap;
 	
 //	@Inject
 //	private BeanFactory appCtx;
@@ -120,65 +114,86 @@ public class MultiTenantWebConfig {
 					getRequest(), env.getRequiredProperty("tenantEnv"));
 		} else if (requestAttrs instanceof CommandRequestAttributes) {
 			final CommandSession session = ((CommandRequestAttributes) requestAttrs).getSession();
-			final String clientId = Optional.fromNullable((String) session.get("clientId")).or(tenantMap.keySet().iterator().next());
-			final String tenantId = Optional.fromNullable((String) session.get("tenantId")).or(tenantMap.keySet().iterator().next());
-			final String tenantEnv = env.getRequiredProperty("tenantEnv");
-			return new TenantRefImpl(clientId, tenantId, tenantEnv);
+			try {
+				final String clientId = Optional.fromNullable((String) session.get("clientId")).or(tenantConfig.tenantMap().keySet().iterator().next());
+				final String tenantId = Optional.fromNullable((String) session.get("tenantId")).or(tenantConfig.tenantMap().keySet().iterator().next());
+				final String tenantEnv = env.getRequiredProperty("tenantEnv");
+				return new TenantRefImpl(clientId, tenantId, tenantEnv);
+			} catch (IllegalStateException | IOException e) {
+				throw new CommonsException("Cannot get tenantRef from CommandRequestAttributes session " + session, e);
+			}
 		} else {
 			throw new IllegalStateException("Unknown request attributes: " + requestAttrs);
 		}
 	}
 	
 	@Bean @DataFolder @Scope(value="request")
-	public String dataFolder() {
+	public String dataFolder() throws IOException {
 		return System.getProperty("user.home") + "/" + tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv();
 	}
 	
-	/**
-	 * proxyMode is required! See http://forum.springsource.org/showthread.php?141230-Beans-initialized-twice-by-WebApplicationContext&p=454428#post454428
-	 * @return
-	 * @throws ExecutionException
-	 * @see {@link TenantConfig#tenantMap()}
-	 * @todo Maybe, instead of loading ad-hoc, it should get it from {@link TenantConfig#tenantMap()} instead.
-	 */
 	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
-	public AppManifest appManifest() throws ExecutionException {
-		final String tenantId = tenantRef().getTenantId();
-		final String tenantKey = tenantId + "_" + tenantRef().getTenantEnv();
-		return appManifestCache.get(tenantKey, new Callable<AppManifest>() {
-			@Override
-			public AppManifest call() throws Exception {
-				URL classpathManifest = MultiTenantWebConfig.class.getResource("/META-INF/" + tenantId + ".AppManifest.xmi");
-				if (classpathManifest != null) {
-					return new StaticXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, classpathManifest, ResourceType.CLASSPATH).get();
-				} else {
-					return new StaticXmiLoader<AppManifest>(CommonsPackage.eINSTANCE,
-						new File(dataFolder(), "model/" + tenantKey + ".AppManifest.xmi").toString()).get();
-				}
-			}
-		});
-	}
+	public AppManifest appManifest() throws IOException {
+		return Preconditions.checkNotNull(
+				tenantConfig.tenantMap().get(tenantRef().getTenantId()),
+				"Unknown tenant '%s'. %s available tenants are: %s",
+				tenantRef().getTenantId(), tenantConfig.tenantMap().size(), tenantConfig.tenantMap().keySet());
 	
-	/**
-	 * @return
-	 * @throws ExecutionException
-	 * @todo Maybe, instead of loading ad-hoc, it should get it from {@link TenantConfig#webAddressMap()} instead.
-	 */
-	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
-	public WebAddress webAddress() throws ExecutionException {
-		final String tenantKey = tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv();
-		return webAddressCache.get(tenantKey, new Callable<WebAddress>() {
-			@Override
-			public WebAddress call() throws Exception {
-//				return new StaticXmiLoader<WebAddress>(CommonsPackage.eINSTANCE,
-//						new File(dataFolder(), "model/custom.WebAddress.xmi").toString()).get();
-				final OnDemandXmiLoader<WebAddress> loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE,
-						MultiTenantWebConfig.class, "/META-INF/tenant.WebAddress.xmi");
-				loader.getScope().put("tenantId", tenantRef().getTenantId());
-				loader.getScope().put("tenantEnv", tenantRef().getTenantEnv());
-				return loader.get();
-			}
-		});
 	}
+	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+	public WebAddress webAddress() throws IOException {
+		return Preconditions.checkNotNull(
+				tenantConfig.webAddressMap().get(tenantRef().getTenantId()),
+				"Unknown tenant WebAddress '%s'. %s available WebAddresses are for: %s",
+				tenantRef().getTenantId(), tenantConfig.webAddressMap().size(), tenantConfig.webAddressMap().keySet());
+		
+	}
+
+//	/**
+//	 * proxyMode is required! See http://forum.springsource.org/showthread.php?141230-Beans-initialized-twice-by-WebApplicationContext&p=454428#post454428
+//	 * @return
+//	 * @throws ExecutionException
+//	 * @see {@link TenantConfig#tenantMap()}
+//	 * @todo Maybe, instead of loading ad-hoc, it should get it from {@link TenantConfig#tenantMap()} instead.
+//	 */
+//	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+//	public AppManifest appManifest() throws ExecutionException {
+//		final String tenantId = tenantRef().getTenantId();
+//		final String tenantKey = tenantId + "_" + tenantRef().getTenantEnv();
+//		return appManifestCache.get(tenantKey, new Callable<AppManifest>() {
+//			@Override
+//			public AppManifest call() throws Exception {
+//				URL classpathManifest = MultiTenantWebConfig.class.getResource("/META-INF/" + tenantId + ".AppManifest.xmi");
+//				if (classpathManifest != null) {
+//					return new StaticXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, classpathManifest, ResourceType.CLASSPATH).get();
+//				} else {
+//					return new StaticXmiLoader<AppManifest>(CommonsPackage.eINSTANCE,
+//						new File(dataFolder(), "model/" + tenantKey + ".AppManifest.xmi").toString()).get();
+//				}
+//			}
+//		});
+//	}
+//	
+//	/**
+//	 * @return
+//	 * @throws ExecutionException
+//	 * @todo Maybe, instead of loading ad-hoc, it should get it from {@link TenantConfig#webAddressMap()} instead.
+//	 */
+//	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+//	public WebAddress webAddress() throws ExecutionException {
+//		final String tenantKey = tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv();
+//		return webAddressCache.get(tenantKey, new Callable<WebAddress>() {
+//			@Override
+//			public WebAddress call() throws Exception {
+////				return new StaticXmiLoader<WebAddress>(CommonsPackage.eINSTANCE,
+////						new File(dataFolder(), "model/custom.WebAddress.xmi").toString()).get();
+//				final OnDemandXmiLoader<WebAddress> loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE,
+//						MultiTenantWebConfig.class, "/META-INF/tenant.WebAddress.xmi");
+//				loader.getScope().put("tenantId", tenantRef().getTenantId());
+//				loader.getScope().put("tenantEnv", tenantRef().getTenantEnv());
+//				return loader.get();
+//			}
+//		});
+//	}
 
 }

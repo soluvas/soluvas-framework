@@ -14,7 +14,11 @@ import org.joda.time.DateTimeZone;
  * <!-- begin-model-doc -->
  * AppManifest is actually a misnomer, it should've been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.
  * 
- * Attributes are optional because can use OverlayingSupplier.
+ * <p>Attributes are optional because can use OverlayingSupplier.
+ * 
+ * <p>Expandable attributes are: domain.
+ * 
+ * <p>Expansion variables are: appDomain.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -41,7 +45,7 @@ import org.joda.time.DateTimeZone;
  * @model
  * @generated
  */
-public interface AppManifest extends Positionable, ResourceAware, BundleAware {
+public interface AppManifest extends Positionable, ResourceAware, BundleAware, Expandable {
 	/**
 	 * Returns the value of the '<em><b>Title</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -140,6 +144,9 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 	 * <p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev
 	 * 
 	 * <p>Description usually stays the same, but can be different too.
+	 * 
+	 * <p>This may contain the {@code appDomain} variable in the form of URI template, i.e. "acme.{+appDomain}",
+	 * that will be expanded when you call {@link #expand()}.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Domain</em>' attribute.
 	 * @see #setDomain(String)

@@ -85,6 +85,7 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = casePositionable(appManifest);
 				if (result == null) result = caseResourceAware(appManifest);
 				if (result == null) result = caseBundleAware(appManifest);
+				if (result == null) result = caseExpandable(appManifest);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

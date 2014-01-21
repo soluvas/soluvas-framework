@@ -4297,6 +4297,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		appManifestEClass.getESuperTypes().add(this.getPositionable());
 		appManifestEClass.getESuperTypes().add(this.getResourceAware());
 		appManifestEClass.getESuperTypes().add(this.getBundleAware());
+		appManifestEClass.getESuperTypes().add(this.getExpandable());
 		personInfoEClass.getESuperTypes().add(this.getIdentifiable());
 		personInfoEClass.getESuperTypes().add(this.getPhotoIdContainer());
 		personInfoEClass.getESuperTypes().add(this.getSluggable());
@@ -4954,7 +4955,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (appManifestEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "AppManifest is actually a misnomer, it should\'ve been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.\n\nAttributes are optional because can use OverlayingSupplier."
+			 "documentation", "AppManifest is actually a misnomer, it should\'ve been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.\n\n<p>Attributes are optional because can use OverlayingSupplier.\n\n<p>Expandable attributes are: domain.\n\n<p>Expansion variables are: appDomain."
 		   });		
 		addAnnotation
 		  (getAppManifest_Summary(), 
@@ -4972,7 +4973,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (getAppManifest_Domain(), 
 		   source, 
 		   new String[] {
-			 "documentation", "Primary domain name of the application, e.g. \"berbatik.com\". Used by Email system.\n\n<p>For development, use e.g. \"berbatik.annafi.dev\".\n\n<p>TODO: title & domain should probably be moved somewhere else, since it\'s tenant & environment specific.\n\n<p>Production: title=Berbatik, domain=berbatik.com\n\n<p>Staging: title=Berbatik stg, domain=stg.berbatik.com\n\n<p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev\n\n<p>Description usually stays the same, but can be different too."
+			 "documentation", "Primary domain name of the application, e.g. \"berbatik.com\". Used by Email system.\n\n<p>For development, use e.g. \"berbatik.annafi.dev\".\n\n<p>TODO: title & domain should probably be moved somewhere else, since it\'s tenant & environment specific.\n\n<p>Production: title=Berbatik, domain=berbatik.com\n\n<p>Staging: title=Berbatik stg, domain=stg.berbatik.com\n\n<p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev\n\n<p>Description usually stays the same, but can be different too.\n\n<p>This may contain the {@code appDomain} variable in the form of URI template, i.e. \"acme.{+appDomain}\",\nthat will be expanded when you call {@link #expand()}."
 		   });		
 		addAnnotation
 		  (getAppManifest_GeneralEmail(), 

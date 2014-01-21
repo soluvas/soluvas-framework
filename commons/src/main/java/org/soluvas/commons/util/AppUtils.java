@@ -8,9 +8,12 @@ import java.util.concurrent.ThreadPoolExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
+import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.WebAddress;
 
+import com.damnhandy.uri.template.MalformedUriTemplateException;
 import com.damnhandy.uri.template.UriTemplate;
+import com.damnhandy.uri.template.VariableExpansionException;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
@@ -39,8 +42,13 @@ public class AppUtils {
 	 * @return
 	 */
 	public static String getEmailLogoUri(AppManifest appManifest, WebAddress webAddress) {
-		final UriTemplate template = UriTemplate.fromTemplate(appManifest.getEmailLogoUriTemplate());
-		return template.expand(ImmutableMap.<String, Object>of("imagesUri", webAddress.getImagesUri())).toString();
+		try {
+			final UriTemplate template = UriTemplate.fromTemplate(appManifest.getEmailLogoUriTemplate());
+			return template.expand(ImmutableMap.<String, Object>of("imagesUri", webAddress.getImagesUri())).toString();
+		} catch (MalformedUriTemplateException | VariableExpansionException e) {
+			throw new CommonsException(e, "Cannot expand imagesUri '%s' from AppManifest '%s' using template '%s'",
+					webAddress.getImagesUri(), appManifest.getTitle(), appManifest.getEmailLogoUriTemplate());
+		}
 	}
 	
 	/**

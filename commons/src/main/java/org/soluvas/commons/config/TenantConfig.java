@@ -62,8 +62,11 @@ public class TenantConfig {
 				final Matcher tenantIdMatcher = tenantIdPattern.matcher(res.getFilename());
 				Preconditions.checkState(tenantIdMatcher.matches(), "Invalid AppManifest resource name: %s", res.getFilename());
 				final String tenantId = tenantIdMatcher.group(1);
+				
+				final ImmutableMap<String, String> scope = ImmutableMap.of(
+						"appDomain", env.getRequiredProperty("appDomain"));
 				final AppManifest tenantManifest = new OnDemandXmiLoader<AppManifest>(
-						CommonsPackage.eINSTANCE, res.getURL(), ResourceType.CLASSPATH).get();
+						CommonsPackage.eINSTANCE, res.getURL(), ResourceType.CLASSPATH, scope).get();
 				builder.put(tenantId, tenantManifest);
 			}
 			return builder.build();
@@ -93,10 +96,10 @@ public class TenantConfig {
 			final String tenantKey = tenant.getKey() + "_" + tenantEnv;
 //					return new StaticXmiLoader<WebAddress>(CommonsPackage.eINSTANCE,
 //							new File(dataFolder(), "model/custom.WebAddress.xmi").toString()).get();
+			final ImmutableMap<String, String> scope = ImmutableMap.of("tenantId", tenant.getKey(),
+					"tenantEnv", tenantEnv);
 			final OnDemandXmiLoader<WebAddress> loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE,
-					MultiTenantWebConfig.class, "/META-INF/tenant.WebAddress.xmi");
-			loader.getScope().put("tenantId", tenant.getKey());
-			loader.getScope().put("tenantEnv", tenantEnv);
+					MultiTenantWebConfig.class, "/META-INF/tenant.WebAddress.xmi", scope);
 			final WebAddress webAddress = loader.get();
 			webAddressBuilder.put(tenant.getKey(), webAddress);
 		}

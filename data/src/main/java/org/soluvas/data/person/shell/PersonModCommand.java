@@ -70,9 +70,9 @@ public class PersonModCommand extends ExtCommandSupport {
 					final Email email = emailIter.next();
 					if (lastPrimaryEmail != null && lastPrimaryEmail.equalsIgnoreCase(email.getEmail())) {
 						emailIter.remove();
-					}
-					// avoid duplicate by pre-removing existing new email address
-					if (emailStr.equalsIgnoreCase(email.getEmail())) {
+					} else if (emailStr.equalsIgnoreCase(email.getEmail())) {
+						// avoid duplicate by pre-removing existing new email address
+						// note that Iterator.remove() can only be called once
 						emailIter.remove();
 					}
 				}
