@@ -150,9 +150,8 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	@SuppressWarnings("null")
 	@Override
 	public Page<Person> findBySearchText(StatusMask statusMask, @Nullable String searchText, Pageable pageable) {
-		final BasicDBObject query = getQueryBySearchText(searchText);
-		augmentQueryForStatusMask(query, statusMask);
-		
+		final BasicDBObject queryBySearchText = getQueryBySearchText(searchText);
+		augmentQueryForStatusMask(queryBySearchText, statusMask);
 		final Sort mySort;
 		if (pageable.getSort() != null) {
 			mySort = pageable.getSort().and(new Sort(Direction.DESC, "modificationTime"));
@@ -162,18 +161,23 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		
 		final PageRequest myPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), mySort);
 		
-		return findAllByQuery(query, myPageable);
+		return findAllByQuery(queryBySearchText, myPageable);
 	}
 	
 	private BasicDBObject getQueryBySearchText(String searchText) {
 		final Pattern regex = Pattern.compile(Pattern.quote(searchText), Pattern.CASE_INSENSITIVE);
+		
 		final BasicDBObject nameQuery = new BasicDBObject("name", regex);
 		final BasicDBObject idQuery = new BasicDBObject("id", regex);
+		
 		final BasicDBObject emailQuery = new BasicDBObject("email", regex);
 		final BasicDBObject emailsQuery = new BasicDBObject("emails", new BasicDBObject("$elemMatch", emailQuery));
-		final BasicDBObject phoneNumberQuery = new BasicDBObject("phoneNumber", regex);
+		
+		final BasicDBObject phoneNumberQuery = new BasicDBObject("phoneNumber", searchText);
 		final BasicDBObject mobileNumbersQuery = new BasicDBObject("mobileNumbers", new BasicDBObject("$elemMatch", phoneNumberQuery));
-		final BasicDBObject query = new BasicDBObject("$or", ImmutableList.of(nameQuery, idQuery , emailsQuery, mobileNumbersQuery));
+		final BasicDBObject phoneNumbersQuery = new BasicDBObject("phoneNumbers", new BasicDBObject("$elemMatch", phoneNumberQuery));
+		
+		final BasicDBObject query = new BasicDBObject("$or", ImmutableList.of(nameQuery, idQuery , emailsQuery, mobileNumbersQuery, phoneNumbersQuery));
 		log.debug("Query is {}", query);
 		return query;
 	}
