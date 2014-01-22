@@ -87,8 +87,8 @@ public class SchedTrigLsCommand extends ExtCommandSupport {
 			));
 			System.out.println(ansi().render("@|bold,black    ||@%-40s@|bold,black ||@%-24s@|bold,black ||@%s", triggerExpr, trigger.getJobKey().getName(), ImmutableMap.copyOf(jobDataMap)));
 		}
-		System.out.println(ansi().render("@|bold,yellow %d|@ Triggers (times are in @|bold %s|@)", 
-				triggerKeys.size(), timeZone));
+		System.out.println(ansi().render("@|bold,yellow %d|@ Triggers in scheduler @|bold %s|@ (times are in @|bold %s|@)", 
+				triggerKeys.size(), scheduler.getSchedulerName(), timeZone));
 		return triggerKeys.size();
 	}
 
