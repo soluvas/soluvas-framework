@@ -19,7 +19,7 @@
   <senderTypes
       name="general"
       from="{{{appManifest.title}}}"
-      email="info@{{{appManifest.domain}}}"/>
+      email="{{{appManifest.generalEmail}}}"/>
   <senderTypes
       name="notification"
       from="{{{appManifest.title}}}"
@@ -32,4 +32,8 @@
       name="support"
       from="{{{appManifest.title}}} Support"
       email="support@{{{appManifest.domain}}}"/>
+  <senderTypes
+      name="info"
+      from="{{{appManifest.title}}}"
+      email="info@{{{appManifest.domain}}}"/>
 </email:EmailCatalog>
