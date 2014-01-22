@@ -48,7 +48,7 @@ public class PersonLsCommand extends ExtCommandSupport {
 			statusMask = StatusMask.RAW;
 		}
 		final PersonRepository personRepo = getBean(PersonRepository.class);
-		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-15s|%-21s|%-20s|@",
+		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-20s|%-21s|%-20s|@",
 				"№", "ID", "Slug", "Name", "Email(s)" ));
 		final Page<Person> personPage = personRepo.findAll(new PageRequest(pageNumber, pageSize, sortDir, sortProperty));
 		int i = 0;
@@ -66,7 +66,7 @@ public class PersonLsCommand extends ExtCommandSupport {
 			} else {
 				emails = it.getEmail();
 			}
-			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-15s|@@|bold,black ||@%-15s@|bold,black ||@" + genderStr + "%-20s@|bold,black ||@%-20s",
+			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-15s|@@|bold,black ||@%-20s@|bold,black ||@" + genderStr + "%-20s@|bold,black ||@%-20s",
 				++i, it.getId(), it.getSlug(), it.getName(), emails) );
 		}
 		System.out.println(ansi().render("@|bold %d|@ of @|bold %d|@ Person entities",
