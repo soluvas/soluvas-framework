@@ -98,7 +98,7 @@ public class ScheduleConfig {
 			final Properties props = new Properties();
 			props.put("org.quartz.jobStore.driverDelegateClass", PostgreSQLDelegate.class.getName());
 			props.put(StdSchedulerFactory.PROP_SCHED_SKIP_UPDATE_CHECK, "true");
-			props.put(StdSchedulerFactory.PROP_JOB_STORE_PREFIX + "."  + StdSchedulerFactory.PROP_TABLE_PREFIX, tenantId + ".qrtz_");
+			props.put(StdSchedulerFactory.PROP_JOB_STORE_PREFIX + "." + StdSchedulerFactory.PROP_TABLE_PREFIX, tenantId + ".qrtz_");
 			schedulerFactoryBean.setQuartzProperties(props);
 			
 			// Other than tenantId & AppManifest, Jobs should get dependencies via getBean(), similar to what shell commands do,
@@ -112,6 +112,8 @@ public class ScheduleConfig {
 			schedulerFactoryBean.afterPropertiesSet();
 //			final Scheduler scheduler = schedulerFactoryBean.getObject();
 			schedulerFactoryBeanMap.put(tenantId, schedulerFactoryBean);
+			
+			log.info("Creating '{}' SchedulerFactoryBean using: {}", tenantId, props);
 //			schedulerMap.put(tenantId, scheduler);
 		}
 //		schedulerMap = schedulerMapBuilder.build();

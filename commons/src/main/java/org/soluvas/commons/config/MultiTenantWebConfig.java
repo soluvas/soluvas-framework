@@ -22,6 +22,7 @@ import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.commons.tenant.TenantRefImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
@@ -33,6 +34,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.google.common.eventbus.EventBus;
 
 /**
  * Reads the tenant information from {@link HttpServletRequest#getPathInfo()}.
@@ -138,15 +140,22 @@ public class MultiTenantWebConfig {
 				tenantConfig.tenantMap().get(tenantRef().getTenantId()),
 				"Unknown tenant '%s'. %s available tenants are: %s",
 				tenantRef().getTenantId(), tenantConfig.tenantMap().size(), tenantConfig.tenantMap().keySet());
-	
 	}
+
+	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES) @Primary
+	public EventBus tenantEventBus() throws IOException {
+		return Preconditions.checkNotNull(
+				tenantConfig.eventBusMap().get(tenantRef().getTenantId()),
+				"Unknown tenant EventBus '%s'. %s available EventBuses are for: %s",
+				tenantRef().getTenantId(), tenantConfig.eventBusMap().size(), tenantConfig.eventBusMap().keySet());
+	}
+	
 	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	public WebAddress webAddress() throws IOException {
 		return Preconditions.checkNotNull(
 				tenantConfig.webAddressMap().get(tenantRef().getTenantId()),
 				"Unknown tenant WebAddress '%s'. %s available WebAddresses are for: %s",
 				tenantRef().getTenantId(), tenantConfig.webAddressMap().size(), tenantConfig.webAddressMap().keySet());
-		
 	}
 
 //	/**

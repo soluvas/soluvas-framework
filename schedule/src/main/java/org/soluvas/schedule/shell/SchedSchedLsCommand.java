@@ -33,8 +33,8 @@ public class SchedSchedLsCommand extends ExtCommandSupport {
 	
 	@Override @Nullable
 	protected Integer doExecute() throws Exception {
-		System.out.println(ansi().render("@|negative_on %3s|%-20s|%-15s|%-3s|%-3s|%-3s|@",
-				"№", "Name/Tenant", "Instance ID", "Cur", "Job", "Trg" ));
+		System.out.println(ansi().render("@|negative_on %3s|%-20s|%-15s|%-3s|%-3s|%-3s|%-25s|@",
+				"№", "Name/Tenant", "Instance ID", "Cur", "Job", "Trg", "Store" ));
 		int i = 0;
 		for (Entry<String, Scheduler> entry : schedulerMap.entrySet()) {
 //			final String tenantId = entry.getKey();
@@ -44,9 +44,10 @@ public class SchedSchedLsCommand extends ExtCommandSupport {
 			final Set<TriggerKey> triggerKeys = scheduler.getTriggerKeys(GroupMatcher.anyTriggerGroup());
 			
 			final String startedAnsi = scheduler.isStarted() ? "@|bold,green ▶|@‎" : "@|bold,red ◼|@";
-			System.out.println(ansi().render("@|bold,black %3d||@" + startedAnsi + "%-19s@|bold,black ||@%-15s@|bold,black ||@%3d@|bold,black ||@%3d@|bold,black ||@%3d",
+			System.out.println(ansi().render("@|bold,black %3d||@" + startedAnsi + "%-19s@|bold,black ||@%-15s@|bold,black ||@%3d@|bold,black ||@%3d@|bold,black ||@%3d@|bold,black ||@%-25s",
 				++i, scheduler.getSchedulerName(), scheduler.getSchedulerInstanceId(), 
-						executingJobs.size(), jobKeys.size(), triggerKeys.size()));
+						executingJobs.size(), jobKeys.size(), triggerKeys.size(),
+						scheduler.getMetaData().getJobStoreClass().getSimpleName()));
 		}
 		System.out.println(ansi().render("@|bold,yellow %d|@ Schedulers", schedulerMap.size()));
 		return schedulerMap.size();

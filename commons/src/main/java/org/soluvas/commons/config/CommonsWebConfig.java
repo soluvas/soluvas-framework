@@ -37,6 +37,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 
 import com.fasterxml.jackson.databind.Module;
@@ -99,10 +100,19 @@ public class CommonsWebConfig {
 		return AppUtils.newCpuExecutor();
 	}
 
-	// TODO: EventBus subscribers
+	/**
+	 * The @{@link Primary} {@link EventBus} is tenant-scoped. In order to access the app eventBus, you'll need to use:
+	 * 
+	 * <pre>
+	 * @Inject @Named("appEventBus")
+	 * private EventBus appEventBus;
+	 * </pre>
+	 * 
+	 * @return EventBus
+	 */
 	@Bean
-	public EventBus globalEventBus() {
-		return new AsyncEventBus("global", networkExecutor());
+	public EventBus appEventBus() {
+		return new AsyncEventBus("*", networkExecutor());
 	}
 	
 	@Bean(destroyMethod="shutdown")

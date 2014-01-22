@@ -2,6 +2,7 @@ package org.soluvas.commons.config;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Network;
 import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.TenantSource;
@@ -25,6 +27,8 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.eventbus.AsyncEventBus;
+import com.google.common.eventbus.EventBus;
 
 /**
  * Non-web tenant-related application configuration.
@@ -37,6 +41,8 @@ public class TenantConfig {
 	
 	@Inject
 	private Environment env;
+	@Inject @Network
+	private ExecutorService networkExecutor;
 	
 	/**
 	 * Loads {@link AppManifest}s for all tenants, depending on
@@ -75,6 +81,25 @@ public class TenantConfig {
 		default:
 			throw new IllegalArgumentException("Unknown tenantSource: " + tenantSource);
 		}
+	}
+
+	/**
+	 * Loads {@link AppManifest}s for all tenants, depending on
+	 * <code>${tenantSource}</code> property ({@link TenantSource}).
+	 * If ${tenantSource} is not specified, default is {@value TenantSource#CONFIG}.
+	 * 
+	 * @return 
+	 * @todo Rename {@link AppManifest} to TenantManifest? Should we? Or just keep it as it is? i.e. make AppManifest overriding from global to tenant?
+	 * @throws IOException 
+	 */
+	@Bean
+	public ImmutableMap<String, EventBus> eventBusMap() throws IOException {
+		final ImmutableMap.Builder<String, EventBus> eventBusb = ImmutableMap.builder();
+		for (final Map.Entry<String, AppManifest> entry : tenantMap().entrySet()) {
+			final AsyncEventBus eventBus = new AsyncEventBus(entry.getKey(), networkExecutor);
+			eventBusb.put(entry.getKey(), eventBus);
+		}
+		return eventBusb.build();
 	}
 
 	@Bean

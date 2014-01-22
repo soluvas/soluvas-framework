@@ -62,7 +62,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 	private static final String suppliedClassName = EmailCatalog.class.getName();
 	private static final EmailPackage xmiEPackage = EmailPackage.eINSTANCE;
 	private final EmailCatalog repo;
-	private final EventBus eventBus;
+	private final EventBus appEventBus;
 	/**
 	 * Used for plain Java.
 	 */
@@ -74,10 +74,10 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 	 * 		is the exclusive consumer of this repo.
 	 */
 	public EmailCatalogXmiTracker(@Nonnull final EmailCatalog repo,
-			@Nonnull final EventBus eventBus) {
+			@Nonnull final EventBus appEventBus) {
 		super();
 		this.repo = repo;
-		this.eventBus = eventBus;
+		this.appEventBus = appEventBus;
 	}
 	
 //	public void add(Class<?> class1, String packageToScan) {
@@ -406,7 +406,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 		// Notify StorySchemaCatalogXmiTracker
 //		final TargetTypeAdded added = SchemaFactory.eINSTANCE.createTargetTypeAdded();
 //		added.getTargetTypes().addAll(targetTypes);
-//		eventBus.post(added);
+//		appEventBus.post(added);
 		
 		final List<EObject> objects = ImmutableList.copyOf(Iterables.<EObject>concat(layoutTypes, pageTypes));
 		return objects;
@@ -503,7 +503,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 		// Notify StorySchemaCatalogXmiTracker
 //			final TargetTypeRemoved removed = SchemaFactory.eINSTANCE.createTargetTypeRemoved();
 //			removed.getTargetTypes().addAll(catalogs);
-//			eventBus.post(removed);
+//			appEventBus.post(removed);
 	}
 	
 	@Override
