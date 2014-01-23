@@ -897,6 +897,10 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	public void expand(Map<String, Object> scope) {
 		if (getExpansionState() == ExpansionState.UNEXPANDED) {
 			try {
+				// domain is expanded twice, because the hub.properties#appDomain may contain URI template {+fqdn} too
+				if (getDomain().contains("{")) {
+					setDomain( UriTemplate.expand(getDomain(), scope) );
+				}
 				if (getDomain().contains("{")) {
 					setDomain( UriTemplate.expand(getDomain(), scope) );
 				}

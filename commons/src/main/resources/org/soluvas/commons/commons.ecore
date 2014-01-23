@@ -41,7 +41,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AppManifest" eSuperTypes="#//Positionable #//ResourceAware #//BundleAware #//Expandable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="AppManifest is actually a misnomer, it should've been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.&#xA;&#xA;&lt;p>Attributes are optional because can use OverlayingSupplier.&#xA;&#xA;&lt;p>Expandable attributes are: domain.&#xA;&#xA;&lt;p>Expansion variables are: appDomain."/>
+      <details key="documentation" value="AppManifest is actually a misnomer, it should've been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.&#xA;&#xA;&lt;p>Attributes are optional because can use OverlayingSupplier.&#xA;&#xA;&lt;p>Expandable attributes are: domain.&#xA;&#xA;&lt;p>Expansion variables are: fqdn (host-dependent), appDomain (from properties)."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="summary" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">

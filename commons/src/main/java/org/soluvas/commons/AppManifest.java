@@ -18,7 +18,7 @@ import org.joda.time.DateTimeZone;
  * 
  * <p>Expandable attributes are: domain.
  * 
- * <p>Expansion variables are: appDomain.
+ * <p>Expansion variables are: fqdn (host-dependent), appDomain (from properties).
  * <!-- end-model-doc -->
  *
  * <p>

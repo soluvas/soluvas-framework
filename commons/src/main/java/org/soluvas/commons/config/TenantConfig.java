@@ -1,6 +1,8 @@
 package org.soluvas.commons.config;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.regex.Matcher;
@@ -11,6 +13,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
+import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Network;
 import org.soluvas.commons.OnDemandXmiLoader;
@@ -26,6 +29,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
@@ -69,7 +73,15 @@ public class TenantConfig {
 				Preconditions.checkState(tenantIdMatcher.matches(), "Invalid AppManifest resource name: %s", res.getFilename());
 				final String tenantId = tenantIdMatcher.group(1);
 				
+				final String fqdn;
+				try {
+					fqdn = InetAddress.getLocalHost().getCanonicalHostName();
+				} catch (UnknownHostException e) {
+					throw new CommonsException("Cannot get FQDN", e);
+				}
+				Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
 				final ImmutableMap<String, String> scope = ImmutableMap.of(
+						"fqdn", fqdn,
 						"appDomain", env.getRequiredProperty("appDomain"));
 				final AppManifest tenantManifest = new OnDemandXmiLoader<AppManifest>(
 						CommonsPackage.eINSTANCE, res.getURL(), ResourceType.CLASSPATH, scope).get();

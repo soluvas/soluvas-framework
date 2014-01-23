@@ -4955,7 +4955,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (appManifestEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "AppManifest is actually a misnomer, it should\'ve been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.\n\n<p>Attributes are optional because can use OverlayingSupplier.\n\n<p>Expandable attributes are: domain.\n\n<p>Expansion variables are: appDomain."
+			 "documentation", "AppManifest is actually a misnomer, it should\'ve been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.\n\n<p>Attributes are optional because can use OverlayingSupplier.\n\n<p>Expandable attributes are: domain.\n\n<p>Expansion variables are: fqdn (host-dependent), appDomain (from properties)."
 		   });		
 		addAnnotation
 		  (getAppManifest_Summary(), 
