@@ -342,12 +342,22 @@
 			<dependency>
 			    <groupId>org.jadira.usertype</groupId>
 			    <artifactId>usertype.extended</artifactId>
-			    <version>3.1.0.CR9</version>
+			    <version>3.1.0.CR10</version>
 			</dependency>
 			<dependency>
 			    <groupId>org.jadira.usertype</groupId>
 			    <artifactId>usertype.core</artifactId>
-			    <version>3.1.0.CR9</version>
+			    <version>3.1.0.CR10</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.mchange</groupId>
+			    <artifactId>c3p0</artifactId>
+			    <version>0.9.2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>5.0.2.Final</version>
 			</dependency>
 			<dependency>
 			    <groupId>org.hibernate.javax.persistence</groupId>
@@ -369,11 +379,6 @@
 			    <groupId>org.hibernate</groupId>
 			    <artifactId>hibernate-c3p0</artifactId>
 			    <version>4.2.8.Final</version>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-validator</artifactId>
-				<version>4.3.1.Final</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.emf</groupId>
