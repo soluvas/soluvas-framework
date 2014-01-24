@@ -6,7 +6,7 @@ import com.google.common.base.Function;
 
 /**
  * Return {@link Identifiable#getId()}.
- * @author rully
+ * @author ceefour
  */
 public class IdFunction implements Function<Identifiable, String> {
 
