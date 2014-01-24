@@ -80,7 +80,7 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	 */
 	public static RequestAttributes currentRequestAttributes() throws IllegalStateException {
 		final CommandRequestAttributes requestAttributes = threadRequestAttributes.get();
-		Preconditions.checkState(requestAttributes != null, "Not in CommandSession");
+		Preconditions.checkState(requestAttributes != null, "Not in CommandSession. Note that currently request-scoped beans are not available inside Atmosphere, as a workaround you can save the 'tenantId' during constructor.");
 		return requestAttributes;
 	}
 	
