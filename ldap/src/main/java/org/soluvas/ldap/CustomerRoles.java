@@ -7,9 +7,14 @@ import java.util.Map;
 import com.google.common.collect.ImmutableList;
 
 /**
+ * Use from org.soluvas.commons
+ * 
  * Holds valid {@link SocialPerson#getCustomerRole()} values.
  * @author rudi
+ * 
+ * @deprecated
  */
+@Deprecated
 public class CustomerRoles {
 	
 	public static final String AGENT = "agen";
