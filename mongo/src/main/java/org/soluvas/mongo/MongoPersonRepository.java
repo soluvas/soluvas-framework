@@ -168,7 +168,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		final Pattern regex = Pattern.compile(Pattern.quote(searchText), Pattern.CASE_INSENSITIVE);
 		
 		final BasicDBObject nameQuery = new BasicDBObject("name", regex);
-		final BasicDBObject idQuery = new BasicDBObject("id", regex);
+		final BasicDBObject idQuery = new BasicDBObject("_id", regex);
 		
 		final BasicDBObject emailQuery = new BasicDBObject("email", regex);
 		final BasicDBObject emailsQuery = new BasicDBObject("emails", new BasicDBObject("$elemMatch", emailQuery));
