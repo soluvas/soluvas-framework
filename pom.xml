@@ -337,7 +337,7 @@
 				<groupId>org.postgresql</groupId>
 				<artifactId>postgresql</artifactId>
 				<version>9.2-1004-jdbc41</version>
-				<scope>runtime</scope>
+				<scope>compile</scope>
 			</dependency>
 			<dependency>
 			    <groupId>org.jadira.usertype</groupId>
