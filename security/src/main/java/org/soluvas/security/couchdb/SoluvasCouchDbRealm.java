@@ -1,4 +1,4 @@
-package org.soluvas.security;
+package org.soluvas.security.couchdb;
 
 import java.net.MalformedURLException;
 import java.util.Set;
@@ -29,6 +29,12 @@ import org.ektorp.impl.StdCouchDbConnector;
 import org.ektorp.impl.StdCouchDbInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.security.AutologinToken;
+import org.soluvas.security.Permission;
+import org.soluvas.security.Rfc2307CredentialsMatcher;
+import org.soluvas.security.Role;
+import org.soluvas.security.SecurityCatalog;
+import org.soluvas.security.SecurityRepository;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Supplier;

@@ -1,4 +1,4 @@
-package org.soluvas.security;
+package org.soluvas.security.couchdb;
 
 import java.util.Collection;
 import java.util.Set;
@@ -7,6 +7,8 @@ import javax.annotation.Nullable;
 
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 import org.soluvas.data.repository.CrudRepository;
+import org.soluvas.security.Role;
+import org.soluvas.security.SecurityRepository;
 
 import com.google.common.collect.ImmutableSet;
 
