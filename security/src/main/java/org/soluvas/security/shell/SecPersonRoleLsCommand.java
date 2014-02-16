@@ -1,5 +1,7 @@
 package org.soluvas.security.shell; 
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 import java.util.List;
 import java.util.Set;
 
@@ -30,19 +32,18 @@ public class SecPersonRoleLsCommand extends ExtCommandSupport {
 	private String personId;
 	
 	@Override
-	protected Object doExecute() throws Exception {
+	protected Void doExecute() throws Exception {
 		final SecurityRepository securityRepo = getBean(SecurityRepository.class);
 		final Set<String> personRoles = securityRepo.getPersonRoles(personId);
-		System.out.format("%3s | %-40s\n", "#", "Role");
+		System.out.println(ansi().render("@|negative_on %3s|%-%-40s|@",
+				"№", "Role"));
 		final List<String> sortedRoles = Ordering.natural().immutableSortedCopy(personRoles);
 		int i = 0;
 		for (final String it : sortedRoles) {
-			// TODO: use locale settings to format date, currency, amount,
-			// "and", many
-			// TODO: format products
-			System.out.format("%3d | %-40s\n", ++i, it );
+			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-40s",
+					++i, it ));
 		}
-		System.out.format("%d roles\n", sortedRoles.size());
+		System.out.println(ansi().render("@|bold %d|@ roles", sortedRoles.size()));
 		return null;
 	}
 

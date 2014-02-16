@@ -38,7 +38,7 @@ public class SecdDomainLsCommand extends ExtCommandSupport {
 			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-15s|@@|bold,black ||@%-40s@|bold,black ||@%-40s",
 					++i, it.getName(), StringUtils.right(it.getResourceUri(), 40), it.getDescription() ));
 		}
-		System.out.println(ansi().render("@|bold %d|@ Domains\n", securityCatalog.getDomains().size()));
+		System.out.println(ansi().render("@|bold %d|@ Domains", securityCatalog.getDomains().size()));
 		return null;
 	}
 
