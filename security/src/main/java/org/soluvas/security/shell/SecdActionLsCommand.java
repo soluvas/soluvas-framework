@@ -1,7 +1,10 @@
 package org.soluvas.security.shell; 
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +29,10 @@ public class SecdActionLsCommand extends ExtCommandSupport {
 	private static final Logger log = LoggerFactory.getLogger(SecdActionLsCommand.class);
 
 	@Override
-	protected Object doExecute() throws Exception {
+	protected Void doExecute() throws Exception {
 		final SecurityCatalog securityCatalog = getBean(SecurityCatalog.class);
-		System.out.format("%3s | %-20s | %1s | %-20s | %-40s | %s\n", "#",
-				"Name", "G", "Domains", "Source", "Description");
+		System.out.println(ansi().render("@|negative_on %3s|%-20s|%-1s|%-20s|%-40s|%-40s|@",
+				"№", "Name", "G", "Domains", "Source", "Description" ));
 		final List<Action> sortedActions = new EObjectNameOrdering()
 				.immutableSortedCopy(securityCatalog.getActions());
 		int i = 0;
@@ -37,13 +40,14 @@ public class SecdActionLsCommand extends ExtCommandSupport {
 			// TODO: use locale settings to format date, currency, amount,
 			// "and", many
 			// TODO: format products
-			System.out.format("%3d | %-20s | %1s | %-20s | %-40s | %s\n", ++i,
+			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-20s|@@|bold,black ||@%-1s@|bold,black ||@%-20s@|bold,black ||@%-40s@|bold,black ||@%-40s",
+					++i,
 					it.getName(), it.getGlobal() ? "G" : "-",
 					Joiner.on(", ").join(it.getDomains()),
-					it.getResourceUri(),
-					it.getDescription());
+					StringUtils.right(it.getResourceUri(), 40),
+					it.getDescription() ));
 		}
-		System.out.format("%d Actions\n", securityCatalog.getActions().size());
+		System.out.println(ansi().render("@|bold %d|@ Actions", securityCatalog.getActions().size()));
 		return null;
 	}
 

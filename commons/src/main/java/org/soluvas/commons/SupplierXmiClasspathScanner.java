@@ -63,7 +63,7 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 	private final List<Supplier<T>> suppliers;
 	
 	/**
-	 * Scan a specific class.
+	 * Scan a specific class (only) for {@code *.SecurityCatalog.xmi}.
 	 * @param ePackage
 	 * @param suppliedClass
 	 * @param tenantId
@@ -83,10 +83,32 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 	}
 	
 	/**
-	 * Scan, in this order:
+	 * Scan the entire {@code org}, {@code com}, and {@code id} classpath for {@code *.SecurityCatalog.xmi}, without scanning the filesystem.
+	 * 
+	 * @param ePackage
+	 * @param suppliedClass
+	 * @param tenantId
+	 * @param tenantEnv
+	 * @todo Note that this is slow, but used for now to support lazy beans instantiation. Static or hybrid is preferable.
+	 */
+	public SupplierXmiClasspathScanner(final EPackage ePackage, final Class<T> suppliedClass,
+			final DelegatingSupplier<T> delegate, final ClassLoader classLoader) {
+		super();
+		this.ePackage = ePackage;
+		this.suppliedClassName = suppliedClass.getName();
+		this.suppliedClassSimpleName = suppliedClass.getSimpleName();
+		this.delegate = delegate;
+		this.classLoader = classLoader;
+		this.packageToScan = "classpath";
+		log = LoggerFactory.getLogger(SupplierXmiClasspathScanner.class.getName() + "." + suppliedClassSimpleName);
+		this.suppliers = scan(classLoader, null);
+	}
+	
+	/**
+	 * Scan for {@code *.SecurityCatalog.xmi}, in this order:
 	 * <ol>
-	 * 	<li>the entire org, com, and id classpath</li>
-	 * 	<li>the {@code common} folder.</li>
+	 * 	<li>the entire {@code org}, {@code com}, and {@code id} classpath</li>
+	 * 	<li>the {@code common} filesystem directory inside {@code dataFolder}.</li>
 	 * </ol>
 	 * @param ePackage
 	 * @param suppliedClass
@@ -113,15 +135,23 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 		removedBundle(classLoader, packageToScan, suppliers);
 	}
 
+	/**
+	 * Usually not used directly, instead please use the appropriate constructor.
+	 * @param classLoader
+	 * @param dataFolder Filesystem directory which if provided, scans the {@code common} subdirectory inside.
+	 * @return
+	 */
 	@Nullable
-	public List<Supplier<T>> scan(ClassLoader classLoader, String dataFolder) {
+	public List<Supplier<T>> scan(ClassLoader classLoader, @Nullable String dataFolder) {
 		final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
 		// Due to JDK limitation, scanning of root won't work in webapp classpath,
 		// at least the root folder must be specified before wildcard
-		final List<String> locationPatterns = ImmutableList.of("classpath*:org/**/*." + suppliedClassSimpleName + ".xmi",
+		final List<String> locationPatterns = new ArrayList<>(ImmutableList.of("classpath*:org/**/*." + suppliedClassSimpleName + ".xmi",
 				"classpath*:com/**/*." + suppliedClassSimpleName + ".xmi",
-				"classpath*:id/**/*." + suppliedClassSimpleName +".xmi",
-				"file:" + dataFolder + "/common/*." + suppliedClassSimpleName +".xmi");
+				"classpath*:id/**/*." + suppliedClassSimpleName +".xmi"));
+		if (dataFolder != null) {
+			locationPatterns.add("file:" + dataFolder + "/common/*." + suppliedClassSimpleName +".xmi");
+		}
 		log.trace("Scanning {} for {}", classLoader, locationPatterns);
 		try {
 			final List<Resource> allResources = new ArrayList<>();

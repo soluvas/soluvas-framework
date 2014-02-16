@@ -1,7 +1,10 @@
 package org.soluvas.security.shell; 
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +27,10 @@ public class SecdRoleLsCommand extends ExtCommandSupport {
 	private static final Logger log = LoggerFactory.getLogger(SecdRoleLsCommand.class);
 	
 	@Override
-	protected Object doExecute() throws Exception {
+	protected Void doExecute() throws Exception {
 		final SecurityCatalog securityCatalog = getBean(SecurityCatalog.class);
-		System.out.format("%3s | %-15s | %-40s | %s\n", "#", "Name",
-				"Source", "Description");
+		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-20s|%-40s|%-40s|@",
+				"№", "ID", "Name", "Source", "Description" ));
 		final List<Role> sortedRoles = new EObjectNameOrdering()
 				.immutableSortedCopy(securityCatalog.getRoles());
 		int i = 0;
@@ -35,10 +38,10 @@ public class SecdRoleLsCommand extends ExtCommandSupport {
 			// TODO: use locale settings to format date, currency, amount,
 			// "and", many
 			// TODO: format products
-			System.out.format("%3d | %-15s | %-40s | %s\n", ++i, it.getName(),
-					it.getResourceUri(), it.getDescription() );
+			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-15s|@@|bold,black ||@%-20s@|bold,black ||@%-40s@|bold,black ||@%-40s",
+					++i, it.getId(), it.getName(), StringUtils.right(it.getResourceUri(), 40), it.getDescription() ));
 		}
-		System.out.format("%d Roles\n", securityCatalog.getRoles().size());
+		System.out.println(ansi().render("@|bold %d|@ Roles", securityCatalog.getRoles().size()));
 		return null;
 	}
 
