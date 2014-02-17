@@ -2,8 +2,6 @@ package org.soluvas.data.person.shell;
 
 import java.util.Iterator;
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
@@ -13,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.Gender;
+import org.soluvas.commons.NameUtils;
+import org.soluvas.commons.NameUtils.PersonName;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.shell.ExtCommandSupport;
@@ -36,6 +36,8 @@ public class PersonModCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(PersonModCommand.class);
 	
+	@Option(name="-n", aliases="--name", description="Name")
+	private transient String nameStr;
 	@Option(aliases="-e", description="Email", name="--email")
 	private transient String emailStr;
 	@Option(aliases="-g", description="Gender", name="--gender")
@@ -46,17 +48,9 @@ public class PersonModCommand extends ExtCommandSupport {
 	@Argument(index=0, name="id", required=true, description="Person ID.")
 	private transient String id;
 	
-	private final PersonRepository personRepo;
-	
-	@Inject
-	public PersonModCommand(PersonRepository personRepo) {
-		super();
-		this.personRepo = personRepo;
-	}
-
-	@SuppressWarnings("null")
 	@Override
-	protected Object doExecute() throws Exception {
+	protected Person doExecute() throws Exception {
+		final PersonRepository personRepo = getBean(PersonRepository.class);
 		final Person person = Preconditions.checkNotNull(personRepo.findOne(id), String.format("Person by ID %s must not be null", id));
 		if (!Strings.isNullOrEmpty(emailStr)) {
 			final Person personByEmail = personRepo.findOneByEmail(StatusMask.RAW, emailStr);
@@ -85,6 +79,13 @@ public class PersonModCommand extends ExtCommandSupport {
 			}
 		}
 		
+		if (nameStr != null) {
+			final PersonName personName = NameUtils.splitName(nameStr);
+			person.setName(nameStr);
+			person.setFirstName(personName.getFirstName());
+			person.setLastName(personName.getLastName());
+		}
+		
 		if (gender != null) {
 			person.setGender(Gender.valueOf(String.valueOf(gender).toUpperCase()));
 		}
@@ -95,7 +96,7 @@ public class PersonModCommand extends ExtCommandSupport {
 				person.setSlug(slug);
 				person.setCanonicalSlug(SlugUtils.canonicalize(slug));
 			} else {
-				System.err.println(String.format("Slug '%s' already used person '%s'", 
+				System.err.println(String.format("Slug '%s' already used by person '%s'", 
 						existsBySlug.get(), existsBySlug.getId()));
 				return null;
 			}
@@ -103,7 +104,7 @@ public class PersonModCommand extends ExtCommandSupport {
 		
 		personRepo.modify(id, person);
 		
-		return null;
+		return person;
 	}
 
 }

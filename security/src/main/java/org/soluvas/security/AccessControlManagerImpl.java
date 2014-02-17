@@ -62,4 +62,14 @@ public class AccessControlManagerImpl implements AccessControlManager {
 		rolePersonRepo.replaceLefts(personId, roleIds);
 	}
 
+	@Override
+	public void replaceTenantRoleMembers(String tenantId, String roleId,
+			Set<String> personIds) {
+		final RolePersonRepository rolePersonRepo = Preconditions.checkNotNull(rolePersonRepoMap.get(tenantId),
+				"Cannot get RolePersonRepository for tenant '%s'. %s available repos are: %s",
+				tenantId, rolePersonRepoMap.size(), Iterables.limit(rolePersonRepoMap.keySet(), 10));
+		log.info("Resetting {}'s tenant role {} members as: {}", tenantId, roleId, personIds);
+		rolePersonRepo.replaceRights(roleId, personIds);
+	}
+
 }

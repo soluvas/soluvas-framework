@@ -41,11 +41,19 @@ public interface AccessControlManager {
 	Set<String> getTenantRoleMembers(String tenantId, String roleId);
 
 	/**
-	 * Replace all tenant roles of a {@link Person} with specified {@link Role} IDs.
+	 * Replace all tenant {@link Role}s of a {@link Person} with specified {@link Role} IDs.
 	 * @param tenantId Tenant ID.
 	 * @param personId Person ID.
 	 * @param roles Tenant Role IDs.
 	 */
-	void replacePersonTenantRoles(String tenantId, final String personId, final Set<String> roleIds);
+	void replacePersonTenantRoles(final String tenantId, final String personId, final Set<String> roleIds);
+
+	/**
+	 * Replace all members of a tenant {@link Role} with specified {@link Person} IDs.
+	 * @param tenantId Tenant ID.
+	 * @param role Role ID.
+	 * @param personId Person ID.
+	 */
+	void replaceTenantRoleMembers(final String tenantId, final String roleId, final Set<String> personIds);
 
 }

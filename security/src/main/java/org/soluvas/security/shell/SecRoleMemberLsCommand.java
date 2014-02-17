@@ -37,7 +37,7 @@ public class SecRoleMemberLsCommand extends ExtCommandSupport {
 		final Set<String> roleMembers = acMgr.getTenantRoleMembers(getTenant().getTenantId(), roleId);
 		System.out.println(ansi().render("@|negative_on %3s|%-40s|@",
 				"№", "Person"));
-		List<String> sortedRoleMembers = Ordering.natural().immutableSortedCopy(roleMembers);
+		final List<String> sortedRoleMembers = Ordering.natural().immutableSortedCopy(roleMembers);
 		int i = 0;
 		for (String it : sortedRoleMembers) {
 			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-40s|@", ++i, it ));
