@@ -1,5 +1,7 @@
 package org.soluvas.data.person.shell; 
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 import java.util.Iterator;
 
 import org.apache.felix.gogo.commands.Argument;
@@ -16,6 +18,7 @@ import org.soluvas.commons.NameUtils.PersonName;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.soluvas.commons.util.HashedPasswordUtils;
 import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.person.PersonRepository;
@@ -44,6 +47,8 @@ public class PersonModCommand extends ExtCommandSupport {
 	private transient Object gender;
 	@Option(aliases="-s", description="Slug", name="--slug")
 	private transient String slug;
+	@Option(name="-p", aliases="--password", description="Password (will be encoded as SSHA).")
+	private String password;
 
 	@Argument(index=0, name="id", required=true, description="Person ID.")
 	private transient String id;
@@ -102,6 +107,12 @@ public class PersonModCommand extends ExtCommandSupport {
 			}
 		}
 		
+		if (!Strings.isNullOrEmpty(password)) {
+			final String encoded = HashedPasswordUtils.encodeSsha(password);
+			System.err.println(ansi().render("Encoded password: @|bold %s|@", encoded));
+			person.setPassword(encoded);
+		}
+
 		personRepo.modify(id, person);
 		
 		return person;
