@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.domain.Page;
@@ -217,7 +215,6 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	 * The default implementation simply processes {@link #findAll()}.
 	 */
 	@Override
-	@Nonnull
 	public Multiset<L> lefts() {
 		return findAll().keys();
 	}
@@ -235,7 +232,6 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	 * The default implementation simply processes {@link #findAll()}.
 	 */
 	@Override
-	@Nonnull
 	public Multiset<R> rights() {
 		return ImmutableMultiset.copyOf(findAll().values());
 	}
@@ -287,14 +283,12 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	}
 	
 	@Override
-	@Nonnull
 	public List<Entry<L, R>> findAll(Sort sort) {
 		log.warn("Sorting on {} not supported", getClass());
 		return ImmutableList.copyOf(findAll().entries());
 	}
 	
 	@Override
-	@Nonnull
 	public Page<Entry<L, R>> findAll(Pageable pageable) {
 		final Collection<Entry<L, R>> entries = findAll(pageable.getSort());
 		final Iterable<Entry<L, R>> skipped = Iterables.skip(
@@ -309,7 +303,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	 * The default implementation uses {@link #findAll()}.
 	 * @see org.soluvas.data.repository.AssocRepository#getLeftCounts()
 	 */
-	@Override @Nonnull
+	@Override
 	public Map<R, Long> getLeftCounts() {
 		final Multimap<R, L> invertedEntries = ImmutableMultimap.copyOf(findAll()).inverse();
 		final ImmutableMap.Builder<R, Long> builder = ImmutableMap.builder();
@@ -325,7 +319,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	 * The default implementation uses {@link #findAll()}.
 	 * @see org.soluvas.data.repository.AssocRepository#getRightCounts()
 	 */
-	@Override @Nonnull
+	@Override
 	public Map<L, Long> getRightCounts() {
 		final Multimap<L, R> entries = findAll();
 		final ImmutableMap.Builder<L, Long> builder = ImmutableMap.builder();
@@ -339,7 +333,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.AssocRepository#getLeft(java.lang.Object, java.awt.print.Pageable)
 	 */
-	@Override @Nonnull
+	@Override
 	public Page<R> getLeft(L left, Pageable pageable) {
 		final Collection<R> allRights = getLeft(left); // TODO: support sort
 		final Iterable<R> skipped = Iterables.skip(
@@ -352,7 +346,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.AssocRepository#getRight(java.lang.Object, java.awt.print.Pageable)
 	 */
-	@Override @Nonnull
+	@Override
 	public Page<L> getRight(R right, Pageable pageable) {
 		final Collection<L> allLefts = getRight(right); // TODO: support sort
 		final Iterable<L> skipped = Iterables.skip(

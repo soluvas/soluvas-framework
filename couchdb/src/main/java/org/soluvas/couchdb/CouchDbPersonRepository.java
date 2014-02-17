@@ -61,6 +61,15 @@ import com.google.common.collect.Sets.SetView;
 public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, AccountStatus>
 		implements PersonRepository {
 	
+	/**
+	 * Used by {@link org.soluvas.security.couchdb.CouchDbRolePersonRepository}. 
+	 */
+	public static final String VIEW_SECURITY_ROLE_IDS = "securityRoleIds";
+	/**
+	 * Used by {@link org.soluvas.security.couchdb.CouchDbRolePersonRepository}. 
+	 */
+	public static final String VIEW_SECURITY_ROLE_MEMBERS = "securityRoleMembers";
+
 	public CouchDbPersonRepository(ClientConnectionManager connMgr, String couchDbUri, String dbName) {
 		super(connMgr, Person.class, PersonImpl.class, 1L, couchDbUri, dbName,
 				ImmutableList.<String>of(), ImmutableMap.<String, Integer>of(),
@@ -111,6 +120,21 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		       + "emit(e.email, null); "
 		       + "}); "
 		       + "} }"));
+		// Used by CouchDbRolePersonRepository
+		design.addView(VIEW_SECURITY_ROLE_IDS, new View(
+				  "function(doc) {"
+				+ "  if (doc.type == 'Person' )"
+				+ "    doc.securityRoleIds.forEach(function(roleId) {"
+				+ "      emit( doc.uid, roleId );"
+				+ "    });"
+				+ "}"));
+		design.addView(VIEW_SECURITY_ROLE_MEMBERS, new View(
+				  "function(doc) {"
+				+ "  if (doc.type == 'Person' )"
+				+ "    doc.securityRoleIds.forEach(function(roleId) {"
+				+ "      emit( roleId, doc.uid );"
+				+ "    });"
+				+ "}"));
 	}
 	
 	/* (non-Javadoc)
@@ -140,8 +164,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.person.PersonRepository#findOneByFacebook(java.lang.Long, java.lang.String)
 	 */
-	@Override
-	@Nullable
+	@Override @Nullable
 	public Person findOneByFacebook(@Nullable Long facebookId,
 			@Nullable String facebookUsername) {
 		// TODO Auto-generated method stub
