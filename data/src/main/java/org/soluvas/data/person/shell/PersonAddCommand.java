@@ -64,7 +64,7 @@ public class PersonAddCommand extends ExtCommandSupport {
 	protected Person doExecute() throws Exception {
 		final Person person = CommonsFactory.eINSTANCE.createPerson();
 		person.setId(id);
-		person.setGuid((Person.class.getSimpleName() + "_" + id).toLowerCase());
+		person.setGuid(Person.class.getSimpleName() + "_" + id);
 		person.setAccountStatus(accountStatus);
 		person.setName(name);
 		person.setSlug(SlugUtils.generateValidScreenName(name, new Predicate<String>() {

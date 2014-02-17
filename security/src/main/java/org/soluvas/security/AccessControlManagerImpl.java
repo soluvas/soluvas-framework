@@ -11,8 +11,10 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 
 /**
+ * General-purpose {@link AccessControlManager} implementation, it's modular because it needs to
+ * be configured with appropriate persistence-specific {@link RolePersonRepository} implementation.
+ * @see AccessControlManager
  * @author ceefour
- *
  */
 public class AccessControlManagerImpl implements AccessControlManager {
 	
@@ -48,6 +50,16 @@ public class AccessControlManagerImpl implements AccessControlManager {
 		log.debug("{}'s role {} has {} members: {}",
 				tenantId, roleId, personIds.size(), Iterables.limit(personIds, 10));
 		return personIds;
+	}
+
+	@Override
+	public void replacePersonTenantRoles(String tenantId, String personId,
+			Set<String> roleIds) {
+		final RolePersonRepository rolePersonRepo = Preconditions.checkNotNull(rolePersonRepoMap.get(tenantId),
+				"Cannot get RolePersonRepository for tenant '%s'. %s available repos are: %s",
+				tenantId, rolePersonRepoMap.size(), Iterables.limit(rolePersonRepoMap.keySet(), 10));
+		log.info("Replacing {}'s {} tenant roles with: {}", tenantId, personId, roleIds);
+		rolePersonRepo.replaceLefts(personId, roleIds);
 	}
 
 }

@@ -30,11 +30,22 @@ public interface AccessControlManager {
 	Set<String> getPersonTenantRoles(final String tenantId, final String personId);
 
 	/**
-	 * Given a {@link Role} ID, return member {@link Person}s in the {@link RolePersonRepository}.
+	 * Given a <strong>physical</strong> {@link Role} ID, return <strong>physical</strong> member {@link Person}s in the {@link RolePersonRepository}.
+	 * 
+	 * <p><em>Physical</em> means actually registered in {@link RolePersonRepository}, not virtual members/roles due to automatic assignment.
+	 * 
 	 * @param tenantId Tenant ID.
 	 * @param roleId Role ID.
 	 * @return
 	 */
 	Set<String> getTenantRoleMembers(String tenantId, String roleId);
+
+	/**
+	 * Replace all tenant roles of a {@link Person} with specified {@link Role} IDs.
+	 * @param tenantId Tenant ID.
+	 * @param personId Person ID.
+	 * @param roles Tenant Role IDs.
+	 */
+	void replacePersonTenantRoles(String tenantId, final String personId, final Set<String> roleIds);
 
 }

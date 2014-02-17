@@ -1,6 +1,7 @@
 package org.soluvas.security.couchdb;
 
 import java.net.URI;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -23,6 +24,9 @@ import org.soluvas.data.repository.AssocRepositoryBase;
 import org.soluvas.security.Role;
 import org.soluvas.security.RolePersonRepository;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
@@ -87,13 +91,53 @@ public class CouchDbRolePersonRepository extends AssocRepositoryBase<String, Str
 	}
 
 	@Override
-	public boolean put(String left, String right) {
-		throw new UnsupportedOperationException();
+	public boolean put(String roleId, String personId) {
+		final ObjectNode personNode = (ObjectNode) dbConn.get(JsonNode.class, "Person_" + personId);
+		final LinkedHashSet<String> tenantRoleIds;
+		if (personNode.get("securityRoleIds") instanceof ArrayNode) {
+			tenantRoleIds = new LinkedHashSet<>(FluentIterable.from(personNode.get("securityRoleIds")).transform(new Function<JsonNode, String>() {
+				@Override @Nullable
+				public String apply(@Nullable JsonNode input) {
+					return input.asText();
+				}
+			}).toSet());
+		} else {
+			tenantRoleIds = new LinkedHashSet<>();
+		}
+		final boolean added = tenantRoleIds.add(roleId);
+		personNode.set("securityRoleIds", SoluvasObjectMapperFactory.INSTANCE.createObjectMapper().valueToTree(tenantRoleIds));
+		dbConn.update(personNode);
+		if (added) {
+			log.info("Assigned tenant role {} to person {}. Current tenant roles: {}", roleId, personId, tenantRoleIds);
+		} else {
+			log.debug("Tenant role {} not added to person {}. Current tenant roles: {}", roleId, personId, tenantRoleIds);
+		}
+		return added;
 	}
 
 	@Override
-	public boolean delete(String left, String right) {
-		throw new UnsupportedOperationException();
+	public boolean delete(String roleId, String personId) {
+		final ObjectNode personNode = (ObjectNode) dbConn.get(JsonNode.class, "Person_" + personId);
+		final LinkedHashSet<String> tenantRoleIds;
+		if (personNode.get("securityRoleIds") instanceof ArrayNode) {
+			tenantRoleIds = new LinkedHashSet<>(FluentIterable.from(personNode.get("securityRoleIds")).transform(new Function<JsonNode, String>() {
+				@Override @Nullable
+				public String apply(@Nullable JsonNode input) {
+					return input.asText();
+				}
+			}).toSet());
+		} else {
+			tenantRoleIds = new LinkedHashSet<>();
+		}
+		final boolean removed = tenantRoleIds.remove(roleId);
+		personNode.set("securityRoleIds", SoluvasObjectMapperFactory.INSTANCE.createObjectMapper().valueToTree(tenantRoleIds));
+		dbConn.update(personNode);
+		if (removed) {
+			log.info("Unassigned tenant role {} from person {}. Current tenant roles: {}", roleId, personId, tenantRoleIds);
+		} else {
+			log.debug("Tenant role didn't exist {} in person {}. Current tenant roles: {}", roleId, personId, tenantRoleIds);
+		}
+		return removed;
 	}
 
 	@Override

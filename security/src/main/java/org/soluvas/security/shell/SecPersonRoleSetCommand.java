@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.soluvas.security.AccessControlManager;
 import org.soluvas.security.Role;
-import org.soluvas.security.SecurityRepository;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -37,12 +37,12 @@ public class SecPersonRoleSetCommand extends ExtCommandSupport {
 
 	@Override
 	protected Set<String> doExecute() throws Exception {
-		final SecurityRepository securityRepo = getBean(SecurityRepository.class);
+		final AccessControlManager acMgr = getBean(AccessControlManager.class);
 		final Set<String> roleSet = roles != null ? ImmutableSet.copyOf(roles) : ImmutableSet.<String>of();
-		System.out.print(ansi().render("Setting security roles of @|bold %s|@ to |@bold %s|@...",
+		System.out.print(ansi().render("Setting security roles of @|bold %s|@ to @|bold %s|@...",
 				personId, Joiner.on(", ").join(roleSet)));
-		securityRepo.replacePersonRoles(personId, roleSet);
-		System.out.println(ansi().render(" @|bold OK|@"));
+		acMgr.replacePersonTenantRoles(getTenant().getTenantId(), personId, roleSet);
+		System.out.println(ansi().render(" @|bold,bg_green  OK |@"));
 		return roleSet;
 	}
 
