@@ -73,7 +73,7 @@
 	<reference id="ldapConfigSupplier" interface="com.google.common.base.Supplier"
 		filter="(suppliedClass=org.apache.directory.ldap.client.api.LdapConnectionConfig)" />
 		
-	<bean id="appSessionRepo" class="org.soluvas.security.impl.MongoAppSessionRepository"
+	<bean id="appSessionRepo" class="org.soluvas.security.mongo.MongoAppSessionRepository"
 		destroy-method="destroy">
 		<argument value="${securityMongoUri}" />
 	</bean>

@@ -1,4 +1,4 @@
-package org.soluvas.security.impl;
+package org.soluvas.security.mongo;
 
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasKey;
@@ -13,6 +13,8 @@ import org.junit.Test;
 import org.soluvas.security.AppSession;
 import org.soluvas.security.AppSessionStatus;
 import org.soluvas.security.SecurityFactory;
+import org.soluvas.security.impl.AppSessionImpl;
+import org.soluvas.security.mongo.MongoAppSessionRepository;
 
 import com.google.code.morphia.logging.MorphiaLoggerFactory;
 import com.google.code.morphia.logging.slf4j.SLF4JLogrImplFactory;

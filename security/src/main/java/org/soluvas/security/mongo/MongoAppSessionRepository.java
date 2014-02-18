@@ -1,4 +1,4 @@
-package org.soluvas.security.impl;
+package org.soluvas.security.mongo;
 
 import java.util.List;
 import java.util.Map;
@@ -15,6 +15,7 @@ import org.soluvas.mongo.MongoUtils;
 import org.soluvas.security.AppSession;
 import org.soluvas.security.AppSessionRepository;
 import org.soluvas.security.AppSessionStatus;
+import org.soluvas.security.impl.AppSessionImpl;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.google.code.morphia.Morphia;
@@ -166,7 +167,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 		if (id == null)
 			return null;
 		final DBObject dbo = coll.findOne(new BasicDBObject(ImmutableMap.of(
-				"schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT,
+				"schemaVersion", AppSessionImpl.getDefaultSchemaVersion(),
 				"status", AppSessionStatus.ACTIVE.name(),
 				"_id", id)));
 		log.trace("findOneByActive {} returns {}", id, dbo);
@@ -206,7 +207,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 
 	@Override
 	public List<AppSession> findAll() {
-		final DBCursor cursor = coll.find(new BasicDBObject("schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT))
+		final DBCursor cursor = coll.find(new BasicDBObject("schemaVersion", AppSessionImpl.getDefaultSchemaVersion()))
 				.sort(new BasicDBObject("creationTime", -1));
 		final List<AppSession> appSessions = MongoUtils.transform(cursor, new FromDBObject());
 		log.debug("findAll returns {} documents", appSessions.size());
@@ -223,7 +224,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 		if (id == null)
 			return null;
 		final Map<String, Object> queryMap = ImmutableMap.<String, Object>of(
-				"schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT,
+				"schemaVersion", AppSessionImpl.getDefaultSchemaVersion(),
 				"_id", id);
 		final DBCursor cursor = coll.find(new BasicDBObject(queryMap));
 		final List<AppSession> appSessions = MongoUtils.transform(cursor, new FromDBObject());
@@ -250,7 +251,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 	@Override
 	public List<AppSession> findAllByActive() {
 		final Map<String, Object> queryMap = ImmutableMap.<String, Object>of(
-				"schemaVersion", AppSessionImpl.SCHEMA_VERSION_EDEFAULT,
+				"schemaVersion", AppSessionImpl.getDefaultSchemaVersion(),
 				"status", AppSessionStatus.ACTIVE.name());
 		final DBCursor cursor = coll.find(new BasicDBObject(queryMap))
 				.sort(new BasicDBObject("creationTime", -1));

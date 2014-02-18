@@ -1,8 +1,9 @@
 package org.soluvas.security.couchdb;
 
 import java.net.MalformedURLException;
-import java.util.Set;
+import java.security.Principal;
 
+import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
 import org.apache.http.conn.ClientConnectionManager;
@@ -17,6 +18,7 @@ import org.apache.shiro.authc.pam.UnsupportedTokenException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.realm.ldap.AbstractLdapRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.ektorp.CouchDbConnector;
@@ -29,18 +31,20 @@ import org.ektorp.impl.StdCouchDbConnector;
 import org.ektorp.impl.StdCouchDbInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.Person;
 import org.soluvas.security.AutologinToken;
-import org.soluvas.security.Permission;
 import org.soluvas.security.Rfc2307CredentialsMatcher;
 import org.soluvas.security.Role;
+import org.soluvas.security.RolePersonRepository;
 import org.soluvas.security.SecurityCatalog;
-import org.soluvas.security.SecurityRepository;
+import org.soluvas.security.impl.RealmUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.base.Function;
 import com.google.common.base.Supplier;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
+import com.google.common.collect.Iterables;
 
 /**
  * A realm implementation that uses LDAP repository.
@@ -49,63 +53,36 @@ import com.google.common.collect.Sets;
  * 
  * @author ceefour
  */
-public class SoluvasCouchDbRealm extends AuthorizingRealm {
+public class CouchDbRealm extends AuthorizingRealm {
 
-	private static final Logger log = LoggerFactory.getLogger(SoluvasCouchDbRealm.class);
+	private static final Logger log = LoggerFactory.getLogger(CouchDbRealm.class);
 
 	private final Supplier<SecurityCatalog> securityCatalogSupplier;
-	private final SecurityRepository securityRepo;
+	@Nullable
+	private final RolePersonRepository rolePersonRepo;
 	private final CouchDbConnector conn;
 
 	private final HttpClient httpClient;
 	
 	/**
-	 * 
-	 * @param securityCatalogSupplier Why not generics? See https://issues.apache.org/jira/browse/ARIES-960 .
-	 * 		Fortunately we no longer use Karaf.
-	 * @param securityRepo
+	 * Constructs a CouchDb {@link Realm} without {@link RolePersonRepository} support,
+	 * meaning you won't be able to assign tenant {@link Role}s to {@link Person}s.
+	 * @param connMgr
+	 * @param name
+	 * @param securityCatalogSupplier
+	 * @param uri
+	 * @param db
+	 * @throws MalformedURLException
 	 */
-	@Deprecated
-	public SoluvasCouchDbRealm(Supplier<SecurityCatalog> securityCatalogSupplier,
-			final CouchDbConnector conn) {
-		super();
-		this.securityCatalogSupplier = securityCatalogSupplier;
-		this.securityRepo = new CouchDbSecurityRepository();
-		this.conn = conn;
-		this.httpClient = null;
-		setName("soluvas");
-		setCredentialsMatcher(new Rfc2307CredentialsMatcher());
-		setAuthenticationTokenClass(AuthenticationToken.class);
-	}
-	
-	@Deprecated
-	public SoluvasCouchDbRealm(Supplier<SecurityCatalog> securityCatalogSupplier,
-			final String url, final String user, final String password, final String db) throws MalformedURLException {
-		super();
-		this.securityCatalogSupplier = securityCatalogSupplier;
-		this.securityRepo = new CouchDbSecurityRepository();
-		httpClient = new StdHttpClient.Builder()
-			.url(url)
-			.username(user)
-			.password(password)				
-			.build();
-		final StdCouchDbInstance stdCouchDbInstance = new StdCouchDbInstance(httpClient);
-		final StdCouchDbConnector cDbCon = new StdCouchDbConnector(db, stdCouchDbInstance);
-		cDbCon.createDatabaseIfNotExists();
-		this.conn = cDbCon;
-		setName("soluvas");
-		setCredentialsMatcher(new Rfc2307CredentialsMatcher());
-		setAuthenticationTokenClass(AuthenticationToken.class);
-	}
-	
-	@Deprecated
-	public SoluvasCouchDbRealm(String name, Supplier<SecurityCatalog> securityCatalogSupplier,
+	public CouchDbRealm(ClientConnectionManager connMgr, String name, Supplier<SecurityCatalog> securityCatalogSupplier,
 			final String uri, final String db) throws MalformedURLException {
 		super();
 		this.securityCatalogSupplier = securityCatalogSupplier;
-		this.securityRepo = new CouchDbSecurityRepository();
-		httpClient = new StdHttpClient.Builder()
+		this.rolePersonRepo = null;
+		this.httpClient = null;
+		final HttpClient httpClient = new StdHttpClient.Builder()
 			.url(uri)
+			.connectionManager(connMgr)
 			.build();
 		final StdCouchDbInstance stdCouchDbInstance = new StdCouchDbInstance(httpClient);
 		final StdCouchDbConnector cDbCon = new StdCouchDbConnector(db, stdCouchDbInstance);
@@ -116,11 +93,23 @@ public class SoluvasCouchDbRealm extends AuthorizingRealm {
 		setAuthenticationTokenClass(HostAuthenticationToken.class);
 	}
 	
-	public SoluvasCouchDbRealm(ClientConnectionManager connMgr, String name, Supplier<SecurityCatalog> securityCatalogSupplier,
+	/**
+	 * Constructs a CouchDb {@link Realm} with {@link RolePersonRepository} support,
+	 * so you can assign tenant {@link Role}s to {@link Person}s via {@link Person#getSecurityRoleIds()}.
+	 * 
+	 * @param connMgr
+	 * @param name
+	 * @param securityCatalogSupplier
+	 * @param rolePersonRepo
+	 * @param uri
+	 * @param db
+	 * @throws MalformedURLException
+	 */
+	public CouchDbRealm(ClientConnectionManager connMgr, String name, Supplier<SecurityCatalog> securityCatalogSupplier, RolePersonRepository rolePersonRepo,
 			final String uri, final String db) throws MalformedURLException {
 		super();
 		this.securityCatalogSupplier = securityCatalogSupplier;
-		this.securityRepo = new CouchDbSecurityRepository();
+		this.rolePersonRepo = rolePersonRepo;
 		this.httpClient = null;
 		final HttpClient httpClient = new StdHttpClient.Builder()
 			.url(uri)
@@ -145,55 +134,26 @@ public class SoluvasCouchDbRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			final PrincipalCollection principalCollection) {
-		final String userName = (String) principalCollection.getPrimaryPrincipal();
-		final Set<String> ldapRoles = securityRepo.getPersonRoles(userName);
-
 		final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.addRoles(ldapRoles);
-
-		// TODO: permissions should be set somewhere else,
-		// using EMF models
-
-		final SecurityCatalog securityCatalog = securityCatalogSupplier.get();
-		log.debug(
-				"Processing security catalog for {} with {} roles, {} domains, {} actions, and {} permissions",
-				userName, securityCatalog.getRoles().size(), securityCatalog
-						.getDomains().size(), securityCatalog.getActions()
-						.size(), securityCatalog.getPermissions().size());
-
-		for (final Role role : securityCatalog.getRoles()) {
-			switch (role.getAssignMode()) {
-			case GUEST:
-				log.debug("Assigning role {} to {} because assign mode {}",
-						role.getName(), userName, role.getAssignMode());
-				info.addRole(role.getName());
-				break;
-			case AUTHENTICATED:
-				if (!principalCollection.isEmpty()) {
-					log.debug(
-							"Assigning role {} to {} because assign mode {} and principals={}",
-							role.getName(), userName, role.getAssignMode(),
-							principalCollection);
-					info.addRole(role.getName());
-				}
-				break;
-			case MANUAL:
-				break;
-			}
+		if (rolePersonRepo != null) {
+			log.trace("Using RolePersonRepository {} to assign AuthorizationInfo for principals: {}",
+					rolePersonRepo, Iterables.transform(principalCollection, new Function<Principal, String>() {
+						@Override
+						public String apply(Principal input) {
+							return input.toString();
+						};
+					}));
+			RealmUtils.modifyAuthInfo(info, principalCollection, rolePersonRepo, securityCatalogSupplier.get());
+		} else {
+			log.trace("Assigning AuthorizationInfo WITHOUT stored roles for principals: {}",
+					rolePersonRepo, Iterables.transform(principalCollection, new Function<Principal, String>() {
+						@Override
+						public String apply(Principal input) {
+							return input.toString();
+						};
+					}));
+			RealmUtils.modifyAuthInfo(info, principalCollection, ImmutableSet.<String>of(), securityCatalogSupplier.get());
 		}
-
-		for (final Permission perm : securityCatalog.getPermissions()) {
-			final Set<String> intersectingRoles = Sets.intersection(info.getRoles(),
-					ImmutableSet.copyOf(perm.getRoles()));
-			if (!intersectingRoles.isEmpty()) {
-				log.debug("Assigning permission {} to {} due to role(s) {}",
-						perm.toStringPermission(), userName, intersectingRoles);
-				info.addStringPermission(perm.toStringPermission());
-			}
-		}
-
-		// TODO: resource-level roles
-
 		return info;
 	}
 

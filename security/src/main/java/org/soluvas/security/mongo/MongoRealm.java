@@ -1,7 +1,5 @@
 package org.soluvas.security.mongo;
 
-import java.util.Set;
-
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -18,17 +16,15 @@ import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.mongo.MongoRepositoryException;
+import org.soluvas.security.AccessControlManager;
 import org.soluvas.security.AutologinToken;
-import org.soluvas.security.Permission;
-import org.soluvas.security.PersonAction;
-import org.soluvas.security.PersonPermission;
 import org.soluvas.security.Rfc2307CredentialsMatcher;
-import org.soluvas.security.Role;
+import org.soluvas.security.RolePersonRepository;
 import org.soluvas.security.SecurityCatalog;
 import org.soluvas.security.SecurityRepository;
+import org.soluvas.security.impl.RealmUtils;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -46,6 +42,10 @@ public class MongoRealm extends AuthorizingRealm {
 	private static final Logger log = LoggerFactory.getLogger(MongoRealm.class);
 
 	private final SecurityCatalog securityCatalog;
+	/**
+	 * @deprecated Use {@link RolePersonRepository} / {@link AccessControlManager} instead. 
+	 */
+	@Deprecated
 	private final SecurityRepository securityRepo;
 	private final String personCollName = "person";
 	private final DBCollection personColl;
@@ -80,52 +80,8 @@ public class MongoRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			final PrincipalCollection principalCollection) {
-		final String userName = (String) principalCollection.getPrimaryPrincipal();
-		final Set<String> personRoles = securityRepo.getPersonRoles(userName);
-
 		final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.addRoles(personRoles);
-
-		// Static Permissions are set in SecurityCatalog.xmi files, using EMF models
-		log.trace("Processing security catalog for {} with {} roles, {} domains, {} actions, and {} permissions",
-				userName, securityCatalog.getRoles().size(), securityCatalog
-						.getDomains().size(), securityCatalog.getActions()
-						.size(), securityCatalog.getPermissions().size());
-		for (final Role role : securityCatalog.getRoles()) {
-			switch (role.getAssignMode()) {
-			case GUEST:
-				log.trace("Assigning role {}-{} to {} because assign mode {}",
-						role.getId(), role.getName(), userName, role.getAssignMode());
-				info.addRole(role.getId());
-				break;
-			case AUTHENTICATED:
-				if (!principalCollection.isEmpty()) {
-					log.trace(
-							"Assigning role {}-{} to {} because assign mode {} and principals={}",
-							role.getId(), role.getName(), userName, role.getAssignMode(),
-							principalCollection);
-					info.addRole(role.getId());
-				}
-				break;
-			case MANUAL:
-				break;
-			}
-		}
-		for (final Permission perm : securityCatalog.getPermissions()) {
-			final Set<String> intersectingRoles = Sets.intersection(info.getRoles(),
-					ImmutableSet.copyOf(perm.getRoles()));
-			if (!intersectingRoles.isEmpty()) {
-				log.trace("Assigning permission {} to {} due to role(s) {}",
-						perm.toStringPermission(), userName, intersectingRoles);
-				info.addStringPermission(perm.toStringPermission());
-			}
-		}
-
-		// dynamic/resource-level roles
-		// add PersonPermission for VIEW & MODIFY (but not VIEW_ADMINISTRATIVE, MODIFY_ADMINISTRATIVE)
-		info.addObjectPermission(
-				new PersonPermission(ImmutableSet.of(PersonAction.VIEW, PersonAction.MODIFY), principalCollection));
-
+		RealmUtils.modifyAuthInfo(info, principalCollection, securityRepo, securityCatalog);
 		return info;
 	}
 
