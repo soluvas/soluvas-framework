@@ -16,6 +16,8 @@ import org.soluvas.security.Role;
 import org.soluvas.security.RolePersonRepository;
 import org.soluvas.security.SecurityCatalog;
 import org.soluvas.security.SecurityRepository;
+import org.soluvas.security.couchdb.CouchDbRealm;
+import org.soluvas.security.mongo.MongoRealm;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -24,6 +26,8 @@ import com.google.common.collect.Sets;
 /**
  * Static helper methods for {@link AuthorizingRealm} implementations.
  * @author ceefour
+ * @see CouchDbRealm
+ * @see MongoRealm
  */
 public class RealmUtils {
 	
