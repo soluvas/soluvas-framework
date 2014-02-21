@@ -59,6 +59,8 @@ public class TenantConfig {
 	 */
 	@Bean
 	public Map<String, AppManifest> tenantMap() throws IOException {
+		// tenantWhitelist: Comma-separated list of tenantIds to load (all others are excluded)
+		final TenantSource tenantWhitelist = env.getProperty("tenantWhitelist", TenantSource.class, TenantSource.CONFIG);
 		final TenantSource tenantSource = env.getProperty("tenantSource", TenantSource.class, TenantSource.CONFIG);
 		log.info("Tenant source: {}", tenantSource);
 		switch (tenantSource) {
@@ -67,19 +69,21 @@ public class TenantConfig {
 				.getResources("classpath*:/META-INF/*.AppManifest.xmi");
 			log.info("Loading {} AppManifest resources from classpath: {}", resources.length, resources);
 			final Pattern tenantIdPattern = Pattern.compile("([^.]+).+");
+			
+			final String fqdn;
+			try {
+				fqdn = InetAddress.getLocalHost().getCanonicalHostName();
+			} catch (UnknownHostException e) {
+				throw new CommonsException("Cannot get FQDN", e);
+			}
+			Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
+
 			final ImmutableMap.Builder<String, AppManifest> builder = ImmutableMap.builder();
 			for (final Resource res : resources) {
 				final Matcher tenantIdMatcher = tenantIdPattern.matcher(res.getFilename());
 				Preconditions.checkState(tenantIdMatcher.matches(), "Invalid AppManifest resource name: %s", res.getFilename());
 				final String tenantId = tenantIdMatcher.group(1);
 				
-				final String fqdn;
-				try {
-					fqdn = InetAddress.getLocalHost().getCanonicalHostName();
-				} catch (UnknownHostException e) {
-					throw new CommonsException("Cannot get FQDN", e);
-				}
-				Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
 				final ImmutableMap<String, String> scope = ImmutableMap.of(
 						"fqdn", fqdn,
 						"appDomain", env.getRequiredProperty("appDomain"));
