@@ -1,5 +1,6 @@
 package org.soluvas.commons;
 
+import java.io.File;
 import java.net.URL;
 
 import org.eclipse.emf.ecore.EObject;
@@ -39,8 +40,18 @@ public class StaticXmiLoader<T extends EObject> extends OnDemandXmiLoader<T> {
 		this.obj = load();
 	}
 
+	/**
+	 * @param ePackage
+	 * @param fileName
+	 * @deprecated Use {@link #StaticXmiLoader(EPackage, File)} instead.
+	 */
+	@Deprecated
 	public StaticXmiLoader(EPackage ePackage, String fileName) {
-		super(ePackage, fileName);
+		this(ePackage, new File(fileName));
+	}
+
+	public StaticXmiLoader(EPackage ePackage, File file) {
+		super(ePackage, file);
 		this.obj = load();
 	}
 

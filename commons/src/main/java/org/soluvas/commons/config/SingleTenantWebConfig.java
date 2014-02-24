@@ -1,6 +1,8 @@
 package org.soluvas.commons.config;
 
 import java.io.File;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,8 +13,10 @@ import javax.servlet.ServletContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
+import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.DataFolder;
+import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.tenant.TenantRef;
@@ -22,11 +26,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 
 /**
  * Reads the tenant information from {@link ServletContext#getContextPath()}.
  * Which means single tenant per webapp context.
+ * 
+ * <p><strong>Note:</strong> It's recommended to use multitenant {@link TenantConfig} to make your application future-proof.
  * @author rudi
  */
 @Configuration @Lazy
@@ -56,10 +63,23 @@ public class SingleTenantWebConfig {
 		return System.getProperty("user.home") + "/" + tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv();
 	}
 	
+	protected String getFqdn() {
+		final String fqdn;
+		try {
+			fqdn = InetAddress.getLocalHost().getCanonicalHostName();
+		} catch (UnknownHostException e) {
+			throw new CommonsException("Cannot get FQDN", e);
+		}
+		Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
+		return fqdn;
+	}
+	
 	@Bean
 	public WebAddress webAddress() {
-		return new StaticXmiLoader<WebAddress>(CommonsPackage.eINSTANCE,
-				new File(dataFolder(), "model/custom.WebAddress.xmi").toString()).get();
+		final String fqdn = getFqdn();
+		final Map<String, Object> scope = ImmutableMap.<String, Object>of("fqdn", fqdn);
+		return new OnDemandXmiLoader<WebAddress>(CommonsPackage.eINSTANCE,
+				new File(dataFolder(), "model/custom.WebAddress.xmi"), scope).get();
 	}
 
 	@Bean

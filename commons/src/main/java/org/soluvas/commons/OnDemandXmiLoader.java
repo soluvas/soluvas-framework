@@ -1,5 +1,6 @@
 package org.soluvas.commons;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -46,10 +47,23 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 	protected final EPackage ePackage;
 	protected final ImmutableMap<String, Object> scope;
 	
+	/**
+	 * Will load using a {@link ClassLoader}, without {@code scope}.
+	 * @param ePackage
+	 * @param loaderClass
+	 * @param resourcePath
+	 */
 	public OnDemandXmiLoader(final EPackage ePackage, final Class<?> loaderClass, final String resourcePath) {
 		this(ePackage, loaderClass, resourcePath, ImmutableMap.<String, Object>of());
 	}
 
+	/**
+	 * Will load using a {@link ClassLoader}, with {@code scope}.
+	 * @param ePackage
+	 * @param loaderClass
+	 * @param resourcePath
+	 * @param scope
+	 */
 	public OnDemandXmiLoader(final EPackage ePackage, final Class<?> loaderClass, final String resourcePath,
 			Map<String, ?> scope) {
 		super();
@@ -77,18 +91,43 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 		this.scope = ImmutableMap.copyOf(scope);
 	}
 
-	public OnDemandXmiLoader(final EPackage ePackage, final String fileName) {
+	/**
+	 * Will load from filesystem {@link File}, without {@code scope}.
+	 * @param ePackage
+	 * @param file
+	 */
+	public OnDemandXmiLoader(final EPackage ePackage, final File file) {
 		super();
 		Preconditions.checkNotNull(ePackage, "ePackage cannot be null");
-		Preconditions.checkArgument(!Strings.isNullOrEmpty(fileName), "fileName cannot be null");
+		Preconditions.checkArgument(file != null, "fileName cannot be null");
 		this.ePackage = ePackage;
 		this.ePackageName = ePackage.getName();
 		this.ePackageNsUri = ePackage.getNsURI();
-		this.resourceUri = URI.createFileURI(fileName);
+		this.resourceUri = URI.createFileURI(file.toString());
 		this.resourceType = ResourceType.FILE;
-		this.resourceName = fileName;
+		this.resourceName = file.toString();
 		this.bundle = null;
 		this.scope = ImmutableMap.of();
+	}
+
+	/**
+	 * Will load from filesystem {@link File}, with {@code scope}.
+	 * @param ePackage
+	 * @param file
+	 * @param scope
+	 */
+	public OnDemandXmiLoader(final EPackage ePackage, final File file, Map<String, Object> scope) {
+		super();
+		Preconditions.checkNotNull(ePackage, "ePackage cannot be null");
+		Preconditions.checkArgument(file != null, "fileName cannot be null");
+		this.ePackage = ePackage;
+		this.ePackageName = ePackage.getName();
+		this.ePackageNsUri = ePackage.getNsURI();
+		this.resourceUri = URI.createFileURI(file.toString());
+		this.resourceType = ResourceType.FILE;
+		this.resourceName = file.toString();
+		this.bundle = null;
+		this.scope = ImmutableMap.copyOf(scope);
 	}
 
 	/**

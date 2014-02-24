@@ -86,7 +86,7 @@ public class TenantDataConfig {
 		if (tenantMixinCatalogFile.exists()) {
 			// If tenant-specific MixinCatalog exists, use it
 			log.info("Using tenant-specific MixinCatalog from {}", tenantMixinCatalogFile);
-			supplier = new OnDemandXmiLoader<>(DataPackage.eINSTANCE, tenantMixinCatalogFile.getPath());
+			supplier = new OnDemandXmiLoader<>(DataPackage.eINSTANCE, tenantMixinCatalogFile.getAbsoluteFile());
 		} else {
 			// otherwise, use default MixinCatalog
 			// TODO: don't hardcode default mixin classpath name

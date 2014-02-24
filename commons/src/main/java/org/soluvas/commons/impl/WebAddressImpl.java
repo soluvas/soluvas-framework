@@ -3,10 +3,7 @@
 package org.soluvas.commons.impl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.net.InetAddress;
 import java.net.URI;
-import java.net.UnknownHostException;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +25,6 @@ import org.soluvas.commons.WebAddress;
 
 import com.damnhandy.uri.template.UriTemplate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 /**
@@ -782,21 +778,15 @@ public class WebAddressImpl extends MinimalEObjectImpl.Container implements WebA
 	}
 
 	/**
-	 * Supported built-in expansion variables are: fqdn.
-	 * scope may provide additionally: tenantId, tenantEnv.
+	 * Scope may provide additionally: tenantId, tenantEnv, fqdn, domain.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public void expand(Map<String, Object> upScope) {
+	public void expand(Map<String, Object> scope) {
 		if (expansionState == ExpansionState.EXPANDED) {
 			return;
 		}
-		
-		final Map<String, Object> scope = new HashMap<>(upScope);
-		final String fqdn = getFqdn();
-		Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
-		scope.put("fqdn", fqdn);
 		
 		if (StringUtils.contains(getBaseUri(), '{')) {
 			try {
@@ -855,18 +845,6 @@ public class WebAddressImpl extends MinimalEObjectImpl.Container implements WebA
 			}
 		}
 		expansionState = ExpansionState.EXPANDED;
-	}
-
-	/**
-	 * @return
-	 * @throws UnknownHostException
-	 */
-	public static String getFqdn() {
-		try {
-			return InetAddress.getLocalHost().getCanonicalHostName();
-		} catch (UnknownHostException e) {
-			throw new CommonsException("Cannot get FQDN", e);
-		}
 	}
 
 	/**
