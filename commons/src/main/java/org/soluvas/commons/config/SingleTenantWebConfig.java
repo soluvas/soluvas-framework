@@ -33,7 +33,7 @@ import com.google.common.collect.ImmutableMap;
  * Reads the tenant information from {@link ServletContext#getContextPath()}.
  * Which means single tenant per webapp context.
  * 
- * <p><strong>Note:</strong> It's recommended to use multitenant {@link TenantConfig} to make your application future-proof.
+ * <p><strong>Note:</strong> It's recommended to use multitenant {@link MultiTenantConfig} to make your application future-proof.
  * @author rudi
  */
 @Configuration @Lazy

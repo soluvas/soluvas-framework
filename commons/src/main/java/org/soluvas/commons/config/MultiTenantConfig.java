@@ -47,10 +47,12 @@ import com.google.common.eventbus.EventBus;
  * @author ceefour
  */
 @Configuration @Lazy
-public class TenantConfig {
+public class MultiTenantConfig {
 	private static final Logger log = LoggerFactory
-			.getLogger(TenantConfig.class);
-	
+			.getLogger(MultiTenantConfig.class);
+
+	@Inject
+	private SoluvasApplication app;
 	@Inject
 	private Environment env;
 	@Inject @Network
@@ -87,7 +89,9 @@ public class TenantConfig {
 	private String tenantEnv;
 
 	private TenantSource tenantSource;
-	
+
+	private String appDomain;
+
 	protected static String getFqdn() {
 		final String fqdn;
 		try {
@@ -108,18 +112,22 @@ public class TenantConfig {
 	 */
 	@PostConstruct
 	public void init() throws IOException {
-		workspaceDir = new File(env.getProperty("workspaceDir", String.class, System.getProperty("user.home")));
+		final String appId = app.getId();
+		workspaceDir = new File(env.getProperty("workspaceDir", System.getProperty("user.home") + appId));
 		dataDirLayout = env.getProperty("dataDirLayout", DataDirLayout.class, DataDirLayout.DEFAULT);
-		tenantEnv = env.getRequiredProperty("tenantEnv", String.class);
+		tenantEnv = env.getRequiredProperty("tenantEnv");
+		final String defaultAppDomain = appDomain + "." + getFqdn();
+		appDomain = env.getProperty("appDomain", defaultAppDomain);
 		// tenantWhitelist: Comma-separated list of tenantIds to load (all others are excluded)
 		@Nullable
 		final String tenantWhitelistStr = env.getProperty("tenantWhitelist", String.class);
 		@Nullable
 		final List<String> tenantWhitelist = tenantWhitelistStr != null ? Splitter.on(',').trimResults().omitEmptyStrings().splitToList( tenantWhitelistStr ) : null;
 		tenantSource = env.getProperty("tenantSource", TenantSource.class, TenantSource.CONFIG);
-		log.info("Tenant source for env '{}': {}. {} whitelist: {}", tenantEnv, tenantSource, tenantWhitelist);
+		log.info("App '{}' env={} domain={}. Workspace dir={} layout={}. Tenant source {} with {} whitelist: {}", 
+				appId, tenantEnv, appDomain, workspaceDir, dataDirLayout, tenantSource, tenantWhitelist.size(), tenantWhitelist);
 		if (tenantSource == TenantSource.CONFIG) {
-			final Resource[] resources = new PathMatchingResourcePatternResolver(TenantConfig.class.getClassLoader())
+			final Resource[] resources = new PathMatchingResourcePatternResolver(MultiTenantConfig.class.getClassLoader())
 				.getResources("classpath*:/META-INF/*.AppManifest.xmi");
 			log.info("Loading {} AppManifest resources from classpath: {}", resources.length, resources);
 			final Pattern tenantIdPattern = Pattern.compile("([^.]+).+");
@@ -132,14 +140,13 @@ public class TenantConfig {
 				final String tenantId = tenantIdMatcher.group(1);
 				
 				if (tenantWhitelist != null && !tenantWhitelist.contains(tenantId)) {
-					log.info("Skipping tenant '{}' because not in {} whitelist: {}", 
-							tenantId, tenantWhitelist.size(), tenantWhitelist);
+					log.info("Skipping tenant '{}' in {} ({}) because not in {} whitelist: {}", 
+							tenantId, appId, tenantEnv, tenantWhitelist.size(), tenantWhitelist);
 					continue;
 				}
 				
 				final ImmutableMap<String, String> scope = ImmutableMap.of(
-						"fqdn", fqdn,
-						"appDomain", env.getRequiredProperty("appDomain"));
+						"fqdn", fqdn, "appDomain", appDomain);
 				final AppManifest tenantManifest = new OnDemandXmiLoader<AppManifest>(
 						CommonsPackage.eINSTANCE, res.getURL(), ResourceType.CLASSPATH, scope).get();
 				builder.put(tenantId, tenantManifest);
@@ -214,12 +221,12 @@ public class TenantConfig {
 				} else {
 					log.info("Tenant '{}' data dir '{}' does not exist, loading generic WebAddress model from classpath: {}",
 							tenantId, dataDir, webAddressRes);
-					loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, TenantConfig.class, webAddressRes, scope);
+					loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, MultiTenantConfig.class, webAddressRes, scope);
 				}
 			} else {
 				log.info("Tenant '{}' has no data dir mapping, loading generic WebAddress model from classpath: {}",
 						tenantId, dataDir, webAddressRes);
-				loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, TenantConfig.class, webAddressRes, scope);
+				loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, MultiTenantConfig.class, webAddressRes, scope);
 			}
 			
 //			final String tenantKey = tenant.getKey() + "_" + tenantEnv;
@@ -245,5 +252,21 @@ public class TenantConfig {
 		}
 		return dataDirMapb.build();
 	}
+
+//	@Configuration @Lazy
+//	public static class SelectorConfig implements TenantSelector {
+//		
+//		@Inject
+//		private TenantRef tenantRef;
+//		@Inject
+//		private MultiTenantConfig tenantConfig;
+//		
+//		@Override
+//		@Bean @Scope("prototype")
+//		public File dataDir() throws IOException {
+//			return tenantConfig.dataDirMap().get(tenantRef.getTenantId());
+//		}
+//		
+//	}
 
 }

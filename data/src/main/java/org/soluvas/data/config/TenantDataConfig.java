@@ -3,7 +3,6 @@ package org.soluvas.data.config;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
@@ -12,10 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AggregatingSupplier;
 import org.soluvas.commons.AppManifest;
-import org.soluvas.commons.DelegatingSupplier;
 import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.SupplierXmiClasspathScanner;
-import org.soluvas.commons.config.TenantConfig;
+import org.soluvas.commons.config.MultiTenantConfig;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataFactory;
@@ -34,8 +32,6 @@ import org.springframework.context.annotation.Scope;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Supplier;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
@@ -43,7 +39,7 @@ import com.google.common.collect.ImmutableMap;
  * Multitenant-aware {@link Configuration} for {@link DataCatalog}, {@link MixinCatalog}, and {@link TermManager} beans.
  * @author rudi
  */
-@Configuration @Scope("prototype") @Lazy
+@Configuration @Lazy
 @ComponentScan("org.soluvas.data.shell")
 public class TenantDataConfig {
 	
@@ -54,12 +50,9 @@ public class TenantDataConfig {
 	@Inject
 	private BeanFactory beanFactory;
 	@Inject
-	private TenantConfig tenantConfig;
+	private MultiTenantConfig tenantConfig;
 	@Inject
 	private TenantRef tenant;
-	
-	private static final Cache<String, DelegatingSupplier<DataCatalog>> dataCatalogCache = 
-			CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build();
 	
 	@Bean
 	public ImmutableMap<String, DataCatalog> dataCatalogMap() throws IOException {

@@ -76,6 +76,7 @@ public class CommonsWebConfig {
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(CommonsWebConfig.class);
+	public static final String APP_EVENT_BUS = "appEventBus";
 	
 	@Inject
 	private Environment env;
@@ -104,7 +105,7 @@ public class CommonsWebConfig {
 	 * The @{@link Primary} {@link EventBus} is tenant-scoped. In order to access the app eventBus, you'll need to use:
 	 * 
 	 * <pre>
-	 * @Inject @Named("appEventBus")
+	 * @Inject @Named(CommonsWebConfig.APP_EVENT_BUS)
 	 * private EventBus appEventBus;
 	 * </pre>
 	 * 

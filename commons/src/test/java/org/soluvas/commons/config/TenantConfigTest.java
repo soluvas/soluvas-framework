@@ -18,7 +18,7 @@ public class TenantConfigTest {
 
 	@Test
 	public void getFqdn() {
-		final String fqdn = TenantConfig.getFqdn();
+		final String fqdn = MultiTenantConfig.getFqdn();
 		assertEquals("mahendri.dev", fqdn);
 	}
 

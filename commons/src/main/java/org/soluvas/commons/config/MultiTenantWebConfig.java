@@ -56,7 +56,7 @@ public class MultiTenantWebConfig {
 	@Inject
 	private Environment env;
 	@Inject
-	private TenantConfig tenantConfig;
+	private MultiTenantConfig tenantConfig;
 //	@Resource(name="tenantMap")
 //	private Map<String, AppManifest> tenantMap;
 	
@@ -77,7 +77,7 @@ public class MultiTenantWebConfig {
 	 * from a {@link HttpServletRequest}. 
 	 * @param httpRequest
 	 * @return
-	 * @see TenantConfig#webAddressMap()
+	 * @see MultiTenantConfig#webAddressMap()
 	 */
 	public static TenantRef getTenantRef(TenantMode tenantMode, HttpServletRequest httpRequest, String tenantEnv) {
 		switch (tenantMode) {
@@ -162,8 +162,8 @@ public class MultiTenantWebConfig {
 //	 * proxyMode is required! See http://forum.springsource.org/showthread.php?141230-Beans-initialized-twice-by-WebApplicationContext&p=454428#post454428
 //	 * @return
 //	 * @throws ExecutionException
-//	 * @see {@link TenantConfig#tenantMap()}
-//	 * @todo Maybe, instead of loading ad-hoc, it should get it from {@link TenantConfig#tenantMap()} instead.
+//	 * @see {@link MultiTenantConfig#tenantMap()}
+//	 * @todo Maybe, instead of loading ad-hoc, it should get it from {@link MultiTenantConfig#tenantMap()} instead.
 //	 */
 //	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 //	public AppManifest appManifest() throws ExecutionException {
@@ -186,7 +186,7 @@ public class MultiTenantWebConfig {
 //	/**
 //	 * @return
 //	 * @throws ExecutionException
-//	 * @todo Maybe, instead of loading ad-hoc, it should get it from {@link TenantConfig#webAddressMap()} instead.
+//	 * @todo Maybe, instead of loading ad-hoc, it should get it from {@link MultiTenantConfig#webAddressMap()} instead.
 //	 */
 //	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 //	public WebAddress webAddress() throws ExecutionException {
