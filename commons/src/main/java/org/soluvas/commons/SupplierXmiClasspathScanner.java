@@ -1,5 +1,6 @@
 package org.soluvas.commons;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -118,7 +119,7 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 	 */
 	public SupplierXmiClasspathScanner(final EPackage ePackage, final Class<T> suppliedClass,
 			final DelegatingSupplier<T> delegate, final ClassLoader classLoader,
-			final String dataFolder) {
+			final File dataDir) {
 		super();
 		this.ePackage = ePackage;
 		this.suppliedClassName = suppliedClass.getName();
@@ -127,7 +128,27 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 		this.classLoader = classLoader;
 		this.packageToScan = "classpath";
 		log = LoggerFactory.getLogger(SupplierXmiClasspathScanner.class.getName() + "." + suppliedClassSimpleName);
-		this.suppliers = scan(classLoader, dataFolder);
+		this.suppliers = scan(classLoader, dataDir);
+	}
+	
+	/**
+	 * Scan for {@code *.SecurityCatalog.xmi}, in this order:
+	 * <ol>
+	 * 	<li>the entire {@code org}, {@code com}, and {@code id} classpath</li>
+	 * 	<li>the {@code common} filesystem directory inside {@code dataFolder}.</li>
+	 * </ol>
+	 * @param ePackage
+	 * @param suppliedClass
+	 * @param tenantId
+	 * @param tenantEnv
+	 * @todo Note that this is slow, but used for now to support lazy beans instantiation. Static or hybrid is preferable.
+	 * @deprecated Use {@link #SupplierXmiClasspathScanner(EPackage, Class, DelegatingSupplier, ClassLoader, File)}.
+	 */
+	@Deprecated
+	public SupplierXmiClasspathScanner(final EPackage ePackage, final Class<T> suppliedClass,
+			final DelegatingSupplier<T> delegate, final ClassLoader classLoader,
+			final String dataDir) {
+		this(ePackage, suppliedClass, delegate, classLoader, new File(dataDir));
 	}
 	
 	@PreDestroy
@@ -138,19 +159,19 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 	/**
 	 * Usually not used directly, instead please use the appropriate constructor.
 	 * @param classLoader
-	 * @param dataFolder Filesystem directory which if provided, scans the {@code common} subdirectory inside.
+	 * @param dataDir Filesystem directory which if provided, scans the {@code common} subdirectory inside.
 	 * @return
 	 */
 	@Nullable
-	public List<Supplier<T>> scan(ClassLoader classLoader, @Nullable String dataFolder) {
+	public List<Supplier<T>> scan(ClassLoader classLoader, @Nullable File dataDir) {
 		final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
 		// Due to JDK limitation, scanning of root won't work in webapp classpath,
 		// at least the root folder must be specified before wildcard
 		final List<String> locationPatterns = new ArrayList<>(ImmutableList.of("classpath*:org/**/*." + suppliedClassSimpleName + ".xmi",
 				"classpath*:com/**/*." + suppliedClassSimpleName + ".xmi",
 				"classpath*:id/**/*." + suppliedClassSimpleName +".xmi"));
-		if (dataFolder != null) {
-			locationPatterns.add("file:" + dataFolder + "/common/*." + suppliedClassSimpleName +".xmi");
+		if (dataDir != null) {
+			locationPatterns.add("file:" + dataDir + "/common/*." + suppliedClassSimpleName +".xmi");
 		}
 		log.trace("Scanning {} for {}", classLoader, locationPatterns);
 		try {

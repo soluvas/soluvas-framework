@@ -32,8 +32,8 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 /**
+ * <p><strong>Note:</strong> It's recommended to use multitenant {@link TenantDataConfig} to make your application future-proof.
  * @author rudi
- *
  */
 @Configuration @Lazy
 @ComponentScan("org.soluvas.data.shell")
