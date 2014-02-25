@@ -62,6 +62,18 @@ public class TenantConfig {
 	 */
 	@Nullable
 	private ImmutableMap<String, AppManifest> staticTenantMap = null;
+	
+	public static enum DataDirLayout {
+		/**
+		 * @deprecated e.g. {@code $HOME/tuneeca_dev}
+		 */
+		@Deprecated
+		LEGACY,
+		/**
+		 * e.g. {@code $HOME/commerce_dev/tuneeca} 
+		 */
+		DEFAULT
+	}
 
 	/**
 	 * App workspace, used as root directory of tenant directories.
@@ -69,6 +81,12 @@ public class TenantConfig {
 	 * e.g. {@code $HOME/commerce_dev, $HOME/hub_dev, $HOME/gauldong_dev}, etc. 
 	 */
 	private File workspaceDir;
+
+	private DataDirLayout dataDirLayout;
+
+	private String tenantEnv;
+
+	private TenantSource tenantSource;
 	
 	protected static String getFqdn() {
 		final String fqdn;
@@ -91,13 +109,15 @@ public class TenantConfig {
 	@PostConstruct
 	public void init() throws IOException {
 		workspaceDir = new File(env.getProperty("workspaceDir", String.class, System.getProperty("user.home")));
+		dataDirLayout = env.getProperty("dataDirLayout", DataDirLayout.class, DataDirLayout.DEFAULT);
+		tenantEnv = env.getRequiredProperty("tenantEnv", String.class);
 		// tenantWhitelist: Comma-separated list of tenantIds to load (all others are excluded)
 		@Nullable
 		final String tenantWhitelistStr = env.getProperty("tenantWhitelist", String.class);
 		@Nullable
 		final List<String> tenantWhitelist = tenantWhitelistStr != null ? Splitter.on(',').trimResults().omitEmptyStrings().splitToList( tenantWhitelistStr ) : null;
-		final TenantSource tenantSource = env.getProperty("tenantSource", TenantSource.class, TenantSource.CONFIG);
-		log.info("Tenant source: {}. {} whitelist: {}", tenantSource, tenantWhitelist);
+		tenantSource = env.getProperty("tenantSource", TenantSource.class, TenantSource.CONFIG);
+		log.info("Tenant source for env '{}': {}. {} whitelist: {}", tenantEnv, tenantSource, tenantWhitelist);
 		if (tenantSource == TenantSource.CONFIG) {
 			final Resource[] resources = new PathMatchingResourcePatternResolver(TenantConfig.class.getClassLoader())
 				.getResources("classpath*:/META-INF/*.AppManifest.xmi");
@@ -137,7 +157,6 @@ public class TenantConfig {
 	 */
 	@Bean @Scope("prototype")
 	public ImmutableMap<String, AppManifest> tenantMap() throws IOException {
-		final TenantSource tenantSource = env.getProperty("tenantSource", TenantSource.class, TenantSource.CONFIG);
 		switch (tenantSource) {
 		case CONFIG:
 			return staticTenantMap;
@@ -162,7 +181,6 @@ public class TenantConfig {
 	@Bean
 	public ImmutableMap<String, WebAddress> webAddressMap() throws IOException {
 		final TenantMode tenantMode = env.getRequiredProperty("tenantMode", TenantMode.class);
-		final String tenantEnv = env.getRequiredProperty("tenantEnv");
 		final String fqdn = getFqdn();
 		
 		switch (tenantMode) {
@@ -222,7 +240,8 @@ public class TenantConfig {
 	public ImmutableMap<String, File> dataDirMap() throws IOException {
 		final ImmutableMap.Builder<String, File> dataDirMapb = ImmutableMap.builder();
 		for (final Map.Entry<String, AppManifest> tenant : tenantMap().entrySet()) {
-			dataDirMapb.put(tenant.getKey(), new File(workspaceDir, tenant.getKey()));
+			final String dataDirName = dataDirLayout == DataDirLayout.LEGACY ? tenant.getKey() + "_" + tenantEnv : tenant.getKey();
+			dataDirMapb.put(tenant.getKey(), new File(workspaceDir, dataDirName));
 		}
 		return dataDirMapb.build();
 	}
