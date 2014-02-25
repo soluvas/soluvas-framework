@@ -20,6 +20,11 @@ public class MongoRolePersonRepository extends AssocRepositoryBase<String, Strin
 
 	private static final Logger log = LoggerFactory
 			.getLogger(MongoRolePersonRepository.class);
+	
+	public MongoRolePersonRepository(String mongoUri) {
+		super();
+		// TODO: implement
+	}
 
 	@Override
 	public boolean put(String left, String right) {

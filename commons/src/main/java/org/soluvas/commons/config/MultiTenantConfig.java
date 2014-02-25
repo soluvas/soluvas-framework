@@ -103,6 +103,10 @@ public class MultiTenantConfig {
 		return fqdn;
 	}
 	
+	public String getTenantEnv() {
+		return tenantEnv;
+	}
+	
 	/**
 	 * Loads {@link AppManifest}s for all tenants, depending on
 	 * <code>${tenantSource}</code> property ({@link TenantSource}).

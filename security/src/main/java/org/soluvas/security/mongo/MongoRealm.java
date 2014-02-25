@@ -1,5 +1,7 @@
 package org.soluvas.security.mongo;
 
+import javax.annotation.PreDestroy;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -51,8 +53,17 @@ public class MongoRealm extends AuthorizingRealm {
 	private final DBCollection personColl;
 	private MongoClient mongoClient;
 	
-	public MongoRealm(SecurityCatalog securityCatalog,
-			final String mongoUri) {
+	/**
+	 * @param securityCatalog
+	 * @param mongoUri
+	 * @deprecated Use {@link #MongoRealm(String, SecurityCatalog, String)}.
+	 */
+	@Deprecated
+	public MongoRealm(SecurityCatalog securityCatalog, final String mongoUri) {
+		this("soluvas", securityCatalog, mongoUri);
+	}
+	
+	public MongoRealm(String name, SecurityCatalog securityCatalog, final String mongoUri) {
 		super();
 		this.securityCatalog = securityCatalog;
 		// WARNING: mongoUri may contain password!
@@ -72,9 +83,13 @@ public class MongoRealm extends AuthorizingRealm {
 					personCollName);
 		}
 		this.securityRepo = new MongoSecurityRepository(personColl);
-		setName("soluvas");
+		setName(name);
 		setCredentialsMatcher(new Rfc2307CredentialsMatcher());
 		setAuthenticationTokenClass(AuthenticationToken.class);
+	}
+	
+	@PreDestroy
+	public void destroy() {
 	}
 	
 	@Override
