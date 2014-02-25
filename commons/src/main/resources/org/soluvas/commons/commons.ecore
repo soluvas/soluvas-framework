@@ -872,7 +872,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Can be expanded upon loading by XmiObjectLoader.&#xA;&#xA;Example is WebAddress, it will replace {+fqdn} with FQDN (useful for development)."/>
     </eAnnotations>
-    <eOperations name="expand">
+    <eOperations name="expand" eExceptions="#//Exception">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Expand attribute values."/>
       </eAnnotations>
@@ -1427,4 +1427,5 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Exception" instanceClassName="java.lang.Exception"/>
 </ecore:EPackage>

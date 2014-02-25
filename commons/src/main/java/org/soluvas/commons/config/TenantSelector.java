@@ -3,6 +3,7 @@ package org.soluvas.commons.config;
 import java.io.File;
 import java.io.IOException;
 
+import org.soluvas.commons.tenant.TenantRef;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -20,5 +21,7 @@ public interface TenantSelector {
 	 * @throws IOException 
 	 */
 	File dataDir() throws IOException;
+	
+	TenantRef tenantRef();
 	
 }

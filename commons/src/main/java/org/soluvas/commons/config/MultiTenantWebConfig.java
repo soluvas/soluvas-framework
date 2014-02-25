@@ -1,5 +1,6 @@
 package org.soluvas.commons.config;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -20,6 +21,7 @@ import org.soluvas.commons.tenant.RequestOrCommandScope;
 import org.soluvas.commons.tenant.TenantMode;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.commons.tenant.TenantRefImpl;
+import org.soluvas.commons.tenant.TenantUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -44,7 +46,7 @@ import com.google.common.eventbus.EventBus;
  * @author rudi
  */
 @Configuration
-public class MultiTenantWebConfig {
+public class MultiTenantWebConfig implements TenantSelector {
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(MultiTenantWebConfig.class);
@@ -109,6 +111,7 @@ public class MultiTenantWebConfig {
 	}
 	
 	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+	@Override
 	public TenantRef tenantRef() {
 		final RequestAttributes requestAttrs = RequestOrCommandScope.currentRequestAttributes();
 		if (requestAttrs instanceof ServletRequestAttributes) {
@@ -156,6 +159,11 @@ public class MultiTenantWebConfig {
 				tenantConfig.webAddressMap().get(tenantRef().getTenantId()),
 				"Unknown tenant WebAddress '%s'. %s available WebAddresses are for: %s",
 				tenantRef().getTenantId(), tenantConfig.webAddressMap().size(), tenantConfig.webAddressMap().keySet());
+	}
+
+	@Override
+	public File dataDir() throws IOException {
+		return TenantUtils.selectBean(this, tenantConfig.dataDirMap(), File.class);
 	}
 
 //	/**

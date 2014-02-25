@@ -1,6 +1,7 @@
 package org.soluvas.commons.tenant;
 
 import java.util.Collection;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -13,12 +14,14 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsException;
+import org.soluvas.commons.config.TenantSelector;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
+import com.google.common.collect.Iterables;
 
 /**
  * Get tenant-aware services.
@@ -130,6 +133,13 @@ public class TenantUtils {
 		} finally {
 			bundleContext.ungetService(serviceLookupRef);
 		}
+	}
+	
+	public static <T> T selectBean(TenantSelector tenantSelector, Map<String, T> map, Class<T> clazz) {
+		final String tenantId = tenantSelector.tenantRef().getTenantId();
+		return Preconditions.checkNotNull(map.get(tenantId),
+				"No %s for tenant '%s'. %s available: %s",
+				clazz.getSimpleName(), tenantId, map.size(), Iterables.limit(map.keySet(), 10));
 	}
 
 }

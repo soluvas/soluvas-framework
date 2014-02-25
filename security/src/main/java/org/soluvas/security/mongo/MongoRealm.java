@@ -1,5 +1,6 @@
 package org.soluvas.security.mongo;
 
+import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -47,8 +48,10 @@ public class MongoRealm extends AuthorizingRealm {
 	/**
 	 * @deprecated Use {@link RolePersonRepository} / {@link AccessControlManager} instead. 
 	 */
-	@Deprecated
+	@Deprecated @Nullable
 	private final SecurityRepository securityRepo;
+	@Nullable
+	private final RolePersonRepository rolePersonRepo;
 	private final String personCollName = "person";
 	private final DBCollection personColl;
 	private MongoClient mongoClient;
@@ -56,14 +59,10 @@ public class MongoRealm extends AuthorizingRealm {
 	/**
 	 * @param securityCatalog
 	 * @param mongoUri
-	 * @deprecated Use {@link #MongoRealm(String, SecurityCatalog, String)}.
+	 * @deprecated Use {@link #MongoRealm(String, SecurityCatalog, RolePersonRepository, String)}.
 	 */
 	@Deprecated
 	public MongoRealm(SecurityCatalog securityCatalog, final String mongoUri) {
-		this("soluvas", securityCatalog, mongoUri);
-	}
-	
-	public MongoRealm(String name, SecurityCatalog securityCatalog, final String mongoUri) {
 		super();
 		this.securityCatalog = securityCatalog;
 		// WARNING: mongoUri may contain password!
@@ -83,6 +82,33 @@ public class MongoRealm extends AuthorizingRealm {
 					personCollName);
 		}
 		this.securityRepo = new MongoSecurityRepository(personColl);
+		this.rolePersonRepo = null;
+		setName("soluvas");
+		setCredentialsMatcher(new Rfc2307CredentialsMatcher());
+		setAuthenticationTokenClass(AuthenticationToken.class);
+	}
+	
+	public MongoRealm(String name, SecurityCatalog securityCatalog, RolePersonRepository rolePersonRepo, final String mongoUri) {
+		super();
+		this.securityCatalog = securityCatalog;
+		// WARNING: mongoUri may contain password!
+		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
+		log.info("Connecting to MongoDB realm database {}/{} as {}, person collection={}",
+				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), personCollName);
+		try {
+			mongoClient = new MongoClient(realMongoUri);
+			final DB db = mongoClient.getDB(realMongoUri.getDatabase());
+			if (realMongoUri.getUsername() != null)
+				db.authenticate(realMongoUri.getUsername(),
+						realMongoUri.getPassword());
+			personColl = db.getCollection(personCollName);
+		} catch (Exception e) {
+			throw new MongoRepositoryException(e, "Cannot connect to MongoDB realm database {}/{} as {} for {} repository",
+					realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(),
+					personCollName);
+		}
+		this.securityRepo = null;
+		this.rolePersonRepo = rolePersonRepo;
 		setName(name);
 		setCredentialsMatcher(new Rfc2307CredentialsMatcher());
 		setAuthenticationTokenClass(AuthenticationToken.class);
@@ -96,7 +122,11 @@ public class MongoRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			final PrincipalCollection principalCollection) {
 		final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		RealmUtils.modifyAuthInfo(info, principalCollection, securityRepo, securityCatalog);
+		if (rolePersonRepo != null) {
+			RealmUtils.modifyAuthInfo(info, principalCollection, rolePersonRepo, securityCatalog);
+		} else {
+			RealmUtils.modifyAuthInfo(info, principalCollection, securityRepo, securityCatalog);
+		}
 		return info;
 	}
 

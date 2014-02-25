@@ -66,14 +66,15 @@ public class MongoSecurityRepository implements SecurityRepository {
 	 */
 	@Override
 	public Set<String> getRoleMembers(String role) {
-		final DBCursor personIdCur = personColl.find(new BasicDBObject("securityRoleIds", role));
-		final Set<String> personIdSet = new HashSet<>();
-		for (final DBObject personObj : personIdCur) {
-			personIdSet.add((String) personObj.get("_id"));
+		try (final DBCursor personIdCur = personColl.find(new BasicDBObject("securityRoleIds", role))) {
+			final Set<String> personIdSet = new HashSet<>();
+			for (final DBObject personObj : personIdCur) {
+				personIdSet.add((String) personObj.get("_id"));
+			}
+			log.trace("Role owned by {} people: {}", role, personIdSet.size(), personIdSet);
+			return personIdSet;
 		}
-		log.trace("Role owned by {} people: {}", role, personIdSet.size(), personIdSet);
-		return personIdSet;
-	}
+	} 
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.security.SecurityRepository#replacePersonRoles(java.lang.String, java.util.Set)

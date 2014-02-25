@@ -1237,8 +1237,13 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
 			case CommonsPackage.APP_MANIFEST___EXPAND__MAP:
-				expand((Map<String, Object>)arguments.get(0));
-				return null;
+				try {
+					expand((Map<String, Object>)arguments.get(0));
+					return null;
+				}
+				catch (Throwable throwable) {
+					throw new InvocationTargetException(throwable);
+				}
 		}
 		return super.eInvoke(operationID, arguments);
 	}

@@ -190,6 +190,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createTemperatureFromString(eDataType, initialValue);
 			case CommonsPackage.LOCAL_TIME:
 				return createLocalTimeFromString(eDataType, initialValue);
+			case CommonsPackage.EXCEPTION:
+				return createExceptionFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -275,6 +277,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertTemperatureToString(eDataType, instanceValue);
 			case CommonsPackage.LOCAL_TIME:
 				return convertLocalTimeToString(eDataType, instanceValue);
+			case CommonsPackage.EXCEPTION:
+				return convertExceptionToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -1263,6 +1267,24 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertLocalTimeToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Exception createExceptionFromString(EDataType eDataType, String initialValue) {
+		return (Exception)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertExceptionToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

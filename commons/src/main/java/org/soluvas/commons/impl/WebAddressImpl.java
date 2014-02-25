@@ -1149,8 +1149,13 @@ public class WebAddressImpl extends MinimalEObjectImpl.Container implements WebA
 			case CommonsPackage.WEB_ADDRESS___GET_SECURE_API_URI:
 				return getSecureApiUri();
 			case CommonsPackage.WEB_ADDRESS___EXPAND__MAP:
-				expand((Map<String, Object>)arguments.get(0));
-				return null;
+				try {
+					expand((Map<String, Object>)arguments.get(0));
+					return null;
+				}
+				catch (Throwable throwable) {
+					throw new InvocationTargetException(throwable);
+				}
 		}
 		return super.eInvoke(operationID, arguments);
 	}

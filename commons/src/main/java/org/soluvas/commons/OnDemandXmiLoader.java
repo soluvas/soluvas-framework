@@ -340,8 +340,12 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 
 	protected long expand(final EObject content) {
 		if (content instanceof Expandable) {
-			((Expandable) content).expand(scope);
-			return 1;
+			try {
+				((Expandable) content).expand(scope);
+				return 1;
+			} catch (Exception e) {
+				throw new CommonsException("Cannot expand " + content.getClass().getName(), e);
+			}
 		} else {
 			return 0;
 		}

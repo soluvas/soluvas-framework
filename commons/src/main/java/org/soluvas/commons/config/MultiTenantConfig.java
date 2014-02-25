@@ -92,7 +92,7 @@ public class MultiTenantConfig {
 
 	private String appDomain;
 
-	protected static String getFqdn() {
+	public static String getFqdn() {
 		final String fqdn;
 		try {
 			fqdn = InetAddress.getLocalHost().getCanonicalHostName();
@@ -211,7 +211,7 @@ public class MultiTenantConfig {
 					"tenantId", tenantId,
 					"tenantEnv", tenantEnv,
 					"domain", tenant.getValue().getDomain(),
-					"fqdn", tenant.getValue().getDomain());
+					"fqdn", fqdn);
 			final OnDemandXmiLoader<WebAddress> loader;
 			
 			final String webAddressRes = "/META-INF/tenant.WebAddress.xmi";
