@@ -38,6 +38,7 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCurrencyCode <em>Default Currency Code</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCurrency <em>Default Currency</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCountryCode <em>Default Country Code</em>}</li>
  * </ul>
  * </p>
  *
@@ -432,5 +433,31 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	void setEmailLogoUriTemplate(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Default Country Code</b></em>' attribute.
+	 * The default value is <code>"US"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Default country code in ISO 3166-1 alpha-2. It is used for e.g. fill the country field in new PostalAddress form.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Default Country Code</em>' attribute.
+	 * @see #setDefaultCountryCode(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultCountryCode()
+	 * @model default="US"
+	 * @generated
+	 */
+	String getDefaultCountryCode();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDefaultCountryCode <em>Default Country Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default Country Code</em>' attribute.
+	 * @see #getDefaultCountryCode()
+	 * @generated
+	 */
+	void setDefaultCountryCode(String value);
 
 } // AppManifest

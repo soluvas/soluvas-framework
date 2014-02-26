@@ -135,6 +135,14 @@ public class TenantUtils {
 		}
 	}
 	
+	/**
+	 * @param tenantSelector
+	 * @param map
+	 * @param clazz
+	 * @return
+	 * @deprecated Use {@link TenantBeanRepository#get(String)}
+	 */
+	@Deprecated
 	public static <T> T selectBean(TenantSelector tenantSelector, Map<String, T> map, Class<T> clazz) {
 		final String tenantId = tenantSelector.tenantRef().getTenantId();
 		return Preconditions.checkNotNull(map.get(tenantId),

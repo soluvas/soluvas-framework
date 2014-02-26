@@ -56,6 +56,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCurrencyCode <em>Default Currency Code</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCurrency <em>Default Currency</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCountryCode <em>Default Country Code</em>}</li>
  * </ul>
  * </p>
  *
@@ -446,6 +447,26 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @ordered
 	 */
 	protected String emailLogoUriTemplate = EMAIL_LOGO_URI_TEMPLATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDefaultCountryCode() <em>Default Country Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultCountryCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DEFAULT_COUNTRY_CODE_EDEFAULT = "US";
+
+	/**
+	 * The cached value of the '{@link #getDefaultCountryCode() <em>Default Country Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultCountryCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected String defaultCountryCode = DEFAULT_COUNTRY_CODE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -892,6 +913,27 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDefaultCountryCode() {
+		return defaultCountryCode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefaultCountryCode(String newDefaultCountryCode) {
+		String oldDefaultCountryCode = defaultCountryCode;
+		defaultCountryCode = newDefaultCountryCode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE, oldDefaultCountryCode, defaultCountryCode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public void expand(Map<String, Object> scope) {
@@ -959,6 +1001,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getDefaultCurrency();
 			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
 				return getEmailLogoUriTemplate();
+			case CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE:
+				return getDefaultCountryCode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1021,6 +1065,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return;
 			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
 				setEmailLogoUriTemplate((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE:
+				setDefaultCountryCode((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1085,6 +1132,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
 				setEmailLogoUriTemplate(EMAIL_LOGO_URI_TEMPLATE_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE:
+				setDefaultCountryCode(DEFAULT_COUNTRY_CODE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1137,6 +1187,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return DEFAULT_CURRENCY_EDEFAULT == null ? getDefaultCurrency() != null : !DEFAULT_CURRENCY_EDEFAULT.equals(getDefaultCurrency());
 			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
 				return EMAIL_LOGO_URI_TEMPLATE_EDEFAULT == null ? emailLogoUriTemplate != null : !EMAIL_LOGO_URI_TEMPLATE_EDEFAULT.equals(emailLogoUriTemplate);
+			case CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE:
+				return DEFAULT_COUNTRY_CODE_EDEFAULT == null ? defaultCountryCode != null : !DEFAULT_COUNTRY_CODE_EDEFAULT.equals(defaultCountryCode);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1294,6 +1346,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(defaultCurrencyCode);
 		result.append(", emailLogoUriTemplate: ");
 		result.append(emailLogoUriTemplate);
+		result.append(", defaultCountryCode: ");
+		result.append(defaultCountryCode);
 		result.append(')');
 		return result.toString();
 	}

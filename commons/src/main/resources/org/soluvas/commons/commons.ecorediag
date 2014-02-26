@@ -119,6 +119,10 @@
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/emailLogoUriTemplate"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_ALBkssHzEeKDZ7Yh48Wjow"/>
         </children>
+        <children xmi:type="notation:Node" xmi:id="_jwar8J7CEeOo-pfIy7koNQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/defaultCountryCode"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_jwar8Z7CEeOo-pfIy7koNQ"/>
+        </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_J59AQSSDEeKyUdMfH4dSfg"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_J59AQiSDEeKyUdMfH4dSfg"/>
         <styles xmi:type="notation:FilteringStyle" xmi:id="_J59AQySDEeKyUdMfH4dSfg"/>

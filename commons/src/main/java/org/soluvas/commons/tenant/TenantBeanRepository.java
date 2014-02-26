@@ -99,6 +99,7 @@ public abstract class TenantBeanRepository<T> {
 				initMethod.invoke(bean);
 			}
 			beanMap.put(tenantId, bean);
+			onCreated(tenantId, appManifest, bean);
 		} catch (Exception e) {
 			throw new CommonsException("Cannot initialize " + implClass.getSimpleName() + " bean for '" + tenantId + "'", e);
 		}
@@ -108,14 +109,19 @@ public abstract class TenantBeanRepository<T> {
 		try {
 			log.info("Shutting down '{}' {} using destroy method {}",
 					tenantId, implClass.getSimpleName(), destroyMethod);
-			final T removed = beanMap.remove(tenantId);
-			if (removed != null) {
+			final T bean = beanMap.get(tenantId);
+			if (bean != null) {
+				onDestroying(tenantId, bean);
+				beanMap.remove(tenantId);
 				if (destroyMethod != null) {
-					destroyMethod.invoke(removed);
+					destroyMethod.invoke(bean);
 				}
+			} else {
+				log.warn("Not removing non-existing {} bean for tenant '{}'",
+						implClass.getSimpleName(), tenantId);
 			}
 		} catch (Exception e) {
-			throw new CommonsException("Cannot initialize " + implClass.getSimpleName() + " bean for '" + tenantId + "'", e);
+			throw new CommonsException("Cannot destroy " + implClass.getSimpleName() + " bean for '" + tenantId + "'", e);
 		}
 	}
 	
@@ -128,6 +134,23 @@ public abstract class TenantBeanRepository<T> {
 	 * @throws Exception
 	 */
 	protected abstract T create(String tenantId, AppManifest appManifest) throws Exception;
+	
+	/**
+	 * Hook that's called after a tenant bean has been created and initialized.
+	 * @param tenantId
+	 * @param appManifest
+	 * @param bean
+	 */
+	protected void onCreated(String tenantId, AppManifest appManifest, T bean) {
+	}
+	
+	/**
+	 * Hook that's called before a tenant bean will be destroyed.
+	 * @param tenantId
+	 * @param bean
+	 */
+	protected void onDestroying(String tenantId, T bean) {
+	}
 	
 	/**
 	 * Returns an {@link ImmutableMap} copy of the current state.
