@@ -46,13 +46,23 @@ import com.mongodb.DBObject;
 public class MongoPersonRepository extends MongoRepositoryBase<Person> implements
 		PersonRepository {
 	
+	private static ImmutableMap<String, Integer> indexMap;
+
+	static {
+		final ImmutableMap.Builder<String, Integer> indexMab = ImmutableMap.builder();
+		indexMab.put("name", 1); // for sorting in list
+		indexMab.put("creationTime", -1);
+		indexMab.put("modificationTime", -1);
+		indexMab.put("securityRoleIds", 1);
+		indexMab.put("customerRole", 1);
+		indexMab.put("memberRole", 1);
+		indexMab.put("managerRole", 1);
+		indexMap = indexMab.build();
+	}
+	
 	public MongoPersonRepository(String mongoUri, boolean migrationEnabled) {
 		super(Person.class, PersonImpl.class, PersonImpl.CURRENT_SCHEMA_VERSION, mongoUri, "person",
-				ImmutableList.of("canonicalSlug"), ImmutableMap.of(
-						"name", 1, // for sorting in list
-						"creationTime", -1,
-						"modificationTime", -1),
-						migrationEnabled);
+				ImmutableList.of("canonicalSlug"), indexMap, migrationEnabled);
 	}
 
 	@Override
