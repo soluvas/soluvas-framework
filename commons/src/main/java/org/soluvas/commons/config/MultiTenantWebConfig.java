@@ -124,7 +124,7 @@ public class MultiTenantWebConfig implements TenantSelector {
 				final String tenantId = Optional.fromNullable((String) session.get("tenantId")).or(tenantConfig.tenantMap().keySet().iterator().next());
 				final String tenantEnv = env.getRequiredProperty("tenantEnv");
 				return new TenantRefImpl(clientId, tenantId, tenantEnv);
-			} catch (IllegalStateException | IOException e) {
+			} catch (IllegalStateException e) {
 				throw new CommonsException("Cannot get tenantRef from CommandRequestAttributes session " + session, e);
 			}
 		} else {
