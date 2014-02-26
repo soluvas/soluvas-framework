@@ -107,6 +107,23 @@ public class MultiTenantConfig {
 		return tenantEnv;
 	}
 	
+	public File getWorkspaceDir() {
+		return workspaceDir;
+	}
+	
+	public String getAppDomain() {
+		return appDomain;
+	}
+	
+	static File internalGetWorkspaceDir(String appId, String tenantEnv, Environment env) {
+		return new File(env.getProperty("workspaceDir", System.getProperty("user.home") + "/" + appId + "_" + tenantEnv));
+	}
+	
+	static String internalGetAppDomain(String appId, Environment env) {
+		final String defaultAppDomain = appId + "." + getFqdn();
+		return env.getProperty("appDomain", defaultAppDomain);
+	}
+	
 	/**
 	 * Loads {@link AppManifest}s for all tenants, depending on
 	 * <code>${tenantSource}</code> property ({@link TenantSource}).
@@ -117,11 +134,10 @@ public class MultiTenantConfig {
 	@PostConstruct
 	public void init() throws IOException {
 		final String appId = app.getId();
-		workspaceDir = new File(env.getProperty("workspaceDir", System.getProperty("user.home") + appId));
-		dataDirLayout = env.getProperty("dataDirLayout", DataDirLayout.class, DataDirLayout.DEFAULT);
 		tenantEnv = env.getRequiredProperty("tenantEnv");
-		final String defaultAppDomain = appDomain + "." + getFqdn();
-		appDomain = env.getProperty("appDomain", defaultAppDomain);
+		workspaceDir = internalGetWorkspaceDir(appId, tenantEnv, env);
+		dataDirLayout = env.getProperty("dataDirLayout", DataDirLayout.class, DataDirLayout.DEFAULT);
+		appDomain = internalGetAppDomain(appId, env);
 		// tenantWhitelist: Comma-separated list of tenantIds to load (all others are excluded)
 		@Nullable
 		final String tenantWhitelistStr = env.getProperty("tenantWhitelist", String.class);
@@ -172,6 +188,7 @@ public class MultiTenantConfig {
 		case CONFIG:
 			return staticTenantMap;
 		case REPOSITORY:
+			Preconditions.checkNotNull(tenantRepo, "tenantRepo must provided for tenantSource=%s", tenantSource);
 			final ImmutableMap<String, AppManifest> tenantMap = tenantRepo.findAll();
 			return tenantMap;
 		default:

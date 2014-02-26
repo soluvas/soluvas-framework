@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
+import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.config.DirectorySourcedConfig;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
@@ -31,6 +33,7 @@ import com.google.common.collect.Iterables;
 /**
  * Reads list of tenants from a filesystem folder, e.g. {@code $HOME}.
  * @author ceefour
+ * @see DirectorySourcedConfig
  */
 public class DirectoryTenantRepository implements TenantRepository {
 
@@ -85,6 +88,7 @@ public class DirectoryTenantRepository implements TenantRepository {
 		init();
 	}
 	
+	@PostConstruct
 	protected void init() throws IOException {
 		final String fqdn;
 		try {
@@ -99,13 +103,13 @@ public class DirectoryTenantRepository implements TenantRepository {
 		final Resource[] resources = new PathMatchingResourcePatternResolver(DirectoryTenantRepository.class.getClassLoader())
 			.getResources(pattern);
 		log.debug("Found {} AppManifests: {}", resources.length, Iterables.limit(ImmutableList.copyOf(resources), 10));
-		final Pattern appManifestXmiPattern = Pattern.compile("([^_+])\\_" + tenantEnv + ".AppManifest.xmi");
+		final Pattern appManifestXmiPattern = Pattern.compile("([^_]+)\\_" + tenantEnv + "\\.AppManifest\\.xmi");
 		
 		for (final Resource res : resources) {
 			final String filename = res.getFilename();
 			final Matcher matcher = appManifestXmiPattern.matcher(filename);
 			if (!matcher.matches()) {
-				log.error("AppManifest.xmi file '{}' does not match pattern: [tenantId]_{}.xmi", res.getFile(), tenantEnv);
+				log.error("AppManifest.xmi file '{}' (from '{}') does not match pattern: [tenantId]_{}.AppManifest.xmi", filename, res.getFile(), tenantEnv);
 				continue;
 			}
 			final String tenantId = matcher.group(1);

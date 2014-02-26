@@ -2,7 +2,6 @@ package org.soluvas.commons.config;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,8 +33,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 import com.google.common.eventbus.EventBus;
 
 /**
@@ -52,8 +49,8 @@ public class MultiTenantWebConfig implements TenantSelector {
 			.getLogger(MultiTenantWebConfig.class);
 //	@Inject
 //	private HttpServletRequest request;
-	private static final Cache<String, AppManifest> appManifestCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build();
-	private static final Cache<String, WebAddress> webAddressCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build();
+//	private static final Cache<String, AppManifest> appManifestCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build();
+//	private static final Cache<String, WebAddress> webAddressCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build();
 	
 	@Inject
 	private Environment env;
