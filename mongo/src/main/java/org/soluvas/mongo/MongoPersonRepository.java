@@ -49,7 +49,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	private static ImmutableMap<String, Integer> indexMap;
 
 	static {
-		ImmutableMap.Builder<String, Integer> indexMab = ImmutableMap.builder();
+		final ImmutableMap.Builder<String, Integer> indexMab = ImmutableMap.builder();
 		indexMab.put("name", 1); // for sorting in list
 		indexMab.put("creationTime", -1);
 		indexMab.put("modificationTime", -1);
