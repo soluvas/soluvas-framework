@@ -34,11 +34,11 @@ public class CustomerRoles {
 	
 	static {
 		DISPLAY_NAMES = new HashMap<>();
-		DISPLAY_NAMES.put(AGENT, "Agen");
-		DISPLAY_NAMES.put(COMMON, "Biasa");
-		DISPLAY_NAMES.put(DEPOSIT, "Deposit");
+		DISPLAY_NAMES.put(AGENT, "Agen 30");
+		DISPLAY_NAMES.put(COMMON, "Retail");
+		DISPLAY_NAMES.put(DEPOSIT, "Agen 20");
 		DISPLAY_NAMES.put(DROP_SHIP, "Drop Ship");
 		DISPLAY_NAMES.put(MEMBER, "Member");
-		DISPLAY_NAMES.put(SPECIAL_AGENT, "Agen Spesial"); // Agen Besar
+		DISPLAY_NAMES.put(SPECIAL_AGENT, "Agen Besar"); // Agen Besar
 	}
 }
