@@ -167,7 +167,7 @@ public class MultiTenantConfig {
 	 * @throws IOException 
 	 */
 	@Bean @Scope("prototype")
-	public ImmutableMap<String, AppManifest> tenantMap() throws IOException {
+	public ImmutableMap<String, AppManifest> tenantMap() {
 		switch (tenantSource) {
 		case CONFIG:
 			return staticTenantMap;
@@ -180,7 +180,7 @@ public class MultiTenantConfig {
 	}
 
 	@Bean
-	public ImmutableMap<String, EventBus> eventBusMap() throws IOException {
+	public ImmutableMap<String, EventBus> eventBusMap() {
 		final ImmutableMap.Builder<String, EventBus> eventBusb = ImmutableMap.builder();
 		for (final Map.Entry<String, AppManifest> entry : tenantMap().entrySet()) {
 			final AsyncEventBus eventBus = new AsyncEventBus(entry.getKey(), networkExecutor);

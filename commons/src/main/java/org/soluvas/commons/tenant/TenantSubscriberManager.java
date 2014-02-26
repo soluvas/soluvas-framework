@@ -30,7 +30,7 @@ public abstract class TenantSubscriberManager {
 	private static final Logger log = LoggerFactory
 			.getLogger(TenantSubscriberManager.class);
 
-	public TenantSubscriberManager(Map<String, AppManifest> initialTenantMap, MultiTenantConfig tenantConfig) throws IOException {
+	public TenantSubscriberManager(Map<String, AppManifest> initialTenantMap, MultiTenantConfig tenantConfig) {
 		super();
 		this.tenantConfig = tenantConfig;
 		for (final Map.Entry<String, AppManifest> tenant : initialTenantMap.entrySet()) {
@@ -48,7 +48,7 @@ public abstract class TenantSubscriberManager {
 		}
 	}
 	
-	protected synchronized final void createSubscribers(String tenantId) throws IOException {
+	protected synchronized final void createSubscribers(String tenantId) {
 		try {
 			final List<Object> subscribers = onReady(tenantId);
 			log.info("Subscribing {} objects to '{}' EventBus: {}",
