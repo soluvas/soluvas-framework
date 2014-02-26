@@ -129,7 +129,7 @@ public class MultiTenantConfig {
 		final List<String> tenantWhitelist = tenantWhitelistStr != null ? Splitter.on(',').trimResults().omitEmptyStrings().splitToList( tenantWhitelistStr ) : null;
 		tenantSource = env.getProperty("tenantSource", TenantSource.class, TenantSource.CONFIG);
 		log.info("App '{}' env={} domain={}. Workspace dir={} layout={}. Tenant source {} with {} whitelist: {}", 
-				appId, tenantEnv, appDomain, workspaceDir, dataDirLayout, tenantSource, tenantWhitelist.size(), tenantWhitelist);
+				appId, tenantEnv, appDomain, workspaceDir, dataDirLayout, tenantSource, tenantWhitelist != null ? tenantWhitelist.size() : 0, tenantWhitelist);
 		if (tenantSource == TenantSource.CONFIG) {
 			final Resource[] resources = new PathMatchingResourcePatternResolver(MultiTenantConfig.class.getClassLoader())
 				.getResources("classpath*:/META-INF/*.AppManifest.xmi");
