@@ -21,7 +21,6 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
-import com.google.common.collect.Iterables;
 
 /**
  * Get tenant-aware services.
@@ -145,9 +144,19 @@ public class TenantUtils {
 	@Deprecated
 	public static <T> T selectBean(TenantSelector tenantSelector, Map<String, T> map, Class<T> clazz) {
 		final String tenantId = tenantSelector.tenantRef().getTenantId();
+		return selectBean(tenantId, map, clazz);
+	}
+
+	/**
+	 * @param tenantId
+	 * @param map
+	 * @param clazz
+	 * @return
+	 */
+	public static <T> T selectBean(String tenantId, Map<String, T> map, Class<T> clazz) {
 		return Preconditions.checkNotNull(map.get(tenantId),
 				"No %s for tenant '%s'. %s available: %s",
-				clazz.getSimpleName(), tenantId, map.size(), Iterables.limit(map.keySet(), 10));
+				clazz.getSimpleName(), tenantId, map.size(), map.keySet());
 	}
 
 }
