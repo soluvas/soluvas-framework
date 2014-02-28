@@ -1,5 +1,6 @@
 package org.soluvas.category.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -87,15 +88,19 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 	 * Scan using classpath.
 	 * @todo Scanning multiple classpaths for resources is slow, so static or hybrid
 	 * 		approach is preferable.
-	 * @param dataFolder TODO
+	 * @param dataDir If not {@code null}, will scan in filesystem too.
 	 */
-	public void scan(ClassLoader classLoader, String dataFolder) {
+	public void scan(ClassLoader classLoader, @Nullable File dataDir) {
 		final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
 		// Due to JDK limitation, scanning of root won't work in webapp classpath,
 		// at least the root folder must be specified before wildcard
-		final List<String> locationPatterns = ImmutableList.of("classpath*:org/**/*.CategoryCatalog.xmi",
-				"classpath*:com/**/*.CategoryCatalog.xmi", "classpath*:id/**/*.CategoryCatalog.xmi",
-				"file:" + dataFolder + "/common/*.CategoryCatalog.xmi");
+		final List<String> locationPatterns = new ArrayList<>();
+		locationPatterns.add("classpath*:org/**/*.CategoryCatalog.xmi");
+		locationPatterns.add("classpath*:com/**/*.CategoryCatalog.xmi");
+		locationPatterns.add("classpath*:id/**/*.CategoryCatalog.xmi");
+		if (dataDir != null) {
+			locationPatterns.add("file:" + dataDir + "/common/*.CategoryCatalog.xmi");
+		}
 		log.trace("Scanning {} for {}", classLoader, locationPatterns);
 		try {
 			final List<Resource> allResources = new ArrayList<>();
@@ -126,6 +131,17 @@ public class CategoryCatalogXmiTracker implements BundleTrackerCustomizer<List<C
 		}
 	}
 
+	/**
+	 * Scan using classpath.
+	 * @todo Scanning multiple classpaths for resources is slow, so static or hybrid
+	 * 		approach is preferable.
+	 * @param dataDir If not {@code null}, will scan in filesystem too.
+	 */
+	@Deprecated
+	public void scan(ClassLoader classLoader, @Nullable String dataDir) {
+		scan(classLoader, dataDir != null ? new File(dataDir) : null);
+	}
+	
 	private List<Category> extractObjects(final List<URL> xmiFiles,
 			final Bundle bundle) {
 		if (xmiFiles.isEmpty())

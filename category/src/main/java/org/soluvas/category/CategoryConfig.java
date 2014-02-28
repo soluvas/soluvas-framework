@@ -13,8 +13,9 @@ import com.google.common.eventbus.EventBus;
 
 /**
  * @author rudi
- *
+ * @deprecated Use {@link MultiTenantCategoryConfig} for multitenant applications.
  */
+@Deprecated
 @Configuration @Lazy
 @ComponentScan("org.soluvas.category")
 public class CategoryConfig {
