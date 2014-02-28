@@ -5,7 +5,6 @@ import static org.fusesource.jansi.Ansi.ansi;
 import java.util.List;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
 import org.apache.commons.pool.ObjectPool;
 import org.apache.directory.api.ldap.model.entry.Entry;
@@ -20,8 +19,6 @@ import org.soluvas.ldap.Ldap;
 import org.soluvas.ldap.LdapRepository;
 import org.soluvas.ldap.LdapUtils;
 import org.soluvas.ldap.SocialPerson;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
 import com.google.common.base.Strings;
@@ -29,16 +26,19 @@ import com.google.common.base.Strings;
 /**
  * Fix invalid primaryShippingAddress and primaryBillingAddress on {@link SocialPerson} entries.
  *
+ * It's running in 5.1.X!!
+ *
  * @author ceefour
  */
-@Service @Scope("prototype")
+//@Service @Scope("prototype")
 @Command(scope="person", name="fixaddress", description="Fix invalid primaryShippingAddress and primaryBillingAddress on person entries.")
+@Deprecated
 public class PersonFixAddressCommand extends ExtCommandSupport {
 
 	private final LdapRepository<SocialPerson> personLdapRepo;
 	private final ObjectPool<LdapConnection> ldapPool;
 	
-	@Inject
+//	@Inject
 	public PersonFixAddressCommand(
 			@PersonLdapRelated LdapRepository<SocialPerson> personLdapRepo,
 			@Ldap ObjectPool<LdapConnection> ldapPool) {
