@@ -18,12 +18,4 @@ package org.soluvas.image;
  * @generated
  */
 public interface DavConnector extends ImageConnector {
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void destroy();
 } // DavConnector

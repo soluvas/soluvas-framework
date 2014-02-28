@@ -134,4 +134,15 @@ public interface ImageConnector extends EObject {
 	 * @generated
 	 */
 	String getOriginUri(String namespace, String imageId, String styleCode, String styleVariant, String extension);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Required to help {@link org.soluvas.commons.tenant.TenantBeanRepository} detect whether this class is destroyable.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	void destroy();
 } // ImageConnector

@@ -44,7 +44,7 @@ public abstract class TenantBeanRepository<T> {
 	private final Map<String, T> beanMap = new LinkedHashMap<>();
 	private Method initMethod;
 	private Method destroyMethod;
-	private final Class<T> implClass;
+	private final Class<? extends T> implClass;
 	
 	/**
 	 * @param implClass Must be the implementation class, because {@code init()} and {@code destroy()}
@@ -52,7 +52,7 @@ public abstract class TenantBeanRepository<T> {
 	 * @param initialTenantMap
 	 * @param appEventBus
 	 */
-	public TenantBeanRepository(Class<T> implClass, Map<String, AppManifest> initialTenantMap, EventBus appEventBus) {
+	public TenantBeanRepository(Class<? extends T> implClass, Map<String, AppManifest> initialTenantMap, EventBus appEventBus) {
 		super();
 		this.implClass = implClass;
 		log = LoggerFactory.getLogger(TenantBeanRepository.class.getName() + "/" + implClass.getSimpleName());
