@@ -55,7 +55,7 @@ public class EmailConfig {
 //			return tracker;
 //		}
 	
-	@Bean(initMethod="init", destroyMethod="destroy")
+	@Bean(destroyMethod="destroy")
 	public TenantBeanRepository<EmailManagerImpl> emailMgrBeanRepo() throws IOException {
 		final String smtpHost = env.getRequiredProperty("emailSmtpHost");
 		final int smtpPort = env.getRequiredProperty("emailSmtpPort", Integer.class);

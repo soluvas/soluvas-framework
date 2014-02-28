@@ -235,7 +235,7 @@ public class MultiTenantConfig {
 			final File dataDir = dataDirMap.get(tenantId);
 			if (dataDir != null) {
 				if (dataDir.exists()) {
-					final File webAddressFile = new File(dataDir, "custom.WebAddress.xmi");
+					final File webAddressFile = new File(dataDir, "model/custom.WebAddress.xmi");
 					log.info("Tenant '{}' data dir '{}' exists, loading WebAddress model from file: {}",
 							tenantId, dataDir, webAddressFile);
 					loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, webAddressFile, scope);
