@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.eventbus.EventBus;
 
 /**
@@ -30,11 +31,12 @@ public abstract class TenantSubscriberManager {
 	private static final Logger log = LoggerFactory
 			.getLogger(TenantSubscriberManager.class);
 
-	public TenantSubscriberManager(Map<String, AppManifest> initialTenantMap, MultiTenantConfig tenantConfig) {
+	public TenantSubscriberManager(MultiTenantConfig tenantConfig) {
 		super();
 		this.tenantConfig = tenantConfig;
+		final ImmutableMap<String, AppManifest> initialTenantMap = tenantConfig.tenantMap();
 		for (final Map.Entry<String, AppManifest> tenant : initialTenantMap.entrySet()) {
-			createSubscribers(tenant.getKey());
+			createSubscribers(tenant.getKey(), tenant.getValue());
 		}
 	}
 	
@@ -48,9 +50,9 @@ public abstract class TenantSubscriberManager {
 		}
 	}
 	
-	protected synchronized final void createSubscribers(String tenantId) {
+	protected synchronized final void createSubscribers(String tenantId, AppManifest appManifest) {
 		try {
-			final List<Object> subscribers = onReady(tenantId);
+			final List<?> subscribers = onReady(tenantId, appManifest);
 			log.info("Subscribing {} objects to '{}' EventBus: {}",
 					subscribers.size(), tenantId, subscribers);
 			final EventBus tenantEventBus = tenantConfig.eventBusMap().get(tenantId);
@@ -77,9 +79,10 @@ public abstract class TenantSubscriberManager {
 	/**
 	 * Called when tenant {@link EventBus} is ready for subscribers.
 	 * @param tenantId
+	 * @param appManifest 
 	 * @return List of subscribers to {@link EventBus#register(Object)}, they'll be automatically
 	 * 		{@link EventBus#unregister(Object)}-ed when the tenant is removed.
 	 */
-	protected abstract List<Object> onReady(String tenantId) throws Exception;
+	protected abstract List<?> onReady(String tenantId, AppManifest appManifest) throws Exception;
 
 }
