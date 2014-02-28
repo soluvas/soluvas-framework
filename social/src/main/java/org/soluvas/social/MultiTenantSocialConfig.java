@@ -19,7 +19,7 @@ import com.google.common.eventbus.EventBus;
  * @author rudi
  */
 @Configuration @Lazy
-@ComponentScan("org.soluvas.social")
+@ComponentScan("org.soluvas.social.shell")
 public class MultiTenantSocialConfig {
 	
 	@Inject @Named(CommonsWebConfig.APP_EVENT_BUS)
