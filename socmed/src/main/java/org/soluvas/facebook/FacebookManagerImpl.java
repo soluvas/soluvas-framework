@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 /**
+ * @todo Remove @Service because doesn't work with multitenant applications.
  * @author haidar
- *
  */
 @Service("facebookMgr") @Lazy
 public class FacebookManagerImpl implements FacebookManager  {

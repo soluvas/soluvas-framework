@@ -1,9 +1,9 @@
 package org.soluvas.commons.config;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.soluvas.commons.tenant.TenantRef;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -16,11 +16,10 @@ import org.springframework.context.annotation.Configuration;
 public interface TenantSelector {
 
 	/**
-	 * Tenant data directory, this is {@code request} scoped.
+	 * Tenant data directory, it's not a {@link Bean} so needs to be called via {@link TenantSelector} bean.
 	 * @return
-	 * @throws IOException 
 	 */
-	File dataDir() throws IOException;
+	File getDataDir();
 	
 	TenantRef tenantRef();
 	

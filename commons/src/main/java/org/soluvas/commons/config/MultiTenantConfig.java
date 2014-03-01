@@ -265,7 +265,7 @@ public class MultiTenantConfig {
 	 * @throws IOException
 	 */
 	@Bean @Scope("prototype")
-	public ImmutableMap<String, File> dataDirMap() throws IOException {
+	public ImmutableMap<String, File> dataDirMap() {
 		final ImmutableMap.Builder<String, File> dataDirMapb = ImmutableMap.builder();
 		for (final Map.Entry<String, AppManifest> tenant : tenantMap().entrySet()) {
 			final String dataDirName = dataDirLayout == DataDirLayout.LEGACY ? tenant.getKey() + "_" + tenantEnv : tenant.getKey();

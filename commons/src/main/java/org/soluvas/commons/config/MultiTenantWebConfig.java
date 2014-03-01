@@ -159,7 +159,7 @@ public class MultiTenantWebConfig implements TenantSelector {
 	}
 
 	@Override
-	public File dataDir() throws IOException {
+	public File getDataDir() {
 		return TenantUtils.selectBean(this, tenantConfig.dataDirMap(), File.class);
 	}
 

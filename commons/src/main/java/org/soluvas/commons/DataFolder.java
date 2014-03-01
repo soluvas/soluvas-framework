@@ -11,7 +11,7 @@ import org.soluvas.commons.config.TenantSelector;
 /**
  * Gets the data folder, e.g. {@literal /home/rudi/cintalama_dev}.
  * @author rudi
- * @deprecated Use {@link TenantSelector#dataDir()}.
+ * @deprecated Use {@link TenantSelector#getDataDir()}.
  */
 @Qualifier
 @Documented
