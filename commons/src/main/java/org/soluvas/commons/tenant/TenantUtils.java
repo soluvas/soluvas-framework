@@ -104,7 +104,7 @@ public class TenantUtils {
 	 * @param clazz
 	 * @return
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	public static <T> T getSupplied(BundleContext bundleContext, TenantRef tenant, Class<T> clazz) {
 		final ServiceReference<Supplier> supplierRef = getService(bundleContext, tenant, Supplier.class,
 				null, "(suppliedClass=" + clazz.getName() + ")(layer=application)");

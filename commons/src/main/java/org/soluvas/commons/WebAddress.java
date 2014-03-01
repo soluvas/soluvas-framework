@@ -8,7 +8,7 @@ package org.soluvas.commons;
  * <em><b>Web Address</b></em>'. <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Tenant-wide website URI configuration.
+ * Tenant-wide website URI configuration. URI template variables: appId, tenantId, tenantEnv, domain, fqdn.
  * <!-- end-model-doc -->
  *
  * <p>

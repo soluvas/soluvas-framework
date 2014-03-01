@@ -209,6 +209,7 @@ public class MultiTenantConfig {
 	@Bean
 	public ImmutableMap<String, WebAddress> webAddressMap() throws IOException {
 		final TenantMode tenantMode = env.getRequiredProperty("tenantMode", TenantMode.class);
+		final String appId = app.getId();
 		final String fqdn = getFqdn();
 		
 		switch (tenantMode) {
@@ -225,23 +226,24 @@ public class MultiTenantConfig {
 		for (final Map.Entry<String, AppManifest> tenant : tenantMap().entrySet()) {
 			final String tenantId = tenant.getKey();
 			final ImmutableMap<String, Object> scope = ImmutableMap.<String, Object>of(
+					"appId", appId,
 					"tenantId", tenantId,
 					"tenantEnv", tenantEnv,
 					"domain", tenant.getValue().getDomain(),
 					"fqdn", fqdn);
 			final OnDemandXmiLoader<WebAddress> loader;
 			
-			final String webAddressRes = "/META-INF/tenant.WebAddress.xmi";
+			final String webAddressRes = "/META-INF/template.WebAddress.xmi";
 			final File dataDir = dataDirMap.get(tenantId);
 			if (dataDir != null) {
-				if (dataDir.exists()) {
-					final File webAddressFile = new File(dataDir, "model/custom.WebAddress.xmi");
-					log.info("Tenant '{}' data dir '{}' exists, loading WebAddress model from file: {}",
-							tenantId, dataDir, webAddressFile);
+				final File webAddressFile = new File(dataDir, "model/" + tenantId + "_" + tenantEnv + ".WebAddress.xmi");
+				if (webAddressFile.exists()) {
+					log.info("Tenant '{}' WebAddress file '{}' exists, loading WebAddress model from file",
+							tenantId, webAddressFile);
 					loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, webAddressFile, scope);
 				} else {
-					log.info("Tenant '{}' data dir '{}' does not exist, loading generic WebAddress model from classpath: {}",
-							tenantId, dataDir, webAddressRes);
+					log.info("Tenant '{}' WebAddress file '{}' does not exist, loading generic WebAddress model from classpath: {}",
+							tenantId, webAddressFile, webAddressRes);
 					loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, MultiTenantConfig.class, webAddressRes, scope);
 				}
 			} else {
