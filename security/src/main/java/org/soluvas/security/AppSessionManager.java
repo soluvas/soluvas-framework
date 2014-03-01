@@ -5,6 +5,7 @@ package org.soluvas.security;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.eclipse.emf.ecore.EObject;
 import org.soluvas.commons.Person;
@@ -13,6 +14,7 @@ import org.soluvas.data.EntityLookup;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>App Session Manager</b></em>'.
+ * @todo Do we still need this? Or Shiro's {@link Session} is enough for all purposes (i.e. REST API sessions)?
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
