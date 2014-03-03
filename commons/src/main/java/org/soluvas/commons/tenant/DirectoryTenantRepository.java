@@ -149,6 +149,7 @@ public class DirectoryTenantRepository implements TenantRepository {
 		return rootDir;
 	}
 	
+	@Nullable
 	public ImmutableSet<String> getWhitelist() {
 		return whitelist;
 	}
@@ -169,6 +170,8 @@ public class DirectoryTenantRepository implements TenantRepository {
 
 	@Override
 	public synchronized AppManifest add(String tenantId, AppManifest appManifest, String trackingId) {
+		Preconditions.checkState(whitelist == null,
+				"Cannot add tenant on whitelisting repository");
 		Preconditions.checkArgument(!tenantMap.containsKey(tenantId),
 				"Cannot add existing tenant '%s'. %s existing tenants: %s",
 				tenantId, tenantMap.size(), tenantMap.keySet());
@@ -187,13 +190,44 @@ public class DirectoryTenantRepository implements TenantRepository {
 	}
 
 	@Override
-	public AppManifest modify(String tenantId, AppManifest appManifest) {
+	public synchronized AppManifest modify(String tenantId, AppManifest appManifest) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public boolean delete(String tenantId) {
+	public synchronized boolean delete(String tenantId) {
+		Preconditions.checkState(whitelist == null,
+				"Cannot delete tenant on whitelisting repository");
+		final AppManifest appManifest = Preconditions.checkNotNull(tenantMap.get(tenantId),
+				"Tenant '%s' not found. %s existing tenants: %s",
+				tenantId, tenantMap.size(), tenantMap.keySet());
+		stop(tenantId, appManifest);
 		throw new UnsupportedOperationException();
 	}
-
+	
+	/**
+	 * Starts a tenant.
+	 * @param tenantId
+	 * @param appManifest
+	 */
+	protected final void start(String tenantId, AppManifest appManifest) {
+	}
+	
+	/**
+	 * Calls {@link #onBeforeStop(String, AppManifest)}.
+	 * @param tenantId
+	 * @param appManifest
+	 */
+	protected final void stop(String tenantId, AppManifest appManifest) {
+		onBeforeStop(tenantId, appManifest);
+	}
+	
+	/**
+	 * Hook method called before stop. Useful to stop repositories, release resources, etc.
+	 * @param tenantId
+	 * @param appManifest
+	 */
+	protected void onBeforeStop(String tenantId, AppManifest appManifest) {
+	}
+	
 }
