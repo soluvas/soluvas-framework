@@ -20,6 +20,7 @@ import com.google.common.base.Preconditions;
  * multiple schemas using "connection altering".  Here we use the PostgreSQL specific SET SCHEMA command; Oracle
  * users might use the ALTER SESSION SET SCHEMA command; etc.
  * @see http://docs.jboss.org/hibernate/core/4.2/devguide/en-US/html/ch16.html#d5e4698
+ * @see SoluvasTenantIdentifierResolver
  * @author ceefour
  */
 public class SoluvasMultiTenantConnectionProviderImpl implements MultiTenantConnectionProvider, Stoppable {

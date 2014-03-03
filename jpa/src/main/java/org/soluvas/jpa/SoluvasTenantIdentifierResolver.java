@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 
 /**
  * Uses {@link RequestOrCommandScope}.
+ * @see SoluvasMultiTenantConnectionProviderImpl
  * @author ceefour
  */
 public class SoluvasTenantIdentifierResolver implements
