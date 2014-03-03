@@ -98,7 +98,7 @@ public class DirectoryTenantRepository implements TenantRepository {
 		}
 		Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
 
-		final String pattern = String.format("file://%s/*_%s/model/*_%s.AppManifest.xmi", rootDir, tenantEnv, tenantEnv);
+		final String pattern = String.format("file://%s/*/model/*_%s.AppManifest.xmi", rootDir, tenantEnv);
 		log.debug("Searching tenant AppManifests for fqdn={} appDomain={} using '{}'...", fqdn, appDomain, pattern);
 		final Resource[] resources = new PathMatchingResourcePatternResolver(DirectoryTenantRepository.class.getClassLoader())
 			.getResources(pattern);

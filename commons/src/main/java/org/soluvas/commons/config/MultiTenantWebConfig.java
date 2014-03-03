@@ -94,10 +94,11 @@ public class MultiTenantWebConfig implements TenantSelector {
 			return pathTenant;
 		case MULTI_HOST:
 			final String serverName = httpRequest.getServerName();
-			final Matcher hostMatcher = Pattern.compile("([^.]+).*").matcher(serverName);
+			final Matcher hostMatcher = Pattern.compile("(www\\.?)([^.]+).*").matcher(serverName);
 			Preconditions.checkState(hostMatcher.matches(),
-					"Server name '%s' must match pattern: ([^.]+).*", serverName);
-			final String tenantId = hostMatcher.group(1).toLowerCase();
+					"Server name '%s' must match pattern: (www\\.?)([^.]+).*", serverName);
+			final String tenantId = hostMatcher.group(2).toLowerCase();
+			// FIXME: Search host/domain from AppManifest/SysConfig/WebAddress 
 			final TenantRef hostTenant = new TenantRefImpl(tenantId, tenantId, tenantEnv);
 			log.debug("MULTI_HOST Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
 					serverName, hostTenant.getClientId(), hostTenant.getTenantId(), hostTenant.getTenantEnv() );
