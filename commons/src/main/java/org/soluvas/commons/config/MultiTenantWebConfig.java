@@ -94,9 +94,9 @@ public class MultiTenantWebConfig implements TenantSelector {
 			return pathTenant;
 		case MULTI_HOST:
 			final String serverName = httpRequest.getServerName();
-			final Matcher hostMatcher = Pattern.compile("(www\\.?)([^.]+).*").matcher(serverName);
+			final Matcher hostMatcher = Pattern.compile("(www\\.)?([^.]+).*").matcher(serverName);
 			Preconditions.checkState(hostMatcher.matches(),
-					"Server name '%s' must match pattern: (www\\.?)([^.]+).*", serverName);
+					"Server name '%s' must match pattern: (www\\.)?([^.]+).*", serverName);
 			final String tenantId = hostMatcher.group(2).toLowerCase();
 			// FIXME: Search host/domain from AppManifest/SysConfig/WebAddress 
 			final TenantRef hostTenant = new TenantRefImpl(tenantId, tenantId, tenantEnv);
