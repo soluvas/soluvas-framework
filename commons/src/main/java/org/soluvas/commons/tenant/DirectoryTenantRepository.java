@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsException;
+import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
@@ -29,6 +30,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.eventbus.EventBus;
 
 /**
  * Reads list of tenants from a filesystem folder, e.g. {@code $HOME}.
@@ -53,6 +55,7 @@ public class DirectoryTenantRepository implements TenantRepository {
 	 * domain name will be completed using the {@code appDomain}. 
 	 */
 	private final String appDomain;
+	private EventBus appEventBus;
 	
 	/**
 	 * @param tenantEnv
@@ -61,8 +64,9 @@ public class DirectoryTenantRepository implements TenantRepository {
 	 * @param rootDir
 	 * @throws IOException
 	 */
-	public DirectoryTenantRepository(String tenantEnv, String appDomain, File rootDir) throws IOException {
+	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir) throws IOException {
 		super();
+		this.appEventBus = appEventBus;
 		this.tenantEnv = tenantEnv;
 		this.appDomain = appDomain;
 		this.rootDir = rootDir;
@@ -78,7 +82,7 @@ public class DirectoryTenantRepository implements TenantRepository {
 	 * @param whitelist
 	 * @throws IOException
 	 */
-	public DirectoryTenantRepository(String tenantEnv, String appDomain, File rootDir, Set<String> whitelist) throws IOException {
+	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir, Set<String> whitelist) throws IOException {
 		super();
 		this.tenantEnv = tenantEnv;
 		this.appDomain = appDomain;
@@ -155,6 +159,41 @@ public class DirectoryTenantRepository implements TenantRepository {
 	@Override
 	public ImmutableMap<String, AppManifest> findAll() {
 		return ImmutableMap.copyOf(tenantMap);
+	}
+
+	@Override
+	public AppManifest newBlank() {
+		final AppManifest appManifest = CommonsFactory.eINSTANCE.createAppManifest();
+		return appManifest;
+	}
+
+	@Override
+	public synchronized AppManifest add(String tenantId, AppManifest appManifest, String trackingId) {
+		Preconditions.checkArgument(!tenantMap.containsKey(tenantId),
+				"Cannot add existing tenant '%s'. %s existing tenants: %s",
+				tenantId, tenantMap.size(), tenantMap.keySet());
+		createDataDir(tenantId);
+		tenantMap.put(tenantId, appManifest);
+		final ImmutableMap<String, AppManifest> addeds = ImmutableMap.of(tenantId, appManifest);
+		appEventBus.post(new TenantsAdded(addeds, trackingId));
+		return appManifest;
+	}
+
+	private void createDataDir(String tenantId) {
+		final File dataDir = new File(rootDir, tenantId);
+		log.info("Creating tenant '{}' data directory: {}", tenantId, dataDir);
+		final boolean created = dataDir.mkdirs();
+		log.info("Created ({}) tenant '{}' data directory: {}", created, tenantId, dataDir);
+	}
+
+	@Override
+	public AppManifest modify(String tenantId, AppManifest appManifest) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean delete(String tenantId) {
+		throw new UnsupportedOperationException();
 	}
 
 }

@@ -20,5 +20,38 @@ public interface TenantRepository {
 	 * @return
 	 */
 	ImmutableMap<String, AppManifest> findAll();
+	
+	/**
+	 * Creates a blank {@link AppManifest} object, which may be pre-customized to the app.
+	 * @return
+	 */
+	AppManifest newBlank();
+	
+	/**
+	 * Sets up a new tenant and activates it.
+	 * @param tenantId
+	 * @param appManifest
+	 * @param trackingId TODO
+	 * @return
+	 * @throws IllegalStateException if {@code tenantWhitelist} is used
+	 */
+	AppManifest add(String tenantId, AppManifest appManifest, String trackingId);
+
+	/**
+	 * Shuts down a tenant, modifies it then restarts it.
+	 * @param tenantId
+	 * @param appManifest
+	 * @return
+	 */
+	AppManifest modify(String tenantId, AppManifest appManifest);
+
+	/**
+	 * Deletes a tenant permanently.
+	 * @param tenantId
+	 * @param appManifest
+	 * @return
+	 * @throws IllegalStateException if {@code tenantWhitelist} is used
+	 */
+	boolean delete(String tenantId);
 
 }

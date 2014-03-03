@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.soluvas.commons.TenantSource;
 import org.soluvas.commons.tenant.DirectoryTenantRepository;
@@ -17,6 +18,7 @@ import org.springframework.core.env.Environment;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.eventbus.EventBus;
 
 /**
  * Please {@link Import} for {@link TenantSource#CONFIG}.
@@ -29,6 +31,8 @@ public class DirectorySourcedConfig {
 	private Environment env;
 	@Inject
 	private SoluvasApplication app;
+	@Inject @Named(CommonsWebConfig.APP_EVENT_BUS)
+	private EventBus appEventBus;
 	
 	@Bean(initMethod="init")
 	public DirectoryTenantRepository tenantRepo() throws IOException {
@@ -40,9 +44,9 @@ public class DirectorySourcedConfig {
 		final String tenantWhitelistStr = env.getProperty("tenantWhitelist", String.class);
 		if (tenantWhitelistStr != null) {
 			final Set<String> tenantWhitelist = ImmutableSet.copyOf( Splitter.on(',').trimResults().omitEmptyStrings().splitToList( tenantWhitelistStr ) );
-			return new DirectoryTenantRepository(tenantEnv, appDomain, workspaceDir, tenantWhitelist);
+			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir, tenantWhitelist);
 		} else {
-			return new DirectoryTenantRepository(tenantEnv, appDomain, workspaceDir);
+			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir);
 		}
 	}
 	
