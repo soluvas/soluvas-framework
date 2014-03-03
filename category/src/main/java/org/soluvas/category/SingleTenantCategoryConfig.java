@@ -17,8 +17,8 @@ import com.google.common.eventbus.EventBus;
  */
 @Deprecated
 @Configuration @Lazy
-@ComponentScan("org.soluvas.category")
-public class CategoryConfig {
+@ComponentScan("org.soluvas.category.shell")
+public class SingleTenantCategoryConfig {
 	
 	@Inject
 	private EventBus eventBus;
@@ -29,7 +29,7 @@ public class CategoryConfig {
 	public CategoryCatalog categoryCatalog() {
 		final CategoryCatalog categoryCatalog = CategoryFactory.eINSTANCE.createCategoryCatalog();
 		final CategoryCatalogXmiTracker tracker = new CategoryCatalogXmiTracker(categoryCatalog, eventBus);
-		tracker.scan(CategoryConfig.class.getClassLoader(), dataFolder);
+		tracker.scan(SingleTenantCategoryConfig.class.getClassLoader(), dataFolder);
 		return categoryCatalog;
 	}
 

@@ -26,7 +26,7 @@ import com.google.common.eventbus.EventBus;
  * @author rudi
  */
 @Configuration @Lazy
-@ComponentScan("org.soluvas.category")
+@ComponentScan("org.soluvas.category.shell")
 public class MultiTenantCategoryConfig {
 	
 	@Inject
