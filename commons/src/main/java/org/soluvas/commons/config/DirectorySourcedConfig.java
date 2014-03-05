@@ -10,6 +10,8 @@ import javax.inject.Named;
 
 import org.soluvas.commons.TenantSource;
 import org.soluvas.commons.tenant.DirectoryTenantRepository;
+import org.soluvas.commons.tenant.TenantProvisioner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -33,20 +35,22 @@ public class DirectorySourcedConfig {
 	private SoluvasApplication app;
 	@Inject @Named(CommonsWebConfig.APP_EVENT_BUS)
 	private EventBus appEventBus;
+	@Autowired(required=false) @Nullable
+	private TenantProvisioner tenantProvisioner;
 	
 	@Bean(initMethod="init")
 	public DirectoryTenantRepository tenantRepo() throws IOException {
 		final String tenantEnv = env.getRequiredProperty("tenantEnv");
 		final String appDomain = MultiTenantConfig.internalGetAppDomain(app.getId(), env);
-		final File workspaceDir = MultiTenantConfig.internalGetWorkspaceDir(app.getId(), tenantEnv, env);
+		final File workspaceDir = MultiTenantConfig.internalGetWorkspaceDir(app.getId(), env);
 		Preconditions.checkState(workspaceDir.exists(), "Application workspace directory '%s' must exist", workspaceDir);
 		@Nullable
 		final String tenantWhitelistStr = env.getProperty("tenantWhitelist", String.class);
 		if (tenantWhitelistStr != null) {
 			final Set<String> tenantWhitelist = ImmutableSet.copyOf( Splitter.on(',').trimResults().omitEmptyStrings().splitToList( tenantWhitelistStr ) );
-			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir, tenantWhitelist);
+			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir, tenantProvisioner, tenantWhitelist);
 		} else {
-			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir);
+			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir, tenantProvisioner);
 		}
 	}
 	

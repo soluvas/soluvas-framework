@@ -56,6 +56,8 @@ public class DirectoryTenantRepository implements TenantRepository {
 	 */
 	private final String appDomain;
 	private final EventBus appEventBus;
+	@Nullable
+	private final TenantProvisioner provisioner;
 	
 	/**
 	 * @param tenantEnv
@@ -64,12 +66,14 @@ public class DirectoryTenantRepository implements TenantRepository {
 	 * @param rootDir
 	 * @throws IOException
 	 */
-	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir) throws IOException {
+	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir,
+			@Nullable TenantProvisioner provisioner) throws IOException {
 		super();
 		this.appEventBus = appEventBus;
 		this.tenantEnv = tenantEnv;
 		this.appDomain = appDomain;
 		this.rootDir = rootDir;
+		this.provisioner = provisioner;
 		this.whitelist = null;
 		init();
 	}
@@ -82,12 +86,14 @@ public class DirectoryTenantRepository implements TenantRepository {
 	 * @param whitelist
 	 * @throws IOException
 	 */
-	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir, Set<String> whitelist) throws IOException {
+	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir, 
+			@Nullable TenantProvisioner provisioner, Set<String> whitelist) throws IOException {
 		super();
 		this.appEventBus = appEventBus;
 		this.tenantEnv = tenantEnv;
 		this.appDomain = appDomain;
 		this.rootDir = rootDir;
+		this.provisioner = provisioner;
 		this.whitelist = ImmutableSet.copyOf(whitelist);
 		log.info("Using whitelist of {} tenants: {}", whitelist.size(), Iterables.limit(whitelist, 10));
 		init();
@@ -176,18 +182,11 @@ public class DirectoryTenantRepository implements TenantRepository {
 		Preconditions.checkArgument(!tenantMap.containsKey(tenantId),
 				"Cannot add existing tenant '%s'. %s existing tenants: %s",
 				tenantId, tenantMap.size(), tenantMap.keySet());
-		createDataDir(tenantId);
+		provisioner.add(tenantId, appManifest, trackingId);
 		tenantMap.put(tenantId, appManifest);
 		final ImmutableMap<String, AppManifest> addeds = ImmutableMap.of(tenantId, appManifest);
 		appEventBus.post(new TenantsAdded(addeds, trackingId));
 		return appManifest;
-	}
-
-	private void createDataDir(String tenantId) {
-		final File dataDir = new File(rootDir, tenantId);
-		log.info("Creating tenant '{}' data directory: {}", tenantId, dataDir);
-		final boolean created = dataDir.mkdirs();
-		log.info("Created ({}) tenant '{}' data directory: {}", created, tenantId, dataDir);
 	}
 
 	@Override

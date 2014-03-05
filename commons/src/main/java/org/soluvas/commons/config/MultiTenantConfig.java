@@ -115,7 +115,8 @@ public class MultiTenantConfig {
 		return appDomain;
 	}
 	
-	static File internalGetWorkspaceDir(String appId, String tenantEnv, Environment env) {
+	public static File internalGetWorkspaceDir(String appId, Environment env) {
+		final String tenantEnv = env.getRequiredProperty("tenantEnv");
 		return new File(env.getProperty("workspaceDir", System.getProperty("user.home") + "/" + appId + "_" + tenantEnv));
 	}
 	
@@ -135,7 +136,7 @@ public class MultiTenantConfig {
 	public void init() throws IOException {
 		final String appId = app.getId();
 		tenantEnv = env.getRequiredProperty("tenantEnv");
-		workspaceDir = internalGetWorkspaceDir(appId, tenantEnv, env);
+		workspaceDir = internalGetWorkspaceDir(appId, env);
 		dataDirLayout = env.getProperty("dataDirLayout", DataDirLayout.class, DataDirLayout.DEFAULT);
 		appDomain = internalGetAppDomain(appId, env);
 		// tenantWhitelist: Comma-separated list of tenantIds to load (all others are excluded)
