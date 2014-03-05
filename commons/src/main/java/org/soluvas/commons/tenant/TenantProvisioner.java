@@ -7,8 +7,8 @@ import org.soluvas.commons.AppManifest;
  * always used during runtime. It may be an ad-hoc management command ran from shell.
  * @author ceefour
  */
-public interface TenantProvisioner {
+public interface TenantProvisioner<T> {
 	
-	AppManifest add(String tenantId, AppManifest appManifest, String trackingId);
+	AppManifest add(String tenantId, AppManifest appManifest, T provisionData, String trackingId);
 
 }

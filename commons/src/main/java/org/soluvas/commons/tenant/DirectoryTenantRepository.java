@@ -37,7 +37,7 @@ import com.google.common.eventbus.EventBus;
  * @author ceefour
  * @see DirectorySourcedConfig
  */
-public class DirectoryTenantRepository implements TenantRepository {
+public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(DirectoryTenantRepository.class);
@@ -176,13 +176,13 @@ public class DirectoryTenantRepository implements TenantRepository {
 	}
 
 	@Override
-	public synchronized AppManifest add(String tenantId, AppManifest appManifest, String trackingId) {
+	public synchronized AppManifest add(String tenantId, AppManifest appManifest, T provisionData, String trackingId) {
 		Preconditions.checkState(whitelist == null,
 				"Cannot add tenant on whitelisting repository");
 		Preconditions.checkArgument(!tenantMap.containsKey(tenantId),
 				"Cannot add existing tenant '%s'. %s existing tenants: %s",
 				tenantId, tenantMap.size(), tenantMap.keySet());
-		provisioner.add(tenantId, appManifest, trackingId);
+		provisioner.add(tenantId, appManifest, provisionData, trackingId);
 		tenantMap.put(tenantId, appManifest);
 		final ImmutableMap<String, AppManifest> addeds = ImmutableMap.of(tenantId, appManifest);
 		appEventBus.post(new TenantsAdded(addeds, trackingId));

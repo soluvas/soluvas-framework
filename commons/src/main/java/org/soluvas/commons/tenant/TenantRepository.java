@@ -13,7 +13,7 @@ import com.google.common.eventbus.EventBus;
  * @author ceefour
  * @see DirectoryTenantRepository
  */
-public interface TenantRepository {
+public interface TenantRepository<T> {
 	
 	/**
 	 * Returns a map of tenant information (key=tenantId).
@@ -31,11 +31,12 @@ public interface TenantRepository {
 	 * Sets up a new tenant and activates it.
 	 * @param tenantId
 	 * @param appManifest
+	 * @param provisionData TODO
 	 * @param trackingId TODO
 	 * @return
 	 * @throws IllegalStateException if {@code tenantWhitelist} is used
 	 */
-	AppManifest add(String tenantId, AppManifest appManifest, String trackingId);
+	AppManifest add(String tenantId, AppManifest appManifest, T provisionData, String trackingId);
 
 	/**
 	 * Shuts down a tenant, modifies it then restarts it.
