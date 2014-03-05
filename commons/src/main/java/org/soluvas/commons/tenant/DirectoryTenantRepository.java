@@ -55,7 +55,7 @@ public class DirectoryTenantRepository implements TenantRepository {
 	 * domain name will be completed using the {@code appDomain}. 
 	 */
 	private final String appDomain;
-	private EventBus appEventBus;
+	private final EventBus appEventBus;
 	
 	/**
 	 * @param tenantEnv
@@ -84,6 +84,7 @@ public class DirectoryTenantRepository implements TenantRepository {
 	 */
 	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir, Set<String> whitelist) throws IOException {
 		super();
+		this.appEventBus = appEventBus;
 		this.tenantEnv = tenantEnv;
 		this.appDomain = appDomain;
 		this.rootDir = rootDir;
