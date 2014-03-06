@@ -9,6 +9,12 @@ import org.soluvas.commons.AppManifest;
  */
 public interface TenantProvisioner<T> {
 	
+	/**
+	 * Creates a blank provisionData.
+	 * @return
+	 */
+	T newProvisionData();
+	
 	AppManifest add(String tenantId, AppManifest appManifest, T provisionData, String trackingId);
 
 }

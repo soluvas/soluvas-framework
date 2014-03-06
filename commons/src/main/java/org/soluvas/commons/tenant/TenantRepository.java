@@ -1,5 +1,7 @@
 package org.soluvas.commons.tenant;
 
+import java.util.Set;
+
 import org.soluvas.commons.AppManifest;
 
 import com.google.common.collect.ImmutableMap;
@@ -28,6 +30,12 @@ public interface TenantRepository<T> {
 	AppManifest newBlank();
 	
 	/**
+	 * Creates a blank provisionData.
+	 * @return
+	 */
+	T newProvisionData();
+	
+	/**
 	 * Sets up a new tenant and activates it.
 	 * @param tenantId
 	 * @param appManifest
@@ -54,5 +62,23 @@ public interface TenantRepository<T> {
 	 * @throws IllegalStateException if {@code tenantWhitelist} is used
 	 */
 	boolean delete(String tenantId);
+	
+	/**
+	 * Internal command to start the specified tenants.
+	 * <p>Important: already started tenants will be re-started!
+	 * @param tenantIds
+	 * @throws IllegalArgumentException if any tenantId is not found
+	 */
+	void start(Set<String> tenantIds);
+	
+	/**
+	 * Internal command to stop the specified tenants.
+	 * <p>Important: already stopped tenants will be re-stopped!
+	 * @param tenantIds
+	 * @throws IllegalArgumentException if any tenantId is not found
+	 */
+	void stop(Set<String> tenantIds);
+	
+	void addListener(TenantRepositoryListener listener);
 
 }

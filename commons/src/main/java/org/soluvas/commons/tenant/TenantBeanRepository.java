@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ import com.google.common.eventbus.EventBus;
  * <p>This class is thread-safe.
  * @author ceefour
  */
-public abstract class TenantBeanRepository<T> {
+public abstract class TenantBeanRepository<T> implements TenantRepositoryListener {
 
 	private final Logger log;
 	/**
@@ -52,7 +53,8 @@ public abstract class TenantBeanRepository<T> {
 	 * @param initialTenantMap
 	 * @param appEventBus
 	 */
-	public TenantBeanRepository(Class<? extends T> implClass, Map<String, AppManifest> initialTenantMap, EventBus appEventBus) {
+	public TenantBeanRepository(Class<? extends T> implClass, Map<String, AppManifest> initialTenantMap, EventBus appEventBus,
+			@Nullable TenantRepository<?> tenantRepo) {
 		super();
 		this.implClass = implClass;
 		log = LoggerFactory.getLogger(TenantBeanRepository.class.getName() + "/" + implClass.getSimpleName());
@@ -77,6 +79,10 @@ public abstract class TenantBeanRepository<T> {
 		for (final Map.Entry<String, AppManifest> tenant : initialTenantMap.entrySet()) {
 			final String tenantId = tenant.getKey();
 			createAndPut(tenantId, tenant.getValue());
+		}
+		
+		if (tenantRepo != null) {
+			tenantRepo.addListener(this);
 		}
 	}
 	
@@ -189,6 +195,24 @@ public abstract class TenantBeanRepository<T> {
 		return Preconditions.checkNotNull( beanMap.get(tenantId),
 				"Cannot get %s bean for '%s'. %s available are: %s",
 				implClass.getSimpleName(), tenantId, tenantIds.size(), tenantIds);
+	}
+	
+	@Override
+	public void onTenantsStarting(TenantsStarting starting) throws Exception {
+		for (final Map.Entry<String, AppManifest> entry : starting.getAddeds().entrySet()) {
+			final String tenantId = entry.getKey();
+			final AppManifest appManifest = entry.getValue();
+			createAndPut(tenantId, appManifest);
+		}
+	}
+	
+	@Override
+	public void onTenantsStopping(TenantsStopping stopping) throws Exception {
+		for (final Map.Entry<String, AppManifest> entry : stopping.getTenants().entrySet()) {
+			final String tenantId = entry.getKey();
+			final AppManifest appManifest = entry.getValue();
+			removeAndDestroy(tenantId);
+		}
 	}
 
 }

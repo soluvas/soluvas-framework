@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.regex.Matcher;
@@ -57,7 +59,8 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 	private final String appDomain;
 	private final EventBus appEventBus;
 	@Nullable
-	private final TenantProvisioner provisioner;
+	private final TenantProvisioner<T> provisioner;
+	private final List<TenantRepositoryListener> listeners = new ArrayList<>();
 	
 	/**
 	 * @param tenantEnv
@@ -67,7 +70,7 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 	 * @throws IOException
 	 */
 	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir,
-			@Nullable TenantProvisioner provisioner) throws IOException {
+			@Nullable TenantProvisioner<T> provisioner) throws IOException {
 		super();
 		this.appEventBus = appEventBus;
 		this.tenantEnv = tenantEnv;
@@ -87,7 +90,7 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 	 * @throws IOException
 	 */
 	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir, 
-			@Nullable TenantProvisioner provisioner, Set<String> whitelist) throws IOException {
+			@Nullable TenantProvisioner<T> provisioner, Set<String> whitelist) throws IOException {
 		super();
 		this.appEventBus = appEventBus;
 		this.tenantEnv = tenantEnv;
@@ -184,8 +187,7 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 				tenantId, tenantMap.size(), tenantMap.keySet());
 		provisioner.add(tenantId, appManifest, provisionData, trackingId);
 		tenantMap.put(tenantId, appManifest);
-		final ImmutableMap<String, AppManifest> addeds = ImmutableMap.of(tenantId, appManifest);
-		appEventBus.post(new TenantsAdded(addeds, trackingId));
+		start(tenantId, appManifest, trackingId);
 		return appManifest;
 	}
 
@@ -201,7 +203,7 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 		final AppManifest appManifest = Preconditions.checkNotNull(tenantMap.get(tenantId),
 				"Tenant '%s' not found. %s existing tenants: %s",
 				tenantId, tenantMap.size(), tenantMap.keySet());
-		stop(tenantId, appManifest);
+		stop(tenantId, appManifest, null);
 		throw new UnsupportedOperationException();
 	}
 	
@@ -210,16 +212,35 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 	 * @param tenantId
 	 * @param appManifest
 	 */
-	protected final void start(String tenantId, AppManifest appManifest) {
+	protected final void start(String tenantId, AppManifest appManifest, String trackingId) {
+		final ImmutableMap<String, AppManifest> addeds = ImmutableMap.of(tenantId, appManifest);
+//		appEventBus.post(new TenantsStarting(addeds, trackingId));
+		final TenantsStarting tenantsStarting = new TenantsStarting(addeds, trackingId);
+		for (final TenantRepositoryListener listener : listeners) {
+			try {
+				listener.onTenantsStarting(tenantsStarting);
+			} catch (Exception e) {
+				throw new CommonsException("Cannot start tenant '" + tenantId + "' due to failed listener '" + listener + "'", e);
+			}
+		}
 	}
 	
 	/**
 	 * Calls {@link #onBeforeStop(String, AppManifest)}.
 	 * @param tenantId
 	 * @param appManifest
+	 * @param trackingId TODO
 	 */
-	protected final void stop(String tenantId, AppManifest appManifest) {
+	protected final void stop(String tenantId, AppManifest appManifest, String trackingId) {
 		onBeforeStop(tenantId, appManifest);
+		final TenantsStopping tenantsStopping = new TenantsStopping(ImmutableMap.of(tenantId, appManifest), trackingId);
+		for (final TenantRepositoryListener listener : listeners) {
+			try {
+				listener.onTenantsStopping(tenantsStopping);
+			} catch (Exception e) {
+				throw new CommonsException("Cannot stop tenant '" + tenantId + "' due to failed listener '" + listener + "'", e);
+			}
+		}
 	}
 	
 	/**
@@ -228,6 +249,37 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 	 * @param appManifest
 	 */
 	protected void onBeforeStop(String tenantId, AppManifest appManifest) {
+	}
+
+	@Override
+	public T newProvisionData() {
+		return provisioner.newProvisionData();
+	}
+	
+	@Override
+	public void addListener(TenantRepositoryListener listener) {
+		log.info("Adding TenantRepository listener #{} {}", listeners.size() + 1, listener);
+		listeners.add(listener);
+	}
+
+	@Override
+	public void start(Set<String> tenantIds) {
+		for (final String tenantId : tenantIds) {
+			final AppManifest appManifest = tenantMap.get(tenantId);
+			Preconditions.checkArgument(appManifest != null, "Tenant '%s' not found, %s available: %s",
+					tenantId, tenantMap.size(), tenantMap.keySet());
+			start(tenantId, appManifest, null);
+		}
+	}
+
+	@Override
+	public void stop(Set<String> tenantIds) {
+		for (final String tenantId : tenantIds) {
+			final AppManifest appManifest = tenantMap.get(tenantId);
+			Preconditions.checkArgument(appManifest != null, "Tenant '%s' not found, %s available: %s",
+					tenantId, tenantMap.size(), tenantMap.keySet());
+			stop(tenantId, appManifest, null);
+		}
 	}
 	
 }

@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableMap;
 /**
  * @author ceefour
  */
-public class TenantsAdded extends TrackableEvent {
+public class TenantsStarting extends TrackableEvent {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -17,7 +17,7 @@ public class TenantsAdded extends TrackableEvent {
 	/**
 	 * @param trackingId
 	 */
-	public TenantsAdded(ImmutableMap<String, AppManifest> addeds, String trackingId) {
+	public TenantsStarting(ImmutableMap<String, AppManifest> addeds, String trackingId) {
 		super(trackingId);
 		this.addeds = addeds;
 	}

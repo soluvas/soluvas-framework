@@ -2,6 +2,7 @@ package org.soluvas.category;
 
 import java.io.File;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -12,7 +13,9 @@ import org.soluvas.commons.config.CommonsWebConfig;
 import org.soluvas.commons.config.MultiTenantConfig;
 import org.soluvas.commons.config.TenantSelector;
 import org.soluvas.commons.tenant.TenantBeanRepository;
+import org.soluvas.commons.tenant.TenantRepository;
 import org.soluvas.commons.tenant.TenantUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -35,10 +38,12 @@ public class MultiTenantCategoryConfig {
 	private EventBus appEventBus;
 	@Inject
 	private MultiTenantConfig tenantConfig;
+	@Autowired(required=false) @Nullable
+	private TenantRepository<?> tenantRepo;
 	
 	@Bean(destroyMethod="destroy")
 	public TenantBeanRepository<CategoryCatalog> categoryCatalogBeanRepo() {
-		return new TenantBeanRepository<CategoryCatalog>(CategoryCatalogImpl.class, tenantConfig.tenantMap(), appEventBus) {
+		return new TenantBeanRepository<CategoryCatalog>(CategoryCatalogImpl.class, tenantConfig.tenantMap(), appEventBus, tenantRepo) {
 			@Override
 			protected CategoryCatalogImpl create(String tenantId, AppManifest appManifest)
 					throws Exception {
