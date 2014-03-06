@@ -83,4 +83,6 @@ public interface TenantRepository<T> {
 	
 	void addListener(TenantRepositoryListener listener);
 
+	ImmutableMap<String, TenantState> getStates();
+
 }

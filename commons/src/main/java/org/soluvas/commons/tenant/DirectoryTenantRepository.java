@@ -302,5 +302,10 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 			}
 		}
 	}
+
+	@Override
+	public ImmutableMap<String, TenantState> getStates() {
+		return ImmutableMap.copyOf(tenantStateMap);
+	}
 	
 }

@@ -98,8 +98,8 @@ public abstract class TenantBeanRepository<T> implements TenantRepositoryListene
 	
 	protected synchronized final void createAndPut(String tenantId, AppManifest appManifest) {
 		try {
-			log.debug("Initializing '{}' {} using init method {}",
-					tenantId, implClass.getSimpleName(), initMethod);
+			log.debug("Initializing '{}' {} {}",
+					tenantId, implClass.getSimpleName(), initMethod != null ? "using init method " + initMethod : "without init method");
 			final T bean = create(tenantId, appManifest);
 			if (initMethod != null) {
 				initMethod.invoke(bean);
@@ -113,8 +113,8 @@ public abstract class TenantBeanRepository<T> implements TenantRepositoryListene
 	
 	protected synchronized final void removeAndDestroy(String tenantId) {
 		try {
-			log.info("Shutting down '{}' {} using destroy method {}",
-					tenantId, implClass.getSimpleName(), destroyMethod);
+			log.info("Shutting down '{}' {} {}",
+					tenantId, implClass.getSimpleName(), destroyMethod != null ? "using destroymethod " + destroyMethod : "without destroy method");
 			final T bean = beanMap.get(tenantId);
 			if (bean != null) {
 				onDestroying(tenantId, bean);

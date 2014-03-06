@@ -67,7 +67,7 @@ import com.google.common.eventbus.EventBus;
  * @author rudi
  */
 @Configuration @Lazy
-@ComponentScan("org.soluvas.push")
+@ComponentScan({"org.soluvas.commons.shell", "org.soluvas.push"})
 public class CommonsWebConfig {
 	
 	static {
