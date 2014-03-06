@@ -65,7 +65,8 @@ public interface TenantRepository<T> {
 	
 	/**
 	 * Internal command to start the specified tenants.
-	 * <p>Important: already started tenants will be re-started!
+	 * Already started tenants will be ignored.
+	 * 
 	 * @param tenantIds
 	 * @throws IllegalArgumentException if any tenantId is not found
 	 */
@@ -73,7 +74,8 @@ public interface TenantRepository<T> {
 	
 	/**
 	 * Internal command to stop the specified tenants.
-	 * <p>Important: already stopped tenants will be re-stopped!
+	 * Already stopped tenants will be ignored.
+	 * 
 	 * @param tenantIds
 	 * @throws IllegalArgumentException if any tenantId is not found
 	 */

@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,6 +43,7 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(DirectoryTenantRepository.class);
+	
 	/**
 	 * Whitelisted tenant IDs.
 	 * Without whitelisting, all readable tenants will be loaded.
@@ -51,7 +52,8 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 	final ImmutableSet<String> whitelist;
 	private final File rootDir;
 	private final String tenantEnv;
-	private final ConcurrentSkipListMap<String, AppManifest> tenantMap = new ConcurrentSkipListMap<>();
+	private final LinkedHashMap<String, AppManifest> tenantMap = new LinkedHashMap<>();
+	private final LinkedHashMap<String, TenantState> tenantStateMap = new LinkedHashMap<>();
 	/**
 	 * If {@link AppManifest#getDomain()} uses a relative domain name, e.g. "dietyuk.{+appDomain}", the tenant's
 	 * domain name will be completed using the {@code appDomain}. 
@@ -142,6 +144,7 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 					CommonsPackage.eINSTANCE, res.getURL(), ResourceType.CLASSPATH, scope).get();
 			
 			tenantMap.put(tenantId, tenantManifest);
+			tenantStateMap.put(tenantId, TenantState.ACTIVE);
 		}
 		
 		log.info("Loaded {} initial tenants from '{}': {}", tenantMap.size(), rootDir, Iterables.limit(tenantMap.keySet(), 10));
@@ -213,6 +216,7 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 	 * @param appManifest
 	 */
 	protected final void start(String tenantId, AppManifest appManifest, String trackingId) {
+		tenantStateMap.put(tenantId, TenantState.STARTING);
 		final ImmutableMap<String, AppManifest> addeds = ImmutableMap.of(tenantId, appManifest);
 //		appEventBus.post(new TenantsStarting(addeds, trackingId));
 		final TenantsStarting tenantsStarting = new TenantsStarting(addeds, trackingId);
@@ -223,6 +227,7 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 				throw new CommonsException("Cannot start tenant '" + tenantId + "' due to failed listener '" + listener + "'", e);
 			}
 		}
+		tenantStateMap.put(tenantId, TenantState.ACTIVE);
 	}
 	
 	/**
@@ -232,6 +237,7 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 	 * @param trackingId TODO
 	 */
 	protected final void stop(String tenantId, AppManifest appManifest, String trackingId) {
+		tenantStateMap.put(tenantId, TenantState.STOPPING);
 		onBeforeStop(tenantId, appManifest);
 		final TenantsStopping tenantsStopping = new TenantsStopping(ImmutableMap.of(tenantId, appManifest), trackingId);
 		for (final TenantRepositoryListener listener : listeners) {
@@ -241,6 +247,7 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 				throw new CommonsException("Cannot stop tenant '" + tenantId + "' due to failed listener '" + listener + "'", e);
 			}
 		}
+		tenantStateMap.put(tenantId, TenantState.RESOLVED);
 	}
 	
 	/**
@@ -263,22 +270,36 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 	}
 
 	@Override
-	public void start(Set<String> tenantIds) {
+	public synchronized void start(Set<String> tenantIds) {
 		for (final String tenantId : tenantIds) {
 			final AppManifest appManifest = tenantMap.get(tenantId);
 			Preconditions.checkArgument(appManifest != null, "Tenant '%s' not found, %s available: %s",
 					tenantId, tenantMap.size(), tenantMap.keySet());
-			start(tenantId, appManifest, null);
+			final TenantState state = tenantStateMap.get(tenantId);
+			Preconditions.checkArgument(appManifest != null, "Tenant state for '%s' not found, %s available: %s",
+					tenantId, tenantStateMap.size(), tenantStateMap.keySet());
+			if (state == TenantState.RESOLVED) {
+				start(tenantId, appManifest, null);
+			} else {
+				log.info("Not starting tenant '{}' because it is in {} state", tenantId, state);
+			}
 		}
 	}
 
 	@Override
-	public void stop(Set<String> tenantIds) {
+	public synchronized void stop(Set<String> tenantIds) {
 		for (final String tenantId : tenantIds) {
 			final AppManifest appManifest = tenantMap.get(tenantId);
 			Preconditions.checkArgument(appManifest != null, "Tenant '%s' not found, %s available: %s",
 					tenantId, tenantMap.size(), tenantMap.keySet());
-			stop(tenantId, appManifest, null);
+			final TenantState state = tenantStateMap.get(tenantId);
+			Preconditions.checkArgument(appManifest != null, "Tenant state for '%s' not found, %s available: %s",
+					tenantId, tenantStateMap.size(), tenantStateMap.keySet());
+			if (state == TenantState.ACTIVE) {
+				stop(tenantId, appManifest, null);
+			} else {
+				log.info("Not starting tenant '{}' because it is in {} state", tenantId, state);
+			}
 		}
 	}
 	

@@ -36,10 +36,10 @@ public class DirectorySourcedConfig {
 	@Inject @Named(CommonsWebConfig.APP_EVENT_BUS)
 	private EventBus appEventBus;
 	@Autowired(required=false) @Nullable
-	private TenantProvisioner tenantProvisioner;
+	private TenantProvisioner<?> tenantProvisioner;
 	
 	@Bean(initMethod="init")
-	public DirectoryTenantRepository tenantRepo() throws IOException {
+	public DirectoryTenantRepository<?> tenantRepo() throws IOException {
 		final String tenantEnv = env.getRequiredProperty("tenantEnv");
 		final String appDomain = MultiTenantConfig.internalGetAppDomain(app.getId(), env);
 		final File workspaceDir = MultiTenantConfig.internalGetWorkspaceDir(app.getId(), env);
