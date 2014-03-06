@@ -4,8 +4,6 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Command;
 import org.eclipse.emf.common.util.EList;
 import org.soluvas.category.Category;
@@ -26,19 +24,13 @@ import com.google.common.base.Strings;
 @Command(scope="cat", name="ls", description="List registered Categories.")
 public class CatLsCommand extends ExtCommandSupport {
 	
-	private final CategoryCatalog categoryCatalog;
-	
-	@Inject
-	public CatLsCommand(CategoryCatalog categoryCatalog) {
-		super();
-		this.categoryCatalog = categoryCatalog;
-	}
-
 	/* (non-Javadoc)
 	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
 	 */
 	@Override
 	protected Object doExecute() throws Exception {
+		final CategoryCatalog categoryCatalog = getBean(CategoryCatalog.class);
+		
 //		final ServiceReference<CategoryCatalog> categoryCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(CategoryCatalog.class),
 //				"Cannot get %s service reference", CategoryCatalog.class.getName());
 //		final CategoryCatalog categoryCatalog = Preconditions.checkNotNull(getService(CategoryCatalog.class, categoryCatalogRef),

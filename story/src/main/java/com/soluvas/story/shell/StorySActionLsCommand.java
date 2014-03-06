@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Command;
 import org.eclipse.emf.ecore.EAttribute;
@@ -39,19 +38,13 @@ import com.soluvas.story.schema.StorySchemaCatalog;
 @Command(scope="storys", name="actionls", description="List registered ActionTypes.")
 public class StorySActionLsCommand extends ExtCommandSupport {
 	
-	private final StorySchemaCatalog storySchemaCatalog;
-
-	@Inject
-	public StorySActionLsCommand(StorySchemaCatalog storySchemaCatalog) {
-		super();
-		this.storySchemaCatalog = storySchemaCatalog;
-	}
-
 	/* (non-Javadoc)
 	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
 	 */
 	@Override
 	protected Object doExecute() throws Exception {
+		final StorySchemaCatalog storySchemaCatalog = getBean(StorySchemaCatalog.class);
+		
 //		final ServiceReference<StorySchemaCatalog> storySchemaCatalogRef = Preconditions.checkNotNull(bundleContext.getServiceReference(StorySchemaCatalog.class),
 //				"Cannot get %s service reference", StorySchemaCatalog.class.getName());
 //		final StorySchemaCatalog storySchemaCatalog = Preconditions.checkNotNull(getService(StorySchemaCatalog.class, storySchemaCatalogRef),
