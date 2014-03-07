@@ -116,7 +116,7 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 	 * @param file
 	 * @param scope
 	 */
-	public OnDemandXmiLoader(final EPackage ePackage, final File file, Map<String, Object> scope) {
+	public OnDemandXmiLoader(final EPackage ePackage, final File file, Map<String, ?> scope) {
 		super();
 		Preconditions.checkNotNull(ePackage, "ePackage cannot be null");
 		Preconditions.checkArgument(file != null, "fileName cannot be null");

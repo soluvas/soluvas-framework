@@ -16,9 +16,9 @@ import org.joda.time.DateTimeZone;
  * 
  * <p>Attributes are optional because can use OverlayingSupplier.
  * 
- * <p>Expandable attributes are: domain.
+ * <p>Expandable attributes are: domain, generalEmail.
  * 
- * <p>Expansion variables are: fqdn (host-dependent), appDomain (from properties).
+ * <p>Expansion variables are: fqdn (host-dependent), appDomain (from properties), userName (from System property user.name), domain (can only be used by other attributes than domain itself).
  * <!-- end-model-doc -->
  *
  * <p>
@@ -129,6 +129,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 
 	/**
 	 * Returns the value of the '<em><b>Domain</b></em>' attribute.
+	 * The default value is <code>"{+tenantId}.{+appDomain}"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -146,13 +147,13 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * 
 	 * <p>Description usually stays the same, but can be different too.
 	 * 
-	 * <p>This may contain the {@code appDomain} variable in the form of URI template, i.e. "acme.{+appDomain}",
+	 * <p>Templated using URI templates. e.g. to use {@code appDomain} variable, i.e. "acme.{+appDomain}",
 	 * that will be expanded when you call {@link #expand()}.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Domain</em>' attribute.
 	 * @see #setDomain(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_Domain()
-	 * @model
+	 * @model default="{+tenantId}.{+appDomain}"
 	 * @generated
 	 */
 	String getDomain();
@@ -169,15 +170,19 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 
 	/**
 	 * Returns the value of the '<em><b>General Email</b></em>' attribute.
+	 * The default value is <code>"{+userName}@{+fqdn}"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Email address used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.
+	 * The default templated generalEmail is "{+userName}@{+fqdn}" so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.
+	 * 
+	 * <p>Templated using URI templates.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>General Email</em>' attribute.
 	 * @see #setGeneralEmail(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_GeneralEmail()
-	 * @model
+	 * @model default="{+userName}@{+fqdn}"
 	 * @generated
 	 */
 	String getGeneralEmail();
@@ -355,6 +360,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 
 	/**
 	 * Returns the value of the '<em><b>Default Currency Code</b></em>' attribute.
+	 * The default value is <code>"USD"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Default Currency Code</em>' attribute isn't clear,
@@ -367,7 +373,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @return the value of the '<em>Default Currency Code</em>' attribute.
 	 * @see #setDefaultCurrencyCode(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultCurrencyCode()
-	 * @model
+	 * @model default="USD"
 	 * @generated
 	 */
 	String getDefaultCurrencyCode();

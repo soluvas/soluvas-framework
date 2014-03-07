@@ -3,6 +3,7 @@
 package org.soluvas.commons.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Nullable;
@@ -256,7 +257,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DOMAIN_EDEFAULT = null;
+	protected static final String DOMAIN_EDEFAULT = "{+tenantId}.{+appDomain}";
 
 	/**
 	 * The cached value of the '{@link #getDomain() <em>Domain</em>}' attribute.
@@ -276,7 +277,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String GENERAL_EMAIL_EDEFAULT = null;
+	protected static final String GENERAL_EMAIL_EDEFAULT = "{+userName}@{+fqdn}";
 
 	/**
 	 * The cached value of the '{@link #getGeneralEmail() <em>General Email</em>}' attribute.
@@ -406,7 +407,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DEFAULT_CURRENCY_CODE_EDEFAULT = null;
+	protected static final String DEFAULT_CURRENCY_CODE_EDEFAULT = "USD";
 
 	/**
 	 * The cached value of the '{@link #getDefaultCurrencyCode() <em>Default Currency Code</em>}' attribute.
@@ -915,6 +916,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDefaultCountryCode() {
 		return defaultCountryCode;
 	}
@@ -924,6 +926,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefaultCountryCode(String newDefaultCountryCode) {
 		String oldDefaultCountryCode = defaultCountryCode;
 		defaultCountryCode = newDefaultCountryCode;
@@ -936,15 +939,21 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public void expand(Map<String, Object> scope) {
+	public void expand(final Map<String, Object> upScope) {
 		if (getExpansionState() == ExpansionState.UNEXPANDED) {
 			try {
 				// domain is expanded twice, because the hub.properties#appDomain may contain URI template {+fqdn} too
 				if (getDomain().contains("{")) {
-					setDomain( UriTemplate.expand(getDomain(), scope) );
+					setDomain( UriTemplate.expand(getDomain(), upScope) );
 				}
 				if (getDomain().contains("{")) {
-					setDomain( UriTemplate.expand(getDomain(), scope) );
+					setDomain( UriTemplate.expand(getDomain(), upScope) );
+				}
+				// 'domain' variable can then be used by other attributes, if needed
+				final HashMap<String, Object> scope = new HashMap<>(upScope);
+				scope.put("domain", getDomain());
+				if (getGeneralEmail().contains("{")) {
+					setGeneralEmail( UriTemplate.expand(getGeneralEmail(), scope) );
 				}
 				expansionState = ExpansionState.EXPANDED;
 			} catch (MalformedUriTemplateException | VariableExpansionException e) {

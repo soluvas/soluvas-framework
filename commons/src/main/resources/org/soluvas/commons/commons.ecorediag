@@ -1796,6 +1796,22 @@
       <element xmi:type="ecore:EClass" href="commons.ecore#//ThingInfo"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TUKhgnRoEeOjHKniHLBKqw" x="12888" y="24"/>
     </children>
+    <children xmi:type="notation:Node" xmi:id="_SnwEAKXXEeOXQfsPjcaIhw" type="1001">
+      <children xmi:type="notation:Node" xmi:id="_Snx5MKXXEeOXQfsPjcaIhw" type="4001"/>
+      <children xmi:type="notation:Node" xmi:id="_Snx5MaXXEeOXQfsPjcaIhw" type="5001">
+        <styles xmi:type="notation:DrawerStyle" xmi:id="_Snx5MqXXEeOXQfsPjcaIhw"/>
+        <styles xmi:type="notation:SortingStyle" xmi:id="_Snx5M6XXEeOXQfsPjcaIhw"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_Snx5NKXXEeOXQfsPjcaIhw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_SnygQKXXEeOXQfsPjcaIhw" type="5002">
+        <styles xmi:type="notation:DrawerStyle" xmi:id="_SnygQaXXEeOXQfsPjcaIhw"/>
+        <styles xmi:type="notation:SortingStyle" xmi:id="_SnygQqXXEeOXQfsPjcaIhw"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_SnygQ6XXEeOXQfsPjcaIhw"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_SnwEAaXXEeOXQfsPjcaIhw" fontColor="4210752" fontName="OxygenSans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+      <element xmi:type="ecore:EClass" href="commons.ecore#//GeneralSysConfig"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SnwEAqXXEeOXQfsPjcaIhw" x="3239" y="643"/>
+    </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_Hn9XoSQDEeKL8qHxNHEWSw"/>
     <element xmi:type="ecore:EPackage" href="commons.ecore#/"/>
     <edges xmi:type="notation:Edge" xmi:id="_Rrm-sCSDEeKyUdMfH4dSfg" type="3003" source="_J57LECSDEeKyUdMfH4dSfg" target="_aOshcSSAEeKyUdMfH4dSfg">

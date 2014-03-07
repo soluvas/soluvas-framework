@@ -3,6 +3,7 @@ package org.soluvas.commons.tenant;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -20,6 +21,7 @@ import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.EmfUtils;
 import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.config.DirectorySourcedConfig;
@@ -114,18 +116,22 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 		}
 		Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
 
-		final String pattern = String.format("file://%s/*/model/*_%s.AppManifest.xmi", rootDir, tenantEnv);
+		final String pattern = String.format("file://%s/*/model/*.AppManifest.xmi", rootDir);
 		log.debug("Searching tenant AppManifests for fqdn={} appDomain={} using '{}'...", fqdn, appDomain, pattern);
 		final Resource[] resources = new PathMatchingResourcePatternResolver(DirectoryTenantRepository.class.getClassLoader())
 			.getResources(pattern);
 		log.debug("Found {} AppManifests: {}", resources.length, Iterables.limit(ImmutableList.copyOf(resources), 10));
-		final Pattern appManifestXmiPattern = Pattern.compile("([^_]+)\\_" + tenantEnv + "\\.AppManifest\\.xmi");
+		final Pattern appManifestXmiPattern = Pattern.compile("([^_]+).*\\.AppManifest\\.xmi");
+		
+		final String appManifestTemplatePath = "/META-INF/template.AppManifest.xmi";
+		@Nullable
+		final URL appManifestTemplate = DirectoryTenantRepository.class.getResource(appManifestTemplatePath);
 		
 		for (final Resource res : resources) {
 			final String filename = res.getFilename();
 			final Matcher matcher = appManifestXmiPattern.matcher(filename);
 			if (!matcher.matches()) {
-				log.error("AppManifest.xmi file '{}' (from '{}') does not match pattern: [tenantId]_{}.AppManifest.xmi", filename, res.getFile(), tenantEnv);
+				log.error("AppManifest.xmi file '{}' (from '{}') does not match pattern: [tenantId]*.AppManifest.xmi", filename, res.getFile(), tenantEnv);
 				continue;
 			}
 			final String tenantId = matcher.group(1);
@@ -135,15 +141,30 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 				continue;
 			}
 			
-			log.info("Loading {} AppManifest resources from classpath: {}", resources.length, resources);
-			final Pattern tenantIdPattern = Pattern.compile("([^.]+).+");
-			
 			final ImmutableMap<String, String> scope = ImmutableMap.of(
-					"fqdn", fqdn, "appDomain", appDomain);
-			final AppManifest tenantManifest = new OnDemandXmiLoader<AppManifest>(
-					CommonsPackage.eINSTANCE, res.getURL(), ResourceType.CLASSPATH, scope).get();
+					"tenantId", tenantId, "fqdn", fqdn, "appDomain", appDomain, "userName", System.getProperty("user.name"));
 			
-			tenantMap.put(tenantId, tenantManifest);
+			final AppManifest appManifest;
+			if (appManifestTemplate != null) {
+				log.info("Combining template AppManifest '{}' with customized '{}'", appManifestTemplate, res.getFile());
+				appManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, appManifestTemplate, ResourceType.CLASSPATH, scope).get();
+			} else {
+				log.info("No template AppManifest found from classpath '{}', only loading AppManifest from '{}'", appManifestTemplatePath, res.getFile());
+				appManifest = CommonsFactory.eINSTANCE.createAppManifest();
+			}
+			final AppManifest overlay = new OnDemandXmiLoader<AppManifest>(
+					CommonsPackage.eINSTANCE, res.getFile(), scope).get();
+			EmfUtils.combineEObject(appManifest, overlay);
+			
+			// env file is usually used to override domain and generalEmail in stg/prd environments
+			final File envFile = new File(rootDir, tenantId + "/etc/" + tenantId + "_" + tenantEnv + ".AppManifest.xmi");
+			if (envFile.exists()) {
+				log.info("Combining with env '{}' specific AppManifest file '{}'", tenantEnv, envFile);				
+				final AppManifest envManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, envFile, scope).get();
+				EmfUtils.combineEObject(appManifest, envManifest);
+			}
+			
+			tenantMap.put(tenantId, appManifest);
 			tenantStateMap.put(tenantId, TenantState.ACTIVE);
 		}
 		
@@ -224,7 +245,7 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 			try {
 				listener.onTenantsStarting(tenantsStarting);
 			} catch (Exception e) {
-				throw new CommonsException("Cannot start tenant '" + tenantId + "' due to failed listener '" + listener + "'", e);
+				throw new CommonsException("Cannot start tenant '" + tenantId + "' due to failed listener '" + listener + "': " + e, e);
 			}
 		}
 		tenantStateMap.put(tenantId, TenantState.ACTIVE);
@@ -244,7 +265,7 @@ public class DirectoryTenantRepository<T> implements TenantRepository<T> {
 			try {
 				listener.onTenantsStopping(tenantsStopping);
 			} catch (Exception e) {
-				throw new CommonsException("Cannot stop tenant '" + tenantId + "' due to failed listener '" + listener + "'", e);
+				throw new CommonsException("Cannot stop tenant '" + tenantId + "' due to failed listener '" + listener + "': " + e, e);
 			}
 		}
 		tenantStateMap.put(tenantId, TenantState.RESOLVED);

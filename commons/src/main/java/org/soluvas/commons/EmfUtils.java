@@ -74,7 +74,7 @@ public class EmfUtils {
 	public static void combineEObject(EObject current, EObject overlay) {
 		for (EAttribute attr : overlay.eClass().getEAllAttributes()) {
 			Object attrValue = overlay.eGet(attr);
-			if (overlay.eIsSet(attr) && attrValue != null) {
+			if (attr.isChangeable() && overlay.eIsSet(attr) && attrValue != null) {
 				log.trace("Override {}.{} to {}", current.eClass().getName(), attr.getName(), attrValue);
 				try {
 					current.eSet(attr, attrValue);

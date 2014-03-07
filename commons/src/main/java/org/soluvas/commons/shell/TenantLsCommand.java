@@ -32,13 +32,13 @@ public class TenantLsCommand extends ExtCommandSupport {
 		Preconditions.checkNotNull(tenantRepo, "TenantRepository bean not found");
 		final ImmutableMap<String, AppManifest> tenantMap = tenantRepo.findAll();
 		final ImmutableMap<String, TenantState> states = tenantRepo.getStates();
-		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-20s|%-10s|%-20s|%-30s|%-20s|%-3s|@",
+		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-20s|%-10s|%-25s|%-30s|%-20s|%-3s|@",
 				"№", "ID", "Title", "State", "Domain", "Email", "Time Zone", "$"));
 		int i = 0;
 		for (final Entry<String, AppManifest> entry : tenantMap.entrySet()) {
 			final AppManifest tenant = entry.getValue();
 			final TenantState state = states.get(entry.getKey());
-			System.out.println(ansi().render("@|bold,black %3d||@%-15s@|bold,black ||@%-20s@|bold,black ||@%-10s@|bold,black ||@%-20s@|bold,black ||@%-30s@|bold,black ||@%-20s@|bold,black ||@%-3s",
+			System.out.println(ansi().render("@|bold,black %3d||@%-15s@|bold,black ||@%-20s@|bold,black ||@%-10s@|bold,black ||@%-25s@|bold,black ||@%-30s@|bold,black ||@%-20s@|bold,black ||@%-3s",
 				++i, entry.getKey(), tenant.getTitle(), state,
 				tenant.getDomain(), tenant.getGeneralEmail(), tenant.getDefaultTimeZoneId(), tenant.getDefaultCurrencyCode()));
 		}

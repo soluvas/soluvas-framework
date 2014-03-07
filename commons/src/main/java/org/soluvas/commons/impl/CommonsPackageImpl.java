@@ -60,6 +60,7 @@ import org.soluvas.commons.ExpansionState;
 import org.soluvas.commons.FacebookAccessible;
 import org.soluvas.commons.FacebookIdentity;
 import org.soluvas.commons.Gender;
+import org.soluvas.commons.GeneralSysConfig;
 import org.soluvas.commons.GenericStatus;
 import org.soluvas.commons.Geolocation;
 import org.soluvas.commons.Identifiable;
@@ -546,6 +547,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass thingInfoEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass generalSysConfigEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3412,6 +3420,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getGeneralSysConfig() {
+		return generalSysConfigEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -4182,6 +4199,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		thingInfoEClass = createEClass(THING_INFO);
 		createEAttribute(thingInfoEClass, THING_INFO__IMAGE_ID);
 
+		generalSysConfigEClass = createEClass(GENERAL_SYS_CONFIG);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -4440,6 +4459,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		thingInfoEClass.getESuperTypes().add(this.getIdentifiable());
 		thingInfoEClass.getESuperTypes().add(this.getSluggable());
 		thingInfoEClass.getESuperTypes().add(this.getImageable());
+		generalSysConfigEClass.getESuperTypes().add(this.getExpandable());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4454,15 +4474,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_Title(), ecorePackage.getEString(), "title", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_Summary(), theEcorePackage.getEString(), "summary", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_Description(), ecorePackage.getEString(), "description", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppManifest_Domain(), theEcorePackage.getEString(), "domain", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppManifest_GeneralEmail(), theEcorePackage.getEString(), "generalEmail", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_Domain(), theEcorePackage.getEString(), "domain", "{+tenantId}.{+appDomain}", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_GeneralEmail(), theEcorePackage.getEString(), "generalEmail", "{+userName}@{+fqdn}", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_OrganizationName(), theEcorePackage.getEString(), "organizationName", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_OrganizationAddress(), theEcorePackage.getEString(), "organizationAddress", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_LetterSalutation(), theEcorePackage.getEString(), "letterSalutation", "Hai", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_LetterClosing(), theEcorePackage.getEString(), "letterClosing", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultTimeZoneId(), theEcorePackage.getEString(), "defaultTimeZoneId", "UTC", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultTimeZone(), this.getDateTimeZone(), "defaultTimeZone", null, 0, 1, AppManifest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppManifest_DefaultCurrencyCode(), theEcorePackage.getEString(), "defaultCurrencyCode", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_DefaultCurrencyCode(), theEcorePackage.getEString(), "defaultCurrencyCode", "USD", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultCurrency(), this.getCurrencyUnit(), "defaultCurrency", null, 0, 1, AppManifest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_EmailLogoUriTemplate(), theEcorePackage.getEString(), "emailLogoUriTemplate", "{+imagesUri}tenant_common/logo_email.png", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultCountryCode(), theEcorePackage.getEString(), "defaultCountryCode", "US", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4833,6 +4853,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEClass(thingInfoEClass, ThingInfo.class, "ThingInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getThingInfo_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, ThingInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(generalSysConfigEClass, GeneralSysConfig.class, "GeneralSysConfig", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.BUNDLE);
@@ -4985,7 +5007,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (appManifestEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "AppManifest is actually a misnomer, it should\'ve been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.\n\n<p>Attributes are optional because can use OverlayingSupplier.\n\n<p>Expandable attributes are: domain.\n\n<p>Expansion variables are: fqdn (host-dependent), appDomain (from properties)."
+			 "documentation", "AppManifest is actually a misnomer, it should\'ve been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.\n\n<p>Attributes are optional because can use OverlayingSupplier.\n\n<p>Expandable attributes are: domain, generalEmail.\n\n<p>Expansion variables are: fqdn (host-dependent), appDomain (from properties), userName (from System property user.name), domain (can only be used by other attributes than domain itself)."
 		   });		
 		addAnnotation
 		  (getAppManifest_Summary(), 
@@ -5003,13 +5025,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (getAppManifest_Domain(), 
 		   source, 
 		   new String[] {
-			 "documentation", "Primary domain name of the application, e.g. \"berbatik.com\". Used by Email system.\n\n<p>For development, use e.g. \"berbatik.annafi.dev\".\n\n<p>TODO: title & domain should probably be moved somewhere else, since it\'s tenant & environment specific.\n\n<p>Production: title=Berbatik, domain=berbatik.com\n\n<p>Staging: title=Berbatik stg, domain=stg.berbatik.com\n\n<p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev\n\n<p>Description usually stays the same, but can be different too.\n\n<p>This may contain the {@code appDomain} variable in the form of URI template, i.e. \"acme.{+appDomain}\",\nthat will be expanded when you call {@link #expand()}."
+			 "documentation", "Primary domain name of the application, e.g. \"berbatik.com\". Used by Email system.\n\n<p>For development, use e.g. \"berbatik.annafi.dev\".\n\n<p>TODO: title & domain should probably be moved somewhere else, since it\'s tenant & environment specific.\n\n<p>Production: title=Berbatik, domain=berbatik.com\n\n<p>Staging: title=Berbatik stg, domain=stg.berbatik.com\n\n<p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev\n\n<p>Description usually stays the same, but can be different too.\n\n<p>Templated using URI templates. e.g. to use {@code appDomain} variable, i.e. \"acme.{+appDomain}\",\nthat will be expanded when you call {@link #expand()}."
 		   });		
 		addAnnotation
 		  (getAppManifest_GeneralEmail(), 
 		   source, 
 		   new String[] {
-			 "documentation", "Email address used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application."
+			 "documentation", "Email address used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.\nThe default templated generalEmail is \"{+userName}@{+fqdn}\" so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.\n\n<p>Templated using URI templates."
 		   });		
 		addAnnotation
 		  (getAppManifest_OrganizationName(), 
