@@ -1,6 +1,7 @@
 package org.soluvas.commons.tenant;
 
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -11,12 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsException;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.env.Environment;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.eventbus.EventBus;
 
@@ -159,13 +158,13 @@ public abstract class TenantBeanRepository<T> implements TenantRepositoryListene
 	}
 	
 	/**
-	 * Returns an {@link ImmutableMap} copy of the current state.
-	 * If used within a Spring {@link Configurable}, make sure to use {@code prototype} scope.
+	 * Returns an unmodifiable {@link Map} <b>view</b> of tenant mapping, which means
+	 * its contents may change based on current state.
 	 * 
 	 * @return
 	 */
-	public ImmutableMap<String, T> immutableCopy() {
-		return ImmutableMap.copyOf(beanMap);
+	public Map<String, T> unmodifiableView() {
+		return Collections.unmodifiableMap(beanMap);
 	}
 	
 	/**
