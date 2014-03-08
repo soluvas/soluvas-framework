@@ -26,7 +26,6 @@ import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.TenantSource;
 import org.soluvas.commons.WebAddress;
-import org.soluvas.commons.tenant.TenantMode;
 import org.soluvas.commons.tenant.TenantRepository;
 import org.soluvas.commons.tenant.TenantRepositoryListener;
 import org.soluvas.commons.tenant.TenantsStarting;
@@ -93,6 +92,8 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	private TenantSource tenantSource;
 	private String appDomain;
 	private final Map<String, EventBus> eventBusMap = new LinkedHashMap<>();
+	private final Map<String, File> dataDirMap = new LinkedHashMap<>();
+	private final Map<String, WebAddress> webAddressMap = new LinkedHashMap<>();
 
 	public static String getFqdn() {
 		final String fqdn;
@@ -178,6 +179,8 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 		}
 		
 		initEventBusMap();
+		initDataDirMap();
+		initWebAddressMap();
 		
 		if (tenantRepo != null) {
 			tenantRepo.addListener(this);
@@ -219,91 +222,104 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	public Map<String, EventBus> eventBusMap() {
 		return Collections.unmodifiableMap(eventBusMap);
 	}
-
-	@Bean
-	public ImmutableMap<String, WebAddress> webAddressMap() throws IOException {
-		final TenantMode tenantMode = env.getRequiredProperty("tenantMode", TenantMode.class);
-		final String appId = app.getId();
-		final String fqdn = getFqdn();
-		
-		switch (tenantMode) {
-		case MULTI_PATH:
-			throw new IllegalArgumentException("Deprecated (unsupported) tenantMode: " + tenantMode);
-		case MULTI_HOST:
-			break;
-		default:
-			throw new IllegalArgumentException("Unsupported tenantMode: " + tenantMode);
-		}
-		
-		final ImmutableMap<String, File> dataDirMap = dataDirMap();
-		final ImmutableMap.Builder<String, WebAddress> webAddressBuilder = ImmutableMap.builder();
+	
+	private void initDataDirMap() {
 		for (final Map.Entry<String, AppManifest> tenant : tenantMap().entrySet()) {
-			final String tenantId = tenant.getKey();
-			final ImmutableMap<String, Object> scope = ImmutableMap.<String, Object>of(
-					"appId", appId,
-					"tenantId", tenantId,
-					"tenantEnv", tenantEnv,
-					"domain", tenant.getValue().getDomain(),
-					"fqdn", fqdn);
-			final OnDemandXmiLoader<WebAddress> loader;
-			
-			final String webAddressRes = "/META-INF/template.WebAddress.xmi";
-			final File dataDir = dataDirMap.get(tenantId);
-			if (dataDir != null) {
-				final File webAddressFile = new File(dataDir, "model/" + tenantId + "_" + tenantEnv + ".WebAddress.xmi");
-				if (webAddressFile.exists()) {
-					log.info("Tenant '{}' WebAddress file '{}' exists, loading WebAddress model from file",
-							tenantId, webAddressFile);
-					loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, webAddressFile, scope);
-				} else {
-					log.info("Tenant '{}' WebAddress file '{}' does not exist, loading generic WebAddress model from classpath: {}",
-							tenantId, webAddressFile, webAddressRes);
-					loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, MultiTenantConfig.class, webAddressRes, scope);
-				}
+			final String dataDirName = dataDirLayout == DataDirLayout.LEGACY ? tenant.getKey() + "_" + tenantEnv : tenant.getKey();
+			dataDirMap.put(tenant.getKey(), new File(workspaceDir, dataDirName));
+		}
+	}
+	
+	/**
+	 * <p>Note: A tenant {@code dataDir} may not be in the dataDirMap (i.e. {@code null}),
+	 * and a dataDir value doesn't mean it exists in the filesystem.
+	 * @return Unmodifiable {@link Map} of tenant {@code dataDir}.
+	 */
+	@Bean
+	public Map<String, File> dataDirMap() {
+		return Collections.unmodifiableMap(dataDirMap);
+	}
+
+	private void createWebAddressAndPut(String tenantId, AppManifest appManifest, @Nullable File dataDir) {
+		final ImmutableMap<String, Object> scope = ImmutableMap.<String, Object>of(
+				"appId", app.getId(),
+				"tenantId", tenantId,
+				"tenantEnv", tenantEnv,
+				"domain", appManifest.getDomain(),
+				"fqdn", getFqdn());
+		final OnDemandXmiLoader<WebAddress> loader;
+		
+		final String webAddressRes = "/META-INF/template.WebAddress.xmi";
+		if (dataDir != null) {
+			final File webAddressFile = new File(dataDir, "model/" + tenantId + "_" + tenantEnv + ".WebAddress.xmi");
+			if (webAddressFile.exists()) {
+				log.info("Tenant '{}' WebAddress file '{}' exists, loading WebAddress model from file",
+						tenantId, webAddressFile);
+				loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, webAddressFile, scope);
 			} else {
-				log.info("Tenant '{}' has no data dir mapping, loading generic WebAddress model from classpath: {}",
-						tenantId, dataDir, webAddressRes);
+				log.info("Tenant '{}' WebAddress file '{}' does not exist, loading generic WebAddress model from classpath: {}",
+						tenantId, webAddressFile, webAddressRes);
 				loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, MultiTenantConfig.class, webAddressRes, scope);
 			}
-			
-//			final String tenantKey = tenant.getKey() + "_" + tenantEnv;
-//					return new StaticXmiLoader<WebAddress>(CommonsPackage.eINSTANCE,
-//							new File(dataFolder(), "model/custom.WebAddress.xmi").toString()).get();
-			final WebAddress webAddress = loader.get();
-			webAddressBuilder.put(tenantId, webAddress);
+		} else {
+			log.info("Tenant '{}' has no data dir mapping, loading generic WebAddress model from classpath: {}",
+					tenantId, dataDir, webAddressRes);
+			loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, MultiTenantConfig.class, webAddressRes, scope);
 		}
-		return webAddressBuilder.build();
+		
+//		final String tenantKey = tenant.getKey() + "_" + tenantEnv;
+//				return new StaticXmiLoader<WebAddress>(CommonsPackage.eINSTANCE,
+//						new File(dataFolder(), "model/custom.WebAddress.xmi").toString()).get();
+		final WebAddress webAddress = loader.get();
+		webAddressMap.put(tenantId, webAddress);
+	}
+	
+	private void initWebAddressMap() {
+		for (final Map.Entry<String, AppManifest> tenant : tenantMap().entrySet()) {
+			final String tenantId = tenant.getKey();
+			final File dataDir = dataDirMap.get(tenantId);
+			createWebAddressAndPut(tenantId, tenant.getValue(), dataDir);
+		}
+		log.info("Initialized WebAddressMap with {} entries: {}", webAddressMap.size(), webAddressMap.keySet());
 	}
 
 	/**
-	 * <p>Note: The tenant {@code dataDir} may not exist!
-	 * @return
-	 * @throws IOException
+	 * @return Unmodifiable {@link Map} of tenant {@link WebAddress}es.
 	 */
-	@Bean @Scope("prototype")
-	public ImmutableMap<String, File> dataDirMap() {
-		final ImmutableMap.Builder<String, File> dataDirMapb = ImmutableMap.builder();
-		for (final Map.Entry<String, AppManifest> tenant : tenantMap().entrySet()) {
-			final String dataDirName = dataDirLayout == DataDirLayout.LEGACY ? tenant.getKey() + "_" + tenantEnv : tenant.getKey();
-			dataDirMapb.put(tenant.getKey(), new File(workspaceDir, dataDirName));
-		}
-		return dataDirMapb.build();
+	@Bean
+	public Map<String, WebAddress> webAddressMap() {
+		return Collections.unmodifiableMap(webAddressMap);
 	}
 
 	@Override
-	public void onTenantsStarting(TenantsStarting starting) throws Exception {
+	public void onTenantsStarting(TenantsStarting starting) {
 		for (Map.Entry<String, AppManifest> tenant : starting.getAddeds().entrySet()) {
 			final String tenantId = tenant.getKey();
+			// EventBus
 			final AsyncEventBus eventBus = new AsyncEventBus(tenantId, networkExecutor);
 			eventBusMap.put(tenantId, eventBus);
 			log.info("Created EventBus for tenant '{}'", tenantId);
+			// dataDir
+			final String dataDirName = dataDirLayout == DataDirLayout.LEGACY ? tenant.getKey() + "_" + tenantEnv : tenant.getKey();
+			final File dataDir = new File(workspaceDir, dataDirName);
+			dataDirMap.put(tenant.getKey(), dataDir);
+			log.info("Registered dataDir for tenant '{}'", tenantId, dataDir);
+			// WebAddress
+			createWebAddressAndPut(tenantId, tenant.getValue(), dataDir);
 		}
 	}
 
 	@Override
-	public void onTenantsStopping(TenantsStopping stopping) throws Exception {
+	public void onTenantsStopping(TenantsStopping stopping) {
 		for (Map.Entry<String, AppManifest> tenant : stopping.getTenants().entrySet()) {
 			final String tenantId = tenant.getKey();
+			// WebAddress
+			webAddressMap.remove(tenantId);
+			log.info("Destroyed WebAddress for tenant '{}'", tenantId);
+			// DataDir
+			final File dataDir = dataDirMap.remove(tenantId);
+			log.info("Unregistered dataDir for tenant '{}': {}", tenantId, dataDir);
+			// EventBus
 			eventBusMap.remove(tenantId);
 			log.info("Destroyed EventBus for tenant '{}'", tenantId);
 		}
