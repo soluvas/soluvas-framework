@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -26,6 +28,9 @@ import org.soluvas.commons.TenantSource;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.tenant.TenantMode;
 import org.soluvas.commons.tenant.TenantRepository;
+import org.soluvas.commons.tenant.TenantRepositoryListener;
+import org.soluvas.commons.tenant.TenantsStarting;
+import org.soluvas.commons.tenant.TenantsStopping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,7 +52,7 @@ import com.google.common.eventbus.EventBus;
  * @author ceefour
  */
 @Configuration @Lazy
-public class MultiTenantConfig {
+public class MultiTenantConfig implements TenantRepositoryListener {
 	private static final Logger log = LoggerFactory
 			.getLogger(MultiTenantConfig.class);
 
@@ -83,14 +88,11 @@ public class MultiTenantConfig {
 	 * e.g. {@code $HOME/commerce_dev, $HOME/hub_dev, $HOME/gauldong_dev}, etc. 
 	 */
 	private File workspaceDir;
-
 	private DataDirLayout dataDirLayout;
-
 	private String tenantEnv;
-
 	private TenantSource tenantSource;
-
 	private String appDomain;
+	private final Map<String, EventBus> eventBusMap = new LinkedHashMap<>();
 
 	public static String getFqdn() {
 		final String fqdn;
@@ -174,6 +176,12 @@ public class MultiTenantConfig {
 			}
 			staticTenantMap = builder.build();
 		}
+		
+		initEventBusMap();
+		
+		if (tenantRepo != null) {
+			tenantRepo.addListener(this);
+		}
 	}
 	
 	/**
@@ -196,15 +204,20 @@ public class MultiTenantConfig {
 			throw new IllegalArgumentException("Unknown tenantSource: " + tenantSource);
 		}
 	}
-
-	@Bean
-	public ImmutableMap<String, EventBus> eventBusMap() {
-		final ImmutableMap.Builder<String, EventBus> eventBusb = ImmutableMap.builder();
+	
+	private void initEventBusMap() {
 		for (final Map.Entry<String, AppManifest> entry : tenantMap().entrySet()) {
 			final AsyncEventBus eventBus = new AsyncEventBus(entry.getKey(), networkExecutor);
-			eventBusb.put(entry.getKey(), eventBus);
+			eventBusMap.put(entry.getKey(), eventBus);
 		}
-		return eventBusb.build();
+	}
+
+	/**
+	 * @return Unmodifiable {@link EventBus} {@link Map} for each tenant.
+	 */
+	@Bean
+	public Map<String, EventBus> eventBusMap() {
+		return Collections.unmodifiableMap(eventBusMap);
 	}
 
 	@Bean
@@ -277,20 +290,23 @@ public class MultiTenantConfig {
 		return dataDirMapb.build();
 	}
 
-//	@Configuration @Lazy
-//	public static class SelectorConfig implements TenantSelector {
-//		
-//		@Inject
-//		private TenantRef tenantRef;
-//		@Inject
-//		private MultiTenantConfig tenantConfig;
-//		
-//		@Override
-//		@Bean @Scope("prototype")
-//		public File dataDir() throws IOException {
-//			return tenantConfig.dataDirMap().get(tenantRef.getTenantId());
-//		}
-//		
-//	}
+	@Override
+	public void onTenantsStarting(TenantsStarting starting) throws Exception {
+		for (Map.Entry<String, AppManifest> tenant : starting.getAddeds().entrySet()) {
+			final String tenantId = tenant.getKey();
+			final AsyncEventBus eventBus = new AsyncEventBus(tenantId, networkExecutor);
+			eventBusMap.put(tenantId, eventBus);
+			log.info("Created EventBus for tenant '{}'", tenantId);
+		}
+	}
+
+	@Override
+	public void onTenantsStopping(TenantsStopping stopping) throws Exception {
+		for (Map.Entry<String, AppManifest> tenant : stopping.getTenants().entrySet()) {
+			final String tenantId = tenant.getKey();
+			eventBusMap.remove(tenantId);
+			log.info("Destroyed EventBus for tenant '{}'", tenantId);
+		}
+	}
 
 }
