@@ -56,7 +56,7 @@ public class TenantDataConfig {
 	
 	@Bean
 	public ImmutableMap<String, DataCatalog> dataCatalogMap() throws IOException {
-		final ImmutableMap<String, File> dataDirMap = tenantConfig.dataDirMap();
+		final Map<String, File> dataDirMap = tenantConfig.dataDirMap();
 		final ImmutableMap.Builder<String, DataCatalog> dataCatalogMapb = ImmutableMap.builder();
 		for (final Map.Entry<String, AppManifest> tenant : tenantConfig.tenantMap().entrySet()) {
 			final String tenantId = tenant.getKey();
@@ -80,7 +80,7 @@ public class TenantDataConfig {
 	
 	@Bean
 	public ImmutableMap<String, MixinCatalog> mixinCatalogMap() throws IOException {
-		final ImmutableMap<String, File> dataDirMap = tenantConfig.dataDirMap();
+		final Map<String, File> dataDirMap = tenantConfig.dataDirMap();
 		final ImmutableMap.Builder<String, MixinCatalog> mixinCatalogMapb = ImmutableMap.builder();
 		for (final Map.Entry<String, AppManifest> tenant : tenantConfig.tenantMap().entrySet()) {
 			final String tenantId = tenant.getKey();
@@ -108,7 +108,7 @@ public class TenantDataConfig {
 	
 	@Bean
 	public ImmutableMap<String, MixinManager> mixinMgrMap() throws IOException {
-		final ImmutableMap<String, File> dataDirMap = tenantConfig.dataDirMap();
+		final Map<String, File> dataDirMap = tenantConfig.dataDirMap();
 		final ImmutableMap.Builder<String, MixinManager> mixinMgrMapb = ImmutableMap.builder();
 		for (final Map.Entry<String, AppManifest> tenant : tenantConfig.tenantMap().entrySet()) {
 			final String tenantId = tenant.getKey();
@@ -120,7 +120,7 @@ public class TenantDataConfig {
 	
 	@Bean
 	public ImmutableMap<String, TermManager> termMgrMap() throws IOException {
-		final ImmutableMap<String, File> dataDirMap = tenantConfig.dataDirMap();
+		final Map<String, File> dataDirMap = tenantConfig.dataDirMap();
 		final ImmutableMap.Builder<String, TermManager> termMgrMapb = ImmutableMap.builder();
 		for (final Map.Entry<String, AppManifest> tenant : tenantConfig.tenantMap().entrySet()) {
 			final String tenantId = tenant.getKey();
