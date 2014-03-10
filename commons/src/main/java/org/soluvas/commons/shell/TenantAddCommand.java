@@ -2,6 +2,7 @@ package org.soluvas.commons.shell;
 
 import javax.annotation.Nullable;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -34,6 +35,8 @@ public class TenantAddCommand extends ExtCommandSupport {
 	private String title;
 	@Option(name="-e", aliases="--email", description="General email.")
 	private String email;
+	@Option(name="--style", description="Default Mall style.")
+	private String defaultStyle;
 	
 	@Override
 	protected AppManifest doExecute() throws Exception {
@@ -48,6 +51,9 @@ public class TenantAddCommand extends ExtCommandSupport {
 			appManifest.setGeneralEmail(email);
 		}
 		final Object provisionData = tenantRepo.newProvisionData();
+		if (defaultStyle != null) {
+			PropertyUtils.setProperty(provisionData, "mall.defaultStyle", defaultStyle);
+		}
 		final AppManifest addedAppManifest = tenantRepo.add(tenantId, appManifest, provisionData, null);
 		return addedAppManifest;
 	}
