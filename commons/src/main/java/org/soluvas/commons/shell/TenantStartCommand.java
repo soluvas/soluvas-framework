@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
+import org.soluvas.commons.tenant.ProvisionData;
 import org.soluvas.commons.tenant.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -24,7 +25,7 @@ public class TenantStartCommand extends ExtCommandSupport {
 	 * Not required so it doesn't break apps that don't use {@link TenantRepository}. 
 	 */
 	@Autowired(required=false) @Nullable
-	private TenantRepository<Object> tenantRepo;
+	private TenantRepository<ProvisionData> tenantRepo;
 	
 	@Argument(name="tenantId ...", required=true, multiValued=true, description="Tenant ID(s)")
 	private String[] tenantIds;

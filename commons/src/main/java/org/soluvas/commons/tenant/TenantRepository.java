@@ -15,7 +15,7 @@ import com.google.common.eventbus.EventBus;
  * @author ceefour
  * @see DirectoryTenantRepository
  */
-public interface TenantRepository<T> {
+public interface TenantRepository<T extends ProvisionData> {
 	
 	/**
 	 * Returns a map of tenant information (key=tenantId).

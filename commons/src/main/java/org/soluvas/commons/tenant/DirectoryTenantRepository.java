@@ -41,7 +41,7 @@ import com.google.common.eventbus.EventBus;
  * @author ceefour
  * @see DirectorySourcedConfig
  */
-public class DirectoryTenantRepository<T> implements TenantRepository<T> {
+public class DirectoryTenantRepository<T extends ProvisionData> implements TenantRepository<T> {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(DirectoryTenantRepository.class);
