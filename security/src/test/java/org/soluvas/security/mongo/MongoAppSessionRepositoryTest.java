@@ -12,7 +12,6 @@ import org.soluvas.security.AppSession;
 import org.soluvas.security.AppSessionStatus;
 import org.soluvas.security.SecurityFactory;
 import org.soluvas.security.impl.AppSessionImpl;
-import org.soluvas.security.impl.MongoAppSessionRepository;
 
 import com.google.code.morphia.logging.MorphiaLoggerFactory;
 import com.google.code.morphia.logging.slf4j.SLF4JLogrImplFactory;
