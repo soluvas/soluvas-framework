@@ -1,7 +1,6 @@
 package org.soluvas.security.couchdb;
 
 import java.net.MalformedURLException;
-import java.security.Principal;
 
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
@@ -137,18 +136,18 @@ public class CouchDbRealm extends AuthorizingRealm {
 		final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		if (rolePersonRepo != null) {
 			log.trace("Using RolePersonRepository {} to assign AuthorizationInfo for principals: {}",
-					rolePersonRepo, Iterables.transform(principalCollection, new Function<Principal, String>() {
+					rolePersonRepo, Iterables.transform(principalCollection, new Function<Object, String>() {
 						@Override
-						public String apply(Principal input) {
+						public String apply(Object input) {
 							return input.toString();
 						};
 					}));
 			RealmUtils.modifyAuthInfo(info, principalCollection, rolePersonRepo, securityCatalogSupplier.get());
 		} else {
 			log.trace("Assigning AuthorizationInfo WITHOUT stored roles for principals: {}",
-					rolePersonRepo, Iterables.transform(principalCollection, new Function<Principal, String>() {
+					rolePersonRepo, Iterables.transform(principalCollection, new Function<Object, String>() {
 						@Override
-						public String apply(Principal input) {
+						public String apply(Object input) {
 							return input.toString();
 						};
 					}));
