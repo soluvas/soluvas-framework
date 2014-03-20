@@ -46,13 +46,23 @@ import com.mongodb.DBObject;
 public class MongoPersonRepository extends MongoRepositoryBase<Person> implements
 		PersonRepository {
 	
+	private static ImmutableMap<String, Integer> indexMap;
+
+	static {
+		final ImmutableMap.Builder<String, Integer> indexMab = ImmutableMap.builder();
+		indexMab.put("name", 1); // for sorting in list
+		indexMab.put("creationTime", -1);
+		indexMab.put("modificationTime", -1);
+		indexMab.put("securityRoleIds", 1);
+		indexMab.put("customerRole", 1);
+		indexMab.put("memberRole", 1);
+		indexMab.put("managerRole", 1);
+		indexMap = indexMab.build();
+	}
+	
 	public MongoPersonRepository(String mongoUri, boolean migrationEnabled) {
 		super(Person.class, PersonImpl.class, PersonImpl.CURRENT_SCHEMA_VERSION, mongoUri, "person",
-				ImmutableList.of("canonicalSlug"), ImmutableMap.of(
-						"name", 1, // for sorting in list
-						"creationTime", -1,
-						"modificationTime", -1),
-						migrationEnabled);
+				ImmutableList.of("canonicalSlug"), indexMap, migrationEnabled);
 	}
 
 	@Override
@@ -150,9 +160,8 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	@SuppressWarnings("null")
 	@Override
 	public Page<Person> findBySearchText(StatusMask statusMask, @Nullable String searchText, Pageable pageable) {
-		final BasicDBObject query = getQueryBySearchText(searchText);
-		augmentQueryForStatusMask(query, statusMask);
-		
+		final BasicDBObject queryBySearchText = getQueryBySearchText(searchText);
+		augmentQueryForStatusMask(queryBySearchText, statusMask);
 		final Sort mySort;
 		if (pageable.getSort() != null) {
 			mySort = pageable.getSort().and(new Sort(Direction.DESC, "modificationTime"));
@@ -162,18 +171,23 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		
 		final PageRequest myPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), mySort);
 		
-		return findAllByQuery(query, myPageable);
+		return findAllByQuery(queryBySearchText, myPageable);
 	}
 	
 	private BasicDBObject getQueryBySearchText(String searchText) {
 		final Pattern regex = Pattern.compile(Pattern.quote(searchText), Pattern.CASE_INSENSITIVE);
+		
 		final BasicDBObject nameQuery = new BasicDBObject("name", regex);
-		final BasicDBObject idQuery = new BasicDBObject("id", regex);
+		final BasicDBObject idQuery = new BasicDBObject("_id", regex);
+		
 		final BasicDBObject emailQuery = new BasicDBObject("email", regex);
 		final BasicDBObject emailsQuery = new BasicDBObject("emails", new BasicDBObject("$elemMatch", emailQuery));
-		final BasicDBObject phoneNumberQuery = new BasicDBObject("phoneNumber", regex);
+		
+		final BasicDBObject phoneNumberQuery = new BasicDBObject("phoneNumber", searchText);
 		final BasicDBObject mobileNumbersQuery = new BasicDBObject("mobileNumbers", new BasicDBObject("$elemMatch", phoneNumberQuery));
-		final BasicDBObject query = new BasicDBObject("$or", ImmutableList.of(nameQuery, idQuery , emailsQuery, mobileNumbersQuery));
+		final BasicDBObject phoneNumbersQuery = new BasicDBObject("phoneNumbers", new BasicDBObject("$elemMatch", phoneNumberQuery));
+		
+		final BasicDBObject query = new BasicDBObject("$or", ImmutableList.of(nameQuery, idQuery , emailsQuery, mobileNumbersQuery, phoneNumbersQuery));
 		log.debug("Query is {}", query);
 		return query;
 	}

@@ -2,7 +2,6 @@ package com.soluvas.story;
 
 import javax.inject.Inject;
 
-import org.soluvas.commons.DataFolder;
 import org.soluvas.social.schema.SocialSchemaCatalog;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,8 +13,8 @@ import com.soluvas.story.schema.StorySchemaCatalog;
 import com.soluvas.story.util.StorySchemaCatalogXmiTracker;
 
 /**
- * @author adri
- *
+ * {@link Configuration} that scans {@link StorySchemaCatalog} in classpath (only).
+ * @author ceefour
  */
 @Configuration @Lazy(false)
 @ComponentScan("com.soluvas.story")
@@ -23,14 +22,12 @@ public class StoryConfig {
 	
 	@Inject
 	private SocialSchemaCatalog socialSchemaCatalog;
-	@Inject @DataFolder
-	private String dataFolder;
 	
 	@Bean
 	public StorySchemaCatalog storySchemaCatalog() {
 		final StorySchemaCatalog storySchemaCatalog = SchemaFactory.eINSTANCE.createStorySchemaCatalog();
 		final StorySchemaCatalogXmiTracker tracker = new StorySchemaCatalogXmiTracker(socialSchemaCatalog, storySchemaCatalog);
-		tracker.scan(StoryConfig.class.getClassLoader(), dataFolder);
+		tracker.scan(StoryConfig.class.getClassLoader(), null);
 		return storySchemaCatalog;
 	}
 

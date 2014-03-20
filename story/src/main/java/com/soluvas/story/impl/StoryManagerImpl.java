@@ -2,8 +2,6 @@ package com.soluvas.story.impl;
 
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
@@ -34,7 +32,6 @@ import com.soluvas.story.StoryRepository;
  * @generated
  */
 // Note: Do not @Service this! It's configured manually in AppConfig.StoryConfig.
-@SuppressWarnings("serial")
 public class StoryManagerImpl extends EObjectImpl implements StoryManager {
 	
 	private static final Logger log = LoggerFactory.getLogger(StoryManagerImpl.class);
@@ -53,8 +50,8 @@ public class StoryManagerImpl extends EObjectImpl implements StoryManager {
 	 * @param personStoryRepo
 	 * @param eventBus
 	 */
-	public StoryManagerImpl(@Nonnull final Map<String, StoryRepository> repositories,
-			@Nonnull final EventBus eventBus) {
+	public StoryManagerImpl(final Map<String, StoryRepository> repositories,
+			final EventBus eventBus) {
 		super();
 		this.repositories = ImmutableMap.copyOf(repositories);
 		this.eventBus = eventBus;

@@ -1,8 +1,8 @@
 package org.soluvas.data.person.shell; 
 
-import java.util.Iterator;
+import static org.fusesource.jansi.Ansi.ansi;
 
-import javax.inject.Inject;
+import java.util.Iterator;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -13,9 +13,12 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.Gender;
+import org.soluvas.commons.NameUtils;
+import org.soluvas.commons.NameUtils.PersonName;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.soluvas.commons.util.HashedPasswordUtils;
 import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.person.PersonRepository;
@@ -36,27 +39,23 @@ public class PersonModCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(PersonModCommand.class);
 	
+	@Option(name="-n", aliases="--name", description="Name")
+	private transient String nameStr;
 	@Option(aliases="-e", description="Email", name="--email")
 	private transient String emailStr;
 	@Option(aliases="-g", description="Gender", name="--gender")
 	private transient Object gender;
 	@Option(aliases="-s", description="Slug", name="--slug")
 	private transient String slug;
+	@Option(name="-p", aliases="--password", description="Password (will be encoded as SSHA).")
+	private String password;
 
 	@Argument(index=0, name="id", required=true, description="Person ID.")
 	private transient String id;
 	
-	private final PersonRepository personRepo;
-	
-	@Inject
-	public PersonModCommand(PersonRepository personRepo) {
-		super();
-		this.personRepo = personRepo;
-	}
-
-	@SuppressWarnings("null")
 	@Override
-	protected Object doExecute() throws Exception {
+	protected Person doExecute() throws Exception {
+		final PersonRepository personRepo = getBean(PersonRepository.class);
 		final Person person = Preconditions.checkNotNull(personRepo.findOne(id), String.format("Person by ID %s must not be null", id));
 		if (!Strings.isNullOrEmpty(emailStr)) {
 			final Person personByEmail = personRepo.findOneByEmail(StatusMask.RAW, emailStr);
@@ -70,9 +69,9 @@ public class PersonModCommand extends ExtCommandSupport {
 					final Email email = emailIter.next();
 					if (lastPrimaryEmail != null && lastPrimaryEmail.equalsIgnoreCase(email.getEmail())) {
 						emailIter.remove();
-					}
-					// avoid duplicate by pre-removing existing new email address
-					if (emailStr.equalsIgnoreCase(email.getEmail())) {
+					} else if (emailStr.equalsIgnoreCase(email.getEmail())) {
+						// avoid duplicate by pre-removing existing new email address
+						// note that Iterator.remove() can only be called once
 						emailIter.remove();
 					}
 				}
@@ -85,6 +84,13 @@ public class PersonModCommand extends ExtCommandSupport {
 			}
 		}
 		
+		if (nameStr != null) {
+			final PersonName personName = NameUtils.splitName(nameStr);
+			person.setName(nameStr);
+			person.setFirstName(personName.getFirstName());
+			person.setLastName(personName.getLastName());
+		}
+		
 		if (gender != null) {
 			person.setGender(Gender.valueOf(String.valueOf(gender).toUpperCase()));
 		}
@@ -95,15 +101,21 @@ public class PersonModCommand extends ExtCommandSupport {
 				person.setSlug(slug);
 				person.setCanonicalSlug(SlugUtils.canonicalize(slug));
 			} else {
-				System.err.println(String.format("Slug '%s' already used person '%s'", 
+				System.err.println(String.format("Slug '%s' already used by person '%s'", 
 						existsBySlug.get(), existsBySlug.getId()));
 				return null;
 			}
 		}
 		
+		if (!Strings.isNullOrEmpty(password)) {
+			final String encoded = HashedPasswordUtils.encodeSsha(password);
+			System.err.println(ansi().render("Encoded password: @|bold %s|@", encoded));
+			person.setPassword(encoded);
+		}
+
 		personRepo.modify(id, person);
 		
-		return null;
+		return person;
 	}
 
 }

@@ -8,9 +8,12 @@ import java.util.Map;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.security.couchdb.CouchDbRealm;
+import org.soluvas.security.mongo.MongoRealm;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -19,7 +22,10 @@ import com.google.common.collect.Maps;
 /**
  * Shiro {@link SessionDAO} implementation using {@link AppSessionRepository}.
  * @author ceefour
+ * @deprecated No longer needed, just use {@link MongoRealm} or {@link CouchDbRealm} inside {@link Map},
+ * then use {@link DefaultWebSecurityManager}.
  */
+@Deprecated
 public class SoluvasSessionDAO implements SessionDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(SoluvasSessionDAO.class);

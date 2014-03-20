@@ -62,7 +62,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 	private static final String suppliedClassName = EmailCatalog.class.getName();
 	private static final EmailPackage xmiEPackage = EmailPackage.eINSTANCE;
 	private final EmailCatalog repo;
-	private final EventBus eventBus;
+	private final EventBus appEventBus;
 	/**
 	 * Used for plain Java.
 	 */
@@ -74,10 +74,10 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 	 * 		is the exclusive consumer of this repo.
 	 */
 	public EmailCatalogXmiTracker(@Nonnull final EmailCatalog repo,
-			@Nonnull final EventBus eventBus) {
+			@Nonnull final EventBus appEventBus) {
 		super();
 		this.repo = repo;
-		this.eventBus = eventBus;
+		this.appEventBus = appEventBus;
 	}
 	
 //	public void add(Class<?> class1, String packageToScan) {
@@ -298,7 +298,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					final URL resource = bundle != null ? bundle.getEntry(plainFileName) : classLoader.getResource(plainFileName);
 					final String plain = IOUtils.toString(resource);
 					layoutType.setPlainTemplate(plain);
-				} catch (IOException e) {
+				} catch (Exception e) {
 					throw new EmailException("Cannot read " + plainFileName + " in " + xmiUrls, e);
 				}
 				final String htmlFileName = genPackage.replace('.', '/') + "/" + eClassName + ".html.mustache";
@@ -306,7 +306,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 					final URL resource = bundle != null ? bundle.getEntry(htmlFileName) : classLoader.getResource(htmlFileName);
 					final String html = IOUtils.toString(resource);
 					layoutType.setHtmlTemplate(html);
-				} catch (IOException e) {
+				} catch (Exception e) {
 					throw new EmailException("Cannot read " + htmlFileName + " in " + xmiUrls, e);
 				}
 			}
@@ -406,7 +406,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 		// Notify StorySchemaCatalogXmiTracker
 //		final TargetTypeAdded added = SchemaFactory.eINSTANCE.createTargetTypeAdded();
 //		added.getTargetTypes().addAll(targetTypes);
-//		eventBus.post(added);
+//		appEventBus.post(added);
 		
 		final List<EObject> objects = ImmutableList.copyOf(Iterables.<EObject>concat(layoutTypes, pageTypes));
 		return objects;
@@ -503,7 +503,7 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 		// Notify StorySchemaCatalogXmiTracker
 //			final TargetTypeRemoved removed = SchemaFactory.eINSTANCE.createTargetTypeRemoved();
 //			removed.getTargetTypes().addAll(catalogs);
-//			eventBus.post(removed);
+//			appEventBus.post(removed);
 	}
 	
 	@Override

@@ -1,14 +1,17 @@
 package org.soluvas.security.shell; 
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 import java.util.Set;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.Person;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.soluvas.security.AccessControlManager;
 import org.soluvas.security.Role;
-import org.soluvas.security.SecurityRepository;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +19,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableSet;
 
 /**
- * Shell command to set members of a {@link Role}.
+ * Shell command to set {@link Role}s of a {@link Person}.
  * 
  * @author ceefour
  */
@@ -33,14 +36,14 @@ public class SecPersonRoleSetCommand extends ExtCommandSupport {
 	private String[] roles;
 
 	@Override
-	protected Object doExecute() throws Exception {
-		final SecurityRepository securityRepo = getBean(SecurityRepository.class);
+	protected Set<String> doExecute() throws Exception {
+		final AccessControlManager acMgr = getBean(AccessControlManager.class);
 		final Set<String> roleSet = roles != null ? ImmutableSet.copyOf(roles) : ImmutableSet.<String>of();
-		System.out.format("Setting security roles of %s to %s...",
-				personId, Joiner.on(", ").join(roleSet));
-		securityRepo.replacePersonRoles(personId, roleSet);
-		System.out.format(" OK\n");
-		return null;
+		System.out.print(ansi().render("Setting security roles of @|bold %s|@ to @|bold %s|@...",
+				personId, Joiner.on(", ").join(roleSet)));
+		acMgr.replacePersonTenantRoles(getTenant().getTenantId(), personId, roleSet);
+		System.out.println(ansi().render(" @|bold,bg_green  OK |@"));
+		return roleSet;
 	}
 
 }

@@ -39,6 +39,7 @@ import com.google.common.base.Preconditions;
  * </p>
  *
  * @generated
+ * @todo Remove the @Service because doesn't work in multitenant applications.
  */
 @Service("appSessionMgr") @Lazy
 public class AppSessionManagerImpl extends EObjectImpl implements AppSessionManager {

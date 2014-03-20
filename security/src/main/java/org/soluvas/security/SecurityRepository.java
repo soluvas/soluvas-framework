@@ -16,7 +16,7 @@ import org.soluvas.data.repository.CrudRepository;
  * 
  * The Roles are defined on {@link Person}'s attributes (SecurityRoleIds)
  * @author ceefour
- * @deprecated This should be more like {@code SecurityManager}-ish. While the "repository" should be
+ * @deprecated Replaced by SecurityManager-ish {@link AccessControlManager}. While the "repository" should be
  * 		provided by individual repositories, e.g. {@link RoleRepository}, etc.
  */
 @Deprecated

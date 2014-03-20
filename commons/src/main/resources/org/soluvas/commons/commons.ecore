@@ -39,9 +39,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="positioner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
         defaultValueLiteral="0"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AppManifest" eSuperTypes="#//Positionable #//ResourceAware #//BundleAware">
+  <eClassifiers xsi:type="ecore:EClass" name="AppManifest" eSuperTypes="#//Positionable #//ResourceAware #//BundleAware #//Expandable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="AppManifest is actually a misnomer, it should've been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.&#xA;&#xA;Attributes are optional because can use OverlayingSupplier."/>
+      <details key="documentation" value="AppManifest is actually a misnomer, it should've been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.&#xA;&#xA;&lt;p>Attributes are optional because can use OverlayingSupplier.&#xA;&#xA;&lt;p>Expandable attributes are: domain, generalEmail.&#xA;&#xA;&lt;p>Expansion variables are: fqdn (host-dependent), appDomain (from properties), userName (from System property user.name), domain (can only be used by other attributes than domain itself)."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="summary" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
@@ -54,14 +54,16 @@
         <details key="documentation" value="Longer description to be used in meta description, recommended to be less than 160 characters."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="domain" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="domain" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        defaultValueLiteral="{+tenantId}.{+appDomain}">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Primary domain name of the application, e.g. &quot;berbatik.com&quot;. Used by Email system.&#xA;&#xA;&lt;p>For development, use e.g. &quot;berbatik.annafi.dev&quot;.&#xA;&#xA;&lt;p>TODO: title &amp; domain should probably be moved somewhere else, since it's tenant &amp; environment specific.&#xA;&#xA;&lt;p>Production: title=Berbatik, domain=berbatik.com&#xA;&#xA;&lt;p>Staging: title=Berbatik stg, domain=stg.berbatik.com&#xA;&#xA;&lt;p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev&#xA;&#xA;&lt;p>Description usually stays the same, but can be different too."/>
+        <details key="documentation" value="Primary domain name of the application, e.g. &quot;berbatik.com&quot;. Used by Email system.&#xA;&#xA;&lt;p>For development, use e.g. &quot;berbatik.annafi.dev&quot;.&#xA;&#xA;&lt;p>TODO: title &amp; domain should probably be moved somewhere else, since it's tenant &amp; environment specific.&#xA;&#xA;&lt;p>Production: title=Berbatik, domain=berbatik.com&#xA;&#xA;&lt;p>Staging: title=Berbatik stg, domain=stg.berbatik.com&#xA;&#xA;&lt;p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev&#xA;&#xA;&lt;p>Description usually stays the same, but can be different too.&#xA;&#xA;&lt;p>Templated using URI templates. e.g. to use {@code appDomain} variable, i.e. &quot;acme.{+appDomain}&quot;,&#xA;that will be expanded when you call {@link #expand()}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generalEmail" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generalEmail" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        defaultValueLiteral="{+userName}@{+fqdn}">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Email address used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application."/>
+        <details key="documentation" value="Email address used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.&#xA;The default templated generalEmail is &quot;{+userName}@{+fqdn}&quot; so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.&#xA;&#xA;&lt;p>Templated using URI templates."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="organizationName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
@@ -97,7 +99,8 @@
         <details key="documentation" value="Reads directly from {@link #getDefaultTimeZoneId()}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultCurrencyCode" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultCurrencyCode" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        defaultValueLiteral="USD">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="This is a String and not a CurrencyUnit object to aid visual editing using EMF Reflective Editor."/>
       </eAnnotations>
@@ -112,6 +115,12 @@
         defaultValueLiteral="{+imagesUri}tenant_common/logo_email.png">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="URI to tenant logo usable when sending email notifications, by default the tenant logo URI template is: {+imagesUri}tenant_common/logo_email.png&#xA;&#xA;&lt;p>Width of 127 pixels is recommended with landscape ratio.&#xA;&#xA;&lt;p>Supported parameter is &quot;imagesUri&quot;, which is from {link WebAddress#getImagesUri()}.&#xA;&#xA;&lt;p>You can have app-wide logo without any tenant_common folder by using URI template such as: {+imagesUri}/com.aksimata.app/aksimata_email_192x92.png&#xA;&#xA;&lt;p>To get the actual URI, call {@link AppUtils#getEmailLogoUri(AppManifest, WebAddress)}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultCountryCode" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        defaultValueLiteral="US">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Default country code in ISO 3166-1 alpha-2. It is used for e.g. fill the country field in new PostalAddress form."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -380,8 +389,18 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WebAddress" eSuperTypes="#//Positionable #//BundleAware #//ResourceAware #//Expandable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Tenant-wide website URI configuration."/>
+      <details key="documentation" value="Tenant-wide website URI configuration. URI template variables: appId, tenantId, tenantEnv, domain, fqdn."/>
     </eAnnotations>
+    <eOperations name="getApiUri" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="API URI is useful if you want to access API resources (e.g. MediaResource) from external apps, email, etc. or where you have taken care of the cross-origin request issues.&#xA;&#xA;Always returns baseUri + apiPath, removing double slash."/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getSecureApiUri" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="API URI is useful if you want to access API resources (e.g. MediaResource) from external apps, email, etc. or where you have taken care of the cross-origin request issues.&#xA;&#xA;Always returns secureBaseUri + apiPath, removing double slash."/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseUri" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -862,7 +881,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Can be expanded upon loading by XmiObjectLoader.&#xA;&#xA;Example is WebAddress, it will replace {+fqdn} with FQDN (useful for development)."/>
     </eAnnotations>
-    <eOperations name="expand">
+    <eOperations name="expand" eExceptions="#//Exception">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Expand attribute values."/>
       </eAnnotations>
@@ -1417,4 +1436,6 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Exception" instanceClassName="java.lang.Exception"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GeneralSysConfig" abstract="true" eSuperTypes="#//Expandable"/>
 </ecore:EPackage>

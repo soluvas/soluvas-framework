@@ -3,12 +3,11 @@
 package org.soluvas.commons.impl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.HashMap;
+import java.net.URI;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.utils.URIUtils;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -26,7 +25,6 @@ import org.soluvas.commons.WebAddress;
 
 import com.damnhandy.uri.template.UriTemplate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 /**
@@ -762,21 +760,33 @@ public class WebAddressImpl extends MinimalEObjectImpl.Container implements WebA
 	}
 
 	/**
-	 * Supported built-in expansion variables are: fqdn.
-	 * scope may provide additionally: tenantId, tenantEnv.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public void expand(Map<String, Object> upScope) {
+	public String getApiUri() {
+		return URIUtils.resolve(URI.create(getBaseUri()), getApiPath()).toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public String getSecureApiUri() {
+		return URIUtils.resolve(URI.create(getSecureBaseUri()), getApiPath()).toString();
+	}
+
+	/**
+	 * Scope may provide additionally: tenantId, tenantEnv, fqdn, domain.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public void expand(Map<String, Object> scope) {
 		if (expansionState == ExpansionState.EXPANDED) {
 			return;
 		}
-		
-		final Map<String, Object> scope = new HashMap<>(upScope);
-		final String fqdn = getFqdn();
-		Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
-		scope.put("fqdn", fqdn);
 		
 		if (StringUtils.contains(getBaseUri(), '{')) {
 			try {
@@ -835,18 +845,6 @@ public class WebAddressImpl extends MinimalEObjectImpl.Container implements WebA
 			}
 		}
 		expansionState = ExpansionState.EXPANDED;
-	}
-
-	/**
-	 * @return
-	 * @throws UnknownHostException
-	 */
-	public static String getFqdn() {
-		try {
-			return InetAddress.getLocalHost().getCanonicalHostName();
-		} catch (UnknownHostException e) {
-			throw new CommonsException("Cannot get FQDN", e);
-		}
 	}
 
 	/**
@@ -1146,9 +1144,18 @@ public class WebAddressImpl extends MinimalEObjectImpl.Container implements WebA
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
+			case CommonsPackage.WEB_ADDRESS___GET_API_URI:
+				return getApiUri();
+			case CommonsPackage.WEB_ADDRESS___GET_SECURE_API_URI:
+				return getSecureApiUri();
 			case CommonsPackage.WEB_ADDRESS___EXPAND__MAP:
-				expand((Map<String, Object>)arguments.get(0));
-				return null;
+				try {
+					expand((Map<String, Object>)arguments.get(0));
+					return null;
+				}
+				catch (Throwable throwable) {
+					throw new InvocationTargetException(throwable);
+				}
 		}
 		return super.eInvoke(operationID, arguments);
 	}

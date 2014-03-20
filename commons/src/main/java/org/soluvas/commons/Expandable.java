@@ -50,9 +50,9 @@ public interface Expandable extends EObject {
 	 * <!-- begin-model-doc -->
 	 * Expand attribute values.
 	 * <!-- end-model-doc -->
-	 * @model scopeDataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EJavaObject>"
+	 * @model exceptions="org.soluvas.commons.Exception" scopeDataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EJavaObject>"
 	 * @generated
 	 */
-	void expand(Map<String, Object> scope);
+	void expand(Map<String, Object> scope) throws Exception;
 
 } // Expandable

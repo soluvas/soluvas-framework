@@ -32,8 +32,8 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 /**
+ * <p><strong>Note:</strong> It's recommended to use multitenant {@link TenantDataConfig} to make your application future-proof.
  * @author rudi
- *
  */
 @Configuration @Lazy
 @ComponentScan("org.soluvas.data.shell")
@@ -80,7 +80,7 @@ public class SingleTenantDataConfig {
 		if (tenantMixinCatalogFile.exists()) {
 			// If tenant-specific MixinCatalog exists, use it
 			log.info("Using tenant-specific MixinCatalog from {}", tenantMixinCatalogFile);
-			supplier = new OnDemandXmiLoader<>(DataPackage.eINSTANCE, tenantMixinCatalogFile.getPath());
+			supplier = new OnDemandXmiLoader<>(DataPackage.eINSTANCE, tenantMixinCatalogFile.getAbsoluteFile());
 		} else {
 			// otherwise, use default MixinCatalog
 			// TODO: don't hardcode default mixin classpath name

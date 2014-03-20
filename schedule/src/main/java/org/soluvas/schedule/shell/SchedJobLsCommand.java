@@ -38,8 +38,8 @@ public class SchedJobLsCommand extends ExtCommandSupport {
 			System.out.println(ansi().render("@|bold,black %3d||@%-25s@|bold,black ||@%-20s@|bold,black ||@" + jobClassAnsi,
 				++i, it.getName(), it.getGroup()));
 		}
-		System.out.println(ansi().render("@|bold,yellow %d|@ Jobs", 
-				jobKeys.size()));
+		System.out.println(ansi().render("@|bold,yellow %d|@ Jobs in scheduler @|bold %s|@", 
+				jobKeys.size(), scheduler.getSchedulerName()));
 		return jobKeys.size();
 	}
 

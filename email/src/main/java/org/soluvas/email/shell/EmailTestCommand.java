@@ -4,7 +4,6 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.mail.Session;
 
 import org.apache.felix.gogo.commands.Argument;
@@ -60,18 +59,11 @@ public class EmailTestCommand extends ExtCommandSupport {
 	@Argument(name="recipientEmail", required=false, description="Where to send the email, by default it will send to ${appManifest.generalEmail}.")
 	private String recipientEmail;
 	
-	private final EmailManager emailMgr;
-	private final AppManifest appManifest;
-	
-	@Inject
-	public EmailTestCommand(EmailManager emailMgr, AppManifest appManifest) {
-		super();
-		this.emailMgr = emailMgr;
-		this.appManifest = appManifest;
-	}
-
 	@Override
 	protected Object doExecute() throws Exception {
+		final EmailManager emailMgr = getBean(EmailManager.class);
+		final AppManifest appManifest = getBean(AppManifest.class);
+		
 		final String realRecipientEmail = Optional.fromNullable(recipientEmail).or(appManifest.getGeneralEmail());
 		log.info("Sending test email to {} <{}> as {} titled {}",
 				recipientName, realRecipientEmail, recipientRole, title);

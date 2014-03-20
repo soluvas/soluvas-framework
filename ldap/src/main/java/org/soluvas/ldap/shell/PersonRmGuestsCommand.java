@@ -4,24 +4,23 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
 import org.soluvas.commons.PersonLdapRelated;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.ldap.LdapRepository;
 import org.soluvas.ldap.SocialPerson;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
 
 /**
  * Delete all guest {@link SocialPerson} users.
  *
+ * It's running on 5.1.x!!
+ *
  * @author ceefour
  */
-@Service @Scope("prototype")
+//@Service @Scope("prototype")
 @Command(scope="person", name="rmguests", description="Delete all guest users.")
+@Deprecated
 public class PersonRmGuestsCommand extends ExtCommandSupport {
 
 	private final LdapRepository<SocialPerson> personLdapRepo;
@@ -29,7 +28,7 @@ public class PersonRmGuestsCommand extends ExtCommandSupport {
 	@Option(name="-f", description="Actually perform the operation, otherwise simply list the guest IDs.")
 	private transient boolean force = false;
 	
-	@Inject
+//	@Inject
 	public PersonRmGuestsCommand(
 			@PersonLdapRelated LdapRepository<SocialPerson> personLdapRepo) {
 		super();

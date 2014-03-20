@@ -8,6 +8,7 @@ import java.io.PrintStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.felix.gogo.runtime.CommandProcessorImpl;
 import org.apache.felix.gogo.runtime.CommandSessionImpl;
@@ -79,30 +80,47 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	 */
 	public static RequestAttributes currentRequestAttributes() throws IllegalStateException {
 		final CommandRequestAttributes requestAttributes = threadRequestAttributes.get();
-		Preconditions.checkState(requestAttributes != null, "Not in CommandSession");
+		Preconditions.checkState(requestAttributes != null, "Not in CommandSession. Note that currently request-scoped beans are not available inside Atmosphere, as a workaround you can save the 'tenantId' during constructor.");
 		return requestAttributes;
 	}
 	
 	/**
-	 * Returns a {@link Closeable} that sets the threadlocal {@link CommandRequestAttributes}
-	 * based on {@link CommandSession}, then afterwards, mark it as {@link #requestCompleted()} and removes it from the thread.
+	 * Returns a {@link Closeable} that:
+	 * A. if threadlocal doesn't yet exist, sets the threadlocal {@link CommandRequestAttributes}
+	 * 		based on {@link CommandSession}, then afterwards, mark it as {@link #requestCompleted()} and removes it from the thread.
+	 * B. if threadlocal already exist and is the same {@code tenantId}, simply uses the existing {@link CommandSession}. Otherwise throw {@link IllegalStateException}.
 	 * @param requestAttributes
 	 * @return 
+	 * @throw {@link IllegalStateException}
 	 */
 	public static Closeable withSession(CommandSession session) {
 		if (threadRequestAttributes.get() != null) {
-			throw new IllegalStateException("Thread '" + Thread.currentThread() + "' already contains a CommandRequestAttributes, cannot set");
-		}
-		final CommandRequestAttributes reqAttrs = new CommandRequestAttributes(session);
-		threadRequestAttributes.set(reqAttrs);
-		return new Closeable() {
-			@Override
-			public void close() {
-				// Mark "request" as completed
-				reqAttrs.requestCompleted();
-				threadRequestAttributes.remove();
+			final CommandSession thatSession = threadRequestAttributes.get().getSession();
+			final String tenantId = (String) session.get("tenantId");
+			final String thatTenantId = (String) thatSession.get("tenantId");
+			if (!Objects.equals(tenantId, thatTenantId)) {
+				throw new IllegalStateException(String.format(
+						"Thread '%s' requests session '%s' for tenant '%s' but already contains a CommandRequestAttributes with different session '%s' for tenant '%s', cannot set",
+						Thread.currentThread().getId(), session, tenantId, thatSession, thatTenantId));
 			}
-		};
+			return new Closeable() {
+				@Override
+				public void close() {
+					// Don't do anything, assume cleanup will be done by "parent"
+				}
+			};
+		} else {
+			final CommandRequestAttributes reqAttrs = new CommandRequestAttributes(session);
+			threadRequestAttributes.set(reqAttrs);
+			return new Closeable() {
+				@Override
+				public void close() {
+					// Mark "request" as completed
+					reqAttrs.requestCompleted();
+					threadRequestAttributes.remove();
+				}
+			};
+		}
 	}
 
 	/**

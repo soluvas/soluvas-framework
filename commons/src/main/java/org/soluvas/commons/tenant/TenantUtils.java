@@ -1,6 +1,7 @@
 package org.soluvas.commons.tenant;
 
 import java.util.Collection;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -13,6 +14,7 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsException;
+import org.soluvas.commons.config.TenantSelector;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -102,7 +104,7 @@ public class TenantUtils {
 	 * @param clazz
 	 * @return
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	public static <T> T getSupplied(BundleContext bundleContext, TenantRef tenant, Class<T> clazz) {
 		final ServiceReference<Supplier> supplierRef = getService(bundleContext, tenant, Supplier.class,
 				null, "(suppliedClass=" + clazz.getName() + ")(layer=application)");
@@ -130,6 +132,31 @@ public class TenantUtils {
 		} finally {
 			bundleContext.ungetService(serviceLookupRef);
 		}
+	}
+	
+	/**
+	 * @param tenantSelector
+	 * @param map
+	 * @param clazz
+	 * @return
+	 * @deprecated Use {@link TenantBeanRepository#get(String)}
+	 */
+	@Deprecated
+	public static <T> T selectBean(TenantSelector tenantSelector, Map<String, T> map, Class<T> clazz) {
+		final String tenantId = tenantSelector.tenantRef().getTenantId();
+		return selectBean(tenantId, map, clazz);
+	}
+
+	/**
+	 * @param tenantId
+	 * @param map
+	 * @param clazz
+	 * @return
+	 */
+	public static <T> T selectBean(String tenantId, Map<String, T> map, Class<T> clazz) {
+		return Preconditions.checkNotNull(map.get(tenantId),
+				"No %s for tenant '%s'. %s available: %s",
+				clazz.getSimpleName(), tenantId, map.size(), map.keySet());
 	}
 
 }

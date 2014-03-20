@@ -31,7 +31,9 @@ import com.amazonaws.services.s3.model.StorageClass;
 import com.amazonaws.services.s3.transfer.Download;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
+import com.damnhandy.uri.template.MalformedUriTemplateException;
 import com.damnhandy.uri.template.UriTemplate;
+import com.damnhandy.uri.template.VariableExpansionException;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
@@ -482,7 +484,11 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 		uriVars.put("imageId", imageId);
 		uriVars.put("styleVariant", styleVariant);
 		uriVars.put("extension", extension);
-		return UriTemplate.fromTemplate(uriTemplate).expand(uriVars);
+		try {
+			return UriTemplate.fromTemplate(uriTemplate).expand(uriVars);
+		} catch (VariableExpansionException | MalformedUriTemplateException e) {
+			throw new ImageException(e, "Cannot expand URI template '%s' using %s", uriTemplate, uriVars);
+		}
 	}
 	
 } //S3ConnectorImpl

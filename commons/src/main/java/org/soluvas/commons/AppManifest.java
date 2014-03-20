@@ -14,7 +14,11 @@ import org.joda.time.DateTimeZone;
  * <!-- begin-model-doc -->
  * AppManifest is actually a misnomer, it should've been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.
  * 
- * Attributes are optional because can use OverlayingSupplier.
+ * <p>Attributes are optional because can use OverlayingSupplier.
+ * 
+ * <p>Expandable attributes are: domain, generalEmail.
+ * 
+ * <p>Expansion variables are: fqdn (host-dependent), appDomain (from properties), userName (from System property user.name), domain (can only be used by other attributes than domain itself).
  * <!-- end-model-doc -->
  *
  * <p>
@@ -34,6 +38,7 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCurrencyCode <em>Default Currency Code</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCurrency <em>Default Currency</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCountryCode <em>Default Country Code</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,7 +46,7 @@ import org.joda.time.DateTimeZone;
  * @model
  * @generated
  */
-public interface AppManifest extends Positionable, ResourceAware, BundleAware {
+public interface AppManifest extends Positionable, ResourceAware, BundleAware, Expandable {
 	/**
 	 * Returns the value of the '<em><b>Title</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -124,6 +129,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 
 	/**
 	 * Returns the value of the '<em><b>Domain</b></em>' attribute.
+	 * The default value is <code>"{+tenantId}.{+appDomain}"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -140,11 +146,14 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 	 * <p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev
 	 * 
 	 * <p>Description usually stays the same, but can be different too.
+	 * 
+	 * <p>Templated using URI templates. e.g. to use {@code appDomain} variable, i.e. "acme.{+appDomain}",
+	 * that will be expanded when you call {@link #expand()}.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Domain</em>' attribute.
 	 * @see #setDomain(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_Domain()
-	 * @model
+	 * @model default="{+tenantId}.{+appDomain}"
 	 * @generated
 	 */
 	String getDomain();
@@ -161,15 +170,19 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 
 	/**
 	 * Returns the value of the '<em><b>General Email</b></em>' attribute.
+	 * The default value is <code>"{+userName}@{+fqdn}"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Email address used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.
+	 * The default templated generalEmail is "{+userName}@{+fqdn}" so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.
+	 * 
+	 * <p>Templated using URI templates.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>General Email</em>' attribute.
 	 * @see #setGeneralEmail(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_GeneralEmail()
-	 * @model
+	 * @model default="{+userName}@{+fqdn}"
 	 * @generated
 	 */
 	String getGeneralEmail();
@@ -347,6 +360,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 
 	/**
 	 * Returns the value of the '<em><b>Default Currency Code</b></em>' attribute.
+	 * The default value is <code>"USD"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Default Currency Code</em>' attribute isn't clear,
@@ -359,7 +373,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 	 * @return the value of the '<em>Default Currency Code</em>' attribute.
 	 * @see #setDefaultCurrencyCode(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultCurrencyCode()
-	 * @model
+	 * @model default="USD"
 	 * @generated
 	 */
 	String getDefaultCurrencyCode();
@@ -425,5 +439,31 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware {
 	 * @generated
 	 */
 	void setEmailLogoUriTemplate(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Default Country Code</b></em>' attribute.
+	 * The default value is <code>"US"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Default country code in ISO 3166-1 alpha-2. It is used for e.g. fill the country field in new PostalAddress form.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Default Country Code</em>' attribute.
+	 * @see #setDefaultCountryCode(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultCountryCode()
+	 * @model default="US"
+	 * @generated
+	 */
+	String getDefaultCountryCode();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDefaultCountryCode <em>Default Country Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default Country Code</em>' attribute.
+	 * @see #getDefaultCountryCode()
+	 * @generated
+	 */
+	void setDefaultCountryCode(String value);
 
 } // AppManifest

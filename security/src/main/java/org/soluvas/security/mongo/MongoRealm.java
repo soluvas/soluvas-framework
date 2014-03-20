@@ -1,6 +1,7 @@
 package org.soluvas.security.mongo;
 
-import java.util.Set;
+import javax.annotation.Nullable;
+import javax.annotation.PreDestroy;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -18,17 +19,15 @@ import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.mongo.MongoRepositoryException;
+import org.soluvas.security.AccessControlManager;
 import org.soluvas.security.AutologinToken;
-import org.soluvas.security.Permission;
-import org.soluvas.security.PersonAction;
-import org.soluvas.security.PersonPermission;
 import org.soluvas.security.Rfc2307CredentialsMatcher;
-import org.soluvas.security.Role;
+import org.soluvas.security.RolePersonRepository;
 import org.soluvas.security.SecurityCatalog;
 import org.soluvas.security.SecurityRepository;
+import org.soluvas.security.impl.RealmUtils;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -46,13 +45,24 @@ public class MongoRealm extends AuthorizingRealm {
 	private static final Logger log = LoggerFactory.getLogger(MongoRealm.class);
 
 	private final SecurityCatalog securityCatalog;
+	/**
+	 * @deprecated Use {@link RolePersonRepository} / {@link AccessControlManager} instead. 
+	 */
+	@Deprecated @Nullable
 	private final SecurityRepository securityRepo;
+	@Nullable
+	private final RolePersonRepository rolePersonRepo;
 	private final String personCollName = "person";
 	private final DBCollection personColl;
 	private MongoClient mongoClient;
 	
-	public MongoRealm(SecurityCatalog securityCatalog,
-			final String mongoUri) {
+	/**
+	 * @param securityCatalog
+	 * @param mongoUri
+	 * @deprecated Use {@link #MongoRealm(String, SecurityCatalog, RolePersonRepository, String)}.
+	 */
+	@Deprecated
+	public MongoRealm(SecurityCatalog securityCatalog, final String mongoUri) {
 		super();
 		this.securityCatalog = securityCatalog;
 		// WARNING: mongoUri may contain password!
@@ -72,60 +82,51 @@ public class MongoRealm extends AuthorizingRealm {
 					personCollName);
 		}
 		this.securityRepo = new MongoSecurityRepository(personColl);
+		this.rolePersonRepo = null;
 		setName("soluvas");
 		setCredentialsMatcher(new Rfc2307CredentialsMatcher());
 		setAuthenticationTokenClass(AuthenticationToken.class);
 	}
 	
+	public MongoRealm(String name, SecurityCatalog securityCatalog, RolePersonRepository rolePersonRepo, final String mongoUri) {
+		super();
+		this.securityCatalog = securityCatalog;
+		// WARNING: mongoUri may contain password!
+		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
+		log.info("Connecting to MongoDB realm database {}/{} as {}, person collection={}",
+				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), personCollName);
+		try {
+			mongoClient = new MongoClient(realMongoUri);
+			final DB db = mongoClient.getDB(realMongoUri.getDatabase());
+			if (realMongoUri.getUsername() != null)
+				db.authenticate(realMongoUri.getUsername(),
+						realMongoUri.getPassword());
+			personColl = db.getCollection(personCollName);
+		} catch (Exception e) {
+			throw new MongoRepositoryException(e, "Cannot connect to MongoDB realm database {}/{} as {} for {} repository",
+					realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(),
+					personCollName);
+		}
+		this.securityRepo = null;
+		this.rolePersonRepo = rolePersonRepo;
+		setName(name);
+		setCredentialsMatcher(new Rfc2307CredentialsMatcher());
+		setAuthenticationTokenClass(AuthenticationToken.class);
+	}
+	
+	@PreDestroy
+	public void destroy() {
+	}
+	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			final PrincipalCollection principalCollection) {
-		final String userName = (String) principalCollection.getPrimaryPrincipal();
-		final Set<String> personRoles = securityRepo.getPersonRoles(userName);
-
 		final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.addRoles(personRoles);
-
-		// Static Permissions are set in SecurityCatalog.xmi files, using EMF models
-		log.trace("Processing security catalog for {} with {} roles, {} domains, {} actions, and {} permissions",
-				userName, securityCatalog.getRoles().size(), securityCatalog
-						.getDomains().size(), securityCatalog.getActions()
-						.size(), securityCatalog.getPermissions().size());
-		for (final Role role : securityCatalog.getRoles()) {
-			switch (role.getAssignMode()) {
-			case GUEST:
-				log.trace("Assigning role {}-{} to {} because assign mode {}",
-						role.getId(), role.getName(), userName, role.getAssignMode());
-				info.addRole(role.getId());
-				break;
-			case AUTHENTICATED:
-				if (!principalCollection.isEmpty()) {
-					log.trace(
-							"Assigning role {}-{} to {} because assign mode {} and principals={}",
-							role.getId(), role.getName(), userName, role.getAssignMode(),
-							principalCollection);
-					info.addRole(role.getId());
-				}
-				break;
-			case MANUAL:
-				break;
-			}
+		if (rolePersonRepo != null) {
+			RealmUtils.modifyAuthInfo(info, principalCollection, rolePersonRepo, securityCatalog);
+		} else {
+			RealmUtils.modifyAuthInfo(info, principalCollection, securityRepo, securityCatalog);
 		}
-		for (final Permission perm : securityCatalog.getPermissions()) {
-			final Set<String> intersectingRoles = Sets.intersection(info.getRoles(),
-					ImmutableSet.copyOf(perm.getRoles()));
-			if (!intersectingRoles.isEmpty()) {
-				log.trace("Assigning permission {} to {} due to role(s) {}",
-						perm.toStringPermission(), userName, intersectingRoles);
-				info.addStringPermission(perm.toStringPermission());
-			}
-		}
-
-		// dynamic/resource-level roles
-		// add PersonPermission for VIEW & MODIFY (but not VIEW_ADMINISTRATIVE, MODIFY_ADMINISTRATIVE)
-		info.addObjectPermission(
-				new PersonPermission(ImmutableSet.of(PersonAction.VIEW, PersonAction.MODIFY), principalCollection));
-
 		return info;
 	}
 

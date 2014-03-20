@@ -37,6 +37,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 
 import com.fasterxml.jackson.databind.Module;
@@ -66,7 +67,7 @@ import com.google.common.eventbus.EventBus;
  * @author rudi
  */
 @Configuration @Lazy
-@ComponentScan("org.soluvas.push")
+@ComponentScan({"org.soluvas.commons.shell", "org.soluvas.push"})
 public class CommonsWebConfig {
 	
 	static {
@@ -75,6 +76,7 @@ public class CommonsWebConfig {
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(CommonsWebConfig.class);
+	public static final String APP_EVENT_BUS = "appEventBus";
 	
 	@Inject
 	private Environment env;
@@ -99,10 +101,19 @@ public class CommonsWebConfig {
 		return AppUtils.newCpuExecutor();
 	}
 
-	// TODO: EventBus subscribers
+	/**
+	 * The @{@link Primary} {@link EventBus} is tenant-scoped. In order to access the app eventBus, you'll need to use:
+	 * 
+	 * <pre>
+	 * @Inject @Named(CommonsWebConfig.APP_EVENT_BUS)
+	 * private EventBus appEventBus;
+	 * </pre>
+	 * 
+	 * @return EventBus
+	 */
 	@Bean
-	public EventBus globalEventBus() {
-		return new AsyncEventBus("global", networkExecutor());
+	public EventBus appEventBus() {
+		return new AsyncEventBus("*", networkExecutor());
 	}
 	
 	@Bean(destroyMethod="shutdown")

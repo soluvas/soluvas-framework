@@ -12,7 +12,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -680,6 +679,7 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EMap<String, Object> getAttributes() {
 		if (attributes == null) {
 			attributes = new EcoreEMap<String,Object>(SecurityPackage.Literals.APP_SESSION_ATTRIBUTE_ENTRY, AppSessionAttributeEntryImpl.class, this, SecurityPackage.APP_SESSION__ATTRIBUTES);
@@ -1148,4 +1148,8 @@ public class AppSessionImpl extends EObjectImpl implements AppSession {
 		return result.toString();
 	}
 
+	public static long getDefaultSchemaVersion() {
+		return SCHEMA_VERSION_EDEFAULT;
+	}
+	
 } //AppSessionImpl

@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -105,33 +104,19 @@ public class StoryAddCommand extends ExtCommandSupport {
 	private String receiverId;
 	@Argument(index=4, name="attachmentId", description="Attachment ID, will be searched using TargetFinder service in the specified namespace.")
 	private String attachmentId;
-	private final StorySchemaCatalog storySchemaCatalog;
-	// TODO: dynamic TargetFinder lookup
-	private final TargetFinder<Target> subjectFinder;
-	private final TargetFinder<Target> receiverFinder;
-	private final TargetFinder<Target> attachmentFinder;
-	private final StoryRepository storyRepo;
 	
-	@Inject
-	public StoryAddCommand(StorySchemaCatalog storySchemaCatalog,
-			@PersonRelated TargetFinder<Target> subjectFinder,
-			@PersonRelated TargetFinder<Target> receiverFinder,
-			@PersonRelated TargetFinder<Target> attachmentFinder,
-			@PersonStory StoryRepository personStoryRepo) {
-		super();
-		this.storySchemaCatalog = storySchemaCatalog;
-		this.subjectFinder = subjectFinder;
-		this.receiverFinder = receiverFinder;
-		this.attachmentFinder = attachmentFinder;
-		this.storyRepo = personStoryRepo;
-	}
-
 	/* (non-Javadoc)
 	 * @see org.apache.karaf.shell.console.AbstractAction#doExecute()
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	protected Object doExecute() throws Exception {
+		final StorySchemaCatalog storySchemaCatalog = getBean(StorySchemaCatalog.class);
+		// TODO: dynamic TargetFinder lookup
+		final TargetFinder<Target> subjectFinder = getBean(TargetFinder.class, PersonRelated.class);
+		final TargetFinder<Target> receiverFinder = getBean(TargetFinder.class, PersonRelated.class);
+		final TargetFinder<Target> attachmentFinder = getBean(TargetFinder.class, PersonRelated.class);
+		final StoryRepository storyRepo = getBean(StoryRepository.class, PersonStory.class);
+		
 		final Identifiable owner = ownerArg instanceof String
 				? CommonsFactory.eINSTANCE.createPersonInfo((String) ownerArg, (String) ownerArg, (String) ownerArg, null, null)
 				: (Identifiable) ownerArg;

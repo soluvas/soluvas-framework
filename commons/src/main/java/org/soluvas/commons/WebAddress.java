@@ -8,7 +8,7 @@ package org.soluvas.commons;
  * <em><b>Web Address</b></em>'. <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Tenant-wide website URI configuration.
+ * Tenant-wide website URI configuration. URI template variables: appId, tenantId, tenantEnv, domain, fqdn.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -283,5 +283,31 @@ public interface WebAddress extends Positionable, BundleAware, ResourceAware, Ex
 	 * @generated
 	 */
 	void setSecureJsUri(String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * API URI is useful if you want to access API resources (e.g. MediaResource) from external apps, email, etc. or where you have taken care of the cross-origin request issues.
+	 * 
+	 * Always returns baseUri + apiPath, removing double slash.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	String getApiUri();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * API URI is useful if you want to access API resources (e.g. MediaResource) from external apps, email, etc. or where you have taken care of the cross-origin request issues.
+	 * 
+	 * Always returns secureBaseUri + apiPath, removing double slash.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	String getSecureApiUri();
 
 } // WebAddress

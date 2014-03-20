@@ -1,12 +1,15 @@
  package org.soluvas.security.shell; 
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.Person;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.soluvas.security.AccessControlManager;
 import org.soluvas.security.Role;
-import org.soluvas.security.SecurityRepository;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +17,12 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableSet;
 
 /**
- * Shell command to set members of a {@link Role}.
+ * Shell command to set {@link Person} members of a tenant {@link Role}.
  * 
  * @author ceefour
  */
 @Service @Scope("prototype")
-@Command(scope = "sec", name = "rolememberset", description = "Set members of a security role.")
+@Command(scope = "sec", name = "rolememberset", description = "Set members of a tenant role.")
 public class SecRoleMemberSetCommand extends ExtCommandSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(SecRoleMemberSetCommand.class);
@@ -30,12 +33,12 @@ public class SecRoleMemberSetCommand extends ExtCommandSupport {
 	private String[] personIds;
 
 	@Override
-	protected Object doExecute() throws Exception {
-		final SecurityRepository securityRepo = getBean(SecurityRepository.class);
-		System.out.format("Setting members of role %s to %s...",
-				role, Joiner.on(", ").join(personIds));
-		securityRepo.replaceRoleMembers(role, ImmutableSet.copyOf(personIds));
-		System.out.format(" OK\n");
+	protected Void doExecute() throws Exception {
+		final AccessControlManager acMgr = getBean(AccessControlManager.class);
+		System.out.print(ansi().render("Setting members of role @|bold %s|@ to @|bold %s|@...",
+				role, Joiner.on(", ").join(personIds)));
+		acMgr.replaceTenantRoleMembers(getTenant().getTenantId(), role, ImmutableSet.copyOf(personIds));
+		System.out.println(ansi().render(" @|bold,bg_green  OK |@"));
 		return null;
 	}
 

@@ -40,6 +40,10 @@
         <element xmi:type="ecore:EOperation" href="image.ecore#//ImageConnector/getOriginUri"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_DrZ3kV5QEeKnN8JJXSOw5w"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_bn9V8KBVEeOI3ue-t34qZA" type="2002">
+        <element xmi:type="ecore:EOperation" href="image.ecore#//ImageConnector/destroy"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bn9V8aBVEeOI3ue-t34qZA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_oMCKYU3SEeKyY_kAWxaufg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_oMCKYk3SEeKyY_kAWxaufg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_oMCKY03SEeKyY_kAWxaufg"/>
@@ -128,10 +132,6 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_3D3hVE3SEeKyY_kAWxaufg"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_3D4IYE3SEeKyY_kAWxaufg" type="5002">
-      <children xmi:type="notation:Node" xmi:id="_91PtwF5VEeKnN8JJXSOw5w" type="2002">
-        <element xmi:type="ecore:EOperation" href="image.ecore#//S3Connector/destroy"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_91PtwV5VEeKnN8JJXSOw5w"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_3D4IYU3SEeKyY_kAWxaufg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_3D4IYk3SEeKyY_kAWxaufg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_3D4IY03SEeKyY_kAWxaufg"/>
@@ -148,10 +148,6 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_6XwT9E3SEeKyY_kAWxaufg"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_6XwT9U3SEeKyY_kAWxaufg" type="5002">
-      <children xmi:type="notation:Node" xmi:id="_Noj4wF2WEeK8n5vmF4w3tA" type="2002">
-        <element xmi:type="ecore:EOperation" href="image.ecore#//DavConnector/destroy"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_Noj4wV2WEeK8n5vmF4w3tA"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_6XwT9k3SEeKyY_kAWxaufg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_6XwT903SEeKyY_kAWxaufg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_6XwT-E3SEeKyY_kAWxaufg"/>

@@ -3,7 +3,6 @@ package org.soluvas.category.shell;
 import java.util.List;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -35,16 +34,10 @@ public class CatCatCommand extends ExtCommandSupport {
 	@Argument(name="id", required=true, description="Category ID.")
 	private String categoryId;
 	
-	private final CategoryCatalog categoryCatalog;
-	
-	@Inject
-	public CatCatCommand(CategoryCatalog categoryCatalog) {
-		super();
-		this.categoryCatalog = categoryCatalog;
-	}
-
 	@Override
 	protected Object doExecute() throws Exception {
+		final CategoryCatalog categoryCatalog = getBean(CategoryCatalog.class);
+		
 		final List<Category> categoryList = CategoryUtils.flatten(ImmutableList.copyOf(EcoreUtil.copyAll(categoryCatalog.getCategories())));
 		final Category cat = Iterables.find(categoryList, new Predicate<Category>() {
 			@Override

@@ -2,8 +2,14 @@
  */
 package org.soluvas.commons.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Nullable;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -12,9 +18,16 @@ import org.joda.time.DateTimeZone;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.BundleAware;
+import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Expandable;
+import org.soluvas.commons.ExpansionState;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
+
+import com.damnhandy.uri.template.MalformedUriTemplateException;
+import com.damnhandy.uri.template.UriTemplate;
+import com.damnhandy.uri.template.VariableExpansionException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -29,6 +42,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getResourceUri <em>Resource Uri</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getBundle <em>Bundle</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getExpansionState <em>Expansion State</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getSummary <em>Summary</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDescription <em>Description</em>}</li>
@@ -43,6 +57,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCurrencyCode <em>Default Currency Code</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCurrency <em>Default Currency</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCountryCode <em>Default Country Code</em>}</li>
  * </ul>
  * </p>
  *
@@ -155,6 +170,26 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	protected Bundle bundle = BUNDLE_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getExpansionState() <em>Expansion State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExpansionState()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ExpansionState EXPANSION_STATE_EDEFAULT = ExpansionState.UNEXPANDED;
+
+	/**
+	 * The cached value of the '{@link #getExpansionState() <em>Expansion State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExpansionState()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExpansionState expansionState = EXPANSION_STATE_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -222,7 +257,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DOMAIN_EDEFAULT = null;
+	protected static final String DOMAIN_EDEFAULT = "{+tenantId}.{+appDomain}";
 
 	/**
 	 * The cached value of the '{@link #getDomain() <em>Domain</em>}' attribute.
@@ -242,7 +277,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String GENERAL_EMAIL_EDEFAULT = null;
+	protected static final String GENERAL_EMAIL_EDEFAULT = "{+userName}@{+fqdn}";
 
 	/**
 	 * The cached value of the '{@link #getGeneralEmail() <em>General Email</em>}' attribute.
@@ -372,7 +407,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DEFAULT_CURRENCY_CODE_EDEFAULT = null;
+	protected static final String DEFAULT_CURRENCY_CODE_EDEFAULT = "USD";
 
 	/**
 	 * The cached value of the '{@link #getDefaultCurrencyCode() <em>Default Currency Code</em>}' attribute.
@@ -413,6 +448,26 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @ordered
 	 */
 	protected String emailLogoUriTemplate = EMAIL_LOGO_URI_TEMPLATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDefaultCountryCode() <em>Default Country Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultCountryCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DEFAULT_COUNTRY_CODE_EDEFAULT = "US";
+
+	/**
+	 * The cached value of the '{@link #getDefaultCountryCode() <em>Default Country Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultCountryCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected String defaultCountryCode = DEFAULT_COUNTRY_CODE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -534,6 +589,16 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 */
 	@Override
+	public ExpansionState getExpansionState() {
+		return expansionState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	@JsonIgnore
 	public ResourceType getResourceType() {
 		return resourceType;
@@ -580,6 +645,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSummary() {
 		return summary;
 	}
@@ -589,6 +655,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSummary(String newSummary) {
 		String oldSummary = summary;
 		summary = newSummary;
@@ -826,6 +893,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getEmailLogoUriTemplate() {
 		return emailLogoUriTemplate;
 	}
@@ -835,11 +903,63 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEmailLogoUriTemplate(String newEmailLogoUriTemplate) {
 		String oldEmailLogoUriTemplate = emailLogoUriTemplate;
 		emailLogoUriTemplate = newEmailLogoUriTemplate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE, oldEmailLogoUriTemplate, emailLogoUriTemplate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getDefaultCountryCode() {
+		return defaultCountryCode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDefaultCountryCode(String newDefaultCountryCode) {
+		String oldDefaultCountryCode = defaultCountryCode;
+		defaultCountryCode = newDefaultCountryCode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE, oldDefaultCountryCode, defaultCountryCode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public void expand(final Map<String, Object> upScope) {
+		if (getExpansionState() == ExpansionState.UNEXPANDED) {
+			try {
+				// domain is expanded twice, because the hub.properties#appDomain may contain URI template {+fqdn} too
+				if (getDomain().contains("{")) {
+					setDomain( UriTemplate.expand(getDomain(), upScope) );
+				}
+				if (getDomain().contains("{")) {
+					setDomain( UriTemplate.expand(getDomain(), upScope) );
+				}
+				// 'domain' variable can then be used by other attributes, if needed
+				final HashMap<String, Object> scope = new HashMap<>(upScope);
+				scope.put("domain", getDomain());
+				if (getGeneralEmail().contains("{")) {
+					setGeneralEmail( UriTemplate.expand(getGeneralEmail(), scope) );
+				}
+				expansionState = ExpansionState.EXPANDED;
+			} catch (MalformedUriTemplateException | VariableExpansionException e) {
+				throw new CommonsException(e, "Cannot expand AppManifest '%s'", getTitle());
+			}
+		}
 	}
 
 	/**
@@ -860,6 +980,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getResourceName();
 			case CommonsPackage.APP_MANIFEST__BUNDLE:
 				return getBundle();
+			case CommonsPackage.APP_MANIFEST__EXPANSION_STATE:
+				return getExpansionState();
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				return getTitle();
 			case CommonsPackage.APP_MANIFEST__SUMMARY:
@@ -888,6 +1010,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getDefaultCurrency();
 			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
 				return getEmailLogoUriTemplate();
+			case CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE:
+				return getDefaultCountryCode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -950,6 +1074,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return;
 			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
 				setEmailLogoUriTemplate((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE:
+				setDefaultCountryCode((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1014,6 +1141,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
 				setEmailLogoUriTemplate(EMAIL_LOGO_URI_TEMPLATE_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE:
+				setDefaultCountryCode(DEFAULT_COUNTRY_CODE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1036,6 +1166,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
 			case CommonsPackage.APP_MANIFEST__BUNDLE:
 				return BUNDLE_EDEFAULT == null ? bundle != null : !BUNDLE_EDEFAULT.equals(bundle);
+			case CommonsPackage.APP_MANIFEST__EXPANSION_STATE:
+				return expansionState != EXPANSION_STATE_EDEFAULT;
 			case CommonsPackage.APP_MANIFEST__TITLE:
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 			case CommonsPackage.APP_MANIFEST__SUMMARY:
@@ -1064,6 +1196,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return DEFAULT_CURRENCY_EDEFAULT == null ? getDefaultCurrency() != null : !DEFAULT_CURRENCY_EDEFAULT.equals(getDefaultCurrency());
 			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
 				return EMAIL_LOGO_URI_TEMPLATE_EDEFAULT == null ? emailLogoUriTemplate != null : !EMAIL_LOGO_URI_TEMPLATE_EDEFAULT.equals(emailLogoUriTemplate);
+			case CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE:
+				return DEFAULT_COUNTRY_CODE_EDEFAULT == null ? defaultCountryCode != null : !DEFAULT_COUNTRY_CODE_EDEFAULT.equals(defaultCountryCode);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1086,6 +1220,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		if (baseClass == BundleAware.class) {
 			switch (derivedFeatureID) {
 				case CommonsPackage.APP_MANIFEST__BUNDLE: return CommonsPackage.BUNDLE_AWARE__BUNDLE;
+				default: return -1;
+			}
+		}
+		if (baseClass == Expandable.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.APP_MANIFEST__EXPANSION_STATE: return CommonsPackage.EXPANDABLE__EXPANSION_STATE;
 				default: return -1;
 			}
 		}
@@ -1113,7 +1253,60 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				default: return -1;
 			}
 		}
+		if (baseClass == Expandable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.EXPANDABLE__EXPANSION_STATE: return CommonsPackage.APP_MANIFEST__EXPANSION_STATE;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == ResourceAware.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == BundleAware.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Expandable.class) {
+			switch (baseOperationID) {
+				case CommonsPackage.EXPANDABLE___EXPAND__MAP: return CommonsPackage.APP_MANIFEST___EXPAND__MAP;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case CommonsPackage.APP_MANIFEST___EXPAND__MAP:
+				try {
+					expand((Map<String, Object>)arguments.get(0));
+					return null;
+				}
+				catch (Throwable throwable) {
+					throw new InvocationTargetException(throwable);
+				}
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -1136,6 +1329,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(resourceName);
 		result.append(", bundle: ");
 		result.append(bundle);
+		result.append(", expansionState: ");
+		result.append(expansionState);
 		result.append(", title: ");
 		result.append(title);
 		result.append(", summary: ");
@@ -1160,6 +1355,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(defaultCurrencyCode);
 		result.append(", emailLogoUriTemplate: ");
 		result.append(emailLogoUriTemplate);
+		result.append(", defaultCountryCode: ");
+		result.append(defaultCountryCode);
 		result.append(')');
 		return result.toString();
 	}

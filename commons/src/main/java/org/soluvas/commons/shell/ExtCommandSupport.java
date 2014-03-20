@@ -57,6 +57,11 @@ public abstract class ExtCommandSupport extends AbstractAction {
 	
 	@Override
 	public Object execute(CommandSession session) throws Exception {
+		// Ensure tenantId is set, so nested CommandRequestAttributes#withSession() works well
+		if (session.get("tenantId") == null) {
+			session.put("tenantId", Optional.fromNullable((String) session.get("tenantId")).or(tenantMap.keySet().iterator().next()));
+		}
+		
 		try (final Closeable closeable = CommandRequestAttributes.withSession(session)) {
 //			threadCommandSession.set(session);
 			try (ThreadLocalProgress progress = new ThreadLocalProgress(monitor)) {

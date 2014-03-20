@@ -9,10 +9,13 @@ import java.util.concurrent.ExecutorService;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.soluvas.image.ImageConnector;
+import org.soluvas.image.ImageException;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.UploadedImage;
 
+import com.damnhandy.uri.template.MalformedUriTemplateException;
 import com.damnhandy.uri.template.UriTemplate;
+import com.damnhandy.uri.template.VariableExpansionException;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
@@ -158,7 +161,11 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 		uriVars.put("imageId", imageId);
 		uriVars.put("styleVariant", styleVariant);
 		uriVars.put("extension", extension);
-		return UriTemplate.fromTemplate(getUriTemplate()).expand(uriVars);
+		try {
+			return UriTemplate.fromTemplate(getUriTemplate()).expand(uriVars);
+		} catch (VariableExpansionException | MalformedUriTemplateException e) {
+			throw new ImageException(e, "Cannot expand URI template '%s' using %s", getUriTemplate(), uriVars);
+		}
 	}
 
 	/**
@@ -168,6 +175,17 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 	@Override
 	public String getOriginUri(String namespace, String imageId, String styleCode, String styleVariant, String extension) {
 		return getUri(namespace, imageId, styleCode, styleVariant, extension);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void destroy() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**

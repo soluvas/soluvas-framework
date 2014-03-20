@@ -1,7 +1,10 @@
 package org.soluvas.security.shell; 
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +28,10 @@ public class SecdPermLsCommand extends ExtCommandSupport {
 	private static final Logger log = LoggerFactory.getLogger(SecdPermLsCommand.class);
 
 	@Override
-	protected Object doExecute() throws Exception {
+	protected Void doExecute() throws Exception {
 		final SecurityCatalog securityCatalog = getBean(SecurityCatalog.class);
-		System.out.format("%3s | %-15s | %-15s | %-15s | %-20s | %s\n", "#",
-				"Domain", "Action", "Instance", "Role", "Source");
+		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-15s|%-15s|%-20s|%-40s|@",
+				"№", "Domain", "Action", "Instance", "Role", "Source" ));
 		final List<Permission> permissions = securityCatalog.getPermissions();
 		int i = 0;
 		for (Permission it : permissions) {
@@ -36,15 +39,15 @@ public class SecdPermLsCommand extends ExtCommandSupport {
 			// "and", many
 			// TODO: format products
 			final Joiner spaceJoiner = Joiner.on(' ');
-			System.out.format("%3d | %-15s | %-15s | %-15s | %-20s | %s\n",
+			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-15s|@@|bold,black ||@%-15s@|bold,black ||@%-15s@|bold,black ||@%-20s@|bold,black ||@%-40s",
 					++i, spaceJoiner.join(it.getDomainPermission()),
-					spaceJoiner.join(it.getActionPermission()), spaceJoiner
-							.join(it.getInstancePermission()), spaceJoiner
-							.join(it.getRoles()),
-					it.getResourceUri());
+					spaceJoiner.join(it.getActionPermission()),
+					spaceJoiner.join(it.getInstancePermission()),
+					spaceJoiner.join(it.getRoles()),
+					StringUtils.right(it.getResourceUri(), 40) ));
 		}
-		System.out.format("%d Permissions\n", securityCatalog.getPermissions()
-				.size());
+		System.out.println(ansi().render("@|bold %d|@ Permissions",
+				securityCatalog.getPermissions().size()));
 		return null;
 	}
 

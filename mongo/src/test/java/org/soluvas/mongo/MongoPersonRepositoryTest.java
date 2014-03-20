@@ -16,6 +16,9 @@ import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.StatusMask;
+import org.soluvas.data.domain.CappedRequest;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageOffsetRequest;
 import org.soluvas.data.person.PersonRepository;
 
 import com.google.code.morphia.logging.MorphiaLoggerFactory;
@@ -74,8 +77,30 @@ public class MongoPersonRepositoryTest {
 		final List<Person> personList = personRepo.findAllBySecRoleIds(StatusMask.ACTIVE_ONLY, secRoleIds);
 		log.debug("People by secRoleIds {} and statusMask Active Only: {}", secRoleIds, personList);
 		assertEquals(3, personList.size());
-		
 	}
 	
-
+	@Test
+	public void findByPhoneNumberOrMobileNumber() {
+		final String mobileNumber = "+6285286185328";
+		final Person person = personRepo.findOneByPhoneNumber(StatusMask.INCLUDE_INACTIVE, mobileNumber);
+		assertNotNull(person);
+		log.debug("we found person {} with mobileNumber {}", person, mobileNumber);
+	}
+	
+	@Test
+	public void findPersonByMobileNumber() {
+		final String mobileNumber = "+6285286185328";
+		
+		final Page<Person> personPage = personRepo.findBySearchText(StatusMask.INCLUDE_INACTIVE, mobileNumber, new PageOffsetRequest(0, 100));
+		assertNotNull(personPage.getContent());
+		log.info("web found {} person with mobileNumber {}", personPage.getContent(), mobileNumber);
+	}
+	
+	@Test
+	public void findOneBySearchText() {
+		final String searchText = "emiral_diana_15382";
+		final List<Person> people = personRepo.findBySearchText(ImmutableList.of(AccountStatus.ACTIVE, AccountStatus.VERIFIED), searchText, new CappedRequest(10)).getContent();
+		assertEquals(1, people.size());
+	}
+	
 }

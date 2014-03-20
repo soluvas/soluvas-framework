@@ -1,6 +1,8 @@
 package org.soluvas.commons.tenant;
 
 import org.apache.felix.service.command.CommandSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.commons.config.MultiTenantWebConfig;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.springframework.beans.factory.ObjectFactory;
@@ -19,6 +21,8 @@ import org.springframework.web.context.request.RequestScope;
  */
 public class RequestOrCommandScope implements Scope {
 
+	private static final Logger log = LoggerFactory
+			.getLogger(RequestOrCommandScope.class);
 	/**
 	 * Return the RequestAttributes currently bound to the thread.
 	 * Will call {@link RequestContextHolder#currentRequestAttributes()}

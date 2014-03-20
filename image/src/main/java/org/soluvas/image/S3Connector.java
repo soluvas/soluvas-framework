@@ -119,12 +119,4 @@ public interface S3Connector extends ImageConnector {
 	 * @generated
 	 */
 	String getCdnAlias();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void destroy();
 } // S3Connector
