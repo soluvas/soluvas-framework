@@ -24,7 +24,8 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoURI;
+import com.mongodb.MongoClientURI;
+import com.mongodb.ReadPreference;
 import com.mongodb.WriteResult;
 import com.soluvas.story.Story;
 import com.soluvas.story.StoryException;
@@ -60,12 +61,12 @@ public class MongoStoryRepository extends CrudRepositoryBase<Story, String>
 		
 		// connecting to mongoDB
 		// WARNING: mongoUri may contain password!
-		final MongoURI realMongoUri = new MongoURI(mongoUri);
+		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
 		log = LoggerFactory.getLogger(MongoStoryRepository.class.getName() + "/" + realMongoUri.getDatabase());
 		log.info("Connecting to MongoDB database {}/{} as {} for {} Story Repository", 
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), namespace);
 		try {
-			final DB db = realMongoUri.connectDB();
+			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.secondaryPreferred());
 			if (realMongoUri.getUsername() != null)
 				db.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
 			coll = db.getCollection(getNamespace() + "Story");
@@ -119,11 +120,7 @@ public class MongoStoryRepository extends CrudRepositoryBase<Story, String>
 	
 	@PreDestroy
 	public void destroy() {
-		log.info("Shutting down {} MongoStoryRepo", namespace);
-		if (coll != null) {
-			coll.getDB().cleanCursors(true);
-			coll.getDB().getMongo().close();
-		}
+		log.info("Shutting down {} MongoStoryRepository", namespace);
 	}
 	
 	/**
@@ -163,7 +160,7 @@ public class MongoStoryRepository extends CrudRepositoryBase<Story, String>
 	
 //	@Override
 //	public PersonCommentProduct findOneByCommentId(String commentId) {
-//		final DBObject story = coll.findOne(new BasicDBObject("commentId", commentId));
+//		final DBObject story = primary.findOne(new BasicDBObject("commentId", commentId));
 //		log.debug("Find one story by comment id is {}: {}", commentId, story);
 //		return morphia.fromDBObject(PersonCommentProduct.class, story);				
 //	}
@@ -189,7 +186,7 @@ public class MongoStoryRepository extends CrudRepositoryBase<Story, String>
 //		query.put("subject", subject);
 //		query.put("status", Pattern.compile(status.name(), Pattern.CASE_INSENSITIVE)); // TODO: standardize enum in MongoDB!
 //		
-//		final DBCursor cursor = coll.find(query).sort(new BasicDBObject("created", -1));
+//		final DBCursor cursor = primary.find(query).sort(new BasicDBObject("created", -1));
 //		final List<Story> stories = MongoUtils.transform(cursor, new DBObjectToStory());
 //		log.debug("findBySubjectStatus {} subject={} status={} returned {} stories",
 //				getNamespace(), subject, status, stories.size() );
@@ -207,7 +204,7 @@ public class MongoStoryRepository extends CrudRepositoryBase<Story, String>
 
 //	@Override
 //	public List<Story> findBySubject(String subject) {
-//		final DBCursor cursor = coll.find(new BasicDBObject("subject", subject));
+//		final DBCursor cursor = primary.find(new BasicDBObject("subject", subject));
 //		log.debug("Cursor {}", cursor);
 //		final List<Story> stories = MongoUtils.transform(cursor, new DBObjectToStory());
 //		final List<String> storySummaries = Lists.transform(stories, new Function<Story, String>() {
@@ -233,7 +230,7 @@ public class MongoStoryRepository extends CrudRepositoryBase<Story, String>
 //		final DBObject obj = morphia.toDBObject(story);
 //		log.debug("Upsert {} {}: {}",
 //				namespace, story.getId(), obj );
-//		coll.update(new BasicDBObject("_id", story.getId()), obj, true, false);
+//		primary.update(new BasicDBObject("_id", story.getId()), obj, true, false);
 //	}
 	
 	@Override

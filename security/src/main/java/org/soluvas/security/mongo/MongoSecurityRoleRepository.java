@@ -18,7 +18,7 @@ public class MongoSecurityRoleRepository extends MongoRepositoryBase<Role>
 		implements PagingAndSortingRepository<Role, String> {
 
 	public MongoSecurityRoleRepository(String mongoUri, boolean migrationEnabled) {
-		super(Role.class, RoleImpl.class, RoleImpl.CURRENT_SCHEMA_VERSION, mongoUri, "securityRole",
+		super(Role.class, RoleImpl.class, RoleImpl.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL, "securityRole",
 				ImmutableList.<String>of(), ImmutableMap.of(
 						"creationTime", -1,
 						"modificationTime", -1),

@@ -32,6 +32,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.ReadPreference;
 
 /**
  * @author ceefour
@@ -43,7 +44,8 @@ public class MongoUtils {
 	/**
 	 * Singleton {@link MongoClient} instances so we can effectively limit to 11 connections per webapp
 	 * (regardless of number of {@link MongoRepositoryBase} repositories).
-	 * <p>Note: This does cause a "memory leak" but in practice it should not matter. 
+	 * <p>Note: This does cause a "memory leak" but in practice it should not matter.
+	 * <p>Entry: "{readPreference}:{uri}" -> MongoClient 
 	 */
 	private static final Map<String, MongoClient> mongoClients = new HashMap<>();
 
@@ -51,21 +53,22 @@ public class MongoUtils {
 	 * Use {@link #getMongoDb(MongoClientURI, String)} instead.
 	 * To prevent accidental call to {@link MongoClient#close()}, this method is marked {@code protected}.
 	 * @param realMongoUri
+	 * @param readPreference 
 	 * @return
 	 * @throws UnknownHostException
 	 */
-	protected static synchronized MongoClient getClient(MongoClientURI realMongoUri) throws UnknownHostException {
-		final String mongoUriStr = realMongoUri.getURI();
-		if (mongoClients.containsKey(mongoUriStr)) {
-			final MongoClient client = mongoClients.get(mongoUriStr);
-			log.debug("Reusing existing MongoClient {} for {}/{} as {}", 
-					client, realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername());
+	protected static synchronized MongoClient getClient(MongoClientURI realMongoUri, ReadPreference readPreference) throws UnknownHostException {
+		final String key = readPreference + ":" + realMongoUri.getURI();
+		if (mongoClients.containsKey(key)) {
+			final MongoClient client = mongoClients.get(key);
+			log.debug("Reusing existing MongoClient {} for {}:{}/{} as {}", 
+					client, readPreference, realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername());
 			return client;
 		} else {
 			final MongoClient client = new MongoClient(realMongoUri);
-			log.info("Instantiating new MongoClient {} for {}/{} as {}", 
-					client, realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername());
-			mongoClients.put(mongoUriStr, client);
+			log.info("Instantiating new MongoClient {} for {}:{}/{} as {}", 
+					client, readPreference, realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername());
+			mongoClients.put(key, client);
 			return client;
 		}
 	}
@@ -77,19 +80,37 @@ public class MongoUtils {
 	 * @return
 	 * @throws UnknownHostException
 	 */
-	protected static synchronized MongoClient getClient(String mongoUri) throws UnknownHostException {
-		return getClient(new MongoClientURI(mongoUri));
+//	protected static synchronized MongoClient getClient(String mongoUri) throws UnknownHostException {
+//		return getClient(new MongoClientURI(mongoUri));
+//	}
+	
+	/**
+	 * Gets a {@link DB} with dbname corresponding to {@link MongoClientURI#getDatabase()},
+	 * reusing a single {@link MongoClient},
+	 * using {@link ReadPreference#primaryPreferred()} (which works in failover situations).
+	 * @param realMongoUri
+	 * @return
+	 * @throws UnknownHostException
+	 * @deprecated Use {@link #getDb(MongoClientURI, ReadPreference)}
+	 */
+	@Deprecated
+	public static DB getDb(MongoClientURI realMongoUri) throws UnknownHostException {
+		return getDb(realMongoUri, ReadPreference.primaryPreferred());
 	}
 	
 	/**
 	 * Gets a {@link DB} with dbname corresponding to {@link MongoClientURI#getDatabase()},
-	 * reusing a single {@link MongoClient}.
+	 * reusing a single {@link MongoClient}, with custom {@link ReadPreference}.
+	 * <p>Note: You must {@link DB#authenticate(String, char[])} yourself.
 	 * @param realMongoUri
+	 * @param readPreference {@link ReadPreference} for the pooled {@link MongoClient} of this DB.
+	 * 		For most repositories you'll use {@link ReadPreference#secondaryPreferred()}.
+	 * 		No tag set is needed unless you actually want to target specific secondary servers.
 	 * @return
 	 * @throws UnknownHostException
 	 */
-	public static DB getDb(MongoClientURI realMongoUri) throws UnknownHostException {
-		final MongoClient client = getClient(realMongoUri);
+	public static DB getDb(MongoClientURI realMongoUri, ReadPreference readPreference) throws UnknownHostException {
+		final MongoClient client = getClient(realMongoUri, readPreference);
 		final String dbname = Preconditions.checkNotNull(realMongoUri.getDatabase(), "MongoURI must contain dbname part");
 		return client.getDB(dbname);
 	}
@@ -148,7 +169,7 @@ public class MongoUtils {
 	 * If an index already exist but not unique, it will drop and recreate the index with <code>{unique: true}</code>.
 	 * <p>Usage:
 	 * <pre>{@literal
-	 * MongoUtils.ensureUnique(coll, "canonicalSlug");
+	 * MongoUtils.ensureUnique(primary, "canonicalSlug");
 	 * }</pre>
 	 * @return Ensured index names (including existing ones).
 	 */
@@ -182,7 +203,7 @@ public class MongoUtils {
 	 * Ensure indexes on MongoDB collection, with logging.
 	 * <p>Usage:
 	 * <pre>{@literal
-	 * MongoUtils.ensureIndexes(coll, ImmutableMap.of("creationTime", -1, "modificationTime", -1);
+	 * MongoUtils.ensureIndexes(primary, ImmutableMap.of("creationTime", -1, "modificationTime", -1);
 	 * }</pre>
 	 * @return 
 	 * @return Ensured index names (including existing ones).
@@ -202,8 +223,8 @@ public class MongoUtils {
 	/**
 	 * Drop the specified indexes if not already existing in collection.
 	 * <p>Usage:
-	 * <pre>MongoUtils.dropIndexesIfNotExist(coll, "formalId_-1", "status_1", "className_1");</pre>
-	 * @param coll
+	 * <pre>MongoUtils.dropIndexesIfNotExist(primary, "formalId_-1", "status_1", "className_1");</pre>
+	 * @param primary
 	 * @param indexNames
 	 */
 	public static void dropIndexesIfNotExist(DBCollection coll,
@@ -233,12 +254,12 @@ public class MongoUtils {
 	 * 
 	 * <pre>{@literal
 	 * final List<String> ensuredIndexes = new ArrayList<>();
-	 * ensuredIndexes.addAll( MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {})) );
-	 * ensuredIndexes.addAll( MongoUtils.ensureIndexes(coll, indexedFields) );
-	 * MongoUtils.retainIndexes(coll, ensuredIndexes.toArray(new String[] {}));
+	 * ensuredIndexes.addAll( MongoUtils.ensureUnique(primary, uniqueFields.toArray(new String[] {})) );
+	 * ensuredIndexes.addAll( MongoUtils.ensureIndexes(primary, indexedFields) );
+	 * MongoUtils.retainIndexes(primary, ensuredIndexes.toArray(new String[] {}));
 	 * }</pre>
 	 * 
-	 * @param coll
+	 * @param primary
 	 * @param retaineds
 	 */
 	public static void retainIndexes(DBCollection coll,

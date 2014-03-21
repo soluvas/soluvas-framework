@@ -27,6 +27,7 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
+import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
@@ -42,8 +43,10 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
+import com.mongodb.ReadPreference;
 import com.mongodb.WriteResult;
 
 /**
@@ -86,10 +89,40 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			return morphia.toDBObject(entity);
 		}
 	}
+	
+	/**
+	 * Determines which {@link MongoClient}s will be used by this repository.
+	 * @author ceefour
+	 */
+	protected static enum ReadPattern {
+		/**
+		 * Only use a {@link MongoClient} with {@link ReadPreference#primaryPreferred()}.
+		 * This is seldom used, and has better data consistency.
+		 * But if you use this, you probably want to use an ACID database (such as RDBMS or Neo4j) instead of MongoDB.
+		 * Both {@link MongoRepositoryBase#primary} and {@link MongoRepositoryBase#secondary} use this {@link MongoClient}.
+		 */
+		PRIMARY_PREFERRED,
+		/**
+		 * Only use a {@link MongoClient} with {@link ReadPreference#secondaryPreferred()}.
+		 * Used for some repositories that does not need consistency even for {@link CrudRepository#findOne(java.io.Serializable)}.
+		 * Both {@link MongoRepositoryBase#primary} and {@link MongoRepositoryBase#secondary} use this {@link MongoClient}.
+		 */
+		SECONDARY_PREFERRED,
+		/**
+		 * <ul>
+		 * 	<li>{@link MongoRepositoryBase#primary} uses a {@link MongoClient} with {@link ReadPreference#primaryPreferred()},
+		 * 		which is especially used by {@link CrudRepository#findOne(java.io.Serializable)}.</li>
+		 * 	<li>{@link MongoRepositoryBase#secondary} uses a {@link MongoClient} with {@link ReadPreference#secondaryPreferred()}</li>
+		 * </ol>
+		 * Typically used for most repositories.
+		 */
+		DUAL
+	}
 
 	public static final String SCHEMA_VERSION_FIELD = "schemaVersion";
 	protected final Logger log;
-	protected DBCollection coll;
+	protected final DBCollection primary;
+	protected final DBCollection secondary;
 	protected Morphia morphia;
 	/**
 	 * Slow query threshold in milliseconds.
@@ -116,7 +149,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * @param indexedFields
 	 */
 	public MongoRepositoryBase(Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
-			String mongoUri, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields,
+			String mongoUri, ReadPattern readPattern, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields,
 			boolean migrationEnabled) {
 		super();
 		this.entityClass = intfClass;
@@ -128,14 +161,41 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		// WARNING: mongoUri may contain password!
 		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
 		this.log = LoggerFactory.getLogger(getClass().getName() + "/" + realMongoUri.getDatabase() + "/" + collName + "/" + currentSchemaVersion);
-		log.info("Connecting to MongoDB database {}/{} as {} for {}",
-				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), collName);
+		log.info("Connecting to MongoDB database {}/{} {} as {} for {}",
+				realMongoUri.getHosts(), realMongoUri.getDatabase(), readPattern, realMongoUri.getUsername(), collName);
 		try {
-			final DB db = MongoUtils.getDb(realMongoUri);
-			if (realMongoUri.getUsername() != null)
-				db.authenticate(realMongoUri.getUsername(),
-						realMongoUri.getPassword());
-			coll = db.getCollection(collName);
+			switch (readPattern) {
+			case PRIMARY_PREFERRED:
+				final DB ppDb = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
+				if (realMongoUri.getUsername() != null) {
+					ppDb.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
+				}
+				primary = ppDb.getCollection(collName);
+				secondary = primary;
+				break;
+			case SECONDARY_PREFERRED:
+				final DB spDb = MongoUtils.getDb(realMongoUri, ReadPreference.secondaryPreferred());
+				if (realMongoUri.getUsername() != null) {
+					spDb.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
+				}
+				secondary = spDb.getCollection(collName);
+				primary = secondary;
+				break;
+			case DUAL:
+				final DB primaryDb = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
+				if (realMongoUri.getUsername() != null) {
+					primaryDb.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
+				}
+				primary = primaryDb.getCollection(collName);
+				final DB secondaryDb = MongoUtils.getDb(realMongoUri, ReadPreference.secondaryPreferred());
+				if (realMongoUri.getUsername() != null) {
+					secondaryDb.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
+				}
+				secondary = secondaryDb.getCollection(collName);
+				break;
+			default:
+				throw new MongoRepositoryException("Unknown readPattern: " + readPattern);
+			}
 			morphia = new Morphia();
 			morphia.map(implClass);
 			morphia.getMapper().getOptions().objectFactory = new DefaultCreator() {
@@ -161,10 +221,10 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		}
 		final List<String> ensuredIndexes = new ArrayList<>();
 		if (uniqueFields != null) {
-			ensuredIndexes.addAll( MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {})) );
+			ensuredIndexes.addAll( MongoUtils.ensureUnique(primary, uniqueFields.toArray(new String[] {})) );
 		}
-		ensuredIndexes.addAll( MongoUtils.ensureIndexes(coll, indexedFields) );
-		MongoUtils.retainIndexes(coll, ensuredIndexes.toArray(new String[] {}));
+		ensuredIndexes.addAll( MongoUtils.ensureIndexes(primary, indexedFields) );
+		MongoUtils.retainIndexes(primary, ensuredIndexes.toArray(new String[] {}));
 	}
 
 	@Deprecated
@@ -181,11 +241,12 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		log.info("Connecting to MongoDB database {}/{} as {} for {}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), collName);
 		try {
-			final DB db = MongoUtils.getDb(realMongoUri);
+			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
 			if (realMongoUri.getUsername() != null)
 				db.authenticate(realMongoUri.getUsername(),
 						realMongoUri.getPassword());
-			coll = db.getCollection(collName);
+			primary = db.getCollection(collName);
+			secondary = primary;
 			morphia = new Morphia();
 		} catch (Exception e) {
 			throw new MongoRepositoryException(e, "Cannot connect to MongoDB %s/%s as %s for %s repository",
@@ -195,7 +256,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		beforeEnsureIndexes();
 		log.debug("Ensuring {} indexes on {}: {}", indexedFields.length, collName, indexedFields);
 		for (String field : indexedFields) {
-			coll.ensureIndex(new BasicDBObject(field, 1));
+			primary.ensureIndex(new BasicDBObject(field, 1));
 		}
 	}
 	
@@ -220,12 +281,12 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	@Override
 	public final Page<T> findAll(Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
-		final long total = coll.count(query);
+		final long total = secondary.count(query);
 		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
 		try {
 			log.debug("Find {} sort={} skip={} limit={} on {}",
 					query, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
-			final DBCursor cursor = coll.find(query)
+			final DBCursor cursor = primary.find(query)
 					.sort(sortQuery)
 					.skip((int) pageable.getOffset())
 					.limit((int) pageable.getPageSize());
@@ -243,7 +304,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 */
 	@Override
 	public final long count() {
-		return coll.count();
+		return secondary.count();
 	}
 	
 	/* (non-Javadoc)
@@ -275,7 +336,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			final List<DBObject> dbObjs = ImmutableList.copyOf(Collections2
 					.transform(entities, new EntityToDBObject()));
 			dbObjsStr = dbObjs.toString();
-			final WriteResult writeResult = coll.insert(dbObjs);
+			final WriteResult writeResult = primary.insert(dbObjs);
 			if (writeResult.getLastError() != null
 					&& writeResult.getLastError().getException() != null) {
 				throw new MongoRepositoryException(writeResult.getLastError()
@@ -320,7 +381,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			final S entity = entry.getValue();
 			beforeSave(entity);
 			final DBObject dbo = new EntityToDBObject().apply(entity);
-			final WriteResult writeResult = coll.update(new BasicDBObject("_id", entry.getKey()), dbo);
+			final WriteResult writeResult = primary.update(new BasicDBObject("_id", entry.getKey()), dbo);
 			if (writeResult.getLastError() != null && writeResult.getLastError().getException() != null) {
 				throw new MongoRepositoryException(writeResult.getLastError().getException(),
 						"Cannot modify %d %s documents: %s", entities.size(), collName, entities.keySet());
@@ -334,7 +395,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	@Override
 	public final Set<String> exists(Collection<String> ids) {
 		log.debug("Checking existence of {} {}: {}", ids.size(), collName, ids);
-		try (final DBCursor cursor = coll.find(new BasicDBObject("_id", new BasicDBObject("$in", ids)), new BasicDBObject())) {
+		try (final DBCursor cursor = primary.find(new BasicDBObject("_id", new BasicDBObject("$in", ids)), new BasicDBObject())) {
 			final Set<String> existed = ImmutableSet.copyOf(Iterables.transform(cursor, new Function<DBObject, String>() {
 				@Override @Nullable
 				public String apply(@Nullable DBObject input) {
@@ -347,12 +408,18 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		} 
 	}
 
+	/**
+	 * Used by {@link #findOne(java.io.Serializable)}, so this must use the {@link #primary} client.
+	 * @param ids
+	 * @param sort
+	 * @return
+	 */
 	@Override
 	public final List<T> findAll(Collection<String> ids, Sort sort) {
 		final BasicDBObject sortQuery = MongoUtils.getSort(sort, "_id", 1);
 		log.trace("finding {} {} sort by {}: {}", ids.size(), collName, sort, Iterables.limit(ids, 10));
 		final List<T> entities = MongoUtils.transform(
-				coll.find(new BasicDBObject("_id", new BasicDBObject("$in", ids))).sort(sortQuery),
+				primary.find(new BasicDBObject("_id", new BasicDBObject("$in", ids))).sort(sortQuery),
 				new DBObjectToEntity());
 		if (ids.size() > 1 || ids.size() != entities.size()) {
 			log.debug("find {} {} by _id ({}) returned {} documents", 
@@ -367,7 +434,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	@Override
 	public final long deleteIds(Collection<String> ids) {
 		log.debug("Deleting {} {}: {}", ids.size(), collName, ids);
-		final WriteResult result = coll.remove(new BasicDBObject("_id", new BasicDBObject("$in", ids)));
+		final WriteResult result = primary.remove(new BasicDBObject("_id", new BasicDBObject("$in", ids)));
 		if (result.getLastError().getException() != null) {
 			throw new MongoRepositoryException(result.getLastError().getException(),
 					"Cannot delete %s %s", collName, ids);
@@ -379,9 +446,9 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	@Override
 	public final Page<String> findAllIds(Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
-		final long total = coll.count(query);
+		final long total = secondary.count(query);
 		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "_id", 1);
-		final DBCursor cursor = coll.find(query)
+		final DBCursor cursor = secondary.find(query)
 				.sort(sortQuery)
 				.skip((int) pageable.getOffset())
 				.limit((int) pageable.getPageSize());
@@ -397,7 +464,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	
 	@Override
 	public long countByQuery(DBObject query) {
-		final long total = coll.count(query);
+		final long total = secondary.count(query);
 		log.debug("Got count {} by query {}", total, query);
 		return total;
 	}
@@ -407,8 +474,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
 		log.debug("findAllByQuery {} {} sort {} skip {} limit {}",
 				collName, query, sortQuery, pageable.getOffset(), pageable.getPageSize());
-		final long total = coll.count(query);
-		final DBCursor cursor = coll.find(query)
+		final long total = secondary.count(query);
+		final DBCursor cursor = secondary.find(query)
 				.sort(sortQuery)
 				.skip((int) pageable.getOffset())
 				.limit((int) pageable.getPageSize());
@@ -421,7 +488,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 
 	protected DBObject findDBObjectByQuery(DBObject query, DBObject fields) {
 		log.trace("findOneByQuery {} {}", collName, query, fields);
-		final DBObject dbo = coll.findOne(query, fields);
+		final DBObject dbo = secondary.findOne(query, fields);
 		log.debug("findAllByQuery {} {} {} returned {}",
 				collName, query, fields, dbo != null ? dbo.get("_id") : null);
 		return dbo;

@@ -78,6 +78,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClientURI;
+import com.mongodb.ReadPreference;
 
 /**
  * @author ceefour
@@ -181,7 +182,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		mongoDatabase = mongoUriDetail.getDatabase();
 		try {
 			log.info("Connecting to MongoDB {} database {}", mongoHosts, mongoDatabase);
-			DB db = MongoUtils.getDb(mongoUriDetail);
+			DB db = MongoUtils.getDb(mongoUriDetail, ReadPreference.secondaryPreferred());
 			if (mongoUriDetail.getUsername() != null)
 				db.authenticate(mongoUriDetail.getUsername(), mongoUriDetail.getPassword());
 			log.info("Authenticated to MongoDB. Collection name is {}", collName);

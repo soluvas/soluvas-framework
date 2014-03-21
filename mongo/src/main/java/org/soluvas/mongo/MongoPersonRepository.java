@@ -61,7 +61,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 	
 	public MongoPersonRepository(String mongoUri, boolean migrationEnabled) {
-		super(Person.class, PersonImpl.class, PersonImpl.CURRENT_SCHEMA_VERSION, mongoUri, "person",
+		super(Person.class, PersonImpl.class, PersonImpl.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL, "person",
 				ImmutableList.of("canonicalSlug"), indexMap, migrationEnabled);
 	}
 
