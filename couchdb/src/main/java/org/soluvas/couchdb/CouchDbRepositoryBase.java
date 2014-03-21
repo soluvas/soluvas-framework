@@ -618,7 +618,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		
 //		final BasicDBObject query = new BasicDBObject();
 //		final long total = coll.count(query);
-//		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
+//		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", Sort.Direction.DESC);
 //		final DBCursor cursor = coll.find(query)
 //				.sort(sortQuery)
 //				.skip((int) pageable.getOffset())
@@ -885,7 +885,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	@Override
 	public Page<T> findAllByView(String viewName, Pageable pageable) {
 		throw new UnsupportedOperationException();
-//		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
+//		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", Sort.Direction.DESC);
 //		log.debug("findAllByQuery {} {} sort {} skip {} limit {}",
 //				collName, query, sortQuery, pageable.getOffset(), pageable.getPageSize());
 //		final long total = coll.count(query);

@@ -840,7 +840,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 
 	@Override
 	public Page<Image> findAll(Pageable pageable) {
-		final BasicDBObject sortDbo = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
+		final BasicDBObject sortDbo = MongoUtils.getSort(pageable.getSort(), "modificationTime", Sort.Direction.DESC);
 		final DBCursor cursor = mongoColl.find().sort(sortDbo)
 				.skip((int) pageable.getOffset()).limit((int) pageable.getPageSize());
 		try {
@@ -1231,7 +1231,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 
 	@Override
 	public Page<String> findAllIds(Pageable pageable) {
-		final BasicDBObject sortDbo = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
+		final BasicDBObject sortDbo = MongoUtils.getSort(pageable.getSort(), "modificationTime", Sort.Direction.DESC);
 		final DBCursor cursor = mongoColl.find(new BasicDBObject(), new BasicDBObject("_id", 1))
 				.sort(sortDbo).skip((int) pageable.getOffset()).limit((int) pageable.getPageSize());
 		try {

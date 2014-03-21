@@ -282,7 +282,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	public final Page<T> findAll(Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
 		final long total = secondary.count(query);
-		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
+		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", Sort.Direction.DESC);
 		try {
 			log.debug("Find {} sort={} skip={} limit={} on {}",
 					query, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
@@ -471,7 +471,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	
 	@Override
 	public Page<T> findAllByQuery(DBObject query, Pageable pageable) {
-		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", -1);
+		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", Sort.Direction.DESC);
 		log.debug("findAllByQuery {} {} sort {} skip {} limit {}",
 				collName, query, sortQuery, pageable.getOffset(), pageable.getPageSize());
 		final long total = secondary.count(query);

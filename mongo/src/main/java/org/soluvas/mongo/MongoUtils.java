@@ -140,6 +140,11 @@ public class MongoUtils {
 		}
 	}
 	
+	/**
+	 * Gets the MongoDB sort {@link BasicDBObject} without specifying default sort.
+	 * @param sort
+	 * @return
+	 */
 	public static BasicDBObject getSort(@Nullable Sort sort) {
 		final BasicDBObject sortObj = new BasicDBObject();
 		if (sort != null) {
@@ -151,16 +156,30 @@ public class MongoUtils {
 	}
 	
 	/**
+	 * Gets the MongoDB sort {@link BasicDBObject} with specifying default sort.
+	 * @param sort
+	 * @param defaultSortField Default sort field, used only if {@code sort} is {@code null}.
+	 * @param defaultSortOrder Default sort order, used only if {@code sort} is {@code null}.
+	 * @return
+	 * @deprecated Use {@link #getSort(Sort, String, Direction)}.
+	 */
+	@Deprecated
+	public static BasicDBObject getSort(@Nullable Sort sort, String defaultSortField, int defaultSortOrder) {
+		return getSort(sort, defaultSortField, defaultSortOrder);
+	}
+	
+	/**
+	 * Gets the MongoDB sort {@link BasicDBObject} with specifying default sort.
 	 * @param sort
 	 * @param defaultSortField Default sort field, used only if {@code sort} is {@code null}.
 	 * @param defaultSortOrder Default sort order, used only if {@code sort} is {@code null}.
 	 * @return
 	 */
-	public static BasicDBObject getSort(@Nullable Sort sort, String defaultSortField, int defaultSortOrder) {
+	public static BasicDBObject getSort(@Nullable Sort sort, String defaultSortField, Sort.Direction defaultSortOrder) {
 		if (sort != null) {
 			return getSort(sort);
 		} else {
-			return new BasicDBObject(defaultSortField, defaultSortOrder);
+			return new BasicDBObject(defaultSortField, defaultSortOrder == Direction.ASC ? 1 : -1);
 		}
 	}
 	
