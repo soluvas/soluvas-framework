@@ -1,5 +1,6 @@
 package org.soluvas.mongo;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,7 +36,9 @@ import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 import com.google.code.morphia.Morphia;
 import com.google.code.morphia.mapping.DefaultCreator;
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -92,6 +95,23 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	}
 	
 	/**
+	 * Closure used by {@link MongoRepositoryBase#findPrimary(DBObject, DBObject, String, Object[], CursorFunction)}
+	 * and {@link MongoRepositoryBase#findSecondary(DBObject, DBObject, String, Object[], CursorFunction)}
+	 * to process {@link DBCursor}.
+	 * @author rudi
+	 *
+	 * @param <R>
+	 */
+	protected static interface CursorFunction<R> {
+		/**
+		 * @param cursor This cursor will be {@link Closeable#close()}d by {@link MongoRepositoryBase}.
+		 * @return
+		 * @throws Exception
+		 */
+		R apply(DBCursor cursor) throws Exception;
+	}
+	
+	/**
 	 * Determines which {@link MongoClient}s will be used by this repository.
 	 * @author ceefour
 	 */
@@ -128,7 +148,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	/**
 	 * Slow query threshold in milliseconds.
 	 */
-	protected static final long LONG_QUERY_THRESHOLD = 500;
+	protected static final long SLOW_QUERY_THRESHOLD = 500;
 	/**
 	 * Usually used by {@link #beforeSave(Identifiable)} to set creationTime and modificationTime
 	 * based on default time zone.
@@ -281,22 +301,16 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 
 	@Override
 	public final Page<T> findAll(Pageable pageable) {
-		final BasicDBObject query = new BasicDBObject();
-		final long total = secondary.count(query);
+		final long total = secondary.count(new BasicDBObject());
 		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", Sort.Direction.DESC);
 		try {
-			log.debug("Find {} sort={} skip={} limit={} on {}",
-					query, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
-			final DBCursor cursor = primary.find(query)
-					.sort(sortQuery)
-					.skip((int) pageable.getOffset())
-					.limit((int) pageable.getPageSize());
-			final List<T> entities = MongoUtils
-					.transform(cursor, new DBObjectToEntity());
+			log.debug("findAll sort={} skip={} limit={} on {}",
+					sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
+			final List<T> entities = findSecondary(null, null, sortQuery, pageable.getOffset(), pageable.getPageSize(), "findAll");
 			return new PageImpl<>(entities, pageable, total);
 		} catch (Exception e) {
-			throw new MongoRepositoryException(e, "Cannot find %s sort=%s skip=%s limit=%s on %s",
-					query, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
+			throw new MongoRepositoryException(e, "Cannot findAll %s sort=%s skip=%s limit=%s on %s",
+					sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
 		}
 	}
 
@@ -394,19 +408,22 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	}
 
 	@Override
-	public final Set<String> exists(Collection<String> ids) {
+	public final Set<String> exists(final Collection<String> ids) {
 		log.debug("Checking existence of {} {}: {}", ids.size(), collName, ids);
-		try (final DBCursor cursor = primary.find(new BasicDBObject("_id", new BasicDBObject("$in", ids)), new BasicDBObject())) {
-			final Set<String> existed = ImmutableSet.copyOf(Iterables.transform(cursor, new Function<DBObject, String>() {
-				@Override @Nullable
-				public String apply(@Nullable DBObject input) {
-					return (String) input.get("_id");
-				}
-			}));
-			log.info("Found {} out of {} existing {}: {}, checked: {}",
-					existed.size(), ids.size(), collName, existed, ids);
-			return existed;
-		} 
+		return findPrimary(new BasicDBObject("_id", new BasicDBObject("$in", ids)), new BasicDBObject("_id", 1), null, 0, 0, new CursorFunction<Set<String>>() {
+			@Override
+			public Set<String> apply(DBCursor cursor) throws Exception {
+				final Set<String> existed = ImmutableSet.copyOf(Iterables.transform(cursor, new Function<DBObject, String>() {
+					@Override @Nullable
+					public String apply(@Nullable DBObject input) {
+						return (String) input.get("_id");
+					}
+				}));
+				log.info("Found {} out of {} existing {}: {}, checked: {}",
+						existed.size(), ids.size(), collName, existed, ids);
+				return existed;
+			}
+		}, "exists", ids);
 	}
 
 	/**
@@ -419,9 +436,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	public final List<T> findAll(Collection<String> ids, Sort sort) {
 		final BasicDBObject sortQuery = MongoUtils.getSort(sort, "_id", Direction.ASC);
 		log.trace("finding {} {} sort by {}: {}", ids.size(), collName, sort, Iterables.limit(ids, 10));
-		final List<T> entities = MongoUtils.transform(
-				primary.find(new BasicDBObject("_id", new BasicDBObject("$in", ids))).sort(sortQuery),
-				new DBObjectToEntity());
+		final List<T> entities = findPrimary(new BasicDBObject("$in", ids), null, sortQuery, 0, 0, "findAll", ids, sort);
 		if (ids.size() > 1 || ids.size() != entities.size()) {
 			log.debug("find {} {} by _id ({}) returned {} documents", 
 					ids.size(), collName, Iterables.limit(ids, 10), entities.size());  
@@ -449,17 +464,12 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		final BasicDBObject query = new BasicDBObject();
 		final long total = secondary.count(query);
 		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "_id", Direction.ASC);
-		final DBCursor cursor = secondary.find(query)
-				.sort(sortQuery)
-				.skip((int) pageable.getOffset())
-				.limit((int) pageable.getPageSize());
-		final List<String> entityIds = MongoUtils
-				.transform(cursor, new Function<DBObject, String>() {
-					@Override @Nullable
-					public String apply(@Nullable DBObject input) {
-						return (String) input.get("_id");
-					}
-				});
+		final List<String> entityIds = findSecondary(query, null, sortQuery, pageable.getOffset(), pageable.getPageSize(), new Function<DBObject, String>() {
+			@Override @Nullable
+			public String apply(@Nullable DBObject input) {
+				return (String) input.get("_id");
+			}
+		}, "findAllIds");
 		return new PageImpl<>(entityIds, pageable, total);
 	}
 	
@@ -476,12 +486,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		log.debug("findAllByQuery {} {} sort {} skip {} limit {}",
 				collName, query, sortQuery, pageable.getOffset(), pageable.getPageSize());
 		final long total = secondary.count(query);
-		final DBCursor cursor = secondary.find(query)
-				.sort(sortQuery)
-				.skip((int) pageable.getOffset())
-				.limit((int) pageable.getPageSize());
-		final List<T> entities = MongoUtils
-				.transform(cursor, new DBObjectToEntity());
+		final List<T> entities = findSecondary(query, null, sortQuery, pageable.getOffset(), pageable.getPageSize(), "findAllByQuery");
 		log.info("findAllByQuery {} {} returned {} out of {} documents, sort {} skip {} limit {}",
 				collName, query, entities.size(), total, sortQuery, pageable.getOffset(), pageable.getPageSize());
 		return new PageImpl<>(entities, pageable, total);		
@@ -499,7 +504,369 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	public T findOneByQuery(DBObject upQuery) {
 		final DBObject dbo = findDBObjectByQuery(upQuery, null);
 		final T entity = new DBObjectToEntity().apply(dbo);
-		return entity;		
+		return entity;
+	}
+	
+	/**
+	 * @param coll
+	 * @param query
+	 * @param fields
+	 * @param sort
+	 * @param skip
+	 * @param limit 0 means no limit.
+	 * @param func
+	 * @param methodName
+	 * @param params {@code Object[]} is used instead of {@link List} because {@link ImmutableList} does not accept {@code null} values.
+	 * @return
+	 */
+	private <R> R doFindClient(DBCollection coll, @Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
+			CursorFunction<R> func, String methodName, @Nullable Object... params) {
+		final long startTime = System.currentTimeMillis();
+		final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").join(params) : "") + ")";
+		try (DBCursor cursor = coll.find(query, fields).addSpecial("$comment", methodSignature)
+			.sort(sort).skip((int) skip).limit((int) limit)) {
+			return func.apply(cursor);
+		} catch (Exception e) {
+			throw new MongoRepositoryException(e, "Cannot find %s %s %s fields=%s sort=%s page=%s/%s for method %s: %s",
+					coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, e);
+		} finally {
+			final long duration = System.currentTimeMillis() - startTime;
+			if (duration > SLOW_QUERY_THRESHOLD) {
+				log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {} ms",
+						coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration);
+			}
+		}
+	}
+
+	/**
+	 * @param coll
+	 * @param query
+	 * @param fields
+	 * @param sort
+	 * @param skip
+	 * @param limit 0 means no limit.
+	 * @param func Must not return {@code null}!
+	 * @param methodName
+	 * @param params
+	 * @return Important: It may not contain {@code null} elements!
+	 */
+	private <R> ImmutableList<R> doFindClient(DBCollection coll, @Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
+			final Function<DBObject, R> func, String methodName, @Nullable Object... params) {
+		return doFindClient(coll, query, fields, sort, skip, limit, new CursorFunction<ImmutableList<R>>() {
+			@Override
+			public ImmutableList<R> apply(DBCursor cursor)
+						throws Exception {
+					return FluentIterable.from(cursor).transform(func).toList();
+			}
+			}, methodName, params);
+	}
+
+	/**
+	 * @param coll
+	 * @param query
+	 * @param fields
+	 * @param sort
+	 * @param skip
+	 * @param limit 0 means no limit.
+	 * @param methodName
+	 * @param params
+	 * @return Important: It may not contain {@code null} elements!
+	 */
+	private ImmutableList<T> doFindClient(DBCollection coll, @Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
+			String methodName, @Nullable Object... params) {
+		return doFindClient(coll, query, fields, sort, skip, limit, new DBObjectToEntity(), methodName, params);
+	}
+
+	/**
+	 * Runs {@link DBCollection#find(DBObject, DBObject)} with specified parameters using {@link #primary} client.
+	 * @param query
+	 * @param fields
+	 * @param sort
+	 * @param skip
+	 * @param limit 0 means no limit.
+	 * @param func
+	 * @param methodName
+	 * @param params
+	 * @return
+	 */
+	protected <R> R findPrimary(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
+			CursorFunction<R> func, String methodName, @Nullable Object... params) {
+		return doFindClient(primary, query, fields, sort, skip, limit, func, methodName, params);
+	}
+
+	/**
+	 * Runs {@link DBCollection#find(DBObject, DBObject)} with specified parameters using {@link #primary} client.
+	 * @param query
+	 * @param fields
+	 * @param sort
+	 * @param skip
+	 * @param limit 0 means no limit.
+	 * @param func
+	 * @param methodName
+	 * @param params
+	 * @return
+	 */
+	protected <R> ImmutableList<R> findPrimary(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
+			final Function<DBObject, R> func, String methodName, @Nullable Object... params) {
+		return doFindClient(primary, query, fields, sort, skip, limit, func, methodName, params);
+	}
+
+	/**
+	 * Runs {@link DBCollection#find(DBObject, DBObject)} with specified parameters using {@link #primary} client.
+	 * @param query
+	 * @param fields
+	 * @param sort
+	 * @param skip
+	 * @param limit 0 means no limit.
+	 * @param methodName
+	 * @param params
+	 * @param func
+	 * @return
+	 */
+	protected ImmutableList<T> findPrimary(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
+			String methodName, @Nullable Object... params) {
+		return doFindClient(primary, query, fields, sort, skip, limit, methodName, params);
+	}
+
+	/**
+	 * Runs {@link DBCollection#find(DBObject, DBObject)} with specified parameters using {@link #primary} client.
+	 * @param query
+	 * @param fields
+	 * @param sort
+	 * @param skip
+	 * @param limit 0 means no limit.
+	 * @param methodName
+	 * @param params
+	 * @param func
+	 * @return
+	 */
+	protected List<DBObject> findPrimaryAsDBObjects(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
+			String methodName, @Nullable Object... params) {
+		return doFindClient(primary, query, fields, sort, skip, limit,
+				new CursorFunction<List<DBObject>>() {
+					@Override
+					public List<DBObject> apply(DBCursor cursor) throws Exception {
+						return cursor.toArray();
+					}
+				}, methodName, params);
+	}
+
+	/**
+	 * Runs {@link DBCollection#find(DBObject, DBObject)} with specified parameters using {@link #secondary} client.
+	 * @param query
+	 * @param fields
+	 * @param sort
+	 * @param skip
+	 * @param limit 0 means no limit.
+	 * @param func
+	 * @param methodName
+	 * @param params
+	 * @return
+	 */
+	protected <R> R findSecondary(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
+			CursorFunction<R> func, String methodName, @Nullable Object... params) {
+		return doFindClient(secondary, query, fields, sort, skip, limit, func, methodName, params);
+	}
+
+	/**
+	 * Runs {@link DBCollection#find(DBObject, DBObject)} with specified parameters using {@link #secondary} client.
+	 * @param query
+	 * @param fields
+	 * @param sort
+	 * @param skip
+	 * @param limit 0 means no limit.
+	 * @param func
+	 * @param methodName
+	 * @param params
+	 * @return
+	 */
+	protected <R> ImmutableList<R> findSecondary(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
+			final Function<DBObject, R> func, String methodName, @Nullable Object... params) {
+		return doFindClient(secondary, query, fields, sort, skip, limit, func, methodName, params);
+	}
+
+	/**
+	 * Runs {@link DBCollection#find(DBObject, DBObject)} with specified parameters using {@link #secondary} client.
+	 * @param query
+	 * @param fields
+	 * @param sort
+	 * @param skip
+	 * @param limit 0 means no limit.
+	 * @param methodName
+	 * @param params
+	 * @param func
+	 * @return
+	 */
+	protected ImmutableList<T> findSecondary(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
+			String methodName, @Nullable Object... params) {
+		return doFindClient(secondary, query, fields, sort, skip, limit, methodName, params);
+	}
+
+	/**
+	 * Runs {@link DBCollection#find(DBObject, DBObject)} with specified parameters using {@link #secondary} client.
+	 * @param query
+	 * @param fields
+	 * @param sort
+	 * @param skip
+	 * @param limit 0 means no limit.
+	 * @param methodName
+	 * @param params
+	 * @param func
+	 * @return
+	 */
+	protected List<DBObject> findSecondaryAsDBObjects(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
+			String methodName, @Nullable Object... params) {
+		return doFindClient(secondary, query, fields, sort, skip, limit,
+				new CursorFunction<List<DBObject>>() {
+					@Override
+					public List<DBObject> apply(DBCursor cursor) throws Exception {
+						return cursor.toArray();
+					}
+				}, methodName, params);
+	}
+
+	@Nullable
+	private DBObject doFindOneClient(DBCollection coll, @Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject orderBy,
+			String methodName, @Nullable Object... params) {
+		final long startTime = System.currentTimeMillis();
+		try {
+			return coll.findOne(query, fields, orderBy);
+		} catch (Exception e) {
+			// defer methodSignature calculation until necessary to save performance
+			final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").join(params) : "") + ")";
+			throw new MongoRepositoryException(e, "Cannot findOne %s %s %s fields=%s orderBy=%s for method %s: %s",
+					coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, e);
+		} finally {
+			final long duration = System.currentTimeMillis() - startTime;
+			if (duration > SLOW_QUERY_THRESHOLD) {
+				// defer methodSignature calculation until necessary to save performance
+				final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").join(params) : "") + ")";
+				log.warn("Slow query {} {} {} fields={} sort={} page={}/{} for method {} took {} ms",
+						coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration);
+			}
+		}
+	}
+
+	/**
+	 * Runs {@link DBCollection#findOne(DBObject, DBObject, DBObject)} with specified parameters using {@link #primary} client.
+	 * @param query
+	 * @param fields
+	 * @param orderBy
+	 * @param methodName
+	 * @param params
+	 * @return
+	 */
+	@Nullable
+	protected DBObject findOnePrimary(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject orderBy,
+			String methodName, @Nullable Object... params) {
+		return doFindOneClient(primary, query, fields, orderBy, methodName, params);
+	}
+
+	/**
+	 * Runs {@link DBCollection#findOne(DBObject, DBObject, DBObject)} with specified parameters using {@link #primary} client.
+	 * @param query
+	 * @param fields
+	 * @param orderBy
+	 * @param methodName
+	 * @param params
+	 * @return
+	 */
+	@Nullable
+	protected T findOnePrimaryAsEntity(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject orderBy,
+			String methodName, @Nullable Object... params) {
+		final DBObject obj = findOnePrimary(query, fields, orderBy, methodName, params);
+		return obj != null ? new DBObjectToEntity().apply(obj) : null;
+	}
+
+	/**
+	 * Runs {@link DBCollection#findOne(DBObject, DBObject, DBObject)} with specified parameters using {@link #primary} client.
+	 * @param query
+	 * @param fields
+	 * @param methodName
+	 * @param params
+	 * @return
+	 */
+	@Nullable
+	protected DBObject findOnePrimary(@Nullable DBObject query, @Nullable DBObject fields,
+			String methodName, @Nullable Object... params) {
+		return doFindOneClient(primary, query, fields, null, methodName, params);
+	}
+
+	/**
+	 * Runs {@link DBCollection#findOne(DBObject, DBObject, DBObject)} with specified parameters using {@link #primary} client.
+	 * @param query
+	 * @param fields
+	 * @param orderBy
+	 * @param methodName
+	 * @param params
+	 * @return
+	 */
+	@Nullable
+	protected T findOnePrimaryAsEntity(@Nullable DBObject query, @Nullable DBObject fields,
+			String methodName, @Nullable Object... params) {
+		final DBObject obj = findOnePrimary(query, fields, methodName, params);
+		return obj != null ? new DBObjectToEntity().apply(obj) : null;
+	}
+
+	/**
+	 * Runs {@link DBCollection#findOne(DBObject, DBObject, DBObject)} with specified parameters using {@link #secondary} client.
+	 * @param query
+	 * @param fields
+	 * @param orderBy
+	 * @param methodName
+	 * @param params
+	 * @return
+	 */
+	@Nullable
+	protected DBObject findOneSecondary(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject orderBy,
+			String methodName, @Nullable Object... params) {
+		return doFindOneClient(secondary, query, fields, orderBy, methodName, params);
+	}
+
+	/**
+	 * Runs {@link DBCollection#findOne(DBObject, DBObject, DBObject)} with specified parameters using {@link #secondary} client.
+	 * @param query
+	 * @param fields
+	 * @param orderBy
+	 * @param methodName
+	 * @param params
+	 * @return
+	 */
+	@Nullable
+	protected T findOneSecondaryAsEntity(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject orderBy,
+			String methodName, @Nullable Object... params) {
+		final DBObject obj = findOneSecondary(query, fields, orderBy, methodName, params);
+		return obj != null ? new DBObjectToEntity().apply(obj) : null;
+	}
+
+	/**
+	 * Runs {@link DBCollection#findOne(DBObject, DBObject, DBObject)} with specified parameters using {@link #secondary} client.
+	 * @param query
+	 * @param fields
+	 * @param methodName
+	 * @param params
+	 * @return
+	 */
+	@Nullable
+	protected DBObject findOneSecondary(@Nullable DBObject query, @Nullable DBObject fields,
+			String methodName, @Nullable Object... params) {
+		return doFindOneClient(secondary, query, fields, null, methodName, params);
+	}
+
+	/**
+	 * Runs {@link DBCollection#findOne(DBObject, DBObject, DBObject)} with specified parameters using {@link #secondary} client.
+	 * @param query
+	 * @param fields
+	 * @param orderBy
+	 * @param methodName
+	 * @param params
+	 * @return
+	 */
+	@Nullable
+	protected T findOneSecondaryAsEntity(@Nullable DBObject query, @Nullable DBObject fields,
+			String methodName, @Nullable Object... params) {
+		final DBObject obj = findOneSecondary(query, fields, methodName, params);
+		return obj != null ? new DBObjectToEntity().apply(obj) : null;
 	}
 
 }
