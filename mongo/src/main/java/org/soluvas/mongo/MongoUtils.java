@@ -165,7 +165,7 @@ public class MongoUtils {
 	 */
 	@Deprecated
 	public static BasicDBObject getSort(@Nullable Sort sort, String defaultSortField, int defaultSortOrder) {
-		return getSort(sort, defaultSortField, defaultSortOrder);
+		return getSort(sort, defaultSortField, defaultSortOrder == 1 ? Direction.ASC : Direction.DESC);
 	}
 	
 	/**

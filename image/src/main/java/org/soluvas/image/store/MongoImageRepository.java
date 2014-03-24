@@ -826,7 +826,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	}
 	
 	public Page<Image> findAllWithoutExtension(Pageable pageable) {
-		final BasicDBObject sortDbo = MongoUtils.getSort(pageable.getSort(), "creationTime", 1);
+		final BasicDBObject sortDbo = MongoUtils.getSort(pageable.getSort(), "creationTime", Direction.ASC);
 		final BasicDBObject query = new BasicDBObject("extension", "");
 		final DBCursor cursor = mongoColl.find(query).sort(sortDbo)
 				.skip((int) pageable.getOffset()).limit((int) pageable.getPageSize());

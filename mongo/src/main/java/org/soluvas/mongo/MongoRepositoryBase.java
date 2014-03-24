@@ -27,6 +27,7 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
+import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
@@ -416,7 +417,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 */
 	@Override
 	public final List<T> findAll(Collection<String> ids, Sort sort) {
-		final BasicDBObject sortQuery = MongoUtils.getSort(sort, "_id", 1);
+		final BasicDBObject sortQuery = MongoUtils.getSort(sort, "_id", Direction.ASC);
 		log.trace("finding {} {} sort by {}: {}", ids.size(), collName, sort, Iterables.limit(ids, 10));
 		final List<T> entities = MongoUtils.transform(
 				primary.find(new BasicDBObject("_id", new BasicDBObject("$in", ids))).sort(sortQuery),
@@ -447,7 +448,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	public final Page<String> findAllIds(Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
 		final long total = secondary.count(query);
-		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "_id", 1);
+		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "_id", Direction.ASC);
 		final DBCursor cursor = secondary.find(query)
 				.sort(sortQuery)
 				.skip((int) pageable.getOffset())
