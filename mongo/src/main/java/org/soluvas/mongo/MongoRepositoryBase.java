@@ -522,7 +522,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	private <R> R doFindClient(DBCollection coll, @Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
 			CursorFunction<R> func, String methodName, @Nullable Object... params) {
 		final long startTime = System.currentTimeMillis();
-		final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").join(params) : "") + ")";
+		log.debug("Params: {}", params);
+		final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").skipNulls().join(params) : "") + ")";
 		try (DBCursor cursor = coll.find(query, fields).addSpecial("$comment", methodSignature)
 			.sort(sort).skip((int) skip).limit((int) limit)) {
 			return func.apply(cursor);
