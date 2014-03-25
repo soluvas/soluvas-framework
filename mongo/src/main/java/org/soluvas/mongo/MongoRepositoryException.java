@@ -4,8 +4,9 @@ package org.soluvas.mongo;
  * @author adri
  *
  */
-@SuppressWarnings("serial")
 public class MongoRepositoryException extends RuntimeException {
+
+	private static final long serialVersionUID = 1L;
 
 	public MongoRepositoryException() {
 		super();

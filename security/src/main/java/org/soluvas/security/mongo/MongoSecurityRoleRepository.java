@@ -17,12 +17,12 @@ import com.google.common.collect.ImmutableMap;
 public class MongoSecurityRoleRepository extends MongoRepositoryBase<Role>
 		implements PagingAndSortingRepository<Role, String> {
 
-	public MongoSecurityRoleRepository(String mongoUri, boolean migrationEnabled) {
+	public MongoSecurityRoleRepository(String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
 		super(Role.class, RoleImpl.class, RoleImpl.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL, "securityRole",
 				ImmutableList.<String>of(), ImmutableMap.of(
 						"creationTime", -1,
 						"modificationTime", -1),
-						migrationEnabled);
+						migrationEnabled, autoExplainSlow);
 	}
 	
 	@Override

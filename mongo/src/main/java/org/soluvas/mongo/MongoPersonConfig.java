@@ -50,12 +50,13 @@ public class MongoPersonConfig implements PersonConfig {
 	@Bean(destroyMethod="destroy")
 	public TenantBeanRepository<PersonRepository> personRepoBeanRepo() {
 		final boolean mongoMigrationEnabled = env.getProperty("mongoMigrationEnabled", Boolean.class, true);
+		final boolean mongoAutoExplainSlow = env.getProperty("mongoAutoExplainSlow", Boolean.class, false);
 		return new TenantBeanRepository<PersonRepository>(MongoPersonRepository.class, tenantConfig.tenantMap(), appEventBus, tenantRepo) {
 			@Override
 			protected MongoPersonRepository create(String tenantId, AppManifest appManifest) throws Exception {
 				final EObject sysConfig = sysConfigMapHolder.sysConfigMap().get(tenantId);
 				final String mongoUri = (String) PropertyUtils.getProperty(sysConfig, "mongoUri");
-				final MongoPersonRepository personRepo = new MongoPersonRepository(mongoUri, mongoMigrationEnabled);
+				final MongoPersonRepository personRepo = new MongoPersonRepository(mongoUri, mongoMigrationEnabled, mongoAutoExplainSlow);
 				return personRepo;
 			}
 		};

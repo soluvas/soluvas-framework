@@ -140,6 +140,11 @@ public class MongoUtils {
 		}
 	}
 	
+	/**
+	 * Gets the MongoDB sort {@link BasicDBObject} without specifying default sort.
+	 * @param sort
+	 * @return
+	 */
 	public static BasicDBObject getSort(@Nullable Sort sort) {
 		final BasicDBObject sortObj = new BasicDBObject();
 		if (sort != null) {
@@ -151,16 +156,30 @@ public class MongoUtils {
 	}
 	
 	/**
+	 * Gets the MongoDB sort {@link BasicDBObject} with specifying default sort.
+	 * @param sort
+	 * @param defaultSortField Default sort field, used only if {@code sort} is {@code null}.
+	 * @param defaultSortOrder Default sort order, used only if {@code sort} is {@code null}.
+	 * @return
+	 * @deprecated Use {@link #getSort(Sort, String, Direction)}.
+	 */
+	@Deprecated
+	public static BasicDBObject getSort(@Nullable Sort sort, String defaultSortField, int defaultSortOrder) {
+		return getSort(sort, defaultSortField, defaultSortOrder == 1 ? Direction.ASC : Direction.DESC);
+	}
+	
+	/**
+	 * Gets the MongoDB sort {@link BasicDBObject} with specifying default sort.
 	 * @param sort
 	 * @param defaultSortField Default sort field, used only if {@code sort} is {@code null}.
 	 * @param defaultSortOrder Default sort order, used only if {@code sort} is {@code null}.
 	 * @return
 	 */
-	public static BasicDBObject getSort(@Nullable Sort sort, String defaultSortField, int defaultSortOrder) {
+	public static BasicDBObject getSort(@Nullable Sort sort, String defaultSortField, Sort.Direction defaultSortOrder) {
 		if (sort != null) {
 			return getSort(sort);
 		} else {
-			return new BasicDBObject(defaultSortField, defaultSortOrder);
+			return new BasicDBObject(defaultSortField, defaultSortOrder == Direction.ASC ? 1 : -1);
 		}
 	}
 	
@@ -206,8 +225,39 @@ public class MongoUtils {
 	 * MongoUtils.ensureIndexes(primary, ImmutableMap.of("creationTime", -1, "modificationTime", -1);
 	 * }</pre>
 	 * @return 
-	 * @return Ensured index names (including existing ones).
+	 * @return Ensured index names (including existing ones). A single index is named e.g. {@code creationTime_-1},
+	 * 		a compound index is named e.g. {@code emails.email_1_accountStatus_1}.
 	 */
+	public static ImmutableList<String> ensureIndexes(DBCollection coll, final Index...indexes) {
+		final ImmutableList.Builder<String> ensuredNames = ImmutableList.builder();
+		log.debug("Ensuring collection {} has {} indexes: {}", 
+				coll.getName(), indexes.length, indexes);
+		for (final Index index : indexes) {
+			final DBObject indexObj = index.getIndexObj();
+			String indexName = "";
+			for (final String key : indexObj.keySet()) {
+				if (!indexName.isEmpty()) {
+					indexName += "_";
+				}
+				indexName += key + "_" + indexObj.get(key);
+			}
+			coll.ensureIndex(indexObj, indexName);
+			ensuredNames.add(indexName);
+		}
+		return ensuredNames.build();
+	}
+	
+	/**
+	 * Ensure indexes on MongoDB collection, with logging.
+	 * <p>Usage:
+	 * <pre>{@literal
+	 * MongoUtils.ensureIndexes(primary, ImmutableMap.of("creationTime", -1, "modificationTime", -1);
+	 * }</pre>
+	 * @return 
+	 * @return Ensured index names (including existing ones). A single index is named e.g. {@code creationTime_-1},
+	 * 		a compound index is named e.g. {@code emails.email_1_accountStatus_1}.
+	 */
+	@Deprecated
 	public static List<String> ensureIndexes(DBCollection coll, 
 			final Map<String, Integer> fields) {
 		final List<String> ensuredNames = new ArrayList<>();

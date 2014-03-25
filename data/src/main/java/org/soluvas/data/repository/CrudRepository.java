@@ -61,7 +61,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	/**
 	 * Adds all given entities.
 	 * 
-	 * @param entities
+	 * @param entities It may be {@link Collection#isEmpty()}, part of the reason is because {@link PagingAndSortingRepositoryBase#save(Collection)} expects it that way.
 	 * @return the saved entities
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */
@@ -79,7 +79,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	/**
 	 * Modifies the given entities. Some repositories may allow modifying the {@code id} attribute.
 	 * 
-	 * @param entities
+	 * @param entities It may be {@link Map#isEmpty()}, part of the reason is because {@link PagingAndSortingRepositoryBase#save(Collection)} expects it that way
 	 * @return the modified entities
 	 * @throws IllegalArgumentException in case the given entity is (@literal null}.
 	 */

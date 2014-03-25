@@ -31,7 +31,11 @@ import com.google.common.collect.Maps;
  * {@link CrudRepository} base implementation that needs only the core
  * methods to override. For new implementations please use {@link StatusAwareRepositoryBase} instead,
  * even if you don't store status in your entity, API consumers still expect {@link StatusMask} support.
+ * 
  * <p><strong>Tip:</strong> It's better if you extend {@link StatusAwareRepositoryBase} instead.
+ * 
+ * <p><strong>Important:</strong> Do not remove the @{@link Transactional} annotations because they're
+ * 	used by JpaRepositoryBase.
  * @author ceefour
  */
 public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable> implements PagingAndSortingRepository<T, ID> {
@@ -105,6 +109,11 @@ public abstract class PagingAndSortingRepositoryBase<T, ID extends Serializable>
 		return save(ImmutableList.of(entity)).iterator().next();
 	}
 	
+	/**
+	 * The {@code entities} will be split between documents to {@link #modify(Map)}
+	 * and documents to {@link #add(Collection)}.
+	 * @see org.soluvas.data.repository.CrudRepository#save(java.util.Collection)
+	 */
 	@Override @Transactional
 	public final <S extends T> Collection<S> save(Collection<S> entities) {
 		final Collection<ID> ids = Collections2.filter(
