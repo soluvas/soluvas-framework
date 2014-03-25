@@ -170,8 +170,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * @param indexedFields
 	 */
 	public MongoRepositoryBase(Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
-			String mongoUri, ReadPattern readPattern, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields,
-			boolean migrationEnabled) {
+			String mongoUri, ReadPattern readPattern, String collName, List<String> uniqueFields, boolean migrationEnabled,
+			Index... indexes) {
 		super();
 		this.entityClass = intfClass;
 		this.implClass = implClass;
@@ -244,8 +244,31 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		if (uniqueFields != null) {
 			ensuredIndexes.addAll( MongoUtils.ensureUnique(primary, uniqueFields.toArray(new String[] {})) );
 		}
-		ensuredIndexes.addAll( MongoUtils.ensureIndexes(primary, indexedFields) );
+		ensuredIndexes.addAll( MongoUtils.ensureIndexes(primary, indexes) );
 		MongoUtils.retainIndexes(primary, ensuredIndexes.toArray(new String[] {}));
+	}
+	
+	private static Index[] indexedFieldMapToIndexes(Map<String, Integer> indexedFields) {
+		final List<Index> indexes = new ArrayList<>();
+		for (final Map.Entry<String, Integer> indexedField : indexedFields.entrySet()) {
+			indexes.add(indexedField.getValue() == 1 ? Index.asc(indexedField.getKey()) : Index.desc(indexedField.getKey()));
+		}
+		return indexes.toArray(new Index[] {});
+	}
+
+	/**
+	 * @param intfClass
+	 * @param currentSchemaVersion e.g. {@link PersonImpl#CURRENT_SCHEMA_VERSION}.
+	 * @param mongoUri
+	 * @param collName
+	 * @param indexedFields
+	 */
+	@Deprecated
+	public MongoRepositoryBase(Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
+			String mongoUri, ReadPattern readPattern, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields,
+			boolean migrationEnabled) {
+		this(intfClass, implClass, currentSchemaVersion, mongoUri, readPattern, collName, uniqueFields, migrationEnabled,
+				indexedFieldMapToIndexes(indexedFields));
 	}
 
 	@Deprecated
@@ -337,6 +360,10 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 */
 	@Override
 	public <S extends T> Collection<S> add(Collection<S> entities) {
+		if (entities.isEmpty()) {
+			log.debug("Not adding empty list of {} documents", collName);
+			return ImmutableList.of();
+		}
 		beforeSave(entities);
 		final Collection<String> transformedAsIds = Collections2.transform(entities, new IdFunction());
 		final List<String> ids;
@@ -352,6 +379,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 					.transform(entities, new EntityToDBObject()));
 			dbObjsStr = dbObjs.toString();
 			final WriteResult writeResult = primary.insert(dbObjs);
+//			log.debug("writeResult: {}", writeResult);
 			if (writeResult.getLastError() != null
 					&& writeResult.getLastError().getException() != null) {
 				throw new MongoRepositoryException(writeResult.getLastError()
@@ -390,6 +418,10 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 
 	@Override
 	public <S extends T> Collection<S> modify(Map<String, S> entities) {
+		if (entities.isEmpty()) {
+			log.debug("Not modifying empty list of {} documents", collName);
+			return ImmutableList.of();
+		}
 		log.debug("Modifying {} {} documents: {}", entities.size(), collName, entities.keySet());
 		final List<S> modifieds = new ArrayList<>();
 		for (final Entry<String, S> entry : entities.entrySet()) {
@@ -524,7 +556,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	private <R> R doFindClient(DBCollection coll, @Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
 			CursorFunction<R> func, String methodName, @Nullable Object... params) {
 		final long startTime = System.currentTimeMillis();
-		log.debug("Params: {}", params);
+//		log.debug("Params: {}", params);
 		final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").skipNulls().join(params) : "") + ")";
 		try (final DBCursor cursor = coll.find(query, fields).addSpecial("$comment", methodSignature)
 			.sort(sort).skip((int) skip).limit((int) limit)) {

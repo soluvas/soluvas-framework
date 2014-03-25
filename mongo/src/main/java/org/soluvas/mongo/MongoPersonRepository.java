@@ -62,7 +62,19 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	
 	public MongoPersonRepository(String mongoUri, boolean migrationEnabled) {
 		super(Person.class, PersonImpl.class, PersonImpl.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL, "person",
-				ImmutableList.of("canonicalSlug"), indexMap, migrationEnabled);
+				ImmutableList.of("canonicalSlug"), migrationEnabled,
+				Index.asc("name"), // for sorting in list
+				Index.desc("creationTime"),
+				Index.desc("modificationTime"),
+				Index.asc("securityRoleIds"),
+				Index.asc("customerRole"),
+				Index.asc("memberRole"),
+				Index.asc("managerRole"),
+				// used by MongoRealm#doGetAuthenticationInfo()
+				Index.compound("_id", Direction.ASC, "accountStatus", Direction.ASC),
+				Index.compound("canonicalSlug", Direction.ASC, "accountStatus", Direction.ASC),
+				Index.compound("emails.email", Direction.ASC, "accountStatus", Direction.ASC)
+			);
 	}
 
 	@Override

@@ -142,6 +142,7 @@ public class MongoRealm extends AuthorizingRealm {
 			final String tokenPrincipal = ((UsernamePasswordToken) token).getUsername();
 			final String canonicalSlug = SlugUtils.canonicalize(tokenPrincipal);
 			final String normalizedEmail = NameUtils.normalizeEmail(tokenPrincipal);
+			// This requires 3 compound indexes in MongoRepositoryBase
 			final BasicDBObject query = new BasicDBObject("$or", new DBObject[] {
 				new BasicDBObject("_id", tokenPrincipal),
 				new BasicDBObject("canonicalSlug", canonicalSlug),
