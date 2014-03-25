@@ -76,7 +76,7 @@
 
 	<properties>
 		<karaf.version>2.3.1</karaf.version>
-		<spring.version>3.2.6.RELEASE</spring.version>
+		<spring.version>3.2.8.RELEASE</spring.version>
 		<jersey.version>1.17.1</jersey.version>
 
 		<shiro.version>1.2.2</shiro.version>
