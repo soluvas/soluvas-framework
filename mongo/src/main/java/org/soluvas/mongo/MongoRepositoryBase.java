@@ -157,7 +157,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	/**
 	 * Slow query threshold in milliseconds.
 	 */
-	protected static final long SLOW_QUERY_THRESHOLD = 400;
+	protected static final long SLOW_QUERY_THRESHOLD = 500;
 	/**
 	 * Usually used by {@link #beforeSave(Identifiable)} to set creationTime and modificationTime
 	 * based on default time zone.
@@ -607,11 +607,13 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				if (autoExplainSlow) {
 					final DBObject explain = coll.find(query, fields).addSpecial("$comment", methodSignature)
 						.sort(sort).skip((int) skip).limit((int) limit).explain();
-					final int nscanned = (int) explain.get("nscanned");
+					final int n = (int) explain.get("n");
+					final int nscanned = (int) explain.get("nscannedAllPlans");
+					final int efficiency = n * 100 / nscanned;
 					final int millis = (int) explain.get("millis");
-					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {}ms (DB scanned {} for {}ms). db.{}.find({}, {}).sort({}).skip({}).limit({}).explain() >> {}",
+					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).skip({}).limit({}).explain() >> {}",
 							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration,
-							nscanned, millis, collName, JSON.serialize(query), JSON.serialize(fields), JSON.serialize(sort), skip, limit, explain);
+							nscanned, n, millis, efficiency, collName, JSON.serialize(query), JSON.serialize(fields), JSON.serialize(sort), skip, limit, explain);
 				} else {
 					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {}ms",
 							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration);

@@ -14,6 +14,17 @@
 	
 	<dependencies>
 		<dependency>
+		    <groupId>net.sf.ehcache</groupId>
+		    <artifactId>ehcache</artifactId>
+		    <optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
 		    <groupId>com.codahale.metrics</groupId>
 		    <artifactId>metrics-core</artifactId>
 		</dependency>
