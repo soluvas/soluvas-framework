@@ -609,7 +609,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 						.sort(sort).skip((int) skip).limit((int) limit).explain();
 					final int n = (int) explain.get("n");
 					final int nscanned = (int) explain.get("nscannedAllPlans");
-					final int efficiency = n * 100 / nscanned;
+					final int efficiency = nscanned > 0 ? n * 100 / nscanned : 100;
 					final int millis = (int) explain.get("millis");
 					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).skip({}).limit({}).explain() >> {}",
 							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration,
@@ -828,11 +828,15 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				if (autoExplainSlow) {
 					final DBObject explain = coll.find(query, fields).addSpecial("$comment", methodSignature)
 						.sort(orderBy).limit(1).explain();
-					log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {} ms: {}. db.{}.find({}, {}).sort({}).limit(1).explain() >> {}",
+					final int n = (int) explain.get("n");
+					final int nscanned = (int) explain.get("nscannedAllPlans");
+					final int efficiency = nscanned > 0 ? n * 100 / nscanned : 100;
+					final int millis = (int) explain.get("millis");
+					log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).limit(1).explain() >> {}",
 							coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration, 
-							collName, query, fields, orderBy, explain);
+							nscanned, n, millis, efficiency, collName, query, fields, orderBy, explain);
 				} else {
-					log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {} ms",
+					log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {}ms",
 							coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration);
 				}
 			}
