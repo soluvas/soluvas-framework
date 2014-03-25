@@ -5,6 +5,7 @@ package org.soluvas.mongo;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
@@ -101,6 +102,16 @@ public class MongoPersonRepositoryTest {
 		final String searchText = "emiral_diana_15382";
 		final List<Person> people = personRepo.findBySearchText(ImmutableList.of(AccountStatus.ACTIVE, AccountStatus.VERIFIED), searchText, new CappedRequest(10)).getContent();
 		assertEquals(1, people.size());
+	}
+	
+	@Test
+	public void findOne() {
+		final String personId = "atang";
+		final Person person = personRepo.findOne(personId);
+		assertNull("Person tidak boleh kosong", person);
+		log.debug("result findone person {}", person);
+//		assertNull("Rules must be not null", person.getCustomerRole());
+		
 	}
 	
 }

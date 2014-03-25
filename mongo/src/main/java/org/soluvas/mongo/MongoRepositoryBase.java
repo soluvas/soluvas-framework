@@ -436,7 +436,9 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	public final List<T> findAll(Collection<String> ids, Sort sort) {
 		final BasicDBObject sortQuery = MongoUtils.getSort(sort, "_id", Direction.ASC);
 		log.trace("finding {} {} sort by {}: {}", ids.size(), collName, sort, Iterables.limit(ids, 10));
-		final List<T> entities = findPrimary(new BasicDBObject("$in", ids), null, sortQuery, 0, 0, "findAll", ids, sort);
+//		final List<T> entities = findPrimary(new BasicDBObject("$in", ids), null, sortQuery, 0, 0, "findAll", ids, sort);
+		final BasicDBObject idsQuery = new BasicDBObject("_id", new BasicDBObject("$in", ids));
+		final List<T> entities = findPrimary(idsQuery, null, sortQuery, 0, 0, "findAll", ids, sort);
 		if (ids.size() > 1 || ids.size() != entities.size()) {
 			log.debug("find {} {} by _id ({}) returned {} documents", 
 					ids.size(), collName, Iterables.limit(ids, 10), entities.size());  
@@ -524,8 +526,9 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		final long startTime = System.currentTimeMillis();
 		log.debug("Params: {}", params);
 		final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").skipNulls().join(params) : "") + ")";
-		try (DBCursor cursor = coll.find(query, fields).addSpecial("$comment", methodSignature)
+		try (final DBCursor cursor = coll.find(query, fields).addSpecial("$comment", methodSignature)
 			.sort(sort).skip((int) skip).limit((int) limit)) {
+			log.debug("Cursor: {}", cursor);
 			return func.apply(cursor);
 		} catch (Exception e) {
 			throw new MongoRepositoryException(e, "Cannot find %s %s %s fields=%s sort=%s page=%s/%s for method %s: %s",
