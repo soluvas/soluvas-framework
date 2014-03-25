@@ -369,17 +369,17 @@
 			<dependency>
 			    <groupId>org.hibernate</groupId>
 			    <artifactId>hibernate-entitymanager</artifactId>
-			    <version>4.2.10.Final</version>
+			    <version>4.2.11.Final</version>
 			</dependency>
 			<dependency>
 			    <groupId>org.hibernate</groupId>
 			    <artifactId>hibernate-core</artifactId>
-			    <version>4.2.10.Final</version>
+			    <version>4.2.11.Final</version>
 			</dependency>
 			<dependency>
 			    <groupId>org.hibernate</groupId>
 			    <artifactId>hibernate-c3p0</artifactId>
-			    <version>4.2.10.Final</version>
+			    <version>4.2.11.Final</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.emf</groupId>
