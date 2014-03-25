@@ -40,7 +40,7 @@ public class PersonStoryRepositoryTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		personStoryRepo = new MongoStoryRepository("mongodb://127.0.0.1:27017/berbatik_dev", "person");
+		personStoryRepo = new MongoStoryRepository("mongodb://127.0.0.1:27017/berbatik_dev", "person", false);
 	}
 
 	/**
