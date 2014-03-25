@@ -142,7 +142,15 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 
 	public static final String SCHEMA_VERSION_FIELD = "schemaVersion";
 	protected final Logger log;
+	/**
+	 * Please use the {@code protected} {@link MongoRepositoryBase} methods.
+	 */
+	@Deprecated
 	protected final DBCollection primary;
+	/**
+	 * Please use the {@code protected} {@link MongoRepositoryBase} methods.
+	 */
+	@Deprecated
 	protected final DBCollection secondary;
 	protected Morphia morphia;
 	/**
@@ -160,7 +168,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	protected final Class<? extends T> implClass;
 	protected long currentSchemaVersion;
 	protected final String mongoUri;
-	protected boolean migrationEnabled = true;
+	protected final boolean migrationEnabled;
+	protected final boolean autoExplainSlow;
 
 	/**
 	 * @param intfClass
@@ -170,7 +179,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * @param indexedFields
 	 */
 	public MongoRepositoryBase(Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
-			String mongoUri, ReadPattern readPattern, String collName, List<String> uniqueFields, boolean migrationEnabled,
+			String mongoUri, ReadPattern readPattern, String collName, List<String> uniqueFields, boolean migrationEnabled, boolean autoExplainSlow,
 			Index... indexes) {
 		super();
 		this.entityClass = intfClass;
@@ -179,6 +188,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		this.mongoUri = mongoUri;
 		this.collName = collName;
 		this.migrationEnabled = migrationEnabled;
+		this.autoExplainSlow = autoExplainSlow;
 		// WARNING: mongoUri may contain password!
 		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
 		this.log = LoggerFactory.getLogger(getClass().getName() + "/" + realMongoUri.getDatabase() + "/" + collName + "/" + currentSchemaVersion);
@@ -267,7 +277,22 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	public MongoRepositoryBase(Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
 			String mongoUri, ReadPattern readPattern, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields,
 			boolean migrationEnabled) {
-		this(intfClass, implClass, currentSchemaVersion, mongoUri, readPattern, collName, uniqueFields, migrationEnabled,
+		this(intfClass, implClass, currentSchemaVersion, mongoUri, readPattern, collName, uniqueFields, migrationEnabled, false,
+				indexedFieldMapToIndexes(indexedFields));
+	}
+
+	/**
+	 * @param intfClass
+	 * @param currentSchemaVersion e.g. {@link PersonImpl#CURRENT_SCHEMA_VERSION}.
+	 * @param mongoUri
+	 * @param collName
+	 * @param indexedFields
+	 */
+	@Deprecated
+	public MongoRepositoryBase(Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
+			String mongoUri, ReadPattern readPattern, String collName, List<String> uniqueFields, Map<String, Integer> indexedFields,
+			boolean migrationEnabled, boolean autoExplainSlow) {
+		this(intfClass, implClass, currentSchemaVersion, mongoUri, readPattern, collName, uniqueFields, migrationEnabled, autoExplainSlow,
 				indexedFieldMapToIndexes(indexedFields));
 	}
 
@@ -279,6 +304,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		this.currentSchemaVersion = 1L;
 		this.mongoUri = mongoUri;
 		this.collName = collName;
+		this.migrationEnabled = true;
+		this.autoExplainSlow = false;
 		// WARNING: mongoUri may contain password!
 		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
 		this.log = LoggerFactory.getLogger(getClass().getName() + "/" + realMongoUri.getDatabase() + "/" + collName);
@@ -308,6 +335,14 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		return migrationEnabled;
 	}
 	
+	/**
+	 * Automatically {@link DBCursor#explain()}s slow queries.
+	 * @return
+	 */
+	public boolean isAutoExplainSlow() {
+		return autoExplainSlow;
+	}
+
 	/**
 	 * Called by constructor after connection and authentication but 
 	 * before calling {@link MongoUtils#ensureUnique(DBCollection, String...)} and {@link MongoUtils#ensureIndexes(DBCollection, Map)}.
@@ -568,8 +603,15 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		} finally {
 			final long duration = System.currentTimeMillis() - startTime;
 			if (duration > SLOW_QUERY_THRESHOLD) {
-				log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {} ms",
-						coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration);
+				if (autoExplainSlow) {
+					final DBObject explain = coll.find(query, fields).addSpecial("$comment", methodSignature)
+						.sort(sort).skip((int) skip).limit((int) limit).explain();
+					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {} ms: {}",
+							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration, explain);
+				} else {
+					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {} ms",
+							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration);
+				}
 			}
 		}
 	}
@@ -777,8 +819,15 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			if (duration > SLOW_QUERY_THRESHOLD) {
 				// defer methodSignature calculation until necessary to save performance
 				final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").join(params) : "") + ")";
-				log.warn("Slow query {} {} {} fields={} sort={} page={}/{} for method {} took {} ms",
-						coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration);
+				if (autoExplainSlow) {
+					final DBObject explain = coll.find(query, fields).addSpecial("$comment", methodSignature)
+						.sort(orderBy).limit(1).explain();
+					log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {} ms: {}",
+							coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration, explain);
+				} else {
+					log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {} ms",
+							coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration);
+				}
 			}
 		}
 	}

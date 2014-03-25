@@ -60,9 +60,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		indexMap = indexMab.build();
 	}
 	
-	public MongoPersonRepository(String mongoUri, boolean migrationEnabled) {
+	public MongoPersonRepository(String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
 		super(Person.class, PersonImpl.class, PersonImpl.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL, "person",
-				ImmutableList.of("canonicalSlug"), migrationEnabled,
+				ImmutableList.of("canonicalSlug"), migrationEnabled, autoExplainSlow,
 				Index.asc("name"), // for sorting in list
 				Index.desc("creationTime"),
 				Index.desc("modificationTime"),

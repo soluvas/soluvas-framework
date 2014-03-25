@@ -59,9 +59,9 @@ public class MongoStoryRepository extends MongoRepositoryBase<Story>
 		
 	}
 	
-	public MongoStoryRepository(String mongoUri, String namespace, boolean migrationEnabled) {
+	public MongoStoryRepository(String mongoUri, String namespace, boolean migrationEnabled, boolean autoExplainSlow) {
 		super(Story.class, StoryImpl.class, StoryImpl.SCHEMA_VERSION_EDEFAULT, mongoUri, ReadPattern.PRIMARY_PREFERRED,
-				namespace + "Story", null, IndexMap.getIndexMap(), migrationEnabled);
+				namespace + "Story", null, IndexMap.getIndexMap(), migrationEnabled, autoExplainSlow);
 		this.namespace = namespace;
 	}
 	
