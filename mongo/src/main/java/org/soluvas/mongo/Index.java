@@ -12,7 +12,7 @@ import com.mongodb.DBObject;
  * Used by {@link MongoRepositoryBase} and {@link MongoUtils} to define MongoDB indexes conveniently.
  * @author rudi
  */
-class Index {
+public class Index {
 	
 	private final DBObject indexObj;
 	

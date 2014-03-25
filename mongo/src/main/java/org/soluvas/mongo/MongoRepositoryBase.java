@@ -52,6 +52,7 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
 import com.mongodb.ReadPreference;
 import com.mongodb.WriteResult;
+import com.mongodb.util.JSON;
 
 /**
  * {@link PagingAndSortingRepository} implemented using MongoDB, with {@link SchemaVersionable} support.
@@ -156,7 +157,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	/**
 	 * Slow query threshold in milliseconds.
 	 */
-	protected static final long SLOW_QUERY_THRESHOLD = 500;
+	protected static final long SLOW_QUERY_THRESHOLD = 400;
 	/**
 	 * Usually used by {@link #beforeSave(Identifiable)} to set creationTime and modificationTime
 	 * based on default time zone.
@@ -606,10 +607,13 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				if (autoExplainSlow) {
 					final DBObject explain = coll.find(query, fields).addSpecial("$comment", methodSignature)
 						.sort(sort).skip((int) skip).limit((int) limit).explain();
-					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {} ms: {}",
-							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration, explain);
+					final int nscanned = (int) explain.get("nscanned");
+					final int millis = (int) explain.get("millis");
+					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {}ms (DB scanned {} for {}ms). db.{}.find({}, {}).sort({}).skip({}).limit({}).explain() >> {}",
+							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration,
+							nscanned, millis, collName, JSON.serialize(query), JSON.serialize(fields), JSON.serialize(sort), skip, limit, explain);
 				} else {
-					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {} ms",
+					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {}ms",
 							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration);
 				}
 			}
@@ -822,8 +826,9 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				if (autoExplainSlow) {
 					final DBObject explain = coll.find(query, fields).addSpecial("$comment", methodSignature)
 						.sort(orderBy).limit(1).explain();
-					log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {} ms: {}",
-							coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration, explain);
+					log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {} ms: {}. db.{}.find({}, {}).sort({}).limit(1).explain() >> {}",
+							coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration, 
+							collName, query, fields, orderBy, explain);
 				} else {
 					log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {} ms",
 							coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration);
