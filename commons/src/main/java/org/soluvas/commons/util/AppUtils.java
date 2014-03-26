@@ -1,6 +1,5 @@
 package org.soluvas.commons.util;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -15,6 +14,8 @@ import com.damnhandy.uri.template.MalformedUriTemplateException;
 import com.damnhandy.uri.template.UriTemplate;
 import com.damnhandy.uri.template.VariableExpansionException;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
@@ -58,18 +59,27 @@ public class AppUtils {
 	 * 
 	 * <pre>{@literal
 	 * @Bean(destroyMethod="shutdown") @Cpu
-	 * public ExecutorService cpuExecutor() {
+	 * public ListeningExecutorService cpuExecutor() {
 	 * 	return AppUtils.newCpuExecutor();
 	 * }
 	 * </pre>
 	 * 
 	 * @return
 	 */
-	public static ExecutorService newCpuExecutor() {
+	public static ListeningExecutorService newCpuExecutor() {
 		final int cpuExecutorThreads = Runtime.getRuntime().availableProcessors();
 		log.info("Creating {} CPU executors", cpuExecutorThreads);
 		final ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("CPU-%02d").build();
-		return Executors.newFixedThreadPool(cpuExecutorThreads, threadFactory);
+		final ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(cpuExecutorThreads, threadFactory));
+		// dummy jobs to ensure the threads are actually created (MDC workaround?)
+		for (int i = 0; i < cpuExecutorThreads; i++) {
+			executor.submit(new Runnable() {
+				@Override
+				public void run() {
+				}
+			});
+		}
+		return executor;
 	}
 
 	/**
@@ -79,17 +89,26 @@ public class AppUtils {
 	 * 
 	 * <pre>{@literal
 	 * @Bean(destroyMethod="shutdown") @Network
-	 * public ExecutorService networkExecutor() {
+	 * public ListeningExecutorService networkExecutor() {
 	 * 	return AppUtils.newNetworkExecutor();
 	 * }
 	 * </pre>
 	 * 
 	 * @return
 	 */
-	public static ExecutorService newNetworkExecutor() {
+	public static ListeningExecutorService newNetworkExecutor() {
 		log.info("Creating {} Network executors", NETWORK_EXECUTOR_THREADS);
 		final ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("Net-%02d").build();
-		return Executors.newFixedThreadPool(NETWORK_EXECUTOR_THREADS, threadFactory);
+		final ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(NETWORK_EXECUTOR_THREADS, threadFactory));
+		// dummy jobs to ensure the threads are actually created (MDC workaround?)
+		for (int i = 0; i < NETWORK_EXECUTOR_THREADS; i++) {
+			executor.submit(new Runnable() {
+				@Override
+				public void run() {
+				}
+			});
+		}
+		return executor;
 	}
 
 }
