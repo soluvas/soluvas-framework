@@ -34,7 +34,6 @@ import scala.util.Try;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -46,20 +45,6 @@ import com.mongodb.DBObject;
 public class MongoPersonRepository extends MongoRepositoryBase<Person> implements
 		PersonRepository {
 	
-	private static ImmutableMap<String, Integer> indexMap;
-
-	static {
-		final ImmutableMap.Builder<String, Integer> indexMab = ImmutableMap.builder();
-		indexMab.put("name", 1); // for sorting in list
-		indexMab.put("creationTime", -1);
-		indexMab.put("modificationTime", -1);
-		indexMab.put("securityRoleIds", 1);
-		indexMab.put("customerRole", 1);
-		indexMab.put("memberRole", 1);
-		indexMab.put("managerRole", 1);
-		indexMap = indexMab.build();
-	}
-	
 	public MongoPersonRepository(String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
 		super(Person.class, PersonImpl.class, PersonImpl.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL, "person",
 				ImmutableList.of("canonicalSlug"), migrationEnabled, autoExplainSlow,
@@ -70,6 +55,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 				Index.asc("customerRole"),
 				Index.asc("memberRole"),
 				Index.asc("managerRole"),
+				Index.asc("facebookId"),
 				// used by MongoRealm#doGetAuthenticationInfo()
 				Index.compound("_id", Direction.ASC, "accountStatus", Direction.ASC),
 				Index.compound("canonicalSlug", Direction.ASC, "accountStatus", Direction.ASC),

@@ -7,6 +7,8 @@ import java.util.Map;
 import com.google.common.collect.ImmutableList;
 
 /**
+ * FIXME: Move to xmi file for each tenant.
+ * 
  * Holds valid {@link SocialPerson#getCustomerRole()} values.
  * @author rudi
  */
@@ -21,6 +23,12 @@ public class CustomerRoles {
 	public static final String DROP_SHIP = "drops";
 	
 	public static final String MEMBER = "member";
+	
+	
+	//GERA
+	public static final String AGENT_RAZHA = "agent_razha";
+	
+	public static final String DISTRIBUTOR_RAZHA = "distributor_razha";
 	
 	/**
 	 * Agen Spesial / Besar. 
@@ -40,5 +48,7 @@ public class CustomerRoles {
 		DISPLAY_NAMES.put(DROP_SHIP, "Drop Ship");
 		DISPLAY_NAMES.put(MEMBER, "Member");
 		DISPLAY_NAMES.put(SPECIAL_AGENT, "Agen Besar"); // Agen Besar
+		DISPLAY_NAMES.put(AGENT_RAZHA, "Agen RaZha");
+		DISPLAY_NAMES.put(DISTRIBUTOR_RAZHA, "Disributor RaZha");
 	}
 }
