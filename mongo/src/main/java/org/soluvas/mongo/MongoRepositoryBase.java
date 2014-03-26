@@ -594,7 +594,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		final long startTime = System.currentTimeMillis();
 //		log.debug("Params: {}", params);
 		final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").skipNulls().join(params) : "") + ")";
-		try (final DBCursor cursor = coll.find(query, fields).addSpecial("$comment", methodSignature)
+		try (final DBCursor cursor = coll.find(query, fields).addSpecial("$comment", Thread.currentThread().getName() + ": " + methodSignature)
 			.sort(sort).skip((int) skip).limit((int) limit)) {
 			log.debug("Cursor: {}", cursor);
 			return func.apply(cursor);
@@ -605,7 +605,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			final long duration = System.currentTimeMillis() - startTime;
 			if (duration > SLOW_QUERY_THRESHOLD) {
 				if (autoExplainSlow) {
-					final DBObject explain = coll.find(query, fields).addSpecial("$comment", methodSignature)
+					final DBObject explain = coll.find(query, fields).addSpecial("$comment", Thread.currentThread().getName() + ": " + methodSignature)
 						.sort(sort).skip((int) skip).limit((int) limit).explain();
 					final int n = (int) explain.get("n");
 					final int nscanned = (int) explain.get("nscannedAllPlans");
@@ -826,7 +826,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				// defer methodSignature calculation until necessary to save performance
 				final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").join(params) : "") + ")";
 				if (autoExplainSlow) {
-					final DBObject explain = coll.find(query, fields).addSpecial("$comment", methodSignature)
+					final DBObject explain = coll.find(query, fields).addSpecial("$comment", Thread.currentThread().getName() + ": " + methodSignature)
 						.sort(orderBy).limit(1).explain();
 					final int n = (int) explain.get("n");
 					final int nscanned = (int) explain.get("nscannedAllPlans");
