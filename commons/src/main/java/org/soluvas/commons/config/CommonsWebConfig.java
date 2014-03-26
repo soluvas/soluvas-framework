@@ -4,7 +4,6 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 
 import javax.inject.Inject;
 import javax.net.ssl.SSLContext;
@@ -23,6 +22,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.soluvas.commons.Cpu;
 import org.soluvas.commons.Network;
 import org.soluvas.commons.tenant.TenantRefImpl;
@@ -50,6 +50,7 @@ import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
+import com.google.common.util.concurrent.ListeningExecutorService;
 
 /**
  * Replacement of OSGI-INF/blueprint/commons.xml
@@ -63,10 +64,13 @@ import com.google.common.eventbus.EventBus;
  * 	<li>{@code int httpMaxConnections}. Maximum number of HTTP Connections pooled by {@link #httpClientConnMgr()}, default: 20.</li>
  * 	<li>{@code boolean httpTrustAll}. Trust all/unsigned SSL certificates. Default: false.</li>
  * </ol>
+ *
+ * <p>Not using {@link Lazy}, we hope the {@link AppUtils#newCpuExecutor()} and {@link AppUtils#newNetworkExecutor()}
+ * isn't a child thread of Tomcat's HTTP request to avoid clobbering {@link MDC}.
  * 
  * @author rudi
  */
-@Configuration @Lazy
+@Configuration
 @ComponentScan({"org.soluvas.commons.shell", "org.soluvas.push"})
 public class CommonsWebConfig {
 	
@@ -92,12 +96,12 @@ public class CommonsWebConfig {
 //	}
 
 	@Bean(destroyMethod="shutdown") @Network
-	public ExecutorService networkExecutor() {
+	public ListeningExecutorService networkExecutor() {
 		return AppUtils.newNetworkExecutor();
 	}
 	
 	@Bean(destroyMethod="shutdown") @Cpu
-	public ExecutorService cpuExecutor() {
+	public ListeningExecutorService cpuExecutor() {
 		return AppUtils.newCpuExecutor();
 	}
 
