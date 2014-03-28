@@ -24,19 +24,19 @@ public class CustomerRoles {
 	
 	public static final String MEMBER = "member";
 	
-	
-	//GERA
-	public static final String AGENT_RAZHA = "agent_razha";
-	
-	public static final String DISTRIBUTOR_RAZHA = "distributor_razha";
-	
 	/**
 	 * Agen Spesial / Besar. 
 	 */
 	public static final String SPECIAL_AGENT = "ag-sp";
 	
+	//GERAIRAZHA
+	public static final String AGENT_RAZHA = "agent_razha";
+	
+	public static final String DISTRIBUTOR_RAZHA = "distributor_razha";
+	
 	public static final List<String> ALL = ImmutableList.copyOf(new String[] { 
-			AGENT, COMMON, DEPOSIT, DROP_SHIP, MEMBER, SPECIAL_AGENT});
+			AGENT, COMMON, DEPOSIT, DROP_SHIP, MEMBER, SPECIAL_AGENT,
+			AGENT_RAZHA, DISTRIBUTOR_RAZHA});
 	
 	public static final Map<String, String> DISPLAY_NAMES;
 	
