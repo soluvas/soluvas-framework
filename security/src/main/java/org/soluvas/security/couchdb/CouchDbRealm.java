@@ -1,6 +1,7 @@
 package org.soluvas.security.couchdb;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
@@ -79,12 +80,23 @@ public class CouchDbRealm extends AuthorizingRealm {
 		this.securityCatalogSupplier = securityCatalogSupplier;
 		this.rolePersonRepo = null;
 		this.httpClient = null;
+		// WARNING: couchDbUri may contain password!
+		final URI realCouchDbUri = URI.create(uri);
+		final String username = realCouchDbUri.getUserInfo() != null ? realCouchDbUri.getUserInfo().split(":")[0] : null;
+		log.info("Creating CouchDB connector {}:{}{} database {} as {} for realm {}",
+				realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), db, username, name);
+		final long connectStart = System.currentTimeMillis();
 		final HttpClient httpClient = new StdHttpClient.Builder()
 			.url(uri)
+			.connectionTimeout(40 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
+			.socketTimeout(20 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
 			.connectionManager(connMgr)
 			.build();
 		final StdCouchDbInstance stdCouchDbInstance = new StdCouchDbInstance(httpClient);
 		final StdCouchDbConnector cDbCon = new StdCouchDbConnector(db, stdCouchDbInstance);
+		final long connectDuration = System.currentTimeMillis() - connectStart;
+		log.info("Connected in {}ms to CouchDB connector {}:{}{} database {} as {} for realm {}",
+				connectDuration, realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), db, username, name);
 		cDbCon.createDatabaseIfNotExists();
 		this.conn = cDbCon;
 		setName(name);
@@ -110,12 +122,23 @@ public class CouchDbRealm extends AuthorizingRealm {
 		this.securityCatalogSupplier = securityCatalogSupplier;
 		this.rolePersonRepo = rolePersonRepo;
 		this.httpClient = null;
+		// WARNING: couchDbUri may contain password!
+		final URI realCouchDbUri = URI.create(uri);
+		final String username = realCouchDbUri.getUserInfo() != null ? realCouchDbUri.getUserInfo().split(":")[0] : null;
+		log.info("Creating CouchDB connector {}:{}{} database {} as {} for realm {}",
+				realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), db, username, name);
+		final long connectStart = System.currentTimeMillis();
 		final HttpClient httpClient = new StdHttpClient.Builder()
 			.url(uri)
+			.connectionTimeout(40 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
+			.socketTimeout(20 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
 			.connectionManager(connMgr)
 			.build();
 		final StdCouchDbInstance stdCouchDbInstance = new StdCouchDbInstance(httpClient);
 		final StdCouchDbConnector cDbCon = new StdCouchDbConnector(db, stdCouchDbInstance);
+		final long connectDuration = System.currentTimeMillis() - connectStart;
+		log.info("Connected in {}ms to CouchDB connector {}:{}{} database {} as {} for realm {}",
+				connectDuration, realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), db, username, name);
 		cDbCon.createDatabaseIfNotExists();
 		this.conn = cDbCon;
 		setName(name);
