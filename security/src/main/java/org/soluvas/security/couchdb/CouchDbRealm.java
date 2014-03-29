@@ -136,10 +136,10 @@ public class CouchDbRealm extends AuthorizingRealm {
 			.build();
 		final StdCouchDbInstance stdCouchDbInstance = new StdCouchDbInstance(httpClient);
 		final StdCouchDbConnector cDbCon = new StdCouchDbConnector(db, stdCouchDbInstance);
-		final long connectDuration = System.currentTimeMillis() - connectStart;
-		log.info("Connected in {}ms to CouchDB connector {}:{}{} database {} as {} for realm {}",
-				connectDuration, realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), db, username, name);
 		cDbCon.createDatabaseIfNotExists();
+		final long connectDuration = System.currentTimeMillis() - connectStart;
+		log.info("Ensured database exists in {}ms to CouchDB connector {}:{}{} database {} as {} for realm {}",
+				connectDuration, realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), db, username, name);
 		this.conn = cDbCon;
 		setName(name);
 		setCredentialsMatcher(new Rfc2307CredentialsMatcher());
