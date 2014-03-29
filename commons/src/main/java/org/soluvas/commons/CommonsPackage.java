@@ -341,13 +341,22 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE = POSITIONABLE_FEATURE_COUNT + 18;
 
 	/**
+	 * The feature id for the '<em><b>Default Language Tag</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__DEFAULT_LANGUAGE_TAG = POSITIONABLE_FEATURE_COUNT + 19;
+
+	/**
 	 * The feature id for the '<em><b>Default Country Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_COUNTRY_CODE = POSITIONABLE_FEATURE_COUNT + 19;
+	int APP_MANIFEST__DEFAULT_COUNTRY_CODE = POSITIONABLE_FEATURE_COUNT + 20;
 
 	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
@@ -356,7 +365,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 20;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 21;
 
 	/**
 	 * The operation id for the '<em>Expand</em>' operation.
@@ -368,13 +377,22 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST___EXPAND__MAP = POSITIONABLE_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Default Locale</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST___GET_DEFAULT_LOCALE = POSITIONABLE_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_OPERATION_COUNT = POSITIONABLE_OPERATION_COUNT + 1;
+	int APP_MANIFEST_OPERATION_COUNT = POSITIONABLE_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}' class.
@@ -5590,6 +5608,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_EmailLogoUriTemplate();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultLanguageTag <em>Default Language Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Language Tag</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultLanguageTag()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultLanguageTag();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultCountryCode <em>Default Country Code</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5599,6 +5628,16 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAppManifest_DefaultCountryCode();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.commons.AppManifest#getDefaultLocale() <em>Get Default Locale</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Default Locale</em>' operation.
+	 * @see org.soluvas.commons.AppManifest#getDefaultLocale()
+	 * @generated
+	 */
+	EOperation getAppManifest__GetDefaultLocale();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonInfo <em>Person Info</em>}'.
@@ -8849,12 +8888,28 @@ public interface CommonsPackage extends EPackage {
 		EAttribute APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE = eINSTANCE.getAppManifest_EmailLogoUriTemplate();
 
 		/**
+		 * The meta object literal for the '<em><b>Default Language Tag</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_LANGUAGE_TAG = eINSTANCE.getAppManifest_DefaultLanguageTag();
+
+		/**
 		 * The meta object literal for the '<em><b>Default Country Code</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__DEFAULT_COUNTRY_CODE = eINSTANCE.getAppManifest_DefaultCountryCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Default Locale</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation APP_MANIFEST___GET_DEFAULT_LOCALE = eINSTANCE.getAppManifest__GetDefaultLocale();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.

@@ -2,13 +2,16 @@
  */
 package org.soluvas.email.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import javax.annotation.Nullable;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
+
 import org.apache.commons.mail.ByteArrayDataSource;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.HtmlEmail;
@@ -28,12 +31,12 @@ import org.soluvas.email.Page;
 import org.soluvas.email.PageType;
 import org.soluvas.email.Recipient;
 import org.soluvas.email.Sender;
+
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * <!-- begin-user-doc -->
@@ -361,8 +364,8 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 	@Override
 	public List<Email> composeAll() {
 		log.info("Composing {}:{} email to {} recipients", getPageType().getNsPrefix(), getPageType().getName(),
-				recipients.size());
-		final List<Email> emails = ImmutableList.copyOf( Lists.transform(recipients, new Function<Recipient, Email>() {
+				getRecipients().size());
+		final List<Email> emails = ImmutableList.copyOf( Lists.transform(getRecipients(), new Function<Recipient, Email>() {
 			@Override @Nullable
 			public Email apply(@Nullable Recipient input) {
 				return compose(input);

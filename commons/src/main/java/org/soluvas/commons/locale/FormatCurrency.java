@@ -34,16 +34,29 @@ public final class FormatCurrency implements
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(FormatCurrency.class);
-	private final CurrencyUnit defaultCurrency;
 	private static final Pattern embeddedPattern = Pattern.compile("(.+) (.+)");
-	
+	private final CurrencyUnit defaultCurrency;
+	private final MoneyFormatter formatter;
+
+	@Deprecated
 	public FormatCurrency() {
-		this(null);
+		this(Locale.forLanguageTag("id-ID"), null);
+	}
+	
+	@Deprecated
+	public FormatCurrency(@Nullable CurrencyUnit defaultCurrency) {
+		this(Locale.forLanguageTag("id-ID"), defaultCurrency);
 	}
 
-	public FormatCurrency(@Nullable CurrencyUnit defaultCurrency) {
+	public FormatCurrency(Locale locale) {
+		this(locale, null);
+	}
+	
+	public FormatCurrency(Locale locale, @Nullable CurrencyUnit defaultCurrency) {
 		super();
 		this.defaultCurrency = defaultCurrency;
+		formatter = new MoneyFormatterBuilder()
+			.appendCurrencySymbolLocalized().appendAmountLocalized().toFormatter(locale);
 	}
 
 	@Override @Nullable
@@ -63,10 +76,6 @@ public final class FormatCurrency implements
 							input);
 					value = input;
 				}
-				// TODO: proper support for locale, e.g. "id" to get proper decimal places, separators etc.
-				final Locale locale = Locale.forLanguageTag("id-ID");
-				final MoneyFormatter formatter = new MoneyFormatterBuilder()
-					.appendCurrencySymbolLocalized().appendAmountLocalized().toFormatter(locale);
 				final BigMoney money = BigMoney.of(currency, new BigDecimal(value));
 				return formatter.print(money);
 			} catch (Exception e) {
@@ -77,4 +86,5 @@ public final class FormatCurrency implements
 			return "";
 		}
 	}
+
 }

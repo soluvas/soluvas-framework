@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons;
 
+import java.util.Locale;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTimeZone;
 
@@ -38,6 +39,7 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCurrencyCode <em>Default Currency Code</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCurrency <em>Default Currency</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDefaultLanguageTag <em>Default Language Tag</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCountryCode <em>Default Country Code</em>}</li>
  * </ul>
  * </p>
@@ -441,6 +443,32 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	void setEmailLogoUriTemplate(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Default Language Tag</b></em>' attribute.
+	 * The default value is <code>"en-US"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * IETF BCP 47 language tag string, e.g. {@code id-ID}. This is different than {@code defaultCountryCode}, because {@code defaultLanguageTag} is used to determine the {@link java.util.Locale}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Default Language Tag</em>' attribute.
+	 * @see #setDefaultLanguageTag(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultLanguageTag()
+	 * @model default="en-US"
+	 * @generated
+	 */
+	String getDefaultLanguageTag();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDefaultLanguageTag <em>Default Language Tag</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default Language Tag</em>' attribute.
+	 * @see #getDefaultLanguageTag()
+	 * @generated
+	 */
+	void setDefaultLanguageTag(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Default Country Code</b></em>' attribute.
 	 * The default value is <code>"US"</code>.
 	 * <!-- begin-user-doc -->
@@ -465,5 +493,16 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	void setDefaultCountryCode(String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns the {@link java.util.Locale} referred by {@link @getDefaultLanguageTag()}.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" dataType="org.soluvas.commons.Locale" required="true"
+	 * @generated
+	 */
+	Locale getDefaultLocale();
 
 } // AppManifest

@@ -1129,8 +1129,26 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultCountryCode() {
+	public EAttribute getAppManifest_DefaultLanguageTag() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_DefaultCountryCode() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getAppManifest__GetDefaultLocale() {
+		return appManifestEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -3897,7 +3915,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_CURRENCY_CODE);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_CURRENCY);
 		createEAttribute(appManifestEClass, APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE);
+		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_LANGUAGE_TAG);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_COUNTRY_CODE);
+		createEOperation(appManifestEClass, APP_MANIFEST___GET_DEFAULT_LOCALE);
 
 		personInfoEClass = createEClass(PERSON_INFO);
 		createEAttribute(personInfoEClass, PERSON_INFO__GENDER);
@@ -4485,7 +4505,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_DefaultCurrencyCode(), theEcorePackage.getEString(), "defaultCurrencyCode", "USD", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultCurrency(), this.getCurrencyUnit(), "defaultCurrency", null, 0, 1, AppManifest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_EmailLogoUriTemplate(), theEcorePackage.getEString(), "emailLogoUriTemplate", "{+imagesUri}tenant_common/logo_email.png", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_DefaultLanguageTag(), theEcorePackage.getEString(), "defaultLanguageTag", "en-US", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultCountryCode(), theEcorePackage.getEString(), "defaultCountryCode", "US", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getAppManifest__GetDefaultLocale(), this.getLocale(), "getDefaultLocale", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(personInfoEClass, PersonInfo.class, "PersonInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPersonInfo_Gender(), this.getGender(), "gender", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5010,6 +5033,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "AppManifest is actually a misnomer, it should\'ve been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.\n\n<p>Attributes are optional because can use OverlayingSupplier.\n\n<p>Expandable attributes are: domain, generalEmail.\n\n<p>Expansion variables are: fqdn (host-dependent), appDomain (from properties), userName (from System property user.name), domain (can only be used by other attributes than domain itself)."
 		   });		
 		addAnnotation
+		  (getAppManifest__GetDefaultLocale(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Returns the {@link java.util.Locale} referred by {@link @getDefaultLanguageTag()}."
+		   });		
+		addAnnotation
 		  (getAppManifest_Summary(), 
 		   source, 
 		   new String[] {
@@ -5086,6 +5115,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "URI to tenant logo usable when sending email notifications, by default the tenant logo URI template is: {+imagesUri}tenant_common/logo_email.png\n\n<p>Width of 127 pixels is recommended with landscape ratio.\n\n<p>Supported parameter is \"imagesUri\", which is from {link WebAddress#getImagesUri()}.\n\n<p>You can have app-wide logo without any tenant_common folder by using URI template such as: {+imagesUri}/com.aksimata.app/aksimata_email_192x92.png\n\n<p>To get the actual URI, call {@link AppUtils#getEmailLogoUri(AppManifest, WebAddress)}."
+		   });		
+		addAnnotation
+		  (getAppManifest_DefaultLanguageTag(), 
+		   source, 
+		   new String[] {
+			 "documentation", "IETF BCP 47 language tag string, e.g. {@code id-ID}. This is different than {@code defaultCountryCode}, because {@code defaultLanguageTag} is used to determine the {@link java.util.Locale}."
 		   });		
 		addAnnotation
 		  (getAppManifest_DefaultCountryCode(), 

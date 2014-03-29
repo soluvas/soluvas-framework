@@ -119,6 +119,10 @@
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/emailLogoUriTemplate"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_ALBkssHzEeKDZ7Yh48Wjow"/>
         </children>
+        <children xmi:type="notation:Node" xmi:id="_wKMsELcsEeOXnKs8cUDr5w" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/defaultLanguageTag"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_wKMsEbcsEeOXnKs8cUDr5w"/>
+        </children>
         <children xmi:type="notation:Node" xmi:id="_jwar8J7CEeOo-pfIy7koNQ" type="2001">
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/defaultCountryCode"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_jwar8Z7CEeOo-pfIy7koNQ"/>
@@ -128,6 +132,10 @@
         <styles xmi:type="notation:FilteringStyle" xmi:id="_J59AQySDEeKyUdMfH4dSfg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_J59nUCSDEeKyUdMfH4dSfg" type="5002">
+        <children xmi:type="notation:Node" xmi:id="_QNYUsLctEeOXnKs8cUDr5w" type="2002">
+          <element xmi:type="ecore:EOperation" href="commons.ecore#//AppManifest/getDefaultLocale"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_QNYUsbctEeOXnKs8cUDr5w"/>
+        </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_J59nUSSDEeKyUdMfH4dSfg"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_J59nUiSDEeKyUdMfH4dSfg"/>
         <styles xmi:type="notation:FilteringStyle" xmi:id="_J5-OYCSDEeKyUdMfH4dSfg"/>

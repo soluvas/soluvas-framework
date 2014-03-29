@@ -4,6 +4,7 @@ package org.soluvas.commons.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Nullable;
@@ -57,6 +58,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCurrencyCode <em>Default Currency Code</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCurrency <em>Default Currency</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultLanguageTag <em>Default Language Tag</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCountryCode <em>Default Country Code</em>}</li>
  * </ul>
  * </p>
@@ -448,6 +450,26 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @ordered
 	 */
 	protected String emailLogoUriTemplate = EMAIL_LOGO_URI_TEMPLATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDefaultLanguageTag() <em>Default Language Tag</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultLanguageTag()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DEFAULT_LANGUAGE_TAG_EDEFAULT = "en-US";
+
+	/**
+	 * The cached value of the '{@link #getDefaultLanguageTag() <em>Default Language Tag</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultLanguageTag()
+	 * @generated
+	 * @ordered
+	 */
+	protected String defaultLanguageTag = DEFAULT_LANGUAGE_TAG_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDefaultCountryCode() <em>Default Country Code</em>}' attribute.
@@ -917,6 +939,29 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 */
 	@Override
+	public String getDefaultLanguageTag() {
+		return defaultLanguageTag;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDefaultLanguageTag(String newDefaultLanguageTag) {
+		String oldDefaultLanguageTag = defaultLanguageTag;
+		defaultLanguageTag = newDefaultLanguageTag;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DEFAULT_LANGUAGE_TAG, oldDefaultLanguageTag, defaultLanguageTag));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getDefaultCountryCode() {
 		return defaultCountryCode;
 	}
@@ -932,6 +977,15 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		defaultCountryCode = newDefaultCountryCode;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE, oldDefaultCountryCode, defaultCountryCode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public Locale getDefaultLocale() {
+		return Locale.forLanguageTag(getDefaultLanguageTag());
 	}
 
 	/**
@@ -1010,6 +1064,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getDefaultCurrency();
 			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
 				return getEmailLogoUriTemplate();
+			case CommonsPackage.APP_MANIFEST__DEFAULT_LANGUAGE_TAG:
+				return getDefaultLanguageTag();
 			case CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE:
 				return getDefaultCountryCode();
 		}
@@ -1074,6 +1130,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return;
 			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
 				setEmailLogoUriTemplate((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_LANGUAGE_TAG:
+				setDefaultLanguageTag((String)newValue);
 				return;
 			case CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE:
 				setDefaultCountryCode((String)newValue);
@@ -1141,6 +1200,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
 				setEmailLogoUriTemplate(EMAIL_LOGO_URI_TEMPLATE_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_LANGUAGE_TAG:
+				setDefaultLanguageTag(DEFAULT_LANGUAGE_TAG_EDEFAULT);
+				return;
 			case CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE:
 				setDefaultCountryCode(DEFAULT_COUNTRY_CODE_EDEFAULT);
 				return;
@@ -1196,6 +1258,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return DEFAULT_CURRENCY_EDEFAULT == null ? getDefaultCurrency() != null : !DEFAULT_CURRENCY_EDEFAULT.equals(getDefaultCurrency());
 			case CommonsPackage.APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE:
 				return EMAIL_LOGO_URI_TEMPLATE_EDEFAULT == null ? emailLogoUriTemplate != null : !EMAIL_LOGO_URI_TEMPLATE_EDEFAULT.equals(emailLogoUriTemplate);
+			case CommonsPackage.APP_MANIFEST__DEFAULT_LANGUAGE_TAG:
+				return DEFAULT_LANGUAGE_TAG_EDEFAULT == null ? defaultLanguageTag != null : !DEFAULT_LANGUAGE_TAG_EDEFAULT.equals(defaultLanguageTag);
 			case CommonsPackage.APP_MANIFEST__DEFAULT_COUNTRY_CODE:
 				return DEFAULT_COUNTRY_CODE_EDEFAULT == null ? defaultCountryCode != null : !DEFAULT_COUNTRY_CODE_EDEFAULT.equals(defaultCountryCode);
 		}
@@ -1297,6 +1361,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
+			case CommonsPackage.APP_MANIFEST___GET_DEFAULT_LOCALE:
+				return getDefaultLocale();
 			case CommonsPackage.APP_MANIFEST___EXPAND__MAP:
 				try {
 					expand((Map<String, Object>)arguments.get(0));
@@ -1355,6 +1421,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(defaultCurrencyCode);
 		result.append(", emailLogoUriTemplate: ");
 		result.append(emailLogoUriTemplate);
+		result.append(", defaultLanguageTag: ");
+		result.append(defaultLanguageTag);
 		result.append(", defaultCountryCode: ");
 		result.append(defaultCountryCode);
 		result.append(')');

@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -17,12 +18,14 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.locale.FormatCurrency;
+import org.soluvas.commons.locale.FormatDateTime;
 import org.soluvas.commons.util.AppUtils;
 import org.soluvas.email.DefaultScope;
 import org.soluvas.email.EmailException;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.Recipient;
 import org.soluvas.email.Template;
+
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
@@ -333,6 +336,7 @@ public abstract class TemplateImpl extends MinimalEObjectImpl.Container implemen
 
 	/**
 	 * @return
+	 * @see FormatCurrency
 	 */
 	protected String doRender(String template, Recipient recipient) {
 		try {
@@ -341,6 +345,7 @@ public abstract class TemplateImpl extends MinimalEObjectImpl.Container implemen
 			final StringWriter stringWriter = new StringWriter();
 			final Map<String, Object> extras = ImmutableMap.of("recipient", recipient,
 					"formatCurrency", new FormatCurrency(),
+					"formatDateTime", new FormatDateTime(appManifest.getDefaultLocale()),
 					"emailLogoUri", AppUtils.getEmailLogoUri(appManifest, webAddress));
 			mustache.execute(stringWriter, new Object[] { extras, this });
 			return stringWriter.toString();
