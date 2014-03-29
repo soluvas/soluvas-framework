@@ -236,6 +236,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		final String username = realCouchDbUri.getUserInfo() != null ? realCouchDbUri.getUserInfo().split(":")[0] : null;
 		log.info("Creating CouchDB connector {}:{}{} database {} as {} for {}",
 				realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
+		final long connectStart = System.currentTimeMillis();
 		try {
 			final BasicHttpParams httpParams = new BasicHttpParams();
 			final HttpClient client = new StdHttpClient.Builder()
@@ -245,6 +246,11 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 				.url(couchDbUri).build();
 			final StdCouchDbInstance dbInstance = new StdCouchDbInstance(client, SoluvasObjectMapperFactory.INSTANCE);
 			dbConn = new StdCouchDbConnector(dbName, dbInstance, SoluvasObjectMapperFactory.INSTANCE);
+			final long connectDuration = System.currentTimeMillis() - connectStart;
+			log.info("Connected in {}ms to CouchDB connector {}:{}{} database {} as {} for {} (now sleeping for a moment to workaround Cloudant slowness)",
+					connectDuration, realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
+			 // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
+			Thread.sleep(3000);
 		} catch (Exception e) {
 			throw new CouchDbRepositoryException(e, "Cannot connect to CouchDB %s:%s%s database %s as %s for %s repository",
 					realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
