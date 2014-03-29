@@ -239,8 +239,8 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		try {
 			final BasicHttpParams httpParams = new BasicHttpParams();
 			final HttpClient client = new StdHttpClient.Builder()
-				.connectionTimeout(40 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
-				.socketTimeout(20 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
+				.connectionTimeout(60 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
+				.socketTimeout(60 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
 				.connectionManager(connMgr)
 				.url(couchDbUri).build();
 			final StdCouchDbInstance dbInstance = new StdCouchDbInstance(client, SoluvasObjectMapperFactory.INSTANCE);
