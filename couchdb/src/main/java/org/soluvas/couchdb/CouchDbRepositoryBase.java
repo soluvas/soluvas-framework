@@ -18,6 +18,7 @@ import javax.annotation.PreDestroy;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.params.BasicHttpParams;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ektorp.ComplexKey;
 import org.ektorp.CouchDbConnector;
@@ -236,7 +237,12 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		log.info("Creating CouchDB connector {}:{}{} database {} as {} for {}",
 				realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
 		try {
-			final HttpClient client = new StdHttpClient.Builder().connectionManager(connMgr).url(couchDbUri).build();
+			final BasicHttpParams httpParams = new BasicHttpParams();
+			final HttpClient client = new StdHttpClient.Builder()
+				.connectionTimeout(40 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
+				.socketTimeout(20 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
+				.connectionManager(connMgr)
+				.url(couchDbUri).build();
 			final StdCouchDbInstance dbInstance = new StdCouchDbInstance(client, SoluvasObjectMapperFactory.INSTANCE);
 			dbConn = new StdCouchDbConnector(dbName, dbInstance, SoluvasObjectMapperFactory.INSTANCE);
 		} catch (Exception e) {
