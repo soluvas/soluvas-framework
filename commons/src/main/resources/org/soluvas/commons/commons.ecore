@@ -82,7 +82,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="letterSalutation" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
-        defaultValueLiteral="Hai">
+        defaultValueLiteral="Hi">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The SALUTATION (C) of the letter starts on the left margin two lines below the inside address for a business letter or five lines below the heading of a personal letter, if typed. All words in the salutation are capitalized, and the last word is followed by a comma in a personal letter or a colon in a business letter.&#xA;Sample salutations are:&#xA;&#xA;&#xA;Personal:&#xA;Greetings Friend, Dear Bob, Hi Bob,&#xA;&#xA;Business:&#xA;Dear Mr. Jones: Dear Sir:&#xA;Ladies and Gentlemen: Dear Mr./Mrs./Ms. Jones:&#xA;"/>
       </eAnnotations>
