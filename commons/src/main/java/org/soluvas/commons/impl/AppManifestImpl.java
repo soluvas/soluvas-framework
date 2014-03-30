@@ -1,5 +1,3 @@
-/**
- */
 package org.soluvas.commons.impl;
 
 import java.lang.reflect.InvocationTargetException;
@@ -17,6 +15,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTimeZone;
 import org.osgi.framework.Bundle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsException;
@@ -70,6 +70,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = LoggerFactory
+			.getLogger(AppManifestImpl.class);
 
 	/**
 	 * The default value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
@@ -996,15 +998,15 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	public void expand(final Map<String, Object> upScope) {
 		if (getExpansionState() == ExpansionState.UNEXPANDED) {
 			try {
-				// domain is expanded twice, because the hub.properties#appDomain may contain URI template {+fqdn} too
-				if (getDomain().contains("{")) {
-					setDomain( UriTemplate.expand(getDomain(), upScope) );
+				final Map<String, Object> scope = new HashMap(upScope);
+				// hub.properties#appDomain may contain URI template {+fqdn}
+				if (((String) scope.get("appDomain")).contains("{")) {
+					scope.put("appDomain", UriTemplate.expand((String) scope.get("appDomain"), scope) );
 				}
 				if (getDomain().contains("{")) {
-					setDomain( UriTemplate.expand(getDomain(), upScope) );
+					setDomain( UriTemplate.expand(getDomain(), scope) );
 				}
 				// 'domain' variable can then be used by other attributes, if needed
-				final HashMap<String, Object> scope = new HashMap<>(upScope);
 				scope.put("domain", getDomain());
 				if (getGeneralEmail().contains("{")) {
 					setGeneralEmail( UriTemplate.expand(getGeneralEmail(), scope) );

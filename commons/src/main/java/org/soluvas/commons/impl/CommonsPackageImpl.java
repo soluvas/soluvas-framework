@@ -5354,7 +5354,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (webAddressEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Tenant-wide website URI configuration. URI template variables: appId, tenantId, tenantEnv, domain, fqdn."
+			 "documentation", "Tenant-wide website URI configuration. URI template variables: appId, tenantId, tenantEnv, appDomain, domain, fqdn."
 		   });		
 		addAnnotation
 		  (getWebAddress__GetApiUri(), 

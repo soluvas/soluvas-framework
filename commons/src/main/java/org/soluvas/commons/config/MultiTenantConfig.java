@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +63,7 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	@Inject @Network
 	private ExecutorService networkExecutor;
 	@Autowired(required=false)
-	private TenantRepository tenantRepo;
+	private TenantRepository<?> tenantRepo;
 	/**
 	 * Used only if using {@link TenantSource#CONFIG}, otherwise {@code null}.
 	 */
@@ -241,12 +242,13 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	}
 
 	private void createWebAddressAndPut(String tenantId, AppManifest appManifest, @Nullable File dataDir) {
-		final ImmutableMap<String, Object> scope = ImmutableMap.<String, Object>of(
-				"appId", app.getId(),
-				"tenantId", tenantId,
-				"tenantEnv", tenantEnv,
-				"domain", appManifest.getDomain(),
-				"fqdn", getFqdn());
+		final Map<String, Object> scope = new HashMap<>();
+		scope.put("appId", app.getId());
+		scope.put("tenantId", tenantId);
+		scope.put("tenantEnv", tenantEnv);
+		scope.put("appDomain", appDomain);
+		scope.put("domain", appManifest.getDomain());
+		scope.put("fqdn", getFqdn());
 		final OnDemandXmiLoader<WebAddress> loader;
 		
 		final String webAddressRes = "/META-INF/template.WebAddress.xmi";
