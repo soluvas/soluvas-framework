@@ -4,6 +4,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 import java.util.Iterator;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
@@ -43,8 +44,8 @@ public class PersonModCommand extends ExtCommandSupport {
 	private transient String nameStr;
 	@Option(aliases="-e", description="Email", name="--email")
 	private transient String emailStr;
-	@Option(aliases="-g", description="Gender", name="--gender")
-	private transient Object gender;
+	@Option(name="-g", aliases="--gender", description="Gender: male|female")
+	private transient String gender;
 	@Option(aliases="-s", description="Slug", name="--slug")
 	private transient String slug;
 	@Option(name="-p", aliases="--password", description="Password (will be encoded as SSHA).")
@@ -92,7 +93,12 @@ public class PersonModCommand extends ExtCommandSupport {
 		}
 		
 		if (gender != null) {
-			person.setGender(Gender.valueOf(String.valueOf(gender).toUpperCase()));
+			if (StringUtils.startsWithIgnoreCase(gender, "m")) {
+				gender = Gender.MALE.name();
+			} else if (StringUtils.startsWithIgnoreCase(gender, "f")) {
+				gender = Gender.FEMALE.name();
+			}
+			person.setGender(Gender.valueOf(gender.toUpperCase()));
 		}
 		
 		if (!Strings.isNullOrEmpty(slug)) {

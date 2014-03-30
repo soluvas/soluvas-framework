@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
@@ -15,6 +16,7 @@ import org.joda.time.DateTime;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Email;
+import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.shell.ExtCommandSupport;
@@ -40,10 +42,12 @@ public class PersonAddCommand extends ExtCommandSupport {
 	private String emailStr;
 	@Option(name="-p", aliases="--password", description="Password (will be encoded as SSHA).")
 	private String password;
-	@Option(name="-f", aliases="--fbAccessToken", description="Facebook Access Token.")
-	private String fbAccessToken;
 	@Option(name="-s", aliases="--status", description="Account status: DRAFT|ACTIVE|VALIDATED|VERIFIED|INACTIVE|VOID.")
 	private transient AccountStatus accountStatus = AccountStatus.ACTIVE;
+	@Option(name="-g", aliases="--gender", description="Gender: m(ale)|f(emale)")
+	private transient String gender;
+	@Option(name="-f", aliases="--fbAccessToken", description="Facebook Access Token.")
+	private String fbAccessToken;
 	
 	@Argument(index=0, name="id", required=true,
 		description="Person ID to be created.")
@@ -104,6 +108,15 @@ public class PersonAddCommand extends ExtCommandSupport {
 			person.setPassword(encoded);
 		}
 		
+		if (gender != null) {
+			if (StringUtils.startsWithIgnoreCase(gender, "m")) {
+				gender = Gender.MALE.name();
+			} else if (StringUtils.startsWithIgnoreCase(gender, "f")) {
+				gender = Gender.FEMALE.name();
+			}
+			person.setGender(Gender.valueOf(gender.toUpperCase()));
+		}
+
 		if (fbAccessToken != null)
 			person.setFacebookAccessToken(fbAccessToken);
 
