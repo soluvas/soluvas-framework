@@ -251,7 +251,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 
 	/**
 	 * Returns the value of the '<em><b>Letter Salutation</b></em>' attribute.
-	 * The default value is <code>"Hai"</code>.
+	 * The default value is <code>"Hi"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -270,7 +270,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @return the value of the '<em>Letter Salutation</em>' attribute.
 	 * @see #setLetterSalutation(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_LetterSalutation()
-	 * @model default="Hai"
+	 * @model default="Hi"
 	 * @generated
 	 */
 	String getLetterSalutation();

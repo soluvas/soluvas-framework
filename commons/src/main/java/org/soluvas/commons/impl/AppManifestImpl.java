@@ -341,7 +341,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LETTER_SALUTATION_EDEFAULT = "Hai";
+	protected static final String LETTER_SALUTATION_EDEFAULT = "Hi";
 
 	/**
 	 * The cached value of the '{@link #getLetterSalutation() <em>Letter Salutation</em>}' attribute.
