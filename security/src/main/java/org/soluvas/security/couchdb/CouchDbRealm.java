@@ -88,8 +88,8 @@ public class CouchDbRealm extends AuthorizingRealm {
 		final long connectStart = System.currentTimeMillis();
 		final HttpClient httpClient = new StdHttpClient.Builder()
 			.url(uri)
-			.connectionTimeout(40 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
-			.socketTimeout(20 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
+			.connectionTimeout(60 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
+			.socketTimeout(60 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
 			.connectionManager(connMgr)
 			.build();
 		final StdCouchDbInstance stdCouchDbInstance = new StdCouchDbInstance(httpClient);
@@ -130,8 +130,8 @@ public class CouchDbRealm extends AuthorizingRealm {
 		final long connectStart = System.currentTimeMillis();
 		final HttpClient httpClient = new StdHttpClient.Builder()
 			.url(uri)
-			.connectionTimeout(40 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
-			.socketTimeout(20 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
+			.connectionTimeout(60 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
+			.socketTimeout(60 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
 			.connectionManager(connMgr)
 			.build();
 		final StdCouchDbInstance stdCouchDbInstance = new StdCouchDbInstance(httpClient);
