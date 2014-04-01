@@ -1461,6 +1461,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	protected EList<Organization> organizations;
 
 	/**
@@ -3042,6 +3043,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Organization> getOrganizations() {
 		if (organizations == null) {
 			organizations = new EObjectResolvingEList<Organization>(Organization.class, this, CommonsPackage.PERSON__ORGANIZATIONS);
