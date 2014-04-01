@@ -999,8 +999,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		if (getExpansionState() == ExpansionState.UNEXPANDED) {
 			try {
 				final Map<String, Object> scope = new HashMap(upScope);
-				// hub.properties#appDomain may contain URI template {+fqdn}
-				if (((String) scope.get("appDomain")).contains("{")) {
+				// hub.properties#appDomain may be null (for single-tenant configs),
+				// and if exists, it may contain URI template esp. {+fqdn}
+				if (scope.get("appDomain") != null && ((String) scope.get("appDomain")).contains("{")) {
 					scope.put("appDomain", UriTemplate.expand((String) scope.get("appDomain"), scope) );
 				}
 				if (getDomain().contains("{")) {
