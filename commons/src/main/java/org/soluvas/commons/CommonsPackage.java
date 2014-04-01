@@ -3905,13 +3905,22 @@ public interface CommonsPackage extends EPackage {
 	int PERSON__VERIFY_CODE = NAME_CONTAINER_FEATURE_COUNT + 66;
 
 	/**
+	 * The feature id for the '<em><b>Organizations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__ORGANIZATIONS = NAME_CONTAINER_FEATURE_COUNT + 67;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 67;
+	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 68;
 
 	/**
 	 * The operation id for the '<em>Get Image Id</em>' operation.
@@ -4945,6 +4954,169 @@ public interface CommonsPackage extends EPackage {
 	int GENERAL_SYS_CONFIG_OPERATION_COUNT = EXPANDABLE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.commons.impl.OrganizationImpl <em>Organization</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.commons.impl.OrganizationImpl
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getOrganization()
+	 * @generated
+	 */
+	int ORGANIZATION = 62;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__ID = IDENTIFIABLE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__NAME = IDENTIFIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Schema Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__SCHEMA_VERSION = IDENTIFIABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Black Berry Pin</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__BLACK_BERRY_PIN = IDENTIFIABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Website</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__WEBSITE = IDENTIFIABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Facebook Page Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__FACEBOOK_PAGE_URI = IDENTIFIABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Facebook Access Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__FACEBOOK_ACCESS_TOKEN = IDENTIFIABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Facebook Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__FACEBOOK_ID = IDENTIFIABLE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Facebook User Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__FACEBOOK_USER_NAME = IDENTIFIABLE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Twitter Screen Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__TWITTER_SCREEN_NAME = IDENTIFIABLE_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Twitter Access Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__TWITTER_ACCESS_TOKEN = IDENTIFIABLE_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Twitter Access Token Secret</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__TWITTER_ACCESS_TOKEN_SECRET = IDENTIFIABLE_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Twitter Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__TWITTER_ID = IDENTIFIABLE_FEATURE_COUNT + 11;
+
+	/**
+	 * The number of structural features of the '<em>Organization</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 12;
+
+	/**
+	 * The operation id for the '<em>Get Schema Version</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION___GET_SCHEMA_VERSION = IDENTIFIABLE_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION___GET_NAME = IDENTIFIABLE_OPERATION_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Organization</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION_OPERATION_COUNT = IDENTIFIABLE_OPERATION_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4952,7 +5124,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getResourceType()
 	 * @generated
 	 */
-	int RESOURCE_TYPE = 62;
+	int RESOURCE_TYPE = 63;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Gender <em>Gender</em>}' enum.
@@ -4962,7 +5134,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 63;
+	int GENDER = 64;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.EClassStatus <em>EClass Status</em>}' enum.
@@ -4972,7 +5144,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEClassStatus()
 	 * @generated
 	 */
-	int ECLASS_STATUS = 64;
+	int ECLASS_STATUS = 65;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassStatus <em>Java Class Status</em>}' enum.
@@ -4982,7 +5154,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getJavaClassStatus()
 	 * @generated
 	 */
-	int JAVA_CLASS_STATUS = 65;
+	int JAVA_CLASS_STATUS = 66;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ProgressStatus <em>Progress Status</em>}' enum.
@@ -4992,7 +5164,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getProgressStatus()
 	 * @generated
 	 */
-	int PROGRESS_STATUS = 66;
+	int PROGRESS_STATUS = 67;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.AccountStatus <em>Account Status</em>}' enum.
@@ -5002,7 +5174,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getAccountStatus()
 	 * @generated
 	 */
-	int ACCOUNT_STATUS = 67;
+	int ACCOUNT_STATUS = 68;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.PublicationStatus <em>Publication Status</em>}' enum.
@@ -5012,7 +5184,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPublicationStatus()
 	 * @generated
 	 */
-	int PUBLICATION_STATUS = 68;
+	int PUBLICATION_STATUS = 69;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ArchivalStatus <em>Archival Status</em>}' enum.
@@ -5022,7 +5194,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getArchivalStatus()
 	 * @generated
 	 */
-	int ARCHIVAL_STATUS = 69;
+	int ARCHIVAL_STATUS = 70;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.TranslationState <em>Translation State</em>}' enum.
@@ -5032,7 +5204,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTranslationState()
 	 * @generated
 	 */
-	int TRANSLATION_STATE = 70;
+	int TRANSLATION_STATE = 71;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ExpansionState <em>Expansion State</em>}' enum.
@@ -5042,7 +5214,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getExpansionState()
 	 * @generated
 	 */
-	int EXPANSION_STATE = 71;
+	int EXPANSION_STATE = 72;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.SignupSourceType <em>Signup Source Type</em>}' enum.
@@ -5052,7 +5224,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSignupSourceType()
 	 * @generated
 	 */
-	int SIGNUP_SOURCE_TYPE = 72;
+	int SIGNUP_SOURCE_TYPE = 73;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.TenantSource <em>Tenant Source</em>}' enum.
@@ -5062,7 +5234,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTenantSource()
 	 * @generated
 	 */
-	int TENANT_SOURCE = 73;
+	int TENANT_SOURCE = 74;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.GenericStatus <em>Generic Status</em>}' enum.
@@ -5072,7 +5244,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getGenericStatus()
 	 * @generated
 	 */
-	int GENERIC_STATUS = 74;
+	int GENERIC_STATUS = 75;
 
 	/**
 	 * The meta object id for the '<em>Date Time</em>' data type.
@@ -5082,7 +5254,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 75;
+	int DATE_TIME = 76;
 
 	/**
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
@@ -5092,7 +5264,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
-	int CURRENCY_UNIT = 76;
+	int CURRENCY_UNIT = 77;
 
 	/**
 	 * The meta object id for the '<em>Quantity</em>' data type.
@@ -5102,7 +5274,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQuantity()
 	 * @generated
 	 */
-	int QUANTITY = 77;
+	int QUANTITY = 78;
 
 	/**
 	 * The meta object id for the '<em>Unit</em>' data type.
@@ -5112,7 +5284,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 78;
+	int UNIT = 79;
 
 	/**
 	 * The meta object id for the '<em>List</em>' data type.
@@ -5122,7 +5294,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 79;
+	int LIST = 80;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -5132,7 +5304,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMap()
 	 * @generated
 	 */
-	int MAP = 80;
+	int MAP = 81;
 
 	/**
 	 * The meta object id for the '<em>Set</em>' data type.
@@ -5142,7 +5314,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 81;
+	int SET = 82;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -5152,7 +5324,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 82;
+	int COLLECTION = 83;
 
 	/**
 	 * The meta object id for the '<em>Multimap</em>' data type.
@@ -5162,7 +5334,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultimap()
 	 * @generated
 	 */
-	int MULTIMAP = 83;
+	int MULTIMAP = 84;
 
 	/**
 	 * The meta object id for the '<em>Navigable Map</em>' data type.
@@ -5172,7 +5344,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNavigableMap()
 	 * @generated
 	 */
-	int NAVIGABLE_MAP = 84;
+	int NAVIGABLE_MAP = 85;
 
 	/**
 	 * The meta object id for the '<em>Queue</em>' data type.
@@ -5182,7 +5354,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getQueue()
 	 * @generated
 	 */
-	int QUEUE = 85;
+	int QUEUE = 86;
 
 	/**
 	 * The meta object id for the '<em>Multiset</em>' data type.
@@ -5192,7 +5364,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMultiset()
 	 * @generated
 	 */
-	int MULTISET = 86;
+	int MULTISET = 87;
 
 	/**
 	 * The meta object id for the '<em>Serializable</em>' data type.
@@ -5202,7 +5374,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getSerializable()
 	 * @generated
 	 */
-	int SERIALIZABLE = 87;
+	int SERIALIZABLE = 88;
 
 	/**
 	 * The meta object id for the '<em>Bundle</em>' data type.
@@ -5212,7 +5384,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBundle()
 	 * @generated
 	 */
-	int BUNDLE = 88;
+	int BUNDLE = 89;
 
 	/**
 	 * The meta object id for the '<em>Big Money Provider</em>' data type.
@@ -5222,7 +5394,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
 	 * @generated
 	 */
-	int BIG_MONEY_PROVIDER = 89;
+	int BIG_MONEY_PROVIDER = 90;
 
 	/**
 	 * The meta object id for the '<em>Measurable</em>' data type.
@@ -5232,7 +5404,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMeasurable()
 	 * @generated
 	 */
-	int MEASURABLE = 90;
+	int MEASURABLE = 91;
 
 	/**
 	 * The meta object id for the '<em>Date Time Zone</em>' data type.
@@ -5242,7 +5414,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDateTimeZone()
 	 * @generated
 	 */
-	int DATE_TIME_ZONE = 91;
+	int DATE_TIME_ZONE = 92;
 
 	/**
 	 * The meta object id for the '<em>Locale</em>' data type.
@@ -5252,7 +5424,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 92;
+	int LOCALE = 93;
 
 	/**
 	 * The meta object id for the '<em>File</em>' data type.
@@ -5262,7 +5434,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getFile()
 	 * @generated
 	 */
-	int FILE = 93;
+	int FILE = 94;
 
 	/**
 	 * The meta object id for the '<em>Listenable Future</em>' data type.
@@ -5272,7 +5444,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListenableFuture()
 	 * @generated
 	 */
-	int LISTENABLE_FUTURE = 94;
+	int LISTENABLE_FUTURE = 95;
 
 	/**
 	 * The meta object id for the '<em>Listening Executor Service</em>' data type.
@@ -5282,7 +5454,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListeningExecutorService()
 	 * @generated
 	 */
-	int LISTENING_EXECUTOR_SERVICE = 95;
+	int LISTENING_EXECUTOR_SERVICE = 96;
 
 	/**
 	 * The meta object id for the '<em>Class Loader</em>' data type.
@@ -5292,7 +5464,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getClassLoader()
 	 * @generated
 	 */
-	int CLASS_LOADER = 96;
+	int CLASS_LOADER = 97;
 
 	/**
 	 * The meta object id for the '<em>URL</em>' data type.
@@ -5302,7 +5474,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getURL()
 	 * @generated
 	 */
-	int URL = 97;
+	int URL = 98;
 
 	/**
 	 * The meta object id for the '<em>Event Bus</em>' data type.
@@ -5312,7 +5484,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEventBus()
 	 * @generated
 	 */
-	int EVENT_BUS = 98;
+	int EVENT_BUS = 99;
 
 	/**
 	 * The meta object id for the '<em>Local Date</em>' data type.
@@ -5322,7 +5494,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocalDate()
 	 * @generated
 	 */
-	int LOCAL_DATE = 99;
+	int LOCAL_DATE = 100;
 
 	/**
 	 * The meta object id for the '<em>No Such Element Exception</em>' data type.
@@ -5332,7 +5504,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getNoSuchElementException()
 	 * @generated
 	 */
-	int NO_SUCH_ELEMENT_EXCEPTION = 100;
+	int NO_SUCH_ELEMENT_EXCEPTION = 101;
 
 
 	/**
@@ -5343,7 +5515,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getDeque()
 	 * @generated
 	 */
-	int DEQUE = 101;
+	int DEQUE = 102;
 
 
 	/**
@@ -5354,7 +5526,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getTemperature()
 	 * @generated
 	 */
-	int TEMPERATURE = 102;
+	int TEMPERATURE = 103;
 
 
 	/**
@@ -5365,7 +5537,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLocalTime()
 	 * @generated
 	 */
-	int LOCAL_TIME = 103;
+	int LOCAL_TIME = 104;
 
 
 	/**
@@ -5376,7 +5548,7 @@ public interface CommonsPackage extends EPackage {
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getException()
 	 * @generated
 	 */
-	int EXCEPTION = 104;
+	int EXCEPTION = 105;
 
 
 	/**
@@ -7577,6 +7749,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getPerson_VerifyCode();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.soluvas.commons.Person#getOrganizations <em>Organizations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Organizations</em>'.
+	 * @see org.soluvas.commons.Person#getOrganizations()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EReference getPerson_Organizations();
+
+	/**
 	 * Returns the meta object for the '{@link org.soluvas.commons.Person#hasEmail(java.lang.String) <em>Has Email</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8230,6 +8413,137 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getGeneralSysConfig();
+
+	/**
+	 * Returns the meta object for class '{@link org.soluvas.commons.Organization <em>Organization</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Organization</em>'.
+	 * @see org.soluvas.commons.Organization
+	 * @generated
+	 */
+	EClass getOrganization();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Organization#getSchemaVersion <em>Schema Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Schema Version</em>'.
+	 * @see org.soluvas.commons.Organization#getSchemaVersion()
+	 * @see #getOrganization()
+	 * @generated
+	 */
+	EAttribute getOrganization_SchemaVersion();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Organization#getBlackBerryPin <em>Black Berry Pin</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Black Berry Pin</em>'.
+	 * @see org.soluvas.commons.Organization#getBlackBerryPin()
+	 * @see #getOrganization()
+	 * @generated
+	 */
+	EAttribute getOrganization_BlackBerryPin();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Organization#getWebsite <em>Website</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Website</em>'.
+	 * @see org.soluvas.commons.Organization#getWebsite()
+	 * @see #getOrganization()
+	 * @generated
+	 */
+	EAttribute getOrganization_Website();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Organization#getFacebookPageUri <em>Facebook Page Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Page Uri</em>'.
+	 * @see org.soluvas.commons.Organization#getFacebookPageUri()
+	 * @see #getOrganization()
+	 * @generated
+	 */
+	EAttribute getOrganization_FacebookPageUri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Organization#getFacebookAccessToken <em>Facebook Access Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Access Token</em>'.
+	 * @see org.soluvas.commons.Organization#getFacebookAccessToken()
+	 * @see #getOrganization()
+	 * @generated
+	 */
+	EAttribute getOrganization_FacebookAccessToken();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Organization#getFacebookId <em>Facebook Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Id</em>'.
+	 * @see org.soluvas.commons.Organization#getFacebookId()
+	 * @see #getOrganization()
+	 * @generated
+	 */
+	EAttribute getOrganization_FacebookId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Organization#getFacebookUserName <em>Facebook User Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook User Name</em>'.
+	 * @see org.soluvas.commons.Organization#getFacebookUserName()
+	 * @see #getOrganization()
+	 * @generated
+	 */
+	EAttribute getOrganization_FacebookUserName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Organization#getTwitterScreenName <em>Twitter Screen Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Twitter Screen Name</em>'.
+	 * @see org.soluvas.commons.Organization#getTwitterScreenName()
+	 * @see #getOrganization()
+	 * @generated
+	 */
+	EAttribute getOrganization_TwitterScreenName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Organization#getTwitterAccessToken <em>Twitter Access Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Twitter Access Token</em>'.
+	 * @see org.soluvas.commons.Organization#getTwitterAccessToken()
+	 * @see #getOrganization()
+	 * @generated
+	 */
+	EAttribute getOrganization_TwitterAccessToken();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Organization#getTwitterAccessTokenSecret <em>Twitter Access Token Secret</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Twitter Access Token Secret</em>'.
+	 * @see org.soluvas.commons.Organization#getTwitterAccessTokenSecret()
+	 * @see #getOrganization()
+	 * @generated
+	 */
+	EAttribute getOrganization_TwitterAccessTokenSecret();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Organization#getTwitterId <em>Twitter Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Twitter Id</em>'.
+	 * @see org.soluvas.commons.Organization#getTwitterId()
+	 * @see #getOrganization()
+	 * @generated
+	 */
+	EAttribute getOrganization_TwitterId();
 
 	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
@@ -10458,6 +10772,14 @@ public interface CommonsPackage extends EPackage {
 		EAttribute PERSON__VERIFY_CODE = eINSTANCE.getPerson_VerifyCode();
 
 		/**
+		 * The meta object literal for the '<em><b>Organizations</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PERSON__ORGANIZATIONS = eINSTANCE.getPerson_Organizations();
+
+		/**
 		 * The meta object literal for the '<em><b>Has Email</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10972,6 +11294,104 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass GENERAL_SYS_CONFIG = eINSTANCE.getGeneralSysConfig();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.commons.impl.OrganizationImpl <em>Organization</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.commons.impl.OrganizationImpl
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getOrganization()
+		 * @generated
+		 */
+		EClass ORGANIZATION = eINSTANCE.getOrganization();
+
+		/**
+		 * The meta object literal for the '<em><b>Schema Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORGANIZATION__SCHEMA_VERSION = eINSTANCE.getOrganization_SchemaVersion();
+
+		/**
+		 * The meta object literal for the '<em><b>Black Berry Pin</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORGANIZATION__BLACK_BERRY_PIN = eINSTANCE.getOrganization_BlackBerryPin();
+
+		/**
+		 * The meta object literal for the '<em><b>Website</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORGANIZATION__WEBSITE = eINSTANCE.getOrganization_Website();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Page Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORGANIZATION__FACEBOOK_PAGE_URI = eINSTANCE.getOrganization_FacebookPageUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Access Token</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORGANIZATION__FACEBOOK_ACCESS_TOKEN = eINSTANCE.getOrganization_FacebookAccessToken();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORGANIZATION__FACEBOOK_ID = eINSTANCE.getOrganization_FacebookId();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook User Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORGANIZATION__FACEBOOK_USER_NAME = eINSTANCE.getOrganization_FacebookUserName();
+
+		/**
+		 * The meta object literal for the '<em><b>Twitter Screen Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORGANIZATION__TWITTER_SCREEN_NAME = eINSTANCE.getOrganization_TwitterScreenName();
+
+		/**
+		 * The meta object literal for the '<em><b>Twitter Access Token</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORGANIZATION__TWITTER_ACCESS_TOKEN = eINSTANCE.getOrganization_TwitterAccessToken();
+
+		/**
+		 * The meta object literal for the '<em><b>Twitter Access Token Secret</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORGANIZATION__TWITTER_ACCESS_TOKEN_SECRET = eINSTANCE.getOrganization_TwitterAccessTokenSecret();
+
+		/**
+		 * The meta object literal for the '<em><b>Twitter Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORGANIZATION__TWITTER_ID = eINSTANCE.getOrganization_TwitterId();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

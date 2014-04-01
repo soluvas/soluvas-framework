@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
@@ -34,6 +35,7 @@ import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.Informer;
 import org.soluvas.commons.NameUtils;
+import org.soluvas.commons.Organization;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.PersonLike;
@@ -141,6 +143,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getDebitCurrency <em>Debit Currency</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getVerifyCode <em>Verify Code</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getOrganizations <em>Organizations</em>}</li>
  * </ul>
  * </p>
  *
@@ -1449,6 +1452,16 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @ordered
 	 */
 	protected String verifyCode = VERIFY_CODE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOrganizations() <em>Organizations</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOrganizations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Organization> organizations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3027,6 +3040,18 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Organization> getOrganizations() {
+		if (organizations == null) {
+			organizations = new EObjectResolvingEList<Organization>(Organization.class, this, CommonsPackage.PERSON__ORGANIZATIONS);
+		}
+		return organizations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public boolean hasEmail(String email) {
@@ -3328,6 +3353,8 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				return getType();
 			case CommonsPackage.PERSON__VERIFY_CODE:
 				return getVerifyCode();
+			case CommonsPackage.PERSON__ORGANIZATIONS:
+				return getOrganizations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -3544,6 +3571,10 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 			case CommonsPackage.PERSON__VERIFY_CODE:
 				setVerifyCode((String)newValue);
 				return;
+			case CommonsPackage.PERSON__ORGANIZATIONS:
+				getOrganizations().clear();
+				getOrganizations().addAll((Collection<? extends Organization>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -3754,6 +3785,9 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 			case CommonsPackage.PERSON__VERIFY_CODE:
 				setVerifyCode(VERIFY_CODE_EDEFAULT);
 				return;
+			case CommonsPackage.PERSON__ORGANIZATIONS:
+				getOrganizations().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -3902,6 +3936,8 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case CommonsPackage.PERSON__VERIFY_CODE:
 				return VERIFY_CODE_EDEFAULT == null ? verifyCode != null : !VERIFY_CODE_EDEFAULT.equals(verifyCode);
+			case CommonsPackage.PERSON__ORGANIZATIONS:
+				return organizations != null && !organizations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

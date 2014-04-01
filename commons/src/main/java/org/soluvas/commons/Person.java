@@ -79,6 +79,7 @@ import com.google.common.base.Function;
  *   <li>{@link org.soluvas.commons.Person#getDebitCurrency <em>Debit Currency</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getType <em>Type</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getVerifyCode <em>Verify Code</em>}</li>
+ *   <li>{@link org.soluvas.commons.Person#getOrganizations <em>Organizations</em>}</li>
  * </ul>
  * </p>
  *
@@ -1395,6 +1396,22 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	void setVerifyCode(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Organizations</b></em>' reference list.
+	 * The list contents are of type {@link org.soluvas.commons.Organization}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Organizations</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Organizations</em>' reference list.
+	 * @see org.soluvas.commons.CommonsPackage#getPerson_Organizations()
+	 * @model
+	 * @generated
+	 */
+	EList<Organization> getOrganizations();
 
 	/**
 	 * <!-- begin-user-doc -->

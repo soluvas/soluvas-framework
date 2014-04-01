@@ -529,6 +529,16 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CommonsPackage.ORGANIZATION: {
+				Organization organization = (Organization)theEObject;
+				T1 result = caseOrganization(organization);
+				if (result == null) result = caseIdentifiable(organization);
+				if (result == null) result = caseSchemaVersionable(organization);
+				if (result == null) result = caseNameContainer(organization);
+				if (result == null) result = caseNameable(organization);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -1460,6 +1470,21 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseGeneralSysConfig(GeneralSysConfig object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Organization</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Organization</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseOrganization(Organization object) {
 		return null;
 	}
 

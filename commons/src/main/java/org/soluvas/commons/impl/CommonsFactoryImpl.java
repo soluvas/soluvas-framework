@@ -105,6 +105,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 			case CommonsPackage.FACEBOOK_ACCESSIBLE: return createFacebookAccessible();
 			case CommonsPackage.GEOLOCATION: return createGeolocation();
 			case CommonsPackage.THING_INFO: return createThingInfo();
+			case CommonsPackage.ORGANIZATION: return createOrganization();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -581,6 +582,16 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	public ThingInfo createThingInfo() {
 		ThingInfoImpl thingInfo = new ThingInfoImpl();
 		return thingInfo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Organization createOrganization() {
+		OrganizationImpl organization = new OrganizationImpl();
+		return organization;
 	}
 
 	/**

@@ -48,6 +48,7 @@ import org.soluvas.commons.CategoryLike;
 import org.soluvas.commons.Colorable;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.Organization;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.EClassLinked;
 import org.soluvas.commons.EClassStatus;
@@ -554,6 +555,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass generalSysConfigEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass organizationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2898,6 +2906,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getPerson_Organizations() {
+		return (EReference)personEClass.getEStructuralFeatures().get(51);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getPerson__HasEmail__String() {
 		return personEClass.getEOperations().get(0);
 	}
@@ -3440,6 +3457,114 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	public EClass getGeneralSysConfig() {
 		return generalSysConfigEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOrganization() {
+		return organizationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrganization_SchemaVersion() {
+		return (EAttribute)organizationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrganization_BlackBerryPin() {
+		return (EAttribute)organizationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrganization_Website() {
+		return (EAttribute)organizationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrganization_FacebookPageUri() {
+		return (EAttribute)organizationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrganization_FacebookAccessToken() {
+		return (EAttribute)organizationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrganization_FacebookId() {
+		return (EAttribute)organizationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrganization_FacebookUserName() {
+		return (EAttribute)organizationEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrganization_TwitterScreenName() {
+		return (EAttribute)organizationEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrganization_TwitterAccessToken() {
+		return (EAttribute)organizationEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrganization_TwitterAccessTokenSecret() {
+		return (EAttribute)organizationEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrganization_TwitterId() {
+		return (EAttribute)organizationEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -4145,6 +4270,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(personEClass, PERSON__DEBIT_CURRENCY);
 		createEAttribute(personEClass, PERSON__TYPE);
 		createEAttribute(personEClass, PERSON__VERIFY_CODE);
+		createEReference(personEClass, PERSON__ORGANIZATIONS);
 		createEOperation(personEClass, PERSON___HAS_EMAIL__STRING);
 		createEOperation(personEClass, PERSON___PUT_EMAIL__STRING);
 
@@ -4220,6 +4346,19 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(thingInfoEClass, THING_INFO__IMAGE_ID);
 
 		generalSysConfigEClass = createEClass(GENERAL_SYS_CONFIG);
+
+		organizationEClass = createEClass(ORGANIZATION);
+		createEAttribute(organizationEClass, ORGANIZATION__SCHEMA_VERSION);
+		createEAttribute(organizationEClass, ORGANIZATION__BLACK_BERRY_PIN);
+		createEAttribute(organizationEClass, ORGANIZATION__WEBSITE);
+		createEAttribute(organizationEClass, ORGANIZATION__FACEBOOK_PAGE_URI);
+		createEAttribute(organizationEClass, ORGANIZATION__FACEBOOK_ACCESS_TOKEN);
+		createEAttribute(organizationEClass, ORGANIZATION__FACEBOOK_ID);
+		createEAttribute(organizationEClass, ORGANIZATION__FACEBOOK_USER_NAME);
+		createEAttribute(organizationEClass, ORGANIZATION__TWITTER_SCREEN_NAME);
+		createEAttribute(organizationEClass, ORGANIZATION__TWITTER_ACCESS_TOKEN);
+		createEAttribute(organizationEClass, ORGANIZATION__TWITTER_ACCESS_TOKEN_SECRET);
+		createEAttribute(organizationEClass, ORGANIZATION__TWITTER_ID);
 
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
@@ -4480,6 +4619,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		thingInfoEClass.getESuperTypes().add(this.getSluggable());
 		thingInfoEClass.getESuperTypes().add(this.getImageable());
 		generalSysConfigEClass.getESuperTypes().add(this.getExpandable());
+		organizationEClass.getESuperTypes().add(this.getIdentifiable());
+		organizationEClass.getESuperTypes().add(this.getSchemaVersionable());
+		organizationEClass.getESuperTypes().add(this.getNameContainer());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4798,6 +4940,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPerson_DebitCurrency(), this.getCurrencyUnit(), "debitCurrency", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_Type(), theEcorePackage.getEString(), "type", "Person", 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_VerifyCode(), theEcorePackage.getEString(), "verifyCode", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPerson_Organizations(), this.getOrganization(), null, "organizations", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getPerson__HasEmail__String(), theEcorePackage.getEBoolean(), "hasEmail", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "email", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -4877,6 +5020,19 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getThingInfo_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, ThingInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(generalSysConfigEClass, GeneralSysConfig.class, "GeneralSysConfig", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(organizationEClass, Organization.class, "Organization", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOrganization_SchemaVersion(), theEcorePackage.getELong(), "schemaVersion", "1", 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOrganization_BlackBerryPin(), theEcorePackage.getEString(), "blackBerryPin", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOrganization_Website(), theEcorePackage.getEString(), "website", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOrganization_FacebookPageUri(), theEcorePackage.getEString(), "facebookPageUri", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOrganization_FacebookAccessToken(), theEcorePackage.getEString(), "facebookAccessToken", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOrganization_FacebookId(), theEcorePackage.getEString(), "facebookId", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOrganization_FacebookUserName(), theEcorePackage.getEString(), "facebookUserName", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOrganization_TwitterScreenName(), theEcorePackage.getEString(), "twitterScreenName", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOrganization_TwitterAccessToken(), theEcorePackage.getEString(), "twitterAccessToken", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOrganization_TwitterAccessTokenSecret(), theEcorePackage.getEString(), "twitterAccessTokenSecret", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOrganization_TwitterId(), theEcorePackage.getEString(), "twitterId", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
