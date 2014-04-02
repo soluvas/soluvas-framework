@@ -6164,7 +6164,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (getPostalAddress_CountryCode(), 
 		   source, 
 		   new String[] {
-			 "documentation", "ISO 3166-1 alpha-2.\n\nLDAP: c, countryName"
+			 "documentation", "Country code using <a href=\"http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO 3166-1 alpha-2</a>.\n\nLDAP: c, countryName"
 		   });		
 		addAnnotation
 		  (getPostalAddress_Mobiles(), 

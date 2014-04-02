@@ -39,12 +39,24 @@
 			<groupId>org.geotoolkit</groupId>
 			<artifactId>geotk-referencing</artifactId>
 			<version>${geotk.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>jsr-275</artifactId>
+					<groupId>javax.measure</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.geotoolkit</groupId>
 			<artifactId>geotk-logging-commons</artifactId>
 			<version>${geotk.version}</version>
 			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>jsr-275</artifactId>
+					<groupId>javax.measure</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
   		
 		<dependency>

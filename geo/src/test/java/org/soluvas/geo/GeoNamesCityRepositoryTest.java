@@ -31,7 +31,7 @@ public class GeoNamesCityRepositoryTest {
 
 	@Test
 	public void searchCityIndr() {
-		final String term = "indr";
+		final String term = "iNdR";
 		final Page<City> cities1 = cityRepo.searchCity(term, new PageRequest(0, 5));
 		log.info("Search {}: {}", term, cities1);
 		final Page<City> cities2 = cityRepo.searchCity(term, new PageRequest(1, 5));
@@ -43,6 +43,19 @@ public class GeoNamesCityRepositoryTest {
 	}
 
 	@Test
+	public void searchCityWates() {
+		final String term = "wates";
+		final Page<City> cities1 = cityRepo.searchCity(term, new PageRequest(0, 5));
+		log.info("Search {}: {}", term, cities1);
+		final Page<City> cities2 = cityRepo.searchCity(term, new PageRequest(1, 5));
+		log.info("Search {}: {}", term, cities2);
+		assertEquals(1, cities1.getNumberOfElements());
+		assertEquals(1, cities1.getTotalElements());
+		assertEquals(0, cities2.getNumberOfElements());
+		assertEquals(1, cities2.getTotalElements());
+	}
+
+	@Test
 	public void getCountryID() {
 		assertEquals("Indonesia", cityRepo.getCountry("ID").getName());
 	}
@@ -50,7 +63,7 @@ public class GeoNamesCityRepositoryTest {
 	@Test
 	public void searchCityIndrExcluded() throws IOException {
 		final CityRepository cityRepo = new GeoNamesCityRepository(ImmutableSet.of("ID"));
-		final String term = "indr";
+		final String term = "iNdR";
 		final Page<City> cities1 = cityRepo.searchCity(term, new PageRequest(0, 5));
 		log.info("Search {}: {}", term, cities1);
 		final Page<City> cities2 = cityRepo.searchCity(term, new PageRequest(1, 5));

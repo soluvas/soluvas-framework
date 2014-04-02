@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.domain.Page;
@@ -19,10 +21,13 @@ import au.com.bytecode.opencsv.CSVReader;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.googlecode.concurrenttrees.radix.ConcurrentRadixTree;
 import com.googlecode.concurrenttrees.radix.RadixTree;
 import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFactory;
@@ -44,7 +49,8 @@ public class GeoNamesCityRepository implements CityRepository {
 	private static final Logger log = LoggerFactory
 			.getLogger(GeoNamesCityRepository.class);
 	final RadixTree<City> tree = new ConcurrentRadixTree<>(new DefaultCharArrayNodeFactory());
-	final HashMap<String, Country> countryMap = new HashMap<>();
+	final ImmutableMap<String, Country> countryMap;
+	final ImmutableMap<String, Country> country3Map;
 	
 	/**
 	 * @param excludedCountryCodes Exclude cities from these country codes (2-letter ISO) from being loaded.
@@ -55,6 +61,7 @@ public class GeoNamesCityRepository implements CityRepository {
 		log.info("Initializing GeoNames city repository excluding {} countries: {}",
 				excludedCountryCodes.size(), excludedCountryCodes);
 		// Countries
+		final ImmutableMap.Builder<String, Country> countryMab = ImmutableMap.builder();
 		try (final InputStreamReader reader = new InputStreamReader(GeoNamesCityRepository.class.getResourceAsStream("countryinfo.csv"))) {
 			try (final CSVReader csv = new CSVReader(reader, '\t', '"')) {
 				while (true) {
@@ -66,13 +73,22 @@ public class GeoNamesCityRepository implements CityRepository {
 					if (line[0].startsWith("#")) {
 						continue;
 					}
-					final Country country = new Country(line[0], line[4]);
-					countryMap.put(country.getIso(), country);
+					final Country country = new Country(line[0], line[1], line[4]);
+					countryMab.put(country.getIso(), country);
 				}
 			}
 		}
+		countryMap = countryMab.build();
 		log.info("Read {} countries: {}", countryMap.size(), countryMap.keySet());
+		country3Map = Maps.uniqueIndex(countryMap.values(), new Function<Country, String>() {
+			@Override @Nullable
+			public String apply(@Nullable Country input) {
+				return input.getIso3();
+			}
+		});
 		// Cities
+		final List<String> skippedCities = new ArrayList<>();
+		final List<String> excludedCities = new ArrayList<>();
 		try (final InputStreamReader reader = new InputStreamReader(GeoNamesCityRepository.class.getResourceAsStream("cities1000lite.csv"))) {
 			try (final CSVReader csv = new CSVReader(reader, '\t', '"')) {
 				while (true) {
@@ -82,21 +98,23 @@ public class GeoNamesCityRepository implements CityRepository {
 						break;
 					}
 					if (line[2].isEmpty()) {
-						log.debug("Skipped city without country '{}'", line[0]);
+						skippedCities.add(line[0]);
 						continue;
 					}
 					if (excludedCountryCodes.contains(line[2])) {
-						log.debug("Excluding city '{}' from country '{}'", line[0], line[2]);
+						excludedCities.add(line[2]);
 						continue;
 					}
 					final Country country = countryMap.get(line[2]);
 					Preconditions.checkNotNull(country, "Invalid country code '%s' for city '%s'",
 							line[2], line[0]);
-					final City city = new City(line[0], line[1], country);
+					final City city = new City(line[0], line[1], null, country);
 					tree.put(city.getNormalizedName().toLowerCase() + ", " + city.getCountry().getIso(), city);
 				}
 			}
 		}
+		log.info("Skipped {} cities without country: {}", skippedCities.size(), Iterables.limit(skippedCities, 10));
+		log.info("Excluded {} cities from country {}: {}", excludedCities.size(), Iterables.limit(excludedCities, 10));
 		log.info("Read {} cities with countries", tree.size());
 	}
 	
@@ -108,15 +126,36 @@ public class GeoNamesCityRepository implements CityRepository {
 		this(ImmutableSet.<String>of());
 	}
 	
+	@Override
+	public City getCity(String normalizedNameAndCountryCode) throws IllegalArgumentException {
+		final City city = tree.getValueForExactKey(normalizedNameAndCountryCode);
+		Preconditions.checkArgument(city != null,
+				"Invalid city for '%s''.", normalizedNameAndCountryCode);
+		return city;
+	}
+	
+	@Override
+	public String getKeyForCity(City city) {
+		return city.getNormalizedName().toLowerCase() + ", " + city.getCountry().getIso();
+	}
+	
+	@Override
+	public City getCity(String name, String countryCode) {
+		return getCity(name.toLowerCase() + ", " + countryCode);
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.soluvas.geo.CityRepository#getCountry(java.lang.String)
 	 */
 	@Override
-	public Country getCountry(String iso) throws IllegalArgumentException {
-		final Country country = countryMap.get(iso);
+	public Country getCountry(String iso2orIso3) throws IllegalArgumentException {
+		Country country = countryMap.get(iso2orIso3);
+		if (country == null) {
+			country = country3Map.get(iso2orIso3);
+		}
 		Preconditions.checkArgument(country != null,
 				"Invalid country ISO code '%s'. %s available countries are: %s.",
-				iso, countryMap.size(), countryMap.keySet());
+				iso2orIso3, countryMap.size(), countryMap.keySet());
 		return country;
 	}
 	
@@ -126,7 +165,7 @@ public class GeoNamesCityRepository implements CityRepository {
 	@Override
 	public Page<City> searchCity(String term, Pageable pageable) {
 		// http://stackoverflow.com/a/3322174/1343587
-		final String normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+		final String normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 		final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
 		final ImmutableList<City> cities = FluentIterable.from(keys)
 				.skip((int) pageable.getOffset())
@@ -148,11 +187,11 @@ public class GeoNamesCityRepository implements CityRepository {
 	 * @see org.soluvas.geo.CityRepository#putCity(java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public City putCity(String name, String normalizedName, String countryCode) {
+	public City putCity(String name, String normalizedName, String countryCode, String province) {
 		final Country country = countryMap.get(countryCode);
 		Preconditions.checkNotNull(country, "Invalid country code '%s' for city '%s'",
 				countryCode, name);
-		final City city = new City(name, normalizedName, country);
+		final City city = new City(name, normalizedName, province, country);
 		tree.put(city.getNormalizedName().toLowerCase() + ", " + city.getCountry().getIso(), city);
 		return city;
 	}
@@ -160,6 +199,32 @@ public class GeoNamesCityRepository implements CityRepository {
 	@Override
 	public long count() {
 		return tree.size();
+	}
+	
+	public ImmutableMap<String, Country> getCountryMap() {
+		return countryMap;
+	}
+	
+	@Override
+	public Page<Country> searchCountry(String term, Pageable pageable) {
+		// http://stackoverflow.com/a/3322174/1343587
+		final String normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+		final FluentIterable<Country> matching = FluentIterable.from(countryMap.values())
+			.filter(new Predicate<Country>() {
+				@Override
+				public boolean apply(@Nullable Country country) {
+					return StringUtils.containsIgnoreCase(country.getIso() + " " + country.getIso3() + " " + country.getName(), normalizedTerm);
+				}
+			});
+		final int total = Iterables.size(matching);
+		final ImmutableList<Country> paged = matching
+			.skip((int) pageable.getOffset())
+			.limit((int) pageable.getPageSize())
+			.toList();
+		final PageImpl<Country> page = new PageImpl<>(paged, pageable, total);
+		log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) countries: {}",
+				term, normalizedTerm, pageable, paged.size(), total, Iterables.limit(paged, 10));
+		return page;
 	}
 	
 }

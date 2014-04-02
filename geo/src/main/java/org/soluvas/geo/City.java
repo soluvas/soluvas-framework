@@ -10,13 +10,23 @@ public class City implements Serializable {
 	
 	private final String name;
 	private final String normalizedName;
+	private final String province;
 	private final Country country;
 	
-	public City(String name, String normalizedName, Country country) {
+	public City(String name, String normalizedName, String province, Country country) {
 		super();
 		this.name = name;
 		this.normalizedName = normalizedName;
+		this.province = province;
 		this.country = country;
+	}
+
+	public City() {
+		super();
+		this.name = null;
+		this.normalizedName = null;
+		this.province = null;
+		this.country = null;
 	}
 
 	public String getName() {
@@ -31,6 +41,10 @@ public class City implements Serializable {
 		return normalizedName;
 	}
 	
+	public String getProvince() {
+		return province;
+	}
+	
 	public Country getCountry() {
 		return country;
 	}
@@ -41,6 +55,10 @@ public class City implements Serializable {
 		int result = 1;
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((normalizedName == null) ? 0 : normalizedName.hashCode());
+		result = prime * result
+				+ ((province == null) ? 0 : province.hashCode());
 		return result;
 	}
 
@@ -63,6 +81,16 @@ public class City implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (normalizedName == null) {
+			if (other.normalizedName != null)
+				return false;
+		} else if (!normalizedName.equals(other.normalizedName))
+			return false;
+		if (province == null) {
+			if (other.province != null)
+				return false;
+		} else if (!province.equals(other.province))
+			return false;
 		return true;
 	}
 
@@ -71,6 +99,8 @@ public class City implements Serializable {
 		return "City ["
 				+ (name != null ? "name=" + name + ", " : "")
 				+ (normalizedName != null ? "normalizedName=" + normalizedName
+						+ ", " : "")
+				+ (province != null ? "province=" + province
 						+ ", " : "")
 				+ (country != null ? "country=" + country.getIso() : "")
 				+ "]";

@@ -11,20 +11,30 @@ public class Country implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private final String iso;
+	private final String iso3;
 	private final String name;
 	
-	public Country(String iso, String name) {
+	public Country(String iso, String iso3, String name) {
 		super();
 		this.iso = iso;
+		this.iso3 = iso3;
 		this.name = name;
 	}
 
 	/**
-	 * 2-letter ISO code.
+	 * Country code using <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO-3166-1 alpha-2</a>.
 	 * @return
 	 */
 	public String getIso() {
 		return iso;
+	}
+	
+	/**
+	 * Country code using <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3">ISO-3166-1 alpha-3</a>.
+	 * @return
+	 */
+	public String getIso3() {
+		return iso3;
 	}
 
 	public String getName() {

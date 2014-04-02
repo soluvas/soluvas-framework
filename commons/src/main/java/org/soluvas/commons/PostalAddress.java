@@ -246,7 +246,7 @@ public interface PostalAddress extends NameContainer, Identifiable, SchemaVersio
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * ISO 3166-1 alpha-2.
+	 * Country code using <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>.
 	 * 
 	 * LDAP: c, countryName
 	 * <!-- end-model-doc -->

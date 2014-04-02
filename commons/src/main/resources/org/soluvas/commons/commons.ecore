@@ -1223,7 +1223,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="countryCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="ISO 3166-1 alpha-2.&#xA;&#xA;LDAP: c, countryName"/>
+        <details key="documentation" value="Country code using &lt;a href=&quot;http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2&quot;>ISO 3166-1 alpha-2&lt;/a>.&#xA;&#xA;LDAP: c, countryName"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryMobile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
