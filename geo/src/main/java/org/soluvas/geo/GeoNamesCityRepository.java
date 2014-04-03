@@ -130,7 +130,7 @@ public class GeoNamesCityRepository implements CityRepository {
 	public City getCity(String normalizedNameAndCountryCode) throws IllegalArgumentException {
 		final City city = tree.getValueForExactKey(normalizedNameAndCountryCode);
 		Preconditions.checkArgument(city != null,
-				"Invalid city for '%s''.", normalizedNameAndCountryCode);
+				"Invalid city for '%s'.", normalizedNameAndCountryCode);
 		return city;
 	}
 	
