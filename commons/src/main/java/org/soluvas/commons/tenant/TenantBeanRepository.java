@@ -106,7 +106,7 @@ public abstract class TenantBeanRepository<T> implements TenantRepositoryListene
 			beanMap.put(tenantId, bean);
 			onCreated(tenantId, appManifest, bean);
 		} catch (Exception e) {
-			throw new CommonsException("Cannot initialize " + implClass.getSimpleName() + " bean for '" + tenantId + "'", e);
+			throw new CommonsException("Cannot initialize " + implClass.getSimpleName() + " bean for '" + tenantId + "': " + e, e);
 		}
 	}
 	
