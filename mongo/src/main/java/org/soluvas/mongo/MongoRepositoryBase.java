@@ -369,7 +369,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			return new PageImpl<>(entities, pageable, total);
 		} catch (Exception e) {
 			throw new MongoRepositoryException(e, "Cannot findAll %s sort=%s skip=%s limit=%s on %s",
-					sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
+					collName, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
 		}
 	}
 
