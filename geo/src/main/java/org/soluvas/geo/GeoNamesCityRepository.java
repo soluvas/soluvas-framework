@@ -48,9 +48,22 @@ public class GeoNamesCityRepository implements CityRepository {
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(GeoNamesCityRepository.class);
+	/**
+	 * Tree containing segmented city names.
+	 * e.g. "Other Kab. Labuhan Batu" will become 1 main entry + 3 full text search entries ({@code 123} is the RadixTree index
+	 * to avoid key collision):
+	 * <ol>
+	 * 	<li>other kab. labuhan batu, ID -- used for exact match</li>
+	 * 	<li>kab. labuhan batu 123</li>
+	 * 	<li>labuhan batu 123</li>
+	 * 	<li>batu 123</li>
+	 * </ol> 
+	 */
 	final RadixTree<City> tree = new ConcurrentRadixTree<>(new DefaultCharArrayNodeFactory());
 	final ImmutableMap<String, Country> countryMap;
 	final ImmutableMap<String, Country> country3Map;
+	private int entryCount = 0;
+	private int realCityCount = 0;
 	
 	/**
 	 * @param excludedCountryCodes Exclude cities from these country codes (2-letter ISO) from being loaded.
@@ -105,17 +118,13 @@ public class GeoNamesCityRepository implements CityRepository {
 						excludedCities.add(line[2]);
 						continue;
 					}
-					final Country country = countryMap.get(line[2]);
-					Preconditions.checkNotNull(country, "Invalid country code '%s' for city '%s'",
-							line[2], line[0]);
-					final City city = new City(line[0], line[1], null, country);
-					tree.put(city.getNormalizedName().toLowerCase() + ", " + city.getCountry().getIso(), city);
+					putCity(line[0], line[1], line[2], null);
 				}
 			}
 		}
 		log.info("Skipped {} cities without country: {}", skippedCities.size(), Iterables.limit(skippedCities, 10));
 		log.info("Excluded {} cities from country {}: {}", excludedCities.size(), Iterables.limit(excludedCities, 10));
-		log.info("Read {} cities with countries", tree.size());
+		log.info("Read {} cities with countries into {} RadixTree entries", realCityCount, tree.size());
 	}
 	
 	/**
@@ -193,12 +202,24 @@ public class GeoNamesCityRepository implements CityRepository {
 				countryCode, name);
 		final City city = new City(name, normalizedName, province, country);
 		tree.put(city.getNormalizedName().toLowerCase() + ", " + city.getCountry().getIso(), city);
+		entryCount++;
+		// full text search entries
+		String fullTextName = city.getNormalizedName().toLowerCase();
+		int spacePos = fullTextName.indexOf(' ');
+		while (spacePos >= 0) {
+			fullTextName = fullTextName.substring(spacePos + 1);
+//			log.debug("fullTextName {} {}", spacePos, fullTextName);
+			tree.put(fullTextName + " " + entryCount, city);
+			entryCount++;
+			spacePos = fullTextName.indexOf(' ');
+		}
+		realCityCount++;		
 		return city;
 	}
 
 	@Override
 	public long count() {
-		return tree.size();
+		return realCityCount;
 	}
 	
 	public ImmutableMap<String, Country> getCountryMap() {
