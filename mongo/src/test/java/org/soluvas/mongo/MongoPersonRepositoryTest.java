@@ -19,7 +19,6 @@ import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.CappedRequest;
 import org.soluvas.data.domain.Page;
-import org.soluvas.data.domain.PageOffsetRequest;
 import org.soluvas.data.person.PersonRepository;
 
 import com.google.code.morphia.logging.MorphiaLoggerFactory;
@@ -92,7 +91,7 @@ public class MongoPersonRepositoryTest {
 	public void findPersonByMobileNumber() {
 		final String mobileNumber = "+6285286185328";
 		
-		final Page<Person> personPage = personRepo.findBySearchText(StatusMask.INCLUDE_INACTIVE, mobileNumber, new PageOffsetRequest(0, 100));
+		final Page<Person> personPage = personRepo.findBySearchText(StatusMask.INCLUDE_INACTIVE, mobileNumber, new CappedRequest(100));
 		assertNotNull(personPage.getContent());
 		log.info("web found {} person with mobileNumber {}", personPage.getContent(), mobileNumber);
 	}

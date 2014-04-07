@@ -7,11 +7,12 @@ import java.util.Map;
 import com.google.common.collect.ImmutableList;
 
 /**
- * FIXME: Move to xmi file for each tenant.
+ * FIXME: <del>Move to xmi file for each tenant.</del>, tapi ke Mongo
  * 
  * Holds valid {@link SocialPerson#getCustomerRole()} values.
  * @author rudi
  */
+@Deprecated
 public class CustomerRoles {
 	
 	public static final String AGENT = "agent";
