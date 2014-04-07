@@ -219,6 +219,13 @@
 			</dependency>
 
 			<dependency>
+				<groupId>org.glassfish.jersey</groupId>
+				<artifactId>jersey-bom</artifactId>
+				<version>2.7</version>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
 				<groupId>com.sun.jersey</groupId>
 				<artifactId>jersey-client</artifactId>
 				<version>${jersey.version}</version>
