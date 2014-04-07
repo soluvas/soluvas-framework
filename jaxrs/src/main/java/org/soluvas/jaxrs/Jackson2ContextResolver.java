@@ -117,4 +117,5 @@ public class Jackson2ContextResolver implements ContextResolver<ObjectMapper> {
 	public ObjectMapper getContext(Class<?> type) {
 		return objectMapperSupplier.get();
 	}
+
 }
