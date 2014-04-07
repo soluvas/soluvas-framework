@@ -14,9 +14,9 @@ import com.google.common.collect.ImmutableList;
  */
 public class CustomerRoles {
 	
-	public static final String AGENT = "agen";
+	public static final String AGENT = "agent";
 	
-	public static final String COMMON = "biasa";
+	public static final String COMMON = "common";
 	
 	public static final String DEPOSIT = "deposit";
 	
