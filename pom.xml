@@ -376,17 +376,17 @@
 			<dependency>
 			    <groupId>org.hibernate</groupId>
 			    <artifactId>hibernate-entitymanager</artifactId>
-			    <version>4.2.11.Final</version>
+			    <version>4.2.12.Final</version>
 			</dependency>
 			<dependency>
 			    <groupId>org.hibernate</groupId>
 			    <artifactId>hibernate-core</artifactId>
-			    <version>4.2.11.Final</version>
+			    <version>4.2.12.Final</version>
 			</dependency>
 			<dependency>
 			    <groupId>org.hibernate</groupId>
 			    <artifactId>hibernate-c3p0</artifactId>
-			    <version>4.2.11.Final</version>
+			    <version>4.2.12.Final</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.emf</groupId>
@@ -721,7 +721,7 @@
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
-				<version>3.1</version>
+				<version>3.3.2</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-codec</groupId>
