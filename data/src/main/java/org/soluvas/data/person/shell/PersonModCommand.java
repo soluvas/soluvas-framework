@@ -11,6 +11,7 @@ import org.apache.felix.gogo.commands.Option;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.Gender;
@@ -50,6 +51,8 @@ public class PersonModCommand extends ExtCommandSupport {
 	private transient String slug;
 	@Option(name="-p", aliases="--password", description="Password (will be encoded as SSHA).")
 	private String password;
+	@Option(name="--status", description="Set account status: draft|validated|active|verified|inactive|void.")
+	private String status;
 	@Argument(index=0, name="id ...", required=true, multiValued=true, description="Person ID(s).")
 	private transient String[] ids;
 	
@@ -117,6 +120,10 @@ public class PersonModCommand extends ExtCommandSupport {
 				final String encoded = HashedPasswordUtils.encodeSsha(password);
 				System.err.println(ansi().render("Encoded password: @|bold %s|@", encoded));
 				person.setPassword(encoded);
+			}
+			
+			if (!Strings.isNullOrEmpty(status)) {
+				person.setAccountStatus(AccountStatus.valueOf(status.toUpperCase()));
 			}
 	
 			personRepo.modify(id, person);

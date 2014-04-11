@@ -16,6 +16,7 @@ import org.soluvas.commons.tenant.TenantRepository;
 import org.soluvas.data.person.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
@@ -27,6 +28,7 @@ import com.google.common.eventbus.EventBus;
  * @author ceefour
  */
 @Configuration @Lazy
+@ComponentScan("org.soluvas.data.person.shell")
 public class MongoPersonConfig implements PersonConfig {
 	
 	@Inject

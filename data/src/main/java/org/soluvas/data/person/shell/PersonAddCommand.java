@@ -6,7 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.gogo.commands.Argument;
@@ -56,16 +55,10 @@ public class PersonAddCommand extends ExtCommandSupport {
 		description="Full name of Person to be created.")
 	private String name;
 	
-	private final PersonRepository personRepo;
-
-	@Inject
-	public PersonAddCommand(PersonRepository personRepo) {
-		super();
-		this.personRepo = personRepo;
-	}
-
 	@Override
 	protected Person doExecute() throws Exception {
+		final PersonRepository personRepo = getBean(PersonRepository.class);
+		
 		final Person person = CommonsFactory.eINSTANCE.createPerson();
 		person.setId(id);
 		person.setGuid(Person.class.getSimpleName() + "_" + id);

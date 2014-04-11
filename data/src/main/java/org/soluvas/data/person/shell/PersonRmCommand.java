@@ -33,7 +33,7 @@ public class PersonRmCommand extends ExtCommandSupport {
 	private String[] ids;
 
 	@Override
-	protected Object doExecute() throws Exception {
+	protected Long doExecute() throws Exception {
 		final PersonRepository personRepo = getBean(PersonRepository.class);
 		long i = 0;
 		for (final String id : ids) {

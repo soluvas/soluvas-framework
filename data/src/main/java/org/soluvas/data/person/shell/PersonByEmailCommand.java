@@ -1,7 +1,5 @@
 package org.soluvas.data.person.shell; 
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
@@ -32,16 +30,9 @@ public class PersonByEmailCommand extends ExtCommandSupport {
 	@Argument(index=0, name="email", required=true, description="Email.")
 	private String email;
 	
-	private final PersonRepository personRepo;
-	
-	@Inject
-	public PersonByEmailCommand(PersonRepository personRepo) {
-		super();
-		this.personRepo = personRepo;
-	}
-
 	@Override
-	protected Object doExecute() throws Exception {
+	protected Person doExecute() throws Exception {
+		final PersonRepository personRepo = getBean(PersonRepository.class);
 		return personRepo.lookupOne(statusMask, LookupKey.EMAIL, email);
 	}
 

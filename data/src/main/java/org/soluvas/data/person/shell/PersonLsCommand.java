@@ -10,6 +10,7 @@ import org.soluvas.commons.Email;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageRequest;
@@ -43,13 +44,14 @@ public class PersonLsCommand extends ExtCommandSupport {
 	private transient StatusMask statusMask = StatusMask.ACTIVE_ONLY;
 	
 	@Override
-	protected Object doExecute() throws Exception {
+	protected Long doExecute() throws Exception {
 		if (all != null && all) {
 			statusMask = StatusMask.RAW;
 		}
 		final PersonRepository personRepo = getBean(PersonRepository.class);
-		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-20s|%-21s|%-30s|@",
-				"№", "ID", "Slug", "Name", "Email(s)" ));
+		final TenantRef tenant = getBean(TenantRef.class);
+		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-20s|%-21s|%-10s|%-30s|@",
+				"№", "ID", "Slug", "Name", "Status", "Email(s)" ));
 		final Page<Person> personPage = personRepo.findAll(new PageRequest(pageNumber, pageSize, sortDir, sortProperty));
 		int i = 0;
 		for (Person it : personPage.getContent()) {
@@ -66,11 +68,11 @@ public class PersonLsCommand extends ExtCommandSupport {
 			} else {
 				emails = it.getEmail();
 			}
-			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-15s|@@|bold,black ||@%-20s@|bold,black ||@" + genderStr + "%-20s@|bold,black ||@%-30s",
-				++i, it.getId(), it.getSlug(), it.getName(), emails) );
+			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-15s|@@|bold,black ||@%-20s@|bold,black ||@" + genderStr + "%-20s@|bold,black ||@%-10s@|bold,black ||@%-30s",
+				++i, it.getId(), it.getSlug(), it.getName(), it.getAccountStatus(), emails) );
 		}
-		System.out.println(ansi().render("@|bold %d|@ of @|bold %d|@ Person entities",
-			personPage.getNumberOfElements(), personPage.getTotalElements()));
+		System.out.println(ansi().render("@|bold %d|@ of @|bold %d|@ Person entities in @|bold %s|@",
+			personPage.getNumberOfElements(), personPage.getTotalElements(), tenant.getTenantId()));
 		return personPage.getTotalElements();
 	}
 

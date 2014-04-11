@@ -2,8 +2,6 @@ package org.soluvas.data.person.shell;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
@@ -32,16 +30,9 @@ public class PersonCatCommand extends ExtCommandSupport {
 	@Argument(index=0, name="id", required=true, description="Person ID.")
 	private String id;
 	
-	private final PersonRepository personRepo;
-	
-	@Inject
-	public PersonCatCommand(PersonRepository personRepo) {
-		super();
-		this.personRepo = personRepo;
-	}
-
 	@Override
 	protected Object doExecute() throws Exception {
+		final PersonRepository personRepo = getBean(PersonRepository.class);
 		if (byIndex == null || byIndex == true) {
 			Integer parsedId = null;
 			try {

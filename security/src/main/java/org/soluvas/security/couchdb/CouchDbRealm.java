@@ -187,14 +187,17 @@ public class CouchDbRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken token) throws AuthenticationException {
+		final String host = token instanceof HostAuthenticationToken ? ((HostAuthenticationToken) token).getHost() : null;
+		if (!getName().equals(host)) {
+			log.debug("[{}] Host mismatch, expected '{}', token requests '{}'."
+					+ " If you use multiple realms, one realm should match the host while others mismatch."
+					+ " If all mismatch, you have a misconfiguration.", getName(), getName(), host);
+			throw new UnknownAccountException("[" + getName() + "] Host mismatch, expected '" + getName() + "', token requests '" + host + "'."
+					+ " If you use multiple realms, one realm should match the host while others mismatch."
+					+ " If all mismatch, you have a misconfiguration.");
+		}
+		
 		try {
-			final String host = token instanceof HostAuthenticationToken ? ((HostAuthenticationToken) token).getHost() : null;
-			if (!getName().equals(host)) {
-				throw new UnknownAccountException("Host mismatch, expected '" + getName() + "', token requests '" + host + "'."
-						+ " If you use multiple realms, one realm should match the host while others mismatch."
-						+ " If all mismatch, you have a misconfiguration.");
-			}
-			
 			if (token instanceof UsernamePasswordToken) {
 				// Key can be either person ID or email
 				final String tokenKey = ((UsernamePasswordToken) token).getUsername();

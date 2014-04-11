@@ -23,5 +23,4 @@ public interface TenantSelector {
 	
 	TenantRef tenantRef();
 	
-	
 }

@@ -17,11 +17,15 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.realm.ldap.AbstractLdapRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.ldap.LdapUtils;
+import org.soluvas.security.couchdb.CouchDbRealm;
+import org.soluvas.security.mongo.MongoRealm;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -35,7 +39,11 @@ import com.google.common.collect.Sets;
  * It does not extend {@link AbstractLdapRealm} (it uses Apache Directory API).
  * 
  * @author ceefour
+ * @deprecated Use {@link DefaultWebSecurityManager} with {@link MongoRealm} or {@link CouchDbRealm},
+ * 		where {@link Realm#getName()} should be set to {@code tenantId}, which will be used as
+ * 		{@link UsernamePasswordToken#setHost(String)}.
  */
+@Deprecated
 public class SoluvasRealm extends AuthorizingRealm {
 
 	private static final Logger log = LoggerFactory.getLogger(SoluvasRealm.class);

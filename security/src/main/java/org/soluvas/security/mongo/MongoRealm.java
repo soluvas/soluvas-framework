@@ -1,13 +1,17 @@
 package org.soluvas.security.mongo;
 
+import java.util.List;
+
 import javax.annotation.Nullable;
 import javax.annotation.PreDestroy;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.HostAuthenticationToken;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -19,6 +23,7 @@ import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.mongo.MongoRepositoryException;
+import org.soluvas.mongo.MongoUtils;
 import org.soluvas.security.AccessControlManager;
 import org.soluvas.security.AutologinToken;
 import org.soluvas.security.Rfc2307CredentialsMatcher;
@@ -32,8 +37,8 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.ReadPreference;
 
 /**
  * A realm implementation that uses MongoDB repository.
@@ -54,7 +59,12 @@ public class MongoRealm extends AuthorizingRealm {
 	private final RolePersonRepository rolePersonRepo;
 	private final String personCollName = "person";
 	private final DBCollection personColl;
-	private MongoClient mongoClient;
+
+	private final List<String> dbHosts;
+
+	private final String dbName;
+
+	private final String dbUser;
 	
 	/**
 	 * @param securityCatalog
@@ -67,11 +77,13 @@ public class MongoRealm extends AuthorizingRealm {
 		this.securityCatalog = securityCatalog;
 		// WARNING: mongoUri may contain password!
 		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
+		dbHosts = realMongoUri.getHosts();
+		dbName = realMongoUri.getDatabase();
+		dbUser = realMongoUri.getUsername();
 		log.info("Connecting to MongoDB realm database {}/{} as {}, person collection={}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), personCollName);
 		try {
-			mongoClient = new MongoClient(realMongoUri);
-			final DB db = mongoClient.getDB(realMongoUri.getDatabase());
+			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
 			if (realMongoUri.getUsername() != null)
 				db.authenticate(realMongoUri.getUsername(),
 						realMongoUri.getPassword());
@@ -93,11 +105,13 @@ public class MongoRealm extends AuthorizingRealm {
 		this.securityCatalog = securityCatalog;
 		// WARNING: mongoUri may contain password!
 		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
+		dbHosts = realMongoUri.getHosts();
+		dbName = realMongoUri.getDatabase();
+		dbUser = realMongoUri.getUsername();
 		log.info("Connecting to MongoDB realm database {}/{} as {}, person collection={}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), personCollName);
 		try {
-			mongoClient = new MongoClient(realMongoUri);
-			final DB db = mongoClient.getDB(realMongoUri.getDatabase());
+			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
 			if (realMongoUri.getUsername() != null)
 				db.authenticate(realMongoUri.getUsername(),
 						realMongoUri.getPassword());
@@ -137,6 +151,16 @@ public class MongoRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken token) throws AuthenticationException {
+		final String host = token instanceof HostAuthenticationToken ? ((HostAuthenticationToken) token).getHost() : null;
+		if (!getName().equals(host)) {
+			log.debug("[{}] Host mismatch, expected '{}', token requests '{}'."
+					+ " If you use multiple realms, one realm should match the host while others mismatch."
+					+ " If all mismatch, you have a misconfiguration.", getName(), getName(), host);
+			throw new UnknownAccountException("[" + getName() + "] Host mismatch, expected '" + getName() + "', token requests '" + host + "'."
+					+ " If you use multiple realms, one realm should match the host while others mismatch."
+					+ " If all mismatch, you have a misconfiguration.");
+		}
+		
 		if (token instanceof UsernamePasswordToken) {
 			// Principal can be either person ID, slug (username in user's perspective), or email
 			final String tokenPrincipal = ((UsernamePasswordToken) token).getUsername();
@@ -151,24 +175,25 @@ public class MongoRealm extends AuthorizingRealm {
 			final ImmutableSet<String> expectedStatuses = ImmutableSet.of(
 					AccountStatus.ACTIVE.name(), AccountStatus.VERIFIED.name());
 			query.put("accountStatus", new BasicDBObject("$in", expectedStatuses));
-			log.debug("findOne MongoDB {} using {}", personCollName, query);
+			log.debug("[{}] findOne MongoDB using {} in {}@{}/{} collection {}",
+					getName(), query, dbUser, dbHosts, dbName, personCollName);
 			final DBObject found = personColl.findOne(query, new BasicDBObject("password", 1));
-			log.debug("Matched for {} : {}", tokenPrincipal, found);
+			log.debug("[{}] findOne result for person '{}' with password: {}", getName(), tokenPrincipal, found);
 			if (found != null) {
 				final String userPrincipal = (String) found.get("_id");
 				final String userPassword = (String) found.get("password");
 				return new SimpleAuthenticationInfo(userPrincipal, userPassword, getName());
 			} else {
-				log.info("Cannot find user '{}' in collection '{}' using: {}",
-						tokenPrincipal, personCollName, query);
-				throw new IncorrectCredentialsException("Cannot find user '" + tokenPrincipal + "' with status " + expectedStatuses);
+				log.info("[{}] Cannot find user '{}' in collection '{}' using: {}",
+						getName(), tokenPrincipal, personCollName, query);
+				throw new IncorrectCredentialsException("[" + getName() + "] Cannot find user '" + tokenPrincipal + "' with status " + expectedStatuses);
 			}
 		} else if (token instanceof AutologinToken) {
-			log.debug("AuthenticationInfo for {} is using AutologinToken", token.getPrincipal());
+			log.debug("[{}] AuthenticationInfo for {} is using AutologinToken", getName(), token.getPrincipal());
 			final String personId = (String) token.getPrincipal();
 			return new SimpleAuthenticationInfo(personId, null, getName());
 		} else {
-			throw new AuthenticationException("Unsupported AuthenticationToken: "
+			throw new AuthenticationException("[" + getName() + "] Unsupported AuthenticationToken: "
 					+ token.getClass() + " using " + token.getPrincipal());
 		}
 	}
