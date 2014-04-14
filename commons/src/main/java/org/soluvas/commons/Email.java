@@ -2,12 +2,9 @@
  */
 package org.soluvas.commons;
 
-import java.io.Serializable;
-
 import org.eclipse.emf.ecore.EObject;
 import org.joda.time.DateTime;
 import org.soluvas.commons.impl.EmailImpl;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 
@@ -30,7 +27,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @generated
  */
 @JsonDeserialize(as=EmailImpl.class)
-public interface Email extends EObject, Serializable {
+public interface Email extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Email</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -106,6 +106,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 			case CommonsPackage.GEOLOCATION: return createGeolocation();
 			case CommonsPackage.THING_INFO: return createThingInfo();
 			case CommonsPackage.ORGANIZATION: return createOrganization();
+			case CommonsPackage.CUSTOMER_ROLE: return createCustomerRole();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -145,6 +146,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createTenantSourceFromString(eDataType, initialValue);
 			case CommonsPackage.GENERIC_STATUS:
 				return createGenericStatusFromString(eDataType, initialValue);
+			case CommonsPackage.CUSTOMER_ROLE_STATUS:
+				return createCustomerRoleStatusFromString(eDataType, initialValue);
 			case CommonsPackage.DATE_TIME:
 				return createDateTimeFromString(eDataType, initialValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -232,6 +235,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertTenantSourceToString(eDataType, instanceValue);
 			case CommonsPackage.GENERIC_STATUS:
 				return convertGenericStatusToString(eDataType, instanceValue);
+			case CommonsPackage.CUSTOMER_ROLE_STATUS:
+				return convertCustomerRoleStatusToString(eDataType, instanceValue);
 			case CommonsPackage.DATE_TIME:
 				return convertDateTimeToString(eDataType, instanceValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -599,6 +604,16 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CustomerRole createCustomerRole() {
+		CustomerRoleImpl customerRole = new CustomerRoleImpl();
+		return customerRole;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ResourceType createResourceTypeFromString(EDataType eDataType, String initialValue) {
 		ResourceType result = ResourceType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -851,6 +866,26 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertGenericStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CustomerRoleStatus createCustomerRoleStatusFromString(EDataType eDataType, String initialValue) {
+		CustomerRoleStatus result = CustomerRoleStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertCustomerRoleStatusToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

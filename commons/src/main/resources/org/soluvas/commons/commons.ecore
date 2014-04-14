@@ -1466,4 +1466,14 @@
         eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="twitterId" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomerRole" eSuperTypes="#//Identifiable #//SchemaVersionable #//NameContainer #//Timestamped">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="schemaVersion" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ELong"
+        changeable="false" defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//CustomerRoleStatus"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CustomerRoleStatus">
+    <eLiterals name="active"/>
+    <eLiterals name="inactive" value="1"/>
+    <eLiterals name="void" value="2"/>
+  </eClassifiers>
 </ecore:EPackage>

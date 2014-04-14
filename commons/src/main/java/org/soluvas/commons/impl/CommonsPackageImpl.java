@@ -48,6 +48,8 @@ import org.soluvas.commons.CategoryLike;
 import org.soluvas.commons.Colorable;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.CustomerRole;
+import org.soluvas.commons.CustomerRoleStatus;
 import org.soluvas.commons.Organization;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.EClassLinked;
@@ -568,6 +570,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass customerRoleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum resourceTypeEEnum = null;
 
 	/**
@@ -653,6 +662,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EEnum genericStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum customerRoleStatusEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3572,6 +3588,33 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCustomerRole() {
+		return customerRoleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCustomerRole_SchemaVersion() {
+		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCustomerRole_Status() {
+		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -3692,6 +3735,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	public EEnum getGenericStatus() {
 		return genericStatusEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getCustomerRoleStatus() {
+		return customerRoleStatusEEnum;
 	}
 
 	/**
@@ -4360,6 +4412,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(organizationEClass, ORGANIZATION__TWITTER_ACCESS_TOKEN_SECRET);
 		createEAttribute(organizationEClass, ORGANIZATION__TWITTER_ID);
 
+		customerRoleEClass = createEClass(CUSTOMER_ROLE);
+		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__SCHEMA_VERSION);
+		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__STATUS);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -4374,6 +4430,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		signupSourceTypeEEnum = createEEnum(SIGNUP_SOURCE_TYPE);
 		tenantSourceEEnum = createEEnum(TENANT_SOURCE);
 		genericStatusEEnum = createEEnum(GENERIC_STATUS);
+		customerRoleStatusEEnum = createEEnum(CUSTOMER_ROLE_STATUS);
 
 		// Create data types
 		dateTimeEDataType = createEDataType(DATE_TIME);
@@ -4622,6 +4679,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		organizationEClass.getESuperTypes().add(this.getIdentifiable());
 		organizationEClass.getESuperTypes().add(this.getSchemaVersionable());
 		organizationEClass.getESuperTypes().add(this.getNameContainer());
+		customerRoleEClass.getESuperTypes().add(this.getIdentifiable());
+		customerRoleEClass.getESuperTypes().add(this.getSchemaVersionable());
+		customerRoleEClass.getESuperTypes().add(this.getNameContainer());
+		customerRoleEClass.getESuperTypes().add(this.getTimestamped());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -5034,6 +5095,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getOrganization_TwitterAccessTokenSecret(), theEcorePackage.getEString(), "twitterAccessTokenSecret", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOrganization_TwitterId(), theEcorePackage.getEString(), "twitterId", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(customerRoleEClass, CustomerRole.class, "CustomerRole", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCustomerRole_SchemaVersion(), theEcorePackage.getELong(), "schemaVersion", "1", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomerRole_Status(), this.getCustomerRoleStatus(), "status", null, 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
 		addEEnumLiteral(resourceTypeEEnum, ResourceType.BUNDLE);
@@ -5103,6 +5168,11 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addEEnumLiteral(genericStatusEEnum, GenericStatus.DRAFT);
 		addEEnumLiteral(genericStatusEEnum, GenericStatus.INACTIVE);
 		addEEnumLiteral(genericStatusEEnum, GenericStatus.VOID);
+
+		initEEnum(customerRoleStatusEEnum, CustomerRoleStatus.class, "CustomerRoleStatus");
+		addEEnumLiteral(customerRoleStatusEEnum, CustomerRoleStatus.ACTIVE);
+		addEEnumLiteral(customerRoleStatusEEnum, CustomerRoleStatus.INACTIVE);
+		addEEnumLiteral(customerRoleStatusEEnum, CustomerRoleStatus.VOID);
 
 		// Initialize data types
 		initEDataType(dateTimeEDataType, DateTime.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

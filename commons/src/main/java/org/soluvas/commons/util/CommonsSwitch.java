@@ -539,6 +539,17 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CommonsPackage.CUSTOMER_ROLE: {
+				CustomerRole customerRole = (CustomerRole)theEObject;
+				T1 result = caseCustomerRole(customerRole);
+				if (result == null) result = caseIdentifiable(customerRole);
+				if (result == null) result = caseSchemaVersionable(customerRole);
+				if (result == null) result = caseNameContainer(customerRole);
+				if (result == null) result = caseTimestamped(customerRole);
+				if (result == null) result = caseNameable(customerRole);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -1485,6 +1496,21 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseOrganization(Organization object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Customer Role</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Customer Role</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseCustomerRole(CustomerRole object) {
 		return null;
 	}
 
