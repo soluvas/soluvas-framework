@@ -328,5 +328,14 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	public ImmutableMap<String, TenantState> getStates() {
 		return ImmutableMap.copyOf(tenantStateMap);
 	}
+
+	@Override
+	public AppManifest lookupOne(String tenantId)
+			throws IllegalArgumentException {
+		final AppManifest appManifest = tenantMap.get(tenantId);
+		Preconditions.checkArgument(appManifest != null, "Tenant '%s' not found, %s available: %s",
+				tenantId, tenantMap.size(), tenantMap.keySet());
+		return appManifest;
+	}
 	
 }

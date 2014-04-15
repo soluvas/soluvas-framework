@@ -2,6 +2,8 @@ package org.soluvas.commons.tenant;
 
 import java.util.Set;
 
+import javax.annotation.Nullable;
+
 import org.soluvas.commons.AppManifest;
 
 import com.google.common.collect.ImmutableMap;
@@ -84,5 +86,7 @@ public interface TenantRepository<T extends ProvisionData> {
 	void addListener(TenantRepositoryListener listener);
 
 	ImmutableMap<String, TenantState> getStates();
+	
+	public AppManifest lookupOne(@Nullable String tenantId) throws IllegalArgumentException;
 
 }
