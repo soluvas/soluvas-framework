@@ -1,5 +1,7 @@
 package org.soluvas.commons.tenant;
 
+import java.io.Serializable;
+
 import javax.annotation.Nullable;
 
 /**
@@ -10,8 +12,10 @@ import javax.annotation.Nullable;
  * @see DirectoryTenantRepository
  * @see TenantProvisioner
  */
-public class ProvisionData {
+public class ProvisionData implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Nullable
 	private String mongoPassword;
 	@Nullable
@@ -91,6 +95,20 @@ public class ProvisionData {
 	 */
 	public void setAdminEmail(String adminEmail) {
 		this.adminEmail = adminEmail;
+	}
+
+	@Override
+	public String toString() {
+		return "ProvisionData ["
+				+ (mongoPassword != null ? "mongoPassword=" + mongoPassword
+						+ ", " : "")
+				+ (defaultStyle != null ? "defaultStyle=" + defaultStyle + ", "
+						: "")
+				+ (adminPersonId != null ? "adminPersonId=" + adminPersonId
+						+ ", " : "")
+				+ (adminPassword != null ? "adminPassword=" + adminPassword
+						+ ", " : "")
+				+ (adminEmail != null ? "adminEmail=" + adminEmail : "") + "]";
 	}
 	
 }
