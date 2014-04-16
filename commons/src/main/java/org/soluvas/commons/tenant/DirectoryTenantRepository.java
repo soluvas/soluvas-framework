@@ -337,5 +337,12 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 				tenantId, tenantMap.size(), tenantMap.keySet());
 		return appManifest;
 	}
+
+	@Override
+	public boolean exists(String tenantId) throws IllegalArgumentException {
+		Preconditions.checkState(!Strings.isNullOrEmpty(tenantId), "TenantID must not be null or empty");
+		final AppManifest appManifest = tenantMap.get(tenantId);
+		return appManifest != null;
+	}
 	
 }

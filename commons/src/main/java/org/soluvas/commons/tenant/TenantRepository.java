@@ -88,5 +88,7 @@ public interface TenantRepository<T extends ProvisionData> {
 	ImmutableMap<String, TenantState> getStates();
 	
 	public AppManifest lookupOne(@Nullable String tenantId) throws IllegalArgumentException;
+	
+	boolean exists(String tenantId) throws IllegalArgumentException;
 
 }
