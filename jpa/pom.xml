@@ -19,6 +19,17 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- special dependency to fix liquibase's logging fetish -->
+		<dependency>
+		    <groupId>com.mattbertolini</groupId>
+		    <artifactId>liquibase-slf4j</artifactId>
+		    <scope>test</scope>
+		</dependency>		
+		<dependency>
 			<groupId>org.jadira.usertype</groupId>
 			<artifactId>usertype.core</artifactId>
 		</dependency>

@@ -345,6 +345,12 @@
 				<artifactId>liquibase-core</artifactId>
 				<version>3.1.1</version>
 			</dependency>
+			<!-- special dependency to fix liquibase's logging fetish -->
+			<dependency>
+			    <groupId>com.mattbertolini</groupId>
+			    <artifactId>liquibase-slf4j</artifactId>
+			    <version>1.2.1</version>
+			</dependency>
 			<dependency>
 				<groupId>org.postgresql</groupId>
 				<artifactId>postgresql</artifactId>
