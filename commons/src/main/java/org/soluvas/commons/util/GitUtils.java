@@ -1,4 +1,4 @@
-package org.soluvas.data.impl;
+package org.soluvas.commons.util;
 
 import org.eclipse.jgit.transport.JschConfigSessionFactory;
 import org.eclipse.jgit.transport.OpenSshConfig.Host;
