@@ -39,7 +39,7 @@ import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.config.DirectorySourcedConfig;
 import org.soluvas.commons.config.TenantSelector;
-import org.soluvas.commons.util.GitUtils;
+import org.soluvas.data.impl.GitUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
