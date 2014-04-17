@@ -341,6 +341,11 @@
 			</dependency>
 
 			<dependency>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-core</artifactId>
+				<version>3.1.1</version>
+			</dependency>
+			<dependency>
 				<groupId>org.postgresql</groupId>
 				<artifactId>postgresql</artifactId>
 				<version>9.2-1004-jdbc41</version>
