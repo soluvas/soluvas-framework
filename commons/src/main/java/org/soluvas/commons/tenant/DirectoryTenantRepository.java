@@ -15,6 +15,18 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.PullResult;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.RepositoryBuilder;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.transport.PushResult;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
@@ -24,7 +36,10 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.EmfUtils;
 import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.config.DirectorySourcedConfig;
+import org.soluvas.commons.config.TenantSelector;
+import org.soluvas.commons.util.GitUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
@@ -65,6 +80,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	@Nullable
 	private final TenantProvisioner<T> provisioner;
 	private final List<TenantRepositoryListener> listeners = new ArrayList<>();
+	private final TenantSelector tenantSelector;
 	
 	/**
 	 * @param tenantEnv
@@ -74,7 +90,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	 * @throws IOException
 	 */
 	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir,
-			@Nullable TenantProvisioner<T> provisioner) throws IOException {
+			@Nullable TenantProvisioner<T> provisioner, TenantSelector tenantSelector) throws IOException {
 		super();
 		this.appEventBus = appEventBus;
 		this.tenantEnv = tenantEnv;
@@ -82,6 +98,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		this.rootDir = rootDir;
 		this.provisioner = provisioner;
 		this.whitelist = null;
+		this.tenantSelector = tenantSelector;
 		init();
 	}
 
@@ -94,7 +111,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	 * @throws IOException
 	 */
 	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir, 
-			@Nullable TenantProvisioner<T> provisioner, Set<String> whitelist) throws IOException {
+			@Nullable TenantProvisioner<T> provisioner, Set<String> whitelist, TenantSelector tenantSelector) throws IOException {
 		super();
 		this.appEventBus = appEventBus;
 		this.tenantEnv = tenantEnv;
@@ -102,6 +119,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		this.rootDir = rootDir;
 		this.provisioner = provisioner;
 		this.whitelist = ImmutableSet.copyOf(whitelist);
+		this.tenantSelector = tenantSelector;
 		log.info("Using whitelist of {} tenants: {}", whitelist.size(), Iterables.limit(whitelist, 10));
 		init();
 	}
@@ -217,7 +235,76 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 
 	@Override
 	public synchronized AppManifest modify(String tenantId, AppManifest appManifest) {
-		throw new UnsupportedOperationException();
+		Preconditions.checkState(!Strings.isNullOrEmpty(tenantId), "TenantID must not be null or empty.");
+		Preconditions.checkState(tenantMap.containsKey(tenantId), "Tenant ID %s is not provided", tenantId);
+		Preconditions.checkNotNull(appManifest, "App Manifest tenantID %s must not be null.", tenantId);
+		
+		updateAppManifest(tenantId, appManifest);
+		reloadAppManifest(tenantId);
+		final File file;
+		try {
+			file = new File(tenantSelector.getDataDir(), "/model/" + tenantId + ".AppManifest.xmi").getParentFile().getCanonicalFile();
+		} catch (IOException e) {
+			throw new RuntimeException("Cannot load file from", e);
+		}
+		cpp(file);
+		
+		return tenantMap.get(tenantId);
+	}
+	
+	private void updateAppManifest(String tenantId, AppManifest appManifest) {
+		final ResourceSetImpl rSet = new ResourceSetImpl();
+		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+		rSet.getPackageRegistry().put(CommonsPackage.eNS_URI, CommonsPackage.eINSTANCE);
+		
+		final File file = new File(tenantSelector.getDataDir(), "model/" + tenantId + ".AppManifest.xmi");
+		final org.eclipse.emf.ecore.resource.Resource res = rSet.createResource(URI.createFileURI(file.getPath()));
+		res.getContents().add(EcoreUtil.copy(appManifest));
+		try {
+			res.save(ImmutableMap.of(XMIResource.OPTION_LINE_WIDTH, 80,
+					XMIResource.OPTION_DECLARE_XML, true,
+					XMIResource.OPTION_ENCODING, "UTF-8"));
+			res.unload();
+		} catch (IOException e) {
+			throw new RuntimeException(String.format("Cannot save %s XMI file %s", tenantId, file), e);
+		}
+	}
+	
+	protected synchronized void reloadAppManifest(String tenantId) {
+		final AppManifest appManifest = (AppManifest) new StaticXmiLoader<>(CommonsPackage.eINSTANCE, new File(tenantSelector.getDataDir(), "model/" + tenantId + ".AppManifest.xmi"));
+		tenantMap.put(tenantId, appManifest);
+		log.debug("Reloaded AppManifest for tenantID {}", tenantId);
+	}
+	
+	protected void cpp(final File file) {
+		GitUtils.disableStrictHostKeyChecking();
+		
+		try {
+			final Repository gitRepo = new RepositoryBuilder().findGitDir(file).setMustExist(true).build();
+			final Git git = new Git(gitRepo);
+			try {
+				//Commit
+				log.debug("Commiting {} in {}", file, gitRepo);
+				final String message = "Changed App Manifest at " + new DateTime();
+				final RevCommit revCommit = git.commit().setAll(true).setMessage(message).call();
+				log.info("Committed '{}' as {} in {}", message, revCommit, gitRepo);
+				//Pull
+				log.debug("Pulling {} due to '{}'", gitRepo, message);
+				final PullResult pullResult = git.pull().call();
+				// FetchResult doesn't have proper toString()
+				final String fetchResult = pullResult.getFetchResult() != null ? pullResult.getFetchResult().getTrackingRefUpdates() + " from " + pullResult.getFetchResult().getURI() : null;
+				log.info("Pulled {} from {}. Fetch: {}. Merge: {}.", gitRepo, pullResult.getFetchedFrom(), fetchResult,
+						pullResult.getMergeResult());
+				// push: MUST set default remote AND branch
+				log.debug("Pushing {} due to '{}'", gitRepo, message);
+				final Iterable<PushResult> pushResults = git.push().call();
+				log.info("Pushed {}: {}", gitRepo, pushResults);
+			} catch (Exception e) {
+				throw new RuntimeException(String.format("Cannot cpp '%s' to Git repository: %s", file), e);
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(String.format("Can not get Git Repository for %s", file, e));
+		}
 	}
 
 	@Override

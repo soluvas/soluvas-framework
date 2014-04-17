@@ -37,6 +37,8 @@ public class DirectorySourcedConfig {
 	private EventBus appEventBus;
 	@Autowired(required=false) @Nullable
 	private TenantProvisioner<?> tenantProvisioner;
+	@Inject
+	private TenantSelector tenantSelector;
 	
 	@Bean(initMethod="init")
 	public DirectoryTenantRepository<?> tenantRepo() throws IOException {
@@ -48,9 +50,9 @@ public class DirectorySourcedConfig {
 		final String tenantWhitelistStr = env.getProperty("tenantWhitelist", String.class);
 		if (tenantWhitelistStr != null) {
 			final Set<String> tenantWhitelist = ImmutableSet.copyOf( Splitter.on(',').trimResults().omitEmptyStrings().splitToList( tenantWhitelistStr ) );
-			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir, tenantProvisioner, tenantWhitelist);
+			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir, tenantProvisioner, tenantWhitelist, tenantSelector);
 		} else {
-			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir, tenantProvisioner);
+			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir, tenantProvisioner, tenantSelector);
 		}
 	}
 	

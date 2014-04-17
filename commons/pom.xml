@@ -28,7 +28,12 @@
 		    <groupId>com.codahale.metrics</groupId>
 		    <artifactId>metrics-core</artifactId>
 		</dependency>
-	
+		
+		<dependency>
+			<groupId>org.eclipse.jgit</groupId>
+			<artifactId>org.eclipse.jgit</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>com.damnhandy</groupId>
 			<artifactId>handy-uri-templates</artifactId>
