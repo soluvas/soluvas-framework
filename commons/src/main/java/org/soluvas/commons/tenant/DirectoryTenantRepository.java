@@ -36,9 +36,7 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.EmfUtils;
 import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
-import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.config.DirectorySourcedConfig;
-import org.soluvas.commons.config.TenantSelector;
 import org.soluvas.commons.util.GitUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -80,7 +78,6 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	@Nullable
 	private final TenantProvisioner<T> provisioner;
 	private final List<TenantRepositoryListener> listeners = new ArrayList<>();
-	private final TenantSelector tenantSelector;
 	
 	/**
 	 * @param tenantEnv
@@ -90,7 +87,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	 * @throws IOException
 	 */
 	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir,
-			@Nullable TenantProvisioner<T> provisioner, TenantSelector tenantSelector) throws IOException {
+			@Nullable TenantProvisioner<T> provisioner) throws IOException {
 		super();
 		this.appEventBus = appEventBus;
 		this.tenantEnv = tenantEnv;
@@ -98,7 +95,6 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		this.rootDir = rootDir;
 		this.provisioner = provisioner;
 		this.whitelist = null;
-		this.tenantSelector = tenantSelector;
 		init();
 	}
 
@@ -111,7 +107,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	 * @throws IOException
 	 */
 	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir, 
-			@Nullable TenantProvisioner<T> provisioner, Set<String> whitelist, TenantSelector tenantSelector) throws IOException {
+			@Nullable TenantProvisioner<T> provisioner, Set<String> whitelist) throws IOException {
 		super();
 		this.appEventBus = appEventBus;
 		this.tenantEnv = tenantEnv;
@@ -119,7 +115,6 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		this.rootDir = rootDir;
 		this.provisioner = provisioner;
 		this.whitelist = ImmutableSet.copyOf(whitelist);
-		this.tenantSelector = tenantSelector;
 		log.info("Using whitelist of {} tenants: {}", whitelist.size(), Iterables.limit(whitelist, 10));
 		init();
 	}
@@ -239,41 +234,30 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		Preconditions.checkState(tenantMap.containsKey(tenantId), "Tenant ID %s is not provided", tenantId);
 		Preconditions.checkNotNull(appManifest, "App Manifest tenantID %s must not be null.", tenantId);
 		
-		updateAppManifest(tenantId, appManifest);
-		reloadAppManifest(tenantId);
-		final File file;
-		try {
-			file = new File(tenantSelector.getDataDir(), "/model/" + tenantId + ".AppManifest.xmi").getParentFile().getCanonicalFile();
-		} catch (IOException e) {
-			throw new RuntimeException("Cannot load file from", e);
-		}
-		cpp(file);
-		
-		return tenantMap.get(tenantId);
-	}
-	
-	private void updateAppManifest(String tenantId, AppManifest appManifest) {
+		/*Write appManifest to file and Reload/Update to memory*/
 		final ResourceSetImpl rSet = new ResourceSetImpl();
 		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		rSet.getPackageRegistry().put(CommonsPackage.eNS_URI, CommonsPackage.eINSTANCE);
-		
-		final File file = new File(tenantSelector.getDataDir(), "model/" + tenantId + ".AppManifest.xmi");
+		final File file = new File(URI.createURI(tenantMap.get(tenantId).getResourceUri()).path());
 		final org.eclipse.emf.ecore.resource.Resource res = rSet.createResource(URI.createFileURI(file.getPath()));
+		appManifest.setResourceName(tenantMap.get(tenantId).getResourceName());
+		appManifest.setResourceUri(tenantMap.get(tenantId).getResourceUri());
+		appManifest.setResourceType(tenantMap.get(tenantId).getResourceType());
 		res.getContents().add(EcoreUtil.copy(appManifest));
 		try {
 			res.save(ImmutableMap.of(XMIResource.OPTION_LINE_WIDTH, 80,
 					XMIResource.OPTION_DECLARE_XML, true,
 					XMIResource.OPTION_ENCODING, "UTF-8"));
 			res.unload();
+			tenantMap.put(tenantId, appManifest);
 		} catch (IOException e) {
 			throw new RuntimeException(String.format("Cannot save %s XMI file %s", tenantId, file), e);
 		}
-	}
-	
-	protected synchronized void reloadAppManifest(String tenantId) {
-		final AppManifest appManifest = (AppManifest) new StaticXmiLoader<>(CommonsPackage.eINSTANCE, new File(tenantSelector.getDataDir(), "model/" + tenantId + ".AppManifest.xmi"));
-		tenantMap.put(tenantId, appManifest);
-		log.debug("Reloaded AppManifest for tenantID {}", tenantId);
+		
+		/*Commit + Pull + Push*/
+		cpp(file);
+		
+		return tenantMap.get(tenantId);
 	}
 	
 	protected void cpp(final File file) {
@@ -306,7 +290,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 			throw new RuntimeException(String.format("Can not get Git Repository for %s", file, e));
 		}
 	}
-
+	
 	@Override
 	public synchronized boolean delete(String tenantId) {
 		Preconditions.checkState(whitelist == null,
