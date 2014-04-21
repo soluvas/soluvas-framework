@@ -124,7 +124,7 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 		return new File(env.getProperty("workspaceDir", System.getProperty("user.home") + "/" + appId + "_" + tenantEnv));
 	}
 	
-	static String internalGetAppDomain(String appId, Environment env) {
+	public static String internalGetAppDomain(String appId, Environment env) {
 		final String defaultAppDomain = appId + "." + getFqdn();
 		return env.getProperty("appDomain", defaultAppDomain);
 	}
