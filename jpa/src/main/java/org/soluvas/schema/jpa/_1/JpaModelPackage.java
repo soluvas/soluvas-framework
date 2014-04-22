@@ -11,12 +11,13 @@ import org.eclipse.emf.texo.model.ModelPackage;
 import org.eclipse.emf.texo.model.ModelResolver;
 import org.eclipse.emf.texo.utils.ModelUtils;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 /**
  * The <b>Package</b> for the model '<em><b>jpa</b></em>'. It contains
  * initialization code and access to the Factory to instantiate types of this
  * package.
- * 
+ *
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -51,6 +52,13 @@ public class JpaModelPackage extends ModelPackage {
 	 * @generated
 	 */
 	public static final int DATETIME_CLASSIFIER_ID = 2;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int LOCALDATE_CLASSIFIER_ID = 3;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -252,9 +260,9 @@ public class JpaModelPackage extends ModelPackage {
 	/**
 	 * Initializes this {@link ModelPackage}. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
+	 *
 	 * @return an initialized instance of this class
-	 * 
+	 *
 	 * @generated
 	 */
 	public static JpaModelPackage initialize() {
@@ -305,7 +313,7 @@ public class JpaModelPackage extends ModelPackage {
 	/**
 	 * Returns the nsUri of the {@link EPackage} managed by this Package
 	 * instance. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the nsUri of the EPackage
 	 * @generated
 	 */
@@ -736,6 +744,19 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
+	 * Returns the {@link EDataType} '<em><b>LocalDate</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>LocalDate</b></em>'
+	 * @generated
+	 */
+	public EDataType getLocalDateEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				LOCALDATE_CLASSIFIER_ID);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param eClassifier
@@ -752,6 +773,8 @@ public class JpaModelPackage extends ModelPackage {
 			return Geolocation.class;
 		case DATETIME_CLASSIFIER_ID:
 			return DateTime.class;
+		case LOCALDATE_CLASSIFIER_ID:
+			return LocalDate.class;
 		default:
 			throw new IllegalArgumentException("The EClassifier '"
 					+ eClassifier + "' is not defined in this EPackage");

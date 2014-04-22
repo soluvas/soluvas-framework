@@ -1,6 +1,6 @@
 package org.soluvas.schema.jpa._1;
 
-import java.util.Set;
+import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -11,6 +11,7 @@ import org.eclipse.emf.texo.model.ModelFeatureMapEntry;
 import org.eclipse.emf.texo.model.ModelObject;
 import org.eclipse.emf.texo.model.ModelPackage;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 /**
  * The <b>{@link ModelFactory}</b> for the types of this model: jpa. It contains
@@ -47,7 +48,7 @@ public class JpaModelFactory implements ModelFactory {
 	/**
 	 * Wraps an object in a {@link ModelObject}. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
+	 *
 	 * @param eClass
 	 *            the EClass of the object
 	 * @param adaptee
@@ -141,6 +142,8 @@ public class JpaModelFactory implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 		case JpaModelPackage.DATETIME_CLASSIFIER_ID:
 			return createDateTimeFromString(value);
+		case JpaModelPackage.LOCALDATE_CLASSIFIER_ID:
+			return createLocalDateFromString(value);
 		default:
 			throw new IllegalArgumentException("The EDatatype '" + eDataType
 					+ "' is not defined in this EPackage");
@@ -161,6 +164,8 @@ public class JpaModelFactory implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 		case JpaModelPackage.DATETIME_CLASSIFIER_ID:
 			return convertDateTimeToString((DateTime) value);
+		case JpaModelPackage.LOCALDATE_CLASSIFIER_ID:
+			return convertLocalDateToString((LocalDate) value);
 		default:
 			throw new IllegalArgumentException("The EDatatype '" + eDataType
 					+ "' is not defined in this EPackage.");
@@ -208,13 +213,53 @@ public class JpaModelFactory implements ModelFactory {
 	}
 
 	/**
+	 * Converts the EDataType: LocalDate to a String. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertLocalDateToString(LocalDate value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getLocalDateEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: LocalDate from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public LocalDate createLocalDateFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getLocalDateEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
 	 * The adapter/wrapper for the EClass '<em><b>PostalAddress</b></em>'.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param <E>
 	 *            the domain model java class
-	 * 
+	 *
 	 * @generated
 	 */
 	public static class PostalAddressModelObject<E extends PostalAddress>
@@ -322,31 +367,31 @@ public class JpaModelFactory implements ModelFactory {
 				getTarget().setPrimaryMobile((String) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_MOBILES_FEATURE_ID:
-				getTarget().setMobiles((Set<String>) value);
+				getTarget().setMobiles((List<String>) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_PRIMARYPHONE_FEATURE_ID:
 				getTarget().setPrimaryPhone((String) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_PHONES_FEATURE_ID:
-				getTarget().setPhones((Set<String>) value);
+				getTarget().setPhones((List<String>) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_PRIMARYHOMEPHONE_FEATURE_ID:
 				getTarget().setPrimaryHomePhone((String) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_HOMEPHONES_FEATURE_ID:
-				getTarget().setHomePhones((Set<String>) value);
+				getTarget().setHomePhones((List<String>) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_PRIMARYWORKPHONE_FEATURE_ID:
 				getTarget().setPrimaryWorkPhone((String) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_WORKPHONES_FEATURE_ID:
-				getTarget().setWorkPhones((Set<String>) value);
+				getTarget().setWorkPhones((List<String>) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_PRIMARYEMAIL_FEATURE_ID:
 				getTarget().setPrimaryEmail((String) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_EMAILS_FEATURE_ID:
-				getTarget().setEmails((Set<String>) value);
+				getTarget().setEmails((List<String>) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_DESCRIPTION_FEATURE_ID:
 				getTarget().setDescription((String) value);
@@ -429,12 +474,12 @@ public class JpaModelFactory implements ModelFactory {
 
 	/**
 	 * The adapter/wrapper for the EClass '<em><b>Geolocation</b></em>'.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param <E>
 	 *            the domain model java class
-	 * 
+	 *
 	 * @generated
 	 */
 	public static class GeolocationModelObject<E extends Geolocation> extends

@@ -1,15 +1,13 @@
 package org.soluvas.schema.jpa._1;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
-
 import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -122,7 +120,7 @@ public class PostalAddress implements Serializable {
 	 */
 	@ElementCollection()
 	@CollectionTable()
-	private Set<String> mobiles = new HashSet<String>();
+	private List<String> mobiles = new ArrayList<String>();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -143,7 +141,7 @@ public class PostalAddress implements Serializable {
 	 */
 	@ElementCollection()
 	@CollectionTable()
-	private Set<String> phones = new HashSet<String>();
+	private List<String> phones = new ArrayList<String>();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -162,7 +160,7 @@ public class PostalAddress implements Serializable {
 	 */
 	@ElementCollection()
 	@CollectionTable()
-	private Set<String> homePhones = new HashSet<String>();
+	private List<String> homePhones = new ArrayList<String>();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -180,7 +178,7 @@ public class PostalAddress implements Serializable {
 	 */
 	@ElementCollection()
 	@CollectionTable()
-	private Set<String> workPhones = new HashSet<String>();
+	private List<String> workPhones = new ArrayList<String>();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -198,7 +196,7 @@ public class PostalAddress implements Serializable {
 	 */
 	@ElementCollection()
 	@CollectionTable()
-	private Set<String> emails = new HashSet<String>();
+	private List<String> emails = new ArrayList<String>();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -287,7 +285,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>street</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>street</b></em>' feature
@@ -299,7 +297,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getStreet() <em>street</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newStreet
@@ -313,7 +311,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>city</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>city</b></em>' feature
@@ -325,7 +323,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getCity() <em>city</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newCity
@@ -339,7 +337,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>postalCode</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>postalCode</b></em>' feature
@@ -352,7 +350,7 @@ public class PostalAddress implements Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPostalCode() <em>postalCode</em>}'
 	 * feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPostalCode
@@ -366,7 +364,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>province</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>province</b></em>' feature
@@ -378,7 +376,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getProvince() <em>province</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newProvince
@@ -457,7 +455,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>primaryMobile</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryMobile</b></em>' feature
@@ -470,7 +468,7 @@ public class PostalAddress implements Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryMobile() <em>primaryMobile</em>}
 	 * ' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryMobile
@@ -492,13 +490,13 @@ public class PostalAddress implements Serializable {
 	 * @return the value of '<em><b>mobiles</b></em>' feature
 	 * @generated
 	 */
-	public Set<String> getMobiles() {
+	public List<String> getMobiles() {
 		return mobiles;
 	}
 
 	/**
 	 * Sets the '{@link PostalAddress#getMobiles() <em>mobiles</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC1274: mobile telephone number LDAP: mobile, mobileTelephoneNumber <!--
 	 * end-model-doc -->
@@ -508,7 +506,7 @@ public class PostalAddress implements Serializable {
 	 *            mobiles}' feature.
 	 * @generated
 	 */
-	public void setMobiles(Set<String> newMobiles) {
+	public void setMobiles(List<String> newMobiles) {
 		mobiles = newMobiles;
 	}
 
@@ -549,19 +547,19 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>phones</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>phones</b></em>' feature
 	 * @generated
 	 */
-	public Set<String> getPhones() {
+	public List<String> getPhones() {
 		return phones;
 	}
 
 	/**
 	 * Sets the '{@link PostalAddress#getPhones() <em>phones</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPhones
@@ -569,13 +567,13 @@ public class PostalAddress implements Serializable {
 	 *            ' feature.
 	 * @generated
 	 */
-	public void setPhones(Set<String> newPhones) {
+	public void setPhones(List<String> newPhones) {
 		phones = newPhones;
 	}
 
 	/**
 	 * Returns the value of '<em><b>primaryHomePhone</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryHomePhone</b></em>' feature
@@ -588,7 +586,7 @@ public class PostalAddress implements Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryHomePhone()
 	 * <em>primaryHomePhone</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryHomePhone
@@ -611,14 +609,14 @@ public class PostalAddress implements Serializable {
 	 * @return the value of '<em><b>homePhones</b></em>' feature
 	 * @generated
 	 */
-	public Set<String> getHomePhones() {
+	public List<String> getHomePhones() {
 		return homePhones;
 	}
 
 	/**
 	 * Sets the '{@link PostalAddress#getHomePhones() <em>homePhones</em>}'
 	 * feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC1274: home telephone number. LDAP: homePhone, homeTelephoneNumber.
 	 * <!-- end-model-doc -->
@@ -628,13 +626,13 @@ public class PostalAddress implements Serializable {
 	 *            homePhones}' feature.
 	 * @generated
 	 */
-	public void setHomePhones(Set<String> newHomePhones) {
+	public void setHomePhones(List<String> newHomePhones) {
 		homePhones = newHomePhones;
 	}
 
 	/**
 	 * Returns the value of '<em><b>primaryWorkPhone</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryWorkPhone</b></em>' feature
@@ -647,7 +645,7 @@ public class PostalAddress implements Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryWorkPhone()
 	 * <em>primaryWorkPhone</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryWorkPhone
@@ -669,14 +667,14 @@ public class PostalAddress implements Serializable {
 	 * @return the value of '<em><b>workPhones</b></em>' feature
 	 * @generated
 	 */
-	public Set<String> getWorkPhones() {
+	public List<String> getWorkPhones() {
 		return workPhones;
 	}
 
 	/**
 	 * Sets the '{@link PostalAddress#getWorkPhones() <em>workPhones</em>}'
 	 * feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC2256: Telephone Number. LDAP: (not yet mapped) <!-- end-model-doc -->
 	 * 
@@ -685,13 +683,13 @@ public class PostalAddress implements Serializable {
 	 *            workPhones}' feature.
 	 * @generated
 	 */
-	public void setWorkPhones(Set<String> newWorkPhones) {
+	public void setWorkPhones(List<String> newWorkPhones) {
 		workPhones = newWorkPhones;
 	}
 
 	/**
 	 * Returns the value of '<em><b>primaryEmail</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryEmail</b></em>' feature
@@ -704,7 +702,7 @@ public class PostalAddress implements Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryEmail() <em>primaryEmail</em>}'
 	 * feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryEmail
@@ -725,13 +723,13 @@ public class PostalAddress implements Serializable {
 	 * @return the value of '<em><b>emails</b></em>' feature
 	 * @generated
 	 */
-	public Set<String> getEmails() {
+	public List<String> getEmails() {
 		return emails;
 	}
 
 	/**
 	 * Sets the '{@link PostalAddress#getEmails() <em>emails</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * LDAP: mail. <!-- end-model-doc -->
 	 * 
@@ -740,7 +738,7 @@ public class PostalAddress implements Serializable {
 	 *            ' feature.
 	 * @generated
 	 */
-	public void setEmails(Set<String> newEmails) {
+	public void setEmails(List<String> newEmails) {
 		emails = newEmails;
 	}
 

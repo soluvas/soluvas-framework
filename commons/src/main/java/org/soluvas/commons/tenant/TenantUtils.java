@@ -3,7 +3,6 @@ package org.soluvas.commons.tenant;
 import java.util.Collection;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.apache.felix.service.command.CommandSession;
@@ -65,7 +64,6 @@ public class TenantUtils {
 	 * @return Desired {@link ServiceReference or exception if not found.
 	 */
 	@SuppressWarnings("unchecked")
-	@Nonnull
 	public static <T, S extends T> ServiceReference<S> getService(BundleContext bundleContext,
 			TenantRef tenant,
 			Class<T> iface,

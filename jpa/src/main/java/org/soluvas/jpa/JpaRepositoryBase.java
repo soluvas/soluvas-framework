@@ -27,6 +27,7 @@ import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.GenericStatus;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SchemaVersionable;
+import org.soluvas.commons.tenant.CommandRequestAttributes;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.GenericLookup;
@@ -59,11 +60,14 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.google.common.eventbus.EventBus;
 
 /**
  * {@link PagingAndSortingRepository} implemented using JPA, supporting 
  * Spring's @{@link Transactional} transaction management.
- * <p>Recommended deployment stack is: Hibernate 4.2 + Spring 3.2 + PostgreSQL 9.1. 
+ * <p>Recommended deployment stack is: Hibernate 4.2 + Spring 3.2 + PostgreSQL 9.1.
+ * <p>To use tenant-specific repository inside a tenant-independent code such as {@link EventBus} subscriber
+ * or Quartz Job, see {@link CommandRequestAttributes#withTenant(String)}. 
  * @param <T> TODO: should this extend an {@link Identifiable} of some sort?
  * @param <T>
  * @todo {@link SchemaVersionable} support, but how???

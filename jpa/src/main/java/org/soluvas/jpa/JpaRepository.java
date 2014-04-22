@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.Identifiable;
+import org.soluvas.commons.tenant.CommandRequestAttributes;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
@@ -14,8 +15,12 @@ import org.soluvas.data.repository.StatusAwareRepository;
 
 import scala.util.Try;
 
+import com.google.common.eventbus.EventBus;
+
 /**
  * JPA-specific repository operations.
+ * <p>To use tenant-specific repository inside a tenant-independent code such as {@link EventBus} subscriber
+ * or Quartz Job, see {@link CommandRequestAttributes#withTenant(String)}. 
  * @param <T> TODO: should this extend an {@link Identifiable} of some sort?
  * @author ceefour
  */

@@ -124,8 +124,8 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	}
 
 	/**
-	 * Returns a {@link Closeable} that sets the threadlocal {@link CommandRequestAttributes}
-	 * based on fixed {@code tenantId}, then afterwards, mark it as {@link #requestCompleted()} and removes it from the threadlocal.
+	 * Returns a {@link Closeable} that sets the {@link ThreadLocal} {@link CommandRequestAttributes}
+	 * based on fixed {@code tenantId}, then afterwards, mark it as {@link #requestCompleted()} and removes it from the {@link ThreadLocal}.
 	 * This is required when you want to use a multitenant {@code EntityManager} from a non-web/shell-request entry point
 	 * (e.g. scheduled).
 	 * @param requestAttributes

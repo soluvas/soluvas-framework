@@ -82,8 +82,8 @@
         <details key="java.member" value="primaryHomePhone"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="homePhones" ordered="false"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="homePhones" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="RFC1274: home telephone number.&#xA;LDAP: homePhone, homeTelephoneNumber."/>
       </eAnnotations>
@@ -110,8 +110,8 @@
         <details key="java.member" value="primaryEmail"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="emails" ordered="false"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="emails" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="LDAP: mail."/>
       </eAnnotations>
@@ -184,4 +184,5 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="DateTime" instanceClassName="org.joda.time.DateTime"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="LocalDate" instanceClassName="org.joda.time.LocalDate"/>
 </ecore:EPackage>
