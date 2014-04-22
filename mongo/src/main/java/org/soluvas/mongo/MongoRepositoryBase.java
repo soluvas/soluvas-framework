@@ -158,7 +158,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	/**
 	 * Slow query threshold in milliseconds.
 	 */
-	protected static final long SLOW_QUERY_THRESHOLD = 10;//500;
+	protected static final long SLOW_QUERY_THRESHOLD = 500;
 	/**
 	 * Usually used by {@link #beforeSave(Identifiable)} to set creationTime and modificationTime
 	 * based on default time zone.
