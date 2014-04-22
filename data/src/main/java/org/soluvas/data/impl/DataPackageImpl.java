@@ -41,6 +41,8 @@ import org.soluvas.data.TermValue;
 import org.soluvas.data.TreeVocab;
 import org.soluvas.data.Value;
 import org.soluvas.data.Vocab;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.data.repository.CrudRepositoryBase;
 import org.soluvas.data.repository.PagingAndSortingRepository;
@@ -240,6 +242,20 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	private EDataType decimalMeasureEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType pageableEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType pageEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -990,6 +1006,24 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getPageable() {
+		return pageableEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getPage() {
+		return pageEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public DataFactory getDataFactory() {
 		return (DataFactory)getEFactoryInstance();
@@ -1103,6 +1137,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		crudRepositoryBaseEDataType = createEDataType(CRUD_REPOSITORY_BASE);
 		measureEDataType = createEDataType(MEASURE);
 		decimalMeasureEDataType = createEDataType(DECIMAL_MEASURE);
+		pageableEDataType = createEDataType(PAGEABLE);
+		pageEDataType = createEDataType(PAGE);
 	}
 
 	/**
@@ -1338,6 +1374,10 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		op = addEOperation(mixinManagerEClass, this.getMixin(), "findMixin", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "uName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(mixinManagerEClass, this.getPage(), "findMixin", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getPageable(), "pageable", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEString(), "term", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(attributeSemanticEEnum, AttributeSemantic.class, "AttributeSemantic");
 		addEEnumLiteral(attributeSemanticEEnum, AttributeSemantic.EQUAL);
@@ -1377,6 +1417,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEDataType(crudRepositoryBaseEDataType, CrudRepositoryBase.class, "CrudRepositoryBase", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(measureEDataType, Measure.class, "Measure", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(decimalMeasureEDataType, DecimalMeasure.class, "DecimalMeasure", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(pageableEDataType, Pageable.class, "Pageable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(pageEDataType, Page.class, "Page", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS, "org.soluvas.data.domain.Page<T>");
 
 		// Create resource
 		createResource(eNS_URI);

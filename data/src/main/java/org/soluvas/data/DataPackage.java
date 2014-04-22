@@ -1555,6 +1555,27 @@ public interface DataPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Pageable</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.data.domain.Pageable
+	 * @see org.soluvas.data.impl.DataPackageImpl#getPageable()
+	 * @generated
+	 */
+	int PAGEABLE = 27;
+
+	/**
+	 * The meta object id for the '<em>Page</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.data.domain.Page
+	 * @see org.soluvas.data.impl.DataPackageImpl#getPage()
+	 * @generated
+	 */
+	int PAGE = 28;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.Attribute <em>Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2281,6 +2302,28 @@ public interface DataPackage extends EPackage {
 	EDataType getDecimalMeasure();
 
 	/**
+	 * Returns the meta object for data type '{@link org.soluvas.data.domain.Pageable <em>Pageable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Pageable</em>'.
+	 * @see org.soluvas.data.domain.Pageable
+	 * @model instanceClass="org.soluvas.data.domain.Pageable"
+	 * @generated
+	 */
+	EDataType getPageable();
+
+	/**
+	 * Returns the meta object for data type '{@link org.soluvas.data.domain.Page <em>Page</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Page</em>'.
+	 * @see org.soluvas.data.domain.Page
+	 * @model instanceClass="org.soluvas.data.domain.Page<java.lang.Object>"
+	 * @generated
+	 */
+	EDataType getPage();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2899,6 +2942,26 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType DECIMAL_MEASURE = eINSTANCE.getDecimalMeasure();
+
+		/**
+		 * The meta object literal for the '<em>Pageable</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.data.domain.Pageable
+		 * @see org.soluvas.data.impl.DataPackageImpl#getPageable()
+		 * @generated
+		 */
+		EDataType PAGEABLE = eINSTANCE.getPageable();
+
+		/**
+		 * The meta object literal for the '<em>Page</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.data.domain.Page
+		 * @see org.soluvas.data.impl.DataPackageImpl#getPage()
+		 * @generated
+		 */
+		EDataType PAGE = eINSTANCE.getPage();
 
 	}
 

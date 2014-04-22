@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.soluvas.data.*;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.AttributeSemantic;
 import org.soluvas.data.CurrencyValue;
 import org.soluvas.data.DataCatalog;
@@ -120,6 +122,10 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 				return createMeasureFromString(eDataType, initialValue);
 			case DataPackage.DECIMAL_MEASURE:
 				return createDecimalMeasureFromString(eDataType, initialValue);
+			case DataPackage.PAGEABLE:
+				return createPageableFromString(eDataType, initialValue);
+			case DataPackage.PAGE:
+				return createPageFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -151,6 +157,10 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 				return convertMeasureToString(eDataType, instanceValue);
 			case DataPackage.DECIMAL_MEASURE:
 				return convertDecimalMeasureToString(eDataType, instanceValue);
+			case DataPackage.PAGEABLE:
+				return convertPageableToString(eDataType, instanceValue);
+			case DataPackage.PAGE:
+				return convertPageToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -501,6 +511,43 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * @generated
 	 */
 	public String convertDecimalMeasureToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Pageable createPageableFromString(EDataType eDataType, String initialValue) {
+		return (Pageable)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPageableToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	public Page<Object> createPageFromString(EDataType eDataType, String initialValue) {
+		return (Page<Object>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPageToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(instanceValue);
 	}
 

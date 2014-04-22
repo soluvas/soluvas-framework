@@ -4,6 +4,8 @@ package org.soluvas.data;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.Pageable;
 
 
 /**
@@ -61,5 +63,12 @@ public interface MixinManager extends EObject {
 	 * @generated
 	 */
 	Mixin findMixin(String uName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="org.soluvas.data.Page" pageableDataType="org.soluvas.data.Pageable"
+	 */
+	Page<Mixin> findMixin(Pageable pageable, String term);
 
 } // MixinManager

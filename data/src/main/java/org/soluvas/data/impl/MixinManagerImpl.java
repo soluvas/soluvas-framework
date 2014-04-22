@@ -21,6 +21,8 @@ import org.soluvas.data.DataPackage;
 import org.soluvas.data.Mixin;
 import org.soluvas.data.MixinCatalog;
 import org.soluvas.data.MixinManager;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.Pageable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -152,6 +154,17 @@ public class MixinManagerImpl extends EObjectImpl implements MixinManager {
 					nsPrefix, mixinName, mixinNames.size(), mixinNames));
 			return null;
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public Page<Mixin> findMixin(Pageable pageable, String term) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
