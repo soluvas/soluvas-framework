@@ -31,6 +31,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoClientURI;
 import com.mongodb.ReadPreference;
 
@@ -65,9 +66,11 @@ public class MongoUtils {
 					client, readPreference, realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername());
 			return client;
 		} else {
-			final MongoClient client = new MongoClient(realMongoUri);
+			final MongoClientOptions.Builder optionsBuilder = MongoClientOptions.builder().readPreference(readPreference);
+			final MongoClientURI optionsMongoUri = new MongoClientURI(realMongoUri.toString(), optionsBuilder);
+			final MongoClient client = new MongoClient(optionsMongoUri);
 			log.info("Instantiating new MongoClient {} for {}:{}/{} as {}", 
-					client, readPreference, realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername());
+					client, readPreference, optionsMongoUri.getHosts(), optionsMongoUri.getDatabase(), optionsMongoUri.getUsername());
 			mongoClients.put(key, client);
 			return client;
 		}

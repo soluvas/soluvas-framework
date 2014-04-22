@@ -37,6 +37,7 @@ import com.google.code.morphia.Morphia;
 import com.google.code.morphia.mapping.DefaultCreator;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
@@ -157,7 +158,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	/**
 	 * Slow query threshold in milliseconds.
 	 */
-	protected static final long SLOW_QUERY_THRESHOLD = 500;
+	protected static final long SLOW_QUERY_THRESHOLD = 10;//500;
 	/**
 	 * Usually used by {@link #beforeSave(Identifiable)} to set creationTime and modificationTime
 	 * based on default time zone.
@@ -199,6 +200,9 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			switch (readPattern) {
 			case PRIMARY_PREFERRED:
 				final DB ppDb = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
+				Preconditions.checkState(ppDb.getMongo().getReadPreference() == ReadPreference.primaryPreferred(),
+						"Expected ReadPreference '%s' but got '%s' for Mongo ppDb %s",
+						ppDb.getMongo(), ppDb.getMongo().getReadPreference());
 				if (realMongoUri.getUsername() != null) {
 					ppDb.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
 				}
@@ -207,6 +211,9 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				break;
 			case SECONDARY_PREFERRED:
 				final DB spDb = MongoUtils.getDb(realMongoUri, ReadPreference.secondaryPreferred());
+				Preconditions.checkState(spDb.getMongo().getReadPreference() == ReadPreference.secondaryPreferred(),
+						"Expected ReadPreference '%s' but got '%s' for Mongo spDb %s",
+						ReadPreference.primaryPreferred(), ReadPreference.secondaryPreferred(), spDb.getMongo(), spDb.getMongo().getReadPreference());
 				if (realMongoUri.getUsername() != null) {
 					spDb.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
 				}
@@ -215,11 +222,17 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				break;
 			case DUAL:
 				final DB primaryDb = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
+				Preconditions.checkState(primaryDb.getMongo().getReadPreference() == ReadPreference.primaryPreferred(),
+						"Expected ReadPreference '%s' but got '%s' for Mongo primaryDb %s",
+						ReadPreference.primaryPreferred(), primaryDb.getMongo().getReadPreference(), primaryDb.getMongo());
 				if (realMongoUri.getUsername() != null) {
 					primaryDb.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
 				}
 				primary = primaryDb.getCollection(collName);
 				final DB secondaryDb = MongoUtils.getDb(realMongoUri, ReadPreference.secondaryPreferred());
+				Preconditions.checkState(secondaryDb.getMongo().getReadPreference() == ReadPreference.secondaryPreferred(),
+						"Expected ReadPreference '%s' but got '%s' for Mongo secondaryDb %s",
+						ReadPreference.secondaryPreferred(), secondaryDb.getMongo(), secondaryDb.getMongo().getReadPreference());
 				if (realMongoUri.getUsername() != null) {
 					secondaryDb.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
 				}
