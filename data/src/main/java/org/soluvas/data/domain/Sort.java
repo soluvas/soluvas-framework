@@ -36,6 +36,7 @@ public class Sort implements Iterable<Sort.Order>, Serializable {
 
 	private static final long serialVersionUID = 5737186511678863905L;
 	public static final Direction DEFAULT_DIRECTION = Direction.ASC;
+	private static final Sort UNSORTED = new Sort(DEFAULT_DIRECTION);
 
 	private final List<Order> orders;
 
@@ -98,6 +99,14 @@ public class Sort implements Iterable<Sort.Order>, Serializable {
 		for (String property : properties) {
 			this.orders.add(new Order(direction, property));
 		}
+	}
+	
+	/**
+	 * Returns global {@link #UNSORTED} {@link Sort} instance (it uses {@value Sort#DEFAULT_DIRECTION} but without any {@code properties}).
+	 * @return
+	 */
+	public static Sort unsorted() {
+		return UNSORTED;
 	}
 
 	/**
@@ -250,19 +259,6 @@ public class Sort implements Iterable<Sort.Order>, Serializable {
 		 */
 		public Order(String property) {
 			this(DEFAULT_DIRECTION, property);
-		}
-
-		/**
-		 * @deprecated use {@link Sort#Sort(Direction, List)} instead.
-		 */
-		@Deprecated
-		public static List<Order> create(Direction direction, Iterable<String> properties) {
-
-			List<Order> orders = new ArrayList<Sort.Order>();
-			for (String property : properties) {
-				orders.add(new Order(direction, property));
-			}
-			return orders;
 		}
 
 		/**
