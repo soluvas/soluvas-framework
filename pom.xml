@@ -79,16 +79,16 @@
 		<spring.version>3.2.8.RELEASE</spring.version>
 		<jersey.version>1.17.1</jersey.version>
 
-		<shiro.version>1.2.2</shiro.version>
+		<shiro.version>1.2.3</shiro.version>
 		<akka.version>2.0.2</akka.version>
 		<scala.version>2.10.2</scala.version>
 		<emf.version>2.9.0.v20130528-0742</emf.version><!-- Note: ecore used to have different version -->
 		
 		<metrics.version>3.0.2</metrics.version>
-		<jackson.version>2.3.2</jackson.version>
+		<jackson.version>2.3.3</jackson.version>
 
-		<slf4j.version>1.7.6</slf4j.version>
-		<logback.version>1.1.1</logback.version>
+		<slf4j.version>1.7.7</slf4j.version>
+		<logback.version>1.1.2</logback.version>
 		<junit.version>4.11</junit.version>
 	</properties>
 
@@ -673,12 +673,12 @@
 			<dependency>
 				<groupId>com.fasterxml.jackson.datatype</groupId>
 				<artifactId>jackson-datatype-guava</artifactId>
-				<version>2.3.2</version>
+				<version>2.3.3</version>
 			</dependency>
 			<dependency>
 				<groupId>com.fasterxml.jackson.datatype</groupId>
 				<artifactId>jackson-datatype-joda</artifactId>
-				<version>2.3.2</version>
+				<version>2.3.3</version>
 			</dependency>
 			<dependency>
 				<groupId>com.fasterxml.jackson.jaxrs</groupId>
@@ -747,7 +747,7 @@
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
-				<version>15.0</version>
+				<version>17.0</version>
 			</dependency>
 
 			<dependency>
@@ -796,6 +796,20 @@
 				<groupId>com.google.protobuf</groupId>
 				<artifactId>protobuf-java</artifactId>
 				<version>2.5.0</version>
+			</dependency>
+			<dependency>
+				<!-- for development -->
+			    <groupId>de.huxhorn.lilith</groupId>
+			    <artifactId>de.huxhorn.lilith.logback.appender.multiplex-classic</artifactId>
+			    <version>0.9.44</version>
+			    <scope>runtime</scope>
+			</dependency>			
+			<dependency>
+				<!-- for live site -->
+			    <groupId>com.logentries</groupId>
+			    <artifactId>logentries-appender</artifactId>
+			    <version>1.1.21</version>
+			    <scope>runtime</scope>
 			</dependency>
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
