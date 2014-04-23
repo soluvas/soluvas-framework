@@ -1,5 +1,7 @@
 package org.soluvas.commons.tenant;
 
+import java.util.Set;
+
 import org.soluvas.commons.AppManifest;
 
 /**
@@ -18,4 +20,6 @@ public interface TenantProvisioner<T> {
 	AppManifest add(String tenantId, AppManifest appManifest, T provisionData, String trackingId);
 
 	T lookupOne(String tenantId);
+	
+	Set<String> findAllStyles();
 }

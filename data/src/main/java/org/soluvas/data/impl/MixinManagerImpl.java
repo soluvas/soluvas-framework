@@ -1,5 +1,7 @@
 package org.soluvas.data.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
@@ -8,12 +10,14 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.QNameFunction;
@@ -22,6 +26,7 @@ import org.soluvas.data.Mixin;
 import org.soluvas.data.MixinCatalog;
 import org.soluvas.data.MixinManager;
 import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -30,6 +35,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
@@ -161,10 +167,24 @@ public class MixinManagerImpl extends EObjectImpl implements MixinManager {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public Page<Mixin> findMixin(Pageable pageable, String term) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public Page<Mixin> findMixin(final String term, Pageable pageable) {
+		final Predicate<Mixin> filter = new Predicate<Mixin>() {
+			@Override
+			public boolean apply(@Nullable Mixin input) {
+				return StringUtils.containsIgnoreCase(input.getDisplayName(), term) || StringUtils.containsIgnoreCase(input.getName(), term);
+			}
+		};
+		
+		final List<Mixin> mixins = ImmutableList.copyOf(EcoreUtil.copyAll(getMixins()));
+		Collections.sort(mixins, new Comparator<Mixin>() {
+			@Override
+			public int compare(Mixin o1, Mixin o2) {
+				return o1.getDisplayName().compareTo(o2.getDisplayName());
+			}
+		});
+		final List<Mixin> skippedMixins = FluentIterable.from(mixins).filter(filter).skip((int)pageable.getOffset()).toList();
+		
+		return new PageImpl<Mixin>(skippedMixins, pageable, mixins.size());
 	}
 
 	/**

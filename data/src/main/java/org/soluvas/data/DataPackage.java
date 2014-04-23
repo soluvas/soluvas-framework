@@ -2318,7 +2318,7 @@ public interface DataPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Page</em>'.
 	 * @see org.soluvas.data.domain.Page
-	 * @model instanceClass="org.soluvas.data.domain.Page<java.lang.Object>"
+	 * @model instanceClass="org.soluvas.data.domain.Page" serializeable="false" typeParameters="T"
 	 * @generated
 	 */
 	EDataType getPage();

@@ -1180,6 +1180,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		addETypeParameter(measureEDataType, "V");
 		ETypeParameter measureEDataType_Q = addETypeParameter(measureEDataType, "Q");
 		ETypeParameter decimalMeasureEDataType_Q = addETypeParameter(decimalMeasureEDataType, "Q");
+		addETypeParameter(pageEDataType, "T");
 
 		// Set bounds for type parameters
 		EGenericType g1 = createEGenericType(theCommonsPackage.getSerializable());
@@ -1374,9 +1375,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		op = addEOperation(mixinManagerEClass, this.getMixin(), "findMixin", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "uName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(mixinManagerEClass, this.getPage(), "findMixin", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getPageable(), "pageable", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(mixinManagerEClass, null, "findMixin", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "term", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getPageable(), "pageable", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getPage());
+		g2 = createEGenericType(this.getMixin());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
 
 		// Initialize enums and add enum literals
 		initEEnum(attributeSemanticEEnum, AttributeSemantic.class, "AttributeSemantic");
@@ -1418,7 +1423,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEDataType(measureEDataType, Measure.class, "Measure", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(decimalMeasureEDataType, DecimalMeasure.class, "DecimalMeasure", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(pageableEDataType, Pageable.class, "Pageable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(pageEDataType, Page.class, "Page", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS, "org.soluvas.data.domain.Page<T>");
+		initEDataType(pageEDataType, Page.class, "Page", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
