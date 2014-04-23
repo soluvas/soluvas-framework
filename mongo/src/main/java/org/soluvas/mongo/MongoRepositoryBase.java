@@ -37,6 +37,7 @@ import com.google.code.morphia.Morphia;
 import com.google.code.morphia.mapping.DefaultCreator;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
@@ -517,15 +518,24 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	public final List<T> findAll(Collection<String> ids, Sort sort) {
 		final BasicDBObject sortQuery = MongoUtils.getSort(sort, "_id", Direction.ASC);
 		log.trace("finding {} {} sort by {}: {}", ids.size(), collName, sort, Iterables.limit(ids, 10));
-//		final List<T> entities = findPrimary(new BasicDBObject("$in", ids), null, sortQuery, 0, 0, "findAll", ids, sort);
-		final BasicDBObject idsQuery = new BasicDBObject("_id", new BasicDBObject("$in", ids));
-		final List<T> entities = findPrimary(idsQuery, null, sortQuery, 0, 0, "findAll", ids, sort);
-		if (ids.size() > 1 || ids.size() != entities.size()) {
-			log.debug("find {} {} by _id ({}) returned {} documents", 
-					ids.size(), collName, Iterables.limit(ids, 10), entities.size());  
+		final List<T> entities;
+		if (ids.size() == 1) {
+			// special case, for better debugging
+			final String id = ids.iterator().next();
+			entities = ImmutableList.copyOf(Optional.fromNullable(
+					findOnePrimaryAsEntity(new BasicDBObject("_id", id), null, "findOne", id)).asSet());
+			if (!entities.isEmpty()) {
+				log.debug("findOne {} by _id '{}' returned that document", collName, id);  
+			} else {
+				log.trace("findOne {} by _id '{}' returned nothing", collName, id);
+			}
 		} else {
-			log.trace("find {} by _id '{}' returned {} documents", 
-					collName, Iterables.getFirst(ids, null), entities.size());
+			final BasicDBObject idsQuery = new BasicDBObject("_id", new BasicDBObject("$in", ids));
+			entities = findPrimary(idsQuery, null, sortQuery, 0, 0, "findAll", ids, sort);
+			if (ids.size() > 1 || ids.size() != entities.size()) {
+				log.debug("find {} {} by _id ({}) returned {} documents", 
+						ids.size(), collName, Iterables.limit(ids, 10), entities.size());  
+			}
 		}
 		return entities;
 	}
@@ -607,10 +617,13 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		final long startTime = System.currentTimeMillis();
 //		log.debug("Params: {}", params);
 		final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").skipNulls().join(params) : "") + ")";
+		Integer cursorSize = null;
 		try (final DBCursor cursor = coll.find(query, fields).addSpecial("$comment", Thread.currentThread().getName() + ": " + methodSignature)
 			.sort(sort).skip((int) skip).limit((int) limit)) {
 			log.debug("Cursor: {}", cursor);
-			return func.apply(cursor);
+			R applied = func.apply(cursor);
+			cursorSize = cursor.size();
+			return applied;
 		} catch (Exception e) {
 			throw new MongoRepositoryException(e, "Cannot find %s %s %s fields=%s sort=%s page=%s/%s for method %s: %s",
 					coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, e);
@@ -624,12 +637,12 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 					final int nscanned = (int) explain.get("nscannedAllPlans");
 					final int efficiency = nscanned > 0 ? n * 100 / nscanned : 100;
 					final int millis = (int) explain.get("millis");
-					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).skip({}).limit({}).explain() >> {}",
-							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration,
+					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} size {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).skip({}).limit({}).explain() >> {}",
+							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, cursorSize, duration,
 							nscanned, n, millis, efficiency, collName, JSON.serialize(query), JSON.serialize(fields), JSON.serialize(sort), skip, limit, explain);
 				} else {
-					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {}ms",
-							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration);
+					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} size {} took {}ms",
+							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, cursorSize, duration);
 				}
 			}
 		}
