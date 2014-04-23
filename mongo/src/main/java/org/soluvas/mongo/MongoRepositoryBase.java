@@ -37,6 +37,7 @@ import com.google.code.morphia.Morphia;
 import com.google.code.morphia.mapping.DefaultCreator;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
@@ -518,8 +519,16 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		final BasicDBObject sortQuery = MongoUtils.getSort(sort, "_id", Direction.ASC);
 		log.trace("finding {} {} sort by {}: {}", ids.size(), collName, sort, Iterables.limit(ids, 10));
 //		final List<T> entities = findPrimary(new BasicDBObject("$in", ids), null, sortQuery, 0, 0, "findAll", ids, sort);
-		final BasicDBObject idsQuery = new BasicDBObject("_id", new BasicDBObject("$in", ids));
-		final List<T> entities = findPrimary(idsQuery, null, sortQuery, 0, 0, "findAll", ids, sort);
+		final List<T> entities;
+		if (ids.size() == 1) {
+			// special case, for better debugging
+			final String id = ids.iterator().next();
+			entities = ImmutableList.copyOf(Optional.fromNullable(
+					findOnePrimaryAsEntity(new BasicDBObject("_id", id), null, "findOne", id)).asSet());
+		} else {
+			final BasicDBObject idsQuery = new BasicDBObject("_id", new BasicDBObject("$in", ids));
+			entities = findPrimary(idsQuery, null, sortQuery, 0, 0, "findAll", ids, sort);
+		}
 		if (ids.size() > 1 || ids.size() != entities.size()) {
 			log.debug("find {} {} by _id ({}) returned {} documents", 
 					ids.size(), collName, Iterables.limit(ids, 10), entities.size());  
