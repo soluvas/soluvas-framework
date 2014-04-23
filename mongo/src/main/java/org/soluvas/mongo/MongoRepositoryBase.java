@@ -518,23 +518,24 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	public final List<T> findAll(Collection<String> ids, Sort sort) {
 		final BasicDBObject sortQuery = MongoUtils.getSort(sort, "_id", Direction.ASC);
 		log.trace("finding {} {} sort by {}: {}", ids.size(), collName, sort, Iterables.limit(ids, 10));
-//		final List<T> entities = findPrimary(new BasicDBObject("$in", ids), null, sortQuery, 0, 0, "findAll", ids, sort);
 		final List<T> entities;
 		if (ids.size() == 1) {
 			// special case, for better debugging
 			final String id = ids.iterator().next();
 			entities = ImmutableList.copyOf(Optional.fromNullable(
 					findOnePrimaryAsEntity(new BasicDBObject("_id", id), null, "findOne", id)).asSet());
+			if (!entities.isEmpty()) {
+				log.debug("findOne {} by _id '{}' returned that document", collName, id);  
+			} else {
+				log.trace("findOne {} by _id '{}' returned nothing", collName, id);
+			}
 		} else {
 			final BasicDBObject idsQuery = new BasicDBObject("_id", new BasicDBObject("$in", ids));
 			entities = findPrimary(idsQuery, null, sortQuery, 0, 0, "findAll", ids, sort);
-		}
-		if (ids.size() > 1 || ids.size() != entities.size()) {
-			log.debug("find {} {} by _id ({}) returned {} documents", 
-					ids.size(), collName, Iterables.limit(ids, 10), entities.size());  
-		} else {
-			log.trace("find {} by _id '{}' returned {} documents", 
-					collName, Iterables.getFirst(ids, null), entities.size());
+			if (ids.size() > 1 || ids.size() != entities.size()) {
+				log.debug("find {} {} by _id ({}) returned {} documents", 
+						ids.size(), collName, Iterables.limit(ids, 10), entities.size());  
+			}
 		}
 		return entities;
 	}
