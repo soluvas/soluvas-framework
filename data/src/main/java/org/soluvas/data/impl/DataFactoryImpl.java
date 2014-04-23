@@ -124,8 +124,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 				return createDecimalMeasureFromString(eDataType, initialValue);
 			case DataPackage.PAGEABLE:
 				return createPageableFromString(eDataType, initialValue);
-			case DataPackage.PAGE:
-				return createPageFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -159,8 +157,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 				return convertDecimalMeasureToString(eDataType, instanceValue);
 			case DataPackage.PAGEABLE:
 				return convertPageableToString(eDataType, instanceValue);
-			case DataPackage.PAGE:
-				return convertPageToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -530,25 +526,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 */
 	public String convertPageableToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	public Page<Object> createPageFromString(EDataType eDataType, String initialValue) {
-		return (Page<Object>)super.createFromString(initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertPageToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(instanceValue);
 	}
 
 	/**

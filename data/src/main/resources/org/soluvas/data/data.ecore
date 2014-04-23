@@ -317,9 +317,12 @@
     <eOperations name="findMixin" eType="#//Mixin">
       <eParameters name="uName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     </eOperations>
-    <eOperations name="findMixin" eType="#//Page">
-      <eParameters name="pageable" eType="#//Pageable"/>
+    <eOperations name="findMixin">
+      <eGenericType eClassifier="#//Page">
+        <eTypeArguments eClassifier="#//Mixin"/>
+      </eGenericType>
       <eParameters name="term" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+      <eParameters name="pageable" eType="#//Pageable"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mixinCatalog" lowerBound="1"
         eType="#//MixinCatalog" changeable="false"/>
@@ -411,5 +414,8 @@
     </eLiterals>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Pageable" instanceClassName="org.soluvas.data.domain.Pageable"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Page" instanceTypeName="org.soluvas.data.domain.Page&lt;T>"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Page" instanceClassName="org.soluvas.data.domain.Page"
+      serializable="false">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
 </ecore:EPackage>

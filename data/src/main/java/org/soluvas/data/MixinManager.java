@@ -67,8 +67,9 @@ public interface MixinManager extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="org.soluvas.data.Page" pageableDataType="org.soluvas.data.Pageable"
+	 * @model dataType="org.soluvas.data.Page<org.soluvas.data.Mixin>" pageableDataType="org.soluvas.data.Pageable"
+	 * @generated
 	 */
-	Page<Mixin> findMixin(Pageable pageable, String term);
+	Page<Mixin> findMixin(String term, Pageable pageable);
 
 } // MixinManager
