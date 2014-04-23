@@ -607,10 +607,13 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		final long startTime = System.currentTimeMillis();
 //		log.debug("Params: {}", params);
 		final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").skipNulls().join(params) : "") + ")";
+		Integer cursorSize = null;
 		try (final DBCursor cursor = coll.find(query, fields).addSpecial("$comment", Thread.currentThread().getName() + ": " + methodSignature)
 			.sort(sort).skip((int) skip).limit((int) limit)) {
 			log.debug("Cursor: {}", cursor);
-			return func.apply(cursor);
+			R applied = func.apply(cursor);
+			cursorSize = cursor.size();
+			return applied;
 		} catch (Exception e) {
 			throw new MongoRepositoryException(e, "Cannot find %s %s %s fields=%s sort=%s page=%s/%s for method %s: %s",
 					coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, e);
@@ -624,12 +627,12 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 					final int nscanned = (int) explain.get("nscannedAllPlans");
 					final int efficiency = nscanned > 0 ? n * 100 / nscanned : 100;
 					final int millis = (int) explain.get("millis");
-					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).skip({}).limit({}).explain() >> {}",
-							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration,
+					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} size {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).skip({}).limit({}).explain() >> {}",
+							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, cursorSize, duration,
 							nscanned, n, millis, efficiency, collName, JSON.serialize(query), JSON.serialize(fields), JSON.serialize(sort), skip, limit, explain);
 				} else {
-					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} took {}ms",
-							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, duration);
+					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} size {} took {}ms",
+							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, cursorSize, duration);
 				}
 			}
 		}
