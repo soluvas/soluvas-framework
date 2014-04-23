@@ -99,7 +99,8 @@ public class MongoPersonRepositoryTest {
 	@Test
 	public void findOneBySearchText() {
 		final String searchText = "emiral_diana_15382";
-		final List<Person> people = personRepo.findBySearchText(ImmutableList.of(AccountStatus.ACTIVE, AccountStatus.VERIFIED), searchText, new CappedRequest(10)).getContent();
+		final List<Person> people = personRepo.findBySearchText(ImmutableList.of(AccountStatus.ACTIVE, AccountStatus.VERIFIED), searchText,
+				new CappedRequest(10)).getContent();
 		assertEquals(1, people.size());
 	}
 	
