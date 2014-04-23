@@ -32,6 +32,7 @@ import org.soluvas.data.person.PersonRepository;
 import scala.util.Try;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -106,7 +107,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 
 	@Override @Nullable
 	public Person findOneByEmail(StatusMask statusMask, @Nullable String email) {
-		if (email == null) {
+		if (Strings.isNullOrEmpty(email))  {
 			return null;
 		}
 		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
