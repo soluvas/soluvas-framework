@@ -25,6 +25,7 @@ import java.util.Locale;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 
 /**
  * Sort option for queries. You have to provide at least a list of properties to sort for that must not include
@@ -36,9 +37,16 @@ public class Sort implements Iterable<Sort.Order>, Serializable {
 
 	private static final long serialVersionUID = 5737186511678863905L;
 	public static final Direction DEFAULT_DIRECTION = Direction.ASC;
-	private static final Sort UNSORTED = new Sort(DEFAULT_DIRECTION);
+	private static final Sort UNSORTED = new Sort();
 
 	private final List<Order> orders;
+	
+	/**
+	 * Constructs an unsorted instance, only used by {@link #UNSORTED}, which is exposed as {@link #unsorted()}. 
+	 */
+	private Sort() {
+		this.orders = ImmutableList.of();
+	}
 
 	/**
 	 * Creates a new {@link Sort} instance using the given {@link Order}s.
