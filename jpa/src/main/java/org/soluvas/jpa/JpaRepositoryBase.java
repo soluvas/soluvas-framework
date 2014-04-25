@@ -1,6 +1,8 @@
 package org.soluvas.jpa;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -13,12 +15,19 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.EntityType;
+import javax.sql.DataSource;
+
+import liquibase.Contexts;
+import liquibase.Liquibase;
+import liquibase.database.core.PostgresDatabase;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.LiquibaseException;
+import liquibase.resource.ClassLoaderResourceAccessor;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -41,6 +50,7 @@ import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.domain.Sort.Order;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.StatusAwareRepositoryBase;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,47 +88,23 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	implements JpaRepository<T, ID>, GenericLookup<T> {
 
 	protected final Logger log;
-	
-	@PersistenceContext
-	protected EntityManager em;
 	@Inject
 	protected PlatformTransactionManager txManager;
 	@Inject
-	protected AppManifest appManifest;
+	protected DataSource dataSource;
+	@Inject
+	private BeanFactory beanFactory;
 	
+	protected EntityManager em;
 	protected Class<T> entityClass;
-
 	@Nullable
 	protected String statusProperty;
 	protected Set<E> activeStatuses;
 	protected Set<E> inactiveStatuses;
 	protected Set<E> draftStatuses;
 	protected Set<E> voidStatuses;
-	
-	/**
-	 * At this point, {@link EntityManager} is not yet ready, so use {@link #onAfterInit(TransactionStatus)} for that.
-	 * @param entityClass
-	 * @param statusProperty
-	 * @param activeStatuses
-	 * @param inactiveStatuses
-	 * @param draftStatuses
-	 * @param voidStatuses
-	 */
-	@Deprecated
-	protected JpaRepositoryBase(Class<T> entityClass,
-			@Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
-		super();
-		this.entityClass = entityClass;
-		
-		this.statusProperty = statusProperty;
-		this.activeStatuses = activeStatuses;
-		this.inactiveStatuses = inactiveStatuses;
-		this.draftStatuses = draftStatuses;
-		this.voidStatuses = voidStatuses;
-		
-		this.log = LoggerFactory.getLogger(JpaRepositoryBase.class.getName() + "/" + entityClass.getSimpleName());
-		log.info("Initializing {} JPA repository", entityClass.getSimpleName());
-	}
+	private String liquibasePath;
+	private Set<String> initialTenantIds;
 	
 	/**
 	 * At this point, {@link EntityManager} is not yet ready, so use {@link #onAfterInit(TransactionStatus)} for that.
@@ -163,9 +149,61 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 				entityClass.getSimpleName(), em, entityNames.size(), entityNames);
 	}
 	
+	/**
+	 * @param entityClass
+	 * @param statusProperty
+	 * @param activeStatuses
+	 * @param inactiveStatuses
+	 * @param draftStatuses
+	 * @param voidStatuses
+	 * @param em
+	 * @param liquibase
+	 * @throws SQLException 
+	 * @throws LiquibaseException 
+	 */
+	protected JpaRepositoryBase(Class<T> entityClass,
+			@Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses,
+			EntityManager em, String liquibasePath, Set<String> initialTenantIds) {
+		this(entityClass, statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, em);
+		this.liquibasePath = liquibasePath;
+		this.initialTenantIds = initialTenantIds;
+	}
+	
+	/**
+	 * Migrates using Liquibase for the specified {@code tenantId}.
+	 * @param tenantId
+	 * @throws SQLException
+	 * @throws LiquibaseException
+	 */
+	public void migrate(String tenantId) throws SQLException, LiquibaseException {
+		log.info("[{}] Migrating {}", tenantId, entityClass.getSimpleName());
+		final Contexts contexts = new Contexts();
+		final ClassLoaderResourceAccessor resourceAccessor = new ClassLoaderResourceAccessor(this.entityClass.getClassLoader());
+		try (final Connection conn = dataSource.getConnection()) {
+			final JdbcConnection jdbc = new JdbcConnection(conn);
+			final PostgresDatabase db = new PostgresDatabase();
+			db.setDefaultSchemaName(tenantId);
+			try {
+				db.setConnection(jdbc);
+				final Liquibase liquibase = new Liquibase(liquibasePath, resourceAccessor, db);
+				liquibase.update(contexts);
+			} finally {
+				db.close();
+			}
+		}
+	}
+	
 	@PostConstruct
-	public final void init() {
+	public final void init() throws SQLException, LiquibaseException {
 		Preconditions.checkNotNull(txManager, "PlatformTransactionManager txManager was not @Inject-ed properly.");
+		
+		if (liquibasePath != null) {
+			Preconditions.checkNotNull(dataSource, "dataSoruce was not @Inject-ed properly.");
+			for (final String tenantId : initialTenantIds) {
+				migrate(tenantId);
+			}
+		}
+		
 		final TransactionTemplate txTemplate = new TransactionTemplate(txManager);
 		txTemplate.execute(new TransactionCallbackWithoutResult() {
 			@Override
@@ -544,9 +582,17 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	
 	protected void beforeSave(T entity) {
 		if (entity.getCreationTime() == null) {
-			entity.setCreationTime(new DateTime(appManifest.getDefaultTimeZone()));
+			entity.setCreationTime(new DateTime(getAppManifest().getDefaultTimeZone()));
 		}
-		entity.setModificationTime(new DateTime(appManifest.getDefaultTimeZone()));
+		entity.setModificationTime(new DateTime(getAppManifest().getDefaultTimeZone()));
+	}
+
+	/**
+	 * Uses {@link #beanFactory} to get tenant-specific {@link AppManifest}.
+	 * @return
+	 */
+	protected AppManifest getAppManifest() {
+		return beanFactory.getBean(AppManifest.class);
 	}
 	
 }
