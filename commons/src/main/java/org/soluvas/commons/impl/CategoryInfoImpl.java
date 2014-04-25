@@ -7,7 +7,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -250,7 +249,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	protected Long categoryCount = CATEGORY_COUNT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
+	 * The cached value of the '{@link #getParent() <em>Parent</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getParent()
@@ -523,14 +522,6 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 */
 	@Override
 	public CategoryInfo getParent() {
-		if (parent != null && ((EObject)parent).eIsProxy()) {
-			InternalEObject oldParent = (InternalEObject)parent;
-			parent = (CategoryInfo)eResolveProxy(oldParent);
-			if (parent != oldParent) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CommonsPackage.CATEGORY_INFO__PARENT, oldParent, parent));
-			}
-		}
 		return parent;
 	}
 
@@ -539,16 +530,6 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CategoryInfo basicGetParent() {
-		return parent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public void setParent(CategoryInfo newParent) {
 		CategoryInfo oldParent = parent;
 		parent = newParent;
@@ -612,8 +593,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 			case CommonsPackage.CATEGORY_INFO__CATEGORY_COUNT:
 				return getCategoryCount();
 			case CommonsPackage.CATEGORY_INFO__PARENT:
-				if (resolve) return getParent();
-				return basicGetParent();
+				return getParent();
 			case CommonsPackage.CATEGORY_INFO__PARENTS:
 				return getParents();
 		}
@@ -884,6 +864,8 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 		result.append(level);
 		result.append(", categoryCount: ");
 		result.append(categoryCount);
+		result.append(", parent: ");
+		result.append(parent);
 		result.append(')');
 		return result.toString();
 	}

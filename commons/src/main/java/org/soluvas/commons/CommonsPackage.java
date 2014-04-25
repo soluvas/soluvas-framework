@@ -251,13 +251,31 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__DOMAIN = POSITIONABLE_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Domain Dev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__DOMAIN_DEV = POSITIONABLE_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Domain Stg</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__DOMAIN_STG = POSITIONABLE_FEATURE_COUNT + 10;
+
+	/**
 	 * The feature id for the '<em><b>General Email</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__GENERAL_EMAIL = POSITIONABLE_FEATURE_COUNT + 9;
+	int APP_MANIFEST__GENERAL_EMAIL = POSITIONABLE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Organization Name</b></em>' attribute.
@@ -266,7 +284,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__ORGANIZATION_NAME = POSITIONABLE_FEATURE_COUNT + 10;
+	int APP_MANIFEST__ORGANIZATION_NAME = POSITIONABLE_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Organization Address</b></em>' attribute.
@@ -275,7 +293,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__ORGANIZATION_ADDRESS = POSITIONABLE_FEATURE_COUNT + 11;
+	int APP_MANIFEST__ORGANIZATION_ADDRESS = POSITIONABLE_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Letter Salutation</b></em>' attribute.
@@ -284,7 +302,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__LETTER_SALUTATION = POSITIONABLE_FEATURE_COUNT + 12;
+	int APP_MANIFEST__LETTER_SALUTATION = POSITIONABLE_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Letter Closing</b></em>' attribute.
@@ -293,7 +311,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__LETTER_CLOSING = POSITIONABLE_FEATURE_COUNT + 13;
+	int APP_MANIFEST__LETTER_CLOSING = POSITIONABLE_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Default Time Zone Id</b></em>' attribute.
@@ -302,7 +320,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_TIME_ZONE_ID = POSITIONABLE_FEATURE_COUNT + 14;
+	int APP_MANIFEST__DEFAULT_TIME_ZONE_ID = POSITIONABLE_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Default Time Zone</b></em>' attribute.
@@ -311,7 +329,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_TIME_ZONE = POSITIONABLE_FEATURE_COUNT + 15;
+	int APP_MANIFEST__DEFAULT_TIME_ZONE = POSITIONABLE_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Default Currency Code</b></em>' attribute.
@@ -320,7 +338,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_CURRENCY_CODE = POSITIONABLE_FEATURE_COUNT + 16;
+	int APP_MANIFEST__DEFAULT_CURRENCY_CODE = POSITIONABLE_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Default Currency</b></em>' attribute.
@@ -329,7 +347,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_CURRENCY = POSITIONABLE_FEATURE_COUNT + 17;
+	int APP_MANIFEST__DEFAULT_CURRENCY = POSITIONABLE_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Email Logo Uri Template</b></em>' attribute.
@@ -338,7 +356,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE = POSITIONABLE_FEATURE_COUNT + 18;
+	int APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE = POSITIONABLE_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Default Language Tag</b></em>' attribute.
@@ -347,7 +365,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_LANGUAGE_TAG = POSITIONABLE_FEATURE_COUNT + 19;
+	int APP_MANIFEST__DEFAULT_LANGUAGE_TAG = POSITIONABLE_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Default Country Code</b></em>' attribute.
@@ -356,7 +374,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_COUNTRY_CODE = POSITIONABLE_FEATURE_COUNT + 20;
+	int APP_MANIFEST__DEFAULT_COUNTRY_CODE = POSITIONABLE_FEATURE_COUNT + 22;
 
 	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
@@ -365,7 +383,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 21;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 23;
 
 	/**
 	 * The operation id for the '<em>Expand</em>' operation.
@@ -386,13 +404,22 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST___GET_DEFAULT_LOCALE = POSITIONABLE_OPERATION_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Get Real Domain</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST___GET_REAL_DOMAIN__STRING = POSITIONABLE_OPERATION_COUNT + 2;
+
+	/**
 	 * The number of operations of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_OPERATION_COUNT = POSITIONABLE_OPERATION_COUNT + 2;
+	int APP_MANIFEST_OPERATION_COUNT = POSITIONABLE_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}' class.
@@ -1130,7 +1157,7 @@ public interface CommonsPackage extends EPackage {
 	int EFACTORY_LINKED = 17;
 
 	/**
-	 * The feature id for the '<em><b>EFactory</b></em>' reference.
+	 * The feature id for the '<em><b>EFactory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2062,7 +2089,7 @@ public interface CommonsPackage extends EPackage {
 	int PARENTABLE = 31;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * The feature id for the '<em><b>Parent</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2325,7 +2352,7 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_INFO__CATEGORY_COUNT = CATEGORY_LIKE__CATEGORY_COUNT;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * The feature id for the '<em><b>Parent</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5662,6 +5689,16 @@ public interface CommonsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>EFactory</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.ecore.EFactory
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEFactory()
+	 * @generated
+	 */
+	int EFACTORY = 108;
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5778,6 +5815,28 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAppManifest_Domain();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDomainDev <em>Domain Dev</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Domain Dev</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDomainDev()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DomainDev();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDomainStg <em>Domain Stg</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Domain Stg</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDomainStg()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DomainStg();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getGeneralEmail <em>General Email</em>}'.
@@ -5920,6 +5979,16 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getAppManifest__GetDefaultLocale();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.commons.AppManifest#getRealDomain(java.lang.String) <em>Get Real Domain</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Real Domain</em>' operation.
+	 * @see org.soluvas.commons.AppManifest#getRealDomain(java.lang.String)
+	 * @generated
+	 */
+	EOperation getAppManifest__GetRealDomain__String();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonInfo <em>Person Info</em>}'.
@@ -6330,15 +6399,15 @@ public interface CommonsPackage extends EPackage {
 	EClass getEFactoryLinked();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.soluvas.commons.EFactoryLinked#getEFactory <em>EFactory</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.EFactoryLinked#getEFactory <em>EFactory</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>EFactory</em>'.
+	 * @return the meta object for the attribute '<em>EFactory</em>'.
 	 * @see org.soluvas.commons.EFactoryLinked#getEFactory()
 	 * @see #getEFactoryLinked()
 	 * @generated
 	 */
-	EReference getEFactoryLinked_EFactory();
+	EAttribute getEFactoryLinked_EFactory();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.NsPrefixable <em>Ns Prefixable</em>}'.
@@ -6709,15 +6778,15 @@ public interface CommonsPackage extends EPackage {
 	EClass getParentable();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.soluvas.commons.Parentable#getParent <em>Parent</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Parentable#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parent</em>'.
+	 * @return the meta object for the attribute '<em>Parent</em>'.
 	 * @see org.soluvas.commons.Parentable#getParent()
 	 * @see #getParentable()
 	 * @generated
 	 */
-	EReference getParentable_Parent();
+	EAttribute getParentable_Parent();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.CategoryLike <em>Category Like</em>}'.
@@ -9158,6 +9227,17 @@ public interface CommonsPackage extends EPackage {
 	EDataType getException();
 
 	/**
+	 * Returns the meta object for data type '{@link org.eclipse.emf.ecore.EFactory <em>EFactory</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>EFactory</em>'.
+	 * @see org.eclipse.emf.ecore.EFactory
+	 * @model instanceClass="org.eclipse.emf.ecore.EFactory" serializeable="false"
+	 * @generated
+	 */
+	EDataType getEFactory();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9274,6 +9354,22 @@ public interface CommonsPackage extends EPackage {
 		EAttribute APP_MANIFEST__DOMAIN = eINSTANCE.getAppManifest_Domain();
 
 		/**
+		 * The meta object literal for the '<em><b>Domain Dev</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DOMAIN_DEV = eINSTANCE.getAppManifest_DomainDev();
+
+		/**
+		 * The meta object literal for the '<em><b>Domain Stg</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DOMAIN_STG = eINSTANCE.getAppManifest_DomainStg();
+
+		/**
 		 * The meta object literal for the '<em><b>General Email</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9376,6 +9472,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation APP_MANIFEST___GET_DEFAULT_LOCALE = eINSTANCE.getAppManifest__GetDefaultLocale();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Real Domain</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation APP_MANIFEST___GET_REAL_DOMAIN__STRING = eINSTANCE.getAppManifest__GetRealDomain__String();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.
@@ -9720,12 +9824,12 @@ public interface CommonsPackage extends EPackage {
 		EClass EFACTORY_LINKED = eINSTANCE.getEFactoryLinked();
 
 		/**
-		 * The meta object literal for the '<em><b>EFactory</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>EFactory</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EFACTORY_LINKED__EFACTORY = eINSTANCE.getEFactoryLinked_EFactory();
+		EAttribute EFACTORY_LINKED__EFACTORY = eINSTANCE.getEFactoryLinked_EFactory();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.NsPrefixable <em>Ns Prefixable</em>}' class.
@@ -10036,12 +10140,12 @@ public interface CommonsPackage extends EPackage {
 		EClass PARENTABLE = eINSTANCE.getParentable();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Parent</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARENTABLE__PARENT = eINSTANCE.getParentable_Parent();
+		EAttribute PARENTABLE__PARENT = eINSTANCE.getParentable_Parent();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.CategoryLike <em>Category Like</em>}' class.
@@ -12010,6 +12114,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType EXCEPTION = eINSTANCE.getException();
+
+		/**
+		 * The meta object literal for the '<em>EFactory</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.emf.ecore.EFactory
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getEFactory()
+		 * @generated
+		 */
+		EDataType EFACTORY = eINSTANCE.getEFactory();
 
 	}
 

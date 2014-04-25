@@ -27,25 +27,25 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface EFactoryLinked extends EObject {
 	/**
-	 * Returns the value of the '<em><b>EFactory</b></em>' reference.
+	 * Returns the value of the '<em><b>EFactory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Useful for schema classes, e.g. {@code com.soluvas.story.schema.ActionType}, {@code com.soluvas.story.schema.TargetType}. Only accessible when resolved.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>EFactory</em>' reference.
+	 * @return the value of the '<em>EFactory</em>' attribute.
 	 * @see #setEFactory(EFactory)
 	 * @see org.soluvas.commons.CommonsPackage#getEFactoryLinked_EFactory()
-	 * @model
+	 * @model dataType="org.soluvas.commons.EFactory" transient="true"
 	 * @generated
 	 */
 	EFactory getEFactory();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.commons.EFactoryLinked#getEFactory <em>EFactory</em>}' reference.
+	 * Sets the value of the '{@link org.soluvas.commons.EFactoryLinked#getEFactory <em>EFactory</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>EFactory</em>' reference.
+	 * @param value the new value of the '<em>EFactory</em>' attribute.
 	 * @see #getEFactory()
 	 * @generated
 	 */

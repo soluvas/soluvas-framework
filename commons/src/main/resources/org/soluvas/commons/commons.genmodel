@@ -2,12 +2,537 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.soluvas.commons/src/main/java" modelPluginID="org.soluvas.commons"
     modelName="Commons" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false"
-    complianceLevel="7.0" suppressGenModelAnnotations="false" copyrightFields="false"
-    publicConstructors="true" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
+    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="7.0"
+    suppressGenModelAnnotations="false" copyrightFields="false" publicConstructors="true"
     operationReflection="true" importOrganizing="true">
   <foreignModel>commons.ecore</foreignModel>
   <genPackages prefix="Commons" basePackage="org.soluvas" disposableProviderFactory="true"
       ecorePackage="commons.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//ResourceType">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ResourceType/bundle"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ResourceType/file"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ResourceType/database"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ResourceType/classpath"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//Gender">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//Gender/unknown"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//Gender/male"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//Gender/female"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//EClassStatus">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//EClassStatus/unresolved"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//EClassStatus/resolved"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//JavaClassStatus">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//JavaClassStatus/unresolved"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//JavaClassStatus/resolved"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//ProgressStatus">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ProgressStatus/ok"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ProgressStatus/error"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ProgressStatus/warning"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ProgressStatus/deleted"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ProgressStatus/skipped"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//AccountStatus">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//AccountStatus/draft"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//AccountStatus/validated"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//AccountStatus/active"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//AccountStatus/verified"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//AccountStatus/inactive"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//AccountStatus/void"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//PublicationStatus">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//PublicationStatus/draft"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//PublicationStatus/published"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//PublicationStatus/unpublished"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//ArchivalStatus">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ArchivalStatus/fresh"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ArchivalStatus/archived"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//TranslationState">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//TranslationState/original"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//TranslationState/translated"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//ExpansionState">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ExpansionState/unexpanded"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ExpansionState/expanded"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//SignupSourceType">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//SignupSourceType/other"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//SignupSourceType/google_search"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//SignupSourceType/google_ads"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//SignupSourceType/facebook_ads"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//SignupSourceType/facebook_friend"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//SignupSourceType/alia_magazine"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//TenantSource">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//TenantSource/config"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//TenantSource/repository"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//GenericStatus">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//GenericStatus/booked"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//GenericStatus/draft"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//GenericStatus/inactive"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//GenericStatus/void"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//CustomerRoleStatus">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//CustomerRoleStatus/active"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//CustomerRoleStatus/inactive"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//CustomerRoleStatus/void"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="commons.ecore#//DateTime"/>
+    <genDataTypes ecoreDataType="commons.ecore#//CurrencyUnit"/>
+    <genDataTypes ecoreDataType="commons.ecore#//Quantity"/>
+    <genDataTypes ecoreDataType="commons.ecore#//Unit">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Unit/Q"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//List">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//List/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Map">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Map/K"/>
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Map/V"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Set">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Set/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Collection">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Collection/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Multimap">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Multimap/K"/>
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Multimap/V"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//NavigableMap">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//NavigableMap/K"/>
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//NavigableMap/V"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Queue">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Queue/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Multiset">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Multiset/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Serializable"/>
+    <genDataTypes ecoreDataType="commons.ecore#//Bundle"/>
+    <genDataTypes ecoreDataType="commons.ecore#//BigMoneyProvider"/>
+    <genDataTypes ecoreDataType="commons.ecore#//Measurable">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Measurable/Q"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//DateTimeZone"/>
+    <genDataTypes ecoreDataType="commons.ecore#//Locale"/>
+    <genDataTypes ecoreDataType="commons.ecore#//File"/>
+    <genDataTypes ecoreDataType="commons.ecore#//ListenableFuture">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//ListenableFuture/V"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//ListeningExecutorService"/>
+    <genDataTypes ecoreDataType="commons.ecore#//ClassLoader"/>
+    <genDataTypes ecoreDataType="commons.ecore#//URL"/>
+    <genDataTypes ecoreDataType="commons.ecore#//EventBus"/>
+    <genDataTypes ecoreDataType="commons.ecore#//LocalDate"/>
+    <genDataTypes ecoreDataType="commons.ecore#//NoSuchElementException"/>
+    <genDataTypes ecoreDataType="commons.ecore#//Deque">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Deque/T"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//Temperature"/>
+    <genDataTypes ecoreDataType="commons.ecore#//LocalTime"/>
+    <genDataTypes ecoreDataType="commons.ecore#//Exception"/>
+    <genDataTypes ecoreDataType="commons.ecore#//EFactory"/>
+    <genClasses image="false" ecoreClass="commons.ecore#//ResourceAware">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ResourceAware/resourceType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ResourceAware/resourceUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ResourceAware/resourceName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Positionable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Positionable/positioner"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//AppManifest">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/summary"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/domain"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/domainDev"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/domainStg"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/generalEmail"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/organizationName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/organizationAddress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/letterSalutation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/letterClosing"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultTimeZoneId"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultTimeZone"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultCurrencyCode"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultCurrency"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/emailLogoUriTemplate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultLanguageTag"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultCountryCode"/>
+      <genOperations ecoreOperation="commons.ecore#//AppManifest/getDefaultLocale"/>
+      <genOperations ecoreOperation="commons.ecore#//AppManifest/getRealDomain">
+        <genParameters ecoreParameter="commons.ecore#//AppManifest/getRealDomain/tenantEnv"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//PersonInfo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/gender"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/email"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Timestamped">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Timestamped/creationTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Timestamped/modificationTime"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Identifiable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Identifiable/id"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Sluggable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Sluggable/slug"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Nameable">
+      <genOperations ecoreOperation="commons.ecore#//Nameable/getName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Imageable">
+      <genOperations ecoreOperation="commons.ecore#//Imageable/getImageId"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//PhotoIdContainer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PhotoIdContainer/photoId"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//NameContainer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//NameContainer/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Informer">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Informer/T"/>
+      <genOperations ecoreOperation="commons.ecore#//Informer/toInfo"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Describable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Describable/description"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//BundleAware">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//BundleAware/bundle"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//JavaClassLinked">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//JavaClassLinked/T"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//JavaClassLinked/javaClassName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//JavaClassLinked/javaClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//JavaClassLinked/javaClassStatus"/>
+      <genOperations ecoreOperation="commons.ecore#//JavaClassLinked/resolveJavaClass">
+        <genParameters ecoreParameter="commons.ecore#//JavaClassLinked/resolveJavaClass/bundle"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//EClassLinked">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference commons.ecore#//EClassLinked/eClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//EClassLinked/eClassStatus"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//EClassLinked/ePackageNsPrefix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//EClassLinked/eClassName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//EClassLinked/ePackageName"/>
+      <genOperations ecoreOperation="commons.ecore#//EClassLinked/resolveEClass">
+        <genParameters ecoreParameter="commons.ecore#//EClassLinked/resolveEClass/eClassMap"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//SchemaVersionable">
+      <genOperations ecoreOperation="commons.ecore#//SchemaVersionable/getSchemaVersion"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//EFactoryLinked">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute commons.ecore#//EFactoryLinked/eFactory"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//NsPrefixable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//NsPrefixable/nsPrefix"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//WebAddress">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//WebAddress/baseUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//WebAddress/basePath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//WebAddress/apiPath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//WebAddress/imagesUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//WebAddress/skinUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//WebAddress/jsUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//WebAddress/secureBaseUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//WebAddress/secureImagesUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//WebAddress/secureSkinUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//WebAddress/secureJsUri"/>
+      <genOperations ecoreOperation="commons.ecore#//WebAddress/getApiUri"/>
+      <genOperations ecoreOperation="commons.ecore#//WebAddress/getSecureApiUri"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//Added">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Added/T"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//ModelNotification">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//ModelNotification/T"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference commons.ecore#//ModelNotification/container"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//AttributeSet">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//AttributeSet/T"/>
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//AttributeSet/V"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//AttributeUnset">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//AttributeUnset/T"/>
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//AttributeUnset/V"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//Removed">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Removed/T"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//ObjectNotification">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//ObjectNotification/T"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ObjectNotification/object"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//AttributeNotification">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//AttributeNotification/T"/>
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//AttributeNotification/V"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference commons.ecore#//AttributeNotification/attribute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AttributeNotification/object"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AttributeNotification/oldValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AttributeNotification/newValue"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//AddedMany">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//AddedMany/T"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//RemovedMany">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//RemovedMany/T"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//ObjectsNotification">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//ObjectsNotification/T"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ObjectsNotification/objects"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//EObjectLinked">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//EObjectLinked/T"/>
+      <genOperations ecoreOperation="commons.ecore#//EObjectLinked/getObject"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Parentable">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//Parentable/P"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute commons.ecore#//Parentable/parent"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//CategoryLike">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CategoryLike/slugPath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CategoryLike/color"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CategoryLike/imageId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CategoryLike/level"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CategoryLike/categoryCount"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//CategoryInfo">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference commons.ecore#//CategoryInfo/parents"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//ProgressMonitor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ProgressMonitor/canceled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ProgressMonitor/taskName"/>
+      <genOperations ecoreOperation="commons.ecore#//ProgressMonitor/beginTask">
+        <genParameters ecoreParameter="commons.ecore#//ProgressMonitor/beginTask/name"/>
+        <genParameters ecoreParameter="commons.ecore#//ProgressMonitor/beginTask/totalWork"/>
+      </genOperations>
+      <genOperations ecoreOperation="commons.ecore#//ProgressMonitor/done"/>
+      <genOperations ecoreOperation="commons.ecore#//ProgressMonitor/internalWorked">
+        <genParameters ecoreParameter="commons.ecore#//ProgressMonitor/internalWorked/work"/>
+      </genOperations>
+      <genOperations ecoreOperation="commons.ecore#//ProgressMonitor/subTask">
+        <genParameters ecoreParameter="commons.ecore#//ProgressMonitor/subTask/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="commons.ecore#//ProgressMonitor/worked">
+        <genParameters ecoreParameter="commons.ecore#//ProgressMonitor/worked/work"/>
+      </genOperations>
+      <genOperations ecoreOperation="commons.ecore#//ProgressMonitor/done.1">
+        <genParameters ecoreParameter="commons.ecore#//ProgressMonitor/done.1/status"/>
+      </genOperations>
+      <genOperations ecoreOperation="commons.ecore#//ProgressMonitor/worked.1">
+        <genParameters ecoreParameter="commons.ecore#//ProgressMonitor/worked.1/work"/>
+        <genParameters ecoreParameter="commons.ecore#//ProgressMonitor/worked.1/status"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//ShellProgressMonitor"/>
+    <genClasses ecoreClass="commons.ecore#//EventBusProgressMonitor">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//EventBusProgressMonitor/eventBus"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//EventBusProgressMonitor/trackingId"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//ProgressMonitorWrapper">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference commons.ecore#//ProgressMonitorWrapper/delegate"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Colorable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Colorable/color"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Translatable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Translatable/translationState"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Translatable/originalLanguage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Translatable/language"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference commons.ecore#//Translatable/translations"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//Translation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Translation/language"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference commons.ecore#//Translation/messages"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//TranslationMessageEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//TranslationMessageEntry/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//TranslationMessageEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//TranslationManager">
+      <genOperations ecoreOperation="commons.ecore#//TranslationManager/translate">
+        <genParameters ecoreParameter="commons.ecore#//TranslationManager/translate/entity"/>
+        <genParameters ecoreParameter="commons.ecore#//TranslationManager/translate/targetLanguage"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//TranslationEntry">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference commons.ecore#//TranslationEntry/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//TranslationEntry/key"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//StyleConfiguration">
+      <genOperations ecoreOperation="commons.ecore#//StyleConfiguration/getDefaultStyle"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Expandable">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Expandable/expansionState"/>
+      <genOperations ecoreOperation="commons.ecore#//Expandable/expand">
+        <genParameters ecoreParameter="commons.ecore#//Expandable/expand/scope"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//PersonLike">
+      <genOperations ecoreOperation="commons.ecore#//PersonLike/getId"/>
+      <genOperations ecoreOperation="commons.ecore#//PersonLike/getName"/>
+      <genOperations ecoreOperation="commons.ecore#//PersonLike/getSlug"/>
+      <genOperations ecoreOperation="commons.ecore#//PersonLike/getEmail"/>
+      <genOperations ecoreOperation="commons.ecore#//PersonLike/getPhotoId"/>
+      <genOperations ecoreOperation="commons.ecore#//PersonLike/getGender"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//Person">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/schemaVersion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/firstName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/lastName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/password"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference commons.ecore#//Person/phoneNumbers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference commons.ecore#//Person/emails"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference commons.ecore#//Person/mobileNumbers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference commons.ecore#//Person/addresses"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/accountStatus"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/birthYear"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/birthMonth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/birthDay"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/birthDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/gender"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/currencyCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/currency"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/googlePlusId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/googleUsername"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/virtualMail"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/nickname"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/customerRole"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/memberRole"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/managerRole"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/timeZoneId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/timeZone"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/referrerId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/referrerType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/signupSource"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/signupSourceType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/ipAddress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/lastIpAddress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/lastLoginTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/validationTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/activationTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/verificationTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/newsletterSubscriptionEnabled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/newsletterSubscriptionTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/socialSharingEnabled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/publicationStatus"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/archivalStatus"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/folder"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/religion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/passwordResetCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/passwordResetExpiryTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/clientAccessToken"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/securityRoleIds"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/debitBalance"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/debitCurrency"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/verifyCode"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference commons.ecore#//Person/organizations"/>
+      <genOperations ecoreOperation="commons.ecore#//Person/hasEmail">
+        <genParameters ecoreParameter="commons.ecore#//Person/hasEmail/email"/>
+      </genOperations>
+      <genOperations ecoreOperation="commons.ecore#//Person/putEmail">
+        <genParameters ecoreParameter="commons.ecore#//Person/putEmail/email"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//PhoneNumber">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PhoneNumber/phoneNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PhoneNumber/primary"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PhoneNumber/validationTime"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//Email">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Email/email"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Email/primary"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Email/validationTime"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//PostalAddress">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/schemaVersion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/organization"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/street"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/city"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/postalCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/province"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/country"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/countryCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/primaryMobile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/mobiles"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/primaryPhone"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/phones"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/primaryHomePhone"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/homePhones"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/primaryWorkPhone"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/workPhones"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/primaryEmail"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/emails"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/primary"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/primaryBilling"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/primaryShipping"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/validationTime"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//PersonCatalog">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference commons.ecore#//PersonCatalog/people"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//CanonicalSluggable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CanonicalSluggable/canonicalSlug"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//TwitterAccessible">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//TwitterAccessible/twitterAccessToken"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//TwitterAccessible/twitterAccessTokenSecret"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//TwitterIdentity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//TwitterIdentity/twitterId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//TwitterIdentity/twitterScreenName"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//FacebookIdentity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//FacebookIdentity/facebookId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//FacebookIdentity/facebookUsername"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//FacebookAccessible">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//FacebookAccessible/facebookAccessToken"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//Revisionable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Revisionable/guid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Revisionable/revision"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//SysConfig">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//SysConfig/tenantId"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//Geolocation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Geolocation/latitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Geolocation/longitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Geolocation/elevation"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//ThingInfo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ThingInfo/imageId"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//GeneralSysConfig"/>
+    <genClasses ecoreClass="commons.ecore#//Organization">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Organization/schemaVersion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Organization/blackBerryPin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Organization/website"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Organization/facebookPageUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Organization/facebookAccessToken"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Organization/facebookId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Organization/facebookUserName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Organization/twitterScreenName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Organization/twitterAccessToken"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Organization/twitterAccessTokenSecret"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Organization/twitterId"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//CustomerRole">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/schemaVersion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/status"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

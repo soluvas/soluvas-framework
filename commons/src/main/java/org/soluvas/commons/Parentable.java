@@ -23,26 +23,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Parentable<P> extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Parent</b></em>' reference.
+	 * Returns the value of the '<em><b>Parent</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parent</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent</em>' reference.
+	 * @return the value of the '<em>Parent</em>' attribute.
 	 * @see #setParent(Object)
 	 * @see org.soluvas.commons.CommonsPackage#getParentable_Parent()
-	 * @model kind="reference"
+	 * @model transient="true"
 	 * @generated
 	 */
 	P getParent();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.commons.Parentable#getParent <em>Parent</em>}' reference.
+	 * Sets the value of the '{@link org.soluvas.commons.Parentable#getParent <em>Parent</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent</em>' reference.
+	 * @param value the new value of the '<em>Parent</em>' attribute.
 	 * @see #getParent()
 	 * @generated
 	 */
