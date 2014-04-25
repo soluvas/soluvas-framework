@@ -29,6 +29,7 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getSummary <em>Summary</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDomain <em>Domain</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDomainPrd <em>Domain Prd</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDomainDev <em>Domain Dev</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDomainStg <em>Domain Stg</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getGeneralEmail <em>General Email</em>}</li>
@@ -137,9 +138,9 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Primary domain name of the application for "prd" environment, e.g. "berbatik.com". Used by Email system. URI templatable using "appDomain", "fqdn", "tenantId", "tenantEnv".
+	 * Primary domain name of the application for current environment, e.g. "berbatik.com". Used by Email system. URI templatable using "appDomain", "fqdn", "tenantId", "tenantEnv".
 	 * 
-	 * <p>To get the real domain name, use {@link #getRealDomain(String)} instead.
+	 * <p>TODO: make this read-only for future usage.
 	 * 
 	 * <p>For development, use e.g. "berbatik.annafi.dev".
 	 * 
@@ -171,6 +172,46 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	void setDomain(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Domain Prd</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Primary domain name of the application for "prd" environment, e.g. "berbatik.com". Used by Email system. URI templatable using "appDomain", "fqdn", "tenantId", "tenantEnv".
+	 * 
+	 * <p>To get the real domain name, use {@link #getRealDomain(String)} instead.
+	 * 
+	 * <p>For development, use e.g. "berbatik.annafi.dev".
+	 * 
+	 * <p>Production: title=Berbatik, domain=berbatik.com
+	 * 
+	 * <p>Staging: title=Berbatik stg, domain=stg.berbatik.com
+	 * 
+	 * <p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev
+	 * 
+	 * <p>Description usually stays the same, but can be different too.
+	 * 
+	 * <p>Templated using URI templates. e.g. to use {@code appDomain} variable, i.e. "acme.{+appDomain}",
+	 * that will be expanded when you call {@link #expand()}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Domain Prd</em>' attribute.
+	 * @see #setDomainPrd(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DomainPrd()
+	 * @model
+	 * @generated
+	 */
+	String getDomainPrd();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDomainPrd <em>Domain Prd</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Domain Prd</em>' attribute.
+	 * @see #getDomainPrd()
+	 * @generated
+	 */
+	void setDomainPrd(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Domain Dev</b></em>' attribute.
@@ -558,16 +599,5 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	Locale getDefaultLocale();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Get the real domain name for specified {@code tenantEnv}.
-	 * <!-- end-model-doc -->
-	 * @model
-	 * @generated
-	 */
-	void getRealDomain(String tenantEnv);
 
 } // AppManifest

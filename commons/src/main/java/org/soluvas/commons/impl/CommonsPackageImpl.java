@@ -1062,7 +1062,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DomainDev() {
+	public EAttribute getAppManifest_DomainPrd() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1071,7 +1071,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DomainStg() {
+	public EAttribute getAppManifest_DomainDev() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1080,8 +1080,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getAppManifest_GeneralEmail() {
+	public EAttribute getAppManifest_DomainStg() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -1091,7 +1090,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAppManifest_OrganizationName() {
+	public EAttribute getAppManifest_GeneralEmail() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -1101,7 +1100,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAppManifest_OrganizationAddress() {
+	public EAttribute getAppManifest_OrganizationName() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -1111,7 +1110,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAppManifest_LetterSalutation() {
+	public EAttribute getAppManifest_OrganizationAddress() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -1121,7 +1120,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAppManifest_LetterClosing() {
+	public EAttribute getAppManifest_LetterSalutation() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -1130,7 +1129,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultTimeZoneId() {
+	@Override
+	public EAttribute getAppManifest_LetterClosing() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -1139,7 +1139,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultTimeZone() {
+	public EAttribute getAppManifest_DefaultTimeZoneId() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(12);
 	}
 
@@ -1148,7 +1148,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultCurrencyCode() {
+	public EAttribute getAppManifest_DefaultTimeZone() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(13);
 	}
 
@@ -1157,7 +1157,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultCurrency() {
+	public EAttribute getAppManifest_DefaultCurrencyCode() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(14);
 	}
 
@@ -1166,7 +1166,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_EmailLogoUriTemplate() {
+	public EAttribute getAppManifest_DefaultCurrency() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(15);
 	}
 
@@ -1175,7 +1175,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultLanguageTag() {
+	public EAttribute getAppManifest_EmailLogoUriTemplate() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(16);
 	}
 
@@ -1184,8 +1184,17 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultCountryCode() {
+	public EAttribute getAppManifest_DefaultLanguageTag() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(17);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_DefaultCountryCode() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(18);
 	}
 
 	/**
@@ -1195,15 +1204,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	public EOperation getAppManifest__GetDefaultLocale() {
 		return appManifestEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getAppManifest__GetRealDomain__String() {
-		return appManifestEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -4122,6 +4122,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__SUMMARY);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DESCRIPTION);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DOMAIN);
+		createEAttribute(appManifestEClass, APP_MANIFEST__DOMAIN_PRD);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DOMAIN_DEV);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DOMAIN_STG);
 		createEAttribute(appManifestEClass, APP_MANIFEST__GENERAL_EMAIL);
@@ -4137,7 +4138,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_LANGUAGE_TAG);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_COUNTRY_CODE);
 		createEOperation(appManifestEClass, APP_MANIFEST___GET_DEFAULT_LOCALE);
-		createEOperation(appManifestEClass, APP_MANIFEST___GET_REAL_DOMAIN__STRING);
 
 		personInfoEClass = createEClass(PERSON_INFO);
 		createEAttribute(personInfoEClass, PERSON_INFO__GENDER);
@@ -4739,6 +4739,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_Summary(), ecorePackage.getEString(), "summary", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_Description(), ecorePackage.getEString(), "description", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_Domain(), ecorePackage.getEString(), "domain", "{+tenantId}.{+appDomain}", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_DomainPrd(), ecorePackage.getEString(), "domainPrd", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DomainDev(), ecorePackage.getEString(), "domainDev", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DomainStg(), ecorePackage.getEString(), "domainStg", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_GeneralEmail(), ecorePackage.getEString(), "generalEmail", "{+userName}@{+fqdn}", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4755,9 +4756,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_DefaultCountryCode(), ecorePackage.getEString(), "defaultCountryCode", "US", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getAppManifest__GetDefaultLocale(), this.getLocale(), "getDefaultLocale", 1, 1, IS_UNIQUE, IS_ORDERED);
-
-		EOperation op = initEOperation(getAppManifest__GetRealDomain__String(), null, "getRealDomain", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "tenantEnv", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(personInfoEClass, PersonInfo.class, "PersonInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPersonInfo_Gender(), this.getGender(), "gender", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4789,7 +4787,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(informerEClass, Informer.class, "Informer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		op = initEOperation(getInformer__ToInfo(), null, "toInfo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = initEOperation(getInformer__ToInfo(), null, "toInfo", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(informerEClass_T);
 		initEOperation(op, g1);
 
@@ -5312,12 +5310,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Returns the {@link java.util.Locale} referred by {@link @getDefaultLanguageTag()}."
 		   });		
 		addAnnotation
-		  (getAppManifest__GetRealDomain__String(), 
-		   source, 
-		   new String[] {
-			 "documentation", "Get the real domain name for specified {@code tenantEnv}."
-		   });		
-		addAnnotation
 		  (getAppManifest_Summary(), 
 		   source, 
 		   new String[] {
@@ -5331,6 +5323,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   });		
 		addAnnotation
 		  (getAppManifest_Domain(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Primary domain name of the application for current environment, e.g. \"berbatik.com\". Used by Email system. URI templatable using \"appDomain\", \"fqdn\", \"tenantId\", \"tenantEnv\".\n\n<p>TODO: make this read-only for future usage.\n\n<p>For development, use e.g. \"berbatik.annafi.dev\".\n\n<p>Production: title=Berbatik, domain=berbatik.com\n\n<p>Staging: title=Berbatik stg, domain=stg.berbatik.com\n\n<p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev\n\n<p>Description usually stays the same, but can be different too.\n\n<p>Templated using URI templates. e.g. to use {@code appDomain} variable, i.e. \"acme.{+appDomain}\",\nthat will be expanded when you call {@link #expand()}."
+		   });		
+		addAnnotation
+		  (getAppManifest_DomainPrd(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Primary domain name of the application for \"prd\" environment, e.g. \"berbatik.com\". Used by Email system. URI templatable using \"appDomain\", \"fqdn\", \"tenantId\", \"tenantEnv\".\n\n<p>To get the real domain name, use {@link #getRealDomain(String)} instead.\n\n<p>For development, use e.g. \"berbatik.annafi.dev\".\n\n<p>Production: title=Berbatik, domain=berbatik.com\n\n<p>Staging: title=Berbatik stg, domain=stg.berbatik.com\n\n<p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev\n\n<p>Description usually stays the same, but can be different too.\n\n<p>Templated using URI templates. e.g. to use {@code appDomain} variable, i.e. \"acme.{+appDomain}\",\nthat will be expanded when you call {@link #expand()}."

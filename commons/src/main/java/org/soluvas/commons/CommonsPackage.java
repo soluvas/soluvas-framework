@@ -251,13 +251,22 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__DOMAIN = POSITIONABLE_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Domain Prd</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__DOMAIN_PRD = POSITIONABLE_FEATURE_COUNT + 9;
+
+	/**
 	 * The feature id for the '<em><b>Domain Dev</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DOMAIN_DEV = POSITIONABLE_FEATURE_COUNT + 9;
+	int APP_MANIFEST__DOMAIN_DEV = POSITIONABLE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Domain Stg</b></em>' attribute.
@@ -266,7 +275,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DOMAIN_STG = POSITIONABLE_FEATURE_COUNT + 10;
+	int APP_MANIFEST__DOMAIN_STG = POSITIONABLE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>General Email</b></em>' attribute.
@@ -275,7 +284,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__GENERAL_EMAIL = POSITIONABLE_FEATURE_COUNT + 11;
+	int APP_MANIFEST__GENERAL_EMAIL = POSITIONABLE_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Organization Name</b></em>' attribute.
@@ -284,7 +293,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__ORGANIZATION_NAME = POSITIONABLE_FEATURE_COUNT + 12;
+	int APP_MANIFEST__ORGANIZATION_NAME = POSITIONABLE_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Organization Address</b></em>' attribute.
@@ -293,7 +302,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__ORGANIZATION_ADDRESS = POSITIONABLE_FEATURE_COUNT + 13;
+	int APP_MANIFEST__ORGANIZATION_ADDRESS = POSITIONABLE_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Letter Salutation</b></em>' attribute.
@@ -302,7 +311,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__LETTER_SALUTATION = POSITIONABLE_FEATURE_COUNT + 14;
+	int APP_MANIFEST__LETTER_SALUTATION = POSITIONABLE_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Letter Closing</b></em>' attribute.
@@ -311,7 +320,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__LETTER_CLOSING = POSITIONABLE_FEATURE_COUNT + 15;
+	int APP_MANIFEST__LETTER_CLOSING = POSITIONABLE_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Default Time Zone Id</b></em>' attribute.
@@ -320,7 +329,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_TIME_ZONE_ID = POSITIONABLE_FEATURE_COUNT + 16;
+	int APP_MANIFEST__DEFAULT_TIME_ZONE_ID = POSITIONABLE_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Default Time Zone</b></em>' attribute.
@@ -329,7 +338,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_TIME_ZONE = POSITIONABLE_FEATURE_COUNT + 17;
+	int APP_MANIFEST__DEFAULT_TIME_ZONE = POSITIONABLE_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Default Currency Code</b></em>' attribute.
@@ -338,7 +347,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_CURRENCY_CODE = POSITIONABLE_FEATURE_COUNT + 18;
+	int APP_MANIFEST__DEFAULT_CURRENCY_CODE = POSITIONABLE_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Default Currency</b></em>' attribute.
@@ -347,7 +356,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_CURRENCY = POSITIONABLE_FEATURE_COUNT + 19;
+	int APP_MANIFEST__DEFAULT_CURRENCY = POSITIONABLE_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Email Logo Uri Template</b></em>' attribute.
@@ -356,7 +365,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE = POSITIONABLE_FEATURE_COUNT + 20;
+	int APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE = POSITIONABLE_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Default Language Tag</b></em>' attribute.
@@ -365,7 +374,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_LANGUAGE_TAG = POSITIONABLE_FEATURE_COUNT + 21;
+	int APP_MANIFEST__DEFAULT_LANGUAGE_TAG = POSITIONABLE_FEATURE_COUNT + 22;
 
 	/**
 	 * The feature id for the '<em><b>Default Country Code</b></em>' attribute.
@@ -374,7 +383,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_COUNTRY_CODE = POSITIONABLE_FEATURE_COUNT + 22;
+	int APP_MANIFEST__DEFAULT_COUNTRY_CODE = POSITIONABLE_FEATURE_COUNT + 23;
 
 	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
@@ -383,7 +392,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 23;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 24;
 
 	/**
 	 * The operation id for the '<em>Expand</em>' operation.
@@ -404,22 +413,13 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST___GET_DEFAULT_LOCALE = POSITIONABLE_OPERATION_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Get Real Domain</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST___GET_REAL_DOMAIN__STRING = POSITIONABLE_OPERATION_COUNT + 2;
-
-	/**
 	 * The number of operations of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_OPERATION_COUNT = POSITIONABLE_OPERATION_COUNT + 3;
+	int APP_MANIFEST_OPERATION_COUNT = POSITIONABLE_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}' class.
@@ -5817,6 +5817,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_Domain();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDomainPrd <em>Domain Prd</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Domain Prd</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDomainPrd()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DomainPrd();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDomainDev <em>Domain Dev</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5979,16 +5990,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getAppManifest__GetDefaultLocale();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.AppManifest#getRealDomain(java.lang.String) <em>Get Real Domain</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Real Domain</em>' operation.
-	 * @see org.soluvas.commons.AppManifest#getRealDomain(java.lang.String)
-	 * @generated
-	 */
-	EOperation getAppManifest__GetRealDomain__String();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonInfo <em>Person Info</em>}'.
@@ -9354,6 +9355,14 @@ public interface CommonsPackage extends EPackage {
 		EAttribute APP_MANIFEST__DOMAIN = eINSTANCE.getAppManifest_Domain();
 
 		/**
+		 * The meta object literal for the '<em><b>Domain Prd</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DOMAIN_PRD = eINSTANCE.getAppManifest_DomainPrd();
+
+		/**
 		 * The meta object literal for the '<em><b>Domain Dev</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9472,14 +9481,6 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation APP_MANIFEST___GET_DEFAULT_LOCALE = eINSTANCE.getAppManifest__GetDefaultLocale();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Real Domain</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation APP_MANIFEST___GET_REAL_DOMAIN__STRING = eINSTANCE.getAppManifest__GetRealDomain__String();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.

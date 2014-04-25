@@ -79,6 +79,10 @@
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/domain"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_BhN3kUWcEeK1qbOICpWDVg"/>
         </children>
+        <children xmi:type="notation:Node" xmi:id="_xBg5MMxiEeO2dfgG1LprzA" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/domainPrd"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_xBg5McxiEeO2dfgG1LprzA"/>
+        </children>
         <children xmi:type="notation:Node" xmi:id="_4i48wMxeEeO2dfgG1LprzA" type="2001">
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/domainDev"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_4i48wcxeEeO2dfgG1LprzA"/>
@@ -143,10 +147,6 @@
         <children xmi:type="notation:Node" xmi:id="_QNYUsLctEeOXnKs8cUDr5w" type="2002">
           <element xmi:type="ecore:EOperation" href="commons.ecore#//AppManifest/getDefaultLocale"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_QNYUsbctEeOXnKs8cUDr5w"/>
-        </children>
-        <children xmi:type="notation:Node" xmi:id="_PAADAMxfEeO2dfgG1LprzA" type="2002">
-          <element xmi:type="ecore:EOperation" href="commons.ecore#//AppManifest/getRealDomain"/>
-          <layoutConstraint xmi:type="notation:Location" xmi:id="_PAADAcxfEeO2dfgG1LprzA"/>
         </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_J59nUSSDEeKyUdMfH4dSfg"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_J59nUiSDEeKyUdMfH4dSfg"/>
