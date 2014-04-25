@@ -54,6 +54,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.jta.JtaTransactionManager;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -103,7 +104,9 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	protected Set<E> inactiveStatuses;
 	protected Set<E> draftStatuses;
 	protected Set<E> voidStatuses;
+	@Nullable
 	private String liquibasePath;
+	@Nullable
 	private Set<String> initialTenantIds;
 	
 	/**
@@ -114,8 +117,9 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	 * @param inactiveStatuses
 	 * @param draftStatuses
 	 * @param voidStatuses
-	 * @param em EntityManager is provided in constructor because there may be multiple {@link EntityManager}s, i.e.
-	 * 		one for app-scope and another for multitenant-scoped.
+	 * @param em EntityManager is provided in constructor because there may be multiple {@link EntityManager}s
+	 * 		in a {@link JtaTransactionManager}. Note that for servlet containers like Tomcat, only one {@link EntityManager} is supported
+	 *		by {@link org.springframework.orm.jpa.JpaTransactionManager}, but we still can do multitenancy with this.
 	 */
 	protected JpaRepositoryBase(Class<T> entityClass,
 			@Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses,
