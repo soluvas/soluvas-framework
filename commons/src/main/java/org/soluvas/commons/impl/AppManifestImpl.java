@@ -1311,13 +1311,13 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				if (scope.get("appDomain") != null && ((String) scope.get("appDomain")).contains("{")) {
 					scope.put("appDomain", UriTemplate.expand((String) scope.get("appDomain"), scope) );
 				}
-				if (getDomainPrd().contains("{")) {
+				if (getDomainPrd() != null && getDomainPrd().contains("{")) {
 					setDomainPrd( UriTemplate.expand(getDomainPrd(), scope) );
 				}
-				if (getDomainDev().contains("{")) {
+				if (getDomainDev() != null && getDomainDev().contains("{")) {
 					setDomainDev( UriTemplate.expand(getDomainDev(), scope) );
 				}
-				if (getDomainStg().contains("{")) {
+				if (getDomainStg() != null && getDomainStg().contains("{")) {
 					setDomainStg( UriTemplate.expand(getDomainStg(), scope) );
 				}
 				setDomainByTenantEnv((String) scope.get("tenantEnv"));
@@ -1326,13 +1326,13 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				}
 				// 'domain' variable can then be used by other attributes, if needed
 				scope.put("domain", getDomain());
-				if (getGeneralEmailPrd().contains("{")) {
+				if (getGeneralEmailPrd() != null && getGeneralEmailPrd().contains("{")) {
 					setGeneralEmailPrd( UriTemplate.expand(getGeneralEmailPrd(), scope) );
 				}
-				if (getGeneralEmailDev().contains("{")) {
+				if (getGeneralEmailDev() != null && getGeneralEmailDev().contains("{")) {
 					setGeneralEmailDev( UriTemplate.expand(getGeneralEmailDev(), scope) );
 				}
-				if (getGeneralEmailStg().contains("{")) {
+				if (getGeneralEmailStg() != null && getGeneralEmailStg().contains("{")) {
 					setGeneralEmailStg( UriTemplate.expand(getGeneralEmailStg(), scope) );
 				}
 				setGeneralEmailByTenantEnv((String) scope.get("tenantEnv"));

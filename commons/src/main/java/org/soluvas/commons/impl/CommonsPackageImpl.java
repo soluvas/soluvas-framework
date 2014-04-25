@@ -1980,8 +1980,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getParentable_Parent() {
-		return (EAttribute)parentableEClass.getEStructuralFeatures().get(0);
+	public EReference getParentable_Parent() {
+		return (EReference)parentableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -4272,7 +4272,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEOperation(eObjectLinkedEClass, EOBJECT_LINKED___GET_OBJECT);
 
 		parentableEClass = createEClass(PARENTABLE);
-		createEAttribute(parentableEClass, PARENTABLE__PARENT);
+		createEReference(parentableEClass, PARENTABLE__PARENT);
 
 		categoryLikeEClass = createEClass(CATEGORY_LIKE);
 		createEAttribute(categoryLikeEClass, CATEGORY_LIKE__SLUG_PATH);
@@ -4922,7 +4922,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(parentableEClass, Parentable.class, "Parentable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		g1 = createEGenericType(parentableEClass_P);
-		initEAttribute(getParentable_Parent(), g1, "parent", null, 0, 1, Parentable.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParentable_Parent(), g1, null, "parent", null, 0, 1, Parentable.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(categoryLikeEClass, CategoryLike.class, "CategoryLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCategoryLike_SlugPath(), ecorePackage.getEString(), "slugPath", null, 0, 1, CategoryLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

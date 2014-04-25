@@ -2116,7 +2116,7 @@ public interface CommonsPackage extends EPackage {
 	int PARENTABLE = 31;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' attribute.
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2379,7 +2379,7 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_INFO__CATEGORY_COUNT = CATEGORY_LIKE__CATEGORY_COUNT;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' attribute.
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -6839,15 +6839,15 @@ public interface CommonsPackage extends EPackage {
 	EClass getParentable();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Parentable#getParent <em>Parent</em>}'.
+	 * Returns the meta object for the reference '{@link org.soluvas.commons.Parentable#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Parent</em>'.
+	 * @return the meta object for the reference '<em>Parent</em>'.
 	 * @see org.soluvas.commons.Parentable#getParent()
 	 * @see #getParentable()
 	 * @generated
 	 */
-	EAttribute getParentable_Parent();
+	EReference getParentable_Parent();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.CategoryLike <em>Category Like</em>}'.
@@ -10225,12 +10225,12 @@ public interface CommonsPackage extends EPackage {
 		EClass PARENTABLE = eINSTANCE.getParentable();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PARENTABLE__PARENT = eINSTANCE.getParentable_Parent();
+		EReference PARENTABLE__PARENT = eINSTANCE.getParentable_Parent();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.CategoryLike <em>Category Like</em>}' class.

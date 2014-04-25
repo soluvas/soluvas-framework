@@ -147,7 +147,8 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 			}
 			
 			final ImmutableMap<String, String> scope = ImmutableMap.of(
-					"tenantId", tenantId, "fqdn", fqdn, "appDomain", appDomain, "userName", System.getProperty("user.name"));
+					"tenantId", tenantId, "tenantEnv", tenantEnv,
+					"fqdn", fqdn, "appDomain", appDomain, "userName", System.getProperty("user.name"));
 			
 			final AppManifest appManifest;
 			if (appManifestTemplate != null) {
@@ -160,14 +161,15 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 			final AppManifest overlay = new OnDemandXmiLoader<AppManifest>(
 					CommonsPackage.eINSTANCE, res.getFile(), scope).get();
 			EmfUtils.combineEObject(appManifest, overlay);
-			
+
+			// NO LONGER SUPPORTED: please use single AppManifest for all environments, use domain{env} and generalEmail{env} properties now
 			// env file is usually used to override domain and generalEmail in stg/prd environments
-			final File envFile = new File(rootDir, tenantId + "/etc/" + tenantId + "_" + tenantEnv + ".AppManifest.xmi");
-			if (envFile.exists()) {
-				log.info("Combining with env '{}' specific AppManifest file '{}'", tenantEnv, envFile);				
-				final AppManifest envManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, envFile, scope).get();
-				EmfUtils.combineEObject(appManifest, envManifest);
-			}
+//			final File envFile = new File(rootDir, tenantId + "/etc/" + tenantId + "_" + tenantEnv + ".AppManifest.xmi");
+//			if (envFile.exists()) {
+//				log.info("Combining with env '{}' specific AppManifest file '{}'", tenantEnv, envFile);				
+//				final AppManifest envManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, envFile, scope).get();
+//				EmfUtils.combineEObject(appManifest, envManifest);
+//			}
 			
 			tenantMap.put(tenantId, appManifest);
 			tenantStateMap.put(tenantId, TenantState.ACTIVE);

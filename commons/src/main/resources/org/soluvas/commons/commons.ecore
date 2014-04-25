@@ -618,7 +618,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parentable" abstract="true" interface="true">
     <eTypeParameters name="P"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parent" transient="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" transient="true">
       <eGenericType eTypeParameter="#//Parentable/P"/>
     </eStructuralFeatures>
   </eClassifiers>
