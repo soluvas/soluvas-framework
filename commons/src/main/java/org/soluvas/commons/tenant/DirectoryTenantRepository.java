@@ -20,13 +20,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.PullResult;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.lib.RepositoryBuilder;
-import org.eclipse.jgit.revwalk.RevCommit;
-import org.eclipse.jgit.transport.PushResult;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
@@ -37,7 +30,6 @@ import org.soluvas.commons.EmfUtils;
 import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.config.DirectorySourcedConfig;
-import org.soluvas.commons.util.GitUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
@@ -255,40 +247,9 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		}
 		
 		/*Commit + Pull + Push*/
-		cpp(file);
+		provisioner.cpp(file);
 		
 		return tenantMap.get(tenantId);
-	}
-	
-	protected void cpp(final File file) {
-		GitUtils.disableStrictHostKeyChecking();
-		
-		try {
-			final Repository gitRepo = new RepositoryBuilder().findGitDir(file).setMustExist(true).build();
-			final Git git = new Git(gitRepo);
-			try {
-				//Commit
-				log.debug("Commiting {} in {}", file, gitRepo);
-				final String message = "Changed App Manifest at " + new DateTime();
-				final RevCommit revCommit = git.commit().setAll(true).setMessage(message).call();
-				log.info("Committed '{}' as {} in {}", message, revCommit, gitRepo);
-				//Pull
-				log.debug("Pulling {} due to '{}'", gitRepo, message);
-				final PullResult pullResult = git.pull().call();
-				// FetchResult doesn't have proper toString()
-				final String fetchResult = pullResult.getFetchResult() != null ? pullResult.getFetchResult().getTrackingRefUpdates() + " from " + pullResult.getFetchResult().getURI() : null;
-				log.info("Pulled {} from {}. Fetch: {}. Merge: {}.", gitRepo, pullResult.getFetchedFrom(), fetchResult,
-						pullResult.getMergeResult());
-				// push: MUST set default remote AND branch
-				log.debug("Pushing {} due to '{}'", gitRepo, message);
-				final Iterable<PushResult> pushResults = git.push().call();
-				log.info("Pushed {}: {}", gitRepo, pushResults);
-			} catch (Exception e) {
-				throw new RuntimeException(String.format("Cannot cpp '%s' to Git repository: %s", file), e);
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(String.format("Can not get Git Repository for %s", file, e));
-		}
 	}
 	
 	@Override

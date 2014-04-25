@@ -60,6 +60,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	
 	/**
 	 * Adds all given entities.
+	 * If any error occurs, the whole operation must be rolled back, and appropriate {@link Exception} is thrown.
 	 * 
 	 * @param entities It may be {@link Collection#isEmpty()}, part of the reason is because {@link PagingAndSortingRepositoryBase#save(Collection)} expects it that way.
 	 * @return the saved entities
@@ -69,6 +70,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	
 	/**
 	 * Modifies a given entity. Some repositories may allow modifying the {@code id} attribute.
+	 * If any error occurs, the whole operation must be rolled back, and appropriate {@link Exception} is thrown.
 	 * 
 	 * @param entities
 	 * @return the modified entities
@@ -181,6 +183,7 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 
 	/**
 	 * Deletes the given entities.
+	 * If any error occurs, the whole operation must be rolled back, and appropriate {@link Exception} is thrown.
 	 * 
 	 * @param entities
 	 * @return Number of deleted entities.
@@ -191,6 +194,8 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	/**
 	 * This is usually (but not always) more efficient than calling
 	 * {@link CrudRepository#delete(Serializable)} multiple times.
+	 * If any error occurs, the whole operation must be rolled back, and appropriate {@link Exception} is thrown.
+	 * 
 	 * @param ids
 	 * @return Number of deleted entities.
 	 */
