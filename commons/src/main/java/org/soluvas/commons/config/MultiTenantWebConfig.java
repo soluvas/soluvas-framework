@@ -102,25 +102,25 @@ public class MultiTenantWebConfig implements TenantSelector {
 	public static TenantRef getTenantRefMultiHost(HttpServletRequest httpRequest, String tenantEnv,
 			Map<String, AppManifest> tenantMap) {
 		Optional<String> tenantId = Optional.absent();
-		final String serverName = httpRequest.getServerName().toLowerCase();
+		final String requestHost = httpRequest.getServerName().toLowerCase();
 		// use AppManifest.domain matching first
-		final String noWww = serverName.startsWith("www.") ? serverName.substring(4) : serverName;
+		final String requestHostNoWww = requestHost.startsWith("www.") ? requestHost.substring(4) : requestHost;
 		for (final Map.Entry<String, AppManifest> entry : tenantMap.entrySet()) {
-			if (entry.getValue().getDomain().equalsIgnoreCase(serverName)) {
+			if (entry.getValue().getDomain().equalsIgnoreCase(requestHostNoWww)) {
 				tenantId = Optional.of(entry.getKey());
 				break;
 			}
 		}
 		// otherwise, fallback to first tenantId
 		if (!tenantId.isPresent()) {
-			final Matcher hostMatcher = Pattern.compile("(www\\.)?([^.]+).*").matcher(serverName);
+			final Matcher hostMatcher = Pattern.compile("(www\\.)?([^.]+).*").matcher(requestHost);
 			Preconditions.checkState(hostMatcher.matches(),
-					"Server name '%s' must match pattern: (www\\.)?([^.]+).*", serverName);
+					"Server name '%s' must match pattern: (www\\.)?([^.]+).*", requestHost);
 			tenantId = Optional.of(hostMatcher.group(2).toLowerCase());
 		}
 		final TenantRef hostTenant = new TenantRefImpl(tenantId.get(), tenantId.get(), tenantEnv);
 		log.debug("MULTI_HOST Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
-				serverName, hostTenant.getClientId(), hostTenant.getTenantId(), hostTenant.getTenantEnv() );
+				requestHost, hostTenant.getClientId(), hostTenant.getTenantId(), hostTenant.getTenantEnv() );
 		return hostTenant;
 	}
 	
