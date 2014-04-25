@@ -1,5 +1,6 @@
 package org.soluvas.data.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -176,15 +177,15 @@ public class MixinManagerImpl extends EObjectImpl implements MixinManager {
 		};
 		
 		final List<Mixin> mixins = ImmutableList.copyOf(EcoreUtil.copyAll(getMixins()));
-		Collections.sort(mixins, new Comparator<Mixin>() {
+		final List<Mixin> skippedMixins = new ArrayList<>(FluentIterable.from(mixins).filter(filter).skip((int)pageable.getOffset()).toList());
+		Collections.sort(skippedMixins, new Comparator<Mixin>() {
 			@Override
 			public int compare(Mixin o1, Mixin o2) {
 				return o1.getDisplayName().compareTo(o2.getDisplayName());
 			}
 		});
-		final List<Mixin> skippedMixins = FluentIterable.from(mixins).filter(filter).skip((int)pageable.getOffset()).toList();
 		
-		return new PageImpl<Mixin>(skippedMixins, pageable, mixins.size());
+		return new PageImpl<>(skippedMixins, pageable, mixins.size());
 	}
 
 	/**

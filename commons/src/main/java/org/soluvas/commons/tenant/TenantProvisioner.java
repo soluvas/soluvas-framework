@@ -1,5 +1,6 @@
 package org.soluvas.commons.tenant;
 
+import java.io.File;
 import java.util.Set;
 
 import org.soluvas.commons.AppManifest;
@@ -22,4 +23,8 @@ public interface TenantProvisioner<T> {
 	T lookupOne(String tenantId);
 	
 	Set<String> findAllStyles();
+	
+	T modifyMall(String tenantId, T provisionData);
+
+	void cpp(File file);
 }
