@@ -53,6 +53,9 @@ import com.google.common.base.Preconditions;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDomainDev <em>Domain Dev</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDomainStg <em>Domain Stg</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getGeneralEmail <em>General Email</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getGeneralEmailPrd <em>General Email Prd</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getGeneralEmailDev <em>General Email Dev</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getGeneralEmailStg <em>General Email Stg</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getOrganizationName <em>Organization Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getOrganizationAddress <em>Organization Address</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterSalutation <em>Letter Salutation</em>}</li>
@@ -351,6 +354,60 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 */
 	protected String generalEmail = GENERAL_EMAIL_EDEFAULT;
 
+	/**
+	 * The default value of the '{@link #getGeneralEmailPrd() <em>General Email Prd</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneralEmailPrd()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String GENERAL_EMAIL_PRD_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getGeneralEmailPrd() <em>General Email Prd</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneralEmailPrd()
+	 * @generated
+	 * @ordered
+	 */
+	protected String generalEmailPrd = GENERAL_EMAIL_PRD_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getGeneralEmailDev() <em>General Email Dev</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneralEmailDev()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String GENERAL_EMAIL_DEV_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getGeneralEmailDev() <em>General Email Dev</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneralEmailDev()
+	 * @generated
+	 * @ordered
+	 */
+	protected String generalEmailDev = GENERAL_EMAIL_DEV_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getGeneralEmailStg() <em>General Email Stg</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneralEmailStg()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String GENERAL_EMAIL_STG_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getGeneralEmailStg() <em>General Email Stg</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneralEmailStg()
+	 * @generated
+	 * @ordered
+	 */
+	protected String generalEmailStg = GENERAL_EMAIL_STG_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getOrganizationName() <em>Organization Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -889,6 +946,75 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 */
 	@Override
+	public String getGeneralEmailPrd() {
+		return generalEmailPrd;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setGeneralEmailPrd(String newGeneralEmailPrd) {
+		String oldGeneralEmailPrd = generalEmailPrd;
+		generalEmailPrd = newGeneralEmailPrd;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_PRD, oldGeneralEmailPrd, generalEmailPrd));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getGeneralEmailDev() {
+		return generalEmailDev;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setGeneralEmailDev(String newGeneralEmailDev) {
+		String oldGeneralEmailDev = generalEmailDev;
+		generalEmailDev = newGeneralEmailDev;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_DEV, oldGeneralEmailDev, generalEmailDev));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getGeneralEmailStg() {
+		return generalEmailStg;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setGeneralEmailStg(String newGeneralEmailStg) {
+		String oldGeneralEmailStg = generalEmailStg;
+		generalEmailStg = newGeneralEmailStg;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_STG, oldGeneralEmailStg, generalEmailStg));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getOrganizationName() {
 		return organizationName;
 	}
@@ -1121,20 +1247,49 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * Sets proper {@link #setDomain(String)} based on {@code tenantEnv}.
 	 * @param tenantEnv
 	 */
-	private void setTenantEnv(String tenantEnv) {
+	private void setDomainByTenantEnv(String tenantEnv) {
 		switch (tenantEnv) {
 		case "prd":
 			if (getDomainPrd() != null) {
 				setDomain(getDomainPrd());
 			}
+			break;
 		case "dev":
 			if (getDomainDev() != null) {
 				setDomain(getDomainDev());
 			}
+			break;
 		case "stg":
 			if (getDomainStg() != null) {
 				setDomain(getDomainStg());
 			}
+			break;
+		default:
+			throw new CommonsException("Unrecognized tenantEnv '" + tenantEnv + "'");
+		}
+	}
+
+	/**
+	 * Sets proper {@link #setGeneralEmail(String)} based on {@code tenantEnv}.
+	 * @param tenantEnv
+	 */
+	private void setGeneralEmailByTenantEnv(String tenantEnv) {
+		switch (tenantEnv) {
+		case "prd":
+			if (getGeneralEmailPrd() != null) {
+				setGeneralEmail(getGeneralEmailPrd());
+			}
+			break;
+		case "dev":
+			if (getGeneralEmailDev() != null) {
+				setGeneralEmail(getGeneralEmailDev());
+			}
+			break;
+		case "stg":
+			if (getGeneralEmailStg() != null) {
+				setGeneralEmail(getGeneralEmailStg());
+			}
+			break;
 		default:
 			throw new CommonsException("Unrecognized tenantEnv '" + tenantEnv + "'");
 		}
@@ -1165,12 +1320,22 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				if (getDomainStg().contains("{")) {
 					setDomainStg( UriTemplate.expand(getDomainStg(), scope) );
 				}
+				setDomainByTenantEnv((String) scope.get("tenantEnv"));
 				if (getDomain().contains("{")) {
 					setDomain( UriTemplate.expand(getDomain(), scope) );
 				}
-				setTenantEnv((String) scope.get("tenantEnv"));
 				// 'domain' variable can then be used by other attributes, if needed
 				scope.put("domain", getDomain());
+				if (getGeneralEmailPrd().contains("{")) {
+					setGeneralEmailPrd( UriTemplate.expand(getGeneralEmailPrd(), scope) );
+				}
+				if (getGeneralEmailDev().contains("{")) {
+					setGeneralEmailDev( UriTemplate.expand(getGeneralEmailDev(), scope) );
+				}
+				if (getGeneralEmailStg().contains("{")) {
+					setGeneralEmailStg( UriTemplate.expand(getGeneralEmailStg(), scope) );
+				}
+				setGeneralEmailByTenantEnv((String) scope.get("tenantEnv"));
 				if (getGeneralEmail().contains("{")) {
 					setGeneralEmail( UriTemplate.expand(getGeneralEmail(), scope) );
 				}
@@ -1217,6 +1382,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getDomainStg();
 			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL:
 				return getGeneralEmail();
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_PRD:
+				return getGeneralEmailPrd();
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_DEV:
+				return getGeneralEmailDev();
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_STG:
+				return getGeneralEmailStg();
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_NAME:
 				return getOrganizationName();
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
@@ -1289,6 +1460,15 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return;
 			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL:
 				setGeneralEmail((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_PRD:
+				setGeneralEmailPrd((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_DEV:
+				setGeneralEmailDev((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_STG:
+				setGeneralEmailStg((String)newValue);
 				return;
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_NAME:
 				setOrganizationName((String)newValue);
@@ -1368,6 +1548,15 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL:
 				setGeneralEmail(GENERAL_EMAIL_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_PRD:
+				setGeneralEmailPrd(GENERAL_EMAIL_PRD_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_DEV:
+				setGeneralEmailDev(GENERAL_EMAIL_DEV_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_STG:
+				setGeneralEmailStg(GENERAL_EMAIL_STG_EDEFAULT);
+				return;
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_NAME:
 				setOrganizationName(ORGANIZATION_NAME_EDEFAULT);
 				return;
@@ -1435,6 +1624,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return DOMAIN_STG_EDEFAULT == null ? domainStg != null : !DOMAIN_STG_EDEFAULT.equals(domainStg);
 			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL:
 				return GENERAL_EMAIL_EDEFAULT == null ? generalEmail != null : !GENERAL_EMAIL_EDEFAULT.equals(generalEmail);
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_PRD:
+				return GENERAL_EMAIL_PRD_EDEFAULT == null ? generalEmailPrd != null : !GENERAL_EMAIL_PRD_EDEFAULT.equals(generalEmailPrd);
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_DEV:
+				return GENERAL_EMAIL_DEV_EDEFAULT == null ? generalEmailDev != null : !GENERAL_EMAIL_DEV_EDEFAULT.equals(generalEmailDev);
+			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL_STG:
+				return GENERAL_EMAIL_STG_EDEFAULT == null ? generalEmailStg != null : !GENERAL_EMAIL_STG_EDEFAULT.equals(generalEmailStg);
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_NAME:
 				return ORGANIZATION_NAME_EDEFAULT == null ? organizationName != null : !ORGANIZATION_NAME_EDEFAULT.equals(organizationName);
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
@@ -1608,6 +1803,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(domainStg);
 		result.append(", generalEmail: ");
 		result.append(generalEmail);
+		result.append(", generalEmailPrd: ");
+		result.append(generalEmailPrd);
+		result.append(", generalEmailDev: ");
+		result.append(generalEmailDev);
+		result.append(", generalEmailStg: ");
+		result.append(generalEmailStg);
 		result.append(", organizationName: ");
 		result.append(organizationName);
 		result.append(", organizationAddress: ");

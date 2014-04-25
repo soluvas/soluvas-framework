@@ -95,6 +95,18 @@
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/generalEmail"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_iPn5kaAUEeKZuq8VblqnLg"/>
         </children>
+        <children xmi:type="notation:Node" xmi:id="_251kMMxyEeO2dfgG1LprzA" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/generalEmailPrd"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_251kMcxyEeO2dfgG1LprzA"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_3nf7cMxyEeO2dfgG1LprzA" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/generalEmailDev"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_3nf7ccxyEeO2dfgG1LprzA"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_4DLx4MxyEeO2dfgG1LprzA" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/generalEmailStg"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_4DLx4cxyEeO2dfgG1LprzA"/>
+        </children>
         <children xmi:type="notation:Node" xmi:id="_iPn5kqAUEeKZuq8VblqnLg" type="2001">
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/organizationName"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_iPogoKAUEeKZuq8VblqnLg"/>

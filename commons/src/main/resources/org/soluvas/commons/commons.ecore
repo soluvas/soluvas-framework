@@ -83,7 +83,22 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="generalEmail" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="{+userName}@{+fqdn}">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Email address used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.&#xA;The default templated generalEmail is &quot;{+userName}@{+fqdn}&quot; so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.&#xA;&#xA;&lt;p>Templated using URI templates."/>
+        <details key="documentation" value="Email address (current environment) used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.&#xA;The default templated generalEmail is &quot;{+userName}@{+fqdn}&quot; so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.&#xA;&#xA;&lt;p>Templated using URI templates.&#xA;&#xA;&lt;p>TODO: this should be read-only"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generalEmailPrd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="General email for &quot;prd&quot; environment."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generalEmailDev" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="General email for &quot;dev&quot; environment."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generalEmailStg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="General email for &quot;stg&quot; environment."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="organizationName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">

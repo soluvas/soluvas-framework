@@ -33,6 +33,9 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getDomainDev <em>Domain Dev</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDomainStg <em>Domain Stg</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getGeneralEmail <em>General Email</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getGeneralEmailPrd <em>General Email Prd</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getGeneralEmailDev <em>General Email Dev</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getGeneralEmailStg <em>General Email Stg</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationName <em>Organization Name</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationAddress <em>Organization Address</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getLetterSalutation <em>Letter Salutation</em>}</li>
@@ -271,10 +274,12 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Email address used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.
+	 * Email address (current environment) used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.
 	 * The default templated generalEmail is "{+userName}@{+fqdn}" so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.
 	 * 
 	 * <p>Templated using URI templates.
+	 * 
+	 * <p>TODO: this should be read-only
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>General Email</em>' attribute.
 	 * @see #setGeneralEmail(String)
@@ -293,6 +298,81 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	void setGeneralEmail(String value);
+
+	/**
+	 * Returns the value of the '<em><b>General Email Prd</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * General email for "prd" environment.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>General Email Prd</em>' attribute.
+	 * @see #setGeneralEmailPrd(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_GeneralEmailPrd()
+	 * @model
+	 * @generated
+	 */
+	String getGeneralEmailPrd();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getGeneralEmailPrd <em>General Email Prd</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>General Email Prd</em>' attribute.
+	 * @see #getGeneralEmailPrd()
+	 * @generated
+	 */
+	void setGeneralEmailPrd(String value);
+
+	/**
+	 * Returns the value of the '<em><b>General Email Dev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * General email for "dev" environment.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>General Email Dev</em>' attribute.
+	 * @see #setGeneralEmailDev(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_GeneralEmailDev()
+	 * @model
+	 * @generated
+	 */
+	String getGeneralEmailDev();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getGeneralEmailDev <em>General Email Dev</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>General Email Dev</em>' attribute.
+	 * @see #getGeneralEmailDev()
+	 * @generated
+	 */
+	void setGeneralEmailDev(String value);
+
+	/**
+	 * Returns the value of the '<em><b>General Email Stg</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * General email for "stg" environment.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>General Email Stg</em>' attribute.
+	 * @see #setGeneralEmailStg(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_GeneralEmailStg()
+	 * @model
+	 * @generated
+	 */
+	String getGeneralEmailStg();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getGeneralEmailStg <em>General Email Stg</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>General Email Stg</em>' attribute.
+	 * @see #getGeneralEmailStg()
+	 * @generated
+	 */
+	void setGeneralEmailStg(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Organization Name</b></em>' attribute.

@@ -1099,8 +1099,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getAppManifest_OrganizationName() {
+	public EAttribute getAppManifest_GeneralEmailPrd() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -1109,8 +1108,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getAppManifest_OrganizationAddress() {
+	public EAttribute getAppManifest_GeneralEmailDev() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -1119,8 +1117,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getAppManifest_LetterSalutation() {
+	public EAttribute getAppManifest_GeneralEmailStg() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -1130,7 +1127,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAppManifest_LetterClosing() {
+	public EAttribute getAppManifest_OrganizationName() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -1139,7 +1136,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultTimeZoneId() {
+	@Override
+	public EAttribute getAppManifest_OrganizationAddress() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(12);
 	}
 
@@ -1148,7 +1146,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultTimeZone() {
+	@Override
+	public EAttribute getAppManifest_LetterSalutation() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(13);
 	}
 
@@ -1157,7 +1156,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultCurrencyCode() {
+	@Override
+	public EAttribute getAppManifest_LetterClosing() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(14);
 	}
 
@@ -1166,7 +1166,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultCurrency() {
+	public EAttribute getAppManifest_DefaultTimeZoneId() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(15);
 	}
 
@@ -1175,7 +1175,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_EmailLogoUriTemplate() {
+	public EAttribute getAppManifest_DefaultTimeZone() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(16);
 	}
 
@@ -1184,7 +1184,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultLanguageTag() {
+	public EAttribute getAppManifest_DefaultCurrencyCode() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(17);
 	}
 
@@ -1193,8 +1193,35 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultCountryCode() {
+	public EAttribute getAppManifest_DefaultCurrency() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(18);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_EmailLogoUriTemplate() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(19);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_DefaultLanguageTag() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(20);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_DefaultCountryCode() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(21);
 	}
 
 	/**
@@ -4126,6 +4153,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__DOMAIN_DEV);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DOMAIN_STG);
 		createEAttribute(appManifestEClass, APP_MANIFEST__GENERAL_EMAIL);
+		createEAttribute(appManifestEClass, APP_MANIFEST__GENERAL_EMAIL_PRD);
+		createEAttribute(appManifestEClass, APP_MANIFEST__GENERAL_EMAIL_DEV);
+		createEAttribute(appManifestEClass, APP_MANIFEST__GENERAL_EMAIL_STG);
 		createEAttribute(appManifestEClass, APP_MANIFEST__ORGANIZATION_NAME);
 		createEAttribute(appManifestEClass, APP_MANIFEST__ORGANIZATION_ADDRESS);
 		createEAttribute(appManifestEClass, APP_MANIFEST__LETTER_SALUTATION);
@@ -4743,6 +4773,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_DomainDev(), ecorePackage.getEString(), "domainDev", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DomainStg(), ecorePackage.getEString(), "domainStg", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_GeneralEmail(), ecorePackage.getEString(), "generalEmail", "{+userName}@{+fqdn}", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_GeneralEmailPrd(), ecorePackage.getEString(), "generalEmailPrd", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_GeneralEmailDev(), ecorePackage.getEString(), "generalEmailDev", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_GeneralEmailStg(), ecorePackage.getEString(), "generalEmailStg", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_OrganizationName(), ecorePackage.getEString(), "organizationName", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_OrganizationAddress(), ecorePackage.getEString(), "organizationAddress", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_LetterSalutation(), ecorePackage.getEString(), "letterSalutation", "Hi", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5349,7 +5382,25 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (getAppManifest_GeneralEmail(), 
 		   source, 
 		   new String[] {
-			 "documentation", "Email address used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.\nThe default templated generalEmail is \"{+userName}@{+fqdn}\" so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.\n\n<p>Templated using URI templates."
+			 "documentation", "Email address (current environment) used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.\nThe default templated generalEmail is \"{+userName}@{+fqdn}\" so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.\n\n<p>Templated using URI templates.\n\n<p>TODO: this should be read-only"
+		   });		
+		addAnnotation
+		  (getAppManifest_GeneralEmailPrd(), 
+		   source, 
+		   new String[] {
+			 "documentation", "General email for \"prd\" environment."
+		   });		
+		addAnnotation
+		  (getAppManifest_GeneralEmailDev(), 
+		   source, 
+		   new String[] {
+			 "documentation", "General email for \"dev\" environment."
+		   });		
+		addAnnotation
+		  (getAppManifest_GeneralEmailStg(), 
+		   source, 
+		   new String[] {
+			 "documentation", "General email for \"stg\" environment."
 		   });		
 		addAnnotation
 		  (getAppManifest_OrganizationName(), 
