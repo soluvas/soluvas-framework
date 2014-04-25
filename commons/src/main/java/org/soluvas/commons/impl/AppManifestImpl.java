@@ -30,6 +30,7 @@ import com.damnhandy.uri.template.MalformedUriTemplateException;
 import com.damnhandy.uri.template.UriTemplate;
 import com.damnhandy.uri.template.VariableExpansionException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Preconditions;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,6 +49,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getSummary <em>Summary</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDomain <em>Domain</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDomainPrd <em>Domain Prd</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDomainDev <em>Domain Dev</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDomainStg <em>Domain Stg</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getGeneralEmail <em>General Email</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getOrganizationName <em>Organization Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getOrganizationAddress <em>Organization Address</em>}</li>
@@ -273,6 +277,60 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 */
 	protected String domain = DOMAIN_EDEFAULT;
 
+	/**
+	 * The default value of the '{@link #getDomainPrd() <em>Domain Prd</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainPrd()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DOMAIN_PRD_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getDomainPrd() <em>Domain Prd</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainPrd()
+	 * @generated
+	 * @ordered
+	 */
+	protected String domainPrd = DOMAIN_PRD_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getDomainDev() <em>Domain Dev</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainDev()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DOMAIN_DEV_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getDomainDev() <em>Domain Dev</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainDev()
+	 * @generated
+	 * @ordered
+	 */
+	protected String domainDev = DOMAIN_DEV_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getDomainStg() <em>Domain Stg</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainStg()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DOMAIN_STG_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getDomainStg() <em>Domain Stg</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainStg()
+	 * @generated
+	 * @ordered
+	 */
+	protected String domainStg = DOMAIN_STG_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getGeneralEmail() <em>General Email</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -739,6 +797,75 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 */
 	@Override
+	public String getDomainPrd() {
+		return domainPrd;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDomainPrd(String newDomainPrd) {
+		String oldDomainPrd = domainPrd;
+		domainPrd = newDomainPrd;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DOMAIN_PRD, oldDomainPrd, domainPrd));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getDomainDev() {
+		return domainDev;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDomainDev(String newDomainDev) {
+		String oldDomainDev = domainDev;
+		domainDev = newDomainDev;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DOMAIN_DEV, oldDomainDev, domainDev));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getDomainStg() {
+		return domainStg;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDomainStg(String newDomainStg) {
+		String oldDomainStg = domainStg;
+		domainStg = newDomainStg;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DOMAIN_STG, oldDomainStg, domainStg));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getGeneralEmail() {
 		return generalEmail;
 	}
@@ -991,12 +1118,37 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	}
 
 	/**
+	 * Sets proper {@link #setDomain(String)} based on {@code tenantEnv}.
+	 * @param tenantEnv
+	 */
+	private void setTenantEnv(String tenantEnv) {
+		switch (tenantEnv) {
+		case "prd":
+			if (getDomainPrd() != null) {
+				setDomain(getDomainPrd());
+			}
+		case "dev":
+			if (getDomainDev() != null) {
+				setDomain(getDomainDev());
+			}
+		case "stg":
+			if (getDomainStg() != null) {
+				setDomain(getDomainStg());
+			}
+		default:
+			throw new CommonsException("Unrecognized tenantEnv '" + tenantEnv + "'");
+		}
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public void expand(final Map<String, Object> upScope) {
 		if (getExpansionState() == ExpansionState.UNEXPANDED) {
+			Preconditions.checkArgument(upScope.containsKey("tenantEnv"),
+					"tenantEnv is required in scope, used to determine domain");
 			try {
 				final Map<String, Object> scope = new HashMap(upScope);
 				// hub.properties#appDomain may be null (for single-tenant configs),
@@ -1004,9 +1156,19 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				if (scope.get("appDomain") != null && ((String) scope.get("appDomain")).contains("{")) {
 					scope.put("appDomain", UriTemplate.expand((String) scope.get("appDomain"), scope) );
 				}
+				if (getDomainPrd().contains("{")) {
+					setDomainPrd( UriTemplate.expand(getDomainPrd(), scope) );
+				}
+				if (getDomainDev().contains("{")) {
+					setDomainDev( UriTemplate.expand(getDomainDev(), scope) );
+				}
+				if (getDomainStg().contains("{")) {
+					setDomainStg( UriTemplate.expand(getDomainStg(), scope) );
+				}
 				if (getDomain().contains("{")) {
 					setDomain( UriTemplate.expand(getDomain(), scope) );
 				}
+				setTenantEnv((String) scope.get("tenantEnv"));
 				// 'domain' variable can then be used by other attributes, if needed
 				scope.put("domain", getDomain());
 				if (getGeneralEmail().contains("{")) {
@@ -1047,6 +1209,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getDescription();
 			case CommonsPackage.APP_MANIFEST__DOMAIN:
 				return getDomain();
+			case CommonsPackage.APP_MANIFEST__DOMAIN_PRD:
+				return getDomainPrd();
+			case CommonsPackage.APP_MANIFEST__DOMAIN_DEV:
+				return getDomainDev();
+			case CommonsPackage.APP_MANIFEST__DOMAIN_STG:
+				return getDomainStg();
 			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL:
 				return getGeneralEmail();
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_NAME:
@@ -1109,6 +1277,15 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return;
 			case CommonsPackage.APP_MANIFEST__DOMAIN:
 				setDomain((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__DOMAIN_PRD:
+				setDomainPrd((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__DOMAIN_DEV:
+				setDomainDev((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__DOMAIN_STG:
+				setDomainStg((String)newValue);
 				return;
 			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL:
 				setGeneralEmail((String)newValue);
@@ -1179,6 +1356,15 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__DOMAIN:
 				setDomain(DOMAIN_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__DOMAIN_PRD:
+				setDomainPrd(DOMAIN_PRD_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__DOMAIN_DEV:
+				setDomainDev(DOMAIN_DEV_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__DOMAIN_STG:
+				setDomainStg(DOMAIN_STG_EDEFAULT);
+				return;
 			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL:
 				setGeneralEmail(GENERAL_EMAIL_EDEFAULT);
 				return;
@@ -1241,6 +1427,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CommonsPackage.APP_MANIFEST__DOMAIN:
 				return DOMAIN_EDEFAULT == null ? domain != null : !DOMAIN_EDEFAULT.equals(domain);
+			case CommonsPackage.APP_MANIFEST__DOMAIN_PRD:
+				return DOMAIN_PRD_EDEFAULT == null ? domainPrd != null : !DOMAIN_PRD_EDEFAULT.equals(domainPrd);
+			case CommonsPackage.APP_MANIFEST__DOMAIN_DEV:
+				return DOMAIN_DEV_EDEFAULT == null ? domainDev != null : !DOMAIN_DEV_EDEFAULT.equals(domainDev);
+			case CommonsPackage.APP_MANIFEST__DOMAIN_STG:
+				return DOMAIN_STG_EDEFAULT == null ? domainStg != null : !DOMAIN_STG_EDEFAULT.equals(domainStg);
 			case CommonsPackage.APP_MANIFEST__GENERAL_EMAIL:
 				return GENERAL_EMAIL_EDEFAULT == null ? generalEmail != null : !GENERAL_EMAIL_EDEFAULT.equals(generalEmail);
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_NAME:
@@ -1408,6 +1600,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(description);
 		result.append(", domain: ");
 		result.append(domain);
+		result.append(", domainPrd: ");
+		result.append(domainPrd);
+		result.append(", domainDev: ");
+		result.append(domainDev);
+		result.append(", domainStg: ");
+		result.append(domainStg);
 		result.append(", generalEmail: ");
 		result.append(generalEmail);
 		result.append(", organizationName: ");

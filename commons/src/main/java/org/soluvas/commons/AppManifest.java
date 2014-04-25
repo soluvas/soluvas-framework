@@ -29,6 +29,9 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getSummary <em>Summary</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDomain <em>Domain</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDomainPrd <em>Domain Prd</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDomainDev <em>Domain Dev</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDomainStg <em>Domain Stg</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getGeneralEmail <em>General Email</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationName <em>Organization Name</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationAddress <em>Organization Address</em>}</li>
@@ -135,11 +138,11 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Primary domain name of the application, e.g. "berbatik.com". Used by Email system.
+	 * Primary domain name of the application for current environment, e.g. "berbatik.com". Used by Email system. URI templatable using "appDomain", "fqdn", "tenantId", "tenantEnv".
+	 * 
+	 * <p>TODO: make this read-only for future usage.
 	 * 
 	 * <p>For development, use e.g. "berbatik.annafi.dev".
-	 * 
-	 * <p>TODO: title & domain should probably be moved somewhere else, since it's tenant & environment specific.
 	 * 
 	 * <p>Production: title=Berbatik, domain=berbatik.com
 	 * 
@@ -169,6 +172,98 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	void setDomain(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Domain Prd</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Primary domain name of the application for "prd" environment, e.g. "berbatik.com". Used by Email system. URI templatable using "appDomain", "fqdn", "tenantId", "tenantEnv".
+	 * 
+	 * <p>To get the real domain name, use {@link #getRealDomain(String)} instead.
+	 * 
+	 * <p>For development, use e.g. "berbatik.annafi.dev".
+	 * 
+	 * <p>Production: title=Berbatik, domain=berbatik.com
+	 * 
+	 * <p>Staging: title=Berbatik stg, domain=stg.berbatik.com
+	 * 
+	 * <p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev
+	 * 
+	 * <p>Description usually stays the same, but can be different too.
+	 * 
+	 * <p>Templated using URI templates. e.g. to use {@code appDomain} variable, i.e. "acme.{+appDomain}",
+	 * that will be expanded when you call {@link #expand()}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Domain Prd</em>' attribute.
+	 * @see #setDomainPrd(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DomainPrd()
+	 * @model
+	 * @generated
+	 */
+	String getDomainPrd();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDomainPrd <em>Domain Prd</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Domain Prd</em>' attribute.
+	 * @see #getDomainPrd()
+	 * @generated
+	 */
+	void setDomainPrd(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Domain Dev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Primary domain name of the application for "dev" environment.
+	 * URI templatable using "appDomain", "fqdn", "tenantId", "tenantEnv".
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Domain Dev</em>' attribute.
+	 * @see #setDomainDev(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DomainDev()
+	 * @model
+	 * @generated
+	 */
+	String getDomainDev();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDomainDev <em>Domain Dev</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Domain Dev</em>' attribute.
+	 * @see #getDomainDev()
+	 * @generated
+	 */
+	void setDomainDev(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Domain Stg</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Primary domain name of the application for "dev" environment.
+	 * URI templatable using "appDomain", "fqdn", "tenantId", "tenantEnv".
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Domain Stg</em>' attribute.
+	 * @see #setDomainStg(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DomainStg()
+	 * @model
+	 * @generated
+	 */
+	String getDomainStg();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDomainStg <em>Domain Stg</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Domain Stg</em>' attribute.
+	 * @see #getDomainStg()
+	 * @generated
+	 */
+	void setDomainStg(String value);
 
 	/**
 	 * Returns the value of the '<em><b>General Email</b></em>' attribute.
