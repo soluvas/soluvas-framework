@@ -521,7 +521,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		return addedImageFuture;
 	}
 	
-	/* (non-Javadoc)
+	/**
+	 * @return Note: The returned {@link ListenableFuture} may contain an {@link Exception} when the upload failed.
 	 * @see org.soluvas.image.store.ImageRepository#doCreate(java.lang.String, java.io.File, java.lang.String, long, java.lang.String, java.lang.String, boolean)
 	 */
 	protected ListenableFuture<OriginalUpload> doCreateOriginal(String existingImageId, final File originalFile, final String upContentType,
