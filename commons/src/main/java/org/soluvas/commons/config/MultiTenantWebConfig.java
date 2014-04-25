@@ -2,6 +2,7 @@ package org.soluvas.commons.config;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -76,36 +77,51 @@ public class MultiTenantWebConfig implements TenantSelector {
 	 * from a {@link HttpServletRequest}. 
 	 * @param httpRequest
 	 * @return
-	 * @see MultiTenantConfig#webAddressMap()
 	 */
-	public static TenantRef getTenantRef(TenantMode tenantMode, HttpServletRequest httpRequest, String tenantEnv) {
-		switch (tenantMode) {
-		case MULTI_PATH:
-			final String pathInfo = httpRequest.getPathInfo();
+	public static TenantRef getTenantRefMultiPath(HttpServletRequest httpRequest, String tenantEnv) {
+		final String pathInfo = httpRequest.getPathInfo();
 //		final String contextPath = Preconditions.checkNotNull(servletContext, "Cannot inject ServletContext")
 //				.getContextPath();
-			final Matcher tenantMatcher = Pattern.compile("\\/t/([^/]+)/([^/]+).*").matcher(pathInfo);
-			Preconditions.checkState(tenantMatcher.matches(),
-					"Path info '%s' must match pattern: /t/{tenantId}/{tenantEnv}",
-					pathInfo);
-			final TenantRef pathTenant = new TenantRefImpl(tenantMatcher.group(1), tenantMatcher.group(1), tenantMatcher.group(2));
-			log.debug("MULTI_PATH Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
-					pathInfo, pathTenant.getClientId(), pathTenant.getTenantId(), pathTenant.getTenantEnv() );
-			return pathTenant;
-		case MULTI_HOST:
-			final String serverName = httpRequest.getServerName();
+		final Matcher tenantMatcher = Pattern.compile("\\/t/([^/]+)/([^/]+).*").matcher(pathInfo);
+		Preconditions.checkState(tenantMatcher.matches(),
+				"Path info '%s' must match pattern: /t/{tenantId}/{tenantEnv}",
+				pathInfo);
+		final TenantRef pathTenant = new TenantRefImpl(tenantMatcher.group(1), tenantMatcher.group(1), tenantMatcher.group(2));
+		log.debug("MULTI_PATH Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
+				pathInfo, pathTenant.getClientId(), pathTenant.getTenantId(), pathTenant.getTenantEnv() );
+		return pathTenant;
+	}
+	
+	/**
+	 * If you can't use Spring dependency injection, use this to get the {@link TenantRef}
+	 * from a {@link HttpServletRequest}. 
+	 * @param httpRequest
+	 * @return
+	 * @see MultiTenantConfig#tenantMap()
+	 */
+	public static TenantRef getTenantRefMultiHost(HttpServletRequest httpRequest, String tenantEnv,
+			Map<String, AppManifest> tenantMap) {
+		Optional<String> tenantId = Optional.absent();
+		final String serverName = httpRequest.getServerName().toLowerCase();
+		// use AppManifest.domain matching first
+		final String noWww = serverName.startsWith("www.") ? serverName.substring(4) : serverName;
+		for (final Map.Entry<String, AppManifest> entry : tenantMap.entrySet()) {
+			if (entry.getValue().getDomain().equalsIgnoreCase(serverName)) {
+				tenantId = Optional.of(entry.getKey());
+				break;
+			}
+		}
+		// otherwise, fallback to first tenantId
+		if (!tenantId.isPresent()) {
 			final Matcher hostMatcher = Pattern.compile("(www\\.)?([^.]+).*").matcher(serverName);
 			Preconditions.checkState(hostMatcher.matches(),
 					"Server name '%s' must match pattern: (www\\.)?([^.]+).*", serverName);
-			final String tenantId = hostMatcher.group(2).toLowerCase();
-			// FIXME: Search host/domain from AppManifest/SysConfig/WebAddress 
-			final TenantRef hostTenant = new TenantRefImpl(tenantId, tenantId, tenantEnv);
-			log.debug("MULTI_HOST Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
-					serverName, hostTenant.getClientId(), hostTenant.getTenantId(), hostTenant.getTenantEnv() );
-			return hostTenant;
-		default:
-			throw new IllegalArgumentException("Unsupported tenantMode: " + tenantMode);
+			tenantId = Optional.of(hostMatcher.group(2).toLowerCase());
 		}
+		final TenantRef hostTenant = new TenantRefImpl(tenantId.get(), tenantId.get(), tenantEnv);
+		log.debug("MULTI_HOST Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
+				serverName, hostTenant.getClientId(), hostTenant.getTenantId(), hostTenant.getTenantEnv() );
+		return hostTenant;
 	}
 	
 	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
@@ -113,8 +129,18 @@ public class MultiTenantWebConfig implements TenantSelector {
 	public TenantRef tenantRef() {
 		final RequestAttributes requestAttrs = RequestOrCommandScope.currentRequestAttributes();
 		if (requestAttrs instanceof ServletRequestAttributes) {
-			return getTenantRef(env.getRequiredProperty("tenantMode", TenantMode.class),
-					getRequest(), env.getRequiredProperty("tenantEnv"));
+			final TenantMode tenantMode = env.getRequiredProperty("tenantMode", TenantMode.class);
+			switch (tenantMode) {
+			case MULTI_PATH:
+				return getTenantRefMultiPath(getRequest(), env.getRequiredProperty("tenantEnv"));
+			case MULTI_HOST:
+				return getTenantRefMultiHost(getRequest(), env.getRequiredProperty("tenantEnv"),
+						tenantConfig.tenantMap());
+			default:
+				throw new IllegalArgumentException("Unsupported tenantMode: " + tenantMode);
+			}
+			
+			
 		} else if (requestAttrs instanceof CommandRequestAttributes) {
 			final CommandSession session = ((CommandRequestAttributes) requestAttrs).getSession();
 			try {
