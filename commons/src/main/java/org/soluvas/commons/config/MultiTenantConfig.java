@@ -350,6 +350,49 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	 * If (currently) there are no tenants or there are more than one tenant, it will return {@code null}.
 	 * "Currently" because when using {@link TenantRepository},
 	 * tenants can be added and removed at any time.
+	 * 
+	 * <p>Usage:
+	 * 
+	 * <pre>
+	 * &lt;!-- BEGIN replace blast-shell-core-0.13.jar!/META-INF/shell/base-command-context.xml -->
+	 * &lt;!-- We don't use ${welcome}, and we use newer 3.2 property placeholder mechanism -->
+	 * &lt;bean name="threadIo" class="org.apache.felix.gogo.runtime.threadio.ThreadIOImpl" />
+	 * 
+	 * &lt;bean name="commandProcessor" class="org.apache.felix.gogo.runtime.CommandProcessorImpl">
+	 * 	&lt;constructor-arg ref="threadIo" />
+	 * &lt;/bean>
+	 * 
+	 * &lt;bean id="commandRegistry" class="blast.shell.CommandRegistry">
+	 * 	&lt;property name="commandShell" ref="commandProcessor" />
+	 * 	&lt;property name="actionFactory">
+	 * 		&lt;bean
+	 * 			class="org.springframework.beans.factory.config.ServiceLocatorFactoryBean">
+	 * 			&lt;property name="serviceLocatorInterface" value="blast.shell.ActionFactory" />
+	 * 		&lt;/bean>
+	 * 	&lt;/property>
+	 * &lt;/bean>
+	 * 
+	 * &lt;!-- Overrides consoleFactory defined in blast-shell-core-0.13.jar!/META-INF/shell/base-command-context.xml -->
+	 * &lt;bean id="consoleFactory" class="org.soluvas.commons.shell.SoluvasConsoleFactory">
+	 * 	&lt;property name="commandRegistry" ref="commandRegistry" />
+	 * 	&lt;property name="commandProcessor" ref="commandProcessor" />
+	 * 	&lt;property name="welcomeMessageFile" value="classpath:branding/branding.properties" />
+	 * 	&lt;property name="application" value="#{app.id}" />
+	 * 	&lt;property name="hotelIdSupplier">
+	 * 		&lt;bean class="com.google.common.base.Suppliers" factory-method="ofInstance">
+	 * 			&lt;constructor-arg value="${hotelId}" />
+	 * 		&lt;/bean>
+	 * 	&lt;/property>
+	 * 	&lt;property name="tenantIdSupplier" value="#{tenantConfig.initialTenantIdSupplier}" />
+	 * 	&lt;property name="tenantEnvSupplier">
+	 * 		&lt;bean class="com.google.common.base.Suppliers" factory-method="ofInstance">
+	 * 			&lt;constructor-arg value="${tenantEnv}" />
+	 * 		&lt;/bean>
+	 * 	&lt;/property>
+	 * &lt;/bean>
+	 * &lt;!-- END replace blast-shell-core-0.13.jar!/META-INF/shell/base-command-context.xml -->
+	 * </pre> 
+	 * 
 	 * @return
 	 */
 	public Supplier<String> getInitialTenantIdSupplier() {
