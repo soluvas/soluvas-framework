@@ -139,6 +139,9 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 		log.debug("Adding supplier {} for {}", supplier, eClass.getName());
 		long count = 0;
 		final T supplied = supplier.get();
+		Preconditions.checkArgument(eClass.isInstance(supplied),
+				"Expected object of EClass {}, but got {} supplied by {}",
+				eClass.getName(), supplied.eClass().getName(), supplier);
 		for (final EReference containment : containments) {
 			final EList<EObject> suppliedContainment = (EList<EObject>) supplied.eGet(containment);
 			log.debug("Aggregating {} {} from {} to {}.{}",
