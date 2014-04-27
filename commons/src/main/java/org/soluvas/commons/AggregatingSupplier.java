@@ -113,7 +113,7 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 		aggregate = (T) eFactory.create(eClass);
 		containments = aggregate.eClass().getEAllContainments();
 		log.info("Initializing aggregating supplier for {} with {} suppliers. {} containments: {}",
-				eClass, suppliers.size(), containments.size(),
+				eClass.getName(), suppliers.size(), containments.size(),
 				FluentIterable.from(containments).transform(new Function<EReference, String>() {
 					@Override @Nullable
 					public String apply(@Nullable EReference input) {
