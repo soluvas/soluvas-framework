@@ -171,7 +171,7 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 				}
 				
 				final ImmutableMap<String, String> scope = ImmutableMap.of(
-						"fqdn", fqdn, "appDomain", appDomain);
+						"fqdn", fqdn, "appDomain", appDomain, "tenantEnv", tenantEnv);
 				final AppManifest tenantManifest = new OnDemandXmiLoader<AppManifest>(
 						CommonsPackage.eINSTANCE, res.getURL(), ResourceType.CLASSPATH, scope).get();
 				builder.put(tenantId, tenantManifest);
