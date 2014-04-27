@@ -2,6 +2,7 @@ package org.soluvas.commons;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -55,6 +56,11 @@ public class StaticXmiLoader<T extends EObject> extends OnDemandXmiLoader<T> {
 		this.obj = load();
 	}
 
+	public StaticXmiLoader(EPackage ePackage, File file, Map<String, ?> scope) {
+		super(ePackage, file, scope);
+		this.obj = load();
+	}
+
 	public StaticXmiLoader(EPackage ePackage, URL resourceUrl, Bundle bundle) {
 		super(ePackage, resourceUrl, bundle);
 		this.obj = load();
@@ -75,10 +81,6 @@ public class StaticXmiLoader<T extends EObject> extends OnDemandXmiLoader<T> {
 		return obj;
 	}
 	
-	/**
-	 * {@link Expandable} scope is not supported.
-	 * @see org.soluvas.commons.OnDemandXmiLoader#getScope()
-	 */
 	@Override
 	public ImmutableMap<String, Object> getScope() {
 		return ImmutableMap.of();

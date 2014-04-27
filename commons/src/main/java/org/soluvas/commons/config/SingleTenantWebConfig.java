@@ -84,8 +84,12 @@ public class SingleTenantWebConfig {
 
 	@Bean
 	public AppManifest appManifest() {
-		return new StaticXmiLoader<AppManifest>(CommonsPackage.eINSTANCE,
-				new File(dataFolder(), "model/" + tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv() + ".AppManifest.xmi").toString()).get();
+		final String fqdn = getFqdn();
+		final Map<String, Object> scope = ImmutableMap.<String, Object>of(
+				"fqdn", fqdn, "tenantEnv", tenantRef().getTenantEnv());
+		final File appManifestFile = new File(dataFolder(),
+				"model/" + tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv() + ".AppManifest.xmi");
+		return new StaticXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, appManifestFile, scope).get();
 	}
 	
 	/**
