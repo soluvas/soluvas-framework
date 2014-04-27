@@ -27,7 +27,6 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 
 import com.google.common.base.Preconditions;
@@ -39,7 +38,7 @@ import com.google.common.collect.ImmutableMap;
  * Multitenant-aware {@link Configuration} for {@link DataCatalog}, {@link MixinCatalog}, and {@link TermManager} beans.
  * @author rudi
  */
-@Configuration @Lazy
+@Configuration
 @ComponentScan("org.soluvas.data.shell")
 public class TenantDataConfig {
 	

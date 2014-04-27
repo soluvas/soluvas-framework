@@ -17,11 +17,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -86,8 +88,7 @@ import com.google.common.collect.Multimaps;
  */
 public class AggregatingSupplier<T extends EObject> implements Supplier<T>, DelegatingSupplier<T> {
 
-	private static final Logger log = LoggerFactory
-			.getLogger(AggregatingSupplier.class);
+	private final Logger log;
 	private final EClass eClass;
 	/**
 	 * Maps a supplier with the {@link EObject}s it contains.
@@ -106,11 +107,20 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 
 	public AggregatingSupplier(EFactory eFactory, EClass eClass, List<Supplier<T>> suppliers) {
 		super();
+		this.log = LoggerFactory.getLogger(getClass() + "/" + eClass.getName());
 		this.eClass = eClass;
 		this.map = Multimaps.synchronizedListMultimap(ArrayListMultimap.<Supplier<T>, EObject>create());
 		aggregate = (T) eFactory.create(eClass);
 		containments = aggregate.eClass().getEAllContainments();
-		log.info("Initializing aggregating supplier for {} with {} suppliers", eClass, suppliers.size());
+		log.info("Initializing aggregating supplier for {} with {} suppliers. {} containments: {}",
+				eClass, suppliers.size(), containments.size(),
+				FluentIterable.from(containments).transform(new Function<EReference, String>() {
+					@Override @Nullable
+					public String apply(@Nullable EReference input) {
+						return input.getName();
+					}
+				}).toSet());
+					
 		for (final Supplier<T> supplier : suppliers) {
 			addSupplier(supplier);
 		}
@@ -132,7 +142,7 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 		for (final EReference containment : containments) {
 			final EList<EObject> suppliedContainment = (EList<EObject>) supplied.eGet(containment);
 			log.debug("Aggregating {} {} from {} to {}.{}",
-					suppliedContainment.size(), containment.getEReferenceType().getName(),
+					suppliedContainment != null ? suppliedContainment.size() : null, containment.getEReferenceType().getName(),
 					supplier, eClass.getName(), containment.getName());
 			final EList<EObject> aggregateContainment = (EList<EObject>) aggregate.eGet(containment);
 			final Collection<EObject> copiedChildren = EcoreUtil.copyAll(suppliedContainment);
