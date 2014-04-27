@@ -27,7 +27,7 @@ public class NewsletterFactoryImpl extends EFactoryImpl implements NewsletterFac
 	 */
 	public static NewsletterFactory init() {
 		try {
-			NewsletterFactory theNewsletterFactory = (NewsletterFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.soluvas.org/schema/newsletter/1.1"); 
+			NewsletterFactory theNewsletterFactory = (NewsletterFactory)EPackage.Registry.INSTANCE.getEFactory(NewsletterPackage.eNS_URI);
 			if (theNewsletterFactory != null) {
 				return theNewsletterFactory;
 			}

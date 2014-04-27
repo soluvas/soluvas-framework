@@ -2009,7 +2009,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		  (imageConnectorEClass.getEOperations().get(5), 
 		   source, 
 		   new String[] {
-			 "documentation", "Required to help {@link org.soluvas.commons.tenant.TenantBeanRepository} detect whether this class is destroyable."
+			 "documentation", "Required to help {@link org.soluvas.commons.tenant.TenantBeans} detect whether this class is destroyable."
 		   });		
 		addAnnotation
 		  (getImageConnector_HiUriTemplate(), 

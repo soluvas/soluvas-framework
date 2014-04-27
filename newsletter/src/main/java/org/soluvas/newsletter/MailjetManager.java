@@ -31,6 +31,9 @@ public interface MailjetManager extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Mailjet API Key.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Api Key</em>' attribute.
 	 * @see org.soluvas.newsletter.NewsletterPackage#getMailjetManager_ApiKey()
 	 * @model required="true" changeable="false"
@@ -46,6 +49,9 @@ public interface MailjetManager extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Mailjet Secret Key.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Secret Key</em>' attribute.
 	 * @see org.soluvas.newsletter.NewsletterPackage#getMailjetManager_SecretKey()
 	 * @model required="true" changeable="false"
@@ -61,6 +67,9 @@ public interface MailjetManager extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Mailjet List ID.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>List Id</em>' attribute.
 	 * @see org.soluvas.newsletter.NewsletterPackage#getMailjetManager_ListId()
 	 * @model required="true" changeable="false"

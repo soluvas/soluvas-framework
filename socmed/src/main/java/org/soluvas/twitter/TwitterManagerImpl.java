@@ -27,15 +27,15 @@ public class TwitterManagerImpl implements TwitterManager  {
 	public TwitterManagerImpl(
 			@Value("#{soluvasProps.authTwitterConsumerKey}") String consumerKey,
 			@Value("#{soluvasProps.authTwitterConsumerSecret}") String consumerSecret,
-			@Value("#{soluvasProps.twitterAppScreenName}") String appScreenName,
-			@Value("#{soluvasProps.twitterAppAccessToken}") String appAccessToken,
-			@Value("#{soluvasProps.twitterAppAccessTokenSecret}") String appAccessTokenSecret) {
+			@Value("#{soluvasProps.twitterAppScreenName}") String tenantScreenName,
+			@Value("#{soluvasProps.twitterAppAccessToken}") String tenantAccessToken,
+			@Value("#{soluvasProps.twitterAppAccessTokenSecret}") String tenantAccessTokenSecret) {
 		super();
 		this.consumerKey = consumerKey;
 		this.consumerSecret = consumerSecret;
-		this.appScreenName = appScreenName;
-		this.appAccessToken = appAccessToken;
-		this.appAccessTokenSecret = appAccessTokenSecret;
+		this.appScreenName = tenantScreenName;
+		this.appAccessToken = tenantAccessToken;
+		this.appAccessTokenSecret = tenantAccessTokenSecret;
 	}
 	
 	@Override

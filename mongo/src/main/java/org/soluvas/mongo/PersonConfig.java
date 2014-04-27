@@ -1,6 +1,6 @@
 package org.soluvas.mongo;
 
-import org.soluvas.commons.tenant.TenantBeanRepository;
+import org.soluvas.commons.tenant.TenantBeans;
 import org.soluvas.data.person.PersonRepository;
 
 /**
@@ -9,6 +9,6 @@ import org.soluvas.data.person.PersonRepository;
  */
 public interface PersonConfig {
 
-	TenantBeanRepository<PersonRepository> personRepoBeanRepo();
+	TenantBeans<PersonRepository> personRepoBeanRepo();
 	
 }

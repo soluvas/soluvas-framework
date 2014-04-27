@@ -24,14 +24,14 @@ import com.google.common.eventbus.EventBus;
  * <p>Note: Make sure you mark your {@link Bean} as {@link Lazy}=false.
  * @author ceefour
  */
-public abstract class TenantSubscriberManager {
+public abstract class TenantSubscribers {
 	
 	final Map<String, List<Object>> subscriberMap = new LinkedHashMap<>();
 	private final MultiTenantConfig tenantConfig;
 	private static final Logger log = LoggerFactory
-			.getLogger(TenantSubscriberManager.class);
+			.getLogger(TenantSubscribers.class);
 
-	public TenantSubscriberManager(MultiTenantConfig tenantConfig) {
+	public TenantSubscribers(MultiTenantConfig tenantConfig) {
 		super();
 		this.tenantConfig = tenantConfig;
 		final ImmutableMap<String, AppManifest> initialTenantMap = tenantConfig.tenantMap();

@@ -5,7 +5,6 @@ import static org.fusesource.jansi.Ansi.ansi;
 import java.sql.Connection;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import liquibase.Contexts;
@@ -32,10 +31,12 @@ import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 
@@ -47,7 +48,7 @@ import com.google.common.collect.FluentIterable;
 @Command(scope="jpa", name="schemaup", description="Updates SQL schema for the current tenant using Liquibase.")
 public class SchemaUpCommand extends ExtCommandSupport {
 	
-	@Inject
+	@Autowired(required=false)
 	private DataSource dataSource;
 	
 	@Option(name="-s", aliases="--schema", description="Default schema name. (defaults to current tenantId)")
@@ -76,6 +77,7 @@ public class SchemaUpCommand extends ExtCommandSupport {
 	
 	@Override
 	protected Void doExecute() throws Exception {
+		Preconditions.checkNotNull(dataSource, "dataSource bean is required");
 		if (Strings.isNullOrEmpty(defaultSchemaName)) {
 			final String tenantId = getTenant().getTenantId();
 			defaultSchemaName = tenantId;

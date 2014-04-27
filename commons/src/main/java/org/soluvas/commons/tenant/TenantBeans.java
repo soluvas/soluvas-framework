@@ -35,7 +35,7 @@ import com.google.common.eventbus.EventBus;
  * <p>This class is thread-safe.
  * @author ceefour
  */
-public abstract class TenantBeanRepository<T> implements TenantRepositoryListener {
+public abstract class TenantBeans<T> implements TenantRepositoryListener {
 
 	private final Logger log;
 	/**
@@ -52,11 +52,11 @@ public abstract class TenantBeanRepository<T> implements TenantRepositoryListene
 	 * @param initialTenantMap
 	 * @param appEventBus
 	 */
-	public TenantBeanRepository(Class<? extends T> implClass, Map<String, AppManifest> initialTenantMap, EventBus appEventBus,
+	public TenantBeans(Class<? extends T> implClass, Map<String, AppManifest> initialTenantMap, EventBus appEventBus,
 			@Nullable TenantRepository<?> tenantRepo) {
 		super();
 		this.implClass = implClass;
-		log = LoggerFactory.getLogger(TenantBeanRepository.class.getName() + "/" + implClass.getSimpleName());
+		log = LoggerFactory.getLogger(TenantBeans.class.getName() + "/" + implClass.getSimpleName());
 		
 		try {
 			initMethod = implClass.getMethod("init");
@@ -132,7 +132,7 @@ public abstract class TenantBeanRepository<T> implements TenantRepositoryListene
 	
 	/**
 	 * Creates the bean for the specified tenant, do <strong>not</strong> call {@code init()},
-	 * {@link TenantBeanRepository} will call it.
+	 * {@link TenantBeans} will call it.
 	 * @param tenantId
 	 * @param appManifest
 	 * @return

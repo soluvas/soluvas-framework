@@ -11,7 +11,7 @@ import org.soluvas.commons.PersonRelated;
 import org.soluvas.commons.config.MultiTenantConfig;
 import org.soluvas.commons.config.SysConfigMapHolder;
 import org.soluvas.commons.config.TenantSelector;
-import org.soluvas.commons.tenant.TenantBeanRepository;
+import org.soluvas.commons.tenant.TenantBeans;
 import org.soluvas.commons.tenant.TenantRepository;
 import org.soluvas.data.person.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +50,10 @@ public class MongoPersonConfig implements PersonConfig {
 
 	@Override
 	@Bean(destroyMethod="destroy")
-	public TenantBeanRepository<PersonRepository> personRepoBeanRepo() {
+	public TenantBeans<PersonRepository> personRepoBeanRepo() {
 		final boolean mongoMigrationEnabled = env.getProperty("mongoMigrationEnabled", Boolean.class, true);
 		final boolean mongoAutoExplainSlow = env.getProperty("mongoAutoExplainSlow", Boolean.class, false);
-		return new TenantBeanRepository<PersonRepository>(MongoPersonRepository.class, tenantConfig.tenantMap(), appEventBus, tenantRepo) {
+		return new TenantBeans<PersonRepository>(MongoPersonRepository.class, tenantConfig.tenantMap(), appEventBus, tenantRepo) {
 			@Override
 			protected MongoPersonRepository create(String tenantId, AppManifest appManifest) throws Exception {
 				final EObject sysConfig = sysConfigMapHolder.sysConfigMap().get(tenantId);

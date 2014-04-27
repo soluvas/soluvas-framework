@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.tenant.TenantBeanRepository;
+import org.soluvas.commons.tenant.TenantBeans;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -19,9 +19,9 @@ public class AccessControlManagerImpl implements AccessControlManager {
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(AccessControlManagerImpl.class);
-	private final TenantBeanRepository<? extends RolePersonRepository> rolePersonRepoBeanRepo;
+	private final TenantBeans<? extends RolePersonRepository> rolePersonRepoBeanRepo;
 	
-	public AccessControlManagerImpl(TenantBeanRepository<? extends RolePersonRepository> rolePersonRepoBeanRepo) {
+	public AccessControlManagerImpl(TenantBeans<? extends RolePersonRepository> rolePersonRepoBeanRepo) {
 		super();
 		this.rolePersonRepoBeanRepo = rolePersonRepoBeanRepo;
 	}

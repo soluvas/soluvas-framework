@@ -1,5 +1,7 @@
 package org.soluvas.jpa;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -37,6 +39,7 @@ import org.soluvas.commons.GenericStatus;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.tenant.CommandRequestAttributes;
+import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.GenericLookup;
@@ -198,11 +201,11 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	}
 	
 	@PostConstruct
-	public final void init() throws SQLException, LiquibaseException {
+	public final void init() throws SQLException, LiquibaseException, IOException {
 		Preconditions.checkNotNull(txManager, "PlatformTransactionManager txManager was not @Inject-ed properly.");
 		
 		if (liquibasePath != null) {
-			Preconditions.checkNotNull(dataSource, "dataSoruce was not @Inject-ed properly.");
+			Preconditions.checkNotNull(dataSource, "dataSource was not @Inject-ed properly.");
 			for (final String tenantId : initialTenantIds) {
 				migrate(tenantId);
 			}
@@ -215,6 +218,20 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 				onAfterInit(status);
 			}
 		});
+		
+		if (initialTenantIds != null) {
+			for (final String tenantId : initialTenantIds) {
+				try (final Closeable closeable = CommandRequestAttributes.withTenant(tenantId)) {
+					txTemplate.execute(new TransactionCallbackWithoutResult() {
+						@Override
+						protected void doInTransactionWithoutResult(TransactionStatus status) {
+							onAfterInitTenant(tenantId, status);
+						}
+					});
+				}
+			}
+		}
+		
 	}
 	
 	/**
@@ -224,6 +241,15 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	 * @see http://stackoverflow.com/a/18790494/1343587 
 	 */
 	protected void onAfterInit(TransactionStatus txStatus) {
+	}
+	
+	/**
+	 * This is @{@link Transactional} (by using {@link PlatformTransactionManager} and {@link TransactionTemplate})
+	 * because you may want to use {@link EntityManager#createNativeQuery(String)}
+	 * to e.g. create a sequence.
+	 * @see http://stackoverflow.com/a/18790494/1343587 
+	 */
+	protected void onAfterInitTenant(String tenantId, TransactionStatus txStatus) {
 	}
 	
 	@PreDestroy
@@ -597,6 +623,22 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	 */
 	protected AppManifest getAppManifest() {
 		return beanFactory.getBean(AppManifest.class);
+	}
+	
+	/**
+	 * Uses {@link #beanFactory} to get tenant-specific {@link TenantRef}.
+	 * @return
+	 */
+	protected TenantRef getTenant() {
+		return beanFactory.getBean(TenantRef.class);
+	}
+	
+	/**
+	 * Uses {@link #beanFactory} to get tenant-specific {@code tenantId}.
+	 * @return
+	 */
+	protected String getTenantId() {
+		return getTenant().getTenantId();
 	}
 	
 }

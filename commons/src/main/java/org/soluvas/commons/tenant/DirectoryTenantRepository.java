@@ -320,7 +320,11 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	
 	@Override
 	public void addListener(TenantRepositoryListener listener) {
-		log.info("Adding TenantRepository listener #{} {}", listeners.size() + 1, listener);
+		if (listener instanceof TenantBeans) {
+			log.info("Adding TenantRepository listener #{}: TenantBeans {}", listeners.size() + 1, listener);
+		} else {
+			log.info("Adding TenantRepository listener #{}: {}", listeners.size() + 1, listener);
+		}
 		listeners.add(listener);
 	}
 

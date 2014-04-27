@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ArrayListMultimap;
@@ -124,20 +125,17 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 	 */
 	@Override
 	public synchronized void addSupplier(Supplier<T> supplier) {
+		Preconditions.checkNotNull(supplier, "Cannot add null %s supplier", eClass.getName());
 		log.debug("Adding supplier {} for {}", supplier, eClass.getName());
 		long count = 0;
 		final T supplied = supplier.get();
 		for (final EReference containment : containments) {
-			final EList<EObject> suppliedContainment = (EList<EObject>) supplied
-					.eGet(containment);
+			final EList<EObject> suppliedContainment = (EList<EObject>) supplied.eGet(containment);
 			log.debug("Aggregating {} {} from {} to {}.{}",
-					suppliedContainment.size(), containment
-							.getEReferenceType().getName(), supplier,
-					eClass.getName(), containment.getName());
-			final EList<EObject> aggregateContainment = (EList<EObject>) aggregate
-					.eGet(containment);
-			final Collection<EObject> copiedChildren = EcoreUtil
-					.copyAll(suppliedContainment);
+					suppliedContainment.size(), containment.getEReferenceType().getName(),
+					supplier, eClass.getName(), containment.getName());
+			final EList<EObject> aggregateContainment = (EList<EObject>) aggregate.eGet(containment);
+			final Collection<EObject> copiedChildren = EcoreUtil.copyAll(suppliedContainment);
 			for (final EObject copiedChild : copiedChildren) {
 				// find the proper sorted position for this new child
 				final int childPositioner = copiedChild instanceof Positionable ? Optional.fromNullable(((Positionable) copiedChild).getPositioner()).or(0) : 0;

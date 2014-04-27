@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.apache.felix.gogo.commands.Argument;
@@ -18,8 +17,11 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.hbm2ddl.SchemaExport.Type;
 import org.hibernate.tool.hbm2ddl.Target;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+
+import com.google.common.base.Preconditions;
 
 /**
  * Export the SQL schema for the current tenant via Hibernate {@link SchemaExport}. 
@@ -30,7 +32,7 @@ import org.springframework.stereotype.Service;
 @Command(scope="jpa", name="schemaexport", description="Export the SQL schema for the current tenant via Hibernate SchemaExport.")
 public class SchemaExportCommand extends ExtCommandSupport {
 	
-	@Inject
+	@Autowired(required=false)
 	private DataSource dataSource;
 	
 	@Option(name="-g", description="Target: SCRIPT (file) | EXPORT (database) | BOTH.")
@@ -47,6 +49,7 @@ public class SchemaExportCommand extends ExtCommandSupport {
 	
 	@Override
 	protected File doExecute() throws Exception {
+		Preconditions.checkNotNull(dataSource, "dataSource bean is required");
 		final String tenantId = getTenant().getTenantId();
 		final File outputFile = file != null ? new File(file) : File.createTempFile(tenantId + "_", ".schema.sql");
 		try (Connection conn = dataSource.getConnection()) {

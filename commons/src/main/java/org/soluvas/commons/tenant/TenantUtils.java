@@ -137,7 +137,7 @@ public class TenantUtils {
 	 * @param map
 	 * @param clazz
 	 * @return
-	 * @deprecated Use {@link TenantBeanRepository#get(String)}
+	 * @deprecated Use {@link TenantBeans#get(String)}
 	 */
 	@Deprecated
 	public static <T> T selectBean(TenantSelector tenantSelector, Map<String, T> map, Class<T> clazz) {

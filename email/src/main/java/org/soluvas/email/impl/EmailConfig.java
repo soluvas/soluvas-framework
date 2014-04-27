@@ -11,7 +11,7 @@ import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.config.CommonsWebConfig;
 import org.soluvas.commons.config.MultiTenantConfig;
 import org.soluvas.commons.config.TenantSelector;
-import org.soluvas.commons.tenant.TenantBeanRepository;
+import org.soluvas.commons.tenant.TenantBeans;
 import org.soluvas.commons.tenant.TenantRepository;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailFactory;
@@ -61,13 +61,13 @@ public class EmailConfig {
 //		}
 	
 	@Bean(destroyMethod="destroy")
-	public TenantBeanRepository<EmailManagerImpl> emailMgrBeanRepo() throws IOException {
+	public TenantBeans<EmailManagerImpl> emailMgrBeanRepo() throws IOException {
 		final String smtpHost = env.getRequiredProperty("emailSmtpHost");
 		final int smtpPort = env.getRequiredProperty("emailSmtpPort", Integer.class);
 		final String smtpUser = env.getRequiredProperty("emailSmtpUser");
 		final String smtpPassword = env.getRequiredProperty("emailSmtpPassword");
 		final EmailSecurity smtpSecurity = env.getRequiredProperty("emailSmtpSecurity", EmailSecurity.class);
-		return new TenantBeanRepository<EmailManagerImpl>(EmailManagerImpl.class, tenantConfig.tenantMap(), appEventBus, tenantRepo) {
+		return new TenantBeans<EmailManagerImpl>(EmailManagerImpl.class, tenantConfig.tenantMap(), appEventBus, tenantRepo) {
 			@Override
 			protected EmailManagerImpl create(String tenantId, AppManifest appManifest) throws Exception {
 //					final EventBus tenantEventBus = tenantConfig.eventBusMap().get(tenantId);

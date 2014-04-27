@@ -139,7 +139,7 @@ public interface ImageConnector extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Required to help {@link org.soluvas.commons.tenant.TenantBeanRepository} detect whether this class is destroyable.
+	 * Required to help {@link org.soluvas.commons.tenant.TenantBeans} detect whether this class is destroyable.
 	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
