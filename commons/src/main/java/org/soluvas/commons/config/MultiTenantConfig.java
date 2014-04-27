@@ -43,7 +43,9 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
+import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 
@@ -51,7 +53,7 @@ import com.google.common.eventbus.EventBus;
  * Non-web tenant-related application configuration.
  * @author ceefour
  */
-@Configuration @Lazy
+@Configuration("tenantConfig") @Lazy
 public class MultiTenantConfig implements TenantRepositoryListener {
 	private static final Logger log = LoggerFactory
 			.getLogger(MultiTenantConfig.class);
@@ -69,6 +71,21 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	 */
 	@Nullable
 	private ImmutableMap<String, AppManifest> staticTenantMap = null;
+	
+	/**
+	 * A {@link String} {@link Supplier} that returns the initial {@code tenantId}.
+	 * If (currently) there is only one tenant, it will return that tenant.
+	 * If (currently) there are no tenants or there are more than one tenant, it will return {@code null}.
+	 * "Currently" because when using {@link TenantRepository},
+	 * tenants can be added and removed at any time.
+	 * @return
+	 */
+	private final Supplier<String> initialTenantIdSupplier = new Supplier<String>() {
+		@Override @Nullable
+		public String get() {
+			return Iterables.getOnlyElement(tenantMap().keySet(), null);
+		}
+	};
 	
 	public static enum DataDirLayout {
 		/**
@@ -325,6 +342,18 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 			eventBusMap.remove(tenantId);
 			log.info("Destroyed EventBus for tenant '{}'", tenantId);
 		}
+	}
+	
+	/**
+	 * A {@link String} {@link Supplier} that returns the initial {@code tenantId}.
+	 * If (currently) there is only one tenant, it will return that tenant.
+	 * If (currently) there are no tenants or there are more than one tenant, it will return {@code null}.
+	 * "Currently" because when using {@link TenantRepository},
+	 * tenants can be added and removed at any time.
+	 * @return
+	 */
+	public Supplier<String> getInitialTenantIdSupplier() {
+		return initialTenantIdSupplier;
 	}
 
 }
