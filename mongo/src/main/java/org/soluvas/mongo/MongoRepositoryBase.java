@@ -387,6 +387,22 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		}
 	}
 
+	@Override
+	public final Page<T> findAllFields(Map<String, Boolean> projection, Pageable pageable) {
+		final long total = secondary.count(new BasicDBObject());
+		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", Sort.Direction.DESC);
+		try {
+			log.debug("findAll projection={} sort={} skip={} limit={} on {}",
+					projection, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
+			final List<T> entities = findSecondary(null, new BasicDBObject(projection),
+					sortQuery, pageable.getOffset(), pageable.getPageSize(), "findAllFields", projection);
+			return new PageImpl<>(entities, pageable, total);
+		} catch (Exception e) {
+			throw new MongoRepositoryException(e, "Cannot findAll %s projection=%s sort=%s skip=%s limit=%s on %s",
+					collName, projection, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
+		}
+	}
+
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.repository.BasicRepository#count()
 	 */

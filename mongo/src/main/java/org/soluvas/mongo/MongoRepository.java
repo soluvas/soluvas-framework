@@ -1,5 +1,7 @@
 package org.soluvas.mongo;
 
+import java.util.Map;
+
 import org.soluvas.commons.Identifiable;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
@@ -18,5 +20,14 @@ public interface MongoRepository<T extends Identifiable> extends Repository<T, S
 	public long countByQuery(DBObject query);
 
 	public T findOneByQuery(DBObject upQuery);
+
+	/**
+	 * @param projection true to include the field. The find() method always includes the _id field even if the field is not explicitly stated to return in the projection parameter.
+	 * 		false to exclude the field.
+	 * 		A projection cannot contain both include and exclude specifications, except for the exclusion of the _id field. In projections that explicitly include fields, the _id field is the only field that you can explicitly exclude.
+	 * @param pageable
+	 * @return
+	 */
+	Page<T> findAllFields(Map<String, Boolean> projection, Pageable pageable);
 
 }
