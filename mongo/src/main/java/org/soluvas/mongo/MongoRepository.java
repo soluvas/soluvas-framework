@@ -2,6 +2,8 @@ package org.soluvas.mongo;
 
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import org.soluvas.commons.Identifiable;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
@@ -28,6 +30,6 @@ public interface MongoRepository<T extends Identifiable> extends Repository<T, S
 	 * @param pageable
 	 * @return
 	 */
-	Page<T> findAllFields(Map<String, Boolean> projection, Pageable pageable);
+	Page<T> findAllFields(@Nullable Map<String, Boolean> projection, Pageable pageable);
 
 }
