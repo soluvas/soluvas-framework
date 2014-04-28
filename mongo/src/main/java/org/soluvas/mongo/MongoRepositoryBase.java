@@ -573,7 +573,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		final BasicDBObject query = new BasicDBObject();
 		final long total = secondary.count(query);
 		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "_id", Direction.ASC);
-		final List<String> entityIds = findSecondary(query, null, sortQuery, pageable.getOffset(), pageable.getPageSize(), new Function<DBObject, String>() {
+		final List<String> entityIds = findSecondary(query, new BasicDBObject("_id", true),
+				sortQuery, pageable.getOffset(), pageable.getPageSize(), new Function<DBObject, String>() {
 			@Override @Nullable
 			public String apply(@Nullable DBObject input) {
 				return (String) input.get("_id");

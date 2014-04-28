@@ -71,8 +71,8 @@ public class RepositoryUtils {
 				}
 			}
 //				processor.process(page.getContent(), page.getNumber(), page.getTotalPages(), page.getTotalElements(), monitor);
-			// fetch next page
-			if (page.hasNextPage()) {
+			// fetch next page, but only if page has valid Pageable
+			if (page.getSize() > 0 && page.hasNextPage()) {
 				final Pageable nextPageable = sort != null ? new PageRequest(page.getNumber() + 1, ITEMS_PER_PAGE, sort) : new PageRequest(page.getNumber() + 1, ITEMS_PER_PAGE);
 				try {
 					page = finder.find(nextPageable);
