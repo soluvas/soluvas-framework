@@ -305,6 +305,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		// Initialize simple dependencies
 		CommonsPackage.eINSTANCE.eClass();
+		EcorePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theDataPackage.createPackageContents();
@@ -1274,16 +1275,28 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEAttribute(getAttribute_FieldWidth(), ecorePackage.getEInt(), "fieldWidth", "20", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_Principal(), theEcorePackage.getEBoolean(), "principal", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(attributeEClass, this.getValue(), "valueOf", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(attributeEClass, null, "valueOf", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "stringValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getValue());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
 
-		addEOperation(attributeEClass, this.getValue(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(attributeEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getValue());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
 
 		addEOperation(attributeEClass, theEcorePackage.getEBoolean(), "isRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(attributeEClass, theEcorePackage.getEBoolean(), "isMultiple", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(attributeEClass, theCommonsPackage.getUnit(), "getInputUnit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(attributeEClass, null, "getInputUnit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theCommonsPackage.getUnit());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
 
 		initEClass(valueEClass, Value.class, "Value", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getValue_Semantic(), this.getAttributeSemantic(), "semantic", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

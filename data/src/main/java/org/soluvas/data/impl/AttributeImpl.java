@@ -844,7 +844,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * @generated
 	 */
 	@Override
-	public Value valueOf(String stringValue) {
+	public Value<?> valueOf(String stringValue) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -856,7 +856,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * @generated
 	 */
 	@Override
-	public Value create() {
+	public Value<?> create() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();

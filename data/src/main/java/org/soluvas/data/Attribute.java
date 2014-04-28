@@ -447,10 +447,10 @@ public interface Attribute extends NsPrefixable, NameContainer, Imageable, Descr
 	 * <!-- begin-model-doc -->
 	 * Returns the Unit object based on {@link #inputUnitName}.
 	 * <!-- end-model-doc -->
-	 * @model kind="operation" dataType="org.soluvas.commons.Unit"
+	 * @model kind="operation" dataType="org.soluvas.commons.Unit<?>"
 	 * @generated
 	 */
-	Unit getInputUnit();
+	Unit<?> getInputUnit();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -461,7 +461,7 @@ public interface Attribute extends NsPrefixable, NameContainer, Imageable, Descr
 	 * @model
 	 * @generated
 	 */
-	Value valueOf(String stringValue);
+	Value<?> valueOf(String stringValue);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -469,7 +469,7 @@ public interface Attribute extends NsPrefixable, NameContainer, Imageable, Descr
 	 * @model
 	 * @generated
 	 */
-	Value create();
+	Value<?> create();
 
 	/**
 	 * <!-- begin-user-doc -->
