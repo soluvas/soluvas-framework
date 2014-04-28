@@ -1,6 +1,7 @@
 package org.soluvas.twitter;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -19,7 +20,8 @@ public class TwitterSingleConfig {
 	@Value("#{soluvasProps.twitterAppAccessToken}") String tenantAccessToken;
 	@Value("#{soluvasProps.twitterAppAccessTokenSecret}") String tenantAccessTokenSecret;
 	
-	public TwitterManager twitterMgr() {
+	@Bean
+	public TwitterManagerImpl twitterMgr() {
 		return new TwitterManagerImpl(consumerKey, consumerSecret, 
 				tenantScreenName, tenantAccessToken, tenantAccessTokenSecret);
 	}
