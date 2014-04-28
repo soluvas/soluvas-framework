@@ -16,6 +16,7 @@ import org.soluvas.newsletter.impl.MailjetManagerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 
 import com.google.common.eventbus.EventBus;
@@ -25,6 +26,7 @@ import com.google.common.eventbus.EventBus;
  * @author ceefour
  */
 @Configuration
+@Import(NewsletterConfig.class)
 public class MailjetConfig {
 	
 	@Inject
