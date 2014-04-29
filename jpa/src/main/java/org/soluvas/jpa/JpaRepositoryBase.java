@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -194,6 +195,9 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		final Contexts contexts = new Contexts();
 		final ClassLoaderResourceAccessor resourceAccessor = new ClassLoaderResourceAccessor(this.entityClass.getClassLoader());
 		try (final Connection conn = dataSource.getConnection()) {
+			// TODO: SET SCHEMA is workaround for Liquibase's not setting schema for <sql>. please report to Liquibase JIRA!
+			final Statement st = conn.createStatement();
+			st.executeUpdate("SET SCHEMA '" + tenantId + "'");
 			final JdbcConnection jdbc = new JdbcConnection(conn);
 			final PostgresDatabase db = new PostgresDatabase();
 			db.setDefaultSchemaName(tenantId);
@@ -202,6 +206,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 				final Liquibase liquibase = new Liquibase(liquibasePath, resourceAccessor, db);
 				liquibase.update(contexts);
 			} finally {
+				st.executeUpdate("SET SCHEMA 'public'");
 				db.close();
 			}
 		}

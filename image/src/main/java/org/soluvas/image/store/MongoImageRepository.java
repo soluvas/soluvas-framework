@@ -52,6 +52,7 @@ import org.soluvas.image.ImageTransformer;
 import org.soluvas.image.ImageVariant;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.image.util.ImageUtils;
+import org.soluvas.mongo.Index;
 import org.soluvas.mongo.MongoUtils;
 
 import com.google.common.base.Function;
@@ -181,16 +182,16 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		mongoHosts = mongoUriDetail.getHosts();
 		mongoDatabase = mongoUriDetail.getDatabase();
 		try {
-			log.info("Connecting to MongoDB {} database {}", mongoHosts, mongoDatabase);
+			log.info("Connecting to MongoDB {} database {} as {} for {}", 
+					mongoHosts, mongoDatabase, mongoUriDetail.getUsername(), collName);
 			DB db = MongoUtils.getDb(mongoUriDetail, ReadPreference.secondaryPreferred());
 			if (mongoUriDetail.getUsername() != null)
 				db.authenticate(mongoUriDetail.getUsername(), mongoUriDetail.getPassword());
-			log.info("Authenticated to MongoDB. Collection name is {}", collName);
 			mongoColl = db.getCollection(collName);
-			mongoColl.ensureIndex(new BasicDBObject("created", -1));
-			mongoColl.ensureIndex(new BasicDBObject("creationTime", -1));
+			MongoUtils.ensureIndexes(mongoColl, Index.desc("created"), Index.desc("creationTime"));
 		} catch (Exception e) {
-			throw new ImageException("Cannot connect to MongoDB "+ mongoHosts + " database " + mongoDatabase, e);
+			throw new ImageException("Cannot connect to MongoDB " + mongoHosts + " database " + mongoDatabase +
+					" as " + mongoUriDetail.getUsername() + " for " + collName, e);
 		}
 		
 		createFolders();
