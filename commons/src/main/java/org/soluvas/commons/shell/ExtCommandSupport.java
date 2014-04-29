@@ -54,12 +54,26 @@ public abstract class ExtCommandSupport extends AbstractAction {
 	private Environment env;
 	@Resource(name="tenantMap")
 	private Map<String, AppManifest> tenantMap;
+	private final boolean tenantIdRequired;
+	
+	public ExtCommandSupport() {
+		this(true);
+	}
+	
+	/**
+	 * @param tenantIdRequired Whether {@link #execute(CommandSession)} will check for session {@code tenantId} value.
+	 */
+	public ExtCommandSupport(boolean tenantIdRequired) {
+		super();
+		this.tenantIdRequired = tenantIdRequired;
+	}
 	
 	@Override
 	public Object execute(CommandSession session) throws Exception {
-		// Ensure tenantId is set, so nested CommandRequestAttributes#withSession() works well
-		if (session.get("tenantId") == null) {
-			session.put("tenantId", Optional.fromNullable((String) session.get("tenantId")).or(tenantMap.keySet().iterator().next()));
+		if (tenantIdRequired) {
+			// In multitenant environment, we must know the current tenantId which must be set explicitly by SoluvasConsoleFactory
+			Preconditions.checkNotNull(session.get("tenantId"),
+					"tenantId not set, please set using \"use\" command");
 		}
 		
 		try (final Closeable closeable = CommandRequestAttributes.withSession(session)) {

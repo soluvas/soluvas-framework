@@ -54,6 +54,7 @@ import org.soluvas.data.domain.Sort.Order;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.StatusAwareRepositoryBase;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,9 +80,15 @@ import com.google.common.eventbus.EventBus;
 /**
  * {@link PagingAndSortingRepository} implemented using JPA, supporting 
  * Spring's @{@link Transactional} transaction management.
+ * 
  * <p>Recommended deployment stack is: Hibernate 4.2 + Spring 3.2 + PostgreSQL 9.1.
+ * 
  * <p>To use tenant-specific repository inside a tenant-independent code such as {@link EventBus} subscriber
- * or Quartz Job, see {@link CommandRequestAttributes#withTenant(String)}. 
+ * or Quartz Job, see {@link CommandRequestAttributes#withTenant(String)}.
+ *  
+ * <p>This repository cannot be {@link Lazy}-init, must be eager-init, because it initializes
+ * all tenants during initialization.
+ * 
  * @param <T> TODO: should this extend an {@link Identifiable} of some sort?
  * @param <T>
  * @todo {@link SchemaVersionable} support, but how???
@@ -221,6 +228,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		
 		if (initialTenantIds != null) {
 			for (final String tenantId : initialTenantIds) {
+				// If you get CommandRequestAttributes' IllegalStateException, do not @Lazy-init this bean!
 				try (final Closeable closeable = CommandRequestAttributes.withTenant(tenantId)) {
 					txTemplate.execute(new TransactionCallbackWithoutResult() {
 						@Override
