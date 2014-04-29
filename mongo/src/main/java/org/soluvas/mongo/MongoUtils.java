@@ -339,15 +339,5 @@ public class MongoUtils {
 					indexesToDelete.size(), coll.getName(), indexesToDelete);
 		}
 	}
-	
-	/**
-	 * Safely returns a {@link DBObject} projection.
-	 * @param projection
-	 * @return
-	 */
-	@Nullable
-	public static DBObject getProjectionDBObject(@Nullable Map<String, Boolean> projection) {
-		return projection != null ? new BasicDBObject(projection) : null;
-	}
 
 }

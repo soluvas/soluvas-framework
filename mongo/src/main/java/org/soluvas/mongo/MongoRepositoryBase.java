@@ -27,6 +27,7 @@ import org.soluvas.data.DataException;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Projection;
 import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.repository.CrudRepository;
@@ -388,13 +389,13 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	}
 
 	@Override
-	public final Page<T> findAllFields(@Nullable Map<String, Boolean> projection, Pageable pageable) {
+	public final Page<T> findAllFields(@Nullable Projection projection, Pageable pageable) {
 		final long total = secondary.count(new BasicDBObject());
 		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", Sort.Direction.DESC);
 		try {
 			log.debug("findAll projection={} sort={} skip={} limit={} on {}",
 					projection, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
-			final List<T> entities = findSecondary(null, MongoUtils.getProjectionDBObject(projection),
+			final List<T> entities = findSecondary(null, getProjectionDBObject(projection),
 					sortQuery, pageable.getOffset(), pageable.getPageSize(), "findAllFields", projection);
 			return new PageImpl<>(entities, pageable, total);
 		} catch (Exception e) {
@@ -1006,6 +1007,30 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			String methodName, @Nullable Object... params) {
 		final DBObject obj = findOneSecondary(query, fields, methodName, params);
 		return obj != null ? new DBObjectToEntity().apply(obj) : null;
+	}
+
+	/**
+	 * Safely returns a MongoDB {@link DBObject} {@link Projection}.
+	 * @param projection
+	 * @return
+	 */
+	@Nullable
+	protected DBObject getProjectionDBObject(@Nullable Projection projection) {
+		if (projection != null) {
+			final BasicDBObject projectionObj = new BasicDBObject();
+			if (!projection.isIdIncluded()) {
+				projectionObj.append("_id", false);
+			}
+			for (String field : projection.getIncludedFields()) {
+				projectionObj.append(field, true);
+			}
+			for (String field : projection.getExcludedFields()) {
+				projectionObj.append(field, false);
+			}
+			return projectionObj;
+		} else {
+			return null;
+		}
 	}
 
 }
