@@ -395,8 +395,8 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 			@Override @Nullable
 			public S apply(@Nullable S input) {
 				beforeSave(input);
-				em.merge(input);
-				return input;
+				final S mergedInput = em.merge(input);
+				return mergedInput;
 			}
 		}).toList();
 		log.info("Added {} {} entities: {}", addeds.size(), entityClass.getSimpleName(),
