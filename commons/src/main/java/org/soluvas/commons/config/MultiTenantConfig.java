@@ -45,7 +45,6 @@ import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 
@@ -83,7 +82,7 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	private final Supplier<String> initialTenantIdSupplier = new Supplier<String>() {
 		@Override @Nullable
 		public String get() {
-			return Iterables.getOnlyElement(tenantMap().keySet(), null);
+			return tenantMap().size() == 1 ? tenantMap().keySet().iterator().next() : null;
 		}
 	};
 	

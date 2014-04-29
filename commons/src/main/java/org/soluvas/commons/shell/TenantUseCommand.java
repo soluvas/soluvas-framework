@@ -21,6 +21,10 @@ public class TenantUseCommand extends ExtCommandSupport {
 	@Argument(index=1, name="tenantId", required=false, description="Tenant ID, if different than client ID.")
 	private String tenantId;
 	
+	public TenantUseCommand() {
+		super(false);
+	}
+	
 	@Override
 	protected Object doExecute() throws Exception {
 		setClientId(clientId);
