@@ -195,7 +195,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		final Contexts contexts = new Contexts();
 		final ClassLoaderResourceAccessor resourceAccessor = new ClassLoaderResourceAccessor(this.entityClass.getClassLoader());
 		try (final Connection conn = dataSource.getConnection()) {
-			// TODO: SET SCHEMA is workaround for Liquibase's not setting schema for <sql>. please report to Liquibase JIRA!
+			// TODO: SET SCHEMA is workaround for Liquibase's not setting schema for <sql>. https://liquibase.jira.com/browse/CORE-1873
 			final Statement st = conn.createStatement();
 			st.executeUpdate("SET SCHEMA '" + tenantId + "'");
 			final JdbcConnection jdbc = new JdbcConnection(conn);
