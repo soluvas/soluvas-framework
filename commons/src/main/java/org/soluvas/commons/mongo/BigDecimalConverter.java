@@ -43,13 +43,13 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 //		else if (fromDBObject instanceof Integer)
 //			return new BigDecimal((Integer)fromDBObject).divide(MULTIPLICAND);
 		else if (fromDBObject instanceof Long)
-			return new BigDecimal((Long)fromDBObject);
+			return BigDecimal.valueOf((Long)fromDBObject);
 		else if (fromDBObject instanceof Integer)
-			return new BigDecimal((Integer)fromDBObject);
+			return BigDecimal.valueOf((Integer)fromDBObject);
 		else if (fromDBObject instanceof Double)
-			return new BigDecimal((Double)fromDBObject);
+			return BigDecimal.valueOf((Double)fromDBObject).stripTrailingZeros();
 		else if (fromDBObject instanceof Float)
-			return new BigDecimal((Float)fromDBObject);
+			return BigDecimal.valueOf((Float)fromDBObject).stripTrailingZeros();
 		else
 			return new BigDecimal((String)fromDBObject);
 	}
