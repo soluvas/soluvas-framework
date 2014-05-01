@@ -136,7 +136,7 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 	@Override
 	public synchronized void addSupplier(Supplier<T> supplier) {
 		Preconditions.checkNotNull(supplier, "Cannot add null %s supplier", eClass.getName());
-		log.debug("Adding supplier {} for {}", supplier, eClass.getName());
+		log.debug("Adding {} supplier {}", eClass.getName(), supplier);
 		long count = 0;
 		final T supplied = supplier.get();
 		Preconditions.checkArgument(eClass.isInstance(supplied),
@@ -171,7 +171,7 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 			map.putAll(supplier, copiedChildren);
 			count += copiedChildren.size();
 		}
-		log.info("Added {} models from supplier {} for {}", count, supplier, eClass.getName());
+		log.info("Added {} models from {} supplier {}", count, eClass.getName(), supplier);
 	}
 
 	/* (non-Javadoc)
@@ -179,10 +179,10 @@ public class AggregatingSupplier<T extends EObject> implements Supplier<T>, Dele
 	 */
 	@Override
 	public synchronized void removeSupplier(Supplier<T> supplier) {
-		log.debug("Removing supplier {} ({}) for {}", supplier, supplier.getClass().getName(), eClass.getName());
+		log.debug("Removing {} supplier {} ({})", eClass.getName(), supplier, supplier.getClass().getName());
 		final int removedModelCount = doRemoveSupplier(supplier);
-		log.info("Removed {} models from supplier {} ({}) for {}", 
-				removedModelCount, supplier, supplier.getClass().getName(), eClass.getName());
+		log.info("Removed {} models from {} supplier {} ({})", 
+				removedModelCount, eClass.getName(), supplier, supplier.getClass().getName());
 	}
 
 	protected int doRemoveSupplier(Supplier<T> supplier) {

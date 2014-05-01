@@ -623,7 +623,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * @param query
 	 * @param fields
 	 * @param sort
-	 * @param skip
+	 * @param skip 0 means no skip (obviously)
 	 * @param limit 0 means no limit.
 	 * @param func
 	 * @param methodName

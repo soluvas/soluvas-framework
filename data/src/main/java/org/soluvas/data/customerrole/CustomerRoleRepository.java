@@ -9,6 +9,8 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.CrudRepository;
 
+import com.google.common.collect.ImmutableSet;
+
 /**
  * @author rudi
  *
@@ -20,5 +22,7 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole, Str
 	Page<CustomerRole> findAll(@Nonnull StatusMask statusMask, @Nullable String searchText, @Nonnull Pageable pageable);
 	
 	long count(@Nonnull StatusMask statusMask);
+	
+	ImmutableSet<String> findAllIds();
 	
 }

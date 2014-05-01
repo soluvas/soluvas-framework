@@ -18,6 +18,7 @@ import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.domain.Sort.Order;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBObject;
@@ -132,6 +133,12 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		default:
 			throw new IllegalArgumentException("Unrecognized StatusMask: " + statusMask);	
 		}
+	}
+
+	@Override
+	public ImmutableSet<String> findAllIds() {
+		final List<DBObject> objs = findSecondaryAsDBObjects(null, new BasicDBObject("_id", true), null, 0, 0, "findAllIds");
+		return FluentIterable.from(objs).transform(new DBObjectToId()).toSet();
 	}
 
 }
