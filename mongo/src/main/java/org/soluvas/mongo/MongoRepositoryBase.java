@@ -444,6 +444,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		try (Profiled p = new Profiled(log, "Added " + entities.size() + " " + collName + " documents: " + ids)) {
 			final List<DBObject> dbObjs = ImmutableList.copyOf(Collections2
 					.transform(entities, new EntityToDBObject()));
+			beforeSaveDBObjects(dbObjs);
 			dbObjsStr = dbObjs.toString();
 			final WriteResult writeResult = primary.insert(dbObjs);
 //			log.debug("writeResult: {}", writeResult);
@@ -462,7 +463,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	}
 	
 	/**
-	 * Override this method to perform additional operations before adding/modifying an entity.
+	 * Override this method to perform additional checks/operations before adding/modifying an entity.
 	 * setCreationTime and setModificationTime is already handled if entity implements
 	 * {@link Timestamped}.
 	 * @param entity
@@ -483,6 +484,20 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		}
 	}
 
+	/**
+	 * Override this method to perform additional checks/operations before adding/modifying an entity
+	 * after it's been converted to {@link DBObject}.
+	 * @param obj
+	 */
+	protected void beforeSaveDBObject(DBObject obj) {
+	}
+
+	protected final void beforeSaveDBObjects(Collection<DBObject> objs) {
+		for (final DBObject obj : objs) {
+			beforeSaveDBObject(obj);
+		}
+	}
+
 	@Override
 	public <S extends T> Collection<S> modify(Map<String, S> entities) {
 		if (entities.isEmpty()) {
@@ -490,11 +505,12 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			return ImmutableList.of();
 		}
 		log.debug("Modifying {} {} documents: {}", entities.size(), collName, entities.keySet());
+		beforeSave(entities.values());
 		final List<S> modifieds = new ArrayList<>();
 		for (final Entry<String, S> entry : entities.entrySet()) {
 			final S entity = entry.getValue();
-			beforeSave(entity);
 			final DBObject dbo = new EntityToDBObject().apply(entity);
+			beforeSaveDBObject(dbo);
 			final WriteResult writeResult = primary.update(new BasicDBObject("_id", entry.getKey()), dbo);
 			if (writeResult.getLastError() != null && writeResult.getLastError().getException() != null) {
 				throw new MongoRepositoryException(writeResult.getLastError().getException(),
