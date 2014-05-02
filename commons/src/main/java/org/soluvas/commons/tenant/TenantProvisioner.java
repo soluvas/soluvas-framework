@@ -25,6 +25,7 @@ public interface TenantProvisioner<T> {
 	Set<String> findAllStyles();
 	
 	T modifyMall(String tenantId, T provisionData);
+	T modifyFeatureSet(String tenantId, T provisionData);
 
 	void cpp(File file);
 }
