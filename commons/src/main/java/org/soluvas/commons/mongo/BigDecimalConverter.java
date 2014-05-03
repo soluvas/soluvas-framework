@@ -26,9 +26,9 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 
 //	private static final BigDecimal MULTIPLICAND = new BigDecimal(10000);
 	/**
-	 * max 4 fraction digits, and arbitrary integer digits, no scientific notation. 
+	 * max 8 fraction digits (Bitcoin is 8 decimal digits), and arbitrary integer digits, no scientific notation. 
 	 */
-	private static final DecimalFormat MONEY_FORMAT = new DecimalFormat("#0.####", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+	private static final DecimalFormat MONEY_FORMAT = new DecimalFormat("#0.########", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
 
 	public BigDecimalConverter() {
 		super(BigDecimal.class);
