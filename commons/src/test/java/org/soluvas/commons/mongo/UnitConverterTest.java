@@ -1,4 +1,4 @@
-package org.soluvas.mongo;
+package org.soluvas.commons.mongo;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

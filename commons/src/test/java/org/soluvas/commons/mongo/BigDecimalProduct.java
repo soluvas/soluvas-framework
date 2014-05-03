@@ -1,4 +1,4 @@
-package org.soluvas.mongo;
+package org.soluvas.commons.mongo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
