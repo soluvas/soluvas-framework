@@ -36,6 +36,16 @@ public class BigDecimalConverterTest {
 		final DBObject dbo = morphia.toDBObject(product);
 		assertNotNull(dbo);
 		assertEquals(2500.0d, dbo.get("price"));
+		assertEquals("2500.0", dbo.get("price").toString());
+	}
+
+	@Test
+	public void fromExponentialProduct() {
+		final BigDecimalProduct product = new BigDecimalProduct(new BigDecimal(2.5e+3));
+		final DBObject dbo = morphia.toDBObject(product);
+		assertNotNull(dbo);
+		assertEquals(2500.0d, dbo.get("price"));
+		assertEquals("2500.0", dbo.get("price").toString());
 	}
 
 	@Test
