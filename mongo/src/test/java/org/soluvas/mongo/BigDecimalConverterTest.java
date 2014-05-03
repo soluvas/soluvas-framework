@@ -2,9 +2,11 @@ package org.soluvas.mongo;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
 
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,6 +43,24 @@ public class BigDecimalConverterTest {
 		final BasicDBObject dbo = new BasicDBObject(ImmutableMap.of("_id", "1", "price", "12900"));
 		final BigDecimalProduct product = morphia.fromDBObject(BigDecimalProduct.class, dbo);
 		assertNotNull(product);
+		assertEquals(new BigDecimal(12900), product.getPrice());
+	}
+
+	@Test
+	public void fromExponentialStringToProduct() {
+		final BasicDBObject dbo = new BasicDBObject(ImmutableMap.of("_id", "1", "price", "1.29E+4"));
+		final BigDecimalProduct product = morphia.fromDBObject(BigDecimalProduct.class, dbo);
+		assertNotNull(product);
+		assertThat(product.getPrice(), Matchers.comparesEqualTo(new BigDecimal(12900)));
+		assertEquals(new BigDecimal(12900), product.getPrice());
+	}
+
+	@Test
+	public void fromExponentialDoubleToProduct() {
+		final BasicDBObject dbo = new BasicDBObject(ImmutableMap.of("_id", "1", "price", 1.29E+4));
+		final BigDecimalProduct product = morphia.fromDBObject(BigDecimalProduct.class, dbo);
+		assertNotNull(product);
+		assertThat(product.getPrice(), Matchers.comparesEqualTo(new BigDecimal(12900)));
 		assertEquals(new BigDecimal(12900), product.getPrice());
 	}
 

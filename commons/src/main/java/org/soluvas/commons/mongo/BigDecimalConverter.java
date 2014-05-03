@@ -1,8 +1,13 @@
 package org.soluvas.commons.mongo;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 import javax.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.google.code.morphia.converters.SimpleValueConverter;
 import com.google.code.morphia.converters.TypeConverter;
@@ -20,6 +25,10 @@ import com.mongodb.DBObject;
 public class BigDecimalConverter extends TypeConverter implements SimpleValueConverter {
 
 //	private static final BigDecimal MULTIPLICAND = new BigDecimal(10000);
+	/**
+	 * max 4 fraction digits, and arbitrary integer digits, no scientific notation. 
+	 */
+	private static final DecimalFormat MONEY_FORMAT = new DecimalFormat("#0.####", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
 
 	public BigDecimalConverter() {
 		super(BigDecimal.class);
@@ -36,6 +45,7 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 		// 12345 => 1.2345
 		// 12300 => 1.23
 		// (because preferred decimal precision is 0, but max decimal precision is 4)
+		// note: double (and BigDecimal supports it too) sometimes gives exponential format/scientific notation e.g. 1.2345e+4 
 		if (fromDBObject == null)
 			return null;
 //		else if (fromDBObject instanceof Long)
@@ -47,11 +57,18 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 		else if (fromDBObject instanceof Integer)
 			return BigDecimal.valueOf((Integer)fromDBObject);
 		else if (fromDBObject instanceof Double)
-			return BigDecimal.valueOf((Double)fromDBObject).stripTrailingZeros();
+			return new BigDecimal(MONEY_FORMAT.format(fromDBObject));// DON'T: will cause exponent: .stripTrailingZeros(); 
 		else if (fromDBObject instanceof Float)
-			return BigDecimal.valueOf((Float)fromDBObject).stripTrailingZeros();
-		else
-			return new BigDecimal((String)fromDBObject);
+			return new BigDecimal(MONEY_FORMAT.format(fromDBObject));// DON'T: will cause exponent: .stripTrailingZeros();
+		else {
+			final String stringObj = (String)fromDBObject;
+			if (StringUtils.containsIgnoreCase(stringObj, "e")) {
+				// remove exponent
+				return new BigDecimal(new BigDecimal(stringObj).toPlainString());
+			} else {
+				return new BigDecimal(stringObj);// DON'T: will cause exponent: .stripTrailingZeros();
+			}
+		}
 	}
 
 	@Override
