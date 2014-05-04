@@ -4,7 +4,7 @@ import org.soluvas.push.TrackableEvent;
 
 /**
  * Posted by {@link TermRepository}.
- * @author adri
+ * @author ceefour
  */
 public class TermChanged extends TrackableEvent {
 	

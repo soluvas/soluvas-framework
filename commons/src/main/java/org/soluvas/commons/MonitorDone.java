@@ -3,7 +3,7 @@ package org.soluvas.commons;
 import org.soluvas.push.TrackableEvent;
 
 /**
- * @author adri
+ * @author ceefour
  *
  */
 @SuppressWarnings("serial")

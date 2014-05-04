@@ -16,7 +16,7 @@ import com.codahale.metrics.MetricSet;
 /**
  * Gives all the gauges for a {@link LdapRepository} that supports {@link AccountStatus},
  * e.g. {@link SocialPerson}.
- * @author adri
+ * @author ceefour
  */
 public class RepositoryAccountGaugeSet implements MetricSet {
 

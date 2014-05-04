@@ -6,7 +6,7 @@ import com.google.common.base.Predicate;
 
 /**
  * Filters {@link Term} based on {@link Kind}'s nsPrefix and name.
- * @author adri
+ * @author ceefour
  */
 public class KindPredicate implements Predicate<Term> {
 	private final String kindNsPrefix;

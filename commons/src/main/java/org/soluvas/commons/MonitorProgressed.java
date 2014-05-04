@@ -5,7 +5,7 @@ import org.soluvas.push.TrackableEvent;
 /**
  * 
  * // TODO: move to soluvas commons
- * @author adri
+ * @author ceefour
  */
 @SuppressWarnings("serial")
 public class MonitorProgressed extends TrackableEvent {

@@ -8,7 +8,7 @@ import com.codahale.metrics.CachedGauge;
 
 /**
  * Used as MBean to expose total LDAP entity counters.
- * @author adri
+ * @author ceefour
  */
 public class TotalAccountCountGauge extends CachedGauge<Long> {
 	

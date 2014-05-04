@@ -1,7 +1,7 @@
 package org.soluvas.mongo;
 
 /**
- * @author adri
+ * @author ceefour
  *
  */
 public class MongoRepositoryException extends RuntimeException {

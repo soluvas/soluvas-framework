@@ -11,7 +11,7 @@ import com.google.common.collect.Iterables;
 /**
  * Finds based on {@link Identifiable#getId()}.
  * Usually used in combination with {@link Iterables#tryFind(Iterable, Predicate)}.
- * @author adri
+ * @author ceefour
  */
 public class IdPredicate<T extends Identifiable> implements Predicate<T> {
 	

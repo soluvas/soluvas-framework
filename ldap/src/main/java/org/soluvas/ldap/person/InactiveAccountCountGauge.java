@@ -9,7 +9,7 @@ import com.codahale.metrics.CachedGauge;
 
 /**
  * Returns count of {@link AccountStatus#INACTIVE} accounts.
- * @author adri
+ * @author ceefour
  */
 public class InactiveAccountCountGauge extends CachedGauge<Long> {
 	

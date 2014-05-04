@@ -21,7 +21,7 @@ import com.google.common.base.Optional;
  * }
  * }</pre>
  * 
- * @author adri
+ * @author ceefour
  */
 public class ThreadLocalProgress implements AutoCloseable {
 

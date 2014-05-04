@@ -7,7 +7,7 @@ import com.codahale.metrics.Gauge;
 /**
  * Decorates a {@link Gauge} and simply logs WARN if
  * gauge throws exception.
- * @author adri
+ * @author ceefour
  */
 public class FailTolerantGaugeDecorator<T> implements Gauge<T> {
 	

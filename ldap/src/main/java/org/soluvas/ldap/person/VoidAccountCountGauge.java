@@ -9,7 +9,7 @@ import com.codahale.metrics.CachedGauge;
 
 /**
  * Used as MBean to expose {@link AccountStatus#VOID} account counters.
- * @author adri
+ * @author ceefour
  */
 public class VoidAccountCountGauge extends CachedGauge<Long> {
 	

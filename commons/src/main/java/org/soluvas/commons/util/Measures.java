@@ -12,7 +12,7 @@ import com.google.common.base.Optional;
 
 /**
  * Helper methods for {@link Unit}.
- * @author adri
+ * @author ceefour
  * @todo Use {@link UnitFormat}.
  */
 public class Measures {

@@ -9,7 +9,7 @@ import com.codahale.metrics.CachedGauge;
 
 /**
  * Returns number of {@link AccountStatus#DRAFT} accounts.
- * @author adri
+ * @author ceefour
  */
 public class DraftAccountCountGauge extends CachedGauge<Long> {
 	

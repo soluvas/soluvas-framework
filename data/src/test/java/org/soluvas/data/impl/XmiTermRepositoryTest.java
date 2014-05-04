@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.eventbus.EventBus;
 
 /**
- * @author adri
+ * @author ceefour
  *
  */
 public class XmiTermRepositoryTest {
