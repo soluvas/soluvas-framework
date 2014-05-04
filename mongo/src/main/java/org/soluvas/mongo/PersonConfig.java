@@ -9,6 +9,6 @@ import org.soluvas.data.person.PersonRepository;
  */
 public interface PersonConfig {
 
-	TenantBeans<PersonRepository> personRepoBeanRepo();
+	TenantBeans<PersonRepository> personRepoBeans();
 	
 }

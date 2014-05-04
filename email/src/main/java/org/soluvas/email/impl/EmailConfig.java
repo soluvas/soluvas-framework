@@ -61,7 +61,7 @@ public class EmailConfig {
 //		}
 	
 	@Bean(destroyMethod="destroy")
-	public TenantBeans<EmailManagerImpl> emailMgrBeanRepo() throws IOException {
+	public TenantBeans<EmailManagerImpl> emailMgrBeans() throws IOException {
 		final String smtpHost = env.getRequiredProperty("emailSmtpHost");
 		final int smtpPort = env.getRequiredProperty("emailSmtpPort", Integer.class);
 		final String smtpUser = env.getRequiredProperty("emailSmtpUser");
@@ -82,7 +82,7 @@ public class EmailConfig {
 	
 	@Bean @Scope("request")
 	public EmailManager emailMgr() throws IOException {
-		return emailMgrBeanRepo().get(tenantSelector.tenantRef().getTenantId());
+		return emailMgrBeans().get(tenantSelector.tenantRef().getTenantId());
 	}
 	
 }

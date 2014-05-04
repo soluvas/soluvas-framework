@@ -50,7 +50,7 @@ public class MongoPersonConfig implements PersonConfig {
 
 	@Override
 	@Bean(destroyMethod="destroy")
-	public TenantBeans<PersonRepository> personRepoBeanRepo() {
+	public TenantBeans<PersonRepository> personRepoBeans() {
 		final boolean mongoMigrationEnabled = env.getProperty("mongoMigrationEnabled", Boolean.class, true);
 		final boolean mongoAutoExplainSlow = env.getProperty("mongoAutoExplainSlow", Boolean.class, false);
 		return new TenantBeans<PersonRepository>(MongoPersonRepository.class, tenantConfig.tenantMap(), appEventBus, tenantRepo) {
@@ -66,7 +66,7 @@ public class MongoPersonConfig implements PersonConfig {
 	
 	@Bean(name={"personRepo", "personLookup"}) @PersonRelated @Scope("prototype")
 	public PersonRepository personRepo() {
-		return personRepoBeanRepo().get(tenantSelector.tenantRef().getTenantId());
+		return personRepoBeans().get(tenantSelector.tenantRef().getTenantId());
 	}
 	
 }
