@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.annotation.Nullable;
@@ -46,6 +45,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.mongodb.BasicDBObject;
+import com.mongodb.BulkWriteOperation;
+import com.mongodb.BulkWriteResult;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -506,20 +507,36 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		}
 		log.debug("Modifying {} {} documents: {}", entities.size(), collName, entities.keySet());
 		beforeSave(entities.values());
-		final List<S> modifieds = new ArrayList<>();
-		for (final Entry<String, S> entry : entities.entrySet()) {
-			final S entity = entry.getValue();
+		
+		if (entities.size() <= 1) {
+			// use normal update
+			final String entityId = Iterables.getOnlyElement(entities.keySet());
+			final S entity = Iterables.getOnlyElement(entities.values());
 			final DBObject dbo = new EntityToDBObject().apply(entity);
 			beforeSaveDBObject(dbo);
-			final WriteResult writeResult = primary.update(new BasicDBObject("_id", entry.getKey()), dbo);
+			final WriteResult writeResult = primary.update(new BasicDBObject("_id", entityId), dbo);
 			if (writeResult.getLastError() != null && writeResult.getLastError().getException() != null) {
 				throw new MongoRepositoryException(writeResult.getLastError().getException(),
-						"Cannot modify %d %s documents: %s", entities.size(), collName, entities.keySet());
+						"Cannot modify %s documents '%s'", collName, entityId);
 			}
-			modifieds.add(entity);
+			log.info("Modified {} document '{}'", collName, entityId);
+			return ImmutableList.of(entity);
+		} else {
+			// bulk update (requires MongoDB ≥ 2.6)
+			final ImmutableList.Builder<S> modifiedb = ImmutableList.builder();
+			final BulkWriteOperation bulk = primary.initializeUnorderedBulkOperation();
+			for (final Map.Entry<String, S> entry : entities.entrySet()) {
+				final S entity = entry.getValue();
+				final DBObject dbo = new EntityToDBObject().apply(entity);
+				beforeSaveDBObject(dbo);
+				bulk.find(new BasicDBObject("_id", entry.getKey())).replaceOne(dbo);
+				modifiedb.add(entity);
+			}
+			final BulkWriteResult writeResult = bulk.execute();
+			log.info("Matched {}, modified {} of {} {} documents: {}", 
+					writeResult.getMatchedCount(), writeResult.getModifiedCount(), entities.size(), collName, entities.keySet());
+			return modifiedb.build();
 		}
-		log.info("Modified {} {} documents: {}", entities.size(), collName, entities.keySet());
-		return modifieds;
 	}
 
 	@Override
