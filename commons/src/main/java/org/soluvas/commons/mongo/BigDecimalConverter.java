@@ -28,7 +28,7 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 	/**
 	 * max 8 fraction digits (Bitcoin is 8 decimal digits), and arbitrary integer digits, no scientific notation. 
 	 */
-	private static final DecimalFormat MONEY_FORMAT = new DecimalFormat("#0.########", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+	static final DecimalFormat MONEY_FORMAT = new DecimalFormat("#0.########", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
 
 	public BigDecimalConverter() {
 		super(BigDecimal.class);
@@ -44,7 +44,7 @@ public class BigDecimalConverter extends TypeConverter implements SimpleValueCon
 		// long x 10000 is no longer used, we now use double.
 		// 12345 => 1.2345
 		// 12300 => 1.23
-		// (because preferred decimal precision is 0, but max decimal precision is 4)
+		// (because preferred decimal precision is 0, but max decimal precision is 8)
 		// note: double (and BigDecimal supports it too) sometimes gives exponential format/scientific notation e.g. 1.2345e+4 
 		if (fromDBObject == null)
 			return null;

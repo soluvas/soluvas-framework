@@ -29,6 +29,12 @@ public class BigDecimalConverterTest {
 	@After
 	public void tearDown() throws Exception {
 	}
+	
+	@Test
+	public void goodFloat() {
+		assertEquals("0.1", Float.toString(0.1f));
+		assertEquals("0.1", BigDecimalConverter.MONEY_FORMAT.format(0.1f));
+	}
 
 	@Test
 	public void fromProduct() {
