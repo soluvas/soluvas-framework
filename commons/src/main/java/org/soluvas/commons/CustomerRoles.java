@@ -1,10 +1,9 @@
 package org.soluvas.commons;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 
 /**
  * FIXME: <del>Move to xmi file for each tenant.</del>, tapi ke Mongo
@@ -35,7 +34,7 @@ public class CustomerRoles {
 	
 	public static final String DISTRIBUTOR_RAZHA = "distributor_razha";
 	
-	public static final List<String> ALL = ImmutableList.copyOf(new String[] { 
+	public static final ImmutableSet<String> ALL = ImmutableSet.copyOf(new String[] { 
 			AGENT, COMMON, DEPOSIT, DROP_SHIP, MEMBER, SPECIAL_AGENT,
 			AGENT_RAZHA, DISTRIBUTOR_RAZHA});
 	
