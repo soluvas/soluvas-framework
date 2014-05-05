@@ -3,7 +3,9 @@
 package org.soluvas.security.impl;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -234,18 +236,18 @@ public class SecurityCatalogImpl extends EObjectImpl implements SecurityCatalog 
 	 */
 	@Override
 	public void validate() {
-		final Set<String> roleIds = new HashSet<>();
+		final Map<String, Role> previousRoles = new HashMap<>();
 		final Set<String> roleNames = new HashSet<>();
 		for (final Role role : getRoles()) {
-			if (roleIds.contains(role.getId())) {
-				throw new SecurityException(String.format("Duplicate role ID: '%s' from '%s'", 
-						role.getId(), role.getResourceUri()));
+			if (previousRoles.containsKey(role.getId())) {
+				throw new SecurityException(String.format("Duplicate role ID: '%s' from '%s', already loaded from '%s'", 
+						role.getId(), role.getResourceUri(), previousRoles.get(role.getId()).getResourceUri()));
 			}
 			if (roleNames.contains(role.getName())) {
 				throw new SecurityException(String.format("Duplicate role name: '%s' from '%s'", 
 						role.getName(), role.getResourceUri()));
 			}
-			roleIds.add(role.getId());
+			previousRoles.put(role.getId(), role);
 			roleNames.add(role.getName());
 		}
 	}

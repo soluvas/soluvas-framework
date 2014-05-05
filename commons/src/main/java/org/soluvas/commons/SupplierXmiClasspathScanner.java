@@ -167,7 +167,8 @@ public class SupplierXmiClasspathScanner<T extends EObject> {
 		final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
 		// Due to JDK limitation, scanning of root won't work in webapp classpath,
 		// at least the root folder must be specified before wildcard
-		final List<String> locationPatterns = new ArrayList<>(ImmutableList.of("classpath*:org/**/*." + suppliedClassSimpleName + ".xmi",
+		final List<String> locationPatterns = new ArrayList<>(ImmutableList.of(
+				"classpath*:org/**/*." + suppliedClassSimpleName + ".xmi",
 				"classpath*:com/**/*." + suppliedClassSimpleName + ".xmi",
 				"classpath*:id/**/*." + suppliedClassSimpleName +".xmi"));
 		if (dataDir != null) {
