@@ -666,36 +666,42 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	private <R> R doFindClient(DBCollection coll, @Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
 			CursorFunction<R> func, String methodName, @Nullable Object... params) {
 		final long startTime = System.currentTimeMillis();
-//		log.debug("Params: {}", params);
 		final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").skipNulls().join(params) : "") + ")";
 		Integer cursorSize = null;
 		try (final DBCursor cursor = coll.find(query, fields).addSpecial("$comment", Thread.currentThread().getName() + ": " + methodSignature)
 			.sort(sort).skip((int) skip).limit((int) limit)) {
-			log.debug("Cursor: {}", cursor);
-			R applied = func.apply(cursor);
+			final R applied = func.apply(cursor);
 			cursorSize = cursor.size();
-			return applied;
-		} catch (Exception e) {
-			throw new MongoRepositoryException(e, "Cannot find %s %s %s fields=%s sort=%s page=%s/%s for method %s: %s",
-					coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, e);
-		} finally {
+
+			// only check SLOW_QUERY_THRESHOLD if query succeeds
 			final long duration = System.currentTimeMillis() - startTime;
 			if (duration > SLOW_QUERY_THRESHOLD) {
 				if (autoExplainSlow) {
-					final DBObject explain = coll.find(query, fields).addSpecial("$comment", Thread.currentThread().getName() + ": " + methodSignature)
-						.sort(sort).skip((int) skip).limit((int) limit).explain();
-					final int n = (int) explain.get("n");
-					final int nscanned = (int) explain.get("nscannedAllPlans");
-					final int efficiency = nscanned > 0 ? n * 100 / nscanned : 100;
-					final int millis = (int) explain.get("millis");
-					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} size {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).skip({}).limit({}).explain() >> {}",
-							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, cursorSize, duration,
-							nscanned, n, millis, efficiency, collName, JSON.serialize(query), JSON.serialize(fields), JSON.serialize(sort), skip, limit, explain);
+					try {
+						final DBObject explain = coll.find(query, fields).addSpecial("$comment", Thread.currentThread().getName() + ": " + methodSignature)
+							.sort(sort).skip((int) skip).limit((int) limit).explain();
+						final int n = (int) explain.get("n");
+						final int nscanned = (int) explain.get("nscannedAllPlans");
+						final int efficiency = nscanned > 0 ? n * 100 / nscanned : 100;
+						final int millis = (int) explain.get("millis");
+						log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} size {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).skip({}).limit({}).explain() >> {}",
+								coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, cursorSize, duration,
+								nscanned, n, millis, efficiency, collName, JSON.serialize(query), JSON.serialize(fields), JSON.serialize(sort), skip, limit, explain);
+					} catch (Exception e) {
+						log.warn(String.format("Slow find %s %s %s fields=%s sort=%s page=%s/%s for method %s size %s took %sms. explain() throws error",
+								coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, cursorSize, duration),
+								e);
+					}
 				} else {
 					log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} size {} took {}ms",
 							coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, cursorSize, duration);
 				}
 			}
+			
+			return applied;
+		} catch (Exception e) {
+			throw new MongoRepositoryException(e, "Cannot find %s %s %s fields=%s sort=%s page=%s/%s for method %s: %s",
+					coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, e);
 		}
 	}
 
@@ -891,32 +897,41 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			String methodName, @Nullable Object... params) {
 		final long startTime = System.currentTimeMillis();
 		try {
-			return coll.findOne(query, fields, orderBy);
-		} catch (Exception e) {
-			// defer methodSignature calculation until necessary to save performance
-			final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").join(params) : "") + ")";
-			throw new MongoRepositoryException(e, "Cannot findOne %s %s %s fields=%s orderBy=%s for method %s: %s",
-					coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, e);
-		} finally {
+			final DBObject result = coll.findOne(query, fields, orderBy);
+
+			// only check SLOW_QUERY_THRESHOLD if query succeeds
 			final long duration = System.currentTimeMillis() - startTime;
 			if (duration > SLOW_QUERY_THRESHOLD) {
 				// defer methodSignature calculation until necessary to save performance
 				final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").join(params) : "") + ")";
 				if (autoExplainSlow) {
-					final DBObject explain = coll.find(query, fields).addSpecial("$comment", Thread.currentThread().getName() + ": " + methodSignature)
-						.sort(orderBy).limit(1).explain();
-					final int n = (int) explain.get("n");
-					final int nscanned = (int) explain.get("nscannedAllPlans");
-					final int efficiency = nscanned > 0 ? n * 100 / nscanned : 100;
-					final int millis = (int) explain.get("millis");
-					log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).limit(1).explain() >> {}",
-							coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration, 
-							nscanned, n, millis, efficiency, collName, query, fields, orderBy, explain);
+					try {
+						final DBObject explain = coll.find(query, fields).addSpecial("$comment", Thread.currentThread().getName() + ": " + methodSignature)
+							.sort(orderBy).limit(1).explain();
+						final int n = (int) explain.get("n");
+						final int nscanned = (int) explain.get("nscannedAllPlans");
+						final int efficiency = nscanned > 0 ? n * 100 / nscanned : 100;
+						final int millis = (int) explain.get("millis");
+						log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).limit(1).explain() >> {}",
+								coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration, 
+								nscanned, n, millis, efficiency, collName, query, fields, orderBy, explain);
+					} catch (Exception e) {
+						log.warn(String.format("Slow findOne %s %s %s fields=%s sort=%s page=%s/%s for method %s took %sms. explain() throws error",
+								coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration),
+								e);						
+					}
 				} else {
 					log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {}ms",
 							coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration);
 				}
 			}
+
+			return result;
+		} catch (Exception e) {
+			// defer methodSignature calculation until necessary to save performance
+			final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").join(params) : "") + ")";
+			throw new MongoRepositoryException(e, "Cannot findOne %s %s %s fields=%s orderBy=%s for method %s: %s",
+					coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, e);
 		}
 	}
 
