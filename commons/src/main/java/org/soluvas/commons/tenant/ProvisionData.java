@@ -17,8 +17,6 @@ public class ProvisionData implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Nullable
-	private String mongoPassword;
-	@Nullable
 	private String defaultStyle;
 	@Nullable
 	private String adminPersonId;
@@ -70,20 +68,6 @@ public class ProvisionData implements Serializable {
 	}
 
 	/**
-	 * @return the mongoPassword
-	 */
-	public String getMongoPassword() {
-		return mongoPassword;
-	}
-
-	/**
-	 * @param mongoPassword the mongoPassword to set
-	 */
-	public void setMongoPassword(String mongoPassword) {
-		this.mongoPassword = mongoPassword;
-	}
-
-	/**
 	 * @return the adminEmail
 	 */
 	public String getAdminEmail() {
@@ -100,8 +84,6 @@ public class ProvisionData implements Serializable {
 	@Override
 	public String toString() {
 		return "ProvisionData ["
-				+ (mongoPassword != null ? "mongoPassword=" + mongoPassword
-						+ ", " : "")
 				+ (defaultStyle != null ? "defaultStyle=" + defaultStyle + ", "
 						: "")
 				+ (adminPersonId != null ? "adminPersonId=" + adminPersonId

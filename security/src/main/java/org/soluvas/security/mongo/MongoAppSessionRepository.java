@@ -28,7 +28,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoURI;
+import com.mongodb.MongoClientURI;
 
 /**
  * Manages OAuth app session ({@link AppSession}).
@@ -115,14 +115,12 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 		super();
 		// WARNING: mongoUri may contain password!
 		this.mongoUri = Preconditions.checkNotNull(mongoUri, "mongoUri must be specified");
-		final MongoURI realMongoUri = new MongoURI(mongoUri);
+		final MongoClientURI realMongoUri = new MongoClientURI(mongoUri);
 		try {
 			log.info("Connecting to MongoDB database {} for AppSessionRepository",
 					realMongoUri.getHosts());
 			// connecting to mongoDB
-			final DB db = realMongoUri.connectDB();
-			if (realMongoUri.getUsername() != null)
-				db.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
+			final DB db = MongoUtils.getDb(realMongoUri);
 			coll  = db.getCollection("appSession");
 			coll.ensureIndex(new BasicDBObject("className", 1));
 			coll.ensureIndex(new BasicDBObject("schemaVersion", 1));

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Person;
 import org.soluvas.data.repository.AssocRepositoryBase;
 import org.soluvas.mongo.MongoRepositoryException;
+import org.soluvas.mongo.MongoUtils;
 import org.soluvas.security.Role;
 import org.soluvas.security.RolePersonRepository;
 import org.soluvas.security.SecurityException;
@@ -25,8 +26,8 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.ReadPreference;
 import com.mongodb.WriteResult;
 
 /**
@@ -52,11 +53,7 @@ public class MongoRolePersonRepository extends AssocRepositoryBase<String, Strin
 		log.info("Connecting to MongoDB role-person repository {}/{} as {}, person collection={}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), PERSON_COLL_NAME);
 		try {
-			final MongoClient mongoClient = new MongoClient(realMongoUri);
-			final DB db = mongoClient.getDB(realMongoUri.getDatabase());
-			if (realMongoUri.getUsername() != null)
-				db.authenticate(realMongoUri.getUsername(),
-						realMongoUri.getPassword());
+			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
 			personColl = db.getCollection(PERSON_COLL_NAME);
 		} catch (Exception e) {
 			throw new MongoRepositoryException(e, "Cannot connect to MongoDB role-person repository {}/{} as {} for collection '{}'",

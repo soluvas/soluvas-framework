@@ -185,8 +185,6 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 			log.info("Connecting to MongoDB {} database {} as {} for {}", 
 					mongoHosts, mongoDatabase, mongoUriDetail.getUsername(), collName);
 			DB db = MongoUtils.getDb(mongoUriDetail, ReadPreference.secondaryPreferred());
-			if (mongoUriDetail.getUsername() != null)
-				db.authenticate(mongoUriDetail.getUsername(), mongoUriDetail.getPassword());
 			mongoColl = db.getCollection(collName);
 			MongoUtils.ensureIndexes(mongoColl, Index.desc("created"), Index.desc("creationTime"));
 		} catch (Exception e) {

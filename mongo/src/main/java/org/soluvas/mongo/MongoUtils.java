@@ -1,5 +1,7 @@
 package org.soluvas.mongo;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +19,7 @@ import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.domain.Sort.Order;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
@@ -45,8 +48,14 @@ public class MongoUtils {
 	/**
 	 * Singleton {@link MongoClient} instances so we can effectively limit to 11 connections per webapp
 	 * (regardless of number of {@link MongoRepositoryBase} repositories).
+	 * 
 	 * <p>Note: This does cause a "memory leak" but in practice it should not matter.
-	 * <p>Entry: "{readPreference}:{uri}" -> MongoClient 
+	 * 
+	 * <p>Entry: "{readPreference}:{uri_without_dbName}" -> MongoClient
+	 * 
+	 * <p>The {@code dbName} part is stripped from the URI for the purpose of connecting.
+	 * The reason is to optimize number of connections when using large number of databases (> 100)
+	 * and also due to <a href="https://jira.mongodb.org/browse/SERVER-3301">SERVER-3301</a>. 
 	 */
 	private static final Map<String, MongoClient> mongoClients = new HashMap<>();
 
@@ -57,20 +66,30 @@ public class MongoUtils {
 	 * @param readPreference 
 	 * @return
 	 * @throws UnknownHostException
+	 * @throws UnsupportedEncodingException 
 	 */
-	protected static synchronized MongoClient getClient(MongoClientURI realMongoUri, ReadPreference readPreference) throws UnknownHostException {
-		final String key = readPreference + ":" + realMongoUri.getURI();
+	protected static synchronized MongoClient getClient(MongoClientURI realMongoUri, ReadPreference readPreference) throws UnknownHostException, UnsupportedEncodingException {
+		String uriWithoutDbStr = "mongodb://";
+		if (realMongoUri.getUsername() != null) {
+			// MongoDB passwords are never empty
+			uriWithoutDbStr += URLEncoder.encode(realMongoUri.getUsername(), "UTF-8") +
+					":" + URLEncoder.encode(String.valueOf(realMongoUri.getPassword()), "UTF-8"); 
+			uriWithoutDbStr += "@";
+		}
+		uriWithoutDbStr += Joiner.on(',').join(realMongoUri.getHosts());
+		uriWithoutDbStr += "/";
+		final String key = readPreference + ":" + uriWithoutDbStr;
 		if (mongoClients.containsKey(key)) {
 			final MongoClient client = mongoClients.get(key);
-			log.debug("Reusing existing MongoClient {} for {}:{}/{} as {}", 
-					client, readPreference, realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername());
+			log.debug("Reusing existing MongoClient {} for {}:{}@{}/{}", 
+					client, readPreference, realMongoUri.getUsername(), realMongoUri.getHosts(), realMongoUri.getDatabase());
 			return client;
 		} else {
 			final MongoClientOptions.Builder optionsBuilder = MongoClientOptions.builder().readPreference(readPreference);
-			final MongoClientURI optionsMongoUri = new MongoClientURI(realMongoUri.toString(), optionsBuilder);
+			final MongoClientURI optionsMongoUri = new MongoClientURI(uriWithoutDbStr, optionsBuilder);
 			final MongoClient client = new MongoClient(optionsMongoUri);
-			log.info("Instantiating new MongoClient {} for {}:{}/{} as {}", 
-					client, readPreference, optionsMongoUri.getHosts(), optionsMongoUri.getDatabase(), optionsMongoUri.getUsername());
+			log.info("Instantiating + authenticating new MongoClient {} for {}:{}@{}/{}", 
+					client, readPreference, optionsMongoUri.getUsername(), optionsMongoUri.getHosts(), optionsMongoUri.getDatabase());
 			mongoClients.put(key, client);
 			return client;
 		}
@@ -94,27 +113,32 @@ public class MongoUtils {
 	 * @param realMongoUri
 	 * @return
 	 * @throws UnknownHostException
+	 * @throws UnsupportedEncodingException 
 	 * @deprecated Use {@link #getDb(MongoClientURI, ReadPreference)}
 	 */
 	@Deprecated
-	public static DB getDb(MongoClientURI realMongoUri) throws UnknownHostException {
+	public static DB getDb(MongoClientURI realMongoUri) throws UnknownHostException, UnsupportedEncodingException {
 		return getDb(realMongoUri, ReadPreference.primaryPreferred());
 	}
 	
 	/**
 	 * Gets a {@link DB} with dbname corresponding to {@link MongoClientURI#getDatabase()},
 	 * reusing a single {@link MongoClient}, with custom {@link ReadPreference}.
-	 * <p>Note: You must {@link DB#authenticate(String, char[])} yourself.
+	 * 
+	 * <p>Note: Authentication is already performed by internal call to {@link #getClient(MongoClientURI, ReadPreference)}
+	 * using the username and password in the {@link MongoClientURI}.
+	 * 
 	 * @param realMongoUri
 	 * @param readPreference {@link ReadPreference} for the pooled {@link MongoClient} of this DB.
 	 * 		For most repositories you'll use {@link ReadPreference#secondaryPreferred()}.
 	 * 		No tag set is needed unless you actually want to target specific secondary servers.
 	 * @return
 	 * @throws UnknownHostException
+	 * @throws UnsupportedEncodingException 
 	 */
-	public static DB getDb(MongoClientURI realMongoUri, ReadPreference readPreference) throws UnknownHostException {
+	public static DB getDb(MongoClientURI realMongoUri, ReadPreference readPreference) throws UnknownHostException, UnsupportedEncodingException {
 		final MongoClient client = getClient(realMongoUri, readPreference);
-		final String dbname = Preconditions.checkNotNull(realMongoUri.getDatabase(), "MongoURI must contain dbname part");
+		final String dbname = Preconditions.checkNotNull(realMongoUri.getDatabase(), "MongoClientURI must contain dbname part");
 		return client.getDB(dbname);
 	}
 	

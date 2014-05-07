@@ -206,9 +206,6 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				Preconditions.checkState(ppDb.getMongo().getReadPreference() == ReadPreference.primaryPreferred(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo ppDb %s",
 						ppDb.getMongo(), ppDb.getMongo().getReadPreference());
-				if (realMongoUri.getUsername() != null) {
-					ppDb.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
-				}
 				primary = ppDb.getCollection(collName);
 				secondary = primary;
 				break;
@@ -217,9 +214,6 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				Preconditions.checkState(spDb.getMongo().getReadPreference() == ReadPreference.secondaryPreferred(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo spDb %s",
 						ReadPreference.primaryPreferred(), ReadPreference.secondaryPreferred(), spDb.getMongo(), spDb.getMongo().getReadPreference());
-				if (realMongoUri.getUsername() != null) {
-					spDb.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
-				}
 				secondary = spDb.getCollection(collName);
 				primary = secondary;
 				break;
@@ -228,17 +222,11 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				Preconditions.checkState(primaryDb.getMongo().getReadPreference() == ReadPreference.primaryPreferred(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo primaryDb %s",
 						ReadPreference.primaryPreferred(), primaryDb.getMongo().getReadPreference(), primaryDb.getMongo());
-				if (realMongoUri.getUsername() != null) {
-					primaryDb.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
-				}
 				primary = primaryDb.getCollection(collName);
 				final DB secondaryDb = MongoUtils.getDb(realMongoUri, ReadPreference.secondaryPreferred());
 				Preconditions.checkState(secondaryDb.getMongo().getReadPreference() == ReadPreference.secondaryPreferred(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo secondaryDb %s",
 						ReadPreference.secondaryPreferred(), secondaryDb.getMongo(), secondaryDb.getMongo().getReadPreference());
-				if (realMongoUri.getUsername() != null) {
-					secondaryDb.authenticate(realMongoUri.getUsername(), realMongoUri.getPassword());
-				}
 				secondary = secondaryDb.getCollection(collName);
 				break;
 			default:
@@ -330,9 +318,6 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), collName);
 		try {
 			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
-			if (realMongoUri.getUsername() != null)
-				db.authenticate(realMongoUri.getUsername(),
-						realMongoUri.getPassword());
 			primary = db.getCollection(collName);
 			secondary = primary;
 			morphia = new Morphia();
