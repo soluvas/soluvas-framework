@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,6 +71,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	@Nullable
 	private final TenantProvisioner<T> provisioner;
 	private final List<TenantRepositoryListener> listeners = new ArrayList<>();
+	private final AtomicBoolean listenersLocked = new AtomicBoolean();
 	
 	/**
 	 * @param tenantEnv
@@ -275,14 +277,19 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		final ImmutableMap<String, AppManifest> addeds = ImmutableMap.of(tenantId, appManifest);
 //		appEventBus.post(new TenantsStarting(addeds, trackingId));
 		final TenantsStarting tenantsStarting = new TenantsStarting(addeds, trackingId);
-		for (final TenantRepositoryListener listener : listeners) {
-			try {
-				listener.onTenantsStarting(tenantsStarting);
-			} catch (Exception e) {
-				throw new CommonsException("Cannot start tenant '" + tenantId + "' due to failed listener '" + listener + "': " + e, e);
+		listenersLocked.set(true);
+		try {
+			for (final TenantRepositoryListener listener : listeners) {
+				try {
+					listener.onTenantsStarting(tenantsStarting);
+				} catch (Exception e) {
+					throw new CommonsException("Cannot start tenant '" + tenantId + "' due to failed listener '" + listener + "': " + e, e);
+				}
 			}
+			tenantStateMap.put(tenantId, TenantState.ACTIVE);
+		} finally {
+			listenersLocked.set(false);
 		}
-		tenantStateMap.put(tenantId, TenantState.ACTIVE);
 	}
 	
 	/**
@@ -295,14 +302,19 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		tenantStateMap.put(tenantId, TenantState.STOPPING);
 		onBeforeStop(tenantId, appManifest);
 		final TenantsStopping tenantsStopping = new TenantsStopping(ImmutableMap.of(tenantId, appManifest), trackingId);
-		for (final TenantRepositoryListener listener : listeners) {
-			try {
-				listener.onTenantsStopping(tenantsStopping);
-			} catch (Exception e) {
-				throw new CommonsException("Cannot stop tenant '" + tenantId + "' due to failed listener '" + listener + "': " + e, e);
+		listenersLocked.set(true);
+		try {
+			for (final TenantRepositoryListener listener : listeners) {
+				try {
+					listener.onTenantsStopping(tenantsStopping);
+				} catch (Exception e) {
+					throw new CommonsException("Cannot stop tenant '" + tenantId + "' due to failed listener '" + listener + "': " + e, e);
+				}
 			}
+			tenantStateMap.put(tenantId, TenantState.RESOLVED);
+		} finally {
+			listenersLocked.set(false);
 		}
-		tenantStateMap.put(tenantId, TenantState.RESOLVED);
 	}
 	
 	/**
@@ -320,6 +332,9 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	
 	@Override
 	public void addListener(TenantRepositoryListener listener) {
+		Preconditions.checkState(!listenersLocked.get(),
+				"Cannot add TenantRepository listener %s during start/stop. Please only add listeners during app initialization.",
+				listener);
 		if (listener instanceof TenantBeans) {
 			log.info("Adding TenantRepository listener #{}: TenantBeans {}", listeners.size() + 1, listener);
 		} else {
