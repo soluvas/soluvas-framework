@@ -31,6 +31,7 @@ import org.springframework.context.annotation.Scope;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
@@ -87,17 +88,22 @@ public class TenantDataConfig {
 			final File dataDir = dataDirMap.get(tenantId);
 			
 			final File tenantMixinCatalogFile = new File(dataDir, "common/base.MixinCatalog.xmi");
-			final Supplier<MixinCatalog> supplier;
+			Supplier<MixinCatalog> supplier;
 			if (tenantMixinCatalogFile.exists()) {
 				// If tenant-specific MixinCatalog exists, use it
 				log.info("Using tenant-specific MixinCatalog from {}", tenantMixinCatalogFile);
 				supplier = new OnDemandXmiLoader<>(DataPackage.eINSTANCE, tenantMixinCatalogFile.getAbsoluteFile());
 			} else {
 				// otherwise, use default MixinCatalog
-				// TODO: don't hardcode default mixin classpath name
-				log.info("Using default MixinCatalog from {}", tenantMixinCatalogFile);
-				supplier = new OnDemandXmiLoader<>(DataPackage.eINSTANCE, TenantDataConfig.class, 
-						"/id/co/bippo/common/base.MixinCatalog.xmi");
+				// TODO: don't hardcode default mixin classpath name, or it should be in src/main/resources/META-INF
+				log.info("Using app MixinCatalog from {}", tenantMixinCatalogFile);
+				try {
+					supplier = new OnDemandXmiLoader<>(DataPackage.eINSTANCE, TenantDataConfig.class, 
+							"/id/co/bippo/common/base.MixinCatalog.xmi");
+				} catch (Exception e) {
+					log.info("App MixinCatalog not found: " + tenantMixinCatalogFile, e);
+					supplier = Suppliers.ofInstance(DataFactory.eINSTANCE.createMixinCatalog());
+				}
 			}
 			final MixinCatalog mixinCatalog = supplier.get();
 			mixinCatalogMapb.put(tenant.getKey(), mixinCatalog);
