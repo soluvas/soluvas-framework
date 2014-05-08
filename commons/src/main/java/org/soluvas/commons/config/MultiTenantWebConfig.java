@@ -48,20 +48,11 @@ public class MultiTenantWebConfig implements TenantSelector {
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(MultiTenantWebConfig.class);
-//	@Inject
-//	private HttpServletRequest request;
-//	private static final Cache<String, AppManifest> appManifestCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build();
-//	private static final Cache<String, WebAddress> webAddressCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build();
 	
 	@Inject
 	private Environment env;
 	@Inject
 	private MultiTenantConfig tenantConfig;
-//	@Resource(name="tenantMap")
-//	private Map<String, AppManifest> tenantMap;
-	
-//	@Inject
-//	private BeanFactory appCtx;
 	
 	/**
 	 * @todo Replace with annotation https://jira.springsource.org/browse/SPR-5192 when it's supported.
@@ -69,7 +60,6 @@ public class MultiTenantWebConfig implements TenantSelector {
 	 */
 	protected HttpServletRequest getRequest() {
 		return ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-//		return appCtx.getBean(HttpServletRequest.class); // doesn't work
 	}
 	
 	/**

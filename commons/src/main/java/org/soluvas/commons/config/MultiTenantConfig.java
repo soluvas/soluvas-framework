@@ -40,6 +40,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+import com.damnhandy.uri.template.MalformedUriTemplateException;
+import com.damnhandy.uri.template.UriTemplate;
+import com.damnhandy.uri.template.VariableExpansionException;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
@@ -112,6 +115,10 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	private final Map<String, File> dataDirMap = new LinkedHashMap<>();
 	private final Map<String, WebAddress> webAddressMap = new LinkedHashMap<>();
 
+	private String openDomain;
+
+	private String manageDomain;
+
 	public static String getFqdn() {
 		final String fqdn;
 		try {
@@ -135,6 +142,14 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 		return appDomain;
 	}
 	
+	public String getOpenDomain() {
+		return openDomain;
+	}
+	
+	public String getManageDomain() {
+		return manageDomain;
+	}
+	
 	public static File internalGetWorkspaceDir(String appId, Environment env) {
 		final String tenantEnv = env.getRequiredProperty("tenantEnv");
 		return new File(env.getProperty("workspaceDir", System.getProperty("user.home") + "/" + appId + "_" + tenantEnv));
@@ -151,14 +166,26 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	 * If ${tenantSource} is not specified, default is {@value TenantSource#CONFIG}.
 	 * 
 	 * @throws IOException
+	 * @throws VariableExpansionException 
+	 * @throws MalformedUriTemplateException 
 	 */
 	@PostConstruct
-	public void init() throws IOException {
+	public void init() throws IOException, MalformedUriTemplateException, VariableExpansionException {
 		final String appId = app.getId();
 		tenantEnv = env.getRequiredProperty("tenantEnv");
 		workspaceDir = internalGetWorkspaceDir(appId, env);
 		dataDirLayout = env.getProperty("dataDirLayout", DataDirLayout.class, DataDirLayout.DEFAULT);
+		
 		appDomain = internalGetAppDomain(appId, env);
+		openDomain = env.getProperty("openDomain", "open.{+appDomain}");
+		if (openDomain.contains("{")) {
+			openDomain = UriTemplate.expand(openDomain, ImmutableMap.<String, Object>of("appDomain", appDomain));
+		}
+		manageDomain = env.getProperty("manageDomain", "manage.{+appDomain}");
+		if (manageDomain.contains("{")) {
+			manageDomain = UriTemplate.expand(manageDomain, ImmutableMap.<String, Object>of("appDomain", appDomain));
+		}
+		
 		// tenantWhitelist: Comma-separated list of tenantIds to load (all others are excluded)
 		@Nullable
 		final String tenantWhitelistStr = env.getProperty("tenantWhitelist", String.class);
