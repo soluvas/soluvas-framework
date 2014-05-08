@@ -167,7 +167,7 @@ public class MultiTenantWebConfig implements TenantSelector {
 				tenantRef().getTenantId(), tenantConfig.eventBusMap().size(), tenantConfig.eventBusMap().keySet());
 	}
 	
-	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+	@Bean @Scope(value="request")
 	public WebAddress webAddress() throws IOException {
 		return Preconditions.checkNotNull(
 				tenantConfig.webAddressMap().get(tenantRef().getTenantId()),

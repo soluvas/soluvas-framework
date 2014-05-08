@@ -1,9 +1,6 @@
  package org.soluvas.commons.shell; 
 
-import javax.inject.Inject;
-
 import org.apache.felix.gogo.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.soluvas.commons.WebAddress;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -14,19 +11,12 @@ import org.springframework.stereotype.Service;
  * @author ceefour
  */
 @Service @Scope("prototype")
-@Command(scope="app", name="webaddress", description="Show current WebAddress.")
-public class AppWebAddressCommand extends OsgiCommandSupport {
+@Command(scope="app", name="webaddress", description="Show tenant WebAddress.")
+public class AppWebAddressCommand extends ExtCommandSupport {
 	
-	private final WebAddress webAddress;
-
-	@Inject
-	public AppWebAddressCommand(WebAddress webAddress) {
-		super();
-		this.webAddress = webAddress;
-	}
-
 	@Override
-	protected Object doExecute() throws Exception {
+	protected WebAddress doExecute() throws Exception {
+		final WebAddress webAddress = getBean(WebAddress.class);
 		return webAddress;
 	}
 
