@@ -1251,16 +1251,19 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		switch (tenantEnv) {
 		case "prd":
 			if (getDomainPrd() != null) {
+				log.trace("Set domain from prd: {}", getDomainPrd());
 				setDomain(getDomainPrd());
 			}
 			break;
 		case "dev":
 			if (getDomainDev() != null) {
+				log.trace("Set domain from dev: {}", getDomainDev());
 				setDomain(getDomainDev());
 			}
 			break;
 		case "stg":
 			if (getDomainStg() != null) {
+				log.trace("Set domain from stg: {}", getDomainStg());
 				setDomain(getDomainStg());
 			}
 			break;
@@ -1277,16 +1280,19 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		switch (tenantEnv) {
 		case "prd":
 			if (getGeneralEmailPrd() != null) {
+				log.trace("Set generalEmail from prd: {}", getGeneralEmailPrd());
 				setGeneralEmail(getGeneralEmailPrd());
 			}
 			break;
 		case "dev":
 			if (getGeneralEmailDev() != null) {
+				log.trace("Set generalEmail from dev: {}", getGeneralEmailDev());
 				setGeneralEmail(getGeneralEmailDev());
 			}
 			break;
 		case "stg":
 			if (getGeneralEmailStg() != null) {
+				log.trace("Set generalEmail from stg: {}", getGeneralEmailStg());
 				setGeneralEmail(getGeneralEmailStg());
 			}
 			break;
@@ -1305,39 +1311,55 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			Preconditions.checkArgument(upScope.containsKey("tenantEnv"),
 					"tenantEnv is required in scope, used to determine domain");
 			try {
-				final Map<String, Object> scope = new HashMap(upScope);
+				final Map<String, Object> scope = new HashMap<>(upScope);
 				// hub.properties#appDomain may be null (for single-tenant configs),
 				// and if exists, it may contain URI template esp. {+fqdn}
 				if (scope.get("appDomain") != null && ((String) scope.get("appDomain")).contains("{")) {
 					scope.put("appDomain", UriTemplate.expand((String) scope.get("appDomain"), scope) );
 				}
 				if (getDomainPrd() != null && getDomainPrd().contains("{")) {
+					log.trace("expanding domainPrd '{}' using: {}", getDomainPrd(), scope);
 					setDomainPrd( UriTemplate.expand(getDomainPrd(), scope) );
+					log.trace("domainPrd expanded to: {}", getDomainPrd());
 				}
 				if (getDomainDev() != null && getDomainDev().contains("{")) {
+					log.trace("expanding domainDev '{}' using: {}", getDomainDev(), scope);
 					setDomainDev( UriTemplate.expand(getDomainDev(), scope) );
+					log.trace("domainDev expanded to: {}", getDomainDev());
 				}
 				if (getDomainStg() != null && getDomainStg().contains("{")) {
+					log.trace("expanding domainStg '{}' using: {}", getDomainStg(), scope);
 					setDomainStg( UriTemplate.expand(getDomainStg(), scope) );
+					log.trace("domainStg expanded to: {}", getDomainStg());
 				}
 				setDomainByTenantEnv((String) scope.get("tenantEnv"));
 				if (getDomain().contains("{")) {
+					log.trace("expanding domain '{}' using: {}", getDomain(), scope);
 					setDomain( UriTemplate.expand(getDomain(), scope) );
+					log.trace("domain expanded to: {}", getDomain());
 				}
 				// 'domain' variable can then be used by other attributes, if needed
 				scope.put("domain", getDomain());
 				if (getGeneralEmailPrd() != null && getGeneralEmailPrd().contains("{")) {
+					log.trace("expanding generalEmailPrd '{}' using: {}", getGeneralEmailPrd(), scope);
 					setGeneralEmailPrd( UriTemplate.expand(getGeneralEmailPrd(), scope) );
+					log.trace("generalEmailPrd expanded to: {}", getGeneralEmailPrd());
 				}
 				if (getGeneralEmailDev() != null && getGeneralEmailDev().contains("{")) {
+					log.trace("expanding generalEmailDev '{}' using: {}", getGeneralEmailDev(), scope);
 					setGeneralEmailDev( UriTemplate.expand(getGeneralEmailDev(), scope) );
+					log.trace("generalEmailDev expanded to: {}", getGeneralEmailDev());
 				}
 				if (getGeneralEmailStg() != null && getGeneralEmailStg().contains("{")) {
+					log.trace("expanding generalEmailStg '{}' using: {}", getGeneralEmailStg(), scope);
 					setGeneralEmailStg( UriTemplate.expand(getGeneralEmailStg(), scope) );
+					log.trace("generalEmailStg expanded to: {}", getGeneralEmailStg());
 				}
 				setGeneralEmailByTenantEnv((String) scope.get("tenantEnv"));
 				if (getGeneralEmail().contains("{")) {
+					log.trace("expanding generalEmail '{}' using: {}", getGeneralEmail(), scope);
 					setGeneralEmail( UriTemplate.expand(getGeneralEmail(), scope) );
+					log.trace("generalEmail expanded to: {}", getGeneralEmail());
 				}
 				expansionState = ExpansionState.EXPANDED;
 			} catch (MalformedUriTemplateException | VariableExpansionException e) {

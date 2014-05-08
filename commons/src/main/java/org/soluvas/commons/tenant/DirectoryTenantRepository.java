@@ -130,10 +130,6 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		log.debug("Found {} AppManifests: {}", resources.length, Iterables.limit(ImmutableList.copyOf(resources), 10));
 		final Pattern appManifestXmiPattern = Pattern.compile("([^_]+).*\\.AppManifest\\.xmi");
 		
-		final String appManifestTemplatePath = "/META-INF/template.AppManifest.xmi";
-		@Nullable
-		final URL appManifestTemplate = DirectoryTenantRepository.class.getResource(appManifestTemplatePath);
-		
 		for (final Resource res : resources) {
 			final String filename = res.getFilename();
 			final Matcher matcher = appManifestXmiPattern.matcher(filename);
@@ -148,36 +144,92 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 				continue;
 			}
 			
-			final ImmutableMap<String, String> scope = ImmutableMap.of(
-					"tenantId", tenantId, "tenantEnv", tenantEnv,
-					"fqdn", fqdn, "appDomain", appDomain, "userName", System.getProperty("user.name"));
-			
-			final AppManifest appManifest;
-			if (appManifestTemplate != null) {
-				log.info("Combining template AppManifest '{}' with customized '{}'", appManifestTemplate, res.getFile());
-				appManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, appManifestTemplate, ResourceType.CLASSPATH, scope).get();
-			} else {
-				log.info("No template AppManifest found from classpath '{}', only loading AppManifest from '{}'", appManifestTemplatePath, res.getFile());
-				appManifest = CommonsFactory.eINSTANCE.createAppManifest();
-			}
-			final AppManifest overlay = new OnDemandXmiLoader<AppManifest>(
-					CommonsPackage.eINSTANCE, res.getFile(), scope).get();
-			EmfUtils.combineEObject(appManifest, overlay);
-
-			// NO LONGER SUPPORTED: please use single AppManifest for all environments, use domain{env} and generalEmail{env} properties now
-			// env file is usually used to override domain and generalEmail in stg/prd environments
-//			final File envFile = new File(rootDir, tenantId + "/etc/" + tenantId + "_" + tenantEnv + ".AppManifest.xmi");
-//			if (envFile.exists()) {
-//				log.info("Combining with env '{}' specific AppManifest file '{}'", tenantEnv, envFile);				
-//				final AppManifest envManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, envFile, scope).get();
-//				EmfUtils.combineEObject(appManifest, envManifest);
-//			}
+			final AppManifest appManifest = combineAppManifest(tenantId, res.getFile()); 
 			
 			tenantMap.put(tenantId, appManifest);
 			tenantStateMap.put(tenantId, TenantState.ACTIVE);
 		}
 		
 		log.info("Loaded {} initial tenants from '{}': {}", tenantMap.size(), rootDir, Iterables.limit(tenantMap.keySet(), 10));
+	}
+	
+	private AppManifest combineAppManifest(String tenantId, AppManifest upAppManifest) {
+		final String fqdn;
+		try {
+			fqdn = InetAddress.getLocalHost().getCanonicalHostName();
+		} catch (UnknownHostException e) {
+			throw new CommonsException("Cannot get FQDN", e);
+		}
+		Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
+		
+		final String appManifestTemplatePath = "/META-INF/template.AppManifest.xmi";
+		@Nullable
+		final URL appManifestTemplate = DirectoryTenantRepository.class.getResource(appManifestTemplatePath);
+
+		final ImmutableMap<String, String> scope = ImmutableMap.of(
+				"tenantId", tenantId, "tenantEnv", tenantEnv,
+				"fqdn", fqdn, "appDomain", appDomain, "userName", System.getProperty("user.name"));
+		
+		final AppManifest appManifest;
+		if (appManifestTemplate != null) {
+			log.info("Combining template AppManifest '{}' with customized", appManifestTemplate);
+			appManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, appManifestTemplate, ResourceType.CLASSPATH, scope).get();
+		} else {
+			log.info("No template AppManifest found from classpath '{}', only loading customized AppManifest", appManifestTemplatePath);
+			appManifest = CommonsFactory.eINSTANCE.createAppManifest();
+		}
+		EmfUtils.combineEObject(appManifest, upAppManifest);
+
+		// NO LONGER SUPPORTED: please use single AppManifest for all environments, use domain{env} and generalEmail{env} properties now
+		// env file is usually used to override domain and generalEmail in stg/prd environments
+//		final File envFile = new File(rootDir, tenantId + "/etc/" + tenantId + "_" + tenantEnv + ".AppManifest.xmi");
+//		if (envFile.exists()) {
+//			log.info("Combining with env '{}' specific AppManifest file '{}'", tenantEnv, envFile);				
+//			final AppManifest envManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, envFile, scope).get();
+//			EmfUtils.combineEObject(appManifest, envManifest);
+		
+		return appManifest;
+	}
+	
+	private AppManifest combineAppManifest(String tenantId, File customized) {
+		final String fqdn;
+		try {
+			fqdn = InetAddress.getLocalHost().getCanonicalHostName();
+		} catch (UnknownHostException e) {
+			throw new CommonsException("Cannot get FQDN", e);
+		}
+		Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
+		
+		final String appManifestTemplatePath = "/META-INF/template.AppManifest.xmi";
+		@Nullable
+		final URL appManifestTemplate = DirectoryTenantRepository.class.getResource(appManifestTemplatePath);
+
+		final ImmutableMap<String, String> scope = ImmutableMap.of(
+				"tenantId", tenantId, "tenantEnv", tenantEnv,
+				"fqdn", fqdn, "appDomain", appDomain, "userName", System.getProperty("user.name"));
+		
+		final AppManifest appManifest;
+		if (appManifestTemplate != null) {
+			log.info("Combining template AppManifest '{}' with customized '{}'", appManifestTemplate, customized);
+			appManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, appManifestTemplate, ResourceType.CLASSPATH, scope).get();
+		} else {
+			log.info("No template AppManifest found from classpath '{}', only loading customized AppManifest from '{}'",
+					appManifestTemplatePath, customized);
+			appManifest = CommonsFactory.eINSTANCE.createAppManifest();
+		}
+		
+		final AppManifest upAppManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, customized, scope).get();
+		EmfUtils.combineEObject(appManifest, upAppManifest);
+
+		// NO LONGER SUPPORTED: please use single AppManifest for all environments, use domain{env} and generalEmail{env} properties now
+		// env file is usually used to override domain and generalEmail in stg/prd environments
+//		final File envFile = new File(rootDir, tenantId + "/etc/" + tenantId + "_" + tenantEnv + ".AppManifest.xmi");
+//		if (envFile.exists()) {
+//			log.info("Combining with env '{}' specific AppManifest file '{}'", tenantEnv, envFile);				
+//			final AppManifest envManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, envFile, scope).get();
+//			EmfUtils.combineEObject(appManifest, envManifest);
+		
+		return appManifest;
 	}
 	
 	public String getTenantEnv() {
@@ -212,13 +264,17 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	}
 
 	@Override
-	public synchronized AppManifest add(String tenantId, AppManifest appManifest, T provisionData, String trackingId) {
+	public synchronized AppManifest add(String tenantId, AppManifest upAppManifest, T provisionData, String trackingId) {
+		// create
 		Preconditions.checkState(whitelist == null,
 				"Cannot add tenant on whitelisting repository");
 		Preconditions.checkArgument(!tenantMap.containsKey(tenantId),
 				"Cannot add existing tenant '%s'. %s existing tenants: %s",
 				tenantId, tenantMap.size(), tenantMap.keySet());
-		provisioner.add(tenantId, appManifest, provisionData, trackingId);
+		provisioner.add(tenantId, upAppManifest, provisionData, trackingId);
+		
+		// load
+		final AppManifest appManifest = combineAppManifest(tenantId, upAppManifest);
 		tenantMap.put(tenantId, appManifest);
 		start(tenantId, appManifest, trackingId);
 		return appManifest;

@@ -40,13 +40,14 @@ public interface TenantRepository<T extends ProvisionData> {
 	/**
 	 * Sets up a new tenant and activates it.
 	 * @param tenantId
-	 * @param appManifest
+	 * @param upAppManifest This is the raw {@link AppManifest} as it appears on the XMI file.
+	 * 		The input {@link AppManifest} will be used as overlay to the {@link AppManifest} template and then {@link AppManifest#expand(java.util.Map)}ed.
 	 * @param provisionData TODO
 	 * @param trackingId TODO
 	 * @return
 	 * @throws IllegalStateException if {@code tenantWhitelist} is used
 	 */
-	AppManifest add(String tenantId, AppManifest appManifest, T provisionData, String trackingId);
+	AppManifest add(String tenantId, AppManifest upAppManifest, T provisionData, String trackingId);
 
 	/**
 	 * Shuts down a tenant, modifies it then restarts it.
