@@ -1,6 +1,5 @@
 package org.soluvas.data.customerrole;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.CustomerRole;
@@ -17,12 +16,18 @@ import com.google.common.collect.ImmutableSet;
  */
 public interface CustomerRoleRepository extends CrudRepository<CustomerRole, String> {
 	
-	Page<CustomerRole> findAll(@Nonnull StatusMask statusMask, @Nonnull Pageable pageable);
+	Page<CustomerRole> findAll(StatusMask statusMask, Pageable pageable);
 	
-	Page<CustomerRole> findAll(@Nonnull StatusMask statusMask, @Nullable String searchText, @Nonnull Pageable pageable);
+	Page<CustomerRole> findAll(StatusMask statusMask, @Nullable String searchText, Pageable pageable);
 	
-	long count(@Nonnull StatusMask statusMask);
+	long count(StatusMask statusMask);
 	
 	ImmutableSet<String> findAllIds();
+	
+	ImmutableSet<String> findAllIdsBySalesOrderReportEnabled(StatusMask statusMask);
+	
+	ImmutableSet<String> findAllIdsByQuickShopEnabled(StatusMask statusMask);
+	
+	ImmutableSet<String> findAllIdsByHistorySalesOrderEnabled(StatusMask statusMask);
 	
 }

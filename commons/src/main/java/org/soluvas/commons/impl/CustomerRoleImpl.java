@@ -32,6 +32,9 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getModificationTime <em>Modification Time</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isQuickShopEnabled <em>Quick Shop Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isSalesOrderReportEnabled <em>Sales Order Report Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isHistorySalesOrderEnabled <em>History Sales Order Enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -158,6 +161,66 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * @ordered
 	 */
 	protected CustomerRoleStatus status = STATUS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isQuickShopEnabled() <em>Quick Shop Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isQuickShopEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean QUICK_SHOP_ENABLED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isQuickShopEnabled() <em>Quick Shop Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isQuickShopEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean quickShopEnabled = QUICK_SHOP_ENABLED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isSalesOrderReportEnabled() <em>Sales Order Report Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSalesOrderReportEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean SALES_ORDER_REPORT_ENABLED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isSalesOrderReportEnabled() <em>Sales Order Report Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSalesOrderReportEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean salesOrderReportEnabled = SALES_ORDER_REPORT_ENABLED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isHistorySalesOrderEnabled() <em>History Sales Order Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHistorySalesOrderEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HISTORY_SALES_ORDER_ENABLED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHistorySalesOrderEnabled() <em>History Sales Order Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHistorySalesOrderEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean historySalesOrderEnabled = HISTORY_SALES_ORDER_ENABLED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -310,6 +373,69 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isQuickShopEnabled() {
+		return quickShopEnabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setQuickShopEnabled(boolean newQuickShopEnabled) {
+		boolean oldQuickShopEnabled = quickShopEnabled;
+		quickShopEnabled = newQuickShopEnabled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__QUICK_SHOP_ENABLED, oldQuickShopEnabled, quickShopEnabled));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSalesOrderReportEnabled() {
+		return salesOrderReportEnabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSalesOrderReportEnabled(boolean newSalesOrderReportEnabled) {
+		boolean oldSalesOrderReportEnabled = salesOrderReportEnabled;
+		salesOrderReportEnabled = newSalesOrderReportEnabled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__SALES_ORDER_REPORT_ENABLED, oldSalesOrderReportEnabled, salesOrderReportEnabled));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isHistorySalesOrderEnabled() {
+		return historySalesOrderEnabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHistorySalesOrderEnabled(boolean newHistorySalesOrderEnabled) {
+		boolean oldHistorySalesOrderEnabled = historySalesOrderEnabled;
+		historySalesOrderEnabled = newHistorySalesOrderEnabled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED, oldHistorySalesOrderEnabled, historySalesOrderEnabled));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -325,6 +451,12 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return getSchemaVersion();
 			case CommonsPackage.CUSTOMER_ROLE__STATUS:
 				return getStatus();
+			case CommonsPackage.CUSTOMER_ROLE__QUICK_SHOP_ENABLED:
+				return isQuickShopEnabled();
+			case CommonsPackage.CUSTOMER_ROLE__SALES_ORDER_REPORT_ENABLED:
+				return isSalesOrderReportEnabled();
+			case CommonsPackage.CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED:
+				return isHistorySalesOrderEnabled();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -351,6 +483,15 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return;
 			case CommonsPackage.CUSTOMER_ROLE__STATUS:
 				setStatus((CustomerRoleStatus)newValue);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__QUICK_SHOP_ENABLED:
+				setQuickShopEnabled((Boolean)newValue);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__SALES_ORDER_REPORT_ENABLED:
+				setSalesOrderReportEnabled((Boolean)newValue);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED:
+				setHistorySalesOrderEnabled((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -379,6 +520,15 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__STATUS:
 				setStatus(STATUS_EDEFAULT);
 				return;
+			case CommonsPackage.CUSTOMER_ROLE__QUICK_SHOP_ENABLED:
+				setQuickShopEnabled(QUICK_SHOP_ENABLED_EDEFAULT);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__SALES_ORDER_REPORT_ENABLED:
+				setSalesOrderReportEnabled(SALES_ORDER_REPORT_ENABLED_EDEFAULT);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED:
+				setHistorySalesOrderEnabled(HISTORY_SALES_ORDER_ENABLED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -403,6 +553,12 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return schemaVersion != SCHEMA_VERSION_EDEFAULT;
 			case CommonsPackage.CUSTOMER_ROLE__STATUS:
 				return status != STATUS_EDEFAULT;
+			case CommonsPackage.CUSTOMER_ROLE__QUICK_SHOP_ENABLED:
+				return quickShopEnabled != QUICK_SHOP_ENABLED_EDEFAULT;
+			case CommonsPackage.CUSTOMER_ROLE__SALES_ORDER_REPORT_ENABLED:
+				return salesOrderReportEnabled != SALES_ORDER_REPORT_ENABLED_EDEFAULT;
+			case CommonsPackage.CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED:
+				return historySalesOrderEnabled != HISTORY_SALES_ORDER_ENABLED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -495,6 +651,12 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 		result.append(schemaVersion);
 		result.append(", status: ");
 		result.append(status);
+		result.append(", quickShopEnabled: ");
+		result.append(quickShopEnabled);
+		result.append(", salesOrderReportEnabled: ");
+		result.append(salesOrderReportEnabled);
+		result.append(", historySalesOrderEnabled: ");
+		result.append(historySalesOrderEnabled);
 		result.append(')');
 		return result.toString();
 	}

@@ -3673,6 +3673,33 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCustomerRole_QuickShopEnabled() {
+		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCustomerRole_SalesOrderReportEnabled() {
+		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCustomerRole_HistorySalesOrderEnabled() {
+		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -4488,6 +4515,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		customerRoleEClass = createEClass(CUSTOMER_ROLE);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__SCHEMA_VERSION);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__STATUS);
+		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__QUICK_SHOP_ENABLED);
+		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__SALES_ORDER_REPORT_ENABLED);
+		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED);
 
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
@@ -5175,6 +5205,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEClass(customerRoleEClass, CustomerRole.class, "CustomerRole", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCustomerRole_SchemaVersion(), ecorePackage.getELong(), "schemaVersion", "1", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_Status(), this.getCustomerRoleStatus(), "status", null, 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomerRole_QuickShopEnabled(), ecorePackage.getEBoolean(), "quickShopEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomerRole_SalesOrderReportEnabled(), ecorePackage.getEBoolean(), "salesOrderReportEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomerRole_HistorySalesOrderEnabled(), ecorePackage.getEBoolean(), "historySalesOrderEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -6565,6 +6598,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "A condensed version of a (probably app-specific) Thing."
+		   });		
+		addAnnotation
+		  (getCustomerRole_QuickShopEnabled(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Can access to \"..quick_shopping_agent/\""
+		   });		
+		addAnnotation
+		  (getCustomerRole_SalesOrderReportEnabled(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Can access to \"..user/salesorder_report/\""
+		   });		
+		addAnnotation
+		  (getCustomerRole_HistorySalesOrderEnabled(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Can access to \"..user/salesorder/\""
 		   });
 	}
 	

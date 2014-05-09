@@ -5235,13 +5235,40 @@ public interface CommonsPackage extends EPackage {
 	int CUSTOMER_ROLE__STATUS = IDENTIFIABLE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Quick Shop Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER_ROLE__QUICK_SHOP_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Sales Order Report Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER_ROLE__SALES_ORDER_REPORT_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>History Sales Order Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Customer Role</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMER_ROLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 5;
+	int CUSTOMER_ROLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The operation id for the '<em>Get Schema Version</em>' operation.
@@ -8818,6 +8845,39 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getCustomerRole_Status();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CustomerRole#isQuickShopEnabled <em>Quick Shop Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Quick Shop Enabled</em>'.
+	 * @see org.soluvas.commons.CustomerRole#isQuickShopEnabled()
+	 * @see #getCustomerRole()
+	 * @generated
+	 */
+	EAttribute getCustomerRole_QuickShopEnabled();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CustomerRole#isSalesOrderReportEnabled <em>Sales Order Report Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sales Order Report Enabled</em>'.
+	 * @see org.soluvas.commons.CustomerRole#isSalesOrderReportEnabled()
+	 * @see #getCustomerRole()
+	 * @generated
+	 */
+	EAttribute getCustomerRole_SalesOrderReportEnabled();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CustomerRole#isHistorySalesOrderEnabled <em>History Sales Order Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>History Sales Order Enabled</em>'.
+	 * @see org.soluvas.commons.CustomerRole#isHistorySalesOrderEnabled()
+	 * @see #getCustomerRole()
+	 * @generated
+	 */
+	EAttribute getCustomerRole_HistorySalesOrderEnabled();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11759,6 +11819,30 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CUSTOMER_ROLE__STATUS = eINSTANCE.getCustomerRole_Status();
+
+		/**
+		 * The meta object literal for the '<em><b>Quick Shop Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOMER_ROLE__QUICK_SHOP_ENABLED = eINSTANCE.getCustomerRole_QuickShopEnabled();
+
+		/**
+		 * The meta object literal for the '<em><b>Sales Order Report Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOMER_ROLE__SALES_ORDER_REPORT_ENABLED = eINSTANCE.getCustomerRole_SalesOrderReportEnabled();
+
+		/**
+		 * The meta object literal for the '<em><b>History Sales Order Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED = eINSTANCE.getCustomerRole_HistorySalesOrderEnabled();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.

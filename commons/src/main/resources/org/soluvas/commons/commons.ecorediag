@@ -834,10 +834,6 @@
     <children xmi:type="notation:Node" xmi:id="_cvbWMEcZEeKj8OUspbP64A" type="1001">
       <children xmi:type="notation:Node" xmi:id="_cvb9QEcZEeKj8OUspbP64A" type="4001"/>
       <children xmi:type="notation:Node" xmi:id="_cvb9QUcZEeKj8OUspbP64A" type="5001">
-        <children xmi:type="notation:Node" xmi:id="_qMtPcMxgEeO2dfgG1LprzA" type="2001">
-          <element xmi:type="ecore:EAttribute" href="commons.ecore#//Parentable/parent"/>
-          <layoutConstraint xmi:type="notation:Location" xmi:id="_qMtPccxgEeO2dfgG1LprzA"/>
-        </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_cvb9QkcZEeKj8OUspbP64A"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_cvb9Q0cZEeKj8OUspbP64A"/>
         <styles xmi:type="notation:FilteringStyle" xmi:id="_cvb9REcZEeKj8OUspbP64A"/>
@@ -1903,6 +1899,18 @@
         <children xmi:type="notation:Node" xmi:id="_0UxBsMOmEeOmhaqSZ2Na6Q" type="2001">
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//CustomerRole/status"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_0UxBscOmEeOmhaqSZ2Na6Q"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_eHbXoNdAEeOc-OnMHbo9gw" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//CustomerRole/quickShopEnabled"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_eHbXoddAEeOc-OnMHbo9gw"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_qYdrcNdAEeOc-OnMHbo9gw" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//CustomerRole/salesOrderReportEnabled"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_qYdrcddAEeOc-OnMHbo9gw"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_qatHINdAEeOc-OnMHbo9gw" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//CustomerRole/historySalesOrderEnabled"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_qatHIddAEeOc-OnMHbo9gw"/>
         </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_otCwocOmEeOmhaqSZ2Na6Q"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_otCwosOmEeOmhaqSZ2Na6Q"/>

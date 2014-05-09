@@ -1501,6 +1501,24 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="schemaVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
         changeable="false" defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//CustomerRoleStatus"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="quickShopEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Can access to &quot;..quick_shopping_agent/&quot;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="salesOrderReportEnabled"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Can access to &quot;..user/salesorder_report/&quot;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="historySalesOrderEnabled"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Can access to &quot;..user/salesorder/&quot;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CustomerRoleStatus">
     <eLiterals name="active"/>

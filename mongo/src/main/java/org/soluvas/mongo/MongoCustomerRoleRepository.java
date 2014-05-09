@@ -38,7 +38,10 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 				"customerRole", null, migrationEnabled, autoExplainSlow,
 				Index.desc("creationTime"),
 				Index.desc("modificationTime"),
-				Index.asc("status"));
+				Index.asc("status"),
+				Index.asc("historySalesOrderEnabled"),
+				Index.asc("quickShopEnabled"),
+				Index.asc("salesOrderReportEnabled"));
 	}
 
 	@Override
@@ -138,6 +141,33 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 	@Override
 	public ImmutableSet<String> findAllIds() {
 		final List<DBObject> objs = findSecondaryAsDBObjects(null, new BasicDBObject("_id", true), null, 0, 0, "findAllIds");
+		return FluentIterable.from(objs).transform(new DBObjectToId()).toSet();
+	}
+
+	@Override
+	public ImmutableSet<String> findAllIdsBySalesOrderReportEnabled(StatusMask statusMask) {
+		final BasicDBObject query = new BasicDBObject("salesOrderReportEnabled", true);
+		augmentQueryForStatusMask(query, statusMask);
+		
+		final List<DBObject> objs = findSecondaryAsDBObjects(query, new BasicDBObject("_id", true), null, 0, 0, "findAllIdsBySalesOrderReportEnabled", statusMask);
+		return FluentIterable.from(objs).transform(new DBObjectToId()).toSet();
+	}
+
+	@Override
+	public ImmutableSet<String> findAllIdsByQuickShopEnabled(StatusMask statusMask) {
+		final BasicDBObject query = new BasicDBObject("quickShopEnabled", true);
+		augmentQueryForStatusMask(query, statusMask);
+		
+		final List<DBObject> objs = findSecondaryAsDBObjects(query, new BasicDBObject("_id", true), null, 0, 0, "findAllIdsByQuickShopEnabled", statusMask);
+		return FluentIterable.from(objs).transform(new DBObjectToId()).toSet();
+	}
+
+	@Override
+	public ImmutableSet<String> findAllIdsByHistorySalesOrderEnabled(StatusMask statusMask) {
+		final BasicDBObject query = new BasicDBObject("historySalesOrderEnabled", true);
+		augmentQueryForStatusMask(query, statusMask);
+		
+		final List<DBObject> objs = findSecondaryAsDBObjects(query, new BasicDBObject("_id", true), null, 0, 0, "findAllIdsByHistorySalesOrderEnabled", statusMask);
 		return FluentIterable.from(objs).transform(new DBObjectToId()).toSet();
 	}
 
