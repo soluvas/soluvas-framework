@@ -1333,6 +1333,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 					log.trace("domainStg expanded to: {}", getDomainStg());
 				}
 				setDomainByTenantEnv((String) scope.get("tenantEnv"));
+				Preconditions.checkNotNull(getDomain(),
+						"AppManifest.domain must not be null. tenantEnv=%s. domainPrd=%s. domainDev=%s. domainStg=%s",
+						scope.get("tenantEnv"), getDomainPrd(), getDomainDev(), getDomainStg());
 				if (getDomain().contains("{")) {
 					log.trace("expanding domain '{}' using: {}", getDomain(), scope);
 					setDomain( UriTemplate.expand(getDomain(), scope) );
@@ -1356,6 +1359,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 					log.trace("generalEmailStg expanded to: {}", getGeneralEmailStg());
 				}
 				setGeneralEmailByTenantEnv((String) scope.get("tenantEnv"));
+				Preconditions.checkNotNull(getGeneralEmail(),
+						"AppManifest.generalEmail must not be null. tenantEnv=%s. generalEmailPrd=%s. generalEmailDev=%s. generalEmailStg=%s",
+						scope.get("tenantEnv"), getGeneralEmailPrd(), getGeneralEmailDev(), getGeneralEmailStg());
 				if (getGeneralEmail().contains("{")) {
 					log.trace("expanding generalEmail '{}' using: {}", getGeneralEmail(), scope);
 					setGeneralEmail( UriTemplate.expand(getGeneralEmail(), scope) );

@@ -166,19 +166,25 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		@Nullable
 		final URL appManifestTemplate = DirectoryTenantRepository.class.getResource(appManifestTemplatePath);
 
-		final ImmutableMap<String, String> scope = ImmutableMap.of(
-				"tenantId", tenantId, "tenantEnv", tenantEnv,
-				"fqdn", fqdn, "appDomain", appDomain, "userName", System.getProperty("user.name"));
-		
 		final AppManifest appManifest;
 		if (appManifestTemplate != null) {
 			log.info("Combining template AppManifest '{}' with customized", appManifestTemplate);
-			appManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, appManifestTemplate, ResourceType.CLASSPATH, scope).get();
+			appManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, appManifestTemplate, ResourceType.CLASSPATH)
+					.autoExpand(false).get();
 		} else {
 			log.info("No template AppManifest found from classpath '{}', only loading customized AppManifest", appManifestTemplatePath);
 			appManifest = CommonsFactory.eINSTANCE.createAppManifest();
 		}
 		EmfUtils.combineEObject(appManifest, upAppManifest);
+
+		final ImmutableMap<String, Object> scope = ImmutableMap.<String, Object>of(
+				"tenantId", tenantId, "tenantEnv", tenantEnv,
+				"fqdn", fqdn, "appDomain", appDomain, "userName", System.getProperty("user.name"));
+		try {
+			appManifest.expand(scope);
+		} catch (Exception e) {
+			throw new TenantException(e, "Cannot expand '%s' AppManifest: %s", tenantId, e);
+		}
 
 		// NO LONGER SUPPORTED: please use single AppManifest for all environments, use domain{env} and generalEmail{env} properties now
 		// env file is usually used to override domain and generalEmail in stg/prd environments
@@ -204,22 +210,28 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		@Nullable
 		final URL appManifestTemplate = DirectoryTenantRepository.class.getResource(appManifestTemplatePath);
 
-		final ImmutableMap<String, String> scope = ImmutableMap.of(
-				"tenantId", tenantId, "tenantEnv", tenantEnv,
-				"fqdn", fqdn, "appDomain", appDomain, "userName", System.getProperty("user.name"));
-		
 		final AppManifest appManifest;
 		if (appManifestTemplate != null) {
 			log.info("Combining template AppManifest '{}' with customized '{}'", appManifestTemplate, customized);
-			appManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, appManifestTemplate, ResourceType.CLASSPATH, scope).get();
+			appManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, appManifestTemplate, ResourceType.CLASSPATH)
+					.autoExpand(false).get();
 		} else {
 			log.info("No template AppManifest found from classpath '{}', only loading customized AppManifest from '{}'",
 					appManifestTemplatePath, customized);
 			appManifest = CommonsFactory.eINSTANCE.createAppManifest();
 		}
 		
-		final AppManifest upAppManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, customized, scope).get();
+		final AppManifest upAppManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, customized).autoExpand(false).get();
 		EmfUtils.combineEObject(appManifest, upAppManifest);
+		
+		final ImmutableMap<String, Object> scope = ImmutableMap.<String, Object>of(
+				"tenantId", tenantId, "tenantEnv", tenantEnv,
+				"fqdn", fqdn, "appDomain", appDomain, "userName", System.getProperty("user.name"));
+		try {
+			appManifest.expand(scope);
+		} catch (Exception e) {
+			throw new TenantException(e, "Cannot expand '%s' AppManifest: %s", tenantId, e);
+		}
 
 		// NO LONGER SUPPORTED: please use single AppManifest for all environments, use domain{env} and generalEmail{env} properties now
 		// env file is usually used to override domain and generalEmail in stg/prd environments

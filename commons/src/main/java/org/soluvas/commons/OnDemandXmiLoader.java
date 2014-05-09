@@ -46,6 +46,7 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 	protected final Bundle bundle;
 	protected final EPackage ePackage;
 	protected final ImmutableMap<String, Object> scope;
+	private boolean autoExpand = true;
 	
 	/**
 	 * Will load using a {@link ClassLoader}, without {@code scope}.
@@ -238,6 +239,11 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 		log.info("Destroying XMI Loader for {} from {} [{}]", resourceUri, ePackageName, ePackageNsUri);
 	}
 
+	/**
+	 * If {@link #autoExpand(boolean)} is {@code true}, will automatically {@link Expandable#expand(Map)} object
+	 * using {@link #getScope()}.
+	 * @see com.google.common.base.Supplier#get()
+	 */
 	@Override
 	public T get() {
 		return load();
@@ -301,7 +307,9 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 		}
 		
 		// Expand with scope
-		expand(obj);
+		if (autoExpand) {
+			expand(obj);
+		}
 		final TreeIterator<EObject> allContents = obj.eAllContents();
 		long augmented = 0;
 		while (allContents.hasNext()) {
@@ -357,6 +365,17 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 	 */
 	public ImmutableMap<String, Object> getScope() {
 		return scope;
+	}
+	
+	/**
+	 * Automatically {@link Expandable#expand(Map)} when {@link #get()} object using {@link #getScope()},
+	 * default is {@code true}.
+	 * @param autoExpand
+	 * @return
+	 */
+	public OnDemandXmiLoader<T> autoExpand(boolean autoExpand) {
+		this.autoExpand = autoExpand;
+		return this;
 	}
 
 	@Override
