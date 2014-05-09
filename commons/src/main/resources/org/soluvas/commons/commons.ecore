@@ -59,8 +59,7 @@
         <details key="documentation" value="Longer description to be used in meta description, recommended to be less than 160 characters."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="domain" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="{+tenantId}.{+appDomain}">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="domain" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Primary domain name of the application for current environment, e.g. &quot;berbatik.com&quot;. Used by Email system. URI templatable using &quot;appDomain&quot;, &quot;fqdn&quot;, &quot;tenantId&quot;, &quot;tenantEnv&quot;.&#xA;&#xA;&lt;p>TODO: make this read-only for future usage.&#xA;&#xA;&lt;p>For development, use e.g. &quot;berbatik.annafi.dev&quot;.&#xA;&#xA;&lt;p>Production: title=Berbatik, domain=berbatik.com&#xA;&#xA;&lt;p>Staging: title=Berbatik stg, domain=stg.berbatik.com&#xA;&#xA;&lt;p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev&#xA;&#xA;&lt;p>Description usually stays the same, but can be different too.&#xA;&#xA;&lt;p>Templated using URI templates. e.g. to use {@code appDomain} variable, i.e. &quot;acme.{+appDomain}&quot;,&#xA;that will be expanded when you call {@link #expand()}."/>
       </eAnnotations>
@@ -80,8 +79,7 @@
         <details key="documentation" value="Primary domain name of the application for &quot;dev&quot; environment.&#xA;URI templatable using &quot;appDomain&quot;, &quot;fqdn&quot;, &quot;tenantId&quot;, &quot;tenantEnv&quot;."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generalEmail" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="{+userName}@{+fqdn}">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generalEmail" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Email address (current environment) used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.&#xA;The default templated generalEmail is &quot;{+userName}@{+fqdn}&quot; so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.&#xA;&#xA;&lt;p>Templated using URI templates.&#xA;&#xA;&lt;p>TODO: this should be read-only"/>
       </eAnnotations>
@@ -111,8 +109,7 @@
         <details key="documentation" value="Used in email notifications, e.g. &quot;Talavera Office Park, Jl. TB Simatupang KAV 20-22 Jakarta&quot;."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="letterSalutation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="Hi">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="letterSalutation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The SALUTATION (C) of the letter starts on the left margin two lines below the inside address for a business letter or five lines below the heading of a personal letter, if typed. All words in the salutation are capitalized, and the last word is followed by a comma in a personal letter or a colon in a business letter.&#xA;Sample salutations are:&#xA;&#xA;&#xA;Personal:&#xA;Greetings Friend, Dear Bob, Hi Bob,&#xA;&#xA;Business:&#xA;Dear Mr. Jones: Dear Sir:&#xA;Ladies and Gentlemen: Dear Mr./Mrs./Ms. Jones:&#xA;"/>
       </eAnnotations>
@@ -146,8 +143,7 @@
         <details key="documentation" value="Reads directly from {@link #getDefaultCurrencyCode()}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="emailLogoUriTemplate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="{+imagesUri}tenant_common/logo_email.png">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="emailLogoUriTemplate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="URI to tenant logo usable when sending email notifications, by default the tenant logo URI template is: {+imagesUri}tenant_common/logo_email.png&#xA;&#xA;&lt;p>Width of 127 pixels is recommended with landscape ratio.&#xA;&#xA;&lt;p>Supported parameter is &quot;imagesUri&quot;, which is from {link WebAddress#getImagesUri()}.&#xA;&#xA;&lt;p>You can have app-wide logo without any tenant_common folder by using URI template such as: {+imagesUri}/com.aksimata.app/aksimata_email_192x92.png&#xA;&#xA;&lt;p>To get the actual URI, call {@link AppUtils#getEmailLogoUri(AppManifest, WebAddress)}."/>
       </eAnnotations>

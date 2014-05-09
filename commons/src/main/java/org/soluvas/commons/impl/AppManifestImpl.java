@@ -268,7 +268,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DOMAIN_EDEFAULT = "{+tenantId}.{+appDomain}";
+	protected static final String DOMAIN_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getDomain() <em>Domain</em>}' attribute.
@@ -342,7 +342,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String GENERAL_EMAIL_EDEFAULT = "{+userName}@{+fqdn}";
+	protected static final String GENERAL_EMAIL_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getGeneralEmail() <em>General Email</em>}' attribute.
@@ -456,7 +456,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LETTER_SALUTATION_EDEFAULT = "Hi";
+	protected static final String LETTER_SALUTATION_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getLetterSalutation() <em>Letter Salutation</em>}' attribute.
@@ -556,7 +556,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String EMAIL_LOGO_URI_TEMPLATE_EDEFAULT = "{+imagesUri}tenant_common/logo_email.png";
+	protected static final String EMAIL_LOGO_URI_TEMPLATE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getEmailLogoUriTemplate() <em>Email Logo Uri Template</em>}' attribute.

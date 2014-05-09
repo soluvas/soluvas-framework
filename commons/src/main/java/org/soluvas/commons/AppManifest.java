@@ -137,7 +137,6 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 
 	/**
 	 * Returns the value of the '<em><b>Domain</b></em>' attribute.
-	 * The default value is <code>"{+tenantId}.{+appDomain}"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -161,7 +160,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @return the value of the '<em>Domain</em>' attribute.
 	 * @see #setDomain(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_Domain()
-	 * @model default="{+tenantId}.{+appDomain}"
+	 * @model
 	 * @generated
 	 */
 	String getDomain();
@@ -270,7 +269,6 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 
 	/**
 	 * Returns the value of the '<em><b>General Email</b></em>' attribute.
-	 * The default value is <code>"{+userName}@{+fqdn}"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -284,7 +282,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @return the value of the '<em>General Email</em>' attribute.
 	 * @see #setGeneralEmail(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_GeneralEmail()
-	 * @model default="{+userName}@{+fqdn}"
+	 * @model
 	 * @generated
 	 */
 	String getGeneralEmail();
@@ -426,7 +424,6 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 
 	/**
 	 * Returns the value of the '<em><b>Letter Salutation</b></em>' attribute.
-	 * The default value is <code>"Hi"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -445,7 +442,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @return the value of the '<em>Letter Salutation</em>' attribute.
 	 * @see #setLetterSalutation(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_LetterSalutation()
-	 * @model default="Hi"
+	 * @model
 	 * @generated
 	 */
 	String getLetterSalutation();
@@ -585,7 +582,6 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 
 	/**
 	 * Returns the value of the '<em><b>Email Logo Uri Template</b></em>' attribute.
-	 * The default value is <code>"{+imagesUri}tenant_common/logo_email.png"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -602,7 +598,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @return the value of the '<em>Email Logo Uri Template</em>' attribute.
 	 * @see #setEmailLogoUriTemplate(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_EmailLogoUriTemplate()
-	 * @model default="{+imagesUri}tenant_common/logo_email.png"
+	 * @model
 	 * @generated
 	 */
 	String getEmailLogoUriTemplate();
