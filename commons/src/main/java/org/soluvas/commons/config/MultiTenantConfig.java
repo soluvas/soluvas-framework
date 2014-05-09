@@ -111,13 +111,12 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	private String tenantEnv;
 	private TenantSource tenantSource;
 	private String appDomain;
+	private String openDomain;
+	private String manageDomain;
+
 	private final Map<String, EventBus> eventBusMap = new LinkedHashMap<>();
 	private final Map<String, File> dataDirMap = new LinkedHashMap<>();
 	private final Map<String, WebAddress> webAddressMap = new LinkedHashMap<>();
-
-	private String openDomain;
-
-	private String manageDomain;
 
 	public static String getFqdn() {
 		final String fqdn;
