@@ -7,27 +7,32 @@ import org.apache.shiro.authc.HostAuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.realm.AuthenticatingRealm;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.security.AutologinToken;
+
+import com.google.common.collect.ImmutableSet;
 
 /**
  * Simple realm that recognizes only {@link HostAuthenticationToken#getHost()} {@code ""},
  * principal of {@code sysadmin}, and role of {@code app_sysadmin}.
  * @author ceefour
  */
-public class StaticAppRealm extends AuthenticatingRealm {
+public class StaticAppRealm extends AuthorizingRealm {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(StaticAppRealm.class);
-	private static final String HOST = "";
+	public static final String HOST = "!APP";
 	
 	private final String sysadminPassword;
 
 	public StaticAppRealm(String sysadminPassword) {
 		super();
-		setName("APP");
+		setName(HOST);
 		this.sysadminPassword = sysadminPassword;
 	}
 
@@ -66,6 +71,16 @@ public class StaticAppRealm extends AuthenticatingRealm {
 		} else {
 			throw new AuthenticationException("[" + getName() + "] Unsupported AuthenticationToken: "
 					+ token.getClass() + " using " + token.getPrincipal());
+		}
+	}
+
+	@Override
+	protected AuthorizationInfo doGetAuthorizationInfo(
+			PrincipalCollection principals) {
+		if ("sysadmin".equals(principals.getPrimaryPrincipal())) {
+			return new SimpleAuthorizationInfo(ImmutableSet.of("sysadmin"));
+		} else {
+			return new SimpleAuthorizationInfo();
 		}
 	}
 

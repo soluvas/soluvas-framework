@@ -424,5 +424,9 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	public Supplier<String> getInitialTenantIdSupplier() {
 		return initialTenantIdSupplier;
 	}
+	
+	public String getHotelId() {
+		return env.getRequiredProperty("hotelId");
+	}
 
 }
