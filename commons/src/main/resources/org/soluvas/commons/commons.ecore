@@ -1515,6 +1515,12 @@
         <details key="documentation" value="Can access to &quot;..user/salesorder/&quot;"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="agentSalesReportEnabled"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="For accessing &quot;..agent_sales_report/mall/&quot;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CustomerRoleStatus">
     <eLiterals name="active"/>

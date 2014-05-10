@@ -35,6 +35,7 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isQuickShopEnabled <em>Quick Shop Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isSalesOrderReportEnabled <em>Sales Order Report Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isHistorySalesOrderEnabled <em>History Sales Order Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isAgentSalesReportEnabled <em>Agent Sales Report Enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -221,6 +222,26 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * @ordered
 	 */
 	protected boolean historySalesOrderEnabled = HISTORY_SALES_ORDER_ENABLED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isAgentSalesReportEnabled() <em>Agent Sales Report Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAgentSalesReportEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean AGENT_SALES_REPORT_ENABLED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAgentSalesReportEnabled() <em>Agent Sales Report Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAgentSalesReportEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean agentSalesReportEnabled = AGENT_SALES_REPORT_ENABLED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -436,6 +457,27 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isAgentSalesReportEnabled() {
+		return agentSalesReportEnabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAgentSalesReportEnabled(boolean newAgentSalesReportEnabled) {
+		boolean oldAgentSalesReportEnabled = agentSalesReportEnabled;
+		agentSalesReportEnabled = newAgentSalesReportEnabled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED, oldAgentSalesReportEnabled, agentSalesReportEnabled));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -457,6 +499,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return isSalesOrderReportEnabled();
 			case CommonsPackage.CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED:
 				return isHistorySalesOrderEnabled();
+			case CommonsPackage.CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED:
+				return isAgentSalesReportEnabled();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -492,6 +536,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return;
 			case CommonsPackage.CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED:
 				setHistorySalesOrderEnabled((Boolean)newValue);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED:
+				setAgentSalesReportEnabled((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -529,6 +576,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED:
 				setHistorySalesOrderEnabled(HISTORY_SALES_ORDER_ENABLED_EDEFAULT);
 				return;
+			case CommonsPackage.CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED:
+				setAgentSalesReportEnabled(AGENT_SALES_REPORT_ENABLED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -559,6 +609,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return salesOrderReportEnabled != SALES_ORDER_REPORT_ENABLED_EDEFAULT;
 			case CommonsPackage.CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED:
 				return historySalesOrderEnabled != HISTORY_SALES_ORDER_ENABLED_EDEFAULT;
+			case CommonsPackage.CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED:
+				return agentSalesReportEnabled != AGENT_SALES_REPORT_ENABLED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -657,6 +709,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 		result.append(salesOrderReportEnabled);
 		result.append(", historySalesOrderEnabled: ");
 		result.append(historySalesOrderEnabled);
+		result.append(", agentSalesReportEnabled: ");
+		result.append(agentSalesReportEnabled);
 		result.append(')');
 		return result.toString();
 	}

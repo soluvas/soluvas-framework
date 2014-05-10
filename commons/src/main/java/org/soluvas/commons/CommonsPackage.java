@@ -5262,13 +5262,22 @@ public interface CommonsPackage extends EPackage {
 	int CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Agent Sales Report Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>Customer Role</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMER_ROLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 8;
+	int CUSTOMER_ROLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The operation id for the '<em>Get Schema Version</em>' operation.
@@ -8878,6 +8887,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getCustomerRole_HistorySalesOrderEnabled();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CustomerRole#isAgentSalesReportEnabled <em>Agent Sales Report Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Agent Sales Report Enabled</em>'.
+	 * @see org.soluvas.commons.CustomerRole#isAgentSalesReportEnabled()
+	 * @see #getCustomerRole()
+	 * @generated
+	 */
+	EAttribute getCustomerRole_AgentSalesReportEnabled();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11843,6 +11863,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED = eINSTANCE.getCustomerRole_HistorySalesOrderEnabled();
+
+		/**
+		 * The meta object literal for the '<em><b>Agent Sales Report Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED = eINSTANCE.getCustomerRole_AgentSalesReportEnabled();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
