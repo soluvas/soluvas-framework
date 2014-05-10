@@ -53,7 +53,7 @@ public class MongoPersonConfig implements PersonConfig {
 	public TenantBeans<PersonRepository> personRepoBeans() {
 		final boolean mongoMigrationEnabled = env.getProperty("mongoMigrationEnabled", Boolean.class, true);
 		final boolean mongoAutoExplainSlow = env.getProperty("mongoAutoExplainSlow", Boolean.class, false);
-		return new TenantBeans<PersonRepository>(MongoPersonRepository.class, tenantConfig.tenantMap(), appEventBus, tenantRepo) {
+		return new TenantBeans<PersonRepository>(MongoPersonRepository.class) {
 			@Override
 			protected MongoPersonRepository create(String tenantId, AppManifest appManifest) throws Exception {
 				final EObject sysConfig = sysConfigMapHolder.sysConfigMap().get(tenantId);

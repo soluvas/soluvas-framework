@@ -5,17 +5,23 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.annotation.Nullable;
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsException;
+import org.soluvas.commons.config.CommonsWebConfig;
+import org.soluvas.commons.config.MultiTenantConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.eventbus.EventBus;
 
@@ -46,14 +52,18 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 	private Method destroyMethod;
 	private final Class<? extends T> implClass;
 	
+	@Inject
+	private MultiTenantConfig tenantConfig;
+	@Inject @Named(CommonsWebConfig.APP_EVENT_BUS)
+	private EventBus appEventBus;
+	@Autowired(required=false)
+	private TenantRepository<?> tenantRepo;
+
 	/**
 	 * @param implClass Must be the implementation class, because {@code init()} and {@code destroy()}
 	 * 		will only be scanned once on this class.
-	 * @param initialTenantMap
-	 * @param appEventBus
 	 */
-	public TenantBeans(Class<? extends T> implClass, Map<String, AppManifest> initialTenantMap, EventBus appEventBus,
-			@Nullable TenantRepository<?> tenantRepo) {
+	public TenantBeans(Class<? extends T> implClass) {
 		super();
 		this.implClass = implClass;
 		log = LoggerFactory.getLogger(TenantBeans.class.getName() + "/" + implClass.getSimpleName());
@@ -72,7 +82,11 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 		}
 		log.info("Lifecycle methods for {}: init={} destroy={}",
 				implClass.getSimpleName(), initMethod, destroyMethod);
-		
+	}
+	
+	@PostConstruct
+	public void init() {
+		ImmutableMap<String, AppManifest> initialTenantMap = tenantConfig.tenantMap();
 		log.info("Initializing {} {} tenant beans: {}", 
 				initialTenantMap.size(), implClass.getSimpleName(), initialTenantMap.keySet());
 		for (final Map.Entry<String, AppManifest> tenant : initialTenantMap.entrySet()) {

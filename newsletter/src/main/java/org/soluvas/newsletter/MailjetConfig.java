@@ -42,7 +42,7 @@ public class MailjetConfig {
 	
 	@Bean(destroyMethod="destroy")
 	public TenantBeans<MailjetManager> mailjetMgrBeans() {
-		return new TenantBeans<MailjetManager>(MailjetManagerImpl.class, tenantConfig.tenantMap(), appEventBus, tenantRepo) {
+		return new TenantBeans<MailjetManager>(MailjetManagerImpl.class) {
 			@Override
 			protected MailjetManagerImpl create(String tenantId, AppManifest appManifest)
 					throws Exception {

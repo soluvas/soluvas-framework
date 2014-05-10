@@ -129,8 +129,6 @@ public class MultiTenantWebConfig implements TenantSelector {
 			default:
 				throw new IllegalArgumentException("Unsupported tenantMode: " + tenantMode);
 			}
-			
-			
 		} else if (requestAttrs instanceof CommandRequestAttributes) {
 			final CommandSession session = ((CommandRequestAttributes) requestAttrs).getSession();
 			try {

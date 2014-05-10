@@ -67,7 +67,7 @@ public class EmailConfig {
 		final String smtpUser = env.getRequiredProperty("emailSmtpUser");
 		final String smtpPassword = env.getRequiredProperty("emailSmtpPassword");
 		final EmailSecurity smtpSecurity = env.getRequiredProperty("emailSmtpSecurity", EmailSecurity.class);
-		return new TenantBeans<EmailManagerImpl>(EmailManagerImpl.class, tenantConfig.tenantMap(), appEventBus, tenantRepo) {
+		return new TenantBeans<EmailManagerImpl>(EmailManagerImpl.class) {
 			@Override
 			protected EmailManagerImpl create(String tenantId, AppManifest appManifest) throws Exception {
 //					final EventBus tenantEventBus = tenantConfig.eventBusMap().get(tenantId);

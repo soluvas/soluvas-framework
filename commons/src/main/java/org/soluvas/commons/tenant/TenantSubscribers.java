@@ -9,12 +9,10 @@ import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
-import org.soluvas.commons.config.CommonsWebConfig;
 import org.soluvas.commons.config.MultiTenantConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
@@ -37,8 +35,8 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 	
 	@Inject
 	private MultiTenantConfig tenantConfig;
-	@Inject @Named(CommonsWebConfig.APP_EVENT_BUS)
-	private EventBus appEventBus;
+	@Inject
+	private TenantRepository<?> tenantRepo;
 
 	@PostConstruct
 	public void init() {
@@ -46,12 +44,11 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 		for (final Map.Entry<String, AppManifest> tenant : initialTenantMap.entrySet()) {
 			createSubscribers(tenant.getKey(), tenant.getValue(), "Init");
 		}
-		appEventBus.register(this);
+		tenantRepo.addListener(this);
 	}
 	
 	@PreDestroy
 	public void destroy() throws IOException {
-		appEventBus.unregister(this);
 		final ImmutableList<String> tenantIdsRev = ImmutableList.copyOf(subscriberMap.keySet()).reverse();
 		log.info("Shutting down EventBus subscribers for {} tenants in reverse order: {}",
 				subscriberMap.size(), tenantIdsRev);
@@ -76,7 +73,8 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 				tenantEventBus.register(subscriber);
 			}
 		} catch (Exception e) {
-			throw new TenantException("Cannot create EventBus subscribers for tenant '" + tenantId + "' reason " + reason, e);
+			throw new TenantException("Cannot create EventBus subscribers for tenant '" + tenantId + "' reason " +
+					reason + ".", e);
 		}
 	}
 	

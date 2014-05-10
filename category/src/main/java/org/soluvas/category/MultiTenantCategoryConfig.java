@@ -43,7 +43,7 @@ public class MultiTenantCategoryConfig {
 	
 	@Bean(destroyMethod="destroy")
 	public TenantBeans<CategoryCatalog> categoryCatalogBeanRepo() {
-		return new TenantBeans<CategoryCatalog>(CategoryCatalogImpl.class, tenantConfig.tenantMap(), appEventBus, tenantRepo) {
+		return new TenantBeans<CategoryCatalog>(CategoryCatalogImpl.class) {
 			@Override
 			protected CategoryCatalogImpl create(String tenantId, AppManifest appManifest)
 					throws Exception {
