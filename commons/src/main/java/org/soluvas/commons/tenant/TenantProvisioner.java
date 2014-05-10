@@ -18,7 +18,7 @@ public interface TenantProvisioner<T> {
 	 */
 	T newProvisionData();
 	
-	AppManifest add(String tenantId, AppManifest appManifest, T provisionData, String trackingId);
+	AppManifest add(String tenantId, AppManifest appManifest, T provisionData, String trackingId) ;
 
 	T lookupOne(String tenantId);
 	
