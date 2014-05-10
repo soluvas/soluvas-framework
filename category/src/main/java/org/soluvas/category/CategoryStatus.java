@@ -149,8 +149,8 @@ public enum CategoryStatus implements Enumerator {
 	public static final Map<CategoryStatus, String> ICON_MAPPING = ImmutableMap.of(
 			DRAFT, "briefcase",
 			ACTIVE, "cog",
-			INACTIVE, "minus",
-			VOID, "trash");
+			INACTIVE, "minus-circle",
+			VOID, "trash-o");
 
 	/**
 	 * Returns the '<em><b>Status</b></em>' literal with the specified literal value.
