@@ -8,11 +8,11 @@ import org.soluvas.push.TrackableEvent;
  * @author atang
  *
  */
-public class PersonSubcribedToMailJetEvent extends TrackableEvent {
+public class PersonSubscribedToMailJetEvent extends TrackableEvent {
 	
 	private final Person person;
 
-	public PersonSubcribedToMailJetEvent(Person person, String trackingId) {
+	public PersonSubscribedToMailJetEvent(Person person, String trackingId) {
 		super(trackingId);
 		this.person = person;
 	}
