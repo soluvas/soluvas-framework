@@ -171,5 +171,14 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		return FluentIterable.from(objs).transform(new DBObjectToId()).toSet();
 	}
 
+	@Override
+	public ImmutableSet<String> findAllIdsByAgentSalesReportEnabled(StatusMask statusMask) {
+		final BasicDBObject query = new BasicDBObject("agentSalesReportEnabled", true);
+		augmentQueryForStatusMask(query, statusMask);
+		
+		final List<DBObject> objs = findSecondaryAsDBObjects(query, new BasicDBObject("_id", true), null, 0, 0, "findAllIdsByAgentSalesReportEnabled", statusMask);
+		return FluentIterable.from(objs).transform(new DBObjectToId()).toSet();
+	}
+
 }
 	
