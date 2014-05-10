@@ -152,6 +152,10 @@ public class TenantUtils {
 	 * @return
 	 */
 	public static <T> T selectBean(String tenantId, Map<String, ? extends T> map, Class<T> clazz) {
+		// ImmutableMap is important to make it threadsafe
+//		return Preconditions.checkNotNull(ImmutableMap.copyOf(map).get(tenantId),
+//				"No %s for tenant '%s'. %s available: %s",
+//				clazz.getSimpleName(), tenantId, map.size(), map.keySet());
 		return Preconditions.checkNotNull(map.get(tenantId),
 				"No %s for tenant '%s'. %s available: %s",
 				clazz.getSimpleName(), tenantId, map.size(), map.keySet());
