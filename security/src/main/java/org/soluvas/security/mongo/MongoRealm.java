@@ -8,8 +8,9 @@ import javax.annotation.PreDestroy;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.HostAuthenticationToken;
-import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -32,6 +33,7 @@ import org.soluvas.security.SecurityCatalog;
 import org.soluvas.security.SecurityRepository;
 import org.soluvas.security.impl.RealmUtils;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -197,21 +199,38 @@ public class MongoRealm extends AuthorizingRealm {
 				new BasicDBObject("canonicalSlug", canonicalSlug),
 				new BasicDBObject("emails.email", normalizedEmail),
 			});
-			final ImmutableSet<String> expectedStatuses = ImmutableSet.of(
-					AccountStatus.ACTIVE.name(), AccountStatus.VERIFIED.name());
-			query.put("accountStatus", new BasicDBObject("$in", expectedStatuses));
+//			query.put("accountStatus", new BasicDBObject("$in", expectedStatuses));
 			log.debug("[{}] findOne MongoDB using {} in {}@{}/{} collection {}",
 					getName(), query, dbUser, dbHosts, dbName, personCollName);
-			final DBObject found = personColl.findOne(query, new BasicDBObject("password", 1));
+			final DBObject found = personColl.findOne(query, new BasicDBObject(ImmutableMap.of(
+					"password", true, "accountStatus", true)));
 			log.debug("[{}] findOne result for person '{}' with password: {}", getName(), tokenPrincipal, found);
+			final AccountStatus accountStatus = AccountStatus.valueOf((String) found.get("accountStatus"));
 			if (found != null) {
-				final String userPrincipal = (String) found.get("_id");
-				final String userPassword = (String) found.get("password");
-				return new SimpleAuthenticationInfo(userPrincipal, userPassword, getName());
+				final ImmutableSet<String> expectedStatuses = ImmutableSet.of(
+						AccountStatus.ACTIVE.name(), AccountStatus.VERIFIED.name());
+				if (expectedStatuses.contains(accountStatus)) {
+					final String userPrincipal = (String) found.get("_id");
+					final String userPassword = (String) found.get("password");
+					return new SimpleAuthenticationInfo(userPrincipal, userPassword, getName());
+				} else {
+					log.info("[{}] User '{}' cannot log in because status is {}",
+							getName(), tokenPrincipal, accountStatus);
+					switch (accountStatus) {
+					case DRAFT:
+					case VALIDATED:
+						throw new DisabledAccountException("User '" + tokenPrincipal + "' cannot log in because status is " + accountStatus);
+					case INACTIVE:
+					case VOID:
+						throw new LockedAccountException("User '" + tokenPrincipal + "' cannot log in because status is " + accountStatus);
+					default:
+						throw new DisabledAccountException("User '" + tokenPrincipal + "' cannot log in because unknown status: " + accountStatus);
+					}
+				}
 			} else {
 				log.info("[{}] Cannot find user '{}' in collection '{}' using: {}",
 						getName(), tokenPrincipal, personCollName, query);
-				throw new IncorrectCredentialsException("[" + getName() + "] Cannot find user '" + tokenPrincipal + "' with status " + expectedStatuses);
+				throw new UnknownAccountException("[" + getName() + "] Cannot find user '" + tokenPrincipal + "'");
 			}
 		} else if (token instanceof AutologinToken) {
 			log.debug("[{}] AuthenticationInfo for {} is using AutologinToken", getName(), token.getPrincipal());
