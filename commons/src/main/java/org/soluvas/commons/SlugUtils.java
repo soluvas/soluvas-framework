@@ -72,6 +72,32 @@ public class SlugUtils {
 	}
 	
 	/**
+	 * Generates tenant IDs (without underscores).
+	 * @param name
+	 * @param suffix
+	 * @return
+	 */
+	public static String generateTenantId(String name, int suffix) {
+		Preconditions.checkNotNull(name, "name must not be null");
+		Preconditions.checkArgument(suffix >= 0, "suffix must be non-negative");
+		String base = name.replaceAll("[^A-Za-z0-9]", "").trim().toLowerCase();
+		while (base.length() < MIN_LENGTH)
+			base += "a";
+		final String suffixStr = String.valueOf(suffix);
+		return (suffix == 0) ? StringUtils.left(base, MAX_LENGTH) :
+			StringUtils.left(base, MAX_LENGTH - suffixStr.length()) + suffixStr;
+	}
+	
+	/**
+	 * Generates tenant IDs (without underscores).
+	 * @param name
+	 * @return
+	 */
+	public static String generateTenantId(String name) {
+		return generateTenantId(name, 0);
+	}
+	
+	/**
 	 * Generates article URI path segments (using '-').
 	 * @param name
 	 * @param suffix
@@ -116,6 +142,27 @@ public class SlugUtils {
 					return id;
 			}
 			throw new CommonsException("Cannot generate valid ID for '" + name + "' after 99 retries.");
+		}
+	}
+
+	/**
+	 * Retries 99 times (using suffix 2 to 99) to get a valid tenant ID, otherwise throw Exception.
+	 * @param name
+	 * @param validator
+	 * @return
+	 */
+	public static String generateValidTenantId(String name, Predicate<String> validator) {
+		Preconditions.checkNotNull(validator, "validator must not be null");
+		String id = generateTenantId(name, 0);
+		if (validator.apply(id))
+			return id;
+		else {
+			for (int i = 2; i <= 99; i++) {
+				id = generateTenantId(name, i);
+				if (validator.apply(id))
+					return id;
+			}
+			throw new CommonsException("Cannot generate valid tenant ID for '" + name + "' after 99 retries.");
 		}
 	}
 

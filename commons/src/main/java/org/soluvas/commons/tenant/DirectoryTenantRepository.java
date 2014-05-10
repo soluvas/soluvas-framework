@@ -279,7 +279,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	public synchronized AppManifest add(String tenantId, AppManifest upAppManifest, T provisionData, String trackingId) {
 		// create
 		Preconditions.checkState(whitelist == null,
-				"Cannot add tenant on whitelisting repository");
+				"To dynamically add/remove tenants, please comment 'tenantWhitelist' in commerce.properties");
 		Preconditions.checkArgument(!tenantMap.containsKey(tenantId),
 				"Cannot add existing tenant '%s'. %s existing tenants: %s",
 				tenantId, tenantMap.size(), tenantMap.keySet());
