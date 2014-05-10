@@ -151,7 +151,7 @@ public class TenantUtils {
 	 * @param clazz
 	 * @return
 	 */
-	public static <T> T selectBean(String tenantId, Map<String, T> map, Class<T> clazz) {
+	public static <T> T selectBean(String tenantId, Map<String, ? extends T> map, Class<T> clazz) {
 		return Preconditions.checkNotNull(map.get(tenantId),
 				"No %s for tenant '%s'. %s available: %s",
 				clazz.getSimpleName(), tenantId, map.size(), map.keySet());

@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.soluvas.commons.Cpu;
+import org.soluvas.commons.IdAsyncEventBus;
 import org.soluvas.commons.Network;
 import org.soluvas.commons.tenant.TenantRefImpl;
 import org.soluvas.commons.util.AppUtils;
@@ -48,7 +49,6 @@ import com.google.code.morphia.logging.MorphiaLoggerFactory;
 import com.google.code.morphia.logging.slf4j.SLF4JLogrImplFactory;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
-import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 import com.google.common.util.concurrent.ListeningExecutorService;
 
@@ -117,7 +117,7 @@ public class CommonsWebConfig {
 	 */
 	@Bean
 	public EventBus appEventBus() {
-		return new AsyncEventBus("*", networkExecutor());
+		return new IdAsyncEventBus("APP", networkExecutor());
 	}
 	
 	@Bean(destroyMethod="shutdown")

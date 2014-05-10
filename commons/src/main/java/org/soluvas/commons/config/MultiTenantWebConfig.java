@@ -159,7 +159,7 @@ public class MultiTenantWebConfig implements TenantSelector {
 				tenantRef().getTenantId(), tenantConfig.tenantMap().size(), tenantConfig.tenantMap().keySet());
 	}
 
-	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES) @Primary
+	@Bean @Scope(value="request") @Primary
 	public EventBus tenantEventBus() throws IOException {
 		return Preconditions.checkNotNull(
 				tenantConfig.eventBusMap().get(tenantRef().getTenantId()),

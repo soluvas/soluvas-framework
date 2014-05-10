@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.IdAsyncEventBus;
 import org.soluvas.commons.Network;
 import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
@@ -48,7 +49,6 @@ import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 
 /**
@@ -253,9 +253,10 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	
 	private void initEventBusMap() {
 		for (final Map.Entry<String, AppManifest> entry : tenantMap().entrySet()) {
-			final AsyncEventBus eventBus = new AsyncEventBus(entry.getKey(), networkExecutor);
+			final IdAsyncEventBus eventBus = new IdAsyncEventBus(entry.getKey(), networkExecutor);
 			eventBusMap.put(entry.getKey(), eventBus);
 		}
+		log.info("Created {} tenant EventBuses: {}", eventBusMap.size(), eventBusMap.keySet());
 	}
 
 	/**
@@ -340,7 +341,7 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 		for (Map.Entry<String, AppManifest> tenant : starting.getAddeds().entrySet()) {
 			final String tenantId = tenant.getKey();
 			// EventBus
-			final AsyncEventBus eventBus = new AsyncEventBus(tenantId, networkExecutor);
+			final IdAsyncEventBus eventBus = new IdAsyncEventBus(tenantId, networkExecutor);
 			eventBusMap.put(tenantId, eventBus);
 			log.info("Created EventBus for tenant '{}'", tenantId);
 			// dataDir

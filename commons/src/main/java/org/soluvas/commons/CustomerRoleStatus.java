@@ -5,8 +5,11 @@ package org.soluvas.commons;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.Enumerator;
+
+import com.google.common.collect.ImmutableMap;
 
 /**
  * <!-- begin-user-doc -->
@@ -107,6 +110,14 @@ public enum CustomerRoleStatus implements Enumerator {
 		};
 
 	/**
+	 * Mapping to Bootstrap glyphicons.
+	 */
+	public static final Map<CustomerRoleStatus, String> ICON_MAPPING = ImmutableMap.of(
+			ACTIVE, "cog",
+			INACTIVE, "minus",
+			VOID, "trash");
+	
+	/**
 	 * A public read-only list of all the '<em><b>Customer Role Status</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -199,6 +210,7 @@ public enum CustomerRoleStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -208,6 +220,7 @@ public enum CustomerRoleStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -217,6 +230,7 @@ public enum CustomerRoleStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}
