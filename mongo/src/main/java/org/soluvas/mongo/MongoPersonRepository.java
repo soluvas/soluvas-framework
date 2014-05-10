@@ -37,6 +37,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 /**
@@ -409,6 +410,21 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		final long count = countByQuery(query);
 		log.debug("Got {} record(s) by query: {}", count, query);
 		return count;
+	}
+
+	@Override
+	public boolean existByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds) {
+		final BasicDBObject query = new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds));
+		augmentQueryForStatusMask(query, statusMask);
+		final DBCursor cursor = primary.find(query, new BasicDBObject("_id", true));
+		return cursor.count() > 0;
+	}
+
+	@Override
+	public void setNullCustomerRole(Collection<String> customerRoleIds) {
+		primary.update(new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds)),
+				new BasicDBObject("$set", new BasicDBObject("customerRole", null))
+				, false, true);
 	}
 
 }

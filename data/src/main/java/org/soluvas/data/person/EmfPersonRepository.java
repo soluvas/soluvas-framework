@@ -376,4 +376,17 @@ public class EmfPersonRepository extends
 		return 0;
 	}
 
+	@Override
+	public boolean existByCustomerRoleIds(StatusMask statusMask,
+			Collection<String> customerRoleIds) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setNullCustomerRole(Collection<String> customerRoleIds) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -86,11 +86,15 @@ public interface PersonRepository extends
 	
 	List<Person> findAllCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds);
 	
+	boolean existByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds);
+	
 	boolean hasMatchWithSecRoleIds(String personId, Collection<String> secRoleIds);
 	
 	long count(StatusMask statusMask);
 	
 	long countByStatuses(Collection<AccountStatus> accountStatuses);
+	
+	void setNullCustomerRole(Collection<String> customerRoleIds);
 
 }
 

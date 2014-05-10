@@ -548,4 +548,17 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
+	@Override
+	public boolean existByCustomerRoleIds(StatusMask statusMask,
+			Collection<String> customerRoleIds) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setNullCustomerRole(Collection<String> customerRoleIds) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
