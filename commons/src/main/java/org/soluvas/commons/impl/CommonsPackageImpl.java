@@ -72,6 +72,7 @@ import org.soluvas.commons.Informer;
 import org.soluvas.commons.JavaClassLinked;
 import org.soluvas.commons.JavaClassStatus;
 import org.soluvas.commons.ModelNotification;
+import org.soluvas.commons.MongoSysConfig;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.NsPrefixable;
@@ -571,6 +572,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass customerRoleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mongoSysConfigEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3709,6 +3717,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMongoSysConfig() {
+		return mongoSysConfigEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMongoSysConfig_MongoUri() {
+		return (EAttribute)mongoSysConfigEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getResourceType() {
 		return resourceTypeEEnum;
@@ -4529,6 +4555,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED);
 
+		mongoSysConfigEClass = createEClass(MONGO_SYS_CONFIG);
+		createEAttribute(mongoSysConfigEClass, MONGO_SYS_CONFIG__MONGO_URI);
+
 		// Create enums
 		resourceTypeEEnum = createEEnum(RESOURCE_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -5219,6 +5248,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getCustomerRole_SalesOrderReportEnabled(), ecorePackage.getEBoolean(), "salesOrderReportEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_HistorySalesOrderEnabled(), ecorePackage.getEBoolean(), "historySalesOrderEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_AgentSalesReportEnabled(), ecorePackage.getEBoolean(), "agentSalesReportEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mongoSysConfigEClass, MongoSysConfig.class, "MongoSysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMongoSysConfig_MongoUri(), ecorePackage.getEString(), "mongoUri", null, 0, 1, MongoSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(resourceTypeEEnum, ResourceType.class, "ResourceType");
@@ -6633,6 +6665,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "For accessing \"..agent_sales_report/mall/\""
+		   });		
+		addAnnotation
+		  (getMongoSysConfig_MongoUri(), 
+		   source, 
+		   new String[] {
+			 "documentation", "MongoDB URI for all MongoDB repositories except image repositories. Each repository implementation should determine its own access patterns with regard to replica set (i.e. primary only, secondary on read, etc.)\n\nTemplated using URI Templates."
 		   });
 	}
 	

@@ -2035,6 +2035,22 @@
       <element xmi:type="ecore:EDataType" href="commons.ecore#//EFactory"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_W-wz4sxgEeO2dfgG1LprzA" x="3492" y="240"/>
     </children>
+    <children xmi:type="notation:Node" xmi:id="_pwAJQNktEeOk-PBtxQc-zg" type="1001">
+      <children xmi:type="notation:Node" xmi:id="_pwAwUNktEeOk-PBtxQc-zg" type="4001"/>
+      <children xmi:type="notation:Node" xmi:id="_pwBXYNktEeOk-PBtxQc-zg" type="5001">
+        <styles xmi:type="notation:DrawerStyle" xmi:id="_pwBXYdktEeOk-PBtxQc-zg"/>
+        <styles xmi:type="notation:SortingStyle" xmi:id="_pwBXYtktEeOk-PBtxQc-zg"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_pwBXY9ktEeOk-PBtxQc-zg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_pwBXZNktEeOk-PBtxQc-zg" type="5002">
+        <styles xmi:type="notation:DrawerStyle" xmi:id="_pwBXZdktEeOk-PBtxQc-zg"/>
+        <styles xmi:type="notation:SortingStyle" xmi:id="_pwBXZtktEeOk-PBtxQc-zg"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_pwBXZ9ktEeOk-PBtxQc-zg"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_pwAJQdktEeOk-PBtxQc-zg" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+      <element xmi:type="ecore:EClass" href="commons.ecore#//MongoSysConfig"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pwAJQtktEeOk-PBtxQc-zg" x="15530" y="368"/>
+    </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_Hn9XoSQDEeKL8qHxNHEWSw"/>
     <element xmi:type="ecore:EPackage" href="commons.ecore#/"/>
     <edges xmi:type="notation:Edge" xmi:id="_Rrm-sCSDEeKyUdMfH4dSfg" type="3003" source="_J57LECSDEeKyUdMfH4dSfg" target="_aOshcSSAEeKyUdMfH4dSfg">

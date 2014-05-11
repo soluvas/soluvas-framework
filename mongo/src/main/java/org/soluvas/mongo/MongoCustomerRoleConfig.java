@@ -4,51 +4,43 @@ import javax.inject.Inject;
 
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.MongoSysConfig;
-import org.soluvas.commons.PersonRelated;
 import org.soluvas.commons.config.SysConfigMapHolder;
 import org.soluvas.commons.tenant.TenantBeans;
-import org.soluvas.data.person.PersonRepository;
+import org.soluvas.data.customerrole.CustomerRoleRepository;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 
 /**
+ * {@link Configuration} for {@link MongoCustomerRoleRepository}.
  * @author ceefour
  */
 @Configuration
-@ComponentScan("org.soluvas.data.person.shell")
-public class MongoPersonConfig implements PersonConfig {
-	
+public class MongoCustomerRoleConfig {
+
 	@Inject
 	private Environment env;
-	/**
-	 * Note: SysConfig object must contain {@code getMongoUri()}.
-	 * @todo Better mechanism?
-	 */
 	@Inject
 	private SysConfigMapHolder<MongoSysConfig> sysConfigMapHolder;
-
-	@Override
-	@Bean(destroyMethod="destroy")
-	public TenantBeans<PersonRepository> personRepoBeans() {
+	
+	@Bean
+	public TenantBeans<CustomerRoleRepository> customerRoleBeans() {
 		final boolean mongoMigrationEnabled = env.getProperty("mongoMigrationEnabled", Boolean.class, true);
 		final boolean mongoAutoExplainSlow = env.getProperty("mongoAutoExplainSlow", Boolean.class, false);
-		return new TenantBeans<PersonRepository>(MongoPersonRepository.class) {
+		return new TenantBeans<CustomerRoleRepository>(MongoCustomerRoleRepository.class) {
 			@Override
-			protected MongoPersonRepository create(String tenantId, AppManifest appManifest) throws Exception {
+			protected CustomerRoleRepository create(String tenantId, AppManifest appManifest) throws Exception {
 				final MongoSysConfig sysConfig = sysConfigMapHolder.sysConfigMap().get(tenantId);
 				final String mongoUri = sysConfig.getMongoUri();
-				final MongoPersonRepository personRepo = new MongoPersonRepository(mongoUri, mongoMigrationEnabled, mongoAutoExplainSlow);
-				return personRepo;
+				return new MongoCustomerRoleRepository(mongoUri, mongoMigrationEnabled, mongoAutoExplainSlow);
 			}
 		};
 	}
 	
-	@Bean(name={"personRepo", "personLookup"}) @PersonRelated @Scope("prototype")
-	public PersonRepository personRepo() {
-		return personRepoBeans().getCurrent();
+	@Bean @Scope("prototype")
+	public CustomerRoleRepository customerRoleRepo() {
+		return customerRoleBeans().getCurrent();
 	}
 	
 }
