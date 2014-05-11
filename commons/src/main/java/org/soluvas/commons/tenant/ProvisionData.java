@@ -28,7 +28,7 @@ public class ProvisionData implements Serializable {
 	private String adminEmail;
 	
 	public String getOrganizationCategory() {
-		return organizationCategory;
+		return organizationCategory.toLowerCase();
 	}
 
 	public void setOrganizationCategory(String organizationCategory) {
