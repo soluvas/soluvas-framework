@@ -19,6 +19,10 @@ import org.springframework.stereotype.Service;
 @Command(scope="tenant", name="map", description="Lists tenant AppManifests using tenantMap.")
 public class TenantMapCommand extends ExtCommandSupport {
 	
+	public TenantMapCommand() {
+		super(false);
+	}
+	
 	@Override
 	protected Void doExecute() throws Exception {
 		final Map<String, AppManifest> tenantMap = appCtx.getBean("tenantMap", Map.class);

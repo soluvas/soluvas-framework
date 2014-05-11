@@ -30,6 +30,10 @@ public class TenantStartCommand extends ExtCommandSupport {
 	@Argument(name="tenantId ...", required=true, multiValued=true, description="Tenant ID(s)")
 	private String[] tenantIds;
 	
+	public TenantStartCommand() {
+		super(false);
+	}
+	
 	@Override
 	protected Void doExecute() throws Exception {
 		Preconditions.checkNotNull(tenantRepo, "TenantRepository bean must present");

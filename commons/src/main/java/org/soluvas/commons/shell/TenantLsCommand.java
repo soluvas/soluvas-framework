@@ -27,6 +27,10 @@ public class TenantLsCommand extends ExtCommandSupport {
 	@Autowired(required=false)
 	private TenantRepository<?> tenantRepo;
 	
+	public TenantLsCommand() {
+		super(false);
+	}
+	
 	@Override
 	protected Void doExecute() throws Exception {
 		Preconditions.checkNotNull(tenantRepo, "TenantRepository bean not found");

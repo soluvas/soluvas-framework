@@ -21,6 +21,11 @@ public class TenantConfigCommand extends ExtCommandSupport {
 	
 	@Argument(name="tenantId", required=true, description="Tenant ID, e.g. acme")
 	private String tenantId;
+	
+	public TenantConfigCommand() {
+		super(false);
+	}
+	
 	@Override
 	protected Object doExecute() throws Exception {
 		final Map<String, SysConfig> sysConfigMap = appCtx.getBean("sysConfigMap", Map.class);

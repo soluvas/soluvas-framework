@@ -22,6 +22,10 @@ import org.springframework.stereotype.Service;
 @Command(scope="tenant", name="configls", description="Lists tenant SysConfigs.")
 public class TenantConfigLsCommand extends ExtCommandSupport {
 	
+	public TenantConfigLsCommand() {
+		super(false);
+	}
+	
 	@Override
 	protected Object doExecute() throws Exception {
 		final Map<String, SysConfig> sysConfigMap = appCtx.getBean("sysConfigMap", Map.class);

@@ -15,6 +15,7 @@ import org.apache.felix.gogo.runtime.CommandSessionImpl;
 import org.apache.felix.gogo.runtime.threadio.ThreadIOImpl;
 import org.apache.felix.service.command.CommandSession;
 import org.apache.felix.service.threadio.ThreadIO;
+import org.slf4j.MDC;
 import org.soluvas.commons.config.MultiTenantWebConfig;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.springframework.context.annotation.Scope;
@@ -34,6 +35,11 @@ import com.google.common.base.Preconditions;
  */
 public class CommandRequestAttributes extends AbstractRequestAttributes {
 
+	/**
+	 * MDC key for {@value #MDC_TENANT_ID}.
+	 * Used by {@link org.soluvas.commons.config.MultiTenantWebConfig#tenantRef()}.
+	 */
+	public static final String MDC_TENANT_ID = "tenantId";
 	protected static final ThreadLocal<CommandRequestAttributes> threadRequestAttributes = new NamedThreadLocal<>("Command RequestAttributes");
 	
 	protected static class SimpleCommandProcessor extends CommandProcessorImpl {
@@ -61,9 +67,15 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	
 	private final CommandSession session;
 	
+	/**
+	 * <strong>Important:</strong> This automatically puts an {@link MDC} entry for {@value CommandRequestAttributes#MDC_TENANT_ID}
+	 * from <tt>{@link CommandSession}.get("tenantId")</tt> (can be {@code null}) which will be removed by {@link #requestCompleted()}.
+	 * @param session
+	 */
 	public CommandRequestAttributes(CommandSession session) {
 		super();
 		this.session = session;
+		MDC.put(CommandRequestAttributes.MDC_TENANT_ID, (String) session.get("tenantId"));
 	}
 
 	public CommandSession getSession() {
@@ -248,6 +260,12 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 
 	@Override
 	protected void updateAccessedSessionAttributes() {
+	}
+	
+	@Override
+	public void requestCompleted() {
+		super.requestCompleted();
+		MDC.remove(CommandRequestAttributes.MDC_TENANT_ID);
 	}
 
 }

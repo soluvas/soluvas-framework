@@ -53,6 +53,10 @@ public class TenantAddCommand extends ExtCommandSupport {
 	@Option(name="--adminemail", description="Admin email (default: same as general email).")
 	private String adminEmail;
 	
+	public TenantAddCommand() {
+		super(false);
+	}
+	
 	@Override
 	protected AppManifest doExecute() throws Exception {
 		Preconditions.checkNotNull(tenantRepo, "TenantRepository bean must present");

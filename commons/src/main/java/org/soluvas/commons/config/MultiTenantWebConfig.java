@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.felix.service.command.CommandSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.DataFolder;
@@ -114,27 +115,43 @@ public class MultiTenantWebConfig implements TenantSelector {
 		return hostTenant;
 	}
 	
+	/**
+	 * Gets the request-scoped {@link TenantRef}.
+	 * <strong>Important:</strong> This automatically puts an {@link MDC} entry for {@value CommandRequestAttributes#MDC_TENANT_ID}
+	 * which will be removed by {@link CommandRequestAttributes#requestCompleted()}.
+	 * @return
+	 */
 	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	@Override
 	public TenantRef tenantRef() {
 		final RequestAttributes requestAttrs = RequestOrCommandScope.currentRequestAttributes();
 		if (requestAttrs instanceof ServletRequestAttributes) {
+			final TenantRef tenant;
 			final TenantMode tenantMode = env.getRequiredProperty("tenantMode", TenantMode.class);
 			switch (tenantMode) {
 			case MULTI_PATH:
-				return getTenantRefMultiPath(getRequest(), env.getRequiredProperty("tenantEnv"));
+				tenant = getTenantRefMultiPath(getRequest(), env.getRequiredProperty("tenantEnv"));
+				break;
 			case MULTI_HOST:
-				return getTenantRefMultiHost(getRequest(), env.getRequiredProperty("tenantEnv"),
+				tenant = getTenantRefMultiHost(getRequest(), env.getRequiredProperty("tenantEnv"),
 						tenantConfig.tenantMap());
+				break;
 			default:
 				throw new IllegalArgumentException("Unsupported tenantMode: " + tenantMode);
 			}
+			MDC.put(CommandRequestAttributes.MDC_TENANT_ID, tenant.getTenantId());
+			return tenant;
 		} else if (requestAttrs instanceof CommandRequestAttributes) {
 			final CommandSession session = ((CommandRequestAttributes) requestAttrs).getSession();
 			try {
-				final String clientId = Optional.fromNullable((String) session.get("clientId")).or(tenantConfig.tenantMap().keySet().iterator().next());
-				final String tenantId = Optional.fromNullable((String) session.get("tenantId")).or(tenantConfig.tenantMap().keySet().iterator().next());
+				Preconditions.checkState(session.get("clientId") != null, 
+						"CommandSession must contain clientId, please run tenant:use command to set desired tenant");
+				Preconditions.checkState(session.get("tenantId") != null, 
+						"CommandSession must contain tenantId, please run tenant:use command to set desired tenant");
+				final String clientId = (String) session.get("clientId");
+				final String tenantId = (String) session.get("tenantId");
 				final String tenantEnv = env.getRequiredProperty("tenantEnv");
+				MDC.put(CommandRequestAttributes.MDC_TENANT_ID, tenantId);
 				return new TenantRefImpl(clientId, tenantId, tenantEnv);
 			} catch (IllegalStateException e) {
 				throw new CommonsException("Cannot get tenantRef from CommandRequestAttributes session " + session, e);
