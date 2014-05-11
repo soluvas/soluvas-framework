@@ -207,15 +207,15 @@ public class MongoRealm extends AuthorizingRealm {
 			log.debug("[{}] findOne result for person '{}' with password: {}", getName(), tokenPrincipal, found);
 			final AccountStatus accountStatus = AccountStatus.valueOf((String) found.get("accountStatus"));
 			if (found != null) {
-				final ImmutableSet<String> expectedStatuses = ImmutableSet.of(
-						AccountStatus.ACTIVE.name(), AccountStatus.VERIFIED.name());
+				final ImmutableSet<AccountStatus> expectedStatuses = ImmutableSet.of(
+						AccountStatus.ACTIVE, AccountStatus.VERIFIED);
 				if (expectedStatuses.contains(accountStatus)) {
 					final String userPrincipal = (String) found.get("_id");
 					final String userPassword = (String) found.get("password");
 					return new SimpleAuthenticationInfo(userPrincipal, userPassword, getName());
 				} else {
-					log.info("[{}] User '{}' cannot log in because status is {}",
-							getName(), tokenPrincipal, accountStatus);
+					log.info("[{}] User '{}' cannot log in because status is {}, expected {}",
+							getName(), tokenPrincipal, accountStatus, expectedStatuses);
 					switch (accountStatus) {
 					case DRAFT:
 					case VALIDATED:
