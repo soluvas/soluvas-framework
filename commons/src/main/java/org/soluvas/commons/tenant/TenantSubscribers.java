@@ -1,5 +1,6 @@
 package org.soluvas.commons.tenant;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -63,7 +64,7 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 		Preconditions.checkState(existing == null,
 				"Cannot recreate subscribers for '%s' with %s existing subscribers", 
 				tenantId, existing != null ? existing.size() : null);
-		try {
+		try (Closeable cl = CommandRequestAttributes.withMdc(tenantId)) {
 			final List<?> subscribers = onReady(tenantId, appManifest);
 			log.info("Subscribing {} objects to '{}' EventBus: {}. Reason: {}",
 					subscribers.size(), tenantId, subscribers, reason);

@@ -3,6 +3,7 @@ package org.soluvas.commons.tenant;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Collection;
@@ -104,6 +105,8 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	 * @param requestAttributes
 	 * @return 
 	 * @throw {@link IllegalStateException}
+	 * @see #withTenant(String)
+	 * @see #withMdc(String)
 	 */
 	public static Closeable withSession(CommandSession session) {
 		if (threadRequestAttributes.get() != null) {
@@ -140,8 +143,10 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	 * based on fixed {@code tenantId}, then afterwards, mark it as {@link #requestCompleted()} and removes it from the {@link ThreadLocal}.
 	 * This is required when you want to use a multitenant {@code EntityManager} from a non-web/shell-request entry point
 	 * (e.g. scheduled).
-	 * @param requestAttributes
+	 * @param tenantId
 	 * @return 
+	 * @see #withMdc(String)
+	 * @see #withSession(CommandSession)
 	 */
 	public static Closeable withTenant(String tenantId) {
 		final SimpleCommandProcessor shell = new SimpleCommandProcessor(new ThreadIOImpl());
@@ -149,6 +154,24 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 				new ByteArrayInputStream(new byte[] {}), new PrintStream(new ByteArrayOutputStream()), new PrintStream(new ByteArrayOutputStream()));
 		session.put("tenantId", tenantId);
 		return withSession(session);
+	}
+
+	/**
+	 * Returns a {@link Closeable} that temporarily sets the {@value #MDC_TENANT_ID} {@link MDC} to {@code tenantId}.
+	 * This is much more lightweight variant of {@link #withTenant(String)}.  
+	 * @param tenantId
+	 * @return
+	 * @see #withTenant(String)
+	 * @see #withSession(CommandSession) 
+	 */
+	public static Closeable withMdc(String tenantId) {
+		MDC.put(MDC_TENANT_ID, tenantId);
+		return new Closeable() {
+			@Override
+			public void close() throws IOException {
+				MDC.remove(MDC_TENANT_ID);
+			}
+		};
 	}
 
 	/* (non-Javadoc)

@@ -1,5 +1,6 @@
 package org.soluvas.commons.tenant;
 
+import java.io.Closeable;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
@@ -181,7 +182,7 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 
 		@Override
 		public String call() throws Exception {
-			try {
+			try (Closeable cl = CommandRequestAttributes.withMdc(tenantId)) {
 				log.debug("Initializing '{}' {} {}",
 						tenantId, implClass.getSimpleName(), initMethod != null ? "using init method " + initMethod : "without init method");
 				final T bean = create(tenantId, appManifest);
@@ -209,7 +210,7 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 
 		@Override
 		public String call() throws Exception {
-			try {
+			try (Closeable cl = CommandRequestAttributes.withMdc(tenantId)) {
 				log.info("Shutting down '{}' {} {}",
 						tenantId, implClass.getSimpleName(), destroyMethod != null ? "using destroymethod " + destroyMethod : "without destroy method");
 				final T bean = beanMap.get(tenantId);
