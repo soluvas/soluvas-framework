@@ -17,6 +17,7 @@ import org.eclipse.jgit.lib.RepositoryBuilder;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.transport.PushResult;
 import org.joda.time.DateTime;
+import org.soluvas.commons.tenant.TenantDirProvision;
 import org.soluvas.commons.util.GitUtils;
 import org.soluvas.data.DataException;
 
@@ -42,10 +43,15 @@ import com.google.common.eventbus.EventBus;
 public class GitXmiTermRepository extends XmiTermRepository {
 	
 	private Map<String, Repository> gitRepos;
+	private TenantDirProvision tenantDirProvision;
 	
 	public GitXmiTermRepository(String kindNsPrefix, String kindName,
-			List<URL> xmiResources, Map<String, File> xmiFiles, EventBus eventBus) {
+			List<URL> xmiResources, Map<String, File> xmiFiles, EventBus eventBus, TenantDirProvision tenantDirProvision) {
 		super(kindNsPrefix, kindName, xmiResources, xmiFiles, eventBus);
+		this.tenantDirProvision = tenantDirProvision;
+		if (tenantDirProvision == TenantDirProvision.WORKSPACE) {
+			return;
+		}
 		GitUtils.disableStrictHostKeyChecking();
 		this.gitRepos = ImmutableMap.copyOf(Maps.transformValues(xmiFiles, new Function<File, Repository>() {
 			@Override @Nullable
@@ -64,6 +70,9 @@ public class GitXmiTermRepository extends XmiTermRepository {
 	@Override
 	protected void catalogFilesChanged(Set<String> nsPrefixes, String message) {
 		super.catalogFilesChanged(nsPrefixes, message);
+		if (tenantDirProvision == TenantDirProvision.WORKSPACE) {
+			return;
+		}
 		try {
 			for (final String nsPrefix : nsPrefixes) {
 				final Repository gitRepo = Preconditions.checkNotNull(gitRepos.get(nsPrefix),

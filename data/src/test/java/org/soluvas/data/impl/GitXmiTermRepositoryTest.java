@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.tenant.TenantDirProvision;
 import org.soluvas.data.Term;
 
 import com.google.common.collect.ImmutableList;
@@ -41,7 +42,7 @@ public class GitXmiTermRepositoryTest {
 		final File xmiFile = new File(System.getProperty("user.home"), "berbatik_dev/common/base_Color-berbatik.DataCatalog.xmi");
 		repo = new GitXmiTermRepository("base", "Color", 
 				ImmutableList.of(GitXmiTermRepositoryTest.class.getResource("/org/soluvas/data/base_Color-base.DataCatalog.xmi")),
-				ImmutableMap.of("berbatik", xmiFile), new EventBus());
+				ImmutableMap.of("berbatik", xmiFile), new EventBus(), TenantDirProvision.WORKSPACE);
 	}
 
 	/**
