@@ -41,6 +41,18 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	 * Used by {@link org.soluvas.commons.config.MultiTenantWebConfig#tenantRef()}.
 	 */
 	public static final String MDC_TENANT_ID = "tenantId";
+	private static Closeable NOOP = new Closeable() {
+		@Override
+		public void close() throws IOException {
+		}
+	};
+	private static Closeable REMOVE_MDC_TENANT_ID = new Closeable() {
+		@Override
+		public void close() throws IOException {
+			MDC.remove(MDC_TENANT_ID);
+		}
+	};
+
 	protected static final ThreadLocal<CommandRequestAttributes> threadRequestAttributes = new NamedThreadLocal<>("Command RequestAttributes");
 	
 	protected static class SimpleCommandProcessor extends CommandProcessorImpl {
@@ -76,7 +88,7 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	public CommandRequestAttributes(CommandSession session) {
 		super();
 		this.session = session;
-		MDC.put(CommandRequestAttributes.MDC_TENANT_ID, (String) session.get("tenantId"));
+		MDC.put(MDC_TENANT_ID, (String) session.get("tenantId"));
 	}
 
 	public CommandSession getSession() {
@@ -118,12 +130,7 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 						"Thread '%s' requests session '%s' for tenant '%s' but already contains a CommandRequestAttributes with different session '%s' for tenant '%s', cannot set",
 						Thread.currentThread().getId(), session, tenantId, thatSession, thatTenantId));
 			}
-			return new Closeable() {
-				@Override
-				public void close() {
-					// Don't do anything, assume cleanup will be done by "parent"
-				}
-			};
+			return NOOP;
 		} else {
 			final CommandRequestAttributes reqAttrs = new CommandRequestAttributes(session);
 			threadRequestAttributes.set(reqAttrs);
@@ -155,9 +162,11 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 		session.put("tenantId", tenantId);
 		return withSession(session);
 	}
-
+	
 	/**
-	 * Returns a {@link Closeable} that temporarily sets the {@value #MDC_TENANT_ID} {@link MDC} to {@code tenantId}.
+	 * Returns a {@link Closeable} that sets the {@value #MDC_TENANT_ID} {@link MDC} to {@code tenantId},
+	 * if not already set.
+	 * If the {@value #MDC_TENANT_ID} {@link MDC} is already set, it will do nothing.
 	 * This is much more lightweight variant of {@link #withTenant(String)}.  
 	 * @param tenantId
 	 * @return
@@ -165,13 +174,12 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	 * @see #withSession(CommandSession) 
 	 */
 	public static Closeable withMdc(String tenantId) {
-		MDC.put(MDC_TENANT_ID, tenantId);
-		return new Closeable() {
-			@Override
-			public void close() throws IOException {
-				MDC.remove(MDC_TENANT_ID);
-			}
-		};
+		if (MDC.get(MDC_TENANT_ID) == null) {
+			MDC.put(MDC_TENANT_ID, tenantId);
+			return REMOVE_MDC_TENANT_ID;
+		} else {
+			return NOOP;
+		}
 	}
 
 	/* (non-Javadoc)
