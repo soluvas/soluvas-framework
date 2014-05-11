@@ -242,9 +242,9 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 		initEAttribute(getMailjetManager_ListId(), ecorePackage.getELongObject(), "listId", null, 1, 1, MailjetManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mailjetSysConfigEClass, MailjetSysConfig.class, "MailjetSysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMailjetSysConfig_MailjetApiKey(), ecorePackage.getEString(), "mailjetApiKey", null, 1, 1, MailjetSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMailjetSysConfig_MailjetSecretKey(), ecorePackage.getEString(), "mailjetSecretKey", null, 1, 1, MailjetSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMailjetSysConfig_MailjetListId(), ecorePackage.getELongObject(), "mailjetListId", null, 1, 1, MailjetSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMailjetSysConfig_MailjetApiKey(), ecorePackage.getEString(), "mailjetApiKey", null, 1, 1, MailjetSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMailjetSysConfig_MailjetSecretKey(), ecorePackage.getEString(), "mailjetSecretKey", null, 1, 1, MailjetSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMailjetSysConfig_MailjetListId(), ecorePackage.getELongObject(), "mailjetListId", null, 1, 1, MailjetSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
