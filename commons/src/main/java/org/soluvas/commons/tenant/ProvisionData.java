@@ -17,6 +17,8 @@ public class ProvisionData implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Nullable
+	private String organizationCategory;
+	@Nullable
 	private String defaultStyle;
 	@Nullable
 	private String adminPersonId;
@@ -25,6 +27,14 @@ public class ProvisionData implements Serializable {
 	@Nullable
 	private String adminEmail;
 	
+	public String getOrganizationCategory() {
+		return organizationCategory.toLowerCase();
+	}
+
+	public void setOrganizationCategory(String organizationCategory) {
+		this.organizationCategory = organizationCategory;
+	}
+
 	/**
 	 * @return the defaultStyle
 	 */
@@ -84,6 +94,8 @@ public class ProvisionData implements Serializable {
 	@Override
 	public String toString() {
 		return "ProvisionData ["
+				+ (organizationCategory != null ? "organizationCategory="
+						+ organizationCategory + ", " : "")
 				+ (defaultStyle != null ? "defaultStyle=" + defaultStyle + ", "
 						: "")
 				+ (adminPersonId != null ? "adminPersonId=" + adminPersonId
@@ -92,5 +104,5 @@ public class ProvisionData implements Serializable {
 						+ ", " : "")
 				+ (adminEmail != null ? "adminEmail=" + adminEmail : "") + "]";
 	}
-	
+
 }
