@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin
+      name="%pluginName"
+      id="org.soluvas.socmed"
+      version="1.0.0"
+      provider-name="%providerName">
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore" export="true"/>
+   </requires>
+
+   <runtime>
+      <library name=".">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated socmed -->
+      <package
+            uri="http://www.soluvas.org/schema/socmed/1.0"
+            class="org.soluvas.socmed.SocmedPackage"
+            genModel="src/main/resources/org/soluvas/socmed/socmed.genmodel"/>
+   </extension>
+
+</plugin>

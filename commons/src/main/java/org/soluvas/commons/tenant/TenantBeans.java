@@ -21,6 +21,7 @@ import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.config.CommonsWebConfig;
 import org.soluvas.commons.config.MultiTenantConfig;
+import org.soluvas.commons.config.TenantSelector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
@@ -70,6 +71,8 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 	private EventBus appEventBus;
 	@Autowired(required=false)
 	private TenantRepository<?> tenantRepo;
+	@Inject
+	private TenantSelector tenantSelector;
 	/**
 	 * Ticket: https://github.com/soluvas/soluvas-framework/issues/66
 	 * 
@@ -330,6 +333,14 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 		return Preconditions.checkNotNull( beanMap.get(tenantId),
 				"Cannot get %s bean for '%s'. %s available are: %s",
 				implClass.getSimpleName(), tenantId, tenantIds.size(), tenantIds);
+	}
+	
+	/**
+	 * Get bean based on {@link TenantSelector#tenantRef()}.
+	 * @return
+	 */
+	public T getCurrent() {
+		return get(tenantSelector.tenantRef().getTenantId());
 	}
 	
 	@Override
