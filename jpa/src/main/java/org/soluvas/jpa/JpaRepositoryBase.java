@@ -52,6 +52,7 @@ import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.domain.Sort.Order;
+import org.soluvas.data.push.RepositoryException;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.StatusAwareRepositoryBase;
 import org.springframework.beans.factory.BeanFactory;
@@ -191,24 +192,28 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	 * @throws LiquibaseException
 	 */
 	public void migrate(String tenantId) throws SQLException, LiquibaseException {
-		log.info("[{}] Migrating {}", tenantId, entityClass.getSimpleName());
-		final Contexts contexts = new Contexts();
-		final ClassLoaderResourceAccessor resourceAccessor = new ClassLoaderResourceAccessor(this.entityClass.getClassLoader());
-		try (final Connection conn = dataSource.getConnection()) {
-			// TODO: SET SCHEMA is workaround for Liquibase's not setting schema for <sql>. https://liquibase.jira.com/browse/CORE-1873
-			final Statement st = conn.createStatement();
-			st.executeUpdate("SET SCHEMA '" + tenantId + "'");
-			final JdbcConnection jdbc = new JdbcConnection(conn);
-			final PostgresDatabase db = new PostgresDatabase();
-			db.setDefaultSchemaName(tenantId);
-			try {
-				db.setConnection(jdbc);
-				final Liquibase liquibase = new Liquibase(liquibasePath, resourceAccessor, db);
-				liquibase.update(contexts);
-			} finally {
-				st.executeUpdate("SET SCHEMA 'public'");
-				db.close();
+		try (final Closeable cl = CommandRequestAttributes.withMdc(tenantId)) {
+			log.info("[{}] Migrating {}", tenantId, entityClass.getSimpleName());
+			final Contexts contexts = new Contexts();
+			final ClassLoaderResourceAccessor resourceAccessor = new ClassLoaderResourceAccessor(this.entityClass.getClassLoader());
+			try (final Connection conn = dataSource.getConnection()) {
+				// TODO: SET SCHEMA is workaround for Liquibase's not setting schema for <sql>. https://liquibase.jira.com/browse/CORE-1873
+				final Statement st = conn.createStatement();
+				st.executeUpdate("SET SCHEMA '" + tenantId + "'");
+				final JdbcConnection jdbc = new JdbcConnection(conn);
+				final PostgresDatabase db = new PostgresDatabase();
+				db.setDefaultSchemaName(tenantId);
+				try {
+					db.setConnection(jdbc);
+					final Liquibase liquibase = new Liquibase(liquibasePath, resourceAccessor, db);
+					liquibase.update(contexts);
+				} finally {
+					st.executeUpdate("SET SCHEMA 'public'");
+					db.close();
+				}
 			}
+		} catch (IOException e) {
+			throw new RepositoryException(e, "Cannot migrate '%s' using '%s': %s", tenantId, liquibasePath);
 		}
 	}
 	
