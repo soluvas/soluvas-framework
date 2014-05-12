@@ -233,7 +233,7 @@ public class LocaleContext {
 		if (total == null)
 			return null;
 		MoneyFormatter formatter = new MoneyFormatterBuilder()
-			.appendLiteral("<small class=\"muted\">").appendCurrencySymbolLocalized().appendLiteral("</small>").appendAmountLocalized()
+			.appendLiteral("<small class=\"text-muted\">").appendCurrencySymbolLocalized().appendLiteral("</small>").appendAmountLocalized()
 			.toFormatter(getLocale());
 		return formatter.print(total);
 	}

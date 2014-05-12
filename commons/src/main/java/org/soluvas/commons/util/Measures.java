@@ -34,7 +34,7 @@ public class Measures {
 	}
 
 	/**
-	 * Format measure number as HTML following Bootstrap conventions (<small> and class="muted").
+	 * Format measure number as HTML following Bootstrap conventions (<small> and class="text-muted").
 	 * @param number
 	 * @param unit
 	 * @param locale
@@ -48,9 +48,9 @@ public class Measures {
 		String str = format.format(number.doubleValue());
 		if (unit != null) {
 			if (unit == Unit.ONE) {
-				str += number.compareTo(BigDecimal.ONE) == 0 ? " <small class=\"muted\">pc</small>" : " <small class=\"muted\">pcs</small>";
+				str += number.compareTo(BigDecimal.ONE) == 0 ? " <small class=\"text-muted\">pc</small>" : " <small class=\"text-muted\">pcs</small>";
 			} else {
-				str += " <small class=\"muted\">" + unit + "</small>";
+				str += " <small class=\"text-muted\">" + unit + "</small>";
 			}
 		}
 		return str;
