@@ -139,7 +139,10 @@ public class XmiCategoryRepository
 
 	@Override
 	public long count() {
-		return Iterables.size(getFlattenedCategories());
+		final int count = Iterables.size(getFlattenedCategories());
+		log.debug("Loaded {} categories", count);
+		
+		return count;
 	}
 
 	@Override @Nullable
