@@ -13,6 +13,7 @@ import org.soluvas.commons.WebAddress;
 import com.damnhandy.uri.template.MalformedUriTemplateException;
 import com.damnhandy.uri.template.UriTemplate;
 import com.damnhandy.uri.template.VariableExpansionException;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -44,6 +45,10 @@ public class AppUtils {
 	 */
 	public static String getEmailLogoUri(AppManifest appManifest, WebAddress webAddress) {
 		try {
+			Preconditions.checkNotNull(appManifest.getEmailLogoUriTemplate(),
+					"AppManifest.emailLogoUriTemplate is required");
+			Preconditions.checkNotNull(webAddress.getImagesUri(),
+					"WebAddress.imagesUri is required");
 			final UriTemplate template = UriTemplate.fromTemplate(appManifest.getEmailLogoUriTemplate());
 			return template.expand(ImmutableMap.<String, Object>of("imagesUri", webAddress.getImagesUri())).toString();
 		} catch (MalformedUriTemplateException | VariableExpansionException e) {
