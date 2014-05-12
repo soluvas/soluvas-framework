@@ -191,7 +191,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	 * @throws SQLException
 	 * @throws LiquibaseException
 	 */
-	public void migrate(String tenantId) throws SQLException, LiquibaseException {
+	public void migrate(String tenantId) throws RepositoryException {
 		try (final Closeable cl = CommandRequestAttributes.withMdc(tenantId)) {
 			log.info("[{}] Migrating {}", tenantId, entityClass.getSimpleName());
 			final Contexts contexts = new Contexts();
@@ -212,7 +212,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 					db.close();
 				}
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			throw new RepositoryException(e, "Cannot migrate '%s' using '%s': %s", tenantId, liquibasePath);
 		}
 	}
