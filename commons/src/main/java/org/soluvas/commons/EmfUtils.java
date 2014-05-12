@@ -73,14 +73,16 @@ public class EmfUtils {
 	 */
 	public static void combineEObject(EObject current, EObject overlay) {
 		for (EAttribute attr : overlay.eClass().getEAllAttributes()) {
-			Object attrValue = overlay.eGet(attr);
-			if (attr.isChangeable() && overlay.eIsSet(attr) && attrValue != null) {
-				log.trace("Override {}.{} to {}", current.eClass().getName(), attr.getName(), attrValue);
-				try {
-					current.eSet(attr, attrValue);
-				} catch (Exception e) {
-					throw new CommonsException(String.format("Cannot override %s.%s to %s", 
-							current.eClass().getName(), attr.getName(), attrValue), e);
+			if (attr.isChangeable() && overlay.eIsSet(attr)) {
+				final Object newAttrValue = overlay.eGet(attr);
+				if (newAttrValue != null) {
+					log.trace("Override {}.{} to {}", current.eClass().getName(), attr.getName(), newAttrValue);
+					try {
+						current.eSet(attr, newAttrValue);
+					} catch (Exception e) {
+						throw new CommonsException(String.format("Cannot override %s.%s to %s", 
+								current.eClass().getName(), attr.getName(), newAttrValue), e);
+					}
 				}
 			}
 		}
