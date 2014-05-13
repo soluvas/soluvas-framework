@@ -897,16 +897,16 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 						final int nscanned = (int) explain.get("nscannedAllPlans");
 						final int efficiency = nscanned > 0 ? n * 100 / nscanned : 100;
 						final int millis = (int) explain.get("millis");
-						log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).limit(1).explain() >> {}",
+						log.warn("Slow findOne {} {} {} fields={} sort={} for method {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).limit(1).explain() >> {}",
 								coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration, 
 								nscanned, n, millis, efficiency, collName, query, fields, orderBy, explain);
 					} catch (Exception e) {
-						log.warn(String.format("Slow findOne %s %s %s fields=%s sort=%s page=%s/%s for method %s took %sms. explain() throws error",
+						log.warn(String.format("Slow findOne %s %s %s fields=%s sort=%s for method %s took %sms. explain() throws error",
 								coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration),
 								e);						
 					}
 				} else {
-					log.warn("Slow findOne {} {} {} fields={} sort={} page={}/{} for method {} took {}ms",
+					log.warn("Slow findOne {} {} {} fields={} sort={} for method {} took {}ms",
 							coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, duration);
 				}
 			}
