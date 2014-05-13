@@ -38,7 +38,7 @@ public class FacebookConfig {
 		return tenantFacebookClientBeans().getCurrent();
 	}
 	
-	@Bean
+	@Bean 
 	public TenantBeans<FacebookManager> facebookMgrBeans() {
 		return new TenantBeans<FacebookManager>(FacebookManagerImpl.class) {
 			@Override

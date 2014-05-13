@@ -2,16 +2,16 @@ package org.soluvas.twitter;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 /**
  * @author ceefour
  * @deprecated TODO: multitenant config for creating {@link TwitterManagerImpl}s
  */
 @Configuration
-@Import(TwitterConfig.class)
 @Deprecated
+@ComponentScan("org.soluvas.twitter.shell")
 public class TwitterSingleConfig {
 
 	@Value("#{soluvasProps.authTwitterConsumerKey}") String consumerKey;
