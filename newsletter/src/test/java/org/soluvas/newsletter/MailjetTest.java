@@ -17,11 +17,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.newsletter.AddContactResponse;
-import org.soluvas.newsletter.AddListContactsResponse;
-import org.soluvas.newsletter.ListContactsResponse;
-import org.soluvas.newsletter.Mailjet;
-import org.soluvas.newsletter.MailjetManager;
 import org.soluvas.newsletter.impl.MailjetManagerImpl;
 
 
@@ -64,7 +59,7 @@ public class MailjetTest {
 					}
 				});
 		
-		mailjetManager = new MailjetManagerImpl(apiKey, secretKey, listId);
+		mailjetManager = new MailjetManagerImpl(true, apiKey, secretKey, listId);
 		mailjet = new Mailjet(mailjetManager);
 	}
 

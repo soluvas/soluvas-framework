@@ -109,7 +109,7 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMailjetManager_ApiKey() {
+	public EAttribute getMailjetManager_Enabled() {
 		return (EAttribute)mailjetManagerEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -118,7 +118,7 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMailjetManager_SecretKey() {
+	public EAttribute getMailjetManager_ApiKey() {
 		return (EAttribute)mailjetManagerEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -127,8 +127,17 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMailjetManager_ListId() {
+	public EAttribute getMailjetManager_SecretKey() {
 		return (EAttribute)mailjetManagerEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMailjetManager_ListId() {
+		return (EAttribute)mailjetManagerEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -145,7 +154,7 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMailjetSysConfig_MailjetApiKey() {
+	public EAttribute getMailjetSysConfig_MailjetEnabled() {
 		return (EAttribute)mailjetSysConfigEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -154,7 +163,7 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMailjetSysConfig_MailjetSecretKey() {
+	public EAttribute getMailjetSysConfig_MailjetApiKey() {
 		return (EAttribute)mailjetSysConfigEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -163,8 +172,17 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMailjetSysConfig_MailjetListId() {
+	public EAttribute getMailjetSysConfig_MailjetSecretKey() {
 		return (EAttribute)mailjetSysConfigEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMailjetSysConfig_MailjetListId() {
+		return (EAttribute)mailjetSysConfigEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -196,11 +214,13 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 
 		// Create classes and their features
 		mailjetManagerEClass = createEClass(MAILJET_MANAGER);
+		createEAttribute(mailjetManagerEClass, MAILJET_MANAGER__ENABLED);
 		createEAttribute(mailjetManagerEClass, MAILJET_MANAGER__API_KEY);
 		createEAttribute(mailjetManagerEClass, MAILJET_MANAGER__SECRET_KEY);
 		createEAttribute(mailjetManagerEClass, MAILJET_MANAGER__LIST_ID);
 
 		mailjetSysConfigEClass = createEClass(MAILJET_SYS_CONFIG);
+		createEAttribute(mailjetSysConfigEClass, MAILJET_SYS_CONFIG__MAILJET_ENABLED);
 		createEAttribute(mailjetSysConfigEClass, MAILJET_SYS_CONFIG__MAILJET_API_KEY);
 		createEAttribute(mailjetSysConfigEClass, MAILJET_SYS_CONFIG__MAILJET_SECRET_KEY);
 		createEAttribute(mailjetSysConfigEClass, MAILJET_SYS_CONFIG__MAILJET_LIST_ID);
@@ -237,11 +257,13 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(mailjetManagerEClass, MailjetManager.class, "MailjetManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMailjetManager_Enabled(), ecorePackage.getEBoolean(), "enabled", null, 1, 1, MailjetManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMailjetManager_ApiKey(), ecorePackage.getEString(), "apiKey", null, 1, 1, MailjetManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMailjetManager_SecretKey(), ecorePackage.getEString(), "secretKey", null, 1, 1, MailjetManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMailjetManager_ListId(), ecorePackage.getELongObject(), "listId", null, 1, 1, MailjetManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mailjetSysConfigEClass, MailjetSysConfig.class, "MailjetSysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMailjetSysConfig_MailjetEnabled(), ecorePackage.getEBooleanObject(), "mailjetEnabled", null, 1, 1, MailjetSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMailjetSysConfig_MailjetApiKey(), ecorePackage.getEString(), "mailjetApiKey", null, 1, 1, MailjetSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMailjetSysConfig_MailjetSecretKey(), ecorePackage.getEString(), "mailjetSecretKey", null, 1, 1, MailjetSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMailjetSysConfig_MailjetListId(), ecorePackage.getELongObject(), "mailjetListId", null, 1, 1, MailjetSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -296,7 +318,7 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 		  (getMailjetSysConfig_MailjetListId(), 
 		   source, 
 		   new String[] {
-			 "documentation", "Mailjet List ID."
+			 "documentation", "Mailjet List ID. To get it, use this command:\n\n<pre>\ncurl  --user $API_KEY:$SECRET_KEY api.mailjet.com/0.1/listsAll | xmllint --format -\n</pre>\n"
 		   });
 	}
 

@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import com.google.common.base.Strings;
+
 /**
  * @author ceefour
  * @deprecated use {@link MailjetConfig}
@@ -21,7 +23,7 @@ public class MailjetSingleConfig {
 	
 	@Bean
 	public MailjetManagerImpl mailjetMgr() {
-		return new MailjetManagerImpl(apiKey, secretKey, listId);
+		return new MailjetManagerImpl(!Strings.isNullOrEmpty(apiKey), apiKey, secretKey, listId);
 	}
 
 }

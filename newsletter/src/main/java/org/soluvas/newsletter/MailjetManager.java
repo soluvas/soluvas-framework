@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.soluvas.newsletter.MailjetManager#isEnabled <em>Enabled</em>}</li>
  *   <li>{@link org.soluvas.newsletter.MailjetManager#getApiKey <em>Api Key</em>}</li>
  *   <li>{@link org.soluvas.newsletter.MailjetManager#getSecretKey <em>Secret Key</em>}</li>
  *   <li>{@link org.soluvas.newsletter.MailjetManager#getListId <em>List Id</em>}</li>
@@ -23,6 +24,21 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface MailjetManager extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Enabled</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Enabled</em>' attribute.
+	 * @see org.soluvas.newsletter.NewsletterPackage#getMailjetManager_Enabled()
+	 * @model required="true" changeable="false"
+	 * @generated
+	 */
+	boolean isEnabled();
+
 	/**
 	 * Returns the value of the '<em><b>Api Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->

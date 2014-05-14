@@ -8,10 +8,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.soluvas.newsletter.MailjetManager;
 import org.soluvas.newsletter.NewsletterPackage;
-import org.soluvas.newsletter.MailjetPackage;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Service;
+
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 
 
 /**
@@ -21,6 +20,7 @@ import org.springframework.stereotype.Service;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.soluvas.newsletter.impl.MailjetManagerImpl#isEnabled <em>Enabled</em>}</li>
  *   <li>{@link org.soluvas.newsletter.impl.MailjetManagerImpl#getApiKey <em>Api Key</em>}</li>
  *   <li>{@link org.soluvas.newsletter.impl.MailjetManagerImpl#getSecretKey <em>Secret Key</em>}</li>
  *   <li>{@link org.soluvas.newsletter.impl.MailjetManagerImpl#getListId <em>List Id</em>}</li>
@@ -29,8 +29,27 @@ import org.springframework.stereotype.Service;
  *
  * @generated
  */
-@Service @Lazy
 public class MailjetManagerImpl extends EObjectImpl implements MailjetManager {
+	/**
+	 * The default value of the '{@link #isEnabled() <em>Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ENABLED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isEnabled() <em>Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean enabled = ENABLED_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getApiKey() <em>Api Key</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -100,14 +119,17 @@ public class MailjetManagerImpl extends EObjectImpl implements MailjetManager {
 	}
 	
 	@Inject
-	public MailjetManagerImpl(
-			@Value("#{soluvasProps.mailjetApiKey}") String apiKey,
-			@Value("#{soluvasProps.mailjetSecretKey}") String secretKey, 
-			@Value("#{soluvasProps.mailjetListId}") Long listId) {
+	public MailjetManagerImpl(boolean enabled,
+			String apiKey, String secretKey, Long listId) {
 		super();
+		this.enabled = enabled;
 		this.apiKey = apiKey;
 		this.secretKey = secretKey;
 		this.listId = listId;
+		if (enabled) { 
+			Preconditions.checkArgument(!Strings.isNullOrEmpty(apiKey), "If Mailjet is enabled, apiKey must be provided");
+			Preconditions.checkArgument(!Strings.isNullOrEmpty(secretKey), "If Mailjet is enabled, secretKey must be provided");
+		}
 	}
 
 	/**
@@ -118,6 +140,16 @@ public class MailjetManagerImpl extends EObjectImpl implements MailjetManager {
 	@Override
 	protected EClass eStaticClass() {
 		return NewsletterPackage.Literals.MAILJET_MANAGER;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isEnabled() {
+		return enabled;
 	}
 
 	/**
@@ -158,6 +190,8 @@ public class MailjetManagerImpl extends EObjectImpl implements MailjetManager {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case NewsletterPackage.MAILJET_MANAGER__ENABLED:
+				return isEnabled();
 			case NewsletterPackage.MAILJET_MANAGER__API_KEY:
 				return getApiKey();
 			case NewsletterPackage.MAILJET_MANAGER__SECRET_KEY:
@@ -176,6 +210,8 @@ public class MailjetManagerImpl extends EObjectImpl implements MailjetManager {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case NewsletterPackage.MAILJET_MANAGER__ENABLED:
+				return enabled != ENABLED_EDEFAULT;
 			case NewsletterPackage.MAILJET_MANAGER__API_KEY:
 				return API_KEY_EDEFAULT == null ? apiKey != null : !API_KEY_EDEFAULT.equals(apiKey);
 			case NewsletterPackage.MAILJET_MANAGER__SECRET_KEY:
@@ -196,7 +232,9 @@ public class MailjetManagerImpl extends EObjectImpl implements MailjetManager {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (apiKey: ");
+		result.append(" (enabled: ");
+		result.append(enabled);
+		result.append(", apiKey: ");
 		result.append(apiKey);
 		result.append(", secretKey: ");
 		result.append(secretKey);

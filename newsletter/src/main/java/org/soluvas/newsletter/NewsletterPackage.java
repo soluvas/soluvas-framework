@@ -65,13 +65,22 @@ public interface NewsletterPackage extends EPackage {
 	int MAILJET_MANAGER = 0;
 
 	/**
+	 * The feature id for the '<em><b>Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAILJET_MANAGER__ENABLED = 0;
+
+	/**
 	 * The feature id for the '<em><b>Api Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAILJET_MANAGER__API_KEY = 0;
+	int MAILJET_MANAGER__API_KEY = 1;
 
 	/**
 	 * The feature id for the '<em><b>Secret Key</b></em>' attribute.
@@ -80,7 +89,7 @@ public interface NewsletterPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAILJET_MANAGER__SECRET_KEY = 1;
+	int MAILJET_MANAGER__SECRET_KEY = 2;
 
 	/**
 	 * The feature id for the '<em><b>List Id</b></em>' attribute.
@@ -89,7 +98,7 @@ public interface NewsletterPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAILJET_MANAGER__LIST_ID = 2;
+	int MAILJET_MANAGER__LIST_ID = 3;
 
 	/**
 	 * The number of structural features of the '<em>Mailjet Manager</em>' class.
@@ -98,7 +107,7 @@ public interface NewsletterPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAILJET_MANAGER_FEATURE_COUNT = 3;
+	int MAILJET_MANAGER_FEATURE_COUNT = 4;
 
 
 	/**
@@ -112,13 +121,22 @@ public interface NewsletterPackage extends EPackage {
 	int MAILJET_SYS_CONFIG = 1;
 
 	/**
+	 * The feature id for the '<em><b>Mailjet Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAILJET_SYS_CONFIG__MAILJET_ENABLED = 0;
+
+	/**
 	 * The feature id for the '<em><b>Mailjet Api Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAILJET_SYS_CONFIG__MAILJET_API_KEY = 0;
+	int MAILJET_SYS_CONFIG__MAILJET_API_KEY = 1;
 
 	/**
 	 * The feature id for the '<em><b>Mailjet Secret Key</b></em>' attribute.
@@ -127,7 +145,7 @@ public interface NewsletterPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAILJET_SYS_CONFIG__MAILJET_SECRET_KEY = 1;
+	int MAILJET_SYS_CONFIG__MAILJET_SECRET_KEY = 2;
 
 	/**
 	 * The feature id for the '<em><b>Mailjet List Id</b></em>' attribute.
@@ -136,7 +154,7 @@ public interface NewsletterPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAILJET_SYS_CONFIG__MAILJET_LIST_ID = 2;
+	int MAILJET_SYS_CONFIG__MAILJET_LIST_ID = 3;
 
 	/**
 	 * The number of structural features of the '<em>Mailjet Sys Config</em>' class.
@@ -145,7 +163,7 @@ public interface NewsletterPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAILJET_SYS_CONFIG_FEATURE_COUNT = 3;
+	int MAILJET_SYS_CONFIG_FEATURE_COUNT = 4;
 
 
 	/**
@@ -157,6 +175,17 @@ public interface NewsletterPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMailjetManager();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.newsletter.MailjetManager#isEnabled <em>Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Enabled</em>'.
+	 * @see org.soluvas.newsletter.MailjetManager#isEnabled()
+	 * @see #getMailjetManager()
+	 * @generated
+	 */
+	EAttribute getMailjetManager_Enabled();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.newsletter.MailjetManager#getApiKey <em>Api Key</em>}'.
@@ -200,6 +229,17 @@ public interface NewsletterPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMailjetSysConfig();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.newsletter.MailjetSysConfig#getMailjetEnabled <em>Mailjet Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Mailjet Enabled</em>'.
+	 * @see org.soluvas.newsletter.MailjetSysConfig#getMailjetEnabled()
+	 * @see #getMailjetSysConfig()
+	 * @generated
+	 */
+	EAttribute getMailjetSysConfig_MailjetEnabled();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.newsletter.MailjetSysConfig#getMailjetApiKey <em>Mailjet Api Key</em>}'.
@@ -267,6 +307,14 @@ public interface NewsletterPackage extends EPackage {
 		EClass MAILJET_MANAGER = eINSTANCE.getMailjetManager();
 
 		/**
+		 * The meta object literal for the '<em><b>Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAILJET_MANAGER__ENABLED = eINSTANCE.getMailjetManager_Enabled();
+
+		/**
 		 * The meta object literal for the '<em><b>Api Key</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -299,6 +347,14 @@ public interface NewsletterPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MAILJET_SYS_CONFIG = eINSTANCE.getMailjetSysConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Mailjet Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAILJET_SYS_CONFIG__MAILJET_ENABLED = eINSTANCE.getMailjetSysConfig_MailjetEnabled();
 
 		/**
 		 * The meta object literal for the '<em><b>Mailjet Api Key</b></em>' attribute feature.

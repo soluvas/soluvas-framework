@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.soluvas.newsletter.MailjetSysConfig#getMailjetEnabled <em>Mailjet Enabled</em>}</li>
  *   <li>{@link org.soluvas.newsletter.MailjetSysConfig#getMailjetApiKey <em>Mailjet Api Key</em>}</li>
  *   <li>{@link org.soluvas.newsletter.MailjetSysConfig#getMailjetSecretKey <em>Mailjet Secret Key</em>}</li>
  *   <li>{@link org.soluvas.newsletter.MailjetSysConfig#getMailjetListId <em>Mailjet List Id</em>}</li>
@@ -23,6 +24,32 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface MailjetSysConfig extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Mailjet Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mailjet Enabled</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mailjet Enabled</em>' attribute.
+	 * @see #setMailjetEnabled(Boolean)
+	 * @see org.soluvas.newsletter.NewsletterPackage#getMailjetSysConfig_MailjetEnabled()
+	 * @model required="true"
+	 * @generated
+	 */
+	Boolean getMailjetEnabled();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.newsletter.MailjetSysConfig#getMailjetEnabled <em>Mailjet Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Mailjet Enabled</em>' attribute.
+	 * @see #getMailjetEnabled()
+	 * @generated
+	 */
+	void setMailjetEnabled(Boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Mailjet Api Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -78,7 +105,12 @@ public interface MailjetSysConfig extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Mailjet List ID.
+	 * Mailjet List ID. To get it, use this command:
+	 * 
+	 * <pre>
+	 * curl  --user $API_KEY:$SECRET_KEY api.mailjet.com/0.1/listsAll | xmllint --format -
+	 * </pre>
+	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Mailjet List Id</em>' attribute.
 	 * @see #setMailjetListId(Long)

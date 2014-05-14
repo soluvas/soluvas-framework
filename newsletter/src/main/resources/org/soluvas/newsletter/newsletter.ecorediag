@@ -3,6 +3,10 @@
   <children xmi:type="notation:Node" xmi:id="_NANiAHmzEeKxeO_f6w_1jg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_NAOwIHmzEeKxeO_f6w_1jg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_NAPXMHmzEeKxeO_f6w_1jg" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_m5FtgNtREeOZIvfE1af2bw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="newsletter.ecore#//MailjetManager/enabled"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_m5FtgdtREeOZIvfE1af2bw"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_NAP-QHmzEeKxeO_f6w_1jg" type="2001">
         <element xmi:type="ecore:EAttribute" href="newsletter.ecore#//MailjetManager/apiKey"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_NAP-QXmzEeKxeO_f6w_1jg"/>
@@ -31,6 +35,22 @@
   <children xmi:type="notation:Node" xmi:id="_pmE_oM5VEeOlGqSufrtIMw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_pmFmsM5VEeOlGqSufrtIMw" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_pmFmsc5VEeOlGqSufrtIMw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_heKV4NtREeOZIvfE1af2bw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="newsletter.ecore#//MailjetSysConfig/mailjetEnabled"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_heKV4dtREeOZIvfE1af2bw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ZnetgNtREeOZIvfE1af2bw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="newsletter.ecore#//MailjetSysConfig/mailjetApiKey"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ZnetgdtREeOZIvfE1af2bw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ZngisNtREeOZIvfE1af2bw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="newsletter.ecore#//MailjetSysConfig/mailjetSecretKey"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ZngisdtREeOZIvfE1af2bw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Znhw0NtREeOZIvfE1af2bw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="newsletter.ecore#//MailjetSysConfig/mailjetListId"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Znhw0dtREeOZIvfE1af2bw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_pmFmss5VEeOlGqSufrtIMw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_pmFms85VEeOlGqSufrtIMw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_pmFmtM5VEeOlGqSufrtIMw"/>

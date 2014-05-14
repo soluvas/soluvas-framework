@@ -47,8 +47,8 @@ public class MailjetConfig {
 			protected MailjetManagerImpl create(String tenantId, AppManifest appManifest)
 					throws Exception {
 				final MailjetSysConfig sysConfig = TenantUtils.selectBean(tenantId, sysConfigMapHolder.sysConfigMap(), MailjetSysConfig.class);
-				return new MailjetManagerImpl(sysConfig.getMailjetApiKey(), sysConfig.getMailjetSecretKey(),
-						sysConfig.getMailjetListId());
+				return new MailjetManagerImpl(sysConfig.getMailjetEnabled() != null && sysConfig.getMailjetEnabled(),
+						sysConfig.getMailjetApiKey(), sysConfig.getMailjetSecretKey(), sysConfig.getMailjetListId());
 			}
 		};
 	}
