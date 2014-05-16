@@ -389,4 +389,10 @@ public class EmfPersonRepository extends
 		
 	}
 
+	@Override
+	public String findCustomerRoleByPersonId(String personId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

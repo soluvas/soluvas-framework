@@ -44,7 +44,7 @@ public class MongoPersonRepositoryTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		personRepo = new MongoPersonRepository("mongodb://127.0.0.1:27017/tuneeca_dev", false, true);
+		personRepo = new MongoPersonRepository("mongodb://127.0.0.1:27017/demo_dev", false, true);
 	}
 	
 	@Test
@@ -112,6 +112,12 @@ public class MongoPersonRepositoryTest {
 		log.debug("result findone person {}", person);
 //		assertNull("Rules must be not null", person.getCustomerRole());
 		
+	}
+	
+	@Test
+	public void findCustomerRole() {
+		final String personId = "listriana_suherman";
+		final String customerRole = personRepo.findCustomerRoleByPersonId(personId);
 	}
 	
 }

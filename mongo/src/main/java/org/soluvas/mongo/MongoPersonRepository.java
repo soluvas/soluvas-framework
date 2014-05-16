@@ -252,7 +252,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	public <S extends Person, K extends Serializable> S lookupOne(
 			StatusMask statusMask, LookupKey lookupKey, K key)
 			throws EntityLookupException {
-		throw new UnsupportedOperationException("to be implemented");
+		final BasicDBObject query = new BasicDBObject(lookupKey.name(), key);
+		augmentQueryForStatusMask(query, statusMask);
+		return (S) findOneByQuery(query);
 	}
 
 	@Override
@@ -425,6 +427,16 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		primary.update(new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds)),
 				new BasicDBObject("$set", new BasicDBObject("customerRole", null))
 				, false, true);
+	}
+
+	@Override
+	public String findCustomerRoleByPersonId(String personId) {
+		final BasicDBObject query = new BasicDBObject("_id", personId);
+		final BasicDBObject field = new BasicDBObject("customerRole", 1);
+		final DBObject object = findOnePrimary(query, field, "findCustomerRoleByPersonId", personId);
+		final String customerRole = (String) object.get("customerRole");
+		log.debug("Got customerRole {} by personID {}", customerRole, personId);
+		return customerRole;
 	}
 
 }

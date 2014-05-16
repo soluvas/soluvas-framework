@@ -95,6 +95,9 @@ public interface PersonRepository extends
 	long countByStatuses(Collection<AccountStatus> accountStatuses);
 	
 	void setNullCustomerRole(Collection<String> customerRoleIds);
+	
+	@Nullable
+	String findCustomerRoleByPersonId(String personId);
 
 }
 
