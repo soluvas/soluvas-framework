@@ -159,6 +159,7 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 		final SimpleCommandProcessor shell = new SimpleCommandProcessor(new ThreadIOImpl());
 		final SimpleCommandSession session = new SimpleCommandSession(shell, 
 				new ByteArrayInputStream(new byte[] {}), new PrintStream(new ByteArrayOutputStream()), new PrintStream(new ByteArrayOutputStream()));
+		session.put("clientId", tenantId);
 		session.put("tenantId", tenantId);
 		return withSession(session);
 	}
