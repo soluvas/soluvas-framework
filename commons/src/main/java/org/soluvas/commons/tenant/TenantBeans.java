@@ -100,7 +100,7 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 			throw new CommonsException("Cannot probe class " + implClass.getName(), e);
 		}
 		try {
-			implClass.getMethod("destroy");
+			destroyMethod = implClass.getMethod("destroy");
 		} catch (NoSuchMethodException e) {
 		} catch (SecurityException e) {
 			throw new CommonsException("Cannot probe class " + implClass.getName(), e);
