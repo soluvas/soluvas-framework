@@ -1536,4 +1536,8 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Mass" instanceClassName="javax.measure.quantity.Mass"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Length" instanceClassName="javax.measure.quantity.Length"
+      serializable="false"/>
 </ecore:EPackage>

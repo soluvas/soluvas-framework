@@ -5799,6 +5799,26 @@ public interface CommonsPackage extends EPackage {
 	int EFACTORY = 109;
 
 	/**
+	 * The meta object id for the '<em>Mass</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see javax.measure.quantity.Mass
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMass()
+	 * @generated
+	 */
+	int MASS = 110;
+
+	/**
+	 * The meta object id for the '<em>Length</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see javax.measure.quantity.Length
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLength()
+	 * @generated
+	 */
+	int LENGTH = 111;
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9437,6 +9457,28 @@ public interface CommonsPackage extends EPackage {
 	EDataType getEFactory();
 
 	/**
+	 * Returns the meta object for data type '{@link javax.measure.quantity.Mass <em>Mass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Mass</em>'.
+	 * @see javax.measure.quantity.Mass
+	 * @model instanceClass="javax.measure.quantity.Mass" serializeable="false"
+	 * @generated
+	 */
+	EDataType getMass();
+
+	/**
+	 * Returns the meta object for data type '{@link javax.measure.quantity.Length <em>Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Length</em>'.
+	 * @see javax.measure.quantity.Length
+	 * @model instanceClass="javax.measure.quantity.Length" serializeable="false"
+	 * @generated
+	 */
+	EDataType getLength();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12397,6 +12439,26 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType EFACTORY = eINSTANCE.getEFactory();
+
+		/**
+		 * The meta object literal for the '<em>Mass</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see javax.measure.quantity.Mass
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMass()
+		 * @generated
+		 */
+		EDataType MASS = eINSTANCE.getMass();
+
+		/**
+		 * The meta object literal for the '<em>Length</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see javax.measure.quantity.Length
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getLength()
+		 * @generated
+		 */
+		EDataType LENGTH = eINSTANCE.getLength();
 
 	}
 

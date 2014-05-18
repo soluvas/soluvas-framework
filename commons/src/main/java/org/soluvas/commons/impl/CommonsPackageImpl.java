@@ -12,6 +12,8 @@ import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Set;
 import javax.measure.Measurable;
+import javax.measure.quantity.Length;
+import javax.measure.quantity.Mass;
 import javax.measure.quantity.Quantity;
 import javax.measure.quantity.Temperature;
 import javax.measure.unit.Unit;
@@ -894,6 +896,20 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EDataType eFactoryEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType massEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType lengthEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -4174,6 +4190,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getMass() {
+		return massEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getLength() {
+		return lengthEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
@@ -4606,6 +4640,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		localTimeEDataType = createEDataType(LOCAL_TIME);
 		exceptionEDataType = createEDataType(EXCEPTION);
 		eFactoryEDataType = createEDataType(EFACTORY);
+		massEDataType = createEDataType(MASS);
+		lengthEDataType = createEDataType(LENGTH);
 	}
 
 	/**
@@ -5359,6 +5395,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(localTimeEDataType, LocalTime.class, "LocalTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(exceptionEDataType, Exception.class, "Exception", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(eFactoryEDataType, EFactory.class, "EFactory", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(massEDataType, Mass.class, "Mass", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(lengthEDataType, Length.class, "Length", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

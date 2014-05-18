@@ -2051,6 +2051,20 @@
       <element xmi:type="ecore:EClass" href="commons.ecore#//MongoSysConfig"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pwAJQtktEeOk-PBtxQc-zg" x="15530" y="368"/>
     </children>
+    <children xmi:type="notation:Node" xmi:id="_bkWhQN5vEeOPaeLtEq-rmQ" type="1004">
+      <children xmi:type="notation:Node" xmi:id="_bkY9gN5vEeOPaeLtEq-rmQ" type="4008"/>
+      <children xmi:type="notation:Node" xmi:id="_bkY9gd5vEeOPaeLtEq-rmQ" type="4009"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_bkXIUN5vEeOPaeLtEq-rmQ" fontColor="4210752" fontName="OxygenSans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+      <element xmi:type="ecore:EDataType" href="commons.ecore#//Mass"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bkXIUd5vEeOPaeLtEq-rmQ" x="3930" y="738"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_f_UQsN5vEeOPaeLtEq-rmQ" type="1004">
+      <children xmi:type="notation:Node" xmi:id="_f_U3wN5vEeOPaeLtEq-rmQ" type="4008"/>
+      <children xmi:type="notation:Node" xmi:id="_f_U3wd5vEeOPaeLtEq-rmQ" type="4009"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_f_UQsd5vEeOPaeLtEq-rmQ" fontColor="4210752" fontName="OxygenSans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+      <element xmi:type="ecore:EDataType" href="commons.ecore#//Length"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_f_UQst5vEeOPaeLtEq-rmQ" x="3904" y="819"/>
+    </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_Hn9XoSQDEeKL8qHxNHEWSw"/>
     <element xmi:type="ecore:EPackage" href="commons.ecore#/"/>
     <edges xmi:type="notation:Edge" xmi:id="_Rrm-sCSDEeKyUdMfH4dSfg" type="3003" source="_J57LECSDEeKyUdMfH4dSfg" target="_aOshcSSAEeKyUdMfH4dSfg">
