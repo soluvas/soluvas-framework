@@ -115,14 +115,6 @@
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/organizationAddress"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_iPogoqAUEeKZuq8VblqnLg"/>
         </children>
-        <children xmi:type="notation:Node" xmi:id="_zgzGcKAUEeKZuq8VblqnLg" type="2001">
-          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/letterSalutation"/>
-          <layoutConstraint xmi:type="notation:Location" xmi:id="_zgzGcaAUEeKZuq8VblqnLg"/>
-        </children>
-        <children xmi:type="notation:Node" xmi:id="_iPkPMaAUEeKZuq8VblqnLg" type="2001">
-          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/letterClosing"/>
-          <layoutConstraint xmi:type="notation:Location" xmi:id="_iPkPMqAUEeKZuq8VblqnLg"/>
-        </children>
         <children xmi:type="notation:Node" xmi:id="_hr6yQa2LEeKZB8-2n6IToQ" type="2001">
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/defaultTimeZoneId"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_hr6yQq2LEeKZB8-2n6IToQ"/>
@@ -139,10 +131,6 @@
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/defaultCurrency"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="__e7bUbn9EeKW_PX3no0XYQ"/>
         </children>
-        <children xmi:type="notation:Node" xmi:id="_ALBkscHzEeKDZ7Yh48Wjow" type="2001">
-          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/emailLogoUriTemplate"/>
-          <layoutConstraint xmi:type="notation:Location" xmi:id="_ALBkssHzEeKDZ7Yh48Wjow"/>
-        </children>
         <children xmi:type="notation:Node" xmi:id="_wKMsELcsEeOXnKs8cUDr5w" type="2001">
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/defaultLanguageTag"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_wKMsEbcsEeOXnKs8cUDr5w"/>
@@ -150,6 +138,22 @@
         <children xmi:type="notation:Node" xmi:id="_jwar8J7CEeOo-pfIy7koNQ" type="2001">
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/defaultCountryCode"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_jwar8Z7CEeOo-pfIy7koNQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_gzd7YN54EeOPaeLtEq-rmQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/defaultCategoryUName"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_gzd7Yd54EeOPaeLtEq-rmQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_ALBkscHzEeKDZ7Yh48Wjow" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/emailLogoUriTemplate"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_ALBkssHzEeKDZ7Yh48Wjow"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_zgzGcKAUEeKZuq8VblqnLg" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/letterSalutation"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zgzGcaAUEeKZuq8VblqnLg"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_iPkPMaAUEeKZuq8VblqnLg" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/letterClosing"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_iPkPMqAUEeKZuq8VblqnLg"/>
         </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_J59AQSSDEeKyUdMfH4dSfg"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_J59AQiSDEeKyUdMfH4dSfg"/>

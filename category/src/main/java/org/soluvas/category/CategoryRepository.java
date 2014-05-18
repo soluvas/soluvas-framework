@@ -8,6 +8,8 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 
+import com.google.common.base.Optional;
+
 /**
  * {@link PagingAndSortingRepository} for {@link Category}.
  * @author ceefour
@@ -23,5 +25,12 @@ public interface CategoryRepository extends
 	Page<Category> findAllOriginalByStatus(Collection<CategoryStatus> statuses, Pageable pageable);
 	
 	Page<Category> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level, boolean notForHasChildren, Pageable pageable);
+
+	/**
+	 * Return the first {@link CategoryStatus#ACTIVE} leaf {@link Category}.
+	 * @return
+	 * @see id.co.bippo.product.hand.ProductCreator
+	 */
+	Optional<Category> getFirstActiveLeaf();
 
 }

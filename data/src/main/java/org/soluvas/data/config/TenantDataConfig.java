@@ -23,7 +23,6 @@ import org.soluvas.data.impl.DataCatalogImpl;
 import org.soluvas.data.impl.MixinCatalogImpl;
 import org.soluvas.data.impl.MixinManagerImpl;
 import org.soluvas.data.impl.TermManagerImpl;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -44,8 +43,6 @@ public class TenantDataConfig {
 	private static final Logger log = LoggerFactory
 			.getLogger(TenantDataConfig.class);
 	
-	@Inject
-	private BeanFactory beanFactory;
 	@Inject
 	private MultiTenantConfig tenantConfig;
 	@Inject

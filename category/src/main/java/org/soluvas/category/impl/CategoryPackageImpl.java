@@ -122,6 +122,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 
 		// Initialize simple dependencies
 		CommonsPackage.eINSTANCE.eClass();
+		EcorePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theCategoryPackage.createPackageContents();
@@ -499,7 +500,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		  (getCategory_DefaultMixin(), 
 		   source, 
 		   new String[] {
-			 "documentation", "Default mixin using the syntax \"{nsPrefix}_{name}\"."
+			 "documentation", "Default {@link org.soluvas.data.Mixin} UName, including nsPrefix, e.g. \"base_Apparel\"."
 		   });		
 		addAnnotation
 		  (getCategory_UName(), 

@@ -31,7 +31,7 @@ public class CategoryFactoryImpl extends EFactoryImpl implements CategoryFactory
 	 */
 	public static CategoryFactory init() {
 		try {
-			CategoryFactory theCategoryFactory = (CategoryFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.soluvas.org/schema/category/1.0"); 
+			CategoryFactory theCategoryFactory = (CategoryFactory)EPackage.Registry.INSTANCE.getEFactory(CategoryPackage.eNS_URI);
 			if (theCategoryFactory != null) {
 				return theCategoryFactory;
 			}

@@ -1172,7 +1172,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	@Override
 	public EAttribute getAppManifest_LetterSalutation() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(13);
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(21);
 	}
 
 	/**
@@ -1182,7 +1182,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	@Override
 	public EAttribute getAppManifest_LetterClosing() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(14);
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(22);
 	}
 
 	/**
@@ -1191,7 +1191,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	public EAttribute getAppManifest_DefaultTimeZoneId() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(15);
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -1200,7 +1200,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	public EAttribute getAppManifest_DefaultTimeZone() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(16);
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -1209,7 +1209,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	public EAttribute getAppManifest_DefaultCurrencyCode() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(17);
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -1218,7 +1218,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	public EAttribute getAppManifest_DefaultCurrency() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(18);
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -1227,15 +1227,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	public EAttribute getAppManifest_EmailLogoUriTemplate() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(19);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAppManifest_DefaultLanguageTag() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(20);
 	}
 
@@ -1244,8 +1235,26 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAppManifest_DefaultLanguageTag() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(17);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getAppManifest_DefaultCountryCode() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(21);
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(18);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_DefaultCategoryUName() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(19);
 	}
 
 	/**
@@ -4254,15 +4263,16 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__GENERAL_EMAIL_STG);
 		createEAttribute(appManifestEClass, APP_MANIFEST__ORGANIZATION_NAME);
 		createEAttribute(appManifestEClass, APP_MANIFEST__ORGANIZATION_ADDRESS);
-		createEAttribute(appManifestEClass, APP_MANIFEST__LETTER_SALUTATION);
-		createEAttribute(appManifestEClass, APP_MANIFEST__LETTER_CLOSING);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_TIME_ZONE_ID);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_TIME_ZONE);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_CURRENCY_CODE);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_CURRENCY);
-		createEAttribute(appManifestEClass, APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_LANGUAGE_TAG);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_COUNTRY_CODE);
+		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_CATEGORY_UNAME);
+		createEAttribute(appManifestEClass, APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE);
+		createEAttribute(appManifestEClass, APP_MANIFEST__LETTER_SALUTATION);
+		createEAttribute(appManifestEClass, APP_MANIFEST__LETTER_CLOSING);
 		createEOperation(appManifestEClass, APP_MANIFEST___GET_DEFAULT_LOCALE);
 
 		personInfoEClass = createEClass(PERSON_INFO);
@@ -4883,15 +4893,16 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_GeneralEmailStg(), ecorePackage.getEString(), "generalEmailStg", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_OrganizationName(), ecorePackage.getEString(), "organizationName", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_OrganizationAddress(), ecorePackage.getEString(), "organizationAddress", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppManifest_LetterSalutation(), ecorePackage.getEString(), "letterSalutation", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppManifest_LetterClosing(), ecorePackage.getEString(), "letterClosing", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultTimeZoneId(), ecorePackage.getEString(), "defaultTimeZoneId", "UTC", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultTimeZone(), this.getDateTimeZone(), "defaultTimeZone", null, 0, 1, AppManifest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultCurrencyCode(), ecorePackage.getEString(), "defaultCurrencyCode", "USD", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultCurrency(), this.getCurrencyUnit(), "defaultCurrency", null, 0, 1, AppManifest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppManifest_EmailLogoUriTemplate(), ecorePackage.getEString(), "emailLogoUriTemplate", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultLanguageTag(), ecorePackage.getEString(), "defaultLanguageTag", "en-US", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultCountryCode(), ecorePackage.getEString(), "defaultCountryCode", "US", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_DefaultCategoryUName(), ecorePackage.getEString(), "defaultCategoryUName", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_EmailLogoUriTemplate(), ecorePackage.getEString(), "emailLogoUriTemplate", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_LetterSalutation(), ecorePackage.getEString(), "letterSalutation", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_LetterClosing(), ecorePackage.getEString(), "letterClosing", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getAppManifest__GetDefaultLocale(), this.getLocale(), "getDefaultLocale", 1, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -5529,18 +5540,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Used in email notifications, e.g. \"Talavera Office Park, Jl. TB Simatupang KAV 20-22 Jakarta\"."
 		   });		
 		addAnnotation
-		  (getAppManifest_LetterSalutation(), 
-		   source, 
-		   new String[] {
-			 "documentation", "The SALUTATION (C) of the letter starts on the left margin two lines below the inside address for a business letter or five lines below the heading of a personal letter, if typed. All words in the salutation are capitalized, and the last word is followed by a comma in a personal letter or a colon in a business letter.\nSample salutations are:\n\n\nPersonal:\nGreetings Friend, Dear Bob, Hi Bob,\n\nBusiness:\nDear Mr. Jones: Dear Sir:\nLadies and Gentlemen: Dear Mr./Mrs./Ms. Jones:\n"
-		   });		
-		addAnnotation
-		  (getAppManifest_LetterClosing(), 
-		   source, 
-		   new String[] {
-			 "documentation", "The first word of the CLOSING (E), which is placed several lines below the body, lines up with the first word in the heading and is the only word capitalized. A comma follows the closing.\n\nPossible closings include:\n\nPersonal:\nYour friend, Missing you, Sincerely,\nConfused, Affectionately,Cordially,\n\nBusiness:\nSincerely yours, Yours truly,Respectfully yours,"
-		   });		
-		addAnnotation
 		  (getAppManifest_DefaultTimeZoneId(), 
 		   source, 
 		   new String[] {
@@ -5565,12 +5564,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Reads directly from {@link #getDefaultCurrencyCode()}."
 		   });		
 		addAnnotation
-		  (getAppManifest_EmailLogoUriTemplate(), 
-		   source, 
-		   new String[] {
-			 "documentation", "URI to tenant logo usable when sending email notifications, by default the tenant logo URI template is: {+imagesUri}tenant_common/logo_email.png\n\n<p>Width of 127 pixels is recommended with landscape ratio.\n\n<p>Supported parameter is \"imagesUri\", which is from {link WebAddress#getImagesUri()}.\n\n<p>You can have app-wide logo without any tenant_common folder by using URI template such as: {+imagesUri}/com.aksimata.app/aksimata_email_192x92.png\n\n<p>To get the actual URI, call {@link AppUtils#getEmailLogoUri(AppManifest, WebAddress)}."
-		   });		
-		addAnnotation
 		  (getAppManifest_DefaultLanguageTag(), 
 		   source, 
 		   new String[] {
@@ -5581,6 +5574,30 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Default country code in ISO 3166-1 alpha-2. It is used for e.g. fill the country field in new PostalAddress form."
+		   });		
+		addAnnotation
+		  (getAppManifest_DefaultCategoryUName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "If specified, this will be the {@link org.soluvas.category.Category}\'s UName to use when creating a new application entity (such as {@link id.co.bippo.product.VariedProduct}).\nIf not specified, please choose the first <b>leaf</b> {@link org.soluvas.category.Category} instead (which must exist)."
+		   });		
+		addAnnotation
+		  (getAppManifest_EmailLogoUriTemplate(), 
+		   source, 
+		   new String[] {
+			 "documentation", "URI to tenant logo usable when sending email notifications, by default the tenant logo URI template is: {+imagesUri}tenant_common/logo_email.png\n\n<p>Width of 127 pixels is recommended with landscape ratio.\n\n<p>Supported parameter is \"imagesUri\", which is from {link WebAddress#getImagesUri()}.\n\n<p>You can have app-wide logo without any tenant_common folder by using URI template such as: {+imagesUri}/com.aksimata.app/aksimata_email_192x92.png\n\n<p>To get the actual URI, call {@link AppUtils#getEmailLogoUri(AppManifest, WebAddress)}."
+		   });		
+		addAnnotation
+		  (getAppManifest_LetterSalutation(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The SALUTATION (C) of the letter starts on the left margin two lines below the inside address for a business letter or five lines below the heading of a personal letter, if typed. All words in the salutation are capitalized, and the last word is followed by a comma in a personal letter or a colon in a business letter.\nSample salutations are:\n\n\nPersonal:\nGreetings Friend, Dear Bob, Hi Bob,\n\nBusiness:\nDear Mr. Jones: Dear Sir:\nLadies and Gentlemen: Dear Mr./Mrs./Ms. Jones:\n"
+		   });		
+		addAnnotation
+		  (getAppManifest_LetterClosing(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The first word of the CLOSING (E), which is placed several lines below the body, lines up with the first word in the heading and is the only word capitalized. A comma follows the closing.\n\nPossible closings include:\n\nPersonal:\nYour friend, Missing you, Sincerely,\nConfused, Affectionately,Cordially,\n\nBusiness:\nSincerely yours, Yours truly,Respectfully yours,"
 		   });		
 		addAnnotation
 		  (personInfoEClass, 

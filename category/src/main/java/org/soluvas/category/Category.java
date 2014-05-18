@@ -330,7 +330,7 @@ public interface Category extends CategoryLike, NsPrefixable, Parentable<Categor
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Default mixin using the syntax "{nsPrefix}_{name}".
+	 * Default {@link org.soluvas.data.Mixin} UName, including nsPrefix, e.g. "base_Apparel".
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Default Mixin</em>' attribute.
 	 * @see #setDefaultMixin(String)

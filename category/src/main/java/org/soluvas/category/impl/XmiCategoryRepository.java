@@ -54,6 +54,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -291,8 +292,8 @@ public class XmiCategoryRepository
 
 	@Override
 	public Set<String> exists(final Collection<String> ids) {
-		return ImmutableSet.copyOf(Iterables.transform(Iterables.filter(
-				getFlattenedCategories(), new Predicate<Category>() {
+		return FluentIterable.from(getFlattenedCategories())
+				.filter(new Predicate<Category>() {
 			@Override
 			public boolean apply(@Nullable Category input) {
 				if (input.getNsPrefix() != null && input.getId() != null) {
@@ -301,14 +302,14 @@ public class XmiCategoryRepository
 					return false;
 				}
 			}
-		}), new CategoryUNameFunction()));
+		}).transform(new CategoryUNameFunction()).toSet();
 	}
 
 	@Override
 	public List<Category> findAll(final Collection<String> ids, Sort sort) {
 		// TODO: support sort
-		final Iterable<Category> filtered = Iterables.filter(
-				getFlattenedCategories(), new Predicate<Category>() {
+		final FluentIterable<Category> filtered = FluentIterable.from(getFlattenedCategories())
+				.filter(new Predicate<Category>() {
 			@Override
 			public boolean apply(@Nullable Category input) {
 				if (input.getNsPrefix() != null && input.getId() != null) {
@@ -319,7 +320,7 @@ public class XmiCategoryRepository
 			}
 		});
 		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
-		return ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(filtered)));
+		return ImmutableList.copyOf(EcoreUtil.copyAll(filtered.toList()));
 	}
 
 	@Override
@@ -362,22 +363,21 @@ public class XmiCategoryRepository
 		return deletedCategories.size();
 	}
 	
-	protected Iterable<Category> doFindAll(Predicate<Category> filter, Pageable pageable, boolean isFlattened) {
+	protected FluentIterable<Category> doFindAll(Predicate<Category> filter, Pageable pageable, boolean isFlattened) {
 		final Sort sort = Optional.fromNullable(pageable.getSort()).or(new Sort("positioner"));
 		log.debug("Find categories sorted by {}", sort.iterator().next().getProperty());
-		final Iterable<Category> filtered;
+		final FluentIterable<Category> filtered;
 		if (filter != null) {
 			if (isFlattened) {
-				filtered = Iterables.filter(getFlattenedCategories(), filter);
+				filtered = FluentIterable.from(getFlattenedCategories()).filter(filter);
 			} else {
-				filtered = Iterables.filter(getCategories(), filter);
+				filtered = FluentIterable.from(getCategories()).filter(filter);
 			}
-				
 		} else {
 			if (isFlattened) {
-				filtered = getFlattenedCategories();
+				filtered = FluentIterable.from(getFlattenedCategories());
 			} else {
-				filtered = getCategories();
+				filtered = FluentIterable.from(getCategories());
 			}
 		}
 		final Ordering<Category> ordering = new Ordering<Category>() {
@@ -406,26 +406,26 @@ public class XmiCategoryRepository
 			}
 		};
 		final List<Category> sorted = ordering.immutableSortedCopy(filtered);
-		final Iterable<Category> limited = Iterables.limit(Iterables.skip(sorted,
-				(int) pageable.getOffset()), (int) pageable.getPageSize());
+		final FluentIterable<Category> limited = FluentIterable.from(sorted)
+				.skip((int) pageable.getOffset()).limit((int) pageable.getPageSize());
 		return limited;
 	}
 
 	@Override
 	public Page<String> findAllIds(Pageable pageable) {
 		final int allSize = Iterables.size(getFlattenedCategories());
-		final Iterable<Category> limited = doFindAll(null, pageable, true);
-		final Iterable<String> limitedUNames = Iterables.transform(limited, new CategoryUNameFunction());
-		return new PageImpl<>(ImmutableList.copyOf(limitedUNames),
+		final FluentIterable<Category> limited = doFindAll(null, pageable, true);
+		final FluentIterable<String> limitedUNames = limited.transform(new CategoryUNameFunction());
+		return new PageImpl<>(limitedUNames.toList(),
 				pageable, allSize);
 	}
 
 	@Override
 	public Page<Category> findAll(Pageable pageable) {
 		final int allSize = Iterables.size(getFlattenedCategories());
-		final Iterable<Category> limited = doFindAll(null, pageable, true);
+		final FluentIterable<Category> limited = doFindAll(null, pageable, true);
 		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
-		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited))),
+		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(limited.toList())),
 				pageable, allSize);
 	}
 	
@@ -437,11 +437,11 @@ public class XmiCategoryRepository
 				return statuses.contains(input.getStatus());
 			}
 		};
-		final Iterable<Category> limited = doFindAll(filter, pageable, true);
-		final int allSize = Iterables.size(getFlattenedCategories());
+		final int filteredCount = FluentIterable.from(getFlattenedCategories()).filter(filter).size();
+		final FluentIterable<Category> limited = doFindAll(filter, pageable, true);
 		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
-		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited))),
-				pageable, allSize);
+		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(limited.toList())),
+				pageable, filteredCount);
 	}
 	
 	/**
@@ -482,11 +482,11 @@ public class XmiCategoryRepository
 				return statuses.contains(input.getStatus());
 			}
 		};
-		final Iterable<Category> limited = doFindAll(filter, pageable, false);
-		final int allSize = Iterables.size(getCategories());
+		final int filteredCount = FluentIterable.from(getFlattenedCategories()).filter(filter).size();
+		final FluentIterable<Category> limited = doFindAll(filter, pageable, false);
 		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
-		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited))),
-				pageable, allSize);
+		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(limited.toList())),
+				pageable, filteredCount);
 	}
 
 	@Override
@@ -497,11 +497,22 @@ public class XmiCategoryRepository
 				return input.getLevel() == level && statuses.contains(input.getStatus()) && (notForHasChildren ? input.getCategories().isEmpty() : true);
 			}
 		};
-		final Iterable<Category> limited = doFindAll(filter, pageable, true);
-		final int allSize = Iterables.size(getFlattenedCategories());
+		final int filteredCount = FluentIterable.from(getFlattenedCategories()).filter(filter).size();
+		final FluentIterable<Category> limited = doFindAll(filter, pageable, true);
 		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
-		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited))),
-				pageable, allSize);
+		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(limited.toList())),
+				pageable, filteredCount);
+	}
+
+	@Override
+	public Optional<Category> getFirstActiveLeaf() {
+		return FluentIterable.from(getFlattenedCategories())
+				.firstMatch(new Predicate<Category>() {
+			@Override
+			public boolean apply(@Nullable Category input) {
+				return input.getCategories().isEmpty() && input.getStatus() == CategoryStatus.ACTIVE;
+			}
+		});
 	}
 
 }

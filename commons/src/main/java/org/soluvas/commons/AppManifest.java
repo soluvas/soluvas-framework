@@ -38,15 +38,16 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getGeneralEmailStg <em>General Email Stg</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationName <em>Organization Name</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationAddress <em>Organization Address</em>}</li>
- *   <li>{@link org.soluvas.commons.AppManifest#getLetterSalutation <em>Letter Salutation</em>}</li>
- *   <li>{@link org.soluvas.commons.AppManifest#getLetterClosing <em>Letter Closing</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultTimeZone <em>Default Time Zone</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCurrencyCode <em>Default Currency Code</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCurrency <em>Default Currency</em>}</li>
- *   <li>{@link org.soluvas.commons.AppManifest#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultLanguageTag <em>Default Language Tag</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCountryCode <em>Default Country Code</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCategoryUName <em>Default Category UName</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getLetterSalutation <em>Letter Salutation</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getLetterClosing <em>Letter Closing</em>}</li>
  * </ul>
  * </p>
  *
@@ -664,6 +665,32 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	void setDefaultCountryCode(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Default Category UName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * If specified, this will be the {@link org.soluvas.category.Category}'s UName to use when creating a new application entity (such as {@link id.co.bippo.product.VariedProduct}).
+	 * If not specified, please choose the first <b>leaf</b> {@link org.soluvas.category.Category} instead (which must exist).
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Default Category UName</em>' attribute.
+	 * @see #setDefaultCategoryUName(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultCategoryUName()
+	 * @model
+	 * @generated
+	 */
+	String getDefaultCategoryUName();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDefaultCategoryUName <em>Default Category UName</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default Category UName</em>' attribute.
+	 * @see #getDefaultCategoryUName()
+	 * @generated
+	 */
+	void setDefaultCategoryUName(String value);
 
 	/**
 	 * <!-- begin-user-doc -->

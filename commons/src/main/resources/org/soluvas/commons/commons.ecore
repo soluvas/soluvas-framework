@@ -109,16 +109,6 @@
         <details key="documentation" value="Used in email notifications, e.g. &quot;Talavera Office Park, Jl. TB Simatupang KAV 20-22 Jakarta&quot;."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="letterSalutation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The SALUTATION (C) of the letter starts on the left margin two lines below the inside address for a business letter or five lines below the heading of a personal letter, if typed. All words in the salutation are capitalized, and the last word is followed by a comma in a personal letter or a colon in a business letter.&#xA;Sample salutations are:&#xA;&#xA;&#xA;Personal:&#xA;Greetings Friend, Dear Bob, Hi Bob,&#xA;&#xA;Business:&#xA;Dear Mr. Jones: Dear Sir:&#xA;Ladies and Gentlemen: Dear Mr./Mrs./Ms. Jones:&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="letterClosing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The first word of the CLOSING (E), which is placed several lines below the body, lines up with the first word in the heading and is the only word capitalized. A comma follows the closing.&#xA;&#xA;Possible closings include:&#xA;&#xA;Personal:&#xA;Your friend, Missing you, Sincerely,&#xA;Confused, Affectionately,Cordially,&#xA;&#xA;Business:&#xA;Sincerely yours, Yours truly,Respectfully yours,"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultTimeZoneId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="UTC">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -143,11 +133,6 @@
         <details key="documentation" value="Reads directly from {@link #getDefaultCurrencyCode()}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="emailLogoUriTemplate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="URI to tenant logo usable when sending email notifications, by default the tenant logo URI template is: {+imagesUri}tenant_common/logo_email.png&#xA;&#xA;&lt;p>Width of 127 pixels is recommended with landscape ratio.&#xA;&#xA;&lt;p>Supported parameter is &quot;imagesUri&quot;, which is from {link WebAddress#getImagesUri()}.&#xA;&#xA;&lt;p>You can have app-wide logo without any tenant_common folder by using URI template such as: {+imagesUri}/com.aksimata.app/aksimata_email_192x92.png&#xA;&#xA;&lt;p>To get the actual URI, call {@link AppUtils#getEmailLogoUri(AppManifest, WebAddress)}."/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultLanguageTag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="en-US">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -158,6 +143,26 @@
         defaultValueLiteral="US">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Default country code in ISO 3166-1 alpha-2. It is used for e.g. fill the country field in new PostalAddress form."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultCategoryUName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If specified, this will be the {@link org.soluvas.category.Category}'s UName to use when creating a new application entity (such as {@link id.co.bippo.product.VariedProduct}).&#xA;If not specified, please choose the first &lt;b>leaf&lt;/b> {@link org.soluvas.category.Category} instead (which must exist)."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="emailLogoUriTemplate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="URI to tenant logo usable when sending email notifications, by default the tenant logo URI template is: {+imagesUri}tenant_common/logo_email.png&#xA;&#xA;&lt;p>Width of 127 pixels is recommended with landscape ratio.&#xA;&#xA;&lt;p>Supported parameter is &quot;imagesUri&quot;, which is from {link WebAddress#getImagesUri()}.&#xA;&#xA;&lt;p>You can have app-wide logo without any tenant_common folder by using URI template such as: {+imagesUri}/com.aksimata.app/aksimata_email_192x92.png&#xA;&#xA;&lt;p>To get the actual URI, call {@link AppUtils#getEmailLogoUri(AppManifest, WebAddress)}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="letterSalutation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The SALUTATION (C) of the letter starts on the left margin two lines below the inside address for a business letter or five lines below the heading of a personal letter, if typed. All words in the salutation are capitalized, and the last word is followed by a comma in a personal letter or a colon in a business letter.&#xA;Sample salutations are:&#xA;&#xA;&#xA;Personal:&#xA;Greetings Friend, Dear Bob, Hi Bob,&#xA;&#xA;Business:&#xA;Dear Mr. Jones: Dear Sir:&#xA;Ladies and Gentlemen: Dear Mr./Mrs./Ms. Jones:&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="letterClosing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The first word of the CLOSING (E), which is placed several lines below the body, lines up with the first word in the heading and is the only word capitalized. A comma follows the closing.&#xA;&#xA;Possible closings include:&#xA;&#xA;Personal:&#xA;Your friend, Missing you, Sincerely,&#xA;Confused, Affectionately,Cordially,&#xA;&#xA;Business:&#xA;Sincerely yours, Yours truly,Respectfully yours,"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

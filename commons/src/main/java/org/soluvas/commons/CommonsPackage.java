@@ -332,31 +332,13 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__ORGANIZATION_ADDRESS = POSITIONABLE_FEATURE_COUNT + 17;
 
 	/**
-	 * The feature id for the '<em><b>Letter Salutation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST__LETTER_SALUTATION = POSITIONABLE_FEATURE_COUNT + 18;
-
-	/**
-	 * The feature id for the '<em><b>Letter Closing</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST__LETTER_CLOSING = POSITIONABLE_FEATURE_COUNT + 19;
-
-	/**
 	 * The feature id for the '<em><b>Default Time Zone Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_TIME_ZONE_ID = POSITIONABLE_FEATURE_COUNT + 20;
+	int APP_MANIFEST__DEFAULT_TIME_ZONE_ID = POSITIONABLE_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Default Time Zone</b></em>' attribute.
@@ -365,7 +347,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_TIME_ZONE = POSITIONABLE_FEATURE_COUNT + 21;
+	int APP_MANIFEST__DEFAULT_TIME_ZONE = POSITIONABLE_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Default Currency Code</b></em>' attribute.
@@ -374,7 +356,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_CURRENCY_CODE = POSITIONABLE_FEATURE_COUNT + 22;
+	int APP_MANIFEST__DEFAULT_CURRENCY_CODE = POSITIONABLE_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Default Currency</b></em>' attribute.
@@ -383,16 +365,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_CURRENCY = POSITIONABLE_FEATURE_COUNT + 23;
-
-	/**
-	 * The feature id for the '<em><b>Email Logo Uri Template</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE = POSITIONABLE_FEATURE_COUNT + 24;
+	int APP_MANIFEST__DEFAULT_CURRENCY = POSITIONABLE_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Default Language Tag</b></em>' attribute.
@@ -401,7 +374,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_LANGUAGE_TAG = POSITIONABLE_FEATURE_COUNT + 25;
+	int APP_MANIFEST__DEFAULT_LANGUAGE_TAG = POSITIONABLE_FEATURE_COUNT + 22;
 
 	/**
 	 * The feature id for the '<em><b>Default Country Code</b></em>' attribute.
@@ -410,7 +383,43 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__DEFAULT_COUNTRY_CODE = POSITIONABLE_FEATURE_COUNT + 26;
+	int APP_MANIFEST__DEFAULT_COUNTRY_CODE = POSITIONABLE_FEATURE_COUNT + 23;
+
+	/**
+	 * The feature id for the '<em><b>Default Category UName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__DEFAULT_CATEGORY_UNAME = POSITIONABLE_FEATURE_COUNT + 24;
+
+	/**
+	 * The feature id for the '<em><b>Email Logo Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE = POSITIONABLE_FEATURE_COUNT + 25;
+
+	/**
+	 * The feature id for the '<em><b>Letter Salutation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__LETTER_SALUTATION = POSITIONABLE_FEATURE_COUNT + 26;
+
+	/**
+	 * The feature id for the '<em><b>Letter Closing</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__LETTER_CLOSING = POSITIONABLE_FEATURE_COUNT + 27;
 
 	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
@@ -419,7 +428,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 27;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 28;
 
 	/**
 	 * The operation id for the '<em>Expand</em>' operation.
@@ -6135,6 +6144,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_DefaultCountryCode();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultCategoryUName <em>Default Category UName</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Category UName</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultCategoryUName()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultCategoryUName();
+
+	/**
 	 * Returns the meta object for the '{@link org.soluvas.commons.AppManifest#getDefaultLocale() <em>Get Default Locale</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9737,6 +9757,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__DEFAULT_COUNTRY_CODE = eINSTANCE.getAppManifest_DefaultCountryCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Category UName</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_CATEGORY_UNAME = eINSTANCE.getAppManifest_DefaultCategoryUName();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Default Locale</b></em>' operation.
