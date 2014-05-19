@@ -394,9 +394,9 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 			}).toList();
 		try {
 			final List<ListenableFuture<String>> futures = (List) cpuExecutor.invokeAll(tasks);
-			final List<String> initializedTenantIds = Futures.allAsList(futures).get();
+			final List<String> stoppedTenantIds = Futures.allAsList(futures).get();
 			log.info("Stopped {} {} tenant beans: {}", 
-					initializedTenantIds.size(), implClass.getSimpleName(), initializedTenantIds);
+					stoppedTenantIds.size(), implClass.getSimpleName(), stoppedTenantIds);
 		} catch (InterruptedException | ExecutionException e) {
 			throw new TenantException(e, "Cannot stop %s %s tenant beans: %s",
 					tenantIdsToRemove.size(), implClass.getSimpleName(), tenantIdsToRemove);
