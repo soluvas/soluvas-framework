@@ -175,7 +175,18 @@ public interface CommonsFactory extends EFactory {
 	 */
 	Person createPerson();
 	
-	Person createPerson(String id, String slug, String name, String photoId, Gender gender);
+	/**
+	 * Will generate name = firstName + " " + lastName;
+	 * 
+	 * @param id
+	 * @param slug
+	 * @param firstName
+	 * @param lastName
+	 * @param photoId
+	 * @param gender
+	 * @return
+	 */
+	Person createPerson(String id, String slug, String firstName, String lastName, String photoId, Gender gender);
 
 	/**
 	 * Returns a new object of class '<em>Phone Number</em>'.

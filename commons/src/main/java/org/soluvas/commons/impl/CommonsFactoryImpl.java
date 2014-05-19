@@ -14,10 +14,12 @@ import java.util.NavigableMap;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Set;
+
 import javax.measure.Measurable;
 import javax.measure.quantity.Quantity;
 import javax.measure.quantity.Temperature;
 import javax.measure.unit.Unit;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -30,7 +32,50 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-import org.soluvas.commons.*;
+import org.soluvas.commons.AccountStatus;
+import org.soluvas.commons.Added;
+import org.soluvas.commons.AddedMany;
+import org.soluvas.commons.AppManifest;
+import org.soluvas.commons.ArchivalStatus;
+import org.soluvas.commons.AttributeNotification;
+import org.soluvas.commons.AttributeSet;
+import org.soluvas.commons.AttributeUnset;
+import org.soluvas.commons.CategoryInfo;
+import org.soluvas.commons.CommonsFactory;
+import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.CustomerRole;
+import org.soluvas.commons.CustomerRoleStatus;
+import org.soluvas.commons.EClassStatus;
+import org.soluvas.commons.Email;
+import org.soluvas.commons.EventBusProgressMonitor;
+import org.soluvas.commons.ExpansionState;
+import org.soluvas.commons.FacebookAccessible;
+import org.soluvas.commons.FacebookIdentity;
+import org.soluvas.commons.Gender;
+import org.soluvas.commons.GenericStatus;
+import org.soluvas.commons.Geolocation;
+import org.soluvas.commons.JavaClassStatus;
+import org.soluvas.commons.Organization;
+import org.soluvas.commons.Person;
+import org.soluvas.commons.PersonCatalog;
+import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.PhoneNumber;
+import org.soluvas.commons.PostalAddress;
+import org.soluvas.commons.ProgressMonitorWrapper;
+import org.soluvas.commons.ProgressStatus;
+import org.soluvas.commons.PublicationStatus;
+import org.soluvas.commons.Removed;
+import org.soluvas.commons.RemovedMany;
+import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.ShellProgressMonitor;
+import org.soluvas.commons.SignupSourceType;
+import org.soluvas.commons.TenantSource;
+import org.soluvas.commons.ThingInfo;
+import org.soluvas.commons.Translation;
+import org.soluvas.commons.TranslationManager;
+import org.soluvas.commons.TranslationState;
+import org.soluvas.commons.WebAddress;
+
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 
@@ -574,6 +619,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Geolocation createGeolocation() {
 		GeolocationImpl geolocation = new GeolocationImpl();
 		return geolocation;
@@ -584,6 +630,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ThingInfo createThingInfo() {
 		ThingInfoImpl thingInfo = new ThingInfoImpl();
 		return thingInfo;
@@ -594,6 +641,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Organization createOrganization() {
 		OrganizationImpl organization = new OrganizationImpl();
 		return organization;
@@ -604,6 +652,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CustomerRole createCustomerRole() {
 		CustomerRoleImpl customerRole = new CustomerRoleImpl();
 		return customerRole;
@@ -1367,13 +1416,19 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 		return person;
 	}
 
+	/*
+	 * Will generate name = firstName + " " + lastName; 
+	 * @see org.soluvas.commons.CommonsFactory#createPerson(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.soluvas.commons.Gender)
+	 */
 	@Override
 	public Person createPerson(String id, String slug,
-			String name, String photoId, Gender gender) {
+			String firstName, String lastName, String photoId, Gender gender) {
 		final Person person = createPerson();
 		person.setId(id);
 		person.setSlug(slug);
-		person.setName(name);
+		person.setFirstName(firstName);
+		person.setLastName(lastName);
+		person.setName(firstName + " " + lastName);
 		person.setPhotoId(photoId);
 		person.setGender(gender);
 		return person;
