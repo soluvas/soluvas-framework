@@ -212,7 +212,7 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 		public String call() throws Exception {
 			try (Closeable cl = CommandRequestAttributes.withMdc(tenantId)) {
 				log.info("Shutting down '{}' {} {}",
-						tenantId, implClass.getSimpleName(), destroyMethod != null ? "using destroymethod " + destroyMethod : "without destroy method");
+						tenantId, implClass.getSimpleName(), destroyMethod != null ? "using destroy method " + destroyMethod : "without destroy method");
 				final T bean = beanMap.get(tenantId);
 				if (bean != null) {
 					onDestroying(tenantId, bean);
@@ -383,7 +383,7 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 		
 		final ImmutableList<String> tenantIdsToRemove = ImmutableList.copyOf(stopping.getTenants().keySet());
 		log.info("Stopping {} {} beans: {}",
-				beanMap.size(), implClass.getSimpleName(), tenantIdsToRemove);
+				tenantIdsToRemove.size(), implClass.getSimpleName(), tenantIdsToRemove);
 		
 		final ImmutableList<RemoveAndDestroy> tasks = FluentIterable.from(tenantIdsToRemove)
 				.transform(new Function<String, RemoveAndDestroy>() {

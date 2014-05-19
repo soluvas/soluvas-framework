@@ -40,6 +40,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 
 /**
@@ -361,10 +362,11 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	}
 	
 	/**
-	 * Calls {@link #onBeforeStop(String, AppManifest)}.
+	 * Calls {@link #onBeforeStop(String, AppManifest)} then calls {@link TenantRepositoryListener#onTenantsStopping(TenantsStopping)}
+	 * for each {@link #listeners} <b>in reverse order</b>.
 	 * @param tenantId
 	 * @param appManifest
-	 * @param trackingId TODO
+	 * @param trackingId Event Tracking ID.
 	 */
 	protected final void stop(String tenantId, AppManifest appManifest, String trackingId) {
 		tenantStateMap.put(tenantId, TenantState.STOPPING);
@@ -372,11 +374,11 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		final TenantsStopping tenantsStopping = new TenantsStopping(ImmutableMap.of(tenantId, appManifest), trackingId);
 		listenersLocked.set(true);
 		try {
-			for (final TenantRepositoryListener listener : listeners) {
+			for (final TenantRepositoryListener listener : Lists.reverse(listeners)) {
 				try {
 					listener.onTenantsStopping(tenantsStopping);
 				} catch (Exception e) {
-					throw new CommonsException("Cannot stop tenant '" + tenantId + "' due to failed listener '" + listener + "': " + e, e);
+					throw new TenantException("Cannot stop tenant '" + tenantId + "' due to failed listener '" + listener + "': " + e, e);
 				}
 			}
 			tenantStateMap.put(tenantId, TenantState.RESOLVED);

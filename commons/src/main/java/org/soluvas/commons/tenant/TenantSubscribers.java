@@ -30,9 +30,10 @@ import com.google.common.eventbus.EventBus;
  */
 public abstract class TenantSubscribers implements TenantRepositoryListener {
 	
-	final Map<String, List<Object>> subscriberMap = new LinkedHashMap<>();
 	private static final Logger log = LoggerFactory
 			.getLogger(TenantSubscribers.class);
+	
+	private final Map<String, List<Object>> subscriberMap = new LinkedHashMap<>();
 	
 	@Inject
 	private MultiTenantConfig tenantConfig;
@@ -42,6 +43,8 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 	@PostConstruct
 	public void init() {
 		final ImmutableMap<String, AppManifest> initialTenantMap = tenantConfig.tenantMap();
+		log.info("Registering {} subscribers for {} tenants: {}",
+				getClass().getName(), initialTenantMap.size(), initialTenantMap.keySet());
 		for (final Map.Entry<String, AppManifest> tenant : initialTenantMap.entrySet()) {
 			createSubscribers(tenant.getKey(), tenant.getValue(), "Init");
 		}
@@ -51,8 +54,8 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 	@PreDestroy
 	public void destroy() throws IOException {
 		final ImmutableList<String> tenantIdsRev = ImmutableList.copyOf(subscriberMap.keySet()).reverse();
-		log.info("Shutting down EventBus subscribers for {} tenants in reverse order: {}",
-				subscriberMap.size(), tenantIdsRev);
+		log.info("Unregistering {} subscribers for {} tenants in reverse order: {}",
+				getClass().getName(), subscriberMap.size(), tenantIdsRev);
 		for (String tenantId : tenantIdsRev) {
 			unsubscribeTenant(tenantId, "Shutdown");
 		}
@@ -80,15 +83,20 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 	}
 	
 	protected synchronized final void unsubscribeTenant(String tenantId, String reason) throws IOException {
+		Preconditions.checkState(tenantConfig.eventBusMap().containsKey(tenantId),
+				"Cannot unsubscribe %s tenant '%s' (reason: %s) because EventBus not found. %s available: %s",
+				getClass().getName(), tenantId, reason, tenantConfig.eventBusMap().size(), tenantConfig.eventBusMap().keySet()); 
 		final EventBus tenantEventBus = tenantConfig.eventBusMap().get(tenantId);
-		final List<Object> subscribers = subscriberMap.get(tenantEventBus);
+		Preconditions.checkState(subscriberMap.containsKey(tenantId),
+				"Cannot unsubscribe %s tenant '%s' (reason: %s) because subscribers not found, createSubscribers() never called? %s available: %s",
+				getClass().getName(), tenantId, reason, subscriberMap.size(), subscriberMap.keySet()); 
+		final List<Object> subscribers = subscriberMap.get(tenantId);
 		log.info("Unsubscribing {} objects from '{}' EventBus: {}. Reason: {}",
 				subscribers.size(), tenantId, subscribers, reason);
 		for (Object subscriber : subscribers) {
 			tenantEventBus.unregister(subscriber);
 		}
-		Preconditions.checkNotNull(subscriberMap.remove(tenantId),
-				"subscriberMap for '%s' was null. Never subscribed?", tenantId);
+		subscriberMap.remove(tenantId);
 	}
 	
 	@Override
