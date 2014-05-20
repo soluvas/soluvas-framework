@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.regex.Matcher;
@@ -17,6 +18,7 @@ import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
@@ -427,6 +429,24 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	
 	public String getHotelId() {
 		return env.getRequiredProperty("hotelId");
+	}
+	
+	/**
+	 * Default {@link Locale} for tenantless operations, e.g. Manage and Open pages.
+	 * @return
+	 * @see commerce.properties: defaultLocale
+	 */
+	public Locale getDefaultLocale() {
+		return Locale.forLanguageTag(env.getRequiredProperty("defaultLocale"));
+	}
+
+	/**
+	 * Default {@link DateTimeZone} for tenantless operations, e.g. Manage and Open pages.
+	 * @return
+	 * @see commerce.properties: defaultTimeZone
+	 */
+	public DateTimeZone getDefaultTimeZone() {
+		return DateTimeZone.forID(env.getRequiredProperty("defaultTimeZone"));
 	}
 
 }

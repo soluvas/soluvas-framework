@@ -13,5 +13,5 @@ public interface SoluvasApplication {
 	 * @return
 	 */
 	String getId();
-
+	
 }
