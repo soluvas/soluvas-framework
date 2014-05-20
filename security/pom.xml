@@ -8,7 +8,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>org.soluvas.security</artifactId>
-	<packaging>bundle</packaging>
+	<packaging>jar</packaging>
 	<name>Soluvas Security</name>
 	<description>Security using role-based and permission-based ACLs.</description>
 	
@@ -140,7 +140,7 @@
 	
 	<build>
 		<plugins>
-			<plugin>
+			<!-- plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<configuration>
@@ -154,7 +154,7 @@
 						<Export-Package>org.soluvas.security.*</Export-Package>
 					</instructions>
 				</configuration>
-			</plugin>
+			</plugin-->
 		</plugins>
 	</build>
 	

@@ -8,7 +8,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>org.soluvas.newsletter</artifactId>
-	<packaging>bundle</packaging>
+	<packaging>jar</packaging>
 	<name>Soluvas Newsletter</name>
 	<description>Helper for newsletter subscription, e.g. Mailjet</description>
 
@@ -106,22 +106,16 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			<plugin>
+			<!-- plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<configuration>
 					<instructions>
-						<!-- TODO: find better mechanism. now we need this to deserialize unknown story classes -->
+						TODO: find better mechanism. now we need this to deserialize unknown story classes
 						<Export-Package>org.soluvas.newsletter.*</Export-Package>
-						<!--<Private-Package>org.foo.myproject.*</Private-Package> -->
-						<!--<Bundle-Activator>org.foo.myproject.impl1.Activator</Bundle-Activator> -->
 					</instructions>
 				</configuration>
-			</plugin>
+			</plugin-->
 		</plugins>
 	</build>
 
