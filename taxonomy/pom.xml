@@ -8,7 +8,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>org.soluvas.taxonomy</artifactId>
-	<packaging>bundle</packaging>
+	<packaging>jar</packaging>
 	<name>Soluvas Taxonomy</name>
 	<description>Dynamic taxonomy, vocabulary and terms system.</description>
 
@@ -61,7 +61,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
+			<!-- plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<configuration>
@@ -69,7 +69,7 @@
 						<Export-Package>org.soluvas.taxonomy.*</Export-Package>
 					</instructions>
 				</configuration>
-			</plugin>
+			</plugin-->
 		</plugins>
 	</build>
 

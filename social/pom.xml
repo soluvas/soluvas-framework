@@ -8,7 +8,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>org.soluvas.social</artifactId>
-	<packaging>bundle</packaging>
+	<packaging>jar</packaging>
 	<name>Soluvas Social</name>
 	<description>Basic social features support for Like, Comment, Share, etc.</description>
 	
@@ -125,7 +125,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
+			<!-- plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<extensions>true</extensions>
@@ -143,7 +143,7 @@
 						</Export-Package>
 					</instructions>
 				</configuration>
-			</plugin>
+			</plugin-->
 		</plugins>
 	</build>
 

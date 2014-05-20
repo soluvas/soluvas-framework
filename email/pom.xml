@@ -8,7 +8,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>org.soluvas.email</artifactId>
-	<packaging>bundle</packaging>
+	<packaging>jar</packaging>
 	<name>Soluvas Email</name>
 	<description>Declarative email composing, sending, and retrieval system.</description>
 
@@ -88,7 +88,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
+			<!-- plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<configuration>
@@ -103,7 +103,7 @@
 							org.soluvas.email.builtin.*</Export-Package>
 					</instructions>
 				</configuration>
-			</plugin>
+			</plugin-->
 		</plugins>
 	</build>
 
