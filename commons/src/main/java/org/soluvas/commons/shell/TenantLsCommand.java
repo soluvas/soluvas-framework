@@ -19,6 +19,7 @@ import com.google.common.collect.ImmutableMap;
  * Lists tenant {@link AppManifest}s and {@link TenantState}s using {@link TenantRepository}.
  *
  * @author ceefour
+ * @see TenantMapCommand
  */
 @Service @Scope("prototype")
 @Command(scope="tenant", name="ls", description="Lists tenant AppManifests and states using TenantRepository.")
@@ -33,18 +34,19 @@ public class TenantLsCommand extends ExtCommandSupport {
 	
 	@Override
 	protected Void doExecute() throws Exception {
-		Preconditions.checkNotNull(tenantRepo, "TenantRepository bean not found");
+		Preconditions.checkNotNull(tenantRepo, "TenantRepository bean not found. Try using tenant:map instead.");
 		final ImmutableMap<String, AppManifest> tenantMap = tenantRepo.findAll();
 		final ImmutableMap<String, TenantState> states = tenantRepo.getStates();
-		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-20s|%-10s|%-25s|%-30s|%-20s|%-3s|@",
-				"№", "ID", "Title", "State", "Domain", "Email", "Time Zone", "$"));
+		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-20s|%-10s|%-25s|%-30s|%-5s|%-2s|%-20s|%-3s|@",
+				"№", "ID", "Title", "State", "Domain", "Email", "Lang", "CC", "Time Zone", "$"));
 		int i = 0;
 		for (final Entry<String, AppManifest> entry : tenantMap.entrySet()) {
 			final AppManifest tenant = entry.getValue();
 			final TenantState state = states.get(entry.getKey());
 			System.out.println(ansi().render("@|bold,black %3d||@%-15s@|bold,black ||@%-20s@|bold,black ||@%-10s@|bold,black ||@%-25s@|bold,black ||@%-30s@|bold,black ||@%-20s@|bold,black ||@%-3s",
 				++i, entry.getKey(), tenant.getTitle(), state,
-				tenant.getDomain(), tenant.getGeneralEmail(), tenant.getDefaultTimeZoneId(), tenant.getDefaultCurrencyCode()));
+				tenant.getDomain(), tenant.getGeneralEmail(), 
+				tenant.getDefaultLocale(), tenant.getDefaultCountryCode(), tenant.getDefaultTimeZoneId(), tenant.getDefaultCurrencyCode()));
 		}
 		System.out.println(ansi().render("@|bold %d|@ tenants", i));
 		return null;
