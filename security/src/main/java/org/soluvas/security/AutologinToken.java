@@ -2,6 +2,7 @@ package org.soluvas.security;
 
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.HostAuthenticationToken;
+import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
 
 /**
  * {@link AuthenticationToken} that is always trusted. For example, when logging in
@@ -14,8 +15,9 @@ import org.apache.shiro.authc.HostAuthenticationToken;
  * 
  * @author haidar
  */
-@SuppressWarnings("serial")
 public class AutologinToken implements HostAuthenticationToken {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private final Object principal;
 	private final String host;
@@ -40,12 +42,14 @@ public class AutologinToken implements HostAuthenticationToken {
 		return principal;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Returns an empty char array to avoid {@link NullPointerException} 
+	 * in {@link SimpleCredentialsMatcher#doCredentialsMatch(AuthenticationToken, org.apache.shiro.authc.AuthenticationInfo)}.
 	 * @see org.apache.shiro.authc.AuthenticationToken#getCredentials()
 	 */
 	@Override
-	public Object getCredentials() {
-		return null;
+	public char[] getCredentials() {
+		return new char[] {};
 	}
 
 	@Override

@@ -62,7 +62,7 @@ public class StaticAppRealm extends AuthorizingRealm {
 			}
 		} else if (token instanceof AutologinToken) {
 			log.debug("[{}] AuthenticationInfo for {} is using AutologinToken", getName(), token.getPrincipal());
-			final String tokenPrincipal = ((UsernamePasswordToken) token).getUsername();
+			final String tokenPrincipal = (String) token.getPrincipal();
 			if ("sysadmin".equals(tokenPrincipal)) {
 				return new SimpleAuthenticationInfo(token.getPrincipal(), token.getCredentials(), HOST);
 			} else {
@@ -82,6 +82,11 @@ public class StaticAppRealm extends AuthorizingRealm {
 		} else {
 			return new SimpleAuthorizationInfo();
 		}
+	}
+	
+	@Override
+	public boolean supports(AuthenticationToken token) {
+		return super.supports(token) || token instanceof AutologinToken;
 	}
 
 }
