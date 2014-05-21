@@ -85,7 +85,7 @@ public class MongoRealm extends AuthorizingRealm {
 		log.info("Connecting to MongoDB realm database {}/{} as {}, person collection={}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), personCollName);
 		try {
-			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
+			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primary());
 			personColl = db.getCollection(personCollName);
 		} catch (Exception e) {
 			throw new MongoRepositoryException(e, "Cannot connect to MongoDB realm database %s/%s as %s for %s repository",
@@ -116,7 +116,7 @@ public class MongoRealm extends AuthorizingRealm {
 		log.info("Connecting to MongoDB realm database {}/{} as {}, person collection={}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), personCollName);
 		try {
-			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
+			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primary());
 			personColl = db.getCollection(personCollName);
 		} catch (Exception e) {
 			throw new MongoRepositoryException(e, "Cannot connect to MongoDB realm database {}/{} as {} for {} repository",
@@ -141,7 +141,7 @@ public class MongoRealm extends AuthorizingRealm {
 		log.info("Connecting to MongoDB realm database {}/{} as {}, person collection={}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), personCollName);
 		try {
-			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
+			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primary());
 			personColl = db.getCollection(personCollName);
 		} catch (Exception e) {
 			throw new MongoRepositoryException(e, "Cannot connect to MongoDB realm database {}/{} as {} for {} repository",

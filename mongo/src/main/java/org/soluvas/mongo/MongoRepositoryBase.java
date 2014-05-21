@@ -122,12 +122,12 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 */
 	protected static enum ReadPattern {
 		/**
-		 * Only use a {@link MongoClient} with {@link ReadPreference#primaryPreferred()}.
+		 * Only use a {@link MongoClient} with {@link ReadPreference#primary()}.
 		 * This is seldom used, and has better data consistency.
 		 * But if you use this, you probably want to use an ACID database (such as RDBMS or Neo4j) instead of MongoDB.
 		 * Both {@link MongoRepositoryBase#primary} and {@link MongoRepositoryBase#secondary} use this {@link MongoClient}.
 		 */
-		PRIMARY_PREFERRED,
+		PRIMARY,
 		/**
 		 * Only use a {@link MongoClient} with {@link ReadPreference#secondaryPreferred()}.
 		 * Used for some repositories that does not need consistency even for {@link CrudRepository#findOne(java.io.Serializable)}.
@@ -136,7 +136,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		SECONDARY_PREFERRED,
 		/**
 		 * <ul>
-		 * 	<li>{@link MongoRepositoryBase#primary} uses a {@link MongoClient} with {@link ReadPreference#primaryPreferred()},
+		 * 	<li>{@link MongoRepositoryBase#primary} uses a {@link MongoClient} with {@link ReadPreference#primary()},
 		 * 		which is especially used by {@link CrudRepository#findOne(java.io.Serializable)}.</li>
 		 * 	<li>{@link MongoRepositoryBase#secondary} uses a {@link MongoClient} with {@link ReadPreference#secondaryPreferred()}</li>
 		 * </ol>
@@ -201,32 +201,32 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), readPattern, realMongoUri.getUsername(), collName);
 		try {
 			switch (readPattern) {
-			case PRIMARY_PREFERRED:
-				final DB ppDb = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
-				Preconditions.checkState(ppDb.getMongo().getReadPreference() == ReadPreference.primaryPreferred(),
-						"Expected ReadPreference '%s' but got '%s' for Mongo ppDb %s",
-						ppDb.getMongo(), ppDb.getMongo().getReadPreference());
-				primary = ppDb.getCollection(collName);
+			case PRIMARY:
+				final DB primDb = MongoUtils.getDb(realMongoUri, ReadPreference.primary());
+				Preconditions.checkState(primDb.getMongo().getReadPreference() == ReadPreference.primary(),
+						"Expected ReadPreference '%s' but got '%s' for Mongo primDb %s",
+						ReadPreference.primary(), primDb.getMongo().getReadPreference(), primDb.getMongo());
+				primary = primDb.getCollection(collName);
 				secondary = primary;
 				break;
 			case SECONDARY_PREFERRED:
 				final DB spDb = MongoUtils.getDb(realMongoUri, ReadPreference.secondaryPreferred());
 				Preconditions.checkState(spDb.getMongo().getReadPreference() == ReadPreference.secondaryPreferred(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo spDb %s",
-						ReadPreference.primaryPreferred(), ReadPreference.secondaryPreferred(), spDb.getMongo(), spDb.getMongo().getReadPreference());
+						ReadPreference.secondaryPreferred(), spDb.getMongo().getReadPreference(), spDb.getMongo());
 				secondary = spDb.getCollection(collName);
 				primary = secondary;
 				break;
 			case DUAL:
-				final DB primaryDb = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
-				Preconditions.checkState(primaryDb.getMongo().getReadPreference() == ReadPreference.primaryPreferred(),
+				final DB primaryDb = MongoUtils.getDb(realMongoUri, ReadPreference.primary());
+				Preconditions.checkState(primaryDb.getMongo().getReadPreference() == ReadPreference.primary(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo primaryDb %s",
-						ReadPreference.primaryPreferred(), primaryDb.getMongo().getReadPreference(), primaryDb.getMongo());
+						ReadPreference.primary(), primaryDb.getMongo().getReadPreference(), primaryDb.getMongo());
 				primary = primaryDb.getCollection(collName);
 				final DB secondaryDb = MongoUtils.getDb(realMongoUri, ReadPreference.secondaryPreferred());
 				Preconditions.checkState(secondaryDb.getMongo().getReadPreference() == ReadPreference.secondaryPreferred(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo secondaryDb %s",
-						ReadPreference.secondaryPreferred(), secondaryDb.getMongo(), secondaryDb.getMongo().getReadPreference());
+						ReadPreference.secondaryPreferred(), secondaryDb.getMongo().getReadPreference(), secondaryDb.getMongo());
 				secondary = secondaryDb.getCollection(collName);
 				break;
 			default:
@@ -317,7 +317,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		log.info("Connecting to MongoDB database {}/{} as {} for {}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), collName);
 		try {
-			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
+			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primary());
 			primary = db.getCollection(collName);
 			secondary = primary;
 			morphia = new Morphia();

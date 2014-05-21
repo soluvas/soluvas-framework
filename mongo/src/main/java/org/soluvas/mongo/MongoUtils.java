@@ -109,7 +109,7 @@ public class MongoUtils {
 	/**
 	 * Gets a {@link DB} with dbname corresponding to {@link MongoClientURI#getDatabase()},
 	 * reusing a single {@link MongoClient},
-	 * using {@link ReadPreference#primaryPreferred()} (which works in failover situations).
+	 * using {@link ReadPreference#primary()} (which doesn't work in failover, but highly consistent).
 	 * @param realMongoUri
 	 * @return
 	 * @throws UnknownHostException
@@ -118,7 +118,7 @@ public class MongoUtils {
 	 */
 	@Deprecated
 	public static DB getDb(MongoClientURI realMongoUri) throws UnknownHostException, UnsupportedEncodingException {
-		return getDb(realMongoUri, ReadPreference.primaryPreferred());
+		return getDb(realMongoUri, ReadPreference.primary());
 	}
 	
 	/**

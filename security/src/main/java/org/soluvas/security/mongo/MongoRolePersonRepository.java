@@ -53,7 +53,7 @@ public class MongoRolePersonRepository extends AssocRepositoryBase<String, Strin
 		log.info("Connecting to MongoDB role-person repository {}/{} as {}, person collection={}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), PERSON_COLL_NAME);
 		try {
-			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primaryPreferred());
+			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primary());
 			personColl = db.getCollection(PERSON_COLL_NAME);
 		} catch (Exception e) {
 			throw new MongoRepositoryException(e, "Cannot connect to MongoDB role-person repository {}/{} as {} for collection '{}'",
