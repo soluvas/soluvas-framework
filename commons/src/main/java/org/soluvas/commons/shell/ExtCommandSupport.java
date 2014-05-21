@@ -29,16 +29,20 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 
 import com.google.common.base.CaseFormat;
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 
 /**
  * {@link AbstractAction} base class for Blast Shell commands.
- * @author ceefour
+ *
+ * <p>If {@link #tenantIdRequired}, then {@code clientId} and {@code tenantId} variables must be set,
+ * which is initialized by default by {@link SoluvasConsoleFactory#createConsole(java.io.InputStream, java.io.PrintStream, java.io.PrintStream, jline.Terminal, Runnable)}.
+ * 
  * @see RequestOrCommandScope
  * @see CommandRequestAttributes
  * @see MultiTenantWebConfig#tenantRef()
+ * @see SoluvasConsoleFactory
+ * @author ceefour
  */
 public abstract class ExtCommandSupport extends AbstractAction {
 
@@ -106,8 +110,11 @@ public abstract class ExtCommandSupport extends AbstractAction {
 	 */
 	protected TenantRef getTenant() {
 		Preconditions.checkState(session != null, "Must be inside CommandSession");
-		final String clientId = Optional.fromNullable((String) session.get("clientId")).or(tenantMap.keySet().iterator().next());
-		final String tenantId = Optional.fromNullable((String) session.get("tenantId")).or(tenantMap.keySet().iterator().next());
+		// TODO: Concept of 'clientId' is currently unused and ambiguous
+		final String clientId = (String) Preconditions.checkNotNull(session.get("clientId"),
+				"clientId not set, please set using \"use\" command");
+		final String tenantId = (String) Preconditions.checkNotNull(session.get("tenantId"),
+				"clientId not set, please set using \"use\" command");
 		final String tenantEnv = env.getRequiredProperty("tenantEnv");
 		return new TenantRefImpl(clientId, tenantId, tenantEnv);
 	}
