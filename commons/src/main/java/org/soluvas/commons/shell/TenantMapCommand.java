@@ -34,7 +34,8 @@ public class TenantMapCommand extends ExtCommandSupport {
 			AppManifest tenant = entry.getValue();
 			System.out.println(ansi().render("@|bold,black %3d||@%-15s@|bold,black ||@%-20s@|bold,black ||@%-25s@|bold,black ||@%-30s@|bold,black ||@%-5s@|bold,black ||@%-2s@|bold,black ||@%-20s@|bold,black ||@%-3s",
 				++i, entry.getKey(), tenant.getTitle(), tenant.getDomain(), tenant.getGeneralEmail(), 
-				tenant.getDefaultLocale(), tenant.getDefaultCountryCode(), tenant.getDefaultTimeZoneId(), tenant.getDefaultCurrencyCode()));
+				tenant.getDefaultLocale().toLanguageTag(), tenant.getDefaultCountryCode(), 
+				tenant.getDefaultTimeZone(), tenant.getDefaultCurrency()));
 		}
 		System.out.println(ansi().render("@|bold %d|@ tenants", i));
 		return null;
