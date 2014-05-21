@@ -92,6 +92,7 @@ public class SoluvasConsoleFactory implements ConsoleFactory {
         });
         
         session.put("hotelId", hotelIdSupplier.get());
+        session.put("clientId", tenantIdSupplier.get());
         session.put("tenantId", tenantIdSupplier.get());
         session.put("tenantEnv", tenantEnvSupplier.get());
         
