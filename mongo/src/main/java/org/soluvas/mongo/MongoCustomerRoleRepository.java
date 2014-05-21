@@ -61,7 +61,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			log.warn("No sort for find customerRoles using {} pageable {}, please add Order or use Sort.unsorted()",
 					query, pageable);
 		}
-		final List<CustomerRole> customerRoles = findSecondary(query, null, sortObj, pageable.getOffset(), pageable.getPageSize(), "findAll",
+		final List<CustomerRole> customerRoles = findPrimary(query, null, sortObj, pageable.getOffset(), pageable.getPageSize(), "findAll",
 				statusMask, pageable);
 		if (customerRoles.isEmpty()) {
 			return new PageImpl<>(ImmutableList.<CustomerRole>of(), pageable, 0);
