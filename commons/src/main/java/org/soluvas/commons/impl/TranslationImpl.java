@@ -3,6 +3,7 @@
 package org.soluvas.commons.impl;
 
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EMap;
@@ -114,11 +115,16 @@ public class TranslationImpl extends MinimalEObjectImpl.Container implements Tra
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EMap<String, String> getMessages() {
 		if (messages == null) {
 			messages = new EcoreEMap<String,String>(CommonsPackage.Literals.TRANSLATION_MESSAGE_ENTRY, TranslationMessageEntryImpl.class, this, CommonsPackage.TRANSLATION__MESSAGES);
 		}
 		return messages;
+	}
+	
+	protected void setMessages(Map<String, String> messages) {
+		getMessages().putAll(messages);
 	}
 
 	/**

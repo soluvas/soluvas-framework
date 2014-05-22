@@ -23,7 +23,16 @@ import com.google.common.collect.Maps;
 
 /**
  * Deserializer class for {@link EMap}.
- * <p>Usage: just register {@link EmfModule} to {@link ObjectMapper} because this deserializer is
+ * 
+ * <p><b>Recommended Usage:</b> Add a protected setter, e.g. {@link org.soluvas.commons.impl.TranslationImpl#setMessages(Map)}.
+ * 
+ * <pre>
+ * protected void setMessages(Map&lt;String, String> messages) {
+ * 	getMessages().putAll(messages);
+ * }
+ * </pre>
+ * 
+ * <p><b>Deprecated Usage:</b> just register {@link EmfModule} to {@link ObjectMapper} because this deserializer is
  * automatically used for {@link EMap}.
  * 
  * <p>Explicit annotation is also possible but <b>not necessary</b>.
@@ -35,8 +44,10 @@ import com.google.common.collect.Maps;
  * 
  * <p>Note: Do <b>not</b> use {@link JsonDeserialize#contentAs()}, just {@link JsonDeserialize#using()} is enough.
  * 
+ * @deprecated Please use setter technique.
  * @author ceefour
  */
+@Deprecated
 public class EMapDeserializer extends StdDeserializer<EMap<Object, Object>> {
 
 	private static final long serialVersionUID = 1L;

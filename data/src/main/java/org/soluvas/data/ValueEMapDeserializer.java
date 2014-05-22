@@ -36,15 +36,8 @@ public class ValueEMapDeserializer extends StdDeserializer<EMap<String, EList<Va
 //		JsonToken token = jp.getCurrentToken();
 //		Preconditions.checkState(token == JsonToken.START_OBJECT, "Invalid token: %s", token);
 //		jp.nextToken();
-		// TODO: find a better, cleaner workaround :'(
-		final ClassLoader oldCcl = Thread.currentThread().getContextClassLoader();
-		Thread.currentThread().setContextClassLoader(ValueEMapDeserializer.class.getClassLoader());
-		final Map<String, List<Value<?>>> map;
-		try {
-			map = jp.readValueAs(new TypeReference<Map<String, List<Value<?>>>>() {});
-		} finally {
-			Thread.currentThread().setContextClassLoader(oldCcl);
-		}
+		
+		final Map<String, List<Value<?>>> map = jp.readValueAs(new TypeReference<Map<String, List<Value<?>>>>() {});
 //		final JsonDeserializer<Map> mapDeser = (JsonDeserializer) ctxt.findRootValueDeserializer(ctxt.getTypeFactory().constructType(Map.class));
 //		final Map<Object, Object> map = mapDeser.deserialize(jp, ctxt);
 //		 convert List to EList
