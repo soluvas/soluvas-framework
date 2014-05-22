@@ -2,10 +2,12 @@ package org.soluvas.json;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
@@ -14,6 +16,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.CommonsFactory;
+import org.soluvas.commons.Translation;
+import org.soluvas.commons.impl.TranslationMessageEntryImpl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -100,6 +105,23 @@ public class EMapDeserializerTest {
 		assertNotNull(eMap);
 		assertThat(eMap, hasSize(2));
 		assertThat(eMap.get("attributes"), instanceOf(EList.class));
+	}
+
+	@Test
+	public void canDeserializeEMapEntry() throws JsonParseException, JsonMappingException, IOException {
+		final Translation trans = CommonsFactory.eINSTANCE.createTranslation();
+		trans.getMessages().put("a", "b");
+		final String transJson = JsonUtils.asJson(trans);
+		
+//		BasicEMap<String, String> eMap = new BasicEMap<String, String>(ImmutableMap.of("hallo", "Yuhu"));
+		final Translation read = objectMapper.readValue(transJson, Translation.class);
+		final EMap<String, String> eMap = read.getMessages();
+		log.info("EMap {}", eMap);
+		assertNotNull(eMap);
+		assertThat(eMap, hasSize(1));
+		assertEquals("b", eMap.get("a"));
+		final Entry<String, String> entry = eMap.entrySet().iterator().next();
+		assertThat(entry, instanceOf(TranslationMessageEntryImpl.class));
 	}
 
 }

@@ -4,6 +4,9 @@ package org.soluvas.commons;
 
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
+import org.soluvas.commons.impl.TranslationImpl;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
+@JsonDeserialize(as=TranslationImpl.class)
 public interface Translation extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Language</b></em>' attribute.
