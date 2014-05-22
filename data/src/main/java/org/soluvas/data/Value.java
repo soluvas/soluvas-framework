@@ -59,7 +59,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
  * @model abstract="true"
  * @generated
  */
-@JsonTypeInfo(use=Id.MINIMAL_CLASS)
+@JsonTypeInfo(use=Id.CLASS)
 public interface Value<T> extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
