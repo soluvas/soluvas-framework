@@ -14,6 +14,8 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
@@ -21,12 +23,17 @@ import com.google.common.collect.Maps;
 
 /**
  * Deserializer class for {@link EMap}.
- * <p>Usage:
+ * <p>Usage: just register {@link EmfModule} to {@link ObjectMapper} because this deserializer is
+ * automatically used for {@link EMap}.
+ * 
+ * <p>Explicit annotation is also possible but <b>not necessary</b>.
  * 
  * <pre>{@literal
  * 	@JsonDeserialize(using=EMapDeserializer.class)
  * 	protected EMap<String, Discount> discounts;
  * }</pre>
+ * 
+ * <p>Note: Do <b>not</b> use {@link JsonDeserialize#contentAs()}, just {@link JsonDeserialize#using()} is enough.
  * 
  * @author ceefour
  */
