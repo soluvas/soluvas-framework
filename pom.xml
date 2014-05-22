@@ -448,6 +448,7 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
 				<exclusions>
 					<exclusion>
 						<artifactId>commons-logging</artifactId>
@@ -458,6 +459,7 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
 				<scope>test</scope>
 			</dependency>
 
