@@ -1190,6 +1190,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAppManifest_Footnote() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(23);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getAppManifest_DefaultTimeZoneId() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(13);
 	}
@@ -4273,6 +4282,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE);
 		createEAttribute(appManifestEClass, APP_MANIFEST__LETTER_SALUTATION);
 		createEAttribute(appManifestEClass, APP_MANIFEST__LETTER_CLOSING);
+		createEAttribute(appManifestEClass, APP_MANIFEST__FOOTNOTE);
 		createEOperation(appManifestEClass, APP_MANIFEST___GET_DEFAULT_LOCALE);
 
 		personInfoEClass = createEClass(PERSON_INFO);
@@ -4903,6 +4913,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_EmailLogoUriTemplate(), ecorePackage.getEString(), "emailLogoUriTemplate", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_LetterSalutation(), ecorePackage.getEString(), "letterSalutation", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_LetterClosing(), ecorePackage.getEString(), "letterClosing", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_Footnote(), ecorePackage.getEString(), "footnote", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getAppManifest__GetDefaultLocale(), this.getLocale(), "getDefaultLocale", 1, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -5598,6 +5609,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "The first word of the CLOSING (E), which is placed several lines below the body, lines up with the first word in the heading and is the only word capitalized. A comma follows the closing.\n\nPossible closings include:\n\nPersonal:\nYour friend, Missing you, Sincerely,\nConfused, Affectionately,Cordially,\n\nBusiness:\nSincerely yours, Yours truly,Respectfully yours,"
+		   });		
+		addAnnotation
+		  (getAppManifest_Footnote(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The footnote is shown on all frontend pages, usually positioned below the main content, but above the footer."
 		   });		
 		addAnnotation
 		  (personInfoEClass, 

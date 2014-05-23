@@ -14,12 +14,10 @@ import java.util.NavigableMap;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Set;
-
 import javax.measure.Measurable;
 import javax.measure.quantity.Quantity;
 import javax.measure.quantity.Temperature;
 import javax.measure.unit.Unit;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -75,7 +73,6 @@ import org.soluvas.commons.Translation;
 import org.soluvas.commons.TranslationManager;
 import org.soluvas.commons.TranslationState;
 import org.soluvas.commons.WebAddress;
-
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 

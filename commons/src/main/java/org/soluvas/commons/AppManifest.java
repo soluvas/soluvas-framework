@@ -48,6 +48,7 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getLetterSalutation <em>Letter Salutation</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getLetterClosing <em>Letter Closing</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getFootnote <em>Footnote</em>}</li>
  * </ul>
  * </p>
  *
@@ -491,6 +492,31 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	void setLetterClosing(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Footnote</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The footnote is shown on all frontend pages, usually positioned below the main content, but above the footer.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Footnote</em>' attribute.
+	 * @see #setFootnote(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_Footnote()
+	 * @model
+	 * @generated
+	 */
+	String getFootnote();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getFootnote <em>Footnote</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Footnote</em>' attribute.
+	 * @see #getFootnote()
+	 * @generated
+	 */
+	void setFootnote(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Default Time Zone Id</b></em>' attribute.
