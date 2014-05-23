@@ -20,18 +20,7 @@ public interface TenantProvisioner<T> {
 	
 	AppManifest add(String tenantId, AppManifest appManifest, T provisionData, String trackingId) ;
 
-	T lookupOne(String tenantId);
-	
 	Set<String> findAllStyles();
 	
-	/**
-	 * @param tenantId
-	 * @param provisionData
-	 * @return
-	 * @deprecated Used TenantXmiBeansImpl instead
-	 */
-	@Deprecated
-	T modifyMall(String tenantId, T provisionData);
-
 	void cpp(File file);
 }
