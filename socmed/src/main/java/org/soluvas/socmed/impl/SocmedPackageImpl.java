@@ -10,6 +10,7 @@ import org.soluvas.socmed.FacebookSysConfig;
 import org.soluvas.socmed.SocmedFactory;
 import org.soluvas.socmed.SocmedPackage;
 import org.soluvas.socmed.TwitterSysConfig;
+import org.soluvas.socmed.YouTubeSysConfig;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +32,13 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * @generated
 	 */
 	private EClass twitterSysConfigEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass youTubeSysConfigEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -215,6 +223,24 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getYouTubeSysConfig() {
+		return youTubeSysConfigEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getYouTubeSysConfig_YouTubeTenantScreenName() {
+		return (EAttribute)youTubeSysConfigEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SocmedFactory getSocmedFactory() {
 		return (SocmedFactory)getEFactoryInstance();
 	}
@@ -252,6 +278,9 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		createEAttribute(twitterSysConfigEClass, TWITTER_SYS_CONFIG__TWITTER_TENANT_SCREEN_NAME);
 		createEAttribute(twitterSysConfigEClass, TWITTER_SYS_CONFIG__TWITTER_TENANT_ACCESS_TOKEN);
 		createEAttribute(twitterSysConfigEClass, TWITTER_SYS_CONFIG__TWITTER_TENANT_ACCESS_TOKEN_SECRET);
+
+		youTubeSysConfigEClass = createEClass(YOU_TUBE_SYS_CONFIG);
+		createEAttribute(youTubeSysConfigEClass, YOU_TUBE_SYS_CONFIG__YOU_TUBE_TENANT_SCREEN_NAME);
 	}
 
 	/**
@@ -298,6 +327,9 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		initEAttribute(getTwitterSysConfig_TwitterTenantScreenName(), ecorePackage.getEString(), "twitterTenantScreenName", null, 0, 1, TwitterSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTwitterSysConfig_TwitterTenantAccessToken(), ecorePackage.getEString(), "twitterTenantAccessToken", null, 0, 1, TwitterSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTwitterSysConfig_TwitterTenantAccessTokenSecret(), ecorePackage.getEString(), "twitterTenantAccessTokenSecret", null, 0, 1, TwitterSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(youTubeSysConfigEClass, YouTubeSysConfig.class, "YouTubeSysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getYouTubeSysConfig_YouTubeTenantScreenName(), ecorePackage.getEString(), "youTubeTenantScreenName", null, 0, 1, YouTubeSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -380,6 +412,12 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Access token secret that has access to this tenant\'s Twitter account, referred by {@link #getTwitterTenantScreenName()}."
+		   });		
+		addAnnotation
+		  (getYouTubeSysConfig_YouTubeTenantScreenName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "YouTube user screen name for the tenant, e.g. <a href=\"http://www.youtube.com/user/BippoID\">bippoID</a>."
 		   });
 	}
 

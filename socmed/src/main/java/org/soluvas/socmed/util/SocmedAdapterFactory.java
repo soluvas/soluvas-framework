@@ -76,6 +76,10 @@ public class SocmedAdapterFactory extends AdapterFactoryImpl {
 				return createTwitterSysConfigAdapter();
 			}
 			@Override
+			public Adapter caseYouTubeSysConfig(YouTubeSysConfig object) {
+				return createYouTubeSysConfigAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -120,6 +124,20 @@ public class SocmedAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTwitterSysConfigAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.socmed.YouTubeSysConfig <em>You Tube Sys Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.socmed.YouTubeSysConfig
+	 * @generated
+	 */
+	public Adapter createYouTubeSysConfigAdapter() {
 		return null;
 	}
 
