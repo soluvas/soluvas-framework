@@ -68,6 +68,7 @@ import com.google.common.base.Preconditions;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterSalutation <em>Letter Salutation</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterClosing <em>Letter Closing</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getFootnote <em>Footnote</em>}</li>
  * </ul>
  * </p>
  *
@@ -623,6 +624,25 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	protected String letterClosing = LETTER_CLOSING_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getFootnote() <em>Footnote</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFootnote()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String FOOTNOTE_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getFootnote() <em>Footnote</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFootnote()
+	 * @generated
+	 * @ordered
+	 */
+	protected String footnote = FOOTNOTE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1120,6 +1140,27 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getFootnote() {
+		return footnote;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFootnote(String newFootnote) {
+		String oldFootnote = footnote;
+		footnote = newFootnote;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__FOOTNOTE, oldFootnote, footnote));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getDefaultTimeZoneId() {
 		return defaultTimeZoneId;
@@ -1475,6 +1516,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getLetterSalutation();
 			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
 				return getLetterClosing();
+			case CommonsPackage.APP_MANIFEST__FOOTNOTE:
+				return getFootnote();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1564,6 +1607,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return;
 			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
 				setLetterClosing((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__FOOTNOTE:
+				setFootnote((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1655,6 +1701,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
 				setLetterClosing(LETTER_CLOSING_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__FOOTNOTE:
+				setFootnote(FOOTNOTE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1725,6 +1774,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return LETTER_SALUTATION_EDEFAULT == null ? letterSalutation != null : !LETTER_SALUTATION_EDEFAULT.equals(letterSalutation);
 			case CommonsPackage.APP_MANIFEST__LETTER_CLOSING:
 				return LETTER_CLOSING_EDEFAULT == null ? letterClosing != null : !LETTER_CLOSING_EDEFAULT.equals(letterClosing);
+			case CommonsPackage.APP_MANIFEST__FOOTNOTE:
+				return FOOTNOTE_EDEFAULT == null ? footnote != null : !FOOTNOTE_EDEFAULT.equals(footnote);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1902,6 +1953,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(letterSalutation);
 		result.append(", letterClosing: ");
 		result.append(letterClosing);
+		result.append(", footnote: ");
+		result.append(footnote);
 		result.append(')');
 		return result.toString();
 	}

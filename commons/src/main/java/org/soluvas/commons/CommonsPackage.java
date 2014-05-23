@@ -422,13 +422,22 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__LETTER_CLOSING = POSITIONABLE_FEATURE_COUNT + 27;
 
 	/**
+	 * The feature id for the '<em><b>Footnote</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__FOOTNOTE = POSITIONABLE_FEATURE_COUNT + 28;
+
+	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 28;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 29;
 
 	/**
 	 * The operation id for the '<em>Expand</em>' operation.
@@ -6067,6 +6076,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_LetterClosing();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getFootnote <em>Footnote</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Footnote</em>'.
+	 * @see org.soluvas.commons.AppManifest#getFootnote()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_Footnote();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9701,6 +9721,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__LETTER_CLOSING = eINSTANCE.getAppManifest_LetterClosing();
+
+		/**
+		 * The meta object literal for the '<em><b>Footnote</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__FOOTNOTE = eINSTANCE.getAppManifest_Footnote();
 
 		/**
 		 * The meta object literal for the '<em><b>Default Time Zone Id</b></em>' attribute feature.
