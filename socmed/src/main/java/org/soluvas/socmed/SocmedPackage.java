@@ -212,6 +212,44 @@ public interface SocmedPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.socmed.YouTubeSysConfig <em>You Tube Sys Config</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.socmed.YouTubeSysConfig
+	 * @see org.soluvas.socmed.impl.SocmedPackageImpl#getYouTubeSysConfig()
+	 * @generated
+	 */
+	int YOU_TUBE_SYS_CONFIG = 2;
+
+	/**
+	 * The feature id for the '<em><b>You Tube Tenant Screen Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOU_TUBE_SYS_CONFIG__YOU_TUBE_TENANT_SCREEN_NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>You Tube Sys Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOU_TUBE_SYS_CONFIG_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>You Tube Sys Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOU_TUBE_SYS_CONFIG_OPERATION_COUNT = 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.socmed.FacebookSysConfig <em>Facebook Sys Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -353,6 +391,27 @@ public interface SocmedPackage extends EPackage {
 	EAttribute getTwitterSysConfig_TwitterTenantAccessTokenSecret();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.socmed.YouTubeSysConfig <em>You Tube Sys Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>You Tube Sys Config</em>'.
+	 * @see org.soluvas.socmed.YouTubeSysConfig
+	 * @generated
+	 */
+	EClass getYouTubeSysConfig();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.socmed.YouTubeSysConfig#getYouTubeTenantScreenName <em>You Tube Tenant Screen Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>You Tube Tenant Screen Name</em>'.
+	 * @see org.soluvas.socmed.YouTubeSysConfig#getYouTubeTenantScreenName()
+	 * @see #getYouTubeSysConfig()
+	 * @generated
+	 */
+	EAttribute getYouTubeSysConfig_YouTubeTenantScreenName();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -482,6 +541,24 @@ public interface SocmedPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TWITTER_SYS_CONFIG__TWITTER_TENANT_ACCESS_TOKEN_SECRET = eINSTANCE.getTwitterSysConfig_TwitterTenantAccessTokenSecret();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.socmed.YouTubeSysConfig <em>You Tube Sys Config</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.socmed.YouTubeSysConfig
+		 * @see org.soluvas.socmed.impl.SocmedPackageImpl#getYouTubeSysConfig()
+		 * @generated
+		 */
+		EClass YOU_TUBE_SYS_CONFIG = eINSTANCE.getYouTubeSysConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>You Tube Tenant Screen Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute YOU_TUBE_SYS_CONFIG__YOU_TUBE_TENANT_SCREEN_NAME = eINSTANCE.getYouTubeSysConfig_YouTubeTenantScreenName();
 
 	}
 

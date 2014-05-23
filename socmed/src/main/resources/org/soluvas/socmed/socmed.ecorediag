@@ -30,7 +30,27 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_02Ts8dj5EeOQzq-LW-VHsg" fontColor="4210752" fontName="OxygenSans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="socmed.ecore#//TwitterSysConfig"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_02Ts8tj5EeOQzq-LW-VHsg" x="197" y="309"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_02Ts8tj5EeOQzq-LW-VHsg" x="84" y="120"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_j1hhYOJNEeO9_uxTaW4ZVg" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_j1ivgOJNEeO9_uxTaW4ZVg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_j1ivgeJNEeO9_uxTaW4ZVg" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_lMvL8OJNEeO9_uxTaW4ZVg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="socmed.ecore#//YouTubeSysConfig/youTubeTenantScreenName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_lMvL8eJNEeO9_uxTaW4ZVg"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_j1ivguJNEeO9_uxTaW4ZVg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_j1ivg-JNEeO9_uxTaW4ZVg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_j1ivhOJNEeO9_uxTaW4ZVg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_j1jWkOJNEeO9_uxTaW4ZVg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_j1jWkeJNEeO9_uxTaW4ZVg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_j1jWkuJNEeO9_uxTaW4ZVg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_j1jWk-JNEeO9_uxTaW4ZVg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_j1hhYeJNEeO9_uxTaW4ZVg" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="socmed.ecore#//YouTubeSysConfig"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_j1hhYuJNEeO9_uxTaW4ZVg" x="581" y="107"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_wn8PEdj5EeOQzq-LW-VHsg"/>
   <element xmi:type="ecore:EPackage" href="socmed.ecore#/"/>
