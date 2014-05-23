@@ -43,4 +43,15 @@ public class ImageResource {
 		return renderedJs;
 	}
 
+	//	@GET @Path("images_product")
+//	public Map<ImageStyles, DisplayImage> findImagesByProductId(@QueryParam("productId") String productId) {
+//		final Map<ImageStyles, DisplayImage> imageProductMap = new HashMap<>();
+//		imageProductMap.put(ImageStyles.LARGE, imageMgr.getSafeImage(ImageTypes.PRODUCT, productId, ImageStyles.LARGE));
+//		imageProductMap.put(ImageStyles.NORMAL, imageMgr.getSafeImage(ImageTypes.PRODUCT, productId, ImageStyles.NORMAL));
+//		imageProductMap.put(ImageStyles.ORIGINAL, imageMgr.getSafeImage(ImageTypes.PRODUCT, productId, ImageStyles.ORIGINAL));
+//		imageProductMap.put(ImageStyles.SMALL, imageMgr.getSafeImage(ImageTypes.PRODUCT, productId, ImageStyles.SMALL));
+//		imageProductMap.put(ImageStyles.THUMBNAIL, imageMgr.getSafeImage(ImageTypes.PRODUCT, productId, ImageStyles.THUMBNAIL));
+//		return imageProductMap;
+//	}
+
 }
