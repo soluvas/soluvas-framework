@@ -56,6 +56,11 @@
 					<artifactId>jsr-275</artifactId>
 					<groupId>javax.measure</groupId>
 				</exclusion>
+				<exclusion>
+					<!-- Please use jcl-over-slf4j instead -->
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
   		

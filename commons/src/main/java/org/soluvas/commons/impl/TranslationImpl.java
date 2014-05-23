@@ -124,6 +124,7 @@ public class TranslationImpl extends MinimalEObjectImpl.Container implements Tra
 	}
 	
 	protected void setMessages(Map<String, String> messages) {
+		getMessages().clear();
 		getMessages().putAll(messages);
 	}
 

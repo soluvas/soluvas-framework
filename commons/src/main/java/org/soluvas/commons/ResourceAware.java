@@ -4,6 +4,8 @@ package org.soluvas.commons;
 
 import org.eclipse.emf.ecore.EObject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Resource Aware</b></em>'.
@@ -37,6 +39,7 @@ public interface ResourceAware extends EObject {
 	 * @model transient="true"
 	 * @generated
 	 */
+	@JsonIgnore
 	String getResourceUri();
 
 	/**
@@ -62,6 +65,7 @@ public interface ResourceAware extends EObject {
 	 * @model transient="true"
 	 * @generated
 	 */
+	@JsonIgnore
 	String getResourceName();
 
 	/**
@@ -90,6 +94,7 @@ public interface ResourceAware extends EObject {
 	 * @model transient="true"
 	 * @generated
 	 */
+	@JsonIgnore
 	ResourceType getResourceType();
 
 	/**
