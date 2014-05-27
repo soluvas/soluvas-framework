@@ -8,7 +8,6 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>org.soluvas.jaxrs</artifactId>
-	<!-- packaging>bundle</packaging-->
 	<packaging>jar</packaging>
 	<name>Soluvas JAX-RS</name>
 	<description>JAX-RS 1.1 and 2.0 ContextResolver for Jackson 1.9 and 2.x.</description>
@@ -71,21 +70,5 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<!-- plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<configuration>
-					<instructions>
-						<Import-Package>com.fasterxml.jackson.*;resolution:=optional,
-							org.codehaus.jackson;resolution:=optional,
-							*</Import-Package>
-					</instructions>
-				</configuration>
-			</plugin-->
-		</plugins>
-	</build>
 
 </project>

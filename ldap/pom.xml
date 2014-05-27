@@ -73,8 +73,12 @@
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
-					<artifactId>apacheds-jdbm2</artifactId>
 					<groupId>org.apache.directory.jdbm</groupId>
+					<artifactId>apacheds-jdbm2</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.directory.jdbm</groupId>
+					<artifactId>apacheds-jdbm1</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -152,25 +156,5 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<!-- plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<configuration>
-					<instructions>
-						<Import-Package>
-							org.apache.directory.api.util,
-							org.apache.directory.server.*;resolution:=optional,
-							org.apache.felix.service.command;resolution:=optional,
-							org.apache.felix.gogo.commands;resolution:=optional,
-							org.apache.karaf.shell.console;resolution:=optional,
-							*</Import-Package>
-					</instructions>
-				</configuration>
-			</plugin-->
-		</plugins>
-	</build>
 
 </project>
