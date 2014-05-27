@@ -19,7 +19,7 @@ public class EmfModule extends SimpleModule {
 //		setMixInAnnotation(EList.class, EListMixin.class);
 		
 		addSerializer(EMap.class, new EMapSerializer());
-		addDeserializer(EMap.class, new EMapDeserializer());
+//		addDeserializer(EMap.class, new EMapDeserializer());
 //		addSerializer(EList.class, new EListSerializer());
 	}
 	
