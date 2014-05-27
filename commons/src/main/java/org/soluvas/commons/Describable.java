@@ -36,7 +36,7 @@ public interface Describable extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Description for this entity, in <a href="http://daringfireball.net/projects/markdown/">Markdown</a> format.
+	 * Description for this entity, in <a href="https://en.wikipedia.org/wiki/AsciiDoc">AsciiDoc</a> format.
 	 * If <a href="http://dev.w3.org/html5/rdfa/">HTML+RDFa (Linked Data)</a> format is desired, you should create a separate {@code descriptionHtml} attribute.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Description</em>' attribute.
