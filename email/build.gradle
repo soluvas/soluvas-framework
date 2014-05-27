@@ -1,5 +1,0 @@
-dependencies {
-    compile project(':ldap')
-    compile 'org.apache.commons:commons-email:1.2'
-    compile libraries.mustache
-}

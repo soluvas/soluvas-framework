@@ -12,28 +12,28 @@
 	<modules>
 		<!-- Infrastructure -->
 		<module>commons</module>
-		<module>data</module>
-		<module>social</module>
-		<module>jaxrs</module>
-		<module>ldap</module>
-		<module>security</module>
-		<module>schedule</module>
-		<module>jpa</module>
-		<module>mongo</module>
-		<module>couchdb</module>
-		<module>email</module>
-		<module>taxonomy</module>
-		<module>category</module>
-		<module>folder</module>
+<!-- 		<module>data</module> -->
+<!-- 		<module>social</module> -->
+<!-- 		<module>jaxrs</module> -->
+<!-- 		<module>ldap</module> -->
+<!-- 		<module>security</module> -->
+<!-- 		<module>schedule</module> -->
+<!-- 		<module>jpa</module> -->
+<!-- 		<module>mongo</module> -->
+<!-- 		<module>couchdb</module> -->
+<!-- 		<module>email</module> -->
+<!-- 		<module>taxonomy</module> -->
+<!-- 		<module>category</module> -->
+<!-- 		<module>folder</module> -->
 		<!-- Backends -->
-		<module>image</module>
+<!-- 		<module>image</module> -->
 		<!-- Others -->
-		<module>socmed</module>
-		<module>newsletter</module>
-		<module>story</module>
-		<module>rules</module>
-		<module>geo</module>
-		<module>notify</module>
+<!-- 		<module>socmed</module> -->
+<!-- 		<module>newsletter</module> -->
+<!-- 		<module>story</module> -->
+<!-- 		<module>rules</module> -->
+<!-- 		<module>geo</module> -->
+<!-- 		<module>notify</module> -->
 	</modules>
 
 	<scm>
@@ -867,8 +867,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.1</version>
 					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
+						<source>1.8</source>
+						<target>1.8</target>
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>

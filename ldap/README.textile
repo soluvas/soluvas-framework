@@ -1,8 +1,0 @@
-h1. Soluvas LDAP
-
-Import and export LDAP Directory data as:
-
-1. RDF
-2. JSON
-3. Atom
-4. LDIF

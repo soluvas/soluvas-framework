@@ -1,4 +1,0 @@
-dependencies {
-    compile project(':commons')
-    compile libraries.mongo, libraries.morphia
-}

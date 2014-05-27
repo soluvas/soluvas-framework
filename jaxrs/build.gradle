@@ -1,5 +1,0 @@
-dependencies {
-    compile project(':commons')
-    compile libraries.jackson1
-    compile libraries.servlet, libraries.jsr311
-}
