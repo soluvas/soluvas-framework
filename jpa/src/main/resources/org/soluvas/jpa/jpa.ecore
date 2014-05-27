@@ -96,6 +96,28 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="longitude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="elevation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="CurrencyUnit" instanceClassName="org.joda.money.CurrencyUnit"/>
   <eClassifiers xsi:type="ecore:EDataType" name="DateTime" instanceClassName="org.joda.time.DateTime"/>
   <eClassifiers xsi:type="ecore:EDataType" name="LocalDate" instanceClassName="org.joda.time.LocalDate"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Quantity" instanceClassName="javax.measure.Quantity"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Unit" instanceClassName="javax.measure.unit.Unit">
+    <eTypeParameters name="Q">
+      <eBounds eClassifier="#//Quantity"/>
+    </eTypeParameters>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="UUID" instanceClassName="java.util.UUID"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="Gender">
+    <eLiterals name="male" value="1"/>
+    <eLiterals name="female" value="2"/>
+    <eLiterals name="unknown"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PersonInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slug" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" eType="#//Gender"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="GenericStatus" instanceClassName="org.soluvas.commons.GenericStatus"/>
 </ecore:EPackage>
