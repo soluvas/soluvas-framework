@@ -1,7 +1,7 @@
 package org.soluvas.jpa.jpa;
 
 import javax.persistence.Basic;
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
@@ -11,7 +11,7 @@ import javax.persistence.Enumerated;
  * 
  * @generated
  */
-@Entity(name = "jpa_PersonInfo")
+@Embeddable()
 public class PersonInfo {
 
 	/**
