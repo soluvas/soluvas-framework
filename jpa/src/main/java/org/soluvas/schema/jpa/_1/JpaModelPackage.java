@@ -1,17 +1,23 @@
 package org.soluvas.schema.jpa._1;
 
+import java.util.UUID;
+import javax.measure.quantity.Quantity;
+import javax.measure.unit.Unit;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.texo.model.ModelFactory;
 import org.eclipse.emf.texo.model.ModelPackage;
 import org.eclipse.emf.texo.model.ModelResolver;
 import org.eclipse.emf.texo.utils.ModelUtils;
+import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.soluvas.commons.GenericStatus;
 
 /**
  * The <b>Package</b> for the model '<em><b>jpa</b></em>'. It contains
@@ -51,14 +57,56 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int DATETIME_CLASSIFIER_ID = 2;
+	public static final int DATETIME_CLASSIFIER_ID = 4;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int LOCALDATE_CLASSIFIER_ID = 3;
+	public static final int GENDER_CLASSIFIER_ID = 9;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int CURRENCYUNIT_CLASSIFIER_ID = 3;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int LOCALDATE_CLASSIFIER_ID = 5;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int QUANTITY_CLASSIFIER_ID = 6;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int UNIT_CLASSIFIER_ID = 7;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int UUID_CLASSIFIER_ID = 8;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int GENERICSTATUS_CLASSIFIER_ID = 10;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -250,6 +298,48 @@ public class JpaModelPackage extends ModelPackage {
 	public static final int GEOLOCATION_ELEVATION_FEATURE_ID = 2;
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int PERSONINFO_CLASSIFIER_ID = 2;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int PERSONINFO_ID_FEATURE_ID = 0;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int PERSONINFO_SLUG_FEATURE_ID = 1;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int PERSONINFO_NAME_FEATURE_ID = 2;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int PERSONINFO_EMAIL_FEATURE_ID = 3;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int PERSONINFO_GENDER_FEATURE_ID = 4;
+
+	/**
 	 * The static member with the instance of this {@link ModelPackage}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -293,6 +383,11 @@ public class JpaModelPackage extends ModelPackage {
 		ModelResolver.getInstance().registerClassModelMapping(
 				Geolocation.class, modelPackage.getGeolocationEClass(),
 				modelPackage);
+		ModelResolver.getInstance().registerClassModelMapping(PersonInfo.class,
+				modelPackage.getPersonInfoEClass(), modelPackage);
+
+		ModelResolver.getInstance().registerClassModelMapping(Gender.class,
+				modelPackage.getGenderEEnum(), modelPackage);
 
 		// and return ourselves
 		return modelPackage;
@@ -731,6 +826,83 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
+	 * Returns the {@link EClass} '<em><b>PersonInfo</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EClass} '<em><b>PersonInfo</b></em>'
+	 * @generated
+	 */
+	public EClass getPersonInfoEClass() {
+		return (EClass) getEPackage().getEClassifiers().get(
+				PERSONINFO_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '<em><b>PersonInfo.id</b></em>'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>PersonInfo.id</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getPersonInfo_Id() {
+		return (EAttribute) getPersonInfoEClass().getEAllStructuralFeatures()
+				.get(PERSONINFO_ID_FEATURE_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '<em><b>PersonInfo.slug</b></em>'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>PersonInfo.slug</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getPersonInfo_Slug() {
+		return (EAttribute) getPersonInfoEClass().getEAllStructuralFeatures()
+				.get(PERSONINFO_SLUG_FEATURE_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '<em><b>PersonInfo.name</b></em>'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>PersonInfo.name</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getPersonInfo_Name() {
+		return (EAttribute) getPersonInfoEClass().getEAllStructuralFeatures()
+				.get(PERSONINFO_NAME_FEATURE_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '<em><b>PersonInfo.email</b></em>
+	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>PersonInfo.email</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getPersonInfo_Email() {
+		return (EAttribute) getPersonInfoEClass().getEAllStructuralFeatures()
+				.get(PERSONINFO_EMAIL_FEATURE_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '<em><b>PersonInfo.gender</b></em>
+	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>PersonInfo.gender</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getPersonInfo_Gender() {
+		return (EAttribute) getPersonInfoEClass().getEAllStructuralFeatures()
+				.get(PERSONINFO_GENDER_FEATURE_ID);
+	}
+
+	/**
 	 * Returns the {@link EDataType} '<em><b>DateTime</b></em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -744,6 +916,31 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
+	 * Returns the EEnum '<em><b>Gender</b></em>'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return an instance of the EEnum representing '<em><b>Gender</b></em>'
+	 * @generated
+	 */
+	public EEnum getGenderEEnum() {
+		return (EEnum) getEPackage().getEClassifiers()
+				.get(GENDER_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EDataType} '<em><b>CurrencyUnit</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>CurrencyUnit</b></em>'
+	 * @generated
+	 */
+	public EDataType getCurrencyUnitEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				CURRENCYUNIT_CLASSIFIER_ID);
+	}
+
+	/**
 	 * Returns the {@link EDataType} '<em><b>LocalDate</b></em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -754,6 +951,58 @@ public class JpaModelPackage extends ModelPackage {
 	public EDataType getLocalDateEDataType() {
 		return (EDataType) getEPackage().getEClassifiers().get(
 				LOCALDATE_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EDataType} '<em><b>Quantity</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>Quantity</b></em>'
+	 * @generated
+	 */
+	public EDataType getQuantityEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				QUANTITY_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EDataType} '<em><b>Unit</b></em>'. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>Unit</b></em>'
+	 * @generated
+	 */
+	public EDataType getUnitEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				UNIT_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EDataType} '<em><b>UUID</b></em>'. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>UUID</b></em>'
+	 * @generated
+	 */
+	public EDataType getUUIDEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				UUID_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EDataType} '<em><b>GenericStatus</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>GenericStatus</b></em>'
+	 * @generated
+	 */
+	public EDataType getGenericStatusEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				GENERICSTATUS_CLASSIFIER_ID);
 	}
 
 	/**
@@ -771,10 +1020,24 @@ public class JpaModelPackage extends ModelPackage {
 			return PostalAddress.class;
 		case GEOLOCATION_CLASSIFIER_ID:
 			return Geolocation.class;
+		case PERSONINFO_CLASSIFIER_ID:
+			return PersonInfo.class;
 		case DATETIME_CLASSIFIER_ID:
 			return DateTime.class;
+		case GENDER_CLASSIFIER_ID:
+			return Gender.class;
+		case CURRENCYUNIT_CLASSIFIER_ID:
+			return CurrencyUnit.class;
 		case LOCALDATE_CLASSIFIER_ID:
 			return LocalDate.class;
+		case QUANTITY_CLASSIFIER_ID:
+			return Quantity.class;
+		case UNIT_CLASSIFIER_ID:
+			return Unit.class;
+		case UUID_CLASSIFIER_ID:
+			return UUID.class;
+		case GENERICSTATUS_CLASSIFIER_ID:
+			return GenericStatus.class;
 		default:
 			throw new IllegalArgumentException("The EClassifier '"
 					+ eClassifier + "' is not defined in this EPackage");

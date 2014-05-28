@@ -1,6 +1,9 @@
 package org.soluvas.schema.jpa._1;
 
 import java.util.List;
+import java.util.UUID;
+import javax.measure.quantity.Quantity;
+import javax.measure.unit.Unit;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -10,8 +13,10 @@ import org.eclipse.emf.texo.model.ModelFactory;
 import org.eclipse.emf.texo.model.ModelFeatureMapEntry;
 import org.eclipse.emf.texo.model.ModelObject;
 import org.eclipse.emf.texo.model.ModelPackage;
+import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.soluvas.commons.GenericStatus;
 
 /**
  * The <b>{@link ModelFactory}</b> for the types of this model: jpa. It contains
@@ -38,6 +43,8 @@ public class JpaModelFactory implements ModelFactory {
 			return createPostalAddress();
 		case JpaModelPackage.GEOLOCATION_CLASSIFIER_ID:
 			return createGeolocation();
+		case JpaModelPackage.PERSONINFO_CLASSIFIER_ID:
+			return createPersonInfo();
 		default:
 			throw new IllegalArgumentException("The EClass '"
 					+ eClass.getName()
@@ -65,6 +72,9 @@ public class JpaModelFactory implements ModelFactory {
 			break;
 		case JpaModelPackage.GEOLOCATION_CLASSIFIER_ID:
 			modelObject = new GeolocationModelObject();
+			break;
+		case JpaModelPackage.PERSONINFO_CLASSIFIER_ID:
+			modelObject = new PersonInfoModelObject();
 			break;
 		default:
 			throw new IllegalArgumentException("The EClass '" + eClass
@@ -128,6 +138,17 @@ public class JpaModelFactory implements ModelFactory {
 	}
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the model object representing the EClass
+	 *         PersonInfo
+	 * @generated
+	 */
+	public PersonInfo createPersonInfo() {
+		return new PersonInfo();
+	}
+
+	/**
 	 * Converts an instance of an {@link EDataType} to a String. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -142,8 +163,20 @@ public class JpaModelFactory implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 		case JpaModelPackage.DATETIME_CLASSIFIER_ID:
 			return createDateTimeFromString(value);
+		case JpaModelPackage.GENDER_CLASSIFIER_ID:
+			return createGenderFromString(value);
+		case JpaModelPackage.CURRENCYUNIT_CLASSIFIER_ID:
+			return createCurrencyUnitFromString(value);
 		case JpaModelPackage.LOCALDATE_CLASSIFIER_ID:
 			return createLocalDateFromString(value);
+		case JpaModelPackage.QUANTITY_CLASSIFIER_ID:
+			return createQuantityFromString(value);
+		case JpaModelPackage.UNIT_CLASSIFIER_ID:
+			return createUnitFromString(value);
+		case JpaModelPackage.UUID_CLASSIFIER_ID:
+			return createUUIDFromString(value);
+		case JpaModelPackage.GENERICSTATUS_CLASSIFIER_ID:
+			return createGenericStatusFromString(value);
 		default:
 			throw new IllegalArgumentException("The EDatatype '" + eDataType
 					+ "' is not defined in this EPackage");
@@ -164,8 +197,20 @@ public class JpaModelFactory implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 		case JpaModelPackage.DATETIME_CLASSIFIER_ID:
 			return convertDateTimeToString((DateTime) value);
+		case JpaModelPackage.GENDER_CLASSIFIER_ID:
+			return convertGenderToString((Gender) value);
+		case JpaModelPackage.CURRENCYUNIT_CLASSIFIER_ID:
+			return convertCurrencyUnitToString((CurrencyUnit) value);
 		case JpaModelPackage.LOCALDATE_CLASSIFIER_ID:
 			return convertLocalDateToString((LocalDate) value);
+		case JpaModelPackage.QUANTITY_CLASSIFIER_ID:
+			return convertQuantityToString((Quantity) value);
+		case JpaModelPackage.UNIT_CLASSIFIER_ID:
+			return convertUnitToString((Unit) value);
+		case JpaModelPackage.UUID_CLASSIFIER_ID:
+			return convertUUIDToString((UUID) value);
+		case JpaModelPackage.GENERICSTATUS_CLASSIFIER_ID:
+			return convertGenericStatusToString((GenericStatus) value);
 		default:
 			throw new IllegalArgumentException("The EDatatype '" + eDataType
 					+ "' is not defined in this EPackage.");
@@ -213,6 +258,82 @@ public class JpaModelFactory implements ModelFactory {
 	}
 
 	/**
+	 * Converts the EDataType: Gender to a String. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertGenderToString(Gender value) {
+		if (value == null) {
+			return null;
+		}
+		return value.toString();
+	}
+
+	/**
+	 * Creates an instance of the EDataType: Gender from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public Gender createGenderFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		return Gender.get(value);
+	}
+
+	/**
+	 * Converts the EDataType: CurrencyUnit to a String. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertCurrencyUnitToString(CurrencyUnit value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE
+				.getCurrencyUnitEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: CurrencyUnit from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public CurrencyUnit createCurrencyUnitFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE
+				.getCurrencyUnitEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
 	 * Converts the EDataType: LocalDate to a String. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -247,6 +368,168 @@ public class JpaModelFactory implements ModelFactory {
 			return null;
 		}
 		EDataType eDataType = JpaModelPackage.INSTANCE.getLocalDateEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Converts the EDataType: Quantity to a String. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertQuantityToString(Quantity value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getQuantityEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: Quantity from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public Quantity createQuantityFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getQuantityEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Converts the EDataType: Unit to a String. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertUnitToString(Unit value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getUnitEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: Unit from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public Unit createUnitFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getUnitEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Converts the EDataType: UUID to a String. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertUUIDToString(UUID value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getUUIDEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: UUID from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public UUID createUUIDFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getUUIDEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Converts the EDataType: GenericStatus to a String. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertGenericStatusToString(GenericStatus value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE
+				.getGenericStatusEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: GenericStatus from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public GenericStatus createGenericStatusFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE
+				.getGenericStatusEDataType();
 		throw new UnsupportedOperationException(
 				"Operation not support for EDataType " + eDataType.getName()
 						+ " converting from value " + value);
@@ -531,6 +814,110 @@ public class JpaModelFactory implements ModelFactory {
 				return;
 			case JpaModelPackage.GEOLOCATION_ELEVATION_FEATURE_ID:
 				getTarget().setElevation((Double) value);
+				return;
+			default:
+				super.eSet(eStructuralFeature, value);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean eAddTo(EStructuralFeature eStructuralFeature,
+				Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+
+			default:
+				return super.eAddTo(eStructuralFeature, value);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean eRemoveFrom(EStructuralFeature eStructuralFeature,
+				Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+
+			default:
+				return super.eRemoveFrom(eStructuralFeature, value);
+			}
+		}
+	}
+
+	/**
+	 * The adapter/wrapper for the EClass '<em><b>PersonInfo</b></em>'.
+	 *
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @param <E>
+	 *            the domain model java class
+	 *
+	 * @generated
+	 */
+	public static class PersonInfoModelObject<E extends PersonInfo> extends
+			AbstractModelObject<E> {
+		/**
+		 * @generated
+		 */
+		public EClass eClass() {
+			return JpaModelPackage.INSTANCE.getPersonInfoEClass();
+		}
+
+		/**
+		 * @generated
+		 */
+		public ModelPackage getModelPackage() {
+			return JpaModelPackage.INSTANCE;
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public Object eGet(EStructuralFeature eStructuralFeature) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+			case JpaModelPackage.PERSONINFO_ID_FEATURE_ID:
+				return getTarget().getId();
+			case JpaModelPackage.PERSONINFO_SLUG_FEATURE_ID:
+				return getTarget().getSlug();
+			case JpaModelPackage.PERSONINFO_NAME_FEATURE_ID:
+				return getTarget().getName();
+			case JpaModelPackage.PERSONINFO_EMAIL_FEATURE_ID:
+				return getTarget().getEmail();
+			case JpaModelPackage.PERSONINFO_GENDER_FEATURE_ID:
+				return getTarget().getGender();
+			default:
+				return super.eGet(eStructuralFeature);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public void eSet(EStructuralFeature eStructuralFeature, Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+			case JpaModelPackage.PERSONINFO_ID_FEATURE_ID:
+				getTarget().setId((String) value);
+				return;
+			case JpaModelPackage.PERSONINFO_SLUG_FEATURE_ID:
+				getTarget().setSlug((String) value);
+				return;
+			case JpaModelPackage.PERSONINFO_NAME_FEATURE_ID:
+				getTarget().setName((String) value);
+				return;
+			case JpaModelPackage.PERSONINFO_EMAIL_FEATURE_ID:
+				getTarget().setEmail((String) value);
+				return;
+			case JpaModelPackage.PERSONINFO_GENDER_FEATURE_ID:
+				getTarget().setGender((Gender) value);
 				return;
 			default:
 				super.eSet(eStructuralFeature, value);
