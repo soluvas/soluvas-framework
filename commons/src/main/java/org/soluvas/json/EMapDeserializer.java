@@ -73,11 +73,11 @@ public class EMapDeserializer extends StdDeserializer<EMap<Object, Object>> {
 				if (input == null)
 					return null;
 				if (input instanceof List)
-					return new BasicEList<Object>((List) input);
+					return new BasicEList<>((List) input);
 				return input;
 			}
 		}));
-		return new BasicEMap<Object, Object>(transformed);
+		return new BasicEMap<>(transformed);
 	}
 
 }

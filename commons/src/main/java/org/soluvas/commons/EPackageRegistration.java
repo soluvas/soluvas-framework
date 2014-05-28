@@ -50,7 +50,9 @@ import com.google.common.collect.Lists;
  * }</pre>
  * 
  * @author ceefour
+ * @deprecated Soluvas Framework no longer supports OSGi environment, especially not with EMF
  */
+@Deprecated
 public class EPackageRegistration {
 
 	public static final class ClassToName implements Function<Class<?>, String> {
@@ -64,8 +66,8 @@ public class EPackageRegistration {
 	private final Iterable<Class<EPackage>> packages;
 	@Nonnull
 	private final BundleContext bundleContext;
-	private final List<ServiceRegistration<?>> pkgRegs = new ArrayList<ServiceRegistration<?>>();
-	private final List<ServiceRegistration<?>> factoryRegs = new ArrayList<ServiceRegistration<?>>();
+	private final List<ServiceRegistration<?>> pkgRegs = new ArrayList<>();
+	private final List<ServiceRegistration<?>> factoryRegs = new ArrayList<>();
 	
 	public EPackageRegistration(BundleContext bundleContext, Class<EPackage> pkg) {
 		super();
@@ -109,7 +111,7 @@ public class EPackageRegistration {
 				
 				final List<Class<?>> ePackageInterfaces = ClassUtils.getAllInterfaces(ePackage.getClass());
 				final List<String> ePackageInterfaceNames = Lists.transform( ePackageInterfaces, new ClassToName());
-				final Dictionary<String, Object> svcProps = new Hashtable<String, Object>();
+				final Dictionary<String, Object> svcProps = new Hashtable<>();
 				svcProps.put("name", ePackage.getName());
 				svcProps.put("nsURI", ePackage.getNsURI());
 				svcProps.put("nsPrefix", ePackage.getNsPrefix());

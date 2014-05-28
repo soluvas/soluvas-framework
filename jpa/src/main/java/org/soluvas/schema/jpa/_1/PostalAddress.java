@@ -3,11 +3,13 @@ package org.soluvas.schema.jpa._1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
+
 import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -120,7 +122,7 @@ public class PostalAddress implements Serializable {
 	 */
 	@ElementCollection()
 	@CollectionTable()
-	private List<String> mobiles = new ArrayList<String>();
+	private List<String> mobiles = new ArrayList<>();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -141,7 +143,7 @@ public class PostalAddress implements Serializable {
 	 */
 	@ElementCollection()
 	@CollectionTable()
-	private List<String> phones = new ArrayList<String>();
+	private List<String> phones = new ArrayList<>();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -160,7 +162,7 @@ public class PostalAddress implements Serializable {
 	 */
 	@ElementCollection()
 	@CollectionTable()
-	private List<String> homePhones = new ArrayList<String>();
+	private List<String> homePhones = new ArrayList<>();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

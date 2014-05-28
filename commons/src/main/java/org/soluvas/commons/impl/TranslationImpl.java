@@ -118,7 +118,7 @@ public class TranslationImpl extends MinimalEObjectImpl.Container implements Tra
 	@Override
 	public EMap<String, String> getMessages() {
 		if (messages == null) {
-			messages = new EcoreEMap<String,String>(CommonsPackage.Literals.TRANSLATION_MESSAGE_ENTRY, TranslationMessageEntryImpl.class, this, CommonsPackage.TRANSLATION__MESSAGES);
+			messages = new EcoreEMap<>(CommonsPackage.Literals.TRANSLATION_MESSAGE_ENTRY, TranslationMessageEntryImpl.class, this, CommonsPackage.TRANSLATION__MESSAGES);
 		}
 		return messages;
 	}

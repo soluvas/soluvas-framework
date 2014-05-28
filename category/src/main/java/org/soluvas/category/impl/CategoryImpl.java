@@ -26,10 +26,8 @@ import org.soluvas.category.CategoryPackage;
 import org.soluvas.category.CategoryStatus;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CategoryInfo;
-import org.soluvas.commons.CategoryLike;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Describable;
-import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.Informer;
 import org.soluvas.commons.NameContainer;
@@ -1003,7 +1001,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	@Override
 	public EList<Category> getCategories() {
 		if (categories == null) {
-			categories = new EObjectContainmentEList<Category>(Category.class, this, CategoryPackage.CATEGORY__CATEGORIES);
+			categories = new EObjectContainmentEList<>(Category.class, this, CategoryPackage.CATEGORY__CATEGORIES);
 		}
 		return categories;
 	}

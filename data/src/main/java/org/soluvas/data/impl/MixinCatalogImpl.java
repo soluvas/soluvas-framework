@@ -6,18 +6,13 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.Mixin;
 import org.soluvas.data.MixinCatalog;
@@ -89,6 +84,7 @@ public class MixinCatalogImpl extends EObjectImpl implements MixinCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -98,6 +94,7 @@ public class MixinCatalogImpl extends EObjectImpl implements MixinCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -110,9 +107,10 @@ public class MixinCatalogImpl extends EObjectImpl implements MixinCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Mixin> getMixins() {
 		if (mixins == null) {
-			mixins = new EObjectContainmentEList<Mixin>(Mixin.class, this, DataPackage.MIXIN_CATALOG__MIXINS);
+			mixins = new EObjectContainmentEList<>(Mixin.class, this, DataPackage.MIXIN_CATALOG__MIXINS);
 		}
 		return mixins;
 	}

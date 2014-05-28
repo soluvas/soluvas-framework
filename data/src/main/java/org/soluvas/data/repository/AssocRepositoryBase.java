@@ -176,7 +176,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	public long putInverse(
 			Multimap<? extends R, ? extends L> inverseMultimap) {
 		@SuppressWarnings("unchecked")
-		final Multimap<L, R> normal = ImmutableMultimap.copyOf((Multimap<R, L>) inverseMultimap).inverse();
+		final Multimap<L, R> normal = ImmutableMultimap.copyOf(inverseMultimap).inverse();
 		return put(normal);
 	}
 
@@ -296,7 +296,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 				entries, (int) (pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize()));
 		final Iterable<Entry<L, R>> limited = Iterables.limit(skipped, (int) pageable.getPageSize());
 		final List<Entry<L, R>> content = ImmutableList.copyOf(limited);
-		return new PageImpl<Entry<L, R>>(content, pageable, entries.size());
+		return new PageImpl<>(content, pageable, entries.size());
 	}
 	
 	/**
@@ -341,7 +341,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 				allRights, (int) (pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize()));
 		final Iterable<R> limited = Iterables.limit(skipped, (int) pageable.getPageSize());
 		final List<R> content = ImmutableList.copyOf(limited);
-		return new PageImpl<R>(content, pageable, allRights.size());
+		return new PageImpl<>(content, pageable, allRights.size());
 	}
 
 	/* (non-Javadoc)
@@ -354,7 +354,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 				allLefts, (int) (pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize()));
 		final Iterable<L> limited = Iterables.limit(skipped, (int) pageable.getPageSize());
 		final List<L> content = ImmutableList.copyOf(limited);
-		return new PageImpl<L>(content, pageable, allLefts.size());
+		return new PageImpl<>(content, pageable, allLefts.size());
 	}
 	
 }

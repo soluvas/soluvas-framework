@@ -65,7 +65,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 			final DateTime creationTime = !Strings.isNullOrEmpty(creationTimeStr) ? new DateTime(creationTimeStr) : null;
 			final String modificationTimeStr = (String) rel.getProperty("modificationTime", null);
 			final DateTime modificationTime = !Strings.isNullOrEmpty(modificationTimeStr) ? new DateTime(modificationTimeStr) : null;
-			return new TimestampedEdge<L, R>(left, right, creationTime, modificationTime);
+			return new TimestampedEdge<>(left, right, creationTime, modificationTime);
 		}
 
 	}
@@ -308,7 +308,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 				leftKind, leftId, skip, limit, matchingRights.size(), total, rightKind,
 				query, params);
 		
-		return new PageImpl<R>(matchingRights, null, total);
+		return new PageImpl<>(matchingRights, null, total);
 	}
 
 	/* (non-Javadoc)
@@ -355,16 +355,16 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 					final Relationship rel = (Relationship) input.get("rel");
 					final Node rightNode = (Node) input.get("right");
 					final R right = rightShadow.realize(rightNode);
-					return new ToEdge<L, R>(left, right).apply(rel);
+					return new ToEdge<>(left, right).apply(rel);
 				}
 			}) );
 			log.info("getLeft {} {} skip={} limit={} returned {}/{} {} rights: {} - {}",
 					leftKind, leftId, skip, limit, matchingRights.size(), total, rightKind,
 					query, params);
 			
-			return new PageImpl<Edge<L, R>>(matchingRights, null, total);
+			return new PageImpl<>(matchingRights, null, total);
 		} else {
-			return new PageImpl<Edge<L,R>>(ImmutableList.<Edge<L, R>>of());
+			return new PageImpl<>(ImmutableList.<Edge<L, R>>of());
 		}
 	}
 
@@ -405,7 +405,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 				rightKind, rightId, skip, limit, matchingLefts.size(), total, leftKind,
 				query, params);
 
-		return new PageImpl<L>(matchingLefts, null, total);
+		return new PageImpl<>(matchingLefts, null, total);
 	}
 	
 	@Override
@@ -448,16 +448,16 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 					final Relationship rel = (Relationship) input.get("rel");
 					final Node leftNode = (Node) input.get("left");
 					final L left = leftShadow.realize(leftNode);
-					return new ToEdge<L, R>(left, right).apply(rel);
+					return new ToEdge<>(left, right).apply(rel);
 				}
 			}) );
 			log.info("getRight {} {} skip={} limit={} returned {}/{} {} lefts: {} - {}",
 					rightKind, rightId, skip, limit, matchingLefts.size(), total, leftKind,
 					query, params);
 			
-			return new PageImpl<Edge<L, R>>(matchingLefts, null, total);
+			return new PageImpl<>(matchingLefts, null, total);
 		} else {
-			return new PageImpl<Edge<L, R>>(ImmutableList.<Edge<L, R>>of());
+			return new PageImpl<>(ImmutableList.<Edge<L, R>>of());
 		}
 	}
 	
@@ -475,7 +475,7 @@ public abstract class Neo4jRelationRepository<L, R> extends ExtendedAssocReposit
 			return null;
 		final L left = leftShadow.realize(rel.getStartNode());
 		final R right = rightShadow.realize(rel.getEndNode());
-		return new ToEdge<L, R>(left, right).apply(rel);
+		return new ToEdge<>(left, right).apply(rel);
 	}
 	
 }

@@ -3,6 +3,7 @@
 package org.soluvas.commons.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -362,6 +363,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNsPrefix() {
 		return nsPrefix;
 	}
@@ -371,6 +373,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNsPrefix(String newNsPrefix) {
 		String oldNsPrefix = nsPrefix;
 		nsPrefix = newNsPrefix;
@@ -548,6 +551,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParent(CategoryInfo newParent) {
 		CategoryInfo oldParent = parent;
 		parent = newParent;
@@ -563,7 +567,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	@Override
 	public EList<CategoryInfo> getParents() {
 		if (parents == null) {
-			parents = new EObjectContainmentEList<CategoryInfo>(CategoryInfo.class, this, CommonsPackage.CATEGORY_INFO__PARENTS);
+			parents = new EObjectContainmentEList<>(CategoryInfo.class, this, CommonsPackage.CATEGORY_INFO__PARENTS);
 		}
 		return parents;
 	}

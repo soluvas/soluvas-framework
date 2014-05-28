@@ -3,6 +3,7 @@
 package org.soluvas.commons.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -62,9 +63,10 @@ public class PersonCatalogImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Person> getPeople() {
 		if (people == null) {
-			people = new EObjectContainmentEList<Person>(Person.class, this, CommonsPackage.PERSON_CATALOG__PEOPLE);
+			people = new EObjectContainmentEList<>(Person.class, this, CommonsPackage.PERSON_CATALOG__PEOPLE);
 		}
 		return people;
 	}

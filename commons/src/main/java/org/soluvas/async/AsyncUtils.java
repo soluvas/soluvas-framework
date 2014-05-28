@@ -16,8 +16,8 @@ public class AsyncUtils {
 	
 	public static <V> V wrap(@Nonnull Function<FailingCallback<V>, Void> func) {
 		// Uses Optional because the callback may return null, and we need to distinguish between "our" null and "their" null
-		final AtomicReference<Optional<V>> success = new AtomicReference<Optional<V>>(Optional.<V>absent());
-		final AtomicReference<Optional<Throwable>> error = new AtomicReference<Optional<Throwable>>(Optional.<Throwable>absent());
+		final AtomicReference<Optional<V>> success = new AtomicReference<>(Optional.<V>absent());
+		final AtomicReference<Optional<Throwable>> error = new AtomicReference<>(Optional.<Throwable>absent());
 		func.apply(new FailingCallback<V>() {
 			@Override public void success(V data) {
 				success.set(Optional.of(data));

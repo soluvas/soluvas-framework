@@ -45,7 +45,7 @@ public class MixinEMapDeserializer extends StdDeserializer<EMap<String, Mixin>> 
 //				return input;
 //			}
 //		}));
-		return new BasicEMap<String, Mixin>(map);
+		return new BasicEMap<>(map);
 		
 	}
 

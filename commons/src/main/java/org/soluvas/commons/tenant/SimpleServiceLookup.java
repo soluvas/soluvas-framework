@@ -3,8 +3,6 @@ package org.soluvas.commons.tenant;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.annotation.Nonnull;
-
 import org.apache.felix.service.command.CommandSession;
 
 /**
@@ -18,7 +16,7 @@ public abstract class SimpleServiceLookup<T> implements ServiceLookup {
 	
 	public SimpleServiceLookup() {
 		super();
-		services = new ConcurrentHashMap<LookupKey, T>();
+		services = new ConcurrentHashMap<>();
 	}
 	
 	public SimpleServiceLookup(Map<LookupKey, T> services) {

@@ -126,8 +126,8 @@ public abstract class ExtendedAssocRepositoryBase<L, R, LID extends Serializable
 	@Override @Nonnull
 	public Page<R> getLeft(LID leftId, Pageable pageable) {
 		long skip = pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize();
-		final Page<R> upPage = doGetLeft(leftId, skip, (long) pageable.getPageSize());
-		return new PageImpl<R>(upPage.getContent(), pageable, upPage.getTotalElements());
+		final Page<R> upPage = doGetLeft(leftId, skip, pageable.getPageSize());
+		return new PageImpl<>(upPage.getContent(), pageable, upPage.getTotalElements());
 	}
 
 	/* (non-Javadoc)
@@ -136,8 +136,8 @@ public abstract class ExtendedAssocRepositoryBase<L, R, LID extends Serializable
 	@Override @Nonnull
 	public Page<L> getRight(RID rightId, Pageable pageable) {
 		long skip = pageable.getOffset() + pageable.getPageNumber() * pageable.getPageSize();
-		final Page<L> upPage = doGetRight(rightId, skip, (long) pageable.getPageSize());
-		return new PageImpl<L>(upPage.getContent(), pageable, upPage.getTotalElements());
+		final Page<L> upPage = doGetRight(rightId, skip, pageable.getPageSize());
+		return new PageImpl<>(upPage.getContent(), pageable, upPage.getTotalElements());
 	}
 	
 	/**

@@ -49,7 +49,7 @@ public class ValueEMapDeserializer extends StdDeserializer<EMap<String, EList<Va
 				return new BasicEList<Value<?>>(input);
 			}
 		}));
-		return new BasicEMap<String, EList<Value<?>>>(transformed);
+		return new BasicEMap<>(transformed);
 		
 	}
 

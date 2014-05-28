@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -73,7 +72,7 @@ public abstract class TenantCommandSupport extends OsgiCommandSupport {
 		final String tenantEnv = tenant.getTenantEnv();
 		
 		// List of get-ed services (to unget).
-		final Map<Field, ServiceReference<?>> serviceRefs = new HashMap<Field, ServiceReference<?>>();
+		final Map<Field, ServiceReference<?>> serviceRefs = new HashMap<>();
 
 		Class<?> clazz = getClass();
 		final ImmutableList.Builder<Field> fieldsBuilder = ImmutableList.builder();

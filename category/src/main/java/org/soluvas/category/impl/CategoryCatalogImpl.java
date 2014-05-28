@@ -6,18 +6,13 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.osgi.framework.Bundle;
 import org.soluvas.category.Category;
 import org.soluvas.category.CategoryCatalog;
@@ -173,9 +168,10 @@ public class CategoryCatalogImpl extends EObjectImpl implements CategoryCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Category> getCategories() {
 		if (categories == null) {
-			categories = new EObjectContainmentEList<Category>(Category.class, this, CategoryPackage.CATEGORY_CATALOG__CATEGORIES);
+			categories = new EObjectContainmentEList<>(Category.class, this, CategoryPackage.CATEGORY_CATALOG__CATEGORIES);
 		}
 		return categories;
 	}
@@ -185,6 +181,7 @@ public class CategoryCatalogImpl extends EObjectImpl implements CategoryCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -194,6 +191,7 @@ public class CategoryCatalogImpl extends EObjectImpl implements CategoryCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -206,6 +204,7 @@ public class CategoryCatalogImpl extends EObjectImpl implements CategoryCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResourceType getResourceType() {
 		return resourceType;
 	}
@@ -215,6 +214,7 @@ public class CategoryCatalogImpl extends EObjectImpl implements CategoryCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceType(ResourceType newResourceType) {
 		ResourceType oldResourceType = resourceType;
 		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
@@ -227,6 +227,7 @@ public class CategoryCatalogImpl extends EObjectImpl implements CategoryCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceUri() {
 		return resourceUri;
 	}
@@ -236,6 +237,7 @@ public class CategoryCatalogImpl extends EObjectImpl implements CategoryCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceUri(String newResourceUri) {
 		String oldResourceUri = resourceUri;
 		resourceUri = newResourceUri;
@@ -248,6 +250,7 @@ public class CategoryCatalogImpl extends EObjectImpl implements CategoryCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceName() {
 		return resourceName;
 	}
@@ -257,6 +260,7 @@ public class CategoryCatalogImpl extends EObjectImpl implements CategoryCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceName(String newResourceName) {
 		String oldResourceName = resourceName;
 		resourceName = newResourceName;
@@ -269,6 +273,7 @@ public class CategoryCatalogImpl extends EObjectImpl implements CategoryCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Bundle getBundle() {
 		return bundle;
 	}
@@ -278,6 +283,7 @@ public class CategoryCatalogImpl extends EObjectImpl implements CategoryCatalog 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBundle(Bundle newBundle) {
 		Bundle oldBundle = bundle;
 		bundle = newBundle;

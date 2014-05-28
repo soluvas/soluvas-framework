@@ -6,31 +6,22 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.osgi.framework.Bundle;
-
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
-
-import org.soluvas.data.Attribute;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.Kind;
-import org.soluvas.data.Mixin;
 import org.soluvas.data.Term;
 import org.soluvas.data.Vocab;
 
@@ -209,6 +200,7 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Bundle getBundle() {
 		return bundle;
 	}
@@ -218,6 +210,7 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBundle(Bundle newBundle) {
 		Bundle oldBundle = bundle;
 		bundle = newBundle;
@@ -230,6 +223,7 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResourceType getResourceType() {
 		return resourceType;
 	}
@@ -239,6 +233,7 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceType(ResourceType newResourceType) {
 		ResourceType oldResourceType = resourceType;
 		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
@@ -251,6 +246,7 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceUri() {
 		return resourceUri;
 	}
@@ -260,6 +256,7 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceUri(String newResourceUri) {
 		String oldResourceUri = resourceUri;
 		resourceUri = newResourceUri;
@@ -272,6 +269,7 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceName() {
 		return resourceName;
 	}
@@ -281,6 +279,7 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceName(String newResourceName) {
 		String oldResourceName = resourceName;
 		resourceName = newResourceName;
@@ -293,6 +292,7 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -302,6 +302,7 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -314,6 +315,7 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Vocab> getVocabs() {
 		if (vocabs == null) {
 			vocabs = new EObjectContainmentEList<Vocab>(Vocab.class, this, DataPackage.DATA_CATALOG__VOCABS);
@@ -326,6 +328,7 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Term> getTerms() {
 		if (terms == null) {
 			terms = new EObjectContainmentEList<Term>(Term.class, this, DataPackage.DATA_CATALOG__TERMS);
@@ -338,9 +341,10 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Kind> getKinds() {
 		if (kinds == null) {
-			kinds = new EObjectContainmentEList<Kind>(Kind.class, this, DataPackage.DATA_CATALOG__KINDS);
+			kinds = new EObjectContainmentEList<>(Kind.class, this, DataPackage.DATA_CATALOG__KINDS);
 		}
 		return kinds;
 	}

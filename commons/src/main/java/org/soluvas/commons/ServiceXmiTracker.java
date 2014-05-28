@@ -5,7 +5,6 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.ClassUtils;
@@ -116,7 +115,7 @@ public class ServiceXmiTracker<T extends EObject> implements BundleTrackerCustom
 				final StaticXmiLoader<T> loader = new StaticXmiLoader<T>(ePackage, url,
 						bundle);
 				final T root = loader.get();
-				final Dictionary<String, Object> props = new Hashtable<String, Object>();
+				final Dictionary<String, Object> props = new Hashtable<>();
 				if (root instanceof Positionable) {
 					props.put(Constants.SERVICE_RANKING, Optional.fromNullable(((Positionable) root).getPositioner()).or(0));
 				}

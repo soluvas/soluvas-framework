@@ -32,7 +32,7 @@ import com.google.common.eventbus.Subscribe;
 public class PushMessageTrackerImpl implements PushMessageTracker {
 
 	private static final Logger log = LoggerFactory.getLogger(PushMessageTrackerImpl.class);
-	private final Map<String, Queue<PushMessage>> queues = new ConcurrentHashMap<String, Queue<PushMessage>>();
+	private final Map<String, Queue<PushMessage>> queues = new ConcurrentHashMap<>();
 	
 	/* (non-Javadoc)
 	 * @see id.co.bippo.commerce.push.PushListener#publishPublic(java.lang.String, org.soluvas.push.PushMessage)
@@ -49,7 +49,7 @@ public class PushMessageTrackerImpl implements PushMessageTracker {
 		
 		Queue<PushMessage> queue = queues.get(trackingId);
 		if (queue == null) {
-			queue = new ConcurrentLinkedQueue<PushMessage>();
+			queue = new ConcurrentLinkedQueue<>();
 			queues.put(trackingId, queue);
 		}
 		log.debug("Tracking {} push message: {}", trackingId, message);

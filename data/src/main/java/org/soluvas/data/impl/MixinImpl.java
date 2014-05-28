@@ -418,7 +418,7 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	@Override @JsonProperty
 	public EList<Attribute> getAttributes() {
 		if (attributes == null) {
-			attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, DataPackage.MIXIN__ATTRIBUTES);
+			attributes = new EObjectContainmentEList<>(Attribute.class, this, DataPackage.MIXIN__ATTRIBUTES);
 		}
 		return attributes;
 	}

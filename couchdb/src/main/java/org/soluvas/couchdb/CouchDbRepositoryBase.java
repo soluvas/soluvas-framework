@@ -836,7 +836,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	@Override
 	public final long deleteIds(Collection<String> ids) {
 		log.debug("Deleting {} {}: {}", ids.size(), collName, ids);
-		final Set<String> deletedRevs = new HashSet<String>();
+		final Set<String> deletedRevs = new HashSet<>();
 		for (final String id : ids) {
 			try {
 				final ViewQuery query = new ViewQuery().designDocId(getDesignDocId()).viewName(VIEW_UID).key(id);

@@ -5,7 +5,6 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.eclipse.emf.ecore.EObject;
@@ -107,9 +106,9 @@ public class XmiTracker implements BundleTrackerCustomizer<List<ServiceRegistrat
 			}
 			for (final URL url : entries) {
 				log.debug("Registering Supplier for {} from {}", suppliedClassName, url);
-				final StaticXmiLoader<EObject> loader = new StaticXmiLoader<EObject>(ePackage, url,
+				final StaticXmiLoader<EObject> loader = new StaticXmiLoader<>(ePackage, url,
 						bundle);
-				final Dictionary<String, String> props = new Hashtable<String, String>();
+				final Dictionary<String, String> props = new Hashtable<>();
 				props.put("suppliedClass", suppliedClassName);
 				props.put("layer", "module");
 				props.put("tenantId", tenantId);

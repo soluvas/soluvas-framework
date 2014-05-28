@@ -550,7 +550,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			public String apply(@Nullable Imageable input) {
 				return input.getImageId();
 			}
-		}), new NotNullPredicate()));
+		}), new NotNullPredicate<>()));
 		final List<Image> images = imageRepo.findAll(imageIds);
 		final Map<String, Image> imageMap = Maps.uniqueIndex(images, new Function<Image, String>() {
 			@Override @Nullable
