@@ -1,4 +1,4 @@
-package org.soluvas.schema.jpa._1;
+package org.soluvas.jpa.jpa;
 
 import java.io.Serializable;
 import javax.persistence.Basic;

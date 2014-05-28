@@ -1,4 +1,4 @@
-package org.soluvas.schema.jpa._1;
+package org.soluvas.jpa.jpa;
 
 import java.util.UUID;
 import javax.measure.quantity.Quantity;
@@ -42,7 +42,7 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final String NS_URI = "http://www.soluvas.org/schema/jpa/1.0";
+	public static final String NS_URI = "http://www.soluvas.org/jpa.jpa/";
 
 	/**
 	 * The {@link ModelFactory} for this package. <!-- begin-user-doc --> <!--
