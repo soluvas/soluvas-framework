@@ -91,5 +91,7 @@ public interface TenantRepository<T extends ProvisionData> {
 	public AppManifest lookupOne(@Nullable String tenantId) throws IllegalArgumentException;
 	
 	boolean exists(String tenantId) throws IllegalArgumentException;
+	
+	boolean remove(Set<String> tenantIds);
 
 }

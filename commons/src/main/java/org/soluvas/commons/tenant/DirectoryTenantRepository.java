@@ -302,7 +302,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		final ResourceSetImpl rSet = new ResourceSetImpl();
 		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		rSet.getPackageRegistry().put(CommonsPackage.eNS_URI, CommonsPackage.eINSTANCE);
-		final File file = new File(getRootDir(), "model/" + tenantId + ".AppManifest.xmi");
+		final File file = new File(getRootDir(), tenantId + "/model/" + tenantId + ".AppManifest.xmi");
 		final org.eclipse.emf.ecore.resource.Resource res = rSet.createResource(URI.createFileURI(file.getPath()));
 		res.getContents().add(EcoreUtil.copy(appManifest));
 		try {
@@ -463,5 +463,64 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		final AppManifest appManifest = tenantMap.get(tenantId);
 		return appManifest != null;
 	}
+
+	@Override
+	public boolean remove(Set<String> tenantIds) {
+		stop(tenantIds);
+		
+		//remove tenant's dataDir
+		for (final String tenantId : tenantIds) {
+			final File tenantDataDir = new File(getRootDir(), tenantId);
+			Preconditions.checkState(tenantDataDir.exists(), "Root Dir for %s must be exists.", tenantId);
+			try {
+				delete(tenantDataDir);
+				log.info("Data dir. for tenant id {} has been removed", tenantId);
+			} catch (IOException e) {
+				log.error(String.format("Can not remove Data dir. for tenant id %s.", tenantId), e);
+			}
+			provisioner.cpp(tenantDataDir);
+		}
+
+		//remove tenant's database
+		provisioner.removeDatabases(tenantIds);
+		provisioner.removeSchemas(tenantIds);
+		
+		return false;
+	}
+	
+	 /**
+	  * http://www.mkyong.com/java/how-to-delete-directory-in-java/
+	  * 
+	 * @param file
+	 * @throws IOException
+	 */
+	private void delete(File file) throws IOException{
+    	if(file.isDirectory()){
+    		//directory is empty, then delete it
+    		if(file.list().length==0){
+    		   file.delete();
+    		} else{
+    		   //list all the directory contents
+        	   final String files[] = file.list();
+ 
+        	   for (String temp : files) {
+        	      //construct the file structure
+        	      File fileDelete = new File(file, temp);
+ 
+        	      //recursive delete
+        	     delete(fileDelete);
+        	   }
+ 
+        	   //check the directory again, if empty then delete it
+        	   if(file.list().length==0){
+           	     file.delete();
+        	   }
+    		}
+ 
+    	} else{
+    		//if file, then delete it
+    		file.delete();
+    	}
+    }
 	
 }
