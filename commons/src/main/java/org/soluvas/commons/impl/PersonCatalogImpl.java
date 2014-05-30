@@ -66,7 +66,7 @@ public class PersonCatalogImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public EList<Person> getPeople() {
 		if (people == null) {
-			people = new EObjectContainmentEList<>(Person.class, this, CommonsPackage.PERSON_CATALOG__PEOPLE);
+			people = new EObjectContainmentEList<Person>(Person.class, this, CommonsPackage.PERSON_CATALOG__PEOPLE);
 		}
 		return people;
 	}

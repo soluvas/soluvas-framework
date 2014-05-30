@@ -1708,7 +1708,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	@Override
 	public EList<PhoneNumber> getPhoneNumbers() {
 		if (phoneNumbers == null) {
-			phoneNumbers = new EObjectContainmentEList<>(PhoneNumber.class, this, CommonsPackage.PERSON__PHONE_NUMBERS);
+			phoneNumbers = new EObjectContainmentEList<PhoneNumber>(PhoneNumber.class, this, CommonsPackage.PERSON__PHONE_NUMBERS);
 		}
 		return phoneNumbers;
 	}
@@ -1744,7 +1744,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	@Override
 	public EList<Email> getEmails() {
 		if (emails == null) {
-			emails = new EObjectContainmentEList<>(Email.class, this, CommonsPackage.PERSON__EMAILS);
+			emails = new EObjectContainmentEList<Email>(Email.class, this, CommonsPackage.PERSON__EMAILS);
 		}
 		return emails;
 	}
@@ -1757,7 +1757,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	@Override
 	public EList<PhoneNumber> getMobileNumbers() {
 		if (mobileNumbers == null) {
-			mobileNumbers = new EObjectContainmentEList<>(PhoneNumber.class, this, CommonsPackage.PERSON__MOBILE_NUMBERS);
+			mobileNumbers = new EObjectContainmentEList<PhoneNumber>(PhoneNumber.class, this, CommonsPackage.PERSON__MOBILE_NUMBERS);
 		}
 		return mobileNumbers;
 	}
@@ -1793,7 +1793,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	@Override
 	public EList<PostalAddress> getAddresses() {
 		if (addresses == null) {
-			addresses = new EObjectContainmentEList<>(PostalAddress.class, this, CommonsPackage.PERSON__ADDRESSES);
+			addresses = new EObjectContainmentEList<PostalAddress>(PostalAddress.class, this, CommonsPackage.PERSON__ADDRESSES);
 		}
 		return addresses;
 	}
@@ -2954,7 +2954,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	@Override
 	public EList<String> getSecurityRoleIds() {
 		if (securityRoleIds == null) {
-			securityRoleIds = new EDataTypeUniqueEList<>(String.class, this, CommonsPackage.PERSON__SECURITY_ROLE_IDS);
+			securityRoleIds = new EDataTypeUniqueEList<String>(String.class, this, CommonsPackage.PERSON__SECURITY_ROLE_IDS);
 		}
 		return securityRoleIds;
 	}
@@ -3046,7 +3046,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	@Override
 	public EList<Organization> getOrganizations() {
 		if (organizations == null) {
-			organizations = new EObjectResolvingEList<>(Organization.class, this, CommonsPackage.PERSON__ORGANIZATIONS);
+			organizations = new EObjectResolvingEList<Organization>(Organization.class, this, CommonsPackage.PERSON__ORGANIZATIONS);
 		}
 		return organizations;
 	}

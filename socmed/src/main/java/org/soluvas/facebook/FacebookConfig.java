@@ -46,7 +46,7 @@ public class FacebookConfig {
 					throws Exception {
 				final FacebookSysConfig sysConfig = TenantUtils.selectBean(tenantId, sysConfigMapHolder.sysConfigMap(), FacebookSysConfig.class);
 				return new FacebookManagerImpl(String.valueOf(sysConfig.getFacebookAppId()), sysConfig.getFacebookAppSecret(),
-						sysConfig.getFacebookTenantAccessToken(), sysConfig.getFacebookTenantPageId());
+						sysConfig.getFacebookTenantAccessToken(), String.valueOf(sysConfig.getFacebookTenantPageId()));
 			}
 		};
 	}

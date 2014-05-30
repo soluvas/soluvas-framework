@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.soluvas.socmed.FacebookSysConfig;
+import org.soluvas.socmed.PinterestSysConfig;
 import org.soluvas.socmed.SocmedFactory;
 import org.soluvas.socmed.SocmedPackage;
 import org.soluvas.socmed.TwitterSysConfig;
@@ -39,6 +40,13 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * @generated
 	 */
 	private EClass youTubeSysConfigEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pinterestSysConfigEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -151,7 +159,7 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFacebookSysConfig_FacebookTenantPublishEnabled() {
+	public EAttribute getFacebookSysConfig_FacebookTenantPageUsername() {
 		return (EAttribute)facebookSysConfigEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -160,8 +168,17 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFacebookSysConfig_FacebookExplicitlyShared() {
+	public EAttribute getFacebookSysConfig_FacebookTenantPublishEnabled() {
 		return (EAttribute)facebookSysConfigEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFacebookSysConfig_FacebookExplicitlyShared() {
+		return (EAttribute)facebookSysConfigEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -241,6 +258,24 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPinterestSysConfig() {
+		return pinterestSysConfigEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPinterestSysConfig_PinterestTenantScreenName() {
+		return (EAttribute)pinterestSysConfigEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SocmedFactory getSocmedFactory() {
 		return (SocmedFactory)getEFactoryInstance();
 	}
@@ -269,6 +304,7 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_APP_SECRET);
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_ACCESS_TOKEN);
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PAGE_ID);
+		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PAGE_USERNAME);
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PUBLISH_ENABLED);
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_EXPLICITLY_SHARED);
 
@@ -281,6 +317,9 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 
 		youTubeSysConfigEClass = createEClass(YOU_TUBE_SYS_CONFIG);
 		createEAttribute(youTubeSysConfigEClass, YOU_TUBE_SYS_CONFIG__YOU_TUBE_TENANT_SCREEN_NAME);
+
+		pinterestSysConfigEClass = createEClass(PINTEREST_SYS_CONFIG);
+		createEAttribute(pinterestSysConfigEClass, PINTEREST_SYS_CONFIG__PINTEREST_TENANT_SCREEN_NAME);
 	}
 
 	/**
@@ -317,7 +356,8 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		initEAttribute(getFacebookSysConfig_FacebookAppId(), ecorePackage.getELongObject(), "facebookAppId", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacebookSysConfig_FacebookAppSecret(), ecorePackage.getEString(), "facebookAppSecret", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacebookSysConfig_FacebookTenantAccessToken(), ecorePackage.getEString(), "facebookTenantAccessToken", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFacebookSysConfig_FacebookTenantPageId(), ecorePackage.getEString(), "facebookTenantPageId", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFacebookSysConfig_FacebookTenantPageId(), ecorePackage.getELongObject(), "facebookTenantPageId", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFacebookSysConfig_FacebookTenantPageUsername(), ecorePackage.getEString(), "facebookTenantPageUsername", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacebookSysConfig_FacebookTenantPublishEnabled(), ecorePackage.getEBooleanObject(), "facebookTenantPublishEnabled", "false", 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacebookSysConfig_FacebookExplicitlyShared(), ecorePackage.getEBooleanObject(), "facebookExplicitlyShared", "false", 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -330,6 +370,9 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 
 		initEClass(youTubeSysConfigEClass, YouTubeSysConfig.class, "YouTubeSysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getYouTubeSysConfig_YouTubeTenantScreenName(), ecorePackage.getEString(), "youTubeTenantScreenName", null, 0, 1, YouTubeSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(pinterestSysConfigEClass, PinterestSysConfig.class, "PinterestSysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPinterestSysConfig_PinterestTenantScreenName(), ecorePackage.getEString(), "pinterestTenantScreenName", null, 0, 1, PinterestSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -370,6 +413,12 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Facebook Page ID for the tenant/mall Facebook Page. This is a Page ID, not a User ID."
+		   });		
+		addAnnotation
+		  (getFacebookSysConfig_FacebookTenantPageUsername(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Facebook Page username for the tenant/mall Facebook Page. This is a Page username, not a User ID.\nIf unknown, this should be the same as {@literal facebookTenantPageId}."
 		   });		
 		addAnnotation
 		  (getFacebookSysConfig_FacebookTenantPublishEnabled(), 
@@ -418,6 +467,12 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "YouTube user screen name for the tenant, e.g. <a href=\"http://www.youtube.com/user/BippoID\">bippoID</a>."
+		   });		
+		addAnnotation
+		  (getPinterestSysConfig_PinterestTenantScreenName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Pinterest Business screen name for the tenant/mall."
 		   });
 	}
 

@@ -1,6 +1,7 @@
 package org.soluvas.commons.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTimeZone;
 import org.osgi.framework.Bundle;
@@ -58,6 +60,7 @@ import com.google.common.base.Preconditions;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getGeneralEmailStg <em>General Email Stg</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getOrganizationName <em>Organization Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getOrganizationAddress <em>Organization Address</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getOrganizationPhoneNumbers <em>Organization Phone Numbers</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultTimeZoneId <em>Default Time Zone Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultTimeZone <em>Default Time Zone</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultCurrencyCode <em>Default Currency Code</em>}</li>
@@ -450,6 +453,15 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 */
 	protected String organizationAddress = ORGANIZATION_ADDRESS_EDEFAULT;
 
+	/**
+	 * The cached value of the '{@link #getOrganizationPhoneNumbers() <em>Organization Phone Numbers</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOrganizationPhoneNumbers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> organizationPhoneNumbers;
 	/**
 	 * The default value of the '{@link #getDefaultTimeZoneId() <em>Default Time Zone Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -1094,6 +1106,18 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getOrganizationPhoneNumbers() {
+		if (organizationPhoneNumbers == null) {
+			organizationPhoneNumbers = new EDataTypeUniqueEList<String>(String.class, this, CommonsPackage.APP_MANIFEST__ORGANIZATION_PHONE_NUMBERS);
+		}
+		return organizationPhoneNumbers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getLetterSalutation() {
 		return letterSalutation;
@@ -1504,6 +1528,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getOrganizationName();
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
 				return getOrganizationAddress();
+			case CommonsPackage.APP_MANIFEST__ORGANIZATION_PHONE_NUMBERS:
+				return getOrganizationPhoneNumbers();
 			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE_ID:
 				return getDefaultTimeZoneId();
 			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE:
@@ -1535,6 +1561,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -1591,6 +1618,10 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return;
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
 				setOrganizationAddress((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__ORGANIZATION_PHONE_NUMBERS:
+				getOrganizationPhoneNumbers().clear();
+				getOrganizationPhoneNumbers().addAll((Collection<? extends String>)newValue);
 				return;
 			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE_ID:
 				setDefaultTimeZoneId((String)newValue);
@@ -1685,6 +1716,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
 				setOrganizationAddress(ORGANIZATION_ADDRESS_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__ORGANIZATION_PHONE_NUMBERS:
+				getOrganizationPhoneNumbers().clear();
+				return;
 			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE_ID:
 				setDefaultTimeZoneId(DEFAULT_TIME_ZONE_ID_EDEFAULT);
 				return;
@@ -1762,6 +1796,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return ORGANIZATION_NAME_EDEFAULT == null ? organizationName != null : !ORGANIZATION_NAME_EDEFAULT.equals(organizationName);
 			case CommonsPackage.APP_MANIFEST__ORGANIZATION_ADDRESS:
 				return ORGANIZATION_ADDRESS_EDEFAULT == null ? organizationAddress != null : !ORGANIZATION_ADDRESS_EDEFAULT.equals(organizationAddress);
+			case CommonsPackage.APP_MANIFEST__ORGANIZATION_PHONE_NUMBERS:
+				return organizationPhoneNumbers != null && !organizationPhoneNumbers.isEmpty();
 			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE_ID:
 				return DEFAULT_TIME_ZONE_ID_EDEFAULT == null ? defaultTimeZoneId != null : !DEFAULT_TIME_ZONE_ID_EDEFAULT.equals(defaultTimeZoneId);
 			case CommonsPackage.APP_MANIFEST__DEFAULT_TIME_ZONE:
@@ -1945,6 +1981,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(organizationName);
 		result.append(", organizationAddress: ");
 		result.append(organizationAddress);
+		result.append(", organizationPhoneNumbers: ");
+		result.append(organizationPhoneNumbers);
 		result.append(", defaultTimeZoneId: ");
 		result.append(defaultTimeZoneId);
 		result.append(", defaultCurrencyCode: ");

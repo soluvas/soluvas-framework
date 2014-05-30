@@ -109,6 +109,12 @@
         <details key="documentation" value="Used in email notifications, e.g. &quot;Talavera Office Park, Jl. TB Simatupang KAV 20-22 Jakarta&quot;."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="organizationPhoneNumbers"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="One or more telephone numbers (can be home, work, or mobile, it's not specified).&#xA;They should conform to &lt;a href=&quot;http://tools.ietf.org/html/rfc3966&quot;>tel: URI specification (RFC3966)&lt;/a> and &lt;a href=&quot;http://tools.ietf.org/html/rfc5341&quot;>RFC5341&lt;/a>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultTimeZoneId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="UTC">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

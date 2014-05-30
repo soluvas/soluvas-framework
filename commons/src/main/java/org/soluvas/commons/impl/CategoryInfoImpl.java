@@ -567,7 +567,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	@Override
 	public EList<CategoryInfo> getParents() {
 		if (parents == null) {
-			parents = new EObjectContainmentEList<>(CategoryInfo.class, this, CommonsPackage.CATEGORY_INFO__PARENTS);
+			parents = new EObjectContainmentEList<CategoryInfo>(CategoryInfo.class, this, CommonsPackage.CATEGORY_INFO__PARENTS);
 		}
 		return parents;
 	}

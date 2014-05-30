@@ -3,6 +3,7 @@
 package org.soluvas.commons;
 
 import java.util.Locale;
+import org.eclipse.emf.common.util.EList;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTimeZone;
 
@@ -38,6 +39,7 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getGeneralEmailStg <em>General Email Stg</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationName <em>Organization Name</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationAddress <em>Organization Address</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getOrganizationPhoneNumbers <em>Organization Phone Numbers</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultTimeZone <em>Default Time Zone</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultCurrencyCode <em>Default Currency Code</em>}</li>
@@ -423,6 +425,22 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	void setOrganizationAddress(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Organization Phone Numbers</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * One or more telephone numbers (can be home, work, or mobile, it's not specified).
+	 * They should conform to <a href="http://tools.ietf.org/html/rfc3966">tel: URI specification (RFC3966)</a> and <a href="http://tools.ietf.org/html/rfc5341">RFC5341</a>.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Organization Phone Numbers</em>' attribute list.
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_OrganizationPhoneNumbers()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getOrganizationPhoneNumbers();
 
 	/**
 	 * Returns the value of the '<em><b>Letter Salutation</b></em>' attribute.

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookAppSecret <em>Facebook App Secret</em>}</li>
  *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookTenantAccessToken <em>Facebook Tenant Access Token</em>}</li>
  *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookTenantPageId <em>Facebook Tenant Page Id</em>}</li>
+ *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookTenantPageUsername <em>Facebook Tenant Page Username</em>}</li>
  *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookTenantPublishEnabled <em>Facebook Tenant Publish Enabled</em>}</li>
  *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookExplicitlyShared <em>Facebook Explicitly Shared</em>}</li>
  * </ul>
@@ -110,12 +111,12 @@ public interface FacebookSysConfig extends EObject {
 	 * Facebook Page ID for the tenant/mall Facebook Page. This is a Page ID, not a User ID.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Facebook Tenant Page Id</em>' attribute.
-	 * @see #setFacebookTenantPageId(String)
+	 * @see #setFacebookTenantPageId(Long)
 	 * @see org.soluvas.socmed.SocmedPackage#getFacebookSysConfig_FacebookTenantPageId()
 	 * @model
 	 * @generated
 	 */
-	String getFacebookTenantPageId();
+	Long getFacebookTenantPageId();
 
 	/**
 	 * Sets the value of the '{@link org.soluvas.socmed.FacebookSysConfig#getFacebookTenantPageId <em>Facebook Tenant Page Id</em>}' attribute.
@@ -125,7 +126,33 @@ public interface FacebookSysConfig extends EObject {
 	 * @see #getFacebookTenantPageId()
 	 * @generated
 	 */
-	void setFacebookTenantPageId(String value);
+	void setFacebookTenantPageId(Long value);
+
+	/**
+	 * Returns the value of the '<em><b>Facebook Tenant Page Username</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Facebook Page username for the tenant/mall Facebook Page. This is a Page username, not a User ID.
+	 * If unknown, this should be the same as {@literal facebookTenantPageId}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Facebook Tenant Page Username</em>' attribute.
+	 * @see #setFacebookTenantPageUsername(String)
+	 * @see org.soluvas.socmed.SocmedPackage#getFacebookSysConfig_FacebookTenantPageUsername()
+	 * @model
+	 * @generated
+	 */
+	String getFacebookTenantPageUsername();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.socmed.FacebookSysConfig#getFacebookTenantPageUsername <em>Facebook Tenant Page Username</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Facebook Tenant Page Username</em>' attribute.
+	 * @see #getFacebookTenantPageUsername()
+	 * @generated
+	 */
+	void setFacebookTenantPageUsername(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Facebook Tenant Publish Enabled</b></em>' attribute.

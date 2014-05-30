@@ -84,6 +84,12 @@ public class SocmedSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SocmedPackage.PINTEREST_SYS_CONFIG: {
+				PinterestSysConfig pinterestSysConfig = (PinterestSysConfig)theEObject;
+				T result = casePinterestSysConfig(pinterestSysConfig);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -130,6 +136,21 @@ public class SocmedSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseYouTubeSysConfig(YouTubeSysConfig object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Pinterest Sys Config</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Pinterest Sys Config</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePinterestSysConfig(PinterestSysConfig object) {
 		return null;
 	}
 

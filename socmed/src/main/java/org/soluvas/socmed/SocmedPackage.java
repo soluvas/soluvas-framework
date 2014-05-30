@@ -102,13 +102,22 @@ public interface SocmedPackage extends EPackage {
 	int FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PAGE_ID = 3;
 
 	/**
+	 * The feature id for the '<em><b>Facebook Tenant Page Username</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PAGE_USERNAME = 4;
+
+	/**
 	 * The feature id for the '<em><b>Facebook Tenant Publish Enabled</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PUBLISH_ENABLED = 4;
+	int FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PUBLISH_ENABLED = 5;
 
 	/**
 	 * The feature id for the '<em><b>Facebook Explicitly Shared</b></em>' attribute.
@@ -117,7 +126,7 @@ public interface SocmedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACEBOOK_SYS_CONFIG__FACEBOOK_EXPLICITLY_SHARED = 5;
+	int FACEBOOK_SYS_CONFIG__FACEBOOK_EXPLICITLY_SHARED = 6;
 
 	/**
 	 * The number of structural features of the '<em>Facebook Sys Config</em>' class.
@@ -126,7 +135,7 @@ public interface SocmedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACEBOOK_SYS_CONFIG_FEATURE_COUNT = 6;
+	int FACEBOOK_SYS_CONFIG_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Facebook Sys Config</em>' class.
@@ -250,6 +259,44 @@ public interface SocmedPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.socmed.PinterestSysConfig <em>Pinterest Sys Config</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.socmed.PinterestSysConfig
+	 * @see org.soluvas.socmed.impl.SocmedPackageImpl#getPinterestSysConfig()
+	 * @generated
+	 */
+	int PINTEREST_SYS_CONFIG = 3;
+
+	/**
+	 * The feature id for the '<em><b>Pinterest Tenant Screen Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PINTEREST_SYS_CONFIG__PINTEREST_TENANT_SCREEN_NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Pinterest Sys Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PINTEREST_SYS_CONFIG_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Pinterest Sys Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PINTEREST_SYS_CONFIG_OPERATION_COUNT = 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.socmed.FacebookSysConfig <em>Facebook Sys Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -302,6 +349,17 @@ public interface SocmedPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getFacebookSysConfig_FacebookTenantPageId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.socmed.FacebookSysConfig#getFacebookTenantPageUsername <em>Facebook Tenant Page Username</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Tenant Page Username</em>'.
+	 * @see org.soluvas.socmed.FacebookSysConfig#getFacebookTenantPageUsername()
+	 * @see #getFacebookSysConfig()
+	 * @generated
+	 */
+	EAttribute getFacebookSysConfig_FacebookTenantPageUsername();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.socmed.FacebookSysConfig#getFacebookTenantPublishEnabled <em>Facebook Tenant Publish Enabled</em>}'.
@@ -412,6 +470,27 @@ public interface SocmedPackage extends EPackage {
 	EAttribute getYouTubeSysConfig_YouTubeTenantScreenName();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.socmed.PinterestSysConfig <em>Pinterest Sys Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Pinterest Sys Config</em>'.
+	 * @see org.soluvas.socmed.PinterestSysConfig
+	 * @generated
+	 */
+	EClass getPinterestSysConfig();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.socmed.PinterestSysConfig#getPinterestTenantScreenName <em>Pinterest Tenant Screen Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pinterest Tenant Screen Name</em>'.
+	 * @see org.soluvas.socmed.PinterestSysConfig#getPinterestTenantScreenName()
+	 * @see #getPinterestSysConfig()
+	 * @generated
+	 */
+	EAttribute getPinterestSysConfig_PinterestTenantScreenName();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -475,6 +554,14 @@ public interface SocmedPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PAGE_ID = eINSTANCE.getFacebookSysConfig_FacebookTenantPageId();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Tenant Page Username</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PAGE_USERNAME = eINSTANCE.getFacebookSysConfig_FacebookTenantPageUsername();
 
 		/**
 		 * The meta object literal for the '<em><b>Facebook Tenant Publish Enabled</b></em>' attribute feature.
@@ -559,6 +646,24 @@ public interface SocmedPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute YOU_TUBE_SYS_CONFIG__YOU_TUBE_TENANT_SCREEN_NAME = eINSTANCE.getYouTubeSysConfig_YouTubeTenantScreenName();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.socmed.PinterestSysConfig <em>Pinterest Sys Config</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.socmed.PinterestSysConfig
+		 * @see org.soluvas.socmed.impl.SocmedPackageImpl#getPinterestSysConfig()
+		 * @generated
+		 */
+		EClass PINTEREST_SYS_CONFIG = eINSTANCE.getPinterestSysConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Pinterest Tenant Screen Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PINTEREST_SYS_CONFIG__PINTEREST_TENANT_SCREEN_NAME = eINSTANCE.getPinterestSysConfig_PinterestTenantScreenName();
 
 	}
 

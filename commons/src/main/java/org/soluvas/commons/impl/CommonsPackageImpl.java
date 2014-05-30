@@ -1170,9 +1170,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAppManifest_OrganizationPhoneNumbers() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EAttribute getAppManifest_LetterSalutation() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(21);
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(22);
 	}
 
 	/**
@@ -1182,15 +1191,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	@Override
 	public EAttribute getAppManifest_LetterClosing() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(22);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAppManifest_Footnote() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(23);
 	}
 
@@ -1199,8 +1199,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultTimeZoneId() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(13);
+	public EAttribute getAppManifest_Footnote() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(24);
 	}
 
 	/**
@@ -1208,7 +1208,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultTimeZone() {
+	public EAttribute getAppManifest_DefaultTimeZoneId() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(14);
 	}
 
@@ -1217,7 +1217,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultCurrencyCode() {
+	public EAttribute getAppManifest_DefaultTimeZone() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(15);
 	}
 
@@ -1226,7 +1226,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultCurrency() {
+	public EAttribute getAppManifest_DefaultCurrencyCode() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(16);
 	}
 
@@ -1235,16 +1235,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_EmailLogoUriTemplate() {
-		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(20);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAppManifest_DefaultLanguageTag() {
+	public EAttribute getAppManifest_DefaultCurrency() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(17);
 	}
 
@@ -1253,7 +1244,16 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultCountryCode() {
+	public EAttribute getAppManifest_EmailLogoUriTemplate() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(21);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_DefaultLanguageTag() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(18);
 	}
 
@@ -1262,8 +1262,17 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAppManifest_DefaultCategoryUName() {
+	public EAttribute getAppManifest_DefaultCountryCode() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(19);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_DefaultCategoryUName() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(20);
 	}
 
 	/**
@@ -4272,6 +4281,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__GENERAL_EMAIL_STG);
 		createEAttribute(appManifestEClass, APP_MANIFEST__ORGANIZATION_NAME);
 		createEAttribute(appManifestEClass, APP_MANIFEST__ORGANIZATION_ADDRESS);
+		createEAttribute(appManifestEClass, APP_MANIFEST__ORGANIZATION_PHONE_NUMBERS);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_TIME_ZONE_ID);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_TIME_ZONE);
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_CURRENCY_CODE);
@@ -4903,6 +4913,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_GeneralEmailStg(), ecorePackage.getEString(), "generalEmailStg", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_OrganizationName(), ecorePackage.getEString(), "organizationName", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_OrganizationAddress(), ecorePackage.getEString(), "organizationAddress", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_OrganizationPhoneNumbers(), ecorePackage.getEString(), "organizationPhoneNumbers", null, 0, -1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultTimeZoneId(), ecorePackage.getEString(), "defaultTimeZoneId", "UTC", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultTimeZone(), this.getDateTimeZone(), "defaultTimeZone", null, 0, 1, AppManifest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_DefaultCurrencyCode(), ecorePackage.getEString(), "defaultCurrencyCode", "USD", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5549,6 +5560,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Used in email notifications, e.g. \"Talavera Office Park, Jl. TB Simatupang KAV 20-22 Jakarta\"."
+		   });		
+		addAnnotation
+		  (getAppManifest_OrganizationPhoneNumbers(), 
+		   source, 
+		   new String[] {
+			 "documentation", "One or more telephone numbers (can be home, work, or mobile, it\'s not specified).\nThey should conform to <a href=\"http://tools.ietf.org/html/rfc3966\">tel: URI specification (RFC3966)</a> and <a href=\"http://tools.ietf.org/html/rfc5341\">RFC5341</a>."
 		   });		
 		addAnnotation
 		  (getAppManifest_DefaultTimeZoneId(), 
