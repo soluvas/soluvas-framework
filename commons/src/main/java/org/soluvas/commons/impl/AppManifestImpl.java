@@ -1140,6 +1140,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFootnote() {
 		return footnote;
 	}
@@ -1149,6 +1150,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFootnote(String newFootnote) {
 		String oldFootnote = footnote;
 		footnote = newFootnote;
@@ -1294,6 +1296,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDefaultCategoryUName() {
 		return defaultCategoryUName;
 	}
@@ -1303,6 +1306,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefaultCategoryUName(String newDefaultCategoryUName) {
 		String oldDefaultCategoryUName = defaultCategoryUName;
 		defaultCategoryUName = newDefaultCategoryUName;
@@ -1386,6 +1390,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		if (getExpansionState() == ExpansionState.UNEXPANDED) {
 			Preconditions.checkArgument(upScope.containsKey("tenantEnv"),
 					"tenantEnv is required in scope, used to determine domain");
+			log.debug("Expanding AppManifest '{}' using {}", getTitle(), upScope);
 			try {
 				final Map<String, Object> scope = new HashMap<>(upScope);
 				// hub.properties#appDomain may be null (for single-tenant configs),
@@ -1443,7 +1448,10 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 					setGeneralEmail( UriTemplate.expand(getGeneralEmail(), scope) );
 					log.trace("generalEmail expanded to: {}", getGeneralEmail());
 				}
+				
 				expansionState = ExpansionState.EXPANDED;
+				log.debug("Expanded AppManifest '{}' to domain={} generalEmail={} using {}", 
+						getTitle(), getDomain(), getGeneralEmail(), upScope);
 			} catch (MalformedUriTemplateException | VariableExpansionException e) {
 				throw new CommonsException(e, "Cannot expand AppManifest '%s'", getTitle());
 			}
