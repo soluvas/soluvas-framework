@@ -303,11 +303,8 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		final ResourceSetImpl rSet = new ResourceSetImpl();
 		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		rSet.getPackageRegistry().put(CommonsPackage.eNS_URI, CommonsPackage.eINSTANCE);
-		final File file = new File(URI.createURI(tenantMap.get(tenantId).getResourceUri()).path());
+		final File file = new File(getRootDir(), "model/" + tenantId + ".AppManifest.xmi");
 		final org.eclipse.emf.ecore.resource.Resource res = rSet.createResource(URI.createFileURI(file.getPath()));
-		appManifest.setResourceName(tenantMap.get(tenantId).getResourceName());
-		appManifest.setResourceUri(tenantMap.get(tenantId).getResourceUri());
-		appManifest.setResourceType(tenantMap.get(tenantId).getResourceType());
 		res.getContents().add(EcoreUtil.copy(appManifest));
 		try {
 			res.save(ImmutableMap.of(XMIResource.OPTION_LINE_WIDTH, 80,
@@ -316,7 +313,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 			res.unload();
 			tenantMap.put(tenantId, appManifest);
 		} catch (IOException e) {
-			throw new RuntimeException(String.format("Cannot save %s XMI file %s", tenantId, file), e);
+			throw new TenantException(String.format("Cannot save %s XMI file %s", tenantId, file), e);
 		}
 		
 		/*Commit + Pull + Push*/
