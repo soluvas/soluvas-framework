@@ -16,6 +16,8 @@ import org.apache.felix.gogo.runtime.CommandSessionImpl;
 import org.apache.felix.gogo.runtime.threadio.ThreadIOImpl;
 import org.apache.felix.service.command.CommandSession;
 import org.apache.felix.service.threadio.ThreadIO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.soluvas.commons.config.MultiTenantWebConfig;
 import org.soluvas.commons.shell.ExtCommandSupport;
@@ -36,6 +38,8 @@ import com.google.common.base.Preconditions;
  */
 public class CommandRequestAttributes extends AbstractRequestAttributes {
 
+	private static final Logger log = LoggerFactory
+			.getLogger(CommandRequestAttributes.class);
 	/**
 	 * MDC key for {@value #MDC_TENANT_ID}.
 	 * Used by {@link org.soluvas.commons.config.MultiTenantWebConfig#tenantRef()}.
@@ -120,7 +124,7 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	 * @see #withTenant(String)
 	 * @see #withMdc(String)
 	 */
-	public static Closeable withSession(CommandSession session) {
+	public static Closeable withSession(final CommandSession session) {
 		if (threadRequestAttributes.get() != null) {
 			final CommandSession thatSession = threadRequestAttributes.get().getSession();
 			final String tenantId = (String) session.get("tenantId");
@@ -130,13 +134,20 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 						"Thread '%s' requests session '%s' for tenant '%s' but already contains a CommandRequestAttributes with different session '%s' for tenant '%s', cannot set",
 						Thread.currentThread().getId(), session, tenantId, thatSession, thatTenantId));
 			}
+			log.trace("{}» Returning existing session with tenantId={} for thread {} session {}", 
+					tenantId, tenantId, Thread.currentThread().getName(), session);
 			return NOOP;
 		} else {
+			final String tenantId = (String) session.get("tenantId");
+			log.trace("{}» withSession tenantId={} for thread {} session {}", 
+					tenantId, tenantId, Thread.currentThread().getName(), session);
 			final CommandRequestAttributes reqAttrs = new CommandRequestAttributes(session);
 			threadRequestAttributes.set(reqAttrs);
 			return new Closeable() {
 				@Override
 				public void close() {
+					log.trace("{}» Closing session tenantId={} for thread {} session {}", 
+							tenantId, tenantId, Thread.currentThread().getName(), session);
 					// Mark "request" as completed
 					reqAttrs.requestCompleted();
 					threadRequestAttributes.remove();
