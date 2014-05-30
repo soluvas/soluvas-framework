@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
-import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.EmfUtils;
@@ -120,7 +119,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		try {
 			fqdn = InetAddress.getLocalHost().getCanonicalHostName();
 		} catch (UnknownHostException e) {
-			throw new CommonsException("Cannot get FQDN", e);
+			throw new TenantException("Cannot get FQDN", e);
 		}
 		Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
 
@@ -159,7 +158,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		try {
 			fqdn = InetAddress.getLocalHost().getCanonicalHostName();
 		} catch (UnknownHostException e) {
-			throw new CommonsException("Cannot get FQDN", e);
+			throw new TenantException("Cannot get FQDN", e);
 		}
 		Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
 		
@@ -203,7 +202,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		try {
 			fqdn = InetAddress.getLocalHost().getCanonicalHostName();
 		} catch (UnknownHostException e) {
-			throw new CommonsException("Cannot get FQDN", e);
+			throw new TenantException("Cannot get FQDN", e);
 		}
 		Preconditions.checkState(!Strings.isNullOrEmpty(fqdn), "Invalid FQDN: empty. Check your host OS's configuration.");
 		
@@ -231,7 +230,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		try {
 			appManifest.expand(scope);
 		} catch (Exception e) {
-			throw new TenantException(e, "Cannot expand '%s' AppManifest: %s", tenantId, e);
+			throw new TenantException(e, "Cannot expand '%s' AppManifest using %s: %s", tenantId, scope, e);
 		}
 
 		// NO LONGER SUPPORTED: please use single AppManifest for all environments, use domain{env} and generalEmail{env} properties now
@@ -352,7 +351,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 				try {
 					listener.onTenantsStarting(tenantsStarting);
 				} catch (Exception e) {
-					throw new CommonsException("Cannot start tenant '" + tenantId + "' due to failed listener '" + listener + "': " + e, e);
+					throw new TenantException("Cannot start tenant '" + tenantId + "' due to failed listener '" + listener + "': " + e, e);
 				}
 			}
 			tenantStateMap.put(tenantId, TenantState.ACTIVE);
