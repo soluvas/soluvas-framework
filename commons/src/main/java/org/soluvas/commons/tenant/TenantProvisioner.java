@@ -23,4 +23,9 @@ public interface TenantProvisioner<T> {
 	Set<String> findAllStyles();
 	
 	void cpp(File file);
+
+	void removeDatabases(Set<String> tenantIds);
+
+	void removeSchemas(Set<String> tenantIds);
+
 }
