@@ -303,7 +303,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		final ResourceSetImpl rSet = new ResourceSetImpl();
 		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		rSet.getPackageRegistry().put(CommonsPackage.eNS_URI, CommonsPackage.eINSTANCE);
-		final File file = new File(getRootDir(), "model/" + tenantId + ".AppManifest.xmi");
+		final File file = new File(getRootDir(), tenantId + "/model/" + tenantId + ".AppManifest.xmi");
 		final org.eclipse.emf.ecore.resource.Resource res = rSet.createResource(URI.createFileURI(file.getPath()));
 		res.getContents().add(EcoreUtil.copy(appManifest));
 		try {
@@ -463,6 +463,20 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		Preconditions.checkState(!Strings.isNullOrEmpty(tenantId), "TenantID must not be null or empty");
 		final AppManifest appManifest = tenantMap.get(tenantId);
 		return appManifest != null;
+	}
+
+	@Override
+	public boolean remove(Set<String> tenantIds) {
+		stop(tenantIds);
+		
+		for (final String tenantId : tenantIds) {
+			final AppManifest appManifest = tenantMap.get(tenantId);
+			
+			//remove dataDir
+			Preconditions.checkState(getRootDir().exists(), "Root Dir for %s must be exists.", tenantId);
+		}
+		
+		return false;
 	}
 	
 }
