@@ -16,6 +16,7 @@ import org.soluvas.security.SecurityException;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
@@ -64,6 +65,8 @@ public class MongoRolePersonRepository extends AssocRepositoryBase<String, Strin
 
 	@Override
 	public boolean put(String roleId, String personId) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(roleId), "roleId must be specified");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(personId), "personId must be specified");
 		final BasicDBObject personObj = (BasicDBObject) personColl.findOne(new BasicDBObject("_id", personId));
 		Preconditions.checkNotNull(personObj, "Cannot find person '%s'", personId);
 		final List<String> tenantRoleIds = (List) personObj.get("securityRoleIds");
