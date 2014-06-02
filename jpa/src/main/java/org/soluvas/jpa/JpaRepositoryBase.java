@@ -213,7 +213,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 				}
 			}
 		} catch (Exception e) {
-			throw new RepositoryException(e, "Cannot migrate '%s' using '%s': %s", tenantId, liquibasePath);
+			throw new RepositoryException(e, "Cannot migrate '%s' using '%s': %s", tenantId, liquibasePath, e);
 		}
 	}
 	
