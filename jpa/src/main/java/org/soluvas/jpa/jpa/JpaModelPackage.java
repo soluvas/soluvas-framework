@@ -23,7 +23,7 @@ import org.soluvas.commons.GenericStatus;
  * The <b>Package</b> for the model '<em><b>jpa</b></em>'. It contains
  * initialization code and access to the Factory to instantiate types of this
  * package.
- *
+ * 
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -57,56 +57,56 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int DATETIME_CLASSIFIER_ID = 4;
+	public static final int DATETIME_CLASSIFIER_ID = 7;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int GENDER_CLASSIFIER_ID = 9;
+	public static final int GENDER_CLASSIFIER_ID = 12;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int CURRENCYUNIT_CLASSIFIER_ID = 3;
+	public static final int CURRENCYUNIT_CLASSIFIER_ID = 6;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int LOCALDATE_CLASSIFIER_ID = 5;
+	public static final int LOCALDATE_CLASSIFIER_ID = 8;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int QUANTITY_CLASSIFIER_ID = 6;
+	public static final int QUANTITY_CLASSIFIER_ID = 9;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int UNIT_CLASSIFIER_ID = 7;
+	public static final int UNIT_CLASSIFIER_ID = 10;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int UUID_CLASSIFIER_ID = 8;
+	public static final int UUID_CLASSIFIER_ID = 11;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int GENERICSTATUS_CLASSIFIER_ID = 10;
+	public static final int GENERICSTATUS_CLASSIFIER_ID = 13;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -120,126 +120,140 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_ORGANIZATION_FEATURE_ID = 0;
+	public static final int POSTALADDRESS_ORGANIZATION_FEATURE_ID = 1;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_STREET_FEATURE_ID = 1;
+	public static final int POSTALADDRESS_STREET_FEATURE_ID = 2;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_CITY_FEATURE_ID = 2;
+	public static final int POSTALADDRESS_CITY_FEATURE_ID = 3;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_POSTALCODE_FEATURE_ID = 3;
+	public static final int POSTALADDRESS_POSTALCODE_FEATURE_ID = 4;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PROVINCE_FEATURE_ID = 4;
+	public static final int POSTALADDRESS_PROVINCE_FEATURE_ID = 5;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_COUNTRY_FEATURE_ID = 5;
+	public static final int POSTALADDRESS_COUNTRY_FEATURE_ID = 6;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_COUNTRYCODE_FEATURE_ID = 6;
+	public static final int POSTALADDRESS_COUNTRYCODE_FEATURE_ID = 7;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PRIMARYMOBILE_FEATURE_ID = 7;
+	public static final int POSTALADDRESS_PRIMARYMOBILE_FEATURE_ID = 8;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_MOBILES_FEATURE_ID = 8;
+	public static final int POSTALADDRESS_MOBILES_FEATURE_ID = 9;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PRIMARYPHONE_FEATURE_ID = 9;
+	public static final int POSTALADDRESS_PRIMARYPHONE_FEATURE_ID = 10;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PHONES_FEATURE_ID = 10;
+	public static final int POSTALADDRESS_PHONES_FEATURE_ID = 11;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PRIMARYHOMEPHONE_FEATURE_ID = 11;
+	public static final int POSTALADDRESS_PRIMARYHOMEPHONE_FEATURE_ID = 12;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_HOMEPHONES_FEATURE_ID = 12;
+	public static final int POSTALADDRESS_HOMEPHONES_FEATURE_ID = 13;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PRIMARYWORKPHONE_FEATURE_ID = 13;
+	public static final int POSTALADDRESS_PRIMARYWORKPHONE_FEATURE_ID = 14;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_WORKPHONES_FEATURE_ID = 14;
+	public static final int POSTALADDRESS_WORKPHONES_FEATURE_ID = 15;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PRIMARYEMAIL_FEATURE_ID = 15;
+	public static final int POSTALADDRESS_PRIMARYEMAIL_FEATURE_ID = 16;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_EMAILS_FEATURE_ID = 16;
+	public static final int POSTALADDRESS_EMAILS_FEATURE_ID = 17;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_DESCRIPTION_FEATURE_ID = 17;
+	public static final int POSTALADDRESS_DESCRIPTION_FEATURE_ID = 0;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int DESCRIBABLE_CLASSIFIER_ID = 5;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int DESCRIBABLE_DESCRIPTION_FEATURE_ID = 0;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -340,6 +354,34 @@ public class JpaModelPackage extends ModelPackage {
 	public static final int PERSONINFO_GENDER_FEATURE_ID = 4;
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int POSITIONABLE_CLASSIFIER_ID = 3;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int POSITIONABLE_POSITIONER_FEATURE_ID = 0;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int NAMECONTAINER_CLASSIFIER_ID = 4;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int NAMECONTAINER_NAME_FEATURE_ID = 0;
+
+	/**
 	 * The static member with the instance of this {@link ModelPackage}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -350,9 +392,9 @@ public class JpaModelPackage extends ModelPackage {
 	/**
 	 * Initializes this {@link ModelPackage}. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 *
+	 * 
 	 * @return an initialized instance of this class
-	 *
+	 * 
 	 * @generated
 	 */
 	public static JpaModelPackage initialize() {
@@ -381,10 +423,19 @@ public class JpaModelPackage extends ModelPackage {
 				PostalAddress.class, modelPackage.getPostalAddressEClass(),
 				modelPackage);
 		ModelResolver.getInstance().registerClassModelMapping(
+				Describable.class, modelPackage.getDescribableEClass(),
+				modelPackage);
+		ModelResolver.getInstance().registerClassModelMapping(
 				Geolocation.class, modelPackage.getGeolocationEClass(),
 				modelPackage);
 		ModelResolver.getInstance().registerClassModelMapping(PersonInfo.class,
 				modelPackage.getPersonInfoEClass(), modelPackage);
+		ModelResolver.getInstance().registerClassModelMapping(
+				Positionable.class, modelPackage.getPositionableEClass(),
+				modelPackage);
+		ModelResolver.getInstance().registerClassModelMapping(
+				NameContainer.class, modelPackage.getNameContainerEClass(),
+				modelPackage);
 
 		ModelResolver.getInstance().registerClassModelMapping(Gender.class,
 				modelPackage.getGenderEEnum(), modelPackage);
@@ -408,7 +459,7 @@ public class JpaModelPackage extends ModelPackage {
 	/**
 	 * Returns the nsUri of the {@link EPackage} managed by this Package
 	 * instance. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
+	 * 
 	 * @return the nsUri of the EPackage
 	 * @generated
 	 */
@@ -712,6 +763,32 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
+	 * Returns the {@link EClass} '<em><b>Describable</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EClass} '<em><b>Describable</b></em>'
+	 * @generated
+	 */
+	public EClass getDescribableEClass() {
+		return (EClass) getEPackage().getEClassifiers().get(
+				DESCRIBABLE_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '
+	 * <em><b>Describable.description</b></em>'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>Describable.description</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getDescribable_Description() {
+		return (EAttribute) getDescribableEClass().getEAllStructuralFeatures()
+				.get(DESCRIBABLE_DESCRIPTION_FEATURE_ID);
+	}
+
+	/**
 	 * Returns the {@link EStructuralFeature} '
 	 * <em><b>PostalAddress.primary</b></em>'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -903,6 +980,58 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
+	 * Returns the {@link EClass} '<em><b>Positionable</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EClass} '<em><b>Positionable</b></em>'
+	 * @generated
+	 */
+	public EClass getPositionableEClass() {
+		return (EClass) getEPackage().getEClassifiers().get(
+				POSITIONABLE_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '
+	 * <em><b>Positionable.positioner</b></em>'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>Positionable.positioner</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getPositionable_Positioner() {
+		return (EAttribute) getPositionableEClass().getEAllStructuralFeatures()
+				.get(POSITIONABLE_POSITIONER_FEATURE_ID);
+	}
+
+	/**
+	 * Returns the {@link EClass} '<em><b>NameContainer</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EClass} '<em><b>NameContainer</b></em>'
+	 * @generated
+	 */
+	public EClass getNameContainerEClass() {
+		return (EClass) getEPackage().getEClassifiers().get(
+				NAMECONTAINER_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '
+	 * <em><b>NameContainer.name</b></em>'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>NameContainer.name</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getNameContainer_Name() {
+		return (EAttribute) getNameContainerEClass()
+				.getEAllStructuralFeatures().get(NAMECONTAINER_NAME_FEATURE_ID);
+	}
+
+	/**
 	 * Returns the {@link EDataType} '<em><b>DateTime</b></em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1018,10 +1147,16 @@ public class JpaModelPackage extends ModelPackage {
 		switch (eClassifier.getClassifierID()) {
 		case POSTALADDRESS_CLASSIFIER_ID:
 			return PostalAddress.class;
+		case DESCRIBABLE_CLASSIFIER_ID:
+			return Describable.class;
 		case GEOLOCATION_CLASSIFIER_ID:
 			return Geolocation.class;
 		case PERSONINFO_CLASSIFIER_ID:
 			return PersonInfo.class;
+		case POSITIONABLE_CLASSIFIER_ID:
+			return Positionable.class;
+		case NAMECONTAINER_CLASSIFIER_ID:
+			return NameContainer.class;
 		case DATETIME_CLASSIFIER_ID:
 			return DateTime.class;
 		case GENDER_CLASSIFIER_ID:

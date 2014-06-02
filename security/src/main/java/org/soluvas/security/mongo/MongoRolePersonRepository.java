@@ -152,6 +152,11 @@ public class MongoRolePersonRepository extends AssocRepositoryBase<String, Strin
 	@Override
 	public List<String> getRight(String personId) {
 		final BasicDBObject personObj = (BasicDBObject) personColl.findOne(new BasicDBObject("_id", personId));
+//		log.debug("Result Query of PersonObj with personId {} : {}", personId, personObj);
+		if (personObj == null) {
+			log.warn("Person object is null for id {}", personId);
+			return ImmutableList.of();
+		}
 		final Set<String> tenantRoleIds = personObj.get("securityRoleIds") != null ?
 				new LinkedHashSet<>((List<String>) personObj.get("securityRoleIds")) : new LinkedHashSet<String>();
 		if (!tenantRoleIds.isEmpty()) {
