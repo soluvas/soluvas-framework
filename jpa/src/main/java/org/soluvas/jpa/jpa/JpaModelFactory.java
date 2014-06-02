@@ -55,7 +55,7 @@ public class JpaModelFactory implements ModelFactory {
 	/**
 	 * Wraps an object in a {@link ModelObject}. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 *
+	 * 
 	 * @param eClass
 	 *            the EClass of the object
 	 * @param adaptee
@@ -70,11 +70,20 @@ public class JpaModelFactory implements ModelFactory {
 		case JpaModelPackage.POSTALADDRESS_CLASSIFIER_ID:
 			modelObject = new PostalAddressModelObject();
 			break;
+		case JpaModelPackage.DESCRIBABLE_CLASSIFIER_ID:
+			modelObject = new DescribableModelObject();
+			break;
 		case JpaModelPackage.GEOLOCATION_CLASSIFIER_ID:
 			modelObject = new GeolocationModelObject();
 			break;
 		case JpaModelPackage.PERSONINFO_CLASSIFIER_ID:
 			modelObject = new PersonInfoModelObject();
+			break;
+		case JpaModelPackage.POSITIONABLE_CLASSIFIER_ID:
+			modelObject = new PositionableModelObject();
+			break;
+		case JpaModelPackage.NAMECONTAINER_CLASSIFIER_ID:
+			modelObject = new NameContainerModelObject();
 			break;
 		default:
 			throw new IllegalArgumentException("The EClass '" + eClass
@@ -537,12 +546,12 @@ public class JpaModelFactory implements ModelFactory {
 
 	/**
 	 * The adapter/wrapper for the EClass '<em><b>PostalAddress</b></em>'.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
+	 * 
 	 * @param <E>
 	 *            the domain model java class
-	 *
+	 * 
 	 * @generated
 	 */
 	public static class PostalAddressModelObject<E extends PostalAddress>
@@ -602,8 +611,6 @@ public class JpaModelFactory implements ModelFactory {
 				return getTarget().getPrimaryEmail();
 			case JpaModelPackage.POSTALADDRESS_EMAILS_FEATURE_ID:
 				return getTarget().getEmails();
-			case JpaModelPackage.POSTALADDRESS_DESCRIPTION_FEATURE_ID:
-				return getTarget().getDescription();
 			case JpaModelPackage.POSTALADDRESS_PRIMARY_FEATURE_ID:
 				return getTarget().isPrimary();
 			case JpaModelPackage.POSTALADDRESS_PRIMARYBILLING_FEATURE_ID:
@@ -612,6 +619,8 @@ public class JpaModelFactory implements ModelFactory {
 				return getTarget().isPrimaryShipping();
 			case JpaModelPackage.POSTALADDRESS_VALIDATIONTIME_FEATURE_ID:
 				return getTarget().getValidationTime();
+			case JpaModelPackage.POSTALADDRESS_DESCRIPTION_FEATURE_ID:
+				return getTarget().getDescription();
 			default:
 				return super.eGet(eStructuralFeature);
 			}
@@ -676,9 +685,6 @@ public class JpaModelFactory implements ModelFactory {
 			case JpaModelPackage.POSTALADDRESS_EMAILS_FEATURE_ID:
 				getTarget().setEmails((List<String>) value);
 				return;
-			case JpaModelPackage.POSTALADDRESS_DESCRIPTION_FEATURE_ID:
-				getTarget().setDescription((String) value);
-				return;
 			case JpaModelPackage.POSTALADDRESS_PRIMARY_FEATURE_ID:
 				getTarget().setPrimary((Boolean) value);
 				return;
@@ -690,6 +696,9 @@ public class JpaModelFactory implements ModelFactory {
 				return;
 			case JpaModelPackage.POSTALADDRESS_VALIDATIONTIME_FEATURE_ID:
 				getTarget().setValidationTime((DateTime) value);
+				return;
+			case JpaModelPackage.POSTALADDRESS_DESCRIPTION_FEATURE_ID:
+				getTarget().setDescription((String) value);
 				return;
 			default:
 				super.eSet(eStructuralFeature, value);
@@ -756,13 +765,97 @@ public class JpaModelFactory implements ModelFactory {
 	}
 
 	/**
-	 * The adapter/wrapper for the EClass '<em><b>Geolocation</b></em>'.
-	 *
+	 * The adapter/wrapper for the EClass '<em><b>Describable</b></em>'.
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
+	 * 
 	 * @param <E>
 	 *            the domain model java class
-	 *
+	 * 
+	 * @generated
+	 */
+	public static class DescribableModelObject<E extends Describable> extends
+			AbstractModelObject<E> {
+		/**
+		 * @generated
+		 */
+		public EClass eClass() {
+			return JpaModelPackage.INSTANCE.getDescribableEClass();
+		}
+
+		/**
+		 * @generated
+		 */
+		public ModelPackage getModelPackage() {
+			return JpaModelPackage.INSTANCE;
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public Object eGet(EStructuralFeature eStructuralFeature) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+			case JpaModelPackage.DESCRIBABLE_DESCRIPTION_FEATURE_ID:
+				return getTarget().getDescription();
+			default:
+				return super.eGet(eStructuralFeature);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public void eSet(EStructuralFeature eStructuralFeature, Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+			case JpaModelPackage.DESCRIBABLE_DESCRIPTION_FEATURE_ID:
+				getTarget().setDescription((String) value);
+				return;
+			default:
+				super.eSet(eStructuralFeature, value);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean eAddTo(EStructuralFeature eStructuralFeature,
+				Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+
+			default:
+				return super.eAddTo(eStructuralFeature, value);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean eRemoveFrom(EStructuralFeature eStructuralFeature,
+				Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+
+			default:
+				return super.eRemoveFrom(eStructuralFeature, value);
+			}
+		}
+	}
+
+	/**
+	 * The adapter/wrapper for the EClass '<em><b>Geolocation</b></em>'.
+	 * 
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param <E>
+	 *            the domain model java class
+	 * 
 	 * @generated
 	 */
 	public static class GeolocationModelObject<E extends Geolocation> extends
@@ -851,12 +944,12 @@ public class JpaModelFactory implements ModelFactory {
 
 	/**
 	 * The adapter/wrapper for the EClass '<em><b>PersonInfo</b></em>'.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
+	 * 
 	 * @param <E>
 	 *            the domain model java class
-	 *
+	 * 
 	 * @generated
 	 */
 	public static class PersonInfoModelObject<E extends PersonInfo> extends
@@ -918,6 +1011,174 @@ public class JpaModelFactory implements ModelFactory {
 				return;
 			case JpaModelPackage.PERSONINFO_GENDER_FEATURE_ID:
 				getTarget().setGender((Gender) value);
+				return;
+			default:
+				super.eSet(eStructuralFeature, value);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean eAddTo(EStructuralFeature eStructuralFeature,
+				Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+
+			default:
+				return super.eAddTo(eStructuralFeature, value);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean eRemoveFrom(EStructuralFeature eStructuralFeature,
+				Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+
+			default:
+				return super.eRemoveFrom(eStructuralFeature, value);
+			}
+		}
+	}
+
+	/**
+	 * The adapter/wrapper for the EClass '<em><b>Positionable</b></em>'.
+	 * 
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param <E>
+	 *            the domain model java class
+	 * 
+	 * @generated
+	 */
+	public static class PositionableModelObject<E extends Positionable> extends
+			AbstractModelObject<E> {
+		/**
+		 * @generated
+		 */
+		public EClass eClass() {
+			return JpaModelPackage.INSTANCE.getPositionableEClass();
+		}
+
+		/**
+		 * @generated
+		 */
+		public ModelPackage getModelPackage() {
+			return JpaModelPackage.INSTANCE;
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public Object eGet(EStructuralFeature eStructuralFeature) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+			case JpaModelPackage.POSITIONABLE_POSITIONER_FEATURE_ID:
+				return getTarget().getPositioner();
+			default:
+				return super.eGet(eStructuralFeature);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public void eSet(EStructuralFeature eStructuralFeature, Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+			case JpaModelPackage.POSITIONABLE_POSITIONER_FEATURE_ID:
+				getTarget().setPositioner((Integer) value);
+				return;
+			default:
+				super.eSet(eStructuralFeature, value);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean eAddTo(EStructuralFeature eStructuralFeature,
+				Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+
+			default:
+				return super.eAddTo(eStructuralFeature, value);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean eRemoveFrom(EStructuralFeature eStructuralFeature,
+				Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+
+			default:
+				return super.eRemoveFrom(eStructuralFeature, value);
+			}
+		}
+	}
+
+	/**
+	 * The adapter/wrapper for the EClass '<em><b>NameContainer</b></em>'.
+	 * 
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param <E>
+	 *            the domain model java class
+	 * 
+	 * @generated
+	 */
+	public static class NameContainerModelObject<E extends NameContainer>
+			extends AbstractModelObject<E> {
+		/**
+		 * @generated
+		 */
+		public EClass eClass() {
+			return JpaModelPackage.INSTANCE.getNameContainerEClass();
+		}
+
+		/**
+		 * @generated
+		 */
+		public ModelPackage getModelPackage() {
+			return JpaModelPackage.INSTANCE;
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public Object eGet(EStructuralFeature eStructuralFeature) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+			case JpaModelPackage.NAMECONTAINER_NAME_FEATURE_ID:
+				return getTarget().getName();
+			default:
+				return super.eGet(eStructuralFeature);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public void eSet(EStructuralFeature eStructuralFeature, Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+			case JpaModelPackage.NAMECONTAINER_NAME_FEATURE_ID:
+				getTarget().setName((String) value);
 				return;
 			default:
 				super.eSet(eStructuralFeature, value);

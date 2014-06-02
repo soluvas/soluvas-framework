@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="jpa" nsURI="http://www.soluvas.org/jpa.jpa/" nsPrefix="jpa">
-  <eClassifiers xsi:type="ecore:EClass" name="PostalAddress">
+  <eClassifiers xsi:type="ecore:EClass" name="PostalAddress" eSuperTypes="#//Describable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="See http://www.upu.int/en/activities/addressing/standards.html - UPU S42.&#xA;&#xA;ID is RFC1274: unique identifer.&#xA;LDAP: uniqueIdentifier&#xA;&#xA;'name' attribute is Person name who will receive.&#xA;RFC2256: common name(s) for which the entity is known by.&#xA;cn, commonName.&#xA;&#xA;Can be used as:&#xA;&#xA;1. Billing Address in SalesQuote/SalesOrder&#xA;2. Shipping Address in SalesQuote/SalesOrder&#xA;3. Origin Address in SalesQuote/SalesOrder&#xA;4. Person (Customer) Address&#xA;5. Shop Address&#xA;6. Mall Address&#xA;"/>
+      <details key="documentation" value="See http://www.upu.int/en/activities/addressing/standards.html - UPU S42.&#xA;For {@link #description} attribute: What this address represents, usually &quot;Home&quot;, &quot;Work&quot;, etc.&#xA;&#xA;ID is RFC1274: unique identifer.&#xA;LDAP: uniqueIdentifier&#xA;&#xA;'name' attribute is Person name who will receive.&#xA;RFC2256: common name(s) for which the entity is known by.&#xA;cn, commonName.&#xA;&#xA;Can be used as:&#xA;&#xA;1. Billing Address in SalesQuote/SalesOrder&#xA;2. Shipping Address in SalesQuote/SalesOrder&#xA;3. Origin Address in SalesQuote/SalesOrder&#xA;4. Person (Customer) Address&#xA;5. Shop Address&#xA;6. Mall Address&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="organization" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -119,14 +119,6 @@
         <details key="java.member" value="emails"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="What this address represents, usually &quot;Home&quot;, &quot;Work&quot;, etc."/>
-      </eAnnotations>
-      <eAnnotations source="org.eclipse.emf.texo">
-        <details key="java.member" value="description"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="primary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -207,6 +199,40 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" eType="#//Gender">
       <eAnnotations source="org.eclipse.emf.texo">
         <details key="java.member" value="gender"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Positionable" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="positioner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0">
+      <eAnnotations source="org.eclipse.emf.texo">
+        <details key="java.member" value="positioner"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NameContainer" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Display name (can be full name, nickname, slug, screen name, etc. whatever is commonly used by the particular app).&#xA;Used by {#getName()}."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Name of the entity."/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.emf.texo">
+        <details key="java.member" value="name"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Describable" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Has description."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Description for this entity, in &lt;a href=&quot;https://en.wikipedia.org/wiki/AsciiDoc&quot;>AsciiDoc&lt;/a> format.&#xA;If &lt;a href=&quot;http://dev.w3.org/html5/rdfa/&quot;>HTML+RDFa (Linked Data)&lt;/a> format is desired, you should create a separate {@code descriptionHtml} attribute."/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.emf.texo">
+        <details key="java.member" value="description"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
