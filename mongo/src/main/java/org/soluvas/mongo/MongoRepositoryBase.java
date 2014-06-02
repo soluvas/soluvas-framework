@@ -346,7 +346,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	}
 
 	/**
-	 * Called by constructor after connection and authentication but 
+	 * If {@link #migrationEnabled} is {@true}, called by constructor after connection and authentication but 
 	 * before calling {@link MongoUtils#ensureUnique(DBCollection, String...)} and {@link MongoUtils#ensureIndexes(DBCollection, Map)}.
 	 * Useful if you want to migrate data or reslug.
 	 */

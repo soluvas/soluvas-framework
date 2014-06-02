@@ -31,7 +31,6 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClientURI;
 import com.mongodb.ReadPreference;
-import com.mongodb.WriteResult;
 
 /**
  * Associates {@link Role} ID with MongoDB {@link Person} IDs, this is implemented by
@@ -73,10 +72,12 @@ public class MongoRolePersonRepository extends AssocRepositoryBase<String, Strin
 		Preconditions.checkNotNull(personObj, "Cannot find person '%s'", personId);
 		final Set<String> tenantRoleIds = personObj.get("securityRoleIds") != null ?
 				new LinkedHashSet<>((List<String>) personObj.get("securityRoleIds")) : new LinkedHashSet<String>();
-		final boolean added = tenantRoleIds.contains(tenantRoleIds) ? tenantRoleIds.add(roleId) : false;
-		final WriteResult writeResult = personColl.update(new BasicDBObject("_id", personId), personObj);
-		if (writeResult.getLastError() != null && writeResult.getLastError().getException() != null) {
-			throw new SecurityException("Cannot update person '" + personId + "'", writeResult.getLastError().getException());
+		final boolean added = !tenantRoleIds.contains(tenantRoleIds) ? tenantRoleIds.add(roleId) : false;
+		try {
+			personColl.update(new BasicDBObject("_id", personId),
+					new BasicDBObject("$set", new BasicDBObject("securityRoleIds", tenantRoleIds)));
+		} catch (Exception e) {
+			throw new SecurityException("Cannot update person '" + personId + "' for adding role '" + roleId + "'", e);
 		}
 		if (added) {
 			log.info("Assigned tenant role {} to person {}. Current tenant roles: {}", roleId, personId, tenantRoleIds);
@@ -92,11 +93,13 @@ public class MongoRolePersonRepository extends AssocRepositoryBase<String, Strin
 		if (personObj != null) {
 			final Set<String> tenantRoleIds = personObj.get("securityRoleIds") != null ?
 					new LinkedHashSet<>((List<String>) personObj.get("securityRoleIds")) : new LinkedHashSet<String>();
-			if (tenantRoleIds != null) {
+			if (!tenantRoleIds.isEmpty()) {
 				final boolean removed = tenantRoleIds.remove(roleId);
-				final WriteResult writeResult = personColl.update(new BasicDBObject("_id", personId), personObj);
-				if (writeResult.getLastError() != null && writeResult.getLastError().getException() != null) {
-					throw new SecurityException("Cannot update person '" + personId + "'", writeResult.getLastError().getException());
+				try {
+					personColl.update(new BasicDBObject("_id", personId), 
+							new BasicDBObject("$set", new BasicDBObject("securityRoleIds", tenantRoleIds)));
+				} catch (Exception e) {
+					throw new SecurityException("Cannot update person '" + personId + "' for deleting role '" + roleId + "'", e);
 				}
 				if (removed) {
 					log.info("Unassigned tenant role {} from person {}. Current tenant roles: {}", roleId, personId, tenantRoleIds);
