@@ -1,7 +1,6 @@
 package org.soluvas.jpa.jpa;
 
 import java.io.Serializable;
-
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 
@@ -39,7 +38,7 @@ public class Geolocation implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>latitude</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>latitude</b></em>' feature
@@ -51,7 +50,7 @@ public class Geolocation implements Serializable {
 
 	/**
 	 * Sets the '{@link Geolocation#getLatitude() <em>latitude</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newLatitude
@@ -65,7 +64,7 @@ public class Geolocation implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>longitude</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>longitude</b></em>' feature
@@ -77,7 +76,7 @@ public class Geolocation implements Serializable {
 
 	/**
 	 * Sets the '{@link Geolocation#getLongitude() <em>longitude</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newLongitude
@@ -91,7 +90,7 @@ public class Geolocation implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>elevation</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>elevation</b></em>' feature
@@ -103,7 +102,7 @@ public class Geolocation implements Serializable {
 
 	/**
 	 * Sets the '{@link Geolocation#getElevation() <em>elevation</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newElevation

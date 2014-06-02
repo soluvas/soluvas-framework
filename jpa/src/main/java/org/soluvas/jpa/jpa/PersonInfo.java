@@ -57,7 +57,7 @@ public class PersonInfo {
 
 	/**
 	 * Returns the value of '<em><b>id</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>id</b></em>' feature
@@ -69,7 +69,7 @@ public class PersonInfo {
 
 	/**
 	 * Sets the '{@link PersonInfo#getId() <em>id</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newId
@@ -82,7 +82,7 @@ public class PersonInfo {
 
 	/**
 	 * Returns the value of '<em><b>slug</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>slug</b></em>' feature
@@ -94,7 +94,7 @@ public class PersonInfo {
 
 	/**
 	 * Sets the '{@link PersonInfo#getSlug() <em>slug</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newSlug
@@ -108,7 +108,7 @@ public class PersonInfo {
 
 	/**
 	 * Returns the value of '<em><b>name</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>name</b></em>' feature
@@ -120,7 +120,7 @@ public class PersonInfo {
 
 	/**
 	 * Sets the '{@link PersonInfo#getName() <em>name</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newName
@@ -134,7 +134,7 @@ public class PersonInfo {
 
 	/**
 	 * Returns the value of '<em><b>email</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>email</b></em>' feature
@@ -146,7 +146,7 @@ public class PersonInfo {
 
 	/**
 	 * Sets the '{@link PersonInfo#getEmail() <em>email</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newEmail
@@ -160,7 +160,7 @@ public class PersonInfo {
 
 	/**
 	 * Returns the value of '<em><b>gender</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>gender</b></em>' feature
@@ -172,7 +172,7 @@ public class PersonInfo {
 
 	/**
 	 * Sets the '{@link PersonInfo#getGender() <em>gender</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newGender

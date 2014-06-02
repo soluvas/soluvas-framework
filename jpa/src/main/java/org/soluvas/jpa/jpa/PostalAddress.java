@@ -31,7 +31,7 @@ import org.joda.time.DateTime;
  * @generated
  */
 @Embeddable()
-public class PostalAddress implements Serializable {
+public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * @generated
@@ -285,7 +285,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>street</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>street</b></em>' feature
@@ -297,7 +297,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getStreet() <em>street</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newStreet
@@ -311,7 +311,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>city</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>city</b></em>' feature
@@ -323,7 +323,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getCity() <em>city</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newCity
@@ -337,7 +337,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>postalCode</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>postalCode</b></em>' feature
@@ -350,7 +350,7 @@ public class PostalAddress implements Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPostalCode() <em>postalCode</em>}'
 	 * feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPostalCode
@@ -364,7 +364,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>province</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>province</b></em>' feature
@@ -376,7 +376,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getProvince() <em>province</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newProvince
@@ -455,7 +455,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>primaryMobile</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryMobile</b></em>' feature
@@ -468,7 +468,7 @@ public class PostalAddress implements Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryMobile() <em>primaryMobile</em>}
 	 * ' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryMobile
@@ -496,7 +496,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getMobiles() <em>mobiles</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC1274: mobile telephone number LDAP: mobile, mobileTelephoneNumber <!--
 	 * end-model-doc -->
@@ -547,7 +547,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>phones</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>phones</b></em>' feature
@@ -559,7 +559,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getPhones() <em>phones</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPhones
@@ -573,7 +573,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>primaryHomePhone</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryHomePhone</b></em>' feature
@@ -586,7 +586,7 @@ public class PostalAddress implements Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryHomePhone()
 	 * <em>primaryHomePhone</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryHomePhone
@@ -616,7 +616,7 @@ public class PostalAddress implements Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getHomePhones() <em>homePhones</em>}'
 	 * feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC1274: home telephone number. LDAP: homePhone, homeTelephoneNumber.
 	 * <!-- end-model-doc -->
@@ -632,7 +632,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>primaryWorkPhone</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryWorkPhone</b></em>' feature
@@ -645,7 +645,7 @@ public class PostalAddress implements Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryWorkPhone()
 	 * <em>primaryWorkPhone</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryWorkPhone
@@ -674,7 +674,7 @@ public class PostalAddress implements Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getWorkPhones() <em>workPhones</em>}'
 	 * feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC2256: Telephone Number. LDAP: (not yet mapped) <!-- end-model-doc -->
 	 * 
@@ -689,7 +689,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Returns the value of '<em><b>primaryEmail</b></em>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryEmail</b></em>' feature
@@ -702,7 +702,7 @@ public class PostalAddress implements Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryEmail() <em>primaryEmail</em>}'
 	 * feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryEmail
@@ -729,7 +729,7 @@ public class PostalAddress implements Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getEmails() <em>emails</em>}' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * LDAP: mail. <!-- end-model-doc -->
 	 * 
@@ -915,10 +915,10 @@ public class PostalAddress implements Serializable {
 				+ " [primaryPhone: " + getPrimaryPhone() + "]"
 				+ " [primaryHomePhone: " + getPrimaryHomePhone() + "]"
 				+ " [primaryWorkPhone: " + getPrimaryWorkPhone() + "]"
-				+ " [primaryEmail: " + getPrimaryEmail() + "]"
-				+ " [description: " + getDescription() + "]" + " [primary: "
+				+ " [primaryEmail: " + getPrimaryEmail() + "]" + " [primary: "
 				+ isPrimary() + "]" + " [primaryBilling: " + isPrimaryBilling()
 				+ "]" + " [primaryShipping: " + isPrimaryShipping() + "]"
-				+ " [validationTime: " + getValidationTime() + "]";
+				+ " [validationTime: " + getValidationTime() + "]"
+				+ " [description: " + getDescription() + "]";
 	}
 }
