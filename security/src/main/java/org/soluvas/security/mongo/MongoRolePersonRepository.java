@@ -90,7 +90,8 @@ public class MongoRolePersonRepository extends AssocRepositoryBase<String, Strin
 	public boolean delete(String roleId, String personId) {
 		final BasicDBObject personObj = (BasicDBObject) personColl.findOne(new BasicDBObject("_id", personId));
 		if (personObj != null) {
-			final List<String> tenantRoleIds = (List) personObj.get("securityRoleIds");
+			final Set<String> tenantRoleIds = personObj.get("securityRoleIds") != null ?
+					new LinkedHashSet<>((List<String>) personObj.get("securityRoleIds")) : new LinkedHashSet<String>();
 			if (tenantRoleIds != null) {
 				final boolean removed = tenantRoleIds.remove(roleId);
 				final WriteResult writeResult = personColl.update(new BasicDBObject("_id", personId), personObj);
@@ -117,12 +118,14 @@ public class MongoRolePersonRepository extends AssocRepositoryBase<String, Strin
 	public Multimap<String, String> findAll() {
 		final BasicDBObject query = new BasicDBObject("securityRoleIds", new BasicDBObject("$exists", true));
 		final ImmutableMultimap.Builder<String, String> allb = ImmutableMultimap.builder();
-		try (final DBCursor cursor = personColl.find(query, new BasicDBObject("securityRoleIds", 1)).sort(new BasicDBObject("_id", 1))) {
+		try (final DBCursor cursor = personColl.find(query, new BasicDBObject("securityRoleIds", 1))
+				.sort(new BasicDBObject("_id", 1))) {
 			for (final DBObject personObj : cursor) {
-				final List<String> securityRoleIds = (List) personObj.get("securityRoleIds");
-				if (securityRoleIds != null) {
+				final Set<String> tenantRoleIds = personObj.get("securityRoleIds") != null ?
+						new LinkedHashSet<>((List<String>) personObj.get("securityRoleIds")) : new LinkedHashSet<String>();
+				if (tenantRoleIds != null) {
 					final String personId = (String) personObj.get("_id");
-					for (final String roleId : securityRoleIds) {
+					for (final String roleId : tenantRoleIds) {
 						allb.put(roleId, personId);
 					}
 				}
@@ -134,7 +137,8 @@ public class MongoRolePersonRepository extends AssocRepositoryBase<String, Strin
 	@Override
 	public List<String> getLeft(String roleId) {
 		try (final DBCursor personIdCur = personColl.find(new BasicDBObject("securityRoleIds", roleId))) {
-			final ImmutableList<String> personIds = FluentIterable.from(personIdCur).transform(new Function<DBObject, String>() {
+			final ImmutableList<String> personIds = FluentIterable.from(personIdCur)
+					.transform(new Function<DBObject, String>() {
 				@Override @Nullable
 				public String apply(@Nullable DBObject input) {
 					return (String) input.get("_id");
@@ -148,10 +152,11 @@ public class MongoRolePersonRepository extends AssocRepositoryBase<String, Strin
 	@Override
 	public List<String> getRight(String personId) {
 		final BasicDBObject personObj = (BasicDBObject) personColl.findOne(new BasicDBObject("_id", personId));
-		final List<String> securityRoleIdsObj = personObj != null ? (List) personObj.get("securityRoleIds") : null;
-		if (securityRoleIdsObj != null) {
-			final ImmutableList<String> roleSet = ImmutableList.copyOf(securityRoleIdsObj);
-			log.trace("PersonID {} has {} roles: {}", personObj.get("_id"), roleSet.size(), Iterables.limit(roleSet, 10));
+		final Set<String> tenantRoleIds = personObj.get("securityRoleIds") != null ?
+				new LinkedHashSet<>((List<String>) personObj.get("securityRoleIds")) : new LinkedHashSet<String>();
+		if (!tenantRoleIds.isEmpty()) {
+			final ImmutableList<String> roleSet = ImmutableList.copyOf(tenantRoleIds);
+			log.trace("PersonID {} has {} roles: {}", personObj.get("_id"), roleSet.size(), roleSet);
 			return roleSet;
 		} else {
 			log.trace("PersonID {} has no roles or not found", personId);
