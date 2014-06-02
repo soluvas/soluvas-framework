@@ -1,6 +1,8 @@
 package org.soluvas.security.mongo;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -69,7 +71,8 @@ public class MongoRolePersonRepository extends AssocRepositoryBase<String, Strin
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(personId), "personId must be specified");
 		final BasicDBObject personObj = (BasicDBObject) personColl.findOne(new BasicDBObject("_id", personId));
 		Preconditions.checkNotNull(personObj, "Cannot find person '%s'", personId);
-		final List<String> tenantRoleIds = (List) personObj.get("securityRoleIds");
+		final Set<String> tenantRoleIds = personObj.get("securityRoleIds") != null ?
+				new LinkedHashSet<>((List<String>) personObj.get("securityRoleIds")) : new LinkedHashSet<String>();
 		final boolean added = tenantRoleIds.contains(tenantRoleIds) ? tenantRoleIds.add(roleId) : false;
 		final WriteResult writeResult = personColl.update(new BasicDBObject("_id", personId), personObj);
 		if (writeResult.getLastError() != null && writeResult.getLastError().getException() != null) {
