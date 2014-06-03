@@ -244,8 +244,8 @@ public class Image {
 	@Override
 	public String toString() {
 		return String.format(
-				"Image [id=%s, contentType=%s, fileName=%s, size=%d, uri=%s]",
-				id, contentType, fileName, size, uri);
+				"Image [id=%s, contentType=%s, fileName=%s, name=%s, size=%d, uri=%s]",
+				id, contentType, fileName, name, size, uri);
 	}
 	
 }

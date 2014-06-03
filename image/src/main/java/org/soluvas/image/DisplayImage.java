@@ -2,8 +2,14 @@
  */
 package org.soluvas.image;
 
-import org.eclipse.emf.ecore.EObject;
 import javax.annotation.Nullable;
+
+import org.eclipse.emf.ecore.EObject;
+import org.soluvas.image.impl.DisplayImageImpl;
+
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 
 /**
@@ -30,6 +36,8 @@ import javax.annotation.Nullable;
  * @model
  * @generated
  */
+@JsonTypeInfo(use=Id.CLASS)
+@JsonDeserialize(as=DisplayImageImpl.class)
 public interface DisplayImage extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Src</b></em>' attribute.

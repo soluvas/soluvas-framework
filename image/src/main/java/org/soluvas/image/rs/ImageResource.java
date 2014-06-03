@@ -62,5 +62,5 @@ public class ImageResource {
 		log.debug("find Image by {} result is {} ", imagetId, imageProductMap);
 		return imageProductMap;
 	}
-
+	
 }

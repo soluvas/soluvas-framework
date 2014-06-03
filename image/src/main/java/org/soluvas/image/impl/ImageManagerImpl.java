@@ -44,6 +44,7 @@ import org.soluvas.image.ImageFactory;
 import org.soluvas.image.ImageManager;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageStyle;
+import org.soluvas.image.ImageStyles;
 import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageType;
 import org.soluvas.image.ImageTypes;
@@ -429,7 +430,14 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		final DisplayImage displayImage = new DisplayImageImpl();
 		
 		if (image != null) {
-			if (image.getStyles() != null && image.getStyles().get(styleKey) != null
+			if (style == ImageStyles.ORIGINAL) {
+				displayImage.setSrc(image.getUri());
+				displayImage.setAlt(image.getName());
+				displayImage.setTitle(image.getName());
+//				TODO: where is original width & height?
+//				displayImage.setWidth(image.getWidth());
+//				displayImage.setHeight(image.getHeight());
+			} else if (image.getStyles() != null && image.getStyles().get(styleKey) != null
 					&& image.getStyles().get(styleKey).getUri() != null) {
 				displayImage.setSrc(image.getStyles().get(styleKey).getUri());
 				displayImage.setAlt(image.getName());
