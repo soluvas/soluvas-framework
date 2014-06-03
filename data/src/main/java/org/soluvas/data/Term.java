@@ -2,6 +2,8 @@
  */
 package org.soluvas.data;
 
+import javax.annotation.Nullable;
+
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.Colorable;
 import org.soluvas.commons.Imageable;
@@ -89,7 +91,17 @@ public interface Term extends TermContainer, BundleAware, NameContainer, Resourc
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Image ID of the term in the repository (if available). The ImageRepository is usually using "term" namespace.
+	 * If a term has specified an image, the image ID in the predefined image directories or {@link org.soluvas.image.store.ImageRepository}, it's highly recommended to just use the {@link #getName()} as {@code imageId}.
+	 * 
+	 * <p>Using image directories and URI templates is common because URI can be created without needing Wicket (e.g. inside email notification) and optionally CDN and even HTTPS. The logic is:
+	 * <ol>
+	 * <li>if Term {@link #getNsPrefix()} is {@code base}, the URI is <tt>{secure|imagesUri}/org.soluvas.data/{kindNsPrefix}_{kindName}/{imageId}.png</tt></li>
+	 * <li>if Term {@link #getNsPrefix()} is not {@code base}, the URI is <tt>{secure|imagesUri}/term/{nsPrefix}/{kindNsPrefix}_{kindName}/{imageId}.png</tt> (since Bippo 5.4.x)</li>
+	 * </ol>
+	 * <p>Note that {@code imagesUri} can be CDN and/or secure. A shared hostname such as {@code bipporeg-prd-img.bipposhop.com} is recommended
+	 * (to make CloudFlare, SSL, and DNS wildcard settings practical). The {@code nsPrefix == tenantId} is part of the URI to support this deployment approach.
+	 * 
+	 * <p>When {@link org.soluvas.image.store.ImageRepository} is used, it depends on the {@link #getKindNsPrefix()} and {@link #getKindName()}.
 	 * 
 	 * TODO: provide a way to specify a static image instead (using 'imagesUri').
 	 * <!-- end-model-doc -->
@@ -210,5 +222,17 @@ public interface Term extends TermContainer, BundleAware, NameContainer, Resourc
 	 * @generated
 	 */
 	TermValue toValue();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Given a base {@code imagesUri} (can be either secure or insecure), returns the term image URI if available, or {@code null} if {@link #getImageId()} is empty.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	@Nullable
+	String getImageUri(String imagesUri);
 
 } // Term

@@ -110,7 +110,7 @@ public class MixinCatalogImpl extends EObjectImpl implements MixinCatalog {
 	@Override
 	public EList<Mixin> getMixins() {
 		if (mixins == null) {
-			mixins = new EObjectContainmentEList<>(Mixin.class, this, DataPackage.MIXIN_CATALOG__MIXINS);
+			mixins = new EObjectContainmentEList<Mixin>(Mixin.class, this, DataPackage.MIXIN_CATALOG__MIXINS);
 		}
 		return mixins;
 	}

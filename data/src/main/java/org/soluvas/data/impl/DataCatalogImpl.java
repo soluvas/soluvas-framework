@@ -344,7 +344,7 @@ public class DataCatalogImpl extends EObjectImpl implements DataCatalog {
 	@Override
 	public EList<Kind> getKinds() {
 		if (kinds == null) {
-			kinds = new EObjectContainmentEList<>(Kind.class, this, DataPackage.DATA_CATALOG__KINDS);
+			kinds = new EObjectContainmentEList<Kind>(Kind.class, this, DataPackage.DATA_CATALOG__KINDS);
 		}
 		return kinds;
 	}

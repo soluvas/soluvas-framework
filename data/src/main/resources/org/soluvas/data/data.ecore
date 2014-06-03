@@ -240,6 +240,12 @@
       </eAnnotations>
     </eOperations>
     <eOperations name="toValue" eType="#//TermValue"/>
+    <eOperations name="getImageUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Given a base {@code imagesUri} (can be either secure or insecure), returns the term image URI if available, or {@code null} if {@link #getImageId()} is empty."/>
+      </eAnnotations>
+      <eParameters name="imagesUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vocab" eType="#//Vocab"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -248,7 +254,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Image ID of the term in the repository (if available). The ImageRepository is usually using &quot;term&quot; namespace.&#xA;&#xA;TODO: provide a way to specify a static image instead (using 'imagesUri')."/>
+        <details key="documentation" value="If a term has specified an image, the image ID in the predefined image directories or {@link org.soluvas.image.store.ImageRepository}, it's highly recommended to just use the {@link #getName()} as {@code imageId}.&#xA;&#xA;&lt;p>Using image directories and URI templates is common because URI can be created without needing Wicket (e.g. inside email notification) and optionally CDN and even HTTPS. The logic is:&#xA;&lt;ol>&#xA;&lt;li>if Term {@link #getNsPrefix()} is {@code base}, the URI is &lt;tt>{secure|imagesUri}/org.soluvas.data/{kindNsPrefix}_{kindName}/{imageId}.png&lt;/tt>&lt;/li>&#xA;&lt;li>if Term {@link #getNsPrefix()} is not {@code base}, the URI is &lt;tt>{secure|imagesUri}/term/{nsPrefix}/{kindNsPrefix}_{kindName}/{imageId}.png&lt;/tt> (since Bippo 5.4.x)&lt;/li>&#xA;&lt;/ol>&#xA;&lt;p>Note that {@code imagesUri} can be CDN and/or secure. A shared hostname such as {@code bipporeg-prd-img.bipposhop.com} is recommended&#xA;(to make CloudFlare, SSL, and DNS wildcard settings practical). The {@code nsPrefix == tenantId} is part of the URI to support this deployment approach.&#xA;&#xA;&lt;p>When {@link org.soluvas.image.store.ImageRepository} is used, it depends on the {@link #getKindNsPrefix()} and {@link #getKindName()}.&#xA;&#xA;TODO: provide a way to specify a static image instead (using 'imagesUri')."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kindNsPrefix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">

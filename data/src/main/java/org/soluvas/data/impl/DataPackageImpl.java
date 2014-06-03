@@ -1170,7 +1170,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		// Obtain other dependent packages
 		CommonsPackage theCommonsPackage = (CommonsPackage)EPackage.Registry.INSTANCE.getEPackage(CommonsPackage.eNS_URI);
-		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
 		ETypeParameter valueEClass_T = addETypeParameter(valueEClass, "T");
@@ -1205,15 +1204,15 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		attributeEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
 		attributeEClass.getESuperTypes().add(theCommonsPackage.getPositionable());
 		g1 = createEGenericType(this.getValue());
-		EGenericType g2 = createEGenericType(theEcorePackage.getEString());
+		EGenericType g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
 		stringValueEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getValue());
-		g2 = createEGenericType(theEcorePackage.getEBigDecimal());
+		g2 = createEGenericType(ecorePackage.getEBigDecimal());
 		g1.getETypeArguments().add(g2);
 		measureValueEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getValue());
-		g2 = createEGenericType(theEcorePackage.getEBigDecimal());
+		g2 = createEGenericType(ecorePackage.getEBigDecimal());
 		g1.getETypeArguments().add(g2);
 		currencyValueEClass.getEGenericSuperTypes().add(g1);
 		mixinEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
@@ -1226,7 +1225,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		g1.getETypeArguments().add(g2);
 		rangeValueEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getValue());
-		g2 = createEGenericType(theEcorePackage.getEString());
+		g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
 		termValueEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(theCommonsPackage.getIdentifiable());
@@ -1264,22 +1263,22 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAttribute_DisplayName(), ecorePackage.getEString(), "displayName", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAttribute_Enabled(), theEcorePackage.getEBoolean(), "enabled", "true", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAttribute_MinValues(), theEcorePackage.getELong(), "minValues", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAttribute_MaxValues(), theEcorePackage.getELong(), "maxValues", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_Enabled(), ecorePackage.getEBoolean(), "enabled", "true", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_MinValues(), ecorePackage.getELong(), "minValues", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_MaxValues(), ecorePackage.getELong(), "maxValues", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_DataTypeName(), ecorePackage.getEString(), "dataTypeName", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAttribute_KindNsPrefix(), theEcorePackage.getEString(), "kindNsPrefix", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAttribute_KindName(), theEcorePackage.getEString(), "kindName", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_KindNsPrefix(), ecorePackage.getEString(), "kindNsPrefix", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_KindName(), ecorePackage.getEString(), "kindName", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_InputMethod(), this.getInputMethod(), "inputMethod", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAttribute_InputUnitName(), theEcorePackage.getEString(), "inputUnitName", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_InputUnitName(), ecorePackage.getEString(), "inputUnitName", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_VisibleInSimple(), ecorePackage.getEBoolean(), "visibleInSimple", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_SearchableInQuick(), ecorePackage.getEBoolean(), "searchableInQuick", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAttribute_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_ImageId(), ecorePackage.getEString(), "imageId", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_FieldWidth(), ecorePackage.getEInt(), "fieldWidth", "20", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAttribute_Principal(), theEcorePackage.getEBoolean(), "principal", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_Principal(), ecorePackage.getEBoolean(), "principal", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(attributeEClass, null, "valueOf", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEString(), "stringValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "stringValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(this.getValue());
 		g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
@@ -1291,9 +1290,9 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		addEOperation(attributeEClass, theEcorePackage.getEBoolean(), "isRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(attributeEClass, ecorePackage.getEBoolean(), "isRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(attributeEClass, theEcorePackage.getEBoolean(), "isMultiple", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(attributeEClass, ecorePackage.getEBoolean(), "isMultiple", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(attributeEClass, null, "getInputUnit", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(theCommonsPackage.getUnit());
@@ -1305,21 +1304,21 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEAttribute(getValue_Semantic(), this.getAttributeSemantic(), "semantic", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getValue_DisplayValue(), ecorePackage.getEString(), "displayValue", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(valueEClass, theEcorePackage.getEString(), "getString", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(valueEClass, ecorePackage.getEString(), "getString", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(valueEClass, null, "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(valueEClass_T);
 		initEOperation(op, g1);
 
 		initEClass(stringValueEClass, StringValue.class, "StringValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getStringValue_Value(), theEcorePackage.getEString(), "value", null, 0, 1, StringValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStringValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(measureValueEClass, MeasureValue.class, "MeasureValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		g1 = createEGenericType(theCommonsPackage.getUnit());
 		g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getMeasureValue_ValueUnit(), g1, "valueUnit", null, 0, 1, MeasureValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMeasureValue_Value(), theEcorePackage.getEBigDecimal(), "value", null, 0, 1, MeasureValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMeasureValue_Value(), ecorePackage.getEBigDecimal(), "value", null, 0, 1, MeasureValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(measureValueEClass, null, "getMeasure", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(this.getDecimalMeasure());
@@ -1332,9 +1331,9 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		initEClass(mixinEClass, Mixin.class, "Mixin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMixin_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, Mixin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMixin_DisplayName(), theEcorePackage.getEString(), "displayName", null, 0, 1, Mixin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMixin_DisplayName(), ecorePackage.getEString(), "displayName", null, 0, 1, Mixin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(mixinEClass, theEcorePackage.getEString(), "getQName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(mixinEClass, ecorePackage.getEString(), "getQName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(rangeValueEClass, RangeValue.class, "RangeValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		g1 = createEGenericType(rangeValueEClass_T);
@@ -1344,22 +1343,25 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		initEClass(termValueEClass, TermValue.class, "TermValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTermValue_Term(), this.getTerm(), null, "term", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTermValue_SlugPath(), theEcorePackage.getEString(), "slugPath", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTermValue_Value(), theEcorePackage.getEString(), "value", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTermValue_SlugPath(), ecorePackage.getEString(), "slugPath", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTermValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(vocabEClass, Vocab.class, "Vocab", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(termEClass, Term.class, "Term", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTerm_Vocab(), this.getVocab(), null, "vocab", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTerm_DisplayName(), theEcorePackage.getEString(), "displayName", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTerm_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTerm_KindNsPrefix(), theEcorePackage.getEString(), "kindNsPrefix", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTerm_KindName(), theEcorePackage.getEString(), "kindName", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTerm_DisplayName(), ecorePackage.getEString(), "displayName", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTerm_ImageId(), ecorePackage.getEString(), "imageId", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTerm_KindNsPrefix(), ecorePackage.getEString(), "kindNsPrefix", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTerm_KindName(), ecorePackage.getEString(), "kindName", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTerm_Bordered(), ecorePackage.getEBoolean(), "bordered", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(termEClass, theEcorePackage.getEString(), "getQName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(termEClass, ecorePackage.getEString(), "getQName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(termEClass, this.getTermValue(), "toValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(termEClass, ecorePackage.getEString(), "getImageUri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "imagesUri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(listVocabEClass, ListVocab.class, "ListVocab", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1376,23 +1378,23 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEReference(getDataCatalog_Kinds(), this.getKind(), null, "kinds", null, 0, -1, DataCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kindEClass, Kind.class, "Kind", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getKind_ImageId(), theEcorePackage.getEString(), "imageId", null, 0, 1, Kind.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKind_ImageId(), ecorePackage.getEString(), "imageId", null, 0, 1, Kind.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mixinCatalogEClass, MixinCatalog.class, "MixinCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMixinCatalog_Mixins(), this.getMixin(), null, "mixins", null, 0, -1, MixinCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mixinManagerEClass, MixinManager.class, "MixinManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMixinManager_MixinCatalog(), this.getMixinCatalog(), null, "mixinCatalog", null, 1, 1, MixinManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(theEcorePackage.getEEList());
+		g1 = createEGenericType(ecorePackage.getEEList());
 		g2 = createEGenericType(this.getMixin());
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getMixinManager_Mixins(), g1, "mixins", null, 1, 1, MixinManager.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(mixinManagerEClass, this.getMixin(), "findMixin", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEString(), "uName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "uName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(mixinManagerEClass, null, "findMixin", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEString(), "term", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "term", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getPageable(), "pageable", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(this.getPage());
 		g2 = createEGenericType(this.getMixin());
@@ -1616,6 +1618,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 			 "documentation", "Return the nsPrefix_name."
 		   });		
 		addAnnotation
+		  (termEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "Given a base {@code imagesUri} (can be either secure or insecure), returns the term image URI if available, or {@code null} if {@link #getImageId()} is empty."
+		   });		
+		addAnnotation
 		  (getTerm_DisplayName(), 
 		   source, 
 		   new String[] {
@@ -1625,7 +1633,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		  (getTerm_ImageId(), 
 		   source, 
 		   new String[] {
-			 "documentation", "Image ID of the term in the repository (if available). The ImageRepository is usually using \"term\" namespace.\n\nTODO: provide a way to specify a static image instead (using \'imagesUri\')."
+			 "documentation", "If a term has specified an image, the image ID in the predefined image directories or {@link org.soluvas.image.store.ImageRepository}, it\'s highly recommended to just use the {@link #getName()} as {@code imageId}.\n\n<p>Using image directories and URI templates is common because URI can be created without needing Wicket (e.g. inside email notification) and optionally CDN and even HTTPS. The logic is:\n<ol>\n<li>if Term {@link #getNsPrefix()} is {@code base}, the URI is <tt>{secure|imagesUri}/org.soluvas.data/{kindNsPrefix}_{kindName}/{imageId}.png</tt></li>\n<li>if Term {@link #getNsPrefix()} is not {@code base}, the URI is <tt>{secure|imagesUri}/term/{nsPrefix}/{kindNsPrefix}_{kindName}/{imageId}.png</tt> (since Bippo 5.4.x)</li>\n</ol>\n<p>Note that {@code imagesUri} can be CDN and/or secure. A shared hostname such as {@code bipporeg-prd-img.bipposhop.com} is recommended\n(to make CloudFlare, SSL, and DNS wildcard settings practical). The {@code nsPrefix == tenantId} is part of the URI to support this deployment approach.\n\n<p>When {@link org.soluvas.image.store.ImageRepository} is used, it depends on the {@link #getKindNsPrefix()} and {@link #getKindName()}.\n\nTODO: provide a way to specify a static image instead (using \'imagesUri\')."
 		   });		
 		addAnnotation
 		  (getTerm_KindNsPrefix(), 
@@ -1780,7 +1788,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "name", "Vocab"
-		   });							
+		   });								
 		addAnnotation
 		  (listVocabEClass, 
 		   source, 

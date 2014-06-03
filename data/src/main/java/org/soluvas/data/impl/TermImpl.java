@@ -4,6 +4,8 @@ package org.soluvas.data.impl;
 
 import java.util.Collection;
 
+import javax.annotation.Nullable;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -718,7 +720,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	@Override
 	public EMap<String, Translation> getTranslations() {
 		if (translations == null) {
-			translations = new EcoreEMap<>(CommonsPackage.Literals.TRANSLATION_ENTRY, TranslationEntryImpl.class, this, DataPackage.TERM__TRANSLATIONS);
+			translations = new EcoreEMap<String,Translation>(CommonsPackage.Literals.TRANSLATION_ENTRY, TranslationEntryImpl.class, this, DataPackage.TERM__TRANSLATIONS);
 		}
 		return translations;
 	}
@@ -895,6 +897,27 @@ public class TermImpl extends EObjectImpl implements Term {
 	public TermValue toValue() {
 		final TermValue value = new TermValueImpl(getQName(), getDisplayName());
 		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override @Nullable
+	public String getImageUri(String imagesUri) {
+		if (!Strings.isNullOrEmpty(getImageId())) {
+			final String uri;
+			if ("base".equals(getNsPrefix())) {
+//				final String bundleName =  ? "org.soluvas.data" : "tenant_common";
+				uri = imagesUri + "org.soluvas.data/" + getKindNsPrefix() + "_" + getKindName() +"/" + getImageId() + ".png";
+			} else {
+				// on 5.3.x this was imagesUri/tenant_common/kindNsPrefix_kindName/imageId.png
+				uri = imagesUri + "term/" + getNsPrefix() + "/" + getKindNsPrefix() + "_" + getKindName() + "/" + getImageId() + ".png";
+			}
+			return uri;
+		} else {
+			return null;
+		}
 	}
 
 	/**
