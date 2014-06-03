@@ -100,4 +100,15 @@ public class GitXmiCategoryRepository extends XmiCategoryRepository {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "GitXmiCategoryRepository ["
+				+ (xmiResources != null ? "xmiResources=" + xmiResources + ", "
+						: "")
+				+ (xmiFiles != null ? "xmiFiles=" + xmiFiles : "") + "]";
+	}
+
 }

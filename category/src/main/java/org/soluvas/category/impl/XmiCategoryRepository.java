@@ -91,12 +91,12 @@ public class XmiCategoryRepository
 	/**
 	 * Changeable XMI files, key is term's nsPrefix which is the same as {@link TenantRef#getTenantId()} (e.g. tuneeca). 
 	 */
-	private final Map<String, File> xmiFiles;
+	protected final Map<String, File> xmiFiles;
 	/**
 	 * Changeable CategoryCatalog, key is term's nsPrefix which is the same as {@link TenantRef#getTenantId()} (e.g. tuneeca). 
 	 */
 	private final Map<String, CategoryCatalog> xmiCatalogs = new HashMap<>();
-	private final List<URL> xmiResources;
+	protected final List<URL> xmiResources;
 	private final EventBus eventBus;
 	
 	public XmiCategoryRepository(List<URL> xmiResources, 
