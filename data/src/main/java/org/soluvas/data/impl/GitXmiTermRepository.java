@@ -17,7 +17,7 @@ import org.eclipse.jgit.lib.RepositoryBuilder;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.transport.PushResult;
 import org.joda.time.DateTime;
-import org.soluvas.commons.tenant.TenantDirProvision;
+import org.soluvas.commons.VersioningMode;
 import org.soluvas.commons.util.GitUtils;
 import org.soluvas.data.DataException;
 
@@ -42,61 +42,63 @@ import com.google.common.eventbus.EventBus;
  */
 public class GitXmiTermRepository extends XmiTermRepository {
 	
-	private Map<String, Repository> gitRepos;
-	private TenantDirProvision tenantDirProvision;
+	private final Map<String, Repository> gitRepos;
+	private final VersioningMode versioningMode;
 	
 	public GitXmiTermRepository(String kindNsPrefix, String kindName,
-			List<URL> xmiResources, Map<String, File> xmiFiles, EventBus eventBus, TenantDirProvision tenantDirProvision) {
+			List<URL> xmiResources, Map<String, File> xmiFiles, VersioningMode versioningMode, EventBus eventBus) {
 		super(kindNsPrefix, kindName, xmiResources, xmiFiles, eventBus);
-		this.tenantDirProvision = tenantDirProvision;
-		if (tenantDirProvision == TenantDirProvision.WORKSPACE) {
-			return;
-		}
-		GitUtils.disableStrictHostKeyChecking();
-		this.gitRepos = ImmutableMap.copyOf(Maps.transformValues(xmiFiles, new Function<File, Repository>() {
-			@Override @Nullable
-			public Repository apply(@Nullable File input) {
-				try {
-					final File xmiParent = input.getParentFile().getCanonicalFile();
-					return new RepositoryBuilder().findGitDir(xmiParent).setMustExist(true)
-						.build();
-				} catch (IOException e) {
-					throw new DataException(e, "Cannot get Git Repository for %s", input);
+		this.versioningMode = versioningMode;
+		if (versioningMode == VersioningMode.WORKING || versioningMode == VersioningMode.SYNC) {
+			GitUtils.disableStrictHostKeyChecking();
+			this.gitRepos = ImmutableMap.copyOf(Maps.transformValues(xmiFiles, new Function<File, Repository>() {
+				@Override @Nullable
+				public Repository apply(@Nullable File input) {
+					try {
+						final File xmiParent = input.getParentFile().getCanonicalFile();
+						return new RepositoryBuilder().findGitDir(xmiParent).setMustExist(true)
+							.build();
+					} catch (IOException e) {
+						throw new DataException(e, "Cannot get Git Repository for %s", input);
+					}
 				}
-			}
-		}));
+			}));
+		} else {
+			this.gitRepos = ImmutableMap.of();
+		}
 	}
 	
 	@Override
 	protected void catalogFilesChanged(Set<String> nsPrefixes, String message) {
 		super.catalogFilesChanged(nsPrefixes, message);
-		if (tenantDirProvision == TenantDirProvision.WORKSPACE) {
-			return;
-		}
-		try {
-			for (final String nsPrefix : nsPrefixes) {
-				final Repository gitRepo = Preconditions.checkNotNull(gitRepos.get(nsPrefix),
-						"Cannot get Git repository for %s", nsPrefix);
-				log.debug("Committing '{}' in {}", message, gitRepo);
-				final Git git = new Git(gitRepo);
-//				final DirCache addCache = git.add().addFilepattern(".").setUpdate(true).call();
-				final RevCommit revCommit = git.commit().setAll(true).setMessage(message + "\nChanged catalog nsPrefixes: " + nsPrefixes + " at " + new DateTime()).call();
-				log.info("Committed '{}' as {} in {}", message, revCommit, gitRepo);
-				
-				// pull
-				log.debug("Pulling {} due to '{}'", gitRepo, message);
-				final PullResult pullResult = git.pull().call();
-				// FetchResult doesn't have proper toString()
-				final String fetchResult = pullResult.getFetchResult() != null ? pullResult.getFetchResult().getTrackingRefUpdates() + " from " + pullResult.getFetchResult().getURI() : null;
-				log.info("Pulled {} from {}. Fetch: {}. Merge: {}.", gitRepo, pullResult.getFetchedFrom(), fetchResult,
-						pullResult.getMergeResult());
-				// push: MUST set default remote AND branch
-				log.debug("Pushing {} due to '{}'", gitRepo, message);
-				final Iterable<PushResult> pushResults = git.push().call();
-				log.info("Pushed {}: {}", gitRepo, pushResults);
+		if (versioningMode == VersioningMode.WORKING || versioningMode == VersioningMode.SYNC) {
+			try {
+				for (final String nsPrefix : nsPrefixes) {
+					final Repository gitRepo = Preconditions.checkNotNull(gitRepos.get(nsPrefix),
+							"Cannot get Git repository for %s", nsPrefix);
+					log.debug("Committing '{}' in {}", message, gitRepo);
+					final Git git = new Git(gitRepo);
+	//				final DirCache addCache = git.add().addFilepattern(".").setUpdate(true).call();
+					final RevCommit revCommit = git.commit().setAll(true).setMessage(message + "\nChanged catalog nsPrefixes: " + nsPrefixes + " at " + new DateTime()).call();
+					log.info("Committed '{}' as {} in {}", message, revCommit, gitRepo);
+					
+					if (versioningMode == VersioningMode.SYNC) {
+						// pull
+						log.debug("Pulling {} due to '{}'", gitRepo, message);
+						final PullResult pullResult = git.pull().call();
+						// FetchResult doesn't have proper toString()
+						final String fetchResult = pullResult.getFetchResult() != null ? pullResult.getFetchResult().getTrackingRefUpdates() + " from " + pullResult.getFetchResult().getURI() : null;
+						log.info("Pulled {} from {}. Fetch: {}. Merge: {}.", gitRepo, pullResult.getFetchedFrom(), fetchResult,
+								pullResult.getMergeResult());
+						// push: MUST set default remote AND branch
+						log.debug("Pushing {} due to '{}'", gitRepo, message);
+						final Iterable<PushResult> pushResults = git.push().call();
+						log.info("Pushed {}: {}", gitRepo, pushResults);
+					}
+				}
+			} catch (GitAPIException e) {
+				throw new DataException(e, "Cannot commit '%s' to Git repository: %s", message, e);
 			}
-		} catch (GitAPIException e) {
-			throw new DataException(e, "Cannot commit '%s' to Git repository: %s", message, e);
 		}
 	}
 
