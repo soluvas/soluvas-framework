@@ -11,15 +11,19 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import javax.servlet.ServletContext;
 
-import org.apache.http.client.HttpClient;
+import org.apache.http.config.Registry;
+import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLSocketFactory;
-import org.apache.http.impl.client.DecompressingHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -164,9 +168,55 @@ public class CommonsWebConfig {
 		return cm;
 	}
 	
+	@Bean(destroyMethod="shutdown")
+	public PoolingHttpClientConnectionManager httpClientConnMgr43() throws NoSuchAlgorithmException, KeyManagementException {
+		final int maxConnections = env.getProperty("httpMaxConnections", Integer.class, 20);
+		final boolean trustAll = env.getProperty("httpTrustAll", Boolean.class, false);
+		log.info("Creating Pooling HTTP ClientConnectionManager with {} max connections, trust all SSL certs: {}",
+				maxConnections, trustAll);
+
+		final SSLSocketFactory sslSocketFactory;
+		if (trustAll) {
+			final SSLContext context = SSLContext.getInstance("TLS");
+			context.init(
+					null,
+					new TrustManager[] { new X509TrustManager() {
+						@Override
+						public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+							return null;
+						}
+
+						@Override
+						public void checkClientTrusted(
+								java.security.cert.X509Certificate[] certs,
+								String authType) {
+						}
+
+						@Override
+						public void checkServerTrusted(
+								java.security.cert.X509Certificate[] certs,
+								String authType) {
+						}
+					} }, null);
+			sslSocketFactory = new SSLSocketFactory(context, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+		} else {
+			sslSocketFactory = SSLSocketFactory.getSocketFactory();
+		}
+		
+		final Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
+                .register("http", PlainConnectionSocketFactory.getSocketFactory())
+                .register("https", sslSocketFactory)
+                .build();
+		
+		final PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(registry);
+		cm.setMaxTotal(maxConnections);
+		cm.setDefaultMaxPerRoute(maxConnections);
+		return cm;
+	}
+	
 	@Bean
-	public HttpClient httpClient() throws KeyManagementException, NoSuchAlgorithmException {
-		return new DecompressingHttpClient(new DefaultHttpClient(httpClientConnMgr()));
+	public CloseableHttpClient httpClient() throws KeyManagementException, NoSuchAlgorithmException {
+		return HttpClientBuilder.create().setConnectionManager(httpClientConnMgr43()).build();
 	}
 	
 	@Bean
