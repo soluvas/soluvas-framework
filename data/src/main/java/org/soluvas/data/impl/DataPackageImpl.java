@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.data.Attribute;
 import org.soluvas.data.AttributeSemantic;
@@ -1007,6 +1008,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getPageable() {
 		return pageableEDataType;
 	}
@@ -1016,6 +1018,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getPage() {
 		return pageEDataType;
 	}
@@ -1806,6 +1809,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	
 	public static DataPackage getInstance() {
 		return eINSTANCE;
+	}
+	
+	@Override
+	protected Resource createResource(String uri) {
+		// assume accessed from bipporeg-model
+		return super.createResource("../../../org.soluvas.data/src/main/resources/org/soluvas/data/data.ecore");
 	}
 
 } //DataPackageImpl

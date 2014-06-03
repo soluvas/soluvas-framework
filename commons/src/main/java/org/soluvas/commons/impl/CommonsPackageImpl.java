@@ -11,12 +11,14 @@ import java.util.NavigableMap;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Set;
+
 import javax.measure.Measurable;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Quantity;
 import javax.measure.quantity.Temperature;
 import javax.measure.unit.Unit;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -28,6 +30,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.joda.money.BigMoneyProvider;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
@@ -52,7 +55,6 @@ import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.CustomerRoleStatus;
-import org.soluvas.commons.Organization;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.EClassLinked;
 import org.soluvas.commons.EClassStatus;
@@ -80,6 +82,7 @@ import org.soluvas.commons.Nameable;
 import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ObjectNotification;
 import org.soluvas.commons.ObjectsNotification;
+import org.soluvas.commons.Organization;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonCatalog;
@@ -114,6 +117,7 @@ import org.soluvas.commons.TranslationState;
 import org.soluvas.commons.TwitterAccessible;
 import org.soluvas.commons.TwitterIdentity;
 import org.soluvas.commons.WebAddress;
+
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 import com.google.common.eventbus.EventBus;
@@ -1057,6 +1061,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_Summary() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(1);
 	}
@@ -1086,6 +1091,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_DomainPrd() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(4);
 	}
@@ -1095,6 +1101,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_DomainDev() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(5);
 	}
@@ -1104,6 +1111,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_DomainStg() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(6);
 	}
@@ -1123,6 +1131,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_GeneralEmailPrd() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(8);
 	}
@@ -1132,6 +1141,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_GeneralEmailDev() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(9);
 	}
@@ -1141,6 +1151,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_GeneralEmailStg() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(10);
 	}
@@ -1170,6 +1181,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_OrganizationPhoneNumbers() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(13);
 	}
@@ -1199,6 +1211,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_Footnote() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(24);
 	}
@@ -1208,6 +1221,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_WwwUsed() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(25);
 	}
@@ -1217,6 +1231,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_DefaultTimeZoneId() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(14);
 	}
@@ -1226,6 +1241,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_DefaultTimeZone() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(15);
 	}
@@ -1235,6 +1251,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_DefaultCurrencyCode() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(16);
 	}
@@ -1244,6 +1261,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_DefaultCurrency() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(17);
 	}
@@ -1253,6 +1271,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_EmailLogoUriTemplate() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(21);
 	}
@@ -1262,6 +1281,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_DefaultLanguageTag() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(18);
 	}
@@ -1271,6 +1291,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_DefaultCountryCode() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(19);
 	}
@@ -1280,6 +1301,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAppManifest_DefaultCategoryUName() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(20);
 	}
@@ -1289,6 +1311,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getAppManifest__GetDefaultLocale() {
 		return appManifestEClass.getEOperations().get(0);
 	}
@@ -1298,6 +1321,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getAppManifest__GetWebHost() {
 		return appManifestEClass.getEOperations().get(1);
 	}
@@ -1417,6 +1441,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getNameable__GetName() {
 		return nameableEClass.getEOperations().get(0);
 	}
@@ -1436,6 +1461,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getImageable__GetImageId() {
 		return imageableEClass.getEOperations().get(0);
 	}
@@ -1495,6 +1521,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getInformer__ToInfo() {
 		return informerEClass.getEOperations().get(0);
 	}
@@ -1584,6 +1611,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getJavaClassLinked__ResolveJavaClass__Bundle() {
 		return javaClassLinkedEClass.getEOperations().get(0);
 	}
@@ -1653,6 +1681,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getEClassLinked__ResolveEClass__Map() {
 		return eClassLinkedEClass.getEOperations().get(0);
 	}
@@ -1672,6 +1701,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getSchemaVersionable__GetSchemaVersion() {
 		return schemaVersionableEClass.getEOperations().get(0);
 	}
@@ -1831,6 +1861,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getWebAddress__GetApiUri() {
 		return webAddressEClass.getEOperations().get(0);
 	}
@@ -1840,6 +1871,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getWebAddress__GetSecureApiUri() {
 		return webAddressEClass.getEOperations().get(1);
 	}
@@ -2029,6 +2061,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getEObjectLinked__GetObject() {
 		return eObjectLinkedEClass.getEOperations().get(0);
 	}
@@ -2168,6 +2201,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getProgressMonitor__BeginTask__String_long() {
 		return progressMonitorEClass.getEOperations().get(0);
 	}
@@ -2177,6 +2211,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getProgressMonitor__Done() {
 		return progressMonitorEClass.getEOperations().get(1);
 	}
@@ -2186,6 +2221,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getProgressMonitor__InternalWorked__double() {
 		return progressMonitorEClass.getEOperations().get(2);
 	}
@@ -2195,6 +2231,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getProgressMonitor__SubTask__String() {
 		return progressMonitorEClass.getEOperations().get(3);
 	}
@@ -2204,6 +2241,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getProgressMonitor__Worked__long() {
 		return progressMonitorEClass.getEOperations().get(4);
 	}
@@ -2213,6 +2251,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getProgressMonitor__Done__ProgressStatus() {
 		return progressMonitorEClass.getEOperations().get(5);
 	}
@@ -2222,6 +2261,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getProgressMonitor__Worked__long_ProgressStatus() {
 		return progressMonitorEClass.getEOperations().get(6);
 	}
@@ -2431,6 +2471,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getTranslationManager__Translate__Translatable_String() {
 		return translationManagerEClass.getEOperations().get(0);
 	}
@@ -2480,6 +2521,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getStyleConfiguration__GetDefaultStyle() {
 		return styleConfigurationEClass.getEOperations().get(0);
 	}
@@ -2509,6 +2551,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getExpandable__Expand__Map() {
 		return expandableEClass.getEOperations().get(0);
 	}
@@ -2518,6 +2561,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPersonLike() {
 		return personLikeEClass;
 	}
@@ -2527,6 +2571,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getPersonLike__GetId() {
 		return personLikeEClass.getEOperations().get(0);
 	}
@@ -2536,6 +2581,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getPersonLike__GetName() {
 		return personLikeEClass.getEOperations().get(1);
 	}
@@ -2545,6 +2591,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getPersonLike__GetSlug() {
 		return personLikeEClass.getEOperations().get(2);
 	}
@@ -2554,6 +2601,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getPersonLike__GetEmail() {
 		return personLikeEClass.getEOperations().get(3);
 	}
@@ -2563,6 +2611,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getPersonLike__GetPhotoId() {
 		return personLikeEClass.getEOperations().get(4);
 	}
@@ -2572,6 +2621,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getPersonLike__GetGender() {
 		return personLikeEClass.getEOperations().get(5);
 	}
@@ -2581,6 +2631,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPerson() {
 		return personEClass;
 	}
@@ -2590,6 +2641,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_SchemaVersion() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(0);
 	}
@@ -2599,6 +2651,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_FirstName() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(1);
 	}
@@ -2608,6 +2661,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_LastName() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(2);
 	}
@@ -2617,6 +2671,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_Password() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(3);
 	}
@@ -2626,6 +2681,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPerson_PhoneNumbers() {
 		return (EReference)personEClass.getEStructuralFeatures().get(4);
 	}
@@ -2635,6 +2691,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPerson_Emails() {
 		return (EReference)personEClass.getEStructuralFeatures().get(5);
 	}
@@ -2644,6 +2701,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPerson_MobileNumbers() {
 		return (EReference)personEClass.getEStructuralFeatures().get(6);
 	}
@@ -2653,6 +2711,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPerson_Addresses() {
 		return (EReference)personEClass.getEStructuralFeatures().get(7);
 	}
@@ -2662,6 +2721,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_AccountStatus() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(8);
 	}
@@ -2671,6 +2731,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_BirthYear() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(9);
 	}
@@ -2680,6 +2741,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_BirthMonth() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(10);
 	}
@@ -2689,6 +2751,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_BirthDay() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(11);
 	}
@@ -2698,6 +2761,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_BirthDate() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(12);
 	}
@@ -2707,6 +2771,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_Gender() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(13);
 	}
@@ -2716,6 +2781,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_Language() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(14);
 	}
@@ -2725,6 +2791,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_CurrencyCode() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(15);
 	}
@@ -2734,6 +2801,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_Currency() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(16);
 	}
@@ -2743,6 +2811,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_GooglePlusId() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(17);
 	}
@@ -2752,6 +2821,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_GoogleUsername() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(18);
 	}
@@ -2761,6 +2831,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_VirtualMail() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(19);
 	}
@@ -2770,6 +2841,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_Nickname() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(20);
 	}
@@ -2779,6 +2851,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_CustomerRole() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(21);
 	}
@@ -2788,6 +2861,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_MemberRole() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(22);
 	}
@@ -2797,6 +2871,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_ManagerRole() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(23);
 	}
@@ -2806,6 +2881,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_TimeZoneId() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(24);
 	}
@@ -2815,6 +2891,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_TimeZone() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(25);
 	}
@@ -2824,6 +2901,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_ReferrerId() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(26);
 	}
@@ -2833,6 +2911,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_ReferrerType() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(27);
 	}
@@ -2842,6 +2921,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_SignupSource() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(28);
 	}
@@ -2851,6 +2931,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_SignupSourceType() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(29);
 	}
@@ -2860,6 +2941,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_IpAddress() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(30);
 	}
@@ -2869,6 +2951,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_LastIpAddress() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(31);
 	}
@@ -2878,6 +2961,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_LastLoginTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(32);
 	}
@@ -2887,6 +2971,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_ValidationTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(33);
 	}
@@ -2896,6 +2981,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_ActivationTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(34);
 	}
@@ -2905,6 +2991,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_VerificationTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(35);
 	}
@@ -2914,6 +3001,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_NewsletterSubscriptionEnabled() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(36);
 	}
@@ -2923,6 +3011,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_NewsletterSubscriptionTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(37);
 	}
@@ -2932,6 +3021,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_SocialSharingEnabled() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(38);
 	}
@@ -2941,6 +3031,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_PublicationStatus() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(39);
 	}
@@ -2950,6 +3041,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_ArchivalStatus() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(40);
 	}
@@ -2959,6 +3051,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_Folder() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(41);
 	}
@@ -2968,6 +3061,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_Religion() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(42);
 	}
@@ -2977,6 +3071,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_PasswordResetCode() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(43);
 	}
@@ -2986,6 +3081,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_PasswordResetExpiryTime() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(44);
 	}
@@ -2995,6 +3091,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_ClientAccessToken() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(45);
 	}
@@ -3004,6 +3101,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_SecurityRoleIds() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(46);
 	}
@@ -3013,6 +3111,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_DebitBalance() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(47);
 	}
@@ -3022,6 +3121,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_DebitCurrency() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(48);
 	}
@@ -3031,6 +3131,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_Type() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(49);
 	}
@@ -3040,6 +3141,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_VerifyCode() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(50);
 	}
@@ -3049,6 +3151,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPerson_Organizations() {
 		return (EReference)personEClass.getEStructuralFeatures().get(51);
 	}
@@ -3058,6 +3161,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getPerson__HasEmail__String() {
 		return personEClass.getEOperations().get(0);
 	}
@@ -3067,6 +3171,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getPerson__PutEmail__String() {
 		return personEClass.getEOperations().get(1);
 	}
@@ -3076,6 +3181,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPhoneNumber() {
 		return phoneNumberEClass;
 	}
@@ -3085,6 +3191,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPhoneNumber_PhoneNumber() {
 		return (EAttribute)phoneNumberEClass.getEStructuralFeatures().get(0);
 	}
@@ -3094,6 +3201,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPhoneNumber_Primary() {
 		return (EAttribute)phoneNumberEClass.getEStructuralFeatures().get(1);
 	}
@@ -3103,6 +3211,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPhoneNumber_ValidationTime() {
 		return (EAttribute)phoneNumberEClass.getEStructuralFeatures().get(2);
 	}
@@ -3112,6 +3221,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEmail() {
 		return emailEClass;
 	}
@@ -3121,6 +3231,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEmail_Email() {
 		return (EAttribute)emailEClass.getEStructuralFeatures().get(0);
 	}
@@ -3130,6 +3241,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEmail_Primary() {
 		return (EAttribute)emailEClass.getEStructuralFeatures().get(1);
 	}
@@ -3139,6 +3251,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEmail_ValidationTime() {
 		return (EAttribute)emailEClass.getEStructuralFeatures().get(2);
 	}
@@ -3148,6 +3261,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPostalAddress() {
 		return postalAddressEClass;
 	}
@@ -3157,6 +3271,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_SchemaVersion() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(0);
 	}
@@ -3166,6 +3281,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_Organization() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(1);
 	}
@@ -3175,6 +3291,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_Street() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(2);
 	}
@@ -3184,6 +3301,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_City() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(3);
 	}
@@ -3193,6 +3311,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_PostalCode() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(4);
 	}
@@ -3202,6 +3321,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_Province() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(5);
 	}
@@ -3211,6 +3331,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_Country() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(6);
 	}
@@ -3220,6 +3341,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_CountryCode() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(7);
 	}
@@ -3229,6 +3351,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_PrimaryMobile() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(8);
 	}
@@ -3238,6 +3361,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_Mobiles() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(9);
 	}
@@ -3247,6 +3371,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_PrimaryPhone() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(10);
 	}
@@ -3256,6 +3381,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_Phones() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(11);
 	}
@@ -3265,6 +3391,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_PrimaryHomePhone() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(12);
 	}
@@ -3274,6 +3401,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_HomePhones() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(13);
 	}
@@ -3283,6 +3411,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_PrimaryWorkPhone() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(14);
 	}
@@ -3292,6 +3421,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_WorkPhones() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(15);
 	}
@@ -3301,6 +3431,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_PrimaryEmail() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(16);
 	}
@@ -3310,6 +3441,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_Emails() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(17);
 	}
@@ -3319,6 +3451,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_Description() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(18);
 	}
@@ -3328,6 +3461,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_Primary() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(19);
 	}
@@ -3337,6 +3471,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_PrimaryBilling() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(20);
 	}
@@ -3346,6 +3481,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_PrimaryShipping() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(21);
 	}
@@ -3355,6 +3491,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPostalAddress_ValidationTime() {
 		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(22);
 	}
@@ -3364,6 +3501,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPersonCatalog() {
 		return personCatalogEClass;
 	}
@@ -3373,6 +3511,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPersonCatalog_People() {
 		return (EReference)personCatalogEClass.getEStructuralFeatures().get(0);
 	}
@@ -3382,6 +3521,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCanonicalSluggable() {
 		return canonicalSluggableEClass;
 	}
@@ -3391,6 +3531,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCanonicalSluggable_CanonicalSlug() {
 		return (EAttribute)canonicalSluggableEClass.getEStructuralFeatures().get(0);
 	}
@@ -3400,6 +3541,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTwitterAccessible() {
 		return twitterAccessibleEClass;
 	}
@@ -3409,6 +3551,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTwitterAccessible_TwitterAccessToken() {
 		return (EAttribute)twitterAccessibleEClass.getEStructuralFeatures().get(0);
 	}
@@ -3418,6 +3561,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTwitterAccessible_TwitterAccessTokenSecret() {
 		return (EAttribute)twitterAccessibleEClass.getEStructuralFeatures().get(1);
 	}
@@ -3427,6 +3571,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTwitterIdentity() {
 		return twitterIdentityEClass;
 	}
@@ -3436,6 +3581,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTwitterIdentity_TwitterId() {
 		return (EAttribute)twitterIdentityEClass.getEStructuralFeatures().get(0);
 	}
@@ -3445,6 +3591,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTwitterIdentity_TwitterScreenName() {
 		return (EAttribute)twitterIdentityEClass.getEStructuralFeatures().get(1);
 	}
@@ -3454,6 +3601,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFacebookIdentity() {
 		return facebookIdentityEClass;
 	}
@@ -3463,6 +3611,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFacebookIdentity_FacebookId() {
 		return (EAttribute)facebookIdentityEClass.getEStructuralFeatures().get(0);
 	}
@@ -3472,6 +3621,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFacebookIdentity_FacebookUsername() {
 		return (EAttribute)facebookIdentityEClass.getEStructuralFeatures().get(1);
 	}
@@ -3481,6 +3631,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFacebookAccessible() {
 		return facebookAccessibleEClass;
 	}
@@ -3490,6 +3641,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFacebookAccessible_FacebookAccessToken() {
 		return (EAttribute)facebookAccessibleEClass.getEStructuralFeatures().get(0);
 	}
@@ -3499,6 +3651,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRevisionable() {
 		return revisionableEClass;
 	}
@@ -3508,6 +3661,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRevisionable_Guid() {
 		return (EAttribute)revisionableEClass.getEStructuralFeatures().get(0);
 	}
@@ -3517,6 +3671,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRevisionable_Revision() {
 		return (EAttribute)revisionableEClass.getEStructuralFeatures().get(1);
 	}
@@ -3526,6 +3681,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSysConfig() {
 		return sysConfigEClass;
 	}
@@ -3535,6 +3691,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSysConfig_TenantId() {
 		return (EAttribute)sysConfigEClass.getEStructuralFeatures().get(0);
 	}
@@ -3544,6 +3701,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGeolocation() {
 		return geolocationEClass;
 	}
@@ -3553,6 +3711,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getGeolocation_Latitude() {
 		return (EAttribute)geolocationEClass.getEStructuralFeatures().get(0);
 	}
@@ -3562,6 +3721,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getGeolocation_Longitude() {
 		return (EAttribute)geolocationEClass.getEStructuralFeatures().get(1);
 	}
@@ -3571,6 +3731,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getGeolocation_Elevation() {
 		return (EAttribute)geolocationEClass.getEStructuralFeatures().get(2);
 	}
@@ -3580,6 +3741,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getThingInfo() {
 		return thingInfoEClass;
 	}
@@ -3589,6 +3751,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getThingInfo_ImageId() {
 		return (EAttribute)thingInfoEClass.getEStructuralFeatures().get(0);
 	}
@@ -3598,6 +3761,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGeneralSysConfig() {
 		return generalSysConfigEClass;
 	}
@@ -3607,6 +3771,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOrganization() {
 		return organizationEClass;
 	}
@@ -3616,6 +3781,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrganization_SchemaVersion() {
 		return (EAttribute)organizationEClass.getEStructuralFeatures().get(0);
 	}
@@ -3625,6 +3791,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrganization_BlackBerryPin() {
 		return (EAttribute)organizationEClass.getEStructuralFeatures().get(1);
 	}
@@ -3634,6 +3801,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrganization_Website() {
 		return (EAttribute)organizationEClass.getEStructuralFeatures().get(2);
 	}
@@ -3643,6 +3811,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrganization_FacebookPageUri() {
 		return (EAttribute)organizationEClass.getEStructuralFeatures().get(3);
 	}
@@ -3652,6 +3821,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrganization_FacebookAccessToken() {
 		return (EAttribute)organizationEClass.getEStructuralFeatures().get(4);
 	}
@@ -3661,6 +3831,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrganization_FacebookId() {
 		return (EAttribute)organizationEClass.getEStructuralFeatures().get(5);
 	}
@@ -3670,6 +3841,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrganization_FacebookUserName() {
 		return (EAttribute)organizationEClass.getEStructuralFeatures().get(6);
 	}
@@ -3679,6 +3851,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrganization_TwitterScreenName() {
 		return (EAttribute)organizationEClass.getEStructuralFeatures().get(7);
 	}
@@ -3688,6 +3861,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrganization_TwitterAccessToken() {
 		return (EAttribute)organizationEClass.getEStructuralFeatures().get(8);
 	}
@@ -3697,6 +3871,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrganization_TwitterAccessTokenSecret() {
 		return (EAttribute)organizationEClass.getEStructuralFeatures().get(9);
 	}
@@ -3706,6 +3881,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrganization_TwitterId() {
 		return (EAttribute)organizationEClass.getEStructuralFeatures().get(10);
 	}
@@ -3715,6 +3891,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCustomerRole() {
 		return customerRoleEClass;
 	}
@@ -3724,6 +3901,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCustomerRole_SchemaVersion() {
 		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(0);
 	}
@@ -3733,6 +3911,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCustomerRole_Status() {
 		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(1);
 	}
@@ -3742,6 +3921,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCustomerRole_QuickShopEnabled() {
 		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(2);
 	}
@@ -3751,6 +3931,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCustomerRole_SalesOrderReportEnabled() {
 		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(3);
 	}
@@ -3760,6 +3941,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCustomerRole_HistorySalesOrderEnabled() {
 		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(4);
 	}
@@ -3769,6 +3951,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCustomerRole_AgentSalesReportEnabled() {
 		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(5);
 	}
@@ -3778,6 +3961,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMongoSysConfig() {
 		return mongoSysConfigEClass;
 	}
@@ -3787,6 +3971,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getMongoSysConfig_MongoUri() {
 		return (EAttribute)mongoSysConfigEClass.getEStructuralFeatures().get(0);
 	}
@@ -3896,6 +4081,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getSignupSourceType() {
 		return signupSourceTypeEEnum;
 	}
@@ -3905,6 +4091,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getTenantSource() {
 		return tenantSourceEEnum;
 	}
@@ -3914,6 +4101,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getGenericStatus() {
 		return genericStatusEEnum;
 	}
@@ -3923,6 +4111,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getCustomerRoleStatus() {
 		return customerRoleStatusEEnum;
 	}
@@ -4172,6 +4361,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getLocalDate() {
 		return localDateEDataType;
 	}
@@ -4181,6 +4371,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getNoSuchElementException() {
 		return noSuchElementExceptionEDataType;
 	}
@@ -4190,6 +4381,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getDeque() {
 		return dequeEDataType;
 	}
@@ -4199,6 +4391,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getTemperature() {
 		return temperatureEDataType;
 	}
@@ -4208,6 +4401,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getLocalTime() {
 		return localTimeEDataType;
 	}
@@ -4217,6 +4411,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getException() {
 		return exceptionEDataType;
 	}
@@ -4226,6 +4421,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getEFactory() {
 		return eFactoryEDataType;
 	}
@@ -4235,6 +4431,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getMass() {
 		return massEDataType;
 	}
@@ -4244,6 +4441,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getLength() {
 		return lengthEDataType;
 	}
@@ -6806,6 +7004,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	
 	public static CommonsPackage getInstance() {
 		return eINSTANCE;
+	}
+
+	@Override
+	protected Resource createResource(String uri) {
+		// assume accessed from bipporeg-model
+		return super.createResource("../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore");
 	}
 
 } //CommonsPackageImpl

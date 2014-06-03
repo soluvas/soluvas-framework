@@ -896,7 +896,7 @@
       kindName="Color"/>
   <terms name="rainbow"
       nsPrefix="base"
-      color="purple"
+      color="silver"
       displayName="Rainbow"
       imageId="rainbow"
       kindNsPrefix="base"

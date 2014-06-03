@@ -274,7 +274,8 @@ public class XmiCategoryRepository
 			try {
 				res.save(ImmutableMap.of(XMIResource.OPTION_LINE_WIDTH, 80,
 						XMIResource.OPTION_DECLARE_XML, true,
-						XMIResource.OPTION_ENCODING, "UTF-8"));
+						XMIResource.OPTION_ENCODING, "UTF-8",
+						XMIResource.OPTION_SCHEMA_LOCATION, true));
 				res.unload();
 			} catch (IOException e) {
 				throw new DataException(e, "Cannot save %s XMI file %s", nsPrefix, file);

@@ -201,7 +201,8 @@ public class TenantXmiBeansImpl<T extends EObject> implements TenantRepositoryLi
 		try {
 			res.save(ImmutableMap.of(XMIResource.OPTION_LINE_WIDTH, 80,
 					XMIResource.OPTION_DECLARE_XML, true,
-					XMIResource.OPTION_ENCODING, "UTF-8"));
+					XMIResource.OPTION_ENCODING, "UTF-8",
+					XMIResource.OPTION_SCHEMA_LOCATION, true));
 			res.unload();
 			log.info("Modifying {} XMI for '{}' as {}", eClass.getName(), tenantId, file);
 		} catch (IOException e) {

@@ -95,6 +95,14 @@ public class XmiTermRepository
 	private final List<URL> xmiResources;
 	private final EventBus eventBus;
 	
+	/**
+	 * @param kindNsPrefix
+	 * @param kindName
+	 * @param xmiResources
+	 * @param xmiFiles These may point to non-existing filepaths (which will be skipped during read, and
+	 * 		created during write), but the parent directory <b>must</b> be valid.
+	 * @param eventBus
+	 */
 	public XmiTermRepository(String kindNsPrefix, String kindName, List<URL> xmiResources, 
 			Map<String, File> xmiFiles, EventBus eventBus) {
 		super();
@@ -119,12 +127,19 @@ public class XmiTermRepository
 		for (final Entry<String, File> entry : xmiFiles.entrySet()) {
 			final File file = entry.getValue();
 			final String nsPrefix = entry.getKey();
-			final DataCatalog loaded = (DataCatalog) new StaticXmiLoader<>(DataPackage.eINSTANCE, file.getPath()).get();
-			xmiCatalogs.put(nsPrefix, loaded);
-			final Collection<Term> matchingTerms = Collections2.filter(loaded.getTerms(), predicate);
-			log.debug("Loaded {} {}:{} terms for {} from file {}", 
-					matchingTerms.size(), kindNsPrefix, kindName, nsPrefix, file);
-			catalog.getTerms().addAll(EcoreUtil.copyAll(matchingTerms));
+			if (file.exists()) {
+				final DataCatalog loaded = (DataCatalog) new StaticXmiLoader<>(DataPackage.eINSTANCE, file.getPath()).get();
+				xmiCatalogs.put(nsPrefix, loaded);
+				final Collection<Term> matchingTerms = Collections2.filter(loaded.getTerms(), predicate);
+				log.debug("Loaded {} {}:{} terms for {} from file {}", 
+						matchingTerms.size(), kindNsPrefix, kindName, nsPrefix, file);
+				catalog.getTerms().addAll(EcoreUtil.copyAll(matchingTerms));
+			} else {
+				final DataCatalog initial = DataFactory.eINSTANCE.createDataCatalog();
+				log.debug("Using empty {}:{} terms for {} because missing DataCatalog file {}", 
+						kindNsPrefix, kindName, nsPrefix, file);
+				xmiCatalogs.put(nsPrefix, initial);
+			}
 		}
 		this.catalog = catalog;
 		log.info("Loaded {} {}:{} terms from {} resources and {} files: {} {}", 
@@ -224,9 +239,11 @@ public class XmiTermRepository
 			final Resource res = rset.createResource(URI.createFileURI(file.getPath()));
 			res.getContents().add(EcoreUtil.copy(xmiCatalog));
 			try {
-				res.save(ImmutableMap.of(XMIResource.OPTION_LINE_WIDTH, 80,
+				res.save(ImmutableMap.of(
+						XMIResource.OPTION_LINE_WIDTH, 80,
 						XMIResource.OPTION_DECLARE_XML, true,
-						XMIResource.OPTION_ENCODING, "UTF-8"));
+						XMIResource.OPTION_ENCODING, "UTF-8",
+						XMIResource.OPTION_SCHEMA_LOCATION, true));
 				res.unload();
 			} catch (IOException e) {
 				throw new DataException(e, "Cannot save %s XMI file %s", nsPrefix, file);
