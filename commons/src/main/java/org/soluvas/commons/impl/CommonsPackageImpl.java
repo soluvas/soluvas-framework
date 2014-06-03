@@ -1208,6 +1208,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAppManifest_WwwUsed() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(25);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getAppManifest_DefaultTimeZoneId() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(14);
 	}
@@ -1282,6 +1291,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	public EOperation getAppManifest__GetDefaultLocale() {
 		return appManifestEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getAppManifest__GetWebHost() {
+		return appManifestEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -4293,7 +4311,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__LETTER_SALUTATION);
 		createEAttribute(appManifestEClass, APP_MANIFEST__LETTER_CLOSING);
 		createEAttribute(appManifestEClass, APP_MANIFEST__FOOTNOTE);
+		createEAttribute(appManifestEClass, APP_MANIFEST__WWW_USED);
 		createEOperation(appManifestEClass, APP_MANIFEST___GET_DEFAULT_LOCALE);
+		createEOperation(appManifestEClass, APP_MANIFEST___GET_WEB_HOST);
 
 		personInfoEClass = createEClass(PERSON_INFO);
 		createEAttribute(personInfoEClass, PERSON_INFO__GENDER);
@@ -4925,8 +4945,11 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_LetterSalutation(), ecorePackage.getEString(), "letterSalutation", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_LetterClosing(), ecorePackage.getEString(), "letterClosing", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_Footnote(), ecorePackage.getEString(), "footnote", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_WwwUsed(), ecorePackage.getEBoolean(), "wwwUsed", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getAppManifest__GetDefaultLocale(), this.getLocale(), "getDefaultLocale", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getAppManifest__GetWebHost(), ecorePackage.getEString(), "getWebHost", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(personInfoEClass, PersonInfo.class, "PersonInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPersonInfo_Gender(), this.getGender(), "gender", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5490,6 +5513,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Returns the {@link java.util.Locale} referred by {@link @getDefaultLanguageTag()}."
 		   });		
 		addAnnotation
+		  (getAppManifest__GetWebHost(), 
+		   source, 
+		   new String[] {
+			 "documentation", "If {@link #isWwwUsed()} is {@code true}, will return \"www.\" + {@link #getDomain()}. Otherwise, just {@link #getDomain()}."
+		   });		
+		addAnnotation
 		  (getAppManifest_Summary(), 
 		   source, 
 		   new String[] {
@@ -5632,6 +5661,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "The footnote is shown on all frontend pages, usually positioned below the main content, but above the footer."
+		   });		
+		addAnnotation
+		  (getAppManifest_WwwUsed(), 
+		   source, 
+		   new String[] {
+			 "documentation", "If {@code true}, {#link getWebHost()} will return \"www.\" + domain. If {@code false}, just domain."
 		   });		
 		addAnnotation
 		  (personInfoEClass, 
@@ -5865,7 +5900,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (webAddressEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Tenant-wide website URI configuration. URI template variables: appId, tenantId, tenantEnv, appDomain, domain, fqdn."
+			 "documentation", "Tenant-wide website URI configuration. URI template variables: appId, tenantId, tenantEnv, appDomain, domain, fqdn, webHost."
 		   });		
 		addAnnotation
 		  (getWebAddress__GetApiUri(), 

@@ -48,6 +48,11 @@
         <details key="documentation" value="Returns the {@link java.util.Locale} referred by {@link @getDefaultLanguageTag()}."/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getWebHost" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If {@link #isWwwUsed()} is {@code true}, will return &quot;www.&quot; + {@link #getDomain()}. Otherwise, just {@link #getDomain()}."/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="summary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -174,6 +179,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="footnote" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The footnote is shown on all frontend pages, usually positioned below the main content, but above the footer."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wwwUsed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If {@code true}, {#link getWebHost()} will return &quot;www.&quot; + domain. If {@code false}, just domain."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -447,7 +458,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WebAddress" eSuperTypes="#//Positionable #//BundleAware #//ResourceAware #//Expandable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Tenant-wide website URI configuration. URI template variables: appId, tenantId, tenantEnv, appDomain, domain, fqdn."/>
+      <details key="documentation" value="Tenant-wide website URI configuration. URI template variables: appId, tenantId, tenantEnv, appDomain, domain, fqdn, webHost."/>
     </eAnnotations>
     <eOperations name="getApiUri" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

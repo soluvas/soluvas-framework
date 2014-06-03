@@ -51,6 +51,7 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getLetterSalutation <em>Letter Salutation</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getLetterClosing <em>Letter Closing</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getFootnote <em>Footnote</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#isWwwUsed <em>Www Used</em>}</li>
  * </ul>
  * </p>
  *
@@ -537,6 +538,58 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	void setFootnote(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Www Used</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * If {@code true}, {#link getWebHost()} will return "www." + domain. If {@code false}, just domain.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Www Used</em>' attribute.
+	 * @see #isSetWwwUsed()
+	 * @see #unsetWwwUsed()
+	 * @see #setWwwUsed(boolean)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_WwwUsed()
+	 * @model unsettable="true"
+	 * @generated
+	 */
+	boolean isWwwUsed();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#isWwwUsed <em>Www Used</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Www Used</em>' attribute.
+	 * @see #isSetWwwUsed()
+	 * @see #unsetWwwUsed()
+	 * @see #isWwwUsed()
+	 * @generated
+	 */
+	void setWwwUsed(boolean value);
+
+	/**
+	 * Unsets the value of the '{@link org.soluvas.commons.AppManifest#isWwwUsed <em>Www Used</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetWwwUsed()
+	 * @see #isWwwUsed()
+	 * @see #setWwwUsed(boolean)
+	 * @generated
+	 */
+	void unsetWwwUsed();
+
+	/**
+	 * Returns whether the value of the '{@link org.soluvas.commons.AppManifest#isWwwUsed <em>Www Used</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Www Used</em>' attribute is set.
+	 * @see #unsetWwwUsed()
+	 * @see #isWwwUsed()
+	 * @see #setWwwUsed(boolean)
+	 * @generated
+	 */
+	boolean isSetWwwUsed();
+
+	/**
 	 * Returns the value of the '<em><b>Default Time Zone Id</b></em>' attribute.
 	 * The default value is <code>"UTC"</code>.
 	 * <!-- begin-user-doc -->
@@ -746,5 +799,16 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	Locale getDefaultLocale();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * If {@link #isWwwUsed()} is {@code true}, will return "www." + {@link #getDomain()}. Otherwise, just {@link #getDomain()}.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	String getWebHost();
 
 } // AppManifest

@@ -163,6 +163,10 @@
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/footnote"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="__JOd8eJfEeOfQ_3MiAABQg"/>
         </children>
+        <children xmi:type="notation:Node" xmi:id="_orMjQOrGEeO3EYi38-fvGA" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/wwwUsed"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_orMjQerGEeO3EYi38-fvGA"/>
+        </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_J59AQSSDEeKyUdMfH4dSfg"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_J59AQiSDEeKyUdMfH4dSfg"/>
         <styles xmi:type="notation:FilteringStyle" xmi:id="_J59AQySDEeKyUdMfH4dSfg"/>
@@ -171,6 +175,10 @@
         <children xmi:type="notation:Node" xmi:id="_QNYUsLctEeOXnKs8cUDr5w" type="2002">
           <element xmi:type="ecore:EOperation" href="commons.ecore#//AppManifest/getDefaultLocale"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_QNYUsbctEeOXnKs8cUDr5w"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_kEy_4OrGEeO3EYi38-fvGA" type="2002">
+          <element xmi:type="ecore:EOperation" href="commons.ecore#//AppManifest/getWebHost"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_kEy_4erGEeO3EYi38-fvGA"/>
         </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_J59nUSSDEeKyUdMfH4dSfg"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_J59nUiSDEeKyUdMfH4dSfg"/>

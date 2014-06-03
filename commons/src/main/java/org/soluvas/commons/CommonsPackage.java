@@ -440,13 +440,22 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__FOOTNOTE = POSITIONABLE_FEATURE_COUNT + 29;
 
 	/**
+	 * The feature id for the '<em><b>Www Used</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__WWW_USED = POSITIONABLE_FEATURE_COUNT + 30;
+
+	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 30;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 31;
 
 	/**
 	 * The operation id for the '<em>Expand</em>' operation.
@@ -467,13 +476,22 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST___GET_DEFAULT_LOCALE = POSITIONABLE_OPERATION_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Get Web Host</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST___GET_WEB_HOST = POSITIONABLE_OPERATION_COUNT + 2;
+
+	/**
 	 * The number of operations of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_OPERATION_COUNT = POSITIONABLE_OPERATION_COUNT + 2;
+	int APP_MANIFEST_OPERATION_COUNT = POSITIONABLE_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}' class.
@@ -6107,6 +6125,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_Footnote();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#isWwwUsed <em>Www Used</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Www Used</em>'.
+	 * @see org.soluvas.commons.AppManifest#isWwwUsed()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_WwwUsed();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6203,6 +6232,16 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getAppManifest__GetDefaultLocale();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.commons.AppManifest#getWebHost() <em>Get Web Host</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Web Host</em>' operation.
+	 * @see org.soluvas.commons.AppManifest#getWebHost()
+	 * @generated
+	 */
+	EOperation getAppManifest__GetWebHost();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonInfo <em>Person Info</em>}'.
@@ -9759,6 +9798,14 @@ public interface CommonsPackage extends EPackage {
 		EAttribute APP_MANIFEST__FOOTNOTE = eINSTANCE.getAppManifest_Footnote();
 
 		/**
+		 * The meta object literal for the '<em><b>Www Used</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__WWW_USED = eINSTANCE.getAppManifest_WwwUsed();
+
+		/**
 		 * The meta object literal for the '<em><b>Default Time Zone Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9829,6 +9876,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation APP_MANIFEST___GET_DEFAULT_LOCALE = eINSTANCE.getAppManifest__GetDefaultLocale();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Web Host</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation APP_MANIFEST___GET_WEB_HOST = eINSTANCE.getAppManifest__GetWebHost();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.

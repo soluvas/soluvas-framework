@@ -294,6 +294,7 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 		scope.put("appDomain", appDomain);
 		scope.put("domain", appManifest.getDomain());
 		scope.put("fqdn", getFqdn());
+		scope.put("webHost", appManifest.getWebHost());
 		final OnDemandXmiLoader<WebAddress> loader;
 		
 		final String webAddressRes = "/META-INF/template.WebAddress.xmi";

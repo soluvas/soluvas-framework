@@ -72,6 +72,7 @@ import com.google.common.base.Preconditions;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterSalutation <em>Letter Salutation</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterClosing <em>Letter Closing</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getFootnote <em>Footnote</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#isWwwUsed <em>Www Used</em>}</li>
  * </ul>
  * </p>
  *
@@ -655,6 +656,33 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	protected String footnote = FOOTNOTE_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #isWwwUsed() <em>Www Used</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isWwwUsed()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean WWW_USED_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isWwwUsed() <em>Www Used</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isWwwUsed()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean wwwUsed = WWW_USED_EDEFAULT;
+	/**
+	 * This is true if the Www Used attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean wwwUsedESet;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1106,6 +1134,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getOrganizationPhoneNumbers() {
 		if (organizationPhoneNumbers == null) {
 			organizationPhoneNumbers = new EDataTypeUniqueEList<String>(String.class, this, CommonsPackage.APP_MANIFEST__ORGANIZATION_PHONE_NUMBERS);
@@ -1180,6 +1209,56 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		footnote = newFootnote;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__FOOTNOTE, oldFootnote, footnote));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isWwwUsed() {
+		return wwwUsed;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setWwwUsed(boolean newWwwUsed) {
+		boolean oldWwwUsed = wwwUsed;
+		wwwUsed = newWwwUsed;
+		boolean oldWwwUsedESet = wwwUsedESet;
+		wwwUsedESet = true;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__WWW_USED, oldWwwUsed, wwwUsed, !oldWwwUsedESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void unsetWwwUsed() {
+		boolean oldWwwUsed = wwwUsed;
+		boolean oldWwwUsedESet = wwwUsedESet;
+		wwwUsed = WWW_USED_EDEFAULT;
+		wwwUsedESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, CommonsPackage.APP_MANIFEST__WWW_USED, oldWwwUsed, WWW_USED_EDEFAULT, oldWwwUsedESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isSetWwwUsed() {
+		return wwwUsedESet;
 	}
 
 	/**
@@ -1345,6 +1424,19 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	@Override
 	public Locale getDefaultLocale() {
 		return Locale.forLanguageTag(getDefaultLanguageTag());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public String getWebHost() {
+		if (isWwwUsed()) {
+			return "www." + getDomain();
+		} else {
+			return getDomain();
+		}
 	}
 
 	/**
@@ -1552,6 +1644,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getLetterClosing();
 			case CommonsPackage.APP_MANIFEST__FOOTNOTE:
 				return getFootnote();
+			case CommonsPackage.APP_MANIFEST__WWW_USED:
+				return isWwwUsed();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1650,6 +1744,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__FOOTNOTE:
 				setFootnote((String)newValue);
 				return;
+			case CommonsPackage.APP_MANIFEST__WWW_USED:
+				setWwwUsed((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1746,6 +1843,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__FOOTNOTE:
 				setFootnote(FOOTNOTE_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__WWW_USED:
+				unsetWwwUsed();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1820,6 +1920,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return LETTER_CLOSING_EDEFAULT == null ? letterClosing != null : !LETTER_CLOSING_EDEFAULT.equals(letterClosing);
 			case CommonsPackage.APP_MANIFEST__FOOTNOTE:
 				return FOOTNOTE_EDEFAULT == null ? footnote != null : !FOOTNOTE_EDEFAULT.equals(footnote);
+			case CommonsPackage.APP_MANIFEST__WWW_USED:
+				return isSetWwwUsed();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1921,6 +2023,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		switch (operationID) {
 			case CommonsPackage.APP_MANIFEST___GET_DEFAULT_LOCALE:
 				return getDefaultLocale();
+			case CommonsPackage.APP_MANIFEST___GET_WEB_HOST:
+				return getWebHost();
 			case CommonsPackage.APP_MANIFEST___EXPAND__MAP:
 				try {
 					expand((Map<String, Object>)arguments.get(0));
@@ -2001,6 +2105,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(letterClosing);
 		result.append(", footnote: ");
 		result.append(footnote);
+		result.append(", wwwUsed: ");
+		if (wwwUsedESet) result.append(wwwUsed); else result.append("<unset>");
 		result.append(')');
 		return result.toString();
 	}
