@@ -157,7 +157,8 @@ public class XmiTermRepository
 		for (final S entity : entities) {
 			final DataCatalog xmiCatalog = xmiCatalogs.get(entity.getNsPrefix());
 			if (xmiCatalog == null) {
-				throw new IllegalArgumentException("NsPrefix " + entity.getNsPrefix() + " is read-only.");
+				throw new IllegalArgumentException(String.format("NsPrefix '%s' is read-only. %s editable nsPrefix(es) are: %s",
+						entity.getNsPrefix(), xmiCatalogs.size(), xmiCatalogs.keySet()));
 			}
 			
 			final S added = EcoreUtil.copy(entity);
@@ -188,7 +189,8 @@ public class XmiTermRepository
 			final S entity = entry.getValue();
 			final DataCatalog xmiCatalog = xmiCatalogs.get(entity.getNsPrefix());
 			if (xmiCatalog == null) {
-				throw new IllegalArgumentException("NsPrefix " + entity.getNsPrefix() + " is read-only.");
+				throw new IllegalArgumentException(String.format("NsPrefix '%s' is read-only. %s editable nsPrefix(es) are: %s",
+						entity.getNsPrefix(), xmiCatalogs.size(), xmiCatalogs.keySet()));
 			}
 			
 			final Term toRemove = Iterables.find(xmiCatalog.getTerms(), new Predicate<Term>() {
@@ -283,7 +285,8 @@ public class XmiTermRepository
 			final String nsPrefix = matcher.group(1);
 			final DataCatalog xmiCatalog = xmiCatalogs.get(nsPrefix);
 			if (xmiCatalog == null) {
-				throw new IllegalArgumentException("NsPrefix " + nsPrefix + " is read-only.");
+				throw new IllegalArgumentException(String.format("NsPrefix '%s' is read-only. %s editable nsPrefix(es) are: %s",
+						nsPrefix, xmiCatalogs.size(), xmiCatalogs.keySet()));
 			}
 			
 			final Term toRemove = Iterables.find(xmiCatalog.getTerms(), new Predicate<Term>() {
