@@ -11,9 +11,8 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
+import org.eclipse.emf.ecore.resource.Resource;
 import org.soluvas.category.Category;
 import org.soluvas.category.CategoryCatalog;
 import org.soluvas.category.CategoryContainer;
@@ -21,7 +20,6 @@ import org.soluvas.category.CategoryFactory;
 import org.soluvas.category.CategoryManager;
 import org.soluvas.category.CategoryPackage;
 import org.soluvas.category.CategoryStatus;
-
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.data.EntityLookup;
 
@@ -144,6 +142,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCategory() {
 		return categoryEClass;
 	}
@@ -153,6 +152,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategory_Status() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(0);
 	}
@@ -162,6 +162,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategory_MetaDescription() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(1);
 	}
@@ -171,6 +172,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategory_MetaKeywords() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(2);
 	}
@@ -180,6 +182,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategory_MetaTitle() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(3);
 	}
@@ -189,6 +192,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategory_AvailableSortBy() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(4);
 	}
@@ -198,6 +202,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategory_DefaultSortBy() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(5);
 	}
@@ -207,6 +212,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategory_Anchor() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(6);
 	}
@@ -216,6 +222,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategory_IncludeInMenu() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(7);
 	}
@@ -225,6 +232,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategory_CatalogName() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(8);
 	}
@@ -234,6 +242,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategory_DefaultMixin() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(9);
 	}
@@ -243,6 +252,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategory_UName() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(10);
 	}
@@ -252,6 +262,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCategory_ParentUName() {
 		return (EAttribute)categoryEClass.getEStructuralFeatures().get(11);
 	}
@@ -261,6 +272,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCategoryContainer() {
 		return categoryContainerEClass;
 	}
@@ -270,6 +282,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCategoryContainer_Categories() {
 		return (EReference)categoryContainerEClass.getEStructuralFeatures().get(0);
 	}
@@ -279,6 +292,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCategoryCatalog() {
 		return categoryCatalogEClass;
 	}
@@ -288,6 +302,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCategoryManager() {
 		return categoryManagerEClass;
 	}
@@ -297,6 +312,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getCategoryStatus() {
 		return categoryStatusEEnum;
 	}
@@ -306,6 +322,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getEntityLookup() {
 		return entityLookupEDataType;
 	}
@@ -315,6 +332,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CategoryFactory getCategoryFactory() {
 		return (CategoryFactory)getEFactoryInstance();
 	}
@@ -522,4 +540,10 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		   });
 	}
 
+	@Override
+	protected Resource createResource(String uri) {
+		// assume accessed from bipporeg-model
+		return super.createResource("../../../org.soluvas.category/src/main/resources/org/soluvas/category/category.ecore");
+	}
+	
 } //CategoryPackageImpl

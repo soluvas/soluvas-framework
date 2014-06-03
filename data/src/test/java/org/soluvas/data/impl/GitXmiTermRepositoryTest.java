@@ -8,13 +8,19 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.VersioningMode;
+import org.soluvas.data.DataCatalog;
+import org.soluvas.data.DataFactory;
 import org.soluvas.data.Term;
 
 import com.google.common.collect.ImmutableList;
@@ -103,6 +109,20 @@ public class GitXmiTermRepositoryTest {
 		boolean deleted = repo.delete("berbatik_birucinta");
 		assertTrue(deleted);
 		assertEquals(origRepoCount - 1, origRepoCount);
+	}
+
+	@Test
+	public void saveWithXsiSchemaLocation() throws IOException {
+		final DataCatalog dataCatalog = DataFactory.eINSTANCE.createDataCatalog();
+		final URI uri = URI.createFileURI(System.getProperty("user.home") + "/tmp/test.DataCatalog.xmi");
+		log.info("Save to {}", uri);
+		final XMIResourceImpl res = new XMIResourceImpl(uri);
+		res.getContents().add(dataCatalog);
+		res.save(ImmutableMap.of(
+				XMIResource.OPTION_LINE_WIDTH, 80,
+				XMIResource.OPTION_DECLARE_XML, true,
+				XMIResource.OPTION_ENCODING, "UTF-8",
+				XMIResource.OPTION_SCHEMA_LOCATION, true));
 	}
 
 }
