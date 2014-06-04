@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.felix.gogo.commands.Command;
+import org.apache.felix.gogo.commands.Option;
 import org.soluvas.commons.AppManifest;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -15,18 +16,25 @@ import org.springframework.stereotype.Service;
  *
  * @author ceefour
  * @see TenantLsCommand
+ * @see TenantIdsCommand
  */
 @Service @Scope("prototype")
 @Command(scope="tenant", name="map", description="Lists tenant AppManifests using tenantMap.")
 public class TenantMapCommand extends ExtCommandSupport {
+	
+	@Option(name="-1", description="Only return IDs, similar to tenant:ids command")
+	public transient boolean idsOnly = false;
 	
 	public TenantMapCommand() {
 		super(false);
 	}
 	
 	@Override
-	protected Void doExecute() throws Exception {
+	protected Object doExecute() throws Exception {
 		final Map<String, AppManifest> tenantMap = appCtx.getBean("tenantMap", Map.class);
+		if (idsOnly) {
+			return tenantMap.keySet();
+		}
 		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-20s|%-25s|%-30s|%-5s|%-2s|%-20s|%-3s|@",
 				"№", "ID", "Title", "Domain", "Email", "Lang", "CC", "Time Zone", "$"));
 		int i = 0;
