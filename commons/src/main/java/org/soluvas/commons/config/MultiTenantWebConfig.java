@@ -78,7 +78,7 @@ public class MultiTenantWebConfig implements TenantSelector {
 				"Path info '%s' must match pattern: /t/{tenantId}/{tenantEnv}",
 				pathInfo);
 		final TenantRef pathTenant = new TenantRefImpl(tenantMatcher.group(1), tenantMatcher.group(1), tenantMatcher.group(2));
-		log.debug("MULTI_PATH Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
+		log.trace("MULTI_PATH Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
 				pathInfo, pathTenant.getClientId(), pathTenant.getTenantId(), pathTenant.getTenantEnv() );
 		return pathTenant;
 	}
@@ -110,7 +110,7 @@ public class MultiTenantWebConfig implements TenantSelector {
 			tenantId = Optional.of(hostMatcher.group(2).toLowerCase());
 		}
 		final TenantRef hostTenant = new TenantRefImpl(tenantId.get(), tenantId.get(), tenantEnv);
-		log.debug("MULTI_HOST Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
+		log.trace("MULTI_HOST Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
 				requestHost, hostTenant.getClientId(), hostTenant.getTenantId(), hostTenant.getTenantEnv() );
 		return hostTenant;
 	}
