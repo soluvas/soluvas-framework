@@ -2,6 +2,9 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="socmed" nsURI="http://www.soluvas.org/schema/socmed/1.0" nsPrefix="socmed">
   <eClassifiers xsi:type="ecore:EClass" name="FacebookSysConfig" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Facebook SysConfig for tenant."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookAppId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Facebook App ID for this tenant, it's used for Facebook-based login/authentication and also for publishing actions using Facebook OpenGraph APIs."/>
@@ -45,6 +48,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TwitterSysConfig" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Twitter SysConfig for tenant."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="twitterConsumerKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Twitter consumer key for this tenant."/>
@@ -76,6 +82,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="YouTubeSysConfig" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="YouTube SysConfig for tenant."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="youTubeTenantScreenName"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -89,6 +98,17 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Pinterest Business screen name for the tenant/mall."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InstagramSysConfig" abstract="true"
+      interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Instagram SysConfig for tenant."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instagramScreenName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Instagram screen name for tenant, usable in Instagram URI e.g. &lt;a href=&quot;http://instagram.com/mamadanbayi&quot;>http://instagram.com/mamadanbayi&lt;/a>."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

@@ -297,6 +297,44 @@ public interface SocmedPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.socmed.InstagramSysConfig <em>Instagram Sys Config</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.socmed.InstagramSysConfig
+	 * @see org.soluvas.socmed.impl.SocmedPackageImpl#getInstagramSysConfig()
+	 * @generated
+	 */
+	int INSTAGRAM_SYS_CONFIG = 4;
+
+	/**
+	 * The feature id for the '<em><b>Instagram Screen Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTAGRAM_SYS_CONFIG__INSTAGRAM_SCREEN_NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Instagram Sys Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTAGRAM_SYS_CONFIG_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Instagram Sys Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTAGRAM_SYS_CONFIG_OPERATION_COUNT = 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.socmed.FacebookSysConfig <em>Facebook Sys Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -491,6 +529,27 @@ public interface SocmedPackage extends EPackage {
 	EAttribute getPinterestSysConfig_PinterestTenantScreenName();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.socmed.InstagramSysConfig <em>Instagram Sys Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Instagram Sys Config</em>'.
+	 * @see org.soluvas.socmed.InstagramSysConfig
+	 * @generated
+	 */
+	EClass getInstagramSysConfig();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.socmed.InstagramSysConfig#getInstagramScreenName <em>Instagram Screen Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Instagram Screen Name</em>'.
+	 * @see org.soluvas.socmed.InstagramSysConfig#getInstagramScreenName()
+	 * @see #getInstagramSysConfig()
+	 * @generated
+	 */
+	EAttribute getInstagramSysConfig_InstagramScreenName();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -664,6 +723,24 @@ public interface SocmedPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PINTEREST_SYS_CONFIG__PINTEREST_TENANT_SCREEN_NAME = eINSTANCE.getPinterestSysConfig_PinterestTenantScreenName();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.socmed.InstagramSysConfig <em>Instagram Sys Config</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.socmed.InstagramSysConfig
+		 * @see org.soluvas.socmed.impl.SocmedPackageImpl#getInstagramSysConfig()
+		 * @generated
+		 */
+		EClass INSTAGRAM_SYS_CONFIG = eINSTANCE.getInstagramSysConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Instagram Screen Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INSTAGRAM_SYS_CONFIG__INSTAGRAM_SCREEN_NAME = eINSTANCE.getInstagramSysConfig_InstagramScreenName();
 
 	}
 

@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.soluvas.socmed.FacebookSysConfig;
+import org.soluvas.socmed.InstagramSysConfig;
 import org.soluvas.socmed.PinterestSysConfig;
 import org.soluvas.socmed.SocmedFactory;
 import org.soluvas.socmed.SocmedPackage;
@@ -47,6 +48,13 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * @generated
 	 */
 	private EClass pinterestSysConfigEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass instagramSysConfigEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -276,6 +284,24 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getInstagramSysConfig() {
+		return instagramSysConfigEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getInstagramSysConfig_InstagramScreenName() {
+		return (EAttribute)instagramSysConfigEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SocmedFactory getSocmedFactory() {
 		return (SocmedFactory)getEFactoryInstance();
 	}
@@ -320,6 +346,9 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 
 		pinterestSysConfigEClass = createEClass(PINTEREST_SYS_CONFIG);
 		createEAttribute(pinterestSysConfigEClass, PINTEREST_SYS_CONFIG__PINTEREST_TENANT_SCREEN_NAME);
+
+		instagramSysConfigEClass = createEClass(INSTAGRAM_SYS_CONFIG);
+		createEAttribute(instagramSysConfigEClass, INSTAGRAM_SYS_CONFIG__INSTAGRAM_SCREEN_NAME);
 	}
 
 	/**
@@ -374,6 +403,9 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		initEClass(pinterestSysConfigEClass, PinterestSysConfig.class, "PinterestSysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPinterestSysConfig_PinterestTenantScreenName(), ecorePackage.getEString(), "pinterestTenantScreenName", null, 0, 1, PinterestSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(instagramSysConfigEClass, InstagramSysConfig.class, "InstagramSysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getInstagramSysConfig_InstagramScreenName(), ecorePackage.getEString(), "instagramScreenName", null, 0, 1, InstagramSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
 
@@ -390,6 +422,12 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 */
 	protected void createGenModelAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		addAnnotation
+		  (facebookSysConfigEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Facebook SysConfig for tenant."
+		   });		
 		addAnnotation
 		  (getFacebookSysConfig_FacebookAppId(), 
 		   source, 
@@ -433,6 +471,12 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 			 "documentation", "Whether publishing will use the \"explicitly_shared\" flag. Note: The Facebook App ID used must be prepared to support explicitly_shared, which requires additional approval from Facebook."
 		   });		
 		addAnnotation
+		  (twitterSysConfigEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Twitter SysConfig for tenant."
+		   });		
+		addAnnotation
 		  (getTwitterSysConfig_TwitterConsumerKey(), 
 		   source, 
 		   new String[] {
@@ -463,6 +507,12 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 			 "documentation", "Access token secret that has access to this tenant\'s Twitter account, referred by {@link #getTwitterTenantScreenName()}."
 		   });		
 		addAnnotation
+		  (youTubeSysConfigEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "YouTube SysConfig for tenant."
+		   });		
+		addAnnotation
 		  (getYouTubeSysConfig_YouTubeTenantScreenName(), 
 		   source, 
 		   new String[] {
@@ -473,6 +523,18 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Pinterest Business screen name for the tenant/mall."
+		   });		
+		addAnnotation
+		  (instagramSysConfigEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Instagram SysConfig for tenant."
+		   });		
+		addAnnotation
+		  (getInstagramSysConfig_InstagramScreenName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Instagram screen name for tenant, usable in Instagram URI e.g. <a href=\"http://instagram.com/mamadanbayi\">http://instagram.com/mamadanbayi</a>."
 		   });
 	}
 
