@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.CustomerRoleStatus;
+import org.soluvas.commons.Describable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.SchemaVersionable;
@@ -30,8 +31,10 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getCreationTime <em>Creation Time</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getModificationTime <em>Modification Time</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isReadOnly <em>Read Only</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isQuickShopEnabled <em>Quick Shop Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isSalesOrderReportEnabled <em>Sales Order Report Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isHistorySalesOrderEnabled <em>History Sales Order Enabled</em>}</li>
@@ -124,6 +127,26 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	protected DateTime modificationTime = MODIFICATION_TIME_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -162,6 +185,26 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * @ordered
 	 */
 	protected CustomerRoleStatus status = STATUS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isReadOnly() <em>Read Only</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isReadOnly()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean READ_ONLY_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isReadOnly() <em>Read Only</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isReadOnly()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean readOnly = READ_ONLY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isQuickShopEnabled() <em>Quick Shop Enabled</em>}' attribute.
@@ -354,6 +397,27 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__MODIFICATION_TIME, oldModificationTime, modificationTime));
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__DESCRIPTION, oldDescription, description));
+	}
+
 	public static long serialVersionUID = SCHEMA_VERSION_EDEFAULT;
 
 	/**
@@ -387,6 +451,27 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__STATUS, oldStatus, status));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isReadOnly() {
+		return readOnly;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReadOnly(boolean newReadOnly) {
+		boolean oldReadOnly = readOnly;
+		readOnly = newReadOnly;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__READ_ONLY, oldReadOnly, readOnly));
 	}
 
 	/**
@@ -489,10 +574,14 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return getCreationTime();
 			case CommonsPackage.CUSTOMER_ROLE__MODIFICATION_TIME:
 				return getModificationTime();
+			case CommonsPackage.CUSTOMER_ROLE__DESCRIPTION:
+				return getDescription();
 			case CommonsPackage.CUSTOMER_ROLE__SCHEMA_VERSION:
 				return getSchemaVersion();
 			case CommonsPackage.CUSTOMER_ROLE__STATUS:
 				return getStatus();
+			case CommonsPackage.CUSTOMER_ROLE__READ_ONLY:
+				return isReadOnly();
 			case CommonsPackage.CUSTOMER_ROLE__QUICK_SHOP_ENABLED:
 				return isQuickShopEnabled();
 			case CommonsPackage.CUSTOMER_ROLE__SALES_ORDER_REPORT_ENABLED:
@@ -525,8 +614,14 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__MODIFICATION_TIME:
 				setModificationTime((DateTime)newValue);
 				return;
+			case CommonsPackage.CUSTOMER_ROLE__DESCRIPTION:
+				setDescription((String)newValue);
+				return;
 			case CommonsPackage.CUSTOMER_ROLE__STATUS:
 				setStatus((CustomerRoleStatus)newValue);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__READ_ONLY:
+				setReadOnly((Boolean)newValue);
 				return;
 			case CommonsPackage.CUSTOMER_ROLE__QUICK_SHOP_ENABLED:
 				setQuickShopEnabled((Boolean)newValue);
@@ -564,8 +659,14 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__MODIFICATION_TIME:
 				setModificationTime(MODIFICATION_TIME_EDEFAULT);
 				return;
+			case CommonsPackage.CUSTOMER_ROLE__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
 			case CommonsPackage.CUSTOMER_ROLE__STATUS:
 				setStatus(STATUS_EDEFAULT);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__READ_ONLY:
+				setReadOnly(READ_ONLY_EDEFAULT);
 				return;
 			case CommonsPackage.CUSTOMER_ROLE__QUICK_SHOP_ENABLED:
 				setQuickShopEnabled(QUICK_SHOP_ENABLED_EDEFAULT);
@@ -599,10 +700,14 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return CREATION_TIME_EDEFAULT == null ? creationTime != null : !CREATION_TIME_EDEFAULT.equals(creationTime);
 			case CommonsPackage.CUSTOMER_ROLE__MODIFICATION_TIME:
 				return MODIFICATION_TIME_EDEFAULT == null ? modificationTime != null : !MODIFICATION_TIME_EDEFAULT.equals(modificationTime);
+			case CommonsPackage.CUSTOMER_ROLE__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CommonsPackage.CUSTOMER_ROLE__SCHEMA_VERSION:
 				return schemaVersion != SCHEMA_VERSION_EDEFAULT;
 			case CommonsPackage.CUSTOMER_ROLE__STATUS:
 				return status != STATUS_EDEFAULT;
+			case CommonsPackage.CUSTOMER_ROLE__READ_ONLY:
+				return readOnly != READ_ONLY_EDEFAULT;
 			case CommonsPackage.CUSTOMER_ROLE__QUICK_SHOP_ENABLED:
 				return quickShopEnabled != QUICK_SHOP_ENABLED_EDEFAULT;
 			case CommonsPackage.CUSTOMER_ROLE__SALES_ORDER_REPORT_ENABLED:
@@ -645,6 +750,12 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				default: return -1;
 			}
 		}
+		if (baseClass == Describable.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.CUSTOMER_ROLE__DESCRIPTION: return CommonsPackage.DESCRIBABLE__DESCRIPTION;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -678,6 +789,12 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				default: return -1;
 			}
 		}
+		if (baseClass == Describable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.DESCRIBABLE__DESCRIPTION: return CommonsPackage.CUSTOMER_ROLE__DESCRIPTION;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -699,10 +816,14 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 		result.append(creationTime);
 		result.append(", modificationTime: ");
 		result.append(modificationTime);
+		result.append(", description: ");
+		result.append(description);
 		result.append(", schemaVersion: ");
 		result.append(schemaVersion);
 		result.append(", status: ");
 		result.append(status);
+		result.append(", readOnly: ");
+		result.append(readOnly);
 		result.append(", quickShopEnabled: ");
 		result.append(quickShopEnabled);
 		result.append(", salesOrderReportEnabled: ");

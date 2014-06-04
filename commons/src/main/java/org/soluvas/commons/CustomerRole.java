@@ -13,6 +13,7 @@ package org.soluvas.commons;
  * <ul>
  *   <li>{@link org.soluvas.commons.CustomerRole#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.soluvas.commons.CustomerRole#isReadOnly <em>Read Only</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isQuickShopEnabled <em>Quick Shop Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isSalesOrderReportEnabled <em>Sales Order Report Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isHistorySalesOrderEnabled <em>History Sales Order Enabled</em>}</li>
@@ -24,7 +25,25 @@ package org.soluvas.commons;
  * @model
  * @generated
  */
-public interface CustomerRole extends Identifiable, SchemaVersionable, NameContainer, Timestamped {
+public interface CustomerRole extends Identifiable, SchemaVersionable, NameContainer, Timestamped, Describable {
+	
+	/**
+	 * Registered user / retail.
+	 */
+	static final String COMMON_ID = "common";
+	/**
+	 * Premium Member.
+	 */
+	static final String MEMBER_ID = "member"; 
+	/**
+	 * Reseller agent.
+	 */
+	static final String AGENT_ID = "agent";
+	/**
+	 * Retailers not keeping goods in stock, but instead transfer customer orders and shipment details to us.
+	 */
+	static final String DROPS_ID = "drops";
+	
 	/**
 	 * Returns the value of the '<em><b>Schema Version</b></em>' attribute.
 	 * The default value is <code>"1"</code>.
@@ -36,9 +55,10 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Schema Version</em>' attribute.
 	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_SchemaVersion()
-	 * @model default="1" changeable="false"
+	 * @model default="1" required="true" changeable="false"
 	 * @generated
 	 */
+	@Override
 	long getSchemaVersion();
 
 	/**
@@ -54,7 +74,7 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	 * @see org.soluvas.commons.CustomerRoleStatus
 	 * @see #setStatus(CustomerRoleStatus)
 	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_Status()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	CustomerRoleStatus getStatus();
@@ -69,6 +89,31 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	 * @generated
 	 */
 	void setStatus(CustomerRoleStatus value);
+
+	/**
+	 * Returns the value of the '<em><b>Read Only</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Read-only customer roles are defined by the application and not editable by the tenant administrator.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Read Only</em>' attribute.
+	 * @see #setReadOnly(boolean)
+	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_ReadOnly()
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean isReadOnly();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.CustomerRole#isReadOnly <em>Read Only</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Read Only</em>' attribute.
+	 * @see #isReadOnly()
+	 * @generated
+	 */
+	void setReadOnly(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Quick Shop Enabled</b></em>' attribute.

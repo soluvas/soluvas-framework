@@ -30,6 +30,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.soluvas.commons.*;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Added;
 import org.soluvas.commons.AddedMany;
@@ -149,6 +150,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 			case CommonsPackage.THING_INFO: return createThingInfo();
 			case CommonsPackage.ORGANIZATION: return createOrganization();
 			case CommonsPackage.CUSTOMER_ROLE: return createCustomerRole();
+			case CommonsPackage.CUSTOMER_ROLE_CATALOG: return createCustomerRoleCatalog();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -653,6 +655,16 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	public CustomerRole createCustomerRole() {
 		CustomerRoleImpl customerRole = new CustomerRoleImpl();
 		return customerRole;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CustomerRoleCatalog createCustomerRoleCatalog() {
+		CustomerRoleCatalogImpl customerRoleCatalog = new CustomerRoleCatalogImpl();
+		return customerRoleCatalog;
 	}
 
 	/**

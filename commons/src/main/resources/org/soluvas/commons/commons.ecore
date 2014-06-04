@@ -1508,7 +1508,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Exception" instanceClassName="java.lang.Exception"/>
-  <eClassifiers xsi:type="ecore:EClass" name="GeneralSysConfig" abstract="true" eSuperTypes="#//Expandable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GeneralSysConfig" abstract="true" eSuperTypes="#//Expandable #//SysConfig"/>
   <eClassifiers xsi:type="ecore:EClass" name="Organization" eSuperTypes="#//Identifiable #//SchemaVersionable #//NameContainer">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="schemaVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
         changeable="false" defaultValueLiteral="1"/>
@@ -1524,10 +1524,23 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="twitterId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CustomerRole" eSuperTypes="#//Identifiable #//SchemaVersionable #//NameContainer #//Timestamped">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="schemaVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
-        changeable="false" defaultValueLiteral="1"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//CustomerRoleStatus"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="CustomerRoleStatus">
+    <eLiterals name="active"/>
+    <eLiterals name="inactive" value="1"/>
+    <eLiterals name="void" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomerRole" eSuperTypes="#//Identifiable #//SchemaVersionable #//NameContainer #//Timestamped #//Describable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="schemaVersion" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong" changeable="false"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" lowerBound="1"
+        eType="#//CustomerRoleStatus"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Read-only customer roles are defined by the application and not editable by the tenant administrator."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="quickShopEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1553,10 +1566,9 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="CustomerRoleStatus">
-    <eLiterals name="active"/>
-    <eLiterals name="inactive" value="1"/>
-    <eLiterals name="void" value="2"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomerRoleCatalog">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customerRoles" upperBound="-1"
+        eType="#//CustomerRole" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="EFactory" instanceClassName="org.eclipse.emf.ecore.EFactory"
       serializable="false"/>

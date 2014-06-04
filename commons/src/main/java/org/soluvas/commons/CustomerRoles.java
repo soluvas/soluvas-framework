@@ -14,15 +14,15 @@ import com.google.common.collect.ImmutableSet;
 @Deprecated
 public class CustomerRoles {
 	
-	public static final String AGENT = "agent";
+	public static final String AGENT = CustomerRole.AGENT_ID;
 	
-	public static final String COMMON = "common";
+	public static final String COMMON = CustomerRole.COMMON_ID;
 	
 	public static final String DEPOSIT = "deposit";
 	
-	public static final String DROP_SHIP = "drops";
+	public static final String DROP_SHIP = CustomerRole.DROPS_ID;
 	
-	public static final String MEMBER = "member";
+	public static final String MEMBER = CustomerRole.MEMBER_ID;
 	
 	/**
 	 * Agen Spesial / Besar. 

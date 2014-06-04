@@ -54,6 +54,7 @@ import org.soluvas.commons.Colorable;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.CustomerRole;
+import org.soluvas.commons.CustomerRoleCatalog;
 import org.soluvas.commons.CustomerRoleStatus;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.EClassLinked;
@@ -578,6 +579,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass customerRoleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass customerRoleCatalogEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3921,8 +3929,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EAttribute getCustomerRole_QuickShopEnabled() {
+	public EAttribute getCustomerRole_ReadOnly() {
 		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -3932,7 +3939,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getCustomerRole_SalesOrderReportEnabled() {
+	public EAttribute getCustomerRole_QuickShopEnabled() {
 		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -3942,7 +3949,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getCustomerRole_HistorySalesOrderEnabled() {
+	public EAttribute getCustomerRole_SalesOrderReportEnabled() {
 		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -3952,8 +3959,36 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getCustomerRole_AgentSalesReportEnabled() {
+	public EAttribute getCustomerRole_HistorySalesOrderEnabled() {
 		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getCustomerRole_AgentSalesReportEnabled() {
+		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCustomerRoleCatalog() {
+		return customerRoleCatalogEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCustomerRoleCatalog_CustomerRoles() {
+		return (EReference)customerRoleCatalogEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -4832,10 +4867,14 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		customerRoleEClass = createEClass(CUSTOMER_ROLE);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__SCHEMA_VERSION);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__STATUS);
+		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__READ_ONLY);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__QUICK_SHOP_ENABLED);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__SALES_ORDER_REPORT_ENABLED);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED);
+
+		customerRoleCatalogEClass = createEClass(CUSTOMER_ROLE_CATALOG);
+		createEReference(customerRoleCatalogEClass, CUSTOMER_ROLE_CATALOG__CUSTOMER_ROLES);
 
 		mongoSysConfigEClass = createEClass(MONGO_SYS_CONFIG);
 		createEAttribute(mongoSysConfigEClass, MONGO_SYS_CONFIG__MONGO_URI);
@@ -5100,6 +5139,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		thingInfoEClass.getESuperTypes().add(this.getSluggable());
 		thingInfoEClass.getESuperTypes().add(this.getImageable());
 		generalSysConfigEClass.getESuperTypes().add(this.getExpandable());
+		generalSysConfigEClass.getESuperTypes().add(this.getSysConfig());
 		organizationEClass.getESuperTypes().add(this.getIdentifiable());
 		organizationEClass.getESuperTypes().add(this.getSchemaVersionable());
 		organizationEClass.getESuperTypes().add(this.getNameContainer());
@@ -5107,6 +5147,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		customerRoleEClass.getESuperTypes().add(this.getSchemaVersionable());
 		customerRoleEClass.getESuperTypes().add(this.getNameContainer());
 		customerRoleEClass.getESuperTypes().add(this.getTimestamped());
+		customerRoleEClass.getESuperTypes().add(this.getDescribable());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -5532,12 +5573,16 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getOrganization_TwitterId(), ecorePackage.getEString(), "twitterId", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(customerRoleEClass, CustomerRole.class, "CustomerRole", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCustomerRole_SchemaVersion(), ecorePackage.getELong(), "schemaVersion", "1", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCustomerRole_Status(), this.getCustomerRoleStatus(), "status", null, 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomerRole_SchemaVersion(), ecorePackage.getELong(), "schemaVersion", "1", 1, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomerRole_Status(), this.getCustomerRoleStatus(), "status", null, 1, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomerRole_ReadOnly(), ecorePackage.getEBoolean(), "readOnly", null, 1, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_QuickShopEnabled(), ecorePackage.getEBoolean(), "quickShopEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_SalesOrderReportEnabled(), ecorePackage.getEBoolean(), "salesOrderReportEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_HistorySalesOrderEnabled(), ecorePackage.getEBoolean(), "historySalesOrderEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_AgentSalesReportEnabled(), ecorePackage.getEBoolean(), "agentSalesReportEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(customerRoleCatalogEClass, CustomerRoleCatalog.class, "CustomerRoleCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCustomerRoleCatalog_CustomerRoles(), this.getCustomerRole(), null, "customerRoles", null, 0, -1, CustomerRoleCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mongoSysConfigEClass, MongoSysConfig.class, "MongoSysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMongoSysConfig_MongoUri(), ecorePackage.getEString(), "mongoUri", null, 0, 1, MongoSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -6969,6 +7014,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "A condensed version of a (probably app-specific) Thing."
+		   });		
+		addAnnotation
+		  (getCustomerRole_ReadOnly(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Read-only customer roles are defined by the application and not editable by the tenant administrator."
 		   });		
 		addAnnotation
 		  (getCustomerRole_QuickShopEnabled(), 

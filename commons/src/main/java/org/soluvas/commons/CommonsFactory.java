@@ -278,6 +278,15 @@ public interface CommonsFactory extends EFactory {
 	 */
 	CustomerRole createCustomerRole();
 
+	/**
+	 * Returns a new object of class '<em>Customer Role Catalog</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Customer Role Catalog</em>'.
+	 * @generated
+	 */
+	CustomerRoleCatalog createCustomerRoleCatalog();
+
 	PersonInfo createPersonInfo(String id, String slug, String name, String photoId, Gender gender);
 
 	/**

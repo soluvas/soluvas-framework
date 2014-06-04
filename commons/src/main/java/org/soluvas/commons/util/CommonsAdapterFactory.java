@@ -325,6 +325,10 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 				return createCustomerRoleAdapter();
 			}
 			@Override
+			public Adapter caseCustomerRoleCatalog(CustomerRoleCatalog object) {
+				return createCustomerRoleCatalogAdapter();
+			}
+			@Override
 			public Adapter caseMongoSysConfig(MongoSysConfig object) {
 				return createMongoSysConfigAdapter();
 			}
@@ -1241,6 +1245,20 @@ public class CommonsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCustomerRoleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.CustomerRoleCatalog <em>Customer Role Catalog</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.CustomerRoleCatalog
+	 * @generated
+	 */
+	public Adapter createCustomerRoleCatalogAdapter() {
 		return null;
 	}
 

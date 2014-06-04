@@ -6,8 +6,11 @@ import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.CustomerRole;
+import org.soluvas.commons.CustomerRoleCatalog;
 import org.soluvas.commons.CustomerRoleStatus;
+import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.impl.CustomerRoleImpl;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.customerrole.CustomerRoleRepository;
@@ -20,13 +23,15 @@ import org.soluvas.data.domain.Sort.Order;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
 /**
+ * {@code base} {@link CustomerRole}s are read from
+ * {@code /org.soluvas.commons/src/main/resources/org/soluvas/commons/base.CustomerRoleCatalog.xmi}.
  * @author rudi
- *
  */
 public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRole>
 	implements CustomerRoleRepository {
@@ -42,6 +47,28 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 				Index.asc("historySalesOrderEnabled"),
 				Index.asc("quickShopEnabled"),
 				Index.asc("salesOrderReportEnabled"));
+		ensureBaseEntities();
+	}
+
+	protected void ensureBaseEntities() {
+		final CustomerRoleCatalog base = new OnDemandXmiLoader<CustomerRoleCatalog>(CommonsPackage.eINSTANCE,
+				CustomerRole.class, "base.CustomerRoleCatalog.xmi").get();
+		log.debug("Ensuring {} base CustomerRoles from {}: {}",
+				base.getCustomerRoles().size(), base.eResource().getURI(),
+				FluentIterable.from(base.getCustomerRoles()).transform(new org.soluvas.commons.IdFunction()));
+		for (final CustomerRole customerRole : base.getCustomerRoles()) {
+			boolean found = exists(customerRole.getId());
+			if (!found) {
+				add(customerRole);
+			}
+			primary.update(new BasicDBObject("_id", customerRole.getId()),
+					new BasicDBObject("$set", ImmutableMap.of(
+							"description", customerRole.getDescription(),
+							"readOnly", customerRole.isReadOnly())));
+		}
+		log.info("Ensured {} base CustomerRoles from {}: {}",
+				base.getCustomerRoles().size(), base.eResource().getURI(),
+				FluentIterable.from(base.getCustomerRoles()).transform(new org.soluvas.commons.IdFunction()));
 	}
 
 	@Override

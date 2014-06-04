@@ -13,6 +13,6 @@ package org.soluvas.commons;
  * @model abstract="true"
  * @generated
  */
-public interface GeneralSysConfig extends Expandable {
+public interface GeneralSysConfig extends Expandable, SysConfig {
 
 } // GeneralSysConfig
