@@ -1,6 +1,7 @@
 package org.soluvas.mongo;
 
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
@@ -53,12 +54,14 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 	protected void ensureBaseEntities() {
 		final CustomerRoleCatalog base = new OnDemandXmiLoader<CustomerRoleCatalog>(CommonsPackage.eINSTANCE,
 				CustomerRole.class, "base.CustomerRoleCatalog.xmi").get();
+		final ImmutableSet<String> baseCustomerRoleIds = FluentIterable.from(base.getCustomerRoles())
+				.transform(new org.soluvas.commons.IdFunction()).toSet();
 		log.debug("Ensuring {} base CustomerRoles from {}: {}",
 				base.getCustomerRoles().size(), base.eResource().getURI(),
-				FluentIterable.from(base.getCustomerRoles()).transform(new org.soluvas.commons.IdFunction()));
+				baseCustomerRoleIds);
+		final Set<String> existing = exists(baseCustomerRoleIds);
 		for (final CustomerRole customerRole : base.getCustomerRoles()) {
-			boolean found = exists(customerRole.getId());
-			if (!found) {
+			if (!existing.contains(customerRole.getId())) {
 				add(customerRole);
 			}
 			primary.update(new BasicDBObject("_id", customerRole.getId()),
@@ -68,7 +71,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		}
 		log.info("Ensured {} base CustomerRoles from {}: {}",
 				base.getCustomerRoles().size(), base.eResource().getURI(),
-				FluentIterable.from(base.getCustomerRoles()).transform(new org.soluvas.commons.IdFunction()));
+				baseCustomerRoleIds);
 	}
 
 	@Override
