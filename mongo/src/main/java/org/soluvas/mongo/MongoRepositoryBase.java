@@ -3,6 +3,7 @@ package org.soluvas.mongo;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -184,7 +185,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * @param indexedFields
 	 */
 	public MongoRepositoryBase(Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
-			String mongoUri, ReadPattern readPattern, String collName, List<String> uniqueFields, boolean migrationEnabled, boolean autoExplainSlow,
+			String mongoUri, ReadPattern readPattern, String collName, boolean migrationEnabled, boolean autoExplainSlow,
 			Index... indexes) {
 		super();
 		this.entityClass = intfClass;
@@ -255,11 +256,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		} else {
 			log.info("Migration disabled for collection {}", collName);
 		}
-		final List<String> ensuredIndexes = new ArrayList<>();
-		if (uniqueFields != null) {
-			ensuredIndexes.addAll( MongoUtils.ensureUnique(primary, uniqueFields.toArray(new String[] {})) );
-		}
-		ensuredIndexes.addAll( MongoUtils.ensureIndexes(primary, indexes) );
+		final List<String> ensuredIndexes = MongoUtils.ensureIndexes(primary, indexes);
 		MongoUtils.retainIndexes(primary, ensuredIndexes.toArray(new String[] {}));
 	}
 	
@@ -269,6 +266,34 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			indexes.add(indexedField.getValue() == 1 ? Index.asc(indexedField.getKey()) : Index.desc(indexedField.getKey()));
 		}
 		return indexes.toArray(new Index[] {});
+	}
+	
+	/**
+	 * @param intfClass
+	 * @param currentSchemaVersion e.g. {@link PersonImpl#CURRENT_SCHEMA_VERSION}.
+	 * @param mongoUri
+	 * @param collName
+	 * @param indexedFields
+	 * @deprecated Use {@link #MongoRepositoryBase(Class, Class, long, String, ReadPattern, String, boolean, boolean, Index...)}
+	 */
+	@Deprecated
+	public MongoRepositoryBase(Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
+			String mongoUri, ReadPattern readPattern, String collName, List<String> uniqueFields, boolean migrationEnabled, boolean autoExplainSlow,
+			Index... indexes) {
+		this(intfClass, implClass, currentSchemaVersion, mongoUri, readPattern, collName, migrationEnabled, autoExplainSlow,
+				mergeUniquesAndIndexes(uniqueFields, indexes));
+	}
+	
+	@Deprecated
+	private static Index[] mergeUniquesAndIndexes(List<String> uniqueFields, Index... indexes) {
+		final FluentIterable<Index> uniques = FluentIterable.from(uniqueFields != null ? uniqueFields : ImmutableList.<String>of())
+				.transform(new Function<String, Index>() {
+			@Override
+			public Index apply(String input) {
+				return Index.uniqueAsc(input);
+			}
+		});
+		return Iterables.toArray(Iterables.concat(uniques, Arrays.asList(indexes)), Index.class);
 	}
 
 	/**

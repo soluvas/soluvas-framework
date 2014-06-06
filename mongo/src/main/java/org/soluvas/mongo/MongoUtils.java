@@ -218,7 +218,9 @@ public class MongoUtils {
 	 * MongoUtils.ensureUnique(primary, "canonicalSlug");
 	 * }</pre>
 	 * @return Ensured index names (including existing ones).
+	 * @deprecated It cannot have unique compound indexes, please use {@link #ensureIndexes(DBCollection, Index...)}.
 	 */
+	@Deprecated
 	public static List<String> ensureUnique(DBCollection coll, String... fields) {
 		log.debug("Ensuring collection {} has {} unique indexes: {}", 
 				coll.getName(), fields.length, fields);
@@ -246,7 +248,7 @@ public class MongoUtils {
 	}
 	
 	/**
-	 * Ensure indexes on MongoDB collection, with logging.
+	 * Ensure indexes (both non-unique and unique) on MongoDB collection, with logging.
 	 * <p>Usage:
 	 * <pre>{@literal
 	 * MongoUtils.ensureIndexes(primary, ImmutableMap.of("creationTime", -1, "modificationTime", -1);
@@ -268,7 +270,7 @@ public class MongoUtils {
 				}
 				indexName += key + "_" + indexObj.get(key);
 			}
-			coll.ensureIndex(indexObj, indexName);
+			coll.ensureIndex(indexObj, indexName, index.isUnique());
 			ensuredNames.add(indexName);
 		}
 		return ensuredNames.build();
