@@ -79,9 +79,14 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	@Override
 	public Existence<String> existsBySlug(StatusMask statusMask, String upSlug) {
 		final DBObject dbo = findDBObjectByQuery(new BasicDBObject("canonicalSlug", SlugUtils.canonicalize(upSlug)),
-				new BasicDBObject("slug", 1));
+				new BasicDBObject("slug", true));
 		if (dbo != null) {
-			return Existence.of((String) dbo.get("slug"), (String) dbo.get("_id"));
+			final String actualSlug = (String) dbo.get("slug");
+			if (actualSlug.equals(upSlug)) {
+				return Existence.of(actualSlug, (String) dbo.get("_id"));
+			} else {
+				return Existence.mismatch(actualSlug, (String) dbo.get("_id"));
+			}
 		} else {
 			return Existence.<String>absent();
 		}

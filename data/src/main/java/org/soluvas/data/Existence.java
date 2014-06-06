@@ -14,6 +14,30 @@ import com.google.common.base.Preconditions;
 
 /**
  * Based on Guava {@link Optional} (which will be deprecated when we switch to Java 8).
+ * 
+ * <p>Usage:
+ * 
+ * <pre>
+ * @Override
+ * protected UrlInfo parseRequest(Request request) {
+ * 	if (request.getUrl().getSegments().size() == 1) {
+ * 		final String segment1 = request.getUrl().getSegments().get(0);
+ * 		if (SlugUtils.SLUG_PATTERN.matcher(segment1).matches()) {
+ * 			final Existence&lt;String> existence = productRepo.existsBySlugEx(StatusMask.RAW, segment1);
+ * 			switch (existence.getState()) {
+ * 			case MATCHED:
+ * 				return new UrlInfo(null, ProductShowPage.class, ProductShowPage.params(segment1));
+ * 			case MISMATCHED:
+ * 				// canonical URI
+ * 				throw new RestartResponseException(ProductShowPage.class, ProductShowPage.params(existence.get()));
+ * 			default:
+ * 			}
+ * 		}
+ * 	}
+ * 	return null;
+ * }
+ * </pre>
+ * 
  * @todo Consider extending {@link java.util.Optional} on Java 8.
  */
 public final class Existence<T> implements Serializable {
@@ -140,7 +164,7 @@ public final class Existence<T> implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Existence.of(" + reference + ")";
+		return "Existence." + state.name().toLowerCase() + "(" + reference + " ID=" + id + ")";
 	}
 
 }
