@@ -1,5 +1,7 @@
 package org.soluvas.commons;
 
+import java.util.regex.Pattern;
+
 import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;
 
@@ -16,6 +18,7 @@ public class SlugUtils {
 	
 	public static final int MIN_LENGTH = 3;
 	public static final int MAX_LENGTH = 63;
+	public static final Pattern SLUG_PATTERN = Pattern.compile("[a-z0-9][a-z0-9-]+");
 	
 	/**
 	 * Generates person slugs (using underscores).

@@ -3,6 +3,9 @@ package org.soluvas.data;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.Person;
+import org.soluvas.data.person.PersonRepository;
+
+import com.google.common.base.Optional;
 
 public interface SlugLookup<T> {
 	
@@ -14,6 +17,7 @@ public interface SlugLookup<T> {
 	 * @param statusMask TODO
 	 * @param upSlug
 	 * @return the entity, or {@code null} if not found.
+	 * @todo FIXME: Should return {@link Optional}.
 	 */
 	@Nullable
 	public T findOneBySlug(StatusMask statusMask, String upSlug);
@@ -26,6 +30,9 @@ public interface SlugLookup<T> {
 	 * @param statusMask TODO
 	 * @param upSlug
 	 * @return The actual slug in the repository, or {@code null} if does not exist.
+	 * 		Actual slug is useful for e.g. canonical URIs. So if someone came using {@code http://www.aksimata.com/hendyirawan}
+	 * 		the {@link org.apache.wicket.request.IRequestMapper} can <i>immediately</i> redirect to {@code http://www.aksimata.com/hendy.irawan}
+	 * 		without processing the page nor getting the {@link Person} entity from {@link PersonRepository}.
 	 */
 	@Nullable
 	public Existence<String> existsBySlug(StatusMask statusMask, String upSlug);

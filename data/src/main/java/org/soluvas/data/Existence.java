@@ -110,7 +110,7 @@ public final class Existence<T> implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return 0x598df91c + reference.hashCode();
+		return 0x598df91c + (reference != null ? reference.hashCode() : 0) + (id != null ? id.hashCode() : 0);
 	}
 
 	@Override
