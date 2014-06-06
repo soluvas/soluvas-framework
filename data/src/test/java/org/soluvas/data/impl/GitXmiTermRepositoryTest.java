@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.junit.After;
 import org.junit.Before;
@@ -22,6 +21,7 @@ import org.soluvas.commons.VersioningMode;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataFactory;
 import org.soluvas.data.Term;
+import org.soluvas.data.repository.XmiRepositoryBase;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -118,11 +118,7 @@ public class GitXmiTermRepositoryTest {
 		log.info("Save to {}", uri);
 		final XMIResourceImpl res = new XMIResourceImpl(uri);
 		res.getContents().add(dataCatalog);
-		res.save(ImmutableMap.of(
-				XMIResource.OPTION_LINE_WIDTH, 80,
-				XMIResource.OPTION_DECLARE_XML, true,
-				XMIResource.OPTION_ENCODING, "UTF-8",
-				XMIResource.OPTION_SCHEMA_LOCATION, true));
+		res.save(XmiRepositoryBase.SAVE_OPTIONS);
 	}
 
 }

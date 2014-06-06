@@ -199,7 +199,8 @@ public class TenantXmiBeansImpl<T extends EObject> implements TenantRepositoryLi
 		final Resource res = rset.createResource(org.eclipse.emf.common.util.URI.createFileURI(file.getPath()));
 		res.getContents().add(EcoreUtil.copy(entity));
 		try {
-			res.save(ImmutableMap.of(XMIResource.OPTION_LINE_WIDTH, 80,
+			res.save(ImmutableMap.<String, Object>of(
+					XMIResource.OPTION_LINE_WIDTH, 80,
 					XMIResource.OPTION_DECLARE_XML, true,
 					XMIResource.OPTION_ENCODING, "UTF-8",
 					XMIResource.OPTION_SCHEMA_LOCATION, true));

@@ -306,7 +306,8 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		final org.eclipse.emf.ecore.resource.Resource res = rSet.createResource(URI.createFileURI(file.getPath()));
 		res.getContents().add(EcoreUtil.copy(appManifest));
 		try {
-			res.save(ImmutableMap.of(XMIResource.OPTION_LINE_WIDTH, 80,
+			res.save(ImmutableMap.<String, Object>of(
+					XMIResource.OPTION_LINE_WIDTH, 80,
 					XMIResource.OPTION_DECLARE_XML, true,
 					XMIResource.OPTION_ENCODING, "UTF-8",
 					XMIResource.OPTION_SCHEMA_LOCATION, true));

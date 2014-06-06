@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Identifiable;
@@ -24,6 +25,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Ordering;
@@ -38,6 +40,15 @@ import com.google.common.collect.Ordering;
 public abstract class XmiRepositoryBase<T extends Identifiable> extends PagingAndSortingRepositoryBase<T, String> {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
+	/**
+	 * To be used with {@link XMIResource#save(Map)}.
+	 */
+	public static final ImmutableMap<String, Object> SAVE_OPTIONS = ImmutableMap.<String, Object>of(
+			XMIResource.OPTION_LINE_WIDTH, 80,
+			XMIResource.OPTION_DECLARE_XML, true,
+			XMIResource.OPTION_ENCODING, "UTF-8",
+			XMIResource.OPTION_SCHEMA_LOCATION, true);
+	
 	public abstract EList<T> getRoot();
 	
 	@Override

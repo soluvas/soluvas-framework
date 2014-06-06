@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +48,7 @@ import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Order;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
+import org.soluvas.data.repository.XmiRepositoryBase;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
@@ -56,7 +56,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -272,10 +271,7 @@ public class XmiCategoryRepository
 			final Resource res = rset.createResource(URI.createFileURI(file.getPath()));
 			res.getContents().add(EcoreUtil.copy(xmiCatalog));
 			try {
-				res.save(ImmutableMap.of(XMIResource.OPTION_LINE_WIDTH, 80,
-						XMIResource.OPTION_DECLARE_XML, true,
-						XMIResource.OPTION_ENCODING, "UTF-8",
-						XMIResource.OPTION_SCHEMA_LOCATION, true));
+				res.save(XmiRepositoryBase.SAVE_OPTIONS);
 				res.unload();
 			} catch (IOException e) {
 				throw new DataException(e, "Cannot save %s XMI file %s", nsPrefix, file);

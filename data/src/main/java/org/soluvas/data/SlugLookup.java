@@ -17,7 +17,7 @@ public interface SlugLookup<T> {
 	 * @param statusMask TODO
 	 * @param upSlug
 	 * @return the entity, or {@code null} if not found.
-	 * @todo FIXME: Should return {@link Optional}.
+	 * @todo Should throw {@link EntityLookupException} (see for rationale vs {@link Optional}).
 	 */
 	@Nullable
 	public T findOneBySlug(StatusMask statusMask, String upSlug);

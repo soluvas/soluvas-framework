@@ -6,36 +6,53 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import org.soluvas.commons.SlugUtils;
+
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Supplier;
 
 /**
- * Based on Guava {@link Optional}.
+ * Based on Guava {@link Optional} (which will be deprecated when we switch to Java 8).
+ * @todo Consider extending {@link java.util.Optional} on Java 8.
  */
 public final class Existence<T> implements Serializable {
+	
 	private static final long serialVersionUID = 0;
-	private final boolean present;
+	
+	public enum State {
+		ABSENT,
+		MISMATCHED,
+		MATCHED
+	};
+	
+	private final State state;
 	@Nullable
 	private final T reference;
 	@Nullable
 	private final String id;
 
-	Existence(boolean present, T reference) {
-		this.present = present;
+	/**
+	 * @param present
+	 * @param reference
+	 * @deprecated ID is mandatory. Otherwise you can't {@link SlugUtils#generateValidSlug(String, com.google.common.base.Predicate)}
+	 * for an <i>existing</i> entity.
+	 */
+	@Deprecated
+	Existence(State state, T reference) {
+		this.state = state;
 		this.reference = reference;
 		this.id = null;
 	}
 
-	Existence(boolean present, T reference, String id) {
-		this.present = present;
+	Existence(State state, T reference, String id) {
+		this.state = state;
 		this.reference = reference;
 		this.id = id;
 	}
 	
 	public static <T> Existence<T> absent() {
-		return new Existence<>(false, null);
+		return new Existence<>(State.ABSENT, null);
 	}
 
 	/**
@@ -44,19 +61,27 @@ public final class Existence<T> implements Serializable {
 	 * @return
 	 */
 	public static <T> Existence<T> of(T reference, String id) {
-		return new Existence<>(true, reference, id);
+		return new Existence<>(State.MATCHED, reference, id);
 	}
 
 	public static <T> Existence<T> mismatch(T mismatchedReference, String id) {
-		return new Existence<>(false, mismatchedReference, id);
+		return new Existence<>(State.MISMATCHED, mismatchedReference, id);
 	}
 
+	/**
+	 * Either {@link State#MATCHED} or {@link State#MISMATCHED}.
+	 * @return
+	 */
 	public boolean isPresent() {
-		return present;
+		return state == State.MATCHED || state == State.MISMATCHED;
+	}
+	
+	public State getState() {
+		return state;
 	}
 
 	public T get() {
-		Preconditions.checkState(present, "Existence value not present");
+		Preconditions.checkState(state != State.ABSENT, "Existence value not present");
 		return reference;
 	}
 	
@@ -65,7 +90,7 @@ public final class Existence<T> implements Serializable {
 	 * @return
 	 */
 	public String getId() {
-		Preconditions.checkState(present, "Existence value not present");
+		Preconditions.checkState(state != State.ABSENT, "Existence value not present");
 		return id;
 	}
 
@@ -80,13 +105,13 @@ public final class Existence<T> implements Serializable {
 		return this;
 	}
 
-	public T or(Supplier<? extends T> supplier) {
-		Preconditions.checkNotNull(supplier);
-		return reference;
-	}
+//	public T or(Supplier<? extends T> supplier) {
+//		throw new UnsupportedOperationException();
+//	}
 
+	@Nullable
 	public T orNull() {
-		return reference;
+		return state != State.ABSENT ? reference : null;
 	}
 
 	public Set<T> asSet() {

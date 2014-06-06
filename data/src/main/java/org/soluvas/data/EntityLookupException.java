@@ -20,12 +20,20 @@ import com.google.common.base.Optional;
  * </ol>
  * 
  * <p>The Exception also contains enough information for giving
- * the reason of the not found (deleted? inactive? blocked for abusive behavior?)
+ * the reason of the not found (deleted? inactive? blocked for abusive behavior?).
  * 
- * <p>This exception should simply be rethrown and caught by the global application exception handler.
+ * <p><b>Why not {@link RuntimeException}?</b> Non-existing entities are usually not a fatal error, but either wrong input or data,
+ * that must be either handled or propagated. In (20%) cases where it's used to show a entity on a web page, you can just wrap and rethrow.
+ * Note that a {@code Page} may lookup multiple entities, e.g. {@code ProductShowPage} you need to find the {@code product.shop}, so if the {@code shop} doesn't exist it's a
+ * system inconsistency, not a 404 Not Found.
+ * 
+ * <p><b>Why not {@link Optional}?</b> Main reason is simple global exception handling in Wicket {@link org.apache.wicket.request.IExceptionMapper}
+ * and JAX-RS / Spring MVC. Even with Java 8, consumers need to {@link java.util.Optional#orElseThrow()}. Actually {@link scala.util.Try}
+ * is a better idea than Optional in this case, which unfortunately Java doesn't have. :(
  * 
  * @author ceefour
- * @todo Merge with {@link ResourceNotFoundException}
+ * @todo What about {@link ResourceNotFoundException}? I think it's a different thing. EntityLookupException is meant for low-level stuff,
+ * 		while {@link ResourceNotFoundException} is for the main entity of a show page, e.g. {@code product} on a {@code ProductShowPage}.
  */
 public class EntityLookupException extends Exception {
 
