@@ -1565,9 +1565,18 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 					log.trace("generalEmail expanded to: {}", getGeneralEmail());
 				}
 				
+				// wwwUsed
+				if (!isSetWwwUsed()) {
+					// tuneeca.com -> wwwUsed: true
+					// demo.com -> wwwUsed: true
+					// tuneeca.tuneeca.com -> wwwUsed: false
+					// demo.tuneeca.com -> wwwUsed: false
+					setWwwUsed(getDomain().equals(scope.get("appDomain")) || !getDomain().endsWith((String) scope.get("appDomain")));
+				}
+				
 				expansionState = ExpansionState.EXPANDED;
-				log.debug("Expanded AppManifest '{}' to domain={} generalEmail={} using {}", 
-						getTitle(), getDomain(), getGeneralEmail(), upScope);
+				log.debug("Expanded AppManifest '{}' to domain={} generalEmail={} wwwUsed={} using {}", 
+						getTitle(), getDomain(), getGeneralEmail(), isWwwUsed(), upScope);
 			} catch (MalformedUriTemplateException | VariableExpansionException e) {
 				throw new CommonsException(e, "Cannot expand AppManifest '%s'", getTitle());
 			}
