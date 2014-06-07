@@ -37,10 +37,13 @@ import org.soluvas.category.CategoryStatus;
 import org.soluvas.category.CategoryUNameFunction;
 import org.soluvas.category.util.CategoryUtils;
 import org.soluvas.commons.ResourceType;
+import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.data.DataException;
 import org.soluvas.data.DataPackage;
+import org.soluvas.data.Existence;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
@@ -56,6 +59,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -97,6 +101,11 @@ public class XmiCategoryRepository
 	private final Map<String, CategoryCatalog> xmiCatalogs = new HashMap<>();
 	protected final List<URL> xmiResources;
 	private final EventBus eventBus;
+	private static final Map<StatusMask, ImmutableSet<CategoryStatus>> statusMapping = ImmutableMap.of(
+			StatusMask.ACTIVE_ONLY, ImmutableSet.of(CategoryStatus.ACTIVE),
+			StatusMask.DRAFT_ONLY, ImmutableSet.of(CategoryStatus.DRAFT),
+			StatusMask.INCLUDE_INACTIVE, ImmutableSet.of(CategoryStatus.ACTIVE, CategoryStatus.INACTIVE),
+			StatusMask.VOID_ONLY, ImmutableSet.of(CategoryStatus.VOID));
 	
 	public XmiCategoryRepository(List<URL> xmiResources, 
 			Map<String, File> xmiFiles, EventBus eventBus) {
@@ -467,7 +476,37 @@ public class XmiCategoryRepository
 			return EcoreUtil.copy(found);
 		} else {
 			log.debug("findOneBySlugPath {} {} is null", slugPath, statuses);
-			return found;
+			return null;
+		}
+	}
+
+	@Override
+	public Existence<String> existsBySlugPath(final StatusMask statusMask, final String upSlugPath) {
+		final String canonicalSlugPath = SlugUtils.canonicalizePath(upSlugPath);
+		final Predicate<Category> filter = new Predicate<Category>() {
+			@Override
+			public boolean apply(@Nullable Category input) {
+				if (statusMask == StatusMask.RAW) {
+					return canonicalSlugPath.equals(SlugUtils.canonicalizePath(input.getSlugPath()));
+				} else {
+					return statusMapping.get(statusMask).contains(input.getStatus()) && 
+							canonicalSlugPath.equals(SlugUtils.canonicalizePath(input.getSlugPath())); 
+				}
+			}
+		};
+		final Category found = Iterables.find(getFlattenedCategories(), filter, null);
+		if (found != null) {
+			if (upSlugPath.equals(found.getSlugPath())) {
+				log.trace("existsBySlugPath {} {} = {}", upSlugPath, statusMask, found.getId());
+				return Existence.of(found.getSlugPath(), found.getId());
+			} else {
+				log.trace("existsBySlugPath {} {} mismatch {} = {}", 
+						upSlugPath, statusMask, found.getSlugPath(), found.getId());
+				return Existence.mismatch(found.getSlugPath(), found.getId());
+			}
+		} else {
+			log.trace("existsBySlugPath {} {} is null", upSlugPath, statusMask);
+			return Existence.absent();
 		}
 	}
 

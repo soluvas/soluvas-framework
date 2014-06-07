@@ -233,10 +233,24 @@ public class SlugUtils {
 	 * 
 	 * @param slug
 	 * @return Canonicalized slug, or {@code null} if input is null.
+	 * @see #canonicalizePath(String)
+	 * @see #generateValidSegment(String, Predicate)
+	 * @see #generateValidScreenName(String, Predicate)
 	 */
 	@Nullable
 	public static String canonicalize(@Nullable String slug) {
 		return slug != null ? slug.toLowerCase().replaceAll("[^a-z0-9]", "") : null;
+	}
+
+	/**
+	 * Makes it lowercase, and removes every character not in a-z and 0-9 and '/'. Underscore is also removed.
+	 * @param slugPath
+	 * @return
+	 * @see #canonicalize(String)
+	 */
+	@Nullable
+	public static String canonicalizePath(@Nullable String slugPath) {
+		return slugPath != null ? slugPath.toLowerCase().replaceAll("[^a-z0-9/]", "") : null;
 	}
 
 }

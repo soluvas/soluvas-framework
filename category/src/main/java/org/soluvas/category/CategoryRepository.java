@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import javax.annotation.Nullable;
 
+import org.soluvas.data.Existence;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.PagingAndSortingRepository;
@@ -32,5 +34,7 @@ public interface CategoryRepository extends
 	 * @see id.co.bippo.product.hand.ProductCreator
 	 */
 	Optional<Category> getFirstActiveLeaf();
+
+	Existence<String> existsBySlugPath(StatusMask statusMask, String upSlugPath);
 
 }

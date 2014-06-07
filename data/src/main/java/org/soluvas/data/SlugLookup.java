@@ -7,6 +7,12 @@ import org.soluvas.data.person.PersonRepository;
 
 import com.google.common.base.Optional;
 
+/**
+ * @author ceefour
+ *
+ * @param <T>
+ * @todo change to {@code SlugPathLookup}, see {@link org.soluvas.category.CategoryRepository} for reason
+ */
 public interface SlugLookup<T> {
 	
 	/**
@@ -18,6 +24,7 @@ public interface SlugLookup<T> {
 	 * @param upSlug
 	 * @return the entity, or {@code null} if not found.
 	 * @todo Should throw {@link EntityLookupException} (see for rationale vs {@link Optional}).
+	 * @todo Support {@code upSlugPath} instead, see {@link org.soluvas.category.CategoryRepository} for reason
 	 */
 	@Nullable
 	public T findOneBySlug(StatusMask statusMask, String upSlug);
@@ -33,6 +40,7 @@ public interface SlugLookup<T> {
 	 * 		Actual slug is useful for e.g. canonical URIs. So if someone came using {@code http://www.aksimata.com/hendyirawan}
 	 * 		the {@link org.apache.wicket.request.IRequestMapper} can <i>immediately</i> redirect to {@code http://www.aksimata.com/hendy.irawan}
 	 * 		without processing the page nor getting the {@link Person} entity from {@link PersonRepository}.
+	 * @todo Support {@code upSlugPath} instead, see {@link org.soluvas.category.CategoryRepository} for reason
 	 */
 	@Nullable
 	public Existence<String> existsBySlug(StatusMask statusMask, String upSlug);
