@@ -192,6 +192,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createGenericStatusFromString(eDataType, initialValue);
 			case CommonsPackage.CUSTOMER_ROLE_STATUS:
 				return createCustomerRoleStatusFromString(eDataType, initialValue);
+			case CommonsPackage.ENTITY_KIND:
+				return createEntityKindFromString(eDataType, initialValue);
 			case CommonsPackage.DATE_TIME:
 				return createDateTimeFromString(eDataType, initialValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -281,6 +283,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertGenericStatusToString(eDataType, instanceValue);
 			case CommonsPackage.CUSTOMER_ROLE_STATUS:
 				return convertCustomerRoleStatusToString(eDataType, instanceValue);
+			case CommonsPackage.ENTITY_KIND:
+				return convertEntityKindToString(eDataType, instanceValue);
 			case CommonsPackage.DATE_TIME:
 				return convertDateTimeToString(eDataType, instanceValue);
 			case CommonsPackage.CURRENCY_UNIT:
@@ -944,6 +948,26 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertCustomerRoleStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EntityKind createEntityKindFromString(EDataType eDataType, String initialValue) {
+		EntityKind result = EntityKind.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertEntityKindToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

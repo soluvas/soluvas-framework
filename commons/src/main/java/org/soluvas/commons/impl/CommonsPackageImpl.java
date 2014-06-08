@@ -62,6 +62,7 @@ import org.soluvas.commons.EClassStatus;
 import org.soluvas.commons.EFactoryLinked;
 import org.soluvas.commons.EObjectLinked;
 import org.soluvas.commons.Email;
+import org.soluvas.commons.EntityKind;
 import org.soluvas.commons.EventBusProgressMonitor;
 import org.soluvas.commons.Expandable;
 import org.soluvas.commons.ExpansionState;
@@ -691,6 +692,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EEnum customerRoleStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum entityKindEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -4156,6 +4164,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getEntityKind() {
+		return entityKindEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EDataType getDateTime() {
 		return dateTimeEDataType;
@@ -4894,6 +4911,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		tenantSourceEEnum = createEEnum(TENANT_SOURCE);
 		genericStatusEEnum = createEEnum(GENERIC_STATUS);
 		customerRoleStatusEEnum = createEEnum(CUSTOMER_ROLE_STATUS);
+		entityKindEEnum = createEEnum(ENTITY_KIND);
 
 		// Create data types
 		dateTimeEDataType = createEDataType(DATE_TIME);
@@ -5661,6 +5679,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addEEnumLiteral(customerRoleStatusEEnum, CustomerRoleStatus.ACTIVE);
 		addEEnumLiteral(customerRoleStatusEEnum, CustomerRoleStatus.INACTIVE);
 		addEEnumLiteral(customerRoleStatusEEnum, CustomerRoleStatus.VOID);
+
+		initEEnum(entityKindEEnum, EntityKind.class, "EntityKind");
+		addEEnumLiteral(entityKindEEnum, EntityKind.PERSON);
+		addEEnumLiteral(entityKindEEnum, EntityKind.SHOP);
+		addEEnumLiteral(entityKindEEnum, EntityKind.PRODUCT);
+		addEEnumLiteral(entityKindEEnum, EntityKind.PLACE);
+		addEEnumLiteral(entityKindEEnum, EntityKind.TASK);
+		addEEnumLiteral(entityKindEEnum, EntityKind.ARTICLE);
+		addEEnumLiteral(entityKindEEnum, EntityKind.BANNER_SHOP);
+		addEEnumLiteral(entityKindEEnum, EntityKind.CATEGORY);
+		addEEnumLiteral(entityKindEEnum, EntityKind.PRODUCT_RELEASE);
+		addEEnumLiteral(entityKindEEnum, EntityKind.TAG);
 
 		// Initialize data types
 		initEDataType(dateTimeEDataType, DateTime.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -7050,6 +7080,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "MongoDB URI for all MongoDB repositories except image repositories. Each repository implementation should determine its own access patterns with regard to replica set (i.e. primary only, secondary on read, etc.)\n\nTemplated using URI Templates."
+		   });		
+		addAnnotation
+		  (entityKindEEnum, 
+		   source, 
+		   new String[] {
+			 "documentation", "Inspired by {@link org.soluvas.image.ImageTypes}. Used by {@link org.soluvas.web.site.PermalinkManager}."
 		   });
 	}
 	

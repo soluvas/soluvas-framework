@@ -19,6 +19,7 @@ public class SlugUtils {
 	public static final int MIN_LENGTH = 3;
 	public static final int MAX_LENGTH = 63;
 	public static final Pattern SLUG_PATTERN = Pattern.compile("[a-z0-9][a-z0-9-]+");
+	public static final Pattern SLUG_PATH_PATTERN = Pattern.compile("[a-z0-9][a-z0-9-]+[a-z0-9/-]*");
 	
 	/**
 	 * Generates person slugs (using underscores).

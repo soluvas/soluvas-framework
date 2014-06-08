@@ -462,20 +462,22 @@ public class XmiCategoryRepository
 	}
 
 	@Override @Nullable
-	public Category findOneBySlugPath(final String slugPath,
+	public Category findOneBySlugPath(final String upSlugPath,
 			final Collection<CategoryStatus> statuses) {
+		final String canonicalSlugPath = SlugUtils.canonicalizePath(upSlugPath);
 		final Predicate<Category> filter = new Predicate<Category>() {
 			@Override
 			public boolean apply(@Nullable Category input) {
-				return statuses.contains(input.getStatus()) && slugPath.equals(input.getSlugPath());
+				return statuses.contains(input.getStatus()) && 
+						canonicalSlugPath.equals(SlugUtils.canonicalizePath(input.getSlugPath()));
 			}
 		};
 		final Category found = Iterables.find(getFlattenedCategories(), filter, null);
 		if (found != null) {
-			log.debug("findOneBySlugPath {} {} = {}", slugPath, statuses, found.getId());
+			log.debug("findOneBySlugPath {} {} = {}", upSlugPath, statuses, found.getId());
 			return EcoreUtil.copy(found);
 		} else {
-			log.debug("findOneBySlugPath {} {} is null", slugPath, statuses);
+			log.debug("findOneBySlugPath {} {} is null", upSlugPath, statuses);
 			return null;
 		}
 	}
