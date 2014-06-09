@@ -18,14 +18,25 @@ public class SlugUtils {
 	
 	public static final int MIN_LENGTH = 3;
 	public static final int MAX_LENGTH = 63;
-	public static final Pattern SLUG_PATTERN = Pattern.compile("[a-z0-9][a-z0-9-]+");
-	public static final Pattern SLUG_PATH_PATTERN = Pattern.compile("[a-z0-9][a-z0-9-]+[a-z0-9/-]*");
+	public static final Pattern ID_PATTERN = Pattern.compile("[a-z0-9][a-z0-9_]+");
+	/**
+	 * Happens to be same as {@link #CANONICAL_PATTERN} but different in purpose.
+	 */
+	public static final Pattern TENANT_ID_PATTERN = Pattern.compile("[a-z0-9][a-z0-9]+");
+	public static final Pattern SCREEN_NAME_PATTERN = Pattern.compile("[a-z0-9][a-z0-9.]+");
+	public static final Pattern SEGMENT_PATTERN = Pattern.compile("[a-z0-9][a-z0-9-]+");
+	public static final Pattern SEGMENT_PATH_PATTERN = Pattern.compile("[a-z0-9][a-z0-9-]+[a-z0-9/-]*");
+	/**
+	 * Happens to be same as {@link #TENANT_ID_PATTERN} but different in purpose.
+	 */
+	public static final Pattern CANONICAL_PATTERN = Pattern.compile("[a-z0-9][a-z0-9]+");
+	public static final Pattern CANONICAL_PATH_PATTERN = Pattern.compile("[a-z0-9][a-z0-9]+[a-z0-9/]*");
 	
 	/**
-	 * Generates person slugs (using underscores).
+	 * Generates person slugs (using dots).
 	 * @param name
 	 * @param suffix
-	 * @return
+	 * @return Guaranteed to conform to {@link #SCREEN_NAME_PATTERN}.
 	 */
 	public static String generateScreenName(String name, @Nonnegative int suffix) {
 		Preconditions.checkNotNull(name, "name must not be null");
@@ -40,9 +51,9 @@ public class SlugUtils {
 	}
 	
 	/**
-	 * Generates person slugs (using underscores).
+	 * Generates person slugs (using dots).
 	 * @param name
-	 * @return
+	 * @return Guaranteed to conform to {@link #SCREEN_NAME_PATTERN}.
 	 */
 	public static String generateScreenName(String name) {
 		return generateScreenName(name, 0);
@@ -52,7 +63,7 @@ public class SlugUtils {
 	 * Generates resource IDs (using underscores).
 	 * @param name
 	 * @param suffix
-	 * @return
+	 * @return Guaranteed to conform to {@link #ID_PATTERN}.
 	 */
 	public static String generateId(String name, int suffix) {
 		Preconditions.checkNotNull(name, "name must not be null");
@@ -69,7 +80,7 @@ public class SlugUtils {
 	/**
 	 * Generates resource IDs (using underscores).
 	 * @param name
-	 * @return
+	 * @return Guaranteed to conform to {@link #ID_PATTERN}.
 	 */
 	public static String generateId(String name) {
 		return generateId(name, 0);
@@ -79,7 +90,7 @@ public class SlugUtils {
 	 * Generates tenant IDs (without underscores).
 	 * @param name
 	 * @param suffix
-	 * @return
+	 * @return Guaranteed to conform to {@link #TENANT_ID_PATTERN}.
 	 */
 	public static String generateTenantId(String name, int suffix) {
 		Preconditions.checkNotNull(name, "name must not be null");
@@ -95,7 +106,7 @@ public class SlugUtils {
 	/**
 	 * Generates tenant IDs (without underscores).
 	 * @param name
-	 * @return
+	 * @return Guaranteed to conform to {@link #TENANT_ID_PATTERN}.
 	 */
 	public static String generateTenantId(String name) {
 		return generateTenantId(name, 0);
@@ -105,7 +116,7 @@ public class SlugUtils {
 	 * Generates article URI path segments (using '-').
 	 * @param name
 	 * @param suffix
-	 * @return
+	 * @return Guaranteed to conform to {@link #SEGMENT_PATTERN}.
 	 */
 	public static String generateSegment(String name, int suffix) {
 		Preconditions.checkNotNull(name, "name must not be null");
@@ -122,7 +133,7 @@ public class SlugUtils {
 	/**
 	 * Generates article URI path segments (using '-').
 	 * @param name
-	 * @return
+	 * @return Guaranteed to conform to {@link #SEGMENT_PATTERN}.
 	 */
 	public static String generateSegment(String name) {
 		return generateSegment(name, 0);
@@ -132,7 +143,7 @@ public class SlugUtils {
 	 * Retries 99 times (using suffix 2 to 99) to get a valid ID, otherwise throw Exception.
 	 * @param name
 	 * @param validator
-	 * @return
+	 * @return Guaranteed to conform to {@link #ID_PATTERN}.
 	 */
 	public static String generateValidId(String name, Predicate<String> validator) {
 		Preconditions.checkNotNull(validator, "validator must not be null");
@@ -153,7 +164,7 @@ public class SlugUtils {
 	 * Retries 99 times (using suffix 2 to 99) to get a valid tenant ID, otherwise throw Exception.
 	 * @param name
 	 * @param validator
-	 * @return
+	 * @return Guaranteed to conform to {@link #TENANT_ID_PATTERN}.
 	 */
 	public static String generateValidTenantId(String name, Predicate<String> validator) {
 		Preconditions.checkNotNull(validator, "validator must not be null");
@@ -185,7 +196,7 @@ public class SlugUtils {
 	 * Retries 99 times (using suffix 2 to 99) to get a valid segment, otherwise throw Exception.
 	 * @param name
 	 * @param validator
-	 * @return
+	 * @return Guaranteed to conform to {@link #SEGMENT_PATTERN}.
 	 */
 	public static String generateValidSegment(String name, Predicate<String> validator) {
 		Preconditions.checkNotNull(validator, "validator must not be null");
@@ -206,7 +217,7 @@ public class SlugUtils {
 	 * Retries 99 times (using suffix 2 to 99) to get a valid segment, otherwise throw Exception.
 	 * @param name
 	 * @param validator
-	 * @return
+	 * @return Guaranteed to conform to {@link #SCREEN_NAME_PATTERN}.
 	 */
 	public static String generateValidScreenName(String name, Predicate<String> validator) {
 		Preconditions.checkNotNull(validator, "validator must not be null");
@@ -237,6 +248,7 @@ public class SlugUtils {
 	 * @see #canonicalizePath(String)
 	 * @see #generateValidSegment(String, Predicate)
 	 * @see #generateValidScreenName(String, Predicate)
+	 * @return Guaranteed to conform to {@link #CANONICAL_PATTERN}.
 	 */
 	@Nullable
 	public static String canonicalize(@Nullable String slug) {
@@ -246,7 +258,7 @@ public class SlugUtils {
 	/**
 	 * Makes it lowercase, and removes every character not in a-z and 0-9 and '/'. Underscore is also removed.
 	 * @param slugPath
-	 * @return
+	 * @return Guaranteed to conform to {@link #CANONICAL_PATH_PATTERN}.
 	 * @see #canonicalize(String)
 	 */
 	@Nullable

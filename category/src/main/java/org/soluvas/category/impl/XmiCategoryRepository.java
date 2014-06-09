@@ -87,6 +87,12 @@ public class XmiCategoryRepository
 		implements CategoryRepository {
 	
 	protected static final Logger log = LoggerFactory.getLogger(XmiCategoryRepository.class);
+	private static final Map<StatusMask, ImmutableSet<CategoryStatus>> statusMapping = ImmutableMap.of(
+			StatusMask.ACTIVE_ONLY, ImmutableSet.of(CategoryStatus.ACTIVE),
+			StatusMask.DRAFT_ONLY, ImmutableSet.of(CategoryStatus.DRAFT),
+			StatusMask.INCLUDE_INACTIVE, ImmutableSet.of(CategoryStatus.ACTIVE, CategoryStatus.INACTIVE),
+			StatusMask.VOID_ONLY, ImmutableSet.of(CategoryStatus.VOID));
+
 	/**
 	 * {@link Category}s in working memory.
 	 */
@@ -101,11 +107,6 @@ public class XmiCategoryRepository
 	private final Map<String, CategoryCatalog> xmiCatalogs = new HashMap<>();
 	protected final List<URL> xmiResources;
 	private final EventBus eventBus;
-	private static final Map<StatusMask, ImmutableSet<CategoryStatus>> statusMapping = ImmutableMap.of(
-			StatusMask.ACTIVE_ONLY, ImmutableSet.of(CategoryStatus.ACTIVE),
-			StatusMask.DRAFT_ONLY, ImmutableSet.of(CategoryStatus.DRAFT),
-			StatusMask.INCLUDE_INACTIVE, ImmutableSet.of(CategoryStatus.ACTIVE, CategoryStatus.INACTIVE),
-			StatusMask.VOID_ONLY, ImmutableSet.of(CategoryStatus.VOID));
 	
 	public XmiCategoryRepository(List<URL> xmiResources, 
 			Map<String, File> xmiFiles, EventBus eventBus) {
