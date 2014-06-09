@@ -5691,6 +5691,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addEEnumLiteral(entityKindEEnum, EntityKind.CATEGORY);
 		addEEnumLiteral(entityKindEEnum, EntityKind.PRODUCT_RELEASE);
 		addEEnumLiteral(entityKindEEnum, EntityKind.TAG);
+		addEEnumLiteral(entityKindEEnum, EntityKind.PAGE);
 
 		// Initialize data types
 		initEDataType(dateTimeEDataType, DateTime.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -7086,6 +7087,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Inspired by {@link org.soluvas.image.ImageTypes}. Used by {@link org.soluvas.web.site.PermalinkManager}."
+		   });		
+		addAnnotation
+		  (entityKindEEnum.getELiterals().get(5), 
+		   source, 
+		   new String[] {
+			 "documentation", "CMS Article, which is usually chronological, categorized/tagged, and owned by Person (compare with Page)."
+		   });		
+		addAnnotation
+		  (entityKindEEnum.getELiterals().get(10), 
+		   source, 
+		   new String[] {
+			 "documentation", "CMS page, which is usually non-chronological, hierarchical / structural, uncategorized/untagged, and owned by Tenant (compare with Article)."
 		   });
 	}
 	

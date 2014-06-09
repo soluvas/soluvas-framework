@@ -1592,10 +1592,19 @@
     <eLiterals name="product" value="2"/>
     <eLiterals name="place" value="3"/>
     <eLiterals name="task" value="4"/>
-    <eLiterals name="article" value="5"/>
+    <eLiterals name="article" value="5">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="CMS Article, which is usually chronological, categorized/tagged, and owned by Person (compare with Page)."/>
+      </eAnnotations>
+    </eLiterals>
     <eLiterals name="banner_shop" value="6"/>
     <eLiterals name="category" value="7"/>
     <eLiterals name="product_release" value="8"/>
     <eLiterals name="tag" value="9"/>
+    <eLiterals name="page" value="10">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="CMS page, which is usually non-chronological, hierarchical / structural, uncategorized/untagged, and owned by Tenant (compare with Article)."/>
+      </eAnnotations>
+    </eLiterals>
   </eClassifiers>
 </ecore:EPackage>

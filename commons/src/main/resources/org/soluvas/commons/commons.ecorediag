@@ -1854,6 +1854,10 @@
           <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//EntityKind/tag"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_uA8AUe7hEeO726ZTgd8_Rw"/>
         </children>
+        <children xmi:type="notation:Node" xmi:id="_E3Vp4O-eEeOU5KqOA78LlA" type="2006">
+          <element xmi:type="ecore:EEnumLiteral" href="commons.ecore#//EntityKind/page"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_E3Vp4e-eEeOU5KqOA78LlA"/>
+        </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_J4ZE0u7hEeO726ZTgd8_Rw"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_J4ZE0-7hEeO726ZTgd8_Rw"/>
         <styles xmi:type="notation:FilteringStyle" xmi:id="_J4ZE1O7hEeO726ZTgd8_Rw"/>

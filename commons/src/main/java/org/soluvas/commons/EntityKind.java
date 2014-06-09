@@ -119,7 +119,15 @@ public enum EntityKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	TAG(9, "tag", "tag");
+	TAG(9, "tag", "tag"), /**
+	 * The '<em><b>Page</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PAGE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	PAGE(10, "page", "page");
 
 	/**
 	 * The '<em><b>Person</b></em>' literal value.
@@ -204,6 +212,9 @@ public enum EntityKind implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * CMS Article, which is usually chronological, categorized/tagged, and owned by Person (compare with Page).
+	 * <!-- end-model-doc -->
 	 * @see #ARTICLE
 	 * @model name="article"
 	 * @generated
@@ -272,6 +283,20 @@ public enum EntityKind implements Enumerator {
 	public static final int TAG_VALUE = 9;
 
 	/**
+	 * The '<em><b>Page</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * CMS page, which is usually non-chronological, hierarchical / structural, uncategorized/untagged, and owned by Tenant (compare with Article).
+	 * <!-- end-model-doc -->
+	 * @see #PAGE
+	 * @model name="page"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PAGE_VALUE = 10;
+
+	/**
 	 * An array of all the '<em><b>Entity Kind</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -289,6 +314,7 @@ public enum EntityKind implements Enumerator {
 			CATEGORY,
 			PRODUCT_RELEASE,
 			TAG,
+			PAGE,
 		};
 
 	/**
@@ -349,6 +375,7 @@ public enum EntityKind implements Enumerator {
 			case CATEGORY_VALUE: return CATEGORY;
 			case PRODUCT_RELEASE_VALUE: return PRODUCT_RELEASE;
 			case TAG_VALUE: return TAG;
+			case PAGE_VALUE: return PAGE;
 		}
 		return null;
 	}
