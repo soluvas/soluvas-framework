@@ -29,6 +29,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mongodb.BasicDBObject;
+import com.mongodb.CommandFailureException;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -249,11 +250,15 @@ public class MongoUtils {
 	
 	/**
 	 * Ensure indexes (both non-unique and unique) on MongoDB collection, with logging.
+	 * Existing indexes with different index options will be recreated with {@code WARN} logging
+	 * (since it can mean misconfiguration, but if intentional then it will happen only once).
+	 * 
 	 * <p>Usage:
+	 * 
 	 * <pre>{@literal
 	 * MongoUtils.ensureIndexes(primary, ImmutableMap.of("creationTime", -1, "modificationTime", -1);
 	 * }</pre>
-	 * @return 
+	 * 
 	 * @return Ensured index names (including existing ones). A single index is named e.g. {@code creationTime_-1},
 	 * 		a compound index is named e.g. {@code emails.email_1_accountStatus_1}.
 	 */
@@ -270,7 +275,18 @@ public class MongoUtils {
 				}
 				indexName += key + "_" + indexObj.get(key);
 			}
-			coll.ensureIndex(indexObj, indexName, index.isUnique());
+			try {
+				coll.ensureIndex(indexObj, indexName, index.isUnique());
+			} catch (CommandFailureException e) {
+				if (e.getCode() == 85) {
+					log.warn("Recreating {} index {} on collection {} due to mismatched options: {}",
+							index.isUnique() ? "unique" : "non-unique", indexName, coll.getName(), indexObj); 
+					coll.dropIndex(indexName);
+					coll.ensureIndex(indexObj, indexName, index.isUnique());
+				} else {
+					throw e;
+				}
+			}
 			ensuredNames.add(indexName);
 		}
 		return ensuredNames.build();
