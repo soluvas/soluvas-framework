@@ -2,8 +2,9 @@ package org.soluvas.jpa.jpa;
 
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+
+import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.Type;
 
 /**
  * A representation of the model object '<em><b>PersonInfo</b></em>'. <!--
@@ -49,10 +50,9 @@ public class PersonInfo {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
 	 */
 	@Basic()
-	@Enumerated(EnumType.STRING)
+	@Type(type = "org.soluvas.jpa.PersistentEnum", parameters = @Parameter(name = "enumClass", value = "org.soluvas.jpa.jpa.Gender"))
 	private Gender gender = null;
 
 	/**
