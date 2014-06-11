@@ -42,7 +42,7 @@ public class ThreadMetricsConfig {
 				log.info("Enabling Thread Metrics");
 				final com.sun.management.ThreadMXBean threadMx = (com.sun.management.ThreadMXBean) ManagementFactory.getThreadMXBean();
 				threadMx.setThreadAllocatedMemoryEnabled(true);
-				threadMx.setThreadContentionMonitoringEnabled(true);
+//				threadMx.setThreadContentionMonitoringEnabled(true);
 				threadMx.setThreadCpuTimeEnabled(true);
 			} catch (Exception e) {
 				throw new CommonsException("Oracle/OpenJDK is required to enabled Thread Metrics", e);
