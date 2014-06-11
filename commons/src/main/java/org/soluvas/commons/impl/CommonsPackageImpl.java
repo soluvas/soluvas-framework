@@ -1247,6 +1247,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAppManifest_HeadNote() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(26);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_HeadTitle() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(27);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EAttribute getAppManifest_DefaultTimeZoneId() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(14);
@@ -4562,6 +4580,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__LETTER_CLOSING);
 		createEAttribute(appManifestEClass, APP_MANIFEST__FOOTNOTE);
 		createEAttribute(appManifestEClass, APP_MANIFEST__WWW_USED);
+		createEAttribute(appManifestEClass, APP_MANIFEST__HEAD_NOTE);
+		createEAttribute(appManifestEClass, APP_MANIFEST__HEAD_TITLE);
 		createEOperation(appManifestEClass, APP_MANIFEST___GET_DEFAULT_LOCALE);
 		createEOperation(appManifestEClass, APP_MANIFEST___GET_WEB_HOST);
 
@@ -5203,6 +5223,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_LetterClosing(), ecorePackage.getEString(), "letterClosing", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_Footnote(), ecorePackage.getEString(), "footnote", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_WwwUsed(), ecorePackage.getEBoolean(), "wwwUsed", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_HeadNote(), ecorePackage.getEString(), "headNote", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_HeadTitle(), ecorePackage.getEString(), "headTitle", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getAppManifest__GetDefaultLocale(), this.getLocale(), "getDefaultLocale", 1, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -5941,6 +5963,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "If {@code true}, {#link getWebHost()} will return \"www.\" + domain. If {@code false}, just domain."
+		   });		
+		addAnnotation
+		  (getAppManifest_HeadNote(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The headnote is shown on all frontend pages, usually positioned above the main content, but above the banner."
+		   });		
+		addAnnotation
+		  (getAppManifest_HeadTitle(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The headtitle is shown on all frontend pages, usually positioned above the main content, but above the banner."
 		   });		
 		addAnnotation
 		  (personInfoEClass, 

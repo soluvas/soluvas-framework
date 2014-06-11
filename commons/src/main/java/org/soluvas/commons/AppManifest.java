@@ -52,6 +52,8 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getLetterClosing <em>Letter Closing</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getFootnote <em>Footnote</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#isWwwUsed <em>Www Used</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getHeadNote <em>Head Note</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getHeadTitle <em>Head Title</em>}</li>
  * </ul>
  * </p>
  *
@@ -588,6 +590,56 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	boolean isSetWwwUsed();
+
+	/**
+	 * Returns the value of the '<em><b>Head Note</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The headnote is shown on all frontend pages, usually positioned above the main content, but above the banner.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Head Note</em>' attribute.
+	 * @see #setHeadNote(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_HeadNote()
+	 * @model
+	 * @generated
+	 */
+	String getHeadNote();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getHeadNote <em>Head Note</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Head Note</em>' attribute.
+	 * @see #getHeadNote()
+	 * @generated
+	 */
+	void setHeadNote(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Head Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The headtitle is shown on all frontend pages, usually positioned above the main content, but above the banner.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Head Title</em>' attribute.
+	 * @see #setHeadTitle(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_HeadTitle()
+	 * @model
+	 * @generated
+	 */
+	String getHeadTitle();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getHeadTitle <em>Head Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Head Title</em>' attribute.
+	 * @see #getHeadTitle()
+	 * @generated
+	 */
+	void setHeadTitle(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Default Time Zone Id</b></em>' attribute.

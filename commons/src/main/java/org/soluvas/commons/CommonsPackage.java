@@ -449,13 +449,31 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__WWW_USED = POSITIONABLE_FEATURE_COUNT + 30;
 
 	/**
+	 * The feature id for the '<em><b>Head Note</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__HEAD_NOTE = POSITIONABLE_FEATURE_COUNT + 31;
+
+	/**
+	 * The feature id for the '<em><b>Head Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__HEAD_TITLE = POSITIONABLE_FEATURE_COUNT + 32;
+
+	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 31;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 33;
 
 	/**
 	 * The operation id for the '<em>Expand</em>' operation.
@@ -6228,6 +6246,28 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_WwwUsed();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getHeadNote <em>Head Note</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Head Note</em>'.
+	 * @see org.soluvas.commons.AppManifest#getHeadNote()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_HeadNote();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getHeadTitle <em>Head Title</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Head Title</em>'.
+	 * @see org.soluvas.commons.AppManifest#getHeadTitle()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_HeadTitle();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9938,6 +9978,22 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__WWW_USED = eINSTANCE.getAppManifest_WwwUsed();
+
+		/**
+		 * The meta object literal for the '<em><b>Head Note</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__HEAD_NOTE = eINSTANCE.getAppManifest_HeadNote();
+
+		/**
+		 * The meta object literal for the '<em><b>Head Title</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__HEAD_TITLE = eINSTANCE.getAppManifest_HeadTitle();
 
 		/**
 		 * The meta object literal for the '<em><b>Default Time Zone Id</b></em>' attribute feature.

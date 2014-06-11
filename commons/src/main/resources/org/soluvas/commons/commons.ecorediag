@@ -167,6 +167,14 @@
           <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/wwwUsed"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_orMjQerGEeO3EYi38-fvGA"/>
         </children>
+        <children xmi:type="notation:Node" xmi:id="_jUqNMPE5EeOihZZkoUldbQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/headNote"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_jUqNMfE5EeOihZZkoUldbQ"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_7H15EPE6EeOihZZkoUldbQ" type="2001">
+          <element xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/headTitle"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_7H15EfE6EeOihZZkoUldbQ"/>
+        </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_J59AQSSDEeKyUdMfH4dSfg"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_J59AQiSDEeKyUdMfH4dSfg"/>
         <styles xmi:type="notation:FilteringStyle" xmi:id="_J59AQySDEeKyUdMfH4dSfg"/>

@@ -74,6 +74,8 @@ import com.google.common.collect.ImmutableSet;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterClosing <em>Letter Closing</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getFootnote <em>Footnote</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#isWwwUsed <em>Www Used</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getHeadNote <em>Head Note</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getHeadTitle <em>Head Title</em>}</li>
  * </ul>
  * </p>
  *
@@ -690,6 +692,44 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	protected boolean wwwUsedESet;
 
 	/**
+	 * The default value of the '{@link #getHeadNote() <em>Head Note</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHeadNote()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String HEAD_NOTE_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getHeadNote() <em>Head Note</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHeadNote()
+	 * @generated
+	 * @ordered
+	 */
+	protected String headNote = HEAD_NOTE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getHeadTitle() <em>Head Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHeadTitle()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String HEAD_TITLE_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getHeadTitle() <em>Head Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHeadTitle()
+	 * @generated
+	 * @ordered
+	 */
+	protected String headTitle = HEAD_TITLE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1273,6 +1313,48 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getHeadNote() {
+		return headNote;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHeadNote(String newHeadNote) {
+		String oldHeadNote = headNote;
+		headNote = newHeadNote;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__HEAD_NOTE, oldHeadNote, headNote));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getHeadTitle() {
+		return headTitle;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHeadTitle(String newHeadTitle) {
+		String oldHeadTitle = headTitle;
+		headTitle = newHeadTitle;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__HEAD_TITLE, oldHeadTitle, headTitle));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getDefaultTimeZoneId() {
 		return defaultTimeZoneId;
@@ -1677,6 +1759,10 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getFootnote();
 			case CommonsPackage.APP_MANIFEST__WWW_USED:
 				return isWwwUsed();
+			case CommonsPackage.APP_MANIFEST__HEAD_NOTE:
+				return getHeadNote();
+			case CommonsPackage.APP_MANIFEST__HEAD_TITLE:
+				return getHeadTitle();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1778,6 +1864,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__WWW_USED:
 				setWwwUsed((Boolean)newValue);
 				return;
+			case CommonsPackage.APP_MANIFEST__HEAD_NOTE:
+				setHeadNote((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__HEAD_TITLE:
+				setHeadTitle((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1877,6 +1969,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__WWW_USED:
 				unsetWwwUsed();
 				return;
+			case CommonsPackage.APP_MANIFEST__HEAD_NOTE:
+				setHeadNote(HEAD_NOTE_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__HEAD_TITLE:
+				setHeadTitle(HEAD_TITLE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1953,6 +2051,10 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return FOOTNOTE_EDEFAULT == null ? footnote != null : !FOOTNOTE_EDEFAULT.equals(footnote);
 			case CommonsPackage.APP_MANIFEST__WWW_USED:
 				return isSetWwwUsed();
+			case CommonsPackage.APP_MANIFEST__HEAD_NOTE:
+				return HEAD_NOTE_EDEFAULT == null ? headNote != null : !HEAD_NOTE_EDEFAULT.equals(headNote);
+			case CommonsPackage.APP_MANIFEST__HEAD_TITLE:
+				return HEAD_TITLE_EDEFAULT == null ? headTitle != null : !HEAD_TITLE_EDEFAULT.equals(headTitle);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2138,6 +2240,10 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(footnote);
 		result.append(", wwwUsed: ");
 		if (wwwUsedESet) result.append(wwwUsed); else result.append("<unset>");
+		result.append(", headNote: ");
+		result.append(headNote);
+		result.append(", headTitle: ");
+		result.append(headTitle);
 		result.append(')');
 		return result.toString();
 	}
