@@ -33,6 +33,7 @@ import com.damnhandy.uri.template.UriTemplate;
 import com.damnhandy.uri.template.VariableExpansionException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -85,6 +86,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = LoggerFactory
 			.getLogger(AppManifestImpl.class);
+	
+	/**
+	 * Ordering matters! i.e. {@code co.id} will be stripped <i>before</i> {@code id}.
+	 */
+	public static final ImmutableSet<String> TLDS = ImmutableSet.of(
+			"com", "net", "org", "biz", "info", "asia", "co", "co.id", "or.id", "web.id", "ac.id", "id", "web");
 
 	/**
 	 * The default value of the '{@link #getPositioner() <em>Positioner</em>}' attribute.
@@ -1567,11 +1574,26 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				
 				// wwwUsed
 				if (!isSetWwwUsed()) {
+					// for appDomain: tuneeca.com
+					// current logic doesn't use appDomain but simply TLD
+					// because stg.tuneeca.com is a valid appDomain but we won't prepend "www."
+					// if it's used as tenant domain
 					// tuneeca.com -> wwwUsed: true
 					// demo.com -> wwwUsed: true
 					// tuneeca.tuneeca.com -> wwwUsed: false
 					// demo.tuneeca.com -> wwwUsed: false
-					setWwwUsed(getDomain().equals(scope.get("appDomain")) || !getDomain().endsWith((String) scope.get("appDomain")));
+					// need TLDs data for below:
+					// somethingelse.com -> wwwUsed: true
+					// stg.somethingelse.com -> wwwUsed: false
+					// defaults to true, unless domain-without-TLD has a dot
+					String withoutTld = getDomain();
+					for (final String tld : TLDS) {
+						if (getDomain().endsWith("." + tld)) {
+							withoutTld = getDomain().substring(0, getDomain().length() - tld.length() - 1);
+							break;
+						}
+					}
+					setWwwUsed(withoutTld.contains("."));
 				}
 				
 				expansionState = ExpansionState.EXPANDED;
