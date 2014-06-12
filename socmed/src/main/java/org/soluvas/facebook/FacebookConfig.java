@@ -19,7 +19,7 @@ import com.restfb.DefaultFacebookClient;
 public class FacebookConfig {
 
 	@Inject
-	private SysConfigMapHolder<FacebookSysConfig> sysConfigMapHolder;
+	private SysConfigMapHolder<? extends FacebookSysConfig> sysConfigMapHolder;
 	
 	@Bean
 	public TenantBeans<DefaultFacebookClient> tenantFacebookClientBeans() {

@@ -28,7 +28,7 @@ public class MongoPersonConfig implements PersonConfig {
 	 * @todo Better mechanism?
 	 */
 	@Inject
-	private SysConfigMapHolder<MongoSysConfig> sysConfigMapHolder;
+	private SysConfigMapHolder<? extends MongoSysConfig> sysConfigMapHolder;
 
 	@Override
 	@Bean(destroyMethod="destroy")

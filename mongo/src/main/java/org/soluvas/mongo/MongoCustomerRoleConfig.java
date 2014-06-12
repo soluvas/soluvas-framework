@@ -22,7 +22,7 @@ public class MongoCustomerRoleConfig {
 	@Inject
 	private Environment env;
 	@Inject
-	private SysConfigMapHolder<MongoSysConfig> sysConfigMapHolder;
+	private SysConfigMapHolder<? extends MongoSysConfig> sysConfigMapHolder;
 	
 	@Bean
 	public TenantBeans<CustomerRoleRepository> customerRoleBeans() {

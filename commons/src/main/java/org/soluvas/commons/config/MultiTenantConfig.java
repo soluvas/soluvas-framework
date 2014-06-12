@@ -37,7 +37,6 @@ import org.soluvas.commons.tenant.TenantsStopping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
@@ -57,7 +56,7 @@ import com.google.common.eventbus.EventBus;
  * Non-web tenant-related application configuration.
  * @author ceefour
  */
-@Configuration("tenantConfig") @Lazy
+@Configuration("tenantConfig")
 public class MultiTenantConfig implements TenantRepositoryListener {
 	private static final Logger log = LoggerFactory
 			.getLogger(MultiTenantConfig.class);

@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Scope;
 public class TwitterConfig {
 
 	@Inject
-	private SysConfigMapHolder<TwitterSysConfig> sysConfigMapHolder;
+	private SysConfigMapHolder<? extends TwitterSysConfig> sysConfigMapHolder;
 	
 	@Bean
 	public TenantBeans<TwitterManager> twitterMgrBeans() {

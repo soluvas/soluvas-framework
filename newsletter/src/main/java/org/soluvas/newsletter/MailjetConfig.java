@@ -36,7 +36,7 @@ public class MailjetConfig {
 	@Inject @Named(CommonsWebConfig.APP_EVENT_BUS)
 	private EventBus appEventBus;
 	@Inject
-	private SysConfigMapHolder<MailjetSysConfig> sysConfigMapHolder;
+	private SysConfigMapHolder<? extends MailjetSysConfig> sysConfigMapHolder;
 	@Autowired(required=false) @Nullable
 	private TenantRepository<?> tenantRepo;
 	
