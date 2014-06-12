@@ -12,7 +12,7 @@ package org.soluvas.jpa.jpa;
 public interface NameContainer {
 	/**
 	 * Returns the value of '<em><b>name</em></b>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>name</b></em>' feature
@@ -22,7 +22,7 @@ public interface NameContainer {
 
 	/**
 	 * Sets the '{@link NameContainer#getName() <em>name</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newName

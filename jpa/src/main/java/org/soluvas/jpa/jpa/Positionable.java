@@ -9,7 +9,7 @@ package org.soluvas.jpa.jpa;
 public interface Positionable {
 	/**
 	 * Returns the value of '<em><b>positioner</em></b>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>positioner</b></em>' feature
@@ -20,7 +20,7 @@ public interface Positionable {
 	/**
 	 * Sets the '{@link Positionable#getPositioner() <em>positioner</em>}'
 	 * feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPositioner

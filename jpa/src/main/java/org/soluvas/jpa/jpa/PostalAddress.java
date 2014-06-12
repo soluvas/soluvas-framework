@@ -5,14 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 
-import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 /**
  * A representation of the model object '<em><b>PostalAddress</b></em>'. <!--
@@ -118,10 +115,8 @@ public class PostalAddress implements Describable, Serializable {
 	 * RFC1274: mobile telephone number LDAP: mobile, mobileTelephoneNumber <!--
 	 * end-model-doc -->
 	 * 
-	 * @generated
 	 */
-	@ElementCollection()
-	@CollectionTable()
+	@Type(type = "org.soluvas.jpa.PersistentStringList")
 	private List<String> mobiles = new ArrayList<String>();
 
 	/**
@@ -139,10 +134,8 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
 	 */
-	@ElementCollection()
-	@CollectionTable()
+	@Type(type = "org.soluvas.jpa.PersistentStringList")
 	private List<String> phones = new ArrayList<String>();
 
 	/**
@@ -158,10 +151,8 @@ public class PostalAddress implements Describable, Serializable {
 	 * RFC1274: home telephone number. LDAP: homePhone, homeTelephoneNumber.
 	 * <!-- end-model-doc -->
 	 * 
-	 * @generated
 	 */
-	@ElementCollection()
-	@CollectionTable()
+	@Type(type = "org.soluvas.jpa.PersistentStringList")
 	private List<String> homePhones = new ArrayList<String>();
 
 	/**
@@ -176,10 +167,8 @@ public class PostalAddress implements Describable, Serializable {
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC2256: Telephone Number. LDAP: (not yet mapped) <!-- end-model-doc -->
 	 * 
-	 * @generated
 	 */
-	@ElementCollection()
-	@CollectionTable()
+	@Type(type = "org.soluvas.jpa.PersistentStringList")
 	private List<String> workPhones = new ArrayList<String>();
 
 	/**
@@ -194,10 +183,8 @@ public class PostalAddress implements Describable, Serializable {
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * LDAP: mail. <!-- end-model-doc -->
 	 * 
-	 * @generated
 	 */
-	@ElementCollection()
-	@CollectionTable()
+	@Type(type = "org.soluvas.jpa.PersistentStringList")
 	private List<String> emails = new ArrayList<String>();
 
 	/**
@@ -215,9 +202,9 @@ public class PostalAddress implements Describable, Serializable {
 	 * Designates this Address as the primary Address of the containing list.
 	 * <!-- end-model-doc -->
 	 * 
+	 * @generated
 	 */
 	@Basic()
-	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean primary = false;
 
 	/**
@@ -225,9 +212,9 @@ public class PostalAddress implements Describable, Serializable {
 	 * Designates this Address as the primary billing Address of the containing
 	 * list. <!-- end-model-doc -->
 	 * 
+	 * @generated
 	 */
 	@Basic()
-	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean primaryBilling = false;
 
 	/**
@@ -235,22 +222,33 @@ public class PostalAddress implements Describable, Serializable {
 	 * Designates this Address as the primary billing Address of the containing
 	 * list. <!-- end-model-doc -->
 	 * 
+	 * @generated
 	 */
 	@Basic()
-//	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean primaryShipping = false;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
-	 * When this postal address was validated by the user. <!-- end-model-doc
-	 * -->
+	 * <!-- begin-user-doc --> Problem with @Columns and @Embeddable:
+	 * https://github.com/JadiraOrg/jadira/issues/20
+	 * 
+	 * @todo <b>WARNING:</b> Custom {@link #getValidationTime()} and
+	 *       {@link #setValidationTime(DateTime)} implementation! Please reset
+	 *       if Jadira issue is fixed. <!-- end-user-doc --> <!--
+	 *       begin-model-doc --> When this postal address was validated by the
+	 *       user. <!-- end-model-doc -->
 	 * 
 	 */
 	@Basic()
-	@Columns(columns = { @Column(name = "validationtime"),
-			@Column(name = "validationtime_zone") })
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTimeAndZone")
+	// @Columns(columns = { @Column(name = "validationtime"),
+	// @Column(name = "validationtime_zone") })
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime validationTime = null;
+
+	@Basic()
+	// @Columns(columns = { @Column(name = "validationtime"),
+	// @Column(name = "validationtime_zone") })
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTimeZoneAsString")
+	private DateTimeZone validationTime_zone = null;
 
 	/**
 	 * Returns the value of '<em><b>organization</b></em>' feature.
@@ -287,7 +285,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>street</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>street</b></em>' feature
@@ -299,7 +297,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getStreet() <em>street</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newStreet
@@ -313,7 +311,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>city</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>city</b></em>' feature
@@ -325,7 +323,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getCity() <em>city</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newCity
@@ -339,7 +337,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>postalCode</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>postalCode</b></em>' feature
@@ -352,7 +350,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPostalCode() <em>postalCode</em>}'
 	 * feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPostalCode
@@ -366,7 +364,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>province</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>province</b></em>' feature
@@ -378,7 +376,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getProvince() <em>province</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newProvince
@@ -457,7 +455,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>primaryMobile</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryMobile</b></em>' feature
@@ -470,7 +468,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryMobile() <em>primaryMobile</em>}
 	 * ' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryMobile
@@ -549,7 +547,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>phones</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>phones</b></em>' feature
@@ -561,7 +559,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getPhones() <em>phones</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPhones
@@ -575,7 +573,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>primaryHomePhone</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryHomePhone</b></em>' feature
@@ -588,7 +586,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryHomePhone()
 	 * <em>primaryHomePhone</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryHomePhone
@@ -634,7 +632,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>primaryWorkPhone</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryWorkPhone</b></em>' feature
@@ -647,7 +645,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryWorkPhone()
 	 * <em>primaryWorkPhone</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryWorkPhone
@@ -691,7 +689,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>primaryEmail</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryEmail</b></em>' feature
@@ -704,7 +702,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryEmail() <em>primaryEmail</em>}'
 	 * feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryEmail
@@ -793,7 +791,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#isPrimary() <em>primary</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * Designates this Address as the primary Address of the containing list.
 	 * <!-- end-model-doc -->
@@ -824,7 +822,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#isPrimaryBilling()
 	 * <em>primaryBilling</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * Designates this Address as the primary billing Address of the containing
 	 * list. <!-- end-model-doc -->
@@ -855,7 +853,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#isPrimaryShipping()
 	 * <em>primaryShipping</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * Designates this Address as the primary billing Address of the containing
 	 * list. <!-- end-model-doc -->
@@ -878,10 +876,10 @@ public class PostalAddress implements Describable, Serializable {
 	 * -->
 	 * 
 	 * @return the value of '<em><b>validationTime</b></em>' feature
-	 * @generated
 	 */
 	public DateTime getValidationTime() {
-		return validationTime;
+		return validationTime != null ? validationTime
+				.withZone(getValidationTime_zone()) : null;
 	}
 
 	/**
@@ -896,10 +894,22 @@ public class PostalAddress implements Describable, Serializable {
 	 *            the new value of the '
 	 *            {@link PostalAddress#getValidationTime() validationTime}'
 	 *            feature.
-	 * @generated
 	 */
 	public void setValidationTime(DateTime newValidationTime) {
 		validationTime = newValidationTime;
+		if (newValidationTime != null) {
+			this.validationTime_zone = newValidationTime.getZone();
+		} else {
+			this.validationTime_zone = null;
+		}
+	}
+
+	public DateTimeZone getValidationTime_zone() {
+		return validationTime_zone;
+	}
+
+	public void setValidationTime_zone(DateTimeZone validationTime_zone) {
+		this.validationTime_zone = validationTime_zone;
 	}
 
 	/**

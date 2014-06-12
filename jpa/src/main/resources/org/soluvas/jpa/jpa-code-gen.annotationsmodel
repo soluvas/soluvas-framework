@@ -78,7 +78,7 @@
         <eAttributeAnnotations xsi:type="modelannotations:EAttributeModelGenAnnotation" documentation="LDAP: mail." name="emails" getter="getEmails" setter="setEmails" validJavaMemberName="emails" useList="true" ownerEClassAnnotation="//@annotatedEPackages.0/@annotatedEClassifiers.0/@eClassAnnotations.0"/>
       </annotatedEStructuralFeatures>
       <annotatedEStructuralFeatures xsi:type="annotationsmodel:AnnotatedEAttribute">
-        <eAttribute href="jpa.ecore#//PostalAddress/description"/>
+        <eAttribute href="jpa.ecore#//Describable/description"/>
         <eAttributeAnnotations xsi:type="modelannotations:EAttributeModelGenAnnotation" documentation="What this address represents, usually &quot;Home&quot;, &quot;Work&quot;, etc." name="description" getter="getDescription" defaultValue="null" setter="setDescription" validJavaMemberName="description" useList="false" ownerEClassAnnotation="//@annotatedEPackages.0/@annotatedEClassifiers.0/@eClassAnnotations.0"/>
       </annotatedEStructuralFeatures>
       <annotatedEStructuralFeatures xsi:type="annotationsmodel:AnnotatedEAttribute">
@@ -95,7 +95,7 @@
       </annotatedEStructuralFeatures>
       <annotatedEStructuralFeatures xsi:type="annotationsmodel:AnnotatedEAttribute">
         <eAttribute href="jpa.ecore#//PostalAddress/validationTime"/>
-        <eAttributeAnnotations xsi:type="modelannotations:EAttributeModelGenAnnotation" documentation="When this postal address was validated by the user." name="validationTime" getter="getValidationTime" defaultValue="null" setter="setValidationTime" validJavaMemberName="validationTime" useList="false" ownerEClassAnnotation="//@annotatedEPackages.0/@annotatedEClassifiers.0/@eClassAnnotations.0"/>
+        <eAttributeAnnotations xsi:type="modelannotations:EAttributeModelGenAnnotation" documentation="When this postal address was validated by the user." name="validationTime" defaultValue="null" useList="false" ownerEClassAnnotation="//@annotatedEPackages.0/@annotatedEClassifiers.0/@eClassAnnotations.0"/>
       </annotatedEStructuralFeatures>
     </annotatedEClassifiers>
     <annotatedEClassifiers xsi:type="annotationsmodel:AnnotatedEDataType">

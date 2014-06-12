@@ -44,26 +44,6 @@
     <element xmi:type="ecore:EClass" href="jpa.ecore#//PostalAddress"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3nkCAlikEeObdY6jdxCTLQ" x="444" y="180"/>
   </children>
-  <children xmi:type="notation:Node" xmi:id="_RjkgoOonEeOdWMr7gvvmiA" type="1001">
-    <children xmi:type="notation:Node" xmi:id="_RjqnQOonEeOdWMr7gvvmiA" type="4001"/>
-    <children xmi:type="notation:Node" xmi:id="_RjrOUOonEeOdWMr7gvvmiA" type="5001">
-      <children xmi:type="notation:Node" xmi:id="_V6L7kOonEeOdWMr7gvvmiA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//Nameable/name"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_V6L7keonEeOdWMr7gvvmiA"/>
-      </children>
-      <styles xmi:type="notation:DrawerStyle" xmi:id="_RjrOUeonEeOdWMr7gvvmiA"/>
-      <styles xmi:type="notation:SortingStyle" xmi:id="_RjrOUuonEeOdWMr7gvvmiA"/>
-      <styles xmi:type="notation:FilteringStyle" xmi:id="_RjrOU-onEeOdWMr7gvvmiA"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_Rjr1YOonEeOdWMr7gvvmiA" type="5002">
-      <styles xmi:type="notation:DrawerStyle" xmi:id="_Rjr1YeonEeOdWMr7gvvmiA"/>
-      <styles xmi:type="notation:SortingStyle" xmi:id="_Rjr1YuonEeOdWMr7gvvmiA"/>
-      <styles xmi:type="notation:FilteringStyle" xmi:id="_Rjr1Y-onEeOdWMr7gvvmiA"/>
-    </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_RjkgoeonEeOdWMr7gvvmiA" fontColor="4210752" fontName="DejaVu Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="jpa.ecore#//Nameable"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RjkgouonEeOdWMr7gvvmiA" x="288" y="24"/>
-  </children>
   <children xmi:type="notation:Node" xmi:id="_SIkEEOonEeOdWMr7gvvmiA" type="1001">
     <children xmi:type="notation:Node" xmi:id="_SIkrIOonEeOdWMr7gvvmiA" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_SIkrIeonEeOdWMr7gvvmiA" type="5001">

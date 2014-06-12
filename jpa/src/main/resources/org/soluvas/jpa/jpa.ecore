@@ -59,22 +59,22 @@
         <details key="documentation" value="LDAP: mail."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
         defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Designates this Address as the primary Address of the containing list."/>
+        <details key="documentation" value="Designates this Address as the primary Address of the containing list.&#xA;Uses {@link Boolean} because can be {@null} when {@link Embeddable}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryBilling" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryBilling" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
         defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Designates this Address as the primary billing Address of the containing list."/>
+        <details key="documentation" value="Designates this Address as the primary billing Address of the containing list.&#xA;Uses {@link Boolean} because can be {@null} when {@link Embeddable}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryShipping" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryShipping" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
         defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Designates this Address as the primary billing Address of the containing list."/>
+        <details key="documentation" value="Designates this Address as the primary billing Address of the containing list.&#xA;Uses {@link Boolean} because can be {@null} when {@link Embeddable}."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="validationTime" eType="#//DateTime">

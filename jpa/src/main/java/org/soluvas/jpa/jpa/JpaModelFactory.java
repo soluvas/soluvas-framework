@@ -55,7 +55,7 @@ public class JpaModelFactory implements ModelFactory {
 	/**
 	 * Wraps an object in a {@link ModelObject}. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
+	 *
 	 * @param eClass
 	 *            the EClass of the object
 	 * @param adaptee
@@ -546,12 +546,12 @@ public class JpaModelFactory implements ModelFactory {
 
 	/**
 	 * The adapter/wrapper for the EClass '<em><b>PostalAddress</b></em>'.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param <E>
 	 *            the domain model java class
-	 * 
+	 *
 	 * @generated
 	 */
 	public static class PostalAddressModelObject<E extends PostalAddress>
@@ -766,12 +766,12 @@ public class JpaModelFactory implements ModelFactory {
 
 	/**
 	 * The adapter/wrapper for the EClass '<em><b>Describable</b></em>'.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param <E>
 	 *            the domain model java class
-	 * 
+	 *
 	 * @generated
 	 */
 	public static class DescribableModelObject<E extends Describable> extends
@@ -850,12 +850,12 @@ public class JpaModelFactory implements ModelFactory {
 
 	/**
 	 * The adapter/wrapper for the EClass '<em><b>Geolocation</b></em>'.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param <E>
 	 *            the domain model java class
-	 * 
+	 *
 	 * @generated
 	 */
 	public static class GeolocationModelObject<E extends Geolocation> extends
@@ -944,12 +944,12 @@ public class JpaModelFactory implements ModelFactory {
 
 	/**
 	 * The adapter/wrapper for the EClass '<em><b>PersonInfo</b></em>'.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param <E>
 	 *            the domain model java class
-	 * 
+	 *
 	 * @generated
 	 */
 	public static class PersonInfoModelObject<E extends PersonInfo> extends
@@ -1048,12 +1048,12 @@ public class JpaModelFactory implements ModelFactory {
 
 	/**
 	 * The adapter/wrapper for the EClass '<em><b>Positionable</b></em>'.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param <E>
 	 *            the domain model java class
-	 * 
+	 *
 	 * @generated
 	 */
 	public static class PositionableModelObject<E extends Positionable> extends
@@ -1132,12 +1132,12 @@ public class JpaModelFactory implements ModelFactory {
 
 	/**
 	 * The adapter/wrapper for the EClass '<em><b>NameContainer</b></em>'.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param <E>
 	 *            the domain model java class
-	 * 
+	 *
 	 * @generated
 	 */
 	public static class NameContainerModelObject<E extends NameContainer>
