@@ -218,7 +218,7 @@ public class PostalAddress implements Describable, Serializable {
 	 */
 	@Basic()
 	@Type(type = "org.hibernate.type.NumericBooleanType")
-	private boolean primary = false;
+	private Boolean primary = false;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -228,7 +228,7 @@ public class PostalAddress implements Describable, Serializable {
 	 */
 	@Basic()
 	@Type(type = "org.hibernate.type.NumericBooleanType")
-	private boolean primaryBilling = false;
+	private Boolean primaryBilling = false;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -237,8 +237,8 @@ public class PostalAddress implements Describable, Serializable {
 	 * 
 	 */
 	@Basic()
-	@Type(type = "org.hibernate.type.NumericBooleanType")
-	private boolean primaryShipping = false;
+//	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean primaryShipping = false;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -787,7 +787,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * @return the value of '<em><b>primary</b></em>' feature
 	 * @generated
 	 */
-	public boolean isPrimary() {
+	public Boolean isPrimary() {
 		return primary;
 	}
 
@@ -803,7 +803,7 @@ public class PostalAddress implements Describable, Serializable {
 	 *            primary}' feature.
 	 * @generated
 	 */
-	public void setPrimary(boolean newPrimary) {
+	public void setPrimary(Boolean newPrimary) {
 		primary = newPrimary;
 	}
 
@@ -817,7 +817,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * @return the value of '<em><b>primaryBilling</b></em>' feature
 	 * @generated
 	 */
-	public boolean isPrimaryBilling() {
+	public Boolean isPrimaryBilling() {
 		return primaryBilling;
 	}
 
@@ -834,7 +834,7 @@ public class PostalAddress implements Describable, Serializable {
 	 *            primaryBilling}' feature.
 	 * @generated
 	 */
-	public void setPrimaryBilling(boolean newPrimaryBilling) {
+	public void setPrimaryBilling(Boolean newPrimaryBilling) {
 		primaryBilling = newPrimaryBilling;
 	}
 
@@ -848,7 +848,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * @return the value of '<em><b>primaryShipping</b></em>' feature
 	 * @generated
 	 */
-	public boolean isPrimaryShipping() {
+	public Boolean isPrimaryShipping() {
 		return primaryShipping;
 	}
 
@@ -866,7 +866,7 @@ public class PostalAddress implements Describable, Serializable {
 	 *            feature.
 	 * @generated
 	 */
-	public void setPrimaryShipping(boolean newPrimaryShipping) {
+	public void setPrimaryShipping(Boolean newPrimaryShipping) {
 		primaryShipping = newPrimaryShipping;
 	}
 
