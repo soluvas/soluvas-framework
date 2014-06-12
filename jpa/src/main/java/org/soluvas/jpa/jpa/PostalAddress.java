@@ -3,11 +3,13 @@ package org.soluvas.jpa.jpa;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
+
 import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -213,9 +215,9 @@ public class PostalAddress implements Describable, Serializable {
 	 * Designates this Address as the primary Address of the containing list.
 	 * <!-- end-model-doc -->
 	 * 
-	 * @generated
 	 */
 	@Basic()
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean primary = false;
 
 	/**
@@ -223,9 +225,9 @@ public class PostalAddress implements Describable, Serializable {
 	 * Designates this Address as the primary billing Address of the containing
 	 * list. <!-- end-model-doc -->
 	 * 
-	 * @generated
 	 */
 	@Basic()
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean primaryBilling = false;
 
 	/**
@@ -233,9 +235,9 @@ public class PostalAddress implements Describable, Serializable {
 	 * Designates this Address as the primary billing Address of the containing
 	 * list. <!-- end-model-doc -->
 	 * 
-	 * @generated
 	 */
 	@Basic()
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean primaryShipping = false;
 
 	/**
@@ -752,6 +754,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * @return the value of '<em><b>description</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -769,6 +772,7 @@ public class PostalAddress implements Describable, Serializable {
 	 *            description}' feature.
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		description = newDescription;
 	}
