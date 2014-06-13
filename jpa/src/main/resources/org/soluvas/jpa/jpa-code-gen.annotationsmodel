@@ -121,11 +121,5 @@
         <eAttributeAnnotations xsi:type="modelannotations:EAttributeModelGenAnnotation" name="elevation" getter="getElevation" defaultValue="0.0f" setter="setElevation" validJavaMemberName="elevation" useList="false" ownerEClassAnnotation="//@annotatedEPackages.0/@annotatedEClassifiers.2/@eClassAnnotations.0"/>
       </annotatedEStructuralFeatures>
     </annotatedEClassifiers>
-    <annotatedEClassifiers xsi:type="annotationsmodel:AnnotatedEClass">
-      <eClass href="jpa.ecore#//PersonInfo"/>
-      <eClassAnnotations xsi:type="ormannotations:EClassORMAnnotation">
-        <embeddable/>
-      </eClassAnnotations>
-    </annotatedEClassifiers>
   </annotatedEPackages>
 </annotationsmodel:AnnotatedModel>

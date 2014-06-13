@@ -10,7 +10,7 @@ package org.soluvas.jpa.jpa;
 public interface Describable {
 	/**
 	 * Returns the value of '<em><b>description</em></b>' feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>description</b></em>' feature
@@ -21,7 +21,7 @@ public interface Describable {
 	/**
 	 * Sets the '{@link Describable#getDescription() <em>description</em>}'
 	 * feature.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newDescription

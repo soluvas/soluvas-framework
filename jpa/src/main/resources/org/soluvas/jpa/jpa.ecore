@@ -107,13 +107,6 @@
     <eLiterals name="female" value="2"/>
     <eLiterals name="unknown"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PersonInfo">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slug" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" eType="#//Gender"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="GenericStatus" instanceClassName="org.soluvas.commons.GenericStatus"/>
   <eClassifiers xsi:type="ecore:EClass" name="Positionable" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="positioner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"

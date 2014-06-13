@@ -23,7 +23,7 @@ import org.soluvas.commons.GenericStatus;
  * The <b>Package</b> for the model '<em><b>jpa</b></em>'. It contains
  * initialization code and access to the Factory to instantiate types of this
  * package.
- *
+ * 
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -57,56 +57,56 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int DATETIME_CLASSIFIER_ID = 7;
+	public static final int DATETIME_CLASSIFIER_ID = 6;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int GENDER_CLASSIFIER_ID = 12;
+	public static final int GENDER_CLASSIFIER_ID = 11;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int CURRENCYUNIT_CLASSIFIER_ID = 6;
+	public static final int CURRENCYUNIT_CLASSIFIER_ID = 5;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int LOCALDATE_CLASSIFIER_ID = 8;
+	public static final int LOCALDATE_CLASSIFIER_ID = 7;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int QUANTITY_CLASSIFIER_ID = 9;
+	public static final int QUANTITY_CLASSIFIER_ID = 8;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int UNIT_CLASSIFIER_ID = 10;
+	public static final int UNIT_CLASSIFIER_ID = 9;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int UUID_CLASSIFIER_ID = 11;
+	public static final int UUID_CLASSIFIER_ID = 10;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int GENERICSTATUS_CLASSIFIER_ID = 13;
+	public static final int GENERICSTATUS_CLASSIFIER_ID = 12;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -246,7 +246,7 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int DESCRIBABLE_CLASSIFIER_ID = 5;
+	public static final int DESCRIBABLE_CLASSIFIER_ID = 4;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -316,49 +316,7 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int PERSONINFO_CLASSIFIER_ID = 2;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public static final int PERSONINFO_ID_FEATURE_ID = 0;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public static final int PERSONINFO_SLUG_FEATURE_ID = 1;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public static final int PERSONINFO_NAME_FEATURE_ID = 2;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public static final int PERSONINFO_EMAIL_FEATURE_ID = 3;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public static final int PERSONINFO_GENDER_FEATURE_ID = 4;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public static final int POSITIONABLE_CLASSIFIER_ID = 3;
+	public static final int POSITIONABLE_CLASSIFIER_ID = 2;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -372,7 +330,7 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int NAMECONTAINER_CLASSIFIER_ID = 4;
+	public static final int NAMECONTAINER_CLASSIFIER_ID = 3;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -392,9 +350,9 @@ public class JpaModelPackage extends ModelPackage {
 	/**
 	 * Initializes this {@link ModelPackage}. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 *
+	 * 
 	 * @return an initialized instance of this class
-	 *
+	 * 
 	 * @generated
 	 */
 	public static JpaModelPackage initialize() {
@@ -428,8 +386,6 @@ public class JpaModelPackage extends ModelPackage {
 		ModelResolver.getInstance().registerClassModelMapping(
 				Geolocation.class, modelPackage.getGeolocationEClass(),
 				modelPackage);
-		ModelResolver.getInstance().registerClassModelMapping(PersonInfo.class,
-				modelPackage.getPersonInfoEClass(), modelPackage);
 		ModelResolver.getInstance().registerClassModelMapping(
 				Positionable.class, modelPackage.getPositionableEClass(),
 				modelPackage);
@@ -459,7 +415,7 @@ public class JpaModelPackage extends ModelPackage {
 	/**
 	 * Returns the nsUri of the {@link EPackage} managed by this Package
 	 * instance. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
+	 * 
 	 * @return the nsUri of the EPackage
 	 * @generated
 	 */
@@ -903,83 +859,6 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
-	 * Returns the {@link EClass} '<em><b>PersonInfo</b></em>'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return an instance of the {@link EClass} '<em><b>PersonInfo</b></em>'
-	 * @generated
-	 */
-	public EClass getPersonInfoEClass() {
-		return (EClass) getEPackage().getEClassifiers().get(
-				PERSONINFO_CLASSIFIER_ID);
-	}
-
-	/**
-	 * Returns the {@link EStructuralFeature} '<em><b>PersonInfo.id</b></em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return an instance of the {@link EStructuralFeature}: '
-	 *         <em><b>PersonInfo.id</b></em>'.
-	 * @generated
-	 */
-	public EAttribute getPersonInfo_Id() {
-		return (EAttribute) getPersonInfoEClass().getEAllStructuralFeatures()
-				.get(PERSONINFO_ID_FEATURE_ID);
-	}
-
-	/**
-	 * Returns the {@link EStructuralFeature} '<em><b>PersonInfo.slug</b></em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return an instance of the {@link EStructuralFeature}: '
-	 *         <em><b>PersonInfo.slug</b></em>'.
-	 * @generated
-	 */
-	public EAttribute getPersonInfo_Slug() {
-		return (EAttribute) getPersonInfoEClass().getEAllStructuralFeatures()
-				.get(PERSONINFO_SLUG_FEATURE_ID);
-	}
-
-	/**
-	 * Returns the {@link EStructuralFeature} '<em><b>PersonInfo.name</b></em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return an instance of the {@link EStructuralFeature}: '
-	 *         <em><b>PersonInfo.name</b></em>'.
-	 * @generated
-	 */
-	public EAttribute getPersonInfo_Name() {
-		return (EAttribute) getPersonInfoEClass().getEAllStructuralFeatures()
-				.get(PERSONINFO_NAME_FEATURE_ID);
-	}
-
-	/**
-	 * Returns the {@link EStructuralFeature} '<em><b>PersonInfo.email</b></em>
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return an instance of the {@link EStructuralFeature}: '
-	 *         <em><b>PersonInfo.email</b></em>'.
-	 * @generated
-	 */
-	public EAttribute getPersonInfo_Email() {
-		return (EAttribute) getPersonInfoEClass().getEAllStructuralFeatures()
-				.get(PERSONINFO_EMAIL_FEATURE_ID);
-	}
-
-	/**
-	 * Returns the {@link EStructuralFeature} '<em><b>PersonInfo.gender</b></em>
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return an instance of the {@link EStructuralFeature}: '
-	 *         <em><b>PersonInfo.gender</b></em>'.
-	 * @generated
-	 */
-	public EAttribute getPersonInfo_Gender() {
-		return (EAttribute) getPersonInfoEClass().getEAllStructuralFeatures()
-				.get(PERSONINFO_GENDER_FEATURE_ID);
-	}
-
-	/**
 	 * Returns the {@link EClass} '<em><b>Positionable</b></em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1151,16 +1030,12 @@ public class JpaModelPackage extends ModelPackage {
 			return Describable.class;
 		case GEOLOCATION_CLASSIFIER_ID:
 			return Geolocation.class;
-		case PERSONINFO_CLASSIFIER_ID:
-			return PersonInfo.class;
 		case POSITIONABLE_CLASSIFIER_ID:
 			return Positionable.class;
 		case NAMECONTAINER_CLASSIFIER_ID:
 			return NameContainer.class;
 		case DATETIME_CLASSIFIER_ID:
 			return DateTime.class;
-		case GENDER_CLASSIFIER_ID:
-			return Gender.class;
 		case CURRENCYUNIT_CLASSIFIER_ID:
 			return CurrencyUnit.class;
 		case LOCALDATE_CLASSIFIER_ID:
@@ -1171,6 +1046,8 @@ public class JpaModelPackage extends ModelPackage {
 			return Unit.class;
 		case UUID_CLASSIFIER_ID:
 			return UUID.class;
+		case GENDER_CLASSIFIER_ID:
+			return Gender.class;
 		case GENERICSTATUS_CLASSIFIER_ID:
 			return GenericStatus.class;
 		default:
