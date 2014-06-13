@@ -1,7 +1,10 @@
 package org.soluvas.jpa.jpa;
 
+import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
+
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
@@ -12,7 +15,7 @@ import org.hibernate.annotations.Type;
  * @generated
  */
 @Embeddable()
-public class PersonInfo {
+public class PersonInfo  implements Serializable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
