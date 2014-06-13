@@ -43,8 +43,6 @@ public class JpaModelFactory implements ModelFactory {
 			return createPostalAddress();
 		case JpaModelPackage.GEOLOCATION_CLASSIFIER_ID:
 			return createGeolocation();
-		case JpaModelPackage.PERSONINFO_CLASSIFIER_ID:
-			return createPersonInfo();
 		default:
 			throw new IllegalArgumentException("The EClass '"
 					+ eClass.getName()
@@ -55,7 +53,7 @@ public class JpaModelFactory implements ModelFactory {
 	/**
 	 * Wraps an object in a {@link ModelObject}. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 *
+	 * 
 	 * @param eClass
 	 *            the EClass of the object
 	 * @param adaptee
@@ -75,9 +73,6 @@ public class JpaModelFactory implements ModelFactory {
 			break;
 		case JpaModelPackage.GEOLOCATION_CLASSIFIER_ID:
 			modelObject = new GeolocationModelObject();
-			break;
-		case JpaModelPackage.PERSONINFO_CLASSIFIER_ID:
-			modelObject = new PersonInfoModelObject();
 			break;
 		case JpaModelPackage.POSITIONABLE_CLASSIFIER_ID:
 			modelObject = new PositionableModelObject();
@@ -147,17 +142,6 @@ public class JpaModelFactory implements ModelFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return an instance of the model object representing the EClass
-	 *         PersonInfo
-	 * @generated
-	 */
-	public PersonInfo createPersonInfo() {
-		return new PersonInfo();
-	}
-
-	/**
 	 * Converts an instance of an {@link EDataType} to a String. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -172,8 +156,6 @@ public class JpaModelFactory implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 		case JpaModelPackage.DATETIME_CLASSIFIER_ID:
 			return createDateTimeFromString(value);
-		case JpaModelPackage.GENDER_CLASSIFIER_ID:
-			return createGenderFromString(value);
 		case JpaModelPackage.CURRENCYUNIT_CLASSIFIER_ID:
 			return createCurrencyUnitFromString(value);
 		case JpaModelPackage.LOCALDATE_CLASSIFIER_ID:
@@ -184,6 +166,8 @@ public class JpaModelFactory implements ModelFactory {
 			return createUnitFromString(value);
 		case JpaModelPackage.UUID_CLASSIFIER_ID:
 			return createUUIDFromString(value);
+		case JpaModelPackage.GENDER_CLASSIFIER_ID:
+			return createGenderFromString(value);
 		case JpaModelPackage.GENERICSTATUS_CLASSIFIER_ID:
 			return createGenericStatusFromString(value);
 		default:
@@ -206,8 +190,6 @@ public class JpaModelFactory implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 		case JpaModelPackage.DATETIME_CLASSIFIER_ID:
 			return convertDateTimeToString((DateTime) value);
-		case JpaModelPackage.GENDER_CLASSIFIER_ID:
-			return convertGenderToString((Gender) value);
 		case JpaModelPackage.CURRENCYUNIT_CLASSIFIER_ID:
 			return convertCurrencyUnitToString((CurrencyUnit) value);
 		case JpaModelPackage.LOCALDATE_CLASSIFIER_ID:
@@ -218,6 +200,8 @@ public class JpaModelFactory implements ModelFactory {
 			return convertUnitToString((Unit) value);
 		case JpaModelPackage.UUID_CLASSIFIER_ID:
 			return convertUUIDToString((UUID) value);
+		case JpaModelPackage.GENDER_CLASSIFIER_ID:
+			return convertGenderToString((Gender) value);
 		case JpaModelPackage.GENERICSTATUS_CLASSIFIER_ID:
 			return convertGenericStatusToString((GenericStatus) value);
 		default:
@@ -546,12 +530,12 @@ public class JpaModelFactory implements ModelFactory {
 
 	/**
 	 * The adapter/wrapper for the EClass '<em><b>PostalAddress</b></em>'.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
+	 * 
 	 * @param <E>
 	 *            the domain model java class
-	 *
+	 * 
 	 * @generated
 	 */
 	public static class PostalAddressModelObject<E extends PostalAddress>
@@ -766,12 +750,12 @@ public class JpaModelFactory implements ModelFactory {
 
 	/**
 	 * The adapter/wrapper for the EClass '<em><b>Describable</b></em>'.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
+	 * 
 	 * @param <E>
 	 *            the domain model java class
-	 *
+	 * 
 	 * @generated
 	 */
 	public static class DescribableModelObject<E extends Describable> extends
@@ -850,12 +834,12 @@ public class JpaModelFactory implements ModelFactory {
 
 	/**
 	 * The adapter/wrapper for the EClass '<em><b>Geolocation</b></em>'.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
+	 * 
 	 * @param <E>
 	 *            the domain model java class
-	 *
+	 * 
 	 * @generated
 	 */
 	public static class GeolocationModelObject<E extends Geolocation> extends
@@ -943,117 +927,13 @@ public class JpaModelFactory implements ModelFactory {
 	}
 
 	/**
-	 * The adapter/wrapper for the EClass '<em><b>PersonInfo</b></em>'.
-	 *
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @param <E>
-	 *            the domain model java class
-	 *
-	 * @generated
-	 */
-	public static class PersonInfoModelObject<E extends PersonInfo> extends
-			AbstractModelObject<E> {
-		/**
-		 * @generated
-		 */
-		public EClass eClass() {
-			return JpaModelPackage.INSTANCE.getPersonInfoEClass();
-		}
-
-		/**
-		 * @generated
-		 */
-		public ModelPackage getModelPackage() {
-			return JpaModelPackage.INSTANCE;
-		}
-
-		/**
-		 * @generated
-		 */
-		@Override
-		public Object eGet(EStructuralFeature eStructuralFeature) {
-			final int featureID = eClass().getFeatureID(eStructuralFeature);
-			switch (featureID) {
-			case JpaModelPackage.PERSONINFO_ID_FEATURE_ID:
-				return getTarget().getId();
-			case JpaModelPackage.PERSONINFO_SLUG_FEATURE_ID:
-				return getTarget().getSlug();
-			case JpaModelPackage.PERSONINFO_NAME_FEATURE_ID:
-				return getTarget().getName();
-			case JpaModelPackage.PERSONINFO_EMAIL_FEATURE_ID:
-				return getTarget().getEmail();
-			case JpaModelPackage.PERSONINFO_GENDER_FEATURE_ID:
-				return getTarget().getGender();
-			default:
-				return super.eGet(eStructuralFeature);
-			}
-		}
-
-		/**
-		 * @generated
-		 */
-		@Override
-		public void eSet(EStructuralFeature eStructuralFeature, Object value) {
-			final int featureID = eClass().getFeatureID(eStructuralFeature);
-			switch (featureID) {
-			case JpaModelPackage.PERSONINFO_ID_FEATURE_ID:
-				getTarget().setId((String) value);
-				return;
-			case JpaModelPackage.PERSONINFO_SLUG_FEATURE_ID:
-				getTarget().setSlug((String) value);
-				return;
-			case JpaModelPackage.PERSONINFO_NAME_FEATURE_ID:
-				getTarget().setName((String) value);
-				return;
-			case JpaModelPackage.PERSONINFO_EMAIL_FEATURE_ID:
-				getTarget().setEmail((String) value);
-				return;
-			case JpaModelPackage.PERSONINFO_GENDER_FEATURE_ID:
-				getTarget().setGender((Gender) value);
-				return;
-			default:
-				super.eSet(eStructuralFeature, value);
-			}
-		}
-
-		/**
-		 * @generated
-		 */
-		@Override
-		public boolean eAddTo(EStructuralFeature eStructuralFeature,
-				Object value) {
-			final int featureID = eClass().getFeatureID(eStructuralFeature);
-			switch (featureID) {
-
-			default:
-				return super.eAddTo(eStructuralFeature, value);
-			}
-		}
-
-		/**
-		 * @generated
-		 */
-		@Override
-		public boolean eRemoveFrom(EStructuralFeature eStructuralFeature,
-				Object value) {
-			final int featureID = eClass().getFeatureID(eStructuralFeature);
-			switch (featureID) {
-
-			default:
-				return super.eRemoveFrom(eStructuralFeature, value);
-			}
-		}
-	}
-
-	/**
 	 * The adapter/wrapper for the EClass '<em><b>Positionable</b></em>'.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
+	 * 
 	 * @param <E>
 	 *            the domain model java class
-	 *
+	 * 
 	 * @generated
 	 */
 	public static class PositionableModelObject<E extends Positionable> extends
@@ -1132,12 +1012,12 @@ public class JpaModelFactory implements ModelFactory {
 
 	/**
 	 * The adapter/wrapper for the EClass '<em><b>NameContainer</b></em>'.
-	 *
+	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
+	 * 
 	 * @param <E>
 	 *            the domain model java class
-	 *
+	 * 
 	 * @generated
 	 */
 	public static class NameContainerModelObject<E extends NameContainer>
