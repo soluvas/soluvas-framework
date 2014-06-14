@@ -41,6 +41,10 @@ import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.tenant.CommandRequestAttributes;
 import org.soluvas.commons.tenant.TenantRef;
+import org.soluvas.commons.tenant.TenantRepository;
+import org.soluvas.commons.tenant.TenantRepositoryListener;
+import org.soluvas.commons.tenant.TenantsStarting;
+import org.soluvas.commons.tenant.TenantsStopping;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.GenericLookup;
@@ -56,6 +60,7 @@ import org.soluvas.data.push.RepositoryException;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.StatusAwareRepositoryBase;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -77,6 +82,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Sets.SetView;
 import com.google.common.eventbus.EventBus;
 
 /**
@@ -98,7 +104,7 @@ import com.google.common.eventbus.EventBus;
  */
 public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Serializable, E extends Enum<E>> 
 	extends StatusAwareRepositoryBase<T, ID>
-	implements JpaRepository<T, ID>, GenericLookup<T> {
+	implements JpaRepository<T, ID>, GenericLookup<T>, TenantRepositoryListener {
 
 	protected final Logger log;
 	@Inject
@@ -107,6 +113,8 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	protected DataSource dataSource;
 	@Inject
 	private BeanFactory beanFactory;
+	@Autowired(required=false)
+	private TenantRepository<?> tenantRepo;
 	
 	protected EntityManager em;
 	protected Class<T> entityClass;
@@ -250,6 +258,9 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 			}
 		}
 		
+		if (tenantRepo != null) {
+			tenantRepo.addListener(this);
+		}
 	}
 	
 	/**
@@ -273,6 +284,23 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	@PreDestroy
 	public void destroy() {
 		log.info("Shutting down {} JPA repository", entityClass.getSimpleName());
+	}
+	
+	@Override
+	public void onTenantsStarting(TenantsStarting starting) throws Exception {
+		final ImmutableSet<String> origTenantIds = starting.getAddeds().keySet();
+		final SetView<String> tenantIds = Sets.difference(origTenantIds, initialTenantIds);
+		log.info("Migrating {} {} JPA repositories (excluding {} initialTenants): {}", 
+				tenantIds.size(), entityClass.getSimpleName(), initialTenantIds.size(), tenantIds);
+		for (String tenantId : tenantIds) {
+			migrate(tenantId);
+		}
+		log.info("Migrated {} {} JPA repositories (excluding {} initialTenants): {}", 
+				tenantIds.size(), entityClass.getSimpleName(), initialTenantIds.size(), tenantIds);
+	}
+	
+	@Override
+	public void onTenantsStopping(TenantsStopping stopping) throws Exception {
 	}
 	
 	@Override @Transactional
