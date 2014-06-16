@@ -27,7 +27,6 @@ import org.soluvas.data.Mixin;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.code.morphia.annotations.Transient;
 import com.google.common.base.Strings;
@@ -415,7 +414,7 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override @JsonProperty
+	@Override
 	public EList<Attribute> getAttributes() {
 		if (attributes == null) {
 			attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, DataPackage.MIXIN__ATTRIBUTES);
@@ -426,9 +425,9 @@ public class MixinImpl extends EObjectImpl implements Mixin {
 	/**
 	 * @param attributes the attributes to set
 	 */
-	@Override @JsonIgnore @JsonDeserialize(as=BasicEList.class) @JsonSetter
-	public void setAttributes(EList<Attribute> attributes) {
-		throw new UnsupportedOperationException();
+	protected void setAttributes(EList<Attribute> attributes) {
+		getAttributes().clear();
+		getAttributes().addAll(attributes);
 	}
 
 	/**

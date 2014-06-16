@@ -58,6 +58,12 @@ public interface TermManager {
 	 */
 	Multimap<String, Term> getTermsByAttributeTypes();
 	
+	/**
+	 * @param qName
+	 * @return
+	 * @todo FIXME: Do <b>not</b> use this for dynamic kinds like {@code base_Color} and {@code base_Size},
+	 * 		because not yet updated to use {@link TermRepository}. For now please use {@code color/size} {@link TermRepository} instead.
+	 */
 	Term findTerm(String qName);
 
 } // TermManager
