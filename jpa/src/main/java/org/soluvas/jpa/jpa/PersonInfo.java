@@ -12,7 +12,6 @@ import org.hibernate.annotations.Type;
  * A representation of the model object '<em><b>PersonInfo</b></em>'. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
- * @generated
  */
 @Embeddable()
 public class PersonInfo  implements Serializable {
