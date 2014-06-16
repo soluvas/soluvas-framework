@@ -14,6 +14,8 @@ import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.Translatable;
 import org.soluvas.data.impl.TermImpl;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
@@ -37,6 +39,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @model
  * @generated
  */
+@JsonTypeInfo(use=Id.CLASS)
 @JsonDeserialize(as=TermImpl.class)
 public interface Term extends TermContainer, BundleAware, NameContainer, ResourceAware, NsPrefixable, Imageable, Positionable, Colorable, Translatable {
 	/**
