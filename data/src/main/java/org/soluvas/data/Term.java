@@ -12,6 +12,9 @@ import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.Translatable;
+import org.soluvas.data.impl.TermImpl;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,6 +37,7 @@ import org.soluvas.commons.Translatable;
  * @model
  * @generated
  */
+@JsonDeserialize(as=TermImpl.class)
 public interface Term extends TermContainer, BundleAware, NameContainer, ResourceAware, NsPrefixable, Imageable, Positionable, Colorable, Translatable {
 	/**
 	 * Returns the value of the '<em><b>Vocab</b></em>' reference.
