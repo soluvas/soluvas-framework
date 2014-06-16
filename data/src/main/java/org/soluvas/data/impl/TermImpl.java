@@ -3,11 +3,13 @@
 package org.soluvas.data.impl;
 
 import java.util.Collection;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
@@ -39,6 +41,7 @@ import org.soluvas.data.TermValue;
 import org.soluvas.data.Vocab;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Strings;
 
 /**
@@ -81,6 +84,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @generated
 	 * @ordered
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	protected EList<Term> terms;
 
 	/**
@@ -724,6 +728,11 @@ public class TermImpl extends EObjectImpl implements Term {
 		}
 		return translations;
 	}
+	
+	protected void setTranslations(Map<String, Translation> translations) {
+		getTranslations().clear();
+		getTranslations().putAll(translations);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -885,6 +894,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
+	@JsonIgnore
 	public String getQName() {
 		return Strings.nullToEmpty(getNsPrefix()) + "_" + Strings.nullToEmpty(getName());
 	}
