@@ -97,7 +97,7 @@ public interface PersonRepository extends
 	void setNullCustomerRole(Collection<String> customerRoleIds);
 	
 	@Nullable
-	String findCustomerRoleByPersonId(String personId);
+	String getCustomerRoleByPersonId(String personId);
 
 }
 

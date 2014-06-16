@@ -429,18 +429,19 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 
 	@Override
 	public void setNullCustomerRole(Collection<String> customerRoleIds) {
-		primary.update(new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds)),
-				new BasicDBObject("$set", new BasicDBObject("customerRole", null))
-				, false, true);
+		primary.update(
+				new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds)),
+				new BasicDBObject("$set", new BasicDBObject("customerRole", null)),
+				false, true);
 	}
 
 	@Override
-	public String findCustomerRoleByPersonId(String personId) {
+	public String getCustomerRoleByPersonId(String personId) {
 		final BasicDBObject query = new BasicDBObject("_id", personId);
-		final BasicDBObject field = new BasicDBObject("customerRole", 1);
+		final BasicDBObject field = new BasicDBObject("customerRole", true);
 		final DBObject object = findOnePrimary(query, field, "findCustomerRoleByPersonId", personId);
 		final String customerRole = (String) object.get("customerRole");
-		log.debug("Got customerRole {} by personID {}", customerRole, personId);
+		log.debug("Person {}'s customerRole is {}", personId, customerRole);
 		return customerRole;
 	}
 

@@ -562,7 +562,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public String findCustomerRoleByPersonId(String personId) {
+	public String getCustomerRoleByPersonId(String personId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

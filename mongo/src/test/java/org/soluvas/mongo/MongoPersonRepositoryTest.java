@@ -117,7 +117,7 @@ public class MongoPersonRepositoryTest {
 	@Test
 	public void findCustomerRole() {
 		final String personId = "listriana_suherman";
-		final String customerRole = personRepo.findCustomerRoleByPersonId(personId);
+		final String customerRole = personRepo.getCustomerRoleByPersonId(personId);
 	}
 	
 }
