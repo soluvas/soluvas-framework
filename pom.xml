@@ -927,7 +927,7 @@
 			<id>sonatype-nexus</id>
 			<url>https://oss.sonatype.org/content/groups/public/</url>
 			<snapshots>
-				<enabled>true</enabled>
+				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 		<repository>
@@ -941,7 +941,7 @@
 			<id>bippo-nexus-public</id>
 			<url>http://nexus.bippo.co.id/nexus/content/groups/public/</url>
 			<snapshots>
-				<enabled>true</enabled>
+				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 		<repository>
