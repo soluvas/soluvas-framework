@@ -16,6 +16,7 @@ import org.eclipse.emf.texo.model.ModelPackage;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.soluvas.commons.Gender;
 import org.soluvas.commons.GenericStatus;
 
 /**
@@ -166,10 +167,10 @@ public class JpaModelFactory implements ModelFactory {
 			return createUnitFromString(value);
 		case JpaModelPackage.UUID_CLASSIFIER_ID:
 			return createUUIDFromString(value);
-		case JpaModelPackage.GENDER_CLASSIFIER_ID:
-			return createGenderFromString(value);
 		case JpaModelPackage.GENERICSTATUS_CLASSIFIER_ID:
 			return createGenericStatusFromString(value);
+		case JpaModelPackage.GENDER_CLASSIFIER_ID:
+			return createGenderFromString(value);
 		default:
 			throw new IllegalArgumentException("The EDatatype '" + eDataType
 					+ "' is not defined in this EPackage");
@@ -200,10 +201,10 @@ public class JpaModelFactory implements ModelFactory {
 			return convertUnitToString((Unit) value);
 		case JpaModelPackage.UUID_CLASSIFIER_ID:
 			return convertUUIDToString((UUID) value);
-		case JpaModelPackage.GENDER_CLASSIFIER_ID:
-			return convertGenderToString((Gender) value);
 		case JpaModelPackage.GENERICSTATUS_CLASSIFIER_ID:
 			return convertGenericStatusToString((GenericStatus) value);
+		case JpaModelPackage.GENDER_CLASSIFIER_ID:
+			return convertGenderToString((Gender) value);
 		default:
 			throw new IllegalArgumentException("The EDatatype '" + eDataType
 					+ "' is not defined in this EPackage.");
@@ -248,40 +249,6 @@ public class JpaModelFactory implements ModelFactory {
 		throw new UnsupportedOperationException(
 				"Operation not support for EDataType " + eDataType.getName()
 						+ " converting from value " + value);
-	}
-
-	/**
-	 * Converts the EDataType: Gender to a String. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *            the object to convert
-	 * @return the String representing the value, if value == null then null is
-	 *         returned
-	 * @generated
-	 */
-	public String convertGenderToString(Gender value) {
-		if (value == null) {
-			return null;
-		}
-		return value.toString();
-	}
-
-	/**
-	 * Creates an instance of the EDataType: Gender from a String. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the string value to convert to an object
-	 * @return the instance of the data type, if value == null then null is
-	 *         returned
-	 * @generated
-	 */
-	public Gender createGenderFromString(String value) {
-		if (value == null) {
-			return null;
-		}
-		return Gender.get(value);
 	}
 
 	/**
@@ -523,6 +490,46 @@ public class JpaModelFactory implements ModelFactory {
 		}
 		EDataType eDataType = JpaModelPackage.INSTANCE
 				.getGenericStatusEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Converts the EDataType: Gender to a String. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertGenderToString(Gender value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getGenderEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: Gender from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public Gender createGenderFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getGenderEDataType();
 		throw new UnsupportedOperationException(
 				"Operation not support for EDataType " + eDataType.getName()
 						+ " converting from value " + value);

@@ -220,10 +220,6 @@
     </eTypeParameters>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="UUID" instanceClassName="java.util.UUID"/>
-  <eClassifiers xsi:type="ecore:EEnum" name="Gender">
-    <eLiterals name="male" value="1"/>
-    <eLiterals name="female" value="2"/>
-    <eLiterals name="unknown"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="GenericStatus" instanceClassName="org.soluvas.commons.GenericStatus"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Gender" instanceClassName="org.soluvas.commons.Gender"/>
 </ecore:EPackage>

@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.texo.model.ModelFactory;
@@ -17,6 +16,7 @@ import org.eclipse.emf.texo.utils.ModelUtils;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.soluvas.commons.Gender;
 import org.soluvas.commons.GenericStatus;
 
 /**
@@ -64,13 +64,6 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int GENDER_CLASSIFIER_ID = 11;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
 	public static final int CURRENCYUNIT_CLASSIFIER_ID = 5;
 
 	/**
@@ -106,7 +99,14 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int GENERICSTATUS_CLASSIFIER_ID = 12;
+	public static final int GENERICSTATUS_CLASSIFIER_ID = 11;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int GENDER_CLASSIFIER_ID = 12;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -392,9 +392,6 @@ public class JpaModelPackage extends ModelPackage {
 		ModelResolver.getInstance().registerClassModelMapping(
 				NameContainer.class, modelPackage.getNameContainerEClass(),
 				modelPackage);
-
-		ModelResolver.getInstance().registerClassModelMapping(Gender.class,
-				modelPackage.getGenderEEnum(), modelPackage);
 
 		// and return ourselves
 		return modelPackage;
@@ -924,18 +921,6 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
-	 * Returns the EEnum '<em><b>Gender</b></em>'. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @return an instance of the EEnum representing '<em><b>Gender</b></em>'
-	 * @generated
-	 */
-	public EEnum getGenderEEnum() {
-		return (EEnum) getEPackage().getEClassifiers()
-				.get(GENDER_CLASSIFIER_ID);
-	}
-
-	/**
 	 * Returns the {@link EDataType} '<em><b>CurrencyUnit</b></em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1014,6 +999,19 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
+	 * Returns the {@link EDataType} '<em><b>Gender</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>Gender</b></em>'
+	 * @generated
+	 */
+	public EDataType getGenderEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				GENDER_CLASSIFIER_ID);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param eClassifier
@@ -1046,10 +1044,10 @@ public class JpaModelPackage extends ModelPackage {
 			return Unit.class;
 		case UUID_CLASSIFIER_ID:
 			return UUID.class;
-		case GENDER_CLASSIFIER_ID:
-			return Gender.class;
 		case GENERICSTATUS_CLASSIFIER_ID:
 			return GenericStatus.class;
+		case GENDER_CLASSIFIER_ID:
+			return Gender.class;
 		default:
 			throw new IllegalArgumentException("The EClassifier '"
 					+ eClassifier + "' is not defined in this EPackage");

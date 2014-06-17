@@ -102,11 +102,6 @@
     </eTypeParameters>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="UUID" instanceClassName="java.util.UUID"/>
-  <eClassifiers xsi:type="ecore:EEnum" name="Gender">
-    <eLiterals name="male" value="1"/>
-    <eLiterals name="female" value="2"/>
-    <eLiterals name="unknown"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="GenericStatus" instanceClassName="org.soluvas.commons.GenericStatus"/>
   <eClassifiers xsi:type="ecore:EClass" name="Positionable" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="positioner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
@@ -132,4 +127,5 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Gender" instanceClassName="org.soluvas.commons.Gender"/>
 </ecore:EPackage>
