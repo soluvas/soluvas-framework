@@ -3,8 +3,10 @@ package org.soluvas.jpa.jpa;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -29,11 +31,50 @@ import org.joda.time.DateTimeZone;
  */
 @Embeddable()
 public class PostalAddress implements Describable, Serializable {
+	
+	public PostalAddress() {
+		super();
+	}
+	
+	public PostalAddress(final org.soluvas.commons.PostalAddress postalAddressUp) {
+		final PostalAddress address = new PostalAddress();
+		address.setCity(postalAddressUp.getCity());
+		address.setCountry(postalAddressUp.getCountry());
+		address.setCountryCode(postalAddressUp.getCountryCode());
+		address.setDescription(postalAddressUp.getDescription());
+		address.setEmails(postalAddressUp.getEmails());
+		address.setHomePhones(postalAddressUp.getHomePhones());
+		address.setMobiles(postalAddressUp.getMobiles());
+		address.setName(postalAddressUp.getName());
+		address.setOrganization(postalAddressUp.getOrganization());
+		address.setPhones(postalAddressUp.getPhones());
+		address.setPostalCode(postalAddressUp.getPostalCode());
+		address.setPrimary(postalAddressUp.isPrimary());
+		address.setPrimaryBilling(postalAddressUp.isPrimaryBilling());
+		address.setPrimaryEmail(postalAddressUp.getPrimaryEmail());
+		address.setPrimaryHomePhone(postalAddressUp.getPrimaryHomePhone());
+		address.setPrimaryMobile(postalAddressUp.getPrimaryMobile());
+		address.setPrimaryPhone(postalAddressUp.getPrimaryPhone());
+		address.setPrimaryShipping(postalAddressUp.isPrimaryShipping());
+		address.setPrimaryWorkPhone(postalAddressUp.getPrimaryWorkPhone());
+		address.setProvince(postalAddressUp.getProvince());
+		address.setStreet(postalAddressUp.getStreet());
+		address.setValidationTime(postalAddressUp.getValidationTime());
+		address.setWorkPhones(postalAddressUp.getWorkPhones());
+	}
 
 	/**
 	 * @generated
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Basic()
+	private String name = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -194,6 +235,32 @@ public class PostalAddress implements Describable, Serializable {
 	 */
 	@Basic()
 	private String description = null;
+
+	/**
+	 * Returns the value of '<em><b>name</b></em>' feature.
+	 * 
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of '<em><b>name</b></em>' feature
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Sets the '{@link PostalAddress#getName() <em>name</em>}' feature.
+	 * 
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param newName
+	 *            the new value of the '{@link PostalAddress#getName() name}'
+	 *            feature.
+	 * @generated
+	 */
+	public void setName(String newName) {
+		name = newName;
+	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -750,6 +817,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * @return the value of '<em><b>description</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -767,6 +835,7 @@ public class PostalAddress implements Describable, Serializable {
 	 *            description}' feature.
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		description = newDescription;
 	}
@@ -916,12 +985,13 @@ public class PostalAddress implements Describable, Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "PostalAddress " + " [organization: " + getOrganization() + "]"
-				+ " [street: " + getStreet() + "]" + " [city: " + getCity()
-				+ "]" + " [postalCode: " + getPostalCode() + "]"
-				+ " [province: " + getProvince() + "]" + " [country: "
-				+ getCountry() + "]" + " [countryCode: " + getCountryCode()
-				+ "]" + " [primaryMobile: " + getPrimaryMobile() + "]"
+		return "PostalAddress " + " [name: " + getName() + "]"
+				+ " [organization: " + getOrganization() + "]" + " [street: "
+				+ getStreet() + "]" + " [city: " + getCity() + "]"
+				+ " [postalCode: " + getPostalCode() + "]" + " [province: "
+				+ getProvince() + "]" + " [country: " + getCountry() + "]"
+				+ " [countryCode: " + getCountryCode() + "]"
+				+ " [primaryMobile: " + getPrimaryMobile() + "]"
 				+ " [primaryPhone: " + getPrimaryPhone() + "]"
 				+ " [primaryHomePhone: " + getPrimaryHomePhone() + "]"
 				+ " [primaryWorkPhone: " + getPrimaryWorkPhone() + "]"

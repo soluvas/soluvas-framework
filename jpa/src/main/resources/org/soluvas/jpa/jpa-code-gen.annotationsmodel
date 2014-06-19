@@ -10,6 +10,9 @@
         <embeddable/>
       </eClassAnnotations>
       <annotatedEStructuralFeatures xsi:type="annotationsmodel:AnnotatedEAttribute">
+        <eAttribute href="jpa.ecore#//PostalAddress/name"/>
+      </annotatedEStructuralFeatures>
+      <annotatedEStructuralFeatures xsi:type="annotationsmodel:AnnotatedEAttribute">
         <eAttribute href="jpa.ecore#//PostalAddress/organization"/>
         <eAttributeAnnotations xsi:type="modelannotations:EAttributeModelGenAnnotation" documentation="Organization or company name who will send or receive.&#xA;Can be empty.&#xA;RFC2256: organization this object belongs to&#xA;LDAP: o, organizationName" name="organization" getter="getOrganization" defaultValue="null" setter="setOrganization" validJavaMemberName="organization" useList="false" ownerEClassAnnotation="//@annotatedEPackages.0/@annotatedEClassifiers.0/@eClassAnnotations.0"/>
       </annotatedEStructuralFeatures>
