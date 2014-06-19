@@ -568,6 +568,8 @@ public class JpaModelFactory implements ModelFactory {
 		public Object eGet(EStructuralFeature eStructuralFeature) {
 			final int featureID = eClass().getFeatureID(eStructuralFeature);
 			switch (featureID) {
+			case JpaModelPackage.POSTALADDRESS_NAME_FEATURE_ID:
+				return getTarget().getName();
 			case JpaModelPackage.POSTALADDRESS_ORGANIZATION_FEATURE_ID:
 				return getTarget().getOrganization();
 			case JpaModelPackage.POSTALADDRESS_STREET_FEATURE_ID:
@@ -625,6 +627,9 @@ public class JpaModelFactory implements ModelFactory {
 		public void eSet(EStructuralFeature eStructuralFeature, Object value) {
 			final int featureID = eClass().getFeatureID(eStructuralFeature);
 			switch (featureID) {
+			case JpaModelPackage.POSTALADDRESS_NAME_FEATURE_ID:
+				getTarget().setName((String) value);
+				return;
 			case JpaModelPackage.POSTALADDRESS_ORGANIZATION_FEATURE_ID:
 				getTarget().setOrganization((String) value);
 				return;

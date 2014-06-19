@@ -5,6 +5,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="See http://www.upu.int/en/activities/addressing/standards.html - UPU S42.&#xA;For {@link #description} attribute: What this address represents, usually &quot;Home&quot;, &quot;Work&quot;, etc.&#xA;&#xA;ID is RFC1274: unique identifer.&#xA;LDAP: uniqueIdentifier&#xA;&#xA;'name' attribute is Person name who will receive.&#xA;RFC2256: common name(s) for which the entity is known by.&#xA;cn, commonName.&#xA;&#xA;Can be used as:&#xA;&#xA;1. Billing Address in SalesQuote/SalesOrder&#xA;2. Shipping Address in SalesQuote/SalesOrder&#xA;3. Origin Address in SalesQuote/SalesOrder&#xA;4. Person (Customer) Address&#xA;5. Shop Address&#xA;6. Mall Address&#xA;"/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="organization" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Organization or company name who will send or receive.&#xA;Can be empty.&#xA;RFC2256: organization this object belongs to&#xA;LDAP: o, organizationName"/>

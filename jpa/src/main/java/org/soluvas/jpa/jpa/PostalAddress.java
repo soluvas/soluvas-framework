@@ -36,6 +36,14 @@ public class PostalAddress implements Describable, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Basic()
+	private String name = null;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * Organization or company name who will send or receive. Can be empty.
 	 * RFC2256: organization this object belongs to LDAP: o, organizationName
@@ -194,6 +202,32 @@ public class PostalAddress implements Describable, Serializable {
 	 */
 	@Basic()
 	private String description = null;
+
+	/**
+	 * Returns the value of '<em><b>name</b></em>' feature.
+	 * 
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of '<em><b>name</b></em>' feature
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Sets the '{@link PostalAddress#getName() <em>name</em>}' feature.
+	 * 
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param newName
+	 *            the new value of the '{@link PostalAddress#getName() name}'
+	 *            feature.
+	 * @generated
+	 */
+	public void setName(String newName) {
+		name = newName;
+	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -916,12 +950,13 @@ public class PostalAddress implements Describable, Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "PostalAddress " + " [organization: " + getOrganization() + "]"
-				+ " [street: " + getStreet() + "]" + " [city: " + getCity()
-				+ "]" + " [postalCode: " + getPostalCode() + "]"
-				+ " [province: " + getProvince() + "]" + " [country: "
-				+ getCountry() + "]" + " [countryCode: " + getCountryCode()
-				+ "]" + " [primaryMobile: " + getPrimaryMobile() + "]"
+		return "PostalAddress " + " [name: " + getName() + "]"
+				+ " [organization: " + getOrganization() + "]" + " [street: "
+				+ getStreet() + "]" + " [city: " + getCity() + "]"
+				+ " [postalCode: " + getPostalCode() + "]" + " [province: "
+				+ getProvince() + "]" + " [country: " + getCountry() + "]"
+				+ " [countryCode: " + getCountryCode() + "]"
+				+ " [primaryMobile: " + getPrimaryMobile() + "]"
 				+ " [primaryPhone: " + getPrimaryPhone() + "]"
 				+ " [primaryHomePhone: " + getPrimaryHomePhone() + "]"
 				+ " [primaryWorkPhone: " + getPrimaryWorkPhone() + "]"
