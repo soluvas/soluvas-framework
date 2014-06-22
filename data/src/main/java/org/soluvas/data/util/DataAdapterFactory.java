@@ -2,6 +2,7 @@
  */
 package org.soluvas.data.util;
 
+import java.io.Serializable;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -97,7 +98,7 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 				return createAttributeAdapter();
 			}
 			@Override
-			public <T> Adapter caseValue(Value<T> object) {
+			public <T extends Serializable> Adapter caseValue(Value<T> object) {
 				return createValueAdapter();
 			}
 			@Override
@@ -117,7 +118,7 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 				return createMixinAdapter();
 			}
 			@Override
-			public <T> Adapter caseRangeValue(RangeValue<T> object) {
+			public <T extends Serializable> Adapter caseRangeValue(RangeValue<T> object) {
 				return createRangeValueAdapter();
 			}
 			@Override

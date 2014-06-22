@@ -112,7 +112,9 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Attribute having single or multiple values.&#xA;&#xA;{&#xA;attributes:&#xA;  color: [{value: &quot;red&quot;, displayValue: &quot;Merah&quot;}],&#xA;  berbatikMaterial: [{value: &quot;katun&quot;, displayValue: &quot;Katun&quot;}],&#xA;  berbatikShawlLength: [{value: &quot;90cm&quot;, displayValue: &quot;90 cm&quot;}],&#xA;mixins: {&#xA;  &quot;color&quot;: {&#xA;    attributeTypes: {&#xA;      color: {className: &quot;TermValue&quot;, &quot;name&quot;: &quot;color&quot;, &quot;label&quot;: &quot;Warna&quot;}, // nsPrefix: builtin&#xA;    },&#xA;  &quot;berbatik&quot;: {&#xA;    attributeTypes: {&#xA;      berbatikMaterial: {className: &quot;TermValue&quot;, nsPrefix: &quot;berbatik&quot;, name: &quot;material&quot;, label: &quot;Material&quot;},&#xA;      berbatikBatikAge: {className: &quot;TermValue&quot;, nsPrefix: &quot;berbatik&quot;, name: &quot;batikAge&quot;, label: &quot;Batik Age&quot;},&#xA;    }&#xA;  },&#xA;}&#xA;&#xA;&#xA;&quot;berbatik:material&quot;: [{value: &quot;Katun&quot;}],&#xA;&#xA;nggak enak:&#xA;product['berbatik:material'][0].displayValue&#xA;&#xA;lebih enak:&#xA;&#xA;&lt;p>Warna: {{product.attributes.color.0.displayValue}}&lt;/p>&#xA;&lt;p>Material: {{product.attributes.berbatikMaterial.0.displayValue}}&lt;/p>&#xA;"/>
     </eAnnotations>
-    <eTypeParameters name="T"/>
+    <eTypeParameters name="T">
+      <eBounds eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Serializable"/>
+    </eTypeParameters>
     <eOperations name="getString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Convert the mixin value to a single string. Paths are separated with '/'. Ranges are separated with &quot;-&quot; or &quot;..&quot; (TODO: which one?).&#xA;Semantics are prefixed: &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;>&quot;, &quot;>=&quot;. equal &quot;=&quot; is default if not specified.&#xA;&#xA;&lt;p>9 cm would be &quot;9cm&quot;. Bags > Hobos would be &quot;bags_hobos&quot; (using ID) or &quot;bags/hobos&quot; (using slugPath).&#xA;&#xA;&lt;p>9 cm, 20 km would be &quot;9cm,20km&quot;.&#xA;&#xA;&lt;p>&quot;2012-12-30-2012-12-30&quot;&#xA;&quot;2012-12-30..2012-12-30&quot;&#xA;&quot;2012-12-30T15:15:70.863+0700-2012-12-30T15:15:70.863+0700&quot;&#xA;&quot;2012-12-30T15:15:70.863+0700..2012-12-30T15:15:70.863+0700&quot;&#xA;&quot;atang-sutisna-rudi-wijaya&quot;&#xA;&quot;atang-sutisna..rudi-wijaya&quot;&#xA;&quot;atang_sutisna-rudi_wijaya&quot;&#xA;&quot;atang_sutisna..rudi_wijaya&quot;&#xA;"/>
@@ -190,7 +192,9 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Range attribute's primary value can be either the start or end value."/>
     </eAnnotations>
-    <eTypeParameters name="T"/>
+    <eTypeParameters name="T">
+      <eBounds eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Serializable"/>
+    </eTypeParameters>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="startValue">
       <eGenericType eTypeParameter="#//RangeValue/T"/>
     </eStructuralFeatures>

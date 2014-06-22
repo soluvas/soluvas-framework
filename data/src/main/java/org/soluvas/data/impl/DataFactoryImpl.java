@@ -2,6 +2,7 @@
  */
 package org.soluvas.data.impl;
 
+import java.io.Serializable;
 import javax.measure.DecimalMeasure;
 import javax.measure.Measure;
 
@@ -230,7 +231,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * @generated
 	 */
 	@Override
-	public <T> RangeValue<T> createRangeValue() {
+	public <T extends Serializable> RangeValue<T> createRangeValue() {
 		RangeValueImpl<T> rangeValue = new RangeValueImpl<T>();
 		return rangeValue;
 	}

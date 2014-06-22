@@ -2,6 +2,7 @@
  */
 package org.soluvas.data.util;
 
+import java.io.Serializable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -295,7 +296,7 @@ public class DataSwitch<T1> extends Switch<T1> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public <T> T1 caseValue(Value<T> object) {
+	public <T extends Serializable> T1 caseValue(Value<T> object) {
 		return null;
 	}
 
@@ -370,7 +371,7 @@ public class DataSwitch<T1> extends Switch<T1> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public <T> T1 caseRangeValue(RangeValue<T> object) {
+	public <T extends Serializable> T1 caseRangeValue(RangeValue<T> object) {
 		return null;
 	}
 

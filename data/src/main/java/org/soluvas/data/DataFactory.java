@@ -2,6 +2,7 @@
  */
 package org.soluvas.data;
 
+import java.io.Serializable;
 import org.eclipse.emf.ecore.EFactory;
 
 /**
@@ -73,7 +74,7 @@ public interface DataFactory extends EFactory {
 	 * @return a new object of class '<em>Range Value</em>'.
 	 * @generated
 	 */
-	<T> RangeValue<T> createRangeValue();
+	<T extends Serializable> RangeValue<T> createRangeValue();
 
 	/**
 	 * Returns a new object of class '<em>Term Value</em>'.

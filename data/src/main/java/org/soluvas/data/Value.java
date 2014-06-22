@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import java.io.Serializable;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,11 +57,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
  * </p>
  *
  * @see org.soluvas.data.DataPackage#getValue()
- * @model abstract="true"
+ * @model abstract="true" TBounds="org.soluvas.commons.Serializable"
  * @generated
  */
 @JsonTypeInfo(use=Id.CLASS)
-public interface Value<T> extends EObject {
+public interface Value<T extends Serializable> extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
