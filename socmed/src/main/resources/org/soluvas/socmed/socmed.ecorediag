@@ -15,6 +15,18 @@
         <element xmi:type="ecore:EAttribute" href="socmed.ecore#//FacebookSysConfig/facebookTenantAccessToken"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Tgly4uf2EeOnrdsTQhibwA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_QDkxcPllEeOGX_5zK5JHnw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="socmed.ecore#//FacebookSysConfig/facebookProfileId"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_QDkxcfllEeOGX_5zK5JHnw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_QnCD0PllEeOGX_5zK5JHnw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="socmed.ecore#//FacebookSysConfig/facebookProfileUsername"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_QnCD0fllEeOGX_5zK5JHnw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_HiTyoPlzEeOGX_5zK5JHnw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="socmed.ecore#//FacebookSysConfig/facebookProfileName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_HiTyoflzEeOGX_5zK5JHnw"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_Tgly4-f2EeOnrdsTQhibwA" type="2001">
         <element xmi:type="ecore:EAttribute" href="socmed.ecore#//FacebookSysConfig/facebookTenantPageId"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Tgly5Of2EeOnrdsTQhibwA"/>

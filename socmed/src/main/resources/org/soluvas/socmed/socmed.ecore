@@ -21,6 +21,22 @@
         <details key="documentation" value="Facebook access token for the tenant/mall Facebook Page. This is a Page token, not a User token."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookProfileId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Facebook (User) Profile ID, if exists."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookProfileUsername"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Facebook (User) Profile username, if exists."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookProfileName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="For some strange reason, Facebook ID is not unique, a user can have 2 different IDs. :(&#xA;So this is additional way to check for posts/comments by self."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="facebookTenantPageId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Facebook Page ID for the tenant/mall Facebook Page. This is a Page ID, not a User ID."/>

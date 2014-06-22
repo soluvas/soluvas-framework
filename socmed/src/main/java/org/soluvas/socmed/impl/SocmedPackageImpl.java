@@ -158,7 +158,7 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFacebookSysConfig_FacebookTenantPageId() {
+	public EAttribute getFacebookSysConfig_FacebookProfileId() {
 		return (EAttribute)facebookSysConfigEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -167,7 +167,7 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFacebookSysConfig_FacebookTenantPageUsername() {
+	public EAttribute getFacebookSysConfig_FacebookProfileUsername() {
 		return (EAttribute)facebookSysConfigEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -176,7 +176,7 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFacebookSysConfig_FacebookTenantPublishEnabled() {
+	public EAttribute getFacebookSysConfig_FacebookProfileName() {
 		return (EAttribute)facebookSysConfigEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -185,8 +185,35 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFacebookSysConfig_FacebookExplicitlyShared() {
+	public EAttribute getFacebookSysConfig_FacebookTenantPageId() {
 		return (EAttribute)facebookSysConfigEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFacebookSysConfig_FacebookTenantPageUsername() {
+		return (EAttribute)facebookSysConfigEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFacebookSysConfig_FacebookTenantPublishEnabled() {
+		return (EAttribute)facebookSysConfigEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFacebookSysConfig_FacebookExplicitlyShared() {
+		return (EAttribute)facebookSysConfigEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -329,6 +356,9 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_APP_ID);
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_APP_SECRET);
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_ACCESS_TOKEN);
+		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_PROFILE_ID);
+		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_PROFILE_USERNAME);
+		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_PROFILE_NAME);
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PAGE_ID);
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PAGE_USERNAME);
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PUBLISH_ENABLED);
@@ -385,6 +415,9 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		initEAttribute(getFacebookSysConfig_FacebookAppId(), ecorePackage.getELongObject(), "facebookAppId", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacebookSysConfig_FacebookAppSecret(), ecorePackage.getEString(), "facebookAppSecret", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacebookSysConfig_FacebookTenantAccessToken(), ecorePackage.getEString(), "facebookTenantAccessToken", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFacebookSysConfig_FacebookProfileId(), ecorePackage.getELongObject(), "facebookProfileId", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFacebookSysConfig_FacebookProfileUsername(), ecorePackage.getEString(), "facebookProfileUsername", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFacebookSysConfig_FacebookProfileName(), ecorePackage.getEString(), "facebookProfileName", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacebookSysConfig_FacebookTenantPageId(), ecorePackage.getELongObject(), "facebookTenantPageId", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacebookSysConfig_FacebookTenantPageUsername(), ecorePackage.getEString(), "facebookTenantPageUsername", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacebookSysConfig_FacebookTenantPublishEnabled(), ecorePackage.getEBooleanObject(), "facebookTenantPublishEnabled", "false", 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -445,6 +478,24 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Facebook access token for the tenant/mall Facebook Page. This is a Page token, not a User token."
+		   });		
+		addAnnotation
+		  (getFacebookSysConfig_FacebookProfileId(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Facebook (User) Profile ID, if exists."
+		   });		
+		addAnnotation
+		  (getFacebookSysConfig_FacebookProfileUsername(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Facebook (User) Profile username, if exists."
+		   });		
+		addAnnotation
+		  (getFacebookSysConfig_FacebookProfileName(), 
+		   source, 
+		   new String[] {
+			 "documentation", "For some strange reason, Facebook ID is not unique, a user can have 2 different IDs. :(\nSo this is additional way to check for posts/comments by self."
 		   });		
 		addAnnotation
 		  (getFacebookSysConfig_FacebookTenantPageId(), 

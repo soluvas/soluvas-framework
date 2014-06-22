@@ -93,13 +93,40 @@ public interface SocmedPackage extends EPackage {
 	int FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_ACCESS_TOKEN = 2;
 
 	/**
+	 * The feature id for the '<em><b>Facebook Profile Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACEBOOK_SYS_CONFIG__FACEBOOK_PROFILE_ID = 3;
+
+	/**
+	 * The feature id for the '<em><b>Facebook Profile Username</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACEBOOK_SYS_CONFIG__FACEBOOK_PROFILE_USERNAME = 4;
+
+	/**
+	 * The feature id for the '<em><b>Facebook Profile Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACEBOOK_SYS_CONFIG__FACEBOOK_PROFILE_NAME = 5;
+
+	/**
 	 * The feature id for the '<em><b>Facebook Tenant Page Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PAGE_ID = 3;
+	int FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PAGE_ID = 6;
 
 	/**
 	 * The feature id for the '<em><b>Facebook Tenant Page Username</b></em>' attribute.
@@ -108,7 +135,7 @@ public interface SocmedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PAGE_USERNAME = 4;
+	int FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PAGE_USERNAME = 7;
 
 	/**
 	 * The feature id for the '<em><b>Facebook Tenant Publish Enabled</b></em>' attribute.
@@ -117,7 +144,7 @@ public interface SocmedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PUBLISH_ENABLED = 5;
+	int FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PUBLISH_ENABLED = 8;
 
 	/**
 	 * The feature id for the '<em><b>Facebook Explicitly Shared</b></em>' attribute.
@@ -126,7 +153,7 @@ public interface SocmedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACEBOOK_SYS_CONFIG__FACEBOOK_EXPLICITLY_SHARED = 6;
+	int FACEBOOK_SYS_CONFIG__FACEBOOK_EXPLICITLY_SHARED = 9;
 
 	/**
 	 * The number of structural features of the '<em>Facebook Sys Config</em>' class.
@@ -135,7 +162,7 @@ public interface SocmedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FACEBOOK_SYS_CONFIG_FEATURE_COUNT = 7;
+	int FACEBOOK_SYS_CONFIG_FEATURE_COUNT = 10;
 
 	/**
 	 * The number of operations of the '<em>Facebook Sys Config</em>' class.
@@ -378,6 +405,39 @@ public interface SocmedPackage extends EPackage {
 	EAttribute getFacebookSysConfig_FacebookTenantAccessToken();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.socmed.FacebookSysConfig#getFacebookProfileId <em>Facebook Profile Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Profile Id</em>'.
+	 * @see org.soluvas.socmed.FacebookSysConfig#getFacebookProfileId()
+	 * @see #getFacebookSysConfig()
+	 * @generated
+	 */
+	EAttribute getFacebookSysConfig_FacebookProfileId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.socmed.FacebookSysConfig#getFacebookProfileUsername <em>Facebook Profile Username</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Profile Username</em>'.
+	 * @see org.soluvas.socmed.FacebookSysConfig#getFacebookProfileUsername()
+	 * @see #getFacebookSysConfig()
+	 * @generated
+	 */
+	EAttribute getFacebookSysConfig_FacebookProfileUsername();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.socmed.FacebookSysConfig#getFacebookProfileName <em>Facebook Profile Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Profile Name</em>'.
+	 * @see org.soluvas.socmed.FacebookSysConfig#getFacebookProfileName()
+	 * @see #getFacebookSysConfig()
+	 * @generated
+	 */
+	EAttribute getFacebookSysConfig_FacebookProfileName();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.socmed.FacebookSysConfig#getFacebookTenantPageId <em>Facebook Tenant Page Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -605,6 +665,30 @@ public interface SocmedPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_ACCESS_TOKEN = eINSTANCE.getFacebookSysConfig_FacebookTenantAccessToken();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Profile Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACEBOOK_SYS_CONFIG__FACEBOOK_PROFILE_ID = eINSTANCE.getFacebookSysConfig_FacebookProfileId();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Profile Username</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACEBOOK_SYS_CONFIG__FACEBOOK_PROFILE_USERNAME = eINSTANCE.getFacebookSysConfig_FacebookProfileUsername();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Profile Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACEBOOK_SYS_CONFIG__FACEBOOK_PROFILE_NAME = eINSTANCE.getFacebookSysConfig_FacebookProfileName();
 
 		/**
 		 * The meta object literal for the '<em><b>Facebook Tenant Page Id</b></em>' attribute feature.
