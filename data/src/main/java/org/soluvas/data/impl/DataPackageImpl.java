@@ -1187,10 +1187,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		// Set bounds for type parameters
 		EGenericType g1 = createEGenericType(theCommonsPackage.getSerializable());
-		valueEClass_T.getEBounds().add(g1);
-		g1 = createEGenericType(theCommonsPackage.getSerializable());
-		rangeValueEClass_T.getEBounds().add(g1);
-		g1 = createEGenericType(theCommonsPackage.getSerializable());
 		crudRepositoryEDataType_ID.getEBounds().add(g1);
 		g1 = createEGenericType(theCommonsPackage.getSerializable());
 		pagingAndSortingRepositoryEDataType_ID.getEBounds().add(g1);

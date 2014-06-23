@@ -2,7 +2,6 @@
  */
 package org.soluvas.data.impl;
 
-import java.io.Serializable;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -26,7 +25,7 @@ import org.soluvas.data.RangeValue;
  *
  * @generated
  */
-public class RangeValueImpl<T extends Serializable> extends ValueImpl<T> implements RangeValue<T> {
+public class RangeValueImpl<T> extends ValueImpl<T> implements RangeValue<T> {
 	/**
 	 * The cached value of the '{@link #getStartValue() <em>Start Value</em>}' attribute.
 	 * <!-- begin-user-doc -->

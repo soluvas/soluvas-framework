@@ -2,8 +2,6 @@
  */
 package org.soluvas.data;
 
-import java.io.Serializable;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -23,10 +21,10 @@ import java.io.Serializable;
  * </p>
  *
  * @see org.soluvas.data.DataPackage#getRangeValue()
- * @model TBounds="org.soluvas.commons.Serializable"
+ * @model
  * @generated
  */
-public interface RangeValue<T extends Serializable> extends Value<T> {
+public interface RangeValue<T> extends Value<T> {
 	/**
 	 * Returns the value of the '<em><b>Start Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -36,7 +34,7 @@ public interface RangeValue<T extends Serializable> extends Value<T> {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Start Value</em>' attribute.
-	 * @see #setStartValue(Serializable)
+	 * @see #setStartValue(Object)
 	 * @see org.soluvas.data.DataPackage#getRangeValue_StartValue()
 	 * @model
 	 * @generated
@@ -62,7 +60,7 @@ public interface RangeValue<T extends Serializable> extends Value<T> {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>End Value</em>' attribute.
-	 * @see #setEndValue(Serializable)
+	 * @see #setEndValue(Object)
 	 * @see org.soluvas.data.DataPackage#getRangeValue_EndValue()
 	 * @model
 	 * @generated

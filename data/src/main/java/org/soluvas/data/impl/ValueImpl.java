@@ -2,7 +2,6 @@
  */
 package org.soluvas.data.impl;
 
-import java.io.Serializable;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -26,7 +25,7 @@ import org.soluvas.data.Value;
  * @generated
  */
 @SuppressWarnings("serial")
-public abstract class ValueImpl<T extends Serializable> extends EObjectImpl implements Value<T> {
+public abstract class ValueImpl<T> extends EObjectImpl implements Value<T> {
 	/**
 	 * The default value of the '{@link #getSemantic() <em>Semantic</em>}' attribute.
 	 * <!-- begin-user-doc -->
