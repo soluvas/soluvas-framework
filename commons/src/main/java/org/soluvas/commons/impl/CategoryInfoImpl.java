@@ -3,6 +3,7 @@
 package org.soluvas.commons.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -570,6 +571,11 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 			parents = new EObjectContainmentEList<CategoryInfo>(CategoryInfo.class, this, CommonsPackage.CATEGORY_INFO__PARENTS);
 		}
 		return parents;
+	}
+	
+	protected void setParents(List<CategoryInfo> parents) {
+		getParents().clear();
+		getParents().addAll(parents);
 	}
 
 	/**
