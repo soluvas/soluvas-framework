@@ -6,8 +6,8 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
+import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.hibernate.service.UnknownUnwrapTypeException;
-import org.hibernate.service.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.hibernate.service.spi.Stoppable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.Preconditions;
 
 /**
- * Implementing MultiTenantConnectionProvider using single connection pool.
+ * Implementing Hibernate 4.3 {@link MultiTenantConnectionProvider} using single connection pool.
  * Simplistic implementation for illustration purposes showing a single connection pool used to serve
  * multiple schemas using "connection altering".  Here we use the PostgreSQL specific SET SCHEMA command; Oracle
  * users might use the ALTER SESSION SET SCHEMA command; etc.
