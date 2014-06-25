@@ -257,7 +257,39 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	public <S extends Person, K extends Serializable> S lookupOne(
 			StatusMask statusMask, LookupKey lookupKey, K key)
 			throws EntityLookupException {
-		final BasicDBObject query = new BasicDBObject(lookupKey == LookupKey.ID ? "_id" : lookupKey.name(), key);
+		final String attribute;
+		switch (lookupKey) {
+		case ID:
+			attribute = "_id";
+			break;
+		case SLUG:
+			attribute = "canonicalSlug";
+			break;
+		case EMAIL:
+			attribute = "emails.email";
+			break;
+		case FACEBOOK_ID:
+			attribute = "facebookId";
+			break;
+		case FACEBOOK_USERNAME:
+			attribute = "facebookUsername";
+			break;
+		case GUID:
+			attribute = "guid";
+			break;
+		case MOBILE_NUMBER:
+			attribute = "mobileNumbers.phoneNumber";
+			break;
+		case TWITTER_ID:
+			attribute = "twitterId";
+			break;
+		case TWITTER_SCREENNAME:
+			attribute = "twitterScreenName";
+			break;
+		default:
+			throw new RuntimeException("Unrecognized for lookupKey " + lookupKey);
+		}
+		final BasicDBObject query = new BasicDBObject(attribute, key);
 		augmentQueryForStatusMask(query, statusMask);
 		return (S) findOneByQuery(query);
 	}
