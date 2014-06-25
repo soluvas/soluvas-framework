@@ -73,11 +73,11 @@ public class TenantAddCommand extends ExtCommandSupport {
 		} else {
 			appManifest.setGeneralEmail(System.getProperty("user.name") + "@" + MultiTenantConfig.getFqdn());
 		}
+		if (defaultStyle != null) {
+			appManifest.setDefaultStyle(defaultStyle);
+		}
 		
 		final ProvisionData provisionData = tenantRepo.newProvisionData();
-		if (defaultStyle != null) {
-			provisionData.setDefaultStyle(defaultStyle);
-		}
 		provisionData.setAdminPersonId(adminPersonId);
 		provisionData.setAdminPassword( adminPassword != null ? adminPassword : UUID.randomUUID().toString().substring(0, 8) );
 		provisionData.setAdminEmail( adminEmail != null ? adminEmail : appManifest.getGeneralEmail() );
