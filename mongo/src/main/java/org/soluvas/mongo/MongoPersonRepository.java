@@ -257,7 +257,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	public <S extends Person, K extends Serializable> S lookupOne(
 			StatusMask statusMask, LookupKey lookupKey, K key)
 			throws EntityLookupException {
-		final BasicDBObject query = new BasicDBObject(lookupKey.name(), key);
+		final BasicDBObject query = new BasicDBObject(lookupKey == LookupKey.ID ? "_id" : lookupKey.name(), key);
 		augmentQueryForStatusMask(query, statusMask);
 		return (S) findOneByQuery(query);
 	}
