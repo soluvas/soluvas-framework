@@ -450,15 +450,35 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		return ImmutableMap.copyOf(tenantStateMap);
 	}
 
+	/** (non-Javadoc)
+	 * @see org.soluvas.commons.tenant.TenantRepository#lookupOne(java.lang.String)
+	 * @deprecated Use {@link #getOriginal(String)} or {@link #getExpanded(String)}
+	 */
+	@Deprecated
 	@Override
 	public AppManifest lookupOne(String tenantId)
+			throws IllegalArgumentException {
+		return getExpanded(tenantId);
+	}
+
+	@Override
+	public AppManifest getOriginal(String tenantId)
+			throws IllegalArgumentException {
+		final File appManifestFile = new File(rootDir, tenantId + "/model/" + tenantId + ".AppManifest.xmi");
+		final AppManifest origAppManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, appManifestFile)
+				.autoExpand(false).get();
+		return origAppManifest;
+	}
+
+	@Override
+	public AppManifest getExpanded(String tenantId)
 			throws IllegalArgumentException {
 		final AppManifest appManifest = tenantMap.get(tenantId);
 		Preconditions.checkArgument(appManifest != null, "Tenant '%s' not found, %s available: %s",
 				tenantId, tenantMap.size(), tenantMap.keySet());
 		return appManifest;
 	}
-
+	
 	@Override
 	public boolean exists(String tenantId) throws IllegalArgumentException {
 		Preconditions.checkState(!Strings.isNullOrEmpty(tenantId), "TenantID must not be null or empty");

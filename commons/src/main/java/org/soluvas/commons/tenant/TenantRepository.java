@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.soluvas.commons.AppManifest;
 
 import com.google.common.collect.ImmutableMap;
@@ -93,5 +95,27 @@ public interface TenantRepository<T extends ProvisionData> {
 	boolean exists(String tenantId) throws IllegalArgumentException;
 	
 	boolean remove(Set<String> tenantIds);
+
+	/**
+	 * Return the expanded entity, after templating and expansion.
+	 * It's not an owned {@link EObject}, so {@link EcoreUtil#copy(EObject)} is not necessary.
+	 * 
+	 * @param tenantId Usually tenantId.
+	 * @return
+	 * @throws IllegalArgumentException If {@code id} is not found.
+	 */
+	public abstract AppManifest getExpanded(String tenantId)
+			throws IllegalArgumentException;
+
+	/**
+	 * Return the original entity from XMI, without templating and expansion.
+	 * It's not an owned {@link EObject}, so {@link EcoreUtil#copy(EObject)} is not necessary.
+	 * 
+	 * @param tenantId Usually tenantId.
+	 * @return
+	 * @throws IllegalArgumentException If {@code id} is not found.
+	 */
+	public abstract AppManifest getOriginal(String tenantId)
+			throws IllegalArgumentException;
 
 }

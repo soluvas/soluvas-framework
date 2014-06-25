@@ -11,6 +11,7 @@ import javax.inject.Named;
 import org.soluvas.commons.TenantSource;
 import org.soluvas.commons.tenant.DirectoryTenantRepository;
 import org.soluvas.commons.tenant.TenantProvisioner;
+import org.soluvas.commons.tenant.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,7 +40,7 @@ public class DirectorySourcedConfig {
 	private TenantProvisioner<?> tenantProvisioner;
 	
 	@Bean(initMethod="init")
-	public DirectoryTenantRepository<?> tenantRepo() throws IOException {
+	public TenantRepository<?> tenantRepo() throws IOException {
 		final String tenantEnv = env.getRequiredProperty("tenantEnv");
 		final String appDomain = MultiTenantConfig.internalGetAppDomain(app.getId(), env);
 		final File workspaceDir = MultiTenantConfig.internalGetWorkspaceDir(app.getId(), env);
