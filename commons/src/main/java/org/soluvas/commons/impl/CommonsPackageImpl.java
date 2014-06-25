@@ -1265,6 +1265,24 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAppManifest_DefaultStyle() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(28);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_DefaultVariation() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(29);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EAttribute getAppManifest_DefaultTimeZoneId() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(14);
@@ -4582,6 +4600,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__WWW_USED);
 		createEAttribute(appManifestEClass, APP_MANIFEST__HEAD_NOTE);
 		createEAttribute(appManifestEClass, APP_MANIFEST__HEAD_TITLE);
+		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_STYLE);
+		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_VARIATION);
 		createEOperation(appManifestEClass, APP_MANIFEST___GET_DEFAULT_LOCALE);
 		createEOperation(appManifestEClass, APP_MANIFEST___GET_WEB_HOST);
 
@@ -5225,6 +5245,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_WwwUsed(), ecorePackage.getEBoolean(), "wwwUsed", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_HeadNote(), ecorePackage.getEString(), "headNote", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_HeadTitle(), ecorePackage.getEString(), "headTitle", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_DefaultStyle(), ecorePackage.getEString(), "defaultStyle", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_DefaultVariation(), ecorePackage.getEString(), "defaultVariation", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getAppManifest__GetDefaultLocale(), this.getLocale(), "getDefaultLocale", 1, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -5975,6 +5997,18 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "The headtitle is shown on all frontend pages, usually positioned above the main content, but above the banner."
+		   });		
+		addAnnotation
+		  (getAppManifest_DefaultStyle(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Default style name for Wicket, e.g. \"fluid\" (Cinta Lama\'s original theme, created by Ahmad Syarif Farsiado)."
+		   });		
+		addAnnotation
+		  (getAppManifest_DefaultVariation(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Default style variation for Wicket, e.g. \"default\", \"shop\", \"business\" (for Queen theme)."
 		   });		
 		addAnnotation
 		  (personInfoEClass, 

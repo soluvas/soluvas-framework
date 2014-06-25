@@ -54,6 +54,8 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#isWwwUsed <em>Www Used</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getHeadNote <em>Head Note</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getHeadTitle <em>Head Title</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDefaultStyle <em>Default Style</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getDefaultVariation <em>Default Variation</em>}</li>
  * </ul>
  * </p>
  *
@@ -640,6 +642,56 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	void setHeadTitle(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Default Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Default style name for Wicket, e.g. "fluid" (Cinta Lama's original theme, created by Ahmad Syarif Farsiado).
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Default Style</em>' attribute.
+	 * @see #setDefaultStyle(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultStyle()
+	 * @model
+	 * @generated
+	 */
+	String getDefaultStyle();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDefaultStyle <em>Default Style</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default Style</em>' attribute.
+	 * @see #getDefaultStyle()
+	 * @generated
+	 */
+	void setDefaultStyle(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Default Variation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Default style variation for Wicket, e.g. "default", "shop", "business" (for Queen theme).
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Default Variation</em>' attribute.
+	 * @see #setDefaultVariation(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_DefaultVariation()
+	 * @model
+	 * @generated
+	 */
+	String getDefaultVariation();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getDefaultVariation <em>Default Variation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default Variation</em>' attribute.
+	 * @see #getDefaultVariation()
+	 * @generated
+	 */
+	void setDefaultVariation(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Default Time Zone Id</b></em>' attribute.

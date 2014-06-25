@@ -76,6 +76,8 @@ import com.google.common.collect.ImmutableSet;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#isWwwUsed <em>Www Used</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getHeadNote <em>Head Note</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getHeadTitle <em>Head Title</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultStyle <em>Default Style</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultVariation <em>Default Variation</em>}</li>
  * </ul>
  * </p>
  *
@@ -730,6 +732,43 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	protected String headTitle = HEAD_TITLE_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getDefaultStyle() <em>Default Style</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultStyle()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DEFAULT_STYLE_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getDefaultStyle() <em>Default Style</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultStyle()
+	 * @generated
+	 * @ordered
+	 */
+	protected String defaultStyle = DEFAULT_STYLE_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getDefaultVariation() <em>Default Variation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultVariation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DEFAULT_VARIATION_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getDefaultVariation() <em>Default Variation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultVariation()
+	 * @generated
+	 * @ordered
+	 */
+	protected String defaultVariation = DEFAULT_VARIATION_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1355,6 +1394,48 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDefaultStyle() {
+		return defaultStyle;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefaultStyle(String newDefaultStyle) {
+		String oldDefaultStyle = defaultStyle;
+		defaultStyle = newDefaultStyle;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DEFAULT_STYLE, oldDefaultStyle, defaultStyle));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDefaultVariation() {
+		return defaultVariation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefaultVariation(String newDefaultVariation) {
+		String oldDefaultVariation = defaultVariation;
+		defaultVariation = newDefaultVariation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__DEFAULT_VARIATION, oldDefaultVariation, defaultVariation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getDefaultTimeZoneId() {
 		return defaultTimeZoneId;
@@ -1763,6 +1844,10 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getHeadNote();
 			case CommonsPackage.APP_MANIFEST__HEAD_TITLE:
 				return getHeadTitle();
+			case CommonsPackage.APP_MANIFEST__DEFAULT_STYLE:
+				return getDefaultStyle();
+			case CommonsPackage.APP_MANIFEST__DEFAULT_VARIATION:
+				return getDefaultVariation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1870,6 +1955,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__HEAD_TITLE:
 				setHeadTitle((String)newValue);
 				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_STYLE:
+				setDefaultStyle((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_VARIATION:
+				setDefaultVariation((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1975,6 +2066,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__HEAD_TITLE:
 				setHeadTitle(HEAD_TITLE_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_STYLE:
+				setDefaultStyle(DEFAULT_STYLE_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__DEFAULT_VARIATION:
+				setDefaultVariation(DEFAULT_VARIATION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -2055,6 +2152,10 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return HEAD_NOTE_EDEFAULT == null ? headNote != null : !HEAD_NOTE_EDEFAULT.equals(headNote);
 			case CommonsPackage.APP_MANIFEST__HEAD_TITLE:
 				return HEAD_TITLE_EDEFAULT == null ? headTitle != null : !HEAD_TITLE_EDEFAULT.equals(headTitle);
+			case CommonsPackage.APP_MANIFEST__DEFAULT_STYLE:
+				return DEFAULT_STYLE_EDEFAULT == null ? defaultStyle != null : !DEFAULT_STYLE_EDEFAULT.equals(defaultStyle);
+			case CommonsPackage.APP_MANIFEST__DEFAULT_VARIATION:
+				return DEFAULT_VARIATION_EDEFAULT == null ? defaultVariation != null : !DEFAULT_VARIATION_EDEFAULT.equals(defaultVariation);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2244,6 +2345,10 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(headNote);
 		result.append(", headTitle: ");
 		result.append(headTitle);
+		result.append(", defaultStyle: ");
+		result.append(defaultStyle);
+		result.append(", defaultVariation: ");
+		result.append(defaultVariation);
 		result.append(')');
 		return result.toString();
 	}

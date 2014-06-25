@@ -467,13 +467,31 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__HEAD_TITLE = POSITIONABLE_FEATURE_COUNT + 32;
 
 	/**
+	 * The feature id for the '<em><b>Default Style</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__DEFAULT_STYLE = POSITIONABLE_FEATURE_COUNT + 33;
+
+	/**
+	 * The feature id for the '<em><b>Default Variation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__DEFAULT_VARIATION = POSITIONABLE_FEATURE_COUNT + 34;
+
+	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 33;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 35;
 
 	/**
 	 * The operation id for the '<em>Expand</em>' operation.
@@ -6268,6 +6286,28 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_HeadTitle();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultStyle <em>Default Style</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Style</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultStyle()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultStyle();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultVariation <em>Default Variation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Variation</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultVariation()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultVariation();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9994,6 +10034,22 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__HEAD_TITLE = eINSTANCE.getAppManifest_HeadTitle();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Style</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_STYLE = eINSTANCE.getAppManifest_DefaultStyle();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Variation</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_VARIATION = eINSTANCE.getAppManifest_DefaultVariation();
 
 		/**
 		 * The meta object literal for the '<em><b>Default Time Zone Id</b></em>' attribute feature.

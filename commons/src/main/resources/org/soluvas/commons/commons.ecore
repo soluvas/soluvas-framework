@@ -197,6 +197,16 @@
         <details key="documentation" value="The headtitle is shown on all frontend pages, usually positioned above the main content, but above the banner."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultStyle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Default style name for Wicket, e.g. &quot;fluid&quot; (Cinta Lama's original theme, created by Ahmad Syarif Farsiado)."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultVariation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Default style variation for Wicket, e.g. &quot;default&quot;, &quot;shop&quot;, &quot;business&quot; (for Queen theme)."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PersonInfo" eSuperTypes="#//Identifiable #//PhotoIdContainer #//Sluggable #//NameContainer #//PersonLike">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
