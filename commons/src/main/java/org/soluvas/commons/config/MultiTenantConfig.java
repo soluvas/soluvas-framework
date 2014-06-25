@@ -55,6 +55,7 @@ import com.google.common.eventbus.EventBus;
 /**
  * Non-web tenant-related application configuration.
  * @author ceefour
+ * @see MultiTenantWebConfig
  */
 @Configuration("tenantConfig")
 public class MultiTenantConfig implements TenantRepositoryListener {

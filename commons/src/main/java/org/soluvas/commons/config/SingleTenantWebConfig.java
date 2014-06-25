@@ -35,6 +35,7 @@ import com.google.common.collect.ImmutableMap;
  * 
  * <p><strong>Note:</strong> It's recommended to use multitenant {@link MultiTenantConfig} to make your application future-proof.
  * @author rudi
+ * @see MultiTenantWebConfig
  */
 @Configuration @Lazy
 public class SingleTenantWebConfig {

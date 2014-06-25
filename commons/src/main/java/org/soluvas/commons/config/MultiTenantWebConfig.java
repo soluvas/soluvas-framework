@@ -43,6 +43,7 @@ import com.google.common.eventbus.EventBus;
  * For {@link TenantMode#MULTI_PATH} (deprecated): e.g. http://localhost:8080/{hotelContext}/{app}/t/{tenantId}/{tenantEnv}.
  * Which means tenant is read per request.
  * @author rudi
+ * @see SingleTenantWebConfig
  */
 @Configuration
 public class MultiTenantWebConfig implements TenantSelector {

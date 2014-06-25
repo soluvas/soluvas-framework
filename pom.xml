@@ -231,6 +231,14 @@
 			</dependency>
 
 			<dependency>
+			    <groupId>org.drools</groupId>
+			    <artifactId>drools-bom</artifactId>
+			    <version>6.1.0.CR1</version>
+			    <type>pom</type>
+			    <scope>import</scope>
+			</dependency>
+
+			<dependency>
 				<groupId>com.sun.jersey</groupId>
 				<artifactId>jersey-client</artifactId>
 				<version>${jersey.version}</version>
