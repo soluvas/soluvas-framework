@@ -39,7 +39,10 @@ public class Geolocation implements Serializable {
 	/**
 	 * Returns the value of '<em><b>latitude</b></em>' feature.
 	 * 
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * Latitude, in decimal degrees. Positive latitudes are north of the
+	 * equator, negative latitudes are south of the equator. <!-- end-model-doc
+	 * -->
 	 * 
 	 * @return the value of '<em><b>latitude</b></em>' feature
 	 * @generated
@@ -51,7 +54,10 @@ public class Geolocation implements Serializable {
 	/**
 	 * Sets the '{@link Geolocation#getLatitude() <em>latitude</em>}' feature.
 	 * 
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * Latitude, in decimal degrees. Positive latitudes are north of the
+	 * equator, negative latitudes are south of the equator. <!-- end-model-doc
+	 * -->
 	 * 
 	 * @param newLatitude
 	 *            the new value of the '{@link Geolocation#getLatitude()
@@ -65,7 +71,10 @@ public class Geolocation implements Serializable {
 	/**
 	 * Returns the value of '<em><b>longitude</b></em>' feature.
 	 * 
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * Longitude, in decimal degrees. Positive longitudes are east of Prime
+	 * Meridian, negative longitudes are west of the Prime Meridian. <!--
+	 * end-model-doc -->
 	 * 
 	 * @return the value of '<em><b>longitude</b></em>' feature
 	 * @generated
@@ -77,7 +86,10 @@ public class Geolocation implements Serializable {
 	/**
 	 * Sets the '{@link Geolocation#getLongitude() <em>longitude</em>}' feature.
 	 * 
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * Longitude, in decimal degrees. Positive longitudes are east of Prime
+	 * Meridian, negative longitudes are west of the Prime Meridian. <!--
+	 * end-model-doc -->
 	 * 
 	 * @param newLongitude
 	 *            the new value of the '{@link Geolocation#getLongitude()
@@ -91,7 +103,8 @@ public class Geolocation implements Serializable {
 	/**
 	 * Returns the value of '<em><b>elevation</b></em>' feature.
 	 * 
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * Elevation, in SI meters. <!-- end-model-doc -->
 	 * 
 	 * @return the value of '<em><b>elevation</b></em>' feature
 	 * @generated
@@ -103,7 +116,8 @@ public class Geolocation implements Serializable {
 	/**
 	 * Sets the '{@link Geolocation#getElevation() <em>elevation</em>}' feature.
 	 * 
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * Elevation, in SI meters. <!-- end-model-doc -->
 	 * 
 	 * @param newElevation
 	 *            the new value of the '{@link Geolocation#getElevation()

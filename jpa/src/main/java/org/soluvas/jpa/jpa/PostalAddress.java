@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
-
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -33,11 +31,11 @@ import org.soluvas.commons.CommonsFactory;
  */
 @Embeddable()
 public class PostalAddress implements Describable, Serializable {
-	
+
 	public PostalAddress() {
 		super();
 	}
-	
+
 	public PostalAddress(final org.soluvas.commons.PostalAddress postalAddressUp) {
 		final PostalAddress address = new PostalAddress();
 		address.setCity(postalAddressUp.getCity());
@@ -64,9 +62,11 @@ public class PostalAddress implements Describable, Serializable {
 		address.setValidationTime(postalAddressUp.getValidationTime());
 		address.setWorkPhones(postalAddressUp.getWorkPhones());
 	}
-	
-	public static org.soluvas.commons.PostalAddress toCommons(PostalAddress postalAddressUp) {
-		final org.soluvas.commons.PostalAddress address = CommonsFactory.eINSTANCE.createPostalAddress();
+
+	public static org.soluvas.commons.PostalAddress toCommons(
+			PostalAddress postalAddressUp) {
+		final org.soluvas.commons.PostalAddress address = CommonsFactory.eINSTANCE
+				.createPostalAddress();
 		address.setCity(postalAddressUp.getCity());
 		address.setCountry(postalAddressUp.getCountry());
 		address.setCountryCode(postalAddressUp.getCountryCode());
@@ -91,7 +91,7 @@ public class PostalAddress implements Describable, Serializable {
 		address.setValidationTime(postalAddressUp.getValidationTime());
 		address.getWorkPhones().addAll(postalAddressUp.getWorkPhones());
 		address.setId(UUID.randomUUID().toString());
-		
+
 		return address;
 	}
 
@@ -849,7 +849,6 @@ public class PostalAddress implements Describable, Serializable {
 	 * @return the value of '<em><b>description</b></em>' feature
 	 * @generated
 	 */
-	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -867,7 +866,6 @@ public class PostalAddress implements Describable, Serializable {
 	 *            description}' feature.
 	 * @generated
 	 */
-	@Override
 	public void setDescription(String newDescription) {
 		description = newDescription;
 	}

@@ -106,6 +106,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="CurrencyUnit" instanceClassName="org.joda.money.CurrencyUnit"/>
   <eClassifiers xsi:type="ecore:EDataType" name="DateTime" instanceClassName="org.joda.time.DateTime"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Mass" instanceClassName="javax.measure.quantity.Mass"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Length" instanceClassName="javax.measure.quantity.Length"
+      serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="LocalDate" instanceClassName="org.joda.time.LocalDate"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Quantity" instanceClassName="javax.measure.quantity.Quantity"
       serializable="false"/>

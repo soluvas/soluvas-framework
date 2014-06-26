@@ -1,6 +1,8 @@
 package org.soluvas.jpa.jpa;
 
 import java.util.UUID;
+import javax.measure.quantity.Length;
+import javax.measure.quantity.Mass;
 import javax.measure.quantity.Quantity;
 import javax.measure.unit.Unit;
 import org.eclipse.emf.ecore.EAttribute;
@@ -71,42 +73,56 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int LOCALDATE_CLASSIFIER_ID = 7;
+	public static final int MASS_CLASSIFIER_ID = 7;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int QUANTITY_CLASSIFIER_ID = 8;
+	public static final int LENGTH_CLASSIFIER_ID = 8;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int UNIT_CLASSIFIER_ID = 9;
+	public static final int LOCALDATE_CLASSIFIER_ID = 9;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int UUID_CLASSIFIER_ID = 10;
+	public static final int QUANTITY_CLASSIFIER_ID = 10;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int GENERICSTATUS_CLASSIFIER_ID = 11;
+	public static final int UNIT_CLASSIFIER_ID = 11;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int GENDER_CLASSIFIER_ID = 12;
+	public static final int UUID_CLASSIFIER_ID = 12;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int GENERICSTATUS_CLASSIFIER_ID = 13;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int GENDER_CLASSIFIER_ID = 14;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -955,6 +971,32 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
+	 * Returns the {@link EDataType} '<em><b>Mass</b></em>'. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>Mass</b></em>'
+	 * @generated
+	 */
+	public EDataType getMassEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				MASS_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EDataType} '<em><b>Length</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>Length</b></em>'
+	 * @generated
+	 */
+	public EDataType getLengthEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				LENGTH_CLASSIFIER_ID);
+	}
+
+	/**
 	 * Returns the {@link EDataType} '<em><b>LocalDate</b></em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1057,6 +1099,10 @@ public class JpaModelPackage extends ModelPackage {
 			return DateTime.class;
 		case CURRENCYUNIT_CLASSIFIER_ID:
 			return CurrencyUnit.class;
+		case MASS_CLASSIFIER_ID:
+			return Mass.class;
+		case LENGTH_CLASSIFIER_ID:
+			return Length.class;
 		case LOCALDATE_CLASSIFIER_ID:
 			return LocalDate.class;
 		case QUANTITY_CLASSIFIER_ID:

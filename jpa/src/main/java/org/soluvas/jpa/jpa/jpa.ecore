@@ -165,16 +165,25 @@
       <details key="documentation" value="Why Double?&#xA;&#xA;Hibernate Search has this as best practice:&#xA;&quot;add the @Latitude and @Longitude annotations on your properties representing the coordinates; these must be of type Double&quot;&#xA;http://docs.jboss.org/hibernate/search/4.2/reference/en-US/html/spatial.html"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="latitude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Latitude, in decimal degrees. Positive latitudes are north of the equator, negative latitudes are south of the equator."/>
+      </eAnnotations>
       <eAnnotations source="org.eclipse.emf.texo">
         <details key="java.member" value="latitude"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="longitude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Longitude, in decimal degrees. Positive longitudes are east of Prime Meridian, negative longitudes are west of the Prime Meridian."/>
+      </eAnnotations>
       <eAnnotations source="org.eclipse.emf.texo">
         <details key="java.member" value="longitude"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="elevation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Elevation, in SI meters."/>
+      </eAnnotations>
       <eAnnotations source="org.eclipse.emf.texo">
         <details key="java.member" value="elevation"/>
       </eAnnotations>
@@ -216,6 +225,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="CurrencyUnit" instanceClassName="org.joda.money.CurrencyUnit"/>
   <eClassifiers xsi:type="ecore:EDataType" name="DateTime" instanceClassName="org.joda.time.DateTime"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Mass" instanceClassName="javax.measure.quantity.Mass"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Length" instanceClassName="javax.measure.quantity.Length"
+      serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="LocalDate" instanceClassName="org.joda.time.LocalDate"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Quantity" instanceClassName="javax.measure.quantity.Quantity"
       serializable="false"/>

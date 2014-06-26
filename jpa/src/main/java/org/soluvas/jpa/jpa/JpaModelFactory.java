@@ -2,6 +2,8 @@ package org.soluvas.jpa.jpa;
 
 import java.util.List;
 import java.util.UUID;
+import javax.measure.quantity.Length;
+import javax.measure.quantity.Mass;
 import javax.measure.quantity.Quantity;
 import javax.measure.unit.Unit;
 import org.eclipse.emf.ecore.EClass;
@@ -159,6 +161,10 @@ public class JpaModelFactory implements ModelFactory {
 			return createDateTimeFromString(value);
 		case JpaModelPackage.CURRENCYUNIT_CLASSIFIER_ID:
 			return createCurrencyUnitFromString(value);
+		case JpaModelPackage.MASS_CLASSIFIER_ID:
+			return createMassFromString(value);
+		case JpaModelPackage.LENGTH_CLASSIFIER_ID:
+			return createLengthFromString(value);
 		case JpaModelPackage.LOCALDATE_CLASSIFIER_ID:
 			return createLocalDateFromString(value);
 		case JpaModelPackage.QUANTITY_CLASSIFIER_ID:
@@ -193,6 +199,10 @@ public class JpaModelFactory implements ModelFactory {
 			return convertDateTimeToString((DateTime) value);
 		case JpaModelPackage.CURRENCYUNIT_CLASSIFIER_ID:
 			return convertCurrencyUnitToString((CurrencyUnit) value);
+		case JpaModelPackage.MASS_CLASSIFIER_ID:
+			return convertMassToString((Mass) value);
+		case JpaModelPackage.LENGTH_CLASSIFIER_ID:
+			return convertLengthToString((Length) value);
 		case JpaModelPackage.LOCALDATE_CLASSIFIER_ID:
 			return convertLocalDateToString((LocalDate) value);
 		case JpaModelPackage.QUANTITY_CLASSIFIER_ID:
@@ -288,6 +298,86 @@ public class JpaModelFactory implements ModelFactory {
 		}
 		EDataType eDataType = JpaModelPackage.INSTANCE
 				.getCurrencyUnitEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Converts the EDataType: Mass to a String. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertMassToString(Mass value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getMassEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: Mass from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public Mass createMassFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getMassEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Converts the EDataType: Length to a String. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertLengthToString(Length value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getLengthEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: Length from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public Length createLengthFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getLengthEDataType();
 		throw new UnsupportedOperationException(
 				"Operation not support for EDataType " + eDataType.getName()
 						+ " converting from value " + value);
