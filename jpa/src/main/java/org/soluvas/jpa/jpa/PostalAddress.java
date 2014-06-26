@@ -3,6 +3,7 @@ package org.soluvas.jpa.jpa;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
@@ -10,6 +11,7 @@ import javax.persistence.Embeddable;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.soluvas.commons.CommonsFactory;
 
 /**
  * A representation of the model object '<em><b>PostalAddress</b></em>'. <!--
@@ -61,6 +63,36 @@ public class PostalAddress implements Describable, Serializable {
 		address.setStreet(postalAddressUp.getStreet());
 		address.setValidationTime(postalAddressUp.getValidationTime());
 		address.setWorkPhones(postalAddressUp.getWorkPhones());
+	}
+	
+	public static org.soluvas.commons.PostalAddress toCommons(PostalAddress postalAddressUp) {
+		final org.soluvas.commons.PostalAddress address = CommonsFactory.eINSTANCE.createPostalAddress();
+		address.setCity(postalAddressUp.getCity());
+		address.setCountry(postalAddressUp.getCountry());
+		address.setCountryCode(postalAddressUp.getCountryCode());
+		address.setDescription(postalAddressUp.getDescription());
+		address.getEmails().addAll(postalAddressUp.getEmails());
+		address.getHomePhones().addAll(postalAddressUp.getHomePhones());
+		address.getMobiles().addAll(postalAddressUp.getMobiles());
+		address.setName(postalAddressUp.getName());
+		address.setOrganization(postalAddressUp.getOrganization());
+		address.getPhones().addAll(postalAddressUp.getPhones());
+		address.setPostalCode(postalAddressUp.getPostalCode());
+		address.setPrimary(postalAddressUp.isPrimary());
+		address.setPrimaryBilling(postalAddressUp.isPrimaryBilling());
+		address.setPrimaryEmail(postalAddressUp.getPrimaryEmail());
+		address.setPrimaryHomePhone(postalAddressUp.getPrimaryHomePhone());
+		address.setPrimaryMobile(postalAddressUp.getPrimaryMobile());
+		address.setPrimaryPhone(postalAddressUp.getPrimaryPhone());
+		address.setPrimaryShipping(postalAddressUp.isPrimaryShipping());
+		address.setPrimaryWorkPhone(postalAddressUp.getPrimaryWorkPhone());
+		address.setProvince(postalAddressUp.getProvince());
+		address.setStreet(postalAddressUp.getStreet());
+		address.setValidationTime(postalAddressUp.getValidationTime());
+		address.getWorkPhones().addAll(postalAddressUp.getWorkPhones());
+		address.setId(UUID.randomUUID().toString());
+		
+		return address;
 	}
 
 	/**
