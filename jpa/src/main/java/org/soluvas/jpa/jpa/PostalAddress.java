@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -38,6 +40,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	public PostalAddress(final org.soluvas.commons.PostalAddress postalAddressUp) {
 		final PostalAddress address = new PostalAddress();
+		address.setId(UUID.fromString(postalAddressUp.getId()));
 		address.setCity(postalAddressUp.getCity());
 		address.setCountry(postalAddressUp.getCountry());
 		address.setCountryCode(postalAddressUp.getCountryCode());
@@ -90,7 +93,7 @@ public class PostalAddress implements Describable, Serializable {
 		address.setStreet(postalAddressUp.getStreet());
 		address.setValidationTime(postalAddressUp.getValidationTime());
 		address.getWorkPhones().addAll(postalAddressUp.getWorkPhones());
-		address.setId(UUID.randomUUID().toString());
+		address.setId(postalAddressUp.getId().toString());
 
 		return address;
 	}
@@ -99,6 +102,14 @@ public class PostalAddress implements Describable, Serializable {
 	 * @generated
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 */
+	@Basic()
+	@Type(type = "org.hibernate.type.PostgresUUIDType")
+	private UUID id = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -267,6 +278,32 @@ public class PostalAddress implements Describable, Serializable {
 	 */
 	@Basic()
 	private String description = null;
+
+	/**
+	 * Returns the value of '<em><b>id</b></em>' feature.
+	 * 
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of '<em><b>id</b></em>' feature
+	 * @generated
+	 */
+	public UUID getId() {
+		return id;
+	}
+
+	/**
+	 * Sets the '{@link PostalAddress#getId() <em>id</em>}' feature.
+	 * 
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param newId
+	 *            the new value of the '{@link PostalAddress#getId() id}'
+	 *            feature.
+	 * @generated
+	 */
+	public void setId(UUID newId) {
+		id = newId;
+	}
 
 	/**
 	 * Returns the value of '<em><b>name</b></em>' feature.
@@ -849,6 +886,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * @return the value of '<em><b>description</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -866,6 +904,7 @@ public class PostalAddress implements Describable, Serializable {
 	 *            description}' feature.
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		description = newDescription;
 	}
@@ -1015,13 +1054,13 @@ public class PostalAddress implements Describable, Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "PostalAddress " + " [name: " + getName() + "]"
-				+ " [organization: " + getOrganization() + "]" + " [street: "
-				+ getStreet() + "]" + " [city: " + getCity() + "]"
-				+ " [postalCode: " + getPostalCode() + "]" + " [province: "
-				+ getProvince() + "]" + " [country: " + getCountry() + "]"
-				+ " [countryCode: " + getCountryCode() + "]"
-				+ " [primaryMobile: " + getPrimaryMobile() + "]"
+		return "PostalAddress " + " [id: " + getId() + "]" + " [name: "
+				+ getName() + "]" + " [organization: " + getOrganization()
+				+ "]" + " [street: " + getStreet() + "]" + " [city: "
+				+ getCity() + "]" + " [postalCode: " + getPostalCode() + "]"
+				+ " [province: " + getProvince() + "]" + " [country: "
+				+ getCountry() + "]" + " [countryCode: " + getCountryCode()
+				+ "]" + " [primaryMobile: " + getPrimaryMobile() + "]"
 				+ " [primaryPhone: " + getPrimaryPhone() + "]"
 				+ " [primaryHomePhone: " + getPrimaryHomePhone() + "]"
 				+ " [primaryWorkPhone: " + getPrimaryWorkPhone() + "]"

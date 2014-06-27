@@ -31,6 +31,98 @@
   <children xmi:type="notation:Node" xmi:id="_3nkCAFikEeObdY6jdxCTLQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_3nl3MFikEeObdY6jdxCTLQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_3nmeQFikEeObdY6jdxCTLQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_ANog0P21EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/id"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ANog0f21EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9jdcP20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9jdcf20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9lSoP20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/organization"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9lSof20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9nH0P20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/street"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9nH0f20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9nH0v20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/city"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9nH0_20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9nu4P20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/postalCode"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9nu4f20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9nu4v20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/province"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9nu4_20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9nu5P20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/country"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9nu5f20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9oV8P20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/countryCode"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9oV8f20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9oV8v20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/primaryMobile"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9oV8_20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9o9AP20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/mobiles"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9o9Af20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9o9Av20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/primaryPhone"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9o9A_20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9o9BP20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/phones"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9o9Bf20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9pkEP20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/primaryHomePhone"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9pkEf20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9pkEv20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/homePhones"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9pkE_20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9pkFP20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/primaryWorkPhone"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9pkFf20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9qLIP20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/workPhones"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9qLIf20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9qyMP20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/primaryEmail"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9qyMf20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9qyMv20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/emails"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9qyM_20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9rZQP20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/primary"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9rZQf20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9rZQv20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/primaryBilling"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9rZQ_20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9rZRP20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/primaryShipping"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9rZRf20EeOaLtOmL4K85A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__9sAUP20EeOaLtOmL4K85A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jpa.ecore#//PostalAddress/validationTime"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__9sAUf20EeOaLtOmL4K85A"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_3nmeQVikEeObdY6jdxCTLQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_3nmeQlikEeObdY6jdxCTLQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_3nmeQ1ikEeObdY6jdxCTLQ"/>

@@ -159,6 +159,8 @@ public class JpaModelFactory implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 		case JpaModelPackage.DATETIME_CLASSIFIER_ID:
 			return createDateTimeFromString(value);
+		case JpaModelPackage.UUID_CLASSIFIER_ID:
+			return createUUIDFromString(value);
 		case JpaModelPackage.CURRENCYUNIT_CLASSIFIER_ID:
 			return createCurrencyUnitFromString(value);
 		case JpaModelPackage.MASS_CLASSIFIER_ID:
@@ -171,8 +173,6 @@ public class JpaModelFactory implements ModelFactory {
 			return createQuantityFromString(value);
 		case JpaModelPackage.UNIT_CLASSIFIER_ID:
 			return createUnitFromString(value);
-		case JpaModelPackage.UUID_CLASSIFIER_ID:
-			return createUUIDFromString(value);
 		case JpaModelPackage.GENERICSTATUS_CLASSIFIER_ID:
 			return createGenericStatusFromString(value);
 		case JpaModelPackage.GENDER_CLASSIFIER_ID:
@@ -197,6 +197,8 @@ public class JpaModelFactory implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 		case JpaModelPackage.DATETIME_CLASSIFIER_ID:
 			return convertDateTimeToString((DateTime) value);
+		case JpaModelPackage.UUID_CLASSIFIER_ID:
+			return convertUUIDToString((UUID) value);
 		case JpaModelPackage.CURRENCYUNIT_CLASSIFIER_ID:
 			return convertCurrencyUnitToString((CurrencyUnit) value);
 		case JpaModelPackage.MASS_CLASSIFIER_ID:
@@ -209,8 +211,6 @@ public class JpaModelFactory implements ModelFactory {
 			return convertQuantityToString((Quantity) value);
 		case JpaModelPackage.UNIT_CLASSIFIER_ID:
 			return convertUnitToString((Unit) value);
-		case JpaModelPackage.UUID_CLASSIFIER_ID:
-			return convertUUIDToString((UUID) value);
 		case JpaModelPackage.GENERICSTATUS_CLASSIFIER_ID:
 			return convertGenericStatusToString((GenericStatus) value);
 		case JpaModelPackage.GENDER_CLASSIFIER_ID:
@@ -658,6 +658,8 @@ public class JpaModelFactory implements ModelFactory {
 		public Object eGet(EStructuralFeature eStructuralFeature) {
 			final int featureID = eClass().getFeatureID(eStructuralFeature);
 			switch (featureID) {
+			case JpaModelPackage.POSTALADDRESS_ID_FEATURE_ID:
+				return getTarget().getId();
 			case JpaModelPackage.POSTALADDRESS_NAME_FEATURE_ID:
 				return getTarget().getName();
 			case JpaModelPackage.POSTALADDRESS_ORGANIZATION_FEATURE_ID:
@@ -717,6 +719,9 @@ public class JpaModelFactory implements ModelFactory {
 		public void eSet(EStructuralFeature eStructuralFeature, Object value) {
 			final int featureID = eClass().getFeatureID(eStructuralFeature);
 			switch (featureID) {
+			case JpaModelPackage.POSTALADDRESS_ID_FEATURE_ID:
+				getTarget().setId((UUID) value);
+				return;
 			case JpaModelPackage.POSTALADDRESS_NAME_FEATURE_ID:
 				getTarget().setName((String) value);
 				return;

@@ -100,6 +100,9 @@
         <eAttribute href="jpa.ecore#//PostalAddress/validationTime"/>
         <eAttributeAnnotations xsi:type="modelannotations:EAttributeModelGenAnnotation" documentation="When this postal address was validated by the user." name="validationTime" defaultValue="null" useList="false" ownerEClassAnnotation="//@annotatedEPackages.0/@annotatedEClassifiers.0/@eClassAnnotations.0"/>
       </annotatedEStructuralFeatures>
+      <annotatedEStructuralFeatures xsi:type="annotationsmodel:AnnotatedEAttribute">
+        <eAttribute href="jpa.ecore#//PostalAddress/id"/>
+      </annotatedEStructuralFeatures>
     </annotatedEClassifiers>
     <annotatedEClassifiers xsi:type="annotationsmodel:AnnotatedEDataType">
       <eDataType href="jpa.ecore#//DateTime"/>

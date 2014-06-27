@@ -136,126 +136,133 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_NAME_FEATURE_ID = 1;
+	public static final int POSTALADDRESS_ID_FEATURE_ID = 1;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_ORGANIZATION_FEATURE_ID = 2;
+	public static final int POSTALADDRESS_NAME_FEATURE_ID = 2;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_STREET_FEATURE_ID = 3;
+	public static final int POSTALADDRESS_ORGANIZATION_FEATURE_ID = 3;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_CITY_FEATURE_ID = 4;
+	public static final int POSTALADDRESS_STREET_FEATURE_ID = 4;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_POSTALCODE_FEATURE_ID = 5;
+	public static final int POSTALADDRESS_CITY_FEATURE_ID = 5;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PROVINCE_FEATURE_ID = 6;
+	public static final int POSTALADDRESS_POSTALCODE_FEATURE_ID = 6;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_COUNTRY_FEATURE_ID = 7;
+	public static final int POSTALADDRESS_PROVINCE_FEATURE_ID = 7;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_COUNTRYCODE_FEATURE_ID = 8;
+	public static final int POSTALADDRESS_COUNTRY_FEATURE_ID = 8;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PRIMARYMOBILE_FEATURE_ID = 9;
+	public static final int POSTALADDRESS_COUNTRYCODE_FEATURE_ID = 9;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_MOBILES_FEATURE_ID = 10;
+	public static final int POSTALADDRESS_PRIMARYMOBILE_FEATURE_ID = 10;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PRIMARYPHONE_FEATURE_ID = 11;
+	public static final int POSTALADDRESS_MOBILES_FEATURE_ID = 11;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PHONES_FEATURE_ID = 12;
+	public static final int POSTALADDRESS_PRIMARYPHONE_FEATURE_ID = 12;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PRIMARYHOMEPHONE_FEATURE_ID = 13;
+	public static final int POSTALADDRESS_PHONES_FEATURE_ID = 13;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_HOMEPHONES_FEATURE_ID = 14;
+	public static final int POSTALADDRESS_PRIMARYHOMEPHONE_FEATURE_ID = 14;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PRIMARYWORKPHONE_FEATURE_ID = 15;
+	public static final int POSTALADDRESS_HOMEPHONES_FEATURE_ID = 15;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_WORKPHONES_FEATURE_ID = 16;
+	public static final int POSTALADDRESS_PRIMARYWORKPHONE_FEATURE_ID = 16;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PRIMARYEMAIL_FEATURE_ID = 17;
+	public static final int POSTALADDRESS_WORKPHONES_FEATURE_ID = 17;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_EMAILS_FEATURE_ID = 18;
+	public static final int POSTALADDRESS_PRIMARYEMAIL_FEATURE_ID = 18;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int POSTALADDRESS_EMAILS_FEATURE_ID = 19;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -283,28 +290,28 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PRIMARY_FEATURE_ID = 19;
+	public static final int POSTALADDRESS_PRIMARY_FEATURE_ID = 20;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PRIMARYBILLING_FEATURE_ID = 20;
+	public static final int POSTALADDRESS_PRIMARYBILLING_FEATURE_ID = 21;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_PRIMARYSHIPPING_FEATURE_ID = 21;
+	public static final int POSTALADDRESS_PRIMARYSHIPPING_FEATURE_ID = 22;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_VALIDATIONTIME_FEATURE_ID = 22;
+	public static final int POSTALADDRESS_VALIDATIONTIME_FEATURE_ID = 23;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -467,6 +474,19 @@ public class JpaModelPackage extends ModelPackage {
 	public EClass getPostalAddressEClass() {
 		return (EClass) getEPackage().getEClassifiers().get(
 				POSTALADDRESS_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '<em><b>PostalAddress.id</b></em>
+	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>PostalAddress.id</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_Id() {
+		return (EAttribute) getPostalAddressEClass()
+				.getEAllStructuralFeatures().get(POSTALADDRESS_ID_FEATURE_ID);
 	}
 
 	/**
@@ -1097,6 +1117,8 @@ public class JpaModelPackage extends ModelPackage {
 			return NameContainer.class;
 		case DATETIME_CLASSIFIER_ID:
 			return DateTime.class;
+		case UUID_CLASSIFIER_ID:
+			return UUID.class;
 		case CURRENCYUNIT_CLASSIFIER_ID:
 			return CurrencyUnit.class;
 		case MASS_CLASSIFIER_ID:
@@ -1109,8 +1131,6 @@ public class JpaModelPackage extends ModelPackage {
 			return Quantity.class;
 		case UNIT_CLASSIFIER_ID:
 			return Unit.class;
-		case UUID_CLASSIFIER_ID:
-			return UUID.class;
 		case GENERICSTATUS_CLASSIFIER_ID:
 			return GenericStatus.class;
 		case GENDER_CLASSIFIER_ID:
