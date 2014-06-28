@@ -339,7 +339,7 @@
 			<dependency>
 				<groupId>org.ektorp</groupId>
 				<artifactId>org.ektorp</artifactId>
-				<version>1.4.1</version>
+				<version>1.4.2</version>
 				<exclusions>
 					<exclusion>
 						<artifactId>commons-logging</artifactId>
@@ -350,7 +350,7 @@
 			<dependency>
 				<groupId>org.ektorp</groupId>
 				<artifactId>org.ektorp.spring</artifactId>
-				<version>1.4.1</version>
+				<version>1.4.2</version>
 			</dependency>
 			
 			<dependency>
@@ -362,7 +362,7 @@
 			<dependency>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-core</artifactId>
-				<version>3.1.1</version>
+				<version>3.2.0</version>
 			</dependency>
 			<!-- special dependency to fix liquibase's logging fetish -->
 			<dependency>
