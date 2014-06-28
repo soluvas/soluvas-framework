@@ -368,6 +368,10 @@
 						<artifactId>jetty-servlet</artifactId>
 						<groupId>org.eclipse.jetty</groupId>
 					</exclusion>
+					<exclusion>
+						<artifactId>velocity</artifactId>
+						<groupId>org.apache.velocity</groupId>
+					</exclusion>
 				</exclusions>
 			</dependency>
 			<!-- special dependency to fix liquibase's logging fetish -->
