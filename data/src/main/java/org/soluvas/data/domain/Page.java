@@ -120,4 +120,10 @@ public interface Page<T> extends Iterable<T> {
 	 * @return
 	 */
 	@Nonnull Sort getSort();
+
+	/**
+	 * @return {@code true} if {@link CappedRequest} has more results than the cap.
+	 */
+	boolean isOverflowed();
+
 }

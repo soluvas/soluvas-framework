@@ -35,7 +35,7 @@ public class PageImpl<T> implements Page<T>, Serializable {
 	private static final Logger log = LoggerFactory.getLogger(PageImpl.class);
 	private static final long serialVersionUID = 867755909294344406L;
 
-	private final List<T> content = new ArrayList<T>();
+	private final List<T> content = new ArrayList<>();
 	private final Pageable pageable;
 	private final long total;
 
@@ -55,7 +55,7 @@ public class PageImpl<T> implements Page<T>, Serializable {
 		this.total = total;
 		this.pageable = pageable;
 		
-		if (!content.isEmpty() && pageable != null && pageable.isCapped() && total > pageable.getPageSize()) {
+		if (isOverflowed()) {
 			log.warn("Page is hard capped at {}, returning only a subset of {} {}s ({} pages)",
 					pageable.getPageSize(), total, content.iterator().next().getClass().getSimpleName(), getTotalPages() );
 		}
@@ -270,4 +270,10 @@ public class PageImpl<T> implements Page<T>, Serializable {
 
 		return result;
 	}
+	
+	@Override
+	public boolean isOverflowed() {
+		return !content.isEmpty() && pageable != null && pageable.isCapped() && total > pageable.getPageSize();
+	}
+
 }
