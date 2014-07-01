@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 
 import org.apache.felix.gogo.runtime.CommandProcessorImpl;
 import org.apache.felix.gogo.runtime.CommandSessionImpl;
@@ -173,6 +174,28 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 		session.put("clientId", tenantId);
 		session.put("tenantId", tenantId);
 		return withSession(session);
+	}
+	
+	/**
+	 * Lambda variant, for use with Java 8. Example:
+	 * 
+	 * <pre>
+	 * CommandRequestAttributes.withTenant("demo", () -&gt; {
+	 * 	final SalesOrder salesOrder = new SalesOrder();
+	 * 	salesOrderRepo.add(salesOrder);
+	 * 	return null;
+	 * });
+	 * </pre>
+	 * 
+	 * @param tenantId
+	 * @param func
+	 * @return
+	 * @throws Exception
+	 */
+	public static <T> T withTenant(String tenantId, Callable<T> func) throws Exception {
+		try (Closeable cl = withTenant(tenantId)) {
+			return func.call();
+		}
 	}
 	
 	/**
