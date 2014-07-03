@@ -13,6 +13,8 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.soluvas.commons.CommonsFactory;
 
+import com.google.common.base.Preconditions;
+
 /**
  * A representation of the model object '<em><b>PostalAddress</b></em>'. <!--
  * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> See
@@ -39,8 +41,9 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	public PostalAddress(final org.soluvas.commons.PostalAddress postalAddressUp) {
+		Preconditions.checkNotNull(postalAddressUp, "Postal Address must not be null");
 		final PostalAddress address = new PostalAddress();
-		address.setId(UUID.fromString(postalAddressUp.getId()));
+		address.setId(postalAddressUp.getId() != null ? UUID.fromString(postalAddressUp.getId()) : UUID.randomUUID());
 		address.setCity(postalAddressUp.getCity());
 		address.setCountry(postalAddressUp.getCountry());
 		address.setCountryCode(postalAddressUp.getCountryCode());
@@ -66,8 +69,8 @@ public class PostalAddress implements Describable, Serializable {
 		address.setWorkPhones(postalAddressUp.getWorkPhones());
 	}
 
-	public static org.soluvas.commons.PostalAddress toCommons(
-			PostalAddress postalAddressUp) {
+	public static org.soluvas.commons.PostalAddress toCommons(PostalAddress postalAddressUp) {
+		Preconditions.checkNotNull(postalAddressUp, "Postal Address must not be null");
 		final org.soluvas.commons.PostalAddress address = CommonsFactory.eINSTANCE
 				.createPostalAddress();
 		address.setCity(postalAddressUp.getCity());
