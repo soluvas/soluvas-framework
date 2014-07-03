@@ -70,6 +70,7 @@ import com.google.common.base.Strings;
  *   <li>{@link org.soluvas.data.impl.TermImpl#getKindNsPrefix <em>Kind Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getKindName <em>Kind Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#isBordered <em>Bordered</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getImageUri <em>Image Uri</em>}</li>
  * </ul>
  * </p>
  *
@@ -430,6 +431,26 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @ordered
 	 */
 	protected boolean bordered = BORDERED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getImageUri() <em>Image Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImageUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String IMAGE_URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getImageUri() <em>Image Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImageUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected String imageUri = IMAGE_URI_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -897,6 +918,27 @@ public class TermImpl extends EObjectImpl implements Term {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getImageUri() {
+		return imageUri;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setImageUri(String newImageUri) {
+		String oldImageUri = imageUri;
+		imageUri = newImageUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__IMAGE_URI, oldImageUri, imageUri));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	@JsonIgnore
@@ -997,6 +1039,8 @@ public class TermImpl extends EObjectImpl implements Term {
 				return getKindName();
 			case DataPackage.TERM__BORDERED:
 				return isBordered();
+			case DataPackage.TERM__IMAGE_URI:
+				return getImageUri();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1068,6 +1112,9 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__BORDERED:
 				setBordered((Boolean)newValue);
 				return;
+			case DataPackage.TERM__IMAGE_URI:
+				setImageUri((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1137,6 +1184,9 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__BORDERED:
 				setBordered(BORDERED_EDEFAULT);
 				return;
+			case DataPackage.TERM__IMAGE_URI:
+				setImageUri(IMAGE_URI_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1187,6 +1237,8 @@ public class TermImpl extends EObjectImpl implements Term {
 				return KIND_NAME_EDEFAULT == null ? kindName != null : !KIND_NAME_EDEFAULT.equals(kindName);
 			case DataPackage.TERM__BORDERED:
 				return bordered != BORDERED_EDEFAULT;
+			case DataPackage.TERM__IMAGE_URI:
+				return IMAGE_URI_EDEFAULT == null ? imageUri != null : !IMAGE_URI_EDEFAULT.equals(imageUri);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1367,6 +1419,8 @@ public class TermImpl extends EObjectImpl implements Term {
 		result.append(kindName);
 		result.append(", bordered: ");
 		result.append(bordered);
+		result.append(", imageUri: ");
+		result.append(imageUri);
 		result.append(')');
 		return result.toString();
 	}

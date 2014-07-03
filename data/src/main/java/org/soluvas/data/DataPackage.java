@@ -952,13 +952,22 @@ public interface DataPackage extends EPackage {
 	int TERM__BORDERED = TERM_CONTAINER_FEATURE_COUNT + 17;
 
 	/**
+	 * The feature id for the '<em><b>Image Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__IMAGE_URI = TERM_CONTAINER_FEATURE_COUNT + 18;
+
+	/**
 	 * The number of structural features of the '<em>Term</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TERM_FEATURE_COUNT = TERM_CONTAINER_FEATURE_COUNT + 18;
+	int TERM_FEATURE_COUNT = TERM_CONTAINER_FEATURE_COUNT + 19;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.ListVocabImpl <em>List Vocab</em>}' class.
@@ -2039,6 +2048,17 @@ public interface DataPackage extends EPackage {
 	EAttribute getTerm_Bordered();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Term#getImageUri <em>Image Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Image Uri</em>'.
+	 * @see org.soluvas.data.Term#getImageUri()
+	 * @see #getTerm()
+	 * @generated
+	 */
+	EAttribute getTerm_ImageUri();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.ListVocab <em>List Vocab</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2708,6 +2728,14 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TERM__BORDERED = eINSTANCE.getTerm_Bordered();
+
+		/**
+		 * The meta object literal for the '<em><b>Image Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TERM__IMAGE_URI = eINSTANCE.getTerm_ImageUri();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.ListVocabImpl <em>List Vocab</em>}' class.

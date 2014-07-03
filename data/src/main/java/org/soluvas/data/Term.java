@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.data.Term#getKindNsPrefix <em>Kind Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.Term#getKindName <em>Kind Name</em>}</li>
  *   <li>{@link org.soluvas.data.Term#isBordered <em>Bordered</em>}</li>
+ *   <li>{@link org.soluvas.data.Term#getImageUri <em>Image Uri</em>}</li>
  * </ul>
  * </p>
  *
@@ -207,6 +208,31 @@ public interface Term extends TermContainer, BundleAware, NameContainer, Resourc
 	 * @generated
 	 */
 	void setBordered(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Image Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Digunakan untuk mendapatkan imageUri dari proses API.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Image Uri</em>' attribute.
+	 * @see #setImageUri(String)
+	 * @see org.soluvas.data.DataPackage#getTerm_ImageUri()
+	 * @model
+	 * @generated
+	 */
+	String getImageUri();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Term#getImageUri <em>Image Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Image Uri</em>' attribute.
+	 * @see #getImageUri()
+	 * @generated
+	 */
+	void setImageUri(String value);
 
 	/**
 	 * <!-- begin-user-doc -->
