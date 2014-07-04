@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
@@ -55,10 +56,10 @@ public class PersistentEnum extends org.jadira.usertype.corejava.PersistentEnum 
 			IllegalAccessException, InvocationTargetException {
     	if (value == null) {
             // To support NULL insertion, use type 1111 instead of VARCHAR
-			preparedStatement.setNull(index, 1111);
+			preparedStatement.setNull(index, Types.OTHER);
 		} else {
             // Notice 1111 which java.sql.Type for Postgres Enum
-			preparedStatement.setObject(index, ((Enum) value).name(), 1111);
+			preparedStatement.setObject(index, ((Enum) value).name(), Types.OTHER);
 		}
 	}
 
