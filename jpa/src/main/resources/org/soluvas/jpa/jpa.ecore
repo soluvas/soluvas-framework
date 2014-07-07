@@ -146,4 +146,8 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Gender" instanceClassName="org.soluvas.commons.Gender"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ListMultimap" instanceClassName="com.google.common.collect.ListMultimap">
+    <eTypeParameters name="K"/>
+    <eTypeParameters name="V"/>
+  </eClassifiers>
 </ecore:EPackage>
