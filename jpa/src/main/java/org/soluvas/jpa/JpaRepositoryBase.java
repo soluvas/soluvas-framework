@@ -76,11 +76,13 @@ import scala.util.Try;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
 import com.google.common.eventbus.EventBus;
@@ -470,9 +472,14 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 
 	@Override @Transactional(readOnly=true)
 	public Set<ID> exists(Collection<ID> ids) {
-		return existsAllById(StatusMask.RAW, ids).keySet();
+		return Maps.filterValues(existsAllById(StatusMask.RAW, ids), new Predicate<Existence<ID>>() {
+			@Override
+			public boolean apply(Existence<ID> input) {
+				return input.isPresent();
+			}
+		}).keySet();
 	}
-
+	
 	@Override @Transactional(readOnly=true)
 	public List<T> findAll(Collection<ID> ids, Sort sort) {
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
