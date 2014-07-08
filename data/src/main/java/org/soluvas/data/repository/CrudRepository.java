@@ -23,6 +23,7 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 
 import org.soluvas.data.EntityLookup;
+import org.soluvas.data.Existence;
 
 /**
  * Interface for generic CRUD operations on a repository for a specific type.
@@ -116,7 +117,9 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @param id must not be {@literal null}.
 	 * @return true if an entity with the given id exists, alse otherwise
 	 * @throws IllegalArgumentException if {@code id} is {@literal null}
+	 * @deprecated If possible, please use variant which return {@link Existence}.
 	 */
+	@Deprecated
 	boolean exists(final ID id);
 
 	/**
@@ -125,7 +128,9 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @param ids must not be {@literal null}.
 	 * @return true if an entity with the given id exists, alse otherwise
 	 * @throws IllegalArgumentException if {@code id} is {@literal null}
+	 * @deprecated If possible, please use variant which return {@link Existence}.
 	 */
+	@Deprecated
 	boolean existsAll(final Collection<ID> ids);
 
 	/**
@@ -134,7 +139,9 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	 * @param ids must not be {@literal null}.
 	 * @return true if an entity with the given id exists, alse otherwise
 	 * @throws IllegalArgumentException if {@code id} is {@literal null}
+	 * @deprecated If possible, please use variant which return {@link Existence}.
 	 */
+	@Deprecated
 	boolean existsAny(final Collection<ID> ids);
 
 	/**
