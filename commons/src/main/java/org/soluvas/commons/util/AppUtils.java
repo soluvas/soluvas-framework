@@ -53,7 +53,7 @@ public class AppUtils {
 				final UriTemplate template = UriTemplate.fromTemplate(appManifest.getEmailLogoUriTemplate());
 				return template.expand(ImmutableMap.<String, Object>of(
 						"baseUri", webAddress.getBaseUri(),
-						"imagesUri", webAddress.getImagesUri())).toString();
+						"imagesUri", webAddress.getImagesUri()));
 			} else {
 				return appManifest.getEmailLogoUriTemplate();
 			}
