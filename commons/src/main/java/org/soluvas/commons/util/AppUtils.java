@@ -29,7 +29,7 @@ public class AppUtils {
 	/**
 	 * Returns the absolute URI of {@literal logo_email.png},
 	 * specified by {@link AppManifest#getEmailLogoUriTemplate()}.
-	 * This is practically "{webAddress.imagesUri}tenant_common/logo_email.png".
+	 * This is practically <code>{webAddress.imagesUri}tenant_common/logo_email.png</code>.
 	 * Where {@literal common} is mounted by {tenantId}_common.
 	 * 
 	 * <p>This is useful for email and for JasperReports reporting.
@@ -47,10 +47,16 @@ public class AppUtils {
 		try {
 			Preconditions.checkNotNull(appManifest.getEmailLogoUriTemplate(),
 					"AppManifest.emailLogoUriTemplate is required");
-			Preconditions.checkNotNull(webAddress.getImagesUri(),
-					"WebAddress.imagesUri is required");
-			final UriTemplate template = UriTemplate.fromTemplate(appManifest.getEmailLogoUriTemplate());
-			return template.expand(ImmutableMap.<String, Object>of("imagesUri", webAddress.getImagesUri())).toString();
+			if (appManifest.getEmailLogoUriTemplate().contains("{")) {
+				Preconditions.checkNotNull(webAddress.getImagesUri(),
+						"WebAddress.imagesUri is required");
+				final UriTemplate template = UriTemplate.fromTemplate(appManifest.getEmailLogoUriTemplate());
+				return template.expand(ImmutableMap.<String, Object>of(
+						"baseUri", webAddress.getBaseUri(),
+						"imagesUri", webAddress.getImagesUri())).toString();
+			} else {
+				return appManifest.getEmailLogoUriTemplate();
+			}
 		} catch (MalformedUriTemplateException | VariableExpansionException e) {
 			throw new CommonsException(e, "Cannot expand imagesUri '%s' from AppManifest '%s' using template '%s'",
 					webAddress.getImagesUri(), appManifest.getTitle(), appManifest.getEmailLogoUriTemplate());
