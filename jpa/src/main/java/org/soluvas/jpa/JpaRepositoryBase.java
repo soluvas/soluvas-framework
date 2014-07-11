@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +23,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Selection;
 import javax.persistence.metamodel.EntityType;
 import javax.sql.DataSource;
 
@@ -53,6 +55,7 @@ import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Projection;
 import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.domain.Sort.Order;
@@ -692,6 +695,19 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	 */
 	protected String getTenantId() {
 		return getTenant().getTenantId();
+	}
+	
+	protected List<Selection<?>> getSelectionsFromProjection(final Root<T> root, final Projection projection){
+		Preconditions.checkState(projection.getExcludedFields() == null, "NOT SUPPORT for Excluded fields on Projection.");
+		Preconditions.checkNotNull(projection, "Projection must not be null.");
+		final List<Selection<?>> selections = new ArrayList<>();
+		if (!projection.isIdIncluded()) {
+			selections.add(root.get("id"));
+		}
+		for (final String field : projection.getIncludedFields()) {
+			selections.add(root.get(field));
+		}
+		return selections;
 	}
 	
 }
