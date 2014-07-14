@@ -670,7 +670,9 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		if (entity.getCreationTime() == null) {
 			entity.setCreationTime(new DateTime(getAppManifest().getDefaultTimeZone()));
 		}
-		entity.setModificationTime(new DateTime(getAppManifest().getDefaultTimeZone()));
+		if (entity.getModificationTime() == null) {
+			entity.setModificationTime(new DateTime(getAppManifest().getDefaultTimeZone()));
+		}
 	}
 
 	/**
