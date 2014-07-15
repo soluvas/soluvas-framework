@@ -203,7 +203,7 @@ public class GeoNamesCityRepository implements CityRepository {
 		final City city = new City(name, normalizedName, province, country);
 		tree.put(city.getNormalizedName().toLowerCase() + ", " + city.getCountry().getIso(), city);
 		entryCount++;
-		// full text search entries
+		// below are full text search entries, so tree entries are "duplicates", but still refer to safe City object above
 		String fullTextName = city.getNormalizedName().toLowerCase();
 		int spacePos = fullTextName.indexOf(' ');
 		while (spacePos >= 0) {
