@@ -42,31 +42,30 @@ public class PostalAddress implements Describable, Serializable {
 
 	public PostalAddress(final org.soluvas.commons.PostalAddress postalAddressUp) {
 		Preconditions.checkNotNull(postalAddressUp, "Postal Address must not be null");
-		final PostalAddress address = new PostalAddress();
-		address.setId(postalAddressUp.getId() != null ? UUID.fromString(postalAddressUp.getId()) : UUID.randomUUID());
-		address.setCity(postalAddressUp.getCity());
-		address.setCountry(postalAddressUp.getCountry());
-		address.setCountryCode(postalAddressUp.getCountryCode());
-		address.setDescription(postalAddressUp.getDescription());
-		address.setEmails(postalAddressUp.getEmails());
-		address.setHomePhones(postalAddressUp.getHomePhones());
-		address.setMobiles(postalAddressUp.getMobiles());
-		address.setName(postalAddressUp.getName());
-		address.setOrganization(postalAddressUp.getOrganization());
-		address.setPhones(postalAddressUp.getPhones());
-		address.setPostalCode(postalAddressUp.getPostalCode());
-		address.setPrimary(postalAddressUp.isPrimary());
-		address.setPrimaryBilling(postalAddressUp.isPrimaryBilling());
-		address.setPrimaryEmail(postalAddressUp.getPrimaryEmail());
-		address.setPrimaryHomePhone(postalAddressUp.getPrimaryHomePhone());
-		address.setPrimaryMobile(postalAddressUp.getPrimaryMobile());
-		address.setPrimaryPhone(postalAddressUp.getPrimaryPhone());
-		address.setPrimaryShipping(postalAddressUp.isPrimaryShipping());
-		address.setPrimaryWorkPhone(postalAddressUp.getPrimaryWorkPhone());
-		address.setProvince(postalAddressUp.getProvince());
-		address.setStreet(postalAddressUp.getStreet());
-		address.setValidationTime(postalAddressUp.getValidationTime());
-		address.setWorkPhones(postalAddressUp.getWorkPhones());
+		setId(postalAddressUp.getId() != null ? UUID.fromString(postalAddressUp.getId()) : UUID.randomUUID());
+		setCity(postalAddressUp.getCity());
+		setCountry(postalAddressUp.getCountry());
+		setCountryCode(postalAddressUp.getCountryCode());
+		setDescription(postalAddressUp.getDescription());
+		setEmails(postalAddressUp.getEmails());
+		setHomePhones(postalAddressUp.getHomePhones());
+		setMobiles(postalAddressUp.getMobiles());
+		setName(postalAddressUp.getName());
+		setOrganization(postalAddressUp.getOrganization());
+		setPhones(postalAddressUp.getPhones());
+		setPostalCode(postalAddressUp.getPostalCode());
+		setPrimary(postalAddressUp.isPrimary());
+		setPrimaryBilling(postalAddressUp.isPrimaryBilling());
+		setPrimaryEmail(postalAddressUp.getPrimaryEmail());
+		setPrimaryHomePhone(postalAddressUp.getPrimaryHomePhone());
+		setPrimaryMobile(postalAddressUp.getPrimaryMobile());
+		setPrimaryPhone(postalAddressUp.getPrimaryPhone());
+		setPrimaryShipping(postalAddressUp.isPrimaryShipping());
+		setPrimaryWorkPhone(postalAddressUp.getPrimaryWorkPhone());
+		setProvince(postalAddressUp.getProvince());
+		setStreet(postalAddressUp.getStreet());
+		setValidationTime(postalAddressUp.getValidationTime());
+		setWorkPhones(postalAddressUp.getWorkPhones());
 	}
 
 	public static org.soluvas.commons.PostalAddress toCommons(PostalAddress postalAddressUp) {
