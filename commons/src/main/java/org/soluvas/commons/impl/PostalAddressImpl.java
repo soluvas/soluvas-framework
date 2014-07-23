@@ -3,6 +3,7 @@
 package org.soluvas.commons.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -52,6 +53,7 @@ import org.soluvas.commons.SchemaVersionable;
  *
  * @generated
  */
+@SuppressWarnings("serial")
 public class PostalAddressImpl extends MinimalEObjectImpl.Container implements PostalAddress {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -527,6 +529,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -536,6 +539,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -548,6 +552,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -557,6 +562,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(String newId) {
 		String oldId = id;
 		id = newId;
@@ -569,6 +575,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public long getSchemaVersion() {
 		return schemaVersion;
 	}
@@ -578,6 +585,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getOrganization() {
 		return organization;
 	}
@@ -587,6 +595,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOrganization(String newOrganization) {
 		String oldOrganization = organization;
 		organization = newOrganization;
@@ -599,6 +608,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getStreet() {
 		return street;
 	}
@@ -608,6 +618,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStreet(String newStreet) {
 		String oldStreet = street;
 		street = newStreet;
@@ -620,6 +631,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getCity() {
 		return city;
 	}
@@ -629,6 +641,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCity(String newCity) {
 		String oldCity = city;
 		city = newCity;
@@ -641,6 +654,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPostalCode() {
 		return postalCode;
 	}
@@ -650,6 +664,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPostalCode(String newPostalCode) {
 		String oldPostalCode = postalCode;
 		postalCode = newPostalCode;
@@ -662,6 +677,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getProvince() {
 		return province;
 	}
@@ -671,6 +687,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setProvince(String newProvince) {
 		String oldProvince = province;
 		province = newProvince;
@@ -683,6 +700,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getCountry() {
 		return country;
 	}
@@ -692,6 +710,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCountry(String newCountry) {
 		String oldCountry = country;
 		country = newCountry;
@@ -704,6 +723,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getCountryCode() {
 		return countryCode;
 	}
@@ -713,6 +733,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCountryCode(String newCountryCode) {
 		String oldCountryCode = countryCode;
 		countryCode = newCountryCode;
@@ -725,6 +746,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPrimaryMobile() {
 		return primaryMobile;
 	}
@@ -734,6 +756,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryMobile(String newPrimaryMobile) {
 		String oldPrimaryMobile = primaryMobile;
 		primaryMobile = newPrimaryMobile;
@@ -746,6 +769,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getMobiles() {
 		if (mobiles == null) {
 			mobiles = new EDataTypeUniqueEList<String>(String.class, this, CommonsPackage.POSTAL_ADDRESS__MOBILES);
@@ -758,6 +782,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPrimaryPhone() {
 		return primaryPhone;
 	}
@@ -767,6 +792,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryPhone(String newPrimaryPhone) {
 		String oldPrimaryPhone = primaryPhone;
 		primaryPhone = newPrimaryPhone;
@@ -779,6 +805,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getPhones() {
 		if (phones == null) {
 			phones = new EDataTypeUniqueEList<String>(String.class, this, CommonsPackage.POSTAL_ADDRESS__PHONES);
@@ -791,6 +818,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPrimaryHomePhone() {
 		return primaryHomePhone;
 	}
@@ -800,6 +828,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryHomePhone(String newPrimaryHomePhone) {
 		String oldPrimaryHomePhone = primaryHomePhone;
 		primaryHomePhone = newPrimaryHomePhone;
@@ -812,6 +841,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getHomePhones() {
 		if (homePhones == null) {
 			homePhones = new EDataTypeUniqueEList<String>(String.class, this, CommonsPackage.POSTAL_ADDRESS__HOME_PHONES);
@@ -824,6 +854,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPrimaryWorkPhone() {
 		return primaryWorkPhone;
 	}
@@ -833,6 +864,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryWorkPhone(String newPrimaryWorkPhone) {
 		String oldPrimaryWorkPhone = primaryWorkPhone;
 		primaryWorkPhone = newPrimaryWorkPhone;
@@ -845,6 +877,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getWorkPhones() {
 		if (workPhones == null) {
 			workPhones = new EDataTypeUniqueEList<String>(String.class, this, CommonsPackage.POSTAL_ADDRESS__WORK_PHONES);
@@ -857,6 +890,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPrimaryEmail() {
 		return primaryEmail;
 	}
@@ -866,6 +900,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryEmail(String newPrimaryEmail) {
 		String oldPrimaryEmail = primaryEmail;
 		primaryEmail = newPrimaryEmail;
@@ -878,6 +913,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getEmails() {
 		if (emails == null) {
 			emails = new EDataTypeUniqueEList<String>(String.class, this, CommonsPackage.POSTAL_ADDRESS__EMAILS);
@@ -890,6 +926,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -899,6 +936,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		String oldDescription = description;
 		description = newDescription;
@@ -911,6 +949,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isPrimary() {
 		return primary;
 	}
@@ -920,6 +959,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimary(boolean newPrimary) {
 		boolean oldPrimary = primary;
 		primary = newPrimary;
@@ -932,6 +972,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isPrimaryBilling() {
 		return primaryBilling;
 	}
@@ -941,6 +982,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryBilling(boolean newPrimaryBilling) {
 		boolean oldPrimaryBilling = primaryBilling;
 		primaryBilling = newPrimaryBilling;
@@ -953,6 +995,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isPrimaryShipping() {
 		return primaryShipping;
 	}
@@ -962,6 +1005,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryShipping(boolean newPrimaryShipping) {
 		boolean oldPrimaryShipping = primaryShipping;
 		primaryShipping = newPrimaryShipping;
@@ -974,6 +1018,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getValidationTime() {
 		return validationTime;
 	}
@@ -983,6 +1028,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValidationTime(DateTime newValidationTime) {
 		DateTime oldValidationTime = validationTime;
 		validationTime = newValidationTime;

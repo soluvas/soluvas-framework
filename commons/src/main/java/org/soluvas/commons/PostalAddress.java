@@ -2,6 +2,8 @@
  */
 package org.soluvas.commons;
 
+import java.io.Serializable;
+
 import org.eclipse.emf.common.util.EList;
 import org.joda.time.DateTime;
 
@@ -64,7 +66,7 @@ import org.joda.time.DateTime;
  * @model
  * @generated
  */
-public interface PostalAddress extends NameContainer, Identifiable, SchemaVersionable {
+public interface PostalAddress extends NameContainer, Identifiable, SchemaVersionable, Serializable {
 	/**
 	 * Returns the value of the '<em><b>Schema Version</b></em>' attribute.
 	 * The default value is <code>"3"</code>.
