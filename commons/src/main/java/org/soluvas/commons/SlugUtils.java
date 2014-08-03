@@ -1,5 +1,6 @@
 package org.soluvas.commons;
 
+import java.text.Normalizer;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nonnegative;
@@ -31,6 +32,14 @@ public class SlugUtils {
 	 */
 	public static final Pattern CANONICAL_PATTERN = Pattern.compile("[a-z0-9][a-z0-9]+");
 	public static final Pattern CANONICAL_PATH_PATTERN = Pattern.compile("[a-z0-9][a-z0-9]+[a-z0-9/]*");
+	public static final Pattern PUNCTUATION = Pattern.compile("\\p{Punct}+", Pattern.UNICODE_CHARACTER_CLASS);
+	public static final Pattern NOT_ALPHANUM_OR_SPACE = Pattern.compile("[^A-Za-z0-9 ]+");
+	public static final Pattern NOT_ALPHANUM = Pattern.compile("[^A-Za-z0-9]+");
+	public static final Pattern NOT_LOWER_ALPHANUM = Pattern.compile("[^a-z0-9]+");
+	public static final Pattern NOT_LOWER_ALPHANUM_OR_SLASH = Pattern.compile("[^a-z0-9/]+");
+	public static final Pattern DOTS = Pattern.compile("\\.+");
+	public static final Pattern UNDERSCORES = Pattern.compile("\\_+");
+	public static final Pattern DASHES = Pattern.compile("\\-+");
 	
 	/**
 	 * Generates person slugs (using dots).
@@ -41,8 +50,12 @@ public class SlugUtils {
 	public static String generateScreenName(String name, @Nonnegative int suffix) {
 		Preconditions.checkNotNull(name, "name must not be null");
 		Preconditions.checkArgument(suffix >= 0, "suffix must be non-negative");
-		String base = name.replaceAll("[^A-Za-z0-9]", " ").trim().toLowerCase().replaceAll(" ", ".")
-				.replaceAll("\\.+", ".");
+		// http://stackoverflow.com/a/3322174/122441
+		String base = Normalizer.normalize(name, Normalizer.Form.NFD);
+		base = PUNCTUATION.matcher(base).replaceAll(" ");
+		base = NOT_ALPHANUM_OR_SPACE.matcher(base).replaceAll("");
+		base = base.trim().toLowerCase().replace(' ', '.');
+		base = DOTS.matcher(base).replaceAll(".");
 		while (base.length() < MIN_LENGTH)
 			base += "a";
 		final String suffixStr = String.valueOf(suffix);
@@ -68,8 +81,12 @@ public class SlugUtils {
 	public static String generateId(String name, int suffix) {
 		Preconditions.checkNotNull(name, "name must not be null");
 		Preconditions.checkArgument(suffix >= 0, "suffix must be non-negative");
-		String base = name.replaceAll("[^A-Za-z0-9]", " ").trim().toLowerCase().replaceAll(" ", "_")
-				.replaceAll("\\_+", "_");
+		// http://stackoverflow.com/a/3322174/122441
+		String base = Normalizer.normalize(name, Normalizer.Form.NFD);
+		base = PUNCTUATION.matcher(base).replaceAll(" ");
+		base = NOT_ALPHANUM_OR_SPACE.matcher(base).replaceAll("");
+		base = base.trim().toLowerCase().replace(' ', '_');
+		base = UNDERSCORES.matcher(base).replaceAll("_");
 		while (base.length() < MIN_LENGTH)
 			base += "a";
 		final String suffixStr = String.valueOf(suffix);
@@ -95,7 +112,10 @@ public class SlugUtils {
 	public static String generateTenantId(String name, int suffix) {
 		Preconditions.checkNotNull(name, "name must not be null");
 		Preconditions.checkArgument(suffix >= 0, "suffix must be non-negative");
-		String base = name.replaceAll("[^A-Za-z0-9]", "").trim().toLowerCase();
+		// http://stackoverflow.com/a/3322174/122441
+		String base = Normalizer.normalize(name, Normalizer.Form.NFD);
+		base = NOT_ALPHANUM.matcher(base).replaceAll("");
+		base = base.trim().toLowerCase();
 		while (base.length() < MIN_LENGTH)
 			base += "a";
 		final String suffixStr = String.valueOf(suffix);
@@ -121,8 +141,12 @@ public class SlugUtils {
 	public static String generateSegment(String name, int suffix) {
 		Preconditions.checkNotNull(name, "name must not be null");
 		Preconditions.checkArgument(suffix >= 0, "suffix must be non-negative");
-		String base = name.replaceAll("[^A-Za-z0-9]", " ").trim().toLowerCase().replaceAll(" ", "-")
-				.replaceAll("\\-+", "-");
+		// http://stackoverflow.com/a/3322174/122441
+		String base = Normalizer.normalize(name, Normalizer.Form.NFD);
+		base = PUNCTUATION.matcher(base).replaceAll(" ");
+		base = NOT_ALPHANUM_OR_SPACE.matcher(base).replaceAll("");
+		base = base.trim().toLowerCase().replace(' ', '-');
+		base = DASHES.matcher(base).replaceAll("-");
 		while (base.length() < MIN_LENGTH)
 			base += "a";
 		final String suffixStr = String.valueOf(suffix);
@@ -252,7 +276,7 @@ public class SlugUtils {
 	 */
 	@Nullable
 	public static String canonicalize(@Nullable String slug) {
-		return slug != null ? slug.toLowerCase().replaceAll("[^a-z0-9]", "") : null;
+		return slug != null ? NOT_LOWER_ALPHANUM.matcher(slug.toLowerCase()).replaceAll("") : null;
 	}
 
 	/**
@@ -263,7 +287,7 @@ public class SlugUtils {
 	 */
 	@Nullable
 	public static String canonicalizePath(@Nullable String slugPath) {
-		return slugPath != null ? slugPath.toLowerCase().replaceAll("[^a-z0-9/]", "") : null;
+		return slugPath != null ? NOT_LOWER_ALPHANUM_OR_SLASH.matcher(slugPath.toLowerCase()).replaceAll("") : null;
 	}
 
 }
