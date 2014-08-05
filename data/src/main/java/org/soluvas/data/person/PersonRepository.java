@@ -98,6 +98,14 @@ public interface PersonRepository extends
 	
 	@Nullable
 	String getCustomerRoleByPersonId(String personId);
+	
+	/**
+	 * @param statusMask
+	 * @param slug
+	 * @return
+	 * @see SlugLookup#existsBySlug(StatusMask, String)
+	 */
+//	public Existence<String> existsBySlugEx(StatusMask statusMask, String slug);
 
 }
 

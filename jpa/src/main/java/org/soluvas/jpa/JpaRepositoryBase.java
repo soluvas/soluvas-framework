@@ -555,6 +555,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 
 	@Override @Transactional(readOnly=true)
 	public Existence<ID> existsById(StatusMask statusMask, ID id) {
+		Preconditions.checkNotNull(id, "ID must not be null");
 		return Preconditions.checkNotNull(existsAllById(statusMask, ImmutableSet.of(id)).get(id),
 				"Internal error: existsAllById %s %s does not return Existence for key '%s'",
 				entityClass.getName(), statusMask, id);
