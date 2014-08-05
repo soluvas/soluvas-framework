@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.felix.service.command.CommandSession;
@@ -29,6 +30,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -42,6 +44,9 @@ import com.google.common.eventbus.EventBus;
  * Recommended is to use {@link TenantMode#MULTI_HOST}.
  * For {@link TenantMode#MULTI_PATH} (deprecated): e.g. http://localhost:8080/{hotelContext}/{app}/t/{tenantId}/{tenantEnv}.
  * Which means tenant is read per request.
+ * Requires either {@link ServletContext} aka {@link WebApplicationContext} or {@link RequestOrCommandScope}
+ * to determine the {@link TenantRefImpl} hence, {@code dataDir}.
+ * 
  * @author rudi
  * @see SingleTenantWebConfig
  */

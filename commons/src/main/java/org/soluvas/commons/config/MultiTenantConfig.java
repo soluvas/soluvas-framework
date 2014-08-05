@@ -58,7 +58,7 @@ import com.google.common.eventbus.EventBus;
  * @see MultiTenantWebConfig
  */
 @Configuration("tenantConfig")
-public class MultiTenantConfig implements TenantRepositoryListener {
+public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConfig {
 	private static final Logger log = LoggerFactory
 			.getLogger(MultiTenantConfig.class);
 
@@ -437,6 +437,7 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	 * @return
 	 * @see commerce.properties: defaultLocale
 	 */
+	@Override
 	public Locale getDefaultLocale() {
 		return Locale.forLanguageTag(env.getRequiredProperty("defaultLocale"));
 	}
@@ -446,6 +447,7 @@ public class MultiTenantConfig implements TenantRepositoryListener {
 	 * @return
 	 * @see commerce.properties: defaultTimeZone
 	 */
+	@Override
 	public DateTimeZone getDefaultTimeZone() {
 		return DateTimeZone.forID(env.getRequiredProperty("defaultTimeZone"));
 	}

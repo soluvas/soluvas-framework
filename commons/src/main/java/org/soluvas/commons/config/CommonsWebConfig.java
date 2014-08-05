@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import javax.servlet.ServletContext;
 
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
@@ -30,7 +29,6 @@ import org.slf4j.MDC;
 import org.soluvas.commons.Cpu;
 import org.soluvas.commons.IdAsyncEventBus;
 import org.soluvas.commons.Network;
-import org.soluvas.commons.tenant.TenantRefImpl;
 import org.soluvas.commons.util.AppUtils;
 import org.soluvas.json.EmfModule;
 import org.soluvas.json.JacksonMapperFactory;
@@ -43,6 +41,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 import com.fasterxml.jackson.databind.Module;
@@ -57,12 +56,20 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.util.concurrent.ListeningExecutorService;
 
 /**
- * Replacement of OSGI-INF/blueprint/commons.xml
- * for Spring applications.
- * Requires {@link ServletContext} aka WebApplicationContext
- * to determine the {@link TenantRefImpl} hence, <code>dataDir</code>.
+ * Common infrastructure beans for Spring applications:
  * 
- * <p>Configurable properties:
+ * <ol>
+ * 	<li>{@link #appEventBus()}</li>
+ * 	<li>{@link #networkExecutor()}</li>
+ * 	<li>{@link #cpuExecutor()}</li>
+ * 	<li>{@link #httpClientConnMgr()} v4.2 (usable by Ektorp, etc.)</li>
+ * 	<li>{@link #httpClientConnMgr43()} v4.3</li>
+ * 	<li>{@link #httpClient()} v4.3 but compatible with v4.2</li>
+ * 	<li>{@link #jacksonMapperFactory()}</li>
+ * 	<li>{@link #jacksonMapper()}</li>
+ * </ol>
+ * 
+ * <p>Configurable properties through {@link PropertySource}:
  * 
  * <ol>
  * 	<li>{@code int httpMaxConnections}. Maximum number of HTTP Connections pooled by {@link #httpClientConnMgr()}, default: 20.</li>
@@ -72,6 +79,7 @@ import com.google.common.util.concurrent.ListeningExecutorService;
  * <p>Not using {@link Lazy}, we hope the {@link AppUtils#newCpuExecutor()} and {@link AppUtils#newNetworkExecutor()}
  * isn't a child thread of Tomcat's HTTP request to avoid clobbering {@link MDC}.
  * 
+ * @todo Rename. There's nothing "Web" about this {@link Configuration}, really.
  * @author rudi
  */
 @Configuration
@@ -89,16 +97,6 @@ public class CommonsWebConfig {
 	@Inject
 	private Environment env;
 	
-//	@Value("#{systemProperties['user.home']}/${tenantId}_${tenantEnv}")
-//	public File dataDir;
-	
-//	@Bean
-//	public Properties soluvasProperties() throws FileNotFoundException, IOException {
-//		final Properties props = new Properties();
-//		props.load(new FileReader(dataFolder() + "/etc/org.soluvas.cfg"));
-//		return props;
-//	}
-
 	@Bean(destroyMethod="shutdown") @Network
 	public ListeningExecutorService networkExecutor() {
 		return AppUtils.newNetworkExecutor();
@@ -236,5 +234,4 @@ public class CommonsWebConfig {
 		return jacksonMapperFactory().get();
 	}
 	
-	// TODO: shell commands
 }
