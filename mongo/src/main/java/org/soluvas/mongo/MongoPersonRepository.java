@@ -73,7 +73,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	
 	@Override @Nullable
 	public Person findOneBySlug(StatusMask statusMask, String upSlug) {
-		return findOneByQuery(new BasicDBObject("canonicalSlug", SlugUtils.canonicalize(upSlug)));
+		String canonicalize = SlugUtils.canonicalize(upSlug);
+		log.debug("slug to canonicalSlug : {}", canonicalize);
+		return findOneByQuery(new BasicDBObject("canonicalSlug", canonicalize));
 	}
 
 	@Override
@@ -476,5 +478,11 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		log.debug("Person {}'s customerRole is {}", personId, customerRole);
 		return customerRole;
 	}
+
+//	@Override
+//	public Existence<String> existsBySlugEx(StatusMask statusMask, String slug) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }
