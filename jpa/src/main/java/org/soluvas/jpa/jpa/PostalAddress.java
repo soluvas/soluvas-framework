@@ -76,12 +76,17 @@ public class PostalAddress implements Describable, Serializable {
 		address.setCountry(postalAddressUp.getCountry());
 		address.setCountryCode(postalAddressUp.getCountryCode());
 		address.setDescription(postalAddressUp.getDescription());
-		address.getEmails().addAll(postalAddressUp.getEmails());
-		address.getHomePhones().addAll(postalAddressUp.getHomePhones());
-		address.getMobiles().addAll(postalAddressUp.getMobiles());
+		if (postalAddressUp.getEmails() != null) {
+			address.getEmails().addAll( postalAddressUp.getEmails() );
+		}
+		if (postalAddressUp.getMobiles() != null) {
+			address.getMobiles().addAll(postalAddressUp.getMobiles());
+		}
 		address.setName(postalAddressUp.getName());
 		address.setOrganization(postalAddressUp.getOrganization());
-		address.getPhones().addAll(postalAddressUp.getPhones());
+		if (postalAddressUp.getPhones() != null) {
+			address.getPhones().addAll(postalAddressUp.getPhones());
+		}
 		address.setPostalCode(postalAddressUp.getPostalCode());
 		address.setPrimary(postalAddressUp.isPrimary());
 		address.setPrimaryBilling(postalAddressUp.isPrimaryBilling());
@@ -94,7 +99,9 @@ public class PostalAddress implements Describable, Serializable {
 		address.setProvince(postalAddressUp.getProvince());
 		address.setStreet(postalAddressUp.getStreet());
 		address.setValidationTime(postalAddressUp.getValidationTime());
-		address.getWorkPhones().addAll(postalAddressUp.getWorkPhones());
+		if (postalAddressUp.getWorkPhones() != null) {
+			address.getWorkPhones().addAll(postalAddressUp.getWorkPhones());
+		}
 		address.setId(postalAddressUp.getId().toString());
 
 		return address;
