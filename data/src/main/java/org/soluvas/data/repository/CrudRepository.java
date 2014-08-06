@@ -28,7 +28,7 @@ import org.soluvas.data.Existence;
 /**
  * Interface for generic CRUD operations on a repository for a specific type.
  * 
- * The difference to Spring Data 1.4 are:
+ * <p>The difference to Spring Data 1.4 are:
  * <ol>
  * 	<li>@{@link Nonnull} annotations</li>
  *  <li>CrudRepository{@link #isEmpty()}</li>
