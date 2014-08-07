@@ -4,15 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
-
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.soluvas.commons.CommonsFactory;
-
 import com.google.common.base.Preconditions;
 
 /**
@@ -41,8 +38,10 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	public PostalAddress(final org.soluvas.commons.PostalAddress postalAddressUp) {
-		Preconditions.checkNotNull(postalAddressUp, "Postal Address must not be null");
-		setId(postalAddressUp.getId() != null ? UUID.fromString(postalAddressUp.getId()) : UUID.randomUUID());
+		Preconditions.checkNotNull(postalAddressUp,
+				"Postal Address must not be null");
+		setId(postalAddressUp.getId() != null ? UUID.fromString(postalAddressUp
+				.getId()) : UUID.randomUUID());
 		setCity(postalAddressUp.getCity());
 		setCountry(postalAddressUp.getCountry());
 		setCountryCode(postalAddressUp.getCountryCode());
@@ -68,8 +67,10 @@ public class PostalAddress implements Describable, Serializable {
 		setWorkPhones(postalAddressUp.getWorkPhones());
 	}
 
-	public static org.soluvas.commons.PostalAddress toCommons(PostalAddress postalAddressUp) {
-		Preconditions.checkNotNull(postalAddressUp, "Postal Address must not be null");
+	public static org.soluvas.commons.PostalAddress toCommons(
+			PostalAddress postalAddressUp) {
+		Preconditions.checkNotNull(postalAddressUp,
+				"Postal Address must not be null");
 		final org.soluvas.commons.PostalAddress address = CommonsFactory.eINSTANCE
 				.createPostalAddress();
 		address.setCity(postalAddressUp.getCity());
@@ -77,7 +78,7 @@ public class PostalAddress implements Describable, Serializable {
 		address.setCountryCode(postalAddressUp.getCountryCode());
 		address.setDescription(postalAddressUp.getDescription());
 		if (postalAddressUp.getEmails() != null) {
-			address.getEmails().addAll( postalAddressUp.getEmails() );
+			address.getEmails().addAll(postalAddressUp.getEmails());
 		}
 		if (postalAddressUp.getMobiles() != null) {
 			address.getMobiles().addAll(postalAddressUp.getMobiles());
@@ -290,7 +291,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>id</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>id</b></em>' feature
@@ -302,7 +303,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getId() <em>id</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newId
@@ -316,7 +317,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>name</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>name</b></em>' feature
@@ -328,7 +329,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getName() <em>name</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newName
@@ -428,7 +429,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>street</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>street</b></em>' feature
@@ -440,7 +441,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getStreet() <em>street</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newStreet
@@ -454,7 +455,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>city</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>city</b></em>' feature
@@ -466,7 +467,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getCity() <em>city</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newCity
@@ -480,7 +481,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>postalCode</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>postalCode</b></em>' feature
@@ -493,7 +494,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPostalCode() <em>postalCode</em>}'
 	 * feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPostalCode
@@ -507,7 +508,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>province</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>province</b></em>' feature
@@ -519,7 +520,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getProvince() <em>province</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newProvince
@@ -598,7 +599,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>primaryMobile</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryMobile</b></em>' feature
@@ -611,7 +612,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryMobile() <em>primaryMobile</em>}
 	 * ' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryMobile
@@ -690,7 +691,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>phones</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>phones</b></em>' feature
@@ -702,7 +703,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Sets the '{@link PostalAddress#getPhones() <em>phones</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPhones
@@ -716,7 +717,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>primaryHomePhone</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryHomePhone</b></em>' feature
@@ -729,7 +730,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryHomePhone()
 	 * <em>primaryHomePhone</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryHomePhone
@@ -775,7 +776,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>primaryWorkPhone</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryWorkPhone</b></em>' feature
@@ -788,7 +789,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryWorkPhone()
 	 * <em>primaryWorkPhone</em>}' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryWorkPhone
@@ -832,7 +833,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * Returns the value of '<em><b>primaryEmail</b></em>' feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the value of '<em><b>primaryEmail</b></em>' feature
@@ -845,7 +846,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * Sets the '{@link PostalAddress#getPrimaryEmail() <em>primaryEmail</em>}'
 	 * feature.
-	 * 
+	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryEmail
@@ -895,7 +896,6 @@ public class PostalAddress implements Describable, Serializable {
 	 * @return the value of '<em><b>description</b></em>' feature
 	 * @generated
 	 */
-	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -913,7 +913,6 @@ public class PostalAddress implements Describable, Serializable {
 	 *            description}' feature.
 	 * @generated
 	 */
-	@Override
 	public void setDescription(String newDescription) {
 		description = newDescription;
 	}
