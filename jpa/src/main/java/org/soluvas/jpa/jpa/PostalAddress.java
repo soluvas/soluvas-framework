@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.soluvas.commons.CommonsFactory;
+
 import com.google.common.base.Preconditions;
 
 /**
@@ -103,7 +106,7 @@ public class PostalAddress implements Describable, Serializable {
 		if (postalAddressUp.getWorkPhones() != null) {
 			address.getWorkPhones().addAll(postalAddressUp.getWorkPhones());
 		}
-		address.setId(postalAddressUp.getId().toString());
+		address.setId(postalAddressUp.getId() != null ? postalAddressUp.getId().toString() : null);
 
 		return address;
 	}
@@ -896,6 +899,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * @return the value of '<em><b>description</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -913,6 +917,7 @@ public class PostalAddress implements Describable, Serializable {
 	 *            description}' feature.
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		description = newDescription;
 	}
