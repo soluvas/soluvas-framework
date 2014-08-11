@@ -2,6 +2,7 @@ package org.soluvas.jpa;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLTransientConnectionException;
 import java.sql.Statement;
 
 import javax.sql.DataSource;
@@ -23,9 +24,9 @@ import com.google.common.base.Preconditions;
  * @see SoluvasTenantIdentifierResolver
  * @author ceefour
  */
+@SuppressWarnings("serial")
 public class SoluvasMultiTenantConnectionProviderImpl implements MultiTenantConnectionProvider, Stoppable {
 
-	private static final long serialVersionUID = 1L;
 	private static final Logger log = LoggerFactory
 			.getLogger(SoluvasMultiTenantConnectionProviderImpl.class);
 	public static final String PUBLIC_SCHEMA = "public";
@@ -72,9 +73,14 @@ public class SoluvasMultiTenantConnectionProviderImpl implements MultiTenantConn
 				"Invalid tenantIdentifier syntax, it must contain only alphanumeric and '_' characters.");
 		final Connection conn = dataSource.getConnection();
 		try (final Statement st = conn.createStatement()) {
+			if ("public".equalsIgnoreCase(tenantIdentifier)) {
+				log.debug("Trying to switch " +  conn + " to tenant schema 'public', are you sure this is what you want?");
+						//new Exception("Trying to switch " +  conn + " to tenant schema 'public', are you sure this is what you want?"));
+			}
+			log.trace("Switching Hibernate connection {} to tenant schema '{}'", conn, tenantIdentifier);
 			st.executeUpdate("SET SCHEMA '" + tenantIdentifier + "'");
 		} catch (SQLException e) {
-			throw new RuntimeException(
+			throw new SQLTransientConnectionException(
 					"Could not alter JDBC connection to specified schema [" + tenantIdentifier + "]", e);
 		}
 		return conn;
@@ -83,15 +89,17 @@ public class SoluvasMultiTenantConnectionProviderImpl implements MultiTenantConn
 	@Override
 	public void releaseConnection(String tenantIdentifier, Connection connection)
 			throws SQLException {
+		log.trace("Switching back Hibernate connection {} to schema '{}'", connection, PUBLIC_SCHEMA);
 		try (final Statement st = connection.createStatement()) {
 			st.executeUpdate("SET SCHEMA '" + PUBLIC_SCHEMA + "'");
 		} catch (SQLException e) {
 			// on error, throw an exception to make sure the connection is not returned to the pool.
 			// your requirements may differ
-			throw new RuntimeException(
+			throw new SQLTransientConnectionException(
 					"Could not alter released JDBC connection from schema '" + tenantIdentifier + "' to schema '" + PUBLIC_SCHEMA + "'", e);
+		} finally {
+			connection.close();
 		}
-		connection.close();
 	}
 
 	@Override
