@@ -345,6 +345,11 @@
 						<artifactId>commons-logging</artifactId>
 						<groupId>commons-logging</groupId>
 					</exclusion>
+					<!-- https://github.com/helun/Ektorp/issues/191 -->
+					<exclusion>
+						<artifactId>annotations</artifactId>
+						<groupId>net.sourceforge.findbugs</groupId>
+					</exclusion>
 				</exclusions>
 			</dependency>
 			<dependency>
