@@ -11,7 +11,6 @@ import javax.persistence.Embeddable;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.soluvas.commons.CommonsFactory;
 
 import com.google.common.base.Preconditions;
 
@@ -68,47 +67,6 @@ public class PostalAddress implements Describable, Serializable {
 		setStreet(postalAddressUp.getStreet());
 		setValidationTime(postalAddressUp.getValidationTime());
 		setWorkPhones(postalAddressUp.getWorkPhones());
-	}
-
-	public static org.soluvas.commons.PostalAddress toCommons(
-			PostalAddress postalAddressUp) {
-		Preconditions.checkNotNull(postalAddressUp,
-				"Postal Address must not be null");
-		final org.soluvas.commons.PostalAddress address = CommonsFactory.eINSTANCE
-				.createPostalAddress();
-		address.setCity(postalAddressUp.getCity());
-		address.setCountry(postalAddressUp.getCountry());
-		address.setCountryCode(postalAddressUp.getCountryCode());
-		address.setDescription(postalAddressUp.getDescription());
-		if (postalAddressUp.getEmails() != null) {
-			address.getEmails().addAll(postalAddressUp.getEmails());
-		}
-		if (postalAddressUp.getMobiles() != null) {
-			address.getMobiles().addAll(postalAddressUp.getMobiles());
-		}
-		address.setName(postalAddressUp.getName());
-		address.setOrganization(postalAddressUp.getOrganization());
-		if (postalAddressUp.getPhones() != null) {
-			address.getPhones().addAll(postalAddressUp.getPhones());
-		}
-		address.setPostalCode(postalAddressUp.getPostalCode());
-		address.setPrimary(postalAddressUp.isPrimary());
-		address.setPrimaryBilling(postalAddressUp.isPrimaryBilling());
-		address.setPrimaryEmail(postalAddressUp.getPrimaryEmail());
-		address.setPrimaryHomePhone(postalAddressUp.getPrimaryHomePhone());
-		address.setPrimaryMobile(postalAddressUp.getPrimaryMobile());
-		address.setPrimaryPhone(postalAddressUp.getPrimaryPhone());
-		address.setPrimaryShipping(postalAddressUp.isPrimaryShipping());
-		address.setPrimaryWorkPhone(postalAddressUp.getPrimaryWorkPhone());
-		address.setProvince(postalAddressUp.getProvince());
-		address.setStreet(postalAddressUp.getStreet());
-		address.setValidationTime(postalAddressUp.getValidationTime());
-		if (postalAddressUp.getWorkPhones() != null) {
-			address.getWorkPhones().addAll(postalAddressUp.getWorkPhones());
-		}
-		address.setId(postalAddressUp.getId() != null ? postalAddressUp.getId().toString() : null);
-
-		return address;
 	}
 
 	/**
