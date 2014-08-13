@@ -228,7 +228,7 @@ public class SlugUtils {
 		if (validator.apply(segment))
 			return segment;
 		else {
-			for (int i = 2; i <= 99; i++) {
+			for (int i = 2; i <= 999; i++) {
 				segment = generateSegment(name, i);
 				if (validator.apply(segment))
 					return segment;
