@@ -47,7 +47,12 @@ public class PostalAddress implements Describable, Serializable {
 				.getId()) : UUID.randomUUID());
 		setCity(postalAddressUp.getCity());
 		setCountry(postalAddressUp.getCountry());
-		setCountryCode(postalAddressUp.getCountryCode());
+		if (postalAddressUp.getCountryCode() != null) {
+			if (postalAddressUp.getCountryCode().length() > 1)
+				setCountryCode("ID");
+			else 
+				setCountryCode(postalAddressUp.getCountryCode());
+		}
 		setDescription(postalAddressUp.getDescription());
 		setEmails(postalAddressUp.getEmails());
 		setHomePhones(postalAddressUp.getHomePhones());
