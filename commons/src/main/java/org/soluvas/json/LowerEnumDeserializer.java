@@ -6,6 +6,8 @@ import java.lang.reflect.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -16,6 +18,7 @@ import com.fasterxml.jackson.databind.deser.std.StdScalarDeserializer;
  * specified Enum class from Strings and Integers,
  * uppercasing before deserialization.
  * @author ceefour
+ * @todo This breaks {@link JsonCreator} and {@link JsonValue} :(
  */
 public class LowerEnumDeserializer extends StdScalarDeserializer<Enum<?>> {
 
