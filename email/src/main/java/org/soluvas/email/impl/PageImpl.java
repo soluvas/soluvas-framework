@@ -337,7 +337,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 				email.setReplyTo(ImmutableList.of(new InternetAddress(getSender().getReplyTo())));
 			}
 			email.setSubject(layout.renderSubject(recipient));
-			log.debug("Adding recipient {}: {}", recipient.getName(), recipient.getEmail());
+//			log.debug("Adding recipient {}: {}", recipient.getName(), recipient.getEmail());
 			email.addTo(recipient.getEmail(), recipient.getName());
 			
 			for (final Entry<String, byte[]> attachment : attachments.entrySet()) {
