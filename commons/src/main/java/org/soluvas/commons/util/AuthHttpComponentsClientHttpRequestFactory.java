@@ -24,20 +24,15 @@ import org.springframework.web.client.RestTemplate;
  * <p>And with that, everything is in place – the {@link RestTemplate} will now be able to support the Basic Authentication scheme; a simple usage pattern would be:
  * 
  * <pre>
- * HttpComponentsClientHttpRequestFactory requestFactory =
- *  (HttpComponentsClientHttpRequestFactory) restTemplate.getRequestFactory();
- * DefaultHttpClient httpClient =
- *  (DefaultHttpClient) requestFactory.getHttpClient();
- * httpClient.getCredentialsProvider().setCredentials(
- *  new AuthScope(host, port, AuthScope.ANY_REALM),
- *   new UsernamePasswordCredentials("name", "pass"));
+ * final AuthHttpComponentsClientHttpRequestFactory requestFactory = new AuthHttpComponentsClientHttpRequestFactory(
+ * 					httpClient, host, userName, password);
+ * final RestTemplate restTemplate = new RestTemplate(requestFactory);
  * </pre>
  *   
  * And the request:
  *
  * <pre>
- * restTemplate.exchange("http://localhost:8080/spring-security-rest-template/api/foos/1", 
- *   HttpMethod.GET, null, Foo.class);
+ * restTemplate.get("http://localhost:8080/spring-security-rest-template/api/foos/1", Foo.class);
  * </pre>
  * 
  * @author anton
