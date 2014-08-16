@@ -1,7 +1,10 @@
 package org.soluvas.email.impl;
 
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +13,7 @@ import javax.annotation.Nullable;
 import javax.mail.Session;
 
 import org.apache.commons.mail.Email;
+import org.apache.commons.mail.HtmlEmail;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -26,17 +30,23 @@ import org.soluvas.email.EmailSecurity;
 import org.soluvas.email.Layout;
 import org.soluvas.email.LayoutType;
 import org.soluvas.email.Page;
+import org.soluvas.email.Recipient;
 import org.soluvas.email.Sender;
 import org.soluvas.email.util.EmailUtils;
 
+import com.github.mustachejava.DefaultMustacheFactory;
+import com.github.mustachejava.Mustache;
+import com.github.mustachejava.MustacheFactory;
 import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,6 +66,8 @@ import com.google.common.collect.Lists;
  * @generated
  */
 public class EmailManagerImpl extends MinimalEObjectImpl.Container implements EmailManager {
+	
+	private static final MustacheFactory MF = new DefaultMustacheFactory(); 
 	
 	/**
 	 * The default value of the '{@link #getSmtpUser() <em>Smtp User</em>}' attribute.
@@ -286,6 +298,49 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 			return page;
 		} catch (Exception e) {
 			throw new EmailException("Cannot create Page " + pageClass.getName(), e);
+		}
+	}
+	
+	public <T> Email compose(EmailTemplate<T> template, T model, Recipient recipient) {
+		return compose(template, model, ImmutableList.of(recipient)).values().iterator().next();
+	}
+	
+	/**
+	 * Outbound only {@link Email} without <a href="http://camel.apache.org/correlation-identifier.html">Correlation ID</a>.
+	 * @param template
+	 * @param model
+	 * @param recipients
+	 * @return
+	 */
+	public <T> Map<Recipient, Email> compose(final EmailTemplate<T> template, final T model, List<Recipient> recipients) {
+		final ImmutableMap<Recipient, Email> emails = Maps.toMap(recipients, new Function<Recipient, Email>() {
+			@Override
+			public Email apply(Recipient input) {
+				HtmlEmail email = new HtmlEmail();
+				try {
+					email.setFrom(renderIfMustache(template.getFromEmail(), model), renderIfMustache(template.getFromName(), model));
+				} catch (org.apache.commons.mail.EmailException e) {
+					throw new EmailException(e, "Cannot commpose template '%s' using model %s", template, model);
+				}
+				return email;
+			}
+		});
+		return emails;
+	}
+	
+	protected String renderIfMustache(String templateOrPlain, Object model) {
+		if (templateOrPlain == null) { 
+			return null;
+		} else if (templateOrPlain.contains("{{")) {
+			Mustache mustache = MF.compile(new StringReader(templateOrPlain), "template");
+			try (StringWriter sw = new StringWriter()) {
+				mustache.execute(sw, model);
+				return sw.toString();
+			} catch (Exception e) {
+				throw new EmailException(e, "Cannot render template '%s' using model %s", templateOrPlain, model);
+			}
+		} else {
+			return templateOrPlain;
 		}
 	}
 	
