@@ -149,33 +149,8 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	protected JpaRepositoryBase(Class<T> entityClass,
 			@Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses,
 			EntityManager em/*, PlatformTransactionManager txManager*/) {
-		super();
-		this.entityClass = entityClass;
-		
-		this.statusProperty = statusProperty;
-		this.activeStatuses = activeStatuses;
-		this.inactiveStatuses = inactiveStatuses;
-		this.draftStatuses = draftStatuses;
-		this.voidStatuses = voidStatuses;
-		
-		this.em = Preconditions.checkNotNull(em, "EntityManager must be provided");
-		//this.txManager = Preconditions.checkNotNull(txManager, "PlatformTransactionManager must be provided");
-		final Set<String> entityNames = FluentIterable.from(em.getMetamodel().getEntities()).transform(new Function<EntityType, String>() {
-			@Override @Nullable
-			public String apply(@Nullable EntityType input) {
-				return input.getBindableJavaType().getName();
-			}
-		}).toSet();
-//		Preconditions.checkArgument(entityNames.contains(entityClass.getName()),
-//				"EntityManager for '%s' JPA repository must include entity '%s'. Make sure you have set e.g. @PersistenceContext(unitName=\"fulan\"). %s known entities are: %s",
-//				entityClass.getSimpleName(), entityClass.getName(), entityNames.size(), entityNames);
-		Preconditions.checkArgument(entityNames.contains(entityClass.getName()),
-				"EntityManager for '%s' JPA repository must include entity '%s'. Make sure you have called factoryBean.setPackagesToScan(). %s known entities are: %s",
-				entityClass.getSimpleName(), entityClass.getName(), entityNames.size(), entityNames);
-		
-		this.log = LoggerFactory.getLogger(JpaRepositoryBase.class.getName() + "/" + entityClass.getSimpleName());
-		log.info("Initializing {} JPA repository using {} with {} entities: {}", 
-				entityClass.getSimpleName(), em, entityNames.size(), entityNames);
+		this(entityClass, statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, em,
+				null, null);
 	}
 	
 	/**
@@ -193,9 +168,41 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	protected JpaRepositoryBase(Class<T> entityClass,
 			@Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses,
 			EntityManager em, String liquibasePath, Set<String> initialTenantIds) {
-		this(entityClass, statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, em);
+		super();
+		this.entityClass = entityClass;
+		
+		this.statusProperty = statusProperty;
+		this.activeStatuses = activeStatuses;
+		this.inactiveStatuses = inactiveStatuses;
+		this.draftStatuses = draftStatuses;
+		this.voidStatuses = voidStatuses;
 		this.liquibasePath = liquibasePath;
 		this.initialTenantIds = initialTenantIds;
+		
+		this.em = Preconditions.checkNotNull(em, "EntityManager must be provided");
+		//this.txManager = Preconditions.checkNotNull(txManager, "PlatformTransactionManager must be provided");
+		final Set<String> entityNames = FluentIterable.from(em.getMetamodel().getEntities()).transform(new Function<EntityType, String>() {
+			@Override @Nullable
+			public String apply(@Nullable EntityType input) {
+				return input.getBindableJavaType().getName();
+			}
+		}).toSet();
+//		Preconditions.checkArgument(entityNames.contains(entityClass.getName()),
+//				"EntityManager for '%s' JPA repository must include entity '%s'. Make sure you have set e.g. @PersistenceContext(unitName=\"fulan\"). %s known entities are: %s",
+//				entityClass.getSimpleName(), entityClass.getName(), entityNames.size(), entityNames);
+		Preconditions.checkArgument(entityNames.contains(entityClass.getName()),
+				"EntityManager for '%s' JPA repository must include entity '%s'. Make sure you have called factoryBean.setPackagesToScan(). %s known entities are: %s",
+				entityClass.getSimpleName(), entityClass.getName(), entityNames.size(), entityNames);
+		
+		this.log = LoggerFactory.getLogger(JpaRepositoryBase.class.getName() + "/" + entityClass.getSimpleName());
+		if (initialTenantIds != null) {
+			log.info("Initializing {} JPA repository using {} with {} entities ({}) and {} initial tenants: {}", 
+					entityClass.getSimpleName(), em.getClass().getName(), entityNames.size(), entityNames,
+					initialTenantIds.size(), initialTenantIds);
+		} else {
+			log.info("Initializing {} JPA repository using {} with {} entities ({}) and empty initial tenants", 
+					entityClass.getSimpleName(), em.getClass().getName(), entityNames.size(), entityNames);
+		}
 	}
 	
 	/**
@@ -204,29 +211,43 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	 * @throws SQLException
 	 * @throws LiquibaseException
 	 */
-	public void migrate(String tenantId) throws RepositoryException {
-		try (final Closeable cl = CommandRequestAttributes.withMdc(tenantId)) {
-			log.info("[{}] Migrating {}", tenantId, entityClass.getSimpleName());
-			final Contexts contexts = new Contexts();
-			final ClassLoaderResourceAccessor resourceAccessor = new ClassLoaderResourceAccessor(this.entityClass.getClassLoader());
-			try (final Connection conn = dataSource.getConnection()) {
-				// TODO: SET SCHEMA is workaround for Liquibase's not setting schema for <sql>. https://liquibase.jira.com/browse/CORE-1873
-				final Statement st = conn.createStatement();
-				st.executeUpdate("SET SCHEMA '" + tenantId + "'");
-				final JdbcConnection jdbc = new JdbcConnection(conn);
-				final PostgresDatabase db = new PostgresDatabase();
-				db.setDefaultSchemaName(tenantId);
-				try {
-					db.setConnection(jdbc);
-					final Liquibase liquibase = new Liquibase(liquibasePath, resourceAccessor, db);
-					liquibase.update(contexts);
-				} finally {
-					st.executeUpdate("SET SCHEMA 'public'");
-					db.close();
+	public void migrate(Set<String> tenantIds) throws RepositoryException {
+		final ClassLoaderResourceAccessor resourceAccessor = new ClassLoaderResourceAccessor(this.entityClass.getClassLoader());
+		final PostgresDatabase db = new PostgresDatabase();
+		try {
+			final Liquibase liquibase;
+			try {
+				liquibase = new Liquibase(liquibasePath, resourceAccessor, db);
+			} catch (LiquibaseException e) {
+				throw new RepositoryException(e, "Cannot migrate tenants %s using '%s': %s", tenantIds, liquibasePath, e);
+			}
+			for (String tenantId : tenantIds) {
+				try (final Closeable cl = CommandRequestAttributes.withMdc(tenantId)) {
+					log.info("[{}] Migrating {}", tenantId, entityClass.getSimpleName());
+					final Contexts contexts = new Contexts();
+					try (final Connection conn = dataSource.getConnection()) {
+						// TODO: SET SCHEMA is workaround for Liquibase's not setting schema for <sql>. https://liquibase.jira.com/browse/CORE-1873
+						final Statement st = conn.createStatement();
+						st.executeUpdate("SET SCHEMA '" + tenantId + "'");
+						final JdbcConnection jdbc = new JdbcConnection(conn);
+						db.setDefaultSchemaName(tenantId);
+						try {
+							db.setConnection(jdbc);
+							liquibase.update(contexts);
+						} finally {
+							st.executeUpdate("SET SCHEMA 'public'");
+						}
+					}
+				} catch (Exception e) {
+					throw new RepositoryException(e, "Cannot migrate '%s' using '%s': %s", tenantId, liquibasePath, e);
 				}
 			}
-		} catch (Exception e) {
-			throw new RepositoryException(e, "Cannot migrate '%s' using '%s': %s", tenantId, liquibasePath, e);
+		} finally {
+			try {
+				db.close();
+			} catch (Exception e) {
+				log.debug("Ignoring close database error: " + e);
+			}
 		}
 	}
 	
@@ -236,9 +257,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		
 		if (liquibasePath != null) {
 			Preconditions.checkNotNull(dataSource, "dataSource was not @Inject-ed properly.");
-			for (final String tenantId : initialTenantIds) {
-				migrate(tenantId);
-			}
+			migrate(initialTenantIds);
 		}
 		
 		final TransactionTemplate txTemplate = new TransactionTemplate(txManager);
@@ -297,9 +316,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		final SetView<String> tenantIds = Sets.difference(origTenantIds, initialTenantIds);
 		log.info("Migrating {} {} JPA repositories (excluding {} initialTenants): {}", 
 				tenantIds.size(), entityClass.getSimpleName(), initialTenantIds.size(), tenantIds);
-		for (String tenantId : tenantIds) {
-			migrate(tenantId);
-		}
+		migrate(tenantIds);
 		log.info("Migrated {} {} JPA repositories (excluding {} initialTenants): {}", 
 				tenantIds.size(), entityClass.getSimpleName(), initialTenantIds.size(), tenantIds);
 	}
