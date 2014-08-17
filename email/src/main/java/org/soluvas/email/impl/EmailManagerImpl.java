@@ -1,8 +1,12 @@
 package org.soluvas.email.impl;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -11,7 +15,10 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
 import javax.mail.Session;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.HtmlEmail;
 import org.eclipse.emf.common.util.EList;
@@ -21,16 +28,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.WebAddress;
+import org.soluvas.commons.locale.FormatCurrency;
+import org.soluvas.commons.locale.FormatDateTime;
+import org.soluvas.commons.util.AppUtils;
 import org.soluvas.email.DefaultScope;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailException;
 import org.soluvas.email.EmailManager;
+import org.soluvas.email.EmailModel;
 import org.soluvas.email.EmailPackage;
 import org.soluvas.email.EmailSecurity;
 import org.soluvas.email.Layout;
 import org.soluvas.email.LayoutType;
 import org.soluvas.email.Page;
 import org.soluvas.email.Recipient;
+import org.soluvas.email.SendResult;
 import org.soluvas.email.Sender;
 import org.soluvas.email.util.EmailUtils;
 
@@ -42,6 +54,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
@@ -301,6 +314,28 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 		}
 	}
 	
+	@Override
+	public <T> EmailTemplate<T> loadTemplate(Class<T> modelClass) {
+		final EmailTemplate<T> template = new EmailTemplate<>();
+		EmailModel emailModel = modelClass.getAnnotation(EmailModel.class);
+		template.setSubject(emailModel.subject());
+		template.setFromEmail(emailModel.fromEmail());
+		template.setFromName(emailModel.fromName());
+		template.setReplyToEmail(Strings.emptyToNull(emailModel.replyToEmail()));
+		template.setReplyToName(Strings.emptyToNull(emailModel.replyToName()));
+		final String mustacheName = modelClass.getSimpleName() + ".html.mustache";
+		final URL mustacheRes = Preconditions.checkNotNull(modelClass.getResource(mustacheName),
+				"Cannot load resource '%s' in package %s", mustacheName, modelClass.getPackage().getName());
+		try {
+			template.setHtml( IOUtils.toString(mustacheRes) );
+		} catch (IOException e) {
+			throw new EmailException(e, "Cannot load resource '%s' in package %s", 
+					mustacheName, modelClass.getPackage().getName());
+		}
+		return template;
+	}
+	
+	@Override
 	public <T> Email compose(EmailTemplate<T> template, T model, Recipient recipient) {
 		return compose(template, model, ImmutableList.of(recipient)).values().iterator().next();
 	}
@@ -312,29 +347,48 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 	 * @param recipients
 	 * @return
 	 */
+	@Override
 	public <T> Map<Recipient, Email> compose(final EmailTemplate<T> template, final T model, List<Recipient> recipients) {
 		final ImmutableMap<Recipient, Email> emails = Maps.toMap(recipients, new Function<Recipient, Email>() {
 			@Override
-			public Email apply(Recipient input) {
+			public Email apply(Recipient recipient) {
 				HtmlEmail email = new HtmlEmail();
 				try {
-					email.setFrom(renderIfMustache(template.getFromEmail(), model), renderIfMustache(template.getFromName(), model));
-				} catch (org.apache.commons.mail.EmailException e) {
+					email.setSubject(renderIfMustache(template.getSubject(), model, recipient));
+					if (template.getReplyToEmail() != null) {
+						final String replyToEmail = renderIfMustache(template.getReplyToEmail(), model, recipient);
+						final String replyToName = renderIfMustache(template.getReplyToName(), model, recipient);
+						final InternetAddress replyToAddress = replyToName != null ? new InternetAddress(replyToEmail, replyToName) : new InternetAddress(replyToEmail);
+						email.setReplyTo(ImmutableList.of(replyToAddress));
+					}
+					email.setFrom(renderIfMustache(template.getFromEmail(), model, recipient), renderIfMustache(template.getFromName(), model, recipient));
+					final InternetAddress toAddress = recipient.getName() != null ? new InternetAddress(recipient.getEmail(), recipient.getName()) : new InternetAddress(recipient.getEmail());
+					email.setTo(ImmutableList.of(toAddress));
+					email.setHtmlMsg(renderIfMustache(template.getHtml(), model, recipient));
+					return email;
+				} catch (org.apache.commons.mail.EmailException | UnsupportedEncodingException | AddressException e) {
 					throw new EmailException(e, "Cannot commpose template '%s' using model %s", template, model);
 				}
-				return email;
 			}
 		});
 		return emails;
 	}
 	
-	protected String renderIfMustache(String templateOrPlain, Object model) {
+	protected <T> String renderIfMustache(String templateOrPlain, T model, Recipient recipient) {
 		if (templateOrPlain == null) { 
 			return null;
 		} else if (templateOrPlain.contains("{{")) {
 			Mustache mustache = MF.compile(new StringReader(templateOrPlain), "template");
+			final Map<String, Object> extras = ImmutableMap.<String, Object>builder()
+					.put("appManifest", appManifest)
+					.put("webAddress", webAddress)
+					.put("recipient", recipient)
+					.put("formatCurrency", new FormatCurrency())
+					.put("formatDateTime", new FormatDateTime(appManifest.getDefaultLocale()))
+					.put("emailLogoUri", AppUtils.getEmailLogoUri(appManifest, webAddress))
+					.build();
 			try (StringWriter sw = new StringWriter()) {
-				mustache.execute(sw, model);
+				mustache.execute(sw, new Object[] { model, extras });
 				return sw.toString();
 			} catch (Exception e) {
 				throw new EmailException(e, "Cannot render template '%s' using model %s", templateOrPlain, model);
@@ -342,6 +396,36 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 		} else {
 			return templateOrPlain;
 		}
+	}
+	
+	@Override
+	public <T> SendResult send(EmailTemplate<T> template, T model, Recipient recipient) {
+		return send(template, model, ImmutableList.of(recipient)).values().iterator().next();
+	}
+	
+	@Override
+	public <T> Map<Recipient, SendResult> send(final EmailTemplate<T> template, final T model, List<Recipient> recipients) {
+		Map<Recipient, Email> emails = compose(template, model, recipients);
+		log.info("Sending email '{}' using {} to {} recipients: {}", 
+				template.getSubject(), model.getClass().getName(), recipients.size(), recipients);
+		LinkedHashMap<Recipient, SendResult> results = new LinkedHashMap<>();
+		for (Map.Entry<Recipient, Email> entry : emails.entrySet()) {
+			Email email = entry.getValue();
+			email.setMailSession(mailSession);
+			try {
+				String messageId = email.send();
+				SendResult<T> result = new SendResult<>(template, model, email, messageId);
+				results.put(entry.getKey(), result);
+				log.info("Sent email {} '{}' using {} from {} to {}", 
+						messageId, email.getSubject(), model.getClass().getName(), email.getFromAddress(), email.getToAddresses());
+			} catch (org.apache.commons.mail.EmailException e) {
+				log.error(String.format("Cannot send email '%s' using %s from %s to %s: %s", 
+						email.getSubject(), model.getClass().getName(), email.getFromAddress(), email.getToAddresses(), e), e);
+				SendResult<T> result = new SendResult<>(template, model, email, e);
+				results.put(entry.getKey(), result);
+			}
+		}
+		return results;
 	}
 	
 	/**

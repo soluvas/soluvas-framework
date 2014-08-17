@@ -99,9 +99,11 @@ public class MultiTenantWebConfig implements TenantSelector {
 	public static TenantRef getTenantRefMultiHost(HttpServletRequest httpRequest, String tenantEnv,
 			Map<String, AppManifest> tenantMap) {
 		Optional<String> tenantId = Optional.absent();
-		final String requestHost = httpRequest.getServerName().toLowerCase();
+		log.info("host {} {}", httpRequest.getClass(), httpRequest);
+		// TODO: https://jira.spring.io/browse/SPR-12088 Spring Mock MVC doesn't return Host header as getServerName()
+		final String origRequestHost = Optional.fromNullable(httpRequest.getHeader("Host")).or(httpRequest.getServerName()).toLowerCase();
 		// use AppManifest.domain matching first
-		final String requestHostNoWww = requestHost.startsWith("www.") ? requestHost.substring(4) : requestHost;
+		final String requestHostNoWww = origRequestHost.startsWith("www.") ? origRequestHost.substring(4) : origRequestHost;
 		for (final Map.Entry<String, AppManifest> entry : tenantMap.entrySet()) {
 			if (entry.getValue().getDomain().equalsIgnoreCase(requestHostNoWww)) {
 				tenantId = Optional.of(entry.getKey());
@@ -110,14 +112,17 @@ public class MultiTenantWebConfig implements TenantSelector {
 		}
 		// otherwise, fallback to first tenantId
 		if (!tenantId.isPresent()) {
-			final Matcher hostMatcher = Pattern.compile("(www\\.)?([^.]+).*").matcher(requestHost);
+			final Matcher hostMatcher = Pattern.compile("(www\\.)?([^.]+).*").matcher(origRequestHost);
 			Preconditions.checkState(hostMatcher.matches(),
-					"Server name '%s' must match pattern: (www\\.)?([^.]+).*", requestHost);
-			tenantId = Optional.of(hostMatcher.group(2).toLowerCase());
+					"Server name '%s' must match pattern: (www\\.)?([^.]+).*", origRequestHost);
+			final String tenantIdFallback = hostMatcher.group(2).toLowerCase();
+			Preconditions.checkArgument(!"localhost".equalsIgnoreCase(tenantIdFallback),
+					"'%s' is an invalid tenant ID for HTTP Request Host '%s'", tenantIdFallback, origRequestHost);
+			tenantId = Optional.of(tenantIdFallback);
 		}
 		final TenantRef hostTenant = new TenantRefImpl(tenantId.get(), tenantId.get(), tenantEnv);
 		log.trace("MULTI_HOST Deployment Configuration for {}: clientId={} tenantId={} tenantEnv={}",
-				requestHost, hostTenant.getClientId(), hostTenant.getTenantId(), hostTenant.getTenantEnv() );
+				origRequestHost, hostTenant.getClientId(), hostTenant.getTenantId(), hostTenant.getTenantEnv() );
 		return hostTenant;
 	}
 	

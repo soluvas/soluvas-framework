@@ -1,5 +1,7 @@
 package org.soluvas.email.impl;
 
+import javax.annotation.Nullable;
+
 /**
  * These attributes are all Mustache templates.
  * @author ceefour
@@ -12,12 +14,14 @@ public class EmailTemplate<T> {
 	String subject;
 	String fromName;
 	String fromEmail;
-	String senderName;
-	String senderEmail;
-	String replyName;
-	String replyEmail;
-	String toName;
-	String toEmail;
+//	String senderName;
+//	String senderEmail;
+	@Nullable
+	String replyToName;
+	@Nullable
+	String replyToEmail;
+//	String toName;
+//	String toEmail;
 	
 	/**
 	 * @return the html
@@ -79,79 +83,81 @@ public class EmailTemplate<T> {
 	public void setFromEmail(String fromEmail) {
 		this.fromEmail = fromEmail;
 	}
-	/**
-	 * @return the senderName
-	 */
-	public String getSenderName() {
-		return senderName;
-	}
-	/**
-	 * @param senderName the senderName to set
-	 */
-	public void setSenderName(String senderName) {
-		this.senderName = senderName;
-	}
-	/**
-	 * @return the senderEmail
-	 */
-	public String getSenderEmail() {
-		return senderEmail;
-	}
-	/**
-	 * @param senderEmail the senderEmail to set
-	 */
-	public void setSenderEmail(String senderEmail) {
-		this.senderEmail = senderEmail;
-	}
 	
+//	/**
+//	 * @return the senderName
+//	 */
+//	public String getSenderName() {
+//		return senderName;
+//	}
+//	/**
+//	 * @param senderName the senderName to set
+//	 */
+//	public void setSenderName(String senderName) {
+//		this.senderName = senderName;
+//	}
+//	/**
+//	 * @return the senderEmail
+//	 */
+//	public String getSenderEmail() {
+//		return senderEmail;
+//	}
+//	/**
+//	 * @param senderEmail the senderEmail to set
+//	 */
+//	public void setSenderEmail(String senderEmail) {
+//		this.senderEmail = senderEmail;
+//	}
 	
 	/**
-	 * @return the replyName
+	 * @return the replyToName
 	 */
-	public String getReplyName() {
-		return replyName;
+	@Nullable
+	public String getReplyToName() {
+		return replyToName;
 	}
 	/**
-	 * @param replyName the replyName to set
+	 * @param replyToName the replyToName to set
 	 */
-	public void setReplyName(String replyName) {
-		this.replyName = replyName;
+	public void setReplyToName(@Nullable String replyToName) {
+		this.replyToName = replyToName;
 	}
 	/**
-	 * @return the replyEmail
+	 * @return the replyToEmail
 	 */
-	public String getReplyEmail() {
-		return replyEmail;
+	@Nullable
+	public String getReplyToEmail() {
+		return replyToEmail;
 	}
 	/**
-	 * @param replyEmail the replyEmail to set
+	 * @param replyToEmail the replyToEmail to set
 	 */
-	public void setReplyEmail(String replyEmail) {
-		this.replyEmail = replyEmail;
+	public void setReplyToEmail(@Nullable String replyToEmail) {
+		this.replyToEmail = replyToEmail;
 	}
-	/**
-	 * @return the toName
-	 */
-	public String getToName() {
-		return toName;
-	}
-	/**
-	 * @param toName the toName to set
-	 */
-	public void setToName(String toName) {
-		this.toName = toName;
-	}
-	/**
-	 * @return the toEmail
-	 */
-	public String getToEmail() {
-		return toEmail;
-	}
-	/**
-	 * @param toEmail the toEmail to set
-	 */
-	public void setToEmail(String toEmail) {
-		this.toEmail = toEmail;
-	}
+//	/**
+//	 * @return the toName
+//	 */
+//	public String getToName() {
+//		return toName;
+//	}
+//	/**
+//	 * @param toName the toName to set
+//	 */
+//	public void setToName(String toName) {
+//		this.toName = toName;
+//	}
+//	/**
+//	 * @return the toEmail
+//	 */
+//	public String getToEmail() {
+//		return toEmail;
+//	}
+//	/**
+//	 * @param toEmail the toEmail to set
+//	 */
+//	public void setToEmail(String toEmail) {
+//		this.toEmail = toEmail;
+//	}
 	
 }

@@ -3,8 +3,13 @@
 package org.soluvas.email;
 
 import java.util.List;
+import java.util.Map;
+
 import javax.mail.Session;
+
+import org.apache.commons.mail.Email;
 import org.eclipse.emf.ecore.EObject;
+import org.soluvas.email.impl.EmailTemplate;
 
 /**
  * <!-- begin-user-doc -->
@@ -148,5 +153,17 @@ public interface EmailManager extends EObject {
 	 * @generated
 	 */
 	List<String> sendAll(Page page, Session mailSession);
+
+	<T> EmailTemplate<T> loadTemplate(Class<T> modelClass);
+
+	<T> Email compose(EmailTemplate<T> template, T model, Recipient recipient);
+
+	<T> Map<Recipient, Email> compose(EmailTemplate<T> template, T model,
+			List<Recipient> recipients);
+
+	<T> SendResult send(EmailTemplate<T> template, T model, Recipient recipient);
+
+	<T> Map<Recipient, SendResult> send(EmailTemplate<T> template, T model,
+			List<Recipient> recipients);
 
 } // EmailManager

@@ -1,7 +1,5 @@
 package org.soluvas.email.impl;
 
-import java.io.IOException;
-
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -10,7 +8,6 @@ import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.config.CommonsWebConfig;
 import org.soluvas.commons.config.MultiTenantConfig;
-import org.soluvas.commons.config.TenantSelector;
 import org.soluvas.commons.tenant.TenantBeans;
 import org.soluvas.commons.tenant.TenantRepository;
 import org.soluvas.email.EmailCatalog;
@@ -22,14 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 
 import com.google.common.eventbus.EventBus;
 
-@Configuration @Lazy
-@ComponentScan("org.soluvas.email")
+@Configuration
+@ComponentScan("org.soluvas.email.shell")
 public class EmailConfig {
 	
 	@Inject
@@ -38,8 +34,6 @@ public class EmailConfig {
 	private EventBus appEventBus;
 	@Inject
 	private MultiTenantConfig tenantConfig;
-	@Inject
-	private TenantSelector tenantSelector;
 	@Autowired(required=false) @Nullable
 	private TenantRepository<?> tenantRepo;
 	
@@ -61,18 +55,20 @@ public class EmailConfig {
 //		}
 	
 	@Bean(destroyMethod="destroy")
-	public TenantBeans<EmailManagerImpl> emailMgrBeans() throws IOException {
+	public TenantBeans<EmailManagerImpl> emailMgrBeans() {
 		final String smtpHost = env.getRequiredProperty("emailSmtpHost");
 		final int smtpPort = env.getRequiredProperty("emailSmtpPort", Integer.class);
 		final String smtpUser = env.getRequiredProperty("emailSmtpUser");
 		final String smtpPassword = env.getRequiredProperty("emailSmtpPassword");
 		final EmailSecurity smtpSecurity = env.getRequiredProperty("emailSmtpSecurity", EmailSecurity.class);
+		final String layoutNsPrefix = env.getProperty("emailLayoutNsPrefix", "bippo");
+		final String layoutName = env.getProperty("emailLayoutName", "bippo");
 		return new TenantBeans<EmailManagerImpl>(EmailManagerImpl.class) {
 			@Override
 			protected EmailManagerImpl create(String tenantId, AppManifest appManifest) throws Exception {
 //					final EventBus tenantEventBus = tenantConfig.eventBusMap().get(tenantId);
 				final WebAddress webAddress = tenantConfig.webAddressMap().get(tenantId);
-				final EmailManagerImpl emailMgr = new EmailManagerImpl(emailCatalog(), "bippo", "bippo",
+				final EmailManagerImpl emailMgr = new EmailManagerImpl(emailCatalog(), layoutNsPrefix, layoutName,
 						smtpHost, smtpPort, smtpUser, smtpPassword, smtpSecurity,
 						appManifest, webAddress);
 				return emailMgr;
@@ -80,9 +76,9 @@ public class EmailConfig {
 		};
 	}
 	
-	@Bean @Scope("request")
-	public EmailManager emailMgr() throws IOException {
-		return emailMgrBeans().get(tenantSelector.tenantRef().getTenantId());
+	@Bean @Scope("prototype")
+	public EmailManager emailMgr() {
+		return emailMgrBeans().getCurrent();
 	}
 	
 }

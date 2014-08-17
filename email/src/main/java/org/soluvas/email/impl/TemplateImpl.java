@@ -144,6 +144,8 @@ public abstract class TemplateImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	protected EList<Recipient> recipients;
 
+	private static final MustacheFactory MF = new DefaultMustacheFactory();
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -340,8 +342,7 @@ public abstract class TemplateImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	protected String doRender(String template, Recipient recipient) {
 		try {
-			final MustacheFactory mf = new DefaultMustacheFactory();
-			final Mustache mustache = mf.compile(new StringReader(template), "subject");
+			final Mustache mustache = MF.compile(new StringReader(template), "subject");
 			final StringWriter stringWriter = new StringWriter();
 			final Map<String, Object> extras = ImmutableMap.of("recipient", recipient,
 					"formatCurrency", new FormatCurrency(),
