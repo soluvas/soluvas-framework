@@ -190,6 +190,8 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 	private final AppManifest appManifest;
 	private final WebAddress webAddress;
 	private final Session mailSession;
+
+	private Class<?> defaultLayoutClass;
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -201,6 +203,7 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 	
 	/**
 	 * @param emailCatalog
+	 * @param defaultLayoutClass TODO
 	 * @param defaultLayoutNsPrefix
 	 * @param defaultLayoutName
 	 * @param smtpHost
@@ -211,12 +214,13 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 	 * @param webAddress
 	 */
 	public EmailManagerImpl(EmailCatalog emailCatalog,
-			String defaultLayoutNsPrefix, String defaultLayoutName,
-			String smtpHost, Integer smtpPort, String smtpUser,
-			String smtpPassword, EmailSecurity smtpSecurity,
-			AppManifest appManifest, WebAddress webAddress) {
+			Class<?> defaultLayoutClass, String defaultLayoutNsPrefix,
+			String defaultLayoutName, String smtpHost, Integer smtpPort,
+			String smtpUser, String smtpPassword,
+			EmailSecurity smtpSecurity, AppManifest appManifest, WebAddress webAddress) {
 		super();
 		this.emailCatalog = emailCatalog;
+		this.defaultLayoutClass = defaultLayoutClass;
 		this.defaultLayoutNsPrefix = defaultLayoutNsPrefix;
 		this.defaultLayoutName = defaultLayoutName;
 		this.smtpHost = smtpHost;
@@ -349,6 +353,19 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 	 */
 	@Override
 	public <T> Map<Recipient, Email> compose(final EmailTemplate<T> template, final T model, List<Recipient> recipients) {
+		Preconditions.checkNotNull(defaultLayoutClass, "EmailManager.defaultLayout is required to use the new compose()");
+		final String mustacheName = defaultLayoutClass.getSimpleName() + ".html.mustache";
+		final URL mustacheRes = Preconditions.checkNotNull(defaultLayoutClass.getResource(mustacheName),
+				"Cannot load layout Mustache '%s' in package %s", mustacheName, defaultLayoutClass.getPackage().getName());
+		final Mustache layoutMustache;
+		try {
+			final String layoutTemplate = IOUtils.toString(mustacheRes);
+			layoutMustache = MF.compile(new StringReader(layoutTemplate), "layout");
+		} catch (IOException e) {
+			throw new EmailException(e, "Cannot load layout Mustache '%s' in package %s", 
+					mustacheName, defaultLayoutClass.getPackage().getName());
+		}
+		
 		final ImmutableMap<Recipient, Email> emails = Maps.toMap(recipients, new Function<Recipient, Email>() {
 			@Override
 			public Email apply(Recipient recipient) {
@@ -364,10 +381,27 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 					email.setFrom(renderIfMustache(template.getFromEmail(), model, recipient), renderIfMustache(template.getFromName(), model, recipient));
 					final InternetAddress toAddress = recipient.getName() != null ? new InternetAddress(recipient.getEmail(), recipient.getName()) : new InternetAddress(recipient.getEmail());
 					email.setTo(ImmutableList.of(toAddress));
-					email.setHtmlMsg(renderIfMustache(template.getHtml(), model, recipient));
+					
+					// render msg using layout
+					String pageHtml = renderIfMustache(template.getHtml(), model, recipient);
+					final Map<String, Object> extras = ImmutableMap.<String, Object>builder()
+							.put("appManifest", appManifest)
+							.put("webAddress", webAddress)
+							.put("recipient", recipient)
+							.put("formatCurrency", new FormatCurrency())
+							.put("formatDateTime", new FormatDateTime(appManifest.getDefaultLocale()))
+							.put("emailLogoUri", AppUtils.getEmailLogoUri(appManifest, webAddress))
+							.put("pageHtml", pageHtml)
+							.build();
+					try (StringWriter sw = new StringWriter()) {
+						layoutMustache.execute(sw, new Object[] { model, extras });
+						email.setHtmlMsg(sw.toString());
+					} catch (Exception e) {
+						throw new EmailException(e, "Cannot render layout %s using model %s", defaultLayoutClass.getName(), model);
+					}
 					return email;
 				} catch (org.apache.commons.mail.EmailException | UnsupportedEncodingException | AddressException e) {
-					throw new EmailException(e, "Cannot commpose template '%s' using model %s", template, model);
+					throw new EmailException(e, "Cannot compose template '%s' using model %s", template, model);
 				}
 			}
 		});

@@ -89,17 +89,18 @@ public class EmailCatalogXmiTracker implements BundleTrackerCustomizer<List<EObj
 	 * Scan using classpath.
 	 * @todo Scanning multiple classpaths for resources is slow, so static or hybrid
 	 * 		approach is preferable.
-	 * @param dataFolder Additional filesystem folder to scan, {@code file:$dataFolder/common/*.EmailCatalog.xmi}.
-	 * 		If {@code null}, will be ignored.
+	 * @param dataDir Additional filesystem directory to scan, {@code file:$dataFolder/common/*.EmailCatalog.xmi}.
+	 * 		If {@code null}, will be ignored. <b>Not recommended</b>, layouts should be defined per application,
+	 * 		mechanism for tenant-specific overrides should be determined later and in efficient way.
 	 */
-	public void scan(ClassLoader classLoader, @Nullable String dataFolder) {
+	public void scan(ClassLoader classLoader, @Nullable String dataDir) {
 		final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
 		// Due to JDK limitation, scanning of root won't work in webapp classpath,
 		// at least the root folder must be specified before wildcard
 		final List<String> locationPatterns = new ArrayList<>(ImmutableList.of("classpath*:org/**/*.EmailCatalog.xmi",
 				"classpath*:com/**/*.EmailCatalog.xmi", "classpath*:id/**/*.EmailCatalog.xmi"));
-		if (dataFolder != null) {
-			locationPatterns.add("file:" + dataFolder + "/common/*.EmailCatalog.xmi");
+		if (dataDir != null) {
+			locationPatterns.add("file:" + dataDir + "/common/*.EmailCatalog.xmi");
 		}
 		log.trace("Scanning {} for {} EmailCatalog patterns: {}", classLoader, locationPatterns.size(), locationPatterns);
 		try {

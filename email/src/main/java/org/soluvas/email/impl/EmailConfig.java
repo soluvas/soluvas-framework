@@ -42,11 +42,12 @@ public class EmailConfig {
 		final EmailCatalog emailCatalog = EmailFactory.eINSTANCE.createEmailCatalog();
 		final EmailCatalogXmiTracker tracker = new EmailCatalogXmiTracker(
 				emailCatalog, appEventBus);
+		// This scans only once per app (not per tenant), so not too slow, although yes I still prefer static/hybrid approach if practical
 		tracker.scan(EmailConfig.class.getClassLoader(), null);
 		return emailCatalog;
 	}
 	
-//		@Bean @Lazy(false)
+//		@Bean
 //		public EmailCatalogXmiTracker emailCatalogXmiTracker() {
 //			final EmailCatalogXmiTracker tracker = new EmailCatalogXmiTracker(emailCatalog(), eventBus);
 //			tracker.add(org.soluvas.email.EmailPackage.class, "org.soluvas.email");
@@ -54,13 +55,20 @@ public class EmailConfig {
 //			return tracker;
 //		}
 	
-	@Bean(destroyMethod="destroy")
+	@Bean
 	public TenantBeans<EmailManagerImpl> emailMgrBeans() {
 		final String smtpHost = env.getRequiredProperty("emailSmtpHost");
 		final int smtpPort = env.getRequiredProperty("emailSmtpPort", Integer.class);
 		final String smtpUser = env.getRequiredProperty("emailSmtpUser");
 		final String smtpPassword = env.getRequiredProperty("emailSmtpPassword");
 		final EmailSecurity smtpSecurity = env.getRequiredProperty("emailSmtpSecurity", EmailSecurity.class);
+		final String layout = env.getProperty("emailLayout", String.class);
+		final Class<?> layoutClass;
+		try {
+			layoutClass = layout != null ? EmailConfig.class.getClassLoader().loadClass(layout) : null;
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Cannot load emailLayout class: " + e, e);
+		}
 		final String layoutNsPrefix = env.getProperty("emailLayoutNsPrefix", "bippo");
 		final String layoutName = env.getProperty("emailLayoutName", "bippo");
 		return new TenantBeans<EmailManagerImpl>(EmailManagerImpl.class) {
@@ -68,9 +76,9 @@ public class EmailConfig {
 			protected EmailManagerImpl create(String tenantId, AppManifest appManifest) throws Exception {
 //					final EventBus tenantEventBus = tenantConfig.eventBusMap().get(tenantId);
 				final WebAddress webAddress = tenantConfig.webAddressMap().get(tenantId);
-				final EmailManagerImpl emailMgr = new EmailManagerImpl(emailCatalog(), layoutNsPrefix, layoutName,
-						smtpHost, smtpPort, smtpUser, smtpPassword, smtpSecurity,
-						appManifest, webAddress);
+				final EmailManagerImpl emailMgr = new EmailManagerImpl(emailCatalog(), layoutClass, layoutNsPrefix,
+						layoutName, smtpHost, smtpPort, smtpUser, smtpPassword,
+						smtpSecurity, appManifest, webAddress);
 				return emailMgr;
 			}
 		};
