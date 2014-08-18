@@ -11,8 +11,8 @@ import java.util.Map.Entry;
 import javax.annotation.Nullable;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
+import javax.mail.util.ByteArrayDataSource;
 
-import org.apache.commons.mail.ByteArrayDataSource;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.MultiPartEmail;
