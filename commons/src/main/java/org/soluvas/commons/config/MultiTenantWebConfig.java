@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.service.command.CommandSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,7 +102,12 @@ public class MultiTenantWebConfig implements TenantSelector {
 		Optional<String> tenantId = Optional.absent();
 		log.info("host {} {}", httpRequest.getClass(), httpRequest);
 		// TODO: https://jira.spring.io/browse/SPR-12088 Spring Mock MVC doesn't return Host header as getServerName()
-		final String origRequestHost = Optional.fromNullable(httpRequest.getHeader("Host")).or(httpRequest.getServerName()).toLowerCase();
+		final String origRequestHost;
+		if (httpRequest.getHeader("Host") != null) {
+			origRequestHost = StringUtils.substringBefore(httpRequest.getHeader("Host"), ":").toLowerCase();
+		} else {
+			origRequestHost = httpRequest.getServerName().toLowerCase();
+		}
 		// use AppManifest.domain matching first
 		final String requestHostNoWww = origRequestHost.startsWith("www.") ? origRequestHost.substring(4) : origRequestHost;
 		for (final Map.Entry<String, AppManifest> entry : tenantMap.entrySet()) {
