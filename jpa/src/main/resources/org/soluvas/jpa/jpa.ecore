@@ -263,4 +263,8 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="DateTimeZone" instanceClassName="org.joda.time.DateTimeZone"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Timestamped" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="creationTime" eType="#//DateTime"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modificationTime" eType="#//DateTime"/>
+  </eClassifiers>
 </ecore:EPackage>
