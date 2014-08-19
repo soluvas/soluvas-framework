@@ -263,4 +263,5 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="DateTimeZone" instanceClassName="org.joda.time.DateTimeZone"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Locale" instanceClassName="java.util.Locale"/>
 </ecore:EPackage>

@@ -17,12 +17,10 @@ import org.hibernate.usertype.UserType;
 import com.google.common.collect.ImmutableList;
 
 /**
- * <a href="http://stackoverflow.com/a/21984484">From Stackoverflow</a>.
- * Being <a href="https://github.com/JadiraOrg/jadira/issues/21">proposed to Jadira</a>
- * 
  * @author atang
+ * @see PersistentStringList
  */
-public class PersistentStringList implements UserType {
+public class PersistentLongList implements UserType {
 
 	@Override
 	public int[] sqlTypes() {
@@ -58,9 +56,9 @@ public class PersistentStringList implements UserType {
 	        return null;
 	    }
 
-	    final List<String> list;
+	    final List<Long> list;
 	    if (rs.getArray(names[0]) != null) {
-	    	list = Arrays.asList( (String[]) rs.getArray(names[0]).getArray() );
+	    	list = Arrays.asList( (Long[]) rs.getArray(names[0]).getArray() );
 	    } else {
 	    	list = null;
 	    }
@@ -73,8 +71,8 @@ public class PersistentStringList implements UserType {
 	    if (value == null) {
 	        st.setNull(index, Types.ARRAY);
 	    } else {
-	    	List<String> castObject = (List<String>) value;
-	        Array array = session.connection().createArrayOf("varchar", castObject.toArray(new String[] {}));
+	    	List<Long> castObject = (List<Long>) value;
+	        Array array = session.connection().createArrayOf("bigint", castObject.toArray(new Long[] {}));
 	        st.setArray(index, array);
 	    }		
 	}
@@ -82,9 +80,9 @@ public class PersistentStringList implements UserType {
 	@Override
 	public Object deepCopy(Object value) throws HibernateException {
 		if (value != null)
-			return new ArrayList<>((List<String>) value);
+			return new ArrayList<>((List<Long>) value);
 		else 
-			return new ArrayList<>(ImmutableList.<String>of());
+			return new ArrayList<>(ImmutableList.<Long>of());
 	}
 
 	@Override
@@ -94,14 +92,12 @@ public class PersistentStringList implements UserType {
 
 	@Override
 	public Serializable disassemble(Object value) throws HibernateException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Object assemble(Serializable cached, Object owner)
 			throws HibernateException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
