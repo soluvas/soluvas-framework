@@ -1,6 +1,7 @@
 package org.soluvas.jpa.jpa;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Mass;
@@ -17,6 +18,7 @@ import org.eclipse.emf.texo.model.ModelObject;
 import org.eclipse.emf.texo.model.ModelPackage;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.GenericStatus;
@@ -87,6 +89,9 @@ public class JpaModelFactory implements ModelFactory {
 			break;
 		case JpaModelPackage.NAMECONTAINER_CLASSIFIER_ID:
 			modelObject = new NameContainerModelObject();
+			break;
+		case JpaModelPackage.TIMESTAMPED_CLASSIFIER_ID:
+			modelObject = new TimestampedModelObject();
 			break;
 		default:
 			throw new IllegalArgumentException("The EClass '" + eClass
@@ -193,6 +198,10 @@ public class JpaModelFactory implements ModelFactory {
 			return createUnitFromString(value);
 		case JpaModelPackage.GENERICSTATUS_CLASSIFIER_ID:
 			return createGenericStatusFromString(value);
+		case JpaModelPackage.DATETIMEZONE_CLASSIFIER_ID:
+			return createDateTimeZoneFromString(value);
+		case JpaModelPackage.LOCALE_CLASSIFIER_ID:
+			return createLocaleFromString(value);
 		default:
 			throw new IllegalArgumentException("The EDatatype '" + eDataType
 					+ "' is not defined in this EPackage");
@@ -231,6 +240,10 @@ public class JpaModelFactory implements ModelFactory {
 			return convertUnitToString((Unit) value);
 		case JpaModelPackage.GENERICSTATUS_CLASSIFIER_ID:
 			return convertGenericStatusToString((GenericStatus) value);
+		case JpaModelPackage.DATETIMEZONE_CLASSIFIER_ID:
+			return convertDateTimeZoneToString((DateTimeZone) value);
+		case JpaModelPackage.LOCALE_CLASSIFIER_ID:
+			return convertLocaleToString((Locale) value);
 		default:
 			throw new IllegalArgumentException("The EDatatype '" + eDataType
 					+ "' is not defined in this EPackage.");
@@ -599,6 +612,82 @@ public class JpaModelFactory implements ModelFactory {
 		throw new UnsupportedOperationException(
 				"Operation not support for EDataType " + eDataType.getName()
 						+ " converting from value " + value);
+	}
+
+	/**
+	 * Converts the EDataType: DateTimeZone to a String. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertDateTimeZoneToString(DateTimeZone value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE
+				.getDateTimeZoneEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: DateTimeZone from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public DateTimeZone createDateTimeZoneFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE
+				.getDateTimeZoneEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Converts the EDataType: Locale to a String. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertLocaleToString(Locale value) {
+		if (value == null) {
+			return null;
+		}
+		return value.toString();
+	}
+
+	/**
+	 * Creates an instance of the EDataType: Locale from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public Locale createLocaleFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		return new Locale(value);
 	}
 
 	/**
@@ -1296,6 +1385,95 @@ public class JpaModelFactory implements ModelFactory {
 			switch (featureID) {
 			case JpaModelPackage.NAMECONTAINER_NAME_FEATURE_ID:
 				getTarget().setName((String) value);
+				return;
+			default:
+				super.eSet(eStructuralFeature, value);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean eAddTo(EStructuralFeature eStructuralFeature,
+				Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+
+			default:
+				return super.eAddTo(eStructuralFeature, value);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean eRemoveFrom(EStructuralFeature eStructuralFeature,
+				Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+
+			default:
+				return super.eRemoveFrom(eStructuralFeature, value);
+			}
+		}
+	}
+
+	/**
+	 * The adapter/wrapper for the EClass '<em><b>Timestamped</b></em>'.
+	 *
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @param <E>
+	 *            the domain model java class
+	 *
+	 * @generated
+	 */
+	public static class TimestampedModelObject<E extends Timestamped> extends
+			AbstractModelObject<E> {
+		/**
+		 * @generated
+		 */
+		public EClass eClass() {
+			return JpaModelPackage.INSTANCE.getTimestampedEClass();
+		}
+
+		/**
+		 * @generated
+		 */
+		public ModelPackage getModelPackage() {
+			return JpaModelPackage.INSTANCE;
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public Object eGet(EStructuralFeature eStructuralFeature) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+			case JpaModelPackage.TIMESTAMPED_CREATIONTIME_FEATURE_ID:
+				return getTarget().getCreationTime();
+			case JpaModelPackage.TIMESTAMPED_MODIFICATIONTIME_FEATURE_ID:
+				return getTarget().getModificationTime();
+			default:
+				return super.eGet(eStructuralFeature);
+			}
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public void eSet(EStructuralFeature eStructuralFeature, Object value) {
+			final int featureID = eClass().getFeatureID(eStructuralFeature);
+			switch (featureID) {
+			case JpaModelPackage.TIMESTAMPED_CREATIONTIME_FEATURE_ID:
+				getTarget().setCreationTime((DateTime) value);
+				return;
+			case JpaModelPackage.TIMESTAMPED_MODIFICATIONTIME_FEATURE_ID:
+				getTarget().setModificationTime((DateTime) value);
 				return;
 			default:
 				super.eSet(eStructuralFeature, value);

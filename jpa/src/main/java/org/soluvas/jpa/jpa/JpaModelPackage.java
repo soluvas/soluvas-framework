@@ -1,5 +1,6 @@
 package org.soluvas.jpa.jpa;
 
+import java.util.Locale;
 import java.util.UUID;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Mass;
@@ -17,6 +18,7 @@ import org.eclipse.emf.texo.model.ModelResolver;
 import org.eclipse.emf.texo.utils.ModelUtils;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.GenericStatus;
@@ -59,70 +61,84 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int DATETIME_CLASSIFIER_ID = 7;
+	public static final int DATETIME_CLASSIFIER_ID = 8;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int CURRENCYUNIT_CLASSIFIER_ID = 6;
+	public static final int CURRENCYUNIT_CLASSIFIER_ID = 7;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int MASS_CLASSIFIER_ID = 8;
+	public static final int MASS_CLASSIFIER_ID = 9;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int LENGTH_CLASSIFIER_ID = 9;
+	public static final int LENGTH_CLASSIFIER_ID = 10;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int LOCALDATE_CLASSIFIER_ID = 10;
+	public static final int LOCALDATE_CLASSIFIER_ID = 11;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int QUANTITY_CLASSIFIER_ID = 11;
+	public static final int QUANTITY_CLASSIFIER_ID = 12;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int UNIT_CLASSIFIER_ID = 12;
+	public static final int UNIT_CLASSIFIER_ID = 13;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int UUID_CLASSIFIER_ID = 13;
+	public static final int UUID_CLASSIFIER_ID = 14;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int GENERICSTATUS_CLASSIFIER_ID = 14;
+	public static final int GENERICSTATUS_CLASSIFIER_ID = 15;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final int GENDER_CLASSIFIER_ID = 15;
+	public static final int DATETIMEZONE_CLASSIFIER_ID = 17;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int LOCALE_CLASSIFIER_ID = 18;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int GENDER_CLASSIFIER_ID = 16;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -269,13 +285,6 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int POSTALADDRESS_DESCRIPTION_FEATURE_ID = 0;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
 	public static final int DESCRIBABLE_CLASSIFIER_ID = 4;
 
 	/**
@@ -312,6 +321,13 @@ public class JpaModelPackage extends ModelPackage {
 	 * @generated
 	 */
 	public static final int POSTALADDRESS_VALIDATIONTIME_FEATURE_ID = 23;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int POSTALADDRESS_DESCRIPTION_FEATURE_ID = 0;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -426,6 +442,27 @@ public class JpaModelPackage extends ModelPackage {
 	public static final int NAMECONTAINER_NAME_FEATURE_ID = 0;
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int TIMESTAMPED_CLASSIFIER_ID = 6;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int TIMESTAMPED_CREATIONTIME_FEATURE_ID = 0;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int TIMESTAMPED_MODIFICATIONTIME_FEATURE_ID = 1;
+
+	/**
 	 * The static member with the instance of this {@link ModelPackage}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -479,6 +516,9 @@ public class JpaModelPackage extends ModelPackage {
 				modelPackage);
 		ModelResolver.getInstance().registerClassModelMapping(
 				NameContainer.class, modelPackage.getNameContainerEClass(),
+				modelPackage);
+		ModelResolver.getInstance().registerClassModelMapping(
+				Timestamped.class, modelPackage.getTimestampedEClass(),
 				modelPackage);
 
 		// and return ourselves
@@ -816,21 +856,6 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
-	 * Returns the {@link EStructuralFeature} '
-	 * <em><b>PostalAddress.description</b></em>'. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @return an instance of the {@link EStructuralFeature}: '
-	 *         <em><b>PostalAddress.description</b></em>'.
-	 * @generated
-	 */
-	public EAttribute getPostalAddress_Description() {
-		return (EAttribute) getPostalAddressEClass()
-				.getEAllStructuralFeatures().get(
-						POSTALADDRESS_DESCRIPTION_FEATURE_ID);
-	}
-
-	/**
 	 * Returns the {@link EClass} '<em><b>Describable</b></em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -914,6 +939,21 @@ public class JpaModelPackage extends ModelPackage {
 		return (EAttribute) getPostalAddressEClass()
 				.getEAllStructuralFeatures().get(
 						POSTALADDRESS_VALIDATIONTIME_FEATURE_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '
+	 * <em><b>PostalAddress.description</b></em>'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>PostalAddress.description</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_Description() {
+		return (EAttribute) getPostalAddressEClass()
+				.getEAllStructuralFeatures().get(
+						POSTALADDRESS_DESCRIPTION_FEATURE_ID);
 	}
 
 	/**
@@ -1127,6 +1167,46 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
+	 * Returns the {@link EClass} '<em><b>Timestamped</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EClass} '<em><b>Timestamped</b></em>'
+	 * @generated
+	 */
+	public EClass getTimestampedEClass() {
+		return (EClass) getEPackage().getEClassifiers().get(
+				TIMESTAMPED_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '
+	 * <em><b>Timestamped.creationTime</b></em>'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>Timestamped.creationTime</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getTimestamped_CreationTime() {
+		return (EAttribute) getTimestampedEClass().getEAllStructuralFeatures()
+				.get(TIMESTAMPED_CREATIONTIME_FEATURE_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '
+	 * <em><b>Timestamped.modificationTime</b></em>'. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>Timestamped.modificationTime</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getTimestamped_ModificationTime() {
+		return (EAttribute) getTimestampedEClass().getEAllStructuralFeatures()
+				.get(TIMESTAMPED_MODIFICATIONTIME_FEATURE_ID);
+	}
+
+	/**
 	 * Returns the {@link EDataType} '<em><b>DateTime</b></em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1244,6 +1324,32 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
+	 * Returns the {@link EDataType} '<em><b>DateTimeZone</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>DateTimeZone</b></em>'
+	 * @generated
+	 */
+	public EDataType getDateTimeZoneEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				DATETIMEZONE_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EDataType} '<em><b>Locale</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>Locale</b></em>'
+	 * @generated
+	 */
+	public EDataType getLocaleEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				LOCALE_CLASSIFIER_ID);
+	}
+
+	/**
 	 * Returns the {@link EDataType} '<em><b>Gender</b></em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1279,6 +1385,8 @@ public class JpaModelPackage extends ModelPackage {
 			return Positionable.class;
 		case NAMECONTAINER_CLASSIFIER_ID:
 			return NameContainer.class;
+		case TIMESTAMPED_CLASSIFIER_ID:
+			return Timestamped.class;
 		case DATETIME_CLASSIFIER_ID:
 			return DateTime.class;
 		case UUID_CLASSIFIER_ID:
@@ -1299,6 +1407,10 @@ public class JpaModelPackage extends ModelPackage {
 			return Unit.class;
 		case GENERICSTATUS_CLASSIFIER_ID:
 			return GenericStatus.class;
+		case DATETIMEZONE_CLASSIFIER_ID:
+			return DateTimeZone.class;
+		case LOCALE_CLASSIFIER_ID:
+			return Locale.class;
 		default:
 			throw new IllegalArgumentException("The EClassifier '"
 					+ eClassifier + "' is not defined in this EPackage");

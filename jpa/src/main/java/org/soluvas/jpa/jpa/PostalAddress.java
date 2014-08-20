@@ -4,14 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
-
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-
 import com.google.common.base.Preconditions;
 
 /**
@@ -49,7 +46,7 @@ public class PostalAddress implements Describable, Serializable {
 		if (postalAddressUp.getCountryCode() != null) {
 			if (postalAddressUp.getCountryCode().length() > 1)
 				setCountryCode("ID");
-			else 
+			else
 				setCountryCode(postalAddressUp.getCountryCode());
 		}
 		setDescription(postalAddressUp.getDescription());
@@ -246,16 +243,6 @@ public class PostalAddress implements Describable, Serializable {
 	private List<String> emails = new ArrayList<String>();
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
-	 * What this address represents, usually "Home", "Work", etc. <!--
-	 * end-model-doc -->
-	 * 
-	 * @generated
-	 */
-	@Basic()
-	private String description = null;
-
-	/**
 	 * Returns the value of '<em><b>id</b></em>' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -353,6 +340,16 @@ public class PostalAddress implements Describable, Serializable {
 	// @Column(name = "validationtime_zone") })
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime validationTime = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * What this address represents, usually "Home", "Work", etc. <!--
+	 * end-model-doc -->
+	 * 
+	 * @generated
+	 */
+	@Basic()
+	private String description = null;
 
 	@Basic()
 	// @Columns(columns = { @Column(name = "validationtime"),
@@ -853,39 +850,6 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Returns the value of '<em><b>description</b></em>' feature.
-	 * 
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
-	 * What this address represents, usually "Home", "Work", etc. <!--
-	 * end-model-doc -->
-	 * 
-	 * @return the value of '<em><b>description</b></em>' feature
-	 * @generated
-	 */
-	@Override
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * Sets the '{@link PostalAddress#getDescription() <em>description</em>}'
-	 * feature.
-	 * 
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
-	 * What this address represents, usually "Home", "Work", etc. <!--
-	 * end-model-doc -->
-	 * 
-	 * @param newDescription
-	 *            the new value of the '{@link PostalAddress#getDescription()
-	 *            description}' feature.
-	 * @generated
-	 */
-	@Override
-	public void setDescription(String newDescription) {
-		description = newDescription;
-	}
-
-	/**
 	 * Returns the value of '<em><b>primary</b></em>' feature.
 	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -1012,6 +976,37 @@ public class PostalAddress implements Describable, Serializable {
 		} else {
 			this.validationTime_zone = null;
 		}
+	}
+
+	/**
+	 * Returns the value of '<em><b>description</b></em>' feature.
+	 *
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * What this address represents, usually "Home", "Work", etc. <!--
+	 * end-model-doc -->
+	 * 
+	 * @return the value of '<em><b>description</b></em>' feature
+	 * @generated
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * Sets the '{@link PostalAddress#getDescription() <em>description</em>}'
+	 * feature.
+	 *
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * What this address represents, usually "Home", "Work", etc. <!--
+	 * end-model-doc -->
+	 * 
+	 * @param newDescription
+	 *            the new value of the '{@link PostalAddress#getDescription()
+	 *            description}' feature.
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		description = newDescription;
 	}
 
 	public DateTimeZone getValidationTime_zone() {

@@ -3,7 +3,6 @@ package org.soluvas.jpa.jpa;
 import javax.annotation.Nullable;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
-
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
 
@@ -289,7 +288,7 @@ public class PersonInfo {
 	public static PersonInfo fromPerson(Person person) {
 		return fromPerson(person, null);
 	}
-	
+
 	public static PersonInfo fromPerson(Person person, @Nullable String domain) {
 		PersonInfo info = new PersonInfo();
 		info.setId(person.getId());
