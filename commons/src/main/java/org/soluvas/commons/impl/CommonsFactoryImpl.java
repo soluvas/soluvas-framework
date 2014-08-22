@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons.impl;
 
+import com.google.common.collect.ListMultimap;
 import java.io.File;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -242,6 +243,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createLocalTimeFromString(eDataType, initialValue);
 			case CommonsPackage.EXCEPTION:
 				return createExceptionFromString(eDataType, initialValue);
+			case CommonsPackage.LIST_MULTIMAP:
+				return createListMultimapFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -333,6 +336,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertLocalTimeToString(eDataType, instanceValue);
 			case CommonsPackage.EXCEPTION:
 				return convertExceptionToString(eDataType, instanceValue);
+			case CommonsPackage.LIST_MULTIMAP:
+				return convertListMultimapToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -1414,6 +1419,24 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 */
 	public String convertExceptionToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ListMultimap<?, ?> createListMultimapFromString(EDataType eDataType, String initialValue) {
+		return (ListMultimap<?, ?>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertListMultimapToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
 	}
 
 	/**

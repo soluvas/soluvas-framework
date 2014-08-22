@@ -47,7 +47,9 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 				Index.asc("status"),
 				Index.asc("historySalesOrderEnabled"),
 				Index.asc("quickShopEnabled"),
-				Index.asc("salesOrderReportEnabled"));
+				Index.asc("salesOrderReportEnabled"),
+				Index.asc("agentSalesReportEnabled"),
+				Index.asc("transactionHistoryEnabled"));
 		ensureBaseEntities();
 	}
 
@@ -210,5 +212,13 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		return FluentIterable.from(objs).transform(new DBObjectToId()).toSet();
 	}
 
+	@Override
+	public ImmutableSet<String> findAllIdsByTransactionHistoryEnabled(StatusMask statusMask) {
+		final BasicDBObject query = new BasicDBObject("transactionHistoryEnabled", true);
+		augmentQueryForStatusMask(query, statusMask);
+		
+		final List<DBObject> objs = findSecondaryAsDBObjects(query, new BasicDBObject("_id", true), null, 0, 0, "findAllIdsByTransactionHistoryEnabled", statusMask);
+		return FluentIterable.from(objs).transform(new DBObjectToId()).toSet();
+	}
 }
 	

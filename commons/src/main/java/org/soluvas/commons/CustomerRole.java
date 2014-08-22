@@ -18,6 +18,7 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.CustomerRole#isSalesOrderReportEnabled <em>Sales Order Report Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isHistorySalesOrderEnabled <em>History Sales Order Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isAgentSalesReportEnabled <em>Agent Sales Report Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.CustomerRole#isTransactionHistoryEnabled <em>Transaction History Enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -46,7 +47,7 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	
 	/**
 	 * Returns the value of the '<em><b>Schema Version</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
+	 * The default value is <code>"2"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Schema Version</em>' attribute isn't clear,
@@ -55,7 +56,7 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Schema Version</em>' attribute.
 	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_SchemaVersion()
-	 * @model default="1" required="true" changeable="false"
+	 * @model default="2" required="true" changeable="false"
 	 * @generated
 	 */
 	@Override
@@ -218,5 +219,31 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	 * @generated
 	 */
 	void setAgentSalesReportEnabled(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Transaction History Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Transaction History Enabled</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Transaction History Enabled</em>' attribute.
+	 * @see #setTransactionHistoryEnabled(boolean)
+	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_TransactionHistoryEnabled()
+	 * @model
+	 * @generated
+	 */
+	boolean isTransactionHistoryEnabled();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.CustomerRole#isTransactionHistoryEnabled <em>Transaction History Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Transaction History Enabled</em>' attribute.
+	 * @see #isTransactionHistoryEnabled()
+	 * @generated
+	 */
+	void setTransactionHistoryEnabled(boolean value);
 
 } // CustomerRole

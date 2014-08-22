@@ -1,5 +1,6 @@
 package org.soluvas.commons.impl;
 
+import com.google.common.collect.ListMultimap;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Collection;
@@ -930,6 +931,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EDataType lengthEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType listMultimapEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -4022,6 +4030,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCustomerRole_TransactionHistoryEnabled() {
+		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCustomerRoleCatalog() {
 		return customerRoleCatalogEClass;
 	}
@@ -4539,6 +4556,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getListMultimap() {
+		return listMultimapEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
@@ -4929,6 +4955,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__SALES_ORDER_REPORT_ENABLED);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__HISTORY_SALES_ORDER_ENABLED);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED);
+		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__TRANSACTION_HISTORY_ENABLED);
 
 		customerRoleCatalogEClass = createEClass(CUSTOMER_ROLE_CATALOG);
 		createEReference(customerRoleCatalogEClass, CUSTOMER_ROLE_CATALOG__CUSTOMER_ROLES);
@@ -4987,6 +5014,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		eFactoryEDataType = createEDataType(EFACTORY);
 		massEDataType = createEDataType(MASS);
 		lengthEDataType = createEDataType(LENGTH);
+		listMultimapEDataType = createEDataType(LIST_MULTIMAP);
 	}
 
 	/**
@@ -5045,6 +5073,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		ETypeParameter measurableEDataType_Q = addETypeParameter(measurableEDataType, "Q");
 		addETypeParameter(listenableFutureEDataType, "V");
 		addETypeParameter(dequeEDataType, "T");
+		addETypeParameter(listMultimapEDataType, "K");
+		addETypeParameter(listMultimapEDataType, "V");
 
 		// Set bounds for type parameters
 		EGenericType g1 = createEGenericType(this.getIdentifiable());
@@ -5635,13 +5665,14 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getOrganization_TwitterId(), ecorePackage.getEString(), "twitterId", null, 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(customerRoleEClass, CustomerRole.class, "CustomerRole", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCustomerRole_SchemaVersion(), ecorePackage.getELong(), "schemaVersion", "1", 1, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomerRole_SchemaVersion(), ecorePackage.getELong(), "schemaVersion", "2", 1, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_Status(), this.getCustomerRoleStatus(), "status", null, 1, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_ReadOnly(), ecorePackage.getEBoolean(), "readOnly", null, 1, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_QuickShopEnabled(), ecorePackage.getEBoolean(), "quickShopEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_SalesOrderReportEnabled(), ecorePackage.getEBoolean(), "salesOrderReportEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_HistorySalesOrderEnabled(), ecorePackage.getEBoolean(), "historySalesOrderEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_AgentSalesReportEnabled(), ecorePackage.getEBoolean(), "agentSalesReportEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomerRole_TransactionHistoryEnabled(), ecorePackage.getEBoolean(), "transactionHistoryEnabled", null, 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(customerRoleCatalogEClass, CustomerRoleCatalog.class, "CustomerRoleCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCustomerRoleCatalog_CustomerRoles(), this.getCustomerRole(), null, "customerRoles", null, 0, -1, CustomerRoleCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5771,6 +5802,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(eFactoryEDataType, EFactory.class, "EFactory", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(massEDataType, Mass.class, "Mass", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(lengthEDataType, Length.class, "Length", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(listMultimapEDataType, ListMultimap.class, "ListMultimap", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -5787,1381 +5819,1381 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	protected void createGenModelAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		String source = "http://www.eclipse.org/emf/2002/GenModel";	
 		addAnnotation
 		  (getResourceAware_ResourceName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name relative to parent resource."
-		   });		
+		   });	
 		addAnnotation
 		  (resourceTypeEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "The resource is from a bundle classpath."
-		   });		
+		   });	
 		addAnnotation
 		  (resourceTypeEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "The resource is from a file, usually in a watched folder."
-		   });		
+		   });	
 		addAnnotation
 		  (resourceTypeEEnum.getELiterals().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "The resource is from a persistence storage."
-		   });		
+		   });	
 		addAnnotation
 		  (resourceTypeEEnum.getELiterals().get(3), 
 		   source, 
 		   new String[] {
 			 "documentation", "The resource is from a plain Java classpath."
-		   });		
+		   });	
 		addAnnotation
 		  (appManifestEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "AppManifest is actually a misnomer, it should\'ve been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.\n\n<p>Attributes are optional because can use OverlayingSupplier.\n\n<p>Expandable attributes are: domain, generalEmail.\n\n<p>Expansion variables are: fqdn (host-dependent), appDomain (from properties), userName (from System property user.name), domain (can only be used by other attributes than domain itself)."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest__GetDefaultLocale(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Returns the {@link java.util.Locale} referred by {@link @getDefaultLanguageTag()}."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest__GetWebHost(), 
 		   source, 
 		   new String[] {
 			 "documentation", "If {@link #isWwwUsed()} is {@code true}, will return \"www.\" + {@link #getDomain()}. Otherwise, just {@link #getDomain()}."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_Summary(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Short description to be used in page title, usually 3-10 words."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_Description(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Longer description to be used in meta description, recommended to be less than 160 characters."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_Domain(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Primary domain name of the application for current environment, e.g. \"berbatik.com\". Used by Email system. URI templatable using \"appDomain\", \"fqdn\", \"tenantId\", \"tenantEnv\".\n\n<p>TODO: make this read-only for future usage.\n\n<p>For development, use e.g. \"berbatik.annafi.dev\".\n\n<p>Production: title=Berbatik, domain=berbatik.com\n\n<p>Staging: title=Berbatik stg, domain=stg.berbatik.com\n\n<p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev\n\n<p>Description usually stays the same, but can be different too.\n\n<p>Templated using URI templates. e.g. to use {@code appDomain} variable, i.e. \"acme.{+appDomain}\",\nthat will be expanded when you call {@link #expand()}."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_DomainPrd(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Primary domain name of the application for \"prd\" environment, e.g. \"berbatik.com\". Used by Email system. URI templatable using \"appDomain\", \"fqdn\", \"tenantId\", \"tenantEnv\".\n\n<p>To get the real domain name, use {@link #getRealDomain(String)} instead.\n\n<p>For development, use e.g. \"berbatik.annafi.dev\".\n\n<p>Production: title=Berbatik, domain=berbatik.com\n\n<p>Staging: title=Berbatik stg, domain=stg.berbatik.com\n\n<p>Development: title=Berbatik Annafi, domain=berbatik.annafi.dev\n\n<p>Description usually stays the same, but can be different too.\n\n<p>Templated using URI templates. e.g. to use {@code appDomain} variable, i.e. \"acme.{+appDomain}\",\nthat will be expanded when you call {@link #expand()}."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_DomainDev(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Primary domain name of the application for \"dev\" environment.\nURI templatable using \"appDomain\", \"fqdn\", \"tenantId\", \"tenantEnv\"."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_DomainStg(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Primary domain name of the application for \"dev\" environment.\nURI templatable using \"appDomain\", \"fqdn\", \"tenantId\", \"tenantEnv\"."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_GeneralEmail(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Email address (current environment) used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.\nThe default templated generalEmail is \"{+userName}@{+fqdn}\" so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.\n\n<p>Templated using URI templates.\n\n<p>TODO: this should be read-only"
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_GeneralEmailPrd(), 
 		   source, 
 		   new String[] {
 			 "documentation", "General email for \"prd\" environment."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_GeneralEmailDev(), 
 		   source, 
 		   new String[] {
 			 "documentation", "General email for \"dev\" environment."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_GeneralEmailStg(), 
 		   source, 
 		   new String[] {
 			 "documentation", "General email for \"stg\" environment."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_OrganizationName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Used in email notifications, e.g. \"PT Berniaga Digital\"."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_OrganizationAddress(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Used in email notifications, e.g. \"Talavera Office Park, Jl. TB Simatupang KAV 20-22 Jakarta\"."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_OrganizationPhoneNumbers(), 
 		   source, 
 		   new String[] {
 			 "documentation", "One or more telephone numbers (can be home, work, or mobile, it\'s not specified).\nThey should conform to <a href=\"http://tools.ietf.org/html/rfc3966\">tel: URI specification (RFC3966)</a> and <a href=\"http://tools.ietf.org/html/rfc5341\">RFC5341</a>."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_DefaultTimeZoneId(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Default time zone for the application. For example this is used by perpetual inventory to store dates with a fixed reference timezone.\nIt\'s a String, not a DateTimeZone object, to make it easier to edit the *.AppManifest.xmi file using generic EMF editor."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_DefaultTimeZone(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Reads directly from {@link #getDefaultTimeZoneId()}."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_DefaultCurrencyCode(), 
 		   source, 
 		   new String[] {
 			 "documentation", "This is a String and not a CurrencyUnit object to aid visual editing using EMF Reflective Editor."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_DefaultCurrency(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Reads directly from {@link #getDefaultCurrencyCode()}."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_DefaultLanguageTag(), 
 		   source, 
 		   new String[] {
 			 "documentation", "IETF BCP 47 language tag string, e.g. {@code id-ID}. This is different than {@code defaultCountryCode}, because {@code defaultLanguageTag} is used to determine the {@link java.util.Locale}."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_DefaultCountryCode(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Default country code in ISO 3166-1 alpha-2. It is used for e.g. fill the country field in new PostalAddress form."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_DefaultCategoryUName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "If specified, this will be the {@link org.soluvas.category.Category}\'s UName to use when creating a new application entity (such as {@link id.co.bippo.product.VariedProduct}).\nIf not specified, please choose the first <b>leaf</b> {@link org.soluvas.category.Category} instead (which must exist)."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_EmailLogoUriTemplate(), 
 		   source, 
 		   new String[] {
 			 "documentation", "URI to tenant logo usable when sending email notifications, by default the tenant logo URI template is: {+imagesUri}tenant_common/logo_email.png\n\n<p>Width of 127 pixels is recommended with landscape ratio.\n\n<p>Supported parameter is \"imagesUri\", which is from {link WebAddress#getImagesUri()}.\n\n<p>You can have app-wide logo without any tenant_common folder by using URI template such as: {+imagesUri}/com.aksimata.app/aksimata_email_192x92.png\n\n<p>To get the actual URI, call {@link AppUtils#getEmailLogoUri(AppManifest, WebAddress)}."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_LetterSalutation(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The SALUTATION (C) of the letter starts on the left margin two lines below the inside address for a business letter or five lines below the heading of a personal letter, if typed. All words in the salutation are capitalized, and the last word is followed by a comma in a personal letter or a colon in a business letter.\nSample salutations are:\n\n\nPersonal:\nGreetings Friend, Dear Bob, Hi Bob,\n\nBusiness:\nDear Mr. Jones: Dear Sir:\nLadies and Gentlemen: Dear Mr./Mrs./Ms. Jones:\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_LetterClosing(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The first word of the CLOSING (E), which is placed several lines below the body, lines up with the first word in the heading and is the only word capitalized. A comma follows the closing.\n\nPossible closings include:\n\nPersonal:\nYour friend, Missing you, Sincerely,\nConfused, Affectionately,Cordially,\n\nBusiness:\nSincerely yours, Yours truly,Respectfully yours,"
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_Footnote(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The footnote is shown on all frontend pages, usually positioned below the main content, but above the footer."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_WwwUsed(), 
 		   source, 
 		   new String[] {
 			 "documentation", "If {@code true}, {#link getWebHost()} will return \"www.\" + domain. If {@code false}, just domain."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_HeadNote(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The headnote is shown on all frontend pages, usually positioned above the main content, but above the banner."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_HeadTitle(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The headtitle is shown on all frontend pages, usually positioned above the main content, but above the banner."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_DefaultStyle(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Default style name for Wicket, e.g. \"fluid\" (Cinta Lama\'s original theme, created by Ahmad Syarif Farsiado)."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppManifest_DefaultVariation(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Default style variation for Wicket, e.g. \"default\", \"shop\", \"business\" (for Queen theme)."
-		   });		
+		   });	
 		addAnnotation
 		  (personInfoEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Person partial value object that is stored in Graph database (usually Neo4j) or embedded in a MongoDB document.\n\nThe ID is Directory entry uid attribute.\n"
-		   });		
+		   });	
 		addAnnotation
 		  (genderEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Unknown gender (null value needs to be modeled explicitly in EMF Enum)."
-		   });		
+		   });	
 		addAnnotation
 		  (genderEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Male person."
-		   });		
+		   });	
 		addAnnotation
 		  (genderEEnum.getELiterals().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "Female person."
-		   });		
+		   });	
 		addAnnotation
 		  (timestampedEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Can be used by any EObject that wants to preserve creationTime/modificationTime."
-		   });		
+		   });	
 		addAnnotation
 		  (getTimestamped_CreationTime(), 
 		   source, 
 		   new String[] {
 			 "documentation", "First creation time (raw)."
-		   });		
+		   });	
 		addAnnotation
 		  (getTimestamped_ModificationTime(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Last modification time (raw)."
-		   });		
+		   });	
 		addAnnotation
 		  (identifiableEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Object that has ID as String."
-		   });		
+		   });	
 		addAnnotation
 		  (getIdentifiable_Id(), 
 		   source, 
 		   new String[] {
 			 "documentation", "ID of the object. Usually either lowercase_underscored or UUID. Optional because some implementations (e.g. CategoryCatalog) can generate IDs dynamically when loading from Catalog.\n\n<p>In LDAP, it can either be \'uid\' or \'uniqueIdentifier\'.\n\n<p>RFC1274: unique identifer.\nLDAP: uniqueIdentifier"
-		   });		
+		   });	
 		addAnnotation
 		  (getSluggable_Slug(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Slug (aka Directory uniqueIdentifier) used in SEO-friendly URIs. Optional because some implementations (e.g. CategoryCatalog) can generate slugs dynamically when loading from Catalogs."
-		   });		
+		   });	
 		addAnnotation
 		  (nameableEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "An object that can provide a name."
-		   });		
+		   });	
 		addAnnotation
 		  (getImageable__GetImageId(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Return the primary image ID for square proportion."
-		   });		
+		   });	
 		addAnnotation
 		  (photoIdContainerEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Contains image ID as photoId attribute and has default implementation for {#getImageId()}."
-		   });		
+		   });	
 		addAnnotation
 		  (getPhotoIdContainer_PhotoId(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Avatar Photo ID directly usable by Image Store. Used by {#getImageId()}."
-		   });		
+		   });	
 		addAnnotation
 		  (nameContainerEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Contains a name attribute named \'name\' and has default implementation for {@link #getName()}."
-		   });		
+		   });	
 		addAnnotation
 		  (getNameContainer_Name(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Display name (can be full name, nickname, slug, screen name, etc. whatever is commonly used by the particular app).\nUsed by {#getName()}."
-		   });		
+		   });	
 		addAnnotation
 		  (informerEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Can transform itself an \"Info\" object."
-		   });		
+		   });	
 		addAnnotation
 		  (getInformer__ToInfo(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Transforms to its \"Info\" model."
-		   });		
+		   });	
 		addAnnotation
 		  (describableEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Has description."
-		   });		
+		   });	
 		addAnnotation
 		  (getDescribable_Description(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Description for this entity, in <a href=\"https://en.wikipedia.org/wiki/AsciiDoc\">AsciiDoc</a> format.\nIf <a href=\"http://dev.w3.org/html5/rdfa/\">HTML+RDFa (Linked Data)</a> format is desired, you should create a separate {@code descriptionHtml} attribute."
-		   });		
+		   });	
 		addAnnotation
 		  (bundleEDataType, 
 		   source, 
 		   new String[] {
 			 "documentation", "An installed bundle in the Framework.\n\nA Bundle object is the access point to define the lifecycle of an installed bundle. Each bundle installed in the OSGi environment must have an associated Bundle object.\n\nA bundle must have a unique identity, a long, chosen by the Framework. This identity must not change during the lifecycle of a bundle, even when the bundle is updated. Uninstalling and then reinstalling the bundle must create a new unique identity.\n\nA bundle can be in one of six states:\n\nUNINSTALLED\nINSTALLED\nRESOLVED\nSTARTING\nSTOPPING\nACTIVE\nValues assigned to these states have no specified ordering; they represent bit values that may be ORed together to determine if a bundle is in one of the valid states.\n\nA bundle should only have active threads of execution when its state is one of STARTING,ACTIVE, or STOPPING. An UNINSTALLED bundle can not be set to another state; it is a zombie and can only be reached because references are kept somewhere.\n\nThe Framework is the only entity that is allowed to create Bundle objects, and these objects are only valid within the Framework that created them.\n\nBundles have a natural ordering such that if two Bundles have the same bundle id they are equal. A Bundle is less than another Bundle if it has a lower bundle id and is greater if it has a higher bundle id."
-		   });		
+		   });	
 		addAnnotation
 		  (bundleAwareEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "BundleAware classes are usually also ResourceAware (since Bundle is a resource).\nHowever, Soluvas can load from other non-bundle resources as well, etc. JCR, Git, filesystem, database, HTTP, etc."
-		   });		
+		   });	
 		addAnnotation
 		  (getBundleAware_Bundle(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Only available if resolved."
-		   });		
+		   });	
 		addAnnotation
 		  (javaClassLinkedEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Implementation is in {@link org.soluvas.commons.JavaClassLinked.Trait}."
-		   });		
+		   });	
 		addAnnotation
 		  (getJavaClassLinked__ResolveJavaClass__Bundle(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Resolve referenced Java Class."
-		   });		
+		   });	
 		addAnnotation
 		  ((getJavaClassLinked__ResolveJavaClass__Bundle()).getEParameters().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Resolve referenced Java Class using the specified Bundle."
-		   });		
+		   });	
 		addAnnotation
 		  (getJavaClassLinked_JavaClassName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The Java class name linked to this type. Used to resolve the Java Class instance."
-		   });		
+		   });	
 		addAnnotation
 		  (getJavaClassLinked_JavaClass(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The Java class linked to this type. Only available when resolved."
-		   });		
+		   });	
 		addAnnotation
 		  (eClassLinkedEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Implementation is in {@link org.soluvas.commons.util.EClassLinked.Trait}."
-		   });		
+		   });	
 		addAnnotation
 		  (getEClassLinked__ResolveEClass__Map(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Resolve referenced EClass."
-		   });		
+		   });	
 		addAnnotation
 		  ((getEClassLinked__ResolveEClass__Map()).getEParameters().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Keys are {ePackageName}.{eClassName}.\nValues are EClass instances themselves."
-		   });		
+		   });	
 		addAnnotation
 		  (getEClassLinked_EClass(), 
 		   source, 
 		   new String[] {
 			 "documentation", "EClass for this instances of this type."
-		   });		
+		   });	
 		addAnnotation
 		  (getEClassLinked_EPackageNsPrefix(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Used to resolve agains NS Prefix instead of EPackage name. The key format will be \"{ePackage.nsPrefix}:{eClass.name}\"."
-		   });		
+		   });	
 		addAnnotation
 		  (getEClassLinked_EClassName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name of EClass, used for resolving the EClass instance."
-		   });		
+		   });	
 		addAnnotation
 		  (getEClassLinked_EPackageName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name of EPackage, used for resolving the EClass instance.  The key format will be \"{ePackage.name}.{eClass.name}\"."
-		   });		
+		   });	
 		addAnnotation
 		  (eFactoryLinkedEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Useful for schema classes, e.g. {@code com.soluvas.story.schema.ActionType}, {@code com.soluvas.story.schema.TargetType}."
-		   });		
+		   });	
 		addAnnotation
 		  (getEFactoryLinked_EFactory(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Useful for schema classes, e.g. {@code com.soluvas.story.schema.ActionType}, {@code com.soluvas.story.schema.TargetType}. Only accessible when resolved."
-		   });		
+		   });	
 		addAnnotation
 		  (getNsPrefixable_NsPrefix(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Context-specific NS prefix.\n\nComes from: getActionType().getEClass().getEPackage().getNsPrefix()."
-		   });		
+		   });	
 		addAnnotation
 		  (webAddressEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Tenant-wide website URI configuration. URI template variables: appId, tenantId, tenantEnv, appDomain, domain, fqdn, webHost."
-		   });		
+		   });	
 		addAnnotation
 		  (getWebAddress__GetApiUri(), 
 		   source, 
 		   new String[] {
 			 "documentation", "API URI is useful if you want to access API resources (e.g. MediaResource) from external apps, email, etc. or where you have taken care of the cross-origin request issues.\n\nAlways returns baseUri + apiPath, removing double slash."
-		   });		
+		   });	
 		addAnnotation
 		  (getWebAddress__GetSecureApiUri(), 
 		   source, 
 		   new String[] {
 			 "documentation", "API URI is useful if you want to access API resources (e.g. MediaResource) from external apps, email, etc. or where you have taken care of the cross-origin request issues.\n\nAlways returns secureBaseUri + apiPath, removing double slash."
-		   });		
+		   });	
 		addAnnotation
 		  (getWebAddress_BaseUri(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Absolute URI of the website. Used by email notifications, external servers, etc."
-		   });		
+		   });	
 		addAnnotation
 		  (getWebAddress_BasePath(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Absolute path to website, e.g. /"
-		   });		
+		   });	
 		addAnnotation
 		  (getWebAddress_ApiPath(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Absolute path to API, e.g. /api/\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getWebAddress_ImagesUri(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Absolute URI to image files, e.g. http://images.berbatik.com/"
-		   });		
+		   });	
 		addAnnotation
 		  (getWebAddress_SkinUri(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Absolute URI to CSS files and dependencies (sprite images, fonts, etc.), e.g. http://skin.berbatik.com/"
-		   });		
+		   });	
 		addAnnotation
 		  (getWebAddress_JsUri(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Absolute URI to JavaScript files, e.g. http://js.berbatik.com/"
-		   });		
+		   });	
 		addAnnotation
 		  (getWebAddress_SecureBaseUri(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Absolute URI to website, e.g. https://www.berbatik.com/"
-		   });		
+		   });	
 		addAnnotation
 		  (getWebAddress_SecureImagesUri(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Absolute URI to secure image files, e.g. https://images.berbatik.com/"
-		   });		
+		   });	
 		addAnnotation
 		  (getWebAddress_SecureSkinUri(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Absolute secure URI to CSS files and dependencies (sprite images, fonts, etc.), e.g. http://skin.berbatik.com/"
-		   });		
+		   });	
 		addAnnotation
 		  (addedEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Inspired by {@link org.eclipse.emf.common.notify.Notification}."
-		   });		
+		   });	
 		addAnnotation
 		  (modelNotificationEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Inspired by {@link org.eclipse.emf.common.notify.Notification}."
-		   });		
+		   });	
 		addAnnotation
 		  (categoryLikeEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "ID is prefixed with parent IDs then concatenated by \'_\', it won\'t change when categories are reordered are moved/restructured. IDs cannot be duplicate (even draft/inactive/void categories). Slugs can be duplicates only within same parent. Names can be duplicates.\n\n<p>Slug is used as name in JCR repositories. If not specified, should be generated based on Name.\n\n<p>Name is used as displayName in JCR repositories."
-		   });		
+		   });	
 		addAnnotation
 		  (getCategoryLike_SlugPath(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Automatically updated based on slug and parent slugs, separated by \'/\'."
-		   });		
+		   });	
 		addAnnotation
 		  (getCategoryLike_Color(), 
 		   source, 
 		   new String[] {
 			 "documentation", "HTML color code name or hexadecimal code (i.e. \"#3356ff\") of category color (usually used as background)."
-		   });		
+		   });	
 		addAnnotation
 		  (getCategoryLike_Level(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The \"implicit root category\" has level 0. So a Category without a parent has level 1. Automatically updated on save."
-		   });		
+		   });	
 		addAnnotation
 		  (getCategoryLike_CategoryCount(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Number of children categories. Automatically updated when categories are restructured."
-		   });		
+		   });	
 		addAnnotation
 		  (getCategoryInfo_Parents(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Used to help query performance. And also to display breadcrumbs."
-		   });		
+		   });	
 		addAnnotation
 		  (progressMonitorEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", " * The <code>IProgressMonitor</code> interface is implemented\n * by objects that monitor the progress of an activity; the methods\n * in this interface are invoked by code that performs the activity.\n * <p>\n * All activity is broken down into a linear sequence of tasks against\n * which progress is reported. When a task begins, a <code>beginTask(String, int)\n * </code> notification is reported, followed by any number and mixture of \n * progress reports (<code>worked()</code>) and subtask notifications \n * (<code>subTask(String)</code>).  When the task is eventually completed, a \n * <code>done()</code> notification is reported.  After the <code>done()</code>\n * notification, the progress monitor cannot be reused;  i.e., <code>\n * beginTask(String, int)</code> cannot be called again after the call to \n * <code>done()</code>.\n * </p>\n * <p>\n * A request to cancel an operation can be signaled using the \n * <code>setCanceled</code> method.  Operations taking a progress\n * monitor are expected to poll the monitor (using <code>isCanceled</code>)\n * periodically and abort at their earliest convenience.  Operation can however \n * choose to ignore cancelation requests.\n * </p>\n * <p>\n * Since notification is synchronous with the activity itself, the listener should \n * provide a fast and robust implementation. If the handling of notifications would \n * involve blocking operations, or operations which might throw uncaught exceptions, \n * the notifications should be queued, and the actual processing deferred (or perhaps\n * delegated to a separate thread).\n * </p><p>\n * This interface can be used without OSGi running.\n * </p><p>\n * Clients may implement this interface.\n * </p>\n\n\nInspired by: org.eclipse.core.runtime.IProgressMonitor\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getProgressMonitor__BeginTask__String_long(), 
 		   source, 
 		   new String[] {
 			 "documentation", "\t * Notifies that the main task is beginning.  This must only be called once\n\t * on a given progress monitor instance.\n\t * \n\t * @param name the name (or description) of the main task\n\t * @param totalWork the total number of work units into which\n\t *  the main task is been subdivided. If the value is <code>UNKNOWN</code> \n\t *  the implementation is free to indicate progress in a way which \n\t *  doesn\'t require the total number of work units in advance.\n\nTODO: support formatting in the task name, probably using HTML5 or RDFa, which will be converted (in shell) into ANSI codes."
-		   });		
+		   });	
 		addAnnotation
 		  (getProgressMonitor__Done(), 
 		   source, 
 		   new String[] {
 			 "documentation", "\t * Notifies that the work is done; that is, either the main task is completed \n\t * or the user canceled it. This method may be called more than once \n\t * (implementations should be prepared to handle this case).\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getProgressMonitor__InternalWorked__double(), 
 		   source, 
 		   new String[] {
 			 "documentation", "\t * Internal method to handle scaling correctly. This method\n\t * must not be called by a client. Clients should \n\t * always use the method </code>worked(int)</code>.\n\t * \n\t * @param work the amount of work done\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getProgressMonitor_Canceled(), 
 		   source, 
 		   new String[] {
 			 "documentation", "\t * Returns whether cancelation of current operation has been requested.\n\t * Long-running operations should poll to see if cancelation\n\t * has been requested.\n\t *\n\t * @return <code>true</code> if cancellation has been requested,\n\t *    and <code>false</code> otherwise\n\t * @see #setCanceled(boolean)\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getProgressMonitor_TaskName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "\t * Sets the task name to the given value. This method is used to \n\t * restore the task label after a nested operation was executed. \n\t * Normally there is no need for clients to call this method.\n\t *\n\t * @param name the name (or description) of the main task\n\t * @see #beginTask(java.lang.String, int)\n"
-		   });		
+		   });	
 		addAnnotation
 		  (progressStatusEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Completed successfully."
-		   });		
+		   });	
 		addAnnotation
 		  (progressStatusEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Error occurred."
-		   });		
+		   });	
 		addAnnotation
 		  (progressStatusEEnum.getELiterals().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "Process completed with warnings."
-		   });		
+		   });	
 		addAnnotation
 		  (progressStatusEEnum.getELiterals().get(3), 
 		   source, 
 		   new String[] {
 			 "documentation", "OK but destructive."
-		   });		
+		   });	
 		addAnnotation
 		  (progressStatusEEnum.getELiterals().get(4), 
 		   source, 
 		   new String[] {
 			 "documentation", "Skipped for some reason."
-		   });		
+		   });	
 		addAnnotation
 		  (shellProgressMonitorEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Use ansi.render() to report progress."
-		   });		
+		   });	
 		addAnnotation
 		  (eventBusProgressMonitorEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Use Guava EventBus to report progress.\nCan be used to implement web-based progress bar."
-		   });		
+		   });	
 		addAnnotation
 		  (progressMonitorWrapperEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", " * An abstract wrapper around a progress monitor which,\n * unless overridden, forwards <code>IProgressMonitor</code>\n * and <code>IProgressMonitorWithBlocking</code> methods to the wrapped progress monitor.\n * <p>\n * This class can be used without OSGi running.\n * </p><p>\n * Clients may subclass.\n * </p>\n"
-		   });		
+		   });	
 		addAnnotation
 		  (accountStatusEEnum, 
 		   source, 
 		   new String[] {
 			 "documentation", "Status of Account, can be use for shop , person , or mall"
-		   });		
+		   });	
 		addAnnotation
 		  (accountStatusEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Member belum aktif. Pertama kali user registrasi mandiri (belum validasi email), status adalah draft.\nSetelah user melakukan validasi email, status berubah menjadi:\n1. Bila membership dimoderasi, menjadi \'validated\' terlebih dahulu. Admin harus meng-approve member tersebut agar menjadi active.\n2. Bila membership bebas, maka status \'draft\' langsung menjadi \'active\' (tanpa approval admin)."
-		   });		
+		   });	
 		addAnnotation
 		  (accountStatusEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Email sudah divalidasi tapi belum aktif (bila membership dimoderasi).\n"
-		   });		
+		   });	
 		addAnnotation
 		  (accountStatusEEnum.getELiterals().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "Akun aktif dan dapat digunakan. Diasumsikan email sudah valid. Bila membership dimoderasi, maka sudah ada admin yang meng-approve membership ini."
-		   });		
+		   });	
 		addAnnotation
 		  (accountStatusEEnum.getELiterals().get(3), 
 		   source, 
 		   new String[] {
 			 "documentation", "Akun aktif dan dapat digunakan, dan sudah diverifikasi secara lebih pasti bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator)."
-		   });		
+		   });	
 		addAnnotation
 		  (accountStatusEEnum.getELiterals().get(4), 
 		   source, 
 		   new String[] {
 			 "documentation", " Member dinonaktifkan / suspended."
-		   });		
+		   });	
 		addAnnotation
 		  (accountStatusEEnum.getELiterals().get(5), 
 		   source, 
 		   new String[] {
 			 "documentation", "Member dihapus."
-		   });		
+		   });	
 		addAnnotation
 		  (publicationStatusEEnum, 
 		   source, 
 		   new String[] {
 			 "documentation", "atribut untuk draft/published, editing. Semanticnya Drafts (Edit kayanya beda lagi, bikin ticket baru aja dech untuk Edit)."
-		   });		
+		   });	
 		addAnnotation
 		  (publicationStatusEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Not Yet Published"
-		   });		
+		   });	
 		addAnnotation
 		  (publicationStatusEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Has published and can be viewed by authorized viewers."
-		   });		
+		   });	
 		addAnnotation
 		  (publicationStatusEEnum.getELiterals().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "Was published but taken down"
-		   });		
+		   });	
 		addAnnotation
 		  (archivalStatusEEnum, 
 		   source, 
 		   new String[] {
 			 "documentation", " atribut untuk new/fresh/inbox. Kalau fresh maka masuk Inbox / New Products / bolded, tidak fresh maka masuk All Mail / All Products. Semanticnya Archive. Tidak termasuk read/unread ya."
-		   });		
+		   });	
 		addAnnotation
 		  (archivalStatusEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "New item"
-		   });		
+		   });	
 		addAnnotation
 		  (archivalStatusEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Old Item"
-		   });		
+		   });	
 		addAnnotation
 		  (colorableEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "An object that can display itself as color."
-		   });		
+		   });	
 		addAnnotation
 		  (getColorable_Color(), 
 		   source, 
 		   new String[] {
 			 "documentation", "HTML color code name or hexadecimal code (i.e. \"#3356ff\") of category color (usually used as background)."
-		   });		
+		   });	
 		addAnnotation
 		  (translatableEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Entity Translation\nMulti-locale & multi-language support for entities/nodes/database objects\nAllow entities (like Product) to have different description / price / custom attribute values (fabric, origin, technique, etc.) for each locale/language."
-		   });		
+		   });	
 		addAnnotation
 		  (getTranslatable_OriginalLanguage(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The language of original values."
-		   });		
+		   });	
 		addAnnotation
 		  (getTranslatable_Language(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Current language code (if translationState == translated) or same as originalLanguage."
-		   });		
+		   });	
 		addAnnotation
 		  (getTranslatable_Translations(), 
 		   source, 
 		   new String[] {
 			 "documentation", "EMap[ language: String, Translation ]\nWhere Translation object contains language: String and the localized messages keyed by attribute QName.\nExample translations is as follows:\n1. en\n1. base_description : Very good style.\n2. base_fabric : Super funky.\n2. id\n1. base_description : Sangat bagus untuk Anda.\n2. base_fabric : Katun keren.\n3. base_origin : Jakarta area.\nCountry codes in language codes:\nen and en_US are identical and interchangeable.\nid and id_ID are identical and interchangeable."
-		   });		
+		   });	
 		addAnnotation
 		  (translationStateEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "1. Values are in their original language as specified by originalLanguage (usually the mother tongue, i.e. id)."
-		   });		
+		   });	
 		addAnnotation
 		  (translationStateEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "2. Values are translated and language attribute is set as the current language."
-		   });		
+		   });	
 		addAnnotation
 		  (translationEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "It\'s not an EMap so it won\'t be complex to create the underlying EMap (messages)."
-		   });		
+		   });	
 		addAnnotation
 		  (getTranslationManager__Translate__Translatable_String(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Processes available translations and sets language to the targetLanguage.\nWill throw Exception if it\'s not already in the targetLanguage and translationState is translated."
-		   });		
+		   });	
 		addAnnotation
 		  (getTranslationEntry_Key(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Language of the translation."
-		   });		
+		   });	
 		addAnnotation
 		  (styleConfigurationEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Used by {@link org.soluvas.web.site.SiteResource} to get the current Mall\'s default style."
-		   });		
+		   });	
 		addAnnotation
 		  (getStyleConfiguration__GetDefaultStyle(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Default style name for Wicket, e.g. \"fluid\" (Cinta Lama\'s original theme, created by Ahmad Syarif Farsiado)."
-		   });		
+		   });	
 		addAnnotation
 		  (expandableEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Can be expanded upon loading by XmiObjectLoader.\n\nExample is WebAddress, it will replace {+fqdn} with FQDN (useful for development)."
-		   });		
+		   });	
 		addAnnotation
 		  (getExpandable__Expand__Map(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Expand attribute values."
-		   });		
+		   });	
 		addAnnotation
 		  (getExpandable_ExpansionState(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Whether attribute values are already expanded. If so, calling expand() will do nothing."
-		   });		
+		   });	
 		addAnnotation
 		  (expansionStateEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Attribute values are unexpanded, for example baseUri=\"http://www.cintalama5.{+fqdn}/\""
-		   });		
+		   });	
 		addAnnotation
 		  (expansionStateEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Attribute values are expanded, for example baseUri=\"http://www.cintalama5.{+fqdn}/\" becomes \"http://www.cintalama5.rudi.dev/\""
-		   });		
+		   });	
 		addAnnotation
 		  (personLikeEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Contains basic attributes of a Person."
-		   });		
+		   });	
 		addAnnotation
 		  (personEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Database-agnostic future replacement for org.soluvas.ldap.SocialPerson & BippoPerson.\n\nA basic LDAP <tt>objectClass=person</tt> with proper mappings that can be subclassed."
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson__HasEmail__String(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Checks if the email is already in its list."
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson__PutEmail__String(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Puts the (normalized) email, and sets it as primary if the only one. Has no effect if already exists. Returns the added Email contained object."
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_Password(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The password, may be encoded e.g. <code>{SSHA}BacKnhFVjpSunHYgivCVPAzcavAZZe9QFtd51A==<code>"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_AccountStatus(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Status of Account, can be used for shop, person, or mall.\n\naccountStatus itu delete (move to Trash)/undelete, untuk normal repository :\n\n<ol>\n\t<li>draft: Member belum aktif.</li>\n\t<li>validated: Email sudah divalidasi tapi belum aktif (bila membership dimoderasi).</li>\n\t<li>active: Akun aktif dan dapat digunakan.</li>\n\t<li>verified: Akun aktif dan dapat digunakan, dan sudah diverifikasi bahwa pemilik akun ini dikenali oleh pengelola website (membership premium/aktivis/donator).</li>\n\t<li>inactive: Member dinonaktifkan / suspended.</li>\n\t<li>void: Member dihapus.@return the accountStatus</li>\n</ol>\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_BirthDate(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Only available if birthYear, birthMonth, and birthDay is a valid date."
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_Language(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Preferred language as language identifier,\nas defined by IETF RFC 4646 (http://www.ietf.org/rfc/rfc4646.txt) or successor,\nor ISO 639-1 Language Codes. \n"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_CurrencyCode(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Preferred currency as ISO 4217. The purpose of ISO 4217:2008 is to establish internationally recognised codes for the representation of currencies.\n\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_Currency(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Preferred currency as ISO 4217. The purpose of ISO 4217:2008 is to establish internationally recognised codes for the representation of currencies.\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_CustomerRole(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name of Customer Role or Group, for example in Tuneeca there are 5: ag-sp, agen, biasa, drops, membr\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_MemberRole(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name of Member Role or Group for example : newbie, aktivis , donatur\n\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_ManagerRole(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name of Manager Role or Group for example : regular, moderator , administrator, sysadmin. (administrativeRole attribute OID 2.5.18.5 is already used by LDAP standard)\n\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_TimeZoneId(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The attribute is named \'timezone\' and is a plain string, e.g. \'Asia/Jakarta\' or \'UTC\'. If not set, will default to whatever the application configuration is set to (or its heuristics). References: * https://wikis.oracle.com/display/CommSuite/LDAP+General+Information+and+Time+Zones#LDAPGeneralInformationandTimeZones-ANOFE * http://docs.oracle.com/cd/E19683-01/816-4856/nisplus2ldap-59/index.html * http://tracker.moodle.org/browse/MDL-17330\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_TimeZone(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The attribute is named \'timezone\' and is a plain string, e.g. \'Asia/Jakarta\' or \'UTC\'. If not set, will default to whatever the application configuration is set to (or its heuristics). References: * https://wikis.oracle.com/display/CommSuite/LDAP+General+Information+and+Time+Zones#LDAPGeneralInformationandTimeZones-ANOFE * http://docs.oracle.com/cd/E19683-01/816-4856/nisplus2ldap-59/index.html * http://tracker.moodle.org/browse/MDL-17330\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_ReferrerId(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Person ID who refers this person"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_ReferrerType(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Type of referrer for example : person_id , email, facebook_id\n\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_SignupSource(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Signup source name, e.g. \"Rudi Wijaya\" for {@link SignupSourceType#FACEBOOK_FRIEND}."
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_SignupSourceType(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Signup source type, e.g. {@link SignupSourceType#FACEBOOK_FRIEND}."
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_IpAddress(), 
 		   source, 
 		   new String[] {
 			 "documentation", "IP address pertama kali login"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_LastIpAddress(), 
 		   source, 
 		   new String[] {
 			 "documentation", "IP address terakhir kali login"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_LastLoginTime(), 
 		   source, 
 		   new String[] {
 			 "documentation", "kapan terakhir kali login"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_ValidationTime(), 
 		   source, 
 		   new String[] {
 			 "documentation", "kapan dia validate email"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_ActivationTime(), 
 		   source, 
 		   new String[] {
 			 "documentation", "kapan akun dia aktif (bila dimoderasi)"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_VerificationTime(), 
 		   source, 
 		   new String[] {
 			 "documentation", "kapan dia menjadi verified member"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_NewsletterSubscriptionEnabled(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Apakah dia ingin menerima newsletter."
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_NewsletterSubscriptionTime(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Kapan dia terdaftar di newsletter"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_SocialSharingEnabled(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Apakah dia ingin mensharing aktivitasnya di social network seperti Twitter, Facebook, Path, Google+, dll. (secara umum, konfigurasi spesifik di tempat lain)"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_PublicationStatus(), 
 		   source, 
 		   new String[] {
 			 "documentation", "atribut untuk draft/published, editing. Semanticnya Drafts (Edit kayanya beda lagi, bikin ticket baru aja dech untuk Edit).\n\n<ol>\n\t<li>draft</li>\n\t<li>published</li>\n\t<li>unpublished</li>\n</ol>"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_ArchivalStatus(), 
 		   source, 
 		   new String[] {
 			 "documentation", "atribut untuk new/fresh/inbox. Kalau fresh maka masuk Inbox / New Products / bolded, tidak fresh maka masuk All Mail / All Products. Semanticnya Archive. Tidak termasuk read/unread ya. fresh archived\n\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_Folder(), 
 		   source, 
 		   new String[] {
 			 "documentation", "atribut untuk labeling. Masukkan nsPrefix_{folderName}. (folder name di sini underscore lowercase)"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_PasswordResetCode(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Code that can be used to perform password reset for a limited time."
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_PasswordResetExpiryTime(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The time when the passwordResetCode becomes no longer usable."
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_ClientAccessToken(), 
 		   source, 
 		   new String[] {
 			 "documentation", "OAuth 2.0 access token usable by official client applications (Android, iOS, etc.).\nThis is for simple usage, with no expiration (though regenerating the client access token is possible if the access token is compromised). For more complex usage like third party applications, use another mechanism.\n\nThe \'client_id\' and \'callback_url\' (or \'callback_domains\') should be specified elsewhere (probably on AppManifest?)\n\nSee: https://developer.foursquare.com/overview/auth.html"
-		   });		
+		   });	
 		addAnnotation
 		  (getPerson_VerifyCode(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Verify Code is used to link to VerifyNewMemberPage"
-		   });		
+		   });	
 		addAnnotation
 		  (getPhoneNumber_Primary(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Designates this PhoneNumber as the primary PhoneNumber of the containing list."
-		   });		
+		   });	
 		addAnnotation
 		  (getPhoneNumber_ValidationTime(), 
 		   source, 
 		   new String[] {
 			 "documentation", "When this phone number was validated by the user."
-		   });		
+		   });	
 		addAnnotation
 		  (getEmail_Email(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Must be normalized: lowercased, trimmed, and must not be null."
-		   });		
+		   });	
 		addAnnotation
 		  (getEmail_Primary(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Designates this Email as the primary Email of the containing list."
-		   });		
+		   });	
 		addAnnotation
 		  (getEmail_ValidationTime(), 
 		   source, 
 		   new String[] {
 			 "documentation", "When this email was validated by the user."
-		   });		
+		   });	
 		addAnnotation
 		  (postalAddressEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "See http://www.upu.int/en/activities/addressing/standards.html - UPU S42.\n\nID is RFC1274: unique identifer.\nLDAP: uniqueIdentifier\n\n\'name\' attribute is Person name who will receive.\nRFC2256: common name(s) for which the entity is known by.\ncn, commonName.\n\nCan be used as:\n\n1. Billing Address in SalesQuote/SalesOrder\n2. Shipping Address in SalesQuote/SalesOrder\n3. Origin Address in SalesQuote/SalesOrder\n4. Person (Customer) Address\n5. Shop Address\n6. Mall Address\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getPostalAddress_Organization(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Organization or company name who will send or receive.\nCan be empty.\nRFC2256: organization this object belongs to\nLDAP: o, organizationName"
-		   });		
+		   });	
 		addAnnotation
 		  (getPostalAddress_Country(), 
 		   source, 
 		   new String[] {
 			 "documentation", "RFC1274: friendly country name.\n\nLDAP: co, friendlyCountryName"
-		   });		
+		   });	
 		addAnnotation
 		  (getPostalAddress_CountryCode(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Country code using <a href=\"http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO 3166-1 alpha-2</a>.\n\nLDAP: c, countryName"
-		   });		
+		   });	
 		addAnnotation
 		  (getPostalAddress_Mobiles(), 
 		   source, 
 		   new String[] {
 			 "documentation", "RFC1274: mobile telephone number\nLDAP: mobile, mobileTelephoneNumber"
-		   });		
+		   });	
 		addAnnotation
 		  (getPostalAddress_PrimaryPhone(), 
 		   source, 
 		   new String[] {
 			 "documentation", "RFC2256: Telephone Number\nLDAP: telephoneNumber\n\nFor offices, usually work phone. For people, usually home phone."
-		   });		
+		   });	
 		addAnnotation
 		  (getPostalAddress_HomePhones(), 
 		   source, 
 		   new String[] {
 			 "documentation", "RFC1274: home telephone number.\nLDAP: homePhone, homeTelephoneNumber."
-		   });		
+		   });	
 		addAnnotation
 		  (getPostalAddress_WorkPhones(), 
 		   source, 
 		   new String[] {
 			 "documentation", "RFC2256: Telephone Number.\nLDAP: (not yet mapped)"
-		   });		
+		   });	
 		addAnnotation
 		  (getPostalAddress_Emails(), 
 		   source, 
 		   new String[] {
 			 "documentation", "LDAP: mail."
-		   });		
+		   });	
 		addAnnotation
 		  (getPostalAddress_Description(), 
 		   source, 
 		   new String[] {
 			 "documentation", "What this address represents, usually \"Home\", \"Work\", etc."
-		   });		
+		   });	
 		addAnnotation
 		  (getPostalAddress_Primary(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Designates this Address as the primary Address of the containing list."
-		   });		
+		   });	
 		addAnnotation
 		  (getPostalAddress_PrimaryBilling(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Designates this Address as the primary billing Address of the containing list."
-		   });		
+		   });	
 		addAnnotation
 		  (getPostalAddress_PrimaryShipping(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Designates this Address as the primary billing Address of the containing list."
-		   });		
+		   });	
 		addAnnotation
 		  (getPostalAddress_ValidationTime(), 
 		   source, 
 		   new String[] {
 			 "documentation", "When this postal address was validated by the user."
-		   });		
+		   });	
 		addAnnotation
 		  (signupSourceTypeEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Other."
-		   });		
+		   });	
 		addAnnotation
 		  (signupSourceTypeEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Google Search Engine."
-		   });		
+		   });	
 		addAnnotation
 		  (signupSourceTypeEEnum.getELiterals().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "Google AdSense / AdWords ads."
-		   });		
+		   });	
 		addAnnotation
 		  (signupSourceTypeEEnum.getELiterals().get(3), 
 		   source, 
 		   new String[] {
 			 "documentation", "Facebook Ads."
-		   });		
+		   });	
 		addAnnotation
 		  (signupSourceTypeEEnum.getELiterals().get(4), 
 		   source, 
 		   new String[] {
 			 "documentation", "Facebook friend."
-		   });		
+		   });	
 		addAnnotation
 		  (signupSourceTypeEEnum.getELiterals().get(5), 
 		   source, 
 		   new String[] {
 			 "documentation", "Alia magazine."
-		   });		
+		   });	
 		addAnnotation
 		  (canonicalSluggableEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "TODO: Consider merging this with {@link Sluggable}?"
-		   });		
+		   });	
 		addAnnotation
 		  (getCanonicalSluggable_CanonicalSlug(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Canonical slug is lowercase, and removes every character not in a-z, 0-9, and underscore.\n\n<p>It is useful for e.g. making both http://www.satukancinta.com/arum.puspita and http://www.satukancinta.com/arumpuspita or even http://www.satukancinta.com/member/arum.pus.pi.ta usable.\n\n<p>From the technical point-of-view (easy matching/lookup), the canonical slug/identifier for arum.puspita is arumpuspita, the canonicalSlug should be indexed in database for fast matching. From the user or SEO point-of-view however, the \"canonical\" one is arum.puspita, but it is not what is meant here.\n\n<p>Use {@link SlugUtils#canonicalize()} to generate canonical slug from user-provided slug."
-		   });		
+		   });	
 		addAnnotation
 		  (twitterAccessibleEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Supports Twitter Access Token and Access Token Secret, and therefore able to tweet, mention, or retweet."
-		   });		
+		   });	
 		addAnnotation
 		  (twitterIdentityEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Contains Twitter identity, which can be Twitter ID, screen name, or both."
-		   });		
+		   });	
 		addAnnotation
 		  (facebookIdentityEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Contains Facebook identity, which can be Facebook ID, username, or both."
-		   });		
+		   });	
 		addAnnotation
 		  (facebookAccessibleEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Contains Facebook access token (which can expire anytime)."
-		   });		
+		   });	
 		addAnnotation
 		  (revisionableEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Contains a globally unique identifier (GUID) and revision."
-		   });		
+		   });	
 		addAnnotation
 		  (getRevisionable_Guid(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Globally unique identifier (GUID). Usually it\'s the same as OID (object identifier), for better space usage. However there are times where it is app-generated\n(i.e. by a PouchDB app).\n\nFor CouchDB this maps to \"_id\" field."
-		   });		
+		   });	
 		addAnnotation
 		  (getRevisionable_Revision(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The CouchDB document revision (\"_rev\")."
-		   });		
+		   });	
 		addAnnotation
 		  (tenantSourceEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Loads tenants from config folder, which is either META-INF or a $HOME-relative config folder.\nThis is practical for development or for production of single or few static tenants."
-		   });		
+		   });	
 		addAnnotation
 		  (tenantSourceEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Loads tenants from repository, which is preferred for production environment with dynamic tenants."
-		   });		
+		   });	
 		addAnnotation
 		  (sysConfigEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Base EMF Interface of system configuration for a tenant."
-		   });		
+		   });	
 		addAnnotation
 		  (getSysConfig_TenantId(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Tenant ID (without tenantEnv) which this sysconfig applies to."
-		   });		
+		   });	
 		addAnnotation
 		  (genericStatusEEnum, 
 		   source, 
 		   new String[] {
 			 "documentation", "Generic status for general-purpose usage."
-		   });		
+		   });	
 		addAnnotation
 		  (genericStatusEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Entity is active and usable."
-		   });		
+		   });	
 		addAnnotation
 		  (genericStatusEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Entity has not yet been formally created."
-		   });		
+		   });	
 		addAnnotation
 		  (genericStatusEEnum.getELiterals().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "Entity is editable but not active for operational purposes."
-		   });		
+		   });	
 		addAnnotation
 		  (genericStatusEEnum.getELiterals().get(3), 
 		   source, 
 		   new String[] {
 			 "documentation", "Entity is trashed or banned."
-		   });		
+		   });	
 		addAnnotation
 		  (geolocationEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Why Double?\n\nHibernate Search has this as best practice:\n\"add the @Latitude and @Longitude annotations on your properties representing the coordinates; these must be of type Double\"\nhttp://docs.jboss.org/hibernate/search/4.2/reference/en-US/html/spatial.html"
-		   });		
+		   });	
 		addAnnotation
 		  (thingInfoEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "A condensed version of a (probably app-specific) Thing."
-		   });		
+		   });	
 		addAnnotation
 		  (getCustomerRole_ReadOnly(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Read-only customer roles are defined by the application and not editable by the tenant administrator."
-		   });		
+		   });	
 		addAnnotation
 		  (getCustomerRole_QuickShopEnabled(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Can access to \"..quick_shopping_agent/\""
-		   });		
+		   });	
 		addAnnotation
 		  (getCustomerRole_SalesOrderReportEnabled(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Can access to \"..user/salesorder_report/\""
-		   });		
+		   });	
 		addAnnotation
 		  (getCustomerRole_HistorySalesOrderEnabled(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Can access to \"..user/salesorder/\""
-		   });		
+		   });	
 		addAnnotation
 		  (getCustomerRole_AgentSalesReportEnabled(), 
 		   source, 
 		   new String[] {
 			 "documentation", "For accessing \"..agent_sales_report/mall/\""
-		   });		
+		   });	
 		addAnnotation
 		  (getMongoSysConfig_MongoUri(), 
 		   source, 
 		   new String[] {
 			 "documentation", "MongoDB URI for all MongoDB repositories except image repositories. Each repository implementation should determine its own access patterns with regard to replica set (i.e. primary only, secondary on read, etc.)\n\nTemplated using URI Templates."
-		   });		
+		   });	
 		addAnnotation
 		  (entityKindEEnum, 
 		   source, 
 		   new String[] {
 			 "documentation", "Inspired by {@link org.soluvas.image.ImageTypes}. Used by {@link org.soluvas.web.site.PermalinkManager}."
-		   });		
+		   });	
 		addAnnotation
 		  (entityKindEEnum.getELiterals().get(5), 
 		   source, 
 		   new String[] {
 			 "documentation", "CMS Article, which is usually chronological, categorized/tagged, and owned by Person (compare with Page)."
-		   });		
+		   });	
 		addAnnotation
 		  (entityKindEEnum.getELiterals().get(10), 
 		   source, 

@@ -1552,7 +1552,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="CustomerRole" eSuperTypes="#//Identifiable #//SchemaVersionable #//NameContainer #//Timestamped #//Describable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="schemaVersion" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong" changeable="false"
-        defaultValueLiteral="1"/>
+        defaultValueLiteral="2"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" lowerBound="1"
         eType="#//CustomerRoleStatus"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" lowerBound="1"
@@ -1585,6 +1585,8 @@
         <details key="documentation" value="For accessing &quot;..agent_sales_report/mall/&quot;"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transactionHistoryEnabled"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CustomerRoleCatalog">
     <eStructuralFeatures xsi:type="ecore:EReference" name="customerRoles" upperBound="-1"

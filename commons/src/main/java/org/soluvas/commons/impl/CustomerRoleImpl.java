@@ -39,6 +39,7 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isSalesOrderReportEnabled <em>Sales Order Report Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isHistorySalesOrderEnabled <em>History Sales Order Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isAgentSalesReportEnabled <em>Agent Sales Report Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isTransactionHistoryEnabled <em>Transaction History Enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,7 +155,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long SCHEMA_VERSION_EDEFAULT = 1L;
+	protected static final long SCHEMA_VERSION_EDEFAULT = 2L;
 
 	/**
 	 * The cached value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
@@ -285,6 +286,26 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * @ordered
 	 */
 	protected boolean agentSalesReportEnabled = AGENT_SALES_REPORT_ENABLED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isTransactionHistoryEnabled() <em>Transaction History Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTransactionHistoryEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TRANSACTION_HISTORY_ENABLED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isTransactionHistoryEnabled() <em>Transaction History Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTransactionHistoryEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean transactionHistoryEnabled = TRANSACTION_HISTORY_ENABLED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -563,6 +584,27 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isTransactionHistoryEnabled() {
+		return transactionHistoryEnabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTransactionHistoryEnabled(boolean newTransactionHistoryEnabled) {
+		boolean oldTransactionHistoryEnabled = transactionHistoryEnabled;
+		transactionHistoryEnabled = newTransactionHistoryEnabled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__TRANSACTION_HISTORY_ENABLED, oldTransactionHistoryEnabled, transactionHistoryEnabled));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -590,6 +632,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return isHistorySalesOrderEnabled();
 			case CommonsPackage.CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED:
 				return isAgentSalesReportEnabled();
+			case CommonsPackage.CUSTOMER_ROLE__TRANSACTION_HISTORY_ENABLED:
+				return isTransactionHistoryEnabled();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -634,6 +678,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return;
 			case CommonsPackage.CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED:
 				setAgentSalesReportEnabled((Boolean)newValue);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__TRANSACTION_HISTORY_ENABLED:
+				setTransactionHistoryEnabled((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -680,6 +727,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED:
 				setAgentSalesReportEnabled(AGENT_SALES_REPORT_ENABLED_EDEFAULT);
 				return;
+			case CommonsPackage.CUSTOMER_ROLE__TRANSACTION_HISTORY_ENABLED:
+				setTransactionHistoryEnabled(TRANSACTION_HISTORY_ENABLED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -716,6 +766,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return historySalesOrderEnabled != HISTORY_SALES_ORDER_ENABLED_EDEFAULT;
 			case CommonsPackage.CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED:
 				return agentSalesReportEnabled != AGENT_SALES_REPORT_ENABLED_EDEFAULT;
+			case CommonsPackage.CUSTOMER_ROLE__TRANSACTION_HISTORY_ENABLED:
+				return transactionHistoryEnabled != TRANSACTION_HISTORY_ENABLED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -832,6 +884,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 		result.append(historySalesOrderEnabled);
 		result.append(", agentSalesReportEnabled: ");
 		result.append(agentSalesReportEnabled);
+		result.append(", transactionHistoryEnabled: ");
+		result.append(transactionHistoryEnabled);
 		result.append(')');
 		return result.toString();
 	}

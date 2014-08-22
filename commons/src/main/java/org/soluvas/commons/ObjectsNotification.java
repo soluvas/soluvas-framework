@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EObject;
 public interface ObjectsNotification<T extends EObject> extends ModelNotification<T> {
 	/**
 	 * Returns the value of the '<em><b>Objects</b></em>' attribute list.
-	 * The list contents are of type {@link T}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Objects</em>' attribute list isn't clear,

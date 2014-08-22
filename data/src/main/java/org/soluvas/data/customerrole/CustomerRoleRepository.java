@@ -31,5 +31,7 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole, Str
 	ImmutableSet<String> findAllIdsByHistorySalesOrderEnabled(StatusMask statusMask);
 	
 	ImmutableSet<String> findAllIdsByAgentSalesReportEnabled(StatusMask statusMask);
+
+	ImmutableSet<String> findAllIdsByTransactionHistoryEnabled(StatusMask statusMask);
 	
 }

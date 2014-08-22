@@ -5397,13 +5397,22 @@ public interface CommonsPackage extends EPackage {
 	int CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Transaction History Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER_ROLE__TRANSACTION_HISTORY_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 11;
+
+	/**
 	 * The number of structural features of the '<em>Customer Role</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMER_ROLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 11;
+	int CUSTOMER_ROLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 12;
 
 	/**
 	 * The operation id for the '<em>Get Schema Version</em>' operation.
@@ -5990,6 +5999,16 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	int LENGTH = 113;
+
+	/**
+	 * The meta object id for the '<em>List Multimap</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.google.common.collect.ListMultimap
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListMultimap()
+	 * @generated
+	 */
+	int LIST_MULTIMAP = 114;
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
@@ -9237,6 +9256,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getCustomerRole_AgentSalesReportEnabled();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CustomerRole#isTransactionHistoryEnabled <em>Transaction History Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Transaction History Enabled</em>'.
+	 * @see org.soluvas.commons.CustomerRole#isTransactionHistoryEnabled()
+	 * @see #getCustomerRole()
+	 * @generated
+	 */
+	EAttribute getCustomerRole_TransactionHistoryEnabled();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.CustomerRoleCatalog <em>Customer Role Catalog</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9790,6 +9820,17 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getLength();
+
+	/**
+	 * Returns the meta object for data type '{@link com.google.common.collect.ListMultimap <em>List Multimap</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>List Multimap</em>'.
+	 * @see com.google.common.collect.ListMultimap
+	 * @model instanceClass="com.google.common.collect.ListMultimap" typeParameters="K V"
+	 * @generated
+	 */
+	EDataType getListMultimap();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -12366,6 +12407,14 @@ public interface CommonsPackage extends EPackage {
 		EAttribute CUSTOMER_ROLE__AGENT_SALES_REPORT_ENABLED = eINSTANCE.getCustomerRole_AgentSalesReportEnabled();
 
 		/**
+		 * The meta object literal for the '<em><b>Transaction History Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOMER_ROLE__TRANSACTION_HISTORY_ENABLED = eINSTANCE.getCustomerRole_TransactionHistoryEnabled();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.CustomerRoleCatalogImpl <em>Customer Role Catalog</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -12880,6 +12929,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType LENGTH = eINSTANCE.getLength();
+
+		/**
+		 * The meta object literal for the '<em>List Multimap</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.google.common.collect.ListMultimap
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getListMultimap()
+		 * @generated
+		 */
+		EDataType LIST_MULTIMAP = eINSTANCE.getListMultimap();
 
 	}
 
