@@ -1,8 +1,14 @@
 package org.soluvas.jpa.jpa;
 
+import java.io.Serializable;
+
 import javax.annotation.Nullable;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
+
+import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.Type;
+import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
 
@@ -13,7 +19,22 @@ import org.soluvas.commons.Person;
  * @generated
  */
 @Embeddable()
-public class PersonInfo {
+public class PersonInfo implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+
+	public PersonInfo() {
+		super();
+	}
+	
+	public PersonInfo(org.soluvas.commons.PersonInfo personInfoUp) {
+		setEmail(personInfoUp.getEmail());
+		setGender(personInfoUp.getGender());
+		setId(personInfoUp.getId());
+		setName(personInfoUp.getName());
+		setPhotoId(personInfoUp.getPhotoId());
+		setSlug(personInfoUp.getSlug());
+	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -36,9 +57,9 @@ public class PersonInfo {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
 	 */
 	@Basic()
+	@Type(type = "org.soluvas.jpa.PersistentEnum", parameters = @Parameter(name = "enumClass", value = "org.soluvas.commons.Gender"))
 	private Gender gender = null;
 
 	/**
@@ -299,5 +320,16 @@ public class PersonInfo {
 		info.setGender(person.getGender());
 		info.setDomain(domain);
 		return info;
+	}
+
+	public static org.soluvas.commons.PersonInfo toCommons(PersonInfo personInfoJpa) {
+		final org.soluvas.commons.PersonInfo personInfoCommons = CommonsFactory.eINSTANCE.createPersonInfo();
+		personInfoCommons.setEmail(personInfoJpa.getEmail());
+		personInfoCommons.setGender(personInfoJpa.getGender());
+		personInfoCommons.setId(personInfoJpa.getId());
+		personInfoCommons.setName(personInfoJpa.getName());
+		personInfoCommons.setPhotoId(personInfoJpa.getPhotoId());
+		personInfoCommons.setSlug(personInfoJpa.getSlug());
+		return personInfoCommons;
 	}
 }
