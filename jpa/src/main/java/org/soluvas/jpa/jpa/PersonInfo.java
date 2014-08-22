@@ -1,11 +1,8 @@
 package org.soluvas.jpa.jpa;
 
-import java.io.Serializable;
-
 import javax.annotation.Nullable;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
-
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.soluvas.commons.CommonsFactory;
@@ -19,14 +16,14 @@ import org.soluvas.commons.Person;
  * @generated
  */
 @Embeddable()
-public class PersonInfo implements Serializable {
-	
+public class PersonInfo {
+
 	private static final long serialVersionUID = 1L;
 
 	public PersonInfo() {
 		super();
 	}
-	
+
 	public PersonInfo(org.soluvas.commons.PersonInfo personInfoUp) {
 		setEmail(personInfoUp.getEmail());
 		setGender(personInfoUp.getGender());
@@ -51,7 +48,7 @@ public class PersonInfo implements Serializable {
 	 * 
 	 * @generated
 	 */
-	@Basic(optional = false)
+	@Basic()
 	private String name = null;
 
 	/**
@@ -322,8 +319,10 @@ public class PersonInfo implements Serializable {
 		return info;
 	}
 
-	public static org.soluvas.commons.PersonInfo toCommons(PersonInfo personInfoJpa) {
-		final org.soluvas.commons.PersonInfo personInfoCommons = CommonsFactory.eINSTANCE.createPersonInfo();
+	public static org.soluvas.commons.PersonInfo toCommons(
+			PersonInfo personInfoJpa) {
+		final org.soluvas.commons.PersonInfo personInfoCommons = CommonsFactory.eINSTANCE
+				.createPersonInfo();
 		personInfoCommons.setEmail(personInfoJpa.getEmail());
 		personInfoCommons.setGender(personInfoJpa.getGender());
 		personInfoCommons.setId(personInfoJpa.getId());
