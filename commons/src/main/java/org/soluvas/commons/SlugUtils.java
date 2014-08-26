@@ -1,5 +1,12 @@
 package org.soluvas.commons;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.nio.CharBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
 import java.util.regex.Pattern;
 
@@ -288,6 +295,40 @@ public class SlugUtils {
 	@Nullable
 	public static String canonicalizePath(@Nullable String slugPath) {
 		return slugPath != null ? NOT_LOWER_ALPHANUM_OR_SLASH.matcher(slugPath.toLowerCase()).replaceAll("") : null;
+	}
+
+	/**
+	 * Checks whether all public {@link String} getters of an object are valid {@link StandardCharsets#UTF_8}.
+	 * @param id
+	 * @param clazz
+	 * @param obj
+	 */
+	public static <T> void checkUtf8(String id, Class<T> clazz, T obj) {
+		final CharsetEncoder encoder = StandardCharsets.UTF_8.newEncoder().onMalformedInput(CodingErrorAction.REPORT).onUnmappableCharacter(CodingErrorAction.REPORT);
+		for (Method method : clazz.getDeclaredMethods()) {
+			if (method.getReturnType() == String.class && method.getParameterTypes().length == 0) {
+				final String str;
+				try {
+					str = (String) method.invoke(obj);
+				} catch (IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException e) {
+					throw new RuntimeException("@" + id + ": Cannot invoke " + method, e);
+				}
+				if (str != null) {
+					try {
+						encoder.reset();
+						byte[] bb = encoder.encode(CharBuffer.wrap(str)).array();
+						for (byte b : bb) {
+							if (b == 0) {
+								throw new RuntimeException("@" + id + ": " + method + " result contains null: " + str);
+							}
+						}
+					} catch (CharacterCodingException e) {
+						throw new RuntimeException("@" + id + ": Cannot encode " + method + " result " + str, e);
+					}
+				}
+			}
+		}
 	}
 
 }
