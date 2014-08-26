@@ -1,8 +1,11 @@
 package org.soluvas.jpa.jpa;
 
+import java.io.Serializable;
+
 import javax.annotation.Nullable;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
+
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.soluvas.commons.CommonsFactory;
@@ -13,10 +16,9 @@ import org.soluvas.commons.Person;
  * A representation of the model object '<em><b>PersonInfo</b></em>'. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
- * @generated
  */
 @Embeddable()
-public class PersonInfo {
+public class PersonInfo  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
