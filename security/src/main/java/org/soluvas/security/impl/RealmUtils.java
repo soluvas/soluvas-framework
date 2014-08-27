@@ -52,17 +52,25 @@ public class RealmUtils {
 
 	/**
 	 * Modifies the given {@link SimpleAuthorizationInfo} using {@link RolePersonRepository}.
+	 * @param realmName 
 	 * @param authzInfo
 	 * @param principalCollection
 	 * @param rolePersonRepo
 	 * @param securityCatalog
 	 */
-	public static void modifyAuthInfo(SimpleAuthorizationInfo authzInfo, final PrincipalCollection principalCollection, RolePersonRepository rolePersonRepo,
+	public static void modifyAuthInfo(String realmName, SimpleAuthorizationInfo authzInfo, final PrincipalCollection principalCollection, RolePersonRepository rolePersonRepo,
 			SecurityCatalog securityCatalog) {
-		final String personId = (String) principalCollection.getPrimaryPrincipal();
-		// Database-based roles for the current principal(s) are retrieved using RolePersonRepository
-		final List<String> personRoleIds = rolePersonRepo.getRight(personId);
-		modifyAuthInfo(authzInfo, principalCollection, personRoleIds, securityCatalog);
+		final Collection<Object> ownPrincipals = principalCollection.fromRealm(realmName);
+		if (!ownPrincipals.isEmpty()) {
+			final String personId = (String) ownPrincipals.iterator().next();
+			log.trace("Modifiying AuthorizationInfo for principal '{}' realm {}", personId, realmName);
+			// Database-based roles for the current principal(s) are retrieved using RolePersonRepository
+			final List<String> personRoleIds = rolePersonRepo.getRight(personId);
+			modifyAuthInfo(authzInfo, principalCollection, personRoleIds, securityCatalog);
+		} else {
+			log.trace("Not modifiying AuthorizationInfo for {}, requested principal '{}' realm(s) {}", 
+					realmName, principalCollection.getPrimaryPrincipal(), principalCollection.getRealmNames());
+		}
 	}
 
 	/**

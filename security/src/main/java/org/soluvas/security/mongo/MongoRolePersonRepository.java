@@ -157,7 +157,7 @@ public class MongoRolePersonRepository extends AssocRepositoryBase<String, Strin
 		final BasicDBObject personObj = (BasicDBObject) personColl.findOne(new BasicDBObject("_id", personId));
 //		log.debug("Result Query of PersonObj with personId {} : {}", personId, personObj);
 		if (personObj == null) {
-			log.warn("Person object is null for id {}", personId);
+			log.warn(personColl.getDB().getName() + "» Person object is null for ID '" + personId + "', returning empty role list", new Exception());
 			return ImmutableList.of();
 		}
 		final Set<String> tenantRoleIds = personObj.get("securityRoleIds") != null ?
