@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
@@ -27,6 +28,7 @@ import com.google.common.base.Predicate;
  */
 public class SlugUtils {
 	
+	public static final CharMatcher NIL_MATCHER = CharMatcher.is('\0');
 	public static final int MIN_LENGTH = 3;
 	public static final int MAX_LENGTH = 63;
 	public static final Pattern ID_PATTERN = Pattern.compile("[a-z0-9][a-z0-9_]+");
@@ -322,11 +324,16 @@ public class SlugUtils {
 				if (str != null) {
 					try {
 						encoder.reset();
-						byte[] bb = encoder.encode(CharBuffer.wrap(str)).array();
+						encoder.encode(CharBuffer.wrap(str)).array(); // just for exception
+						byte[] bb = str.getBytes(StandardCharsets.UTF_8);
 						for (int i = 0; i < bb.length; i++) {
 							byte b = bb[i];
 							if (b == 0) {
-								errors.add(id + ": " + method + " result contains 00 at index " + i + ": " + str + " - " + Hex.encodeHexString(bb));
+								String charArray = "";
+								for (char c : str.toCharArray()) {
+									charArray += Integer.toHexString(c) + " ";
+								}
+								errors.add(id + ": " + method + " result contains 00 at index " + i + ": " + Hex.encodeHexString(bb) + " UTF-16: " + charArray + " - " + str);
 								break;
 							}
 						}
@@ -339,6 +346,16 @@ public class SlugUtils {
 		if (!errors.isEmpty()) {
 			throw new RuntimeException(Joiner.on('\n').join(errors));
 		}
+	}
+	
+	/**
+	 * Remove all {@code \0} characters, useful for cleaning up https://dev.twitter.com/issues/1908
+	 * wtih problematic user http://twitter.com/rediantihera
+	 * @param str
+	 */
+	@Nullable
+	public static String stripNullChars(@Nullable String str) {
+		return str != null ? NIL_MATCHER.removeFrom(str) : null;
 	}
 
 }
