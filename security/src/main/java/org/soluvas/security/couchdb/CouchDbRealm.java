@@ -165,7 +165,7 @@ public class CouchDbRealm extends AuthorizingRealm {
 							return input.toString();
 						};
 					}));
-			RealmUtils.modifyAuthInfo(info, principalCollection, rolePersonRepo, securityCatalogSupplier.get());
+			RealmUtils.modifyAuthInfo(getName(), info, principalCollection, rolePersonRepo, securityCatalogSupplier.get());
 		} else {
 			log.trace("Assigning AuthorizationInfo WITHOUT stored roles for principals: {}",
 					rolePersonRepo, Iterables.transform(principalCollection, new Function<Object, String>() {

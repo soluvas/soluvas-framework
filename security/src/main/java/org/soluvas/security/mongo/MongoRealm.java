@@ -164,7 +164,7 @@ public class MongoRealm extends AuthorizingRealm {
 			final PrincipalCollection principalCollection) {
 		final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		if (rolePersonRepo != null) {
-			RealmUtils.modifyAuthInfo(info, principalCollection, rolePersonRepo, securityCatalog);
+			RealmUtils.modifyAuthInfo(getName(), info, principalCollection, rolePersonRepo, securityCatalog);
 		} else {
 			RealmUtils.modifyAuthInfo(info, principalCollection, securityRepo, securityCatalog);
 		}
