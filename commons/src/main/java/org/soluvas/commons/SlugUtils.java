@@ -8,13 +8,16 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;
 
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 
@@ -302,32 +305,39 @@ public class SlugUtils {
 	 * @param id
 	 * @param clazz
 	 * @param obj
+	 * @see https://dev.twitter.com/issues/1908
 	 */
 	public static <T> void checkUtf8(String id, Class<T> clazz, T obj) {
+		final ArrayList<String> errors = new ArrayList<>();
 		final CharsetEncoder encoder = StandardCharsets.UTF_8.newEncoder().onMalformedInput(CodingErrorAction.REPORT).onUnmappableCharacter(CodingErrorAction.REPORT);
 		for (Method method : clazz.getDeclaredMethods()) {
-			if (method.getReturnType() == String.class && method.getParameterTypes().length == 0) {
+			if (method.getReturnType() == String.class && method.getParameterTypes().length == 0 && method.getName().startsWith("get")) {
 				final String str;
 				try {
 					str = (String) method.invoke(obj);
 				} catch (IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException e) {
-					throw new RuntimeException("@" + id + ": Cannot invoke " + method, e);
+					throw new RuntimeException(id + ": Cannot invoke " + method, e);
 				}
 				if (str != null) {
 					try {
 						encoder.reset();
 						byte[] bb = encoder.encode(CharBuffer.wrap(str)).array();
-						for (byte b : bb) {
+						for (int i = 0; i < bb.length; i++) {
+							byte b = bb[i];
 							if (b == 0) {
-								throw new RuntimeException("@" + id + ": " + method + " result contains null: " + str);
+								errors.add(id + ": " + method + " result contains 00 at index " + i + ": " + str + " - " + Hex.encodeHexString(bb));
+								break;
 							}
 						}
 					} catch (CharacterCodingException e) {
-						throw new RuntimeException("@" + id + ": Cannot encode " + method + " result " + str, e);
+						errors.add(id + ": Cannot encode " + method + " result " + str + ": " + e);
 					}
 				}
 			}
+		}
+		if (!errors.isEmpty()) {
+			throw new RuntimeException(Joiner.on('\n').join(errors));
 		}
 	}
 
