@@ -7,5 +7,7 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
  */
 public interface TermRepository extends
 		PagingAndSortingRepository<Term, String> {
+	
+	DataCatalog getDataCatalog();
 
 }

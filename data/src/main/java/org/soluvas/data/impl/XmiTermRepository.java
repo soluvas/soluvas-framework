@@ -372,4 +372,9 @@ public class XmiTermRepository
 		eventBus.post(new TermChanged(null, kindNsPrefix, kindName));
 	}
 
+	@Override
+	public DataCatalog getDataCatalog() {
+		return catalog;
+	}
+
 }

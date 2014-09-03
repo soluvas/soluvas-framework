@@ -68,7 +68,7 @@ public class TermManagerImpl implements TermManager {
 	public DataCatalog getDataCatalog() {
 		return dataCatalog;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
