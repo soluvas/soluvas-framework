@@ -11,10 +11,10 @@ import org.soluvas.newsletter.MailjetManager;
  * @author atang
  *
  */
-public class PersonSubcribedToMailJetHandler {
+public class PersonSubscribedToMailJetHandler {
 	
 	private static final Logger log = LoggerFactory
-			.getLogger(PersonSubcribedToMailJetHandler.class);
+			.getLogger(PersonSubscribedToMailJetHandler.class);
 	
 	private final MailjetManager mailJetMgr;
 	
@@ -22,7 +22,7 @@ public class PersonSubcribedToMailJetHandler {
 	 * @param mailJet
 	 * @param mailJetMgr
 	 */
-	public PersonSubcribedToMailJetHandler(MailjetManager mailJetMgr) {
+	public PersonSubscribedToMailJetHandler(MailjetManager mailJetMgr) {
 		super();
 		this.mailJetMgr = mailJetMgr;
 	}

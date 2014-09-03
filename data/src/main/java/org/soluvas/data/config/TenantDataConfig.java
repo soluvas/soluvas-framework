@@ -1,6 +1,7 @@
 package org.soluvas.data.config;
 
 import java.io.File;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -12,6 +13,7 @@ import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.config.MultiTenantConfig;
 import org.soluvas.commons.config.TenantSelector;
 import org.soluvas.commons.tenant.TenantBeans;
+import org.soluvas.commons.tenant.TenantSubscribers;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataFactory;
 import org.soluvas.data.DataPackage;
@@ -21,6 +23,7 @@ import org.soluvas.data.TermManager;
 import org.soluvas.data.impl.DataCatalogImpl;
 import org.soluvas.data.impl.MixinManagerImpl;
 import org.soluvas.data.impl.TermManagerImpl;
+import org.soluvas.data.subscriber.TermSubscriber;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -198,6 +201,19 @@ public class TenantDataConfig {
 	@Bean @Scope("prototype")
 	public TermManager termMgr() {
 		return termMgrBeans().get(tenantSelector.tenantRef().getTenantId());
+	}
+	
+	@Bean
+	public TenantSubscribers salesOrderSubscribers() {
+		return new TenantSubscribers() {
+			@Override
+			protected List<?> onReady(String tenantId, AppManifest appManifest) throws Exception {
+				final TermManager termManager = termMgrBeans().get(tenantId);
+				final TermSubscriber termSubscriber = new TermSubscriber(termManager);
+				
+				return ImmutableList.of( termSubscriber );
+			}
+		};
 	}
 	
 //	@Bean @Lazy(false)

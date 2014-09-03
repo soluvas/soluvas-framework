@@ -38,7 +38,7 @@ public interface TermManager {
 	 * @generated
 	 */
 	DataCatalog getDataCatalog();
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
