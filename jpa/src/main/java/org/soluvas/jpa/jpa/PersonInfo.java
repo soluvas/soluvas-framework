@@ -310,7 +310,7 @@ public class PersonInfo  implements Serializable {
 	}
 
 	public static PersonInfo fromPerson(Person person, @Nullable String domain) {
-		PersonInfo info = new PersonInfo();
+		final PersonInfo info = new PersonInfo();
 		info.setId(person.getId());
 		info.setSlug(person.getSlug());
 		info.setName(person.getName());
