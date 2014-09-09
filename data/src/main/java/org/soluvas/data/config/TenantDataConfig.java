@@ -204,7 +204,7 @@ public class TenantDataConfig {
 	}
 	
 	@Bean
-	public TenantSubscribers salesOrderSubscribers() {
+	public TenantSubscribers tenantSubcribers() {
 		return new TenantSubscribers() {
 			@Override
 			protected List<?> onReady(String tenantId, AppManifest appManifest) throws Exception {
