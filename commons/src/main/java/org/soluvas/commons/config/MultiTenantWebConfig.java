@@ -100,7 +100,6 @@ public class MultiTenantWebConfig implements TenantSelector {
 	public static TenantRef getTenantRefMultiHost(HttpServletRequest httpRequest, String tenantEnv,
 			Map<String, AppManifest> tenantMap) {
 		Optional<String> tenantId = Optional.absent();
-		log.info("host {} {}", httpRequest.getClass(), httpRequest);
 		// TODO: https://jira.spring.io/browse/SPR-12088 Spring Mock MVC doesn't return Host header as getServerName()
 		final String origRequestHost;
 		if (httpRequest.getHeader("Host") != null) {
