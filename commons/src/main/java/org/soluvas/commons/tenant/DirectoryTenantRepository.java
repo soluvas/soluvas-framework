@@ -293,10 +293,12 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	}
 
 	@Override
-	public synchronized AppManifest modify(String tenantId, AppManifest appManifest) {
+	public synchronized AppManifest modify(String tenantId, AppManifest upAppManifest) {
 		Preconditions.checkState(!Strings.isNullOrEmpty(tenantId), "TenantID must not be null or empty.");
 		Preconditions.checkState(tenantMap.containsKey(tenantId), "Tenant ID %s is not provided", tenantId);
-		Preconditions.checkNotNull(appManifest, "App Manifest tenantID %s must not be null.", tenantId);
+		Preconditions.checkNotNull(upAppManifest, "App Manifest tenantID %s must not be null.", tenantId);
+		
+		stop(ImmutableSet.of(tenantId));
 		
 		/*Write appManifest to file and Reload/Update to memory*/
 		final ResourceSetImpl rSet = new ResourceSetImpl();
@@ -304,7 +306,8 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		rSet.getPackageRegistry().put(CommonsPackage.eNS_URI, CommonsPackage.eINSTANCE);
 		final File file = new File(getRootDir(), tenantId + "/model/" + tenantId + ".AppManifest.xmi");
 		final org.eclipse.emf.ecore.resource.Resource res = rSet.createResource(URI.createFileURI(file.getPath()));
-		res.getContents().add(EcoreUtil.copy(appManifest));
+		res.getContents().add(EcoreUtil.copy(upAppManifest));
+		final AppManifest appManifest;
 		try {
 			res.save(ImmutableMap.<String, Object>of(
 					XMIResource.OPTION_LINE_WIDTH, 80,
@@ -312,6 +315,9 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 					XMIResource.OPTION_ENCODING, "UTF-8",
 					XMIResource.OPTION_SCHEMA_LOCATION, true));
 			res.unload();
+			
+			// load
+			appManifest = combineAppManifest(tenantId, upAppManifest);
 			tenantMap.put(tenantId, appManifest);
 		} catch (IOException e) {
 			throw new TenantException(String.format("Cannot save %s XMI file %s", tenantId, file), e);
@@ -320,7 +326,9 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		/*Commit + Pull + Push*/
 		provisioner.cpp(file);
 		
-		return tenantMap.get(tenantId);
+		start(ImmutableSet.of(tenantId));
+		
+		return appManifest;
 	}
 	
 	@Override

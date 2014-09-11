@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.service.command.CommandSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,19 +96,22 @@ public class MultiTenantWebConfig implements TenantSelector {
 	 * @return
 	 * @see MultiTenantConfig#tenantMap()
 	 */
-	public static TenantRef getTenantRefMultiHost(HttpServletRequest httpRequest, String tenantEnv,
+	public TenantRef getTenantRefMultiHost(HttpServletRequest httpRequest, String tenantEnv,
 			Map<String, AppManifest> tenantMap) {
 		Optional<String> tenantId = Optional.absent();
-		// TODO: https://jira.spring.io/browse/SPR-12088 Spring Mock MVC doesn't return Host header as getServerName()
-		final String origRequestHost;
-		if (httpRequest.getHeader("Host") != null) {
-			origRequestHost = StringUtils.substringBefore(httpRequest.getHeader("Host"), ":").toLowerCase();
-		} else {
-			origRequestHost = httpRequest.getServerName().toLowerCase();
-		}
+		final String origRequestHost = httpRequest.getServerName().toLowerCase();
 		// use AppManifest.domain matching first
 		final String requestHostNoWww = origRequestHost.startsWith("www.") ? origRequestHost.substring(4) : origRequestHost;
+		
+		Preconditions.checkState(!tenantConfig.getOpenDomain().equalsIgnoreCase(requestHostNoWww),
+				"Trying to get TenantRef for OPEN domain '%s'. Probably incorrect @Inject, check the stacktrace to find out which bean is accessed.", tenantConfig.getOpenDomain());
+		Preconditions.checkState(!tenantConfig.getManageDomain().equalsIgnoreCase(requestHostNoWww),
+				"Trying to get TenantRef for MANAGE domain '%s'. Probably incorrect @Inject, check the stacktrace to find out which bean is accessed.", tenantConfig.getManageDomain());
+		
 		for (final Map.Entry<String, AppManifest> entry : tenantMap.entrySet()) {
+			Preconditions.checkNotNull(entry.getValue().getDomain(),
+					"Domain for tenant '%s' cannot be null. Please check your TenantRepository configuration.",
+					entry.getKey());
 			if (entry.getValue().getDomain().equalsIgnoreCase(requestHostNoWww)) {
 				tenantId = Optional.of(entry.getKey());
 				break;
