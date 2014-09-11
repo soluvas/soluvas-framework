@@ -65,8 +65,8 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 		@Nullable
 		final List<Object> existing = subscriberMap.get(tenantId);
 		Preconditions.checkState(existing == null,
-				"Cannot recreate subscribers for '%s' with %s existing subscribers", 
-				tenantId, existing != null ? existing.size() : null);
+				"%s subscribers for '%s' already exists with %s existing subscribers, probably wasn't stopped properly", 
+				getClass().getName(), tenantId, existing != null ? existing.size() : null);
 		try (Closeable cl = CommandRequestAttributes.withMdc(tenantId)) {
 			final List<?> subscribers = onReady(tenantId, appManifest);
 			log.info("Subscribing {} objects to '{}' EventBus: {}. Reason: {}",

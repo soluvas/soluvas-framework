@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -34,12 +35,14 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicates;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 
 /**
@@ -298,7 +301,8 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		Preconditions.checkState(tenantMap.containsKey(tenantId), "Tenant ID %s is not provided", tenantId);
 		Preconditions.checkNotNull(upAppManifest, "App Manifest tenantID %s must not be null.", tenantId);
 		
-		stop(ImmutableSet.of(tenantId));
+		// FIXME: depends on https://jira.mongodb.org/browse/JAVA-1251
+		//stop(ImmutableSet.of(tenantId));
 		
 		/*Write appManifest to file and Reload/Update to memory*/
 		final ResourceSetImpl rSet = new ResourceSetImpl();
@@ -320,13 +324,14 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 			appManifest = combineAppManifest(tenantId, upAppManifest);
 			tenantMap.put(tenantId, appManifest);
 		} catch (IOException e) {
-			throw new TenantException(String.format("Cannot save %s XMI file %s", tenantId, file), e);
+			throw new TenantException(e, "Cannot save %s XMI file %s", tenantId, file);
 		}
 		
 		/*Commit + Pull + Push*/
 		provisioner.cpp(file);
 		
-		start(ImmutableSet.of(tenantId));
+		// FIXME: depends on https://jira.mongodb.org/browse/JAVA-1251
+//		start(ImmutableSet.of(tenantId));
 		
 		return appManifest;
 	}
@@ -353,15 +358,33 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 //		appEventBus.post(new TenantsStarting(addeds, trackingId));
 		final TenantsStarting tenantsStarting = new TenantsStarting(addeds, trackingId);
 		listenersLocked.set(true);
+		ArrayDeque<TenantRepositoryListener> startedListeners = new ArrayDeque<>();
 		try {
 			for (final TenantRepositoryListener listener : listeners) {
 				try {
 					listener.onTenantsStarting(tenantsStarting);
+					startedListeners.push(listener);
 				} catch (Exception e) {
 					throw new TenantException("Cannot start tenant '" + tenantId + "' due to failed listener '" + listener + "': " + e, e);
 				}
 			}
 			tenantStateMap.put(tenantId, TenantState.ACTIVE);
+		} catch (TenantException e) {
+			// "rollback" started listeners
+			log.warn("Error during starting '{}', rolling back {} started listeners: {}",
+					tenantId, startedListeners.size(), startedListeners);
+			tenantStateMap.put(tenantId, TenantState.STOPPING);
+			try {
+				while (!startedListeners.isEmpty()) {
+					TenantRepositoryListener listener = startedListeners.pop();
+					listener.onTenantsStopping(new TenantsStopping(addeds, trackingId));
+				}
+				throw e;
+			} catch (Exception e2) {
+				throw new TenantException(e, "Cannot stop tenant '%s' due to failed listener(s)", tenantId);
+			} finally {
+				tenantStateMap.put(tenantId, TenantState.RESOLVED);
+			}
 		} finally {
 			listenersLocked.set(false);
 		}
@@ -377,9 +400,9 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	protected final void stop(String tenantId, AppManifest appManifest, String trackingId) {
 		tenantStateMap.put(tenantId, TenantState.STOPPING);
 		onBeforeStop(tenantId, appManifest);
-		final TenantsStopping tenantsStopping = new TenantsStopping(ImmutableMap.of(tenantId, appManifest), trackingId);
 		listenersLocked.set(true);
 		try {
+			final TenantsStopping tenantsStopping = new TenantsStopping(ImmutableMap.of(tenantId, appManifest), trackingId);
 			for (final TenantRepositoryListener listener : Lists.reverse(listeners)) {
 				try {
 					listener.onTenantsStopping(tenantsStopping);
@@ -387,8 +410,8 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 					throw new TenantException("Cannot stop tenant '" + tenantId + "' due to failed listener '" + listener + "': " + e, e);
 				}
 			}
-			tenantStateMap.put(tenantId, TenantState.RESOLVED);
 		} finally {
+			tenantStateMap.put(tenantId, TenantState.RESOLVED);
 			listenersLocked.set(false);
 		}
 	}
@@ -421,35 +444,49 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 
 	@Override
 	public synchronized void start(Set<String> tenantIds) {
-		for (final String tenantId : tenantIds) {
-			final AppManifest appManifest = tenantMap.get(tenantId);
-			Preconditions.checkArgument(appManifest != null, "Tenant '%s' not found, %s available: %s",
-					tenantId, tenantMap.size(), tenantMap.keySet());
-			final TenantState state = tenantStateMap.get(tenantId);
-			Preconditions.checkArgument(appManifest != null, "Tenant state for '%s' not found, %s available: %s",
-					tenantId, tenantStateMap.size(), tenantStateMap.keySet());
-			if (state == TenantState.RESOLVED) {
-				start(tenantId, appManifest, null);
-			} else {
-				log.info("Not starting tenant '{}' because it is in {} state", tenantId, state);
+		log.info("Starting {} tenants state: {}", tenantIds.size(),
+				Maps.filterKeys(tenantStateMap, Predicates.in(tenantIds)));
+		try {
+			for (final String tenantId : tenantIds) {
+				final AppManifest appManifest = tenantMap.get(tenantId);
+				Preconditions.checkArgument(appManifest != null, "Tenant '%s' not found, %s available: %s",
+						tenantId, tenantMap.size(), tenantMap.keySet());
+				final TenantState state = tenantStateMap.get(tenantId);
+				Preconditions.checkArgument(appManifest != null, "Tenant state for '%s' not found, %s available: %s",
+						tenantId, tenantStateMap.size(), tenantStateMap.keySet());
+				if (state == TenantState.RESOLVED) {
+					start(tenantId, appManifest, null);
+				} else {
+					log.info("Not starting tenant '{}' because it is in {} state", tenantId, state);
+				}
 			}
+		} finally {
+			log.info("Started {} tenants state: {}", tenantIds.size(),
+					Maps.filterKeys(tenantStateMap, Predicates.in(tenantIds)));
 		}
 	}
 
 	@Override
 	public synchronized void stop(Set<String> tenantIds) {
-		for (final String tenantId : tenantIds) {
-			final AppManifest appManifest = tenantMap.get(tenantId);
-			Preconditions.checkArgument(appManifest != null, "Tenant '%s' not found, %s available: %s",
-					tenantId, tenantMap.size(), tenantMap.keySet());
-			final TenantState state = tenantStateMap.get(tenantId);
-			Preconditions.checkArgument(appManifest != null, "Tenant state for '%s' not found, %s available: %s",
-					tenantId, tenantStateMap.size(), tenantStateMap.keySet());
-			if (state == TenantState.ACTIVE) {
-				stop(tenantId, appManifest, null);
-			} else {
-				log.info("Not starting tenant '{}' because it is in {} state", tenantId, state);
+		log.info("Stopping {} tenants state: {}", tenantIds.size(),
+				Maps.filterKeys(tenantStateMap, Predicates.in(tenantIds)));
+		try {
+			for (final String tenantId : tenantIds) {
+				final AppManifest appManifest = tenantMap.get(tenantId);
+				Preconditions.checkArgument(appManifest != null, "Tenant '%s' not found, %s available: %s",
+						tenantId, tenantMap.size(), tenantMap.keySet());
+				final TenantState state = tenantStateMap.get(tenantId);
+				Preconditions.checkArgument(appManifest != null, "Tenant state for '%s' not found, %s available: %s",
+						tenantId, tenantStateMap.size(), tenantStateMap.keySet());
+				if (state == TenantState.ACTIVE) {
+					stop(tenantId, appManifest, null);
+				} else {
+					log.info("Not stopping tenant '{}' because it is in {} state", tenantId, state);
+				}
 			}
+		} finally {
+			log.info("Stopped {} tenants state: {}", tenantIds.size(),
+					Maps.filterKeys(tenantStateMap, Predicates.in(tenantIds)));
 		}
 	}
 

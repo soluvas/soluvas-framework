@@ -173,7 +173,8 @@ public class TenantXmiBeansImpl<T extends EObject> implements TenantRepositoryLi
 	@Override
 	public T getExpanded(String tenantId) throws IllegalArgumentException {
 		Preconditions.checkArgument(entityMap.containsKey(tenantId),
-				"Entity '%s' not found. %s available: %s", tenantId, entityMap.size(), entityMap.keySet());
+				"Entity '%s' not found in %s. %s available: %s", 
+				tenantId, getClass().getName(), entityMap.size(), entityMap.keySet());
 		return entityMap.get(tenantId);
 	}
 	
