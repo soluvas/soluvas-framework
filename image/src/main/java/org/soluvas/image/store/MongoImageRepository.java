@@ -213,10 +213,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 //		}
 		if (innerConnector != null)
 			innerConnector.destroy();
-		if (mongoColl != null) {
-			mongoColl.getDB().cleanCursors(false);
-			mongoColl.getDB().getMongo().close();
-		}
+		// do NOT close Mongo, because it's reused throughout the app
 	}
 	
 	/**

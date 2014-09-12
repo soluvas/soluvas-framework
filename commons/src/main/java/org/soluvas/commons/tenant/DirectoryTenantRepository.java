@@ -302,7 +302,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		Preconditions.checkNotNull(upAppManifest, "App Manifest tenantID %s must not be null.", tenantId);
 		
 		// FIXME: depends on https://jira.mongodb.org/browse/JAVA-1251
-		//stop(ImmutableSet.of(tenantId));
+		stop(ImmutableSet.of(tenantId));
 		
 		/*Write appManifest to file and Reload/Update to memory*/
 		final ResourceSetImpl rSet = new ResourceSetImpl();
@@ -331,7 +331,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		provisioner.cpp(file);
 		
 		// FIXME: depends on https://jira.mongodb.org/browse/JAVA-1251
-//		start(ImmutableSet.of(tenantId));
+		start(ImmutableSet.of(tenantId));
 		
 		return appManifest;
 	}

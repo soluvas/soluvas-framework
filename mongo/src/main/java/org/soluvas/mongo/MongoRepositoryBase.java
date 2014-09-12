@@ -207,6 +207,9 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				Preconditions.checkState(primDb.getMongo().getReadPreference() == ReadPreference.primary(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo primDb %s",
 						ReadPreference.primary(), primDb.getMongo().getReadPreference(), primDb.getMongo());
+				Preconditions.checkState(primDb.getMongo().getConnector().isOpen(),
+						"Primary %s Mongo %s %s must be open", 
+						intfClass.getSimpleName(), primDb.getMongo(), primDb.getMongo().getReadPreference());
 				primary = primDb.getCollection(collName);
 				secondary = primary;
 				break;
@@ -215,6 +218,9 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				Preconditions.checkState(spDb.getMongo().getReadPreference() == ReadPreference.secondaryPreferred(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo spDb %s",
 						ReadPreference.secondaryPreferred(), spDb.getMongo().getReadPreference(), spDb.getMongo());
+				Preconditions.checkState(spDb.getMongo().getConnector().isOpen(),
+						"SecondaryPreferred %s Mongo %s %s must be open", 
+						intfClass.getSimpleName(), spDb.getMongo(), spDb.getMongo().getReadPreference());
 				secondary = spDb.getCollection(collName);
 				primary = secondary;
 				break;
@@ -223,11 +229,17 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				Preconditions.checkState(primaryDb.getMongo().getReadPreference() == ReadPreference.primary(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo primaryDb %s",
 						ReadPreference.primary(), primaryDb.getMongo().getReadPreference(), primaryDb.getMongo());
+				Preconditions.checkState(primaryDb.getMongo().getConnector().isOpen(),
+						"Primary %s Mongo %s %s must be open", 
+						intfClass.getSimpleName(), primaryDb.getMongo(), primaryDb.getMongo().getReadPreference());
 				primary = primaryDb.getCollection(collName);
 				final DB secondaryDb = MongoUtils.getDb(realMongoUri, ReadPreference.secondaryPreferred());
 				Preconditions.checkState(secondaryDb.getMongo().getReadPreference() == ReadPreference.secondaryPreferred(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo secondaryDb %s",
 						ReadPreference.secondaryPreferred(), secondaryDb.getMongo().getReadPreference(), secondaryDb.getMongo());
+				Preconditions.checkState(secondaryDb.getMongo().getConnector().isOpen(),
+						"SecondaryPreferred %s Mongo %s %s must be open", 
+						intfClass.getSimpleName(), secondaryDb.getMongo(), secondaryDb.getMongo().getReadPreference());
 				secondary = secondaryDb.getCollection(collName);
 				break;
 			default:

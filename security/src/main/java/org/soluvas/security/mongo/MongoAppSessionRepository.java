@@ -29,6 +29,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClientURI;
+import com.mongodb.ReadPreference;
 
 /**
  * Manages OAuth app session ({@link AppSession}).
@@ -120,7 +121,7 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 			log.info("Connecting to MongoDB database {} for AppSessionRepository",
 					realMongoUri.getHosts());
 			// connecting to mongoDB
-			final DB db = MongoUtils.getDb(realMongoUri);
+			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primary());
 			coll  = db.getCollection("appSession");
 			coll.ensureIndex(new BasicDBObject("className", 1));
 			coll.ensureIndex(new BasicDBObject("schemaVersion", 1));
@@ -143,11 +144,8 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 
 	@PreDestroy
 	public void destroy() {
-		log.info("Shutting down AppSessionRepository");
-		if (coll != null) {
-			coll.getDB().cleanCursors(true);
-			coll.getDB().getMongo().close();
-		}
+		log.info("Shutting down AppSessionRepository (no-op)");
+		// do NOT close Mongo, because it's reused throughout the app
 	}
 
 	/* (non-Javadoc)
