@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.config.MultiTenantConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 
@@ -37,7 +38,7 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 	
 	@Inject
 	private MultiTenantConfig tenantConfig;
-	@Inject
+	@Autowired(required=false) @Nullable
 	private TenantRepository<?> tenantRepo;
 
 	@PostConstruct
@@ -48,7 +49,9 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 		for (final Map.Entry<String, AppManifest> tenant : initialTenantMap.entrySet()) {
 			createSubscribers(tenant.getKey(), tenant.getValue(), "Init");
 		}
-		tenantRepo.addListener(this);
+		if (tenantRepo != null) {
+			tenantRepo.addListener(this);
+		}
 	}
 	
 	@PreDestroy
