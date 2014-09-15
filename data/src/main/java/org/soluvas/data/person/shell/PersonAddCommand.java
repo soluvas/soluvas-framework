@@ -2,6 +2,7 @@ package org.soluvas.data.person.shell;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +18,8 @@ import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.PhoneNumber;
+import org.soluvas.commons.PostalAddress;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.commons.util.HashedPasswordUtils;
@@ -47,6 +50,20 @@ public class PersonAddCommand extends ExtCommandSupport {
 	private transient String gender;
 	@Option(name="-f", aliases="--fbAccessToken", description="Facebook Access Token.")
 	private String fbAccessToken;
+	@Option(name="--mobile", description="Mobile number.")
+	private String mobileNumber;
+	@Option(name="--street", description="Street address.")
+	private String streetAddress;
+	@Option(name="--city", description="City.")
+	private String city;
+	@Option(name="--postalcode", description="Postal code.")
+	private String postalCode;
+	@Option(name="--province", description="Province, e.g. 'Jawa Timur'.")
+	private String province;
+	@Option(name="--cc", description="Country code, e.g. 'ID'. Note: Please also set --countryname.")
+	private String countryCode;
+	@Option(name="--countryname", description="Country name, e.g. 'Indonesia'")
+	private String countryName;
 	
 	@Argument(index=0, name="id", required=true,
 		description="Person ID to be created.")
@@ -112,6 +129,39 @@ public class PersonAddCommand extends ExtCommandSupport {
 
 		if (fbAccessToken != null)
 			person.setFacebookAccessToken(fbAccessToken);
+
+		if (!Strings.isNullOrEmpty(mobileNumber)) {
+			PhoneNumber theMobile = CommonsFactory.eINSTANCE.createPhoneNumber();
+			theMobile.setPhoneNumber(mobileNumber);
+			theMobile.setPrimary(true);
+			person.getMobileNumbers().add(theMobile);
+		}
+		
+		PostalAddress address = CommonsFactory.eINSTANCE.createPostalAddress();
+		address.setId(UUID.randomUUID().toString());
+		address.setName(person.getName());
+		address.setPrimary(true);
+		address.setPrimaryBilling(true);
+		address.setPrimaryShipping(true);
+		if (!Strings.isNullOrEmpty(streetAddress)) {
+			address.setStreet(streetAddress);
+		}
+		if (!Strings.isNullOrEmpty(city)) {
+			address.setCity(city);
+		}
+		if (!Strings.isNullOrEmpty(province)) {
+			address.setProvince(province);
+		}
+		if (!Strings.isNullOrEmpty(postalCode)) {
+			address.setPostalCode(postalCode);
+		}
+		if (!Strings.isNullOrEmpty(countryCode)) {
+			address.setCountryCode(countryCode);
+		}
+		if (!Strings.isNullOrEmpty(countryName)) {
+			address.setCountry(countryName);
+		}
+		person.getAddresses().add(address);
 
 		final Person added = personRepo.add(person);
 		return added;
