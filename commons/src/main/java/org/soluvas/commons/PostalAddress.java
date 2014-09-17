@@ -6,6 +6,9 @@ import java.io.Serializable;
 
 import org.eclipse.emf.common.util.EList;
 import org.joda.time.DateTime;
+import org.soluvas.commons.impl.PostalAddressImpl;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * <!-- begin-user-doc -->
@@ -66,6 +69,7 @@ import org.joda.time.DateTime;
  * @model
  * @generated
  */
+@JsonDeserialize(as=PostalAddressImpl.class)
 public interface PostalAddress extends NameContainer, Identifiable, SchemaVersionable, Serializable {
 	/**
 	 * Returns the value of the '<em><b>Schema Version</b></em>' attribute.
