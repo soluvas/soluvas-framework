@@ -3,8 +3,10 @@
 package org.soluvas.commons.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -15,6 +17,8 @@ import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.PostalAddress;
 import org.soluvas.commons.SchemaVersionable;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * <!-- begin-user-doc -->
@@ -53,7 +57,6 @@ import org.soluvas.commons.SchemaVersionable;
  *
  * @generated
  */
-@SuppressWarnings("serial")
 public class PostalAddressImpl extends MinimalEObjectImpl.Container implements PostalAddress {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -283,6 +286,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * @generated
 	 * @ordered
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	protected EList<String> mobiles;
 
 	/**
@@ -313,6 +317,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * @generated
 	 * @ordered
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	protected EList<String> phones;
 
 	/**
@@ -343,6 +348,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * @generated
 	 * @ordered
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	protected EList<String> homePhones;
 
 	/**
@@ -373,6 +379,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * @generated
 	 * @ordered
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	protected EList<String> workPhones;
 
 	/**
@@ -403,6 +410,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * @generated
 	 * @ordered
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	protected EList<String> emails;
 
 	/**
@@ -776,6 +784,11 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 		}
 		return mobiles;
 	}
+	
+	protected void setMobiles(List<String> mobiles) {
+		getMobiles().clear();
+		getMobiles().addAll(mobiles);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -811,6 +824,11 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 			phones = new EDataTypeUniqueEList<String>(String.class, this, CommonsPackage.POSTAL_ADDRESS__PHONES);
 		}
 		return phones;
+	}
+	
+	protected void setPhones(List<String> phones) {
+		getPhones().clear();
+		getPhones().addAll(phones);
 	}
 
 	/**
@@ -848,6 +866,11 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 		}
 		return homePhones;
 	}
+	
+	protected void setHomePhones(List<String> homePhones) {
+		getHomePhones().clear();
+		getHomePhones().addAll(homePhones);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -884,6 +907,11 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 		}
 		return workPhones;
 	}
+	
+	protected void setWorkPhones(List<String> workPhones) {
+		getWorkPhones().clear();
+		getWorkPhones().addAll(workPhones);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -919,6 +947,11 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 			emails = new EDataTypeUniqueEList<String>(String.class, this, CommonsPackage.POSTAL_ADDRESS__EMAILS);
 		}
 		return emails;
+	}
+	
+	protected void setEmails(List<String> emails) {
+		getEmails().clear();
+		getEmails().addAll(emails);
 	}
 
 	/**
