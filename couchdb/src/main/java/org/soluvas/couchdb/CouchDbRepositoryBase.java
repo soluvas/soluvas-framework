@@ -763,7 +763,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	@Override
 	public <S extends T> Collection<S> modify(Map<String, S> entities) {
 		log.debug("Modifying {} {} documents: {}", entities.size(), collName, entities.keySet());
-		final List<S> modifieds = new ArrayList<>();
+//		final List<S> modifieds = new ArrayList<>();
 		for (final Entry<String, S> entry : entities.entrySet()) {
 			final S entity = entry.getValue();
 			beforeSave(entity);
@@ -792,6 +792,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 			throw new CouchDbRepositoryException(String.format("Errors modifying %s out of %s %s documents (%s): %s",
 					errors.size(), entities.size(), collName, entities.keySet(), errors));
 		}
+		final ImmutableList<S> modifieds = ImmutableList.copyOf(entities.values());
 		log.info("Modified {} {} documents: {}", entities.size(), collName, entities.keySet());
 		return modifieds;
 	}
