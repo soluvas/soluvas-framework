@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+
 import com.google.common.base.Preconditions;
 
 /**
@@ -50,12 +53,12 @@ public class PostalAddress implements Describable, Serializable {
 				setCountryCode(postalAddressUp.getCountryCode());
 		}
 		setDescription(postalAddressUp.getDescription());
-		setEmails(postalAddressUp.getEmails());
-		setHomePhones(postalAddressUp.getHomePhones());
-		setMobiles(postalAddressUp.getMobiles());
+		setEmails(new ArrayList<>(postalAddressUp.getEmails()));
+		setHomePhones(new ArrayList<>(postalAddressUp.getHomePhones()));
+		setMobiles(new ArrayList<>(postalAddressUp.getMobiles()));
 		setName(postalAddressUp.getName());
 		setOrganization(postalAddressUp.getOrganization());
-		setPhones(postalAddressUp.getPhones());
+		setPhones(new ArrayList<>(postalAddressUp.getPhones()));
 		setPostalCode(postalAddressUp.getPostalCode());
 		setPrimary(postalAddressUp.isPrimary());
 		setPrimaryBilling(postalAddressUp.isPrimaryBilling());
@@ -68,7 +71,7 @@ public class PostalAddress implements Describable, Serializable {
 		setProvince(postalAddressUp.getProvince());
 		setStreet(postalAddressUp.getStreet());
 		setValidationTime(postalAddressUp.getValidationTime());
-		setWorkPhones(postalAddressUp.getWorkPhones());
+		setWorkPhones(new ArrayList<>(postalAddressUp.getWorkPhones()));
 	}
 
 	/**
@@ -988,6 +991,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * @return the value of '<em><b>description</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -1005,6 +1009,7 @@ public class PostalAddress implements Describable, Serializable {
 	 *            description}' feature.
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		description = newDescription;
 	}
