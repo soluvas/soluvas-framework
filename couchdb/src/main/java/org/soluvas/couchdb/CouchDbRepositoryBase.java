@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -24,6 +25,7 @@ import org.ektorp.ComplexKey;
 import org.ektorp.CouchDbConnector;
 import org.ektorp.DbAccessException;
 import org.ektorp.DocumentNotFoundException;
+import org.ektorp.DocumentOperationResult;
 import org.ektorp.PageRequest;
 import org.ektorp.ViewQuery;
 import org.ektorp.ViewResult.Row;
@@ -68,6 +70,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -764,19 +767,34 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		for (final Entry<String, S> entry : entities.entrySet()) {
 			final S entity = entry.getValue();
 			beforeSave(entity);
-			try {
-				dbConn.update(entity);
-			} catch (Exception e) {
-				throw new CouchDbRepositoryException(e,
-						"Cannot modify ID %s out of %d %s documents: %s", 
-						entity.getId(), entities.size(), collName, entities.keySet());
+//			try {
+//				dbConn.update(entity);
+//			} catch (Exception e) {
+//				throw new CouchDbRepositoryException(e,
+//						"Cannot modify ID %s out of %d %s documents: %s", 
+//						entity.getId(), entities.size(), collName, entities.keySet());
+//			}
+//			modifieds.add(entity);
+		}
+		List<DocumentOperationResult> opResults = dbConn.executeAllOrNothing(entities.values());
+		List<DocumentOperationResult> errors = new ArrayList<>();
+		Set<String> successIds = new LinkedHashSet<>(); 
+		Set<String> errorIds = new LinkedHashSet<>();
+		for (DocumentOperationResult opResult : opResults) {
+			if (!Strings.isNullOrEmpty(opResult.getError())) {
+				errors.add(opResult);
+				errorIds.add(opResult.getId());
+			} else {
+				successIds.add(opResult.getId());
 			}
-			modifieds.add(entity);
+		}
+		if (!errors.isEmpty()) {
+			throw new CouchDbRepositoryException(String.format("Errors modifying %s out of %s %s documents (%s): %s",
+					errors.size(), entities.size(), collName, entities.keySet(), errors));
 		}
 		log.info("Modified {} {} documents: {}", entities.size(), collName, entities.keySet());
 		return modifieds;
 	}
-
 	
 	/**
 	 * Uses {@code all} view.
