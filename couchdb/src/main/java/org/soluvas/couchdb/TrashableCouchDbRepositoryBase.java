@@ -45,6 +45,7 @@ public abstract class TrashableCouchDbRepositoryBase<T extends Identifiable, E e
 	 * @param currentSchemaVersion
 	 * @param couchDbUri
 	 * @param dbName
+	 * @param deleteMethod TODO
 	 * @param uniqueFields
 	 * @param indexedFields
 	 * @param statusProperty
@@ -56,12 +57,12 @@ public abstract class TrashableCouchDbRepositoryBase<T extends Identifiable, E e
 	public TrashableCouchDbRepositoryBase(ClientConnectionManager connMgr,
 			Class<T> intfClass, Class<? extends T> implClass,
 			long currentSchemaVersion, String couchDbUri, String dbName,
-			List<String> uniqueFields, Map<String, Integer> indexedFields,
-			String statusProperty, Set<E> activeStatuses,
-			Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
+			org.soluvas.couchdb.CouchDbRepositoryBase.DeleteMethod deleteMethod, List<String> uniqueFields,
+			Map<String, Integer> indexedFields, String statusProperty,
+			Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
 		super(connMgr, intfClass, implClass, currentSchemaVersion, couchDbUri,
-				dbName, uniqueFields, indexedFields, statusProperty,
-				activeStatuses, inactiveStatuses, draftStatuses, voidStatuses);
+				dbName, uniqueFields, indexedFields, deleteMethod,
+				statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses);
 	}
 
 	/**
@@ -71,15 +72,16 @@ public abstract class TrashableCouchDbRepositoryBase<T extends Identifiable, E e
 	 * @param currentSchemaVersion
 	 * @param couchDbUri
 	 * @param dbName
+	 * @param deleteMethod TODO
 	 * @param uniqueFields
 	 * @param indexedFields
 	 */
 	public TrashableCouchDbRepositoryBase(ClientConnectionManager connMgr,
 			Class<T> intfClass, Class<? extends T> implClass,
 			long currentSchemaVersion, String couchDbUri, String dbName,
-			List<String> uniqueFields, Map<String, Integer> indexedFields) {
+			org.soluvas.couchdb.CouchDbRepositoryBase.DeleteMethod deleteMethod, List<String> uniqueFields, Map<String, Integer> indexedFields) {
 		super(connMgr, intfClass, implClass, currentSchemaVersion, couchDbUri,
-				dbName, uniqueFields, indexedFields);
+				dbName, deleteMethod, uniqueFields, indexedFields);
 	}
 	
 	/**

@@ -95,6 +95,31 @@ import com.google.common.collect.Sets.SetView;
 public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> extends StatusAwareRepositoryBase<T, String>
 	implements CouchDbRepository<T>, GenericLookup<T> {
 	
+	public static enum DeleteMethod {
+		/**
+		 * Normal HTTP DELETE document, which doesn't work with filtered replication.
+		 */
+		DELETE,
+		/**
+		 * Update document using <code>{"_deleted": true}</code>, this works well with filtered replication.
+		 * 
+		 * <p><b>Important:</b> To use this, your entity must implement {@code String getGuid()}, {@code String getRevision()}, and {@code Boolean getDeleted()}.
+		 * 
+		 * <pre>
+		 * @JsonProperty("_deleted") @JsonInclude(Include.NON_NULL)
+		 * protected Boolean deleted = DELETED_EDEFAULT;
+		 * </pre>
+		 * 
+		 * <p>Using this, the deleted document will behave just like {@link #DELETE}, but with different reason:
+		 * 
+		 * <pre>
+		 * &gt; curl http://localhost:5984/acme_dev/Diagram_hapus3
+		 * {"error":"not_found","reason":"deleted"}
+		 * </pre>
+		 */
+		MARK_DELETED
+	}
+	
 	/**
 	 * Used by {@link #addStatusMaskDesignView(DesignDocument, String, String, Set, Set, Set, Set, String, String)}.
 	 */
@@ -148,6 +173,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	protected final String dbName;
 	protected StdCouchDbConnector dbConn;
 
+	protected DeleteMethod deleteMethod;
 	/**
 	 * If {@code null}, {@link StatusMask} is always ignored.
 	 */
@@ -180,12 +206,13 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	 * @param couchDbUri Scheme (http/https), username (optional), password (optional), port, and path, e.g. {@code http://localhost:5984}.
 	 * 	Excluding databaseName.
 	 * @param dbName Database name.
-	 * @param collName
 	 * @param indexedFields
+	 * @param deleteMethod TODO
+	 * @param collName
 	 */
 	protected CouchDbRepositoryBase(ClientConnectionManager connMgr, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
 			String couchDbUri, String dbName, List<String> uniqueFields, Map<String, Integer> indexedFields,
-			@Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
+			DeleteMethod deleteMethod, @Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
 		super();
 		this.entityClass = intfClass;
 		this.implClass = implClass;
@@ -193,7 +220,8 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		this.couchDbUri = couchDbUri;
 		this.dbName = dbName;
 		this.collName = StringUtils.uncapitalize(intfClass.getSimpleName());
-		
+
+		this.deleteMethod = deleteMethod;
 		this.statusProperty = statusProperty;
 		this.activeStatuses = activeStatuses;
 		this.inactiveStatuses = inactiveStatuses;
@@ -283,14 +311,15 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	 * @param currentSchemaVersion
 	 * @param couchDbUri
 	 * @param dbName
-	 * @param collName
+	 * @param deleteMethod TODO
 	 * @param uniqueFields
 	 * @param indexedFields
+	 * @param collName
 	 */
 	protected CouchDbRepositoryBase(ClientConnectionManager connMgr, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
-			String couchDbUri, String dbName, List<String> uniqueFields, Map<String, Integer> indexedFields) {
+			String couchDbUri, String dbName, DeleteMethod deleteMethod, List<String> uniqueFields, Map<String, Integer> indexedFields) {
 		this(connMgr, intfClass, implClass, currentSchemaVersion, couchDbUri, dbName, uniqueFields, indexedFields, 
-				null, ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of());
+				deleteMethod, null, ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of());
 	}
 
 	/**
@@ -854,14 +883,15 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 
 	@Override
 	public final long deleteIds(Collection<String> ids) {
-		log.debug("Deleting {} {}: {}", ids.size(), collName, ids);
-		final Set<String> deletedRevs = new HashSet<>();
-		for (final String id : ids) {
-			try {
-				final ViewQuery query = new ViewQuery().designDocId(getDesignDocId()).viewName(VIEW_UID).key(id);
-				final Row row = Iterables.getFirst(dbConn.queryView(query).getRows(), null);
-				if (row != null) {
-					final String guid = row.getId();
+		switch (deleteMethod) {
+		case DELETE:
+			log.debug("DELETEing {} {}: {}", ids.size(), collName, ids);
+			final Set<String> deletedRevs = new HashSet<>();
+			final ViewQuery query = new ViewQuery().designDocId(getDesignDocId()).viewName(VIEW_UID).keys(ids);
+			for (final Row row : dbConn.queryView(query)) {
+				final String id = row.getKey();
+				final String guid = row.getId();
+				try {
 					final String currentRevision = dbConn.getCurrentRevision(guid);
 					if (currentRevision != null) {
 						log.trace("Deleting {} '{}': GUID={} revision={}", collName, id, guid, currentRevision);
@@ -872,17 +902,48 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 					} else {
 						log.trace("No current revision for {} '{}' (GUID: {})", collName, id, guid);
 					}
-				} else {
-					log.trace("Cannot find {} '{}'", collName, id);
+				} catch (Exception e) {
+					throw new CouchDbRepositoryException(e,
+							"Cannot delete %s '%s' GUID '%s'", collName, id, guid);
 				}
-			} catch (Exception e) {
-				throw new CouchDbRepositoryException(e,
-						"Cannot delete %s %s", collName, id);
 			}
+			log.info("DELETEd {} out of {} {}, revisions: {}", 
+					deletedRevs.size(), ids.size(), collName, deletedRevs);
+			return deletedRevs.size();
+		case MARK_DELETED:
+			log.debug("Marking _deleted {} {}: {}", ids.size(), collName, ids);
+			final Set<String> markedDeletedRevs = new HashSet<>();
+			final ViewQuery markQuery = new ViewQuery().designDocId(getDesignDocId()).viewName(VIEW_UID).keys(ids).includeDocs(true);
+			for (final T entity : dbConn.queryView(markQuery, implClass)) {
+				final String id = entity.getId();
+				try {
+					final String guid = (String) PropertyUtils.getProperty(entity, "guid");
+					final String prevRevision = (String) PropertyUtils.getProperty(entity, "revision");
+					if (prevRevision != null) {
+						Boolean deleted = (Boolean) PropertyUtils.getProperty(entity, "deleted");
+						if (Boolean.TRUE.equals(deleted)) {
+							log.info("{} '{}' already marked _deleted: GUID={} revision={}", collName, id, guid, prevRevision);
+						} else {
+							log.trace("Marking _deleted {} '{}': GUID={} revision={}", collName, id, guid, prevRevision);
+							PropertyUtils.setProperty(entity, "deleted", true);
+							dbConn.update(entity);
+							final String deletedRevision = (String) PropertyUtils.getProperty(entity, "revision");
+							markedDeletedRevs.add(deletedRevision);
+						}
+					} else {
+						log.trace("No current revision for {} '{}' (GUID: {})", collName, id, guid);
+					}
+				} catch (Exception e) {
+					throw new CouchDbRepositoryException(e,
+							"Cannot mark _deleted %s '%s'", collName, id);
+				}
+			}
+			log.info("Marked _deleted {} out of {} {}, revisions: {}", 
+					markedDeletedRevs.size(), ids.size(), collName, markedDeletedRevs);
+			return markedDeletedRevs.size();
+		default:
+			throw new UnsupportedOperationException("Unknown deleteMethod: " + deleteMethod);
 		}
-		log.info("Deleted {} out of {} {}, revisions: {}", 
-				deletedRevs.size(), ids.size(), collName, deletedRevs);
-		return deletedRevs.size();
 	}
 
 	@Override

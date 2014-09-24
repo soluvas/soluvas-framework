@@ -46,11 +46,11 @@ public class CouchDbMediaRepository extends CouchDbRepositoryBase<Media, MediaSt
 			String couchDbUri, String dbName, WebAddress webAddress) {
 		super(connMgr, Media.class, MediaImpl.class, 1L, couchDbUri, dbName,
 				ImmutableList.<String>of(), ImmutableMap.<String, Integer>of(),
-				"status", 
+				DeleteMethod.DELETE,
+				"status",
 				ImmutableSet.of(MediaStatus.BOOKED),
 				ImmutableSet.<MediaStatus>of(),
-				ImmutableSet.of(MediaStatus.DRAFT),
-				ImmutableSet.of(MediaStatus.VOID) );
+				ImmutableSet.of(MediaStatus.DRAFT), ImmutableSet.of(MediaStatus.VOID) );
 		this.webAddress = webAddress;
 	}
 	
