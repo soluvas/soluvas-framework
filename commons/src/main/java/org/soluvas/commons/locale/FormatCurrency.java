@@ -1,6 +1,7 @@
 package org.soluvas.commons.locale;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,10 +23,15 @@ import com.google.common.base.Strings;
  * Function to format a {@link BigDecimal} monetary value using a specified currency.
  * Useful as Mustache function.
  * 
- * The input can be:
- * 1. just number, defaultCurrency will be used. If defaultCurrency is null, this mode
- * 		is not supported.
- * 2. both currency code and number, separated by space, e.g. "IDR 275000"
+ * <p>The {@link BigDecimal#setScale(int, java.math.RoundingMode)} will be set to 
+ * {@link CurrencyUnit#getDecimalPlaces()} using {@link RoundingMode#HALF_EVEN} if available, or left as is.
+ * 
+ * <p>The input can be:
+ * <ol>
+ * <li>just number, defaultCurrency will be used. If defaultCurrency is null, this mode
+ * 		is not supported.</li>
+ * <li>both currency code and number, separated by space, e.g. "IDR 275000"</li>
+ * </ol>
  * 
  * @author rudi
  */
@@ -65,18 +71,18 @@ public final class FormatCurrency implements
 			try {
 				final Matcher matcher = embeddedPattern.matcher(input);
 				final CurrencyUnit currency;
-				final String value;
+				final BigDecimal scaled;
 				if (matcher.matches()) {
 					final String currencyCode = matcher.group(1);
 					currency = CurrencyUnit.of(currencyCode);
-					value = matcher.group(2);
+					scaled = new BigDecimal(matcher.group(2)).setScale(currency.getDecimalPlaces(), RoundingMode.HALF_EVEN);
 				} else {
 					currency = Preconditions.checkNotNull(defaultCurrency,
 							"input string '%s' does not embed currency code, either defaultCurrency must be specified or fix your input",
 							input);
-					value = input;
+					scaled = new BigDecimal(input);
 				}
-				final BigMoney money = BigMoney.of(currency, new BigDecimal(value));
+				final BigMoney money = BigMoney.of(currency, scaled);
 				return formatter.print(money);
 			} catch (Exception e) {
 				log.error("Cannot formatCurrency from " + input, e);
