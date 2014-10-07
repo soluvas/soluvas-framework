@@ -21,9 +21,23 @@ import org.soluvas.commons.Person;
 public class PersonInfo  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	private static final String GUEST_ID = "guest";
+	
+	private static final String GUEST_NAME = "guest";
+	
+	private static final String GUEST_SLUG = "guest";
 
 	public PersonInfo() {
 		super();
+	}
+	
+	public static PersonInfo getDefaultGuest() {
+		final PersonInfo guest = new PersonInfo();
+		guest.setId(GUEST_ID);
+		guest.setName(GUEST_NAME);
+		guest.setSlug(GUEST_SLUG);
+		return guest;
 	}
 
 	public PersonInfo(org.soluvas.commons.PersonInfo personInfoUp) {
