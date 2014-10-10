@@ -920,6 +920,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getImageUri() {
 		return imageUri;
 	}
@@ -929,6 +930,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setImageUri(String newImageUri) {
 		String oldImageUri = imageUri;
 		imageUri = newImageUri;
@@ -1424,5 +1426,53 @@ public class TermImpl extends EObjectImpl implements Term {
 		result.append(')');
 		return result.toString();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((kindName == null) ? 0 : kindName.hashCode());
+		result = prime * result
+				+ ((kindNsPrefix == null) ? 0 : kindNsPrefix.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((nsPrefix == null) ? 0 : nsPrefix.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TermImpl other = (TermImpl) obj;
+		if (kindName == null) {
+			if (other.kindName != null)
+				return false;
+		} else if (!kindName.equals(other.kindName))
+			return false;
+		if (kindNsPrefix == null) {
+			if (other.kindNsPrefix != null)
+				return false;
+		} else if (!kindNsPrefix.equals(other.kindNsPrefix))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (nsPrefix == null) {
+			if (other.nsPrefix != null)
+				return false;
+		} else if (!nsPrefix.equals(other.nsPrefix))
+			return false;
+		return true;
+	}
+	
+	
 
 } //TermImpl
