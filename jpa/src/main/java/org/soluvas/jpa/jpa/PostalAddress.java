@@ -39,6 +39,15 @@ public class PostalAddress implements Describable, Serializable {
 	public PostalAddress() {
 		super();
 	}
+	
+	public static PostalAddress getDefaultPrimaryAddress() {
+		final PostalAddress postalAddress = new PostalAddress();
+		postalAddress.setId(UUID.randomUUID());
+		postalAddress.setPrimary(true);
+		postalAddress.setPrimaryBilling(true);
+		postalAddress.setPrimaryShipping(true);
+		return postalAddress;
+	}
 
 	public PostalAddress(final org.soluvas.commons.PostalAddress postalAddressUp) {
 		Preconditions.checkNotNull(postalAddressUp,
