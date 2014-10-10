@@ -130,6 +130,53 @@ public class PostalAddress implements Describable, Serializable {
 		
 		return emfPostalAddress;
 	}
+	
+	public static PostalAddress fromCommons(org.soluvas.commons.PostalAddress commonsPostalAddressUp) {
+		final PostalAddress jpaPostalAddress = new PostalAddress();
+		Preconditions.checkNotNull(commonsPostalAddressUp,
+				"Postal Address must not be null");
+		jpaPostalAddress.setId(commonsPostalAddressUp.getId() != null ? UUID.fromString(commonsPostalAddressUp.getId()) : UUID.randomUUID());
+		jpaPostalAddress.setCity(commonsPostalAddressUp.getCity());
+		jpaPostalAddress.setCountry(commonsPostalAddressUp.getCountry());
+		if (commonsPostalAddressUp.getCountryCode() != null) {
+			if (commonsPostalAddressUp.getCountryCode().length() > 1)
+				jpaPostalAddress.setCountryCode("ID");
+			else
+				jpaPostalAddress.setCountryCode(commonsPostalAddressUp.getCountryCode());
+		}
+		jpaPostalAddress.setDescription(commonsPostalAddressUp.getDescription());
+		if (commonsPostalAddressUp.getEmails() != null && !commonsPostalAddressUp.getEmails().isEmpty()) {
+			jpaPostalAddress.getEmails().addAll(commonsPostalAddressUp.getEmails());
+		}
+		if (commonsPostalAddressUp.getHomePhones() != null && !commonsPostalAddressUp.getHomePhones().isEmpty()) {
+			jpaPostalAddress.getHomePhones().addAll(commonsPostalAddressUp.getHomePhones());
+		}
+		if (commonsPostalAddressUp.getMobiles() != null && !commonsPostalAddressUp.getMobiles().isEmpty()) {
+			jpaPostalAddress.getMobiles().addAll(commonsPostalAddressUp.getMobiles());
+		}
+		jpaPostalAddress.setName(commonsPostalAddressUp.getName());
+		jpaPostalAddress.setOrganization(commonsPostalAddressUp.getOrganization());
+		if (commonsPostalAddressUp.getPhones() != null && !commonsPostalAddressUp.getPhones().isEmpty()) {
+			jpaPostalAddress.getPhones().addAll(commonsPostalAddressUp.getPhones());
+		}
+		jpaPostalAddress.setPostalCode(commonsPostalAddressUp.getPostalCode());
+		jpaPostalAddress.setPrimary(commonsPostalAddressUp.isPrimary());
+		jpaPostalAddress.setPrimaryBilling(commonsPostalAddressUp.isPrimaryBilling());
+		jpaPostalAddress.setPrimaryEmail(commonsPostalAddressUp.getPrimaryEmail());
+		jpaPostalAddress.setPrimaryHomePhone(commonsPostalAddressUp.getPrimaryHomePhone());
+		jpaPostalAddress.setPrimaryMobile(commonsPostalAddressUp.getPrimaryMobile());
+		jpaPostalAddress.setPrimaryPhone(commonsPostalAddressUp.getPrimaryPhone());
+		jpaPostalAddress.setPrimaryShipping(commonsPostalAddressUp.isPrimaryShipping());
+		jpaPostalAddress.setPrimaryWorkPhone(commonsPostalAddressUp.getPrimaryWorkPhone());
+		jpaPostalAddress.setProvince(commonsPostalAddressUp.getProvince());
+		jpaPostalAddress.setStreet(commonsPostalAddressUp.getStreet());
+		jpaPostalAddress.setValidationTime(commonsPostalAddressUp.getValidationTime());
+		if (commonsPostalAddressUp.getWorkPhones() != null && !commonsPostalAddressUp.getWorkPhones().isEmpty()) {
+			jpaPostalAddress.getWorkPhones().addAll(commonsPostalAddressUp.getWorkPhones());
+		}
+		
+		return jpaPostalAddress;
+	}
 
 	/**
 	 * @generated
