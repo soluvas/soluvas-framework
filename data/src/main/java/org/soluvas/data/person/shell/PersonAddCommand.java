@@ -95,13 +95,16 @@ public class PersonAddCommand extends ExtCommandSupport {
 			person.setFirstName(name);
 			person.setLastName(name);
 		}
+
+		PostalAddress address = CommonsFactory.eINSTANCE.createPostalAddress();
+		address.setId(UUID.randomUUID().toString());
 		
 		if (!Strings.isNullOrEmpty(emailStr)) {
-			final Person personByEmail = personRepo.findOneByEmail(StatusMask.RAW, emailStr);
-			if (personByEmail != null) {
-				log.info("Email {} already exists for person {}", emailStr, personByEmail.getId());
+			final Person existingPersonByEmail = personRepo.findOneByEmail(StatusMask.RAW, emailStr);
+			if (existingPersonByEmail != null) {
+				log.info("Email {} already exists for person {}", emailStr, existingPersonByEmail.getId());
 				System.err.println(ansi().render("@|red Email|@ @|bold %s|@ @|red already exists for person|@ @|bold %s|@",
-						emailStr, personByEmail.getId()));
+						emailStr, existingPersonByEmail.getId()));
 				return null;
 			} else {
 				final Email email = CommonsFactory.eINSTANCE.createEmail();
@@ -109,6 +112,9 @@ public class PersonAddCommand extends ExtCommandSupport {
 				email.setPrimary(true);
 				email.setValidationTime(new DateTime());
 				person.getEmails().add(email);
+				// address
+				address.getEmails().add(emailStr);
+				address.setPrimaryEmail(emailStr);
 			}
 		}
 		
@@ -135,10 +141,11 @@ public class PersonAddCommand extends ExtCommandSupport {
 			theMobile.setPhoneNumber(mobileNumber);
 			theMobile.setPrimary(true);
 			person.getMobileNumbers().add(theMobile);
+			// address
+			address.getMobiles().add(mobileNumber);
+			address.setPrimaryMobile(mobileNumber);
 		}
 		
-		PostalAddress address = CommonsFactory.eINSTANCE.createPostalAddress();
-		address.setId(UUID.randomUUID().toString());
 		address.setName(person.getName());
 		address.setPrimary(true);
 		address.setPrimaryBilling(true);
