@@ -82,7 +82,6 @@ public class PersistentStringList implements UserType {
 		if (value != null)
 			return new ArrayList<>((List<String>) value);
 		else 
-//			return new ArrayList<>(ImmutableList.<String>of());
 			return null;
 	}
 
