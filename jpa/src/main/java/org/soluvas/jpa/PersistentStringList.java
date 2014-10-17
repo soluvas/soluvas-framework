@@ -14,8 +14,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 
-import com.google.common.collect.ImmutableList;
-
 /**
  * <a href="http://stackoverflow.com/a/21984484">From Stackoverflow</a>.
  * Being <a href="https://github.com/JadiraOrg/jadira/issues/21">proposed to Jadira</a>
@@ -84,7 +82,8 @@ public class PersistentStringList implements UserType {
 		if (value != null)
 			return new ArrayList<>((List<String>) value);
 		else 
-			return new ArrayList<>(ImmutableList.<String>of());
+//			return new ArrayList<>(ImmutableList.<String>of());
+			return null;
 	}
 
 	@Override

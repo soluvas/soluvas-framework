@@ -11,6 +11,8 @@ import javax.persistence.Embeddable;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsFactory;
 
 import com.google.common.base.Preconditions;
@@ -35,11 +37,10 @@ import com.google.common.base.Preconditions;
  */
 @Embeddable()
 public class PostalAddress implements Describable, Serializable {
-
-	public PostalAddress() {
-		super();
-	}
 	
+	private static final Logger log = LoggerFactory
+			.getLogger(PostalAddress.class);
+
 	public static PostalAddress getDefaultPrimaryAddress() {
 		final PostalAddress postalAddress = new PostalAddress();
 		postalAddress.setId(UUID.randomUUID());
@@ -49,41 +50,6 @@ public class PostalAddress implements Describable, Serializable {
 		return postalAddress;
 	}
 
-	public PostalAddress(final org.soluvas.commons.PostalAddress postalAddressUp) {
-		Preconditions.checkNotNull(postalAddressUp,
-				"Postal Address must not be null");
-		setId(postalAddressUp.getId() != null ? UUID.fromString(postalAddressUp
-				.getId()) : UUID.randomUUID());
-		setCity(postalAddressUp.getCity());
-		setCountry(postalAddressUp.getCountry());
-		if (postalAddressUp.getCountryCode() != null) {
-			if (postalAddressUp.getCountryCode().length() > 1)
-				setCountryCode("ID");
-			else
-				setCountryCode(postalAddressUp.getCountryCode());
-		}
-		setDescription(postalAddressUp.getDescription());
-		setEmails(new ArrayList<>(postalAddressUp.getEmails()));
-		setHomePhones(new ArrayList<>(postalAddressUp.getHomePhones()));
-		setMobiles(new ArrayList<>(postalAddressUp.getMobiles()));
-		setName(postalAddressUp.getName());
-		setOrganization(postalAddressUp.getOrganization());
-		setPhones(new ArrayList<>(postalAddressUp.getPhones()));
-		setPostalCode(postalAddressUp.getPostalCode());
-		setPrimary(postalAddressUp.isPrimary());
-		setPrimaryBilling(postalAddressUp.isPrimaryBilling());
-		setPrimaryEmail(postalAddressUp.getPrimaryEmail());
-		setPrimaryHomePhone(postalAddressUp.getPrimaryHomePhone());
-		setPrimaryMobile(postalAddressUp.getPrimaryMobile());
-		setPrimaryPhone(postalAddressUp.getPrimaryPhone());
-		setPrimaryShipping(postalAddressUp.isPrimaryShipping());
-		setPrimaryWorkPhone(postalAddressUp.getPrimaryWorkPhone());
-		setProvince(postalAddressUp.getProvince());
-		setStreet(postalAddressUp.getStreet());
-		setValidationTime(postalAddressUp.getValidationTime());
-		setWorkPhones(new ArrayList<>(postalAddressUp.getWorkPhones()));
-	}
-	
 	public static org.soluvas.commons.PostalAddress toCommons(PostalAddress jpaPostalAddressUp) {
 		final org.soluvas.commons.PostalAddress emfPostalAddress = CommonsFactory.eINSTANCE.createPostalAddress();
 		Preconditions.checkNotNull(jpaPostalAddressUp,
@@ -464,6 +430,45 @@ public class PostalAddress implements Describable, Serializable {
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTimeZoneAsString")
 	private DateTimeZone validationTime_zone = null;
 
+	public PostalAddress() {
+		super();
+	}
+	
+	public PostalAddress(final org.soluvas.commons.PostalAddress postalAddressUp) {
+		Preconditions.checkNotNull(postalAddressUp,
+				"Postal Address must not be null");
+		setId(postalAddressUp.getId() != null ? UUID.fromString(postalAddressUp
+				.getId()) : UUID.randomUUID());
+		setCity(postalAddressUp.getCity());
+		setCountry(postalAddressUp.getCountry());
+		if (postalAddressUp.getCountryCode() != null) {
+			if (postalAddressUp.getCountryCode().length() > 1)
+				setCountryCode("ID");
+			else
+				setCountryCode(postalAddressUp.getCountryCode());
+		}
+		setDescription(postalAddressUp.getDescription());
+		setEmails(new ArrayList<>(postalAddressUp.getEmails()));
+		setHomePhones(new ArrayList<>(postalAddressUp.getHomePhones()));
+		setMobiles(new ArrayList<>(postalAddressUp.getMobiles()));
+		setName(postalAddressUp.getName());
+		setOrganization(postalAddressUp.getOrganization());
+		setPhones(new ArrayList<>(postalAddressUp.getPhones()));
+		setPostalCode(postalAddressUp.getPostalCode());
+		setPrimary(postalAddressUp.isPrimary());
+		setPrimaryBilling(postalAddressUp.isPrimaryBilling());
+		setPrimaryEmail(postalAddressUp.getPrimaryEmail());
+		setPrimaryHomePhone(postalAddressUp.getPrimaryHomePhone());
+		setPrimaryMobile(postalAddressUp.getPrimaryMobile());
+		setPrimaryPhone(postalAddressUp.getPrimaryPhone());
+		setPrimaryShipping(postalAddressUp.isPrimaryShipping());
+		setPrimaryWorkPhone(postalAddressUp.getPrimaryWorkPhone());
+		setProvince(postalAddressUp.getProvince());
+		setStreet(postalAddressUp.getStreet());
+		setValidationTime(postalAddressUp.getValidationTime());
+		setWorkPhones(new ArrayList<>(postalAddressUp.getWorkPhones()));
+	}
+	
 	/**
 	 * Returns the value of '<em><b>organization</b></em>' feature.
 	 * 
@@ -1150,4 +1155,5 @@ public class PostalAddress implements Describable, Serializable {
 				+ " [validationTime: " + getValidationTime() + "]"
 				+ " [description: " + getDescription() + "]";
 	}
+
 }
