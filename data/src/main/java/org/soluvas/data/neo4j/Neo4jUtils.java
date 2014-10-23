@@ -41,11 +41,26 @@ public class Neo4jUtils {
 		}
 	}
 
+	/**
+	 * @param graph
+	 * @param indexName
+	 * @return
+	 * @deprecated For Neo4j 2.0, please use auto-indexes instead, which works well with GraphML import/export.
+	 * 		"java.lang.IllegalArgumentException: Index with the same name but different config exists!" will be logged as WARN then ignored.
+	 */
+	@Deprecated
 	public static Index<Node> ensureIndex(@Nonnull final GraphDatabaseService graph,
 			@Nonnull final String indexName) {
-		log.debug("Getting vertex index {}", indexName);
-		final Index<Node> index = graph.index().forNodes(indexName,
-				ImmutableMap.of("_blueprints:type", "MANUAL", "type", "exact"));
+		final ImmutableMap<String, String> indexConfig = ImmutableMap.of("_blueprints:type", "MANUAL", "type", "exact");
+		log.debug("Getting vertex index '{}' with config {}", indexName, indexConfig);
+		Index<Node> index;
+		try {
+			index = graph.index().forNodes(indexName,
+					indexConfig);
+		} catch (IllegalArgumentException e) {
+			log.warn("Cannot ensure index '" + indexName + "' with config " + indexConfig, e);
+			index = graph.index().forNodes(indexName);
+		}
 		return index;
 	}
 
