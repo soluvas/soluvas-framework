@@ -20,6 +20,7 @@ public interface TenantProvisioner<T> {
 	
 	AppManifest add(String tenantId, AppManifest appManifest, T provisionData, String trackingId) ;
 
+	@Deprecated
 	Set<String> findAllStyles();
 	
 	void cpp(File file);
