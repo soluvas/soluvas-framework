@@ -26,6 +26,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookTenantPageUsername <em>Facebook Tenant Page Username</em>}</li>
  *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookTenantPublishEnabled <em>Facebook Tenant Publish Enabled</em>}</li>
  *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookExplicitlyShared <em>Facebook Explicitly Shared</em>}</li>
+ *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookPixelId <em>Facebook Pixel Id</em>}</li>
+ *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookPixelEnabled <em>Facebook Pixel Enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -288,4 +290,66 @@ public interface FacebookSysConfig extends EObject {
 	 * @generated
 	 */
 	void setFacebookExplicitlyShared(Boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Facebook Pixel Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <a href="https://www.facebook.com/help/373979379354234">Facebook Conversion Tracking Pixel</a> ID, e.g. {@code 1656065864618581}.
+	 * 
+	 * <p>If you want to track the conversions that happen on your website as a result of ads that you're running on Facebook, you can create a conversion tracking pixel to put on your website.
+	 * 
+	 * <p>Using the conversion tracking pixel tool, you can create a JavaScript code snippet to place on your conversion pages. For example, if you want to track checkouts, you would put the conversion tracking pixel on the checkout confirmation page that people see after completing a checkout. Whenever a person loads that page in his or her browser, the code tells Facebook that the conversion event has occurred. Facebook then matches that conversion event against the set of people an ad was served to/or that clicked on an ad so that we can provide you with information that helps understand the return on investment for your ad spend.
+	 * 
+	 * <p><a href="https://www.facebook.com/help/373979379354234">Learn more about conversion pixels.</a>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Facebook Pixel Id</em>' attribute.
+	 * @see #setFacebookPixelId(Long)
+	 * @see org.soluvas.socmed.SocmedPackage#getFacebookSysConfig_FacebookPixelId()
+	 * @model
+	 * @generated
+	 */
+	Long getFacebookPixelId();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.socmed.FacebookSysConfig#getFacebookPixelId <em>Facebook Pixel Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Facebook Pixel Id</em>' attribute.
+	 * @see #getFacebookPixelId()
+	 * @generated
+	 */
+	void setFacebookPixelId(Long value);
+
+	/**
+	 * Returns the value of the '<em><b>Facebook Pixel Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Enables <a href="https://www.facebook.com/help/373979379354234">Facebook Conversion Tracking Pixel</a>. {@link #setFacebookPixelId()} must be set.
+	 * 
+	 * <p>If you want to track the conversions that happen on your website as a result of ads that you're running on Facebook, you can create a conversion tracking pixel to put on your website.
+	 * 
+	 * <p>Using the conversion tracking pixel tool, you can create a JavaScript code snippet to place on your conversion pages. For example, if you want to track checkouts, you would put the conversion tracking pixel on the checkout confirmation page that people see after completing a checkout. Whenever a person loads that page in his or her browser, the code tells Facebook that the conversion event has occurred. Facebook then matches that conversion event against the set of people an ad was served to/or that clicked on an ad so that we can provide you with information that helps understand the return on investment for your ad spend.
+	 * 
+	 * <p><a href="https://www.facebook.com/help/373979379354234">Learn more about conversion pixels.</a>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Facebook Pixel Enabled</em>' attribute.
+	 * @see #setFacebookPixelEnabled(Boolean)
+	 * @see org.soluvas.socmed.SocmedPackage#getFacebookSysConfig_FacebookPixelEnabled()
+	 * @model
+	 * @generated
+	 */
+	Boolean getFacebookPixelEnabled();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.socmed.FacebookSysConfig#getFacebookPixelEnabled <em>Facebook Pixel Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Facebook Pixel Enabled</em>' attribute.
+	 * @see #getFacebookPixelEnabled()
+	 * @generated
+	 */
+	void setFacebookPixelEnabled(Boolean value);
 } // FacebookSysConfig

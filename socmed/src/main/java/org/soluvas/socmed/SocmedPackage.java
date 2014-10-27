@@ -156,13 +156,31 @@ public interface SocmedPackage extends EPackage {
 	int FACEBOOK_SYS_CONFIG__FACEBOOK_EXPLICITLY_SHARED = 9;
 
 	/**
+	 * The feature id for the '<em><b>Facebook Pixel Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACEBOOK_SYS_CONFIG__FACEBOOK_PIXEL_ID = 10;
+
+	/**
+	 * The feature id for the '<em><b>Facebook Pixel Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACEBOOK_SYS_CONFIG__FACEBOOK_PIXEL_ENABLED = 11;
+
+	/**
 	 * The number of structural features of the '<em>Facebook Sys Config</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FACEBOOK_SYS_CONFIG_FEATURE_COUNT = 10;
+	int FACEBOOK_SYS_CONFIG_FEATURE_COUNT = 12;
 
 	/**
 	 * The number of operations of the '<em>Facebook Sys Config</em>' class.
@@ -482,6 +500,28 @@ public interface SocmedPackage extends EPackage {
 	EAttribute getFacebookSysConfig_FacebookExplicitlyShared();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.socmed.FacebookSysConfig#getFacebookPixelId <em>Facebook Pixel Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Pixel Id</em>'.
+	 * @see org.soluvas.socmed.FacebookSysConfig#getFacebookPixelId()
+	 * @see #getFacebookSysConfig()
+	 * @generated
+	 */
+	EAttribute getFacebookSysConfig_FacebookPixelId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.socmed.FacebookSysConfig#getFacebookPixelEnabled <em>Facebook Pixel Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Facebook Pixel Enabled</em>'.
+	 * @see org.soluvas.socmed.FacebookSysConfig#getFacebookPixelEnabled()
+	 * @see #getFacebookSysConfig()
+	 * @generated
+	 */
+	EAttribute getFacebookSysConfig_FacebookPixelEnabled();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.socmed.TwitterSysConfig <em>Twitter Sys Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -721,6 +761,22 @@ public interface SocmedPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FACEBOOK_SYS_CONFIG__FACEBOOK_EXPLICITLY_SHARED = eINSTANCE.getFacebookSysConfig_FacebookExplicitlyShared();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Pixel Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACEBOOK_SYS_CONFIG__FACEBOOK_PIXEL_ID = eINSTANCE.getFacebookSysConfig_FacebookPixelId();
+
+		/**
+		 * The meta object literal for the '<em><b>Facebook Pixel Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACEBOOK_SYS_CONFIG__FACEBOOK_PIXEL_ENABLED = eINSTANCE.getFacebookSysConfig_FacebookPixelEnabled();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.socmed.TwitterSysConfig <em>Twitter Sys Config</em>}' class.

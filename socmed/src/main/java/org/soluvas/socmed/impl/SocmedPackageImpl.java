@@ -221,6 +221,24 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getFacebookSysConfig_FacebookPixelId() {
+		return (EAttribute)facebookSysConfigEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFacebookSysConfig_FacebookPixelEnabled() {
+		return (EAttribute)facebookSysConfigEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTwitterSysConfig() {
 		return twitterSysConfigEClass;
 	}
@@ -363,6 +381,8 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PAGE_USERNAME);
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_TENANT_PUBLISH_ENABLED);
 		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_EXPLICITLY_SHARED);
+		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_PIXEL_ID);
+		createEAttribute(facebookSysConfigEClass, FACEBOOK_SYS_CONFIG__FACEBOOK_PIXEL_ENABLED);
 
 		twitterSysConfigEClass = createEClass(TWITTER_SYS_CONFIG);
 		createEAttribute(twitterSysConfigEClass, TWITTER_SYS_CONFIG__TWITTER_CONSUMER_KEY);
@@ -422,6 +442,8 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 		initEAttribute(getFacebookSysConfig_FacebookTenantPageUsername(), ecorePackage.getEString(), "facebookTenantPageUsername", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacebookSysConfig_FacebookTenantPublishEnabled(), ecorePackage.getEBooleanObject(), "facebookTenantPublishEnabled", "false", 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFacebookSysConfig_FacebookExplicitlyShared(), ecorePackage.getEBooleanObject(), "facebookExplicitlyShared", "false", 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFacebookSysConfig_FacebookPixelId(), ecorePackage.getELongObject(), "facebookPixelId", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFacebookSysConfig_FacebookPixelEnabled(), ecorePackage.getEBooleanObject(), "facebookPixelEnabled", null, 0, 1, FacebookSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(twitterSysConfigEClass, TwitterSysConfig.class, "TwitterSysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTwitterSysConfig_TwitterConsumerKey(), ecorePackage.getEString(), "twitterConsumerKey", null, 0, 1, TwitterSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -454,133 +476,145 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * @generated
 	 */
 	protected void createGenModelAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		String source = "http://www.eclipse.org/emf/2002/GenModel";	
 		addAnnotation
 		  (facebookSysConfigEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Facebook SysConfig for tenant."
-		   });		
+		   });	
 		addAnnotation
 		  (getFacebookSysConfig_FacebookAppId(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Facebook App ID for this tenant, it\'s used for Facebook-based login/authentication and also for publishing actions using Facebook OpenGraph APIs."
-		   });		
+		   });	
 		addAnnotation
 		  (getFacebookSysConfig_FacebookAppSecret(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Facebook App Secret for this tenant, it\'s used for Facebook-based login/authentication and also for publishing actions using Facebook OpenGraph APIs."
-		   });		
+		   });	
 		addAnnotation
 		  (getFacebookSysConfig_FacebookTenantAccessToken(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Facebook access token for the tenant/mall Facebook Page. This is a Page token, not a User token."
-		   });		
+		   });	
 		addAnnotation
 		  (getFacebookSysConfig_FacebookProfileId(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Facebook (User) Profile ID, if exists."
-		   });		
+		   });	
 		addAnnotation
 		  (getFacebookSysConfig_FacebookProfileUsername(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Facebook (User) Profile username, if exists."
-		   });		
+		   });	
 		addAnnotation
 		  (getFacebookSysConfig_FacebookProfileName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "For some strange reason, Facebook ID is not unique, a user can have 2 different IDs. :(\nSo this is additional way to check for posts/comments by self."
-		   });		
+		   });	
 		addAnnotation
 		  (getFacebookSysConfig_FacebookTenantPageId(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Facebook Page ID for the tenant/mall Facebook Page. This is a Page ID, not a User ID."
-		   });		
+		   });	
 		addAnnotation
 		  (getFacebookSysConfig_FacebookTenantPageUsername(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Facebook Page username for the tenant/mall Facebook Page. This is a Page username, not a User ID.\nIf unknown, this should be the same as {@literal facebookTenantPageId}."
-		   });		
+		   });	
 		addAnnotation
 		  (getFacebookSysConfig_FacebookTenantPublishEnabled(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Whether features to publish to tenant\'s Facebook Page are enabled. This requires both the {@code facebookTenantAccessToken} and {@code facebookTenantPageId} to be filled properly."
-		   });		
+		   });	
 		addAnnotation
 		  (getFacebookSysConfig_FacebookExplicitlyShared(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Whether publishing will use the \"explicitly_shared\" flag. Note: The Facebook App ID used must be prepared to support explicitly_shared, which requires additional approval from Facebook."
-		   });		
+		   });	
+		addAnnotation
+		  (getFacebookSysConfig_FacebookPixelId(), 
+		   source, 
+		   new String[] {
+			 "documentation", "<a href=\"https://www.facebook.com/help/373979379354234\">Facebook Conversion Tracking Pixel</a> ID, e.g. {@code 1656065864618581}.\n\n<p>If you want to track the conversions that happen on your website as a result of ads that you\'re running on Facebook, you can create a conversion tracking pixel to put on your website.\n\n<p>Using the conversion tracking pixel tool, you can create a JavaScript code snippet to place on your conversion pages. For example, if you want to track checkouts, you would put the conversion tracking pixel on the checkout confirmation page that people see after completing a checkout. Whenever a person loads that page in his or her browser, the code tells Facebook that the conversion event has occurred. Facebook then matches that conversion event against the set of people an ad was served to/or that clicked on an ad so that we can provide you with information that helps understand the return on investment for your ad spend.\n\n<p><a href=\"https://www.facebook.com/help/373979379354234\">Learn more about conversion pixels.</a>"
+		   });	
+		addAnnotation
+		  (getFacebookSysConfig_FacebookPixelEnabled(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Enables <a href=\"https://www.facebook.com/help/373979379354234\">Facebook Conversion Tracking Pixel</a>. {@link #setFacebookPixelId()} must be set.\n\n<p>If you want to track the conversions that happen on your website as a result of ads that you\'re running on Facebook, you can create a conversion tracking pixel to put on your website.\n\n<p>Using the conversion tracking pixel tool, you can create a JavaScript code snippet to place on your conversion pages. For example, if you want to track checkouts, you would put the conversion tracking pixel on the checkout confirmation page that people see after completing a checkout. Whenever a person loads that page in his or her browser, the code tells Facebook that the conversion event has occurred. Facebook then matches that conversion event against the set of people an ad was served to/or that clicked on an ad so that we can provide you with information that helps understand the return on investment for your ad spend.\n\n<p><a href=\"https://www.facebook.com/help/373979379354234\">Learn more about conversion pixels.</a>"
+		   });	
 		addAnnotation
 		  (twitterSysConfigEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Twitter SysConfig for tenant."
-		   });		
+		   });	
 		addAnnotation
 		  (getTwitterSysConfig_TwitterConsumerKey(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Twitter consumer key for this tenant."
-		   });		
+		   });	
 		addAnnotation
 		  (getTwitterSysConfig_TwitterConsumerSecret(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Twitter consumer key for this tenant."
-		   });		
+		   });	
 		addAnnotation
 		  (getTwitterSysConfig_TwitterTenantScreenName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Twitter account screen name for this tenant."
-		   });		
+		   });	
 		addAnnotation
 		  (getTwitterSysConfig_TwitterTenantAccessToken(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Access token that has access to this tenant\'s Twitter account, referred by {@link #getTwitterTenantScreenName()}."
-		   });		
+		   });	
 		addAnnotation
 		  (getTwitterSysConfig_TwitterTenantAccessTokenSecret(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Access token secret that has access to this tenant\'s Twitter account, referred by {@link #getTwitterTenantScreenName()}."
-		   });		
+		   });	
 		addAnnotation
 		  (youTubeSysConfigEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "YouTube SysConfig for tenant."
-		   });		
+		   });	
 		addAnnotation
 		  (getYouTubeSysConfig_YouTubeTenantScreenName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "YouTube user screen name for the tenant, e.g. <a href=\"http://www.youtube.com/user/BippoID\">bippoID</a>."
-		   });		
+		   });	
 		addAnnotation
 		  (getPinterestSysConfig_PinterestTenantScreenName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Pinterest Business screen name for the tenant/mall."
-		   });		
+		   });	
 		addAnnotation
 		  (instagramSysConfigEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Instagram SysConfig for tenant."
-		   });		
+		   });	
 		addAnnotation
 		  (getInstagramSysConfig_InstagramScreenName(), 
 		   source, 
