@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -36,7 +38,7 @@ public class PostgresConfig {
 	private Environment env;
 	
 	@Bean(destroyMethod="close")
-	public ComboPooledDataSource dataSource() throws PropertyVetoException {
+	public ComboPooledDataSource dataSource() {
 		final String jdbcUrl = env.getRequiredProperty("sqlUrl");
 		final String jdbcUser = env.getRequiredProperty("sqlUser");
 		final String jdbcPassword = env.getRequiredProperty("sqlPassword");
@@ -55,6 +57,16 @@ public class PostgresConfig {
 		cpds.setPassword(jdbcPassword);
 		cpds.setTestConnectionOnCheckin(true);
 		return cpds;
+	}
+	
+	/**
+	 * Note: You need to mark the {@link org.springframework.orm.jpa.JpaTransactionManager} as @{@link Primary}.
+	 * @return
+	 * @throws PropertyVetoException 
+	 */
+	@Bean
+	public DataSourceTransactionManager dataSourceTransactionManager() {
+		return new DataSourceTransactionManager(dataSource());
 	}
 	
 }
