@@ -24,7 +24,7 @@ public class ScheduleTenantConfig {
 	@Inject
 	private MultiTenantWebConfig tenantConfig;
 	@Inject
-	public ScheduleConfig scheduleConfig;
+	public ScheduleMultiConfig scheduleConfig;
 	
 	/**
 	 * Scope must be prototype, otherwise it will be destroyed by Spring.

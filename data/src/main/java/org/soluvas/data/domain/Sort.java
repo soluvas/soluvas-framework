@@ -40,6 +40,7 @@ public class Sort implements Iterable<Sort.Order>, Serializable {
 	private static final Sort UNSORTED = new Sort();
 
 	private final List<Order> orders;
+	private String name;
 	
 	/**
 	 * Constructs an unsorted instance, only used by {@link #UNSORTED}, which is exposed as {@link #unsorted()}. 
@@ -163,6 +164,21 @@ public class Sort implements Iterable<Sort.Order>, Serializable {
 	@Override
 	public Iterator<Order> iterator() {
 		return this.orders.iterator();
+	}
+	
+	/**
+	 * Sets the name for this {@link Sort}, useful for using in {@link org.apache.wicket.markup.html.form.DropDownChoice} /
+	 * combo box / {@link org.apache.wicket.markup.html.form.RadioGroup}.
+	 * @param name
+	 * @return
+	 */
+	public Sort name(String name) {
+		this.name = name;
+		return this;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 	/*
