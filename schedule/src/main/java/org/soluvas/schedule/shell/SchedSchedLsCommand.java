@@ -7,9 +7,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.annotation.Nullable;
-import javax.annotation.Resource;
-
 import org.apache.felix.gogo.commands.Command;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobKey;
@@ -17,22 +14,23 @@ import org.quartz.Scheduler;
 import org.quartz.TriggerKey;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.soluvas.commons.shell.ExtCommandSupport;
+import org.soluvas.schedule.ScheduleMultiConfig;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
  * List {@link Scheduler}s for all tenants.
  * @author ceefour
+ * @deprecated See {@link ScheduleMultiConfig}
  */
+@Deprecated
 @Service @Scope("prototype")
 @Command(scope="sched", name="schedls", description="List schedulers for all tenants.")
 public class SchedSchedLsCommand extends ExtCommandSupport {
 
-	@Resource(name="schedulerMap")
-	private Map<String, Scheduler> schedulerMap;
-	
-	@Override @Nullable
+	@Override
 	protected Integer doExecute() throws Exception {
+		final Map<String, Scheduler> schedulerMap = (Map<String, Scheduler>) appCtx.getBean("schedulerMap");
 		System.out.println(ansi().render("@|negative_on %3s|%-20s|%-15s|%-3s|%-3s|%-3s|%-25s|@",
 				"№", "Name/Tenant", "Instance ID", "Cur", "Job", "Trg", "Store" ));
 		int i = 0;
