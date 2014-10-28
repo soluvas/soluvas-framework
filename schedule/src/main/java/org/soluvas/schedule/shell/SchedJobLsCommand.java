@@ -17,6 +17,8 @@ import org.soluvas.commons.tenant.TenantRef;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.ImmutableMap;
+
 /**
  * List {@link JobDetail}s for current {@link TenantRef}'s {@link Scheduler}.
  * @author ceefour
@@ -29,14 +31,15 @@ public class SchedJobLsCommand extends ExtCommandSupport {
 	protected Integer doExecute() throws Exception {
 		final Scheduler scheduler = getBean(Scheduler.class);
 		final Set<JobKey> jobKeys = scheduler.getJobKeys(GroupMatcher.anyJobGroup());
-		System.out.println(ansi().render("@|negative_on %3s|%-25s|%-20s|%-25s|@",
+		System.out.println(ansi().render("@|negative_on %3s|%-50s|%-20s|%-25s|@",
 				"№", "Name", "Group", "Class"));
 		int i = 0;
 		for (final JobKey it : jobKeys) {
 			final JobDetail jobDetail = scheduler.getJobDetail(it);
 			final String jobClassAnsi = NameUtils.shortenClassAnsi(jobDetail.getJobClass(), 25);
-			System.out.println(ansi().render("@|bold,black %3d||@%-25s@|bold,black ||@%-20s@|bold,black ||@" + jobClassAnsi,
+			System.out.println(ansi().render("@|bold,black %3d||@%-50s@|bold,black ||@%-20s@|bold,black ||@" + jobClassAnsi,
 				++i, it.getName(), it.getGroup()));
+			System.out.println(ansi().render("@|bold,black    ||@%-50s", ImmutableMap.copyOf(jobDetail.getJobDataMap())));
 		}
 		System.out.println(ansi().render("@|bold,yellow %d|@ Jobs in scheduler @|bold %s|@", 
 				jobKeys.size(), scheduler.getSchedulerName()));
