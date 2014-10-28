@@ -102,8 +102,12 @@ public abstract class TenantJob implements Job {
 	public final void execute(JobExecutionContext context) throws JobExecutionException {
 		try (Closeable closeable = CommandRequestAttributes.withTenant(tenantId)) {
 			doExecute(context);
+		} catch (JobExecutionException e) {
+			throw e;
 		} catch (IOException e) {
-			throw new JobExecutionException("Error wrapping job " + getClass().getName(), e);
+			throw new JobExecutionException("Error wrapping Quartz job " + context.getJobDetail().getKey() + " (" + getClass().getName() + ")", e);
+		} catch (Exception e) {
+			throw new JobExecutionException("Error executing Quartz job " + context.getJobDetail().getKey() + " (" + getClass().getName() + ")", e);
 		}
 	}
 
@@ -112,6 +116,6 @@ public abstract class TenantJob implements Job {
 	 * @param context
 	 * @see Job#execute(JobExecutionContext)
 	 */
-	public abstract void doExecute(JobExecutionContext context) throws JobExecutionException;
+	public abstract void doExecute(JobExecutionContext context) throws Exception;
 
 }
