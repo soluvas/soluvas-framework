@@ -13,12 +13,14 @@ import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
 import org.soluvas.image.Media;
 import org.soluvas.image.MediaRepository;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Works with {@link MediaRepository} to provide Wicket-independent secure media serving
  * via {@link MediaResource}.
  * It uses JAX-RS instead of Wicket because {@link Media} resources may be used in
  * email notifications, Facebook shares, or other non-webapp purposes.
+ * @todo FIXME: Migrate to Spring {@link RestController}, see {@link ProductPubResource} for example.
  * @author ceefour
  */
 @Path("media")

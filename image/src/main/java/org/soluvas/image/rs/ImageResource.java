@@ -18,9 +18,11 @@ import org.soluvas.image.ImageStyles;
 import org.soluvas.image.ImageTypes;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Provides ImageConfig.
+ * @todo FIXME: Migrate to Spring {@link RestController}, see {@link ProductPubResource} for example.
  * @author ceefour
  */
 //@Path("org.soluvas.image")

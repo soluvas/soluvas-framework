@@ -18,10 +18,16 @@ import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
  * See http://jira.codehaus.org/browse/JACKSON-861
  * 
  * @author ceefour
- * @todo This breaks {@link JsonCreator} and {@link JsonValue} :(
+ * @deprecated This breaks {@link JsonCreator} and {@link JsonValue} :(
  */
+@Deprecated
 @SuppressWarnings("rawtypes")
 public class LowerEnumSerializer extends StdScalarSerializer<Enum> {
+	
+	/**
+	 * Transitional configuration, set to false to "disable".
+	 */
+	public static boolean LOWER = true;
 
 	public LowerEnumSerializer() {
 		super(Enum.class, false);
@@ -31,6 +37,10 @@ public class LowerEnumSerializer extends StdScalarSerializer<Enum> {
 	public void serialize(Enum value, JsonGenerator jgen,
 			SerializerProvider provider) throws IOException,
 			JsonGenerationException {
-		jgen.writeString(value.name().toLowerCase());
+		if (LOWER) {
+			jgen.writeString(value.name().toLowerCase());
+		} else {
+			jgen.writeString(value.name());
+		}
 	}
 }	
