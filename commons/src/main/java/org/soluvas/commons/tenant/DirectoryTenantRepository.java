@@ -214,14 +214,17 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		final URL appManifestTemplate = DirectoryTenantRepository.class.getResource(appManifestTemplatePath);
 
 		final AppManifest appManifest;
+		final boolean templateFound;
 		if (appManifestTemplate != null) {
 			log.info("Combining template AppManifest '{}' with customized '{}'", appManifestTemplate, customized);
 			appManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, appManifestTemplate, ResourceType.CLASSPATH)
 					.autoExpand(false).get();
+			templateFound = true;
 		} else {
 			log.info("No template AppManifest found from classpath '{}', only loading customized AppManifest from '{}'",
 					appManifestTemplatePath, customized);
 			appManifest = CommonsFactory.eINSTANCE.createAppManifest();
+			templateFound = false;
 		}
 		
 		final AppManifest upAppManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, customized).autoExpand(false).get();
@@ -233,7 +236,8 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		try {
 			appManifest.expand(scope);
 		} catch (Exception e) {
-			throw new TenantException(e, "Cannot expand '%s' AppManifest using %s: %s", tenantId, scope, e);
+			throw new TenantException(e, "Cannot expand '%s' AppManifest from %s (template %s %s) using %s: %s", 
+					tenantId, customized, "classpath:" + appManifestTemplatePath, templateFound ? "FOUND": "NOT found", scope, e);
 		}
 
 		// NO LONGER SUPPORTED: please use single AppManifest for all environments, use domain{env} and generalEmail{env} properties now
